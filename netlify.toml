@@ -1,0 +1,172 @@
+# ─── Netlify Configuration ───────────────────────────────────
+[build]
+  publish = "."
+  functions = "netlify/functions"
+
+[build.processing]
+  skip_processing = false
+
+[build.processing.css]
+  bundle = false
+  minify = true
+
+[build.processing.js]
+  bundle = false
+  minify = true
+
+[build.processing.html]
+  pretty_urls = true
+
+[build.processing.images]
+  compress = true
+
+# ─── Function Timeouts ────────────────────────────────────────
+[functions.course-lesson]
+  timeout = 10
+
+[functions.course-exam]
+  timeout = 10
+
+# ─── Scheduled Functions ──────────────────────────────────────
+[functions.email-drip]
+  schedule = "0 * * * *"
+
+# ─── Clean URL Redirects ──────────────────────────────────────
+[[redirects]]
+  from = "/admin"
+  to = "/admin-c7x9k2m.html"
+  status = 200
+
+[[redirects]]
+  from = "/webinar"
+  to = "/webinar.html"
+  status = 200
+
+[[redirects]]
+  from = "/access"
+  to = "/.netlify/functions/access"
+  status = 200
+
+[[redirects]]
+  from = "/validate-token"
+  to = "/.netlify/functions/validate-token"
+  status = 200
+
+[[redirects]]
+  from = "/course-enroll"
+  to = "/.netlify/functions/course-enroll"
+  status = 200
+
+[[redirects]]
+  from = "/course-lesson"
+  to = "/.netlify/functions/course-lesson"
+  status = 200
+
+[[redirects]]
+  from = "/course-exam"
+  to = "/.netlify/functions/course-exam"
+  status = 200
+
+[[redirects]]
+  from = "/course-graduate"
+  to = "/.netlify/functions/course-graduate"
+  status = 200
+
+[[redirects]]
+  from = "/course-curriculum"
+  to = "/.netlify/functions/course-curriculum"
+  status = 200
+
+[[redirects]]
+  from = "/course-votes"
+  to = "/.netlify/functions/course-votes"
+  status = 200
+
+[[redirects]]
+  from = "/purchase-gate"
+  to = "/.netlify/functions/purchase-gate"
+  status = 200
+
+[[redirects]]
+  from = "/student-portal"
+  to = "/.netlify/functions/student-portal"
+  status = 200
+
+[[redirects]]
+  from = "/founding-status"
+  to = "/.netlify/functions/founding-status"
+  status = 200
+
+# ─── Performance: Cache Static Assets ─────────────────────────
+[[headers]]
+  for = "/style.css"
+  [headers.values]
+    Cache-Control = "public, max-age=2592000, stale-while-revalidate=86400"
+    Vary = "Accept-Encoding"
+
+[[headers]]
+  for = "/*.css"
+  [headers.values]
+    Cache-Control = "public, max-age=2592000, stale-while-revalidate=86400"
+    Vary = "Accept-Encoding"
+
+[[headers]]
+  for = "/*.js"
+  [headers.values]
+    Cache-Control = "public, max-age=2592000, stale-while-revalidate=86400"
+    Vary = "Accept-Encoding"
+
+[[headers]]
+  for = "/*.png"
+  [headers.values]
+    Cache-Control = "public, max-age=31536000, immutable"
+
+[[headers]]
+  for = "/*.jpg"
+  [headers.values]
+    Cache-Control = "public, max-age=31536000, immutable"
+
+[[headers]]
+  for = "/*.webp"
+  [headers.values]
+    Cache-Control = "public, max-age=31536000, immutable"
+
+[[headers]]
+  for = "/*.svg"
+  [headers.values]
+    Cache-Control = "public, max-age=31536000, immutable"
+
+[[headers]]
+  for = "/sitemap.xml"
+  [headers.values]
+    Cache-Control = "public, max-age=86400"
+    Content-Type = "application/xml; charset=utf-8"
+
+# ─── Security Headers ─────────────────────────────────────────
+[[headers]]
+  for = "/admin.html"
+  [headers.values]
+    X-Frame-Options = "DENY"
+    X-Content-Type-Options = "nosniff"
+    Cache-Control = "no-store, no-cache"
+
+[[headers]]
+  for = "/webinar-playbook-delivery.html"
+  [headers.values]
+    X-Frame-Options = "DENY"
+    Cache-Control = "no-store, no-cache"
+
+[[headers]]
+  for = "/*.html"
+  [headers.values]
+    X-Frame-Options = "SAMEORIGIN"
+    X-Content-Type-Options = "nosniff"
+    Referrer-Policy = "strict-origin-when-cross-origin"
+    Cache-Control = "public, max-age=3600, stale-while-revalidate=86400"
+
+# ─── Optional: Basic Auth for VDR (uncomment + set env var to enable)
+# [[plugins]]
+#   package = "@netlify/plugin-password-protect"
+# [plugins.inputs]
+#   password = "${BASIC_AUTH}"
+#   paths = ["/documents/*", "/forms/*"]

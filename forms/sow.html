@@ -1,0 +1,80 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"/><meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>Statement of Work · MarkCMO.com</title><meta name="robots" content="noindex,nofollow"/>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600;700&family=Barlow:wght@300;400;500;600&display=swap" rel="stylesheet"/>
+<script src="https://unpkg.com/pdf-lib@1.17.1/dist/pdf-lib.min.js"></script>
+<script src="https://unpkg.com/@pdf-lib/fontkit@1.1.1/dist/fontkit.umd.min.js"></script>
+<link rel="stylesheet" href="/style.css">
+<style>
+    html, body, * { cursor: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAARCAYAAADUryzEAAAAV0lEQVR42mMQFBT8z0AJABlwbFnIf4oNINsQZAPIMgTdAJINwWYASYbgMoBoQ/AZQJQhhAwgaAguA4iOHXSFJMcKSANME4yNjEkKSLLzxcAbgBwWDPQGAEWguILiE6w1AAAAAElFTkSuQmCC') 0 0, default !important; }
+</style>
+</head><body>
+<section style="background:#0d0d0d;padding:3rem 2rem 2rem;border-bottom:1px solid rgba(255,255,255,0.06);">
+  <div style="max-width:640px;margin:0 auto;">
+    <div style="font-size:0.7rem;letter-spacing:0.2em;color:#C6A654;text-transform:uppercase;margin-bottom:0.5rem;">MG-SOW-001</div>
+    <h1 style="font-family:'Barlow Condensed',sans-serif;font-size:2.2rem;font-weight:700;letter-spacing:0.05em;color:#fff;margin:0 0 0.5rem;text-transform:uppercase;">Statement of Work</h1>
+    <p style="color:#888;font-size:0.85rem;margin:0;">Define the scope, timeline, and fees for a specific engagement. Both parties sign and receive a copy.</p>
+  </div>
+</section>
+<main style="background:#0d0d0d;min-height:60vh;">
+  <div class="doc-form-wrap">
+    <div class="required-note">All fields marked with * are required.</div>
+    <div class="form-section"><div class="form-section-label">Effective Date</div>
+      <div class="form-row"><label>Effective Date *</label><input type="date" id="eff_date" required/></div>
+    </div>
+    <div class="form-section"><div class="form-section-label">Client Information</div>
+      <div class="form-row"><label>Full Legal Name *</label><input type="text" id="client_name" placeholder="Jane Smith" required/></div>
+      <div class="form-row"><label>Company Name *</label><input type="text" id="client_company" placeholder="Acme Corp LLC" required/></div>
+      <div class="form-row"><label>Email Address *</label><input type="email" id="client_email" placeholder="jane@acmecorp.com" required/></div>
+      <div class="form-row"><label>Phone</label><input type="tel" id="client_phone" placeholder="321-555-0000"/></div>
+    </div>
+    <div class="form-section"><div class="form-section-label">Engagement Details</div>
+      <div class="form-row"><label>Project Title *</label><input type="text" id="project_title" placeholder="Q2 Go-to-Market Strategy" required/></div>
+      <div class="form-row"><label>Start Date *</label><input type="date" id="start_date" required/></div>
+      <div class="form-row"><label>Engagement Fee</label><input type="text" id="fee" placeholder="$5,000 / month"/></div>
+      <div class="form-row"><label>Payment Schedule</label><input type="text" id="payment" placeholder="Net 15, invoiced monthly"/></div>
+    </div>
+    <button id="generate-btn" onclick="generate()">✍ Sign &amp; Submit</button>
+    <div id="form-status" class="form-status"></div>
+  </div>
+</main>
+<script src="form-engine.js"></script>
+<script>
+injectFormStyles();initSigPad('client_name');
+function fmt(v){if(!v)return'';const d=new Date(v+'T12:00:00');return d.toLocaleDateString('en-US',{month:'long',day:'numeric',year:'numeric'});}
+async function generate(){
+  const date=fmt(document.getElementById('eff_date').value);
+  const name=document.getElementById('client_name').value.trim();
+  const company=document.getElementById('client_company').value.trim();
+  const email=document.getElementById('client_email').value.trim();
+  const phone=document.getElementById('client_phone').value.trim();
+  const project=document.getElementById('project_title').value.trim();
+  const start=fmt(document.getElementById('start_date').value);
+  const fee=document.getElementById('fee').value.trim();
+  const payment=document.getElementById('payment').value.trim();
+  if(!date||!name||!company||!email||!project||!start){const s=document.getElementById('form-status');s.textContent='Please fill in all required fields.';s.className='form-status error';return;}
+  await fillAndSubmit({
+    pdfPath:'../pdfs/MG-SOW-001-Statement-of-Work.pdf',
+    textFields:[
+      {page:1,x:226,y:529,value:date,maxWidth:220},
+      {page:1,x:112,y:399,value:name,maxWidth:340},
+      {page:1,x:148,y:383,value:company,maxWidth:310},
+      {page:1,x:123,y:366,value:email,maxWidth:330},
+      {page:1,x:119,y:349,value:phone,maxWidth:250},
+      {page:1,x:160,y:275,value:project,maxWidth:300},
+      {page:1,x:147,y:130,value:start,maxWidth:220},
+      {page:1,x:112,y:114,value:fee,maxWidth:220},
+      {page:1,x:175,y:97,value:payment,maxWidth:220},
+    ],
+    sigPage:2,sigX:63,sigY:281,sigW:200,sigH:24,
+    clientNameY:267,clientTitleY:253,clientDateY:238,
+    clientCompany:company,effectiveDate:date,
+    markSigY:184,markNameY:170,markTitleY:156,markDateY:141,
+    docName:'Statement of Work',docId:'MG-SOW-001',
+    filename:`SOW-${company.replace(/\s+/g,'-')}-${new Date().getFullYear()}.pdf`,
+    clientName:name,clientEmail:email,
+    formFields:{'Date':date,'Name':name,'Company':company,'Email':email,'Project':project,'Start Date':start,'Fee':fee,'Payment':payment},
+  });
+}
+const cur=document.getElementById('custom-cursor');document.addEventListener('mousemove',e=>{cur.style.left=e.clientX+'px';cur.style.top=e.clientY+'px';});
+</script></body></html>

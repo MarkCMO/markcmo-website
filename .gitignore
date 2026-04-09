@@ -1,0 +1,44 @@
+# Dependencies
+node_modules/
+.pnp
+.pnp.js
+
+# Build outputs
+dist/
+build/
+.cache/
+.parcel-cache/
+
+# Environment & secrets
+.env
+.env.local
+.env.*.local
+*.env
+
+# Netlify
+.netlify/
+
+# Claude / IDE
+.claude/
+.cursor/
+*.backup
+
+# OS
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Logs
+*.log
+npm-debug.log*
+
+# Temp / dev scripts
+/tmp/
+*.py
+sync-to-sheets.py
+
+# Large binary/zip files
+*.zip
+*.pdf
+*.mp4
+*.mov

@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/><meta name="viewport" content="width=device-width,initial-scale=1"/>
+  <title>Non-Disclosure Agreement — Sign & Submit | MarkCMO</title>
+  <meta name="robots" content="noindex,nofollow,noarchive"/>
+  <link rel="stylesheet" href="../style.css"/>
+  <link href="https://fonts.googleapis.com/css2?family=Barlow:wght@400;600;700&family=Barlow+Condensed:wght@600;700&display=swap" rel="stylesheet"/>
+  <script src="https://unpkg.com/pdf-lib@1.17.1/dist/pdf-lib.min.js"></script>
+<style>
+    html, body, * { cursor: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAARCAYAAADUryzEAAAAV0lEQVR42mMQFBT8z0AJABlwbFnIf4oNINsQZAPIMgTdAJINwWYASYbgMoBoQ/AZQJQhhAwgaAguA4iOHXSFJMcKSANME4yNjEkKSLLzxcAbgBwWDPQGAEWguILiE6w1AAAAAElFTkSuQmCC') 0 0, default !important; }
+</style>
+</head>
+<body>
+<form name="nda-submission" data-netlify="true" hidden><input type="hidden" name="form-name" value="nda-submission"/><input type="text" name="name"/><input type="text" name="company"/><input type="email" name="email"/><input type="text" name="date"/></form>
+<nav style="position:sticky;top:0;z-index:100;background:#0a0a0a;border-bottom:1px solid rgba(198,166,84,0.2);padding:1rem 2rem;display:flex;justify-content:space-between;align-items:center;">
+  <a href="/" style="font-family:'Barlow Condensed',sans-serif;font-size:1.1rem;font-weight:700;letter-spacing:0.1em;color:#C6A654;text-decoration:none;">MARK<span style="color:#fff">CMO</span></a>
+  <a href="/documents" style="font-size:0.75rem;letter-spacing:0.1em;color:#888;text-decoration:none;text-transform:uppercase;">← Back to Documents</a>
+</nav>
+<section style="background:linear-gradient(135deg,#0a0a0a 0%,#111 100%);border-bottom:1px solid rgba(198,166,84,0.15);padding:3rem 2rem 2.5rem;">
+  <div style="max-width:680px;margin:0 auto;">
+    <div style="font-size:0.7rem;letter-spacing:0.2em;color:#C6A654;text-transform:uppercase;margin-bottom:0.5rem;">MG-NDA-001</div>
+    <h1 style="font-family:'Barlow Condensed',sans-serif;font-size:2.2rem;font-weight:700;letter-spacing:0.05em;color:#fff;margin:0 0 0.5rem;text-transform:uppercase;">Non-Disclosure Agreement</h1>
+    <p style="color:#888;font-size:0.85rem;margin:0;">Fill in your details, sign below, and submit. Mark will countersign within 24 hours and both parties will receive the executed document by email.</p>
+  </div>
+</section>
+<main style="background:#0d0d0d;min-height:60vh;">
+  <div class="doc-form-wrap">
+    <div class="required-note">All fields marked with * are required.</div>
+    <div class="form-section">
+      <div class="form-section-label">Effective Date</div>
+      <div class="form-row"><label>Effective Date *</label><input type="date" id="eff_date" required/></div>
+    </div>
+    <div class="form-section">
+      <div class="form-section-label">Your Information</div>
+      <div class="form-row"><label>Full Legal Name *</label><input type="text" id="client_name" placeholder="Jane Smith" required/></div>
+      <div class="form-row"><label>Company Name *</label><input type="text" id="client_company" placeholder="Acme Corp LLC" required/></div>
+      <div class="form-row"><label>Email Address *</label><input type="email" id="client_email" placeholder="jane@acmecorp.com" required/></div>
+    </div>
+    <button id="generate-btn" onclick="generate()">✍ Sign &amp; Submit</button>
+    <div id="form-status" class="form-status"></div>
+  </div>
+</main>
+<script src="form-engine.js"></script>
+<script>
+injectFormStyles();
+initSigPad('client_name');
+function fmt(v){if(!v)return'';const d=new Date(v+'T12:00:00');return d.toLocaleDateString('en-US',{month:'long',day:'numeric',year:'numeric'});}
+async function generate(){
+  const date=fmt(document.getElementById('eff_date').value);
+  const name=document.getElementById('client_name').value.trim();
+  const company=document.getElementById('client_company').value.trim();
+  const email=document.getElementById('client_email').value.trim();
+  if(!date||!name||!company||!email){
+    const s=document.getElementById('form-status');
+    s.textContent='Please fill in all required fields.';s.className='form-status error';return;
+  }
+  await fillAndSubmit({
+    pdfPath:'../pdfs/MG-NDA-001-Non-Disclosure-Agreement.pdf',
+    textFields:[
+      {page:1,x:306,y:529,value:date,maxWidth:220},
+      {page:1,x:127,y:390,value:name,maxWidth:340},
+      {page:1,x:148,y:373,value:company,maxWidth:310},
+      {page:1,x:123,y:356,value:email,maxWidth:330},
+    ],
+    sigPage:3,sigX:63,sigY:580,sigW:200,sigH:24,
+    clientNameY:555,clientTitleY:523,clientDateY:492,
+    clientCompany:company,effectiveDate:date,
+    markSigY:424,markNameY:392,markTitleY:361,markDateY:329,
+    docName:'Non-Disclosure Agreement',
+    docId:'MG-NDA-001',
+    filename:`NDA-${company.replace(/\s+/g,'-')}-${new Date().getFullYear()}.pdf`,
+    clientName:name, clientEmail:email,
+    formFields:{'Effective Date':date,'Name':name,'Company':company,'Email':email},
+  });
+}
+const cur=document.getElementById('custom-cursor');
+document.addEventListener('mousemove',e=>{cur.style.left=e.clientX+'px';cur.style.top=e.clientY+'px';});
+</script>
+</body></html>

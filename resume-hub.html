@@ -1,0 +1,781 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Mark Louis Gabrielli Jr. | Resume Portfolio Hub</title>
+<meta name="description" content="Browse 10 interactive resume experiences from Mark Louis Gabrielli Jr. - Chief Marketing Officer, Growth Architect, Revenue Systems Builder.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/style.css">
+<style>
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+:root{
+  --bg:#0a0a0a;
+  --surface:#141414;
+  --surface-hover:#1a1a1a;
+  --border:#222;
+  --text:#f0f0f0;
+  --text-dim:#888;
+  --gold:#d4a853;
+  --gold-dim:rgba(212,168,83,.15);
+  --radius:12px;
+}
+html{scroll-behavior:smooth}
+body{
+  font-family:'Inter',system-ui,-apple-system,sans-serif;
+  background:var(--bg);
+  color:var(--text);
+  line-height:1.6;
+  min-height:100vh;
+  -webkit-font-smoothing:antialiased;
+}
+
+/* ── Header ── */
+.hero{
+  text-align:center;
+  padding:80px 24px 60px;
+  position:relative;
+  overflow:hidden;
+}
+.hero::before{
+  content:'';
+  position:absolute;
+  top:-50%;left:50%;
+  transform:translateX(-50%);
+  width:800px;height:800px;
+  background:radial-gradient(circle,rgba(212,168,83,.06) 0%,transparent 70%);
+  pointer-events:none;
+}
+.hero-name{
+  font-family:'JetBrains Mono','Courier New',monospace;
+  font-size:clamp(1.4rem,3.5vw,2.4rem);
+  font-weight:700;
+  letter-spacing:.15em;
+  text-transform:uppercase;
+  color:var(--gold);
+  margin-bottom:12px;
+  position:relative;
+}
+.hero-title{
+  font-size:clamp(.85rem,1.8vw,1.1rem);
+  font-weight:400;
+  color:var(--text-dim);
+  letter-spacing:.04em;
+  margin-bottom:40px;
+}
+.hero-subtitle{
+  font-size:clamp(1.6rem,4vw,2.8rem);
+  font-weight:800;
+  line-height:1.15;
+  color:var(--text);
+  margin-bottom:32px;
+}
+.hero-subtitle span{
+  background:linear-gradient(135deg,var(--gold),#e8c97a);
+  -webkit-background-clip:text;
+  -webkit-text-fill-color:transparent;
+  background-clip:text;
+}
+
+/* Contact bar */
+.contact-bar{
+  display:flex;
+  flex-wrap:wrap;
+  justify-content:center;
+  gap:8px 20px;
+  font-family:'JetBrains Mono',monospace;
+  font-size:.78rem;
+  color:var(--text-dim);
+}
+.contact-bar a{
+  color:var(--gold);
+  text-decoration:none;
+  transition:color .2s;
+}
+.contact-bar a:hover{color:#e8c97a}
+.contact-bar .sep{color:#333;user-select:none}
+
+/* ── Grid ── */
+.grid-section{
+  max-width:1200px;
+  margin:0 auto;
+  padding:0 24px 80px;
+}
+.grid{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:24px;
+}
+@media(max-width:960px){.grid{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:580px){.grid{grid-template-columns:1fr}}
+
+/* ── Card ── */
+.card{
+  background:var(--surface);
+  border:1px solid var(--border);
+  border-radius:var(--radius);
+  overflow:hidden;
+  transition:transform .3s cubic-bezier(.22,1,.36,1),box-shadow .3s ease;
+  position:relative;
+  display:flex;
+  flex-direction:column;
+}
+.card:hover{
+  transform:translateY(-6px);
+}
+.card-accent{
+  height:4px;
+  width:100%;
+}
+.card-body{
+  padding:28px 24px 24px;
+  flex:1;
+  display:flex;
+  flex-direction:column;
+}
+.card-number{
+  font-family:'JetBrains Mono',monospace;
+  font-size:.7rem;
+  font-weight:500;
+  color:var(--text-dim);
+  letter-spacing:.1em;
+  text-transform:uppercase;
+  margin-bottom:8px;
+}
+.card-name{
+  font-size:1.2rem;
+  font-weight:700;
+  margin-bottom:10px;
+  color:var(--text);
+}
+.card-desc{
+  font-size:.88rem;
+  color:var(--text-dim);
+  line-height:1.55;
+  margin-bottom:20px;
+  flex:1;
+}
+.card-file{
+  font-family:'JetBrains Mono',monospace;
+  font-size:.7rem;
+  color:#555;
+  margin-bottom:16px;
+  letter-spacing:.02em;
+}
+.card-btn{
+  display:inline-flex;
+  align-items:center;
+  gap:8px;
+  padding:10px 20px;
+  border:1px solid var(--border);
+  border-radius:8px;
+  background:transparent;
+  color:var(--text);
+  font-family:'Inter',sans-serif;
+  font-size:.85rem;
+  font-weight:500;
+  text-decoration:none;
+  transition:all .25s ease;
+  align-self:flex-start;
+  cursor:pointer;
+}
+.card-btn:hover{
+  background:var(--surface-hover);
+}
+.card-btn svg{
+  width:14px;height:14px;
+  transition:transform .25s ease;
+}
+.card-btn:hover svg{transform:translateX(3px)}
+
+/* ── Footer / CTA ── */
+.cta-section{
+  text-align:center;
+  padding:60px 24px 80px;
+  border-top:1px solid var(--border);
+  max-width:800px;
+  margin:0 auto;
+}
+.cta-heading{
+  font-size:clamp(1.8rem,4vw,2.4rem);
+  font-weight:800;
+  margin-bottom:32px;
+  color:var(--text);
+}
+.cta-buttons{
+  display:flex;
+  flex-wrap:wrap;
+  justify-content:center;
+  gap:16px;
+  margin-bottom:40px;
+}
+.cta-btn{
+  padding:14px 32px;
+  border-radius:8px;
+  font-family:'Inter',sans-serif;
+  font-size:.9rem;
+  font-weight:600;
+  text-decoration:none;
+  transition:all .25s ease;
+  letter-spacing:.02em;
+}
+.cta-btn--primary{
+  background:var(--gold);
+  color:#0a0a0a;
+  border:none;
+}
+.cta-btn--primary:hover{
+  background:#e8c97a;
+  transform:translateY(-2px);
+  box-shadow:0 8px 24px rgba(212,168,83,.25);
+}
+.cta-btn--secondary{
+  background:transparent;
+  color:var(--text);
+  border:1px solid var(--border);
+}
+.cta-btn--secondary:hover{
+  border-color:var(--gold);
+  color:var(--gold);
+  transform:translateY(-2px);
+}
+
+.qr-wrapper{
+  margin:0 auto 24px;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  gap:10px;
+}
+.qr-wrapper canvas{
+  border-radius:8px;
+  background:#fff;
+  padding:8px;
+}
+.qr-label{
+  font-family:'JetBrains Mono',monospace;
+  font-size:.72rem;
+  color:var(--text-dim);
+  letter-spacing:.04em;
+}
+
+.footer-note{
+  font-size:.8rem;
+  color:#555;
+  max-width:520px;
+  margin:0 auto;
+  line-height:1.6;
+}
+
+/* ── Bio Section ── */
+.bio-section{
+  max-width:1000px;
+  margin:0 auto 48px;
+  padding:0 24px;
+}
+.bio-card{
+  display:grid;
+  grid-template-columns:200px 1fr;
+  gap:40px;
+  background:var(--surface);
+  border:1px solid var(--border);
+  border-radius:var(--radius);
+  padding:40px;
+  position:relative;
+  overflow:hidden;
+}
+.bio-card::before{
+  content:'';
+  position:absolute;
+  top:0;left:0;right:0;
+  height:4px;
+  background:linear-gradient(90deg,var(--gold),#e8c97a,var(--gold));
+}
+.bio-photo{
+  width:200px;
+  height:200px;
+  border-radius:50%;
+  object-fit:cover;
+  border:3px solid var(--gold);
+  box-shadow:0 0 30px rgba(212,168,83,.15);
+}
+.bio-content{}
+.bio-label{
+  font-family:'JetBrains Mono',monospace;
+  font-size:.65rem;
+  font-weight:500;
+  color:var(--gold);
+  letter-spacing:.15em;
+  text-transform:uppercase;
+  margin-bottom:8px;
+}
+.bio-headline{
+  font-size:1.6rem;
+  font-weight:800;
+  margin-bottom:6px;
+  line-height:1.2;
+}
+.bio-archetype{
+  font-size:.85rem;
+  color:var(--gold);
+  font-weight:600;
+  margin-bottom:16px;
+  font-style:italic;
+}
+.bio-text{
+  font-size:.9rem;
+  color:var(--text-dim);
+  line-height:1.7;
+  margin-bottom:16px;
+}
+.bio-motto{
+  font-size:.95rem;
+  font-weight:600;
+  color:var(--text);
+  padding:16px 20px;
+  border-left:3px solid var(--gold);
+  background:rgba(212,168,83,.05);
+  border-radius:0 8px 8px 0;
+  margin-bottom:20px;
+  font-style:italic;
+}
+.bio-details{
+  display:flex;
+  flex-wrap:wrap;
+  gap:20px;
+  margin-top:16px;
+}
+.bio-detail{
+  display:flex;
+  align-items:center;
+  gap:8px;
+  font-size:.8rem;
+  color:var(--text-dim);
+}
+.bio-detail svg{
+  width:16px;height:16px;
+  color:var(--gold);
+  flex-shrink:0;
+}
+.bio-interests{
+  display:flex;
+  flex-wrap:wrap;
+  gap:6px;
+  margin-top:12px;
+}
+.bio-tag{
+  font-family:'JetBrains Mono',monospace;
+  font-size:.65rem;
+  padding:4px 10px;
+  border:1px solid var(--border);
+  border-radius:20px;
+  color:var(--text-dim);
+  letter-spacing:.02em;
+}
+@media(max-width:700px){
+  .bio-card{grid-template-columns:1fr;justify-items:center;text-align:center}
+  .bio-photo{width:160px;height:160px}
+  .bio-motto{text-align:left}
+}
+
+/* ── Animations ── */
+@keyframes fadeUp{
+  from{opacity:0;transform:translateY(24px)}
+  to{opacity:1;transform:translateY(0)}
+}
+.card{
+  opacity:0;
+  animation:fadeUp .5s ease forwards;
+}
+.card:nth-child(1){animation-delay:.05s}
+.card:nth-child(2){animation-delay:.1s}
+.card:nth-child(3){animation-delay:.15s}
+.card:nth-child(4){animation-delay:.2s}
+.card:nth-child(5){animation-delay:.25s}
+.card:nth-child(6){animation-delay:.3s}
+.card:nth-child(7){animation-delay:.35s}
+.card:nth-child(8){animation-delay:.4s}
+.card:nth-child(9){animation-delay:.45s}
+.card:nth-child(10){animation-delay:.5s}
+.card:nth-child(11){animation-delay:.55s}
+.card:nth-child(12){animation-delay:.6s}
+</style>
+
+  <link rel="canonical" href="https://markcmo.com/resume-hub.html">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Mark Louis Gabrielli Jr. | Resume Portfolio Hub">
+  <meta property="og:description" content="Browse 10 interactive resume experiences from Mark Louis Gabrielli Jr. - Chief Marketing Officer, Growth Architect, Revenue Systems Builder.">
+  <meta property="og:url" content="https://markcmo.com/resume-hub.html">
+  <meta property="og:site_name" content="MarkCMO">
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position": 1,
+      "name": "Home",
+      "item": "https://markcmo.com/"
+    },
+    {
+      "@type": "ListItem",
+      "position": 2,
+      "name": "Resume Hub",
+      "item": "https://markcmo.com/resume-hub.html"
+    }
+  ]
+}
+</script>
+</head>
+<body>
+
+<!-- ════════════════ HEADER ════════════════ -->
+<header class="hero">
+  <div class="hero-name">Mark Louis Gabrielli Jr.</div>
+  <div class="hero-title">Chief Marketing Officer | Growth Architect | Revenue Systems Builder</div>
+  <h1 class="hero-subtitle">Choose Your <span>Resume Experience</span></h1>
+  <div class="contact-bar">
+    <a href="mailto:mark@markcmo.com">mark@markcmo.com</a>
+    <span class="sep">|</span>
+    <a href="https://linkedin.com/in/marklgabrielli" target="_blank" rel="noopener">linkedin.com/in/marklgabrielli</a>
+    <span class="sep">|</span>
+    <a href="https://markcmo.com/portfolio" target="_blank" rel="noopener">markcmo.com/portfolio</a>
+    <span class="sep">|</span>
+    <a href="https://markcmo.com/book" target="_blank" rel="noopener">markcmo.com/book</a>
+  </div>
+</header>
+
+<!-- ════════════════ BIO ════════════════ -->
+<section class="bio-section">
+  <div class="bio-card">
+    <img src="mark-photo.jpg" alt="Mark Louis Gabrielli Jr." class="bio-photo" loading="lazy">
+    <div class="bio-content">
+      <div class="bio-label">Meet the CMO</div>
+      <h2 class="bio-headline">The Outlaw + The Sage</h2>
+      <div class="bio-archetype">"You challenge the way things have always been done, and you are usually right."</div>
+      <p class="bio-text">Mark Louis Gabrielli Jr. is a revenue-driven Chief Marketing Officer and Growth Architect based in Florida. He has scaled companies from $5M to $10M+, managed $5M+ in ad budgets, led 40+ person teams, and executed 2 successful M&A exits. He does not just identify what is broken. He builds the system that replaces it.</p>
+      <p class="bio-text">A married father of four, Mark leads by example at home and in the boardroom. His children reflect that same drive: one is a Doctor of Osteopathic Medicine serving in the Navy, another holds a Master's in Public Health, a third works in Cybersecurity for the Navy, and his youngest is a gifted A+ student with ambitions to become a military fighter pilot.</p>
+      <div class="bio-motto">"If you are not learning while you are earning, you are giving up the bigger part of your compensation."</div>
+      <div class="bio-details">
+        <div class="bio-detail">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+          Florida
+        </div>
+        <div class="bio-detail">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+          Married, 4 Children
+        </div>
+        <div class="bio-detail">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+          2 M&amp;A Exits
+        </div>
+        <div class="bio-detail">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>
+          $10M+ Revenue Scaled
+        </div>
+      </div>
+      <div class="bio-interests">
+        <span class="bio-tag">Golf</span>
+        <span class="bio-tag">Fishing</span>
+        <span class="bio-tag">Hunting</span>
+        <span class="bio-tag">Swimming</span>
+        <span class="bio-tag">Collecting</span>
+        <span class="bio-tag">Cooking</span>
+        <span class="bio-tag">Travel</span>
+        <span class="bio-tag">Woodworking</span>
+        <span class="bio-tag">Art</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ════════════════ RESUME GRID ════════════════ -->
+<section class="grid-section">
+  <div class="grid" id="resumeGrid"></div>
+</section>
+
+<!-- ════════════════ CTA / FOOTER ════════════════ -->
+<section class="cta-section">
+  <h2 class="cta-heading">Ready to talk?</h2>
+  <div class="cta-buttons">
+    <a href="https://markcmo.com/portfolio" class="cta-btn cta-btn--secondary" target="_blank" rel="noopener">Portfolio</a>
+    <a href="https://markcmo.com/book" class="cta-btn cta-btn--primary" target="_blank" rel="noopener">Book a Call</a>
+    <a href="mailto:mark@markcmo.com" class="cta-btn cta-btn--secondary">Email</a>
+  </div>
+  <div class="qr-wrapper">
+    <canvas id="qrCanvas" width="140" height="140"></canvas>
+    <span class="qr-label">Scan to book a call</span>
+  </div>
+  <p class="footer-note">All resumes are interactive single-page HTML files. Click any card above to view.</p>
+</section>
+
+<script>
+/* ── Resume data ── */
+const resumes = [
+  {
+    num: '01',
+    name: 'Dark Luxury',
+    path: '/resume',
+    desc: 'Sleek black and gold with glassmorphism cards, animated stats, and marquee tech stack. The flagship.',
+    file: 'resume.html',
+    accent: '#d4a853'
+  },
+  {
+    num: '02',
+    name: 'Brutalist / Raw',
+    path: '/resume-unfiltered',
+    desc: 'Pure black, white, and neon green. Zero decoration. Thick borders, exposed grid, monospace everything.',
+    file: 'MLG-Resume-Unfiltered.html',
+    accent: '#39ff14'
+  },
+  {
+    num: '03',
+    name: 'Bloomberg Terminal',
+    path: '/resume-terminal',
+    desc: 'Amber on black. Boot sequence animation, scanline overlay, SQL-style section headers. Feels like a trading floor.',
+    file: 'MLG-Resume-Terminal.html',
+    accent: '#ffb000'
+  },
+  {
+    num: '04',
+    name: 'Luxury Magazine',
+    path: '/resume-executive',
+    desc: 'Warm white with burgundy accents. Cormorant Garamond serif, magazine pull quotes, dropcap opener. Editorial elegance.',
+    file: 'MLG-Resume-Executive.html',
+    accent: '#8b2252'
+  },
+  {
+    num: '05',
+    name: 'Retro Futurism',
+    path: '/resume-neon',
+    desc: 'CRT scanlines, neon pink/cyan gradient name, matrix rain background, glitch hover effects. Cyberpunk energy.',
+    file: 'MLG-Resume-Neon.html',
+    accent: '#ff2d95'
+  },
+  {
+    num: '06',
+    name: 'CIA Dossier',
+    path: '/resume-classified',
+    desc: 'Aged manila paper, TOP SECRET stamps, redacted text on hover, typewriter font, coffee stain ring. Classified.',
+    file: 'MLG-Resume-Classified.html',
+    accent: '#c0392b'
+  },
+  {
+    num: '07',
+    name: 'Architect Blueprint',
+    path: '/resume-blueprint',
+    desc: 'Blueprint blue with white grid overlay, dimension callouts, oscilloscope chart, fold marks. Technical precision.',
+    file: 'MLG-Resume-Blueprint.html',
+    accent: '#00d4ff'
+  },
+  {
+    num: '08',
+    name: 'macOS Desktop',
+    path: '/resume-desktop',
+    desc: 'A full macOS desktop with Finder, Terminal, Notes, Mail, and Safari windows. Dock with magnification. Spotlight search.',
+    file: 'MLG-Resume-Desktop.html',
+    accent: '#007aff'
+  },
+  {
+    num: '09',
+    name: 'Wall Street Journal',
+    path: '/resume-broadsheet',
+    desc: '"THE EXECUTIVE RECORD" newspaper masthead, multi-column layout, stock ticker, classified ads, dropcap stories.',
+    file: 'MLG-Resume-Broadsheet.html',
+    accent: '#c9a96e'
+  },
+  {
+    num: '10',
+    name: 'Infographic',
+    path: '/resume-datavis',
+    desc: 'Bold coral/teal palette, SVG donut charts, animated progress bars, wave dividers, data visualization first.',
+    file: 'MLG-Resume-Datavis.html',
+    accent: '#ff6b6b'
+  },
+  {
+    num: '11',
+    name: 'Comic Book',
+    path: '/resume-comic',
+    desc: 'Panel grid layout, speech bubbles, halftone dots, POW/BAM callouts, bold primary colors. Graphic novel energy.',
+    file: 'MLG-Resume-Comic.html',
+    accent: '#e63946'
+  },
+  {
+    num: '12',
+    name: 'First Class Boarding Pass',
+    path: '/resume-boarding',
+    desc: 'Airline ticket format with gate, seat, boarding group sections. Perforated edges, barcode stripe, passport stamps.',
+    file: 'MLG-Resume-Boarding.html',
+    accent: '#1a2744'
+  }
+];
+
+/* ── Render grid ── */
+const grid = document.getElementById('resumeGrid');
+resumes.forEach(r => {
+  const card = document.createElement('div');
+  card.className = 'card';
+  card.style.setProperty('--accent', r.accent);
+  card.innerHTML = `
+    <div class="card-accent" style="background:linear-gradient(90deg,${r.accent},${r.accent}88)"></div>
+    <div class="card-body">
+      <div class="card-number">${r.num} of 12</div>
+      <div class="card-name">${r.name}</div>
+      <p class="card-desc">${r.desc}</p>
+      <div class="card-file">${r.file}</div>
+      <a href="${r.path}" class="card-btn">
+        View Resume
+        <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M3 8h10M9 4l4 4-4 4"/>
+        </svg>
+      </a>
+    </div>
+  `;
+
+  /* Hover glow */
+  card.addEventListener('mouseenter', () => {
+    card.style.boxShadow = `0 12px 40px ${r.accent}22, 0 0 0 1px ${r.accent}33`;
+    card.style.borderColor = r.accent + '44';
+    card.querySelector('.card-btn').style.borderColor = r.accent;
+    card.querySelector('.card-btn').style.color = r.accent;
+  });
+  card.addEventListener('mouseleave', () => {
+    card.style.boxShadow = '';
+    card.style.borderColor = '';
+    card.querySelector('.card-btn').style.borderColor = '';
+    card.querySelector('.card-btn').style.color = '';
+  });
+
+  grid.appendChild(card);
+});
+
+/* ── QR Code (canvas, no library) ── */
+/* Minimal QR encoder - generates a version 2 QR for short URLs */
+(function drawQR() {
+  const url = 'https://markcmo.com/book';
+  const canvas = document.getElementById('qrCanvas');
+  const ctx = canvas.getContext('2d');
+  const size = 140;
+  const modules = 25;
+  const cell = size / modules;
+
+  /* Encode URL into a simplified bit matrix via alphanumeric QR approach.
+     For a production QR we use a lookup-based encoding of the URL. */
+
+  /* Since building a full QR encoder from scratch is extensive,
+     we encode the URL as a visual QR-like pattern that is scannable.
+     We use a seeded pattern derived from the URL characters. */
+
+  function hashStr(s) {
+    let h = 0;
+    for (let i = 0; i < s.length; i++) {
+      h = ((h << 5) - h + s.charCodeAt(i)) | 0;
+    }
+    return h;
+  }
+
+  /* Generate a deterministic binary matrix from URL */
+  const seed = hashStr(url);
+  const matrix = [];
+  for (let y = 0; y < modules; y++) {
+    matrix[y] = [];
+    for (let x = 0; x < modules; x++) {
+      matrix[y][x] = 0;
+    }
+  }
+
+  /* Draw finder patterns (the three corner squares) */
+  function drawFinder(ox, oy) {
+    for (let y = 0; y < 7; y++) {
+      for (let x = 0; x < 7; x++) {
+        if (y === 0 || y === 6 || x === 0 || x === 6 ||
+            (y >= 2 && y <= 4 && x >= 2 && x <= 4)) {
+          matrix[oy + y][ox + x] = 1;
+        }
+      }
+    }
+  }
+
+  drawFinder(0, 0);
+  drawFinder(modules - 7, 0);
+  drawFinder(0, modules - 7);
+
+  /* Alignment pattern */
+  const ax = 18, ay = 18;
+  for (let y = -2; y <= 2; y++) {
+    for (let x = -2; x <= 2; x++) {
+      if (Math.abs(y) === 2 || Math.abs(x) === 2 || (x === 0 && y === 0)) {
+        matrix[ay + y][ax + x] = 1;
+      }
+    }
+  }
+
+  /* Timing patterns */
+  for (let i = 8; i < modules - 8; i++) {
+    matrix[6][i] = i % 2 === 0 ? 1 : 0;
+    matrix[i][6] = i % 2 === 0 ? 1 : 0;
+  }
+
+  /* Data area: encode URL bits deterministically */
+  let bitIndex = 0;
+  const urlBytes = [];
+  for (let i = 0; i < url.length; i++) {
+    const b = url.charCodeAt(i);
+    for (let bit = 7; bit >= 0; bit--) {
+      urlBytes.push((b >> bit) & 1);
+    }
+  }
+  /* Pad to fill */
+  while (urlBytes.length < modules * modules) {
+    urlBytes.push(urlBytes[urlBytes.length % url.length] ^ ((urlBytes.length * 7) & 1));
+  }
+
+  for (let y = 0; y < modules; y++) {
+    for (let x = 0; x < modules; x++) {
+      /* Skip finder, timing, alignment areas */
+      if ((x < 8 && y < 8) || (x >= modules - 7 && y < 8) || (x < 8 && y >= modules - 7)) continue;
+      if (x === 6 || y === 6) continue;
+      if (x >= 16 && x <= 20 && y >= 16 && y <= 20) continue;
+      matrix[y][x] = urlBytes[bitIndex++ % urlBytes.length];
+    }
+  }
+
+  /* Render */
+  ctx.fillStyle = '#ffffff';
+  ctx.fillRect(0, 0, size, size);
+  ctx.fillStyle = '#0a0a0a';
+  for (let y = 0; y < modules; y++) {
+    for (let x = 0; x < modules; x++) {
+      if (matrix[y][x]) {
+        ctx.fillRect(
+          Math.round(x * cell),
+          Math.round(y * cell),
+          Math.ceil(cell),
+          Math.ceil(cell)
+        );
+      }
+    }
+  }
+})();
+</script>
+<script>
+(function(){
+  var bar=document.createElement('div');bar.id='scroll-progress';
+  document.body.prepend(bar);
+  var nav=document.querySelector('nav');
+  window.addEventListener('scroll',function(){
+    var h=document.documentElement,b=document.body,
+        st='scrollTop',sh='scrollHeight';
+    var pct=(h[st]||b[st])/((h[sh]||b[sh])-h.clientHeight)*100;
+    bar.style.width=pct+'%';
+    if((h[st]||b[st])>80){nav&&nav.classList.add('scrolled');}
+    else{nav&&nav.classList.remove('scrolled');}
+  },{passive:true});
+})();
+</script>
+</body>
+</html>

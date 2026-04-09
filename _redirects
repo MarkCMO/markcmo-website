@@ -1,0 +1,438 @@
+# ═══════════════════════════════════════════════════════════
+# Netlify Redirects — markcmo.com
+# RULE: First match wins. Keep most-specific rules FIRST.
+# 404 catch-all MUST be last.
+# ═══════════════════════════════════════════════════════════
+
+# ─── www → non-www ──────────────────────────────────────────
+https://www.markcmo.com/* https://markcmo.com/:splat 301!
+
+# ─── Core pages: .html → clean URL (301 permanent) ─────────
+/index.html                          /                              301!
+/about.html                          /about                         301!
+/services.html                       /services                      301!
+/portfolio.html                      /portfolio                     301!
+/results.html                        /results                       301!
+/book.html                           /book                          301!
+/blog.html                           /blog                          301!
+/contact.html                        /contact                       301!
+/faq.html                            /faq                           301!
+/industries.html                     /industries                    301!
+/testimonials.html                   /testimonials                  301!
+/privacy.html                        /privacy                       301!
+/thank-you.html                      /thank-you                     301!
+/wetyr.html                          /wetyr                         301!
+
+# ─── Service pages ──────────────────────────────────────────
+/fractional-cmo.html                 /fractional-cmo                301!
+/press.html                          /press                         301!
+/speaking.html                       /speaking                      301!
+/case-studies.html                   /case-studies                  301!
+/glossary.html                       /glossary                      301!
+
+# ─── Glossary clean URLs ─────────────────────────────────────
+/what-is-a-fractional-cmo.html       /what-is-a-fractional-cmo      301!
+/fractional-cmo-definition.html      /fractional-cmo-definition     301!
+/what-is-a-cmo.html                  /what-is-a-cmo                 301!
+/what-is-coo.html                    /what-is-coo                   301!
+/what-is-demand-generation.html      /what-is-demand-generation     301!
+/what-is-go-to-market-strategy.html  /what-is-go-to-market-strategy 301!
+/what-is-revenue-operations.html     /what-is-revenue-operations    301!
+/what-is-cac.html                    /what-is-cac                   301!
+/what-is-ltv.html                    /what-is-ltv                   301!
+/marketing-qualified-lead.html       /marketing-qualified-lead      301!
+/ideal-customer-profile.html         /ideal-customer-profile        301!
+/what-is-product-market-fit.html     /what-is-product-market-fit    301!
+/fractional-coo.html                 /fractional-coo                301!
+/executive-advisory.html             /executive-advisory            301!
+/marketing-strategy.html             /marketing-strategy            301!
+/ai-automation.html                  /ai-automation                 301!
+/cybersecurity.html                  /cybersecurity                 301!
+/managed-it.html                     /managed-it                    301!
+/business-funding.html               /business-funding              301!
+/saas-development.html               /saas-development              301!
+/cloud-services.html                 /cloud-services                301!
+/executive-recruiting.html           /executive-recruiting          301!
+/mergers-acquisitions.html           /mergers-acquisitions          301!
+
+# ─── Industry pages ─────────────────────────────────────────
+/fractional-cmo-tech.html                    /fractional-cmo-tech                    301!
+/fractional-cmo-retail.html                  /fractional-cmo-retail                  301!
+/fractional-cmo-energy.html                  /fractional-cmo-energy                  301!
+/fractional-cmo-media.html                   /fractional-cmo-media                   301!
+/fractional-cmo-ai.html                      /fractional-cmo-ai                      301!
+/fractional-cmo-cybersecurity.html           /fractional-cmo-cybersecurity           301!
+/fractional-cmo-private-equity.html          /fractional-cmo-private-equity          301!
+/fractional-cmo-venture-capital.html         /fractional-cmo-venture-capital         301!
+/fractional-cmo-home-services.html           /fractional-cmo-home-services           301!
+/fractional-cmo-cannabis.html                /fractional-cmo-cannabis                301!
+
+# ─── Guide / FAQ pages ──────────────────────────────────────
+/how-to-hire-a-fractional-cmo.html           /how-to-hire-a-fractional-cmo           301!
+/questions-to-ask-a-fractional-cmo.html      /questions-to-ask-a-fractional-cmo      301!
+/when-do-you-need-a-fractional-cmo.html      /when-do-you-need-a-fractional-cmo      301!
+/fractional-cmo-vs-vp-marketing.html         /fractional-cmo-vs-vp-marketing         301!
+/fractional-cmo-first-90-days.html           /fractional-cmo-first-90-days           301!
+/fractional-cmo-contract.html                /fractional-cmo-contract                301!
+/fractional-cmo-vs-interim-cmo.html          /fractional-cmo-vs-interim-cmo          301!
+/fractional-cmo-vs-marketing-consultant.html /fractional-cmo-vs-marketing-consultant 301!
+
+# ─── Competitor alternative pages ───────────────────────────
+/fractional-cmo-vs-marketerhire.html          /fractional-cmo-vs-marketerhire          301!
+/fractional-cmo-vs-growthmode.html            /fractional-cmo-vs-growthmode            301!
+/fractional-cmo-vs-toptal.html                /fractional-cmo-vs-toptal                301!
+/fractional-cmo-vs-hire-with-near.html        /fractional-cmo-vs-hire-with-near        301!
+/fractional-cmo-vs-sterling-chase.html        /fractional-cmo-vs-sterling-chase        301!
+/fractional-cmo-vs-cmo-alliance.html          /fractional-cmo-vs-cmo-alliance          301!
+
+# ─── Funding-stage pages ─────────────────────────────────────
+/fractional-cmo-series-a.html                 /fractional-cmo-series-a                 301!
+/fractional-cmo-series-b.html                 /fractional-cmo-series-b                 301!
+/fractional-cmo-bootstrapped-companies.html   /fractional-cmo-bootstrapped-companies   301!
+/fractional-cmo-pe-backed-companies.html      /fractional-cmo-pe-backed-companies      301!
+/fractional-cmo-pre-revenue.html              /fractional-cmo-pre-revenue              301!
+
+# ─── Authority pages ─────────────────────────────────────────
+/best-fractional-cmo.html                     /best-fractional-cmo                     301!
+/top-fractional-cmo-usa.html                  /top-fractional-cmo-usa                  301!
+/fractional-cmo-for-b2b-companies.html        /fractional-cmo-for-b2b-companies        301!
+
+# ─── Blog pages ─────────────────────────────────────────────
+/blog-fractional-cmo-guide.html          /blog-fractional-cmo-guide          301!
+/blog-fractional-vs-fulltime-cmo.html    /blog-fractional-vs-fulltime-cmo    301!
+/blog-healthcare-marketing-strategy.html /blog-healthcare-marketing-strategy 301!
+/blog-operational-blind-spots.html       /blog-operational-blind-spots       301!
+/blog-psychology-framework.html          /blog-psychology-framework          301!
+
+# ─── Project pages ──────────────────────────────────────────
+/project-wetyr.html          /project-wetyr         301!
+/project-aileaders.html      /project-aileaders     301!
+/project-aitoolbox.html      /project-aitoolbox     301!
+/project-busbrother.html     /project-busbrother    301!
+/project-butcherbud.html     /project-butcherbud    301!
+/project-leadflow-cash.html  /project-leadflow-cash 301!
+/project-letsleavenow.html   /project-letsleavenow  301!
+/project-markcmo.html        /project-markcmo       301!
+/project-microgreenusa.html  /project-microgreenusa 301!
+/project-saasaf.html         /project-saasaf        301!
+/project-swipehire365.html   /project-swipehire365  301!
+/project-tablegreens.html    /project-tablegreens   301!
+
+# ─── Clean URL rewrites (serve .html at clean path) ─────────
+/about                         /about.html                    200
+/services                      /services.html                 200
+/portfolio                     /portfolio.html                200
+/results                       /results.html                  200
+/book                          /book.html                     200
+/blog                          /blog.html                     200
+/contact                       /contact.html                  200
+/faq                           /faq.html                      200
+/industries                    /industries.html               200
+/testimonials                  /testimonials.html             200
+/privacy                       /privacy.html                  200
+/thank-you                     /thank-you.html                200
+/wetyr                         /wetyr.html                    200
+/fractional-cmo                /fractional-cmo.html           200
+/press                         /press.html                    200
+/speaking                      /speaking.html                 200
+/case-studies                  /case-studies.html             200
+/fractional-coo                /fractional-coo.html           200
+/executive-advisory            /executive-advisory.html       200
+/marketing-strategy            /marketing-strategy.html       200
+/ai-automation                 /ai-automation.html            200
+/cybersecurity                 /cybersecurity.html            200
+/managed-it                    /managed-it.html               200
+/business-funding              /business-funding.html         200
+/saas-development              /saas-development.html         200
+/cloud-services                /cloud-services.html           200
+/executive-recruiting          /executive-recruiting.html     200
+/mergers-acquisitions          /mergers-acquisitions.html     200
+/blog-fractional-cmo-guide     /blog-fractional-cmo-guide.html     200
+/blog-fractional-vs-fulltime-cmo /blog-fractional-vs-fulltime-cmo.html 200
+/blog-healthcare-marketing-strategy /blog-healthcare-marketing-strategy.html 200
+/blog-operational-blind-spots  /blog-operational-blind-spots.html  200
+/blog-psychology-framework     /blog-psychology-framework.html     200
+/project-wetyr                 /project-wetyr.html            200
+/project-aileaders             /project-aileaders.html        200
+/project-aitoolbox             /project-aitoolbox.html        200
+/project-busbrother            /project-busbrother.html       200
+/project-butcherbud            /project-butcherbud.html       200
+/project-leadflow-cash         /project-leadflow-cash.html    200
+/project-letsleavenow          /project-letsleavenow.html     200
+/project-markcmo               /project-markcmo.html          200
+/project-microgreenusa         /project-microgreenusa.html    200
+/project-saasaf                /project-saasaf.html           200
+/project-swipehire365          /project-swipehire365.html     200
+/project-tablegreens           /project-tablegreens.html      200
+
+# ─── Document VDR (secure, noindex) ─────────────────────────
+/documents                     /documents/index.html          200
+/documents/nda                 /documents/nda.html            200
+/documents/mutual-nda          /documents/mutual-nda.html     200
+/documents/engagement          /documents/engagement.html     200
+/documents/msa                 /documents/msa.html            200
+/documents/referral            /documents/referral.html       200
+/documents/contractor          /documents/contractor.html     200
+/documents/onboarding          /documents/onboarding.html     200
+/documents/proposal            /documents/proposal.html       200
+
+# ─── Location hub ───────────────────────────────────────────
+/location                      /location/index.html           200
+
+# ─── Location pages (110 pages — explicit rewrites) ─────────
+/location/fractional-cmo-alabama          /location/fractional-cmo-alabama.html          200
+/location/fractional-cmo-alaska           /location/fractional-cmo-alaska.html           200
+/location/fractional-cmo-albuquerque      /location/fractional-cmo-albuquerque.html      200
+/location/fractional-cmo-anaheim          /location/fractional-cmo-anaheim.html          200
+/location/fractional-cmo-arizona          /location/fractional-cmo-arizona.html          200
+/location/fractional-cmo-arkansas         /location/fractional-cmo-arkansas.html         200
+/location/fractional-cmo-arlington        /location/fractional-cmo-arlington.html        200
+/location/fractional-cmo-atlanta          /location/fractional-cmo-atlanta.html          200
+/location/fractional-cmo-austin           /location/fractional-cmo-austin.html           200
+/location/fractional-cmo-bakersfield      /location/fractional-cmo-bakersfield.html      200
+/location/fractional-cmo-baltimore        /location/fractional-cmo-baltimore.html        200
+/location/fractional-cmo-birmingham       /location/fractional-cmo-birmingham.html       200
+/location/fractional-cmo-boston           /location/fractional-cmo-boston.html           200
+/location/fractional-cmo-buffalo          /location/fractional-cmo-buffalo.html          200
+/location/fractional-cmo-california       /location/fractional-cmo-california.html       200
+/location/fractional-cmo-charlotte        /location/fractional-cmo-charlotte.html        200
+/location/fractional-cmo-chicago          /location/fractional-cmo-chicago.html          200
+/location/fractional-cmo-cincinnati       /location/fractional-cmo-cincinnati.html       200
+/location/fractional-cmo-cleveland        /location/fractional-cmo-cleveland.html        200
+/location/fractional-cmo-colorado-springs /location/fractional-cmo-colorado-springs.html 200
+/location/fractional-cmo-colorado         /location/fractional-cmo-colorado.html         200
+/location/fractional-cmo-columbus         /location/fractional-cmo-columbus.html         200
+/location/fractional-cmo-connecticut      /location/fractional-cmo-connecticut.html      200
+/location/fractional-cmo-dallas           /location/fractional-cmo-dallas.html           200
+/location/fractional-cmo-delaware         /location/fractional-cmo-delaware.html         200
+/location/fractional-cmo-denver           /location/fractional-cmo-denver.html           200
+/location/fractional-cmo-detroit          /location/fractional-cmo-detroit.html          200
+/location/fractional-cmo-el-paso          /location/fractional-cmo-el-paso.html          200
+/location/fractional-cmo-florida          /location/fractional-cmo-florida.html          200
+/location/fractional-cmo-fort-worth       /location/fractional-cmo-fort-worth.html       200
+/location/fractional-cmo-fresno           /location/fractional-cmo-fresno.html           200
+/location/fractional-cmo-georgia          /location/fractional-cmo-georgia.html          200
+/location/fractional-cmo-hartford         /location/fractional-cmo-hartford.html         200
+/location/fractional-cmo-hawaii           /location/fractional-cmo-hawaii.html           200
+/location/fractional-cmo-houston          /location/fractional-cmo-houston.html          200
+/location/fractional-cmo-idaho            /location/fractional-cmo-idaho.html            200
+/location/fractional-cmo-illinois         /location/fractional-cmo-illinois.html         200
+/location/fractional-cmo-indiana          /location/fractional-cmo-indiana.html          200
+/location/fractional-cmo-indianapolis     /location/fractional-cmo-indianapolis.html     200
+/location/fractional-cmo-iowa             /location/fractional-cmo-iowa.html             200
+/location/fractional-cmo-jacksonville     /location/fractional-cmo-jacksonville.html     200
+/location/fractional-cmo-kansas-city      /location/fractional-cmo-kansas-city.html      200
+/location/fractional-cmo-kansas           /location/fractional-cmo-kansas.html           200
+/location/fractional-cmo-kentucky         /location/fractional-cmo-kentucky.html         200
+/location/fractional-cmo-las-vegas        /location/fractional-cmo-las-vegas.html        200
+/location/fractional-cmo-lexington        /location/fractional-cmo-lexington.html        200
+/location/fractional-cmo-los-angeles      /location/fractional-cmo-los-angeles.html      200
+/location/fractional-cmo-louisiana        /location/fractional-cmo-louisiana.html        200
+/location/fractional-cmo-louisville       /location/fractional-cmo-louisville.html       200
+/location/fractional-cmo-maine            /location/fractional-cmo-maine.html            200
+/location/fractional-cmo-maryland         /location/fractional-cmo-maryland.html         200
+/location/fractional-cmo-massachusetts    /location/fractional-cmo-massachusetts.html    200
+/location/fractional-cmo-memphis          /location/fractional-cmo-memphis.html          200
+/location/fractional-cmo-mesa             /location/fractional-cmo-mesa.html             200
+/location/fractional-cmo-miami            /location/fractional-cmo-miami.html            200
+/location/fractional-cmo-michigan         /location/fractional-cmo-michigan.html         200
+/location/fractional-cmo-milwaukee        /location/fractional-cmo-milwaukee.html        200
+/location/fractional-cmo-minneapolis      /location/fractional-cmo-minneapolis.html      200
+/location/fractional-cmo-minnesota        /location/fractional-cmo-minnesota.html        200
+/location/fractional-cmo-mississippi      /location/fractional-cmo-mississippi.html      200
+/location/fractional-cmo-missouri         /location/fractional-cmo-missouri.html         200
+/location/fractional-cmo-montana          /location/fractional-cmo-montana.html          200
+/location/fractional-cmo-nashville        /location/fractional-cmo-nashville.html        200
+/location/fractional-cmo-nebraska         /location/fractional-cmo-nebraska.html         200
+/location/fractional-cmo-nevada           /location/fractional-cmo-nevada.html           200
+/location/fractional-cmo-new-hampshire    /location/fractional-cmo-new-hampshire.html    200
+/location/fractional-cmo-new-jersey       /location/fractional-cmo-new-jersey.html       200
+/location/fractional-cmo-new-mexico       /location/fractional-cmo-new-mexico.html       200
+/location/fractional-cmo-new-orleans      /location/fractional-cmo-new-orleans.html      200
+/location/fractional-cmo-new-york         /location/fractional-cmo-new-york.html         200
+/location/fractional-cmo-north-carolina   /location/fractional-cmo-north-carolina.html   200
+/location/fractional-cmo-north-dakota     /location/fractional-cmo-north-dakota.html     200
+/location/fractional-cmo-ohio             /location/fractional-cmo-ohio.html             200
+/location/fractional-cmo-oklahoma-city    /location/fractional-cmo-oklahoma-city.html    200
+/location/fractional-cmo-oklahoma         /location/fractional-cmo-oklahoma.html         200
+/location/fractional-cmo-omaha            /location/fractional-cmo-omaha.html            200
+/location/fractional-cmo-oregon           /location/fractional-cmo-oregon.html           200
+/location/fractional-cmo-orlando          /location/fractional-cmo-orlando.html          200
+/location/fractional-cmo-pennsylvania     /location/fractional-cmo-pennsylvania.html     200
+/location/fractional-cmo-philadelphia     /location/fractional-cmo-philadelphia.html     200
+/location/fractional-cmo-phoenix          /location/fractional-cmo-phoenix.html          200
+/location/fractional-cmo-pittsburgh       /location/fractional-cmo-pittsburgh.html       200
+/location/fractional-cmo-portland         /location/fractional-cmo-portland.html         200
+/location/fractional-cmo-raleigh          /location/fractional-cmo-raleigh.html          200
+/location/fractional-cmo-rhode-island     /location/fractional-cmo-rhode-island.html     200
+/location/fractional-cmo-richmond         /location/fractional-cmo-richmond.html         200
+/location/fractional-cmo-sacramento       /location/fractional-cmo-sacramento.html       200
+/location/fractional-cmo-salt-lake-city   /location/fractional-cmo-salt-lake-city.html   200
+/location/fractional-cmo-san-antonio      /location/fractional-cmo-san-antonio.html      200
+/location/fractional-cmo-san-diego        /location/fractional-cmo-san-diego.html        200
+/location/fractional-cmo-san-francisco    /location/fractional-cmo-san-francisco.html    200
+/location/fractional-cmo-san-jose         /location/fractional-cmo-san-jose.html         200
+/location/fractional-cmo-seattle          /location/fractional-cmo-seattle.html          200
+/location/fractional-cmo-south-carolina   /location/fractional-cmo-south-carolina.html   200
+/location/fractional-cmo-south-dakota     /location/fractional-cmo-south-dakota.html     200
+/location/fractional-cmo-st-louis         /location/fractional-cmo-st-louis.html         200
+/location/fractional-cmo-tampa            /location/fractional-cmo-tampa.html            200
+/location/fractional-cmo-tennessee        /location/fractional-cmo-tennessee.html        200
+/location/fractional-cmo-texas            /location/fractional-cmo-texas.html            200
+/location/fractional-cmo-tucson           /location/fractional-cmo-tucson.html           200
+/location/fractional-cmo-utah             /location/fractional-cmo-utah.html             200
+/location/fractional-cmo-vermont          /location/fractional-cmo-vermont.html          200
+/location/fractional-cmo-virginia-beach   /location/fractional-cmo-virginia-beach.html   200
+/location/fractional-cmo-virginia         /location/fractional-cmo-virginia.html         200
+/location/fractional-cmo-washington-dc    /location/fractional-cmo-washington-dc.html    200
+/location/fractional-cmo-washington       /location/fractional-cmo-washington.html       200
+/location/fractional-cmo-west-virginia    /location/fractional-cmo-west-virginia.html    200
+/location/fractional-cmo-wisconsin        /location/fractional-cmo-wisconsin.html        200
+/location/fractional-cmo-wyoming          /location/fractional-cmo-wyoming.html          200
+
+# ─── Document signing system ────────────────────────────────
+/sign  /sign/index.html  200
+/sign/*  /sign/index.html  200
+
+# ─── Forms (PDF fill system) ─────────────────────────────────
+/forms                         /forms/index.html              200
+/forms/nda                     /forms/nda.html                200
+/forms/mutual-nda              /forms/mutual-nda.html         200
+/forms/engagement              /forms/engagement.html         200
+/forms/msa                     /forms/msa.html                200
+/forms/referral                /forms/referral.html           200
+/forms/contractor              /forms/contractor.html         200
+/forms/onboarding              /forms/onboarding.html         200
+/forms/proposal                /forms/proposal.html           200
+
+
+/forms/sow                     /forms/sow.html                200
+/forms/change-order            /forms/change-order.html       200
+/forms/testimonial-release     /forms/testimonial-release.html 200
+/forms/non-solicitation        /forms/non-solicitation.html   200
+/forms/conflict-of-interest    /forms/conflict-of-interest.html 200
+/forms/board-advisory          /forms/board-advisory.html     200
+/forms/equity-compensation     /forms/equity-compensation.html 200
+
+/documents/sow                 /documents/sow.html            200
+/documents/change-order        /documents/change-order.html   200
+/documents/testimonial-release /documents/testimonial-release.html 200
+/documents/non-solicitation    /documents/non-solicitation.html 200
+/documents/conflict-of-interest /documents/conflict-of-interest.html 200
+/documents/board-advisory      /documents/board-advisory.html 200
+/documents/equity-compensation /documents/equity-compensation.html 200
+
+# ─── Courses Platform ───────────────────────────────────────
+/courses                       /courses/index.html            200
+/courses/learn                 /courses/learn.html            200
+/courses/exam                  /courses/exam.html             200
+/courses/diploma               /courses/diploma.html          200
+/courses/welcome               /courses/welcome.html          200
+/graduation                    /graduation.html               200
+
+# ─── Webinar Funnel + Admin ─────────────────────────────────
+/webinar                       /webinar.html                  200
+/webinar-confirmation          /webinar-confirmation.html     200
+/webinar-playbook-delivery     /webinar-playbook-delivery.html 200
+/webinar-strategy-guide        /webinar-strategy-guide.html   200
+/admin                         /index.html                    404
+/admin.html                    /index.html                    404
+/admin-c7x9k2m                 /admin-c7x9k2m.html            200
+/access-required               /access-required.html          200
+
+# ─── Resume Pages ──────────────────────────────────────────
+/resume.html                     /resume                        301!
+/MLG-Resume-Unfiltered.html      /resume-unfiltered             301!
+/MLG-Resume-Terminal.html        /resume-terminal               301!
+/MLG-Resume-Executive.html       /resume-executive              301!
+/MLG-Resume-Neon.html            /resume-neon                   301!
+/MLG-Resume-Classified.html      /resume-classified             301!
+/MLG-Resume-Blueprint.html       /resume-blueprint              301!
+/MLG-Resume-Desktop.html         /resume-desktop                301!
+/MLG-Resume-Broadsheet.html      /resume-broadsheet             301!
+/MLG-Resume-Datavis.html         /resume-datavis                301!
+/MLG-Resume-Comic.html           /resume-comic                  301!
+/MLG-Resume-Boarding.html        /resume-boarding               301!
+/resume-hub.html                 /resumes                       301!
+
+/resume-professional   /MLG-Resume-Professional.html  200
+/resume                /resume.html                   200
+/resume-unfiltered     /MLG-Resume-Unfiltered.html    200
+/resume-terminal       /MLG-Resume-Terminal.html      200
+/resume-executive      /MLG-Resume-Executive.html     200
+/resume-neon           /MLG-Resume-Neon.html          200
+/resume-classified     /MLG-Resume-Classified.html    200
+/resume-blueprint      /MLG-Resume-Blueprint.html     200
+/resume-desktop        /MLG-Resume-Desktop.html       200
+/resume-broadsheet     /MLG-Resume-Broadsheet.html    200
+/resume-datavis        /MLG-Resume-Datavis.html       200
+/resume-comic          /MLG-Resume-Comic.html         200
+/resume-boarding       /MLG-Resume-Boarding.html      200
+/resumes               /resume-hub.html               200
+
+# ─── Fix: Broken Calendly URL concatenations ─────────────────
+# Old pages had a malformed CTA that appended the Calendly URL to the page path
+/*/https/calendly.com/*                    /book  301
+/*/https//calendly.com/*                   /book  301
+
+# ─── Fix: Old WordPress taxonomy + pagination ────────────────
+/tag/*                                     /blog  301
+/category/*                                /blog  301
+/page/*                                    /      301
+/downloads/category/*                      /      301
+/downloads/page/*                          /      301
+/downloads/0*/                             /      301
+
+# ─── Fix: Old WordPress blog patterns ───────────────────────
+/growth-strategies-of-*                    /blog  301
+/the-way-mark-moves-on-*                   /blog  301
+/mark_gabrielli_cmo_contact*               /contact  301
+/mark_gabrielli_chief-marketing-officer*   /book  301
+/mark_gabrielli_cmo_chief*                 /blog  301
+/hire-or-contract-*                        /book  301
+/buy-ebooks-audiobooks*                    /blog  301
+
+# ─── Fix: Academy + Webinar old paths ───────────────────────
+/academy/magnet-blueprint-enrollment*      /courses  301
+/academy/thank-you*                        /thank-you  301
+/academy/*                                 /courses  301
+
+# ─── Fix: Old WordPress individual page slugs ────────────────
+/privacy-policy                            /privacy  301
+/privacy-policy/                           /privacy  301
+/about-mark-cmo-gabrielli                  /about  301
+/about-mark-cmo-gabrielli/                 /about  301
+/mark-louis-gabrielli-jr                   /about  301
+/mark-louis-gabrielli-jr/                  /about  301
+/markgpt                                   /ai-automation  301
+/markgpt/                                  /ai-automation  301
+/ridemark                                  /about  301
+/ridemark/                                 /about  301
+/6068-2                                    /blog  301
+/6068-2/                                   /blog  301
+/custom-tag-sitemap.xml                    /sitemap.xml  301
+/wp-content/*                              /  301
+/instant-branding-kits                     /services  301
+/instant-branding-kits/                    /services  301
+/mark_gabrielli_cmo_chief_marketing_officer_fuel_blog  /blog  301
+/mark_gabrielli_cmo_chief_marketing_officer_fuel_blog/ /blog  301
+/core-strategy-positioning-2               /fractional-cmo  301
+/core-strategy-positioning-2/              /fractional-cmo  301
+
+# ─── Fix: Old location format (city without state code) ─────
+/location/fractional-cmo-milwaukee         /fractional-cmo-milwaukee-wi  301
+/location/fractional-cmo-texas             /fractional-cmo-texas  301
+/location/results.html                     /results  301
+/location/marketing-strategy.html          /marketing-strategy  301
+/location/*                                /fractional-cmo  301
+
+# ─── Fix: Misc old paths ────────────────────────────────────
+/page/                                     /  301
+/downloads/                                /  301
+/portfolio/                                /portfolio  301
+/industry-specific-marketing-playbooks     /services  301
+/industry-specific-marketing-playbooks/    /services  301
+
+# ─── 404 fallback — MUST BE LAST ────────────────────────────
+/*  /index.html  404
+

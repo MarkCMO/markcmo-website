@@ -1,0 +1,105 @@
+<!DOCTYPE html><html lang="en"><head>
+  <meta charset="UTF-8"/><meta name="viewport" content="width=device-width,initial-scale=1"/>
+  <title>Engagement Letter — Sign & Submit | MarkCMO</title>
+  <meta name="robots" content="noindex,nofollow,noarchive"/>
+  <link rel="stylesheet" href="../style.css"/>
+  <link href="https://fonts.googleapis.com/css2?family=Barlow:wght@400;600;700&family=Barlow+Condensed:wght@600;700&display=swap" rel="stylesheet"/>
+  <script src="https://unpkg.com/pdf-lib@1.17.1/dist/pdf-lib.min.js"></script>
+<style>
+    html, body, * { cursor: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAARCAYAAADUryzEAAAAV0lEQVR42mMQFBT8z0AJABlwbFnIf4oNINsQZAPIMgTdAJINwWYASYbgMoBoQ/AZQJQhhAwgaAguA4iOHXSFJMcKSANME4yNjEkKSLLzxcAbgBwWDPQGAEWguILiE6w1AAAAAElFTkSuQmCC') 0 0, default !important; }
+</style>
+</head><body>
+<form name="engagement-submission" data-netlify="true" hidden><input type="hidden" name="form-name" value="engagement-submission"/><input type="text" name="name"/><input type="text" name="company"/><input type="email" name="email"/><input type="tel" name="phone"/><input type="text" name="date"/><input type="text" name="start_date"/><input type="text" name="term"/><textarea name="services"></textarea></form>
+<nav style="position:sticky;top:0;z-index:100;background:#0a0a0a;border-bottom:1px solid rgba(198,166,84,0.2);padding:1rem 2rem;display:flex;justify-content:space-between;align-items:center;">
+  <a href="/" style="font-family:'Barlow Condensed',sans-serif;font-size:1.1rem;font-weight:700;letter-spacing:0.1em;color:#C6A654;text-decoration:none;">MARK<span style="color:#fff">CMO</span></a>
+  <a href="/documents" style="font-size:0.75rem;letter-spacing:0.1em;color:#888;text-decoration:none;text-transform:uppercase;">← Back to Documents</a>
+</nav>
+<section style="background:linear-gradient(135deg,#0a0a0a 0%,#111 100%);border-bottom:1px solid rgba(198,166,84,0.15);padding:3rem 2rem 2.5rem;">
+  <div style="max-width:680px;margin:0 auto;">
+    <div style="font-size:0.7rem;letter-spacing:0.2em;color:#C6A654;text-transform:uppercase;margin-bottom:0.5rem;">MG-ENG-001</div>
+    <h1 style="font-family:'Barlow Condensed',sans-serif;font-size:2.2rem;font-weight:700;letter-spacing:0.05em;color:#fff;margin:0 0 0.5rem;text-transform:uppercase;">Engagement Letter</h1>
+    <p style="color:#888;font-size:0.85rem;margin:0;">Fill in your details, sign below, and submit. Mark will countersign within 24 hours and both parties will receive the executed document by email.</p>
+  </div>
+</section>
+<main style="background:#0d0d0d;min-height:60vh;">
+  <div class="doc-form-wrap">
+    <div class="required-note">All fields marked with * are required.</div>
+    <div class="form-section">
+      <div class="form-section-label">Agreement Date</div>
+      <div class="form-row"><label>Date *</label><input type="date" id="eff_date" required/></div>
+    </div>
+    <div class="form-section">
+      <div class="form-section-label">Your Information</div>
+      <div class="form-row"><label>Full Legal Name *</label><input type="text" id="client_name" placeholder="Jane Smith" required/></div>
+      <div class="form-row"><label>Company Name *</label><input type="text" id="client_company" placeholder="Acme Corp LLC" required/></div>
+      <div class="form-row"><label>Email Address *</label><input type="email" id="client_email" placeholder="jane@acmecorp.com" required/></div>
+      <div class="form-row"><label>Phone Number</label><input type="tel" id="client_phone" placeholder="+1 (555) 000-0000"/></div>
+    </div>
+    <div class="form-section">
+      <div class="form-section-label">Engagement Terms</div>
+      <div class="form-row"><label>Engagement Start Date *</label><input type="date" id="start_date" required/></div>
+      <div class="form-row"><label>Engagement Term *</label>
+        <select id="eng_term">
+          <option value="3 months">3 months</option>
+          <option value="6 months" selected>6 months</option>
+          <option value="12 months">12 months</option>
+          <option value="Month-to-month">Month-to-month</option>
+        </select>
+      </div>
+      <div class="form-row"><label>Services Requested</label>
+        <div class="form-check-group" style="display:flex;flex-direction:column;gap:.55rem;">
+          <label style="display:flex;align-items:center;gap:.65rem;font-size:.88rem;color:#ccc;text-transform:none;letter-spacing:0;font-weight:400;"><input type="checkbox" value="Fractional CMO" class="svc-check" style="width:16px;height:16px;accent-color:#C6A654;flex-shrink:0;"/> Fractional CMO</label>
+          <label style="display:flex;align-items:center;gap:.65rem;font-size:.88rem;color:#ccc;text-transform:none;letter-spacing:0;font-weight:400;"><input type="checkbox" value="Fractional COO" class="svc-check" style="width:16px;height:16px;accent-color:#C6A654;flex-shrink:0;"/> Fractional COO</label>
+          <label style="display:flex;align-items:center;gap:.65rem;font-size:.88rem;color:#ccc;text-transform:none;letter-spacing:0;font-weight:400;"><input type="checkbox" value="Marketing Strategy" class="svc-check" style="width:16px;height:16px;accent-color:#C6A654;flex-shrink:0;"/> Marketing Strategy</label>
+          <label style="display:flex;align-items:center;gap:.65rem;font-size:.88rem;color:#ccc;text-transform:none;letter-spacing:0;font-weight:400;"><input type="checkbox" value="Executive Advisory" class="svc-check" style="width:16px;height:16px;accent-color:#C6A654;flex-shrink:0;"/> Executive Advisory</label>
+          <label style="display:flex;align-items:center;gap:.65rem;font-size:.88rem;color:#ccc;text-transform:none;letter-spacing:0;font-weight:400;"><input type="checkbox" value="AI & Automation" class="svc-check" style="width:16px;height:16px;accent-color:#C6A654;flex-shrink:0;"/> AI &amp; Automation</label>
+          <label style="display:flex;align-items:center;gap:.65rem;font-size:.88rem;color:#ccc;text-transform:none;letter-spacing:0;font-weight:400;"><input type="checkbox" value="Business Consulting" class="svc-check" style="width:16px;height:16px;accent-color:#C6A654;flex-shrink:0;"/> Business Consulting</label>
+          <label style="display:flex;align-items:center;gap:.65rem;font-size:.88rem;color:#ccc;text-transform:none;letter-spacing:0;font-weight:400;"><input type="checkbox" value="Other" class="svc-check" style="width:16px;height:16px;accent-color:#C6A654;flex-shrink:0;"/> Other</label>
+        </div>
+      </div>
+    </div>
+    <button id="generate-btn" onclick="generate()">✍ Sign &amp; Submit</button>
+    <div id="form-status" class="form-status"></div>
+  </div>
+</main>
+<script src="form-engine.js"></script>
+<script>
+injectFormStyles();initSigPad('client_name');
+function fmt(v){if(!v)return'';const d=new Date(v+'T12:00:00');return d.toLocaleDateString('en-US',{month:'long',day:'numeric',year:'numeric'});}
+async function generate(){
+  const date=fmt(document.getElementById('eff_date').value);
+  const name=document.getElementById('client_name').value.trim();
+  const company=document.getElementById('client_company').value.trim();
+  const email=document.getElementById('client_email').value.trim();
+  const phone=document.getElementById('client_phone').value.trim();
+  const startDate=fmt(document.getElementById('start_date').value);
+  const term=document.getElementById('eng_term').value;
+  const checkedServices=[...document.querySelectorAll('.svc-check:checked')].map(c=>c.value);
+  const services=checkedServices.join(', ');
+  const svcMap={'Fractional CMO':211,'Fractional COO':194,'Executive Advisory':178,'Marketing Strategy':161,'AI & Automation':144,'Business Consulting':128,'Other':111};
+  const checkFields=checkedServices.filter(s=>svcMap[s]).map(s=>({page:1,x:63,y:svcMap[s],value:'x',size:9}));
+  if(!date||!name||!company||!email||!startDate){const s=document.getElementById('form-status');s.textContent='Please fill in all required fields.';s.className='form-status error';return;}
+  await fillAndSubmit({
+    pdfPath:'../pdfs/MG-ENG-001-Engagement-Letter.pdf',
+    textFields:[
+      {page:1,x:306,y:529,value:date,maxWidth:220},
+      {page:1,x:112,y:399,value:name,maxWidth:340},
+      {page:1,x:152,y:383,value:company,maxWidth:300},
+      {page:1,x:123,y:366,value:email,maxWidth:330},
+      {page:1,x:119,y:349,value:phone,maxWidth:250},
+      {page:2,x:147,y:696,value:startDate,maxWidth:220},
+      {page:2,x:152,y:679,value:term,maxWidth:220},
+      ...checkFields,
+    ],
+    sigPage:3,sigX:63,sigY:626,sigW:200,sigH:24,
+    clientNameY:601,clientTitleY:570,clientDateY:538,
+    clientCompany:company,effectiveDate:date,
+    markSigY:470,markNameY:438,markTitleY:407,markDateY:376,
+    docName:'Engagement Letter',docId:'MG-ENG-001',
+    filename:`Engagement-${company.replace(/\s+/g,'-')}.pdf`,
+    clientName:name,clientEmail:email,
+    formFields:{'Date':date,'Name':name,'Company':company,'Email':email,'Phone':phone,'Start Date':startDate,'Term':term,'Services':services},
+  });
+}
+const cur=document.getElementById('custom-cursor');document.addEventListener('mousemove',e=>{cur.style.left=e.clientX+'px';cur.style.top=e.clientY+'px';});
+</script></body></html>

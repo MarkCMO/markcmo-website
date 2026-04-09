@@ -1,0 +1,541 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>MarkCMO Academy - Elite Business Courses</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Barlow:ital,wght@0,300;0,400;0,600;0,700;0,900;1,400&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root{--black:#060606;--surface:#0e0e0e;--card:#141414;--border:#1e1e1e;--gold:#C9A84C;--gold-dim:rgba(201,168,76,0.15);--gold-glow:rgba(201,168,76,0.4);--text:#f0f0f0;--dim:#666;--red:#e05555;--green:#4CAF72}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{background:var(--black);color:var(--text);font-family:'Barlow',sans-serif;font-size:15px;line-height:1.6}
+a{color:inherit;text-decoration:none}
+
+/* NAV */
+.nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:16px 40px;display:flex;align-items:center;justify-content:space-between;background:rgba(6,6,6,0.92);backdrop-filter:blur(12px);border-bottom:1px solid rgba(201,168,76,0.1)}
+.nav-logo{font-family:'Bebas Neue',sans-serif;font-size:22px;letter-spacing:3px;color:var(--gold)}
+.nav-links{display:flex;gap:28px;align-items:center;font-size:12px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--dim)}
+.nav-links a:hover{color:var(--gold)}
+.nav-cta{background:var(--gold);color:#000;padding:8px 20px;font-size:11px;font-weight:900;letter-spacing:2px;text-transform:uppercase;transition:all 0.2s}
+.nav-cta:hover{background:#fff;color:#000}
+/* HERO */
+.hero{min-height:100vh;display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center;padding:120px 40px 80px;position:relative;overflow:hidden}
+.hero::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse 80% 60% at 50% 0%,rgba(201,168,76,0.08) 0%,transparent 60%);pointer-events:none}
+.hero-eyebrow{font-size:11px;font-weight:700;letter-spacing:4px;text-transform:uppercase;color:var(--gold);margin-bottom:24px;padding:6px 16px;border:1px solid rgba(201,168,76,0.3);display:inline-block}
+.hero-title{font-family:'Bebas Neue',sans-serif;font-size:clamp(60px,10vw,140px);line-height:0.9;letter-spacing:3px;margin-bottom:24px}
+.hero-title span{color:var(--gold)}
+.hero-sub{font-size:clamp(16px,2vw,22px);color:var(--dim);max-width:700px;line-height:1.7;margin:0 auto 40px}
+.hero-stats{display:flex;gap:48px;justify-content:center;margin-bottom:48px;flex-wrap:wrap}
+.hero-stat-val{font-family:'Bebas Neue',sans-serif;font-size:48px;color:var(--gold);display:block;line-height:1}
+.hero-stat-label{font-size:11px;letter-spacing:2px;text-transform:uppercase;color:var(--dim);margin-top:4px}
+.hero-btns{display:flex;gap:16px;flex-wrap:wrap;justify-content:center}
+.btn-primary{background:var(--gold);color:#000;padding:14px 32px;font-size:12px;font-weight:900;letter-spacing:3px;text-transform:uppercase;transition:all 0.2s;display:inline-block}
+.btn-primary:hover{background:#fff;transform:translateY(-2px)}
+.btn-outline{border:1px solid rgba(201,168,76,0.4);color:var(--gold);padding:14px 32px;font-size:12px;font-weight:700;letter-spacing:2px;text-transform:uppercase;transition:all 0.2s;display:inline-block}
+.btn-outline:hover{border-color:var(--gold);background:var(--gold-dim)}
+/* HOW IT WORKS */
+.section{padding:100px 40px;max-width:1400px;margin:0 auto}
+.section-label{font-size:10px;font-weight:700;letter-spacing:4px;text-transform:uppercase;color:var(--gold);margin-bottom:16px}
+.section-title{font-family:'Bebas Neue',sans-serif;font-size:clamp(40px,5vw,72px);letter-spacing:2px;line-height:1;margin-bottom:48px}
+.steps{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:2px;margin-top:48px}
+.step{background:var(--card);padding:32px;border:1px solid var(--border);position:relative;transition:border-color 0.2s}
+.step:hover{border-color:var(--gold)}
+.step-num{font-family:'Bebas Neue',sans-serif;font-size:64px;color:var(--border);line-height:1;position:absolute;top:16px;right:20px}
+.step-icon{font-size:28px;margin-bottom:16px}
+.step-title{font-size:16px;font-weight:700;color:var(--text);margin-bottom:8px}
+.step-desc{font-size:13px;color:var(--dim);line-height:1.7}
+.step-outcome-tag{margin-top:16px;font-size:11px;font-weight:700;letter-spacing:1.5px;color:var(--gold);font-family:'DM Mono',monospace;border-top:1px solid rgba(201,168,76,0.15);padding-top:12px}
+.step-outcome .step-title{font-size:15px;font-weight:900;color:var(--text);letter-spacing:0;line-height:1.3;margin-bottom:10px}
+.step-outcome .step-num{color:rgba(201,168,76,0.12)}
+.step-outcome:hover .step-num{color:rgba(201,168,76,0.25)}
+/* COURSES GRID */
+.courses-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(380px,1fr));gap:2px;margin-top:48px}
+.course-card{background:var(--card);border:1px solid var(--border);padding:32px;position:relative;transition:all 0.3s;display:flex;flex-direction:column}
+.course-card:hover{border-color:var(--gold);background:#181818;transform:translateY(-2px)}
+.course-badge{font-size:9px;font-weight:900;letter-spacing:3px;text-transform:uppercase;padding:4px 10px;background:var(--gold);color:#000;display:inline-block;margin-bottom:16px}
+.course-icon{font-size:32px;margin-bottom:12px}
+.course-title{font-family:'Bebas Neue',sans-serif;font-size:28px;letter-spacing:1px;color:var(--text);margin-bottom:8px;line-height:1.1}
+.course-tagline{font-size:13px;color:var(--dim);margin-bottom:20px;line-height:1.5;font-style:italic}
+.course-meta{display:flex;gap:16px;flex-wrap:wrap;margin-bottom:20px}
+.course-meta-item{font-size:11px;color:var(--dim);display:flex;align-items:center;gap:4px}
+.course-meta-item span{color:var(--text);font-weight:600}
+.course-modules-preview{border-top:1px solid var(--border);padding-top:16px;margin-bottom:20px}
+.course-modules-label{font-size:10px;letter-spacing:2px;text-transform:uppercase;color:var(--dim);margin-bottom:8px}
+.course-module-item{font-size:12px;color:var(--dim);padding:3px 0;display:flex;align-items:center;gap:6px}
+.course-module-item::before{content:'→';color:var(--gold);font-size:10px}
+.course-pricing{margin-top:auto;display:flex;align-items:baseline;gap:12px;margin-bottom:16px}
+.course-price{font-family:'Bebas Neue',sans-serif;font-size:42px;color:var(--gold);letter-spacing:1px}
+.course-retake{font-size:12px;color:var(--dim)}
+.course-retake strong{color:var(--text)}
+.course-cta{width:100%;background:var(--gold);color:#000;border:none;padding:14px;font-family:'Barlow',sans-serif;font-size:12px;font-weight:900;letter-spacing:3px;text-transform:uppercase;cursor:pointer;transition:all 0.2s;display:block;text-align:center}
+.course-cta:hover{background:#fff}
+.course-access-link{display:block;text-align:center;font-size:11px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--dim);margin-top:10px;padding:6px;border:1px solid var(--border);transition:all 0.2s;text-decoration:none;}
+.course-access-link:hover{color:var(--gold);border-color:var(--gold);background:rgba(201,168,76,0.05);}
+/* COMING SOON CARDS */
+.course-card-soon{background:#111;border:1px solid #2a2a2a;padding:0;overflow:hidden;min-height:280px;display:flex;align-items:stretch;}
+.course-card-soon:hover{border-color:#3a3a3a;transform:none;}
+.course-soon-overlay{display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center;padding:32px 24px;width:100%;gap:10px;filter:none;}
+.course-soon-badge{font-size:9px;font-weight:900;letter-spacing:4px;text-transform:uppercase;padding:4px 14px;border:1px solid #333;color:#444;display:inline-block;}
+.course-soon-title{font-family:'Bebas Neue',sans-serif;font-size:22px;letter-spacing:1px;color:#333;line-height:1.2;}
+.course-soon-tagline{font-size:12px;color:#2a2a2a;font-style:italic;max-width:280px;line-height:1.5;}
+.course-soon-meta{font-size:10px;color:#2a2a2a;letter-spacing:1px;}
+.course-soon-notify{font-size:10px;color:#333;letter-spacing:2px;text-transform:uppercase;margin-top:8px;padding:8px 16px;border:1px solid #2a2a2a;cursor:default;}
+/* WARNING BANNER */
+.warning-banner{background:rgba(201,168,76,0.06);border:1px solid rgba(201,168,76,0.2);border-left:3px solid var(--gold);padding:24px 32px;margin-bottom:48px;display:flex;gap:16px;align-items:flex-start}
+.warning-icon{font-size:24px;flex-shrink:0}
+.warning-text h3{font-family:'Bebas Neue',sans-serif;font-size:20px;letter-spacing:1px;margin-bottom:6px}
+.warning-text p{font-size:13px;color:var(--dim);line-height:1.7}
+/* GRADING */
+.grade-table{width:100%;border-collapse:collapse;margin-top:32px}
+.grade-table th{text-align:left;padding:12px 16px;font-size:10px;letter-spacing:2px;text-transform:uppercase;color:var(--dim);border-bottom:1px solid var(--border)}
+.grade-table td{padding:12px 16px;font-size:13px;border-bottom:1px solid rgba(255,255,255,0.04)}
+.grade-table tr:hover td{background:rgba(201,168,76,0.03)}
+.grade-a{color:#4CAF72;font-weight:700}
+.grade-b{color:var(--gold);font-weight:700}
+.grade-c{color:#e0a040;font-weight:700}
+.grade-f{color:var(--red);font-weight:700}
+/* GRAD PREVIEW */
+.grad-preview{display:grid;grid-template-columns:repeat(auto-fill,minmax(180px,1fr));gap:16px;margin-top:32px}
+.grad-card{background:var(--card);border:1px solid var(--border);padding:20px;text-align:center;transition:border-color 0.2s}
+.grad-card:hover{border-color:var(--gold)}
+.grad-photo{width:72px;height:72px;border-radius:50%;background:var(--border);margin:0 auto 12px;overflow:hidden;border:2px solid var(--gold)}
+.grad-photo img{width:100%;height:100%;object-fit:cover}
+.grad-photo-placeholder{width:72px;height:72px;border-radius:50%;background:var(--gold-dim);border:2px solid rgba(201,168,76,0.3);display:flex;align-items:center;justify-content:center;font-size:24px;margin:0 auto 12px}
+.grad-name{font-size:13px;font-weight:700;margin-bottom:4px}
+.grad-course{font-size:11px;color:var(--dim)}
+.grad-gpa{font-size:12px;color:var(--gold);font-family:'DM Mono',monospace;margin-top:4px}
+/* DIPSLOMA PREVIEW */
+.diploma-preview{background:var(--card);border:1px solid var(--gold);padding:48px;text-align:center;position:relative;max-width:700px;margin:48px auto 0}
+.diploma-preview::before{content:'';position:absolute;inset:8px;border:1px solid rgba(201,168,76,0.2);pointer-events:none}
+.diploma-seal{font-size:36px;margin-bottom:16px;color:var(--gold);letter-spacing:12px;display:block}
+.diploma-from{font-size:11px;letter-spacing:4px;text-transform:uppercase;color:var(--dim);margin-bottom:16px}
+.diploma-certifies{font-size:13px;color:var(--dim);margin-bottom:8px}
+.diploma-name{font-family:'Bebas Neue',sans-serif;font-size:48px;color:var(--gold);letter-spacing:3px}
+.diploma-completed{font-size:14px;color:var(--dim);margin:8px 0}
+.diploma-course{font-size:20px;font-weight:700;margin-bottom:8px}
+.diploma-gpa{font-size:13px;color:var(--dim);margin-bottom:24px}
+.diploma-gpa strong{color:var(--gold);font-family:'DM Mono',monospace}
+.diploma-footer{display:flex;justify-content:space-around;border-top:1px solid var(--border);padding-top:24px;margin-top:8px}
+.diploma-sig{text-align:center}
+.diploma-sig-name{font-size:14px;font-weight:700}
+.diploma-sig-title{font-size:11px;color:var(--dim)}
+/* FAQ */
+.faq-item{border-bottom:1px solid var(--border);padding:20px 0}
+.faq-q{font-size:15px;font-weight:700;cursor:pointer;display:flex;justify-content:space-between;align-items:center}
+.faq-q:hover{color:var(--gold)}
+.faq-chevron{transition:transform 0.2s;font-size:12px;color:var(--gold)}
+.faq-a{font-size:13px;color:var(--dim);line-height:1.8;max-height:0;overflow:hidden;transition:max-height 0.3s ease,padding 0.2s}
+.faq-item.open .faq-a{max-height:300px;padding-top:12px}
+.faq-item.open .faq-chevron{transform:rotate(180deg)}
+/* FOOTER */
+.footer{border-top:1px solid var(--border);padding:48px 40px;text-align:center}
+.footer-logo{font-family:'Bebas Neue',sans-serif;font-size:28px;letter-spacing:4px;color:var(--gold);margin-bottom:8px}
+.footer-tagline{font-size:12px;color:var(--dim);margin-bottom:24px}
+.footer-links{display:flex;gap:24px;justify-content:center;font-size:12px;color:var(--dim);flex-wrap:wrap}
+.footer-links a:hover{color:var(--gold)}
+/* SCROLL REVEAL */
+.reveal{opacity:0;transform:translateY(20px);transition:opacity 0.6s,transform 0.6s}
+.reveal.visible{opacity:1;transform:translateY(0)}
+</style>
+</head>
+<body>
+
+
+<!-- NAV -->
+<nav class="nav">
+  <div class="nav-logo">MarkCMO Academy</div>
+  <div class="nav-links">
+    <a href="#courses">Courses</a>
+    <a href="#how">How It Works</a>
+    <a href="#grading">Grading</a>
+    <a href="/graduation">Graduates</a>
+    <a href="/">← Main Site</a>
+  </div>
+  <a href="#courses" class="nav-cta">Start Learning</a>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-eyebrow">MarkCMO Academy - Est. 2026</div>
+  <h1 class="hero-title">ELITE COURSES.<br><span>REAL RESULTS.</span><br>NO SHORTCUTS.</h1>
+  <p class="hero-sub">The most rigorous executive education on the market. Built for operators who want to run at the top - not study their way to average. These courses are hard. They're supposed to be.</p>
+  <div class="hero-stats">
+    <div><span class="hero-stat-val">14</span><div class="hero-stat-label">Courses</div></div>
+    <div><span class="hero-stat-val">600+</span><div class="hero-stat-label">Lessons</div></div>
+    <div><span class="hero-stat-val">50Q</span><div class="hero-stat-label">Final Exam</div></div>
+    <div><span class="hero-stat-val">4.0</span><div class="hero-stat-label">GPA Scale</div></div>
+  </div>
+  <div class="hero-btns">
+    <a href="#courses" class="btn-primary">Browse All Courses</a>
+    <a href="/graduation" class="btn-outline">View Graduates</a>
+  </div>
+</section>
+
+<!-- HOW IT WORKS -->
+<div style="max-width:1400px;margin:0 auto;padding:0 40px" id="how">
+  <div class="reveal">
+    <div class="section-label">The Process · What You Actually Get Out Of This</div>
+    <div class="section-title">HOW IT WORKS</div>
+    <p style="font-size:15px;color:var(--dim);max-width:700px;line-height:1.9;margin-bottom:0">Most courses teach you content. This teaches you how to operate. There's a difference between knowing a framework and being able to use it under pressure in front of a board. That's what this process is designed to produce.</p>
+  </div>
+  <div class="steps reveal">
+
+    <div class="step step-outcome">
+      <div class="step-num">01</div>
+      <div class="step-icon">🔑</div>
+      <div class="step-title">Start Immediately. Full Access.</div>
+      <div class="step-desc">No waiting. No setup. You get immediate access to every lesson, framework, and exam in your course - study at your pace, revisit any lesson anytime, pick up exactly where you left off.</div>
+      <div class="step-outcome-tag">→ Day one access. Study on your schedule.</div>
+    </div>
+
+    <div class="step step-outcome">
+      <div class="step-num">02</div>
+      <div class="step-icon">🧠</div>
+      <div class="step-title">Learn How Executives Actually Think</div>
+      <div class="step-desc">50+ lessons per course. Each one a 1,500+ word case-driven deep dive - real companies, real frameworks, real decisions. Not textbook theory. The exact mental models that executives use to run $50M-$500M organizations.</div>
+      <div class="step-outcome-tag">→ You leave thinking differently. Permanently.</div>
+    </div>
+
+    <div class="step step-outcome">
+      <div class="step-num">03</div>
+      <div class="step-icon">⚡</div>
+      <div class="step-title">No Moving Forward Until You Actually Know It</div>
+      <div class="step-desc">5 rigorous questions after every lesson - written at the level of a live board debrief, not a textbook quiz. Score below 60% and you re-study before the next lesson unlocks. No skimming. No clicking through. You either know the material or you go back. This is how real competence is built.</div>
+      <div class="step-outcome-tag">→ You don't just learn it - you can defend it in a boardroom.</div>
+    </div>
+
+    <div class="step step-outcome">
+      <div class="step-num">04</div>
+      <div class="step-icon">🏆</div>
+      <div class="step-title">A Final Exam That Means Something</div>
+      <div class="step-desc">50 questions across every module. 75% minimum to pass. Questions are scenario-based - the kind a CEO or board would actually ask you. First-time pass rate is below 50%. That's not a bug. That's the entire point.</div>
+      <div class="step-outcome-tag">→ When you pass, you know you actually passed.</div>
+    </div>
+
+    <div class="step step-outcome" style="border-color:rgba(201,168,76,0.3);background:linear-gradient(135deg,#111 0%,#130f00 100%)">
+      <div class="step-num">05</div>
+      <div class="step-icon">🎓</div>
+      <div class="step-title">Graduate as a Different Executive</div>
+      <div class="step-desc">A numbered, verified diploma bearing your GPA designation - Summa, Magna, or Cum Laude. Your name on the MarkCMO Graduate Wall. A credential that belongs on your LinkedIn headline and in your client proposals. But more than any certificate: the frameworks, fluency, and demonstrated mastery to walk into any room and be the most qualified operator there.</div>
+      <div class="step-outcome-tag" style="color:var(--gold)">→ This is the credential that opens rooms.</div>
+    </div>
+
+  </div>
+</div>
+
+<!-- CREDENTIAL BANNER -->
+<div style="max-width:1400px;margin:60px auto;padding:0 40px">
+  <div class="warning-banner reveal">
+    <div class="warning-icon">🏆</div>
+    <div class="warning-text">
+      <h3>This Diploma Is Earned. Not Handed Out.</h3>
+      <p>First-time exam pass rate is below 50%. Every retake uses a completely new question set - there is no memorizing your way through. Graduates of this program have gone on to command $150K-$300K+ fractional engagements, close Fortune 500 clients, and walk into any boardroom as the most credible operator in the room. That outcome starts with a credential that's actually hard to earn. This is it.</p>
+    </div>
+  </div>
+</div>
+
+<!-- TOP 5 FLAGSHIP COURSES -->
+<div id="courses" style="max-width:1400px;margin:0 auto;padding:0 40px 60px">
+  <div class="reveal">
+    <div class="section-label">Top 5 Launch Courses · Highest Demand Roles</div>
+    <div class="section-title">THE FLAGSHIP FIVE</div>
+    <p style="font-size:15px;color:var(--dim);max-width:680px;line-height:1.8;margin:16px 0 0">Three flagship C-suite courses are live now. Complete, battle-tested, and ready to deploy. More courses launching soon - the complete executive stack is being built in public.</p>
+  </div>
+  <!-- Market demand stats bar -->
+  <div style="display:grid;grid-template-columns:repeat(5,1fr);gap:2px;margin:40px 0 0;background:var(--border)">
+    <div style="background:var(--card);padding:20px 16px;text-align:center">
+      <div style="font-size:22px;font-weight:900;color:var(--gold)">50K+</div>
+      <div style="font-size:10px;letter-spacing:2px;text-transform:uppercase;color:var(--dim);margin-top:4px">CFO Community</div>
+    </div>
+    <div style="background:var(--card);padding:20px 16px;text-align:center">
+      <div style="font-size:22px;font-weight:900;color:var(--gold)">75K+</div>
+      <div style="font-size:10px;letter-spacing:2px;text-transform:uppercase;color:var(--dim);margin-top:4px">CMO Community</div>
+    </div>
+    <div style="background:var(--card);padding:20px 16px;text-align:center">
+      <div style="font-size:22px;font-weight:900;color:var(--gold)">90K+</div>
+      <div style="font-size:10px;letter-spacing:2px;text-transform:uppercase;color:var(--dim);margin-top:4px">AE Community</div>
+    </div>
+    <div style="background:var(--card);padding:20px 16px;text-align:center">
+      <div style="font-size:22px;font-weight:900;color:var(--gold)">140K+</div>
+      <div style="font-size:10px;letter-spacing:2px;text-transform:uppercase;color:var(--dim);margin-top:4px">Growth Community</div>
+    </div>
+    <div style="background:var(--card);padding:20px 16px;text-align:center">
+      <div style="font-size:22px;font-weight:900;color:var(--gold)">60K+</div>
+      <div style="font-size:10px;letter-spacing:2px;text-transform:uppercase;color:var(--dim);margin-top:4px">VP Sales Community</div>
+    </div>
+  </div>
+  <div class="courses-grid reveal" id="courses-grid-top5" style="margin-top:2px">
+    <!-- JS rendered top 5 -->
+  </div>
+</div>
+
+<!-- EXTENDED COURSE LIBRARY -->
+<div style="max-width:1400px;margin:0 auto;padding:0 40px 100px">
+  <div class="reveal" style="padding-top:60px;border-top:1px solid var(--border)">
+    <div class="section-label">Extended Course Library</div>
+    <div class="section-title">BUILD YOUR FULL STACK</div>
+    <p style="font-size:15px;color:var(--dim);max-width:680px;line-height:1.8;margin:16px 0 0">Specialty and tactical courses - each earning a separate diploma. These are coming. Sign up now to be notified when each launches.</p>
+  </div>
+  <div class="courses-grid reveal" id="courses-grid-library" style="margin-top:48px">
+    <!-- JS rendered library -->
+  </div>
+</div>
+
+<!-- GRADING SYSTEM -->
+<div id="grading" style="background:var(--surface);padding:100px 0">
+  <div style="max-width:1000px;margin:0 auto;padding:0 40px">
+    <div class="reveal">
+      <div class="section-label">Academic Standards</div>
+      <div class="section-title">GRADING SYSTEM</div>
+      <p style="color:var(--dim);margin-bottom:32px">GPA is calculated from your average score across all lesson quizzes, module exams, and the final exam. To graduate, you need a minimum 2.0 GPA AND a passing final exam score.</p>
+    </div>
+    <table class="grade-table reveal">
+      <thead><tr><th>Score</th><th>Letter</th><th>GPA Points</th><th>Designation</th></tr></thead>
+      <tbody>
+        <tr><td>93-100%</td><td class="grade-a">A</td><td>4.0</td><td>🏆 Summa Cum Laude</td></tr>
+        <tr><td>90-92%</td><td class="grade-a">A−</td><td>3.7</td><td>🥇 Magna Cum Laude</td></tr>
+        <tr><td>87-89%</td><td class="grade-b">B+</td><td>3.3</td><td>🥈 Cum Laude</td></tr>
+        <tr><td>83-86%</td><td class="grade-b">B</td><td>3.0</td><td>✅ Pass with Distinction</td></tr>
+        <tr><td>80-82%</td><td class="grade-b">B−</td><td>2.7</td><td>✅ Pass with Merit</td></tr>
+        <tr><td>77-79%</td><td class="grade-c">C+</td><td>2.3</td><td>✅ Pass</td></tr>
+        <tr><td>73-76%</td><td class="grade-c">C</td><td>2.0</td><td>✅ Pass (minimum GPA to graduate)</td></tr>
+        <tr><td>70-72%</td><td class="grade-c">C−</td><td>1.7</td><td>⛔ No Diploma (must retake exam)</td></tr>
+        <tr><td>&lt;70%</td><td class="grade-f">F</td><td>0.0</td><td>⛔ Fail - Retake Required</td></tr>
+      </tbody>
+    </table>
+    <div style="background:var(--card);border:1px solid var(--border);padding:20px;margin-top:24px;font-size:13px;color:var(--dim)" class="reveal">
+      <strong style="color:var(--text)">Retake Policy:</strong> Failed courses require a discounted retake fee (see individual course pricing). Retakes generate completely new lesson content and exam questions - there is no memorizing your way through this.
+    </div>
+  </div>
+</div>
+
+<!-- DIPLOMA PREVIEW -->
+<div style="max-width:1000px;margin:0 auto;padding:100px 40px">
+  <div style="text-align:center" class="reveal">
+    <div class="section-label">What You Earn</div>
+    <div class="section-title">A CREDENTIAL THAT COMMANDS RESPECT</div>
+    <p style="color:var(--dim);font-size:15px;max-width:600px;margin:12px auto 0;line-height:1.8">Numbered. Verified. Signed. Every diploma issued by MarkCMO Academy represents a passing grade on one of the most demanding executive assessments in professional education - and a name that belongs on your LinkedIn headline.</p>
+  </div>
+  <div class="diploma-preview reveal">
+    <div class="diploma-seal">✦</div>
+    <div class="diploma-from">MarkCMO Academy &nbsp;·&nbsp; Established 2026 &nbsp;·&nbsp; Executive Education</div>
+    <div class="diploma-certifies">This diploma is proudly awarded to</div>
+    <div class="diploma-name">YOUR NAME HERE</div>
+    <div class="diploma-completed">who has demonstrated mastery of</div>
+    <div class="diploma-course">Fractional CMO Mastery</div>
+    <div class="diploma-gpa">Grade Point Average: <strong>3.7 (A−)</strong> &nbsp;·&nbsp; Magna Cum Laude</div>
+    <div class="diploma-footer">
+      <div class="diploma-sig"><div class="diploma-sig-name">Mark Donnigan</div><div class="diploma-sig-title">Founder &amp; Dean, MarkCMO Academy</div></div>
+      <div class="diploma-sig"><div class="diploma-sig-name">CMO-2026-001</div><div class="diploma-sig-title">Diploma Number · Verified Credential</div></div>
+    </div>
+  </div>
+</div>
+
+<!-- GRAD WALL PREVIEW -->
+<div style="background:var(--surface);padding:100px 0">
+  <div style="max-width:1400px;margin:0 auto;padding:0 40px">
+    <div style="display:flex;justify-content:space-between;align-items:flex-end;margin-bottom:48px;flex-wrap:gap" class="reveal">
+      <div>
+        <div class="section-label">Hall of Fame</div>
+        <div class="section-title">GRADUATE WALL</div>
+      </div>
+      <a href="/graduation" class="btn-outline">View All Graduates</a>
+    </div>
+    <div class="grad-preview reveal" id="grad-preview-grid">
+      <!-- Will be populated from JSONBin or show placeholders -->
+      <div class="grad-card"><div class="grad-photo-placeholder">👤</div><div class="grad-name">Be First</div><div class="grad-course">Start a Course</div><div class="grad-gpa">GPA: -</div></div>
+      <div class="grad-card"><div class="grad-photo-placeholder">👤</div><div class="grad-name">Your Name</div><div class="grad-course">MarkCMO Academy</div><div class="grad-gpa">GPA: -</div></div>
+      <div class="grad-card"><div class="grad-photo-placeholder">👤</div><div class="grad-name">Hall of Fame</div><div class="grad-course">Awaiting Legends</div><div class="grad-gpa">GPA: -</div></div>
+      <div class="grad-card"><div class="grad-photo-placeholder">👤</div><div class="grad-name">Could Be You</div><div class="grad-course">Start Learning</div><div class="grad-gpa">GPA: -</div></div>
+    </div>
+  </div>
+</div>
+
+<!-- FAQ -->
+<div style="max-width:800px;margin:0 auto;padding:100px 40px">
+  <div class="reveal">
+    <div class="section-label">Questions</div>
+    <div class="section-title">FAQ</div>
+  </div>
+  <div id="faq" class="reveal">
+    <div class="faq-item">
+      <div class="faq-q" onclick="toggleFaq(this)">Do I need videos to learn? <span class="faq-chevron">▼</span></div>
+      <div class="faq-a">Every lesson is delivered as a dynamically generated 1,500+ word deep-dive, built fresh for each student. Video slots are built into the platform - as video content is recorded and published, it will automatically appear alongside the text lesson. You can learn fully without video. Video is an enhancement, not a requirement.</div>
+    </div>
+    <div class="faq-item">
+      <div class="faq-q" onclick="toggleFaq(this)">Why is every lesson different? <span class="faq-chevron">▼</span></div>
+      <div class="faq-a">The platform generates fresh lesson content every time based on the topic, your student ID, and a unique session seed. This means no two students get the same content, retakes get entirely new material, and the platform never gets "gamed" by sharing answers. This is how education at scale should work.</div>
+    </div>
+    <div class="faq-item">
+      <div class="faq-q" onclick="toggleFaq(this)">What if I fail the final exam? <span class="faq-chevron">▼</span></div>
+      <div class="faq-a">You can retake the final exam. Your retake gets a completely new set of 50 final exam questions. Your progress (completed lessons and module scores) is preserved, so you only need to retake the final - not the entire course.</div>
+    </div>
+    <div class="faq-item">
+      <div class="faq-q" onclick="toggleFaq(this)">Is this accredited? <span class="faq-chevron">▼</span></div>
+      <div class="faq-a">MarkCMO Academy is a professional development platform, not an accredited academic institution. The diploma is a credential of professional excellence from Mark Donnigan, a recognized Fractional CMO and business growth expert. The rigor is by design - you cannot fake your way through a 50-question final exam with new questions every retake. The value comes from what you actually learn and can prove you know.</div>
+    </div>
+    <div class="faq-item">
+      <div class="faq-q" onclick="toggleFaq(this)">How long do courses take? <span class="faq-chevron">▼</span></div>
+      <div class="faq-a">Most courses are 35-80 hours of study time. You go at your own pace - there are no deadlines or time limits. The average student completes a course in 4-12 weeks. Access is lifetime, so you can return and review any lesson whenever you need a refresher.</div>
+    </div>
+    <div class="faq-item">
+      <div class="faq-q" onclick="toggleFaq(this)">Can I take multiple courses? <span class="faq-chevron">▼</span></div>
+      <div class="faq-a">Absolutely. Each course is independent - you can start any course at any time. Many students start with the CMO or COO course and add LinkedIn, Digital Marketing, and Revenue Architecture as they scale their practice.</div>
+    </div>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<footer class="footer">
+  <div class="footer-logo">MarkCMO Academy</div>
+  <div class="footer-tagline">Elite Business Education for Leaders Building to $50M+</div>
+  <div class="footer-links">
+    <a href="/">markcmo.com</a>
+    <a href="/graduation">Graduate Wall</a>
+    <a href="/contact">Contact</a>
+    <a href="/privacy">Privacy</a>
+  </div>
+</footer>
+
+<script>
+// ── Course Data ───────────────────────────────────────────────────────────────
+</script>
+<script>
+const COURSES = {
+  // ── C-SUITE CHAIN OF COMMAND ────────────────────────────────────────────────
+  cfo:         {id:'cfo',         tier:1, title:'Fractional CFO Mastery',                           tagline:'Own the numbers. Drive enterprise value. Command $200K+ engagements.',                                          badge:'#1 IN DEMAND',       icon:'📊',hours:80,difficulty:'Advanced',              modules:10,lessons:50,  community:'50K+ LinkedIn'},
+  coo:         {id:'coo',         tier:1, title:'Fractional COO Mastery',                           tagline:'Architect the systems that scale companies from chaos to exit.',                                                  badge:'ELITE COURSE',       icon:'⚙️',hours:80,difficulty:'Advanced',              modules:10,lessons:50},
+  cmo:         {id:'cmo',         tier:1, title:'Fractional CMO Mastery',                           tagline:'Command revenue, own the market, build a $50M practice.',                                                       badge:'FLAGSHIP COURSE',    icon:'📣',hours:80,difficulty:'Advanced',              modules:10,lessons:50,  community:'75K+ LinkedIn'},
+  ceo:         {id:'ceo',         tier:1, comingSoon:true, title:'CEO Mastery: Building & Leading a $50M Company',  tagline:'The complete operating system for CEOs - strategy, team, capital, and culture - to build to $50M and beyond.',  badge:'TOP OF THE CHAIN',   icon:'👑',hours:80,difficulty:'Advanced',              modules:10,lessons:50},
+  vpsales:     {id:'vpsales',     tier:1, comingSoon:true, title:'VP of Sales Mastery',                              tagline:'Build revenue organizations that consistently exceed quota at every scale.',                                      badge:'REVENUE LEADER',     icon:'💼',hours:75,difficulty:'Advanced',              modules:10,lessons:50,  community:'60K+ LinkedIn'},
+  growth:      {id:'growth',      tier:1, comingSoon:true, title:'Growth Manager Mastery',               tagline:'Build compounding growth systems. Take companies from $1M to $100M ARR.',                                       badge:'FASTEST GROWING',    icon:'📈',hours:45,difficulty:'Intermediate-Advanced',  modules:8, lessons:32, community:'140K+ Community'},
+  ae:          {id:'ae',          tier:1, comingSoon:true, title:'Account Executive Excellence',          tagline:'Hit 150%+ of quota consistently. Build a $300K-500K sales career.',                                            badge:'LARGEST COMMUNITY',  icon:'🎯',hours:50,difficulty:'Intermediate-Advanced',  modules:8, lessons:32, community:'90K+ LinkedIn'},
+  // ── SPECIALTY & TACTICAL ────────────────────────────────────────────────────
+  revenue:     {id:'revenue',     tier:2, comingSoon:true, title:'Revenue Architecture & GTM',                       tagline:'Design the revenue machine that never stops compounding.',                                                       badge:'EXECUTIVE LEVEL',    icon:'💰',hours:70,difficulty:'Advanced',              modules:10,lessons:50},
+  category:    {id:'category',    tier:2, comingSoon:true, title:'Category Design & Market Leadership',   tagline:"Don't compete for the market. Design one you own.",                                                             badge:'BREAKTHROUGH',       icon:'🏆',hours:45,difficulty:'Advanced',              modules:8, lessons:32},
+  leadership:  {id:'leadership',  tier:2, comingSoon:true, title:'Executive Leadership for Consultants',  tagline:'Lead at the highest level. Command the room. Change companies.',                                                  badge:'LEADERSHIP MASTER',  icon:'🌟',hours:35,difficulty:'Advanced',              modules:8, lessons:32},
+  digital:     {id:'digital',     tier:2, comingSoon:true, title:'Digital Marketing Mastery',             tagline:'Dominate every channel. Build systems that compound.',                                                           badge:'BESTSELLER',         icon:'🚀',hours:60,difficulty:'Intermediate-Advanced',  modules:10,lessons:40},
+  b2bdemand:   {id:'b2bdemand',   tier:2, comingSoon:true, title:'B2B Demand Generation',                 tagline:'Build the pipeline machine that feeds sales forever.',                                                           badge:'SALES ACCELERATOR',  icon:'🎪',hours:45,difficulty:'Intermediate-Advanced',  modules:8, lessons:32},
+  aimarketing: {id:'aimarketing', tier:2, comingSoon:true, title:'AI-Powered Marketing',                  tagline:'Harness AI to outmarket every competitor.',                                                                      badge:'FUTURE-PROOF',       icon:'🤖',hours:40,difficulty:'Intermediate',              modules:8, lessons:32},
+  linkedin:    {id:'linkedin',    tier:2, comingSoon:true, title:'LinkedIn Growth Machine',               tagline:'Build authority. Generate leads. Close clients on LinkedIn.',                                                    badge:'HOT COURSE',         icon:'🔗',hours:35,difficulty:'Intermediate',              modules:8, lessons:32},
+  instagram:   {id:'instagram',   tier:2, comingSoon:true, title:'Instagram for Business',                tagline:'Visual storytelling that turns followers into revenue.',                                                          badge:'TRENDING',           icon:'📸',hours:30,difficulty:'Beginner-Intermediate',  modules:8, lessons:32},
+};
+
+// ── Render Courses Grid ──────────────────────────────────────────────────────
+const sampleModules = {
+  cmo:['The CMO Mandate & Strategic Framework','Brand Architecture & Market Positioning','Revenue Attribution & Analytics','Demand Generation Architecture','Content Strategy & Thought Leadership'],
+  coo:['Operations Architecture & Systems Thinking','Process Design & Operational Excellence','Technology Stack & Infrastructure','Financial Operations & BI','Team Structure, HR Ops & Talent Systems'],
+  digital:['Digital Marketing Strategy','SEO Mastery','Paid Search & PPC','Social Media Marketing','Email Marketing & Automation'],
+  linkedin:['LinkedIn Algorithm Mastery','Content Strategy for Authority','Thought Leadership & Personal Brand','Lead Generation Systems','LinkedIn Ads & Paid Strategy'],
+  instagram:['Algorithm & Platform Strategy','Visual Branding & Aesthetic','Reels Strategy & Video Content','Community Building & Engagement','Instagram Shopping & eCommerce'],
+  revenue:['Revenue Architecture Fundamentals','Go-To-Market Strategy Design','Pricing Strategy & Optimization','Sales Architecture & Pipeline','Demand Generation & Revenue Marketing'],
+  category:['Category Design Fundamentals','Market Research & Discovery','Point of View Architecture','Category Evangelism & Conditioning','Competitive Moats & Dominance'],
+  aimarketing:['AI Marketing Foundations','AI-Powered Content Creation','AI for SEO & Organic Growth','AI in Paid Media','Personalization & Customer Experience'],
+  b2bdemand:['B2B Demand Generation Strategy','ABM at Scale','Content-Led Demand','Outbound Demand Generation','Events, Webinars & Community'],
+  leadership:['Executive Presence & Leadership Identity','Strategic Communication','Decision Making & Strategic Thinking','Leadership in Consulting','Building High-Performance Teams'],
+  cfo:['CFO Mandate & Strategic Finance Leadership','Accounting Systems & Financial Architecture','Cash Flow Management & Working Capital','Financial Modeling & Forecasting','Capital Structure & Fundraising','Investor Relations & Board Reporting','Risk Management & Internal Controls','M&A Due Diligence & Integration','Strategic Finance & Value Creation','CFO Leadership & Executive Presence'],
+  ae:['Elite AE Mindset & Territory Planning','Prospecting & Pipeline Generation','Discovery Mastery & Qualification','Solution Selling & Demonstrations','Proposal, Negotiation & Deal Architecture','Closing Strategies & Deal Velocity','Account Management & Expansion Revenue','Sales Technology & Performance Analytics'],
+  growth:['Growth Foundations & Operating System','Acquisition Channel Strategy','Activation & Onboarding Optimization','Retention & Churn Reduction','Revenue Expansion & Monetization','Viral Growth & Referral Systems','Growth Analytics & Experimentation','Scaling Growth & Growth Leadership'],
+  vpsales:['VP of Sales Operating System','Building the Sales Team','Sales Process Design & Methodology','Pipeline Management & Revenue Forecasting','Sales Compensation & Incentive Design','Sales Enablement & Continuous Training','Territory Segmentation & Account Strategy','Revenue Operations & Sales Analytics','Enterprise & Strategic Selling','VP of Sales Leadership & Career'],
+};
+
+function courseCard(c, featured) {
+  const communityBadge = c.community ? `<div class="course-community">${c.community}</div>` : '';
+
+  if (c.comingSoon) {
+    return `
+    <div class="course-card course-card-soon">
+      <div class="course-soon-overlay">
+        <div class="course-soon-badge">COMING SOON</div>
+        <div class="course-soon-title">${c.icon} ${c.title}</div>
+        <div class="course-soon-tagline">"${c.tagline}"</div>
+        <div class="course-soon-meta">${c.modules} Modules · ${c.lessons} Lessons · ${c.hours}h Study</div>
+        <div class="course-soon-notify">🔔 Notify me when available</div>
+      </div>
+    </div>`;
+  }
+
+  const featuredClass = featured ? ' course-card-featured' : '';
+  return `
+    <div class="course-card${featuredClass}">
+      ${featured ? '<div class="course-featured-ribbon">LIVE NOW</div>' : ''}
+      <div class="course-badge">${c.badge}</div>
+      <div class="course-icon">${c.icon}</div>
+      <div class="course-title">${c.title}</div>
+      <div class="course-tagline">"${c.tagline}"</div>
+      ${communityBadge}
+      <div class="course-meta">
+        <div class="course-meta-item">📚 <span>${c.modules}</span> Modules</div>
+        <div class="course-meta-item">📝 <span>${c.lessons}</span> Lessons</div>
+        <div class="course-meta-item">⏱ <span>${c.hours}h</span> Study</div>
+        <div class="course-meta-item">📊 <span>${c.difficulty}</span></div>
+      </div>
+      <div class="course-modules-preview">
+        <div class="course-modules-label">Sample Modules</div>
+        ${(sampleModules[c.id]||[]).slice(0,4).map(m=>`<div class="course-module-item">${m}</div>`).join('')}
+      </div>
+      <a href="/learn?course=${c.id}" class="course-cta">Start Course →</a>
+    </div>
+  `;
+}
+
+function renderCourses(){
+  const top5 = document.getElementById('courses-grid-top5');
+  const library = document.getElementById('courses-grid-library');
+  const all = Object.values(COURSES);
+  const live1 = all.filter(c=>c.tier===1 && !c.comingSoon);
+  const soon1 = all.filter(c=>c.tier===1 && c.comingSoon);
+  const live2 = all.filter(c=>c.tier===2 && !c.comingSoon);
+  const soon2 = all.filter(c=>c.tier===2 && c.comingSoon);
+  top5.innerHTML    = live1.map(c=>courseCard(c, true)).join('') + soon1.map(c=>courseCard(c, false)).join('');
+  library.innerHTML = live2.map(c=>courseCard(c, false)).join('') + soon2.map(c=>courseCard(c, false)).join('');
+}
+
+// ── FAQ ───────────────────────────────────────────────────────────────────────
+function toggleFaq(el){
+  el.parentElement.classList.toggle('open');
+}
+
+// ── Scroll Reveal ─────────────────────────────────────────────────────────────
+function initReveal(){
+  const els = document.querySelectorAll('.reveal');
+  const obs = new IntersectionObserver(entries=>{
+    entries.forEach(e=>{if(e.isIntersecting){e.target.classList.add('visible');obs.unobserve(e.target);}});
+  },{threshold:0.1});
+  els.forEach(el=>obs.observe(el));
+}
+
+// ── Load Graduates Preview ────────────────────────────────────────────────────
+async function loadGradsPreview(){
+  try{
+    const r = await fetch('/.netlify/functions/course-graduate');
+    if(!r.ok) return;
+    const data = await r.json();
+    const grads = (data.graduates||[]).slice(0,8);
+    if(!grads.length) return;
+    const grid = document.getElementById('grad-preview-grid');
+    grid.innerHTML = grads.map(g=>`
+      <div class="grad-card">
+        ${g.photo?`<div class="grad-photo"><img src="${g.photo}" alt="${g.name}" /></div>`:`<div class="grad-photo-placeholder">🎓</div>`}
+        <div class="grad-name">${g.name}</div>
+        <div class="grad-course">${g.courseTitle||g.course}</div>
+        <div class="grad-gpa">GPA: ${g.gpa} (${g.grade})</div>
+      </div>
+    `).join('');
+  }catch(e){}
+}
+
+renderCourses();
+initReveal();
+loadGradsPreview();
+
+function trackEnroll(courseId) {
+  // Store course interest for post-payment welcome
+  localStorage.setItem('mcademy_last_course', courseId);
+}
+</script>
+
+</body>
+</html>

@@ -1,0 +1,75 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"/><meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>Equity & Compensation Agreement · MarkCMO.com</title><meta name="robots" content="noindex,nofollow"/>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600;700&family=Barlow:wght@300;400;500;600&display=swap" rel="stylesheet"/>
+<script src="https://unpkg.com/pdf-lib@1.17.1/dist/pdf-lib.min.js"></script>
+<script src="https://unpkg.com/@pdf-lib/fontkit@1.1.1/dist/fontkit.umd.min.js"></script>
+<link rel="stylesheet" href="/style.css">
+<style>
+    html, body, * { cursor: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAARCAYAAADUryzEAAAAV0lEQVR42mMQFBT8z0AJABlwbFnIf4oNINsQZAPIMgTdAJINwWYASYbgMoBoQ/AZQJQhhAwgaAguA4iOHXSFJMcKSANME4yNjEkKSLLzxcAbgBwWDPQGAEWguILiE6w1AAAAAElFTkSuQmCC') 0 0, default !important; }
+</style>
+</head><body>
+<section style="background:#0d0d0d;padding:3rem 2rem 2rem;border-bottom:1px solid rgba(255,255,255,0.06);">
+  <div style="max-width:640px;margin:0 auto;">
+    <div style="font-size:0.7rem;letter-spacing:0.2em;color:#C6A654;text-transform:uppercase;margin-bottom:0.5rem;">MG-ECA-001</div>
+    <h1 style="font-family:'Barlow Condensed',sans-serif;font-size:2.2rem;font-weight:700;letter-spacing:0.05em;color:#fff;margin:0 0 0.5rem;text-transform:uppercase;">Equity & Compensation Agreement</h1>
+    <p style="color:#888;font-size:0.85rem;margin:0;">Define cash retainer, equity grant, vesting schedule, and performance milestones.</p>
+  </div>
+</section>
+<main style="background:#0d0d0d;min-height:60vh;">
+  <div class="doc-form-wrap">
+    <div class="required-note">All fields marked with * are required.</div>
+    <div class="form-section"><div class="form-section-label">Effective Date</div>
+      <div class="form-row"><label>Effective Date *</label><input type="date" id="eff_date" required/></div>
+    </div>
+    <div class="form-section"><div class="form-section-label">Company Information</div>
+      <div class="form-row"><label>Company Legal Name *</label><input type="text" id="client_name" placeholder="Acme Corp LLC" required/></div>
+      <div class="form-row"><label>Authorized Signatory *</label><input type="text" id="client_company" placeholder="Jane Smith, CEO" required/></div>
+      <div class="form-row"><label>Email Address *</label><input type="email" id="client_email" placeholder="jane@acmecorp.com" required/></div>
+    </div>
+    <div class="form-section"><div class="form-section-label">Role & Compensation</div>
+      <div class="form-row"><label>Title / Role</label><input type="text" id="role" placeholder="Fractional CMO"/></div>
+      <div class="form-row"><label>Monthly Retainer</label><input type="text" id="retainer" placeholder="$8,000/month"/></div>
+      <div class="form-row"><label>Equity Grant</label><input type="text" id="equity" placeholder="0.5% common stock options"/></div>
+      <div class="form-row"><label>Vesting Schedule</label><input type="text" id="vesting" placeholder="4 years, 12-month cliff"/></div>
+    </div>
+    <button id="generate-btn" onclick="generate()">✍ Sign &amp; Submit</button>
+    <div id="form-status" class="form-status"></div>
+  </div>
+</main>
+<script src="form-engine.js"></script>
+<script>
+injectFormStyles();initSigPad('client_name');
+function fmt(v){if(!v)return'';const d=new Date(v+'T12:00:00');return d.toLocaleDateString('en-US',{month:'long',day:'numeric',year:'numeric'});}
+async function generate(){
+  const date=fmt(document.getElementById('eff_date').value);
+  const name=document.getElementById('client_name').value.trim();
+  const company=document.getElementById('client_company').value.trim();
+  const email=document.getElementById('client_email').value.trim();
+  const role=document.getElementById('role').value.trim();
+  const retainer=document.getElementById('retainer').value.trim();
+  const equity=document.getElementById('equity').value.trim();
+  const vesting=document.getElementById('vesting').value.trim();
+  if(!date||!name||!company||!email){const s=document.getElementById('form-status');s.textContent='Please fill in all required fields.';s.className='form-status error';return;}
+  await fillAndSubmit({
+    pdfPath:'../pdfs/MG-ECA-001-Equity-Compensation.pdf',
+    textFields:[{page:1,x:226,y:529,value:date,maxWidth:220},
+      {page:1,x:148,y:399,value:name,maxWidth:340},
+      {page:1,x:148,y:383,value:company,maxWidth:310},
+      {page:1,x:123,y:366,value:email,maxWidth:330},
+      {page:1,x:148,y:288,value:role,maxWidth:280},
+      {page:1,x:148,y:180,value:retainer,maxWidth:220},
+      {page:1,x:148,y:130,value:equity,maxWidth:280},
+      {page:1,x:148,y:115,value:vesting,maxWidth:280},],
+    sigPage:2,sigX:63,sigY:170,sigW:200,sigH:24,
+    clientNameY:156,clientTitleY:141,clientDateY:127,
+    clientCompany:company,effectiveDate:date,
+    markSigY:73,markNameY:724,markTitleY:709,markDateY:695,
+    docName:'Equity & Compensation Agreement',docId:'MG-ECA-001',
+    filename:`ECA-${name.replace(/\s+/g,'-')}-${new Date().getFullYear()}.pdf`,
+    clientName:name,clientEmail:email,
+    formFields:{'Date':date,'Company':name,'Signatory':company,'Email':email,'Role':role,'Retainer':retainer,'Equity':equity,'Vesting':vesting},
+  });
+}
+const cur=document.getElementById('custom-cursor');document.addEventListener('mousemove',e=>{cur.style.left=e.clientX+'px';cur.style.top=e.clientY+'px';});
+</script></body></html>

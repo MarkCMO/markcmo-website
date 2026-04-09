@@ -1,0 +1,1024 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Mark Gabrielli | Fractional CMO · COO · Digital Venture Builder</title>
+  <meta name="description" content="Mark Gabrielli — Fractional CMO & COO. 15+ years of global executive marketing and operations. Founder of MarkCMO, Money Scaling Cycle, ButcherBud, and 15+ digital ventures.">
+  <meta name="robots" content="index, follow">
+  <link rel="canonical" href="https://markcmo.com/links">
+  <meta name="theme-color" content="#0B1120">
+
+  <!-- Open Graph -->
+  <meta property="og:title" content="Mark Gabrielli | MarkCMO">
+  <meta property="og:description" content="Fractional CMO & COO. 15+ digital ventures. Explore all links and projects.">
+  <meta property="og:image" content="https://markcmo.com/assets/mark-og-image.jpg"><!-- TODO: Add OG image -->
+  <meta property="og:url" content="https://markcmo.com/links">
+  <meta property="og:type" content="website">
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:site" content="@markcmo">
+  <meta name="twitter:creator" content="@markcmo">
+  <meta name="twitter:title" content="Mark Gabrielli | MarkCMO">
+  <meta name="twitter:description" content="Fractional CMO & COO. 15+ digital ventures. Explore all links.">
+
+  <!-- Inline SVG Favicon: MC gold on navy -->
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='6' fill='%230B1120'/%3E%3Ctext x='50%25' y='50%25' dominant-baseline='central' text-anchor='middle' font-family='Georgia,serif' font-weight='700' font-size='13' fill='%23C8A84E'%3EMC%3C/text%3E%3C/svg%3E">
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Barlow:ital,wght@0,400;0,500;0,600;1,400&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="/style.css">
+<style>
+    /* ─── RESET & BASE ─────────────────────────────────────────────── */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+
+    /* ─── CSS VARIABLES ────────────────────────────────────────────── */
+    :root {
+      --bg:           #0B1120;
+      --surface:      #111827;
+      --surface-lift: #162033;
+      --border:       #1E2D45;
+      --border-hover: #2A3F60;
+      --gold:         #C8A84E;
+      --gold-light:   #E2C97E;
+      --gold-dim:     #8B7235;
+      --gold-glow:    rgba(200, 168, 78, 0.13);
+      --gold-glow-md: rgba(200, 168, 78, 0.22);
+      --white:        #FFFFFF;
+      --offwhite:     #E8EAF0;
+      --muted:        #6B7A99;
+      --muted-light:  #8899BB;
+      --font-display: 'Bebas Neue', sans-serif;
+      --font-body:    'Barlow', sans-serif;
+      --radius-card:  14px;
+      --radius-sm:    8px;
+      --max-w:        480px;
+      --transition:   0.22s ease;
+    }
+
+    body {
+      background-color: var(--bg);
+      color: var(--offwhite);
+      font-family: var(--font-body);
+      font-weight: 400;
+      line-height: 1.5;
+      min-height: 100vh;
+      overflow-x: hidden;
+      -webkit-tap-highlight-color: transparent;
+      /* Noise grain texture via SVG filter */
+      position: relative;
+    }
+
+    /* Grain overlay */
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");
+      background-size: 200px 200px;
+      pointer-events: none;
+      z-index: 0;
+      opacity: 0.55;
+    }
+
+    /* Ambient radial bg glow — top center */
+    body::after {
+      content: '';
+      position: fixed;
+      top: -120px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 600px;
+      height: 500px;
+      background: radial-gradient(ellipse at center, rgba(200,168,78,0.07) 0%, transparent 70%);
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    /* ─── LAYOUT WRAPPER ───────────────────────────────────────────── */
+    .page {
+      position: relative;
+      z-index: 1;
+      max-width: var(--max-w);
+      margin: 0 auto;
+      padding: 40px 20px 60px;
+    }
+
+    /* ─── ANIMATION SYSTEM ─────────────────────────────────────────── */
+    .reveal {
+      opacity: 0;
+      transform: translateY(18px);
+      transition: opacity 0.55s ease, transform 0.55s ease;
+    }
+    .reveal.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    /* Load delays for stagger */
+    .d0  { transition-delay: 0ms; }
+    .d1  { transition-delay: 80ms; }
+    .d2  { transition-delay: 160ms; }
+    .d3  { transition-delay: 240ms; }
+    .d4  { transition-delay: 320ms; }
+    .d5  { transition-delay: 400ms; }
+    .d6  { transition-delay: 480ms; }
+    .d7  { transition-delay: 560ms; }
+    .d8  { transition-delay: 640ms; }
+    .d9  { transition-delay: 720ms; }
+    .d10 { transition-delay: 800ms; }
+    .d11 { transition-delay: 880ms; }
+    .d12 { transition-delay: 960ms; }
+    .d13 { transition-delay: 1040ms; }
+    .d14 { transition-delay: 1120ms; }
+    .d15 { transition-delay: 1200ms; }
+
+    /* ─── WORDMARK BADGE ───────────────────────────────────────────── */
+    .wordmark {
+      text-align: center;
+      margin-bottom: 28px;
+    }
+    .wordmark-text {
+      font-family: var(--font-display);
+      font-size: 1.1rem;
+      letter-spacing: 0.12em;
+    }
+    .wordmark-text .mark { color: var(--white); }
+    .wordmark-text .cmo  { color: var(--gold); }
+    .wordmark-rule {
+      width: 48px;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, var(--gold), transparent);
+      margin: 7px auto 0;
+    }
+
+    /* ─── PROFILE PHOTO ────────────────────────────────────────────── */
+    .profile-wrap {
+      display: flex;
+      justify-content: center;
+      margin-bottom: 20px;
+    }
+    .profile-ring {
+      position: relative;
+      width: 118px;
+      height: 118px;
+    }
+    /* Gold ambient halo */
+    .profile-ring::before {
+      content: '';
+      position: absolute;
+      inset: -14px;
+      border-radius: 50%;
+      background: radial-gradient(ellipse at center, rgba(200,168,78,0.18) 0%, transparent 70%);
+      z-index: 0;
+    }
+    .profile-img {
+      display: block;
+      width: 118px;
+      height: 118px;
+      border-radius: 50%;
+      border: 2.5px solid var(--gold);
+      object-fit: cover;
+      position: relative;
+      z-index: 1;
+      transition: transform var(--transition), box-shadow var(--transition);
+      background: var(--surface);
+    }
+    .profile-img:hover {
+      transform: scale(1.04);
+      box-shadow: 0 0 30px rgba(200,168,78,0.25);
+    }
+    /* Placeholder when no photo */
+    .profile-placeholder {
+      width: 118px;
+      height: 118px;
+      border-radius: 50%;
+      border: 2.5px solid var(--gold);
+      background: var(--surface);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+      z-index: 1;
+      transition: transform var(--transition);
+    }
+    .profile-placeholder:hover { transform: scale(1.04); }
+    .profile-placeholder-text {
+      font-family: var(--font-display);
+      font-size: 2.2rem;
+      color: var(--gold-dim);
+      letter-spacing: 0.05em;
+    }
+
+    /* ─── HERO NAME & TAGLINE ──────────────────────────────────────── */
+    .hero {
+      text-align: center;
+      margin-bottom: 26px;
+    }
+    .hero-name {
+      font-family: var(--font-display);
+      font-size: 3.2rem;
+      line-height: 1;
+      letter-spacing: 0.04em;
+      color: var(--white);
+      margin-bottom: 8px;
+    }
+    .hero-follow {
+      font-size: 0.58rem;
+      font-weight: 600;
+      letter-spacing: 0.28em;
+      text-transform: uppercase;
+      color: var(--gold-dim);
+      margin-bottom: 5px;
+    }
+    .hero-title {
+      font-size: 0.9rem;
+      font-weight: 500;
+      color: var(--muted);
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      margin-bottom: 8px;
+    }
+    .hero-tagline {
+      font-size: 0.95rem;
+      font-style: italic;
+      color: var(--muted-light);
+      margin-bottom: 20px;
+    }
+    .hero-divider {
+      width: 100%;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, var(--border), transparent);
+    }
+
+    /* ─── SOCIAL ICONS ROW ─────────────────────────────────────────── */
+    .social-row {
+      display: flex;
+      justify-content: center;
+      gap: 10px;
+      margin: 24px 0 28px;
+      overflow-x: auto;
+      -webkit-overflow-scrolling: touch;
+      scrollbar-width: none;
+      padding-bottom: 4px;
+    }
+    .social-row::-webkit-scrollbar { display: none; }
+    .social-btn {
+      flex-shrink: 0;
+      width: 46px;
+      height: 46px;
+      border-radius: 50%;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      text-decoration: none;
+      transition: border-color var(--transition), background var(--transition), transform var(--transition), box-shadow var(--transition);
+    }
+    .social-btn svg {
+      width: 18px;
+      height: 18px;
+      fill: var(--muted);
+      transition: fill var(--transition);
+    }
+    .social-btn:hover {
+      border-color: var(--gold);
+      background: rgba(200,168,78,0.08);
+      transform: scale(1.12);
+      box-shadow: 0 0 14px rgba(200,168,78,0.18);
+    }
+    .social-btn:hover svg { fill: var(--gold); }
+
+    /* ─── SECTION LABELS ───────────────────────────────────────────── */
+    .section-label {
+      font-size: 0.62rem;
+      font-weight: 600;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--gold-dim);
+      margin-bottom: 12px;
+      padding-left: 2px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .section-label::after {
+      content: '';
+      flex: 1;
+      height: 1px;
+      background: var(--border);
+    }
+
+    /* ─── LINK CARDS ───────────────────────────────────────────────── */
+    .cards-list {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      margin-bottom: 28px;
+    }
+
+    .card {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      padding: 15px 16px;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-card);
+      text-decoration: none;
+      color: inherit;
+      position: relative;
+      overflow: hidden;
+      transition: background var(--transition), border-color var(--transition), box-shadow var(--transition), transform var(--transition);
+      cursor: pointer;
+    }
+    /* Left gold accent bar */
+    .card::before {
+      content: '';
+      position: absolute;
+      left: 0;
+      top: 0;
+      bottom: 0;
+      width: 3px;
+      background: var(--gold);
+      transform: scaleY(0);
+      transform-origin: center;
+      border-radius: 0 2px 2px 0;
+      transition: transform 0.2s ease;
+    }
+    .card:hover {
+      background: var(--surface-lift);
+      border-color: var(--border-hover);
+      box-shadow: 0 4px 28px var(--gold-glow);
+      transform: translateX(2px);
+    }
+    .card:hover::before { transform: scaleY(1); }
+
+    .card-icon {
+      width: 44px;
+      height: 44px;
+      border-radius: var(--radius-sm);
+      background: rgba(200,168,78,0.07);
+      border: 1px solid rgba(200,168,78,0.15);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.3rem;
+      flex-shrink: 0;
+      transition: background var(--transition), border-color var(--transition);
+    }
+    .card:hover .card-icon {
+      background: rgba(200,168,78,0.14);
+      border-color: rgba(200,168,78,0.3);
+    }
+
+    .card-text { flex: 1; min-width: 0; }
+    .card-title {
+      font-weight: 600;
+      font-size: 0.98rem;
+      color: var(--white);
+      margin-bottom: 2px;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+    .card-sub {
+      font-size: 0.78rem;
+      color: var(--muted);
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .card-arrow {
+      color: var(--gold-dim);
+      font-size: 1rem;
+      flex-shrink: 0;
+      transition: transform var(--transition), color var(--transition);
+    }
+    .card:hover .card-arrow {
+      transform: translateX(4px);
+      color: var(--gold);
+    }
+
+    /* Featured card variant — booking CTA */
+    .card-featured {
+      background: linear-gradient(135deg, #162033 0%, #111827 100%);
+      border-color: rgba(200,168,78,0.25);
+    }
+    .card-featured::after {
+      content: 'BOOK NOW';
+      position: absolute;
+      top: 10px;
+      right: 44px;
+      font-family: var(--font-body);
+      font-size: 0.55rem;
+      font-weight: 600;
+      letter-spacing: 0.18em;
+      color: var(--gold);
+      background: rgba(200,168,78,0.1);
+      border: 1px solid rgba(200,168,78,0.25);
+      border-radius: 3px;
+      padding: 2px 6px;
+    }
+    .card-featured:hover { border-color: rgba(200,168,78,0.5); }
+
+    /* ─── PAYMENT GRID ─────────────────────────────────────────────── */
+    .payment-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 10px;
+      margin-bottom: 28px;
+    }
+    .pay-btn {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      padding: 16px 8px 14px;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-card);
+      text-decoration: none;
+      cursor: pointer;
+      transition: background var(--transition), border-color var(--transition), transform var(--transition), box-shadow var(--transition);
+    }
+    .pay-btn:hover {
+      background: rgba(200,168,78,0.07);
+      border-color: rgba(200,168,78,0.3);
+      transform: translateY(-2px);
+      box-shadow: 0 6px 20px var(--gold-glow);
+    }
+    .pay-icon {
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1rem;
+      background: rgba(200,168,78,0.07);
+      border: 1px solid rgba(200,168,78,0.12);
+      transition: background var(--transition), border-color var(--transition);
+    }
+    .pay-btn:hover .pay-icon {
+      background: rgba(200,168,78,0.15);
+      border-color: rgba(200,168,78,0.35);
+    }
+    .pay-icon svg {
+      width: 18px;
+      height: 18px;
+      fill: var(--muted-light);
+      transition: fill var(--transition);
+    }
+    .pay-btn:hover .pay-icon svg { fill: var(--gold); }
+    .pay-label {
+      font-size: 0.68rem;
+      font-weight: 600;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      text-align: center;
+      color: var(--muted);
+      transition: color var(--transition);
+    }
+    .pay-btn:hover .pay-label { color: var(--gold-light); }
+
+    /* ─── FOOTER ───────────────────────────────────────────────────── */
+    .footer {
+      text-align: center;
+      padding-top: 24px;
+      border-top: 1px solid var(--border);
+      margin-top: 8px;
+    }
+    .footer-copy {
+      font-size: 0.72rem;
+      color: var(--muted);
+      margin-bottom: 5px;
+    }
+    .footer-link {
+      font-size: 0.78rem;
+      font-weight: 500;
+      color: var(--gold-dim);
+      text-decoration: none;
+      letter-spacing: 0.05em;
+      transition: color var(--transition);
+    }
+    .footer-link:hover { color: var(--gold); }
+
+    /* ─── TOAST NOTIFICATION ───────────────────────────────────────── */
+    .toast {
+      position: fixed;
+      bottom: 28px;
+      left: 50%;
+      transform: translateX(-50%) translateY(20px);
+      background: var(--surface-lift);
+      border: 1px solid var(--gold-dim);
+      color: var(--offwhite);
+      font-family: var(--font-body);
+      font-size: 0.85rem;
+      font-weight: 500;
+      padding: 10px 20px;
+      border-radius: 40px;
+      box-shadow: 0 8px 28px rgba(0,0,0,0.4), 0 0 16px var(--gold-glow);
+      z-index: 999;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.2s ease, transform 0.2s ease;
+      white-space: nowrap;
+    }
+    .toast.show {
+      opacity: 1;
+      transform: translateX(-50%) translateY(0);
+    }
+    .toast-check { color: var(--gold); margin-right: 6px; }
+
+    /* ─── DESKTOP POLISH ───────────────────────────────────────────── */
+    @media (min-width: 600px) {
+      .page { padding: 56px 24px 80px; }
+      .hero-name { font-size: 4rem; }
+      .profile-img,
+      .profile-placeholder { width: 130px; height: 130px; }
+      .profile-ring { width: 130px; height: 130px; }
+    }
+  </style>
+</head>
+<body>
+
+<div class="page">
+
+  <!-- ── WORDMARK ────────────────────────────── -->
+  <div class="wordmark reveal d0">
+    <div class="wordmark-text">
+      <span class="mark">MARK</span><span class="cmo">CMO</span>
+    </div>
+    <div class="wordmark-rule"></div>
+  </div>
+
+  <!-- ── PROFILE PHOTO ───────────────────────── -->
+  <div class="profile-wrap reveal d1">
+    <div class="profile-ring">
+      <img src="/assets/mark-gabrielli.jpg" alt="Mark Gabrielli - Fractional CMO & COO" class="profile-img">
+    </div>
+  </div>
+
+  <!-- ── HERO NAME & TAGLINE ─────────────────── -->
+  <div class="hero reveal d2">
+    <h1 class="hero-name">MARK GABRIELLI</h1>
+    <p class="hero-follow">FOLLOW ME FOR</p>
+    <p class="hero-title">More Money &nbsp;·&nbsp; More Time &nbsp;·&nbsp; Less Risk &nbsp;·&nbsp; Bigger Status</p>
+    <p class="hero-tagline">15+ Years. 3 Continents. Zero Fluff.</p>
+    <div class="hero-divider"></div>
+  </div>
+
+  <!-- ── SOCIAL ICONS ─────────────────────────── -->
+  <!-- TODO: Confirm all social handles match your active accounts -->
+  <div class="social-row reveal d3">
+
+    <!-- LinkedIn -->
+    <a href="https://www.linkedin.com/in/marklgabrielli/" target="_blank" rel="noopener noreferrer" class="social-btn" aria-label="LinkedIn">
+      <svg viewBox="0 0 24 24"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 0 1-2.063-2.065 2.064 2.064 0 1 1 2.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
+    </a>
+
+    <!-- Instagram -->
+    <a href="https://www.instagram.com/officialmarkcmo/" target="_blank" rel="noopener noreferrer" class="social-btn" aria-label="Instagram">
+      <svg viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838a6.162 6.162 0 1 0 0 12.324 6.162 6.162 0 0 0 0-12.324zM12 16a4 4 0 1 1 0-8 4 4 0 0 1 0 8zm6.406-11.845a1.44 1.44 0 1 0 0 2.881 1.44 1.44 0 0 0 0-2.881z"/></svg>
+    </a>
+
+    <!-- Facebook -->
+    <a href="https://www.facebook.com/profile.php?id=61581441943753" target="_blank" rel="noopener noreferrer" class="social-btn" aria-label="Facebook">
+      <svg viewBox="0 0 24 24"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
+    </a>
+
+    <!-- X / Twitter -->
+    <a href="https://x.com/MarkGCMO" target="_blank" rel="noopener noreferrer" class="social-btn" aria-label="X (Twitter)">
+      <svg viewBox="0 0 24 24"><path d="M18.901 1.153h3.68l-8.04 9.19L24 22.846h-7.406l-5.8-7.584-6.638 7.584H.474l8.6-9.83L0 1.154h7.594l5.243 6.932ZM17.61 20.644h2.039L6.486 3.24H4.298Z"/></svg>
+    </a>
+
+    <!-- YouTube -->
+    <a href="https://www.youtube.com/@aiscalingcycle" target="_blank" rel="noopener noreferrer" class="social-btn" aria-label="YouTube">
+      <svg viewBox="0 0 24 24"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg>
+    </a>
+
+    <!-- TikTok -->
+    <a href="https://www.tiktok.com/@mark.gabrielli.cmo" target="_blank" rel="noopener noreferrer" class="social-btn" aria-label="TikTok">
+      <svg viewBox="0 0 24 24"><path d="M12.525.02c1.31-.02 2.61-.01 3.91-.02.08 1.53.63 3.09 1.75 4.17 1.12 1.11 2.7 1.62 4.24 1.79v4.03c-1.44-.05-2.89-.35-4.2-.97-.57-.26-1.1-.59-1.62-.93-.01 2.92.01 5.84-.02 8.75-.08 1.4-.54 2.79-1.35 3.94-1.31 1.92-3.58 3.17-5.91 3.21-1.43.08-2.86-.31-4.08-1.03-2.02-1.19-3.44-3.37-3.65-5.71-.02-.5-.03-1-.01-1.49.18-1.9 1.12-3.72 2.58-4.96 1.66-1.44 3.98-2.13 6.15-1.72.02 1.48-.04 2.96-.04 4.44-.99-.32-2.15-.23-3.02.37-.63.41-1.11 1.04-1.36 1.75-.21.51-.15 1.07-.14 1.61.24 1.64 1.82 3.02 3.5 2.87 1.12-.01 2.19-.66 2.77-1.61.19-.33.4-.67.41-1.06.1-1.79.06-3.57.07-5.36.01-4.03-.01-8.05.02-12.07z"/></svg>
+    </a>
+
+  </div><!-- /social-row -->
+
+  <!-- ══════════════════════════════════════════ -->
+  <!-- MY VENTURES                               -->
+  <!-- ══════════════════════════════════════════ -->
+  <p class="section-label reveal d4">My Ventures</p>
+
+  <div class="cards-list">
+
+    <a href="https://markcmo.com/portfolio" target="_blank" rel="noopener noreferrer" class="card reveal d5">
+      <div class="card-icon">💼</div>
+      <div class="card-text">
+        <div class="card-title">Full Portfolio</div>
+        <div class="card-sub">15+ Active Digital Ventures - markcmo.com/portfolio</div>
+      </div>
+      <div class="card-arrow">→</div>
+    </a>
+
+    <a href="https://wetyr.com" target="_blank" rel="noopener noreferrer" class="card reveal d5b">
+      <div class="card-icon">🏢</div>
+      <div class="card-text">
+        <div class="card-title">WETYR</div>
+        <div class="card-sub">Corporate Holding & Venture Studio - wetyr.com</div>
+      </div>
+      <div class="card-arrow">→</div>
+    </a>
+
+    <a href="https://markcmo.com" target="_blank" rel="noopener noreferrer" class="card reveal d6">
+      <div class="card-icon">📊</div>
+      <div class="card-text">
+        <div class="card-title">MarkCMO</div>
+        <div class="card-sub">Fractional CMO & COO Advisory - markcmo.com</div>
+      </div>
+      <div class="card-arrow">→</div>
+    </a>
+
+    <a href="https://academy.markcmo.com" target="_blank" rel="noopener noreferrer" class="card reveal d7">
+      <div class="card-icon">🎓</div>
+      <div class="card-text">
+        <div class="card-title">MarkCMO Academy</div>
+        <div class="card-sub">Executive Courses & Certifications - academy.markcmo.com</div>
+      </div>
+      <div class="card-arrow">→</div>
+    </a>
+
+    <a href="https://butcherbud.com" target="_blank" rel="noopener noreferrer" class="card reveal d8">
+      <div class="card-icon">🥩</div>
+      <div class="card-text">
+        <div class="card-title">ButcherBud</div>
+        <div class="card-sub">Local Farm & Butcher Directory - butcherbud.com</div>
+      </div>
+      <div class="card-arrow">→</div>
+    </a>
+
+    <a href="https://moneyscalingcycle.com" target="_blank" rel="noopener noreferrer" class="card reveal d9">
+      <div class="card-icon">💰</div>
+      <div class="card-text">
+        <div class="card-title">Money Scaling Cycle</div>
+        <div class="card-sub">Affiliate Revenue Framework - moneyscalingcycle.com</div>
+      </div>
+      <div class="card-arrow">→</div>
+    </a>
+
+  </div><!-- /cards-list ventures -->
+
+  <!-- ══════════════════════════════════════════ -->
+  <!-- PROJECTS - JOIN THE WAITLIST              -->
+  <!-- ══════════════════════════════════════════ -->
+  <p class="section-label reveal d9b">Launching Soon - Join the Waitlist</p>
+
+  <div class="cards-list">
+
+    <a href="https://proof-of-you.netlify.app" target="_blank" rel="noopener noreferrer" class="card reveal d9c">
+      <div class="card-icon">🪪</div>
+      <div class="card-text">
+        <div class="card-title">Proof of You</div>
+        <div class="card-sub">Digital Identity Verification - proof-of-you.netlify.app</div>
+      </div>
+      <div class="card-arrow">→</div>
+    </a>
+
+    <a href="https://claimpilot-elite.netlify.app" target="_blank" rel="noopener noreferrer" class="card reveal d9d">
+      <div class="card-icon">📋</div>
+      <div class="card-text">
+        <div class="card-title">ClaimPilot Elite</div>
+        <div class="card-sub">Claims Management Automation - claimpilot-elite.netlify.app</div>
+      </div>
+      <div class="card-arrow">→</div>
+    </a>
+
+    <a href="https://saasaf.ai" target="_blank" rel="noopener noreferrer" class="card reveal d9e">
+      <div class="card-icon">🤖</div>
+      <div class="card-text">
+        <div class="card-title">SaaSaf.ai</div>
+        <div class="card-sub">AI-Powered SaaS Platform - saasaf.ai</div>
+      </div>
+      <div class="card-arrow">→</div>
+    </a>
+
+    <a href="https://swipehire365.com" target="_blank" rel="noopener noreferrer" class="card reveal d9f">
+      <div class="card-icon">👥</div>
+      <div class="card-text">
+        <div class="card-title">SwipeHire365</div>
+        <div class="card-sub">Hiring Made Simple - swipehire365.com</div>
+      </div>
+      <div class="card-arrow">→</div>
+    </a>
+
+    <a href="https://leadflow.cash" target="_blank" rel="noopener noreferrer" class="card reveal d9g">
+      <div class="card-icon">💸</div>
+      <div class="card-text">
+        <div class="card-title">LeadFlow Cash</div>
+        <div class="card-sub">Lead Generation Revenue Engine - leadflow.cash</div>
+      </div>
+      <div class="card-arrow">→</div>
+    </a>
+
+    <a href="https://letsleavenow.com" target="_blank" rel="noopener noreferrer" class="card reveal d9h">
+      <div class="card-icon">✈️</div>
+      <div class="card-text">
+        <div class="card-title">LetsLeaveNow</div>
+        <div class="card-sub">Spontaneous Travel Deals - letsleavenow.com</div>
+      </div>
+      <div class="card-arrow">→</div>
+    </a>
+
+    <a href="https://tablegreens.com" target="_blank" rel="noopener noreferrer" class="card reveal d9i">
+      <div class="card-icon">🥬</div>
+      <div class="card-text">
+        <div class="card-title">TableGreens</div>
+        <div class="card-sub">Farm-to-Table Microgreens - tablegreens.com</div>
+      </div>
+      <div class="card-arrow">→</div>
+    </a>
+
+    <a href="https://microgreenusa.com" target="_blank" rel="noopener noreferrer" class="card reveal d9j">
+      <div class="card-icon">🌱</div>
+      <div class="card-text">
+        <div class="card-title">MicrogreenUSA</div>
+        <div class="card-sub">Microgreen Marketplace - microgreenusa.com</div>
+      </div>
+      <div class="card-arrow">→</div>
+    </a>
+
+    <a href="https://busbrother.com" target="_blank" rel="noopener noreferrer" class="card reveal d9k">
+      <div class="card-icon">🚌</div>
+      <div class="card-text">
+        <div class="card-title">BusBrother</div>
+        <div class="card-sub">Transportation Solutions - busbrother.com</div>
+      </div>
+      <div class="card-arrow">→</div>
+    </a>
+
+  </div><!-- /cards-list waitlist -->
+
+  <!-- ══════════════════════════════════════════ -->
+  <!-- WORK WITH ME                              -->
+  <!-- ══════════════════════════════════════════ -->
+  <p class="section-label reveal d10">Work With Me</p>
+
+  <div class="cards-list">
+
+    <a href="https://calendly.com/marklgabriellijr/discovery-call-marketing-clone" target="_blank" rel="noopener noreferrer" class="card card-featured reveal d11">
+      <div class="card-icon">📅</div>
+      <div class="card-text">
+        <div class="card-title">Book a Strategy Call</div>
+        <div class="card-sub">30-Min Discovery · No Pitch · Just Clarity</div>
+      </div>
+      <div class="card-arrow">→</div>
+    </a>
+
+    <a href="mailto:mark@markcmo.com" class="card reveal d12">
+      <div class="card-icon">✉️</div>
+      <div class="card-text">
+        <div class="card-title">Email Mark Directly</div>
+        <div class="card-sub">mark@markcmo.com</div>
+      </div>
+      <div class="card-arrow">→</div>
+    </a>
+
+  </div><!-- /cards-list work -->
+
+  <!-- ══════════════════════════════════════════ -->
+  <!-- TOOLS I USE & RECOMMEND                   -->
+  <!-- ══════════════════════════════════════════ -->
+  <p class="section-label reveal d12b">Tools I Use & Recommend</p>
+
+  <div class="cards-list">
+
+    <!-- Funnels & Landing Pages -->
+    <a href="https://www.clickfunnels.com/signup-flow?aff=11983e49a7d533e57d230c1f004478c31e0e684b1d529b5c2ebec29e3811cee0" target="_blank" rel="noopener noreferrer" class="card reveal">
+      <div class="card-icon">🔗</div>
+      <div class="card-text">
+        <div class="card-title">ClickFunnels</div>
+        <div class="card-sub">Funnels & Landing Pages</div>
+      </div>
+      <div class="card-arrow">→</div>
+    </a>
+
+    <a href="https://systeme.io/?sa=sa02663927809febb849e0946d3bc1f58b7b71b72d" target="_blank" rel="noopener noreferrer" class="card reveal">
+      <div class="card-icon">⚙️</div>
+      <div class="card-text">
+        <div class="card-title">Systeme.io</div>
+        <div class="card-sub">All-in-One Business Builder</div>
+      </div>
+      <div class="card-arrow">→</div>
+    </a>
+
+    <!-- Checkout & Payments -->
+    <a href="https://moneyscalecycling--checkout.thrivecart.com/thrivecart-standard-account/" target="_blank" rel="noopener noreferrer" class="card reveal">
+      <div class="card-icon">🛒</div>
+      <div class="card-text">
+        <div class="card-title">ThriveCart</div>
+        <div class="card-sub">High-Converting Checkout Pages</div>
+      </div>
+      <div class="card-arrow">→</div>
+    </a>
+
+    <a href="https://moneyscalecycling--sslcheckout.thrivecart.com/cb-lifetime/" target="_blank" rel="noopener noreferrer" class="card reveal">
+      <div class="card-icon">📦</div>
+      <div class="card-text">
+        <div class="card-title">ConvertBox</div>
+        <div class="card-sub">Smart On-Site Popups & CTAs</div>
+      </div>
+      <div class="card-arrow">→</div>
+    </a>
+
+    <!-- Email -->
+    <a href="https://www.aweber.com/easy-email.htm?id=560469" target="_blank" rel="noopener noreferrer" class="card reveal">
+      <div class="card-icon">📧</div>
+      <div class="card-text">
+        <div class="card-title">AWeber</div>
+        <div class="card-sub">Email Marketing & Automation</div>
+      </div>
+      <div class="card-arrow">→</div>
+    </a>
+
+    <a href="https://trymoo.moosend.com/moneyscalingcycle" target="_blank" rel="noopener noreferrer" class="card reveal">
+      <div class="card-icon">📬</div>
+      <div class="card-text">
+        <div class="card-title">Moosend</div>
+        <div class="card-sub">Email Campaigns & Newsletters</div>
+      </div>
+      <div class="card-arrow">→</div>
+    </a>
+
+    <!-- Community -->
+    <a href="https://www.skool.com/signup?ref=4d42270f8e5a41c8a2f35806715180b0" target="_blank" rel="noopener noreferrer" class="card reveal">
+      <div class="card-icon">🏫</div>
+      <div class="card-text">
+        <div class="card-title">Skool</div>
+        <div class="card-sub">Community & Course Platform</div>
+      </div>
+      <div class="card-arrow">→</div>
+    </a>
+
+    <!-- Social -->
+    <a href="https://hypefury.com/?via=moneyscalingcycle" target="_blank" rel="noopener noreferrer" class="card reveal">
+      <div class="card-icon">🐦</div>
+      <div class="card-text">
+        <div class="card-title">Hypefury</div>
+        <div class="card-sub">Social Media Scheduling & Growth</div>
+      </div>
+      <div class="card-arrow">→</div>
+    </a>
+
+    <!-- Analytics -->
+    <a href="https://f.mtr.cool/markcmo" target="_blank" rel="noopener noreferrer" class="card reveal">
+      <div class="card-icon">📊</div>
+      <div class="card-text">
+        <div class="card-title">Metricool</div>
+        <div class="card-sub">Social Media Analytics & Scheduling</div>
+      </div>
+      <div class="card-arrow">→</div>
+    </a>
+
+    <!-- Social Scheduling -->
+    <a href="https://www.oneupapp.io/?via=markcmo" target="_blank" rel="noopener noreferrer" class="card reveal">
+      <div class="card-icon">🔄</div>
+      <div class="card-text">
+        <div class="card-title">OneUp</div>
+        <div class="card-sub">Auto-Post & Recycle Social Content</div>
+      </div>
+      <div class="card-arrow">→</div>
+    </a>
+
+    <!-- Trading -->
+    <a href="https://theconcepttrading.com/ref/1891/" target="_blank" rel="noopener noreferrer" class="card reveal">
+      <div class="card-icon">📈</div>
+      <div class="card-text">
+        <div class="card-title">The Concept Trading</div>
+        <div class="card-sub">Trading Education & Signals</div>
+      </div>
+      <div class="card-arrow">→</div>
+    </a>
+
+    <!-- ElevenLabs -->
+    <a href="https://try.elevenlabs.io/lno7yoatfuht" target="_blank" rel="noopener noreferrer" class="card reveal">
+      <div class="card-icon">🎙️</div>
+      <div class="card-text">
+        <div class="card-title">ElevenLabs</div>
+        <div class="card-sub">AI Voice & Audio Generation</div>
+      </div>
+      <div class="card-arrow">→</div>
+    </a>
+
+    <!-- Shopify -->
+    <a href="https://shopify.pxf.io/yZZLvD" target="_blank" rel="noopener noreferrer" class="card reveal">
+      <div class="card-icon">🛒</div>
+      <div class="card-text">
+        <div class="card-title">Shopify</div>
+        <div class="card-sub">Build Your Online Store</div>
+      </div>
+      <div class="card-arrow">→</div>
+    </a>
+
+  </div><!-- /cards-list tools -->
+
+  <!-- ══════════════════════════════════════════ -->
+  <!-- SEND PAYMENT                              -->
+  <!-- ══════════════════════════════════════════ -->
+  <p class="section-label reveal d13">Send Payment</p>
+
+  <!-- TODO: Confirm all payment handles/links below before going live -->
+  <div class="payment-grid reveal d14">
+
+    <!-- Square -->
+    <a href="https://square.link/u/FCy4I0Yd" target="_blank" rel="noopener noreferrer" class="pay-btn" aria-label="Make a Payment">
+      <div class="pay-icon">
+        <svg viewBox="0 0 24 24"><path d="M4.01 0A4.01 4.01 0 0 0 0 4.01v15.98A4.01 4.01 0 0 0 4.01 24h15.98A4.01 4.01 0 0 0 24 19.99V4.01A4.01 4.01 0 0 0 19.99 0zm1.62 4.36h12.74c.7 0 1.27.57 1.27 1.27v12.74c0 .7-.57 1.27-1.27 1.27H5.63c-.7 0-1.27-.57-1.27-1.27V5.63c0-.7.57-1.27 1.27-1.27zm2.54 3.81v7.66h7.66V8.17z"/></svg>
+      </div>
+      <span class="pay-label">Make a Payment</span>
+    </a>
+
+    <!-- CashApp — TODO: Confirm $cashtag -->
+    <a href="https://cash.app/$markgabriellijr" target="_blank" rel="noopener noreferrer" class="pay-btn" aria-label="Cash App">
+      <div class="pay-icon">
+        <svg viewBox="0 0 24 24"><path d="M23.59 3.48A11.97 11.97 0 0 0 20.52.41C18.6-.35 14.49 0 12 0S5.4-.35 3.48.41A11.97 11.97 0 0 0 .41 3.48C-.35 5.4 0 9.51 0 12s-.35 6.6.41 8.52a11.97 11.97 0 0 0 3.07 3.07C5.4 24.35 9.51 24 12 24s6.6.35 8.52-.41a11.97 11.97 0 0 0 3.07-3.07C24.35 18.6 24 14.49 24 12s.35-5.4-.41-3.52zM15.16 7.16l-1.07 1.07a3.23 3.23 0 0 0-2.09-.6c-1.15 0-1.81.52-1.81 1.17 0 .77.96 1.01 2.08 1.32 1.57.42 3.36 1.01 3.36 3.15 0 1.84-1.4 3.08-3.52 3.3v1.15H10.8v-1.18a5.6 5.6 0 0 1-3.06-1.44l1.14-1.14a3.87 3.87 0 0 0 2.53.89c1.26 0 2.05-.55 2.05-1.39 0-.81-.88-1.07-2.05-1.4-1.6-.43-3.36-1.01-3.36-3.07 0-1.71 1.3-2.96 3.27-3.2V5.64h1.31v1.15a5.1 5.1 0 0 1 2.53.86v.01z"/></svg>
+      </div>
+      <span class="pay-label">Cash App</span>
+    </a>
+
+    <!-- Zelle — copy email to clipboard -->
+    <button class="pay-btn" onclick="copyZelle()" aria-label="Zelle">
+      <div class="pay-icon">
+        <svg viewBox="0 0 24 24"><path d="M11.88 0C5.32 0 0 5.32 0 11.88s5.32 11.88 11.88 11.88 11.88-5.32 11.88-11.88S18.44 0 11.88 0zm4.01 16.16H9.65l6.15-8.44H9.89V6.05h6.39l-6.15 8.44h5.76v1.67z"/></svg>
+      </div>
+      <span class="pay-label">Zelle</span>
+    </button>
+
+    <!-- PayPal — TODO: Confirm PayPal.me link -->
+    <a href="https://www.paypal.com/ncp/payment/TGMAYD7Q6423U" target="_blank" rel="noopener noreferrer" class="pay-btn" aria-label="PayPal">
+      <div class="pay-icon">
+        <svg viewBox="0 0 24 24"><path d="M7.076 21.337H2.47a.641.641 0 0 1-.633-.74L4.944.901C5.026.382 5.474 0 5.998 0h7.46c2.57 0 4.578.543 5.69 1.81 1.01 1.15 1.304 2.42 1.012 4.287-.023.143-.047.288-.077.437-.983 5.05-4.349 6.797-8.647 6.797h-2.19c-.524 0-.968.382-1.05.9l-1.12 7.106zm14.146-14.42a3.35 3.35 0 0 0-.607-.541c-.013.076-.026.175-.041.254-.93 4.778-4.005 7.201-9.138 7.201h-2.19a.563.563 0 0 0-.556.479l-1.187 7.527h-.506l-.24 1.516a.56.56 0 0 0 .554.647h3.882c.46 0 .85-.334.922-.788.06-.26.76-4.852.816-5.09a.932.932 0 0 1 .923-.788h.58c3.76 0 6.705-1.528 7.565-5.946.36-1.847.174-3.388-.777-4.471z"/></svg>
+      </div>
+      <span class="pay-label">PayPal</span>
+    </a>
+
+  </div><!-- /payment-grid -->
+
+  <!-- ── FOOTER ───────────────────────────────── -->
+  <footer class="footer reveal d15">
+    <p class="footer-copy">© 2025 WETYR Corporation &nbsp;·&nbsp; Mark Gabrielli</p>
+    <a href="https://markcmo.com" target="_blank" rel="noopener noreferrer" class="footer-link">markcmo.com</a>
+  </footer>
+
+</div><!-- /page -->
+
+<!-- ── TOAST ────────────────────────────────── -->
+<div class="toast" id="toast">
+  <span class="toast-check">✓</span> Zelle number copied to clipboard
+</div>
+
+<script>
+  /* ── INTERSECTION OBSERVER ─────────────────── */
+  const reveals = document.querySelectorAll('.reveal');
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('visible');
+        observer.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.08 });
+  reveals.forEach(el => observer.observe(el));
+
+  /* ── ZELLE COPY + TOAST ─────────────────────── */
+  function copyZelle() {
+    const email = '3219175738';
+    if (navigator.clipboard && window.isSecureContext) {
+      navigator.clipboard.writeText(email).then(showToast);
+    } else {
+      const el = document.createElement('textarea');
+      el.value = email;
+      el.style.position = 'fixed';
+      el.style.opacity = '0';
+      document.body.appendChild(el);
+      el.focus(); el.select();
+      try { document.execCommand('copy'); showToast(); } catch(e) {}
+      document.body.removeChild(el);
+    }
+  }
+  function showToast() {
+    const t = document.getElementById('toast');
+    t.classList.add('show');
+    setTimeout(() => t.classList.remove('show'), 2400);
+  }
+</script>
+
+</body>
+</html>
