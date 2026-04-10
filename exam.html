@@ -17,11 +17,9 @@ body{background:var(--black);color:var(--text);font-family:'Barlow',sans-serif;m
 .top-timer{font-family:'DM Mono',monospace;font-size:14px;color:var(--gold);background:rgba(201,168,76,0.08);border:1px solid rgba(201,168,76,0.2);padding:6px 14px}
 .top-timer.warning{color:var(--red);border-color:var(--red);animation:blink 1s ease infinite}
 @keyframes blink{50%{opacity:0.5}}
-
 /* PHASES */
 .phase{display:none;min-height:calc(100vh - 52px)}
 .phase.active{display:block}
-
 /* WARNING PHASE */
 .warning-phase{max-width:700px;margin:0 auto;padding:80px 32px;text-align:center}
 .warning-icon{font-size:56px;margin-bottom:24px}
@@ -40,14 +38,12 @@ body{background:var(--black);color:var(--text);font-family:'Barlow',sans-serif;m
 .start-exam-btn{background:var(--red);color:#fff;border:none;padding:16px 48px;font-family:'Barlow',sans-serif;font-size:13px;font-weight:900;letter-spacing:3px;text-transform:uppercase;transition:all 0.2s;width:100%;max-width:360px}
 .start-exam-btn:hover:not(:disabled){background:#fff;color:#000}
 .start-exam-btn:disabled{background:#2a2a2a;color:#555;cursor:not-allowed;border:1px solid #333}
-
 /* LOADING PHASE */
 .loading-phase{display:flex;flex-direction:column;justify-content:center;align-items:center;gap:20px;min-height:calc(100vh - 52px)}
 .loading-spinner{width:56px;height:56px;border:2px solid var(--border2);border-top-color:var(--gold);border-radius:50%;animation:spin 0.8s linear infinite}
 @keyframes spin{to{transform:rotate(360deg)}}
 .loading-title{font-family:'Bebas Neue',sans-serif;font-size:32px;letter-spacing:2px;color:var(--text)}
 .loading-sub{font-size:12px;font-family:'DM Mono',monospace;color:var(--dim)}
-
 /* EXAM PHASE */
 .exam-phase{max-width:860px;margin:0 auto;padding:40px 32px}
 .exam-header{margin-bottom:32px}
@@ -79,7 +75,6 @@ body{background:var(--black);color:var(--text);font-family:'Barlow',sans-serif;m
 .q-nav-dot:hover{border-color:var(--gold);color:var(--gold)}
 .q-nav-dot.answered{background:var(--gold-dim);border-color:rgba(201,168,76,0.4);color:var(--gold)}
 .q-nav-dot.current{border-color:var(--gold);background:var(--gold);color:#000}
-
 /* RESULTS PHASE */
 .results-phase{max-width:800px;margin:0 auto;padding:60px 32px}
 .results-header{text-align:center;margin-bottom:48px}
@@ -92,7 +87,6 @@ body{background:var(--black);color:var(--text);font-family:'Barlow',sans-serif;m
 .results-score-label{font-size:10px;letter-spacing:2px;text-transform:uppercase;color:var(--dim)}
 .results-title{font-family:'Bebas Neue',sans-serif;font-size:48px;letter-spacing:2px;margin-bottom:8px}
 .results-subtitle{font-size:16px;color:var(--dim);margin-bottom:32px}
-
 .results-stat{background:var(--card);border:1px solid var(--border);padding:20px;text-align:center}
 .results-stat-val{font-family:'Bebas Neue',sans-serif;font-size:36px;color:var(--gold);display:block;line-height:1}
 .results-stat-label{font-size:10px;letter-spacing:2px;text-transform:uppercase;color:var(--dim);margin-top:4px}
@@ -122,18 +116,15 @@ body{background:var(--black);color:var(--text);font-family:'Barlow',sans-serif;m
 .toast{position:fixed;bottom:24px;right:24px;background:var(--card);border:1px solid var(--border2);padding:12px 20px;font-size:12px;z-index:9000;transform:translateY(100px);opacity:0;transition:all 0.3s;max-width:320px}
 .toast.show{transform:translateY(0);opacity:1}
 .toast.red{border-color:var(--red);color:var(--red)}
-
     html, body, * { cursor: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAARCAYAAADUryzEAAAAV0lEQVR42mMQFBT8z0AJABlwbFnIf4oNINsQZAPIMgTdAJINwWYASYbgMoBoQ/AZQJQhhAwgaAguA4iOHXSFJMcKSANME4yNjEkKSLLzxcAbgBwWDPQGAEWguILiE6w1AAAAAElFTkSuQmCC') 0 0, default !important; }
 </style>
-
-  <meta name="description" content="MarkCMO Academy - Final Exam - MarkCMO provides fractional CMO and strategic marketing services for growth-stage companies.">
-  <link rel="canonical" href="https://markcmo.com/exam.html">
-  <meta property="og:type" content="website">
-  <meta property="og:title" content="MarkCMO Academy - Final Exam">
-  <meta property="og:description" content="MarkCMO Academy - Final Exam - MarkCMO provides fractional CMO and strategic marketing services for growth-stage companies.">
-  <meta property="og:url" content="https://markcmo.com/exam.html">
-  <meta property="og:site_name" content="MarkCMO">
-
+<meta name="description" content="MarkCMO Academy - Final Exam - MarkCMO provides fractional CMO and strategic marketing services for growth-stage companies.">
+<link rel="canonical" href="https://markcmo.com/exam.html">
+<meta property="og:type" content="website">
+<meta property="og:title" content="MarkCMO Academy - Final Exam">
+<meta property="og:description" content="MarkCMO Academy - Final Exam - MarkCMO provides fractional CMO and strategic marketing services for growth-stage companies.">
+<meta property="og:url" content="https://markcmo.com/exam.html">
+<meta property="og:site_name" content="MarkCMO">
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
@@ -156,60 +147,46 @@ body{background:var(--black);color:var(--text);font-family:'Barlow',sans-serif;m
 </script>
 </head>
 <body>
-
-<!-- TOP BAR -->
 <div class="top-bar">
-  <div class="top-logo">MarkCMO</div>
-  <div class="top-title" id="top-title">Final Exam</div>
-  <div class="top-spacer"></div>
-  <div class="top-timer" id="top-timer" style="display:none">4:00:00</div>
+<div class="top-logo">MarkCMO</div>
+<div class="top-title" id="top-title">Final Exam</div>
+<div class="top-spacer"></div>
+<div class="top-timer" id="top-timer" style="display:none">4:00:00</div>
 </div>
-
-<!-- PHASE 1: WARNING -->\n<div class="phase active" id="phase-warning">\n  <div class="warning-phase">\n    <div class="warning-icon">🎯</div>\n    <div class="warning-eyebrow">Final Examination</div>\n    <h1 class="warning-title" id="warning-course-title">LOADING...</h1>\n    <p class="warning-sub">This is the complete final exam. 50 questions spanning all course modules. You have <strong style="color:var(--text)">4 hours</strong>. All questions are uniquely generated - every attempt uses a completely new set.</p>\n    <div class="warning-attempts-badge" id="warning-attempts-badge"></div>\n    <div class="warning-rules">\n      <h3>Exam Rules</h3>\n      <ul>\n        <li><strong>50 Questions</strong> - Multiple choice, spanning all modules</li>\n        <li><strong>4-Hour Time Limit</strong> - Timer starts when you click Begin</li>\n        <li><strong>73% Minimum to Pass</strong> - Combined score (40% quiz avg + 60% exam)</li>\n        <li><strong>No Going Back</strong> - Once submitted, this attempt is final and locked</li>\n        <li><strong>3 Attempts Total</strong> - You have used <span id="attempts-used-inline">0</span> of 3 attempts</li>\n        <li><strong>Retakes Cost $97</strong> - Each retake after the first attempt requires payment</li>\n        <li><strong>Questions Are Unique</strong> - Every attempt generates a fresh set of 50 questions</li>\n        <li><strong>Quiz Scores Count</strong> - Your lesson quiz average (40%) + this exam (60%) = your GPA</li>\n      </ul>\n    </div>\n    <button class="start-exam-btn" id="begin-exam-btn" onclick="beginExam()">I Understand - Begin Exam →</button>\n  </div>\n</div>
-
-<!-- PHASE 2: LOADING -->
+\n<div class="phase active" id="phase-warning">\n <div class="warning-phase">\n <div class="warning-icon">🎯</div>\n <div class="warning-eyebrow">Final Examination</div>\n <h1 class="warning-title" id="warning-course-title">LOADING...</h1>\n <p class="warning-sub">This is the complete final exam. 50 questions spanning all course modules. You have <strong style="color:var(--text)">4 hours</strong>. All questions are uniquely generated - every attempt uses a completely new set.</p>\n <div class="warning-attempts-badge" id="warning-attempts-badge"></div>\n <div class="warning-rules">\n <h3>Exam Rules</h3>\n <ul>\n <li><strong>50 Questions</strong> - Multiple choice, spanning all modules</li>\n <li><strong>4-Hour Time Limit</strong> - Timer starts when you click Begin</li>\n <li><strong>73% Minimum to Pass</strong> - Combined score (40% quiz avg + 60% exam)</li>\n <li><strong>No Going Back</strong> - Once submitted, this attempt is final and locked</li>\n <li><strong>3 Attempts Total</strong> - You have used <span id="attempts-used-inline">0</span> of 3 attempts</li>\n <li><strong>Retakes Cost $97</strong> - Each retake after the first attempt requires payment</li>\n <li><strong>Questions Are Unique</strong> - Every attempt generates a fresh set of 50 questions</li>\n <li><strong>Quiz Scores Count</strong> - Your lesson quiz average (40%) + this exam (60%) = your GPA</li>\n </ul>\n </div>\n <button class="start-exam-btn" id="begin-exam-btn" onclick="beginExam()">I Understand - Begin Exam →</button>\n </div>\n</div>
 <div class="phase" id="phase-loading">
-  <div class="loading-phase">
-    <div class="loading-spinner"></div>
-    <div class="loading-title">Generating Your Exam</div>
-    <div class="loading-sub">Building 50 unique questions for you...</div>
-  </div>
+<div class="loading-phase">
+<div class="loading-spinner"></div>
+<div class="loading-title">Generating Your Exam</div>
+<div class="loading-sub">Building 50 unique questions for you...</div>
 </div>
-
-<!-- PHASE 3: EXAM -->
+</div>
 <div class="phase" id="phase-exam">
-  <div class="exam-phase">
-    <div class="exam-header">
-      <div class="exam-progress-row">
-        <div class="exam-prog-bar"><div class="exam-prog-fill" id="exam-prog-fill" style="width:2%"></div></div>
-        <div class="exam-prog-text" id="exam-prog-text">1 / 50</div>
-      </div>
-      <div class="question-nav-grid" id="question-nav-grid"></div>
-    </div>
-    <div id="exam-question-container"></div>
-  </div>
+<div class="exam-phase">
+<div class="exam-header">
+<div class="exam-progress-row">
+<div class="exam-prog-bar"><div class="exam-prog-fill" id="exam-prog-fill" style="width:2%"></div></div>
+<div class="exam-prog-text" id="exam-prog-text">1 / 50</div>
 </div>
-
-<!-- PHASE 4: RESULTS -->
+<div class="question-nav-grid" id="question-nav-grid"></div>
+</div>
+<div id="exam-question-container"></div>
+</div>
+</div>
 <div class="phase" id="phase-results"></div>
-
 <div class="toast" id="toast"></div>
-
 <script>
 const params = new URLSearchParams(location.search);
 const COURSE_ID = params.get('course') || 'cmo';
 const TOKEN = params.get('token') || 'demo';
 const STUDENT_NAME = params.get('name') || localStorage.getItem('mcademy_name_' + COURSE_ID) || 'Student';
-
 let examQuestions = [];
 let examAnswers = [];
 let currentQ = 0;
 let timerInterval, timeLeft = 4 * 60 * 60; // 4 hours
 let examStarted = false;
-
 const MAX_ATTEMPTS = 3;
 const RETAKE_PRICE = 97; // USD
-
 function getAttemptCount() {
   return parseInt(localStorage.getItem(`mcademy_exam_attempts_${COURSE_ID}`) || '0');
 }
@@ -218,7 +195,6 @@ function incrementAttempt() {
   localStorage.setItem(`mcademy_exam_attempts_${COURSE_ID}`, n);
   return n;
 }
-
 const COURSE_TITLES = {
   // Top 5 Flagship
   cfo:'Fractional CFO Mastery', cmo:'Fractional CMO Mastery',
@@ -229,11 +205,9 @@ const COURSE_TITLES = {
   category:'Category Design & Market Leadership', aimarketing:'AI-Powered Marketing',
   b2bdemand:'B2B Demand Generation', leadership:'Executive Leadership for Consultants'
 };
-
 // Init
 document.getElementById('warning-course-title').textContent = (COURSE_TITLES[COURSE_ID] || 'Course').toUpperCase() + ' - FINAL EXAM';
 document.getElementById('top-title').textContent = (COURSE_TITLES[COURSE_ID] || 'Course') + ' - Final Exam';
-
 // Show attempt count on warning screen
 (function initAttemptBadge() {
   const used = getAttemptCount();
@@ -253,7 +227,6 @@ document.getElementById('top-title').textContent = (COURSE_TITLES[COURSE_ID] || 
     }
   }
 })();
-
 // ── EXAM FLOW ──────────────────────────────────────────────────────────────────
 async function beginExam() {
   // Hard gate: no more than MAX_ATTEMPTS
@@ -280,7 +253,6 @@ async function beginExam() {
     toast('Failed to generate exam: ' + e.message, 'red');
   }
 }
-
 function startTimer() {
   examStarted = true;
   timerInterval = setInterval(() => {
@@ -294,7 +266,6 @@ function startTimer() {
     if(timeLeft <= 0) { clearInterval(timerInterval); submitExam(); }
   }, 1000);
 }
-
 function renderNavGrid() {
   const grid = document.getElementById('question-nav-grid');
   grid.innerHTML = examQuestions.map((q, i) => 
@@ -302,19 +273,16 @@ function renderNavGrid() {
      onclick="goToQuestion(${i})" title="Q${i+1}: ${q.module||''}">${i+1}</button>`
   ).join('');
 }
-
 function goToQuestion(idx) {
   currentQ = idx;
   renderQuestion(idx);
   renderNavGrid();
 }
-
 function renderQuestion(idx) {
   const q = examQuestions[idx];
   const total = examQuestions.length;
   document.getElementById('exam-prog-fill').style.width = `${((idx+1)/total)*100}%`;
   document.getElementById('exam-prog-text').textContent = `${idx+1} / ${total}`;
-
   document.getElementById('exam-question-container').innerHTML = `
     <div class="exam-question-card">
       <div class="exam-q-num">Question ${idx+1} of ${total} - ${q.module || ''}</div>
@@ -338,13 +306,11 @@ function renderQuestion(idx) {
       </div>
     </div>`;
 }
-
 function selectExamAnswer(i) {
   examAnswers[currentQ] = i;
   renderNavGrid();
   renderQuestion(currentQ);
 }
-
 function confirmSubmit() {
   const unanswered = examAnswers.filter(a => a === -1).length;
   if(unanswered > 0) {
@@ -352,17 +318,14 @@ function confirmSubmit() {
   }
   submitExam();
 }
-
 async function submitExam() {
   clearInterval(timerInterval);
   showPhase('loading');
   document.querySelector('.loading-title').textContent = 'Grading Your Exam';
   document.querySelector('.loading-sub').textContent = 'Calculating your score and GPA...';
-
   const progress = JSON.parse(localStorage.getItem('mcademy_progress_' + COURSE_ID) || '{"quizScores":{},"moduleScores":{}}');
   const quizScores = Object.values(progress.quizScores || {}).map(Number).filter(n => !isNaN(n));
   const moduleScores = Object.values(progress.moduleScores || {}).map(Number).filter(n => !isNaN(n));
-
   try {
     const resp = await fetch('/.netlify/functions/course-exam?action=grade', {
       method: 'POST',
@@ -377,14 +340,12 @@ async function submitExam() {
     showPhase('exam');
   }
 }
-
 function renderResults(result) {
   showPhase('results');
   const passed = result.passed;
   const attemptCount = getAttemptCount();
   const attemptsLeft = MAX_ATTEMPTS - attemptCount;
   const gpaColor = passed ? 'var(--green)' : 'var(--red)';
-
   let actionHtml = '';
   if(passed) {
     actionHtml = `<button class="results-btn results-btn-gold" onclick="location.href='/diploma?course=${COURSE_ID}&gpa=${result.gpa}&letter=${encodeURIComponent(result.letter)}&designation=${encodeURIComponent(result.designation)}&name=${encodeURIComponent(STUDENT_NAME)}'">🎓 Claim My Diploma →</button>
@@ -407,7 +368,6 @@ function renderResults(result) {
         <button class="results-btn results-btn-gold" onclick="location.href='/'">Repurchase Course →</button>
       </div>`;
   }
-
   const resultHtml = `
     <div class="results-phase">
       <div class="results-header">
@@ -448,21 +408,17 @@ function renderResults(result) {
         ${!passed ? `<div style="text-align:center;padding:20px;color:var(--dim);font-size:12px;border-top:1px solid var(--border)">Full review unlocked after passing.</div>` : ''}
       </div>
     </div>`;
-
   document.getElementById('phase-results').innerHTML = resultHtml;
 }
-
 function purchaseRetake() {
   // TODO: Connect to payment processor (Stripe/Paddle)
   // For now redirect to a purchase page or show modal
   alert('Retake purchase coming soon. Contact support@markcmo.com to process your retake.');
 }
-
 function showPhase(name) {
   document.querySelectorAll('.phase').forEach(p => p.classList.remove('active'));
   document.getElementById(`phase-${name}`).classList.add('active');
 }
-
 let toastTimer;
 function toast(msg, type='') {
   const el = document.getElementById('toast');
@@ -470,9 +426,7 @@ function toast(msg, type='') {
   clearTimeout(toastTimer);
   toastTimer = setTimeout(() => el.classList.remove('show'), 4000);
 }
-
 </script>
-
 <script>
   // ─── Custom Cursor ───
   var cur = document.getElementById('custom-cursor');

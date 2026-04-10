@@ -64,14 +64,12 @@ margin-bottom:4px;white-space:pre;
 .boot-line:nth-child(13){animation:bootIn 0.05s ease 3.5s forwards}
 .boot-line:nth-child(14){animation:bootIn 0.05s ease 3.8s forwards}
 @keyframes bootIn{to{opacity:1}}
-
 /* LAYOUT */
 .terminal-wrap{
 max-width:1200px;margin:0 auto;padding:20px 24px 60px;
 opacity:0;animation:termIn 0.4s ease 4.2s forwards;
 }
 @keyframes termIn{to{opacity:1}}
-
 /* STATUS BAR */
 .status-bar{
 display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:8px;
@@ -83,7 +81,6 @@ display:inline-block;width:7px;height:7px;background:var(--green);
 margin-right:6px;animation:blink 1.2s step-end infinite;
 }
 @keyframes blink{50%{opacity:0}}
-
 /* HEADER */
 .terminal-header{margin-bottom:28px}
 .header-name{
@@ -106,7 +103,6 @@ letter-spacing:0.5px;
 }
 .header-contact a{color:var(--dim);text-decoration:none;border-bottom:1px solid var(--dimmer)}
 .header-contact a:hover{color:var(--amber);border-color:var(--amber)}
-
 /* SECTION COMMAND HEADERS */
 .cmd{
 font-size:0.85rem;font-weight:600;color:var(--green);
@@ -117,7 +113,6 @@ text-transform:uppercase;letter-spacing:1px;
 .cmd::after{
 content:' [OK]';color:var(--green);font-weight:400;font-size:0.7rem;
 }
-
 /* STAT DASHBOARD */
 .stats-grid{
 display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:0;
@@ -138,7 +133,6 @@ font-size:1.5rem;font-weight:700;color:var(--green);
 position:absolute;top:16px;right:16px;width:6px;height:6px;
 background:var(--green);animation:blink 1.4s step-end infinite;
 }
-
 /* SUMMARY */
 .summary-block{
 border:1px solid var(--border);padding:18px 20px;
@@ -146,7 +140,6 @@ font-size:0.82rem;color:var(--amber);line-height:1.7;
 background:var(--panel);
 }
 .summary-block .prompt{color:var(--dim);margin-bottom:8px;font-size:0.72rem}
-
 /* COMPETENCY GRID */
 .comp-grid{
 display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:0;
@@ -161,7 +154,6 @@ position:relative;padding-left:28px;
 content:'[+]';position:absolute;left:8px;top:8px;
 color:var(--green);font-size:0.7rem;
 }
-
 /* EXPERIENCE RECORDS */
 .exp-record{
 border:1px solid var(--border);margin-bottom:0;background:var(--panel);
@@ -184,7 +176,6 @@ list-style:none;position:relative;padding-left:20px;
 .exp-body li::before{
 content:'>';position:absolute;left:0;top:0;color:var(--green);font-weight:700;
 }
-
 /* DEAL SHEET */
 .deal-table{
 width:100%;border-collapse:collapse;border:1px solid var(--border);
@@ -199,7 +190,6 @@ letter-spacing:1px;font-size:0.68rem;border:1px solid var(--border);
 padding:10px 14px;border:1px solid var(--border);color:var(--amber);
 }
 .deal-table .tag-green{color:var(--green);font-weight:600}
-
 /* CASE STUDIES */
 .case-grid{
 display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:0;
@@ -211,7 +201,6 @@ padding:18px;border:1px solid var(--border);background:var(--panel);
 .case-id{font-size:0.65rem;color:var(--dim);text-transform:uppercase;letter-spacing:1.5px}
 .case-title{font-size:0.85rem;color:var(--orange);margin:6px 0 4px;font-weight:600}
 .case-metric{font-size:1.1rem;color:var(--green);font-weight:700}
-
 /* TECH STACK SCROLL */
 .tech-section{border:1px solid var(--border);overflow:hidden;background:var(--panel)}
 .tech-header{
@@ -241,7 +230,6 @@ display:inline-block;border:1px solid var(--border);
 padding:2px 8px;margin:2px 4px 2px 0;
 }
 .tech-tools span:hover{border-color:var(--amber);color:var(--green)}
-
 /* WINS / DASHBOARD */
 .perf-dashboard{
 display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:0;
@@ -270,7 +258,6 @@ position:absolute;left:12px;top:14px;
 font-size:0.7rem;color:var(--green);font-weight:700;
 }
 .win-item .win-check{color:var(--green);font-weight:700}
-
 /* ACTIONS BAR */
 .actions-bar{
 display:flex;gap:0;margin-top:36px;border:1px solid var(--border);flex-wrap:wrap;
@@ -286,7 +273,6 @@ text-decoration:none;display:flex;align-items:center;justify-content:center;gap:
 }
 .action-btn:hover{background:var(--amber);color:var(--bg)}
 .action-btn.green:hover{background:var(--green);color:var(--bg)}
-
 /* QR CODE */
 .qr-section{
 margin-top:36px;text-align:center;padding:20px;
@@ -294,7 +280,6 @@ border:1px solid var(--border);background:var(--panel);
 }
 .qr-section canvas{margin:10px auto;display:block}
 .qr-label{font-size:0.65rem;color:var(--dim);text-transform:uppercase;letter-spacing:1.5px}
-
 /* FOOTER */
 .terminal-footer{
 margin-top:36px;padding-top:16px;
@@ -302,7 +287,6 @@ border-top:1px solid var(--border);
 font-size:0.68rem;color:var(--dim);
 text-align:center;letter-spacing:1px;
 }
-
 /* RESPONSIVE */
 @media(max-width:768px){
 .terminal-wrap{padding:12px 14px 40px}
@@ -324,7 +308,6 @@ html{font-size:12px}
 .perf-dashboard{grid-template-columns:1fr}
 .boot-overlay{padding:20px}
 }
-
 /* PRINT */
 @media print{
 body::after{display:none}
@@ -345,14 +328,12 @@ body{background:#fff;color:#000;-webkit-print-color-adjust:exact;print-color-adj
 a{color:#000}
 }
 </style>
-
-  <link rel="canonical" href="https://markcmo.com/MLG-Resume-Terminal.html">
-  <meta property="og:type" content="website">
-  <meta property="og:title" content="MLG TERMINAL // Mark Louis Gabrielli Jr. - CMO">
-  <meta property="og:description" content="Bloomberg Terminal style resume for Mark Louis Gabrielli Jr., Chief Marketing Officer and Growth Architect.">
-  <meta property="og:url" content="https://markcmo.com/MLG-Resume-Terminal.html">
-  <meta property="og:site_name" content="MarkCMO">
-
+<link rel="canonical" href="https://markcmo.com/MLG-Resume-Terminal.html">
+<meta property="og:type" content="website">
+<meta property="og:title" content="MLG TERMINAL // Mark Louis Gabrielli Jr. - CMO">
+<meta property="og:description" content="Bloomberg Terminal style resume for Mark Louis Gabrielli Jr., Chief Marketing Officer and Growth Architect.">
+<meta property="og:url" content="https://markcmo.com/MLG-Resume-Terminal.html">
+<meta property="og:site_name" content="MarkCMO">
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
@@ -375,8 +356,6 @@ a{color:#000}
 </script>
 </head>
 <body>
-
-<!-- BOOT SEQUENCE -->
 <div class="boot-overlay" aria-hidden="true">
 <div class="boot-line amber">MLG TERMINAL v4.1.0</div>
 <div class="boot-line dim">Copyright (c) 2026 Mark Louis Gabrielli Jr.</div>
@@ -393,18 +372,12 @@ a{color:#000}
 <div class="boot-line dim">----------------------------------------------</div>
 <div class="boot-line orange">SYSTEM READY. WELCOME, OPERATOR.</div>
 </div>
-
-<!-- MAIN TERMINAL -->
 <div class="terminal-wrap">
-
-<!-- STATUS BAR -->
 <div class="status-bar">
 <div><span class="live-dot"></span>MLG TERMINAL v4.1.0 // ACTIVE SESSION</div>
 <div>LAST UPDATED: 2026-03-17 08:00:00 EST</div>
 <div>STATUS: AVAILABLE FOR ENGAGEMENT</div>
 </div>
-
-<!-- HEADER -->
 <header class="terminal-header">
 <div class="header-name">Mark Louis Gabrielli Jr.<span class="cursor"></span></div>
 <div class="header-title">Chief Marketing Officer / Growth Architect / Revenue Systems Builder</div>
@@ -416,8 +389,6 @@ a{color:#000}
 South Florida
 </div>
 </header>
-
-<!-- STATS DASHBOARD -->
 <div class="cmd">LOAD_DASHBOARD.run</div>
 <div class="stats-grid">
 <div class="stat-cell">
@@ -441,15 +412,11 @@ South Florida
 <div class="stat-value">2</div>
 </div>
 </div>
-
-<!-- EXEC SUMMARY -->
 <div class="cmd">EXEC_SUMMARY.run</div>
 <div class="summary-block">
 <div class="prompt">// EXECUTIVE SUMMARY - CLEARANCE LEVEL: PUBLIC</div>
 Revenue-focused Chief Marketing Officer with a track record of scaling companies from $5M to $10M+ through system-driven marketing architecture. Managed $5M+ in annual advertising budgets across Meta, Google, and emerging channels while building and leading cross-functional teams of 40+ across growth, creative, analytics, and automation. Directly involved in 2 successful company exits (buy-side and sell-side), aligning marketing performance with enterprise valuation drivers. Known for architecting AI-powered marketing systems and scalable infrastructure that reduce CAC, accelerate pipeline, and compound revenue - not just campaigns, but the operating systems behind them.
 </div>
-
-<!-- CORE COMPETENCIES -->
 <div class="cmd">QUERY_COMPETENCIES.run --count=18</div>
 <div class="comp-grid">
 <div class="comp-item">Go-To-Market Strategy</div>
@@ -471,10 +438,7 @@ Revenue-focused Chief Marketing Officer with a track record of scaling companies
 <div class="comp-item">SEO &amp; Technical SEO</div>
 <div class="comp-item">ABM &amp; Buyer Intent Platforms</div>
 </div>
-
-<!-- EXPERIENCE -->
 <div class="cmd">SELECT * FROM EXPERIENCE ORDER BY DATE DESC</div>
-
 <div class="exp-record">
 <div class="exp-head">
 <span class="exp-role">Chief Marketing Officer &amp; Growth Advisor</span>
@@ -493,7 +457,6 @@ Revenue-focused Chief Marketing Officer with a track record of scaling companies
 </ul>
 </div>
 </div>
-
 <div class="exp-record">
 <div class="exp-head">
 <span class="exp-role">VP of Marketing &amp; Growth</span>
@@ -510,7 +473,6 @@ Revenue-focused Chief Marketing Officer with a track record of scaling companies
 </ul>
 </div>
 </div>
-
 <div class="exp-record">
 <div class="exp-head">
 <span class="exp-role">Director of Digital Marketing</span>
@@ -526,7 +488,6 @@ Revenue-focused Chief Marketing Officer with a track record of scaling companies
 </ul>
 </div>
 </div>
-
 <div class="exp-record">
 <div class="exp-head">
 <span class="exp-role">Marketing Strategist &amp; Consultant</span>
@@ -540,8 +501,6 @@ Revenue-focused Chief Marketing Officer with a track record of scaling companies
 </ul>
 </div>
 </div>
-
-<!-- PERFORMANCE DASHBOARD -->
 <div class="cmd">RENDER_PERFORMANCE_DASHBOARD.run</div>
 <div class="perf-dashboard">
 <div class="perf-stat">
@@ -557,8 +516,6 @@ Revenue-focused Chief Marketing Officer with a track record of scaling companies
 <div class="lbl">Revenue Growth</div>
 </div>
 </div>
-
-<!-- DEAL SHEET -->
 <div class="cmd">LOAD_DEAL_SHEET.run</div>
 <table class="deal-table">
 <thead>
@@ -584,8 +541,6 @@ Revenue-focused Chief Marketing Officer with a track record of scaling companies
 </tr>
 </tbody>
 </table>
-
-<!-- CASE STUDIES -->
 <div class="cmd">FETCH_CASE_STUDIES.run</div>
 <div class="case-grid">
 <div class="case-card">
@@ -604,8 +559,6 @@ Revenue-focused Chief Marketing Officer with a track record of scaling companies
 <div class="case-metric">2 Exits</div>
 </div>
 </div>
-
-<!-- TECH STACK -->
 <div class="cmd">DUMP_TECH_STACK.run --verbose --count=109</div>
 <div class="tech-section">
 <div class="tech-header">
@@ -699,8 +652,6 @@ Revenue-focused Chief Marketing Officer with a track record of scaling companies
 </div>
 </div>
 </div>
-
-<!-- WINS -->
 <div class="cmd">LIST_KEY_WINS.run</div>
 <div class="wins-grid">
 <div class="win-item"><span class="win-num">01</span><span class="win-check">[X]</span> Multi-Company Revenue Scale</div>
@@ -710,14 +661,10 @@ Revenue-focused Chief Marketing Officer with a track record of scaling companies
 <div class="win-item"><span class="win-num">05</span><span class="win-check">[X]</span> AI Marketing Infrastructure</div>
 <div class="win-item"><span class="win-num">06</span><span class="win-check">[X]</span> Scalable Marketing Architecture</div>
 </div>
-
-<!-- QR CODE -->
 <div class="qr-section">
 <div class="qr-label">Scan to Connect // linkedin.com/in/marklgabrielli</div>
 <canvas id="qrCanvas" width="150" height="150"></canvas>
 </div>
-
-<!-- ACTIONS -->
 <div class="actions-bar">
 <a href="mailto:mark@markcmo.com" class="action-btn green">[E] Email</a>
 <a href="https://linkedin.com/in/marklgabrielli" target="_blank" rel="noopener noreferrer" class="action-btn">[L] LinkedIn</a>
@@ -725,21 +672,17 @@ Revenue-focused Chief Marketing Officer with a track record of scaling companies
 <a href="https://markcmo.com/book" target="_blank" rel="noopener noreferrer" class="action-btn green">[B] Book a Call</a>
 <button class="action-btn" onclick="window.print()" type="button">[P] Export PDF</button>
 </div>
-
-<!-- FOOTER -->
 <footer style="background:#0a0a0a;border-top:1px solid rgba(255,255,255,0.08);padding:28px 40px;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:16px;font-family:system-ui,sans-serif;">
-  <p style="font-size:11px;color:#555;margin:0;">&copy; 2026 Mark Louis Gabrielli Jr. &middot; markcmo.com &middot; All rights reserved.</p>
-  <div style="display:flex;gap:20px;flex-wrap:wrap;">
-    <a href="https://markcmo.com/portfolio" target="_blank" rel="noopener" style="font-size:11px;color:#888;text-decoration:none;transition:color .2s;" onmouseover="this.style.color='#d4a853'" onmouseout="this.style.color='#888'">Portfolio</a>
-    <a href="https://markcmo.com/book" target="_blank" rel="noopener" style="font-size:11px;color:#888;text-decoration:none;" onmouseover="this.style.color='#d4a853'" onmouseout="this.style.color='#888'">Book a Call</a>
-    <a href="https://markcmo.com/about" target="_blank" rel="noopener" style="font-size:11px;color:#888;text-decoration:none;" onmouseover="this.style.color='#d4a853'" onmouseout="this.style.color='#888'">About</a>
-    <a href="https://markcmo.com/resumes" target="_blank" rel="noopener" style="font-size:11px;color:#888;text-decoration:none;" onmouseover="this.style.color='#d4a853'" onmouseout="this.style.color='#888'">All Resumes</a>
-    <a href="https://linkedin.com/in/marklgabrielli" target="_blank" rel="noopener" style="font-size:11px;color:#4f8fff;text-decoration:none;" onmouseover="this.style.color='#6ba0ff'" onmouseout="this.style.color='#4f8fff'">LinkedIn</a>
-  </div>
-</footer>
-
+<p style="font-size:11px;color:#555;margin:0;">&copy; 2026 Mark Louis Gabrielli Jr. &middot; markcmo.com &middot; All rights reserved.</p>
+<div style="display:flex;gap:20px;flex-wrap:wrap;">
+<a href="https://markcmo.com/portfolio" target="_blank" rel="noopener" style="font-size:11px;color:#888;text-decoration:none;transition:color .2s;" onmouseover="this.style.color='#d4a853'" onmouseout="this.style.color='#888'">Portfolio</a>
+<a href="https://markcmo.com/book" target="_blank" rel="noopener" style="font-size:11px;color:#888;text-decoration:none;" onmouseover="this.style.color='#d4a853'" onmouseout="this.style.color='#888'">Book a Call</a>
+<a href="https://markcmo.com/about" target="_blank" rel="noopener" style="font-size:11px;color:#888;text-decoration:none;" onmouseover="this.style.color='#d4a853'" onmouseout="this.style.color='#888'">About</a>
+<a href="https://markcmo.com/resumes" target="_blank" rel="noopener" style="font-size:11px;color:#888;text-decoration:none;" onmouseover="this.style.color='#d4a853'" onmouseout="this.style.color='#888'">All Resumes</a>
+<a href="https://linkedin.com/in/marklgabrielli" target="_blank" rel="noopener" style="font-size:11px;color:#4f8fff;text-decoration:none;" onmouseover="this.style.color='#6ba0ff'" onmouseout="this.style.color='#4f8fff'">LinkedIn</a>
 </div>
-
+</footer>
+</div>
 <script>
 // QR Code generator - minimal inline implementation (no CDN)
 (function(){
@@ -749,7 +692,6 @@ var canvas=document.getElementById('qrCanvas');
 if(!canvas)return;
 var ctx=canvas.getContext('2d');
 var url='https://linkedin.com/in/marklgabrielli';
-
 // Minimal QR matrix generator
 function generateQR(text){
 var size=25;
@@ -829,14 +771,11 @@ matrix[r][c]=bit;
 }
 return matrix;
 }
-
 var matrix=generateQR(url);
 var cellSize=Math.floor(150/matrix.length);
 var offset=Math.floor((150-cellSize*matrix.length)/2);
-
 ctx.fillStyle='#ffffff';
 ctx.fillRect(0,0,150,150);
-
 ctx.fillStyle='#0a0a0a';
 for(var r=0;r<matrix.length;r++){
 for(var c=0;c<matrix[r].length;c++){

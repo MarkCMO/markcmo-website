@@ -10,33 +10,33 @@
 </style>
 </head><body>
 <section style="background:#0d0d0d;padding:3rem 2rem 2rem;border-bottom:1px solid rgba(255,255,255,0.06);">
-  <div style="max-width:640px;margin:0 auto;">
-    <div style="font-size:0.7rem;letter-spacing:0.2em;color:#C6A654;text-transform:uppercase;margin-bottom:0.5rem;">MG-SOW-001</div>
-    <h1 style="font-family:'Barlow Condensed',sans-serif;font-size:2.2rem;font-weight:700;letter-spacing:0.05em;color:#fff;margin:0 0 0.5rem;text-transform:uppercase;">Statement of Work</h1>
-    <p style="color:#888;font-size:0.85rem;margin:0;">Define the scope, timeline, and fees for a specific engagement. Both parties sign and receive a copy.</p>
-  </div>
+<div style="max-width:640px;margin:0 auto;">
+<div style="font-size:0.7rem;letter-spacing:0.2em;color:#C6A654;text-transform:uppercase;margin-bottom:0.5rem;">MG-SOW-001</div>
+<h1 style="font-family:'Barlow Condensed',sans-serif;font-size:2.2rem;font-weight:700;letter-spacing:0.05em;color:#fff;margin:0 0 0.5rem;text-transform:uppercase;">Statement of Work</h1>
+<p style="color:#888;font-size:0.85rem;margin:0;">Define the scope, timeline, and fees for a specific engagement. Both parties sign and receive a copy.</p>
+</div>
 </section>
 <main style="background:#0d0d0d;min-height:60vh;">
-  <div class="doc-form-wrap">
-    <div class="required-note">All fields marked with * are required.</div>
-    <div class="form-section"><div class="form-section-label">Effective Date</div>
-      <div class="form-row"><label>Effective Date *</label><input type="date" id="eff_date" required/></div>
-    </div>
-    <div class="form-section"><div class="form-section-label">Client Information</div>
-      <div class="form-row"><label>Full Legal Name *</label><input type="text" id="client_name" placeholder="Jane Smith" required/></div>
-      <div class="form-row"><label>Company Name *</label><input type="text" id="client_company" placeholder="Acme Corp LLC" required/></div>
-      <div class="form-row"><label>Email Address *</label><input type="email" id="client_email" placeholder="jane@acmecorp.com" required/></div>
-      <div class="form-row"><label>Phone</label><input type="tel" id="client_phone" placeholder="321-555-0000"/></div>
-    </div>
-    <div class="form-section"><div class="form-section-label">Engagement Details</div>
-      <div class="form-row"><label>Project Title *</label><input type="text" id="project_title" placeholder="Q2 Go-to-Market Strategy" required/></div>
-      <div class="form-row"><label>Start Date *</label><input type="date" id="start_date" required/></div>
-      <div class="form-row"><label>Engagement Fee</label><input type="text" id="fee" placeholder="$5,000 / month"/></div>
-      <div class="form-row"><label>Payment Schedule</label><input type="text" id="payment" placeholder="Net 15, invoiced monthly"/></div>
-    </div>
-    <button id="generate-btn" onclick="generate()">✍ Sign &amp; Submit</button>
-    <div id="form-status" class="form-status"></div>
-  </div>
+<div class="doc-form-wrap">
+<div class="required-note">All fields marked with * are required.</div>
+<div class="form-section"><div class="form-section-label">Effective Date</div>
+<div class="form-row"><label>Effective Date *</label><input type="date" id="eff_date" required/></div>
+</div>
+<div class="form-section"><div class="form-section-label">Client Information</div>
+<div class="form-row"><label>Full Legal Name *</label><input type="text" id="client_name" placeholder="Jane Smith" required/></div>
+<div class="form-row"><label>Company Name *</label><input type="text" id="client_company" placeholder="Acme Corp LLC" required/></div>
+<div class="form-row"><label>Email Address *</label><input type="email" id="client_email" placeholder="jane@acmecorp.com" required/></div>
+<div class="form-row"><label>Phone</label><input type="tel" id="client_phone" placeholder="321-555-0000"/></div>
+</div>
+<div class="form-section"><div class="form-section-label">Engagement Details</div>
+<div class="form-row"><label>Project Title *</label><input type="text" id="project_title" placeholder="Q2 Go-to-Market Strategy" required/></div>
+<div class="form-row"><label>Start Date *</label><input type="date" id="start_date" required/></div>
+<div class="form-row"><label>Engagement Fee</label><input type="text" id="fee" placeholder="$5,000 / month"/></div>
+<div class="form-row"><label>Payment Schedule</label><input type="text" id="payment" placeholder="Net 15, invoiced monthly"/></div>
+</div>
+<button id="generate-btn" onclick="generate()">✍ Sign &amp; Submit</button>
+<div id="form-status" class="form-status"></div>
+</div>
 </main>
 <script src="form-engine.js"></script>
 <script>

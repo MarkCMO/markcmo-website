@@ -1,7 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<!-- Google tag (gtag.js) -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-BXK5Y3DQBL"></script>
 <script>
   window.dataLayer = window.dataLayer || [];
@@ -33,23 +32,19 @@
   .money-callout { background: #f0fff4; border: 1px solid #4caf50; padding: 1rem 1.5rem; border-radius: 4px; margin: 1rem 0; }
   .toc a { color: #7a6020; display: block; padding: 0.2rem 0; }
   @media print { body { max-width: none; } }
-
     html, body, * { cursor: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAARCAYAAADUryzEAAAAV0lEQVR42mMQFBT8z0AJABlwbFnIf4oNINsQZAPIMgTdAJINwWYASYbgMoBoQ/AZQJQhhAwgaAguA4iOHXSFJMcKSANME4yNjEkKSLLzxcAbgBwWDPQGAEWguILiE6w1AAAAAElFTkSuQmCC') 0 0, default !important; }
-
   
     html { overflow-x: hidden; }
     * { box-sizing: border-box; }
     img, video, iframe, table { max-width: 100%; }
   </style>
-
-  <meta name="description" content="MarkCMO Webinar Funnel, Full Strategy & Setup Guide - MarkCMO provides fractional CMO and strategic marketing services for growth-stage companies.">
-  <link rel="canonical" href="https://markcmo.com/webinar-strategy-guide.html">
-  <meta property="og:type" content="website">
-  <meta property="og:title" content="MarkCMO Webinar Funnel, Full Strategy & Setup Guide">
-  <meta property="og:description" content="MarkCMO Webinar Funnel, Full Strategy & Setup Guide - MarkCMO provides fractional CMO and strategic marketing services for growth-stage companies.">
-  <meta property="og:url" content="https://markcmo.com/webinar-strategy-guide.html">
-  <meta property="og:site_name" content="MarkCMO">
-
+<meta name="description" content="MarkCMO Webinar Funnel, Full Strategy & Setup Guide - MarkCMO provides fractional CMO and strategic marketing services for growth-stage companies.">
+<link rel="canonical" href="https://markcmo.com/webinar-strategy-guide.html">
+<meta property="og:type" content="website">
+<meta property="og:title" content="MarkCMO Webinar Funnel, Full Strategy & Setup Guide">
+<meta property="og:description" content="MarkCMO Webinar Funnel, Full Strategy & Setup Guide - MarkCMO provides fractional CMO and strategic marketing services for growth-stage companies.">
+<meta property="og:url" content="https://markcmo.com/webinar-strategy-guide.html">
+<meta property="og:site_name" content="MarkCMO">
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
@@ -72,96 +67,81 @@
 </script>
 </head>
 <body>
-
-
 <h1>MarkCMO.com, Webinar Funnel & Monetization Strategy</h1>
 <p class="subtitle">Full Infrastructure Guide · Setup, Stack, Email Sequences, Monetization Tiers, COI &amp; Referral Programs</p>
-
 <p><strong>Prepared for:</strong> Mark Gabrielli · markcmo.com<br>
 <strong>Version:</strong> 1.0 · March 2026<br>
 <strong>Status:</strong> <span class="badge">READY TO DEPLOY</span></p>
-
 <div class="highlight">
-  <strong>Executive Summary:</strong> This document describes the complete webinar infrastructure built for markcmo.com, from registration page to post-webinar revenue. Total revenue potential per webinar cohort: <strong>$15,000-$85,000+</strong> depending on attendee size and conversion rates. The system runs on your existing Netlify hosting with free/low-cost third-party tools.
+<strong>Executive Summary:</strong> This document describes the complete webinar infrastructure built for markcmo.com, from registration page to post-webinar revenue. Total revenue potential per webinar cohort: <strong>$15,000-$85,000+</strong> depending on attendee size and conversion rates. The system runs on your existing Netlify hosting with free/low-cost third-party tools.
 </div>
-
 <hr class="section-divider">
 <h2>Table of Contents</h2>
 <div class="toc">
-  <a href="#1">1. Files Delivered</a>
-  <a href="#2">2. Recommended Tech Stack (Free / Low-Cost)</a>
-  <a href="#3">3. Setup Checklist</a>
-  <a href="#4">4. The Full Funnel Architecture</a>
-  <a href="#5">5. Email Sequence (Full Copy)</a>
-  <a href="#6">6. Monetization Tiers &amp; Revenue Projections</a>
-  <a href="#7">7. Referral Partner Program</a>
-  <a href="#8">8. COI (Center of Influence) Program</a>
-  <a href="#9">9. Digital Product Strategy</a>
-  <a href="#10">10. The Live Webinar (Hosting Options)</a>
-  <a href="#11">11. Ongoing Webinar Cadence</a>
-  <a href="#12">12. Revenue Projection Model</a>
+<a href="#1">1. Files Delivered</a>
+<a href="#2">2. Recommended Tech Stack (Free / Low-Cost)</a>
+<a href="#3">3. Setup Checklist</a>
+<a href="#4">4. The Full Funnel Architecture</a>
+<a href="#5">5. Email Sequence (Full Copy)</a>
+<a href="#6">6. Monetization Tiers &amp; Revenue Projections</a>
+<a href="#7">7. Referral Partner Program</a>
+<a href="#8">8. COI (Center of Influence) Program</a>
+<a href="#9">9. Digital Product Strategy</a>
+<a href="#10">10. The Live Webinar (Hosting Options)</a>
+<a href="#11">11. Ongoing Webinar Cadence</a>
+<a href="#12">12. Revenue Projection Model</a>
 </div>
-
 <hr class="section-divider">
-
 <h2 id="1">1. Files Delivered</h2>
-
 <table>
-  <tr><th>File</th><th>Purpose</th><th>Status</th></tr>
-  <tr><td><code>webinar.html</code></td><td>Main registration landing page with full pitch, curriculum, pricing tiers</td><td>✅ Complete</td></tr>
-  <tr><td><code>webinar-confirmation.html</code></td><td>Post-signup confirmation with immediate upsells, referral program, digital product</td><td>✅ Complete</td></tr>
-  <tr><td><code>webinar-playbook-delivery.html</code></td><td>Post-webinar page with PDF download, consulting pitch, personal note from Mark</td><td>✅ Complete</td></tr>
-  <tr><td><code>netlify/functions/webinar-signup.js</code></td><td>Backend function: stores leads in JSONBin, sends confirmation email via SendGrid with ICS calendar invite</td><td>✅ Complete</td></tr>
+<tr><th>File</th><th>Purpose</th><th>Status</th></tr>
+<tr><td><code>webinar.html</code></td><td>Main registration landing page with full pitch, curriculum, pricing tiers</td><td>✅ Complete</td></tr>
+<tr><td><code>webinar-confirmation.html</code></td><td>Post-signup confirmation with immediate upsells, referral program, digital product</td><td>✅ Complete</td></tr>
+<tr><td><code>webinar-playbook-delivery.html</code></td><td>Post-webinar page with PDF download, consulting pitch, personal note from Mark</td><td>✅ Complete</td></tr>
+<tr><td><code>netlify/functions/webinar-signup.js</code></td><td>Backend function: stores leads in JSONBin, sends confirmation email via SendGrid with ICS calendar invite</td><td>✅ Complete</td></tr>
 </table>
-
 <h2 id="2">2. Recommended Tech Stack (Free / Low-Cost)</h2>
-
 <table>
-  <tr><th>Function</th><th>Tool</th><th>Cost</th><th>Why</th></tr>
-  <tr><td>Website hosting</td><td>Netlify (existing)</td><td>Free</td><td>Already deployed</td></tr>
-  <tr><td>Form backend</td><td>Netlify Functions (existing)</td><td>Free (125k/mo)</td><td>Already integrated</td></tr>
-  <tr><td>Transactional email</td><td>SendGrid</td><td>Free (100/day)</td><td>Calendar ICS + confirmation</td></tr>
-  <tr><td>Email marketing / sequences</td><td>Mailchimp</td><td>Free ≤ 500 contacts</td><td>Automation, tagging, drip sequences</td></tr>
-  <tr><td>Lead storage</td><td>JSONBin.io (existing)</td><td>Free</td><td>Already in your Netlify functions</td></tr>
-  <tr><td>Webinar hosting, FREE</td><td>Zoom (free tier)</td><td>Free (40 min limit)</td><td>Fine for ≤ 100 attendees with upgrade prompt at 40 min</td></tr>
-  <tr><td>Webinar hosting, BEST</td><td>Riverside.fm (existing)</td><td>$15-$24/mo</td><td>Professional recording, multitrack, repurpose to podcast</td></tr>
-  <tr><td>Webinar hosting, SCALE</td><td>Demio or Livestorm</td><td>$49-$99/mo</td><td>Built-in registration, analytics, replay</td></tr>
-  <tr><td>Calendar invites</td><td>ICS file (built-in, free)</td><td>$0</td><td>Already built into the Netlify function</td></tr>
-  <tr><td>Payments</td><td>Stripe</td><td>2.9% + 30¢</td><td>CMO Audit upsell, digital products</td></tr>
-  <tr><td>Digital product delivery</td><td>Gumroad or Lemon Squeezy</td><td>Free (5-10% fee)</td><td>CMO Accelerator Kit, Playbook paid version</td></tr>
-  <tr><td>CRM / pipeline</td><td>HubSpot (free CRM)</td><td>Free</td><td>Track attendees → leads → clients</td></tr>
-  <tr><td>Recording/replay</td><td>Loom or YouTube (unlisted)</td><td>Free</td><td>48-hour replay access</td></tr>
+<tr><th>Function</th><th>Tool</th><th>Cost</th><th>Why</th></tr>
+<tr><td>Website hosting</td><td>Netlify (existing)</td><td>Free</td><td>Already deployed</td></tr>
+<tr><td>Form backend</td><td>Netlify Functions (existing)</td><td>Free (125k/mo)</td><td>Already integrated</td></tr>
+<tr><td>Transactional email</td><td>SendGrid</td><td>Free (100/day)</td><td>Calendar ICS + confirmation</td></tr>
+<tr><td>Email marketing / sequences</td><td>Mailchimp</td><td>Free ≤ 500 contacts</td><td>Automation, tagging, drip sequences</td></tr>
+<tr><td>Lead storage</td><td>JSONBin.io (existing)</td><td>Free</td><td>Already in your Netlify functions</td></tr>
+<tr><td>Webinar hosting, FREE</td><td>Zoom (free tier)</td><td>Free (40 min limit)</td><td>Fine for ≤ 100 attendees with upgrade prompt at 40 min</td></tr>
+<tr><td>Webinar hosting, BEST</td><td>Riverside.fm (existing)</td><td>$15-$24/mo</td><td>Professional recording, multitrack, repurpose to podcast</td></tr>
+<tr><td>Webinar hosting, SCALE</td><td>Demio or Livestorm</td><td>$49-$99/mo</td><td>Built-in registration, analytics, replay</td></tr>
+<tr><td>Calendar invites</td><td>ICS file (built-in, free)</td><td>$0</td><td>Already built into the Netlify function</td></tr>
+<tr><td>Payments</td><td>Stripe</td><td>2.9% + 30¢</td><td>CMO Audit upsell, digital products</td></tr>
+<tr><td>Digital product delivery</td><td>Gumroad or Lemon Squeezy</td><td>Free (5-10% fee)</td><td>CMO Accelerator Kit, Playbook paid version</td></tr>
+<tr><td>CRM / pipeline</td><td>HubSpot (free CRM)</td><td>Free</td><td>Track attendees → leads → clients</td></tr>
+<tr><td>Recording/replay</td><td>Loom or YouTube (unlisted)</td><td>Free</td><td>48-hour replay access</td></tr>
 </table>
-
 <div class="money-callout">
-  <strong>💰 Total Monthly Cost (Starter Stack):</strong> $0-$24/mo<br>
-  Riverside ($24) + SendGrid free + Mailchimp free + JSONBin free + Netlify free + Zoom free
+<strong>💰 Total Monthly Cost (Starter Stack):</strong> $0-$24/mo<br>
+Riverside ($24) + SendGrid free + Mailchimp free + JSONBin free + Netlify free + Zoom free
 </div>
-
 <h2 id="3">3. Setup Checklist</h2>
-
 <h3>A. Environment Variables (Netlify Dashboard → Site Settings → Environment Variables)</h3>
 <table>
-  <tr><th>Variable</th><th>Value</th><th>Where to get it</th></tr>
-  <tr><td><code>SENDGRID_API_KEY</code></td><td>Your SendGrid API key</td><td>sendgrid.com → Settings → API Keys</td></tr>
-  <tr><td><code>FROM_EMAIL</code></td><td><code><a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="305d51425b705d51425b535d5f1e535f5d">[email&#160;protected]</a></code></td><td>Must be verified in SendGrid</td></tr>
-  <tr><td><code>NOTIFY_EMAIL</code></td><td><code><a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="600d01120b200d01120b030d0f4e030f0d">[email&#160;protected]</a></code></td><td>Where new registrant alerts go</td></tr>
-  <tr><td><code>JSONBIN_API_KEY</code></td><td>Your JSONBin master key</td><td>jsonbin.io → API Keys</td></tr>
-  <tr><td><code>JSONBIN_BIN_ID</code></td><td>New bin for webinar leads</td><td>Create at jsonbin.io → New Bin</td></tr>
+<tr><th>Variable</th><th>Value</th><th>Where to get it</th></tr>
+<tr><td><code>SENDGRID_API_KEY</code></td><td>Your SendGrid API key</td><td>sendgrid.com → Settings → API Keys</td></tr>
+<tr><td><code>FROM_EMAIL</code></td><td><code><a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="305d51425b705d51425b535d5f1e535f5d">[email&#160;protected]</a></code></td><td>Must be verified in SendGrid</td></tr>
+<tr><td><code>NOTIFY_EMAIL</code></td><td><code><a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="600d01120b200d01120b030d0f4e030f0d">[email&#160;protected]</a></code></td><td>Where new registrant alerts go</td></tr>
+<tr><td><code>JSONBIN_API_KEY</code></td><td>Your JSONBin master key</td><td>jsonbin.io → API Keys</td></tr>
+<tr><td><code>JSONBIN_BIN_ID</code></td><td>New bin for webinar leads</td><td>Create at jsonbin.io → New Bin</td></tr>
 </table>
-
 <h3>B. One-Time Setup Tasks</h3>
 <ol>
-  <li>Create a SendGrid account → verify <code><a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="80ede1f2ebc0ede1f2ebe3edefaee3efed">[email&#160;protected]</a></code> as sender domain</li>
-  <li>Create a Zoom or Riverside webinar link → update <code>WEBINAR_CONFIG.zoomLink</code> in <code>webinar-signup.js</code></li>
-  <li>Update <code>WEBINAR_CONFIG.date</code> in the Netlify function with your first session datetime (UTC)</li>
-  <li>Create a JSONBin bin for webinar leads → set bin ID in env vars</li>
-  <li>Upload the Revenue Leak Playbook PDF to <code>/pdfs/markcmo-revenue-leak-playbook.pdf</code> on your site</li>
-  <li>Add "Webinar" to the main nav in <code>index.html</code> (optional, already done on webinar-specific pages)</li>
-  <li>Set up Mailchimp audience + automation for attendee drip sequence</li>
-  <li>Set up Stripe product for CMO Audit ($997) and CMO Accelerator Kit ($47)</li>
+<li>Create a SendGrid account → verify <code><a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="80ede1f2ebc0ede1f2ebe3edefaee3efed">[email&#160;protected]</a></code> as sender domain</li>
+<li>Create a Zoom or Riverside webinar link → update <code>WEBINAR_CONFIG.zoomLink</code> in <code>webinar-signup.js</code></li>
+<li>Update <code>WEBINAR_CONFIG.date</code> in the Netlify function with your first session datetime (UTC)</li>
+<li>Create a JSONBin bin for webinar leads → set bin ID in env vars</li>
+<li>Upload the Revenue Leak Playbook PDF to <code>/pdfs/markcmo-revenue-leak-playbook.pdf</code> on your site</li>
+<li>Add "Webinar" to the main nav in <code>index.html</code> (optional, already done on webinar-specific pages)</li>
+<li>Set up Mailchimp audience + automation for attendee drip sequence</li>
+<li>Set up Stripe product for CMO Audit ($997) and CMO Accelerator Kit ($47)</li>
 </ol>
-
 <h3>C. Webinar Date Configuration</h3>
 <p>To update the webinar date, open <code>netlify/functions/webinar-signup.js</code> and change:</p>
 <pre style="background:#f4f4f4;padding:1rem;border-radius:4px;font-size:0.82rem;overflow:auto;">
@@ -169,404 +149,338 @@ date: "20260401T180000Z",   // e.g. April 1, 2026 at 6:00 PM UTC
 endDate: "20260401T193000Z", // 75 min later
 zoomLink: "https://zoom.us/j/YOUR_MEETING_ID",
 </pre>
-
 <hr class="section-divider">
-
 <h2 id="4">4. The Full Funnel Architecture</h2>
-
 <div class="funnel-step">
-  <h4>Stage 1: Discovery → webinar.html</h4>
-  SEO, social, LinkedIn posts, email blasts, podcast mentions, direct referrals → webinar.html registration page
+<h4>Stage 1: Discovery → webinar.html</h4>
+SEO, social, LinkedIn posts, email blasts, podcast mentions, direct referrals → webinar.html registration page
 </div>
-
 <div class="funnel-step">
-  <h4>Stage 2: Registration</h4>
-  Form submit → <code>netlify/functions/webinar-signup.js</code> → stores lead → sends confirmation email with ICS calendar file → redirects to webinar-confirmation.html
+<h4>Stage 2: Registration</h4>
+Form submit → <code>netlify/functions/webinar-signup.js</code> → stores lead → sends confirmation email with ICS calendar file → redirects to webinar-confirmation.html
 </div>
-
 <div class="funnel-step">
-  <h4>Stage 3: Confirmation Page (webinar-confirmation.html)</h4>
-  Personalized greeting → next steps → <strong>immediate upsell: CMO Audit ($997)</strong> → <strong>digital product: CMO Kit ($47)</strong> → referral partner program → COI program
+<h4>Stage 3: Confirmation Page (webinar-confirmation.html)</h4>
+Personalized greeting → next steps → <strong>immediate upsell: CMO Audit ($997)</strong> → <strong>digital product: CMO Kit ($47)</strong> → referral partner program → COI program
 </div>
-
 <div class="funnel-step">
-  <h4>Stage 4: Pre-Webinar Drip (Mailchimp / Email)</h4>
-  T-7 days: welcome + prep questions | T-2 days: reminder + tease | T-1 day: reminder + agenda | T-2 hours: final link + "bring your questions"
+<h4>Stage 4: Pre-Webinar Drip (Mailchimp / Email)</h4>
+T-7 days: welcome + prep questions | T-2 days: reminder + tease | T-1 day: reminder + agenda | T-2 hours: final link + "bring your questions"
 </div>
-
 <div class="funnel-step">
-  <h4>Stage 5: Live Webinar (Riverside / Zoom)</h4>
-  75-minute session → mid-session: CMO Audit offer mentioned once → end: playbook announced + call-to-action for strategy call
+<h4>Stage 5: Live Webinar (Riverside / Zoom)</h4>
+75-minute session → mid-session: CMO Audit offer mentioned once → end: playbook announced + call-to-action for strategy call
 </div>
-
 <div class="funnel-step">
-  <h4>Stage 6: Post-Webinar Email (T+0 hours)</h4>
-  Playbook delivery email with download link → webinar-playbook-delivery.html → free strategy call CTA → paid engagement options
+<h4>Stage 6: Post-Webinar Email (T+0 hours)</h4>
+Playbook delivery email with download link → webinar-playbook-delivery.html → free strategy call CTA → paid engagement options
 </div>
-
 <div class="funnel-step">
-  <h4>Stage 7: Follow-Up Sequence (T+1 to T+14 days)</h4>
-  T+1: "What did you think?" | T+3: case study email | T+7: hard CTA for strategy call | T+14: last chance for CMO Audit offer
+<h4>Stage 7: Follow-Up Sequence (T+1 to T+14 days)</h4>
+T+1: "What did you think?" | T+3: case study email | T+7: hard CTA for strategy call | T+14: last chance for CMO Audit offer
 </div>
-
 <hr class="section-divider">
-
 <h2 id="5">5. Email Sequence (Full Copy Framework)</h2>
-
 <h3>Email 1: Immediate Confirmation (auto-sent by Netlify function)</h3>
 <p><strong>Subject:</strong> ✅ You're registered: "The Revenue Leak Audit", here's your calendar invite</p>
 <p><em>Content: Webinar details, ICS attachment, prep questions, upsell offer. This email is fully built into the Netlify function.</em></p>
-
 <h3>Email 2: T-2 Days (Mailchimp automation)</h3>
 <p><strong>Subject:</strong> 48 hours out, what most people miss about audits</p>
 <p>Teaser content about one of the 7 revenue leaks. Short, punchy. Drives curiosity. No links except "add to calendar" and "invite a colleague."</p>
-
 <h3>Email 3: T-1 Day</h3>
 <p><strong>Subject:</strong> Tomorrow at [TIME], your prep checklist</p>
 <p>Bulleted checklist: have your revenue numbers handy, think of one thing you can't figure out, block 90 minutes. Replay will be available 48 hours only.</p>
-
 <h3>Email 4: T-2 Hours</h3>
 <p><strong>Subject:</strong> Starting in 2 hours, Zoom link inside</p>
 <p>One-click join button. "Bring your biggest marketing question." No fluff.</p>
-
 <h3>Email 5: Post-Webinar Playbook Delivery (T+0 hours)</h3>
 <p><strong>Subject:</strong> Your Revenue Leak Playbook is ready (+ a note from Mark)</p>
 <p>Playbook download link → webinar-playbook-delivery.html. Personal note from Mark. Strategy call CTA. CMO Audit offer with deadline.</p>
-
 <h3>Email 6: T+3 Days</h3>
 <p><strong>Subject:</strong> The $800K in pipeline they didn't know they had</p>
 <p>Short case study (anonymized). One company. What we found. What we fixed. What it cost. What it returned. Closes with: "If that sounds familiar, the call takes 30 minutes."</p>
-
 <h3>Email 7: T+7 Days</h3>
 <p><strong>Subject:</strong> Real talk: did you use the playbook?</p>
 <p>Low-key, personal tone. "If you've been meaning to but haven't had time, here's the fast-start version." 3-bullet version of the audit checklist. Strategy call link.</p>
-
 <h3>Email 8: T+14 Days (Last Chance)</h3>
 <p><strong>Subject:</strong> Closing this out</p>
 <p>"The CMO Audit offer from the webinar closes on Friday. After that, regular pricing applies." Clear scarcity. No fake urgency, set a real deadline and honor it.</p>
-
 <hr class="section-divider">
-
 <h2 id="6">6. Monetization Tiers &amp; Revenue Projections</h2>
-
 <table>
-  <tr><th>Tier</th><th>Offer</th><th>Price</th><th>What It Is</th></tr>
-  <tr><td><strong>T0, Attend</strong></td><td>Webinar Registration</td><td>$0</td><td>Lead capture. Goal: maximize volume.</td></tr>
-  <tr><td><strong>T1, Accelerate</strong></td><td>CMO Audit + Sprint Blueprint</td><td>$997</td><td>Personal 90-min audit + 90-day sprint document + 2 check-ins. Upsold on confirmation page and post-webinar email.</td></tr>
-  <tr><td><strong>T2, Intensive</strong></td><td>VIP Strategy Day</td><td>$2,500</td><td>Full-day close look. On-site or virtual. For companies ready to move fast.</td></tr>
-  <tr><td><strong>T3, Transform</strong></td><td>Fractional CMO Retainer</td><td>$5k-$15k/mo</td><td>Ongoing fractional CMO/COO engagement. Webinar is the top-of-funnel.</td></tr>
-  <tr><td><strong>D1, Digital</strong></td><td>CMO Accelerator Kit</td><td>$47</td><td>17-template library. Sold on confirmation page and in follow-up email.</td></tr>
-  <tr><td><strong>D2, Digital</strong></td><td>Revenue Leak Playbook (Paid Version)</td><td>$97</td><td>Expanded 40-page version with case studies. For those who can't attend live.</td></tr>
+<tr><th>Tier</th><th>Offer</th><th>Price</th><th>What It Is</th></tr>
+<tr><td><strong>T0, Attend</strong></td><td>Webinar Registration</td><td>$0</td><td>Lead capture. Goal: maximize volume.</td></tr>
+<tr><td><strong>T1, Accelerate</strong></td><td>CMO Audit + Sprint Blueprint</td><td>$997</td><td>Personal 90-min audit + 90-day sprint document + 2 check-ins. Upsold on confirmation page and post-webinar email.</td></tr>
+<tr><td><strong>T2, Intensive</strong></td><td>VIP Strategy Day</td><td>$2,500</td><td>Full-day close look. On-site or virtual. For companies ready to move fast.</td></tr>
+<tr><td><strong>T3, Transform</strong></td><td>Fractional CMO Retainer</td><td>$5k-$15k/mo</td><td>Ongoing fractional CMO/COO engagement. Webinar is the top-of-funnel.</td></tr>
+<tr><td><strong>D1, Digital</strong></td><td>CMO Accelerator Kit</td><td>$47</td><td>17-template library. Sold on confirmation page and in follow-up email.</td></tr>
+<tr><td><strong>D2, Digital</strong></td><td>Revenue Leak Playbook (Paid Version)</td><td>$97</td><td>Expanded 40-page version with case studies. For those who can't attend live.</td></tr>
 </table>
-
 <hr class="section-divider">
-
 <h2 id="7">7. Referral Partner Program</h2>
-
 <div class="highlight">
-  <strong>The Pitch:</strong> "Know a founder, CEO, or VP who's struggling with their marketing? Make one intro. If they sign, you earn 20% of their first 90 days, with no cap."
+<strong>The Pitch:</strong> "Know a founder, CEO, or VP who's struggling with their marketing? Make one intro. If they sign, you earn 20% of their first 90 days, with no cap."
 </div>
-
 <h3>Terms</h3>
 <ul>
-  <li>Commission: <strong>20% of first 90 days</strong> of any referred client who signs a fractional engagement</li>
-  <li>Example: $5,000/month client → $3,000 paid to referrer within 30 days of client's first payment</li>
-  <li>Qualification: Lead must be new to Mark (no existing contact), and referrer must make a warm introduction (email or phone)</li>
-  <li>Payout: PayPal, Stripe transfer, or check, referrer's choice</li>
-  <li>Tracking: Honor system + email confirmation. Sign the Referral Partnership Agreement (already on the site: <code>documents/referral.html</code>)</li>
-  <li>Expiry: 90-day cookie, if the referral converts within 90 days of intro, commission applies</li>
+<li>Commission: <strong>20% of first 90 days</strong> of any referred client who signs a fractional engagement</li>
+<li>Example: $5,000/month client → $3,000 paid to referrer within 30 days of client's first payment</li>
+<li>Qualification: Lead must be new to Mark (no existing contact), and referrer must make a warm introduction (email or phone)</li>
+<li>Payout: PayPal, Stripe transfer, or check, referrer's choice</li>
+<li>Tracking: Honor system + email confirmation. Sign the Referral Partnership Agreement (already on the site: <code>documents/referral.html</code>)</li>
+<li>Expiry: 90-day cookie, if the referral converts within 90 days of intro, commission applies</li>
 </ul>
-
 <h3>Who to Target as Referral Partners</h3>
 <ul>
-  <li>Attendees of this webinar (they've seen Mark's quality firsthand)</li>
-  <li>Past clients (best source, already trust Mark)</li>
-  <li>Executive recruiters (often know companies needing CMO-level help)</li>
-  <li>Business brokers and M&amp;A advisors</li>
-  <li>CPAs and business accountants (see their clients' P&amp;Ls)</li>
-  <li>Business coaches and consultants who don't offer marketing services</li>
+<li>Attendees of this webinar (they've seen Mark's quality firsthand)</li>
+<li>Past clients (best source, already trust Mark)</li>
+<li>Executive recruiters (often know companies needing CMO-level help)</li>
+<li>Business brokers and M&amp;A advisors</li>
+<li>CPAs and business accountants (see their clients' P&amp;Ls)</li>
+<li>Business coaches and consultants who don't offer marketing services</li>
 </ul>
-
 <h2 id="8">8. COI (Center of Influence) Program</h2>
-
 <p>COI partnerships are for <strong>organizations</strong> vs. individual referrers, agencies, firms, platforms, and communities who can deliver multiple referrals over time.</p>
-
 <h3>COI Program Tiers</h3>
 <table>
-  <tr><th>Partner Type</th><th>Commission</th><th>Additional Benefits</th></tr>
-  <tr><td>Marketing / PR Agencies</td><td>15% first 90 days</td><td>Reciprocal referrals, co-marketing, joint webinars</td></tr>
-  <tr><td>SaaS Vendors (CRM, analytics, etc.)</td><td>15% first 90 days</td><td>Case study co-authorship, integration endorsement</td></tr>
-  <tr><td>Accounting Firms / CPAs</td><td>20% first 90 days</td><td>Priority access to Mark's COO advisory</td></tr>
-  <tr><td>Executive Coaches</td><td>20% first 90 days</td><td>Reciprocal intro network</td></tr>
-  <tr><td>Investor Networks / VCs</td><td>20% first 6 months</td><td>Portfolio company advisory access</td></tr>
+<tr><th>Partner Type</th><th>Commission</th><th>Additional Benefits</th></tr>
+<tr><td>Marketing / PR Agencies</td><td>15% first 90 days</td><td>Reciprocal referrals, co-marketing, joint webinars</td></tr>
+<tr><td>SaaS Vendors (CRM, analytics, etc.)</td><td>15% first 90 days</td><td>Case study co-authorship, integration endorsement</td></tr>
+<tr><td>Accounting Firms / CPAs</td><td>20% first 90 days</td><td>Priority access to Mark's COO advisory</td></tr>
+<tr><td>Executive Coaches</td><td>20% first 90 days</td><td>Reciprocal intro network</td></tr>
+<tr><td>Investor Networks / VCs</td><td>20% first 6 months</td><td>Portfolio company advisory access</td></tr>
 </table>
-
 <h3>COI Partner Activation Steps</h3>
 <ol>
-  <li>Sign the Referral Partnership Agreement (already available as <code>documents/referral.html</code>)</li>
-  <li>Receive a personalized partner welcome deck and referral briefing sheet</li>
-  <li>Get added to the COI partner newsletter (quarterly insights + co-marketing opportunities)</li>
-  <li>Receive reciprocal introductions as appropriate</li>
+<li>Sign the Referral Partnership Agreement (already available as <code>documents/referral.html</code>)</li>
+<li>Receive a personalized partner welcome deck and referral briefing sheet</li>
+<li>Get added to the COI partner newsletter (quarterly insights + co-marketing opportunities)</li>
+<li>Receive reciprocal introductions as appropriate</li>
 </ol>
-
 <hr class="section-divider">
-
 <h2 id="9">9. Digital Product Strategy</h2>
-
 <h3>Product 1: Revenue Leak Playbook (Free → $97)</h3>
 <p>The 20-page PDF delivered free to webinar attendees. The <strong>expanded 40-page version</strong> with case studies, industry benchmarks, and video walkthroughs sells for $97 as a standalone product via Gumroad or Lemon Squeezy.</p>
 <p><strong>Where to sell it:</strong> On-site landing page, Gumroad, LinkedIn posts, post-webinar emails.</p>
-
 <h3>Product 2: CMO Accelerator Kit ($47-$97)</h3>
 <p>17 templates in Notion + PDF format: ICP builder, sprint tracker, audit checklist, channel ROI calculator, board deck template, and more. Delivered via Gumroad automated delivery.</p>
 <p><strong>Upsell placement:</strong> Webinar confirmation page, post-webinar email, social media.</p>
-
 <h3>Product 3: Mini-Course (Future, $297-$497)</h3>
 <p>4-module video course: "The 90-Day CMO Sprint." Each module is 20-30 minutes. Hosted on Teachable or Gumroad. Webinar replay clips become free preview content.</p>
-
 <h3>Product 4: Live Workshop ($997-$1,997)</h3>
 <p>Small-group (8-12 people) intensive. 3 hours live. Each participant gets a personalized audit during the session. Seats sold via the webinar funnel. Premium tier above the solo audit.</p>
-
 <hr class="section-divider">
-
 <h2 id="10">10. The Live Webinar (Hosting Options)</h2>
-
 <h3>Option A: Riverside.fm (Recommended, You Already Use It)</h3>
 <p>Use Riverside for both recording and webinar delivery. Pros: Professional recording quality, multi-track audio, easy replay export, integrates with your existing podcast workflow. Create a "Studio" link for the webinar.</p>
 <p><strong>Action:</strong> In <code>webinar-signup.js</code>, set <code>zoomLink</code> to your Riverside studio URL.</p>
-
 <h3>Option B: Zoom</h3>
 <p>Free tier: 100 participants, 40-minute limit (upgrade prompt at 40 min is actually a good natural break). Paid: $15.99/month for up to 100 attendees, no time limit.</p>
-
 <h3>Option C: Demio ($49/month)</h3>
 <p>Purpose-built webinar platform. Built-in registration (could replace the custom form), email reminders, attendee analytics, automated replay. Worth it at 200+ monthly attendees.</p>
-
 <hr class="section-divider">
-
 <h2 id="11">11. Ongoing Webinar Cadence</h2>
-
 <table>
-  <tr><th>Cadence</th><th>Format</th><th>Effort</th></tr>
-  <tr><td>Monthly evergreen session</td><td>Same "Revenue Leak Audit" webinar, new date, same content</td><td>Low, just change the date in the config and send emails</td></tr>
-  <tr><td>Quarterly themed session</td><td>Industry-specific: "Healthcare Marketing Audit," "SaaS Funnel Audit," etc.</td><td>Medium, repurpose the framework with new examples</td></tr>
-  <tr><td>Annual flagship event</td><td>"CMO State of the Union", market trends, predictions, live analysis</td><td>High, but generates the most press and referrals</td></tr>
+<tr><th>Cadence</th><th>Format</th><th>Effort</th></tr>
+<tr><td>Monthly evergreen session</td><td>Same "Revenue Leak Audit" webinar, new date, same content</td><td>Low, just change the date in the config and send emails</td></tr>
+<tr><td>Quarterly themed session</td><td>Industry-specific: "Healthcare Marketing Audit," "SaaS Funnel Audit," etc.</td><td>Medium, repurpose the framework with new examples</td></tr>
+<tr><td>Annual flagship event</td><td>"CMO State of the Union", market trends, predictions, live analysis</td><td>High, but generates the most press and referrals</td></tr>
 </table>
-
 <div class="highlight">
-  <strong>Evergreen Tip:</strong> Record your first live session, then offer it as an "on-demand replay" that still collects email addresses. The same funnel page works, just update the copy from "Register for the live session" to "Watch the on-demand replay." Converts nearly as well.
+<strong>Evergreen Tip:</strong> Record your first live session, then offer it as an "on-demand replay" that still collects email addresses. The same funnel page works, just update the copy from "Register for the live session" to "Watch the on-demand replay." Converts nearly as well.
 </div>
-
 <hr class="section-divider">
-
 <h2 id="12">12. Revenue Projection Model</h2>
-
 <table>
-  <tr><th>Metric</th><th>Conservative</th><th>Moderate</th><th>Optimistic</th></tr>
-  <tr><td>Monthly registrants</td><td>50</td><td>150</td><td>400</td></tr>
-  <tr><td>Attendance rate</td><td>40% (20)</td><td>50% (75)</td><td>55% (220)</td></tr>
-  <tr><td>CMO Audit conversion (2%)</td><td>1 × $997 = $997</td><td>2 × $997 = $1,994</td><td>5 × $997 = $4,985</td></tr>
-  <tr><td>CMO Accelerator Kit conversion (10%)</td><td>5 × $47 = $235</td><td>15 × $47 = $705</td><td>40 × $47 = $1,880</td></tr>
-  <tr><td>Fractional CMO conversion (0.5%)</td><td>0 leads</td><td>1 × $7k/mo = $7,000/mo</td><td>2 × $8k/mo = $16,000/mo</td></tr>
-  <tr><td>Referral revenue (1 referral @ $5k engagement)</td><td>$1,000</td><td>$2,000</td><td>$4,000</td></tr>
-  <tr><td><strong>Monthly revenue from webinar funnel</strong></td><td><strong>$2,232</strong></td><td><strong>$11,699</strong></td><td><strong>$26,865</strong></td></tr>
+<tr><th>Metric</th><th>Conservative</th><th>Moderate</th><th>Optimistic</th></tr>
+<tr><td>Monthly registrants</td><td>50</td><td>150</td><td>400</td></tr>
+<tr><td>Attendance rate</td><td>40% (20)</td><td>50% (75)</td><td>55% (220)</td></tr>
+<tr><td>CMO Audit conversion (2%)</td><td>1 × $997 = $997</td><td>2 × $997 = $1,994</td><td>5 × $997 = $4,985</td></tr>
+<tr><td>CMO Accelerator Kit conversion (10%)</td><td>5 × $47 = $235</td><td>15 × $47 = $705</td><td>40 × $47 = $1,880</td></tr>
+<tr><td>Fractional CMO conversion (0.5%)</td><td>0 leads</td><td>1 × $7k/mo = $7,000/mo</td><td>2 × $8k/mo = $16,000/mo</td></tr>
+<tr><td>Referral revenue (1 referral @ $5k engagement)</td><td>$1,000</td><td>$2,000</td><td>$4,000</td></tr>
+<tr><td><strong>Monthly revenue from webinar funnel</strong></td><td><strong>$2,232</strong></td><td><strong>$11,699</strong></td><td><strong>$26,865</strong></td></tr>
 </table>
-
 <div class="money-callout">
-  <strong>Key insight:</strong> One fractional CMO client from the webinar funnel ($7k-$15k/month, 6-12 month avg engagement) returns $42k-$180k per client acquired, making the entire webinar infrastructure pay for itself with a single conversion. The webinar is the most cost-effective client acquisition channel available.
+<strong>Key insight:</strong> One fractional CMO client from the webinar funnel ($7k-$15k/month, 6-12 month avg engagement) returns $42k-$180k per client acquired, making the entire webinar infrastructure pay for itself with a single conversion. The webinar is the most cost-effective client acquisition channel available.
 </div>
-
 <hr class="section-divider">
-
 <h2>Immediate Next Actions (Priority Order)</h2>
 <ol>
-  <li><span class="badge">NOW</span> Add the 4 new HTML files to your site and deploy to Netlify</li>
-  <li><span class="badge">DAY 1</span> Create SendGrid account, verify your sender domain, get API key</li>
-  <li><span class="badge">DAY 1</span> Set up JSONBin bin for webinar leads, add all env vars in Netlify</li>
-  <li><span class="badge">DAY 2</span> Create your first Zoom or Riverside webinar session, update the link in the function</li>
-  <li><span class="badge">DAY 2</span> Set up Mailchimp audience + pre-webinar drip sequence (5 emails)</li>
-  <li><span class="badge">DAY 3</span> Create Gumroad product for CMO Accelerator Kit at $47</li>
-  <li><span class="badge">DAY 3</span> Write and upload the Revenue Leak Playbook PDF to <code>/pdfs/</code></li>
-  <li><span class="badge">WEEK 1</span> Post webinar announcement on LinkedIn (3 posts, 3 days apart)</li>
-  <li><span class="badge">WEEK 2</span> Email your existing list about the free webinar</li>
-  <li><span class="badge">ONGOING</span> Run monthly webinars and refine your funnel based on conversion data.</li>
+<li><span class="badge">NOW</span> Add the 4 new HTML files to your site and deploy to Netlify</li>
+<li><span class="badge">DAY 1</span> Create SendGrid account, verify your sender domain, get API key</li>
+<li><span class="badge">DAY 1</span> Set up JSONBin bin for webinar leads, add all env vars in Netlify</li>
+<li><span class="badge">DAY 2</span> Create your first Zoom or Riverside webinar session, update the link in the function</li>
+<li><span class="badge">DAY 2</span> Set up Mailchimp audience + pre-webinar drip sequence (5 emails)</li>
+<li><span class="badge">DAY 3</span> Create Gumroad product for CMO Accelerator Kit at $47</li>
+<li><span class="badge">DAY 3</span> Write and upload the Revenue Leak Playbook PDF to <code>/pdfs/</code></li>
+<li><span class="badge">WEEK 1</span> Post webinar announcement on LinkedIn (3 posts, 3 days apart)</li>
+<li><span class="badge">WEEK 2</span> Email your existing list about the free webinar</li>
+<li><span class="badge">ONGOING</span> Run monthly webinars and refine your funnel based on conversion data.</li>
 </ol>
-
 <footer>
-  <div class="footer-mega">
-
-    <div class="footer-brand-col">
-      <div class="footer-logo">Mark <span>Gabrielli</span></div>
-      <p class="footer-desc">Fractional CMO, COO &amp; Executive Consultant. I help businesses from $1M to $100M find what's broken, build what scales, and execute what others only talk about.</p>
-      <div class="footer-brand-tags">
-        <span>WETYR Founder</span><span>Fractional C-Suite</span><span>AI Strategist</span><span>CST Certified</span>
-      </div>
-      <div class="social-links" style="margin-top:1.2rem;">
-        <a href="https://www.linkedin.com/in/marklgabrielli/" target="_blank" rel="noopener" class="social-link">in</a>
-        <a href="mailto:mark@markcmo.com" class="social-link">@</a>
-      </div>
-    </div>
-
-    <div class="footer-col">
-      <h4>C-Suite Services</h4>
-      <ul>
-        <li><a href="fractional-cmo.html">Fractional CMO</a></li>
-        <li><a href="fractional-coo.html">Fractional COO</a></li>
-        <li><a href="fractional-ceo.html">Fractional CEO</a></li>
-        <li><a href="fractional-cto.html">Fractional CTO</a></li>
-        <li><a href="fractional-cfo.html">Fractional CFO</a></li>
-        <li><a href="executive-advisory.html">Executive Advisory</a></li>
-        <li><a href="services.html">All Services</a></li>
-      </ul>
-    </div>
-
-    <div class="footer-col">
-      <h4>Marketing Services</h4>
-      <ul>
-        <li><a href="demand-generation.html">Demand Generation</a></li>
-        <li><a href="lead-generation.html">Lead Generation</a></li>
-        <li><a href="content-marketing.html">Content Marketing</a></li>
-        <li><a href="account-based-marketing.html">Account-Based Marketing</a></li>
-        <li><a href="go-to-market-strategy.html">Go-to-Market Strategy</a></li>
-        <li><a href="marketing-audit.html">Marketing Audit</a></li>
-        <li><a href="marketing-strategy.html">Marketing Strategy</a></li>
-      </ul>
-    </div>
-
-    <div class="footer-col">
-      <h4>Pricing &amp; Compare</h4>
-      <ul>
-        <li><a href="fractional-cmo-cost.html">Fractional CMO Cost</a></li>
-        <li><a href="fractional-cmo-near-me.html">Fractional CMO Near Me</a></li>
-        <li><a href="fractional-cmo-vs-full-time-cmo.html">Fractional vs Full-Time CMO</a></li>
-        <li><a href="fractional-cmo-vs-agency.html">CMO vs Agency</a></li>
-        <li><a href="fractional-cmo-vs-vp-marketing.html">CMO vs VP Marketing</a></li>
-        <li><a href="fractional-cmo-vs-interim-cmo.html">Fractional vs Interim CMO</a></li>
-        <li><a href="fractional-cmo-vs-marketing-consultant.html">CMO vs Consultant</a></li>
-        <li><a href="chief-outsiders-alternative.html">Chief Outsiders Alternative</a></li>
-      </ul>
-    </div>
-
-    <div class="footer-col">
-      <h4>By Company Stage</h4>
-      <ul>
-        <li><a href="fractional-cmo-pre-revenue.html">Pre-Revenue Startups</a></li>
-        <li><a href="fractional-cmo-series-a.html">Series A</a></li>
-        <li><a href="fractional-cmo-series-b.html">Series B</a></li>
-        <li><a href="fractional-cmo-bootstrapped-companies.html">Bootstrapped Companies</a></li>
-        <li><a href="fractional-cmo-pe-backed-companies.html">PE-Backed Companies</a></li>
-        <li><a href="fractional-cmo-private-equity.html">Private Equity Portfolio</a></li>
-        <li><a href="fractional-cmo-venture-capital.html">VC-Backed Startups</a></li>
-        <li><a href="best-fractional-cmo.html">Best Fractional CMO</a></li>
-      </ul>
-    </div>
-
-    <div class="footer-col">
-      <h4>By Industry</h4>
-      <ul>
-        <li><a href="fractional-cmo-saas.html">SaaS</a></li>
-        <li><a href="fractional-cmo-healthcare.html">Healthcare</a></li>
-        <li><a href="fractional-cmo-fintech.html">Fintech</a></li>
-        <li><a href="fractional-cmo-ai.html">AI Companies</a></li>
-        <li><a href="fractional-cmo-tech.html">Tech Companies</a></li>
-        <li><a href="fractional-cmo-cybersecurity.html">Cybersecurity</a></li>
-        <li><a href="fractional-cmo-b2b.html">B2B Companies</a></li>
-        <li><a href="fractional-cmo-ecommerce.html">E-Commerce</a></li>
-        <li><a href="fractional-cmo-private-equity.html">Private Equity</a></li>
-        <li><a href="fractional-cmo-venture-capital.html">VC-Backed Startups</a></li>
-        <li><a href="fractional-cmo-retail.html">Retail</a></li>
-        <li><a href="fractional-cmo-energy.html">Energy</a></li>
-        <li><a href="fractional-cmo-professional-services.html">Professional Services</a></li>
-        <li><a href="industries.html">All Industries</a></li>
-      </ul>
-    </div>
-
-    <div class="footer-col">
-      <h4>Top Locations</h4>
-      <ul>
-        <li><a href="fractional-cmo-dallas-fort-worth.html">Dallas-Fort Worth</a></li>
-        <li><a href="fractional-cmo-greater-houston.html">Greater Houston</a></li>
-        <li><a href="fractional-cmo-greater-chicago.html">Greater Chicago</a></li>
-        <li><a href="fractional-cmo-greater-atlanta.html">Greater Atlanta</a></li>
-        <li><a href="fractional-cmo-greater-miami.html">Greater Miami</a></li>
-        <li><a href="fractional-cmo-greater-boston.html">Greater Boston</a></li>
-        <li><a href="fractional-cmo-near-me.html">Find CMO Near Me</a></li>
-      </ul>
-    </div>
-
-    <div class="footer-col">
-      <h4>Learn &amp; Company</h4>
-      <ul>
-        <li><a href="blog.html">Insights &amp; Blog</a></li>
-        <li><a href="how-to-hire-a-fractional-cmo.html">How to Hire a Fractional CMO</a></li>
-        <li><a href="when-do-you-need-a-fractional-cmo.html">When Do You Need a CMO?</a></li>
-        <li><a href="questions-to-ask-a-fractional-cmo.html">Questions to Ask a CMO</a></li>
-        <li><a href="fractional-cmo-first-90-days.html">First 90 Days</a></li>
-        <li><a href="fractional-cmo-contract.html">CMO Contract Guide</a></li>
-        <li><a href="about.html">About Mark</a></li>
-        <li><a href="testimonials.html">Testimonials</a></li>
-        <li><a href="faq.html">FAQ</a></li>
-        <li><a href="contact.html">Contact</a></li>
-        <li><a href="https://academy.markcmo.com" target="_blank" style="color:var(--gold);font-weight:700;">&#127891; MarkCMO Academy</a></li>
-      </ul>
-    </div>
-
-    <div class="footer-col">
-      <h4>Glossary</h4>
-      <ul>
-        <li><a href="what-is-a-fractional-cmo.html">What Is a Fractional CMO?</a></li>
-        <li><a href="fractional-cmo-definition.html">Fractional CMO Definition</a></li>
-        <li><a href="what-is-a-cmo.html">What Is a CMO?</a></li>
-        <li><a href="what-is-coo.html">What Is a COO?</a></li>
-        <li><a href="what-is-demand-generation.html">What Is Demand Generation?</a></li>
-        <li><a href="what-is-go-to-market-strategy.html">What Is a GTM Strategy?</a></li>
-        <li><a href="what-is-revenue-operations.html">What Is RevOps?</a></li>
-        <li><a href="what-is-cac.html">What Is CAC?</a></li>
-        <li><a href="what-is-ltv.html">What Is LTV?</a></li>
-        <li><a href="marketing-qualified-lead.html">What Is an MQL?</a></li>
-        <li><a href="ideal-customer-profile.html">What Is an ICP?</a></li>
-        <li><a href="what-is-product-market-fit.html">What Is Product-Market Fit?</a></li>
-      </ul>
-    </div>
-
-  </div>
-
-  <div style="border-top:1px solid rgba(201,168,76,0.15);border-bottom:1px solid rgba(201,168,76,0.08);padding:1.6rem 4vw;">
-    <div style="max-width:1400px;margin:0 auto;display:flex;gap:2rem;align-items:baseline;flex-wrap:wrap;">
-      <span style="font-family:'DM Mono',monospace;font-size:0.62rem;letter-spacing:0.15em;text-transform:uppercase;color:#C9A84C;white-space:nowrap;flex-shrink:0;">Latest Articles</span>
-      <div style="display:flex;gap:1.4rem;flex-wrap:wrap;">
-        <a href="/blog.html" style="font-size:0.8rem;color:#C9A84C;font-weight:600;text-decoration:none;">All Insights &rarr;</a>
-        <a href="/blog-what-is-a-fractional-cmo.html" style="font-size:0.8rem;color:rgba(136,136,136,0.7);text-decoration:none;">What is a Fractional CMO</a>
-        <a href="/blog-go-to-market-strategy.html" style="font-size:0.8rem;color:rgba(136,136,136,0.7);text-decoration:none;">Go-to-Market Strategy</a>
-        <a href="/blog-b2b-marketing-strategy.html" style="font-size:0.8rem;color:rgba(136,136,136,0.7);text-decoration:none;">B2B Marketing Strategy</a>
-        <a href="/blog-demand-generation-guide.html" style="font-size:0.8rem;color:rgba(136,136,136,0.7);text-decoration:none;">Demand Generation Guide</a>
-        <a href="/blog-saas-marketing-guide.html" style="font-size:0.8rem;color:rgba(136,136,136,0.7);text-decoration:none;">SaaS Marketing Guide</a>
-        <a href="/blog-account-based-marketing-guide.html" style="font-size:0.8rem;color:rgba(136,136,136,0.7);text-decoration:none;">ABM Guide</a>
-        <a href="/blog-marketing-roi-guide.html" style="font-size:0.8rem;color:rgba(136,136,136,0.7);text-decoration:none;">Marketing ROI Guide</a>
-        <a href="/blog-how-to-hire-fractional-cmo.html" style="font-size:0.8rem;color:rgba(136,136,136,0.7);text-decoration:none;">How to Hire a Fractional CMO</a>
-        <a href="/fractional-cmo-cost.html" style="font-size:0.8rem;color:rgba(136,136,136,0.7);text-decoration:none;">Fractional CMO Cost 2025</a>
-      </div>
-    </div>
-  </div>
-
-  <div class="footer-bottom">
-    <p>&copy; 2026 Mark Gabrielli &middot; markcmo.com &middot; All rights reserved.</p>
-    <p class="footer-bottom-tags">Fractional CMO &middot; Fractional COO &middot; Fractional CEO &middot; Chief Marketing Officer &middot; Chief Operating Officer &middot; Go-to-Market Strategy &middot; Demand Generation &middot; Marketing Audit &middot; AI Automation &middot; SaaS Strategy &middot; Executive Advisory &middot; Cape Canaveral, FL &middot; Global &middot; All 50 States &middot; Remote Available</p>
-    <p class="footer-bottom-social">
-      <a href="https://www.linkedin.com/in/marklgabrielli/" target="_blank" rel="noopener">LinkedIn</a>
-      <span>&middot;</span>
-      <a href="https://about.me/mark_gabrielli" target="_blank" rel="noopener">About.me</a>
-      <span>&middot;</span>
-      <a href="https://medium.com/@mark_louis_gabrielli_jr" target="_blank" rel="noopener">Medium</a>
-      <span>&middot;</span>
-      <a href="https://x.com/markgcmo" target="_blank" rel="noopener">X / Twitter</a>
-      <span>&middot;</span>
-      <a href="https://www.tiktok.com/@mark.gabrielli.cmo" target="_blank" rel="noopener">TikTok</a>
-      <span>&middot;</span>
-      <a href="https://www.digitalreference.co/insights/marketing-professionals/best-fractional-cmos-in-orlando" target="_blank" rel="noopener">Digital Reference</a>
-    </p>
-  </div>
+<div class="footer-mega">
+<div class="footer-brand-col">
+<div class="footer-logo">Mark <span>Gabrielli</span></div>
+<p class="footer-desc">Fractional CMO, COO &amp; Executive Consultant. I help businesses from $1M to $100M find what's broken, build what scales, and execute what others only talk about.</p>
+<div class="footer-brand-tags">
+<span>WETYR Founder</span><span>Fractional C-Suite</span><span>AI Strategist</span><span>CST Certified</span>
+</div>
+<div class="social-links" style="margin-top:1.2rem;">
+<a href="https://www.linkedin.com/in/marklgabrielli/" target="_blank" rel="noopener" class="social-link">in</a>
+<a href="mailto:mark@markcmo.com" class="social-link">@</a>
+</div>
+</div>
+<div class="footer-col">
+<h4>C-Suite Services</h4>
+<ul>
+<li><a href="fractional-cmo.html">Fractional CMO</a></li>
+<li><a href="fractional-coo.html">Fractional COO</a></li>
+<li><a href="fractional-ceo.html">Fractional CEO</a></li>
+<li><a href="fractional-cto.html">Fractional CTO</a></li>
+<li><a href="fractional-cfo.html">Fractional CFO</a></li>
+<li><a href="executive-advisory.html">Executive Advisory</a></li>
+<li><a href="services.html">All Services</a></li>
+</ul>
+</div>
+<div class="footer-col">
+<h4>Marketing Services</h4>
+<ul>
+<li><a href="demand-generation.html">Demand Generation</a></li>
+<li><a href="lead-generation.html">Lead Generation</a></li>
+<li><a href="content-marketing.html">Content Marketing</a></li>
+<li><a href="account-based-marketing.html">Account-Based Marketing</a></li>
+<li><a href="go-to-market-strategy.html">Go-to-Market Strategy</a></li>
+<li><a href="marketing-audit.html">Marketing Audit</a></li>
+<li><a href="marketing-strategy.html">Marketing Strategy</a></li>
+</ul>
+</div>
+<div class="footer-col">
+<h4>Pricing &amp; Compare</h4>
+<ul>
+<li><a href="fractional-cmo-cost.html">Fractional CMO Cost</a></li>
+<li><a href="fractional-cmo-near-me.html">Fractional CMO Near Me</a></li>
+<li><a href="fractional-cmo-vs-full-time-cmo.html">Fractional vs Full-Time CMO</a></li>
+<li><a href="fractional-cmo-vs-agency.html">CMO vs Agency</a></li>
+<li><a href="fractional-cmo-vs-vp-marketing.html">CMO vs VP Marketing</a></li>
+<li><a href="fractional-cmo-vs-interim-cmo.html">Fractional vs Interim CMO</a></li>
+<li><a href="fractional-cmo-vs-marketing-consultant.html">CMO vs Consultant</a></li>
+<li><a href="chief-outsiders-alternative.html">Chief Outsiders Alternative</a></li>
+</ul>
+</div>
+<div class="footer-col">
+<h4>By Company Stage</h4>
+<ul>
+<li><a href="fractional-cmo-pre-revenue.html">Pre-Revenue Startups</a></li>
+<li><a href="fractional-cmo-series-a.html">Series A</a></li>
+<li><a href="fractional-cmo-series-b.html">Series B</a></li>
+<li><a href="fractional-cmo-bootstrapped-companies.html">Bootstrapped Companies</a></li>
+<li><a href="fractional-cmo-pe-backed-companies.html">PE-Backed Companies</a></li>
+<li><a href="fractional-cmo-private-equity.html">Private Equity Portfolio</a></li>
+<li><a href="fractional-cmo-venture-capital.html">VC-Backed Startups</a></li>
+<li><a href="best-fractional-cmo.html">Best Fractional CMO</a></li>
+</ul>
+</div>
+<div class="footer-col">
+<h4>By Industry</h4>
+<ul>
+<li><a href="fractional-cmo-saas.html">SaaS</a></li>
+<li><a href="fractional-cmo-healthcare.html">Healthcare</a></li>
+<li><a href="fractional-cmo-fintech.html">Fintech</a></li>
+<li><a href="fractional-cmo-ai.html">AI Companies</a></li>
+<li><a href="fractional-cmo-tech.html">Tech Companies</a></li>
+<li><a href="fractional-cmo-cybersecurity.html">Cybersecurity</a></li>
+<li><a href="fractional-cmo-b2b.html">B2B Companies</a></li>
+<li><a href="fractional-cmo-ecommerce.html">E-Commerce</a></li>
+<li><a href="fractional-cmo-private-equity.html">Private Equity</a></li>
+<li><a href="fractional-cmo-venture-capital.html">VC-Backed Startups</a></li>
+<li><a href="fractional-cmo-retail.html">Retail</a></li>
+<li><a href="fractional-cmo-energy.html">Energy</a></li>
+<li><a href="fractional-cmo-professional-services.html">Professional Services</a></li>
+<li><a href="industries.html">All Industries</a></li>
+</ul>
+</div>
+<div class="footer-col">
+<h4>Top Locations</h4>
+<ul>
+<li><a href="fractional-cmo-dallas-fort-worth.html">Dallas-Fort Worth</a></li>
+<li><a href="fractional-cmo-greater-houston.html">Greater Houston</a></li>
+<li><a href="fractional-cmo-greater-chicago.html">Greater Chicago</a></li>
+<li><a href="fractional-cmo-greater-atlanta.html">Greater Atlanta</a></li>
+<li><a href="fractional-cmo-greater-miami.html">Greater Miami</a></li>
+<li><a href="fractional-cmo-greater-boston.html">Greater Boston</a></li>
+<li><a href="fractional-cmo-near-me.html">Find CMO Near Me</a></li>
+</ul>
+</div>
+<div class="footer-col">
+<h4>Learn &amp; Company</h4>
+<ul>
+<li><a href="blog.html">Insights &amp; Blog</a></li>
+<li><a href="how-to-hire-a-fractional-cmo.html">How to Hire a Fractional CMO</a></li>
+<li><a href="when-do-you-need-a-fractional-cmo.html">When Do You Need a CMO?</a></li>
+<li><a href="questions-to-ask-a-fractional-cmo.html">Questions to Ask a CMO</a></li>
+<li><a href="fractional-cmo-first-90-days.html">First 90 Days</a></li>
+<li><a href="fractional-cmo-contract.html">CMO Contract Guide</a></li>
+<li><a href="about.html">About Mark</a></li>
+<li><a href="testimonials.html">Testimonials</a></li>
+<li><a href="faq.html">FAQ</a></li>
+<li><a href="contact.html">Contact</a></li>
+<li><a href="https://academy.markcmo.com" target="_blank" style="color:var(--gold);font-weight:700;">&#127891; MarkCMO Academy</a></li>
+</ul>
+</div>
+<div class="footer-col">
+<h4>Glossary</h4>
+<ul>
+<li><a href="what-is-a-fractional-cmo.html">What Is a Fractional CMO?</a></li>
+<li><a href="fractional-cmo-definition.html">Fractional CMO Definition</a></li>
+<li><a href="what-is-a-cmo.html">What Is a CMO?</a></li>
+<li><a href="what-is-coo.html">What Is a COO?</a></li>
+<li><a href="what-is-demand-generation.html">What Is Demand Generation?</a></li>
+<li><a href="what-is-go-to-market-strategy.html">What Is a GTM Strategy?</a></li>
+<li><a href="what-is-revenue-operations.html">What Is RevOps?</a></li>
+<li><a href="what-is-cac.html">What Is CAC?</a></li>
+<li><a href="what-is-ltv.html">What Is LTV?</a></li>
+<li><a href="marketing-qualified-lead.html">What Is an MQL?</a></li>
+<li><a href="ideal-customer-profile.html">What Is an ICP?</a></li>
+<li><a href="what-is-product-market-fit.html">What Is Product-Market Fit?</a></li>
+</ul>
+</div>
+</div>
+<div style="border-top:1px solid rgba(201,168,76,0.15);border-bottom:1px solid rgba(201,168,76,0.08);padding:1.6rem 4vw;">
+<div style="max-width:1400px;margin:0 auto;display:flex;gap:2rem;align-items:baseline;flex-wrap:wrap;">
+<span style="font-family:'DM Mono',monospace;font-size:0.62rem;letter-spacing:0.15em;text-transform:uppercase;color:#C9A84C;white-space:nowrap;flex-shrink:0;">Latest Articles</span>
+<div style="display:flex;gap:1.4rem;flex-wrap:wrap;">
+<a href="/blog.html" style="font-size:0.8rem;color:#C9A84C;font-weight:600;text-decoration:none;">All Insights &rarr;</a>
+<a href="/blog-what-is-a-fractional-cmo.html" style="font-size:0.8rem;color:rgba(136,136,136,0.7);text-decoration:none;">What is a Fractional CMO</a>
+<a href="/blog-go-to-market-strategy.html" style="font-size:0.8rem;color:rgba(136,136,136,0.7);text-decoration:none;">Go-to-Market Strategy</a>
+<a href="/blog-b2b-marketing-strategy.html" style="font-size:0.8rem;color:rgba(136,136,136,0.7);text-decoration:none;">B2B Marketing Strategy</a>
+<a href="/blog-demand-generation-guide.html" style="font-size:0.8rem;color:rgba(136,136,136,0.7);text-decoration:none;">Demand Generation Guide</a>
+<a href="/blog-saas-marketing-guide.html" style="font-size:0.8rem;color:rgba(136,136,136,0.7);text-decoration:none;">SaaS Marketing Guide</a>
+<a href="/blog-account-based-marketing-guide.html" style="font-size:0.8rem;color:rgba(136,136,136,0.7);text-decoration:none;">ABM Guide</a>
+<a href="/blog-marketing-roi-guide.html" style="font-size:0.8rem;color:rgba(136,136,136,0.7);text-decoration:none;">Marketing ROI Guide</a>
+<a href="/blog-how-to-hire-fractional-cmo.html" style="font-size:0.8rem;color:rgba(136,136,136,0.7);text-decoration:none;">How to Hire a Fractional CMO</a>
+<a href="/fractional-cmo-cost.html" style="font-size:0.8rem;color:rgba(136,136,136,0.7);text-decoration:none;">Fractional CMO Cost 2025</a>
+</div>
+</div>
+</div>
+<div class="footer-bottom">
+<p>&copy; 2026 Mark Gabrielli &middot; markcmo.com &middot; All rights reserved.</p>
+<p class="footer-bottom-tags">Fractional CMO &middot; Fractional COO &middot; Fractional CEO &middot; Chief Marketing Officer &middot; Chief Operating Officer &middot; Go-to-Market Strategy &middot; Demand Generation &middot; Marketing Audit &middot; AI Automation &middot; SaaS Strategy &middot; Executive Advisory &middot; Cape Canaveral, FL &middot; Global &middot; All 50 States &middot; Remote Available</p>
+<p class="footer-bottom-social">
+<a href="https://www.linkedin.com/in/marklgabrielli/" target="_blank" rel="noopener">LinkedIn</a>
+<span>&middot;</span>
+<a href="https://about.me/mark_gabrielli" target="_blank" rel="noopener">About.me</a>
+<span>&middot;</span>
+<a href="https://medium.com/@mark_louis_gabrielli_jr" target="_blank" rel="noopener">Medium</a>
+<span>&middot;</span>
+<a href="https://x.com/markgcmo" target="_blank" rel="noopener">X / Twitter</a>
+<span>&middot;</span>
+<a href="https://www.tiktok.com/@mark.gabrielli.cmo" target="_blank" rel="noopener">TikTok</a>
+<span>&middot;</span>
+<a href="https://www.digitalreference.co/insights/marketing-professionals/best-fractional-cmos-in-orlando" target="_blank" rel="noopener">Digital Reference</a>
+</p>
+</div>
 </footer>
-
 <script>
   var cur = document.getElementById('custom-cursor');
   if (cur) {

@@ -1,0 +1,311 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>Directory Citations Tracker | MarkCMO</title>
+<meta name="robots" content="noindex,nofollow"/>
+<link rel="stylesheet" href="style.css"/>
+<style>
+.cit-wrap { max-width: 1100px; margin: 0 auto; padding: 6rem 5vw 4rem; }
+.cit-title { font-family: 'Bebas Neue', sans-serif; font-size: clamp(2rem,4vw,3.5rem); letter-spacing: 0.04em; margin-bottom: 0.4rem; }
+.cit-title span { color: var(--gold); }
+.cit-sub { font-family: 'DM Mono', monospace; font-size: 0.65rem; letter-spacing: 0.16em; text-transform: uppercase; color: rgba(255,255,255,0.35); margin-bottom: 3rem; }
+.cit-progress { display: flex; gap: 2rem; margin-bottom: 3rem; flex-wrap: wrap; }
+.cit-stat { text-align: center; flex: 1; min-width: 120px; background: rgba(201,168,76,0.05); border: 1px solid rgba(201,168,76,0.12); border-radius: 16px; padding: 1.5rem 1rem; }
+.cit-stat-num { font-family: 'Bebas Neue', sans-serif; font-size: 2.4rem; color: var(--gold); }
+.cit-stat-label { font-family: 'DM Mono', monospace; font-size: 0.58rem; letter-spacing: 0.12em; text-transform: uppercase; color: rgba(255,255,255,0.35); margin-top: 0.3rem; }
+.cit-bar-bg { background: rgba(255,255,255,0.06); border-radius: 999px; height: 8px; margin-bottom: 2.5rem; overflow: hidden; }
+.cit-bar-fill { height: 100%; background: linear-gradient(90deg, #9a7130, #e8c14a); border-radius: 999px; transition: width 0.6s ease; }
+.cit-table { width: 100%; border-collapse: collapse; font-size: 0.88rem; }
+.cit-table th { font-family: 'DM Mono', monospace; font-size: 0.6rem; letter-spacing: 0.14em; text-transform: uppercase; color: rgba(255,255,255,0.3); text-align: left; padding: 0.75rem 1rem; border-bottom: 1px solid rgba(255,255,255,0.06); }
+.cit-table td { padding: 0.9rem 1rem; border-bottom: 1px solid rgba(255,255,255,0.04); vertical-align: middle; }
+.cit-table tr:hover td { background: rgba(201,168,76,0.03); }
+.cit-name { font-weight: 600; color: var(--white); }
+.cit-name a { color: var(--gold); text-decoration: none; font-size: 0.75rem; margin-left: 0.5rem; opacity: 0.7; }
+.cit-name a:hover { opacity: 1; }
+.cit-tier { font-family: 'DM Mono', monospace; font-size: 0.6rem; padding: 0.2rem 0.6rem; border-radius: 999px; font-weight: 600; }
+.tier-1 { background: rgba(201,168,76,0.18); color: #e8c14a; border: 1px solid rgba(201,168,76,0.3); }
+.tier-2 { background: rgba(100,100,160,0.18); color: rgba(180,180,230,0.9); border: 1px solid rgba(100,100,160,0.3); }
+.tier-3 { background: rgba(80,80,80,0.2); color: rgba(200,200,200,0.6); border: 1px solid rgba(100,100,100,0.2); }
+.cit-status { display: inline-flex; align-items: center; gap: 0.4rem; font-size: 0.78rem; }
+.dot { width: 8px; height: 8px; border-radius: 50%; flex-shrink: 0; }
+.dot-done { background: #4ade80; }
+.dot-pending { background: #facc15; }
+.dot-todo { background: rgba(255,255,255,0.2); }
+.cit-notes { font-size: 0.78rem; color: rgba(255,255,255,0.4); max-width: 260px; }
+.cit-impact { font-family: 'DM Mono', monospace; font-size: 0.62rem; }
+.impact-high { color: #4ade80; }
+.impact-med { color: #facc15; }
+.impact-low { color: rgba(255,255,255,0.35); }
+.cit-section-hdr { font-family: 'Bebas Neue', sans-serif; font-size: 1.3rem; letter-spacing: 0.06em; color: rgba(255,255,255,0.5); margin: 2.5rem 0 0.5rem; padding-left: 1rem; border-left: 2px solid rgba(201,168,76,0.4); }
+.cit-legend { display: flex; gap: 1.5rem; flex-wrap: wrap; margin-bottom: 2rem; font-size: 0.75rem; color: rgba(255,255,255,0.4); }
+.cit-legend span { display: flex; align-items: center; gap: 0.4rem; }
+select.cit-filter { background: rgba(255,255,255,0.04); border: 1px solid rgba(201,168,76,0.18); color: var(--white); padding: 0.4rem 0.8rem; border-radius: 8px; font-family: 'DM Mono', monospace; font-size: 0.7rem; margin-bottom: 1.5rem; cursor: pointer; }
+</style>
+</head>
+<body>
+<nav>
+<a href="index.html" class="nav-logo">Mark <span>Gabrielli</span></a>
+<ul class="nav-links">
+<li><a href="index.html">Home</a></li>
+<li><a href="about.html">About</a></li>
+<li><a href="services.html">Services</a></li>
+<li><a href="blog.html">Blog</a></li>
+</ul>
+<a href="book.html" class="nav-cta btn-primary">Book a Call</a>
+</nav>
+
+<div class="cit-wrap">
+  <h1 class="cit-title">Directory <span>Citations</span></h1>
+  <p class="cit-sub">markcmo.com — Domain Authority & Local SEO Tracker — Updated April 2026</p>
+
+  <!-- Progress bar -->
+  <div id="cit-progress" class="cit-progress">
+    <div class="cit-stat"><div class="cit-stat-num" id="stat-done">0</div><div class="cit-stat-label">Submitted</div></div>
+    <div class="cit-stat"><div class="cit-stat-num" id="stat-pending">0</div><div class="cit-stat-label">In Progress</div></div>
+    <div class="cit-stat"><div class="cit-stat-num" id="stat-todo">0</div><div class="cit-stat-label">To Do</div></div>
+    <div class="cit-stat"><div class="cit-stat-num" id="stat-total">0</div><div class="cit-stat-label">Total</div></div>
+  </div>
+  <div class="cit-bar-bg"><div class="cit-bar-fill" id="cit-bar" style="width:0%"></div></div>
+
+  <div class="cit-legend">
+    <span><span class="dot dot-done"></span> Submitted / Live</span>
+    <span><span class="dot dot-pending"></span> In Progress / Awaiting Review</span>
+    <span><span class="dot dot-todo"></span> Not Started</span>
+  </div>
+
+  <select class="cit-filter" onchange="filterTable(this.value)">
+    <option value="all">Show All</option>
+    <option value="done">Submitted Only</option>
+    <option value="todo">Not Started Only</option>
+    <option value="tier-1">Tier 1 Only</option>
+  </select>
+
+  <!-- TIER 1 — Highest DA / Highest Impact -->
+  <p class="cit-section-hdr">Tier 1 — Must-Have (Highest Domain Authority)</p>
+  <table class="cit-table" id="cit-table">
+    <thead>
+      <tr>
+        <th>Directory</th>
+        <th>Tier</th>
+        <th>Status</th>
+        <th>Impact</th>
+        <th>Notes</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr data-status="todo" data-tier="tier-1">
+        <td class="cit-name">Google Business Profile <a href="https://business.google.com" target="_blank" rel="noopener">Submit ↗</a></td>
+        <td><span class="cit-tier tier-1">Tier 1</span></td>
+        <td><span class="cit-status"><span class="dot dot-todo"></span> Not Started</span></td>
+        <td><span class="cit-impact impact-high">HIGH</span></td>
+        <td class="cit-notes">Critical for local pack and Google AI answers. Category: Marketing Consultant.</td>
+      </tr>
+      <tr data-status="todo" data-tier="tier-1">
+        <td class="cit-name">LinkedIn Services <a href="https://www.linkedin.com/services/" target="_blank" rel="noopener">Submit ↗</a></td>
+        <td><span class="cit-tier tier-1">Tier 1</span></td>
+        <td><span class="cit-status"><span class="dot dot-todo"></span> Not Started</span></td>
+        <td><span class="cit-impact impact-high">HIGH</span></td>
+        <td class="cit-notes">Add Services section to Mark's LinkedIn profile. Shows up in search results.</td>
+      </tr>
+      <tr data-status="todo" data-tier="tier-1">
+        <td class="cit-name">Clutch.co <a href="https://clutch.co/get-listed" target="_blank" rel="noopener">Submit ↗</a></td>
+        <td><span class="cit-tier tier-1">Tier 1</span></td>
+        <td><span class="cit-status"><span class="dot dot-todo"></span> Not Started</span></td>
+        <td><span class="cit-impact impact-high">HIGH</span></td>
+        <td class="cit-notes">Top B2B ratings platform. Needs 3 client reviews to rank. DA 76.</td>
+      </tr>
+      <tr data-status="todo" data-tier="tier-1">
+        <td class="cit-name">UpCity <a href="https://upcity.com/list-your-business/" target="_blank" rel="noopener">Submit ↗</a></td>
+        <td><span class="cit-tier tier-1">Tier 1</span></td>
+        <td><span class="cit-status"><span class="dot dot-todo"></span> Not Started</span></td>
+        <td><span class="cit-impact impact-high">HIGH</span></td>
+        <td class="cit-notes">Marketing agencies / consultants. Strong local SEO signals. DA 62.</td>
+      </tr>
+      <tr data-status="todo" data-tier="tier-1">
+        <td class="cit-name">GoodFirms <a href="https://www.goodfirms.co/join" target="_blank" rel="noopener">Submit ↗</a></td>
+        <td><span class="cit-tier tier-1">Tier 1</span></td>
+        <td><span class="cit-status"><span class="dot dot-todo"></span> Not Started</span></td>
+        <td><span class="cit-impact impact-high">HIGH</span></td>
+        <td class="cit-notes">B2B service providers. Fractional CMO category growing. DA 61.</td>
+      </tr>
+      <tr data-status="todo" data-tier="tier-1">
+        <td class="cit-name">G2.com <a href="https://sell.g2.com/" target="_blank" rel="noopener">Submit ↗</a></td>
+        <td><span class="cit-tier tier-1">Tier 1</span></td>
+        <td><span class="cit-status"><span class="dot dot-todo"></span> Not Started</span></td>
+        <td><span class="cit-impact impact-high">HIGH</span></td>
+        <td class="cit-notes">Largest B2B software review site. Add consulting services listing. DA 91.</td>
+      </tr>
+      <tr data-status="todo" data-tier="tier-1">
+        <td class="cit-name">Expertise.com <a href="https://www.expertise.com/claim" target="_blank" rel="noopener">Submit ↗</a></td>
+        <td><span class="cit-tier tier-1">Tier 1</span></td>
+        <td><span class="cit-status"><span class="dot dot-todo"></span> Not Started</span></td>
+        <td><span class="cit-impact impact-high">HIGH</span></td>
+        <td class="cit-notes">Ranks for "best marketing consultants in [city]" queries. DA 58.</td>
+      </tr>
+      <tr data-status="todo" data-tier="tier-1">
+        <td class="cit-name">Bark.com <a href="https://www.bark.com/en/us/signup/" target="_blank" rel="noopener">Submit ↗</a></td>
+        <td><span class="cit-tier tier-1">Tier 1</span></td>
+        <td><span class="cit-status"><span class="dot dot-todo"></span> Not Started</span></td>
+        <td><span class="cit-impact impact-high">HIGH</span></td>
+        <td class="cit-notes">Active lead gen for marketing consultants. Pay-per-lead model. DA 54.</td>
+      </tr>
+
+      <!-- TIER 2 -->
+      <tr data-status="todo" data-tier="tier-2">
+        <td class="cit-name">Yelp for Business <a href="https://biz.yelp.com/" target="_blank" rel="noopener">Submit ↗</a></td>
+        <td><span class="cit-tier tier-2">Tier 2</span></td>
+        <td><span class="cit-status"><span class="dot dot-todo"></span> Not Started</span></td>
+        <td><span class="cit-impact impact-med">MED</span></td>
+        <td class="cit-notes">Still valuable for local authority. Category: Business Consulting. DA 93.</td>
+      </tr>
+      <tr data-status="todo" data-tier="tier-2">
+        <td class="cit-name">BBB (Better Business Bureau) <a href="https://www.bbb.org/accreditation/" target="_blank" rel="noopener">Submit ↗</a></td>
+        <td><span class="cit-tier tier-2">Tier 2</span></td>
+        <td><span class="cit-status"><span class="dot dot-todo"></span> Not Started</span></td>
+        <td><span class="cit-impact impact-med">MED</span></td>
+        <td class="cit-notes">Trust signal for enterprise prospects. Annual fee. DA 91.</td>
+      </tr>
+      <tr data-status="todo" data-tier="tier-2">
+        <td class="cit-name">Crunchbase <a href="https://www.crunchbase.com/add-new" target="_blank" rel="noopener">Submit ↗</a></td>
+        <td><span class="cit-tier tier-2">Tier 2</span></td>
+        <td><span class="cit-status"><span class="dot dot-todo"></span> Not Started</span></td>
+        <td><span class="cit-impact impact-med">MED</span></td>
+        <td class="cit-notes">Add WETYR Corp + Mark's advisory profile. Referenced by VCs. DA 90.</td>
+      </tr>
+      <tr data-status="done" data-tier="tier-2">
+        <td class="cit-name">About.me <a href="https://about.me/mark_gabrielli" target="_blank" rel="noopener">View ↗</a></td>
+        <td><span class="cit-tier tier-2">Tier 2</span></td>
+        <td><span class="cit-status"><span class="dot dot-done"></span> Live</span></td>
+        <td><span class="cit-impact impact-med">MED</span></td>
+        <td class="cit-notes">Profile is live. Ensure URL and description are current.</td>
+      </tr>
+      <tr data-status="done" data-tier="tier-2">
+        <td class="cit-name">Medium Profile <a href="https://medium.com/@mark_louis_gabrielli_jr" target="_blank" rel="noopener">View ↗</a></td>
+        <td><span class="cit-tier tier-2">Tier 2</span></td>
+        <td><span class="cit-status"><span class="dot dot-done"></span> Live</span></td>
+        <td><span class="cit-impact impact-med">MED</span></td>
+        <td class="cit-notes">Cross-post 1 article/month to amplify domain authority signals.</td>
+      </tr>
+      <tr data-status="todo" data-tier="tier-2">
+        <td class="cit-name">AngelList / Wellfound <a href="https://wellfound.com/" target="_blank" rel="noopener">Submit ↗</a></td>
+        <td><span class="cit-tier tier-2">Tier 2</span></td>
+        <td><span class="cit-status"><span class="dot dot-todo"></span> Not Started</span></td>
+        <td><span class="cit-impact impact-med">MED</span></td>
+        <td class="cit-notes">Add WETYR Corp and Mark as advisor/founder. Good for startup audience. DA 82.</td>
+      </tr>
+      <tr data-status="todo" data-tier="tier-2">
+        <td class="cit-name">Manta.com <a href="https://www.manta.com/add-your-business/" target="_blank" rel="noopener">Submit ↗</a></td>
+        <td><span class="cit-tier tier-2">Tier 2</span></td>
+        <td><span class="cit-status"><span class="dot dot-todo"></span> Not Started</span></td>
+        <td><span class="cit-impact impact-med">MED</span></td>
+        <td class="cit-notes">Small business directory. Strong local citation signal. DA 72.</td>
+      </tr>
+      <tr data-status="todo" data-tier="tier-2">
+        <td class="cit-name">Alignable <a href="https://www.alignable.com/" target="_blank" rel="noopener">Submit ↗</a></td>
+        <td><span class="cit-tier tier-2">Tier 2</span></td>
+        <td><span class="cit-status"><span class="dot dot-todo"></span> Not Started</span></td>
+        <td><span class="cit-impact impact-med">MED</span></td>
+        <td class="cit-notes">SMB network. Good for referral traffic + local citations. DA 58.</td>
+      </tr>
+      <tr data-status="todo" data-tier="tier-2">
+        <td class="cit-name">Thumbtack <a href="https://www.thumbtack.com/pro/signup/" target="_blank" rel="noopener">Submit ↗</a></td>
+        <td><span class="cit-tier tier-2">Tier 2</span></td>
+        <td><span class="cit-status"><span class="dot dot-todo"></span> Not Started</span></td>
+        <td><span class="cit-impact impact-med">MED</span></td>
+        <td class="cit-notes">Lead gen + citation. Marketing consultant category. DA 75.</td>
+      </tr>
+      <tr data-status="todo" data-tier="tier-2">
+        <td class="cit-name">Sortlist <a href="https://www.sortlist.com/" target="_blank" rel="noopener">Submit ↗</a></td>
+        <td><span class="cit-tier tier-2">Tier 2</span></td>
+        <td><span class="cit-status"><span class="dot dot-todo"></span> Not Started</span></td>
+        <td><span class="cit-impact impact-med">MED</span></td>
+        <td class="cit-notes">Agency / consultant directory. European + US. DA 55.</td>
+      </tr>
+
+      <!-- TIER 3 -->
+      <tr data-status="todo" data-tier="tier-3">
+        <td class="cit-name">Foursquare <a href="https://business.foursquare.com/" target="_blank" rel="noopener">Submit ↗</a></td>
+        <td><span class="cit-tier tier-3">Tier 3</span></td>
+        <td><span class="cit-status"><span class="dot dot-todo"></span> Not Started</span></td>
+        <td><span class="cit-impact impact-low">LOW</span></td>
+        <td class="cit-notes">Powers Apple Maps, Uber, and other apps. Passive citation value.</td>
+      </tr>
+      <tr data-status="todo" data-tier="tier-3">
+        <td class="cit-name">EZLocal <a href="https://www.ezlocal.com/" target="_blank" rel="noopener">Submit ↗</a></td>
+        <td><span class="cit-tier tier-3">Tier 3</span></td>
+        <td><span class="cit-status"><span class="dot dot-todo"></span> Not Started</span></td>
+        <td><span class="cit-impact impact-low">LOW</span></td>
+        <td class="cit-notes">Aggregator that pushes to dozens of smaller directories. DA 48.</td>
+      </tr>
+      <tr data-status="todo" data-tier="tier-3">
+        <td class="cit-name">Hotfrog <a href="https://www.hotfrog.com/" target="_blank" rel="noopener">Submit ↗</a></td>
+        <td><span class="cit-tier tier-3">Tier 3</span></td>
+        <td><span class="cit-status"><span class="dot dot-todo"></span> Not Started</span></td>
+        <td><span class="cit-impact impact-low">LOW</span></td>
+        <td class="cit-notes">Free business directory. Small but consistent citation signal.</td>
+      </tr>
+      <tr data-status="todo" data-tier="tier-3">
+        <td class="cit-name">Mapquest <a href="https://business.mapquest.com/" target="_blank" rel="noopener">Submit ↗</a></td>
+        <td><span class="cit-tier tier-3">Tier 3</span></td>
+        <td><span class="cit-status"><span class="dot dot-todo"></span> Not Started</span></td>
+        <td><span class="cit-impact impact-low">LOW</span></td>
+        <td class="cit-notes">Still used by ~10M monthly. NAP consistency matters here.</td>
+      </tr>
+      <tr data-status="todo" data-tier="tier-3">
+        <td class="cit-name">Yellow Pages (YP.com) <a href="https://www.yellowpages.com/claim-business/" target="_blank" rel="noopener">Submit ↗</a></td>
+        <td><span class="cit-tier tier-3">Tier 3</span></td>
+        <td><span class="cit-status"><span class="dot dot-todo"></span> Not Started</span></td>
+        <td><span class="cit-impact impact-low">LOW</span></td>
+        <td class="cit-notes">Legacy but still indexed. Keep NAP identical to Google Business Profile.</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <div style="margin-top:3rem; padding:2rem; background:rgba(201,168,76,0.05); border:1px solid rgba(201,168,76,0.15); border-radius:20px;">
+    <p style="font-family:'DM Mono',monospace;font-size:0.65rem;letter-spacing:0.12em;text-transform:uppercase;color:rgba(201,168,76,0.7);margin-bottom:0.8rem;">NAP — Use Exactly This Everywhere</p>
+    <p style="font-size:0.9rem;line-height:2;color:rgba(255,255,255,0.7);">
+      <strong style="color:var(--white)">Name:</strong> Mark Gabrielli — Fractional CMO &amp; COO<br>
+      <strong style="color:var(--white)">Address:</strong> Cape Canaveral, FL 32920<br>
+      <strong style="color:var(--white)">Phone:</strong> +1 (321) 917-5738<br>
+      <strong style="color:var(--white)">Website:</strong> https://markcmo.com<br>
+      <strong style="color:var(--white)">Category:</strong> Marketing Consultant / Business Consultant<br>
+      <strong style="color:var(--white)">Description:</strong> Fractional CMO and COO services for growth-stage B2B companies. Senior marketing and operations leadership without the full-time cost.
+    </p>
+  </div>
+</div>
+
+<script>
+// Count and update stats
+function updateStats() {
+  const rows = document.querySelectorAll('#cit-table tbody tr');
+  let done = 0, pending = 0, todo = 0;
+  rows.forEach(r => {
+    const s = r.dataset.status;
+    if (s === 'done') done++;
+    else if (s === 'pending') pending++;
+    else todo++;
+  });
+  const total = done + pending + todo;
+  document.getElementById('stat-done').textContent = done;
+  document.getElementById('stat-pending').textContent = pending;
+  document.getElementById('stat-todo').textContent = todo;
+  document.getElementById('stat-total').textContent = total;
+  document.getElementById('cit-bar').style.width = (done / total * 100).toFixed(1) + '%';
+}
+
+function filterTable(val) {
+  document.querySelectorAll('#cit-table tbody tr').forEach(r => {
+    if (val === 'all') { r.style.display = ''; return; }
+    if (val === 'done' && r.dataset.status === 'done') { r.style.display = ''; return; }
+    if (val === 'todo' && r.dataset.status === 'todo') { r.style.display = ''; return; }
+    if (val === 'tier-1' && r.dataset.tier === 'tier-1') { r.style.display = ''; return; }
+    r.style.display = 'none';
+  });
+}
+
+updateStats();
+</script>
+</body>
+</html>

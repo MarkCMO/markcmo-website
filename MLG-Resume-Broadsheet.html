@@ -15,9 +15,7 @@
    Wall Street Journal Broadsheet Resume
    Mark Louis Gabrielli Jr.
    ============================================ */
-
 *{margin:0;padding:0;box-sizing:border-box}
-
 :root{
   --newsprint:#faf8f0;
   --ink:#1a1a1a;
@@ -34,9 +32,7 @@
   --body:'Lora','Times New Roman',serif;
   --sans:'IBM Plex Sans','Helvetica Neue',Arial,sans-serif;
 }
-
 html{font-size:15px;scroll-behavior:smooth}
-
 body{
   font-family:var(--body);
   background:var(--newsprint);
@@ -46,18 +42,14 @@ body{
   overflow-x:hidden;
   position:relative;
 }
-
 /* Newsprint texture */
 body::before{
   content:'';position:fixed;inset:0;z-index:0;
   opacity:.04;pointer-events:none;
   background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
 }
-
 ::selection{background:rgba(201,169,110,.3)}
-
 a{color:inherit;text-decoration:none}
-
 /* ============================================
    STOCK TICKER BAR
    ============================================ */
@@ -88,12 +80,10 @@ a{color:inherit;text-decoration:none}
 .ticker-item .sym{font-weight:700;color:#fff}
 .ticker-item .up{color:#4caf50}
 .ticker-item .dot{color:var(--gold)}
-
 @keyframes tickerScroll{
   0%{transform:translateX(0)}
   100%{transform:translateX(-50%)}
 }
-
 /* ============================================
    MAIN CONTAINER
    ============================================ */
@@ -104,7 +94,6 @@ a{color:inherit;text-decoration:none}
   position:relative;
   z-index:1;
 }
-
 /* ============================================
    MASTHEAD
    ============================================ */
@@ -164,7 +153,6 @@ a{color:inherit;text-decoration:none}
   padding:8px 4px 0;
   border-top:var(--rule-thin);
 }
-
 /* ============================================
    HEADLINE BANNER
    ============================================ */
@@ -189,7 +177,6 @@ a{color:inherit;text-decoration:none}
   color:var(--gray);
   font-weight:400;
 }
-
 /* ============================================
    CONTACT BAR (below headline)
    ============================================ */
@@ -205,7 +192,6 @@ a{color:inherit;text-decoration:none}
 }
 .contact-bar a:hover{color:var(--gold-dark)}
 .contact-sep{color:var(--gray-rule)}
-
 /* ============================================
    SECTION HEADERS
    ============================================ */
@@ -222,7 +208,6 @@ a{color:inherit;text-decoration:none}
   margin-bottom:20px;
   margin-top:32px;
 }
-
 /* ============================================
    EXECUTIVE SUMMARY (Lead Story)
    ============================================ */
@@ -252,7 +237,6 @@ a{color:inherit;text-decoration:none}
   color:var(--navy);
 }
 .lead-story .em-gold{color:var(--gold-dark);font-weight:600;font-style:normal}
-
 /* ============================================
    STATS BAR (Market Summary)
    ============================================ */
@@ -285,7 +269,6 @@ a{color:inherit;text-decoration:none}
   text-transform:uppercase;
   color:var(--gray);
 }
-
 /* ============================================
    COMPETENCIES (Index Sidebar)
    ============================================ */
@@ -327,7 +310,6 @@ a{color:inherit;text-decoration:none}
   color:var(--gold);
   line-height:2.4;
 }
-
 /* ============================================
    TWO COLUMN LAYOUT
    ============================================ */
@@ -341,7 +323,6 @@ a{color:inherit;text-decoration:none}
   grid-template-columns:1fr 1fr;
   gap:28px;
 }
-
 /* ============================================
    EXPERIENCE STORIES
    ============================================ */
@@ -412,7 +393,6 @@ a{color:inherit;text-decoration:none}
   font-weight:700;
 }
 .story-body .hi{color:var(--navy);font-weight:600}
-
 /* ============================================
    REVENUE DASHBOARD (Markets Section)
    ============================================ */
@@ -451,7 +431,6 @@ a{color:inherit;text-decoration:none}
   color:var(--gray-light);
   margin-top:4px;
 }
-
 .chart-container{
   position:relative;
   height:140px;
@@ -492,7 +471,6 @@ a{color:inherit;text-decoration:none}
   content:'';width:5px;height:5px;
   border-radius:50%;background:var(--gold-dark);
 }
-
 /* ============================================
    DEAL BLOTTER
    ============================================ */
@@ -543,7 +521,6 @@ a{color:inherit;text-decoration:none}
 .deal-row:last-child{border-bottom:none}
 .deal-row span:first-child{color:var(--gray)}
 .deal-row span:last-child{font-weight:600;color:var(--ink)}
-
 /* ============================================
    CASE STUDIES (Feature Articles)
    ============================================ */
@@ -611,7 +588,6 @@ a{color:inherit;text-decoration:none}
   line-height:1;
   opacity:.4;
 }
-
 /* ============================================
    TECH STACK / CLASSIFIEDS
    ============================================ */
@@ -651,7 +627,6 @@ a{color:inherit;text-decoration:none}
 .classified-cat-items span:last-child::after{
   content:'';
 }
-
 /* ============================================
    WINS / BREAKING NEWS
    ============================================ */
@@ -701,7 +676,6 @@ a{color:inherit;text-decoration:none}
   line-height:1.55;
   text-align:justify;
 }
-
 /* ============================================
    FOLD LINE
    ============================================ */
@@ -726,7 +700,6 @@ a{color:inherit;text-decoration:none}
   text-transform:uppercase;
   color:var(--gray-light);
 }
-
 /* ============================================
    QR / FOOTER
    ============================================ */
@@ -785,7 +758,6 @@ a{color:inherit;text-decoration:none}
   text-align:right;
   margin-top:8px;
 }
-
 /* ============================================
    SCROLL REVEAL
    ============================================ */
@@ -795,7 +767,6 @@ a{color:inherit;text-decoration:none}
   transition:all .55s cubic-bezier(.16,1,.3,1);
 }
 .reveal.vis{opacity:1;transform:none}
-
 /* ============================================
    HOVER on articles
    ============================================ */
@@ -803,12 +774,10 @@ a{color:inherit;text-decoration:none}
 .win-card:hover{background:rgba(201,169,110,.05)}
 .feature-article:hover{background:rgba(201,169,110,.03)}
 .deal-entry:hover{background:rgba(201,169,110,.04)}
-
 /* ============================================
    COUNTER ANIMATION
    ============================================ */
 .counter{display:inline-block}
-
 /* ============================================
    PRINT STYLESHEET
    ============================================ */
@@ -836,7 +805,6 @@ a{color:inherit;text-decoration:none}
   a[href]::after{content:none!important}
   .footer-links a{border-color:#999;color:#333}
 }
-
 /* ============================================
    RESPONSIVE
    ============================================ */
@@ -866,15 +834,13 @@ a{color:inherit;text-decoration:none}
   .ticker-bar{font-size:.6rem;height:28px}
 }
 </style>
-
-  <meta name="description" content="The Executive Record - Mark Louis Gabrielli Jr. - MarkCMO provides fractional CMO and strategic marketing services for growth-stage companies.">
-  <link rel="canonical" href="https://markcmo.com/MLG-Resume-Broadsheet.html">
-  <meta property="og:type" content="website">
-  <meta property="og:title" content="The Executive Record - Mark Louis Gabrielli Jr.">
-  <meta property="og:description" content="The Executive Record - Mark Louis Gabrielli Jr. - MarkCMO provides fractional CMO and strategic marketing services for growth-stage companies.">
-  <meta property="og:url" content="https://markcmo.com/MLG-Resume-Broadsheet.html">
-  <meta property="og:site_name" content="MarkCMO">
-
+<meta name="description" content="The Executive Record - Mark Louis Gabrielli Jr. - MarkCMO provides fractional CMO and strategic marketing services for growth-stage companies.">
+<link rel="canonical" href="https://markcmo.com/MLG-Resume-Broadsheet.html">
+<meta property="og:type" content="website">
+<meta property="og:title" content="The Executive Record - Mark Louis Gabrielli Jr.">
+<meta property="og:description" content="The Executive Record - Mark Louis Gabrielli Jr. - MarkCMO provides fractional CMO and strategic marketing services for growth-stage companies.">
+<meta property="og:url" content="https://markcmo.com/MLG-Resume-Broadsheet.html">
+<meta property="og:site_name" content="MarkCMO">
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
@@ -897,514 +863,418 @@ a{color:inherit;text-decoration:none}
 </script>
 </head>
 <body>
-
-<!-- ════════════════════════════════════════════
-     STOCK TICKER
-     ════════════════════════════════════════════ -->
 <div class="ticker-bar">
-  <div class="ticker-track" id="tickerTrack">
-    <div class="ticker-item"><span class="sym">MLG</span> $10M+ <span class="up">&#9650;</span></div>
-    <div class="ticker-item"><span class="sym">ADSPEND</span> $5M+ <span class="up">&#9650;</span></div>
-    <div class="ticker-item"><span class="sym">TEAM</span> 40+ <span class="dot">&#9679;</span></div>
-    <div class="ticker-item"><span class="sym">EXITS</span> 2 <span class="up">&#9650;</span></div>
-    <div class="ticker-item"><span class="sym">REV.INF</span> $50M+ <span class="up">&#9650;</span></div>
-    <div class="ticker-item"><span class="sym">CAC.RED</span> -32% <span class="up">&#9650;</span></div>
-    <div class="ticker-item"><span class="sym">GROWTH</span> 2.4x <span class="up">&#9650;</span></div>
-    <div class="ticker-item"><span class="sym">ROAS</span> Optimized <span class="dot">&#9679;</span></div>
-    <div class="ticker-item"><span class="sym">TECH</span> 109 Tools <span class="dot">&#9679;</span></div>
-    <div class="ticker-item"><span class="sym">AI.SYS</span> Active <span class="up">&#9650;</span></div>
-    <!-- Duplicate for seamless loop -->
-    <div class="ticker-item"><span class="sym">MLG</span> $10M+ <span class="up">&#9650;</span></div>
-    <div class="ticker-item"><span class="sym">ADSPEND</span> $5M+ <span class="up">&#9650;</span></div>
-    <div class="ticker-item"><span class="sym">TEAM</span> 40+ <span class="dot">&#9679;</span></div>
-    <div class="ticker-item"><span class="sym">EXITS</span> 2 <span class="up">&#9650;</span></div>
-    <div class="ticker-item"><span class="sym">REV.INF</span> $50M+ <span class="up">&#9650;</span></div>
-    <div class="ticker-item"><span class="sym">CAC.RED</span> -32% <span class="up">&#9650;</span></div>
-    <div class="ticker-item"><span class="sym">GROWTH</span> 2.4x <span class="up">&#9650;</span></div>
-    <div class="ticker-item"><span class="sym">ROAS</span> Optimized <span class="dot">&#9679;</span></div>
-    <div class="ticker-item"><span class="sym">TECH</span> 109 Tools <span class="dot">&#9679;</span></div>
-    <div class="ticker-item"><span class="sym">AI.SYS</span> Active <span class="up">&#9650;</span></div>
-  </div>
+<div class="ticker-track" id="tickerTrack">
+<div class="ticker-item"><span class="sym">MLG</span> $10M+ <span class="up">&#9650;</span></div>
+<div class="ticker-item"><span class="sym">ADSPEND</span> $5M+ <span class="up">&#9650;</span></div>
+<div class="ticker-item"><span class="sym">TEAM</span> 40+ <span class="dot">&#9679;</span></div>
+<div class="ticker-item"><span class="sym">EXITS</span> 2 <span class="up">&#9650;</span></div>
+<div class="ticker-item"><span class="sym">REV.INF</span> $50M+ <span class="up">&#9650;</span></div>
+<div class="ticker-item"><span class="sym">CAC.RED</span> -32% <span class="up">&#9650;</span></div>
+<div class="ticker-item"><span class="sym">GROWTH</span> 2.4x <span class="up">&#9650;</span></div>
+<div class="ticker-item"><span class="sym">ROAS</span> Optimized <span class="dot">&#9679;</span></div>
+<div class="ticker-item"><span class="sym">TECH</span> 109 Tools <span class="dot">&#9679;</span></div>
+<div class="ticker-item"><span class="sym">AI.SYS</span> Active <span class="up">&#9650;</span></div>
+<div class="ticker-item"><span class="sym">MLG</span> $10M+ <span class="up">&#9650;</span></div>
+<div class="ticker-item"><span class="sym">ADSPEND</span> $5M+ <span class="up">&#9650;</span></div>
+<div class="ticker-item"><span class="sym">TEAM</span> 40+ <span class="dot">&#9679;</span></div>
+<div class="ticker-item"><span class="sym">EXITS</span> 2 <span class="up">&#9650;</span></div>
+<div class="ticker-item"><span class="sym">REV.INF</span> $50M+ <span class="up">&#9650;</span></div>
+<div class="ticker-item"><span class="sym">CAC.RED</span> -32% <span class="up">&#9650;</span></div>
+<div class="ticker-item"><span class="sym">GROWTH</span> 2.4x <span class="up">&#9650;</span></div>
+<div class="ticker-item"><span class="sym">ROAS</span> Optimized <span class="dot">&#9679;</span></div>
+<div class="ticker-item"><span class="sym">TECH</span> 109 Tools <span class="dot">&#9679;</span></div>
+<div class="ticker-item"><span class="sym">AI.SYS</span> Active <span class="up">&#9650;</span></div>
 </div>
-
+</div>
 <div class="broadsheet">
-
-<!-- ════════════════════════════════════════════
-     MASTHEAD
-     ════════════════════════════════════════════ -->
 <header class="masthead">
-  <div class="masthead-top">
-    <span>Vol. I &middot; No. 1</span>
-    <span>South Florida &middot; Sunny, 82&deg;F</span>
-    <span>Price: $0.00 / Priceless</span>
-  </div>
-  <div class="masthead-title">The Executive Record</div>
-  <div class="masthead-subtitle">The Definitive Source for Executive Marketing Leadership</div>
-  <div class="masthead-rule">Est. 2011</div>
-  <div class="masthead-bottom">
-    <span>Monday, March 17, 2026</span>
-    <span>mark@markcmo.com</span>
-    <span>linkedin.com/in/marklgabrielli</span>
-  </div>
+<div class="masthead-top">
+<span>Vol. I &middot; No. 1</span>
+<span>South Florida &middot; Sunny, 82&deg;F</span>
+<span>Price: $0.00 / Priceless</span>
+</div>
+<div class="masthead-title">The Executive Record</div>
+<div class="masthead-subtitle">The Definitive Source for Executive Marketing Leadership</div>
+<div class="masthead-rule">Est. 2011</div>
+<div class="masthead-bottom">
+<span>Monday, March 17, 2026</span>
+<span>mark@markcmo.com</span>
+<span>linkedin.com/in/marklgabrielli</span>
+</div>
 </header>
-
-<!-- ════════════════════════════════════════════
-     HEADLINE
-     ════════════════════════════════════════════ -->
 <div class="headline-banner">
-  <h1 class="headline-main">CMO Scales Companies From $5M to $10M+<br>Through System-Driven Marketing Architecture</h1>
-  <p class="headline-sub">Mark Louis Gabrielli Jr. delivers revenue systems, not just campaigns, for PE-backed firms and high-growth startups</p>
+<h1 class="headline-main">CMO Scales Companies From $5M to $10M+<br>Through System-Driven Marketing Architecture</h1>
+<p class="headline-sub">Mark Louis Gabrielli Jr. delivers revenue systems, not just campaigns, for PE-backed firms and high-growth startups</p>
 </div>
-
-<!-- Contact Bar -->
 <div class="contact-bar">
-  <a href="mailto:mark@markcmo.com">mark@markcmo.com</a>
-  <span class="contact-sep">|</span>
-  <a href="https://linkedin.com/in/marklgabrielli" target="_blank">linkedin.com/in/marklgabrielli</a>
-  <span class="contact-sep">|</span>
-  <a href="https://markcmo.com/portfolio" target="_blank" rel="noopener noreferrer">markcmo.com/portfolio</a>
-  <span class="contact-sep">|</span>
-  <a href="https://markcmo.com/book" target="_blank" rel="noopener noreferrer">markcmo.com/book</a>
-  <span class="contact-sep">|</span>
-  <span>South Florida</span>
-  <span class="contact-sep">|</span>
-  <span>Chief Marketing Officer &middot; Growth Architect &middot; Revenue Systems Builder</span>
+<a href="mailto:mark@markcmo.com">mark@markcmo.com</a>
+<span class="contact-sep">|</span>
+<a href="https://linkedin.com/in/marklgabrielli" target="_blank">linkedin.com/in/marklgabrielli</a>
+<span class="contact-sep">|</span>
+<a href="https://markcmo.com/portfolio" target="_blank" rel="noopener noreferrer">markcmo.com/portfolio</a>
+<span class="contact-sep">|</span>
+<a href="https://markcmo.com/book" target="_blank" rel="noopener noreferrer">markcmo.com/book</a>
+<span class="contact-sep">|</span>
+<span>South Florida</span>
+<span class="contact-sep">|</span>
+<span>Chief Marketing Officer &middot; Growth Architect &middot; Revenue Systems Builder</span>
 </div>
-
-<!-- ════════════════════════════════════════════
-     STATS BAR (Market Summary)
-     ════════════════════════════════════════════ -->
 <div class="market-bar">
-  <div class="market-item">
-    <div class="market-val counter" data-target="10" data-prefix="$" data-suffix="M+">$10M+</div>
-    <div class="market-label">Revenue Scaled</div>
-  </div>
-  <div class="market-item">
-    <div class="market-val counter" data-target="5" data-prefix="$" data-suffix="M+">$5M+</div>
-    <div class="market-label">Ad Spend Managed</div>
-  </div>
-  <div class="market-item">
-    <div class="market-val counter" data-target="40" data-suffix="+">40+</div>
-    <div class="market-label">Team Members Led</div>
-  </div>
-  <div class="market-item">
-    <div class="market-val">2</div>
-    <div class="market-label">M&amp;A Exits</div>
-  </div>
+<div class="market-item">
+<div class="market-val counter" data-target="10" data-prefix="$" data-suffix="M+">$10M+</div>
+<div class="market-label">Revenue Scaled</div>
 </div>
-
-<!-- ════════════════════════════════════════════
-     SECTION A: EXECUTIVE SUMMARY
-     ════════════════════════════════════════════ -->
+<div class="market-item">
+<div class="market-val counter" data-target="5" data-prefix="$" data-suffix="M+">$5M+</div>
+<div class="market-label">Ad Spend Managed</div>
+</div>
+<div class="market-item">
+<div class="market-val counter" data-target="40" data-suffix="+">40+</div>
+<div class="market-label">Team Members Led</div>
+</div>
+<div class="market-item">
+<div class="market-val">2</div>
+<div class="market-label">M&amp;A Exits</div>
+</div>
+</div>
 <div class="section-label reveal">SECTION A: EXECUTIVE SUMMARY</div>
-
 <div class="lead-story reveal">
-  <p>Revenue-focused Chief Marketing Officer with a track record of <span class="em-gold">scaling companies from $5M to $10M+</span> through system-driven marketing architecture. Managed <span class="em-gold">$5M+ in annual advertising budgets</span> across Meta, Google, and emerging channels while building and leading <span class="em-gold">cross-functional teams of 40+</span> across growth, creative, analytics, and automation.</p>
-  <p>Directly involved in <span class="em-gold">2 successful company exits</span> (buy-side and sell-side), aligning marketing performance with enterprise valuation drivers. Known for architecting <span class="em-gold">AI-powered marketing systems</span> and scalable infrastructure that reduce CAC, accelerate pipeline, and compound revenue. Not just campaigns, but the operating systems behind them.</p>
+<p>Revenue-focused Chief Marketing Officer with a track record of <span class="em-gold">scaling companies from $5M to $10M+</span> through system-driven marketing architecture. Managed <span class="em-gold">$5M+ in annual advertising budgets</span> across Meta, Google, and emerging channels while building and leading <span class="em-gold">cross-functional teams of 40+</span> across growth, creative, analytics, and automation.</p>
+<p>Directly involved in <span class="em-gold">2 successful company exits</span> (buy-side and sell-side), aligning marketing performance with enterprise valuation drivers. Known for architecting <span class="em-gold">AI-powered marketing systems</span> and scalable infrastructure that reduce CAC, accelerate pipeline, and compound revenue. Not just campaigns, but the operating systems behind them.</p>
 </div>
-
-<!-- ════════════════════════════════════════════
-     COMPETENCIES INDEX
-     ════════════════════════════════════════════ -->
 <div class="index-box reveal">
-  <div class="index-title">Index of Core Competencies</div>
-  <ul class="index-list">
-    <li>Go-To-Market Strategy</li>
-    <li>Demand Generation</li>
-    <li>Revenue Operations</li>
-    <li>Customer Acquisition &amp; Lifecycle</li>
-    <li>Brand Strategy &amp; Positioning</li>
-    <li>Performance Marketing</li>
-    <li>AI-Driven Marketing Systems</li>
-    <li>Marketing Automation</li>
-    <li>Martech Stack Development</li>
-    <li>Data Analytics &amp; Attribution</li>
-    <li>Conversion Rate Optimization</li>
-    <li>Multi-Channel Growth</li>
-    <li>M&amp;A Marketing Integration</li>
-    <li>Digital Transformation</li>
-    <li>Team Leadership &amp; Org Design</li>
-    <li>Web Development &amp; Site Building</li>
-    <li>SEO &amp; Technical SEO</li>
-    <li>ABM &amp; Buyer Intent Platforms</li>
-  </ul>
+<div class="index-title">Index of Core Competencies</div>
+<ul class="index-list">
+<li>Go-To-Market Strategy</li>
+<li>Demand Generation</li>
+<li>Revenue Operations</li>
+<li>Customer Acquisition &amp; Lifecycle</li>
+<li>Brand Strategy &amp; Positioning</li>
+<li>Performance Marketing</li>
+<li>AI-Driven Marketing Systems</li>
+<li>Marketing Automation</li>
+<li>Martech Stack Development</li>
+<li>Data Analytics &amp; Attribution</li>
+<li>Conversion Rate Optimization</li>
+<li>Multi-Channel Growth</li>
+<li>M&amp;A Marketing Integration</li>
+<li>Digital Transformation</li>
+<li>Team Leadership &amp; Org Design</li>
+<li>Web Development &amp; Site Building</li>
+<li>SEO &amp; Technical SEO</li>
+<li>ABM &amp; Buyer Intent Platforms</li>
+</ul>
 </div>
-
-<!-- ════════════════════════════════════════════
-     SECTION B: PROFESSIONAL EXPERIENCE
-     ════════════════════════════════════════════ -->
 <div class="section-label reveal">SECTION B: PROFESSIONAL EXPERIENCE</div>
-
 <div class="story reveal">
-  <div class="story-headline">Chief Marketing Officer &amp; Growth Advisor</div>
-  <div class="story-org">MarkCMO - Executive Marketing Consultancy</div>
-  <div class="story-byline">2020 to Present</div>
-  <div class="story-desc">Fractional CMO practice serving PE-backed firms, high-growth startups, and enterprise organizations.</div>
-  <div class="story-body">
-    <ul>
-      <li>Scaled <span class="hi">multiple client companies from $5M to $10M+</span> in annual revenue by architecting full-funnel GTM strategies across paid, organic, and partnership channels</li>
-      <li>Managed <span class="hi">$5M+ in combined annual ad spend</span> across Meta, Google, TikTok, and LinkedIn with consistent ROAS optimization and attribution modeling</li>
-      <li>Built and led <span class="hi">cross-functional teams of 40+</span> spanning growth marketing, creative production, analytics, and marketing automation</li>
-      <li>Designed and deployed <span class="hi">AI-driven marketing systems</span> using Claude, ChatGPT, and custom automation pipelines that reduced CAC by 30%+ while increasing conversion rates</li>
-      <li>Served as strategic marketing advisor during <span class="hi">2 successful company exits</span>, aligning marketing KPIs with valuation multiples for both buy-side and sell-side transactions</li>
-      <li>Engineered scalable marketing infrastructure including CRM architecture, lead scoring models, and automated nurture systems that compound pipeline velocity quarter over quarter</li>
-    </ul>
-  </div>
+<div class="story-headline">Chief Marketing Officer &amp; Growth Advisor</div>
+<div class="story-org">MarkCMO - Executive Marketing Consultancy</div>
+<div class="story-byline">2020 to Present</div>
+<div class="story-desc">Fractional CMO practice serving PE-backed firms, high-growth startups, and enterprise organizations.</div>
+<div class="story-body">
+<ul>
+<li>Scaled <span class="hi">multiple client companies from $5M to $10M+</span> in annual revenue by architecting full-funnel GTM strategies across paid, organic, and partnership channels</li>
+<li>Managed <span class="hi">$5M+ in combined annual ad spend</span> across Meta, Google, TikTok, and LinkedIn with consistent ROAS optimization and attribution modeling</li>
+<li>Built and led <span class="hi">cross-functional teams of 40+</span> spanning growth marketing, creative production, analytics, and marketing automation</li>
+<li>Designed and deployed <span class="hi">AI-driven marketing systems</span> using Claude, ChatGPT, and custom automation pipelines that reduced CAC by 30%+ while increasing conversion rates</li>
+<li>Served as strategic marketing advisor during <span class="hi">2 successful company exits</span>, aligning marketing KPIs with valuation multiples for both buy-side and sell-side transactions</li>
+<li>Engineered scalable marketing infrastructure including CRM architecture, lead scoring models, and automated nurture systems that compound pipeline velocity quarter over quarter</li>
+</ul>
 </div>
-
+</div>
 <div class="story reveal">
-  <div class="story-headline">VP of Marketing &amp; Growth</div>
-  <div class="story-org">Multi-Vertical Operating Company</div>
-  <div class="story-byline">2017 to 2020</div>
-  <div class="story-desc">High-growth portfolio company spanning e-commerce, SaaS, and services verticals.</div>
-  <div class="story-body">
-    <ul>
-      <li>Drove <span class="hi">120% revenue growth</span> over 3 years by redesigning the company's demand generation engine and implementing performance marketing at scale</li>
-      <li>Established the company's first RevOps function, unifying marketing, sales, and customer success data into a single attribution framework</li>
-      <li>Led <span class="hi">brand repositioning initiative</span> that increased qualified lead volume by 45% and improved sales cycle velocity by 22%</li>
-      <li>Recruited, trained, and scaled the marketing organization from 8 to 28 team members across 4 functional areas</li>
-      <li>Managed martech stack consolidation that reduced operational costs by <span class="hi">$380K annually</span> while improving campaign throughput</li>
-    </ul>
-  </div>
+<div class="story-headline">VP of Marketing &amp; Growth</div>
+<div class="story-org">Multi-Vertical Operating Company</div>
+<div class="story-byline">2017 to 2020</div>
+<div class="story-desc">High-growth portfolio company spanning e-commerce, SaaS, and services verticals.</div>
+<div class="story-body">
+<ul>
+<li>Drove <span class="hi">120% revenue growth</span> over 3 years by redesigning the company's demand generation engine and implementing performance marketing at scale</li>
+<li>Established the company's first RevOps function, unifying marketing, sales, and customer success data into a single attribution framework</li>
+<li>Led <span class="hi">brand repositioning initiative</span> that increased qualified lead volume by 45% and improved sales cycle velocity by 22%</li>
+<li>Recruited, trained, and scaled the marketing organization from 8 to 28 team members across 4 functional areas</li>
+<li>Managed martech stack consolidation that reduced operational costs by <span class="hi">$380K annually</span> while improving campaign throughput</li>
+</ul>
 </div>
-
+</div>
 <div class="two-col-even reveal">
-  <div class="story" style="margin-bottom:0">
-    <div class="story-headline">Director of Digital Marketing</div>
-    <div class="story-org">Growth-Stage Technology Company</div>
-    <div class="story-byline">2014 to 2017</div>
-    <div class="story-desc">Series B technology company focused on B2B SaaS solutions.</div>
-    <div class="story-body single-col">
-      <ul>
-        <li>Built the digital marketing function from the ground up, establishing paid media, SEO, content, and email as scalable acquisition channels</li>
-        <li>Launched and optimized <span class="hi">multi-channel paid campaigns</span> that generated 60%+ of the company's qualified pipeline</li>
-        <li>Implemented marketing automation platform (HubSpot) and designed lead scoring models that increased MQL-to-SQL conversion by <span class="hi">38%</span></li>
-        <li>Developed data-driven content strategy that grew organic traffic by <span class="hi">4x</span> within 18 months</li>
-      </ul>
-    </div>
-  </div>
-  <div class="story" style="margin-bottom:0">
-    <div class="story-headline">Marketing Strategist &amp; Consultant</div>
-    <div class="story-org">Independent Consulting Practice</div>
-    <div class="story-byline">2011 to 2014</div>
-    <div class="story-desc">Strategic marketing consultancy serving SMBs and mid-market companies.</div>
-    <div class="story-body single-col">
-      <ul>
-        <li>Provided end-to-end marketing strategy and execution for <span class="hi">20+ clients</span> across technology, professional services, and consumer verticals</li>
-        <li>Developed go-to-market playbooks that reduced client time-to-revenue by an average of <span class="hi">40%</span></li>
-        <li>Built repeatable frameworks for customer acquisition, retention, and brand positioning adopted across multiple engagements</li>
-      </ul>
-    </div>
-  </div>
+<div class="story" style="margin-bottom:0">
+<div class="story-headline">Director of Digital Marketing</div>
+<div class="story-org">Growth-Stage Technology Company</div>
+<div class="story-byline">2014 to 2017</div>
+<div class="story-desc">Series B technology company focused on B2B SaaS solutions.</div>
+<div class="story-body single-col">
+<ul>
+<li>Built the digital marketing function from the ground up, establishing paid media, SEO, content, and email as scalable acquisition channels</li>
+<li>Launched and optimized <span class="hi">multi-channel paid campaigns</span> that generated 60%+ of the company's qualified pipeline</li>
+<li>Implemented marketing automation platform (HubSpot) and designed lead scoring models that increased MQL-to-SQL conversion by <span class="hi">38%</span></li>
+<li>Developed data-driven content strategy that grew organic traffic by <span class="hi">4x</span> within 18 months</li>
+</ul>
 </div>
-
-<!-- ════════════════════════════════════════════
-     FOLD LINE
-     ════════════════════════════════════════════ -->
+</div>
+<div class="story" style="margin-bottom:0">
+<div class="story-headline">Marketing Strategist &amp; Consultant</div>
+<div class="story-org">Independent Consulting Practice</div>
+<div class="story-byline">2011 to 2014</div>
+<div class="story-desc">Strategic marketing consultancy serving SMBs and mid-market companies.</div>
+<div class="story-body single-col">
+<ul>
+<li>Provided end-to-end marketing strategy and execution for <span class="hi">20+ clients</span> across technology, professional services, and consumer verticals</li>
+<li>Developed go-to-market playbooks that reduced client time-to-revenue by an average of <span class="hi">40%</span></li>
+<li>Built repeatable frameworks for customer acquisition, retention, and brand positioning adopted across multiple engagements</li>
+</ul>
+</div>
+</div>
+</div>
 <div class="fold-line"><span>Below the Fold</span></div>
-
-<!-- ════════════════════════════════════════════
-     SECTION C: MARKETS (Revenue Dashboard)
-     ════════════════════════════════════════════ -->
 <div class="section-label reveal">SECTION C: MARKETS &amp; REVENUE IMPACT</div>
-
 <div class="two-col reveal">
-  <div>
-    <div class="chart-title">Career Performance Snapshot <span class="chart-verified">Verified</span></div>
-    <div class="markets-grid">
-      <div class="market-cell">
-        <div class="market-cell-label">Cumulative Revenue Influenced</div>
-        <div class="market-cell-val counter" data-target="50" data-prefix="$" data-suffix="M+">$50M+</div>
-        <div class="market-cell-sub">Across all engagements</div>
-      </div>
-      <div class="market-cell">
-        <div class="market-cell-label">Avg. CAC Reduction</div>
-        <div class="market-cell-val">-32%</div>
-        <div class="market-cell-sub">Via AI + automation systems</div>
-      </div>
-      <div class="market-cell">
-        <div class="market-cell-label">Avg. Revenue Growth</div>
-        <div class="market-cell-val">2.4x</div>
-        <div class="market-cell-sub">Within 24-month engagements</div>
-      </div>
-    </div>
-
-    <!-- Revenue Growth Chart -->
-    <div class="chart-title">Revenue Trajectory, 2011 to 2026</div>
-    <div class="chart-container">
-      <svg viewBox="0 0 800 120" preserveAspectRatio="none">
-        <defs>
-          <linearGradient id="areaGrad" x1="0" y1="0" x2="0" y2="1">
-            <stop offset="0%" stop-color="#0a2240" stop-opacity=".25"/>
-            <stop offset="100%" stop-color="#0a2240" stop-opacity="0"/>
-          </linearGradient>
-        </defs>
-        <!-- Grid lines -->
-        <line class="chart-gridline" x1="0" y1="30" x2="800" y2="30"/>
-        <line class="chart-gridline" x1="0" y1="60" x2="800" y2="60"/>
-        <line class="chart-gridline" x1="0" y1="90" x2="800" y2="90"/>
-        <!-- Vertical grid -->
-        <line class="chart-gridline" x1="160" y1="0" x2="160" y2="120"/>
-        <line class="chart-gridline" x1="320" y1="0" x2="320" y2="120"/>
-        <line class="chart-gridline" x1="480" y1="0" x2="480" y2="120"/>
-        <line class="chart-gridline" x1="640" y1="0" x2="640" y2="120"/>
-        <!-- Area fill -->
-        <path class="chart-area" d="M0,108 C80,105 120,100 160,92 C200,84 240,74 280,66 C320,58 360,48 400,40 C440,32 480,25 520,20 C560,15 600,12 640,10 C680,8 720,6 760,5 L800,4 L800,120 L0,120 Z"/>
-        <!-- Line -->
-        <path class="chart-line" d="M0,108 C80,105 120,100 160,92 C200,84 240,74 280,66 C320,58 360,48 400,40 C440,32 480,25 520,20 C560,15 600,12 640,10 C680,8 720,6 760,5 L800,4"/>
-        <!-- Dots -->
-        <circle class="chart-dot" cx="0" cy="108" r="3"/>
-        <circle class="chart-dot" cx="160" cy="92" r="3"/>
-        <circle class="chart-dot" cx="320" cy="66" r="3"/>
-        <circle class="chart-dot" cx="480" cy="40" r="3"/>
-        <circle class="chart-dot" cx="640" cy="10" r="3"/>
-        <circle class="chart-dot" cx="800" cy="4" r="3"/>
-      </svg>
-    </div>
-    <div class="chart-axis">
-      <span>2011</span><span>2014</span><span>2017</span><span>2020</span><span>2023</span><span>2026</span>
-    </div>
-  </div>
-
-  <!-- DEAL BLOTTER (sidebar) -->
-  <div>
-    <div class="deal-blotter">
-      <div class="deal-blotter-title">Deal Blotter</div>
-      <div class="deal-entry">
-        <div class="deal-type-label">Sell-Side Exit</div>
-        <div class="deal-name">Growth-Stage Portfolio Company</div>
-        <div class="deal-row"><span>Role</span><span>CMO / Marketing Lead</span></div>
-        <div class="deal-row"><span>Contribution</span><span>Revenue scaling &amp; brand positioning</span></div>
-        <div class="deal-row"><span>Impact</span><span>Aligned marketing KPIs to valuation</span></div>
-        <div class="deal-row"><span>Result</span><span>Successful exit at premium multiple</span></div>
-      </div>
-      <div class="deal-entry">
-        <div class="deal-type-label">Buy-Side Integration</div>
-        <div class="deal-name">PE-Backed Acquisition Target</div>
-        <div class="deal-row"><span>Role</span><span>Marketing Integration Advisor</span></div>
-        <div class="deal-row"><span>Contribution</span><span>Due diligence &amp; post-merger GTM</span></div>
-        <div class="deal-row"><span>Impact</span><span>Unified martech &amp; team structures</span></div>
-        <div class="deal-row"><span>Result</span><span>Accelerated post-acquisition growth</span></div>
-      </div>
-    </div>
-    <div class="continued">Continued on Section D...</div>
-  </div>
+<div>
+<div class="chart-title">Career Performance Snapshot <span class="chart-verified">Verified</span></div>
+<div class="markets-grid">
+<div class="market-cell">
+<div class="market-cell-label">Cumulative Revenue Influenced</div>
+<div class="market-cell-val counter" data-target="50" data-prefix="$" data-suffix="M+">$50M+</div>
+<div class="market-cell-sub">Across all engagements</div>
 </div>
-
-<!-- ════════════════════════════════════════════
-     SECTION D: CASE STUDIES (Feature Articles)
-     ════════════════════════════════════════════ -->
+<div class="market-cell">
+<div class="market-cell-label">Avg. CAC Reduction</div>
+<div class="market-cell-val">-32%</div>
+<div class="market-cell-sub">Via AI + automation systems</div>
+</div>
+<div class="market-cell">
+<div class="market-cell-label">Avg. Revenue Growth</div>
+<div class="market-cell-val">2.4x</div>
+<div class="market-cell-sub">Within 24-month engagements</div>
+</div>
+</div>
+<div class="chart-title">Revenue Trajectory, 2011 to 2026</div>
+<div class="chart-container">
+<svg viewBox="0 0 800 120" preserveAspectRatio="none">
+<defs>
+<linearGradient id="areaGrad" x1="0" y1="0" x2="0" y2="1">
+<stop offset="0%" stop-color="#0a2240" stop-opacity=".25"/>
+<stop offset="100%" stop-color="#0a2240" stop-opacity="0"/>
+</linearGradient>
+</defs>
+<line class="chart-gridline" x1="0" y1="30" x2="800" y2="30"/>
+<line class="chart-gridline" x1="0" y1="60" x2="800" y2="60"/>
+<line class="chart-gridline" x1="0" y1="90" x2="800" y2="90"/>
+<line class="chart-gridline" x1="160" y1="0" x2="160" y2="120"/>
+<line class="chart-gridline" x1="320" y1="0" x2="320" y2="120"/>
+<line class="chart-gridline" x1="480" y1="0" x2="480" y2="120"/>
+<line class="chart-gridline" x1="640" y1="0" x2="640" y2="120"/>
+<path class="chart-area" d="M0,108 C80,105 120,100 160,92 C200,84 240,74 280,66 C320,58 360,48 400,40 C440,32 480,25 520,20 C560,15 600,12 640,10 C680,8 720,6 760,5 L800,4 L800,120 L0,120 Z"/>
+<path class="chart-line" d="M0,108 C80,105 120,100 160,92 C200,84 240,74 280,66 C320,58 360,48 400,40 C440,32 480,25 520,20 C560,15 600,12 640,10 C680,8 720,6 760,5 L800,4"/>
+<circle class="chart-dot" cx="0" cy="108" r="3"/>
+<circle class="chart-dot" cx="160" cy="92" r="3"/>
+<circle class="chart-dot" cx="320" cy="66" r="3"/>
+<circle class="chart-dot" cx="480" cy="40" r="3"/>
+<circle class="chart-dot" cx="640" cy="10" r="3"/>
+<circle class="chart-dot" cx="800" cy="4" r="3"/>
+</svg>
+</div>
+<div class="chart-axis">
+<span>2011</span><span>2014</span><span>2017</span><span>2020</span><span>2023</span><span>2026</span>
+</div>
+</div>
+<div>
+<div class="deal-blotter">
+<div class="deal-blotter-title">Deal Blotter</div>
+<div class="deal-entry">
+<div class="deal-type-label">Sell-Side Exit</div>
+<div class="deal-name">Growth-Stage Portfolio Company</div>
+<div class="deal-row"><span>Role</span><span>CMO / Marketing Lead</span></div>
+<div class="deal-row"><span>Contribution</span><span>Revenue scaling &amp; brand positioning</span></div>
+<div class="deal-row"><span>Impact</span><span>Aligned marketing KPIs to valuation</span></div>
+<div class="deal-row"><span>Result</span><span>Successful exit at premium multiple</span></div>
+</div>
+<div class="deal-entry">
+<div class="deal-type-label">Buy-Side Integration</div>
+<div class="deal-name">PE-Backed Acquisition Target</div>
+<div class="deal-row"><span>Role</span><span>Marketing Integration Advisor</span></div>
+<div class="deal-row"><span>Contribution</span><span>Due diligence &amp; post-merger GTM</span></div>
+<div class="deal-row"><span>Impact</span><span>Unified martech &amp; team structures</span></div>
+<div class="deal-row"><span>Result</span><span>Accelerated post-acquisition growth</span></div>
+</div>
+</div>
+<div class="continued">Continued on Section D...</div>
+</div>
+</div>
 <div class="section-label reveal">SECTION D: FEATURE STORIES / CASE STUDIES</div>
-
 <div class="reveal">
-  <div class="pull-quote">Not just campaigns, but the operating systems behind them. Revenue architecture that compounds quarter over quarter.</div>
+<div class="pull-quote">Not just campaigns, but the operating systems behind them. Revenue architecture that compounds quarter over quarter.</div>
 </div>
-
 <div class="two-col reveal">
-  <div>
-    <div class="feature-article">
-      <span class="feature-tag rev">Revenue Scale</span>
-      <div class="feature-title">$5M to $10M+ Revenue Architecture</div>
-      <div class="feature-desc">Designed and executed full-funnel GTM strategy combining paid media, organic growth, and strategic partnerships. Built the demand generation engine, attribution framework, and conversion infrastructure that transformed early-stage revenue into a scalable, repeatable growth system.</div>
-      <div class="feature-metric">2x+ Revenue Growth</div>
-    </div>
-    <div class="feature-article">
-      <span class="feature-tag perf">Performance</span>
-      <div class="feature-title">$5M+ Ad Budget Optimization Engine</div>
-      <div class="feature-desc">Managed multi-million dollar ad spend across Meta, Google, TikTok, and LinkedIn with AI-driven bidding strategies. Deployed machine learning models for audience targeting and bid optimization that consistently outperformed manual management benchmarks.</div>
-      <div class="feature-metric">-32% CAC Reduction</div>
-    </div>
-  </div>
-  <div>
-    <div class="feature-article">
-      <span class="feature-tag ma">M&amp;A</span>
-      <div class="feature-title">Exit-Ready Marketing Organization</div>
-      <div class="feature-desc">Aligned marketing performance metrics with enterprise valuation drivers for PE-backed exit. Built the documentation, dashboards, and organizational structure that demonstrated marketing's direct contribution to company value during due diligence.</div>
-      <div class="feature-metric">2 Successful Exits</div>
-    </div>
-
-    <div class="pull-quote" style="margin-top:24px">Scaling companies is not about spending more. It is about building systems that make every dollar work harder and every quarter compound on the last.</div>
-  </div>
+<div>
+<div class="feature-article">
+<span class="feature-tag rev">Revenue Scale</span>
+<div class="feature-title">$5M to $10M+ Revenue Architecture</div>
+<div class="feature-desc">Designed and executed full-funnel GTM strategy combining paid media, organic growth, and strategic partnerships. Built the demand generation engine, attribution framework, and conversion infrastructure that transformed early-stage revenue into a scalable, repeatable growth system.</div>
+<div class="feature-metric">2x+ Revenue Growth</div>
 </div>
-
-<!-- ════════════════════════════════════════════
-     SECTION E: BREAKING NEWS (Selected Wins)
-     ════════════════════════════════════════════ -->
+<div class="feature-article">
+<span class="feature-tag perf">Performance</span>
+<div class="feature-title">$5M+ Ad Budget Optimization Engine</div>
+<div class="feature-desc">Managed multi-million dollar ad spend across Meta, Google, TikTok, and LinkedIn with AI-driven bidding strategies. Deployed machine learning models for audience targeting and bid optimization that consistently outperformed manual management benchmarks.</div>
+<div class="feature-metric">-32% CAC Reduction</div>
+</div>
+</div>
+<div>
+<div class="feature-article">
+<span class="feature-tag ma">M&amp;A</span>
+<div class="feature-title">Exit-Ready Marketing Organization</div>
+<div class="feature-desc">Aligned marketing performance metrics with enterprise valuation drivers for PE-backed exit. Built the documentation, dashboards, and organizational structure that demonstrated marketing's direct contribution to company value during due diligence.</div>
+<div class="feature-metric">2 Successful Exits</div>
+</div>
+<div class="pull-quote" style="margin-top:24px">Scaling companies is not about spending more. It is about building systems that make every dollar work harder and every quarter compound on the last.</div>
+</div>
+</div>
 <div class="section-label reveal">SECTION E: BREAKING NEWS / SELECTED WINS</div>
-
 <div class="reveal">
-  <div class="breaking-header">Breaking News</div>
-  <div class="wins-grid">
-    <div class="win-card">
-      <div class="win-num">01</div>
-      <div class="win-title">Multi-Company Revenue Scale</div>
-      <div class="win-desc">Scaled multiple companies from $5M to $10M+ through architected growth systems, not one-off campaigns.</div>
-    </div>
-    <div class="win-card">
-      <div class="win-num">02</div>
-      <div class="win-title">$5M+ Ad Budget Mastery</div>
-      <div class="win-desc">Managed seven-figure annual ad spend with consistent ROAS optimization across Meta, Google, and emerging channels.</div>
-    </div>
-    <div class="win-card">
-      <div class="win-num">03</div>
-      <div class="win-title">40+ Person Team Leadership</div>
-      <div class="win-desc">Built and led cross-functional teams spanning growth, creative, analytics, and automation from the ground up.</div>
-    </div>
-    <div class="win-card">
-      <div class="win-num">04</div>
-      <div class="win-title">2 Successful Company Exits</div>
-      <div class="win-desc">Key contributor to both buy-side and sell-side M&amp;A transactions, aligning marketing with enterprise value drivers.</div>
-    </div>
-    <div class="win-card">
-      <div class="win-num">05</div>
-      <div class="win-title">AI Marketing Infrastructure</div>
-      <div class="win-desc">Pioneered AI-driven marketing systems that reduced CAC by 30%+ while increasing conversion rates and pipeline velocity.</div>
-    </div>
-    <div class="win-card">
-      <div class="win-num">06</div>
-      <div class="win-title">Scalable Marketing Architecture</div>
-      <div class="win-desc">Designed marketing operating systems that compound growth: CRM, automation, attribution, and funnel architecture.</div>
-    </div>
-  </div>
+<div class="breaking-header">Breaking News</div>
+<div class="wins-grid">
+<div class="win-card">
+<div class="win-num">01</div>
+<div class="win-title">Multi-Company Revenue Scale</div>
+<div class="win-desc">Scaled multiple companies from $5M to $10M+ through architected growth systems, not one-off campaigns.</div>
 </div>
-
-<!-- ════════════════════════════════════════════
-     SECTION F: CLASSIFIEDS (Technology Stack)
-     ════════════════════════════════════════════ -->
+<div class="win-card">
+<div class="win-num">02</div>
+<div class="win-title">$5M+ Ad Budget Mastery</div>
+<div class="win-desc">Managed seven-figure annual ad spend with consistent ROAS optimization across Meta, Google, and emerging channels.</div>
+</div>
+<div class="win-card">
+<div class="win-num">03</div>
+<div class="win-title">40+ Person Team Leadership</div>
+<div class="win-desc">Built and led cross-functional teams spanning growth, creative, analytics, and automation from the ground up.</div>
+</div>
+<div class="win-card">
+<div class="win-num">04</div>
+<div class="win-title">2 Successful Company Exits</div>
+<div class="win-desc">Key contributor to both buy-side and sell-side M&amp;A transactions, aligning marketing with enterprise value drivers.</div>
+</div>
+<div class="win-card">
+<div class="win-num">05</div>
+<div class="win-title">AI Marketing Infrastructure</div>
+<div class="win-desc">Pioneered AI-driven marketing systems that reduced CAC by 30%+ while increasing conversion rates and pipeline velocity.</div>
+</div>
+<div class="win-card">
+<div class="win-num">06</div>
+<div class="win-title">Scalable Marketing Architecture</div>
+<div class="win-desc">Designed marketing operating systems that compound growth: CRM, automation, attribution, and funnel architecture.</div>
+</div>
+</div>
+</div>
 <div class="section-label reveal">SECTION F: BUSINESS DIRECTORY / TECHNOLOGY STACK</div>
-
 <div class="classifieds reveal">
-  <div class="classified-cat">
-    <div class="classified-cat-title">Frontend Development &amp; Web</div>
-    <div class="classified-cat-items">
-      <span>HTML5</span><span>CSS3</span><span>JavaScript</span><span>React</span><span>Responsive Web Design</span><span>MJML</span><span>Liquid (Shopify/ESP)</span><span>Schema Markup</span><span>Sitemap Markup</span>
-    </div>
-  </div>
-
-  <div class="classified-cat">
-    <div class="classified-cat-title">Backend &amp; Data Infrastructure</div>
-    <div class="classified-cat-items">
-      <span>APIs &amp; Webhooks</span><span>SQL</span><span>Google Tag Manager</span><span>Segment</span><span>mParticle</span><span>Amperity</span><span>Multi-Touch Attribution</span><span>Data Layer Management</span>
-    </div>
-  </div>
-
-  <div class="classified-cat">
-    <div class="classified-cat-title">CMS &amp; Web Platforms</div>
-    <div class="classified-cat-items">
-      <span>WordPress</span><span>Webflow</span><span>Shopify</span><span>Magento</span><span>Contentful</span>
-    </div>
-  </div>
-
-  <div class="classified-cat">
-    <div class="classified-cat-title">CRM &amp; Marketing Automation</div>
-    <div class="classified-cat-items">
-      <span>Salesforce (Sales + Marketing Cloud)</span><span>HubSpot</span><span>Zoho CRM</span><span>Marketo</span><span>Pardot</span><span>ActiveCampaign</span><span>Make (Integromat)</span><span>Zapier</span><span>n8n</span>
-    </div>
-  </div>
-
-  <div class="classified-cat">
-    <div class="classified-cat-title">Advertising Platforms</div>
-    <div class="classified-cat-items">
-      <span>Google Ads</span><span>Meta Ads Manager</span><span>TikTok Ads</span><span>LinkedIn Campaign Manager</span><span>The Trade Desk</span><span>StackAdapt</span>
-    </div>
-  </div>
-
-  <div class="classified-cat">
-    <div class="classified-cat-title">Analytics &amp; Attribution</div>
-    <div class="classified-cat-items">
-      <span>Google Analytics (GA4)</span><span>Looker</span><span>Tableau</span><span>Power BI</span><span>Mixpanel</span><span>Amplitude</span><span>Heap</span><span>Northbeam</span><span>Triple Whale</span>
-    </div>
-  </div>
-
-  <div class="classified-cat">
-    <div class="classified-cat-title">Email, SMS &amp; Lifecycle</div>
-    <div class="classified-cat-items">
-      <span>Klaviyo</span><span>Braze</span><span>Iterable</span><span>Mailchimp</span><span>Zoho Campaigns</span><span>Brevo</span><span>Constant Contact</span><span>Postscript (SMS)</span><span>Attentive (SMS)</span>
-    </div>
-  </div>
-
-  <div class="classified-cat">
-    <div class="classified-cat-title">SEO &amp; Content Optimization</div>
-    <div class="classified-cat-items">
-      <span>SEMrush</span><span>Ahrefs</span><span>Screaming Frog</span><span>Clearscope</span><span>Brightlocal</span><span>Whitespark</span>
-    </div>
-  </div>
-
-  <div class="classified-cat">
-    <div class="classified-cat-title">A/B Testing &amp; CRO</div>
-    <div class="classified-cat-items">
-      <span>Optimizely</span><span>VWO</span><span>Convert.com</span><span>Dynamic Yield</span><span>Mutiny</span><span>Adobe Target</span>
-    </div>
-  </div>
-
-  <div class="classified-cat">
-    <div class="classified-cat-title">Social, Influencer &amp; Partnerships</div>
-    <div class="classified-cat-items">
-      <span>Sprout Social</span><span>Later</span><span>Buffer</span><span>Hootsuite</span><span>GRIN</span><span>AspireIQ</span><span>CreatorIQ</span><span>Impact</span><span>Refersion</span><span>PartnerStack</span>
-    </div>
-  </div>
-
-  <div class="classified-cat">
-    <div class="classified-cat-title">Design &amp; Creative</div>
-    <div class="classified-cat-items">
-      <span>Figma</span><span>Canva</span><span>Adobe Photoshop</span><span>Adobe Illustrator</span><span>Premiere Pro</span><span>After Effects</span><span>Miro</span>
-    </div>
-  </div>
-
-  <div class="classified-cat">
-    <div class="classified-cat-title">Communication &amp; Project Mgmt</div>
-    <div class="classified-cat-items">
-      <span>Slack</span><span>Asana</span><span>Monday</span><span>Trello</span><span>Notion</span><span>Airtable</span><span>G Suite</span><span>Microsoft 365</span><span>Zoom</span><span>Loom</span>
-    </div>
-  </div>
-
-  <div class="classified-cat">
-    <div class="classified-cat-title">AI, LLM &amp; Next-Gen Tools</div>
-    <div class="classified-cat-items">
-      <span>ChatGPT</span><span>Claude</span><span>Gemini (Google)</span><span>Jasper</span><span>Midjourney</span><span>DALL-E</span><span>Descript</span><span>Copy.ai</span><span>Writesonic</span><span>Lumen5</span><span>Perplexity</span>
-    </div>
-  </div>
-
-  <div class="classified-cat">
-    <div class="classified-cat-title">ABM, Intent &amp; Data Enrichment</div>
-    <div class="classified-cat-items">
-      <span>6sense</span><span>Demandbase</span><span>Clearbit</span><span>ZoomInfo</span>
-    </div>
-  </div>
+<div class="classified-cat">
+<div class="classified-cat-title">Frontend Development &amp; Web</div>
+<div class="classified-cat-items">
+<span>HTML5</span><span>CSS3</span><span>JavaScript</span><span>React</span><span>Responsive Web Design</span><span>MJML</span><span>Liquid (Shopify/ESP)</span><span>Schema Markup</span><span>Sitemap Markup</span>
 </div>
-
+</div>
+<div class="classified-cat">
+<div class="classified-cat-title">Backend &amp; Data Infrastructure</div>
+<div class="classified-cat-items">
+<span>APIs &amp; Webhooks</span><span>SQL</span><span>Google Tag Manager</span><span>Segment</span><span>mParticle</span><span>Amperity</span><span>Multi-Touch Attribution</span><span>Data Layer Management</span>
+</div>
+</div>
+<div class="classified-cat">
+<div class="classified-cat-title">CMS &amp; Web Platforms</div>
+<div class="classified-cat-items">
+<span>WordPress</span><span>Webflow</span><span>Shopify</span><span>Magento</span><span>Contentful</span>
+</div>
+</div>
+<div class="classified-cat">
+<div class="classified-cat-title">CRM &amp; Marketing Automation</div>
+<div class="classified-cat-items">
+<span>Salesforce (Sales + Marketing Cloud)</span><span>HubSpot</span><span>Zoho CRM</span><span>Marketo</span><span>Pardot</span><span>ActiveCampaign</span><span>Make (Integromat)</span><span>Zapier</span><span>n8n</span>
+</div>
+</div>
+<div class="classified-cat">
+<div class="classified-cat-title">Advertising Platforms</div>
+<div class="classified-cat-items">
+<span>Google Ads</span><span>Meta Ads Manager</span><span>TikTok Ads</span><span>LinkedIn Campaign Manager</span><span>The Trade Desk</span><span>StackAdapt</span>
+</div>
+</div>
+<div class="classified-cat">
+<div class="classified-cat-title">Analytics &amp; Attribution</div>
+<div class="classified-cat-items">
+<span>Google Analytics (GA4)</span><span>Looker</span><span>Tableau</span><span>Power BI</span><span>Mixpanel</span><span>Amplitude</span><span>Heap</span><span>Northbeam</span><span>Triple Whale</span>
+</div>
+</div>
+<div class="classified-cat">
+<div class="classified-cat-title">Email, SMS &amp; Lifecycle</div>
+<div class="classified-cat-items">
+<span>Klaviyo</span><span>Braze</span><span>Iterable</span><span>Mailchimp</span><span>Zoho Campaigns</span><span>Brevo</span><span>Constant Contact</span><span>Postscript (SMS)</span><span>Attentive (SMS)</span>
+</div>
+</div>
+<div class="classified-cat">
+<div class="classified-cat-title">SEO &amp; Content Optimization</div>
+<div class="classified-cat-items">
+<span>SEMrush</span><span>Ahrefs</span><span>Screaming Frog</span><span>Clearscope</span><span>Brightlocal</span><span>Whitespark</span>
+</div>
+</div>
+<div class="classified-cat">
+<div class="classified-cat-title">A/B Testing &amp; CRO</div>
+<div class="classified-cat-items">
+<span>Optimizely</span><span>VWO</span><span>Convert.com</span><span>Dynamic Yield</span><span>Mutiny</span><span>Adobe Target</span>
+</div>
+</div>
+<div class="classified-cat">
+<div class="classified-cat-title">Social, Influencer &amp; Partnerships</div>
+<div class="classified-cat-items">
+<span>Sprout Social</span><span>Later</span><span>Buffer</span><span>Hootsuite</span><span>GRIN</span><span>AspireIQ</span><span>CreatorIQ</span><span>Impact</span><span>Refersion</span><span>PartnerStack</span>
+</div>
+</div>
+<div class="classified-cat">
+<div class="classified-cat-title">Design &amp; Creative</div>
+<div class="classified-cat-items">
+<span>Figma</span><span>Canva</span><span>Adobe Photoshop</span><span>Adobe Illustrator</span><span>Premiere Pro</span><span>After Effects</span><span>Miro</span>
+</div>
+</div>
+<div class="classified-cat">
+<div class="classified-cat-title">Communication &amp; Project Mgmt</div>
+<div class="classified-cat-items">
+<span>Slack</span><span>Asana</span><span>Monday</span><span>Trello</span><span>Notion</span><span>Airtable</span><span>G Suite</span><span>Microsoft 365</span><span>Zoom</span><span>Loom</span>
+</div>
+</div>
+<div class="classified-cat">
+<div class="classified-cat-title">AI, LLM &amp; Next-Gen Tools</div>
+<div class="classified-cat-items">
+<span>ChatGPT</span><span>Claude</span><span>Gemini (Google)</span><span>Jasper</span><span>Midjourney</span><span>DALL-E</span><span>Descript</span><span>Copy.ai</span><span>Writesonic</span><span>Lumen5</span><span>Perplexity</span>
+</div>
+</div>
+<div class="classified-cat">
+<div class="classified-cat-title">ABM, Intent &amp; Data Enrichment</div>
+<div class="classified-cat-items">
+<span>6sense</span><span>Demandbase</span><span>Clearbit</span><span>ZoomInfo</span>
+</div>
+</div>
+</div>
 <div class="continued reveal" style="margin-top:12px">109 tools across 14 categories. Stack evolves quarterly.</div>
-
-<!-- ════════════════════════════════════════════
-     FOOTER / CTA
-     ════════════════════════════════════════════ -->
 <div class="footer-section">
-  <div class="footer-cta">
-    <div class="qr-wrap"><canvas id="qrcode" width="110" height="110"></canvas></div>
-    <div class="footer-text">
-      <strong>Scan to view full portfolio</strong><br>
-      or reach out directly to discuss how system-driven marketing architecture can scale your business from $5M to $10M+.
-    </div>
-  </div>
-  <div class="footer-links">
-    <a href="mailto:mark@markcmo.com">Email Me</a>
-    <a href="https://linkedin.com/in/marklgabrielli" target="_blank">LinkedIn</a>
-    <a href="https://markcmo.com/portfolio" target="_blank" rel="noopener noreferrer">Portfolio</a>
-    <a href="https://markcmo.com/book" target="_blank" rel="noopener noreferrer">Book a Call</a>
-    <a href="javascript:window.print()">Export PDF</a>
-  </div>
-  <div class="footer-fine">
-    &copy; 2026 Mark Louis Gabrielli Jr. &middot; The Executive Record &middot; All rights reserved. &middot; Continued on markcmo.com
-  </div>
+<div class="footer-cta">
+<div class="qr-wrap"><canvas id="qrcode" width="110" height="110"></canvas></div>
+<div class="footer-text">
+<strong>Scan to view full portfolio</strong><br>
+or reach out directly to discuss how system-driven marketing architecture can scale your business from $5M to $10M+.
 </div>
-
-</div><!-- .broadsheet -->
-
-<!-- ════════════════════════════════════════════
-     SCRIPTS
-     ════════════════════════════════════════════ -->
-
-<!-- QR Code (Canvas drawn, no library) -->
+</div>
+<div class="footer-links">
+<a href="mailto:mark@markcmo.com">Email Me</a>
+<a href="https://linkedin.com/in/marklgabrielli" target="_blank">LinkedIn</a>
+<a href="https://markcmo.com/portfolio" target="_blank" rel="noopener noreferrer">Portfolio</a>
+<a href="https://markcmo.com/book" target="_blank" rel="noopener noreferrer">Book a Call</a>
+<a href="javascript:window.print()">Export PDF</a>
+</div>
+<div class="footer-fine">
+&copy; 2026 Mark Louis Gabrielli Jr. &middot; The Executive Record &middot; All rights reserved. &middot; Continued on markcmo.com
+</div>
+</div>
+</div>
 <script>
 (function(){
   var c=document.getElementById('qrcode');
@@ -1442,8 +1312,6 @@ a{color:inherit;text-decoration:none}
         ctx.fillRect(off+col*cs,off+r*cs,cs+.5,cs+.5);
 })();
 </script>
-
-<!-- Scroll Reveal -->
 <script>
 (function(){
   var io=new IntersectionObserver(function(entries){
@@ -1454,8 +1322,6 @@ a{color:inherit;text-decoration:none}
   document.querySelectorAll('.reveal').forEach(function(el){io.observe(el)});
 })();
 </script>
-
-<!-- Counter Animation -->
 <script>
 (function(){
   var counters=document.querySelectorAll('.counter');

@@ -55,69 +55,63 @@ nav{border-bottom:1px solid var(--border);padding:0 40px;height:56px;display:fle
 .spinner{width:20px;height:20px;border:2px solid var(--border2);border-top-color:var(--gold);border-radius:50%;animation:spin 0.8s linear infinite;display:inline-block;vertical-align:middle;margin-right:8px}
 @keyframes spin{to{transform:rotate(360deg)}}
 </style>
-
-  <meta name="description" content="Verify Diploma — MarkCMO Academy - MarkCMO provides fractional CMO and strategic marketing services for growth-stage companies.">
-  <link rel="canonical" href="https://markcmo.com/courses/verify.html">
-  <meta property="og:type" content="website">
-  <meta property="og:title" content="Verify Diploma — MarkCMO Academy">
-  <meta property="og:description" content="Verify Diploma — MarkCMO Academy - MarkCMO provides fractional CMO and strategic marketing services for growth-stage companies.">
-  <meta property="og:url" content="https://markcmo.com/courses/verify.html">
-  <meta property="og:site_name" content="MarkCMO">
+<meta name="description" content="Verify Diploma — MarkCMO Academy - MarkCMO provides fractional CMO and strategic marketing services for growth-stage companies.">
+<link rel="canonical" href="https://markcmo.com/courses/verify.html">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Verify Diploma — MarkCMO Academy">
+<meta property="og:description" content="Verify Diploma — MarkCMO Academy - MarkCMO provides fractional CMO and strategic marketing services for growth-stage companies.">
+<meta property="og:url" content="https://markcmo.com/courses/verify.html">
+<meta property="og:site_name" content="MarkCMO">
 </head>
 <body>
 <nav>
-  <a href="/" class="nav-logo">MARKCMO</a>
-  <div class="nav-links">
-    <a href="/courses">Courses</a>
-    <a href="/graduation">Graduates</a>
-  </div>
+<a href="/" class="nav-logo">MARKCMO</a>
+<div class="nav-links">
+<a href="/courses">Courses</a>
+<a href="/graduation">Graduates</a>
+</div>
 </nav>
-
 <div class="hero">
-  <div class="hero-eyebrow">Credential Verification</div>
-  <h1 class="hero-title">VERIFY A DIPLOMA</h1>
-  <p class="hero-sub">Enter a diploma number to verify authenticity. All MarkCMO Academy credentials are permanently recorded and publicly verifiable.</p>
+<div class="hero-eyebrow">Credential Verification</div>
+<h1 class="hero-title">VERIFY A DIPLOMA</h1>
+<p class="hero-sub">Enter a diploma number to verify authenticity. All MarkCMO Academy credentials are permanently recorded and publicly verifiable.</p>
 </div>
-
 <div class="verify-box">
-  <div class="input-group">
-    <label class="input-label" for="diploma-input">Diploma Number</label>
-    <input id="diploma-input" class="verify-input" placeholder="e.g. CMO-2026-4821" maxlength="20" oninput="this.value=this.value.toUpperCase()">
-  </div>
-  <button class="verify-btn" id="verify-btn" onclick="verifyDiploma()">Verify Credential →</button>
-
-  <div id="result-area" class="hidden">
-    <div id="result-valid" class="result-card valid hidden">
-      <div class="result-badge valid">✓ Verified — Authentic Credential</div>
-      <div class="result-name" id="r-name"></div>
-      <div class="result-course" id="r-course"></div>
-      <div class="result-stats">
-        <div class="result-stat"><div class="result-stat-val" id="r-gpa"></div><div class="result-stat-label">GPA</div></div>
-        <div class="result-stat"><div class="result-stat-val" id="r-letter"></div><div class="result-stat-label">Grade</div></div>
-        <div class="result-stat"><div class="result-stat-val" id="r-year"></div><div class="result-stat-label">Year</div></div>
-      </div>
-      <div class="result-meta">
-        <div class="result-meta-item"><strong id="r-designation"></strong></div>
-        <div class="divider" style="width:100%;margin:12px 0"></div>
-        <div class="result-meta-item">Diploma # <strong id="r-dipnum"></strong></div>
-        <div class="result-meta-item">Completed <strong id="r-date"></strong></div>
-        <div class="result-meta-item">Issued by <strong>MarkCMO Academy — Mark Donnigan, Dean</strong></div>
-      </div>
-    </div>
-    <div id="result-invalid" class="result-card invalid hidden">
-      <div class="result-badge invalid">✗ Not Found — Diploma Not Verified</div>
-      <p style="color:var(--dim);font-size:14px;line-height:1.8">No credential matching this diploma number was found in our records. Please check the number and try again. If you believe this is an error, contact <a href="mailto:mark@markcmo.com" style="color:var(--gold)">mark@markcmo.com</a>.</p>
-    </div>
-  </div>
+<div class="input-group">
+<label class="input-label" for="diploma-input">Diploma Number</label>
+<input id="diploma-input" class="verify-input" placeholder="e.g. CMO-2026-4821" maxlength="20" oninput="this.value=this.value.toUpperCase()">
 </div>
-
+<button class="verify-btn" id="verify-btn" onclick="verifyDiploma()">Verify Credential →</button>
+<div id="result-area" class="hidden">
+<div id="result-valid" class="result-card valid hidden">
+<div class="result-badge valid">✓ Verified — Authentic Credential</div>
+<div class="result-name" id="r-name"></div>
+<div class="result-course" id="r-course"></div>
+<div class="result-stats">
+<div class="result-stat"><div class="result-stat-val" id="r-gpa"></div><div class="result-stat-label">GPA</div></div>
+<div class="result-stat"><div class="result-stat-val" id="r-letter"></div><div class="result-stat-label">Grade</div></div>
+<div class="result-stat"><div class="result-stat-val" id="r-year"></div><div class="result-stat-label">Year</div></div>
+</div>
+<div class="result-meta">
+<div class="result-meta-item"><strong id="r-designation"></strong></div>
+<div class="divider" style="width:100%;margin:12px 0"></div>
+<div class="result-meta-item">Diploma # <strong id="r-dipnum"></strong></div>
+<div class="result-meta-item">Completed <strong id="r-date"></strong></div>
+<div class="result-meta-item">Issued by <strong>MarkCMO Academy — Mark Donnigan, Dean</strong></div>
+</div>
+</div>
+<div id="result-invalid" class="result-card invalid hidden">
+<div class="result-badge invalid">✗ Not Found — Diploma Not Verified</div>
+<p style="color:var(--dim);font-size:14px;line-height:1.8">No credential matching this diploma number was found in our records. Please check the number and try again. If you believe this is an error, contact <a href="mailto:mark@markcmo.com" style="color:var(--gold)">mark@markcmo.com</a>.</p>
+</div>
+</div>
+</div>
 <div class="trust-row">
-  <div class="trust-item"><div class="trust-val">4.0</div><div class="trust-label">GPA Scale</div></div>
-  <div class="trust-item"><div class="trust-val">14</div><div class="trust-label">Courses</div></div>
-  <div class="trust-item"><div class="trust-val">600+</div><div class="trust-label">Lessons</div></div>
-  <div class="trust-item"><div class="trust-val">50Q</div><div class="trust-label">Final Exam</div></div>
+<div class="trust-item"><div class="trust-val">4.0</div><div class="trust-label">GPA Scale</div></div>
+<div class="trust-item"><div class="trust-val">14</div><div class="trust-label">Courses</div></div>
+<div class="trust-item"><div class="trust-val">600+</div><div class="trust-label">Lessons</div></div>
+<div class="trust-item"><div class="trust-val">50Q</div><div class="trust-label">Final Exam</div></div>
 </div>
-
 <script>
 // Pre-fill from URL param
 const urlParam = new URLSearchParams(location.search).get('id');
@@ -125,26 +119,21 @@ if (urlParam) {
   document.getElementById('diploma-input').value = urlParam.toUpperCase();
   setTimeout(verifyDiploma, 300);
 }
-
 async function verifyDiploma() {
   const dipNum = document.getElementById('diploma-input').value.trim().toUpperCase();
   if (!dipNum || dipNum.length < 5) { alert('Please enter a diploma number.'); return; }
-
   const btn = document.getElementById('verify-btn');
   btn.disabled = true;
   btn.innerHTML = '<span class="spinner"></span>Verifying...';
   document.getElementById('result-area').classList.add('hidden');
   document.getElementById('result-valid').classList.add('hidden');
   document.getElementById('result-invalid').classList.add('hidden');
-
   try {
     const resp = await fetch('https://academy.markcmo.com/.netlify/functions/course-graduate');
     const data = await resp.json();
     const grads = data.graduates || [];
     const grad = grads.find(g => g.diplomaNumber === dipNum);
-
     document.getElementById('result-area').classList.remove('hidden');
-
     if (grad) {
       document.getElementById('r-name').textContent = grad.name.toUpperCase();
       document.getElementById('r-course').textContent = grad.courseTitle || grad.course;
@@ -163,11 +152,9 @@ async function verifyDiploma() {
     document.getElementById('result-area').classList.remove('hidden');
     document.getElementById('result-invalid').classList.remove('hidden');
   }
-
   btn.disabled = false;
   btn.textContent = 'Verify Credential →';
 }
-
 document.getElementById('diploma-input').addEventListener('keydown', e => {
   if (e.key === 'Enter') verifyDiploma();
 });

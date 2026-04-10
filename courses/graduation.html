@@ -13,7 +13,6 @@
 html{scroll-behavior:smooth}
 body{background:var(--black);color:var(--text);font-family:'Barlow',sans-serif;min-height:100vh}
 a{color:inherit;text-decoration:none}
-
 /* ── NAV ─────────────────────────────────────────────────────────────────── */
 .nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:16px 40px;display:flex;align-items:center;justify-content:space-between;background:rgba(6,6,6,0.95);backdrop-filter:blur(12px);border-bottom:1px solid rgba(201,168,76,0.1)}
 .nav-logo{font-family:'Bebas Neue',sans-serif;font-size:22px;letter-spacing:3px;color:var(--gold)}
@@ -21,7 +20,6 @@ a{color:inherit;text-decoration:none}
 .nav-links a:hover{color:var(--gold)}
 .nav-cta{background:var(--gold);color:#000;padding:8px 20px;font-size:11px;font-weight:900;letter-spacing:2px;text-transform:uppercase;transition:all 0.2s}
 .nav-cta:hover{background:#fff}
-
 /* ── HERO ─────────────────────────────────────────────────────────────────── */
 .hero{padding:130px 40px 80px;text-align:center;position:relative;overflow:hidden}
 .hero::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse 70% 50% at 50% 0%,rgba(201,168,76,0.07) 0%,transparent 60%)}
@@ -32,7 +30,6 @@ a{color:inherit;text-decoration:none}
 .hero-stats{display:flex;gap:48px;justify-content:center;flex-wrap:wrap}
 .stat-val{font-family:'Bebas Neue',sans-serif;font-size:52px;color:var(--gold);display:block;line-height:1}
 .stat-label{font-size:10px;letter-spacing:3px;text-transform:uppercase;color:var(--dim);margin-top:4px}
-
 /* ── FILTERS ──────────────────────────────────────────────────────────────── */
 .filter-bar{padding:0 40px 40px;max-width:1400px;margin:0 auto}
 .filter-row{display:flex;gap:12px;flex-wrap:wrap;align-items:center;border-bottom:1px solid var(--border);padding-bottom:24px;margin-bottom:8px}
@@ -42,18 +39,14 @@ a{color:inherit;text-decoration:none}
 .search-input{background:var(--surface);border:1px solid var(--border);color:var(--text);font-family:'DM Mono',monospace;font-size:12px;padding:7px 14px;outline:none;width:220px;transition:border-color 0.2s;margin-left:auto}
 .search-input:focus{border-color:var(--gold)}
 .search-input::placeholder{color:var(--dim)}
-
 /* ── RESULTS META ────────────────────────────────────────────────────────── */
 .results-meta{padding:0 40px 20px;max-width:1400px;margin:0 auto;font-size:12px;color:var(--dim);letter-spacing:1px;text-transform:uppercase}
-
 /* ── GRAD GRID ───────────────────────────────────────────────────────────── */
 .grad-grid{padding:0 40px 100px;max-width:1400px;margin:0 auto;display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:2px}
-
 .grad-card{background:var(--card);border:1px solid var(--border);padding:28px 20px;text-align:center;transition:all 0.25s;position:relative;overflow:hidden}
 .grad-card::before{content:'';position:absolute;inset:0;background:linear-gradient(135deg,rgba(201,168,76,0.05) 0%,transparent 50%);opacity:0;transition:opacity 0.3s}
 .grad-card:hover{border-color:rgba(201,168,76,0.5);transform:translateY(-2px);box-shadow:0 20px 60px rgba(0,0,0,0.4),0 0 30px rgba(201,168,76,0.05)}
 .grad-card:hover::before{opacity:1}
-
 .grad-photo{width:88px;height:88px;border-radius:50%;margin:0 auto 16px;overflow:hidden;border:2px solid var(--border);background:var(--surface);display:flex;align-items:center;justify-content:center;font-size:36px;transition:border-color 0.3s;position:relative;z-index:1}
 .grad-card:hover .grad-photo{border-color:var(--gold)}
 .grad-photo img{width:100%;height:100%;object-fit:cover}
@@ -67,12 +60,10 @@ a{color:inherit;text-decoration:none}
 .grad-date{font-family:'DM Mono',monospace;font-size:9px;color:var(--dim);letter-spacing:1px;margin-top:8px;position:relative;z-index:1}
 .grad-linkedin{display:block;margin-top:10px;font-size:10px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--dim);transition:color 0.2s;position:relative;z-index:1}
 .grad-linkedin:hover{color:var(--gold)}
-
 /* honors colors */
 .grad-card[data-honors="Summa Cum Laude"] .grad-gpa{color:#FFD700}
 .grad-card[data-honors="Magna Cum Laude"] .grad-gpa{color:#C9A84C}
 .grad-card[data-honors="Cum Laude"] .grad-gpa{color:#a0906a}
-
 /* ── EMPTY / LOADING STATES ──────────────────────────────────────────────── */
 .state-loading,.state-empty{display:none;text-align:center;padding:80px 40px;grid-column:1/-1}
 .state-loading.show,.state-empty.show{display:block}
@@ -84,7 +75,6 @@ a{color:inherit;text-decoration:none}
 .empty-sub{color:var(--dim);margin-bottom:28px}
 .empty-cta{background:var(--gold);color:#000;padding:12px 28px;font-size:11px;font-weight:900;letter-spacing:3px;text-transform:uppercase;display:inline-block;transition:all 0.2s}
 .empty-cta:hover{background:#fff}
-
 /* ── CTA BANNER ──────────────────────────────────────────────────────────── */
 .cta-banner{background:var(--surface);border-top:1px solid var(--border);border-bottom:1px solid var(--border);padding:60px 40px;text-align:center;margin-bottom:0}
 .cta-banner h2{font-family:'Bebas Neue',sans-serif;font-size:clamp(36px,5vw,64px);letter-spacing:3px;margin-bottom:16px}
@@ -95,17 +85,14 @@ a{color:inherit;text-decoration:none}
 .btn-gold:hover{background:#fff}
 .btn-outline{border:1px solid rgba(201,168,76,0.4);color:var(--gold);padding:14px 32px;font-size:12px;font-weight:700;letter-spacing:2px;text-transform:uppercase;display:inline-block;transition:all 0.2s}
 .btn-outline:hover{border-color:var(--gold);background:var(--gold-dim)}
-
 /* ── TOP PERFORMERS BANNER ───────────────────────────────────────────────── */
 .top-band{background:linear-gradient(90deg,transparent,var(--gold-dim),transparent);border-top:1px solid rgba(201,168,76,0.2);border-bottom:1px solid rgba(201,168,76,0.2);padding:16px 40px;text-align:center;font-size:11px;font-weight:700;letter-spacing:3px;text-transform:uppercase;color:var(--gold);overflow:hidden;white-space:nowrap;position:relative}
 .top-band-inner{display:inline-block;animation:marquee 40s linear infinite}
 @keyframes marquee{0%{transform:translateX(100vw)}100%{transform:translateX(-100%)}}
-
 .toast{position:fixed;bottom:30px;left:50%;transform:translateX(-50%) translateY(80px);background:var(--card);border:1px solid var(--border);color:var(--text);padding:12px 24px;font-size:12px;letter-spacing:1px;text-transform:uppercase;font-weight:700;transition:transform 0.3s;z-index:1000;white-space:nowrap}
 .toast.show{transform:translateX(-50%) translateY(0)}
 .toast.gold{border-color:var(--gold);color:var(--gold)}
 .toast.green{border-color:var(--green);color:var(--green)}
-
 @media(max-width:768px){
   .nav{padding:14px 20px}
   .hero{padding:100px 20px 60px}
@@ -114,89 +101,78 @@ a{color:inherit;text-decoration:none}
   .search-input{width:100%;margin-left:0}
 }
 </style>
-
-  <meta name="description" content="MarkCMO Academy — Graduate Wall - MarkCMO provides fractional CMO and strategic marketing services for growth-stage companies.">
-  <link rel="canonical" href="https://markcmo.com/courses/graduation.html">
-  <meta property="og:type" content="website">
-  <meta property="og:title" content="MarkCMO Academy — Graduate Wall">
-  <meta property="og:description" content="MarkCMO Academy — Graduate Wall - MarkCMO provides fractional CMO and strategic marketing services for growth-stage companies.">
-  <meta property="og:url" content="https://markcmo.com/courses/graduation.html">
-  <meta property="og:site_name" content="MarkCMO">
+<meta name="description" content="MarkCMO Academy — Graduate Wall - MarkCMO provides fractional CMO and strategic marketing services for growth-stage companies.">
+<link rel="canonical" href="https://markcmo.com/courses/graduation.html">
+<meta property="og:type" content="website">
+<meta property="og:title" content="MarkCMO Academy — Graduate Wall">
+<meta property="og:description" content="MarkCMO Academy — Graduate Wall - MarkCMO provides fractional CMO and strategic marketing services for growth-stage companies.">
+<meta property="og:url" content="https://markcmo.com/courses/graduation.html">
+<meta property="og:site_name" content="MarkCMO">
 </head>
 <body>
-
-
 <nav class="nav">
-  <a href="/" class="nav-logo">MarkCMO</a>
-  <div class="nav-links">
-    <a href="/">Courses</a>
-    <a href="/blog.html">Blog</a>
-    <a href="/contact.html">Contact</a>
-    <a href="/" class="nav-cta">Start Learning</a>
-  </div>
+<a href="/" class="nav-logo">MarkCMO</a>
+<div class="nav-links">
+<a href="/">Courses</a>
+<a href="/blog.html">Blog</a>
+<a href="/contact.html">Contact</a>
+<a href="/" class="nav-cta">Start Learning</a>
+</div>
 </nav>
-
 <div class="hero">
-  <div class="hero-eyebrow">🎓 Class of 2026 & Beyond</div>
-  <h1 class="hero-title">THE GRADUATE<br><span>WALL</span></h1>
-  <p class="hero-sub">Every name here represents someone who refused the easy route. Harvard/MIT-level rigor. Real credentials. Real results.</p>
-  <div class="hero-stats">
-    <div><span class="stat-val" id="stat-grads">—</span><div class="stat-label">Graduates</div></div>
-    <div><span class="stat-val" id="stat-courses">10</span><div class="stat-label">Courses</div></div>
-    <div><span class="stat-val" id="stat-avg-gpa">—</span><div class="stat-label">Avg GPA</div></div>
-    <div><span class="stat-val" id="stat-summa">—</span><div class="stat-label">Summa Cum Laude</div></div>
-  </div>
+<div class="hero-eyebrow">🎓 Class of 2026 & Beyond</div>
+<h1 class="hero-title">THE GRADUATE<br><span>WALL</span></h1>
+<p class="hero-sub">Every name here represents someone who refused the easy route. Harvard/MIT-level rigor. Real credentials. Real results.</p>
+<div class="hero-stats">
+<div><span class="stat-val" id="stat-grads">—</span><div class="stat-label">Graduates</div></div>
+<div><span class="stat-val" id="stat-courses">10</span><div class="stat-label">Courses</div></div>
+<div><span class="stat-val" id="stat-avg-gpa">—</span><div class="stat-label">Avg GPA</div></div>
+<div><span class="stat-val" id="stat-summa">—</span><div class="stat-label">Summa Cum Laude</div></div>
 </div>
-
+</div>
 <div class="top-band">
-  <div class="top-band-inner" id="top-band-text">Loading graduates...</div>
+<div class="top-band-inner" id="top-band-text">Loading graduates...</div>
 </div>
-
 <div class="filter-bar">
-  <div class="filter-row">
-    <span class="filter-label">Course:</span>
-    <button class="filter-btn active" data-filter="">All Courses</button>
-    <button class="filter-btn" data-filter="ceo">CEO</button>
-    <button class="filter-btn" data-filter="cfo">CFO</button>
-    <button class="filter-btn" data-filter="coo">COO</button>
-    <button class="filter-btn" data-filter="cmo">CMO</button>
-    <button class="filter-btn" data-filter="vpsales">VP Sales</button>
-    <button class="filter-btn" data-filter="growth">Growth</button>
-    <button class="filter-btn" data-filter="ae">Account Exec</button>
-    <button class="filter-btn" data-filter="revenue">Revenue</button>
-    <button class="filter-btn" data-filter="leadership">Leadership</button>
-    <button class="filter-btn" data-filter="digital">Digital</button>
-    <input type="text" class="search-input" id="search-input" placeholder="Search graduates..." oninput="filterGrads()">
-  </div>
+<div class="filter-row">
+<span class="filter-label">Course:</span>
+<button class="filter-btn active" data-filter="">All Courses</button>
+<button class="filter-btn" data-filter="ceo">CEO</button>
+<button class="filter-btn" data-filter="cfo">CFO</button>
+<button class="filter-btn" data-filter="coo">COO</button>
+<button class="filter-btn" data-filter="cmo">CMO</button>
+<button class="filter-btn" data-filter="vpsales">VP Sales</button>
+<button class="filter-btn" data-filter="growth">Growth</button>
+<button class="filter-btn" data-filter="ae">Account Exec</button>
+<button class="filter-btn" data-filter="revenue">Revenue</button>
+<button class="filter-btn" data-filter="leadership">Leadership</button>
+<button class="filter-btn" data-filter="digital">Digital</button>
+<input type="text" class="search-input" id="search-input" placeholder="Search graduates..." oninput="filterGrads()">
 </div>
-
+</div>
 <div class="results-meta" id="results-meta"></div>
-
 <div class="grad-grid" id="grad-grid">
-  <div class="state-loading show" id="state-loading">
-    <div class="loading-spinner"></div>
-    <div class="loading-text">Loading graduates<span class="loading-dots"></span></div>
-  </div>
+<div class="state-loading show" id="state-loading">
+<div class="loading-spinner"></div>
+<div class="loading-text">Loading graduates<span class="loading-dots"></span></div>
+</div>
   <style>.loading-dots::after{content:'...';animation:dots 1.5s steps(4,end) infinite}@keyframes dots{0%,20%{content:''}40%{content:'.'}60%{content:'..'}80%,100%{content:'...'}}</style>
-  <div class="state-empty" id="state-empty">
-    <div class="empty-icon">🎓</div>
-    <div class="empty-title">Be First to Graduate</div>
-    <p class="empty-sub">No graduates yet. Earn your diploma, and be the first name on this wall.</p>
-    <a href="/" class="empty-cta">Start Learning →</a>
-  </div>
+<div class="state-empty" id="state-empty">
+<div class="empty-icon">🎓</div>
+<div class="empty-title">Be First to Graduate</div>
+<p class="empty-sub">No graduates yet. Earn your diploma, and be the first name on this wall.</p>
+<a href="/" class="empty-cta">Start Learning →</a>
 </div>
-
+</div>
 <div class="cta-banner">
-  <h2>YOUR NAME BELONGS<br><span>ON THIS WALL</span></h2>
-  <p>10 elite courses. Harvard/MIT rigor. expert lessons that are never the same twice. If you fail, you pay discounted retake. If you pass, you earn it.</p>
-  <div class="cta-btns">
-    <a href="/" class="btn-gold">Browse All Courses →</a>
-    <a href="/courses#how-it-works" class="btn-outline">How It Works</a>
-  </div>
+<h2>YOUR NAME BELONGS<br><span>ON THIS WALL</span></h2>
+<p>10 elite courses. Harvard/MIT rigor. expert lessons that are never the same twice. If you fail, you pay discounted retake. If you pass, you earn it.</p>
+<div class="cta-btns">
+<a href="/" class="btn-gold">Browse All Courses →</a>
+<a href="/courses#how-it-works" class="btn-outline">How It Works</a>
 </div>
-
+</div>
 <div class="toast" id="toast"></div>
-
 <script>
 const COURSE_SHORT = {
   ceo:'CEO Mastery',
@@ -215,10 +191,8 @@ const COURSE_SHORT = {
   linkedin:'LinkedIn Growth Machine',
   instagram:'Instagram for Business'
 };
-
 let ALL_GRADS = [];
 let activeFilter = '';
-
 async function loadGrads() {
   try {
     const resp = await fetch('https://academy.markcmo.com/.netlify/functions/course-graduate');
@@ -235,7 +209,6 @@ async function loadGrads() {
   }
   document.getElementById('state-loading').classList.remove('show');
 }
-
 function renderGrads() {
   const search = (document.getElementById('search-input')?.value || '').toLowerCase();
   let filtered = ALL_GRADS.filter(g => {
@@ -246,9 +219,7 @@ function renderGrads() {
       (COURSE_SHORT[g.course]||'').toLowerCase().includes(search);
     return matchCourse && matchSearch;
   });
-
   document.getElementById('results-meta').textContent = `Showing ${filtered.length} of ${ALL_GRADS.length} graduates`;
-
   const grid = document.getElementById('grad-grid');
   // Remove existing cards
   grid.querySelectorAll('.grad-card').forEach(el => el.remove());
@@ -258,7 +229,6 @@ function renderGrads() {
     return;
   }
   document.getElementById('state-empty').classList.remove('show');
-
   filtered.forEach((g, i) => {
     const card = document.createElement('div');
     card.className = 'grad-card';
@@ -273,11 +243,9 @@ function renderGrads() {
     const linkedinLink = g.linkedin 
       ? `<a href="${g.linkedin.startsWith('http') ? g.linkedin : 'https://'+g.linkedin}" target="_blank" rel="noopener" class="grad-linkedin">🔗 LinkedIn</a>`
       : '';
-
     const profileUrl = `/profile?id=${g.diplomaNumber}`;
     const titleLine = [g.title, g.company].filter(Boolean).join(' · ');
     const hasProfile = !!(g.bio || g.title || g.company);
-
     card.innerHTML = `
       <a href="${profileUrl}" style="display:block;text-decoration:none;color:inherit;cursor:pointer">
         <div class="grad-photo">${photoContent}</div>
@@ -296,7 +264,6 @@ function renderGrads() {
     grid.appendChild(card);
   });
 }
-
 function getInitialsAvatar(name) {
   const initials = name.split(' ').slice(0,2).map(n=>n[0]||'').join('').toUpperCase();
   // Generate consistent color from name
@@ -308,7 +275,6 @@ function getInitialsAvatar(name) {
     <text x="44" y="54" text-anchor="middle" font-size="28" font-family="Barlow,sans-serif" font-weight="700" fill="#C9A84C">${initials}</text>
   </svg>`;
 }
-
 function updateStats() {
   const total = ALL_GRADS.length;
   document.getElementById('stat-grads').textContent = total;
@@ -323,7 +289,6 @@ function updateStats() {
     document.getElementById('stat-summa').textContent = '—';
   }
 }
-
 function updateMarquee() {
   const names = ALL_GRADS.slice(0,20).map(g => 
     `🎓 ${g.name} · ${COURSE_SHORT[g.course]||g.course} · ${g.designation||'Graduate'}`
@@ -332,11 +297,9 @@ function updateMarquee() {
   // Repeat for seamless loop
   document.getElementById('top-band-text').textContent = (names.join('   ·   ') + '   ·   ').repeat(3);
 }
-
 function filterGrads() {
   renderGrads();
 }
-
 // Filter buttons
 document.querySelectorAll('.filter-btn').forEach(btn => {
   btn.addEventListener('click', () => {
@@ -346,12 +309,10 @@ document.querySelectorAll('.filter-btn').forEach(btn => {
     filterGrads();
   });
 });
-
 function escapeHtml(str) {
   if (!str) return '';
   return str.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
 }
-
 // Demo grads for when no real data yet
 const DEMO_GRADS = [
   {name:'Sarah Chen',course:'cmo',gpa:3.9,letter:'A',designation:'Magna Cum Laude',company:'Fractional CMO, Series B SaaS',completedAt:'2026-03-01T00:00:00Z',photo:null},
@@ -361,7 +322,6 @@ const DEMO_GRADS = [
   {name:'Rachel Torres',course:'coo',gpa:4.0,letter:'A',designation:'Summa Cum Laude',company:'Fractional COO, E-commerce',completedAt:'2026-02-18T00:00:00Z',photo:null},
   {name:'Alex Patel',course:'leadership',gpa:3.5,letter:'A−',designation:'Magna Cum Laude',company:'Executive Coach',completedAt:'2026-02-15T00:00:00Z',photo:null},
 ];
-
 // Toast
 let toastTimer;
 function toast(msg, type='gold') {
@@ -370,8 +330,6 @@ function toast(msg, type='gold') {
   clearTimeout(toastTimer);
   toastTimer = setTimeout(() => el.classList.remove('show'), 4000);
 }
-
-
 // Boot
 loadGrads();
 </script>

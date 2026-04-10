@@ -11,7 +11,6 @@
 <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Barlow:ital,wght@0,400;0,500;0,600;0,700;0,800&family=DM+Mono:wght@400;500&display=swap"></noscript>
 <style>
 *{margin:0;padding:0;box-sizing:border-box}
-
 :root{
   --bg:#0a1628;
   --bg-light:#0d1d35;
@@ -29,9 +28,7 @@
   --border:rgba(232,240,255,.15);
   --border-bright:rgba(232,240,255,.3);
 }
-
 html{font-size:16px;scroll-behavior:smooth}
-
 body{
   font-family:'IBM Plex Mono',monospace;
   background:var(--bg);
@@ -41,11 +38,8 @@ body{
   overflow-x:hidden;
   position:relative;
 }
-
 ::selection{background:rgba(0,212,255,.3)}
-
 a{color:inherit;text-decoration:none}
-
 /* BLUEPRINT GRID OVERLAY */
 body::before{
   content:'';
@@ -59,7 +53,6 @@ body::before{
     repeating-linear-gradient(0deg,transparent,transparent 199px,var(--grid-strong) 199px,var(--grid-strong) 200px),
     repeating-linear-gradient(90deg,transparent,transparent 199px,var(--grid-strong) 199px,var(--grid-strong) 200px);
 }
-
 /* LIGHT LEAK */
 body::after{
   content:'';
@@ -72,7 +65,6 @@ body::after{
     radial-gradient(ellipse at 100% 100%, rgba(0,212,255,.04) 0%, transparent 50%),
     radial-gradient(ellipse at 50% 0%, rgba(255,107,53,.03) 0%, transparent 40%);
 }
-
 /* FOLD MARKS & CROP MARKS */
 .fold-marks{
   position:fixed;inset:0;z-index:1000;pointer-events:none;
@@ -100,14 +92,11 @@ body::after{
 .crop-br{bottom:10px;right:10px;}
 .crop-br::before{content:'';position:absolute;bottom:0;right:0;width:1px;height:15px;background:var(--text-faint);}
 .crop-br::after{content:'';position:absolute;bottom:0;right:0;width:15px;height:1px;background:var(--text-faint);}
-
 /* CENTER MARKS */
 .center-top{position:fixed;top:0;left:50%;width:1px;height:15px;background:var(--text-faint);z-index:1000;pointer-events:none;transform:translateX(-50%);}
 .center-bottom{position:fixed;bottom:0;left:50%;width:1px;height:15px;background:var(--text-faint);z-index:1000;pointer-events:none;transform:translateX(-50%);}
-
 /* LAYOUT */
 .wrap{max-width:1100px;margin:0 auto;padding:0 40px;position:relative;z-index:1}
-
 /* NAV */
 .nav{
   position:fixed;top:0;left:0;right:0;z-index:100;
@@ -165,12 +154,10 @@ body::after{
   box-shadow:0 0 20px rgba(0,212,255,.4);
   color:var(--bg);
 }
-
 /* TEXT GLOW */
 .glow{text-shadow:0 0 10px rgba(0,212,255,.4),0 0 30px rgba(0,212,255,.15)}
 .glow-orange{text-shadow:0 0 10px rgba(255,107,53,.5),0 0 30px rgba(255,107,53,.2)}
 .glow-subtle{text-shadow:0 0 8px rgba(232,240,255,.2)}
-
 /* TITLE BLOCK (architectural drawing style) */
 .title-block{
   position:relative;
@@ -181,14 +168,12 @@ body::after{
   gap:0;
   min-height:400px;
 }
-
 .title-block-main{
   padding:40px 0;
   display:flex;
   flex-direction:column;
   justify-content:flex-end;
 }
-
 .title-block-info{
   border:2px solid var(--border-bright);
   padding:0;
@@ -228,7 +213,6 @@ body::after{
   text-transform:uppercase;
   color:var(--cyan);
 }
-
 .hero-label{
   font-size:.6rem;font-weight:500;
   letter-spacing:.25em;text-transform:uppercase;
@@ -239,7 +223,6 @@ body::after{
 .hero-label::before{
   content:'';width:40px;height:1px;background:var(--cyan);
 }
-
 .hero-name{
   font-family:'Rajdhani',sans-serif;
   font-size:clamp(2.5rem,5.5vw,4.2rem);
@@ -250,7 +233,6 @@ body::after{
   text-shadow:0 0 20px rgba(0,212,255,.3),0 0 60px rgba(0,212,255,.1);
 }
 .hero-name .cyan{color:var(--cyan)}
-
 .hero-role{
   font-size:.85rem;
   color:var(--text-dim);
@@ -265,7 +247,6 @@ body::after{
   margin:0 10px;
   vertical-align:middle;
 }
-
 .hero-contact{
   display:flex;gap:24px;flex-wrap:wrap;
   margin-bottom:40px;
@@ -276,7 +257,6 @@ body::after{
   letter-spacing:.03em;
 }
 .hc-item:hover{color:var(--cyan);text-shadow:0 0 8px rgba(0,212,255,.3)}
-
 /* DIMENSION CALLOUT STATS */
 .stats{
   display:grid;
@@ -331,7 +311,6 @@ body::after{
 .dim-val[data-counter]{
   transition:all .3s;
 }
-
 /* SECTIONS */
 .sec{
   padding:70px 0;
@@ -340,7 +319,6 @@ body::after{
   transition:all .6s cubic-bezier(.16,1,.3,1);
 }
 .sec.vis{opacity:1;transform:none}
-
 .sec-head{
   display:flex;align-items:center;gap:14px;
   margin-bottom:36px;
@@ -364,7 +342,6 @@ body::after{
   flex:1;height:0;
   border-top:1px dashed var(--border);
 }
-
 /* ANNOTATION BOX (Executive Summary) */
 .annotation-box{
   position:relative;
@@ -405,7 +382,6 @@ body::after{
   font-style:normal;color:var(--cyan);font-weight:500;
   text-shadow:0 0 6px rgba(0,212,255,.2);
 }
-
 /* COMPETENCIES - Circuit Diagram Nodes */
 .circuit-board{
   display:flex;flex-wrap:wrap;gap:0;
@@ -448,7 +424,6 @@ body::after{
 .circuit-connector{
   display:none;/* visual only through gap styling */
 }
-
 /* EXPERIENCE TIMELINE - Technical Measurement */
 .tech-timeline{
   position:relative;
@@ -471,7 +446,6 @@ body::after{
     var(--border) 48px, var(--border) 50px
   );
 }
-
 .tl-item{
   position:relative;
   margin-bottom:30px;
@@ -486,7 +460,6 @@ body::after{
   background:rgba(0,212,255,.03);
   box-shadow:0 0 20px rgba(0,212,255,.05);
 }
-
 .tl-item::before{
   content:'';position:absolute;
   left:-32px;top:32px;
@@ -504,7 +477,6 @@ body::after{
   background:var(--cyan);
   box-shadow:0 0 10px rgba(0,212,255,.5);
 }
-
 .tl-top{
   display:flex;justify-content:space-between;
   align-items:baseline;gap:16px;
@@ -538,7 +510,6 @@ body::after{
   background:var(--cyan-dim);
 }
 .tl-bullets .hi{color:var(--cyan);font-weight:500}
-
 /* REVENUE DASHBOARD - Oscilloscope Style */
 .scope-panel{
   border:2px solid var(--border-bright);
@@ -565,7 +536,6 @@ body::after{
   animation:gPulse 2s infinite;
 }
 @keyframes gPulse{0%,100%{opacity:1;box-shadow:0 0 0 0 rgba(52,211,153,.4)}50%{opacity:.6;box-shadow:0 0 0 6px rgba(52,211,153,0)}}
-
 .scope-body{padding:24px}
 .scope-metrics{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-bottom:24px}
 .scope-metric{
@@ -585,7 +555,6 @@ body::after{
   text-shadow:0 0 12px rgba(0,212,255,.4);
 }
 .scope-metric-sub{font-size:.6rem;color:var(--text-faint);margin-top:4px}
-
 .scope-chart{
   position:relative;
   height:140px;
@@ -614,7 +583,6 @@ body::after{
   font-size:.5rem;color:var(--text-faint);
   letter-spacing:.05em;
 }
-
 /* DEAL SHEET - Engineering Spec Boxes */
 .spec-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px}
 .spec-box{
@@ -651,7 +619,6 @@ body::after{
 .spec-row:last-child{border:none}
 .spec-row span:first-child{color:var(--text-faint);text-transform:uppercase;font-size:.6rem;letter-spacing:.08em}
 .spec-row span:last-child{color:var(--text);font-weight:500}
-
 /* CASE STUDIES - Cross Section Views */
 .case-list{display:grid;gap:12px}
 .case-item{
@@ -710,7 +677,6 @@ body::after{
   font-size:.45rem;letter-spacing:.1em;
   text-transform:uppercase;color:var(--text-faint);
 }
-
 /* TECH STACK - Bill of Materials */
 .bom-section{margin-bottom:20px}
 .bom-section:last-child{margin-bottom:0}
@@ -766,7 +732,6 @@ body::after{
   margin-bottom:4px;
   padding:10px 0 4px;
 }
-
 /* WINS - Revision Notes */
 .rev-notes{
   display:grid;grid-template-columns:repeat(2,1fr);gap:14px;
@@ -796,7 +761,6 @@ body::after{
   letter-spacing:.02em;
 }
 .rev-note p{font-size:.72rem;color:var(--text-dim);line-height:1.5}
-
 /* CTA / TITLE BLOCK FOOTER */
 .cta-block{
   border:2px solid var(--border-bright);
@@ -857,7 +821,6 @@ body::after{
   color:var(--cyan);
   box-shadow:0 0 12px rgba(0,212,255,.15);
 }
-
 /* FOOTER */
 .foot{
   text-align:center;padding:28px 0;
@@ -865,13 +828,11 @@ body::after{
   letter-spacing:.1em;
   border-top:1px dashed var(--border);
 }
-
 /* SECTION DIVIDER */
 .section-divider{
   width:100%;height:0;
   border-top:1px dashed var(--border);
 }
-
 /* PRINT */
 @media print{
   .nav,.fold-marks,.crop-tl,.crop-tr,.crop-bl,.crop-br,.center-top,.center-bottom{display:none!important}
@@ -890,7 +851,6 @@ body::after{
   .cta-block{page-break-before:always}
   * {-webkit-print-color-adjust:exact;print-color-adjust:exact}
 }
-
 /* RESPONSIVE */
 @media(max-width:900px){
   .title-block{grid-template-columns:1fr}
@@ -916,15 +876,13 @@ body::after{
   .hero-contact{flex-direction:column;gap:8px}
 }
 </style>
-
-  <meta name="description" content="Mark Louis Gabrielli Jr. - CMO Blueprint - MarkCMO provides fractional CMO and strategic marketing services for growth-stage companies.">
-  <link rel="canonical" href="https://markcmo.com/MLG-Resume-Blueprint.html">
-  <meta property="og:type" content="website">
-  <meta property="og:title" content="Mark Louis Gabrielli Jr. - CMO Blueprint">
-  <meta property="og:description" content="Mark Louis Gabrielli Jr. - CMO Blueprint - MarkCMO provides fractional CMO and strategic marketing services for growth-stage companies.">
-  <meta property="og:url" content="https://markcmo.com/MLG-Resume-Blueprint.html">
-  <meta property="og:site_name" content="MarkCMO">
-
+<meta name="description" content="Mark Louis Gabrielli Jr. - CMO Blueprint - MarkCMO provides fractional CMO and strategic marketing services for growth-stage companies.">
+<link rel="canonical" href="https://markcmo.com/MLG-Resume-Blueprint.html">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Mark Louis Gabrielli Jr. - CMO Blueprint">
+<meta property="og:description" content="Mark Louis Gabrielli Jr. - CMO Blueprint - MarkCMO provides fractional CMO and strategic marketing services for growth-stage companies.">
+<meta property="og:url" content="https://markcmo.com/MLG-Resume-Blueprint.html">
+<meta property="og:site_name" content="MarkCMO">
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
@@ -947,8 +905,6 @@ body::after{
 </script>
 </head>
 <body>
-
-<!-- FOLD/CROP MARKS -->
 <div class="fold-marks"></div>
 <div class="crop-tl"></div>
 <div class="crop-tr"></div>
@@ -956,645 +912,577 @@ body::after{
 <div class="crop-br"></div>
 <div class="center-top"></div>
 <div class="center-bottom"></div>
-
-<!-- NAV -->
 <nav>
-    <a href="index.html" class="nav-logo">
-      <div class="nav-avatar">
-        <img src="data:image/png;base64,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" alt="Mark Gabrielli" />
-      </div>
-      Mark <span>Gabrielli</span>
-    </a>
-    <ul class="nav-links">
-      <li><a href="index.html">Home</a></li>
-      <li><a href="about.html" class="active">About</a></li>
-      <li><a href="services.html">Services</a></li>
-      <li><a href="portfolio.html">Portfolio</a></li>
-      <li><a href="results.html">Results</a></li>
-      <li><a href="blog.html">Insights</a></li>
-      <li><a href="https://academy.markcmo.com" target="_blank" style="color:var(--gold);font-weight:700;">🎓 Academy</a></li>
-      <li><a href="book.html" class="nav-cta">Book a Free Call</a></li>
-    </ul>
-    <div class="nav-mobile-links">
-      <a href="portfolio.html" class="nav-mob-pill">Portfolio</a>
-      <a href="book.html" class="nav-mob-cta">Book Mark →</a>
-    </div>
-  </nav>
-
+<a href="index.html" class="nav-logo">
+<div class="nav-avatar">
+<img src="data:image/png;base64,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" alt="Mark Gabrielli" />
+</div>
+Mark <span>Gabrielli</span>
+</a>
+<ul class="nav-links">
+<li><a href="index.html">Home</a></li>
+<li><a href="about.html" class="active">About</a></li>
+<li><a href="services.html">Services</a></li>
+<li><a href="portfolio.html">Portfolio</a></li>
+<li><a href="results.html">Results</a></li>
+<li><a href="blog.html">Insights</a></li>
+<li><a href="https://academy.markcmo.com" target="_blank" style="color:var(--gold);font-weight:700;">🎓 Academy</a></li>
+<li><a href="book.html" class="nav-cta">Book a Free Call</a></li>
+</ul>
+<div class="nav-mobile-links">
+<a href="portfolio.html" class="nav-mob-pill">Portfolio</a>
+<a href="book.html" class="nav-mob-cta">Book Mark →</a>
+</div>
+</nav>
 <div class="wrap">
-
-<!-- HERO / TITLE BLOCK -->
 <section class="title-block">
-  <div class="title-block-main">
-    <div class="hero-label">Executive Resume // Drawing 001 // 2026</div>
-    <h1 class="hero-name">MARK LOUIS<br><span class="cyan">GABRIELLI</span> JR.</h1>
-    <p class="hero-role">Chief Marketing Officer <span class="sep"></span> Growth Architect <span class="sep"></span> Revenue Systems Builder</p>
-
-    <div class="hero-contact">
-      <a class="hc-item" href="mailto:mark@markcmo.com">mark@markcmo.com</a>
-      <a class="hc-item" href="https://linkedin.com/in/marklgabrielli" target="_blank">linkedin.com/in/marklgabrielli</a>
-      <a class="hc-item" href="https://markcmo.com/portfolio" target="_blank" rel="noopener noreferrer">markcmo.com/portfolio</a>
-      <a class="hc-item" href="https://markcmo.com/book" target="_blank" rel="noopener noreferrer">markcmo.com/book</a>
-      <span class="hc-item">South Florida</span>
-    </div>
-  </div>
-
-  <div class="title-block-info">
-    <div class="tbi-header">Drawing Title Block</div>
-    <div class="tbi-row"><span class="tbi-label">Name</span><span class="tbi-val">Mark Louis Gabrielli Jr.</span></div>
-    <div class="tbi-row"><span class="tbi-label">Title</span><span class="tbi-val">Chief Marketing Officer</span></div>
-    <div class="tbi-row"><span class="tbi-label">Drawing No.</span><span class="tbi-val">MLG-CMO-2026-001</span></div>
-    <div class="tbi-row"><span class="tbi-label">Revision</span><span class="tbi-val">REV. 04</span></div>
-    <div class="tbi-row"><span class="tbi-label">Date</span><span class="tbi-val">2026-03-17</span></div>
-    <div class="tbi-row"><span class="tbi-label">Scale</span><span class="tbi-val">1:1 (FULL SCALE)</span></div>
-    <div class="tbi-row"><span class="tbi-label">Classification</span><span class="tbi-val">EXECUTIVE</span></div>
-    <div class="tbi-row"><span class="tbi-label">Sheet</span><span class="tbi-val">1 of 1</span></div>
-  </div>
+<div class="title-block-main">
+<div class="hero-label">Executive Resume // Drawing 001 // 2026</div>
+<h1 class="hero-name">MARK LOUIS<br><span class="cyan">GABRIELLI</span> JR.</h1>
+<p class="hero-role">Chief Marketing Officer <span class="sep"></span> Growth Architect <span class="sep"></span> Revenue Systems Builder</p>
+<div class="hero-contact">
+<a class="hc-item" href="mailto:mark@markcmo.com">mark@markcmo.com</a>
+<a class="hc-item" href="https://linkedin.com/in/marklgabrielli" target="_blank">linkedin.com/in/marklgabrielli</a>
+<a class="hc-item" href="https://markcmo.com/portfolio" target="_blank" rel="noopener noreferrer">markcmo.com/portfolio</a>
+<a class="hc-item" href="https://markcmo.com/book" target="_blank" rel="noopener noreferrer">markcmo.com/book</a>
+<span class="hc-item">South Florida</span>
+</div>
+</div>
+<div class="title-block-info">
+<div class="tbi-header">Drawing Title Block</div>
+<div class="tbi-row"><span class="tbi-label">Name</span><span class="tbi-val">Mark Louis Gabrielli Jr.</span></div>
+<div class="tbi-row"><span class="tbi-label">Title</span><span class="tbi-val">Chief Marketing Officer</span></div>
+<div class="tbi-row"><span class="tbi-label">Drawing No.</span><span class="tbi-val">MLG-CMO-2026-001</span></div>
+<div class="tbi-row"><span class="tbi-label">Revision</span><span class="tbi-val">REV. 04</span></div>
+<div class="tbi-row"><span class="tbi-label">Date</span><span class="tbi-val">2026-03-17</span></div>
+<div class="tbi-row"><span class="tbi-label">Scale</span><span class="tbi-val">1:1 (FULL SCALE)</span></div>
+<div class="tbi-row"><span class="tbi-label">Classification</span><span class="tbi-val">EXECUTIVE</span></div>
+<div class="tbi-row"><span class="tbi-label">Sheet</span><span class="tbi-val">1 of 1</span></div>
+</div>
 </section>
-
-<!-- DIMENSION CALLOUT STATS -->
 <div class="stats">
-  <div class="dim-stat">
-    <div class="dim-line-l"></div>
-    <div class="dim-line-r"></div>
-    <div class="dim-arrow-r"></div>
-    <div class="dim-val" data-counter data-target="10" data-prefix="$" data-suffix="M+">$10M+</div>
-    <div class="dim-label">Revenue Scaled</div>
-  </div>
-  <div class="dim-stat">
-    <div class="dim-line-l"></div>
-    <div class="dim-line-r"></div>
-    <div class="dim-arrow-r"></div>
-    <div class="dim-val" data-counter data-target="5" data-prefix="$" data-suffix="M+">$5M+</div>
-    <div class="dim-label">Ad Spend Managed</div>
-  </div>
-  <div class="dim-stat">
-    <div class="dim-line-l"></div>
-    <div class="dim-line-r"></div>
-    <div class="dim-arrow-r"></div>
-    <div class="dim-val" data-counter data-target="40" data-suffix="+">40+</div>
-    <div class="dim-label">Team Members Led</div>
-  </div>
-  <div class="dim-stat">
-    <div class="dim-line-l"></div>
-    <div class="dim-line-r"></div>
-    <div class="dim-arrow-r"></div>
-    <div class="dim-val" data-counter data-target="2">2</div>
-    <div class="dim-label">M&amp;A Exits</div>
-  </div>
+<div class="dim-stat">
+<div class="dim-line-l"></div>
+<div class="dim-line-r"></div>
+<div class="dim-arrow-r"></div>
+<div class="dim-val" data-counter data-target="10" data-prefix="$" data-suffix="M+">$10M+</div>
+<div class="dim-label">Revenue Scaled</div>
 </div>
-
+<div class="dim-stat">
+<div class="dim-line-l"></div>
+<div class="dim-line-r"></div>
+<div class="dim-arrow-r"></div>
+<div class="dim-val" data-counter data-target="5" data-prefix="$" data-suffix="M+">$5M+</div>
+<div class="dim-label">Ad Spend Managed</div>
+</div>
+<div class="dim-stat">
+<div class="dim-line-l"></div>
+<div class="dim-line-r"></div>
+<div class="dim-arrow-r"></div>
+<div class="dim-val" data-counter data-target="40" data-suffix="+">40+</div>
+<div class="dim-label">Team Members Led</div>
+</div>
+<div class="dim-stat">
+<div class="dim-line-l"></div>
+<div class="dim-line-r"></div>
+<div class="dim-arrow-r"></div>
+<div class="dim-val" data-counter data-target="2">2</div>
+<div class="dim-label">M&amp;A Exits</div>
+</div>
+</div>
 <div class="section-divider" style="margin-top:60px"></div>
-
-<!-- 01: EXECUTIVE SUMMARY -->
 <section id="summary" class="sec">
-  <div class="sec-head">
-    <span class="sec-num">SEC 01</span>
-    <h2 class="sec-title">Executive Summary</h2>
-    <div class="sec-line"></div>
-  </div>
-  <div class="annotation-box">
-    <span class="ann-label">Annotation A-1</span>
-    <p>Revenue-focused Chief Marketing Officer with a track record of <em>scaling companies from $5M to $10M+</em> through system-driven marketing architecture. Managed <em>$5M+ in annual advertising budgets</em> across Meta, Google, and emerging channels while building and leading <em>cross-functional teams of 40+</em> across growth, creative, analytics, and automation. Directly involved in <em>2 successful company exits</em> (buy-side and sell-side), aligning marketing performance with enterprise valuation drivers. Known for architecting <em>AI-powered marketing systems</em> and scalable infrastructure that reduce CAC, accelerate pipeline, and compound revenue - not just campaigns, but the operating systems behind them.</p>
-  </div>
-</section>
-
-<!-- 02: COMPETENCIES - Circuit Diagram -->
-<section id="competencies" class="sec">
-  <div class="sec-head">
-    <span class="sec-num">SEC 02</span>
-    <h2 class="sec-title">Core Competencies</h2>
-    <div class="sec-line"></div>
-  </div>
-  <div class="circuit-board">
-    <div class="circuit-node">Go-To-Market Strategy</div>
-    <div class="circuit-node">Demand Generation</div>
-    <div class="circuit-node">Revenue Operations</div>
-    <div class="circuit-node">Customer Acquisition &amp; Lifecycle</div>
-    <div class="circuit-node">Brand Strategy &amp; Positioning</div>
-    <div class="circuit-node">Performance Marketing</div>
-    <div class="circuit-node">AI-Driven Marketing Systems</div>
-    <div class="circuit-node">Marketing Automation</div>
-    <div class="circuit-node">Martech Stack Development</div>
-    <div class="circuit-node">Data Analytics &amp; Attribution</div>
-    <div class="circuit-node">Conversion Rate Optimization</div>
-    <div class="circuit-node">Multi-Channel Growth</div>
-    <div class="circuit-node">M&amp;A Marketing Integration</div>
-    <div class="circuit-node">Digital Transformation</div>
-    <div class="circuit-node">Team Leadership &amp; Org Design</div>
-    <div class="circuit-node">Web Development &amp; Site Building</div>
-    <div class="circuit-node">SEO &amp; Technical SEO</div>
-    <div class="circuit-node">ABM &amp; Buyer Intent Platforms</div>
-  </div>
-</section>
-
-<!-- 03: EXPERIENCE - Technical Timeline -->
-<section id="experience" class="sec">
-  <div class="sec-head">
-    <span class="sec-num">SEC 03</span>
-    <h2 class="sec-title">Professional Experience</h2>
-    <div class="sec-line"></div>
-  </div>
-  <div class="tech-timeline">
-
-    <div class="tl-item">
-      <div class="tl-top">
-        <div class="tl-role">Chief Marketing Officer &amp; Growth Advisor</div>
-        <div class="tl-dates">2020 - PRESENT</div>
-      </div>
-      <div class="tl-org">MarkCMO - Executive Marketing Consultancy</div>
-      <div class="tl-desc">Fractional CMO practice serving PE-backed firms, high-growth startups, and enterprise organizations.</div>
-      <ul class="tl-bullets">
-        <li>Scaled <span class="hi">multiple client companies from $5M to $10M+</span> in annual revenue by architecting full-funnel GTM strategies across paid, organic, and partnership channels</li>
-        <li>Managed <span class="hi">$5M+ in combined annual ad spend</span> across Meta, Google, TikTok, and LinkedIn with consistent ROAS optimization and attribution modeling</li>
-        <li>Built and led <span class="hi">cross-functional teams of 40+</span> spanning growth marketing, creative production, analytics, and marketing automation</li>
-        <li>Designed and deployed <span class="hi">AI-driven marketing systems</span> using Claude, ChatGPT, and custom automation pipelines that reduced CAC by 30%+ while increasing conversion rates</li>
-        <li>Served as strategic marketing advisor during <span class="hi">2 successful company exits</span>, aligning marketing KPIs with valuation multiples for both buy-side and sell-side transactions</li>
-        <li>Engineered scalable marketing infrastructure including CRM architecture, lead scoring models, and automated nurture systems that compound pipeline velocity quarter over quarter</li>
-      </ul>
-    </div>
-
-    <div class="tl-item">
-      <div class="tl-top">
-        <div class="tl-role">VP of Marketing &amp; Growth</div>
-        <div class="tl-dates">2017 - 2020</div>
-      </div>
-      <div class="tl-org">Multi-Vertical Operating Company</div>
-      <div class="tl-desc">High-growth portfolio company spanning e-commerce, SaaS, and services verticals.</div>
-      <ul class="tl-bullets">
-        <li>Drove <span class="hi">120% revenue growth</span> over 3 years by redesigning the company's demand generation engine and implementing performance marketing at scale</li>
-        <li>Established the company's first RevOps function, unifying marketing, sales, and customer success data into a single attribution framework</li>
-        <li>Led <span class="hi">brand repositioning initiative</span> that increased qualified lead volume by 45% and improved sales cycle velocity by 22%</li>
-        <li>Recruited, trained, and scaled the marketing organization from 8 to 28 team members across 4 functional areas</li>
-        <li>Managed martech stack consolidation that reduced operational costs by <span class="hi">$380K annually</span> while improving campaign throughput</li>
-      </ul>
-    </div>
-
-    <div class="tl-item">
-      <div class="tl-top">
-        <div class="tl-role">Director of Digital Marketing</div>
-        <div class="tl-dates">2014 - 2017</div>
-      </div>
-      <div class="tl-org">Growth-Stage Technology Company</div>
-      <div class="tl-desc">Series B technology company focused on B2B SaaS solutions.</div>
-      <ul class="tl-bullets">
-        <li>Built the digital marketing function from the ground up, establishing paid media, SEO, content, and email as scalable acquisition channels</li>
-        <li>Launched and optimized <span class="hi">multi-channel paid campaigns</span> that generated 60%+ of the company's qualified pipeline</li>
-        <li>Implemented marketing automation platform (HubSpot) and designed lead scoring models that increased MQL-to-SQL conversion by <span class="hi">38%</span></li>
-        <li>Developed data-driven content strategy that grew organic traffic by <span class="hi">4x</span> within 18 months</li>
-      </ul>
-    </div>
-
-    <div class="tl-item">
-      <div class="tl-top">
-        <div class="tl-role">Marketing Strategist &amp; Consultant</div>
-        <div class="tl-dates">2011 - 2014</div>
-      </div>
-      <div class="tl-org">Independent Consulting Practice</div>
-      <div class="tl-desc">Strategic marketing consultancy serving SMBs and mid-market companies.</div>
-      <ul class="tl-bullets">
-        <li>Provided end-to-end marketing strategy and execution for <span class="hi">20+ clients</span> across technology, professional services, and consumer verticals</li>
-        <li>Developed go-to-market playbooks that reduced client time-to-revenue by an average of <span class="hi">40%</span></li>
-        <li>Built repeatable frameworks for customer acquisition, retention, and brand positioning adopted across multiple engagements</li>
-      </ul>
-    </div>
-
-  </div>
-</section>
-
-<!-- 04: REVENUE DASHBOARD - Oscilloscope -->
-<section id="dashboard" class="sec">
-  <div class="sec-head">
-    <span class="sec-num">SEC 04</span>
-    <h2 class="sec-title">Revenue Impact</h2>
-    <div class="sec-line"></div>
-  </div>
-  <div class="scope-panel">
-    <div class="scope-header">
-      <div class="scope-label">Career Performance Snapshot // Oscilloscope View</div>
-      <div class="scope-live"><span class="pulse"></span> VERIFIED</div>
-    </div>
-    <div class="scope-body">
-      <div class="scope-metrics">
-        <div class="scope-metric">
-          <div class="scope-metric-label">Cumulative Revenue Influenced</div>
-          <div class="scope-metric-val">$50M+</div>
-          <div class="scope-metric-sub">Across all engagements</div>
-        </div>
-        <div class="scope-metric">
-          <div class="scope-metric-label">Avg. CAC Reduction</div>
-          <div class="scope-metric-val">-32%</div>
-          <div class="scope-metric-sub">Via AI + automation systems</div>
-        </div>
-        <div class="scope-metric">
-          <div class="scope-metric-label">Avg. Revenue Growth</div>
-          <div class="scope-metric-val">2.4x</div>
-          <div class="scope-metric-sub">Within 24-month engagements</div>
-        </div>
-      </div>
-
-      <div class="scope-chart">
-        <svg viewBox="0 0 800 140" preserveAspectRatio="none">
-          <defs>
-            <linearGradient id="scopeGrad" x1="0" y1="0" x2="0" y2="1">
-              <stop offset="0%" stop-color="rgba(0,212,255,.2)"/>
-              <stop offset="100%" stop-color="rgba(0,212,255,0)"/>
-            </linearGradient>
-          </defs>
-          <path class="trace-fill" d="M0,125 C80,122 120,118 160,108 C200,98 240,86 280,76 C320,66 360,54 400,44 C440,35 480,28 520,22 C560,17 600,13 640,10 C680,8 720,6 760,5 L800,4 L800,140 L0,140 Z"/>
-          <path class="trace" d="M0,125 C80,122 120,118 160,108 C200,98 240,86 280,76 C320,66 360,54 400,44 C440,35 480,28 520,22 C560,17 600,13 640,10 C680,8 720,6 760,5 L800,4"/>
-          <!-- Scan line effect dots -->
-          <circle cx="800" cy="4" r="3" fill="#00d4ff" opacity=".8">
-            <animate attributeName="opacity" values="1;.3;1" dur="2s" repeatCount="indefinite"/>
-          </circle>
-        </svg>
-      </div>
-      <div class="scope-x">
-        <span>2011</span><span>2014</span><span>2017</span><span>2020</span><span>2023</span><span>2026</span>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- 05: M&A DEAL SHEET - Engineering Spec Boxes -->
-<section id="deals" class="sec">
-  <div class="sec-head">
-    <span class="sec-num">SEC 05</span>
-    <h2 class="sec-title">M&amp;A Deal Sheet</h2>
-    <div class="sec-line"></div>
-  </div>
-  <div class="spec-grid">
-    <div class="spec-box">
-      <div class="spec-header">
-        <span class="spec-type">Sell-Side Exit</span>
-        <span class="spec-dwg">DWG: MA-001</span>
-      </div>
-      <h4>Growth-Stage Portfolio Company</h4>
-      <div class="spec-rows">
-        <div class="spec-row"><span>Role</span><span>CMO / Marketing Lead</span></div>
-        <div class="spec-row"><span>Contribution</span><span>Revenue scaling &amp; brand positioning</span></div>
-        <div class="spec-row"><span>Impact</span><span>Aligned marketing KPIs to valuation</span></div>
-        <div class="spec-row"><span>Result</span><span>Successful exit at premium multiple</span></div>
-      </div>
-    </div>
-    <div class="spec-box">
-      <div class="spec-header">
-        <span class="spec-type">Buy-Side Integration</span>
-        <span class="spec-dwg">DWG: MA-002</span>
-      </div>
-      <h4>PE-Backed Acquisition Target</h4>
-      <div class="spec-rows">
-        <div class="spec-row"><span>Role</span><span>Marketing Integration Advisor</span></div>
-        <div class="spec-row"><span>Contribution</span><span>Due diligence &amp; post-merger GTM</span></div>
-        <div class="spec-row"><span>Impact</span><span>Unified martech &amp; team structures</span></div>
-        <div class="spec-row"><span>Result</span><span>Accelerated post-acquisition growth</span></div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- 06: CASE STUDIES - Cross Section Views -->
-<section class="sec">
-  <div class="sec-head">
-    <span class="sec-num">SEC 06</span>
-    <h2 class="sec-title">Case Studies</h2>
-    <div class="sec-line"></div>
-  </div>
-  <div class="case-list">
-    <div class="case-item">
-      <div>
-        <span class="case-tag rev">Revenue Scale</span>
-        <div class="case-title">$5M to $10M+ Revenue Architecture</div>
-        <div class="case-desc">Designed and executed full-funnel GTM strategy combining paid media, organic growth, and strategic partnerships.</div>
-      </div>
-      <div class="case-metric"><strong>2x+</strong><small>Revenue Growth</small></div>
-    </div>
-    <div class="case-item">
-      <div>
-        <span class="case-tag perf">Performance</span>
-        <div class="case-title">$5M+ Ad Budget Optimization Engine</div>
-        <div class="case-desc">Managed multi-million dollar ad spend across Meta, Google, TikTok, and LinkedIn with AI-driven bidding strategies.</div>
-      </div>
-      <div class="case-metric"><strong>-32%</strong><small>CAC Reduction</small></div>
-    </div>
-    <div class="case-item">
-      <div>
-        <span class="case-tag ma">M&amp;A</span>
-        <div class="case-title">Exit-Ready Marketing Organization</div>
-        <div class="case-desc">Aligned marketing performance metrics with enterprise valuation drivers for PE-backed exit.</div>
-      </div>
-      <div class="case-metric"><strong>2</strong><small>Successful Exits</small></div>
-    </div>
-  </div>
-</section>
-
-<!-- 07: TECH STACK - Bill of Materials -->
-<section id="tech" class="sec">
-  <div class="sec-head">
-    <span class="sec-num">SEC 07</span>
-    <h2 class="sec-title">Technology Stack</h2>
-    <div class="sec-line"></div>
-  </div>
-  <div style="font-size:.55rem;color:var(--text-faint);letter-spacing:.15em;text-transform:uppercase;margin-bottom:20px;">Bill of Materials // 109 Tools // 14 Categories</div>
-
-  <!-- 1. Frontend Development & Web (9 tools) -->
-  <div class="bom-section">
-    <div class="bom-cat-label">01 // Frontend Development &amp; Web</div>
-    <div class="bom-header"><span>Part #</span><span>Description</span><span>Qty</span></div>
-    <div class="bom-table">
-      <div class="bom-row"><span>FE-001</span><span>HTML5</span><span>1</span></div>
-      <div class="bom-row"><span>FE-002</span><span>CSS3</span><span>1</span></div>
-      <div class="bom-row"><span>FE-003</span><span>JavaScript</span><span>1</span></div>
-      <div class="bom-row"><span>FE-004</span><span>React</span><span>1</span></div>
-      <div class="bom-row"><span>FE-005</span><span>Responsive Web Design</span><span>1</span></div>
-      <div class="bom-row"><span>FE-006</span><span>MJML</span><span>1</span></div>
-      <div class="bom-row"><span>FE-007</span><span>Liquid (Shopify/ESP)</span><span>1</span></div>
-      <div class="bom-row"><span>FE-008</span><span>Schema Markup</span><span>1</span></div>
-      <div class="bom-row"><span>FE-009</span><span>Sitemap Markup</span><span>1</span></div>
-    </div>
-  </div>
-
-  <!-- 2. Backend & Data Infrastructure (8 tools) -->
-  <div class="bom-section">
-    <div class="bom-cat-label">02 // Backend &amp; Data Infrastructure</div>
-    <div class="bom-header"><span>Part #</span><span>Description</span><span>Qty</span></div>
-    <div class="bom-table">
-      <div class="bom-row"><span>BE-001</span><span>APIs &amp; Webhooks</span><span>1</span></div>
-      <div class="bom-row"><span>BE-002</span><span>SQL</span><span>1</span></div>
-      <div class="bom-row"><span>BE-003</span><span>Google Tag Manager</span><span>1</span></div>
-      <div class="bom-row"><span>BE-004</span><span>Segment</span><span>1</span></div>
-      <div class="bom-row"><span>BE-005</span><span>mParticle</span><span>1</span></div>
-      <div class="bom-row"><span>BE-006</span><span>Amperity</span><span>1</span></div>
-      <div class="bom-row"><span>BE-007</span><span>Multi-Touch Attribution</span><span>1</span></div>
-      <div class="bom-row"><span>BE-008</span><span>Data Layer Management</span><span>1</span></div>
-    </div>
-  </div>
-
-  <!-- 3. CMS & Web Platforms (5 tools) -->
-  <div class="bom-section">
-    <div class="bom-cat-label">03 // CMS &amp; Web Platforms</div>
-    <div class="bom-header"><span>Part #</span><span>Description</span><span>Qty</span></div>
-    <div class="bom-table">
-      <div class="bom-row"><span>CM-001</span><span>WordPress</span><span>1</span></div>
-      <div class="bom-row"><span>CM-002</span><span>Webflow</span><span>1</span></div>
-      <div class="bom-row"><span>CM-003</span><span>Shopify</span><span>1</span></div>
-      <div class="bom-row"><span>CM-004</span><span>Magento</span><span>1</span></div>
-      <div class="bom-row"><span>CM-005</span><span>Contentful</span><span>1</span></div>
-    </div>
-  </div>
-
-  <!-- 4. CRM & Marketing Automation (9 tools) -->
-  <div class="bom-section">
-    <div class="bom-cat-label">04 // CRM &amp; Marketing Automation</div>
-    <div class="bom-header"><span>Part #</span><span>Description</span><span>Qty</span></div>
-    <div class="bom-table">
-      <div class="bom-row"><span>CR-001</span><span>Salesforce (Sales + Marketing Cloud)</span><span>1</span></div>
-      <div class="bom-row"><span>CR-002</span><span>HubSpot</span><span>1</span></div>
-      <div class="bom-row"><span>CR-003</span><span>Zoho CRM</span><span>1</span></div>
-      <div class="bom-row"><span>CR-004</span><span>Marketo</span><span>1</span></div>
-      <div class="bom-row"><span>CR-005</span><span>Pardot</span><span>1</span></div>
-      <div class="bom-row"><span>CR-006</span><span>ActiveCampaign</span><span>1</span></div>
-      <div class="bom-row"><span>CR-007</span><span>Make (Integromat)</span><span>1</span></div>
-      <div class="bom-row"><span>CR-008</span><span>Zapier</span><span>1</span></div>
-      <div class="bom-row"><span>CR-009</span><span>n8n</span><span>1</span></div>
-    </div>
-  </div>
-
-  <!-- 5. Advertising Platforms (6 tools) -->
-  <div class="bom-section">
-    <div class="bom-cat-label">05 // Advertising Platforms</div>
-    <div class="bom-header"><span>Part #</span><span>Description</span><span>Qty</span></div>
-    <div class="bom-table">
-      <div class="bom-row"><span>AD-001</span><span>Google Ads</span><span>1</span></div>
-      <div class="bom-row"><span>AD-002</span><span>Meta Ads Manager</span><span>1</span></div>
-      <div class="bom-row"><span>AD-003</span><span>TikTok Ads</span><span>1</span></div>
-      <div class="bom-row"><span>AD-004</span><span>LinkedIn Campaign Manager</span><span>1</span></div>
-      <div class="bom-row"><span>AD-005</span><span>The Trade Desk</span><span>1</span></div>
-      <div class="bom-row"><span>AD-006</span><span>StackAdapt</span><span>1</span></div>
-    </div>
-  </div>
-
-  <!-- 6. Analytics & Attribution (9 tools) -->
-  <div class="bom-section">
-    <div class="bom-cat-label">06 // Analytics &amp; Attribution</div>
-    <div class="bom-header"><span>Part #</span><span>Description</span><span>Qty</span></div>
-    <div class="bom-table">
-      <div class="bom-row"><span>AN-001</span><span>Google Analytics (GA4)</span><span>1</span></div>
-      <div class="bom-row"><span>AN-002</span><span>Looker</span><span>1</span></div>
-      <div class="bom-row"><span>AN-003</span><span>Tableau</span><span>1</span></div>
-      <div class="bom-row"><span>AN-004</span><span>Power BI</span><span>1</span></div>
-      <div class="bom-row"><span>AN-005</span><span>Mixpanel</span><span>1</span></div>
-      <div class="bom-row"><span>AN-006</span><span>Amplitude</span><span>1</span></div>
-      <div class="bom-row"><span>AN-007</span><span>Heap</span><span>1</span></div>
-      <div class="bom-row"><span>AN-008</span><span>Northbeam</span><span>1</span></div>
-      <div class="bom-row"><span>AN-009</span><span>Triple Whale</span><span>1</span></div>
-    </div>
-  </div>
-
-  <!-- 7. Email, SMS & Lifecycle (9 tools) -->
-  <div class="bom-section">
-    <div class="bom-cat-label">07 // Email, SMS &amp; Lifecycle</div>
-    <div class="bom-header"><span>Part #</span><span>Description</span><span>Qty</span></div>
-    <div class="bom-table">
-      <div class="bom-row"><span>EM-001</span><span>Klaviyo</span><span>1</span></div>
-      <div class="bom-row"><span>EM-002</span><span>Braze</span><span>1</span></div>
-      <div class="bom-row"><span>EM-003</span><span>Iterable</span><span>1</span></div>
-      <div class="bom-row"><span>EM-004</span><span>Mailchimp</span><span>1</span></div>
-      <div class="bom-row"><span>EM-005</span><span>Zoho Campaigns</span><span>1</span></div>
-      <div class="bom-row"><span>EM-006</span><span>Brevo</span><span>1</span></div>
-      <div class="bom-row"><span>EM-007</span><span>Constant Contact</span><span>1</span></div>
-      <div class="bom-row"><span>EM-008</span><span>Postscript (SMS)</span><span>1</span></div>
-      <div class="bom-row"><span>EM-009</span><span>Attentive (SMS)</span><span>1</span></div>
-    </div>
-  </div>
-
-  <!-- 8. SEO & Content Optimization (6 tools) -->
-  <div class="bom-section">
-    <div class="bom-cat-label">08 // SEO &amp; Content Optimization</div>
-    <div class="bom-header"><span>Part #</span><span>Description</span><span>Qty</span></div>
-    <div class="bom-table">
-      <div class="bom-row"><span>SE-001</span><span>SEMrush</span><span>1</span></div>
-      <div class="bom-row"><span>SE-002</span><span>Ahrefs</span><span>1</span></div>
-      <div class="bom-row"><span>SE-003</span><span>Screaming Frog</span><span>1</span></div>
-      <div class="bom-row"><span>SE-004</span><span>Clearscope</span><span>1</span></div>
-      <div class="bom-row"><span>SE-005</span><span>Brightlocal</span><span>1</span></div>
-      <div class="bom-row"><span>SE-006</span><span>Whitespark</span><span>1</span></div>
-    </div>
-  </div>
-
-  <!-- 9. A/B Testing & CRO (6 tools) -->
-  <div class="bom-section">
-    <div class="bom-cat-label">09 // A/B Testing &amp; CRO</div>
-    <div class="bom-header"><span>Part #</span><span>Description</span><span>Qty</span></div>
-    <div class="bom-table">
-      <div class="bom-row"><span>AB-001</span><span>Optimizely</span><span>1</span></div>
-      <div class="bom-row"><span>AB-002</span><span>VWO</span><span>1</span></div>
-      <div class="bom-row"><span>AB-003</span><span>Convert.com</span><span>1</span></div>
-      <div class="bom-row"><span>AB-004</span><span>Dynamic Yield</span><span>1</span></div>
-      <div class="bom-row"><span>AB-005</span><span>Mutiny</span><span>1</span></div>
-      <div class="bom-row"><span>AB-006</span><span>Adobe Target</span><span>1</span></div>
-    </div>
-  </div>
-
-  <!-- 10. Social, Influencer & Partnerships (10 tools) -->
-  <div class="bom-section">
-    <div class="bom-cat-label">10 // Social, Influencer &amp; Partnerships</div>
-    <div class="bom-header"><span>Part #</span><span>Description</span><span>Qty</span></div>
-    <div class="bom-table">
-      <div class="bom-row"><span>SO-001</span><span>Sprout Social</span><span>1</span></div>
-      <div class="bom-row"><span>SO-002</span><span>Later</span><span>1</span></div>
-      <div class="bom-row"><span>SO-003</span><span>Buffer</span><span>1</span></div>
-      <div class="bom-row"><span>SO-004</span><span>Hootsuite</span><span>1</span></div>
-      <div class="bom-row"><span>SO-005</span><span>GRIN</span><span>1</span></div>
-      <div class="bom-row"><span>SO-006</span><span>AspireIQ</span><span>1</span></div>
-      <div class="bom-row"><span>SO-007</span><span>CreatorIQ</span><span>1</span></div>
-      <div class="bom-row"><span>SO-008</span><span>Impact</span><span>1</span></div>
-      <div class="bom-row"><span>SO-009</span><span>Refersion</span><span>1</span></div>
-      <div class="bom-row"><span>SO-010</span><span>PartnerStack</span><span>1</span></div>
-    </div>
-  </div>
-
-  <!-- 11. Design & Creative (7 tools) -->
-  <div class="bom-section">
-    <div class="bom-cat-label">11 // Design &amp; Creative</div>
-    <div class="bom-header"><span>Part #</span><span>Description</span><span>Qty</span></div>
-    <div class="bom-table">
-      <div class="bom-row"><span>DC-001</span><span>Figma</span><span>1</span></div>
-      <div class="bom-row"><span>DC-002</span><span>Canva</span><span>1</span></div>
-      <div class="bom-row"><span>DC-003</span><span>Adobe Photoshop</span><span>1</span></div>
-      <div class="bom-row"><span>DC-004</span><span>Adobe Illustrator</span><span>1</span></div>
-      <div class="bom-row"><span>DC-005</span><span>Premiere Pro</span><span>1</span></div>
-      <div class="bom-row"><span>DC-006</span><span>After Effects</span><span>1</span></div>
-      <div class="bom-row"><span>DC-007</span><span>Miro</span><span>1</span></div>
-    </div>
-  </div>
-
-  <!-- 12. Communication & Project Management (10 tools) -->
-  <div class="bom-section">
-    <div class="bom-cat-label">12 // Communication &amp; Project Management</div>
-    <div class="bom-header"><span>Part #</span><span>Description</span><span>Qty</span></div>
-    <div class="bom-table">
-      <div class="bom-row"><span>PM-001</span><span>Slack</span><span>1</span></div>
-      <div class="bom-row"><span>PM-002</span><span>Asana</span><span>1</span></div>
-      <div class="bom-row"><span>PM-003</span><span>Monday</span><span>1</span></div>
-      <div class="bom-row"><span>PM-004</span><span>Trello</span><span>1</span></div>
-      <div class="bom-row"><span>PM-005</span><span>Notion</span><span>1</span></div>
-      <div class="bom-row"><span>PM-006</span><span>Airtable</span><span>1</span></div>
-      <div class="bom-row"><span>PM-007</span><span>G Suite</span><span>1</span></div>
-      <div class="bom-row"><span>PM-008</span><span>Microsoft 365</span><span>1</span></div>
-      <div class="bom-row"><span>PM-009</span><span>Zoom</span><span>1</span></div>
-      <div class="bom-row"><span>PM-010</span><span>Loom</span><span>1</span></div>
-    </div>
-  </div>
-
-  <!-- 13. AI, LLM & Next-Gen Tools (11 tools) -->
-  <div class="bom-section">
-    <div class="bom-cat-label">13 // AI, LLM &amp; Next-Gen Tools</div>
-    <div class="bom-header"><span>Part #</span><span>Description</span><span>Qty</span></div>
-    <div class="bom-table">
-      <div class="bom-row"><span>AI-001</span><span>ChatGPT</span><span>1</span></div>
-      <div class="bom-row"><span>AI-002</span><span>Claude</span><span>1</span></div>
-      <div class="bom-row"><span>AI-003</span><span>Gemini (Google)</span><span>1</span></div>
-      <div class="bom-row"><span>AI-004</span><span>Jasper</span><span>1</span></div>
-      <div class="bom-row"><span>AI-005</span><span>Midjourney</span><span>1</span></div>
-      <div class="bom-row"><span>AI-006</span><span>DALL-E</span><span>1</span></div>
-      <div class="bom-row"><span>AI-007</span><span>Descript</span><span>1</span></div>
-      <div class="bom-row"><span>AI-008</span><span>Copy.ai</span><span>1</span></div>
-      <div class="bom-row"><span>AI-009</span><span>Writesonic</span><span>1</span></div>
-      <div class="bom-row"><span>AI-010</span><span>Lumen5</span><span>1</span></div>
-      <div class="bom-row"><span>AI-011</span><span>Perplexity</span><span>1</span></div>
-    </div>
-  </div>
-
-  <!-- 14. ABM, Intent & Data Enrichment (4 tools) -->
-  <div class="bom-section">
-    <div class="bom-cat-label">14 // ABM, Intent &amp; Data Enrichment</div>
-    <div class="bom-header"><span>Part #</span><span>Description</span><span>Qty</span></div>
-    <div class="bom-table">
-      <div class="bom-row"><span>AB-001</span><span>6sense</span><span>1</span></div>
-      <div class="bom-row"><span>AB-002</span><span>Demandbase</span><span>1</span></div>
-      <div class="bom-row"><span>AB-003</span><span>Clearbit</span><span>1</span></div>
-      <div class="bom-row"><span>AB-004</span><span>ZoomInfo</span><span>1</span></div>
-    </div>
-  </div>
-
-</section>
-
-<!-- 08: SELECTED WINS - Revision Notes -->
-<section id="wins" class="sec">
-  <div class="sec-head">
-    <span class="sec-num">SEC 08</span>
-    <h2 class="sec-title">Selected Wins</h2>
-    <div class="sec-line"></div>
-  </div>
-  <div style="font-size:.55rem;color:var(--text-faint);letter-spacing:.15em;text-transform:uppercase;margin-bottom:16px;">Revision Notes // Verified Outcomes</div>
-  <div class="rev-notes">
-    <div class="rev-note">
-      <div class="rev-note-num">01</div>
-      <h4>Multi-Company Revenue Scale</h4>
-      <p>Scaled multiple companies from $5M to $10M+ through architected growth systems, not one-off campaigns.</p>
-    </div>
-    <div class="rev-note">
-      <div class="rev-note-num">02</div>
-      <h4>$5M+ Ad Budget Mastery</h4>
-      <p>Managed seven-figure annual ad spend with consistent ROAS optimization across Meta, Google, and emerging channels.</p>
-    </div>
-    <div class="rev-note">
-      <div class="rev-note-num">03</div>
-      <h4>40+ Person Team Leadership</h4>
-      <p>Built and led cross-functional teams spanning growth, creative, analytics, and automation from the ground up.</p>
-    </div>
-    <div class="rev-note">
-      <div class="rev-note-num">04</div>
-      <h4>2 Successful Company Exits</h4>
-      <p>Key contributor to both buy-side and sell-side M&amp;A transactions, aligning marketing with enterprise value drivers.</p>
-    </div>
-    <div class="rev-note">
-      <div class="rev-note-num">05</div>
-      <h4>AI Marketing Infrastructure</h4>
-      <p>Pioneered AI-driven marketing systems that reduced CAC by 30%+ while increasing conversion rates and pipeline velocity.</p>
-    </div>
-    <div class="rev-note">
-      <div class="rev-note-num">06</div>
-      <h4>Scalable Marketing Architecture</h4>
-      <p>Designed marketing operating systems that compound growth - CRM, automation, attribution, and funnel architecture.</p>
-    </div>
-  </div>
-</section>
-
-</div><!-- .wrap -->
-
-<!-- CTA BLOCK -->
-<div class="wrap">
-  <div class="cta-block">
-    <div class="cta-header">Contact // Title Block // MLG-CMO-2026-001 REV. 04</div>
-    <div class="cta-body">
-      <div class="qr-box"><canvas id="qrcode"></canvas></div>
-      <h3>Ready to Build Something</h3>
-      <p>Scan to view portfolio, or reach out directly.</p>
-      <div class="cta-btns">
-        <a href="mailto:mark@markcmo.com" class="cbtn cbtn-cyan">Email Me</a>
-        <a href="https://linkedin.com/in/marklgabrielli" target="_blank" class="cbtn">LinkedIn</a>
-        <a href="https://markcmo.com/portfolio" target="_blank" rel="noopener noreferrer" class="cbtn">Portfolio</a>
-        <a href="https://markcmo.com/book" target="_blank" rel="noopener noreferrer" class="cbtn cbtn-cyan">Book a Call</a>
-        <button onclick="window.print()" class="cbtn">Export PDF</button>
-      </div>
-    </div>
-  </div>
+<div class="sec-head">
+<span class="sec-num">SEC 01</span>
+<h2 class="sec-title">Executive Summary</h2>
+<div class="sec-line"></div>
 </div>
-
+<div class="annotation-box">
+<span class="ann-label">Annotation A-1</span>
+<p>Revenue-focused Chief Marketing Officer with a track record of <em>scaling companies from $5M to $10M+</em> through system-driven marketing architecture. Managed <em>$5M+ in annual advertising budgets</em> across Meta, Google, and emerging channels while building and leading <em>cross-functional teams of 40+</em> across growth, creative, analytics, and automation. Directly involved in <em>2 successful company exits</em> (buy-side and sell-side), aligning marketing performance with enterprise valuation drivers. Known for architecting <em>AI-powered marketing systems</em> and scalable infrastructure that reduce CAC, accelerate pipeline, and compound revenue - not just campaigns, but the operating systems behind them.</p>
+</div>
+</section>
+<section id="competencies" class="sec">
+<div class="sec-head">
+<span class="sec-num">SEC 02</span>
+<h2 class="sec-title">Core Competencies</h2>
+<div class="sec-line"></div>
+</div>
+<div class="circuit-board">
+<div class="circuit-node">Go-To-Market Strategy</div>
+<div class="circuit-node">Demand Generation</div>
+<div class="circuit-node">Revenue Operations</div>
+<div class="circuit-node">Customer Acquisition &amp; Lifecycle</div>
+<div class="circuit-node">Brand Strategy &amp; Positioning</div>
+<div class="circuit-node">Performance Marketing</div>
+<div class="circuit-node">AI-Driven Marketing Systems</div>
+<div class="circuit-node">Marketing Automation</div>
+<div class="circuit-node">Martech Stack Development</div>
+<div class="circuit-node">Data Analytics &amp; Attribution</div>
+<div class="circuit-node">Conversion Rate Optimization</div>
+<div class="circuit-node">Multi-Channel Growth</div>
+<div class="circuit-node">M&amp;A Marketing Integration</div>
+<div class="circuit-node">Digital Transformation</div>
+<div class="circuit-node">Team Leadership &amp; Org Design</div>
+<div class="circuit-node">Web Development &amp; Site Building</div>
+<div class="circuit-node">SEO &amp; Technical SEO</div>
+<div class="circuit-node">ABM &amp; Buyer Intent Platforms</div>
+</div>
+</section>
+<section id="experience" class="sec">
+<div class="sec-head">
+<span class="sec-num">SEC 03</span>
+<h2 class="sec-title">Professional Experience</h2>
+<div class="sec-line"></div>
+</div>
+<div class="tech-timeline">
+<div class="tl-item">
+<div class="tl-top">
+<div class="tl-role">Chief Marketing Officer &amp; Growth Advisor</div>
+<div class="tl-dates">2020 - PRESENT</div>
+</div>
+<div class="tl-org">MarkCMO - Executive Marketing Consultancy</div>
+<div class="tl-desc">Fractional CMO practice serving PE-backed firms, high-growth startups, and enterprise organizations.</div>
+<ul class="tl-bullets">
+<li>Scaled <span class="hi">multiple client companies from $5M to $10M+</span> in annual revenue by architecting full-funnel GTM strategies across paid, organic, and partnership channels</li>
+<li>Managed <span class="hi">$5M+ in combined annual ad spend</span> across Meta, Google, TikTok, and LinkedIn with consistent ROAS optimization and attribution modeling</li>
+<li>Built and led <span class="hi">cross-functional teams of 40+</span> spanning growth marketing, creative production, analytics, and marketing automation</li>
+<li>Designed and deployed <span class="hi">AI-driven marketing systems</span> using Claude, ChatGPT, and custom automation pipelines that reduced CAC by 30%+ while increasing conversion rates</li>
+<li>Served as strategic marketing advisor during <span class="hi">2 successful company exits</span>, aligning marketing KPIs with valuation multiples for both buy-side and sell-side transactions</li>
+<li>Engineered scalable marketing infrastructure including CRM architecture, lead scoring models, and automated nurture systems that compound pipeline velocity quarter over quarter</li>
+</ul>
+</div>
+<div class="tl-item">
+<div class="tl-top">
+<div class="tl-role">VP of Marketing &amp; Growth</div>
+<div class="tl-dates">2017 - 2020</div>
+</div>
+<div class="tl-org">Multi-Vertical Operating Company</div>
+<div class="tl-desc">High-growth portfolio company spanning e-commerce, SaaS, and services verticals.</div>
+<ul class="tl-bullets">
+<li>Drove <span class="hi">120% revenue growth</span> over 3 years by redesigning the company's demand generation engine and implementing performance marketing at scale</li>
+<li>Established the company's first RevOps function, unifying marketing, sales, and customer success data into a single attribution framework</li>
+<li>Led <span class="hi">brand repositioning initiative</span> that increased qualified lead volume by 45% and improved sales cycle velocity by 22%</li>
+<li>Recruited, trained, and scaled the marketing organization from 8 to 28 team members across 4 functional areas</li>
+<li>Managed martech stack consolidation that reduced operational costs by <span class="hi">$380K annually</span> while improving campaign throughput</li>
+</ul>
+</div>
+<div class="tl-item">
+<div class="tl-top">
+<div class="tl-role">Director of Digital Marketing</div>
+<div class="tl-dates">2014 - 2017</div>
+</div>
+<div class="tl-org">Growth-Stage Technology Company</div>
+<div class="tl-desc">Series B technology company focused on B2B SaaS solutions.</div>
+<ul class="tl-bullets">
+<li>Built the digital marketing function from the ground up, establishing paid media, SEO, content, and email as scalable acquisition channels</li>
+<li>Launched and optimized <span class="hi">multi-channel paid campaigns</span> that generated 60%+ of the company's qualified pipeline</li>
+<li>Implemented marketing automation platform (HubSpot) and designed lead scoring models that increased MQL-to-SQL conversion by <span class="hi">38%</span></li>
+<li>Developed data-driven content strategy that grew organic traffic by <span class="hi">4x</span> within 18 months</li>
+</ul>
+</div>
+<div class="tl-item">
+<div class="tl-top">
+<div class="tl-role">Marketing Strategist &amp; Consultant</div>
+<div class="tl-dates">2011 - 2014</div>
+</div>
+<div class="tl-org">Independent Consulting Practice</div>
+<div class="tl-desc">Strategic marketing consultancy serving SMBs and mid-market companies.</div>
+<ul class="tl-bullets">
+<li>Provided end-to-end marketing strategy and execution for <span class="hi">20+ clients</span> across technology, professional services, and consumer verticals</li>
+<li>Developed go-to-market playbooks that reduced client time-to-revenue by an average of <span class="hi">40%</span></li>
+<li>Built repeatable frameworks for customer acquisition, retention, and brand positioning adopted across multiple engagements</li>
+</ul>
+</div>
+</div>
+</section>
+<section id="dashboard" class="sec">
+<div class="sec-head">
+<span class="sec-num">SEC 04</span>
+<h2 class="sec-title">Revenue Impact</h2>
+<div class="sec-line"></div>
+</div>
+<div class="scope-panel">
+<div class="scope-header">
+<div class="scope-label">Career Performance Snapshot // Oscilloscope View</div>
+<div class="scope-live"><span class="pulse"></span> VERIFIED</div>
+</div>
+<div class="scope-body">
+<div class="scope-metrics">
+<div class="scope-metric">
+<div class="scope-metric-label">Cumulative Revenue Influenced</div>
+<div class="scope-metric-val">$50M+</div>
+<div class="scope-metric-sub">Across all engagements</div>
+</div>
+<div class="scope-metric">
+<div class="scope-metric-label">Avg. CAC Reduction</div>
+<div class="scope-metric-val">-32%</div>
+<div class="scope-metric-sub">Via AI + automation systems</div>
+</div>
+<div class="scope-metric">
+<div class="scope-metric-label">Avg. Revenue Growth</div>
+<div class="scope-metric-val">2.4x</div>
+<div class="scope-metric-sub">Within 24-month engagements</div>
+</div>
+</div>
+<div class="scope-chart">
+<svg viewBox="0 0 800 140" preserveAspectRatio="none">
+<defs>
+<linearGradient id="scopeGrad" x1="0" y1="0" x2="0" y2="1">
+<stop offset="0%" stop-color="rgba(0,212,255,.2)"/>
+<stop offset="100%" stop-color="rgba(0,212,255,0)"/>
+</linearGradient>
+</defs>
+<path class="trace-fill" d="M0,125 C80,122 120,118 160,108 C200,98 240,86 280,76 C320,66 360,54 400,44 C440,35 480,28 520,22 C560,17 600,13 640,10 C680,8 720,6 760,5 L800,4 L800,140 L0,140 Z"/>
+<path class="trace" d="M0,125 C80,122 120,118 160,108 C200,98 240,86 280,76 C320,66 360,54 400,44 C440,35 480,28 520,22 C560,17 600,13 640,10 C680,8 720,6 760,5 L800,4"/>
+<circle cx="800" cy="4" r="3" fill="#00d4ff" opacity=".8">
+<animate attributeName="opacity" values="1;.3;1" dur="2s" repeatCount="indefinite"/>
+</circle>
+</svg>
+</div>
+<div class="scope-x">
+<span>2011</span><span>2014</span><span>2017</span><span>2020</span><span>2023</span><span>2026</span>
+</div>
+</div>
+</div>
+</section>
+<section id="deals" class="sec">
+<div class="sec-head">
+<span class="sec-num">SEC 05</span>
+<h2 class="sec-title">M&amp;A Deal Sheet</h2>
+<div class="sec-line"></div>
+</div>
+<div class="spec-grid">
+<div class="spec-box">
+<div class="spec-header">
+<span class="spec-type">Sell-Side Exit</span>
+<span class="spec-dwg">DWG: MA-001</span>
+</div>
+<h4>Growth-Stage Portfolio Company</h4>
+<div class="spec-rows">
+<div class="spec-row"><span>Role</span><span>CMO / Marketing Lead</span></div>
+<div class="spec-row"><span>Contribution</span><span>Revenue scaling &amp; brand positioning</span></div>
+<div class="spec-row"><span>Impact</span><span>Aligned marketing KPIs to valuation</span></div>
+<div class="spec-row"><span>Result</span><span>Successful exit at premium multiple</span></div>
+</div>
+</div>
+<div class="spec-box">
+<div class="spec-header">
+<span class="spec-type">Buy-Side Integration</span>
+<span class="spec-dwg">DWG: MA-002</span>
+</div>
+<h4>PE-Backed Acquisition Target</h4>
+<div class="spec-rows">
+<div class="spec-row"><span>Role</span><span>Marketing Integration Advisor</span></div>
+<div class="spec-row"><span>Contribution</span><span>Due diligence &amp; post-merger GTM</span></div>
+<div class="spec-row"><span>Impact</span><span>Unified martech &amp; team structures</span></div>
+<div class="spec-row"><span>Result</span><span>Accelerated post-acquisition growth</span></div>
+</div>
+</div>
+</div>
+</section>
+<section class="sec">
+<div class="sec-head">
+<span class="sec-num">SEC 06</span>
+<h2 class="sec-title">Case Studies</h2>
+<div class="sec-line"></div>
+</div>
+<div class="case-list">
+<div class="case-item">
+<div>
+<span class="case-tag rev">Revenue Scale</span>
+<div class="case-title">$5M to $10M+ Revenue Architecture</div>
+<div class="case-desc">Designed and executed full-funnel GTM strategy combining paid media, organic growth, and strategic partnerships.</div>
+</div>
+<div class="case-metric"><strong>2x+</strong><small>Revenue Growth</small></div>
+</div>
+<div class="case-item">
+<div>
+<span class="case-tag perf">Performance</span>
+<div class="case-title">$5M+ Ad Budget Optimization Engine</div>
+<div class="case-desc">Managed multi-million dollar ad spend across Meta, Google, TikTok, and LinkedIn with AI-driven bidding strategies.</div>
+</div>
+<div class="case-metric"><strong>-32%</strong><small>CAC Reduction</small></div>
+</div>
+<div class="case-item">
+<div>
+<span class="case-tag ma">M&amp;A</span>
+<div class="case-title">Exit-Ready Marketing Organization</div>
+<div class="case-desc">Aligned marketing performance metrics with enterprise valuation drivers for PE-backed exit.</div>
+</div>
+<div class="case-metric"><strong>2</strong><small>Successful Exits</small></div>
+</div>
+</div>
+</section>
+<section id="tech" class="sec">
+<div class="sec-head">
+<span class="sec-num">SEC 07</span>
+<h2 class="sec-title">Technology Stack</h2>
+<div class="sec-line"></div>
+</div>
+<div style="font-size:.55rem;color:var(--text-faint);letter-spacing:.15em;text-transform:uppercase;margin-bottom:20px;">Bill of Materials // 109 Tools // 14 Categories</div>
+<div class="bom-section">
+<div class="bom-cat-label">01 // Frontend Development &amp; Web</div>
+<div class="bom-header"><span>Part #</span><span>Description</span><span>Qty</span></div>
+<div class="bom-table">
+<div class="bom-row"><span>FE-001</span><span>HTML5</span><span>1</span></div>
+<div class="bom-row"><span>FE-002</span><span>CSS3</span><span>1</span></div>
+<div class="bom-row"><span>FE-003</span><span>JavaScript</span><span>1</span></div>
+<div class="bom-row"><span>FE-004</span><span>React</span><span>1</span></div>
+<div class="bom-row"><span>FE-005</span><span>Responsive Web Design</span><span>1</span></div>
+<div class="bom-row"><span>FE-006</span><span>MJML</span><span>1</span></div>
+<div class="bom-row"><span>FE-007</span><span>Liquid (Shopify/ESP)</span><span>1</span></div>
+<div class="bom-row"><span>FE-008</span><span>Schema Markup</span><span>1</span></div>
+<div class="bom-row"><span>FE-009</span><span>Sitemap Markup</span><span>1</span></div>
+</div>
+</div>
+<div class="bom-section">
+<div class="bom-cat-label">02 // Backend &amp; Data Infrastructure</div>
+<div class="bom-header"><span>Part #</span><span>Description</span><span>Qty</span></div>
+<div class="bom-table">
+<div class="bom-row"><span>BE-001</span><span>APIs &amp; Webhooks</span><span>1</span></div>
+<div class="bom-row"><span>BE-002</span><span>SQL</span><span>1</span></div>
+<div class="bom-row"><span>BE-003</span><span>Google Tag Manager</span><span>1</span></div>
+<div class="bom-row"><span>BE-004</span><span>Segment</span><span>1</span></div>
+<div class="bom-row"><span>BE-005</span><span>mParticle</span><span>1</span></div>
+<div class="bom-row"><span>BE-006</span><span>Amperity</span><span>1</span></div>
+<div class="bom-row"><span>BE-007</span><span>Multi-Touch Attribution</span><span>1</span></div>
+<div class="bom-row"><span>BE-008</span><span>Data Layer Management</span><span>1</span></div>
+</div>
+</div>
+<div class="bom-section">
+<div class="bom-cat-label">03 // CMS &amp; Web Platforms</div>
+<div class="bom-header"><span>Part #</span><span>Description</span><span>Qty</span></div>
+<div class="bom-table">
+<div class="bom-row"><span>CM-001</span><span>WordPress</span><span>1</span></div>
+<div class="bom-row"><span>CM-002</span><span>Webflow</span><span>1</span></div>
+<div class="bom-row"><span>CM-003</span><span>Shopify</span><span>1</span></div>
+<div class="bom-row"><span>CM-004</span><span>Magento</span><span>1</span></div>
+<div class="bom-row"><span>CM-005</span><span>Contentful</span><span>1</span></div>
+</div>
+</div>
+<div class="bom-section">
+<div class="bom-cat-label">04 // CRM &amp; Marketing Automation</div>
+<div class="bom-header"><span>Part #</span><span>Description</span><span>Qty</span></div>
+<div class="bom-table">
+<div class="bom-row"><span>CR-001</span><span>Salesforce (Sales + Marketing Cloud)</span><span>1</span></div>
+<div class="bom-row"><span>CR-002</span><span>HubSpot</span><span>1</span></div>
+<div class="bom-row"><span>CR-003</span><span>Zoho CRM</span><span>1</span></div>
+<div class="bom-row"><span>CR-004</span><span>Marketo</span><span>1</span></div>
+<div class="bom-row"><span>CR-005</span><span>Pardot</span><span>1</span></div>
+<div class="bom-row"><span>CR-006</span><span>ActiveCampaign</span><span>1</span></div>
+<div class="bom-row"><span>CR-007</span><span>Make (Integromat)</span><span>1</span></div>
+<div class="bom-row"><span>CR-008</span><span>Zapier</span><span>1</span></div>
+<div class="bom-row"><span>CR-009</span><span>n8n</span><span>1</span></div>
+</div>
+</div>
+<div class="bom-section">
+<div class="bom-cat-label">05 // Advertising Platforms</div>
+<div class="bom-header"><span>Part #</span><span>Description</span><span>Qty</span></div>
+<div class="bom-table">
+<div class="bom-row"><span>AD-001</span><span>Google Ads</span><span>1</span></div>
+<div class="bom-row"><span>AD-002</span><span>Meta Ads Manager</span><span>1</span></div>
+<div class="bom-row"><span>AD-003</span><span>TikTok Ads</span><span>1</span></div>
+<div class="bom-row"><span>AD-004</span><span>LinkedIn Campaign Manager</span><span>1</span></div>
+<div class="bom-row"><span>AD-005</span><span>The Trade Desk</span><span>1</span></div>
+<div class="bom-row"><span>AD-006</span><span>StackAdapt</span><span>1</span></div>
+</div>
+</div>
+<div class="bom-section">
+<div class="bom-cat-label">06 // Analytics &amp; Attribution</div>
+<div class="bom-header"><span>Part #</span><span>Description</span><span>Qty</span></div>
+<div class="bom-table">
+<div class="bom-row"><span>AN-001</span><span>Google Analytics (GA4)</span><span>1</span></div>
+<div class="bom-row"><span>AN-002</span><span>Looker</span><span>1</span></div>
+<div class="bom-row"><span>AN-003</span><span>Tableau</span><span>1</span></div>
+<div class="bom-row"><span>AN-004</span><span>Power BI</span><span>1</span></div>
+<div class="bom-row"><span>AN-005</span><span>Mixpanel</span><span>1</span></div>
+<div class="bom-row"><span>AN-006</span><span>Amplitude</span><span>1</span></div>
+<div class="bom-row"><span>AN-007</span><span>Heap</span><span>1</span></div>
+<div class="bom-row"><span>AN-008</span><span>Northbeam</span><span>1</span></div>
+<div class="bom-row"><span>AN-009</span><span>Triple Whale</span><span>1</span></div>
+</div>
+</div>
+<div class="bom-section">
+<div class="bom-cat-label">07 // Email, SMS &amp; Lifecycle</div>
+<div class="bom-header"><span>Part #</span><span>Description</span><span>Qty</span></div>
+<div class="bom-table">
+<div class="bom-row"><span>EM-001</span><span>Klaviyo</span><span>1</span></div>
+<div class="bom-row"><span>EM-002</span><span>Braze</span><span>1</span></div>
+<div class="bom-row"><span>EM-003</span><span>Iterable</span><span>1</span></div>
+<div class="bom-row"><span>EM-004</span><span>Mailchimp</span><span>1</span></div>
+<div class="bom-row"><span>EM-005</span><span>Zoho Campaigns</span><span>1</span></div>
+<div class="bom-row"><span>EM-006</span><span>Brevo</span><span>1</span></div>
+<div class="bom-row"><span>EM-007</span><span>Constant Contact</span><span>1</span></div>
+<div class="bom-row"><span>EM-008</span><span>Postscript (SMS)</span><span>1</span></div>
+<div class="bom-row"><span>EM-009</span><span>Attentive (SMS)</span><span>1</span></div>
+</div>
+</div>
+<div class="bom-section">
+<div class="bom-cat-label">08 // SEO &amp; Content Optimization</div>
+<div class="bom-header"><span>Part #</span><span>Description</span><span>Qty</span></div>
+<div class="bom-table">
+<div class="bom-row"><span>SE-001</span><span>SEMrush</span><span>1</span></div>
+<div class="bom-row"><span>SE-002</span><span>Ahrefs</span><span>1</span></div>
+<div class="bom-row"><span>SE-003</span><span>Screaming Frog</span><span>1</span></div>
+<div class="bom-row"><span>SE-004</span><span>Clearscope</span><span>1</span></div>
+<div class="bom-row"><span>SE-005</span><span>Brightlocal</span><span>1</span></div>
+<div class="bom-row"><span>SE-006</span><span>Whitespark</span><span>1</span></div>
+</div>
+</div>
+<div class="bom-section">
+<div class="bom-cat-label">09 // A/B Testing &amp; CRO</div>
+<div class="bom-header"><span>Part #</span><span>Description</span><span>Qty</span></div>
+<div class="bom-table">
+<div class="bom-row"><span>AB-001</span><span>Optimizely</span><span>1</span></div>
+<div class="bom-row"><span>AB-002</span><span>VWO</span><span>1</span></div>
+<div class="bom-row"><span>AB-003</span><span>Convert.com</span><span>1</span></div>
+<div class="bom-row"><span>AB-004</span><span>Dynamic Yield</span><span>1</span></div>
+<div class="bom-row"><span>AB-005</span><span>Mutiny</span><span>1</span></div>
+<div class="bom-row"><span>AB-006</span><span>Adobe Target</span><span>1</span></div>
+</div>
+</div>
+<div class="bom-section">
+<div class="bom-cat-label">10 // Social, Influencer &amp; Partnerships</div>
+<div class="bom-header"><span>Part #</span><span>Description</span><span>Qty</span></div>
+<div class="bom-table">
+<div class="bom-row"><span>SO-001</span><span>Sprout Social</span><span>1</span></div>
+<div class="bom-row"><span>SO-002</span><span>Later</span><span>1</span></div>
+<div class="bom-row"><span>SO-003</span><span>Buffer</span><span>1</span></div>
+<div class="bom-row"><span>SO-004</span><span>Hootsuite</span><span>1</span></div>
+<div class="bom-row"><span>SO-005</span><span>GRIN</span><span>1</span></div>
+<div class="bom-row"><span>SO-006</span><span>AspireIQ</span><span>1</span></div>
+<div class="bom-row"><span>SO-007</span><span>CreatorIQ</span><span>1</span></div>
+<div class="bom-row"><span>SO-008</span><span>Impact</span><span>1</span></div>
+<div class="bom-row"><span>SO-009</span><span>Refersion</span><span>1</span></div>
+<div class="bom-row"><span>SO-010</span><span>PartnerStack</span><span>1</span></div>
+</div>
+</div>
+<div class="bom-section">
+<div class="bom-cat-label">11 // Design &amp; Creative</div>
+<div class="bom-header"><span>Part #</span><span>Description</span><span>Qty</span></div>
+<div class="bom-table">
+<div class="bom-row"><span>DC-001</span><span>Figma</span><span>1</span></div>
+<div class="bom-row"><span>DC-002</span><span>Canva</span><span>1</span></div>
+<div class="bom-row"><span>DC-003</span><span>Adobe Photoshop</span><span>1</span></div>
+<div class="bom-row"><span>DC-004</span><span>Adobe Illustrator</span><span>1</span></div>
+<div class="bom-row"><span>DC-005</span><span>Premiere Pro</span><span>1</span></div>
+<div class="bom-row"><span>DC-006</span><span>After Effects</span><span>1</span></div>
+<div class="bom-row"><span>DC-007</span><span>Miro</span><span>1</span></div>
+</div>
+</div>
+<div class="bom-section">
+<div class="bom-cat-label">12 // Communication &amp; Project Management</div>
+<div class="bom-header"><span>Part #</span><span>Description</span><span>Qty</span></div>
+<div class="bom-table">
+<div class="bom-row"><span>PM-001</span><span>Slack</span><span>1</span></div>
+<div class="bom-row"><span>PM-002</span><span>Asana</span><span>1</span></div>
+<div class="bom-row"><span>PM-003</span><span>Monday</span><span>1</span></div>
+<div class="bom-row"><span>PM-004</span><span>Trello</span><span>1</span></div>
+<div class="bom-row"><span>PM-005</span><span>Notion</span><span>1</span></div>
+<div class="bom-row"><span>PM-006</span><span>Airtable</span><span>1</span></div>
+<div class="bom-row"><span>PM-007</span><span>G Suite</span><span>1</span></div>
+<div class="bom-row"><span>PM-008</span><span>Microsoft 365</span><span>1</span></div>
+<div class="bom-row"><span>PM-009</span><span>Zoom</span><span>1</span></div>
+<div class="bom-row"><span>PM-010</span><span>Loom</span><span>1</span></div>
+</div>
+</div>
+<div class="bom-section">
+<div class="bom-cat-label">13 // AI, LLM &amp; Next-Gen Tools</div>
+<div class="bom-header"><span>Part #</span><span>Description</span><span>Qty</span></div>
+<div class="bom-table">
+<div class="bom-row"><span>AI-001</span><span>ChatGPT</span><span>1</span></div>
+<div class="bom-row"><span>AI-002</span><span>Claude</span><span>1</span></div>
+<div class="bom-row"><span>AI-003</span><span>Gemini (Google)</span><span>1</span></div>
+<div class="bom-row"><span>AI-004</span><span>Jasper</span><span>1</span></div>
+<div class="bom-row"><span>AI-005</span><span>Midjourney</span><span>1</span></div>
+<div class="bom-row"><span>AI-006</span><span>DALL-E</span><span>1</span></div>
+<div class="bom-row"><span>AI-007</span><span>Descript</span><span>1</span></div>
+<div class="bom-row"><span>AI-008</span><span>Copy.ai</span><span>1</span></div>
+<div class="bom-row"><span>AI-009</span><span>Writesonic</span><span>1</span></div>
+<div class="bom-row"><span>AI-010</span><span>Lumen5</span><span>1</span></div>
+<div class="bom-row"><span>AI-011</span><span>Perplexity</span><span>1</span></div>
+</div>
+</div>
+<div class="bom-section">
+<div class="bom-cat-label">14 // ABM, Intent &amp; Data Enrichment</div>
+<div class="bom-header"><span>Part #</span><span>Description</span><span>Qty</span></div>
+<div class="bom-table">
+<div class="bom-row"><span>AB-001</span><span>6sense</span><span>1</span></div>
+<div class="bom-row"><span>AB-002</span><span>Demandbase</span><span>1</span></div>
+<div class="bom-row"><span>AB-003</span><span>Clearbit</span><span>1</span></div>
+<div class="bom-row"><span>AB-004</span><span>ZoomInfo</span><span>1</span></div>
+</div>
+</div>
+</section>
+<section id="wins" class="sec">
+<div class="sec-head">
+<span class="sec-num">SEC 08</span>
+<h2 class="sec-title">Selected Wins</h2>
+<div class="sec-line"></div>
+</div>
+<div style="font-size:.55rem;color:var(--text-faint);letter-spacing:.15em;text-transform:uppercase;margin-bottom:16px;">Revision Notes // Verified Outcomes</div>
+<div class="rev-notes">
+<div class="rev-note">
+<div class="rev-note-num">01</div>
+<h4>Multi-Company Revenue Scale</h4>
+<p>Scaled multiple companies from $5M to $10M+ through architected growth systems, not one-off campaigns.</p>
+</div>
+<div class="rev-note">
+<div class="rev-note-num">02</div>
+<h4>$5M+ Ad Budget Mastery</h4>
+<p>Managed seven-figure annual ad spend with consistent ROAS optimization across Meta, Google, and emerging channels.</p>
+</div>
+<div class="rev-note">
+<div class="rev-note-num">03</div>
+<h4>40+ Person Team Leadership</h4>
+<p>Built and led cross-functional teams spanning growth, creative, analytics, and automation from the ground up.</p>
+</div>
+<div class="rev-note">
+<div class="rev-note-num">04</div>
+<h4>2 Successful Company Exits</h4>
+<p>Key contributor to both buy-side and sell-side M&amp;A transactions, aligning marketing with enterprise value drivers.</p>
+</div>
+<div class="rev-note">
+<div class="rev-note-num">05</div>
+<h4>AI Marketing Infrastructure</h4>
+<p>Pioneered AI-driven marketing systems that reduced CAC by 30%+ while increasing conversion rates and pipeline velocity.</p>
+</div>
+<div class="rev-note">
+<div class="rev-note-num">06</div>
+<h4>Scalable Marketing Architecture</h4>
+<p>Designed marketing operating systems that compound growth - CRM, automation, attribution, and funnel architecture.</p>
+</div>
+</div>
+</section>
+</div>
+<div class="wrap">
+<div class="cta-block">
+<div class="cta-header">Contact // Title Block // MLG-CMO-2026-001 REV. 04</div>
+<div class="cta-body">
+<div class="qr-box"><canvas id="qrcode"></canvas></div>
+<h3>Ready to Build Something</h3>
+<p>Scan to view portfolio, or reach out directly.</p>
+<div class="cta-btns">
+<a href="mailto:mark@markcmo.com" class="cbtn cbtn-cyan">Email Me</a>
+<a href="https://linkedin.com/in/marklgabrielli" target="_blank" class="cbtn">LinkedIn</a>
+<a href="https://markcmo.com/portfolio" target="_blank" rel="noopener noreferrer" class="cbtn">Portfolio</a>
+<a href="https://markcmo.com/book" target="_blank" rel="noopener noreferrer" class="cbtn cbtn-cyan">Book a Call</a>
+<button onclick="window.print()" class="cbtn">Export PDF</button>
+</div>
+</div>
+</div>
+</div>
 <footer style="background:#0a0a0a;border-top:1px solid rgba(255,255,255,0.08);padding:28px 40px;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:16px;font-family:system-ui,sans-serif;">
-  <p style="font-size:11px;color:#555;margin:0;">&copy; 2026 Mark Louis Gabrielli Jr. &middot; markcmo.com &middot; All rights reserved.</p>
-  <div style="display:flex;gap:20px;flex-wrap:wrap;">
-    <a href="https://markcmo.com/portfolio" target="_blank" rel="noopener" style="font-size:11px;color:#888;text-decoration:none;transition:color .2s;" onmouseover="this.style.color='#d4a853'" onmouseout="this.style.color='#888'">Portfolio</a>
-    <a href="https://markcmo.com/book" target="_blank" rel="noopener" style="font-size:11px;color:#888;text-decoration:none;" onmouseover="this.style.color='#d4a853'" onmouseout="this.style.color='#888'">Book a Call</a>
-    <a href="https://markcmo.com/about" target="_blank" rel="noopener" style="font-size:11px;color:#888;text-decoration:none;" onmouseover="this.style.color='#d4a853'" onmouseout="this.style.color='#888'">About</a>
-    <a href="https://markcmo.com/resumes" target="_blank" rel="noopener" style="font-size:11px;color:#888;text-decoration:none;" onmouseover="this.style.color='#d4a853'" onmouseout="this.style.color='#888'">All Resumes</a>
-    <a href="https://linkedin.com/in/marklgabrielli" target="_blank" rel="noopener" style="font-size:11px;color:#4f8fff;text-decoration:none;" onmouseover="this.style.color='#6ba0ff'" onmouseout="this.style.color='#4f8fff'">LinkedIn</a>
-  </div>
+<p style="font-size:11px;color:#555;margin:0;">&copy; 2026 Mark Louis Gabrielli Jr. &middot; markcmo.com &middot; All rights reserved.</p>
+<div style="display:flex;gap:20px;flex-wrap:wrap;">
+<a href="https://markcmo.com/portfolio" target="_blank" rel="noopener" style="font-size:11px;color:#888;text-decoration:none;transition:color .2s;" onmouseover="this.style.color='#d4a853'" onmouseout="this.style.color='#888'">Portfolio</a>
+<a href="https://markcmo.com/book" target="_blank" rel="noopener" style="font-size:11px;color:#888;text-decoration:none;" onmouseover="this.style.color='#d4a853'" onmouseout="this.style.color='#888'">Book a Call</a>
+<a href="https://markcmo.com/about" target="_blank" rel="noopener" style="font-size:11px;color:#888;text-decoration:none;" onmouseover="this.style.color='#d4a853'" onmouseout="this.style.color='#888'">About</a>
+<a href="https://markcmo.com/resumes" target="_blank" rel="noopener" style="font-size:11px;color:#888;text-decoration:none;" onmouseover="this.style.color='#d4a853'" onmouseout="this.style.color='#888'">All Resumes</a>
+<a href="https://linkedin.com/in/marklgabrielli" target="_blank" rel="noopener" style="font-size:11px;color:#4f8fff;text-decoration:none;" onmouseover="this.style.color='#6ba0ff'" onmouseout="this.style.color='#4f8fff'">LinkedIn</a>
+</div>
 </footer>
-
-<!-- QR CODE - Canvas Drawn -->
 <script>
 (function(){
   var c=document.getElementById('qrcode');
@@ -1635,8 +1523,6 @@ body::after{
         ctx.fillRect(off+col*cs,off+r*cs,cs+.5,cs+.5);
 })();
 </script>
-
-<!-- SCROLL REVEAL -->
 <script>
 (function(){
   var io=new IntersectionObserver(function(entries){
@@ -1647,8 +1533,6 @@ body::after{
   document.querySelectorAll('.sec').forEach(function(s){io.observe(s)});
 })();
 </script>
-
-<!-- COUNTER ANIMATION -->
 <script>
 (function(){
   var animated=false;
@@ -1682,8 +1566,6 @@ body::after{
   if(statsEl) statsObserver.observe(statsEl);
 })();
 </script>
-
-<!-- HOVER GLOW ENHANCEMENT -->
 <script>
 (function(){
   document.querySelectorAll('.circuit-node, .bom-row, .tl-item, .rev-note, .case-item, .dim-stat').forEach(function(el){
