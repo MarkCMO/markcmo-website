@@ -67,8 +67,25 @@ exports.handler = async (event) => {
   if (event.httpMethod === 'OPTIONS') return { statusCode: 200, headers: getCorsHeaders(event), body: '' };
 
   const secret  = process.env.ADMIN_SESSION_SECRET || process.env.TOKEN_SECRET || 'fallback';
-  const adminUser = (process.env.ADMIN_USER || '').toLowerCase().trim();
-  const adminPass = process.env.ADMIN_PASS || '';
+
+  // Multi-user support:
+  //   ADMIN_USERS = JSON array, e.g. [{"user":"mark","pass":"..."},{"user":"austinsepulveda","pass":"..."}]
+  // Backward-compat: single ADMIN_USER + ADMIN_PASS still works and is appended to the list.
+  let users = [];
+  try {
+    if (process.env.ADMIN_USERS) {
+      const parsed = JSON.parse(process.env.ADMIN_USERS);
+      if (Array.isArray(parsed)) {
+        users = parsed
+          .filter(u => u && u.user && u.pass)
+          .map(u => ({ user: String(u.user).toLowerCase().trim(), pass: String(u.pass) }));
+      }
+    }
+  } catch { /* fall through to legacy */ }
+  if (process.env.ADMIN_USER && process.env.ADMIN_PASS) {
+    const legacy = { user: process.env.ADMIN_USER.toLowerCase().trim(), pass: process.env.ADMIN_PASS };
+    if (!users.find(u => u.user === legacy.user)) users.push(legacy);
+  }
 
   // ── GET: verify existing session ─────────────────────────────────────────
   if (event.httpMethod === 'GET') {
@@ -100,15 +117,14 @@ exports.handler = async (event) => {
   const { user, pass } = body;
   if (!user || !pass) return { statusCode: 400, headers, body: JSON.stringify({ error: 'Missing credentials' }) };
 
-  // Rate limiting hint (basic — Netlify has no built-in state per request)
-  if (!adminUser || !adminPass) {
+  if (!users.length) {
     return { statusCode: 503, headers, body: JSON.stringify({ error: 'Auth not configured' }) };
   }
 
-  const userMatch = user.trim().toLowerCase() === adminUser;
-  const passMatch = pass === adminPass;
+  const submittedUser = user.trim().toLowerCase();
+  const match = users.find(u => u.user === submittedUser && u.pass === pass);
 
-  if (!userMatch || !passMatch) {
+  if (!match) {
     // Small delay to slow brute force
     await new Promise(r => setTimeout(r, 800));
     return { statusCode: 401, headers, body: JSON.stringify({ error: 'Invalid credentials' }) };
@@ -116,7 +132,7 @@ exports.handler = async (event) => {
 
   // Issue signed session token
   const token = await signToken(
-    { sub: adminUser, iat: Date.now(), exp: Date.now() + COOKIE_MAX_AGE * 1000 },
+    { sub: match.user, iat: Date.now(), exp: Date.now() + COOKIE_MAX_AGE * 1000 },
     secret
   );
 
