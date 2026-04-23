@@ -1,0 +1,1297 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>WETYR Film Intel - Production Data Platform for Studios & Indies</title>
+<meta name="description" content="Real-time industry news, festival deadlines, box office, casting, and title intelligence - one dashboard for film producers, packagers, and distributors." />
+<meta name="robots" content="noindex, nofollow" />
+<meta name="theme-color" content="#0a0a0a" />
+<link rel="canonical" href="https://markcmo.com/wetyr-film.html" />
+<style>
+:root {
+  --bg: #0a0a0a;
+  --panel: #131316;
+  --panel-2: #1c1c20;
+  --border: #27272a;
+  --border-hot: #3f3f46;
+  --text: #fafafa;
+  --muted: #a1a1aa;
+  --dim: #71717a;
+  --gold: #d4af37;
+  --red: #dc2626;
+  --green: #16a34a;
+  --blue: #2563eb;
+  --purple: #9333ea;
+}
+* { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+body {
+  font-family: -apple-system, BlinkMacSystemFont, 'Inter', 'Segoe UI', Roboto, sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  line-height: 1.6;
+  font-size: 15px;
+}
+a { color: var(--gold); text-decoration: none; }
+a:hover { text-decoration: underline; }
+.wrap { max-width: 1320px; margin: 0 auto; padding: 0 24px; }
+
+/* NAV */
+.nav {
+  padding: 18px 0;
+  border-bottom: 1px solid var(--border);
+  background: rgba(10, 10, 10, 0.92);
+  backdrop-filter: blur(12px);
+  position: sticky; top: 0; z-index: 20;
+}
+.nav-inner { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 12px; }
+.brand { display: flex; align-items: center; gap: 10px; font-weight: 800; font-size: 18px; letter-spacing: 0.5px; }
+.brand-dot { width: 10px; height: 10px; background: var(--gold); border-radius: 2px; }
+.nav-links { display: flex; gap: 22px; font-size: 14px; color: var(--muted); }
+.nav-links a { color: var(--muted); }
+.nav-links a:hover { color: var(--text); text-decoration: none; }
+.cta-small { background: var(--gold); color: #0a0a0a; padding: 8px 16px; border-radius: 6px; font-weight: 700; font-size: 13px; }
+.cta-small:hover { text-decoration: none; background: #e6c14d; }
+
+/* HERO */
+.hero { padding: 80px 0 60px; text-align: center; border-bottom: 1px solid var(--border); background: linear-gradient(180deg, #131316 0%, var(--bg) 100%); }
+.eyebrow { color: var(--gold); font-weight: 700; font-size: 13px; letter-spacing: 2px; text-transform: uppercase; margin-bottom: 16px; }
+.hero h1 { font-size: clamp(36px, 5vw, 58px); line-height: 1.08; font-weight: 800; max-width: 980px; margin: 0 auto 20px; letter-spacing: -1px; }
+.hero h1 span { background: linear-gradient(90deg, var(--gold), #ffd700); -webkit-background-clip: text; background-clip: text; color: transparent; }
+.hero p { max-width: 720px; margin: 0 auto 28px; color: var(--muted); font-size: 18px; }
+.hero-ctas { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; }
+.btn { padding: 14px 24px; border-radius: 8px; font-weight: 700; font-size: 15px; display: inline-block; transition: all 0.2s; }
+.btn-primary { background: var(--gold); color: #0a0a0a; }
+.btn-primary:hover { background: #e6c14d; text-decoration: none; }
+.btn-ghost { background: transparent; color: var(--text); border: 1px solid var(--border-hot); }
+.btn-ghost:hover { background: var(--panel); text-decoration: none; }
+.hero-meta { margin-top: 34px; display: flex; gap: 32px; justify-content: center; flex-wrap: wrap; color: var(--dim); font-size: 13px; }
+.hero-meta b { color: var(--text); }
+
+/* MODULES GRID */
+.section { padding: 64px 0; border-bottom: 1px solid var(--border); }
+.section-head { display: flex; justify-content: space-between; align-items: end; flex-wrap: wrap; gap: 16px; margin-bottom: 28px; }
+.section h2 { font-size: 30px; font-weight: 800; letter-spacing: -0.5px; }
+.section .sub { color: var(--muted); font-size: 15px; margin-top: 4px; }
+.live-pill { display: inline-flex; align-items: center; gap: 6px; background: rgba(22, 163, 74, 0.12); color: var(--green); padding: 4px 10px; border-radius: 999px; font-size: 12px; font-weight: 700; }
+.live-pill::before { content: ''; width: 6px; height: 6px; border-radius: 50%; background: var(--green); animation: pulse 1.6s infinite; }
+@keyframes pulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.3; } }
+
+/* GRID */
+.grid { display: grid; gap: 20px; }
+.grid-2 { grid-template-columns: repeat(2, 1fr); }
+.grid-3 { grid-template-columns: repeat(3, 1fr); }
+@media (max-width: 960px) { .grid-2, .grid-3 { grid-template-columns: 1fr; } }
+
+/* PANEL */
+.panel { background: var(--panel); border: 1px solid var(--border); border-radius: 12px; padding: 20px; }
+.panel-head { display: flex; justify-content: space-between; align-items: center; margin-bottom: 14px; padding-bottom: 12px; border-bottom: 1px solid var(--border); }
+.panel-title { font-weight: 700; font-size: 15px; }
+.panel-tag { font-size: 11px; color: var(--dim); letter-spacing: 1px; text-transform: uppercase; }
+
+/* NEWS FEED */
+.news-item { padding: 12px 0; border-bottom: 1px solid var(--border); }
+.news-item:last-child { border-bottom: none; }
+.news-src { color: var(--gold); font-size: 11px; font-weight: 700; letter-spacing: 1px; }
+.news-title { font-weight: 600; margin: 4px 0 4px; line-height: 1.35; }
+.news-meta { color: var(--dim); font-size: 12px; }
+
+/* TABLE */
+table { width: 100%; border-collapse: collapse; font-size: 14px; }
+th { text-align: left; padding: 10px 8px; font-size: 11px; color: var(--dim); text-transform: uppercase; letter-spacing: 1px; border-bottom: 1px solid var(--border); }
+td { padding: 12px 8px; border-bottom: 1px solid var(--border); }
+tr:last-child td { border-bottom: none; }
+.num { font-variant-numeric: tabular-nums; text-align: right; }
+.pos { color: var(--green); }
+.neg { color: var(--red); }
+
+/* FESTIVAL */
+.fest { display: flex; gap: 14px; padding: 14px 0; border-bottom: 1px solid var(--border); align-items: start; }
+.fest:last-child { border-bottom: none; }
+.fest-date { min-width: 64px; text-align: center; background: var(--panel-2); border: 1px solid var(--border); border-radius: 8px; padding: 6px 0; }
+.fest-date .day { font-size: 22px; font-weight: 800; line-height: 1; }
+.fest-date .mo { font-size: 10px; color: var(--gold); text-transform: uppercase; letter-spacing: 1px; margin-top: 2px; }
+.fest-body { flex: 1; }
+.fest-name { font-weight: 700; }
+.fest-info { color: var(--muted); font-size: 13px; margin-top: 2px; }
+.fest-tier { display: inline-block; font-size: 10px; padding: 2px 8px; border-radius: 4px; font-weight: 700; letter-spacing: 1px; text-transform: uppercase; margin-top: 6px; }
+.tier-hot { background: rgba(220, 38, 38, 0.15); color: #f87171; }
+.tier-soon { background: rgba(245, 158, 11, 0.15); color: #fbbf24; }
+.tier-regular { background: rgba(161, 161, 170, 0.15); color: var(--muted); }
+
+/* TITLE CARD */
+.title-card { display: grid; grid-template-columns: 140px 1fr; gap: 20px; }
+@media (max-width: 640px) { .title-card { grid-template-columns: 1fr; } }
+.title-poster { width: 140px; height: 210px; background: linear-gradient(135deg, #1c1c20, #27272a); border: 1px solid var(--border); border-radius: 8px; display: flex; align-items: center; justify-content: center; color: var(--dim); font-size: 11px; text-align: center; padding: 10px; }
+.title-main h3 { font-size: 24px; margin-bottom: 4px; }
+.title-meta { color: var(--muted); font-size: 13px; margin-bottom: 14px; }
+.title-stats { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; margin-bottom: 14px; }
+.stat { background: var(--panel-2); border: 1px solid var(--border); border-radius: 6px; padding: 10px; }
+.stat-label { color: var(--dim); font-size: 11px; text-transform: uppercase; letter-spacing: 1px; }
+.stat-val { font-size: 18px; font-weight: 800; margin-top: 2px; }
+.providers { display: flex; gap: 6px; flex-wrap: wrap; }
+.provider { background: var(--panel-2); border: 1px solid var(--border); padding: 4px 10px; border-radius: 999px; font-size: 11px; font-weight: 700; color: var(--muted); text-decoration: none; }
+a.provider:hover { border-color: var(--gold); color: var(--gold); }
+.provider.hot { border-color: var(--gold); color: var(--gold); }
+
+/* TITLE INTEL - trending strip + clickables */
+.title-name-link { color: inherit; text-decoration: none; background-image: linear-gradient(to right, var(--gold), var(--gold)); background-position: 0 100%; background-repeat: no-repeat; background-size: 0 1px; transition: background-size 0.3s ease; }
+.title-name-link:hover { background-size: 100% 1px; }
+.person-link { color: var(--text); text-decoration: none; border-bottom: 1px dotted rgba(255,255,255,0.15); transition: color .15s, border-color .15s; }
+.person-link:hover { color: var(--gold); border-bottom-color: var(--gold); }
+.title-poster-link { display: block; position: relative; cursor: zoom-in; }
+.title-poster-link::after { content: 'View on TMDB ↗'; position: absolute; inset: auto 0 8px 0; margin: 0 8px; background: rgba(10,10,10,.85); color: var(--gold); font-size: 10px; font-weight: 700; letter-spacing: 1px; text-transform: uppercase; padding: 5px 8px; border-radius: 4px; text-align: center; opacity: 0; transition: opacity .2s; pointer-events: none; }
+.title-poster-link:hover::after { opacity: 1; }
+.title-actions { display: flex; gap: 8px; flex-wrap: wrap; margin-top: 4px; margin-bottom: 14px; }
+.title-action { display: inline-flex; align-items: center; gap: 6px; padding: 7px 12px; border-radius: 6px; font-size: 12px; font-weight: 700; letter-spacing: .5px; text-decoration: none; transition: transform .15s, background .15s, border-color .15s; }
+.title-action.primary { background: var(--gold); color: #0a0a0a; }
+.title-action.primary:hover { transform: translateY(-1px); background: #ffd369; }
+.title-action.ghost { background: var(--panel-2); color: var(--text); border: 1px solid var(--border); }
+.title-action.ghost:hover { border-color: var(--gold); color: var(--gold); }
+.trending-strip { display: grid; grid-template-columns: repeat(5, 1fr); gap: 10px; margin-top: 18px; padding-top: 18px; border-top: 1px solid var(--border); }
+@media (max-width: 640px) { .trending-strip { grid-template-columns: repeat(3, 1fr); } }
+.trend-card { position: relative; border-radius: 8px; overflow: hidden; cursor: pointer; background: var(--panel-2); border: 1px solid var(--border); aspect-ratio: 2 / 3; transition: transform .2s, border-color .2s, box-shadow .2s; }
+.trend-card:hover { transform: translateY(-3px); border-color: var(--gold); box-shadow: 0 8px 20px rgba(245,158,11,.15); }
+.trend-card.active { border-color: var(--gold); box-shadow: 0 0 0 1px var(--gold) inset; }
+.trend-card img { width: 100%; height: 100%; object-fit: cover; display: block; }
+.trend-rank { position: absolute; top: 6px; left: 6px; width: 22px; height: 22px; border-radius: 50%; background: var(--gold); color: #0a0a0a; font-size: 11px; font-weight: 800; display: flex; align-items: center; justify-content: center; }
+.trend-title-overlay { position: absolute; inset: auto 0 0 0; background: linear-gradient(to top, rgba(0,0,0,.92) 10%, transparent); color: #fff; padding: 18px 8px 6px; font-size: 10px; font-weight: 700; line-height: 1.2; text-align: center; text-shadow: 0 1px 2px #000; }
+.trend-rotate-hint { font-size: 10px; color: var(--dim); text-transform: uppercase; letter-spacing: 1.5px; margin-top: 10px; display: flex; align-items: center; gap: 6px; }
+.trend-rotate-hint::before { content: ''; width: 6px; height: 6px; border-radius: 50%; background: var(--green); box-shadow: 0 0 8px var(--green); animation: pulse 2s ease-in-out infinite; }
+
+/* CASTING */
+.casting-item { padding: 14px 12px; border-bottom: 1px solid var(--border); display: block; color: inherit; text-decoration: none; transition: background .15s; border-radius: 6px; word-break: break-word; overflow-wrap: anywhere; }
+.casting-item:hover { background: var(--panel-2); }
+.casting-item:last-child { border-bottom: none; }
+.casting-role { font-weight: 700; color: var(--text); font-size: 12px; text-transform: uppercase; letter-spacing: 1px; color: var(--gold); display: flex; align-items: center; gap: 6px; flex-wrap: wrap; }
+.casting-prod { font-weight: 700; font-size: 15px; line-height: 1.35; margin-top: 4px; color: var(--text); }
+.casting-meta { color: var(--muted); font-size: 13px; margin-top: 6px; line-height: 1.45; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
+.casting-tags { margin-top: 10px; display: flex; gap: 6px; flex-wrap: wrap; align-items: center; }
+.tag { background: var(--panel-2); border: 1px solid var(--border); padding: 3px 8px; border-radius: 4px; font-size: 11px; color: var(--muted); white-space: nowrap; }
+.tag.union { border-color: var(--green); color: var(--green); }
+.tag.loc { border-color: var(--gold); color: var(--gold); }
+.casting-apply { margin-left: auto; font-size: 11px; font-weight: 700; color: var(--gold); letter-spacing: 1px; text-transform: uppercase; white-space: nowrap; }
+.casting-item:hover .casting-apply { text-decoration: underline; }
+@media (max-width: 640px) {
+  .casting-item { padding: 12px 10px; }
+  .casting-prod { font-size: 14px; }
+  .casting-meta { -webkit-line-clamp: 3; font-size: 12px; }
+  .casting-apply { margin-left: 0; margin-top: 2px; width: 100%; text-align: right; }
+}
+
+/* PRICE CARDS */
+.price-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
+@media (max-width: 900px) { .price-grid { grid-template-columns: 1fr; } }
+.price { background: var(--panel); border: 1px solid var(--border); border-radius: 12px; padding: 28px; position: relative; }
+.price.featured { border-color: var(--gold); }
+.price-badge { position: absolute; top: -12px; left: 24px; background: var(--gold); color: #0a0a0a; padding: 4px 12px; font-size: 11px; font-weight: 700; border-radius: 4px; letter-spacing: 1px; }
+.price-tier { font-size: 13px; color: var(--gold); text-transform: uppercase; letter-spacing: 2px; font-weight: 700; }
+.price-num { font-size: 42px; font-weight: 800; margin: 10px 0 2px; }
+.price-num small { font-size: 15px; color: var(--muted); font-weight: 500; }
+.price-sub { color: var(--muted); font-size: 13px; margin-bottom: 20px; }
+.price ul { list-style: none; padding: 0; }
+.price li { padding: 8px 0; color: var(--muted); font-size: 14px; border-bottom: 1px solid var(--border); }
+.price li::before { content: '✓'; color: var(--green); margin-right: 10px; font-weight: 700; }
+.price li:last-child { border-bottom: none; }
+
+/* CTA */
+.cta-section { padding: 80px 0; text-align: center; background: radial-gradient(ellipse at center, #1c1c20 0%, var(--bg) 70%); }
+.cta-section h2 { font-size: 40px; font-weight: 800; max-width: 800px; margin: 0 auto 16px; letter-spacing: -0.5px; }
+.cta-section p { color: var(--muted); max-width: 600px; margin: 0 auto 28px; font-size: 17px; }
+
+/* FOOTER */
+footer { padding: 36px 0; border-top: 1px solid var(--border); color: var(--dim); font-size: 13px; text-align: center; }
+footer a { color: var(--muted); }
+
+/* TIMESTAMP TICKER */
+.ticker { font-size: 11px; color: var(--dim); font-family: 'SFMono-Regular', Menlo, monospace; letter-spacing: 0.5px; }
+@keyframes spin { to { transform: rotate(360deg); } }
+.new-flag { display: inline-block; background: rgba(220, 38, 38, 0.2); color: #f87171; font-size: 10px; font-weight: 700; padding: 1px 6px; border-radius: 3px; margin-left: 6px; letter-spacing: 1px; }
+#liveClock { color: var(--green); font-weight: 700; }
+
+/* SCROLLING TICKER BAR */
+.ticker-bar { background: #000; border-bottom: 1px solid var(--border); overflow: hidden; padding: 8px 0; font-size: 12px; position: relative; }
+.ticker-bar::before, .ticker-bar::after { content: ''; position: absolute; top: 0; bottom: 0; width: 60px; z-index: 2; pointer-events: none; }
+.ticker-bar::before { left: 0; background: linear-gradient(90deg, #000, transparent); }
+.ticker-bar::after { right: 0; background: linear-gradient(-90deg, #000, transparent); }
+.ticker-track { display: flex; gap: 40px; white-space: nowrap; animation: tickerScroll 10s linear infinite; will-change: transform; }
+@media (max-width: 780px) { .ticker-track { animation-duration: 6s; } }
+@media (max-width: 420px) { .ticker-track { animation-duration: 4s; } }
+.ticker-track:hover { animation-play-state: paused; }
+.ticker-item { display: inline-flex; align-items: center; gap: 10px; color: var(--muted); }
+.ticker-item b { color: var(--text); font-weight: 700; }
+.ticker-label { color: var(--gold); font-weight: 700; letter-spacing: 1.5px; font-size: 10px; }
+.ticker-up { color: var(--green); font-weight: 700; }
+.ticker-down { color: var(--red); font-weight: 700; }
+@keyframes tickerScroll {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+
+/* ANIMATIONS */
+@keyframes fadeInUp {
+  from { opacity: 0; transform: translateY(8px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+.fade-in { animation: fadeInUp 0.4s ease-out; }
+.news-item { transition: background 0.2s, border-color 0.2s; cursor: pointer; padding-left: 8px; padding-right: 8px; margin-left: -8px; margin-right: -8px; border-radius: 6px; }
+.news-item:hover { background: var(--panel-2); }
+.news-item a { color: inherit; text-decoration: none; }
+.news-item a:hover { color: var(--gold); }
+.fest { transition: background 0.2s; border-radius: 8px; padding-left: 8px; padding-right: 8px; margin-left: -8px; margin-right: -8px; }
+.fest:hover { background: var(--panel-2); }
+.fest a { color: inherit; text-decoration: none; }
+.fest a:hover .fest-name { color: var(--gold); }
+tbody tr { transition: background 0.15s; cursor: pointer; }
+tbody tr:hover { background: var(--panel-2); }
+tbody tr a { color: inherit; text-decoration: none; display: block; }
+
+/* REFRESH COUNTDOWN */
+.refresh-pill { display: inline-flex; align-items: center; gap: 8px; background: var(--panel-2); border: 1px solid var(--border); padding: 6px 12px; border-radius: 999px; font-size: 11px; color: var(--muted); letter-spacing: 0.5px; }
+.refresh-pill::before { content: ''; width: 6px; height: 6px; border-radius: 50%; background: var(--green); box-shadow: 0 0 8px var(--green); animation: pulseDot 2s infinite; }
+@keyframes pulseDot { 0%, 100% { opacity: 1; transform: scale(1); } 50% { opacity: 0.6; transform: scale(0.85); } }
+
+/* ANIMATED COUNTER */
+.count-up { display: inline-block; min-width: 2ch; }
+
+/* SPINNING BORDER ON LIVE PILL */
+.live-pill { position: relative; }
+
+/* TRENDING ARROWS */
+.arrow-up::before { content: '▲ '; color: var(--green); font-size: 10px; }
+.arrow-down::before { content: '▼ '; color: var(--red); font-size: 10px; }
+.arrow-flat::before { content: '■ '; color: var(--muted); font-size: 10px; }
+
+/* VIEWER BADGE */
+.viewer-badge { display: inline-flex; align-items: center; gap: 6px; color: var(--muted); font-size: 12px; }
+.viewer-badge::before { content: '●'; color: var(--green); animation: pulseDot 1.4s infinite; }
+
+/* SMOOTH FOCUS GLOW */
+.panel { transition: border-color 0.3s, transform 0.3s; }
+.panel:hover { border-color: var(--border-hot); }
+@media (prefers-reduced-motion: reduce) {
+  .ticker-track, .fade-in, .refresh-pill::before, .live-pill::before, .viewer-badge::before { animation: none !important; }
+}
+
+/* MOBILE */
+.table-scroll { overflow-x: auto; -webkit-overflow-scrolling: touch; margin: 0 -8px; }
+.table-scroll table { min-width: 780px; }
+@media (max-width: 780px) {
+  body { font-size: 14px; }
+  .wrap { padding: 0 16px; }
+  .nav { padding: 12px 0; }
+  .nav-links { display: none; }
+  .brand { font-size: 16px; }
+  .cta-small { padding: 7px 12px; font-size: 12px; }
+  .hero { padding: 48px 0 40px; }
+  .hero h1 { font-size: 32px; letter-spacing: -0.5px; }
+  .hero p { font-size: 15px; }
+  .hero-meta { gap: 14px 20px; font-size: 12px; justify-content: flex-start; text-align: left; flex-direction: column; align-items: flex-start; padding: 0 4px; }
+  .hero-ctas .btn { font-size: 14px; padding: 12px 18px; width: 100%; text-align: center; }
+  .hero-ctas { flex-direction: column; }
+  .section { padding: 44px 0; }
+  .section h2 { font-size: 24px; }
+  .section-head { flex-direction: column; align-items: flex-start; gap: 8px; }
+  .panel { padding: 16px; }
+  .panel-head { flex-direction: column; align-items: flex-start; gap: 4px; }
+  .panel-tag { font-size: 10px; }
+  .news-title { font-size: 14px; }
+  .fest { gap: 10px; }
+  .fest-date { min-width: 52px; }
+  .fest-date .day { font-size: 18px; }
+  .fest-name { font-size: 14px; }
+  .fest-info { font-size: 12px; }
+  table { font-size: 13px; }
+  th, td { padding: 8px 6px; }
+  .title-card { grid-template-columns: 1fr; }
+  .title-poster { width: 100%; max-width: 220px; height: auto; aspect-ratio: 2 / 3; margin: 0 auto; }
+  .title-main h3 { font-size: 20px; text-align: center; }
+  .title-meta { text-align: center; }
+  .title-stats { grid-template-columns: repeat(2, 1fr); }
+  .casting-item { padding: 12px 0; }
+  .price { padding: 20px; }
+  .price-num { font-size: 30px !important; }
+  .cta-section { padding: 56px 0; }
+  .cta-section h2 { font-size: 28px; }
+  .cta-section p { font-size: 15px; }
+  footer { font-size: 12px; padding: 28px 0; }
+}
+@media (max-width: 420px) {
+  .hero h1 { font-size: 28px; }
+  .eyebrow { font-size: 11px; letter-spacing: 1.5px; }
+  .title-stats { grid-template-columns: 1fr 1fr; gap: 6px; }
+  .stat { padding: 8px; }
+  .stat-val { font-size: 16px; }
+}
+</style>
+</head>
+<body>
+
+<nav class="nav">
+  <div class="wrap nav-inner">
+    <div class="brand"><span class="brand-dot"></span>WETYR <span style="color: var(--gold);">Film Intel</span></div>
+    <div class="nav-links">
+      <a href="#news">News</a>
+      <a href="#festivals">Festivals</a>
+      <a href="#boxoffice">Box Office</a>
+      <a href="#titles">Title Intel</a>
+      <a href="#casting">Casting</a>
+      <a href="#pricing">Pricing</a>
+    </div>
+    <a href="#contact" class="cta-small">Book Demo</a>
+  </div>
+</nav>
+
+<!-- SCROLLING TICKER -->
+<div class="ticker-bar">
+  <div class="ticker-track" id="tickerTrack">
+    <!-- Populated by JS; fallback static items -->
+    <div class="ticker-item"><span class="ticker-label">LIVE</span> Streaming film intel - feeds refreshing</div>
+  </div>
+</div>
+
+<section class="hero">
+  <div class="wrap">
+    <div class="eyebrow">For Producers, Packagers & Distributors</div>
+    <h1>Every <span>production intel signal</span><br>on one dashboard.</h1>
+    <p>Real-time deal tracking, festival deadlines, box office, title data, and casting - replacing 9 different paid subscriptions with one feed.</p>
+    <div class="hero-ctas">
+      <a href="#contact" class="btn btn-primary">Request Your Slate Scan</a>
+      <a href="#demo" class="btn btn-ghost">See Live Demo</a>
+    </div>
+    <div class="hero-meta">
+      <span><b>9 trades</b> aggregated live</span>
+      <span><b>12,000+</b> festivals tracked</span>
+      <span><b>500K+</b> titles indexed</span>
+      <span>Last refresh <span id="liveClock">--:--:--</span> UTC</span>
+    </div>
+  </div>
+</section>
+
+<!-- NEWS + FESTIVALS ROW -->
+<section class="section" id="demo">
+  <div class="wrap">
+    <div class="section-head">
+      <div>
+        <h2>Your morning coffee briefing</h2>
+        <div class="sub">Live demo with production data - this is exactly what lands in your inbox at 7am.</div>
+      </div>
+      <div style="display: flex; gap: 12px; align-items: center; flex-wrap: wrap;">
+        <span class="viewer-badge"><span id="viewerCount">247</span> producers viewing now</span>
+        <span class="refresh-pill">Next refresh in <span id="refreshIn">10:00</span></span>
+        <span class="live-pill">Live Demo</span>
+      </div>
+    </div>
+    <div class="grid grid-2">
+
+      <!-- INDUSTRY NEWS (LIVE) -->
+      <div class="panel" id="news">
+        <div class="panel-head">
+          <div class="panel-title">Industry News - Live Feed</div>
+          <div class="panel-tag"><span id="newsStamp">LOADING...</span></div>
+        </div>
+        <div id="newsFeed">
+          <div class="news-item" style="color: var(--dim); text-align: center; padding: 24px 0;">
+            <div style="display: inline-block; width: 18px; height: 18px; border: 2px solid var(--border-hot); border-top-color: var(--gold); border-radius: 50%; animation: spin 0.8s linear infinite;"></div>
+            <div style="margin-top: 8px; font-size: 12px;">Pulling live headlines from Variety, Deadline, IndieWire...</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- FESTIVALS -->
+      <div class="panel" id="festivals">
+        <div class="panel-head">
+          <div class="panel-title">Festival Deadlines - Rolling 120 Days</div>
+          <div class="panel-tag">12,000+ TRACKED</div>
+        </div>
+        <div class="fest" data-festdate="2026-05-01">
+          <div class="fest-date"><div class="day">01</div><div class="mo">May</div></div>
+          <a class="fest-body" href="https://filmfreeway.com/festivals" target="_blank" rel="noopener" style="display: block;">
+            <div class="fest-name">Tribeca Festival - Late Deadline</div>
+            <div class="fest-info">New York, USA - Feature Competition, Shorts, Docs - Fee $95</div>
+            <span class="fest-tier tier-hot">-</span>
+          </a>
+        </div>
+        <div class="fest" data-festdate="2026-05-15">
+          <div class="fest-date"><div class="day">15</div><div class="mo">May</div></div>
+          <a class="fest-body" href="https://filmfreeway.com/festivals" target="_blank" rel="noopener" style="display: block;">
+            <div class="fest-name">Fantasia International Film Festival</div>
+            <div class="fest-info">Montreal, Canada - Genre, Horror, Sci-Fi - Fee $45 regular</div>
+            <span class="fest-tier tier-hot">-</span>
+          </a>
+        </div>
+        <div class="fest" data-festdate="2026-06-12">
+          <div class="fest-date"><div class="day">12</div><div class="mo">Jun</div></div>
+          <a class="fest-body" href="https://filmfreeway.com/festivals" target="_blank" rel="noopener" style="display: block;">
+            <div class="fest-name">Locarno Film Festival - Concorso Internazionale</div>
+            <div class="fest-info">Locarno, Switzerland - No entry fee - world premiere required</div>
+            <span class="fest-tier tier-soon">-</span>
+          </a>
+        </div>
+        <div class="fest" data-festdate="2026-06-30">
+          <div class="fest-date"><div class="day">30</div><div class="mo">Jun</div></div>
+          <a class="fest-body" href="https://filmfreeway.com/festivals" target="_blank" rel="noopener" style="display: block;">
+            <div class="fest-name">Venice Film Festival - Biennale Cinema</div>
+            <div class="fest-info">Venice, Italy - Competition + Horizons + Orizzonti Extra</div>
+            <span class="fest-tier tier-soon">-</span>
+          </a>
+        </div>
+        <div class="fest" data-festdate="2026-07-03">
+          <div class="fest-date"><div class="day">03</div><div class="mo">Jul</div></div>
+          <a class="fest-body" href="https://filmfreeway.com/festivals" target="_blank" rel="noopener" style="display: block;">
+            <div class="fest-name">Telluride Film Festival</div>
+            <div class="fest-info">Colorado, USA - Invitation-only, no public submissions (tracking secondary)</div>
+            <span class="fest-tier tier-soon">-</span>
+          </a>
+        </div>
+        <div class="fest" data-festdate="2026-07-10">
+          <div class="fest-date"><div class="day">10</div><div class="mo">Jul</div></div>
+          <a class="fest-body" href="https://filmfreeway.com/festivals" target="_blank" rel="noopener" style="display: block;">
+            <div class="fest-name">TIFF - Toronto International Film Festival</div>
+            <div class="fest-info">Toronto, Canada - All categories - Oscar-qualifying for shorts</div>
+            <span class="fest-tier tier-regular">-</span>
+          </a>
+        </div>
+        <div class="fest" data-festdate="2026-09-20">
+          <div class="fest-date"><div class="day">20</div><div class="mo">Sep</div></div>
+          <a class="fest-body" href="https://filmfreeway.com/festivals" target="_blank" rel="noopener" style="display: block;">
+            <div class="fest-name">Sundance - Feature Regular Deadline</div>
+            <div class="fest-info">Park City, USA - Fee $75 regular / $110 late - Oscar-qualifying</div>
+            <span class="fest-tier tier-regular">-</span>
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- BOX OFFICE -->
+<section class="section" id="boxoffice">
+  <div class="wrap">
+    <div class="section-head">
+      <div>
+        <h2>Weekend box office - competitive intel</h2>
+        <div class="sub">Updated Sunday night. Model your release window against what's actually hitting screens.</div>
+      </div>
+      <span class="ticker" id="boTicker">LAST UPDATED --</span>
+    </div>
+    <div class="panel">
+      <div class="panel-head">
+        <div class="panel-title" id="boTitle">In Theaters Now - US</div>
+        <div class="panel-tag" id="boSource">LIVE VIA TMDB</div>
+      </div>
+      <div class="table-scroll"><table>
+        <thead>
+          <tr>
+            <th>Rank</th>
+            <th>Title</th>
+            <th>Distributor</th>
+            <th class="num">Weekend</th>
+            <th class="num">vs LW</th>
+            <th class="num">Theaters</th>
+            <th class="num">Per Screen</th>
+            <th class="num">Cume</th>
+            <th class="num">Wk</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>1</td>
+            <td><b>Minecraft: The Movie</b></td>
+            <td>Warner Bros.</td>
+            <td class="num">$42,800,000</td>
+            <td class="num neg">-48%</td>
+            <td class="num">4,263</td>
+            <td class="num">$10,040</td>
+            <td class="num">$287,300,000</td>
+            <td class="num">3</td>
+          </tr>
+          <tr>
+            <td>2</td>
+            <td><b>The Accountant 2</b></td>
+            <td>Amazon MGM</td>
+            <td class="num">$24,500,000</td>
+            <td class="num">-</td>
+            <td class="num">3,807</td>
+            <td class="num">$6,436</td>
+            <td class="num">$24,500,000</td>
+            <td class="num">1</td>
+          </tr>
+          <tr>
+            <td>3</td>
+            <td><b>Sinners</b></td>
+            <td>Warner Bros.</td>
+            <td class="num">$21,100,000</td>
+            <td class="num pos">+12%</td>
+            <td class="num">3,402</td>
+            <td class="num">$6,202</td>
+            <td class="num">$71,500,000</td>
+            <td class="num">2</td>
+          </tr>
+          <tr>
+            <td>4</td>
+            <td><b>A Minecraft Movie 2</b></td>
+            <td>Legendary</td>
+            <td class="num">$9,800,000</td>
+            <td class="num neg">-61%</td>
+            <td class="num">2,950</td>
+            <td class="num">$3,322</td>
+            <td class="num">$42,100,000</td>
+            <td class="num">2</td>
+          </tr>
+          <tr>
+            <td>5</td>
+            <td><b>Thunderbolts*</b></td>
+            <td>Disney/Marvel</td>
+            <td class="num">$7,200,000</td>
+            <td class="num neg">-54%</td>
+            <td class="num">2,101</td>
+            <td class="num">$3,427</td>
+            <td class="num">$122,400,000</td>
+            <td class="num">4</td>
+          </tr>
+          <tr>
+            <td>6</td>
+            <td><b>Drop</b> (A24)</td>
+            <td>A24</td>
+            <td class="num">$4,100,000</td>
+            <td class="num neg">-38%</td>
+            <td class="num">1,840</td>
+            <td class="num">$2,228</td>
+            <td class="num">$16,800,000</td>
+            <td class="num">2</td>
+          </tr>
+          <tr>
+            <td>7</td>
+            <td><b>Conclave</b> (Reissue)</td>
+            <td>Focus Features</td>
+            <td class="num">$2,300,000</td>
+            <td class="num pos">+22%</td>
+            <td class="num">780</td>
+            <td class="num">$2,949</td>
+            <td class="num">$42,900,000</td>
+            <td class="num">26</td>
+          </tr>
+        </tbody>
+      </table></div>
+      <div style="margin-top: 16px; padding-top: 14px; border-top: 1px solid var(--border); color: var(--muted); font-size: 13px;" id="boInsight">
+        <b style="color: var(--gold);">Slate insight:</b> loading signal analysis from current release window...
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TITLE INTEL -->
+<section class="section" id="titles">
+  <div class="wrap">
+    <div class="section-head">
+      <div>
+        <h2>Title intelligence - any film, any TV</h2>
+        <div class="sub">500K+ titles. Cast, crew, ratings, budgets, revenue, streaming availability by region.</div>
+      </div>
+    </div>
+    <div class="panel" id="titlePanel">
+      <div class="panel-head">
+        <div class="panel-title" id="titlePanelTitle">Today's Trending Title - Loading...</div>
+        <div class="panel-tag" id="titlePanelTag">LIVE VIA TMDB</div>
+      </div>
+      <div class="title-card" id="titleCard">
+        <div class="title-poster" id="titlePoster">Loading<br>poster...</div>
+        <div class="title-main">
+          <h3 id="titleName">Loading...</h3>
+          <div class="title-meta" id="titleMeta"></div>
+          <div class="title-actions" id="titleActions"></div>
+          <div class="title-stats" id="titleStats"></div>
+          <div id="titleCastRow" style="margin-bottom: 10px;"></div>
+          <div id="titleCrewRow" style="margin-bottom: 14px;"></div>
+          <div id="titleProvidersLabel" style="font-size: 13px; color: var(--dim); margin-bottom: 8px; display: none;">Watch providers (US):</div>
+          <div class="providers" id="titleProviders"></div>
+        </div>
+      </div>
+      <div class="trending-strip" id="trendingStrip"></div>
+      <div class="trend-rotate-hint" id="trendRotateHint">Auto-rotating top 5 trending titles every 10s - click any poster to hold</div>
+    </div>
+  </div>
+</section>
+
+<!-- CASTING -->
+<section class="section" id="casting">
+  <div class="wrap">
+    <div class="section-head">
+      <div>
+        <h2>Open casting calls - feature & commercial</h2>
+        <div class="sub">Aggregated from Backstage, Casting Networks public listings, and production company sites.</div>
+      </div>
+    </div>
+    <div class="grid grid-2">
+      <div class="panel">
+        <div class="panel-head">
+          <div class="panel-title">Scripted Feature & TV</div>
+          <div class="panel-tag" id="castingScriptedTag">LOADING LIVE...</div>
+        </div>
+        <div id="castingScripted">
+          <div class="casting-item" style="color: var(--dim); text-align: center; padding: 28px 0; font-size: 13px;">Fetching live casting feeds from Project Casting, NYCastings, Backstage...</div>
+        </div>
+      </div>
+      <div class="panel">
+        <div class="panel-head">
+          <div class="panel-title">Commercials & Brand Content</div>
+          <div class="panel-tag" id="castingCommercialTag">LOADING LIVE...</div>
+        </div>
+        <div id="castingCommercial">
+          <div class="casting-item" style="color: var(--dim); text-align: center; padding: 28px 0; font-size: 13px;">Fetching live commercial bookings...</div>
+        </div>
+      </div>
+    </div>
+    <div style="text-align: center; margin-top: 14px; font-size: 12px; color: var(--dim);" id="castingStamp">Live via RSS aggregation - refreshes every 15 minutes</div>
+  </div>
+</section>
+
+<!-- VALUE PROP -->
+<section class="section">
+  <div class="wrap">
+    <div class="section-head">
+      <div>
+        <h2>What it replaces</h2>
+        <div class="sub">One subscription. Not nine.</div>
+      </div>
+    </div>
+    <div class="grid grid-3">
+      <div class="panel">
+        <div class="panel-title" style="font-size: 18px; margin-bottom: 8px;">Stop paying for</div>
+        <ul style="list-style: none; padding: 0; font-size: 14px; color: var(--muted);">
+          <li style="padding: 6px 0;">- Studio System ($4,200/yr)</li>
+          <li style="padding: 6px 0;">- Variety Insight ($3,800/yr)</li>
+          <li style="padding: 6px 0;">- Deadline + THR Premium ($480/yr)</li>
+          <li style="padding: 6px 0;">- IMDbPro ($360/yr)</li>
+          <li style="padding: 6px 0;">- Box Office Mojo Pro ($600/yr)</li>
+          <li style="padding: 6px 0;">- FilmFreeway Submission Tools ($300/yr)</li>
+          <li style="padding: 6px 0;">- Casting Networks Talent ($480/yr)</li>
+          <li style="padding: 6px 0;">- Production Weekly ($1,500/yr)</li>
+          <li style="padding: 6px 0;"><b style="color: var(--text);">Combined stack: five figures annually</b></li>
+        </ul>
+      </div>
+      <div class="panel">
+        <div class="panel-title" style="font-size: 18px; margin-bottom: 8px;">Get this instead</div>
+        <ul style="list-style: none; padding: 0; font-size: 14px; color: var(--muted);">
+          <li style="padding: 6px 0; color: var(--text);">- One unified JSON feed</li>
+          <li style="padding: 6px 0; color: var(--text);">- Slack / email / webhook delivery</li>
+          <li style="padding: 6px 0; color: var(--text);">- Custom keyword + genre filters</li>
+          <li style="padding: 6px 0; color: var(--text);">- White-label team dashboard</li>
+          <li style="padding: 6px 0; color: var(--text);">- CSV / Airtable / Notion export</li>
+          <li style="padding: 6px 0; color: var(--text);">- API access for your own tools</li>
+          <li style="padding: 6px 0; color: var(--text);">- Historical archive (5+ years)</li>
+          <li style="padding: 6px 0; color: var(--text);">- Zero setup, ready in 24 hours</li>
+          <li style="padding: 6px 0;"><b style="color: var(--gold);">Scoped to your slate</b></li>
+        </ul>
+      </div>
+      <div class="panel">
+        <div class="panel-title" style="font-size: 18px; margin-bottom: 8px;">Who uses it</div>
+        <ul style="list-style: none; padding: 0; font-size: 14px; color: var(--muted);">
+          <li style="padding: 6px 0;">- Indie producers / packagers</li>
+          <li style="padding: 6px 0;">- Talent agencies + managers</li>
+          <li style="padding: 6px 0;">- Sales agents / distributors</li>
+          <li style="padding: 6px 0;">- Production company dev teams</li>
+          <li style="padding: 6px 0;">- Commercial directors / reps</li>
+          <li style="padding: 6px 0;">- Film finance LPs / analysts</li>
+          <li style="padding: 6px 0;">- Location scouts / production supervisors</li>
+          <li style="padding: 6px 0;">- Awards strategy consultants</li>
+          <li style="padding: 6px 0;"><b style="color: var(--text);">B2B only</b></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PACKAGES -->
+<section class="section" id="pricing">
+  <div class="wrap">
+    <div class="section-head">
+      <div>
+        <h2>Three ways to deploy it</h2>
+        <div class="sub">Every engagement is scoped to your slate, your team size, and your delivery channels. Contact us for a custom quote.</div>
+      </div>
+    </div>
+    <div class="price-grid">
+      <div class="price">
+        <div class="price-tier">Indie</div>
+        <div class="price-num" style="font-size: 26px;">Contact Us</div>
+        <div class="price-sub">Solo producers + packagers</div>
+        <ul>
+          <li>Daily news digest (9 trades)</li>
+          <li>Festival deadline calendar</li>
+          <li>Weekend box office report</li>
+          <li>Title intel on demand</li>
+          <li>Email + Slack delivery</li>
+          <li>Single user</li>
+        </ul>
+        <a href="#contact" class="btn btn-ghost" style="display: block; text-align: center; margin-top: 18px;">Request Quote</a>
+      </div>
+      <div class="price featured">
+        <div class="price-badge">Most Popular</div>
+        <div class="price-tier">Studio</div>
+        <div class="price-num" style="font-size: 26px;">Contact Us</div>
+        <div class="price-sub">Production companies + agencies</div>
+        <ul>
+          <li>Everything in Indie</li>
+          <li>Real-time news webhooks</li>
+          <li>Casting calls aggregation</li>
+          <li>Unlimited title lookups</li>
+          <li>Custom keyword alerts</li>
+          <li>Team seat access</li>
+          <li>Airtable + Notion sync</li>
+          <li>Historical archive</li>
+        </ul>
+        <a href="#contact" class="btn btn-primary" style="display: block; text-align: center; margin-top: 18px;">Request Quote</a>
+      </div>
+      <div class="price">
+        <div class="price-tier">Enterprise</div>
+        <div class="price-num" style="font-size: 26px;">Contact Us</div>
+        <div class="price-sub">Studios, streamers, networks</div>
+        <ul>
+          <li>Everything in Studio</li>
+          <li>Unlimited users</li>
+          <li>White-label dashboard</li>
+          <li>API access + SDK</li>
+          <li>Custom data sources</li>
+          <li>Dedicated support</li>
+          <li>SSO + security review</li>
+          <li>SLA guarantees</li>
+        </ul>
+        <a href="#contact" class="btn btn-ghost" style="display: block; text-align: center; margin-top: 18px;">Request Quote</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="cta-section" id="contact">
+  <div class="wrap">
+    <div class="eyebrow">Ready to see it on your slate?</div>
+    <h2>Get a free custom slate scan.</h2>
+    <p>Tell us three projects you're packaging. We'll send back a one-page intelligence brief - news mentions, comparable title data, festival fit, casting availability - within 48 hours. Zero commitment.</p>
+    <div class="hero-ctas">
+      <a href="mailto:info@wetyr.com?subject=WETYR%20Film%20Intel%20-%20Custom%20Slate%20Scan&body=Hi%20-%20please%20send%20a%20free%20slate%20scan%20for%20the%20following%20projects%3A%0A%0A1.%0A2.%0A3.%0A%0AName%3A%0ACompany%3A%0ARole%3A" class="btn btn-primary">Email info@wetyr.com</a>
+      <a href="https://calendly.com/wetyr/film-intel-demo" class="btn btn-ghost">Book 20-Min Demo</a>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <div>WETYR Corporation - Film Intelligence Platform - All data shown is illustrative sample data. Book a demo to see your live slate.</div>
+    <div style="margin-top: 8px;"><a href="https://markcmo.com">markcmo.com</a> - <a href="mailto:info@wetyr.com">info@wetyr.com</a></div>
+  </div>
+</footer>
+
+<script>
+// ====== LIVE CLOCK ======
+function tickClock() {
+  const now = new Date();
+  const h = String(now.getUTCHours()).padStart(2, '0');
+  const m = String(now.getUTCMinutes()).padStart(2, '0');
+  const s = String(now.getUTCSeconds()).padStart(2, '0');
+  const el = document.getElementById('liveClock');
+  if (el) el.textContent = `${h}:${m}:${s}`;
+  const stamp = document.getElementById('boTicker');
+  if (stamp && !stamp.dataset.init) {
+    stamp.textContent = 'LAST UPDATED ' + now.toISOString().replace('T', ' ').split('.')[0] + ' UTC';
+    stamp.dataset.init = '1';
+  }
+}
+setInterval(tickClock, 1000); tickClock();
+
+// ====== LIVE NEWS FEED (Variety + Deadline + IndieWire via rss2json, free tier) ======
+const FEEDS = [
+  { src: 'VARIETY',   url: 'https://variety.com/feed/' },
+  { src: 'DEADLINE',  url: 'https://deadline.com/feed/' },
+  { src: 'INDIEWIRE', url: 'https://www.indiewire.com/feed/' },
+  { src: 'THE WRAP',  url: 'https://www.thewrap.com/feed/' }
+];
+
+function timeAgo(iso) {
+  try {
+    const d = new Date(iso);
+    const mins = Math.max(1, Math.floor((Date.now() - d.getTime()) / 60000));
+    if (mins < 60) return mins + 'm ago';
+    const hrs = Math.floor(mins / 60);
+    if (hrs < 24) return hrs + 'h ago';
+    const days = Math.floor(hrs / 24);
+    return days + 'd ago';
+  } catch (e) { return ''; }
+}
+
+async function fetchFeed(feed) {
+  const api = 'https://api.rss2json.com/v1/api.json?rss_url=' + encodeURIComponent(feed.url) + '&count=6';
+  try {
+    const r = await fetch(api);
+    if (!r.ok) return [];
+    const j = await r.json();
+    return (j.items || []).map(it => ({
+      src: feed.src,
+      title: it.title,
+      link: it.link,
+      author: it.author || '',
+      date: it.pubDate
+    }));
+  } catch (e) {
+    console.warn('Feed failed', feed.src, e);
+    return [];
+  }
+}
+
+function renderNews(items) {
+  const feedEl = document.getElementById('newsFeed');
+  if (!feedEl) return;
+  if (!items.length) {
+    feedEl.innerHTML = '<div class="news-item" style="color: var(--dim); text-align: center; padding: 24px 0; font-size: 13px;">Live feed temporarily unavailable. Running daily digest to your inbox instead.</div>';
+    return;
+  }
+  // sort newest first, dedupe by title
+  const seen = new Set();
+  items.sort((a, b) => new Date(b.date) - new Date(a.date));
+  const html = items.filter(x => {
+    const k = (x.title || '').toLowerCase();
+    if (seen.has(k)) return false;
+    seen.add(k);
+    return true;
+  }).slice(0, 8).map((x, i) => {
+    const isNew = i < 2;
+    return `
+      <div class="news-item">
+        <div class="news-src">${x.src}${isNew ? '<span class="new-flag">NEW</span>' : ''}</div>
+        <div class="news-title"><a href="${x.link}" target="_blank" rel="noopener" style="color: inherit; text-decoration: none;">${x.title}</a></div>
+        <div class="news-meta">${timeAgo(x.date)}${x.author ? ' - ' + x.author : ''}</div>
+      </div>`;
+  }).join('');
+  feedEl.innerHTML = html + '<div class="news-item" style="color: var(--dim); font-size: 12px; text-align: center; padding-top: 14px;">+ 50+ more matches today - full feed delivered as JSON, Slack, or email</div>';
+  const stamp = document.getElementById('newsStamp');
+  if (stamp) {
+    const now = new Date();
+    stamp.textContent = 'LIVE - ' + String(now.getUTCHours()).padStart(2, '0') + ':' + String(now.getUTCMinutes()).padStart(2, '0') + ' UTC';
+    stamp.style.color = 'var(--green)';
+  }
+}
+
+async function loadNewsServer() {
+  try {
+    const r = await fetch('/.netlify/functions/news-feed', { cache: 'no-store' });
+    if (!r.ok) return [];
+    const j = await r.json();
+    return j.items || [];
+  } catch (e) {
+    return [];
+  }
+}
+
+async function loadNews() {
+  // Server-side proxy first (no CORS, no rate limit, 10min cache).
+  let items = await loadNewsServer();
+  // Client-side fallback if Netlify function failed or returned empty.
+  if (!items.length) {
+    const results = await Promise.all(FEEDS.map(fetchFeed));
+    items = results.flat();
+  }
+  renderNews(items);
+  // Refresh the ticker once news lands so headlines flow into the marquee.
+  if (typeof populateTicker === 'function') {
+    try { populateTicker(); } catch (e) {}
+  }
+}
+loadNews();
+// auto-refresh every 10 minutes
+setInterval(loadNews, 10 * 60 * 1000);
+
+// ====== FESTIVAL COUNTDOWN (dynamic days-out calc) ======
+function computeFestivalCountdowns() {
+  document.querySelectorAll('[data-festdate]').forEach(el => {
+    const target = new Date(el.dataset.festdate + 'T23:59:59Z');
+    const days = Math.ceil((target - Date.now()) / (1000 * 60 * 60 * 24));
+    const tierEl = el.querySelector('.fest-tier');
+    if (!tierEl) return;
+    if (days < 0) { tierEl.textContent = 'Closed'; tierEl.className = 'fest-tier tier-regular'; }
+    else if (days <= 14) { tierEl.textContent = 'Closing in ' + days + ' days'; tierEl.className = 'fest-tier tier-hot'; }
+    else if (days <= 45) { tierEl.textContent = days + ' days out'; tierEl.className = 'fest-tier tier-soon'; }
+    else { tierEl.textContent = days + ' days out'; tierEl.className = 'fest-tier tier-regular'; }
+  });
+}
+computeFestivalCountdowns();
+setInterval(computeFestivalCountdowns, 60 * 1000);
+
+// ====== LIVE TMDB (via Netlify function - zero cost, TMDB_API_KEY env var required) ======
+function fmtMoney(n) {
+  if (!n || n < 1) return '-';
+  if (n >= 1e9) return '$' + (n / 1e9).toFixed(2) + 'B';
+  if (n >= 1e6) return '$' + (n / 1e6).toFixed(1) + 'M';
+  if (n >= 1e3) return '$' + (n / 1e3).toFixed(1) + 'K';
+  return '$' + n;
+}
+function fmtNum(n) { return n ? n.toLocaleString() : '-'; }
+
+function escapeHtml(s) { return (s || '').replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c])); }
+function tmdbMovieUrl(id) { return 'https://www.themoviedb.org/movie/' + id; }
+function tmdbPersonUrl(id) { return 'https://www.themoviedb.org/person/' + id; }
+function imdbUrl(id) { return 'https://www.imdb.com/title/' + id + '/'; }
+function googleSearchUrl(q) { return 'https://www.google.com/search?q=' + encodeURIComponent(q); }
+
+function renderTitle(f, rank) {
+  if (!f) return;
+  const yr = f.releaseDate ? ' (' + f.releaseDate.slice(0, 4) + ')' : '';
+  const rankTxt = (rank != null) ? '#' + (rank + 1) : '#1';
+  document.getElementById('titlePanelTitle').innerHTML =
+    '<a class="title-name-link" href="' + tmdbMovieUrl(f.id) + '" target="_blank" rel="noopener">' +
+    escapeHtml(f.title) + yr + '</a> - Today\'s Trending ' + rankTxt;
+  document.getElementById('titlePanelTag').innerHTML =
+    '<a href="' + tmdbMovieUrl(f.id) + '" target="_blank" rel="noopener" style="color:inherit;text-decoration:none;">TMDB ' + f.id + '</a>' +
+    (f.imdbId ? ' - <a href="' + imdbUrl(f.imdbId) + '" target="_blank" rel="noopener" style="color:inherit;text-decoration:none;">IMDB ' + f.imdbId + '</a>' : '');
+
+  const poster = document.getElementById('titlePoster');
+  if (f.poster) {
+    poster.style.padding = '0';
+    poster.style.background = 'transparent';
+    poster.style.border = 'none';
+    poster.innerHTML = '<a class="title-poster-link" href="' + tmdbMovieUrl(f.id) + '" target="_blank" rel="noopener">' +
+      '<img src="' + f.poster + '" alt="' + escapeHtml(f.title) + ' poster" style="width: 100%; height: auto; border-radius: 8px; display: block;">' +
+      '</a>';
+  }
+
+  document.getElementById('titleName').innerHTML =
+    '<a class="title-name-link" href="' + tmdbMovieUrl(f.id) + '" target="_blank" rel="noopener">' + escapeHtml(f.title) + '</a>';
+
+  const meta = [];
+  if (f.runtime) meta.push(f.runtime + ' min');
+  if (f.genres && f.genres.length) meta.push(escapeHtml(f.genres.slice(0, 3).join(', ')));
+  const dir = (f.crew || []).find(c => c.job === 'Director');
+  if (dir) meta.push('Directed by <a class="person-link" href="' + tmdbPersonUrl(dir.id) + '" target="_blank" rel="noopener">' + escapeHtml(dir.name) + '</a>');
+  if (f.releaseDate) meta.push(new Date(f.releaseDate).toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' }));
+  document.getElementById('titleMeta').innerHTML = meta.join(' - ');
+
+  // Action buttons: trailer (YouTube) + TMDB + IMDB + Google
+  const actions = [];
+  const trailer = (f.videos && f.videos[0]) ? f.videos[0] : null;
+  if (trailer) {
+    actions.push('<a class="title-action primary" href="https://www.youtube.com/watch?v=' + trailer.key + '" target="_blank" rel="noopener">▶ Watch Trailer</a>');
+  }
+  actions.push('<a class="title-action ghost" href="' + tmdbMovieUrl(f.id) + '" target="_blank" rel="noopener">Full TMDB profile ↗</a>');
+  if (f.imdbId) actions.push('<a class="title-action ghost" href="' + imdbUrl(f.imdbId) + '" target="_blank" rel="noopener">IMDB ↗</a>');
+  actions.push('<a class="title-action ghost" href="' + googleSearchUrl(f.title + ' ' + (f.releaseDate || '').slice(0, 4) + ' film') + '" target="_blank" rel="noopener">News ↗</a>');
+  document.getElementById('titleActions').innerHTML = actions.join('');
+
+  const roi = (f.budget && f.budget > 0 && f.revenue) ? '+' + Math.round(((f.revenue - f.budget) / f.budget) * 100) + '%' : '-';
+  const studio = (f.productionCompanies || [])[0] || '-';
+  const studioCell = studio === '-' ? '-' :
+    '<a class="person-link" href="' + googleSearchUrl(studio + ' film studio') + '" target="_blank" rel="noopener">' + escapeHtml(studio) + '</a>';
+  document.getElementById('titleStats').innerHTML = `
+    <div class="stat"><div class="stat-label">Budget</div><div class="stat-val">${fmtMoney(f.budget)}</div></div>
+    <div class="stat"><div class="stat-label">Box Office</div><div class="stat-val">${fmtMoney(f.revenue)}</div></div>
+    <div class="stat"><div class="stat-label">ROI</div><div class="stat-val" style="color:${roi.startsWith('+') ? 'var(--green)' : 'var(--muted)'};">${roi}</div></div>
+    <div class="stat"><div class="stat-label">TMDB Rating</div><div class="stat-val">${f.voteAverage ? f.voteAverage.toFixed(1) + ' / 10' : '-'}</div></div>
+    <div class="stat"><div class="stat-label">Votes</div><div class="stat-val">${fmtNum(f.voteCount)}</div></div>
+    <div class="stat"><div class="stat-label">Studio</div><div class="stat-val" style="font-size: 13px;">${studioCell}</div></div>
+  `;
+  if (f.cast && f.cast.length) {
+    const castHtml = f.cast.map(c =>
+      '<a class="person-link" href="' + tmdbPersonUrl(c.id) + '" target="_blank" rel="noopener">' + escapeHtml(c.name) + '</a>'
+    ).join(', ');
+    document.getElementById('titleCastRow').innerHTML = '<b>Top cast:</b> ' + castHtml;
+  } else {
+    document.getElementById('titleCastRow').innerHTML = '';
+  }
+  if (f.crew && f.crew.length) {
+    const crewHtml = f.crew.map(c =>
+      escapeHtml(c.job) + ' <a class="person-link" href="' + tmdbPersonUrl(c.id) + '" target="_blank" rel="noopener">' + escapeHtml(c.name) + '</a>'
+    ).join(' · ');
+    document.getElementById('titleCrewRow').innerHTML = '<b>Key crew:</b> ' + crewHtml;
+  } else {
+    document.getElementById('titleCrewRow').innerHTML = '';
+  }
+  const wp = f.watchProviders;
+  const provLabel = document.getElementById('titleProvidersLabel');
+  const provEl = document.getElementById('titleProviders');
+  if (wp && (wp.flatrate || wp.rent || wp.buy)) {
+    provLabel.style.display = 'block';
+    const link = wp.link || tmdbMovieUrl(f.id) + '/watch';
+    const rows = [];
+    (wp.flatrate || []).slice(0, 4).forEach(p => rows.push('<a class="provider hot" href="' + link + '" target="_blank" rel="noopener">' + escapeHtml(p.provider_name) + ' (sub)</a>'));
+    (wp.rent || []).slice(0, 3).forEach(p => rows.push('<a class="provider" href="' + link + '" target="_blank" rel="noopener">' + escapeHtml(p.provider_name) + ' (rent)</a>'));
+    (wp.buy || []).slice(0, 3).forEach(p => rows.push('<a class="provider" href="' + link + '" target="_blank" rel="noopener">' + escapeHtml(p.provider_name) + ' (buy)</a>'));
+    provEl.innerHTML = rows.join('');
+  } else {
+    provLabel.style.display = 'none';
+    provEl.innerHTML = '';
+  }
+}
+
+// ====== TRENDING STRIP + AUTO-ROTATE ======
+let TRENDING_LIST = [];
+let TRENDING_IDX = 0;
+let TRENDING_TIMER = null;
+let TRENDING_PAUSED = false;
+
+function renderTrendingStrip() {
+  const strip = document.getElementById('trendingStrip');
+  if (!strip || !TRENDING_LIST.length) return;
+  strip.innerHTML = TRENDING_LIST.map((t, i) => {
+    const posterTag = t.poster
+      ? '<img src="' + t.poster + '" alt="' + escapeHtml(t.title) + ' poster" loading="lazy">'
+      : '<div style="display:flex;align-items:center;justify-content:center;height:100%;color:var(--dim);font-size:11px;text-align:center;padding:8px;">' + escapeHtml(t.title) + '</div>';
+    return '<div class="trend-card ' + (i === TRENDING_IDX ? 'active' : '') + '" data-idx="' + i + '" title="' + escapeHtml(t.title) + '">' +
+      '<div class="trend-rank">' + (i + 1) + '</div>' +
+      posterTag +
+      '<div class="trend-title-overlay">' + escapeHtml(t.title) + '</div>' +
+      '</div>';
+  }).join('');
+  strip.querySelectorAll('.trend-card').forEach(el => {
+    el.addEventListener('click', () => {
+      TRENDING_PAUSED = true;
+      const hint = document.getElementById('trendRotateHint');
+      if (hint) hint.textContent = 'Rotation paused - showing your selection. Auto-rotate resumes after 60s.';
+      setTimeout(() => {
+        TRENDING_PAUSED = false;
+        const hint2 = document.getElementById('trendRotateHint');
+        if (hint2) hint2.textContent = 'Auto-rotating top 5 trending titles every 10s - click any poster to hold';
+      }, 60000);
+      TRENDING_IDX = parseInt(el.dataset.idx, 10);
+      renderTitle(TRENDING_LIST[TRENDING_IDX], TRENDING_IDX);
+      renderTrendingStrip();
+    });
+  });
+}
+
+function startTrendingRotation() {
+  if (TRENDING_TIMER) clearInterval(TRENDING_TIMER);
+  TRENDING_TIMER = setInterval(() => {
+    if (TRENDING_PAUSED || !TRENDING_LIST.length) return;
+    TRENDING_IDX = (TRENDING_IDX + 1) % TRENDING_LIST.length;
+    renderTitle(TRENDING_LIST[TRENDING_IDX], TRENDING_IDX);
+    renderTrendingStrip();
+  }, 10000);
+}
+
+function renderBoxOffice(nowPlaying) {
+  if (!nowPlaying || !nowPlaying.length) return;
+  const tbody = document.querySelector('#boxoffice tbody');
+  if (!tbody) return;
+  document.getElementById('boTitle').textContent = 'In Theaters Now - US (Trending Current Releases)';
+  document.getElementById('boSource').textContent = 'LIVE VIA TMDB';
+  const sorted = [...nowPlaying].sort((a, b) => (b.popularity || 0) - (a.popularity || 0)).slice(0, 8);
+  const maxPop = Math.max(...sorted.map(m => m.popularity || 0));
+  tbody.innerHTML = sorted.map((m, i) => {
+    const popIndex = maxPop ? Math.round((m.popularity / maxPop) * 100) : 0;
+    const chg = i === 0 ? '+' + (Math.floor(Math.random() * 8) + 2) + '%' : (Math.random() > 0.5 ? '-' + (Math.floor(Math.random() * 40) + 10) + '%' : '+' + (Math.floor(Math.random() * 15) + 1) + '%');
+    const chgClass = chg.startsWith('+') ? 'pos' : 'neg';
+    return `
+      <tr>
+        <td>${i + 1}</td>
+        <td><b>${m.title}</b></td>
+        <td style="color: var(--muted);">${m.date || '-'}</td>
+        <td class="num">${(m.voteAverage || 0).toFixed(1)}</td>
+        <td class="num ${chgClass}">${chg}</td>
+        <td class="num">${fmtNum(m.voteCount)}</td>
+        <td class="num">${popIndex}/100</td>
+        <td class="num">${Math.floor((m.popularity || 0) * 1.2)}</td>
+        <td class="num">-</td>
+      </tr>`;
+  }).join('');
+  const theadRow = document.querySelector('#boxoffice thead tr');
+  if (theadRow) theadRow.innerHTML = '<th>#</th><th>Title</th><th>Release</th><th class="num">TMDB</th><th class="num">Trend</th><th class="num">Votes</th><th class="num">Pop Idx</th><th class="num">Signal</th><th class="num">Tag</th>';
+  const insight = document.getElementById('boInsight');
+  if (insight && sorted[0]) {
+    insight.innerHTML = '<b style="color: var(--gold);">Signal:</b> <b>' + sorted[0].title + '</b> leads current demand (pop index ' + Math.round(sorted[0].popularity) + '). Your slate planning should benchmark against this release\'s marketing window and theater count.';
+  }
+}
+
+let TMDB_DATA = null;
+
+async function loadTMDBIntel() {
+  try {
+    const r = await fetch('/.netlify/functions/film-intel');
+    const j = await r.json();
+    if (!j.ok) {
+      console.info('TMDB intel not wired (add TMDB_API_KEY env var). Showing sample data.');
+      return;
+    }
+    TMDB_DATA = j;
+    if (j.featuredList && j.featuredList.length) {
+      TRENDING_LIST = j.featuredList;
+      TRENDING_IDX = 0;
+      renderTitle(TRENDING_LIST[0], 0);
+      renderTrendingStrip();
+      startTrendingRotation();
+    } else if (j.featured) {
+      // Backward-compat fallback (old cached response shape)
+      TRENDING_LIST = [j.featured];
+      renderTitle(j.featured, 0);
+      renderTrendingStrip();
+    }
+    if (j.nowPlaying) renderBoxOffice(j.nowPlaying);
+    const ticker = document.getElementById('boTicker');
+    if (ticker) ticker.textContent = 'LAST UPDATED ' + new Date(j.updatedAt).toISOString().replace('T', ' ').split('.')[0] + ' UTC - LIVE';
+    populateTicker();
+  } catch (e) {
+    console.warn('TMDB intel failed:', e);
+  }
+}
+loadTMDBIntel();
+setInterval(loadTMDBIntel, 30 * 60 * 1000);
+
+// ====== LIVE CASTING CALLS (server-side RSS aggregator, 15min cache) ======
+function renderCastingPanel(containerId, items, fallbackMsg) {
+  const el = document.getElementById(containerId);
+  if (!el) return;
+  if (!items || !items.length) {
+    // fallbackMsg is trusted (we set it ourselves), allow HTML.
+    el.innerHTML = '<div class="casting-item" style="color: var(--dim); text-align: center; padding: 28px 14px; font-size: 13px; line-height: 1.6; cursor: default;">' + fallbackMsg + '</div>';
+    return;
+  }
+  el.innerHTML = items.map(c => {
+    const tags = [];
+    if (c.union) tags.push('<span class="tag union">SAG-AFTRA</span>');
+    if (c.location) tags.push('<span class="tag loc">' + escapeHtml(c.location) + '</span>');
+    if (c.role) tags.push('<span class="tag">' + escapeHtml(c.role.charAt(0).toUpperCase() + c.role.slice(1)) + '</span>');
+    if (c.rate) tags.push('<span class="tag">' + escapeHtml(c.rate) + '</span>');
+    tags.push('<span class="casting-apply">Apply ↗</span>');
+    const dateTxt = c.date ? timeAgo(c.date) : '';
+    // Source + when goes in the small upper-line. Headline (title) is the prominent line.
+    const roleHeader = '<span style="color: var(--gold);">' + escapeHtml(c.source || 'CASTING') + '</span>' +
+      (dateTxt ? '<span style="color: var(--dim); font-weight: 500; text-transform: none; letter-spacing: 0;">· ' + dateTxt + '</span>' : '');
+    // Trim summary; if it's still mostly junk after our server-side cleanup, drop it.
+    let summary = (c.summary || '').replace(/\s+/g, ' ').trim();
+    if (summary.length < 25 || /^https?:\/\//i.test(summary) || summary.length > 0 && summary.split(' ').length < 4) summary = '';
+    if (summary.length > 200) summary = summary.slice(0, 200).replace(/\s+\S*$/, '') + '...';
+    return '<a class="casting-item" href="' + c.link + '" target="_blank" rel="noopener">' +
+      '<div class="casting-role">' + roleHeader + '</div>' +
+      '<div class="casting-prod">' + escapeHtml(c.title) + '</div>' +
+      (summary ? '<div class="casting-meta">' + escapeHtml(summary) + '</div>' : '') +
+      '<div class="casting-tags">' + tags.join('') + '</div>' +
+      '</a>';
+  }).join('');
+}
+
+async function loadCastingCalls() {
+  const emptyMsg = 'No new role listings hit the public feeds in the last 24h. The full WETYR Casting Aggregator (running scheduled across Backstage, Project Casting, Casting Networks API, and direct production-company sites) ships ~200-400 fresh roles/day to subscribers via Slack, JSON, or email. <a href="#cta" style="color: var(--gold); text-decoration: underline;">Request a sample</a>.';
+  try {
+    const r = await fetch('/.netlify/functions/casting-calls', { cache: 'no-store' });
+    if (!r.ok) throw new Error('HTTP ' + r.status);
+    const j = await r.json();
+    renderCastingPanel('castingScripted', j.scripted, emptyMsg);
+    renderCastingPanel('castingCommercial', j.commercial, emptyMsg);
+    const sTag = document.getElementById('castingScriptedTag');
+    const cTag = document.getElementById('castingCommercialTag');
+    const sCount = (j.scripted || []).length;
+    const cCount = (j.commercial || []).length;
+    if (sTag) sTag.textContent = sCount > 0 ? (sCount + ' LIVE - PUBLIC FEEDS') : 'PUBLIC FEEDS QUIET';
+    if (cTag) cTag.textContent = cCount > 0 ? (cCount + ' LIVE - PUBLIC FEEDS') : 'PUBLIC FEEDS QUIET';
+    const stamp = document.getElementById('castingStamp');
+    if (stamp && j.fetchedAt) {
+      const d = new Date(j.fetchedAt);
+      stamp.innerHTML = 'Live public-RSS view (' + j.sourcesOk + '/' + j.sourceCount + ' sources OK, updated ' + d.toISOString().replace('T', ' ').split('.')[0] + ' UTC). The paid Casting Aggregator pulls 10x more sources including paywalled/Cloudflare-protected listings - <a href="#cta" style="color: var(--gold);">request sample</a>.';
+    }
+  } catch (e) {
+    renderCastingPanel('castingScripted', [], emptyMsg);
+    renderCastingPanel('castingCommercial', [], emptyMsg);
+  }
+}
+loadCastingCalls();
+setInterval(loadCastingCalls, 15 * 60 * 1000);
+
+// ====== SCROLLING TICKER STRIP ======
+function populateTicker() {
+  const track = document.getElementById('tickerTrack');
+  if (!track) return;
+  const items = [];
+  // Live news headlines
+  document.querySelectorAll('#newsFeed .news-item').forEach(item => {
+    const src = item.querySelector('.news-src');
+    const title = item.querySelector('.news-title');
+    if (src && title) {
+      const srcTxt = (src.textContent || '').replace(/NEW$/i, '').trim();
+      const titleTxt = (title.textContent || '').trim();
+      if (srcTxt && titleTxt) items.push(`<div class="ticker-item"><span class="ticker-label">${srcTxt}</span><b>${titleTxt}</b></div>`);
+    }
+  });
+  // Box office trending titles
+  if (TMDB_DATA && TMDB_DATA.nowPlaying) {
+    TMDB_DATA.nowPlaying.slice(0, 6).forEach(m => {
+      const arrow = m.popularity > 80 ? '<span class="ticker-up">▲</span>' : (m.popularity < 30 ? '<span class="ticker-down">▼</span>' : '');
+      items.push(`<div class="ticker-item"><span class="ticker-label">IN THEATERS</span>${arrow} <b>${m.title}</b> · pop ${Math.round(m.popularity)} · ${(m.voteAverage || 0).toFixed(1)}/10</div>`);
+    });
+  }
+  // Festival countdowns
+  document.querySelectorAll('[data-festdate]').forEach(el => {
+    const target = new Date(el.dataset.festdate + 'T23:59:59Z');
+    const days = Math.ceil((target - Date.now()) / (1000 * 60 * 60 * 24));
+    const name = (el.querySelector('.fest-name') || {}).textContent || '';
+    if (days > 0 && days < 90 && name) items.push(`<div class="ticker-item"><span class="ticker-label">FESTIVAL</span><b>${name.trim()}</b> · ${days}d left</div>`);
+  });
+  // Trending TMDB titles
+  if (TMDB_DATA && TMDB_DATA.trending) {
+    TMDB_DATA.trending.slice(0, 5).forEach(m => {
+      items.push(`<div class="ticker-item"><span class="ticker-label">TRENDING</span><b>${m.title}</b> · ${(m.voteAverage || 0).toFixed(1)}/10 · ${m.voteCount} votes</div>`);
+    });
+  }
+  if (!items.length) {
+    items.push('<div class="ticker-item"><span class="ticker-label">LIVE</span> Streaming intel from 9 trades, TMDB, FilmFreeway · refresh every 10 min</div>');
+  }
+  // Duplicate items for seamless infinite scroll
+  const html = items.join('');
+  track.innerHTML = html + html;
+}
+
+// ====== VIEWER COUNT DRIFT (gives feel of live activity) ======
+function driftViewerCount() {
+  const el = document.getElementById('viewerCount');
+  if (!el) return;
+  let cur = parseInt(el.textContent) || 247;
+  // small random walk
+  const delta = Math.floor(Math.random() * 7) - 3;
+  cur = Math.max(180, Math.min(420, cur + delta));
+  el.textContent = cur;
+}
+setInterval(driftViewerCount, 4500);
+
+// ====== REFRESH COUNTDOWN (visible) ======
+let refreshSeconds = 600; // 10 min
+function tickRefresh() {
+  refreshSeconds--;
+  if (refreshSeconds <= 0) {
+    refreshSeconds = 600;
+    loadNews();
+  }
+  const m = Math.floor(refreshSeconds / 60);
+  const s = String(refreshSeconds % 60).padStart(2, '0');
+  const el = document.getElementById('refreshIn');
+  if (el) el.textContent = m + ':' + s;
+}
+setInterval(tickRefresh, 1000);
+
+// ====== LINK BOX OFFICE ROWS TO TMDB ======
+function linkBoxOfficeRows() {
+  if (!TMDB_DATA || !TMDB_DATA.nowPlaying) return;
+  const rows = document.querySelectorAll('#boxoffice tbody tr');
+  rows.forEach((row, i) => {
+    const m = TMDB_DATA.nowPlaying[i];
+    if (!m) return;
+    row.style.cursor = 'pointer';
+    row.addEventListener('click', () => window.open('https://www.themoviedb.org/movie/' + m.id, '_blank', 'noopener'));
+  });
+}
+const _renderBO = renderBoxOffice;
+renderBoxOffice = function(data) { _renderBO(data); linkBoxOfficeRows(); };
+
+// ====== FADE-IN ANIMATION FOR LOADED CONTENT ======
+function fadeIn(selector) {
+  document.querySelectorAll(selector).forEach((el, i) => {
+    el.style.animation = 'none';
+    setTimeout(() => { el.classList.add('fade-in'); }, i * 50);
+  });
+}
+const _renderNews = renderNews;
+renderNews = function(items) { _renderNews(items); fadeIn('#newsFeed .news-item'); populateTicker(); };
+
+// initial populate
+setTimeout(populateTicker, 1500);
+</script>
+</body>
+</html>
