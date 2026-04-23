@@ -31,6 +31,12 @@
 [functions.email-drip]
   schedule = "0 * * * *"
 
+# Film rolodex auto-sync: every 6 hours (00:00, 06:00, 12:00, 18:00 UTC)
+# Pulls fresh production-co + crew contacts from TMDB + SEC EDGAR into Blobs.
+[functions.film-rolodex-cron]
+  schedule = "0 */6 * * *"
+  timeout = 30
+
 # ─── Clean URL Redirects ──────────────────────────────────────
 [[redirects]]
   from = "/admin"
