@@ -73,8 +73,21 @@ function makeId(prefix, name) {
   return `${prefix}-${base}-${Math.random().toString(36).slice(2, 6)}`;
 }
 
+function openStore() {
+  // Prefer auto-injected Netlify context. Fall back to manual creds if the
+  // environment didn't inject NETLIFY_BLOBS_CONTEXT (happens on some sites).
+  try {
+    return getStore({ name: STORE_NAME, consistency: 'strong' });
+  } catch (e) {
+    const siteID = process.env.NETLIFY_SITE_ID || process.env.SITE_ID || '609d74ca-5f2a-4caa-aa7c-3f6922a7bcb4';
+    const token = process.env.NETLIFY_TOKEN || process.env.NETLIFY_API_TOKEN || process.env.NETLIFY_AUTH_TOKEN;
+    if (!token) throw new Error('Netlify Blobs not configured. Set NETLIFY_TOKEN env var (PAT) on the markcmo site, or wait for blob context injection.');
+    return getStore({ name: STORE_NAME, siteID, token, consistency: 'strong' });
+  }
+}
+
 async function loadStore() {
-  const store = getStore({ name: STORE_NAME, consistency: 'strong' });
+  const store = openStore();
   let companies = await store.get('companies', { type: 'json' });
   let people = await store.get('people', { type: 'json' });
   let bootstrapped = false;

@@ -115,8 +115,19 @@ exports.handler = async (event) => {
     return i >= 0 ? normalize(r[i]) : '';
   };
 
+  function openStore() {
+    try {
+      return getStore({ name: STORE_NAME, consistency: 'strong' });
+    } catch (e) {
+      const siteID = process.env.NETLIFY_SITE_ID || process.env.SITE_ID || '609d74ca-5f2a-4caa-aa7c-3f6922a7bcb4';
+      const token = process.env.NETLIFY_TOKEN || process.env.NETLIFY_API_TOKEN || process.env.NETLIFY_AUTH_TOKEN;
+      if (!token) throw new Error('Netlify Blobs not configured. Set NETLIFY_TOKEN env var (PAT) on the markcmo site.');
+      return getStore({ name: STORE_NAME, siteID, token, consistency: 'strong' });
+    }
+  }
+
   try {
-    const store = getStore({ name: STORE_NAME, consistency: 'strong' });
+    const store = openStore();
     const existingCompanies = (await store.get('companies', { type: 'json' })) || [];
     const existingPeople = (await store.get('people', { type: 'json' })) || [];
 

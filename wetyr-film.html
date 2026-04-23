@@ -327,7 +327,8 @@ tbody tr a { color: inherit; text-decoration: none; display: block; }
 
 /* ── ROLODEX (internal) ───────────────────────────────────────────── */
 .rx-bar { display: grid; grid-template-columns: 2fr 1fr 1fr auto; gap: 10px; margin-bottom: 16px; }
-@media (max-width: 760px) { .rx-bar { grid-template-columns: 1fr; } }
+@media (max-width: 900px) { .rx-bar { grid-template-columns: 1fr 1fr; } .rx-bar .rx-input { grid-column: 1 / -1; } .rx-bar .rx-btn { grid-column: 1 / -1; } }
+@media (max-width: 520px) { .rx-bar { grid-template-columns: 1fr; } #rolodex .section-head { flex-direction: column; align-items: flex-start; } #rolodex h2 { font-size: 22px; } .rx-cards { grid-template-columns: 1fr; } .rx-tools { gap: 6px; } .rx-tools .rx-btn-ghost { padding: 8px 10px; font-size: 11px; } }
 .rx-input, .rx-select { background: var(--panel-2); border: 1px solid var(--border-hot); color: var(--text); padding: 10px 12px; border-radius: 8px; font-size: 14px; width: 100%; font-family: inherit; }
 .rx-input:focus, .rx-select:focus { outline: none; border-color: var(--gold); }
 .rx-btn { background: var(--gold); color: #0a0a0a; border: 0; padding: 10px 16px; border-radius: 8px; font-weight: 700; font-size: 13px; cursor: pointer; white-space: nowrap; }
@@ -716,11 +717,6 @@ tbody tr a { color: inherit; text-decoration: none; display: block; }
 
     <!-- AUTHED PANE -->
     <div id="rxAuthedPane" style="display: none;">
-      <div class="rx-internal-banner">
-        <span style="font-size: 16px;">●</span>
-        Internal-only. Records here are not exposed publicly. Add private contacts via <b>Add</b> or <b>Import CSV</b>. Optional Hunter.io email enrichment requires <code style="color: var(--text);">HUNTER_API_KEY</code> env var.
-      </div>
-
       <div class="rx-bar">
         <input id="rxQ" class="rx-input" type="search" placeholder="Search by name, company, email, address, IMDb id..." />
         <select id="rxType" class="rx-select"><option value="">All types</option></select>
