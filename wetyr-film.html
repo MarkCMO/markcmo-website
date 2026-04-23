@@ -718,10 +718,43 @@ tbody tr a { color: inherit; text-decoration: none; display: block; }
     <!-- AUTHED PANE -->
     <div id="rxAuthedPane" style="display: none;">
       <div class="rx-bar">
-        <input id="rxQ" class="rx-input" type="search" placeholder="Search by name, company, email, address, IMDb id..." />
+        <input id="rxQ" class="rx-input" type="search" placeholder="Search by name, company, email, address, IMDb id, production..." />
         <select id="rxType" class="rx-select"><option value="">All types</option></select>
         <select id="rxTag" class="rx-select"><option value="">All tags</option></select>
         <button id="rxRefresh" class="rx-btn">Search</button>
+      </div>
+      <div class="rx-bar" style="margin-top:8px;">
+        <select id="rxSort" class="rx-select" title="Sort by">
+          <option value="name-asc">Sort: Name A-Z</option>
+          <option value="name-desc">Sort: Name Z-A</option>
+          <option value="company-asc">Sort: Company A-Z</option>
+          <option value="company-desc">Sort: Company Z-A</option>
+          <option value="production-asc">Sort: Production A-Z</option>
+          <option value="production-desc">Sort: Production Z-A</option>
+          <option value="updated-desc">Sort: Recently updated</option>
+          <option value="added-desc">Sort: Recently added</option>
+        </select>
+        <select id="rxFilterEmail" class="rx-select" title="Filter by contact info">
+          <option value="">All contacts</option>
+          <option value="has-email">Has email</option>
+          <option value="no-email">Missing email</option>
+          <option value="has-phone">Has phone</option>
+          <option value="no-phone">Missing phone</option>
+          <option value="has-production">Has production credit</option>
+        </select>
+        <select id="rxFilterDept" class="rx-select" title="Filter by department">
+          <option value="">All departments</option>
+        </select>
+        <button id="rxClearFilters" class="rx-btn-ghost">Clear filters</button>
+        <select id="rxPerPage" class="rx-select" title="Results per page" style="margin-left:auto;">
+          <option value="25" selected>25 per page</option>
+          <option value="5">5 per page</option>
+          <option value="10">10 per page</option>
+          <option value="50">50 per page</option>
+          <option value="100">100 per page</option>
+          <option value="250">250 per page</option>
+          <option value="500">500 per page</option>
+        </select>
       </div>
 
       <div class="rx-tools">
@@ -730,6 +763,7 @@ tbody tr a { color: inherit; text-decoration: none; display: block; }
         <button class="rx-btn-ghost" id="rxImportBtn">Import CSV</button>
         <button class="rx-btn-ghost" id="rxExportBtn">Export CSV</button>
         <button class="rx-btn-ghost" id="rxSyncBtn" style="border-color: var(--gold); color: var(--gold);">Sync Now</button>
+        <button class="rx-btn-ghost" id="rxDeepSyncBtn" style="border-color: var(--gold); color: var(--gold);">Deep Crawl</button>
       </div>
 
       <div class="rx-stats" id="rxStats">Loading...</div>
@@ -740,6 +774,12 @@ tbody tr a { color: inherit; text-decoration: none; display: block; }
       </div>
 
       <div id="rxResults" class="rx-cards"></div>
+
+      <div id="rxPager" class="rx-bar" style="margin-top: 14px; justify-content: center; flex-wrap: wrap;">
+        <button id="rxPagePrev" class="rx-btn-ghost" type="button">‹ Prev</button>
+        <span id="rxPageInfo" style="color: var(--muted); padding: 0 10px; align-self: center;">Page 1 of 1</span>
+        <button id="rxPageNext" class="rx-btn-ghost" type="button">Next ›</button>
+      </div>
     </div>
   </div>
 </section>
@@ -1432,7 +1472,21 @@ setTimeout(populateTicker, 1500);
     data: { companies: [], people: [], facets: { types: [], tags: [], depts: [] }, total: {} },
     modalMode: null,
     editId: null,
+    sort: 'name-asc',
+    filterContact: '',
+    filterDept: '',
+    page: 1,
+    perPage: 25,
   };
+
+  const sortSel        = $('#rxSort');
+  const filterEmailSel = $('#rxFilterEmail');
+  const filterDeptSel  = $('#rxFilterDept');
+  const clearFiltersBtn = $('#rxClearFilters');
+  const perPageSel     = $('#rxPerPage');
+  const pagePrevBtn    = $('#rxPagePrev');
+  const pageNextBtn    = $('#rxPageNext');
+  const pageInfoEl     = $('#rxPageInfo');
 
   function showMsg(el, kind, text) {
     el.innerHTML = '';
@@ -1508,6 +1562,15 @@ setTimeout(populateTicker, 1500);
     const curT = typeSel.value, curG = tagSel.value;
     typeSel.innerHTML = '<option value="">All types</option>' + (state.data.facets.types || []).map(t => `<option ${t===curT?'selected':''}>${t}</option>`).join('');
     tagSel.innerHTML  = '<option value="">All tags</option>'  + (state.data.facets.tags  || []).map(t => `<option ${t===curG?'selected':''}>${t}</option>`).join('');
+
+    // Build dept facet from current people if backend doesn't provide one
+    const deptSet = new Set(state.data.facets.depts || []);
+    (state.data.people || []).forEach(p => { if (p.dept) deptSet.add(p.dept); });
+    const depts = Array.from(deptSet).sort();
+    const curD = filterDeptSel.value;
+    filterDeptSel.innerHTML = '<option value="">All departments</option>' +
+      depts.map(d => `<option value="${escHtml(d)}" ${d===curD?'selected':''}>${escHtml(d)}</option>`).join('');
+    if (state.filterDept && depts.includes(state.filterDept)) filterDeptSel.value = state.filterDept;
   }
 
   function renderStats() {
@@ -1515,7 +1578,7 @@ setTimeout(populateTicker, 1500);
     statsEl.innerHTML = `
       <span><b>${t.filteredCompanies ?? 0}</b> / ${t.companies ?? 0} companies</span>
       <span><b>${t.filteredPeople ?? 0}</b> / ${t.people ?? 0} contacts</span>
-      <span>Storage: Netlify Blobs</span>
+      <span id="rxFilterCount" style="color: var(--gold);"></span>
     `;
   }
 
@@ -1523,15 +1586,18 @@ setTimeout(populateTicker, 1500);
 
   function companyCard(c) {
     const tags = (c.tags || []).map(t => `<span class="rx-tag">${escHtml(t)}</span>`).join('');
+    const prods = (c.productions || []).slice(0, 6);
     return `
       <div class="rx-card" data-id="${escHtml(c.id)}" data-kind="company">
         <div class="rx-card-name">${escHtml(c.name)}</div>
         <div class="rx-card-sub">${escHtml(c.type || 'company')}${c.parent?' &middot; '+escHtml(c.parent):''}</div>
         ${c.hq ? `<div class="rx-card-line">📍 ${escHtml(c.hq)}</div>` : ''}
         ${c.website ? `<div class="rx-card-line">🌐 <a href="${escHtml(c.website)}" target="_blank" rel="noopener">${escHtml(c.website.replace(/^https?:\/\//,''))}</a></div>` : ''}
-        ${c.phone ? `<div class="rx-card-line">📞 ${escHtml(c.phone)}</div>` : ''}
+        ${c.phone ? `<div class="rx-card-line">📞 ${escHtml(c.phone)}${c.phone_secondary?' &middot; '+escHtml(c.phone_secondary):''}</div>` : ''}
+        ${c.email ? `<div class="rx-card-line">✉ <a href="mailto:${escHtml(c.email)}">${escHtml(c.email)}</a>${c.email_secondary?' &middot; <a href="mailto:'+escHtml(c.email_secondary)+'">'+escHtml(c.email_secondary)+'</a>':''}</div>` : ''}
         ${c.imdb ? `<div class="rx-card-line">🎬 IMDb: <a href="https://www.imdb.com/company/${escHtml(c.imdb)}/" target="_blank" rel="noopener">${escHtml(c.imdb)}</a></div>` : ''}
         ${c.sec_cik ? `<div class="rx-card-line">📑 SEC CIK: <a href="https://www.sec.gov/cgi-bin/browse-edgar?action=getcompany&CIK=${escHtml(c.sec_cik)}" target="_blank" rel="noopener">${escHtml(c.sec_cik)}</a></div>` : ''}
+        ${prods.length ? `<div class="rx-card-line" style="margin-top:6px;">🎞 <span style="color:var(--gold);">Productions:</span> ${prods.map(p=>escHtml(p)).join(' &middot; ')}</div>` : ''}
         ${c.notes ? `<div class="rx-card-line" style="color: var(--dim); margin-top: 8px;">${escHtml(c.notes)}</div>` : ''}
         <div style="margin-top: 8px;">${tags}</div>
         <div style="margin-top: 10px; display: flex; gap: 6px;">
@@ -1550,6 +1616,7 @@ setTimeout(populateTicker, 1500);
         ${p.phone ? `<div class="rx-card-line">📞 ${escHtml(p.phone)}</div>` : ''}
         ${p.linkedin ? `<div class="rx-card-line">🔗 <a href="${escHtml(p.linkedin)}" target="_blank" rel="noopener">LinkedIn</a></div>` : ''}
         ${p.imdb ? `<div class="rx-card-line">🎬 <a href="https://www.imdb.com/name/${escHtml(p.imdb)}/" target="_blank" rel="noopener">IMDb profile</a></div>` : ''}
+        ${(p.productions||[]).length ? `<div class="rx-card-line" style="margin-top:6px;">🎞 <span style="color:var(--gold);">Worked on:</span> ${(p.productions||[]).slice(0,5).map(t=>escHtml(t)).join(' &middot; ')}</div>` : ''}
         ${p.notes ? `<div class="rx-card-line" style="color: var(--dim); margin-top: 6px;">${escHtml(p.notes)}</div>` : ''}
         <div style="margin-top: 10px; display: flex; gap: 6px; flex-wrap: wrap;">
           <button class="rx-btn-ghost" data-action="edit-person" data-id="${escHtml(p.id)}">Edit</button>
@@ -1559,12 +1626,82 @@ setTimeout(populateTicker, 1500);
       </div>`;
   }
 
+  function applyContactFilter(rows, isCompany) {
+    const f = state.filterContact;
+    if (!f) return rows;
+    return rows.filter(r => {
+      if (f === 'has-email') return !!r.email;
+      if (f === 'no-email')  return !r.email;
+      if (f === 'has-phone') return !!r.phone;
+      if (f === 'no-phone')  return !r.phone;
+      if (f === 'has-production') return Array.isArray(r.productions) && r.productions.length > 0;
+      return true;
+    });
+  }
+
+  function applyDeptFilter(rows, isCompany) {
+    if (!state.filterDept) return rows;
+    if (isCompany) return rows; // dept is people-only
+    return rows.filter(p => (p.dept || '').toLowerCase() === state.filterDept.toLowerCase());
+  }
+
+  function sortRows(rows, isCompany) {
+    const s = state.sort || 'name-asc';
+    const [key, dir] = s.split('-');
+    const mult = dir === 'desc' ? -1 : 1;
+    const get = (row) => {
+      if (key === 'name')       return (row.name || '').toLowerCase();
+      if (key === 'company')    return (isCompany ? (row.name || '') : (row._companyName || '')).toLowerCase();
+      if (key === 'production') return ((row.productions && row.productions[0]) || '').toLowerCase();
+      if (key === 'updated')    return Number(row.updated_at || row.updatedAt || row.updated || 0);
+      if (key === 'added')      return Number(row.created_at || row.createdAt || row.added || 0);
+      return '';
+    };
+    return rows.slice().sort((a, b) => {
+      const va = get(a), vb = get(b);
+      if (va < vb) return -1 * mult;
+      if (va > vb) return 1 * mult;
+      return 0;
+    });
+  }
+
   function renderResults() {
-    if (state.activeTab === 'companies') {
-      resultsEl.innerHTML = (state.data.companies || []).map(companyCard).join('') || '<div style="color: var(--dim); padding: 30px; text-align: center;">No companies match.</div>';
-    } else {
-      resultsEl.innerHTML = (state.data.people || []).map(personCard).join('') || '<div style="color: var(--dim); padding: 30px; text-align: center;">No contacts match. Add some via "+ Contact" or "Import CSV".</div>';
+    const isCompany = state.activeTab === 'companies';
+    let rows = isCompany ? (state.data.companies || []) : (state.data.people || []);
+    rows = applyContactFilter(rows, isCompany);
+    rows = applyDeptFilter(rows, isCompany);
+    rows = sortRows(rows, isCompany);
+
+    // ── Pagination ─────────────────────────────────────────────
+    const totalRows = rows.length;
+    const perPage = state.perPage > 0 ? state.perPage : 25;
+    const totalPages = Math.max(1, Math.ceil(totalRows / perPage));
+    if (state.page > totalPages) state.page = totalPages;
+    if (state.page < 1) state.page = 1;
+    const startIdx = (state.page - 1) * perPage;
+    const pageRows = rows.slice(startIdx, startIdx + perPage);
+
+    const card = isCompany ? companyCard : personCard;
+    const empty = isCompany
+      ? '<div style="color: var(--dim); padding: 30px; text-align: center;">No companies match.</div>'
+      : '<div style="color: var(--dim); padding: 30px; text-align: center;">No contacts match. Add some via "+ Contact" or "Import CSV".</div>';
+    resultsEl.innerHTML = totalRows ? pageRows.map(card).join('') : empty;
+
+    // update visible filtered count
+    const total = isCompany ? (state.data.total?.companies ?? 0) : (state.data.total?.people ?? 0);
+    const sub = document.getElementById('rxFilterCount');
+    if (sub) sub.textContent = `${totalRows} of ${total} shown`;
+
+    // update pager
+    if (pageInfoEl) {
+      const from = totalRows === 0 ? 0 : startIdx + 1;
+      const to = Math.min(startIdx + perPage, totalRows);
+      pageInfoEl.textContent = `Page ${state.page} of ${totalPages} (${from}–${to} of ${totalRows})`;
     }
+    if (pagePrevBtn) pagePrevBtn.disabled = state.page <= 1;
+    if (pageNextBtn) pageNextBtn.disabled = state.page >= totalPages;
+    const pagerEl = document.getElementById('rxPager');
+    if (pagerEl) pagerEl.style.display = totalRows > perPage ? '' : (totalRows > 0 ? '' : 'none');
   }
 
   // ── modal helpers ─────────────────────────────────────────────────
@@ -1706,7 +1843,7 @@ setTimeout(populateTicker, 1500);
   }
 
   async function enrich(id) {
-    statsEl.textContent = 'Looking up email via Hunter.io...';
+    statsEl.textContent = 'Searching company site, Wikipedia, and (if configured) Hunter.io for this contact...';
     try {
       const r = await fetch('/.netlify/functions/film-rolodex', {
         method: 'POST', credentials: 'include',
@@ -1715,6 +1852,14 @@ setTimeout(populateTicker, 1500);
       });
       const j = await r.json();
       if (!j.ok) { alert(j.reason || j.error || 'No match.'); statsEl.textContent = ''; return; }
+      const f = j.found || {};
+      const bits = [];
+      if (j.verified) bits.push('verified email saved');
+      if (f.emails && f.emails.length) bits.push(f.emails.length + ' email(s) found');
+      if (f.phones && f.phones.length) bits.push(f.phones.length + ' phone(s)');
+      if (f.candidates && f.candidates.length) bits.push(f.candidates.length + ' email pattern guess(es)');
+      if (f.wiki) bits.push('Wikipedia bio attached');
+      statsEl.textContent = 'Enrich done: ' + (bits.length ? bits.join(' · ') : 'nothing new found');
       fetchRolodex();
     } catch (e) { alert(e.message); }
   }
@@ -1752,10 +1897,38 @@ setTimeout(populateTicker, 1500);
   typeSel.addEventListener('change', fetchRolodex);
   tagSel.addEventListener('change', fetchRolodex);
 
+  // sort/filter — client-side, no refetch needed
+  sortSel.addEventListener('change', () => { state.sort = sortSel.value; state.page = 1; renderResults(); });
+  filterEmailSel.addEventListener('change', () => { state.filterContact = filterEmailSel.value; state.page = 1; renderResults(); });
+  filterDeptSel.addEventListener('change', () => { state.filterDept = filterDeptSel.value; state.page = 1; renderResults(); });
+  clearFiltersBtn.addEventListener('click', () => {
+    state.sort = 'name-asc';
+    state.filterContact = '';
+    state.filterDept = '';
+    state.page = 1;
+    sortSel.value = 'name-asc';
+    filterEmailSel.value = '';
+    filterDeptSel.value = '';
+    qInput.value = '';
+    typeSel.value = '';
+    tagSel.value = '';
+    fetchRolodex();
+  });
+
+  // pagination
+  perPageSel.addEventListener('change', () => {
+    state.perPage = parseInt(perPageSel.value, 10) || 25;
+    state.page = 1;
+    renderResults();
+  });
+  pagePrevBtn.addEventListener('click', () => { if (state.page > 1) { state.page--; renderResults(); resultsEl.scrollIntoView({ behavior: 'smooth', block: 'start' }); } });
+  pageNextBtn.addEventListener('click', () => { state.page++; renderResults(); resultsEl.scrollIntoView({ behavior: 'smooth', block: 'start' }); });
+
   tabBtns.forEach(b => b.addEventListener('click', () => {
     tabBtns.forEach(x => x.classList.remove('active'));
     b.classList.add('active');
     state.activeTab = b.dataset.rxtab;
+    state.page = 1;
     renderResults();
   }));
 
@@ -1764,6 +1937,7 @@ setTimeout(populateTicker, 1500);
   $('#rxImportBtn').addEventListener('click',     () => openModal('Import CSV',  importForm(), 'import'));
   $('#rxExportBtn').addEventListener('click', exportCSV);
   $('#rxSyncBtn').addEventListener('click', syncNow);
+  $('#rxDeepSyncBtn').addEventListener('click', deepSyncNow);
 
   async function syncNow() {
     const btn = $('#rxSyncBtn');
@@ -1787,6 +1961,34 @@ setTimeout(populateTicker, 1500);
       }
     } catch (e) {
       statsEl.textContent = 'Sync failed: ' + e.message;
+    } finally {
+      btn.textContent = original;
+      btn.disabled = false;
+    }
+  }
+
+  async function deepSyncNow() {
+    const btn = $('#rxDeepSyncBtn');
+    const original = btn.textContent;
+    btn.textContent = 'Crawling...';
+    btn.disabled = true;
+    statsEl.textContent = 'Deep-crawling 25 company sites for emails / phones / personnel / productions (this can take 60-90s)...';
+    try {
+      const r = await fetch('/.netlify/functions/film-rolodex-deep-cron', {
+        method: 'POST', credentials: 'include',
+        headers: { 'Content-Type': 'application/json' },
+        body: '{}',
+      });
+      const j = await r.json();
+      if (!r.ok || !j.ok) {
+        statsEl.textContent = 'Deep crawl error: ' + (j.error || r.status);
+      } else {
+        const s = j.sync || {};
+        statsEl.textContent = `Deep crawl in ${(j.runMs/1000).toFixed(1)}s. Crawled ${j.crawled} sites (${j.pages} pages). Companies upd ${s.cUpdated||0}. People +${s.pAdded||0}/upd ${s.pUpdated||0}. Total ${s.totalCompanies}/${s.totalPeople}.`;
+        fetchRolodex();
+      }
+    } catch (e) {
+      statsEl.textContent = 'Deep crawl failed: ' + e.message;
     } finally {
       btn.textContent = original;
       btn.disabled = false;

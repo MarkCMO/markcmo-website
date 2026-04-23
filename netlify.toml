@@ -27,6 +27,11 @@
 [functions.course-exam]
   timeout = 10
 
+# Find-email button runs deep-crawl + Wikipedia + (optional) Hunter
+# inside film-rolodex.js → needs more than the 10s default.
+[functions.film-rolodex]
+  timeout = 26
+
 # ─── Scheduled Functions ──────────────────────────────────────
 [functions.email-drip]
   schedule = "0 * * * *"
@@ -36,6 +41,14 @@
 [functions.film-rolodex-cron]
   schedule = "0 */6 * * *"
   timeout = 30
+
+# Deep-website crawl: daily at 09:00 UTC. Crawls 25 company sites per run on
+# a round-robin cursor (covers all ~140 companies every ~6 days). Extracts
+# emails, phones, named personnel + their titles, and production credits
+# straight from About / Team / Leadership / Contact / Press pages.
+[functions.film-rolodex-deep-cron]
+  schedule = "0 9 * * *"
+  timeout = 26
 
 # ─── Clean URL Redirects ──────────────────────────────────────
 [[redirects]]
@@ -101,6 +114,27 @@
 [[redirects]]
   from = "/founding-status"
   to = "/.netlify/functions/founding-status"
+  status = 200
+
+# Film rolodex endpoints
+[[redirects]]
+  from = "/film-rolodex"
+  to = "/.netlify/functions/film-rolodex"
+  status = 200
+
+[[redirects]]
+  from = "/film-rolodex-import"
+  to = "/.netlify/functions/film-rolodex-import"
+  status = 200
+
+[[redirects]]
+  from = "/film-rolodex-cron"
+  to = "/.netlify/functions/film-rolodex-cron"
+  status = 200
+
+[[redirects]]
+  from = "/film-rolodex-deep-cron"
+  to = "/.netlify/functions/film-rolodex-deep-cron"
   status = 200
 
 # ─── Performance: Cache Static Assets ─────────────────────────

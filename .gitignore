@@ -36,6 +36,7 @@ npm-debug.log*
 /tmp/
 *.py
 sync-to-sheets.py
+!.github/scripts/*.py
 
 # Large binary/zip files
 *.zip

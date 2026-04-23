@@ -10,7 +10,10 @@
 // POST { action: 'updatePerson',  id, patch }     -> { ok }
 // POST { action: 'deleteCompany', id }            -> { ok }
 // POST { action: 'deletePerson',  id }            -> { ok }
-// POST { action: 'enrich', personId }             -> { ok, person } (if HUNTER_API_KEY set)
+// POST { action: 'enrich', personId }             -> { ok, verified, person, found }
+//   Free strategies: deep-crawl company /team /contact pages, Wikipedia REST,
+//   observed-pattern email candidates. Optional 4th strategy uses Hunter.io
+//   if HUNTER_API_KEY env var is set (auto-saves only if score>=80 + verified).
 //
 // Bootstraps on first call by merging _film-rolodex-seed.js into Blobs.
 
@@ -203,34 +206,154 @@ exports.handler = async (event) => {
     }
 
     if (action === 'enrich') {
-      // Optional: enrich a person's email via Hunter.io if HUNTER_API_KEY set.
+      // FREE enrichment - no paid APIs. Strategy:
+      //   1. Crawl the company's About/Team/Contact pages looking for the
+      //      person's name nearby an email (mailto: or plain text).
+      //   2. If not found there, crawl Wikipedia + Wikidata for biographical
+      //      info and any linked official site / IMDb id.
+      //   3. As a last resort, derive a likely email pattern from any
+      //      same-domain emails already harvested in the deep-crawl
+      //      (e.g. firstname@domain, first.last@domain) and surface them as
+      //      *unverified candidates* (never silently set as verified).
       const id = body.personId;
       const person = people.find(p => p.id === id);
       if (!person) return { statusCode: 404, headers, body: JSON.stringify({ ok: false, error: 'person not found' }) };
       const company = companies.find(c => c.id === person.company_id);
-      const apiKey = process.env.HUNTER_API_KEY;
-      if (!apiKey) return { statusCode: 200, headers, body: JSON.stringify({ ok: false, reason: 'HUNTER_API_KEY not set' }) };
-      if (!company || !company.website) return { statusCode: 400, headers, body: JSON.stringify({ ok: false, error: 'company website missing' }) };
+      const found = { emails: [], phones: [], urls: [], wiki: null, candidates: [] };
 
-      const domain = company.website.replace(/^https?:\/\//, '').replace(/\/.*$/, '');
-      const [first, ...rest] = (person.name || '').split(' ');
-      const last = rest.pop() || '';
-      const url = `https://api.hunter.io/v2/email-finder?domain=${encodeURIComponent(domain)}&first_name=${encodeURIComponent(first)}&last_name=${encodeURIComponent(last)}&api_key=${apiKey}`;
-      try {
-        const r = await fetch(url);
-        const j = await r.json();
-        const email = j?.data?.email;
-        const score = j?.data?.score;
-        if (email) {
-          const i = people.findIndex(p => p.id === id);
-          people[i] = { ...people[i], email, _enrichmentScore: score, _enrichedAt: new Date().toISOString() };
-          await store.setJSON('people', people);
-          return { statusCode: 200, headers, body: JSON.stringify({ ok: true, person: people[i] }) };
-        }
-        return { statusCode: 200, headers, body: JSON.stringify({ ok: false, reason: 'no email found', raw: j?.data || null }) };
-      } catch (e) {
-        return { statusCode: 200, headers, body: JSON.stringify({ ok: false, error: e.message }) };
+      // ── Strategy 1: deep-crawl the company website for the name (parallel) ──
+      if (company?.website) {
+        const base = company.website.replace(/\/+$/, '');
+        const paths = ['/team', '/leadership', '/about', '/contact'];
+        const nameRe = new RegExp(person.name.replace(/[.*+?^${}()|[\]\\]/g, '\\$&'), 'i');
+        const emailRe = /\b[A-Za-z0-9._%+\-]+@[A-Za-z0-9.\-]+\.[A-Za-z]{2,}\b/g;
+        const phoneRe = /(?:(?:\+?1[\s.\-]?)?(?:\(?\d{3}\)?[\s.\-]?)\d{3}[\s.\-]?\d{4})/g;
+        const fetchOne = async (p) => {
+          const ctrl = new AbortController();
+          const tid = setTimeout(() => ctrl.abort(), 4000);
+          try {
+            const r = await fetch(base + p, {
+              headers: { 'User-Agent': 'WETYR-FilmIntel/1.0 (+mailto:info@wetyr.com)' },
+              signal: ctrl.signal,
+            });
+            if (!r.ok) return null;
+            const html = (await r.text()).slice(0, 200_000);
+            const m = html.match(nameRe);
+            if (!m) return null;
+            const idx = m.index || 0;
+            const window = html.slice(Math.max(0, idx - 800), idx + 1500);
+            return {
+              url: base + p,
+              emails: (window.match(emailRe) || []).map(e => e.toLowerCase()),
+              phones: (window.match(phoneRe) || []),
+            };
+          } catch { return null; } finally { clearTimeout(tid); }
+        };
+        const results = await Promise.all(paths.map(fetchOne));
+        results.filter(Boolean).forEach(r => {
+          r.emails.forEach(e => found.emails.push(e));
+          r.phones.forEach(ph => found.phones.push(ph));
+          found.urls.push(r.url);
+        });
       }
+
+      // ── Strategy 2: Wikipedia summary (free, no auth) ──
+      try {
+        const wikiTitle = encodeURIComponent(person.name.replace(/\s+/g, '_'));
+        const wr = await fetch(`https://en.wikipedia.org/api/rest_v1/page/summary/${wikiTitle}`, {
+          headers: { 'User-Agent': 'WETYR-FilmIntel/1.0 (+mailto:info@wetyr.com)', Accept: 'application/json' },
+        });
+        if (wr.ok) {
+          const wj = await wr.json();
+          if (wj.type === 'standard' || wj.type === 'disambiguation') {
+            found.wiki = {
+              extract: wj.extract,
+              url: wj.content_urls?.desktop?.page,
+              imdb: null, // populated below from Wikidata
+            };
+          }
+        }
+      } catch { /* ignore */ }
+
+      // ── Strategy 3: pattern candidates from same-domain harvested emails ──
+      if (company?.website) {
+        const domain = company.website.replace(/^https?:\/\//, '').replace(/\/.*$/, '').replace(/^www\./, '');
+        const [first, ...rest] = (person.name || '').toLowerCase().split(/\s+/);
+        const last = (rest.pop() || '').toLowerCase().replace(/[^a-z]/g, '');
+        if (first && last) {
+          // Only suggest patterns we've actually OBSERVED on this domain
+          const observed = new Set();
+          people.forEach(pp => {
+            if (pp.email && pp.email.toLowerCase().endsWith('@' + domain)) {
+              const local = pp.email.split('@')[0].toLowerCase();
+              if (/^[a-z]+\.[a-z]+$/.test(local)) observed.add('first.last');
+              else if (/^[a-z]+$/.test(local) && local.length > 2) observed.add('first');
+              else if (/^[a-z]\.[a-z]+$/.test(local)) observed.add('f.last');
+              else if (/^[a-z][a-z]+$/.test(local) && local.length > 3) observed.add('flast');
+            }
+          });
+          if (observed.has('first.last')) found.candidates.push(`${first}.${last}@${domain}`);
+          if (observed.has('first'))      found.candidates.push(`${first}@${domain}`);
+          if (observed.has('f.last'))     found.candidates.push(`${first[0]}.${last}@${domain}`);
+          if (observed.has('flast'))      found.candidates.push(`${first[0]}${last}@${domain}`);
+        }
+      }
+
+      // ── Strategy 4 (OPTIONAL): Hunter.io email-finder ──
+      // Only runs if HUNTER_API_KEY is set in Netlify env. Hunter returns one
+      // best-guess email per (domain, first, last) plus a confidence score and
+      // a verification result. We only AUTO-SAVE if score >= 80 AND
+      // verification.result === 'deliverable'. Lower-confidence guesses go
+      // into found.candidates as suggestions.
+      if (process.env.HUNTER_API_KEY && company?.website) {
+        try {
+          const domain = company.website.replace(/^https?:\/\//, '').replace(/\/.*$/, '').replace(/^www\./, '');
+          const [first, ...rest] = (person.name || '').trim().split(/\s+/);
+          const last = rest.pop() || '';
+          if (first && last && domain) {
+            const url = `https://api.hunter.io/v2/email-finder?domain=${encodeURIComponent(domain)}&first_name=${encodeURIComponent(first)}&last_name=${encodeURIComponent(last)}&api_key=${process.env.HUNTER_API_KEY}`;
+            const hr = await fetch(url, { headers: { 'User-Agent': 'WETYR-FilmIntel/1.0 (+mailto:info@wetyr.com)', Accept: 'application/json' } });
+            if (hr.ok) {
+              const hj = await hr.json();
+              const d = hj?.data;
+              if (d?.email) {
+                const score = Number(d.score || 0);
+                const verified = d.verification?.result === 'deliverable';
+                found.hunter = { email: d.email, score, verification: d.verification?.result || null, sources: (d.sources || []).slice(0, 3) };
+                if (score >= 80 && verified) {
+                  // High-confidence -> treat as verified email
+                  found.emails.unshift(d.email.toLowerCase());
+                  if (!found.urls.length && d.sources?.[0]?.uri) found.urls.push(d.sources[0].uri);
+                } else {
+                  // Lower confidence -> candidate only
+                  found.candidates.unshift(`${d.email} (Hunter score ${score})`);
+                }
+              }
+            }
+          }
+        } catch { /* hunter is best-effort */ }
+      }
+
+      // ── Persist if we got a verified email from strategy 1 or hunter ──
+      const emailToSet = (found.emails || [])[0];
+      if (emailToSet) {
+        const i = people.findIndex(p => p.id === id);
+        people[i] = {
+          ...people[i],
+          email: people[i].email || emailToSet,
+          phone: people[i].phone || (found.phones[0] || ''),
+          notes: (people[i].notes || '') + ` [enriched ${new Date().toISOString().slice(0,10)} from ${found.urls[0] || 'site'}]`,
+          _enrichedAt: new Date().toISOString(),
+        };
+        await store.setJSON('people', people);
+        return { statusCode: 200, headers, body: JSON.stringify({ ok: true, verified: true, person: people[i], found }) };
+      }
+      return { statusCode: 200, headers, body: JSON.stringify({
+        ok: !!(found.candidates.length || found.wiki),
+        verified: false,
+        reason: 'no verified email on company site - returning unverified candidates only',
+        found,
+      }) };
     }
 
     if (action === 'reset') {

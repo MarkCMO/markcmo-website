@@ -1,0 +1,61 @@
+name: Film Rolodex deep scrape
+
+# Runs the deep website crawl on GitHub's free runners (no Netlify
+# function timeout). Crawls all 140+ rolodex companies in one pass and
+# POSTs the harvested rows into markcmo.com via the existing admin-gated
+# /film-rolodex-import endpoint. NO Netlify token required - it
+# authenticates with the same admin user/password that the rolodex UI uses.
+#
+# Secrets required on the GitHub repo (Settings -> Secrets -> Actions):
+#   MARKCMO_ADMIN_USER     - your rolodex admin username
+#   MARKCMO_ADMIN_PASSWORD - that user's password
+
+on:
+  schedule:
+    # Daily 09:30 UTC (~30 min after the Netlify deep-cron, so they don't race)
+    - cron: '30 9 * * *'
+  workflow_dispatch:
+    inputs:
+      limit:
+        description: 'Limit to N companies (blank = all)'
+        required: false
+        default: ''
+      only:
+        description: 'Only scrape company name containing this substring'
+        required: false
+        default: ''
+
+jobs:
+  scrape:
+    runs-on: ubuntu-latest
+    timeout-minutes: 60
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Install deps
+        run: pip install requests
+
+      - name: Run deep scrape and import
+        env:
+          MARKCMO_ADMIN_USER:     ${{ secrets.MARKCMO_ADMIN_USER }}
+          MARKCMO_ADMIN_PASSWORD: ${{ secrets.MARKCMO_ADMIN_PASSWORD }}
+          MARKCMO_BASE_URL:       https://markcmo.com
+          SCRAPE_LIMIT:           ${{ github.event.inputs.limit }}
+          SCRAPE_ONLY:            ${{ github.event.inputs.only }}
+        run: python .github/scripts/film_rolodex_scrape.py
+
+      - name: Upload CSV artifacts
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: rolodex-csv-${{ github.run_id }}
+          path: |
+            output/*.csv
+          if-no-files-found: ignore
+          retention-days: 14
