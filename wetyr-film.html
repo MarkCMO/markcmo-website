@@ -324,6 +324,45 @@ tbody tr a { color: inherit; text-decoration: none; display: block; }
   .stat { padding: 8px; }
   .stat-val { font-size: 16px; }
 }
+
+/* ── ROLODEX (internal) ───────────────────────────────────────────── */
+.rx-bar { display: grid; grid-template-columns: 2fr 1fr 1fr auto; gap: 10px; margin-bottom: 16px; }
+@media (max-width: 760px) { .rx-bar { grid-template-columns: 1fr; } }
+.rx-input, .rx-select { background: var(--panel-2); border: 1px solid var(--border-hot); color: var(--text); padding: 10px 12px; border-radius: 8px; font-size: 14px; width: 100%; font-family: inherit; }
+.rx-input:focus, .rx-select:focus { outline: none; border-color: var(--gold); }
+.rx-btn { background: var(--gold); color: #0a0a0a; border: 0; padding: 10px 16px; border-radius: 8px; font-weight: 700; font-size: 13px; cursor: pointer; white-space: nowrap; }
+.rx-btn:hover { background: #e6c14d; }
+.rx-btn-ghost { background: transparent; color: var(--muted); border: 1px solid var(--border-hot); padding: 8px 14px; border-radius: 8px; font-size: 12px; cursor: pointer; }
+.rx-btn-ghost:hover { color: var(--text); border-color: var(--gold); }
+.rx-stats { display: flex; gap: 18px; flex-wrap: wrap; color: var(--dim); font-size: 12px; margin-bottom: 14px; }
+.rx-stats b { color: var(--gold); font-size: 14px; }
+.rx-cards { display: grid; grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); gap: 14px; }
+.rx-card { background: var(--panel-2); border: 1px solid var(--border); border-radius: 10px; padding: 14px; }
+.rx-card:hover { border-color: var(--gold); }
+.rx-card-name { font-weight: 700; font-size: 15px; color: var(--text); }
+.rx-card-sub { color: var(--gold); font-size: 11px; letter-spacing: 0.5px; text-transform: uppercase; margin: 2px 0 8px; }
+.rx-card-line { color: var(--muted); font-size: 12px; margin: 3px 0; }
+.rx-card-line a { color: var(--text); word-break: break-all; }
+.rx-tag { display: inline-block; background: rgba(212, 175, 55, 0.1); color: var(--gold); border: 1px solid rgba(212, 175, 55, 0.3); padding: 2px 7px; border-radius: 4px; font-size: 10px; margin: 2px 4px 0 0; letter-spacing: 0.3px; }
+.rx-tab-row { display: flex; gap: 4px; border-bottom: 1px solid var(--border); margin-bottom: 18px; }
+.rx-tab { background: transparent; color: var(--muted); border: 0; border-bottom: 2px solid transparent; padding: 10px 16px; cursor: pointer; font-size: 13px; font-weight: 600; }
+.rx-tab.active { color: var(--gold); border-bottom-color: var(--gold); }
+.rx-login-card { max-width: 460px; margin: 30px auto; background: var(--panel-2); border: 1px solid var(--border-hot); border-radius: 12px; padding: 28px; text-align: center; }
+.rx-login-card h3 { font-size: 18px; margin-bottom: 8px; }
+.rx-login-card p { color: var(--muted); font-size: 13px; margin-bottom: 18px; }
+.rx-login-row { display: flex; flex-direction: column; gap: 10px; }
+.rx-msg { font-size: 12px; padding: 8px 12px; border-radius: 6px; margin-top: 10px; }
+.rx-msg-ok { background: rgba(22, 163, 74, 0.1); color: var(--green); border: 1px solid rgba(22, 163, 74, 0.3); }
+.rx-msg-err { background: rgba(220, 38, 38, 0.1); color: var(--red); border: 1px solid rgba(220, 38, 38, 0.3); }
+.rx-tools { display: flex; gap: 8px; margin-bottom: 14px; flex-wrap: wrap; }
+.rx-modal-bg { position: fixed; inset: 0; background: rgba(0,0,0,0.75); display: none; align-items: center; justify-content: center; z-index: 100; padding: 20px; }
+.rx-modal-bg.show { display: flex; }
+.rx-modal { background: var(--panel); border: 1px solid var(--border-hot); border-radius: 12px; padding: 24px; max-width: 720px; width: 100%; max-height: 90vh; overflow-y: auto; }
+.rx-modal h3 { margin-bottom: 12px; font-size: 17px; }
+.rx-modal label { display: block; margin: 12px 0 4px; font-size: 12px; color: var(--muted); font-weight: 600; }
+.rx-modal textarea { width: 100%; min-height: 240px; background: var(--panel-2); border: 1px solid var(--border-hot); color: var(--text); border-radius: 8px; padding: 12px; font-family: ui-monospace, Menlo, Consolas, monospace; font-size: 12px; resize: vertical; }
+.rx-modal-actions { display: flex; gap: 8px; justify-content: flex-end; margin-top: 18px; }
+.rx-internal-banner { background: linear-gradient(90deg, rgba(212,175,55,0.08), rgba(212,175,55,0.02)); border: 1px solid rgba(212,175,55,0.25); border-radius: 8px; padding: 10px 14px; font-size: 12px; color: var(--gold); margin-bottom: 18px; display: flex; align-items: center; gap: 8px; }
 </style>
 </head>
 <body>
@@ -337,6 +376,7 @@ tbody tr a { color: inherit; text-decoration: none; display: block; }
       <a href="#boxoffice">Box Office</a>
       <a href="#titles">Title Intel</a>
       <a href="#casting">Casting</a>
+      <a href="#rolodex" style="color: var(--gold);">Rolodex</a>
       <a href="#pricing">Pricing</a>
     </div>
     <a href="#contact" class="cta-small">Book Demo</a>
@@ -647,6 +687,78 @@ tbody tr a { color: inherit; text-decoration: none; display: block; }
     <div style="text-align: center; margin-top: 14px; font-size: 12px; color: var(--dim);" id="castingStamp">Live via RSS aggregation - refreshes every 15 minutes</div>
   </div>
 </section>
+
+<!-- ROLODEX (internal-only, admin-gated) -->
+<section class="section" id="rolodex">
+  <div class="wrap">
+    <div class="section-head">
+      <div>
+        <h2>Industry Rolodex - <span style="color: var(--gold);">Internal</span></h2>
+        <div class="sub">Production companies, financiers, agents, publicists - searchable contact graph. Internal use only.</div>
+      </div>
+      <div style="display: flex; gap: 10px; align-items: center;">
+        <span class="live-pill" id="rxStatusPill" style="display: none;">Connected</span>
+        <button id="rxLogoutBtn" class="rx-btn-ghost" style="display: none;">Sign out</button>
+      </div>
+    </div>
+
+    <!-- AUTH GATE -->
+    <div id="rxLoginPane" class="rx-login-card">
+      <h3>Internal Access</h3>
+      <p>This rolodex is restricted to WETYR staff. Sign in with your admin credentials.</p>
+      <div class="rx-login-row">
+        <input id="rxLoginUser" class="rx-input" type="text" placeholder="Username" autocomplete="username" />
+        <input id="rxLoginPass" class="rx-input" type="password" placeholder="Password" autocomplete="current-password" />
+        <button id="rxLoginBtn" class="rx-btn">Sign in</button>
+      </div>
+      <div id="rxLoginMsg"></div>
+    </div>
+
+    <!-- AUTHED PANE -->
+    <div id="rxAuthedPane" style="display: none;">
+      <div class="rx-internal-banner">
+        <span style="font-size: 16px;">●</span>
+        Internal-only. Records here are not exposed publicly. Add private contacts via <b>Add</b> or <b>Import CSV</b>. Optional Hunter.io email enrichment requires <code style="color: var(--text);">HUNTER_API_KEY</code> env var.
+      </div>
+
+      <div class="rx-bar">
+        <input id="rxQ" class="rx-input" type="search" placeholder="Search by name, company, email, address, IMDb id..." />
+        <select id="rxType" class="rx-select"><option value="">All types</option></select>
+        <select id="rxTag" class="rx-select"><option value="">All tags</option></select>
+        <button id="rxRefresh" class="rx-btn">Search</button>
+      </div>
+
+      <div class="rx-tools">
+        <button class="rx-btn-ghost" id="rxAddCompanyBtn">+ Company</button>
+        <button class="rx-btn-ghost" id="rxAddPersonBtn">+ Contact</button>
+        <button class="rx-btn-ghost" id="rxImportBtn">Import CSV</button>
+        <button class="rx-btn-ghost" id="rxExportBtn">Export CSV</button>
+      </div>
+
+      <div class="rx-stats" id="rxStats">Loading...</div>
+
+      <div class="rx-tab-row">
+        <button class="rx-tab active" data-rxtab="people">Contacts</button>
+        <button class="rx-tab" data-rxtab="companies">Companies</button>
+      </div>
+
+      <div id="rxResults" class="rx-cards"></div>
+    </div>
+  </div>
+</section>
+
+<!-- ROLODEX MODAL (Add / Import) -->
+<div class="rx-modal-bg" id="rxModalBg">
+  <div class="rx-modal" id="rxModal">
+    <h3 id="rxModalTitle">Add</h3>
+    <div id="rxModalBody"></div>
+    <div class="rx-modal-actions">
+      <button class="rx-btn-ghost" id="rxModalCancel">Cancel</button>
+      <button class="rx-btn" id="rxModalSave">Save</button>
+    </div>
+    <div id="rxModalMsg"></div>
+  </div>
+</div>
 
 <!-- VALUE PROP -->
 <section class="section">
@@ -1292,6 +1404,392 @@ renderNews = function(items) { _renderNews(items); fadeIn('#newsFeed .news-item'
 
 // initial populate
 setTimeout(populateTicker, 1500);
+
+/* ──────────────────────────────────────────────────────────────────
+   ROLODEX (internal) - admin-gated contact graph
+   Backend: /.netlify/functions/film-rolodex + film-rolodex-import
+   Auth:    /.netlify/functions/admin-auth (cookie-based)
+   ────────────────────────────────────────────────────────────────── */
+(function rolodex() {
+  const $ = (s) => document.querySelector(s);
+  const loginPane  = $('#rxLoginPane');
+  const authedPane = $('#rxAuthedPane');
+  const statusPill = $('#rxStatusPill');
+  const logoutBtn  = $('#rxLogoutBtn');
+  const qInput     = $('#rxQ');
+  const typeSel    = $('#rxType');
+  const tagSel     = $('#rxTag');
+  const refreshBtn = $('#rxRefresh');
+  const resultsEl  = $('#rxResults');
+  const statsEl    = $('#rxStats');
+  const tabBtns    = document.querySelectorAll('.rx-tab');
+  const modalBg    = $('#rxModalBg');
+  const modalTitle = $('#rxModalTitle');
+  const modalBody  = $('#rxModalBody');
+  const modalSave  = $('#rxModalSave');
+  const modalMsg   = $('#rxModalMsg');
+
+  let state = {
+    authed: false,
+    activeTab: 'people',
+    data: { companies: [], people: [], facets: { types: [], tags: [], depts: [] }, total: {} },
+    modalMode: null,
+    editId: null,
+  };
+
+  function showMsg(el, kind, text) {
+    el.innerHTML = '';
+    if (!text) return;
+    const d = document.createElement('div');
+    d.className = 'rx-msg ' + (kind === 'ok' ? 'rx-msg-ok' : 'rx-msg-err');
+    d.textContent = text;
+    el.appendChild(d);
+  }
+
+  async function checkAuth() {
+    try {
+      const r = await fetch('/.netlify/functions/admin-auth?action=verify', { credentials: 'include' });
+      const j = await r.json();
+      return !!j.ok;
+    } catch { return false; }
+  }
+
+  async function login() {
+    const user = $('#rxLoginUser').value.trim();
+    const pass = $('#rxLoginPass').value;
+    if (!user || !pass) { showMsg($('#rxLoginMsg'), 'err', 'Enter username and password.'); return; }
+    try {
+      const r = await fetch('/.netlify/functions/admin-auth', {
+        method: 'POST', credentials: 'include',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ user, pass }),
+      });
+      const j = await r.json();
+      if (!r.ok || !j.ok) { showMsg($('#rxLoginMsg'), 'err', j.error || 'Sign-in failed.'); return; }
+      showMsg($('#rxLoginMsg'), 'ok', 'Signed in.');
+      enterAuthed();
+    } catch (e) {
+      showMsg($('#rxLoginMsg'), 'err', e.message);
+    }
+  }
+
+  async function logout() {
+    try {
+      await fetch('/.netlify/functions/admin-auth', {
+        method: 'POST', credentials: 'include',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ action: 'logout' }),
+      });
+    } catch {}
+    state.authed = false;
+    authedPane.style.display = 'none';
+    loginPane.style.display = '';
+    statusPill.style.display = 'none';
+    logoutBtn.style.display = 'none';
+    $('#rxLoginPass').value = '';
+  }
+
+  async function fetchRolodex() {
+    const params = new URLSearchParams();
+    if (qInput.value.trim()) params.set('q', qInput.value.trim());
+    if (typeSel.value) params.set('type', typeSel.value);
+    if (tagSel.value) params.set('tag', tagSel.value);
+    statsEl.textContent = 'Loading...';
+    try {
+      const r = await fetch('/.netlify/functions/film-rolodex?' + params.toString(), { credentials: 'include' });
+      if (r.status === 401) { state.authed = false; logout(); return; }
+      const j = await r.json();
+      if (!j.ok) { statsEl.textContent = 'Error: ' + (j.error || 'unknown'); return; }
+      state.data = j;
+      hydrateFacets();
+      renderStats();
+      renderResults();
+    } catch (e) { statsEl.textContent = 'Network error: ' + e.message; }
+  }
+
+  function hydrateFacets() {
+    const curT = typeSel.value, curG = tagSel.value;
+    typeSel.innerHTML = '<option value="">All types</option>' + (state.data.facets.types || []).map(t => `<option ${t===curT?'selected':''}>${t}</option>`).join('');
+    tagSel.innerHTML  = '<option value="">All tags</option>'  + (state.data.facets.tags  || []).map(t => `<option ${t===curG?'selected':''}>${t}</option>`).join('');
+  }
+
+  function renderStats() {
+    const t = state.data.total || {};
+    statsEl.innerHTML = `
+      <span><b>${t.filteredCompanies ?? 0}</b> / ${t.companies ?? 0} companies</span>
+      <span><b>${t.filteredPeople ?? 0}</b> / ${t.people ?? 0} contacts</span>
+      <span>Storage: Netlify Blobs</span>
+    `;
+  }
+
+  function escHtml(s) { return String(s == null ? '' : s).replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c])); }
+
+  function companyCard(c) {
+    const tags = (c.tags || []).map(t => `<span class="rx-tag">${escHtml(t)}</span>`).join('');
+    return `
+      <div class="rx-card" data-id="${escHtml(c.id)}" data-kind="company">
+        <div class="rx-card-name">${escHtml(c.name)}</div>
+        <div class="rx-card-sub">${escHtml(c.type || 'company')}${c.parent?' &middot; '+escHtml(c.parent):''}</div>
+        ${c.hq ? `<div class="rx-card-line">📍 ${escHtml(c.hq)}</div>` : ''}
+        ${c.website ? `<div class="rx-card-line">🌐 <a href="${escHtml(c.website)}" target="_blank" rel="noopener">${escHtml(c.website.replace(/^https?:\/\//,''))}</a></div>` : ''}
+        ${c.phone ? `<div class="rx-card-line">📞 ${escHtml(c.phone)}</div>` : ''}
+        ${c.imdb ? `<div class="rx-card-line">🎬 IMDb: <a href="https://www.imdb.com/company/${escHtml(c.imdb)}/" target="_blank" rel="noopener">${escHtml(c.imdb)}</a></div>` : ''}
+        ${c.sec_cik ? `<div class="rx-card-line">📑 SEC CIK: <a href="https://www.sec.gov/cgi-bin/browse-edgar?action=getcompany&CIK=${escHtml(c.sec_cik)}" target="_blank" rel="noopener">${escHtml(c.sec_cik)}</a></div>` : ''}
+        ${c.notes ? `<div class="rx-card-line" style="color: var(--dim); margin-top: 8px;">${escHtml(c.notes)}</div>` : ''}
+        <div style="margin-top: 8px;">${tags}</div>
+        <div style="margin-top: 10px; display: flex; gap: 6px;">
+          <button class="rx-btn-ghost" data-action="edit-company" data-id="${escHtml(c.id)}">Edit</button>
+          <button class="rx-btn-ghost" data-action="delete-company" data-id="${escHtml(c.id)}" style="color: var(--red); border-color: rgba(220,38,38,0.4);">Delete</button>
+        </div>
+      </div>`;
+  }
+
+  function personCard(p) {
+    return `
+      <div class="rx-card" data-id="${escHtml(p.id)}" data-kind="person">
+        <div class="rx-card-name">${escHtml(p.name)}</div>
+        <div class="rx-card-sub">${escHtml(p.title || p.dept || 'contact')}${p._companyName?' &middot; '+escHtml(p._companyName):''}</div>
+        ${p.email ? `<div class="rx-card-line">✉ <a href="mailto:${escHtml(p.email)}">${escHtml(p.email)}</a></div>` : '<div class="rx-card-line" style="color: var(--dim);">✉ no email on file</div>'}
+        ${p.phone ? `<div class="rx-card-line">📞 ${escHtml(p.phone)}</div>` : ''}
+        ${p.linkedin ? `<div class="rx-card-line">🔗 <a href="${escHtml(p.linkedin)}" target="_blank" rel="noopener">LinkedIn</a></div>` : ''}
+        ${p.imdb ? `<div class="rx-card-line">🎬 <a href="https://www.imdb.com/name/${escHtml(p.imdb)}/" target="_blank" rel="noopener">IMDb profile</a></div>` : ''}
+        ${p.notes ? `<div class="rx-card-line" style="color: var(--dim); margin-top: 6px;">${escHtml(p.notes)}</div>` : ''}
+        <div style="margin-top: 10px; display: flex; gap: 6px; flex-wrap: wrap;">
+          <button class="rx-btn-ghost" data-action="edit-person" data-id="${escHtml(p.id)}">Edit</button>
+          <button class="rx-btn-ghost" data-action="enrich-person" data-id="${escHtml(p.id)}">Find email</button>
+          <button class="rx-btn-ghost" data-action="delete-person" data-id="${escHtml(p.id)}" style="color: var(--red); border-color: rgba(220,38,38,0.4);">Delete</button>
+        </div>
+      </div>`;
+  }
+
+  function renderResults() {
+    if (state.activeTab === 'companies') {
+      resultsEl.innerHTML = (state.data.companies || []).map(companyCard).join('') || '<div style="color: var(--dim); padding: 30px; text-align: center;">No companies match.</div>';
+    } else {
+      resultsEl.innerHTML = (state.data.people || []).map(personCard).join('') || '<div style="color: var(--dim); padding: 30px; text-align: center;">No contacts match. Add some via "+ Contact" or "Import CSV".</div>';
+    }
+  }
+
+  // ── modal helpers ─────────────────────────────────────────────────
+  function openModal(title, html, mode, editRow) {
+    modalTitle.textContent = title;
+    modalBody.innerHTML = html;
+    modalMsg.innerHTML = '';
+    state.modalMode = mode;
+    state.editId = editRow?.id || null;
+    if (editRow) {
+      Object.entries(editRow).forEach(([k, v]) => {
+        const el = modalBody.querySelector(`[name="${k}"]`);
+        if (!el) return;
+        if (Array.isArray(v)) el.value = v.join(', ');
+        else el.value = v;
+      });
+    }
+    modalBg.classList.add('show');
+  }
+  function closeModal() { modalBg.classList.remove('show'); state.modalMode = null; state.editId = null; }
+
+  function companyForm() {
+    return `
+      <label>Name *</label><input name="name" class="rx-input" required />
+      <label>Type</label><select name="type" class="rx-select">
+        ${['prodco','studio-major','mini-major','streamer','agency','sales-agent','financier','publicist','bond','legal','vendor','other'].map(t=>`<option>${t}</option>`).join('')}
+      </select>
+      <label>Parent (optional)</label><input name="parent" class="rx-input" />
+      <label>HQ address</label><input name="hq" class="rx-input" />
+      <div style="display: grid; grid-template-columns: 2fr 1fr 1fr; gap: 10px;">
+        <div><label>City</label><input name="city" class="rx-input" /></div>
+        <div><label>Region</label><input name="region" class="rx-input" /></div>
+        <div><label>Country</label><input name="country" class="rx-input" /></div>
+      </div>
+      <label>Website</label><input name="website" class="rx-input" placeholder="https://" />
+      <label>Phone</label><input name="phone" class="rx-input" />
+      <label>IMDb company id</label><input name="imdb" class="rx-input" placeholder="co0000000" />
+      <label>SEC CIK</label><input name="sec_cik" class="rx-input" />
+      <label>Tags (comma)</label><input name="tags" class="rx-input" placeholder="indie, prestige, financier" />
+      <label>Notes</label><textarea name="notes" class="rx-input" style="min-height: 70px;"></textarea>
+    `;
+  }
+
+  function personForm(companies) {
+    const opts = ['<option value="">— No company —</option>'].concat((companies || []).map(c => `<option value="${escHtml(c.id)}">${escHtml(c.name)}</option>`)).join('');
+    return `
+      <label>Full name *</label><input name="name" class="rx-input" required />
+      <label>Title / role</label><input name="title" class="rx-input" placeholder="VP Acquisitions" />
+      <label>Company</label><select name="company_id" class="rx-select">${opts}</select>
+      <label>Department</label><select name="dept" class="rx-select">
+        ${['','dev','acquisitions','production','sales','press','legal','finance','distribution','general'].map(d=>`<option value="${d}">${d||'(blank)'}</option>`).join('')}
+      </select>
+      <label>Email</label><input name="email" class="rx-input" type="email" />
+      <label>Phone</label><input name="phone" class="rx-input" />
+      <label>LinkedIn URL</label><input name="linkedin" class="rx-input" />
+      <label>IMDb name id</label><input name="imdb" class="rx-input" placeholder="nm0000000" />
+      <label>Notes</label><textarea name="notes" class="rx-input" style="min-height: 70px;"></textarea>
+    `;
+  }
+
+  function importForm() {
+    return `
+      <p style="color: var(--muted); font-size: 13px; margin-bottom: 10px;">
+        Paste a CSV. First row must be headers. Existing rows (matched by name) are updated; new rows are added.
+      </p>
+      <label>Mode</label>
+      <select name="mode" class="rx-select">
+        <option value="people">People / contacts</option>
+        <option value="companies">Companies</option>
+      </select>
+      <label>Companies headers</label>
+      <code style="display: block; background: var(--panel-2); padding: 8px; border-radius: 6px; font-size: 11px; color: var(--dim);">name, type, parent, hq, city, region, country, website, phone, imdb, sec_cik, tags, notes</code>
+      <label>People headers</label>
+      <code style="display: block; background: var(--panel-2); padding: 8px; border-radius: 6px; font-size: 11px; color: var(--dim);">name, title, company, company_id, dept, email, phone, linkedin, imdb, notes, tags</code>
+      <label>CSV</label>
+      <textarea name="csv" placeholder="name,title,company,email&#10;Jane Doe,VP Acquisitions,A24,jane@a24films.com"></textarea>
+    `;
+  }
+
+  function readForm() {
+    const o = {};
+    modalBody.querySelectorAll('[name]').forEach(el => {
+      const v = el.value.trim();
+      if (v === '') return;
+      if (el.name === 'tags') o.tags = v.split(/[;,|]/).map(s => s.trim()).filter(Boolean);
+      else o[el.name] = v;
+    });
+    return o;
+  }
+
+  async function save() {
+    const data = readForm();
+    let url = '/.netlify/functions/film-rolodex';
+    let payload = null;
+    if (state.modalMode === 'company') {
+      if (!data.name) { showMsg(modalMsg, 'err', 'Name is required.'); return; }
+      payload = { action: state.editId ? 'updateCompany' : 'addCompany', company: state.editId ? undefined : data, id: state.editId, patch: state.editId ? data : undefined };
+    } else if (state.modalMode === 'person') {
+      if (!data.name) { showMsg(modalMsg, 'err', 'Name is required.'); return; }
+      payload = { action: state.editId ? 'updatePerson' : 'addPerson', person: state.editId ? undefined : data, id: state.editId, patch: state.editId ? data : undefined };
+    } else if (state.modalMode === 'import') {
+      url = '/.netlify/functions/film-rolodex-import';
+      if (!data.csv) { showMsg(modalMsg, 'err', 'Paste CSV content.'); return; }
+      payload = { mode: data.mode || 'people', csv: data.csv };
+    } else { return; }
+
+    showMsg(modalMsg, 'ok', 'Saving...');
+    try {
+      const r = await fetch(url, {
+        method: 'POST', credentials: 'include',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(payload),
+      });
+      const j = await r.json();
+      if (!j.ok) { showMsg(modalMsg, 'err', j.error || 'Save failed.'); return; }
+      if (state.modalMode === 'import') {
+        showMsg(modalMsg, 'ok', `Imported. Added ${j.added}, updated ${j.updated}, skipped ${j.skipped}. Total now ${j.total}.${j.errors && j.errors.length?' ('+j.errors.length+' notes)':''}`);
+        setTimeout(() => { closeModal(); fetchRolodex(); }, 1500);
+      } else {
+        closeModal();
+        fetchRolodex();
+      }
+    } catch (e) { showMsg(modalMsg, 'err', e.message); }
+  }
+
+  async function del(kind, id) {
+    if (!confirm('Delete this ' + kind + '?')) return;
+    const action = kind === 'company' ? 'deleteCompany' : 'deletePerson';
+    try {
+      const r = await fetch('/.netlify/functions/film-rolodex', {
+        method: 'POST', credentials: 'include',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ action, id }),
+      });
+      const j = await r.json();
+      if (!j.ok) { alert(j.error || 'Delete failed.'); return; }
+      fetchRolodex();
+    } catch (e) { alert(e.message); }
+  }
+
+  async function enrich(id) {
+    statsEl.textContent = 'Looking up email via Hunter.io...';
+    try {
+      const r = await fetch('/.netlify/functions/film-rolodex', {
+        method: 'POST', credentials: 'include',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ action: 'enrich', personId: id }),
+      });
+      const j = await r.json();
+      if (!j.ok) { alert(j.reason || j.error || 'No match.'); statsEl.textContent = ''; return; }
+      fetchRolodex();
+    } catch (e) { alert(e.message); }
+  }
+
+  function exportCSV() {
+    const rows = state.activeTab === 'companies' ? state.data.companies : state.data.people;
+    if (!rows || !rows.length) { alert('Nothing to export.'); return; }
+    const cols = state.activeTab === 'companies'
+      ? ['id','name','type','parent','hq','city','region','country','website','phone','imdb','sec_cik','tags','notes']
+      : ['id','name','title','_companyName','company_id','dept','email','phone','linkedin','imdb','notes'];
+    const esc = (v) => { if (v == null) return ''; const s = Array.isArray(v) ? v.join('; ') : String(v); return /[",\n]/.test(s) ? '"' + s.replace(/"/g, '""') + '"' : s; };
+    const csv = [cols.join(',')].concat(rows.map(r => cols.map(c => esc(r[c])).join(','))).join('\n');
+    const blob = new Blob([csv], { type: 'text/csv' });
+    const a = document.createElement('a');
+    a.href = URL.createObjectURL(blob);
+    a.download = 'wetyr-rolodex-' + state.activeTab + '-' + new Date().toISOString().slice(0,10) + '.csv';
+    a.click();
+  }
+
+  function enterAuthed() {
+    state.authed = true;
+    loginPane.style.display = 'none';
+    authedPane.style.display = '';
+    statusPill.style.display = '';
+    logoutBtn.style.display = '';
+    fetchRolodex();
+  }
+
+  // ── wire up ───────────────────────────────────────────────────────
+  $('#rxLoginBtn').addEventListener('click', login);
+  $('#rxLoginPass').addEventListener('keydown', (e) => { if (e.key === 'Enter') login(); });
+  logoutBtn.addEventListener('click', logout);
+  refreshBtn.addEventListener('click', fetchRolodex);
+  qInput.addEventListener('keydown', (e) => { if (e.key === 'Enter') fetchRolodex(); });
+  typeSel.addEventListener('change', fetchRolodex);
+  tagSel.addEventListener('change', fetchRolodex);
+
+  tabBtns.forEach(b => b.addEventListener('click', () => {
+    tabBtns.forEach(x => x.classList.remove('active'));
+    b.classList.add('active');
+    state.activeTab = b.dataset.rxtab;
+    renderResults();
+  }));
+
+  $('#rxAddCompanyBtn').addEventListener('click', () => openModal('Add Company', companyForm(), 'company'));
+  $('#rxAddPersonBtn').addEventListener('click',  () => openModal('Add Contact', personForm(state.data.companies), 'person'));
+  $('#rxImportBtn').addEventListener('click',     () => openModal('Import CSV',  importForm(), 'import'));
+  $('#rxExportBtn').addEventListener('click', exportCSV);
+
+  modalSave.addEventListener('click', save);
+  $('#rxModalCancel').addEventListener('click', closeModal);
+  modalBg.addEventListener('click', (e) => { if (e.target === modalBg) closeModal(); });
+
+  resultsEl.addEventListener('click', (e) => {
+    const btn = e.target.closest('button[data-action]');
+    if (!btn) return;
+    const id = btn.dataset.id;
+    const action = btn.dataset.action;
+    if (action === 'edit-company') {
+      const row = state.data.companies.find(c => c.id === id);
+      if (row) openModal('Edit Company', companyForm(), 'company', row);
+    } else if (action === 'edit-person') {
+      const row = state.data.people.find(p => p.id === id);
+      if (row) openModal('Edit Contact', personForm(state.data.companies), 'person', row);
+    } else if (action === 'delete-company') del('company', id);
+    else if (action === 'delete-person') del('person', id);
+    else if (action === 'enrich-person') enrich(id);
+  });
+
+  // boot: check existing session
+  checkAuth().then(ok => { if (ok) enterAuthed(); });
+})();
 </script>
 </body>
 </html>
