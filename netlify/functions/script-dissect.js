@@ -10,12 +10,12 @@
 //
 // Env: GEMINI_API_KEY, GEMINI_MODEL (optional, defaults to gemini-2.5-flash)
 
-const MODEL = process.env.GEMINI_MODEL || 'gemini-2.0-flash';
+const MODEL = process.env.GEMINI_MODEL || 'gemini-2.5-flash';
 const API_URL = `https://generativelanguage.googleapis.com/v1beta/models/${MODEL}:generateContent`;
-const CHUNK_CHARS = 50000;
+const CHUNK_CHARS = 60000;
 const MAX_OUTPUT_TOKENS = 8192;
-const MAX_CONCURRENCY = 4;
-const RETRY_MS = 1500;
+const MAX_CONCURRENCY = 3;
+const RETRY_MS = 2500;
 
 const SYSTEM_META = `You are the WETYR Studios Script Breakdown Engine - a veteran 1st AD with 25 years of feature experience.
 
