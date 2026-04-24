@@ -10,10 +10,12 @@
 //
 // Env: GEMINI_API_KEY, GEMINI_MODEL (optional, defaults to gemini-2.5-flash)
 
-const MODEL = process.env.GEMINI_MODEL || 'gemini-2.5-flash';
+const MODEL = process.env.GEMINI_MODEL || 'gemini-2.0-flash';
 const API_URL = `https://generativelanguage.googleapis.com/v1beta/models/${MODEL}:generateContent`;
-const CHUNK_CHARS = 35000;
+const CHUNK_CHARS = 50000;
 const MAX_OUTPUT_TOKENS = 8192;
+const MAX_CONCURRENCY = 4;
+const RETRY_MS = 1500;
 
 const SYSTEM_META = `You are the WETYR Studios Script Breakdown Engine - a veteran 1st AD with 25 years of feature experience.
 
@@ -110,10 +112,12 @@ exports.handler = async (event) => {
       ? scriptText
       : summariseForMeta(scriptText);
 
-    const [metaResult, ...chunkResults] = await Promise.all([
-      callGemini(key, SYSTEM_META, `Title hint: "${userTitle}". Format hint: ${userFormat}.\n\n${metaInput}`),
-      ...chunks.map((c, i) => callGemini(key, SYSTEM_CHUNK, `Chunk ${i + 1} of ${chunks.length}:\n\n${c}`))
-    ]);
+    const tasks = [
+      () => callGemini(key, SYSTEM_META, `Title hint: "${userTitle}". Format hint: ${userFormat}.\n\n${metaInput}`),
+      ...chunks.map((c, i) => () => callGemini(key, SYSTEM_CHUNK, `Chunk ${i + 1} of ${chunks.length}:\n\n${c}`))
+    ];
+    const results = await runConcurrent(tasks, MAX_CONCURRENCY);
+    const [metaResult, ...chunkResults] = results;
 
     const meta = safeParse(metaResult.text) || {};
     const chunkBreakdowns = chunkResults.map(r => safeParse(r.text) || { scenes: [], characters: [], locations: [] });
@@ -170,8 +174,8 @@ function summariseForMeta(text) {
   return `[OPENING]\n${first}\n\n[SCENE HEADINGS]\n${headings}\n\n[CLOSING]\n${last}`;
 }
 
-// ─── Gemini call ────────────────────────────────────────────────
-async function callGemini(key, systemPrompt, userText) {
+// ─── Gemini call with one retry on 429 ──────────────────────────
+async function callGemini(key, systemPrompt, userText, attempt = 0) {
   const resp = await fetch(API_URL + '?key=' + encodeURIComponent(key), {
     method: 'POST',
     headers: { 'content-type': 'application/json' },
@@ -185,10 +189,30 @@ async function callGemini(key, systemPrompt, userText) {
       }
     })
   });
+  if (resp.status === 429 && attempt < 1) {
+    await new Promise(r => setTimeout(r, RETRY_MS));
+    return callGemini(key, systemPrompt, userText, attempt + 1);
+  }
   if (!resp.ok) throw new Error('Gemini ' + resp.status + ': ' + (await resp.text()).slice(0, 1500));
   const data = await resp.json();
   const text = (data.candidates?.[0]?.content?.parts || []).map(p => p.text || '').join('');
   return { text, usage: data.usageMetadata };
+}
+
+// Run async tasks with bounded concurrency, preserving order.
+async function runConcurrent(tasks, limit) {
+  const results = new Array(tasks.length);
+  let next = 0;
+  async function worker() {
+    while (true) {
+      const i = next++;
+      if (i >= tasks.length) return;
+      results[i] = await tasks[i]();
+    }
+  }
+  const workers = Array.from({ length: Math.min(limit, tasks.length) }, worker);
+  await Promise.all(workers);
+  return results;
 }
 
 function safeParse(raw) {
