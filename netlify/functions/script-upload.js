@@ -134,8 +134,9 @@ function estimatePages(text) {
 }
 
 async function mistralOcr(buf, key) {
-  // Mistral OCR: upload document, then request OCR processing.
-  // Uses document-image endpoint with base64 payload.
+  // Mistral OCR takes a document_url - for local files, pass a data URL
+  // with the PDF base64-encoded so we don't need a separate upload step.
+  const dataUrl = 'data:application/pdf;base64,' + buf.toString('base64');
   const resp = await fetch('https://api.mistral.ai/v1/ocr', {
     method: 'POST',
     headers: {
@@ -145,14 +146,14 @@ async function mistralOcr(buf, key) {
     body: JSON.stringify({
       model: 'mistral-ocr-latest',
       document: {
-        type: 'document_base64',
-        document_base64: buf.toString('base64')
-      }
+        type: 'document_url',
+        document_url: dataUrl
+      },
+      include_image_base64: false
     })
   });
   if (!resp.ok) throw new Error('Mistral OCR ' + resp.status + ': ' + (await resp.text()).slice(0, 300));
   const data = await resp.json();
-  // Response shape: { pages: [{ markdown: "..." }, ...] }
   const pages = data.pages || [];
   return pages.map(p => p.markdown || p.text || '').join('\n\n').trim();
 }
