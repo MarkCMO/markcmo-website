@@ -185,7 +185,7 @@ async function callGemini(key, systemPrompt, userText) {
       }
     })
   });
-  if (!resp.ok) throw new Error('Gemini ' + resp.status + ': ' + (await resp.text()).slice(0, 300));
+  if (!resp.ok) throw new Error('Gemini ' + resp.status + ': ' + (await resp.text()).slice(0, 1500));
   const data = await resp.json();
   const text = (data.candidates?.[0]?.content?.parts || []).map(p => p.text || '').join('');
   return { text, usage: data.usageMetadata };
