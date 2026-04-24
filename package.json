@@ -3,6 +3,7 @@
   "version": "1.0.0",
   "description": "MarkCMO.com — Full site with webinar funnel and admin",
   "dependencies": {
-    "@netlify/blobs": "^6.0.0"
+    "@netlify/blobs": "^6.0.0",
+    "pdf-parse": "^1.1.1"
   }
 }

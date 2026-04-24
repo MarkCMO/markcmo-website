@@ -3,6 +3,10 @@
   publish = "."
   functions = "netlify/functions"
 
+# Auto-install missing function dependencies (e.g. pdf-parse)
+[[plugins]]
+  package = "@netlify/plugin-functions-install-core"
+
 [build.processing]
   skip_processing = false
 
@@ -34,6 +38,24 @@
 
 # Expand pulls TMDB credit data for one page of titles per call.
 [functions.film-rolodex-expand]
+  timeout = 26
+
+# ─── WETYR Studios - Script Dissector ─────────────────────────
+# script-dissect: Claude Opus runs over full feature scripts (up to ~800k chars)
+# and returns a complete tagged breakdown. Needs the full function timeout.
+[functions.script-dissect]
+  timeout = 26
+
+# script-upload: PDF text extraction is fast; OCR fallback (Mistral) needs room.
+[functions.script-upload]
+  timeout = 26
+
+# script-schedule: stripboard + day-out-of-days reasoning pass.
+[functions.script-schedule]
+  timeout = 26
+
+# script-budget: top-sheet + line-item generation pass.
+[functions.script-budget]
   timeout = 26
 
 # ─── Scheduled Functions ──────────────────────────────────────
