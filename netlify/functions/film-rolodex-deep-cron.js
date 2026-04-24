@@ -19,12 +19,12 @@ const { COMPANIES: SEED_COMPANIES, PEOPLE: SEED_PEOPLE } = require('./_film-rolo
 
 const STORE_NAME = 'film-rolodex';
 const COOKIE_NAME = 'mcadmin_session';
-const PER_COMPANY_DELAY_MS = 400;
-const MAX_PAGES_PER_COMPANY = 4;
+const PER_COMPANY_DELAY_MS = 250;
+const MAX_PAGES_PER_COMPANY = 3;
 const MAX_BYTES_PER_PAGE = 200_000;
-const MAX_COMPANIES_PER_RUN = 12;     // cap to stay under function timeout
-const FETCH_TIMEOUT_MS = 4_000;
-const WALL_CLOCK_BUDGET_MS = 22_000;  // bail out before the 26s function timeout
+const MAX_COMPANIES_PER_RUN = 8;      // cap to stay under function timeout
+const FETCH_TIMEOUT_MS = 3_000;
+const WALL_CLOCK_BUDGET_MS = 18_000;  // bail out well before the 26s function timeout
 
 const DEFAULT_PATHS = ['/', '/about', '/about-us', '/team', '/leadership', '/contact', '/press', '/news', '/films'];
 
@@ -162,11 +162,49 @@ async function crawlCompany(company) {
   return result;
 }
 
+// ── snapshot helper (rollback safety net) ──────────────────────────
+const MAX_SNAPSHOTS = 10;
+async function snapshotBeforeWrite(store, label) {
+  try {
+    const c = await store.get('companies', { type: 'json' });
+    const p = await store.get('people',    { type: 'json' });
+    if (!c && !p) return null;
+    const ts = new Date().toISOString().replace(/[:.]/g, '-');
+    const key = `_snapshot_${ts}`;
+    await store.setJSON(key, {
+      at: new Date().toISOString(),
+      label: label || 'deep-cron',
+      companiesCount: (c || []).length,
+      peopleCount:    (p || []).length,
+      companies: c || [],
+      people:    p || [],
+    });
+    // prune
+    try {
+      const list = await store.list({ prefix: '_snapshot_' });
+      const blobs = (list && list.blobs) || [];
+      const sorted = blobs.map(b => b.key).sort();
+      while (sorted.length > MAX_SNAPSHOTS) {
+        const oldest = sorted.shift();
+        await store.delete(oldest);
+      }
+    } catch {}
+    return key;
+  } catch { return null; }
+}
+
 // ── merge into Blobs store ─────────────────────────────────────────
 async function syncToStore(crawls) {
   const store = openStore();
-  const existingC = (await store.get('companies', { type: 'json' })) || SEED_COMPANIES.slice();
-  const existingP = (await store.get('people', { type: 'json' }))    || SEED_PEOPLE.slice();
+  const snapKey = await snapshotBeforeWrite(store, 'deep-cron');
+  const meta = await store.get('_meta', { type: 'json' });
+  let existingC = await store.get('companies', { type: 'json' });
+  let existingP = await store.get('people',    { type: 'json' });
+  if (meta && (existingC === null || existingP === null)) {
+    throw new Error('Blob read returned null but store is bootstrapped - aborting deep-cron sync to protect data. Snapshot key: ' + snapKey);
+  }
+  if (!existingC) existingC = SEED_COMPANIES.slice();
+  if (!existingP) existingP = SEED_PEOPLE.slice();
 
   const cByKey = new Map(existingC.map(c => [slug(c.name), c]));
   const pByKey = new Map(existingP.map(p => [`${slug(p.name)}|${slug(p.company || '')}`, p]));

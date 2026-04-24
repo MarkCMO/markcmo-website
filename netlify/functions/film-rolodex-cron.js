@@ -224,11 +224,48 @@ async function fromSec() {
   return { companies: [], people: Array.from(seen.values()), summary };
 }
 
+// ── snapshot helper (rollback safety net) ──────────────────────────
+const MAX_SNAPSHOTS = 10;
+async function snapshotBeforeWrite(store, label) {
+  try {
+    const c = await store.get('companies', { type: 'json' });
+    const p = await store.get('people',    { type: 'json' });
+    if (!c && !p) return null;
+    const ts = new Date().toISOString().replace(/[:.]/g, '-');
+    const key = `_snapshot_${ts}`;
+    await store.setJSON(key, {
+      at: new Date().toISOString(),
+      label: label || 'cron',
+      companiesCount: (c || []).length,
+      peopleCount:    (p || []).length,
+      companies: c || [],
+      people:    p || [],
+    });
+    try {
+      const list = await store.list({ prefix: '_snapshot_' });
+      const blobs = (list && list.blobs) || [];
+      const sorted = blobs.map(b => b.key).sort();
+      while (sorted.length > MAX_SNAPSHOTS) {
+        const oldest = sorted.shift();
+        await store.delete(oldest);
+      }
+    } catch {}
+    return key;
+  } catch { return null; }
+}
+
 // ── merge new rows into the Blobs store (idempotent) ────────────────
 async function syncToStore({ companies: newCompanies, people: newPeople }) {
   const store = openStore();
-  const existingC = (await store.get('companies', { type: 'json' })) || SEED_COMPANIES.slice();
-  const existingP = (await store.get('people', { type: 'json' }))    || SEED_PEOPLE.slice();
+  const snapKey = await snapshotBeforeWrite(store, 'tmdb-cron');
+  const meta = await store.get('_meta', { type: 'json' });
+  let existingC = await store.get('companies', { type: 'json' });
+  let existingP = await store.get('people',    { type: 'json' });
+  if (meta && (existingC === null || existingP === null)) {
+    throw new Error('Blob read returned null but store is bootstrapped - aborting cron sync to protect data. Snapshot key: ' + snapKey);
+  }
+  if (!existingC) existingC = SEED_COMPANIES.slice();
+  if (!existingP) existingP = SEED_PEOPLE.slice();
 
   const cByKey = new Map(existingC.map(c => [slug(c.name), c]));
   const pByKey = new Map(existingP.map(p => [`${slug(p.name)}|${slug(p.company || '')}`, p]));

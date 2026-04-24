@@ -32,6 +32,10 @@
 [functions.film-rolodex]
   timeout = 26
 
+# Expand pulls TMDB credit data for one page of titles per call.
+[functions.film-rolodex-expand]
+  timeout = 26
+
 # ─── Scheduled Functions ──────────────────────────────────────
 [functions.email-drip]
   schedule = "0 * * * *"
@@ -135,6 +139,11 @@
 [[redirects]]
   from = "/film-rolodex-deep-cron"
   to = "/.netlify/functions/film-rolodex-deep-cron"
+  status = 200
+
+[[redirects]]
+  from = "/film-rolodex-expand"
+  to = "/.netlify/functions/film-rolodex-expand"
   status = 200
 
 # ─── Performance: Cache Static Assets ─────────────────────────

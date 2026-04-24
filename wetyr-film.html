@@ -722,6 +722,13 @@ tbody tr a { color: inherit; text-decoration: none; display: block; }
         <select id="rxType" class="rx-select"><option value="">All types</option></select>
         <select id="rxTag" class="rx-select"><option value="">All tags</option></select>
         <button id="rxRefresh" class="rx-btn">Search</button>
+        <select id="rxShowQuick" class="rx-select" title="Quick show count" style="margin-left:auto; border-color: var(--gold); color: var(--gold); font-weight: 600;">
+          <option value="">Show...</option>
+          <option value="50">Show 50</option>
+          <option value="100">Show 100</option>
+          <option value="250">Show 250</option>
+          <option value="500">Show 500</option>
+        </select>
       </div>
       <div class="rx-bar" style="margin-top:8px;">
         <select id="rxSort" class="rx-select" title="Sort by">
@@ -764,6 +771,10 @@ tbody tr a { color: inherit; text-decoration: none; display: block; }
         <button class="rx-btn-ghost" id="rxExportBtn">Export CSV</button>
         <button class="rx-btn-ghost" id="rxSyncBtn" style="border-color: var(--gold); color: var(--gold);">Sync Now</button>
         <button class="rx-btn-ghost" id="rxDeepSyncBtn" style="border-color: var(--gold); color: var(--gold);">Deep Crawl</button>
+        <button class="rx-btn-ghost" id="rxBackfillBtn" style="border-color: var(--gold); color: var(--gold);" title="Pass 1: Hunter domain-search every company website (up to 25 emails each). Pass 2: re-Hunter every talent contact already matched to a CAA/WME/UTA/Gersh/Paradigm address.">Backfill Hunter</button>
+        <button class="rx-btn-ghost" id="rxExpandBtn" style="border-color: var(--gold); color: var(--gold);" title="Mass-import contacts: walks TMDB movies/TV/discover/popular-people, NYC + LA film-permit OpenData, and 18 Wikipedia film-industry list pages. Adds ~3000-6000 new contacts and 300-800 new companies in one click.">Expand +1000s</button>
+        <button class="rx-btn-ghost" id="rxFreshenBtn" style="border-color: var(--gold); color: var(--gold);" title="Bulk-freshen stale emails. Scores every contact, takes the worst-scoring (stale agency / no current employer) and runs Find Newest Email on each: pulls latest TMDB credits, detects current production company, Hunter-searches that domain, archives stale addresses. Pages through 5 contacts per call until done.">Freshen Stale</button>
+        <button class="rx-btn-ghost" id="rxRestoreBtn" style="border-color: rgba(220,38,38,0.6); color: #f87171;" title="View and restore from automatic snapshots. The system snapshots before every bulk write (Expand, Backfill, Sync, Deep Crawl, Reset) and keeps the most recent 10.">Restore</button>
       </div>
 
       <div class="rx-stats" id="rxStats">Loading...</div>
@@ -1484,6 +1495,7 @@ setTimeout(populateTicker, 1500);
   const filterDeptSel  = $('#rxFilterDept');
   const clearFiltersBtn = $('#rxClearFilters');
   const perPageSel     = $('#rxPerPage');
+  const showQuickSel   = $('#rxShowQuick');
   const pagePrevBtn    = $('#rxPagePrev');
   const pageNextBtn    = $('#rxPageNext');
   const pageInfoEl     = $('#rxPageInfo');
@@ -1541,17 +1553,39 @@ setTimeout(populateTicker, 1500);
   }
 
   async function fetchRolodex() {
-    const params = new URLSearchParams();
-    if (qInput.value.trim()) params.set('q', qInput.value.trim());
-    if (typeSel.value) params.set('type', typeSel.value);
-    if (tagSel.value) params.set('tag', tagSel.value);
+    // The dataset is now 16k+ contacts - one big GET would blow the 6MB
+    // Lambda response cap. Page through in 2000-row chunks and concat.
+    const baseParams = new URLSearchParams();
+    if (qInput.value.trim()) baseParams.set('q', qInput.value.trim());
+    if (typeSel.value)  baseParams.set('type', typeSel.value);
+    if (tagSel.value)   baseParams.set('tag', tagSel.value);
     statsEl.textContent = 'Loading...';
     try {
-      const r = await fetch('/.netlify/functions/film-rolodex?' + params.toString(), { credentials: 'include' });
-      if (r.status === 401) { state.authed = false; logout(); return; }
-      const j = await r.json();
-      if (!j.ok) { statsEl.textContent = 'Error: ' + (j.error || 'unknown'); return; }
-      state.data = j;
+      const PAGE = 2000;
+      const MAX_PAGES = 25; // hard ceiling - 50k rows
+      let offset = 0;
+      let merged = null;
+      for (let i = 0; i < MAX_PAGES; i++) {
+        const params = new URLSearchParams(baseParams);
+        params.set('limit', String(PAGE));
+        params.set('offset', String(offset));
+        const r = await fetch('/.netlify/functions/film-rolodex?' + params.toString(), { credentials: 'include' });
+        if (r.status === 401) { state.authed = false; logout(); return; }
+        let j;
+        try { j = await r.json(); }
+        catch { statsEl.textContent = `Error: server returned non-JSON at offset ${offset}`; return; }
+        if (!j.ok) { statsEl.textContent = 'Error: ' + (j.error || 'unknown'); return; }
+        if (!merged) merged = { ...j, companies: [], people: [] };
+        merged.companies = merged.companies.concat(j.companies || []);
+        merged.people    = merged.people.concat(j.people || []);
+        merged.total = j.total;
+        merged.facets = j.facets;
+        statsEl.textContent = `Loading... ${merged.companies.length}/${j.total?.filteredCompanies||0} companies, ${merged.people.length}/${j.total?.filteredPeople||0} contacts`;
+        const more = (j.paging?.companiesHasMore || j.paging?.peopleHasMore);
+        if (!more) break;
+        offset += PAGE;
+      }
+      state.data = merged || { companies: [], people: [], facets: { types: [], tags: [], depts: [] }, total: { companies: 0, people: 0 } };
       hydrateFacets();
       renderStats();
       renderResults();
@@ -1560,8 +1594,11 @@ setTimeout(populateTicker, 1500);
 
   function hydrateFacets() {
     const curT = typeSel.value, curG = tagSel.value;
-    typeSel.innerHTML = '<option value="">All types</option>' + (state.data.facets.types || []).map(t => `<option ${t===curT?'selected':''}>${t}</option>`).join('');
-    tagSel.innerHTML  = '<option value="">All tags</option>'  + (state.data.facets.tags  || []).map(t => `<option ${t===curG?'selected':''}>${t}</option>`).join('');
+    const cmp = (a, b) => String(a).toLowerCase().localeCompare(String(b).toLowerCase());
+    const types = (state.data.facets.types || []).slice().sort(cmp);
+    const facetTags = (state.data.facets.tags  || []).slice().sort(cmp);
+    typeSel.innerHTML = '<option value="">All types</option>' + types.map(t => `<option ${t===curT?'selected':''}>${t}</option>`).join('');
+    tagSel.innerHTML  = '<option value="">All tags</option>'  + facetTags.map(t => `<option ${t===curG?'selected':''}>${t}</option>`).join('');
 
     // Build dept facet from current people if backend doesn't provide one
     const deptSet = new Set(state.data.facets.depts || []);
@@ -1587,32 +1624,129 @@ setTimeout(populateTicker, 1500);
   function companyCard(c) {
     const tags = (c.tags || []).map(t => `<span class="rx-tag">${escHtml(t)}</span>`).join('');
     const prods = (c.productions || []).slice(0, 6);
+
+    // Render multi-email list. Schema: c.emails = [{address, source, score?, name?, title?, department?}]
+    // Falls back to legacy c.email + c.email_secondary if emails[] not yet populated.
+    const emailRows = (() => {
+      const list = Array.isArray(c.emails) && c.emails.length
+        ? c.emails
+        : [
+            ...(c.email ? [{ address: c.email, source: 'manual' }] : []),
+            ...(c.email_secondary ? [{ address: c.email_secondary, source: 'manual' }] : []),
+          ];
+      if (!list.length) return '<div class="rx-card-line" style="color: var(--dim);">✉ no email on file</div>';
+      const seen = new Set();
+      const unique = list.filter(e => {
+        const a = (typeof e === 'string' ? e : e.address || '').toLowerCase();
+        if (!a || seen.has(a)) return false;
+        seen.add(a); return true;
+      });
+      return unique.slice(0, 12).map((e) => {
+        const addr = typeof e === 'string' ? e : e.address;
+        const src = typeof e === 'object' ? e.source : null;
+        const score = typeof e === 'object' ? e.score : null;
+        const name = typeof e === 'object' ? e.name : null;
+        const title = typeof e === 'object' ? e.title : null;
+        const meta = [name, title].filter(Boolean).join(' - ');
+        const tag = src
+          ? ` <span style="color: var(--dim); font-size: 11px;">(${escHtml(src.replace(/^hunter:/, ''))}${score ? ` ${score}%` : ''})</span>`
+          : '';
+        const metaLine = meta ? `<div style="color: var(--dim); font-size: 11px; padding-left: 16px;">${escHtml(meta)}</div>` : '';
+        return `<div class="rx-card-line">✉ <a href="mailto:${escHtml(addr)}">${escHtml(addr)}</a>${tag}</div>${metaLine}`;
+      }).join('');
+    })();
+
+    // Render multi-phone list.
+    const phoneRows = (() => {
+      const list = Array.isArray(c.phones) && c.phones.length
+        ? c.phones
+        : [c.phone, c.phone_secondary].filter(Boolean);
+      if (!list.length) return '';
+      const seen = new Set();
+      const unique = list.filter(p => {
+        const k = String(p).replace(/\D/g, '');
+        if (!k || seen.has(k)) return false;
+        seen.add(k); return true;
+      });
+      return unique.slice(0, 4).map(p => `<div class="rx-card-line">📞 ${escHtml(p)}</div>`).join('');
+    })();
+
     return `
       <div class="rx-card" data-id="${escHtml(c.id)}" data-kind="company">
         <div class="rx-card-name">${escHtml(c.name)}</div>
         <div class="rx-card-sub">${escHtml(c.type || 'company')}${c.parent?' &middot; '+escHtml(c.parent):''}</div>
         ${c.hq ? `<div class="rx-card-line">📍 ${escHtml(c.hq)}</div>` : ''}
         ${c.website ? `<div class="rx-card-line">🌐 <a href="${escHtml(c.website)}" target="_blank" rel="noopener">${escHtml(c.website.replace(/^https?:\/\//,''))}</a></div>` : ''}
-        ${c.phone ? `<div class="rx-card-line">📞 ${escHtml(c.phone)}${c.phone_secondary?' &middot; '+escHtml(c.phone_secondary):''}</div>` : ''}
-        ${c.email ? `<div class="rx-card-line">✉ <a href="mailto:${escHtml(c.email)}">${escHtml(c.email)}</a>${c.email_secondary?' &middot; <a href="mailto:'+escHtml(c.email_secondary)+'">'+escHtml(c.email_secondary)+'</a>':''}</div>` : ''}
+        ${phoneRows}
+        ${emailRows}
         ${c.imdb ? `<div class="rx-card-line">🎬 IMDb: <a href="https://www.imdb.com/company/${escHtml(c.imdb)}/" target="_blank" rel="noopener">${escHtml(c.imdb)}</a></div>` : ''}
         ${c.sec_cik ? `<div class="rx-card-line">📑 SEC CIK: <a href="https://www.sec.gov/cgi-bin/browse-edgar?action=getcompany&CIK=${escHtml(c.sec_cik)}" target="_blank" rel="noopener">${escHtml(c.sec_cik)}</a></div>` : ''}
         ${prods.length ? `<div class="rx-card-line" style="margin-top:6px;">🎞 <span style="color:var(--gold);">Productions:</span> ${prods.map(p=>escHtml(p)).join(' &middot; ')}</div>` : ''}
         ${c.notes ? `<div class="rx-card-line" style="color: var(--dim); margin-top: 8px;">${escHtml(c.notes)}</div>` : ''}
         <div style="margin-top: 8px;">${tags}</div>
-        <div style="margin-top: 10px; display: flex; gap: 6px;">
+        <div style="margin-top: 10px; display: flex; gap: 6px; flex-wrap: wrap;">
           <button class="rx-btn-ghost" data-action="edit-company" data-id="${escHtml(c.id)}">Edit</button>
+          <button class="rx-btn-ghost" data-action="enrich-company" data-id="${escHtml(c.id)}" style="border-color: var(--gold); color: var(--gold);">Find emails</button>
           <button class="rx-btn-ghost" data-action="delete-company" data-id="${escHtml(c.id)}" style="color: var(--red); border-color: rgba(220,38,38,0.4);">Delete</button>
         </div>
       </div>`;
   }
 
   function personCard(p) {
+    // Render the multi-email list. The server attaches _freshness (0-200) +
+    // _isPrimary + _archivedAt to each email. We sort current-first, badge by
+    // freshness band, and collapse archived emails behind a "show historical"
+    // toggle so the card surfaces the email most likely to actually deliver.
+    const emailRows = (() => {
+      const list = Array.isArray(p.emails) ? p.emails : (p.email ? [{ address: p.email, source: 'manual' }] : []);
+      if (!list.length) return '<div class="rx-card-line" style="color: var(--dim);">✉ no email on file</div>';
+      // De-dupe by address (case-insensitive), preserve order
+      const seen = new Set();
+      const unique = list.filter(e => {
+        const a = (typeof e === 'string' ? e : e.address || '').toLowerCase();
+        if (!a || seen.has(a)) return false;
+        seen.add(a); return true;
+      });
+      const current  = unique.filter(e => typeof e === 'object' ? !e._archivedAt : true);
+      const archived = unique.filter(e => typeof e === 'object' && e._archivedAt);
+
+      const renderOne = (e, idx, isArchived) => {
+        const addr = typeof e === 'string' ? e : e.address;
+        const src  = typeof e === 'object' ? e.source : null;
+        const score = typeof e === 'object' ? e.score : null;
+        const fresh = typeof e === 'object' ? e._freshness : null;
+        const reasons = typeof e === 'object' ? (e._freshnessReasons || []) : [];
+        const isPrimary = !isArchived && (e._isPrimary || idx === 0 || (p._primaryEmail && addr.toLowerCase() === String(p._primaryEmail).toLowerCase()));
+        // Freshness badge color
+        let badge = '';
+        if (typeof fresh === 'number') {
+          let color = '#888', label = 'STALE';
+          if (fresh >= 130)      { color = '#10b981'; label = 'CURRENT'; }
+          else if (fresh >= 90)  { color = '#22c55e'; label = 'LIKELY'; }
+          else if (fresh >= 60)  { color = '#fbbf24'; label = 'AGING'; }
+          else if (fresh >= 30)  { color = '#f97316'; label = 'OLD'; }
+          else                   { color = '#ef4444'; label = 'STALE'; }
+          const tip = reasons.length ? reasons.join(', ') : `freshness score ${fresh}`;
+          badge = ` <span title="${escHtml(tip)} (score ${fresh})" style="color:${color}; font-size:10px; font-weight:700; letter-spacing:0.5px; padding:1px 5px; border:1px solid ${color}; border-radius:3px; vertical-align: middle;">${label}</span>`;
+        }
+        const tag = src ? ` <span style="color: var(--dim); font-size: 11px;">(${escHtml(src)}${score?` ${score}%`:''})</span>` : '';
+        const star = isPrimary ? ' <span style="color: var(--gold); font-size: 13px;" title="primary - most likely current">★</span>' : '';
+        const archMark = isArchived ? ' <span style="color: #ef4444; font-size: 10px; font-style: italic;" title="' + escHtml(e._archivedReason || 'archived') + '">[archived]</span>' : '';
+        const dim = isArchived ? 'opacity: 0.45; text-decoration: line-through;' : '';
+        return `<div class="rx-card-line" style="${dim}">✉ <a href="mailto:${escHtml(addr)}">${escHtml(addr)}</a>${star}${badge}${tag}${archMark}</div>`;
+      };
+
+      const cur = current.map((e, i) => renderOne(e, i, false)).join('');
+      const arc = archived.length
+        ? `<details style="margin: 4px 0 0 16px;"><summary style="color: var(--dim); font-size: 11px; cursor: pointer;">Show ${archived.length} archived (old job) email${archived.length===1?'':'s'}</summary>${archived.map((e,i) => renderOne(e, i, true)).join('')}</details>`
+        : '';
+      return cur + arc;
+    })();
     return `
       <div class="rx-card" data-id="${escHtml(p.id)}" data-kind="person">
         <div class="rx-card-name">${escHtml(p.name)}</div>
         <div class="rx-card-sub">${escHtml(p.title || p.dept || 'contact')}${p._companyName?' &middot; '+escHtml(p._companyName):''}</div>
-        ${p.email ? `<div class="rx-card-line">✉ <a href="mailto:${escHtml(p.email)}">${escHtml(p.email)}</a></div>` : '<div class="rx-card-line" style="color: var(--dim);">✉ no email on file</div>'}
+        ${emailRows}
         ${p.phone ? `<div class="rx-card-line">📞 ${escHtml(p.phone)}</div>` : ''}
         ${p.linkedin ? `<div class="rx-card-line">🔗 <a href="${escHtml(p.linkedin)}" target="_blank" rel="noopener">LinkedIn</a></div>` : ''}
         ${p.imdb ? `<div class="rx-card-line">🎬 <a href="https://www.imdb.com/name/${escHtml(p.imdb)}/" target="_blank" rel="noopener">IMDb profile</a></div>` : ''}
@@ -1621,6 +1755,7 @@ setTimeout(populateTicker, 1500);
         <div style="margin-top: 10px; display: flex; gap: 6px; flex-wrap: wrap;">
           <button class="rx-btn-ghost" data-action="edit-person" data-id="${escHtml(p.id)}">Edit</button>
           <button class="rx-btn-ghost" data-action="enrich-person" data-id="${escHtml(p.id)}">Find email</button>
+          <button class="rx-btn-ghost" data-action="find-newest" data-id="${escHtml(p.id)}" style="border-color: var(--gold); color: var(--gold);" title="Detect this contact's CURRENT employer via their latest TMDB credit, then Hunter the new domain. Use when an existing email looks stale (e.g. they moved jobs).">Find newest email</button>
           <button class="rx-btn-ghost" data-action="delete-person" data-id="${escHtml(p.id)}" style="color: var(--red); border-color: rgba(220,38,38,0.4);">Delete</button>
         </div>
       </div>`;
@@ -1727,7 +1862,7 @@ setTimeout(populateTicker, 1500);
     return `
       <label>Name *</label><input name="name" class="rx-input" required />
       <label>Type</label><select name="type" class="rx-select">
-        ${['prodco','studio-major','mini-major','streamer','agency','sales-agent','financier','publicist','bond','legal','vendor','other'].map(t=>`<option>${t}</option>`).join('')}
+        ${['agency','bond','financier','legal','mini-major','other','prodco','publicist','sales-agent','streamer','studio-major','vendor'].map(t=>`<option>${t}</option>`).join('')}
       </select>
       <label>Parent (optional)</label><input name="parent" class="rx-input" />
       <label>HQ address</label><input name="hq" class="rx-input" />
@@ -1746,13 +1881,20 @@ setTimeout(populateTicker, 1500);
   }
 
   function personForm(companies) {
-    const opts = ['<option value="">— No company —</option>'].concat((companies || []).map(c => `<option value="${escHtml(c.id)}">${escHtml(c.name)}</option>`)).join('');
+    const sortedCompanies = (companies || []).slice().sort((a, b) =>
+      String(a.name || '').toLowerCase().localeCompare(String(b.name || '').toLowerCase())
+    );
+    const opts = ['<option value="">— No company —</option>']
+      .concat(sortedCompanies.map(c => `<option value="${escHtml(c.id)}">${escHtml(c.name)}</option>`))
+      .join('');
+    const deptList = ['acquisitions','development','distribution','finance','general','legal','press','production','sales'];
     return `
       <label>Full name *</label><input name="name" class="rx-input" required />
       <label>Title / role</label><input name="title" class="rx-input" placeholder="VP Acquisitions" />
       <label>Company</label><select name="company_id" class="rx-select">${opts}</select>
       <label>Department</label><select name="dept" class="rx-select">
-        ${['','dev','acquisitions','production','sales','press','legal','finance','distribution','general'].map(d=>`<option value="${d}">${d||'(blank)'}</option>`).join('')}
+        <option value="">(blank)</option>
+        ${deptList.map(d=>`<option value="${d}">${d}</option>`).join('')}
       </select>
       <label>Email</label><input name="email" class="rx-input" type="email" />
       <label>Phone</label><input name="phone" class="rx-input" />
@@ -1843,7 +1985,7 @@ setTimeout(populateTicker, 1500);
   }
 
   async function enrich(id) {
-    statsEl.textContent = 'Searching company site, Wikipedia, and (if configured) Hunter.io for this contact...';
+    statsEl.textContent = 'Searching company site, Wikipedia, talent agencies, and Hunter.io for this contact...';
     try {
       const r = await fetch('/.netlify/functions/film-rolodex', {
         method: 'POST', credentials: 'include',
@@ -1851,15 +1993,39 @@ setTimeout(populateTicker, 1500);
         body: JSON.stringify({ action: 'enrich', personId: id }),
       });
       const j = await r.json();
-      if (!j.ok) { alert(j.reason || j.error || 'No match.'); statsEl.textContent = ''; return; }
       const f = j.found || {};
-      const bits = [];
-      if (j.verified) bits.push('verified email saved');
-      if (f.emails && f.emails.length) bits.push(f.emails.length + ' email(s) found');
-      if (f.phones && f.phones.length) bits.push(f.phones.length + ' phone(s)');
-      if (f.candidates && f.candidates.length) bits.push(f.candidates.length + ' email pattern guess(es)');
-      if (f.wiki) bits.push('Wikipedia bio attached');
-      statsEl.textContent = 'Enrich done: ' + (bits.length ? bits.join(' · ') : 'nothing new found');
+      // Build a detailed report regardless of ok/!ok
+      const lines = [];
+      if (j.verified && j.saved?.email) {
+        lines.push('✅ SAVED to contact: ' + j.saved.email);
+        if (j.saved.phone) lines.push('✅ SAVED phone: ' + j.saved.phone);
+      } else if (j.verified && f.emails?.length) {
+        lines.push('✅ SAVED to contact: ' + f.emails[0]);
+      }
+      if (f.candidates?.length) {
+        lines.push('Other candidates (not auto-saved):');
+        f.candidates.slice(0, 5).forEach(c => lines.push('  • ' + c));
+      }
+      if (f.hunterAll?.length) {
+        const others = f.hunterAll.slice(1, 4).filter(h => h.email);
+        if (others.length) {
+          lines.push('Other agency hits:');
+          others.forEach(h => lines.push(`  • ${h.email} (${h.domain}, score ${h.score})`));
+        }
+      }
+      if (f.phones?.length)  lines.push('Phone(s) found: ' + f.phones.slice(0, 3).join(', '));
+      if (f.wiki?.url)       lines.push('Wikipedia: ' + f.wiki.url);
+      if (j.reason)          lines.push('Note: ' + j.reason);
+      if (!j.ok && !lines.length) lines.push(j.error || 'No match.');
+
+      // Show inline summary in stats bar
+      const summary = j.verified ? 'verified email saved' :
+        (f.candidates?.length ? f.candidates.length + ' candidate(s)' :
+         f.wiki ? 'Wikipedia bio only' : 'nothing found');
+      statsEl.textContent = 'Enrich done: ' + summary;
+
+      // Detailed pop-up so the user can copy candidates
+      if (lines.length) alert('Find email - results:\n\n' + lines.join('\n'));
       fetchRolodex();
     } catch (e) { alert(e.message); }
   }
@@ -1919,6 +2085,24 @@ setTimeout(populateTicker, 1500);
   perPageSel.addEventListener('change', () => {
     state.perPage = parseInt(perPageSel.value, 10) || 25;
     state.page = 1;
+    // keep quick-show in sync
+    const opt = Array.from(showQuickSel.options).find(o => o.value === String(state.perPage));
+    showQuickSel.value = opt ? String(state.perPage) : '';
+    renderResults();
+  });
+  showQuickSel.addEventListener('change', () => {
+    if (!showQuickSel.value) return;
+    state.perPage = parseInt(showQuickSel.value, 10) || 25;
+    state.page = 1;
+    // keep main per-page in sync (add option if it's not there)
+    let match = Array.from(perPageSel.options).find(o => o.value === String(state.perPage));
+    if (!match) {
+      match = document.createElement('option');
+      match.value = String(state.perPage);
+      match.textContent = state.perPage + ' per page';
+      perPageSel.appendChild(match);
+    }
+    perPageSel.value = String(state.perPage);
     renderResults();
   });
   pagePrevBtn.addEventListener('click', () => { if (state.page > 1) { state.page--; renderResults(); resultsEl.scrollIntoView({ behavior: 'smooth', block: 'start' }); } });
@@ -1938,6 +2122,308 @@ setTimeout(populateTicker, 1500);
   $('#rxExportBtn').addEventListener('click', exportCSV);
   $('#rxSyncBtn').addEventListener('click', syncNow);
   $('#rxDeepSyncBtn').addEventListener('click', deepSyncNow);
+  $('#rxBackfillBtn').addEventListener('click', backfillHunter);
+  $('#rxExpandBtn').addEventListener('click', expandContacts);
+  $('#rxFreshenBtn').addEventListener('click', freshenStale);
+  $('#rxRestoreBtn').addEventListener('click', restoreFromSnapshot);
+
+  // Bulk-freshen sweep. Server-side `freshen-batch` action scores every
+  // contact's email freshness, sorts worst-first, and runs Find Newest Email
+  // on `limit` contacts per call (within a 22s wall-clock budget). The browser
+  // pages through nextOffset until paging.hasMore===false. Skips contacts
+  // already attempted in the last 14 days where nothing was found.
+  async function freshenStale() {
+    const ok = confirm(
+      `Bulk-freshen stale emails.\n\n` +
+      `Scans every contact, scores email freshness 0-200, takes the worst-scoring\n` +
+      `(stale agency emails, no current employer detected, etc.), and runs Find\n` +
+      `Newest Email on each. For each contact:\n\n` +
+      `  - Pulls latest TMDB credits\n` +
+      `  - Detects current production company\n` +
+      `  - Hunter-searches that domain for the contact's name\n` +
+      `  - Archives stale agency addresses\n\n` +
+      `Default: threshold 60, 5 contacts per batch, no upper limit (pages until done).\n` +
+      `Costs Hunter credits (1 per contact found). Skip-window: 14 days.\n\n` +
+      `Continue?`
+    );
+    if (!ok) return;
+
+    const btn = $('#rxFreshenBtn');
+    const original = btn.textContent;
+    btn.disabled = true;
+
+    let offset = 0;
+    let totalProcessed = 0;
+    let totalFound = 0;
+    let totalRemaining = null;
+    let calls = 0;
+    let consecutiveErrors = 0;
+    const MAX_CALLS = 200; // safety cap (= up to 1000 contacts per click)
+    const startedAt = Date.now();
+
+    try {
+      while (calls < MAX_CALLS) {
+        calls++;
+        btn.textContent = `Freshening ${totalProcessed}${totalRemaining != null ? '/' + (totalProcessed + totalRemaining) : ''}...`;
+        statsEl.textContent = `Freshen batch ${calls} - processed ${totalProcessed}, found ${totalFound} new emails${totalRemaining != null ? `, ~${totalRemaining} stale remaining` : ''}`;
+
+        let j;
+        try {
+          const r = await fetch('/.netlify/functions/film-rolodex', {
+            method: 'POST', credentials: 'include',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ action: 'freshen-batch', limit: 5, threshold: 60, offset }),
+          });
+          const text = await r.text();
+          try { j = JSON.parse(text); }
+          catch {
+            consecutiveErrors++;
+            statsEl.textContent = `Freshen: server returned non-JSON (call ${calls}, err ${consecutiveErrors}/3). Retrying...`;
+            if (consecutiveErrors >= 3) { statsEl.textContent = 'Freshen: aborted - server returned non-JSON 3x in a row.'; break; }
+            await new Promise(res => setTimeout(res, 2000));
+            continue;
+          }
+        } catch (e) {
+          consecutiveErrors++;
+          statsEl.textContent = `Freshen: network error (${e.message}, ${consecutiveErrors}/3). Retrying...`;
+          if (consecutiveErrors >= 3) { statsEl.textContent = 'Freshen: aborted - network failed 3x.'; break; }
+          await new Promise(res => setTimeout(res, 2000));
+          continue;
+        }
+
+        if (!j.ok) {
+          statsEl.textContent = 'Freshen error: ' + (j.error || 'unknown');
+          break;
+        }
+        consecutiveErrors = 0;
+
+        totalProcessed += (j.processed || 0);
+        totalFound     += (j.foundCount || 0);
+        if (j.paging && typeof j.paging.remaining === 'number') totalRemaining = j.paging.remaining;
+
+        if (j.bailed) {
+          statsEl.textContent = `Freshen: server bailed mid-batch (timeout safety). Will retry from offset ${j.paging?.nextOffset ?? offset}.`;
+        }
+
+        if (!j.paging || !j.paging.hasMore) break;
+        offset = j.paging.nextOffset;
+
+        // small pause so we don't hammer Hunter / TMDB
+        await new Promise(res => setTimeout(res, 400));
+      }
+    } finally {
+      btn.textContent = original;
+      btn.disabled = false;
+    }
+
+    const secs = ((Date.now() - startedAt) / 1000).toFixed(1);
+    statsEl.textContent = `Freshen done in ${secs}s. Processed ${totalProcessed} contacts, found ${totalFound} new emails.`;
+    fetchRolodex();
+    alert(`Bulk freshen complete.\n\nProcessed: ${totalProcessed} contacts\nNew current emails found: ${totalFound}\nBatches: ${calls}\nElapsed: ${secs}s\n\nStale agency addresses have been archived (visible under "Show archived" on each card).`);
+  }
+
+  // Snapshot picker. Lists the auto-snapshots taken before each bulk write
+  // and lets the user roll back to any of the last 10 states.
+  async function restoreFromSnapshot() {
+    statsEl.textContent = 'Loading snapshots...';
+    try {
+      const r = await fetch('/.netlify/functions/film-rolodex', {
+        method: 'POST', credentials: 'include',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ action: 'listSnapshots' }),
+      });
+      const j = await r.json();
+      if (!j.ok) { statsEl.textContent = 'Error: ' + (j.error || 'unknown'); return; }
+      const snaps = j.snapshots || [];
+      if (!snaps.length) {
+        alert('No snapshots yet. Snapshots are taken automatically before every bulk write (Expand, Backfill, Sync, Deep Crawl, Reset). Try one of those and then come back.');
+        statsEl.textContent = 'No snapshots.';
+        return;
+      }
+      const lines = snaps.map((s, i) =>
+        `${i + 1}. ${s.at || s.key.replace(/^_snapshot_/, '')} - ${s.label || 'auto'}\n   ${s.companiesCount} companies, ${s.peopleCount} contacts`
+      ).join('\n\n');
+      const choice = prompt(
+        `Restore from snapshot? (current state will be snapshot too, so this is reversible)\n\n${lines}\n\nEnter snapshot number (1-${snaps.length}) to restore, or Cancel:`,
+        '1'
+      );
+      if (!choice) { statsEl.textContent = 'Restore cancelled.'; return; }
+      const idx = parseInt(choice, 10) - 1;
+      if (isNaN(idx) || idx < 0 || idx >= snaps.length) { alert('Invalid choice.'); return; }
+      const target = snaps[idx];
+      const ok = confirm(`Restore to:\n\n${target.at}\n${target.label}\n${target.companiesCount} companies, ${target.peopleCount} contacts\n\nContinue?`);
+      if (!ok) { statsEl.textContent = 'Restore cancelled.'; return; }
+      statsEl.textContent = 'Restoring...';
+      const r2 = await fetch('/.netlify/functions/film-rolodex', {
+        method: 'POST', credentials: 'include',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ action: 'restoreSnapshot', key: target.key }),
+      });
+      const j2 = await r2.json();
+      if (!j2.ok) { alert('Restore failed: ' + (j2.error || 'unknown')); return; }
+      alert(`Restored.\n\nCompanies: ${j2.restored.companies}\nContacts: ${j2.restored.people}\nFrom: ${j2.restored.takenAt}\n\nCurrent state was snapshot too - you can undo this restore from the Restore menu.`);
+      fetchRolodex();
+    } catch (e) {
+      statsEl.textContent = 'Restore error: ' + e.message;
+    }
+  }
+
+  // Mass-import contacts. Walks N pages of each source via the
+  // film-rolodex-expand function. Each page = one function call (<26s),
+  // so the browser can drive the entire run without any timeout risk.
+  async function expandContacts() {
+    const PLAN = [
+      { source: 'tmdb-movie',          pages: 20, label: 'TMDB movies' },
+      { source: 'tmdb-tv',             pages: 20, label: 'TMDB TV (showrunners + writers room)' },
+      { source: 'tmdb-discover',       pages: 16, label: 'TMDB discover (indie / festival reach)' },
+      { source: 'tmdb-person-popular', pages: 25, label: 'TMDB popular people (working talent)' },
+      { source: 'nyc-film-permits',    pages: 10, label: 'NYC OpenData film permits (active prodcos)' },
+      { source: 'la-film-permits',     pages: 10, label: 'LA City OpenData film permits' },
+      { source: 'wiki-list',           pages: 18, label: 'Wikipedia film-industry lists (18 lists)' },
+    ];
+    const totalCalls = PLAN.reduce((s, p) => s + p.pages, 0);
+    const ok = confirm(
+      `Mass-import contacts from ${PLAN.length} sources (${totalCalls} API calls):\n\n` +
+      PLAN.map(p => `  - ${p.label} (${p.pages} pages)`).join('\n') +
+      `\n\nExpected: ~2000-4000 new contacts, ~200-500 new companies.\nElapsed: 3-6 minutes (you can keep using the page).\n\nContinue?`
+    );
+    if (!ok) return;
+
+    const btn = $('#rxExpandBtn');
+    const original = btn.textContent;
+    btn.disabled = true;
+
+    let call = 0, totalP = 0, totalC = 0, errors = 0;
+    const startedAt = Date.now();
+    for (const stage of PLAN) {
+      for (let page = 1; page <= stage.pages; page++) {
+        call++;
+        btn.textContent = `Expand ${call}/${totalCalls}...`;
+        statsEl.textContent = `Expand ${call}/${totalCalls} - ${stage.label} pg ${page} (added so far: +${totalP} contacts, +${totalC} companies)`;
+        try {
+          const r = await fetch('/.netlify/functions/film-rolodex-expand', {
+            method: 'POST', credentials: 'include',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ source: stage.source, page }),
+          });
+          const text = await r.text();
+          let j; try { j = JSON.parse(text); } catch { errors++; continue; }
+          if (j?.sync?.pAdded) totalP += j.sync.pAdded;
+          if (j?.sync?.cAdded) totalC += j.sync.cAdded;
+        } catch (e) {
+          errors++;
+        }
+        await new Promise(res => setTimeout(res, 250));
+      }
+    }
+    const secs = ((Date.now() - startedAt) / 1000).toFixed(1);
+    btn.textContent = original;
+    btn.disabled = false;
+    statsEl.textContent = `Expand done in ${secs}s. +${totalP} contacts, +${totalC} companies. ${errors} error(s).`;
+    fetchRolodex();
+    alert(`Mass-import complete.\n\nNew contacts: +${totalP}\nNew companies: +${totalC}\nErrors: ${errors}\nElapsed: ${secs}s\n\nNext step: click Backfill Hunter to find emails for the new companies.`);
+  }
+
+  // Walk every COMPANY that has a website (Hunter domain-search returns up to
+  // 25 indexed emails per call). Then walk every PERSON who already has a
+  // Hunter-found agency email so the new multi-email persist code pulls in
+  // every alternate agency address (paradigm + uta + wme + caa + gersh).
+  async function backfillHunter() {
+    // ── Pass 1: companies ──
+    const companyTargets = (state.data.companies || []).filter(c => c && c.id && c.website);
+    if (companyTargets.length) {
+      const okC = confirm(`Backfill Hunter for ${companyTargets.length} company website(s)?\n\nUses 1 Hunter domain-search call per company (returns up to 25 emails each).\n\nContinue?`);
+      if (okC) {
+        const btn = $('#rxBackfillBtn');
+        const original = btn.textContent;
+        btn.disabled = true;
+        let done = 0, addedTotal = 0, errors = 0;
+        const startedAt = Date.now();
+        for (const c of companyTargets) {
+          done++;
+          btn.textContent = `Co ${done}/${companyTargets.length}...`;
+          statsEl.textContent = `Company backfill ${done}/${companyTargets.length} - ${c.name || c.id} (added so far: ${addedTotal})`;
+          try {
+            const r = await fetch('/.netlify/functions/film-rolodex', {
+              method: 'POST', credentials: 'include',
+              headers: { 'Content-Type': 'application/json' },
+              body: JSON.stringify({ action: 'enrich-company', companyId: c.id }),
+            });
+            const j = await r.json();
+            if (j?.saved?.addedEmails) addedTotal += j.saved.addedEmails;
+          } catch (e) { errors++; }
+          await new Promise(res => setTimeout(res, 300));
+        }
+        const secs = ((Date.now() - startedAt) / 1000).toFixed(1);
+        btn.textContent = original;
+        btn.disabled = false;
+        statsEl.textContent = `Company backfill done in ${secs}s. ${done} companies, +${addedTotal} new email(s). ${errors} error(s).`;
+        fetchRolodex();
+        alert(`Company backfill complete.\n\nCompanies processed: ${done}\nNew emails added: ${addedTotal}\nErrors: ${errors}\nElapsed: ${secs}s`);
+      }
+    }
+
+    // ── Pass 2: contacts (talent agencies) ──
+    const TALENT_DOMAINS = ['caa.com','wmeagency.com','unitedtalent.com','gersh.com','paradigmagency.com'];
+    const isAgencyAddr = (a) => {
+      if (!a) return false;
+      const lo = String(a).toLowerCase();
+      return TALENT_DOMAINS.some(d => lo.endsWith('@' + d) || lo.endsWith('.' + d));
+    };
+    const isAgencySrc = (s) => s && TALENT_DOMAINS.includes(String(s).toLowerCase());
+
+    const targets = (state.data.people || []).filter(p => {
+      if (!p || !p.id) return false;
+      if (isAgencyAddr(p.email)) return true;
+      const arr = Array.isArray(p.emails) ? p.emails : [];
+      return arr.some(e => {
+        if (typeof e === 'string') return isAgencyAddr(e);
+        return isAgencyAddr(e?.address) || isAgencySrc(e?.source);
+      });
+    });
+
+    if (!targets.length) {
+      alert('No contacts found with an existing agency email (CAA, WME, UTA, Gersh, Paradigm). Use Find email on individual contacts first - the backfill re-enriches anyone Hunter has already matched once, so the new multi-email logic can capture the rest.');
+      return;
+    }
+
+    const ok = confirm(`Backfill Hunter for ${targets.length} contact(s)?\n\nThis will call Hunter ~${targets.length * 5} times against the 5 talent agencies and save every additional email it finds. Hunter Starter quota is 500/mo.\n\nContinue?`);
+    if (!ok) return;
+
+    const btn = $('#rxBackfillBtn');
+    const original = btn.textContent;
+    btn.disabled = true;
+
+    let done = 0, addedTotal = 0, errors = 0;
+    const startedAt = Date.now();
+
+    for (const p of targets) {
+      done++;
+      const pre = (Array.isArray(p.emails) ? p.emails.length : (p.email ? 1 : 0));
+      btn.textContent = `Backfilling ${done}/${targets.length}...`;
+      statsEl.textContent = `Backfill ${done}/${targets.length} - ${p.name || p.id} (added so far: ${addedTotal})`;
+      try {
+        const r = await fetch('/.netlify/functions/film-rolodex', {
+          method: 'POST', credentials: 'include',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ action: 'enrich', personId: p.id }),
+        });
+        const j = await r.json();
+        const post = j?.person?.emails?.length || 0;
+        if (post > pre) addedTotal += (post - pre);
+      } catch (e) {
+        errors++;
+      }
+      await new Promise(res => setTimeout(res, 250));
+    }
+
+    const secs = ((Date.now() - startedAt) / 1000).toFixed(1);
+    btn.textContent = original;
+    btn.disabled = false;
+    statsEl.textContent = `Backfill done in ${secs}s. Re-enriched ${done} contact(s), added ${addedTotal} new email(s). ${errors} error(s).`;
+    fetchRolodex();
+    alert(`Backfill complete.\n\nContacts processed: ${done}\nNew emails added: ${addedTotal}\nErrors: ${errors}\nElapsed: ${secs}s`);
+  }
 
   async function syncNow() {
     const btn = $('#rxSyncBtn');
@@ -1972,19 +2458,28 @@ setTimeout(populateTicker, 1500);
     const original = btn.textContent;
     btn.textContent = 'Crawling...';
     btn.disabled = true;
-    statsEl.textContent = 'Deep-crawling 25 company sites for emails / phones / personnel / productions (this can take 60-90s)...';
+    statsEl.textContent = 'Deep-crawling next 8-company batch for emails / phones / personnel / productions...';
     try {
       const r = await fetch('/.netlify/functions/film-rolodex-deep-cron', {
         method: 'POST', credentials: 'include',
         headers: { 'Content-Type': 'application/json' },
         body: '{}',
       });
-      const j = await r.json();
+      const text = await r.text();
+      let j;
+      try { j = JSON.parse(text); }
+      catch {
+        // Function timed out (Netlify returns an HTML 502/504). Surface a useful
+        // error and remind the user the GitHub Actions daily scrape covers all
+        // 140+ companies without any per-call timeout.
+        statsEl.textContent = `Deep crawl: function timed out (${r.status}). Try again - it advances a cursor so each click crawls the next 8 companies. Or wait for the daily GitHub Actions scrape (09:30 UTC) which has no timeout.`;
+        return;
+      }
       if (!r.ok || !j.ok) {
         statsEl.textContent = 'Deep crawl error: ' + (j.error || r.status);
       } else {
         const s = j.sync || {};
-        statsEl.textContent = `Deep crawl in ${(j.runMs/1000).toFixed(1)}s. Crawled ${j.crawled} sites (${j.pages} pages). Companies upd ${s.cUpdated||0}. People +${s.pAdded||0}/upd ${s.pUpdated||0}. Total ${s.totalCompanies}/${s.totalPeople}.`;
+        statsEl.textContent = `Deep crawl in ${(j.runMs/1000).toFixed(1)}s. Crawled ${j.crawled} sites (${j.pages} pages). Companies upd ${s.cUpdated||0}. People +${s.pAdded||0}/upd ${s.pUpdated||0}. Total ${s.totalCompanies}/${s.totalPeople}.${j.partialBail?' (Bailed early - cursor rewound, click again to retry the rest.)':''}`;
         fetchRolodex();
       }
     } catch (e) {
@@ -2013,7 +2508,85 @@ setTimeout(populateTicker, 1500);
     } else if (action === 'delete-company') del('company', id);
     else if (action === 'delete-person') del('person', id);
     else if (action === 'enrich-person') enrich(id);
+    else if (action === 'enrich-company') enrichCompany(id);
+    else if (action === 'find-newest') findNewest(id);
   });
+
+  async function findNewest(id) {
+    statsEl.textContent = 'Find newest email: pulling latest TMDB credits to detect current employer, then Hunter-searching that domain...';
+    try {
+      const r = await fetch('/.netlify/functions/film-rolodex', {
+        method: 'POST', credentials: 'include',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ action: 'find-newest-email', personId: id }),
+      });
+      const text = await r.text();
+      let j;
+      try { j = JSON.parse(text); }
+      catch { alert('Server returned non-JSON (probably timed out):\n\n' + text.slice(0, 200)); statsEl.textContent = 'Find newest: server error'; return; }
+      if (!j.ok) { alert('Find newest failed: ' + (j.error || 'unknown')); statsEl.textContent = 'Find newest: failed'; return; }
+
+      const lines = [];
+      if (j.found && j.newEmail) {
+        lines.push(`FOUND new email: ${j.newEmail.address}`);
+        lines.push(`  via "${j.latestProject || '?'}" -> ${j.currentCompany?.name || '?'} -> ${j.resolvedDomain || '?'}`);
+        if (j.newEmail.score) lines.push(`  Hunter confidence: ${j.newEmail.score}%`);
+        if (j.verify) lines.push(`  SMTP verify: ${j.verify.status} (smtp_check=${j.verify.smtp_check}, score=${j.verify.score})`);
+        if (j.newEmail.title) lines.push(`  Title at new company: ${j.newEmail.title}`);
+      } else if (j.currentCompany) {
+        lines.push(`Detected company change: ${j.currentCompany.name} (from "${j.latestProject}")`);
+        lines.push(`But could not find an email at ${j.resolvedDomain || '(no domain on file)'}.`);
+        lines.push('Affiliation updated. Old emails marked as historical.');
+      } else {
+        lines.push('Could not detect a current production company from TMDB credits.');
+        lines.push('Either no recent producing/directing credits, or TMDB has no person match.');
+      }
+      lines.push('');
+      lines.push('-- Trace --');
+      (j.trace || []).forEach(t => lines.push(t));
+      alert('Find newest email - results:\n\n' + lines.join('\n'));
+      statsEl.textContent = j.found ? `Find newest: NEW EMAIL ${j.newEmail.address}` : 'Find newest: no new email found';
+      fetchRolodex();
+    } catch (e) { alert(e.message); statsEl.textContent = 'Find newest: ' + e.message; }
+  }
+
+  async function enrichCompany(id) {
+    statsEl.textContent = 'Hunter domain-search + crawling /team /about /contact /press for emails + phones...';
+    try {
+      const r = await fetch('/.netlify/functions/film-rolodex', {
+        method: 'POST', credentials: 'include',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ action: 'enrich-company', companyId: id }),
+      });
+      const j = await r.json();
+      const f = j.found || {};
+      const lines = [];
+      if (j.verified && j.saved) {
+        lines.push(`SAVED: +${j.saved.addedEmails} new email(s). Total emails: ${j.saved.totalEmails}, phones: ${j.saved.totalPhones}.`);
+      }
+      if (f.hunterMeta) {
+        lines.push(`Hunter: ${f.hunterMeta.total} indexed email(s)${f.hunterMeta.organization?` for "${f.hunterMeta.organization}"`:''}${f.hunterMeta.pattern?` (pattern: ${f.hunterMeta.pattern})`:''}.`);
+      }
+      if (f.hunterEmails?.length) {
+        lines.push('Hunter hits:');
+        f.hunterEmails.slice(0, 8).forEach(h => {
+          const who = [h.first_name, h.last_name].filter(Boolean).join(' ');
+          const role = h.position || h.department || '';
+          lines.push(`  • ${h.address}${who?` - ${who}`:''}${role?` (${role})`:''}${h.confidence?` [${h.confidence}%]`:''}`);
+        });
+      }
+      if (f.phones?.length) lines.push('Phones found: ' + f.phones.slice(0, 4).join(', '));
+      if (f.urls?.length)   lines.push('Sources: ' + f.urls.slice(0, 4).join(', '));
+      if (j.reason)         lines.push('Note: ' + j.reason);
+      if (!j.ok && !lines.length) lines.push(j.error || 'No match.');
+
+      statsEl.textContent = j.verified
+        ? `Find emails done: +${j.saved.addedEmails} new, ${j.saved.totalEmails} total.`
+        : 'Find emails: ' + (j.reason || 'nothing found');
+      if (lines.length) alert('Find emails - results:\n\n' + lines.join('\n'));
+      fetchRolodex();
+    } catch (e) { alert(e.message); }
+  }
 
   // boot: check existing session
   checkAuth().then(ok => { if (ok) enterAuthed(); });
