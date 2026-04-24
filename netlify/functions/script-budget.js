@@ -5,7 +5,7 @@
 // POST { breakdown, schedule?, context?: { budgetTier, union, region, shootState } }
 // -> { ok: true, budget: { topSheet, categories, contingency, grandTotal } }
 
-const MODEL = 'gemini-2.5-pro';
+const MODEL = process.env.GEMINI_MODEL || 'gemini-2.5-flash';
 const API_URL = `https://generativelanguage.googleapis.com/v1beta/models/${MODEL}:generateContent`;
 
 const SYSTEM_PROMPT = `You are a Line Producer building a top-sheet budget in AICP/MPAA style.

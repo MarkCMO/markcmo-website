@@ -6,7 +6,7 @@
 // POST { breakdown: {...}, constraints?: { shootDays?: number, maxHoursPerDay?: number, unionRules?: string, daysOfWeek?: number } }
 // -> { ok: true, schedule: { days: [...], dayOutOfDays: [...], summary: {...} } }
 
-const MODEL = 'gemini-2.5-pro';
+const MODEL = process.env.GEMINI_MODEL || 'gemini-2.5-flash';
 const API_URL = `https://generativelanguage.googleapis.com/v1beta/models/${MODEL}:generateContent`;
 
 const SYSTEM_PROMPT = `You are a veteran Unit Production Manager building a shooting schedule in Movie Magic style.

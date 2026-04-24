@@ -414,7 +414,7 @@ async function runBreakdown() {
   state.scriptText = text;
 
   $('goBtn').disabled = true;
-  setStatus('<span class="spinner"></span> Gemini 2.5 Pro is reading your script and tagging every element. Can take 30-120s for a feature...', 'info');
+  setStatus('<span class="spinner"></span> Gemini is reading your script and tagging every element. Can take 30-120s for a feature...', 'info');
 
   try {
     const r = await fetch('/.netlify/functions/script-dissect', {

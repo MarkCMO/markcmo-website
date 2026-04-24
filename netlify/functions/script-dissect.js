@@ -7,7 +7,7 @@
 //
 // Env: GEMINI_API_KEY
 
-const MODEL = 'gemini-2.5-pro';
+const MODEL = process.env.GEMINI_MODEL || 'gemini-2.5-flash';
 const API_URL = `https://generativelanguage.googleapis.com/v1beta/models/${MODEL}:generateContent`;
 const MAX_OUTPUT_TOKENS = 32000;
 
