@@ -1182,6 +1182,135 @@
   /* Hide the duplicate top-right Case Files button now that it lives in the sidebar */
   .top-bar a[href="/admin/vdr"] { display: none !important; }
 
+  /* ════════════════════════════════════════════════════════════
+     PANEL TRANSITIONS — smoother fade + slide between admin panels
+     ════════════════════════════════════════════════════════════ */
+  .panel { transition: opacity 0.18s ease, transform 0.18s ease; }
+  .panel:not(.active) { opacity: 0; transform: translateY(8px); pointer-events: none; }
+  .panel.active { opacity: 1; transform: translateY(0); }
+
+  .admin-nav-item, .admin-nav-cta { transition: background 0.14s ease, color 0.14s ease, border-color 0.14s ease, transform 0.14s ease, box-shadow 0.14s ease !important; }
+
+  /* ════════════════════════════════════════════════════════════
+     CASE FILES PANEL — scoped to #panel-case-files (cf- prefix)
+     Modern light/blue palette matching markcmo.com brand.
+     ════════════════════════════════════════════════════════════ */
+  .cf-wrap { padding: 24px 32px; }
+  .cf-layout { display: grid; grid-template-columns: 320px 1fr; gap: 1.5rem; align-items: start; }
+  @media (max-width: 980px) { .cf-layout { grid-template-columns: 1fr; } }
+
+  /* Sidebar (clients list) */
+  .cf-aside {
+    background: #FFFFFF;
+    border: 1px solid #E2E8F0;
+    border-radius: 14px;
+    padding: 1.1rem;
+    box-shadow: 0 1px 2px rgba(15,32,64,0.04), 0 8px 24px rgba(15,32,64,0.06);
+    position: sticky; top: 16px;
+  }
+  .cf-aside-head { display: flex; align-items: center; justify-content: space-between; margin-bottom: 0.75rem; }
+  .cf-aside-title { font-family: 'DM Mono', monospace; font-size: 0.7rem; letter-spacing: 0.18em; text-transform: uppercase; color: #2563EB; font-weight: 700; }
+  .cf-aside-count { font-family: 'DM Mono', monospace; font-size: 0.7rem; color: #94A3B8; }
+  .cf-search { width: 100%; padding: 0.55rem 0.8rem; border: 1.5px solid #E2E8F0; border-radius: 8px; font-size: 0.88rem; font-family: 'Barlow', sans-serif; outline: none; transition: border-color 0.15s, box-shadow 0.15s; margin-bottom: 0.85rem; color: #1E293B; background: #FFFFFF; }
+  .cf-search:focus { border-color: #2563EB; box-shadow: 0 0 0 3px rgba(37,99,235,0.12); }
+  .cf-list { display: flex; flex-direction: column; gap: 0.5rem; max-height: calc(100vh - 220px); overflow-y: auto; padding-right: 0.25rem; }
+  .cf-list::-webkit-scrollbar { width: 6px; } .cf-list::-webkit-scrollbar-thumb { background: #CBD5E1; border-radius: 3px; }
+
+  .cf-card { background: #F8FAFC; border: 1px solid #E2E8F0; border-radius: 10px; padding: 0.85rem 1rem; cursor: pointer; transition: all 0.15s; display: flex; flex-direction: column; gap: 0.25rem; }
+  .cf-card:hover { border-color: #3B82F6; background: #EFF6FF; transform: translateY(-1px); }
+  .cf-card.active { border-color: #2563EB; background: #EFF6FF; box-shadow: 0 0 0 1.5px #2563EB inset; }
+  .cf-card .cf-name { font-weight: 700; color: #0A1628; font-size: 0.92rem; line-height: 1.2; font-family: 'Barlow', sans-serif; }
+  .cf-card .cf-meta { font-family: 'DM Mono', monospace; font-size: 0.62rem; letter-spacing: 0.04em; color: #64748B; }
+  .cf-card .cf-row { display: flex; justify-content: space-between; align-items: center; gap: 0.5rem; margin-top: 0.25rem; }
+
+  /* Detail panel */
+  .cf-panel { min-height: 400px; }
+  .cf-empty { background: #FFFFFF; border: 1px dashed #E2E8F0; border-radius: 14px; padding: 3.5rem 2rem; text-align: center; color: #64748B; }
+  .cf-empty-icon { font-size: 2.4rem; margin-bottom: 0.75rem; }
+  .cf-empty h3 { font-family: 'Bebas Neue', sans-serif; font-size: 1.6rem; color: #0A1628; font-weight: 400; letter-spacing: 0.03em; margin-bottom: 0.5rem; }
+  .cf-empty p { font-size: 0.95rem; color: #64748B; max-width: 520px; margin: 0 auto; }
+
+  /* Case head card */
+  .cf-head { background: #FFFFFF; border: 1px solid rgba(15,32,64,0.06); border-radius: 16px; padding: 1.5rem 1.75rem; margin-bottom: 1rem; box-shadow: 0 1px 2px rgba(15,32,64,0.04), 0 12px 32px rgba(37,99,235,0.10); }
+  .cf-eyebrow { font-family: 'DM Mono', monospace; font-size: 0.65rem; letter-spacing: 0.18em; text-transform: uppercase; color: #2563EB; font-weight: 700; margin-bottom: 0.5rem; }
+  .cf-head h2 { font-family: 'Bebas Neue', sans-serif; font-size: 2rem; font-weight: 400; letter-spacing: 0.03em; color: #0A1628; line-height: 1.1; margin-bottom: 0.25rem; }
+  .cf-head .cf-dba { font-size: 0.9rem; color: #64748B; margin-bottom: 0.85rem; }
+  .cf-meta-grid { display: grid; grid-template-columns: repeat(4,1fr); gap: 1rem; padding-top: 1rem; border-top: 1px solid #E2E8F0; }
+  @media (max-width: 760px) { .cf-meta-grid { grid-template-columns: 1fr 1fr; } }
+  .cf-meta-grid .l { font-family: 'DM Mono', monospace; font-size: 0.6rem; letter-spacing: 0.18em; text-transform: uppercase; color: #94A3B8; margin-bottom: 0.25rem; }
+  .cf-meta-grid .v { font-family: 'Barlow', sans-serif; font-size: 0.92rem; color: #0A1628; font-weight: 600; }
+
+  .cf-actions { display: flex; gap: 0.6rem; flex-wrap: wrap; align-items: center; margin-top: 1.25rem; padding-top: 1.25rem; border-top: 1px solid #E2E8F0; }
+  .cf-action-meta { font-family: 'DM Mono', monospace; font-size: 0.65rem; color: #64748B; margin-left: auto; }
+
+  /* Sections */
+  .cf-section { background: #FFFFFF; border: 1px solid rgba(15,32,64,0.06); border-radius: 16px; padding: 1.5rem 1.75rem; margin-bottom: 1rem; box-shadow: 0 1px 2px rgba(15,32,64,0.04), 0 12px 32px rgba(15,32,64,0.08); }
+  .cf-sec-head { display: flex; align-items: center; justify-content: space-between; margin-bottom: 1rem; gap: 1rem; flex-wrap: wrap; }
+  .cf-sec-eyebrow { font-family: 'DM Mono', monospace; font-size: 0.65rem; letter-spacing: 0.18em; text-transform: uppercase; color: #2563EB; font-weight: 600; display: block; margin-bottom: 0.25rem; }
+  .cf-sec-title { font-family: 'Bebas Neue', sans-serif; font-size: 1.2rem; font-weight: 400; letter-spacing: 0.03em; color: #0A1628; }
+
+  /* Engagement card */
+  .cf-eng { border: 1px solid #E2E8F0; border-radius: 12px; padding: 1.25rem 1.5rem; margin-bottom: 1rem; }
+  .cf-eng:last-child { margin-bottom: 0; }
+  .cf-eng-head { display: flex; align-items: flex-start; justify-content: space-between; gap: 1rem; margin-bottom: 1rem; flex-wrap: wrap; }
+  .cf-eng-head .cf-eng-name { font-family: 'Bebas Neue', sans-serif; font-size: 1.3rem; color: #0A1628; font-weight: 400; letter-spacing: 0.03em; }
+  .cf-eng-head .cf-fee { font-family: 'Bebas Neue', sans-serif; font-size: 1.4rem; color: #2563EB; font-weight: 400; letter-spacing: 0.04em; text-align: right; }
+  .cf-eng-head .cf-fee small { display: block; font-family: 'DM Mono', monospace; font-size: 0.6rem; color: #94A3B8; letter-spacing: 0.18em; margin-top: 0.1rem; }
+  .cf-eng-meta { display: grid; grid-template-columns: repeat(4,1fr); gap: 0.85rem; padding: 0.85rem 1rem; background: #F8FAFC; border-radius: 8px; font-size: 0.82rem; }
+  @media(max-width:760px){.cf-eng-meta{grid-template-columns:1fr 1fr;}}
+  .cf-eng-meta .l { font-family: 'DM Mono', monospace; font-size: 0.58rem; letter-spacing: 0.18em; text-transform: uppercase; color: #94A3B8; margin-bottom: 0.15rem; }
+  .cf-eng-meta .v { font-weight: 600; color: #0A1628; }
+
+  /* Doc table */
+  .cf-doc-table { width: 100%; border-collapse: collapse; margin-top: 1rem; }
+  .cf-doc-table th { font-family: 'DM Mono', monospace; font-size: 0.6rem; letter-spacing: 0.15em; text-transform: uppercase; color: #94A3B8; font-weight: 600; text-align: left; padding: 0.5rem 0.75rem; border-bottom: 1.5px solid #E2E8F0; }
+  .cf-doc-table td { padding: 0.85rem 0.75rem; border-bottom: 1px solid #F1F5F9; font-size: 0.88rem; vertical-align: middle; color: #1E293B; }
+  .cf-doc-table tr:last-child td { border-bottom: none; }
+  .cf-doc-table .cf-doc-id { font-family: 'DM Mono', monospace; font-weight: 700; color: #0A1628; }
+  .cf-doc-actions { text-align: right; white-space: nowrap; }
+
+  /* Status pills */
+  .cf-pill { display: inline-flex; align-items: center; gap: 0.3rem; font-family: 'DM Mono', monospace; font-size: 0.6rem; letter-spacing: 0.1em; text-transform: uppercase; padding: 0.2rem 0.6rem; border-radius: 999px; font-weight: 600; border: 1px solid transparent; white-space: nowrap; }
+  .cf-pill-blue { background: #EFF6FF; color: #2563EB; border-color: rgba(37,99,235,0.25); }
+  .cf-pill-green { background: #ECFDF5; color: #065F46; border-color: rgba(16,185,129,0.3); }
+  .cf-pill-orange { background: #FFF7ED; color: #9A3412; border-color: rgba(249,115,22,0.3); }
+  .cf-pill-grey { background: #F1F5F9; color: #64748B; border-color: #E2E8F0; }
+  .cf-pill-red { background: #FEE2E2; color: #DC2626; border-color: rgba(220,38,38,0.3); }
+
+  /* Action buttons */
+  .cf-btn { display: inline-flex; align-items: center; gap: 0.4rem; padding: 0.6rem 1.1rem; border-radius: 8px; font-family: 'Barlow', sans-serif; font-size: 0.82rem; font-weight: 700; letter-spacing: 0.04em; cursor: pointer; border: none; text-decoration: none; transition: all 0.15s; }
+  .cf-btn.primary { background: #F97316; color: #FFFFFF; box-shadow: 0 2px 8px rgba(249,115,22,0.3); }
+  .cf-btn.primary:hover { background: #EA6C0A; transform: translateY(-1px); box-shadow: 0 4px 12px rgba(249,115,22,0.4); color: #FFFFFF; }
+  .cf-btn.outline { background: #FFFFFF; color: #1E293B; border: 1.5px solid #E2E8F0; }
+  .cf-btn.outline:hover { border-color: #2563EB; color: #2563EB; background: #EFF6FF; }
+  .cf-btn-sm { padding: 0.35rem 0.7rem; font-size: 0.7rem; border-radius: 6px; }
+
+  /* Invoice block */
+  .cf-invoice { margin-top: 1.25rem; padding: 1.25rem 1.5rem; background: #EFF6FF; border-radius: 12px; border: 1px solid rgba(37,99,235,0.15); }
+  .cf-invoice-empty { background: #F8FAFC; border: 1px dashed #E2E8F0; }
+  .cf-invoice-head { display: flex; align-items: center; justify-content: space-between; gap: 1rem; margin-bottom: 0.85rem; flex-wrap: wrap; }
+  .cf-inv-eyebrow { font-family: 'DM Mono', monospace; font-size: 0.65rem; letter-spacing: 0.18em; text-transform: uppercase; color: #2563EB; font-weight: 700; }
+  .cf-invoice-meta { display: grid; grid-template-columns: repeat(4,1fr); gap: 0.85rem; padding: 0.75rem 1rem; background: #FFFFFF; border-radius: 8px; margin-bottom: 0.85rem; font-size: 0.82rem; }
+  @media(max-width:760px){.cf-invoice-meta{grid-template-columns:1fr 1fr;}}
+  .cf-invoice-meta .l { font-family: 'DM Mono', monospace; font-size: 0.58rem; letter-spacing: 0.18em; text-transform: uppercase; color: #94A3B8; margin-bottom: 0.15rem; }
+  .cf-invoice-meta .v { font-weight: 600; color: #0A1628; }
+  .cf-invoice-actions { display: flex; gap: 0.5rem; flex-wrap: wrap; align-items: center; }
+
+  /* Audit timeline */
+  .cf-audit-list { list-style: none; padding: 0; margin: 0; }
+  .cf-audit-item { display: grid; grid-template-columns: auto 1fr auto; gap: 1rem; padding: 0.75rem 0; border-bottom: 1px dashed #E2E8F0; align-items: center; }
+  .cf-audit-item:last-child { border-bottom: none; }
+  .cf-audit-event { font-family: 'DM Mono', monospace; font-size: 0.72rem; letter-spacing: 0.08em; color: #2563EB; background: #EFF6FF; padding: 0.25rem 0.65rem; border-radius: 6px; font-weight: 600; white-space: nowrap; }
+  .cf-audit-detail { font-size: 0.85rem; color: #1E293B; }
+  .cf-audit-time { font-family: 'DM Mono', monospace; font-size: 0.7rem; color: #94A3B8; white-space: nowrap; }
+
+  /* Loading + error */
+  .cf-loading { display: flex; align-items: center; justify-content: center; padding: 3rem; color: #64748B; }
+  .cf-loading-ring { width: 32px; height: 32px; border: 3px solid #E2E8F0; border-top-color: #2563EB; border-radius: 50%; animation: spin 0.8s linear infinite; }
+  @keyframes spin { to { transform: rotate(360deg); } }
+  .cf-err { background: #FFF7ED; border: 1px solid rgba(249,115,22,0.3); color: #9A3412; padding: 1rem 1.25rem; border-radius: 10px; margin-bottom: 1rem; font-size: 0.92rem; }
+  .cf-err.fatal { background: #FEE2E2; border-color: rgba(220,38,38,0.3); color: #991B1B; }
+
 </style>
 <meta name="description" content="MarkCMO — Admin - MarkCMO provides fractional CMO and strategic marketing services for growth-stage companies.">
 <link rel="canonical" href="https://markcmo.com/admin.html">
@@ -1242,8 +1371,8 @@
 <nav class="admin-nav">
   <!-- ADMIN TOOL NAVIGATION (replaced public-site nav) -->
 
-  <!-- Quick action: Case Files VDR (separate page, opens in same tab) -->
-  <a href="/admin/vdr" class="admin-nav-cta">📁 Case Files (VDR)</a>
+  <!-- Quick action: Case Files (VDR) - now an embedded panel, not a separate page -->
+  <a class="admin-nav-cta" onclick="switchPanel('case-files', this)">📁 Case Files (VDR)</a>
 
   <!-- Dashboard -->
   <div class="admin-nav-section">Overview</div>
@@ -1253,7 +1382,7 @@
   <div class="admin-nav-section">CRM</div>
   <a class="admin-nav-item" onclick="switchPanel('leads', this)"><span class="admin-nav-ico">👥</span><span>All Leads</span><span class="admin-nav-badge" id="lead-badge"></span></a>
   <a class="admin-nav-item" onclick="switchPanel('crm-contacts', this)"><span class="admin-nav-ico">📋</span><span>Contacts</span></a>
-  <a class="admin-nav-item" onclick="switchPanel('crm-clients', this)"><span class="admin-nav-ico">⭐</span><span>Active Clients</span></a>
+  <a class="admin-nav-item" onclick="switchPanel('case-files', this)"><span class="admin-nav-ico">⭐</span><span>Active Clients</span></a>
   <a class="admin-nav-item" onclick="switchPanel('crm-pipeline', this)"><span class="admin-nav-ico">🔄</span><span>Pipeline</span></a>
   <a class="admin-nav-item" onclick="switchPanel('crm-notes', this)"><span class="admin-nav-ico">📝</span><span>Notes &amp; Activity</span></a>
 
@@ -1465,6 +1594,40 @@
 </div>
 </div>
 </div>
+
+<!-- ════════════════════════════════════════════════════════════════
+     CASE FILES (VDR) — embedded panel (replaces /admin/vdr/)
+     ════════════════════════════════════════════════════════════════ -->
+<div id="panel-case-files" class="panel">
+  <div class="top-bar">
+    <div class="page-title">📁 Case Files (VDR)</div>
+    <div class="page-actions">
+      <button class="btn btn-outline" onclick="loadCaseFilesPanel()">↻ Refresh</button>
+    </div>
+  </div>
+  <div class="content-body cf-wrap">
+    <div class="cf-layout">
+      <aside class="cf-aside">
+        <div class="cf-aside-head">
+          <div class="cf-aside-title">Clients</div>
+          <div class="cf-aside-count" id="cf-client-count">—</div>
+        </div>
+        <input type="text" class="cf-search" id="cf-search" placeholder="Search by name, email, slug…"/>
+        <div class="cf-list" id="cf-clients-list">
+          <div class="cf-loading"><div class="cf-loading-ring"></div></div>
+        </div>
+      </aside>
+      <section class="cf-panel" id="cf-detail">
+        <div class="cf-empty">
+          <div class="cf-empty-icon">📁</div>
+          <h3>Pick a client</h3>
+          <p>Select a client from the left to open their case file. You'll see every engagement, every document, the audit trail, invoice status, and one-click actions for sending the proposal email or invoice.</p>
+        </div>
+      </section>
+    </div>
+  </div>
+</div>
+
 <div id="panel-crm-clients" class="panel">
 <div class="panel-header"><h1 class="panel-title">⭐ Active Clients</h1></div>
 <div class="coming-soon">
@@ -3057,9 +3220,13 @@ function toggleGroup(header) {
   }
 }
 function switchPanel(id, el) {
+  // Clear ALL nav active states (legacy .nav-item/.nav-sub AND new .admin-nav-item).
+  // The bug previously: only legacy classes were cleared, so admin-nav-items
+  // accumulated 'active' on every click and stayed lit forever.
   document.querySelectorAll('.panel').forEach(p => p.classList.remove('active'));
-  document.querySelectorAll('.nav-item, .nav-sub').forEach(n => n.classList.remove('active'));
-  if (el && el.classList.contains('nav-sub')) {
+  document.querySelectorAll('.nav-item, .nav-sub, .admin-nav-item').forEach(n => n.classList.remove('active'));
+
+  if (el && el.classList && el.classList.contains('nav-sub')) {
     const group = el.closest('.nav-group');
     if (group) {
       const header = group.querySelector('.nav-group-header');
@@ -3067,13 +3234,338 @@ function switchPanel(id, el) {
       if (header && items) { header.classList.add('open'); items.classList.add('open'); }
     }
   }
-  document.getElementById('panel-' + id).classList.add('active');
-  el.classList.add('active');
-  // Auto-load data
+
+  const target = document.getElementById('panel-' + id);
+  if (target) target.classList.add('active');
+  if (el && el.classList) el.classList.add('active');
+
+  // Push to URL hash so refresh + back-button work
+  if (id) history.replaceState(null, '', '#' + id);
+
+  // Smooth scroll to top of the main content area
+  const main = document.querySelector('.main-content');
+  if (main) main.scrollTop = 0;
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+
+  // Auto-load data per panel
   if (['courses-overview','courses-enrollments','courses-graduates','courses-revenue'].includes(id)) loadCoursesData();
   else if (id === 'courses-votes')  loadVotesData();
   else if (id === 'courses-notify') loadNotifyData();
   else if (id === 'courses-intl')   loadIntlData();
+  else if (id === 'case-files' || id === 'crm-clients') {
+    // Both nav items open the embedded Case Files / VDR panel
+    if (typeof loadCaseFilesPanel === 'function') loadCaseFilesPanel();
+  }
+}
+
+// Open a panel from a URL hash on page load (e.g. /admin#case-files)
+function openPanelFromHash() {
+  const id = (location.hash || '').replace(/^#/, '');
+  if (!id) return;
+  // Find a nav item with matching switchPanel call
+  const navItem = Array.from(document.querySelectorAll('.admin-nav-item, .admin-nav-cta'))
+    .find(el => (el.getAttribute('onclick') || '').includes(`'${id}'`));
+  if (navItem) navItem.click();
+}
+window.addEventListener('hashchange', openPanelFromHash);
+
+// ════════════════════════════════════════════════════════════════
+// CASE FILES PANEL — embedded VDR
+// Pulls clients/engagements/documents/audit from Supabase via the
+// existing admin-engagement-data Netlify function. Same auth (cookie
+// or x-admin-api-token header).
+// ════════════════════════════════════════════════════════════════
+const CF_API = '/.netlify/functions/admin-engagement-data';
+const CF_STATUS_PILL = {
+  draft: 'cf-pill-grey', proposed: 'cf-pill-blue', accepted: 'cf-pill-blue',
+  paid: 'cf-pill-green', in_progress: 'cf-pill-orange', delivered: 'cf-pill-green',
+  complete: 'cf-pill-green', cancelled: 'cf-pill-red',
+  sent: 'cf-pill-blue', client_signed: 'cf-pill-orange', countersigned: 'cf-pill-orange',
+  executed: 'cf-pill-green', void: 'cf-pill-red',
+  lead: 'cf-pill-grey', proposal_sent: 'cf-pill-blue', signed: 'cf-pill-blue',
+  active: 'cf-pill-green', archived: 'cf-pill-grey'
+};
+let _cfClients = [];
+let _cfActiveSlug = null;
+let _cfLoadedOnce = false;
+
+const cfFmtDate = iso => iso ? new Date(iso).toLocaleString('en-US',{dateStyle:'medium',timeStyle:'short'}) : '—';
+const cfFmtDateShort = iso => iso ? new Date(iso).toLocaleDateString('en-US',{month:'short',day:'numeric',year:'numeric'}) : '—';
+const cfFmtUSD = n => '$' + Number(n||0).toLocaleString('en-US',{minimumFractionDigits:0,maximumFractionDigits:2});
+const cfEsc = s => String(s ?? '').replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+const cfPill = status => `<span class="cf-pill ${CF_STATUS_PILL[status] || 'cf-pill-grey'}">${cfEsc(status||'unknown')}</span>`;
+
+async function loadCaseFilesPanel() {
+  // Only load on first open; subsequent opens just re-use cached data unless refresh clicked
+  if (_cfLoadedOnce && _cfClients.length) return;
+  await cfLoadClients();
+  _cfLoadedOnce = true;
+}
+
+async function cfLoadClients() {
+  const listEl = document.getElementById('cf-clients-list');
+  if (!listEl) return;
+  listEl.innerHTML = '<div class="cf-loading"><div class="cf-loading-ring"></div></div>';
+  try {
+    const res = await fetch(`${CF_API}?type=clients`, { credentials: 'include' });
+    if (res.status === 401) return cfShowAuthRequired();
+    if (!res.ok) throw new Error(`HTTP ${res.status}`);
+    const data = await res.json();
+    _cfClients = data.clients || [];
+    document.getElementById('cf-client-count').textContent = `${_cfClients.length} client${_cfClients.length===1?'':'s'}`;
+    cfRenderClients(_cfClients);
+  } catch (e) {
+    listEl.innerHTML = `<div class="cf-err fatal">Failed to load: ${cfEsc(e.message)}</div>`;
+  }
+}
+
+function cfRenderClients(list) {
+  const el = document.getElementById('cf-clients-list');
+  if (!list.length) {
+    el.innerHTML = '<div class="cf-empty" style="padding:1.5rem 1rem;border:none;"><div class="cf-empty-icon">📭</div><p style="font-size:.85rem;">No clients match your search.</p></div>';
+    return;
+  }
+  el.innerHTML = list.map(c => `
+    <div class="cf-card ${c.slug === _cfActiveSlug ? 'active' : ''}" data-slug="${cfEsc(c.slug)}" onclick="cfLoadCase('${cfEsc(c.slug)}')">
+      <div class="cf-name">${cfEsc(c.legal_name || c.slug)}</div>
+      <div class="cf-meta">${cfEsc(c.primary_contact_name || '')}${c.primary_contact_email ? ' &middot; ' + cfEsc(c.primary_contact_email) : ''}</div>
+      <div class="cf-row">
+        ${cfPill(c.latest_engagement_status || c.status || 'lead')}
+        <span style="font-family:'DM Mono',monospace;font-size:.62rem;color:#64748B;">${c.engagements_count} eng &middot; ${c.documents_count} doc &middot; ${cfFmtUSD(c.engagement_total_usd)}</span>
+      </div>
+    </div>
+  `).join('');
+}
+
+document.addEventListener('input', e => {
+  if (e.target && e.target.id === 'cf-search') {
+    const q = e.target.value.toLowerCase().trim();
+    cfRenderClients(!q ? _cfClients : _cfClients.filter(c =>
+      (c.legal_name||'').toLowerCase().includes(q) ||
+      (c.dba||'').toLowerCase().includes(q) ||
+      (c.primary_contact_name||'').toLowerCase().includes(q) ||
+      (c.primary_contact_email||'').toLowerCase().includes(q) ||
+      (c.slug||'').toLowerCase().includes(q)
+    ));
+  }
+});
+
+async function cfLoadCase(slug) {
+  _cfActiveSlug = slug;
+  document.querySelectorAll('.cf-card').forEach(el => el.classList.toggle('active', el.dataset.slug === slug));
+  const detail = document.getElementById('cf-detail');
+  detail.innerHTML = '<div class="cf-loading"><div class="cf-loading-ring"></div></div>';
+  try {
+    const res = await fetch(`${CF_API}?type=case&slug=${encodeURIComponent(slug)}`, { credentials: 'include' });
+    if (!res.ok) {
+      const data = await res.json().catch(() => ({}));
+      throw new Error(data.error || `HTTP ${res.status}`);
+    }
+    const { client, audit } = await res.json();
+    cfRenderCase(client, audit || []);
+  } catch (e) {
+    detail.innerHTML = `<div class="cf-err fatal">Failed to load case: ${cfEsc(e.message)}</div>`;
+  }
+}
+
+function cfRenderCase(client, audit) {
+  const engagements = (client.mc_engagements || []).sort((a,b) => new Date(b.created_at) - new Date(a.created_at));
+  const totalFee = engagements.reduce((s,e) => s + Number(e.fee_usd||0), 0);
+  const lastSent = audit.find(a => a.event === 'proposal_email_sent') || null;
+  const lastTest = audit.find(a => a.event === 'proposal_email_test_sent') || null;
+  const isLead = !engagements.length || engagements.every(e => e.status === 'lead');
+
+  let html = `
+    <div class="cf-head">
+      <div class="cf-eyebrow">Case File &middot; ${cfEsc(client.slug)}</div>
+      <h2>${cfEsc(client.legal_name)}</h2>
+      ${client.dba ? `<div class="cf-dba">d/b/a ${cfEsc(client.dba)}</div>` : ''}
+      <div class="cf-meta-grid">
+        <div><div class="l">Primary Contact</div><div class="v">${cfEsc(client.primary_contact_name || '—')}</div></div>
+        <div><div class="l">Email</div><div class="v"><a href="mailto:${cfEsc(client.primary_contact_email)}" style="color:#2563EB;">${cfEsc(client.primary_contact_email || '—')}</a></div></div>
+        <div><div class="l">Status</div><div class="v">${cfPill(client.status)}</div></div>
+        <div><div class="l">Engagement Total</div><div class="v">${cfFmtUSD(totalFee)}</div></div>
+      </div>
+      <div class="cf-actions">
+        ${isLead ? `<button class="cf-btn primary" onclick="cfGenerateDocs('${cfEsc(client.slug)}')">Generate Engagement Docs</button>` : `
+          <button class="cf-btn primary" onclick="cfSendProposal('${cfEsc(client.slug)}', false)">${lastSent ? 'Resend Proposal Email' : 'Send Proposal Email'}</button>
+          <button class="cf-btn outline" onclick="cfSendProposal('${cfEsc(client.slug)}', true)">Send Test Copy</button>
+        `}
+        ${lastSent ? `<span class="cf-action-meta">Last sent: ${cfFmtDate(lastSent.created_at)} to ${cfEsc(lastSent.payload?.recipient || '?')}</span>` : ''}
+        ${lastTest && !lastSent ? `<span class="cf-action-meta">Last test: ${cfFmtDate(lastTest.created_at)}</span>` : ''}
+      </div>
+    </div>`;
+
+  if (!engagements.length) {
+    html += `<div class="cf-section"><div class="cf-empty" style="border:none;padding:2rem;"><div class="cf-empty-icon">📂</div><h3>No engagements yet</h3><p>Click 'Generate Engagement Docs' above to start the engagement record set.</p></div></div>`;
+  } else {
+    html += `<div class="cf-section">
+      <div class="cf-sec-head"><div>
+        <span class="cf-sec-eyebrow">Engagements &middot; ${engagements.length}</span>
+        <div class="cf-sec-title">Active &amp; Historical Work</div>
+      </div></div>`;
+    for (const e of engagements) {
+      const docs = (e.mc_documents || []).sort((a,b) => (a.doc_id || '').localeCompare(b.doc_id || ''));
+      const invoices = (e.mc_invoices || []).sort((a,b) => new Date(b.created_at) - new Date(a.created_at));
+      html += `<div class="cf-eng">
+        <div class="cf-eng-head">
+          <div><div class="cf-eng-name">${cfEsc(e.name)}</div><div style="margin-top:.4rem;">${cfPill(e.status)}</div></div>
+          <div class="cf-fee">${cfFmtUSD(e.fee_usd)}<small>${e.delivery_window_hrs || '—'} HR DELIVERY</small></div>
+        </div>
+        <div class="cf-eng-meta">
+          <div><div class="l">Proposed</div><div class="v">${cfFmtDateShort(e.proposed_at)}</div></div>
+          <div><div class="l">Accepted</div><div class="v">${cfFmtDateShort(e.accepted_at)}</div></div>
+          <div><div class="l">Paid</div><div class="v">${cfFmtDateShort(e.paid_at)}</div></div>
+          <div><div class="l">Delivery Due</div><div class="v">${cfFmtDateShort(e.delivery_due_at)}</div></div>
+        </div>
+        ${docs.length ? `
+          <table class="cf-doc-table">
+            <thead><tr><th>Doc ID</th><th>Name</th><th>Type</th><th>Status</th><th>Signed</th><th>Executed</th><th></th></tr></thead>
+            <tbody>${docs.map(d => `
+              <tr>
+                <td class="cf-doc-id">${cfEsc(d.doc_id)}</td>
+                <td>${cfEsc(d.doc_name)}</td>
+                <td><span class="cf-pill cf-pill-grey">${cfEsc(d.doc_type)}</span></td>
+                <td>${cfPill(d.status)}</td>
+                <td>${cfFmtDateShort(d.client_signed_at)}</td>
+                <td>${cfFmtDateShort(d.executed_at)}</td>
+                <td class="cf-doc-actions">${d.storage_path ? `<button class="cf-btn cf-btn-sm outline" onclick="cfOpenDoc('${cfEsc(d.storage_path)}')">Open PDF</button>` : '<span style="color:#94A3B8;font-size:.7rem;">No file</span>'}</td>
+              </tr>`).join('')}
+            </tbody>
+          </table>
+        ` : '<p style="color:#64748B;font-size:.85rem;margin-top:.85rem;">No documents on this engagement yet.</p>'}
+        ${cfRenderInvoiceBlock(e, invoices)}
+      </div>`;
+    }
+    html += `</div>`;
+  }
+
+  if (audit.length) {
+    html += `<div class="cf-section">
+      <div class="cf-sec-head"><div>
+        <span class="cf-sec-eyebrow">Audit Trail &middot; Last ${audit.length}</span>
+        <div class="cf-sec-title">Activity Timeline</div>
+      </div></div>
+      <ul class="cf-audit-list">
+        ${audit.map(a => `<li class="cf-audit-item">
+          <span class="cf-audit-event">${cfEsc(a.event)}</span>
+          <span class="cf-audit-detail">${cfEsc(a.payload?.docName || a.payload?.docId || a.payload?.recipient || a.payload?.amount_usd || '—')}${a.ip ? ` <span style="color:#94A3B8;font-family:'DM Mono',monospace;font-size:.7rem;">&middot; ${cfEsc(a.ip)}</span>` : ''}</span>
+          <span class="cf-audit-time">${cfFmtDate(a.created_at)}</span>
+        </li>`).join('')}
+      </ul>
+    </div>`;
+  }
+
+  document.getElementById('cf-detail').innerHTML = html;
+}
+
+function cfRenderInvoiceBlock(engagement, invoices) {
+  const active = invoices.find(i => i.status !== 'void') || null;
+  const hasExecuted = (engagement.mc_documents || []).some(d => d.status === 'executed');
+  if (!active) {
+    if (!hasExecuted) return '';
+    return `<div class="cf-invoice cf-invoice-empty">
+      <div class="cf-invoice-head"><div class="cf-inv-eyebrow">Payment</div><span class="cf-pill cf-pill-grey">No invoice yet</span></div>
+      <p style="font-size:.88rem;color:#64748B;margin:.5rem 0 .85rem;">A document is executed but no invoice exists. Create a Square draft invoice for ${cfFmtUSD(engagement.fee_usd)}.</p>
+      <div class="cf-invoice-actions">
+        <button class="cf-btn primary" onclick="cfInvoiceAction('create-draft','${engagement.id}',false)">Prepare Invoice (${cfFmtUSD(engagement.fee_usd)})</button>
+        <button class="cf-btn outline" onclick="cfInvoiceAction('create-draft','${engagement.id}',true)">Prepare $1 Test Invoice</button>
+      </div>
+    </div>`;
+  }
+  return `<div class="cf-invoice">
+    <div class="cf-invoice-head">
+      <div><div class="cf-inv-eyebrow">Payment ${active.is_test ? '<span class="cf-pill cf-pill-orange" style="margin-left:.4rem;">TEST</span>' : ''}</div>
+        <div style="font-family:'Bebas Neue',sans-serif;font-size:1.4rem;color:#0A1628;letter-spacing:.03em;margin-top:.25rem;">${cfFmtUSD(active.amount_usd)}</div></div>
+      ${cfPill(active.status)}
+    </div>
+    <div class="cf-invoice-meta">
+      <div><div class="l">Drafted</div><div class="v">${cfFmtDateShort(active.draft_at)}</div></div>
+      <div><div class="l">Sent</div><div class="v">${cfFmtDateShort(active.sent_at)}</div></div>
+      <div><div class="l">Paid</div><div class="v">${cfFmtDateShort(active.paid_at)}</div></div>
+      <div><div class="l">Reminders</div><div class="v">${active.reminder_count || 0} sent</div></div>
+    </div>
+    <div class="cf-invoice-actions">
+      ${active.status === 'draft' ? `
+        <button class="cf-btn primary" onclick="cfInvoiceAction('publish',null,null,'${active.id}')">Send Payment Request</button>
+        <button class="cf-btn outline" onclick="cfInvoiceAction('cancel',null,null,'${active.id}')">Void</button>` : ''}
+      ${active.status === 'sent' ? `
+        ${active.square_invoice_url ? `<a class="cf-btn outline" href="${cfEsc(active.square_invoice_url)}" target="_blank" rel="noopener">View Square Invoice</a>` : ''}
+        <button class="cf-btn outline" onclick="cfInvoiceAction('cancel',null,null,'${active.id}')">Void</button>` : ''}
+      ${active.status === 'paid' ? `<span style="font-size:.85rem;color:#10B981;font-weight:600;">Paid in full. Delivery clock running.</span>` : ''}
+    </div>
+  </div>`;
+}
+
+async function cfOpenDoc(path) {
+  try {
+    const res = await fetch(`${CF_API}?type=signed-url&path=${encodeURIComponent(path)}`, { credentials: 'include' });
+    if (!res.ok) { const d = await res.json().catch(() => ({})); throw new Error(d.error || `HTTP ${res.status}`); }
+    const { url } = await res.json();
+    window.open(url, '_blank', 'noopener');
+  } catch (e) { alert('Could not get signed URL: ' + e.message); }
+}
+
+async function cfSendProposal(slug, isTest) {
+  const msg = isTest
+    ? 'Send a TEST copy of the proposal email to mark@markcmo.com?'
+    : 'Send the LIVE proposal email to the client? They will see the full audit package and an Accept & Sign button.';
+  if (!confirm(msg)) return;
+  try {
+    const body = { clientSlug: slug }; if (isTest) body.testRecipient = 'mark@markcmo.com';
+    const res = await fetch('/.netlify/functions/send-engagement-proposal-email', {
+      method:'POST', credentials:'include', headers:{'Content-Type':'application/json'}, body: JSON.stringify(body)
+    });
+    const data = await res.json();
+    if (!res.ok) throw new Error(data.error || `HTTP ${res.status}`);
+    alert(`${isTest ? 'TEST email' : 'Proposal email'} sent to ${data.sentTo}${data.cc?.length ? '\nCC: ' + data.cc.join(', ') : ''}\nResend ID: ${data.resend_id || 'n/a'}`);
+    if (_cfActiveSlug) cfLoadCase(_cfActiveSlug);
+  } catch (e) { alert('Send failed: ' + e.message); }
+}
+
+async function cfInvoiceAction(action, engagementId, isTest, invoiceId) {
+  const msg = { 'create-draft': isTest ? 'Create a $1 TEST invoice?' : 'Create a draft invoice (will not send yet)?', 'publish': 'Send the payment request to the client now?', 'cancel': 'Void this invoice? This cannot be undone.' }[action];
+  if (!confirm(msg)) return;
+  try {
+    const res = await fetch('/.netlify/functions/square-invoice-action', {
+      method:'POST', credentials:'include', headers:{'Content-Type':'application/json'},
+      body: JSON.stringify({ action, engagementId, invoiceId, isTest })
+    });
+    const data = await res.json();
+    if (!res.ok) throw new Error(data.error || `HTTP ${res.status}`);
+    alert(action === 'create-draft' ? 'Draft invoice created.' : action === 'publish' ? 'Payment request sent. Square is emailing the client now.' : 'Invoice voided.');
+    if (_cfActiveSlug) cfLoadCase(_cfActiveSlug);
+  } catch (e) { alert('Action failed: ' + e.message); }
+}
+
+async function cfGenerateDocs(slug) {
+  const name = prompt('Engagement name:', 'Business Discovery Audit'); if (!name) return;
+  const docPrefix = prompt('Document prefix (uppercase, like "AC-AUD"):', ''); if (!docPrefix) return;
+  const fee = Number((prompt('Fee in USD:', '2500') || '').replace(/[^0-9.]/g, '')); if (!fee) return alert('Invalid fee.');
+  const hrs = Number(prompt('Delivery window in hours:', '72')); if (!hrs) return alert('Invalid hours.');
+  if (!confirm(`Create engagement?\n\nClient: ${slug}\nName: ${name}\nDocs: ${docPrefix}-001/002/003\nFee: $${fee}\nDelivery: ${hrs}h`)) return;
+  try {
+    const res = await fetch('/.netlify/functions/generate-engagement-docs', {
+      method:'POST', credentials:'include', headers:{'Content-Type':'application/json'},
+      body: JSON.stringify({ clientSlug:slug, name, docPrefix, feeUsd:fee, deliveryWindowHrs:hrs })
+    });
+    const data = await res.json();
+    if (!res.ok) throw new Error(data.error || `HTTP ${res.status}`);
+    alert('Engagement records created.\n\n' + data.docs.map(d => `  ${d.doc_id}: ${d.status}`).join('\n') + '\n\nNext steps:\n' + data.next_steps.map((s,i) => `  ${i+1}. ${s}`).join('\n'));
+    if (_cfActiveSlug) cfLoadCase(_cfActiveSlug);
+  } catch (e) { alert('Generate failed: ' + e.message); }
+}
+
+function cfShowAuthRequired() {
+  document.getElementById('cf-detail').innerHTML = `
+    <div class="cf-empty">
+      <div class="cf-empty-icon">🔒</div>
+      <h3>Sign in required</h3>
+      <p>The case-file API needs an admin session. Use the admin login to authenticate and the data will load automatically.</p>
+    </div>`;
+  const list = document.getElementById('cf-clients-list');
+  if (list) list.innerHTML = '';
+  document.getElementById('cf-client-count').textContent = 'Not signed in';
 }
 // ─── DATA LOADING (via admin-proxy function) ──────────────────────────────────
 async function loadLeads() {
