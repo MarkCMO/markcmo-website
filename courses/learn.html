@@ -1,9 +1,10 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="UTF-8">
+<link rel="icon" type="image/webp" href="/favicon.webp"><link rel="apple-touch-icon" href="/mark-photo.webp">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>MarkCMO Academy — Lesson Player</title>
+<title>MarkCMO Academy - Lesson Player</title>
 <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Barlow:ital,wght@0,300;0,400;0,600;0,700;0,900;1,400&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="/style.css">
 <style>
@@ -186,11 +187,11 @@ html,body,*,*::before,*::after{cursor:none!important}
 }
 </style>
 
-  <meta name="description" content="MarkCMO Academy — Lesson Player - MarkCMO provides fractional CMO and strategic marketing services for growth-stage companies.">
+  <meta name="description" content="MarkCMO Academy - Lesson Player - MarkCMO provides fractional CMO and strategic marketing services for growth-stage companies.">
   <link rel="canonical" href="https://markcmo.com/courses/learn.html">
   <meta property="og:type" content="website">
-  <meta property="og:title" content="MarkCMO Academy — Lesson Player">
-  <meta property="og:description" content="MarkCMO Academy — Lesson Player - MarkCMO provides fractional CMO and strategic marketing services for growth-stage companies.">
+  <meta property="og:title" content="MarkCMO Academy - Lesson Player">
+  <meta property="og:description" content="MarkCMO Academy - Lesson Player - MarkCMO provides fractional CMO and strategic marketing services for growth-stage companies.">
   <meta property="og:url" content="https://markcmo.com/courses/learn.html">
   <meta property="og:site_name" content="MarkCMO">
 </head>
@@ -332,7 +333,7 @@ async function init() {
   if(!meta) { toast('Invalid course', 'red'); return; }
 
   // ── ENROLLMENT GATE ──────────────────────────────────────────────────────
-  // If token='demo' or no email — check if user has previously validated (stored locally)
+  // If token='demo' or no email - check if user has previously validated (stored locally)
   const storedToken  = localStorage.getItem('mcademy_token_' + COURSE_ID) || '';
   const storedEmail  = localStorage.getItem('mcademy_email_' + COURSE_ID) || '';
   const activeToken  = TOKEN || storedToken;
@@ -351,9 +352,9 @@ async function init() {
           STUDENT_NAME = d.enrollment.name;
           localStorage.setItem('mcademy_name_' + COURSE_ID, STUDENT_NAME);
         }
-        // Valid — continue to course
+        // Valid - continue to course
       } else if (d.reason === 'invalid_token') {
-        // Token mismatch — clear stored and gate
+        // Token mismatch - clear stored and gate
         localStorage.removeItem('mcademy_token_' + COURSE_ID);
         localStorage.removeItem('mcademy_email_' + COURSE_ID);
         showAccessGate(COURSE_ID);
@@ -361,17 +362,17 @@ async function init() {
       }
       // If enrolled=false but no reason (network/server issue), allow through
     } catch(e) {
-      // Network error — allow through to not block paying students
+      // Network error - allow through to not block paying students
       console.warn('Enrollment check failed (network):', e);
     }
   } else if (!activeToken || activeToken === 'demo') {
-    // No token at all — show access gate
+    // No token at all - show access gate
     showAccessGate(COURSE_ID);
     return;
   }
   // ── END GATE ─────────────────────────────────────────────────────────────
 
-  document.title = 'MarkCMO Academy — ' + meta.title;
+  document.title = 'MarkCMO Academy - ' + meta.title;
   document.getElementById('top-course-name').textContent = meta.title;
   document.getElementById('sidebar-course-title').textContent = meta.title;
   document.getElementById('welcome-title').textContent = meta.title.toUpperCase();
@@ -587,7 +588,7 @@ function renderLesson(data) {
     <div class="video-slot">
       <div class="video-slot-icon">🎬</div>
       <div class="video-slot-text">
-        <h4>Video Lesson — Coming Soon</h4>
+        <h4>Video Lesson - Coming Soon</h4>
         <p>Video content for this lesson is being recorded. The AI-generated lesson below is complete and fully sufficient.</p>
       </div>
     </div>
@@ -633,7 +634,7 @@ function renderQuizQuestion() {
 
   document.getElementById('state-quiz').innerHTML = `
     <div class="quiz-header">
-      <div class="quiz-eyebrow">Lesson Quiz — ${(MODULE_NAMES[COURSE_ID]||[])[parseInt(currentModule.replace('m',''))-1] || currentModule}</div>
+      <div class="quiz-eyebrow">Lesson Quiz - ${(MODULE_NAMES[COURSE_ID]||[])[parseInt(currentModule.replace('m',''))-1] || currentModule}</div>
       <div class="quiz-title">Test Your Understanding</div>
       <div class="quiz-subtitle">Score 60% or higher to mark this lesson complete. No shortcuts.</div>
     </div>

@@ -171,7 +171,7 @@ for (const file of files) {
   const stateKeys = Object.keys(STATE_CITIES);
 
   if (stateKeys.includes(base)) {
-    // State page — link to top cities in that state
+    // State page - link to top cities in that state
     stateSlug = base;
     citySlug = null;
   } else {
@@ -189,7 +189,7 @@ for (const file of files) {
   if (citySlug) {
     nearbyCities = getNearbyCities(citySlug, stateSlug);
   } else {
-    // State page — link to top 5 cities
+    // State page - link to top 5 cities
     nearbyCities = (STATE_CITIES[stateSlug] || []).slice(0, 5);
   }
 

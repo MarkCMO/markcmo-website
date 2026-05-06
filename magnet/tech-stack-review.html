@@ -1,0 +1,331 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-BXK5Y3DQBL"></script>
+<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-BXK5Y3DQBL');</script>
+<meta charset="UTF-8"/>
+<link rel="icon" type="image/webp" href="/favicon.webp"><link rel="apple-touch-icon" href="/mark-photo.webp">
+<meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+<title>Tech Stack Review | MarTech Audit | MAGNET Framework | Mark Gabrielli</title>
+<meta name="description" content="Mark Gabrielli audits your entire marketing tech stack for ROI, integration gaps, and attribution blind spots. Stop paying for tools that don't compound."/>
+<meta name="robots" content="index, follow"/>
+<link rel="canonical" href="https://markcmo.com/magnet/tech-stack-review.html"/>
+<meta property="og:title" content="Tech Stack Review | MarTech Audit | Mark Gabrielli"/>
+<meta property="og:description" content="Mark Gabrielli audits your entire marketing tech stack for ROI, integration gaps, and attribution blind spots. Stop paying for tools that don't compound."/>
+<meta property="og:url" content="https://markcmo.com/magnet/tech-stack-review.html"/>
+<meta property="og:image" content="https://markcmo.com/og-image.jpg"/>
+<meta name="twitter:card" content="summary_large_image"/>
+<link rel="preconnect" href="https://fonts.googleapis.com" crossorigin>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800;900&family=Space+Grotesk:wght@400;500;600;700&display=swap">
+<link rel="stylesheet" href="../style.css"/>
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"Article","headline":"Marketing Tech Stack Review","description":"Mark Gabrielli audits your entire marketing tech stack for ROI, integration gaps, and attribution blind spots. Stop paying for tools that don't compound.","author":{"@type":"Person","name":"Mark Gabrielli","url":"https://markcmo.com/about.html"},"publisher":{"@type":"Organization","name":"MarkCMO","url":"https://markcmo.com"},"mainEntityOfPage":"https://markcmo.com/magnet/tech-stack-review.html"}
+</script>
+<style>
+.dl-page-wrap{padding-top:64px;}
+.dl-breadcrumb{padding:1.25rem 6vw;background:var(--bg2);border-bottom:1px solid var(--border);}
+.dl-breadcrumb nav{max-width:1200px;margin:0 auto;font-size:0.78rem;color:var(--text3);}
+.dl-breadcrumb a{color:var(--text3);text-decoration:none;}
+.dl-breadcrumb a:hover{color:var(--accent);}
+.dl-breadcrumb span{margin:0 0.4rem;opacity:0.5;}
+.dl-hero{padding:5rem 6vw 4rem;background:var(--bg);border-bottom:1px solid var(--border);position:relative;overflow:hidden;}
+.dl-hero::before{content:'';position:absolute;top:-200px;left:50%;transform:translateX(-50%);width:700px;height:700px;border-radius:50%;background:radial-gradient(circle,rgba(201,168,76,0.07) 0%,transparent 65%);pointer-events:none;}
+.dl-hero-inner{max-width:860px;margin:0 auto;position:relative;z-index:1;}
+.dl-phase-badge{display:inline-flex;align-items:center;gap:8px;background:rgba(201,168,76,0.1);border:1px solid rgba(201,168,76,0.25);border-radius:30px;padding:0.35rem 1rem;font-size:0.7rem;font-weight:800;letter-spacing:0.12em;color:var(--accent);text-transform:uppercase;margin-bottom:1.25rem;text-decoration:none;}
+.dl-phase-badge:hover{background:rgba(201,168,76,0.15);}
+.dl-h1{font-family:'Outfit',sans-serif;font-size:clamp(2.25rem,5vw,3.75rem);font-weight:900;letter-spacing:-0.04em;color:var(--text);line-height:1.05;margin-bottom:1rem;}
+.dl-h1 em{color:var(--accent);font-style:italic;}
+.dl-hero-sub{font-size:1.1rem;color:var(--text2);line-height:1.75;max-width:680px;margin-bottom:2rem;}
+.dl-hero-cta{display:inline-flex;align-items:center;gap:0.5rem;background:var(--accent);color:#000;font-family:'Outfit',sans-serif;font-weight:700;font-size:0.9rem;padding:0.75rem 1.75rem;border-radius:8px;text-decoration:none;transition:opacity 0.15s;}
+.dl-hero-cta:hover{opacity:0.88;}
+.dl-body{max-width:1200px;margin:0 auto;padding:5rem 6vw;}
+.dl-content{max-width:760px;}
+.dl-content h2{font-family:'Outfit',sans-serif;font-size:clamp(1.5rem,3vw,2rem);font-weight:800;letter-spacing:-0.03em;color:var(--text);margin:3rem 0 1rem;line-height:1.15;}
+.dl-content h3{font-family:'Outfit',sans-serif;font-size:1.15rem;font-weight:700;color:var(--text);margin:2rem 0 0.75rem;}
+.dl-content p{font-size:1rem;color:var(--text2);line-height:1.85;margin-bottom:1.25rem;}
+.dl-content ul,.dl-content ol{padding-left:1.5rem;margin-bottom:1.5rem;}
+.dl-content li{font-size:0.97rem;color:var(--text2);line-height:1.8;margin-bottom:0.5rem;}
+.dl-content strong{color:var(--text);font-weight:700;}
+.dl-pullquote{margin:2.5rem 0;padding:1.5rem 2rem;background:rgba(201,168,76,0.06);border-left:3px solid var(--accent);border-radius:0 12px 12px 0;}
+.dl-pullquote p{font-family:'Outfit',sans-serif;font-size:1.15rem;font-weight:700;font-style:italic;color:var(--accent);margin:0;line-height:1.5;}
+.dl-stat-row{display:grid;grid-template-columns:repeat(3,1fr);gap:1.25rem;margin:2.5rem 0;}
+.dl-stat-box{background:var(--bg3);border:1px solid var(--border);border-radius:12px;padding:1.5rem;text-align:center;}
+.dl-stat-n{display:block;font-family:'Outfit',sans-serif;font-size:2rem;font-weight:900;color:var(--accent);letter-spacing:-0.04em;}
+.dl-stat-l{display:block;font-size:0.72rem;color:var(--text3);text-transform:uppercase;letter-spacing:0.1em;margin-top:4px;}
+.dl-faq{margin-top:3rem;}
+.dl-faq h2{font-family:'Outfit',sans-serif;font-size:1.75rem;font-weight:800;color:var(--text);margin-bottom:1.5rem;}
+.dl-faq-item{border-bottom:1px solid var(--border);padding:1.25rem 0;}
+.dl-faq-q{font-family:'Outfit',sans-serif;font-size:1rem;font-weight:700;color:var(--text);margin-bottom:0.6rem;}
+.dl-faq-a{font-size:0.95rem;color:var(--text2);line-height:1.8;}
+.dl-related{background:var(--bg2);padding:5rem 6vw;border-top:1px solid var(--border);}
+.dl-related-inner{max-width:1200px;margin:0 auto;}
+.dl-related h2{font-family:'Outfit',sans-serif;font-size:1.5rem;font-weight:800;color:var(--text);margin-bottom:1.75rem;}
+.dl-related-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1rem;}
+.dl-rel-card{background:var(--bg3);border:1px solid var(--border);border-radius:12px;padding:1.25rem;text-decoration:none;transition:border-color 0.2s,transform 0.2s;}
+.dl-rel-card:hover{border-color:rgba(201,168,76,0.3);transform:translateY(-2px);}
+.dl-rel-phase{font-size:0.65rem;font-weight:800;letter-spacing:0.12em;color:var(--accent);text-transform:uppercase;margin-bottom:0.5rem;}
+.dl-rel-title{font-family:'Outfit',sans-serif;font-size:0.9rem;font-weight:700;color:var(--text);margin-bottom:0.4rem;}
+.dl-rel-desc{font-size:0.78rem;color:var(--text3);line-height:1.55;}
+.dl-cta-section{padding:6rem 6vw;background:var(--bg);text-align:center;border-top:1px solid var(--border);}
+.dl-cta-inner{max-width:640px;margin:0 auto;}
+@media(max-width:900px){.dl-stat-row{grid-template-columns:1fr 1fr;}.dl-related-grid{grid-template-columns:1fr 1fr;}}
+@media(max-width:600px){.dl-stat-row{grid-template-columns:1fr;}.dl-related-grid{grid-template-columns:1fr;}}
+</style>
+</head>
+<body>
+<div class="dl-page-wrap">
+
+<nav>
+  <a href="../index.html" class="nav-logo">
+    <div class="nav-avatar"><img src="../mark-photo.webp" alt="Mark Gabrielli" onerror="this.style.display='none';this.parentElement.style.background='var(--accent)';this.parentElement.innerHTML='<span style=\'font-family:Outfit,sans-serif;font-weight:900;font-size:1rem;color:#fff;display:flex;align-items:center;justify-content:center;width:100%;height:100%\'>M</span>'"/></div>
+    Mark <span>Gabrielli</span>
+  </a>
+  <ul class="nav-links">
+    <li><a href="../about.html">About</a></li>
+    <li><a href="../services.html">Services</a></li>
+    <li><a href="../portfolio.html">Portfolio</a></li>
+    <li><a href="../results.html">Results</a></li>
+    <li><a href="../blog.html">Insights</a></li>
+    <li><a href="../magnet-framework.html" style="color:var(--accent);font-weight:600;">MAGNET&#x2122;</a></li>
+    <li><a href="../book.html" class="nav-cta">Book a Free Call</a></li>
+  </ul>
+  <button class="nav-hamburger" id="navHam" aria-label="Open menu"><span></span><span></span><span></span></button>
+</nav>
+<div class="mobile-drawer" id="mobileDrawer">
+<button class="drawer-close" id="drawerClose" aria-label="Close menu">&#x2715;</button>
+<a href="../index.html">Home</a>
+<a href="../about.html">About</a>
+<a href="../services.html">Services</a>
+<a href="../magnet-framework.html" style="color:var(--accent);font-weight:600;">MAGNET Framework&#x2122;</a>
+<a href="../results.html">Results</a>
+<a href="../portfolio.html">Portfolio</a>
+<a href="../blog.html">Insights</a>
+<a href="https://academy.markcmo.com" target="_blank" rel="noopener">Academy</a>
+<a href="../book.html" class="drawer-cta">Book a Free Strategy Call &#x2192;</a>
+</div>
+
+<div class="dl-breadcrumb">
+  <nav aria-label="Breadcrumb">
+    <a href="../index.html">Home</a>
+    <span>&#x203A;</span>
+    <a href="../magnet-framework.html">MAGNET Framework</a>
+    <span>&#x203A;</span>
+    <a href="../magnet-map.html">Map</a>
+    <span>&#x203A;</span>
+    Tech Stack Review
+  </nav>
+</div>
+
+<div class="dl-hero">
+  <div class="dl-hero-inner">
+    <a href="../magnet-framework.html" class="dl-phase-badge">Phase 01 &mdash; Map &middot; MAGNET Framework</a>
+    <h1 class="dl-h1">Marketing Tech <em>Stack Review</em></h1>
+    <p class="dl-hero-sub">The average growth-stage company pays for 14 marketing tools. Most of them are underused, several overlap in function, and at least a few are creating attribution blind spots that make it impossible to know what is actually driving revenue. The tech stack review changes that.</p>
+    <a href="../book.html" class="dl-hero-cta">Audit Your MarTech Stack &#x2192;</a>
+  </div>
+</div>
+
+<div class="dl-body">
+  <div class="dl-content">
+
+    <h2>What a Marketing Tech Stack Review Covers</h2>
+    <p>A marketing tech stack review is a systematic audit of every tool and platform your marketing and sales teams use to execute, measure, and optimize demand generation. The goal is not to produce a list of tools - your team already knows what tools you have. The goal is to answer five specific questions about each tool that collectively determine whether it is earning its place in your stack or bleeding budget without commensurate return.</p>
+    <p><strong>Full Inventory.</strong> The audit starts with a comprehensive catalog of every tool, platform, subscription, and license in use across marketing and sales. This catalog frequently surprises leadership teams - annual tool audits routinely surface subscriptions that nobody on the current team actively uses or even knew existed. A CMO departure, an agency transition, or rapid team growth typically leaves orphaned tools in the stack that continue billing indefinitely.</p>
+    <p><strong>Cost Per Tool vs. Demonstrated Revenue Impact.</strong> Every tool in the stack has a cost. That cost should be justified by a demonstrable, positive impact on revenue generation or revenue efficiency. The review examines whether each tool's contribution to revenue can be traced - either directly through attribution data or indirectly through efficiency metrics that have a clear revenue linkage. Tools that cannot demonstrate a connection to revenue outcomes become candidates for consolidation or elimination.</p>
+    <p><strong>Integration Health.</strong> Marketing tools that do not talk to each other create data silos, attribution gaps, and manual reconciliation work that wastes team time and produces unreliable reporting. The review maps the integration architecture of your current stack - which tools are connected, which should be connected but are not, and where disconnections are creating blind spots in your view of the buyer journey. A lead that enters the funnel through a LinkedIn ad should be trackable all the way through to closed deal - and most stacks have at least two or three points where that tracking chain breaks.</p>
+    <p><strong>Attribution Coverage.</strong> Can you trace a lead from its original source through every touchpoint to closed deal? This is the single most important infrastructure question in marketing technology. Without full-funnel attribution, budget allocation decisions are made on incomplete information - you may know that a channel is generating leads without knowing whether those leads are converting to revenue at a rate that justifies the investment. Attribution coverage analysis identifies every point in the buyer journey where tracking breaks down and quantifies the attribution blind spot created by each gap.</p>
+    <p><strong>Team Adoption.</strong> The best tool in the world produces zero value if nobody is using it. Team adoption analysis examines login frequency, feature utilization depth, data quality (are fields being filled in correctly?), and whether the tool is generating outputs that the team actually acts on. Low-adoption tools represent a different problem than no-adoption tools - low adoption typically indicates a training or process gap that can be addressed, while no adoption indicates the tool was purchased for a use case that the team never actually had or has since moved on from.</p>
+
+    <div class="dl-stat-row">
+      <div class="dl-stat-box">
+        <span class="dl-stat-n">$47K</span>
+        <span class="dl-stat-l">average annual savings found in a tech stack consolidation</span>
+      </div>
+      <div class="dl-stat-box">
+        <span class="dl-stat-n">62%</span>
+        <span class="dl-stat-l">of MarTech tools are significantly underutilized</span>
+      </div>
+      <div class="dl-stat-box">
+        <span class="dl-stat-n">3.4x</span>
+        <span class="dl-stat-l">better attribution accuracy after integration architecture rebuild</span>
+      </div>
+    </div>
+
+    <h2>The 7 Categories of MarTech Mark Audits</h2>
+    <p>The marketing technology landscape has over 11,000 tools. No company uses more than a fraction of them, but the categories that matter for demand generation and revenue attribution are consistent. Every MAGNET Framework tech stack review covers these seven categories in depth.</p>
+    <h3>1. CRM</h3>
+    <p>The CRM is the revenue infrastructure backbone - everything else in the stack should integrate with it. The review examines whether the CRM is being used consistently by the sales team, whether pipeline stages reflect the actual buyer journey, whether lead source attribution is being captured correctly at the contact and deal level, and whether the CRM data quality is sufficient to support meaningful reporting. HubSpot, Salesforce, and Pipedrive are the most common platforms in the $1M to $50M segment; each has specific strengths, limitations, and configuration requirements. A misconfigured CRM is worse than a simple one - it creates false confidence in inaccurate data.</p>
+    <h3>2. Marketing Automation</h3>
+    <p>Marketing automation platforms manage email nurture sequences, lead scoring, and the handoff of leads from marketing to sales. The review examines whether automation is actually running - many companies pay for platforms where the automation has never been built, making them expensive email-sending tools. We assess nurture sequence completion rates, lead scoring model accuracy, and the quality of the marketing-to-sales handoff process. HubSpot Marketing Hub, Marketo, ActiveCampaign, and Klaviyo are evaluated against the specific use cases they were purchased for and the actual use cases the company needs.</p>
+    <h3>3. Paid Media Management</h3>
+    <p>Ad platform management tools range from the native interfaces of Google Ads, LinkedIn Campaign Manager, and Meta Ads Manager to third-party management and attribution platforms. The review examines campaign structure, bidding strategy, audience definition, creative testing cadence, and - critically - the connection between ad platform data and CRM pipeline data. Most companies operating paid media at scale have a meaningful gap between ad platform conversion tracking and CRM-verified pipeline generation, and that gap distorts every optimization decision.</p>
+    <h3>4. Analytics and Attribution</h3>
+    <p>GA4, Mixpanel, Segment, Triple Whale, and similar platforms provide the data infrastructure for understanding the buyer journey. The review examines whether conversion tracking is set up correctly, whether events are being captured at every meaningful buyer interaction, whether multi-touch attribution models are configured and actually being used for budget decisions, and whether the analytics stack provides a coherent view of the full buyer journey rather than channel-siloed activity reports. The most common finding in this category is that analytics tools are generating data that nobody has the time, capability, or process to act on.</p>
+    <h3>5. SEO and Content Tools</h3>
+    <p>Tools like Ahrefs, SEMrush, Surfer SEO, and Clearscope support keyword research, content optimization, competitive analysis, and technical SEO monitoring. The review examines whether these tools are being actively used or sitting idle, whether the outputs are connected to a content production workflow that consistently produces optimized content, and whether the company has a process for acting on technical SEO findings rather than accumulating audit reports that never get implemented.</p>
+    <h3>6. Email Outreach and Sales Sequencing</h3>
+    <p>Outreach, Salesloft, Apollo, Instantly, and similar platforms automate and manage multi-touch outbound communication sequences. The review examines sequence design quality, deliverability health (are emails landing in inboxes?), response rate benchmarks, and whether the platform is integrated with the CRM so that sequence activity is reflected in the full prospect record. Disconnected outreach tools create duplicate contact records, attributionless activity logs, and a view of the prospect relationship that is incomplete from the first interaction.</p>
+    <h3>7. Data and Enrichment</h3>
+    <p>Clearbit, ZoomInfo, Clay, and Apollo provide firmographic and contact data that powers ICP-matched prospecting and lead enrichment. The review examines data freshness and accuracy, integration with CRM and marketing automation, and whether the enrichment data is actually being used to inform targeting and personalization or simply being collected without application. Data and enrichment tools represent one of the highest categories of tool redundancy - many companies pay for two or three platforms that provide overlapping data sets with marginal incremental value.</p>
+
+    <div class="dl-pullquote">
+      <p>"A leaner, better-integrated stack gives you more visibility, less cost, and a team that actually knows how to use what they have. More tools is almost never the answer."</p>
+    </div>
+
+    <h2>The Most Common Tech Stack Problems</h2>
+    <p>Across dozens of tech stack reviews, the same problems appear with remarkable consistency regardless of company size, industry, or tech sophistication. Understanding these patterns helps you assess your own stack before the formal review.</p>
+    <p><strong>Tool Overlap</strong> is the most common and immediately addressable problem. Companies paying for three tools that each perform the same core function - email marketing, for example - are wasting budget without gaining capability. The overlap typically develops when a new tool is adopted to solve a specific problem but the original tool is not decommissioned, or when different teams independently procure tools for similar needs without coordination. Tool overlap audits consistently identify $10,000 to $50,000 in annual savings for companies in the $5M to $30M revenue range.</p>
+    <p><strong>Integration Gaps</strong> are more costly in the long run than tool overlap because they produce attribution blind spots that affect every budget allocation decision made. When your ad platform does not pass conversion data to your CRM, you cannot know which campaigns are producing actual revenue. When your email platform is not connected to your analytics, you cannot attribute website behavior to email engagement. When your CRM pipeline data is not connected to your attribution reporting, you are making channel investment decisions based on proxy metrics rather than actual revenue outcomes.</p>
+    <p><strong>Attribution Blind Spots</strong> accumulate from integration gaps, incorrect tracking implementation, and fundamental misunderstandings of how attribution models work. First-touch attribution overweights awareness channels. Last-touch attribution overweights bottom-funnel conversion channels. Neither provides an accurate view of the full buyer journey. Multi-touch attribution - properly implemented and actually used - is the only model that gives an honest accounting of how each channel contributes to revenue. Very few companies in the $1M to $20M range have multi-touch attribution implemented correctly.</p>
+    <p><strong>Under-Adoption</strong> means the company is paying for tool capabilities that the team does not use - either because the tool was purchased for a capability the team has not been trained on, or because the workflow around the tool was never properly designed. Under-adopted tools represent pure waste: the subscription cost continues without the value being captured. The fix is either proper onboarding and process design, or cancellation and reallocation of the budget.</p>
+    <p><strong>Over-Complexity</strong> is the accumulation of too many tools that creates cognitive overload, unclear ownership, and a team that does not have deep proficiency with any tool because they are spread across too many. The principle of fewer tools, deeper integration, and higher team mastery consistently produces better marketing outcomes than a comprehensive stack that nobody fully understands.</p>
+
+    <h2>Building a Lean, High-Performance Stack</h2>
+    <p>The principle driving stack design at every company size is: fewer tools, deeper integration, and maximum team adoption of each tool in use. A company operating with six deeply integrated, fully adopted tools will consistently outperform a company operating with 20 partially used, poorly integrated tools - and will spend significantly less in the process.</p>
+    <p>For companies in the $1M to $10M revenue range, a minimum viable MarTech stack typically covers: one CRM with integrated marketing automation (HubSpot being the most common all-in-one platform at this stage), Google Analytics 4 for web analytics, the native interfaces of any paid ad platforms in use, one SEO tool for keyword research and content optimization, and basic email capability for outbound prospecting. Total stack cost in this range should be under $2,000 per month including all subscriptions.</p>
+    <p>For companies in the $10M to $50M revenue range, the stack typically expands to include a more sophisticated CRM if HubSpot's sales functionality is insufficient, a dedicated marketing automation platform if email sophistication requirements exceed the CRM's capabilities, a proper attribution platform, more advanced SEO tooling, a data enrichment solution, and sales sequencing software. At this stage, integration architecture becomes critical - the additional tools must be connected to maintain attribution fidelity.</p>
+    <p>Enterprise tools - Salesforce, Marketo, sophisticated data warehouse solutions - become relevant when company complexity, deal volume, and reporting requirements exceed what growth-stage platforms can handle. The mistake is implementing enterprise-grade tools at growth-stage scale, where the implementation complexity and maintenance overhead overwhelm the benefits and the cost dramatically exceeds the ROI available at smaller scale.</p>
+
+    <h2>Tech Stack ROI Calculation</h2>
+    <p>Calculating the true ROI of a marketing technology tool requires defining what success looks like for that specific tool in your specific context, then measuring whether the tool is achieving it. Generic ROI benchmarks are largely useless - a tool's ROI depends entirely on how well it is implemented, adopted, and integrated with the broader stack.</p>
+    <p>The practical ROI calculation framework assigns each tool to one of three categories. Revenue-generating tools are those with a traceable line to pipeline or closed revenue - attribution platforms, CRM, ad management tools. These tools are evaluated on whether the pipeline they demonstrably influence justifies their cost. Revenue-enabling tools support the team's ability to execute but do not directly generate pipeline - SEO research tools, content optimization platforms, project management. These are evaluated on efficiency metrics and the quality of outputs they enable. Operational tools - billing, legal, HR - are evaluated on cost avoidance and compliance, not revenue metrics.</p>
+    <p>The tools most consistently producing positive ROI in growth-stage stacks are: the CRM (when properly implemented and adopted), marketing automation with active nurture sequences in operation, and attribution platforms when connected to both ad platforms and CRM pipeline data. The tools most often found to have negative or unmeasurable ROI are: data enrichment platforms purchased for one-time use cases and then left running, duplicate email marketing tools, and analytics platforms whose outputs never drive decisions.</p>
+
+    <h2>What Comes After the Tech Stack Review</h2>
+    <p>The tech stack review produces two immediate deliverables. The first is a consolidation plan - a prioritized list of tools to eliminate, tools to retain, and tools to replace with better alternatives, with an estimated annual savings figure and a recommended implementation sequence. The second is an integration architecture recommendation - a specific plan for how the retained tools should connect to each other to eliminate the attribution blind spots identified in the review.</p>
+    <p>These two deliverables feed directly into the Architect phase of the MAGNET Framework, specifically into the Technology Architecture deliverable. The Architect phase designs the demand generation infrastructure that will power the Generate and Nurture phases - and it cannot produce a coherent infrastructure design without knowing what the current stack looks like, what it costs, where it breaks down, and what a consolidated, integrated version of it should look like. The tech stack review is the Map phase contribution to the infrastructure that makes everything else in the framework function reliably.</p>
+
+    <div class="dl-faq">
+      <h2>Frequently Asked Questions</h2>
+      <div class="dl-faq-item">
+        <div class="dl-faq-q">How do you audit a tech stack you've never used before?</div>
+        <div class="dl-faq-a">The tech stack review starts with a tool inventory - a complete list of every platform, subscription, and license in use, with account access or screen-share review of each. For platforms without direct access, the review draws on integration data, team interviews, and usage reports pulled by the account administrator. Familiarity with most major MarTech platforms from prior client engagements means most tools are assessable quickly. Novel platforms or highly customized implementations require more time but rarely require deep expertise to assess at the strategic level the review is designed to address.</div>
+      </div>
+      <div class="dl-faq-item">
+        <div class="dl-faq-q">Should we add tools or cut tools to improve marketing performance?</div>
+        <div class="dl-faq-a">For the vast majority of growth-stage companies, cutting tools and deepening integration with the retained stack produces better marketing performance than adding more tools. The instinct to add is strong - every new tool promises a capability that feels valuable. But capability is only valuable when it is implemented, adopted, and integrated. The average growth-stage company is not suffering from insufficient tool capability. It is suffering from insufficient depth of use of the tools it already has. Cut first, optimize second, add only when a specific, justified capability gap cannot be addressed by the existing stack.</div>
+      </div>
+      <div class="dl-faq-item">
+        <div class="dl-faq-q">What is the most important tool in a marketing tech stack?</div>
+        <div class="dl-faq-a">The CRM is the most important tool in any marketing and sales technology stack, because everything else should integrate with it. A well-implemented CRM with clean data, consistent usage, and proper pipeline stage definitions provides the foundation for attribution, reporting, lead management, and marketing-sales alignment. A poorly implemented CRM - with inconsistent usage, dirty data, and undefined pipeline stages - undermines the value of every other tool connected to it. If there is only one technology investment to get right, it is the CRM.</div>
+      </div>
+      <div class="dl-faq-item">
+        <div class="dl-faq-q">How often should a marketing tech stack be reviewed?</div>
+        <div class="dl-faq-a">A full tech stack review should be conducted annually, or whenever there is a significant organizational change - a new marketing leader, a major product change, a shift in go-to-market strategy. The MarTech landscape evolves rapidly, and tools that were best-in-category two years ago may have been superseded or may no longer match your current needs. More importantly, the stack that was right for $2M revenue is frequently the wrong stack for $10M revenue. Annual reviews catch this misalignment before it becomes a growth bottleneck.</div>
+      </div>
+      <div class="dl-faq-item">
+        <div class="dl-faq-q">What is the biggest red flag in a marketing tech stack?</div>
+        <div class="dl-faq-a">The biggest red flag is a broken attribution chain between ad spend and closed revenue. When you cannot reliably connect a dollar of ad spend to a dollar of revenue generated - because of integration gaps, tracking failures, or attribution model misconfiguration - you are making all of your budget allocation decisions in the dark. This problem is common, largely invisible until specifically investigated, and enormously costly in misallocated budget. It is the first integration problem addressed in any MAGNET Framework engagement that uncovers it.</div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<div class="dl-related">
+  <div class="dl-related-inner">
+    <h2>Other Map Phase Deliverables</h2>
+    <div class="dl-related-grid">
+      <a href="full-marketing-audit.html" class="dl-rel-card">
+        <div class="dl-rel-phase">Phase 01 - Map</div>
+        <div class="dl-rel-title">Full Marketing Audit</div>
+        <div class="dl-rel-desc">Every channel, campaign, and spend analyzed for ROI.</div>
+      </a>
+      <a href="revenue-leak-analysis.html" class="dl-rel-card">
+        <div class="dl-rel-phase">Phase 01 - Map</div>
+        <div class="dl-rel-title">Revenue Leak Analysis</div>
+        <div class="dl-rel-desc">Funnel drop-offs mapped to specific causes and dollar values.</div>
+      </a>
+      <a href="competitive-gap-map.html" class="dl-rel-card">
+        <div class="dl-rel-phase">Phase 01 - Map</div>
+        <div class="dl-rel-title">Competitive Gap Map</div>
+        <div class="dl-rel-desc">Where competitors are winning and where you have openings.</div>
+      </a>
+      <a href="icp-validation.html" class="dl-rel-card">
+        <div class="dl-rel-phase">Phase 01 - Map</div>
+        <div class="dl-rel-title">ICP Validation</div>
+        <div class="dl-rel-desc">Who your best buyers actually are, confirmed with data.</div>
+      </a>
+      <a href="prioritized-action-plan.html" class="dl-rel-card">
+        <div class="dl-rel-phase">Phase 01 - Map</div>
+        <div class="dl-rel-title">Prioritized Action Plan</div>
+        <div class="dl-rel-desc">What to fix first, second, and never - ranked by revenue impact.</div>
+      </a>
+    </div>
+  </div>
+</div>
+
+<div class="dl-cta-section">
+  <div class="dl-cta-inner">
+    <a href="../magnet-framework.html" class="dl-phase-badge" style="margin-bottom:1.5rem;">MAGNET Framework&#x2122;</a>
+    <h2 style="font-family:'Outfit',sans-serif;font-size:clamp(1.75rem,4vw,2.5rem);font-weight:900;letter-spacing:-0.04em;color:var(--text);margin-bottom:1rem;">Stop Paying for Tools That Don't Compound</h2>
+    <p style="color:var(--text2);font-size:1rem;line-height:1.8;margin-bottom:2rem;">A tech stack review is included in every MAGNET Framework engagement. Book a free call to discuss what a lean, integrated stack should look like for a company at your stage and scale.</p>
+    <a href="../book.html" class="dl-hero-cta">Book a Free Strategy Call &#x2192;</a>
+  </div>
+</div>
+
+<footer>
+  <div class="footer-mega">
+    <div class="footer-brand-col">
+      <div class="footer-logo-text">Mark <span>Gabrielli</span></div>
+      <p class="footer-about">Fractional CMO, COO &amp; Executive Consultant. I help businesses from $1M to $100M find what's broken, build what scales, and execute what others only talk about.</p>
+      <div class="footer-chips">
+        <span class="footer-chip">WETYR Founder</span>
+        <span class="footer-chip">MAGNET Framework&#x2122;</span>
+        <span class="footer-chip">Fractional C-Suite</span>
+        <span class="footer-chip">CST Certified</span>
+      </div>
+      <div class="footer-socials">
+        <a href="https://www.linkedin.com/in/marklgabrielli/" target="_blank" rel="noopener" class="footer-soc">in</a>
+        <a href="mailto:mark@markcmo.com" class="footer-soc">@</a>
+      </div>
+    </div>
+    <div class="footer-col">
+      <h4>Framework</h4>
+      <ul>
+        <li><a href="../magnet-framework.html">MAGNET Overview</a></li>
+        <li><a href="../magnet-map.html">Map Phase</a></li>
+        <li><a href="../magnet-architect.html">Architect Phase</a></li>
+        <li><a href="../magnet-generate.html">Generate Phase</a></li>
+        <li><a href="../magnet-nurture.html">Nurture Phase</a></li>
+        <li><a href="../magnet-engineer.html">Engineer Phase</a></li>
+        <li><a href="../magnet-track.html">Track Phase</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>Services</h4>
+      <ul>
+        <li><a href="../fractional-cmo.html">Fractional CMO</a></li>
+        <li><a href="../fractional-coo.html">Fractional COO</a></li>
+        <li><a href="../marketing-audit.html">Marketing Audit</a></li>
+        <li><a href="../demand-generation.html">Demand Generation</a></li>
+        <li><a href="../go-to-market-strategy.html">Go-to-Market</a></li>
+        <li><a href="../services.html">All Services</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>Learn</h4>
+      <ul>
+        <li><a href="../about.html">About Mark</a></li>
+        <li><a href="../blog.html">Insights &amp; Blog</a></li>
+        <li><a href="../results.html">Results</a></li>
+        <li><a href="../faq.html">FAQ</a></li>
+        <li><a href="../contact.html">Contact</a></li>
+        <li><a href="../book.html" style="color:var(--accent);font-weight:600;">Book a Free Call</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <p>&copy; 2026 Mark Gabrielli &middot; markcmo.com &middot; All rights reserved.</p>
+    <p class="footer-bottom-tags">The MAGNET Framework&#x2122; &middot; Fractional CMO &middot; <a href="../fractional-coo.html">Fractional COO</a> &middot; Revenue Operations &middot; Demand Generation</p>
+  </div>
+</footer>
+
+</div>
+<script>
+(function(){var bar=document.createElement('div');bar.id='scroll-progress';document.body.prepend(bar);var nav=document.querySelector('nav');window.addEventListener('scroll',function(){var h=document.documentElement,b=document.body;var pct=(h.scrollTop||b.scrollTop)/((h.scrollHeight||b.scrollHeight)-h.clientHeight)*100;bar.style.width=pct+'%';if((h.scrollTop||b.scrollTop)>80){nav&&nav.classList.add('scrolled');}else{nav&&nav.classList.remove('scrolled');}},{passive:true});})();
+</script>
+<script src="../nav.js" defer></script>
+</body>
+</html>

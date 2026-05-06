@@ -1,7 +1,8 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="UTF-8"/>
+<link rel="icon" type="image/webp" href="/favicon.webp"><link rel="apple-touch-icon" href="/mark-photo.webp">
 <meta name="viewport" content="width=device-width,initial-scale=1"/>
 <title>What Is a Fractional CMO? The Complete 2026 Guide | MarkCMO</title>
 <meta name="description" content="What is a fractional CMO? Roles, responsibilities, cost, when to hire one, and how they differ from a full-time CMO or marketing agency. Real answers from an actual fractional CMO."/>
@@ -50,19 +51,28 @@ Mark <span>Gabrielli</span>
 </a>
 <ul class="nav-links">
 <li><a href="index.html">Home</a></li>
-<li><a href="about.html" class="active">About</a></li>
+<li><a href="about.html">About</a></li>
 <li><a href="services.html">Services</a></li>
 <li><a href="portfolio.html">Portfolio</a></li>
 <li><a href="results.html">Results</a></li>
-<li><a href="blog.html">Insights</a></li>
-<li><a href="https://academy.markcmo.com" target="_blank" style="color:var(--gold);font-weight:700;">🎓 Academy</a></li>
+<li><a class="active" href="blog.html">Insights</a></li>
+<li><a href="https://academy.markcmo.com" target="_blank" style="color:var(--gold);font-weight:700;">Academy</a></li>
 <li><a href="book.html" class="nav-cta">Book a Free Call</a></li>
 </ul>
-<div class="nav-mobile-links">
-<a href="portfolio.html" class="nav-mob-pill">Portfolio</a>
-<a href="book.html" class="nav-mob-cta">Book Mark →</a>
-</div>
+<button class="nav-hamburger" id="navHam" aria-label="Open menu"><span></span><span></span><span></span></button>
 </nav>
+<div class="mobile-drawer" id="mobileDrawer">
+<button class="drawer-close" id="drawerClose" aria-label="Close menu">&#x2715;</button>
+<a href="index.html">Home</a>
+<a href="about.html">About</a>
+<a href="services.html">Services</a>
+<a href="magnet-framework.html" style="color:var(--accent);font-weight:600;">MAGNET Framework&#x2122;</a>
+<a href="results.html">Results</a>
+<a href="portfolio.html">Portfolio</a>
+<a href="blog.html">Insights</a>
+<a href="https://academy.markcmo.com" target="_blank" rel="noopener">Academy</a>
+<a href="book.html" class="drawer-cta">Book a Free Strategy Call &#x2192;</a>
+</div>
 <section class="ba-hero">
 <div style="max-width:820px;margin:0 auto;">
 <p class="ba-label">Fractional CMO</p>
@@ -164,6 +174,11 @@ Mark <span>Gabrielli</span>
 <h3 style="font-family:'Bebas Neue';font-size:1.8rem;color:var(--white);margin-bottom:1rem;">See If a Fractional CMO Is Right for Your Company</h3>
 <p style="color:var(--light-grey);line-height:1.8;margin-bottom:1.5rem;">30-minute call. We'll review your current marketing situation, identify the biggest gaps, and give you a straight answer on whether a fractional CMO engagement makes sense - and what it would look like.</p>
 <a href="/book.html" style="display:inline-block;background:var(--gold);color:var(--black);font-family:'DM Mono';padding:.9rem 2rem;font-weight:700;text-decoration:none;">Book a Free Strategy Call</a>
+<div style="margin-top:1.5rem;padding-top:1.25rem;border-top:1px solid rgba(255,255,255,0.08);display:flex;gap:0.9rem;flex-wrap:wrap;">
+<a href="/marketing-assessment.html" style="padding:0.55rem 1.1rem;background:rgba(201,168,76,0.12);border:1px solid rgba(201,168,76,0.3);color:#C9A84C;font-weight:600;font-size:0.82rem;border-radius:7px;text-decoration:none;">Take the Marketing Assessment &rarr;</a>
+<a href="/fractional-cmo-roi-calculator.html" style="padding:0.55rem 1.1rem;background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.1);color:rgba(255,255,255,0.7);font-size:0.82rem;border-radius:7px;text-decoration:none;">ROI Calculator</a>
+<a href="/why-hire-fractional-cmo.html" style="padding:0.55rem 1.1rem;background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.1);color:rgba(255,255,255,0.7);font-size:0.82rem;border-radius:7px;text-decoration:none;">15 Signs You Need One</a>
+</div>
 </div>
 <div style="margin:2rem 0;">
 <p style="font-family:'DM Mono';color:var(--gold);font-size:.7rem;letter-spacing:.1em;text-transform:uppercase;margin-bottom:1rem;">Related Articles</p>
@@ -359,5 +374,6 @@ Mark <span>Gabrielli</span>
   },{passive:true});
 })();
 </script>
+<script src="nav.js" defer></script>
 </body>
 </html>

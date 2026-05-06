@@ -30,9 +30,7 @@
   "url": "https://markcmo.com/fractional-cmo-miami-fl.html",
   "areaServed": {"@type": "City", "name": "Miami"},
   "provider": {"@type": "Person", "name": "Mark Gabrielli", "url": "https://markcmo.com/about.html"},
-  "serviceType": "Fractional CMO, Chief Marketing Officer",
-  "telephone": "+13214990689"
-}
+  "serviceType": "Fractional CMO, Chief Marketing Officer",}
 </script>
 <style>
   html, body, * { cursor: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAARCAYAAADUryzEAAAAV0lEQVR42mMQFBT8z0AJABlwbFnIf4oNINsQZAPIMgTdAJINwWYASYbgMoBoQ/AZQJQhhAwgaAguA4iOHXSFJMcKSANME4yNjEkKSLLzxcAbgBwWDPQGAEWguILiE6w1AAAAAElFTkSuQmCC') 0 0, default !important; }
@@ -128,19 +126,28 @@ Mark <span>Gabrielli</span>
 </a>
 <ul class="nav-links">
 <li><a href="index.html">Home</a></li>
-<li><a href="about.html" class="active">About</a></li>
-<li><a href="services.html">Services</a></li>
+<li><a href="about.html">About</a></li>
+<li><a class="active" href="services.html">Services</a></li>
 <li><a href="portfolio.html">Portfolio</a></li>
 <li><a href="results.html">Results</a></li>
 <li><a href="blog.html">Insights</a></li>
-<li><a href="https://academy.markcmo.com" target="_blank" style="color:var(--gold);font-weight:700;">🎓 Academy</a></li>
+<li><a href="https://academy.markcmo.com" target="_blank" style="color:var(--gold);font-weight:700;">Academy</a></li>
 <li><a href="book.html" class="nav-cta">Book a Free Call</a></li>
 </ul>
-<div class="nav-mobile-links">
-<a href="portfolio.html" class="nav-mob-pill">Portfolio</a>
-<a href="book.html" class="nav-mob-cta">Book Mark →</a>
-</div>
+<button class="nav-hamburger" id="navHam" aria-label="Open menu"><span></span><span></span><span></span></button>
 </nav>
+<div class="mobile-drawer" id="mobileDrawer">
+<button class="drawer-close" id="drawerClose" aria-label="Close menu">&#x2715;</button>
+<a href="index.html">Home</a>
+<a href="about.html">About</a>
+<a href="services.html">Services</a>
+<a href="magnet-framework.html" style="color:var(--accent);font-weight:600;">MAGNET Framework&#x2122;</a>
+<a href="results.html">Results</a>
+<a href="portfolio.html">Portfolio</a>
+<a href="blog.html">Insights</a>
+<a href="https://academy.markcmo.com" target="_blank" rel="noopener">Academy</a>
+<a href="book.html" class="drawer-cta">Book a Free Strategy Call &#x2192;</a>
+</div>
 <div class="sp-hero">
 <div class="sp-hero-grid"></div>
 <div class="sp-hero-content">
@@ -406,7 +413,7 @@ Mark <span>Gabrielli</span>
   <p>Book a free 30-minute strategy call. No pitch deck. No sales pressure. An honest conversation about your Miami market, your current marketing, and exactly what it would take to build pipeline this quarter.</p>
   <div class="sp-final-cta-btns">
     <a href="/book.html" class="btn-primary sp-cta-primary">Book Your Free Strategy Call &rarr;</a>
-    <a href="tel:+13214990689" class="btn-ghost">(321) 499-0689</a>
+    
     <a href="/results.html" class="btn-ghost">See Results First</a>
   </div>
   <p class="sp-cta-footnote">Month-to-month. No contracts. First results in 30 days. Serving Miami, Florida, and nationwide.</p>
@@ -419,7 +426,7 @@ Mark <span>Gabrielli</span>
 <h3>Let's Talk About Your Miami Pipeline</h3>
 <p>No pitch. No deck. 30 minutes to diagnose your marketing and map a clear path to predictable revenue growth in Miami.</p>
 <a href="/book.html" class="sp-cta-btn">Book Your Free Call &rarr;</a>
-<a href="tel:+13214990689" class="sp-cta-btn ghost">(321) 499-0689</a>
+
 <div class="sp-cta-trust">
   <span>&#9989; Month-to-month</span>
   <span>&#9989; No long-term contracts</span>
@@ -642,5 +649,6 @@ Mark <span>Gabrielli</span>
   },{passive:true});
 })();
 </script>
+<script src="nav.js" defer></script>
 </body>
 </html>

@@ -1,0 +1,327 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-BXK5Y3DQBL"></script>
+<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-BXK5Y3DQBL');</script>
+<meta charset="UTF-8"/>
+<link rel="icon" type="image/webp" href="/favicon.webp"><link rel="apple-touch-icon" href="/mark-photo.webp">
+<meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+<title>Revenue Leak Analysis | MAGNET Framework | Mark Gabrielli</title>
+<meta name="description" content="Identify exactly where revenue is escaping your funnel. Mark Gabrielli's revenue leak analysis pinpoints drop-offs, abandoned journeys, and missed conversions."/>
+<meta name="robots" content="index, follow"/>
+<link rel="canonical" href="https://markcmo.com/magnet/revenue-leak-analysis.html"/>
+<meta property="og:title" content="Revenue Leak Analysis | Mark Gabrielli"/>
+<meta property="og:description" content="Identify exactly where revenue is escaping your funnel. Mark Gabrielli's revenue leak analysis pinpoints drop-offs, abandoned journeys, and missed conversions."/>
+<meta property="og:url" content="https://markcmo.com/magnet/revenue-leak-analysis.html"/>
+<meta property="og:image" content="https://markcmo.com/og-image.jpg"/>
+<meta name="twitter:card" content="summary_large_image"/>
+<link rel="preconnect" href="https://fonts.googleapis.com" crossorigin>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800;900&family=Space+Grotesk:wght@400;500;600;700&display=swap">
+<link rel="stylesheet" href="../style.css"/>
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"Article","headline":"Revenue Leak Analysis","description":"Identify exactly where revenue is escaping your funnel. Mark Gabrielli's revenue leak analysis pinpoints drop-offs, abandoned journeys, and missed conversions.","author":{"@type":"Person","name":"Mark Gabrielli","url":"https://markcmo.com/about.html"},"publisher":{"@type":"Organization","name":"MarkCMO","url":"https://markcmo.com"},"mainEntityOfPage":"https://markcmo.com/magnet/revenue-leak-analysis.html"}
+</script>
+<style>
+.dl-page-wrap{padding-top:64px;}
+.dl-breadcrumb{padding:1.25rem 6vw;background:var(--bg2);border-bottom:1px solid var(--border);}
+.dl-breadcrumb nav{max-width:1200px;margin:0 auto;font-size:0.78rem;color:var(--text3);}
+.dl-breadcrumb a{color:var(--text3);text-decoration:none;}
+.dl-breadcrumb a:hover{color:var(--accent);}
+.dl-breadcrumb span{margin:0 0.4rem;opacity:0.5;}
+.dl-hero{padding:5rem 6vw 4rem;background:var(--bg);border-bottom:1px solid var(--border);position:relative;overflow:hidden;}
+.dl-hero::before{content:'';position:absolute;top:-200px;left:50%;transform:translateX(-50%);width:700px;height:700px;border-radius:50%;background:radial-gradient(circle,rgba(201,168,76,0.07) 0%,transparent 65%);pointer-events:none;}
+.dl-hero-inner{max-width:860px;margin:0 auto;position:relative;z-index:1;}
+.dl-phase-badge{display:inline-flex;align-items:center;gap:8px;background:rgba(201,168,76,0.1);border:1px solid rgba(201,168,76,0.25);border-radius:30px;padding:0.35rem 1rem;font-size:0.7rem;font-weight:800;letter-spacing:0.12em;color:var(--accent);text-transform:uppercase;margin-bottom:1.25rem;text-decoration:none;}
+.dl-phase-badge:hover{background:rgba(201,168,76,0.15);}
+.dl-h1{font-family:'Outfit',sans-serif;font-size:clamp(2.25rem,5vw,3.75rem);font-weight:900;letter-spacing:-0.04em;color:var(--text);line-height:1.05;margin-bottom:1rem;}
+.dl-h1 em{color:var(--accent);font-style:italic;}
+.dl-hero-sub{font-size:1.1rem;color:var(--text2);line-height:1.75;max-width:680px;margin-bottom:2rem;}
+.dl-hero-cta{display:inline-flex;align-items:center;gap:0.5rem;background:var(--accent);color:#000;font-family:'Outfit',sans-serif;font-weight:700;font-size:0.9rem;padding:0.75rem 1.75rem;border-radius:8px;text-decoration:none;transition:opacity 0.15s;}
+.dl-hero-cta:hover{opacity:0.88;}
+.dl-body{max-width:1200px;margin:0 auto;padding:5rem 6vw;}
+.dl-content{max-width:760px;}
+.dl-content h2{font-family:'Outfit',sans-serif;font-size:clamp(1.5rem,3vw,2rem);font-weight:800;letter-spacing:-0.03em;color:var(--text);margin:3rem 0 1rem;line-height:1.15;}
+.dl-content h3{font-family:'Outfit',sans-serif;font-size:1.15rem;font-weight:700;color:var(--text);margin:2rem 0 0.75rem;}
+.dl-content p{font-size:1rem;color:var(--text2);line-height:1.85;margin-bottom:1.25rem;}
+.dl-content ul,.dl-content ol{padding-left:1.5rem;margin-bottom:1.5rem;}
+.dl-content li{font-size:0.97rem;color:var(--text2);line-height:1.8;margin-bottom:0.5rem;}
+.dl-content strong{color:var(--text);font-weight:700;}
+.dl-pullquote{margin:2.5rem 0;padding:1.5rem 2rem;background:rgba(201,168,76,0.06);border-left:3px solid var(--accent);border-radius:0 12px 12px 0;}
+.dl-pullquote p{font-family:'Outfit',sans-serif;font-size:1.15rem;font-weight:700;font-style:italic;color:var(--accent);margin:0;line-height:1.5;}
+.dl-stat-row{display:grid;grid-template-columns:repeat(3,1fr);gap:1.25rem;margin:2.5rem 0;}
+.dl-stat-box{background:var(--bg3);border:1px solid var(--border);border-radius:12px;padding:1.5rem;text-align:center;}
+.dl-stat-n{display:block;font-family:'Outfit',sans-serif;font-size:2rem;font-weight:900;color:var(--accent);letter-spacing:-0.04em;}
+.dl-stat-l{display:block;font-size:0.72rem;color:var(--text3);text-transform:uppercase;letter-spacing:0.1em;margin-top:4px;}
+.dl-faq{margin-top:3rem;}
+.dl-faq h2{font-family:'Outfit',sans-serif;font-size:1.75rem;font-weight:800;color:var(--text);margin-bottom:1.5rem;}
+.dl-faq-item{border-bottom:1px solid var(--border);padding:1.25rem 0;}
+.dl-faq-q{font-family:'Outfit',sans-serif;font-size:1rem;font-weight:700;color:var(--text);margin-bottom:0.6rem;}
+.dl-faq-a{font-size:0.95rem;color:var(--text2);line-height:1.8;}
+.dl-related{background:var(--bg2);padding:5rem 6vw;border-top:1px solid var(--border);}
+.dl-related-inner{max-width:1200px;margin:0 auto;}
+.dl-related h2{font-family:'Outfit',sans-serif;font-size:1.5rem;font-weight:800;color:var(--text);margin-bottom:1.75rem;}
+.dl-related-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1rem;}
+.dl-rel-card{background:var(--bg3);border:1px solid var(--border);border-radius:12px;padding:1.25rem;text-decoration:none;transition:border-color 0.2s,transform 0.2s;}
+.dl-rel-card:hover{border-color:rgba(201,168,76,0.3);transform:translateY(-2px);}
+.dl-rel-phase{font-size:0.65rem;font-weight:800;letter-spacing:0.12em;color:var(--accent);text-transform:uppercase;margin-bottom:0.5rem;}
+.dl-rel-title{font-family:'Outfit',sans-serif;font-size:0.9rem;font-weight:700;color:var(--text);margin-bottom:0.4rem;}
+.dl-rel-desc{font-size:0.78rem;color:var(--text3);line-height:1.55;}
+.dl-cta-section{padding:6rem 6vw;background:var(--bg);text-align:center;border-top:1px solid var(--border);}
+.dl-cta-inner{max-width:640px;margin:0 auto;}
+@media(max-width:900px){.dl-stat-row{grid-template-columns:1fr 1fr;}.dl-related-grid{grid-template-columns:1fr 1fr;}}
+@media(max-width:600px){.dl-stat-row{grid-template-columns:1fr;}.dl-related-grid{grid-template-columns:1fr;}}
+</style>
+</head>
+<body>
+<div class="dl-page-wrap">
+
+<nav>
+  <a href="../index.html" class="nav-logo">
+    <div class="nav-avatar"><img src="../mark-photo.webp" alt="Mark Gabrielli" onerror="this.style.display='none';this.parentElement.style.background='var(--accent)';this.parentElement.innerHTML='<span style=\'font-family:Outfit,sans-serif;font-weight:900;font-size:1rem;color:#fff;display:flex;align-items:center;justify-content:center;width:100%;height:100%\'>M</span>'"/></div>
+    Mark <span>Gabrielli</span>
+  </a>
+  <ul class="nav-links">
+    <li><a href="../about.html">About</a></li>
+    <li><a href="../services.html">Services</a></li>
+    <li><a href="../portfolio.html">Portfolio</a></li>
+    <li><a href="../results.html">Results</a></li>
+    <li><a href="../blog.html">Insights</a></li>
+    <li><a href="../magnet-framework.html" style="color:var(--accent);font-weight:600;">MAGNET&#x2122;</a></li>
+    <li><a href="../book.html" class="nav-cta">Book a Free Call</a></li>
+  </ul>
+  <button class="nav-hamburger" id="navHam" aria-label="Open menu"><span></span><span></span><span></span></button>
+</nav>
+<div class="mobile-drawer" id="mobileDrawer">
+<button class="drawer-close" id="drawerClose" aria-label="Close menu">&#x2715;</button>
+<a href="../index.html">Home</a>
+<a href="../about.html">About</a>
+<a href="../services.html">Services</a>
+<a href="../magnet-framework.html" style="color:var(--accent);font-weight:600;">MAGNET Framework&#x2122;</a>
+<a href="../results.html">Results</a>
+<a href="../portfolio.html">Portfolio</a>
+<a href="../blog.html">Insights</a>
+<a href="https://academy.markcmo.com" target="_blank" rel="noopener">Academy</a>
+<a href="../book.html" class="drawer-cta">Book a Free Strategy Call &#x2192;</a>
+</div>
+
+<div class="dl-breadcrumb">
+  <nav aria-label="Breadcrumb">
+    <a href="../index.html">Home</a>
+    <span>&#x203A;</span>
+    <a href="../magnet-framework.html">MAGNET Framework</a>
+    <span>&#x203A;</span>
+    <a href="../magnet-map.html">Map</a>
+    <span>&#x203A;</span>
+    Revenue Leak Analysis
+  </nav>
+</div>
+
+<div class="dl-hero">
+  <div class="dl-hero-inner">
+    <a href="../magnet-framework.html" class="dl-phase-badge">Phase 01 &mdash; Map &middot; MAGNET Framework</a>
+    <h1 class="dl-h1">Revenue <em>Leak Analysis</em></h1>
+    <p class="dl-hero-sub">Every growing company has revenue escaping its funnel at multiple points simultaneously. Most leadership teams sense this is happening but have never mapped where the exits are or how much they cost. The revenue leak analysis changes that - permanently.</p>
+    <a href="../book.html" class="dl-hero-cta">Find Your Revenue Leaks &#x2192;</a>
+  </div>
+</div>
+
+<div class="dl-body">
+  <div class="dl-content">
+
+    <h2>What Is a Revenue Leak (And Why Every Growing Business Has One)</h2>
+    <p>A revenue leak is any point in your funnel where a potential buyer exits without converting - and where that exit was preventable. The critical phrase is "preventable." Not every exit from your funnel is a leak. A visitor who was never your ICP leaving your website is not a leak. A prospect who genuinely cannot afford your service is not a leak. A revenue leak is specifically the potential buyer who had genuine interest and genuine fit, whose exit was caused by something within your control - and which you have not yet fixed.</p>
+    <p>Every growing business has revenue leaks. This is not a failure condition - it is the natural consequence of building a marketing and sales system at speed. Channels get added without proper conversion infrastructure. Nurture sequences never get built because the team is focused on acquisition. Follow-up processes exist on paper but break down in practice. Each of these gaps is a leak, and most companies are running with three to seven significant ones simultaneously.</p>
+    <p>The problem is not the existence of leaks - it is the failure to identify and quantify them. Revenue that escapes through an unmapped leak is invisible. The company continues spending on top-of-funnel acquisition, blaming insufficient traffic or a weak product for growth challenges, when the actual problem is that a substantial percentage of already-qualified prospects are exiting at a specific, fixable point. Finding those points is the purpose of the revenue leak analysis.</p>
+    <p>Common sources of revenue leaks include high bounce rates on landing pages where positioning is misaligned with the ad that drove the visit, slow or absent follow-up on inbound inquiries where a 24-hour response window collapses close rates dramatically, non-existent nurture sequences that leave prospects who were not ready to buy immediately with no mechanism to re-engage, weak discovery call processes that fail to qualify and advance genuinely interested prospects, and proposal-to-close gaps where interested prospects go silent and no follow-up cadence exists to recover them.</p>
+
+    <div class="dl-stat-row">
+      <div class="dl-stat-box">
+        <span class="dl-stat-n">79%</span>
+        <span class="dl-stat-l">of marketing leads never convert due to lack of nurture</span>
+      </div>
+      <div class="dl-stat-box">
+        <span class="dl-stat-n">$180K</span>
+        <span class="dl-stat-l">average annual revenue recovered per significant leak fixed</span>
+      </div>
+      <div class="dl-stat-box">
+        <span class="dl-stat-n">5x</span>
+        <span class="dl-stat-l">more costly to acquire new leads than to convert existing ones</span>
+      </div>
+    </div>
+
+    <h2>The 6 Most Common Revenue Leaks Mark Finds</h2>
+    <p>Across dozens of marketing audits in companies ranging from $1M to $50M revenue, the same leak patterns appear repeatedly. Understanding these six categories helps you begin to recognize where your own funnel is losing revenue before the formal analysis even begins.</p>
+    <h3>1. The Traffic-to-Lead Gap</h3>
+    <p>High traffic with low lead conversion is the most visible and arguably most common revenue leak in B2B marketing. A company drives thousands of visitors to its website through paid and organic channels, yet converts a fraction of a percent into leads. The root cause is almost always one of two things: positioning misalignment - the visitor arrives expecting one thing and finds another - or an absent or weak call to action that fails to give the qualified visitor a compelling next step. The fix is rarely "more traffic." It is usually better positioning and better conversion architecture on the existing traffic you already paid for.</p>
+    <h3>2. The Lead-to-MQL Gap</h3>
+    <p>Leads that come in and go nowhere represent a significant and often shocking revenue leak. When a company has no lead scoring process, no automated nurture sequence, and no defined criteria for when a lead becomes marketing-qualified, what happens in practice is that high-quality leads get treated identically to low-quality ones - which means most of them receive no meaningful follow-up at all. They were interested. They raised their hand. The company simply never responded in a meaningful way, and by the time anyone did, the prospect had already engaged a competitor.</p>
+    <h3>3. The MQL-to-Demo Gap</h3>
+    <p>A marketing-qualified lead that never becomes a booked demo is a revenue leak that lives at the intersection of marketing and sales. The causes are typically: the wrong leads are being qualified as MQLs because ICP criteria are poorly defined, sales team follow-up speed is too slow, or the handoff process between marketing and sales is breaking down. In companies without a formal sales development function, MQLs often sit in a CRM queue for days before anyone contacts them. Response time is one of the most powerful predictors of demo conversion rate - prospects who are contacted within an hour of expressing interest are far more likely to book.</p>
+    <h3>4. The Demo-to-Proposal Gap</h3>
+    <p>When a prospect takes a discovery call or demo but then does not receive a proposal - or receives one but never responds - the leak is almost always in the discovery process itself. Discovery calls that fail to establish genuine pain, quantify the cost of inaction, create personal urgency, and secure a committed next step produce prospects who feel politely informed but not motivated to act. The fix requires reworking the discovery methodology, ensuring every call ends with a defined mutual next step, and building a follow-up sequence specifically designed for post-demo re-engagement.</p>
+    <h3>5. The Proposal-to-Close Gap</h3>
+    <p>Proposal-to-close rate is one of the most revealing metrics in a company's entire revenue operation. When a prospect receives a proposal and then goes silent, it typically means one of three things: the proposal did not adequately connect the solution to the specific pain articulated in discovery, price objections were not addressed in the proposal or in a follow-up conversation, or the follow-up cadence after sending the proposal was absent or insufficient. Most companies send a proposal and then wait. The companies that close at high rates send the proposal, schedule a debrief call within 48 hours, and have a systematic follow-up sequence for the 30 days following.</p>
+    <h3>6. The Customer-to-Expansion Gap</h3>
+    <p>The largest and most frequently overlooked revenue leak is the failure to expand existing customer relationships. A customer who is achieving results with your service is the highest-probability, lowest-cost revenue opportunity in your entire business - yet most companies between $1M and $20M revenue have no structured post-sale marketing program. No upsell sequence, no QBR process designed to surface expansion opportunities, no case study generation workflow that reinforces value and opens referral conversations. The customer-to-expansion gap is not a sales problem or a product problem. It is a marketing problem - and fixing it typically delivers faster revenue growth than any top-of-funnel investment.</p>
+
+    <div class="dl-pullquote">
+      <p>"Most companies are spending money at the top of the funnel while hemorrhaging revenue at the bottom. Find the leaks first. Then spend on acquisition."</p>
+    </div>
+
+    <h2>How Mark Quantifies Revenue Leaks</h2>
+    <p>Identifying a revenue leak without attaching a dollar value to it is interesting but not actionable. The methodology for quantifying leaks is straightforward: take the volume of prospects entering each funnel stage, apply the current conversion rate and the benchmark conversion rate for your industry and company type, calculate the gap in conversions, and multiply by average deal value.</p>
+    <p>As a concrete example: if you are running 200 demos per month with a 10 percent close rate, you are closing 20 deals. If the benchmark close rate for your category and average deal size is 20 percent, a 10-point gap represents 20 additional deals per month. At an average deal value of $8,000, that gap is worth $160,000 per month - or $1.92 million annually. That is the value of closing the Demo-to-Close leak. This calculation, applied at every funnel stage, produces a total addressable revenue leak figure that almost always surprises leadership teams and immediately prioritizes marketing investment decisions.</p>
+    <p>The methodology does not assume every leak can be completely closed - a more conservative analysis targets improving each stage by 30 to 50 percent of the benchmark gap, which typically produces compelling ROI projections even under conservative assumptions. The point is to move the conversation from "our marketing needs to improve" to "our Demo-to-Close rate improvement is worth $576,000 annually and here is specifically what needs to change to capture it."</p>
+
+    <h2>The Revenue Leak Analysis Process</h2>
+    <p>The revenue leak analysis follows a six-step process designed to produce actionable findings within two weeks for most companies.</p>
+    <p><strong>Step 1: Data Pull.</strong> We pull data from CRM, ad platforms, email marketing platform, website analytics, and where available, call recording or sales conversation data. The goal is to have quantitative data at each funnel stage - not estimates or assumptions, but actual numbers.</p>
+    <p><strong>Step 2: Funnel Stage Mapping.</strong> We define the funnel stages specific to your business and buyer journey, not generic categories. A company that sells through a 90-day enterprise sales cycle has a very different funnel map than a company with a 14-day SMB sales motion. Stage definitions must match reality, not aspirational models.</p>
+    <p><strong>Step 3: Conversion Rate Calculation.</strong> For each stage transition, we calculate the current conversion rate with precision. This step frequently surfaces data gaps - stages where the company does not have reliable data because tracking was never implemented. Those gaps are findings in themselves.</p>
+    <p><strong>Step 4: Benchmark Comparison.</strong> Current conversion rates are compared against industry benchmarks for your specific category, business model, and average contract value. Benchmarks are contextual - a professional services firm should not be compared to a SaaS company's conversion standards.</p>
+    <p><strong>Step 5: Root Cause Analysis.</strong> For each stage where conversion is below benchmark, we identify the most likely root causes through a combination of data analysis, sales conversation review, and qualitative interviews with front-line sales and marketing team members who are closest to the prospect experience.</p>
+    <p><strong>Step 6: Priority Scoring.</strong> Each leak is scored by revenue impact (dollar value of closing 40 percent of the gap) and effort to fix (time, cost, and complexity of the recommended solution). The output is a ranked list of leaks with specific remediation recommendations, ordered by the ratio of revenue recovery to implementation effort.</p>
+
+    <h2>Revenue Leaks vs. Revenue Opportunities</h2>
+    <p>The revenue leak analysis operates in parallel with opportunity identification - and the distinction between the two matters for how you sequence your investments. Revenue leaks are defensive: they represent revenue you are already generating demand for and then failing to convert. Fixing them recovers dollars that your current marketing spend has already earned the right to close. Revenue opportunities are offensive: new channels, new segments, new offer structures that could generate demand you are not currently capturing.</p>
+    <p>The temptation in most marketing planning is to lead with offense - new campaigns, new channels, new content. The data consistently argues for starting with defense. Every dollar you invest in top-of-funnel acquisition while your Demo-to-Close rate is 50 percent below benchmark is half-wasted. Fixing the conversion infrastructure first means every subsequent acquisition investment produces dramatically higher returns.</p>
+    <p>In practice, a SaaS company discovered during a revenue leak analysis that 60 percent of trial users were abandoning the product between day 1 and day 3 without ever activating a core feature. The leak was not in marketing - it was in the post-signup onboarding sequence. A day-2 activation email that highlighted the specific feature most correlated with long-term retention was implemented in a single week. Trial-to-paid conversion rate improved by 34 percent, recovering $180,000 in annual recurring revenue from the same traffic volume - with no additional acquisition spend.</p>
+
+    <h2>What Happens After the Revenue Leak Analysis</h2>
+    <p>Every identified revenue leak receives a specific fix recommendation - not a vague suggestion to "improve follow-up" but a defined action: build a 5-email demo follow-up sequence, implement a lead scoring model with specific criteria, redesign the landing page headline and primary CTA, create a proposal debrief call protocol. Each recommendation is described with enough specificity that a competent marketing or sales operator can execute it immediately.</p>
+    <p>The fixes are then prioritized using the Impact x Effort matrix that structures all MAGNET Framework deliverables. Quick wins - high revenue recovery, low implementation effort - become the immediate priorities for the first 30 days of the Architect phase. Foundational fixes requiring more infrastructure - like rebuilding the entire lead nurture system - are sequenced into the 30 to 90 day roadmap. The output of the revenue leak analysis does not wait for the broader MAGNET engagement to drive action. The highest-priority leaks begin being addressed immediately.</p>
+
+    <div class="dl-faq">
+      <h2>Frequently Asked Questions</h2>
+      <div class="dl-faq-item">
+        <div class="dl-faq-q">How do I know if my business has revenue leaks?</div>
+        <div class="dl-faq-a">If you are generating leads that are not converting at the rate you expect, if prospects go quiet after a demo or proposal, if trial users or free customers are not converting to paid at benchmark rates, or if existing customers are not expanding - you have revenue leaks. Nearly every company between $1M and $50M revenue has at least three significant leaks operating simultaneously. The question is not whether they exist but where they are and how much they cost.</div>
+      </div>
+      <div class="dl-faq-item">
+        <div class="dl-faq-q">Can you fix a revenue leak without a CRM?</div>
+        <div class="dl-faq-a">You can identify the existence of leaks without a CRM by analyzing website analytics, email data, and sales conversation notes - but you cannot quantify them precisely without stage-by-stage tracking. Implementing basic CRM usage is often itself a recommendation that comes out of the revenue leak analysis, because the data gaps it creates are themselves a form of revenue leak - you cannot optimize what you cannot measure. If you do not have a CRM, implementing one correctly becomes a top-priority action item.</div>
+      </div>
+      <div class="dl-faq-item">
+        <div class="dl-faq-q">Is a revenue leak analysis only relevant for B2B companies?</div>
+        <div class="dl-faq-a">Revenue leaks exist in both B2B and B2C businesses, but the analysis methodology differs. B2B revenue leak analysis focuses on funnel stage conversion rates through a multi-touch sales process. B2C analysis focuses more heavily on cart abandonment, trial-to-paid conversion, customer lifetime value optimization, and retention cohort analysis. The underlying principle - that every point of preventable exit from your funnel represents recoverable revenue - applies universally. Most of my engagements are with B2B companies, but the framework translates.</div>
+      </div>
+      <div class="dl-faq-item">
+        <div class="dl-faq-q">How long does it take to fix a revenue leak once identified?</div>
+        <div class="dl-faq-a">The fastest leaks to fix are process-based ones: implementing a follow-up cadence, adding a post-demo nurture sequence, or improving proposal follow-up protocols. These can be implemented in days and begin producing results within the first sales cycle. Infrastructure-based fixes - rebuilding lead scoring, redesigning landing pages, implementing new attribution tracking - typically take two to six weeks. The revenue leak analysis prioritizes the fastest-to-implement, highest-impact fixes so you begin recovering revenue immediately while longer-term fixes are built in parallel.</div>
+      </div>
+      <div class="dl-faq-item">
+        <div class="dl-faq-q">What is the difference between a revenue leak analysis and a funnel audit?</div>
+        <div class="dl-faq-a">A funnel audit typically reports on what is happening at each stage - traffic numbers, conversion rates, lead volumes. A revenue leak analysis goes two steps further: it translates every underperforming conversion rate into a dollar figure, and it identifies the specific root cause of each underperformance rather than simply noting the gap. The deliverable from a funnel audit is a report. The deliverable from a revenue leak analysis is a ranked list of specific fixes with quantified revenue recovery potential attached to each one.</div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<div class="dl-related">
+  <div class="dl-related-inner">
+    <h2>Other Map Phase Deliverables</h2>
+    <div class="dl-related-grid">
+      <a href="full-marketing-audit.html" class="dl-rel-card">
+        <div class="dl-rel-phase">Phase 01 - Map</div>
+        <div class="dl-rel-title">Full Marketing Audit</div>
+        <div class="dl-rel-desc">Every channel, campaign, and spend analyzed for ROI.</div>
+      </a>
+      <a href="competitive-gap-map.html" class="dl-rel-card">
+        <div class="dl-rel-phase">Phase 01 - Map</div>
+        <div class="dl-rel-title">Competitive Gap Map</div>
+        <div class="dl-rel-desc">Where competitors are winning and where you have openings.</div>
+      </a>
+      <a href="icp-validation.html" class="dl-rel-card">
+        <div class="dl-rel-phase">Phase 01 - Map</div>
+        <div class="dl-rel-title">ICP Validation</div>
+        <div class="dl-rel-desc">Who your best buyers actually are, confirmed with data.</div>
+      </a>
+      <a href="tech-stack-review.html" class="dl-rel-card">
+        <div class="dl-rel-phase">Phase 01 - Map</div>
+        <div class="dl-rel-title">Tech Stack Review</div>
+        <div class="dl-rel-desc">Every tool audited for ROI, adoption, and integration health.</div>
+      </a>
+      <a href="prioritized-action-plan.html" class="dl-rel-card">
+        <div class="dl-rel-phase">Phase 01 - Map</div>
+        <div class="dl-rel-title">Prioritized Action Plan</div>
+        <div class="dl-rel-desc">What to fix first, second, and never - ranked by revenue impact.</div>
+      </a>
+    </div>
+  </div>
+</div>
+
+<div class="dl-cta-section">
+  <div class="dl-cta-inner">
+    <a href="../magnet-framework.html" class="dl-phase-badge" style="margin-bottom:1.5rem;">MAGNET Framework&#x2122;</a>
+    <h2 style="font-family:'Outfit',sans-serif;font-size:clamp(1.75rem,4vw,2.5rem);font-weight:900;letter-spacing:-0.04em;color:var(--text);margin-bottom:1rem;">Stop Losing Revenue You Already Earned</h2>
+    <p style="color:var(--text2);font-size:1rem;line-height:1.8;margin-bottom:2rem;">The revenue leak analysis is included in every MAGNET Framework engagement. Book a free call to discuss where your funnel is most likely leaking and what fixing it is worth.</p>
+    <a href="../book.html" class="dl-hero-cta">Book a Free Strategy Call &#x2192;</a>
+  </div>
+</div>
+
+<footer>
+  <div class="footer-mega">
+    <div class="footer-brand-col">
+      <div class="footer-logo-text">Mark <span>Gabrielli</span></div>
+      <p class="footer-about">Fractional CMO, COO &amp; Executive Consultant. I help businesses from $1M to $100M find what's broken, build what scales, and execute what others only talk about.</p>
+      <div class="footer-chips">
+        <span class="footer-chip">WETYR Founder</span>
+        <span class="footer-chip">MAGNET Framework&#x2122;</span>
+        <span class="footer-chip">Fractional C-Suite</span>
+        <span class="footer-chip">CST Certified</span>
+      </div>
+      <div class="footer-socials">
+        <a href="https://www.linkedin.com/in/marklgabrielli/" target="_blank" rel="noopener" class="footer-soc">in</a>
+        <a href="mailto:mark@markcmo.com" class="footer-soc">@</a>
+      </div>
+    </div>
+    <div class="footer-col">
+      <h4>Framework</h4>
+      <ul>
+        <li><a href="../magnet-framework.html">MAGNET Overview</a></li>
+        <li><a href="../magnet-map.html">Map Phase</a></li>
+        <li><a href="../magnet-architect.html">Architect Phase</a></li>
+        <li><a href="../magnet-generate.html">Generate Phase</a></li>
+        <li><a href="../magnet-nurture.html">Nurture Phase</a></li>
+        <li><a href="../magnet-engineer.html">Engineer Phase</a></li>
+        <li><a href="../magnet-track.html">Track Phase</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>Services</h4>
+      <ul>
+        <li><a href="../fractional-cmo.html">Fractional CMO</a></li>
+        <li><a href="../fractional-coo.html">Fractional COO</a></li>
+        <li><a href="../marketing-audit.html">Marketing Audit</a></li>
+        <li><a href="../demand-generation.html">Demand Generation</a></li>
+        <li><a href="../go-to-market-strategy.html">Go-to-Market</a></li>
+        <li><a href="../services.html">All Services</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>Learn</h4>
+      <ul>
+        <li><a href="../about.html">About Mark</a></li>
+        <li><a href="../blog.html">Insights &amp; Blog</a></li>
+        <li><a href="../results.html">Results</a></li>
+        <li><a href="../faq.html">FAQ</a></li>
+        <li><a href="../contact.html">Contact</a></li>
+        <li><a href="../book.html" style="color:var(--accent);font-weight:600;">Book a Free Call</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <p>&copy; 2026 Mark Gabrielli &middot; markcmo.com &middot; All rights reserved.</p>
+    <p class="footer-bottom-tags">The MAGNET Framework&#x2122; &middot; Fractional CMO &middot; <a href="../fractional-coo.html">Fractional COO</a> &middot; Revenue Operations &middot; Demand Generation</p>
+  </div>
+</footer>
+
+</div>
+<script>
+(function(){var bar=document.createElement('div');bar.id='scroll-progress';document.body.prepend(bar);var nav=document.querySelector('nav');window.addEventListener('scroll',function(){var h=document.documentElement,b=document.body;var pct=(h.scrollTop||b.scrollTop)/((h.scrollHeight||b.scrollHeight)-h.clientHeight)*100;bar.style.width=pct+'%';if((h.scrollTop||b.scrollTop)>80){nav&&nav.classList.add('scrolled');}else{nav&&nav.classList.remove('scrolled');}},{passive:true});})();
+</script>
+<script src="../nav.js" defer></script>
+</body>
+</html>
