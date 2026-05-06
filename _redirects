@@ -350,9 +350,8 @@ https://www.markcmo.com/* https://markcmo.com/:splat 301!
 /webinar-confirmation          /webinar-confirmation.html     200
 /webinar-playbook-delivery     /webinar-playbook-delivery.html 200
 /webinar-strategy-guide        /webinar-strategy-guide.html   200
-/admin                         /index.html                    404
-/admin.html                    /index.html                    404
-/admin-c7x9k2m                 /admin-c7x9k2m.html            200
+# Admin: canonical URL handled in netlify.toml. The legacy obfuscated
+# /admin-c7x9k2m URL 301s to /admin to keep one admin surface alive.
 /access-required               /access-required.html          200
 
 # ─── Resume Pages ──────────────────────────────────────────

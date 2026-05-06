@@ -92,10 +92,26 @@
   timeout = 26
 
 # ─── Clean URL Redirects ──────────────────────────────────────
+# Canonical admin URL is /admin (serves the live admin.html).
+# /admin-c7x9k2m and /admin-c7x9k2m.html are kept alive for any
+# legacy bookmarks but redirect to /admin so there's only one
+# admin surface to maintain.
 [[redirects]]
   from = "/admin"
-  to = "/admin-c7x9k2m.html"
+  to = "/admin.html"
   status = 200
+
+[[redirects]]
+  from = "/admin-c7x9k2m"
+  to = "/admin"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/admin-c7x9k2m.html"
+  to = "/admin"
+  status = 301
+  force = true
 
 [[redirects]]
   from = "/webinar"
@@ -229,12 +245,32 @@
     Content-Type = "application/xml; charset=utf-8"
 
 # ─── Security Headers ─────────────────────────────────────────
+# Admin: never cache. We push fresh code constantly and a stale
+# admin in the browser causes the wrong dashboard to show.
 [[headers]]
   for = "/admin.html"
   [headers.values]
     X-Frame-Options = "DENY"
     X-Content-Type-Options = "nosniff"
-    Cache-Control = "no-store, no-cache"
+    Cache-Control = "no-store, no-cache, must-revalidate, max-age=0"
+    Pragma = "no-cache"
+    Expires = "0"
+
+[[headers]]
+  for = "/admin"
+  [headers.values]
+    X-Frame-Options = "DENY"
+    X-Content-Type-Options = "nosniff"
+    Cache-Control = "no-store, no-cache, must-revalidate, max-age=0"
+    Pragma = "no-cache"
+    Expires = "0"
+
+[[headers]]
+  for = "/admin-c7x9k2m.html"
+  [headers.values]
+    X-Frame-Options = "DENY"
+    X-Content-Type-Options = "nosniff"
+    Cache-Control = "no-store, no-cache, must-revalidate, max-age=0"
 
 [[headers]]
   for = "/webinar-playbook-delivery.html"
