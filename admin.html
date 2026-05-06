@@ -1415,6 +1415,81 @@
   .mc-kanban-card .fee { font-family: 'Bebas Neue', Impact, sans-serif; font-size: 1rem; color: #2563EB; letter-spacing: 0.02em; }
   .mc-kanban-card .age { font-family: 'DM Mono', monospace; font-size: 0.6rem; color: #94A3B8; }
 
+  /* Dashboard widgets (mc-dash-) */
+  .mc-dash { padding: 0; }
+  .mc-dash-section { margin-bottom: 1.75rem; }
+  .mc-dash-section-head { display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 0.85rem; gap: 1rem; }
+  .mc-dash-section-head h3 { font-family: 'Bebas Neue', Impact, sans-serif; font-size: 1.35rem; letter-spacing: 0.025em; color: #0A1628; margin: 0; font-weight: 400; line-height: 1; }
+  .mc-dash-section-head .eyebrow { font-family: 'DM Mono', monospace; font-size: 0.6rem; letter-spacing: 0.22em; text-transform: uppercase; color: #2563EB; font-weight: 700; }
+  .mc-dash-section-head a { font-family: 'DM Mono', monospace; font-size: 0.7rem; letter-spacing: 0.12em; text-transform: uppercase; color: #2563EB; text-decoration: none; font-weight: 700; }
+  .mc-dash-section-head a:hover { color: #1D4ED8; }
+
+  .mc-kpi-grid { display: grid; grid-template-columns: repeat(auto-fit,minmax(180px,1fr)); gap: 0.85rem; margin-bottom: 1.75rem; }
+  .mc-kpi { background: #FFFFFF; border: 1px solid #E2E8F0; border-radius: 14px; padding: 1.1rem 1.3rem; cursor: pointer; transition: transform 0.15s, box-shadow 0.15s, border-color 0.15s; box-shadow: 0 1px 3px rgba(10,22,40,0.04); }
+  .mc-kpi:hover { transform: translateY(-2px); box-shadow: 0 12px 24px rgba(10,22,40,0.08); border-color: #2563EB; }
+  .mc-kpi .l { font-family: 'DM Mono', monospace; font-size: 0.6rem; letter-spacing: 0.18em; text-transform: uppercase; color: #94A3B8; font-weight: 700; margin-bottom: 0.5rem; display: flex; align-items: center; gap: 0.4rem; }
+  .mc-kpi .l .ico { font-size: 0.95rem; opacity: 0.7; }
+  .mc-kpi .v { font-family: 'Bebas Neue', Impact, sans-serif; font-size: 2.1rem; line-height: 1; letter-spacing: 0.02em; color: #0A1628; }
+  .mc-kpi .v.green { color: #10B981; }
+  .mc-kpi .v.orange { color: #F97316; }
+  .mc-kpi .v.red { color: #DC2626; }
+  .mc-kpi .v.blue { color: #2563EB; }
+  .mc-kpi .s { font-size: 0.74rem; color: #64748B; margin-top: 0.4rem; line-height: 1.35; }
+  .mc-kpi.hero { background: linear-gradient(135deg, #0A1628 0%, #0F2040 50%, #162A4A 100%); color: #FFFFFF; border-color: #0A1628; }
+  .mc-kpi.hero .l { color: #93C5FD; }
+  .mc-kpi.hero .v { color: #FFFFFF; font-size: 2.4rem; }
+  .mc-kpi.hero .s { color: #CBD5E1; }
+
+  .mc-dash-grid { display: grid; grid-template-columns: 1.4fr 1fr; gap: 1.25rem; align-items: flex-start; }
+  @media(max-width:1100px) { .mc-dash-grid { grid-template-columns: 1fr; } }
+
+  .mc-card { background: #FFFFFF; border: 1px solid #E2E8F0; border-radius: 14px; box-shadow: 0 1px 3px rgba(10,22,40,0.04); overflow: hidden; }
+  .mc-card-head { padding: 1rem 1.25rem; border-bottom: 1px solid #F1F5F9; display: flex; justify-content: space-between; align-items: center; gap: 0.85rem; flex-wrap: wrap; }
+  .mc-card-head h4 { font-family: 'Bebas Neue', Impact, sans-serif; font-size: 1.15rem; letter-spacing: 0.02em; color: #0A1628; margin: 0; font-weight: 400; }
+  .mc-card-head .eyebrow { font-family: 'DM Mono', monospace; font-size: 0.58rem; letter-spacing: 0.2em; text-transform: uppercase; color: #2563EB; font-weight: 700; margin-bottom: 0.2rem; }
+  .mc-card-body { padding: 1rem 1.25rem; max-height: 420px; overflow-y: auto; }
+  .mc-card-body.no-pad { padding: 0; max-height: 420px; overflow-y: auto; }
+  .mc-card-foot { padding: 0.75rem 1.25rem; border-top: 1px solid #F1F5F9; background: #F8FAFC; font-size: 0.78rem; color: #64748B; }
+
+  /* Activity feed items */
+  .mc-feed { list-style: none; padding: 0; margin: 0; }
+  .mc-feed-item { display: grid; grid-template-columns: auto 1fr auto; gap: 0.75rem; align-items: center; padding: 0.65rem 0; border-bottom: 1px dashed #E2E8F0; cursor: pointer; transition: background 0.12s; padding-left: 0.5rem; padding-right: 0.5rem; border-radius: 6px; }
+  .mc-feed-item:last-child { border-bottom: none; }
+  .mc-feed-item:hover { background: #F8FAFC; }
+  .mc-feed-event { font-family: 'DM Mono', monospace; font-size: 0.66rem; letter-spacing: 0.06em; padding: 0.2rem 0.55rem; border-radius: 6px; font-weight: 600; white-space: nowrap; background: #EFF6FF; color: #2563EB; }
+  .mc-feed-event.green { background: #D1FAE5; color: #065F46; }
+  .mc-feed-event.orange { background: #FED7AA; color: #9A3412; }
+  .mc-feed-event.violet { background: #EDE9FE; color: #5B21B6; }
+  .mc-feed-event.red { background: #FEE2E2; color: #991B1B; }
+  .mc-feed-meta { font-size: 0.82rem; color: #1E293B; line-height: 1.3; min-width: 0; }
+  .mc-feed-meta .who { font-weight: 700; color: #0A1628; }
+  .mc-feed-meta .what { color: #475569; font-size: 0.76rem; margin-top: 0.15rem; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+  .mc-feed-time { font-family: 'DM Mono', monospace; font-size: 0.66rem; color: #94A3B8; white-space: nowrap; }
+
+  /* Project / invoice mini-rows */
+  .mc-mini-row { display: flex; justify-content: space-between; align-items: center; gap: 0.85rem; padding: 0.7rem 1rem; border-bottom: 1px solid #F1F5F9; cursor: pointer; transition: background 0.12s; }
+  .mc-mini-row:last-child { border-bottom: none; }
+  .mc-mini-row:hover { background: #F8FAFC; }
+  .mc-mini-row.overdue { background: #FEF2F2; }
+  .mc-mini-row.overdue:hover { background: #FEE2E2; }
+  .mc-mini-row .left { min-width: 0; flex: 1 1 auto; }
+  .mc-mini-row .name { font-weight: 700; color: #0A1628; font-size: 0.86rem; line-height: 1.25; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+  .mc-mini-row .sub { font-size: 0.72rem; color: #64748B; margin-top: 0.15rem; }
+  .mc-mini-row .right { text-align: right; flex-shrink: 0; }
+  .mc-mini-row .amt { font-family: 'Bebas Neue', Impact, sans-serif; font-size: 1.05rem; color: #0A1628; letter-spacing: 0.02em; line-height: 1; }
+  .mc-mini-row .badge { font-family: 'DM Mono', monospace; font-size: 0.62rem; color: #475569; margin-top: 0.2rem; }
+  .mc-mini-row .badge.red { color: #DC2626; font-weight: 700; }
+  .mc-mini-row .badge.orange { color: #F97316; font-weight: 700; }
+  .mc-mini-row .badge.green { color: #10B981; font-weight: 700; }
+
+  /* Pipeline stage strip */
+  .mc-stage-strip { display: grid; grid-template-columns: repeat(auto-fit,minmax(110px,1fr)); gap: 0.5rem; padding: 1rem 1.25rem; }
+  .mc-stage { background: #F8FAFC; border-radius: 8px; padding: 0.65rem 0.75rem; border: 1px solid #E2E8F0; cursor: pointer; transition: all 0.15s; }
+  .mc-stage:hover { background: #EFF6FF; border-color: #2563EB; }
+  .mc-stage .label { font-family: 'DM Mono', monospace; font-size: 0.58rem; letter-spacing: 0.14em; text-transform: uppercase; color: #475569; font-weight: 700; margin-bottom: 0.3rem; }
+  .mc-stage .count { font-family: 'Bebas Neue', Impact, sans-serif; font-size: 1.4rem; line-height: 1; color: #0A1628; letter-spacing: 0.02em; }
+  .mc-stage .total { font-size: 0.7rem; color: #64748B; margin-top: 0.2rem; font-family: 'DM Mono', monospace; }
+
   /* Loading + error */
   .cf-loading { display: flex; align-items: center; justify-content: center; padding: 3rem; color: #64748B; }
   .cf-loading-ring { width: 32px; height: 32px; border: 3px solid #E2E8F0; border-top-color: #2563EB; border-radius: 50%; animation: spin 0.8s linear infinite; }
@@ -1590,26 +1665,100 @@
 </div>
 </div>
 <div class="content-body">
-<div class="stats-grid" id="stats-grid">
-<a href="/admin/vdr" class="stat-card" style="text-decoration:none;display:block;cursor:pointer;background:linear-gradient(135deg,rgba(37,99,235,0.08),rgba(37,99,235,0.02));border:1px solid rgba(37,99,235,0.25);"><div class="stat-label" style="color:#3B82F6;">📁 Case Files VDR</div><div class="stat-value" style="color:#2563EB;font-size:1.35rem;">Open →</div><div class="stat-sub">Per-client documents, signatures, audit trail</div></a>
-<div class="stat-card"><div class="stat-label">Total Registrants</div><div class="stat-value" id="stat-total">—</div><div class="stat-sub">all time</div></div>
-<div class="stat-card"><div class="stat-label">This Week</div><div class="stat-value" id="stat-week">—</div><div class="stat-sub">last 7 days</div></div>
-<div class="stat-card"><div class="stat-label">Emails Sent</div><div class="stat-value" id="stat-sent">—</div><div class="stat-sub">drip sequence</div></div>
-</div>
-<div class="table-wrap">
-<div class="table-header">
-<div class="table-title">Recent Registrants</div>
-<div class="text-sm text-muted" id="dash-updated">—</div>
-</div>
-<table>
-<thead><tr>
-<th>Name</th><th>Email</th><th>Company</th><th>Revenue</th><th>Registered</th>
-</tr></thead>
-<tbody id="dash-leads-body">
-<tr><td colspan="5"><div class="loading">Loading</div></td></tr>
-</tbody>
-</table>
-</div>
+  <!-- ═══ Consulting Business Metrics ═══ -->
+  <div class="mc-dash">
+    <!-- Top KPI row -->
+    <div class="mc-kpi-grid" id="mc-dash-kpis">
+      <div class="mc-kpi"><div class="l"><span class="ico">⏳</span>Loading</div><div class="v">—</div></div>
+      <div class="mc-kpi"><div class="l"><span class="ico">⏳</span>Loading</div><div class="v">—</div></div>
+      <div class="mc-kpi"><div class="l"><span class="ico">⏳</span>Loading</div><div class="v">—</div></div>
+      <div class="mc-kpi"><div class="l"><span class="ico">⏳</span>Loading</div><div class="v">—</div></div>
+    </div>
+
+    <!-- Pipeline-by-stage strip -->
+    <div class="mc-dash-section">
+      <div class="mc-card">
+        <div class="mc-card-head">
+          <div>
+            <div class="eyebrow">Sales Pipeline</div>
+            <h4>Engagements by Stage</h4>
+          </div>
+          <a onclick="switchPanel('crm-pipeline', this)" style="cursor:pointer;">View Full Pipeline →</a>
+        </div>
+        <div class="mc-stage-strip" id="mc-dash-stages">
+          <div class="mc-stage"><div class="label">Loading</div><div class="count">—</div></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Two-column: Activity feed (left) + side widgets (right) -->
+    <div class="mc-dash-grid">
+      <!-- Recent Activity (audit log, all engagements) -->
+      <div class="mc-card">
+        <div class="mc-card-head">
+          <div>
+            <div class="eyebrow">Pipeline Activity</div>
+            <h4>Recent Events</h4>
+          </div>
+          <a onclick="mcLoadDashboard(true)" style="cursor:pointer;">↻ Refresh</a>
+        </div>
+        <div class="mc-card-body">
+          <ul class="mc-feed" id="mc-dash-activity"><li class="mc-feed-item">Loading…</li></ul>
+        </div>
+      </div>
+
+      <!-- Right column: Active projects + Outstanding invoices -->
+      <div style="display:flex;flex-direction:column;gap:1.25rem;">
+        <div class="mc-card">
+          <div class="mc-card-head">
+            <div>
+              <div class="eyebrow">Engagements · Active</div>
+              <h4>Delivery Clocks</h4>
+            </div>
+            <a onclick="switchPanel('eng-projects', this)" style="cursor:pointer;">All Projects →</a>
+          </div>
+          <div class="mc-card-body no-pad" id="mc-dash-projects">
+            <div class="mc-loading">Loading projects</div>
+          </div>
+        </div>
+
+        <div class="mc-card">
+          <div class="mc-card-head">
+            <div>
+              <div class="eyebrow">Engagements · AR</div>
+              <h4>Outstanding Invoices</h4>
+            </div>
+            <a onclick="switchPanel('eng-invoices', this)" style="cursor:pointer;">All Invoices →</a>
+          </div>
+          <div class="mc-card-body no-pad" id="mc-dash-outstanding">
+            <div class="mc-loading">Loading invoices</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ═══ Legacy webinar registrants (secondary) ═══ -->
+  <div class="mc-dash-section" style="margin-top:2rem;">
+    <div class="mc-dash-section-head">
+      <div>
+        <div class="eyebrow">Webinar Funnel</div>
+        <h3>Recent Registrants</h3>
+      </div>
+      <div style="display:flex;align-items:center;gap:.6rem;">
+        <span style="font-family:'DM Mono',monospace;font-size:.66rem;color:#94A3B8;letter-spacing:.12em;text-transform:uppercase;">Total: <strong id="stat-total" style="color:#0A1628;">—</strong> · 7d: <strong id="stat-week" style="color:#0A1628;">—</strong> · Sent: <strong id="stat-sent" style="color:#0A1628;">—</strong></span>
+        <a onclick="switchPanel('leads', this)" style="font-family:'DM Mono',monospace;font-size:.7rem;letter-spacing:.12em;text-transform:uppercase;color:#2563EB;text-decoration:none;font-weight:700;cursor:pointer;">View All Leads →</a>
+      </div>
+    </div>
+    <div class="mc-card">
+      <div class="mc-card-body no-pad">
+        <table class="mc-table">
+          <thead><tr><th>Name</th><th>Email</th><th>Company</th><th>Revenue</th><th>Registered</th></tr></thead>
+          <tbody id="dash-leads-body"><tr><td colspan="5"><div class="mc-loading">Loading</div></td></tr></tbody>
+        </table>
+      </div>
+    </div>
+  </div>
 </div>
 </div>
 <div id="panel-leads" class="panel">
@@ -3398,12 +3547,15 @@ function initApp() {
   loadDocs();
   loadLinks();
   setupDragDrop();
+  // Consulting metrics dashboard (mc_* tables via admin-engagement-data)
+  if (typeof mcLoadDashboard === 'function') mcLoadDashboard();
 }
 function refreshAll() {
   loadLeads();
   loadQueue();
   loadDocs();
   loadLinks();
+  if (typeof mcLoadDashboard === 'function') mcLoadDashboard(true);
   toast('Data refreshed');
 }
 // ─── PANELS ──────────────────────────────────────────────────────────────────
@@ -3457,6 +3609,7 @@ function switchPanel(id, el) {
   else if (id === 'case-files') {
     if (typeof loadCaseFilesPanel === 'function') loadCaseFilesPanel();
   }
+  else if (id === 'dashboard')      { if (typeof mcLoadDashboard === 'function')      mcLoadDashboard(); }
   // mc- panels (engagement / CRM data)
   else if (id === 'crm-contacts')   { if (typeof mcLoadContacts === 'function')       mcLoadContacts(); }
   else if (id === 'crm-clients')    { if (typeof mcLoadActiveClients === 'function')  mcLoadActiveClients(); }
@@ -4295,6 +4448,220 @@ document.addEventListener('input', (e) => {
     else if (type === 'invoices') mcRenderInvoices(_mcCache[type]);
   }
 });
+
+// ════════════════════════════════════════════════════════════════
+// DASHBOARD: top-of-funnel consulting metrics + live activity feed
+// ════════════════════════════════════════════════════════════════
+async function mcLoadDashboard(force) {
+  // Fire 4 parallel calls — all cheap reads from Supabase via REST
+  const types = ['summary', 'pipeline', 'activity', 'projects', 'invoices'];
+  if (!force) {
+    // Use cache if all already loaded
+    const allCached = types.every(t => _mcCache[t]);
+    if (allCached) {
+      mcRenderDashboardKPIs(_mcCache.summary, _mcCache.invoices, _mcCache.projects);
+      mcRenderDashboardStages(_mcCache.pipeline);
+      mcRenderDashboardActivity(_mcCache.activity);
+      mcRenderDashboardProjectsWidget(_mcCache.projects);
+      mcRenderDashboardOutstanding(_mcCache.invoices);
+      return;
+    }
+  }
+  try {
+    const [summary, pipeline, activity, projects, invoices] = await Promise.all(
+      types.map(t => fetch(`${MC_API}?type=${t}${t === 'activity' ? '&limit=20' : ''}`, { credentials: 'include' })
+        .then(async r => {
+          if (r.status === 401) throw new Error('AUTH');
+          if (!r.ok) throw new Error(`HTTP ${r.status}`);
+          return r.json();
+        }))
+    );
+    _mcCache.summary = summary;
+    _mcCache.pipeline = pipeline;
+    _mcCache.activity = activity;
+    _mcCache.projects = projects;
+    _mcCache.invoices = invoices;
+    mcRenderDashboardKPIs(summary, invoices, projects);
+    mcRenderDashboardStages(pipeline);
+    mcRenderDashboardActivity(activity);
+    mcRenderDashboardProjectsWidget(projects);
+    mcRenderDashboardOutstanding(invoices);
+  } catch (e) {
+    if (e.message === 'AUTH') return; // silent — login screen handles it
+    console.warn('Dashboard load failed:', e);
+    const grid = document.getElementById('mc-dash-kpis');
+    if (grid) grid.innerHTML = `<div class="mc-kpi"><div class="l">Error</div><div class="v red">—</div><div class="s">${mcEsc(e.message)}</div></div>`;
+  }
+}
+
+function mcRenderDashboardKPIs(summary, invoicesData, projectsData) {
+  const s = summary?.summary || {};
+  const invoices = invoicesData?.invoices || [];
+  const projects = projectsData?.projects || [];
+  const overdueProjects = projects.filter(p => p.overdue).length;
+  const grid = document.getElementById('mc-dash-kpis');
+  if (!grid) return;
+  grid.innerHTML = `
+    <div class="mc-kpi hero" onclick="switchPanel('crm-clients', this)">
+      <div class="l"><span class="ico">⭐</span>Active Clients</div>
+      <div class="v">${s.engagements_active || 0}</div>
+      <div class="s">${s.engagements_total || 0} engagements total · ${s.contacts_total || 0} contacts</div>
+    </div>
+    <div class="mc-kpi" onclick="switchPanel('eng-invoices', this)">
+      <div class="l"><span class="ico">💰</span>Revenue Collected</div>
+      <div class="v green">${mcFmtUSD(s.revenue_paid_usd)}</div>
+      <div class="s">${s.invoices_paid || 0} paid invoice${(s.invoices_paid||0)===1?'':'s'}</div>
+    </div>
+    <div class="mc-kpi" onclick="switchPanel('eng-invoices', this)">
+      <div class="l"><span class="ico">📤</span>Outstanding</div>
+      <div class="v orange">${mcFmtUSD(s.revenue_outstanding_usd)}</div>
+      <div class="s">${s.invoices_outstanding || 0} unpaid · awaiting payment</div>
+    </div>
+    <div class="mc-kpi" onclick="switchPanel('eng-projects', this)">
+      <div class="l"><span class="ico">${overdueProjects > 0 ? '⚠️' : '🚀'}</span>Active Projects</div>
+      <div class="v ${overdueProjects > 0 ? 'red' : 'blue'}">${projects.length}</div>
+      <div class="s">${overdueProjects > 0 ? `${overdueProjects} overdue · needs attention` : 'all on track'}</div>
+    </div>
+    <div class="mc-kpi" onclick="switchPanel('eng-proposals', this)">
+      <div class="l"><span class="ico">📄</span>Proposals</div>
+      <div class="v blue">${s.proposals_total || 0}</div>
+      <div class="s">in pipeline</div>
+    </div>
+    <div class="mc-kpi" onclick="switchPanel('eng-contracts', this)">
+      <div class="l"><span class="ico">✍️</span>Contracts</div>
+      <div class="v">${s.contracts_total || 0}</div>
+      <div class="s">SOWs, NDAs, MSAs, timelines</div>
+    </div>
+  `;
+}
+
+function mcRenderDashboardStages(pipelineData) {
+  const all = pipelineData?.engagements || [];
+  const stages = [
+    { key: 'lead', label: 'Lead' },
+    { key: 'draft', label: 'Draft' },
+    { key: 'proposal_sent', label: 'Proposal Sent' },
+    { key: 'signed', label: 'Signed' },
+    { key: 'invoiced', label: 'Invoiced' },
+    { key: 'paid', label: 'Paid' },
+    { key: 'delivering', label: 'Delivering' },
+    { key: 'delivered', label: 'Delivered' },
+  ];
+  const buckets = {};
+  for (const s of stages) buckets[s.key] = [];
+  for (const e of all) {
+    const k = (e.status || 'draft').toLowerCase();
+    if (buckets[k]) buckets[k].push(e);
+  }
+  const strip = document.getElementById('mc-dash-stages');
+  if (!strip) return;
+  strip.innerHTML = stages.map(s => {
+    const items = buckets[s.key];
+    const total = items.reduce((sum, e) => sum + Number(e.fee_usd || 0), 0);
+    return `<div class="mc-stage" onclick="switchPanel('crm-pipeline', this)">
+      <div class="label">${mcEsc(s.label)}</div>
+      <div class="count">${items.length}</div>
+      <div class="total">${mcFmtUSD(total)}</div>
+    </div>`;
+  }).join('');
+}
+
+function mcRenderDashboardActivity(activityData) {
+  const events = activityData?.events || [];
+  const ul = document.getElementById('mc-dash-activity');
+  if (!ul) return;
+  if (!events.length) {
+    ul.innerHTML = '<li class="mc-feed-item" style="cursor:default;"><span class="mc-feed-event">empty</span><span class="mc-feed-meta"><span class="who">No activity yet</span><span class="what">Events appear here as soon as a proposal is sent, signed, or paid.</span></span><span class="mc-feed-time"></span></li>';
+    return;
+  }
+  ul.innerHTML = events.map(e => {
+    const ev = (e.event || '').toLowerCase();
+    let kind = '';
+    let label = e.event;
+    if (ev.includes('paid')) { kind = 'green'; label = '💰 paid'; }
+    else if (ev.includes('executed')) { kind = 'green'; label = '✅ executed'; }
+    else if (ev.includes('signed') && ev.includes('client')) { kind = 'violet'; label = '✍️ client signed'; }
+    else if (ev.includes('sent') && ev.includes('proposal')) { kind = 'orange'; label = '📤 proposal sent'; }
+    else if (ev.includes('test_sent')) { kind = ''; label = '🧪 test sent'; }
+    else if (ev.includes('drafted')) { kind = ''; label = '📝 drafted'; }
+    else if (ev.includes('voided') || ev.includes('canceled')) { kind = 'red'; label = '🚫 voided'; }
+    else if (ev.includes('reminder')) { kind = 'orange'; label = '🔔 reminder'; }
+    else if (ev.includes('escalated')) { kind = 'red'; label = '⚠️ escalated'; }
+    else if (ev.includes('client_updated')) { kind = ''; label = '✏️ client updated'; }
+    else if (ev.includes('calendly')) { kind = 'violet'; label = '📅 calendly'; }
+    const who = e.client_name || e.recipient || '—';
+    const what = [e.engagement_name, e.doc_id, e.subject, e.amount_usd ? '$' + e.amount_usd : null].filter(Boolean).join(' · ');
+    const onClick = e.client_slug ? `mcGoToCase('${mcEsc(e.client_slug)}')` : 'void(0)';
+    return `<li class="mc-feed-item" onclick="${onClick}">
+      <span class="mc-feed-event ${kind}">${mcEsc(label)}${e.is_test ? ' · TEST' : ''}</span>
+      <span class="mc-feed-meta"><span class="who">${mcEsc(who)}</span><span class="what">${mcEsc(what || '—')}</span></span>
+      <span class="mc-feed-time">${mcFmtRelTime(e.created_at)}</span>
+    </li>`;
+  }).join('');
+}
+
+function mcRenderDashboardProjectsWidget(projectsData) {
+  const projects = (projectsData?.projects || []).slice(0, 6);
+  const el = document.getElementById('mc-dash-projects');
+  if (!el) return;
+  if (!projects.length) {
+    el.innerHTML = '<div class="mc-empty" style="margin:1rem;padding:1.5rem 1rem;border:none;background:transparent;"><div class="ico">🏁</div><h3>No active projects</h3><p>They appear once an invoice is paid and the delivery clock starts.</p></div>';
+    return;
+  }
+  el.innerHTML = projects.map(p => {
+    const overdue = p.overdue;
+    const close = p.hours_to_delivery !== null && p.hours_to_delivery >= 0 && p.hours_to_delivery < 12;
+    return `<div class="mc-mini-row ${overdue ? 'overdue' : ''}" onclick="mcGoToCase('${mcEsc(p.client_slug)}')">
+      <div class="left">
+        <div class="name">${mcEsc(p.client_name || p.name || '—')}</div>
+        <div class="sub">${mcEsc(p.name)} · ${mcEsc(p.docs_executed || 0)}/${mcEsc(p.docs_total || 0)} docs</div>
+      </div>
+      <div class="right">
+        <div class="amt">${mcFmtUSD(p.fee_usd)}</div>
+        <div class="badge ${overdue ? 'red' : (close ? 'orange' : 'green')}">${mcFmtRelHrs(p.hours_to_delivery)}</div>
+      </div>
+    </div>`;
+  }).join('');
+}
+
+function mcRenderDashboardOutstanding(invoicesData) {
+  const invoices = (invoicesData?.invoices || [])
+    .filter(i => i.status === 'sent' && !i.is_test)
+    .slice(0, 6);
+  const el = document.getElementById('mc-dash-outstanding');
+  if (!el) return;
+  if (!invoices.length) {
+    el.innerHTML = '<div class="mc-empty" style="margin:1rem;padding:1.5rem 1rem;border:none;background:transparent;"><div class="ico">✅</div><h3>Nothing outstanding</h3><p>No unpaid invoices. Hit "Send Payment Request" on any countersigned engagement to draft one.</p></div>';
+    return;
+  }
+  el.innerHTML = invoices.map(i => {
+    const ageDays = i.sent_at ? Math.round((Date.now() - new Date(i.sent_at).getTime()) / 86400000) : 0;
+    const reminderBadge = i.reminder_count ? ` · ${i.reminder_count} reminder${i.reminder_count===1?'':'s'} sent` : '';
+    return `<div class="mc-mini-row" onclick="mcGoToCase('${mcEsc(i.client_slug)}')">
+      <div class="left">
+        <div class="name">${mcEsc(i.client_name || '—')}</div>
+        <div class="sub">${mcEsc(i.engagement_name || '')} · sent ${ageDays}d ago${reminderBadge}</div>
+      </div>
+      <div class="right">
+        <div class="amt">${mcFmtUSD(i.amount_usd)}</div>
+        <div class="badge ${ageDays > 3 ? 'red' : (ageDays > 1 ? 'orange' : '')}">${ageDays > 3 ? 'overdue' : (ageDays > 1 ? 'follow-up' : 'awaiting')}</div>
+      </div>
+    </div>`;
+  }).join('');
+}
+
+function mcFmtRelTime(s) {
+  if (!s) return '—';
+  try {
+    const t = new Date(s).getTime();
+    const diff = Date.now() - t;
+    if (diff < 60000) return 'just now';
+    if (diff < 3600000) return Math.round(diff / 60000) + 'm ago';
+    if (diff < 86400000) return Math.round(diff / 3600000) + 'h ago';
+    if (diff < 604800000) return Math.round(diff / 86400000) + 'd ago';
+    return new Date(s).toLocaleDateString('en-US', { month: 'short', day: 'numeric' });
+  } catch { return '—'; }
+}
 // ─── DATA LOADING (via admin-proxy function) ──────────────────────────────────
 async function loadLeads() {
   try {

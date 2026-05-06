@@ -16,6 +16,7 @@
 //   GET ?type=proposals            — mc_documents where doc_type='proposal'
 //   GET ?type=contracts            — mc_documents where doc_type IN (sow,agreement,nda,msa,timeline)
 //   GET ?type=invoices             — mc_invoices
+//   GET ?type=activity&limit=30    — last N audit_log events across all engagements
 //   GET ?type=summary              — counts for the dashboard tiles
 // ═══════════════════════════════════════════════════════════════
 
@@ -367,6 +368,42 @@ exports.handler = async (event) => {
         client_email: i.mc_engagements?.mc_clients?.primary_contact_email,
       }));
       return { statusCode: 200, headers, body: JSON.stringify({ invoices }) };
+    }
+
+    // ─── /activity: recent mc_audit_log across ALL engagements ──
+    if (type === 'activity') {
+      const limit = Math.min(Number(q.limit || 30), 100);
+      const rows = await sbSelect(
+        `mc_audit_log?select=id,event,payload,ip,created_at,engagement_id,client_id&order=created_at.desc&limit=${limit}`
+      );
+      // Resolve client + engagement names (one extra fetch each, lookup map)
+      const clientIds = Array.from(new Set(rows.map(r => r.client_id).filter(Boolean)));
+      const engIds = Array.from(new Set(rows.map(r => r.engagement_id).filter(Boolean)));
+      const [clients, engs] = await Promise.all([
+        clientIds.length ? sbSelect(`mc_clients?id=in.(${clientIds.join(',')})&select=id,slug,legal_name`) : Promise.resolve([]),
+        engIds.length ? sbSelect(`mc_engagements?id=in.(${engIds.join(',')})&select=id,name,client_id,mc_clients(id,slug,legal_name)`) : Promise.resolve([]),
+      ]);
+      const cMap = Object.fromEntries(clients.map(c => [c.id, c]));
+      const eMap = Object.fromEntries(engs.map(e => [e.id, e]));
+      const events = rows.map(r => {
+        const eng = r.engagement_id ? eMap[r.engagement_id] : null;
+        const cli = (r.client_id ? cMap[r.client_id] : null) || eng?.mc_clients || null;
+        return {
+          id: r.id,
+          event: r.event,
+          created_at: r.created_at,
+          ip: r.ip,
+          recipient: r.payload?.recipient || null,
+          subject: r.payload?.subject || null,
+          amount_usd: r.payload?.amount_usd || null,
+          is_test: r.payload?.is_test === true || r.payload?.testMode === true,
+          doc_id: r.payload?.docId || r.payload?.doc_id || null,
+          client_slug: cli?.slug || null,
+          client_name: cli?.legal_name || null,
+          engagement_name: eng?.name || null,
+        };
+      });
+      return { statusCode: 200, headers, body: JSON.stringify({ events }) };
     }
 
     // ─── /summary: dashboard tile counts ────────────────────────
