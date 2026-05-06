@@ -63,12 +63,20 @@ function parseCookies(h) {
 }
 
 async function isAuthed(event) {
+  // Accept either the mcadmin_session cookie OR the x-admin-api-token header
+  // (latter is for server-to-server / smoke tests / cron-style triggers).
   const cookies = parseCookies(event.headers?.cookie || event.headers?.Cookie || '');
-  const token = cookies[COOKIE_NAME];
-  if (!token) return false;
-  const secret = process.env.ADMIN_SESSION_SECRET || process.env.TOKEN_SECRET || 'fallback';
-  const payload = await verifyToken(token, secret);
-  return !!payload;
+  const cookieToken = cookies[COOKIE_NAME];
+  if (cookieToken) {
+    const secret = process.env.ADMIN_SESSION_SECRET || process.env.TOKEN_SECRET || 'fallback';
+    const payload = await verifyToken(cookieToken, secret);
+    if (payload) return true;
+  }
+  const headerToken = event.headers?.['x-admin-api-token'] || event.headers?.['X-Admin-Api-Token'];
+  if (headerToken && process.env.MARKCMO_ADMIN_API_TOKEN && headerToken === process.env.MARKCMO_ADMIN_API_TOKEN) {
+    return true;
+  }
+  return false;
 }
 
 // ─── Supabase REST helpers ──────────────────────────────────────
