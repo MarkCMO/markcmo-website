@@ -186,19 +186,19 @@ ${testMode ? `
   <div style="padding:0 32px;">
     <div style="font-family:'DM Mono',Menlo,monospace;font-size:11px;letter-spacing:0.18em;text-transform:uppercase;color:#2563EB;font-weight:600;margin-bottom:14px;">Engagement Documents</div>
 
-    <a href="${proposalUrl}" style="display:block;text-decoration:none;margin-bottom:10px;background:#fff;border:1px solid #E2E8F0;border-left:4px solid #2563EB;border-radius:10px;padding:16px 20px;color:#1E293B;">
+    <a href="${proposalUrl}" style="display:block;text-decoration:none;margin-bottom:10px;background:#fff;border:1px solid rgba(15,32,64,0.08);border-radius:14px;padding:18px 22px;color:#1E293B;box-shadow:0 1px 2px rgba(15,32,64,0.04), 0 8px 24px rgba(37,99,235,0.10), 0 24px 48px -16px rgba(37,99,235,0.08);">
       <div style="font-family:'DM Mono',Menlo,monospace;font-size:11px;letter-spacing:0.15em;color:#2563EB;font-weight:600;margin-bottom:4px;">DOC ${esc(docId('proposal'))} &middot; PROPOSAL</div>
       <div style="font-size:16px;font-weight:700;color:#0A1628;margin-bottom:4px;">Audit Proposal</div>
       <div style="font-size:13px;color:#64748B;">Why this audit, what's covered, what's delivered, the $${Number(engagement.fee_usd).toLocaleString('en-US')} fee, and the 14-day acceptance window.</div>
     </a>
 
-    <a href="${sowUrl}" style="display:block;text-decoration:none;margin-bottom:10px;background:#fff;border:1px solid #E2E8F0;border-left:4px solid #2563EB;border-radius:10px;padding:16px 20px;color:#1E293B;">
+    <a href="${sowUrl}" style="display:block;text-decoration:none;margin-bottom:10px;background:#fff;border:1px solid rgba(15,32,64,0.08);border-radius:14px;padding:18px 22px;color:#1E293B;box-shadow:0 1px 2px rgba(15,32,64,0.04), 0 8px 24px rgba(37,99,235,0.10), 0 24px 48px -16px rgba(37,99,235,0.08);">
       <div style="font-family:'DM Mono',Menlo,monospace;font-size:11px;letter-spacing:0.15em;color:#2563EB;font-weight:600;margin-bottom:4px;">DOC ${esc(docId('sow'))} &middot; SCOPE OF WORK</div>
       <div style="font-size:16px;font-weight:700;color:#0A1628;margin-bottom:4px;">Scope of Work</div>
       <div style="font-size:13px;color:#64748B;">Six modules, activities, inputs, outputs, out-of-scope items, and your obligations during the 72-hour window.</div>
     </a>
 
-    <a href="${timelineUrl}" style="display:block;text-decoration:none;margin-bottom:10px;background:#fff;border:1px solid #E2E8F0;border-left:4px solid #2563EB;border-radius:10px;padding:16px 20px;color:#1E293B;">
+    <a href="${timelineUrl}" style="display:block;text-decoration:none;margin-bottom:10px;background:#fff;border:1px solid rgba(15,32,64,0.08);border-radius:14px;padding:18px 22px;color:#1E293B;box-shadow:0 1px 2px rgba(15,32,64,0.04), 0 8px 24px rgba(37,99,235,0.10), 0 24px 48px -16px rgba(37,99,235,0.08);">
       <div style="font-family:'DM Mono',Menlo,monospace;font-size:11px;letter-spacing:0.15em;color:#2563EB;font-weight:600;margin-bottom:4px;">DOC ${esc(docId('timeline'))} &middot; TIMELINE</div>
       <div style="font-size:16px;font-weight:700;color:#0A1628;margin-bottom:4px;">${engagement.delivery_window_hrs}-Hour Deliverable Timeline</div>
       <div style="font-size:13px;color:#64748B;">Hour-by-hour: 4 phases, 16 milestones, who owns what, what causes the timeline to slip.</div>
