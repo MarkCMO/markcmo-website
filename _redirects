@@ -185,6 +185,10 @@ https://www.markcmo.com/* https://markcmo.com/:splat 301!
 /documents/clients/wendal-enterprise/timeline  /documents/clients/wendal-enterprise/timeline.html      200
 /documents/clients/wendal-enterprise/sign      /forms/wendal-enterprise-audit.html                     200
 
+# ─── Admin VDR (Virtual Data Room — internal, auth-gated) ────
+/admin/vdr                                      /admin/vdr/index.html                                  200
+/admin/vdr/                                     /admin/vdr/index.html                                  200
+
 # ─── Location hub ───────────────────────────────────────────
 /location                      /location/index.html           200
 
