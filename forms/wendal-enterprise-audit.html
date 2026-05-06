@@ -549,24 +549,30 @@ async function generate() {
     btn.textContent = 'Submitting…';
     status.textContent = 'Uploading signed PDF and notifying both parties…';
 
-    // Route to existing submit-document Netlify function
+    // The Netlify function (submit-engagement-doc) decides email routing
+    // based on testMode. In TEST mode the "client" copy goes to mark@markcmo.com.
     const docName = (TEST_MODE ? '[TEST] ' : '') + 'Wendal Enterprise, Business Discovery Audit Acceptance';
     const filename = (TEST_MODE ? 'TEST-' : '') + 'WE-AUD-001-Wendal-Enterprise-Audit-Acceptance.pdf';
-    const recipientEmail = TEST_MODE ? TEST_EMAIL : clientEmail;
 
-    const res = await fetch('/.netlify/functions/submit-document', {
+    // POST to the Supabase-backed engagement endpoint.
+    // The function looks up the engagement + document in mc_documents using
+    // (clientSlug, docId), uploads the signed PDF and signature PNG to
+    // Supabase Storage, updates state, and emails both parties via Resend.
+    const res = await fetch('/.netlify/functions/submit-engagement-doc', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({
-        docName,
+        clientSlug: 'wendal-enterprise',
         docId: 'WE-AUD-001',
+        docName,
         filename,
+        testMode: TEST_MODE,
         fields: {
           'Client': clientName,
           'Title': clientTitle,
           'Company': clientCompany,
           'Email': clientEmail,
-          'Phone': clientPhone || ', ',
+          'Phone': clientPhone || '(not provided)',
           'Engagement': 'Business Discovery Audit',
           'Investment': '$2,500 USD',
           'Delivery': '72 hours from payment + intake',
@@ -575,14 +581,17 @@ async function generate() {
         },
         pdfBase64,
         clientName,
-        clientEmail: recipientEmail,
+        clientTitle,
+        clientCompany,
+        clientPhone,
+        clientEmail,
         clientSigBase64: sigDataUrl.split(',')[1],
         // Signature placement on page 2 of the generated PDF (consultant block, right side).
         // The /sign/ countersign flow draws at x:320 (hardcoded). Our consultant block spans
-        // x:316 to 556 (blockW≈240). Sig image is 200w × 30h, so it lands inside the block.
+        // x:316 to 556 (blockW=240). Sig image is 200w x 30h, so it lands inside the block.
         markSig: {
           page: 2,
-          sigY: 425,    // Sig image bottom-left y; image spans 425→455, just above the line at y=418
+          sigY: 425,    // Sig image bottom-left y; image spans 425 to 455, above the line at y=418
           nameY: 403,   // Printed name baseline
           titleY: 389,  // Title baseline
           dateY: 375,   // Date baseline
@@ -604,11 +613,12 @@ async function generate() {
     fd.append('accepted_at', signedAt);
     fetch('/', { method: 'POST', body: fd }).catch(() => {});
 
+    const sentTo = TEST_MODE ? TEST_EMAIL : clientEmail;
     status.innerHTML = `
-      <strong style="display:block;font-size:1.05rem;margin-bottom:0.5rem;">✅ Submitted Successfully</strong>
-      Your signed copy of <strong>${docName}</strong> has been sent to <strong>${recipientEmail}</strong>.<br/>
-      Mark will review and countersign within 24 hours. You'll receive the fully executed PDF and the Square invoice for $2,500 USD by email immediately after.<br/>
-      <span style="font-size:0.82rem;display:block;margin-top:0.6rem;color:#065F46;">Confirmation # ${(result.token || signedAt).toString().substring(0, 12)}</span>
+      <strong style="display:block;font-size:1.05rem;margin-bottom:0.5rem;">Submitted successfully.</strong>
+      Your signed copy of <strong>${docName}</strong> has been sent to <strong>${sentTo}</strong>.<br/>
+      Mark countersigns within 24 hours. You will receive the fully executed PDF and the Square invoice for $2,500 USD by email immediately after.<br/>
+      <span style="font-size:0.82rem;display:block;margin-top:0.6rem;color:#065F46;">Confirmation: ${(result.docUuid || signedAt).toString().substring(0, 12)}</span>
     `;
     status.className = 'form-status success';
     btn.textContent = '✅ Submitted, Awaiting Countersignature';

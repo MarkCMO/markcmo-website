@@ -1,3 +1,12 @@
+// ═══════════════════════════════════════════════════════════════
+// get-document.js
+// Validates an HMAC-signed token and returns the doc metadata + PDF.
+//
+// Two token versions:
+//   v1 (legacy): payload contains { binId } -> fetch from JSONBin
+//   v2 (Supabase): payload contains { v: 2, pdfPath } -> fetch from
+//                  Supabase Storage in the markcmo-engagement-docs bucket.
+// ═══════════════════════════════════════════════════════════════
 const crypto = require('crypto');
 
 const CORS = {
@@ -5,6 +14,45 @@ const CORS = {
   'Access-Control-Allow-Headers': 'Content-Type',
   'Content-Type': 'application/json',
 };
+
+const STORAGE_BUCKET = 'markcmo-engagement-docs';
+
+async function fetchPdfFromSupabase(pdfPath) {
+  const url = process.env.SUPABASE_URL;
+  const key = process.env.SUPABASE_SERVICE_ROLE_KEY;
+  if (!url || !key) {
+    console.warn('Supabase env vars missing; cannot fetch v2 PDF');
+    return null;
+  }
+  try {
+    const res = await fetch(`${url}/storage/v1/object/${STORAGE_BUCKET}/${pdfPath}`, {
+      headers: { apikey: key, Authorization: `Bearer ${key}` },
+    });
+    if (!res.ok) {
+      console.warn('Supabase storage fetch failed:', res.status, await res.text());
+      return null;
+    }
+    const buf = Buffer.from(await res.arrayBuffer());
+    return buf.toString('base64');
+  } catch (e) {
+    console.warn('Supabase storage fetch error:', e.message);
+    return null;
+  }
+}
+
+async function fetchPdfFromJsonbin(binId) {
+  if (!process.env.JSONBIN_API_KEY) return null;
+  try {
+    const res = await fetch(`https://api.jsonbin.io/v3/b/${binId}/latest`, {
+      headers: { 'X-Master-Key': process.env.JSONBIN_API_KEY },
+    });
+    const binData = await res.json();
+    return binData.record?.pdfBase64 || null;
+  } catch (e) {
+    console.warn('JSONBin fetch error:', e.message);
+    return null;
+  }
+}
 
 exports.handler = async (event) => {
   if (event.httpMethod === 'OPTIONS') return { statusCode: 200, headers: CORS, body: '' };
@@ -22,22 +70,17 @@ exports.handler = async (event) => {
   if (hmac !== expected) return { statusCode: 401, headers: CORS, body: JSON.stringify({ error: 'Invalid or tampered token' }) };
 
   if (payload.expiresAt && new Date(payload.expiresAt) < new Date()) {
-    return { statusCode: 410, headers: CORS, body: JSON.stringify({ error: 'Link expired (30-day limit)' }) };
+    return { statusCode: 410, headers: CORS, body: JSON.stringify({ error: 'Link expired' }) };
   }
 
-  // If PDF is stored in JSONBin, fetch it and include in response
+  // Fetch PDF based on token version
   let pdfBase64 = null;
-  if (payload.binId && process.env.JSONBIN_API_KEY) {
-    try {
-      const res = await fetch(`https://api.jsonbin.io/v3/b/${payload.binId}/latest`, {
-        headers: { 'X-Master-Key': process.env.JSONBIN_API_KEY },
-      });
-      const binData = await res.json();
-      pdfBase64 = binData.record?.pdfBase64 || null;
-      if (pdfBase64) console.log('Retrieved PDF from JSONBin:', payload.binId);
-    } catch (e) {
-      console.warn('JSONBin fetch error:', e.message);
-    }
+  if (payload.v === 2 && payload.pdfPath) {
+    pdfBase64 = await fetchPdfFromSupabase(payload.pdfPath);
+    if (pdfBase64) console.log('Retrieved PDF from Supabase Storage:', payload.pdfPath);
+  } else if (payload.binId) {
+    pdfBase64 = await fetchPdfFromJsonbin(payload.binId);
+    if (pdfBase64) console.log('Retrieved PDF from JSONBin:', payload.binId);
   }
 
   return {
