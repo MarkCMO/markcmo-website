@@ -27,6 +27,10 @@
 //   GET ?type=revenue-report       — monthly revenue from paid invoices
 //   GET ?type=funnel               — lead -> proposal -> signed -> paid conversion rates
 //   GET ?type=lead-sources         — mc_clients grouped by source with conversion %
+//   GET ?type=journey&clientId=X   — full customer journey timeline for a client
+//                                    (emails sent/opened/clicked, page views,
+//                                     payment-link clicks, all in chronological order)
+//   GET ?type=email-stats          — open/click/bounce rates rolled up
 // ═══════════════════════════════════════════════════════════════
 
 const COOKIE_NAME = 'mcadmin_session';
@@ -560,6 +564,103 @@ exports.handler = async (event) => {
         .map(g => ({ ...g, conversion_pct: g.contacts ? +(g.paid / g.contacts * 100).toFixed(1) : 0 }))
         .sort((a, b) => b.contacts - a.contacts);
       return { statusCode: 200, headers, body: JSON.stringify({ sources }) };
+    }
+
+    // ─── /journey: customer-journey timeline for one client ────
+    if (type === 'journey') {
+      const clientId = q.clientId;
+      const slug = q.slug;
+      let cId = clientId;
+      if (!cId && slug) {
+        const c = await sbSelect(`mc_clients?slug=eq.${encodeURIComponent(slug)}&select=id&limit=1`);
+        cId = c[0]?.id;
+      }
+      if (!cId) return { statusCode: 400, headers, body: JSON.stringify({ error: 'Provide clientId or slug' }) };
+
+      const limit = Math.min(Number(q.limit || 200), 500);
+      const events = await sbSelect(
+        `mc_journey_events?client_id=eq.${encodeURIComponent(cId)}&select=*&order=created_at.asc&limit=${limit}`
+      );
+
+      // Roll-up stats per email (group by resend_email_id)
+      const byEmail = {};
+      for (const e of events) {
+        if (e.category !== 'email' || !e.resend_email_id) continue;
+        const k = e.resend_email_id;
+        if (!byEmail[k]) byEmail[k] = {
+          resend_email_id: k,
+          subject: e.subject_or_url,
+          recipient: e.recipient_email,
+          first_seen: e.created_at,
+          last_seen: e.created_at,
+          sent_at: null, delivered_at: null, opened_at: null, clicked_at: null,
+          bounced_at: null, complained_at: null,
+          open_count: 0, click_count: 0,
+        };
+        const slot = byEmail[k];
+        slot.last_seen = e.created_at;
+        if (e.event === 'email_sent' && !slot.sent_at) slot.sent_at = e.created_at;
+        if (e.event === 'email_delivered' && !slot.delivered_at) slot.delivered_at = e.created_at;
+        if (e.event === 'email_opened') { slot.opened_at = slot.opened_at || e.created_at; slot.open_count++; }
+        if (e.event === 'email_clicked') { slot.clicked_at = slot.clicked_at || e.created_at; slot.click_count++; }
+        if (e.event === 'email_bounced' && !slot.bounced_at) slot.bounced_at = e.created_at;
+        if (e.event === 'email_complained' && !slot.complained_at) slot.complained_at = e.created_at;
+      }
+
+      // Page-view rollup
+      const pageViews = events.filter(e => e.category === 'page');
+      const pageStats = {};
+      for (const v of pageViews) {
+        const p = v.subject_or_url || 'unknown';
+        pageStats[p] = (pageStats[p] || 0) + 1;
+      }
+
+      const summary = {
+        emails_sent: Object.values(byEmail).filter(e => e.sent_at).length,
+        emails_opened: Object.values(byEmail).filter(e => e.opened_at).length,
+        emails_clicked: Object.values(byEmail).filter(e => e.clicked_at).length,
+        emails_bounced: Object.values(byEmail).filter(e => e.bounced_at).length,
+        page_views_total: pageViews.length,
+        page_views_by_kind: pageStats,
+        payment_link_clicks: events.filter(e => e.event === 'payment_link_click').length,
+        first_touch: events[0]?.created_at || null,
+        last_touch: events[events.length - 1]?.created_at || null,
+      };
+
+      return { statusCode: 200, headers, body: JSON.stringify({
+        events,
+        emails: Object.values(byEmail).sort((a, b) => new Date(b.first_seen) - new Date(a.first_seen)),
+        summary,
+      }) };
+    }
+
+    // ─── /email-stats: rolled-up open/click/bounce rates ───────
+    if (type === 'email-stats') {
+      const events = await sbSelect('mc_journey_events?category=eq.email&select=event,resend_email_id,client_id,recipient_email,created_at&limit=2000');
+      const byEmail = {};
+      for (const e of events) {
+        if (!e.resend_email_id) continue;
+        if (!byEmail[e.resend_email_id]) byEmail[e.resend_email_id] = { sent: false, opened: false, clicked: false, bounced: false };
+        const k = byEmail[e.resend_email_id];
+        if (e.event === 'email_sent') k.sent = true;
+        if (e.event === 'email_delivered') k.sent = true; // count delivered as sent for rate calc
+        if (e.event === 'email_opened') k.opened = true;
+        if (e.event === 'email_clicked') k.clicked = true;
+        if (e.event === 'email_bounced') k.bounced = true;
+      }
+      const all = Object.values(byEmail);
+      const sent = all.filter(e => e.sent).length;
+      const opened = all.filter(e => e.opened).length;
+      const clicked = all.filter(e => e.clicked).length;
+      const bounced = all.filter(e => e.bounced).length;
+      return { statusCode: 200, headers, body: JSON.stringify({
+        emails_total: all.length,
+        sent, opened, clicked, bounced,
+        open_rate: sent ? +(opened / sent * 100).toFixed(1) : 0,
+        click_rate: sent ? +(clicked / sent * 100).toFixed(1) : 0,
+        click_through_rate: opened ? +(clicked / opened * 100).toFixed(1) : 0,
+        bounce_rate: sent ? +(bounced / sent * 100).toFixed(1) : 0,
+      }) };
     }
 
     // ─── /summary: dashboard tile counts ────────────────────────

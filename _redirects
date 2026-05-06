@@ -345,6 +345,16 @@ https://www.markcmo.com/* https://markcmo.com/:splat 301!
 /courses/welcome               /courses/welcome.html          200
 /graduation                    /graduation.html               200
 
+# ─── Customer-journey tracking redirects ─────────────────────
+# /pay/{mc_invoices.id} 302s to Square's payment URL after logging
+# the click. Lets us attribute payment-page opens to the channel
+# that drove them (email reminder vs admin "Send Payment Request").
+/pay/*                         /.netlify/functions/pay?id=:splat   200
+# /track/* surfaces the multi-purpose tracker for friendly URLs in
+# emails (e.g. /track/click?...). The function itself reads the
+# query string.
+/track/*                       /.netlify/functions/track   200
+
 # ─── Webinar Funnel + Admin ─────────────────────────────────
 /webinar                       /webinar.html                  200
 /webinar-confirmation          /webinar-confirmation.html     200

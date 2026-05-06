@@ -130,11 +130,27 @@ function esc(s) {
 
 function buildEmailHtml({ client, engagement, docs, siteUrl, testMode, testRecipient }) {
   const slug = client.slug;
+  // Real destination URLs
   const proposalUrl = `${siteUrl}/documents/clients/${slug}/proposal`;
   const sowUrl      = `${siteUrl}/documents/clients/${slug}/sow`;
   const timelineUrl = `${siteUrl}/documents/clients/${slug}/timeline`;
   const coverUrl    = `${siteUrl}/documents/clients/${slug}`;
   const signUrl     = `${siteUrl}/documents/clients/${slug}/sign${testMode ? '?test=1' : ''}`;
+
+  // Wrap each link in our /track click redirect so we can attribute every
+  // open + click to a specific touchpoint (which CTA, which client) in
+  // mc_journey_events. Falls back gracefully if the tracker is down (Resend
+  // delivery completes either way; tracker logs are best-effort).
+  const trk = (kind, target) => {
+    const u = Buffer.from(target).toString('base64').replace(/\+/g,'-').replace(/\//g,'_').replace(/=+$/,'');
+    const eid = engagement?.id ? `&eid=${encodeURIComponent(engagement.id)}` : '';
+    return `${siteUrl}/track?t=click&c=${encodeURIComponent(slug)}&k=${encodeURIComponent(kind)}${eid}&u=${u}`;
+  };
+  const tProposalUrl = trk('proposal', proposalUrl);
+  const tSowUrl      = trk('sow', sowUrl);
+  const tTimelineUrl = trk('timeline', timelineUrl);
+  const tCoverUrl    = trk('cover', coverUrl);
+  const tSignUrl     = trk('sign', signUrl);
 
   const docByType = {};
   (docs || []).forEach(d => { docByType[d.doc_type] = d; });
@@ -202,26 +218,26 @@ ${testMode ? `
   <div style="padding:0 32px;">
     <div style="font-family:'DM Mono',Menlo,monospace;font-size:11px;letter-spacing:0.18em;text-transform:uppercase;color:#2563EB;font-weight:600;margin-bottom:14px;">Engagement Documents</div>
 
-    <a href="${proposalUrl}" style="display:block;text-decoration:none;margin-bottom:10px;background:#fff;border:1px solid rgba(15,32,64,0.08);border-radius:14px;padding:18px 22px;color:#1E293B;box-shadow:0 1px 2px rgba(15,32,64,0.04), 0 8px 24px rgba(37,99,235,0.10), 0 24px 48px -16px rgba(37,99,235,0.08);">
+    <a href="${tProposalUrl}" style="display:block;text-decoration:none;margin-bottom:10px;background:#fff;border:1px solid rgba(15,32,64,0.08);border-radius:14px;padding:18px 22px;color:#1E293B;box-shadow:0 1px 2px rgba(15,32,64,0.04), 0 8px 24px rgba(37,99,235,0.10), 0 24px 48px -16px rgba(37,99,235,0.08);">
       <div style="font-family:'DM Mono',Menlo,monospace;font-size:11px;letter-spacing:0.15em;color:#2563EB;font-weight:600;margin-bottom:4px;">DOC ${esc(docId('proposal'))} &middot; PROPOSAL</div>
       <div style="font-size:16px;font-weight:700;color:#0A1628;margin-bottom:4px;">Audit Proposal</div>
       <div style="font-size:13px;color:#64748B;">Why this audit, what's covered, what's delivered, the $${Number(engagement.fee_usd).toLocaleString('en-US')} fee, and the 14-day acceptance window.</div>
     </a>
 
-    <a href="${sowUrl}" style="display:block;text-decoration:none;margin-bottom:10px;background:#fff;border:1px solid rgba(15,32,64,0.08);border-radius:14px;padding:18px 22px;color:#1E293B;box-shadow:0 1px 2px rgba(15,32,64,0.04), 0 8px 24px rgba(37,99,235,0.10), 0 24px 48px -16px rgba(37,99,235,0.08);">
+    <a href="${tSowUrl}" style="display:block;text-decoration:none;margin-bottom:10px;background:#fff;border:1px solid rgba(15,32,64,0.08);border-radius:14px;padding:18px 22px;color:#1E293B;box-shadow:0 1px 2px rgba(15,32,64,0.04), 0 8px 24px rgba(37,99,235,0.10), 0 24px 48px -16px rgba(37,99,235,0.08);">
       <div style="font-family:'DM Mono',Menlo,monospace;font-size:11px;letter-spacing:0.15em;color:#2563EB;font-weight:600;margin-bottom:4px;">DOC ${esc(docId('sow'))} &middot; SCOPE OF WORK</div>
       <div style="font-size:16px;font-weight:700;color:#0A1628;margin-bottom:4px;">Scope of Work</div>
       <div style="font-size:13px;color:#64748B;">Six modules, activities, inputs, outputs, out-of-scope items, and your obligations during the 72-hour window.</div>
     </a>
 
-    <a href="${timelineUrl}" style="display:block;text-decoration:none;margin-bottom:10px;background:#fff;border:1px solid rgba(15,32,64,0.08);border-radius:14px;padding:18px 22px;color:#1E293B;box-shadow:0 1px 2px rgba(15,32,64,0.04), 0 8px 24px rgba(37,99,235,0.10), 0 24px 48px -16px rgba(37,99,235,0.08);">
+    <a href="${tTimelineUrl}" style="display:block;text-decoration:none;margin-bottom:10px;background:#fff;border:1px solid rgba(15,32,64,0.08);border-radius:14px;padding:18px 22px;color:#1E293B;box-shadow:0 1px 2px rgba(15,32,64,0.04), 0 8px 24px rgba(37,99,235,0.10), 0 24px 48px -16px rgba(37,99,235,0.08);">
       <div style="font-family:'DM Mono',Menlo,monospace;font-size:11px;letter-spacing:0.15em;color:#2563EB;font-weight:600;margin-bottom:4px;">DOC ${esc(docId('timeline'))} &middot; TIMELINE</div>
       <div style="font-size:16px;font-weight:700;color:#0A1628;margin-bottom:4px;">${engagement.delivery_window_hrs}-Hour Deliverable Timeline</div>
       <div style="font-size:13px;color:#64748B;">Hour-by-hour: 4 phases, 16 milestones, who owns what, what causes the timeline to slip.</div>
     </a>
 
     <p style="font-size:13px;color:#64748B;margin:14px 0 0;">
-      Or open everything from the package cover: <a href="${coverUrl}" style="color:#2563EB;">${esc(coverUrl.replace('https://',''))}</a>
+      Or open everything from the package cover: <a href="${tCoverUrl}" style="color:#2563EB;">${esc(coverUrl.replace('https://',''))}</a>
     </p>
   </div>
 
@@ -231,7 +247,7 @@ ${testMode ? `
     <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0" style="border-collapse:collapse;">
       <tr>
         <td bgcolor="#F97316" align="center" style="background-color:#F97316;border-radius:10px;">
-          <a href="${signUrl}" style="display:block;background-color:#F97316;color:#FFFFFF;font-weight:700;font-size:15px;letter-spacing:0.02em;text-transform:uppercase;text-decoration:none;padding:18px 24px;border-radius:10px;text-align:center;">
+          <a href="${tSignUrl}" style="display:block;background-color:#F97316;color:#FFFFFF;font-weight:700;font-size:15px;letter-spacing:0.02em;text-transform:uppercase;text-decoration:none;padding:18px 24px;border-radius:10px;text-align:center;">
             <span style="color:#FFFFFF;">Accept &amp; Sign Electronically &rarr;</span>
           </a>
         </td>
@@ -365,6 +381,21 @@ exports.handler = async (event) => {
         },
       });
     } catch (e) { console.warn('audit_log insert failed:', e.message); }
+
+    // Customer-journey: seed an email_sent row so subsequent Resend
+    // open/click webhooks can correlate by resend_email_id.
+    try {
+      await sbInsert('mc_journey_events', {
+        client_id: client.id,
+        engagement_id: engagement.id,
+        category: 'email',
+        event: 'email_sent',
+        subject_or_url: subject,
+        recipient_email: recipientEmail,
+        resend_email_id: resendData?.id || null,
+        raw: { template: 'proposal-package', testMode, cc: ccList },
+      });
+    } catch (e) { console.warn('mc_journey_events insert failed:', e.message); }
 
     // ─── Auto-advance pipeline status on LIVE sends ─────────────
     // Move engagement out of 'lead'/'draft' to 'proposal_sent' so the

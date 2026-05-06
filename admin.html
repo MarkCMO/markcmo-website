@@ -1490,6 +1490,50 @@
   .mc-stage .count { font-family: 'Bebas Neue', Impact, sans-serif; font-size: 1.4rem; line-height: 1; color: #0A1628; letter-spacing: 0.02em; }
   .mc-stage .total { font-size: 0.7rem; color: #64748B; margin-top: 0.2rem; font-family: 'DM Mono', monospace; }
 
+  /* ─── Customer Journey timeline (cf-journey-) ─── */
+  .cf-journey-section { margin-top: 1.5rem; }
+  .cf-journey-stats { display: grid; grid-template-columns: repeat(auto-fit,minmax(140px,1fr)); gap: 0.6rem; margin-bottom: 1rem; }
+  .cf-journey-stat { background: #FFFFFF; border: 1px solid #E2E8F0; border-radius: 10px; padding: 0.7rem 0.95rem; }
+  .cf-journey-stat .l { font-family: 'DM Mono', monospace; font-size: 0.56rem; letter-spacing: 0.16em; text-transform: uppercase; color: #94A3B8; font-weight: 700; }
+  .cf-journey-stat .v { font-family: 'Bebas Neue', Impact, sans-serif; font-size: 1.4rem; color: #0A1628; letter-spacing: 0.02em; line-height: 1; margin-top: 0.25rem; }
+  .cf-journey-stat .v.green { color: #10B981; }
+  .cf-journey-stat .v.orange { color: #F97316; }
+  .cf-journey-stat .v.red { color: #DC2626; }
+  .cf-journey-stat .s { font-size: 0.68rem; color: #64748B; margin-top: 0.2rem; }
+
+  .cf-journey-timeline { background: #FFFFFF; border: 1px solid #E2E8F0; border-radius: 12px; padding: 0; max-height: 480px; overflow-y: auto; }
+  .cf-journey-event { display: grid; grid-template-columns: 110px 1fr auto; gap: 0.85rem; align-items: center; padding: 0.7rem 1rem; border-bottom: 1px solid #F1F5F9; }
+  .cf-journey-event:last-child { border-bottom: none; }
+  .cf-journey-pill { font-family: 'DM Mono', monospace; font-size: 0.6rem; letter-spacing: 0.06em; padding: 0.18rem 0.55rem; border-radius: 5px; font-weight: 700; text-align: center; white-space: nowrap; }
+  .cf-journey-pill.email-sent { background: #EFF6FF; color: #1D4ED8; }
+  .cf-journey-pill.email-delivered { background: #DBEAFE; color: #1E40AF; }
+  .cf-journey-pill.email-opened { background: #D1FAE5; color: #065F46; }
+  .cf-journey-pill.email-clicked { background: #DCFCE7; color: #14532D; }
+  .cf-journey-pill.email-bounced, .cf-journey-pill.email-complained, .cf-journey-pill.email-failed { background: #FEE2E2; color: #991B1B; }
+  .cf-journey-pill.page { background: #EDE9FE; color: #5B21B6; }
+  .cf-journey-pill.payment { background: #FED7AA; color: #9A3412; }
+  .cf-journey-pill.cta { background: #FEF3C7; color: #92400E; }
+  .cf-journey-pill.calendly { background: #FCE7F3; color: #9D174D; }
+  .cf-journey-detail { font-size: 0.84rem; color: #1E293B; min-width: 0; line-height: 1.3; }
+  .cf-journey-detail .what { font-weight: 600; color: #0A1628; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+  .cf-journey-detail .meta { font-size: 0.7rem; color: #64748B; margin-top: 0.15rem; font-family: 'DM Mono', monospace; }
+  .cf-journey-time { font-family: 'DM Mono', monospace; font-size: 0.66rem; color: #94A3B8; white-space: nowrap; }
+
+  .cf-journey-emails { background: #F8FAFC; border-radius: 10px; padding: 0.4rem; margin-bottom: 0.85rem; }
+  .cf-journey-email-row { display: grid; grid-template-columns: 1fr auto; gap: 0.6rem; align-items: center; padding: 0.6rem 0.85rem; background: #FFFFFF; border: 1px solid #E2E8F0; border-radius: 8px; margin-bottom: 0.4rem; }
+  .cf-journey-email-row:last-child { margin-bottom: 0; }
+  .cf-journey-email-subj { font-weight: 700; color: #0A1628; font-size: 0.86rem; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+  .cf-journey-email-meta { font-size: 0.7rem; color: #64748B; margin-top: 0.15rem; }
+  .cf-journey-email-stages { display: flex; gap: 0.3rem; }
+  .cf-journey-email-stage { font-family: 'DM Mono', monospace; font-size: 0.58rem; padding: 0.15rem 0.5rem; border-radius: 4px; letter-spacing: 0.06em; }
+  .cf-journey-email-stage.on { color: #FFFFFF; }
+  .cf-journey-email-stage.on.sent { background: #2563EB; }
+  .cf-journey-email-stage.on.delivered { background: #1E40AF; }
+  .cf-journey-email-stage.on.opened { background: #10B981; }
+  .cf-journey-email-stage.on.clicked { background: #14532D; }
+  .cf-journey-email-stage.on.bounced { background: #DC2626; }
+  .cf-journey-email-stage.off { background: #F1F5F9; color: #94A3B8; }
+
   /* Loading + error */
   .cf-loading { display: flex; align-items: center; justify-content: center; padding: 3rem; color: #64748B; }
   .cf-loading-ring { width: 32px; height: 32px; border: 3px solid #E2E8F0; border-top-color: #2563EB; border-radius: 50%; animation: spin 0.8s linear infinite; }
@@ -3885,7 +3929,116 @@ function cfRenderCase(client, audit) {
     </div>`;
   }
 
+  // Customer Journey section (loaded async after the rest of the case file renders)
+  html += `<div class="cf-section cf-journey-section">
+    <div class="cf-sec-head"><div>
+      <span class="cf-sec-eyebrow">Customer Journey &middot; Touchpoint Analytics</span>
+      <div class="cf-sec-title">Email + Page View Timeline</div>
+    </div></div>
+    <div id="cf-journey-${cfEsc(client.id)}"><div class="cf-loading"><div class="cf-loading-ring"></div></div></div>
+  </div>`;
+
   document.getElementById('cf-detail').innerHTML = html;
+  cfLoadJourney(client.id);
+}
+
+// ─── Customer Journey loader ─────────────────────────────────────
+async function cfLoadJourney(clientId) {
+  const target = document.getElementById(`cf-journey-${clientId}`);
+  if (!target) return;
+  try {
+    const res = await fetch(`${CF_API}?type=journey&clientId=${encodeURIComponent(clientId)}&limit=300`, { credentials: 'include' });
+    if (!res.ok) throw new Error(`HTTP ${res.status}`);
+    const data = await res.json();
+    target.innerHTML = cfRenderJourney(data);
+  } catch (e) {
+    target.innerHTML = `<div class="cf-empty" style="border:none;padding:1.5rem;background:#F8FAFC;border-radius:10px;"><div class="cf-empty-icon">⚠️</div><h3>Journey unavailable</h3><p style="font-size:.86rem;">${cfEsc(e.message)}</p></div>`;
+  }
+}
+function cfRenderJourney(data) {
+  const events = data.events || [];
+  const emails = data.emails || [];
+  const s = data.summary || {};
+
+  if (!events.length) {
+    return `<div class="cf-empty" style="border:none;padding:1.5rem;background:#F8FAFC;border-radius:10px;">
+      <div class="cf-empty-icon">📭</div>
+      <h3>No journey events yet</h3>
+      <p style="font-size:.86rem;">Tracking starts the first time a proposal email is sent or a document page is viewed. Make sure RESEND_WEBHOOK_SECRET is set + the webhook is registered on Resend.</p>
+    </div>`;
+  }
+
+  // Stats row
+  const stats = `<div class="cf-journey-stats">
+    <div class="cf-journey-stat"><div class="l">Emails Sent</div><div class="v">${s.emails_sent||0}</div></div>
+    <div class="cf-journey-stat"><div class="l">Opened</div><div class="v green">${s.emails_opened||0}</div><div class="s">${s.emails_sent ? Math.round((s.emails_opened||0)/s.emails_sent*100) + '%' : '—'} open rate</div></div>
+    <div class="cf-journey-stat"><div class="l">Clicked</div><div class="v green">${s.emails_clicked||0}</div><div class="s">${s.emails_sent ? Math.round((s.emails_clicked||0)/s.emails_sent*100) + '%' : '—'} click rate</div></div>
+    <div class="cf-journey-stat"><div class="l">Page Views</div><div class="v">${s.page_views_total||0}</div><div class="s">${Object.keys(s.page_views_by_kind||{}).length} pages</div></div>
+    <div class="cf-journey-stat"><div class="l">Pay Link Clicks</div><div class="v orange">${s.payment_link_clicks||0}</div></div>
+    ${s.emails_bounced ? `<div class="cf-journey-stat"><div class="l">Bounced</div><div class="v red">${s.emails_bounced}</div></div>` : ''}
+  </div>`;
+
+  // Per-email rollup with stage chips
+  const emailsBlock = emails.length ? `<div style="margin-bottom:1rem;">
+    <div style="font-family:'DM Mono',monospace;font-size:.62rem;letter-spacing:.16em;text-transform:uppercase;color:#475569;font-weight:700;margin-bottom:.4rem;">Emails Sent · ${emails.length}</div>
+    <div class="cf-journey-emails">
+      ${emails.map(em => {
+        const stages = ['sent','delivered','opened','clicked','bounced'];
+        return `<div class="cf-journey-email-row">
+          <div style="min-width:0;">
+            <div class="cf-journey-email-subj">${cfEsc(em.subject || '(no subject)')}</div>
+            <div class="cf-journey-email-meta">to ${cfEsc(em.recipient || '—')} · sent ${cfFmtDate(em.sent_at || em.first_seen)}${em.open_count ? ` · opened ${em.open_count}×` : ''}${em.click_count ? ` · clicked ${em.click_count}×` : ''}</div>
+          </div>
+          <div class="cf-journey-email-stages">
+            ${stages.map(st => {
+              const on = !!em[st + '_at'];
+              return `<span class="cf-journey-email-stage ${on?'on '+st:'off'}" title="${st}${on?': '+new Date(em[st+'_at']).toLocaleString():''}">${st}</span>`;
+            }).join('')}
+          </div>
+        </div>`;
+      }).join('')}
+    </div>
+  </div>` : '';
+
+  // Page views breakdown
+  const pageBreakdown = Object.keys(s.page_views_by_kind||{}).length ? `<div style="margin-bottom:1rem;">
+    <div style="font-family:'DM Mono',monospace;font-size:.62rem;letter-spacing:.16em;text-transform:uppercase;color:#475569;font-weight:700;margin-bottom:.4rem;">Pages Viewed</div>
+    <div style="display:flex;gap:.4rem;flex-wrap:wrap;">
+      ${Object.entries(s.page_views_by_kind).map(([page, n]) => `<span style="background:#FFFFFF;border:1px solid #E2E8F0;padding:.4rem .8rem;border-radius:8px;font-size:.78rem;"><strong style="font-family:'Bebas Neue',sans-serif;color:#5B21B6;font-size:1rem;letter-spacing:.02em;margin-right:.3rem;">${n}</strong>${cfEsc(page)}</span>`).join('')}
+    </div>
+  </div>` : '';
+
+  // Full chronological timeline (newest first)
+  const eventsRev = [...events].reverse();
+  const timeline = `<div class="cf-journey-timeline">
+    ${eventsRev.map(e => {
+      const ev = e.event || '';
+      let pillKind = 'email-sent', pillLabel = ev;
+      if (ev === 'email_sent') { pillKind = 'email-sent'; pillLabel = '📤 sent'; }
+      else if (ev === 'email_delivered') { pillKind = 'email-delivered'; pillLabel = '📬 delivered'; }
+      else if (ev === 'email_opened') { pillKind = 'email-opened'; pillLabel = '👁 opened'; }
+      else if (ev === 'email_clicked') { pillKind = 'email-clicked'; pillLabel = '🔗 clicked'; }
+      else if (ev === 'email_bounced') { pillKind = 'email-bounced'; pillLabel = '⚠ bounced'; }
+      else if (ev === 'email_complained') { pillKind = 'email-bounced'; pillLabel = '🚫 spam'; }
+      else if (ev === 'email_failed') { pillKind = 'email-bounced'; pillLabel = '⚠ failed'; }
+      else if (ev === 'page_view') { pillKind = 'page'; pillLabel = '👁 page view'; }
+      else if (ev === 'cta_click') { pillKind = 'cta'; pillLabel = '🔗 cta click'; }
+      else if (ev === 'payment_link_click') { pillKind = 'payment'; pillLabel = '💳 pay link'; }
+      else if (ev.includes('calendly')) { pillKind = 'calendly'; pillLabel = '📅 calendly'; }
+      const what = e.subject_or_url || (e.raw && (e.raw.kind || e.raw.template)) || '—';
+      const ip = e.ip ? ` · ${cfEsc(e.ip)}` : '';
+      return `<div class="cf-journey-event">
+        <span class="cf-journey-pill ${pillKind}">${cfEsc(pillLabel)}</span>
+        <div class="cf-journey-detail">
+          <div class="what">${cfEsc(String(what).slice(0, 110))}${String(what).length>110?'…':''}</div>
+          <div class="meta">${cfEsc(e.recipient_email || '')}${ip}${e.user_agent ? ' · ' + cfEsc(e.user_agent.split(/[)(]/)[0].slice(0, 40)) : ''}</div>
+        </div>
+        <span class="cf-journey-time">${cfFmtDate(e.created_at)}</span>
+      </div>`;
+    }).join('')}
+  </div>`;
+
+  return stats + emailsBlock + pageBreakdown + timeline;
 }
 
 function cfRenderInvoiceBlock(engagement, invoices) {
@@ -4536,13 +4689,11 @@ document.addEventListener('input', (e) => {
 // DASHBOARD: top-of-funnel consulting metrics + live activity feed
 // ════════════════════════════════════════════════════════════════
 async function mcLoadDashboard(force) {
-  // Fire 4 parallel calls — all cheap reads from Supabase via REST
-  const types = ['summary', 'pipeline', 'activity', 'projects', 'invoices'];
+  const types = ['summary', 'pipeline', 'activity', 'projects', 'invoices', 'email-stats'];
   if (!force) {
-    // Use cache if all already loaded
     const allCached = types.every(t => _mcCache[t]);
     if (allCached) {
-      mcRenderDashboardKPIs(_mcCache.summary, _mcCache.invoices, _mcCache.projects);
+      mcRenderDashboardKPIs(_mcCache.summary, _mcCache.invoices, _mcCache.projects, _mcCache['email-stats']);
       mcRenderDashboardStages(_mcCache.pipeline);
       mcRenderDashboardActivity(_mcCache.activity);
       mcRenderDashboardProjectsWidget(_mcCache.projects);
@@ -4551,7 +4702,7 @@ async function mcLoadDashboard(force) {
     }
   }
   try {
-    const [summary, pipeline, activity, projects, invoices] = await Promise.all(
+    const [summary, pipeline, activity, projects, invoices, emailStats] = await Promise.all(
       types.map(t => fetch(`${MC_API}?type=${t}${t === 'activity' ? '&limit=20' : ''}`, { credentials: 'include' })
         .then(async r => {
           if (r.status === 401) throw new Error('AUTH');
@@ -4564,23 +4715,25 @@ async function mcLoadDashboard(force) {
     _mcCache.activity = activity;
     _mcCache.projects = projects;
     _mcCache.invoices = invoices;
-    mcRenderDashboardKPIs(summary, invoices, projects);
+    _mcCache['email-stats'] = emailStats;
+    mcRenderDashboardKPIs(summary, invoices, projects, emailStats);
     mcRenderDashboardStages(pipeline);
     mcRenderDashboardActivity(activity);
     mcRenderDashboardProjectsWidget(projects);
     mcRenderDashboardOutstanding(invoices);
   } catch (e) {
-    if (e.message === 'AUTH') return; // silent — login screen handles it
+    if (e.message === 'AUTH') return;
     console.warn('Dashboard load failed:', e);
     const grid = document.getElementById('mc-dash-kpis');
     if (grid) grid.innerHTML = `<div class="mc-kpi"><div class="l">Error</div><div class="v red">—</div><div class="s">${mcEsc(e.message)}</div></div>`;
   }
 }
 
-function mcRenderDashboardKPIs(summary, invoicesData, projectsData) {
+function mcRenderDashboardKPIs(summary, invoicesData, projectsData, emailStatsData) {
   const s = summary?.summary || {};
   const invoices = invoicesData?.invoices || [];
   const projects = projectsData?.projects || [];
+  const es = emailStatsData || {};
   const overdueProjects = projects.filter(p => p.overdue).length;
   const grid = document.getElementById('mc-dash-kpis');
   if (!grid) return;
@@ -4610,10 +4763,10 @@ function mcRenderDashboardKPIs(summary, invoicesData, projectsData) {
       <div class="v blue">${s.proposals_total || 0}</div>
       <div class="s">in pipeline</div>
     </div>
-    <div class="mc-kpi" onclick="switchPanel('eng-contracts', this)">
-      <div class="l"><span class="ico">✍️</span>Contracts</div>
-      <div class="v">${s.contracts_total || 0}</div>
-      <div class="s">SOWs, NDAs, MSAs, timelines</div>
+    <div class="mc-kpi" onclick="switchPanel('analytics-funnel', this)">
+      <div class="l"><span class="ico">👁</span>Email Open Rate</div>
+      <div class="v ${(es.open_rate||0) > 40 ? 'green' : (es.open_rate||0) > 20 ? 'blue' : ''}">${es.open_rate || 0}%</div>
+      <div class="s">${es.opened || 0} of ${es.sent || 0} sent · click rate ${es.click_rate || 0}%</div>
     </div>
   `;
 }
