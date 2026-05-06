@@ -1,0 +1,593 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Scope of Work: Business Discovery Audit | Wendal Enterprise Inc.</title>
+<meta name="description" content="Scope of Work for the Business Discovery Audit prepared for Wendal Joseph, Wendal Enterprise Inc." />
+<meta name="robots" content="noindex, nofollow, noarchive, nosnippet, noimageindex" />
+<meta http-equiv="Cache-Control" content="no-store, no-cache, must-revalidate, private" />
+<link rel="preconnect" href="https://fonts.googleapis.com" crossorigin>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Barlow:wght@400;500;600;700;800&family=DM+Mono:wght@400;500&display=swap">
+<style>
+  :root {
+    --navy:#0A1628; --navy-mid:#0F2040; --navy-light:#162A4A;
+    --blue:#2563EB; --blue-hover:#1D4ED8; --blue-light:#3B82F6; --blue-pale:#EFF6FF;
+    --orange:#F97316; --orange-light:#FB923C;
+    --white:#FFFFFF; --off-white:#F8FAFC; --light:#F1F5F9; --border:#E2E8F0;
+    --text:#1E293B; --text-mid:#64748B; --text-light:#94A3B8;
+    --shadow-md:0 4px 16px rgba(15,32,64,0.08), 0 8px 32px rgba(15,32,64,0.06);
+  }
+  *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+  body{font-family:'Barlow',sans-serif;background:var(--off-white);color:var(--text);line-height:1.65;}
+  a{color:var(--blue);text-decoration:none;}
+  a:hover{color:var(--blue-hover);}
+
+  .doc-nav{position:sticky;top:0;z-index:100;background:var(--white);border-bottom:1px solid var(--border);padding:0.9rem 2rem;display:flex;justify-content:space-between;align-items:center;}
+  .doc-nav-logo{font-family:'Bebas Neue',sans-serif;font-size:1.25rem;letter-spacing:0.12em;color:var(--blue);}
+  .doc-nav-logo span{color:var(--text);}
+  .doc-nav-meta{font-family:'DM Mono',monospace;font-size:0.7rem;letter-spacing:0.15em;text-transform:uppercase;color:var(--text-light);}
+  .doc-nav-meta strong{color:var(--blue);font-weight:600;}
+
+  .doc-hero{background:linear-gradient(135deg,var(--navy) 0%,var(--navy-mid) 50%,var(--navy-light) 100%);color:var(--white);padding:4rem 2rem 3rem;position:relative;overflow:hidden;}
+  .doc-hero::before{content:'';position:absolute;top:0;left:0;right:0;height:4px;background:linear-gradient(90deg,var(--blue) 0%,var(--orange) 50%,var(--blue) 100%);}
+  .doc-hero-inner{max-width:980px;margin:0 auto;}
+  .doc-hero-eyebrow{font-family:'DM Mono',monospace;font-size:0.72rem;letter-spacing:0.25em;text-transform:uppercase;color:var(--blue-light);margin-bottom:1.2rem;display:flex;align-items:center;gap:0.75rem;}
+  .doc-hero-eyebrow::before{content:'';width:2.5rem;height:1px;background:var(--blue-light);}
+  .doc-hero h1{font-family:'Bebas Neue',sans-serif;font-size:clamp(2.2rem,5vw,3.5rem);font-weight:400;letter-spacing:0.02em;line-height:1.05;color:var(--white);margin-bottom:1rem;}
+  .doc-hero h1 em{color:var(--orange-light);font-style:normal;}
+  .doc-hero-sub{font-size:1.05rem;color:rgba(248,250,252,0.78);max-width:640px;line-height:1.55;}
+
+  .doc-body{max-width:980px;margin:0 auto;padding:3.5rem 2rem;}
+  .section{margin-bottom:3.5rem;}
+  .section-eyebrow{font-family:'DM Mono',monospace;font-size:0.7rem;letter-spacing:0.2em;text-transform:uppercase;color:var(--blue);margin-bottom:0.85rem;display:flex;align-items:center;gap:0.7rem;}
+  .section-eyebrow::after{content:'';height:1px;flex:1;background:linear-gradient(90deg,var(--blue) 0%,transparent 100%);}
+  h2{font-family:'Bebas Neue',sans-serif;font-size:clamp(1.7rem,3.2vw,2.3rem);font-weight:400;letter-spacing:0.02em;color:var(--navy);margin-bottom:1.25rem;line-height:1.15;}
+  h2 span{color:var(--blue);}
+  h3{font-family:'Barlow',sans-serif;font-size:1.1rem;font-weight:700;color:var(--navy);margin-bottom:0.5rem;margin-top:1.25rem;}
+  p{margin-bottom:1rem;color:var(--text);font-size:0.98rem;}
+  p strong{color:var(--navy);font-weight:700;}
+  ul{padding-left:1.4rem;margin:0.5rem 0 1.2rem;}
+  ul li{margin-bottom:0.4rem;color:var(--text);font-size:0.95rem;line-height:1.55;}
+  ul li::marker{color:var(--blue);}
+
+  /* Module card */
+  .module{
+    background:var(--white);
+    border:1px solid var(--border);
+    border-left:4px solid var(--blue);
+    border-radius:14px;
+    padding:1.75rem 2rem;
+    margin-bottom:1.25rem;
+    box-shadow:0 1px 3px rgba(15,32,64,0.04);
+  }
+  .module .head{display:flex;align-items:flex-start;gap:1rem;margin-bottom:1rem;flex-wrap:wrap;}
+  .module .head .num{font-family:'Bebas Neue',sans-serif;font-size:1.4rem;color:var(--blue);background:var(--blue-pale);width:2.6rem;height:2.6rem;border-radius:8px;display:flex;align-items:center;justify-content:center;flex-shrink:0;line-height:1;}
+  .module .head .title{flex:1;}
+  .module .head h3{font-size:1.25rem;margin:0 0 0.2rem;color:var(--navy);}
+  .module .head .lbl{font-family:'DM Mono',monospace;font-size:0.65rem;letter-spacing:0.2em;text-transform:uppercase;color:var(--text-light);}
+  .module .head .hours{font-family:'DM Mono',monospace;font-size:0.7rem;letter-spacing:0.1em;color:var(--blue);background:var(--blue-pale);border:1px solid rgba(37,99,235,0.25);padding:0.25rem 0.7rem;border-radius:999px;font-weight:600;}
+  .module .body p{font-size:0.94rem;}
+  .module .grid{display:grid;grid-template-columns:1fr 1fr;gap:1rem 2rem;margin-top:0.75rem;}
+  @media(max-width:720px){.module .grid{grid-template-columns:1fr;}}
+  .module .grid h4{font-family:'DM Mono',monospace;font-size:0.65rem;letter-spacing:0.2em;text-transform:uppercase;color:var(--blue);margin-bottom:0.5rem;font-weight:600;}
+  .module .grid ul{padding-left:1.1rem;margin:0;}
+  .module .grid ul li{font-size:0.9rem;margin-bottom:0.3rem;color:var(--text-mid);}
+
+  /* Out-of-scope */
+  .oos{
+    background:#FFF7ED;
+    border:1px solid rgba(249,115,22,0.3);
+    border-left:4px solid var(--orange);
+    border-radius:14px;
+    padding:1.75rem 2rem;
+    margin:1.5rem 0;
+  }
+  .oos .lbl{font-family:'DM Mono',monospace;font-size:0.7rem;letter-spacing:0.2em;text-transform:uppercase;color:var(--orange);font-weight:600;margin-bottom:0.6rem;}
+  .oos h3{margin:0 0 0.5rem;}
+  .oos ul li::marker{color:var(--orange);}
+
+  /* Assumption block */
+  .assume{
+    background:var(--white);
+    border:1px solid var(--border);
+    border-radius:14px;
+    padding:1.5rem 1.75rem;
+    margin:1rem 0;
+  }
+  .assume .lbl{font-family:'DM Mono',monospace;font-size:0.65rem;letter-spacing:0.2em;text-transform:uppercase;color:var(--blue);font-weight:600;margin-bottom:0.5rem;}
+
+  /* Definitions table */
+  .def-table{width:100%;border-collapse:collapse;background:var(--white);border:1px solid var(--border);border-radius:12px;overflow:hidden;margin:1rem 0 1.5rem;}
+  .def-table th,.def-table td{padding:0.85rem 1.2rem;text-align:left;border-bottom:1px solid var(--border);font-size:0.92rem;}
+  .def-table th{background:var(--off-white);font-family:'DM Mono',monospace;font-size:0.65rem;letter-spacing:0.18em;text-transform:uppercase;color:var(--blue);font-weight:600;}
+  .def-table tr:last-child td{border-bottom:none;}
+  .def-table td:first-child{font-weight:700;color:var(--navy);width:32%;}
+
+  /* Header for prepared block */
+  .prepared-card{background:var(--white);border:1px solid var(--border);border-left:4px solid var(--blue);border-radius:14px;padding:1.5rem 1.75rem;margin-bottom:2.5rem;box-shadow:var(--shadow-md);display:grid;grid-template-columns:1fr 1fr 1fr;gap:1.5rem;}
+  @media(max-width:720px){.prepared-card{grid-template-columns:1fr;}}
+  .prepared-card .lbl{font-family:'DM Mono',monospace;font-size:0.62rem;letter-spacing:0.2em;text-transform:uppercase;color:var(--text-light);margin-bottom:0.4rem;}
+  .prepared-card .val{font-size:0.92rem;color:var(--text);line-height:1.55;}
+  .prepared-card .val strong{display:block;font-size:1rem;color:var(--navy);margin-bottom:0.1rem;}
+
+  footer.doc-footer{background:var(--navy);color:rgba(255,255,255,0.6);padding:2.5rem 2rem;border-top:4px solid var(--blue);}
+  .doc-footer-inner{max-width:980px;margin:0 auto;display:grid;grid-template-columns:1fr auto;gap:2rem;align-items:center;}
+  @media(max-width:600px){.doc-footer-inner{grid-template-columns:1fr;}}
+  .doc-footer-logo{font-family:'Bebas Neue',sans-serif;font-size:1.4rem;letter-spacing:0.12em;color:var(--white);}
+  .doc-footer-logo span{color:var(--blue-light);}
+  .doc-footer p{font-size:0.82rem;line-height:1.6;margin:0.4rem 0 0;color:rgba(255,255,255,0.55);}
+  .doc-footer-meta{font-family:'DM Mono',monospace;font-size:0.68rem;letter-spacing:0.15em;text-transform:uppercase;color:rgba(255,255,255,0.4);text-align:right;}
+  @media(max-width:600px){.doc-footer-meta{text-align:left;}}
+
+  @media print{
+    .doc-nav{position:static;}
+    body{background:white;}
+    .module,.oos,.assume,.prepared-card,.def-table{break-inside:avoid;}
+  }
+</style>
+</head>
+<body>
+
+<nav class="doc-nav">
+  <div class="doc-nav-logo">MARK<span>CMO</span></div>
+  <div class="doc-nav-meta">Doc <strong>WE-AUD-002</strong> · Scope of Work · Confidential</div>
+</nav>
+
+<header class="doc-hero">
+  <div class="doc-hero-inner">
+    <div class="doc-hero-eyebrow">Scope of Work · Companion to Doc WE-AUD-001</div>
+    <h1>Scope of Work, <em>Business Discovery Audit</em></h1>
+    <p class="doc-hero-sub">
+      Detailed module-by-module breakdown of every activity, input, and deliverable inside the 72-hour audit. Reference document; not separately invoiced. Read alongside the Proposal (WE-AUD-001) and Deliverable Timeline (WE-AUD-003).
+    </p>
+  </div>
+</header>
+
+<main class="doc-body">
+
+  <div class="prepared-card">
+    <div>
+      <div class="lbl">Client</div>
+      <div class="val"><strong>Wendal Joseph</strong>Wendal Enterprise Inc.<br/>d/b/a Unique Tours and Rentals Ltd.<br/>Providenciales, Turks &amp; Caicos</div>
+    </div>
+    <div>
+      <div class="lbl">Consultant</div>
+      <div class="val"><strong>Mark Gabrielli</strong>Fractional CMO &amp; COO<br/>WETYR Corp · MarkCMO.com<br/>Cape Canaveral, FL</div>
+    </div>
+    <div>
+      <div class="lbl">Engagement</div>
+      <div class="val"><strong>Business Discovery Audit</strong>Fixed-fee · $2,500 USD<br/>72-hour delivery from payment + intake<br/>One-time, non-recurring</div>
+    </div>
+  </div>
+
+  <!-- 1. Engagement Definition -->
+  <section class="section">
+    <div class="section-eyebrow">01 · Engagement Definition</div>
+    <h2>What This Engagement <span>Is</span>, And What It Isn't.</h2>
+    <p>
+      The Business Discovery Audit is a structured, fixed-fee diagnostic engagement designed to produce an honest, evidence-based snapshot of the current state of Wendal Enterprise Inc. and its operating brand, Unique Tours and Rentals Ltd., and to translate that snapshot into a sequenced 12-month roadmap. It is <strong>diagnostic</strong>, not implementation. The deliverables are documentation, analysis, and strategy, not operational execution.
+    </p>
+
+    <table class="def-table">
+      <thead>
+        <tr><th>Term</th><th>Definition</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>Client</td><td>Wendal Enterprise Inc., a Turks &amp; Caicos entity, represented by Wendal Joseph, Managing Director.</td></tr>
+        <tr><td>Operating Brand</td><td>Unique Tours and Rentals Ltd., Providenciales-based tour and rental operator.</td></tr>
+        <tr><td>Consultant</td><td>Mark Gabrielli, principal of WETYR Corp d/b/a MarkCMO, Cape Canaveral, FL, USA.</td></tr>
+        <tr><td>Engagement</td><td>The 72-hour Business Discovery Audit, fixed-fee at $2,500 USD.</td></tr>
+        <tr><td>Effective Date</td><td>The date payment clears AND the Client Intake Worksheet is returned, whichever is later.</td></tr>
+        <tr><td>Delivery Window</td><td>72 calendar hours starting from the Effective Date.</td></tr>
+        <tr><td>Roadmap Horizon</td><td>30-day, 90-day, 6-month, 12-month execution recommendations.</td></tr>
+        <tr><td>Expansion Markets</td><td>West Palm Beach, FL and Atlanta, GA, under preliminary analysis only.</td></tr>
+      </tbody>
+    </table>
+  </section>
+
+  <!-- 2. The Six Modules -->
+  <section class="section">
+    <div class="section-eyebrow">02 · Modules &amp; Activities</div>
+    <h2>Six Modules. Same Order. <span>Every Engagement.</span></h2>
+    <p>The audit runs through six modules in fixed sequence. Each module has defined inputs (what we need from you), activities (what we do), and outputs (what gets written into the deliverables).</p>
+
+    <!-- MODULE 1 -->
+    <div class="module">
+      <div class="head">
+        <div class="num">01</div>
+        <div class="title">
+          <div class="lbl">Module One</div>
+          <h3>Workflow Discovery &amp; Mapping</h3>
+        </div>
+        <div class="hours">~10 hours</div>
+      </div>
+      <div class="body">
+        <p>Document the full operating workflow of Unique Tours and Rentals from <strong>customer awareness → booking → confirmation → dispatch → on-site execution → tour completion → photo/video delivery → review request → repeat-booking funnel</strong>. Identify which steps are automated, which are manual, which are owner-dependent, and which are tribal-knowledge-only.</p>
+        <div class="grid">
+          <div>
+            <h4>Inputs Required From Client</h4>
+            <ul>
+              <li>Read-only access (or screenshares) of booking platform</li>
+              <li>Sample reservation flow walk-through (live or recorded)</li>
+              <li>Org chart or staff/role description</li>
+              <li>Standard operating procedures, if any exist</li>
+              <li>Sample customer email / SMS confirmations</li>
+            </ul>
+          </div>
+          <div>
+            <h4>Activities Performed</h4>
+            <ul>
+              <li>Step-by-step current-state workflow documentation</li>
+              <li>Owner-dependency tagging (Wendal-only vs. delegable)</li>
+              <li>Automation gap identification</li>
+              <li>Handoff/communication-break mapping</li>
+              <li>Visual current-state workflow diagram</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- MODULE 2 -->
+    <div class="module">
+      <div class="head">
+        <div class="num">02</div>
+        <div class="title">
+          <div class="lbl">Module Two</div>
+          <h3>Systems &amp; Tech Stack Inventory</h3>
+        </div>
+        <div class="hours">~8 hours</div>
+      </div>
+      <div class="body">
+        <p>Build a complete inventory of every tool, platform, and account in use today. For each: cost, owner, integration status, redundancy, and risk level. We also flag tools that should exist but don't.</p>
+        <div class="grid">
+          <div>
+            <h4>Stack Categories Reviewed</h4>
+            <ul>
+              <li>Website + DNS + hosting (uniquetoursandrentals.com)</li>
+              <li>Reservation / booking engine</li>
+              <li>Payment processor(s), card-present + card-not-present</li>
+              <li>OTA channels: GetYourGuide, Viator, TripAdvisor Experiences</li>
+              <li>CRM / customer database</li>
+              <li>Email + SMS + WhatsApp comms</li>
+              <li>Photo &amp; video delivery (guide-to-guest)</li>
+              <li>Fleet, jet-ski, and horse-management records</li>
+              <li>Accounting / bookkeeping</li>
+              <li>Analytics (Google Analytics, Meta, OTA dashboards)</li>
+              <li>Social media + scheduling tools</li>
+            </ul>
+          </div>
+          <div>
+            <h4>For Each Tool We Document</h4>
+            <ul>
+              <li>Vendor + plan/tier</li>
+              <li>Monthly/annual cost (USD)</li>
+              <li>Internal owner / admin</li>
+              <li>Integrations (in &amp; out)</li>
+              <li>Redundancy (is anyone else doing this?)</li>
+              <li>Single-point-of-failure rating</li>
+              <li>Replacement / consolidation opportunity</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- MODULE 3 -->
+    <div class="module">
+      <div class="head">
+        <div class="num">03</div>
+        <div class="title">
+          <div class="lbl">Module Three</div>
+          <h3>Bottleneck &amp; Pain-Point Diagnostic</h3>
+        </div>
+        <div class="hours">~10 hours</div>
+      </div>
+      <div class="body">
+        <p>Identify, classify, and rate every bottleneck that is currently costing the business time, money, attention, customer trust, or staff retention. Each is documented with an evidence anchor (review, dataset, observation, or owner interview quote) and a severity rating.</p>
+        <div class="grid">
+          <div>
+            <h4>Bottleneck Domains</h4>
+            <ul>
+              <li>Booking-to-cash cycle latency</li>
+              <li>Manual / double-entry between systems</li>
+              <li>Owner-dependent decisions blocking velocity</li>
+              <li>Refund &amp; dispute handling (inc. partial-refund cases visible in TripAdvisor reviews)</li>
+              <li>Pre-ride / pre-tour rider-assessment process</li>
+              <li>Safety briefing &amp; incident-protocol gaps</li>
+              <li>Staff onboarding &amp; cross-training</li>
+              <li>OTA dependency vs. direct-booking %</li>
+              <li>Cash flow / FX exposure (USD revenue, TC operating cost)</li>
+            </ul>
+          </div>
+          <div>
+            <h4>Severity Rating Framework</h4>
+            <ul>
+              <li><strong>Critical:</strong> risks revenue, safety, or brand survival within 30 days</li>
+              <li><strong>High:</strong> limits ability to scale to second/third location</li>
+              <li><strong>Medium:</strong> efficiency loss, fixable in 90 days</li>
+              <li><strong>Low:</strong> cosmetic, future-quarter cleanup</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- MODULE 4 -->
+    <div class="module">
+      <div class="head">
+        <div class="num">04</div>
+        <div class="title">
+          <div class="lbl">Module Four</div>
+          <h3>Competitive &amp; Market Analysis</h3>
+        </div>
+        <div class="hours">~12 hours</div>
+      </div>
+      <div class="body">
+        <p>Two-part analysis: Turks &amp; Caicos competitive benchmark, plus a US market-entry preliminary read for West Palm Beach and Atlanta.</p>
+        <div class="grid">
+          <div>
+            <h4>Part A · Turks &amp; Caicos Benchmark</h4>
+            <ul>
+              <li>Hydro Charters (jet ski tours)</li>
+              <li>Mako Watersports (Leeward jet ski)</li>
+              <li>Caribbean Cruisin' (Seafari combo)</li>
+              <li>Five Cays Watersports (rentals + tours)</li>
+              <li>Floe Lux Tour Company (private jet ski)</li>
+              <li>Turks &amp; Caicos Flyboard (Jet Ski Safari)</li>
+              <li>Side-by-side: pricing, durations, OTA presence, ratings, review volume, positioning</li>
+              <li>Where Unique Tours wins vs. loses on each lens</li>
+            </ul>
+          </div>
+          <div>
+            <h4>Part B · US Market Penetration Read</h4>
+            <ul>
+              <li>Source-market data: ~81% of TC visitors are US-based</li>
+              <li>Atlanta (ATL → PLS): direct lift on Delta &amp; Frontier, ~3 hr flight</li>
+              <li>South Florida (MIA / PBI / FLL → PLS): feeder economics</li>
+              <li>West Palm Beach competitive set (boat / jet ski / experiential rentals)</li>
+              <li>Atlanta storefront/satellite-office logic vs. pure marketing presence</li>
+              <li>Pre-trip booking funnel: capture US customers <em>before</em> they board the plane</li>
+              <li>Cruise-passenger overlap (~1.3M annually) vs. stayover (~640K)</li>
+            </ul>
+          </div>
+        </div>
+        <div class="assume" style="margin-top:1rem;">
+          <div class="lbl">Important Scope Note</div>
+          <p style="margin:0;font-size:0.94rem;">
+            The US market analysis in this engagement is a <strong>preliminary read</strong> built from public data, OTA signal, and competitive benchmarking. It is <em>not</em> a full market-entry study, real-estate scout, or licensing/legal feasibility report for FL or GA operations. Those are recommended as separate Phase 2 engagements if the audit indicates green-light economics.
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <!-- MODULE 5 -->
+    <div class="module">
+      <div class="head">
+        <div class="num">05</div>
+        <div class="title">
+          <div class="lbl">Module Five</div>
+          <h3>Roadmap Construction (30 / 90 / 6mo / 12mo)</h3>
+        </div>
+        <div class="hours">~12 hours</div>
+      </div>
+      <div class="body">
+        <p>Translate the diagnostic into a sequenced, owner-tagged, cost-tagged execution plan across four horizons. Built so individual line items can be handed to staff or contractors without re-explanation.</p>
+        <div class="grid">
+          <div>
+            <h4>Horizon Themes</h4>
+            <ul>
+              <li><strong>30 Days:</strong> stop the bleeding: critical fixes, safety/liability gaps, owner-dependency band-aids, low-effort revenue lifts</li>
+              <li><strong>90 Days:</strong> stabilize and document: systems consolidation, SOPs, direct-booking lift, review-velocity program, staff cross-training</li>
+              <li><strong>6 Months:</strong> West Palm Beach launch readiness: entity, licensing path, real-estate criteria, fleet/staff plan, marketing pre-launch</li>
+              <li><strong>12 Months:</strong> Atlanta + multi-location operating model: HQ vs. local-ops split, brand architecture, cross-location booking, financial reporting cadence</li>
+            </ul>
+          </div>
+          <div>
+            <h4>Each Roadmap Item Includes</h4>
+            <ul>
+              <li>Action description (one sentence, plain English)</li>
+              <li>Owner (Wendal / staff role / contractor / TBD)</li>
+              <li>Estimated cost band (USD)</li>
+              <li>Estimated time investment (hours/days)</li>
+              <li>Dependencies (what must happen first)</li>
+              <li>Definition of "done"</li>
+              <li>Risk if skipped</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- MODULE 6 -->
+    <div class="module">
+      <div class="head">
+        <div class="num">06</div>
+        <div class="title">
+          <div class="lbl">Module Six</div>
+          <h3>Deliverable Packaging &amp; Walkthrough</h3>
+        </div>
+        <div class="hours">~6 hours + 1 hour live</div>
+      </div>
+      <div class="body">
+        <p>Final QA, formatting, packaging, secure delivery, and live walkthrough call. The walkthrough is recorded and the recording is delivered along with the documents.</p>
+        <div class="grid">
+          <div>
+            <h4>Deliverables Produced</h4>
+            <ul>
+              <li>Executive Findings Brief (1-page PDF)</li>
+              <li>Business Discovery Audit Report (25 to 35-page PDF)</li>
+              <li>Workflow &amp; Systems Map (PNG + editable file)</li>
+              <li>Competitive &amp; Market Analysis (8 to 12-page PDF)</li>
+              <li>30/90/6mo/12mo Roadmap (10 to 14-page PDF)</li>
+              <li>60-minute walkthrough recording</li>
+            </ul>
+          </div>
+          <div>
+            <h4>Delivery Method</h4>
+            <ul>
+              <li>Secure email link to PDF bundle</li>
+              <li>Optional Google Drive / Dropbox folder mirror</li>
+              <li>Walkthrough call: Zoom or Google Meet</li>
+              <li>14-day post-delivery email window for clarification questions</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 3. Out of Scope -->
+  <section class="section">
+    <div class="section-eyebrow">03 · Out Of Scope</div>
+    <h2>Explicitly <span>Not</span> Included In This Engagement.</h2>
+    <p>To keep this engagement honest and the price stable, the following are explicitly out of scope. Any of them can be scoped as a separate engagement after the audit is delivered.</p>
+
+    <div class="oos">
+      <div class="lbl">Out Of Scope</div>
+      <h3>Implementation &amp; Build Work</h3>
+      <ul>
+        <li>Building, configuring, or migrating any software platform</li>
+        <li>Website redesign, rebuild, or re-platforming</li>
+        <li>Booking-engine selection, contract negotiation, or installation</li>
+        <li>CRM build / data migration</li>
+        <li>Brand identity redesign (logo, typography, photography)</li>
+        <li>Paid-media buying, ad-account setup, or campaign management</li>
+      </ul>
+    </div>
+
+    <div class="oos">
+      <div class="lbl">Out Of Scope</div>
+      <h3>Legal, Regulatory &amp; Real Estate</h3>
+      <ul>
+        <li>US legal entity formation (FL, GA, or otherwise)</li>
+        <li>Tour-operator licensing, USCG documentation, or insurance brokering</li>
+        <li>Real-estate scouting, lease review, or location selection in WPB / ATL</li>
+        <li>Tax structuring, transfer-pricing, or international entity advice</li>
+        <li>Employment-law review for staff in any jurisdiction</li>
+      </ul>
+    </div>
+
+    <div class="oos">
+      <div class="lbl">Out Of Scope</div>
+      <h3>Hiring, Operations Execution &amp; Ongoing Retainer</h3>
+      <ul>
+        <li>Recruiting, interviewing, or hiring staff for any location</li>
+        <li>Day-to-day operations, dispatch, or customer service</li>
+        <li>Vendor management or contractor oversight</li>
+        <li>Ongoing fractional CMO/COO retainer (separately scoped if desired)</li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- 4. Client Responsibilities -->
+  <section class="section">
+    <div class="section-eyebrow">04 · Client Responsibilities</div>
+    <h2>What We Need From <span>You.</span></h2>
+    <p>The 72-hour clock depends on Client meeting the following obligations within the windows specified. Delays here extend the delivery window 1:1.</p>
+
+    <div class="module">
+      <div class="head">
+        <div class="num">①</div>
+        <div class="title"><h3 style="margin:0;">Within 4 hours of payment</h3></div>
+      </div>
+      <div class="body">
+        <ul>
+          <li>Confirm primary point of contact (assumed: Wendal Joseph) and an alternate</li>
+          <li>Confirm preferred communication channel (email, WhatsApp, SMS)</li>
+          <li>Schedule the 30-minute kickoff call (within Hour 0 to 12 window)</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="module">
+      <div class="head">
+        <div class="num">②</div>
+        <div class="title"><h3 style="margin:0;">Within 12 hours of payment</h3></div>
+      </div>
+      <div class="body">
+        <ul>
+          <li>Return the completed Client Intake Worksheet</li>
+          <li>Provide read-only or shared-screen access to: booking platform, OTA dashboards (GetYourGuide, Viator, TripAdvisor), Google Analytics, Meta Business, primary email/CRM, payment processor</li>
+          <li>Provide the most recent 12 months of booking data (export, screenshare, or summary table)</li>
+          <li>Provide owner-narrative on top 3 known pain points (5 to 10 minute voice memo or written)</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="module">
+      <div class="head">
+        <div class="num">③</div>
+        <div class="title"><h3 style="margin:0;">Within 60 hours of payment</h3></div>
+      </div>
+      <div class="body">
+        <ul>
+          <li>Be reachable within 4 business hours for any clarification questions</li>
+          <li>Confirm the 60-minute walkthrough call slot (within the Hour 60 to 72 window)</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- 5. Assumptions -->
+  <section class="section">
+    <div class="section-eyebrow">05 · Assumptions</div>
+    <h2>What We're Assuming Going In.</h2>
+    <p>This scope, timeline, and price are built on the following assumptions. If any prove materially false, scope and timeline will be re-discussed in writing before continuing.</p>
+
+    <div class="assume">
+      <div class="lbl">Assumption A · Single Operating Brand</div>
+      <p style="margin:0;">All operations under review fall under Wendal Enterprise Inc. and its operating brand Unique Tours and Rentals Ltd. No additional sister entities, joint ventures, or franchise relationships are reviewed in this engagement.</p>
+    </div>
+    <div class="assume">
+      <div class="lbl">Assumption B · Single Physical Location Today</div>
+      <p style="margin:0;">Today's operating footprint is a single Providenciales, TC location (Bay Road, Blue Hills). West Palm Beach and Atlanta are <em>future</em> locations, not currently operating.</p>
+    </div>
+    <div class="assume">
+      <div class="lbl">Assumption C · English-Language Documentation</div>
+      <p style="margin:0;">All deliverables are produced in US English. Translation is out of scope.</p>
+    </div>
+    <div class="assume">
+      <div class="lbl">Assumption D · Read-Only System Access</div>
+      <p style="margin:0;">Client provides read-only or shared-screen access to relevant systems. Consultant does not require, and will not request, admin/edit credentials.</p>
+    </div>
+    <div class="assume">
+      <div class="lbl">Assumption E · Confidentiality Both Ways</div>
+      <p style="margin:0;">All findings, screenshots, financials, and customer data shared during the engagement are treated as confidential under standard professional-services norms. A separate Mutual NDA is available on request and can be executed prior to kickoff at Client's option.</p>
+    </div>
+  </section>
+
+  <!-- 6. Change Control -->
+  <section class="section">
+    <div class="section-eyebrow">06 · Change Control &amp; Acceptance</div>
+    <h2>How We Handle Changes <span>Mid-Engagement.</span></h2>
+    <p>
+      Because the audit is fixed-fee and fixed-window, changes to scope mid-engagement require a written change order signed by both parties. Minor clarifications or re-orderings within the existing scope do not require a change order.
+    </p>
+    <p>
+      <strong>Acceptance criteria:</strong> The engagement is considered complete when (a) all six deliverables listed in Module Six are delivered to the Client's specified email address, and (b) the 60-minute walkthrough call has been held (or formally waived in writing by Client). The 14-day clarification window begins on the later of those two events.
+    </p>
+    <p style="font-size:0.9rem;color:var(--text-mid);margin-top:1.5rem;">
+      This Scope of Work is a companion document to the Proposal (Doc WE-AUD-001) and Deliverable Timeline (Doc WE-AUD-003). Acceptance of the Proposal constitutes acceptance of this Scope of Work.
+    </p>
+  </section>
+
+</main>
+
+<footer class="doc-footer">
+  <div class="doc-footer-inner">
+    <div>
+      <div class="doc-footer-logo">MARK<span>CMO</span></div>
+      <p>Mark Gabrielli · Fractional CMO &amp; COO · WETYR Corp · Cape Canaveral, FL · <a style="color:var(--blue-light);" href="mailto:mark@markcmo.com">mark@markcmo.com</a></p>
+    </div>
+    <div class="doc-footer-meta">
+      Doc WE-AUD-002 · v1.0<br/>
+      Confidential, Wendal Enterprise Inc.
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>

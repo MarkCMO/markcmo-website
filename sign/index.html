@@ -263,15 +263,27 @@ async function execute() {
   setStatus('Embedding signature…','warn');
   try {
     const sigUrl=getSig(), sigParts=sigUrl.split(',');
-    if(!sigParts[1]) throw new Error('Could not capture signature — try the Type tab.');
+    if(!sigParts[1]) throw new Error('Could not capture signature. Try the Type tab.');
     const execB64 = await embedSig(pdfBytes, sigParts[1]);
     setStatus('Sending to both parties…','warn');
-    const res = await fetch('/.netlify/functions/execute-document',{
+
+    // v2 tokens (Supabase-backed engagement docs) call execute-engagement-doc.
+    // Legacy v1 tokens call the original execute-document.
+    const isV2 = docData.v === 2 && docData.docUuid;
+    const endpoint = isV2 ? '/.netlify/functions/execute-engagement-doc' : '/.netlify/functions/execute-document';
+    const payload = isV2
+      ? { docUuid:docData.docUuid, engagementId:docData.engagementId,
+          docName:docData.docName, docId:docData.docId, filename:docData.filename,
+          fields:docData.fields, clientName:docData.clientName, clientEmail:docData.clientEmail,
+          executedPdfBase64:execB64, consultantSigBase64:sigParts[1],
+          testMode: !!docData.testMode }
+      : { token, docName:docData.docName, docId:docData.docId, filename:docData.filename,
+          fields:docData.fields, clientName:docData.clientName, clientEmail:docData.clientEmail,
+          executedPdfBase64:execB64 };
+
+    const res = await fetch(endpoint,{
       method:'POST', headers:{'Content-Type':'application/json'},
-      body:JSON.stringify({token,docName:docData.docName,docId:docData.docId,
-        filename:docData.filename,fields:docData.fields,
-        clientName:docData.clientName,clientEmail:docData.clientEmail,
-        executedPdfBase64:execB64}),
+      body:JSON.stringify(payload),
     });
     let result; try{result=await res.json();}catch(e){result={};}
     if(!res.ok) throw new Error(result.error||'Server error '+res.status);
@@ -281,7 +293,7 @@ async function execute() {
     show('done');
   } catch(e){
     setStatus('Error: '+(e.message||'Unknown error'),'error');
-    btn.disabled=false; btn.textContent='✍  Execute & Send to Both Parties';
+    btn.disabled=false; btn.textContent='Execute &amp; Send to Both Parties';
   }
 }
 
@@ -309,7 +321,7 @@ async function embedSig(bytes, sigB64) {
   // EXECUTED stamp on sig page (client's page for MSA where sigs span pages)
   const stampPage = pages[pages.length > mc.page ? (mc.page ? mc.page-2 : pages.length-1) : pages.length-1];
   (mc.page && mc.page > 1 ? pages[mc.page-2] : sigPage).drawText(
-    'EXECUTED — '+today, {x:63,y:48,size:7.5,font:bold,color:rgb(.18,.5,.25)});
+    'EXECUTED · '+today, {x:63,y:48,size:7.5,font:bold,color:rgb(.18,.5,.25)});
 
   const out=await pdfDoc.save();
   let b64=''; const arr=new Uint8Array(out);

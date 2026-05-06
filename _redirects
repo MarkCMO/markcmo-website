@@ -178,6 +178,13 @@ https://www.markcmo.com/* https://markcmo.com/:splat 301!
 /documents/onboarding          /documents/onboarding.html     200
 /documents/proposal            /documents/proposal.html       200
 
+# ─── Client case files (per-client VDR — confidential) ──────
+/documents/clients/wendal-enterprise           /documents/clients/wendal-enterprise/index.html         200
+/documents/clients/wendal-enterprise/proposal  /documents/clients/wendal-enterprise/proposal.html      200
+/documents/clients/wendal-enterprise/sow       /documents/clients/wendal-enterprise/scope-of-work.html 200
+/documents/clients/wendal-enterprise/timeline  /documents/clients/wendal-enterprise/timeline.html      200
+/documents/clients/wendal-enterprise/sign      /forms/wendal-enterprise-audit.html                     200
+
 # ─── Location hub ───────────────────────────────────────────
 /location                      /location/index.html           200
 

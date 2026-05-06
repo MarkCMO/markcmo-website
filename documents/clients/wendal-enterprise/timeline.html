@@ -1,0 +1,558 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>72-Hour Deliverable Timeline | Wendal Enterprise Inc. | MarkCMO</title>
+<meta name="description" content="Hour-by-hour deliverable timeline for the Business Discovery Audit prepared for Wendal Joseph, Wendal Enterprise Inc." />
+<meta name="robots" content="noindex, nofollow, noarchive, nosnippet, noimageindex" />
+<meta http-equiv="Cache-Control" content="no-store, no-cache, must-revalidate, private" />
+<link rel="preconnect" href="https://fonts.googleapis.com" crossorigin>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Barlow:wght@400;500;600;700;800&family=DM+Mono:wght@400;500&display=swap">
+<style>
+  :root{
+    --navy:#0A1628;--navy-mid:#0F2040;--navy-light:#162A4A;
+    --blue:#2563EB;--blue-hover:#1D4ED8;--blue-light:#3B82F6;--blue-pale:#EFF6FF;
+    --orange:#F97316;--orange-light:#FB923C;--orange-pale:#FFF7ED;
+    --green:#10B981;--green-pale:#ECFDF5;
+    --white:#FFFFFF;--off-white:#F8FAFC;--light:#F1F5F9;--border:#E2E8F0;
+    --text:#1E293B;--text-mid:#64748B;--text-light:#94A3B8;
+    --shadow-md:0 4px 16px rgba(15,32,64,0.08), 0 8px 32px rgba(15,32,64,0.06);
+  }
+  *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+  body{font-family:'Barlow',sans-serif;background:var(--off-white);color:var(--text);line-height:1.65;}
+  a{color:var(--blue);text-decoration:none;}
+  a:hover{color:var(--blue-hover);}
+
+  .doc-nav{position:sticky;top:0;z-index:100;background:var(--white);border-bottom:1px solid var(--border);padding:0.9rem 2rem;display:flex;justify-content:space-between;align-items:center;}
+  .doc-nav-logo{font-family:'Bebas Neue',sans-serif;font-size:1.25rem;letter-spacing:0.12em;color:var(--blue);}
+  .doc-nav-logo span{color:var(--text);}
+  .doc-nav-meta{font-family:'DM Mono',monospace;font-size:0.7rem;letter-spacing:0.15em;text-transform:uppercase;color:var(--text-light);}
+  .doc-nav-meta strong{color:var(--blue);font-weight:600;}
+
+  .doc-hero{background:linear-gradient(135deg,var(--navy) 0%,var(--navy-mid) 50%,var(--navy-light) 100%);color:var(--white);padding:4rem 2rem 3rem;position:relative;overflow:hidden;}
+  .doc-hero::before{content:'';position:absolute;top:0;left:0;right:0;height:4px;background:linear-gradient(90deg,var(--blue) 0%,var(--orange) 50%,var(--blue) 100%);}
+  .doc-hero-inner{max-width:1080px;margin:0 auto;}
+  .doc-hero-eyebrow{font-family:'DM Mono',monospace;font-size:0.72rem;letter-spacing:0.25em;text-transform:uppercase;color:var(--blue-light);margin-bottom:1.2rem;display:flex;align-items:center;gap:0.75rem;}
+  .doc-hero-eyebrow::before{content:'';width:2.5rem;height:1px;background:var(--blue-light);}
+  .doc-hero h1{font-family:'Bebas Neue',sans-serif;font-size:clamp(2.2rem,5vw,3.6rem);font-weight:400;letter-spacing:0.02em;line-height:1.05;color:var(--white);margin-bottom:1rem;}
+  .doc-hero h1 em{color:var(--orange-light);font-style:normal;}
+  .doc-hero-sub{font-size:1.05rem;color:rgba(248,250,252,0.78);max-width:680px;line-height:1.55;}
+
+  /* Clock summary strip */
+  .clock-summary{
+    max-width:1080px;margin:-1.5rem auto 0;padding:0 2rem;position:relative;z-index:5;
+  }
+  .clock-card{
+    background:var(--white);border:1px solid var(--border);border-radius:16px;
+    padding:1.75rem 2rem;box-shadow:var(--shadow-md);
+    display:grid;grid-template-columns:repeat(4,1fr);gap:1rem;
+  }
+  @media(max-width:760px){.clock-card{grid-template-columns:1fr 1fr;}}
+  .clock-card .item{padding:0 1rem;border-right:1px solid var(--border);}
+  .clock-card .item:last-child{border-right:none;}
+  @media(max-width:760px){.clock-card .item:nth-child(2){border-right:none;}}
+  .clock-card .lbl{font-family:'DM Mono',monospace;font-size:0.62rem;letter-spacing:0.2em;text-transform:uppercase;color:var(--text-light);margin-bottom:0.4rem;}
+  .clock-card .val{font-family:'Bebas Neue',sans-serif;font-size:1.6rem;color:var(--navy);letter-spacing:0.04em;line-height:1.1;}
+  .clock-card .val small{font-family:'Barlow',sans-serif;display:block;font-size:0.78rem;color:var(--text-mid);font-weight:500;letter-spacing:0;text-transform:none;margin-top:0.2rem;}
+
+  .doc-body{max-width:1080px;margin:0 auto;padding:3.5rem 2rem;}
+  .section{margin-bottom:3.5rem;}
+  .section-eyebrow{font-family:'DM Mono',monospace;font-size:0.7rem;letter-spacing:0.2em;text-transform:uppercase;color:var(--blue);margin-bottom:0.85rem;display:flex;align-items:center;gap:0.7rem;}
+  .section-eyebrow::after{content:'';height:1px;flex:1;background:linear-gradient(90deg,var(--blue) 0%,transparent 100%);}
+  h2{font-family:'Bebas Neue',sans-serif;font-size:clamp(1.7rem,3.2vw,2.3rem);font-weight:400;letter-spacing:0.02em;color:var(--navy);margin-bottom:1.25rem;line-height:1.15;}
+  h2 span{color:var(--blue);}
+  p{margin-bottom:1rem;color:var(--text);font-size:0.98rem;}
+  p strong{color:var(--navy);font-weight:700;}
+
+  /* Phase header (Hour 0-12 etc.) */
+  .phase{
+    background:var(--white);border:1px solid var(--border);
+    border-radius:16px;overflow:hidden;
+    margin-bottom:1.75rem;box-shadow:var(--shadow-md);
+  }
+  .phase-head{
+    display:grid;grid-template-columns:auto 1fr auto;gap:1.5rem;align-items:center;
+    padding:1.5rem 2rem;
+    background:linear-gradient(135deg,var(--navy) 0%,var(--navy-mid) 100%);
+    color:var(--white);
+    border-bottom:3px solid var(--blue);
+  }
+  @media(max-width:720px){.phase-head{grid-template-columns:1fr;text-align:left;}}
+  .phase-head .hour-block{
+    font-family:'Bebas Neue',sans-serif;font-size:2.6rem;line-height:1;
+    color:var(--orange-light);letter-spacing:0.04em;
+    border-right:1px solid rgba(255,255,255,0.15);padding-right:1.5rem;
+  }
+  @media(max-width:720px){.phase-head .hour-block{border-right:none;border-bottom:1px solid rgba(255,255,255,0.15);padding:0 0 0.75rem;margin-bottom:0.5rem;}}
+  .phase-head .hour-block small{display:block;font-family:'DM Mono',monospace;font-size:0.65rem;color:var(--blue-light);letter-spacing:0.2em;text-transform:uppercase;margin-top:0.3rem;font-weight:500;}
+  .phase-head .title h3{font-family:'Bebas Neue',sans-serif;font-size:1.7rem;letter-spacing:0.04em;color:var(--white);margin:0 0 0.2rem;font-weight:400;}
+  .phase-head .title p{margin:0;color:rgba(255,255,255,0.7);font-size:0.92rem;}
+  .phase-head .badge{
+    font-family:'DM Mono',monospace;font-size:0.7rem;letter-spacing:0.15em;
+    background:rgba(37,99,235,0.2);border:1px solid rgba(59,130,246,0.4);
+    color:var(--blue-light);padding:0.4rem 0.85rem;border-radius:999px;
+    text-transform:uppercase;white-space:nowrap;
+  }
+
+  .phase-body{padding:1.75rem 2rem;}
+  .milestone{
+    display:grid;grid-template-columns:auto 1fr;gap:1.25rem;
+    padding:1.1rem 0;border-bottom:1px dashed var(--border);
+    align-items:flex-start;
+  }
+  .milestone:last-child{border-bottom:none;}
+  .milestone .hour-tag{
+    font-family:'DM Mono',monospace;font-size:0.72rem;letter-spacing:0.1em;
+    color:var(--blue);background:var(--blue-pale);
+    padding:0.3rem 0.7rem;border-radius:6px;
+    white-space:nowrap;font-weight:600;
+    min-width:5.5rem;text-align:center;
+  }
+  .milestone .body strong{display:block;font-size:1rem;color:var(--navy);margin-bottom:0.3rem;}
+  .milestone .body p{font-size:0.9rem;margin:0;color:var(--text-mid);line-height:1.55;}
+  .milestone .body .who{
+    font-family:'DM Mono',monospace;font-size:0.62rem;letter-spacing:0.18em;text-transform:uppercase;
+    margin-top:0.35rem;display:inline-block;
+  }
+  .milestone .body .who.client{color:var(--orange);}
+  .milestone .body .who.consultant{color:var(--blue);}
+  .milestone .body .who.both{color:var(--green);}
+
+  /* Final delivery card */
+  .final-card{
+    background:linear-gradient(135deg,#065F46 0%,#10B981 100%);
+    color:var(--white);
+    border-radius:18px;padding:2.5rem;
+    margin:2.5rem 0;box-shadow:var(--shadow-md);
+    position:relative;overflow:hidden;
+  }
+  .final-card::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;background:linear-gradient(90deg,var(--orange),var(--blue),var(--orange));}
+  .final-card .lbl{font-family:'DM Mono',monospace;font-size:0.7rem;letter-spacing:0.2em;text-transform:uppercase;color:rgba(255,255,255,0.75);margin-bottom:0.6rem;}
+  .final-card h2{font-family:'Bebas Neue',sans-serif;color:var(--white);font-size:2.4rem;margin-bottom:0.75rem;}
+  .final-card p{color:rgba(255,255,255,0.85);font-size:1rem;margin-bottom:0;}
+  .final-list{list-style:none;display:grid;grid-template-columns:1fr 1fr;gap:0.6rem 1.5rem;margin-top:1.25rem;}
+  @media(max-width:600px){.final-list{grid-template-columns:1fr;}}
+  .final-list li{font-size:0.94rem;color:rgba(255,255,255,0.92);display:flex;gap:0.5rem;align-items:flex-start;}
+  .final-list li::before{content:'✓';color:var(--white);font-weight:800;}
+
+  /* Risk panel */
+  .risk-panel{
+    background:var(--orange-pale);
+    border:1px solid rgba(249,115,22,0.3);
+    border-left:4px solid var(--orange);
+    border-radius:14px;padding:1.5rem 1.75rem;margin:2rem 0;
+  }
+  .risk-panel .lbl{font-family:'DM Mono',monospace;font-size:0.7rem;letter-spacing:0.2em;text-transform:uppercase;color:var(--orange);font-weight:600;margin-bottom:0.6rem;}
+  .risk-panel h3{font-family:'Barlow',sans-serif;font-size:1.1rem;font-weight:700;color:var(--navy);margin-bottom:0.5rem;}
+  .risk-panel ul{padding-left:1.3rem;margin:0;}
+  .risk-panel ul li{font-size:0.92rem;color:var(--text);margin-bottom:0.35rem;line-height:1.55;}
+  .risk-panel ul li::marker{color:var(--orange);}
+
+  /* Legend */
+  .legend{
+    display:flex;flex-wrap:wrap;gap:1.5rem;
+    background:var(--white);border:1px solid var(--border);
+    border-radius:12px;padding:1rem 1.5rem;margin:1.25rem 0 2rem;
+    font-family:'DM Mono',monospace;font-size:0.7rem;letter-spacing:0.1em;
+  }
+  .legend .item{display:flex;align-items:center;gap:0.5rem;}
+  .legend .dot{width:10px;height:10px;border-radius:50%;}
+  .legend .dot.blue{background:var(--blue);}
+  .legend .dot.orange{background:var(--orange);}
+  .legend .dot.green{background:var(--green);}
+  .legend .lbl{color:var(--text-mid);text-transform:uppercase;}
+
+  footer.doc-footer{background:var(--navy);color:rgba(255,255,255,0.6);padding:2.5rem 2rem;border-top:4px solid var(--blue);}
+  .doc-footer-inner{max-width:1080px;margin:0 auto;display:grid;grid-template-columns:1fr auto;gap:2rem;align-items:center;}
+  @media(max-width:600px){.doc-footer-inner{grid-template-columns:1fr;}}
+  .doc-footer-logo{font-family:'Bebas Neue',sans-serif;font-size:1.4rem;letter-spacing:0.12em;color:var(--white);}
+  .doc-footer-logo span{color:var(--blue-light);}
+  .doc-footer p{font-size:0.82rem;line-height:1.6;margin:0.4rem 0 0;color:rgba(255,255,255,0.55);}
+  .doc-footer-meta{font-family:'DM Mono',monospace;font-size:0.68rem;letter-spacing:0.15em;text-transform:uppercase;color:rgba(255,255,255,0.4);text-align:right;}
+  @media(max-width:600px){.doc-footer-meta{text-align:left;}}
+
+  @media print{
+    .doc-nav{position:static;}
+    body{background:white;}
+    .phase,.final-card,.risk-panel,.clock-card{break-inside:avoid;}
+  }
+</style>
+</head>
+<body>
+
+<nav class="doc-nav">
+  <div class="doc-nav-logo">MARK<span>CMO</span></div>
+  <div class="doc-nav-meta">Doc <strong>WE-AUD-003</strong> · 72-Hour Timeline · Confidential</div>
+</nav>
+
+<header class="doc-hero">
+  <div class="doc-hero-inner">
+    <div class="doc-hero-eyebrow">Deliverable Timeline · Companion to Doc WE-AUD-001 + 002</div>
+    <h1>72 Hours. <em>Hour-By-Hour.</em></h1>
+    <p class="doc-hero-sub">
+      The exact schedule from "payment cleared" to "deliverables in your inbox + walkthrough call complete." Four phases, sixteen milestones, two parties, one clock. Designed so you always know what's happening, what's next, and what's needed from your side.
+    </p>
+  </div>
+</header>
+
+<div class="clock-summary">
+  <div class="clock-card">
+    <div class="item">
+      <div class="lbl">Total Window</div>
+      <div class="val">72 HRS<small>3 calendar days</small></div>
+    </div>
+    <div class="item">
+      <div class="lbl">Clock Starts</div>
+      <div class="val">HOUR 0<small>Payment + intake received</small></div>
+    </div>
+    <div class="item">
+      <div class="lbl">Final Hand-Off</div>
+      <div class="val">HOUR 72<small>Deliverables + walkthrough done</small></div>
+    </div>
+    <div class="item">
+      <div class="lbl">Post-Delivery Window</div>
+      <div class="val">14 DAYS<small>Email Q&amp;A clarification</small></div>
+    </div>
+  </div>
+</div>
+
+<main class="doc-body">
+
+  <!-- Legend -->
+  <div class="legend">
+    <div class="item"><div class="dot blue"></div><div class="lbl">Consultant Activity</div></div>
+    <div class="item"><div class="dot orange"></div><div class="lbl">Client Action Required</div></div>
+    <div class="item"><div class="dot green"></div><div class="lbl">Joint / Both Parties</div></div>
+  </div>
+
+  <!-- INTRO -->
+  <section class="section">
+    <div class="section-eyebrow">Reading This Document</div>
+    <h2>How The Clock <span>Actually Works.</span></h2>
+    <p>
+      The 72-hour clock starts at <strong>Hour 0</strong>, defined as the moment <strong>both</strong> of the following are true: (1) the $2,500 USD Square invoice is paid and funds have cleared, and (2) the Client Intake Worksheet has been returned with required information. If those happen at different times, the clock starts at the later of the two. From Hour 0, the engagement runs across four phases, <em>Intake</em>, <em>Diagnostic</em>, <em>Build</em>, and <em>Deliver</em>, each with explicit milestones and explicit owners.
+    </p>
+    <p>
+      <strong>If a client-side action is delayed</strong>, the timeline extends 1:1 by the duration of the delay. Consultant-side delays do not extend the timeline, they are absorbed within the fixed fee.
+    </p>
+  </section>
+
+  <!-- PHASE 1 -->
+  <section class="section">
+    <div class="section-eyebrow">Phase One</div>
+    <div class="phase">
+      <div class="phase-head">
+        <div class="hour-block">0 to 12<small>Hours · Day 1 AM</small></div>
+        <div class="title">
+          <h3>INTAKE &amp; KICKOFF</h3>
+          <p>Get aligned, get access, get the data flowing. No analysis happens until intake is clean.</p>
+        </div>
+        <div class="badge">Phase 1 of 4</div>
+      </div>
+      <div class="phase-body">
+
+        <div class="milestone">
+          <div class="hour-tag">HOUR 0</div>
+          <div class="body">
+            <strong>Payment cleared + intake worksheet returned</strong>
+            <p>Square invoice marked paid; Client Intake Worksheet received. Engagement clock officially begins. Confirmation email sent to Wendal.</p>
+            <span class="who both">● Both parties</span>
+          </div>
+        </div>
+
+        <div class="milestone">
+          <div class="hour-tag">HOUR 0 to 2</div>
+          <div class="body">
+            <strong>Engagement workspace provisioned</strong>
+            <p>Secure shared folder created (Google Drive or Dropbox). Project tracker stood up. Calendar holds blocked across the 72-hour window. Mutual NDA executed if requested.</p>
+            <span class="who consultant">● Consultant</span>
+          </div>
+        </div>
+
+        <div class="milestone">
+          <div class="hour-tag">HOUR 2 to 4</div>
+          <div class="body">
+            <strong>System-access provisioning</strong>
+            <p>Client provides read-only access (or scheduled screenshare slots) to: booking platform, OTA dashboards (GetYourGuide, Viator, TripAdvisor Experiences), Google Analytics, Meta Business Suite, primary email/CRM, and payment processor.</p>
+            <span class="who client">● Client action</span>
+          </div>
+        </div>
+
+        <div class="milestone">
+          <div class="hour-tag">HOUR 4 to 6</div>
+          <div class="body">
+            <strong>30-minute kickoff call</strong>
+            <p>Live call with Wendal. Confirm priorities, confirm primary pain points, confirm the West Palm Beach + Atlanta expansion narrative, confirm point-of-contact for any questions during analysis. Recorded with consent.</p>
+            <span class="who both">● Both parties</span>
+          </div>
+        </div>
+
+        <div class="milestone">
+          <div class="hour-tag">HOUR 6 to 12</div>
+          <div class="body">
+            <strong>Initial reconnaissance</strong>
+            <p>Surface scan of the public footprint: website audit, OTA listings review, TripAdvisor review-pattern read, Google Business Profile, Instagram, Facebook, TikTok. Competitor public-data pull begins.</p>
+            <span class="who consultant">● Consultant</span>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- PHASE 2 -->
+  <section class="section">
+    <div class="section-eyebrow">Phase Two</div>
+    <div class="phase">
+      <div class="phase-head">
+        <div class="hour-block">12 to 36<small>Hours · Day 1 PM → Day 2</small></div>
+        <div class="title">
+          <h3>DIAGNOSTIC</h3>
+          <p>The longest, deepest phase. Workflow mapping, tech-stack inventory, and the bottleneck/pain-point register get built here.</p>
+        </div>
+        <div class="badge">Phase 2 of 4</div>
+      </div>
+      <div class="phase-body">
+
+        <div class="milestone">
+          <div class="hour-tag">HOUR 12 to 18</div>
+          <div class="body">
+            <strong>Workflow mapping, booking → on-site execution</strong>
+            <p>Document customer journey and operational handoffs end-to-end. Owner-dependency tagging on every step. First draft of the visual current-state workflow diagram.</p>
+            <span class="who consultant">● Consultant</span>
+          </div>
+        </div>
+
+        <div class="milestone">
+          <div class="hour-tag">HOUR 18 to 24</div>
+          <div class="body">
+            <strong>Tech-stack inventory build</strong>
+            <p>Every tool, vendor, and account documented: vendor, plan/tier, monthly cost, internal owner, integrations, single-point-of-failure rating.</p>
+            <span class="who consultant">● Consultant</span>
+          </div>
+        </div>
+
+        <div class="milestone">
+          <div class="hour-tag">HOUR 24 to 28</div>
+          <div class="body">
+            <strong>OTA + review-platform deep-read</strong>
+            <p>Quantitative read of GetYourGuide, Viator, and TripAdvisor data. Direct vs. OTA-booking ratio. Praise patterns (Oscar, Vixon, photo service, transport). Complaint patterns (rider-assessment, refund disputes, safety incidents), with remediation recommendations.</p>
+            <span class="who consultant">● Consultant</span>
+          </div>
+        </div>
+
+        <div class="milestone">
+          <div class="hour-tag">HOUR 28 to 32</div>
+          <div class="body">
+            <strong>Bottleneck &amp; pain-point register</strong>
+            <p>Every issue identified across workflow, systems, and owner-dependency lenses. Each gets: evidence anchor, severity rating (Critical / High / Medium / Low), business impact, and a candidate remediation.</p>
+            <span class="who consultant">● Consultant</span>
+          </div>
+        </div>
+
+        <div class="milestone">
+          <div class="hour-tag">HOUR 32 to 36</div>
+          <div class="body">
+            <strong>Owner clarification round (async)</strong>
+            <p>Up to 8 written questions sent to Wendal for clarification on ambiguous items. Client expected to respond within 4 business hours. Continues in parallel with Phase 3 if response is delayed.</p>
+            <span class="who both">● Both parties</span>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- PHASE 3 -->
+  <section class="section">
+    <div class="section-eyebrow">Phase Three</div>
+    <div class="phase">
+      <div class="phase-head">
+        <div class="hour-block">36 to 60<small>Hours · Day 2 → Day 3 AM</small></div>
+        <div class="title">
+          <h3>BUILD</h3>
+          <p>Competitive benchmark, US market analysis, and the four-horizon roadmap get constructed and stress-tested.</p>
+        </div>
+        <div class="badge">Phase 3 of 4</div>
+      </div>
+      <div class="phase-body">
+
+        <div class="milestone">
+          <div class="hour-tag">HOUR 36 to 42</div>
+          <div class="body">
+            <strong>TC competitive benchmark constructed</strong>
+            <p>Side-by-side analysis: Hydro Charters, Mako Watersports, Caribbean Cruisin', Five Cays Watersports, Floe Lux, TC Flyboard. Pricing, durations, OTA presence, ratings, review volume, brand positioning. Where Unique Tours wins; where it loses.</p>
+            <span class="who consultant">● Consultant</span>
+          </div>
+        </div>
+
+        <div class="milestone">
+          <div class="hour-tag">HOUR 42 to 48</div>
+          <div class="body">
+            <strong>US market-entry analysis (WPB + ATL)</strong>
+            <p>West Palm Beach competitive set (Get Wet Watersports, Beach Water Sports, Visit Palm Beach, Riviera Beach Marina Village, Sak Pase Rental, etc.) and Atlanta funnel logic (ATL→PLS direct lift, feeder-city economics). White-space identification. Pre-trip booking funnel concept.</p>
+            <span class="who consultant">● Consultant</span>
+          </div>
+        </div>
+
+        <div class="milestone">
+          <div class="hour-tag">HOUR 48 to 54</div>
+          <div class="body">
+            <strong>30 / 90 / 6mo / 12mo roadmap construction</strong>
+            <p>Sequenced action plan across four horizons. Each item: owner, cost band, time band, dependencies, definition of done, risk-if-skipped. WPB launch readiness lives at the 6-month horizon; Atlanta + multi-location operating model lives at 12.</p>
+            <span class="who consultant">● Consultant</span>
+          </div>
+        </div>
+
+        <div class="milestone">
+          <div class="hour-tag">HOUR 54 to 58</div>
+          <div class="body">
+            <strong>Deliverable drafting</strong>
+            <p>Executive Findings Brief drafted (1-page). Full audit report assembled (25 to 35 pages). Workflow + systems map finalized. Competitive analysis formatted. Roadmap formatted.</p>
+            <span class="who consultant">● Consultant</span>
+          </div>
+        </div>
+
+        <div class="milestone">
+          <div class="hour-tag">HOUR 58 to 60</div>
+          <div class="body">
+            <strong>Client confirms walkthrough call slot</strong>
+            <p>Wendal selects a 60-minute window inside Hour 60 to 72 for the live walkthrough call. Calendar invite issued.</p>
+            <span class="who client">● Client action</span>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- PHASE 4 -->
+  <section class="section">
+    <div class="section-eyebrow">Phase Four</div>
+    <div class="phase">
+      <div class="phase-head">
+        <div class="hour-block">60 to 72<small>Hours · Day 3</small></div>
+        <div class="title">
+          <h3>DELIVER</h3>
+          <p>Final QA, package delivery, walkthrough call, and engagement close.</p>
+        </div>
+        <div class="badge">Phase 4 of 4</div>
+      </div>
+      <div class="phase-body">
+
+        <div class="milestone">
+          <div class="hour-tag">HOUR 60 to 64</div>
+          <div class="body">
+            <strong>Final QA pass</strong>
+            <p>Full read-through of every document. Cross-reference between deliverables (does the executive brief match the full report? does the roadmap match the bottleneck register?). Spelling, formatting, branding consistency. PDF rendering check.</p>
+            <span class="who consultant">● Consultant</span>
+          </div>
+        </div>
+
+        <div class="milestone">
+          <div class="hour-tag">HOUR 64 to 66</div>
+          <div class="body">
+            <strong>Deliverable package sent</strong>
+            <p>All six deliverables delivered to Wendal's email and mirrored in the secure shared folder. Delivery email includes index, file checksums, and walkthrough call link.</p>
+            <span class="who consultant">● Consultant</span>
+          </div>
+        </div>
+
+        <div class="milestone">
+          <div class="hour-tag">HOUR 66 to 72</div>
+          <div class="body">
+            <strong>60-minute walkthrough call</strong>
+            <p>Live Zoom or Google Meet. Wendal + invited team members. Findings reviewed in the order they appear in the executive brief. Q&amp;A. Action commitments captured. Call recorded; recording delivered within 1 hour of call end.</p>
+            <span class="who both">● Both parties</span>
+          </div>
+        </div>
+
+        <div class="milestone">
+          <div class="hour-tag">HOUR 72</div>
+          <div class="body">
+            <strong>Engagement closed · 14-day clarification window opens</strong>
+            <p>Engagement formally complete. 14-day post-delivery window starts: Wendal can email clarification questions on the deliverables and receive responses within 2 business days. No new analysis is performed in this window, clarification only.</p>
+            <span class="who both">● Both parties</span>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- FINAL CARD -->
+  <section class="section">
+    <div class="final-card">
+      <div class="lbl">At Hour 72, You Walk Away With</div>
+      <h2>Six Deliverables. One Walkthrough. Zero Ambiguity.</h2>
+      <p>You're holding everything you need to make confident, sequenced decisions about the next 12 months, including whether West Palm Beach and Atlanta are go, no-go, or "go, but in a different order."</p>
+      <ul class="final-list">
+        <li>Executive Findings Brief (1-page PDF)</li>
+        <li>Business Discovery Audit Report (25 to 35-page PDF)</li>
+        <li>Workflow &amp; Systems Map (PNG + editable)</li>
+        <li>Competitive &amp; Market Analysis (8 to 12-page PDF)</li>
+        <li>30 / 90 / 6mo / 12mo Roadmap (10 to 14-page PDF)</li>
+        <li>Walkthrough call recording (~60 min)</li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- RISK PANEL -->
+  <section class="section">
+    <div class="section-eyebrow">Timeline Risks &amp; What Happens</div>
+    <h2>What Could <span>Slow This Down.</span></h2>
+
+    <div class="risk-panel">
+      <div class="lbl">Risk · Client-Side Delay</div>
+      <h3>If intake or system access is late</h3>
+      <ul>
+        <li>Hour 0 doesn't start until both payment and intake are received</li>
+        <li>If system access is delayed past Hour 4, the entire timeline shifts 1:1 by the duration of the delay</li>
+        <li>Consultant will notify Client in writing of any timeline shift within 1 business hour of the delay being known</li>
+      </ul>
+    </div>
+
+    <div class="risk-panel">
+      <div class="lbl">Risk · Mid-Engagement Scope Change</div>
+      <h3>If new questions or asks come up</h3>
+      <ul>
+        <li>Items that fit inside the existing six modules are absorbed without scope change</li>
+        <li>Items outside the existing scope (e.g., financial modeling, full feasibility study, brand redesign) require a written change order</li>
+        <li>Change orders may extend the 72-hour window or add fixed fees; both parties must agree in writing</li>
+      </ul>
+    </div>
+
+    <div class="risk-panel">
+      <div class="lbl">Risk · Walkthrough Call Conflict</div>
+      <h3>If Wendal can't take the call inside Hour 60 to 72</h3>
+      <ul>
+        <li>Deliverables are still sent at Hour 64 to 66 as planned</li>
+        <li>Walkthrough call is rescheduled to a mutually-available time within 5 business days</li>
+        <li>Engagement is considered delivered at the time of file delivery; the walkthrough is considered a separately-scheduled event</li>
+      </ul>
+    </div>
+  </section>
+
+  <p style="font-size:0.9rem;color:var(--text-mid);margin-top:1.5rem;text-align:center;">
+    This Deliverable Timeline is a companion document to the Proposal (Doc WE-AUD-001) and Scope of Work (Doc WE-AUD-002). Acceptance of the Proposal constitutes acceptance of this Timeline.
+  </p>
+
+</main>
+
+<footer class="doc-footer">
+  <div class="doc-footer-inner">
+    <div>
+      <div class="doc-footer-logo">MARK<span>CMO</span></div>
+      <p>Mark Gabrielli · Fractional CMO &amp; COO · WETYR Corp · Cape Canaveral, FL · <a style="color:var(--blue-light);" href="mailto:mark@markcmo.com">mark@markcmo.com</a></p>
+    </div>
+    <div class="doc-footer-meta">
+      Doc WE-AUD-003 · v1.0<br/>
+      Confidential, Wendal Enterprise Inc.
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>

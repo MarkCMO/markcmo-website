@@ -1,54 +1,65 @@
-// WETYR Studios - Script Dissector
-// Takes normalized script text, returns a full production breakdown (scenes,
-// characters, elements, locations, production flags) via Gemini 2.5 Pro.
+// WETYR Studios - Script Dissector (chunked, parallel)
+//
+// For feature-length scripts (100k+ chars), one Gemini call blows past
+// Netlify's 26s function timeout. Strategy: split the script at scene
+// boundaries into ~35k-char chunks, dissect each chunk in parallel, then
+// merge scenes/characters/locations/flags in JS.
 //
 // POST { scriptText: string, title?: string, format?: string }
-// -> { ok: true, breakdown: {...}, usage: {...}, ms: number }
+// -> { ok: true, breakdown: {...}, chunks: number, ms: number }
 //
-// Env: GEMINI_API_KEY
+// Env: GEMINI_API_KEY, GEMINI_MODEL (optional, defaults to gemini-2.5-flash)
 
 const MODEL = process.env.GEMINI_MODEL || 'gemini-2.5-flash';
 const API_URL = `https://generativelanguage.googleapis.com/v1beta/models/${MODEL}:generateContent`;
-const MAX_OUTPUT_TOKENS = 32000;
+const CHUNK_CHARS = 60000;
+const MAX_OUTPUT_TOKENS = 8192;
+const MAX_CONCURRENCY = 3;
+const RETRY_MS = 2500;
 
-const SYSTEM_PROMPT = `You are the WETYR Studios Script Breakdown Engine - a veteran 1st Assistant Director with 25 years of feature experience. You break down screenplays into production-ready data like Movie Magic / StudioBinder, with the judgment of an experienced AD.
+const SYSTEM_META = `You are the WETYR Studios Script Breakdown Engine - a veteran 1st AD with 25 years of feature experience.
 
-TASK
-Given a screenplay in any text format (standard US, Fountain, FDX-exported), return a COMPLETE structured JSON breakdown matching the schema below.
+You are being given the FULL TEXT of a screenplay. Return ONLY high-level metadata as JSON. Do NOT enumerate scenes.
 
-RULES
-1. Tag every element that appears on screen. A gun held by a character goes in BOTH weapons AND props.
-2. Page count in eighths. 1 page = 8/8. pageCount is decimal; eighths is integer count of 1/8 units.
-3. Scene numbers: use the script's numbers if present; otherwise sequential starting at 1.
-4. INT/EXT and time-of-day come from the slugline. Infer if ambiguous.
-5. Characters: every speaking role + named non-speaking. minor:true if under 18. sceneCount = scenes they appear in. dialogueLineCount = dialogue blocks.
-6. Locations: consolidate equivalent spaces (JOHN'S KITCHEN == KITCHEN - JOHN'S HOUSE). Track totalEighths per location.
-7. Production flags: set TRUE if ANY scene triggers it - drives insurance/union/safety.
-8. Return ONLY valid JSON. No markdown fences, no preface, no trailing text.
-9. Exhaustive but not speculative - don't invent props that aren't mentioned or clearly implied.
-10. Flag high-liability items (weapons, stunts, minors, firearms, animals, vehicle action) aggressively - missed flag = missed insurance rider.
-
-JUDGMENT CALLS
-- "Room is on fire" -> sfx:["controlled fire"], specialEquipment:["fire safety officer","extinguishers"], hasStunts:true if talent near it.
-- "She drives fast" -> vehicles:["hero car"], stunts:["driving"], hasVehicleAction:true.
-- Rain/snow/fog at scale -> sfx (practical rig) unless scope implies VFX-only.
-- Phone screens shown -> props:["cell phone"], vfx:["phone screen inserts"].
-- Blood/gore -> makeup:["blood rig","prosthetic wound"] + sfx if pumping.
-
-JSON SCHEMA (return exactly this shape):
+Return JSON matching:
 {
   "title": string,
-  "logline": string,
+  "logline": string (1-2 sentences),
   "genre": string,
   "format": "feature"|"short"|"pilot"|"episode"|"commercial"|"music_video",
-  "pageCount": number,
   "estimatedRuntimeMinutes": number,
+  "productionFlags": {
+    "hasMinors": bool, "hasStunts": bool, "hasFirearms": bool, "hasAnimals": bool,
+    "hasVfx": bool, "hasNightWork": bool, "hasWaterWork": bool,
+    "hasVehicleAction": bool, "hasIntimacy": bool,
+    "unionConsiderations": [string]
+  }
+}
+No prose. JSON only.`;
+
+const SYSTEM_CHUNK = `You are a 1st AD breaking down a CHUNK of a larger screenplay.
+
+Return JSON with ONLY scenes, characters, and locations found in THIS chunk. Do NOT produce title/logline/format - those are handled separately.
+
+RULES
+1. Tag every element: props, wardrobe, vehicles, weapons, animals, sfx, vfx, stunts, specialEquipment.
+2. Page count: 1 page = 8/8. pageCount is decimal; eighths is integer 1/8 units.
+3. Scene number: use the script's numbers if present; otherwise use the heading itself as the number.
+4. Characters: every speaking role + named non-speaking. minor:true if under 18. sceneCount/dialogueLineCount = count WITHIN THIS CHUNK only.
+5. Locations: consolidate equivalent spaces. totalEighths = eighths WITHIN THIS CHUNK only.
+6. Flag high-liability items aggressively (weapons, stunts, minors, firearms, animals, vehicle action, water).
+7. Return ONLY valid JSON. No prose, no fences.
+
+OUTPUT SCHEMA:
+{
   "scenes": [{
-    "number": string, "heading": string, "intExt": "INT"|"EXT"|"INT/EXT"|"EXT/INT",
+    "number": string, "heading": string,
+    "intExt": "INT"|"EXT"|"INT/EXT"|"EXT/INT",
     "location": string, "subLocation": string,
     "timeOfDay": "DAY"|"NIGHT"|"DAWN"|"DUSK"|"CONTINUOUS"|"LATER"|"MORNING"|"EVENING"|"MAGIC HOUR",
     "pageCount": number, "eighths": number, "synopsis": string,
-    "characters": [string], "extras": {"count": number, "description": string},
+    "characters": [string],
+    "extras": {"count": number, "description": string},
     "props": [string], "wardrobe": [string], "makeup": [string], "setDressing": [string],
     "vehicles": [string], "animals": [string], "weapons": [string],
     "sfx": [string], "vfx": [string], "stunts": [string],
@@ -57,7 +68,7 @@ JSON SCHEMA (return exactly this shape):
   }],
   "characters": [{
     "name": string, "type": "lead"|"supporting"|"day_player"|"extra"|"voice",
-    "age": string, "gender": string, "description": string, "arc": string,
+    "age": string, "gender": string, "description": string,
     "sceneCount": number, "dialogueLineCount": number,
     "firstScene": string, "lastScene": string,
     "specialSkillsRequired": [string], "minor": bool
@@ -67,24 +78,14 @@ JSON SCHEMA (return exactly this shape):
     "intExt": "INT"|"EXT"|"BOTH", "scenes": [string],
     "totalEighths": number, "complexity": "low"|"medium"|"high",
     "permitRequirements": [string]
-  }],
-  "productionFlags": {
-    "hasMinors": bool, "hasStunts": bool, "hasFirearms": bool, "hasAnimals": bool,
-    "hasVfx": bool, "hasNightWork": bool, "hasWaterWork": bool,
-    "hasVehicleAction": bool, "hasIntimacy": bool,
-    "unionConsiderations": [string]
-  }
+  }]
 }`;
 
 exports.handler = async (event) => {
   const t0 = Date.now();
 
-  if (event.httpMethod === 'OPTIONS') {
-    return { statusCode: 204, headers: cors(), body: '' };
-  }
-  if (event.httpMethod !== 'POST') {
-    return json(405, { ok: false, error: 'POST only' });
-  }
+  if (event.httpMethod === 'OPTIONS') return { statusCode: 204, headers: cors(), body: '' };
+  if (event.httpMethod !== 'POST') return json(405, { ok: false, error: 'POST only' });
 
   const key = process.env.GEMINI_API_KEY;
   if (!key) return json(500, { ok: false, error: 'GEMINI_API_KEY missing' });
@@ -102,47 +103,31 @@ exports.handler = async (event) => {
   const userTitle = body.title || 'Untitled';
   const userFormat = body.format || 'feature';
 
-  const userMsg =
-    `Break down this screenplay. Title hint: "${userTitle}". Format hint: ${userFormat}.\n\n` +
-    `=== SCRIPT START ===\n${scriptText}\n=== SCRIPT END ===`;
-
   try {
-    const resp = await fetch(API_URL + '?key=' + encodeURIComponent(key), {
-      method: 'POST',
-      headers: { 'content-type': 'application/json' },
-      body: JSON.stringify({
-        systemInstruction: { parts: [{ text: SYSTEM_PROMPT }] },
-        contents: [{ role: 'user', parts: [{ text: userMsg }] }],
-        generationConfig: {
-          responseMimeType: 'application/json',
-          temperature: 0.2,
-          maxOutputTokens: MAX_OUTPUT_TOKENS
-        }
-      })
-    });
+    const chunks = splitScript(scriptText, CHUNK_CHARS);
 
-    if (!resp.ok) {
-      const errText = await resp.text();
-      return json(resp.status, { ok: false, error: 'Gemini API ' + resp.status, detail: errText.slice(0, 600) });
-    }
+    // For short scripts: skip chunking overhead, run metadata + single chunk in parallel.
+    // For longer scripts: metadata gets script-summary-level text, chunks run in parallel.
+    const metaInput = chunks.length === 1
+      ? scriptText
+      : summariseForMeta(scriptText);
 
-    const data = await resp.json();
-    const raw = (data.candidates?.[0]?.content?.parts || []).map(p => p.text || '').join('');
-    if (!raw) {
-      return json(502, { ok: false, error: 'Empty response from Gemini', detail: JSON.stringify(data).slice(0, 600) });
-    }
+    const tasks = [
+      () => callGemini(key, SYSTEM_META, `Title hint: "${userTitle}". Format hint: ${userFormat}.\n\n${metaInput}`),
+      ...chunks.map((c, i) => () => callGemini(key, SYSTEM_CHUNK, `Chunk ${i + 1} of ${chunks.length}:\n\n${c}`))
+    ];
+    const results = await runConcurrent(tasks, MAX_CONCURRENCY);
+    const [metaResult, ...chunkResults] = results;
 
-    let breakdown;
-    try {
-      breakdown = JSON.parse(extractJson(raw));
-    } catch (e) {
-      return json(502, { ok: false, error: 'Model returned non-JSON', preview: raw.slice(0, 800) });
-    }
+    const meta = safeParse(metaResult.text) || {};
+    const chunkBreakdowns = chunkResults.map(r => safeParse(r.text) || { scenes: [], characters: [], locations: [] });
+
+    const merged = mergeBreakdowns(chunkBreakdowns, meta, userTitle, userFormat);
 
     return json(200, {
       ok: true,
-      breakdown,
-      usage: data.usageMetadata || null,
+      breakdown: merged,
+      chunks: chunks.length,
       ms: Date.now() - t0
     });
   } catch (e) {
@@ -150,15 +135,199 @@ exports.handler = async (event) => {
   }
 };
 
-function extractJson(text) {
-  const fenced = text.match(/```json\s*([\s\S]*?)```/i);
-  if (fenced) return fenced[1].trim();
-  const first = text.indexOf('{');
-  const last = text.lastIndexOf('}');
-  if (first >= 0 && last > first) return text.slice(first, last + 1);
-  return text.trim();
+// ─── Script splitter ────────────────────────────────────────────
+function splitScript(text, maxChars) {
+  // Split at scene headings (INT./EXT./I/E.) so chunk boundaries are clean.
+  const sceneRegex = /(?=^\s*(?:INT\.?\s|EXT\.?\s|INT\.?\/EXT\.?\s|I\/E\.?\s|INT\s+EXT))/gmi;
+  const scenes = text.split(sceneRegex);
+  if (scenes.length <= 1) {
+    // No scene boundaries detected - fall back to paragraph split.
+    const paras = text.split(/\n\n+/);
+    return packChunks(paras, maxChars, '\n\n');
+  }
+  return packChunks(scenes, maxChars, '');
 }
 
+function packChunks(parts, maxChars, sep) {
+  const chunks = [];
+  let current = '';
+  for (const part of parts) {
+    if (!part) continue;
+    if (current.length + part.length + sep.length > maxChars && current) {
+      chunks.push(current);
+      current = part;
+    } else {
+      current = current ? current + sep + part : part;
+    }
+  }
+  if (current) chunks.push(current);
+  return chunks.length ? chunks : [parts.join(sep)];
+}
+
+function summariseForMeta(text) {
+  // Pull the first ~5k chars (title page + opening), last ~2k (closing),
+  // and every scene heading in between. Enough context for meta + flags
+  // without sending the full script.
+  const first = text.slice(0, 5000);
+  const last = text.slice(-2000);
+  const headings = (text.match(/^\s*(?:INT\.?\s|EXT\.?\s|INT\.?\/EXT\.?\s|I\/E\.?\s).*$/gmi) || []).join('\n');
+  return `[OPENING]\n${first}\n\n[SCENE HEADINGS]\n${headings}\n\n[CLOSING]\n${last}`;
+}
+
+// ─── Gemini call with one retry on 429 ──────────────────────────
+async function callGemini(key, systemPrompt, userText, attempt = 0) {
+  const resp = await fetch(API_URL + '?key=' + encodeURIComponent(key), {
+    method: 'POST',
+    headers: { 'content-type': 'application/json' },
+    body: JSON.stringify({
+      systemInstruction: { parts: [{ text: systemPrompt }] },
+      contents: [{ role: 'user', parts: [{ text: userText }] }],
+      generationConfig: {
+        responseMimeType: 'application/json',
+        temperature: 0.2,
+        maxOutputTokens: MAX_OUTPUT_TOKENS
+      }
+    })
+  });
+  if (resp.status === 429 && attempt < 1) {
+    await new Promise(r => setTimeout(r, RETRY_MS));
+    return callGemini(key, systemPrompt, userText, attempt + 1);
+  }
+  if (!resp.ok) throw new Error('Gemini ' + resp.status + ': ' + (await resp.text()).slice(0, 1500));
+  const data = await resp.json();
+  const text = (data.candidates?.[0]?.content?.parts || []).map(p => p.text || '').join('');
+  return { text, usage: data.usageMetadata };
+}
+
+// Run async tasks with bounded concurrency, preserving order.
+async function runConcurrent(tasks, limit) {
+  const results = new Array(tasks.length);
+  let next = 0;
+  async function worker() {
+    while (true) {
+      const i = next++;
+      if (i >= tasks.length) return;
+      results[i] = await tasks[i]();
+    }
+  }
+  const workers = Array.from({ length: Math.min(limit, tasks.length) }, worker);
+  await Promise.all(workers);
+  return results;
+}
+
+function safeParse(raw) {
+  if (!raw) return null;
+  try {
+    const fenced = raw.match(/```json\s*([\s\S]*?)```/i);
+    return JSON.parse(fenced ? fenced[1].trim() : raw.trim());
+  } catch {
+    const first = raw.indexOf('{');
+    const last = raw.lastIndexOf('}');
+    if (first >= 0 && last > first) {
+      try { return JSON.parse(raw.slice(first, last + 1)); } catch { return null; }
+    }
+    return null;
+  }
+}
+
+// ─── Merger ─────────────────────────────────────────────────────
+function mergeBreakdowns(chunks, meta, fallbackTitle, fallbackFormat) {
+  const scenes = [];
+  const charMap = new Map();
+  const locMap = new Map();
+
+  let sceneIdx = 1;
+  for (const c of chunks) {
+    for (const s of c.scenes || []) {
+      if (!s.number || s.number === '') s.number = String(sceneIdx);
+      scenes.push(s);
+      sceneIdx++;
+    }
+    for (const ch of c.characters || []) {
+      const key = (ch.name || '').toUpperCase().trim();
+      if (!key) continue;
+      const ex = charMap.get(key);
+      if (!ex) {
+        charMap.set(key, { ...ch });
+      } else {
+        ex.sceneCount = (ex.sceneCount || 0) + (ch.sceneCount || 0);
+        ex.dialogueLineCount = (ex.dialogueLineCount || 0) + (ch.dialogueLineCount || 0);
+        ex.specialSkillsRequired = uniq([...(ex.specialSkillsRequired || []), ...(ch.specialSkillsRequired || [])]);
+        if (ch.minor) ex.minor = true;
+        if (!ex.lastScene && ch.lastScene) ex.lastScene = ch.lastScene;
+        else if (ch.lastScene) ex.lastScene = ch.lastScene;
+        if (!ex.description && ch.description) ex.description = ch.description;
+      }
+    }
+    for (const l of c.locations || []) {
+      const key = normalizeLoc(l.name);
+      if (!key) continue;
+      const ex = locMap.get(key);
+      if (!ex) {
+        locMap.set(key, { ...l, scenes: [...(l.scenes || [])] });
+      } else {
+        ex.totalEighths = (ex.totalEighths || 0) + (l.totalEighths || 0);
+        ex.scenes = uniq([...(ex.scenes || []), ...(l.scenes || [])]);
+        if (l.intExt && ex.intExt && l.intExt !== ex.intExt) ex.intExt = 'BOTH';
+        if (l.permitRequirements) ex.permitRequirements = uniq([...(ex.permitRequirements || []), ...(l.permitRequirements || [])]);
+        if (l.complexity === 'high' || ex.complexity === 'high') ex.complexity = 'high';
+      }
+    }
+  }
+
+  // Re-classify character types based on total dialogue count across full script.
+  const allChars = [...charMap.values()].sort((a, b) => (b.dialogueLineCount || 0) - (a.dialogueLineCount || 0));
+  allChars.forEach((c, i) => {
+    if ((c.dialogueLineCount || 0) === 0) c.type = c.type || 'extra';
+    else if (i < 3) c.type = 'lead';
+    else if (i < 10) c.type = 'supporting';
+    else c.type = 'day_player';
+  });
+
+  const totalEighths = scenes.reduce((s, sc) => s + (sc.eighths || 0), 0);
+  const totalPages = scenes.reduce((s, sc) => s + (sc.pageCount || 0), 0);
+
+  return {
+    title: meta.title || fallbackTitle,
+    logline: meta.logline || '',
+    genre: meta.genre || '',
+    format: meta.format || fallbackFormat,
+    pageCount: Math.round(totalPages * 100) / 100 || Math.round(totalEighths / 8 * 100) / 100,
+    estimatedRuntimeMinutes: meta.estimatedRuntimeMinutes || Math.round(totalPages),
+    scenes,
+    characters: allChars,
+    locations: [...locMap.values()],
+    productionFlags: meta.productionFlags || rollUpFlags(scenes)
+  };
+}
+
+function rollUpFlags(scenes) {
+  // Fallback: infer production flags from merged scenes if meta didn't return them.
+  const flags = {
+    hasMinors: false, hasStunts: false, hasFirearms: false, hasAnimals: false,
+    hasVfx: false, hasNightWork: false, hasWaterWork: false,
+    hasVehicleAction: false, hasIntimacy: false, unionConsiderations: []
+  };
+  for (const s of scenes) {
+    if (s.minorsOnSet) flags.hasMinors = true;
+    if ((s.stunts || []).length) flags.hasStunts = true;
+    if ((s.weapons || []).length) flags.hasFirearms = true;
+    if ((s.animals || []).length) flags.hasAnimals = true;
+    if ((s.vfx || []).length) flags.hasVfx = true;
+    if (s.timeOfDay === 'NIGHT') flags.hasNightWork = true;
+    if ((s.vehicles || []).length || (s.stunts || []).some(st => /drive|chase|crash/i.test(st))) flags.hasVehicleAction = true;
+    if (s.intimacy) flags.hasIntimacy = true;
+    if ((s.specialEquipment || []).some(e => /water|underwater|marine/i.test(e))) flags.hasWaterWork = true;
+  }
+  return flags;
+}
+
+function normalizeLoc(name) {
+  return (name || '').toUpperCase().replace(/[^A-Z0-9]+/g, ' ').trim();
+}
+function uniq(arr) { return [...new Set(arr)]; }
+
+// ─── HTTP helpers ───────────────────────────────────────────────
 function cors() {
   return {
     'Access-Control-Allow-Origin': '*',
