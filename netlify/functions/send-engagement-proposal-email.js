@@ -213,7 +213,7 @@ ${testMode ? `
   <div style="padding:28px 32px 8px;">
     <div style="font-family:'DM Mono',Menlo,monospace;font-size:11px;letter-spacing:0.18em;text-transform:uppercase;color:#2563EB;font-weight:600;margin-bottom:12px;">Ready to Move?</div>
     <a href="${signUrl}" style="display:block;background:#F97316;color:#fff;font-weight:700;font-size:15px;letter-spacing:0.02em;text-transform:uppercase;text-decoration:none;padding:18px 24px;border-radius:10px;text-align:center;box-shadow:0 4px 14px rgba(249,115,22,0.3);">
-      &check; Accept &amp; Sign Electronically
+      Accept &amp; Sign Electronically →
     </a>
     <p style="font-size:13px;color:#64748B;margin:14px 0 0;line-height:1.6;">
       One signature, one click. I'll countersign within 24 hours and the Square invoice for $${Number(engagement.fee_usd).toLocaleString('en-US')} USD goes out immediately. The 72-hour delivery clock starts when payment clears and the intake worksheet is returned.
