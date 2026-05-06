@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>Sign &amp; Accept — Business Discovery Audit | Wendal Enterprise Inc.</title>
+<title>Sign and Accept: Business Discovery Audit | Wendal Enterprise Inc.</title>
 <meta name="description" content="Accept and electronically sign the Business Discovery Audit proposal." />
 <meta name="robots" content="noindex, nofollow, noarchive, nosnippet, noimageindex" />
 <meta http-equiv="Cache-Control" content="no-store, no-cache, must-revalidate, private" />
@@ -120,7 +120,7 @@
   <div class="hero-inner">
     <div class="hero-eyebrow">Acceptance &amp; Electronic Signature</div>
     <h1>Accept the <em>Business Discovery Audit.</em></h1>
-    <p>One signature, one click. Mark countersigns within 24 hours and you'll receive the fully executed PDF by email — followed by your Square invoice for $2,500 USD to start the 72-hour clock.</p>
+    <p>One signature, one click. Mark countersigns within 24 hours and you'll receive the fully executed PDF by email, followed by your Square invoice for $2,500 USD to start the 72-hour clock.</p>
   </div>
 </header>
 
@@ -143,7 +143,7 @@
   <div class="summary-card">
     <div class="lbl">You're Accepting</div>
     <h2>Business Discovery Audit · Wendal Enterprise Inc.</h2>
-    <p>This signature accepts the terms in <a href="/documents/clients/wendal-enterprise/proposal" target="_blank">Proposal WE-AUD-001</a>, <a href="/documents/clients/wendal-enterprise/sow" target="_blank">Scope of Work WE-AUD-002</a>, and <a href="/documents/clients/wendal-enterprise/timeline" target="_blank">Timeline WE-AUD-003</a> — and authorizes WETYR Corp / MarkCMO to issue a Square invoice for $2,500 USD. The 72-hour delivery clock begins when payment clears and the intake worksheet is returned.</p>
+    <p>This signature accepts the terms in <a href="/documents/clients/wendal-enterprise/proposal" target="_blank">Proposal WE-AUD-001</a>, <a href="/documents/clients/wendal-enterprise/sow" target="_blank">Scope of Work WE-AUD-002</a>, and <a href="/documents/clients/wendal-enterprise/timeline" target="_blank">Timeline WE-AUD-003</a>, and authorizes WETYR Corp / MarkCMO to issue a Square invoice for $2,500 USD. The 72-hour delivery clock begins when payment clears and the intake worksheet is returned.</p>
     <div class="summary-grid">
       <div class="item"><div class="l">Investment</div><div class="v">$2,500 USD</div></div>
       <div class="item"><div class="l">Delivery</div><div class="v">72 HRS</div></div>
@@ -212,7 +212,7 @@
     </div>
     <div class="sig-actions">
       <button class="sig-clear-btn" type="button" onclick="clearClientSig()">Clear</button>
-      <span class="sig-hint">Draw with your mouse or finger — or switch to "Type."</span>
+      <span class="sig-hint">Draw with your mouse or finger, or switch to "Type."</span>
     </div>
 
     <div class="sig-legal">
@@ -353,7 +353,7 @@ async function buildSignedPDF({ clientName, clientTitle, clientCompany, clientEm
     page.drawText(`${n} / ${total}`, { x: W - M - 30, y: 36, size: 8, font: helv, color: GREY });
   };
 
-  // ── PAGE 1 — Cover ──────────────────────────────────────────────
+  // ── PAGE 1, Cover ──────────────────────────────────────────────
   const p1 = pdf.addPage([W, H]);
   drawHeader(p1);
 
@@ -421,11 +421,11 @@ async function buildSignedPDF({ clientName, clientTitle, clientCompany, clientEm
   p1.drawText('SCOPE OVERVIEW', { x: M, y: y, size: 8, font: bold, color: BLUE });
   y -= 16;
   const scope = [
-    'Workflow mapping — booking, dispatch, on-site execution, follow-up',
-    'Tech-stack inventory — booking, payments, CRM, OTAs, comms, fleet/horse mgmt',
+    'Workflow mapping, booking, dispatch, on-site execution, follow-up',
+    'Tech-stack inventory, booking, payments, CRM, OTAs, comms, fleet/horse mgmt',
     'Bottleneck & pain-point register with severity ratings',
-    'Competitive benchmark — Turks & Caicos tour operators',
-    'US market entry analysis — West Palm Beach + Atlanta',
+    'Competitive benchmark, Turks & Caicos tour operators',
+    'US market entry analysis, West Palm Beach + Atlanta',
     '30 / 90 / 6mo / 12mo execution roadmap with owner + cost tagging',
   ];
   scope.forEach(line => {
@@ -436,7 +436,7 @@ async function buildSignedPDF({ clientName, clientTitle, clientCompany, clientEm
 
   drawFooter(p1, 1, 2);
 
-  // ── PAGE 2 — Signature page ─────────────────────────────────────
+  // ── PAGE 2, Signature page ─────────────────────────────────────
   const p2 = pdf.addPage([W, H]);
   drawHeader(p2);
 
@@ -479,13 +479,13 @@ async function buildSignedPDF({ clientName, clientTitle, clientCompany, clientEm
   });
   p2.drawText(`Signed electronically · IP & user-agent recorded`, { x: cx + 12, y: cy + 12, size: 6, font: helv, color: GREY });
 
-  // Consultant block — left empty for countersignature (filled by /sign/ flow)
+  // Consultant block. Header label only; body left empty so the countersign
+  // step (which draws sig image, name, title, and date at y=425/403/389/375)
+  // produces a clean executed document with no leftover placeholder text.
   const mx = M + blockW + 20, my = cy;
   p2.drawRectangle({ x: mx, y: my, width: blockW, height: blockH, borderColor: rgb(0.55, 0.62, 0.71), borderWidth: 1 });
   p2.drawText('CONSULTANT · WETYR CORP', { x: mx + 12, y: my + blockH - 18, size: 7, font: bold, color: GREY });
-  // Awaiting label — sits ABOVE the sig area, will not be overdrawn by countersign
-  p2.drawText('Awaiting Mark\'s countersignature', { x: mx + 12, y: my + blockH - 36, size: 8, font: helv, color: ORG });
-  // Empty signature line — countersign step writes sig image, name, title, date over the rows below
+  // Empty signature line. Countersign step overlays sig image, name, title, date.
   p2.drawLine({ start: {x: mx + 12, y: my + 65}, end: {x: mx + blockW - 12, y: my + 65}, thickness: 1, color: rgb(0.55, 0.62, 0.71) });
 
   drawFooter(p2, 2, 2);
@@ -550,7 +550,7 @@ async function generate() {
     status.textContent = 'Uploading signed PDF and notifying both parties…';
 
     // Route to existing submit-document Netlify function
-    const docName = (TEST_MODE ? '[TEST] ' : '') + 'Wendal Enterprise — Business Discovery Audit Acceptance';
+    const docName = (TEST_MODE ? '[TEST] ' : '') + 'Wendal Enterprise, Business Discovery Audit Acceptance';
     const filename = (TEST_MODE ? 'TEST-' : '') + 'WE-AUD-001-Wendal-Enterprise-Audit-Acceptance.pdf';
     const recipientEmail = TEST_MODE ? TEST_EMAIL : clientEmail;
 
@@ -566,12 +566,12 @@ async function generate() {
           'Title': clientTitle,
           'Company': clientCompany,
           'Email': clientEmail,
-          'Phone': clientPhone || '—',
+          'Phone': clientPhone || ', ',
           'Engagement': 'Business Discovery Audit',
           'Investment': '$2,500 USD',
           'Delivery': '72 hours from payment + intake',
           'Accepted At': new Date(signedAt).toLocaleString('en-US', { dateStyle:'long', timeStyle:'short', timeZone:'America/New_York' }) + ' ET',
-          ...(TEST_MODE ? { 'Test Mode': 'YES — routed to test email' } : {}),
+          ...(TEST_MODE ? { 'Test Mode': 'YES, routed to test email' } : {}),
         },
         pdfBase64,
         clientName,
@@ -579,7 +579,7 @@ async function generate() {
         clientSigBase64: sigDataUrl.split(',')[1],
         // Signature placement on page 2 of the generated PDF (consultant block, right side).
         // The /sign/ countersign flow draws at x:320 (hardcoded). Our consultant block spans
-        // x:316–556 (blockW≈240). Sig image is 200w × 30h, so it lands inside the block.
+        // x:316 to 556 (blockW≈240). Sig image is 200w × 30h, so it lands inside the block.
         markSig: {
           page: 2,
           sigY: 425,    // Sig image bottom-left y; image spans 425→455, just above the line at y=418
@@ -611,12 +611,12 @@ async function generate() {
       <span style="font-size:0.82rem;display:block;margin-top:0.6rem;color:#065F46;">Confirmation # ${(result.token || signedAt).toString().substring(0, 12)}</span>
     `;
     status.className = 'form-status success';
-    btn.textContent = '✅ Submitted — Awaiting Countersignature';
+    btn.textContent = '✅ Submitted, Awaiting Countersignature';
     btn.style.opacity = '0.5';
 
   } catch (err) {
     console.error(err);
-    status.textContent = 'Error: ' + err.message + ' — please try again or email mark@markcmo.com.';
+    status.textContent = 'Error: ' + err.message + ', please try again or email mark@markcmo.com.';
     status.className = 'form-status error';
     btn.disabled = false;
     btn.textContent = '✍ Sign & Submit for Countersignature';
