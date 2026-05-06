@@ -116,6 +116,10 @@
   .doc-action-btn:hover{border-color:var(--blue);color:var(--blue);background:var(--blue-pale)}
   .doc-action-btn:disabled{opacity:.5;cursor:not-allowed}
 
+  /* ── Case actions row (Send Proposal etc.) ── */
+  .case-actions{display:flex;gap:.6rem;flex-wrap:wrap;align-items:center;margin-top:1.25rem;padding-top:1.25rem;border-top:1px solid var(--border)}
+  .case-action-meta{font-family:'DM Mono',monospace;font-size:.65rem;letter-spacing:.05em;color:var(--text-mid);margin-left:auto}
+
   /* ── Invoice block ── */
   .invoice-block{margin-top:1.25rem;padding:1.25rem 1.5rem;background:var(--blue-pale);border-radius:12px;border:1px solid rgba(37,99,235,0.15)}
   .invoice-block-empty{background:var(--off-white);border:1px dashed var(--border)}
@@ -286,6 +290,76 @@ $('search').addEventListener('input', (e) => {
   ));
 });
 
+// ─── Generate engagement docs (lead → draft) ───────────────────
+async function generateEngagementDocs(slug) {
+  const name        = prompt('Engagement name (e.g. "Business Discovery Audit"):', 'Business Discovery Audit');
+  if (!name) return;
+  const docPrefix   = prompt('Document prefix (uppercase, like "AC-AUD" - used for AC-AUD-001/002/003):', '');
+  if (!docPrefix) return;
+  const feeStr      = prompt('Engagement fee in USD (e.g. 2500):', '2500');
+  if (!feeStr) return;
+  const feeUsd      = Number(feeStr.replace(/[^0-9.]/g, ''));
+  if (!feeUsd) return alert('Invalid fee.');
+  const deliveryStr = prompt('Delivery window in hours (e.g. 72):', '72');
+  if (!deliveryStr) return;
+  const deliveryWindowHrs = Number(deliveryStr);
+  if (!deliveryWindowHrs) return alert('Invalid delivery window.');
+
+  if (!confirm(`Create engagement?\n\n  Client: ${slug}\n  Name: ${name}\n  Docs: ${docPrefix}-001/002/003\n  Fee: $${feeUsd}\n  Delivery: ${deliveryWindowHrs}h`)) return;
+
+  try {
+    const res = await fetch('/.netlify/functions/generate-engagement-docs', {
+      method: 'POST',
+      credentials: 'include',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ clientSlug: slug, name, docPrefix, feeUsd, deliveryWindowHrs }),
+    });
+    const data = await res.json();
+    if (!res.ok) throw new Error(data.error || `HTTP ${res.status}`);
+
+    alert(
+      'Engagement records created.\n\n' +
+      data.docs.map(d => `  ${d.doc_id}: ${d.status}`).join('\n') +
+      '\n\nNext steps:\n' +
+      data.next_steps.map((s, i) => `  ${i + 1}. ${s}`).join('\n')
+    );
+    if (activeSlug) loadCase(activeSlug);
+  } catch (e) {
+    alert('Generate failed: ' + e.message);
+  }
+}
+
+// ─── Send proposal email (from case-head action) ───────────────
+async function sendProposalEmail(slug, isTest) {
+  const confirmMsg = isTest
+    ? 'Send a TEST copy of the proposal email to mark@markcmo.com?'
+    : 'Send the LIVE proposal email to the client (their primary_contact_email)? They will see the full audit package and an Accept & Sign button.';
+  if (!confirm(confirmMsg)) return;
+
+  try {
+    const body = { clientSlug: slug };
+    if (isTest) body.testRecipient = 'mark@markcmo.com';
+
+    const res = await fetch('/.netlify/functions/send-engagement-proposal-email', {
+      method: 'POST',
+      credentials: 'include',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(body),
+    });
+    const data = await res.json();
+    if (!res.ok) throw new Error(data.error || `HTTP ${res.status}`);
+
+    alert(
+      (isTest ? 'TEST email' : 'Proposal email') + ' sent to ' + data.sentTo +
+      (data.cc?.length ? '\nCC: ' + data.cc.join(', ') : '') +
+      '\n\nResend ID: ' + (data.resend_id || 'n/a')
+    );
+    if (activeSlug) loadCase(activeSlug);
+  } catch (e) {
+    alert('Send failed: ' + e.message);
+  }
+}
+
 // ─── Invoice block (rendered inside each engagement card) ──────
 function renderInvoiceBlock(engagement, invoices) {
   // Pick the most recent non-void invoice as the "active" one
@@ -390,6 +464,10 @@ function renderCase(client, audit) {
   const engagements = (client.mc_engagements || []).sort((a,b) => new Date(b.created_at) - new Date(a.created_at));
   const totalFee = engagements.reduce((s,e) => s + Number(e.fee_usd||0), 0);
 
+  // Find the most recent proposal email send from audit log
+  const lastProposalSend = audit.find(a => a.event === 'proposal_email_sent') || null;
+  const lastProposalTest = audit.find(a => a.event === 'proposal_email_test_sent') || null;
+
   let html = `
     <div class="case-head">
       <div class="case-eyebrow">Case File &middot; ${esc(client.slug)}</div>
@@ -400,6 +478,22 @@ function renderCase(client, audit) {
         <div class="item"><div class="l">Email</div><div class="v"><a href="mailto:${esc(client.primary_contact_email)}">${esc(client.primary_contact_email || '—')}</a></div></div>
         <div class="item"><div class="l">Status</div><div class="v">${pill(client.status)}</div></div>
         <div class="item"><div class="l">Engagement Total</div><div class="v">${fmtUSD(totalFee)}</div></div>
+      </div>
+      <div class="case-actions">
+        ${engagements.length === 0 || engagements.every(e => e.status === 'lead') ? `
+          <button class="action-btn primary" onclick="generateEngagementDocs('${esc(client.slug)}')">
+            Generate Engagement Docs
+          </button>
+        ` : `
+          <button class="action-btn primary" onclick="sendProposalEmail('${esc(client.slug)}', false)">
+            ${lastProposalSend ? 'Resend Proposal Email' : 'Send Proposal Email'}
+          </button>
+          <button class="action-btn outline" onclick="sendProposalEmail('${esc(client.slug)}', true)">
+            Send Test Copy (to mark@markcmo.com)
+          </button>
+        `}
+        ${lastProposalSend ? `<span class="case-action-meta">Last sent: ${fmtDate(lastProposalSend.created_at)} to ${esc(lastProposalSend.payload?.recipient || '?')}</span>` : ''}
+        ${lastProposalTest && !lastProposalSend ? `<span class="case-action-meta">Last test: ${fmtDate(lastProposalTest.created_at)}</span>` : ''}
       </div>
     </div>
   `;
