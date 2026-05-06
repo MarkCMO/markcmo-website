@@ -147,11 +147,15 @@ async function sendInternalPaymentNotification({ inv, eng, client }) {
 <html><head><meta charset="UTF-8"/></head>
 <body style="margin:0;padding:24px;background:#F8FAFC;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif;color:#1E293B;">
 <div style="max-width:600px;margin:0 auto;background:#fff;border-radius:14px;overflow:hidden;box-shadow:0 24px 48px rgba(10,22,40,0.12);">
-  <div style="background:linear-gradient(135deg,#0A1628 0%,#0F2040 50%,#162A4A 100%);color:#fff;padding:24px 28px;">
-    <div style="font-family:'DM Mono',Menlo,monospace;font-size:11px;letter-spacing:0.22em;text-transform:uppercase;color:#10B981;margin-bottom:8px;font-weight:600;">${isTest}Payment Received</div>
-    <div style="font-family:'Bebas Neue',Impact,sans-serif;font-size:36px;letter-spacing:0.02em;line-height:1;color:#fff;margin:0 0 6px;">${amount} - ${esc(clientName)}</div>
-    <div style="font-size:13px;color:rgba(248,250,252,0.78);">${esc(engName)}${deliveryDueStr ? ' &middot; delivery due ' + esc(deliveryDueStr) + ' ET' : ''}</div>
-  </div>
+  <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0" bgcolor="#0A1628" style="background-color:#0A1628;border-collapse:collapse;">
+    <tr>
+      <td bgcolor="#0A1628" style="background-color:#0A1628;background-image:linear-gradient(135deg,#0A1628 0%,#0F2040 50%,#162A4A 100%);color:#FFFFFF;padding:24px 28px;">
+        <div style="font-family:'DM Mono',Menlo,monospace;font-size:11px;letter-spacing:0.22em;text-transform:uppercase;color:#34D399;margin-bottom:8px;font-weight:600;">${isTest}Payment Received</div>
+        <div style="font-family:'Bebas Neue',Impact,sans-serif;font-size:36px;letter-spacing:0.02em;line-height:1;color:#FFFFFF;margin:0 0 6px;">${amount} - ${esc(clientName)}</div>
+        <div style="font-size:13px;color:#E2E8F0;">${esc(engName)}${deliveryDueStr ? ' &middot; delivery due ' + esc(deliveryDueStr) + ' ET' : ''}</div>
+      </td>
+    </tr>
+  </table>
   <div style="padding:24px 28px;font-size:14px;line-height:1.65;">
     ${client ? `<p style="margin:0 0 12px;"><strong>${esc(client.primary_contact_name || '')}</strong> (${esc(client.primary_contact_email || '')}) just paid the ${esc(engName)} invoice.</p>` : ''}
     ${inv.is_test ? `
@@ -198,15 +202,20 @@ async function sendClientReceipt({ inv, eng, client }) {
 <html><head><meta charset="UTF-8"/></head>
 <body style="margin:0;padding:0;background:#F8FAFC;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif;color:#1E293B;">
 <div style="max-width:680px;margin:0 auto;background:#fff;">
-  <div style="background:linear-gradient(135deg,#0A1628 0%,#0F2040 50%,#162A4A 100%);color:#fff;padding:36px 32px 32px;">
-    <div style="font-family:'DM Mono',Menlo,monospace;font-size:11px;letter-spacing:0.22em;text-transform:uppercase;color:#3B82F6;margin-bottom:10px;font-weight:600;">Payment Received</div>
-    <h1 style="font-family:'Bebas Neue',Impact,sans-serif;font-size:30px;font-weight:400;letter-spacing:0.02em;line-height:1.1;color:#fff;margin:0 0 8px;">
-      Thank you, ${esc(greetingName)}.<br/>${eng.delivery_window_hrs}-hour clock has started.
-    </h1>
-    <p style="font-size:15px;color:rgba(248,250,252,0.78);margin:0;line-height:1.5;">
-      ${amount} received. ${esc(eng.name)} delivery is due by ${esc(deliveryDueStr)} ET.
-    </p>
-  </div>
+  <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0" bgcolor="#0A1628" style="background-color:#0A1628;border-collapse:collapse;">
+    <tr>
+      <td bgcolor="#0A1628" style="background-color:#0A1628;background-image:linear-gradient(135deg,#0A1628 0%,#0F2040 50%,#162A4A 100%);color:#FFFFFF;padding:36px 32px 32px;">
+        <div style="font-family:'DM Mono',Menlo,monospace;font-size:11px;letter-spacing:0.22em;text-transform:uppercase;color:#93C5FD;margin-bottom:10px;font-weight:600;">Payment Received</div>
+        <h1 style="font-family:'Bebas Neue',Impact,sans-serif;font-size:30px;font-weight:400;letter-spacing:0.02em;line-height:1.1;color:#FFFFFF;margin:0 0 8px;">
+          <span style="color:#FFFFFF;">Thank you, ${esc(greetingName)}.</span><br/>
+          <span style="color:#FFFFFF;">${eng.delivery_window_hrs}-hour clock has started.</span>
+        </h1>
+        <p style="font-size:15px;color:#E2E8F0;margin:0;line-height:1.5;">
+          ${amount} received. ${esc(eng.name)} delivery is due by ${esc(deliveryDueStr)} ET.
+        </p>
+      </td>
+    </tr>
+  </table>
   <div style="padding:32px;">
     <p style="font-size:16px;line-height:1.65;margin:0 0 16px;">${esc(greetingName)},</p>
     <p style="font-size:15px;line-height:1.65;margin:0 0 16px;">
@@ -231,9 +240,13 @@ async function sendClientReceipt({ inv, eng, client }) {
       Questions or anything that needs to change? Reply to this email or reach Mark directly at <a href="mailto:mark@markcmo.com" style="color:#2563EB;">mark@markcmo.com</a>.
     </p>
   </div>
-  <div style="background:#0A1628;padding:18px 32px;font-size:11px;color:rgba(255,255,255,0.5);text-align:center;">
-    Mark Gabrielli &middot; Fractional CMO &middot; markcmo.com
-  </div>
+  <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0" bgcolor="#0A1628" style="background-color:#0A1628;border-collapse:collapse;">
+    <tr>
+      <td bgcolor="#0A1628" align="center" style="background-color:#0A1628;padding:18px 32px;font-size:11px;color:#94A3B8;">
+        Mark Gabrielli &middot; Fractional CMO &middot; markcmo.com
+      </td>
+    </tr>
+  </table>
 </div></body></html>`;
 
   await fetch('https://api.resend.com/emails', {

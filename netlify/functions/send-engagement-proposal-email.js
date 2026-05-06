@@ -142,16 +142,21 @@ ${testMode ? `
 ` : ''}
 <div style="max-width:680px;margin:0 auto;background:#fff;">
 
-  <!-- Hero -->
-  <div style="background:linear-gradient(135deg,#0A1628 0%,#0F2040 50%,#162A4A 100%);color:#fff;padding:36px 32px 32px;border-top:4px solid #2563EB;">
-    <div style="font-size:11px;letter-spacing:0.22em;text-transform:uppercase;color:#3B82F6;margin-bottom:10px;font-family:'DM Mono',Menlo,monospace;">${esc(engagement.name)} &middot; Proposal</div>
-    <h1 style="font-family:'Bebas Neue',Impact,sans-serif;font-size:32px;font-weight:400;letter-spacing:0.02em;line-height:1.1;color:#fff;margin:0 0 8px;">
-      ${esc(client.legal_name)},<br/>your audit package is ready.
-    </h1>
-    <p style="font-size:15px;color:rgba(248,250,252,0.78);margin:0;line-height:1.5;">
-      Three documents. One signature. ${engagement.delivery_window_hrs}-hour delivery once we kick off.
-    </p>
-  </div>
+  <!-- Hero (bulletproof: bgcolor + background-color + gradient fallback for Outlook/Gmail) -->
+  <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0" bgcolor="#0A1628" style="background-color:#0A1628;border-collapse:collapse;border-top:4px solid #2563EB;">
+    <tr>
+      <td bgcolor="#0A1628" style="background-color:#0A1628;background-image:linear-gradient(135deg,#0A1628 0%,#0F2040 50%,#162A4A 100%);padding:36px 32px 32px;color:#FFFFFF;">
+        <div style="font-size:11px;letter-spacing:0.22em;text-transform:uppercase;color:#93C5FD;margin-bottom:10px;font-family:'DM Mono',Menlo,monospace;">${esc(engagement.name)} &middot; Proposal</div>
+        <h1 style="font-family:'Bebas Neue',Impact,sans-serif;font-size:32px;font-weight:400;letter-spacing:0.02em;line-height:1.1;color:#FFFFFF;margin:0 0 8px;">
+          <span style="color:#FFFFFF;">${esc(client.legal_name)},</span><br/>
+          <span style="color:#FFFFFF;">your audit package is ready.</span>
+        </h1>
+        <p style="font-size:15px;color:#E2E8F0;margin:0;line-height:1.5;">
+          Three documents. One signature. ${engagement.delivery_window_hrs}-hour delivery once we kick off.
+        </p>
+      </td>
+    </tr>
+  </table>
 
   <!-- Greeting + intro -->
   <div style="padding:32px;">
@@ -209,12 +214,18 @@ ${testMode ? `
     </p>
   </div>
 
-  <!-- Sign CTA -->
+  <!-- Sign CTA (table-based for bulletproof button rendering) -->
   <div style="padding:28px 32px 8px;">
     <div style="font-family:'DM Mono',Menlo,monospace;font-size:11px;letter-spacing:0.18em;text-transform:uppercase;color:#2563EB;font-weight:600;margin-bottom:12px;">Ready to Move?</div>
-    <a href="${signUrl}" style="display:block;background:#F97316;color:#fff;font-weight:700;font-size:15px;letter-spacing:0.02em;text-transform:uppercase;text-decoration:none;padding:18px 24px;border-radius:10px;text-align:center;box-shadow:0 4px 14px rgba(249,115,22,0.3);">
-      Accept &amp; Sign Electronically →
-    </a>
+    <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0" style="border-collapse:collapse;">
+      <tr>
+        <td bgcolor="#F97316" align="center" style="background-color:#F97316;border-radius:10px;">
+          <a href="${signUrl}" style="display:block;background-color:#F97316;color:#FFFFFF;font-weight:700;font-size:15px;letter-spacing:0.02em;text-transform:uppercase;text-decoration:none;padding:18px 24px;border-radius:10px;text-align:center;">
+            <span style="color:#FFFFFF;">Accept &amp; Sign Electronically &rarr;</span>
+          </a>
+        </td>
+      </tr>
+    </table>
     <p style="font-size:13px;color:#64748B;margin:14px 0 0;line-height:1.6;">
       One signature, one click. I'll countersign within 24 hours and the Square invoice for $${Number(engagement.fee_usd).toLocaleString('en-US')} USD goes out immediately. The 72-hour delivery clock starts when payment clears and the intake worksheet is returned.
     </p>
@@ -227,10 +238,14 @@ ${testMode ? `
     <p style="font-size:13px;line-height:1.55;margin:2px 0 0;color:#64748B;">Fractional CMO &amp; COO &middot; WETYR Corp<br/><a href="mailto:mark@markcmo.com" style="color:#2563EB;">mark@markcmo.com</a> &middot; <a href="https://markcmo.com" style="color:#2563EB;">markcmo.com</a></p>
   </div>
 
-  <!-- Footer -->
-  <div style="background:#0A1628;padding:18px 32px;font-size:11px;color:rgba(255,255,255,0.5);text-align:center;border-top:4px solid #2563EB;">
-    Confidential &middot; prepared for ${esc(client.legal_name)} &middot; valid 14 days from issue
-  </div>
+  <!-- Footer (table-based for Outlook/Gmail) -->
+  <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0" bgcolor="#0A1628" style="background-color:#0A1628;border-collapse:collapse;border-top:4px solid #2563EB;">
+    <tr>
+      <td bgcolor="#0A1628" align="center" style="background-color:#0A1628;padding:18px 32px;font-size:11px;color:#94A3B8;">
+        Confidential &middot; prepared for ${esc(client.legal_name)} &middot; valid 14 days from issue
+      </td>
+    </tr>
+  </table>
 </div>
 </body></html>`;
 }
