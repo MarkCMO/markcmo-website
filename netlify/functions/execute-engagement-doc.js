@@ -16,9 +16,10 @@ const CORS = {
 const STORAGE_BUCKET = 'markcmo-engagement-docs';
 
 function sb() {
-  const url = process.env.SUPABASE_URL;
-  const key = process.env.SUPABASE_SERVICE_ROLE_KEY;
-  if (!url || !key) throw new Error('SUPABASE_URL or SUPABASE_SERVICE_ROLE_KEY not set');
+  // Namespaced to avoid collision with existing SUPABASE_* vars (different project)
+  const url = process.env.MARKCMO_SUPABASE_URL;
+  const key = process.env.MARKCMO_SUPABASE_SERVICE_KEY;
+  if (!url || !key) throw new Error('MARKCMO_SUPABASE_URL or MARKCMO_SUPABASE_SERVICE_KEY not set');
   return { url, key };
 }
 
@@ -100,8 +101,8 @@ exports.handler = async (event) => {
 
   const apiKey = process.env.RESEND_API_KEY;
   if (!apiKey)                return { statusCode: 500, headers: CORS, body: JSON.stringify({ error: 'RESEND_API_KEY not set' }) };
-  if (!process.env.SUPABASE_URL || !process.env.SUPABASE_SERVICE_ROLE_KEY) {
-    return { statusCode: 500, headers: CORS, body: JSON.stringify({ error: 'Supabase env vars not set' }) };
+  if (!process.env.MARKCMO_SUPABASE_URL || !process.env.MARKCMO_SUPABASE_SERVICE_KEY) {
+    return { statusCode: 500, headers: CORS, body: JSON.stringify({ error: 'MARKCMO_SUPABASE_URL or MARKCMO_SUPABASE_SERVICE_KEY env var not set' }) };
   }
 
   const executedAt = new Date().toISOString();

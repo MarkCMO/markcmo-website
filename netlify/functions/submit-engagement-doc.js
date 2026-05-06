@@ -12,10 +12,14 @@
 //  6. Return an HMAC token for the countersign step.
 //
 // Required env vars (Netlify):
-//   SUPABASE_URL                  e.g. https://saoomfwycegflxelggxv.supabase.co
-//   SUPABASE_SERVICE_ROLE_KEY     service-role key (NOT the anon key)
+//   MARKCMO_SUPABASE_URL          e.g. https://saoomfwycegflxelggxv.supabase.co (CLIPOS project)
+//   MARKCMO_SUPABASE_SERVICE_KEY  service-role key (NOT the anon key)
 //   RESEND_API_KEY                Resend API key
 //   TOKEN_SECRET                  any random secret for HMAC
+//
+// Note: vars are namespaced (MARKCMO_) so they don't collide with the
+// existing SUPABASE_URL/SUPABASE_SERVICE_KEY which point at a different
+// Supabase project used by other systems on this site.
 // ═══════════════════════════════════════════════════════════════
 const crypto = require('crypto');
 
@@ -35,9 +39,9 @@ function makeToken(payload, secret) {
 
 // ─── Supabase REST helpers ──────────────────────────────────────
 function sb() {
-  const url = process.env.SUPABASE_URL;
-  const key = process.env.SUPABASE_SERVICE_ROLE_KEY;
-  if (!url || !key) throw new Error('SUPABASE_URL or SUPABASE_SERVICE_ROLE_KEY not set');
+  const url = process.env.MARKCMO_SUPABASE_URL;
+  const key = process.env.MARKCMO_SUPABASE_SERVICE_KEY;
+  if (!url || !key) throw new Error('MARKCMO_SUPABASE_URL or MARKCMO_SUPABASE_SERVICE_KEY not set');
   return { url, key };
 }
 
@@ -142,8 +146,8 @@ exports.handler = async (event) => {
 
   const apiKey = process.env.RESEND_API_KEY;
   if (!apiKey)                return { statusCode: 500, headers: CORS, body: JSON.stringify({ error: 'RESEND_API_KEY not set' }) };
-  if (!process.env.SUPABASE_URL || !process.env.SUPABASE_SERVICE_ROLE_KEY) {
-    return { statusCode: 500, headers: CORS, body: JSON.stringify({ error: 'Supabase env vars not set' }) };
+  if (!process.env.MARKCMO_SUPABASE_URL || !process.env.MARKCMO_SUPABASE_SERVICE_KEY) {
+    return { statusCode: 500, headers: CORS, body: JSON.stringify({ error: 'MARKCMO_SUPABASE_URL or MARKCMO_SUPABASE_SERVICE_KEY env var not set' }) };
   }
 
   const submittedAt = new Date().toISOString();

@@ -18,10 +18,11 @@ const CORS = {
 const STORAGE_BUCKET = 'markcmo-engagement-docs';
 
 async function fetchPdfFromSupabase(pdfPath) {
-  const url = process.env.SUPABASE_URL;
-  const key = process.env.SUPABASE_SERVICE_ROLE_KEY;
+  // Namespaced to avoid collision with existing SUPABASE_* vars (different project)
+  const url = process.env.MARKCMO_SUPABASE_URL;
+  const key = process.env.MARKCMO_SUPABASE_SERVICE_KEY;
   if (!url || !key) {
-    console.warn('Supabase env vars missing; cannot fetch v2 PDF');
+    console.warn('MARKCMO_SUPABASE_* env vars missing; cannot fetch v2 PDF');
     return null;
   }
   try {
