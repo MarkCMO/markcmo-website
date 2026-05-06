@@ -18,6 +18,15 @@
 //   GET ?type=invoices             — mc_invoices
 //   GET ?type=activity&limit=30    — last N audit_log events across all engagements
 //   GET ?type=summary              — counts for the dashboard tiles
+//   GET ?type=notes&clientId=X     — mc_notes (all or per-client, per-engagement)
+//   GET ?type=products             — mc_products service catalog
+//   GET ?type=templates&category=X — mc_email_templates
+//   GET ?type=webinars             — mc_webinar_events
+//   GET ?type=submissions          — every signed/executed mc_documents row
+//   GET ?type=transactions         — paid mc_invoices with Square payment IDs
+//   GET ?type=revenue-report       — monthly revenue from paid invoices
+//   GET ?type=funnel               — lead -> proposal -> signed -> paid conversion rates
+//   GET ?type=lead-sources         — mc_clients grouped by source with conversion %
 // ═══════════════════════════════════════════════════════════════
 
 const COOKIE_NAME = 'mcadmin_session';
@@ -404,6 +413,153 @@ exports.handler = async (event) => {
         };
       });
       return { statusCode: 200, headers, body: JSON.stringify({ events }) };
+    }
+
+    // ─── /notes: list mc_notes, optionally filtered ─────────────
+    if (type === 'notes') {
+      const filters = [];
+      if (q.clientId) filters.push(`client_id=eq.${encodeURIComponent(q.clientId)}`);
+      if (q.engagementId) filters.push(`engagement_id=eq.${encodeURIComponent(q.engagementId)}`);
+      const path = `mc_notes?${filters.join('&')}${filters.length ? '&' : ''}select=*,mc_clients(slug,legal_name)&order=pinned.desc,created_at.desc&limit=200`;
+      const rows = await sbSelect(path);
+      const notes = rows.map(n => ({
+        id: n.id, client_id: n.client_id, engagement_id: n.engagement_id,
+        author: n.author, category: n.category, body: n.body, pinned: n.pinned,
+        created_at: n.created_at, updated_at: n.updated_at,
+        client_slug: n.mc_clients?.slug, client_name: n.mc_clients?.legal_name,
+      }));
+      return { statusCode: 200, headers, body: JSON.stringify({ notes }) };
+    }
+
+    // ─── /products: service catalog ─────────────────────────────
+    if (type === 'products') {
+      const rows = await sbSelect('mc_products?select=*&order=display_order.asc,name.asc');
+      return { statusCode: 200, headers, body: JSON.stringify({ products: rows }) };
+    }
+
+    // ─── /templates: mc_email_templates ─────────────────────────
+    if (type === 'templates') {
+      const filter = q.category ? `category=eq.${encodeURIComponent(q.category)}&` : '';
+      const rows = await sbSelect(`mc_email_templates?${filter}select=id,slug,name,category,subject,preheader,variables,is_active,last_sent_at,send_count,created_at,updated_at&order=updated_at.desc`);
+      return { statusCode: 200, headers, body: JSON.stringify({ templates: rows }) };
+    }
+
+    // ─── /webinars: mc_webinar_events ───────────────────────────
+    if (type === 'webinars') {
+      const rows = await sbSelect('mc_webinar_events?select=*&order=scheduled_at.desc,created_at.desc');
+      return { statusCode: 200, headers, body: JSON.stringify({ webinars: rows }) };
+    }
+
+    // ─── /submissions: every signed or executed document ────────
+    if (type === 'submissions') {
+      const rows = await sbSelect(
+        'mc_documents?or=(status.eq.client_signed,status.eq.executed,status.eq.submitted)&select=id,doc_id,doc_type,doc_name,status,storage_path,client_signed_at,executed_at,client_ip,fields,mc_engagements(id,name,fee_usd,mc_clients(id,slug,legal_name,primary_contact_name,primary_contact_email))&order=client_signed_at.desc.nullslast,executed_at.desc.nullslast'
+      );
+      const submissions = rows.map(d => ({
+        id: d.id, doc_id: d.doc_id, doc_type: d.doc_type, doc_name: d.doc_name,
+        status: d.status, storage_path: d.storage_path,
+        client_signed_at: d.client_signed_at, executed_at: d.executed_at,
+        client_ip: d.client_ip, fields: d.fields,
+        engagement_name: d.mc_engagements?.name, engagement_fee_usd: d.mc_engagements?.fee_usd,
+        client_slug: d.mc_engagements?.mc_clients?.slug,
+        client_name: d.mc_engagements?.mc_clients?.legal_name,
+        client_contact: d.mc_engagements?.mc_clients?.primary_contact_name,
+        client_email: d.mc_engagements?.mc_clients?.primary_contact_email,
+      }));
+      return { statusCode: 200, headers, body: JSON.stringify({ submissions }) };
+    }
+
+    // ─── /transactions: paid invoices, Square-transaction view ──
+    if (type === 'transactions') {
+      const rows = await sbSelect(
+        'mc_invoices?status=eq.paid&select=id,square_invoice_id,square_invoice_url,square_payment_id,amount_usd,is_test,paid_at,mc_engagements(id,name,mc_clients(id,slug,legal_name,primary_contact_name))&order=paid_at.desc'
+      );
+      const transactions = rows.map(i => ({
+        id: i.id, square_invoice_id: i.square_invoice_id,
+        square_invoice_url: i.square_invoice_url,
+        square_payment_id: i.square_payment_id,
+        amount_usd: i.amount_usd, is_test: i.is_test, paid_at: i.paid_at,
+        engagement_name: i.mc_engagements?.name,
+        client_slug: i.mc_engagements?.mc_clients?.slug,
+        client_name: i.mc_engagements?.mc_clients?.legal_name,
+        client_contact: i.mc_engagements?.mc_clients?.primary_contact_name,
+      }));
+      return { statusCode: 200, headers, body: JSON.stringify({ transactions }) };
+    }
+
+    // ─── /revenue-report: monthly buckets from paid invoices ────
+    if (type === 'revenue-report') {
+      const invoices = await sbSelect('mc_invoices?status=eq.paid&select=amount_usd,paid_at,is_test');
+      const buckets = {};
+      const live = invoices.filter(i => !i.is_test);
+      for (const i of live) {
+        if (!i.paid_at) continue;
+        const d = new Date(i.paid_at);
+        const key = `${d.getUTCFullYear()}-${String(d.getUTCMonth() + 1).padStart(2, '0')}`;
+        if (!buckets[key]) buckets[key] = { month: key, count: 0, revenue: 0 };
+        buckets[key].count += 1;
+        buckets[key].revenue += Number(i.amount_usd || 0);
+      }
+      const months = Object.values(buckets).sort((a, b) => a.month.localeCompare(b.month));
+      const totalRevenue = months.reduce((s, m) => s + m.revenue, 0);
+      const totalCount = months.reduce((s, m) => s + m.count, 0);
+      const avgInvoice = totalCount ? totalRevenue / totalCount : 0;
+      return { statusCode: 200, headers, body: JSON.stringify({
+        months, total_revenue: totalRevenue, total_count: totalCount,
+        avg_invoice: avgInvoice, test_count: invoices.length - live.length,
+      }) };
+    }
+
+    // ─── /funnel: lead → proposal_sent → signed → paid % ────────
+    if (type === 'funnel') {
+      const [clients, engs, docs, invoices] = await Promise.all([
+        sbSelect('mc_clients?select=id,source,status,created_at'),
+        sbSelect('mc_engagements?select=id,client_id,status,proposed_at,accepted_at,paid_at'),
+        sbSelect('mc_documents?select=id,engagement_id,status,client_signed_at,executed_at'),
+        sbSelect('mc_invoices?select=id,engagement_id,status,paid_at,is_test'),
+      ]);
+      const liveInvoices = invoices.filter(i => !i.is_test);
+      const totalContacts = clients.length;
+      const totalEngagements = engs.length;
+      const proposalSent = engs.filter(e => e.proposed_at || ['proposal_sent','signed','invoiced','paid','delivering','delivered'].includes(e.status)).length;
+      const clientSigned = docs.filter(d => d.client_signed_at).length;
+      const executed = docs.filter(d => d.executed_at).length;
+      const paid = liveInvoices.filter(i => i.status === 'paid').length;
+      const funnel = [
+        { stage: 'Contact Created', count: totalContacts, pct: 100 },
+        { stage: 'Engagement Drafted', count: totalEngagements, pct: totalContacts ? +(totalEngagements / totalContacts * 100).toFixed(1) : 0 },
+        { stage: 'Proposal Sent', count: proposalSent, pct: totalContacts ? +(proposalSent / totalContacts * 100).toFixed(1) : 0 },
+        { stage: 'Client Signed', count: clientSigned, pct: totalContacts ? +(clientSigned / totalContacts * 100).toFixed(1) : 0 },
+        { stage: 'Executed', count: executed, pct: totalContacts ? +(executed / totalContacts * 100).toFixed(1) : 0 },
+        { stage: 'Paid', count: paid, pct: totalContacts ? +(paid / totalContacts * 100).toFixed(1) : 0 },
+      ];
+      return { statusCode: 200, headers, body: JSON.stringify({ funnel }) };
+    }
+
+    // ─── /lead-sources: mc_clients grouped by source ────────────
+    if (type === 'lead-sources') {
+      const rows = await sbSelect('mc_clients?select=id,source,status,created_at,mc_engagements(id,status,fee_usd,paid_at,mc_invoices(id,status,amount_usd,is_test))');
+      const groups = {};
+      for (const c of rows) {
+        const key = c.source || 'unknown';
+        if (!groups[key]) groups[key] = { source: key, contacts: 0, engagements: 0, paid: 0, revenue: 0 };
+        groups[key].contacts += 1;
+        const engs = c.mc_engagements || [];
+        groups[key].engagements += engs.length;
+        for (const e of engs) {
+          const inv = (e.mc_invoices || []).filter(i => !i.is_test);
+          for (const i of inv) {
+            if (i.status === 'paid') {
+              groups[key].paid += 1;
+              groups[key].revenue += Number(i.amount_usd || 0);
+            }
+          }
+        }
+      }
+      const sources = Object.values(groups)
+        .map(g => ({ ...g, conversion_pct: g.contacts ? +(g.paid / g.contacts * 100).toFixed(1) : 0 }))
+        .sort((a, b) => b.contacts - a.contacts);
+      return { statusCode: 200, headers, body: JSON.stringify({ sources }) };
     }
 
     // ─── /summary: dashboard tile counts ────────────────────────

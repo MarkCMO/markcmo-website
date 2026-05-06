@@ -1816,30 +1816,38 @@
 </div>
 </div>
 <div id="panel-webinar-replay" class="panel">
-<div class="panel-header"><h1 class="panel-title">▶️ Replay Links</h1></div>
-<div class="coming-soon">
-<div class="cs-icon">▶️</div>
-<h2>REPLAY LINKS</h2>
-<p>Manage and distribute recorded webinar replays with gated access links.</p>
-<div class="cs-badge">Coming Next Build</div>
-<div style="margin-top:20px;text-align:left;max-width:360px;width:100%;">
-<div style="font-size:10px;letter-spacing:2px;text-transform:uppercase;color:var(--dim);margin-bottom:8px;">ROADMAP</div>
-<div style="font-size:12px;color:var(--dim);padding:4px 0;border-bottom:1px solid var(--border);">→ Upload replay recording to storage</div><div style="font-size:12px;color:var(--dim);padding:4px 0;border-bottom:1px solid var(--border);">→ Generate unique access tokens per buyer</div><div style="font-size:12px;color:var(--dim);padding:4px 0;border-bottom:1px solid var(--border);">→ Embed YouTube/Vimeo replay player</div><div style="font-size:12px;color:var(--dim);padding:4px 0;border-bottom:1px solid var(--border);">→ Auto-email replay link post-webinar</div><div style="font-size:12px;color:var(--dim);padding:4px 0;border-bottom:1px solid var(--border);">→ Track replay views per contact</div>
-</div>
-</div>
+  <div class="mc-panel">
+    <div class="mc-panel-head">
+      <div>
+        <div class="mc-eyebrow">Webinars · Replays</div>
+        <h2>Replay Links</h2>
+        <div class="mc-sub">Recorded webinar replays with gated access. Edit titles, replay URLs, view counts, and per-buyer access.</div>
+      </div>
+      <div class="mc-panel-actions">
+        <button class="mc-btn primary" onclick="mcOpenWebinarEditor(null,'recorded')">+ Add Replay</button>
+        <button class="mc-btn" onclick="mcLoadWebinars(true)">↻ Refresh</button>
+      </div>
+    </div>
+    <div id="mc-webinar-replay-stats" class="mc-stats"></div>
+    <div id="mc-webinar-replay-body"><div class="mc-loading">Loading replays</div></div>
+  </div>
 </div>
 <div id="panel-webinar-schedule" class="panel">
-<div class="panel-header"><h1 class="panel-title">📅 Webinar Schedule</h1></div>
-<div class="coming-soon">
-<div class="cs-icon">📅</div>
-<h2>WEBINAR SCHEDULE</h2>
-<p>Manage upcoming webinar dates, topics, and registration windows.</p>
-<div class="cs-badge">Coming Next Build</div>
-<div style="margin-top:20px;text-align:left;max-width:360px;width:100%;">
-<div style="font-size:10px;letter-spacing:2px;text-transform:uppercase;color:var(--dim);margin-bottom:8px;">ROADMAP</div>
-<div style="font-size:12px;color:var(--dim);padding:4px 0;border-bottom:1px solid var(--border);">→ Create new webinar events</div><div style="font-size:12px;color:var(--dim);padding:4px 0;border-bottom:1px solid var(--border);">→ Set registration open/close dates</div><div style="font-size:12px;color:var(--dim);padding:4px 0;border-bottom:1px solid var(--border);">→ Configure Riverside or YouTube Live links</div><div style="font-size:12px;color:var(--dim);padding:4px 0;border-bottom:1px solid var(--border);">→ Sync ICS calendar invites</div><div style="font-size:12px;color:var(--dim);padding:4px 0;border-bottom:1px solid var(--border);">→ Publish to webinar landing page</div>
-</div>
-</div>
+  <div class="mc-panel">
+    <div class="mc-panel-head">
+      <div>
+        <div class="mc-eyebrow">Webinars · Schedule</div>
+        <h2>Upcoming Webinars</h2>
+        <div class="mc-sub">Live + draft events. Set the date, registration window, and live URL. Webinar landing page reads from this list.</div>
+      </div>
+      <div class="mc-panel-actions">
+        <button class="mc-btn primary" onclick="mcOpenWebinarEditor(null,'scheduled')">+ Schedule Webinar</button>
+        <button class="mc-btn" onclick="mcLoadWebinars(true)">↻ Refresh</button>
+      </div>
+    </div>
+    <div id="mc-webinar-schedule-stats" class="mc-stats"></div>
+    <div id="mc-webinar-schedule-body"><div class="mc-loading">Loading schedule</div></div>
+  </div>
 </div>
 <div id="panel-crm-contacts" class="panel">
   <div class="mc-panel">
@@ -1991,17 +1999,24 @@
   </div>
 </div>
 <div id="panel-crm-notes" class="panel">
-<div class="panel-header"><h1 class="panel-title">📝 Notes & Activity</h1></div>
-<div class="coming-soon">
-<div class="cs-icon">📝</div>
-<h2>NOTES & ACTIVITY</h2>
-<p>Log calls, meetings, emails, and notes for every contact and engagement.</p>
-<div class="cs-badge">Coming Next Build</div>
-<div style="margin-top:20px;text-align:left;max-width:360px;width:100%;">
-<div style="font-size:10px;letter-spacing:2px;text-transform:uppercase;color:var(--dim);margin-bottom:8px;">ROADMAP</div>
-<div style="font-size:12px;color:var(--dim);padding:4px 0;border-bottom:1px solid var(--border);">→ Call/meeting log with timestamps</div><div style="font-size:12px;color:var(--dim);padding:4px 0;border-bottom:1px solid var(--border);">→ Link notes to contact or engagement</div><div style="font-size:12px;color:var(--dim);padding:4px 0;border-bottom:1px solid var(--border);">→ Set follow-up reminders</div><div style="font-size:12px;color:var(--dim);padding:4px 0;border-bottom:1px solid var(--border);">→ Activity feed across all contacts</div><div style="font-size:12px;color:var(--dim);padding:4px 0;border-bottom:1px solid var(--border);">→ Export activity log to PDF</div>
-</div>
-</div>
+  <div class="mc-panel">
+    <div class="mc-panel-head">
+      <div>
+        <div class="mc-eyebrow">CRM &middot; Activity</div>
+        <h2>Notes &amp; Activity</h2>
+        <div class="mc-sub">Calls, meetings, observations, and follow-ups. Pinned notes float to the top. Auto-merged with the audit-log timeline.</div>
+      </div>
+      <div class="mc-panel-actions">
+        <select id="mc-notes-client-filter" class="mc-search" style="min-width:auto;">
+          <option value="">All clients</option>
+        </select>
+        <button class="mc-btn primary" onclick="mcOpenNoteEditor()">+ Add Note</button>
+        <button class="mc-btn" onclick="mcLoadNotes(true)">↻ Refresh</button>
+      </div>
+    </div>
+    <div id="mc-notes-stats" class="mc-stats"></div>
+    <div id="mc-notes-body"><div class="mc-loading">Loading notes</div></div>
+  </div>
 </div>
 <div id="panel-eng-projects" class="panel">
   <div class="mc-panel">
@@ -2169,149 +2184,170 @@
 </div>
 </div>
 <div id="panel-forms-nda" class="panel">
-<div class="panel-header"><h1 class="panel-title">🔒 NDA & Mutual NDA</h1></div>
-<div style="padding:20px 0">
-<a href="/forms/nda" target="_blank" class="fc-btn primary" style="display:inline-block;margin-bottom:16px;font-size:12px;padding:10px 20px;">Open NDA & Mutual NDA Form →</a>
-<div style="font-size:12px;color:var(--dim);">Opens the interactive PDF form in a new tab. Fill, sign, and download or send directly to your client.</div>
-</div>
+  <div class="mc-panel">
+    <div class="mc-panel-head">
+      <div><div class="mc-eyebrow">Forms · Confidentiality</div><h2>NDA / Mutual NDA</h2><div class="mc-sub">One-way and mutual non-disclosure templates. Open the form to fill + sign yourself, or send to a client.</div></div>
+      <div class="mc-panel-actions">
+        <a href="/forms/nda" target="_blank" class="mc-btn primary">Open NDA Form →</a>
+        <a href="/forms/mutual-nda" target="_blank" class="mc-btn">Mutual NDA</a>
+      </div>
+    </div>
+    <div id="mc-form-nda-body"><div class="mc-loading">Loading recent NDA submissions</div></div>
+  </div>
 </div>
 <div id="panel-forms-msa" class="panel">
-<div class="panel-header"><h1 class="panel-title">📃 MSA & SOW</h1></div>
-<div style="padding:20px 0">
-<a href="/forms/msa" target="_blank" class="fc-btn primary" style="display:inline-block;margin-bottom:16px;font-size:12px;padding:10px 20px;">Open MSA & SOW Form →</a>
-<div style="font-size:12px;color:var(--dim);">Opens the interactive PDF form in a new tab. Fill, sign, and download or send directly to your client.</div>
-</div>
+  <div class="mc-panel">
+    <div class="mc-panel-head">
+      <div><div class="mc-eyebrow">Forms · Master Agreement</div><h2>MSA / SOW</h2><div class="mc-sub">Master Services Agreements and Statements of Work. Use as the contractual foundation for any consulting engagement.</div></div>
+      <div class="mc-panel-actions">
+        <a href="/forms/msa" target="_blank" class="mc-btn primary">Open MSA Form →</a>
+        <a href="/forms/sow" target="_blank" class="mc-btn">SOW Template</a>
+      </div>
+    </div>
+    <div id="mc-form-msa-body"><div class="mc-loading">Loading recent MSA submissions</div></div>
+  </div>
 </div>
 <div id="panel-forms-engagement" class="panel">
-<div class="panel-header"><h1 class="panel-title">🤝 Engagement Letter</h1></div>
-<div style="padding:20px 0">
-<a href="/forms/engagement" target="_blank" class="fc-btn primary" style="display:inline-block;margin-bottom:16px;font-size:12px;padding:10px 20px;">Open Engagement Letter Form →</a>
-<div style="font-size:12px;color:var(--dim);">Opens the interactive PDF form in a new tab. Fill, sign, and download or send directly to your client.</div>
-</div>
+  <div class="mc-panel">
+    <div class="mc-panel-head">
+      <div><div class="mc-eyebrow">Forms · Engagement</div><h2>Engagement Letter</h2><div class="mc-sub">Short-form engagement letter for advisory and fractional retainers. Pairs with the SOW for full project work.</div></div>
+      <div class="mc-panel-actions">
+        <a href="/forms/engagement" target="_blank" class="mc-btn primary">Open Engagement Form →</a>
+      </div>
+    </div>
+    <div id="mc-form-engagement-body"><div class="mc-loading">Loading recent engagement letters</div></div>
+  </div>
 </div>
 <div id="panel-forms-onboarding" class="panel">
-<div class="panel-header"><h1 class="panel-title">🚪 Client Onboarding</h1></div>
-<div style="padding:20px 0">
-<a href="/forms/onboarding" target="_blank" class="fc-btn primary" style="display:inline-block;margin-bottom:16px;font-size:12px;padding:10px 20px;">Open Client Onboarding Form →</a>
-<div style="font-size:12px;color:var(--dim);">Opens the interactive PDF form in a new tab. Fill, sign, and download or send directly to your client.</div>
-</div>
+  <div class="mc-panel">
+    <div class="mc-panel-head">
+      <div><div class="mc-eyebrow">Forms · Onboarding</div><h2>Client Onboarding</h2><div class="mc-sub">Intake worksheet that kicks off engagement delivery. Sent to the client when payment clears.</div></div>
+      <div class="mc-panel-actions">
+        <a href="/forms/onboarding" target="_blank" class="mc-btn primary">Open Onboarding Form →</a>
+      </div>
+    </div>
+    <div id="mc-form-onboarding-body"><div class="mc-loading">Loading recent onboarding intake</div></div>
+  </div>
 </div>
 <div id="panel-forms-submissions" class="panel">
-<div class="panel-header"><h1 class="panel-title">📥 Form Submissions</h1></div>
-<div class="coming-soon">
-<div class="cs-icon">📥</div>
-<h2>FORM SUBMISSIONS</h2>
-<p>Track all submitted forms — who filled them, when, and their current status.</p>
-<div class="cs-badge">Coming Next Build</div>
-<div style="margin-top:20px;text-align:left;max-width:360px;width:100%;">
-<div style="font-size:10px;letter-spacing:2px;text-transform:uppercase;color:var(--dim);margin-bottom:8px;">ROADMAP</div>
-<div style="font-size:12px;color:var(--dim);padding:4px 0;border-bottom:1px solid var(--border);">→ Log each form submission with timestamp</div><div style="font-size:12px;color:var(--dim);padding:4px 0;border-bottom:1px solid var(--border);">→ Status: draft / sent / signed / archived</div><div style="font-size:12px;color:var(--dim);padding:4px 0;border-bottom:1px solid var(--border);">→ Link submissions to client in CRM</div><div style="font-size:12px;color:var(--dim);padding:4px 0;border-bottom:1px solid var(--border);">→ Email notifications on submission</div><div style="font-size:12px;color:var(--dim);padding:4px 0;border-bottom:1px solid var(--border);">→ Export to PDF for record keeping</div>
-</div>
-</div>
+  <div class="mc-panel">
+    <div class="mc-panel-head">
+      <div>
+        <div class="mc-eyebrow">Forms · Activity</div>
+        <h2>Form Submissions</h2>
+        <div class="mc-sub">Every signed and executed document across all clients. IPs captured, PDFs in storage, fully audit-logged.</div>
+      </div>
+      <div class="mc-panel-actions">
+        <input type="text" class="mc-search" id="mc-submissions-search" placeholder="Search...">
+        <button class="mc-btn" onclick="mcLoadSubmissions(true)">↻ Refresh</button>
+      </div>
+    </div>
+    <div id="mc-submissions-stats" class="mc-stats"></div>
+    <div id="mc-submissions-body"><div class="mc-loading">Loading submissions</div></div>
+  </div>
 </div>
 <div id="panel-email-campaigns" class="panel">
-<div class="panel-header"><h1 class="panel-title">📢 Email Campaigns</h1></div>
-<div class="coming-soon">
-<div class="cs-icon">📢</div>
-<h2>EMAIL CAMPAIGNS</h2>
-<p>Create and send broadcast emails to your full list or targeted segments.</p>
-<div class="cs-badge">Coming Next Build</div>
-<div style="margin-top:20px;text-align:left;max-width:360px;width:100%;">
-<div style="font-size:10px;letter-spacing:2px;text-transform:uppercase;color:var(--dim);margin-bottom:8px;">ROADMAP</div>
-<div style="font-size:12px;color:var(--dim);padding:4px 0;border-bottom:1px solid var(--border);">→ Campaign builder with brand template</div><div style="font-size:12px;color:var(--dim);padding:4px 0;border-bottom:1px solid var(--border);">→ Segment by tag, source, or engagement</div><div style="font-size:12px;color:var(--dim);padding:4px 0;border-bottom:1px solid var(--border);">→ Send via Resend API</div><div style="font-size:12px;color:var(--dim);padding:4px 0;border-bottom:1px solid var(--border);">→ Open/click rate tracking</div><div style="font-size:12px;color:var(--dim);padding:4px 0;border-bottom:1px solid var(--border);">→ A/B subject line testing</div>
-</div>
-</div>
+  <div class="mc-panel">
+    <div class="mc-panel-head">
+      <div><div class="mc-eyebrow">Email · Broadcast</div><h2>Email Campaigns</h2><div class="mc-sub">One-shot broadcasts (newsletters, announcements, re-engagement). Filtered to category=campaign.</div></div>
+      <div class="mc-panel-actions">
+        <button class="mc-btn primary" onclick="mcOpenTemplateEditor(null,'campaign')">+ New Campaign</button>
+        <button class="mc-btn" onclick="mcLoadTemplates(true)">↻ Refresh</button>
+      </div>
+    </div>
+    <div id="mc-email-campaigns-stats" class="mc-stats"></div>
+    <div id="mc-email-campaigns-body"><div class="mc-loading">Loading campaigns</div></div>
+  </div>
 </div>
 <div id="panel-email-templates" class="panel">
-<div class="panel-header"><h1 class="panel-title">🎨 Email Templates</h1></div>
-<div class="coming-soon">
-<div class="cs-icon">🎨</div>
-<h2>EMAIL TEMPLATES</h2>
-<p>Library of reusable email templates for every scenario in your consulting business.</p>
-<div class="cs-badge">Coming Next Build</div>
-<div style="margin-top:20px;text-align:left;max-width:360px;width:100%;">
-<div style="font-size:10px;letter-spacing:2px;text-transform:uppercase;color:var(--dim);margin-bottom:8px;">ROADMAP</div>
-<div style="font-size:12px;color:var(--dim);padding:4px 0;border-bottom:1px solid var(--border);">→ Welcome / intro email</div><div style="font-size:12px;color:var(--dim);padding:4px 0;border-bottom:1px solid var(--border);">→ Proposal follow-up</div><div style="font-size:12px;color:var(--dim);padding:4px 0;border-bottom:1px solid var(--border);">→ Retainer renewal reminder</div><div style="font-size:12px;color:var(--dim);padding:4px 0;border-bottom:1px solid var(--border);">→ Case study / social proof</div><div style="font-size:12px;color:var(--dim);padding:4px 0;border-bottom:1px solid var(--border);">→ Re-engagement for cold leads</div>
-</div>
-</div>
+  <div class="mc-panel">
+    <div class="mc-panel-head">
+      <div><div class="mc-eyebrow">Email · Library</div><h2>Email Templates</h2><div class="mc-sub">Reusable HTML templates. Edit subject + body + variables, then use in campaigns or send directly to a client.</div></div>
+      <div class="mc-panel-actions">
+        <button class="mc-btn primary" onclick="mcOpenTemplateEditor(null,'transactional')">+ New Template</button>
+        <button class="mc-btn" onclick="mcLoadTemplates(true)">↻ Refresh</button>
+      </div>
+    </div>
+    <div id="mc-email-templates-stats" class="mc-stats"></div>
+    <div id="mc-email-templates-body"><div class="mc-loading">Loading templates</div></div>
+  </div>
 </div>
 <div id="panel-email-sequences" class="panel">
-<div class="panel-header"><h1 class="panel-title">🔁 Drip Sequences</h1></div>
-<div class="coming-soon">
-<div class="cs-icon">🔁</div>
-<h2>DRIP SEQUENCES</h2>
-<p>Automated multi-step email sequences triggered by actions (webinar, purchase, inquiry).</p>
-<div class="cs-badge">Coming Next Build</div>
-<div style="margin-top:20px;text-align:left;max-width:360px;width:100%;">
-<div style="font-size:10px;letter-spacing:2px;text-transform:uppercase;color:var(--dim);margin-bottom:8px;">ROADMAP</div>
-<div style="font-size:12px;color:var(--dim);padding:4px 0;border-bottom:1px solid var(--border);">→ Visual sequence builder</div><div style="font-size:12px;color:var(--dim);padding:4px 0;border-bottom:1px solid var(--border);">→ Trigger: webinar signup, form submit, purchase</div><div style="font-size:12px;color:var(--dim);padding:4px 0;border-bottom:1px solid var(--border);">→ Time delays and conditional branching</div><div style="font-size:12px;color:var(--dim);padding:4px 0;border-bottom:1px solid var(--border);">→ Webinar drip (existing 8-email sequence)</div><div style="font-size:12px;color:var(--dim);padding:4px 0;border-bottom:1px solid var(--border);">→ Post-engagement nurture sequences</div>
-</div>
-</div>
+  <div class="mc-panel">
+    <div class="mc-panel-head">
+      <div><div class="mc-eyebrow">Email · Automation</div><h2>Drip Sequences</h2><div class="mc-sub">Multi-step automation flows. Webinar drip + proposal follow-ups live here. Templates with category=sequence.</div></div>
+      <div class="mc-panel-actions">
+        <button class="mc-btn primary" onclick="mcOpenTemplateEditor(null,'sequence')">+ New Sequence Step</button>
+        <button class="mc-btn" onclick="mcLoadTemplates(true)">↻ Refresh</button>
+      </div>
+    </div>
+    <div id="mc-email-sequences-stats" class="mc-stats"></div>
+    <div id="mc-email-sequences-body"><div class="mc-loading">Loading sequences</div></div>
+  </div>
 </div>
 <div id="panel-email-subscribers" class="panel">
-<div class="panel-header"><h1 class="panel-title">👤 Subscribers</h1></div>
-<div class="coming-soon">
-<div class="cs-icon">👤</div>
-<h2>SUBSCRIBERS</h2>
-<p>Manage your full email list — segments, tags, suppression, and compliance.</p>
-<div class="cs-badge">Coming Next Build</div>
-<div style="margin-top:20px;text-align:left;max-width:360px;width:100%;">
-<div style="font-size:10px;letter-spacing:2px;text-transform:uppercase;color:var(--dim);margin-bottom:8px;">ROADMAP</div>
-<div style="font-size:12px;color:var(--dim);padding:4px 0;border-bottom:1px solid var(--border);">→ Import/export subscribers</div><div style="font-size:12px;color:var(--dim);padding:4px 0;border-bottom:1px solid var(--border);">→ Tag by source, service interest, stage</div><div style="font-size:12px;color:var(--dim);padding:4px 0;border-bottom:1px solid var(--border);">→ Unsubscribe and bounce management</div><div style="font-size:12px;color:var(--dim);padding:4px 0;border-bottom:1px solid var(--border);">→ GDPR/CAN-SPAM compliance tools</div><div style="font-size:12px;color:var(--dim);padding:4px 0;border-bottom:1px solid var(--border);">→ List health and engagement scores</div>
-</div>
-</div>
+  <div class="mc-panel">
+    <div class="mc-panel-head">
+      <div><div class="mc-eyebrow">Email · List</div><h2>Subscribers</h2><div class="mc-sub">Combined list of CRM contacts (mc_clients) + webinar registrants. Tag by source, segment, suppression.</div></div>
+      <div class="mc-panel-actions">
+        <input type="text" class="mc-search" id="mc-subscribers-search" placeholder="Search...">
+        <button class="mc-btn" onclick="mcLoadSubscribers(true)">↻ Refresh</button>
+      </div>
+    </div>
+    <div id="mc-subscribers-stats" class="mc-stats"></div>
+    <div id="mc-subscribers-body"><div class="mc-loading">Loading subscribers</div></div>
+  </div>
 </div>
 <div id="panel-rev-transactions" class="panel">
-<div class="panel-header"><h1 class="panel-title">💳 Transactions</h1></div>
-<div class="coming-soon">
-<div class="cs-icon">💳</div>
-<h2>TRANSACTIONS</h2>
-<p>All Square payment transactions in one view — purchases, refunds, and status.</p>
-<div class="cs-badge">Coming Next Build</div>
-<div style="margin-top:20px;text-align:left;max-width:360px;width:100%;">
-<div style="font-size:10px;letter-spacing:2px;text-transform:uppercase;color:var(--dim);margin-bottom:8px;">ROADMAP</div>
-<div style="font-size:12px;color:var(--dim);padding:4px 0;border-bottom:1px solid var(--border);">→ Pull from Square API</div><div style="font-size:12px;color:var(--dim);padding:4px 0;border-bottom:1px solid var(--border);">→ Filter by product, date, amount</div><div style="font-size:12px;color:var(--dim);padding:4px 0;border-bottom:1px solid var(--border);">→ Refund management</div><div style="font-size:12px;color:var(--dim);padding:4px 0;border-bottom:1px solid var(--border);">→ Link transactions to contacts in CRM</div><div style="font-size:12px;color:var(--dim);padding:4px 0;border-bottom:1px solid var(--border);">→ Export to CSV for accounting</div>
-</div>
-</div>
+  <div class="mc-panel">
+    <div class="mc-panel-head">
+      <div><div class="mc-eyebrow">Revenue · Cash</div><h2>Transactions</h2><div class="mc-sub">Every paid invoice with the Square transaction reference. Filter test vs live, export to CSV for accounting.</div></div>
+      <div class="mc-panel-actions">
+        <input type="text" class="mc-search" id="mc-transactions-search" placeholder="Search...">
+        <button class="mc-btn" onclick="mcLoadTransactions(true)">↻ Refresh</button>
+      </div>
+    </div>
+    <div id="mc-transactions-stats" class="mc-stats"></div>
+    <div id="mc-transactions-body"><div class="mc-loading">Loading transactions</div></div>
+  </div>
 </div>
 <div id="panel-rev-invoices" class="panel">
-<div class="panel-header"><h1 class="panel-title">🧾 Invoices</h1></div>
-<div class="coming-soon">
-<div class="cs-icon">🧾</div>
-<h2>INVOICES</h2>
-<p>Create, send, and track professional invoices for all consulting engagements.</p>
-<div class="cs-badge">Coming Next Build</div>
-<div style="margin-top:20px;text-align:left;max-width:360px;width:100%;">
-<div style="font-size:10px;letter-spacing:2px;text-transform:uppercase;color:var(--dim);margin-bottom:8px;">ROADMAP</div>
-<div style="font-size:12px;color:var(--dim);padding:4px 0;border-bottom:1px solid var(--border);">→ Invoice builder with your branding</div><div style="font-size:12px;color:var(--dim);padding:4px 0;border-bottom:1px solid var(--border);">→ Line items for retainer, project, expenses</div><div style="font-size:12px;color:var(--dim);padding:4px 0;border-bottom:1px solid var(--border);">→ Send via email with Square payment link</div><div style="font-size:12px;color:var(--dim);padding:4px 0;border-bottom:1px solid var(--border);">→ Track paid/outstanding/overdue</div><div style="font-size:12px;color:var(--dim);padding:4px 0;border-bottom:1px solid var(--border);">→ Monthly auto-invoicing for retainers</div>
-</div>
-</div>
+  <div class="mc-panel">
+    <div class="mc-panel-head">
+      <div><div class="mc-eyebrow">Revenue · Billing</div><h2>All Invoices</h2><div class="mc-sub">Every Square invoice (drafted, sent, paid, voided). Same data as the engagement Invoices tab — different cut.</div></div>
+      <div class="mc-panel-actions">
+        <input type="text" class="mc-search" id="mc-invoices-search" placeholder="Search...">
+        <button class="mc-btn" onclick="mcLoadInvoices(true)">↻ Refresh</button>
+      </div>
+    </div>
+    <div id="mc-invoices-stats" class="mc-stats"></div>
+    <div id="mc-invoices-body"><div class="mc-loading">Loading invoices</div></div>
+  </div>
 </div>
 <div id="panel-rev-products" class="panel">
-<div class="panel-header"><h1 class="panel-title">🏷 Products & Pricing</h1></div>
-<div class="coming-soon">
-<div class="cs-icon">🏷</div>
-<h2>PRODUCTS & PRICING</h2>
-<p>Manage all your service offerings, prices, and Square payment links in one place.</p>
-<div class="cs-badge">Coming Next Build</div>
-<div style="margin-top:20px;text-align:left;max-width:360px;width:100%;">
-<div style="font-size:10px;letter-spacing:2px;text-transform:uppercase;color:var(--dim);margin-bottom:8px;">ROADMAP</div>
-<div style="font-size:12px;color:var(--dim);padding:4px 0;border-bottom:1px solid var(--border);">→ CMO Audit & Sprint — from $1,000</div><div style="font-size:12px;color:var(--dim);padding:4px 0;border-bottom:1px solid var(--border);">→ VIP Strategy Day — $2,500</div><div style="font-size:12px;color:var(--dim);padding:4px 0;border-bottom:1px solid var(--border);">→ Fractional CMO Retainer — $5k-$15k/mo</div><div style="font-size:12px;color:var(--dim);padding:4px 0;border-bottom:1px solid var(--border);">→ Revenue Leak Playbook — $100</div><div style="font-size:12px;color:var(--dim);padding:4px 0;border-bottom:1px solid var(--border);">→ CMO Accelerator Kit — $50</div>
-</div>
-</div>
+  <div class="mc-panel">
+    <div class="mc-panel-head">
+      <div><div class="mc-eyebrow">Revenue · Catalog</div><h2>Products &amp; Pricing</h2><div class="mc-sub">Service catalog. Each row is a fixed-fee or recurring offer — used by the proposal generator and the public pricing pages.</div></div>
+      <div class="mc-panel-actions">
+        <button class="mc-btn primary" onclick="mcOpenProductEditor(null)">+ Add Product</button>
+        <button class="mc-btn" onclick="mcLoadProducts(true)">↻ Refresh</button>
+      </div>
+    </div>
+    <div id="mc-products-stats" class="mc-stats"></div>
+    <div id="mc-products-body"><div class="mc-loading">Loading product catalog</div></div>
+  </div>
 </div>
 <div id="panel-rev-reports" class="panel">
-<div class="panel-header"><h1 class="panel-title">📈 Revenue Reports</h1></div>
-<div class="coming-soon">
-<div class="cs-icon">📈</div>
-<h2>REVENUE REPORTS</h2>
-<p>Monthly and annual revenue dashboards — MRR, one-time, pipeline, and projections.</p>
-<div class="cs-badge">Coming Next Build</div>
-<div style="margin-top:20px;text-align:left;max-width:360px;width:100%;">
-<div style="font-size:10px;letter-spacing:2px;text-transform:uppercase;color:var(--dim);margin-bottom:8px;">ROADMAP</div>
-<div style="font-size:12px;color:var(--dim);padding:4px 0;border-bottom:1px solid var(--border);">→ Monthly recurring revenue (MRR)</div><div style="font-size:12px;color:var(--dim);padding:4px 0;border-bottom:1px solid var(--border);">→ One-time project revenue</div><div style="font-size:12px;color:var(--dim);padding:4px 0;border-bottom:1px solid var(--border);">→ Pipeline value and close probability</div><div style="font-size:12px;color:var(--dim);padding:4px 0;border-bottom:1px solid var(--border);">→ Revenue by service line</div><div style="font-size:12px;color:var(--dim);padding:4px 0;border-bottom:1px solid var(--border);">→ YoY growth charts</div>
-</div>
-</div>
+  <div class="mc-panel">
+    <div class="mc-panel-head">
+      <div><div class="mc-eyebrow">Revenue · Reports</div><h2>Revenue Reports</h2><div class="mc-sub">Monthly revenue + invoice count + average invoice size. Sourced from paid mc_invoices (excludes test invoices).</div></div>
+      <div class="mc-panel-actions">
+        <button class="mc-btn" onclick="mcLoadRevenueReport(true)">↻ Refresh</button>
+      </div>
+    </div>
+    <div id="mc-rev-reports-stats" class="mc-stats"></div>
+    <div id="mc-rev-reports-body"><div class="mc-loading">Loading revenue report</div></div>
+  </div>
 </div>
 <div id="panel-courses-overview" class="panel">
 <div class="panel-header"><h1 class="panel-title">🎓 Academy Overview</h1>
@@ -2636,56 +2672,53 @@ Generate unique tracked links to send clients to your forms and documents. Each 
 </div>
 </div>
 <div id="panel-analytics-traffic" class="panel">
-<div class="panel-header"><h1 class="panel-title">🌐 Site Traffic</h1></div>
-<div class="coming-soon">
-<div class="cs-icon">🌐</div>
-<h2>SITE TRAFFIC</h2>
-<p>Google Analytics integration to track visitors, pages, and traffic sources.</p>
-<div class="cs-badge">Coming Next Build</div>
-<div style="margin-top:20px;text-align:left;max-width:360px;width:100%;">
-<div style="font-size:10px;letter-spacing:2px;text-transform:uppercase;color:var(--dim);margin-bottom:8px;">ROADMAP</div>
-<div style="font-size:12px;color:var(--dim);padding:4px 0;border-bottom:1px solid var(--border);">→ Total sessions, users, pageviews</div><div style="font-size:12px;color:var(--dim);padding:4px 0;border-bottom:1px solid var(--border);">→ Top pages and entry points</div><div style="font-size:12px;color:var(--dim);padding:4px 0;border-bottom:1px solid var(--border);">→ Traffic source breakdown (organic, social, direct, referral)</div><div style="font-size:12px;color:var(--dim);padding:4px 0;border-bottom:1px solid var(--border);">→ Geographic breakdown</div><div style="font-size:12px;color:var(--dim);padding:4px 0;border-bottom:1px solid var(--border);">→ Device and browser data</div>
-</div>
-</div>
+  <div class="mc-panel">
+    <div class="mc-panel-head">
+      <div><div class="mc-eyebrow">Analytics · Traffic</div><h2>Site Traffic</h2><div class="mc-sub">Server-side traffic snapshot. Sessions / referrers / top pages from Netlify Analytics + Google Analytics (when configured).</div></div>
+      <div class="mc-panel-actions">
+        <a href="https://app.netlify.com/projects/markcmo/analytics" target="_blank" rel="noopener" class="mc-btn">Netlify Analytics →</a>
+        <a href="https://analytics.google.com/" target="_blank" rel="noopener" class="mc-btn">Google Analytics →</a>
+      </div>
+    </div>
+    <div id="mc-traffic-stats" class="mc-stats"></div>
+    <div id="mc-traffic-body"><div class="mc-loading">Loading traffic snapshot</div></div>
+  </div>
 </div>
 <div id="panel-analytics-leads" class="panel">
-<div class="panel-header"><h1 class="panel-title">🎯 Lead Sources</h1></div>
-<div class="coming-soon">
-<div class="cs-icon">🎯</div>
-<h2>LEAD SOURCES</h2>
-<p>Track where your best leads come from and which channels convert.</p>
-<div class="cs-badge">Coming Next Build</div>
-<div style="margin-top:20px;text-align:left;max-width:360px;width:100%;">
-<div style="font-size:10px;letter-spacing:2px;text-transform:uppercase;color:var(--dim);margin-bottom:8px;">ROADMAP</div>
-<div style="font-size:12px;color:var(--dim);padding:4px 0;border-bottom:1px solid var(--border);">→ Lead source attribution (webinar, referral, SEO, social)</div><div style="font-size:12px;color:var(--dim);padding:4px 0;border-bottom:1px solid var(--border);">→ Cost per lead by channel</div><div style="font-size:12px;color:var(--dim);padding:4px 0;border-bottom:1px solid var(--border);">→ Lead-to-client conversion by source</div><div style="font-size:12px;color:var(--dim);padding:4px 0;border-bottom:1px solid var(--border);">→ Monthly lead volume trends</div><div style="font-size:12px;color:var(--dim);padding:4px 0;border-bottom:1px solid var(--border);">→ Source quality score</div>
-</div>
-</div>
+  <div class="mc-panel">
+    <div class="mc-panel-head">
+      <div><div class="mc-eyebrow">Analytics · Sources</div><h2>Lead Sources</h2><div class="mc-sub">Where contacts came from (Calendly, manual entry, direct, referral) and how each source converts to paid revenue.</div></div>
+      <div class="mc-panel-actions">
+        <button class="mc-btn" onclick="mcLoadLeadSources(true)">↻ Refresh</button>
+      </div>
+    </div>
+    <div id="mc-lead-sources-stats" class="mc-stats"></div>
+    <div id="mc-lead-sources-body"><div class="mc-loading">Loading lead sources</div></div>
+  </div>
 </div>
 <div id="panel-analytics-funnel" class="panel">
-<div class="panel-header"><h1 class="panel-title">🔽 Conversion Funnel</h1></div>
-<div class="coming-soon">
-<div class="cs-icon">🔽</div>
-<h2>CONVERSION FUNNEL</h2>
-<p>Visualize your full funnel from visitor to paid client.</p>
-<div class="cs-badge">Coming Next Build</div>
-<div style="margin-top:20px;text-align:left;max-width:360px;width:100%;">
-<div style="font-size:10px;letter-spacing:2px;text-transform:uppercase;color:var(--dim);margin-bottom:8px;">ROADMAP</div>
-<div style="font-size:12px;color:var(--dim);padding:4px 0;border-bottom:1px solid var(--border);">→ Visitor → Lead conversion rate</div><div style="font-size:12px;color:var(--dim);padding:4px 0;border-bottom:1px solid var(--border);">→ Lead → Webinar registrant rate</div><div style="font-size:12px;color:var(--dim);padding:4px 0;border-bottom:1px solid var(--border);">→ Webinar → Paid offer conversion</div><div style="font-size:12px;color:var(--dim);padding:4px 0;border-bottom:1px solid var(--border);">→ Proposal → Signed client rate</div><div style="font-size:12px;color:var(--dim);padding:4px 0;border-bottom:1px solid var(--border);">→ Identify biggest drop-off points</div>
-</div>
-</div>
+  <div class="mc-panel">
+    <div class="mc-panel-head">
+      <div><div class="mc-eyebrow">Analytics · Funnel</div><h2>Conversion Funnel</h2><div class="mc-sub">Contact → Engagement → Proposal → Signed → Executed → Paid. Conversion rate at every step.</div></div>
+      <div class="mc-panel-actions">
+        <button class="mc-btn" onclick="mcLoadFunnel(true)">↻ Refresh</button>
+      </div>
+    </div>
+    <div id="mc-funnel-stats" class="mc-stats"></div>
+    <div id="mc-funnel-body"><div class="mc-loading">Loading funnel</div></div>
+  </div>
 </div>
 <div id="panel-analytics-revenue" class="panel">
-<div class="panel-header"><h1 class="panel-title">💹 Revenue Analytics</h1></div>
-<div class="coming-soon">
-<div class="cs-icon">💹</div>
-<h2>REVENUE ANALYTICS</h2>
-<p>Full revenue attribution — which marketing activity drives income.</p>
-<div class="cs-badge">Coming Next Build</div>
-<div style="margin-top:20px;text-align:left;max-width:360px;width:100%;">
-<div style="font-size:10px;letter-spacing:2px;text-transform:uppercase;color:var(--dim);margin-bottom:8px;">ROADMAP</div>
-<div style="font-size:12px;color:var(--dim);padding:4px 0;border-bottom:1px solid var(--border);">→ Revenue by channel and campaign</div><div style="font-size:12px;color:var(--dim);padding:4px 0;border-bottom:1px solid var(--border);">→ Customer acquisition cost (CAC)</div><div style="font-size:12px;color:var(--dim);padding:4px 0;border-bottom:1px solid var(--border);">→ Lifetime value (LTV) by service type</div><div style="font-size:12px;color:var(--dim);padding:4px 0;border-bottom:1px solid var(--border);">→ Retainer churn rate</div><div style="font-size:12px;color:var(--dim);padding:4px 0;border-bottom:1px solid var(--border);">→ Pipeline velocity</div>
-</div>
-</div>
+  <div class="mc-panel">
+    <div class="mc-panel-head">
+      <div><div class="mc-eyebrow">Analytics · Revenue</div><h2>Revenue Analytics</h2><div class="mc-sub">Total + monthly revenue, average invoice, MRR, top-grossing engagements. Same data as Revenue Reports, presented as analytics.</div></div>
+      <div class="mc-panel-actions">
+        <button class="mc-btn" onclick="mcLoadRevenueReport(true)">↻ Refresh</button>
+      </div>
+    </div>
+    <div id="mc-rev-analytics-stats" class="mc-stats"></div>
+    <div id="mc-rev-analytics-body"><div class="mc-loading">Loading revenue analytics</div></div>
+  </div>
 </div>
 <div id="panel-settings" class="panel">
 <div class="top-bar">
@@ -3618,6 +3651,26 @@ function switchPanel(id, el) {
   else if (id === 'eng-proposals')  { if (typeof mcLoadProposals === 'function')      mcLoadProposals(); }
   else if (id === 'eng-contracts')  { if (typeof mcLoadContracts === 'function')      mcLoadContracts(); }
   else if (id === 'eng-invoices')   { if (typeof mcLoadInvoices === 'function')       mcLoadInvoices(); }
+  else if (id === 'crm-notes')      { if (typeof mcLoadNotes === 'function')          mcLoadNotes(); }
+  else if (id === 'forms-submissions') { if (typeof mcLoadSubmissions === 'function') mcLoadSubmissions(); }
+  else if (id === 'forms-nda')         { if (typeof mcLoadFormPanel === 'function')   mcLoadFormPanel('nda','nda'); }
+  else if (id === 'forms-msa')         { if (typeof mcLoadFormPanel === 'function')   mcLoadFormPanel('sow','msa'); }
+  else if (id === 'forms-engagement')  { if (typeof mcLoadFormPanel === 'function')   mcLoadFormPanel('engagement','engagement'); }
+  else if (id === 'forms-onboarding')  { if (typeof mcLoadFormPanel === 'function')   mcLoadFormPanel('onboarding','onboarding'); }
+  else if (id === 'rev-transactions')  { if (typeof mcLoadTransactions === 'function') mcLoadTransactions(); }
+  else if (id === 'rev-invoices')      { if (typeof mcLoadInvoices === 'function')    mcLoadInvoices(); }
+  else if (id === 'rev-products')      { if (typeof mcLoadProducts === 'function')    mcLoadProducts(); }
+  else if (id === 'rev-reports')       { if (typeof mcLoadRevenueReport === 'function') mcLoadRevenueReport(); }
+  else if (id === 'analytics-traffic') { if (typeof mcLoadTrafficSnapshot === 'function') mcLoadTrafficSnapshot(); }
+  else if (id === 'analytics-leads')   { if (typeof mcLoadLeadSources === 'function') mcLoadLeadSources(); }
+  else if (id === 'analytics-funnel')  { if (typeof mcLoadFunnel === 'function')      mcLoadFunnel(); }
+  else if (id === 'analytics-revenue') { if (typeof mcLoadRevenueReport === 'function') mcLoadRevenueReport(); }
+  else if (id === 'email-campaigns')   { if (typeof mcLoadTemplates === 'function')   mcLoadTemplates(); }
+  else if (id === 'email-templates')   { if (typeof mcLoadTemplates === 'function')   mcLoadTemplates(); }
+  else if (id === 'email-sequences')   { if (typeof mcLoadTemplates === 'function')   mcLoadTemplates(); }
+  else if (id === 'email-subscribers') { if (typeof mcLoadSubscribers === 'function') mcLoadSubscribers(); }
+  else if (id === 'webinar-replay')    { if (typeof mcLoadWebinars === 'function')    mcLoadWebinars(); }
+  else if (id === 'webinar-schedule')  { if (typeof mcLoadWebinars === 'function')    mcLoadWebinars(); }
 }
 
 // Open a panel from a URL hash on page load (e.g. /admin#case-files)
@@ -4446,6 +4499,9 @@ document.addEventListener('input', (e) => {
     else if (type === 'proposals') mcRenderProposals(_mcCache[type]);
     else if (type === 'contracts') mcRenderContracts(_mcCache[type]);
     else if (type === 'invoices') mcRenderInvoices(_mcCache[type]);
+    else if (type === 'submissions') mcRenderSubmissions(_mcCache[type]);
+    else if (type === 'transactions') mcRenderTransactions(_mcCache[type]);
+    else if (type === 'subscribers') mcRenderSubscribers(_mcCache.contacts || {});
   }
 });
 
@@ -4661,6 +4717,742 @@ function mcFmtRelTime(s) {
     if (diff < 604800000) return Math.round(diff / 86400000) + 'd ago';
     return new Date(s).toLocaleDateString('en-US', { month: 'short', day: 'numeric' });
   } catch { return '—'; }
+}
+
+// ════════════════════════════════════════════════════════════════
+// SHARED WRITE HELPER + GENERIC EDITOR MODAL
+// All admin-mc-write traffic flows through this so authentication,
+// audit logging, and error handling stay consistent.
+// ════════════════════════════════════════════════════════════════
+const MC_WRITE_API = '/.netlify/functions/admin-mc-write';
+
+async function mcWrite(table, op, payload) {
+  const body = { table, op, ...payload };
+  const res = await fetch(MC_WRITE_API, {
+    method: 'POST', credentials: 'include', headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify(body),
+  });
+  const data = await res.json().catch(() => ({}));
+  if (!res.ok) throw new Error(data.error || `HTTP ${res.status}`);
+  return data;
+}
+
+function mcConfirmDelete(table, id, label, refreshFn) {
+  if (!confirm(`Delete ${label}? This cannot be undone.`)) return;
+  mcWrite(table, 'delete', { id })
+    .then(() => { delete _mcCache[table]; if (refreshFn) refreshFn(true); })
+    .catch(e => alert('Delete failed: ' + e.message));
+}
+
+// Generic modal — re-uses the same backdrop/modal markup as cf-modal.
+// Usage: mcOpenModal({ title, fields: [...], submit: async (values) => {...} })
+function mcOpenModal({ title, eyebrow, fields, values, submit, onClose }) {
+  // Build the modal DOM if it doesn't exist
+  let modal = document.getElementById('mc-modal-backdrop');
+  if (!modal) {
+    modal = document.createElement('div');
+    modal.id = 'mc-modal-backdrop';
+    modal.className = 'cf-modal-backdrop';
+    modal.innerHTML = `
+      <div class="cf-modal" role="dialog" aria-modal="true">
+        <div class="cf-modal-head">
+          <div>
+            <div class="cf-modal-eyebrow" id="mc-modal-eyebrow">Edit</div>
+            <h3 id="mc-modal-title">Edit</h3>
+          </div>
+          <button class="cf-modal-close" onclick="mcCloseModal()" aria-label="Close">×</button>
+        </div>
+        <form id="mc-modal-form">
+          <div class="cf-modal-body" id="mc-modal-body"></div>
+          <div id="mc-modal-result" class="cf-edit-result"></div>
+          <div class="cf-modal-foot">
+            <button type="button" class="cf-btn outline" onclick="mcCloseModal()">Cancel</button>
+            <button type="submit" class="cf-btn primary">Save</button>
+          </div>
+        </form>
+      </div>`;
+    document.body.appendChild(modal);
+    modal.addEventListener('click', (ev) => { if (ev.target === modal) mcCloseModal(); });
+  }
+  document.getElementById('mc-modal-title').textContent = title;
+  document.getElementById('mc-modal-eyebrow').textContent = eyebrow || 'Edit';
+  const body = document.getElementById('mc-modal-body');
+  body.innerHTML = (fields || []).map(f => {
+    const v = (values && f.name in values) ? values[f.name] : (f.default || '');
+    if (f.type === 'textarea') {
+      return `<div class="cf-row"><div class="cf-field full"><label>${mcEsc(f.label)}${f.required?' *':''}</label><textarea name="${mcEsc(f.name)}" rows="${f.rows||4}" ${f.required?'required':''} placeholder="${mcEsc(f.placeholder||'')}">${mcEsc(v||'')}</textarea>${f.hint?`<div style="font-size:.7rem;color:#94A3B8;margin-top:.2rem;">${mcEsc(f.hint)}</div>`:''}</div></div>`;
+    }
+    if (f.type === 'select') {
+      const opts = (f.options || []).map(o => `<option value="${mcEsc(o.value)}" ${o.value===v?'selected':''}>${mcEsc(o.label||o.value)}</option>`).join('');
+      return `<div class="cf-row"><div class="cf-field ${f.full?'full':''}"><label>${mcEsc(f.label)}${f.required?' *':''}</label><select name="${mcEsc(f.name)}" ${f.required?'required':''}>${opts}</select></div></div>`;
+    }
+    if (f.type === 'checkbox') {
+      return `<div class="cf-row"><div class="cf-field full"><label style="display:flex;align-items:center;gap:.5rem;cursor:pointer;text-transform:none;letter-spacing:0;font-size:.86rem;color:#0A1628;font-weight:500;font-family:'Barlow',sans-serif;"><input type="checkbox" name="${mcEsc(f.name)}" ${v?'checked':''} style="width:auto;margin:0;"> ${mcEsc(f.label)}</label></div></div>`;
+    }
+    return `<div class="cf-row"><div class="cf-field ${f.full?'full':''}"><label>${mcEsc(f.label)}${f.required?' *':''}</label><input type="${f.type||'text'}" name="${mcEsc(f.name)}" value="${mcEsc(v)}" placeholder="${mcEsc(f.placeholder||'')}" ${f.required?'required':''}>${f.hint?`<div style="font-size:.7rem;color:#94A3B8;margin-top:.2rem;">${mcEsc(f.hint)}</div>`:''}</div></div>`;
+  }).join('');
+  document.getElementById('mc-modal-result').className = 'cf-edit-result';
+  document.getElementById('mc-modal-result').textContent = '';
+  document.getElementById('mc-modal-form').onsubmit = async (ev) => {
+    ev.preventDefault();
+    const form = ev.target;
+    const out = {};
+    for (const f of (fields||[])) {
+      const el = form.elements[f.name];
+      if (!el) continue;
+      if (f.type === 'checkbox') out[f.name] = el.checked;
+      else if (f.type === 'number') out[f.name] = el.value === '' ? null : Number(el.value);
+      else out[f.name] = el.value;
+    }
+    const result = document.getElementById('mc-modal-result');
+    result.className = 'cf-edit-result';
+    result.textContent = 'Saving…';
+    try {
+      await submit(out);
+      result.classList.add('ok'); result.textContent = 'Saved.';
+      setTimeout(() => { mcCloseModal(); if (onClose) onClose(); }, 500);
+    } catch (e) {
+      result.classList.add('err'); result.textContent = 'Save failed: ' + e.message;
+    }
+  };
+  modal.classList.add('open');
+}
+function mcCloseModal() {
+  const m = document.getElementById('mc-modal-backdrop');
+  if (m) m.classList.remove('open');
+}
+
+// ════════════════════════════════════════════════════════════════
+// NOTES & ACTIVITY (panel-crm-notes)
+// ════════════════════════════════════════════════════════════════
+let _mcNotesClientFilter = '';
+function mcLoadNotes(force) {
+  // populate the client-filter dropdown lazily
+  if (!_mcCache.contacts) {
+    fetch(`${MC_API}?type=contacts`, { credentials: 'include' })
+      .then(r => r.ok ? r.json() : null).then(d => { if (d) { _mcCache.contacts = d; mcPopulateNotesClientFilter(); } });
+  } else { mcPopulateNotesClientFilter(); }
+  mcFetch('notes', mcRenderNotes, force);
+}
+function mcPopulateNotesClientFilter() {
+  const sel = document.getElementById('mc-notes-client-filter');
+  if (!sel) return;
+  const contacts = _mcCache.contacts?.contacts || [];
+  sel.innerHTML = '<option value="">All clients</option>' + contacts.map(c => `<option value="${mcEsc(c.id)}">${mcEsc(c.legal_name)}</option>`).join('');
+  sel.value = _mcNotesClientFilter || '';
+  sel.onchange = () => { _mcNotesClientFilter = sel.value; mcLoadNotes(true); };
+}
+function mcRenderNotes(data) {
+  const all = data.notes || [];
+  const list = _mcNotesClientFilter ? all.filter(n => n.client_id === _mcNotesClientFilter) : all;
+  document.getElementById('mc-notes-stats').innerHTML = [
+    mcStatTile('Total Notes', all.length, ''),
+    mcStatTile('Pinned', all.filter(n => n.pinned).length, '', 'orange'),
+    mcStatTile('Calls Logged', all.filter(n => n.category === 'call').length, ''),
+    mcStatTile('Last 7 Days', all.filter(n => (Date.now()-new Date(n.created_at).getTime()) < 7*86400000).length, ''),
+  ].join('');
+  if (!list.length) {
+    document.getElementById('mc-notes-body').innerHTML = `<div class="mc-empty"><div class="ico">📝</div><h3>No notes yet</h3><p>Click "+ Add Note" to log a call, meeting, or observation. Notes are filterable by client and surface in the Activity dashboard.</p></div>`;
+    return;
+  }
+  document.getElementById('mc-notes-body').innerHTML = `<div class="mc-card-body no-pad" style="max-height:none;">${list.map(n => `
+    <div style="padding:1rem 1.25rem;border-bottom:1px solid #F1F5F9;cursor:pointer;" onclick="mcGoToCase('${mcEsc(n.client_slug)}')">
+      <div style="display:flex;justify-content:space-between;align-items:flex-start;gap:.85rem;">
+        <div style="flex:1 1 auto;min-width:0;">
+          <div style="display:flex;align-items:center;gap:.5rem;margin-bottom:.3rem;">
+            <span class="mc-pill mc-pill-${n.category==='call'?'blue':n.category==='meeting'?'violet':n.category==='followup'?'orange':'grey'}">${mcEsc(n.category||'note')}</span>
+            ${n.pinned ? '<span class="mc-pill mc-pill-orange">📌 pinned</span>' : ''}
+            <span style="font-weight:700;color:#0A1628;font-size:.86rem;">${mcEsc(n.client_name||'(no client)')}</span>
+          </div>
+          <div style="font-size:.86rem;color:#1E293B;white-space:pre-wrap;line-height:1.5;">${mcEsc(n.body)}</div>
+          <div style="font-family:'DM Mono',monospace;font-size:.66rem;color:#94A3B8;margin-top:.4rem;">${mcEsc(n.author||'mark')} &middot; ${mcFmtRelTime(n.created_at)}</div>
+        </div>
+        <div style="display:flex;gap:.3rem;flex-shrink:0;" onclick="event.stopPropagation()">
+          <button class="mc-btn" style="padding:.3rem .6rem;font-size:.66rem;" onclick="mcOpenNoteEditor('${mcEsc(n.id)}')">edit</button>
+          <button class="mc-btn" style="padding:.3rem .6rem;font-size:.66rem;color:#DC2626;border-color:#FCA5A5;" onclick="mcConfirmDelete('notes','${mcEsc(n.id)}','this note',mcLoadNotes)">×</button>
+        </div>
+      </div>
+    </div>`).join('')}</div>`;
+}
+function mcOpenNoteEditor(id) {
+  const existing = id ? (_mcCache.notes?.notes || []).find(n => n.id === id) : null;
+  const contacts = _mcCache.contacts?.contacts || [];
+  const clientOpts = [{ value: '', label: '— No client / general note —' }, ...contacts.map(c => ({ value: c.id, label: c.legal_name }))];
+  mcOpenModal({
+    title: id ? 'Edit Note' : 'Add Note',
+    eyebrow: 'CRM · Activity',
+    fields: [
+      { name: 'client_id', label: 'Client', type: 'select', options: clientOpts },
+      { name: 'category', label: 'Category', type: 'select', options: [
+        { value: 'note', label: 'Note' }, { value: 'call', label: 'Call' }, { value: 'meeting', label: 'Meeting' },
+        { value: 'email', label: 'Email' }, { value: 'followup', label: 'Follow-up Reminder' }, { value: 'observation', label: 'Observation' },
+      ]},
+      { name: 'body', label: 'Note', type: 'textarea', rows: 6, required: true, full: true, placeholder: 'What happened? What did you learn? What is the next step?' },
+      { name: 'author', label: 'Author', placeholder: 'mark', default: 'mark' },
+      { name: 'pinned', label: 'Pin to top of timeline', type: 'checkbox' },
+    ],
+    values: existing || {},
+    submit: async (values) => {
+      // Empty client_id should send NULL
+      if (!values.client_id) values.client_id = null;
+      if (id) await mcWrite('notes', 'update', { id, data: values });
+      else await mcWrite('notes', 'create', { data: values });
+    },
+    onClose: () => { delete _mcCache.notes; mcLoadNotes(true); },
+  });
+}
+
+// ════════════════════════════════════════════════════════════════
+// PRODUCTS (panel-rev-products)
+// ════════════════════════════════════════════════════════════════
+function mcLoadProducts(force) { mcFetch('products', mcRenderProducts, force); }
+function mcRenderProducts(data) {
+  const all = data.products || [];
+  const active = all.filter(p => p.is_active);
+  const totalAnnualValue = all.reduce((s, p) => {
+    const fee = Number(p.fee_usd || 0);
+    if (p.fee_type === 'monthly') return s + fee * 12;
+    if (p.fee_type === 'quarterly') return s + fee * 4;
+    return s + fee;
+  }, 0);
+  document.getElementById('mc-products-stats').innerHTML = [
+    mcStatTile('Total Products', all.length, ''),
+    mcStatTile('Active', active.length, '', 'green'),
+    mcStatTile('Recurring', all.filter(p => ['monthly','quarterly'].includes(p.fee_type)).length, ''),
+    mcStatTile('Catalog Value', mcFmtUSD(totalAnnualValue), 'annualized', 'orange'),
+  ].join('');
+  if (!all.length) {
+    document.getElementById('mc-products-body').innerHTML = `<div class="mc-empty"><div class="ico">🏷</div><h3>No products yet</h3><p>Click "+ Add Product" to create a service offer.</p></div>`;
+    return;
+  }
+  document.getElementById('mc-products-body').innerHTML = `<div class="mc-table-wrap"><table class="mc-table"><thead><tr>
+    <th>Order</th><th>Product</th><th>Category</th><th>Price</th><th>Type</th><th>Delivery</th><th>Doc Prefix</th><th>Active</th><th></th>
+  </tr></thead><tbody>${all.map(p => `<tr onclick="mcOpenProductEditor('${mcEsc(p.id)}')">
+    <td><span class="id-cell">${p.display_order}</span></td>
+    <td><div class="name-cell">${mcEsc(p.name)}</div><div class="meta-cell">${mcEsc(p.slug)}</div>${p.description ? `<div class="meta-cell" style="margin-top:.2rem;max-width:420px;white-space:normal;">${mcEsc(p.description.slice(0, 140))}${p.description.length>140?'…':''}</div>` : ''}</td>
+    <td>${mcPill(p.category)}</td>
+    <td class="amt-cell">${p.fee_usd ? mcFmtUSD(p.fee_usd) : '<span style="color:#94A3B8;">custom</span>'}</td>
+    <td><span style="font-family:'DM Mono',monospace;font-size:.7rem;">${mcEsc(p.fee_type)}</span></td>
+    <td>${p.delivery_window_hrs ? p.delivery_window_hrs + 'h' : '—'}</td>
+    <td><span class="id-cell">${mcEsc(p.doc_prefix||'—')}</span></td>
+    <td>${p.is_active ? '<span class="mc-pill mc-pill-green">active</span>' : '<span class="mc-pill mc-pill-grey">off</span>'}</td>
+    <td onclick="event.stopPropagation()"><button class="mc-btn" style="padding:.3rem .6rem;font-size:.66rem;color:#DC2626;border-color:#FCA5A5;" onclick="mcConfirmDelete('products','${mcEsc(p.id)}','${mcEsc(p.name)}',mcLoadProducts)">×</button></td>
+  </tr>`).join('')}</tbody></table></div>`;
+}
+function mcOpenProductEditor(id) {
+  const existing = id ? (_mcCache.products?.products || []).find(p => p.id === id) : null;
+  mcOpenModal({
+    title: id ? 'Edit Product' : 'Add Product',
+    eyebrow: 'Revenue · Catalog',
+    fields: [
+      { name: 'slug', label: 'Slug', required: true, placeholder: 'business-discovery-audit', hint: 'lowercase, hyphen-separated, used in URLs' },
+      { name: 'name', label: 'Display Name', required: true, placeholder: 'Business Discovery Audit', full: true },
+      { name: 'category', label: 'Category', type: 'select', options: [
+        { value: 'consulting', label: 'Consulting (one-time)' },
+        { value: 'retainer', label: 'Retainer (recurring)' },
+        { value: 'investment', label: 'Investment / Fund' },
+        { value: 'product', label: 'Digital Product' },
+        { value: 'training', label: 'Training / Course' },
+      ]},
+      { name: 'fee_type', label: 'Fee Type', type: 'select', options: [
+        { value: 'one_time', label: 'One-time' },
+        { value: 'monthly', label: 'Monthly' },
+        { value: 'quarterly', label: 'Quarterly' },
+        { value: 'hourly', label: 'Hourly' },
+        { value: 'custom', label: 'Custom (no set price)' },
+      ]},
+      { name: 'fee_usd', label: 'Fee (USD)', type: 'number', placeholder: '2500' },
+      { name: 'delivery_window_hrs', label: 'Delivery Window (hours)', type: 'number', placeholder: '72' },
+      { name: 'doc_prefix', label: 'Doc Prefix', placeholder: 'AUD' },
+      { name: 'display_order', label: 'Display Order', type: 'number', placeholder: '100', default: 100 },
+      { name: 'description', label: 'Description', type: 'textarea', rows: 3, full: true },
+      { name: 'is_active', label: 'Active (shown in catalog + proposal generator)', type: 'checkbox', default: true },
+    ],
+    values: existing || { is_active: true, fee_type: 'one_time', category: 'consulting', display_order: 100 },
+    submit: async (values) => {
+      if (id) await mcWrite('products', 'update', { id, data: values });
+      else await mcWrite('products', 'create', { data: values });
+    },
+    onClose: () => { delete _mcCache.products; mcLoadProducts(true); },
+  });
+}
+
+// ════════════════════════════════════════════════════════════════
+// EMAIL TEMPLATES (campaigns + templates + sequences all share data)
+// ════════════════════════════════════════════════════════════════
+function mcLoadTemplates(force) { mcFetch('templates', mcRenderTemplates, force); }
+function mcRenderTemplates(data) {
+  const all = data.templates || [];
+  // Render into all 3 panels (only the visible one will show), filtered by category
+  const renderInto = (panelId, filterFn, eyebrow) => {
+    const filtered = filterFn ? all.filter(filterFn) : all;
+    const statsEl = document.getElementById(`mc-${panelId}-stats`);
+    const bodyEl = document.getElementById(`mc-${panelId}-body`);
+    if (!bodyEl) return;
+    if (statsEl) statsEl.innerHTML = [
+      mcStatTile('Templates', filtered.length, ''),
+      mcStatTile('Active', filtered.filter(t => t.is_active).length, '', 'green'),
+      mcStatTile('Total Sends', filtered.reduce((s,t) => s + (t.send_count||0), 0), ''),
+      mcStatTile('Last Sent', filtered.find(t => t.last_sent_at) ? mcFmtRelTime(filtered.find(t => t.last_sent_at).last_sent_at) : 'never', ''),
+    ].join('');
+    if (!filtered.length) {
+      bodyEl.innerHTML = `<div class="mc-empty"><div class="ico">📨</div><h3>No ${eyebrow} yet</h3><p>Click "+ New" above to create one.</p></div>`;
+      return;
+    }
+    bodyEl.innerHTML = `<div class="mc-table-wrap"><table class="mc-table"><thead><tr>
+      <th>Name</th><th>Subject</th><th>Category</th><th>Variables</th><th>Sends</th><th>Last Sent</th><th>Active</th><th></th>
+    </tr></thead><tbody>${filtered.map(t => `<tr onclick="mcOpenTemplateEditor('${mcEsc(t.id)}')">
+      <td><div class="name-cell">${mcEsc(t.name)}</div><div class="meta-cell">${mcEsc(t.slug)}</div></td>
+      <td>${mcEsc(t.subject || '')}${t.preheader ? `<div class="meta-cell">${mcEsc(t.preheader)}</div>` : ''}</td>
+      <td>${mcPill(t.category)}</td>
+      <td><span style="font-family:'DM Mono',monospace;font-size:.66rem;color:#475569;">${(t.variables || []).slice(0, 3).join(', ')}${(t.variables||[]).length>3?'…':''}</span></td>
+      <td>${t.send_count || 0}</td>
+      <td>${t.last_sent_at ? mcFmtRelTime(t.last_sent_at) : '<span style="color:#94A3B8;">never</span>'}</td>
+      <td>${t.is_active ? '<span class="mc-pill mc-pill-green">active</span>' : '<span class="mc-pill mc-pill-grey">off</span>'}</td>
+      <td onclick="event.stopPropagation()"><button class="mc-btn" style="padding:.3rem .6rem;font-size:.66rem;color:#DC2626;border-color:#FCA5A5;" onclick="mcConfirmDelete('templates','${mcEsc(t.id)}','${mcEsc(t.name)}',mcLoadTemplates)">×</button></td>
+    </tr>`).join('')}</tbody></table></div>`;
+  };
+  renderInto('email-templates', null, 'templates');
+  renderInto('email-campaigns', t => t.category === 'campaign', 'campaigns');
+  renderInto('email-sequences', t => t.category === 'sequence', 'sequences');
+}
+function mcOpenTemplateEditor(id, defaultCategory) {
+  const existing = id ? (_mcCache.templates?.templates || []).find(t => t.id === id) : null;
+  mcOpenModal({
+    title: id ? 'Edit Template' : 'New Template',
+    eyebrow: 'Email · Library',
+    fields: [
+      { name: 'slug', label: 'Slug', required: true, placeholder: 'discovery-call-invite' },
+      { name: 'name', label: 'Display Name', required: true, full: true },
+      { name: 'category', label: 'Category', type: 'select', options: [
+        { value: 'transactional', label: 'Transactional' },
+        { value: 'campaign', label: 'Campaign / Broadcast' },
+        { value: 'sequence', label: 'Sequence Step (drip)' },
+        { value: 'proposal', label: 'Proposal' },
+      ]},
+      { name: 'subject', label: 'Subject Line', required: true, full: true, placeholder: 'Quick {{topic}} call?' },
+      { name: 'preheader', label: 'Preheader (preview text)', full: true, placeholder: 'I have a 30-min slot on {{date_window}} that might fit.' },
+      { name: 'html_body', label: 'HTML Body', type: 'textarea', rows: 10, required: true, full: true, placeholder: '<p>Hi {{first_name}},</p>...', hint: 'Use {{variable_name}} placeholders. Final HTML body — full <html> wrapping isn\'t needed.' },
+      { name: 'is_active', label: 'Active (available to send)', type: 'checkbox', default: true },
+    ],
+    values: existing || { is_active: true, category: defaultCategory || 'transactional' },
+    submit: async (values) => {
+      // Auto-extract variable names from {{var}} placeholders in subject + body
+      const all = (values.subject || '') + ' ' + (values.html_body || '') + ' ' + (values.preheader || '');
+      const vars = Array.from(new Set((all.match(/\{\{\s*([a-z0-9_]+)\s*\}\}/gi) || []).map(s => s.replace(/\{\{|\}\}|\s/g, ''))));
+      values.variables = vars;
+      if (id) await mcWrite('templates', 'update', { id, data: values });
+      else await mcWrite('templates', 'create', { data: values });
+    },
+    onClose: () => { delete _mcCache.templates; mcLoadTemplates(true); },
+  });
+}
+
+// ════════════════════════════════════════════════════════════════
+// WEBINARS (replays + schedule share data, filtered by status)
+// ════════════════════════════════════════════════════════════════
+function mcLoadWebinars(force) { mcFetch('webinars', mcRenderWebinars, force); }
+function mcRenderWebinars(data) {
+  const all = data.webinars || [];
+  const upcoming = all.filter(w => ['draft','scheduled','live'].includes(w.status));
+  const replays = all.filter(w => ['recorded','archived'].includes(w.status));
+
+  const renderList = (panelId, list, eyebrow, emptyText) => {
+    const statsEl = document.getElementById(`mc-${panelId}-stats`);
+    const bodyEl = document.getElementById(`mc-${panelId}-body`);
+    if (!bodyEl) return;
+    if (statsEl) statsEl.innerHTML = [
+      mcStatTile('Total', list.length, ''),
+      mcStatTile('Registrants', list.reduce((s,w) => s + (w.registrant_count||0), 0), ''),
+      mcStatTile('Attendees', list.reduce((s,w) => s + (w.attendee_count||0), 0), ''),
+      mcStatTile('Replay Views', list.reduce((s,w) => s + (w.replay_view_count||0), 0), ''),
+    ].join('');
+    if (!list.length) {
+      bodyEl.innerHTML = `<div class="mc-empty"><div class="ico">📅</div><h3>${emptyText}</h3><p>Click "+ Add" above to create one.</p></div>`;
+      return;
+    }
+    bodyEl.innerHTML = `<div class="mc-table-wrap"><table class="mc-table"><thead><tr>
+      <th>Title</th><th>Topic</th><th>${panelId==='webinar-replay'?'Recorded':'Scheduled'}</th><th>Status</th><th>Registrants</th><th>${panelId==='webinar-replay'?'Replay Views':'Attendees'}</th><th>Link</th><th></th>
+    </tr></thead><tbody>${list.map(w => `<tr onclick="mcOpenWebinarEditor('${mcEsc(w.id)}')">
+      <td><div class="name-cell">${mcEsc(w.title)}</div><div class="meta-cell">${mcEsc(w.slug)}</div></td>
+      <td>${mcEsc(w.topic||'—')}</td>
+      <td>${mcFmtDateTime(w.scheduled_at)}</td>
+      <td>${mcPill(w.status)}</td>
+      <td>${w.registrant_count||0}</td>
+      <td>${panelId==='webinar-replay' ? (w.replay_view_count||0) : (w.attendee_count||0)}</td>
+      <td>${(panelId==='webinar-replay'?w.replay_url:w.live_url) ? `<a class="mc-btn" style="padding:.3rem .6rem;font-size:.66rem;" href="${mcEsc(panelId==='webinar-replay'?w.replay_url:w.live_url)}" target="_blank" rel="noopener" onclick="event.stopPropagation()">open</a>` : '<span style="color:#94A3B8;font-size:.7rem;">—</span>'}</td>
+      <td onclick="event.stopPropagation()"><button class="mc-btn" style="padding:.3rem .6rem;font-size:.66rem;color:#DC2626;border-color:#FCA5A5;" onclick="mcConfirmDelete('webinars','${mcEsc(w.id)}','${mcEsc(w.title)}',mcLoadWebinars)">×</button></td>
+    </tr>`).join('')}</tbody></table></div>`;
+  };
+  renderList('webinar-replay', replays, 'Webinars · Replays', 'No replays recorded yet');
+  renderList('webinar-schedule', upcoming, 'Webinars · Schedule', 'No webinars scheduled');
+}
+function mcOpenWebinarEditor(id, defaultStatus) {
+  const existing = id ? (_mcCache.webinars?.webinars || []).find(w => w.id === id) : null;
+  const toLocalInput = (iso) => { if (!iso) return ''; const d = new Date(iso); const off = d.getTimezoneOffset()*60000; return new Date(d.getTime()-off).toISOString().slice(0,16); };
+  mcOpenModal({
+    title: id ? 'Edit Webinar' : 'New Webinar',
+    eyebrow: 'Webinars',
+    fields: [
+      { name: 'slug', label: 'Slug', required: true, placeholder: 'q4-2026-saas-pricing' },
+      { name: 'title', label: 'Title', required: true, full: true },
+      { name: 'topic', label: 'Topic / Subhead', full: true },
+      { name: 'host', label: 'Host', default: 'Mark Gabrielli' },
+      { name: 'duration_minutes', label: 'Duration (minutes)', type: 'number', default: 60 },
+      { name: 'scheduled_at', label: 'Scheduled At (local time)', type: 'datetime-local' },
+      { name: 'registration_open_at', label: 'Registration Opens', type: 'datetime-local' },
+      { name: 'registration_close_at', label: 'Registration Closes', type: 'datetime-local' },
+      { name: 'live_url', label: 'Live Stream URL', full: true, placeholder: 'https://riverside.fm/...' },
+      { name: 'replay_url', label: 'Replay URL', full: true, placeholder: 'https://youtube.com/watch?...' },
+      { name: 'replay_password', label: 'Replay Password', placeholder: 'optional' },
+      { name: 'registrant_count', label: 'Registrants', type: 'number', default: 0 },
+      { name: 'attendee_count', label: 'Attendees', type: 'number', default: 0 },
+      { name: 'replay_view_count', label: 'Replay Views', type: 'number', default: 0 },
+      { name: 'status', label: 'Status', type: 'select', options: [
+        { value: 'draft', label: 'Draft' },
+        { value: 'scheduled', label: 'Scheduled' },
+        { value: 'live', label: 'Live (in progress)' },
+        { value: 'recorded', label: 'Recorded (replay available)' },
+        { value: 'archived', label: 'Archived' },
+      ]},
+      { name: 'notes', label: 'Internal Notes', type: 'textarea', rows: 3, full: true },
+    ],
+    values: existing ? {
+      ...existing,
+      scheduled_at: toLocalInput(existing.scheduled_at),
+      registration_open_at: toLocalInput(existing.registration_open_at),
+      registration_close_at: toLocalInput(existing.registration_close_at),
+    } : { status: defaultStatus || 'draft', host: 'Mark Gabrielli', duration_minutes: 60 },
+    submit: async (values) => {
+      // Convert datetime-local to ISO
+      ['scheduled_at','registration_open_at','registration_close_at'].forEach(k => {
+        if (values[k]) values[k] = new Date(values[k]).toISOString();
+        else values[k] = null;
+      });
+      if (id) await mcWrite('webinars', 'update', { id, data: values });
+      else await mcWrite('webinars', 'create', { data: values });
+    },
+    onClose: () => { delete _mcCache.webinars; mcLoadWebinars(true); },
+  });
+}
+
+// ════════════════════════════════════════════════════════════════
+// SUBMISSIONS (forms-submissions)
+// ════════════════════════════════════════════════════════════════
+function mcLoadSubmissions(force) { mcFetch('submissions', mcRenderSubmissions, force); }
+function mcRenderSubmissions(data) {
+  const all = data.submissions || [];
+  const q = (_mcSearch.submissions || '').toLowerCase();
+  const list = q ? all.filter(s =>
+    (s.client_name||'').toLowerCase().includes(q) ||
+    (s.doc_id||'').toLowerCase().includes(q) ||
+    (s.doc_name||'').toLowerCase().includes(q) ||
+    (s.client_email||'').toLowerCase().includes(q)
+  ) : all;
+  document.getElementById('mc-submissions-stats').innerHTML = [
+    mcStatTile('Total', all.length, ''),
+    mcStatTile('Client Signed', all.filter(s => s.status === 'client_signed').length, '', 'blue'),
+    mcStatTile('Executed', all.filter(s => s.status === 'executed').length, '', 'green'),
+    mcStatTile('Last 7 Days', all.filter(s => (s.executed_at||s.client_signed_at) && (Date.now()-new Date(s.executed_at||s.client_signed_at).getTime()) < 7*86400000).length, ''),
+  ].join('');
+  if (!list.length) {
+    document.getElementById('mc-submissions-body').innerHTML = `<div class="mc-empty"><div class="ico">📥</div><h3>No submissions yet</h3><p>Documents appear here when a client signs or you countersign.</p></div>`;
+    return;
+  }
+  document.getElementById('mc-submissions-body').innerHTML = `<div class="mc-table-wrap"><table class="mc-table"><thead><tr>
+    <th>Doc ID</th><th>Document</th><th>Client</th><th>Type</th><th>Status</th><th>Signed</th><th>Executed</th><th>IP</th><th></th>
+  </tr></thead><tbody>${list.map(s => `<tr onclick="mcGoToCase('${mcEsc(s.client_slug)}')">
+    <td><span class="id-cell">${mcEsc(s.doc_id)}</span></td>
+    <td><div class="name-cell">${mcEsc(s.doc_name)}</div><div class="meta-cell">${mcEsc(s.engagement_name || '')}</div></td>
+    <td>${mcEsc(s.client_name || '—')}<div class="meta-cell">${mcEsc(s.client_email || '')}</div></td>
+    <td>${mcPill(s.doc_type)}</td>
+    <td>${mcPill(s.status)}</td>
+    <td>${mcFmtDate(s.client_signed_at)}</td>
+    <td>${mcFmtDate(s.executed_at)}</td>
+    <td><span style="font-family:'DM Mono',monospace;font-size:.66rem;color:#94A3B8;">${mcEsc(s.client_ip||'—')}</span></td>
+    <td>${s.storage_path ? `<button class="mc-btn" style="padding:.3rem .6rem;font-size:.66rem;" onclick="event.stopPropagation();cfOpenDoc('${mcEsc(s.storage_path)}')">PDF</button>` : ''}</td>
+  </tr>`).join('')}</tbody></table></div>`;
+}
+
+// ════════════════════════════════════════════════════════════════
+// TRANSACTIONS (rev-transactions)
+// ════════════════════════════════════════════════════════════════
+function mcLoadTransactions(force) { mcFetch('transactions', mcRenderTransactions, force); }
+function mcRenderTransactions(data) {
+  const all = data.transactions || [];
+  const q = (_mcSearch.transactions || '').toLowerCase();
+  const list = q ? all.filter(t =>
+    (t.client_name||'').toLowerCase().includes(q) ||
+    (t.engagement_name||'').toLowerCase().includes(q) ||
+    (t.square_invoice_id||'').toLowerCase().includes(q) ||
+    (t.square_payment_id||'').toLowerCase().includes(q)
+  ) : all;
+  const live = all.filter(t => !t.is_test);
+  document.getElementById('mc-transactions-stats').innerHTML = [
+    mcStatTile('Live Transactions', live.length, all.length > live.length ? `+${all.length - live.length} test` : ''),
+    mcStatTile('Total Revenue', mcFmtUSD(live.reduce((s,t) => s + Number(t.amount_usd||0), 0)), '', 'green'),
+    mcStatTile('Avg Transaction', mcFmtUSD(live.length ? live.reduce((s,t) => s + Number(t.amount_usd||0), 0) / live.length : 0), ''),
+    mcStatTile('Last 30 Days', mcFmtUSD(live.filter(t => t.paid_at && (Date.now()-new Date(t.paid_at).getTime()) < 30*86400000).reduce((s,t) => s + Number(t.amount_usd||0), 0)), '', 'orange'),
+  ].join('');
+  if (!list.length) {
+    document.getElementById('mc-transactions-body').innerHTML = `<div class="mc-empty"><div class="ico">💳</div><h3>No transactions yet</h3><p>Paid invoices appear here.</p></div>`;
+    return;
+  }
+  document.getElementById('mc-transactions-body').innerHTML = `<div class="mc-table-wrap"><table class="mc-table"><thead><tr>
+    <th>Paid At</th><th>Client</th><th>Engagement</th><th>Amount</th><th>Square Invoice</th><th>Payment ID</th><th></th>
+  </tr></thead><tbody>${list.map(t => `<tr onclick="mcGoToCase('${mcEsc(t.client_slug)}')">
+    <td>${mcFmtDateTime(t.paid_at)}</td>
+    <td><div class="name-cell">${mcEsc(t.client_name || '—')}</div><div class="meta-cell">${mcEsc(t.client_contact || '')}</div></td>
+    <td>${mcEsc(t.engagement_name || '—')}</td>
+    <td class="amt-cell" style="color:#10B981;">${mcFmtUSD(t.amount_usd)}${t.is_test ? '<span class="test-tag">TEST</span>' : ''}</td>
+    <td><span class="id-cell">${mcEsc((t.square_invoice_id||'').slice(-12) || '—')}</span></td>
+    <td><span class="id-cell">${mcEsc((t.square_payment_id||'').slice(0,16) || '—')}</span></td>
+    <td>${t.square_invoice_url ? `<a class="mc-btn" style="padding:.3rem .6rem;font-size:.66rem;" href="${mcEsc(t.square_invoice_url)}" target="_blank" rel="noopener" onclick="event.stopPropagation()">view</a>` : ''}</td>
+  </tr>`).join('')}</tbody></table></div>`;
+}
+
+// ════════════════════════════════════════════════════════════════
+// REVENUE REPORTS + ANALYTICS (shared data, two views)
+// ════════════════════════════════════════════════════════════════
+function mcLoadRevenueReport(force) { mcFetch('revenue-report', mcRenderRevenueReport, force); }
+function mcRenderRevenueReport(data) {
+  const months = data.months || [];
+  const total = data.total_revenue || 0;
+  const count = data.total_count || 0;
+  const avg = data.avg_invoice || 0;
+  const maxRev = months.reduce((m, b) => Math.max(m, b.revenue), 0);
+
+  // Monthly bar chart
+  const barChart = months.length ? `<div style="background:#FFFFFF;border:1px solid #E2E8F0;border-radius:14px;padding:1.25rem;">
+    <div style="font-family:'DM Mono',monospace;font-size:.6rem;letter-spacing:.18em;text-transform:uppercase;color:#475569;font-weight:700;margin-bottom:1rem;">Monthly Revenue</div>
+    <div style="display:flex;align-items:flex-end;gap:.5rem;height:240px;padding:.5rem 0;">
+      ${months.map(m => `<div style="flex:1 1 0;display:flex;flex-direction:column;align-items:center;gap:.4rem;min-width:0;">
+        <div style="font-family:'Bebas Neue',Impact,sans-serif;font-size:.85rem;color:#0A1628;letter-spacing:.02em;">${mcFmtUSD(m.revenue)}</div>
+        <div style="width:100%;background:linear-gradient(180deg,#2563EB,#1D4ED8);border-radius:6px 6px 0 0;height:${maxRev?(m.revenue/maxRev*180):4}px;min-height:4px;transition:height .3s;"></div>
+        <div style="font-family:'DM Mono',monospace;font-size:.62rem;color:#475569;letter-spacing:.04em;">${mcEsc(m.month)}</div>
+        <div style="font-size:.66rem;color:#94A3B8;">${m.count} inv</div>
+      </div>`).join('')}
+    </div>
+  </div>` : `<div class="mc-empty"><div class="ico">📈</div><h3>No revenue yet</h3><p>This chart populates the moment your first real invoice is paid.</p></div>`;
+
+  const stats = [
+    mcStatTile('Lifetime Revenue', mcFmtUSD(total), '', 'green'),
+    mcStatTile('Paid Invoices', count, ''),
+    mcStatTile('Avg Invoice', mcFmtUSD(avg), '', 'blue'),
+    mcStatTile('Months Active', months.length, ''),
+  ];
+
+  // Render into both rev-reports and rev-analytics + dashboard analytics-revenue
+  ['mc-rev-reports-stats','mc-rev-analytics-stats'].forEach(eid => { const el = document.getElementById(eid); if (el) el.innerHTML = stats.join(''); });
+  ['mc-rev-reports-body','mc-rev-analytics-body'].forEach(eid => { const el = document.getElementById(eid); if (el) el.innerHTML = barChart; });
+}
+
+// ════════════════════════════════════════════════════════════════
+// FUNNEL (analytics-funnel)
+// ════════════════════════════════════════════════════════════════
+function mcLoadFunnel(force) { mcFetch('funnel', mcRenderFunnel, force); }
+function mcRenderFunnel(data) {
+  const stages = data.funnel || [];
+  const top = stages[0]?.count || 1;
+  document.getElementById('mc-funnel-stats').innerHTML = [
+    mcStatTile('Top of Funnel', stages[0]?.count || 0, 'contacts created'),
+    mcStatTile('Bottom of Funnel', stages[stages.length-1]?.count || 0, 'paid clients', 'green'),
+    mcStatTile('Overall Conversion', (stages[stages.length-1]?.pct || 0) + '%', 'contact → paid', 'orange'),
+    mcStatTile('Biggest Drop', mcFunnelBiggestDrop(stages), 'where leads stall', 'red'),
+  ].join('');
+  if (!stages.length) {
+    document.getElementById('mc-funnel-body').innerHTML = '<div class="mc-empty"><div class="ico">🔽</div><h3>Need data</h3><p>Funnel populates from contacts, engagements, documents and invoices.</p></div>';
+    return;
+  }
+  document.getElementById('mc-funnel-body').innerHTML = `<div style="background:#FFFFFF;border:1px solid #E2E8F0;border-radius:14px;padding:1.5rem 1.75rem;">
+    ${stages.map((s, i) => {
+      const prev = stages[i-1]?.count;
+      const dropPct = prev ? (1 - s.count/prev) * 100 : 0;
+      const widthPct = top ? (s.count / top * 100) : 0;
+      return `<div style="margin-bottom:1.1rem;">
+        <div style="display:flex;justify-content:space-between;align-items:baseline;margin-bottom:.4rem;">
+          <span style="font-family:'DM Mono',monospace;font-size:.7rem;letter-spacing:.12em;text-transform:uppercase;color:#475569;font-weight:700;">${i+1}. ${mcEsc(s.stage)}</span>
+          <span style="display:flex;gap:.85rem;align-items:baseline;">
+            <span style="font-family:'Bebas Neue',Impact,sans-serif;font-size:1.4rem;color:#0A1628;letter-spacing:.02em;">${s.count}</span>
+            <span style="font-family:'DM Mono',monospace;font-size:.7rem;color:#2563EB;font-weight:700;">${s.pct}%</span>
+            ${i > 0 && prev ? `<span style="font-family:'DM Mono',monospace;font-size:.66rem;color:${dropPct>50?'#DC2626':dropPct>20?'#F97316':'#10B981'};">${dropPct>0?'-':''}${dropPct.toFixed(0)}%</span>` : ''}
+          </span>
+        </div>
+        <div style="height:14px;background:#F1F5F9;border-radius:7px;overflow:hidden;">
+          <div style="height:100%;background:linear-gradient(90deg,#2563EB,#1D4ED8);width:${widthPct}%;border-radius:7px;transition:width .4s ease;"></div>
+        </div>
+      </div>`;
+    }).join('')}
+  </div>`;
+}
+function mcFunnelBiggestDrop(stages) {
+  let worst = null, worstPct = 0;
+  for (let i = 1; i < stages.length; i++) {
+    const prev = stages[i-1].count;
+    if (!prev) continue;
+    const drop = 1 - stages[i].count / prev;
+    if (drop > worstPct) { worstPct = drop; worst = `${stages[i-1].stage} → ${stages[i].stage}`; }
+  }
+  return worst ? `${(worstPct*100).toFixed(0)}%` : '—';
+}
+
+// ════════════════════════════════════════════════════════════════
+// LEAD SOURCES (analytics-leads)
+// ════════════════════════════════════════════════════════════════
+function mcLoadLeadSources(force) { mcFetch('lead-sources', mcRenderLeadSources, force); }
+function mcRenderLeadSources(data) {
+  const sources = data.sources || [];
+  const totalContacts = sources.reduce((s, x) => s + x.contacts, 0);
+  const totalRevenue = sources.reduce((s, x) => s + x.revenue, 0);
+  document.getElementById('mc-lead-sources-stats').innerHTML = [
+    mcStatTile('Total Contacts', totalContacts, ''),
+    mcStatTile('Sources', sources.length, ''),
+    mcStatTile('Top Source', sources[0]?.source || '—', sources[0] ? `${sources[0].contacts} contacts` : '', 'blue'),
+    mcStatTile('Best Conversion', sources.reduce((b,s) => s.conversion_pct > (b?.conversion_pct||0) ? s : b, null)?.source || '—', '', 'green'),
+  ].join('');
+  if (!sources.length) {
+    document.getElementById('mc-lead-sources-body').innerHTML = '<div class="mc-empty"><div class="ico">🎯</div><h3>No source data yet</h3><p>Sources auto-populate from Calendly, manual entry, or referral fields on mc_clients.</p></div>';
+    return;
+  }
+  document.getElementById('mc-lead-sources-body').innerHTML = `<div class="mc-table-wrap"><table class="mc-table"><thead><tr>
+    <th>Source</th><th>Contacts</th><th>Engagements</th><th>Paid</th><th>Revenue</th><th>Contact → Paid %</th><th>Avg Deal</th>
+  </tr></thead><tbody>${sources.map(s => `<tr style="cursor:default;">
+    <td><div class="name-cell">${mcEsc(s.source)}</div></td>
+    <td>${s.contacts}</td>
+    <td>${s.engagements}</td>
+    <td><span class="mc-pill mc-pill-green">${s.paid}</span></td>
+    <td class="amt-cell">${mcFmtUSD(s.revenue)}</td>
+    <td><strong style="color:${s.conversion_pct > 30 ? '#10B981' : s.conversion_pct > 10 ? '#F97316' : '#94A3B8'};">${s.conversion_pct}%</strong></td>
+    <td class="amt-cell">${s.paid ? mcFmtUSD(s.revenue/s.paid) : '—'}</td>
+  </tr>`).join('')}</tbody></table></div>`;
+}
+
+// ════════════════════════════════════════════════════════════════
+// TRAFFIC SNAPSHOT (analytics-traffic)
+// Server-side only knows what its own functions saw. Real traffic
+// data lives in Netlify Analytics / GA. This shows form-submission
+// + audit-log patterns as a lightweight stand-in.
+// ════════════════════════════════════════════════════════════════
+function mcLoadTrafficSnapshot(force) {
+  const stats = document.getElementById('mc-traffic-stats');
+  const body = document.getElementById('mc-traffic-body');
+  if (!stats || !body) return;
+  // Compose from contacts + activity + form events
+  if (!_mcCache.contacts) {
+    fetch(`${MC_API}?type=contacts`, { credentials: 'include' }).then(r => r.ok && r.json()).then(d => { if (d) _mcCache.contacts = d; mcRenderTrafficSnapshot(); });
+  } else { mcRenderTrafficSnapshot(); }
+  if (!_mcCache.activity || force) {
+    fetch(`${MC_API}?type=activity&limit=100`, { credentials: 'include' }).then(r => r.ok && r.json()).then(d => { if (d) _mcCache.activity = d; mcRenderTrafficSnapshot(); });
+  }
+}
+function mcRenderTrafficSnapshot() {
+  const contacts = _mcCache.contacts?.contacts || [];
+  const activity = _mcCache.activity?.events || [];
+  const last7Days = activity.filter(e => (Date.now() - new Date(e.created_at).getTime()) < 7*86400000);
+  const formActivity = activity.filter(e => /signed|submitted|sent|test_sent/.test(e.event||''));
+  const stats = [
+    mcStatTile('Tracked Contacts', contacts.length, 'in CRM'),
+    mcStatTile('Activity (7d)', last7Days.length, 'pipeline events'),
+    mcStatTile('Form Touches', formActivity.length, 'sign / submit / test'),
+    mcStatTile('External', '—', 'open in Netlify Analytics'),
+  ];
+  const body = `<div class="mc-card" style="margin-bottom:1rem;"><div class="mc-card-head"><h4>Server-Side Activity Window</h4><span style="font-family:'DM Mono',monospace;font-size:.66rem;color:#94A3B8;">last 100 events</span></div><div class="mc-card-body">
+    <p style="font-size:.86rem;color:#475569;line-height:1.5;margin:0 0 .85rem;">Detailed page-level traffic data lives in Netlify Analytics + Google Analytics. Below are the in-app events that actually impact revenue (form submits, sign events, payment events) so you can correlate marketing spend with pipeline movement.</p>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:.75rem;font-size:.86rem;">
+      ${[['Audit events (7d)', last7Days.length],
+         ['Proposals sent', activity.filter(e=>e.event==='proposal_email_sent').length],
+         ['Test sends', activity.filter(e=>e.event==='proposal_email_test_sent').length],
+         ['Client signed', activity.filter(e=>(e.event||'').includes('signed')).length],
+         ['Executions', activity.filter(e=>e.event==='executed').length],
+         ['Invoice payments', activity.filter(e=>e.event==='invoice_paid').length],
+         ['Lead conversions (Calendly)', activity.filter(e=>(e.event||'').includes('calendly')).length],
+         ['Client edits', activity.filter(e=>e.event==='client_updated').length],
+        ].map(([label,n]) => `<div style="background:#F8FAFC;border:1px solid #E2E8F0;border-radius:8px;padding:.7rem .9rem;display:flex;justify-content:space-between;align-items:center;"><span style="color:#475569;">${mcEsc(label)}</span><strong style="font-family:'Bebas Neue',Impact,sans-serif;font-size:1.15rem;color:#0A1628;letter-spacing:.02em;">${n}</strong></div>`).join('')}
+    </div>
+  </div></div>
+  <div class="mc-card"><div class="mc-card-head"><h4>External Traffic Sources</h4></div><div class="mc-card-body">
+    <p style="font-size:.86rem;color:#475569;line-height:1.5;margin:0 0 .85rem;">For full visitor-level analytics, configure these:</p>
+    <ul style="list-style:none;padding:0;margin:0;font-size:.86rem;line-height:1.7;">
+      <li>• <strong>Netlify Analytics</strong> (server-side, no scripts): <a href="https://app.netlify.com/projects/markcmo/analytics" target="_blank" style="color:#2563EB;">app.netlify.com/projects/markcmo/analytics</a></li>
+      <li>• <strong>Google Analytics 4</strong>: add the GA snippet to <code>index.html</code> + every public page</li>
+      <li>• <strong>Search Console</strong>: <a href="https://search.google.com/search-console?resource_id=https://markcmo.com" target="_blank" style="color:#2563EB;">search.google.com/search-console</a></li>
+    </ul>
+  </div></div>`;
+  document.getElementById('mc-traffic-stats').innerHTML = stats.join('');
+  document.getElementById('mc-traffic-body').innerHTML = body;
+}
+
+// ════════════════════════════════════════════════════════════════
+// SUBSCRIBERS (email-subscribers): combined CRM + audit-derived
+// ════════════════════════════════════════════════════════════════
+function mcLoadSubscribers(force) {
+  if (!_mcCache.contacts || force) {
+    fetch(`${MC_API}?type=contacts`, { credentials: 'include' }).then(r => r.ok && r.json()).then(d => { if (d) { _mcCache.contacts = d; mcRenderSubscribers(d); } });
+  } else { mcRenderSubscribers(_mcCache.contacts); }
+}
+function mcRenderSubscribers(data) {
+  const all = data.contacts || [];
+  const q = (_mcSearch.subscribers || '').toLowerCase();
+  const list = q ? all.filter(c =>
+    (c.legal_name||'').toLowerCase().includes(q) ||
+    (c.primary_contact_name||'').toLowerCase().includes(q) ||
+    (c.primary_contact_email||'').toLowerCase().includes(q) ||
+    (c.source||'').toLowerCase().includes(q)
+  ) : all;
+  const bySource = {};
+  for (const c of all) { const s = c.source || 'unknown'; bySource[s] = (bySource[s]||0) + 1; }
+  document.getElementById('mc-subscribers-stats').innerHTML = [
+    mcStatTile('Total Subscribers', all.length, ''),
+    mcStatTile('From Calendly', bySource['calendly'] || 0, ''),
+    mcStatTile('Direct / Manual', (bySource['direct'] || 0) + (bySource['manual'] || 0), ''),
+    mcStatTile('Total CC Recipients', all.reduce((s,c) => s + (c.cc_emails?.length || 0), 0), ''),
+  ].join('');
+  if (!list.length) {
+    document.getElementById('mc-subscribers-body').innerHTML = '<div class="mc-empty"><div class="ico">👤</div><h3>No subscribers</h3><p>Calendly bookings + manual additions populate this list.</p></div>';
+    return;
+  }
+  document.getElementById('mc-subscribers-body').innerHTML = `<div class="mc-table-wrap"><table class="mc-table"><thead><tr>
+    <th>Email</th><th>Name</th><th>Company</th><th>Source</th><th>Engagements</th><th>Pipeline</th><th>CC List</th>
+  </tr></thead><tbody>${list.map(c => `<tr onclick="mcGoToCase('${mcEsc(c.slug)}')">
+    <td><a href="mailto:${mcEsc(c.primary_contact_email)}" style="color:#2563EB;text-decoration:none;" onclick="event.stopPropagation()">${mcEsc(c.primary_contact_email||'—')}</a></td>
+    <td>${mcEsc(c.primary_contact_name||'—')}</td>
+    <td>${mcEsc(c.legal_name||'—')}</td>
+    <td>${mcPill(c.source)}</td>
+    <td>${c.engagements_count || 0}</td>
+    <td class="amt-cell">${mcFmtUSD(c.engagement_total_usd)}</td>
+    <td><span style="font-family:'DM Mono',monospace;font-size:.66rem;color:#475569;">${(c.cc_emails || []).length} cc</span></td>
+  </tr>`).join('')}</tbody></table></div>`;
+}
+
+// ════════════════════════════════════════════════════════════════
+// FORM-SPECIFIC PANELS (nda/msa/engagement/onboarding):
+// Show recent submissions filtered to that doc_type
+// ════════════════════════════════════════════════════════════════
+function mcLoadFormPanel(formType, panelKey) {
+  if (!_mcCache.submissions) {
+    mcFetch('submissions', () => mcRenderFormPanel(formType, panelKey), false);
+  } else { mcRenderFormPanel(formType, panelKey); }
+}
+function mcRenderFormPanel(formType, panelKey) {
+  const all = _mcCache.submissions?.submissions || [];
+  const list = all.filter(s => (s.doc_type||'').toLowerCase().includes(formType));
+  const bodyEl = document.getElementById(`mc-form-${panelKey}-body`);
+  if (!bodyEl) return;
+  if (!list.length) {
+    bodyEl.innerHTML = `<div class="mc-empty"><div class="ico">📄</div><h3>No ${panelKey.toUpperCase()} submissions yet</h3><p>Once a client signs the form, the submission shows up here with their IP, timestamp, and PDF link.</p></div>`;
+    return;
+  }
+  bodyEl.innerHTML = `<div class="mc-table-wrap"><table class="mc-table"><thead><tr>
+    <th>Doc ID</th><th>Client</th><th>Status</th><th>Signed</th><th>Executed</th><th>IP</th><th></th>
+  </tr></thead><tbody>${list.slice(0, 25).map(s => `<tr onclick="mcGoToCase('${mcEsc(s.client_slug)}')">
+    <td><span class="id-cell">${mcEsc(s.doc_id)}</span></td>
+    <td>${mcEsc(s.client_name || '—')}</td>
+    <td>${mcPill(s.status)}</td>
+    <td>${mcFmtDate(s.client_signed_at)}</td>
+    <td>${mcFmtDate(s.executed_at)}</td>
+    <td><span style="font-family:'DM Mono',monospace;font-size:.66rem;color:#94A3B8;">${mcEsc(s.client_ip||'—')}</span></td>
+    <td>${s.storage_path ? `<button class="mc-btn" style="padding:.3rem .6rem;font-size:.66rem;" onclick="event.stopPropagation();cfOpenDoc('${mcEsc(s.storage_path)}')">PDF</button>` : ''}</td>
+  </tr>`).join('')}</tbody></table></div>`;
 }
 // ─── DATA LOADING (via admin-proxy function) ──────────────────────────────────
 async function loadLeads() {
