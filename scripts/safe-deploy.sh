@@ -51,7 +51,11 @@ echo
 command -v git >/dev/null      || { echo "[fatal] git not found"; exit 1; }
 command -v netlify >/dev/null  || { echo "[fatal] netlify CLI not found"; exit 1; }
 
-# ─── Step 1: Preserve any uncommitted parent-worktree work ──────
+# ─── Step 1: Preserve any uncommitted work without disturbing it ─
+# Strategy: snapshot the entire working tree (tracked + untracked) as a
+# detached commit on a new auto-wip branch and push it, WITHOUT
+# changing the working tree, the index, or the current branch HEAD.
+# Mark's editor stays exactly as he had it.
 preserve_wip() {
   local wt="$1"
   local label="$2"
@@ -59,11 +63,12 @@ preserve_wip() {
   echo "─── Step: snapshot uncommitted work in $label worktree ───"
   cd "$wt"
 
-  local short_count
-  short_count=$(git status --porcelain 2>/dev/null | wc -l | tr -d '[:space:]')
-  echo "  uncommitted files: $short_count"
+  # Count untracked + modified + staged
+  local count
+  count=$(git status --porcelain 2>/dev/null | wc -l | tr -d '[:space:]')
+  echo "  uncommitted files: $count"
 
-  if [ "$short_count" = "0" ]; then
+  if [ "$count" = "0" ]; then
     echo "  clean - nothing to preserve."
     return 0
   fi
@@ -74,20 +79,41 @@ preserve_wip() {
   timestamp=$(date -u +%Y-%m-%dT%H%M%SZ)
   local wip_branch="auto-wip/${label}-${current_branch//\//-}-${timestamp}"
 
-  echo "  preserving on branch: $wip_branch"
-  # Stash everything (including untracked) to a safety branch
-  git stash push --include-untracked -m "auto-wip-preserve-$timestamp" >/dev/null 2>&1 || true
-  if git stash list 2>/dev/null | grep -q "auto-wip-preserve-$timestamp"; then
-    git checkout -b "$wip_branch" 2>&1 | tail -2
-    git stash pop >/dev/null 2>&1 || true
-    git add -A >/dev/null 2>&1 || true
-    git commit -m "auto-wip: snapshot $label worktree before deploy ($timestamp)" >/dev/null 2>&1 || true
-    git push origin "$wip_branch" 2>&1 | tail -2
-    git checkout "$current_branch" 2>&1 | tail -1
-    echo "  pushed to: origin/$wip_branch"
-    echo "  the WIP files remain in your worktree (only branch + push happened)."
+  # Save current index (what's staged) so we can restore it after
+  local saved_index
+  saved_index=$(git write-tree)
+
+  # Stage all changes (tracked + untracked) so we can capture them in a tree
+  git add -A >/dev/null 2>&1
+  local snapshot_tree
+  snapshot_tree=$(git write-tree)
+  local parent_commit
+  parent_commit=$(git rev-parse HEAD)
+  local snapshot_commit
+  snapshot_commit=$(echo "auto-wip: snapshot $label worktree before deploy ($timestamp)
+files: $count
+branch-at-time: $current_branch" | git commit-tree "$snapshot_tree" -p "$parent_commit")
+
+  # Create the wip branch ref pointing at the snapshot commit
+  git update-ref "refs/heads/$wip_branch" "$snapshot_commit"
+
+  # Push the snapshot to origin
+  if git push origin "$wip_branch" 2>&1 | tail -2; then
+    echo "  pushed: origin/$wip_branch"
   else
-    echo "  no stash created (probably nothing to stash); continuing."
+    echo "  push failed (continuing - snapshot still exists locally)"
+  fi
+
+  # Restore the original index state (working tree was never touched)
+  git read-tree "$saved_index" 2>/dev/null || true
+
+  # Final sanity check: working tree count should match what we saw at the top
+  local final_count
+  final_count=$(git status --porcelain 2>/dev/null | wc -l | tr -d '[:space:]')
+  if [ "$final_count" = "$count" ]; then
+    echo "  worktree intact ($final_count files, matches before)"
+  else
+    echo "  WARNING: worktree count changed: $count -> $final_count (recover from origin/$wip_branch if needed)"
   fi
   echo
 }
