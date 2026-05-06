@@ -1036,13 +1036,38 @@
      Sidebar: dark navy chrome. Nav items in white/blue, active in
      blue accent, sections labeled in DM Mono uppercase eyebrows.
      ════════════════════════════════════════════════════════════ */
-  .sidebar { width: 260px !important; padding: 0 !important; overflow-y: auto !important; max-height: 100vh; }
-  .sidebar-logo { padding: 1.4rem 1.25rem 1rem !important; border-bottom: 1px solid rgba(248,250,252,0.08); }
+  /* Sidebar shell: fixed-width column flexbox. NO scroll on the shell —
+     only the inner .admin-nav scrolls, so logo + footer stay pinned. */
+  .sidebar { width: 260px !important; padding: 0 !important; overflow: hidden !important; max-height: 100vh; display: flex !important; flex-direction: column !important; }
+  /* Bump main-content margin to match the new sidebar width so cards don't get clipped */
+  .main-content { margin-left: 260px !important; }
+  /* Adjust mobile breakpoint margins to match (was 200px in original CSS) */
+  @media (max-width: 1100px) {
+    .main-content { margin-left: 240px !important; }
+    .sidebar { width: 240px !important; }
+  }
+  @media (max-width: 760px) {
+    .main-content { margin-left: 60px !important; }
+    .sidebar { width: 60px !important; }
+  }
+  .sidebar-logo { padding: 1.4rem 1.25rem 1rem !important; border-bottom: 1px solid rgba(248,250,252,0.08); flex-shrink: 0; }
   .sidebar-logo-text { font-family: 'Bebas Neue', sans-serif !important; font-size: 1.4rem !important; letter-spacing: 0.12em !important; color: #FFFFFF !important; }
   .sidebar-logo-text span { color: #3B82F6 !important; }
   .sidebar-tag { font-family: 'DM Mono', monospace !important; font-size: 0.62rem !important; letter-spacing: 0.18em !important; text-transform: uppercase !important; color: rgba(248,250,252,0.45) !important; margin-top: 0.4rem !important; }
 
-  .admin-nav { display: block; padding: 0.75rem 0.5rem 1rem; }
+  /* Admin nav fills the middle space + scrolls vertically with HIDDEN scrollbar.
+     The scroll still works (mouse wheel, trackpad, keyboard) but the visual bar
+     is suppressed across all browsers. */
+  .admin-nav {
+    display: block;
+    padding: 0.75rem 0.5rem 1rem;
+    flex: 1 1 auto;
+    overflow-y: auto;
+    overflow-x: hidden;
+    scrollbar-width: none;        /* Firefox */
+    -ms-overflow-style: none;     /* IE/old Edge */
+  }
+  .admin-nav::-webkit-scrollbar { width: 0; height: 0; display: none; } /* Chrome/Safari */
 
   /* Top CTA — Case Files (VDR) */
   .admin-nav-cta {
@@ -1126,7 +1151,7 @@
     padding: 0.85rem 1.1rem !important;
     border-top: 1px solid rgba(248,250,252,0.08) !important;
     background: rgba(0,0,0,0.15);
-    position: sticky; bottom: 0;
+    flex-shrink: 0;       /* never shrink — stays pinned at the bottom of the column */
   }
   .sidebar-user {
     font-family: 'DM Mono', monospace !important;
