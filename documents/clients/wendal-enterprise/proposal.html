@@ -64,12 +64,8 @@
     background: linear-gradient(135deg, var(--navy) 0%, var(--navy-mid) 50%, var(--navy-light) 100%);
     color: var(--white);
     padding: 4.5rem 2rem 3.5rem;
-    position: relative; overflow: hidden;
-  }
-  .doc-hero::before {
-    content: ''; position: absolute; top: 0; left: 0; right: 0; height: 4px;
-    background: linear-gradient(90deg, var(--blue) 0%, var(--orange) 50%, var(--blue) 100%);
-  }
+    position:relative;overflow:hidden;box-shadow:0 24px 60px -16px rgba(15,32,64,0.35);}
+  
   .doc-hero-inner { max-width: 980px; margin: 0 auto; }
   .doc-hero-eyebrow {
     font-family: 'DM Mono', monospace;
@@ -77,9 +73,7 @@
     color: var(--blue-light); margin-bottom: 1.25rem;
     display: flex; align-items: center; gap: 0.75rem;
   }
-  .doc-hero-eyebrow::before {
-    content: ''; width: 2.5rem; height: 1px; background: var(--blue-light);
-  }
+  
   .doc-hero h1 {
     font-family: 'Bebas Neue', sans-serif;
     font-size: clamp(2.4rem, 5.5vw, 4rem);
@@ -113,15 +107,8 @@
     max-width: 980px; margin: 0 auto; padding: 4rem 2rem;
   }
   .section { margin-bottom: 4rem; }
-  .section-eyebrow {
-    font-family: 'DM Mono', monospace;
-    font-size: 0.7rem; letter-spacing: 0.2em; text-transform: uppercase;
-    color: var(--blue); margin-bottom: 0.85rem;
-    display: flex; align-items: center; gap: 0.7rem;
-  }
-  .section-eyebrow::after {
-    content: ''; height: 1px; flex: 1; background: linear-gradient(90deg, var(--blue) 0%, transparent 100%);
-  }
+  .section-eyebrow{font-family:'DM Mono',monospace;font-size:0.7rem;letter-spacing:0.2em;text-transform:uppercase;color:var(--blue);margin-bottom:0.85rem;font-weight:700;display:inline-block;padding:0.3rem 0.85rem;background:var(--blue-pale);border-radius:6px;}
+  
   h2 {
     font-family: 'Bebas Neue', sans-serif;
     font-size: clamp(1.7rem, 3.2vw, 2.4rem);
@@ -217,10 +204,7 @@
     position: relative; overflow: hidden;
     box-shadow: var(--shadow-md);
   }
-  .invest-card::before {
-    content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px;
-    background: linear-gradient(90deg, var(--orange), var(--blue), var(--orange));
-  }
+  
   .invest-row {
     display: grid; grid-template-columns: 1fr auto; gap: 2rem; align-items: center;
   }
