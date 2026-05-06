@@ -1699,6 +1699,7 @@
             <div class="cf-field"><label>Status</label><select name="status">
               <option value="lead">lead</option>
               <option value="draft">draft</option>
+              <option value="proposal_sent">proposal_sent</option>
               <option value="signed">signed</option>
               <option value="invoiced">invoiced</option>
               <option value="paid">paid</option>
@@ -3702,7 +3703,17 @@ function cfOpenEditClient(clientId) {
   f.elements['website'].value = client.website || '';
   f.elements['country'].value = client.country || '';
   f.elements['region'].value = client.region || '';
-  f.elements['status'].value = client.status || 'lead';
+  // Status: if client's current status isn't a known dropdown option,
+  // inject it as a selectable option so the dropdown reflects reality.
+  const statusSel = f.elements['status'];
+  const known = Array.from(statusSel.options).map(o => o.value);
+  const cur = (client.status || 'lead').toLowerCase();
+  if (!known.includes(cur)) {
+    const opt = document.createElement('option');
+    opt.value = cur; opt.textContent = cur + ' (current)';
+    statusSel.insertBefore(opt, statusSel.firstChild);
+  }
+  statusSel.value = cur;
   f.elements['notes'].value = client.notes || '';
   // Populate cc emails list
   const ccList = document.getElementById('cf-edit-cc-list');
@@ -3751,10 +3762,12 @@ async function cfSaveClient(ev) {
     website: f.elements['website'].value.trim(),
     country: f.elements['country'].value.trim(),
     region: f.elements['region'].value.trim(),
-    status: f.elements['status'].value,
     notes: f.elements['notes'].value.trim(),
     cc_emails,
   };
+  // Only include status if a real value is selected (don't clobber existing on blank)
+  const statusVal = (f.elements['status'].value || '').trim();
+  if (statusVal) body.status = statusVal;
 
   try {
     const res = await fetch('/.netlify/functions/update-client', {

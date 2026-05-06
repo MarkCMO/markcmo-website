@@ -97,10 +97,17 @@ exports.handler = async (event) => {
     }
 
     if (k === 'status') {
-      const allowedStatuses = ['lead', 'draft', 'signed', 'invoiced', 'paid', 'delivering', 'delivered', 'closed', 'archived'];
-      if (!allowedStatuses.includes(String(v))) {
-        return { statusCode: 400, headers, body: JSON.stringify({ error: `Invalid status. Allowed: ${allowedStatuses.join(', ')}` }) };
+      // Conservative shape check: lowercase letters, digits, _ only.
+      // We don't enforce a hardcoded list anymore because legacy rows
+      // (e.g. 'proposal_sent', 'lead_calendly') need to pass through.
+      // Skip the field entirely if empty/null so an unselected dropdown
+      // doesn't accidentally clobber the existing value.
+      if (v === '' || v === null || v === undefined) continue;
+      const sv = String(v).trim().toLowerCase();
+      if (!/^[a-z0-9_]{1,32}$/.test(sv)) {
+        return { statusCode: 400, headers, body: JSON.stringify({ error: 'Invalid status format. Use lowercase letters, digits, underscores (max 32 chars).' }) };
       }
+      v = sv;
     }
 
     if (typeof v === 'string') v = v.trim();
