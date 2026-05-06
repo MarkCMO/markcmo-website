@@ -1,0 +1,628 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Sign &amp; Accept — Business Discovery Audit | Wendal Enterprise Inc.</title>
+<meta name="description" content="Accept and electronically sign the Business Discovery Audit proposal." />
+<meta name="robots" content="noindex, nofollow, noarchive, nosnippet, noimageindex" />
+<meta http-equiv="Cache-Control" content="no-store, no-cache, must-revalidate, private" />
+<link rel="preconnect" href="https://fonts.googleapis.com" crossorigin>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Barlow:wght@400;500;600;700;800&family=DM+Mono:wght@400;500&family=Dancing+Script:wght@700&display=swap">
+<script src="https://unpkg.com/pdf-lib@1.17.1/dist/pdf-lib.min.js"></script>
+<style>
+  :root{
+    --navy:#0A1628;--navy-mid:#0F2040;--navy-light:#162A4A;
+    --blue:#2563EB;--blue-hover:#1D4ED8;--blue-light:#3B82F6;--blue-pale:#EFF6FF;
+    --orange:#F97316;--orange-light:#FB923C;--orange-pale:#FFF7ED;
+    --green:#10B981;--green-pale:#ECFDF5;
+    --white:#FFFFFF;--off-white:#F8FAFC;--light:#F1F5F9;--border:#E2E8F0;
+    --text:#1E293B;--text-mid:#64748B;--text-light:#94A3B8;
+    --shadow-md:0 4px 16px rgba(15,32,64,0.08), 0 8px 32px rgba(15,32,64,0.06);
+    --shadow-blue:0 4px 20px rgba(37,99,235,0.22), 0 2px 8px rgba(37,99,235,0.14);
+  }
+  *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+  body{font-family:'Barlow',sans-serif;background:var(--off-white);color:var(--text);line-height:1.6;}
+  a{color:var(--blue);text-decoration:none;}
+
+  .doc-nav{position:sticky;top:0;z-index:100;background:var(--white);border-bottom:1px solid var(--border);padding:0.9rem 2rem;display:flex;justify-content:space-between;align-items:center;}
+  .doc-nav-logo{font-family:'Bebas Neue',sans-serif;font-size:1.25rem;letter-spacing:0.12em;color:var(--blue);}
+  .doc-nav-logo span{color:var(--text);}
+  .doc-nav-meta{font-family:'DM Mono',monospace;font-size:0.7rem;letter-spacing:0.15em;text-transform:uppercase;color:var(--text-light);}
+  .doc-nav-meta strong{color:var(--blue);font-weight:600;}
+  .doc-nav-back{font-family:'DM Mono',monospace;font-size:0.7rem;letter-spacing:0.12em;color:var(--text-mid);text-transform:uppercase;}
+  .doc-nav-back:hover{color:var(--blue);}
+
+  .hero{background:linear-gradient(135deg,var(--navy) 0%,var(--navy-mid) 50%,var(--navy-light) 100%);color:var(--white);padding:3rem 2rem 2.5rem;position:relative;overflow:hidden;}
+  .hero::before{content:'';position:absolute;top:0;left:0;right:0;height:4px;background:linear-gradient(90deg,var(--blue) 0%,var(--orange) 50%,var(--blue) 100%);}
+  .hero-inner{max-width:720px;margin:0 auto;}
+  .hero-eyebrow{font-family:'DM Mono',monospace;font-size:0.7rem;letter-spacing:0.25em;text-transform:uppercase;color:var(--blue-light);margin-bottom:0.85rem;}
+  .hero h1{font-family:'Bebas Neue',sans-serif;font-size:clamp(2rem,4.5vw,3rem);font-weight:400;letter-spacing:0.02em;line-height:1.1;margin-bottom:0.6rem;}
+  .hero h1 em{color:var(--orange-light);font-style:normal;}
+  .hero p{font-size:0.98rem;color:rgba(248,250,252,0.78);max-width:540px;}
+
+  .wrap{max-width:720px;margin:0 auto;padding:2.5rem 1.5rem 4rem;}
+
+  .summary-card{background:var(--white);border:1px solid var(--border);border-left:4px solid var(--blue);border-radius:14px;padding:1.5rem 1.75rem;margin-bottom:2rem;box-shadow:var(--shadow-md);}
+  .summary-card .lbl{font-family:'DM Mono',monospace;font-size:0.65rem;letter-spacing:0.2em;text-transform:uppercase;color:var(--blue);font-weight:600;margin-bottom:0.6rem;}
+  .summary-card h2{font-family:'Bebas Neue',sans-serif;font-size:1.6rem;letter-spacing:0.03em;color:var(--navy);font-weight:400;margin-bottom:0.75rem;}
+  .summary-card p{font-size:0.95rem;color:var(--text);margin-bottom:0.75rem;}
+  .summary-card p:last-child{margin-bottom:0;}
+  .summary-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1rem;margin-top:1rem;padding-top:1rem;border-top:1px solid var(--border);}
+  @media(max-width:600px){.summary-grid{grid-template-columns:1fr 1fr;}}
+  .summary-grid .item .l{font-family:'DM Mono',monospace;font-size:0.6rem;letter-spacing:0.18em;text-transform:uppercase;color:var(--text-light);margin-bottom:0.25rem;}
+  .summary-grid .item .v{font-family:'Bebas Neue',sans-serif;font-size:1.2rem;color:var(--navy);letter-spacing:0.03em;}
+
+  .form-section{background:var(--white);border:1px solid var(--border);border-radius:14px;padding:1.75rem 2rem;margin-bottom:1.25rem;}
+  .form-section-label{font-family:'DM Mono',monospace;font-size:0.7rem;font-weight:700;letter-spacing:0.18em;text-transform:uppercase;color:var(--blue);border-bottom:1px solid var(--border);padding-bottom:0.6rem;margin-bottom:1.25rem;}
+  .form-row{margin-bottom:1.1rem;}
+  .form-row:last-child{margin-bottom:0;}
+  .form-row label{display:block;font-family:'DM Mono',monospace;font-size:0.68rem;font-weight:600;letter-spacing:0.1em;text-transform:uppercase;color:var(--text-mid);margin-bottom:0.4rem;}
+  .form-row label .req{color:var(--orange);}
+  .form-row input,.form-row select,.form-row textarea{width:100%;background:var(--white);border:1.5px solid var(--border);border-radius:8px;color:var(--text);font-family:'Barlow',sans-serif;font-size:0.95rem;padding:0.75rem 0.9rem;outline:none;transition:border-color .15s, box-shadow .15s;}
+  .form-row input:focus,.form-row select:focus,.form-row textarea:focus{border-color:var(--blue);box-shadow:0 0 0 3px rgba(37,99,235,0.1);}
+  .form-row .hint{font-size:0.78rem;color:var(--text-light);margin-top:0.35rem;}
+
+  .acceptance-box{background:var(--blue-pale);border:1px solid rgba(37,99,235,0.25);border-radius:10px;padding:1.1rem 1.25rem;margin:1rem 0;}
+  .acceptance-box label{display:flex;gap:0.65rem;align-items:flex-start;cursor:pointer;}
+  .acceptance-box input[type=checkbox]{margin-top:0.25rem;width:1.1rem;height:1.1rem;accent-color:var(--blue);flex-shrink:0;}
+  .acceptance-box .body{font-size:0.88rem;color:var(--navy);line-height:1.55;}
+  .acceptance-box .body strong{color:var(--navy);}
+
+  /* Signature pad */
+  .sig-tabs{display:flex;border-bottom:1.5px solid var(--border);margin-bottom:0;}
+  .sig-tab{font-family:'DM Mono',monospace;font-size:0.7rem;letter-spacing:0.12em;text-transform:uppercase;padding:0.6rem 1.1rem;cursor:pointer;color:var(--text-light);border:none;background:none;border-bottom:2px solid transparent;transition:all .15s;}
+  .sig-tab.active{color:var(--blue);border-bottom-color:var(--blue);}
+  .sig-canvas-wrap{background:var(--off-white);border:1.5px solid var(--border);border-top:none;border-radius:0 0 8px 8px;height:140px;position:relative;}
+  canvas#client-sig-canvas{width:100%;height:100%;touch-action:none;cursor:crosshair;display:block;}
+  .sig-type-wrap{display:none;height:140px;align-items:center;justify-content:center;border:1.5px solid var(--border);border-top:none;background:var(--off-white);border-radius:0 0 8px 8px;}
+  .sig-type-wrap.visible{display:flex;}
+  .sig-type-preview{font-family:'Dancing Script',cursive;font-size:2.4rem;color:var(--blue);text-align:center;}
+  .sig-actions{display:flex;justify-content:space-between;align-items:center;margin-top:0.75rem;}
+  .sig-clear-btn{font-family:'DM Mono',monospace;font-size:0.65rem;letter-spacing:0.12em;text-transform:uppercase;color:var(--text-mid);background:none;border:1.5px solid var(--border);border-radius:6px;padding:0.4rem 0.85rem;cursor:pointer;transition:all .15s;}
+  .sig-clear-btn:hover{color:var(--orange);border-color:var(--orange);}
+  .sig-hint{font-size:0.78rem;color:var(--text-light);font-style:italic;}
+  .sig-legal{font-size:0.78rem;color:var(--text-mid);line-height:1.6;margin-top:1rem;padding:1rem 1.25rem;background:var(--off-white);border-radius:8px;border:1px solid var(--border);}
+  .sig-legal strong{color:var(--navy);}
+
+  #generate-btn{display:flex;align-items:center;justify-content:center;gap:0.5rem;width:100%;background:var(--orange);color:var(--white);border:none;border-radius:10px;font-family:'Barlow',sans-serif;font-size:1rem;font-weight:700;letter-spacing:0.02em;padding:1.1rem 2rem;cursor:pointer;transition:all .15s;margin-top:1rem;box-shadow:0 4px 14px rgba(249,115,22,0.3);}
+  #generate-btn:hover:not(:disabled){background:#EA6C0A;transform:translateY(-1px);box-shadow:0 6px 18px rgba(249,115,22,0.4);}
+  #generate-btn:active:not(:disabled){transform:translateY(0);}
+  #generate-btn:disabled{opacity:0.6;cursor:not-allowed;background:var(--text-light);box-shadow:none;}
+
+  .form-status{margin-top:1rem;padding:1rem 1.25rem;border-radius:10px;font-size:0.92rem;line-height:1.6;display:none;}
+  .form-status.loading{display:block;background:var(--blue-pale);color:var(--blue);border:1px solid rgba(37,99,235,0.25);}
+  .form-status.success{display:block;background:var(--green-pale);color:#065F46;border:1px solid rgba(16,185,129,0.3);}
+  .form-status.error{display:block;background:var(--orange-pale);color:#9A3412;border:1px solid rgba(249,115,22,0.3);}
+
+  /* Test mode banner */
+  .test-banner{background:var(--orange-pale);border:1px solid rgba(249,115,22,0.4);color:#9A3412;padding:0.75rem 1.25rem;border-radius:8px;margin-bottom:1.25rem;font-size:0.85rem;display:none;}
+  .test-banner.on{display:block;}
+  .test-banner strong{color:#9A3412;}
+
+  footer.doc-footer{background:var(--navy);color:rgba(255,255,255,0.6);padding:2rem;border-top:4px solid var(--blue);margin-top:2rem;}
+  .doc-footer-inner{max-width:720px;margin:0 auto;text-align:center;}
+  .doc-footer-logo{font-family:'Bebas Neue',sans-serif;font-size:1.3rem;letter-spacing:0.12em;color:var(--white);}
+  .doc-footer-logo span{color:var(--blue-light);}
+  .doc-footer p{font-size:0.78rem;line-height:1.6;margin:0.5rem 0 0;color:rgba(255,255,255,0.5);}
+</style>
+</head>
+<body>
+
+<nav class="doc-nav">
+  <div class="doc-nav-logo">MARK<span>CMO</span></div>
+  <a class="doc-nav-back" href="/documents/clients/wendal-enterprise/proposal">← Back to Proposal</a>
+  <div class="doc-nav-meta">Doc <strong>WE-AUD-001</strong> · Sign &amp; Accept</div>
+</nav>
+
+<header class="hero">
+  <div class="hero-inner">
+    <div class="hero-eyebrow">Acceptance &amp; Electronic Signature</div>
+    <h1>Accept the <em>Business Discovery Audit.</em></h1>
+    <p>One signature, one click. Mark countersigns within 24 hours and you'll receive the fully executed PDF by email — followed by your Square invoice for $2,500 USD to start the 72-hour clock.</p>
+  </div>
+</header>
+
+<main class="wrap">
+
+  <div class="test-banner" id="test-banner">
+    🧪 <strong>Test Mode is ON.</strong> Submissions will be tagged "[TEST]" and routed to the test recipient. Toggle off before sending to a real client.
+  </div>
+
+  <!-- Hidden Netlify form for build detection -->
+  <form name="wendal-audit-acceptance" data-netlify="true" hidden>
+    <input type="text" name="client_name"/>
+    <input type="text" name="client_company"/>
+    <input type="email" name="client_email"/>
+    <input type="text" name="client_title"/>
+    <input type="text" name="accepted_at"/>
+  </form>
+
+  <!-- Summary -->
+  <div class="summary-card">
+    <div class="lbl">You're Accepting</div>
+    <h2>Business Discovery Audit · Wendal Enterprise Inc.</h2>
+    <p>This signature accepts the terms in <a href="/documents/clients/wendal-enterprise/proposal" target="_blank">Proposal WE-AUD-001</a>, <a href="/documents/clients/wendal-enterprise/sow" target="_blank">Scope of Work WE-AUD-002</a>, and <a href="/documents/clients/wendal-enterprise/timeline" target="_blank">Timeline WE-AUD-003</a> — and authorizes WETYR Corp / MarkCMO to issue a Square invoice for $2,500 USD. The 72-hour delivery clock begins when payment clears and the intake worksheet is returned.</p>
+    <div class="summary-grid">
+      <div class="item"><div class="l">Investment</div><div class="v">$2,500 USD</div></div>
+      <div class="item"><div class="l">Delivery</div><div class="v">72 HRS</div></div>
+      <div class="item"><div class="l">Valid Through</div><div class="v" id="valid-through">14 Days</div></div>
+    </div>
+  </div>
+
+  <!-- Form -->
+  <div class="form-section">
+    <div class="form-section-label">Your Information</div>
+    <div class="form-row">
+      <label>Full Legal Name <span class="req">*</span></label>
+      <input type="text" id="client_name" value="Wendal Joseph" required/>
+    </div>
+    <div class="form-row">
+      <label>Title <span class="req">*</span></label>
+      <input type="text" id="client_title" value="Managing Director" required/>
+    </div>
+    <div class="form-row">
+      <label>Company <span class="req">*</span></label>
+      <input type="text" id="client_company" value="Wendal Enterprise Inc." required/>
+    </div>
+    <div class="form-row">
+      <label>Email <span class="req">*</span></label>
+      <input type="email" id="client_email" placeholder="wendal@uniquetoursandrentals.com" required/>
+      <div class="hint">Your signed copy + invoice will be sent here.</div>
+    </div>
+    <div class="form-row">
+      <label>Phone (optional)</label>
+      <input type="tel" id="client_phone" placeholder="+1 649 ___ ____"/>
+    </div>
+  </div>
+
+  <div class="form-section">
+    <div class="form-section-label">Acceptance</div>
+    <div class="acceptance-box">
+      <label>
+        <input type="checkbox" id="accept_terms" required/>
+        <span class="body">
+          <strong>I accept the terms of the proposal.</strong> I am authorized to bind Wendal Enterprise Inc. to this engagement. I understand the engagement is fixed-fee at $2,500 USD, paid up-front, with delivery within 72 hours of payment clearance and intake worksheet return. I agree the documents at <code style="background:rgba(37,99,235,0.1);padding:1px 5px;border-radius:3px;font-size:0.82rem;">/documents/clients/wendal-enterprise/</code> form the complete agreement.
+        </span>
+      </label>
+    </div>
+    <div class="acceptance-box">
+      <label>
+        <input type="checkbox" id="accept_esign" required/>
+        <span class="body">
+          <strong>I consent to electronic signature.</strong> Under the U.S. ESIGN Act (15 U.S.C. § 7001 et seq.), I agree my electronic signature on this form is legally binding and equivalent to a handwritten signature. I consent to electronic delivery of the executed agreement, my signed copy, and any invoices.
+        </span>
+      </label>
+    </div>
+  </div>
+
+  <div class="form-section">
+    <div class="form-section-label">Electronic Signature</div>
+
+    <div class="sig-tabs">
+      <button class="sig-tab active" type="button" onclick="switchSigMode('draw')">✍ Draw</button>
+      <button class="sig-tab" type="button" onclick="switchSigMode('type')">⌨ Type</button>
+    </div>
+    <div class="sig-canvas-wrap" id="client-draw-wrap">
+      <canvas id="client-sig-canvas"></canvas>
+    </div>
+    <div class="sig-type-wrap" id="client-type-wrap">
+      <div class="sig-type-preview" id="client-typed-sig">Wendal Joseph</div>
+    </div>
+    <div class="sig-actions">
+      <button class="sig-clear-btn" type="button" onclick="clearClientSig()">Clear</button>
+      <span class="sig-hint">Draw with your mouse or finger — or switch to "Type."</span>
+    </div>
+
+    <div class="sig-legal">
+      <strong>By clicking "Sign &amp; Submit"</strong> you confirm: (1) you have read, understood, and agree to the proposal terms; (2) your electronic signature is intended as your legal signature; (3) you consent to electronic delivery of the executed document. Your IP address, timestamp, and user agent will be recorded as part of the audit trail.
+    </div>
+
+    <button id="generate-btn" type="button" onclick="generate()">✍ Sign &amp; Submit for Countersignature</button>
+    <div id="form-status" class="form-status"></div>
+  </div>
+
+</main>
+
+<footer class="doc-footer">
+  <div class="doc-footer-inner">
+    <div class="doc-footer-logo">MARK<span>CMO</span></div>
+    <p>Mark Gabrielli · Fractional CMO &amp; COO · WETYR Corp · Cape Canaveral, FL · <a style="color:var(--blue-light);" href="mailto:mark@markcmo.com">mark@markcmo.com</a></p>
+  </div>
+</footer>
+
+<script>
+// ─── Config ──────────────────────────────────────────────────────
+// To run a test before sending to client: append ?test=1 to the URL
+// e.g. https://markcmo.com/documents/clients/wendal-enterprise/sign?test=1
+// In test mode the recipient on the "client" leg is YOU (mark@markcmo.com)
+const URL_PARAMS = new URLSearchParams(window.location.search);
+const TEST_MODE = URL_PARAMS.get('test') === '1';
+const TEST_EMAIL = 'mark@markcmo.com'; // change if you want a different test inbox
+
+if (TEST_MODE) {
+  document.getElementById('test-banner').classList.add('on');
+}
+
+// Set the "valid through" pill to 14 days from today
+(function(){
+  const d = new Date(); d.setDate(d.getDate() + 14);
+  document.getElementById('valid-through').textContent =
+    d.toLocaleDateString('en-US', { month:'short', day:'numeric' });
+})();
+
+// ─── Signature pad ───────────────────────────────────────────────
+const { PDFDocument, rgb, StandardFonts } = PDFLib;
+let _sigMode = 'draw';
+let _hasSig = false;
+
+(function initSigPad() {
+  const canvas = document.getElementById('client-sig-canvas');
+  const ctx = canvas.getContext('2d');
+  let drawing = false, lx = 0, ly = 0;
+
+  function resize() {
+    const dpr = window.devicePixelRatio || 1;
+    canvas.width = canvas.parentElement.offsetWidth * dpr;
+    canvas.height = canvas.parentElement.offsetHeight * dpr;
+    canvas.style.width = canvas.parentElement.offsetWidth + 'px';
+    canvas.style.height = canvas.parentElement.offsetHeight + 'px';
+    ctx.scale(dpr, dpr);
+    ctx.strokeStyle = '#2563EB';
+    ctx.lineWidth = 2.4;
+    ctx.lineCap = 'round';
+    ctx.lineJoin = 'round';
+  }
+  resize();
+  window.addEventListener('resize', resize);
+
+  function pt(e) {
+    const r = canvas.getBoundingClientRect();
+    return [e.clientX - r.left, e.clientY - r.top];
+  }
+  canvas.addEventListener('mousedown', e => { drawing = true; [lx, ly] = pt(e); _hasSig = true; });
+  canvas.addEventListener('mousemove', e => { if(!drawing) return; ctx.beginPath(); ctx.moveTo(lx,ly); ctx.lineTo(...pt(e)); ctx.stroke(); [lx,ly]=pt(e); });
+  canvas.addEventListener('mouseup', () => drawing = false);
+  canvas.addEventListener('mouseleave', () => drawing = false);
+  canvas.addEventListener('touchstart', e => { e.preventDefault(); drawing = true; [lx,ly] = pt(e.touches[0]); _hasSig = true; }, {passive:false});
+  canvas.addEventListener('touchmove', e => { e.preventDefault(); if(!drawing) return; ctx.beginPath(); ctx.moveTo(lx,ly); ctx.lineTo(...pt(e.touches[0])); ctx.stroke(); [lx,ly]=pt(e.touches[0]); }, {passive:false});
+  canvas.addEventListener('touchend', () => drawing = false);
+
+  document.getElementById('client_name').addEventListener('input', e => {
+    document.getElementById('client-typed-sig').textContent = e.target.value || 'Your Name';
+  });
+})();
+
+function switchSigMode(m) {
+  _sigMode = m;
+  document.querySelectorAll('.sig-tab').forEach((t, i) => t.classList.toggle('active', (i===0) === (m==='draw')));
+  document.getElementById('client-draw-wrap').style.display = m === 'draw' ? 'block' : 'none';
+  document.getElementById('client-type-wrap').classList.toggle('visible', m === 'type');
+  if (m === 'type') _hasSig = !!document.getElementById('client_name').value.trim();
+}
+
+function clearClientSig() {
+  const canvas = document.getElementById('client-sig-canvas');
+  const ctx = canvas.getContext('2d');
+  ctx.clearRect(0, 0, canvas.width, canvas.height);
+  _hasSig = false;
+}
+
+function getClientSigDataURL(name) {
+  if (_sigMode === 'type') {
+    const oc = document.createElement('canvas');
+    oc.width = 480; oc.height = 110;
+    const c = oc.getContext('2d');
+    c.font = 'bold 52px "Dancing Script", cursive';
+    c.fillStyle = '#2563EB';
+    c.textAlign = 'center';
+    c.textBaseline = 'middle';
+    c.fillText(name || 'Signature', 240, 55);
+    return oc.toDataURL('image/png');
+  }
+  return document.getElementById('client-sig-canvas').toDataURL('image/png');
+}
+
+// ─── Build the PDF in the browser (no template required) ─────────
+async function buildSignedPDF({ clientName, clientTitle, clientCompany, clientEmail, clientPhone, signedAt, sigDataUrl }) {
+  const pdf = await PDFDocument.create();
+  const helv = await pdf.embedFont(StandardFonts.Helvetica);
+  const bold = await pdf.embedFont(StandardFonts.HelveticaBold);
+  const NAVY  = rgb(0.039, 0.086, 0.157);
+  const BLUE  = rgb(0.145, 0.388, 0.922);
+  const ORG   = rgb(0.976, 0.451, 0.086);
+  const GREY  = rgb(0.4, 0.45, 0.51);
+  const DARK  = rgb(0.117, 0.16, 0.231);
+  const W = 612, H = 792; // US Letter
+  const M = 56;
+
+  const drawHeader = (page) => {
+    // Top accent bar
+    page.drawRectangle({ x: 0, y: H - 6, width: W, height: 6, color: BLUE });
+    page.drawRectangle({ x: W*0.4, y: H - 6, width: W*0.2, height: 6, color: ORG });
+    // Logo + meta
+    page.drawText('MARKCMO', { x: M, y: H - 38, size: 16, font: bold, color: BLUE });
+    page.drawText('Doc WE-AUD-001 · Confidential', { x: W - M - 200, y: H - 36, size: 8, font: helv, color: GREY });
+  };
+  const drawFooter = (page, n, total) => {
+    page.drawLine({ start: {x: M, y: 50}, end: {x: W-M, y: 50}, thickness: 0.5, color: rgb(0.88,0.9,0.94) });
+    page.drawText('Mark Gabrielli · Fractional CMO & COO · WETYR Corp · mark@markcmo.com', {
+      x: M, y: 36, size: 8, font: helv, color: GREY,
+    });
+    page.drawText(`${n} / ${total}`, { x: W - M - 30, y: 36, size: 8, font: helv, color: GREY });
+  };
+
+  // ── PAGE 1 — Cover ──────────────────────────────────────────────
+  const p1 = pdf.addPage([W, H]);
+  drawHeader(p1);
+
+  // Big nav block
+  p1.drawRectangle({ x: 0, y: H - 360, width: W, height: 290, color: NAVY });
+  p1.drawText('BUSINESS DISCOVERY AUDIT', { x: M, y: H - 130, size: 11, font: bold, color: rgb(0.55, 0.75, 1) });
+  p1.drawText('PROPOSAL · ACCEPTED & SIGNED', { x: M, y: H - 145, size: 8, font: helv, color: rgb(0.55, 0.75, 1) });
+
+  // Big headline
+  p1.drawText('Wendal Enterprise Inc.', { x: M, y: H - 200, size: 32, font: bold, color: rgb(1,1,1) });
+  p1.drawText('72-Hour Discovery Audit', { x: M, y: H - 234, size: 22, font: helv, color: rgb(0.65, 0.78, 1) });
+
+  // Meta block
+  p1.drawText('PREPARED FOR', { x: M, y: H - 290, size: 7, font: bold, color: rgb(0.55, 0.75, 1) });
+  p1.drawText(clientName, { x: M, y: H - 305, size: 11, font: bold, color: rgb(1,1,1) });
+  p1.drawText(`${clientTitle} · ${clientCompany}`, { x: M, y: H - 320, size: 9, font: helv, color: rgb(0.85,0.88,0.95) });
+  p1.drawText(clientEmail, { x: M, y: H - 335, size: 9, font: helv, color: rgb(0.85,0.88,0.95) });
+
+  p1.drawText('PREPARED BY', { x: M + 280, y: H - 290, size: 7, font: bold, color: rgb(0.55, 0.75, 1) });
+  p1.drawText('Mark Gabrielli', { x: M + 280, y: H - 305, size: 11, font: bold, color: rgb(1,1,1) });
+  p1.drawText('Fractional CMO & COO · WETYR Corp', { x: M + 280, y: H - 320, size: 9, font: helv, color: rgb(0.85,0.88,0.95) });
+  p1.drawText('mark@markcmo.com', { x: M + 280, y: H - 335, size: 9, font: helv, color: rgb(0.85,0.88,0.95) });
+
+  // Investment box
+  let y = H - 410;
+  p1.drawText('ENGAGEMENT TERMS', { x: M, y: y, size: 8, font: bold, color: BLUE });
+  y -= 22;
+  const termRows = [
+    ['Investment', '$2,500 USD · One-time, fixed fee'],
+    ['Delivery', '72 hours from payment + intake worksheet'],
+    ['Deliverables', 'Executive Brief, Audit Report, Workflow Map, Competitive Analysis, 30/90/6mo/12mo Roadmap, Walkthrough Call'],
+    ['Post-Delivery', '14-day clarification window via email'],
+    ['Governing Docs', 'Proposal WE-AUD-001 · SOW WE-AUD-002 · Timeline WE-AUD-003'],
+  ];
+  // Helper: word-wrap a string to fit a max width at a given font size
+  const wrapText = (text, font, size, maxW) => {
+    const words = text.split(' ');
+    const lines = [];
+    let cur = '';
+    for (const w of words) {
+      const trial = cur ? cur + ' ' + w : w;
+      if (font.widthOfTextAtSize(trial, size) > maxW && cur) {
+        lines.push(cur);
+        cur = w;
+      } else {
+        cur = trial;
+      }
+    }
+    if (cur) lines.push(cur);
+    return lines;
+  };
+
+  termRows.forEach(([k, v]) => {
+    p1.drawText(k.toUpperCase(), { x: M, y: y, size: 7, font: bold, color: GREY });
+    const lines = wrapText(v, helv, 9, W - M - 100 - M);
+    lines.forEach((ln, idx) => {
+      p1.drawText(ln, { x: M + 100, y: y - (idx * 12), size: 9, font: helv, color: DARK });
+    });
+    y -= Math.max(16, lines.length * 12 + 4);
+  });
+
+  y -= 18;
+  p1.drawLine({ start: {x: M, y: y}, end: {x: W-M, y: y}, thickness: 0.5, color: rgb(0.88,0.9,0.94) });
+  y -= 18;
+  p1.drawText('SCOPE OVERVIEW', { x: M, y: y, size: 8, font: bold, color: BLUE });
+  y -= 16;
+  const scope = [
+    'Workflow mapping — booking, dispatch, on-site execution, follow-up',
+    'Tech-stack inventory — booking, payments, CRM, OTAs, comms, fleet/horse mgmt',
+    'Bottleneck & pain-point register with severity ratings',
+    'Competitive benchmark — Turks & Caicos tour operators',
+    'US market entry analysis — West Palm Beach + Atlanta',
+    '30 / 90 / 6mo / 12mo execution roadmap with owner + cost tagging',
+  ];
+  scope.forEach(line => {
+    p1.drawText('•', { x: M, y: y, size: 10, font: bold, color: BLUE });
+    p1.drawText(line, { x: M + 12, y: y, size: 9, font: helv, color: DARK });
+    y -= 14;
+  });
+
+  drawFooter(p1, 1, 2);
+
+  // ── PAGE 2 — Signature page ─────────────────────────────────────
+  const p2 = pdf.addPage([W, H]);
+  drawHeader(p2);
+
+  p2.drawText('ACCEPTANCE & ELECTRONIC SIGNATURE', { x: M, y: H - 90, size: 9, font: bold, color: BLUE });
+  p2.drawText('Page 2 of 2', { x: W - M - 50, y: H - 90, size: 8, font: helv, color: GREY });
+  p2.drawText('Acceptance', { x: M, y: H - 130, size: 28, font: bold, color: NAVY });
+
+  let y2 = H - 175;
+  const acceptText = [
+    'The undersigned, on behalf of Wendal Enterprise Inc., accepts the terms of the Business Discovery',
+    'Audit proposal (WE-AUD-001) and the companion Scope of Work (WE-AUD-002) and Deliverable',
+    'Timeline (WE-AUD-003), and authorizes WETYR Corp d/b/a MarkCMO to issue a Square invoice for',
+    '$2,500 USD. The 72-hour delivery clock begins when payment clears and the intake worksheet is',
+    'returned, whichever is later. The undersigned consents to electronic signature under the U.S. ESIGN',
+    'Act and consents to electronic delivery of the executed agreement and all related invoices.',
+  ];
+  acceptText.forEach(l => { p2.drawText(l, { x: M, y: y2, size: 10, font: helv, color: DARK }); y2 -= 14; });
+
+  // Two signature blocks
+  y2 -= 30;
+  const blockW = (W - M*2 - 20) / 2;
+  const blockH = 150;
+
+  // Client block (signed)
+  const cx = M, cy = y2 - blockH;
+  p2.drawRectangle({ x: cx, y: cy, width: blockW, height: blockH, borderColor: BLUE, borderWidth: 1.5, color: rgb(0.94, 0.97, 1) });
+  p2.drawText('CLIENT · WENDAL ENTERPRISE INC.', { x: cx + 12, y: cy + blockH - 18, size: 7, font: bold, color: BLUE });
+
+  // Signature image
+  if (sigDataUrl) {
+    const sigBytes = Uint8Array.from(atob(sigDataUrl.split(',')[1]), c => c.charCodeAt(0));
+    const sigImg = await pdf.embedPng(sigBytes);
+    p2.drawImage(sigImg, { x: cx + 12, y: cy + 70, width: blockW - 24, height: 38 });
+  }
+  p2.drawLine({ start: {x: cx + 12, y: cy + 65}, end: {x: cx + blockW - 12, y: cy + 65}, thickness: 1, color: NAVY });
+  p2.drawText(clientName, { x: cx + 12, y: cy + 50, size: 10, font: bold, color: NAVY });
+  p2.drawText(`${clientTitle} · ${clientCompany}`, { x: cx + 12, y: cy + 36, size: 8, font: helv, color: DARK });
+  p2.drawText(`Date: ${new Date(signedAt).toLocaleString('en-US', { dateStyle:'long', timeStyle:'short', timeZone:'America/New_York' })} ET`, {
+    x: cx + 12, y: cy + 22, size: 7, font: helv, color: GREY,
+  });
+  p2.drawText(`Signed electronically · IP & user-agent recorded`, { x: cx + 12, y: cy + 12, size: 6, font: helv, color: GREY });
+
+  // Consultant block — left empty for countersignature (filled by /sign/ flow)
+  const mx = M + blockW + 20, my = cy;
+  p2.drawRectangle({ x: mx, y: my, width: blockW, height: blockH, borderColor: rgb(0.55, 0.62, 0.71), borderWidth: 1 });
+  p2.drawText('CONSULTANT · WETYR CORP', { x: mx + 12, y: my + blockH - 18, size: 7, font: bold, color: GREY });
+  // Awaiting label — sits ABOVE the sig area, will not be overdrawn by countersign
+  p2.drawText('Awaiting Mark\'s countersignature', { x: mx + 12, y: my + blockH - 36, size: 8, font: helv, color: ORG });
+  // Empty signature line — countersign step writes sig image, name, title, date over the rows below
+  p2.drawLine({ start: {x: mx + 12, y: my + 65}, end: {x: mx + blockW - 12, y: my + 65}, thickness: 1, color: rgb(0.55, 0.62, 0.71) });
+
+  drawFooter(p2, 2, 2);
+
+  // Save and return base64
+  const bytes = await pdf.save();
+  let b64 = '';
+  const ch = 8192;
+  for (let i = 0; i < bytes.length; i += ch) b64 += String.fromCharCode(...bytes.slice(i, i + ch));
+  return { pdfBase64: btoa(b64) };
+}
+
+// ─── Submit handler ──────────────────────────────────────────────
+async function generate() {
+  const status = document.getElementById('form-status');
+  const btn = document.getElementById('generate-btn');
+
+  const clientName    = document.getElementById('client_name').value.trim();
+  const clientTitle   = document.getElementById('client_title').value.trim();
+  const clientCompany = document.getElementById('client_company').value.trim();
+  const clientEmail   = document.getElementById('client_email').value.trim();
+  const clientPhone   = document.getElementById('client_phone').value.trim();
+  const okTerms       = document.getElementById('accept_terms').checked;
+  const okEsign       = document.getElementById('accept_esign').checked;
+
+  // Validation
+  if (!clientName || !clientTitle || !clientCompany || !clientEmail) {
+    status.textContent = 'Please fill in all required fields.';
+    status.className = 'form-status error';
+    return;
+  }
+  if (!okTerms || !okEsign) {
+    status.textContent = 'Please accept both checkboxes (terms + electronic signature consent).';
+    status.className = 'form-status error';
+    return;
+  }
+  if (!_hasSig && _sigMode === 'draw') {
+    status.textContent = 'Please draw your signature, or switch to "Type" mode.';
+    status.className = 'form-status error';
+    return;
+  }
+  if (_sigMode === 'type' && !clientName) {
+    status.textContent = 'Please enter your name to use Type signature.';
+    status.className = 'form-status error';
+    return;
+  }
+
+  btn.disabled = true;
+  btn.textContent = 'Generating signed PDF…';
+  status.textContent = 'Building your signed PDF in your browser…';
+  status.className = 'form-status loading';
+
+  try {
+    const signedAt = new Date().toISOString();
+    const sigDataUrl = getClientSigDataURL(clientName);
+
+    const { pdfBase64 } = await buildSignedPDF({
+      clientName, clientTitle, clientCompany, clientEmail, clientPhone, signedAt, sigDataUrl,
+    });
+
+    btn.textContent = 'Submitting…';
+    status.textContent = 'Uploading signed PDF and notifying both parties…';
+
+    // Route to existing submit-document Netlify function
+    const docName = (TEST_MODE ? '[TEST] ' : '') + 'Wendal Enterprise — Business Discovery Audit Acceptance';
+    const filename = (TEST_MODE ? 'TEST-' : '') + 'WE-AUD-001-Wendal-Enterprise-Audit-Acceptance.pdf';
+    const recipientEmail = TEST_MODE ? TEST_EMAIL : clientEmail;
+
+    const res = await fetch('/.netlify/functions/submit-document', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        docName,
+        docId: 'WE-AUD-001',
+        filename,
+        fields: {
+          'Client': clientName,
+          'Title': clientTitle,
+          'Company': clientCompany,
+          'Email': clientEmail,
+          'Phone': clientPhone || '—',
+          'Engagement': 'Business Discovery Audit',
+          'Investment': '$2,500 USD',
+          'Delivery': '72 hours from payment + intake',
+          'Accepted At': new Date(signedAt).toLocaleString('en-US', { dateStyle:'long', timeStyle:'short', timeZone:'America/New_York' }) + ' ET',
+          ...(TEST_MODE ? { 'Test Mode': 'YES — routed to test email' } : {}),
+        },
+        pdfBase64,
+        clientName,
+        clientEmail: recipientEmail,
+        clientSigBase64: sigDataUrl.split(',')[1],
+        // Signature placement on page 2 of the generated PDF (consultant block, right side).
+        // The /sign/ countersign flow draws at x:320 (hardcoded). Our consultant block spans
+        // x:316–556 (blockW≈240). Sig image is 200w × 30h, so it lands inside the block.
+        markSig: {
+          page: 2,
+          sigY: 425,    // Sig image bottom-left y; image spans 425→455, just above the line at y=418
+          nameY: 403,   // Printed name baseline
+          titleY: 389,  // Title baseline
+          dateY: 375,   // Date baseline
+        },
+      }),
+    });
+
+    let result;
+    try { result = await res.json(); } catch(e) { result = {}; }
+    if (!res.ok) throw new Error(result.error || `Server error ${res.status}`);
+
+    // Also POST to Netlify form for the engagement log
+    const fd = new FormData();
+    fd.append('form-name', 'wendal-audit-acceptance');
+    fd.append('client_name', clientName);
+    fd.append('client_company', clientCompany);
+    fd.append('client_email', clientEmail);
+    fd.append('client_title', clientTitle);
+    fd.append('accepted_at', signedAt);
+    fetch('/', { method: 'POST', body: fd }).catch(() => {});
+
+    status.innerHTML = `
+      <strong style="display:block;font-size:1.05rem;margin-bottom:0.5rem;">✅ Submitted Successfully</strong>
+      Your signed copy of <strong>${docName}</strong> has been sent to <strong>${recipientEmail}</strong>.<br/>
+      Mark will review and countersign within 24 hours. You'll receive the fully executed PDF and the Square invoice for $2,500 USD by email immediately after.<br/>
+      <span style="font-size:0.82rem;display:block;margin-top:0.6rem;color:#065F46;">Confirmation # ${(result.token || signedAt).toString().substring(0, 12)}</span>
+    `;
+    status.className = 'form-status success';
+    btn.textContent = '✅ Submitted — Awaiting Countersignature';
+    btn.style.opacity = '0.5';
+
+  } catch (err) {
+    console.error(err);
+    status.textContent = 'Error: ' + err.message + ' — please try again or email mark@markcmo.com.';
+    status.className = 'form-status error';
+    btn.disabled = false;
+    btn.textContent = '✍ Sign & Submit for Countersignature';
+  }
+}
+</script>
+
+</body>
+</html>
