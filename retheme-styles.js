@@ -130,7 +130,7 @@ const STYLE_RULES = [
   },
 
   // Text: --light-grey → slate (on white bg these need to be darker)
-  // Keep as CSS var — the new --light-grey is already slate-500
+  // Keep as CSS var - the new --light-grey is already slate-500
 
   // Proof number: --gold → --orange for energy
   {

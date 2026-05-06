@@ -1,14 +1,14 @@
 // netlify/functions/admin-upload.js
 // Handles document uploads from admin panel
 // Files are saved to Netlify's built-in file system via base64 → stored as metadata in JSONBin
-// Actual files must be placed in /public/pdfs/ via Git or Netlify deploy — this records metadata
+// Actual files must be placed in /public/pdfs/ via Git or Netlify deploy - this records metadata
 
 // NOTE ON FILE STORAGE:
-// Netlify Functions are stateless — they cannot write permanent files to disk.
+// Netlify Functions are stateless - they cannot write permanent files to disk.
 // For production file storage, we recommend one of:
-//   Option A: Netlify Blobs (beta) — native Netlify key-value storage
-//   Option B: Cloudflare R2 or AWS S3 — store files, return public URL
-//   Option C: Manual — you upload files via Git to /public/pdfs/, this function just records metadata
+//   Option A: Netlify Blobs (beta) - native Netlify key-value storage
+//   Option B: Cloudflare R2 or AWS S3 - store files, return public URL
+//   Option C: Manual - you upload files via Git to /public/pdfs/, this function just records metadata
 //
 // This implementation uses Netlify Blobs (available on Netlify Pro/free with feature flag).
 // Enable at: app.netlify.com → Site settings → Feature flags → Netlify Blobs
@@ -23,7 +23,7 @@ exports.handler = async (event) => {
   const { JSONBIN_API_KEY, JSONBIN_DOCS_BIN_ID } = process.env;
 
   try {
-    // Parse multipart form — Netlify doesn't parse multipart automatically
+    // Parse multipart form - Netlify doesn't parse multipart automatically
     // We expect JSON body with { name, category, base64, mimeType, size }
     let body;
     try {
@@ -87,7 +87,7 @@ exports.handler = async (event) => {
 };
 
 function formatBytes(bytes) {
-  if (!bytes) return '—';
+  if (!bytes) return '-';
   if (bytes < 1024) return bytes + ' B';
   if (bytes < 1048576) return (bytes / 1024).toFixed(1) + ' KB';
   return (bytes / 1048576).toFixed(1) + ' MB';

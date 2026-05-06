@@ -1,4 +1,4 @@
-# MarkCMO.com — Complete Deployment Guide
+# MarkCMO.com - Complete Deployment Guide
 
 ## ═══════════════════════════════════════════════════
 ## 1. NETLIFY ENVIRONMENT VARIABLES
@@ -28,7 +28,7 @@ Set these in Netlify Dashboard → Site Settings → Environment Variables:
 3. Copy the Bin ID from the URL and add as env var
 
 ## ═══════════════════════════════════════════════════
-## 2. SQUARE PAYMENT LINKS — CRITICAL SETUP
+## 2. SQUARE PAYMENT LINKS - CRITICAL SETUP
 ## ═══════════════════════════════════════════════════
 Each course needs its own Square payment link. After payment, Square should redirect to:
 
@@ -64,7 +64,7 @@ After payment, the student lands on /courses/welcome → enters email → gets a
    - Visit /admin → login → check Academy tab for enrollment data
 
 ## ═══════════════════════════════════════════════════
-## 4. COURSE FLOW — HOW IT WORKS
+## 4. COURSE FLOW - HOW IT WORKS
 ## ═══════════════════════════════════════════════════
 1. Student browses /courses → clicks "Enroll Now" → Square payment page
 2. Student pays → Square redirects to /courses/welcome?course={id}
@@ -78,12 +78,12 @@ After payment, the student lands on /courses/welcome → enters email → gets a
 10. Pass → /courses/diploma generates diploma → student can join Graduate Wall at /graduation
 
 ## ═══════════════════════════════════════════════════
-## 5. ADMIN PANEL — /admin
+## 5. ADMIN PANEL - /admin
 ## ═══════════════════════════════════════════════════
 Login: mark@markcmo.com / Mark3148#
 
 Key tabs:
-- **Dashboard** — Overall stats
+- **Dashboard** - Overall stats
 - **Webinar** → Registrants / Email Drip / Replay / Schedule
 - **CRM** → All Contacts (includes course buyers automatically)
 - **Academy** → Overview / Enrollments / Graduates / Revenue (NEW)
@@ -123,7 +123,7 @@ For emails to send from mark@markcmo.com:
 | /blog | Blog (5 articles) |
 
 
-## Lesson Cache (NEW — required for instant lesson loading)
+## Lesson Cache (NEW - required for instant lesson loading)
 
 Create a new JSONBin bin at https://jsonbin.io with content `{}` (empty object).
 Set the bin ID as env var: `JSONBIN_LESSON_CACHE_BIN_ID`

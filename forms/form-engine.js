@@ -1,5 +1,5 @@
 // ═══════════════════════════════════════════════════════════════
-// MarkCMO Form Engine v3 — Sign & Hold for Countersignature
+// MarkCMO Form Engine v3 - Sign & Hold for Countersignature
 // Flow: fill → sign → PDF generated in browser → POST to Netlify
 //       function → Mark gets email to countersign → both get PDF
 // ═══════════════════════════════════════════════════════════════
@@ -90,7 +90,7 @@ function initSigPad(clientNameFieldId = 'client_name') {
     </div>
     <div class="sig-hint">Draw with mouse or finger. Or switch to "Type" to sign with your name.</div>
     <div class="sig-legal">
-      <strong>By clicking "Sign &amp; Submit"</strong> you confirm: (1) You have read and agree to the terms above. (2) Your electronic signature is intended as your legal signature. (3) You consent to electronic delivery of the executed document. &nbsp;—&nbsp; IP and timestamp will be logged.
+      <strong>By clicking "Sign &amp; Submit"</strong> you confirm: (1) You have read and agree to the terms above. (2) Your electronic signature is intended as your legal signature. (3) You consent to electronic delivery of the executed document. &nbsp;-&nbsp; IP and timestamp will be logged.
     </div>
   </div>`;
 
@@ -239,7 +239,7 @@ async function fillAndSubmit({ pdfPath, textFields, sigPage, sigX, sigY, sigW, s
 
     // 5. Convert to base64
     const pdfBytes = await pdfDoc.save();
-    // Chunked base64 encode — avoids stack overflow on large PDFs
+    // Chunked base64 encode - avoids stack overflow on large PDFs
     let pdfBase64 = '';
     const chunk = 8192;
     for (let i = 0; i < pdfBytes.length; i += chunk) {
@@ -277,7 +277,7 @@ async function fillAndSubmit({ pdfPath, textFields, sigPage, sigX, sigY, sigW, s
       <strong>Both you and Mark will receive the fully executed document by email</strong> once it's countersigned.<br/>
       <span style="color:#3a9a60;font-size:.78rem;display:block;margin-top:.6rem;">Confirmation sent to ${clientEmail}</span>`;
     statusEl.className = 'form-status success';
-    btn.textContent = '✅ Submitted — Awaiting Countersignature';
+    btn.textContent = '✅ Submitted - Awaiting Countersignature';
     btn.style.opacity = '0.4';
 
   } catch (err) {
@@ -316,7 +316,7 @@ async function downloadFilledPDF(pdfPath, textFields, outputFilename) {
       statusEl.innerHTML = '<strong>✅ Proposal Downloaded</strong><br/>Your filled proposal has been saved to your device.';
       statusEl.className = 'form-status success';
     }
-    btn.textContent = '✅ Downloaded — Generate Again'; btn.disabled = false;
+    btn.textContent = '✅ Downloaded - Generate Again'; btn.disabled = false;
   } catch (err) {
     if (statusEl) { statusEl.textContent = 'Error: ' + err.message; statusEl.className = 'form-status error'; }
     btn.textContent = 'Try Again'; btn.disabled = false;

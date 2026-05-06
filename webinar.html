@@ -14,7 +14,7 @@
 <meta name="description" content="Join Mark Gabrielli for a live CMO-level audit framework webinar. Learn exactly what's silently killing your revenue, and how to fix it in 90 days." />
 <meta name="robots" content="index, follow" />
 <link rel="canonical" href="https://markcmo.com/webinar.html" />
-<meta property="og:title" content="Free Webinar: The Revenue Leak Audit — Mark Gabrielli" />
+<meta property="og:title" content="Free Webinar: The Revenue Leak Audit - Mark Gabrielli" />
 <meta property="og:description" content="A live CMO-level framework to find and fix what's silently killing your revenue." />
 <meta property="og:url" content="https://markcmo.com/webinar.html" />
 <meta property="og:type" content="website" />
@@ -691,19 +691,28 @@ Mark <span>Gabrielli</span>
 </a>
 <ul class="nav-links">
 <li><a href="index.html">Home</a></li>
-<li><a href="about.html" class="active">About</a></li>
+<li><a href="about.html">About</a></li>
 <li><a href="services.html">Services</a></li>
 <li><a href="portfolio.html">Portfolio</a></li>
 <li><a href="results.html">Results</a></li>
 <li><a href="blog.html">Insights</a></li>
-<li><a href="https://academy.markcmo.com" target="_blank" style="color:var(--gold);font-weight:700;">🎓 Academy</a></li>
+<li><a href="https://academy.markcmo.com" target="_blank" style="color:var(--gold);font-weight:700;">Academy</a></li>
 <li><a href="book.html" class="nav-cta">Book a Free Call</a></li>
 </ul>
-<div class="nav-mobile-links">
-<a href="portfolio.html" class="nav-mob-pill">Portfolio</a>
-<a href="book.html" class="nav-mob-cta">Book Mark →</a>
-</div>
+<button class="nav-hamburger" id="navHam" aria-label="Open menu"><span></span><span></span><span></span></button>
 </nav>
+<div class="mobile-drawer" id="mobileDrawer">
+<button class="drawer-close" id="drawerClose" aria-label="Close menu">&#x2715;</button>
+<a href="index.html">Home</a>
+<a href="about.html">About</a>
+<a href="services.html">Services</a>
+<a href="magnet-framework.html" style="color:var(--accent);font-weight:600;">MAGNET Framework&#x2122;</a>
+<a href="results.html">Results</a>
+<a href="portfolio.html">Portfolio</a>
+<a href="blog.html">Insights</a>
+<a href="https://academy.markcmo.com" target="_blank" rel="noopener">Academy</a>
+<a href="book.html" class="drawer-cta">Book a Free Strategy Call &#x2192;</a>
+</div>
 <section class="webinar-hero" style="padding:0;">
 <div class="webinar-hero-grid"></div>
 <div class="webinar-left">
@@ -765,7 +774,9 @@ A live CMO-level framework to find the invisible gaps in your marketing, operati
 <div class="webinar-form-card">
 <div class="form-heading">Reserve Your Seat</div>
 <p class="form-subheading">Free registration, takes 30 seconds. Your spot is held until 24 hours before showtime.</p>
-<form id="webinarForm">
+<form id="webinarForm" name="webinar_signup" data-netlify="true" netlify-honeypot="bot-field">
+<input type="hidden" name="form-name" value="webinar_signup" />
+<input type="hidden" name="bot-field" style="display:none" />
 <div class="form-group">
 <label for="firstName">First Name</label>
 <input type="text" id="firstName" name="firstName" placeholder="Mark" required />
@@ -1235,10 +1246,18 @@ page: 'webinar.html',
 timestamp: new Date().toISOString()
 };
 try {
-const res = await fetch('/.netlify/functions/webinar-signup', {
+const res = await fetch('/', {
 method: 'POST',
-headers: { 'Content-Type': 'application/json' },
-body: JSON.stringify(payload)
+headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+body: new URLSearchParams({
+'form-name': 'webinar_signup',
+firstName: payload.firstName,
+lastName: payload.lastName,
+email: payload.email,
+company: payload.company,
+revenue: payload.revenue,
+biggestChallenge: payload.biggestChallenge
+}).toString()
 });
 if (res.ok) {
 form.style.display = 'none';
@@ -1277,5 +1296,6 @@ btn.disabled = false;
   },{passive:true});
 })();
 </script>
+<script src="nav.js" defer></script>
 </body>
 </html>

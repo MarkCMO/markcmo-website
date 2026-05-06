@@ -1833,7 +1833,7 @@ setTimeout(populateTicker, 1500);
     if (pageInfoEl) {
       const from = totalRows === 0 ? 0 : startIdx + 1;
       const to = Math.min(startIdx + perPage, totalRows);
-      pageInfoEl.textContent = `Page ${state.page} of ${totalPages} (${from}–${to} of ${totalRows})`;
+      pageInfoEl.textContent = `Page ${state.page} of ${totalPages} (${from}-${to} of ${totalRows})`;
     }
     if (pagePrevBtn) pagePrevBtn.disabled = state.page <= 1;
     if (pageNextBtn) pageNextBtn.disabled = state.page >= totalPages;
@@ -1886,7 +1886,7 @@ setTimeout(populateTicker, 1500);
     const sortedCompanies = (companies || []).slice().sort((a, b) =>
       String(a.name || '').toLowerCase().localeCompare(String(b.name || '').toLowerCase())
     );
-    const opts = ['<option value="">— No company —</option>']
+    const opts = ['<option value="">- No company -</option>']
       .concat(sortedCompanies.map(c => `<option value="${escHtml(c.id)}">${escHtml(c.name)}</option>`))
       .join('');
     const deptList = ['acquisitions','development','distribution','finance','general','legal','press','production','sales'];
@@ -2065,7 +2065,7 @@ setTimeout(populateTicker, 1500);
   typeSel.addEventListener('change', fetchRolodex);
   tagSel.addEventListener('change', fetchRolodex);
 
-  // sort/filter — client-side, no refetch needed
+  // sort/filter - client-side, no refetch needed
   sortSel.addEventListener('change', () => { state.sort = sortSel.value; state.page = 1; renderResults(); });
   filterEmailSel.addEventListener('change', () => { state.filterContact = filterEmailSel.value; state.page = 1; renderResults(); });
   filterDeptSel.addEventListener('change', () => { state.filterDept = filterDeptSel.value; state.page = 1; renderResults(); });

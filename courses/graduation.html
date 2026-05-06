@@ -1,9 +1,10 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="UTF-8">
+<link rel="icon" type="image/webp" href="/favicon.webp"><link rel="apple-touch-icon" href="/mark-photo.webp">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>MarkCMO Academy — Graduate Wall</title>
+<title>MarkCMO Academy - Graduate Wall</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Barlow:ital,wght@0,300;0,400;0,600;0,700;0,900;1,400&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="/style.css">
@@ -101,11 +102,11 @@ a{color:inherit;text-decoration:none}
   .search-input{width:100%;margin-left:0}
 }
 </style>
-<meta name="description" content="MarkCMO Academy — Graduate Wall - MarkCMO provides fractional CMO and strategic marketing services for growth-stage companies.">
+<meta name="description" content="MarkCMO Academy - Graduate Wall - MarkCMO provides fractional CMO and strategic marketing services for growth-stage companies.">
 <link rel="canonical" href="https://markcmo.com/courses/graduation.html">
 <meta property="og:type" content="website">
-<meta property="og:title" content="MarkCMO Academy — Graduate Wall">
-<meta property="og:description" content="MarkCMO Academy — Graduate Wall - MarkCMO provides fractional CMO and strategic marketing services for growth-stage companies.">
+<meta property="og:title" content="MarkCMO Academy - Graduate Wall">
+<meta property="og:description" content="MarkCMO Academy - Graduate Wall - MarkCMO provides fractional CMO and strategic marketing services for growth-stage companies.">
 <meta property="og:url" content="https://markcmo.com/courses/graduation.html">
 <meta property="og:site_name" content="MarkCMO">
 </head>
@@ -124,10 +125,10 @@ a{color:inherit;text-decoration:none}
 <h1 class="hero-title">THE GRADUATE<br><span>WALL</span></h1>
 <p class="hero-sub">Every name here represents someone who refused the easy route. Harvard/MIT-level rigor. Real credentials. Real results.</p>
 <div class="hero-stats">
-<div><span class="stat-val" id="stat-grads">—</span><div class="stat-label">Graduates</div></div>
+<div><span class="stat-val" id="stat-grads">-</span><div class="stat-label">Graduates</div></div>
 <div><span class="stat-val" id="stat-courses">10</span><div class="stat-label">Courses</div></div>
-<div><span class="stat-val" id="stat-avg-gpa">—</span><div class="stat-label">Avg GPA</div></div>
-<div><span class="stat-val" id="stat-summa">—</span><div class="stat-label">Summa Cum Laude</div></div>
+<div><span class="stat-val" id="stat-avg-gpa">-</span><div class="stat-label">Avg GPA</div></div>
+<div><span class="stat-val" id="stat-summa">-</span><div class="stat-label">Summa Cum Laude</div></div>
 </div>
 </div>
 <div class="top-band">
@@ -253,7 +254,7 @@ function renderGrads() {
         <div class="grad-course">${COURSE_SHORT[g.course] || g.courseTitle || g.course}</div>
         <div class="grad-company">${escapeHtml(titleLine || g.company || '')}</div>
         <div class="grad-gpa-row">
-          <span class="grad-gpa">${g.gpa || '—'}</span>
+          <span class="grad-gpa">${g.gpa || '-'}</span>
           <span class="grad-letter">${g.letter || ''}</span>
         </div>
         <div class="grad-honors">${g.designation || ''}</div>
@@ -285,8 +286,8 @@ function updateStats() {
     const summa = ALL_GRADS.filter(g => g.designation === 'Summa Cum Laude').length;
     document.getElementById('stat-summa').textContent = summa;
   } else {
-    document.getElementById('stat-avg-gpa').textContent = '—';
-    document.getElementById('stat-summa').textContent = '—';
+    document.getElementById('stat-avg-gpa').textContent = '-';
+    document.getElementById('stat-summa').textContent = '-';
   }
 }
 function updateMarquee() {

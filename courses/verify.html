@@ -1,9 +1,10 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="UTF-8">
+<link rel="icon" type="image/webp" href="/favicon.webp"><link rel="apple-touch-icon" href="/mark-photo.webp">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Verify Diploma — MarkCMO Academy</title>
+<title>Verify Diploma - MarkCMO Academy</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Barlow:wght@400;600;700;900&family=DM+Mono&display=swap" rel="stylesheet">
@@ -55,11 +56,11 @@ nav{border-bottom:1px solid var(--border);padding:0 40px;height:56px;display:fle
 .spinner{width:20px;height:20px;border:2px solid var(--border2);border-top-color:var(--gold);border-radius:50%;animation:spin 0.8s linear infinite;display:inline-block;vertical-align:middle;margin-right:8px}
 @keyframes spin{to{transform:rotate(360deg)}}
 </style>
-<meta name="description" content="Verify Diploma — MarkCMO Academy - MarkCMO provides fractional CMO and strategic marketing services for growth-stage companies.">
+<meta name="description" content="Verify Diploma - MarkCMO Academy - MarkCMO provides fractional CMO and strategic marketing services for growth-stage companies.">
 <link rel="canonical" href="https://markcmo.com/courses/verify.html">
 <meta property="og:type" content="website">
-<meta property="og:title" content="Verify Diploma — MarkCMO Academy">
-<meta property="og:description" content="Verify Diploma — MarkCMO Academy - MarkCMO provides fractional CMO and strategic marketing services for growth-stage companies.">
+<meta property="og:title" content="Verify Diploma - MarkCMO Academy">
+<meta property="og:description" content="Verify Diploma - MarkCMO Academy - MarkCMO provides fractional CMO and strategic marketing services for growth-stage companies.">
 <meta property="og:url" content="https://markcmo.com/courses/verify.html">
 <meta property="og:site_name" content="MarkCMO">
 </head>
@@ -84,7 +85,7 @@ nav{border-bottom:1px solid var(--border);padding:0 40px;height:56px;display:fle
 <button class="verify-btn" id="verify-btn" onclick="verifyDiploma()">Verify Credential →</button>
 <div id="result-area" class="hidden">
 <div id="result-valid" class="result-card valid hidden">
-<div class="result-badge valid">✓ Verified — Authentic Credential</div>
+<div class="result-badge valid">✓ Verified - Authentic Credential</div>
 <div class="result-name" id="r-name"></div>
 <div class="result-course" id="r-course"></div>
 <div class="result-stats">
@@ -97,11 +98,11 @@ nav{border-bottom:1px solid var(--border);padding:0 40px;height:56px;display:fle
 <div class="divider" style="width:100%;margin:12px 0"></div>
 <div class="result-meta-item">Diploma # <strong id="r-dipnum"></strong></div>
 <div class="result-meta-item">Completed <strong id="r-date"></strong></div>
-<div class="result-meta-item">Issued by <strong>MarkCMO Academy — Mark Donnigan, Dean</strong></div>
+<div class="result-meta-item">Issued by <strong>MarkCMO Academy - Mark Donnigan, Dean</strong></div>
 </div>
 </div>
 <div id="result-invalid" class="result-card invalid hidden">
-<div class="result-badge invalid">✗ Not Found — Diploma Not Verified</div>
+<div class="result-badge invalid">✗ Not Found - Diploma Not Verified</div>
 <p style="color:var(--dim);font-size:14px;line-height:1.8">No credential matching this diploma number was found in our records. Please check the number and try again. If you believe this is an error, contact <a href="mailto:mark@markcmo.com" style="color:var(--gold)">mark@markcmo.com</a>.</p>
 </div>
 </div>
@@ -138,7 +139,7 @@ async function verifyDiploma() {
       document.getElementById('r-name').textContent = grad.name.toUpperCase();
       document.getElementById('r-course').textContent = grad.courseTitle || grad.course;
       document.getElementById('r-gpa').textContent = grad.gpa;
-      document.getElementById('r-letter').textContent = grad.letter || '—';
+      document.getElementById('r-letter').textContent = grad.letter || '-';
       document.getElementById('r-year').textContent = grad.completedAt ? new Date(grad.completedAt).getFullYear() : '2026';
       document.getElementById('r-designation').textContent = grad.designation || '';
       document.getElementById('r-dipnum').textContent = grad.diplomaNumber;

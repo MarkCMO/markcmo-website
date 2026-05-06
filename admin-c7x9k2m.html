@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="en">
 <head>
 <meta name="robots" content="noindex, nofollow">
@@ -10,8 +10,9 @@
   gtag('config', 'G-BXK5Y3DQBL');
 </script>
 <meta charset="UTF-8">
+<link rel="icon" type="image/webp" href="/favicon.webp"><link rel="apple-touch-icon" href="/mark-photo.webp">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>MarkCMO — Admin</title>
+<title>MarkCMO - Admin</title>
 <link rel="preconnect" href="https://fonts.googleapis.com" crossorigin>
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Barlow:ital,wght@0,400;0,500;0,600;0,700;0,800&family=DM+Mono:wght@400;500&display=swap">
@@ -981,11 +982,11 @@
   }
 /* ── ENGAGE ACCELERATOR ── */
   </style>
-<meta name="description" content="MarkCMO — Admin - MarkCMO provides fractional CMO and strategic marketing services for growth-stage companies.">
+<meta name="description" content="MarkCMO - Admin - MarkCMO provides fractional CMO and strategic marketing services for growth-stage companies.">
 <link rel="canonical" href="https://markcmo.com/admin-c7x9k2m.html">
 <meta property="og:type" content="website">
-<meta property="og:title" content="MarkCMO — Admin">
-<meta property="og:description" content="MarkCMO — Admin - MarkCMO provides fractional CMO and strategic marketing services for growth-stage companies.">
+<meta property="og:title" content="MarkCMO - Admin">
+<meta property="og:description" content="MarkCMO - Admin - MarkCMO provides fractional CMO and strategic marketing services for growth-stage companies.">
 <meta property="og:url" content="https://markcmo.com/admin-c7x9k2m.html">
 <meta property="og:site_name" content="MarkCMO">
 <script type="application/ld+json">
@@ -1046,19 +1047,28 @@ Mark <span>Gabrielli</span>
 </a>
 <ul class="nav-links">
 <li><a href="index.html">Home</a></li>
-<li><a href="about.html" class="active">About</a></li>
+<li><a href="about.html">About</a></li>
 <li><a href="services.html">Services</a></li>
 <li><a href="portfolio.html">Portfolio</a></li>
 <li><a href="results.html">Results</a></li>
 <li><a href="blog.html">Insights</a></li>
-<li><a href="https://academy.markcmo.com" target="_blank" style="color:var(--gold);font-weight:700;">🎓 Academy</a></li>
+<li><a href="https://academy.markcmo.com" target="_blank" style="color:var(--gold);font-weight:700;">Academy</a></li>
 <li><a href="book.html" class="nav-cta">Book a Free Call</a></li>
 </ul>
-<div class="nav-mobile-links">
-<a href="portfolio.html" class="nav-mob-pill">Portfolio</a>
-<a href="book.html" class="nav-mob-cta">Book Mark →</a>
-</div>
+<button class="nav-hamburger" id="navHam" aria-label="Open menu"><span></span><span></span><span></span></button>
 </nav>
+<div class="mobile-drawer" id="mobileDrawer">
+<button class="drawer-close" id="drawerClose" aria-label="Close menu">&#x2715;</button>
+<a href="index.html">Home</a>
+<a href="about.html">About</a>
+<a href="services.html">Services</a>
+<a href="magnet-framework.html" style="color:var(--accent);font-weight:600;">MAGNET Framework&#x2122;</a>
+<a href="results.html">Results</a>
+<a href="portfolio.html">Portfolio</a>
+<a href="blog.html">Insights</a>
+<a href="https://academy.markcmo.com" target="_blank" rel="noopener">Academy</a>
+<a href="book.html" class="drawer-cta">Book a Free Strategy Call &#x2192;</a>
+</div>
 <div class="sidebar-footer">
 <div class="sidebar-user">Signed in as<br><strong><a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="bad7dbc8d1fad7dbc8d1d9d7d594d9d5d7">[email&#160;protected]</a></strong></div>
 <div class="logout-btn" onclick="doLogout()">Sign out</div>
@@ -1074,15 +1084,15 @@ Mark <span>Gabrielli</span>
 </div>
 <div class="content-body">
 <div class="stats-grid" id="stats-grid">
-<div class="stat-card"><div class="stat-label">Total Registrants</div><div class="stat-value" id="stat-total">—</div><div class="stat-sub">all time</div></div>
-<div class="stat-card"><div class="stat-label">This Week</div><div class="stat-value" id="stat-week">—</div><div class="stat-sub">last 7 days</div></div>
-<div class="stat-card"><div class="stat-label">Emails Queued</div><div class="stat-value" id="stat-queued">—</div><div class="stat-sub">pending send</div></div>
-<div class="stat-card"><div class="stat-label">Emails Sent</div><div class="stat-value" id="stat-sent">—</div><div class="stat-sub">drip sequence</div></div>
+<div class="stat-card"><div class="stat-label">Total Registrants</div><div class="stat-value" id="stat-total">-</div><div class="stat-sub">all time</div></div>
+<div class="stat-card"><div class="stat-label">This Week</div><div class="stat-value" id="stat-week">-</div><div class="stat-sub">last 7 days</div></div>
+<div class="stat-card"><div class="stat-label">Emails Queued</div><div class="stat-value" id="stat-queued">-</div><div class="stat-sub">pending send</div></div>
+<div class="stat-card"><div class="stat-label">Emails Sent</div><div class="stat-value" id="stat-sent">-</div><div class="stat-sub">drip sequence</div></div>
 </div>
 <div class="table-wrap">
 <div class="table-header">
 <div class="table-title">Recent Registrants</div>
-<div class="text-sm text-muted" id="dash-updated">—</div>
+<div class="text-sm text-muted" id="dash-updated">-</div>
 </div>
 <table>
 <thead><tr>
@@ -1129,9 +1139,9 @@ Mark <span>Gabrielli</span>
 </div>
 <div class="content-body">
 <div class="stats-grid" style="grid-template-columns:repeat(3,1fr);max-width:500px;">
-<div class="stat-card"><div class="stat-label">Total</div><div class="stat-value" id="q-total">—</div></div>
-<div class="stat-card"><div class="stat-label">Pending</div><div class="stat-value" id="q-pending" style="color:var(--gold)">—</div></div>
-<div class="stat-card"><div class="stat-label">Sent</div><div class="stat-value" id="q-sent" style="color:var(--green)">—</div></div>
+<div class="stat-card"><div class="stat-label">Total</div><div class="stat-value" id="q-total">-</div></div>
+<div class="stat-card"><div class="stat-label">Pending</div><div class="stat-value" id="q-pending" style="color:var(--gold)">-</div></div>
+<div class="stat-card"><div class="stat-label">Sent</div><div class="stat-value" id="q-sent" style="color:var(--green)">-</div></div>
 </div>
 <div class="table-wrap">
 <div class="table-header">
@@ -1180,7 +1190,7 @@ Mark <span>Gabrielli</span>
 <div class="coming-soon">
 <div class="cs-icon">📋</div>
 <h2>ALL CONTACTS</h2>
-<p>Full contact database — every lead, prospect, and connection across all channels.</p>
+<p>Full contact database - every lead, prospect, and connection across all channels.</p>
 <div class="cs-badge">Coming Next Build</div>
 <div style="margin-top:20px;text-align:left;max-width:360px;width:100%;">
 <div style="font-size:10px;letter-spacing:2px;text-transform:uppercase;color:var(--dim);margin-bottom:8px;">ROADMAP</div>
@@ -1232,7 +1242,7 @@ Mark <span>Gabrielli</span>
 <div class="coming-soon">
 <div class="cs-icon">🚀</div>
 <h2>ACTIVE PROJECTS</h2>
-<p>Track all live engagements — deliverables, milestones, and status.</p>
+<p>Track all live engagements - deliverables, milestones, and status.</p>
 <div class="cs-badge">Coming Next Build</div>
 <div style="margin-top:20px;text-align:left;max-width:360px;width:100%;">
 <div style="font-size:10px;letter-spacing:2px;text-transform:uppercase;color:var(--dim);margin-bottom:8px;">ROADMAP</div>
@@ -1258,7 +1268,7 @@ Mark <span>Gabrielli</span>
 <div class="coming-soon">
 <div class="cs-icon">✍️</div>
 <h2>CONTRACTS</h2>
-<p>Manage all signed contracts — NDAs, MSAs, SOWs, and engagement letters.</p>
+<p>Manage all signed contracts - NDAs, MSAs, SOWs, and engagement letters.</p>
 <div class="cs-badge">Coming Next Build</div>
 <div style="margin-top:20px;text-align:left;max-width:360px;width:100%;">
 <div style="font-size:10px;letter-spacing:2px;text-transform:uppercase;color:var(--dim);margin-bottom:8px;">ROADMAP</div>
@@ -1410,7 +1420,7 @@ Mark <span>Gabrielli</span>
 <div class="coming-soon">
 <div class="cs-icon">📥</div>
 <h2>FORM SUBMISSIONS</h2>
-<p>Track all submitted forms — who filled them, when, and their current status.</p>
+<p>Track all submitted forms - who filled them, when, and their current status.</p>
 <div class="cs-badge">Coming Next Build</div>
 <div style="margin-top:20px;text-align:left;max-width:360px;width:100%;">
 <div style="font-size:10px;letter-spacing:2px;text-transform:uppercase;color:var(--dim);margin-bottom:8px;">ROADMAP</div>
@@ -1462,7 +1472,7 @@ Mark <span>Gabrielli</span>
 <div class="coming-soon">
 <div class="cs-icon">👤</div>
 <h2>SUBSCRIBERS</h2>
-<p>Manage your full email list — segments, tags, suppression, and compliance.</p>
+<p>Manage your full email list - segments, tags, suppression, and compliance.</p>
 <div class="cs-badge">Coming Next Build</div>
 <div style="margin-top:20px;text-align:left;max-width:360px;width:100%;">
 <div style="font-size:10px;letter-spacing:2px;text-transform:uppercase;color:var(--dim);margin-bottom:8px;">ROADMAP</div>
@@ -1475,7 +1485,7 @@ Mark <span>Gabrielli</span>
 <div class="coming-soon">
 <div class="cs-icon">💳</div>
 <h2>TRANSACTIONS</h2>
-<p>All Square payment transactions in one view — purchases, refunds, and status.</p>
+<p>All Square payment transactions in one view - purchases, refunds, and status.</p>
 <div class="cs-badge">Coming Next Build</div>
 <div style="margin-top:20px;text-align:left;max-width:360px;width:100%;">
 <div style="font-size:10px;letter-spacing:2px;text-transform:uppercase;color:var(--dim);margin-bottom:8px;">ROADMAP</div>
@@ -1505,7 +1515,7 @@ Mark <span>Gabrielli</span>
 <div class="cs-badge">Coming Next Build</div>
 <div style="margin-top:20px;text-align:left;max-width:360px;width:100%;">
 <div style="font-size:10px;letter-spacing:2px;text-transform:uppercase;color:var(--dim);margin-bottom:8px;">ROADMAP</div>
-<div style="font-size:12px;color:var(--dim);padding:4px 0;border-bottom:1px solid var(--border);">→ CMO Audit & Sprint — from $1,000</div><div style="font-size:12px;color:var(--dim);padding:4px 0;border-bottom:1px solid var(--border);">→ VIP Strategy Day — $2,500</div><div style="font-size:12px;color:var(--dim);padding:4px 0;border-bottom:1px solid var(--border);">→ Fractional CMO Retainer — $5k-$15k/mo</div><div style="font-size:12px;color:var(--dim);padding:4px 0;border-bottom:1px solid var(--border);">→ Revenue Leak Playbook — $100</div><div style="font-size:12px;color:var(--dim);padding:4px 0;border-bottom:1px solid var(--border);">→ CMO Accelerator Kit — $50</div>
+<div style="font-size:12px;color:var(--dim);padding:4px 0;border-bottom:1px solid var(--border);">→ CMO Audit & Sprint - from $1,000</div><div style="font-size:12px;color:var(--dim);padding:4px 0;border-bottom:1px solid var(--border);">→ VIP Strategy Day - $2,500</div><div style="font-size:12px;color:var(--dim);padding:4px 0;border-bottom:1px solid var(--border);">→ Fractional CMO Retainer - $5k-$15k/mo</div><div style="font-size:12px;color:var(--dim);padding:4px 0;border-bottom:1px solid var(--border);">→ Revenue Leak Playbook - $100</div><div style="font-size:12px;color:var(--dim);padding:4px 0;border-bottom:1px solid var(--border);">→ CMO Accelerator Kit - $50</div>
 </div>
 </div>
 </div>
@@ -1514,7 +1524,7 @@ Mark <span>Gabrielli</span>
 <div class="coming-soon">
 <div class="cs-icon">📈</div>
 <h2>REVENUE REPORTS</h2>
-<p>Monthly and annual revenue dashboards — MRR, one-time, pipeline, and projections.</p>
+<p>Monthly and annual revenue dashboards - MRR, one-time, pipeline, and projections.</p>
 <div class="cs-badge">Coming Next Build</div>
 <div style="margin-top:20px;text-align:left;max-width:360px;width:100%;">
 <div style="font-size:10px;letter-spacing:2px;text-transform:uppercase;color:var(--dim);margin-bottom:8px;">ROADMAP</div>
@@ -1531,12 +1541,12 @@ Mark <span>Gabrielli</span>
 </div>
 <div class="content-body">
 <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(160px,1fr));gap:12px;margin-bottom:28px;" id="courses-stats">
-<div class="stat-card"><div class="stat-label">Total Enrollments</div><div class="stat-value" id="cs-total">—</div></div>
-<div class="stat-card"><div class="stat-label">Active Students</div><div class="stat-value" id="cs-active">—</div></div>
-<div class="stat-card"><div class="stat-label">Graduates</div><div class="stat-value" id="cs-grads">—</div></div>
-<div class="stat-card"><div class="stat-label">Est. Revenue</div><div class="stat-value" id="cs-revenue">—</div></div>
-<div class="stat-card"><div class="stat-label">Avg GPA</div><div class="stat-value" id="cs-gpa">—</div></div>
-<div class="stat-card"><div class="stat-label">Completion Rate</div><div class="stat-value" id="cs-completion">—</div></div>
+<div class="stat-card"><div class="stat-label">Total Enrollments</div><div class="stat-value" id="cs-total">-</div></div>
+<div class="stat-card"><div class="stat-label">Active Students</div><div class="stat-value" id="cs-active">-</div></div>
+<div class="stat-card"><div class="stat-label">Graduates</div><div class="stat-value" id="cs-grads">-</div></div>
+<div class="stat-card"><div class="stat-label">Est. Revenue</div><div class="stat-value" id="cs-revenue">-</div></div>
+<div class="stat-card"><div class="stat-label">Avg GPA</div><div class="stat-value" id="cs-gpa">-</div></div>
+<div class="stat-card"><div class="stat-label">Completion Rate</div><div class="stat-value" id="cs-completion">-</div></div>
 </div>
 <div class="table-wrap">
 <div class="table-header"><div class="table-title">Enrollments by Course</div></div>
@@ -1622,10 +1632,10 @@ Mark <span>Gabrielli</span>
 <div class="panel-header"><h1 class="panel-title">💵 Course Revenue</h1></div>
 <div class="content-body">
 <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:12px;margin-bottom:28px;">
-<div class="stat-card"><div class="stat-label">Total Est. Revenue</div><div class="stat-value" id="rev-total">—</div></div>
-<div class="stat-card"><div class="stat-label">Avg Course Value</div><div class="stat-value" id="rev-avg">—</div></div>
-<div class="stat-card"><div class="stat-label">New This Month</div><div class="stat-value" id="rev-month">—</div></div>
-<div class="stat-card"><div class="stat-label">Retakes Revenue</div><div class="stat-value" id="rev-retakes">—</div></div>
+<div class="stat-card"><div class="stat-label">Total Est. Revenue</div><div class="stat-value" id="rev-total">-</div></div>
+<div class="stat-card"><div class="stat-label">Avg Course Value</div><div class="stat-value" id="rev-avg">-</div></div>
+<div class="stat-card"><div class="stat-label">New This Month</div><div class="stat-value" id="rev-month">-</div></div>
+<div class="stat-card"><div class="stat-label">Retakes Revenue</div><div class="stat-value" id="rev-retakes">-</div></div>
 </div>
 <div class="table-wrap">
 <div class="table-header"><div class="table-title">Revenue by Course</div></div>
@@ -1653,12 +1663,12 @@ Actual revenue is confirmed in your Square Dashboard.
 </div>
 <div class="content-body">
 <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(160px,1fr));gap:12px;margin-bottom:28px;">
-<div class="stat-card"><div class="stat-label">Total Votes Cast</div><div class="stat-value" id="v-total">—</div></div>
-<div class="stat-card"><div class="stat-label">Courses With Votes</div><div class="stat-value" id="v-courses">—</div></div>
-<div class="stat-card"><div class="stat-label">#1 Most Wanted</div><div class="stat-value" id="v-top" style="font-size:13px;letter-spacing:0;">—</div></div>
+<div class="stat-card"><div class="stat-label">Total Votes Cast</div><div class="stat-value" id="v-total">-</div></div>
+<div class="stat-card"><div class="stat-label">Courses With Votes</div><div class="stat-value" id="v-courses">-</div></div>
+<div class="stat-card"><div class="stat-label">#1 Most Wanted</div><div class="stat-value" id="v-top" style="font-size:13px;letter-spacing:0;">-</div></div>
 </div>
 <div class="table-wrap">
-<div class="table-header"><div class="table-title">Votes by Course — Build Priority Order</div></div>
+<div class="table-header"><div class="table-title">Votes by Course - Build Priority Order</div></div>
 <table class="data-table">
 <thead><tr><th>Rank</th><th>Course</th><th>Category</th><th>Votes</th><th>Notify Signups</th><th>Action</th></tr></thead>
 <tbody id="votes-tbody">
@@ -1680,12 +1690,12 @@ Actual revenue is confirmed in your Square Dashboard.
 </div>
 <div class="content-body">
 <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(160px,1fr));gap:12px;margin-bottom:28px;">
-<div class="stat-card"><div class="stat-label">Total Signups</div><div class="stat-value" id="n-total">—</div></div>
-<div class="stat-card"><div class="stat-label">Courses Watched</div><div class="stat-value" id="n-courses">—</div></div>
-<div class="stat-card"><div class="stat-label">Emails Sent</div><div class="stat-value" id="n-sent">—</div></div>
+<div class="stat-card"><div class="stat-label">Total Signups</div><div class="stat-value" id="n-total">-</div></div>
+<div class="stat-card"><div class="stat-label">Courses Watched</div><div class="stat-value" id="n-courses">-</div></div>
+<div class="stat-card"><div class="stat-label">Emails Sent</div><div class="stat-value" id="n-sent">-</div></div>
 </div>
 <div class="table-wrap" style="margin-bottom:20px;">
-<div class="table-header"><div class="table-title">Signups by Course — Fire Launch Emails Here</div></div>
+<div class="table-header"><div class="table-title">Signups by Course - Fire Launch Emails Here</div></div>
 <table class="data-table">
 <thead><tr><th>Course</th><th>Signups</th><th>Last Signup</th><th>Launch Email Sent</th><th>Action</th></tr></thead>
 <tbody id="notify-summary-tbody">
@@ -1720,7 +1730,7 @@ style="background:var(--bg);border:1px solid var(--border);color:var(--text);pad
 <div class="upload-zone" id="upload-zone" onclick="document.getElementById('file-input').click()">
 <div class="upload-zone-icon">📎</div>
 <div class="upload-zone-text">Drop files here or click to upload</div>
-<div class="upload-zone-sub">PDF, DOCX, XLSX, ZIP, MP4 — any file type</div>
+<div class="upload-zone-sub">PDF, DOCX, XLSX, ZIP, MP4 - any file type</div>
 </div>
 <input type="file" id="file-input" multiple onchange="handleFileUpload(this.files)">
 <div class="flex gap-2 mb-4" style="flex-wrap:wrap;">
@@ -1736,7 +1746,7 @@ style="background:var(--bg);border:1px solid var(--border);color:var(--text);pad
 <div class="table-wrap" style="margin-top:24px;">
 <div class="table-header">
 <div class="table-title">All Files</div>
-<div class="text-sm text-muted" id="doc-count">—</div>
+<div class="text-sm text-muted" id="doc-count">-</div>
 </div>
 <table>
 <thead><tr><th>File</th><th>Category</th><th>Size</th><th>Uploaded</th><th>Public URL</th><th></th></tr></thead>
@@ -1756,7 +1766,7 @@ style="background:var(--bg);border:1px solid var(--border);color:var(--text);pad
 <div class="content-body">
 <div style="background:var(--surface);border:1px solid var(--border);border-left:3px solid var(--gold);padding:16px 20px;margin-bottom:24px;">
 <div style="font-size:13px;color:var(--muted);line-height:1.6;">
-Generate unique tracked links to send clients to your forms and documents. Each link is different — click <strong style="color:var(--text)">Rotate</strong> on any link to get a fresh URL while keeping the same destination. Mark links as single-use to expire after one click.
+Generate unique tracked links to send clients to your forms and documents. Each link is different - click <strong style="color:var(--text)">Rotate</strong> on any link to get a fresh URL while keeping the same destination. Mark links as single-use to expire after one click.
 </div>
 </div>
 <div class="flex gap-2 mb-4" style="flex-wrap:wrap;align-items:center;">
@@ -1782,7 +1792,7 @@ Generate unique tracked links to send clients to your forms and documents. Each 
 <div class="coming-soon">
 <div class="cs-icon">✏️</div>
 <h2>BLOG MANAGER</h2>
-<p>Manage your Insights blog — draft, schedule, and publish posts to markcmo.com.</p>
+<p>Manage your Insights blog - draft, schedule, and publish posts to markcmo.com.</p>
 <div class="cs-badge">Coming Next Build</div>
 <div style="margin-top:20px;text-align:left;max-width:360px;width:100%;">
 <div style="font-size:10px;letter-spacing:2px;text-transform:uppercase;color:var(--dim);margin-bottom:8px;">ROADMAP</div>
@@ -1888,7 +1898,7 @@ Generate unique tracked links to send clients to your forms and documents. Each 
 <div class="coming-soon">
 <div class="cs-icon">💹</div>
 <h2>REVENUE ANALYTICS</h2>
-<p>Full revenue attribution — which marketing activity drives income.</p>
+<p>Full revenue attribution - which marketing activity drives income.</p>
 <div class="cs-badge">Coming Next Build</div>
 <div style="margin-top:20px;text-align:left;max-width:360px;width:100%;">
 <div style="font-size:10px;letter-spacing:2px;text-transform:uppercase;color:var(--dim);margin-bottom:8px;">ROADMAP</div>
@@ -1911,7 +1921,7 @@ Generate unique tracked links to send clients to your forms and documents. Each 
 <div class="settings-field">
 <label class="field-label">Admin Secret (from Netlify env: ADMIN_SECRET)</label>
 <input type="password" class="field-input" id="settings-admin-secret" placeholder="Paste your ADMIN_SECRET value here" autocomplete="off">
-<div style="font-size:11px;color:var(--dim);margin-top:6px;">Required to load the Notify List and fire launch emails. Never saved — re-enter each session.</div>
+<div style="font-size:11px;color:var(--dim);margin-top:6px;">Required to load the Notify List and fire launch emails. Never saved - re-enter each session.</div>
 </div>
 </div>
 </div>
@@ -1990,12 +2000,12 @@ Generate unique tracked links to send clients to your forms and documents. Each 
 <div style="padding:24px;background:var(--surface);border:1px solid var(--border);margin-bottom:24px;">
 <div class="settings-head" style="padding:0;border:none;margin-bottom:16px;">Environment Variables Required in Netlify</div>
 <div style="font-family:'DM Mono',monospace;font-size:11px;color:var(--muted);line-height:2;">
-<div><span style="color:var(--gold)">RESEND_API_KEY</span> — Your Resend.com API key</div>
-<div><span style="color:var(--gold)">JSONBIN_API_KEY</span> — JSONBin master key</div>
-<div><span style="color:var(--gold)">JSONBIN_BIN_ID</span> — Bin ID for webinar leads</div>
-<div><span style="color:var(--gold)">JSONBIN_DRIP_BIN_ID</span> — Bin ID for drip queue</div>
-<div><span style="color:var(--gold)">JSONBIN_DOCS_BIN_ID</span> — Bin ID for document metadata</div>
-<div><span style="color:var(--gold)">NOTIFY_EMAIL</span> — <a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="563b37243d163b37243d353b397835393b">[email&#160;protected]</a></div>
+<div><span style="color:var(--gold)">RESEND_API_KEY</span> - Your Resend.com API key</div>
+<div><span style="color:var(--gold)">JSONBIN_API_KEY</span> - JSONBin master key</div>
+<div><span style="color:var(--gold)">JSONBIN_BIN_ID</span> - Bin ID for webinar leads</div>
+<div><span style="color:var(--gold)">JSONBIN_DRIP_BIN_ID</span> - Bin ID for drip queue</div>
+<div><span style="color:var(--gold)">JSONBIN_DOCS_BIN_ID</span> - Bin ID for document metadata</div>
+<div><span style="color:var(--gold)">NOTIFY_EMAIL</span> - <a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="563b37243d163b37243d353b397835393b">[email&#160;protected]</a></div>
 </div>
 </div>
 </div>
@@ -2009,13 +2019,13 @@ Generate unique tracked links to send clients to your forms and documents. Each 
 </div>
 <div class="content-body">
 <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(160px,1fr));gap:12px;margin-bottom:28px;">
-<div class="stat-card"><div class="stat-label">Total Requests</div><div class="stat-value" id="intl-total">—</div></div>
-<div class="stat-card"><div class="stat-label">Pending</div><div class="stat-value" id="intl-pending" style="color:#f0a050;">—</div></div>
-<div class="stat-card"><div class="stat-label">Approved</div><div class="stat-value" id="intl-approved-count" style="color:#4CAF72;">—</div></div>
+<div class="stat-card"><div class="stat-label">Total Requests</div><div class="stat-value" id="intl-total">-</div></div>
+<div class="stat-card"><div class="stat-label">Pending</div><div class="stat-value" id="intl-pending" style="color:#f0a050;">-</div></div>
+<div class="stat-card"><div class="stat-label">Approved</div><div class="stat-value" id="intl-approved-count" style="color:#4CAF72;">-</div></div>
 </div>
 <div class="table-wrap">
 <div class="table-header">
-<div class="table-title">Access Requests — Click Approve to Send Magic Link</div>
+<div class="table-title">Access Requests - Click Approve to Send Magic Link</div>
 <input type="text" id="intl-search" placeholder="Search name, email, country…" oninput="filterIntlList()"
 style="background:var(--bg);border:1px solid var(--border);color:var(--text);padding:6px 10px;font-size:11px;outline:none;width:200px;">
 </div>
@@ -2038,7 +2048,7 @@ style="background:var(--bg);border:1px solid var(--border);color:var(--text);pad
 <div class="content-body">
 <div style="margin-bottom:32px;">
 <div style="font-size:13px;color:var(--muted);line-height:1.8;max-width:700px;">
-This is your legitimate social growth engine. Unlike bots or fake engagement tools, every feature here is powered by AI strategy and content intelligence — helping you grow real audiences on LinkedIn and Instagram through superior content, targeting clarity, and conversion funnels.
+This is your legitimate social growth engine. Unlike bots or fake engagement tools, every feature here is powered by AI strategy and content intelligence - helping you grow real audiences on LinkedIn and Instagram through superior content, targeting clarity, and conversion funnels.
 </div>
 </div>
 <div class="grid-4" style="margin-bottom:28px;">
@@ -2069,15 +2079,15 @@ This is your legitimate social growth engine. Unlike bots or fake engagement too
 <div class="card-body" style="display:grid;gap:12px;">
 <div style="display:flex;gap:12px;align-items:flex-start;font-size:12px;">
 <span style="color:var(--gold);font-size:16px;flex-shrink:0;">🎯</span>
-<div><strong style="color:var(--text);">Audience Intel</strong><br><span style="color:var(--muted);">Like Outfame's targeting engine — identify exactly who to attract and where they hang out.</span></div>
+<div><strong style="color:var(--text);">Audience Intel</strong><br><span style="color:var(--muted);">Like Outfame's targeting engine - identify exactly who to attract and where they hang out.</span></div>
 </div>
 <div style="display:flex;gap:12px;align-items:flex-start;font-size:12px;">
 <span style="color:var(--gold);font-size:16px;flex-shrink:0;">💬</span>
-<div><strong style="color:var(--text);">DM Funnel Builder</strong><br><span style="color:var(--muted);">Like Zeals' comment-to-DM system — build automated chat flows you deploy via ManyChat or Meta.</span></div>
+<div><strong style="color:var(--text);">DM Funnel Builder</strong><br><span style="color:var(--muted);">Like Zeals' comment-to-DM system - build automated chat flows you deploy via ManyChat or Meta.</span></div>
 </div>
 <div style="display:flex;gap:12px;align-items:flex-start;font-size:12px;">
 <span style="color:var(--gold);font-size:16px;flex-shrink:0;">📅</span>
-<div><strong style="color:var(--text);">Content Calendar</strong><br><span style="color:var(--muted);">Like Jetpack's scheduling engine — AI plans your full month of posts by type and optimal timing.</span></div>
+<div><strong style="color:var(--text);">Content Calendar</strong><br><span style="color:var(--muted);">Like Jetpack's scheduling engine - AI plans your full month of posts by type and optimal timing.</span></div>
 </div>
 <div style="display:flex;gap:12px;align-items:flex-start;font-size:12px;">
 <span style="color:var(--gold);font-size:16px;flex-shrink:0;">🔍</span>
@@ -2136,7 +2146,7 @@ This is your legitimate social growth engine. Unlike bots or fake engagement too
 </div>
 <div>
 <label class="field-label">Client Revenue Range / Company Size</label>
-<input id="aud-size" class="field-input" placeholder="e.g. $2M–$20M revenue, Series A–B, 10–150 employees">
+<input id="aud-size" class="field-input" placeholder="e.g. $2M-$20M revenue, Series A-B, 10-150 employees">
 </div>
 </div>
 </div>
@@ -2368,7 +2378,7 @@ This is your legitimate social growth engine. Unlike bots or fake engagement too
 <div class="content-body">
 <div class="card" style="margin-bottom:24px;">
 <div class="card-header">
-<div><div class="card-title">Build Comment-to-DM Conversion Funnels</div><div class="card-sub">Like Zeals — build automated chat flows triggered by post comments. Deploy via ManyChat or Meta.</div></div>
+<div><div class="card-title">Build Comment-to-DM Conversion Funnels</div><div class="card-sub">Like Zeals - build automated chat flows triggered by post comments. Deploy via ManyChat or Meta.</div></div>
 </div>
 <div class="card-body">
 <div class="gap-16">
@@ -2550,7 +2560,7 @@ This is your legitimate social growth engine. Unlike bots or fake engagement too
 <div class="table-wrap" style="margin-bottom:20px;">
 <div class="table-header">
 <div class="table-title">Your Voice Profile</div>
-<div class="text-sm text-muted" style="font-size:11px;color:var(--muted);">Set once — used in all replies</div>
+<div class="text-sm text-muted" style="font-size:11px;color:var(--muted);">Set once - used in all replies</div>
 </div>
 <div style="padding:16px 24px;display:grid;grid-template-columns:1fr 1fr 1fr;gap:16px;">
 <div>
@@ -2632,7 +2642,7 @@ This is your legitimate social growth engine. Unlike bots or fake engagement too
 <div class="table-title" style="color:var(--gold);">⏱ 60-Min Engagement Timer</div>
 </div>
 <div style="padding:16px 24px;display:grid;gap:10px;">
-<div style="font-size:11px;color:var(--muted);line-height:1.7;">Start this when you publish a post. Reply to all comments before the timer hits zero — that's the algorithm window.</div>
+<div style="font-size:11px;color:var(--muted);line-height:1.7;">Start this when you publish a post. Reply to all comments before the timer hits zero - that's the algorithm window.</div>
 <div style="display:flex;gap:8px;">
 <button class="btn btn-gold" style="font-size:10px;padding:8px 14px;" onclick="startTimer()">▶ START TIMER</button>
 <button class="btn btn-outline" style="font-size:10px;padding:8px 14px;" onclick="resetTimer()">↺ RESET</button>
@@ -2710,7 +2720,7 @@ async function doLogin() {
       btn.textContent = 'SIGN IN →';
     }
   } catch(e) {
-    err.textContent = 'Connection error — try again.';
+    err.textContent = 'Connection error - try again.';
     err.style.display = 'block';
     btn.disabled = false;
     btn.textContent = 'SIGN IN →';
@@ -2744,7 +2754,7 @@ let allLeads = [];
 let allQueue = [];
 let allDocs = [];
 let settings = {};
-const JSONBIN_KEY = ''; // filled from env — read via admin API
+const JSONBIN_KEY = ''; // filled from env - read via admin API
 // For demo/admin UI, we'll use fetch to a Netlify function that proxies JSONBin
 // ─── INIT ────────────────────────────────────────────────────────────────────
 function initApp() {
@@ -2862,9 +2872,9 @@ function renderLeads(leads) {
     <tr>
       <td><strong>${esc(l.firstName)} ${esc(l.lastName || '')}</strong></td>
       <td class="td-mono td-muted">${esc(l.email)}</td>
-      <td>${esc(l.company || '—')}</td>
-      <td class="td-muted">${esc(l.revenue || '—')}</td>
-      <td style="max-width:180px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;" class="td-muted" title="${esc(l.challenge || '')}">${esc(l.challenge || '—')}</td>
+      <td>${esc(l.company || '-')}</td>
+      <td class="td-muted">${esc(l.revenue || '-')}</td>
+      <td style="max-width:180px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;" class="td-muted" title="${esc(l.challenge || '')}">${esc(l.challenge || '-')}</td>
       <td class="td-mono td-muted">${fmtDate(l.registeredAt)}</td>
       <td><button class="btn btn-outline" onclick="openLeadDrawer(${i})">View</button></td>
     </tr>
@@ -2881,8 +2891,8 @@ function renderDashLeads(leads) {
     <tr>
       <td><strong>${esc(l.firstName)} ${esc(l.lastName || '')}</strong></td>
       <td class="td-mono td-muted">${esc(l.email)}</td>
-      <td>${esc(l.company || '—')}</td>
-      <td class="td-muted">${esc(l.revenue || '—')}</td>
+      <td>${esc(l.company || '-')}</td>
+      <td class="td-muted">${esc(l.revenue || '-')}</td>
       <td class="td-mono td-muted">${fmtDate(l.registeredAt)}</td>
     </tr>
   `).join('');
@@ -2905,9 +2915,9 @@ function openLeadDrawer(idx) {
   document.getElementById('drawer-content').innerHTML = `
     <div class="detail-field"><div class="detail-label">Full Name</div><div class="detail-value">${esc(l.firstName)} ${esc(l.lastName || '')}</div></div>
     <div class="detail-field"><div class="detail-label">Email</div><div class="detail-value mono">${esc(l.email)}</div></div>
-    <div class="detail-field"><div class="detail-label">Company</div><div class="detail-value">${esc(l.company || '—')}</div></div>
-    <div class="detail-field"><div class="detail-label">Revenue Range</div><div class="detail-value">${esc(l.revenue || '—')}</div></div>
-    <div class="detail-field"><div class="detail-label">Biggest Challenge</div><div class="detail-value">${esc(l.challenge || '—')}</div></div>
+    <div class="detail-field"><div class="detail-label">Company</div><div class="detail-value">${esc(l.company || '-')}</div></div>
+    <div class="detail-field"><div class="detail-label">Revenue Range</div><div class="detail-value">${esc(l.revenue || '-')}</div></div>
+    <div class="detail-field"><div class="detail-label">Biggest Challenge</div><div class="detail-value">${esc(l.challenge || '-')}</div></div>
     <div class="detail-field"><div class="detail-label">Registered</div><div class="detail-value mono">${new Date(l.registeredAt).toLocaleString()}</div></div>
     <div class="detail-field"><div class="detail-label">Source</div><div class="detail-value td-muted">${esc(l.source || 'webinar-landing')}</div></div>
     <hr style="border:none;border-top:1px solid var(--border);margin:20px 0;">
@@ -2942,7 +2952,7 @@ function renderQueue(queue) {
       <td>${EMAIL_LABELS[q.emailType] || esc(q.emailType)}</td>
       <td class="td-mono td-muted">${fmtDate(q.sendAt)}</td>
       <td><span class="tag ${q.sent ? 'tag-sent' : q.error ? 'tag-error' : 'tag-pending'}">${q.sent ? 'Sent' : q.error ? 'Error' : 'Pending'}</span></td>
-      <td class="td-mono td-muted">${q.sentAt ? fmtDate(q.sentAt) : '—'}</td>
+      <td class="td-mono td-muted">${q.sentAt ? fmtDate(q.sentAt) : '-'}</td>
     </tr>
   `).join('');
 }
@@ -2980,7 +2990,7 @@ function renderDocs(docs) {
     <tr>
       <td>${fileIcon(d.name)} <strong>${esc(d.name)}</strong></td>
       <td><span class="tag tag-pending">${esc(d.category || 'other')}</span></td>
-      <td class="td-muted td-mono">${d.size || '—'}</td>
+      <td class="td-muted td-mono">${d.size || '-'}</td>
       <td class="td-mono td-muted">${fmtDate(d.uploadedAt)}</td>
       <td class="td-mono" style="font-size:11px;"><a href="${esc(d.url)}" style="color:var(--gold)">${esc(d.url)}</a></td>
       <td>
@@ -3314,7 +3324,7 @@ function esc(s) {
   return String(s || '').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
 }
 function fmtDate(iso) {
-  if (!iso) return '—';
+  if (!iso) return '-';
   try {
     return new Date(iso).toLocaleDateString('en-US', { month:'short', day:'numeric', year:'numeric', hour:'2-digit', minute:'2-digit' });
   } catch { return iso; }
@@ -3372,7 +3382,7 @@ function setLoading(id, msg = 'AI is analyzing') {
     <div class="card">
       <div class="ai-loading">
         <div class="ai-loading-text ai-loading-dots">${msg}</div>
-        <div style="font-size:11px;color:var(--dim);margin-top:8px;font-family:'DM Mono',monospace;">This takes 10–20 seconds</div>
+        <div style="font-size:11px;color:var(--dim);margin-top:8px;font-family:'DM Mono',monospace;">This takes 10-20 seconds</div>
       </div>
     </div>`;
 }
@@ -3434,7 +3444,7 @@ List 8 specific sub-audiences with:
 - Why they're a fit
 - Specific accounts/hashtags/communities where they hang out
 SECTION 4: CONTENT TRIGGERS
-10 specific topics/angles that will attract this exact audience. Not generic — be specific to their role and pains.
+10 specific topics/angles that will attract this exact audience. Not generic - be specific to their role and pains.
 SECTION 5: OUTREACH INTELLIGENCE
 How to identify and attract this audience without paid ads:
 - Engagement signals to watch for
@@ -3497,7 +3507,7 @@ TRIGGER MOMENTS (when they're most likely to hire/engage)
 - 5 specific trigger events that push them to take action
 - How to create content that appears right before those moments
 EMOTIONAL VOCABULARY
-30 specific words and phrases this audience uses — use these in your content to signal you understand them`, 2000);
+30 specific words and phrases this audience uses - use these in your content to signal you understand them`, 2000);
     renderOutput('aud-output', 'PAIN-TO-CONTENT MAP', result);
   } catch(e) { renderOutput('aud-output', 'Error', e.message); }
 }
@@ -3537,7 +3547,7 @@ Based on my differentiator (${val('comp-diff') || 'not specified'}):
 - How to position myself as the clear alternative
 - The narrative that beats their narrative
 COUNTER-POSITIONING STRATEGY
-How to make my content make theirs look incomplete — without mentioning them`, 2200);
+How to make my content make theirs look incomplete - without mentioning them`, 2200);
     renderOutput('comp-output', 'COMPETITOR INTELLIGENCE REPORT', result);
   } catch(e) { renderOutput('comp-output', 'Error', e.message); }
 }
@@ -3557,11 +3567,11 @@ For each gap:
 - The content opportunity for me
 - Sample post angle/hook
 UNDERSERVED AUDIENCE SEGMENTS
-5 audience sub-groups who exist in this niche but are being ignored by competitors — with content strategy for each.
+5 audience sub-groups who exist in this niche but are being ignored by competitors - with content strategy for each.
 THE "BLUE OCEAN" CONTENT ANGLES
-5 completely differentiated content approaches that no one in this niche is doing — that would attract massive engagement.
+5 completely differentiated content approaches that no one in this niche is doing - that would attract massive engagement.
 FORMAT GAPS
-Content formats nobody in this niche is fully exploiting — and how to use them first.`, 1800);
+Content formats nobody in this niche is fully exploiting - and how to use them first.`, 1800);
     renderOutput('comp-output', 'CONTENT GAP ANALYSIS', result);
   } catch(e) { renderOutput('comp-output', 'Error', e.message); }
 }
@@ -3818,7 +3828,7 @@ Return ONLY valid JSON (no markdown) in this exact format:
       </div>
       <div class="output-wrap">
         <div class="output-head">
-          <span class="output-title">✍️ AI REWRITE — OPTIMIZED VERSION</span>
+          <span class="output-title">✍️ AI REWRITE - OPTIMIZED VERSION</span>
           <button class="btn btn-ghost btn-sm" onclick="navigator.clipboard.writeText(document.getElementById('viral-rewrite').innerText);toast('Copied ✓')">📋 COPY</button>
         </div>
         <div class="output-body" id="viral-rewrite">${escHtml(parsed.rewrite || '')}</div>
@@ -3970,7 +3980,7 @@ Return ONLY valid JSON (no markdown) in this format:
           <div class="stat-sub">${parsed.summary || ''}</div>
         </div>
         <div class="card">
-          <div class="card-header"><div class="card-title">Quick Wins — Do These Today</div></div>
+          <div class="card-header"><div class="card-title">Quick Wins - Do These Today</div></div>
           <div class="card-body" style="display:grid;gap:8px;">
             ${(parsed.quickWins||[]).map(w => `<div style="display:flex;gap:8px;font-size:12px;"><span style="color:var(--gold);">→</span><span style="color:var(--text);">${escHtml(w)}</span></div>`).join('')}
             ${parsed.keywordStrategy ? `<div style="margin-top:8px;padding:10px;background:var(--black);font-size:11px;color:var(--dim);">🔍 ${escHtml(parsed.keywordStrategy)}</div>` : ''}
@@ -3983,7 +3993,7 @@ Return ONLY valid JSON (no markdown) in this format:
       html += `
         <div class="audit-section">
           <div class="audit-section-head" onclick="toggleAudit(this)">
-            <span class="audit-section-title">${escHtml(s.title)} <span style="color:var(--dim);font-weight:400;">— ${s.score}/${s.max}</span></span>
+            <span class="audit-section-title">${escHtml(s.title)} <span style="color:var(--dim);font-weight:400;">- ${s.score}/${s.max}</span></span>
             <span class="audit-score-pill score-${sc}">${s.score >= 8 ? '✓ STRONG' : s.score >= 6 ? '~ NEEDS WORK' : '✗ WEAK'}</span>
           </div>
           <div class="audit-section-body">
@@ -4153,24 +4163,24 @@ async function generateReply() {
   const typeInstructions = {
     positive:   'This is a positive/supportive comment. Reply warmly, add an extra insight to deepen the conversation, and ask a question to extend engagement.',
     question:   'This is a genuine question. Answer it directly and insightfully in 2-3 sentences. Add a follow-up question back to them.',
-    pushback:   'This is a disagreement or pushback. Acknowledge their perspective with respect, hold your ground with a new angle, and invite further discussion — don\'t cave but don\'t be defensive.',
-    short:      'This is a short one-liner comment (like "Great post!" or "🔥"). Reply in a way that extends the conversation and adds value — don\'t just say thanks.',
+    pushback:   'This is a disagreement or pushback. Acknowledge their perspective with respect, hold your ground with a new angle, and invite further discussion - don\'t cave but don\'t be defensive.',
+    short:      'This is a short one-liner comment (like "Great post!" or "🔥"). Reply in a way that extends the conversation and adds value - don\'t just say thanks.',
     spam:       'This looks like a spammy or promotional comment. Write a brief, polite, non-engaging reply that doesn\'t reward the spam or embarrass the commenter publicly.'
   };
   try {
     const result = await callEngageClaude(`You are ${name}, a ${role}. You just posted on ${platform}${topic ? ` about: "${topic}"` : ''}.
 Someone${commenter ? ` named ${commenter}` : ''} commented:
 "${comment}"
-COMMENT TYPE: ${ctype} — ${typeInstructions[ctype]}
+COMMENT TYPE: ${ctype} - ${typeInstructions[ctype]}
 TONE: ${tone}
 ${cta ? `OPTIONAL CTA TO WEAVE IN (only if natural): ${cta}` : ''}
 Write 4 different reply options. Each reply must:
-- Sound completely human and authentic — NOT like AI
+- Sound completely human and authentic - NOT like AI
 - Be conversational, not corporate
 - Be the right length for ${platform} (LinkedIn: 2-4 sentences max, Instagram: 1-3 sentences)
 - Use ${commenter ? `"${commenter}"` : 'their first name if known'} naturally if it fits
 - End with a question that invites them to reply again (except spam type)
-Return ONLY valid JSON — no markdown, no extra text:
+Return ONLY valid JSON - no markdown, no extra text:
 {
   "replies": [
     { "label": "Warm & Insightful", "text": "..." },
@@ -4218,7 +4228,7 @@ function copyReply(i, text) {
       if (label) { label.textContent = 'CLICK TO COPY'; label.style.color = ''; }
     }, 2000);
   }
-  engToast('Reply copied — paste it now ✓');
+  engToast('Reply copied - paste it now ✓');
 }
 function markReplied(i) {
   repliesReplied++;
@@ -4342,7 +4352,7 @@ function startTimer() {
       engToast('⚠ 60-minute window closed. Reply window has ended.');
     }
   }, 1000);
-  engToast('⏱ Timer started — reply to all comments now!');
+  engToast('⏱ Timer started - reply to all comments now!');
 }
 function resetTimer() {
   clearInterval(timerInterval);
@@ -4398,20 +4408,20 @@ async function regenerateSingle(i) {
     engToast('Reply regenerated ↺');
   } catch(e) {
     if (card) card.style.opacity = '1';
-    engToast('Regenerate failed — try again');
+    engToast('Regenerate failed - try again');
   }
 }
 </script>
 <script>
 // ═══════════════════════════════════════════════════════════════
-// COURSES ACADEMY — Admin JS
+// COURSES ACADEMY - Admin JS
 // ═══════════════════════════════════════════════════════════════
 const COURSE_PRICES = {
-  // Live courses — $248 founding class price, $28 retake
+  // Live courses - $248 founding class price, $28 retake
   cmo:    {title:'CMO Mastery',                         price:248, retake:28},
   cfo:    {title:'CFO Mastery',                         price:248, retake:28},
   coo:    {title:'COO Mastery',                         price:248, retake:28},
-  // Coming soon (future prices shown for planning — not yet live)
+  // Coming soon (future prices shown for planning - not yet live)
   ceo:    {title:'CEO Mastery',                         price:248, retake:28},
   cto:    {title:'CTO Mastery',                         price:248, retake:28},
   cpo:    {title:'Chief Product Officer Mastery',       price:248, retake:28},
@@ -4497,14 +4507,14 @@ function renderVotesTable() {
   const total = sorted.reduce((s,[,v])=>s+v,0);
   document.getElementById('v-total').textContent = total;
   document.getElementById('v-courses').textContent = sorted.length;
-  document.getElementById('v-top').textContent = sorted[0] ? (ALL_COURSE_TITLES[sorted[0][0]]||sorted[0][0]) : '—';
+  document.getElementById('v-top').textContent = sorted[0] ? (ALL_COURSE_TITLES[sorted[0][0]]||sorted[0][0]) : '-';
   if (!sorted.length) { tbody.innerHTML='<tr><td colspan="6" style="text-align:center;color:var(--dim);padding:32px;">No votes yet.</td></tr>'; return; }
   tbody.innerHTML = sorted.map(([id,votes],i) => {
     const rank = i===0?'🥇':i===1?'🥈':i===2?'🥉':`#${i+1}`;
     return `<tr>
       <td style="font-weight:700;color:var(--gold);">${rank}</td>
       <td style="font-weight:600;">${ALL_COURSE_TITLES[id]||id}</td>
-      <td style="color:var(--dim);font-size:11px;">${ALL_COURSE_CATS[id]||'—'}</td>
+      <td style="color:var(--dim);font-size:11px;">${ALL_COURSE_CATS[id]||'-'}</td>
       <td><span style="background:rgba(37,99,235,0.12);color:#2563EB;padding:3px 10px;font-weight:700;font-size:13px;">${votes}</span></td>
       <td>${(nc[id]||0)>0?`<span style="color:#7eb87e;">${nc[id]} signed up</span>`:'<span style="color:var(--dim);">0</span>'}</td>
       <td><button onclick="openLaunchModal('${id}')" style="background:none;border:1px solid rgba(37,99,235,0.3);color:#2563EB;padding:5px 12px;font-size:10px;font-weight:700;letter-spacing:1px;cursor:pointer;">🚀 LAUNCH</button></td>
@@ -4515,7 +4525,7 @@ async function loadNotifyData() {
   const adminSecret = document.getElementById('settings-admin-secret')?.value || '';
   try {
     const r = await fetch(`https://academy.markcmo.com/course-notify?adminSecret=${encodeURIComponent(adminSecret)}`);
-    if (!r.ok) { document.getElementById('notify-tbody').innerHTML='<tr><td colspan="5" style="text-align:center;color:#e05555;padding:32px;">Error — check Admin Secret in Settings</td></tr>'; return; }
+    if (!r.ok) { document.getElementById('notify-tbody').innerHTML='<tr><td colspan="5" style="text-align:center;color:#e05555;padding:32px;">Error - check Admin Secret in Settings</td></tr>'; return; }
     ALL_NOTIFY = (await r.json()).signups || [];
   } catch(e) { ALL_NOTIFY = []; }
   renderNotifyTable();
@@ -4537,7 +4547,7 @@ function renderNotifyTable() {
     ? sumRows.map(([id,info]) => `<tr>
         <td style="font-weight:600;">${ALL_COURSE_TITLES[id]||id}</td>
         <td><span style="color:#2563EB;font-weight:700;">${info.count}</span></td>
-        <td style="color:var(--dim);font-size:11px;">${info.last?new Date(info.last).toLocaleDateString():'—'}</td>
+        <td style="color:var(--dim);font-size:11px;">${info.last?new Date(info.last).toLocaleDateString():'-'}</td>
         <td>${info.notified?'<span style="color:#7eb87e;">✓ Sent</span>':'<span style="color:var(--dim);">Not yet</span>'}</td>
         <td><button onclick="openLaunchModal('${id}')" style="background:none;border:1px solid rgba(37,99,235,0.3);color:#2563EB;padding:5px 12px;font-size:10px;font-weight:700;letter-spacing:1px;cursor:pointer;">🚀 FIRE</button></td>
       </tr>`).join('')
@@ -4553,7 +4563,7 @@ function filterNotifyList() {
         <td style="font-weight:600;">${s.name}</td>
         <td><a href="mailto:${s.email}" style="color:var(--gold);">${s.email}</a></td>
         <td style="font-size:11px;">${ALL_COURSE_TITLES[s.courseId]||s.courseId}</td>
-        <td style="color:var(--dim);font-size:11px;">${s.signedUpAt?new Date(s.signedUpAt).toLocaleDateString():'—'}</td>
+        <td style="color:var(--dim);font-size:11px;">${s.signedUpAt?new Date(s.signedUpAt).toLocaleDateString():'-'}</td>
         <td>${s.launchNotifiedAt?'<span style="color:#7eb87e;">✓ Notified</span>':'<span style="color:var(--dim);">Waiting</span>'}</td>
       </tr>`).join('')
     : '<tr><td colspan="5" style="text-align:center;color:var(--dim);padding:24px;">No results.</td></tr>';
@@ -4632,9 +4642,9 @@ function renderIntlTable(list) {
       <td style="font-weight:600">${escHtml(e.name)}</td>
       <td style="color:var(--dim)">${escHtml(e.email)}</td>
       <td>${escHtml(e.country||'?')}</td>
-      <td style="color:var(--dim)">${escHtml(e.company||'—')}</td>
-      <td style="color:var(--dim);font-size:11px;max-width:180px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;" title="${escHtml(e.message||'')}">${escHtml(e.message||'—')}</td>
-      <td style="color:var(--dim);font-size:11px">${e.submittedAt ? new Date(e.submittedAt).toLocaleDateString() : '—'}</td>
+      <td style="color:var(--dim)">${escHtml(e.company||'-')}</td>
+      <td style="color:var(--dim);font-size:11px;max-width:180px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;" title="${escHtml(e.message||'')}">${escHtml(e.message||'-')}</td>
+      <td style="color:var(--dim);font-size:11px">${e.submittedAt ? new Date(e.submittedAt).toLocaleDateString() : '-'}</td>
       <td>${e.approved
         ? '<span style="color:#4CAF72;font-size:11px;font-weight:700;letter-spacing:1px;">✓ APPROVED</span>'
         : '<span style="color:#f0a050;font-size:11px;font-weight:700;letter-spacing:1px;">PENDING</span>'
@@ -4684,7 +4694,7 @@ function escHtml(str) {
   return String(str||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
 }
 async function loadCoursesData() {
-  // Academy functions live on academy.markcmo.com — must use absolute URLs
+  // Academy functions live on academy.markcmo.com - must use absolute URLs
   const ACADEMY = 'https://academy.markcmo.com';
   const adminSecret = document.getElementById('settings-admin-secret')?.value || '';
   // Load enrollments
@@ -4719,7 +4729,7 @@ function renderCoursesOverview() {
   const completion = total > 0 ? Math.round((grads/total)*100) : 0;
   const avgGpa = ALL_GRADUATES.length > 0
     ? (ALL_GRADUATES.reduce((s,g)=>s+(parseFloat(g.gpa)||0),0)/ALL_GRADUATES.length).toFixed(1)
-    : '—';
+    : '-';
   // Estimate revenue
   let totalRev = 0;
   ALL_ENROLLMENTS.forEach(e => {
@@ -4751,7 +4761,7 @@ function renderCoursesOverview() {
     const meta  = COURSE_PRICES[id];
     const stats = byId[id] || {enrollments:0,revenue:0};
     const gList = gradsByC[id] || [];
-    const avgG  = gList.length > 0 ? (gList.reduce((s,g)=>s+(parseFloat(g.gpa)||0),0)/gList.length).toFixed(1) : '—';
+    const avgG  = gList.length > 0 ? (gList.reduce((s,g)=>s+(parseFloat(g.gpa)||0),0)/gList.length).toFixed(1) : '-';
     return `<tr>
       <td><strong>${meta.title}</strong></td>
       <td style="color:var(--gold);">$${meta.price.toLocaleString()}</td>
@@ -4783,11 +4793,11 @@ function renderEnrollmentsTable() {
       ? Math.round((e.progress.completedLessons.length / 50) * 100) + '%'
       : '0%';
     const meta = COURSE_PRICES[e.courseId];
-    const enrolled = e.enrolledAt ? new Date(e.enrolledAt).toLocaleDateString() : '—';
+    const enrolled = e.enrolledAt ? new Date(e.enrolledAt).toLocaleDateString() : '-';
     const hasFinal = e.progress?.finalScore != null;
     return `<tr>
-      <td><strong>${escHtml(e.name||'—')}</strong></td>
-      <td><a href="mailto:${escHtml(e.email||'')}" style="color:var(--gold);">${escHtml(e.email||'—')}</a></td>
+      <td><strong>${escHtml(e.name||'-')}</strong></td>
+      <td><a href="mailto:${escHtml(e.email||'')}" style="color:var(--gold);">${escHtml(e.email||'-')}</a></td>
       <td style="font-size:11px;">${meta?.title||e.courseId}</td>
       <td style="font-size:11px;color:var(--dim);">${enrolled}</td>
       <td><div style="background:var(--border);height:4px;width:80px;display:inline-block;vertical-align:middle;margin-right:6px;"><div style="background:var(--gold);height:100%;width:${pct};"></div></div>${pct}</td>
@@ -4816,14 +4826,14 @@ function renderGraduatesTable() {
     return;
   }
   tbody.innerHTML = ALL_GRADUATES.map(g => {
-    const date = g.completedAt ? new Date(g.completedAt).toLocaleDateString() : '—';
+    const date = g.completedAt ? new Date(g.completedAt).toLocaleDateString() : '-';
     const meta = COURSE_PRICES[g.course];
     return `<tr>
-      <td><strong>${escHtml(g.name||'—')}</strong>${g.linkedin?` <a href="${escHtml(g.linkedin)}" target="_blank" style="color:var(--gold);font-size:11px;">🔗</a>`:''}</td>
+      <td><strong>${escHtml(g.name||'-')}</strong>${g.linkedin?` <a href="${escHtml(g.linkedin)}" target="_blank" style="color:var(--gold);font-size:11px;">🔗</a>`:''}</td>
       <td style="font-size:11px;">${meta?.title||g.course}</td>
-      <td style="color:var(--gold);font-weight:700;">${g.gpa||'—'}</td>
-      <td style="font-size:11px;font-style:italic;color:var(--dim);">${g.designation||'—'}</td>
-      <td style="font-family:'DM Mono',monospace;font-size:10px;color:var(--dim);">${g.diplomaNumber||'—'}</td>
+      <td style="color:var(--gold);font-weight:700;">${g.gpa||'-'}</td>
+      <td style="font-size:11px;font-style:italic;color:var(--dim);">${g.designation||'-'}</td>
+      <td style="font-family:'DM Mono',monospace;font-size:10px;color:var(--dim);">${g.diplomaNumber||'-'}</td>
       <td style="font-size:11px;color:var(--dim);">${date}</td>
     </tr>`;
   }).join('');
@@ -4884,10 +4894,10 @@ function escHtml(str) {
 <div id="launch-confirm-modal" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,0.85);z-index:99999;align-items:center;justify-content:center;" onclick="closeLaunchModal(event)">
 <div style="background:#F8FAFC;border:1px solid rgba(37,99,235,0.35);padding:36px;max-width:500px;width:90%;position:relative;box-shadow:0 20px 60px rgba(0,0,0,0.8);">
 <div style="font-size:10px;font-weight:900;letter-spacing:3px;color:#2563EB;margin-bottom:14px;">🚀 FIRE LAUNCH EMAILS</div>
-<div style="font-size:20px;font-weight:700;color:#fff;margin-bottom:8px;" id="launch-modal-title">—</div>
-<div style="font-size:13px;color:#666;line-height:1.6;margin-bottom:24px;" id="launch-modal-body">—</div>
+<div style="font-size:20px;font-weight:700;color:#fff;margin-bottom:8px;" id="launch-modal-title">-</div>
+<div style="font-size:13px;color:#666;line-height:1.6;margin-bottom:24px;" id="launch-modal-body">-</div>
 <div style="margin-bottom:20px;">
-<label style="font-size:10px;letter-spacing:2px;color:#555;font-weight:700;display:block;margin-bottom:8px;">PREVIEW URL (optional — defaults to academy course page)</label>
+<label style="font-size:10px;letter-spacing:2px;color:#555;font-weight:700;display:block;margin-bottom:8px;">PREVIEW URL (optional - defaults to academy course page)</label>
 <input type="text" id="launch-preview-url" placeholder="https://academy.markcmo.com/preview?course=..."
 style="width:100%;background:#F8FAFC;border:1px solid #2a2a2a;color:#e8e0e0;padding:10px 12px;font-size:12px;outline:none;box-sizing:border-box;">
 </div>
@@ -4913,5 +4923,6 @@ style="width:100%;background:#F8FAFC;border:1px solid #2a2a2a;color:#e8e0e0;padd
   },{passive:true});
 })();
 </script>
+<script src="nav.js" defer></script>
 </body>
 </html>

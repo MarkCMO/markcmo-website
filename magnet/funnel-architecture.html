@@ -1,0 +1,303 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-BXK5Y3DQBL"></script>
+<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-BXK5Y3DQBL');</script>
+  <meta charset="UTF-8"/>
+<link rel="icon" type="image/webp" href="/favicon.webp"><link rel="apple-touch-icon" href="/mark-photo.webp">
+  <meta name="viewport" content="width=device-width,initial-scale=1"/>
+  <title>Funnel Architecture for B2B | MAGNET Framework | Mark Gabrielli</title>
+  <meta name="description" content="Mark Gabrielli designs full-funnel architecture from first touch to closed deal. Every stage defined, every asset built, every handoff mapped before a dollar is spent."/>
+  <meta name="keywords" content="B2B funnel architecture, marketing funnel design, demand generation funnel, fractional CMO funnel strategy"/>
+  <link rel="canonical" href="https://markcmo.com/magnet/funnel-architecture.html"/>
+  <meta property="og:title" content="Funnel Architecture for B2B | MAGNET Framework | Mark Gabrielli"/>
+  <meta property="og:description" content="Mark Gabrielli designs full-funnel architecture from first touch to closed deal. Every stage defined, every asset built, every handoff mapped before a dollar is spent."/>
+  <meta property="og:url" content="https://markcmo.com/magnet/funnel-architecture.html"/>
+  <meta property="og:type" content="article"/>
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;600;700;800;900&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet"/>
+  <link rel="stylesheet" href="../style.css"/>
+  <style>
+    .dl-page-wrap{padding-top:64px;}
+    .dl-breadcrumb{padding:1.25rem 6vw;background:var(--bg2);border-bottom:1px solid var(--border);}
+    .dl-breadcrumb nav{max-width:1200px;margin:0 auto;font-size:0.78rem;color:var(--text3);}
+    .dl-breadcrumb a{color:var(--text3);text-decoration:none;}
+    .dl-breadcrumb a:hover{color:var(--accent);}
+    .dl-breadcrumb span{margin:0 0.4rem;opacity:0.5;}
+    .dl-hero{padding:5rem 6vw 4rem;background:var(--bg);border-bottom:1px solid var(--border);position:relative;overflow:hidden;}
+    .dl-hero::before{content:'';position:absolute;top:-200px;left:50%;transform:translateX(-50%);width:700px;height:700px;border-radius:50%;background:radial-gradient(circle,rgba(201,168,76,0.07) 0%,transparent 65%);pointer-events:none;}
+    .dl-hero-inner{max-width:860px;margin:0 auto;position:relative;z-index:1;}
+    .dl-phase-badge{display:inline-flex;align-items:center;gap:8px;background:rgba(201,168,76,0.1);border:1px solid rgba(201,168,76,0.25);border-radius:30px;padding:0.35rem 1rem;font-size:0.7rem;font-weight:800;letter-spacing:0.12em;color:var(--accent);text-transform:uppercase;margin-bottom:1.25rem;text-decoration:none;}
+    .dl-phase-badge:hover{background:rgba(201,168,76,0.15);}
+    .dl-h1{font-family:'Outfit',sans-serif;font-size:clamp(2.25rem,5vw,3.75rem);font-weight:900;letter-spacing:-0.04em;color:var(--text);line-height:1.05;margin-bottom:1rem;}
+    .dl-h1 em{color:var(--accent);font-style:italic;}
+    .dl-hero-sub{font-size:1.1rem;color:var(--text2);line-height:1.75;max-width:680px;margin-bottom:2rem;}
+    .dl-hero-cta{display:inline-flex;align-items:center;gap:0.5rem;background:var(--accent);color:#000;font-family:'Outfit',sans-serif;font-weight:700;font-size:0.9rem;padding:0.75rem 1.75rem;border-radius:8px;text-decoration:none;transition:opacity 0.15s;}
+    .dl-hero-cta:hover{opacity:0.88;}
+    .dl-body{max-width:1200px;margin:0 auto;padding:5rem 6vw;}
+    .dl-content{max-width:760px;}
+    .dl-content h2{font-family:'Outfit',sans-serif;font-size:clamp(1.5rem,3vw,2rem);font-weight:800;letter-spacing:-0.03em;color:var(--text);margin:3rem 0 1rem;line-height:1.15;}
+    .dl-content h3{font-family:'Outfit',sans-serif;font-size:1.15rem;font-weight:700;color:var(--text);margin:2rem 0 0.75rem;}
+    .dl-content p{font-size:1rem;color:var(--text2);line-height:1.85;margin-bottom:1.25rem;}
+    .dl-content ul,.dl-content ol{padding-left:1.5rem;margin-bottom:1.5rem;}
+    .dl-content li{font-size:0.97rem;color:var(--text2);line-height:1.8;margin-bottom:0.5rem;}
+    .dl-content strong{color:var(--text);font-weight:700;}
+    .dl-pullquote{margin:2.5rem 0;padding:1.5rem 2rem;background:rgba(201,168,76,0.06);border-left:3px solid var(--accent);border-radius:0 12px 12px 0;}
+    .dl-pullquote p{font-family:'Outfit',sans-serif;font-size:1.15rem;font-weight:700;font-style:italic;color:var(--accent);margin:0;line-height:1.5;}
+    .dl-stat-row{display:grid;grid-template-columns:repeat(3,1fr);gap:1.25rem;margin:2.5rem 0;}
+    .dl-stat-box{background:var(--bg3);border:1px solid var(--border);border-radius:12px;padding:1.5rem;text-align:center;}
+    .dl-stat-n{display:block;font-family:'Outfit',sans-serif;font-size:2rem;font-weight:900;color:var(--accent);letter-spacing:-0.04em;}
+    .dl-stat-l{display:block;font-size:0.72rem;color:var(--text3);text-transform:uppercase;letter-spacing:0.1em;margin-top:4px;}
+    .dl-faq{margin-top:3rem;}
+    .dl-faq h2{font-family:'Outfit',sans-serif;font-size:1.75rem;font-weight:800;color:var(--text);margin-bottom:1.5rem;}
+    .dl-faq-item{border-bottom:1px solid var(--border);padding:1.25rem 0;}
+    .dl-faq-q{font-family:'Outfit',sans-serif;font-size:1rem;font-weight:700;color:var(--text);margin-bottom:0.6rem;}
+    .dl-faq-a{font-size:0.95rem;color:var(--text2);line-height:1.8;}
+    .dl-related{background:var(--bg2);padding:5rem 6vw;border-top:1px solid var(--border);}
+    .dl-related-inner{max-width:1200px;margin:0 auto;}
+    .dl-related h2{font-family:'Outfit',sans-serif;font-size:1.5rem;font-weight:800;color:var(--text);margin-bottom:1.75rem;}
+    .dl-related-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1rem;}
+    .dl-rel-card{background:var(--bg3);border:1px solid var(--border);border-radius:12px;padding:1.25rem;text-decoration:none;transition:border-color 0.2s,transform 0.2s;}
+    .dl-rel-card:hover{border-color:rgba(201,168,76,0.3);transform:translateY(-2px);}
+    .dl-rel-phase{font-size:0.65rem;font-weight:800;letter-spacing:0.12em;color:var(--accent);text-transform:uppercase;margin-bottom:0.5rem;}
+    .dl-rel-title{font-family:'Outfit',sans-serif;font-size:0.9rem;font-weight:700;color:var(--text);margin-bottom:0.4rem;}
+    .dl-rel-desc{font-size:0.78rem;color:var(--text3);line-height:1.55;}
+    .dl-cta-section{padding:6rem 6vw;background:var(--bg);text-align:center;border-top:1px solid var(--border);}
+    .dl-cta-inner{max-width:640px;margin:0 auto;}
+    @media(max-width:900px){.dl-stat-row{grid-template-columns:1fr 1fr;}.dl-related-grid{grid-template-columns:1fr 1fr;}}
+    @media(max-width:600px){.dl-stat-row{grid-template-columns:1fr;}.dl-related-grid{grid-template-columns:1fr;}}
+  </style>
+</head>
+<body>
+<div id="scroll-progress" style="position:fixed;top:0;left:0;height:3px;background:var(--accent);z-index:9999;width:0%;transition:width 0.1s;"></div>
+
+<nav>
+  <a href="../index.html" class="nav-logo"><div class="nav-avatar"><img src="../mark-photo.webp" alt="Mark Gabrielli" onerror="this.style.display='none';this.parentElement.style.background='var(--accent)';this.parentElement.innerHTML='<span style=\'font-family:Outfit,sans-serif;font-weight:900;font-size:1rem;color:#fff;display:flex;align-items:center;justify-content:center;width:100%;height:100%\'>M</span>'"/></div>Mark <span>Gabrielli</span></a>
+  <ul class="nav-links">
+    <li><a href="../about.html">About</a></li>
+    <li><a href="../services.html">Services</a></li>
+    <li><a href="../portfolio.html">Portfolio</a></li>
+    <li><a href="../results.html">Results</a></li>
+    <li><a href="../blog.html">Insights</a></li>
+    <li><a href="../magnet-framework.html" style="color:var(--accent);font-weight:600;">MAGNET&#x2122;</a></li>
+    <li><a href="../book.html" class="nav-cta">Book a Free Call</a></li>
+  </ul>
+  <button class="nav-hamburger" id="navHam" aria-label="Open menu"><span></span><span></span><span></span></button>
+</nav>
+<div class="mobile-drawer" id="mobileDrawer">
+  <button class="drawer-close" id="drawerClose" aria-label="Close menu">&#x2715;</button>
+  <a href="../index.html">Home</a><a href="../about.html">About</a><a href="../services.html">Services</a>
+  <a href="../magnet-framework.html" style="color:var(--accent);font-weight:600;">MAGNET Framework&#x2122;</a>
+  <a href="../results.html">Results</a><a href="../portfolio.html">Portfolio</a><a href="../blog.html">Insights</a>
+  <a href="https://academy.markcmo.com" target="_blank" rel="noopener">Academy</a>
+  <a href="../book.html" class="drawer-cta">Book a Free Strategy Call &#x2192;</a>
+</div>
+
+<div class="dl-page-wrap">
+
+  <div class="dl-breadcrumb">
+    <nav aria-label="Breadcrumb">
+      <a href="../index.html">Home</a>
+      <span>&#x203A;</span>
+      <a href="../magnet-framework.html">MAGNET Framework</a>
+      <span>&#x203A;</span>
+      <a href="../magnet-architect.html">Architect</a>
+      <span>&#x203A;</span>
+      Funnel Architecture
+    </nav>
+  </div>
+
+  <section class="dl-hero">
+    <div class="dl-hero-inner">
+      <a href="../magnet-architect.html" class="dl-phase-badge">&#x25C6; Phase 02 &mdash; Architect</a>
+      <h1 class="dl-h1"><em>Funnel Architecture</em></h1>
+      <p class="dl-hero-sub">A marketing funnel is not a diagram you draw in a strategy meeting. It is a system you engineer with precision - every stage defined, every asset built, every handoff mapped before you spend the first dollar driving traffic into it.</p>
+      <a href="../book.html" class="dl-hero-cta">Design Your Funnel &#x2192;</a>
+    </div>
+  </section>
+
+  <div class="dl-body">
+    <div class="dl-content">
+
+      <h2>What Funnel Architecture Actually Means</h2>
+      <p>Most companies have a funnel map. Very few have funnel architecture. The difference is the difference between a floor plan and an engineered building. A funnel map draws boxes and arrows. Funnel architecture specifies exactly what happens at every stage, what moves a prospect from one stage to the next, what assets exist to facilitate that movement, and how the whole system is measured.</p>
+      <p>A funnel without architecture is a leaky container. You pour leads in the top and wonder why none of them come out as revenue at the bottom. The answer is almost always that the stages are undefined, the assets are missing, the handoffs are ambiguous, and the attribution is nonexistent. You cannot fix a leaky funnel by adding more volume at the top. You fix it by building the architecture first.</p>
+
+      <h3>The Full-Funnel Stage Model</h3>
+      <p>The complete funnel has six stages, each with a distinct job to do: <strong>Awareness</strong> (the prospect learns you exist), <strong>Consideration</strong> (they evaluate whether you solve their problem), <strong>Evaluation</strong> (they compare you to alternatives), <strong>Decision</strong> (they choose you or someone else), <strong>Retention</strong> (they get value and stay), and <strong>Expansion</strong> (they buy more or refer others). Most B2B marketing only addresses the first stage seriously. The rest is left to chance.</p>
+
+      <h3>Funnel Map vs. Funnel Architecture</h3>
+      <p>A funnel map tells you the stages exist. Funnel architecture tells you what lives at each stage. It answers: What content or asset does a buyer at this stage need? What behavior or signal moves them to the next stage? Who is responsible for the progression - marketing, sales, or customer success? What metric tells you this stage is healthy or broken? Without these answers, you do not have a funnel. You have a hypothesis.</p>
+
+      <h3>Why Companies Skip Architecture and Go Straight to Tactics</h3>
+      <p>Tactics are tangible and fast. Architecture takes time and feels abstract. So companies hire an agency to run ads, launch a newsletter, or build a content program - and then wonder why none of it produces pipeline. The reason is almost always architectural: the ads send traffic to a website that does not convert, the newsletter has no mid-funnel follow-up, and the content has no path to a sales conversation. Tactics without architecture generate activity. Architecture with tactics generates revenue.</p>
+
+      <div class="dl-stat-row">
+        <div class="dl-stat-box">
+          <span class="dl-stat-n">68%</span>
+          <span class="dl-stat-l">of B2B companies do not have a defined lead nurture process in the middle funnel</span>
+        </div>
+        <div class="dl-stat-box">
+          <span class="dl-stat-n">3x</span>
+          <span class="dl-stat-l">more pipeline generated by companies with documented funnel stage definitions</span>
+        </div>
+        <div class="dl-stat-box">
+          <span class="dl-stat-n">50%</span>
+          <span class="dl-stat-l">of qualified leads are never followed up because there is no defined handoff protocol</span>
+        </div>
+      </div>
+
+      <h2>The Four Components of Proper Funnel Architecture</h2>
+      <p>Every funnel Mark architects is built on four structural components. Skip any one of them and the system has a gap that will cost you pipeline.</p>
+
+      <h3>1. Stage Definitions</h3>
+      <p><strong>Stage definitions</strong> answer the most fundamental question in funnel design: what exactly moves a prospect from one stage to the next? Not "they seem interested" - but specifically: what behavior, action, or signal constitutes progression? For the transition from Awareness to Consideration, it might be a second content touchpoint within seven days. For the transition from Consideration to Evaluation, it might be downloading a case study or requesting pricing. These definitions must be documented, agreed upon across marketing and sales, and encoded in your CRM.</p>
+      <p>Without stage definitions, your funnel reporting is meaningless. You cannot identify where prospects are dropping out if you do not have clear criteria for what stage they are in. Stage definitions are the prerequisite for all funnel analysis and optimization.</p>
+
+      <h3>2. Asset Mapping</h3>
+      <p><strong>Asset mapping</strong> inventories every content asset and touchpoint that exists at each stage of the funnel and identifies the gaps. For each stage, the question is: when a prospect is at this stage, what do they need to see, read, watch, or experience to move to the next stage? If the asset does not exist, it needs to be built. If it exists but is not being deployed at the right stage, it needs to be repositioned in the funnel sequence.</p>
+      <p>Asset mapping typically reveals that most companies are over-invested in top-of-funnel content (blog posts, social content, ads) and severely under-invested in mid-funnel content (case studies, ROI tools, comparison content) - which is exactly where most purchase decisions are actually made.</p>
+
+      <h3>3. Handoff Protocols</h3>
+      <p><strong>Handoff protocols</strong> define the transition between teams at critical points in the funnel. The two most important handoffs in B2B are the marketing-to-sales handoff (when does marketing pass a lead to sales, and what information travels with it?) and the sales-to-customer-success handoff (when a deal closes, what does CS need to know to deliver the promised outcome?). Both handoffs are almost always broken in companies under $20M. Leads get passed too early, too late, without context, or not at all.</p>
+      <p>A well-designed handoff protocol specifies: the trigger criteria (what signal initiates the handoff), the data that transfers (what information must accompany the lead), the SLA (how quickly must the receiving team respond), and the escalation path (what happens if the SLA is missed). This is not bureaucracy - it is the infrastructure that prevents qualified pipeline from disappearing between teams.</p>
+
+      <h3>4. Attribution Design</h3>
+      <p><strong>Attribution design</strong> determines how you will track a prospect through every stage of the funnel and connect marketing activities to closed revenue. Without attribution, you are flying blind - spending on channels you cannot measure and deprioritizing channels that are actually working. Attribution design is not just adding UTM parameters. It is deciding on an attribution model, implementing consistent tracking across every channel, connecting ad platform data to CRM data, and building reports that show you where your revenue actually comes from.</p>
+
+      <div class="dl-pullquote">
+        <p>"You cannot optimize a funnel you have not defined. Build the architecture first, then drive the volume."</p>
+      </div>
+
+      <h2>Designing the Top of Funnel (Awareness)</h2>
+      <p>The top of funnel has one job: make the right people aware that you exist. Not everyone - the right people. Your ICP at the "problem-aware" stage: they know they have a problem, they are starting to look for solutions, but they may not yet know your company or your specific approach.</p>
+
+      <h3>Awareness Channels and Their Role</h3>
+      <p><strong>SEO</strong> captures intent-based awareness - people who are actively searching for information related to your category. It is slow to build but compounds over time and produces the highest-quality awareness because the prospect self-identified their interest. <strong>Paid social</strong> (LinkedIn, Meta) generates interrupt-based awareness - you appear in front of people who are not actively searching but match your ICP profile. It is fast but does not compound. <strong>Content and thought leadership</strong> build reputation-based awareness - over time, being consistently present in the conversations your ICP is already having. <strong>Referral</strong> is the highest-converting awareness channel and the most underinvested. <strong>Outbound</strong> creates awareness by direct outreach to your ICP list.</p>
+
+      <h3>Awareness Assets and KPIs</h3>
+      <p>Awareness assets include long-form blog posts targeting high-intent search queries, short-form social content that reflects your positioning, podcast appearances in shows your ICP listens to, webinars and virtual events, and paid advertising creative. The KPIs that tell you awareness is healthy are: branded search volume growth (are more people searching for you by name?), content reach and engagement rates, inbound inquiry rate (how many people are finding you without being targeted?), and new visitor traffic with low bounce rates.</p>
+
+      <h2>Designing the Middle of Funnel (Consideration and Evaluation)</h2>
+      <p>The middle of the funnel is the most neglected, most important, and most fixable part of any B2B revenue system. It is where the majority of purchase decisions are actually made - not at the bottom of the funnel, not in the sales call, but in the invisible research phase where a buyer is evaluating their options without talking to any vendor.</p>
+
+      <h3>Mid-Funnel Assets That Actually Move Decisions</h3>
+      <p><strong>Case studies with specific numbers</strong> are the highest-converting mid-funnel asset in B2B. Not vague testimonials - specific outcome data: "Company X reduced their CAC by 34% in 90 days." The specificity is what makes it credible. <strong>ROI calculators</strong> allow buyers to personalize the value proposition to their specific situation - which dramatically accelerates consideration. <strong>Comparison pages</strong> capture buyers who are actively comparing you to alternatives and allow you to set the evaluation criteria. <strong>Webinars and demos</strong> bridge the gap between content consumption and a live conversation with your team.</p>
+
+      <h3>The Lead Scoring Framework</h3>
+      <p>Lead scoring assigns point values to prospect behaviors that signal purchase intent. High-intent behaviors (viewed pricing page, downloaded a case study, attended a webinar, returned to the site three times in one week) score high. Low-intent behaviors (opened one email, visited the blog once) score low. The scoring threshold that triggers a handoff to sales should be validated against actual close data - not guessed. Mark builds lead scoring models that are empirically calibrated against your own historical win data, not generic templates.</p>
+
+      <h3>The Nurture Sequence That Bridges Awareness to Decision</h3>
+      <p>Most email nurture sequences are either too short (three emails in a week, then silence) or too generic (the same sequence for every lead regardless of what they engaged with). An effective nurture sequence is stage-aware: it delivers different content based on what the prospect has already engaged with, it has defined exit triggers (when a prospect shows high-intent signals, they exit the nurture sequence and enter a sales workflow), and it continues for a minimum of sixty days - because most B2B purchase cycles are longer than most marketing teams account for.</p>
+
+      <h2>Designing the Bottom of Funnel (Decision)</h2>
+      <p>The bottom of the funnel is where revenue is either won or lost in the final mile of the buyer's journey. Most of the work here belongs to sales, but marketing owns the infrastructure that makes the sales conversation more effective and the close more predictable.</p>
+
+      <h3>The Demo and Discovery Call Experience</h3>
+      <p>The demo or discovery call is not just a sales event - it is a designed experience with a specific job: move a qualified prospect from evaluation to decision. Marketing owns the pre-call preparation (what information does the prospect receive before the call to show up ready?), the post-call follow-up assets (what materials does the sales team send within twenty-four hours?), and the call architecture (what sequence of conversation gives the prospect the best path to yes?).</p>
+
+      <h3>Proposal Structure and Follow-Up Cadence</h3>
+      <p>Proposals are marketing assets. They communicate positioning, proof, and differentiation in the highest-stakes context in the entire buyer journey. A strong proposal follows a specific structure: the prospect's problem restated in their own language, the solution overview, the proof (relevant case studies), the mechanism (how you work), the investment, and a clear single next step. The follow-up cadence defines the specific touchpoints and timeline after the proposal is sent - removing the ambiguity that causes deals to stall.</p>
+
+      <h3>The Close Rate Optimization Playbook</h3>
+      <p>Close rate is a funnel metric, not just a sales metric. If your close rate from demo to won is below thirty percent, the issue may be: too-early handoffs from marketing (unqualified prospects entering the demo stage), weak proposal assets, inconsistent objection handling, or a misaligned pricing structure. The close rate optimization playbook documents the most common objections at the decision stage and provides the sales team with pre-built responses that align with the brand positioning - so objections are handled consistently and persuasively, not improvised.</p>
+
+      <h2>Funnel Architecture as Infrastructure</h2>
+      <p>The goal of funnel architecture is a revenue system that operates reliably without requiring heroic individual effort at every stage. When the architecture is right, leads flow predictably from awareness to decision. When it is wrong, every deal feels like a grind and every quarter feels unpredictable.</p>
+
+      <h3>The Automation Layer</h3>
+      <p>The automation layer encodes funnel logic into your marketing technology stack. Stage transitions trigger automated nurture sequences. High-intent behaviors trigger sales alerts. Handoff criteria trigger CRM workflows. The automation layer does not replace human judgment - it handles the consistent, repeatable steps so that human attention can focus on the high-value interactions that actually require it.</p>
+
+      <h3>The 30/60/90 Day Funnel Build Sequence</h3>
+      <p>Mark builds funnels in a structured sequence. Days one through thirty: architecture and asset audit, stage definitions documented, gap analysis completed, CRM and attribution setup initiated. Days thirty-one through sixty: missing mid-funnel assets created, nurture sequences built, handoff protocols documented and agreed upon, automation workflows configured. Days sixty-one through ninety: full funnel activated, initial data flowing, first optimization cycle based on early performance data. By day ninety, the funnel is operational and measurable - not perfect, but running and producing data that drives the next iteration.</p>
+
+      <h3>What Good Funnel Metrics Look Like at Each Stage</h3>
+      <p>Awareness metrics: new website visitors, branded search growth, content engagement rate, inbound inquiry volume. Consideration metrics: email click-through rate on nurture sequences, case study downloads, mid-funnel page views. Evaluation metrics: demo request rate, lead score distribution, days from first touch to demo request. Decision metrics: demo-to-proposal rate, proposal-to-close rate, average deal cycle length, average contract value. Retention and expansion metrics: net revenue retention, expansion revenue, referral rate. Every metric tells you something specific about funnel health - and together they give you a complete picture of where to invest next.</p>
+
+      <div class="dl-faq">
+        <h2>Frequently Asked Questions</h2>
+
+        <div class="dl-faq-item">
+          <div class="dl-faq-q">How is funnel architecture different from building a sales process?</div>
+          <div class="dl-faq-a">A sales process governs what happens once a lead is in the hands of the sales team. Funnel architecture governs the entire buyer journey from first awareness through closed deal and beyond - including all the stages that happen before a lead ever talks to sales. The two systems need to be aligned and connected, but they are distinct. Funnel architecture is primarily a marketing and revenue operations responsibility. The sales process is primarily a sales leadership responsibility. Mark designs both and connects them through the handoff protocol.</div>
+        </div>
+
+        <div class="dl-faq-item">
+          <div class="dl-faq-q">How long does it take to see results from a newly architected funnel?</div>
+          <div class="dl-faq-a">The early indicators (engagement rates, lead quality, demo request rate) typically improve within thirty to sixty days of implementation. Pipeline impact (qualified opportunities from the new architecture) is typically visible at sixty to ninety days. Revenue impact (closed deals influenced by the new funnel) is typically visible at ninety to one-hundred-eighty days, depending on your average sales cycle length. The longer your sales cycle, the longer the lag between funnel changes and revenue results.</div>
+        </div>
+
+        <div class="dl-faq-item">
+          <div class="dl-faq-q">What is the most common funnel architecture mistake Mark sees?</div>
+          <div class="dl-faq-a">The most common mistake is an over-investment in top-of-funnel awareness combined with almost no mid-funnel infrastructure. Companies spend on ads and content to drive awareness, but when those prospects reach the website, there is nothing to move them from "I know you exist" to "I want to talk to you." The gap between awareness and decision is where most B2B pipeline is lost - and it is almost entirely a content and nurture infrastructure problem, not a traffic problem.</div>
+        </div>
+
+        <div class="dl-faq-item">
+          <div class="dl-faq-q">Do you need a large tech stack to build good funnel architecture?</div>
+          <div class="dl-faq-a">No. A well-designed funnel can run on a minimum viable stack: a CRM (HubSpot free or Pipedrive), an email platform, and a website with basic form capture and tracking. The architecture principles - stage definitions, asset mapping, handoff protocols, attribution - apply regardless of which tools you use. Complexity in the tech stack should follow proven funnel performance, not precede it. Start with the minimum viable setup and add technology as the funnel data tells you where the leverage is.</div>
+        </div>
+
+        <div class="dl-faq-item">
+          <div class="dl-faq-q">How does funnel architecture connect to brand positioning?</div>
+          <div class="dl-faq-a">Brand positioning determines the message that every asset in the funnel communicates. Funnel architecture determines where that message is delivered, in what form, and to whom. They are two sides of the same system: positioning without architecture means your message never reaches the right buyer at the right moment. Architecture without positioning means your funnel delivers volume but poor quality. The two must be designed together - which is why they both live in the Architect phase of MAGNET.</div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <section class="dl-related">
+    <div class="dl-related-inner">
+      <h2>Other Phase 02 - Architect Deliverables</h2>
+      <div class="dl-related-grid">
+        <a href="brand-positioning.html" class="dl-rel-card">
+          <div class="dl-rel-phase">Phase 02 - Architect</div>
+          <div class="dl-rel-title">Brand Positioning</div>
+          <div class="dl-rel-desc">Category design and the "only we" statement that separates you from every competitor.</div>
+        </a>
+        <a href="messaging-hierarchy.html" class="dl-rel-card">
+          <div class="dl-rel-phase">Phase 02 - Architect</div>
+          <div class="dl-rel-title">Messaging Hierarchy</div>
+          <div class="dl-rel-desc">The core message in language buyers actually use - codified for every channel.</div>
+        </a>
+        <a href="website-landing-page-blueprint.html" class="dl-rel-card">
+          <div class="dl-rel-phase">Phase 02 - Architect</div>
+          <div class="dl-rel-title">Website &amp; Landing Page Blueprint</div>
+          <div class="dl-rel-desc">Pages designed to sell, not just inform - built around your ICP.</div>
+        </a>
+        <a href="tech-stack-architecture.html" class="dl-rel-card">
+          <div class="dl-rel-phase">Phase 02 - Architect</div>
+          <div class="dl-rel-title">Tech Stack Architecture</div>
+          <div class="dl-rel-desc">CRM, automation, attribution, and analytics unified as a revenue machine.</div>
+        </a>
+        <a href="org-team-structure.html" class="dl-rel-card">
+          <div class="dl-rel-phase">Phase 02 - Architect</div>
+          <div class="dl-rel-title">Org &amp; Team Structure</div>
+          <div class="dl-rel-desc">Who you need, when you need them, and who owns what - built in from day one.</div>
+        </a>
+        <a href="../magnet-architect.html" class="dl-rel-card">
+          <div class="dl-rel-phase">Phase 02 - Architect</div>
+          <div class="dl-rel-title">Architect Phase Overview</div>
+          <div class="dl-rel-desc">All six Architect deliverables and how they connect into a cohesive growth system.</div>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <section class="dl-cta-section">
+    <div class="dl-cta-inner">
+      <h2 style="font-family:'Outfit',sans-serif;font-size:clamp(1.75rem,3.5vw,2.5rem);font-weight:900;letter-spacing:-0.04em;color:var(--text);margin-bottom:1rem;">Ready to Build a Funnel That Actually Converts?</h2>
+      <p style="font-size:1rem;color:var(--text2);line-height:1.75;margin-bottom:2rem;">Book a free strategy call. We will audit your current funnel, identify the leaks, and design the architecture that turns your marketing spend into predictable pipeline.</p>
+      <a href="../book.html" class="dl-hero-cta">Book a Free Strategy Call &#x2192;</a>
+    </div>
+  </section>
+
+</div>
+
+<footer><div class="footer-mega"><div class="footer-brand-col"><div class="footer-logo-text">Mark <span>Gabrielli</span></div><p class="footer-about">Fractional CMO, COO &amp; Executive Consultant. I help businesses from $1M to $100M find what's broken, build what scales, and execute what others only talk about.</p><div class="footer-chips"><span class="footer-chip">WETYR Founder</span><span class="footer-chip">MAGNET Framework&#x2122;</span><span class="footer-chip">Fractional C-Suite</span><span class="footer-chip">CST Certified</span></div><div class="footer-socials"><a href="https://www.linkedin.com/in/marklgabrielli/" target="_blank" rel="noopener" class="footer-soc">in</a><a href="mailto:mark@markcmo.com" class="footer-soc">@</a></div></div><div class="footer-col"><h4>Framework</h4><ul><li><a href="../magnet-framework.html">MAGNET Overview</a></li><li><a href="../magnet-map.html">Map Phase</a></li><li><a href="../magnet-architect.html">Architect Phase</a></li><li><a href="../magnet-generate.html">Generate Phase</a></li><li><a href="../magnet-nurture.html">Nurture Phase</a></li><li><a href="../magnet-engineer.html">Engineer Phase</a></li><li><a href="../magnet-track.html">Track Phase</a></li></ul></div><div class="footer-col"><h4>Services</h4><ul><li><a href="../fractional-cmo.html">Fractional CMO</a></li><li><a href="../fractional-coo.html">Fractional COO</a></li><li><a href="../marketing-audit.html">Marketing Audit</a></li><li><a href="../demand-generation.html">Demand Generation</a></li><li><a href="../go-to-market-strategy.html">Go-to-Market</a></li><li><a href="../services.html">All Services</a></li></ul></div><div class="footer-col"><h4>Learn</h4><ul><li><a href="../about.html">About Mark</a></li><li><a href="../blog.html">Insights &amp; Blog</a></li><li><a href="../results.html">Results</a></li><li><a href="../faq.html">FAQ</a></li><li><a href="../contact.html">Contact</a></li><li><a href="../book.html" style="color:var(--accent);font-weight:600;">Book a Free Call</a></li></ul></div></div><div class="footer-bottom"><p>&copy; 2026 Mark Gabrielli &middot; markcmo.com &middot; All rights reserved.</p><p class="footer-bottom-tags">The MAGNET Framework&#x2122; &middot; Fractional CMO &middot; <a href="../fractional-coo.html">Fractional COO</a> &middot; Revenue Operations</p></div></footer>
+
+<script>(function(){var bar=document.getElementById('scroll-progress');var nav=document.querySelector('nav');window.addEventListener('scroll',function(){var h=document.documentElement,b=document.body;var pct=(h.scrollTop||b.scrollTop)/((h.scrollHeight||b.scrollHeight)-h.clientHeight)*100;bar.style.width=pct+'%';if((h.scrollTop||b.scrollTop)>80){nav&&nav.classList.add('scrolled');}else{nav&&nav.classList.remove('scrolled');}},{passive:true});})();</script>
+<script src="../nav.js" defer></script>
+</body>
+</html>

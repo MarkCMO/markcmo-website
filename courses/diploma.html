@@ -1,9 +1,11 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="UTF-8">
+<link rel="icon" type="image/webp" href="/favicon.webp"><link rel="apple-touch-icon" href="/mark-photo.webp">
+<meta name="robots" content="noindex, follow">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>MarkCMO Academy — Your Diploma</title>
+<title>MarkCMO Academy - Your Diploma</title>
 <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Barlow:ital,wght@0,300;0,400;0,600;0,700;0,900;1,400&family=DM+Mono:wght@400;500&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="/style.css">
 <style>
@@ -134,11 +136,11 @@ html,body,*,*::before,*::after{cursor:none!important}
   .main{padding:80px 20px 40px}
 }
 </style>
-<meta name="description" content="MarkCMO Academy — Your Diploma - MarkCMO provides fractional CMO and strategic marketing services for growth-stage companies.">
+<meta name="description" content="MarkCMO Academy - Your Diploma - MarkCMO provides fractional CMO and strategic marketing services for growth-stage companies.">
 <link rel="canonical" href="https://markcmo.com/courses/diploma.html">
 <meta property="og:type" content="website">
-<meta property="og:title" content="MarkCMO Academy — Your Diploma">
-<meta property="og:description" content="MarkCMO Academy — Your Diploma - MarkCMO provides fractional CMO and strategic marketing services for growth-stage companies.">
+<meta property="og:title" content="MarkCMO Academy - Your Diploma">
+<meta property="og:description" content="MarkCMO Academy - Your Diploma - MarkCMO provides fractional CMO and strategic marketing services for growth-stage companies.">
 <meta property="og:url" content="https://markcmo.com/courses/diploma.html">
 <meta property="og:site_name" content="MarkCMO">
 </head>
@@ -214,8 +216,8 @@ html,body,*,*::before,*::after{cursor:none!important}
 <button class="upload-btn" onclick="document.getElementById('photo-input').click()">Choose Photo</button>
 </div>
 <div class="submit-section">
-<input type="text" class="linkedin-input" id="linkedin-url" placeholder="LinkedIn URL (optional — linkedin.com/in/yourname)">
-<input type="text" class="linkedin-input" id="company-input" placeholder="Company or title (optional — e.g. Fractional CMO at TechCo)">
+<input type="text" class="linkedin-input" id="linkedin-url" placeholder="LinkedIn URL (optional - linkedin.com/in/yourname)">
+<input type="text" class="linkedin-input" id="company-input" placeholder="Company or title (optional - e.g. Fractional CMO at TechCo)">
 <button class="submit-grad-btn" id="submit-grad-btn" onclick="submitToGradWall()">✦ Join the Graduate Wall →</button>
 </div>
 </div>
@@ -255,7 +257,7 @@ document.getElementById('d-honors').textContent = DESIGNATION;
 document.getElementById('d-sig-num').textContent = diplomaNum;
 document.getElementById('d-date').textContent = dateStr;
 document.getElementById('congrats-title').textContent = 'CONGRATULATIONS, ' + STUDENT_NAME.split(' ')[0].toUpperCase() + '!';
-document.getElementById('congrats-sub').textContent = `You earned a ${GPA} GPA (${LETTER}) — ${DESIGNATION}. Download your diploma and join the Graduate Wall.`;
+document.getElementById('congrats-sub').textContent = `You earned a ${GPA} GPA (${LETTER}) - ${DESIGNATION}. Download your diploma and join the Graduate Wall.`;
 // ── DOWNLOAD DIPLOMA ──────────────────────────────────────────────────────────
 function downloadDiploma() {
   const el = document.getElementById('diploma');
@@ -308,7 +310,7 @@ setTimeout(() => { w.document.close(); w.print(); }, 800);
 }
 // ── LINKEDIN SHARE ─────────────────────────────────────────────────────────────
 function shareLinkedIn() {
-const text = encodeURIComponent(`I just earned my ${courseTitle} diploma from MarkCMO Academy with a ${GPA} GPA — ${DESIGNATION}! Harvard/MIT-level rigour. This is what executive education should look like. 🎓 #MarkCMOAcademy #FractionalCMO #ExecutiveEducation`);
+const text = encodeURIComponent(`I just earned my ${courseTitle} diploma from MarkCMO Academy with a ${GPA} GPA - ${DESIGNATION}! Harvard/MIT-level rigour. This is what executive education should look like. 🎓 #MarkCMOAcademy #FractionalCMO #ExecutiveEducation`);
 const url = encodeURIComponent('https://markcmo.com/courses');
 window.open(`https://www.linkedin.com/sharing/share-offsite/?url=${url}&summary=${text}`, '_blank');
 }
@@ -338,7 +340,7 @@ reader.onload = (e) => {
 photoDataUrl = e.target.result;
 const preview = document.getElementById('photo-preview');
 preview.innerHTML = `<img src="${photoDataUrl}" alt="Your photo">`;
-toast('Photo ready — looking good! 📸', 'gold');
+toast('Photo ready - looking good! 📸', 'gold');
 };
 reader.readAsDataURL(file);
 }
@@ -375,7 +377,7 @@ setTimeout(() => location.href = '/graduation', 2000);
 throw new Error(data.error || 'Failed');
 }
 } catch(e) {
-toast('Submission failed — please try again', 'red');
+toast('Submission failed - please try again', 'red');
 btn.disabled = false;
 btn.textContent = '✦ Join the Graduate Wall →';
 }

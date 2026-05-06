@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="en">
 <head>
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-BXK5Y3DQBL"></script>
@@ -9,6 +9,7 @@
   gtag('config', 'G-BXK5Y3DQBL');
 </script>
 <meta charset="UTF-8"/>
+<link rel="icon" type="image/webp" href="/favicon.webp"><link rel="apple-touch-icon" href="/mark-photo.webp">
 <meta name="viewport" content="width=device-width,initial-scale=1.0"/>
 <title>Client Testimonials | Fractional CMO Reviews | Mark Gabrielli</title>
 <meta name="description" content="Testimonials from CEOs & founders who hired Mark Gabrielli as Fractional CMO and COO. Real results across healthcare, SaaS, aerospace & eCommerce." />
@@ -32,13 +33,13 @@
 <meta property="og:image" content="https://markcmo.com/og-image.jpg" />
 <meta property="og:image:width" content="1200" />
 <meta property="og:image:height" content="630" />
-<meta property="og:image:alt" content="Mark Gabrielli — Fractional CMO & COO" />
+<meta property="og:image:alt" content="Mark Gabrielli - Fractional CMO & COO" />
 <meta property="og:locale" content="en_US" />
 <meta name="twitter:card" content="summary_large_image" />
 <meta name="twitter:title" content="Client Testimonials | Fractional CMO Reviews | Mark Gabrielli" />
 <meta name="twitter:description" content="Testimonials from CEOs & founders who hired Mark Gabrielli as Fractional CMO and COO. Real results across healthcare, SaaS, aerospace & eCommerce." />
 <meta name="twitter:image" content="https://markcmo.com/og-image.jpg" />
-<meta name="twitter:image:alt" content="Mark Gabrielli — Fractional CMO & COO" />
+<meta name="twitter:image:alt" content="Mark Gabrielli - Fractional CMO & COO" />
 <meta name="twitter:site" content="@markgabrielli" />
 <meta name="twitter:creator" content="@markgabrielli" />
 <meta name="author" content="Mark Gabrielli" />
@@ -76,9 +77,7 @@
     "description": "Certified Surgical Technologist, 4.0 Biological Sciences graduate, and Global CMO with 15+ years scaling healthcare, aerospace, SaaS and automotive companies worldwide.",
     "url": "https://markcmo.com",
     "image": "https://markcmo.com/og-image.jpg",
-    "email": "marklgabriellijr@gmail.com",
-    "telephone": "+13219175738",
-    "sameAs": [
+    "email": "marklgabriellijr@gmail.com",    "sameAs": [
       "https://www.linkedin.com/in/markgabriellijr",
       "https://markcmo.com"
     ],
@@ -496,19 +495,28 @@ Mark <span>Gabrielli</span>
 </a>
 <ul class="nav-links">
 <li><a href="index.html">Home</a></li>
-<li><a href="about.html" class="active">About</a></li>
+<li><a href="about.html">About</a></li>
 <li><a href="services.html">Services</a></li>
 <li><a href="portfolio.html">Portfolio</a></li>
 <li><a href="results.html">Results</a></li>
 <li><a href="blog.html">Insights</a></li>
-<li><a href="https://academy.markcmo.com" target="_blank" style="color:var(--gold);font-weight:700;">🎓 Academy</a></li>
+<li><a href="https://academy.markcmo.com" target="_blank" style="color:var(--gold);font-weight:700;">Academy</a></li>
 <li><a href="book.html" class="nav-cta">Book a Free Call</a></li>
 </ul>
-<div class="nav-mobile-links">
-<a href="portfolio.html" class="nav-mob-pill">Portfolio</a>
-<a href="book.html" class="nav-mob-cta">Book Mark →</a>
-</div>
+<button class="nav-hamburger" id="navHam" aria-label="Open menu"><span></span><span></span><span></span></button>
 </nav>
+<div class="mobile-drawer" id="mobileDrawer">
+<button class="drawer-close" id="drawerClose" aria-label="Close menu">&#x2715;</button>
+<a href="index.html">Home</a>
+<a href="about.html">About</a>
+<a href="services.html">Services</a>
+<a href="magnet-framework.html" style="color:var(--accent);font-weight:600;">MAGNET Framework&#x2122;</a>
+<a href="results.html">Results</a>
+<a href="portfolio.html">Portfolio</a>
+<a href="blog.html">Insights</a>
+<a href="https://academy.markcmo.com" target="_blank" rel="noopener">Academy</a>
+<a href="book.html" class="drawer-cta">Book a Free Strategy Call &#x2192;</a>
+</div>
 <style>
 .pg-hero{background:var(--off-black);padding:8rem 6vw 5rem;position:relative;overflow:hidden;}
 .pg-hero::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse at 60% 50%,rgba(201,168,76,0.08) 0%,transparent 60%);}
@@ -676,7 +684,7 @@ Mark <span>Gabrielli</span>
 </div>
 <div class="test-card reveal" style="transition-delay:0.2s;">
 <div class="test-stars"><span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star">★</span></div>
-<p class="test-text">"Mark is exceptional at separating signal from noise. We had 12 marketing initiatives running simultaneously and nothing was getting the attention it deserved. He cut it to three, funded each of them properly, and we saw results within 45 days. Less is more is not just a phrase to him &mdash; it's how he operates."</p>
+<p class="test-text">"Mark is exceptional at separating signal from noise. We had 12 marketing initiatives running simultaneously and nothing was getting the attention it deserved. He cut it to three, funded each of them properly, and we saw results within 45 days. Less is more is not just a phrase to him  -  it's how he operates."</p>
 <div class="test-author"><div class="test-avatar">C</div><div><div class="test-name">Christine A.</div><div class="test-title">Co-Founder</div><div class="test-industry">B2B SaaS &middot; Marketing Analytics</div></div></div>
 </div>
 <div class="test-card reveal">
@@ -981,5 +989,6 @@ Mark <span>Gabrielli</span>
   },{passive:true});
 })();
 </script>
+<script src="nav.js" defer></script>
 </body>
 </html>

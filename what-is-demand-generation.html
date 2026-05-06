@@ -54,7 +54,7 @@
     "description": "Demand generation is the full-funnel marketing strategy that creates awareness, builds interest, and drives pipeline for B2B companies. Learn the definition, tactics, and how it differs from lead generation.",
     "url": "https://markcmo.com/what-is-demand-generation",
     "datePublished": "2026-04-01",
-    "dateModified": "2026-04-05",
+    "dateModified": "2026-04-28",
     "author": {
       "@type": "Person",
       "name": "Mark Gabrielli",
@@ -91,7 +91,7 @@
       "name": "What is a demand generation manager?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "A demand generation manager owns the programs responsible for creating pipeline — typically managing paid channels, content distribution, email nurture, and campaign execution. They report to a VP of Marketing or CMO."
+        "text": "A demand generation manager owns the programs responsible for creating pipeline - typically managing paid channels, content distribution, email nurture, and campaign execution. They report to a VP of Marketing or CMO."
       }
     },
     {
@@ -100,6 +100,38 @@
       "acceptedAnswer": {
         "@type": "Answer",
         "text": "Measure demand gen ROI by tracking marketing-sourced pipeline, marketing-influenced pipeline, CAC, and customer LTV. Tie every dollar of marketing spend to pipeline created and revenue closed."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "What is a demand generation strategy?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "A demand gen strategy is the documented plan for creating pipeline through specific channels, content, and campaigns - aligned to ICP, buying stages, and revenue targets. It defines which channels to invest in, what content to create, and how to measure success."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "How much should you spend on demand generation?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "B2B companies typically allocate 5-15% of revenue to marketing, with demand gen comprising 40-60% of that budget. Early-stage companies often invest more as a percentage of revenue to build pipeline velocity."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "What's the difference between demand gen and growth marketing?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Demand generation focuses on creating and capturing pipeline for a sales-led or product-led revenue motion. Growth marketing is a broader experimental discipline that optimizes across the entire user lifecycle - from acquisition through retention and referral - often in a product-led context."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "How long does it take to see demand generation results?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Content and SEO take 3-6 months to show meaningful results. Paid channels can generate pipeline within 30-60 days. A full demand gen engine typically shows compounding returns at the 6-12 month mark."
       }
     }
     ]
@@ -139,9 +171,6 @@
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Barlow:ital,wght@0,400;0,500;0,600;0,700;0,800&family=DM+Mono:wght@400;500&display=swap" media="print" onload="this.media='all'">
   <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Barlow:ital,wght@0,400;0,500;0,600;0,700;0,800&family=DM+Mono:wght@400;500&display=swap"></noscript>
   <link rel="stylesheet" href="style.css" />
-<style>
-  html, body, * { cursor: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAARCAYAAADUryzEAAAAV0lEQVR42mMQFBT8z0AJABlwbFnIf4oNINsQZAPIMgTdAJINwWYASYbgMoBoQ/AZQJQhhAwgaAguA4iOHXSFJMcKSANME4yNjEkKSLLzxcAbgBwWDPQGAEWguILiE6w1AAAAAElFTkSuQmCC') 0 0, default !important; }
-</style>
 </head>
 <body>
   <nav>
@@ -153,19 +182,28 @@
     </a>
     <ul class="nav-links">
       <li><a href="index.html">Home</a></li>
-      <li><a href="about.html" class="active">About</a></li>
+      <li><a href="about.html">About</a></li>
       <li><a href="services.html">Services</a></li>
       <li><a href="portfolio.html">Portfolio</a></li>
       <li><a href="results.html">Results</a></li>
       <li><a href="blog.html">Insights</a></li>
-      <li><a href="https://academy.markcmo.com" target="_blank" style="color:var(--gold);font-weight:700;">🎓 Academy</a></li>
+      <li><a href="https://academy.markcmo.com" target="_blank" style="color:var(--gold);font-weight:700;">Academy</a></li>
       <li><a href="book.html" class="nav-cta">Book a Free Call</a></li>
     </ul>
-    <div class="nav-mobile-links">
-      <a href="portfolio.html" class="nav-mob-pill">Portfolio</a>
-      <a href="book.html" class="nav-mob-cta">Book Mark →</a>
-    </div>
+    <button class="nav-hamburger" id="navHam" aria-label="Open menu"><span></span><span></span><span></span></button>
   </nav>
+<div class="mobile-drawer" id="mobileDrawer">
+<button class="drawer-close" id="drawerClose" aria-label="Close menu">&#x2715;</button>
+<a href="index.html">Home</a>
+<a href="about.html">About</a>
+<a href="services.html">Services</a>
+<a href="magnet-framework.html" style="color:var(--accent);font-weight:600;">MAGNET Framework&#x2122;</a>
+<a href="results.html">Results</a>
+<a href="portfolio.html">Portfolio</a>
+<a href="blog.html">Insights</a>
+<a href="https://academy.markcmo.com" target="_blank" rel="noopener">Academy</a>
+<a href="book.html" class="drawer-cta">Book a Free Strategy Call &#x2192;</a>
+</div>
 
   <section class="sp-hero sp-hero-dark" style="padding:5rem 1.5rem 3rem">
     <div class="sp-hero-inner" style="max-width:860px;margin:0 auto">
@@ -180,13 +218,13 @@
     <div style="max-width:860px;margin:0 auto">
       
       <h2 style="font-size:clamp(1.3rem,2.5vw,1.65rem);color:var(--white);margin:2.5rem 0 1rem">Demand Generation Definition</h2>
-      <p>Demand generation (often shortened to <em>demand gen</em>) is not a single tactic — it's the entire marketing system responsible for creating and capturing demand for your product or service.</p>
+      <p>Demand generation (often shortened to <em>demand gen</em>) is not a single tactic - it's the entire marketing system responsible for creating and capturing demand for your product or service.</p>
 <div class="quick-answer" style="background:#F8FAFC;border-left:4px solid #2563EB;padding:1.25rem 1.5rem;margin:1.5rem 0;border-radius:0 6px 6px 0">
 <strong style="color:#2563EB;display:block;margin-bottom:0.5rem">Simple Definition</strong>
 <p style="margin:0;color:#ccc">Demand generation is the marketing function responsible for creating awareness and interest in your product, nurturing that interest into pipeline, and delivering sales-ready opportunities to your revenue team.</p>
 </div>
       <h2 style="font-size:clamp(1.3rem,2.5vw,1.65rem);color:var(--white);margin:2.5rem 0 1rem">Demand Generation vs. Lead Generation</h2>
-      <p>Lead generation focuses on capturing contact information from interested buyers. Demand generation is broader — it creates the demand that makes lead generation possible.</p>
+      <p>Lead generation focuses on capturing contact information from interested buyers. Demand generation is broader - it creates the demand that makes lead generation possible.</p>
 <ul style="color:var(--light-grey);line-height:2.2;padding-left:1.4rem">
 <li><strong style="color:#fff">Lead gen:</strong> Gated content, forms, paid ads optimized for CPL</li>
 <li><strong style="color:#fff">Demand gen:</strong> Content strategy, brand building, dark funnel, community, events, and the entire buyer journey</li>
@@ -213,6 +251,106 @@
 <li>Pipeline velocity and win rates on marketing-sourced opportunities</li>
 </ul>
 
+      <!-- Section A: Full-Funnel Framework -->
+      <h2 style="font-size:clamp(1.3rem,2.5vw,1.65rem);color:var(--white);margin:2.5rem 0 1rem">The Full-Funnel Demand Generation Framework</h2>
+      <p style="color:var(--light-grey);line-height:1.75">Demand generation is not a single stage - it is a system that operates across the entire buyer journey. Understanding the three layers of the funnel is the foundation of any effective demand gen program.</p>
+
+      <h3 style="font-size:1.15rem;color:#C9A84C;margin:2rem 0 0.75rem">Top of Funnel (TOFU): Awareness</h3>
+      <p style="color:var(--light-grey);line-height:1.75">TOFU demand gen is about reaching buyers before they know they have a problem - or before they know you exist. The primary channels are content marketing, SEO, organic social, thought leadership, and brand advertising. The goal is not to convert at this stage. The goal is to become familiar. Buyers who recognize your brand and associate it with expertise are dramatically more likely to engage when they enter an active buying cycle.</p>
+
+      <h3 style="font-size:1.15rem;color:#C9A84C;margin:2rem 0 0.75rem">Middle of Funnel (MOFU): Consideration</h3>
+      <p style="color:var(--light-grey);line-height:1.75">At the consideration stage, buyers are actively evaluating options. They want proof. MOFU demand gen tactics include webinars, case studies, product tours, comparison content, and third-party reviews. This is where you build trust and preference. Marketing automation and email nurture play a critical role in moving MOFU prospects forward without requiring a sales conversation too early.</p>
+
+      <h3 style="font-size:1.15rem;color:#C9A84C;margin:2rem 0 0.75rem">Bottom of Funnel (BOFU): Decision</h3>
+      <p style="color:var(--light-grey);line-height:1.75">BOFU demand gen supports the buying decision. Demos, free trials, proposals, pricing pages, and sales enablement content all live here. At this stage, marketing and sales must be tightly aligned. Marketing creates the materials and context; sales executes the conversation.</p>
+
+      <h3 style="font-size:1.15rem;color:#C9A84C;margin:2rem 0 0.75rem">The Dark Funnel</h3>
+      <p style="color:var(--light-grey);line-height:1.75">The dark funnel refers to all the research, conversation, and influence that happens before a buyer ever fills out a form. Slack communities, LinkedIn feeds, podcasts, peer recommendations, Reddit threads - these touchpoints shape buying decisions but are invisible to traditional attribution. Modern demand generation acknowledges the dark funnel and invests in channels that build brand presence even when it cannot be directly measured.</p>
+      <p style="color:var(--light-grey);line-height:1.75">This is also why ungated content often generates higher-quality pipeline than gated content. When you remove friction and let buyers self-educate freely, you attract more qualified prospects - those who have already decided they trust you before they raise their hand.</p>
+
+      <!-- Section B: B2B Strategies 2026 -->
+      <h2 style="font-size:clamp(1.3rem,2.5vw,1.65rem);color:var(--white);margin:2.5rem 0 1rem">B2B Demand Generation Strategies That Work in 2026</h2>
+      <p style="color:var(--light-grey);line-height:1.75">The channels available to B2B demand gen teams have expanded significantly. The most effective programs combine multiple channels into a coherent system rather than running isolated campaigns. Here are the five strategies that are generating the most consistent pipeline in 2026.</p>
+
+      <h3 style="font-size:1.15rem;color:#C9A84C;margin:2rem 0 0.75rem">Content-Led Demand Generation</h3>
+      <p style="color:var(--light-grey);line-height:1.75">Content is the fuel for every other demand gen channel. SEO-driven content builds organic visibility that compounds over time. Thought leadership - distinctive points of view published consistently - builds brand authority that paid advertising cannot replicate. Original research is the most powerful content format available to B2B marketers: it earns backlinks from other publications, generates social sharing, and creates a reason for journalists and analysts to cite your brand. A company that publishes a credible industry benchmark report does not just get traffic - it becomes a reference point in its category. Content-led demand gen is a long game, but it is the only channel where the returns increase over time rather than requiring continuous spend to maintain.</p>
+
+      <h3 style="font-size:1.15rem;color:#C9A84C;margin:2rem 0 0.75rem">Account-Based Marketing (ABM)</h3>
+      <p style="color:var(--light-grey);line-height:1.75">ABM flips traditional demand gen by targeting specific high-value accounts rather than casting a wide net. There are three tiers: one-to-one ABM targets a small number of strategic accounts with fully personalized campaigns; one-to-few clusters 5-50 accounts with shared characteristics; one-to-many applies account-level personalization at scale. LinkedIn is the dominant ABM channel for awareness and retargeting - the ability to target by company, job title, and seniority makes it uniquely suited for reaching buying committees. Intent data platforms like Bombora and 6sense identify accounts that are actively researching your category, allowing demand gen teams to prioritize spend on accounts with the highest propensity to buy. Personalized outreach - whether through sales development reps or direct mail - closes the loop from digital to human.</p>
+
+      <h3 style="font-size:1.15rem;color:#C9A84C;margin:2rem 0 0.75rem">Paid Demand Generation</h3>
+      <p style="color:var(--light-grey);line-height:1.75">Paid channels give demand gen teams speed and control. Google Ads is most efficient at the bottom of the funnel - capturing buyers who are actively searching for a solution. LinkedIn Ads are the standard for B2B awareness and retargeting at the account and persona level. YouTube is an underutilized channel for brand and educational content - particularly effective for reaching executives who consume video but ignore banner ads. Programmatic advertising provides scale for brand campaigns targeting broad audiences. The key to paid demand gen is discipline: measure pipeline generated, not just clicks or impressions, and reallocate budget to the channels that create revenue.</p>
+
+      <h3 style="font-size:1.15rem;color:#C9A84C;margin:2rem 0 0.75rem">Event and Community Demand Gen</h3>
+      <p style="color:var(--light-grey);line-height:1.75">Events - both virtual and in-person - remain one of the highest-converting demand gen channels because they create concentrated moments of attention and relationship building. Webinars work best when they are genuinely educational rather than thinly veiled product pitches. Virtual summits can generate significant pipeline by bringing together audiences around a shared problem. In-person events build relationships that digital channels cannot replicate. Community-led growth - building or participating in communities where your buyers already gather - creates ambient demand gen that operates continuously. Podcast appearances give founders and executives access to targeted audiences that have already opted in to deep content consumption.</p>
+
+      <h3 style="font-size:1.15rem;color:#C9A84C;margin:2rem 0 0.75rem">Product-Led Growth (PLG)</h3>
+      <p style="color:var(--light-grey);line-height:1.75">In product-led growth models, the product itself becomes the primary demand gen channel. Freemium tiers and free trials allow buyers to experience value before engaging with sales, compressing the sales cycle and reducing CAC. Usage data becomes a demand gen signal - accounts that reach certain engagement thresholds are handed to sales for expansion conversations. PLG works best for products where value can be demonstrated quickly and where individual users have influence over organizational purchasing decisions. For companies where PLG is viable, it is often the most efficient demand gen motion available.</p>
+
+      <!-- Section C: Demand Gen vs Lead Gen Breakdown -->
+      <h2 style="font-size:clamp(1.3rem,2.5vw,1.65rem);color:var(--white);margin:2.5rem 0 1rem">Demand Generation vs. Lead Generation: The Full Breakdown</h2>
+      <p style="color:var(--light-grey);line-height:1.75">The demand gen vs. lead gen debate is one of the most common sources of misalignment between marketing and sales teams. Both functions matter - but they serve different purposes and require different tactics, metrics, and time horizons.</p>
+      <p style="color:var(--light-grey);line-height:1.75">Lead generation is a subset of demand generation. You cannot consistently generate high-quality leads without first generating demand. Companies that invest only in lead gen - without the demand creation that precedes it - end up buying poor-quality contacts and wondering why conversion rates are low.</p>
+
+      <table style="width:100%;border-collapse:collapse;margin:1.5rem 0;font-size:0.95rem">
+        <thead>
+          <tr style="background:rgba(201,168,76,0.1);text-align:left">
+            <th style="padding:10px 14px;border:1px solid #333;color:#C9A84C">Dimension</th>
+            <th style="padding:10px 14px;border:1px solid #333;color:#C9A84C">Demand Generation</th>
+            <th style="padding:10px 14px;border:1px solid #333;color:#C9A84C">Lead Generation</th>
+          </tr>
+        </thead>
+        <tbody style="color:#ccc">
+          <tr><td style="padding:10px 14px;border:1px solid #222">Goal</td><td style="padding:10px 14px;border:1px solid #222">Create and capture demand</td><td style="padding:10px 14px;border:1px solid #222">Capture contact information</td></tr>
+          <tr><td style="padding:10px 14px;border:1px solid #222">Funnel stage</td><td style="padding:10px 14px;border:1px solid #222">Full funnel (TOFU to BOFU)</td><td style="padding:10px 14px;border:1px solid #222">Primarily MOFU and BOFU</td></tr>
+          <tr><td style="padding:10px 14px;border:1px solid #222">Tactics</td><td style="padding:10px 14px;border:1px solid #222">Content, SEO, events, ABM, brand</td><td style="padding:10px 14px;border:1px solid #222">Gated content, paid ads, forms</td></tr>
+          <tr><td style="padding:10px 14px;border:1px solid #222">Measurement</td><td style="padding:10px 14px;border:1px solid #222">Pipeline, revenue, CAC, LTV</td><td style="padding:10px 14px;border:1px solid #222">MQL volume, CPL, conversion rate</td></tr>
+          <tr><td style="padding:10px 14px;border:1px solid #222">Time horizon</td><td style="padding:10px 14px;border:1px solid #222">Long-term brand + short-term pipeline</td><td style="padding:10px 14px;border:1px solid #222">Short-term volume</td></tr>
+        </tbody>
+      </table>
+
+      <!-- Section D: How to Build a Demand Generation Strategy -->
+      <h2 style="font-size:clamp(1.3rem,2.5vw,1.65rem);color:var(--white);margin:2.5rem 0 1rem">How to Build a Demand Generation Strategy</h2>
+      <p style="color:var(--light-grey);line-height:1.75">Most demand gen programs fail not because the tactics are wrong but because the strategy underneath them is missing. Here is the process for building a demand gen engine that generates predictable, scalable pipeline.</p>
+
+      <ol style="color:var(--light-grey);line-height:2;padding-left:1.5rem">
+        <li style="margin-bottom:0.75rem"><strong style="color:#fff">Define your ICP and buying committee.</strong> Your Ideal Customer Profile is the foundation of every demand gen decision. Know the company size, industry, tech stack, and pain profile of your best-fit buyers. Equally important is the buying committee - the 5-10 people who influence or approve a purchase. Demand gen that targets only the end user misses the economic buyer, the champion, the legal reviewer, and the technical evaluator.</li>
+        <li style="margin-bottom:0.75rem"><strong style="color:#fff">Map the buyer journey from first awareness to signed contract.</strong> Walk through every stage a buyer moves through before purchasing. Where do they discover your category? What content do they consume? Which objections do they raise? This journey map becomes the blueprint for your content strategy and channel mix.</li>
+        <li style="margin-bottom:0.75rem"><strong style="color:#fff">Audit your current pipeline sources.</strong> Before building anything new, understand where revenue actually comes from today. Which channels generate the most pipeline? Which generate the highest close rates? Which have the shortest sales cycles? This audit prevents you from abandoning channels that are quietly working while chasing new ones.</li>
+        <li style="margin-bottom:0.75rem"><strong style="color:#fff">Choose 2-3 core demand gen channels and go deep.</strong> The most common demand gen mistake is spreading budget and attention across too many channels. Pick the 2-3 channels most likely to reach your ICP and invest enough to do them well. Mediocre execution across five channels consistently underperforms excellent execution across two.</li>
+        <li style="margin-bottom:0.75rem"><strong style="color:#fff">Build the content engine.</strong> Every demand gen channel needs content. Develop pillar pages for your core topics, supporting content that covers related questions, and a distribution plan that gets the content in front of your ICP consistently. Content without distribution is invisible.</li>
+        <li style="margin-bottom:0.75rem"><strong style="color:#fff">Set up attribution before scaling spend.</strong> Know what is working before you spend more. Implement multi-touch attribution so you can see which channels contribute to pipeline and revenue - not just which ones generate clicks. Self-reported attribution (asking prospects "how did you hear about us?") often surfaces channels that are invisible to digital tracking, including the dark funnel.</li>
+        <li style="margin-bottom:0.75rem"><strong style="color:#fff">Align marketing and sales on MQL definition and handoff process.</strong> Misalignment between marketing and sales on what constitutes a sales-ready lead is one of the top reasons demand gen programs fail. Define MQL criteria together, agree on the handoff SLA, and establish a feedback loop so sales can report back on lead quality.</li>
+        <li style="margin-bottom:0.75rem"><strong style="color:#fff">Test, measure, and double down on what creates pipeline.</strong> Demand gen is not a set-and-forget function. Run structured experiments, measure pipeline impact - not vanity metrics - and reallocate budget toward what works. The programs that compound are the ones that earn more investment over time.</li>
+      </ol>
+
+      <!-- Section E: Demand Generation Roles and Team Structure -->
+      <h2 style="font-size:clamp(1.3rem,2.5vw,1.65rem);color:var(--white);margin:2.5rem 0 1rem">Demand Generation Roles and Team Structure</h2>
+      <p style="color:var(--light-grey);line-height:1.75">Demand generation is not a one-person job - but it does not require a large team to be effective. Here is how demand gen functions are typically structured in B2B companies.</p>
+
+      <ul style="color:var(--light-grey);line-height:1.9;padding-left:1.4rem">
+        <li style="margin-bottom:0.85rem"><strong style="color:#fff">VP or Head of Demand Generation:</strong> Owns the strategy, budget, and board-level reporting for pipeline. Accountable for marketing-sourced revenue and CAC targets. Typically a senior hire at Series B or later, or a role handled by the CMO in earlier-stage companies.</li>
+        <li style="margin-bottom:0.85rem"><strong style="color:#fff">Demand Gen Manager:</strong> Executes campaigns across channels, manages agency relationships, owns channel-level reporting. This is the most common demand gen hire and the engine of day-to-day program execution.</li>
+        <li style="margin-bottom:0.85rem"><strong style="color:#fff">Content Strategist:</strong> Drives the SEO content roadmap, thought leadership calendar, and asset creation that fuels every other demand gen channel. Often owns the blog, pillar pages, and long-form content that builds organic pipeline over time.</li>
+        <li style="margin-bottom:0.85rem"><strong style="color:#fff">Paid Media Specialist:</strong> Manages Google Ads, LinkedIn, and programmatic campaigns. Responsible for CPL, pipeline contribution from paid, and ROAS targets. Should report into demand gen - not as a siloed function.</li>
+        <li style="margin-bottom:0.85rem"><strong style="color:#fff">Marketing Operations / RevOps:</strong> Owns the attribution model, CRM hygiene, lead routing, and the tech stack that makes demand gen measurable. Often the most undervalued role on the team - without it, none of the other functions can prove their impact.</li>
+        <li style="margin-bottom:0.85rem"><strong style="color:#fff">When to use a Fractional CMO:</strong> Early-stage and growth-stage companies often need senior demand gen strategy before they are ready to hire a full-time VP. A <a href="fractional-cmo.html" style="color:#2563EB">Fractional CMO</a> provides board-ready leadership, builds the demand gen playbook, and hires or manages the team - at a fraction of the cost of a full-time executive hire.</li>
+      </ul>
+
+      <!-- Section F: Demand Generation Tech Stack -->
+      <h2 style="font-size:clamp(1.3rem,2.5vw,1.65rem);color:var(--white);margin:2.5rem 0 1rem">Demand Generation Tech Stack</h2>
+      <p style="color:var(--light-grey);line-height:1.75">The right tech stack enables demand gen teams to execute faster, measure more accurately, and scale efficiently. The wrong stack creates data silos, attribution gaps, and budget waste. Here is how a modern B2B demand gen stack is typically organized.</p>
+
+      <ul style="color:var(--light-grey);line-height:1.9;padding-left:1.4rem">
+        <li style="margin-bottom:0.6rem"><strong style="color:#fff">CRM:</strong> Salesforce and HubSpot are the two dominant platforms. Your CRM is the system of record for pipeline and revenue - every demand gen program should trace back to it.</li>
+        <li style="margin-bottom:0.6rem"><strong style="color:#fff">Marketing Automation:</strong> HubSpot, Marketo, and Pardot are the leading platforms for email nurture, lead scoring, and campaign orchestration. Marketing automation is the connective tissue between demand gen activities and the CRM.</li>
+        <li style="margin-bottom:0.6rem"><strong style="color:#fff">Intent Data:</strong> Bombora, 6sense, and G2 Buyer Intent identify companies that are actively researching your category - even before they contact you. Intent data is one of the highest-leverage signals available to B2B demand gen and ABM programs.</li>
+        <li style="margin-bottom:0.6rem"><strong style="color:#fff">ABM Platforms:</strong> Demandbase, Terminus, and RollWorks sit on top of your CRM and intent data to orchestrate account-level campaigns across paid, email, and sales outreach channels.</li>
+        <li style="margin-bottom:0.6rem"><strong style="color:#fff">Attribution:</strong> Rockerbox, Triple Whale, and custom multi-touch models in your CRM allow you to understand which channels and touchpoints contribute to pipeline and revenue - not just which ones generate form fills.</li>
+        <li style="margin-bottom:0.6rem"><strong style="color:#fff">Content and SEO:</strong> Ahrefs, Semrush, and Clearscope are the standard tools for keyword research, competitive analysis, and content optimization that drives organic demand gen.</li>
+        <li style="margin-bottom:0.6rem"><strong style="color:#fff">Analytics:</strong> Google Analytics 4 for web behavior, Looker or Tableau for pipeline dashboards and executive reporting. The analytics stack should connect marketing activity to revenue outcomes - not just website metrics.</li>
+      </ul>
+
       <div style="background:#F8FAFC;border:1px solid #222;border-radius:8px;padding:2rem;margin:3rem 0">
         <h3 style="color:var(--gold);font-family:'Bebas Neue',sans-serif;font-size:1.5rem;margin:0 0 1rem">Related Resources</h3>
         <ul style="margin:0;padding-left:1.2rem;line-height:2.4;color:var(--light-grey)">
@@ -234,11 +372,27 @@
 </details>
 <details style="border-bottom:1px solid var(--border,#222);padding:1.25rem 0">
 <summary style="cursor:pointer;font-size:1.05rem;font-weight:600;color:var(--white);list-style:none;display:flex;justify-content:space-between">What is a demand generation manager? <span style="color:var(--gold)">+</span></summary>
-<p style="margin-top:1rem;color:var(--light-grey);line-height:1.75">A demand generation manager owns the programs responsible for creating pipeline — typically managing paid channels, content distribution, email nurture, and campaign execution. They report to a VP of Marketing or CMO.</p>
+<p style="margin-top:1rem;color:var(--light-grey);line-height:1.75">A demand generation manager owns the programs responsible for creating pipeline - typically managing paid channels, content distribution, email nurture, and campaign execution. They report to a VP of Marketing or CMO.</p>
 </details>
-<details style="padding:1.25rem 0">
+<details style="border-bottom:1px solid var(--border,#222);padding:1.25rem 0">
 <summary style="cursor:pointer;font-size:1.05rem;font-weight:600;color:var(--white);list-style:none;display:flex;justify-content:space-between">How do you measure demand generation ROI? <span style="color:var(--gold)">+</span></summary>
 <p style="margin-top:1rem;color:var(--light-grey);line-height:1.75">Measure demand gen ROI by tracking marketing-sourced pipeline, marketing-influenced pipeline, CAC, and customer LTV. Tie every dollar of marketing spend to pipeline created and revenue closed.</p>
+</details>
+<details style="border-bottom:1px solid var(--border,#222);padding:1.25rem 0">
+<summary style="cursor:pointer;font-size:1.05rem;font-weight:600;color:var(--white);list-style:none;display:flex;justify-content:space-between">What is a demand generation strategy? <span style="color:var(--gold)">+</span></summary>
+<p style="margin-top:1rem;color:var(--light-grey);line-height:1.75">A demand gen strategy is the documented plan for creating pipeline through specific channels, content, and campaigns - aligned to ICP, buying stages, and revenue targets. It defines which channels to invest in, what content to create, and how to measure success.</p>
+</details>
+<details style="border-bottom:1px solid var(--border,#222);padding:1.25rem 0">
+<summary style="cursor:pointer;font-size:1.05rem;font-weight:600;color:var(--white);list-style:none;display:flex;justify-content:space-between">How much should you spend on demand generation? <span style="color:var(--gold)">+</span></summary>
+<p style="margin-top:1rem;color:var(--light-grey);line-height:1.75">B2B companies typically allocate 5-15% of revenue to marketing, with demand gen comprising 40-60% of that budget. Early-stage companies often invest more as a percentage of revenue to build pipeline velocity.</p>
+</details>
+<details style="border-bottom:1px solid var(--border,#222);padding:1.25rem 0">
+<summary style="cursor:pointer;font-size:1.05rem;font-weight:600;color:var(--white);list-style:none;display:flex;justify-content:space-between">What's the difference between demand gen and growth marketing? <span style="color:var(--gold)">+</span></summary>
+<p style="margin-top:1rem;color:var(--light-grey);line-height:1.75">Demand generation focuses on creating and capturing pipeline for a sales-led or product-led revenue motion. Growth marketing is a broader experimental discipline that optimizes across the entire user lifecycle - from acquisition through retention and referral - often in a product-led context.</p>
+</details>
+<details style="padding:1.25rem 0">
+<summary style="cursor:pointer;font-size:1.05rem;font-weight:600;color:var(--white);list-style:none;display:flex;justify-content:space-between">How long does it take to see demand generation results? <span style="color:var(--gold)">+</span></summary>
+<p style="margin-top:1rem;color:var(--light-grey);line-height:1.75">Content and SEO take 3-6 months to show meaningful results. Paid channels can generate pipeline within 30-60 days. A full demand gen engine typically shows compounding returns at the 6-12 month mark.</p>
 </details>
 
       </div>
@@ -252,5 +406,6 @@
       <a href="contact.html" class="sp-btn sp-btn-gold" style="display:inline-block;background:#2563EB;color:#1E293B;padding:0.85rem 2.25rem;border-radius:4px;font-weight:700;font-size:1.05rem;text-decoration:none">Work With Mark &rarr;</a>
     </div>
   </section>
+<script src="nav.js" defer></script>
 </body>
 </html>

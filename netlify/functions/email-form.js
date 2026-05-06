@@ -2,7 +2,7 @@
 // Netlify Function: email-form.js
 // Receives filled PDF data from form pages → emails to Mark
 //
-// Uses Resend (resend.com — free 3000 emails/mo, no credit card)
+// Uses Resend (resend.com - free 3000 emails/mo, no credit card)
 // Set env var in Netlify dashboard: RESEND_API_KEY=re_xxxxxxxxxx
 // ═══════════════════════════════════════════════════════════════
 
@@ -90,7 +90,7 @@ exports.handler = async (event) => {
         from: 'MarkCMO Forms <forms@markcmo.com>',
         to: ['mark@markcmo.com'],
         reply_to: senderEmail || undefined,
-        subject: `📋 ${docName} — Submitted by ${senderName || senderEmail || 'a client'}`,
+        subject: `📋 ${docName} - Submitted by ${senderName || senderEmail || 'a client'}`,
         html,
         attachments: [
           {

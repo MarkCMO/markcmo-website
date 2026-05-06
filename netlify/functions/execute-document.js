@@ -1,5 +1,5 @@
 // ═══════════════════════════════════════════════════════════════
-// execute-document.js — v2 (stateless)
+// execute-document.js - v2 (stateless)
 // Mark uploads the signed PDF + his sig → we merge → email both
 // ═══════════════════════════════════════════════════════════════
 const CORS = {
@@ -82,7 +82,7 @@ exports.handler = async (event) => {
         from: 'MarkCMO Documents <forms@markcmo.com>',
         to: ['mark@markcmo.com'],
         reply_to: clientEmail,
-        subject: `✅ Executed: ${docName} — ${clientName || clientEmail}`,
+        subject: `✅ Executed: ${docName} - ${clientName || clientEmail}`,
         html: makeHtml('Mark', true),
         attachments: [{ filename: execFilename, content: executedPdfBase64 }],
       }),

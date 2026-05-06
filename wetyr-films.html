@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="UTF-8" />
@@ -140,6 +140,7 @@ pre.json { background: #0f0f12; border: 1px solid var(--border); border-radius: 
   .nav-links { display: none; }
 }
 </style>
+<script src="/components.js" defer></script>
 </head>
 <body>
 
@@ -334,7 +335,7 @@ const $ = (id) => document.getElementById(id);
 
 let state = { scriptText: '', breakdown: null, schedule: null, budget: null };
 
-// ─── File drop ───────────────────────────────────────────────
+// â”€â”€â”€ File drop â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 const drop = $('drop');
 const fileInput = $('fileInput');
 drop.addEventListener('click', () => fileInput.click());
@@ -376,7 +377,7 @@ function fileToBase64(file) {
   });
 }
 
-// ─── Buttons ─────────────────────────────────────────────────
+// â”€â”€â”€ Buttons â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 $('goBtn').addEventListener('click', runBreakdown);
 $('clearBtn').addEventListener('click', () => {
   state = { scriptText: '', breakdown: null, schedule: null, budget: null };
@@ -397,7 +398,7 @@ $('tierInput').addEventListener('change', () => {
   $('customBudgetField').style.display = $('tierInput').value === 'custom' ? 'flex' : 'none';
 });
 
-// ─── Tabs ────────────────────────────────────────────────────
+// â”€â”€â”€ Tabs â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 document.querySelectorAll('.tab').forEach(tab => {
   tab.addEventListener('click', () => {
     document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
@@ -407,7 +408,7 @@ document.querySelectorAll('.tab').forEach(tab => {
   });
 });
 
-// ─── Run breakdown ───────────────────────────────────────────
+// â”€â”€â”€ Run breakdown â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 async function runBreakdown() {
   const text = $('pasteInput').value.trim() || state.scriptText;
   if (!text) { setStatus('Upload a file or paste script text first.', 'err'); return; }
@@ -440,7 +441,7 @@ async function runBreakdown() {
   }
 }
 
-// ─── Run schedule ────────────────────────────────────────────
+// â”€â”€â”€ Run schedule â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 async function runSchedule() {
   if (!state.breakdown) { setStatus('Run breakdown first.', 'err'); return; }
   $('scheduleView').innerHTML = '<p style="color: var(--muted);"><span class="spinner"></span> Building stripboard + shoot days...</p>';
@@ -465,7 +466,7 @@ async function runSchedule() {
   }
 }
 
-// ─── Run budget ──────────────────────────────────────────────
+// â”€â”€â”€ Run budget â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 async function runBudget() {
   if (!state.breakdown) { setStatus('Run breakdown first.', 'err'); return; }
   $('budgetView').innerHTML = '<p style="color: var(--muted);"><span class="spinner"></span> Building budget top sheet...</p>';
@@ -494,7 +495,7 @@ async function runBudget() {
   }
 }
 
-// ─── Renderers ───────────────────────────────────────────────
+// â”€â”€â”€ Renderers â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 function render(b) {
   const totalEighths = (b.scenes || []).reduce((s, sc) => s + (sc.eighths || 0), 0);
   const totalPages = totalEighths / 8;
@@ -694,7 +695,7 @@ function renderBudget(b) {
   `;
 }
 
-// ─── Utils ───────────────────────────────────────────────────
+// â”€â”€â”€ Utils â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 function setStatus(html, cls) {
   const s = $('status');
   s.innerHTML = html;
@@ -703,7 +704,7 @@ function setStatus(html, cls) {
 function escapeHtml(s) { return String(s ?? '').replace(/[&<>"']/g, c => ({ '&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;' }[c])); }
 function fmt(n) { if (n == null || isNaN(n)) return '0'; return Math.round(Number(n)).toLocaleString('en-US'); }
 
-// ─── Sample script (ultra-short for quick tests) ─────────────
+// â”€â”€â”€ Sample script (ultra-short for quick tests) â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 const SAMPLE_SCRIPT = `FADE IN:
 
 INT. DINER - DAY

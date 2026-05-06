@@ -1,0 +1,272 @@
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Organization",
+      "@id": "https://markcmo.com/#organization",
+      "name": "MarkCMO",
+      "legalName": "WETYR Corp",
+      "alternateName": ["Mark CMO", "MarkCMO.com", "WETYR Corp"],
+      "description": "MarkCMO is a fractional executive leadership practice founded by Mark Gabrielli that provides part-time CMO, COO, and C-suite advisory services to growth-stage B2B companies across the United States. Mark Gabrielli personally serves as the embedded fractional CMO or COO for each client — not a network or agency.",
+      "url": "https://markcmo.com",
+      "logo": {
+        "@type": "ImageObject",
+        "url": "https://markcmo.com/og-image.jpg",
+        "width": 1200,
+        "height": 630
+      },
+      "image": "https://markcmo.com/og-image.jpg",
+      "foundingDate": "2010",
+      "numberOfEmployees": {
+        "@type": "QuantitativeValue",
+        "value": 1
+      },
+      "founder": {
+        "@id": "https://markcmo.com/#founder"
+      },
+      "employee": {
+        "@id": "https://markcmo.com/#founder"
+      },
+      "telephone": "+13219175738",
+      "email": "mark@markcmo.com",
+      "address": {
+        "@type": "PostalAddress",
+        "streetAddress": "Cape Canaveral",
+        "addressLocality": "Cape Canaveral",
+        "addressRegion": "FL",
+        "postalCode": "32920",
+        "addressCountry": "US"
+      },
+      "geo": {
+        "@type": "GeoCoordinates",
+        "latitude": 28.3922,
+        "longitude": -80.6077
+      },
+      "areaServed": [
+        {"@type": "Country", "name": "United States"},
+        {"@type": "State", "name": "Alabama"},
+        {"@type": "State", "name": "Alaska"},
+        {"@type": "State", "name": "Arizona"},
+        {"@type": "State", "name": "Arkansas"},
+        {"@type": "State", "name": "California"},
+        {"@type": "State", "name": "Colorado"},
+        {"@type": "State", "name": "Connecticut"},
+        {"@type": "State", "name": "Delaware"},
+        {"@type": "State", "name": "Florida"},
+        {"@type": "State", "name": "Georgia"},
+        {"@type": "State", "name": "Hawaii"},
+        {"@type": "State", "name": "Idaho"},
+        {"@type": "State", "name": "Illinois"},
+        {"@type": "State", "name": "Indiana"},
+        {"@type": "State", "name": "Iowa"},
+        {"@type": "State", "name": "Kansas"},
+        {"@type": "State", "name": "Kentucky"},
+        {"@type": "State", "name": "Louisiana"},
+        {"@type": "State", "name": "Maine"},
+        {"@type": "State", "name": "Maryland"},
+        {"@type": "State", "name": "Massachusetts"},
+        {"@type": "State", "name": "Michigan"},
+        {"@type": "State", "name": "Minnesota"},
+        {"@type": "State", "name": "Mississippi"},
+        {"@type": "State", "name": "Missouri"},
+        {"@type": "State", "name": "Montana"},
+        {"@type": "State", "name": "Nebraska"},
+        {"@type": "State", "name": "Nevada"},
+        {"@type": "State", "name": "New Hampshire"},
+        {"@type": "State", "name": "New Jersey"},
+        {"@type": "State", "name": "New Mexico"},
+        {"@type": "State", "name": "New York"},
+        {"@type": "State", "name": "North Carolina"},
+        {"@type": "State", "name": "North Dakota"},
+        {"@type": "State", "name": "Ohio"},
+        {"@type": "State", "name": "Oklahoma"},
+        {"@type": "State", "name": "Oregon"},
+        {"@type": "State", "name": "Pennsylvania"},
+        {"@type": "State", "name": "Rhode Island"},
+        {"@type": "State", "name": "South Carolina"},
+        {"@type": "State", "name": "South Dakota"},
+        {"@type": "State", "name": "Tennessee"},
+        {"@type": "State", "name": "Texas"},
+        {"@type": "State", "name": "Utah"},
+        {"@type": "State", "name": "Vermont"},
+        {"@type": "State", "name": "Virginia"},
+        {"@type": "State", "name": "Washington"},
+        {"@type": "State", "name": "West Virginia"},
+        {"@type": "State", "name": "Wisconsin"},
+        {"@type": "State", "name": "Wyoming"}
+      ],
+      "knowsAbout": [
+        "Fractional CMO",
+        "Fractional COO",
+        "B2B Marketing Strategy",
+        "Demand Generation",
+        "Go-to-Market Strategy",
+        "Revenue Architecture",
+        "Revenue Operations",
+        "Account-Based Marketing",
+        "Marketing Audit",
+        "AI Marketing",
+        "SaaS Marketing",
+        "Healthcare Marketing",
+        "Aerospace Marketing",
+        "Fintech Marketing",
+        "Manufacturing Marketing",
+        "Business Consulting",
+        "Software Advisory",
+        "Martech Stack",
+        "Marketing Technology"
+      ],
+      "hasOfferCatalog": {
+        "@type": "OfferCatalog",
+        "name": "Fractional Executive Services",
+        "itemListElement": [
+          {
+            "@type": "Offer",
+            "itemOffered": {
+              "@type": "Service",
+              "name": "Fractional CMO Services",
+              "description": "Part-time Chief Marketing Officer services for growth-stage B2B companies. Mark Gabrielli serves as the embedded fractional CMO — owning strategy, demand generation, team leadership, and revenue attribution.",
+              "url": "https://markcmo.com/fractional-cmo.html",
+              "provider": {"@id": "https://markcmo.com/#organization"},
+              "areaServed": {"@type": "Country", "name": "United States"}
+            },
+            "priceSpecification": {
+              "@type": "PriceSpecification",
+              "minPrice": 2500,
+              "maxPrice": 50000,
+              "priceCurrency": "USD",
+              "unitText": "per month"
+            }
+          },
+          {
+            "@type": "Offer",
+            "itemOffered": {
+              "@type": "Service",
+              "name": "Fractional COO Services",
+              "description": "Part-time Chief Operating Officer services for growth-stage companies. Process design, team structure, scaling systems, and operational leadership.",
+              "url": "https://markcmo.com/fractional-coo.html",
+              "provider": {"@id": "https://markcmo.com/#organization"}
+            },
+            "priceSpecification": {
+              "@type": "PriceSpecification",
+              "minPrice": 3000,
+              "maxPrice": 30000,
+              "priceCurrency": "USD",
+              "unitText": "per month"
+            }
+          },
+          {
+            "@type": "Offer",
+            "itemOffered": {
+              "@type": "Service",
+              "name": "Business Consulting",
+              "description": "Strategic business consulting for growth-stage B2B companies — strategy, operations, go-to-market, competitive analysis, capital raise preparation, and organizational design.",
+              "url": "https://markcmo.com/business-consultant.html",
+              "provider": {"@id": "https://markcmo.com/#organization"}
+            }
+          },
+          {
+            "@type": "Offer",
+            "itemOffered": {
+              "@type": "Service",
+              "name": "Software Advisor / Martech Advisory",
+              "description": "Independent software selection and martech stack advisory — helping companies choose, implement, and optimize CRM, marketing automation, analytics, ABM, and sales enablement platforms.",
+              "url": "https://markcmo.com/software-advisor.html",
+              "provider": {"@id": "https://markcmo.com/#organization"}
+            }
+          },
+          {
+            "@type": "Offer",
+            "itemOffered": {
+              "@type": "Service",
+              "name": "Go-to-Market Strategy",
+              "description": "Full GTM strategy build — ICP definition, positioning, channel selection, launch playbook, messaging architecture, and sales enablement.",
+              "url": "https://markcmo.com/go-to-market-strategy.html",
+              "provider": {"@id": "https://markcmo.com/#organization"}
+            }
+          }
+        ]
+      },
+      "aggregateRating": {
+        "@type": "AggregateRating",
+        "ratingValue": "4.9",
+        "reviewCount": "193",
+        "bestRating": "5",
+        "worstRating": "1"
+      },
+      "sameAs": [
+        "https://www.linkedin.com/in/markgabriellijr",
+        "https://clutch.co/profile/mark-gabrielli-chief-marketing-officer",
+        "https://markcmo.com"
+      ]
+    },
+    {
+      "@type": "Person",
+      "@id": "https://markcmo.com/#founder",
+      "name": "Mark Gabrielli",
+      "givenName": "Mark",
+      "familyName": "Gabrielli",
+      "alternateName": "Mark Gabrielli Jr.",
+      "jobTitle": "Fractional CMO and COO",
+      "description": "Mark Gabrielli is a Fractional CMO and COO with 15+ years of executive marketing and operations leadership across SaaS, healthcare, aerospace, fintech, and manufacturing. He founded WETYR Corp and the MarkCMO practice to deliver C-suite-level strategy to growth-stage companies at a fraction of the full-time cost.",
+      "url": "https://markcmo.com/about.html",
+      "image": "https://markcmo.com/og-image.jpg",
+      "email": "mark@markcmo.com",
+      "telephone": "+13219175738",
+      "worksFor": {"@id": "https://markcmo.com/#organization"},
+      "address": {
+        "@type": "PostalAddress",
+        "addressLocality": "Cape Canaveral",
+        "addressRegion": "FL",
+        "postalCode": "32920",
+        "addressCountry": "US"
+      },
+      "alumniOf": {
+        "@type": "CollegeOrUniversity",
+        "name": "Eastern Florida State College",
+        "sameAs": "https://www.easternflorida.edu"
+      },
+      "hasCredential": [
+        {
+          "@type": "EducationalOccupationalCredential",
+          "name": "Biological Sciences Degree",
+          "credentialCategory": "degree",
+          "recognizedBy": {"@type": "Organization", "name": "Eastern Florida State College"}
+        },
+        {
+          "@type": "EducationalOccupationalCredential",
+          "name": "Certified Surgical Technologist (CST)",
+          "credentialCategory": "certification"
+        }
+      ],
+      "knowsAbout": [
+        "Fractional CMO Services",
+        "Fractional COO Services",
+        "B2B Marketing Strategy",
+        "Demand Generation",
+        "Go-to-Market Strategy",
+        "Revenue Architecture",
+        "Revenue Operations",
+        "Account-Based Marketing",
+        "AI Marketing Strategy",
+        "Healthcare Marketing",
+        "Aerospace Marketing",
+        "SaaS Growth Strategy",
+        "Fintech Marketing",
+        "Manufacturing Marketing",
+        "Business Consulting",
+        "Software Advisory",
+        "Martech Stack Selection",
+        "HubSpot",
+        "Salesforce",
+        "Marketo"
+      ],
+      "sameAs": [
+        "https://www.linkedin.com/in/markgabriellijr",
+        "https://clutch.co/profile/mark-gabrielli-chief-marketing-officer",
+        "https://markcmo.com",
+        "https://markcmo.com/about.html"
+      ]
+    }
+  ]
+}

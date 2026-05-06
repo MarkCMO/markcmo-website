@@ -11,22 +11,22 @@
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <title>Managed IT Services (MSP), IT Support for Growing Businesses | Mark Gabrielli</title>
-<meta name="description" content="Managed IT services for SMBs. Help desk support, network management, cloud services, server management, Microsoft 365, and proactive IT maintenance — flat monthly pricing." />
+<meta name="description" content="Managed IT services for SMBs. Help desk support, network management, cloud services, server management, Microsoft 365, and proactive IT maintenance - flat monthly pricing." />
 <meta name="keywords" content="managed IT services, MSP, managed service provider, IT support for small business, outsourced IT, IT consulting, Microsoft 365 management, cloud IT services, network management, help desk support" />
 <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large" />
 <meta name="author" content="Mark Gabrielli" />
 <meta name="geo.region" content="US-FL" />
 <link rel="canonical" href="https://markcmo.com/managed-it" />
 <meta property="og:type" content="website" />
-<meta property="og:title" content="Managed IT Services (MSP) — IT Support for Growing Businesses | Mark Gabrielli" />
-<meta property="og:description" content="Managed IT services for SMBs. Help desk support, network management, cloud services, server management, Microsoft 365, and proactive IT maintenance — flat monthly pricing." />
+<meta property="og:title" content="Managed IT Services (MSP) - IT Support for Growing Businesses | Mark Gabrielli" />
+<meta property="og:description" content="Managed IT services for SMBs. Help desk support, network management, cloud services, server management, Microsoft 365, and proactive IT maintenance - flat monthly pricing." />
 <meta property="og:url" content="https://markcmo.com/managed-it" />
 <meta property="og:site_name" content="Mark Gabrielli | Fractional CMO &amp; COO" />
 <meta property="og:image" content="https://markcmo.com/og-image.jpg" />
 <meta property="og:locale" content="en_US" />
 <meta name="twitter:card" content="summary_large_image" />
-<meta name="twitter:title" content="Managed IT Services (MSP) — IT Support for Growing Businesses | Mark Gabrielli" />
-<meta name="twitter:description" content="Managed IT services for SMBs. Help desk support, network management, cloud services, server management, Microsoft 365, and proactive IT maintenance — flat monthly pricing." />
+<meta name="twitter:title" content="Managed IT Services (MSP) - IT Support for Growing Businesses | Mark Gabrielli" />
+<meta name="twitter:description" content="Managed IT services for SMBs. Help desk support, network management, cloud services, server management, Microsoft 365, and proactive IT maintenance - flat monthly pricing." />
 <meta name="twitter:image" content="https://markcmo.com/og-image.jpg" />
 <meta name="theme-color" content="#C9A84C" />
 <link rel="manifest" href="/manifest.json" />
@@ -81,19 +81,28 @@ Mark <span>Gabrielli</span>
 </a>
 <ul class="nav-links">
 <li><a href="index.html">Home</a></li>
-<li><a href="about.html" class="active">About</a></li>
+<li><a href="about.html">About</a></li>
 <li><a href="services.html">Services</a></li>
 <li><a href="portfolio.html">Portfolio</a></li>
 <li><a href="results.html">Results</a></li>
 <li><a href="blog.html">Insights</a></li>
-<li><a href="https://academy.markcmo.com" target="_blank" style="color:var(--gold);font-weight:700;">🎓 Academy</a></li>
+<li><a href="https://academy.markcmo.com" target="_blank" style="color:var(--gold);font-weight:700;">Academy</a></li>
 <li><a href="book.html" class="nav-cta">Book a Free Call</a></li>
 </ul>
-<div class="nav-mobile-links">
-<a href="portfolio.html" class="nav-mob-pill">Portfolio</a>
-<a href="book.html" class="nav-mob-cta">Book Mark →</a>
-</div>
+<button class="nav-hamburger" id="navHam" aria-label="Open menu"><span></span><span></span><span></span></button>
 </nav>
+<div class="mobile-drawer" id="mobileDrawer">
+<button class="drawer-close" id="drawerClose" aria-label="Close menu">&#x2715;</button>
+<a href="index.html">Home</a>
+<a href="about.html">About</a>
+<a href="services.html">Services</a>
+<a href="magnet-framework.html" style="color:var(--accent);font-weight:600;">MAGNET Framework&#x2122;</a>
+<a href="results.html">Results</a>
+<a href="portfolio.html">Portfolio</a>
+<a href="blog.html">Insights</a>
+<a href="https://academy.markcmo.com" target="_blank" rel="noopener">Academy</a>
+<a href="book.html" class="drawer-cta">Book a Free Strategy Call &#x2192;</a>
+</div>
 <section class="sp-hero">
 <div class="sp-hero-grid"></div>
 <div class="sp-hero-content">
@@ -172,7 +181,7 @@ Mark <span>Gabrielli</span>
 </div>
 <div class="nf-group">
 <label class="nf-label">Phone Number</label>
-<input class="nf-input" type="tel" name="phone" placeholder="+1 (321) 917-5738" />
+<input class="nf-input" type="tel" name="phone" placeholder="" />
 </div>
 </div>
 <div class="nf-group">
@@ -415,5 +424,6 @@ Mark <span>Gabrielli</span>
   },{passive:true});
 })();
 </script>
+<script src="nav.js" defer></script>
 </body>
 </html>

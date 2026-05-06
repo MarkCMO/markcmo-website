@@ -1,7 +1,8 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="UTF-8">
+<link rel="icon" type="image/webp" href="/favicon.webp"><link rel="apple-touch-icon" href="/mark-photo.webp">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>Fractional CMO Near Dallas-Fort Worth | Mark Gabrielli - Texas</title>
 <meta name="description" content="Fractional CMO serving Dallas-Fort Worth and the surrounding Texas metro area. Mark Gabrielli brings senior marketing leadership to Dallas-Fort Worth companies across healthcare and beyond.">
@@ -94,10 +95,10 @@ body{font-family:'Inter',sans-serif;background:#0a0a0a;color:#e8e6e1;line-height
 .city-links{display:flex;flex-wrap:wrap;gap:8px;margin:16px 0}
 .city-links a{background:#111;border:1px solid #222;color:#888;padding:6px 12px;border-radius:4px;font-size:.8rem;text-decoration:none}
 .city-links a:hover{color:#c9a84c}
-.cta-block{background:#c9a84c;color:#000;padding:52px 28px;border-radius:8px;text-align:center;margin-top:48px}
-.cta-block h2{font-size:1.8rem;font-weight:800;margin-bottom:10px}
-.cta-block p{font-size:1rem;margin-bottom:24px;opacity:.8}
-.cta-block a{background:#000;color:#c9a84c;padding:13px 28px;border-radius:6px;font-weight:700;text-decoration:none}
+.cta-block{background:#c9a84c;padding:52px 28px;border-radius:8px;text-align:center;margin-top:48px}
+.cta-block h2{font-size:1.8rem;font-weight:800;margin-bottom:10px;color:#0a0f2c}
+.cta-block p{font-size:1rem;margin-bottom:24px;color:rgba(10,15,44,.75)}
+.cta-block a{background:#0a0f2c;color:#fff;padding:13px 28px;border-radius:6px;font-weight:700;text-decoration:none}
 </style>
 </head>
 <body>
@@ -110,19 +111,28 @@ Mark <span>Gabrielli</span>
 </a>
 <ul class="nav-links">
 <li><a href="index.html">Home</a></li>
-<li><a href="about.html" class="active">About</a></li>
-<li><a href="services.html">Services</a></li>
+<li><a href="about.html">About</a></li>
+<li><a class="active" href="services.html">Services</a></li>
 <li><a href="portfolio.html">Portfolio</a></li>
 <li><a href="results.html">Results</a></li>
 <li><a href="blog.html">Insights</a></li>
-<li><a href="https://academy.markcmo.com" target="_blank" style="color:var(--gold);font-weight:700;">🎓 Academy</a></li>
+<li><a href="https://academy.markcmo.com" target="_blank" style="color:var(--gold);font-weight:700;">Academy</a></li>
 <li><a href="book.html" class="nav-cta">Book a Free Call</a></li>
 </ul>
-<div class="nav-mobile-links">
-<a href="portfolio.html" class="nav-mob-pill">Portfolio</a>
-<a href="book.html" class="nav-mob-cta">Book Mark →</a>
-</div>
+<button class="nav-hamburger" id="navHam" aria-label="Open menu"><span></span><span></span><span></span></button>
 </nav>
+<div class="mobile-drawer" id="mobileDrawer">
+<button class="drawer-close" id="drawerClose" aria-label="Close menu">&#x2715;</button>
+<a href="index.html">Home</a>
+<a href="about.html">About</a>
+<a href="services.html">Services</a>
+<a href="magnet-framework.html" style="color:var(--accent);font-weight:600;">MAGNET Framework&#x2122;</a>
+<a href="results.html">Results</a>
+<a href="portfolio.html">Portfolio</a>
+<a href="blog.html">Insights</a>
+<a href="https://academy.markcmo.com" target="_blank" rel="noopener">Academy</a>
+<a href="book.html" class="drawer-cta">Book a Free Strategy Call &#x2192;</a>
+</div>
 <section class="hero">
 <span class="hero-badge">Dallas-Fort Worth Metro</span>
 <h1>Fractional CMO Near Dallas-Fort Worth</h1>
@@ -325,5 +335,6 @@ Mark <span>Gabrielli</span>
 </p>
 </div>
 </footer>
+<script src="nav.js" defer></script>
 </body>
 </html>

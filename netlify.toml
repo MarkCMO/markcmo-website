@@ -1,6 +1,7 @@
 # ─── Netlify Configuration ───────────────────────────────────
 [build]
   publish = "."
+  command = ""
   functions = "netlify/functions"
 
 # Auto-install missing function dependencies (e.g. pdf-parse)
@@ -142,6 +143,27 @@
   to = "/.netlify/functions/founding-status"
   status = 200
 
+# New service pages
+[[redirects]]
+  from = "/software-advisor"
+  to = "/software-advisor.html"
+  status = 200
+
+[[redirects]]
+  from = "/business-consultant"
+  to = "/business-consultant.html"
+  status = 200
+
+[[redirects]]
+  from = "/business-consulting"
+  to = "/business-consultant.html"
+  status = 200
+
+[[redirects]]
+  from = "/fractional-cmo-competitive-analysis"
+  to = "/fractional-cmo-competitive-analysis.html"
+  status = 200
+
 # Film rolodex endpoints
 [[redirects]]
   from = "/film-rolodex"
@@ -167,6 +189,13 @@
   from = "/film-rolodex-expand"
   to = "/.netlify/functions/film-rolodex-expand"
   status = 200
+
+# ─── Components: force UTF-8 so XHR decodes ™ etc. correctly ──
+[[headers]]
+  for = "/components/*"
+  [headers.values]
+    Content-Type = "text/html; charset=utf-8"
+    Cache-Control = "public, max-age=3600, stale-while-revalidate=86400"
 
 # ─── Performance: Cache Static Assets ─────────────────────────
 [[headers]]

@@ -915,67 +915,67 @@ const CURRICULUM = {
         {id:'l5',title:'The CEO Brand: Your Authority Inside and Outside the Company',keywords:['CEO personal brand','executive presence','internal authority','external thought leadership','leadership credibility']},
       ]},
       { id:'m2', title:'Strategy & Competitive Positioning', lessons:[
-        {id:'l1',title:'Strategic Clarity — Turning Vision Into a Governing Framework',keywords:['strategic clarity','vision to strategy','governing framework','strategic priorities','what we are not doing']},
-        {id:'l2',title:'Competitive Positioning — Owning a Defensible Market Position',keywords:['competitive positioning','market differentiation','defensible moat','competitive strategy','market leadership']},
+        {id:'l1',title:'Strategic Clarity - Turning Vision Into a Governing Framework',keywords:['strategic clarity','vision to strategy','governing framework','strategic priorities','what we are not doing']},
+        {id:'l2',title:'Competitive Positioning - Owning a Defensible Market Position',keywords:['competitive positioning','market differentiation','defensible moat','competitive strategy','market leadership']},
         {id:'l3',title:'The Annual Strategic Planning Process',keywords:['strategic planning','annual planning','OKR design','resource allocation','strategic prioritization']},
-        {id:'l4',title:'Category Design — Creating the Market You Want to Win',keywords:['category design','market creation','thought leadership','category conditioning','market leadership']},
-        {id:'l5',title:'Competitive Intelligence — How CEOs Monitor & Respond to the Market',keywords:['competitive intelligence','market monitoring','competitive response','strategic adaptation','market signals']},
+        {id:'l4',title:'Category Design - Creating the Market You Want to Win',keywords:['category design','market creation','thought leadership','category conditioning','market leadership']},
+        {id:'l5',title:'Competitive Intelligence - How CEOs Monitor & Respond to the Market',keywords:['competitive intelligence','market monitoring','competitive response','strategic adaptation','market signals']},
       ]},
       { id:'m3', title:'Financial Leadership & Capital Allocation', lessons:[
-        {id:'l1',title:'The CEO\'s Financial Fluency — Reading the Business Through Numbers',keywords:['financial fluency','CEO finance','reading financials','business metrics','financial literacy']},
-        {id:'l2',title:'Capital Allocation — The Highest-Leverage CEO Decision',keywords:['capital allocation','investment prioritization','resource allocation','ROI thinking','capital strategy']},
-        {id:'l3',title:'Fundraising Architecture — Timing, Investors & Terms',keywords:['fundraising strategy','investor selection','term sheets','round timing','capital structure']},
-        {id:'l4',title:'Unit Economics — The Foundation of Every Growth Decision',keywords:['unit economics','LTV CAC','payback period','cohort analysis','financial model']},
-        {id:'l5',title:'Financial Governance — Controls, Reporting & Board Confidence',keywords:['financial governance','internal controls','board reporting','financial transparency','CFO partnership']},
+        {id:'l1',title:'The CEO\'s Financial Fluency - Reading the Business Through Numbers',keywords:['financial fluency','CEO finance','reading financials','business metrics','financial literacy']},
+        {id:'l2',title:'Capital Allocation - The Highest-Leverage CEO Decision',keywords:['capital allocation','investment prioritization','resource allocation','ROI thinking','capital strategy']},
+        {id:'l3',title:'Fundraising Architecture - Timing, Investors & Terms',keywords:['fundraising strategy','investor selection','term sheets','round timing','capital structure']},
+        {id:'l4',title:'Unit Economics - The Foundation of Every Growth Decision',keywords:['unit economics','LTV CAC','payback period','cohort analysis','financial model']},
+        {id:'l5',title:'Financial Governance - Controls, Reporting & Board Confidence',keywords:['financial governance','internal controls','board reporting','financial transparency','CFO partnership']},
       ]},
       { id:'m4', title:'Building & Leading the Executive Team', lessons:[
-        {id:'l1',title:'Hiring Your C-Suite — The Decisions That Determine Your Ceiling',keywords:['C-suite hiring','executive assessment','wrong-stage executive','executive selection','leadership team building']},
-        {id:'l2',title:'Leading Executives — Managing People Who Are Experts in Their Domain',keywords:['leading executives','mission-bounded autonomy','executive management','functional leadership','expert management']},
+        {id:'l1',title:'Hiring Your C-Suite - The Decisions That Determine Your Ceiling',keywords:['C-suite hiring','executive assessment','wrong-stage executive','executive selection','leadership team building']},
+        {id:'l2',title:'Leading Executives - Managing People Who Are Experts in Their Domain',keywords:['leading executives','mission-bounded autonomy','executive management','functional leadership','expert management']},
         {id:'l3',title:'Managing Underperformance and Making the Hard Firing Decisions',keywords:['executive underperformance','firing decisions','performance management','leadership accountability','hard people decisions']},
         {id:'l4',title:'Compensation Architecture for the Leadership Team',keywords:['executive compensation','equity design','incentive structures','compensation strategy','leadership pay']},
         {id:'l5',title:'Executive Team Operating Rhythm',keywords:['executive team rhythm','leadership cadence','operating meetings','team alignment','leadership operating system']},
       ]},
       { id:'m5', title:'Revenue Architecture & Commercial Leadership', lessons:[
-        {id:'l1',title:'Owning the Revenue Number — The CEO\'s Commercial Accountability',keywords:['CEO revenue ownership','commercial accountability','revenue leadership','GTM oversight','pipeline ownership']},
+        {id:'l1',title:'Owning the Revenue Number - The CEO\'s Commercial Accountability',keywords:['CEO revenue ownership','commercial accountability','revenue leadership','GTM oversight','pipeline ownership']},
         {id:'l2',title:'Go-to-Market Strategy from the CEO Seat',keywords:['GTM strategy','ICP definition','channel strategy','market segmentation','commercial architecture']},
         {id:'l3',title:'Building and Scaling a Sales Organization',keywords:['sales organization','sales process','sales hiring','quota design','revenue operations']},
         {id:'l4',title:'Customer Success as a Revenue and Retention Strategy',keywords:['customer success','NRR strategy','churn reduction','expansion revenue','retention architecture']},
-        {id:'l5',title:'Revenue Model Design — Pricing, Packaging, and Mix',keywords:['revenue model','pricing strategy','packaging design','value-based pricing','revenue mix']},
+        {id:'l5',title:'Revenue Model Design - Pricing, Packaging, and Mix',keywords:['revenue model','pricing strategy','packaging design','value-based pricing','revenue mix']},
       ]},
       { id:'m6', title:'Operational Excellence & Scaling Systems', lessons:[
-        {id:'l1',title:'Building Systems That Scale — The CEO\'s Role in Operations',keywords:['scaling systems','operational architecture','CEO operations role','systems thinking','operational leverage']},
-        {id:'l2',title:'The Operating Cadence — Metrics, Meetings, and Accountability Rhythms',keywords:['operating cadence','OKRs','accountability rhythm','metrics architecture','operating meetings']},
-        {id:'l3',title:'Process Without Bureaucracy — Discipline at Scale',keywords:['process design','avoiding bureaucracy','operational discipline','scalable process','growth operations']},
-        {id:'l4',title:'Technology Leverage — How CEOs Think About Tech Investment',keywords:['technology investment','build vs buy','tech leverage','operational technology','digital infrastructure']},
+        {id:'l1',title:'Building Systems That Scale - The CEO\'s Role in Operations',keywords:['scaling systems','operational architecture','CEO operations role','systems thinking','operational leverage']},
+        {id:'l2',title:'The Operating Cadence - Metrics, Meetings, and Accountability Rhythms',keywords:['operating cadence','OKRs','accountability rhythm','metrics architecture','operating meetings']},
+        {id:'l3',title:'Process Without Bureaucracy - Discipline at Scale',keywords:['process design','avoiding bureaucracy','operational discipline','scalable process','growth operations']},
+        {id:'l4',title:'Technology Leverage - How CEOs Think About Tech Investment',keywords:['technology investment','build vs buy','tech leverage','operational technology','digital infrastructure']},
         {id:'l5',title:'Quality, Delivery, and Systems That Protect Customer Trust',keywords:['quality systems','delivery excellence','customer trust','SLA design','operational quality']},
       ]},
       { id:'m7', title:'Board Management & Investor Relations', lessons:[
-        {id:'l1',title:'Understanding Your Board — Power Dynamics and Stakeholder Maps',keywords:['board dynamics','stakeholder mapping','board power','investor interests','board relationships']},
-        {id:'l2',title:'Running the Board Meeting — Preparation, Presentation, and Pre-Selling',keywords:['board meeting preparation','pre-read','board presentation','board management','governance best practices']},
+        {id:'l1',title:'Understanding Your Board - Power Dynamics and Stakeholder Maps',keywords:['board dynamics','stakeholder mapping','board power','investor interests','board relationships']},
+        {id:'l2',title:'Running the Board Meeting - Preparation, Presentation, and Pre-Selling',keywords:['board meeting preparation','pre-read','board presentation','board management','governance best practices']},
         {id:'l3',title:'Investor Relations for Growth-Stage CEOs',keywords:['investor relations','investor updates','fundraising narrative','investor communication','capital relationships']},
         {id:'l4',title:'Governance, Legal Accountability, and CEO Risk Management',keywords:['corporate governance','legal accountability','CEO legal exposure','fiduciary duty','risk management']},
         {id:'l5',title:'Managing Board Conflict and Navigating Disagreement',keywords:['board conflict','board disagreement','investor pressure','governance disputes','strategic alignment']},
       ]},
       { id:'m8', title:'Culture, Talent & Organizational Design', lessons:[
-        {id:'l1',title:'Culture as Strategy — How CEOs Shape the Invisible Architecture',keywords:['culture strategy','cultural architecture','values operationalization','culture design','CEO cultural role']},
-        {id:'l2',title:'Talent Architecture — Building a Team That Wins at Scale',keywords:['talent architecture','hiring excellence','talent density','team building','talent strategy']},
-        {id:'l3',title:'Organizational Design — Structure, Reporting Lines, and Decision Rights',keywords:['organizational design','org structure','reporting lines','decision rights','RACI']},
-        {id:'l4',title:'Managing High Performers — Keeping Your Best People',keywords:['high performer management','retention strategy','top talent','performance culture','star player retention']},
-        {id:'l5',title:'Scaling Culture — Maintaining What Matters as the Company Grows',keywords:['scaling culture','culture at scale','cultural consistency','manager development','cultural transmission']},
+        {id:'l1',title:'Culture as Strategy - How CEOs Shape the Invisible Architecture',keywords:['culture strategy','cultural architecture','values operationalization','culture design','CEO cultural role']},
+        {id:'l2',title:'Talent Architecture - Building a Team That Wins at Scale',keywords:['talent architecture','hiring excellence','talent density','team building','talent strategy']},
+        {id:'l3',title:'Organizational Design - Structure, Reporting Lines, and Decision Rights',keywords:['organizational design','org structure','reporting lines','decision rights','RACI']},
+        {id:'l4',title:'Managing High Performers - Keeping Your Best People',keywords:['high performer management','retention strategy','top talent','performance culture','star player retention']},
+        {id:'l5',title:'Scaling Culture - Maintaining What Matters as the Company Grows',keywords:['scaling culture','culture at scale','cultural consistency','manager development','cultural transmission']},
       ]},
       { id:'m9', title:'M&A, Partnerships & Strategic Growth', lessons:[
-        {id:'l1',title:'Strategic Partnerships — How CEOs Create Asymmetric Growth Leverage',keywords:['strategic partnerships','partnership strategy','channel partnerships','integration partnerships','partnership value']},
-        {id:'l2',title:'M&A for Growth-Stage CEOs — Acquisitions as Strategic Acceleration',keywords:['M&A strategy','acquisition thesis','integration planning','due diligence','buy-side M&A']},
-        {id:'l3',title:'International Expansion — When, How, and How Not to Go Global',keywords:['international expansion','global growth','market entry','localization','international GTM']},
-        {id:'l4',title:'Building a Strategic Roadmap — Translating Vision Into Executable Plans',keywords:['strategic roadmap','vision execution','planning architecture','strategic priorities','OKR design']},
-        {id:'l5',title:'Competitive Strategy — How CEOs Think About Winning Long-Term',keywords:['competitive strategy','long-term positioning','market leadership','competitive moats','strategic advantage']},
+        {id:'l1',title:'Strategic Partnerships - How CEOs Create Asymmetric Growth Leverage',keywords:['strategic partnerships','partnership strategy','channel partnerships','integration partnerships','partnership value']},
+        {id:'l2',title:'M&A for Growth-Stage CEOs - Acquisitions as Strategic Acceleration',keywords:['M&A strategy','acquisition thesis','integration planning','due diligence','buy-side M&A']},
+        {id:'l3',title:'International Expansion - When, How, and How Not to Go Global',keywords:['international expansion','global growth','market entry','localization','international GTM']},
+        {id:'l4',title:'Building a Strategic Roadmap - Translating Vision Into Executable Plans',keywords:['strategic roadmap','vision execution','planning architecture','strategic priorities','OKR design']},
+        {id:'l5',title:'Competitive Strategy - How CEOs Think About Winning Long-Term',keywords:['competitive strategy','long-term positioning','market leadership','competitive moats','strategic advantage']},
       ]},
       { id:'m10', title:'CEO Decision-Making & Personal Leadership', lessons:[
-        {id:'l1',title:'CEO Decision-Making — Frameworks for High-Stakes Choices',keywords:['decision frameworks','pre-mortem analysis','reversibility test','decision quality','high-stakes decisions']},
-        {id:'l2',title:'Managing Your Energy — The CEO\'s Most Scarce Resource',keywords:['CEO energy management','peak performance','attention allocation','physical disciplines','calendar architecture']},
-        {id:'l3',title:'CEO Communication — Leading Through Narrative, Clarity, and Presence',keywords:['CEO communication','all-hands design','leadership narrative','strategic clarity','internal communication']},
-        {id:'l4',title:'CEO Wellbeing — Sustaining Performance Over the Long Arc',keywords:['CEO wellbeing','peer CEO group','executive coach','sustainable performance','impostor syndrome']},
-        {id:'l5',title:'The CEO at $50M — Completing the Journey and Beginning the Next',keywords:['CEO at 50M','builder to leader transition','next stage growth','CEO development','company building mastery']},
+        {id:'l1',title:'CEO Decision-Making - Frameworks for High-Stakes Choices',keywords:['decision frameworks','pre-mortem analysis','reversibility test','decision quality','high-stakes decisions']},
+        {id:'l2',title:'Managing Your Energy - The CEO\'s Most Scarce Resource',keywords:['CEO energy management','peak performance','attention allocation','physical disciplines','calendar architecture']},
+        {id:'l3',title:'CEO Communication - Leading Through Narrative, Clarity, and Presence',keywords:['CEO communication','all-hands design','leadership narrative','strategic clarity','internal communication']},
+        {id:'l4',title:'CEO Wellbeing - Sustaining Performance Over the Long Arc',keywords:['CEO wellbeing','peer CEO group','executive coach','sustainable performance','impostor syndrome']},
+        {id:'l5',title:'The CEO at $50M - Completing the Journey and Beginning the Next',keywords:['CEO at 50M','builder to leader transition','next stage growth','CEO development','company building mastery']},
       ]},
     ]
   }};
@@ -1014,7 +1014,7 @@ exports.handler = async function(event) {
   const lessonId = p.lesson;
   const token    = p.token;  // required for auth
 
-  // ── HARD TOKEN GATE — no token = no content ────────────────────────────────
+  // ── HARD TOKEN GATE - no token = no content ────────────────────────────────
   if (!token || token.length < 8) {
     return { statusCode: 401, headers, body: JSON.stringify({ error: 'Access token required', code: 'NO_TOKEN' }) };
   }
@@ -1035,10 +1035,10 @@ exports.handler = async function(event) {
       if (enrollment.courseId !== courseId) {
         return { statusCode: 403, headers, body: JSON.stringify({ error: 'Token not valid for this course', code: 'WRONG_COURSE' }) };
       }
-      // Token valid for this course — continue to serve content
+      // Token valid for this course - continue to serve content
     } catch(err) {
       console.error('Token validation error in course-lesson:', err.message);
-      // Fail CLOSED — if we can't validate, deny access
+      // Fail CLOSED - if we can't validate, deny access
       return { statusCode: 503, headers, body: JSON.stringify({ error: 'Auth service temporarily unavailable', code: 'AUTH_ERROR' }) };
     }
   }

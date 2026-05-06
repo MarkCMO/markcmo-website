@@ -1,5 +1,5 @@
 // netlify/functions/admin-data.js
-// Unified admin data proxy — serves both markcmo.com AND academy.markcmo.com data
+// Unified admin data proxy - serves both markcmo.com AND academy.markcmo.com data
 // Protected by a simple token check matching admin credentials
 
 const CORS = {
@@ -133,7 +133,7 @@ exports.handler = async (event) => {
     if (body.action === 'launch' || body.action === 'notify-list') {
       try {
         if (!ADMIN_SECRET) {
-          return { statusCode: 500, headers: CORS, body: JSON.stringify({ error: 'ADMIN_SECRET not configured on markcmo.com — set it in Netlify environment variables' }) };
+          return { statusCode: 500, headers: CORS, body: JSON.stringify({ error: 'ADMIN_SECRET not configured on markcmo.com - set it in Netlify environment variables' }) };
         }
         const proxyBody = { ...body, adminSecret: ADMIN_SECRET };
         const r = await fetch('https://academy.markcmo.com/course-notify', {

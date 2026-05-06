@@ -1,9 +1,10 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="UTF-8">
+<link rel="icon" type="image/webp" href="/favicon.webp"><link rel="apple-touch-icon" href="/mark-photo.webp">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>MarkCMO Academy — Final Exam</title>
+<title>MarkCMO Academy - Final Exam</title>
 <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Barlow:ital,wght@0,300;0,400;0,600;0,700;0,900&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="/style.css">
 <style>
@@ -114,11 +115,11 @@ html,body,*{cursor:none!important}
 .toast.red{border-color:var(--red);color:var(--red)}
 </style>
 
-  <meta name="description" content="MarkCMO Academy — Final Exam - MarkCMO provides fractional CMO and strategic marketing services for growth-stage companies.">
+  <meta name="description" content="MarkCMO Academy - Final Exam - MarkCMO provides fractional CMO and strategic marketing services for growth-stage companies.">
   <link rel="canonical" href="https://markcmo.com/courses/exam.html">
   <meta property="og:type" content="website">
-  <meta property="og:title" content="MarkCMO Academy — Final Exam">
-  <meta property="og:description" content="MarkCMO Academy — Final Exam - MarkCMO provides fractional CMO and strategic marketing services for growth-stage companies.">
+  <meta property="og:title" content="MarkCMO Academy - Final Exam">
+  <meta property="og:description" content="MarkCMO Academy - Final Exam - MarkCMO provides fractional CMO and strategic marketing services for growth-stage companies.">
   <meta property="og:url" content="https://markcmo.com/courses/exam.html">
   <meta property="og:site_name" content="MarkCMO">
 </head>
@@ -139,20 +140,20 @@ html,body,*{cursor:none!important}
     <div class="warning-icon">⚠️</div>
     <div class="warning-eyebrow">Final Examination</div>
     <h1 class="warning-title" id="warning-course-title">LOADING...</h1>
-    <p class="warning-sub">This is the comprehensive final exam. 50 questions spanning all course modules. You have <strong style="color:var(--text)">4 hours</strong>. All questions are AI-generated — every attempt is different.</p>
+    <p class="warning-sub">This is the comprehensive final exam. 50 questions spanning all course modules. You have <strong style="color:var(--text)">4 hours</strong>. All questions are AI-generated - every attempt is different.</p>
     <div class="warning-rules">
       <h3>Exam Rules</h3>
       <ul>
-        <li><strong>50 Questions</strong> — Multiple choice, spanning all modules</li>
-        <li><strong>4-Hour Time Limit</strong> — Timer starts when you click Begin</li>
-        <li><strong>73% Minimum to Pass</strong> — That's 37 of 50 correct</li>
-        <li><strong>No Going Back</strong> — After submitting, this attempt is final</li>
-        <li><strong>Retakes Cost Money</strong> — If you fail, a discounted fee applies</li>
-        <li><strong>Questions Are Unique</strong> — Every exam is AI-generated differently</li>
-        <li><strong>GPA is Calculated</strong> — Combined with your lesson quiz scores</li>
+        <li><strong>50 Questions</strong> - Multiple choice, spanning all modules</li>
+        <li><strong>4-Hour Time Limit</strong> - Timer starts when you click Begin</li>
+        <li><strong>73% Minimum to Pass</strong> - That's 37 of 50 correct</li>
+        <li><strong>No Going Back</strong> - After submitting, this attempt is final</li>
+        <li><strong>Retakes Cost Money</strong> - If you fail, a discounted fee applies</li>
+        <li><strong>Questions Are Unique</strong> - Every exam is AI-generated differently</li>
+        <li><strong>GPA is Calculated</strong> - Combined with your lesson quiz scores</li>
       </ul>
     </div>
-    <button class="start-exam-btn" onclick="beginExam()">I Understand — Begin Exam →</button>
+    <button class="start-exam-btn" onclick="beginExam()">I Understand - Begin Exam →</button>
   </div>
 </div>
 
@@ -208,8 +209,8 @@ const COURSE_TITLES = {
 };
 
 // Init
-document.getElementById('warning-course-title').textContent = (COURSE_TITLES[COURSE_ID] || 'Course').toUpperCase() + ' — FINAL EXAM';
-document.getElementById('top-title').textContent = (COURSE_TITLES[COURSE_ID] || 'Course') + ' — Final Exam';
+document.getElementById('warning-course-title').textContent = (COURSE_TITLES[COURSE_ID] || 'Course').toUpperCase() + ' - FINAL EXAM';
+document.getElementById('top-title').textContent = (COURSE_TITLES[COURSE_ID] || 'Course') + ' - Final Exam';
 
 // ── EXAM FLOW ──────────────────────────────────────────────────────────────────
 async function beginExam() {
@@ -268,7 +269,7 @@ function renderQuestion(idx) {
 
   document.getElementById('exam-question-container').innerHTML = `
     <div class="exam-question-card">
-      <div class="exam-q-num">Question ${idx+1} of ${total} — ${q.module || ''}</div>
+      <div class="exam-q-num">Question ${idx+1} of ${total} - ${q.module || ''}</div>
       <div class="exam-q-text">${q.question}</div>
       <div class="exam-options">
         ${q.options.map((opt, i) => `
@@ -346,7 +347,7 @@ function renderResults(result) {
         </h1>
         <p class="results-subtitle">
           ${passed 
-            ? `You passed with a ${result.letter} — ${result.designation}. Your diploma is ready.`
+            ? `You passed with a ${result.letter} - ${result.designation}. Your diploma is ready.`
             : `Exam score: ${result.examScore}%. You need 73% overall to earn your diploma. Retakes available at a discount.`
           }
         </p>

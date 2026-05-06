@@ -82,7 +82,7 @@ exports.handler = async (event) => {
       const votes = record.courseVotes || {};
       const seen = record.voteFingerprints || [];
 
-      // Deduplicate — one vote per IP per course per day
+      // Deduplicate - one vote per IP per course per day
       if (seen.includes(fingerprint)) {
         const currentCount = votes[courseId] || 0;
         return { statusCode: 200, headers, body: JSON.stringify({ ok: true, count: currentCount, alreadyVoted: true }) };
