@@ -1304,6 +1304,40 @@
   .cf-audit-detail { font-size: 0.85rem; color: #1E293B; }
   .cf-audit-time { font-family: 'DM Mono', monospace; font-size: 0.7rem; color: #94A3B8; white-space: nowrap; }
 
+  /* Edit-client modal */
+  .cf-modal-backdrop { position: fixed; inset: 0; background: rgba(10,22,40,0.55); backdrop-filter: blur(3px); z-index: 1000; display: none; align-items: flex-start; justify-content: center; padding: 4vh 1rem 2rem; overflow-y: auto; }
+  .cf-modal-backdrop.open { display: flex; }
+  .cf-modal { background: #FFFFFF; width: 100%; max-width: 640px; border-radius: 16px; overflow: hidden; box-shadow: 0 36px 80px rgba(10,22,40,0.32), 0 0 0 1px rgba(255,255,255,0.06); }
+  .cf-modal-head { background: linear-gradient(135deg,#0A1628 0%,#0F2040 50%,#162A4A 100%); color: #FFFFFF; padding: 1.4rem 1.75rem 1.25rem; display: flex; justify-content: space-between; align-items: flex-start; gap: 1rem; }
+  .cf-modal-head h3 { font-family: 'Bebas Neue', Impact, sans-serif; font-size: 1.55rem; letter-spacing: 0.025em; margin: 0; font-weight: 400; line-height: 1.05; }
+  .cf-modal-head .cf-modal-eyebrow { font-family: 'DM Mono', monospace; font-size: 0.6rem; letter-spacing: 0.22em; text-transform: uppercase; color: #3B82F6; margin-bottom: 0.4rem; font-weight: 700; }
+  .cf-modal-close { background: rgba(255,255,255,0.1); color: #FFFFFF; border: none; width: 32px; height: 32px; border-radius: 8px; cursor: pointer; font-size: 1.1rem; line-height: 1; display: flex; align-items: center; justify-content: center; transition: background 0.15s; }
+  .cf-modal-close:hover { background: rgba(255,255,255,0.22); }
+  .cf-modal-body { padding: 1.5rem 1.75rem; max-height: 70vh; overflow-y: auto; }
+  .cf-modal-body .cf-row { display: grid; grid-template-columns: 1fr 1fr; gap: 0.85rem; margin-bottom: 0.85rem; }
+  @media(max-width:560px) { .cf-modal-body .cf-row { grid-template-columns: 1fr; } }
+  .cf-modal-body .cf-field { display: flex; flex-direction: column; gap: 0.3rem; }
+  .cf-modal-body .cf-field.full { grid-column: 1 / -1; }
+  .cf-modal-body label { font-family: 'DM Mono', monospace; font-size: 0.62rem; letter-spacing: 0.18em; text-transform: uppercase; color: #475569; font-weight: 700; }
+  .cf-modal-body input, .cf-modal-body select, .cf-modal-body textarea { font-family: 'Barlow', sans-serif; font-size: 0.92rem; padding: 0.6rem 0.85rem; border: 1.5px solid #E2E8F0; border-radius: 8px; color: #0A1628; background: #FFFFFF; transition: border-color 0.15s, box-shadow 0.15s; }
+  .cf-modal-body input:focus, .cf-modal-body select:focus, .cf-modal-body textarea:focus { outline: none; border-color: #2563EB; box-shadow: 0 0 0 3px rgba(37,99,235,0.15); }
+  .cf-modal-body textarea { resize: vertical; min-height: 64px; }
+  .cf-cc-list { display: flex; flex-direction: column; gap: 0.5rem; margin-top: 0.3rem; }
+  .cf-cc-row { display: flex; gap: 0.5rem; align-items: center; }
+  .cf-cc-row input { flex: 1 1 auto; }
+  .cf-cc-row button { background: #FEE2E2; color: #991B1B; border: none; width: 34px; height: 34px; border-radius: 8px; cursor: pointer; font-size: 1rem; line-height: 1; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+  .cf-cc-row button:hover { background: #FCA5A5; }
+  .cf-cc-add { background: #EFF6FF; color: #2563EB; border: 1px dashed #2563EB; padding: 0.5rem 0.85rem; border-radius: 8px; font-family: 'Barlow', sans-serif; font-size: 0.78rem; font-weight: 700; letter-spacing: 0.04em; cursor: pointer; align-self: flex-start; }
+  .cf-cc-add:hover { background: #DBEAFE; }
+  .cf-modal-foot { padding: 1rem 1.75rem 1.4rem; display: flex; justify-content: flex-end; gap: 0.6rem; border-top: 1px solid #E2E8F0; background: #F8FAFC; }
+  .cf-edit-icon-btn { background: #FFFFFF; color: #2563EB; border: 1.5px solid #2563EB; padding: 0.45rem 0.85rem; border-radius: 8px; font-family: 'Barlow', sans-serif; font-size: 0.74rem; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase; cursor: pointer; transition: all 0.15s; }
+  .cf-edit-icon-btn:hover { background: #2563EB; color: #FFFFFF; }
+  .cf-edit-result { margin-top: 0.6rem; font-size: 0.82rem; padding: 0.55rem 0.85rem; border-radius: 8px; display: none; }
+  .cf-edit-result.ok { display: block; background: #ECFDF5; color: #065F46; border: 1px solid rgba(16,185,129,0.3); }
+  .cf-edit-result.err { display: block; background: #FEE2E2; color: #991B1B; border: 1px solid rgba(220,38,38,0.3); }
+  .cf-cc-strip { display: inline-flex; flex-wrap: wrap; gap: 0.3rem; margin-top: 0.25rem; }
+  .cf-cc-chip { background: #EFF6FF; color: #2563EB; font-family: 'DM Mono', monospace; font-size: 0.66rem; padding: 0.2rem 0.55rem; border-radius: 999px; letter-spacing: 0.04em; }
+
   /* Loading + error */
   .cf-loading { display: flex; align-items: center; justify-content: center; padding: 3rem; color: #64748B; }
   .cf-loading-ring { width: 32px; height: 32px; border: 3px solid #E2E8F0; border-top-color: #2563EB; border-radius: 50%; animation: spin 0.8s linear infinite; }
@@ -1624,6 +1658,70 @@
           <p>Select a client from the left to open their case file. You'll see every engagement, every document, the audit trail, invoice status, and one-click actions for sending the proposal email or invoice.</p>
         </div>
       </section>
+    </div>
+  </div>
+
+  <!-- ═══ Edit Client Modal ═══ -->
+  <div id="cf-modal-backdrop" class="cf-modal-backdrop" onclick="if(event.target===this)cfCloseEditClient()">
+    <div class="cf-modal" role="dialog" aria-modal="true">
+      <div class="cf-modal-head">
+        <div>
+          <div class="cf-modal-eyebrow">Edit Client Profile</div>
+          <h3 id="cf-modal-title">Client</h3>
+        </div>
+        <button class="cf-modal-close" onclick="cfCloseEditClient()" aria-label="Close">×</button>
+      </div>
+      <form id="cf-edit-form" onsubmit="cfSaveClient(event)">
+        <div class="cf-modal-body">
+          <div class="cf-row">
+            <div class="cf-field full"><label>Legal Name</label><input type="text" name="legal_name" required></div>
+          </div>
+          <div class="cf-row">
+            <div class="cf-field full"><label>D/B/A (optional)</label><input type="text" name="dba"></div>
+          </div>
+          <div class="cf-row">
+            <div class="cf-field"><label>Primary Contact Name</label><input type="text" name="primary_contact_name" required></div>
+            <div class="cf-field"><label>Title</label><input type="text" name="primary_contact_title"></div>
+          </div>
+          <div class="cf-row">
+            <div class="cf-field"><label>Primary Email</label><input type="email" name="primary_contact_email" required></div>
+            <div class="cf-field"><label>Phone</label><input type="text" name="primary_contact_phone"></div>
+          </div>
+          <div class="cf-row">
+            <div class="cf-field full">
+              <label>CC Emails (always copied on every client-facing email)</label>
+              <div id="cf-edit-cc-list" class="cf-cc-list"></div>
+              <button type="button" class="cf-cc-add" onclick="cfAddCcRow()">+ Add CC email</button>
+            </div>
+          </div>
+          <div class="cf-row">
+            <div class="cf-field"><label>Website</label><input type="text" name="website" placeholder="https://..."></div>
+            <div class="cf-field"><label>Status</label><select name="status">
+              <option value="lead">lead</option>
+              <option value="draft">draft</option>
+              <option value="signed">signed</option>
+              <option value="invoiced">invoiced</option>
+              <option value="paid">paid</option>
+              <option value="delivering">delivering</option>
+              <option value="delivered">delivered</option>
+              <option value="closed">closed</option>
+              <option value="archived">archived</option>
+            </select></div>
+          </div>
+          <div class="cf-row">
+            <div class="cf-field"><label>Country</label><input type="text" name="country"></div>
+            <div class="cf-field"><label>Region</label><input type="text" name="region"></div>
+          </div>
+          <div class="cf-row">
+            <div class="cf-field full"><label>Notes (internal)</label><textarea name="notes" rows="3"></textarea></div>
+          </div>
+          <div id="cf-edit-result" class="cf-edit-result"></div>
+        </div>
+        <div class="cf-modal-foot">
+          <button type="button" class="cf-btn outline" onclick="cfCloseEditClient()">Cancel</button>
+          <button type="submit" class="cf-btn primary">Save Changes</button>
+        </div>
+      </form>
     </div>
   </div>
 </div>
@@ -3362,6 +3460,7 @@ async function cfLoadCase(slug) {
       throw new Error(data.error || `HTTP ${res.status}`);
     }
     const { client, audit } = await res.json();
+    window._cfActiveClientObj = client; // cache for the Edit Client modal
     cfRenderCase(client, audit || []);
   } catch (e) {
     detail.innerHTML = `<div class="cf-err fatal">Failed to load case: ${cfEsc(e.message)}</div>`;
@@ -3375,16 +3474,29 @@ function cfRenderCase(client, audit) {
   const lastTest = audit.find(a => a.event === 'proposal_email_test_sent') || null;
   const isLead = !engagements.length || engagements.every(e => e.status === 'lead');
 
+  const ccEmails = Array.isArray(client.cc_emails) ? client.cc_emails : [];
+  const ccChips = ccEmails.length
+    ? `<div class="cf-cc-strip">${ccEmails.map(e => `<span class="cf-cc-chip">${cfEsc(e)}</span>`).join('')}</div>`
+    : '<span style="color:#94A3B8;font-style:italic;">none configured</span>';
+
   let html = `
     <div class="cf-head">
-      <div class="cf-eyebrow">Case File &middot; ${cfEsc(client.slug)}</div>
-      <h2>${cfEsc(client.legal_name)}</h2>
-      ${client.dba ? `<div class="cf-dba">d/b/a ${cfEsc(client.dba)}</div>` : ''}
+      <div style="display:flex;justify-content:space-between;align-items:flex-start;gap:1rem;flex-wrap:wrap;">
+        <div style="flex:1 1 auto;">
+          <div class="cf-eyebrow">Case File &middot; ${cfEsc(client.slug)}</div>
+          <h2>${cfEsc(client.legal_name)}</h2>
+          ${client.dba ? `<div class="cf-dba">d/b/a ${cfEsc(client.dba)}</div>` : ''}
+        </div>
+        <button class="cf-edit-icon-btn" onclick="cfOpenEditClient('${cfEsc(client.id)}')">Edit Client</button>
+      </div>
       <div class="cf-meta-grid">
         <div><div class="l">Primary Contact</div><div class="v">${cfEsc(client.primary_contact_name || '—')}</div></div>
         <div><div class="l">Email</div><div class="v"><a href="mailto:${cfEsc(client.primary_contact_email)}" style="color:#2563EB;">${cfEsc(client.primary_contact_email || '—')}</a></div></div>
         <div><div class="l">Status</div><div class="v">${cfPill(client.status)}</div></div>
         <div><div class="l">Engagement Total</div><div class="v">${cfFmtUSD(totalFee)}</div></div>
+      </div>
+      <div class="cf-meta-grid" style="margin-top:.6rem;">
+        <div style="grid-column:1/-1;"><div class="l">CC On Client Emails</div><div class="v">${ccChips}</div></div>
       </div>
       <div class="cf-actions">
         ${isLead ? `<button class="cf-btn primary" onclick="cfGenerateDocs('${cfEsc(client.slug)}')">Generate Engagement Docs</button>` : `
@@ -3491,8 +3603,11 @@ function cfRenderInvoiceBlock(engagement, invoices) {
         <button class="cf-btn outline" onclick="cfInvoiceAction('cancel',null,null,'${active.id}')">Void</button>` : ''}
       ${active.status === 'sent' ? `
         ${active.square_invoice_url ? `<a class="cf-btn outline" href="${cfEsc(active.square_invoice_url)}" target="_blank" rel="noopener">View Square Invoice</a>` : ''}
+        <button class="cf-btn outline" onclick="cfSyncInvoice('${active.id}')" title="Pull latest status from Square (use if a payment was made but the timeline didn't update)">Sync from Square</button>
         <button class="cf-btn outline" onclick="cfInvoiceAction('cancel',null,null,'${active.id}')">Void</button>` : ''}
-      ${active.status === 'paid' ? `<span style="font-size:.85rem;color:#10B981;font-weight:600;">Paid in full. Delivery clock running.</span>` : ''}
+      ${active.status === 'paid' ? `
+        <span style="font-size:.85rem;color:#10B981;font-weight:600;">Paid in full. Delivery clock running.</span>
+        ${active.square_invoice_url ? `<a class="cf-btn outline" href="${cfEsc(active.square_invoice_url)}" target="_blank" rel="noopener">View Receipt</a>` : ''}` : ''}
     </div>
   </div>`;
 }
@@ -3536,6 +3651,130 @@ async function cfInvoiceAction(action, engagementId, isTest, invoiceId) {
     alert(action === 'create-draft' ? 'Draft invoice created.' : action === 'publish' ? 'Payment request sent. Square is emailing the client now.' : 'Invoice voided.');
     if (_cfActiveSlug) cfLoadCase(_cfActiveSlug);
   } catch (e) { alert('Action failed: ' + e.message); }
+}
+
+// ─── Sync invoice from Square (manual reconcile when webhook didn't fire) ──
+async function cfSyncInvoice(invoiceId) {
+  if (!confirm('Pull the latest status of this invoice from Square and reconcile our records?\n\nIf the client has paid, this will mark the invoice paid, start the delivery clock, write the audit log entry, and trigger the payment-received notification email to mark@markcmo.com.')) return;
+  try {
+    const res = await fetch('/.netlify/functions/square-invoice-sync', {
+      method:'POST', credentials:'include', headers:{'Content-Type':'application/json'},
+      body: JSON.stringify({ invoiceId })
+    });
+    const data = await res.json();
+    if (!res.ok) throw new Error(data.error || `HTTP ${res.status}`);
+    const r = data.results?.[0];
+    if (!r) { alert('Sync ran but returned no result.'); return; }
+    let summary;
+    if (r.error) {
+      summary = `Sync error: ${r.error}`;
+    } else if (r.applied) {
+      summary = `Synced. Status changed to: ${r.status}.\n\nSquare reported: ${r.square_status}\nNotification email: ${r.notification_sent ? 'sent to mark@markcmo.com' : 'not sent (test or skipped)'}`;
+    } else {
+      summary = `No change (already in sync).\n\nSquare status: ${r.square_status}\nLocal status: ${r.before_status}\nReason: ${r.reason || 'unchanged'}`;
+    }
+    alert(summary);
+    if (_cfActiveSlug) cfLoadCase(_cfActiveSlug);
+  } catch (e) { alert('Sync failed: ' + e.message); }
+}
+
+// ─── Edit Client modal ────────────────────────────────────────────────────
+let _cfEditClientId = null;
+
+function cfOpenEditClient(clientId) {
+  _cfEditClientId = clientId;
+  // Find the loaded client data
+  const client = (window._cfClientsCache || []).find(c => c.id === clientId)
+    || (window._cfActiveClientObj && window._cfActiveClientObj.id === clientId ? window._cfActiveClientObj : null);
+  if (!client) {
+    alert('Could not find client data; refresh the page and try again.');
+    return;
+  }
+  // Build the form
+  const f = document.getElementById('cf-edit-form');
+  if (!f) return;
+  f.elements['legal_name'].value = client.legal_name || '';
+  f.elements['dba'].value = client.dba || '';
+  f.elements['primary_contact_name'].value = client.primary_contact_name || '';
+  f.elements['primary_contact_title'].value = client.primary_contact_title || '';
+  f.elements['primary_contact_email'].value = client.primary_contact_email || '';
+  f.elements['primary_contact_phone'].value = client.primary_contact_phone || '';
+  f.elements['website'].value = client.website || '';
+  f.elements['country'].value = client.country || '';
+  f.elements['region'].value = client.region || '';
+  f.elements['status'].value = client.status || 'lead';
+  f.elements['notes'].value = client.notes || '';
+  // Populate cc emails list
+  const ccList = document.getElementById('cf-edit-cc-list');
+  ccList.innerHTML = '';
+  (Array.isArray(client.cc_emails) ? client.cc_emails : []).forEach(e => cfAddCcRow(e));
+  // Modal title
+  document.getElementById('cf-modal-title').textContent = client.legal_name || 'Edit client';
+  document.getElementById('cf-edit-result').className = 'cf-edit-result';
+  document.getElementById('cf-edit-result').textContent = '';
+  document.getElementById('cf-modal-backdrop').classList.add('open');
+}
+
+function cfCloseEditClient() {
+  document.getElementById('cf-modal-backdrop').classList.remove('open');
+  _cfEditClientId = null;
+}
+
+function cfAddCcRow(value) {
+  const ccList = document.getElementById('cf-edit-cc-list');
+  const row = document.createElement('div');
+  row.className = 'cf-cc-row';
+  row.innerHTML = `<input type="email" placeholder="cfo@example.com" value="${cfEsc(value || '')}"><button type="button" title="Remove" onclick="this.parentElement.remove()">×</button>`;
+  ccList.appendChild(row);
+}
+
+async function cfSaveClient(ev) {
+  ev.preventDefault();
+  if (!_cfEditClientId) return;
+  const f = document.getElementById('cf-edit-form');
+  const result = document.getElementById('cf-edit-result');
+  result.className = 'cf-edit-result';
+  result.textContent = '';
+
+  // Collect cc emails
+  const ccInputs = document.querySelectorAll('#cf-edit-cc-list input');
+  const cc_emails = Array.from(ccInputs).map(i => i.value.trim()).filter(v => v);
+
+  const body = {
+    id: _cfEditClientId,
+    legal_name: f.elements['legal_name'].value.trim(),
+    dba: f.elements['dba'].value.trim(),
+    primary_contact_name: f.elements['primary_contact_name'].value.trim(),
+    primary_contact_title: f.elements['primary_contact_title'].value.trim(),
+    primary_contact_email: f.elements['primary_contact_email'].value.trim(),
+    primary_contact_phone: f.elements['primary_contact_phone'].value.trim(),
+    website: f.elements['website'].value.trim(),
+    country: f.elements['country'].value.trim(),
+    region: f.elements['region'].value.trim(),
+    status: f.elements['status'].value,
+    notes: f.elements['notes'].value.trim(),
+    cc_emails,
+  };
+
+  try {
+    const res = await fetch('/.netlify/functions/update-client', {
+      method:'POST', credentials:'include', headers:{'Content-Type':'application/json'},
+      body: JSON.stringify(body)
+    });
+    const data = await res.json();
+    if (!res.ok) throw new Error(data.error || `HTTP ${res.status}`);
+    result.classList.add('ok');
+    const changed = (data.changed || []).filter(k => k !== 'updated_at');
+    result.textContent = changed.length ? `Saved. Updated: ${changed.join(', ')}` : 'No changes detected.';
+    setTimeout(() => {
+      cfCloseEditClient();
+      if (_cfActiveSlug) cfLoadCase(_cfActiveSlug);
+      cfLoadClients();
+    }, 700);
+  } catch (e) {
+    result.classList.add('err');
+    result.textContent = 'Save failed: ' + e.message;
+  }
 }
 
 async function cfGenerateDocs(slug) {

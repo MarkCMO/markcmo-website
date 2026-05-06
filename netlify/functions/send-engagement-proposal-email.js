@@ -285,9 +285,22 @@ exports.handler = async (event) => {
 
     const subject = (testMode ? '[TEST] ' : '') + `${client.legal_name} — ${engagement.name} (Proposal)`.replace(/—/g, '-');
 
-    // CC: defaults to marklgabriellijr@gmail.com so Mark always has a copy.
-    // Pass cc:[] (empty array) explicitly to suppress, or cc:['custom@x'] to override.
-    const ccList = Array.isArray(ccArg) ? ccArg : (ccArg === null ? [] : ['marklgabriellijr@gmail.com']);
+    // CC list logic:
+    //   - If caller passes ccArg explicitly (array or null), honor it.
+    //   - Otherwise, default = Mark's gmail + any cc_emails configured on the client record
+    //     (set via /admin Edit Client -> CC Emails). Filtered to never CC the primary recipient.
+    let ccList;
+    if (Array.isArray(ccArg)) {
+      ccList = ccArg;
+    } else if (ccArg === null) {
+      ccList = [];
+    } else {
+      const customCc = Array.isArray(client?.cc_emails)
+        ? client.cc_emails.filter(e => typeof e === 'string' && e.includes('@'))
+        : [];
+      ccList = Array.from(new Set(['marklgabriellijr@gmail.com', ...customCc]))
+        .filter(e => e !== recipientEmail);
+    }
 
     const resendPayload = {
       from: 'Mark Gabrielli <mark@markcmo.com>',

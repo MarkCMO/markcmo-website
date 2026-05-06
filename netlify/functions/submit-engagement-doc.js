@@ -159,7 +159,7 @@ exports.handler = async (event) => {
   try {
     // ─── 1. Look up document by slug + docId ─────────────────────
     const docs = await sbSelect(
-      `mc_documents?doc_id=eq.${encodeURIComponent(docId)}&select=id,engagement_id,doc_id,doc_type,doc_name,status,storage_bucket,mc_engagements(id,client_id,name,fee_usd,delivery_window_hrs,doc_prefix,mc_clients(id,slug,legal_name,primary_contact_name,primary_contact_email))`
+      `mc_documents?doc_id=eq.${encodeURIComponent(docId)}&select=id,engagement_id,doc_id,doc_type,doc_name,status,storage_bucket,mc_engagements(id,client_id,name,fee_usd,delivery_window_hrs,doc_prefix,mc_clients(id,slug,legal_name,primary_contact_name,primary_contact_email,cc_emails))`
     );
     const doc = docs.find(d => d.mc_engagements?.mc_clients?.slug === clientSlug);
     if (!doc) {
@@ -298,9 +298,16 @@ exports.handler = async (event) => {
 
     const execFilename = (filename || `${docName || docId}.pdf`).replace(/\.pdf$/i, '') + '-signed.pdf';
     const recipientForClientCopy = testMode ? 'mark@markcmo.com' : clientEmail;
-    // Always CC Mark's Gmail on client-facing emails as a record (in test mode the client copy already
-    // goes to mark@markcmo.com so we still CC the Gmail to confirm CC delivery is working too).
-    const clientCC = ['marklgabriellijr@gmail.com'];
+    // Always CC Mark's Gmail + any custom cc_emails configured on the client record
+    // (set via /admin#case-files Edit Client). In test mode the client copy goes to
+    // mark@markcmo.com but we still send the per-client CC list to confirm delivery.
+    const clientCcCustom = Array.isArray(doc.mc_engagements?.mc_clients?.cc_emails)
+      ? doc.mc_engagements.mc_clients.cc_emails.filter(e => typeof e === 'string' && e.includes('@'))
+      : [];
+    const clientCC = Array.from(new Set([
+      'marklgabriellijr@gmail.com',
+      ...clientCcCustom,
+    ])).filter(e => e !== clientEmail); // never CC the primary recipient
 
     const emailPayloads = [
       {

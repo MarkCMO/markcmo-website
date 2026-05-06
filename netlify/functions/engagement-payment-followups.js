@@ -14,7 +14,7 @@
 //   curl -X POST https://markcmo.com/.netlify/functions/engagement-payment-followups \
 //     -H "x-admin-api-token: $TOK"
 // ═══════════════════════════════════════════════════════════════
-const { sbSelect, sbUpdate, sbInsert, isAdminAuthed, corsHeaders } = require('./_lib_supabase');
+const { sbSelect, sbUpdate, sbInsert, isAdminAuthed, corsHeaders, buildClientCcList } = require('./_lib_supabase');
 
 const HOURS = (n) => n * 60 * 60 * 1000;
 
@@ -136,7 +136,7 @@ async function sendReminder(inv, reminderSpec) {
     body: JSON.stringify({
       from: 'Mark Gabrielli <mark@markcmo.com>',
       to: [client.primary_contact_email],
-      cc: ['marklgabriellijr@gmail.com'],
+      cc: buildClientCcList(client),
       reply_to: 'mark@markcmo.com',
       subject: subjects[reminderSpec.tone],
       html,
