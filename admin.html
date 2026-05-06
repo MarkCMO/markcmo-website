@@ -1338,6 +1338,83 @@
   .cf-cc-strip { display: inline-flex; flex-wrap: wrap; gap: 0.3rem; margin-top: 0.25rem; }
   .cf-cc-chip { background: #EFF6FF; color: #2563EB; font-family: 'DM Mono', monospace; font-size: 0.66rem; padding: 0.2rem 0.55rem; border-radius: 999px; letter-spacing: 0.04em; }
 
+  /* ═══════════════════════════════════════════════════════════════
+     mc- prefix: shared CRM/engagement panel styles (contacts, clients,
+     pipeline, projects, proposals, contracts, invoices). Light theme,
+     matches markcmo.com brand. Cards + tables + kanban.
+     ═══════════════════════════════════════════════════════════════ */
+  .mc-panel { padding: 1.5rem 2rem 4rem; }
+  .mc-panel-head { display: flex; justify-content: space-between; align-items: flex-start; gap: 1rem; flex-wrap: wrap; margin-bottom: 1.25rem; padding-bottom: 1rem; border-bottom: 1px solid #E2E8F0; }
+  .mc-panel-head .mc-eyebrow { font-family: 'DM Mono', monospace; font-size: 0.65rem; letter-spacing: 0.22em; text-transform: uppercase; color: #2563EB; font-weight: 700; margin-bottom: 0.3rem; }
+  .mc-panel-head h2 { font-family: 'Bebas Neue', Impact, sans-serif; font-size: 1.85rem; letter-spacing: 0.02em; color: #0A1628; margin: 0; line-height: 1; font-weight: 400; }
+  .mc-panel-head .mc-sub { font-size: 0.86rem; color: #64748B; margin-top: 0.4rem; }
+  .mc-panel-actions { display: flex; gap: 0.5rem; align-items: center; flex-wrap: wrap; }
+  .mc-btn { display: inline-flex; align-items: center; gap: 0.4rem; padding: 0.55rem 1rem; border-radius: 8px; font-family: 'Barlow', sans-serif; font-size: 0.78rem; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase; cursor: pointer; border: 1.5px solid #E2E8F0; background: #FFFFFF; color: #1E293B; transition: all 0.15s; text-decoration: none; }
+  .mc-btn:hover { border-color: #2563EB; color: #2563EB; background: #EFF6FF; }
+  .mc-btn.primary { background: #F97316; color: #FFFFFF; border-color: #F97316; box-shadow: 0 2px 8px rgba(249,115,22,0.3); }
+  .mc-btn.primary:hover { background: #EA6C0A; border-color: #EA6C0A; color: #FFFFFF; }
+  .mc-search { padding: 0.55rem 0.95rem; border: 1.5px solid #E2E8F0; border-radius: 8px; font-family: 'Barlow', sans-serif; font-size: 0.86rem; color: #0A1628; min-width: 240px; transition: border-color 0.15s, box-shadow 0.15s; }
+  .mc-search:focus { outline: none; border-color: #2563EB; box-shadow: 0 0 0 3px rgba(37,99,235,0.15); }
+
+  /* Stat tiles row */
+  .mc-stats { display: grid; grid-template-columns: repeat(auto-fit,minmax(170px,1fr)); gap: 0.85rem; margin-bottom: 1.5rem; }
+  .mc-stat { background: #FFFFFF; border: 1px solid #E2E8F0; border-radius: 12px; padding: 1rem 1.2rem; box-shadow: 0 1px 3px rgba(10,22,40,0.04); }
+  .mc-stat .l { font-family: 'DM Mono', monospace; font-size: 0.6rem; letter-spacing: 0.18em; text-transform: uppercase; color: #94A3B8; font-weight: 700; margin-bottom: 0.25rem; }
+  .mc-stat .v { font-family: 'Bebas Neue', Impact, sans-serif; font-size: 1.85rem; color: #0A1628; line-height: 1; letter-spacing: 0.02em; }
+  .mc-stat .v.green { color: #10B981; }
+  .mc-stat .v.orange { color: #F97316; }
+  .mc-stat .v.red { color: #DC2626; }
+  .mc-stat .s { font-size: 0.72rem; color: #64748B; margin-top: 0.3rem; }
+
+  /* Tables */
+  .mc-table-wrap { background: #FFFFFF; border: 1px solid #E2E8F0; border-radius: 14px; overflow: hidden; box-shadow: 0 4px 16px rgba(10,22,40,0.04); margin-bottom: 1.25rem; }
+  .mc-table { width: 100%; border-collapse: collapse; }
+  .mc-table thead { background: #F8FAFC; }
+  .mc-table th { font-family: 'DM Mono', monospace; font-size: 0.62rem; letter-spacing: 0.18em; text-transform: uppercase; color: #475569; font-weight: 700; padding: 0.85rem 1rem; text-align: left; border-bottom: 1px solid #E2E8F0; white-space: nowrap; }
+  .mc-table td { padding: 0.85rem 1rem; font-size: 0.86rem; color: #1E293B; border-bottom: 1px solid #F1F5F9; vertical-align: middle; }
+  .mc-table tr:last-child td { border-bottom: none; }
+  .mc-table tbody tr { cursor: pointer; transition: background 0.12s; }
+  .mc-table tbody tr:hover { background: #F8FAFC; }
+  .mc-table tbody tr.row-overdue { background: #FEF2F2; }
+  .mc-table tbody tr.row-overdue:hover { background: #FEE2E2; }
+  .mc-table .name-cell { font-weight: 700; color: #0A1628; }
+  .mc-table .meta-cell { font-size: 0.74rem; color: #64748B; margin-top: 0.15rem; }
+  .mc-table .id-cell { font-family: 'DM Mono', monospace; font-size: 0.74rem; color: #475569; letter-spacing: 0.04em; }
+  .mc-table .amt-cell { font-family: 'Bebas Neue', Impact, sans-serif; font-size: 1.05rem; color: #0A1628; letter-spacing: 0.02em; }
+  .mc-table .test-tag { font-family: 'DM Mono', monospace; font-size: 0.6rem; letter-spacing: 0.12em; padding: 0.1rem 0.4rem; border-radius: 4px; background: #FED7AA; color: #9A3412; margin-left: 0.4rem; vertical-align: middle; }
+
+  /* Status pills (shared) */
+  .mc-pill { display: inline-block; padding: 0.18rem 0.65rem; border-radius: 999px; font-family: 'DM Mono', monospace; font-size: 0.62rem; letter-spacing: 0.08em; text-transform: lowercase; font-weight: 700; white-space: nowrap; }
+  .mc-pill-grey { background: #F1F5F9; color: #475569; }
+  .mc-pill-blue { background: #DBEAFE; color: #1D4ED8; }
+  .mc-pill-orange { background: #FED7AA; color: #9A3412; }
+  .mc-pill-green { background: #D1FAE5; color: #065F46; }
+  .mc-pill-red { background: #FEE2E2; color: #991B1B; }
+  .mc-pill-violet { background: #EDE9FE; color: #5B21B6; }
+
+  /* Empty state */
+  .mc-empty { padding: 3rem 1.5rem; text-align: center; color: #64748B; background: #F8FAFC; border-radius: 12px; border: 1px dashed #CBD5E1; }
+  .mc-empty .ico { font-size: 2.4rem; margin-bottom: 0.6rem; opacity: 0.6; }
+  .mc-empty h3 { color: #0A1628; font-family: 'Bebas Neue', Impact, sans-serif; font-size: 1.4rem; margin: 0 0 0.4rem; letter-spacing: 0.02em; font-weight: 400; }
+  .mc-empty p { font-size: 0.86rem; margin: 0; color: #64748B; }
+
+  /* Loading */
+  .mc-loading { display: flex; align-items: center; justify-content: center; padding: 3rem; color: #64748B; gap: 0.75rem; }
+  .mc-loading::before { content: ''; display: block; width: 28px; height: 28px; border: 3px solid #E2E8F0; border-top-color: #2563EB; border-radius: 50%; animation: spin 0.8s linear infinite; }
+
+  /* Pipeline kanban */
+  .mc-kanban { display: grid; grid-template-columns: repeat(auto-fit,minmax(220px,1fr)); gap: 0.85rem; align-items: flex-start; }
+  .mc-kanban-col { background: #F8FAFC; border-radius: 12px; padding: 0.75rem; min-height: 120px; border: 1px solid #E2E8F0; }
+  .mc-kanban-col h4 { font-family: 'DM Mono', monospace; font-size: 0.62rem; letter-spacing: 0.18em; text-transform: uppercase; color: #475569; font-weight: 700; margin: 0 0 0.85rem; padding: 0 0.4rem; display: flex; justify-content: space-between; align-items: center; }
+  .mc-kanban-col h4 .count { background: #FFFFFF; border: 1px solid #E2E8F0; border-radius: 999px; padding: 0.1rem 0.5rem; font-size: 0.6rem; color: #1E293B; }
+  .mc-kanban-card { background: #FFFFFF; border-radius: 10px; padding: 0.85rem 1rem; margin-bottom: 0.6rem; cursor: pointer; box-shadow: 0 1px 3px rgba(10,22,40,0.05); border: 1px solid #E2E8F0; transition: all 0.15s; }
+  .mc-kanban-card:hover { transform: translateY(-2px); box-shadow: 0 8px 18px rgba(10,22,40,0.1); border-color: #2563EB; }
+  .mc-kanban-card .name { font-weight: 700; color: #0A1628; font-size: 0.86rem; line-height: 1.2; margin-bottom: 0.2rem; }
+  .mc-kanban-card .sub { font-size: 0.72rem; color: #64748B; margin-bottom: 0.35rem; line-height: 1.2; }
+  .mc-kanban-card .row { display: flex; justify-content: space-between; align-items: center; gap: 0.4rem; }
+  .mc-kanban-card .fee { font-family: 'Bebas Neue', Impact, sans-serif; font-size: 1rem; color: #2563EB; letter-spacing: 0.02em; }
+  .mc-kanban-card .age { font-family: 'DM Mono', monospace; font-size: 0.6rem; color: #94A3B8; }
+
   /* Loading + error */
   .cf-loading { display: flex; align-items: center; justify-content: center; padding: 3rem; color: #64748B; }
   .cf-loading-ring { width: 32px; height: 32px; border: 3px solid #E2E8F0; border-top-color: #2563EB; border-radius: 50%; animation: spin 0.8s linear infinite; }
@@ -1416,7 +1493,7 @@
   <div class="admin-nav-section">CRM</div>
   <a class="admin-nav-item" onclick="switchPanel('leads', this)"><span class="admin-nav-ico">👥</span><span>All Leads</span><span class="admin-nav-badge" id="lead-badge"></span></a>
   <a class="admin-nav-item" onclick="switchPanel('crm-contacts', this)"><span class="admin-nav-ico">📋</span><span>Contacts</span></a>
-  <a class="admin-nav-item" onclick="switchPanel('case-files', this)"><span class="admin-nav-ico">⭐</span><span>Active Clients</span></a>
+  <a class="admin-nav-item" onclick="switchPanel('crm-clients', this)"><span class="admin-nav-ico">⭐</span><span>Active Clients</span></a>
   <a class="admin-nav-item" onclick="switchPanel('crm-pipeline', this)"><span class="admin-nav-ico">🔄</span><span>Pipeline</span></a>
   <a class="admin-nav-item" onclick="switchPanel('crm-notes', this)"><span class="admin-nav-ico">📝</span><span>Notes &amp; Activity</span></a>
 
@@ -1616,17 +1693,21 @@
 </div>
 </div>
 <div id="panel-crm-contacts" class="panel">
-<div class="panel-header"><h1 class="panel-title">📋 All Contacts</h1></div>
-<div class="coming-soon">
-<div class="cs-icon">📋</div>
-<h2>ALL CONTACTS</h2>
-<p>Full contact database — every lead, prospect, and connection across all channels.</p>
-<div class="cs-badge">Coming Next Build</div>
-<div style="margin-top:20px;text-align:left;max-width:360px;width:100%;">
-<div style="font-size:10px;letter-spacing:2px;text-transform:uppercase;color:var(--dim);margin-bottom:8px;">ROADMAP</div>
-<div style="font-size:12px;color:var(--dim);padding:4px 0;border-bottom:1px solid var(--border);">→ Import contacts from CSV</div><div style="font-size:12px;color:var(--dim);padding:4px 0;border-bottom:1px solid var(--border);">→ Auto-capture from webinar registrations</div><div style="font-size:12px;color:var(--dim);padding:4px 0;border-bottom:1px solid var(--border);">→ Tag and segment by service interest</div><div style="font-size:12px;color:var(--dim);padding:4px 0;border-bottom:1px solid var(--border);">→ Search by name, company, email</div><div style="font-size:12px;color:var(--dim);padding:4px 0;border-bottom:1px solid var(--border);">→ View full activity timeline per contact</div>
-</div>
-</div>
+  <div class="mc-panel">
+    <div class="mc-panel-head">
+      <div>
+        <div class="mc-eyebrow">CRM &middot; Contacts</div>
+        <h2>All Contacts</h2>
+        <div class="mc-sub">Every client and prospect in the database. Click a row to open their case file.</div>
+      </div>
+      <div class="mc-panel-actions">
+        <input type="text" class="mc-search" id="mc-contacts-search" placeholder="Search name, email, company, country...">
+        <button class="mc-btn" onclick="mcLoadContacts()">↻ Refresh</button>
+      </div>
+    </div>
+    <div id="mc-contacts-stats" class="mc-stats"></div>
+    <div id="mc-contacts-body"><div class="mc-loading">Loading contacts</div></div>
+  </div>
 </div>
 
 <!-- ════════════════════════════════════════════════════════════════
@@ -1728,30 +1809,37 @@
 </div>
 
 <div id="panel-crm-clients" class="panel">
-<div class="panel-header"><h1 class="panel-title">⭐ Active Clients</h1></div>
-<div class="coming-soon">
-<div class="cs-icon">⭐</div>
-<h2>ACTIVE CLIENTS</h2>
-<p>Track all current paying engagements, retainer status, and deliverables.</p>
-<div class="cs-badge">Coming Next Build</div>
-<div style="margin-top:20px;text-align:left;max-width:360px;width:100%;">
-<div style="font-size:10px;letter-spacing:2px;text-transform:uppercase;color:var(--dim);margin-bottom:8px;">ROADMAP</div>
-<div style="font-size:12px;color:var(--dim);padding:4px 0;border-bottom:1px solid var(--border);">→ Engagement type (CMO/COO/Advisory)</div><div style="font-size:12px;color:var(--dim);padding:4px 0;border-bottom:1px solid var(--border);">→ Monthly retainer amount and status</div><div style="font-size:12px;color:var(--dim);padding:4px 0;border-bottom:1px solid var(--border);">→ Start/end dates and renewal alerts</div><div style="font-size:12px;color:var(--dim);padding:4px 0;border-bottom:1px solid var(--border);">→ Key contacts and stakeholders</div><div style="font-size:12px;color:var(--dim);padding:4px 0;border-bottom:1px solid var(--border);">→ Linked documents and SOWs</div>
-</div>
-</div>
+  <div class="mc-panel">
+    <div class="mc-panel-head">
+      <div>
+        <div class="mc-eyebrow">CRM &middot; Active</div>
+        <h2>Active Clients</h2>
+        <div class="mc-sub">Clients with at least one engagement past the lead stage. Paid + outstanding revenue, delivery clocks.</div>
+      </div>
+      <div class="mc-panel-actions">
+        <input type="text" class="mc-search" id="mc-active-search" placeholder="Search...">
+        <button class="mc-btn" onclick="mcLoadActiveClients()">↻ Refresh</button>
+      </div>
+    </div>
+    <div id="mc-active-stats" class="mc-stats"></div>
+    <div id="mc-active-body"><div class="mc-loading">Loading active clients</div></div>
+  </div>
 </div>
 <div id="panel-crm-pipeline" class="panel">
-<div class="panel-header"><h1 class="panel-title">🔄 Sales Pipeline</h1></div>
-<div class="coming-soon">
-<div class="cs-icon">🔄</div>
-<h2>SALES PIPELINE</h2>
-<p>Kanban-style pipeline to track every prospect from first touch to signed contract.</p>
-<div class="cs-badge">Coming Next Build</div>
-<div style="margin-top:20px;text-align:left;max-width:360px;width:100%;">
-<div style="font-size:10px;letter-spacing:2px;text-transform:uppercase;color:var(--dim);margin-bottom:8px;">ROADMAP</div>
-<div style="font-size:12px;color:var(--dim);padding:4px 0;border-bottom:1px solid var(--border);">→ Stages: Lead → Qualified → Proposal → Negotiation → Closed</div><div style="font-size:12px;color:var(--dim);padding:4px 0;border-bottom:1px solid var(--border);">→ Deal value and probability</div><div style="font-size:12px;color:var(--dim);padding:4px 0;border-bottom:1px solid var(--border);">→ Next action and follow-up reminders</div><div style="font-size:12px;color:var(--dim);padding:4px 0;border-bottom:1px solid var(--border);">→ Source attribution (webinar, referral, direct)</div><div style="font-size:12px;color:var(--dim);padding:4px 0;border-bottom:1px solid var(--border);">→ Win/loss tracking</div>
-</div>
-</div>
+  <div class="mc-panel">
+    <div class="mc-panel-head">
+      <div>
+        <div class="mc-eyebrow">CRM &middot; Pipeline</div>
+        <h2>Sales Pipeline</h2>
+        <div class="mc-sub">Every engagement, grouped by status. Lead &rarr; Proposal &rarr; Signed &rarr; Invoiced &rarr; Paid &rarr; Delivered.</div>
+      </div>
+      <div class="mc-panel-actions">
+        <button class="mc-btn" onclick="mcLoadPipeline()">↻ Refresh</button>
+      </div>
+    </div>
+    <div id="mc-pipeline-stats" class="mc-stats"></div>
+    <div id="mc-pipeline-body"><div class="mc-loading">Loading pipeline</div></div>
+  </div>
 </div>
 <div id="panel-crm-notes" class="panel">
 <div class="panel-header"><h1 class="panel-title">📝 Notes & Activity</h1></div>
@@ -1767,56 +1855,71 @@
 </div>
 </div>
 <div id="panel-eng-projects" class="panel">
-<div class="panel-header"><h1 class="panel-title">🚀 Active Projects</h1></div>
-<div class="coming-soon">
-<div class="cs-icon">🚀</div>
-<h2>ACTIVE PROJECTS</h2>
-<p>Track all live engagements — deliverables, milestones, and status.</p>
-<div class="cs-badge">Coming Next Build</div>
-<div style="margin-top:20px;text-align:left;max-width:360px;width:100%;">
-<div style="font-size:10px;letter-spacing:2px;text-transform:uppercase;color:var(--dim);margin-bottom:8px;">ROADMAP</div>
-<div style="font-size:12px;color:var(--dim);padding:4px 0;border-bottom:1px solid var(--border);">→ Project name, client, type, status</div><div style="font-size:12px;color:var(--dim);padding:4px 0;border-bottom:1px solid var(--border);">→ Sprint/milestone tracker</div><div style="font-size:12px;color:var(--dim);padding:4px 0;border-bottom:1px solid var(--border);">→ Deliverable checklist</div><div style="font-size:12px;color:var(--dim);padding:4px 0;border-bottom:1px solid var(--border);">→ Time tracking (optional)</div><div style="font-size:12px;color:var(--dim);padding:4px 0;border-bottom:1px solid var(--border);">→ Client-facing status dashboard link</div>
-</div>
-</div>
+  <div class="mc-panel">
+    <div class="mc-panel-head">
+      <div>
+        <div class="mc-eyebrow">Engagements &middot; Active</div>
+        <h2>Active Projects</h2>
+        <div class="mc-sub">Paid + delivering engagements with live delivery clocks. Overdue rows are highlighted red.</div>
+      </div>
+      <div class="mc-panel-actions">
+        <button class="mc-btn" onclick="mcLoadProjects()">↻ Refresh</button>
+      </div>
+    </div>
+    <div id="mc-projects-stats" class="mc-stats"></div>
+    <div id="mc-projects-body"><div class="mc-loading">Loading projects</div></div>
+  </div>
 </div>
 <div id="panel-eng-proposals" class="panel">
-<div class="panel-header"><h1 class="panel-title">📄 Proposals</h1></div>
-<div class="coming-soon">
-<div class="cs-icon">📄</div>
-<h2>PROPOSALS</h2>
-<p>Create, send, and track consulting proposals with e-signature.</p>
-<div class="cs-badge">Coming Next Build</div>
-<div style="margin-top:20px;text-align:left;max-width:360px;width:100%;">
-<div style="font-size:10px;letter-spacing:2px;text-transform:uppercase;color:var(--dim);margin-bottom:8px;">ROADMAP</div>
-<div style="font-size:12px;color:var(--dim);padding:4px 0;border-bottom:1px solid var(--border);">→ Proposal builder with your templates</div><div style="font-size:12px;color:var(--dim);padding:4px 0;border-bottom:1px solid var(--border);">→ Service scope + pricing blocks</div><div style="font-size:12px;color:var(--dim);padding:4px 0;border-bottom:1px solid var(--border);">→ Send via secure link or email</div><div style="font-size:12px;color:var(--dim);padding:4px 0;border-bottom:1px solid var(--border);">→ Track open/viewed/signed status</div><div style="font-size:12px;color:var(--dim);padding:4px 0;border-bottom:1px solid var(--border);">→ Convert to SOW on approval</div>
-</div>
-</div>
+  <div class="mc-panel">
+    <div class="mc-panel-head">
+      <div>
+        <div class="mc-eyebrow">Engagements &middot; Proposals</div>
+        <h2>Proposals</h2>
+        <div class="mc-sub">All proposal documents (mc_documents.doc_type='proposal') across every client. Status, signatures, links to PDF.</div>
+      </div>
+      <div class="mc-panel-actions">
+        <input type="text" class="mc-search" id="mc-proposals-search" placeholder="Search...">
+        <button class="mc-btn" onclick="mcLoadProposals()">↻ Refresh</button>
+      </div>
+    </div>
+    <div id="mc-proposals-stats" class="mc-stats"></div>
+    <div id="mc-proposals-body"><div class="mc-loading">Loading proposals</div></div>
+  </div>
 </div>
 <div id="panel-eng-contracts" class="panel">
-<div class="panel-header"><h1 class="panel-title">✍️ Contracts</h1></div>
-<div class="coming-soon">
-<div class="cs-icon">✍️</div>
-<h2>CONTRACTS</h2>
-<p>Manage all signed contracts — NDAs, MSAs, SOWs, and engagement letters.</p>
-<div class="cs-badge">Coming Next Build</div>
-<div style="margin-top:20px;text-align:left;max-width:360px;width:100%;">
-<div style="font-size:10px;letter-spacing:2px;text-transform:uppercase;color:var(--dim);margin-bottom:8px;">ROADMAP</div>
-<div style="font-size:12px;color:var(--dim);padding:4px 0;border-bottom:1px solid var(--border);">→ Upload executed contracts</div><div style="font-size:12px;color:var(--dim);padding:4px 0;border-bottom:1px solid var(--border);">→ Link to client and engagement</div><div style="font-size:12px;color:var(--dim);padding:4px 0;border-bottom:1px solid var(--border);">→ Expiry and renewal alerts</div><div style="font-size:12px;color:var(--dim);padding:4px 0;border-bottom:1px solid var(--border);">→ Filter by type, client, status</div><div style="font-size:12px;color:var(--dim);padding:4px 0;border-bottom:1px solid var(--border);">→ Generate from form templates</div>
-</div>
-</div>
+  <div class="mc-panel">
+    <div class="mc-panel-head">
+      <div>
+        <div class="mc-eyebrow">Engagements &middot; Contracts</div>
+        <h2>Contracts</h2>
+        <div class="mc-sub">SOWs, NDAs, MSAs, engagement letters, timelines. Every signed (or pending) contract document.</div>
+      </div>
+      <div class="mc-panel-actions">
+        <input type="text" class="mc-search" id="mc-contracts-search" placeholder="Search...">
+        <button class="mc-btn" onclick="mcLoadContracts()">↻ Refresh</button>
+      </div>
+    </div>
+    <div id="mc-contracts-stats" class="mc-stats"></div>
+    <div id="mc-contracts-body"><div class="mc-loading">Loading contracts</div></div>
+  </div>
 </div>
 <div id="panel-eng-invoices" class="panel">
-<div class="panel-header"><h1 class="panel-title">🧾 Invoices</h1></div>
-<div class="coming-soon">
-<div class="cs-icon">🧾</div>
-<h2>INVOICES</h2>
-<p>Create and track invoices tied to active engagements.</p>
-<div class="cs-badge">Coming Next Build</div>
-<div style="margin-top:20px;text-align:left;max-width:360px;width:100%;">
-<div style="font-size:10px;letter-spacing:2px;text-transform:uppercase;color:var(--dim);margin-bottom:8px;">ROADMAP</div>
-<div style="font-size:12px;color:var(--dim);padding:4px 0;border-bottom:1px solid var(--border);">→ Invoice builder with your branding</div><div style="font-size:12px;color:var(--dim);padding:4px 0;border-bottom:1px solid var(--border);">→ Send via email with pay link</div><div style="font-size:12px;color:var(--dim);padding:4px 0;border-bottom:1px solid var(--border);">→ Track paid/outstanding/overdue</div><div style="font-size:12px;color:var(--dim);padding:4px 0;border-bottom:1px solid var(--border);">→ Connect to Square transactions</div><div style="font-size:12px;color:var(--dim);padding:4px 0;border-bottom:1px solid var(--border);">→ Monthly retainer auto-invoicing</div>
-</div>
-</div>
+  <div class="mc-panel">
+    <div class="mc-panel-head">
+      <div>
+        <div class="mc-eyebrow">Engagements &middot; Invoices</div>
+        <h2>Invoices</h2>
+        <div class="mc-sub">Every Square invoice tied to a client engagement. Drafted, sent, paid, voided. Click row to open the case file.</div>
+      </div>
+      <div class="mc-panel-actions">
+        <input type="text" class="mc-search" id="mc-invoices-search" placeholder="Search...">
+        <button class="mc-btn" onclick="mcLoadInvoices()">↻ Refresh</button>
+      </div>
+    </div>
+    <div id="mc-invoices-stats" class="mc-stats"></div>
+    <div id="mc-invoices-body"><div class="mc-loading">Loading invoices</div></div>
+  </div>
 </div>
 <div id="panel-forms-hub" class="panel">
 <div class="panel-header">
@@ -3351,10 +3454,17 @@ function switchPanel(id, el) {
   else if (id === 'courses-votes')  loadVotesData();
   else if (id === 'courses-notify') loadNotifyData();
   else if (id === 'courses-intl')   loadIntlData();
-  else if (id === 'case-files' || id === 'crm-clients') {
-    // Both nav items open the embedded Case Files / VDR panel
+  else if (id === 'case-files') {
     if (typeof loadCaseFilesPanel === 'function') loadCaseFilesPanel();
   }
+  // mc- panels (engagement / CRM data)
+  else if (id === 'crm-contacts')   { if (typeof mcLoadContacts === 'function')       mcLoadContacts(); }
+  else if (id === 'crm-clients')    { if (typeof mcLoadActiveClients === 'function')  mcLoadActiveClients(); }
+  else if (id === 'crm-pipeline')   { if (typeof mcLoadPipeline === 'function')       mcLoadPipeline(); }
+  else if (id === 'eng-projects')   { if (typeof mcLoadProjects === 'function')       mcLoadProjects(); }
+  else if (id === 'eng-proposals')  { if (typeof mcLoadProposals === 'function')      mcLoadProposals(); }
+  else if (id === 'eng-contracts')  { if (typeof mcLoadContracts === 'function')      mcLoadContracts(); }
+  else if (id === 'eng-invoices')   { if (typeof mcLoadInvoices === 'function')       mcLoadInvoices(); }
 }
 
 // Open a panel from a URL hash on page load (e.g. /admin#case-files)
@@ -3819,6 +3929,372 @@ function cfShowAuthRequired() {
   if (list) list.innerHTML = '';
   document.getElementById('cf-client-count').textContent = 'Not signed in';
 }
+
+// ════════════════════════════════════════════════════════════════
+// MC- PANELS: Contacts, Active Clients, Pipeline, Projects,
+// Proposals, Contracts, Invoices. Single API call per panel.
+// All data from /admin-engagement-data?type=...
+// Click any row to deep-link into Case Files for that client.
+// ════════════════════════════════════════════════════════════════
+const MC_API = '/.netlify/functions/admin-engagement-data';
+const _mcCache = {};   // cached per-panel response, keyed by type
+const _mcSearch = {};  // search filter per panel
+
+function mcEsc(s) { return String(s ?? '').replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c])); }
+function mcFmtUSD(n) { const v = Number(n); if (!isFinite(v) || v === 0) return '$0'; return '$' + v.toLocaleString('en-US', { minimumFractionDigits: 0, maximumFractionDigits: 2 }); }
+function mcFmtDate(s) { if (!s) return '—'; try { const d = new Date(s); return d.toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' }); } catch { return '—'; } }
+function mcFmtDateTime(s) { if (!s) return '—'; try { const d = new Date(s); return d.toLocaleString('en-US', { month: 'short', day: 'numeric', hour: 'numeric', minute: '2-digit' }); } catch { return '—'; } }
+function mcFmtRelHrs(hrs) { if (hrs === null || hrs === undefined) return '—'; if (hrs < 0) return Math.round(-hrs) + 'h overdue'; if (hrs < 24) return hrs + 'h left'; return Math.round(hrs / 24) + 'd left'; }
+
+function mcPill(status) {
+  const s = String(status || '').toLowerCase();
+  let kind = 'grey';
+  if (['paid','delivered','executed','complete','closed','signed'].some(k => s.includes(k))) kind = 'green';
+  else if (['lead','draft','pending','new','calendly'].some(k => s.includes(k))) kind = 'grey';
+  else if (['proposal','sent','invoiced','negotiation','review'].some(k => s.includes(k))) kind = 'blue';
+  else if (['delivering','active','in_progress','in-progress'].some(k => s.includes(k))) kind = 'violet';
+  else if (['overdue','escalated','urgent','reminder','final'].some(k => s.includes(k))) kind = 'red';
+  else if (['void','cancelled','canceled','refunded','archived'].some(k => s.includes(k))) kind = 'orange';
+  return `<span class="mc-pill mc-pill-${kind}">${mcEsc(s || '—')}</span>`;
+}
+
+// Fetch + cache + render. Calls renderFn(data) on success.
+async function mcFetch(type, renderFn, force) {
+  const bodyEl = document.getElementById(`mc-${type}-body`);
+  const statsEl = document.getElementById(`mc-${type}-stats`);
+  if (!bodyEl) return;
+  if (!force && _mcCache[type]) { renderFn(_mcCache[type]); return; }
+  bodyEl.innerHTML = `<div class="mc-loading">Loading ${type}</div>`;
+  if (statsEl) statsEl.innerHTML = '';
+  try {
+    const res = await fetch(`${MC_API}?type=${type}`, { credentials: 'include' });
+    if (res.status === 401) { mcShowAuthRequired(bodyEl); return; }
+    if (!res.ok) { const d = await res.json().catch(() => ({})); throw new Error(d.error || `HTTP ${res.status}`); }
+    const data = await res.json();
+    _mcCache[type] = data;
+    renderFn(data);
+  } catch (e) {
+    bodyEl.innerHTML = `<div class="mc-empty"><div class="ico">⚠</div><h3>Failed to load</h3><p>${mcEsc(e.message)}</p></div>`;
+  }
+}
+
+function mcShowAuthRequired(bodyEl) {
+  bodyEl.innerHTML = `<div class="mc-empty"><div class="ico">🔒</div><h3>Sign in required</h3><p>This panel needs an admin session. Use the admin login above and the data will load automatically.</p></div>`;
+}
+
+// Open a client's case file (deep-link from any row).
+function mcGoToCase(slug) {
+  if (!slug) return;
+  // Use the existing case-files plumbing
+  if (typeof switchPanel === 'function') {
+    const navItem = Array.from(document.querySelectorAll('.admin-nav-cta, .admin-nav-item'))
+      .find(el => (el.getAttribute('onclick') || '').includes("'case-files'"));
+    if (navItem) navItem.click();
+    setTimeout(() => { if (typeof cfLoadCase === 'function') cfLoadCase(slug); }, 80);
+  }
+}
+
+function mcStatTile(label, value, sub, color) {
+  return `<div class="mc-stat"><div class="l">${mcEsc(label)}</div><div class="v ${color || ''}">${mcEsc(value)}</div>${sub ? `<div class="s">${mcEsc(sub)}</div>` : ''}</div>`;
+}
+
+// ─── Contacts ────────────────────────────────────────────────────
+function mcLoadContacts(force) { mcFetch('contacts', mcRenderContacts, force); }
+function mcRenderContacts(data) {
+  const all = data.contacts || [];
+  const q = (_mcSearch.contacts || '').toLowerCase();
+  const list = q ? all.filter(c =>
+    (c.legal_name||'').toLowerCase().includes(q) ||
+    (c.dba||'').toLowerCase().includes(q) ||
+    (c.primary_contact_name||'').toLowerCase().includes(q) ||
+    (c.primary_contact_email||'').toLowerCase().includes(q) ||
+    (c.country||'').toLowerCase().includes(q) ||
+    (c.region||'').toLowerCase().includes(q)
+  ) : all;
+
+  document.getElementById('mc-contacts-stats').innerHTML = [
+    mcStatTile('Total', all.length, q ? `${list.length} match` : null),
+    mcStatTile('From Calendly', all.filter(c => c.source === 'calendly').length, ''),
+    mcStatTile('With Engagement', all.filter(c => c.engagements_count > 0).length, ''),
+    mcStatTile('Total Pipeline', mcFmtUSD(all.reduce((s,c) => s + Number(c.engagement_total_usd||0), 0)), '', 'green'),
+  ].join('');
+
+  if (!list.length) {
+    document.getElementById('mc-contacts-body').innerHTML = `<div class="mc-empty"><div class="ico">📭</div><h3>No contacts found</h3><p>${q ? 'Try a different search.' : 'Contacts auto-create from Calendly bookings or via /admin Edit Client.'}</p></div>`;
+    return;
+  }
+
+  const rows = list.map(c => {
+    const ccChips = (c.cc_emails || []).slice(0, 2).map(e => `<span style="font-family:'DM Mono',monospace;font-size:.62rem;background:#EFF6FF;color:#2563EB;padding:.1rem .4rem;border-radius:4px;margin-right:.2rem;">${mcEsc(e)}</span>`).join('');
+    return `<tr onclick="mcGoToCase('${mcEsc(c.slug)}')">
+      <td><div class="name-cell">${mcEsc(c.legal_name)}</div>${c.dba ? `<div class="meta-cell">d/b/a ${mcEsc(c.dba)}</div>` : ''}</td>
+      <td>${mcEsc(c.primary_contact_name || '—')}${c.primary_contact_title ? `<div class="meta-cell">${mcEsc(c.primary_contact_title)}</div>` : ''}</td>
+      <td><a href="mailto:${mcEsc(c.primary_contact_email)}" style="color:#2563EB;text-decoration:none;" onclick="event.stopPropagation()">${mcEsc(c.primary_contact_email || '—')}</a>${ccChips ? `<div class="meta-cell" style="margin-top:.2rem;">${ccChips}</div>` : ''}</td>
+      <td>${mcEsc([c.region, c.country].filter(Boolean).join(', ') || '—')}</td>
+      <td>${mcPill(c.source)}</td>
+      <td>${mcPill(c.latest_engagement_status || c.status)}</td>
+      <td class="amt-cell">${mcFmtUSD(c.engagement_total_usd)}</td>
+      <td><span style="font-family:'DM Mono',monospace;font-size:.7rem;color:#475569;">${c.engagements_count} eng</span></td>
+    </tr>`;
+  }).join('');
+
+  document.getElementById('mc-contacts-body').innerHTML = `<div class="mc-table-wrap"><table class="mc-table"><thead><tr>
+    <th>Name</th><th>Contact</th><th>Email</th><th>Location</th><th>Source</th><th>Status</th><th>Pipeline</th><th></th>
+  </tr></thead><tbody>${rows}</tbody></table></div>`;
+}
+
+// ─── Active Clients ──────────────────────────────────────────────
+function mcLoadActiveClients(force) { mcFetch('active-clients', mcRenderActiveClients, force); }
+function mcRenderActiveClients(data) {
+  const all = data.clients || [];
+  const q = (_mcSearch['active-clients'] || '').toLowerCase();
+  const list = q ? all.filter(c =>
+    (c.legal_name||'').toLowerCase().includes(q) ||
+    (c.dba||'').toLowerCase().includes(q) ||
+    (c.primary_contact_name||'').toLowerCase().includes(q) ||
+    (c.primary_contact_email||'').toLowerCase().includes(q)
+  ) : all;
+
+  const totalFee = all.reduce((s,c) => s + Number(c.total_fee_usd||0), 0);
+  const totalPaid = all.reduce((s,c) => s + Number(c.total_paid_usd||0), 0);
+
+  document.getElementById('mc-active-stats').innerHTML = [
+    mcStatTile('Active Clients', all.length, ''),
+    mcStatTile('Total Engagements', all.reduce((s,c) => s + c.engagements.length, 0), ''),
+    mcStatTile('Pipeline Value', mcFmtUSD(totalFee), '', 'orange'),
+    mcStatTile('Collected', mcFmtUSD(totalPaid), totalFee > 0 ? `${Math.round((totalPaid/totalFee)*100)}% of pipeline` : '', 'green'),
+  ].join('');
+
+  if (!list.length) {
+    document.getElementById('mc-active-body').innerHTML = `<div class="mc-empty"><div class="ico">⭐</div><h3>No active clients yet</h3><p>${q ? 'No clients match that search.' : 'Clients move here once they have a non-lead engagement.'}</p></div>`;
+    return;
+  }
+
+  const rows = list.map(c => {
+    const eng = c.engagements[0] || {};
+    return `<tr onclick="mcGoToCase('${mcEsc(c.slug)}')">
+      <td><div class="name-cell">${mcEsc(c.legal_name)}</div>${c.dba ? `<div class="meta-cell">d/b/a ${mcEsc(c.dba)}</div>` : ''}</td>
+      <td>${mcEsc(c.primary_contact_name || '—')}<div class="meta-cell">${mcEsc(c.primary_contact_email || '')}</div></td>
+      <td>${mcEsc(eng.name || '—')}<div class="meta-cell">${c.engagements.length > 1 ? `+${c.engagements.length - 1} more` : ''}</div></td>
+      <td>${mcPill(eng.status)}</td>
+      <td class="amt-cell">${mcFmtUSD(c.total_fee_usd)}</td>
+      <td class="amt-cell" style="color:#10B981;">${mcFmtUSD(c.total_paid_usd)}</td>
+      <td>${mcFmtDate(eng.delivery_due_at)}</td>
+    </tr>`;
+  }).join('');
+
+  document.getElementById('mc-active-body').innerHTML = `<div class="mc-table-wrap"><table class="mc-table"><thead><tr>
+    <th>Client</th><th>Primary Contact</th><th>Latest Engagement</th><th>Status</th><th>Fee</th><th>Paid</th><th>Delivery Due</th>
+  </tr></thead><tbody>${rows}</tbody></table></div>`;
+}
+
+// ─── Pipeline (kanban) ───────────────────────────────────────────
+function mcLoadPipeline(force) { mcFetch('pipeline', mcRenderPipeline, force); }
+function mcRenderPipeline(data) {
+  const all = data.engagements || [];
+  // Stage definitions in order. Engagements get bucketed by status.
+  const stages = [
+    { key: 'lead', label: 'Lead', emoji: '👋' },
+    { key: 'draft', label: 'Draft', emoji: '✏️' },
+    { key: 'proposal_sent', label: 'Proposal Sent', emoji: '📤' },
+    { key: 'signed', label: 'Signed', emoji: '✍️' },
+    { key: 'invoiced', label: 'Invoiced', emoji: '💸' },
+    { key: 'paid', label: 'Paid', emoji: '✅' },
+    { key: 'delivering', label: 'Delivering', emoji: '🚚' },
+    { key: 'delivered', label: 'Delivered', emoji: '🏁' },
+  ];
+
+  const totalValue = all.reduce((s,e) => s + Number(e.fee_usd||0), 0);
+  const wonValue = all.filter(e => e.paid_at).reduce((s,e) => s + Number(e.fee_usd||0), 0);
+
+  document.getElementById('mc-pipeline-stats').innerHTML = [
+    mcStatTile('Total Engagements', all.length, ''),
+    mcStatTile('Total Pipeline Value', mcFmtUSD(totalValue), '', 'orange'),
+    mcStatTile('Won', mcFmtUSD(wonValue), totalValue > 0 ? `${Math.round((wonValue/totalValue)*100)}%` : '', 'green'),
+    mcStatTile('Open', mcFmtUSD(totalValue - wonValue), '', 'orange'),
+  ].join('');
+
+  if (!all.length) {
+    document.getElementById('mc-pipeline-body').innerHTML = `<div class="mc-empty"><div class="ico">🔄</div><h3>Pipeline empty</h3><p>No engagements yet. They appear here as soon as a Calendly booking creates one (via webhook), or when you click 'Generate Engagement Docs' on a lead in Case Files.</p></div>`;
+    return;
+  }
+
+  const buckets = {};
+  for (const s of stages) buckets[s.key] = [];
+  const otherBucket = [];
+  for (const e of all) {
+    const s = (e.status || 'draft').toLowerCase();
+    if (buckets[s]) buckets[s].push(e); else otherBucket.push(e);
+  }
+
+  const cardHtml = (e) => {
+    const ageMs = Date.now() - new Date(e.updated_at || e.proposed_at || Date.now()).getTime();
+    const ageDays = Math.max(0, Math.round(ageMs / 86400000));
+    return `<div class="mc-kanban-card" onclick="mcGoToCase('${mcEsc(e.client_slug)}')">
+      <div class="name">${mcEsc(e.client_name || 'Unknown')}</div>
+      <div class="sub">${mcEsc(e.name)}</div>
+      <div class="row">
+        <span class="fee">${mcFmtUSD(e.fee_usd)}</span>
+        <span class="age">${ageDays === 0 ? 'today' : ageDays + 'd'}</span>
+      </div>
+    </div>`;
+  };
+
+  const cols = stages.map(s => `
+    <div class="mc-kanban-col">
+      <h4>${s.emoji} ${s.label} <span class="count">${buckets[s.key].length}</span></h4>
+      ${buckets[s.key].length ? buckets[s.key].map(cardHtml).join('') : '<div style="font-size:.72rem;color:#94A3B8;text-align:center;padding:.5rem;font-style:italic;">empty</div>'}
+    </div>`).join('');
+  const otherHtml = otherBucket.length ? `
+    <div class="mc-kanban-col">
+      <h4>📌 Other <span class="count">${otherBucket.length}</span></h4>
+      ${otherBucket.map(cardHtml).join('')}
+    </div>` : '';
+
+  document.getElementById('mc-pipeline-body').innerHTML = `<div class="mc-kanban">${cols}${otherHtml}</div>`;
+}
+
+// ─── Projects ────────────────────────────────────────────────────
+function mcLoadProjects(force) { mcFetch('projects', mcRenderProjects, force); }
+function mcRenderProjects(data) {
+  const all = data.projects || [];
+  const overdue = all.filter(p => p.overdue);
+
+  document.getElementById('mc-projects-stats').innerHTML = [
+    mcStatTile('Active', all.length, ''),
+    mcStatTile('Overdue', overdue.length, '', overdue.length ? 'red' : 'green'),
+    mcStatTile('Active Revenue', mcFmtUSD(all.reduce((s,p) => s + Number(p.fee_usd||0), 0)), '', 'green'),
+    mcStatTile('Docs Pending', all.reduce((s,p) => s + (p.docs_pending||0), 0), 'across all projects'),
+  ].join('');
+
+  if (!all.length) {
+    document.getElementById('mc-projects-body').innerHTML = `<div class="mc-empty"><div class="ico">🚀</div><h3>No active projects</h3><p>Projects appear here once an invoice is paid. The 72-hour delivery clock starts at payment.</p></div>`;
+    return;
+  }
+
+  const rows = all.map(p => `<tr class="${p.overdue ? 'row-overdue' : ''}" onclick="mcGoToCase('${mcEsc(p.client_slug)}')">
+    <td><div class="name-cell">${mcEsc(p.name)}</div><div class="meta-cell">${mcEsc(p.client_name || '')}</div></td>
+    <td>${mcPill(p.status)}</td>
+    <td class="amt-cell">${mcFmtUSD(p.fee_usd)}</td>
+    <td>${mcFmtDateTime(p.started_at)}</td>
+    <td>${mcFmtDateTime(p.delivery_due_at)}</td>
+    <td><strong style="color:${p.overdue ? '#DC2626' : (p.hours_to_delivery !== null && p.hours_to_delivery < 12 ? '#F97316' : '#10B981')};">${mcFmtRelHrs(p.hours_to_delivery)}</strong></td>
+    <td><span style="font-family:'DM Mono',monospace;font-size:.7rem;color:#475569;">${p.docs_executed}/${p.docs_total} done</span></td>
+  </tr>`).join('');
+
+  document.getElementById('mc-projects-body').innerHTML = `<div class="mc-table-wrap"><table class="mc-table"><thead><tr>
+    <th>Project</th><th>Status</th><th>Fee</th><th>Started</th><th>Due</th><th>Time Left</th><th>Docs</th>
+  </tr></thead><tbody>${rows}</tbody></table></div>`;
+}
+
+// ─── Proposals ───────────────────────────────────────────────────
+function mcLoadProposals(force) { mcFetch('proposals', mcRenderProposals, force); }
+function mcRenderProposals(data) { mcRenderDocList(data, 'proposals', 'No proposals yet', '📄'); }
+
+// ─── Contracts ───────────────────────────────────────────────────
+function mcLoadContracts(force) { mcFetch('contracts', mcRenderContracts, force); }
+function mcRenderContracts(data) { mcRenderDocList(data, 'contracts', 'No contracts yet', '✍️'); }
+
+// Shared renderer for proposals + contracts (both are mc_documents subsets)
+function mcRenderDocList(data, type, emptyText, emptyIco) {
+  const all = data.documents || [];
+  const q = (_mcSearch[type] || '').toLowerCase();
+  const list = q ? all.filter(d =>
+    (d.doc_id||'').toLowerCase().includes(q) ||
+    (d.doc_name||'').toLowerCase().includes(q) ||
+    (d.client_name||'').toLowerCase().includes(q) ||
+    (d.engagement_name||'').toLowerCase().includes(q)
+  ) : all;
+
+  const counts = all.reduce((acc, d) => { const k = d.status || 'unknown'; acc[k] = (acc[k]||0)+1; return acc; }, {});
+  document.getElementById(`mc-${type}-stats`).innerHTML = [
+    mcStatTile('Total', all.length, ''),
+    mcStatTile('Sent / Pending', (counts.sent||0) + (counts.pending||0), '', 'orange'),
+    mcStatTile('Signed', counts.client_signed || 0, '', 'blue'),
+    mcStatTile('Executed', counts.executed || 0, '', 'green'),
+  ].join('');
+
+  if (!list.length) {
+    document.getElementById(`mc-${type}-body`).innerHTML = `<div class="mc-empty"><div class="ico">${emptyIco}</div><h3>${emptyText}</h3><p>${q ? 'Try a different search.' : 'Documents are auto-created when you generate engagement docs from a lead.'}</p></div>`;
+    return;
+  }
+
+  const rows = list.map(d => `<tr onclick="mcGoToCase('${mcEsc(d.client_slug)}')">
+    <td><span class="id-cell">${mcEsc(d.doc_id)}</span></td>
+    <td><div class="name-cell">${mcEsc(d.doc_name)}</div><div class="meta-cell">${mcEsc(d.doc_type)}</div></td>
+    <td>${mcEsc(d.client_name || '—')}<div class="meta-cell">${mcEsc(d.client_contact || '')}</div></td>
+    <td>${mcEsc(d.engagement_name || '—')}</td>
+    <td>${mcPill(d.status)}</td>
+    <td>${mcFmtDate(d.client_signed_at)}</td>
+    <td>${mcFmtDate(d.executed_at)}</td>
+    <td>${d.storage_path ? `<button class="mc-btn" style="padding:.3rem .7rem;font-size:.66rem;" onclick="event.stopPropagation();cfOpenDoc('${mcEsc(d.storage_path)}')">Open PDF</button>` : '<span style="color:#94A3B8;font-size:.7rem;">no file</span>'}</td>
+  </tr>`).join('');
+
+  document.getElementById(`mc-${type}-body`).innerHTML = `<div class="mc-table-wrap"><table class="mc-table"><thead><tr>
+    <th>Doc ID</th><th>Document</th><th>Client</th><th>Engagement</th><th>Status</th><th>Signed</th><th>Executed</th><th></th>
+  </tr></thead><tbody>${rows}</tbody></table></div>`;
+}
+
+// ─── Invoices ────────────────────────────────────────────────────
+function mcLoadInvoices(force) { mcFetch('invoices', mcRenderInvoices, force); }
+function mcRenderInvoices(data) {
+  const all = data.invoices || [];
+  const q = (_mcSearch.invoices || '').toLowerCase();
+  const list = q ? all.filter(i =>
+    (i.client_name||'').toLowerCase().includes(q) ||
+    (i.engagement_name||'').toLowerCase().includes(q) ||
+    (i.square_invoice_id||'').toLowerCase().includes(q) ||
+    (i.status||'').toLowerCase().includes(q)
+  ) : all;
+
+  const live = all.filter(i => !i.is_test);
+  const paid = live.filter(i => i.status === 'paid');
+  const sent = live.filter(i => i.status === 'sent');
+  const drafted = live.filter(i => i.status === 'draft');
+
+  document.getElementById('mc-invoices-stats').innerHTML = [
+    mcStatTile('Live Invoices', live.length, all.length > live.length ? `+${all.length - live.length} test` : ''),
+    mcStatTile('Drafted', drafted.length, '', 'grey'),
+    mcStatTile('Outstanding', mcFmtUSD(sent.reduce((s,i) => s + Number(i.amount_usd||0), 0)), `${sent.length} sent`, 'orange'),
+    mcStatTile('Paid (Lifetime)', mcFmtUSD(paid.reduce((s,i) => s + Number(i.amount_usd||0), 0)), `${paid.length} invoices`, 'green'),
+  ].join('');
+
+  if (!list.length) {
+    document.getElementById('mc-invoices-body').innerHTML = `<div class="mc-empty"><div class="ico">🧾</div><h3>No invoices yet</h3><p>${q ? 'Try a different search.' : 'Invoices are auto-drafted when an engagement document is countersigned.'}</p></div>`;
+    return;
+  }
+
+  const rows = list.map(i => `<tr onclick="mcGoToCase('${mcEsc(i.client_slug)}')">
+    <td><span class="id-cell">${mcEsc(i.square_invoice_id ? i.square_invoice_id.slice(-12) : '—')}</span>${i.is_test ? '<span class="test-tag">TEST</span>' : ''}</td>
+    <td><div class="name-cell">${mcEsc(i.client_name || '—')}</div><div class="meta-cell">${mcEsc(i.client_contact || '')}</div></td>
+    <td>${mcEsc(i.engagement_name || '—')}</td>
+    <td>${mcPill(i.status)}</td>
+    <td class="amt-cell">${mcFmtUSD(i.amount_usd)}</td>
+    <td>${mcFmtDate(i.draft_at)}</td>
+    <td>${mcFmtDate(i.sent_at)}</td>
+    <td>${mcFmtDate(i.paid_at)}</td>
+    <td><span style="font-family:'DM Mono',monospace;font-size:.7rem;color:#475569;">${i.reminder_count || 0}</span></td>
+    <td>${i.square_invoice_url ? `<a class="mc-btn" style="padding:.3rem .7rem;font-size:.66rem;" href="${mcEsc(i.square_invoice_url)}" target="_blank" rel="noopener" onclick="event.stopPropagation()">View</a>` : ''}</td>
+  </tr>`).join('');
+
+  document.getElementById('mc-invoices-body').innerHTML = `<div class="mc-table-wrap"><table class="mc-table"><thead><tr>
+    <th>Invoice ID</th><th>Client</th><th>Engagement</th><th>Status</th><th>Amount</th><th>Drafted</th><th>Sent</th><th>Paid</th><th>Reminders</th><th></th>
+  </tr></thead><tbody>${rows}</tbody></table></div>`;
+}
+
+// Wire up search inputs (one global listener handles every mc-*-search)
+document.addEventListener('input', (e) => {
+  if (!e.target?.id?.startsWith('mc-') || !e.target.id.endsWith('-search')) return;
+  const type = e.target.id.replace(/^mc-/, '').replace(/-search$/, '');
+  _mcSearch[type] = e.target.value;
+  if (_mcCache[type]) {
+    if (type === 'contacts') mcRenderContacts(_mcCache[type]);
+    else if (type === 'active-clients') mcRenderActiveClients(_mcCache[type]);
+    else if (type === 'proposals') mcRenderProposals(_mcCache[type]);
+    else if (type === 'contracts') mcRenderContracts(_mcCache[type]);
+    else if (type === 'invoices') mcRenderInvoices(_mcCache[type]);
+  }
+});
 // ─── DATA LOADING (via admin-proxy function) ──────────────────────────────────
 async function loadLeads() {
   try {
