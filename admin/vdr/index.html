@@ -116,6 +116,22 @@
   .doc-action-btn:hover{border-color:var(--blue);color:var(--blue);background:var(--blue-pale)}
   .doc-action-btn:disabled{opacity:.5;cursor:not-allowed}
 
+  /* ── Invoice block ── */
+  .invoice-block{margin-top:1.25rem;padding:1.25rem 1.5rem;background:var(--blue-pale);border-radius:12px;border:1px solid rgba(37,99,235,0.15)}
+  .invoice-block-empty{background:var(--off-white);border:1px dashed var(--border)}
+  .invoice-block-head{display:flex;align-items:center;justify-content:space-between;gap:1rem;margin-bottom:.85rem;flex-wrap:wrap}
+  .invoice-eyebrow{font-family:'DM Mono',monospace;font-size:.65rem;letter-spacing:.18em;text-transform:uppercase;color:var(--blue);font-weight:700}
+  .invoice-meta{display:grid;grid-template-columns:repeat(4,1fr);gap:.85rem;padding:.75rem 1rem;background:var(--white);border-radius:8px;margin-bottom:.85rem;font-size:.82rem}
+  @media(max-width:760px){.invoice-meta{grid-template-columns:1fr 1fr}}
+  .invoice-meta .l{font-family:'DM Mono',monospace;font-size:.58rem;letter-spacing:.18em;text-transform:uppercase;color:var(--text-light);margin-bottom:.15rem}
+  .invoice-meta .v{font-weight:600;color:var(--navy)}
+  .invoice-actions{display:flex;gap:.5rem;flex-wrap:wrap;align-items:center}
+  .action-btn{display:inline-flex;align-items:center;gap:.4rem;padding:.6rem 1.1rem;border-radius:8px;font-family:'Barlow',sans-serif;font-size:.82rem;font-weight:700;letter-spacing:.04em;cursor:pointer;border:none;text-decoration:none;transition:all .15s}
+  .action-btn.primary{background:var(--orange);color:var(--white);box-shadow:0 2px 8px rgba(249,115,22,.3)}
+  .action-btn.primary:hover{background:#EA6C0A;transform:translateY(-1px);box-shadow:0 4px 12px rgba(249,115,22,.4)}
+  .action-btn.outline{background:var(--white);color:var(--text);border:1.5px solid var(--border)}
+  .action-btn.outline:hover{border-color:var(--blue);color:var(--blue);background:var(--blue-pale)}
+
   /* ── Status pills ── */
   .pill{display:inline-flex;align-items:center;gap:.3rem;font-family:'DM Mono',monospace;font-size:.6rem;letter-spacing:.1em;text-transform:uppercase;padding:.2rem .6rem;border-radius:999px;font-weight:600;border:1px solid transparent;white-space:nowrap}
   .pill-blue{background:var(--blue-pale);color:var(--blue);border-color:rgba(37,99,235,.25)}
@@ -270,6 +286,87 @@ $('search').addEventListener('input', (e) => {
   ));
 });
 
+// ─── Invoice block (rendered inside each engagement card) ──────
+function renderInvoiceBlock(engagement, invoices) {
+  // Pick the most recent non-void invoice as the "active" one
+  const active = invoices.find(i => i.status !== 'void') || null;
+  const hasExecutedDoc = (engagement.mc_documents || []).some(d => d.status === 'executed');
+
+  // No invoice yet — show "Prepare Invoice" CTA only if a doc was executed
+  if (!active) {
+    if (!hasExecutedDoc) return '';
+    return `
+      <div class="invoice-block invoice-block-empty">
+        <div class="invoice-block-head">
+          <div class="invoice-eyebrow">Payment</div>
+          <span class="pill pill-grey">No invoice yet</span>
+        </div>
+        <p style="font-size:.88rem;color:var(--text-mid);margin:.5rem 0 .85rem;">A document on this engagement is executed but no invoice exists. Click below to create a Square draft invoice for ${fmtUSD(engagement.fee_usd)}.</p>
+        <div class="invoice-actions">
+          <button class="action-btn primary" onclick="invoiceAction('create-draft', '${engagement.id}', false)">Prepare Invoice (${fmtUSD(engagement.fee_usd)})</button>
+          <button class="action-btn outline" onclick="invoiceAction('create-draft', '${engagement.id}', true)">Prepare $1 Test Invoice</button>
+        </div>
+      </div>`;
+  }
+
+  // Active invoice exists — show status + action buttons
+  return `
+    <div class="invoice-block">
+      <div class="invoice-block-head">
+        <div>
+          <div class="invoice-eyebrow">Payment ${active.is_test ? '<span class="pill pill-orange" style="margin-left:.4rem;">TEST</span>' : ''}</div>
+          <div style="font-family:'Bebas Neue',sans-serif;font-size:1.4rem;color:var(--navy);letter-spacing:.03em;margin-top:.25rem;">${fmtUSD(active.amount_usd)}</div>
+        </div>
+        ${pill(active.status)}
+      </div>
+      <div class="invoice-meta">
+        <div><div class="l">Drafted</div><div class="v">${fmtDateShort(active.draft_at)}</div></div>
+        <div><div class="l">Sent</div><div class="v">${fmtDateShort(active.sent_at)}</div></div>
+        <div><div class="l">Paid</div><div class="v">${fmtDateShort(active.paid_at)}</div></div>
+        <div><div class="l">Reminders</div><div class="v">${active.reminder_count || 0} sent</div></div>
+      </div>
+      <div class="invoice-actions">
+        ${active.status === 'draft' ? `
+          <button class="action-btn primary" onclick="invoiceAction('publish', null, null, '${active.id}')">Send Payment Request</button>
+          <button class="action-btn outline" onclick="invoiceAction('cancel', null, null, '${active.id}')">Void</button>
+        ` : ''}
+        ${active.status === 'sent' ? `
+          ${active.square_invoice_url ? `<a class="action-btn outline" href="${esc(active.square_invoice_url)}" target="_blank" rel="noopener">View Square Invoice</a>` : ''}
+          <button class="action-btn outline" onclick="invoiceAction('cancel', null, null, '${active.id}')">Void</button>
+        ` : ''}
+        ${active.status === 'paid' ? `
+          <span style="font-size:.85rem;color:var(--green);font-weight:600;">Paid in full. Delivery clock running.</span>
+        ` : ''}
+      </div>
+    </div>`;
+}
+
+async function invoiceAction(action, engagementId, isTest, invoiceId) {
+  const confirmMsg = {
+    'create-draft': isTest ? 'Create a $1 TEST invoice?' : 'Create a draft invoice (will not send yet)?',
+    'publish':      'Send the payment request to the client now?',
+    'cancel':       'Void this invoice? This cannot be undone.',
+  }[action];
+  if (!confirm(confirmMsg)) return;
+
+  try {
+    const res = await fetch('/.netlify/functions/square-invoice-action', {
+      method: 'POST',
+      credentials: 'include',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ action, engagementId, invoiceId, isTest }),
+    });
+    const data = await res.json();
+    if (!res.ok) throw new Error(data.error || `HTTP ${res.status}`);
+    alert(action === 'create-draft' ? 'Draft invoice created.' :
+          action === 'publish'      ? 'Payment request sent. Square is emailing the client now.' :
+                                      'Invoice voided.');
+    if (activeSlug) loadCase(activeSlug);
+  } catch (e) {
+    alert('Action failed: ' + e.message);
+  }
+}
+
 // ─── Load case file for one client ─────────────────────────────
 async function loadCase(slug) {
   activeSlug = slug;
@@ -321,6 +418,7 @@ function renderCase(client, audit) {
 
     for (const e of engagements) {
       const docs = (e.mc_documents || []).sort((a,b) => (a.doc_id || '').localeCompare(b.doc_id || ''));
+      const invoices = (e.mc_invoices || []).sort((a,b) => new Date(b.created_at) - new Date(a.created_at));
       html += `
         <div class="engagement">
           <div class="engagement-head">
@@ -337,7 +435,7 @@ function renderCase(client, audit) {
             <div><div class="l">Proposed</div><div class="v">${fmtDateShort(e.proposed_at)}</div></div>
             <div><div class="l">Accepted</div><div class="v">${fmtDateShort(e.accepted_at)}</div></div>
             <div><div class="l">Paid</div><div class="v">${fmtDateShort(e.paid_at)}</div></div>
-            <div><div class="l">Delivered</div><div class="v">${fmtDateShort(e.delivered_at)}</div></div>
+            <div><div class="l">Delivery Due</div><div class="v">${fmtDateShort(e.delivery_due_at)}</div></div>
           </div>
           ${docs.length ? `
             <table class="doc-table">
@@ -352,13 +450,15 @@ function renderCase(client, audit) {
                     <td>${fmtDateShort(d.client_signed_at)}</td>
                     <td>${fmtDateShort(d.executed_at)}</td>
                     <td class="doc-actions">
-                      ${d.storage_path ? `<button class="doc-action-btn" onclick="openDoc('${esc(d.storage_path)}')">⬇ Open PDF</button>` : '<span style="color:var(--text-light);font-size:.7rem;">No file</span>'}
+                      ${d.storage_path ? `<button class="doc-action-btn" onclick="openDoc('${esc(d.storage_path)}')">Open PDF</button>` : '<span style="color:var(--text-light);font-size:.7rem;">No file</span>'}
                     </td>
                   </tr>
                 `).join('')}
               </tbody>
             </table>
           ` : '<p style="color:var(--text-mid);font-size:.85rem;margin-top:.85rem;">No documents on this engagement yet.</p>'}
+
+          ${renderInvoiceBlock(e, invoices)}
         </div>
       `;
     }

@@ -251,7 +251,7 @@ exports.handler = async (event) => {
   try { body = JSON.parse(event.body || '{}'); }
   catch (e) { return { statusCode: 400, headers, body: JSON.stringify({ error: 'Invalid JSON' }) }; }
 
-  const { clientSlug, testRecipient, siteUrl: siteUrlArg } = body;
+  const { clientSlug, testRecipient, cc: ccArg, siteUrl: siteUrlArg } = body;
   if (!clientSlug) return { statusCode: 400, headers, body: JSON.stringify({ error: 'Missing clientSlug' }) };
 
   const apiKey = process.env.RESEND_API_KEY;
@@ -285,9 +285,14 @@ exports.handler = async (event) => {
 
     const subject = (testMode ? '[TEST] ' : '') + `${client.legal_name} — ${engagement.name} (Proposal)`.replace(/—/g, '-');
 
+    // CC: defaults to marklgabriellijr@gmail.com so Mark always has a copy.
+    // Pass cc:[] (empty array) explicitly to suppress, or cc:['custom@x'] to override.
+    const ccList = Array.isArray(ccArg) ? ccArg : (ccArg === null ? [] : ['marklgabriellijr@gmail.com']);
+
     const resendPayload = {
       from: 'Mark Gabrielli <mark@markcmo.com>',
       to: [recipientEmail],
+      ...(ccList.length ? { cc: ccList } : {}),
       reply_to: 'mark@markcmo.com',
       subject,
       html,
@@ -312,6 +317,7 @@ exports.handler = async (event) => {
         event: testMode ? 'proposal_email_test_sent' : 'proposal_email_sent',
         payload: {
           recipient: recipientEmail,
+          cc: ccList,
           subject,
           resend_id: resendData?.id,
           siteUrl,
@@ -327,6 +333,7 @@ exports.handler = async (event) => {
       body: JSON.stringify({
         success: true,
         sentTo: recipientEmail,
+        cc: ccList,
         testMode,
         subject,
         resend_id: resendData?.id,

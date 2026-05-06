@@ -147,6 +147,47 @@ exports.handler = async (event) => {
       ip: ipAddr,
     });
 
+    // ─── 4b. Auto-create DRAFT Square invoice if this is a paid engagement ──
+    // Only kicks in for proposal-type docs (the engagement-acceptance trigger);
+    // SOW / NDA executions don't create invoices.
+    let draftInvoice = null;
+    try {
+      const docType = (docName || '').toLowerCase();
+      const isProposalAcceptance = /proposal|acceptance|engagement.{0,20}acceptance/i.test(docName || '') || /AUD-001|PROP-001|ENG-001/i.test(docId || '');
+      if (isProposalAcceptance && engagementId) {
+        // Check if invoice already exists
+        const existingInvs = await fetch(
+          `${process.env.MARKCMO_SUPABASE_URL}/rest/v1/mc_invoices?engagement_id=eq.${engagementId}&status=neq.void&limit=1`,
+          { headers: { apikey: process.env.MARKCMO_SUPABASE_SERVICE_KEY, Authorization: `Bearer ${process.env.MARKCMO_SUPABASE_SERVICE_KEY}` } }
+        ).then(r => r.json()).catch(() => []);
+
+        if (!existingInvs?.length) {
+          // Self-call square-invoice-action with internal admin token
+          const siteUrl = process.env.URL || 'https://markcmo.com';
+          const draftRes = await fetch(`${siteUrl}/.netlify/functions/square-invoice-action`, {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json',
+              'x-admin-api-token': process.env.MARKCMO_ADMIN_API_TOKEN || '',
+            },
+            body: JSON.stringify({ action: 'create-draft', engagementId, isTest: !!testMode }),
+          });
+          const draftData = await draftRes.json().catch(() => ({}));
+          if (draftRes.ok && draftData.success) {
+            draftInvoice = draftData.invoice;
+            console.log('Draft invoice auto-created:', draftInvoice?.id);
+          } else {
+            console.warn('Draft invoice auto-create failed (non-fatal):', JSON.stringify(draftData));
+          }
+        } else {
+          console.log('Invoice already exists for engagement, skipping auto-draft.');
+        }
+      }
+    } catch (e) {
+      // Auto-draft is best-effort; never block the executed-doc flow on it.
+      console.warn('Auto-draft invoice error (non-fatal):', e.message);
+    }
+
     // ─── 5. Build email content ─────────────────────────────────
     const executedDateStr = new Date(executedAt).toLocaleString('en-US', {
       timeZone: 'America/New_York', dateStyle: 'full', timeStyle: 'short',
@@ -182,6 +223,7 @@ exports.handler = async (event) => {
 
     const execFilename = (filename || `${docName}.pdf`).replace(/\.pdf$/i, '') + '-EXECUTED.pdf';
     const recipientForClientCopy = testMode ? 'mark@markcmo.com' : clientEmail;
+    const clientCC = ['marklgabriellijr@gmail.com']; // always CC Gmail on client-facing emails
 
     const results = await Promise.allSettled([
       fetch('https://api.resend.com/emails', {
@@ -190,6 +232,7 @@ exports.handler = async (event) => {
         body: JSON.stringify({
           from: 'Mark Gabrielli <mark@markcmo.com>',
           to: [recipientForClientCopy],
+          cc: clientCC,
           reply_to: 'mark@markcmo.com',
           subject: `${testMode ? '[TEST] ' : ''}Executed: ${docName}`,
           html: makeHtml(clientName || 'there'),
@@ -223,7 +266,13 @@ exports.handler = async (event) => {
     return {
       statusCode: 200,
       headers: CORS,
-      body: JSON.stringify({ success: true, executedAt, executedPath: execPath, filename: execFilename }),
+      body: JSON.stringify({
+        success: true,
+        executedAt,
+        executedPath: execPath,
+        filename: execFilename,
+        draftInvoice: draftInvoice ? { id: draftInvoice.id, square_invoice_id: draftInvoice.square_invoice_id, status: draftInvoice.status } : null,
+      }),
     };
   } catch (err) {
     console.error('execute-engagement-doc error:', err);

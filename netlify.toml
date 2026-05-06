@@ -31,6 +31,21 @@
 [functions.course-exam]
   timeout = 10
 
+# ─── MarkCMO Engagement Pipeline ──────────────────────────────
+# Scheduled follow-ups: every 6 hours, walks mc_invoices status='sent' and
+# sends 24h/48h/72h reminders + escalation emails.
+[functions."engagement-payment-followups"]
+  schedule = "0 */6 * * *"
+  timeout = 26
+
+# Square webhook receiver: invoice.payment_made etc. → mark paid, start clock.
+[functions."square-webhook"]
+  timeout = 26
+
+# Square invoice action endpoint: create-draft, publish, cancel.
+[functions."square-invoice-action"]
+  timeout = 26
+
 # Find-email button runs deep-crawl + Wikipedia + (optional) Hunter
 # inside film-rolodex.js → needs more than the 10s default.
 [functions.film-rolodex]

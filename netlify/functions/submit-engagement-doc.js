@@ -298,6 +298,9 @@ exports.handler = async (event) => {
 
     const execFilename = (filename || `${docName || docId}.pdf`).replace(/\.pdf$/i, '') + '-signed.pdf';
     const recipientForClientCopy = testMode ? 'mark@markcmo.com' : clientEmail;
+    // Always CC Mark's Gmail on client-facing emails as a record (in test mode the client copy already
+    // goes to mark@markcmo.com so we still CC the Gmail to confirm CC delivery is working too).
+    const clientCC = ['marklgabriellijr@gmail.com'];
 
     const emailPayloads = [
       {
@@ -310,6 +313,7 @@ exports.handler = async (event) => {
       {
         from: 'Mark Gabrielli <mark@markcmo.com>',
         to: [recipientForClientCopy],
+        cc: clientCC,
         subject: `${testMode ? '[TEST] ' : ''}Received: ${docName || doc.doc_name} — Pending Countersignature`,
         html: clientHtml,
         attachments: [{ filename: execFilename, content: pdfBase64 }],
