@@ -3838,7 +3838,7 @@ function cfRenderCase(client, audit) {
       const invoices = (e.mc_invoices || []).sort((a,b) => new Date(b.created_at) - new Date(a.created_at));
       html += `<div class="cf-eng">
         <div class="cf-eng-head">
-          <div><div class="cf-eng-name">${cfEsc(e.name)}</div><div style="margin-top:.4rem;">${cfPill(e.status)}</div></div>
+          <div><div class="cf-eng-name">${cfEsc(e.name)}</div><div style="margin-top:.4rem;display:flex;align-items:center;gap:.5rem;flex-wrap:wrap;">${cfPill(e.status)}<button class="cf-btn cf-btn-sm outline" style="padding:.2rem .55rem;font-size:.62rem;" onclick="cfChangeEngagementStatus('${cfEsc(e.id)}','${cfEsc(e.status||'draft')}')">Change Stage</button></div></div>
           <div class="cf-fee">${cfFmtUSD(e.fee_usd)}<small>${e.delivery_window_hrs || '—'} HR DELIVERY</small></div>
         </div>
         <div class="cf-eng-meta">
@@ -4104,6 +4104,33 @@ async function cfSaveClient(ev) {
     result.classList.add('err');
     result.textContent = 'Save failed: ' + e.message;
   }
+}
+
+// Manual stage advance / regress on a single engagement
+async function cfChangeEngagementStatus(engagementId, currentStatus) {
+  const stages = ['lead','draft','proposal_sent','signed','invoiced','paid','delivering','delivered','closed','archived'];
+  const prompt = `Change engagement status\n\nCurrent: ${currentStatus}\n\nEnter new status:\n${stages.map((s,i) => `${i+1}. ${s}`).join('\n')}\n\nType the number or the name:`;
+  const input = window.prompt(prompt, currentStatus);
+  if (!input) return;
+  let next = input.trim().toLowerCase();
+  // Allow numeric shortcut
+  const n = parseInt(next, 10);
+  if (!isNaN(n) && n >= 1 && n <= stages.length) next = stages[n-1];
+  if (!stages.includes(next)) return alert(`Unknown status: "${next}". Allowed: ${stages.join(', ')}`);
+  if (next === currentStatus) return;
+  const patch = { status: next };
+  // Set the corresponding timestamp when advancing into a known stage
+  const now = new Date().toISOString();
+  if (next === 'proposal_sent' && !confirm(`Advance to proposal_sent and set proposed_at = now?`) === false) patch.proposed_at = now;
+  else if (next === 'signed') patch.accepted_at = now;
+  else if (next === 'paid') { patch.paid_at = now; patch.started_at = now; }
+  try {
+    await mcWrite('engagements', 'update', { id: engagementId, data: patch });
+    // Bust caches so the kanban reflects immediately
+    delete _mcCache.pipeline; delete _mcCache.summary; delete _mcCache['active-clients']; delete _mcCache.projects;
+    if (_cfActiveSlug) cfLoadCase(_cfActiveSlug);
+    if (typeof mcLoadDashboard === 'function') mcLoadDashboard(true);
+  } catch (e) { alert('Status change failed: ' + e.message); }
 }
 
 async function cfGenerateDocs(slug) {

@@ -159,7 +159,7 @@ exports.handler = async (event) => {
   try {
     // ─── 1. Look up document by slug + docId ─────────────────────
     const docs = await sbSelect(
-      `mc_documents?doc_id=eq.${encodeURIComponent(docId)}&select=id,engagement_id,doc_id,doc_type,doc_name,status,storage_bucket,mc_engagements(id,client_id,name,fee_usd,delivery_window_hrs,doc_prefix,mc_clients(id,slug,legal_name,primary_contact_name,primary_contact_email,cc_emails))`
+      `mc_documents?doc_id=eq.${encodeURIComponent(docId)}&select=id,engagement_id,doc_id,doc_type,doc_name,status,storage_bucket,mc_engagements(id,client_id,name,fee_usd,delivery_window_hrs,doc_prefix,status,mc_clients(id,slug,legal_name,primary_contact_name,primary_contact_email,cc_emails,status))`
     );
     const doc = docs.find(d => d.mc_engagements?.mc_clients?.slug === clientSlug);
     if (!doc) {
@@ -195,11 +195,20 @@ exports.handler = async (event) => {
       },
     });
 
-    // ─── 4. Update mc_engagements status ─────────────────────────
-    await sbUpdate('mc_engagements', `id=eq.${engagementId}`, {
-      status: 'accepted',
-      accepted_at: submittedAt,
-    });
+    // ─── 4. Auto-advance pipeline status: → signed ──────────────
+    // The pipeline kanban uses 'signed' as the stage key. Don't
+    // overwrite later statuses (invoiced, paid, delivering, delivered).
+    const TERMINAL = ['invoiced','paid','delivering','delivered','closed'];
+    if (!TERMINAL.includes(doc.mc_engagements?.status)) {
+      await sbUpdate('mc_engagements', `id=eq.${engagementId}`, {
+        status: 'signed',
+        accepted_at: submittedAt,
+      });
+    }
+    // Bump client status the same way (only if they're earlier in pipeline)
+    if (clientId && !['paid','delivering','delivered','closed'].includes(doc.mc_engagements?.mc_clients?.status)) {
+      await sbUpdate('mc_clients', `id=eq.${clientId}`, { status: 'signed' });
+    }
 
     // ─── 5. Insert audit log ─────────────────────────────────────
     await sbInsert('mc_audit_log', {

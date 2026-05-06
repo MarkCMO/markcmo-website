@@ -63,6 +63,11 @@ async function applyInvoiceState({ sqInvoice, source = 'webhook' }) {
         delivery_due_at: deliveryDueAt,
       });
     }
+    // Bump client status to 'paid' as well so CRM list reflects reality
+    if (client && !['delivered','closed','archived'].includes(client.status)) {
+      try { await sbUpdate('mc_clients', `id=eq.${client.id}`, { status: 'paid' }); }
+      catch (e) { console.warn('client status bump on paid failed:', e.message); }
+    }
 
     const audit = await sbInsert('mc_audit_log', {
       engagement_id: inv.engagement_id,

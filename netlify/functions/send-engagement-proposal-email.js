@@ -112,6 +112,17 @@ async function sbInsert(table, body) {
   return res.json();
 }
 
+async function sbUpdate(table, filter, body) {
+  const { url, key } = sb();
+  const res = await fetch(`${url}/rest/v1/${table}?${filter}`, {
+    method: 'PATCH',
+    headers: { apikey: key, Authorization: `Bearer ${key}`, 'Content-Type': 'application/json', Prefer: 'return=representation' },
+    body: JSON.stringify(body),
+  });
+  if (!res.ok) throw new Error(`Supabase update ${table} failed: ${res.status} ${await res.text()}`);
+  return res.json();
+}
+
 // ─── Email template ─────────────────────────────────────────────
 function esc(s) {
   return String(s ?? '').replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
@@ -354,6 +365,26 @@ exports.handler = async (event) => {
         },
       });
     } catch (e) { console.warn('audit_log insert failed:', e.message); }
+
+    // ─── Auto-advance pipeline status on LIVE sends ─────────────
+    // Move engagement out of 'lead'/'draft' to 'proposal_sent' so the
+    // kanban + dashboard reflect reality without manual cleanup.
+    // Test sends do NOT advance status (deliberate — testMode means
+    // we're QA-ing the email, not progressing the pipeline).
+    if (!testMode) {
+      try {
+        if (['lead','draft',null,undefined].includes(engagement.status)) {
+          await sbUpdate('mc_engagements', `id=eq.${engagement.id}`, {
+            status: 'proposal_sent',
+            proposed_at: engagement.proposed_at || new Date().toISOString(),
+          });
+        }
+        // Bump the client too, but only if they were sitting at 'lead'
+        if (client.status === 'lead') {
+          await sbUpdate('mc_clients', `id=eq.${client.id}`, { status: 'proposal_sent' });
+        }
+      } catch (e) { console.warn('auto-advance status failed:', e.message); }
+    }
 
     return {
       statusCode: 200,
