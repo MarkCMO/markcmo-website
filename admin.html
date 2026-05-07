@@ -1665,7 +1665,8 @@
 <nav class="admin-nav">
   <!-- ADMIN TOOL NAVIGATION (replaced public-site nav) -->
 
-  <!-- Quick action: Case Files (VDR) - now an embedded panel, not a separate page -->
+  <!-- Top quick actions -->
+  <a class="admin-nav-cta" onclick="switchPanel('meetings', this)" style="background:linear-gradient(135deg,#F97316,#EA6C0A);color:#FFFFFF;">📆 Calendly Meetings <span class="admin-nav-badge" id="meetings-badge"></span></a>
   <a class="admin-nav-cta" onclick="switchPanel('case-files', this)">📁 Case Files (VDR)</a>
 
   <!-- Dashboard -->
@@ -1679,6 +1680,7 @@
   <a class="admin-nav-item" onclick="switchPanel('crm-clients', this)"><span class="admin-nav-ico">⭐</span><span>Active Clients</span></a>
   <a class="admin-nav-item" onclick="switchPanel('crm-pipeline', this)"><span class="admin-nav-ico">🔄</span><span>Pipeline</span></a>
   <a class="admin-nav-item" onclick="switchPanel('crm-notes', this)"><span class="admin-nav-ico">📝</span><span>Notes &amp; Activity</span></a>
+  <a class="admin-nav-item" onclick="switchPanel('crm-tasks', this)"><span class="admin-nav-ico">✅</span><span>Tasks</span><span class="admin-nav-badge" id="tasks-badge"></span></a>
 
   <!-- Engagements -->
   <div class="admin-nav-section">Engagements</div>
@@ -2004,6 +2006,51 @@
     </div>
     <div id="mc-contacts-stats" class="mc-stats"></div>
     <div id="mc-contacts-body"><div class="mc-loading">Loading contacts</div></div>
+  </div>
+</div>
+
+<!-- ════════════════════════════════════════════════════════════════
+     CALENDLY MEETINGS — top-of-sidebar quick action
+     Shows upcoming + past Calendly bookings (mc_engagements rows
+     with metadata.calendly_invitee_uri set, joined to mc_clients).
+     ════════════════════════════════════════════════════════════════ -->
+<div id="panel-meetings" class="panel">
+  <div class="mc-panel">
+    <div class="mc-panel-head">
+      <div>
+        <div class="mc-eyebrow">CRM &middot; Calendly</div>
+        <h2>📆 Meetings</h2>
+        <div class="mc-sub">Every Calendly-booked call. Auto-synced from Calendly webhook into mc_engagements. Click any row to open the client case file.</div>
+      </div>
+      <div class="mc-panel-actions">
+        <button class="mc-btn primary" onclick="mcRunCalendlySync()">↻ Sync from Calendly</button>
+        <button class="mc-btn" onclick="mcLoadMeetings(true)">↻ Refresh</button>
+        <a href="https://calendly.com/event_types" target="_blank" rel="noopener" class="mc-btn">Calendly Dashboard →</a>
+      </div>
+    </div>
+    <div id="mc-meetings-stats" class="mc-stats"></div>
+    <div id="mc-meetings-body"><div class="mc-loading">Loading meetings</div></div>
+  </div>
+</div>
+
+<!-- ════════════════════════════════════════════════════════════════
+     TASKS (CRM) — mc_tasks panel with create/complete UI
+     ════════════════════════════════════════════════════════════════ -->
+<div id="panel-crm-tasks" class="panel">
+  <div class="mc-panel">
+    <div class="mc-panel-head">
+      <div>
+        <div class="mc-eyebrow">CRM &middot; Tasks</div>
+        <h2>✅ Tasks</h2>
+        <div class="mc-sub">Personal task list across all clients and engagements. Set priority, due dates, and assignees. Completed tasks roll out of the active list.</div>
+      </div>
+      <div class="mc-panel-actions">
+        <button class="mc-btn primary" onclick="mcOpenTaskEditor()">+ New Task</button>
+        <button class="mc-btn" onclick="mcLoadTasks(true)">↻ Refresh</button>
+      </div>
+    </div>
+    <div id="mc-tasks-stats" class="mc-stats"></div>
+    <div id="mc-tasks-body"><div class="mc-loading">Loading tasks</div></div>
   </div>
 </div>
 
@@ -3872,6 +3919,8 @@ function switchPanel(id, el) {
   else if (id === 'eng-contracts')  { if (typeof mcLoadContracts === 'function')      mcLoadContracts(); }
   else if (id === 'eng-invoices')   { if (typeof mcLoadInvoices === 'function')       mcLoadInvoices(); }
   else if (id === 'crm-notes')      { if (typeof mcLoadNotes === 'function')          mcLoadNotes(); }
+  else if (id === 'crm-tasks')      { if (typeof mcLoadTasks === 'function')          mcLoadTasks(); }
+  else if (id === 'meetings')       { if (typeof mcLoadMeetings === 'function')       mcLoadMeetings(); }
   else if (id === 'forms-submissions') { if (typeof mcLoadSubmissions === 'function') mcLoadSubmissions(); }
   else if (id === 'forms-nda')         { if (typeof mcLoadFormPanel === 'function')   mcLoadFormPanel('nda','nda'); }
   else if (id === 'forms-msa')         { if (typeof mcLoadFormPanel === 'function')   mcLoadFormPanel('sow','msa'); }
@@ -5415,6 +5464,218 @@ async function mcLoadDashboard(force) {
     const grid = document.getElementById('mc-dash-kpis');
     if (grid) grid.innerHTML = `<div class="mc-kpi"><div class="l">Error</div><div class="v red">—</div><div class="s">${mcEsc(e.message)}</div></div>`;
   }
+}
+
+// ════════════════════════════════════════════════════════════════
+// CRM · Calendly Meetings (mc_engagements with calendly metadata)
+// Top-of-sidebar quick action. Shows upcoming + past calls.
+// ════════════════════════════════════════════════════════════════
+async function mcLoadMeetings(force) {
+  const bodyEl = document.getElementById('mc-meetings-body');
+  const statsEl = document.getElementById('mc-meetings-stats');
+  if (!bodyEl) return;
+  if (!force && _mcCache.meetings) { mcRenderMeetings(_mcCache.meetings); return; }
+  bodyEl.innerHTML = '<div class="mc-loading">Loading meetings</div>';
+  if (statsEl) statsEl.innerHTML = '';
+  try {
+    const res = await fetch(`${MC_API}?type=meetings`, { credentials: 'include' });
+    if (res.status === 401) { mcHandleAuthExpired(); mcShowAuthRequired(bodyEl); return; }
+    if (!res.ok) throw new Error(`HTTP ${res.status}`);
+    _mcCache.meetings = await res.json();
+    mcRenderMeetings(_mcCache.meetings);
+  } catch (e) {
+    bodyEl.innerHTML = `<div class="mc-empty"><div class="ico">⚠</div><h3>Failed to load meetings</h3><p>${mcEsc(e.message)}</p></div>`;
+  }
+}
+
+function mcRenderMeetings(data) {
+  const meetings = data.meetings || [];
+  const stats = data.stats || {};
+  const bodyEl = document.getElementById('mc-meetings-body');
+  const statsEl = document.getElementById('mc-meetings-stats');
+  const badge = document.getElementById('meetings-badge');
+  if (badge) badge.textContent = stats.upcoming || '';
+
+  if (statsEl) {
+    const next = stats.next_meeting;
+    statsEl.innerHTML = [
+      mcStatTile('Upcoming', stats.upcoming || 0, '', 'blue'),
+      mcStatTile('Past 30 days', meetings.filter(m => m.bucket === 'past' && (Date.now() - new Date(m.scheduled_at).getTime()) < 30*86400000).length, ''),
+      mcStatTile('No-shows', stats.no_shows || 0, stats.no_shows ? '' : '', stats.no_shows ? 'red' : 'grey'),
+      mcStatTile('Next call', next?.scheduled_at ? mcFmtRelTime(next.scheduled_at) : '—', next?.client_name ? mcEsc(next.client_name) : 'no scheduled meeting'),
+    ].join('');
+  }
+  if (!meetings.length) {
+    bodyEl.innerHTML = `<div class="mc-empty"><div class="ico">📆</div><h3>No Calendly meetings yet</h3><p>Once someone books a call via your Calendly link, the booking syncs into Supabase and shows up here. To backfill historical meetings, click "Sync from Calendly" above.</p></div>`;
+    return;
+  }
+
+  // Split into Upcoming / Past sections
+  const upcoming = meetings.filter(m => m.bucket === 'upcoming').sort((a, b) => new Date(a.scheduled_at) - new Date(b.scheduled_at));
+  const recent = meetings.filter(m => m.bucket !== 'upcoming').sort((a, b) => new Date(b.scheduled_at || b.booked_at) - new Date(a.scheduled_at || a.booked_at));
+
+  const renderRow = (m) => `<tr onclick="mcGoToCase('${mcEsc(m.client_slug)}')" style="cursor:pointer;">
+    <td>${m.scheduled_at ? `<div style="font-weight:700;color:#0A1628;font-size:.86rem;">${mcFmtDateTime(m.scheduled_at)}</div><div style="font-family:'DM Mono',monospace;font-size:.66rem;color:#94A3B8;">${mcFmtRelTime(m.scheduled_at)}</div>` : '<span style="color:#94A3B8;">—</span>'}</td>
+    <td>
+      <div class="name-cell">${mcEsc(m.client_name || m.client_contact || '—')}</div>
+      <div class="meta-cell">${mcEsc(m.client_email || '')}${m.client_phone ? ' · ' + mcEsc(m.client_phone) : ''}</div>
+    </td>
+    <td>${mcEsc(m.event_type_name || 'Discovery Call')}</td>
+    <td>${mcMeetingPill(m)}</td>
+    <td>${m.booked_at ? mcFmtRelTime(m.booked_at) : '—'}</td>
+    <td onclick="event.stopPropagation()" style="white-space:nowrap;">
+      ${m.calendly_event_uri ? `<a href="${mcEsc(m.calendly_event_uri)}" target="_blank" rel="noopener" class="mc-btn" style="padding:.3rem .6rem;font-size:.66rem;margin-right:.3rem;">Calendly ↗</a>` : ''}
+      <button class="mc-btn" style="padding:.3rem .6rem;font-size:.66rem;" onclick="mcGoToCase('${mcEsc(m.client_slug)}')">Open Case</button>
+    </td>
+  </tr>`;
+
+  let html = '';
+  if (upcoming.length) {
+    html += `<div style="font-family:'DM Mono',monospace;font-size:.66rem;letter-spacing:.18em;text-transform:uppercase;color:#2563EB;font-weight:700;margin:.5rem 0 .85rem;">Upcoming (${upcoming.length})</div>`;
+    html += `<div class="mc-table-wrap" style="margin-bottom:1.5rem;"><table class="mc-table"><thead><tr><th>When</th><th>Who</th><th>Event Type</th><th>Status</th><th>Booked</th><th></th></tr></thead><tbody>${upcoming.map(renderRow).join('')}</tbody></table></div>`;
+  }
+  if (recent.length) {
+    html += `<div style="font-family:'DM Mono',monospace;font-size:.66rem;letter-spacing:.18em;text-transform:uppercase;color:#475569;font-weight:700;margin:.5rem 0 .85rem;">Past &amp; Canceled (${recent.length})</div>`;
+    html += `<div class="mc-table-wrap"><table class="mc-table"><thead><tr><th>When</th><th>Who</th><th>Event Type</th><th>Status</th><th>Booked</th><th></th></tr></thead><tbody>${recent.map(renderRow).join('')}</tbody></table></div>`;
+  }
+  bodyEl.innerHTML = html;
+}
+
+function mcMeetingPill(m) {
+  const map = {
+    upcoming: ['mc-pill-blue',   'upcoming'],
+    past:     ['mc-pill-green',  'completed'],
+    no_show:  ['mc-pill-red',    'no-show'],
+    canceled: ['mc-pill-grey',   'canceled'],
+    unknown:  ['mc-pill-grey',   'unknown'],
+  };
+  const [cls, label] = map[m.bucket] || map.unknown;
+  return `<span class="mc-pill ${cls}">${label}</span>`;
+}
+
+// ════════════════════════════════════════════════════════════════
+// CRM · Tasks (mc_tasks)
+// ════════════════════════════════════════════════════════════════
+function mcLoadTasks(force) { mcFetch('tasks', mcRenderTasks, force); }
+
+function mcRenderTasks(data) {
+  const all = data.tasks || [];
+  const open = all.filter(t => t.status !== 'completed' && t.status !== 'canceled');
+  const done = all.filter(t => t.status === 'completed');
+  const overdue = open.filter(t => t.due_at && new Date(t.due_at).getTime() < Date.now());
+  const bodyEl = document.getElementById('mc-tasks-body');
+  const statsEl = document.getElementById('mc-tasks-stats');
+  const badge = document.getElementById('tasks-badge');
+  if (badge) badge.textContent = open.length || '';
+  if (statsEl) {
+    statsEl.innerHTML = [
+      mcStatTile('Open', open.length, ''),
+      mcStatTile('Overdue', overdue.length, '', overdue.length ? 'red' : 'grey'),
+      mcStatTile('Due This Week', open.filter(t => t.due_at && (new Date(t.due_at) - Date.now()) < 7*86400000 && new Date(t.due_at) > Date.now()).length, '', 'orange'),
+      mcStatTile('Completed', done.length, '', 'green'),
+    ].join('');
+  }
+  if (!all.length) {
+    bodyEl.innerHTML = `<div class="mc-empty"><div class="ico">✅</div><h3>No tasks yet</h3><p>Click "+ New Task" above to log a TODO. Tasks can be tied to a specific client or engagement and surface in the dashboard.</p></div>`;
+    return;
+  }
+  const renderRow = (t) => {
+    const isOverdue = t.due_at && new Date(t.due_at).getTime() < Date.now() && t.status !== 'completed';
+    const priority = (t.priority || 'normal').toLowerCase();
+    const priCls = priority === 'high' ? 'mc-pill-red' : priority === 'low' ? 'mc-pill-grey' : 'mc-pill-blue';
+    return `<tr style="${t.status === 'completed' ? 'opacity:.55;' : isOverdue ? 'background:rgba(239,68,68,0.04);' : ''}">
+      <td onclick="event.stopPropagation()" style="width:32px;">
+        <input type="checkbox" ${t.status === 'completed' ? 'checked' : ''} onchange="mcToggleTaskComplete('${mcEsc(t.id)}', this.checked)" style="cursor:pointer;width:18px;height:18px;" />
+      </td>
+      <td onclick="mcOpenTaskEditor('${mcEsc(t.id)}')" style="cursor:pointer;">
+        <div class="name-cell" style="${t.status === 'completed' ? 'text-decoration:line-through;' : ''}">${mcEsc(t.title || '(untitled)')}</div>
+        ${t.description ? `<div class="meta-cell">${mcEsc((t.description || '').slice(0, 80))}${(t.description || '').length > 80 ? '…' : ''}</div>` : ''}
+      </td>
+      <td>${mcEsc(t.client_name || '—')}</td>
+      <td><span class="mc-pill ${priCls}">${priority}</span></td>
+      <td>${t.due_at ? `<span style="color:${isOverdue ? '#DC2626' : '#0A1628'};font-weight:${isOverdue ? '700' : '500'};">${mcFmtRelTime(t.due_at)}</span>` : '<span style="color:#94A3B8;">—</span>'}</td>
+      <td>${mcEsc(t.assigned_to || 'mark')}</td>
+      <td onclick="event.stopPropagation()" style="white-space:nowrap;">
+        <button class="mc-btn" style="padding:.3rem .6rem;font-size:.66rem;" onclick="mcOpenTaskEditor('${mcEsc(t.id)}')">edit</button>
+        <button class="mc-btn" style="padding:.3rem .6rem;font-size:.66rem;color:#DC2626;border-color:#FCA5A5;margin-left:.3rem;" onclick="mcConfirmDelete('tasks','${mcEsc(t.id)}','${mcEsc((t.title || '').replace(/'/g, '\\u0027'))}',mcLoadTasks)">×</button>
+      </td>
+    </tr>`;
+  };
+  bodyEl.innerHTML = `<div class="mc-table-wrap"><table class="mc-table"><thead><tr>
+    <th></th><th>Task</th><th>Client</th><th>Priority</th><th>Due</th><th>Assignee</th><th></th>
+  </tr></thead><tbody>
+    ${open.length ? open.map(renderRow).join('') : ''}
+    ${done.length ? `<tr><td colspan="7" style="background:#F8FAFC;font-family:'DM Mono',monospace;font-size:.66rem;letter-spacing:.18em;text-transform:uppercase;color:#94A3B8;font-weight:700;padding:.85rem 1rem;">Completed (${done.length})</td></tr>` : ''}
+    ${done.map(renderRow).join('')}
+  </tbody></table></div>`;
+}
+
+async function mcToggleTaskComplete(id, checked) {
+  try {
+    const res = await fetch('/.netlify/functions/admin-mc-write', {
+      method: 'POST', credentials: 'include',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        table: 'tasks', op: 'update', id,
+        data: checked
+          ? { status: 'completed', completed_at: new Date().toISOString() }
+          : { status: 'open', completed_at: null },
+      }),
+    });
+    if (!res.ok) throw new Error(`HTTP ${res.status}`);
+    _mcCache.tasks = null;
+    mcLoadTasks(true);
+  } catch (e) { alert('Failed: ' + e.message); }
+}
+
+async function mcOpenTaskEditor(id) {
+  // Make sure contacts are loaded for the client picker
+  if (!_mcCache.contacts) {
+    try {
+      const r = await fetch(`${MC_API}?type=contacts`, { credentials: 'include' });
+      if (r.ok) _mcCache.contacts = await r.json();
+    } catch {}
+  }
+  const contacts = (_mcCache.contacts?.contacts || []);
+  const existing = id ? (_mcCache.tasks?.tasks || []).find(t => t.id === id) : null;
+  const t = existing || { title: '', description: '', priority: 'normal', status: 'open', due_at: null, assigned_to: 'mark', client_id: '' };
+  const dueLocal = t.due_at ? new Date(t.due_at).toISOString().slice(0, 16) : '';
+  mcOpenModal({
+    title: id ? 'Edit Task' : 'New Task',
+    eyebrow: 'CRM · Tasks',
+    fields: [
+      { name: 'title',       label: 'Title',       type: 'text',     required: true, placeholder: 'Follow up with Wendal on proposal', full: true },
+      { name: 'description', label: 'Description', type: 'textarea', rows: 3,        placeholder: 'Optional context, links, follow-up notes' },
+      { name: 'client_id',   label: 'Client (optional)', type: 'select', full: true,
+        options: [{ value: '', label: '— No client —' }, ...contacts.map(c => ({ value: c.id, label: c.legal_name }))] },
+      { name: 'priority',    label: 'Priority', type: 'select',
+        options: [{ value: 'low', label: 'Low' }, { value: 'normal', label: 'Normal' }, { value: 'high', label: 'High' }] },
+      { name: 'status',      label: 'Status', type: 'select',
+        options: [{ value: 'open', label: 'Open' }, { value: 'in_progress', label: 'In Progress' }, { value: 'blocked', label: 'Blocked' }, { value: 'completed', label: 'Completed' }] },
+      { name: 'due_at',      label: 'Due (optional)', type: 'datetime-local' },
+      { name: 'assigned_to', label: 'Assignee', type: 'text', placeholder: 'mark' },
+    ],
+    values: { ...t, due_at: dueLocal },
+    submit: async (out) => {
+      const data = {
+        title: out.title,
+        description: out.description || null,
+        client_id: out.client_id || null,
+        priority: out.priority,
+        status: out.status,
+        assigned_to: out.assigned_to || 'mark',
+        due_at: out.due_at ? new Date(out.due_at).toISOString() : null,
+      };
+      if (out.status === 'completed' && !t.completed_at) data.completed_at = new Date().toISOString();
+      const res = await fetch('/.netlify/functions/admin-mc-write', {
+        method: 'POST', credentials: 'include',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ table: 'tasks', op: id ? 'update' : 'create', id, data }),
+      });
+      if (!res.ok) throw new Error(`HTTP ${res.status}: ${await res.text()}`);
+    },
+    onClose: () => { _mcCache.tasks = null; mcLoadTasks(true); },
+  });
 }
 
 // ════════════════════════════════════════════════════════════════
