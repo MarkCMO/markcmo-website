@@ -1,6 +1,31 @@
 # CLAUDE.md — operating guide for any Claude session in this repo
 
-> **Read this first. Three rules at the top will save the user hours of lost work.**
+> **Read this first. Four rules at the top will save the user hours of lost work.**
+
+## RULE #-1 — The homepage at `markcmo.com/` (i.e. `index.html`) is LOCKED.
+
+Mark explicitly told Claude on 2026-05-07 after multiple failed template changes:
+
+> "that is it. do not let that ever change again"
+
+Reference state: the deploy that landed at commit `99b6a24a` ("Revert Homepage: replace with MAGNET Framework template").
+
+Going forward, do **NOT**:
+- Replace `index.html` content with another page's template (the magnet-framework template, the about template, etc.)
+- Change the body background color of `index.html`
+- Change the hero copy, the nav structure, the section structure, or the layout of `index.html`
+- Restyle `index.html` "to match the brand" or "to match the magnet-framework page" — those are different surfaces
+- Add `MAGNET™` to the nav of `index.html` unless explicitly asked
+- Inject CSS overrides into `index.html` (no `BRAND-LOCK` blocks, no body bg flips)
+
+You **MAY**:
+- Fix bugs in `index.html` (broken links, security issues, accessibility, schema.org, sitemap entries)
+- Update SEO metadata if Mark explicitly asks for it
+- Add new content sections only if Mark asks for them by name
+
+If Mark asks for a styling change to the homepage, **stop and confirm by re-quoting this rule back at him before doing the edit**. He has been bitten multiple times by Claude restyling the homepage to match other pages or design templates that turned out to be the wrong reference.
+
+When in doubt: do not touch `index.html`. Touch any other file instead.
 
 ## RULE #0 — NEVER send any email without explicit user consent. Not even tests.
 
