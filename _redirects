@@ -345,6 +345,12 @@ https://www.markcmo.com/* https://markcmo.com/:splat 301!
 /courses/welcome               /courses/welcome.html          200
 /graduation                    /graduation.html               200
 
+# ─── Public client portal: /portal/{slug} ───────────────────
+# Slug-gated public page that fetches sanitized data via
+# /.netlify/functions/client-portal-data?slug=... — no admin auth,
+# but only exposes the fields explicitly whitelisted in the function.
+/portal/*                      /portal/index.html              200
+
 # ─── Customer-journey tracking redirects ─────────────────────
 # /pay/{mc_invoices.id} 302s to Square's payment URL after logging
 # the click. Lets us attribute payment-page opens to the channel

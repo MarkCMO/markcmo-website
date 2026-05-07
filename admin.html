@@ -980,6 +980,7 @@
   .pillar-name { font-size: 14px; font-weight: 700; color: var(--text); margin-bottom: 8px; }
   .pillar-desc { font-size: 12px; color: var(--muted); line-height: 1.6; }
   .pillar-example { margin-top: 12px; padding: 10px; background: var(--black); border-left: 2px solid var(--gold-dim); font-size: 11px; color: var(--dim); font-style: italic; }
+  /* Tablet (≤768): collapse sidebar to icons */
   @media (max-width: 768px) {
     .sidebar { width: 60px; }
     .sidebar-logo-text, .sidebar-tag, .nav-section, .sidebar-footer, .nav-item span:not(.nav-icon) { display: none; }
@@ -987,6 +988,28 @@
     .main-content { margin-left: 60px; }
     .grid-2, .grid-3, .grid-4 { grid-template-columns: 1fr; }
     .content-body { padding: 16px; }
+  }
+
+  /* Phone (≤640): full-screen overlay sidebar with hamburger toggle */
+  .mc-mobile-toggle { display: none; }
+  @media (max-width: 640px) {
+    .sidebar { width: 240px; transform: translateX(-100%); transition: transform .25s ease; box-shadow: 0 24px 48px rgba(10,22,40,0.4); z-index: 200; }
+    .sidebar.mc-open { transform: translateX(0); }
+    .sidebar-logo-text, .sidebar-tag, .nav-section, .sidebar-footer, .nav-item span:not(.nav-icon), .admin-nav-item span, .admin-nav-section { display: revert !important; }
+    .admin-nav-item { padding: 0.5rem 0.85rem !important; justify-content: flex-start !important; }
+    .main-content { margin-left: 0 !important; }
+    .mc-mobile-toggle { display: inline-flex; position: fixed; top: 12px; left: 12px; z-index: 250; background: #FFFFFF; border: 1px solid #E2E8F0; border-radius: 10px; padding: 0.55rem 0.7rem; cursor: pointer; align-items: center; justify-content: center; box-shadow: 0 4px 14px rgba(10,22,40,0.12); font-size: 1.2rem; color: #0A1628; }
+    .mc-mobile-toggle:hover { background: #F8FAFC; }
+    .mc-mobile-backdrop { display: none; position: fixed; inset: 0; background: rgba(10,22,40,0.45); z-index: 150; }
+    .mc-mobile-backdrop.mc-open { display: block; }
+    /* Padding so toggle button doesn't overlap top of content */
+    .main-content { padding-top: 56px; }
+    /* KPI grid stacks */
+    .mc-kpi-grid, .mc-stats { grid-template-columns: 1fr 1fr !important; }
+    .mc-dash-grid { grid-template-columns: 1fr !important; }
+    .mc-kanban { grid-template-columns: 1fr !important; }
+    /* Tables horizontally scroll */
+    .mc-table-wrap { overflow-x: auto; }
   }
 /* ── ENGAGE ACCELERATOR ── */
   
@@ -1707,6 +1730,9 @@
 <div class="logout-btn" onclick="doLogout()">Sign out</div>
 </div>
 </aside>
+<!-- Mobile sidebar controls (only show ≤640px) -->
+<button class="mc-mobile-toggle" onclick="mcToggleSidebar()" aria-label="Toggle navigation">☰</button>
+<div class="mc-mobile-backdrop" onclick="mcToggleSidebar()"></div>
 <main class="main-content">
 <div id="panel-dashboard" class="panel active">
 <div class="top-bar">
@@ -5214,6 +5240,74 @@ async function mcRunSquareWebhookRegister(force) {
   }
 }
 
+// ════════════════════════════════════════════════════════════════
+// Mobile sidebar toggle (≤640px)
+// ════════════════════════════════════════════════════════════════
+function mcToggleSidebar() {
+  document.querySelector('.sidebar')?.classList.toggle('mc-open');
+  document.querySelector('.mc-mobile-backdrop')?.classList.toggle('mc-open');
+}
+// Close mobile sidebar when a nav item is clicked
+document.addEventListener('click', (e) => {
+  const t = e.target.closest('.admin-nav-item, .admin-nav-cta');
+  if (!t) return;
+  if (window.matchMedia('(max-width: 640px)').matches) {
+    document.querySelector('.sidebar')?.classList.remove('mc-open');
+    document.querySelector('.mc-mobile-backdrop')?.classList.remove('mc-open');
+  }
+});
+
+// ════════════════════════════════════════════════════════════════
+// Keyboard shortcuts
+//   /         focus the first visible search input on the active panel
+//   Esc       close any open modal (cf-modal or mc-modal)
+//   g then d  go to dashboard
+//   g then l  go to leads
+//   g then c  go to case files
+//   g then p  go to pipeline
+//   n         on case file: open Add Note modal
+// ════════════════════════════════════════════════════════════════
+let _mcGoMode = 0;
+document.addEventListener('keydown', (e) => {
+  // Don't intercept if user is typing in an input/textarea
+  const t = e.target;
+  const isTyping = t && (t.tagName === 'INPUT' || t.tagName === 'TEXTAREA' || t.tagName === 'SELECT' || t.isContentEditable);
+
+  // Esc closes modals (always, even when typing)
+  if (e.key === 'Escape') {
+    const cf = document.getElementById('cf-modal-backdrop');
+    const mc = document.getElementById('mc-modal-backdrop');
+    if (cf?.classList.contains('open')) { cf.classList.remove('open'); e.preventDefault(); return; }
+    if (mc?.classList.contains('open')) { mc.classList.remove('open'); e.preventDefault(); return; }
+  }
+  if (isTyping) { _mcGoMode = 0; return; }
+
+  // / focuses search
+  if (e.key === '/') {
+    const active = document.querySelector('.panel.active');
+    const inp = active?.querySelector('input.mc-search, input.search-input, input[placeholder*="earch"]');
+    if (inp) { inp.focus(); inp.select?.(); e.preventDefault(); _mcGoMode = 0; return; }
+  }
+
+  // g + letter navigates
+  if (_mcGoMode) {
+    _mcGoMode = 0;
+    const map = { d: 'dashboard', l: 'leads', c: 'case-files', p: 'crm-pipeline', i: 'eng-invoices', t: 'eng-projects', s: 'settings' };
+    const target = map[e.key.toLowerCase()];
+    if (target && typeof switchPanel === 'function') {
+      switchPanel(target, document.querySelector(`[onclick*="'${target}'"]`));
+      e.preventDefault();
+    }
+    return;
+  }
+  if (e.key === 'g') { _mcGoMode = 1; setTimeout(() => { _mcGoMode = 0; }, 1500); return; }
+
+  // n on case file: add note
+  if (e.key === 'n' && document.getElementById('panel-case-files')?.classList.contains('active')) {
+    if (typeof mcOpenNoteEditor === 'function') { mcOpenNoteEditor(); e.preventDefault(); }
+  }
+});
+
 function mcRenderDashboardInsights(data) {
   const el = document.getElementById('mc-dash-insights');
   if (!el) return;
@@ -5800,6 +5894,25 @@ async function mcOpenComposeEmail(opts = {}) {
         variables,
       };
       if (values.testRecipient) payload.testRecipient = values.testRecipient;
+
+      // Pre-flight: dry_run first to render the email + check for missing
+      // {{vars}}. Only after the user confirms the preview do we actually
+      // send. Per CLAUDE.md RULE #0: no surprise email sends.
+      const previewRes = await fetch('/.netlify/functions/send-template-email', {
+        method: 'POST', credentials: 'include', headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ ...payload, dry_run: true }),
+      });
+      const preview = await previewRes.json();
+      if (preview.missing_variables && preview.missing_variables.length) {
+        throw new Error('Missing values for: ' + preview.missing_variables.join(', ') + '. Fill those fields above and try again.');
+      }
+
+      // Show preview, ask for confirmation, then send
+      const confirmMsg = `Preview:\n\nTo: ${preview.recipient_email}${preview.cc?.length ? '\nCC: ' + preview.cc.join(', ') : ''}\n${values.testRecipient ? '\n[TEST] Routing to: ' + values.testRecipient : ''}\n\nSubject: ${preview.rendered_subject}\n${preview.rendered_preheader ? '\nPreheader: ' + preview.rendered_preheader : ''}\n\nSEND NOW?`;
+      if (!confirm(confirmMsg)) {
+        throw new Error('Cancelled — no email sent.');
+      }
+
       const res = await fetch('/.netlify/functions/send-template-email', {
         method: 'POST', credentials: 'include', headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(payload),
