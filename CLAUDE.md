@@ -1,6 +1,71 @@
 # CLAUDE.md — operating guide for any Claude session in this repo
 
-> **Read this first. Four rules at the top will save the user hours of lost work.**
+> **Read this first. Five rules at the top will save the user hours of lost work.**
+
+## RULE #-2 — The admin console + the engagement-pipeline backends are LOCKED.
+
+Mark explicitly told Claude on 2026-05-07 after a parallel session deleted ~5,300 lines of admin.html plus 12 backend functions and called it "Wire all admin panels + lock admin.html permanently":
+
+> "the rich with everything wired"
+> "after we fix everything we need to lock this so noone can change it"
+
+**Reference state:** child branch `claude/stoic-raman-9cafcb` HEAD = `96180cbb` (deploy `69fd18ea3d69382756e07c14`). Live admin.html is **524,598 bytes** with 14 mc-dash-* widgets, 37 drag-drop refs, 72 journey refs, 18 Blog Manager refs.
+
+### LOCKED files — do NOT replace, simplify, "consolidate," or delete without explicit per-file Mark permission:
+
+**Admin console:**
+- `admin.html` — the rich console (524 KB). Has drag-drop kanban pipeline, journey timeline, mc_* wired panels (CRM/Engagements/Forms/Email/Revenue/Analytics/Webinars/Blog), Compose Email modal, Client Editor with Square sync, full Blog Manager, Case Files VDR embedded, dashboard with mc-dash-kpis/stages/insights/activity/projects/outstanding tied to mcLoadDashboard.
+- `portal/index.html` — client portal page.
+- `blog-post.html` — dynamic blog post viewer.
+- `admin/vdr/index.html` — Case Files VDR.
+
+**Backend functions** (`netlify/functions/`):
+- Pipeline (Supabase + Square + Resend): `submit-engagement-doc`, `execute-engagement-doc`, `send-engagement-proposal-email`, `square-invoice-action`, `square-invoice-sync`, `square-webhook`, `square-webhook-register`, `engagement-payment-followups`, `_lib_payment_apply`, `_lib_supabase`, `_lib_square`
+- Calendly: `calendly-webhook`, `calendly-sync-history`
+- Email (Resend): `send-template-email`, `resend-webhook`
+- Admin readers/writers: `admin-engagement-data`, `admin-mc-write`, `admin-auth`, `admin-data`, `admin-links`, `admin-upload`, `update-client`, `client-portal-data`
+- Blog: `admin-blog`, `public-blog`
+- Tracking: `track`
+- Misc: `pay`, `course-enroll`, `generate-engagement-docs`, `get-document`, `submit-document`, `execute-document`
+
+**Supabase tables (CLIPOS project, ref `saoomfwycegflxelggxv`):**
+- `mc_clients`, `mc_engagements`, `mc_documents`, `mc_invoices`, `mc_audit_log`, `mc_notes`, `mc_products`, `mc_email_templates`, `mc_webinar_events`, `mc_journey_events`, `mc_tasks`, `mc_blog_posts`
+
+### What "locked" means in practice:
+
+Going forward, do **NOT**:
+- Delete any of the files listed above
+- Reduce admin.html below ~520 KB (the rich version size)
+- Replace admin.html with a "simpler" or "cleaner" version (this has happened twice — both times destroyed work)
+- Drop any of the 12 mc-dash-* dashboard widgets
+- Remove the drag-drop kanban, journey timeline, Compose Email modal, Client Editor, Blog Manager, or Case Files VDR
+- Delete Supabase tables or drop columns from any `mc_*` table
+- Commit a change with the message "Wire all admin panels" / "lock admin.html" / "clean up admin" / "simplify admin" without explicit Mark approval — those messages have all been used to justify destructive deletes
+
+You **MAY**:
+- Fix bugs in admin.html (wiring mismatches, broken handlers, layout issues, auth bugs)
+- Add NEW panels, widgets, or backend functions
+- Add NEW columns to existing mc_* tables (never drop)
+- Refactor internals as long as the user-facing surface and the file inventory above stay intact
+- Wire a panel to a new data source if it currently shows wrong/empty data
+
+If a session's job feels like "consolidate" or "remove" or "simplify" anything in this list, **STOP and ask Mark first**. Quote this rule back at him before any destructive action.
+
+### Recovery — if locked files were deleted by another session:
+
+The auto-wip safety branches preserve every state. To find the last known-good rich admin:
+```bash
+git log --all --oneline -- admin.html | grep -i "rich\|wired\|build" | head -5
+git checkout <commit-with-rich-admin> -- admin.html netlify/functions/ portal/index.html
+```
+Or restore from `auto-wip/child-claude-stoic-raman-9cafcb-2026-05-07T225208Z` which has the full set.
+
+### Session ownership division (to prevent this happening again):
+
+- **claude/stoic-raman-9cafcb** owns: `admin.html`, all `netlify/functions/*`, `portal/index.html`, `blog-post.html`, `admin/vdr/`, all `mc_*` Supabase tables.
+- **markcmo.com / parent worktree session** owns: `index.html`, `about.html`, `services.html`, `blog.html`, `results.html`, `portfolio.html`, all `blog-*.html`, `style.css`, sitemap files, SEO meta, marketing surfaces.
+
+If two sessions are running and one needs to touch the other's files, **stop and let Mark decide which session does it.** Don't merge, don't override.
 
 ## RULE #-1 — The homepage at `markcmo.com/` (i.e. `index.html`) is LOCKED.
 

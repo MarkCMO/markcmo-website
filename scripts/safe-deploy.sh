@@ -156,6 +156,24 @@ fi
 echo "  ready."
 echo
 
+# ─── Step 3.5: Verify LOCKED files (CLAUDE.md RULE #-2) ─────────
+# Refuses to deploy if admin.html or any locked backend function
+# has been deleted or shrunk below ~500KB. This catches accidental
+# "cleanup" deletes that have torched ~5,000 lines of work twice now.
+if [ -f "$CALLING_WT/scripts/verify-locked-files.sh" ]; then
+  echo "─── Step: verify locked files (RULE #-2) ───"
+  if ! ( cd "$CALLING_WT" && bash scripts/verify-locked-files.sh ); then
+    echo
+    echo "[fatal] Locked-file verification failed. Refusing to deploy."
+    echo "        See CLAUDE.md RULE #-2 for the recovery steps."
+    echo "        Override: only with explicit Mark approval, run with"
+    echo "                  SKIP_LOCK_CHECK=1 bash scripts/safe-deploy.sh ..."
+    if [ "${SKIP_LOCK_CHECK:-0}" != "1" ]; then exit 3; fi
+    echo "[warning] SKIP_LOCK_CHECK=1 set — proceeding anyway."
+  fi
+  echo
+fi
+
 # ─── Step 4: The actual deploy ──────────────────────────────────
 echo "─── Step: netlify deploy --prod ───"
 cd "$CALLING_WT"
