@@ -157,7 +157,8 @@
     color: var(--dim);
     margin-top: 2px;
   }
-  .sidebar-nav { flex: 1; padding: 16px 0; overflow-y: auto; }
+  .sidebar-nav { flex: 1; padding: 16px 0; overflow-y: auto; scrollbar-width: none; -ms-overflow-style: none; }
+  .sidebar-nav::-webkit-scrollbar { display: none; }
   .nav-section {
     font-size: 9px;
     letter-spacing: 3px;
@@ -1036,7 +1037,8 @@
      Sidebar: dark navy chrome. Nav items in white/blue, active in
      blue accent, sections labeled in DM Mono uppercase eyebrows.
      ════════════════════════════════════════════════════════════ */
-  .sidebar { width: 260px !important; padding: 0 !important; overflow-y: auto !important; max-height: 100vh; }
+  .sidebar { width: 260px !important; padding: 0 !important; overflow-y: auto !important; max-height: 100vh; scrollbar-width: none; -ms-overflow-style: none; }
+  .sidebar::-webkit-scrollbar { display: none; }
   .sidebar-logo { padding: 1.4rem 1.25rem 1rem !important; border-bottom: 1px solid rgba(248,250,252,0.08); }
   .sidebar-logo-text { font-family: 'Bebas Neue', sans-serif !important; font-size: 1.4rem !important; letter-spacing: 0.12em !important; color: #FFFFFF !important; }
   .sidebar-logo-text span { color: #3B82F6 !important; }
@@ -1635,15 +1637,15 @@
 <div class="panel-header"><h1 class="panel-title">📄 Proposals</h1>
 <div class="panel-actions">
 <button class="btn btn-primary" onclick="loadEngDocs('proposal')">↻ Refresh</button>
-<a href="/forms/proposal" target="_blank" class="btn btn-outline">New Proposal →</a>
+<a href="/admin/vdr" target="_blank" class="btn btn-outline">Case Files (VDR) →</a>
 </div>
 </div>
 <div class="content-body">
 <div class="table-wrap">
 <table class="data-table">
-<thead><tr><th>Title</th><th>Client</th><th>Engagement</th><th>Status</th><th>Created</th><th>URL</th></tr></thead>
+<thead><tr><th>Doc ID</th><th>Client</th><th>Engagement</th><th>Status</th><th>Created</th><th>Client Signed</th><th>Executed</th></tr></thead>
 <tbody id="docs-proposals-tbody">
-<tr><td colspan="6" style="text-align:center;color:var(--dim);padding:32px;">Loading proposals...</td></tr>
+<tr><td colspan="7" style="text-align:center;color:var(--dim);padding:32px;">Loading proposals...</td></tr>
 </tbody>
 </table>
 </div>
@@ -1653,15 +1655,15 @@
 <div class="panel-header"><h1 class="panel-title">✍️ Contracts</h1>
 <div class="panel-actions">
 <button class="btn btn-primary" onclick="loadEngDocs('contract')">↻ Refresh</button>
-<a href="/forms/msa" target="_blank" class="btn btn-outline">New Contract →</a>
+<a href="/admin/vdr" target="_blank" class="btn btn-outline">Case Files (VDR) →</a>
 </div>
 </div>
 <div class="content-body">
 <div class="table-wrap">
 <table class="data-table">
-<thead><tr><th>Title</th><th>Client</th><th>Engagement</th><th>Status</th><th>Created</th><th>URL</th></tr></thead>
+<thead><tr><th>Doc ID</th><th>Client</th><th>Engagement</th><th>Status</th><th>Created</th><th>Client Signed</th><th>Executed</th></tr></thead>
 <tbody id="docs-contracts-tbody">
-<tr><td colspan="6" style="text-align:center;color:var(--dim);padding:32px;">Loading contracts...</td></tr>
+<tr><td colspan="7" style="text-align:center;color:var(--dim);padding:32px;">Loading contracts...</td></tr>
 </tbody>
 </table>
 </div>
@@ -4163,24 +4165,30 @@ async function loadEngagements() {
 async function loadEngDocs(type) {
   const tbody = document.getElementById(`docs-${type}s-tbody`);
   if (!tbody) return;
-  tbody.innerHTML = '<tr><td colspan="6" style="text-align:center;color:var(--dim);padding:32px;">Loading...</td></tr>';
+  tbody.innerHTML = '<tr><td colspan="7" style="text-align:center;color:var(--dim);padding:32px;">Loading...</td></tr>';
   try {
     const d = await adminFetch('supadocs');
-    const rows = (d.supadocs||[]).filter(r=>(r.type||'').toLowerCase()===type);
+    // mc_documents uses doc_type field (not type)
+    const rows = (d.supadocs||[]).filter(r=>(r.doc_type||'').toLowerCase()===type || (r.doc_type||'').toLowerCase().includes(type));
     tbody.innerHTML = rows.length ? rows.map(r => {
       const client = r.mc_engagements?.mc_clients?.company_name || '—';
       const eng = r.mc_engagements?.title || '—';
+      const signed = r.client_signed_at || r.signed_at;
+      const executed = r.executed_at || r.countersigned_at;
+      const sigBadge = signed ? `<span style="color:#4CAF72;font-size:11px;">✓ ${fmtDate(signed)}</span>` : `<span style="color:var(--dim);font-size:11px;">Pending</span>`;
+      const execBadge = executed ? `<span style="color:#4CAF72;font-size:11px;">✓ ${fmtDate(executed)}</span>` : `<span style="color:var(--dim);font-size:11px;">—</span>`;
       return `<tr>
-        <td style="font-weight:500;">${r.title||'—'}</td>
-        <td>${client}</td>
+        <td style="font-family:'DM Mono',monospace;font-size:11px;color:var(--dim);">${(r.doc_id||r.id||'—').toString().substring(0,8)}</td>
+        <td style="font-weight:500;">${client}</td>
         <td style="color:var(--dim);">${eng}</td>
         <td>${statusBadge(r.status)}</td>
         <td style="color:var(--dim);font-size:11px;">${fmtDate(r.created_at)}</td>
-        <td>${r.url?`<a href="${r.url}" target="_blank" style="color:var(--gold);font-size:11px;">Open →</a>`:'—'}</td>
+        <td>${sigBadge}</td>
+        <td>${execBadge}</td>
       </tr>`;
-    }).join('') : `<tr><td colspan="6" style="text-align:center;color:var(--dim);padding:32px;">No ${type}s found in mc_documents.</td></tr>`;
+    }).join('') : `<tr><td colspan="7" style="text-align:center;color:var(--dim);padding:32px;">No ${type}s found. Create one via VDR → Case Files.</td></tr>`;
   } catch(e) {
-    tbody.innerHTML = `<tr><td colspan="6" style="text-align:center;color:#ef4444;padding:32px;">${e.message}</td></tr>`;
+    tbody.innerHTML = `<tr><td colspan="7" style="text-align:center;color:#ef4444;padding:32px;">${e.message}</td></tr>`;
   }
 }
 
