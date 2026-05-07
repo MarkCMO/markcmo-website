@@ -2708,6 +2708,9 @@ document.getElementById('login-pass').addEventListener('keydown', e => {
 if (sessionStorage.getItem('admin_auth') === '1') {
   document.getElementById('login-screen').style.display = 'none';
   document.getElementById('app').style.display = 'block';
+  // Wire up the panels — without this, every box stays stuck on "LOADING..."
+  // because initApp() was previously only called from doLogin().
+  setTimeout(() => { try { initApp(); } catch(e) { console.error('initApp failed:', e); } }, 0);
 }
 // ─── STATE ───────────────────────────────────────────────────────────────────
 let allLeads = [];
