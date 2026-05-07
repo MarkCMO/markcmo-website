@@ -22,7 +22,8 @@ const TABLE_MAP = {
   templates:   { name: 'mc_email_templates', editable: ['slug','name','category','subject','preheader','html_body','variables','is_active'] },
   webinars:    { name: 'mc_webinar_events',  editable: ['slug','title','topic','scheduled_at','registration_open_at','registration_close_at','duration_minutes','host','live_url','replay_url','replay_password','status','registrant_count','attendee_count','replay_view_count','notes'] },
   engagements: { name: 'mc_engagements',     editable: ['client_id','status','name','description','fee_usd','delivery_window_hrs','doc_prefix','proposed_at','accepted_at','paid_at','started_at','delivery_due_at','complete_at','metadata'] },
-  clients:     { name: 'mc_clients',         editable: ['slug','legal_name','dba','primary_contact_name','primary_contact_title','primary_contact_email','primary_contact_phone','website','country','region','source','status','notes','cc_emails','square_customer_id'] },
+  clients:     { name: 'mc_clients',         editable: ['slug','legal_name','dba','primary_contact_name','primary_contact_title','primary_contact_email','primary_contact_phone','website','country','region','source','status','notes','cc_emails','tags','square_customer_id'] },
+  tasks:       { name: 'mc_tasks',            editable: ['engagement_id','client_id','title','description','status','priority','due_at','completed_at','assigned_to','display_order'] },
 };
 
 async function sbDelete(table, filter) {

@@ -178,13 +178,17 @@ exports.handler = async (event) => {
         return { statusCode: 404, headers, body: JSON.stringify({ error: `Client ${slug} not found` }) };
       }
       const client = clients[0];
-      const engagementIds = (client.mc_engagements || []).map(e => `id.eq.${e.id}`).join(',');
-      const auditFilter = engagementIds ? `engagement_id=in.(${(client.mc_engagements || []).map(e => e.id).join(',')})` : null;
-      const audit = auditFilter
-        ? await sbSelect(`mc_audit_log?${auditFilter}&order=created_at.desc&limit=100`)
-        : [];
+      const engIds = (client.mc_engagements || []).map(e => e.id);
+      const [audit, tasks] = await Promise.all([
+        engIds.length
+          ? sbSelect(`mc_audit_log?engagement_id=in.(${engIds.join(',')})&order=created_at.desc&limit=100`)
+          : Promise.resolve([]),
+        engIds.length
+          ? sbSelect(`mc_tasks?engagement_id=in.(${engIds.join(',')})&select=*&order=status.asc,display_order.asc,created_at.asc`)
+          : Promise.resolve([]),
+      ]);
 
-      return { statusCode: 200, headers, body: JSON.stringify({ client, audit }) };
+      return { statusCode: 200, headers, body: JSON.stringify({ client, audit, tasks }) };
     }
 
     // ─── /signed-url: short-lived signed URL for a stored doc ───
@@ -212,7 +216,7 @@ exports.handler = async (event) => {
     // ─── /contacts: every mc_clients row, with engagement summary ──
     if (type === 'contacts') {
       const rows = await sbSelect(
-        'mc_clients?select=id,slug,legal_name,dba,primary_contact_name,primary_contact_title,primary_contact_email,primary_contact_phone,country,region,source,status,cc_emails,notes,created_at,updated_at,mc_engagements(id,name,fee_usd,status,paid_at)&order=updated_at.desc'
+        'mc_clients?select=id,slug,legal_name,dba,primary_contact_name,primary_contact_title,primary_contact_email,primary_contact_phone,country,region,source,status,cc_emails,tags,notes,created_at,updated_at,mc_engagements(id,name,fee_usd,status,paid_at)&order=updated_at.desc'
       );
       const contacts = rows.map(c => {
         const eng = c.mc_engagements || [];
@@ -230,6 +234,7 @@ exports.handler = async (event) => {
           source: c.source || 'manual',
           status: c.status,
           cc_emails: Array.isArray(c.cc_emails) ? c.cc_emails : [],
+          tags: Array.isArray(c.tags) ? c.tags : [],
           engagements_count: eng.length,
           engagement_total_usd: eng.reduce((s,e) => s + Number(e.fee_usd || 0), 0),
           engagement_paid_usd: eng.filter(e => e.paid_at).reduce((s,e) => s + Number(e.fee_usd || 0), 0),
@@ -680,6 +685,40 @@ exports.handler = async (event) => {
         click_through_rate: opened ? +(clicked / opened * 100).toFixed(1) : 0,
         bounce_rate: sent ? +(bounced / sent * 100).toFixed(1) : 0,
       }) };
+    }
+
+    // ─── /tasks: list mc_tasks, optionally filtered ─────────────
+    if (type === 'tasks') {
+      const filters = [];
+      if (q.engagementId) filters.push(`engagement_id=eq.${encodeURIComponent(q.engagementId)}`);
+      if (q.clientId) filters.push(`client_id=eq.${encodeURIComponent(q.clientId)}`);
+      if (q.status) filters.push(`status=eq.${encodeURIComponent(q.status)}`);
+      const path = `mc_tasks?${filters.join('&')}${filters.length ? '&' : ''}select=*,mc_clients(slug,legal_name),mc_engagements(name)&order=status.asc,display_order.asc,created_at.asc&limit=500`;
+      const rows = await sbSelect(path);
+      const tasks = rows.map(t => ({
+        ...t,
+        client_slug: t.mc_clients?.slug,
+        client_name: t.mc_clients?.legal_name,
+        engagement_name: t.mc_engagements?.name,
+      }));
+      return { statusCode: 200, headers, body: JSON.stringify({ tasks }) };
+    }
+
+    // ─── /tags: distinct tag list across mc_clients ─────────────
+    if (type === 'tags') {
+      const rows = await sbSelect('mc_clients?select=tags&limit=2000');
+      const counts = {};
+      for (const r of rows) {
+        const tags = Array.isArray(r.tags) ? r.tags : [];
+        for (const t of tags) {
+          if (typeof t !== 'string') continue;
+          counts[t] = (counts[t] || 0) + 1;
+        }
+      }
+      const tags = Object.entries(counts)
+        .map(([tag, count]) => ({ tag, count }))
+        .sort((a, b) => b.count - a.count);
+      return { statusCode: 200, headers, body: JSON.stringify({ tags }) };
     }
 
     // ─── /insights: actionable signals for the dashboard ────────

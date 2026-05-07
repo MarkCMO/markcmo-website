@@ -36,6 +36,7 @@ const EDITABLE = [
   'website', 'country', 'region',
   'notes', 'status',
   'cc_emails',
+  'tags',
 ];
 
 exports.handler = async (event) => {
@@ -68,6 +69,20 @@ exports.handler = async (event) => {
     if (!(k in body)) continue;
     let v = body[k];
 
+    if (k === 'tags') {
+      if (!Array.isArray(v)) return { statusCode: 400, headers, body: JSON.stringify({ error: 'tags must be an array' }) };
+      const cleaned = [];
+      for (const t of v) {
+        if (typeof t !== 'string') continue;
+        const trimmed = t.trim();
+        if (!trimmed) continue;
+        if (trimmed.length > 40) return { statusCode: 400, headers, body: JSON.stringify({ error: `Tag too long (max 40 chars): "${trimmed}"` }) };
+        if (!/^[A-Za-z0-9:_\-\s]+$/.test(trimmed)) return { statusCode: 400, headers, body: JSON.stringify({ error: `Invalid tag: "${trimmed}". Letters/digits/colon/underscore/hyphen/space only.` }) };
+        cleaned.push(trimmed);
+      }
+      patch.tags = Array.from(new Set(cleaned));
+      continue;
+    }
     if (k === 'cc_emails') {
       // Must be an array of valid email strings
       if (!Array.isArray(v)) {

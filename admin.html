@@ -1517,6 +1517,32 @@
   .mc-stage .count { font-family: 'Bebas Neue', Impact, sans-serif; font-size: 1.4rem; line-height: 1; color: #0A1628; letter-spacing: 0.02em; }
   .mc-stage .total { font-size: 0.7rem; color: #64748B; margin-top: 0.2rem; font-family: 'DM Mono', monospace; }
 
+  /* ─── Per-engagement tasks (cf-task-) ─── */
+  .cf-tasks { margin-top: 1rem; }
+  .cf-task-list { display: flex; flex-direction: column; gap: 0.4rem; }
+  .cf-task-row { display: grid; grid-template-columns: auto 1fr auto auto; gap: 0.6rem; align-items: center; padding: 0.55rem 0.85rem; background: #FFFFFF; border: 1px solid #E2E8F0; border-radius: 8px; transition: border-color 0.12s; }
+  .cf-task-row:hover { border-color: #2563EB; }
+  .cf-task-row.done { background: #F8FAFC; opacity: 0.7; }
+  .cf-task-row.done .cf-task-title { text-decoration: line-through; color: #64748B; }
+  .cf-task-row.in_progress { border-left: 3px solid #2563EB; }
+  .cf-task-row.blocked { border-left: 3px solid #DC2626; background: #FEF2F2; }
+  .cf-task-checkbox { width: 18px; height: 18px; border: 2px solid #CBD5E1; border-radius: 5px; cursor: pointer; flex-shrink: 0; display: inline-flex; align-items: center; justify-content: center; transition: all 0.12s; background: #FFFFFF; }
+  .cf-task-checkbox:hover { border-color: #2563EB; }
+  .cf-task-checkbox.checked { background: #10B981; border-color: #10B981; color: #FFFFFF; font-size: 0.85rem; font-weight: 700; }
+  .cf-task-title { font-size: 0.86rem; color: #0A1628; font-weight: 500; line-height: 1.35; min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+  .cf-task-due { font-family: 'DM Mono', monospace; font-size: 0.66rem; color: #94A3B8; white-space: nowrap; padding: 0.2rem 0.5rem; border-radius: 5px; background: #F1F5F9; }
+  .cf-task-due.urgent { color: #DC2626; background: #FEE2E2; font-weight: 700; }
+  .cf-task-due.soon { color: #F97316; background: #FED7AA; font-weight: 700; }
+  .cf-task-priority { font-family: 'DM Mono', monospace; font-size: 0.6rem; padding: 0.18rem 0.4rem; border-radius: 4px; font-weight: 700; }
+  .cf-task-priority.urgent { background: #FEE2E2; color: #DC2626; }
+  .cf-task-priority.high { background: #FED7AA; color: #9A3412; }
+  .cf-task-priority.normal { background: #F1F5F9; color: #475569; }
+  .cf-task-priority.low { background: #DBEAFE; color: #1D4ED8; }
+  .cf-task-actions { display: flex; gap: 0.25rem; }
+  .cf-task-add-btn { background: #EFF6FF; color: #2563EB; border: 1px dashed #2563EB; padding: 0.55rem 0.9rem; border-radius: 8px; font-family: 'Barlow', sans-serif; font-size: 0.78rem; font-weight: 700; letter-spacing: 0.04em; cursor: pointer; margin-top: 0.4rem; }
+  .cf-task-add-btn:hover { background: #DBEAFE; }
+  .cf-task-empty { font-size: .82rem; color: #94A3B8; font-style: italic; padding: .85rem; text-align: center; background: #F8FAFC; border-radius: 8px; border: 1px dashed #E2E8F0; }
+
   /* ─── Customer Journey timeline (cf-journey-) ─── */
   .cf-journey-section { margin-top: 1.5rem; }
   .cf-journey-stats { display: grid; grid-template-columns: repeat(auto-fit,minmax(140px,1fr)); gap: 0.6rem; margin-bottom: 1rem; }
@@ -2037,6 +2063,13 @@
               <label>CC Emails (always copied on every client-facing email)</label>
               <div id="cf-edit-cc-list" class="cf-cc-list"></div>
               <button type="button" class="cf-cc-add" onclick="cfAddCcRow()">+ Add CC email</button>
+            </div>
+          </div>
+          <div class="cf-row">
+            <div class="cf-field full">
+              <label>Tags (free-form labels for filtering: VIP, industry:tourism, geo:caribbean, priority:high)</label>
+              <div id="cf-edit-tag-list" class="cf-cc-list"></div>
+              <button type="button" class="cf-cc-add" onclick="cfAddTagRow()">+ Add tag</button>
             </div>
           </div>
           <div class="cf-row">
@@ -3927,8 +3960,9 @@ async function cfLoadCase(slug) {
       const data = await res.json().catch(() => ({}));
       throw new Error(data.error || `HTTP ${res.status}`);
     }
-    const { client, audit } = await res.json();
+    const { client, audit, tasks } = await res.json();
     window._cfActiveClientObj = client; // cache for the Edit Client modal
+    window._cfActiveTasks = tasks || [];
     cfRenderCase(client, audit || []);
   } catch (e) {
     detail.innerHTML = `<div class="cf-err fatal">Failed to load case: ${cfEsc(e.message)}</div>`;
@@ -3946,6 +3980,16 @@ function cfRenderCase(client, audit) {
   const ccChips = ccEmails.length
     ? `<div class="cf-cc-strip">${ccEmails.map(e => `<span class="cf-cc-chip">${cfEsc(e)}</span>`).join('')}</div>`
     : '<span style="color:#94A3B8;font-style:italic;">none configured</span>';
+  const tags = Array.isArray(client.tags) ? client.tags : [];
+  const tagChips = tags.length
+    ? `<div class="cf-cc-strip">${tags.map(t => {
+        const isCat = t.includes(':');
+        const cat = isCat ? t.split(':')[0] : 'tag';
+        const colorMap = { vip:'#F97316', industry:'#5B21B6', geo:'#0E7490', priority:'#DC2626', source:'#475569' };
+        const color = colorMap[cat.toLowerCase()] || '#2563EB';
+        return `<span class="cf-cc-chip" style="background:${color}1A;color:${color};font-weight:700;">${cfEsc(t)}</span>`;
+      }).join('')}</div>`
+    : '<span style="color:#94A3B8;font-style:italic;">no tags</span>';
 
   let html = `
     <div class="cf-head">
@@ -3965,6 +4009,7 @@ function cfRenderCase(client, audit) {
       </div>
       <div class="cf-meta-grid" style="margin-top:.6rem;">
         <div style="grid-column:1/-1;"><div class="l">CC On Client Emails</div><div class="v">${ccChips}</div></div>
+        <div style="grid-column:1/-1;"><div class="l">Tags</div><div class="v">${tagChips}</div></div>
       </div>
       <div class="cf-actions">
         ${isLead ? `<button class="cf-btn primary" onclick="cfGenerateDocs('${cfEsc(client.slug)}')">Generate Engagement Docs</button>` : `
@@ -4016,6 +4061,7 @@ function cfRenderCase(client, audit) {
           </table>
         ` : '<p style="color:#64748B;font-size:.85rem;margin-top:.85rem;">No documents on this engagement yet.</p>'}
         ${cfRenderInvoiceBlock(e, invoices)}
+        ${cfRenderTaskBlock(e)}
       </div>`;
     }
     html += `</div>`;
@@ -4042,12 +4088,39 @@ function cfRenderCase(client, audit) {
     <div class="cf-sec-head"><div>
       <span class="cf-sec-eyebrow">Customer Journey &middot; Touchpoint Analytics</span>
       <div class="cf-sec-title">Email + Page View Timeline</div>
-    </div></div>
+    </div><button class="cf-btn outline" style="padding:.4rem .85rem;font-size:.7rem;" onclick="cfExportJourneyCsv('${cfEsc(client.id)}','${cfEsc(client.slug)}')">⬇ Export CSV</button></div>
     <div id="cf-journey-${cfEsc(client.id)}"><div class="cf-loading"><div class="cf-loading-ring"></div></div></div>
   </div>`;
 
   document.getElementById('cf-detail').innerHTML = html;
   cfLoadJourney(client.id);
+}
+
+// ─── CSV export of journey events ────────────────────────────────
+async function cfExportJourneyCsv(clientId, slug) {
+  try {
+    const res = await fetch(`${CF_API}?type=journey&clientId=${encodeURIComponent(clientId)}&limit=500`, { credentials: 'include' });
+    if (!res.ok) throw new Error(`HTTP ${res.status}`);
+    const data = await res.json();
+    const events = data.events || [];
+    if (!events.length) { alert('No events to export.'); return; }
+    const csvEsc = (v) => {
+      if (v === null || v === undefined) return '';
+      const s = String(v);
+      return /[",\n\r]/.test(s) ? '"' + s.replace(/"/g,'""') + '"' : s;
+    };
+    const cols = ['created_at','category','event','subject_or_url','recipient_email','resend_email_id','ip','user_agent','referrer','session_id'];
+    const header = cols.join(',');
+    const rows = events.map(e => cols.map(c => csvEsc(e[c])).join(','));
+    const csv = [header, ...rows].join('\n');
+    const blob = new Blob([csv], { type: 'text/csv;charset=utf-8' });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = `mc-journey-${slug}-${new Date().toISOString().slice(0,10)}.csv`;
+    document.body.appendChild(a); a.click(); a.remove();
+    setTimeout(() => URL.revokeObjectURL(url), 1000);
+  } catch (e) { alert('Export failed: ' + e.message); }
 }
 
 // ─── Customer Journey loader ─────────────────────────────────────
@@ -4151,6 +4224,108 @@ function cfRenderJourney(data) {
   </div>`;
 
   return stats + emailsBlock + pageBreakdown + timeline;
+}
+
+function cfRenderTaskBlock(engagement) {
+  const all = window._cfActiveTasks || [];
+  const tasks = all.filter(t => t.engagement_id === engagement.id);
+  // Sort: not-done first by display_order, then done
+  const open = tasks.filter(t => !['done','cancelled'].includes(t.status));
+  const closed = tasks.filter(t => ['done','cancelled'].includes(t.status));
+  open.sort((a,b) => (a.display_order||100) - (b.display_order||100));
+  closed.sort((a,b) => new Date(b.completed_at||0) - new Date(a.completed_at||0));
+  const list = [...open, ...closed];
+
+  const fmtDue = (s, status) => {
+    if (!s) return '';
+    const t = new Date(s).getTime();
+    const hours = (t - Date.now()) / 3600000;
+    let cls = '';
+    if (hours < 0) cls = 'urgent';
+    else if (hours < 24) cls = 'soon';
+    const label = hours < 0 ? Math.round(-hours) + 'h overdue'
+      : hours < 24 ? Math.round(hours) + 'h left'
+      : Math.round(hours/24) + 'd left';
+    return `<span class="cf-task-due ${cls}">${cfEsc(label)}</span>`;
+  };
+
+  return `<div class="cf-tasks">
+    <div style="display:flex;justify-content:space-between;align-items:baseline;margin-bottom:.5rem;flex-wrap:wrap;gap:.5rem;">
+      <div style="font-family:'DM Mono',monospace;font-size:.62rem;letter-spacing:.16em;text-transform:uppercase;color:#475569;font-weight:700;">Delivery Tasks · ${open.length} open · ${closed.length} done</div>
+    </div>
+    <div class="cf-task-list">
+      ${list.length ? list.map(t => `<div class="cf-task-row ${cfEsc(t.status)}">
+        <div class="cf-task-checkbox ${['done'].includes(t.status)?'checked':''}" onclick="cfToggleTask('${cfEsc(t.id)}','${cfEsc(t.status)}')" title="Toggle done">${t.status==='done'?'✓':''}</div>
+        <div class="cf-task-title">${cfEsc(t.title)}${t.description?`<div style="font-size:.7rem;color:#64748B;font-weight:400;margin-top:.15rem;white-space:normal;">${cfEsc(t.description)}</div>`:''}</div>
+        ${fmtDue(t.due_at, t.status)}
+        <div class="cf-task-actions">
+          <span class="cf-task-priority ${cfEsc(t.priority)}">${cfEsc(t.priority)}</span>
+          <button class="cf-btn cf-btn-sm outline" style="padding:.2rem .5rem;font-size:.62rem;" onclick="cfEditTask('${cfEsc(t.id)}')">edit</button>
+          <button class="cf-btn cf-btn-sm" style="padding:.2rem .5rem;font-size:.62rem;color:#DC2626;border-color:#FCA5A5;background:#FFFFFF;" onclick="mcConfirmDelete('tasks','${cfEsc(t.id)}','this task',()=>{if(_cfActiveSlug)cfLoadCase(_cfActiveSlug);})">×</button>
+        </div>
+      </div>`).join('') : '<div class="cf-task-empty">No tasks. Add one below to start tracking delivery work.</div>'}
+    </div>
+    <button class="cf-task-add-btn" onclick="cfOpenTaskEditor(null,'${cfEsc(engagement.id)}','${cfEsc(engagement.client_id||'')}')">+ Add Task</button>
+  </div>`;
+}
+
+async function cfToggleTask(taskId, currentStatus) {
+  const next = currentStatus === 'done' ? 'todo' : 'done';
+  const patch = { status: next };
+  if (next === 'done') patch.completed_at = new Date().toISOString();
+  else patch.completed_at = null;
+  try {
+    await mcWrite('tasks', 'update', { id: taskId, data: patch });
+    if (_cfActiveSlug) cfLoadCase(_cfActiveSlug);
+  } catch (e) { alert('Toggle failed: ' + e.message); }
+}
+
+function cfOpenTaskEditor(taskId, engagementId, clientId) {
+  const existing = taskId ? (window._cfActiveTasks || []).find(t => t.id === taskId) : null;
+  const toLocal = (iso) => { if (!iso) return ''; try { const d=new Date(iso); const off=d.getTimezoneOffset()*60000; return new Date(d.getTime()-off).toISOString().slice(0,16); } catch { return ''; } };
+  mcOpenModal({
+    title: taskId ? 'Edit Task' : 'Add Task',
+    eyebrow: 'Engagement · Delivery',
+    fields: [
+      { name: 'title', label: 'Title', required: true, full: true, placeholder: 'Pull last 90d analytics + segment by channel' },
+      { name: 'description', label: 'Description (optional)', type: 'textarea', rows: 2, full: true },
+      { name: 'priority', label: 'Priority', type: 'select', options: [
+        { value: 'urgent', label: '🔥 Urgent' },
+        { value: 'high', label: '⚡ High' },
+        { value: 'normal', label: 'Normal' },
+        { value: 'low', label: 'Low' },
+      ]},
+      { name: 'status', label: 'Status', type: 'select', options: [
+        { value: 'todo', label: 'To Do' },
+        { value: 'in_progress', label: 'In Progress' },
+        { value: 'blocked', label: 'Blocked' },
+        { value: 'done', label: 'Done' },
+        { value: 'cancelled', label: 'Cancelled' },
+      ]},
+      { name: 'due_at', label: 'Due At (optional)', type: 'datetime-local' },
+      { name: 'assigned_to', label: 'Assigned To', placeholder: 'mark', default: 'mark' },
+      { name: 'display_order', label: 'Order (lower = higher in list)', type: 'number', default: 100 },
+    ],
+    values: existing ? { ...existing, due_at: toLocal(existing.due_at) } : { priority: 'normal', status: 'todo', assigned_to: 'mark', display_order: 100 },
+    submit: async (values) => {
+      if (values.due_at) values.due_at = new Date(values.due_at).toISOString();
+      else values.due_at = null;
+      if (values.status === 'done' && !existing?.completed_at) values.completed_at = new Date().toISOString();
+      if (taskId) {
+        await mcWrite('tasks', 'update', { id: taskId, data: values });
+      } else {
+        values.engagement_id = engagementId;
+        if (clientId) values.client_id = clientId;
+        await mcWrite('tasks', 'create', { data: values });
+      }
+    },
+    onClose: () => { if (_cfActiveSlug) cfLoadCase(_cfActiveSlug); },
+  });
+}
+function cfEditTask(taskId) {
+  const t = (window._cfActiveTasks || []).find(x => x.id === taskId);
+  if (!t) return;
+  cfOpenTaskEditor(taskId, t.engagement_id, t.client_id);
 }
 
 function cfRenderInvoiceBlock(engagement, invoices) {
@@ -4300,6 +4475,12 @@ function cfOpenEditClient(clientId) {
   const ccList = document.getElementById('cf-edit-cc-list');
   ccList.innerHTML = '';
   (Array.isArray(client.cc_emails) ? client.cc_emails : []).forEach(e => cfAddCcRow(e));
+  // Populate tags list
+  const tagList = document.getElementById('cf-edit-tag-list');
+  if (tagList) {
+    tagList.innerHTML = '';
+    (Array.isArray(client.tags) ? client.tags : []).forEach(t => cfAddTagRow(t));
+  }
   // Modal title
   document.getElementById('cf-modal-title').textContent = client.legal_name || 'Edit client';
   document.getElementById('cf-edit-result').className = 'cf-edit-result';
@@ -4319,6 +4500,14 @@ function cfAddCcRow(value) {
   row.innerHTML = `<input type="email" placeholder="cfo@example.com" value="${cfEsc(value || '')}"><button type="button" title="Remove" onclick="this.parentElement.remove()">×</button>`;
   ccList.appendChild(row);
 }
+function cfAddTagRow(value) {
+  const tagList = document.getElementById('cf-edit-tag-list');
+  if (!tagList) return;
+  const row = document.createElement('div');
+  row.className = 'cf-cc-row';
+  row.innerHTML = `<input type="text" placeholder="VIP   or   industry:tourism   or   priority:high" value="${cfEsc(value || '')}"><button type="button" title="Remove" onclick="this.parentElement.remove()">×</button>`;
+  tagList.appendChild(row);
+}
 
 async function cfSaveClient(ev) {
   ev.preventDefault();
@@ -4328,9 +4517,11 @@ async function cfSaveClient(ev) {
   result.className = 'cf-edit-result';
   result.textContent = '';
 
-  // Collect cc emails
+  // Collect cc emails + tags
   const ccInputs = document.querySelectorAll('#cf-edit-cc-list input');
   const cc_emails = Array.from(ccInputs).map(i => i.value.trim()).filter(v => v);
+  const tagInputs = document.querySelectorAll('#cf-edit-tag-list input');
+  const tags = Array.from(tagInputs).map(i => i.value.trim()).filter(v => v && /^[A-Za-z0-9:_\-\s]{1,40}$/.test(v));
 
   const body = {
     id: _cfEditClientId,
@@ -4345,6 +4536,7 @@ async function cfSaveClient(ev) {
     region: f.elements['region'].value.trim(),
     notes: f.elements['notes'].value.trim(),
     cc_emails,
+    tags,
   };
   // Only include status if a real value is selected (don't clobber existing on blank)
   const statusVal = (f.elements['status'].value || '').trim();
@@ -4660,6 +4852,7 @@ function mcRenderLeads(data) {
       <td>${mcPill(c.latest_engagement_status || c.status || 'lead')}</td>
       <td><span style="font-family:'DM Mono',monospace;font-size:.7rem;color:${stale?'#DC2626':'#475569'};font-weight:${stale?'700':'500'};">${ageDays === 0 ? 'today' : ageDays + 'd'}${stale?' · stale':''}</span></td>
       <td onclick="event.stopPropagation()" style="white-space:nowrap;">
+        <button class="mc-btn" style="padding:.3rem .55rem;font-size:.62rem;" onclick="mcOpenComposeEmail({clientId:'${mcEsc(c.id)}'})">✉</button>
         <button class="mc-btn" style="padding:.3rem .6rem;font-size:.66rem;" onclick="cfGenerateDocs('${mcEsc(c.slug)}')">+ Engagement</button>
       </td>
     </tr>`;
@@ -4755,20 +4948,28 @@ function mcRenderContacts(data) {
 
   const rows = list.map(c => {
     const ccChips = (c.cc_emails || []).slice(0, 2).map(e => `<span style="font-family:'DM Mono',monospace;font-size:.62rem;background:#EFF6FF;color:#2563EB;padding:.1rem .4rem;border-radius:4px;margin-right:.2rem;">${mcEsc(e)}</span>`).join('');
+    const tagChips = (c.tags || []).slice(0, 3).map(t => {
+      const cat = t.includes(':') ? t.split(':')[0] : 'tag';
+      const cm = { vip:'#F97316', industry:'#5B21B6', geo:'#0E7490', priority:'#DC2626', source:'#475569' };
+      const color = cm[cat.toLowerCase()] || '#2563EB';
+      return `<span style="font-family:'DM Mono',monospace;font-size:.6rem;background:${color}1A;color:${color};padding:.1rem .4rem;border-radius:4px;margin-right:.2rem;font-weight:700;">${mcEsc(t)}</span>`;
+    }).join('');
     return `<tr onclick="mcGoToCase('${mcEsc(c.slug)}')">
-      <td><div class="name-cell">${mcEsc(c.legal_name)}</div>${c.dba ? `<div class="meta-cell">d/b/a ${mcEsc(c.dba)}</div>` : ''}</td>
+      <td><div class="name-cell">${mcEsc(c.legal_name)}</div>${c.dba ? `<div class="meta-cell">d/b/a ${mcEsc(c.dba)}</div>` : ''}${tagChips ? `<div class="meta-cell" style="margin-top:.2rem;">${tagChips}</div>` : ''}</td>
       <td>${mcEsc(c.primary_contact_name || '—')}${c.primary_contact_title ? `<div class="meta-cell">${mcEsc(c.primary_contact_title)}</div>` : ''}</td>
       <td><a href="mailto:${mcEsc(c.primary_contact_email)}" style="color:#2563EB;text-decoration:none;" onclick="event.stopPropagation()">${mcEsc(c.primary_contact_email || '—')}</a>${ccChips ? `<div class="meta-cell" style="margin-top:.2rem;">${ccChips}</div>` : ''}</td>
       <td>${mcEsc([c.region, c.country].filter(Boolean).join(', ') || '—')}</td>
       <td>${mcPill(c.source)}</td>
       <td>${mcPill(c.latest_engagement_status || c.status)}</td>
       <td class="amt-cell">${mcFmtUSD(c.engagement_total_usd)}</td>
-      <td><span style="font-family:'DM Mono',monospace;font-size:.7rem;color:#475569;">${c.engagements_count} eng</span></td>
+      <td onclick="event.stopPropagation()" style="white-space:nowrap;">
+        <button class="mc-btn" style="padding:.25rem .55rem;font-size:.62rem;" onclick="mcOpenComposeEmail({clientId:'${mcEsc(c.id)}'})">✉</button>
+      </td>
     </tr>`;
   }).join('');
 
   document.getElementById('mc-contacts-body').innerHTML = `<div class="mc-table-wrap"><table class="mc-table"><thead><tr>
-    <th>Name</th><th>Contact</th><th>Email</th><th>Location</th><th>Source</th><th>Status</th><th>Pipeline</th><th></th>
+    <th>Name</th><th>Contact</th><th>Email</th><th>Location</th><th>Source</th><th>Status</th><th>Pipeline</th><th>Email</th>
   </tr></thead><tbody>${rows}</tbody></table></div>`;
 }
 
@@ -5907,11 +6108,11 @@ async function mcOpenComposeEmail(opts = {}) {
         throw new Error('Missing values for: ' + preview.missing_variables.join(', ') + '. Fill those fields above and try again.');
       }
 
-      // Show preview, ask for confirmation, then send
-      const confirmMsg = `Preview:\n\nTo: ${preview.recipient_email}${preview.cc?.length ? '\nCC: ' + preview.cc.join(', ') : ''}\n${values.testRecipient ? '\n[TEST] Routing to: ' + values.testRecipient : ''}\n\nSubject: ${preview.rendered_subject}\n${preview.rendered_preheader ? '\nPreheader: ' + preview.rendered_preheader : ''}\n\nSEND NOW?`;
-      if (!confirm(confirmMsg)) {
-        throw new Error('Cancelled — no email sent.');
-      }
+      // Rich preview modal — replaces the confirm() popup with an
+      // iframe-isolated render of the actual email so Mark sees exactly
+      // what the recipient will receive before he clicks Send.
+      const confirmed = await mcShowEmailPreview(preview, !!values.testRecipient, values.testRecipient || null);
+      if (!confirmed) throw new Error('Cancelled — no email sent.');
 
       const res = await fetch('/.netlify/functions/send-template-email', {
         method: 'POST', credentials: 'include', headers: { 'Content-Type': 'application/json' },
@@ -5944,6 +6145,71 @@ async function mcOpenComposeEmail(opts = {}) {
     });
   }, 50);
 }
+
+// Rich email preview modal. Renders the dry_run output in an
+// iframe so the user sees the actual email exactly as the recipient
+// would. Returns a Promise<boolean> — true if they click "Send",
+// false if they Cancel.
+function mcShowEmailPreview(preview, isTest, testRecipient) {
+  return new Promise((resolve) => {
+    let backdrop = document.getElementById('mc-preview-backdrop');
+    if (!backdrop) {
+      backdrop = document.createElement('div');
+      backdrop.id = 'mc-preview-backdrop';
+      backdrop.className = 'cf-modal-backdrop';
+      document.body.appendChild(backdrop);
+    }
+    const subj = preview.rendered_subject || '(no subject)';
+    const pre  = preview.rendered_preheader || '';
+    const html = preview.rendered_html || '<p>(no body)</p>';
+    const safeHtml = String(html).replace(/<\/script/gi, '<\\/script');
+
+    backdrop.innerHTML = `
+      <div class="cf-modal" role="dialog" aria-modal="true" style="max-width:760px;">
+        <div class="cf-modal-head">
+          <div>
+            <div class="cf-modal-eyebrow">${isTest ? 'TEST · Email Preview' : 'Final Preview'}</div>
+            <h3>${escapeForAttr(subj)}</h3>
+          </div>
+          <button class="cf-modal-close" onclick="mcCloseEmailPreview(false)">×</button>
+        </div>
+        <div class="cf-modal-body" style="max-height:75vh;overflow-y:auto;">
+          <div style="background:#F8FAFC;border:1px solid #E2E8F0;border-radius:8px;padding:.85rem 1rem;margin-bottom:1rem;font-family:'DM Mono',monospace;font-size:.78rem;line-height:1.7;">
+            <div><strong>To:</strong> ${escapeForAttr(preview.recipient_email || '—')}${isTest ? `<span style="color:#F97316;font-weight:700;margin-left:.5rem;">[TEST → ${escapeForAttr(testRecipient || '')}]</span>` : ''}</div>
+            ${preview.cc?.length ? `<div><strong>CC:</strong> ${preview.cc.map(e => escapeForAttr(e)).join(', ')}</div>` : ''}
+            <div><strong>Subject:</strong> ${escapeForAttr(subj)}</div>
+            ${pre ? `<div><strong>Preheader:</strong> ${escapeForAttr(pre)}</div>` : ''}
+            <div><strong>Template:</strong> ${escapeForAttr(preview.template_slug || '—')}</div>
+          </div>
+          <div style="font-family:'DM Mono',monospace;font-size:.62rem;letter-spacing:.18em;text-transform:uppercase;color:#475569;font-weight:700;margin-bottom:.4rem;">Rendered Body — Recipient View</div>
+          <iframe id="mc-preview-iframe" sandbox="" style="width:100%;height:480px;border:1px solid #E2E8F0;border-radius:10px;background:#FFFFFF;"></iframe>
+        </div>
+        <div class="cf-modal-foot">
+          <button type="button" class="cf-btn outline" onclick="mcCloseEmailPreview(false)">Cancel — Don't Send</button>
+          <button type="button" class="cf-btn primary" onclick="mcCloseEmailPreview(true)">${isTest ? 'Send Test Email' : 'Send Live Email'}</button>
+        </div>
+      </div>`;
+    backdrop.classList.add('open');
+
+    // Inject HTML into the sandboxed iframe via srcdoc (no script execution)
+    const iframe = document.getElementById('mc-preview-iframe');
+    if (iframe) {
+      iframe.srcdoc = `<!doctype html><html><head><meta charset="utf-8"><base target="_blank"><style>body{margin:0;padding:16px;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif;color:#1E293B;background:#F8FAFC;}</style></head><body>${safeHtml}</body></html>`;
+    }
+
+    window._mcPreviewResolve = resolve;
+    backdrop.onclick = (ev) => { if (ev.target === backdrop) mcCloseEmailPreview(false); };
+  });
+}
+function mcCloseEmailPreview(confirmed) {
+  const b = document.getElementById('mc-preview-backdrop');
+  if (b) b.classList.remove('open');
+  if (typeof window._mcPreviewResolve === 'function') {
+    window._mcPreviewResolve(!!confirmed);
+    window._mcPreviewResolve = null;
+  }
+}
+function escapeForAttr(s) { return String(s ?? '').replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c])); }
 
 function mcOpenTemplateEditor(id, defaultCategory) {
   const existing = id ? (_mcCache.templates?.templates || []).find(t => t.id === id) : null;
@@ -6341,7 +6607,7 @@ function mcRenderSubscribers(data) {
     return;
   }
   document.getElementById('mc-subscribers-body').innerHTML = `<div class="mc-table-wrap"><table class="mc-table"><thead><tr>
-    <th>Email</th><th>Name</th><th>Company</th><th>Source</th><th>Engagements</th><th>Pipeline</th><th>CC List</th>
+    <th>Email</th><th>Name</th><th>Company</th><th>Source</th><th>Engagements</th><th>Pipeline</th><th>CC List</th><th>Email</th>
   </tr></thead><tbody>${list.map(c => `<tr onclick="mcGoToCase('${mcEsc(c.slug)}')">
     <td><a href="mailto:${mcEsc(c.primary_contact_email)}" style="color:#2563EB;text-decoration:none;" onclick="event.stopPropagation()">${mcEsc(c.primary_contact_email||'—')}</a></td>
     <td>${mcEsc(c.primary_contact_name||'—')}</td>
@@ -6350,6 +6616,9 @@ function mcRenderSubscribers(data) {
     <td>${c.engagements_count || 0}</td>
     <td class="amt-cell">${mcFmtUSD(c.engagement_total_usd)}</td>
     <td><span style="font-family:'DM Mono',monospace;font-size:.66rem;color:#475569;">${(c.cc_emails || []).length} cc</span></td>
+    <td onclick="event.stopPropagation()" style="white-space:nowrap;">
+      <button class="mc-btn" style="padding:.25rem .55rem;font-size:.62rem;" onclick="mcOpenComposeEmail({clientId:'${mcEsc(c.id)}'})">✉</button>
+    </td>
   </tr>`).join('')}</tbody></table></div>`;
 }
 
