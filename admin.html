@@ -1588,7 +1588,7 @@
 <div id="panel-eng-proposals" class="panel">
 <div class="panel-header"><h1 class="panel-title">📄 Proposals</h1>
 <div class="panel-actions">
-<button class="btn btn-primary" onclick="loadDocs('proposal')">↻ Refresh</button>
+<button class="btn btn-primary" onclick="loadEngDocs('proposal')">↻ Refresh</button>
 <a href="/forms/proposal" target="_blank" class="btn btn-outline">New Proposal →</a>
 </div>
 </div>
@@ -1606,7 +1606,7 @@
 <div id="panel-eng-contracts" class="panel">
 <div class="panel-header"><h1 class="panel-title">✍️ Contracts</h1>
 <div class="panel-actions">
-<button class="btn btn-primary" onclick="loadDocs('contract')">↻ Refresh</button>
+<button class="btn btn-primary" onclick="loadEngDocs('contract')">↻ Refresh</button>
 <a href="/forms/msa" target="_blank" class="btn btn-outline">New Contract →</a>
 </div>
 </div>
@@ -3342,8 +3342,8 @@ function switchPanel(id, el) {
   else if (id === 'crm-pipeline')     loadPipeline();
   else if (id === 'crm-notes')        loadAuditLog();
   else if (id === 'eng-projects')     loadEngagements();
-  else if (id === 'eng-proposals')    loadDocs('proposal');
-  else if (id === 'eng-contracts')    loadDocs('contract');
+  else if (id === 'eng-proposals')    loadEngDocs('proposal');
+  else if (id === 'eng-contracts')    loadEngDocs('contract');
   else if (id === 'eng-invoices')     loadInvoices();
   else if (id === 'forms-submissions') loadFormSubmissions();
   else if (id === 'email-subscribers') loadSubscribers();
@@ -4059,7 +4059,7 @@ async function loadEngagements() {
 }
 
 // ─── DOCUMENTS (proposals/contracts from Supabase mc_documents) ──────────────
-async function loadDocs(type) {
+async function loadEngDocs(type) {
   const tbody = document.getElementById(`docs-${type}s-tbody`);
   if (!tbody) return;
   tbody.innerHTML = '<tr><td colspan="6" style="text-align:center;color:var(--dim);padding:32px;">Loading...</td></tr>';
