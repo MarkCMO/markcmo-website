@@ -187,6 +187,13 @@ https://www.markcmo.com/* https://markcmo.com/:splat 301!
 /documents/clients/wendal-enterprise/timeline  /documents/clients/wendal-enterprise/timeline.html      200
 /documents/clients/wendal-enterprise/sign      /forms/wendal-enterprise-audit.html                     200
 
+# Salt Lake City Public Library — engagement package
+/documents/clients/salt-lake-city-public-library            /documents/clients/salt-lake-city-public-library/index.html         200
+/documents/clients/salt-lake-city-public-library/proposal   /documents/clients/salt-lake-city-public-library/proposal.html      200
+/documents/clients/salt-lake-city-public-library/sow        /documents/clients/salt-lake-city-public-library/scope-of-work.html 200
+/documents/clients/salt-lake-city-public-library/timeline   /documents/clients/salt-lake-city-public-library/timeline.html      200
+/documents/clients/salt-lake-city-public-library/sign       /forms/salt-lake-city-public-library-discovery.html                 200
+
 # ─── Admin VDR (now embedded inside /admin as #case-files panel) ──
 # Backwards-compat: any old links to /admin/vdr* land on /admin#case-files
 /admin/vdr                                      /admin#case-files                                       301!

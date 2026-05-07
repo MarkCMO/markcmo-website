@@ -98,7 +98,7 @@
   <section class="section">
     <div class="section-eyebrow">Engagement Summary</div>
     <h2>The Two-Week <span>Engagement.</span></h2>
-    <p><strong>Engagement code:</strong> SLC-DA &middot; <strong>Engagement type:</strong> Fixed-fee discovery &middot; <strong>Duration:</strong> 2 calendar weeks from kickoff &middot; <strong>Fee:</strong> $12,500 USD &middot; <strong>Payment terms:</strong> Net 10 from Square invoice issuance &middot; <strong>Deliverable format:</strong> PDF memo + 60-minute leadership readout (in-person or video, library's choice)</p>
+    <p><strong>Engagement code:</strong> SLC-DA &middot; <strong>Engagement type:</strong> Fixed-fee discovery &middot; <strong>Duration:</strong> 2 calendar weeks from kickoff &middot; <strong>Fee:</strong> $28,500 USD &middot; <strong>Payment terms:</strong> Net 10 from Square invoice issuance &middot; <strong>Deliverable format:</strong> PDF memo + 60-minute leadership readout (in-person or video, library's choice)</p>
     <p>The engagement establishes a baseline read of how technology, systems, and organizational practices currently support the library's mission &mdash; deep enough to scope a Phase 1 engagement properly, light enough to deliver in 2 weeks without disrupting library operations.</p>
   </section>
 
@@ -163,6 +163,83 @@
   </section>
 
   <section class="section">
+    <div class="section-eyebrow">Coverage Scope</div>
+    <h2>What Gets Looked At. <span>Mapped To Your RFQ.</span></h2>
+    <p>Your RFQ asked Phase 1 to cover &ldquo;how systems are used, how decisions are made, and how support is delivered.&rdquo; Discovery &amp; Alignment surfaces the high-altitude version of each column below; Phase 1 (if initiated) goes column-by-column in depth. Items in <strong>bold</strong> are the Discovery-level scan; items in plain text are added in Phase 1.</p>
+
+    <style>
+      .coverage-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1rem;margin:1.5rem 0;}
+      @media(max-width:760px){.coverage-grid{grid-template-columns:1fr;}}
+      .coverage-col{background:var(--white);border:1px solid var(--border);border-radius:14px;padding:1.5rem 1.6rem;}
+      .coverage-col .col-eyebrow{font-family:'DM Mono',monospace;font-size:0.66rem;letter-spacing:0.2em;text-transform:uppercase;color:var(--blue);margin-bottom:0.4rem;font-weight:700;}
+      .coverage-col h3{font-family:'Bebas Neue',sans-serif;font-size:1.4rem;letter-spacing:0.04em;color:var(--navy);margin:0 0 0.4rem;font-weight:400;}
+      .coverage-col .col-rfq{font-size:0.78rem;color:var(--text-mid);margin-bottom:1rem;font-style:italic;line-height:1.45;}
+      .coverage-col ul{list-style:none;padding:0;margin:0;}
+      .coverage-col li{font-size:0.86rem;color:var(--text);padding:0.4rem 0;border-bottom:1px solid var(--border);line-height:1.4;}
+      .coverage-col li:last-child{border-bottom:0;}
+      .coverage-col li strong{color:var(--navy);}
+    </style>
+
+    <div class="coverage-grid">
+      <div class="coverage-col">
+        <div class="col-eyebrow">Column A</div>
+        <h3>Systems</h3>
+        <div class="col-rfq">&ldquo;how systems are used&rdquo;</div>
+        <ul>
+          <li><strong>Integrated Library System</strong> + discovery layer / catalog UX</li>
+          <li><strong>Patron-facing digital services</strong> &mdash; Libby, OverDrive, Hoopla, databases, study-room booking</li>
+          <li><strong>Public computing</strong> &mdash; patron PCs, session/print management, self-checkout, RFID</li>
+          <li>Network &amp; Wi-Fi &mdash; branch infrastructure, public Wi-Fi, bandwidth provisioning</li>
+          <li>Identity &amp; access &mdash; staff SSO, role-based access, vendor account hygiene</li>
+          <li>Staff productivity &mdash; M365 / Google Workspace, intranet, document management</li>
+          <li>Communications &mdash; VOIP, email, messaging, conferencing</li>
+          <li>Back-office &mdash; HR, finance, payroll, ERP integrations</li>
+          <li>Programming &amp; events tech &mdash; registration, virtual programming, AV/streaming</li>
+          <li>Maker spaces &amp; digital media labs &mdash; equipment, scheduling, software</li>
+          <li>Cybersecurity posture &mdash; endpoint, network, DLP, patron PII handling</li>
+          <li>Cloud spend, integrations, DR/BCP &mdash; vendor consolidation opportunities</li>
+        </ul>
+      </div>
+      <div class="coverage-col">
+        <div class="col-eyebrow">Column B</div>
+        <h3>Decisions</h3>
+        <div class="col-rfq">&ldquo;how decisions are made&rdquo;</div>
+        <ul>
+          <li><strong>Technology decision rights</strong> &amp; approval thresholds</li>
+          <li><strong>Vendor selection process</strong> + contract renewal calendar</li>
+          <li><strong>Technology committee</strong> / governance structure</li>
+          <li>Central IT vs. branch-level autonomy</li>
+          <li>Capital + operating budget allocation logic</li>
+          <li>Strategic technology roadmap ownership</li>
+          <li>Compliance &amp; policy review cadence</li>
+          <li>Patron privacy law (state) + ALA Library Bill of Rights</li>
+          <li>Accessibility / WCAG compliance ownership</li>
+          <li>Tech-debt visibility &mdash; what's known, what's hidden</li>
+        </ul>
+      </div>
+      <div class="coverage-col">
+        <div class="col-eyebrow">Column C</div>
+        <h3>Support</h3>
+        <div class="col-rfq">&ldquo;how support is delivered&rdquo;</div>
+        <ul>
+          <li><strong>IT support workflow</strong> &mdash; intake, triage, escalation, resolution</li>
+          <li><strong>IT staffing model</strong> &mdash; FTE allocation, system-to-staff ratio, branch coverage</li>
+          <li><strong>Help-desk &amp; ticketing operations</strong></li>
+          <li>Staff digital literacy &amp; training cadence</li>
+          <li>After-hours incident response</li>
+          <li>Patron-facing tech support (assisted vs. self-service)</li>
+          <li>Branch IT autonomy &amp; central IT support boundary</li>
+          <li>Vendor support escalation playbooks</li>
+          <li>Knowledge management &amp; runbook coverage</li>
+          <li>Onboarding / offboarding workflow for staff IT access</li>
+        </ul>
+      </div>
+    </div>
+
+    <p style="font-size:0.92rem;color:var(--text-mid);">Discovery &amp; Alignment delivers a snapshot read of the bolded items only (top of each column). Phase 1 adds depth across all 32 items, with scoring against current goals and a future-state recommendation per column.</p>
+  </section>
+
+  <section class="section">
     <div class="section-eyebrow">Out of Scope</div>
     <h2>What This Engagement <span>Does Not Include.</span></h2>
     <div class="warn-box">
@@ -190,7 +267,7 @@
         <li>Calendar access for 6&ndash;8 leadership interviews during Week 1.</li>
         <li>One warm-up email from library leadership to interviewees explaining the engagement and asking for cooperation.</li>
         <li>Designated audience for the 60-minute readout in Week 2.</li>
-        <li>Payment of the $12,500 invoice within 10 business days of issuance, per public-procurement norms.</li>
+        <li>Payment of the $28,500 invoice within 10 business days of issuance, per public-procurement norms.</li>
       </ul>
     </div>
   </section>
@@ -205,7 +282,7 @@
   <section class="section">
     <div class="section-eyebrow">Change Control</div>
     <h2>If Scope Needs <span>To Change.</span></h2>
-    <p>The fixed fee covers the modules above. If the library wants to add interviews, expand modules, or accelerate the timeline, a written change order is issued before the additional work starts. Change orders carry a separate fee, are signed by both parties, and do not affect the original $12,500 fee or the original 2-week timeline unless explicitly agreed.</p>
+    <p>The fixed fee covers the modules above. If the library wants to add interviews, expand modules, or accelerate the timeline, a written change order is issued before the additional work starts. Change orders carry a separate fee, are signed by both parties, and do not affect the original $28,500 fee or the original 2-week timeline unless explicitly agreed.</p>
     <p>Conversely, if the library wants to descope (e.g. fewer interviews, no readout), the engagement fee can be reduced via written change order. There is no minimum modules requirement, but the integrity of the deliverable depends on at least Modules 01, 02, and 04.</p>
   </section>
 
