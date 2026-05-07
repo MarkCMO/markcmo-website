@@ -1814,29 +1814,43 @@
 </div>
 </div>
 <div id="panel-leads" class="panel">
-<div class="top-bar">
-<div class="page-title">ALL LEADS</div>
-<div class="page-actions">
-<button class="btn btn-outline" onclick="exportCSV()">⬇ Export CSV</button>
-<button class="btn btn-outline" onclick="loadLeads()">↻ Refresh</button>
-</div>
-</div>
-<div class="content-body">
-<div class="table-wrap">
-<div class="table-header">
-<div class="table-title">Webinar Registrants</div>
-<input type="text" class="search-input" placeholder="Search name, email, company..." oninput="filterLeads(this.value)">
-</div>
-<table>
-<thead><tr>
-<th>Name</th><th>Email</th><th>Company</th><th>Revenue</th><th>Challenge</th><th>Registered</th><th></th>
-</tr></thead>
-<tbody id="leads-body">
-<tr><td colspan="7"><div class="loading">Loading</div></td></tr>
-</tbody>
-</table>
-</div>
-</div>
+  <div class="mc-panel">
+    <div class="mc-panel-head">
+      <div>
+        <div class="mc-eyebrow">CRM &middot; Top of Funnel</div>
+        <h2>All Leads</h2>
+        <div class="mc-sub">Prospects + Calendly bookings that haven't yet signed an engagement. Quick actions to advance them to draft proposal or archive.</div>
+      </div>
+      <div class="mc-panel-actions">
+        <input type="text" class="mc-search" id="mc-leads-search" placeholder="Search name, email, company...">
+        <button class="mc-btn primary" onclick="mcOpenAddContact()">+ Add Lead</button>
+        <button class="mc-btn" onclick="mcLoadLeads(true)">↻ Refresh</button>
+      </div>
+    </div>
+    <div id="mc-leads-stats" class="mc-stats"></div>
+    <div id="mc-leads-body"><div class="mc-loading">Loading leads</div></div>
+
+    <!-- Legacy webinar registrants kept as a collapsible secondary section -->
+    <details style="margin-top:2rem;">
+      <summary style="cursor:pointer;font-family:'DM Mono',monospace;font-size:.7rem;letter-spacing:.16em;text-transform:uppercase;color:#94A3B8;font-weight:700;padding:.6rem 0;">Legacy webinar registrants (drip funnel)</summary>
+      <div style="margin-top:.85rem;">
+        <div style="display:flex;justify-content:space-between;align-items:center;gap:1rem;margin-bottom:.6rem;flex-wrap:wrap;">
+          <span style="font-size:.78rem;color:#64748B;">From the webinar drip system. These do not auto-create CRM contacts.</span>
+          <div style="display:flex;gap:.4rem;">
+            <button class="mc-btn" onclick="exportCSV()">⬇ Export CSV</button>
+            <button class="mc-btn" onclick="loadLeads()">↻ Refresh</button>
+            <input type="text" class="mc-search" placeholder="Search..." oninput="filterLeads(this.value)" style="min-width:auto;">
+          </div>
+        </div>
+        <div class="mc-card"><div class="mc-card-body no-pad">
+          <table class="mc-table">
+            <thead><tr><th>Name</th><th>Email</th><th>Company</th><th>Revenue</th><th>Challenge</th><th>Registered</th><th></th></tr></thead>
+            <tbody id="leads-body"><tr><td colspan="7"><div class="mc-loading">Loading webinar leads</div></td></tr></tbody>
+          </table>
+        </div></div>
+      </div>
+    </details>
+  </div>
 </div>
 <div id="panel-emails" class="panel">
 <div class="top-bar">
@@ -3696,6 +3710,7 @@ function switchPanel(id, el) {
     if (typeof loadCaseFilesPanel === 'function') loadCaseFilesPanel();
   }
   else if (id === 'dashboard')      { if (typeof mcLoadDashboard === 'function')      mcLoadDashboard(); }
+  else if (id === 'leads')          { if (typeof mcLoadLeads === 'function')          mcLoadLeads(); }
   // mc- panels (engagement / CRM data)
   else if (id === 'crm-contacts')   { if (typeof mcLoadContacts === 'function')       mcLoadContacts(); }
   else if (id === 'crm-clients')    { if (typeof mcLoadActiveClients === 'function')  mcLoadActiveClients(); }
@@ -4508,6 +4523,69 @@ function mcStatTile(label, value, sub, color) {
   return `<div class="mc-stat"><div class="l">${mcEsc(label)}</div><div class="v ${color || ''}">${mcEsc(value)}</div>${sub ? `<div class="s">${mcEsc(sub)}</div>` : ''}</div>`;
 }
 
+// ─── Leads (consulting top-of-funnel) ────────────────────────────
+// Filters mc_clients to those without a paying engagement yet:
+//   - status in (lead, draft, proposal_sent) on the client OR engagement
+//   - OR no engagements at all
+function mcLoadLeads(force) {
+  // Re-uses contacts data — single fetch, two views
+  mcFetch('contacts', (data) => mcRenderLeads(data), force);
+}
+function mcRenderLeads(data) {
+  const all = data.contacts || [];
+  // A "lead" = client whose latest engagement status is lead/draft/proposal_sent
+  // (or has no engagements at all and is itself flagged 'lead')
+  const leadStatuses = ['lead','draft','proposal_sent'];
+  const leads = all.filter(c => {
+    const latest = (c.latest_engagement_status || c.status || 'lead').toLowerCase();
+    return leadStatuses.includes(latest) || c.engagements_count === 0;
+  });
+  const q = (_mcSearch.leads || '').toLowerCase();
+  const list = q ? leads.filter(c =>
+    (c.legal_name||'').toLowerCase().includes(q) ||
+    (c.dba||'').toLowerCase().includes(q) ||
+    (c.primary_contact_name||'').toLowerCase().includes(q) ||
+    (c.primary_contact_email||'').toLowerCase().includes(q)
+  ) : leads;
+
+  // Update the sidebar badge with the lead count
+  const badge = document.getElementById('lead-badge');
+  if (badge) badge.textContent = leads.length || '';
+
+  document.getElementById('mc-leads-stats').innerHTML = [
+    mcStatTile('Total Leads', leads.length, q ? `${list.length} match` : ''),
+    mcStatTile('From Calendly', leads.filter(c => c.source === 'calendly').length, '', 'blue'),
+    mcStatTile('Direct / Manual', leads.filter(c => ['direct','manual','linkedin','inbound','referral','cold-outbound','event','partner'].includes(c.source||'')).length, ''),
+    mcStatTile('Pipeline Value', mcFmtUSD(leads.reduce((s,c) => s + Number(c.engagement_total_usd||0), 0)), '', 'orange'),
+  ].join('');
+
+  if (!list.length) {
+    document.getElementById('mc-leads-body').innerHTML = `<div class="mc-empty"><div class="ico">👥</div><h3>${q ? 'No matches' : 'No leads yet'}</h3><p>${q ? 'Try a different search.' : 'Calendly bookings auto-create leads. Click "+ Add Lead" to manually enter one (referral, cold outbound, event, etc).'}</p></div>`;
+    return;
+  }
+
+  const rows = list.map(c => {
+    const ageDays = c.created_at ? Math.round((Date.now() - new Date(c.created_at).getTime()) / 86400000) : 0;
+    const stale = ageDays > 14;
+    return `<tr onclick="mcGoToCase('${mcEsc(c.slug)}')">
+      <td><div class="name-cell">${mcEsc(c.legal_name)}</div>${c.dba ? `<div class="meta-cell">d/b/a ${mcEsc(c.dba)}</div>` : ''}</td>
+      <td>${mcEsc(c.primary_contact_name || '—')}<div class="meta-cell">${mcEsc(c.primary_contact_title || '')}</div></td>
+      <td><a href="mailto:${mcEsc(c.primary_contact_email)}" style="color:#2563EB;text-decoration:none;" onclick="event.stopPropagation()">${mcEsc(c.primary_contact_email || '—')}</a></td>
+      <td>${mcEsc([c.region, c.country].filter(Boolean).join(', ') || '—')}</td>
+      <td>${mcPill(c.source||'unknown')}</td>
+      <td>${mcPill(c.latest_engagement_status || c.status || 'lead')}</td>
+      <td><span style="font-family:'DM Mono',monospace;font-size:.7rem;color:${stale?'#DC2626':'#475569'};font-weight:${stale?'700':'500'};">${ageDays === 0 ? 'today' : ageDays + 'd'}${stale?' · stale':''}</span></td>
+      <td onclick="event.stopPropagation()" style="white-space:nowrap;">
+        <button class="mc-btn" style="padding:.3rem .6rem;font-size:.66rem;" onclick="cfGenerateDocs('${mcEsc(c.slug)}')">+ Engagement</button>
+      </td>
+    </tr>`;
+  }).join('');
+
+  document.getElementById('mc-leads-body').innerHTML = `<div class="mc-table-wrap"><table class="mc-table"><thead><tr>
+    <th>Lead</th><th>Contact</th><th>Email</th><th>Location</th><th>Source</th><th>Stage</th><th>Age</th><th></th>
+  </tr></thead><tbody>${rows}</tbody></table></div>`;
+}
+
 // ─── Contacts ────────────────────────────────────────────────────
 function mcLoadContacts(force) { mcFetch('contacts', mcRenderContacts, force); }
 function mcOpenAddContact() {
@@ -4903,6 +4981,7 @@ document.addEventListener('input', (e) => {
   if (!e.target?.id?.startsWith('mc-') || !e.target.id.endsWith('-search')) return;
   const type = e.target.id.replace(/^mc-/, '').replace(/-search$/, '');
   _mcSearch[type] = e.target.value;
+  if (type === 'leads' && _mcCache.contacts) { mcRenderLeads(_mcCache.contacts); return; }
   if (_mcCache[type]) {
     if (type === 'contacts') mcRenderContacts(_mcCache[type]);
     else if (type === 'active-clients') mcRenderActiveClients(_mcCache[type]);
