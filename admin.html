@@ -3729,11 +3729,38 @@ document.getElementById('login-pass').addEventListener('keydown', e => {
 });
 // Check existing session — if present, show the app AND boot the data loaders
 // (without this, the dashboard sits forever at "—" / "LOADING…" because initApp() is skipped).
+//
+// IMPORTANT: sessionStorage flag and the mcadmin_session HTTP cookie have
+// independent lifetimes. The user can hit a state where sessionStorage says
+// "logged in" but the cookie has expired -> every API call returns 401 and
+// panels stay stuck on "Loading". Probe the cookie BEFORE booting the data
+// loaders. If the cookie is bad, immediately route the user to the login
+// screen instead of letting them see a half-broken admin.
 if (sessionStorage.getItem('admin_auth') === '1') {
   document.getElementById('login-screen').style.display = 'none';
   document.getElementById('app').style.display = 'block';
-  // Defer to ensure the page is hydrated, then init.
-  setTimeout(() => { try { initApp(); } catch (e) { console.error('initApp on session restore failed:', e); } }, 0);
+  // Probe the admin API for cookie validity before initApp fires.
+  fetch('/.netlify/functions/admin-engagement-data?type=summary', { credentials: 'include' })
+    .then(r => {
+      if (r.status === 401) {
+        // Cookie expired — clear sessionStorage flag, show login screen, no banner needed
+        // (banner is for mid-session expiry; here we just route to login cleanly).
+        sessionStorage.removeItem('admin_auth');
+        document.getElementById('login-screen').style.display = 'flex';
+        document.getElementById('app').style.display = 'none';
+        return null;
+      }
+      return r;
+    })
+    .then(r => {
+      if (!r) return;
+      // Cookie is valid — boot the app
+      setTimeout(() => { try { initApp(); } catch (e) { console.error('initApp on session restore failed:', e); } }, 0);
+    })
+    .catch(e => {
+      console.warn('auth probe failed (network); booting app anyway:', e);
+      setTimeout(() => { try { initApp(); } catch (e) { console.error('initApp on session restore failed:', e); } }, 0);
+    });
 }
 // ─── STATE ───────────────────────────────────────────────────────────────────
 let allLeads = [];
@@ -3907,7 +3934,7 @@ async function cfLoadClients() {
   listEl.innerHTML = '<div class="cf-loading"><div class="cf-loading-ring"></div></div>';
   try {
     const res = await fetch(`${CF_API}?type=clients`, { credentials: 'include' });
-    if (res.status === 401) return cfShowAuthRequired();
+    if (res.status === 401) { mcHandleAuthExpired(); return cfShowAuthRequired(); }
     if (!res.ok) throw new Error(`HTTP ${res.status}`);
     const data = await res.json();
     _cfClients = data.clients || [];
@@ -4769,18 +4796,52 @@ async function mcFetch(type, renderFn, force) {
   if (statsEl) statsEl.innerHTML = '';
   try {
     const res = await fetch(`${MC_API}?type=${type}`, { credentials: 'include' });
-    if (res.status === 401) { mcShowAuthRequired(bodyEl); return; }
+    if (res.status === 401) { mcHandleAuthExpired(); mcShowAuthRequired(bodyEl); return; }
     if (!res.ok) { const d = await res.json().catch(() => ({})); throw new Error(d.error || `HTTP ${res.status}`); }
     const data = await res.json();
     _mcCache[type] = data;
     renderFn(data);
   } catch (e) {
-    bodyEl.innerHTML = `<div class="mc-empty"><div class="ico">⚠</div><h3>Failed to load</h3><p>${mcEsc(e.message)}</p></div>`;
+    bodyEl.innerHTML = `<div class="mc-empty"><div class="ico">⚠</div><h3>Failed to load</h3><p>${mcEsc(e.message)}</p><p style="margin-top:.85rem;"><button class="mc-btn primary" onclick="window.location.reload()">↻ Reload page</button></p></div>`;
   }
 }
 
 function mcShowAuthRequired(bodyEl) {
-  bodyEl.innerHTML = `<div class="mc-empty"><div class="ico">🔒</div><h3>Sign in required</h3><p>This panel needs an admin session. Use the admin login above and the data will load automatically.</p></div>`;
+  bodyEl.innerHTML = `<div class="mc-empty"><div class="ico">🔒</div><h3>Sign in required</h3><p>Your session has expired. Sign in again to continue.</p><p style="margin-top:.85rem;"><button class="mc-btn primary" onclick="mcReLogin()">Sign In Again</button></p></div>`;
+}
+
+// ════════════════════════════════════════════════════════════════
+// Auth-expired handler: when ANY admin endpoint returns 401, the
+// session cookie has expired. Clear the legacy session-storage flag
+// and show the login screen so the user can re-authenticate.
+// Without this, panels sit forever on "Loading" because the user
+// SEES the admin app (sessionStorage says logged-in) but every API
+// call returns 401 (cookie expired).
+// ════════════════════════════════════════════════════════════════
+let _mcAuthBannerShown = false;
+function mcHandleAuthExpired() {
+  if (_mcAuthBannerShown) return;
+  _mcAuthBannerShown = true;
+  // Show a top-of-page banner so the user knows what happened
+  let banner = document.getElementById('mc-auth-banner');
+  if (!banner) {
+    banner = document.createElement('div');
+    banner.id = 'mc-auth-banner';
+    banner.style.cssText = 'position:fixed;top:0;left:0;right:0;z-index:9999;background:#DC2626;color:#FFFFFF;padding:.85rem 1.25rem;text-align:center;font-family:Barlow,sans-serif;font-size:.86rem;font-weight:600;box-shadow:0 4px 14px rgba(0,0,0,0.2);';
+    banner.innerHTML = `Your admin session has expired. <button onclick="mcReLogin()" style="margin-left:.85rem;background:#FFFFFF;color:#DC2626;border:none;padding:.4rem .9rem;border-radius:6px;font-weight:700;cursor:pointer;">Sign In Again</button> <button onclick="document.getElementById('mc-auth-banner').remove();" style="margin-left:.5rem;background:transparent;color:#FFFFFF;border:1px solid rgba(255,255,255,0.4);padding:.4rem .9rem;border-radius:6px;cursor:pointer;">Dismiss</button>`;
+    document.body.appendChild(banner);
+  }
+}
+function mcReLogin() {
+  sessionStorage.removeItem('admin_auth');
+  // Clear the cookie too (best-effort)
+  try {
+    fetch('/.netlify/functions/admin-auth', {
+      method: 'POST', credentials: 'include',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ action: 'logout' }),
+    }).finally(() => location.reload());
+  } catch { location.reload(); }
 }
 
 // Open a client's case file (deep-link from any row).
@@ -5319,7 +5380,13 @@ async function mcLoadDashboard(force) {
     mcRenderDashboardProjectsWidget(projects);
     mcRenderDashboardOutstanding(invoices);
   } catch (e) {
-    if (e.message === 'AUTH') return;
+    if (e.message === 'AUTH') {
+      mcHandleAuthExpired();
+      // Replace stuck "Loading" placeholders with a clear sign-in prompt
+      ['mc-dash-kpis','mc-dash-stages','mc-dash-insights','mc-dash-activity','mc-dash-projects','mc-dash-outstanding']
+        .forEach(id => { const el = document.getElementById(id); if (el) el.innerHTML = '<div class="mc-empty" style="grid-column:1/-1;"><div class="ico">🔒</div><h3>Sign in required</h3><p>Session expired. Click "Sign In Again" in the red banner above.</p></div>'; });
+      return;
+    }
     console.warn('Dashboard load failed:', e);
     const grid = document.getElementById('mc-dash-kpis');
     if (grid) grid.innerHTML = `<div class="mc-kpi"><div class="l">Error</div><div class="v red">—</div><div class="s">${mcEsc(e.message)}</div></div>`;
