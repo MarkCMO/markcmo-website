@@ -15,6 +15,8 @@ https://www.markcmo.com/* https://markcmo.com/:splat 301!
 /results.html                        /results                       301!
 /book.html                           /book                          301!
 /blog.html                           /blog                          301!
+# Dynamic CMS blog posts: /blog/<slug> renders blog-post.html which fetches from public-blog
+/blog/:slug                          /blog-post.html?slug=:slug     200
 /contact.html                        /contact                       301!
 /faq.html                            /faq                           301!
 /industries.html                     /industries                    301!

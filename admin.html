@@ -1064,6 +1064,13 @@
   .sidebar { width: 260px !important; padding: 0 !important; overflow: hidden !important; max-height: 100vh; display: flex !important; flex-direction: column !important; }
   /* Bump main-content margin to match the new sidebar width so cards don't get clipped */
   .main-content { margin-left: 260px !important; }
+  /* Bare panels (no top-bar / content-body / mc-panel wrapper) get default padding
+     so their leftmost column doesn't sit flush against the sidebar. Wrapped panels
+     handle their own spacing internally. Modern browsers only (:has() — Chrome 105+,
+     Safari 15.4+, Firefox 121+, all current production browsers). */
+  .panel:not(:has(> .top-bar)):not(:has(> .content-body)):not(:has(> .mc-panel)) {
+    padding: 28px 32px;
+  }
   /* Adjust mobile breakpoint margins to match (was 200px in original CSS) */
   @media (max-width: 1100px) {
     .main-content { margin-left: 240px !important; }
@@ -2226,6 +2233,7 @@
   </div>
 </div>
 <div id="panel-forms-hub" class="panel">
+<div class="content-body">
 <div class="panel-header">
 <h1 class="panel-title">📋 Forms Hub</h1>
 <div style="font-size:12px;color:var(--dim);">Open, fill, and send any document template</div>
@@ -2321,8 +2329,9 @@
 <div class="form-card-desc">Permission to use client testimonials in marketing.</div>
 <div class="form-card-actions"><span class="fc-btn primary">Open Form →</span></div>
 </a>
-</div>
-</div>
+</div><!-- /forms-grid -->
+</div><!-- /content-body -->
+</div><!-- /panel-forms-hub -->
 <div id="panel-forms-nda" class="panel">
   <div class="mc-panel">
     <div class="mc-panel-head">
@@ -2456,12 +2465,12 @@
     <div class="mc-panel-head">
       <div><div class="mc-eyebrow">Revenue · Billing</div><h2>All Invoices</h2><div class="mc-sub">Every Square invoice (drafted, sent, paid, voided). Same data as the engagement Invoices tab — different cut.</div></div>
       <div class="mc-panel-actions">
-        <input type="text" class="mc-search" id="mc-invoices-search" placeholder="Search...">
+        <input type="text" class="mc-search" id="mc-rev-invoices-search" placeholder="Search...">
         <button class="mc-btn" onclick="mcLoadInvoices(true)">↻ Refresh</button>
       </div>
     </div>
-    <div id="mc-invoices-stats" class="mc-stats"></div>
-    <div id="mc-invoices-body"><div class="mc-loading">Loading invoices</div></div>
+    <div id="mc-rev-invoices-stats" class="mc-stats"></div>
+    <div id="mc-rev-invoices-body"><div class="mc-loading">Loading invoices</div></div>
   </div>
 </div>
 <div id="panel-rev-products" class="panel">
@@ -2741,21 +2750,22 @@ Generate unique tracked links to send clients to your forms and documents. Each 
 </div>
 </div>
 <div id="panel-content-blog" class="panel">
-<div class="panel-header"><h1 class="panel-title">✏️ Blog Manager</h1>
-<div class="panel-actions">
-<a href="https://markcmo.com/blog.html" target="_blank" class="btn btn-outline">View Blog →</a>
-</div>
-</div>
-<div class="coming-soon">
-<div class="cs-icon">✏️</div>
-<h2>BLOG MANAGER</h2>
-<p>Manage your Insights blog — draft, schedule, and publish posts to markcmo.com.</p>
-<div class="cs-badge">Coming Next Build</div>
-<div style="margin-top:20px;text-align:left;max-width:360px;width:100%;">
-<div style="font-size:10px;letter-spacing:2px;text-transform:uppercase;color:var(--dim);margin-bottom:8px;">ROADMAP</div>
-<div style="font-size:12px;color:var(--dim);padding:4px 0;border-bottom:1px solid var(--border);">→ Draft and edit blog posts in-browser</div><div style="font-size:12px;color:var(--dim);padding:4px 0;border-bottom:1px solid var(--border);">→ SEO title, meta description, slug</div><div style="font-size:12px;color:var(--dim);padding:4px 0;border-bottom:1px solid var(--border);">→ Schedule publish date</div><div style="font-size:12px;color:var(--dim);padding:4px 0;border-bottom:1px solid var(--border);">→ Tag by topic and service area</div><div style="font-size:12px;color:var(--dim);padding:4px 0;border-bottom:1px solid var(--border);">→ Sync to sitemap.xml</div>
-</div>
-</div>
+  <div class="mc-panel">
+    <div class="mc-panel-head">
+      <div>
+        <div class="mc-eyebrow">Content · Insights Blog</div>
+        <h2>Blog Manager</h2>
+        <div class="mc-sub">Draft, schedule, and publish posts to markcmo.com/blog. Posts are stored in Supabase (mc_blog_posts) and rendered live by the public-blog function — no static rebuild needed.</div>
+      </div>
+      <div class="mc-panel-actions">
+        <button class="mc-btn primary" onclick="mcBlogOpenEditor()">+ New Post</button>
+        <button class="mc-btn" onclick="mcLoadBlog(true)">↻ Refresh</button>
+        <a href="https://markcmo.com/blog.html" target="_blank" rel="noopener" class="mc-btn">View Blog →</a>
+      </div>
+    </div>
+    <div id="mc-blog-stats" class="mc-stats"></div>
+    <div id="mc-blog-body"><div class="mc-loading">Loading posts</div></div>
+  </div>
 </div>
 <div id="panel-content-resources" class="panel">
 <div class="panel-header"><h1 class="panel-title">📚 Client Forms & Resources</h1>
@@ -3048,22 +3058,22 @@ This is your legitimate social growth engine. Unlike bots or fake engagement too
 </div>
 </div>
 <div class="grid-4" style="margin-bottom:28px;">
-<div class="stat-card" onclick="switchPanel('audience', document.querySelector('[data-panel=audience]'))" style="cursor:pointer;">
+<div class="stat-card" onclick="switchPanel('sg-audience', this)" style="cursor:pointer;">
 <div class="stat-label">Audience Intel</div>
 <div style="font-size:28px;margin:8px 0;">🎯</div>
 <div class="stat-sub">ICP personas + where to find them</div>
 </div>
-<div class="stat-card" onclick="switchPanel('funnel', document.querySelector('[data-panel=funnel]'))" style="cursor:pointer;">
+<div class="stat-card" onclick="switchPanel('sg-funnel', this)" style="cursor:pointer;">
 <div class="stat-label">DM Funnels</div>
 <div style="font-size:28px;margin:8px 0;">💬</div>
 <div class="stat-sub">Comment → DM conversion flows</div>
 </div>
-<div class="stat-card" onclick="switchPanel('calendar', document.querySelector('[data-panel=calendar]'))" style="cursor:pointer;">
+<div class="stat-card" onclick="switchPanel('sg-calendar', this)" style="cursor:pointer;">
 <div class="stat-label">Content Calendar</div>
 <div style="font-size:28px;margin:8px 0;">📅</div>
 <div class="stat-sub">AI-planned 30-day posting plan</div>
 </div>
-<div class="stat-card" onclick="switchPanel('viral', document.querySelector('[data-panel=viral]'))" style="cursor:pointer;">
+<div class="stat-card" onclick="switchPanel('sg-viral', this)" style="cursor:pointer;">
 <div class="stat-label">Viral Score Lab</div>
 <div style="font-size:28px;margin:8px 0;">📈</div>
 <div class="stat-sub">Score + fix any post before publishing</div>
@@ -3094,12 +3104,12 @@ This is your legitimate social growth engine. Unlike bots or fake engagement too
 <div class="card">
 <div class="card-header"><div class="card-title">Quick Actions</div></div>
 <div class="card-body" style="display:grid;gap:8px;">
-<button class="btn btn-outline" style="width:100%;justify-content:flex-start;" onclick="switchPanel('hooks', document.querySelector('[data-panel=hooks]'))">⚡ Generate 20 Hooks for Any Topic</button>
-<button class="btn btn-outline" style="width:100%;justify-content:flex-start;" onclick="switchPanel('viral', document.querySelector('[data-panel=viral]'))">📈 Score My Draft Post</button>
-<button class="btn btn-outline" style="width:100%;justify-content:flex-start;" onclick="switchPanel('audit', document.querySelector('[data-panel=audit]'))">🏆 Audit My LinkedIn Profile</button>
-<button class="btn btn-outline" style="width:100%;justify-content:flex-start;" onclick="switchPanel('competitor', document.querySelector('[data-panel=competitor]'))">🔍 Analyze a Competitor</button>
-<button class="btn btn-outline" style="width:100%;justify-content:flex-start;" onclick="switchPanel('funnel', document.querySelector('[data-panel=funnel]'))">💬 Build a DM Funnel</button>
-<button class="btn btn-gold" style="width:100%;justify-content:flex-start;" onclick="switchPanel('pillars', document.querySelector('[data-panel=pillars]'))">🧱 Define My Content Pillars</button>
+<button class="btn btn-outline" style="width:100%;justify-content:flex-start;" onclick="switchPanel('sg-hooks', this)">⚡ Generate 20 Hooks for Any Topic</button>
+<button class="btn btn-outline" style="width:100%;justify-content:flex-start;" onclick="switchPanel('sg-viral', this)">📈 Score My Draft Post</button>
+<button class="btn btn-outline" style="width:100%;justify-content:flex-start;" onclick="switchPanel('sg-audit', this)">🏆 Audit My LinkedIn Profile</button>
+<button class="btn btn-outline" style="width:100%;justify-content:flex-start;" onclick="switchPanel('sg-competitor', this)">🔍 Analyze a Competitor</button>
+<button class="btn btn-outline" style="width:100%;justify-content:flex-start;" onclick="switchPanel('sg-funnel', this)">💬 Build a DM Funnel</button>
+<button class="btn btn-gold" style="width:100%;justify-content:flex-start;" onclick="switchPanel('sg-pillars', this)">🧱 Define My Content Pillars</button>
 </div>
 </div>
 </div>
@@ -3881,6 +3891,7 @@ function switchPanel(id, el) {
   else if (id === 'email-subscribers') { if (typeof mcLoadSubscribers === 'function') mcLoadSubscribers(); }
   else if (id === 'webinar-replay')    { if (typeof mcLoadWebinars === 'function')    mcLoadWebinars(); }
   else if (id === 'webinar-schedule')  { if (typeof mcLoadWebinars === 'function')    mcLoadWebinars(); }
+  else if (id === 'content-blog')      { if (typeof mcLoadBlog === 'function')        mcLoadBlog(); }
   else if (id === 'settings')          { if (typeof mcLoadIntegrations === 'function') mcLoadIntegrations(); }
 }
 
@@ -4788,25 +4799,31 @@ function mcPill(status) {
 
 // Fetch + cache + render. Calls renderFn(data) on success.
 async function mcFetch(type, renderFn, force) {
+  // Optional convenience containers for the canonical case (e.g. mc-pipeline-body).
+  // Many panels use renamed containers (mc-email-templates-body, mc-rev-reports-body)
+  // and rely on the renderer to find its own targets — so DON'T bail when these
+  // canonical IDs are missing. Just skip the canonical loading UI.
   const bodyEl = document.getElementById(`mc-${type}-body`);
   const statsEl = document.getElementById(`mc-${type}-stats`);
-  if (!bodyEl) return;
   if (!force && _mcCache[type]) { renderFn(_mcCache[type]); return; }
-  bodyEl.innerHTML = `<div class="mc-loading">Loading ${type}</div>`;
+  if (bodyEl) bodyEl.innerHTML = `<div class="mc-loading">Loading ${type}</div>`;
   if (statsEl) statsEl.innerHTML = '';
   try {
     const res = await fetch(`${MC_API}?type=${type}`, { credentials: 'include' });
-    if (res.status === 401) { mcHandleAuthExpired(); mcShowAuthRequired(bodyEl); return; }
+    if (res.status === 401) { mcHandleAuthExpired(); if (bodyEl) mcShowAuthRequired(bodyEl); return; }
     if (!res.ok) { const d = await res.json().catch(() => ({})); throw new Error(d.error || `HTTP ${res.status}`); }
     const data = await res.json();
     _mcCache[type] = data;
     renderFn(data);
   } catch (e) {
-    bodyEl.innerHTML = `<div class="mc-empty"><div class="ico">⚠</div><h3>Failed to load</h3><p>${mcEsc(e.message)}</p><p style="margin-top:.85rem;"><button class="mc-btn primary" onclick="window.location.reload()">↻ Reload page</button></p></div>`;
+    if (bodyEl) {
+      bodyEl.innerHTML = `<div class="mc-empty"><div class="ico">⚠</div><h3>Failed to load</h3><p>${mcEsc(e.message)}</p><p style="margin-top:.85rem;"><button class="mc-btn primary" onclick="window.location.reload()">↻ Reload page</button></p></div>`;
+    }
   }
 }
 
 function mcShowAuthRequired(bodyEl) {
+  if (!bodyEl) return;
   bodyEl.innerHTML = `<div class="mc-empty"><div class="ico">🔒</div><h3>Sign in required</h3><p>Your session has expired. Sign in again to continue.</p><p style="margin-top:.85rem;"><button class="mc-btn primary" onclick="mcReLogin()">Sign In Again</button></p></div>`;
 }
 
@@ -5320,6 +5337,13 @@ function mcRenderInvoices(data) {
   document.getElementById('mc-invoices-body').innerHTML = `<div class="mc-table-wrap"><table class="mc-table"><thead><tr>
     <th>Invoice ID</th><th>Client</th><th>Engagement</th><th>Status</th><th>Amount</th><th>Drafted</th><th>Sent</th><th>Paid</th><th>Reminders</th><th></th>
   </tr></thead><tbody>${rows}</tbody></table></div>`;
+
+  // Mirror into rev-invoices duplicate panel (Engagements > Invoices and Revenue > Invoices share the same table)
+  ['body','stats','search'].forEach(suffix => {
+    const src = document.getElementById('mc-invoices-' + suffix);
+    const dst = document.getElementById('mc-rev-invoices-' + suffix);
+    if (src && dst && src !== dst) dst.innerHTML = src.innerHTML;
+  });
 }
 
 // Wire up search inputs (one global listener handles every mc-*-search)
@@ -5392,6 +5416,353 @@ async function mcLoadDashboard(force) {
     if (grid) grid.innerHTML = `<div class="mc-kpi"><div class="l">Error</div><div class="v red">—</div><div class="s">${mcEsc(e.message)}</div></div>`;
   }
 }
+
+// ════════════════════════════════════════════════════════════════
+// CONTENT · Blog Manager (mc_blog_posts via /admin-blog)
+// Full CRUD: list, draft, schedule, publish, archive, delete.
+// ════════════════════════════════════════════════════════════════
+const MC_BLOG_API = '/.netlify/functions/admin-blog';
+let _mcBlogPosts = [];
+
+async function mcLoadBlog(force) {
+  const bodyEl = document.getElementById('mc-blog-body');
+  const statsEl = document.getElementById('mc-blog-stats');
+  if (!bodyEl) return;
+  if (!force && _mcBlogPosts.length) {
+    mcRenderBlog(_mcBlogPosts);
+    return;
+  }
+  bodyEl.innerHTML = '<div class="mc-loading">Loading posts</div>';
+  if (statsEl) statsEl.innerHTML = '';
+  try {
+    const res = await fetch(`${MC_BLOG_API}?action=list`, { credentials: 'include' });
+    if (res.status === 401) { mcHandleAuthExpired(); mcShowAuthRequired(bodyEl); return; }
+    if (!res.ok) { const d = await res.json().catch(() => ({})); throw new Error(d.error || `HTTP ${res.status}`); }
+    const data = await res.json();
+    _mcBlogPosts = data.posts || [];
+    mcRenderBlog(_mcBlogPosts);
+  } catch (e) {
+    bodyEl.innerHTML = `<div class="mc-empty"><div class="ico">⚠</div><h3>Failed to load posts</h3><p>${mcEsc(e.message)}</p></div>`;
+  }
+}
+
+function mcRenderBlog(posts) {
+  const bodyEl = document.getElementById('mc-blog-body');
+  const statsEl = document.getElementById('mc-blog-stats');
+  if (!bodyEl) return;
+  const pub = posts.filter(p => p.status === 'published').length;
+  const drafts = posts.filter(p => p.status === 'draft').length;
+  const sched = posts.filter(p => p.status === 'scheduled').length;
+  const totalViews = posts.reduce((s, p) => s + (p.view_count || 0), 0);
+  if (statsEl) {
+    statsEl.innerHTML = [
+      mcStatTile('Published', pub, '', 'green'),
+      mcStatTile('Drafts', drafts, ''),
+      mcStatTile('Scheduled', sched, '', 'blue'),
+      mcStatTile('Total Views', totalViews, ''),
+    ].join('');
+  }
+  if (!posts.length) {
+    bodyEl.innerHTML = `<div class="mc-empty"><div class="ico">✏️</div><h3>No blog posts yet</h3><p>Click "+ New Post" above to draft your first one. Posts publish to markcmo.com/blog instantly — no static rebuild needed.</p></div>`;
+    return;
+  }
+  bodyEl.innerHTML = `<div class="mc-table-wrap"><table class="mc-table"><thead><tr>
+    <th>Title</th><th>Status</th><th>Category</th><th>Read</th><th>Views</th><th>Updated</th><th></th>
+  </tr></thead><tbody>${posts.map(p => `<tr onclick="mcBlogOpenEditor('${mcEsc(p.id)}')" style="cursor:pointer;">
+    <td>
+      <div class="name-cell">${mcEsc(p.title || '(untitled)')}</div>
+      <div class="meta-cell">/${mcEsc(p.slug)}${p.subtitle ? ' · ' + mcEsc(p.subtitle) : ''}</div>
+    </td>
+    <td>${mcBlogStatusPill(p)}</td>
+    <td>${mcPill(p.category || 'insights')}</td>
+    <td>${p.read_time_min || 1} min</td>
+    <td>${p.view_count || 0}</td>
+    <td>${mcFmtRelTime(p.updated_at)}</td>
+    <td onclick="event.stopPropagation()" style="white-space:nowrap;">
+      ${p.status === 'published'
+        ? `<a href="https://markcmo.com/blog/${mcEsc(p.slug)}" target="_blank" rel="noopener" class="mc-btn" style="padding:.3rem .6rem;font-size:.66rem;margin-right:.3rem;">View ↗</a>`
+        : `<button class="mc-btn primary" style="padding:.3rem .6rem;font-size:.66rem;margin-right:.3rem;" onclick="mcBlogPublish('${mcEsc(p.id)}')">Publish</button>`}
+      <button class="mc-btn" style="padding:.3rem .6rem;font-size:.66rem;color:#DC2626;border-color:#FCA5A5;" onclick="mcBlogConfirmDelete('${mcEsc(p.id)}','${mcEsc((p.title || '').replace(/'/g, '\\u0027'))}')">×</button>
+    </td>
+  </tr>`).join('')}</tbody></table></div>`;
+}
+
+function mcBlogStatusPill(p) {
+  const map = {
+    published: ['mc-pill-green', 'live'],
+    draft:     ['mc-pill-grey',  'draft'],
+    scheduled: ['mc-pill-blue',  'scheduled'],
+    archived:  ['mc-pill-grey',  'archived'],
+  };
+  const [cls, label] = map[p.status] || map.draft;
+  return `<span class="mc-pill ${cls}">${label}</span>`;
+}
+
+async function mcBlogPublish(id) {
+  if (!confirm('Publish this post to markcmo.com/blog? It will be visible to anyone immediately.')) return;
+  try {
+    const res = await fetch(MC_BLOG_API, {
+      method: 'POST',
+      credentials: 'include',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ action: 'publish', id }),
+    });
+    if (!res.ok) throw new Error(`HTTP ${res.status}`);
+    await mcLoadBlog(true);
+  } catch (e) { alert('Publish failed: ' + e.message); }
+}
+
+async function mcBlogConfirmDelete(id, title) {
+  if (!confirm(`Permanently delete "${title}"? This cannot be undone.`)) return;
+  try {
+    const res = await fetch(MC_BLOG_API, {
+      method: 'POST',
+      credentials: 'include',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ action: 'delete', id }),
+    });
+    if (!res.ok) throw new Error(`HTTP ${res.status}`);
+    await mcLoadBlog(true);
+  } catch (e) { alert('Delete failed: ' + e.message); }
+}
+
+// ── Inline editor (renders inside #mc-blog-body, not a modal) ─────
+const _mcBlogInputCss = `padding:.6rem .85rem;border:1px solid #CBD5E1;border-radius:8px;font-family:'Barlow',sans-serif;font-size:.86rem;background:#FFFFFF;color:#0A1628;width:100%;box-sizing:border-box;`;
+const _mcBlogLabelCss = `font-family:'DM Mono',monospace;font-size:.66rem;letter-spacing:.18em;text-transform:uppercase;color:#475569;font-weight:700;display:block;margin-bottom:.35rem;`;
+
+async function mcBlogOpenEditor(id) {
+  let post = {
+    id: null, slug: '', title: '', subtitle: '', excerpt: '',
+    content_html: '', hero_image_url: '', hero_image_alt: '',
+    category: 'insights', tags: [],
+    author_name: 'Mark Gabrielli',
+    meta_title: '', meta_description: '',
+    status: 'draft', scheduled_at: null,
+  };
+  if (id) {
+    try {
+      const res = await fetch(`${MC_BLOG_API}?action=single&id=${encodeURIComponent(id)}`, { credentials: 'include' });
+      if (!res.ok) throw new Error(`HTTP ${res.status}`);
+      const d = await res.json();
+      post = { ...post, ...d.post, tags: d.post.tags || [] };
+    } catch (e) { alert('Failed to load post: ' + e.message); return; }
+  }
+  const bodyEl = document.getElementById('mc-blog-body');
+  const statsEl = document.getElementById('mc-blog-stats');
+  if (!bodyEl) return;
+
+  const tagsStr = (post.tags || []).join(', ');
+  const scheduledLocal = post.scheduled_at
+    ? new Date(post.scheduled_at).toISOString().slice(0, 16)
+    : '';
+
+  if (statsEl) statsEl.innerHTML = '';
+
+  bodyEl.innerHTML = `
+    <div style="background:#FFFFFF;border:1px solid #E2E8F0;border-radius:14px;padding:1.5rem 1.75rem;">
+      <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:1.25rem;gap:.85rem;flex-wrap:wrap;">
+        <div>
+          <div style="font-family:'DM Mono',monospace;font-size:.62rem;letter-spacing:.22em;text-transform:uppercase;color:#2563EB;font-weight:700;margin-bottom:.3rem;">Blog Manager</div>
+          <h2 style="font-family:'Bebas Neue',Impact,sans-serif;font-size:1.65rem;letter-spacing:.02em;color:#0A1628;margin:0;line-height:1;font-weight:400;">${id ? 'Edit Post' : 'New Post'}</h2>
+        </div>
+        <button class="mc-btn" onclick="mcLoadBlog(true)">← Back to list</button>
+      </div>
+      <form id="mc-blog-form" onsubmit="event.preventDefault();return false;" style="display:grid;gap:1rem;">
+        <div style="display:grid;grid-template-columns:2fr 1fr;gap:1rem;">
+          <div>
+            <label style="${_mcBlogLabelCss}">Title *</label>
+            <input id="mcb-title" type="text" value="${mcEsc(post.title)}" placeholder="The 3 Things Killing Your Pipeline" oninput="mcBlogAutoSlug()" style="${_mcBlogInputCss}" />
+          </div>
+          <div>
+            <label style="${_mcBlogLabelCss}">Slug</label>
+            <input id="mcb-slug" type="text" value="${mcEsc(post.slug)}" placeholder="auto-from-title" style="${_mcBlogInputCss}" />
+          </div>
+        </div>
+        <div>
+          <label style="${_mcBlogLabelCss}">Subtitle</label>
+          <input id="mcb-subtitle" type="text" value="${mcEsc(post.subtitle || '')}" placeholder="Optional one-line subtitle" style="${_mcBlogInputCss}" />
+        </div>
+        <div>
+          <label style="${_mcBlogLabelCss}">Excerpt (shown on listing)</label>
+          <textarea id="mcb-excerpt" rows="2" placeholder="2-3 sentence preview that appears on /blog" style="${_mcBlogInputCss}resize:vertical;">${mcEsc(post.excerpt || '')}</textarea>
+        </div>
+        <div>
+          <label style="${_mcBlogLabelCss}">Body (HTML)</label>
+          <textarea id="mcb-content" rows="18" placeholder="<h2>Section</h2>&#10;<p>Your content...</p>&#10;<p>Use <strong>HTML</strong> or paste from a doc. Auto-saves on Save Draft.</p>" style="${_mcBlogInputCss}font-family:'DM Mono',monospace;font-size:.78rem;line-height:1.6;resize:vertical;">${mcEsc(post.content_html || '')}</textarea>
+          <div style="font-size:.7rem;color:#94A3B8;margin-top:.3rem;">Supports any HTML (h2, h3, p, ul, ol, blockquote, img, a, code, pre). Read time auto-calculated from word count.</div>
+        </div>
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:1rem;">
+          <div>
+            <label style="${_mcBlogLabelCss}">Hero image URL</label>
+            <input id="mcb-hero-url" type="url" value="${mcEsc(post.hero_image_url || '')}" placeholder="https://..." style="${_mcBlogInputCss}" />
+          </div>
+          <div>
+            <label style="${_mcBlogLabelCss}">Hero alt text</label>
+            <input id="mcb-hero-alt" type="text" value="${mcEsc(post.hero_image_alt || '')}" placeholder="Describe the image for SEO + accessibility" style="${_mcBlogInputCss}" />
+          </div>
+        </div>
+        <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:1rem;">
+          <div>
+            <label style="${_mcBlogLabelCss}">Category</label>
+            <select id="mcb-category" style="${_mcBlogInputCss}">
+              ${['insights','strategy','operations','playbooks','case-studies','tactics'].map(c =>
+                `<option value="${c}"${post.category === c ? ' selected' : ''}>${c}</option>`).join('')}
+            </select>
+          </div>
+          <div>
+            <label style="${_mcBlogLabelCss}">Tags (comma-separated)</label>
+            <input id="mcb-tags" type="text" value="${mcEsc(tagsStr)}" placeholder="positioning, b2b, growth" style="${_mcBlogInputCss}" />
+          </div>
+          <div>
+            <label style="${_mcBlogLabelCss}">Author</label>
+            <input id="mcb-author" type="text" value="${mcEsc(post.author_name || 'Mark Gabrielli')}" style="${_mcBlogInputCss}" />
+          </div>
+        </div>
+        <details style="background:#F8FAFC;padding:.85rem 1rem;border-radius:8px;border:1px solid #E2E8F0;">
+          <summary style="cursor:pointer;font-weight:600;color:#475569;font-size:.82rem;">SEO &amp; metadata</summary>
+          <div style="display:grid;gap:.85rem;margin-top:.85rem;">
+            <div>
+              <label style="${_mcBlogLabelCss}">Meta title (defaults to post title)</label>
+              <input id="mcb-meta-title" type="text" value="${mcEsc(post.meta_title || '')}" placeholder="${mcEsc(post.title)} | MarkCMO" style="${_mcBlogInputCss}" />
+            </div>
+            <div>
+              <label style="${_mcBlogLabelCss}">Meta description (160 chars max)</label>
+              <textarea id="mcb-meta-desc" rows="2" maxlength="160" style="${_mcBlogInputCss}resize:vertical;">${mcEsc(post.meta_description || '')}</textarea>
+            </div>
+          </div>
+        </details>
+        <details style="background:#F8FAFC;padding:.85rem 1rem;border-radius:8px;border:1px solid #E2E8F0;">
+          <summary style="cursor:pointer;font-weight:600;color:#475569;font-size:.82rem;">Schedule for later</summary>
+          <div style="margin-top:.85rem;">
+            <label style="${_mcBlogLabelCss}">Publish at (optional)</label>
+            <input id="mcb-scheduled" type="datetime-local" value="${scheduledLocal}" style="${_mcBlogInputCss}" />
+            <div style="font-size:.7rem;color:#94A3B8;margin-top:.3rem;">If set, post stays as 'scheduled' until this time. Use the Schedule button below to commit.</div>
+          </div>
+        </details>
+      </form>
+      <div id="mc-blog-save-result" style="margin-top:1rem;font-size:.86rem;"></div>
+      <div style="display:flex;gap:.5rem;flex-wrap:wrap;margin-top:1.25rem;padding-top:1.25rem;border-top:1px solid #E2E8F0;align-items:center;">
+        ${id ? `<button class="mc-btn" style="color:#DC2626;border-color:#FCA5A5;" onclick="mcBlogConfirmDelete('${mcEsc(post.id)}','${mcEsc((post.title || '').replace(/'/g, '\\u0027'))}')">Delete</button>` : ''}
+        <span style="flex:1;"></span>
+        <button class="mc-btn" onclick="mcBlogSave('draft', ${id ? `'${mcEsc(post.id)}'` : 'null'})">Save Draft</button>
+        ${id && post.status === 'published'
+          ? `<button class="mc-btn" onclick="mcBlogSave('unpublish', '${mcEsc(post.id)}')">Unpublish</button>`
+          : ''}
+        <button class="mc-btn" onclick="mcBlogSave('schedule', ${id ? `'${mcEsc(post.id)}'` : 'null'})">Schedule</button>
+        <button class="mc-btn primary" onclick="mcBlogSave('publish', ${id ? `'${mcEsc(post.id)}'` : 'null'})">${post.status === 'published' ? 'Re-publish' : 'Publish Now'}</button>
+      </div>
+    </div>
+  `;
+}
+
+function mcBlogAutoSlug() {
+  const titleEl = document.getElementById('mcb-title');
+  const slugEl = document.getElementById('mcb-slug');
+  if (!titleEl || !slugEl) return;
+  // Only auto-fill the slug if it's empty or hasn't been manually edited
+  if (!slugEl.dataset.touched) {
+    slugEl.value = (titleEl.value || '')
+      .toLowerCase()
+      .replace(/&[a-z]+;/g, '')
+      .replace(/[^a-z0-9\s-]/g, '')
+      .trim().replace(/\s+/g, '-')
+      .replace(/-+/g, '-')
+      .slice(0, 80);
+  }
+}
+
+function mcBlogReadForm() {
+  const get = (id) => (document.getElementById(id) || { value: '' }).value;
+  const tags = get('mcb-tags').split(',').map(t => t.trim()).filter(Boolean);
+  return {
+    title:           get('mcb-title').trim(),
+    slug:            get('mcb-slug').trim(),
+    subtitle:        get('mcb-subtitle').trim(),
+    excerpt:         get('mcb-excerpt').trim(),
+    content_html:    get('mcb-content'),
+    hero_image_url:  get('mcb-hero-url').trim(),
+    hero_image_alt:  get('mcb-hero-alt').trim(),
+    category:        get('mcb-category'),
+    tags,
+    author_name:     get('mcb-author').trim(),
+    meta_title:      get('mcb-meta-title').trim(),
+    meta_description: get('mcb-meta-desc').trim(),
+    scheduled_at:    get('mcb-scheduled') ? new Date(get('mcb-scheduled')).toISOString() : null,
+  };
+}
+
+async function mcBlogSave(mode, id) {
+  const data = mcBlogReadForm();
+  const resultEl = document.getElementById('mc-blog-save-result');
+  const showStatus = (msg, kind) => {
+    if (!resultEl) return;
+    const color = kind === 'err' ? '#DC2626' : kind === 'ok' ? '#10B981' : '#475569';
+    resultEl.innerHTML = `<span style="color:${color};font-weight:600;">${mcEsc(msg)}</span>`;
+  };
+  if (!data.title) { showStatus('Title is required', 'err'); return; }
+  if (mode === 'schedule' && !data.scheduled_at) {
+    showStatus('Set a "Publish at" date in the Schedule section first.', 'err');
+    return;
+  }
+  showStatus('Saving…');
+
+  // Save (create or update first), then optionally publish/schedule
+  try {
+    let postId = id;
+    if (!postId) {
+      const res = await fetch(MC_BLOG_API, {
+        method: 'POST',
+        credentials: 'include',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ action: 'create', data }),
+      });
+      if (!res.ok) { const d = await res.json().catch(() => ({})); throw new Error(d.error || `HTTP ${res.status}`); }
+      const d = await res.json();
+      postId = d.post.id;
+    } else {
+      const res = await fetch(MC_BLOG_API, {
+        method: 'POST',
+        credentials: 'include',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ action: 'update', id: postId, data }),
+      });
+      if (!res.ok) { const d = await res.json().catch(() => ({})); throw new Error(d.error || `HTTP ${res.status}`); }
+    }
+
+    if (mode === 'publish') {
+      const r = await fetch(MC_BLOG_API, {
+        method: 'POST', credentials: 'include',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ action: 'publish', id: postId }),
+      });
+      if (!r.ok) throw new Error('Publish step failed');
+    } else if (mode === 'unpublish') {
+      const r = await fetch(MC_BLOG_API, {
+        method: 'POST', credentials: 'include',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ action: 'unpublish', id: postId }),
+      });
+      if (!r.ok) throw new Error('Unpublish failed');
+    } else if (mode === 'schedule') {
+      const r = await fetch(MC_BLOG_API, {
+        method: 'POST', credentials: 'include',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ action: 'schedule', id: postId, scheduled_at: data.scheduled_at }),
+      });
+      if (!r.ok) throw new Error('Schedule failed');
+    }
+
+    showStatus('Saved.', 'ok');
+    setTimeout(() => mcLoadBlog(true), 600);
+  } catch (e) {
+    showStatus('Save failed: ' + e.message, 'err');
+  }
+}
+
+// Mark slug as manually-edited so we stop auto-syncing it from the title
+document.addEventListener('input', (e) => {
+  if (e.target && e.target.id === 'mcb-slug') e.target.dataset.touched = '1';
+});
 
 // ════════════════════════════════════════════════════════════════
 // SETTINGS · Integrations Health + Maintenance Tools
