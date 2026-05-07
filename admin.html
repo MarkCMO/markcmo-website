@@ -1064,6 +1064,13 @@
   .sidebar { width: 260px !important; padding: 0 !important; overflow: hidden !important; max-height: 100vh; display: flex !important; flex-direction: column !important; }
   /* Bump main-content margin to match the new sidebar width so cards don't get clipped */
   .main-content { margin-left: 260px !important; }
+  /* Bare panels (no top-bar / content-body / mc-panel wrapper) get default padding
+     so their leftmost column doesn't sit flush against the sidebar. Wrapped panels
+     handle their own spacing internally. Modern browsers only (:has() — Chrome 105+,
+     Safari 15.4+, Firefox 121+, all current production browsers). */
+  .panel:not(:has(> .top-bar)):not(:has(> .content-body)):not(:has(> .mc-panel)) {
+    padding: 28px 32px;
+  }
   /* Adjust mobile breakpoint margins to match (was 200px in original CSS) */
   @media (max-width: 1100px) {
     .main-content { margin-left: 240px !important; }
@@ -2226,6 +2233,7 @@
   </div>
 </div>
 <div id="panel-forms-hub" class="panel">
+<div class="content-body">
 <div class="panel-header">
 <h1 class="panel-title">📋 Forms Hub</h1>
 <div style="font-size:12px;color:var(--dim);">Open, fill, and send any document template</div>
@@ -2321,8 +2329,9 @@
 <div class="form-card-desc">Permission to use client testimonials in marketing.</div>
 <div class="form-card-actions"><span class="fc-btn primary">Open Form →</span></div>
 </a>
-</div>
-</div>
+</div><!-- /forms-grid -->
+</div><!-- /content-body -->
+</div><!-- /panel-forms-hub -->
 <div id="panel-forms-nda" class="panel">
   <div class="mc-panel">
     <div class="mc-panel-head">
@@ -3048,22 +3057,22 @@ This is your legitimate social growth engine. Unlike bots or fake engagement too
 </div>
 </div>
 <div class="grid-4" style="margin-bottom:28px;">
-<div class="stat-card" onclick="switchPanel('audience', document.querySelector('[data-panel=audience]'))" style="cursor:pointer;">
+<div class="stat-card" onclick="switchPanel('sg-audience', this)" style="cursor:pointer;">
 <div class="stat-label">Audience Intel</div>
 <div style="font-size:28px;margin:8px 0;">🎯</div>
 <div class="stat-sub">ICP personas + where to find them</div>
 </div>
-<div class="stat-card" onclick="switchPanel('funnel', document.querySelector('[data-panel=funnel]'))" style="cursor:pointer;">
+<div class="stat-card" onclick="switchPanel('sg-funnel', this)" style="cursor:pointer;">
 <div class="stat-label">DM Funnels</div>
 <div style="font-size:28px;margin:8px 0;">💬</div>
 <div class="stat-sub">Comment → DM conversion flows</div>
 </div>
-<div class="stat-card" onclick="switchPanel('calendar', document.querySelector('[data-panel=calendar]'))" style="cursor:pointer;">
+<div class="stat-card" onclick="switchPanel('sg-calendar', this)" style="cursor:pointer;">
 <div class="stat-label">Content Calendar</div>
 <div style="font-size:28px;margin:8px 0;">📅</div>
 <div class="stat-sub">AI-planned 30-day posting plan</div>
 </div>
-<div class="stat-card" onclick="switchPanel('viral', document.querySelector('[data-panel=viral]'))" style="cursor:pointer;">
+<div class="stat-card" onclick="switchPanel('sg-viral', this)" style="cursor:pointer;">
 <div class="stat-label">Viral Score Lab</div>
 <div style="font-size:28px;margin:8px 0;">📈</div>
 <div class="stat-sub">Score + fix any post before publishing</div>
@@ -3094,12 +3103,12 @@ This is your legitimate social growth engine. Unlike bots or fake engagement too
 <div class="card">
 <div class="card-header"><div class="card-title">Quick Actions</div></div>
 <div class="card-body" style="display:grid;gap:8px;">
-<button class="btn btn-outline" style="width:100%;justify-content:flex-start;" onclick="switchPanel('hooks', document.querySelector('[data-panel=hooks]'))">⚡ Generate 20 Hooks for Any Topic</button>
-<button class="btn btn-outline" style="width:100%;justify-content:flex-start;" onclick="switchPanel('viral', document.querySelector('[data-panel=viral]'))">📈 Score My Draft Post</button>
-<button class="btn btn-outline" style="width:100%;justify-content:flex-start;" onclick="switchPanel('audit', document.querySelector('[data-panel=audit]'))">🏆 Audit My LinkedIn Profile</button>
-<button class="btn btn-outline" style="width:100%;justify-content:flex-start;" onclick="switchPanel('competitor', document.querySelector('[data-panel=competitor]'))">🔍 Analyze a Competitor</button>
-<button class="btn btn-outline" style="width:100%;justify-content:flex-start;" onclick="switchPanel('funnel', document.querySelector('[data-panel=funnel]'))">💬 Build a DM Funnel</button>
-<button class="btn btn-gold" style="width:100%;justify-content:flex-start;" onclick="switchPanel('pillars', document.querySelector('[data-panel=pillars]'))">🧱 Define My Content Pillars</button>
+<button class="btn btn-outline" style="width:100%;justify-content:flex-start;" onclick="switchPanel('sg-hooks', this)">⚡ Generate 20 Hooks for Any Topic</button>
+<button class="btn btn-outline" style="width:100%;justify-content:flex-start;" onclick="switchPanel('sg-viral', this)">📈 Score My Draft Post</button>
+<button class="btn btn-outline" style="width:100%;justify-content:flex-start;" onclick="switchPanel('sg-audit', this)">🏆 Audit My LinkedIn Profile</button>
+<button class="btn btn-outline" style="width:100%;justify-content:flex-start;" onclick="switchPanel('sg-competitor', this)">🔍 Analyze a Competitor</button>
+<button class="btn btn-outline" style="width:100%;justify-content:flex-start;" onclick="switchPanel('sg-funnel', this)">💬 Build a DM Funnel</button>
+<button class="btn btn-gold" style="width:100%;justify-content:flex-start;" onclick="switchPanel('sg-pillars', this)">🧱 Define My Content Pillars</button>
 </div>
 </div>
 </div>
