@@ -1,6 +1,18 @@
 # CLAUDE.md — operating guide for any Claude session in this repo
 
-> **Read this first. Two rules at the top will save the user hours of lost work.**
+> **Read this first. Three rules at the top will save the user hours of lost work.**
+
+## RULE #0 — NEVER send any email without explicit user consent. Not even tests.
+
+This includes:
+- `send-engagement-proposal-email` — even with `testRecipient` set
+- `send-template-email` — same, even when routed to mark@markcmo.com
+- Any direct call to the Resend API
+- Triggering anything that fires `_lib_payment_apply.sendOnboardingIntake` (e.g. flipping an invoice paid via SQL or curl when the user hasn't asked for that test)
+
+Mark gets every email Resend sends through his inbox — there is no such thing as a "private" test send. Smoke-testing email functions must use `curl` against Supabase / Square / etc, OR a `dry_run: true` flag if the function supports it. **If you need to verify an email function works end-to-end, ASK THE USER FIRST.**
+
+If the user explicitly says "send a test to mark@markcmo.com" or "fire the proposal to Wendal now," that's consent — proceed. Otherwise: do not.
 
 ## RULE #1 — Never run `netlify deploy --prod` directly. Use safe-deploy.sh.
 
