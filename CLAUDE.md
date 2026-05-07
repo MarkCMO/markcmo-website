@@ -1,11 +1,38 @@
 # CLAUDE.md — operating guide for any Claude session in this repo
 
-> **Read this first. Two rules at the top will save the user hours of lost work.**
+> **Read this first. Rules at the top will save the user hours of lost work.**
+
+---
+
+## RULE #0 — admin.html is PERMANENTLY LOCKED
+
+Mark explicitly stated on 2026-05-07: "once everything is wired we need to lock the admin panel to never get changed again. this is retarded that I have to get this all back every time you decide to make the wrong changes."
+
+**DO NOT, under any circumstances:**
+- Replace any panel content with stubs, placeholders, or "Coming Next Build" blocks
+- Remove or rename any `<div id="panel-*">` elements
+- Change `<nav class="admin-nav">` structure or `.admin-nav-item` elements
+- Restyle admin.html "to match" another page, template, or design refresh
+- Add new panels without Mark explicitly naming the panel ID and content
+- Modify the `switchPanel()` or `toggleGroup()` functions
+- Remove or break any data-loading functions (`loadClients`, `loadEngagements`, `loadInvoices`, `loadContacts`, `loadPipeline`, `loadAuditLog`, `loadFormSubmissions`, `loadSubscribers`, `loadLeadSources`, `loadFunnelData`, `loadRevenueReport`, `populateWebinarSchedule`, etc.)
+- Change the admin dark theme colors (`--black`, `--surface`, `--gold`, `--border`, `--dim`)
+
+**YOU MAY ONLY:**
+- Fix bugs in data loading (fetch errors, broken response parsing, missing null checks)
+- Add new `?type=` routes to `admin-data.js` if Mark explicitly asks for a new data type
+- Fix display/formatting issues within a panel if Mark identifies a specific visual bug
+- Update Square payment link values inside `panel-rev-products` if Mark gives new links
+- Fix spelling errors or update text Mark explicitly identifies
+
+**HISTORY:** The admin panel has been rebuilt from scratch multiple times after Claude regressions. The final wired version was locked on 2026-05-07. Every panel either loads live data or links to the correct third-party service. This is the permanent state.
+
+---
 
 ## RULE #1 — Never run `netlify deploy --prod` directly. Use safe-deploy.sh.
 
 ```bash
-bash scripts/safe-deploy.sh "your deploy message"
+bash .claude/scripts/safe-deploy.sh "your deploy message"
 ```
 
 The script:
