@@ -74,10 +74,64 @@ exports.handler = async (event) => {
     // user overrides (anything passed in `variables` clobbers the defaults)
     ...(body.variables || {}),
   };
-  const sub = (s) => String(s || '').replace(/\{\{\s*([a-z0-9_]+)\s*\}\}/gi, (_, k) => vars[k] !== undefined ? String(vars[k]) : `{{${k}}}`);
+  // Track which vars are missing/empty so we can refuse before sending
+  const missing = new Set();
+  const sub = (s) => String(s || '').replace(/\{\{\s*([a-z0-9_]+)\s*\}\}/gi, (_, k) => {
+    const v = vars[k];
+    if (v === undefined || v === null || String(v).trim() === '') {
+      missing.add(k);
+      return `{{${k}}}`;
+    }
+    return String(v);
+  });
   const subject = sub(template.subject);
   const html = sub(template.html_body);
   const preheader = template.preheader ? sub(template.preheader) : null;
+
+  // ─── Guard: refuse to send (or dry-run) with unfilled placeholders ──
+  // The user explicitly hit this bug once: a [TEST] email landed with
+  // "Quick {{topic}} call?" as the subject because `topic` was unfilled.
+  // Now any unfilled {{var}} in subject/preheader/body kills the send
+  // with a 422 + the list of missing keys. Dry-run path skips the
+  // Resend call but still surfaces the rendered subject/preview/missing
+  // so the caller can show a preview UI before consenting to send.
+  const dryRun = !!body.dry_run;
+  if (missing.size && !body.allow_partial) {
+    return {
+      statusCode: dryRun ? 200 : 422,
+      headers,
+      body: JSON.stringify({
+        ok: false,
+        error: dryRun ? null : 'Unfilled template variables — refusing to send. Pass values in `variables` or set `allow_partial: true` to ignore (not recommended).',
+        missing_variables: Array.from(missing),
+        rendered_subject: subject,
+        rendered_preheader: preheader,
+        dry_run: dryRun,
+        ...(dryRun ? { rendered_html: html } : {}),
+      }),
+    };
+  }
+
+  // ─── Dry-run: return rendered output without calling Resend ─────
+  if (dryRun) {
+    return {
+      statusCode: 200,
+      headers,
+      body: JSON.stringify({
+        ok: true,
+        dry_run: true,
+        sent: false,
+        rendered_subject: subject,
+        rendered_preheader: preheader,
+        rendered_html: html,
+        recipient_email: client.primary_contact_email,
+        cc: buildClientCcList(client),
+        template_slug: template.slug,
+        client_slug: client.slug,
+        missing_variables: Array.from(missing),
+      }),
+    };
+  }
 
   // ─── Recipients + CC ──────────────────────────────────────────
   const testMode = !!body.testRecipient;
