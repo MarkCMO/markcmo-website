@@ -578,9 +578,28 @@ exports.handler = async (event) => {
       if (!cId) return { statusCode: 400, headers, body: JSON.stringify({ error: 'Provide clientId or slug' }) };
 
       const limit = Math.min(Number(q.limit || 200), 500);
-      const events = await sbSelect(
-        `mc_journey_events?client_id=eq.${encodeURIComponent(cId)}&select=*&order=created_at.asc&limit=${limit}`
-      );
+      const [events, notes] = await Promise.all([
+        sbSelect(`mc_journey_events?client_id=eq.${encodeURIComponent(cId)}&select=*&order=created_at.asc&limit=${limit}`),
+        sbSelect(`mc_notes?client_id=eq.${encodeURIComponent(cId)}&select=id,author,category,body,pinned,created_at,engagement_id&order=created_at.asc&limit=200`),
+      ]);
+      // Fold notes into the events stream so the timeline shows everything
+      // in one chronological order. Use category='note' so the UI can pill them.
+      for (const n of notes) {
+        events.push({
+          id: 'note_' + n.id,
+          client_id: cId,
+          engagement_id: n.engagement_id,
+          category: 'note',
+          event: n.pinned ? 'note_pinned' : 'note_' + (n.category || 'note'),
+          subject_or_url: n.body,
+          recipient_email: null,
+          ip: null,
+          user_agent: n.author || null,
+          raw: { note_id: n.id, pinned: n.pinned, author: n.author, category: n.category },
+          created_at: n.created_at,
+        });
+      }
+      events.sort((a, b) => new Date(a.created_at) - new Date(b.created_at));
 
       // Roll-up stats per email (group by resend_email_id)
       const byEmail = {};

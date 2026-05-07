@@ -1404,16 +1404,20 @@
 
   /* Pipeline kanban */
   .mc-kanban { display: grid; grid-template-columns: repeat(auto-fit,minmax(220px,1fr)); gap: 0.85rem; align-items: flex-start; }
-  .mc-kanban-col { background: #F8FAFC; border-radius: 12px; padding: 0.75rem; min-height: 120px; border: 1px solid #E2E8F0; }
+  .mc-kanban-col { background: #F8FAFC; border-radius: 12px; padding: 0.75rem; min-height: 160px; border: 1px solid #E2E8F0; transition: background 0.15s, border-color 0.15s; }
+  .mc-kanban-col.drag-over { background: #EFF6FF; border-color: #2563EB; border-style: dashed; }
   .mc-kanban-col h4 { font-family: 'DM Mono', monospace; font-size: 0.62rem; letter-spacing: 0.18em; text-transform: uppercase; color: #475569; font-weight: 700; margin: 0 0 0.85rem; padding: 0 0.4rem; display: flex; justify-content: space-between; align-items: center; }
   .mc-kanban-col h4 .count { background: #FFFFFF; border: 1px solid #E2E8F0; border-radius: 999px; padding: 0.1rem 0.5rem; font-size: 0.6rem; color: #1E293B; }
-  .mc-kanban-card { background: #FFFFFF; border-radius: 10px; padding: 0.85rem 1rem; margin-bottom: 0.6rem; cursor: pointer; box-shadow: 0 1px 3px rgba(10,22,40,0.05); border: 1px solid #E2E8F0; transition: all 0.15s; }
+  .mc-kanban-card { background: #FFFFFF; border-radius: 10px; padding: 0.85rem 1rem; margin-bottom: 0.6rem; cursor: grab; box-shadow: 0 1px 3px rgba(10,22,40,0.05); border: 1px solid #E2E8F0; transition: transform 0.12s, box-shadow 0.12s, border-color 0.12s, opacity 0.12s; user-select: none; }
   .mc-kanban-card:hover { transform: translateY(-2px); box-shadow: 0 8px 18px rgba(10,22,40,0.1); border-color: #2563EB; }
+  .mc-kanban-card:active { cursor: grabbing; }
+  .mc-kanban-card.dragging { opacity: 0.4; }
   .mc-kanban-card .name { font-weight: 700; color: #0A1628; font-size: 0.86rem; line-height: 1.2; margin-bottom: 0.2rem; }
   .mc-kanban-card .sub { font-size: 0.72rem; color: #64748B; margin-bottom: 0.35rem; line-height: 1.2; }
   .mc-kanban-card .row { display: flex; justify-content: space-between; align-items: center; gap: 0.4rem; }
   .mc-kanban-card .fee { font-family: 'Bebas Neue', Impact, sans-serif; font-size: 1rem; color: #2563EB; letter-spacing: 0.02em; }
   .mc-kanban-card .age { font-family: 'DM Mono', monospace; font-size: 0.6rem; color: #94A3B8; }
+  .mc-kanban-hint { font-size: .7rem; color: #94A3B8; margin: -.4rem 0 .85rem; padding: 0 .4rem; font-style: italic; }
 
   /* Dashboard widgets (mc-dash-) */
   .mc-dash { padding: 0; }
@@ -1514,6 +1518,10 @@
   .cf-journey-pill.payment { background: #FED7AA; color: #9A3412; }
   .cf-journey-pill.cta { background: #FEF3C7; color: #92400E; }
   .cf-journey-pill.calendly { background: #FCE7F3; color: #9D174D; }
+  .cf-journey-pill.note { background: #FEF3C7; color: #92400E; }
+  .cf-journey-pill.note-pinned { background: #FED7AA; color: #9A3412; }
+  .cf-journey-pill.note-call { background: #DBEAFE; color: #1D4ED8; }
+  .cf-journey-pill.note-meeting { background: #EDE9FE; color: #5B21B6; }
   .cf-journey-detail { font-size: 0.84rem; color: #1E293B; min-width: 0; line-height: 1.3; }
   .cf-journey-detail .what { font-weight: 600; color: #0A1628; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
   .cf-journey-detail .meta { font-size: 0.7rem; color: #64748B; margin-top: 0.15rem; font-family: 'DM Mono', monospace; }
@@ -1903,7 +1911,8 @@
       </div>
       <div class="mc-panel-actions">
         <input type="text" class="mc-search" id="mc-contacts-search" placeholder="Search name, email, company, country...">
-        <button class="mc-btn" onclick="mcLoadContacts()">↻ Refresh</button>
+        <button class="mc-btn primary" onclick="mcOpenAddContact()">+ Add Contact</button>
+        <button class="mc-btn" onclick="mcLoadContacts(true)">↻ Refresh</button>
       </div>
     </div>
     <div id="mc-contacts-stats" class="mc-stats"></div>
@@ -3882,7 +3891,7 @@ function cfRenderCase(client, audit) {
       const invoices = (e.mc_invoices || []).sort((a,b) => new Date(b.created_at) - new Date(a.created_at));
       html += `<div class="cf-eng">
         <div class="cf-eng-head">
-          <div><div class="cf-eng-name">${cfEsc(e.name)}</div><div style="margin-top:.4rem;display:flex;align-items:center;gap:.5rem;flex-wrap:wrap;">${cfPill(e.status)}<button class="cf-btn cf-btn-sm outline" style="padding:.2rem .55rem;font-size:.62rem;" onclick="cfChangeEngagementStatus('${cfEsc(e.id)}','${cfEsc(e.status||'draft')}')">Change Stage</button></div></div>
+          <div><div class="cf-eng-name">${cfEsc(e.name)}</div><div style="margin-top:.4rem;display:flex;align-items:center;gap:.5rem;flex-wrap:wrap;">${cfPill(e.status)}<button class="cf-btn cf-btn-sm outline" style="padding:.2rem .55rem;font-size:.62rem;" onclick="cfEditEngagement('${cfEsc(e.id)}')">Edit Engagement</button><button class="cf-btn cf-btn-sm outline" style="padding:.2rem .55rem;font-size:.62rem;" onclick="cfChangeEngagementStatus('${cfEsc(e.id)}','${cfEsc(e.status||'draft')}')">Quick Stage…</button></div></div>
           <div class="cf-fee">${cfFmtUSD(e.fee_usd)}<small>${e.delivery_window_hrs || '—'} HR DELIVERY</small></div>
         </div>
         <div class="cf-eng-meta">
@@ -4025,6 +4034,10 @@ function cfRenderJourney(data) {
       else if (ev === 'cta_click') { pillKind = 'cta'; pillLabel = '🔗 cta click'; }
       else if (ev === 'payment_link_click') { pillKind = 'payment'; pillLabel = '💳 pay link'; }
       else if (ev.includes('calendly')) { pillKind = 'calendly'; pillLabel = '📅 calendly'; }
+      else if (ev === 'note_pinned') { pillKind = 'note-pinned'; pillLabel = '📌 pinned note'; }
+      else if (ev === 'note_call') { pillKind = 'note-call'; pillLabel = '📞 call note'; }
+      else if (ev === 'note_meeting') { pillKind = 'note-meeting'; pillLabel = '🤝 meeting'; }
+      else if (ev.startsWith('note_')) { pillKind = 'note'; pillLabel = '📝 ' + ev.replace('note_',''); }
       const what = e.subject_or_url || (e.raw && (e.raw.kind || e.raw.template)) || '—';
       const ip = e.ip ? ` · ${cfEsc(e.ip)}` : '';
       return `<div class="cf-journey-event">
@@ -4259,6 +4272,58 @@ async function cfSaveClient(ev) {
   }
 }
 
+// Full engagement editor (name, fee, delivery window, doc prefix, status, etc.)
+async function cfEditEngagement(engagementId) {
+  // Pull the row from cache (the loaded case file has it)
+  const eng = (window._cfActiveClientObj?.mc_engagements || []).find(e => e.id === engagementId);
+  if (!eng) return alert('Could not find engagement in current case file. Refresh and try again.');
+
+  const stages = ['lead','draft','proposal_sent','signed','invoiced','paid','delivering','delivered','closed','archived'];
+  const toLocalInput = (iso) => { if (!iso) return ''; try { const d = new Date(iso); const off = d.getTimezoneOffset()*60000; return new Date(d.getTime()-off).toISOString().slice(0,16); } catch { return ''; } };
+
+  mcOpenModal({
+    title: 'Edit Engagement',
+    eyebrow: 'Engagements · Edit',
+    fields: [
+      { name: 'name', label: 'Name', required: true, full: true },
+      { name: 'description', label: 'Description', type: 'textarea', rows: 2, full: true },
+      { name: 'fee_usd', label: 'Fee (USD)', type: 'number' },
+      { name: 'delivery_window_hrs', label: 'Delivery Window (hours)', type: 'number' },
+      { name: 'doc_prefix', label: 'Doc Prefix', placeholder: 'AUD' },
+      { name: 'status', label: 'Status', type: 'select', options: stages.map(s => ({ value: s, label: s })) },
+      { name: 'proposed_at', label: 'Proposed At', type: 'datetime-local' },
+      { name: 'accepted_at', label: 'Accepted At', type: 'datetime-local' },
+      { name: 'paid_at', label: 'Paid At', type: 'datetime-local' },
+      { name: 'started_at', label: 'Started At', type: 'datetime-local' },
+      { name: 'delivery_due_at', label: 'Delivery Due At', type: 'datetime-local' },
+      { name: 'complete_at', label: 'Completed At', type: 'datetime-local' },
+    ],
+    values: {
+      ...eng,
+      proposed_at: toLocalInput(eng.proposed_at),
+      accepted_at: toLocalInput(eng.accepted_at),
+      paid_at: toLocalInput(eng.paid_at),
+      started_at: toLocalInput(eng.started_at),
+      delivery_due_at: toLocalInput(eng.delivery_due_at),
+      complete_at: toLocalInput(eng.complete_at),
+    },
+    submit: async (values) => {
+      ['proposed_at','accepted_at','paid_at','started_at','delivery_due_at','complete_at'].forEach(k => {
+        if (values[k]) values[k] = new Date(values[k]).toISOString();
+        else values[k] = null;
+      });
+      // Drop empty doc_prefix to avoid clobbering
+      if (!values.doc_prefix) delete values.doc_prefix;
+      await mcWrite('engagements', 'update', { id: engagementId, data: values });
+    },
+    onClose: () => {
+      delete _mcCache.pipeline; delete _mcCache.summary; delete _mcCache['active-clients']; delete _mcCache.projects;
+      if (_cfActiveSlug) cfLoadCase(_cfActiveSlug);
+      if (typeof mcLoadDashboard === 'function') mcLoadDashboard(true);
+    },
+  });
+}
+
 // Manual stage advance / regress on a single engagement
 async function cfChangeEngagementStatus(engagementId, currentStatus) {
   const stages = ['lead','draft','proposal_sent','signed','invoiced','paid','delivering','delivered','closed','archived'];
@@ -4287,21 +4352,80 @@ async function cfChangeEngagementStatus(engagementId, currentStatus) {
 }
 
 async function cfGenerateDocs(slug) {
-  const name = prompt('Engagement name:', 'Business Discovery Audit'); if (!name) return;
-  const docPrefix = prompt('Document prefix (uppercase, like "AC-AUD"):', ''); if (!docPrefix) return;
-  const fee = Number((prompt('Fee in USD:', '2500') || '').replace(/[^0-9.]/g, '')); if (!fee) return alert('Invalid fee.');
-  const hrs = Number(prompt('Delivery window in hours:', '72')); if (!hrs) return alert('Invalid hours.');
-  if (!confirm(`Create engagement?\n\nClient: ${slug}\nName: ${name}\nDocs: ${docPrefix}-001/002/003\nFee: $${fee}\nDelivery: ${hrs}h`)) return;
-  try {
-    const res = await fetch('/.netlify/functions/generate-engagement-docs', {
-      method:'POST', credentials:'include', headers:{'Content-Type':'application/json'},
-      body: JSON.stringify({ clientSlug:slug, name, docPrefix, feeUsd:fee, deliveryWindowHrs:hrs })
+  // Make sure the products catalog is loaded so we can offer it as an autofill picker
+  if (!_mcCache.products) {
+    try {
+      const r = await fetch(`${MC_API}?type=products`, { credentials: 'include' });
+      if (r.ok) _mcCache.products = await r.json();
+    } catch {}
+  }
+  const products = (_mcCache.products?.products || []).filter(p => p.is_active);
+  const productOpts = [
+    { value: '__custom', label: '— Custom (fill manually) —' },
+    ...products.map(p => ({
+      value: p.slug,
+      label: `${p.name} · ${p.fee_usd ? '$' + Number(p.fee_usd).toLocaleString('en-US') : 'custom $'}${p.fee_type !== 'one_time' ? '/' + p.fee_type.replace('ly','') : ''}${p.delivery_window_hrs ? ' · ' + p.delivery_window_hrs + 'h' : ''}`,
+    })),
+  ];
+
+  // Pre-fill from the first product so it isn't empty
+  const first = products[0] || { name: '', doc_prefix: '', fee_usd: 2500, delivery_window_hrs: 72 };
+  mcOpenModal({
+    title: 'Create New Engagement',
+    eyebrow: 'Engagements',
+    fields: [
+      { name: 'product', label: 'Product / Service', type: 'select', options: productOpts, hint: 'Pick a service from your catalog to auto-fill the fields below, or choose Custom.' },
+      { name: 'name', label: 'Engagement Name', required: true, full: true, placeholder: 'Business Discovery Audit', default: first.name },
+      { name: 'docPrefix', label: 'Document Prefix', required: true, placeholder: 'AUD or BDA', hint: 'Used as the prefix for the 3 doc IDs (e.g. AUD-001, AUD-002, AUD-003).', default: first.doc_prefix },
+      { name: 'feeUsd', label: 'Fee (USD)', type: 'number', required: true, placeholder: '2500', default: first.fee_usd },
+      { name: 'deliveryWindowHrs', label: 'Delivery Window (hours)', type: 'number', required: true, placeholder: '72', default: first.delivery_window_hrs },
+      { name: 'description', label: 'Description (optional, internal note)', type: 'textarea', rows: 2, full: true, placeholder: 'Anything to remember about this specific engagement', default: first.description },
+    ],
+    values: {},
+    submit: async (values) => {
+      const fee = Number(values.feeUsd);
+      const hrs = Number(values.deliveryWindowHrs);
+      if (!fee || !hrs) throw new Error('Fee and delivery hours are required');
+      const res = await fetch('/.netlify/functions/generate-engagement-docs', {
+        method:'POST', credentials:'include', headers:{'Content-Type':'application/json'},
+        body: JSON.stringify({
+          clientSlug: slug,
+          name: values.name,
+          docPrefix: String(values.docPrefix || '').toUpperCase().replace(/[^A-Z0-9-]/g, ''),
+          feeUsd: fee,
+          deliveryWindowHrs: hrs,
+          description: values.description || '',
+        }),
+      });
+      const data = await res.json();
+      if (!res.ok) throw new Error(data.error || `HTTP ${res.status}`);
+    },
+    onClose: () => {
+      // Bust caches so the kanban + dashboard reflect the new engagement
+      delete _mcCache.pipeline; delete _mcCache.summary; delete _mcCache['active-clients']; delete _mcCache.contacts;
+      if (_cfActiveSlug) cfLoadCase(_cfActiveSlug);
+      if (typeof mcLoadDashboard === 'function') mcLoadDashboard(true);
+    },
+  });
+
+  // Wire the product-picker to autofill the other fields
+  setTimeout(() => {
+    const f = document.getElementById('mc-modal-form');
+    if (!f) return;
+    const sel = f.elements['product'];
+    if (!sel) return;
+    sel.addEventListener('change', () => {
+      const slugPick = sel.value;
+      if (slugPick === '__custom') return;
+      const p = products.find(pp => pp.slug === slugPick);
+      if (!p) return;
+      if (f.elements['name']) f.elements['name'].value = p.name || '';
+      if (f.elements['docPrefix']) f.elements['docPrefix'].value = p.doc_prefix || '';
+      if (f.elements['feeUsd']) f.elements['feeUsd'].value = p.fee_usd || '';
+      if (f.elements['deliveryWindowHrs']) f.elements['deliveryWindowHrs'].value = p.delivery_window_hrs || '';
+      if (f.elements['description']) f.elements['description'].value = p.description || '';
     });
-    const data = await res.json();
-    if (!res.ok) throw new Error(data.error || `HTTP ${res.status}`);
-    alert('Engagement records created.\n\n' + data.docs.map(d => `  ${d.doc_id}: ${d.status}`).join('\n') + '\n\nNext steps:\n' + data.next_steps.map((s,i) => `  ${i+1}. ${s}`).join('\n'));
-    if (_cfActiveSlug) cfLoadCase(_cfActiveSlug);
-  } catch (e) { alert('Generate failed: ' + e.message); }
+  }, 50);
 }
 
 function cfShowAuthRequired() {
@@ -4386,6 +4510,63 @@ function mcStatTile(label, value, sub, color) {
 
 // ─── Contacts ────────────────────────────────────────────────────
 function mcLoadContacts(force) { mcFetch('contacts', mcRenderContacts, force); }
+function mcOpenAddContact() {
+  mcOpenModal({
+    title: 'Add Contact',
+    eyebrow: 'CRM · New Contact',
+    fields: [
+      { name: 'legal_name', label: 'Legal Name (or Company)', required: true, full: true, placeholder: 'Acme Corp.' },
+      { name: 'dba', label: 'D/B/A (optional)', placeholder: 'Trading name' },
+      { name: 'slug', label: 'URL Slug', required: true, placeholder: 'acme-corp', hint: 'Used in /documents/clients/{slug}/. Lowercase, hyphenated.' },
+      { name: 'primary_contact_name', label: 'Primary Contact Name', required: true, placeholder: 'Jane Smith' },
+      { name: 'primary_contact_title', label: 'Title', placeholder: 'Founder / CEO' },
+      { name: 'primary_contact_email', label: 'Primary Email', type: 'email', required: true, placeholder: 'jane@acmecorp.com' },
+      { name: 'primary_contact_phone', label: 'Phone', placeholder: '+1 555 123 4567' },
+      { name: 'website', label: 'Website', placeholder: 'https://acmecorp.com', full: true },
+      { name: 'country', label: 'Country', placeholder: 'US' },
+      { name: 'region', label: 'State / Region', placeholder: 'California' },
+      { name: 'source', label: 'Source', type: 'select', options: [
+        { value: 'direct', label: 'direct (manual entry)' },
+        { value: 'referral', label: 'referral' },
+        { value: 'linkedin', label: 'linkedin' },
+        { value: 'inbound', label: 'inbound (website)' },
+        { value: 'cold-outbound', label: 'cold outbound' },
+        { value: 'event', label: 'event / conference' },
+        { value: 'partner', label: 'partner' },
+      ]},
+      { name: 'notes', label: 'Notes (internal)', type: 'textarea', rows: 3, full: true },
+    ],
+    values: { source: 'direct' },
+    submit: async (values) => {
+      // Auto-generate slug from legal_name if blank
+      if (!values.slug && values.legal_name) {
+        values.slug = values.legal_name.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-+|-+$/g, '').slice(0, 60);
+      }
+      values.status = 'lead';
+      values.cc_emails = [];
+      await mcWrite('clients', 'create', { data: values });
+    },
+    onClose: () => {
+      delete _mcCache.contacts; delete _mcCache.summary; delete _mcCache['lead-sources']; delete _mcCache.activity;
+      mcLoadContacts(true);
+      if (typeof mcLoadDashboard === 'function') mcLoadDashboard(true);
+    },
+  });
+
+  // Auto-fill slug as user types legal_name
+  setTimeout(() => {
+    const f = document.getElementById('mc-modal-form');
+    if (!f) return;
+    const ln = f.elements['legal_name']; const sl = f.elements['slug'];
+    if (!ln || !sl) return;
+    let userTyped = false;
+    sl.addEventListener('input', () => { userTyped = true; });
+    ln.addEventListener('input', () => {
+      if (userTyped) return;
+      sl.value = ln.value.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-+|-+$/g, '').slice(0, 60);
+    });
+  }, 50);
+}
 function mcRenderContacts(data) {
   const all = data.contacts || [];
   const q = (_mcSearch.contacts || '').toLowerCase();
@@ -4516,7 +4697,7 @@ function mcRenderPipeline(data) {
   const cardHtml = (e) => {
     const ageMs = Date.now() - new Date(e.updated_at || e.proposed_at || Date.now()).getTime();
     const ageDays = Math.max(0, Math.round(ageMs / 86400000));
-    return `<div class="mc-kanban-card" onclick="mcGoToCase('${mcEsc(e.client_slug)}')">
+    return `<div class="mc-kanban-card" draggable="true" data-engagement-id="${mcEsc(e.id)}" data-current-status="${mcEsc(e.status||'draft')}" data-client-slug="${mcEsc(e.client_slug)}">
       <div class="name">${mcEsc(e.client_name || 'Unknown')}</div>
       <div class="sub">${mcEsc(e.name)}</div>
       <div class="row">
@@ -4527,17 +4708,66 @@ function mcRenderPipeline(data) {
   };
 
   const cols = stages.map(s => `
-    <div class="mc-kanban-col">
+    <div class="mc-kanban-col" data-stage="${mcEsc(s.key)}">
       <h4>${s.emoji} ${s.label} <span class="count">${buckets[s.key].length}</span></h4>
-      ${buckets[s.key].length ? buckets[s.key].map(cardHtml).join('') : '<div style="font-size:.72rem;color:#94A3B8;text-align:center;padding:.5rem;font-style:italic;">empty</div>'}
+      ${buckets[s.key].length ? buckets[s.key].map(cardHtml).join('') : '<div style="font-size:.72rem;color:#94A3B8;text-align:center;padding:.5rem;font-style:italic;">drop here</div>'}
     </div>`).join('');
   const otherHtml = otherBucket.length ? `
-    <div class="mc-kanban-col">
+    <div class="mc-kanban-col" data-stage="">
       <h4>📌 Other <span class="count">${otherBucket.length}</span></h4>
       ${otherBucket.map(cardHtml).join('')}
     </div>` : '';
 
-  document.getElementById('mc-pipeline-body').innerHTML = `<div class="mc-kanban">${cols}${otherHtml}</div>`;
+  document.getElementById('mc-pipeline-body').innerHTML = `
+    <div class="mc-kanban-hint">Drag any card between columns to advance the stage. Click a card to open its case file.</div>
+    <div class="mc-kanban">${cols}${otherHtml}</div>`;
+
+  mcWireKanbanDragDrop();
+}
+
+// ─── Kanban drag + drop ───────────────────────────────────────
+let _mcDragId = null, _mcDragCurrent = null;
+function mcWireKanbanDragDrop() {
+  document.querySelectorAll('.mc-kanban-card').forEach(card => {
+    card.addEventListener('dragstart', (e) => {
+      _mcDragId = card.dataset.engagementId;
+      _mcDragCurrent = card.dataset.currentStatus;
+      card.classList.add('dragging');
+      try { e.dataTransfer.effectAllowed = 'move'; e.dataTransfer.setData('text/plain', _mcDragId); } catch {}
+    });
+    card.addEventListener('dragend', () => { card.classList.remove('dragging'); _mcDragId = null; _mcDragCurrent = null; });
+    // Click handler — only fire if not in middle of drag
+    card.addEventListener('click', (e) => {
+      // dragend fires before click, so _mcDragId is null after a drag
+      mcGoToCase(card.dataset.clientSlug);
+    });
+  });
+  document.querySelectorAll('.mc-kanban-col').forEach(col => {
+    col.addEventListener('dragover', (e) => { e.preventDefault(); col.classList.add('drag-over'); try { e.dataTransfer.dropEffect = 'move'; } catch {} });
+    col.addEventListener('dragleave', () => col.classList.remove('drag-over'));
+    col.addEventListener('drop', async (e) => {
+      e.preventDefault();
+      col.classList.remove('drag-over');
+      const targetStage = col.dataset.stage;
+      if (!_mcDragId || !targetStage || targetStage === _mcDragCurrent) return;
+      const id = _mcDragId; const from = _mcDragCurrent; _mcDragId = null; _mcDragCurrent = null;
+      try {
+        const patch = { status: targetStage };
+        const now = new Date().toISOString();
+        if (targetStage === 'proposal_sent') patch.proposed_at = now;
+        else if (targetStage === 'signed') patch.accepted_at = now;
+        else if (targetStage === 'paid') { patch.paid_at = now; patch.started_at = now; }
+        await mcWrite('engagements', 'update', { id, data: patch });
+        // Bust caches + re-render
+        delete _mcCache.pipeline; delete _mcCache.summary; delete _mcCache['active-clients']; delete _mcCache.projects; delete _mcCache.activity;
+        mcLoadPipeline(true);
+        if (typeof mcLoadDashboard === 'function') mcLoadDashboard(true);
+      } catch (err) {
+        alert('Stage change failed: ' + err.message);
+        mcLoadPipeline(true);
+      }
+    });
+  });
 }
 
 // ─── Projects ────────────────────────────────────────────────────
