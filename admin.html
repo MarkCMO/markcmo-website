@@ -1423,12 +1423,12 @@
 <div style="font-size:13px;color:var(--text);">Download Recording</div>
 <div style="font-size:11px;color:var(--dim);margin-top:4px;">Export from Riverside projects</div>
 </a>
-<a onclick="switchPanel('documents', document.querySelector('[data-panel=documents]'))" style="display:block;background:var(--surface);border:1px solid var(--border);padding:20px;text-decoration:none;cursor:pointer;" onmouseover="this.style.borderColor='rgba(201,168,76,0.4)'" onmouseout="this.style.borderColor='var(--border)'">
+<a onclick="switchPanel('documents', null)" style="display:block;background:var(--surface);border:1px solid var(--border);padding:20px;text-decoration:none;cursor:pointer;" onmouseover="this.style.borderColor='rgba(201,168,76,0.4)'" onmouseout="this.style.borderColor='var(--border)'">
 <div style="font-size:10px;font-weight:700;letter-spacing:2px;color:var(--gold);margin-bottom:6px;">📎 DOCUMENTS</div>
 <div style="font-size:13px;color:var(--text);">Upload Replay File</div>
 <div style="font-size:11px;color:var(--dim);margin-top:4px;">Store and host the replay video</div>
 </a>
-<a onclick="switchPanel('links', document.querySelector('[data-panel=links]'))" style="display:block;background:var(--surface);border:1px solid var(--border);padding:20px;text-decoration:none;cursor:pointer;" onmouseover="this.style.borderColor='rgba(201,168,76,0.4)'" onmouseout="this.style.borderColor='var(--border)'">
+<a onclick="switchPanel('links', null)" style="display:block;background:var(--surface);border:1px solid var(--border);padding:20px;text-decoration:none;cursor:pointer;" onmouseover="this.style.borderColor='rgba(201,168,76,0.4)'" onmouseout="this.style.borderColor='var(--border)'">
 <div style="font-size:10px;font-weight:700;letter-spacing:2px;color:var(--gold);margin-bottom:6px;">🔗 ACCESS LINKS</div>
 <div style="font-size:13px;color:var(--text);">Generate Tracked Link</div>
 <div style="font-size:11px;color:var(--dim);margin-top:4px;">Unique tracked URL per recipient</div>
@@ -1439,7 +1439,7 @@
 <div id="panel-webinar-schedule" class="panel">
 <div class="panel-header"><h1 class="panel-title">📅 Webinar Schedule</h1>
 <div class="panel-actions">
-<a onclick="switchPanel('settings', document.querySelector('[data-panel=settings]'))" class="btn btn-outline" style="cursor:pointer;">Edit Settings →</a>
+<a onclick="switchPanel('settings', null)" class="btn btn-outline" style="cursor:pointer;">Edit Settings →</a>
 </div>
 </div>
 <div class="content-body">
@@ -3326,7 +3326,12 @@ function switchPanel(id, el) {
     }
   }
   document.getElementById('panel-' + id).classList.add('active');
-  el.classList.add('active');
+  if (el) el.classList.add('active');
+  else {
+    // Try to find the matching nav item by onclick content
+    const match = document.querySelector(`.admin-nav-item[onclick*="'${id}'"]`);
+    if (match) match.classList.add('active');
+  }
   // Auto-load data
   if (['courses-overview','courses-enrollments','courses-graduates','courses-revenue'].includes(id)) loadCoursesData();
   else if (id === 'courses-votes')    loadVotesData();
