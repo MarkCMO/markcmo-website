@@ -682,6 +682,119 @@ exports.handler = async (event) => {
       }) };
     }
 
+    // ─── /insights: actionable signals for the dashboard ────────
+    // Returns:
+    //   stale_leads     clients in lead/draft/proposal_sent for >14 days
+    //   at_risk_projects engagements where delivery_due_at - now < 12h and not delivered
+    //   hot_leads       clients with >=3 journey events in last 24h (active engagement)
+    //   needs_followup  invoices status='sent' and >24h with reminder_count=0
+    if (type === 'insights') {
+      const NOW = Date.now();
+      const D14 = NOW - 14 * 86400000;
+      const D1 = NOW - 86400000;
+      const H12 = NOW + 12 * 3600000;
+      const [clients, engs, journey, invoices] = await Promise.all([
+        sbSelect('mc_clients?select=id,slug,legal_name,primary_contact_name,status,created_at,updated_at,mc_engagements(id,name,status,fee_usd,proposed_at)'),
+        sbSelect('mc_engagements?select=id,name,fee_usd,status,delivery_due_at,paid_at,client_id,mc_clients(id,slug,legal_name,primary_contact_name),mc_documents(id,status)'),
+        sbSelect(`mc_journey_events?created_at=gte.${new Date(D1).toISOString()}&select=client_id,event,created_at&limit=500`),
+        sbSelect('mc_invoices?status=eq.sent&is_test=eq.false&select=id,amount_usd,sent_at,reminder_count,square_invoice_url,mc_engagements(id,name,mc_clients(id,slug,legal_name))'),
+      ]);
+
+      // Stale leads: client in lead/draft/proposal_sent for >14d AND latest engagement
+      // hasn't moved past those statuses
+      const stale = [];
+      for (const c of clients) {
+        const engagements = c.mc_engagements || [];
+        const latestStatus = engagements[0]?.status || c.status;
+        if (!['lead','draft','proposal_sent'].includes(latestStatus)) continue;
+        const since = new Date(c.updated_at || c.created_at).getTime();
+        if (since > D14) continue;  // not stale yet
+        const ageDays = Math.floor((NOW - since) / 86400000);
+        stale.push({
+          client_id: c.id, slug: c.slug, name: c.legal_name,
+          contact: c.primary_contact_name, status: latestStatus,
+          age_days: ageDays,
+          fee_usd: engagements[0]?.fee_usd || 0,
+          engagement_name: engagements[0]?.name || null,
+        });
+      }
+      stale.sort((a, b) => b.age_days - a.age_days);
+
+      // At-risk projects: paid + delivering, due within 12h, no documents executed yet
+      const atRisk = [];
+      for (const e of engs) {
+        if (!['paid','delivering','invoiced'].includes(e.status)) continue;
+        if (!e.delivery_due_at) continue;
+        const dueAt = new Date(e.delivery_due_at).getTime();
+        const hoursLeft = (dueAt - NOW) / 3600000;
+        if (hoursLeft > 12) continue;  // still time
+        const docsExecuted = (e.mc_documents || []).filter(d => d.status === 'executed').length;
+        const docsTotal = (e.mc_documents || []).length;
+        atRisk.push({
+          engagement_id: e.id, name: e.name, fee_usd: e.fee_usd,
+          slug: e.mc_clients?.slug, client_name: e.mc_clients?.legal_name,
+          contact: e.mc_clients?.primary_contact_name,
+          hours_left: Math.round(hoursLeft),
+          overdue: hoursLeft < 0,
+          docs_progress: `${docsExecuted}/${docsTotal}`,
+          status: e.status,
+        });
+      }
+      atRisk.sort((a, b) => a.hours_left - b.hours_left);
+
+      // Hot leads: clients with >=3 journey events in the last 24h
+      const eventCounts = {};
+      for (const j of journey) {
+        if (!j.client_id) continue;
+        eventCounts[j.client_id] = (eventCounts[j.client_id] || 0) + 1;
+      }
+      const hot = [];
+      for (const c of clients) {
+        const count = eventCounts[c.id] || 0;
+        if (count < 3) continue;
+        hot.push({
+          client_id: c.id, slug: c.slug, name: c.legal_name,
+          contact: c.primary_contact_name,
+          touch_count: count,
+          status: c.mc_engagements?.[0]?.status || c.status,
+          fee_usd: c.mc_engagements?.[0]?.fee_usd || 0,
+        });
+      }
+      hot.sort((a, b) => b.touch_count - a.touch_count);
+
+      // Needs followup: invoice sent >24h ago, no reminders sent yet
+      const needsFollowup = [];
+      for (const i of invoices) {
+        if (i.reminder_count > 0) continue;
+        if (!i.sent_at) continue;
+        const ageHrs = (NOW - new Date(i.sent_at).getTime()) / 3600000;
+        if (ageHrs < 24) continue;
+        needsFollowup.push({
+          invoice_id: i.id,
+          amount_usd: i.amount_usd,
+          age_hrs: Math.round(ageHrs),
+          slug: i.mc_engagements?.mc_clients?.slug,
+          client_name: i.mc_engagements?.mc_clients?.legal_name,
+          engagement_name: i.mc_engagements?.name,
+          square_invoice_url: i.square_invoice_url,
+        });
+      }
+      needsFollowup.sort((a, b) => b.age_hrs - a.age_hrs);
+
+      return { statusCode: 200, headers, body: JSON.stringify({
+        stale_leads: stale.slice(0, 10),
+        at_risk_projects: atRisk.slice(0, 10),
+        hot_leads: hot.slice(0, 10),
+        needs_followup: needsFollowup.slice(0, 10),
+        counts: {
+          stale_leads: stale.length,
+          at_risk_projects: atRisk.length,
+          hot_leads: hot.length,
+          needs_followup: needsFollowup.length,
+        },
+      }) };
+    }
+
     // ─── /summary: dashboard tile counts ────────────────────────
     if (type === 'summary') {
       const [clients, engs, docs, invoices] = await Promise.all([

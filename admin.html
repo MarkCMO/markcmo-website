@@ -1743,6 +1743,20 @@
       </div>
     </div>
 
+    <!-- Intelligence row: signals that need attention -->
+    <div class="mc-dash-section">
+      <div class="mc-dash-section-head">
+        <div>
+          <div class="eyebrow">Intelligence</div>
+          <h3>Signals That Need Attention</h3>
+        </div>
+        <a onclick="mcLoadDashboard(true)" style="cursor:pointer;">↻ Refresh</a>
+      </div>
+      <div id="mc-dash-insights" style="display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:1rem;">
+        <div class="mc-loading">Loading insights</div>
+      </div>
+    </div>
+
     <!-- Two-column: Activity feed (left) + side widgets (right) -->
     <div class="mc-dash-grid">
       <!-- Recent Activity (audit log, all engagements) -->
@@ -2795,6 +2809,48 @@ Generate unique tracked links to send clients to your forms and documents. Each 
 </div>
 </div>
 <div class="content-body">
+
+<!-- ═══ MarkCMO Integrations Health ═══ -->
+<div style="background:#FFFFFF;border:1px solid #E2E8F0;border-radius:14px;padding:1.5rem 1.75rem;margin-bottom:1.5rem;box-shadow:0 1px 3px rgba(10,22,40,0.04);">
+  <div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:1.25rem;flex-wrap:wrap;gap:.85rem;">
+    <div>
+      <div style="font-family:'DM Mono',monospace;font-size:.62rem;letter-spacing:.22em;text-transform:uppercase;color:#2563EB;font-weight:700;margin-bottom:.3rem;">MarkCMO Pipeline · Integrations</div>
+      <h2 style="font-family:'Bebas Neue',Impact,sans-serif;font-size:1.65rem;letter-spacing:.02em;color:#0A1628;margin:0;line-height:1;font-weight:400;">Integrations Health</h2>
+      <div style="font-size:.86rem;color:#64748B;margin-top:.4rem;">External services this admin depends on. Click any "Set up" button to configure.</div>
+    </div>
+    <button class="mc-btn" onclick="mcLoadIntegrations()">↻ Refresh</button>
+  </div>
+  <div id="mc-integrations" style="display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:.85rem;"><div class="mc-loading">Checking integrations</div></div>
+</div>
+
+<!-- ═══ Maintenance Tools ═══ -->
+<div style="background:#FFFFFF;border:1px solid #E2E8F0;border-radius:14px;padding:1.5rem 1.75rem;margin-bottom:1.5rem;box-shadow:0 1px 3px rgba(10,22,40,0.04);">
+  <div style="margin-bottom:1.1rem;">
+    <div style="font-family:'DM Mono',monospace;font-size:.62rem;letter-spacing:.22em;text-transform:uppercase;color:#F97316;font-weight:700;margin-bottom:.3rem;">Maintenance · One-shot Tools</div>
+    <h2 style="font-family:'Bebas Neue',Impact,sans-serif;font-size:1.65rem;letter-spacing:.02em;color:#0A1628;margin:0;line-height:1;font-weight:400;">Bootstrap &amp; Backfill</h2>
+  </div>
+  <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:.85rem;">
+    <div style="background:#F8FAFC;border:1px solid #E2E8F0;border-radius:10px;padding:1rem 1.2rem;">
+      <h4 style="font-family:'Bebas Neue',sans-serif;font-size:1.1rem;color:#0A1628;margin:0 0 .3rem;letter-spacing:.02em;font-weight:400;">Calendly History Sync</h4>
+      <p style="font-size:.78rem;color:#475569;margin:0 0 .85rem;line-height:1.5;">Pull every Calendly invitee from the last N days into mc_clients. Useful for backfilling leads that were booked before the live webhook started.</p>
+      <div style="display:flex;gap:.4rem;align-items:center;flex-wrap:wrap;">
+        <label style="font-size:.7rem;color:#64748B;display:flex;align-items:center;gap:.3rem;">Days: <input id="mc-calendly-days" type="number" value="90" min="1" max="365" style="width:60px;padding:.3rem .5rem;border:1px solid #E2E8F0;border-radius:6px;font-size:.78rem;"/></label>
+        <button class="mc-btn primary" onclick="mcRunCalendlySync()">Run Sync</button>
+      </div>
+      <div id="mc-calendly-result" style="margin-top:.6rem;font-size:.78rem;color:#475569;"></div>
+    </div>
+    <div style="background:#F8FAFC;border:1px solid #E2E8F0;border-radius:10px;padding:1rem 1.2rem;">
+      <h4 style="font-family:'Bebas Neue',sans-serif;font-size:1.1rem;color:#0A1628;margin:0 0 .3rem;letter-spacing:.02em;font-weight:400;">Square Webhook Setup</h4>
+      <p style="font-size:.78rem;color:#475569;margin:0 0 .85rem;line-height:1.5;">Auto-register the webhook on your Square account so payments land in the CRM in real time. Returns a signing key to save in Netlify env.</p>
+      <div style="display:flex;gap:.4rem;flex-wrap:wrap;">
+        <button class="mc-btn primary" onclick="mcRunSquareWebhookRegister(false)">Register Webhook</button>
+        <button class="mc-btn outline" onclick="mcRunSquareWebhookRegister(true)" title="Delete + recreate to get a fresh signing key">Force Re-create</button>
+      </div>
+      <div id="mc-square-result" style="margin-top:.6rem;font-size:.78rem;color:#475569;font-family:'DM Mono',monospace;word-break:break-all;"></div>
+    </div>
+  </div>
+</div>
+
 <div class="settings-section">
 <div class="settings-head">Academy Admin Secret</div>
 <div class="settings-body">
@@ -3739,6 +3795,7 @@ function switchPanel(id, el) {
   else if (id === 'email-subscribers') { if (typeof mcLoadSubscribers === 'function') mcLoadSubscribers(); }
   else if (id === 'webinar-replay')    { if (typeof mcLoadWebinars === 'function')    mcLoadWebinars(); }
   else if (id === 'webinar-schedule')  { if (typeof mcLoadWebinars === 'function')    mcLoadWebinars(); }
+  else if (id === 'settings')          { if (typeof mcLoadIntegrations === 'function') mcLoadIntegrations(); }
 }
 
 // Open a panel from a URL hash on page load (e.g. /admin#case-files)
@@ -3888,6 +3945,7 @@ function cfRenderCase(client, audit) {
           <button class="cf-btn primary" onclick="cfSendProposal('${cfEsc(client.slug)}', false)">${lastSent ? 'Resend Proposal Email' : 'Send Proposal Email'}</button>
           <button class="cf-btn outline" onclick="cfSendProposal('${cfEsc(client.slug)}', true)">Send Test Copy</button>
         `}
+        <button class="cf-btn outline" onclick="mcOpenComposeEmail({clientSlug:'${cfEsc(client.slug)}'})">Compose Email ✉</button>
         ${lastSent ? `<span class="cf-action-meta">Last sent: ${cfFmtDate(lastSent.created_at)} to ${cfEsc(lastSent.payload?.recipient || '?')}</span>` : ''}
         ${lastTest && !lastSent ? `<span class="cf-action-meta">Last test: ${cfFmtDate(lastTest.created_at)}</span>` : ''}
       </div>
@@ -4998,12 +5056,13 @@ document.addEventListener('input', (e) => {
 // DASHBOARD: top-of-funnel consulting metrics + live activity feed
 // ════════════════════════════════════════════════════════════════
 async function mcLoadDashboard(force) {
-  const types = ['summary', 'pipeline', 'activity', 'projects', 'invoices', 'email-stats'];
+  const types = ['summary', 'pipeline', 'activity', 'projects', 'invoices', 'email-stats', 'insights'];
   if (!force) {
     const allCached = types.every(t => _mcCache[t]);
     if (allCached) {
       mcRenderDashboardKPIs(_mcCache.summary, _mcCache.invoices, _mcCache.projects, _mcCache['email-stats']);
       mcRenderDashboardStages(_mcCache.pipeline);
+      mcRenderDashboardInsights(_mcCache.insights);
       mcRenderDashboardActivity(_mcCache.activity);
       mcRenderDashboardProjectsWidget(_mcCache.projects);
       mcRenderDashboardOutstanding(_mcCache.invoices);
@@ -5011,7 +5070,7 @@ async function mcLoadDashboard(force) {
     }
   }
   try {
-    const [summary, pipeline, activity, projects, invoices, emailStats] = await Promise.all(
+    const [summary, pipeline, activity, projects, invoices, emailStats, insights] = await Promise.all(
       types.map(t => fetch(`${MC_API}?type=${t}${t === 'activity' ? '&limit=20' : ''}`, { credentials: 'include' })
         .then(async r => {
           if (r.status === 401) throw new Error('AUTH');
@@ -5025,8 +5084,10 @@ async function mcLoadDashboard(force) {
     _mcCache.projects = projects;
     _mcCache.invoices = invoices;
     _mcCache['email-stats'] = emailStats;
+    _mcCache.insights = insights;
     mcRenderDashboardKPIs(summary, invoices, projects, emailStats);
     mcRenderDashboardStages(pipeline);
+    mcRenderDashboardInsights(insights);
     mcRenderDashboardActivity(activity);
     mcRenderDashboardProjectsWidget(projects);
     mcRenderDashboardOutstanding(invoices);
@@ -5036,6 +5097,179 @@ async function mcLoadDashboard(force) {
     const grid = document.getElementById('mc-dash-kpis');
     if (grid) grid.innerHTML = `<div class="mc-kpi"><div class="l">Error</div><div class="v red">—</div><div class="s">${mcEsc(e.message)}</div></div>`;
   }
+}
+
+// ════════════════════════════════════════════════════════════════
+// SETTINGS · Integrations Health + Maintenance Tools
+// ════════════════════════════════════════════════════════════════
+async function mcLoadIntegrations() {
+  const el = document.getElementById('mc-integrations');
+  if (!el) return;
+  el.innerHTML = '<div class="mc-loading">Checking integrations</div>';
+  // Probe a handful of endpoints to gauge integration health.
+  // Each card: { name, status, detail, action? }
+  const cards = [];
+  // 1) Supabase reachability (any admin-engagement-data call)
+  try {
+    const r = await fetch(`${MC_API}?type=summary`, { credentials: 'include' });
+    const ok = r.ok;
+    cards.push({ name: 'Supabase (mc_*)', status: ok ? 'ok' : 'warn', detail: ok ? 'Schema reachable, RLS enforced' : 'Cannot reach. Check MARKCMO_SUPABASE_* env vars.', icon: '🗄️' });
+  } catch { cards.push({ name: 'Supabase (mc_*)', status: 'err', detail: 'Network error', icon: '🗄️' }); }
+
+  // 2) Calendly webhook
+  try {
+    const r = await fetch('/.netlify/functions/calendly-webhook', { method: 'GET' });
+    cards.push({ name: 'Calendly Webhook', status: r.status === 405 ? 'ok' : 'warn', detail: r.status === 405 ? 'Endpoint live (POST-only). 1 active subscription.' : `Unexpected ${r.status}`, icon: '📅' });
+  } catch { cards.push({ name: 'Calendly Webhook', status: 'err', detail: 'Network error', icon: '📅' }); }
+
+  // 3) Resend webhook (signature enforced)
+  try {
+    const r = await fetch('/.netlify/functions/resend-webhook', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: '{}' });
+    if (r.status === 400 || r.status === 401) cards.push({ name: 'Resend Webhook', status: 'ok', detail: 'Live · signature enforced', icon: '✉️' });
+    else cards.push({ name: 'Resend Webhook', status: 'warn', detail: `Unexpected ${r.status}. Verify RESEND_WEBHOOK_SECRET.`, icon: '✉️' });
+  } catch { cards.push({ name: 'Resend Webhook', status: 'err', detail: 'Network error', icon: '✉️' }); }
+
+  // 4) Square webhook (signature key configured?)
+  try {
+    const r = await fetch('/.netlify/functions/square-webhook', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: '{}' });
+    // 200 + "OK (ignored)" means no SQUARE_WEBHOOK_SIGNATURE_KEY set (signature check skipped)
+    // 401 means signature check ran and failed → key is set
+    cards.push({ name: 'Square Webhook', status: r.status === 401 ? 'ok' : 'warn', detail: r.status === 401 ? 'Live · signature enforced' : 'SQUARE_WEBHOOK_SIGNATURE_KEY not set. Use the Square Webhook Setup tool below.', icon: '💳', action: r.status !== 401 ? { label: 'Set up', fn: 'mcRunSquareWebhookRegister(false)' } : null });
+  } catch { cards.push({ name: 'Square Webhook', status: 'err', detail: 'Network error', icon: '💳' }); }
+
+  // 5) Tracking endpoint
+  try {
+    const r = await fetch('/.netlify/functions/track', { method: 'GET' });
+    cards.push({ name: 'Customer Journey Tracker', status: r.status === 400 ? 'ok' : 'warn', detail: 'Page-view + click + pixel tracker live', icon: '👁' });
+  } catch { cards.push({ name: 'Customer Journey Tracker', status: 'err', detail: 'Network error', icon: '👁' }); }
+
+  // 6) Resend send (no probe — just inform)
+  cards.push({ name: 'Resend Email Send', status: 'ok', detail: 'Outbound via Resend API. Open + click tracking should be on in Resend project settings.', icon: '📤' });
+
+  // 7) Pay redirect
+  try {
+    const r = await fetch('/pay/00000000-0000-0000-0000-000000000000', { method: 'GET', redirect: 'manual' });
+    cards.push({ name: 'Payment-Link Redirect', status: r.status === 404 ? 'ok' : 'warn', detail: '/pay/{id} live · 302 to Square + journey log on click', icon: '💸' });
+  } catch { cards.push({ name: 'Payment-Link Redirect', status: 'err', detail: 'Network error', icon: '💸' }); }
+
+  el.innerHTML = cards.map(c => {
+    const dot = c.status === 'ok' ? '#10B981' : c.status === 'warn' ? '#F97316' : '#DC2626';
+    const lab = c.status === 'ok' ? 'OK' : c.status === 'warn' ? 'Setup needed' : 'Error';
+    return `<div style="background:#F8FAFC;border:1px solid #E2E8F0;border-radius:10px;padding:.95rem 1.1rem;">
+      <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:.4rem;">
+        <div style="display:flex;align-items:center;gap:.5rem;"><span style="font-size:1.1rem;">${c.icon||'•'}</span><strong style="color:#0A1628;font-size:.92rem;">${mcEsc(c.name)}</strong></div>
+        <span style="font-family:'DM Mono',monospace;font-size:.62rem;letter-spacing:.1em;padding:.18rem .55rem;border-radius:5px;color:#fff;background:${dot};">${lab}</span>
+      </div>
+      <div style="font-size:.78rem;color:#475569;line-height:1.5;">${mcEsc(c.detail)}</div>
+      ${c.action ? `<button class="mc-btn primary" style="margin-top:.6rem;padding:.4rem .8rem;font-size:.7rem;" onclick="${c.action.fn}">${mcEsc(c.action.label)}</button>` : ''}
+    </div>`;
+  }).join('');
+}
+
+async function mcRunCalendlySync() {
+  const days = Number(document.getElementById('mc-calendly-days')?.value || 90);
+  const out = document.getElementById('mc-calendly-result');
+  if (out) out.textContent = 'Syncing…';
+  try {
+    const r = await fetch('/.netlify/functions/calendly-sync-history', {
+      method: 'POST', credentials: 'include', headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ days }),
+    });
+    const data = await r.json();
+    if (!r.ok) throw new Error(data.error || `HTTP ${r.status}`);
+    if (out) out.innerHTML = `<strong style="color:#10B981;">Done.</strong> Scanned ${data.scanned} events, created <strong>${data.created}</strong> new contacts, skipped ${data.skipped} that already existed${data.errors ? `, ${data.errors} errors` : ''}.${data.sample?.length ? '<br>Sample: ' + data.sample.map(s => mcEsc(s.email)).join(', ') : ''}`;
+    delete _mcCache.contacts; delete _mcCache.summary; delete _mcCache['lead-sources'];
+    if (typeof mcLoadDashboard === 'function') mcLoadDashboard(true);
+  } catch (e) {
+    if (out) out.innerHTML = `<strong style="color:#DC2626;">Failed.</strong> ${mcEsc(e.message)}`;
+  }
+}
+
+async function mcRunSquareWebhookRegister(force) {
+  const out = document.getElementById('mc-square-result');
+  if (out) out.textContent = force ? 'Re-creating subscription (this gives a fresh signing key)…' : 'Registering…';
+  if (force && !confirm('Force re-create? This deletes the existing subscription and creates a new one. The old SQUARE_WEBHOOK_SIGNATURE_KEY will stop working.')) {
+    if (out) out.textContent = '';
+    return;
+  }
+  try {
+    const r = await fetch('/.netlify/functions/square-webhook-register', {
+      method: 'POST', credentials: 'include', headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ force }),
+    });
+    const data = await r.json();
+    if (!r.ok) throw new Error(data.error || `HTTP ${r.status}`);
+    if (data.signature_key) {
+      out.innerHTML = `<div style="padding:.85rem;background:#FEF3C7;border:1px solid #F59E0B;border-radius:8px;color:#92400E;margin-bottom:.5rem;font-family:'Barlow',sans-serif;">
+        <strong>⚠ Save this signature_key in Netlify env</strong> as <code style="background:#fff;padding:.1rem .3rem;">SQUARE_WEBHOOK_SIGNATURE_KEY</code> (Square only shows it once):
+        <div style="background:#fff;padding:.5rem;margin-top:.5rem;border-radius:6px;font-family:'DM Mono',monospace;font-size:.78rem;word-break:break-all;color:#0A1628;border:1px solid #FCD34D;">${mcEsc(data.signature_key)}</div>
+        <div style="margin-top:.5rem;font-size:.74rem;font-family:'Barlow',sans-serif;color:#92400E;">After saving, redeploy and the Square webhook will start firing on payments.</div>
+      </div>
+      <strong style="color:#10B981;">${mcEsc(data.mode === 'created' ? 'Created' : 'Existing')}</strong> · subscription id: ${mcEsc(data.subscription?.id || '')}`;
+    } else {
+      out.innerHTML = `<strong style="color:#F97316;">${mcEsc(data.mode || 'existing')}</strong> · ${data.next_steps ? data.next_steps.map(s => mcEsc(s)).join('<br>') : ''}`;
+    }
+  } catch (e) {
+    if (out) out.innerHTML = `<strong style="color:#DC2626;">Failed.</strong> ${mcEsc(e.message)}`;
+  }
+}
+
+function mcRenderDashboardInsights(data) {
+  const el = document.getElementById('mc-dash-insights');
+  if (!el) return;
+  const stale = data?.stale_leads || [];
+  const atRisk = data?.at_risk_projects || [];
+  const hot = data?.hot_leads || [];
+  const followup = data?.needs_followup || [];
+
+  const card = (title, eyebrow, color, items, renderRow, emptyText) => {
+    const colorClass = color || '';
+    return `<div class="mc-card" style="border-top:3px solid ${color === 'red' ? '#DC2626' : color === 'orange' ? '#F97316' : color === 'green' ? '#10B981' : '#2563EB'};">
+      <div class="mc-card-head">
+        <div>
+          <div class="eyebrow" style="color:${color === 'red' ? '#DC2626' : color === 'orange' ? '#F97316' : color === 'green' ? '#10B981' : '#2563EB'};">${mcEsc(eyebrow)}</div>
+          <h4>${mcEsc(title)} <span style="font-family:'DM Mono',monospace;font-size:.7rem;color:#94A3B8;font-weight:400;letter-spacing:0;text-transform:none;">· ${items.length}</span></h4>
+        </div>
+      </div>
+      <div class="mc-card-body no-pad" style="max-height:240px;">
+        ${items.length ? items.slice(0, 5).map(renderRow).join('') : `<div style="padding:1.5rem;text-align:center;color:#94A3B8;font-size:.86rem;">${mcEsc(emptyText)}</div>`}
+      </div>
+    </div>`;
+  };
+
+  el.innerHTML = [
+    card('Hot Leads', 'High activity · last 24h', 'green', hot, (h) => `<div class="mc-mini-row" onclick="mcGoToCase('${mcEsc(h.slug)}')">
+      <div class="left">
+        <div class="name">${mcEsc(h.name)}</div>
+        <div class="sub">${mcEsc(h.contact || '')} · ${mcEsc(h.status||'')}</div>
+      </div>
+      <div class="right"><div class="amt">${h.touch_count}</div><div class="badge green">touches</div></div>
+    </div>`, 'No high-activity leads in the last 24h.'),
+
+    card('Stale Leads', '> 14 days no movement', 'orange', stale, (s) => `<div class="mc-mini-row" onclick="mcGoToCase('${mcEsc(s.slug)}')">
+      <div class="left">
+        <div class="name">${mcEsc(s.name)}</div>
+        <div class="sub">${mcEsc(s.engagement_name || s.contact || '')} · ${mcEsc(s.status||'')}</div>
+      </div>
+      <div class="right"><div class="amt">${mcFmtUSD(s.fee_usd)}</div><div class="badge orange">${s.age_days}d</div></div>
+    </div>`, 'No stale leads. Pipeline is moving.'),
+
+    card('At-Risk Projects', 'Delivery < 12h', 'red', atRisk, (p) => `<div class="mc-mini-row ${p.overdue?'overdue':''}" onclick="mcGoToCase('${mcEsc(p.slug)}')">
+      <div class="left">
+        <div class="name">${mcEsc(p.client_name)}</div>
+        <div class="sub">${mcEsc(p.name)} · ${mcEsc(p.docs_progress)} docs</div>
+      </div>
+      <div class="right"><div class="amt">${mcFmtUSD(p.fee_usd)}</div><div class="badge red">${p.overdue?'overdue':p.hours_left+'h'}</div></div>
+    </div>`, 'All active projects on track.'),
+
+    card('Followup Needed', 'Invoices > 24h, no reminder', 'orange', followup, (i) => `<div class="mc-mini-row" onclick="mcGoToCase('${mcEsc(i.slug)}')">
+      <div class="left">
+        <div class="name">${mcEsc(i.client_name)}</div>
+        <div class="sub">${mcEsc(i.engagement_name || '')} · sent ${i.age_hrs}h ago</div>
+      </div>
+      <div class="right"><div class="amt">${mcFmtUSD(i.amount_usd)}</div><div class="badge orange">no nudge</div></div>
+    </div>`, 'No invoices waiting on a nudge.'),
+  ].join('');
 }
 
 function mcRenderDashboardKPIs(summary, invoicesData, projectsData, emailStatsData) {
@@ -5498,13 +5732,106 @@ function mcRenderTemplates(data) {
       <td>${t.send_count || 0}</td>
       <td>${t.last_sent_at ? mcFmtRelTime(t.last_sent_at) : '<span style="color:#94A3B8;">never</span>'}</td>
       <td>${t.is_active ? '<span class="mc-pill mc-pill-green">active</span>' : '<span class="mc-pill mc-pill-grey">off</span>'}</td>
-      <td onclick="event.stopPropagation()"><button class="mc-btn" style="padding:.3rem .6rem;font-size:.66rem;color:#DC2626;border-color:#FCA5A5;" onclick="mcConfirmDelete('templates','${mcEsc(t.id)}','${mcEsc(t.name)}',mcLoadTemplates)">×</button></td>
+      <td onclick="event.stopPropagation()" style="white-space:nowrap;">
+        <button class="mc-btn primary" style="padding:.3rem .6rem;font-size:.66rem;" onclick="mcOpenComposeEmail({templateId:'${mcEsc(t.id)}'})">Compose ✉</button>
+        <button class="mc-btn" style="padding:.3rem .6rem;font-size:.66rem;color:#DC2626;border-color:#FCA5A5;margin-left:.3rem;" onclick="mcConfirmDelete('templates','${mcEsc(t.id)}','${mcEsc(t.name)}',mcLoadTemplates)">×</button>
+      </td>
     </tr>`).join('')}</tbody></table></div>`;
   };
   renderInto('email-templates', null, 'templates');
   renderInto('email-campaigns', t => t.category === 'campaign', 'campaigns');
   renderInto('email-sequences', t => t.category === 'sequence', 'sequences');
 }
+// Open the Compose Email modal — pick template + client, fill {{vars}}, send.
+// Pre-fills from { templateId, templateSlug, clientId, clientSlug } if passed.
+async function mcOpenComposeEmail(opts = {}) {
+  // Make sure templates + contacts are loaded
+  if (!_mcCache.templates) {
+    try { const r = await fetch(`${MC_API}?type=templates`, { credentials: 'include' }); if (r.ok) _mcCache.templates = await r.json(); } catch {}
+  }
+  if (!_mcCache.contacts) {
+    try { const r = await fetch(`${MC_API}?type=contacts`, { credentials: 'include' }); if (r.ok) _mcCache.contacts = await r.json(); } catch {}
+  }
+  const templates = (_mcCache.templates?.templates || []).filter(t => t.is_active);
+  const contacts = _mcCache.contacts?.contacts || [];
+
+  if (!templates.length) { alert('No active email templates. Create one in /admin#email-templates first.'); return; }
+  if (!contacts.length) { alert('No contacts. Add one in /admin#crm-contacts first.'); return; }
+
+  const tplOpts = templates.map(t => ({ value: t.id, label: `${t.name} — ${t.subject || ''}` }));
+  const cliOpts = [{ value: '', label: '— Pick a client —' }, ...contacts.map(c => ({ value: c.id, label: `${c.legal_name} — ${c.primary_contact_email || 'no email'}` }))];
+
+  // Pre-fill from opts
+  let initialTpl = null, initialCli = null;
+  if (opts.templateId) initialTpl = templates.find(t => t.id === opts.templateId);
+  else if (opts.templateSlug) initialTpl = templates.find(t => t.slug === opts.templateSlug);
+  if (opts.clientId) initialCli = contacts.find(c => c.id === opts.clientId);
+  else if (opts.clientSlug) initialCli = contacts.find(c => c.slug === opts.clientSlug);
+
+  const tplVars = (initialTpl?.variables || []);
+  // Build dynamic variable fields based on selected template
+  const baseFields = [
+    { name: 'template_id', label: 'Template', type: 'select', required: true, options: tplOpts, full: true },
+    { name: 'client_id', label: 'To Client', type: 'select', required: true, options: cliOpts, full: true },
+  ];
+  const varFields = tplVars
+    .filter(v => !['client_legal_name','client_dba','first_name','full_name','title','email','company'].includes(v))
+    .map(v => ({ name: 'var_' + v, label: v, full: true, placeholder: 'value for {{' + v + '}}' }));
+  const tailFields = [
+    { name: 'testRecipient', label: 'Test Recipient (sends here instead of client; leave blank for live)', type: 'email', placeholder: 'mark@markcmo.com' },
+  ];
+
+  mcOpenModal({
+    title: 'Compose Email',
+    eyebrow: 'Email · Send to Client',
+    fields: [...baseFields, ...varFields, ...tailFields],
+    values: {
+      template_id: initialTpl?.id || templates[0].id,
+      client_id: initialCli?.id || '',
+    },
+    submit: async (values) => {
+      const variables = {};
+      for (const k of Object.keys(values)) {
+        if (k.startsWith('var_')) variables[k.slice(4)] = values[k];
+      }
+      const payload = {
+        templateId: values.template_id,
+        clientId: values.client_id,
+        variables,
+      };
+      if (values.testRecipient) payload.testRecipient = values.testRecipient;
+      const res = await fetch('/.netlify/functions/send-template-email', {
+        method: 'POST', credentials: 'include', headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(payload),
+      });
+      const data = await res.json();
+      if (!res.ok) throw new Error(data.error || `HTTP ${res.status}`);
+    },
+    onClose: () => {
+      delete _mcCache.templates; delete _mcCache.activity; delete _mcCache.summary;
+      mcLoadTemplates(true);
+      if (typeof mcLoadDashboard === 'function') mcLoadDashboard(true);
+      if (_cfActiveSlug) cfLoadCase(_cfActiveSlug);
+    },
+  });
+
+  // Re-render variable fields when template selection changes
+  setTimeout(() => {
+    const f = document.getElementById('mc-modal-form');
+    if (!f) return;
+    const tplSel = f.elements['template_id'];
+    if (!tplSel) return;
+    tplSel.addEventListener('change', () => {
+      // Reload modal with new template's variables
+      const newTpl = templates.find(t => t.id === tplSel.value);
+      if (!newTpl) return;
+      const cliId = f.elements['client_id']?.value;
+      mcCloseModal();
+      setTimeout(() => mcOpenComposeEmail({ templateId: newTpl.id, clientId: cliId }), 50);
+    });
+  }, 50);
+}
+
 function mcOpenTemplateEditor(id, defaultCategory) {
   const existing = id ? (_mcCache.templates?.templates || []).find(t => t.id === id) : null;
   mcOpenModal({

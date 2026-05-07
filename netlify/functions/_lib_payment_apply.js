@@ -92,6 +92,11 @@ async function applyInvoiceState({ sqInvoice, source = 'webhook' }) {
       // Client-facing receipt only on real invoices
       if (!inv.is_test && client && eng) {
         await sendClientReceipt({ inv, eng, client });
+        // Trigger the onboarding intake form post-payment (best-effort).
+        // If it fails it's not fatal — Mark can re-send manually from /admin.
+        try {
+          await sendOnboardingIntake({ inv, eng, client });
+        } catch (e) { console.warn('onboarding intake send failed:', e.message); }
       }
     } catch (e) {
       console.error('payment notification email failed:', e);
@@ -270,6 +275,86 @@ async function sendClientReceipt({ inv, eng, client }) {
 
 function esc(s) {
   return String(s ?? '').replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+}
+
+// ─── Onboarding intake email — fires automatically on payment ───
+async function sendOnboardingIntake({ inv, eng, client }) {
+  const apiKey = process.env.RESEND_API_KEY;
+  if (!apiKey) return;
+  const greetingName = (client.primary_contact_name || '').split(' ')[0] || 'there';
+  const cc = buildClientCcList(client);
+  const intakeUrl = 'https://markcmo.com/forms/onboarding';
+  const deliveryHrs = eng.delivery_window_hrs || 72;
+  const deliveryDueAt = new Date(Date.now() + deliveryHrs * 60 * 60 * 1000);
+  const deliveryDueStr = deliveryDueAt.toLocaleString('en-US', { dateStyle: 'full', timeStyle: 'short', timeZone: 'America/New_York' });
+
+  const html = `<!DOCTYPE html>
+<html><head><meta charset="UTF-8"/></head>
+<body style="margin:0;padding:0;background:#F8FAFC;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif;color:#1E293B;">
+<div style="max-width:680px;margin:0 auto;background:#fff;">
+  <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0" bgcolor="#0A1628" style="background-color:#0A1628;border-collapse:collapse;">
+    <tr><td bgcolor="#0A1628" style="background-color:#0A1628;background-image:linear-gradient(135deg,#0A1628 0%,#0F2040 50%,#162A4A 100%);color:#FFFFFF;padding:32px;">
+      <div style="font-family:'DM Mono',Menlo,monospace;font-size:11px;letter-spacing:0.22em;text-transform:uppercase;color:#34D399;margin-bottom:8px;font-weight:600;">Step 1 of 1 · Intake</div>
+      <h1 style="font-family:'Bebas Neue',Impact,sans-serif;font-size:28px;font-weight:400;letter-spacing:0.02em;line-height:1.1;color:#FFFFFF;margin:0 0 6px;">${esc(greetingName)}, the clock is ticking.</h1>
+      <p style="font-size:14px;color:#E2E8F0;margin:0;line-height:1.5;">Fill the intake worksheet so we can hit ${esc(deliveryDueStr)} ET.</p>
+    </td></tr>
+  </table>
+  <div style="padding:32px;">
+    <p style="font-size:15px;line-height:1.65;margin:0 0 16px;">Payment confirmed — thanks. To stay on the ${deliveryHrs}-hour delivery promise for <strong>${esc(eng.name)}</strong>, I need a short intake worksheet to point the audit at the right places. It takes about 12 minutes.</p>
+    <p style="font-size:15px;line-height:1.65;margin:0 0 22px;">What I need from you:</p>
+    <ul style="font-size:14px;line-height:1.7;margin:0 0 22px;padding-left:1.1rem;">
+      <li>Read-only access to your analytics + ad accounts (or screenshots if access is messy)</li>
+      <li>Your last 3 months of revenue + spend numbers (CSV is fine)</li>
+      <li>Brand assets &amp; current marketing collateral</li>
+      <li>One paragraph each on: top customer, product mix, what isn't working</li>
+      <li>Anything else worth knowing about the business</li>
+    </ul>
+    <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0" style="border-collapse:collapse;">
+      <tr><td bgcolor="#F97316" align="center" style="background-color:#F97316;border-radius:10px;">
+        <a href="${intakeUrl}" style="display:block;background-color:#F97316;color:#FFFFFF;font-weight:700;font-size:15px;letter-spacing:0.02em;text-transform:uppercase;text-decoration:none;padding:18px 24px;border-radius:10px;text-align:center;">
+          <span style="color:#FFFFFF;">Open Intake Worksheet &rarr;</span>
+        </a>
+      </td></tr>
+    </table>
+    <p style="font-size:13px;color:#64748B;margin:14px 0 0;line-height:1.6;">Reply to this email if anything's unclear. Looking forward to seeing the data.</p>
+    <p style="font-size:14px;line-height:1.65;margin:22px 0 0;">— Mark</p>
+  </div>
+  <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0" bgcolor="#0A1628" style="background-color:#0A1628;border-collapse:collapse;">
+    <tr><td bgcolor="#0A1628" align="center" style="background-color:#0A1628;padding:18px 32px;font-size:11px;color:#94A3B8;">Mark Gabrielli &middot; Fractional CMO &middot; markcmo.com</td></tr>
+  </table>
+</div></body></html>`;
+
+  const res = await fetch('https://api.resend.com/emails', {
+    method: 'POST',
+    headers: { Authorization: `Bearer ${apiKey}`, 'Content-Type': 'application/json' },
+    body: JSON.stringify({
+      from: 'Mark Gabrielli <mark@markcmo.com>',
+      to: [client.primary_contact_email],
+      cc,
+      reply_to: 'mark@markcmo.com',
+      subject: `Intake worksheet — ${eng.name} starts now`,
+      html,
+      tags: [{ name: 'template', value: 'onboarding-intake' }, { name: 'client', value: client.slug }],
+    }),
+  });
+  const data = await res.json().catch(() => ({}));
+
+  // Audit + journey rows
+  try {
+    await sbInsert('mc_audit_log', {
+      engagement_id: eng.id, client_id: client.id,
+      event: 'onboarding_intake_sent',
+      payload: { recipient: client.primary_contact_email, cc, resend_id: data?.id, intake_url: intakeUrl },
+    });
+    await sbInsert('mc_journey_events', {
+      client_id: client.id, engagement_id: eng.id,
+      category: 'email', event: 'email_sent',
+      subject_or_url: `Intake worksheet — ${eng.name} starts now`,
+      recipient_email: client.primary_contact_email,
+      resend_email_id: data?.id || null,
+      raw: { template: 'onboarding-intake', auto: true },
+    });
+  } catch (e) { console.warn('onboarding audit/journey insert failed:', e.message); }
 }
 
 module.exports = { applyInvoiceState, buildCcList };
