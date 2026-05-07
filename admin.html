@@ -1402,132 +1402,245 @@
 </div>
 </div>
 <div id="panel-webinar-replay" class="panel">
-<div class="panel-header"><h1 class="panel-title">▶️ Replay Links</h1></div>
-<div class="coming-soon">
-<div class="cs-icon">▶️</div>
-<h2>REPLAY LINKS</h2>
-<p>Manage and distribute recorded webinar replays with gated access links.</p>
-<div class="cs-badge">Coming Next Build</div>
-<div style="margin-top:20px;text-align:left;max-width:360px;width:100%;">
-<div style="font-size:10px;letter-spacing:2px;text-transform:uppercase;color:var(--dim);margin-bottom:8px;">ROADMAP</div>
-<div style="font-size:12px;color:var(--dim);padding:4px 0;border-bottom:1px solid var(--border);">→ Upload replay recording to storage</div><div style="font-size:12px;color:var(--dim);padding:4px 0;border-bottom:1px solid var(--border);">→ Generate unique access tokens per buyer</div><div style="font-size:12px;color:var(--dim);padding:4px 0;border-bottom:1px solid var(--border);">→ Embed YouTube/Vimeo replay player</div><div style="font-size:12px;color:var(--dim);padding:4px 0;border-bottom:1px solid var(--border);">→ Auto-email replay link post-webinar</div><div style="font-size:12px;color:var(--dim);padding:4px 0;border-bottom:1px solid var(--border);">→ Track replay views per contact</div>
+<div class="panel-header"><h1 class="panel-title">▶️ Replay Links</h1>
+<div class="panel-actions">
+<a href="https://riverside.fm/projects" target="_blank" class="btn btn-outline">Riverside Projects →</a>
+</div>
+</div>
+<div class="content-body">
+<div style="background:var(--surface);border:1px solid var(--border);border-left:3px solid var(--gold);padding:20px;margin-bottom:24px;">
+<div style="font-size:13px;font-weight:600;color:var(--text);margin-bottom:10px;">Post-Webinar: Distribute Your Replay</div>
+<div style="font-size:12px;color:var(--dim);line-height:2;">
+<strong style="color:var(--text);">Step 1:</strong> Download recording from Riverside<br>
+<strong style="color:var(--text);">Step 2:</strong> Upload to Documents panel (auto-generates public URL)<br>
+<strong style="color:var(--text);">Step 3:</strong> Use Generate Link in Access Links to create a tracked link<br>
+<strong style="color:var(--text);">Step 4:</strong> Send replay link via Email Queue to all registered leads
+</div>
+</div>
+<div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:14px;">
+<a href="https://riverside.fm/projects" target="_blank" style="display:block;background:var(--surface);border:1px solid var(--border);padding:20px;text-decoration:none;" onmouseover="this.style.borderColor='rgba(201,168,76,0.4)'" onmouseout="this.style.borderColor='var(--border)'">
+<div style="font-size:10px;font-weight:700;letter-spacing:2px;color:var(--gold);margin-bottom:6px;">🎙 RIVERSIDE</div>
+<div style="font-size:13px;color:var(--text);">Download Recording</div>
+<div style="font-size:11px;color:var(--dim);margin-top:4px;">Export from Riverside projects</div>
+</a>
+<a onclick="switchPanel('documents', document.querySelector('[data-panel=documents]'))" style="display:block;background:var(--surface);border:1px solid var(--border);padding:20px;text-decoration:none;cursor:pointer;" onmouseover="this.style.borderColor='rgba(201,168,76,0.4)'" onmouseout="this.style.borderColor='var(--border)'">
+<div style="font-size:10px;font-weight:700;letter-spacing:2px;color:var(--gold);margin-bottom:6px;">📎 DOCUMENTS</div>
+<div style="font-size:13px;color:var(--text);">Upload Replay File</div>
+<div style="font-size:11px;color:var(--dim);margin-top:4px;">Store and host the replay video</div>
+</a>
+<a onclick="switchPanel('links', document.querySelector('[data-panel=links]'))" style="display:block;background:var(--surface);border:1px solid var(--border);padding:20px;text-decoration:none;cursor:pointer;" onmouseover="this.style.borderColor='rgba(201,168,76,0.4)'" onmouseout="this.style.borderColor='var(--border)'">
+<div style="font-size:10px;font-weight:700;letter-spacing:2px;color:var(--gold);margin-bottom:6px;">🔗 ACCESS LINKS</div>
+<div style="font-size:13px;color:var(--text);">Generate Tracked Link</div>
+<div style="font-size:11px;color:var(--dim);margin-top:4px;">Unique tracked URL per recipient</div>
+</a>
 </div>
 </div>
 </div>
 <div id="panel-webinar-schedule" class="panel">
-<div class="panel-header"><h1 class="panel-title">📅 Webinar Schedule</h1></div>
-<div class="coming-soon">
-<div class="cs-icon">📅</div>
-<h2>WEBINAR SCHEDULE</h2>
-<p>Manage upcoming webinar dates, topics, and registration windows.</p>
-<div class="cs-badge">Coming Next Build</div>
-<div style="margin-top:20px;text-align:left;max-width:360px;width:100%;">
-<div style="font-size:10px;letter-spacing:2px;text-transform:uppercase;color:var(--dim);margin-bottom:8px;">ROADMAP</div>
-<div style="font-size:12px;color:var(--dim);padding:4px 0;border-bottom:1px solid var(--border);">→ Create new webinar events</div><div style="font-size:12px;color:var(--dim);padding:4px 0;border-bottom:1px solid var(--border);">→ Set registration open/close dates</div><div style="font-size:12px;color:var(--dim);padding:4px 0;border-bottom:1px solid var(--border);">→ Configure Riverside or YouTube Live links</div><div style="font-size:12px;color:var(--dim);padding:4px 0;border-bottom:1px solid var(--border);">→ Sync ICS calendar invites</div><div style="font-size:12px;color:var(--dim);padding:4px 0;border-bottom:1px solid var(--border);">→ Publish to webinar landing page</div>
+<div class="panel-header"><h1 class="panel-title">📅 Webinar Schedule</h1>
+<div class="panel-actions">
+<a onclick="switchPanel('settings', document.querySelector('[data-panel=settings]'))" class="btn btn-outline" style="cursor:pointer;">Edit Settings →</a>
+</div>
+</div>
+<div class="content-body">
+<div style="background:var(--surface);border:1px solid var(--border);border-left:3px solid var(--gold);padding:20px;margin-bottom:24px;">
+<div style="font-size:13px;font-weight:600;color:var(--text);margin-bottom:8px;">Active Webinar Configuration</div>
+<div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:12px;">
+<div>
+<div style="font-size:10px;letter-spacing:2px;color:var(--dim);margin-bottom:4px;">WEBINAR DATE</div>
+<div style="font-size:13px;color:var(--text);" id="ws-date">—</div>
+</div>
+<div>
+<div style="font-size:10px;letter-spacing:2px;color:var(--dim);margin-bottom:4px;">RIVERSIDE LINK</div>
+<div style="font-size:13px;"><a id="ws-riverside" href="#" target="_blank" style="color:var(--gold);">—</a></div>
+</div>
+<div>
+<div style="font-size:10px;letter-spacing:2px;color:var(--dim);margin-bottom:4px;">REGISTRATION PAGE</div>
+<div style="font-size:13px;"><a href="/webinar" target="_blank" style="color:var(--gold);">markcmo.com/webinar →</a></div>
+</div>
+<div>
+<div style="font-size:10px;letter-spacing:2px;color:var(--dim);margin-bottom:4px;">REGISTRANTS</div>
+<div style="font-size:13px;color:var(--text);" id="ws-count">—</div>
+</div>
+</div>
+</div>
+<div style="font-size:12px;color:var(--dim);line-height:1.8;background:var(--surface);border:1px solid var(--border);padding:18px;">
+<strong style="color:var(--text);">To update the next webinar:</strong><br>
+1. Go to <strong style="color:var(--gold);">Settings</strong> and update the Webinar Date and Riverside Link<br>
+2. Save changes — the registration page and confirmation emails will auto-update<br>
+3. Lead count and registrants tracked in the <strong style="color:var(--gold);">All Leads</strong> panel
 </div>
 </div>
 </div>
 <div id="panel-crm-contacts" class="panel">
-<div class="panel-header"><h1 class="panel-title">📋 All Contacts</h1></div>
-<div class="coming-soon">
-<div class="cs-icon">📋</div>
-<h2>ALL CONTACTS</h2>
-<p>Full contact database — every lead, prospect, and connection across all channels.</p>
-<div class="cs-badge">Coming Next Build</div>
-<div style="margin-top:20px;text-align:left;max-width:360px;width:100%;">
-<div style="font-size:10px;letter-spacing:2px;text-transform:uppercase;color:var(--dim);margin-bottom:8px;">ROADMAP</div>
-<div style="font-size:12px;color:var(--dim);padding:4px 0;border-bottom:1px solid var(--border);">→ Import contacts from CSV</div><div style="font-size:12px;color:var(--dim);padding:4px 0;border-bottom:1px solid var(--border);">→ Auto-capture from webinar registrations</div><div style="font-size:12px;color:var(--dim);padding:4px 0;border-bottom:1px solid var(--border);">→ Tag and segment by service interest</div><div style="font-size:12px;color:var(--dim);padding:4px 0;border-bottom:1px solid var(--border);">→ Search by name, company, email</div><div style="font-size:12px;color:var(--dim);padding:4px 0;border-bottom:1px solid var(--border);">→ View full activity timeline per contact</div>
+<div class="panel-header"><h1 class="panel-title">📋 All Contacts</h1>
+<div class="panel-actions">
+<button class="btn btn-primary" onclick="loadContacts()">↻ Refresh</button>
 </div>
+</div>
+<div class="content-body">
+<div style="display:flex;gap:12px;margin-bottom:20px;flex-wrap:wrap;">
+<input type="text" class="filter-input" id="contacts-search" placeholder="Search name, email, company..." oninput="filterContacts()" style="flex:1;min-width:200px;background:var(--surface);border:1px solid var(--border);color:var(--text);padding:8px 12px;font-size:12px;outline:none;">
+</div>
+<div class="table-wrap">
+<table class="data-table">
+<thead><tr><th>Name</th><th>Email</th><th>Company</th><th>Title</th><th>Source</th><th>Date</th><th>Status</th></tr></thead>
+<tbody id="contacts-tbody">
+<tr><td colspan="7" style="text-align:center;color:var(--dim);padding:32px;">Loading contacts...</td></tr>
+</tbody>
+</table>
+</div>
+<div style="font-size:11px;color:var(--dim);margin-top:8px;" id="contacts-count"></div>
 </div>
 </div>
 <div id="panel-crm-clients" class="panel">
-<div class="panel-header"><h1 class="panel-title">⭐ Active Clients</h1></div>
-<div class="coming-soon">
-<div class="cs-icon">⭐</div>
-<h2>ACTIVE CLIENTS</h2>
-<p>Track all current paying engagements, retainer status, and deliverables.</p>
-<div class="cs-badge">Coming Next Build</div>
-<div style="margin-top:20px;text-align:left;max-width:360px;width:100%;">
-<div style="font-size:10px;letter-spacing:2px;text-transform:uppercase;color:var(--dim);margin-bottom:8px;">ROADMAP</div>
-<div style="font-size:12px;color:var(--dim);padding:4px 0;border-bottom:1px solid var(--border);">→ Engagement type (CMO/COO/Advisory)</div><div style="font-size:12px;color:var(--dim);padding:4px 0;border-bottom:1px solid var(--border);">→ Monthly retainer amount and status</div><div style="font-size:12px;color:var(--dim);padding:4px 0;border-bottom:1px solid var(--border);">→ Start/end dates and renewal alerts</div><div style="font-size:12px;color:var(--dim);padding:4px 0;border-bottom:1px solid var(--border);">→ Key contacts and stakeholders</div><div style="font-size:12px;color:var(--dim);padding:4px 0;border-bottom:1px solid var(--border);">→ Linked documents and SOWs</div>
+<div class="panel-header"><h1 class="panel-title">⭐ Active Clients</h1>
+<div class="panel-actions">
+<button class="btn btn-primary" onclick="loadClients()">↻ Refresh</button>
 </div>
+</div>
+<div class="content-body">
+<div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(160px,1fr));gap:12px;margin-bottom:24px;" id="clients-stats-row">
+<div class="stat-card"><div class="stat-label">Total Clients</div><div class="stat-value" id="cl-total">—</div></div>
+<div class="stat-card"><div class="stat-label">Active</div><div class="stat-value" id="cl-active" style="color:#4CAF72;">—</div></div>
+<div class="stat-card"><div class="stat-label">Retainer MRR</div><div class="stat-value" id="cl-mrr" style="color:var(--gold);">—</div></div>
+<div class="stat-card"><div class="stat-label">Paused</div><div class="stat-value" id="cl-paused" style="color:#f0a050;">—</div></div>
+</div>
+<div class="table-wrap">
+<table class="data-table">
+<thead><tr><th>Company</th><th>Contact</th><th>Email</th><th>Type</th><th>Retainer</th><th>Status</th><th>Start Date</th></tr></thead>
+<tbody id="clients-tbody">
+<tr><td colspan="7" style="text-align:center;color:var(--dim);padding:32px;">Loading clients...</td></tr>
+</tbody>
+</table>
+</div>
+<div style="font-size:11px;color:var(--dim);margin-top:8px;" id="clients-count"></div>
 </div>
 </div>
 <div id="panel-crm-pipeline" class="panel">
-<div class="panel-header"><h1 class="panel-title">🔄 Sales Pipeline</h1></div>
-<div class="coming-soon">
-<div class="cs-icon">🔄</div>
-<h2>SALES PIPELINE</h2>
-<p>Kanban-style pipeline to track every prospect from first touch to signed contract.</p>
-<div class="cs-badge">Coming Next Build</div>
-<div style="margin-top:20px;text-align:left;max-width:360px;width:100%;">
-<div style="font-size:10px;letter-spacing:2px;text-transform:uppercase;color:var(--dim);margin-bottom:8px;">ROADMAP</div>
-<div style="font-size:12px;color:var(--dim);padding:4px 0;border-bottom:1px solid var(--border);">→ Stages: Lead → Qualified → Proposal → Negotiation → Closed</div><div style="font-size:12px;color:var(--dim);padding:4px 0;border-bottom:1px solid var(--border);">→ Deal value and probability</div><div style="font-size:12px;color:var(--dim);padding:4px 0;border-bottom:1px solid var(--border);">→ Next action and follow-up reminders</div><div style="font-size:12px;color:var(--dim);padding:4px 0;border-bottom:1px solid var(--border);">→ Source attribution (webinar, referral, direct)</div><div style="font-size:12px;color:var(--dim);padding:4px 0;border-bottom:1px solid var(--border);">→ Win/loss tracking</div>
+<div class="panel-header"><h1 class="panel-title">🔄 Sales Pipeline</h1>
+<div class="panel-actions">
+<button class="btn btn-primary" onclick="loadPipeline()">↻ Refresh</button>
+</div>
+</div>
+<div class="content-body">
+<div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(140px,1fr));gap:12px;margin-bottom:24px;">
+<div class="stat-card"><div class="stat-label">New Leads</div><div class="stat-value" id="pip-new" style="color:#60a5fa;">—</div></div>
+<div class="stat-card"><div class="stat-label">Qualified</div><div class="stat-value" id="pip-qualified" style="color:#a78bfa;">—</div></div>
+<div class="stat-card"><div class="stat-label">Proposal Sent</div><div class="stat-value" id="pip-proposal" style="color:#f0a050;">—</div></div>
+<div class="stat-card"><div class="stat-label">In Negotiation</div><div class="stat-value" id="pip-negotiation" style="color:var(--gold);">—</div></div>
+<div class="stat-card"><div class="stat-label">Closed Won</div><div class="stat-value" id="pip-won" style="color:#4CAF72;">—</div></div>
+</div>
+<div class="table-wrap">
+<table class="data-table">
+<thead><tr><th>Name</th><th>Email</th><th>Company</th><th>Title</th><th>Stage</th><th>Source</th><th>Date</th></tr></thead>
+<tbody id="pipeline-tbody">
+<tr><td colspan="7" style="text-align:center;color:var(--dim);padding:32px;">Loading pipeline...</td></tr>
+</tbody>
+</table>
 </div>
 </div>
 </div>
 <div id="panel-crm-notes" class="panel">
-<div class="panel-header"><h1 class="panel-title">📝 Notes & Activity</h1></div>
-<div class="coming-soon">
-<div class="cs-icon">📝</div>
-<h2>NOTES & ACTIVITY</h2>
-<p>Log calls, meetings, emails, and notes for every contact and engagement.</p>
-<div class="cs-badge">Coming Next Build</div>
-<div style="margin-top:20px;text-align:left;max-width:360px;width:100%;">
-<div style="font-size:10px;letter-spacing:2px;text-transform:uppercase;color:var(--dim);margin-bottom:8px;">ROADMAP</div>
-<div style="font-size:12px;color:var(--dim);padding:4px 0;border-bottom:1px solid var(--border);">→ Call/meeting log with timestamps</div><div style="font-size:12px;color:var(--dim);padding:4px 0;border-bottom:1px solid var(--border);">→ Link notes to contact or engagement</div><div style="font-size:12px;color:var(--dim);padding:4px 0;border-bottom:1px solid var(--border);">→ Set follow-up reminders</div><div style="font-size:12px;color:var(--dim);padding:4px 0;border-bottom:1px solid var(--border);">→ Activity feed across all contacts</div><div style="font-size:12px;color:var(--dim);padding:4px 0;border-bottom:1px solid var(--border);">→ Export activity log to PDF</div>
+<div class="panel-header"><h1 class="panel-title">📝 Activity Log</h1>
+<div class="panel-actions">
+<button class="btn btn-primary" onclick="loadAuditLog()">↻ Refresh</button>
 </div>
+</div>
+<div class="content-body">
+<div style="display:flex;gap:12px;margin-bottom:20px;">
+<input type="text" id="audit-search" placeholder="Search activity..." oninput="filterAudit()" style="flex:1;background:var(--surface);border:1px solid var(--border);color:var(--text);padding:8px 12px;font-size:12px;outline:none;">
+</div>
+<div class="table-wrap">
+<table class="data-table">
+<thead><tr><th>Timestamp</th><th>Action</th><th>Entity</th><th>Detail</th><th>User</th></tr></thead>
+<tbody id="audit-tbody">
+<tr><td colspan="5" style="text-align:center;color:var(--dim);padding:32px;">Loading activity log...</td></tr>
+</tbody>
+</table>
+</div>
+<div style="font-size:11px;color:var(--dim);margin-top:8px;" id="audit-count"></div>
 </div>
 </div>
 <div id="panel-eng-projects" class="panel">
-<div class="panel-header"><h1 class="panel-title">🚀 Active Projects</h1></div>
-<div class="coming-soon">
-<div class="cs-icon">🚀</div>
-<h2>ACTIVE PROJECTS</h2>
-<p>Track all live engagements — deliverables, milestones, and status.</p>
-<div class="cs-badge">Coming Next Build</div>
-<div style="margin-top:20px;text-align:left;max-width:360px;width:100%;">
-<div style="font-size:10px;letter-spacing:2px;text-transform:uppercase;color:var(--dim);margin-bottom:8px;">ROADMAP</div>
-<div style="font-size:12px;color:var(--dim);padding:4px 0;border-bottom:1px solid var(--border);">→ Project name, client, type, status</div><div style="font-size:12px;color:var(--dim);padding:4px 0;border-bottom:1px solid var(--border);">→ Sprint/milestone tracker</div><div style="font-size:12px;color:var(--dim);padding:4px 0;border-bottom:1px solid var(--border);">→ Deliverable checklist</div><div style="font-size:12px;color:var(--dim);padding:4px 0;border-bottom:1px solid var(--border);">→ Time tracking (optional)</div><div style="font-size:12px;color:var(--dim);padding:4px 0;border-bottom:1px solid var(--border);">→ Client-facing status dashboard link</div>
+<div class="panel-header"><h1 class="panel-title">🚀 Active Projects</h1>
+<div class="panel-actions">
+<button class="btn btn-primary" onclick="loadEngagements()">↻ Refresh</button>
+</div>
+</div>
+<div class="content-body">
+<div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(140px,1fr));gap:12px;margin-bottom:24px;">
+<div class="stat-card"><div class="stat-label">Total</div><div class="stat-value" id="eng-total">—</div></div>
+<div class="stat-card"><div class="stat-label">Active</div><div class="stat-value" id="eng-active" style="color:#4CAF72;">—</div></div>
+<div class="stat-card"><div class="stat-label">On Hold</div><div class="stat-value" id="eng-hold" style="color:#f0a050;">—</div></div>
+<div class="stat-card"><div class="stat-label">Completed</div><div class="stat-value" id="eng-done" style="color:var(--dim);">—</div></div>
+</div>
+<div class="table-wrap">
+<table class="data-table">
+<thead><tr><th>Project</th><th>Client</th><th>Type</th><th>Status</th><th>Start</th><th>End</th><th>Value</th></tr></thead>
+<tbody id="eng-tbody">
+<tr><td colspan="7" style="text-align:center;color:var(--dim);padding:32px;">Loading engagements...</td></tr>
+</tbody>
+</table>
 </div>
 </div>
 </div>
 <div id="panel-eng-proposals" class="panel">
-<div class="panel-header"><h1 class="panel-title">📄 Proposals</h1></div>
-<div class="coming-soon">
-<div class="cs-icon">📄</div>
-<h2>PROPOSALS</h2>
-<p>Create, send, and track consulting proposals with e-signature.</p>
-<div class="cs-badge">Coming Next Build</div>
-<div style="margin-top:20px;text-align:left;max-width:360px;width:100%;">
-<div style="font-size:10px;letter-spacing:2px;text-transform:uppercase;color:var(--dim);margin-bottom:8px;">ROADMAP</div>
-<div style="font-size:12px;color:var(--dim);padding:4px 0;border-bottom:1px solid var(--border);">→ Proposal builder with your templates</div><div style="font-size:12px;color:var(--dim);padding:4px 0;border-bottom:1px solid var(--border);">→ Service scope + pricing blocks</div><div style="font-size:12px;color:var(--dim);padding:4px 0;border-bottom:1px solid var(--border);">→ Send via secure link or email</div><div style="font-size:12px;color:var(--dim);padding:4px 0;border-bottom:1px solid var(--border);">→ Track open/viewed/signed status</div><div style="font-size:12px;color:var(--dim);padding:4px 0;border-bottom:1px solid var(--border);">→ Convert to SOW on approval</div>
+<div class="panel-header"><h1 class="panel-title">📄 Proposals</h1>
+<div class="panel-actions">
+<button class="btn btn-primary" onclick="loadDocs('proposal')">↻ Refresh</button>
+<a href="/forms/proposal" target="_blank" class="btn btn-outline">New Proposal →</a>
+</div>
+</div>
+<div class="content-body">
+<div class="table-wrap">
+<table class="data-table">
+<thead><tr><th>Title</th><th>Client</th><th>Engagement</th><th>Status</th><th>Created</th><th>URL</th></tr></thead>
+<tbody id="docs-proposals-tbody">
+<tr><td colspan="6" style="text-align:center;color:var(--dim);padding:32px;">Loading proposals...</td></tr>
+</tbody>
+</table>
 </div>
 </div>
 </div>
 <div id="panel-eng-contracts" class="panel">
-<div class="panel-header"><h1 class="panel-title">✍️ Contracts</h1></div>
-<div class="coming-soon">
-<div class="cs-icon">✍️</div>
-<h2>CONTRACTS</h2>
-<p>Manage all signed contracts — NDAs, MSAs, SOWs, and engagement letters.</p>
-<div class="cs-badge">Coming Next Build</div>
-<div style="margin-top:20px;text-align:left;max-width:360px;width:100%;">
-<div style="font-size:10px;letter-spacing:2px;text-transform:uppercase;color:var(--dim);margin-bottom:8px;">ROADMAP</div>
-<div style="font-size:12px;color:var(--dim);padding:4px 0;border-bottom:1px solid var(--border);">→ Upload executed contracts</div><div style="font-size:12px;color:var(--dim);padding:4px 0;border-bottom:1px solid var(--border);">→ Link to client and engagement</div><div style="font-size:12px;color:var(--dim);padding:4px 0;border-bottom:1px solid var(--border);">→ Expiry and renewal alerts</div><div style="font-size:12px;color:var(--dim);padding:4px 0;border-bottom:1px solid var(--border);">→ Filter by type, client, status</div><div style="font-size:12px;color:var(--dim);padding:4px 0;border-bottom:1px solid var(--border);">→ Generate from form templates</div>
+<div class="panel-header"><h1 class="panel-title">✍️ Contracts</h1>
+<div class="panel-actions">
+<button class="btn btn-primary" onclick="loadDocs('contract')">↻ Refresh</button>
+<a href="/forms/msa" target="_blank" class="btn btn-outline">New Contract →</a>
+</div>
+</div>
+<div class="content-body">
+<div class="table-wrap">
+<table class="data-table">
+<thead><tr><th>Title</th><th>Client</th><th>Engagement</th><th>Status</th><th>Created</th><th>URL</th></tr></thead>
+<tbody id="docs-contracts-tbody">
+<tr><td colspan="6" style="text-align:center;color:var(--dim);padding:32px;">Loading contracts...</td></tr>
+</tbody>
+</table>
 </div>
 </div>
 </div>
 <div id="panel-eng-invoices" class="panel">
-<div class="panel-header"><h1 class="panel-title">🧾 Invoices</h1></div>
-<div class="coming-soon">
-<div class="cs-icon">🧾</div>
-<h2>INVOICES</h2>
-<p>Create and track invoices tied to active engagements.</p>
-<div class="cs-badge">Coming Next Build</div>
-<div style="margin-top:20px;text-align:left;max-width:360px;width:100%;">
-<div style="font-size:10px;letter-spacing:2px;text-transform:uppercase;color:var(--dim);margin-bottom:8px;">ROADMAP</div>
-<div style="font-size:12px;color:var(--dim);padding:4px 0;border-bottom:1px solid var(--border);">→ Invoice builder with your branding</div><div style="font-size:12px;color:var(--dim);padding:4px 0;border-bottom:1px solid var(--border);">→ Send via email with pay link</div><div style="font-size:12px;color:var(--dim);padding:4px 0;border-bottom:1px solid var(--border);">→ Track paid/outstanding/overdue</div><div style="font-size:12px;color:var(--dim);padding:4px 0;border-bottom:1px solid var(--border);">→ Connect to Square transactions</div><div style="font-size:12px;color:var(--dim);padding:4px 0;border-bottom:1px solid var(--border);">→ Monthly retainer auto-invoicing</div>
+<div class="panel-header"><h1 class="panel-title">🧾 Invoices</h1>
+<div class="panel-actions">
+<button class="btn btn-primary" onclick="loadInvoices()">↻ Refresh</button>
+</div>
+</div>
+<div class="content-body">
+<div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(140px,1fr));gap:12px;margin-bottom:24px;">
+<div class="stat-card"><div class="stat-label">Total Billed</div><div class="stat-value" id="inv-total-billed" style="color:var(--gold);">—</div></div>
+<div class="stat-card"><div class="stat-label">Paid</div><div class="stat-value" id="inv-paid" style="color:#4CAF72;">—</div></div>
+<div class="stat-card"><div class="stat-label">Outstanding</div><div class="stat-value" id="inv-outstanding" style="color:#f0a050;">—</div></div>
+<div class="stat-card"><div class="stat-label">Overdue</div><div class="stat-value" id="inv-overdue" style="color:#ef4444;">—</div></div>
+</div>
+<div class="table-wrap">
+<table class="data-table">
+<thead><tr><th>Invoice #</th><th>Client</th><th>Engagement</th><th>Amount</th><th>Status</th><th>Due Date</th><th>Paid Date</th></tr></thead>
+<tbody id="invoices-tbody">
+<tr><td colspan="7" style="text-align:center;color:var(--dim);padding:32px;">Loading invoices...</td></tr>
+</tbody>
+</table>
 </div>
 </div>
 </div>
@@ -1658,119 +1771,250 @@
 </div>
 </div>
 <div id="panel-forms-submissions" class="panel">
-<div class="panel-header"><h1 class="panel-title">📥 Form Submissions</h1></div>
-<div class="coming-soon">
-<div class="cs-icon">📥</div>
-<h2>FORM SUBMISSIONS</h2>
-<p>Track all submitted forms — who filled them, when, and their current status.</p>
-<div class="cs-badge">Coming Next Build</div>
-<div style="margin-top:20px;text-align:left;max-width:360px;width:100%;">
-<div style="font-size:10px;letter-spacing:2px;text-transform:uppercase;color:var(--dim);margin-bottom:8px;">ROADMAP</div>
-<div style="font-size:12px;color:var(--dim);padding:4px 0;border-bottom:1px solid var(--border);">→ Log each form submission with timestamp</div><div style="font-size:12px;color:var(--dim);padding:4px 0;border-bottom:1px solid var(--border);">→ Status: draft / sent / signed / archived</div><div style="font-size:12px;color:var(--dim);padding:4px 0;border-bottom:1px solid var(--border);">→ Link submissions to client in CRM</div><div style="font-size:12px;color:var(--dim);padding:4px 0;border-bottom:1px solid var(--border);">→ Email notifications on submission</div><div style="font-size:12px;color:var(--dim);padding:4px 0;border-bottom:1px solid var(--border);">→ Export to PDF for record keeping</div>
+<div class="panel-header"><h1 class="panel-title">📥 Form Submissions</h1>
+<div class="panel-actions">
+<button class="btn btn-primary" onclick="loadFormSubmissions()">↻ Refresh</button>
+</div>
+</div>
+<div class="content-body">
+<div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(140px,1fr));gap:12px;margin-bottom:24px;">
+<div class="stat-card"><div class="stat-label">Total</div><div class="stat-value" id="fsub-total">—</div></div>
+<div class="stat-card"><div class="stat-label">This Week</div><div class="stat-value" id="fsub-week" style="color:var(--gold);">—</div></div>
+</div>
+<div class="table-wrap">
+<table class="data-table">
+<thead><tr><th>Name</th><th>Email</th><th>Company</th><th>Form</th><th>Submitted</th><th>Message</th></tr></thead>
+<tbody id="fsub-tbody">
+<tr><td colspan="6" style="text-align:center;color:var(--dim);padding:32px;">Loading submissions...</td></tr>
+</tbody>
+</table>
 </div>
 </div>
 </div>
 <div id="panel-email-campaigns" class="panel">
-<div class="panel-header"><h1 class="panel-title">📢 Email Campaigns</h1></div>
-<div class="coming-soon">
-<div class="cs-icon">📢</div>
-<h2>EMAIL CAMPAIGNS</h2>
-<p>Create and send broadcast emails to your full list or targeted segments.</p>
-<div class="cs-badge">Coming Next Build</div>
-<div style="margin-top:20px;text-align:left;max-width:360px;width:100%;">
-<div style="font-size:10px;letter-spacing:2px;text-transform:uppercase;color:var(--dim);margin-bottom:8px;">ROADMAP</div>
-<div style="font-size:12px;color:var(--dim);padding:4px 0;border-bottom:1px solid var(--border);">→ Campaign builder with brand template</div><div style="font-size:12px;color:var(--dim);padding:4px 0;border-bottom:1px solid var(--border);">→ Segment by tag, source, or engagement</div><div style="font-size:12px;color:var(--dim);padding:4px 0;border-bottom:1px solid var(--border);">→ Send via Resend API</div><div style="font-size:12px;color:var(--dim);padding:4px 0;border-bottom:1px solid var(--border);">→ Open/click rate tracking</div><div style="font-size:12px;color:var(--dim);padding:4px 0;border-bottom:1px solid var(--border);">→ A/B subject line testing</div>
+<div class="panel-header"><h1 class="panel-title">📢 Email Campaigns</h1>
+<div class="panel-actions">
+<a href="https://resend.com/broadcasts" target="_blank" class="btn btn-outline">Open Resend →</a>
+</div>
+</div>
+<div class="content-body">
+<div style="background:var(--surface);border:1px solid var(--border);border-left:3px solid var(--gold);padding:24px;margin-bottom:24px;">
+<div style="font-size:13px;font-weight:600;color:var(--text);margin-bottom:8px;">Email Campaigns via Resend</div>
+<div style="font-size:12px;color:var(--dim);line-height:1.8;">Your campaigns are managed in Resend. Click the button above to open your Resend dashboard to create and send broadcast emails to your full list or targeted segments.</div>
+</div>
+<div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:14px;">
+<a href="https://resend.com/broadcasts" target="_blank" style="display:block;background:var(--surface);border:1px solid var(--border);padding:20px;text-decoration:none;" onmouseover="this.style.borderColor='rgba(201,168,76,0.4)'" onmouseout="this.style.borderColor='var(--border)'">
+<div style="font-size:10px;font-weight:700;letter-spacing:2px;color:var(--gold);margin-bottom:6px;">📢 BROADCASTS</div>
+<div style="font-size:13px;font-weight:600;color:var(--text);">Send Campaign</div>
+<div style="font-size:11px;color:var(--dim);margin-top:4px;">One-time blast to full list or segment</div>
+</a>
+<a href="https://resend.com/audiences" target="_blank" style="display:block;background:var(--surface);border:1px solid var(--border);padding:20px;text-decoration:none;" onmouseover="this.style.borderColor='rgba(201,168,76,0.4)'" onmouseout="this.style.borderColor='var(--border)'">
+<div style="font-size:10px;font-weight:700;letter-spacing:2px;color:var(--gold);margin-bottom:6px;">👥 AUDIENCES</div>
+<div style="font-size:13px;font-weight:600;color:var(--text);">Manage Segments</div>
+<div style="font-size:11px;color:var(--dim);margin-top:4px;">Import, tag, and organize subscribers</div>
+</a>
+<a href="https://resend.com/emails" target="_blank" style="display:block;background:var(--surface);border:1px solid var(--border);padding:20px;text-decoration:none;" onmouseover="this.style.borderColor='rgba(201,168,76,0.4)'" onmouseout="this.style.borderColor='var(--border)'">
+<div style="font-size:10px;font-weight:700;letter-spacing:2px;color:var(--gold);margin-bottom:6px;">📊 ANALYTICS</div>
+<div style="font-size:13px;font-weight:600;color:var(--text);">Email Analytics</div>
+<div style="font-size:11px;color:var(--dim);margin-top:4px;">Open rates, clicks, bounces, deliverability</div>
+</a>
 </div>
 </div>
 </div>
 <div id="panel-email-templates" class="panel">
-<div class="panel-header"><h1 class="panel-title">🎨 Email Templates</h1></div>
-<div class="coming-soon">
-<div class="cs-icon">🎨</div>
-<h2>EMAIL TEMPLATES</h2>
-<p>Library of reusable email templates for every scenario in your consulting business.</p>
-<div class="cs-badge">Coming Next Build</div>
-<div style="margin-top:20px;text-align:left;max-width:360px;width:100%;">
-<div style="font-size:10px;letter-spacing:2px;text-transform:uppercase;color:var(--dim);margin-bottom:8px;">ROADMAP</div>
-<div style="font-size:12px;color:var(--dim);padding:4px 0;border-bottom:1px solid var(--border);">→ Welcome / intro email</div><div style="font-size:12px;color:var(--dim);padding:4px 0;border-bottom:1px solid var(--border);">→ Proposal follow-up</div><div style="font-size:12px;color:var(--dim);padding:4px 0;border-bottom:1px solid var(--border);">→ Retainer renewal reminder</div><div style="font-size:12px;color:var(--dim);padding:4px 0;border-bottom:1px solid var(--border);">→ Case study / social proof</div><div style="font-size:12px;color:var(--dim);padding:4px 0;border-bottom:1px solid var(--border);">→ Re-engagement for cold leads</div>
+<div class="panel-header"><h1 class="panel-title">🎨 Email Templates</h1>
+<div class="panel-actions">
+<a href="https://resend.com/emails/templates" target="_blank" class="btn btn-outline">Manage in Resend →</a>
+</div>
+</div>
+<div class="content-body">
+<div style="background:var(--surface);border:1px solid var(--border);border-left:3px solid var(--gold);padding:16px 20px;margin-bottom:24px;font-size:12px;color:var(--dim);line-height:1.7;">
+<strong style="color:var(--text);">Your active drip sequence:</strong> 8-email webinar follow-up sequence is live in the system. Manage HTML templates directly in Resend or edit the serverless function.
+</div>
+<div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:14px;">
+<div style="background:var(--surface);border:1px solid var(--border);padding:18px;">
+<div style="font-size:10px;font-weight:700;letter-spacing:2px;color:var(--gold);margin-bottom:6px;">EMAIL 1 — IMMEDIATE</div>
+<div style="font-size:13px;color:var(--text);font-weight:600;">Webinar Confirmation</div>
+<div style="font-size:11px;color:var(--dim);margin-top:4px;">Sent: on registration · Subject: You're registered for...</div>
+</div>
+<div style="background:var(--surface);border:1px solid var(--border);padding:18px;">
+<div style="font-size:10px;font-weight:700;letter-spacing:2px;color:var(--gold);margin-bottom:6px;">EMAIL 2 — DAY 1</div>
+<div style="font-size:13px;color:var(--text);font-weight:600;">Day Before Reminder</div>
+<div style="font-size:11px;color:var(--dim);margin-top:4px;">Sent: 24h before webinar · Reminder + agenda</div>
+</div>
+<div style="background:var(--surface);border:1px solid var(--border);padding:18px;">
+<div style="font-size:10px;font-weight:700;letter-spacing:2px;color:var(--gold);margin-bottom:6px;">EMAIL 3 — DAY 2</div>
+<div style="font-size:13px;color:var(--text);font-weight:600;">Day-Of Reminder</div>
+<div style="font-size:11px;color:var(--dim);margin-top:4px;">Sent: morning of webinar · Join link + agenda</div>
+</div>
+<div style="background:var(--surface);border:1px solid var(--border);padding:18px;">
+<div style="font-size:10px;font-weight:700;letter-spacing:2px;color:var(--gold);margin-bottom:6px;">EMAILS 4-8 — FOLLOW-UP</div>
+<div style="font-size:13px;color:var(--text);font-weight:600;">Post-Webinar Nurture</div>
+<div style="font-size:11px;color:var(--dim);margin-top:4px;">5-email follow-up sequence over 14 days</div>
+</div>
 </div>
 </div>
 </div>
 <div id="panel-email-sequences" class="panel">
-<div class="panel-header"><h1 class="panel-title">🔁 Drip Sequences</h1></div>
-<div class="coming-soon">
-<div class="cs-icon">🔁</div>
-<h2>DRIP SEQUENCES</h2>
-<p>Automated multi-step email sequences triggered by actions (webinar, purchase, inquiry).</p>
-<div class="cs-badge">Coming Next Build</div>
-<div style="margin-top:20px;text-align:left;max-width:360px;width:100%;">
-<div style="font-size:10px;letter-spacing:2px;text-transform:uppercase;color:var(--dim);margin-bottom:8px;">ROADMAP</div>
-<div style="font-size:12px;color:var(--dim);padding:4px 0;border-bottom:1px solid var(--border);">→ Visual sequence builder</div><div style="font-size:12px;color:var(--dim);padding:4px 0;border-bottom:1px solid var(--border);">→ Trigger: webinar signup, form submit, purchase</div><div style="font-size:12px;color:var(--dim);padding:4px 0;border-bottom:1px solid var(--border);">→ Time delays and conditional branching</div><div style="font-size:12px;color:var(--dim);padding:4px 0;border-bottom:1px solid var(--border);">→ Webinar drip (existing 8-email sequence)</div><div style="font-size:12px;color:var(--dim);padding:4px 0;border-bottom:1px solid var(--border);">→ Post-engagement nurture sequences</div>
+<div class="panel-header"><h1 class="panel-title">🔁 Drip Sequences</h1>
+<div class="panel-actions">
+<button class="btn btn-primary" onclick="loadQueue()">View Queue →</button>
+</div>
+</div>
+<div class="content-body">
+<div style="background:var(--surface);border:1px solid var(--border);border-left:3px solid #4CAF72;padding:16px 20px;margin-bottom:24px;font-size:12px;color:var(--dim);line-height:1.7;">
+<strong style="color:#4CAF72;">LIVE:</strong> <span style="color:var(--text);">Webinar registration drip sequence is active.</span> New registrants are automatically enrolled in your 8-email follow-up sequence via <code style="font-family:'DM Mono',monospace;font-size:11px;color:var(--gold);">netlify/functions/send-drip.js</code>.
+</div>
+<div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;">
+<div style="background:var(--surface);border:1px solid var(--border);padding:20px;">
+<div style="font-size:10px;font-weight:700;letter-spacing:2px;color:#4CAF72;margin-bottom:10px;">ACTIVE SEQUENCE</div>
+<div style="font-size:13px;color:var(--text);font-weight:600;margin-bottom:8px;">Webinar Registration Flow</div>
+<div style="font-size:11px;color:var(--dim);line-height:2;">
+Trigger: Webinar registration form<br>
+Steps: 8 emails over 14 days<br>
+Status: <span style="color:#4CAF72;">Live</span><br>
+Managed via: Email Queue panel
+</div>
+</div>
+<div style="background:var(--surface);border:1px solid var(--border);border-style:dashed;padding:20px;opacity:0.6;">
+<div style="font-size:10px;font-weight:700;letter-spacing:2px;color:var(--dim);margin-bottom:10px;">PLANNED</div>
+<div style="font-size:13px;color:var(--dim);font-weight:600;margin-bottom:8px;">Post-Engagement Nurture</div>
+<div style="font-size:11px;color:var(--dim);line-height:2;">
+Trigger: Client offboarding<br>
+Steps: 6 emails over 30 days<br>
+Status: In roadmap
+</div>
+</div>
 </div>
 </div>
 </div>
 <div id="panel-email-subscribers" class="panel">
-<div class="panel-header"><h1 class="panel-title">👤 Subscribers</h1></div>
-<div class="coming-soon">
-<div class="cs-icon">👤</div>
-<h2>SUBSCRIBERS</h2>
-<p>Manage your full email list — segments, tags, suppression, and compliance.</p>
-<div class="cs-badge">Coming Next Build</div>
-<div style="margin-top:20px;text-align:left;max-width:360px;width:100%;">
-<div style="font-size:10px;letter-spacing:2px;text-transform:uppercase;color:var(--dim);margin-bottom:8px;">ROADMAP</div>
-<div style="font-size:12px;color:var(--dim);padding:4px 0;border-bottom:1px solid var(--border);">→ Import/export subscribers</div><div style="font-size:12px;color:var(--dim);padding:4px 0;border-bottom:1px solid var(--border);">→ Tag by source, service interest, stage</div><div style="font-size:12px;color:var(--dim);padding:4px 0;border-bottom:1px solid var(--border);">→ Unsubscribe and bounce management</div><div style="font-size:12px;color:var(--dim);padding:4px 0;border-bottom:1px solid var(--border);">→ GDPR/CAN-SPAM compliance tools</div><div style="font-size:12px;color:var(--dim);padding:4px 0;border-bottom:1px solid var(--border);">→ List health and engagement scores</div>
+<div class="panel-header"><h1 class="panel-title">👤 Subscribers</h1>
+<div class="panel-actions">
+<button class="btn btn-primary" onclick="loadSubscribers()">↻ Refresh</button>
+</div>
+</div>
+<div class="content-body">
+<div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(140px,1fr));gap:12px;margin-bottom:24px;">
+<div class="stat-card"><div class="stat-label">Total Subscribers</div><div class="stat-value" id="sub-total">—</div></div>
+<div class="stat-card"><div class="stat-label">This Month</div><div class="stat-value" id="sub-month" style="color:var(--gold);">—</div></div>
+</div>
+<div style="display:flex;gap:12px;margin-bottom:20px;">
+<input type="text" id="sub-search" placeholder="Search name, email..." oninput="filterSubscribers()" style="flex:1;background:var(--surface);border:1px solid var(--border);color:var(--text);padding:8px 12px;font-size:12px;outline:none;">
+</div>
+<div class="table-wrap">
+<table class="data-table">
+<thead><tr><th>Name</th><th>Email</th><th>Company</th><th>Title</th><th>Source</th><th>Subscribed</th></tr></thead>
+<tbody id="sub-tbody">
+<tr><td colspan="6" style="text-align:center;color:var(--dim);padding:32px;">Loading subscribers...</td></tr>
+</tbody>
+</table>
 </div>
 </div>
 </div>
 <div id="panel-rev-transactions" class="panel">
-<div class="panel-header"><h1 class="panel-title">💳 Transactions</h1></div>
-<div class="coming-soon">
-<div class="cs-icon">💳</div>
-<h2>TRANSACTIONS</h2>
-<p>All Square payment transactions in one view — purchases, refunds, and status.</p>
-<div class="cs-badge">Coming Next Build</div>
-<div style="margin-top:20px;text-align:left;max-width:360px;width:100%;">
-<div style="font-size:10px;letter-spacing:2px;text-transform:uppercase;color:var(--dim);margin-bottom:8px;">ROADMAP</div>
-<div style="font-size:12px;color:var(--dim);padding:4px 0;border-bottom:1px solid var(--border);">→ Pull from Square API</div><div style="font-size:12px;color:var(--dim);padding:4px 0;border-bottom:1px solid var(--border);">→ Filter by product, date, amount</div><div style="font-size:12px;color:var(--dim);padding:4px 0;border-bottom:1px solid var(--border);">→ Refund management</div><div style="font-size:12px;color:var(--dim);padding:4px 0;border-bottom:1px solid var(--border);">→ Link transactions to contacts in CRM</div><div style="font-size:12px;color:var(--dim);padding:4px 0;border-bottom:1px solid var(--border);">→ Export to CSV for accounting</div>
+<div class="panel-header"><h1 class="panel-title">💳 Transactions</h1>
+<div class="panel-actions">
+<a href="https://squareup.com/dashboard/sales/transactions" target="_blank" class="btn btn-outline">Open Square →</a>
+<button class="btn btn-primary" onclick="loadInvoices()">View Invoices</button>
+</div>
+</div>
+<div class="content-body">
+<div style="background:var(--surface);border:1px solid var(--border);border-left:3px solid var(--gold);padding:24px;margin-bottom:24px;">
+<div style="font-size:13px;font-weight:600;color:var(--text);margin-bottom:8px;">Payment Transactions via Square</div>
+<div style="font-size:12px;color:var(--dim);line-height:1.8;">Course purchases and one-time payments process through Square. Click above to view all transactions in your Square dashboard. Consulting invoices are tracked in the Invoices panel.</div>
+</div>
+<div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:14px;">
+<a href="https://squareup.com/dashboard/sales/transactions" target="_blank" style="display:block;background:var(--surface);border:1px solid var(--border);padding:20px;text-decoration:none;" onmouseover="this.style.borderColor='rgba(201,168,76,0.4)'" onmouseout="this.style.borderColor='var(--border)'">
+<div style="font-size:10px;font-weight:700;letter-spacing:2px;color:var(--gold);margin-bottom:6px;">💳 TRANSACTIONS</div>
+<div style="font-size:13px;color:var(--text);">All Transactions</div>
+<div style="font-size:11px;color:var(--dim);margin-top:4px;">Filter by date, amount, product</div>
+</a>
+<a href="https://squareup.com/dashboard/reports" target="_blank" style="display:block;background:var(--surface);border:1px solid var(--border);padding:20px;text-decoration:none;" onmouseover="this.style.borderColor='rgba(201,168,76,0.4)'" onmouseout="this.style.borderColor='var(--border)'">
+<div style="font-size:10px;font-weight:700;letter-spacing:2px;color:var(--gold);margin-bottom:6px;">📊 REPORTS</div>
+<div style="font-size:13px;color:var(--text);">Sales Reports</div>
+<div style="font-size:11px;color:var(--dim);margin-top:4px;">Daily, weekly, and monthly summaries</div>
+</a>
+<a href="https://squareup.com/dashboard/customers" target="_blank" style="display:block;background:var(--surface);border:1px solid var(--border);padding:20px;text-decoration:none;" onmouseover="this.style.borderColor='rgba(201,168,76,0.4)'" onmouseout="this.style.borderColor='var(--border)'">
+<div style="font-size:10px;font-weight:700;letter-spacing:2px;color:var(--gold);margin-bottom:6px;">👤 BUYERS</div>
+<div style="font-size:13px;color:var(--text);">Square Customers</div>
+<div style="font-size:11px;color:var(--dim);margin-top:4px;">Buyer profiles and purchase history</div>
+</a>
 </div>
 </div>
 </div>
 <div id="panel-rev-invoices" class="panel">
-<div class="panel-header"><h1 class="panel-title">🧾 Invoices</h1></div>
-<div class="coming-soon">
-<div class="cs-icon">🧾</div>
-<h2>INVOICES</h2>
-<p>Create, send, and track professional invoices for all consulting engagements.</p>
-<div class="cs-badge">Coming Next Build</div>
-<div style="margin-top:20px;text-align:left;max-width:360px;width:100%;">
-<div style="font-size:10px;letter-spacing:2px;text-transform:uppercase;color:var(--dim);margin-bottom:8px;">ROADMAP</div>
-<div style="font-size:12px;color:var(--dim);padding:4px 0;border-bottom:1px solid var(--border);">→ Invoice builder with your branding</div><div style="font-size:12px;color:var(--dim);padding:4px 0;border-bottom:1px solid var(--border);">→ Line items for retainer, project, expenses</div><div style="font-size:12px;color:var(--dim);padding:4px 0;border-bottom:1px solid var(--border);">→ Send via email with Square payment link</div><div style="font-size:12px;color:var(--dim);padding:4px 0;border-bottom:1px solid var(--border);">→ Track paid/outstanding/overdue</div><div style="font-size:12px;color:var(--dim);padding:4px 0;border-bottom:1px solid var(--border);">→ Monthly auto-invoicing for retainers</div>
+<div class="panel-header"><h1 class="panel-title">🧾 Revenue Invoices</h1>
+<div class="panel-actions">
+<button class="btn btn-primary" onclick="loadInvoices()">↻ Refresh</button>
+</div>
+</div>
+<div class="content-body">
+<div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(140px,1fr));gap:12px;margin-bottom:24px;">
+<div class="stat-card"><div class="stat-label">Total Billed</div><div class="stat-value" id="revinv-billed" style="color:var(--gold);">—</div></div>
+<div class="stat-card"><div class="stat-label">Collected</div><div class="stat-value" id="revinv-paid" style="color:#4CAF72;">—</div></div>
+<div class="stat-card"><div class="stat-label">Outstanding</div><div class="stat-value" id="revinv-out" style="color:#f0a050;">—</div></div>
+<div class="stat-card"><div class="stat-label">Overdue</div><div class="stat-value" id="revinv-over" style="color:#ef4444;">—</div></div>
+</div>
+<div class="table-wrap">
+<table class="data-table">
+<thead><tr><th>Invoice #</th><th>Client</th><th>Amount</th><th>Status</th><th>Due</th><th>Paid</th></tr></thead>
+<tbody id="revinv-tbody">
+<tr><td colspan="6" style="text-align:center;color:var(--dim);padding:32px;">Loading invoices...</td></tr>
+</tbody>
+</table>
 </div>
 </div>
 </div>
 <div id="panel-rev-products" class="panel">
-<div class="panel-header"><h1 class="panel-title">🏷 Products & Pricing</h1></div>
-<div class="coming-soon">
-<div class="cs-icon">🏷</div>
-<h2>PRODUCTS & PRICING</h2>
-<p>Manage all your service offerings, prices, and Square payment links in one place.</p>
-<div class="cs-badge">Coming Next Build</div>
-<div style="margin-top:20px;text-align:left;max-width:360px;width:100%;">
-<div style="font-size:10px;letter-spacing:2px;text-transform:uppercase;color:var(--dim);margin-bottom:8px;">ROADMAP</div>
-<div style="font-size:12px;color:var(--dim);padding:4px 0;border-bottom:1px solid var(--border);">→ CMO Audit & Sprint — from $1,000</div><div style="font-size:12px;color:var(--dim);padding:4px 0;border-bottom:1px solid var(--border);">→ VIP Strategy Day — $2,500</div><div style="font-size:12px;color:var(--dim);padding:4px 0;border-bottom:1px solid var(--border);">→ Fractional CMO Retainer — $5k-$15k/mo</div><div style="font-size:12px;color:var(--dim);padding:4px 0;border-bottom:1px solid var(--border);">→ Revenue Leak Playbook — $100</div><div style="font-size:12px;color:var(--dim);padding:4px 0;border-bottom:1px solid var(--border);">→ CMO Accelerator Kit — $50</div>
+<div class="panel-header"><h1 class="panel-title">🏷 Products & Pricing</h1>
+<div class="panel-actions">
+<a href="https://squareup.com/dashboard/items/library" target="_blank" class="btn btn-outline">Edit in Square →</a>
+</div>
+</div>
+<div class="content-body">
+<div class="table-wrap">
+<table class="data-table">
+<thead><tr><th>Product</th><th>Price</th><th>Type</th><th>Square Pay Link</th><th>Status</th></tr></thead>
+<tbody>
+<tr><td><strong>Fractional CMO Retainer</strong></td><td style="color:var(--gold);">$5,000 - $15,000/mo</td><td>Retainer</td><td><a href="https://squareup.com/dashboard/items/library" target="_blank" style="color:var(--gold);font-size:11px;">Configure in Square →</a></td><td><span style="color:#4CAF72;font-size:11px;">● ACTIVE</span></td></tr>
+<tr><td><strong>CMO Audit &amp; Sprint</strong></td><td style="color:var(--gold);">$1,000</td><td>One-Time</td><td><a href="https://square.link/u/kLKYt0W3" target="_blank" style="color:var(--gold);font-size:11px;">square.link/u/kLKYt0W3 →</a></td><td><span style="color:#4CAF72;font-size:11px;">● ACTIVE</span></td></tr>
+<tr><td><strong>VIP Strategy Day</strong></td><td style="color:var(--gold);">$2,500</td><td>One-Time</td><td><a href="https://square.link/u/xZr7xL1L2500" target="_blank" style="color:var(--gold);font-size:11px;">square.link/u/xZr7xL1L2500 →</a></td><td><span style="color:#4CAF72;font-size:11px;">● ACTIVE</span></td></tr>
+<tr><td><strong>Revenue Leak Playbook</strong></td><td style="color:var(--gold);">$100</td><td>Digital Product</td><td><a href="https://square.link/u/aWWEtFwC" target="_blank" style="color:var(--gold);font-size:11px;">square.link/u/aWWEtFwC →</a></td><td><span style="color:#4CAF72;font-size:11px;">● ACTIVE</span></td></tr>
+<tr><td><strong>CMO Accelerator Kit</strong></td><td style="color:var(--gold);">$50</td><td>Digital Product</td><td><a href="https://square.link/u/vU2gDuuq" target="_blank" style="color:var(--gold);font-size:11px;">square.link/u/vU2gDuuq →</a></td><td><span style="color:#4CAF72;font-size:11px;">● ACTIVE</span></td></tr>
+<tr><td><strong>Fractional COO Retainer</strong></td><td style="color:var(--gold);">$5,000 - $12,000/mo</td><td>Retainer</td><td><span style="color:var(--dim);font-size:11px;">Custom quote</span></td><td><span style="color:#4CAF72;font-size:11px;">● ACTIVE</span></td></tr>
+<tr><td><strong>Board Advisory</strong></td><td style="color:var(--gold);">Equity + Cash</td><td>Advisory</td><td><span style="color:var(--dim);font-size:11px;">Custom agreement</span></td><td><span style="color:#4CAF72;font-size:11px;">● ACTIVE</span></td></tr>
+</tbody>
+</table>
 </div>
 </div>
 </div>
 <div id="panel-rev-reports" class="panel">
-<div class="panel-header"><h1 class="panel-title">📈 Revenue Reports</h1></div>
-<div class="coming-soon">
-<div class="cs-icon">📈</div>
-<h2>REVENUE REPORTS</h2>
-<p>Monthly and annual revenue dashboards — MRR, one-time, pipeline, and projections.</p>
-<div class="cs-badge">Coming Next Build</div>
-<div style="margin-top:20px;text-align:left;max-width:360px;width:100%;">
-<div style="font-size:10px;letter-spacing:2px;text-transform:uppercase;color:var(--dim);margin-bottom:8px;">ROADMAP</div>
-<div style="font-size:12px;color:var(--dim);padding:4px 0;border-bottom:1px solid var(--border);">→ Monthly recurring revenue (MRR)</div><div style="font-size:12px;color:var(--dim);padding:4px 0;border-bottom:1px solid var(--border);">→ One-time project revenue</div><div style="font-size:12px;color:var(--dim);padding:4px 0;border-bottom:1px solid var(--border);">→ Pipeline value and close probability</div><div style="font-size:12px;color:var(--dim);padding:4px 0;border-bottom:1px solid var(--border);">→ Revenue by service line</div><div style="font-size:12px;color:var(--dim);padding:4px 0;border-bottom:1px solid var(--border);">→ YoY growth charts</div>
+<div class="panel-header"><h1 class="panel-title">📈 Revenue Reports</h1>
+<div class="panel-actions">
+<button class="btn btn-primary" onclick="loadRevenueReport()">↻ Refresh</button>
+</div>
+</div>
+<div class="content-body">
+<div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(160px,1fr));gap:12px;margin-bottom:28px;">
+<div class="stat-card"><div class="stat-label">Total Billed (All Time)</div><div class="stat-value" id="rr-total" style="color:var(--gold);">—</div></div>
+<div class="stat-card"><div class="stat-label">Collected</div><div class="stat-value" id="rr-collected" style="color:#4CAF72;">—</div></div>
+<div class="stat-card"><div class="stat-label">Outstanding</div><div class="stat-value" id="rr-outstanding" style="color:#f0a050;">—</div></div>
+<div class="stat-card"><div class="stat-label">Active Retainers</div><div class="stat-value" id="rr-retainers">—</div></div>
+<div class="stat-card"><div class="stat-label">Avg Invoice</div><div class="stat-value" id="rr-avg">—</div></div>
+<div class="stat-card"><div class="stat-label">Invoices This Mo.</div><div class="stat-value" id="rr-month">—</div></div>
+</div>
+<div class="table-wrap">
+<div class="table-header"><div class="table-title">Breakdown by Status</div></div>
+<table class="data-table">
+<thead><tr><th>Status</th><th>Count</th><th>Total Amount</th><th>% of Billed</th></tr></thead>
+<tbody id="rr-tbody">
+<tr><td colspan="4" style="text-align:center;color:var(--dim);padding:32px;">Loading revenue data...</td></tr>
+</tbody>
+</table>
+</div>
+<div style="margin-top:16px;background:var(--surface);border:1px solid var(--border);border-left:3px solid var(--gold);padding:14px 18px;font-size:11px;color:var(--dim);line-height:1.7;">
+Course revenue is tracked separately in <a onclick="switchPanel('courses-revenue',null)" style="color:var(--gold);cursor:pointer;">Academy → Course Revenue</a>. Square transactions visible at <a href="https://squareup.com/dashboard/reports" target="_blank" style="color:var(--gold);">squareup.com/dashboard →</a>
 </div>
 </div>
 </div>
@@ -2097,54 +2341,91 @@ Generate unique tracked links to send clients to your forms and documents. Each 
 </div>
 </div>
 <div id="panel-analytics-traffic" class="panel">
-<div class="panel-header"><h1 class="panel-title">🌐 Site Traffic</h1></div>
-<div class="coming-soon">
-<div class="cs-icon">🌐</div>
-<h2>SITE TRAFFIC</h2>
-<p>Google Analytics integration to track visitors, pages, and traffic sources.</p>
-<div class="cs-badge">Coming Next Build</div>
-<div style="margin-top:20px;text-align:left;max-width:360px;width:100%;">
-<div style="font-size:10px;letter-spacing:2px;text-transform:uppercase;color:var(--dim);margin-bottom:8px;">ROADMAP</div>
-<div style="font-size:12px;color:var(--dim);padding:4px 0;border-bottom:1px solid var(--border);">→ Total sessions, users, pageviews</div><div style="font-size:12px;color:var(--dim);padding:4px 0;border-bottom:1px solid var(--border);">→ Top pages and entry points</div><div style="font-size:12px;color:var(--dim);padding:4px 0;border-bottom:1px solid var(--border);">→ Traffic source breakdown (organic, social, direct, referral)</div><div style="font-size:12px;color:var(--dim);padding:4px 0;border-bottom:1px solid var(--border);">→ Geographic breakdown</div><div style="font-size:12px;color:var(--dim);padding:4px 0;border-bottom:1px solid var(--border);">→ Device and browser data</div>
+<div class="panel-header"><h1 class="panel-title">🌐 Site Traffic</h1>
+<div class="panel-actions">
+<a href="https://analytics.google.com/" target="_blank" class="btn btn-outline">Open GA4 →</a>
+</div>
+</div>
+<div class="content-body">
+<div style="background:var(--surface);border:1px solid var(--border);border-left:3px solid var(--gold);padding:20px;margin-bottom:24px;">
+<div style="font-size:13px;font-weight:600;color:var(--text);margin-bottom:8px;">Traffic via Google Analytics 4</div>
+<div style="font-size:12px;color:var(--dim);line-height:1.8;">Your site traffic data lives in GA4. The embedded report below shows live data for markcmo.com.</div>
+</div>
+<div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:14px;">
+<a href="https://analytics.google.com/analytics/web/#/p[your-ga4-id]/reports/reportinghub" target="_blank" style="display:block;background:var(--surface);border:1px solid var(--border);padding:20px;text-decoration:none;" onmouseover="this.style.borderColor='rgba(201,168,76,0.4)'" onmouseout="this.style.borderColor='var(--border)'">
+<div style="font-size:10px;font-weight:700;letter-spacing:2px;color:var(--gold);margin-bottom:6px;">📊 OVERVIEW</div>
+<div style="font-size:13px;color:var(--text);">Traffic Overview</div>
+<div style="font-size:11px;color:var(--dim);margin-top:4px;">Sessions, users, bounce rate</div>
+</a>
+<a href="https://analytics.google.com/analytics/web/#/p[your-ga4-id]/reports/explorer" target="_blank" style="display:block;background:var(--surface);border:1px solid var(--border);padding:20px;text-decoration:none;" onmouseover="this.style.borderColor='rgba(201,168,76,0.4)'" onmouseout="this.style.borderColor='var(--border)'">
+<div style="font-size:10px;font-weight:700;letter-spacing:2px;color:var(--gold);margin-bottom:6px;">📄 PAGES</div>
+<div style="font-size:13px;color:var(--text);">Top Pages</div>
+<div style="font-size:11px;color:var(--dim);margin-top:4px;">Most visited pages and entry points</div>
+</a>
+<a href="https://analytics.google.com/analytics/web/#/p[your-ga4-id]/reports/acquisition-overview" target="_blank" style="display:block;background:var(--surface);border:1px solid var(--border);padding:20px;text-decoration:none;" onmouseover="this.style.borderColor='rgba(201,168,76,0.4)'" onmouseout="this.style.borderColor='var(--border)'">
+<div style="font-size:10px;font-weight:700;letter-spacing:2px;color:var(--gold);margin-bottom:6px;">🔗 SOURCES</div>
+<div style="font-size:13px;color:var(--text);">Traffic Sources</div>
+<div style="font-size:11px;color:var(--dim);margin-top:4px;">Organic, social, direct, referral</div>
+</a>
 </div>
 </div>
 </div>
 <div id="panel-analytics-leads" class="panel">
-<div class="panel-header"><h1 class="panel-title">🎯 Lead Sources</h1></div>
-<div class="coming-soon">
-<div class="cs-icon">🎯</div>
-<h2>LEAD SOURCES</h2>
-<p>Track where your best leads come from and which channels convert.</p>
-<div class="cs-badge">Coming Next Build</div>
-<div style="margin-top:20px;text-align:left;max-width:360px;width:100%;">
-<div style="font-size:10px;letter-spacing:2px;text-transform:uppercase;color:var(--dim);margin-bottom:8px;">ROADMAP</div>
-<div style="font-size:12px;color:var(--dim);padding:4px 0;border-bottom:1px solid var(--border);">→ Lead source attribution (webinar, referral, SEO, social)</div><div style="font-size:12px;color:var(--dim);padding:4px 0;border-bottom:1px solid var(--border);">→ Cost per lead by channel</div><div style="font-size:12px;color:var(--dim);padding:4px 0;border-bottom:1px solid var(--border);">→ Lead-to-client conversion by source</div><div style="font-size:12px;color:var(--dim);padding:4px 0;border-bottom:1px solid var(--border);">→ Monthly lead volume trends</div><div style="font-size:12px;color:var(--dim);padding:4px 0;border-bottom:1px solid var(--border);">→ Source quality score</div>
+<div class="panel-header"><h1 class="panel-title">🎯 Lead Sources</h1>
+<div class="panel-actions">
+<button class="btn btn-primary" onclick="loadLeadSources()">↻ Refresh</button>
+</div>
+</div>
+<div class="content-body">
+<div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(140px,1fr));gap:12px;margin-bottom:24px;">
+<div class="stat-card"><div class="stat-label">Total Leads</div><div class="stat-value" id="ls-total">—</div></div>
+<div class="stat-card"><div class="stat-label">This Month</div><div class="stat-value" id="ls-month" style="color:var(--gold);">—</div></div>
+<div class="stat-card"><div class="stat-label">Top Source</div><div class="stat-value" id="ls-top" style="font-size:13px;letter-spacing:0;">—</div></div>
+</div>
+<div class="table-wrap">
+<div class="table-header"><div class="table-title">Leads by Source</div></div>
+<table class="data-table">
+<thead><tr><th>Source</th><th>Leads</th><th>% of Total</th></tr></thead>
+<tbody id="ls-tbody">
+<tr><td colspan="3" style="text-align:center;color:var(--dim);padding:32px;">Loading lead source data...</td></tr>
+</tbody>
+</table>
 </div>
 </div>
 </div>
 <div id="panel-analytics-funnel" class="panel">
-<div class="panel-header"><h1 class="panel-title">🔽 Conversion Funnel</h1></div>
-<div class="coming-soon">
-<div class="cs-icon">🔽</div>
-<h2>CONVERSION FUNNEL</h2>
-<p>Visualize your full funnel from visitor to paid client.</p>
-<div class="cs-badge">Coming Next Build</div>
-<div style="margin-top:20px;text-align:left;max-width:360px;width:100%;">
-<div style="font-size:10px;letter-spacing:2px;text-transform:uppercase;color:var(--dim);margin-bottom:8px;">ROADMAP</div>
-<div style="font-size:12px;color:var(--dim);padding:4px 0;border-bottom:1px solid var(--border);">→ Visitor → Lead conversion rate</div><div style="font-size:12px;color:var(--dim);padding:4px 0;border-bottom:1px solid var(--border);">→ Lead → Webinar registrant rate</div><div style="font-size:12px;color:var(--dim);padding:4px 0;border-bottom:1px solid var(--border);">→ Webinar → Paid offer conversion</div><div style="font-size:12px;color:var(--dim);padding:4px 0;border-bottom:1px solid var(--border);">→ Proposal → Signed client rate</div><div style="font-size:12px;color:var(--dim);padding:4px 0;border-bottom:1px solid var(--border);">→ Identify biggest drop-off points</div>
+<div class="panel-header"><h1 class="panel-title">🔽 Conversion Funnel</h1>
+<div class="panel-actions">
+<button class="btn btn-primary" onclick="loadFunnelData()">↻ Refresh</button>
+</div>
+</div>
+<div class="content-body">
+<div style="max-width:600px;margin:0 auto;" id="funnel-container">
+<div style="text-align:center;color:var(--dim);padding:32px;">Loading funnel data...</div>
 </div>
 </div>
 </div>
 <div id="panel-analytics-revenue" class="panel">
-<div class="panel-header"><h1 class="panel-title">💹 Revenue Analytics</h1></div>
-<div class="coming-soon">
-<div class="cs-icon">💹</div>
-<h2>REVENUE ANALYTICS</h2>
-<p>Full revenue attribution — which marketing activity drives income.</p>
-<div class="cs-badge">Coming Next Build</div>
-<div style="margin-top:20px;text-align:left;max-width:360px;width:100%;">
-<div style="font-size:10px;letter-spacing:2px;text-transform:uppercase;color:var(--dim);margin-bottom:8px;">ROADMAP</div>
-<div style="font-size:12px;color:var(--dim);padding:4px 0;border-bottom:1px solid var(--border);">→ Revenue by channel and campaign</div><div style="font-size:12px;color:var(--dim);padding:4px 0;border-bottom:1px solid var(--border);">→ Customer acquisition cost (CAC)</div><div style="font-size:12px;color:var(--dim);padding:4px 0;border-bottom:1px solid var(--border);">→ Lifetime value (LTV) by service type</div><div style="font-size:12px;color:var(--dim);padding:4px 0;border-bottom:1px solid var(--border);">→ Retainer churn rate</div><div style="font-size:12px;color:var(--dim);padding:4px 0;border-bottom:1px solid var(--border);">→ Pipeline velocity</div>
+<div class="panel-header"><h1 class="panel-title">💹 Revenue Analytics</h1>
+<div class="panel-actions">
+<button class="btn btn-primary" onclick="loadRevenueReport()">↻ Refresh</button>
+</div>
+</div>
+<div class="content-body">
+<div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(160px,1fr));gap:12px;margin-bottom:28px;">
+<div class="stat-card"><div class="stat-label">All-Time Billed</div><div class="stat-value" id="ar-total" style="color:var(--gold);">—</div></div>
+<div class="stat-card"><div class="stat-label">Collected</div><div class="stat-value" id="ar-collected" style="color:#4CAF72;">—</div></div>
+<div class="stat-card"><div class="stat-label">Outstanding</div><div class="stat-value" id="ar-out" style="color:#f0a050;">—</div></div>
+<div class="stat-card"><div class="stat-label">Active Clients</div><div class="stat-value" id="ar-clients">—</div></div>
+</div>
+<div class="table-wrap">
+<div class="table-header"><div class="table-title">Revenue by Invoice Status</div></div>
+<table class="data-table">
+<thead><tr><th>Status</th><th>Count</th><th>Amount</th><th>% of Total</th></tr></thead>
+<tbody id="ar-tbody">
+<tr><td colspan="4" style="text-align:center;color:var(--dim);padding:32px;">Loading revenue analytics...</td></tr>
+</tbody>
+</table>
 </div>
 </div>
 </div>
@@ -2280,7 +2561,7 @@ style="background:var(--bg);border:1px solid var(--border);color:var(--text);pad
 </div>
 </div>
 </div>
-<div id="panel-sg-overview" class="panel active">
+<div id="panel-sg-overview" class="panel">
 <div class="top-bar">
 <div class="page-title">SOCIAL GROWTH INTELLIGENCE</div>
 <div class="page-actions">
@@ -3008,6 +3289,8 @@ function initApp() {
   loadDocs();
   loadLinks();
   setupDragDrop();
+  // Pre-populate panels from settings
+  setTimeout(populateWebinarSchedule, 500);
 }
 function refreshAll() {
   loadLeads();
@@ -3033,7 +3316,7 @@ function toggleGroup(header) {
 }
 function switchPanel(id, el) {
   document.querySelectorAll('.panel').forEach(p => p.classList.remove('active'));
-  document.querySelectorAll('.nav-item, .nav-sub').forEach(n => n.classList.remove('active'));
+  document.querySelectorAll('.nav-item, .nav-sub, .admin-nav-item').forEach(n => n.classList.remove('active'));
   if (el && el.classList.contains('nav-sub')) {
     const group = el.closest('.nav-group');
     if (group) {
@@ -3046,9 +3329,25 @@ function switchPanel(id, el) {
   el.classList.add('active');
   // Auto-load data
   if (['courses-overview','courses-enrollments','courses-graduates','courses-revenue'].includes(id)) loadCoursesData();
-  else if (id === 'courses-votes')  loadVotesData();
-  else if (id === 'courses-notify') loadNotifyData();
-  else if (id === 'courses-intl')   loadIntlData();
+  else if (id === 'courses-votes')    loadVotesData();
+  else if (id === 'courses-notify')   loadNotifyData();
+  else if (id === 'courses-intl')     loadIntlData();
+  else if (id === 'crm-contacts')     loadContacts();
+  else if (id === 'crm-clients')      loadClients();
+  else if (id === 'crm-pipeline')     loadPipeline();
+  else if (id === 'crm-notes')        loadAuditLog();
+  else if (id === 'eng-projects')     loadEngagements();
+  else if (id === 'eng-proposals')    loadDocs('proposal');
+  else if (id === 'eng-contracts')    loadDocs('contract');
+  else if (id === 'eng-invoices')     loadInvoices();
+  else if (id === 'forms-submissions') loadFormSubmissions();
+  else if (id === 'email-subscribers') loadSubscribers();
+  else if (id === 'rev-invoices')     loadInvoices();
+  else if (id === 'rev-reports')      loadRevenueReport();
+  else if (id === 'analytics-leads')  loadLeadSources();
+  else if (id === 'analytics-funnel') loadFunnelData();
+  else if (id === 'analytics-revenue') loadRevenueReport();
+  else if (id === 'webinar-schedule') populateWebinarSchedule();
 }
 // ─── DATA LOADING (via admin-proxy function) ──────────────────────────────────
 async function loadLeads() {
@@ -3586,9 +3885,417 @@ function detectCategory(name) {
   if (n.includes('recording') || n.includes('replay') || n.includes('.mp4') || n.includes('.mp4') || n.includes('.mov')) return 'recording';
   return 'other';
 }
-</script>
-<script>
-// ── SOCIAL GROWTH INTELLIGENCE JS ──────────────────────────
+
+// ─── ADMIN DATA HELPER ───────────────────────────────────────────────────────
+async function adminFetch(type) {
+  const res = await fetch(`/.netlify/functions/admin-data?type=${type}`);
+  if (!res.ok) throw new Error(`admin-data?type=${type} → ${res.status}`);
+  return res.json();
+}
+function fmt$(n) {
+  if (n == null || isNaN(n)) return '—';
+  return '$' + Number(n).toLocaleString('en-US', { minimumFractionDigits: 0, maximumFractionDigits: 0 });
+}
+function fmtDate(d) {
+  if (!d) return '—';
+  return new Date(d).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' });
+}
+function statusBadge(s) {
+  const map = {
+    active:   ['#4CAF72','ACTIVE'],
+    paid:     ['#4CAF72','PAID'],
+    completed:['#4CAF72','DONE'],
+    pending:  ['#f0a050','PENDING'],
+    sent:     ['#f0a050','SENT'],
+    outstanding:['#f0a050','OUTSTANDING'],
+    overdue:  ['#ef4444','OVERDUE'],
+    draft:    ['#888','DRAFT'],
+    cancelled:['#888','CANCELLED'],
+    paused:   ['#888','PAUSED'],
+  };
+  const [c, label] = map[(s||'').toLowerCase()] || ['#888', (s||'—').toUpperCase()];
+  return `<span style="color:${c};font-size:10px;font-weight:700;letter-spacing:1px;">● ${label}</span>`;
+}
+
+// ─── CRM CONTACTS (from webinar leads) ──────────────────────────────────────
+let allContacts = [];
+async function loadContacts() {
+  document.getElementById('contacts-tbody').innerHTML = '<tr><td colspan="7" style="text-align:center;color:var(--dim);padding:32px;">Loading...</td></tr>';
+  try {
+    const d = await adminFetch('leads');
+    allContacts = (d.leads || []).slice().reverse();
+    renderContacts();
+    document.getElementById('contacts-count').textContent = `${allContacts.length} contacts`;
+  } catch(e) {
+    document.getElementById('contacts-tbody').innerHTML = `<tr><td colspan="7" style="text-align:center;color:#ef4444;padding:32px;">${e.message}</td></tr>`;
+  }
+}
+function renderContacts() {
+  const q = (document.getElementById('contacts-search')?.value || '').toLowerCase();
+  const rows = allContacts.filter(c => !q || [c.name,c.email,c.company,c.title].some(v=>(v||'').toLowerCase().includes(q)));
+  document.getElementById('contacts-tbody').innerHTML = rows.length ? rows.map(c => `<tr>
+    <td style="font-weight:500;">${c.name||'—'}</td>
+    <td style="font-family:'DM Mono',monospace;font-size:11px;">${c.email||'—'}</td>
+    <td>${c.company||'—'}</td>
+    <td style="color:var(--dim);">${c.title||'—'}</td>
+    <td><span style="font-size:11px;background:rgba(201,168,76,0.1);color:var(--gold);padding:2px 8px;">${c.source||'webinar'}</span></td>
+    <td style="color:var(--dim);font-size:11px;">${fmtDate(c.registeredAt||c.date||c.ts)}</td>
+    <td>${statusBadge(c.status||'active')}</td>
+  </tr>`).join('') : '<tr><td colspan="7" style="text-align:center;color:var(--dim);padding:32px;">No contacts found.</td></tr>';
+  document.getElementById('contacts-count').textContent = `${rows.length} of ${allContacts.length} contacts`;
+}
+function filterContacts() { renderContacts(); }
+
+// ─── CRM CLIENTS (Supabase mc_clients) ───────────────────────────────────────
+async function loadClients() {
+  document.getElementById('clients-tbody').innerHTML = '<tr><td colspan="7" style="text-align:center;color:var(--dim);padding:32px;">Loading...</td></tr>';
+  try {
+    const d = await adminFetch('clients');
+    const rows = d.clients || [];
+    document.getElementById('cl-total').textContent = rows.length;
+    document.getElementById('cl-active').textContent = rows.filter(r=>r.status==='active').length;
+    document.getElementById('cl-paused').textContent = rows.filter(r=>r.status==='paused').length;
+    const mrr = rows.filter(r=>r.status==='active').reduce((s,r)=>s+(r.monthly_retainer||0),0);
+    document.getElementById('cl-mrr').textContent = fmt$(mrr);
+    document.getElementById('clients-count').textContent = `${rows.length} clients`;
+    document.getElementById('clients-tbody').innerHTML = rows.length ? rows.map(r => `<tr>
+      <td style="font-weight:600;">${r.company_name||'—'}</td>
+      <td>${r.contact_name||'—'}</td>
+      <td style="font-family:'DM Mono',monospace;font-size:11px;">${r.email||'—'}</td>
+      <td><span style="font-size:11px;background:rgba(201,168,76,0.1);color:var(--gold);padding:2px 8px;">${r.engagement_type||'—'}</span></td>
+      <td style="color:var(--gold);">${fmt$(r.monthly_retainer)}/mo</td>
+      <td>${statusBadge(r.status)}</td>
+      <td style="color:var(--dim);font-size:11px;">${fmtDate(r.start_date)}</td>
+    </tr>`).join('') : '<tr><td colspan="7" style="text-align:center;color:var(--dim);padding:32px;">No clients yet. Add your first client in Supabase → mc_clients.</td></tr>';
+  } catch(e) {
+    document.getElementById('clients-tbody').innerHTML = `<tr><td colspan="7" style="text-align:center;color:#ef4444;padding:32px;">${e.message}</td></tr>`;
+  }
+}
+
+// ─── CRM PIPELINE (from webinar leads, staged by field) ──────────────────────
+let pipelineData = [];
+async function loadPipeline() {
+  document.getElementById('pipeline-tbody').innerHTML = '<tr><td colspan="7" style="text-align:center;color:var(--dim);padding:32px;">Loading...</td></tr>';
+  try {
+    const d = await adminFetch('leads');
+    pipelineData = (d.leads || []).slice().reverse();
+    const stages = ['new','qualified','proposal','negotiation','won'];
+    stages.forEach(st => {
+      const el = document.getElementById('pip-'+st);
+      if (el) el.textContent = pipelineData.filter(l=>(l.pipelineStage||'new')===st).length;
+    });
+    document.getElementById('pipeline-tbody').innerHTML = pipelineData.length ? pipelineData.map(l => `<tr>
+      <td style="font-weight:500;">${l.name||'—'}</td>
+      <td style="font-family:'DM Mono',monospace;font-size:11px;">${l.email||'—'}</td>
+      <td>${l.company||'—'}</td>
+      <td style="color:var(--dim);">${l.title||'—'}</td>
+      <td>${statusBadge(l.pipelineStage||'new')}</td>
+      <td><span style="font-size:11px;">${l.source||'webinar'}</span></td>
+      <td style="color:var(--dim);font-size:11px;">${fmtDate(l.registeredAt||l.date||l.ts)}</td>
+    </tr>`).join('') : '<tr><td colspan="7" style="text-align:center;color:var(--dim);padding:32px;">No leads in pipeline yet.</td></tr>';
+  } catch(e) {
+    document.getElementById('pipeline-tbody').innerHTML = `<tr><td colspan="7" style="text-align:center;color:#ef4444;padding:32px;">${e.message}</td></tr>`;
+  }
+}
+
+// ─── CRM NOTES / AUDIT LOG (Supabase mc_audit_log) ───────────────────────────
+let auditData = [];
+async function loadAuditLog() {
+  document.getElementById('audit-tbody').innerHTML = '<tr><td colspan="5" style="text-align:center;color:var(--dim);padding:32px;">Loading...</td></tr>';
+  try {
+    const d = await adminFetch('audit');
+    auditData = d.audit || [];
+    renderAudit();
+    document.getElementById('audit-count').textContent = `${auditData.length} events`;
+  } catch(e) {
+    document.getElementById('audit-tbody').innerHTML = `<tr><td colspan="5" style="text-align:center;color:#ef4444;padding:32px;">${e.message}</td></tr>`;
+  }
+}
+function renderAudit() {
+  const q = (document.getElementById('audit-search')?.value||'').toLowerCase();
+  const rows = auditData.filter(r => !q || JSON.stringify(r).toLowerCase().includes(q));
+  document.getElementById('audit-tbody').innerHTML = rows.length ? rows.map(r => `<tr>
+    <td style="font-family:'DM Mono',monospace;font-size:10px;color:var(--dim);">${fmtDate(r.created_at)}</td>
+    <td><span style="font-size:11px;background:rgba(201,168,76,0.1);color:var(--gold);padding:2px 8px;">${r.action||'—'}</span></td>
+    <td style="color:var(--dim);">${r.entity_type||'—'}</td>
+    <td style="font-size:11px;">${r.detail||r.note||'—'}</td>
+    <td style="color:var(--dim);font-size:11px;">${r.user||'admin'}</td>
+  </tr>`).join('') : '<tr><td colspan="5" style="text-align:center;color:var(--dim);padding:32px;">No activity logged yet.</td></tr>';
+  document.getElementById('audit-count').textContent = `${rows.length} of ${auditData.length} events`;
+}
+function filterAudit() { renderAudit(); }
+
+// ─── ENGAGEMENTS (Supabase mc_engagements) ────────────────────────────────────
+let engagementData = [];
+async function loadEngagements() {
+  document.getElementById('eng-tbody').innerHTML = '<tr><td colspan="7" style="text-align:center;color:var(--dim);padding:32px;">Loading...</td></tr>';
+  try {
+    const d = await adminFetch('engagements');
+    engagementData = d.engagements || [];
+    document.getElementById('eng-total').textContent = engagementData.length;
+    document.getElementById('eng-active').textContent = engagementData.filter(e=>e.status==='active').length;
+    document.getElementById('eng-hold').textContent = engagementData.filter(e=>e.status==='on_hold'||e.status==='paused').length;
+    document.getElementById('eng-done').textContent = engagementData.filter(e=>e.status==='completed').length;
+    document.getElementById('eng-tbody').innerHTML = engagementData.length ? engagementData.map(e => {
+      const client = e.mc_clients?.company_name || '—';
+      return `<tr>
+        <td style="font-weight:500;">${e.title||'—'}</td>
+        <td>${client}</td>
+        <td><span style="font-size:11px;background:rgba(201,168,76,0.1);color:var(--gold);padding:2px 8px;">${e.type||'—'}</span></td>
+        <td>${statusBadge(e.status)}</td>
+        <td style="color:var(--dim);font-size:11px;">${fmtDate(e.start_date)}</td>
+        <td style="color:var(--dim);font-size:11px;">${fmtDate(e.end_date)}</td>
+        <td style="color:var(--gold);">${fmt$(e.value)}</td>
+      </tr>`;
+    }).join('') : '<tr><td colspan="7" style="text-align:center;color:var(--dim);padding:32px;">No engagements yet. Add in Supabase → mc_engagements.</td></tr>';
+  } catch(e) {
+    document.getElementById('eng-tbody').innerHTML = `<tr><td colspan="7" style="text-align:center;color:#ef4444;padding:32px;">${e.message}</td></tr>`;
+  }
+}
+
+// ─── DOCUMENTS (proposals/contracts from Supabase mc_documents) ──────────────
+async function loadDocs(type) {
+  const tbody = document.getElementById(`docs-${type}s-tbody`);
+  if (!tbody) return;
+  tbody.innerHTML = '<tr><td colspan="6" style="text-align:center;color:var(--dim);padding:32px;">Loading...</td></tr>';
+  try {
+    const d = await adminFetch('supadocs');
+    const rows = (d.supadocs||[]).filter(r=>(r.type||'').toLowerCase()===type);
+    tbody.innerHTML = rows.length ? rows.map(r => {
+      const client = r.mc_engagements?.mc_clients?.company_name || '—';
+      const eng = r.mc_engagements?.title || '—';
+      return `<tr>
+        <td style="font-weight:500;">${r.title||'—'}</td>
+        <td>${client}</td>
+        <td style="color:var(--dim);">${eng}</td>
+        <td>${statusBadge(r.status)}</td>
+        <td style="color:var(--dim);font-size:11px;">${fmtDate(r.created_at)}</td>
+        <td>${r.url?`<a href="${r.url}" target="_blank" style="color:var(--gold);font-size:11px;">Open →</a>`:'—'}</td>
+      </tr>`;
+    }).join('') : `<tr><td colspan="6" style="text-align:center;color:var(--dim);padding:32px;">No ${type}s found in mc_documents.</td></tr>`;
+  } catch(e) {
+    tbody.innerHTML = `<tr><td colspan="6" style="text-align:center;color:#ef4444;padding:32px;">${e.message}</td></tr>`;
+  }
+}
+
+// ─── INVOICES (Supabase mc_invoices) ─────────────────────────────────────────
+let invoiceData = [];
+async function loadInvoices() {
+  const targets = ['invoices-tbody','revinv-tbody'];
+  targets.forEach(id => { const el=document.getElementById(id); if(el) el.innerHTML='<tr><td colspan="7" style="text-align:center;color:var(--dim);padding:32px;">Loading...</td></tr>'; });
+  try {
+    const d = await adminFetch('invoices');
+    invoiceData = d.invoices || [];
+    const totalBilled = invoiceData.reduce((s,r)=>s+(r.amount||0),0);
+    const paid = invoiceData.filter(r=>r.status==='paid').reduce((s,r)=>s+(r.amount||0),0);
+    const outstanding = invoiceData.filter(r=>r.status==='outstanding'||r.status==='sent').reduce((s,r)=>s+(r.amount||0),0);
+    const overdue = invoiceData.filter(r=>r.status==='overdue').reduce((s,r)=>s+(r.amount||0),0);
+    // Update all stat cells that exist
+    ['inv-total-billed','revinv-billed'].forEach(id=>{const el=document.getElementById(id);if(el)el.textContent=fmt$(totalBilled);});
+    ['inv-paid','revinv-paid'].forEach(id=>{const el=document.getElementById(id);if(el)el.textContent=fmt$(paid);});
+    ['inv-outstanding','revinv-out'].forEach(id=>{const el=document.getElementById(id);if(el)el.textContent=fmt$(outstanding);});
+    ['inv-overdue','revinv-over'].forEach(id=>{const el=document.getElementById(id);if(el)el.textContent=fmt$(overdue);});
+    const html = invoiceData.length ? invoiceData.map(r => {
+      const client = r.mc_engagements?.mc_clients?.company_name || '—';
+      const eng = r.mc_engagements?.title || '—';
+      return `<tr>
+        <td style="font-family:'DM Mono',monospace;font-size:11px;">${r.invoice_number||r.id?.substring(0,8)||'—'}</td>
+        <td style="font-weight:500;">${client}</td>
+        <td style="color:var(--dim);">${eng}</td>
+        <td style="color:var(--gold);">${fmt$(r.amount)}</td>
+        <td>${statusBadge(r.status)}</td>
+        <td style="color:var(--dim);font-size:11px;">${fmtDate(r.due_date)}</td>
+        <td style="color:var(--dim);font-size:11px;">${fmtDate(r.paid_date)}</td>
+      </tr>`;
+    }).join('') : '<tr><td colspan="7" style="text-align:center;color:var(--dim);padding:32px;">No invoices yet. Add in Supabase → mc_invoices.</td></tr>';
+    targets.forEach(id => { const el=document.getElementById(id); if(el) el.innerHTML=html.replace('colspan="7"', el.id==='revinv-tbody'?'colspan="6"':'colspan="7"'); });
+  } catch(e) {
+    targets.forEach(id => { const el=document.getElementById(id); if(el) el.innerHTML=`<tr><td colspan="7" style="text-align:center;color:#ef4444;padding:32px;">${e.message}</td></tr>`; });
+  }
+}
+
+// ─── REVENUE REPORT ──────────────────────────────────────────────────────────
+async function loadRevenueReport() {
+  const targets = { 'rr-tbody':'rr', 'ar-tbody':'ar' };
+  Object.values(targets).forEach(pfx => {
+    ['total','collected','outstanding','retainers','avg','month','clients'].forEach(k=>{const el=document.getElementById(`${pfx}-${k}`);if(el)el.textContent='—';});
+  });
+  try {
+    const d = await adminFetch('invoices');
+    const invs = d.invoices || [];
+    const total = invs.reduce((s,r)=>s+(r.amount||0),0);
+    const collected = invs.filter(r=>r.status==='paid').reduce((s,r)=>s+(r.amount||0),0);
+    const outstanding = invs.filter(r=>['outstanding','sent','overdue'].includes(r.status)).reduce((s,r)=>s+(r.amount||0),0);
+    const avg = invs.length ? Math.round(total/invs.length) : 0;
+    const thisMonth = invs.filter(r=>{
+      const d=new Date(r.created_at); const n=new Date();
+      return d.getMonth()===n.getMonth()&&d.getFullYear()===n.getFullYear();
+    }).length;
+    // Collect unique clients
+    const uniqueClients = new Set(invs.map(r=>r.mc_engagements?.mc_clients?.company_name).filter(Boolean)).size;
+    const statSets = [
+      {pfx:'rr',fields:{total,collected,outstanding,avg,month:thisMonth,retainers:uniqueClients}},
+      {pfx:'ar',fields:{total,collected,out:outstanding,clients:uniqueClients}},
+    ];
+    statSets.forEach(({pfx,fields})=>{
+      Object.entries(fields).forEach(([k,v])=>{
+        const el=document.getElementById(`${pfx}-${k}`);
+        if(el) el.textContent=typeof v==='number'&&k!=='month'&&k!=='retainers'&&k!=='clients'&&k!=='avg'?fmt$(v):(k==='avg'?fmt$(v):v);
+      });
+    });
+    // Status breakdown table
+    const statuses = [...new Set(invs.map(r=>r.status||'unknown'))];
+    const breakdown = statuses.map(st=>{
+      const sub=invs.filter(r=>(r.status||'unknown')===st);
+      const amt=sub.reduce((s,r)=>s+(r.amount||0),0);
+      const pct=total>0?Math.round(amt/total*100):0;
+      return `<tr><td>${statusBadge(st)}</td><td>${sub.length}</td><td style="color:var(--gold);">${fmt$(amt)}</td><td style="color:var(--dim);">${pct}%</td></tr>`;
+    }).join('');
+    ['rr-tbody','ar-tbody'].forEach(id=>{
+      const el=document.getElementById(id);
+      if(el) el.innerHTML = breakdown || '<tr><td colspan="4" style="text-align:center;color:var(--dim);padding:32px;">No invoice data yet.</td></tr>';
+    });
+  } catch(e) {
+    ['rr-tbody','ar-tbody'].forEach(id=>{
+      const el=document.getElementById(id);
+      if(el) el.innerHTML=`<tr><td colspan="4" style="text-align:center;color:#ef4444;padding:32px;">${e.message}</td></tr>`;
+    });
+  }
+}
+
+// ─── FORM SUBMISSIONS (from webinar leads) ────────────────────────────────────
+async function loadFormSubmissions() {
+  document.getElementById('fsub-tbody').innerHTML = '<tr><td colspan="6" style="text-align:center;color:var(--dim);padding:32px;">Loading...</td></tr>';
+  try {
+    const d = await adminFetch('leads');
+    const rows = (d.leads||[]).slice().reverse();
+    document.getElementById('fsub-total').textContent = rows.length;
+    const thisWeek = rows.filter(r=>{
+      const d=new Date(r.registeredAt||r.date||r.ts||0);
+      return Date.now()-d.getTime() < 7*24*60*60*1000;
+    }).length;
+    document.getElementById('fsub-week').textContent = thisWeek;
+    document.getElementById('fsub-tbody').innerHTML = rows.length ? rows.map(r=>`<tr>
+      <td style="font-weight:500;">${r.name||'—'}</td>
+      <td style="font-family:'DM Mono',monospace;font-size:11px;">${r.email||'—'}</td>
+      <td>${r.company||'—'}</td>
+      <td><span style="font-size:11px;background:rgba(201,168,76,0.1);color:var(--gold);padding:2px 8px;">Webinar Registration</span></td>
+      <td style="color:var(--dim);font-size:11px;">${fmtDate(r.registeredAt||r.date||r.ts)}</td>
+      <td style="color:var(--dim);font-size:11px;">${r.message||r.interest||'—'}</td>
+    </tr>`).join('') : '<tr><td colspan="6" style="text-align:center;color:var(--dim);padding:32px;">No form submissions yet.</td></tr>';
+  } catch(e) {
+    document.getElementById('fsub-tbody').innerHTML=`<tr><td colspan="6" style="text-align:center;color:#ef4444;padding:32px;">${e.message}</td></tr>`;
+  }
+}
+
+// ─── EMAIL SUBSCRIBERS (from webinar leads) ───────────────────────────────────
+let subData = [];
+async function loadSubscribers() {
+  document.getElementById('sub-tbody').innerHTML='<tr><td colspan="6" style="text-align:center;color:var(--dim);padding:32px;">Loading...</td></tr>';
+  try {
+    const d = await adminFetch('leads');
+    subData = (d.leads||[]).slice().reverse();
+    document.getElementById('sub-total').textContent = subData.length;
+    const now = new Date(); const m = now.getMonth(); const y = now.getFullYear();
+    document.getElementById('sub-month').textContent = subData.filter(r=>{
+      const d=new Date(r.registeredAt||r.date||r.ts||0);
+      return d.getMonth()===m&&d.getFullYear()===y;
+    }).length;
+    renderSubscribers();
+  } catch(e) {
+    document.getElementById('sub-tbody').innerHTML=`<tr><td colspan="6" style="text-align:center;color:#ef4444;padding:32px;">${e.message}</td></tr>`;
+  }
+}
+function renderSubscribers() {
+  const q=(document.getElementById('sub-search')?.value||'').toLowerCase();
+  const rows=subData.filter(r=>!q||[r.name,r.email,r.company].some(v=>(v||'').toLowerCase().includes(q)));
+  document.getElementById('sub-tbody').innerHTML=rows.length?rows.map(r=>`<tr>
+    <td style="font-weight:500;">${r.name||'—'}</td>
+    <td style="font-family:'DM Mono',monospace;font-size:11px;">${r.email||'—'}</td>
+    <td>${r.company||'—'}</td>
+    <td style="color:var(--dim);">${r.title||'—'}</td>
+    <td><span style="font-size:11px;">${r.source||'webinar'}</span></td>
+    <td style="color:var(--dim);font-size:11px;">${fmtDate(r.registeredAt||r.date||r.ts)}</td>
+  </tr>`).join(''):'<tr><td colspan="6" style="text-align:center;color:var(--dim);padding:32px;">No subscribers yet.</td></tr>';
+}
+function filterSubscribers() { renderSubscribers(); }
+
+// ─── LEAD SOURCES ANALYTICS (computed from webinar leads) ────────────────────
+async function loadLeadSources() {
+  document.getElementById('ls-tbody').innerHTML='<tr><td colspan="3" style="text-align:center;color:var(--dim);padding:32px;">Loading...</td></tr>';
+  try {
+    const d = await adminFetch('leads');
+    const leads = d.leads||[];
+    document.getElementById('ls-total').textContent = leads.length;
+    // Count by month
+    const now = new Date();
+    document.getElementById('ls-month').textContent = leads.filter(r=>{
+      const d=new Date(r.registeredAt||r.date||r.ts||0);
+      return d.getMonth()===now.getMonth()&&d.getFullYear()===now.getFullYear();
+    }).length;
+    // Count by source
+    const src = {};
+    leads.forEach(r=>{ const s=r.source||r.utm_source||'webinar'; src[s]=(src[s]||0)+1; });
+    const sorted = Object.entries(src).sort((a,b)=>b[1]-a[1]);
+    document.getElementById('ls-top').textContent = sorted[0]?sorted[0][0]:'—';
+    document.getElementById('ls-tbody').innerHTML = sorted.map(([s,n])=>`<tr>
+      <td><span style="font-size:11px;background:rgba(201,168,76,0.1);color:var(--gold);padding:2px 8px;">${s}</span></td>
+      <td style="font-weight:600;">${n}</td>
+      <td style="color:var(--dim);">${leads.length?Math.round(n/leads.length*100):0}%</td>
+    </tr>`).join('');
+  } catch(e) {
+    document.getElementById('ls-tbody').innerHTML=`<tr><td colspan="3" style="text-align:center;color:#ef4444;padding:32px;">${e.message}</td></tr>`;
+  }
+}
+
+// ─── CONVERSION FUNNEL (computed from leads + clients + invoices) ─────────────
+async function loadFunnelData() {
+  document.getElementById('funnel-container').innerHTML='<div style="text-align:center;color:var(--dim);padding:32px;">Loading funnel data...</div>';
+  try {
+    const [ld, cd, id] = await Promise.all([adminFetch('leads'), adminFetch('clients'), adminFetch('invoices')]);
+    const leads = (ld.leads||[]).length;
+    const clients = (cd.clients||[]).length;
+    const invs = (id.invoices||[]);
+    const paidInvs = invs.filter(r=>r.status==='paid').length;
+    const steps = [
+      {label:'Webinar Registrants', n:leads, color:'#60a5fa'},
+      {label:'Active Clients', n:clients, color:'var(--gold)'},
+      {label:'Paid Invoices', n:paidInvs, color:'#4CAF72'},
+    ];
+    const max = steps[0].n || 1;
+    document.getElementById('funnel-container').innerHTML = steps.map((s,i)=>`
+      <div style="margin-bottom:16px;">
+        <div style="display:flex;justify-content:space-between;font-size:12px;margin-bottom:6px;">
+          <span style="color:var(--text);">${s.label}</span>
+          <span style="color:${s.color};font-weight:600;">${s.n}</span>
+        </div>
+        <div style="background:rgba(255,255,255,0.05);height:32px;position:relative;">
+          <div style="background:${s.color};height:100%;width:${Math.max(s.n/max*100,2)}%;opacity:0.7;"></div>
+          ${i>0&&steps[i-1].n>0?`<span style="position:absolute;right:8px;top:50%;transform:translateY(-50%);font-size:10px;color:var(--dim);">${Math.round(s.n/steps[i-1].n*100)}% conversion</span>`:''}
+        </div>
+      </div>`).join('');
+  } catch(e) {
+    document.getElementById('funnel-container').innerHTML=`<div style="color:#ef4444;padding:32px;text-align:center;">${e.message}</div>`;
+  }
+}
+
+// ─── WEBINAR SCHEDULE: populate from settings ─────────────────────────────────
+function populateWebinarSchedule() {
+  try {
+    const s = JSON.parse(localStorage.getItem('markcmo_settings')||'{}');
+    const dateEl = document.getElementById('ws-date');
+    const rvEl = document.getElementById('ws-riverside');
+    const cntEl = document.getElementById('ws-count');
+    if (dateEl) dateEl.textContent = s.webinarDate || 'Not set — update in Settings';
+    if (rvEl) { rvEl.textContent = s.riversideLink || 'Not set'; rvEl.href = s.riversideLink || '#'; }
+  } catch(e) {}
+  // Also pull lead count for registrant display
+  adminFetch('leads').then(d => {
+    const el = document.getElementById('ws-count');
+    if (el) el.textContent = `${(d.leads||[]).length} registered`;
+  }).catch(()=>{});
+}
+
 // ── PANEL NAVIGATION ─────────────────────────────────────────────────────────
 // Social panel switching handled by main admin switchPanel
 function _sgUnused(id, el) {
