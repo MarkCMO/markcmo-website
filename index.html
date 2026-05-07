@@ -24,6 +24,7 @@
 <meta name="format-detection" content="telephone=yes" />
 <link rel="manifest" href="/manifest.json" />
 <link rel="canonical" href="https://markcmo.com/" />
+<link rel="alternate" type="application/rss+xml" title="MarkCMO Insights" href="https://markcmo.com/feed.xml" />
 <meta property="og:type" content="website" />
 <meta property="og:title" content="Mark Gabrielli | Fractional CMO & COO | Healthcare, Aerospace & SaaS Growth Expert" />
 <meta property="og:description" content="Hire Mark Gabrielli as your Fractional CMO or COO. 15+ years in healthcare, aerospace, SaaS & automotive. Biological Sciences. CST certified. FL & global." />
@@ -280,8 +281,8 @@
     html { scroll-behavior: smooth; }
     body {
       font-family: 'Barlow', sans-serif;
-      background: #FFFFFF;
-      color: #1E293B;
+      background: #0A1628;
+      color: #F8F6EE;
       overflow-x: hidden;
     }
     /* ─── NOISE OVERLAY ─── */
@@ -1390,6 +1391,91 @@
       .nav-mob-pill { flex: 0 0 auto; }
       table { display: block; overflow-x: auto; -webkit-overflow-scrolling: touch; }
     }
+
+    /* ═══════════════════════════════════════════════════════════════
+       BRAND-LOCK · Dark navy + blue + gold theme override.
+       Per CLAUDE.md RULE #-1: blue + gold on dark navy is permanent.
+       This block flips every light-surface section to dark variants
+       and lifts all text to light tones for readability.
+       Do NOT remove without explicit user instruction.
+       ═══════════════════════════════════════════════════════════════ */
+    body { background: #0A1628 !important; color: #F8F6EE !important; }
+    /* Light surfaces → navy variants (cards/sections that were white/off-white) */
+    [style*="background: #FFFFFF"]:not(img):not(svg),
+    [style*="background:#FFFFFF"]:not(img):not(svg),
+    [style*="background: #fff"]:not(img):not(svg),
+    [style*="background: #FFF "]:not(img):not(svg),
+    [style*="background-color: #FFFFFF"]:not(img):not(svg),
+    [style*="background-color:#FFFFFF"]:not(img):not(svg) {
+      background: #0F2040 !important;
+      background-color: #0F2040 !important;
+      color: #F8F6EE !important;
+    }
+    [style*="background: #F8FAFC"]:not(img):not(svg),
+    [style*="background:#F8FAFC"]:not(img):not(svg),
+    [style*="background-color: #F8FAFC"]:not(img):not(svg),
+    [style*="background-color:#F8FAFC"]:not(img):not(svg) {
+      background: #162A4A !important;
+      background-color: #162A4A !important;
+      color: #F8F6EE !important;
+    }
+    /* Sections via class with explicit white backgrounds */
+    .bg-white, .bg-light, .section-light, .panel-white, [class*="bg-white"] {
+      background: #0F2040 !important;
+      color: #F8F6EE !important;
+    }
+    /* Borders that were dark on light → light gold on dark for readability */
+    [style*="border: 1px solid #E2E8F0"],
+    [style*="border:1px solid #E2E8F0"],
+    [style*="border: 1px solid rgba(15,32,64"] {
+      border-color: rgba(201,168,76,0.25) !important;
+    }
+    /* Dark text on dark bg → flip to light */
+    [style*="color: #1E293B"],
+    [style*="color:#1E293B"],
+    [style*="color: #0A1628"],
+    [style*="color:#0A1628"],
+    [style*="color: #0F2040"],
+    [style*="color:#0F2040"] {
+      color: #F8F6EE !important;
+    }
+    /* Muted text → keep muted but readable on dark */
+    [style*="color: #64748B"],
+    [style*="color:#64748B"],
+    [style*="color: #475569"],
+    [style*="color:#475569"] {
+      color: #94A3B8 !important;
+    }
+    /* CTAs: keep blue + gold language */
+    .btn-primary, [class*="cta-primary"], [class*="btn-cta"] {
+      background: #2563EB !important;
+      color: #FFFFFF !important;
+      border-color: #2563EB !important;
+    }
+    /* Replace any orange CTA with blue */
+    [style*="background: #F97316"],
+    [style*="background:#F97316"],
+    [style*="background-color: #F97316"],
+    [style*="background-color:#F97316"],
+    [style*="bgcolor=\"#F97316\""] {
+      background: #2563EB !important;
+      background-color: #2563EB !important;
+    }
+    [style*="color: #F97316"],
+    [style*="color:#F97316"] {
+      color: #C9A84C !important;
+    }
+    /* Inputs */
+    input, textarea, select {
+      background: #0F2040 !important;
+      color: #F8F6EE !important;
+      border-color: rgba(201,168,76,0.3) !important;
+    }
+    input::placeholder, textarea::placeholder { color: #94A3B8 !important; }
+    /* Tables */
+    table { background: transparent !important; }
+    table th { color: #C9A84C !important; }
+    table td { color: #F8F6EE !important; border-color: rgba(201,168,76,0.15) !important; }
   </style>
 <script type="application/ld+json">
 {
