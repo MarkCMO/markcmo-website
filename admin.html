@@ -2280,7 +2280,7 @@ style="background:var(--bg);border:1px solid var(--border);color:var(--text);pad
 </div>
 </div>
 </div>
-<div id="panel-sg-overview" class="panel active">
+<div id="panel-sg-overview" class="panel">
 <div class="top-bar">
 <div class="page-title">SOCIAL GROWTH INTELLIGENCE</div>
 <div class="page-actions">
@@ -3033,7 +3033,7 @@ function toggleGroup(header) {
 }
 function switchPanel(id, el) {
   document.querySelectorAll('.panel').forEach(p => p.classList.remove('active'));
-  document.querySelectorAll('.nav-item, .nav-sub').forEach(n => n.classList.remove('active'));
+  document.querySelectorAll('.nav-item, .nav-sub, .admin-nav-item').forEach(n => n.classList.remove('active'));
   if (el && el.classList.contains('nav-sub')) {
     const group = el.closest('.nav-group');
     if (group) {
