@@ -156,7 +156,27 @@ function buildEmailHtml({ client, engagement, docs, siteUrl, testMode, testRecip
   (docs || []).forEach(d => { docByType[d.doc_type] = d; });
   const docId = (t) => docByType[t]?.doc_id || '';
 
-  const greetingName = (client.primary_contact_name || '').split(' ')[0] || 'there';
+  // Per-engagement copy overrides via mc_engagements.metadata.email.
+  // This lets each client get tailored messaging without forking the function
+  // (Wendal is the legacy hardcoded "audit" tone; SLCPL gets a public-sector
+  // tone via metadata; future clients drop their own metadata keys to override).
+  const em = (engagement?.metadata?.email) || {};
+  const hrs = engagement.delivery_window_hrs;
+  const fee = Number(engagement.fee_usd).toLocaleString('en-US');
+  const subjectPhrase    = em.subject_phrase    || 'audit package';
+  const deliveryPhrase   = em.delivery_phrase   || `${hrs}-hour`;
+  const deliveryShort    = em.delivery_phrase_short || `${hrs} HRS`;
+  const heroH1Line2      = em.hero_h1_line2    || `your ${subjectPhrase} is ready.`;
+  const heroH1Line1      = em.hero_h1_line1    || `${esc(client.legal_name)},`;
+  const heroSub          = em.hero_sub          || `Three documents. One signature. ${deliveryPhrase} delivery once we kick off.`;
+  const greetingFirstName = em.greeting_first_name || (client.primary_contact_name || '').split(' ')[0] || 'there';
+  const introHtml        = em.intro_html        || `Thanks for the conversation. As promised, the full <strong>${esc(engagement.name)}</strong> package is below. It's a fixed-fee engagement designed to give you an honest, evidence-based picture of what's working at <strong>${esc(client.dba || client.legal_name)}</strong>, where the bottlenecks are, and a sequenced 30 / 90 / 6-month / 12-month roadmap to execute against.`;
+  const signOutroHtml    = em.sign_outro_html   || `One signature, one click. I'll countersign within 24 hours and the Square invoice for $${fee} USD goes out immediately. The ${deliveryPhrase} delivery clock starts when payment clears and the intake worksheet is returned.`;
+  const signoffLine      = em.signoff_line      || 'Looking forward to digging in,';
+  const docProposalDesc  = em.doc_proposal_desc || `Why this engagement, what's covered, what's delivered, the $${fee} fee, and the 14-day acceptance window.`;
+  const docSowDesc       = em.doc_sow_desc      || `Modules, activities, inputs, outputs, out-of-scope items, and your obligations during the ${deliveryPhrase} window.`;
+  const docTimelineDesc  = em.doc_timeline_desc || `Phase by phase, milestone by milestone. Who owns what, when, and what slips the timeline.`;
+  const docTimelineTitle = em.doc_timeline_title || `${deliveryShort.replace(/\s+/g,'-')} Deliverable Timeline`;
 
   return `<!DOCTYPE html>
 <html lang="en">
@@ -175,11 +195,11 @@ ${testMode ? `
       <td bgcolor="#0A1628" style="background-color:#0A1628;background-image:linear-gradient(135deg,#0A1628 0%,#0F2040 50%,#162A4A 100%);padding:36px 32px 32px;color:#FFFFFF;">
         <div style="font-size:11px;letter-spacing:0.22em;text-transform:uppercase;color:#93C5FD;margin-bottom:10px;font-family:'DM Mono',Menlo,monospace;">${esc(engagement.name)} &middot; Proposal</div>
         <h1 style="font-family:'Bebas Neue',Impact,sans-serif;font-size:32px;font-weight:400;letter-spacing:0.02em;line-height:1.1;color:#FFFFFF;margin:0 0 8px;">
-          <span style="color:#FFFFFF;">${esc(client.legal_name)},</span><br/>
-          <span style="color:#FFFFFF;">your audit package is ready.</span>
+          <span style="color:#FFFFFF;">${esc(heroH1Line1)}</span><br/>
+          <span style="color:#FFFFFF;">${esc(heroH1Line2)}</span>
         </h1>
         <p style="font-size:15px;color:#E2E8F0;margin:0;line-height:1.5;">
-          Three documents. One signature. ${engagement.delivery_window_hrs}-hour delivery once we kick off.
+          ${esc(heroSub)}
         </p>
       </td>
     </tr>
@@ -187,9 +207,9 @@ ${testMode ? `
 
   <!-- Greeting + intro -->
   <div style="padding:32px;">
-    <p style="font-size:16px;line-height:1.65;margin:0 0 16px;">${esc(greetingName)},</p>
+    <p style="font-size:16px;line-height:1.65;margin:0 0 16px;">${esc(greetingFirstName)},</p>
     <p style="font-size:15px;line-height:1.65;margin:0 0 16px;color:#1E293B;">
-      Thanks for the conversation. As promised, the full <strong>${esc(engagement.name)}</strong> package is below. It's a fixed-fee engagement designed to give you an honest, evidence-based picture of what's working at <strong>${esc(client.dba || client.legal_name)}</strong>, where the bottlenecks are, and a sequenced 30 / 90 / 6-month / 12-month roadmap to execute against, including the West Palm Beach and Atlanta expansion analysis.
+      ${introHtml}
     </p>
     <p style="font-size:15px;line-height:1.65;margin:0;color:#1E293B;">
       Below are the three documents that make up the engagement, plus a one-click acceptance link.
@@ -207,7 +227,7 @@ ${testMode ? `
         </td>
         <td style="vertical-align:top;padding:0;text-align:right;">
           <div style="font-family:'DM Mono',Menlo,monospace;font-size:11px;letter-spacing:0.18em;text-transform:uppercase;color:#2563EB;margin-bottom:4px;font-weight:600;">Delivery</div>
-          <div style="font-family:'Bebas Neue',Impact,sans-serif;font-size:30px;color:#0A1628;letter-spacing:0.02em;line-height:1;">${engagement.delivery_window_hrs} HRS</div>
+          <div style="font-family:'Bebas Neue',Impact,sans-serif;font-size:30px;color:#0A1628;letter-spacing:0.02em;line-height:1;">${esc(deliveryShort)}</div>
           <div style="font-size:12px;color:#64748B;margin-top:4px;">from payment + intake</div>
         </td>
       </tr>
@@ -220,20 +240,20 @@ ${testMode ? `
 
     <a href="${tProposalUrl}" style="display:block;text-decoration:none;margin-bottom:10px;background:#fff;border:1px solid rgba(15,32,64,0.08);border-radius:14px;padding:18px 22px;color:#1E293B;box-shadow:0 1px 2px rgba(15,32,64,0.04), 0 8px 24px rgba(37,99,235,0.10), 0 24px 48px -16px rgba(37,99,235,0.08);">
       <div style="font-family:'DM Mono',Menlo,monospace;font-size:11px;letter-spacing:0.15em;color:#2563EB;font-weight:600;margin-bottom:4px;">DOC ${esc(docId('proposal'))} &middot; PROPOSAL</div>
-      <div style="font-size:16px;font-weight:700;color:#0A1628;margin-bottom:4px;">Audit Proposal</div>
-      <div style="font-size:13px;color:#64748B;">Why this audit, what's covered, what's delivered, the $${Number(engagement.fee_usd).toLocaleString('en-US')} fee, and the 14-day acceptance window.</div>
+      <div style="font-size:16px;font-weight:700;color:#0A1628;margin-bottom:4px;">Proposal</div>
+      <div style="font-size:13px;color:#64748B;">${docProposalDesc}</div>
     </a>
 
     <a href="${tSowUrl}" style="display:block;text-decoration:none;margin-bottom:10px;background:#fff;border:1px solid rgba(15,32,64,0.08);border-radius:14px;padding:18px 22px;color:#1E293B;box-shadow:0 1px 2px rgba(15,32,64,0.04), 0 8px 24px rgba(37,99,235,0.10), 0 24px 48px -16px rgba(37,99,235,0.08);">
       <div style="font-family:'DM Mono',Menlo,monospace;font-size:11px;letter-spacing:0.15em;color:#2563EB;font-weight:600;margin-bottom:4px;">DOC ${esc(docId('sow'))} &middot; SCOPE OF WORK</div>
       <div style="font-size:16px;font-weight:700;color:#0A1628;margin-bottom:4px;">Scope of Work</div>
-      <div style="font-size:13px;color:#64748B;">Six modules, activities, inputs, outputs, out-of-scope items, and your obligations during the 72-hour window.</div>
+      <div style="font-size:13px;color:#64748B;">${docSowDesc}</div>
     </a>
 
     <a href="${tTimelineUrl}" style="display:block;text-decoration:none;margin-bottom:10px;background:#fff;border:1px solid rgba(15,32,64,0.08);border-radius:14px;padding:18px 22px;color:#1E293B;box-shadow:0 1px 2px rgba(15,32,64,0.04), 0 8px 24px rgba(37,99,235,0.10), 0 24px 48px -16px rgba(37,99,235,0.08);">
       <div style="font-family:'DM Mono',Menlo,monospace;font-size:11px;letter-spacing:0.15em;color:#2563EB;font-weight:600;margin-bottom:4px;">DOC ${esc(docId('timeline'))} &middot; TIMELINE</div>
-      <div style="font-size:16px;font-weight:700;color:#0A1628;margin-bottom:4px;">${engagement.delivery_window_hrs}-Hour Deliverable Timeline</div>
-      <div style="font-size:13px;color:#64748B;">Hour-by-hour: 4 phases, 16 milestones, who owns what, what causes the timeline to slip.</div>
+      <div style="font-size:16px;font-weight:700;color:#0A1628;margin-bottom:4px;">${esc(docTimelineTitle)}</div>
+      <div style="font-size:13px;color:#64748B;">${docTimelineDesc}</div>
     </a>
 
     <p style="font-size:13px;color:#64748B;margin:14px 0 0;">
@@ -254,13 +274,13 @@ ${testMode ? `
       </tr>
     </table>
     <p style="font-size:13px;color:#64748B;margin:14px 0 0;line-height:1.6;">
-      One signature, one click. I'll countersign within 24 hours and the Square invoice for $${Number(engagement.fee_usd).toLocaleString('en-US')} USD goes out immediately. The 72-hour delivery clock starts when payment clears and the intake worksheet is returned.
+      ${signOutroHtml}
     </p>
   </div>
 
   <!-- Sign-off -->
   <div style="padding:24px 32px 32px;">
-    <p style="font-size:15px;line-height:1.65;margin:0 0 4px;">Looking forward to digging in,</p>
+    <p style="font-size:15px;line-height:1.65;margin:0 0 4px;">${esc(signoffLine)}</p>
     <p style="font-size:15px;line-height:1.65;margin:0;font-weight:700;color:#0A1628;">Mark Gabrielli</p>
     <p style="font-size:13px;line-height:1.55;margin:2px 0 0;color:#64748B;">Fractional CMO &amp; COO &middot; WETYR Corp<br/><a href="mailto:mark@markcmo.com" style="color:#2563EB;">mark@markcmo.com</a> &middot; <a href="https://markcmo.com" style="color:#2563EB;">markcmo.com</a></p>
   </div>
