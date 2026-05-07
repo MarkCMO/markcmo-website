@@ -1064,6 +1064,13 @@
   .sidebar { width: 260px !important; padding: 0 !important; overflow: hidden !important; max-height: 100vh; display: flex !important; flex-direction: column !important; }
   /* Bump main-content margin to match the new sidebar width so cards don't get clipped */
   .main-content { margin-left: 260px !important; }
+  /* Bare panels (no top-bar / content-body / mc-panel wrapper) get default padding
+     so their leftmost column doesn't sit flush against the sidebar. Wrapped panels
+     handle their own spacing internally. Modern browsers only (:has() — Chrome 105+,
+     Safari 15.4+, Firefox 121+, all current production browsers). */
+  .panel:not(:has(> .top-bar)):not(:has(> .content-body)):not(:has(> .mc-panel)) {
+    padding: 28px 32px;
+  }
   /* Adjust mobile breakpoint margins to match (was 200px in original CSS) */
   @media (max-width: 1100px) {
     .main-content { margin-left: 240px !important; }
@@ -2226,6 +2233,7 @@
   </div>
 </div>
 <div id="panel-forms-hub" class="panel">
+<div class="content-body">
 <div class="panel-header">
 <h1 class="panel-title">📋 Forms Hub</h1>
 <div style="font-size:12px;color:var(--dim);">Open, fill, and send any document template</div>
@@ -2321,8 +2329,9 @@
 <div class="form-card-desc">Permission to use client testimonials in marketing.</div>
 <div class="form-card-actions"><span class="fc-btn primary">Open Form →</span></div>
 </a>
-</div>
-</div>
+</div><!-- /forms-grid -->
+</div><!-- /content-body -->
+</div><!-- /panel-forms-hub -->
 <div id="panel-forms-nda" class="panel">
   <div class="mc-panel">
     <div class="mc-panel-head">
