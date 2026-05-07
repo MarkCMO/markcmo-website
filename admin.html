@@ -1064,6 +1064,13 @@
   .sidebar { width: 260px !important; padding: 0 !important; overflow: hidden !important; max-height: 100vh; display: flex !important; flex-direction: column !important; }
   /* Bump main-content margin to match the new sidebar width so cards don't get clipped */
   .main-content { margin-left: 260px !important; }
+  /* Bare panels (no top-bar / content-body / mc-panel wrapper) get default padding
+     so their leftmost column doesn't sit flush against the sidebar. Wrapped panels
+     handle their own spacing internally. Modern browsers only (:has() — Chrome 105+,
+     Safari 15.4+, Firefox 121+, all current production browsers). */
+  .panel:not(:has(> .top-bar)):not(:has(> .content-body)):not(:has(> .mc-panel)) {
+    padding: 28px 32px;
+  }
   /* Adjust mobile breakpoint margins to match (was 200px in original CSS) */
   @media (max-width: 1100px) {
     .main-content { margin-left: 240px !important; }
@@ -2226,6 +2233,7 @@
   </div>
 </div>
 <div id="panel-forms-hub" class="panel">
+<div class="content-body">
 <div class="panel-header">
 <h1 class="panel-title">📋 Forms Hub</h1>
 <div style="font-size:12px;color:var(--dim);">Open, fill, and send any document template</div>
@@ -2321,8 +2329,9 @@
 <div class="form-card-desc">Permission to use client testimonials in marketing.</div>
 <div class="form-card-actions"><span class="fc-btn primary">Open Form →</span></div>
 </a>
-</div>
-</div>
+</div><!-- /forms-grid -->
+</div><!-- /content-body -->
+</div><!-- /panel-forms-hub -->
 <div id="panel-forms-nda" class="panel">
   <div class="mc-panel">
     <div class="mc-panel-head">
@@ -2456,12 +2465,12 @@
     <div class="mc-panel-head">
       <div><div class="mc-eyebrow">Revenue · Billing</div><h2>All Invoices</h2><div class="mc-sub">Every Square invoice (drafted, sent, paid, voided). Same data as the engagement Invoices tab — different cut.</div></div>
       <div class="mc-panel-actions">
-        <input type="text" class="mc-search" id="mc-invoices-search" placeholder="Search...">
+        <input type="text" class="mc-search" id="mc-rev-invoices-search" placeholder="Search...">
         <button class="mc-btn" onclick="mcLoadInvoices(true)">↻ Refresh</button>
       </div>
     </div>
-    <div id="mc-invoices-stats" class="mc-stats"></div>
-    <div id="mc-invoices-body"><div class="mc-loading">Loading invoices</div></div>
+    <div id="mc-rev-invoices-stats" class="mc-stats"></div>
+    <div id="mc-rev-invoices-body"><div class="mc-loading">Loading invoices</div></div>
   </div>
 </div>
 <div id="panel-rev-products" class="panel">
@@ -3048,22 +3057,22 @@ This is your legitimate social growth engine. Unlike bots or fake engagement too
 </div>
 </div>
 <div class="grid-4" style="margin-bottom:28px;">
-<div class="stat-card" onclick="switchPanel('audience', document.querySelector('[data-panel=audience]'))" style="cursor:pointer;">
+<div class="stat-card" onclick="switchPanel('sg-audience', this)" style="cursor:pointer;">
 <div class="stat-label">Audience Intel</div>
 <div style="font-size:28px;margin:8px 0;">🎯</div>
 <div class="stat-sub">ICP personas + where to find them</div>
 </div>
-<div class="stat-card" onclick="switchPanel('funnel', document.querySelector('[data-panel=funnel]'))" style="cursor:pointer;">
+<div class="stat-card" onclick="switchPanel('sg-funnel', this)" style="cursor:pointer;">
 <div class="stat-label">DM Funnels</div>
 <div style="font-size:28px;margin:8px 0;">💬</div>
 <div class="stat-sub">Comment → DM conversion flows</div>
 </div>
-<div class="stat-card" onclick="switchPanel('calendar', document.querySelector('[data-panel=calendar]'))" style="cursor:pointer;">
+<div class="stat-card" onclick="switchPanel('sg-calendar', this)" style="cursor:pointer;">
 <div class="stat-label">Content Calendar</div>
 <div style="font-size:28px;margin:8px 0;">📅</div>
 <div class="stat-sub">AI-planned 30-day posting plan</div>
 </div>
-<div class="stat-card" onclick="switchPanel('viral', document.querySelector('[data-panel=viral]'))" style="cursor:pointer;">
+<div class="stat-card" onclick="switchPanel('sg-viral', this)" style="cursor:pointer;">
 <div class="stat-label">Viral Score Lab</div>
 <div style="font-size:28px;margin:8px 0;">📈</div>
 <div class="stat-sub">Score + fix any post before publishing</div>
@@ -3094,12 +3103,12 @@ This is your legitimate social growth engine. Unlike bots or fake engagement too
 <div class="card">
 <div class="card-header"><div class="card-title">Quick Actions</div></div>
 <div class="card-body" style="display:grid;gap:8px;">
-<button class="btn btn-outline" style="width:100%;justify-content:flex-start;" onclick="switchPanel('hooks', document.querySelector('[data-panel=hooks]'))">⚡ Generate 20 Hooks for Any Topic</button>
-<button class="btn btn-outline" style="width:100%;justify-content:flex-start;" onclick="switchPanel('viral', document.querySelector('[data-panel=viral]'))">📈 Score My Draft Post</button>
-<button class="btn btn-outline" style="width:100%;justify-content:flex-start;" onclick="switchPanel('audit', document.querySelector('[data-panel=audit]'))">🏆 Audit My LinkedIn Profile</button>
-<button class="btn btn-outline" style="width:100%;justify-content:flex-start;" onclick="switchPanel('competitor', document.querySelector('[data-panel=competitor]'))">🔍 Analyze a Competitor</button>
-<button class="btn btn-outline" style="width:100%;justify-content:flex-start;" onclick="switchPanel('funnel', document.querySelector('[data-panel=funnel]'))">💬 Build a DM Funnel</button>
-<button class="btn btn-gold" style="width:100%;justify-content:flex-start;" onclick="switchPanel('pillars', document.querySelector('[data-panel=pillars]'))">🧱 Define My Content Pillars</button>
+<button class="btn btn-outline" style="width:100%;justify-content:flex-start;" onclick="switchPanel('sg-hooks', this)">⚡ Generate 20 Hooks for Any Topic</button>
+<button class="btn btn-outline" style="width:100%;justify-content:flex-start;" onclick="switchPanel('sg-viral', this)">📈 Score My Draft Post</button>
+<button class="btn btn-outline" style="width:100%;justify-content:flex-start;" onclick="switchPanel('sg-audit', this)">🏆 Audit My LinkedIn Profile</button>
+<button class="btn btn-outline" style="width:100%;justify-content:flex-start;" onclick="switchPanel('sg-competitor', this)">🔍 Analyze a Competitor</button>
+<button class="btn btn-outline" style="width:100%;justify-content:flex-start;" onclick="switchPanel('sg-funnel', this)">💬 Build a DM Funnel</button>
+<button class="btn btn-gold" style="width:100%;justify-content:flex-start;" onclick="switchPanel('sg-pillars', this)">🧱 Define My Content Pillars</button>
 </div>
 </div>
 </div>
@@ -4788,25 +4797,31 @@ function mcPill(status) {
 
 // Fetch + cache + render. Calls renderFn(data) on success.
 async function mcFetch(type, renderFn, force) {
+  // Optional convenience containers for the canonical case (e.g. mc-pipeline-body).
+  // Many panels use renamed containers (mc-email-templates-body, mc-rev-reports-body)
+  // and rely on the renderer to find its own targets — so DON'T bail when these
+  // canonical IDs are missing. Just skip the canonical loading UI.
   const bodyEl = document.getElementById(`mc-${type}-body`);
   const statsEl = document.getElementById(`mc-${type}-stats`);
-  if (!bodyEl) return;
   if (!force && _mcCache[type]) { renderFn(_mcCache[type]); return; }
-  bodyEl.innerHTML = `<div class="mc-loading">Loading ${type}</div>`;
+  if (bodyEl) bodyEl.innerHTML = `<div class="mc-loading">Loading ${type}</div>`;
   if (statsEl) statsEl.innerHTML = '';
   try {
     const res = await fetch(`${MC_API}?type=${type}`, { credentials: 'include' });
-    if (res.status === 401) { mcHandleAuthExpired(); mcShowAuthRequired(bodyEl); return; }
+    if (res.status === 401) { mcHandleAuthExpired(); if (bodyEl) mcShowAuthRequired(bodyEl); return; }
     if (!res.ok) { const d = await res.json().catch(() => ({})); throw new Error(d.error || `HTTP ${res.status}`); }
     const data = await res.json();
     _mcCache[type] = data;
     renderFn(data);
   } catch (e) {
-    bodyEl.innerHTML = `<div class="mc-empty"><div class="ico">⚠</div><h3>Failed to load</h3><p>${mcEsc(e.message)}</p><p style="margin-top:.85rem;"><button class="mc-btn primary" onclick="window.location.reload()">↻ Reload page</button></p></div>`;
+    if (bodyEl) {
+      bodyEl.innerHTML = `<div class="mc-empty"><div class="ico">⚠</div><h3>Failed to load</h3><p>${mcEsc(e.message)}</p><p style="margin-top:.85rem;"><button class="mc-btn primary" onclick="window.location.reload()">↻ Reload page</button></p></div>`;
+    }
   }
 }
 
 function mcShowAuthRequired(bodyEl) {
+  if (!bodyEl) return;
   bodyEl.innerHTML = `<div class="mc-empty"><div class="ico">🔒</div><h3>Sign in required</h3><p>Your session has expired. Sign in again to continue.</p><p style="margin-top:.85rem;"><button class="mc-btn primary" onclick="mcReLogin()">Sign In Again</button></p></div>`;
 }
 
@@ -5320,6 +5335,13 @@ function mcRenderInvoices(data) {
   document.getElementById('mc-invoices-body').innerHTML = `<div class="mc-table-wrap"><table class="mc-table"><thead><tr>
     <th>Invoice ID</th><th>Client</th><th>Engagement</th><th>Status</th><th>Amount</th><th>Drafted</th><th>Sent</th><th>Paid</th><th>Reminders</th><th></th>
   </tr></thead><tbody>${rows}</tbody></table></div>`;
+
+  // Mirror into rev-invoices duplicate panel (Engagements > Invoices and Revenue > Invoices share the same table)
+  ['body','stats','search'].forEach(suffix => {
+    const src = document.getElementById('mc-invoices-' + suffix);
+    const dst = document.getElementById('mc-rev-invoices-' + suffix);
+    if (src && dst && src !== dst) dst.innerHTML = src.innerHTML;
+  });
 }
 
 // Wire up search inputs (one global listener handles every mc-*-search)
