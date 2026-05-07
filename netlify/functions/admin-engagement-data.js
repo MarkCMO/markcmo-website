@@ -31,6 +31,8 @@
 //                                    (emails sent/opened/clicked, page views,
 //                                     payment-link clicks, all in chronological order)
 //   GET ?type=email-stats          — open/click/bounce rates rolled up
+//   GET ?type=meetings             — Calendly-booked engagements + client info,
+//                                    bucketed into upcoming / past / no_show / canceled
 // ═══════════════════════════════════════════════════════════════
 
 const COOKIE_NAME = 'mcadmin_session';
@@ -457,6 +459,70 @@ exports.handler = async (event) => {
     if (type === 'webinars') {
       const rows = await sbSelect('mc_webinar_events?select=*&order=scheduled_at.desc,created_at.desc');
       return { statusCode: 200, headers, body: JSON.stringify({ webinars: rows }) };
+    }
+
+    // ─── /meetings: Calendly bookings + journey ─────────────────
+    // Returns lead engagements that came from Calendly (calendly-webhook
+    // creates mc_engagements with metadata.calendly_invitee_uri set) joined
+    // with the underlying mc_clients row. Used by the Calendly Meetings
+    // tab at the top of the admin sidebar.
+    if (type === 'meetings') {
+      const rows = await sbSelect(
+        'mc_engagements?metadata->>calendly_invitee_uri=not.is.null&select=id,status,metadata,proposed_at,created_at,mc_clients(id,slug,legal_name,primary_contact_name,primary_contact_email,primary_contact_phone,source,status,created_at)&order=created_at.desc'
+      );
+      const now = Date.now();
+      const meetings = rows.map(e => {
+        const md = e.metadata || {};
+        const scheduledAt = md.scheduled_at || null;
+        const startMs = scheduledAt ? new Date(scheduledAt).getTime() : null;
+        let bucket = 'unknown';
+        if (md.canceled || md.cancellation) bucket = 'canceled';
+        else if (startMs && startMs > now) bucket = 'upcoming';
+        else if (startMs && startMs <= now) bucket = (md.attended === false ? 'no_show' : 'past');
+        return {
+          engagement_id: e.id,
+          engagement_status: e.status,
+          calendly_event_uri: md.calendly_event_uri || null,
+          calendly_invitee_uri: md.calendly_invitee_uri || null,
+          event_type_name: md.event_type_name || md.event_name || null,
+          scheduled_at: scheduledAt,
+          booked_at: e.created_at,
+          questions: md.questions_and_answers || md.questions || null,
+          location: md.location || null,
+          notes: md.notes || null,
+          canceled: !!(md.canceled || md.cancellation),
+          attended: md.attended,
+          bucket,
+          // Client info
+          client_id: e.mc_clients?.id,
+          client_slug: e.mc_clients?.slug,
+          client_name: e.mc_clients?.legal_name,
+          client_contact: e.mc_clients?.primary_contact_name,
+          client_email: e.mc_clients?.primary_contact_email,
+          client_phone: e.mc_clients?.primary_contact_phone,
+          client_source: e.mc_clients?.source,
+          client_status: e.mc_clients?.status,
+          client_created_at: e.mc_clients?.created_at,
+        };
+      });
+      // Stats
+      const upcoming = meetings.filter(m => m.bucket === 'upcoming');
+      const past = meetings.filter(m => m.bucket === 'past');
+      const canceled = meetings.filter(m => m.bucket === 'canceled');
+      return {
+        statusCode: 200, headers,
+        body: JSON.stringify({
+          meetings,
+          stats: {
+            total: meetings.length,
+            upcoming: upcoming.length,
+            past: past.length,
+            canceled: canceled.length,
+            no_shows: meetings.filter(m => m.bucket === 'no_show').length,
+            next_meeting: upcoming.sort((a, b) => new Date(a.scheduled_at) - new Date(b.scheduled_at))[0] || null,
+          },
+        }),
+      };
     }
 
     // ─── /submissions: every signed or executed document ────────
