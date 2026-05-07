@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Scope of Work &middot; SLC-DA-002 &middot; Salt Lake City Public Library</title>
+<meta name="description" content="Scope of Work for the Discovery &amp; Alignment Engagement with Salt Lake City Public Library." />
+<meta name="robots" content="noindex, nofollow, noarchive, nosnippet, noimageindex" />
+<meta http-equiv="Cache-Control" content="no-store, no-cache, must-revalidate, private" />
+<link rel="preconnect" href="https://fonts.googleapis.com" crossorigin>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Barlow:wght@400;500;600;700;800&family=DM+Mono:wght@400;500&display=swap">
+<style>
+  :root{--navy:#0A1628;--navy-mid:#0F2040;--navy-light:#162A4A;--blue:#2563EB;--blue-hover:#1D4ED8;--blue-light:#3B82F6;--blue-pale:#EFF6FF;--orange:#F97316;--orange-light:#FB923C;--white:#FFFFFF;--off-white:#F8FAFC;--light:#F1F5F9;--border:#E2E8F0;--text:#1E293B;--text-mid:#64748B;--text-light:#94A3B8;--shadow-md:0 4px 16px rgba(15,32,64,0.08), 0 8px 32px rgba(15,32,64,0.06);}
+  *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+  body{font-family:'Barlow',sans-serif;background:var(--off-white);color:var(--text);line-height:1.65;}
+  a{color:var(--blue);text-decoration:none;}
+
+  .doc-nav{position:sticky;top:0;z-index:100;background:var(--white);border-bottom:1px solid var(--border);padding:0.9rem 2rem;display:flex;justify-content:space-between;align-items:center;}
+  .doc-nav-logo{font-family:'Bebas Neue',sans-serif;font-size:1.25rem;letter-spacing:0.12em;color:var(--blue);}
+  .doc-nav-logo span{color:var(--text);}
+  .doc-nav-meta{font-family:'DM Mono',monospace;font-size:0.7rem;letter-spacing:0.15em;text-transform:uppercase;color:var(--text-light);}
+  .doc-nav-meta strong{color:var(--blue);font-weight:600;}
+  .doc-nav-links{display:flex;gap:0.85rem;}
+  .doc-nav-links a{font-family:'DM Mono',monospace;font-size:0.66rem;letter-spacing:0.15em;text-transform:uppercase;color:var(--text-mid);font-weight:600;}
+  .doc-nav-links a:hover{color:var(--blue);}
+
+  .doc-hero{background:linear-gradient(135deg,var(--navy) 0%,var(--navy-mid) 50%,var(--navy-light) 100%);color:var(--white);padding:4rem 2rem 3rem;}
+  .doc-hero-inner{max-width:980px;margin:0 auto;}
+  .doc-hero-eyebrow{font-family:'DM Mono',monospace;font-size:0.72rem;letter-spacing:0.25em;text-transform:uppercase;color:var(--blue-light);margin-bottom:1.25rem;}
+  .doc-hero h1{font-family:'Bebas Neue',sans-serif;font-size:clamp(2.2rem,5vw,3.4rem);font-weight:400;letter-spacing:0.02em;line-height:1.05;color:var(--white);margin-bottom:1rem;}
+  .doc-hero h1 em{color:var(--orange-light);font-style:normal;}
+  .doc-hero-sub{font-size:1.05rem;color:rgba(248,250,252,0.78);max-width:640px;line-height:1.55;}
+
+  .doc-body{max-width:880px;margin:0 auto;padding:3.5rem 2rem;}
+  .section{margin-bottom:3rem;}
+  .section-eyebrow{font-family:'DM Mono',monospace;font-size:0.7rem;letter-spacing:0.2em;text-transform:uppercase;color:var(--blue);margin-bottom:0.85rem;font-weight:700;display:inline-block;padding:0.3rem 0.85rem;background:var(--blue-pale);border-radius:6px;}
+
+  h2{font-family:'Bebas Neue',sans-serif;font-size:clamp(1.7rem,3.2vw,2.2rem);font-weight:400;letter-spacing:0.02em;color:var(--navy);margin-bottom:1.25rem;line-height:1.15;}
+  h2 span{color:var(--blue);}
+  h3{font-family:'Barlow',sans-serif;font-size:1.1rem;font-weight:700;color:var(--navy);margin-bottom:0.6rem;margin-top:1.5rem;}
+  p{margin-bottom:1rem;color:var(--text);font-size:0.96rem;}
+  p strong{color:var(--navy);font-weight:700;}
+  ul{padding-left:1.4rem;margin-bottom:1rem;}
+  li{margin-bottom:0.4rem;color:var(--text);font-size:0.94rem;line-height:1.55;}
+  li strong{color:var(--navy);}
+
+  .module{background:var(--white);border:1px solid var(--border);border-radius:14px;padding:1.75rem 2rem;margin-bottom:1.25rem;}
+  .module .lbl{font-family:'DM Mono',monospace;font-size:0.65rem;letter-spacing:0.2em;text-transform:uppercase;color:var(--blue);margin-bottom:0.5rem;font-weight:700;}
+  .module h3{font-family:'Bebas Neue',sans-serif;font-size:1.45rem;letter-spacing:0.04em;color:var(--navy);margin:0 0 0.85rem;font-weight:400;}
+  .module .row{display:grid;grid-template-columns:140px 1fr;gap:1rem;padding:0.6rem 0;border-bottom:1px solid var(--border);font-size:0.92rem;}
+  .module .row:last-child{border-bottom:0;}
+  .module .row .k{font-family:'DM Mono',monospace;font-size:0.66rem;letter-spacing:0.18em;text-transform:uppercase;color:var(--text-mid);font-weight:700;padding-top:0.15rem;}
+  .module .row .v{color:var(--text);line-height:1.55;}
+
+  .out-box{background:var(--blue-pale);border:1px solid rgba(37,99,235,0.25);border-radius:12px;padding:1.4rem 1.65rem;margin:1rem 0;}
+  .out-box .lbl{font-family:'DM Mono',monospace;font-size:0.65rem;letter-spacing:0.2em;text-transform:uppercase;color:var(--blue);margin-bottom:0.5rem;font-weight:700;}
+  .out-box ul{padding-left:1.2rem;margin:0;}
+
+  .warn-box{background:#FFF7ED;border:1px solid rgba(249,115,22,0.3);border-radius:12px;padding:1.4rem 1.65rem;margin:1rem 0;}
+  .warn-box .lbl{font-family:'DM Mono',monospace;font-size:0.65rem;letter-spacing:0.2em;text-transform:uppercase;color:#C2410C;margin-bottom:0.5rem;font-weight:700;}
+  .warn-box p{margin:0;color:var(--text);font-size:0.94rem;}
+  .warn-box ul{padding-left:1.2rem;margin:0.5rem 0 0;}
+  .warn-box li{font-size:0.92rem;}
+
+  footer.doc-footer{background:var(--navy);color:rgba(255,255,255,0.6);padding:2.5rem 2rem;border-top:4px solid var(--blue);}
+  .doc-footer-inner{max-width:980px;margin:0 auto;display:grid;grid-template-columns:1fr auto;gap:2rem;align-items:center;}
+  @media(max-width:600px){.doc-footer-inner{grid-template-columns:1fr;}}
+  .doc-footer-logo{font-family:'Bebas Neue',sans-serif;font-size:1.4rem;letter-spacing:0.12em;color:var(--white);}
+  .doc-footer-logo span{color:var(--blue-light);}
+  .doc-footer p{font-size:0.82rem;line-height:1.6;margin:0.4rem 0 0;color:rgba(255,255,255,0.55);}
+  .doc-footer-meta{font-family:'DM Mono',monospace;font-size:0.68rem;letter-spacing:0.15em;text-transform:uppercase;color:rgba(255,255,255,0.4);text-align:right;}
+  @media(max-width:600px){.doc-footer-meta{text-align:left;}}
+</style>
+</head>
+<body>
+
+<nav class="doc-nav">
+  <div class="doc-nav-logo">MARK<span>CMO</span></div>
+  <div class="doc-nav-links">
+    <a href="index.html">&larr; Cover</a>
+    <a href="proposal.html">Proposal</a>
+    <a href="timeline.html">Timeline</a>
+  </div>
+  <div class="doc-nav-meta">SLC-DA-002 &middot; <strong>Scope of Work</strong></div>
+</nav>
+
+<header class="doc-hero">
+  <div class="doc-hero-inner">
+    <div class="doc-hero-eyebrow">SLC-DA-002 &middot; Scope of Work</div>
+    <h1>Discovery &amp; Alignment <em>Engagement Scope.</em></h1>
+    <p class="doc-hero-sub">The reference document. What's delivered, the methodology used, what's required from the library, what's explicitly out of scope, and how changes to scope are handled. Phase 1 and Phase 2 SOWs will be issued separately if and when those engagements are initiated.</p>
+  </div>
+</header>
+
+<main class="doc-body">
+
+  <section class="section">
+    <div class="section-eyebrow">Engagement Summary</div>
+    <h2>The Two-Week <span>Engagement.</span></h2>
+    <p><strong>Engagement code:</strong> SLC-DA &middot; <strong>Engagement type:</strong> Fixed-fee discovery &middot; <strong>Duration:</strong> 2 calendar weeks from kickoff &middot; <strong>Fee:</strong> $12,500 USD &middot; <strong>Payment terms:</strong> Net 10 from Square invoice issuance &middot; <strong>Deliverable format:</strong> PDF memo + 60-minute leadership readout (in-person or video, library's choice)</p>
+    <p>The engagement establishes a baseline read of how technology, systems, and organizational practices currently support the library's mission &mdash; deep enough to scope a Phase 1 engagement properly, light enough to deliver in 2 weeks without disrupting library operations.</p>
+  </section>
+
+  <section class="section">
+    <div class="section-eyebrow">Module 01</div>
+    <div class="module">
+      <div class="lbl">Module 01 &middot; Stakeholder Interviews</div>
+      <h3>6&ndash;8 Leadership Conversations</h3>
+      <div class="row"><div class="k">Inputs</div><div class="v">Org chart, leadership directory, library board contact (if applicable), department head list. Provided by Tyler Bahr or designated point of contact.</div></div>
+      <div class="row"><div class="k">Activities</div><div class="v">45-minute structured interviews with: Executive Director, CFO, IT lead, Operations lead, Public Services lead, Branch Manager (one), Collections / Programs lead, board liaison if available. Standard interview protocol covering technology, decision rights, hand-offs, and stated vs. lived workflows.</div></div>
+      <div class="row"><div class="k">Outputs</div><div class="v">Anonymized interview synthesis (no quotes attributed to individuals), preserved as appendix to the final memo.</div></div>
+      <div class="row"><div class="k">Library responsibilities</div><div class="v">Schedule interviews on calendar; provide 1 brief warm-up email to interviewees from library leadership.</div></div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="section-eyebrow">Module 02</div>
+    <div class="module">
+      <div class="lbl">Module 02 &middot; Technology Inventory Snapshot</div>
+      <h3>What's In Use, What's Not, What's Stuck</h3>
+      <div class="row"><div class="k">Inputs</div><div class="v">Current vendor list, ILS / catalog system, network &amp; identity systems, learning / programming systems, AV/streaming, point-of-sale (if applicable), HR / finance / payroll, and any patron-facing apps.</div></div>
+      <div class="row"><div class="k">Activities</div><div class="v">Light desk research and 1&ndash;2 IT-side conversations. Catalogs systems by category (patron-facing, staff-facing, admin/finance, infrastructure), notes integration points and known pain points, identifies orphaned systems and shadow IT.</div></div>
+      <div class="row"><div class="k">Outputs</div><div class="v">1-page system inventory in the final memo. Not a full technical audit &mdash; that is Phase 1 territory.</div></div>
+      <div class="row"><div class="k">Library responsibilities</div><div class="v">Provide read-only access to the existing vendor / system list. No system access or credentials needed for this engagement.</div></div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="section-eyebrow">Module 03</div>
+    <div class="module">
+      <div class="lbl">Module 03 &middot; Decision-Flow Snapshot</div>
+      <h3>How Technology Decisions Get Made</h3>
+      <div class="row"><div class="k">Inputs</div><div class="v">Recent (last 18 months) examples of technology decisions: a new-system buy, a vendor renewal, a deferred initiative. Provided informally during interviews.</div></div>
+      <div class="row"><div class="k">Activities</div><div class="v">Map who initiates, who recommends, who approves, who is informed. Identify where decisions speed up vs. stall. Note governance gaps.</div></div>
+      <div class="row"><div class="k">Outputs</div><div class="v">RACI-style summary embedded in the final memo's "alignment risks" section.</div></div>
+      <div class="row"><div class="k">Library responsibilities</div><div class="v">2&ndash;3 example decisions referenced anonymously by participants during interviews.</div></div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="section-eyebrow">Module 04</div>
+    <div class="module">
+      <div class="lbl">Module 04 &middot; Lay of the Land Memo</div>
+      <h3>The Primary Deliverable</h3>
+      <div class="row"><div class="k">Format</div><div class="v">5-page PDF memo, plain-English, executive-readable. Prepared in markcmo.com brand styling, delivered as a private password-protected URL plus PDF attachment.</div></div>
+      <div class="row"><div class="k">Sections</div><div class="v">(1) Current State Read &mdash; what we observed, summarized. (2) Alignment Risks &mdash; the top 3&ndash;5 places where roles, systems, and goals don't line up. (3) Three Framed Phase 1 Options &mdash; lighter / standard / deeper, each with scope, fee, and tradeoffs.</div></div>
+      <div class="row"><div class="k">Confidentiality</div><div class="v">Memo is delivered to Tyler Bahr only. Distribution to other parties (board, executive director, etc.) is at the library's discretion.</div></div>
+      <div class="row"><div class="k">Revisions</div><div class="v">One round of revision included if requested within 14 days of delivery.</div></div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="section-eyebrow">Module 05</div>
+    <div class="module">
+      <div class="lbl">Module 05 &middot; Leadership Readout</div>
+      <h3>60-Minute Walkthrough</h3>
+      <div class="row"><div class="k">Format</div><div class="v">In-person if Mark is in Salt Lake City for the engagement, or by video conference. Library's choice. Recording optional and at library's discretion.</div></div>
+      <div class="row"><div class="k">Audience</div><div class="v">Whoever Tyler Bahr designates &mdash; typically CFO + Executive Director + IT lead. Up to 8 attendees.</div></div>
+      <div class="row"><div class="k">Agenda</div><div class="v">Walk through the memo, answer clarifying questions, discuss the three Phase 1 options. No decision required at the readout &mdash; the library can take time to consider next steps.</div></div>
+      <div class="row"><div class="k">Follow-up</div><div class="v">Up to 14 days of email Q&amp;A clarification on the memo included. Phase 1 sign-up is a separate signed engagement at the library's option.</div></div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="section-eyebrow">Out of Scope</div>
+    <h2>What This Engagement <span>Does Not Include.</span></h2>
+    <div class="warn-box">
+      <div class="lbl">Explicit Exclusions</div>
+      <ul>
+        <li><strong>No implementation.</strong> No tooling changes, no vendor procurement, no staffing changes.</li>
+        <li><strong>No technical audit.</strong> No code review, network pen-test, security audit, or compliance review.</li>
+        <li><strong>No staff interviews beyond leadership.</strong> Branch staff, programming staff, and front-line personnel are interviewed in Phase 1, not Discovery.</li>
+        <li><strong>No vendor outreach on library's behalf.</strong> No talking to current or potential vendors during this engagement.</li>
+        <li><strong>No patron data review.</strong> Discovery does not require access to patron records, circulation data, or PII. If incidental patron data is observed, it is not retained or referenced.</li>
+        <li><strong>No public deliverable.</strong> All work product is confidential to the library.</li>
+      </ul>
+    </div>
+    <p>If the library wants any of the above, it is in scope for Phase 1 (Operational Assessment) or Phase 2 (Implementation), with separate fees and timelines.</p>
+  </section>
+
+  <section class="section">
+    <div class="section-eyebrow">Library Responsibilities</div>
+    <h2>What We Need <span>From You.</span></h2>
+    <div class="out-box">
+      <div class="lbl">Required from Salt Lake City Public Library</div>
+      <ul>
+        <li>A single point of contact (default: Tyler Bahr) for scheduling, intake, and clarifications.</li>
+        <li>Org chart, current vendor list, system list. Provided by start of Week 1.</li>
+        <li>Calendar access for 6&ndash;8 leadership interviews during Week 1.</li>
+        <li>One warm-up email from library leadership to interviewees explaining the engagement and asking for cooperation.</li>
+        <li>Designated audience for the 60-minute readout in Week 2.</li>
+        <li>Payment of the $12,500 invoice within 10 business days of issuance, per public-procurement norms.</li>
+      </ul>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="section-eyebrow">Confidentiality &amp; Data Handling</div>
+    <h2>How Information Is <span>Protected.</span></h2>
+    <p>All information shared during the engagement &mdash; verbal, written, observed, or inferred &mdash; is treated as confidential to Salt Lake City Public Library. Information is held by Mark Gabrielli (sole engagement lead) and not shared with subcontractors, partners, or any third party. Discovery work product is stored encrypted at rest in markcmo.com's Supabase + Storage infrastructure (US-based). On engagement close, Mark retains the executed proposal and the final memo for the standard 7-year business records period; all interview notes and ancillary materials are destroyed within 30 days of memo delivery unless the library requests otherwise.</p>
+    <p>If the engagement transitions to Phase 1 or Phase 2, data handling is re-stated in those engagement documents and may include additional protections (e.g. signed BAAs or DPAs) at the library's direction.</p>
+  </section>
+
+  <section class="section">
+    <div class="section-eyebrow">Change Control</div>
+    <h2>If Scope Needs <span>To Change.</span></h2>
+    <p>The fixed fee covers the modules above. If the library wants to add interviews, expand modules, or accelerate the timeline, a written change order is issued before the additional work starts. Change orders carry a separate fee, are signed by both parties, and do not affect the original $12,500 fee or the original 2-week timeline unless explicitly agreed.</p>
+    <p>Conversely, if the library wants to descope (e.g. fewer interviews, no readout), the engagement fee can be reduced via written change order. There is no minimum modules requirement, but the integrity of the deliverable depends on at least Modules 01, 02, and 04.</p>
+  </section>
+
+  <section class="section">
+    <div class="section-eyebrow">Acceptance Criteria</div>
+    <h2>When This <span>Engagement Is Done.</span></h2>
+    <p>The engagement is considered complete when (a) the 5-page Lay of the Land memo has been delivered to Tyler Bahr, (b) the 60-minute readout has been held and either recorded or summarized in writing, and (c) the 14-day Q&amp;A clarification window has closed. The library does not need to "approve" findings &mdash; the deliverable is an independent assessment, not a co-authored document. Disagreement with findings is documented as part of the readout and does not affect engagement closure.</p>
+  </section>
+
+</main>
+
+<footer class="doc-footer">
+  <div class="doc-footer-inner">
+    <div>
+      <div class="doc-footer-logo">MARK<span>CMO</span></div>
+      <p>Mark Gabrielli &middot; Fractional CMO &amp; COO &middot; WETYR Corp &middot; Cape Canaveral, FL &middot; <a style="color:var(--blue-light);" href="mailto:mark@markcmo.com">mark@markcmo.com</a></p>
+    </div>
+    <div class="doc-footer-meta">
+      SLC-DA-002 &middot; v1.0<br/>
+      Confidential &middot; Salt Lake City Public Library
+    </div>
+  </div>
+</footer>
+
+<script>
+(function(){
+  try {
+    var sk = 'mc_jsid';
+    var sid = sessionStorage.getItem(sk) || ('s_' + Math.random().toString(36).slice(2) + Date.now().toString(36));
+    sessionStorage.setItem(sk, sid);
+    fetch('/.netlify/functions/track', {
+      method: 'POST', headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ t: 'view', client: 'salt-lake-city-public-library', page: 'sow', session_id: sid, url: location.pathname, title: document.title }),
+      keepalive: true
+    }).catch(function(){});
+  } catch(e) {}
+})();
+</script>
+</body>
+</html>
