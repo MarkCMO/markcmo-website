@@ -112,7 +112,11 @@ exports.handler = async (event) => {
         ip, user_agent: ua, referrer,
         raw: { kind },
       });
-      return { statusCode: 302, headers: { Location: target, 'Cache-Control': 'no-store' }, body: '' };
+      // Netlify merges the source request's query string into the
+      // response Location when the destination has no query string.
+      // Prevent that by always appending a no-op param if needed.
+      const finalUrl = target.includes('?') ? target : target + '?_mc=' + Date.now().toString(36);
+      return { statusCode: 302, headers: { Location: finalUrl, 'Cache-Control': 'no-store' }, body: '' };
     }
 
     if (t === 'pixel') {

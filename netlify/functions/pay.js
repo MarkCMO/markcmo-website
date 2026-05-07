@@ -58,9 +58,14 @@ exports.handler = async (event) => {
     });
   } catch (e) { console.warn('payment_link_click insert failed:', e.message); }
 
+  // Netlify merges request query string into Location when the destination
+  // has none. Square's invoice URLs already have a path but no query, so
+  // append a tracking marker to prevent param leak.
+  const sqUrl = invoice.square_invoice_url;
+  const finalUrl = sqUrl.includes('?') ? sqUrl : sqUrl + '?_mc=' + Date.now().toString(36);
   return {
     statusCode: 302,
-    headers: { Location: invoice.square_invoice_url, 'Cache-Control': 'no-store' },
+    headers: { Location: finalUrl, 'Cache-Control': 'no-store' },
     body: '',
   };
 };
