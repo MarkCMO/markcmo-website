@@ -1,0 +1,938 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>WETYR Studio - Script to Production (Internal)</title>
+<meta name="description" content="Internal WETYR tooling - script breakdown, schedule, budget. Admin sign-in required." />
+<meta name="robots" content="noindex, nofollow" />
+<meta name="theme-color" content="#0a0a0a" />
+<link rel="canonical" href="https://markcmo.com/wetyr-studio" />
+<style>
+:root {
+  --bg: #0a0a0a;
+  --panel: #131316;
+  --panel-2: #1c1c20;
+  --border: #27272a;
+  --border-hot: #3f3f46;
+  --text: #fafafa;
+  --muted: #a1a1aa;
+  --dim: #71717a;
+  --gold: #d4af37;
+  --red: #dc2626;
+  --green: #16a34a;
+  --blue: #2563eb;
+  --purple: #9333ea;
+}
+* { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+body { font-family: -apple-system, BlinkMacSystemFont, 'Inter', 'Segoe UI', Roboto, sans-serif; background: var(--bg); color: var(--text); line-height: 1.55; font-size: 15px; }
+a { color: var(--gold); text-decoration: none; }
+a:hover { text-decoration: underline; }
+.wrap { max-width: 1320px; margin: 0 auto; padding: 0 24px; }
+
+.nav { padding: 18px 0; border-bottom: 1px solid var(--border); background: rgba(10,10,10,0.92); backdrop-filter: blur(12px); position: sticky; top: 0; z-index: 20; }
+.nav-inner { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 12px; }
+.brand { display: flex; align-items: center; gap: 10px; font-weight: 800; font-size: 18px; letter-spacing: 0.5px; }
+.brand-dot { width: 10px; height: 10px; background: var(--gold); border-radius: 2px; }
+.nav-links { display: flex; gap: 22px; font-size: 14px; color: var(--muted); }
+.nav-links a { color: var(--muted); }
+.nav-links a:hover { color: var(--text); text-decoration: none; }
+
+.hero { padding: 70px 0 50px; text-align: center; border-bottom: 1px solid var(--border); background: linear-gradient(180deg, #131316 0%, var(--bg) 100%); }
+.eyebrow { color: var(--gold); font-weight: 700; font-size: 13px; letter-spacing: 2px; text-transform: uppercase; margin-bottom: 16px; }
+.hero h1 { font-size: clamp(36px, 5vw, 58px); line-height: 1.08; font-weight: 800; max-width: 980px; margin: 0 auto 20px; letter-spacing: -1px; }
+.hero h1 span { background: linear-gradient(90deg, var(--gold), #ffd700); -webkit-background-clip: text; background-clip: text; color: transparent; }
+.hero p { max-width: 720px; margin: 0 auto 28px; color: var(--muted); font-size: 18px; }
+
+.btn { padding: 12px 22px; border-radius: 8px; font-weight: 700; font-size: 14px; display: inline-block; transition: all 0.15s; border: 0; cursor: pointer; font-family: inherit; }
+.btn-primary { background: var(--gold); color: #0a0a0a; }
+.btn-primary:hover { background: #e6c14d; text-decoration: none; }
+.btn-primary:disabled { opacity: 0.5; cursor: not-allowed; }
+.btn-ghost { background: transparent; color: var(--text); border: 1px solid var(--border-hot); }
+.btn-ghost:hover { background: var(--panel); text-decoration: none; }
+
+.section { padding: 48px 0; border-bottom: 1px solid var(--border); }
+.section h2 { font-size: 26px; font-weight: 800; letter-spacing: -0.3px; margin-bottom: 8px; }
+.section .sub { color: var(--muted); font-size: 14px; margin-bottom: 22px; }
+
+/* Upload panel */
+.upload-card { background: var(--panel); border: 1px solid var(--border); border-radius: 14px; padding: 28px; }
+.drop {
+  border: 2px dashed var(--border-hot);
+  border-radius: 12px;
+  padding: 40px 20px;
+  text-align: center;
+  transition: all 0.15s;
+  cursor: pointer;
+  background: var(--panel-2);
+}
+.drop.hover { border-color: var(--gold); background: rgba(212, 175, 55, 0.05); }
+.drop-icon { font-size: 32px; margin-bottom: 10px; }
+.drop-title { font-weight: 700; margin-bottom: 6px; }
+.drop-sub { color: var(--muted); font-size: 13px; }
+.upload-form { display: grid; gap: 14px; margin-top: 18px; }
+.form-row { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 12px; }
+.field { display: flex; flex-direction: column; gap: 5px; }
+.field label { font-size: 12px; color: var(--muted); text-transform: uppercase; letter-spacing: 0.5px; font-weight: 700; }
+.field input, .field select, .field textarea {
+  background: var(--panel-2); border: 1px solid var(--border); color: var(--text);
+  padding: 10px 12px; border-radius: 6px; font-family: inherit; font-size: 14px;
+}
+.field input:focus, .field select:focus, .field textarea:focus { outline: none; border-color: var(--gold); }
+.field textarea { min-height: 120px; resize: vertical; font-family: ui-monospace, 'SF Mono', Menlo, monospace; font-size: 12px; line-height: 1.5; }
+
+/* Status */
+.status { display: none; margin-top: 18px; padding: 14px; border-radius: 8px; font-size: 13px; }
+.status.active { display: block; }
+.status.info { background: rgba(201,168,76,0.1); border: 1px solid rgba(201,168,76,0.4); color: #93c5fd; }
+.status.err { background: rgba(220, 38, 38, 0.1); border: 1px solid rgba(220, 38, 38, 0.4); color: #fca5a5; }
+.status.ok { background: rgba(22, 163, 74, 0.1); border: 1px solid rgba(22, 163, 74, 0.4); color: #86efac; }
+.spinner { display: inline-block; width: 12px; height: 12px; border: 2px solid rgba(255,255,255,0.2); border-top-color: currentColor; border-radius: 50%; animation: spin 0.8s linear infinite; vertical-align: middle; margin-right: 8px; }
+@keyframes spin { to { transform: rotate(360deg); } }
+
+/* Tabs */
+.tabs { display: flex; gap: 4px; border-bottom: 1px solid var(--border); margin-bottom: 22px; overflow-x: auto; }
+.tab { padding: 10px 16px; font-size: 13px; font-weight: 700; color: var(--muted); border-bottom: 2px solid transparent; cursor: pointer; white-space: nowrap; }
+.tab.active { color: var(--text); border-bottom-color: var(--gold); }
+.tab-panel { display: none; }
+.tab-panel.active { display: block; }
+
+/* Summary stats */
+.stats { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 12px; margin-bottom: 22px; }
+.stat { background: var(--panel); border: 1px solid var(--border); border-radius: 10px; padding: 16px; }
+.stat-label { font-size: 11px; color: var(--muted); text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 6px; font-weight: 700; }
+.stat-value { font-size: 22px; font-weight: 800; letter-spacing: -0.5px; }
+.stat-sub { font-size: 12px; color: var(--dim); margin-top: 4px; }
+
+/* Tables */
+table { width: 100%; border-collapse: collapse; font-size: 13px; }
+th, td { padding: 10px 12px; text-align: left; border-bottom: 1px solid var(--border); vertical-align: top; }
+th { background: var(--panel); color: var(--muted); font-weight: 700; font-size: 11px; text-transform: uppercase; letter-spacing: 0.5px; position: sticky; top: 62px; }
+tr:hover td { background: var(--panel); }
+.tbl-scroll { max-height: 620px; overflow-y: auto; border: 1px solid var(--border); border-radius: 10px; }
+.tag { display: inline-block; padding: 2px 8px; border-radius: 4px; font-size: 11px; font-weight: 700; margin: 1px 3px 1px 0; background: var(--panel-2); color: var(--muted); border: 1px solid var(--border); }
+.tag.int { background: rgba(201,168,76,0.12); color: #93c5fd; border-color: rgba(201,168,76,0.3); }
+.tag.ext { background: rgba(212, 175, 55, 0.12); color: var(--gold); border-color: rgba(212, 175, 55, 0.3); }
+.tag.day { background: rgba(234, 179, 8, 0.12); color: #fde047; border-color: rgba(234, 179, 8, 0.3); }
+.tag.night { background: rgba(147, 51, 234, 0.12); color: #c4b5fd; border-color: rgba(147, 51, 234, 0.3); }
+.tag.hot { background: rgba(220, 38, 38, 0.12); color: #fca5a5; border-color: rgba(220, 38, 38, 0.3); }
+
+.flag-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 10px; margin: 18px 0; }
+.flag { padding: 12px; border-radius: 8px; background: var(--panel); border: 1px solid var(--border); font-size: 12px; display: flex; justify-content: space-between; align-items: center; }
+.flag-on { border-color: var(--red); background: rgba(220, 38, 38, 0.06); color: var(--text); }
+.flag-off { color: var(--dim); }
+.flag-dot { width: 8px; height: 8px; border-radius: 50%; background: var(--dim); }
+.flag-on .flag-dot { background: var(--red); }
+
+.bar { display: flex; gap: 10px; align-items: center; margin: 6px 0; }
+.bar-fill { flex: 1; height: 8px; background: var(--panel-2); border-radius: 4px; overflow: hidden; }
+.bar-fill > div { height: 100%; background: var(--gold); border-radius: 4px; }
+.bar-label { font-size: 12px; color: var(--muted); min-width: 180px; }
+.bar-val { font-size: 12px; font-weight: 700; min-width: 50px; text-align: right; }
+
+pre.json { background: #0f0f12; border: 1px solid var(--border); border-radius: 8px; padding: 14px; max-height: 600px; overflow: auto; font-size: 11px; color: #c0c0c8; font-family: ui-monospace, 'SF Mono', Menlo, monospace; }
+
+.footer { padding: 40px 0; color: var(--dim); font-size: 13px; text-align: center; }
+
+@media (max-width: 720px) {
+  th { position: static; }
+  .nav-links { display: none; }
+}
+</style>
+<meta property="og:type" content="website"/>
+<meta property="og:site_name" content="MarkCMO"/>
+<meta property="og:title" content="WETYR Studios - Script to Production, Automated"/>
+<meta property="og:description" content="Upload a screenplay, get a full production breakdown: scenes, characters, schedule, budget, and every document a crew needs. Powered by Claude Opus."/>
+<meta property="og:url" content="https://markcmo.com/wetyr-films"/>
+<meta property="og:image" content="https://markcmo.com/mark-photo.webp"/>
+<meta name="twitter:card" content="summary_large_image"/>
+<meta name="twitter:site" content="@markgcmo"/>
+<meta name="twitter:title" content="WETYR Studios - Script to Production, Automated"/>
+<meta name="twitter:description" content="Upload a screenplay, get a full production breakdown: scenes, characters, schedule, budget, and every document a crew needs. Powered by Claude Opus."/>
+<meta name="twitter:image" content="https://markcmo.com/mark-photo.webp"/>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "What does a fractional CMO do for companies in this market?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "A fractional CMO acts as your Chief Marketing Officer on a part-time basis - typically 2-3 days per week - with full executive accountability for strategy, team leadership, budget, and revenue outcomes. They own your entire marketing function and are accountable for pipeline generation and revenue attribution, not just deliverables."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "How quickly will I see results?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Most engagements produce measurable outputs within 30 days: a GTM strategy, ICP definition, messaging architecture, and demand generation plan. Pipeline movement typically appears in 60-90 days as campaigns launch. Long-term compounding results build over 6-12 months."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Is there a long-term contract required?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "No. Every MarkCMO engagement is month-to-month. There are no long-term contracts, no cancellation fees, and no lock-in. You stay because the results justify it. We offer a free GTM diagnostic before you commit to any paid engagement."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Do I have to sign a long-term contract?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "No. Every MarkCMO engagement is month-to-month. There are no long-term contracts, no cancellation fees, and no lock-in clauses. You stay because the results justify it - not because you are contractually obligated. We offer a free GTM diagnostic before you commit to any paid engagement so you can validate fit before spending a dollar."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "How does the engagement start?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Step one is a free 30-minute GTM diagnostic call. We review your current situation, revenue goals, team structure, and the biggest gap between where you are and where you need to be. If there is a clear fit, we outline a 30-60-90 day plan and agree on scope. Most engagements are live within 5-7 business days of the diagnostic call."
+      }
+    }
+  ],
+  "dateModified": "2026-05-08"
+}
+</script>
+<meta name="author" content="Mark Gabrielli"/>
+<link rel="author" href="https://markcmo.com/about.html"/>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebPage",
+  "name": "WETYR Studios - Script to Production, Automated",
+  "description": "Upload a screenplay, get a full production breakdown: scenes, characters, schedule, budget, and every document a crew needs. Powered by Claude Opus.",
+  "url": "https://markcmo.com/wetyr-films",
+  "author": {
+    "@type": "Person",
+    "name": "Mark Gabrielli",
+    "url": "https://markcmo.com/about.html",
+    "sameAs": [
+      "https://www.linkedin.com/in/marklgabrielli/",
+      "https://markcmo.com"
+    ]
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "MarkCMO",
+    "url": "https://markcmo.com",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "https://markcmo.com/mark-photo.webp"
+    }
+  },
+  "dateModified": "2026-05-08",
+  "inLanguage": "en-US"
+}
+</script>
+</head>
+<body>
+
+<nav class="nav">
+  <div class="wrap nav-inner">
+    <div class="brand"><span class="brand-dot"></span>WETYR</div>
+    <div class="nav-links">
+      <a href="/wetyr-films" style="color: var(--gold);">Studios</a>
+      <a href="/wetyr-film">Film Intel</a>
+      <span style="color: var(--border-hot);">|</span>
+      <a href="#upload">Upload</a>
+      <a href="#results">Results</a>
+      <a href="#how">Roadmap</a>
+    </div>
+  </div>
+</nav>
+
+<section class="hero">
+  <div class="wrap">
+    <div class="eyebrow">WETYR Studios - Test Build</div>
+    <h1>Script to <span>Production</span>, automated.</h1>
+    <p>Upload a screenplay. Get a full breakdown, stripboard, shooting schedule, and budget in under 3 minutes. Every document a production needs, generated from page one.</p>
+    <div style="display: flex; gap: 10px; justify-content: center; flex-wrap: wrap;">
+      <a href="#upload" class="btn btn-primary">Try it now</a>
+      <a href="#how" class="btn btn-ghost">How it works</a>
+    </div>
+  </div>
+</section>
+<div class="sp-proof-strip">
+<div class="sp-proof-item">
+<span class="sp-proof-num">4.9&#9733;</span>
+<span class="sp-proof-label">193 Reviews</span>
+</div>
+<div class="sp-proof-item">
+<span class="sp-proof-num">90%</span>
+<span class="sp-proof-label">Retention Rate</span>
+</div>
+<div class="sp-proof-item">
+<span class="sp-proof-num">19+</span>
+<span class="sp-proof-label">Ventures Built</span>
+</div>
+<div class="sp-proof-item">
+<span class="sp-proof-num">$50M+</span>
+<span class="sp-proof-label">Revenue Generated</span>
+</div>
+<div class="sp-proof-item">
+<span class="sp-proof-num">30</span>
+<span class="sp-proof-label">Days to First Results</span>
+</div>
+</div>
+
+
+<section class="section" id="upload">
+  <div class="wrap">
+    <h2>1. Upload your script</h2>
+    <div class="sub">PDF, FDX, Fountain, or plain text. Scanned PDFs run through OCR automatically.</div>
+
+    <div class="upload-card">
+      <div id="drop" class="drop">
+        <div class="drop-icon">[FILE]</div>
+        <div class="drop-title">Drop script here or click to browse</div>
+        <div class="drop-sub">.pdf &bull; .fdx &bull; .fountain &bull; .txt - up to 10 MB</div>
+        <input type="file" id="fileInput" accept=".pdf,.fdx,.fountain,.txt,application/pdf,text/plain" style="display: none;" />
+      </div>
+
+      <div class="upload-form">
+        <div class="form-row">
+          <div class="field">
+            <label>Title</label>
+            <input type="text" id="titleInput" placeholder="Untitled" />
+          </div>
+          <div class="field">
+            <label>Format</label>
+            <select id="formatInput">
+              <option value="feature">Feature</option>
+              <option value="short">Short</option>
+              <option value="pilot">TV Pilot</option>
+              <option value="episode">TV Episode</option>
+              <option value="commercial">Commercial</option>
+              <option value="music_video">Music Video</option>
+            </select>
+          </div>
+          <div class="field">
+            <label>Budget Tier</label>
+            <select id="tierInput">
+              <option value="ultralow">Ultra-low ($50k-$250k)</option>
+              <option value="micro">Micro ($250k-$1M)</option>
+              <option value="indie">Indie ($1M-$5M)</option>
+              <option value="midrange">Midrange ($5M-$20M)</option>
+              <option value="studio" selected>Studio ($20M-$80M)</option>
+              <option value="tentpole">Tentpole ($80M-$200M)</option>
+              <option value="blockbuster">Blockbuster ($200M+)</option>
+              <option value="custom">Custom (enter amount)</option>
+            </select>
+          </div>
+          <div class="field" id="customBudgetField" style="display: none;">
+            <label>Target Budget (USD)</label>
+            <input type="number" id="customBudgetInput" placeholder="e.g. 45000000" min="10000" step="100000" />
+          </div>
+          <div class="field">
+            <label>Union</label>
+            <select id="unionInput">
+              <option value="non-union">Non-union</option>
+              <option value="sag-ulb">SAG Ultra-Low</option>
+              <option value="sag-mlb">SAG Modified Low</option>
+              <option value="sag-lba">SAG Low Budget</option>
+              <option value="full-union">Full Union</option>
+            </select>
+          </div>
+          <div class="field">
+            <label>Shoot State</label>
+            <input type="text" id="stateInput" placeholder="e.g. NY, CA, GA, NM" />
+          </div>
+          <div class="field">
+            <label>Target Shoot Days</label>
+            <input type="number" id="daysInput" placeholder="auto" min="1" max="200" />
+          </div>
+        </div>
+
+        <details>
+          <summary style="cursor: pointer; color: var(--muted); font-size: 13px;">Or paste script text directly</summary>
+          <div class="field" style="margin-top: 10px;">
+            <textarea id="pasteInput" placeholder="Paste full screenplay text here..."></textarea>
+          </div>
+        </details>
+
+        <div style="display: flex; gap: 10px; flex-wrap: wrap;">
+          <button class="btn btn-primary" id="goBtn">Break down script</button>
+          <button class="btn btn-ghost" id="loadSampleBtn">Load sample script</button>
+          <button class="btn btn-ghost" id="clearBtn">Clear</button>
+        </div>
+      </div>
+
+      <div id="status" class="status"></div>
+    </div>
+  </div>
+</section>
+
+<section class="section" id="results" style="display: none;">
+  <div class="wrap">
+    <div class="tabs">
+      <div class="tab active" data-tab="breakdown">Breakdown</div>
+      <div class="tab" data-tab="scenes">Scenes</div>
+      <div class="tab" data-tab="characters">Characters</div>
+      <div class="tab" data-tab="locations">Locations</div>
+      <div class="tab" data-tab="flags">Production Flags</div>
+      <div class="tab" data-tab="schedule">Schedule</div>
+      <div class="tab" data-tab="budget">Budget</div>
+      <div class="tab" data-tab="json">Raw JSON</div>
+    </div>
+
+    <div class="tab-panel active" data-panel="breakdown">
+      <div id="overview"></div>
+    </div>
+    <div class="tab-panel" data-panel="scenes">
+      <div class="tbl-scroll"><table id="scenesTable"><thead><tr>
+        <th>#</th><th>Heading</th><th>Location</th><th>I/E</th><th>TOD</th><th>Pages</th><th>Cast</th><th>Tags</th>
+      </tr></thead><tbody></tbody></table></div>
+    </div>
+    <div class="tab-panel" data-panel="characters">
+      <div class="tbl-scroll"><table id="charTable"><thead><tr>
+        <th>Name</th><th>Type</th><th>Age</th><th>Scenes</th><th>Lines</th><th>First</th><th>Last</th><th>Skills</th>
+      </tr></thead><tbody></tbody></table></div>
+    </div>
+    <div class="tab-panel" data-panel="locations">
+      <div id="locView"></div>
+    </div>
+    <div class="tab-panel" data-panel="flags">
+      <div id="flagsView"></div>
+    </div>
+    <div class="tab-panel" data-panel="schedule">
+      <div id="scheduleView">
+        <p style="color: var(--muted); font-size: 14px;">Run breakdown first, then generate schedule.</p>
+        <button class="btn btn-primary" id="genScheduleBtn" style="margin-top: 12px;">Generate shooting schedule</button>
+      </div>
+    </div>
+    <div class="tab-panel" data-panel="budget">
+      <div id="budgetView">
+        <p style="color: var(--muted); font-size: 14px;">Run breakdown first, then generate budget.</p>
+        <button class="btn btn-primary" id="genBudgetBtn" style="margin-top: 12px;">Generate budget</button>
+      </div>
+    </div>
+    <div class="tab-panel" data-panel="json">
+      <pre class="json" id="rawJson"></pre>
+    </div>
+  </div>
+</section>
+
+<section class="section" id="how">
+  <div class="wrap">
+    <h2>What gets generated</h2>
+    <div class="sub">MVP v1 ships the first three. The rest ship next.</div>
+    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 14px; margin-top: 14px;">
+      <div class="stat"><div class="stat-label">Script Breakdown</div><div class="stat-sub">Scenes, chars, props, wardrobe, VFX, stunts, weapons, animals, minors, vehicles - every tagged element.</div></div>
+      <div class="stat"><div class="stat-label">Shooting Schedule</div><div class="stat-sub">Stripboard, shoot days grouped by location + INT/EXT + TOD, cast day-out-of-days.</div></div>
+      <div class="stat"><div class="stat-label">Budget Top Sheet</div><div class="stat-sub">ATL / BTL-Production / BTL-Post / Other, with line items, contingency, tier comparison.</div></div>
+      <div class="stat" style="opacity: 0.5;"><div class="stat-label">Call Sheets</div><div class="stat-sub">Per-day auto-generated from schedule + breakdown.</div></div>
+      <div class="stat" style="opacity: 0.5;"><div class="stat-label">Shot List + Storyboards</div><div class="stat-sub">VLM-generated reference frames per scene.</div></div>
+      <div class="stat" style="opacity: 0.5;"><div class="stat-label">Purchase Orders</div><div class="stat-sub">Props, wardrobe, set dressing, catering, equipment rental quotes.</div></div>
+      <div class="stat" style="opacity: 0.5;"><div class="stat-label">Location Scouting</div><div class="stat-sub">Permit requirements per jurisdiction, site-rep needs.</div></div>
+      <div class="stat" style="opacity: 0.5;"><div class="stat-label">Safety + Insurance</div><div class="stat-sub">Stunts, minors, firearms, animals, vehicles - rider docs.</div></div>
+      <div class="stat" style="opacity: 0.5;"><div class="stat-label">Post-Production Plan</div><div class="stat-sub">Edit, color, sound mix, VFX shot list, delivery specs.</div></div>
+    </div>
+  </div>
+</section>
+
+<div class="sp-faq" style="padding:3rem 6vw;max-width:960px;margin:0 auto;">
+<h2 style="color:#ffffff;font-family:'Bebas Neue',sans-serif;font-size:clamp(1.6rem,2.8vw,2.2rem);letter-spacing:.04em;margin-bottom:1.5rem;">What You Get - Frequently Asked Questions</h2>
+<div class="sp-faq-item">
+<p class="sp-faq-q">What does a fractional CMO do for companies in this market?</p>
+<p class="sp-faq-a">A fractional CMO acts as your Chief Marketing Officer on a part-time basis -- typically 2-3 days per week -- with full executive accountability for strategy, team leadership, budget, and revenue outcomes. They own your entire marketing function and are accountable for pipeline generation and revenue attribution, not just deliverables.</p>
+</div>
+<div class="sp-faq-item">
+<p class="sp-faq-q">How quickly will I see results?</p>
+<p class="sp-faq-a">Most engagements produce measurable outputs within 30 days: a GTM strategy, ICP definition, messaging architecture, and demand generation plan. Pipeline movement typically appears in 60-90 days as campaigns launch. Long-term compounding results build over 6-12 months.</p>
+</div>
+<div class="sp-faq-item">
+<p class="sp-faq-q">Is there a long-term contract required?</p>
+<p class="sp-faq-a">No. Every MarkCMO engagement is month-to-month. There are no long-term contracts, no cancellation fees, and no lock-in. You stay because the results justify it. We offer a free GTM diagnostic before you commit to any paid engagement.</p>
+</div>
+<div class="sp-faq-item">
+<p class="sp-faq-q">Do I have to sign a long-term contract?</p>
+<p class="sp-faq-a">No. Every MarkCMO engagement is month-to-month. There are no long-term contracts, no cancellation fees, and no lock-in clauses. You stay because the results justify it -- not because you are contractually obligated. We offer a free GTM diagnostic before you commit to any paid engagement so you can validate fit before spending a dollar.</p>
+</div>
+<div class="sp-faq-item">
+<p class="sp-faq-q">How does the engagement start?</p>
+<p class="sp-faq-a">Step one is a free 30-minute GTM diagnostic call. We review your current situation, revenue goals, team structure, and the biggest gap between where you are and where you need to be. If there is a clear fit, we outline a 30-60-90 day plan and agree on scope. Most engagements are live within 5-7 business days of the diagnostic call.</p>
+</div>
+</div>
+<div class="sp-cta-closer">
+<div class="sp-cta-closer-inner">
+<span class="sp-cta-closer-tag">Free 30-Min Diagnostic</span>
+<h2>Ready to Build a Marketing Engine That Compounds?</h2>
+<p>Book a free GTM diagnostic call. No pitch. No pressure. We review your current situation, identify the single biggest gap in your marketing, and give you a clear path forward -- whether you hire us or not.</p>
+<div class="sp-cta-closer-btns">
+<a href="/book.html" class="sp-cta-primary">Book Free Strategy Call</a>
+<a href="/fractional-cmo.html" class="btn-ghost">Learn About Fractional CMO</a>
+</div>
+<p class="sp-cta-closer-trust"><span>4.9&#9733; rated</span><span>&nbsp;&bull;&nbsp;</span><span>193 client reviews</span><span>&nbsp;&bull;&nbsp;</span><span>No long-term contracts</span><span>&nbsp;&bull;&nbsp;</span><span>Month-to-month</span></p>
+</div>
+</div>
+
+<footer class="footer">
+  <div class="wrap">
+    WETYR Studios - a WETYR Corporation product &bull; Test build at markcmo.com/wetyr-films
+  </div>
+</footer>
+
+<script>
+const $ = (id) => document.getElementById(id);
+
+let state = { scriptText: '', breakdown: null, schedule: null, budget: null };
+
+// ─── File drop ───────────────────────────────────────────────
+const drop = $('drop');
+const fileInput = $('fileInput');
+drop.addEventListener('click', () => fileInput.click());
+drop.addEventListener('dragover', e => { e.preventDefault(); drop.classList.add('hover'); });
+drop.addEventListener('dragleave', () => drop.classList.remove('hover'));
+drop.addEventListener('drop', e => {
+  e.preventDefault(); drop.classList.remove('hover');
+  if (e.dataTransfer.files[0]) handleFile(e.dataTransfer.files[0]);
+});
+fileInput.addEventListener('change', () => { if (fileInput.files[0]) handleFile(fileInput.files[0]); });
+
+async function handleFile(file) {
+  if (file.size > 10 * 1024 * 1024) { setStatus('File too large (>10 MB)', 'err'); return; }
+  setStatus('<span class="spinner"></span> Uploading + extracting text from ' + escapeHtml(file.name) + '...', 'info');
+  if (!$('titleInput').value) $('titleInput').value = file.name.replace(/\.[^.]+$/, '');
+  try {
+    const dataBase64 = await fileToBase64(file);
+    const r = await fetch('/.netlify/functions/script-upload', {
+      method: 'POST',
+      headers: { 'content-type': 'application/json' },
+      body: JSON.stringify({ filename: file.name, contentType: file.type, dataBase64 })
+    });
+    const j = await r.json();
+    if (!j.ok) throw new Error(j.error || 'upload failed');
+    state.scriptText = j.text;
+    $('pasteInput').value = j.text;
+    setStatus('Extracted ~' + j.pageCount + ' pages via ' + j.method + '. Ready to break down.', 'ok');
+  } catch (e) {
+    setStatus('Upload failed: ' + (e.message || e), 'err');
+  }
+}
+
+function fileToBase64(file) {
+  return new Promise((res, rej) => {
+    const r = new FileReader();
+    r.onload = () => res(String(r.result).split(',')[1]);
+    r.onerror = rej;
+    r.readAsDataURL(file);
+  });
+}
+
+// ─── Buttons ─────────────────────────────────────────────────
+$('goBtn').addEventListener('click', runBreakdown);
+$('clearBtn').addEventListener('click', () => {
+  state = { scriptText: '', breakdown: null, schedule: null, budget: null };
+  $('pasteInput').value = ''; $('titleInput').value = '';
+  $('results').style.display = 'none';
+  setStatus('', '');
+});
+$('loadSampleBtn').addEventListener('click', () => {
+  $('pasteInput').value = SAMPLE_SCRIPT;
+  $('titleInput').value = 'The Coffee Break';
+  state.scriptText = SAMPLE_SCRIPT;
+  setStatus('Sample loaded. Click "Break down script".', 'ok');
+});
+$('genScheduleBtn').addEventListener('click', runSchedule);
+$('genBudgetBtn').addEventListener('click', runBudget);
+
+$('tierInput').addEventListener('change', () => {
+  $('customBudgetField').style.display = $('tierInput').value === 'custom' ? 'flex' : 'none';
+});
+
+// ─── Tabs ────────────────────────────────────────────────────
+document.querySelectorAll('.tab').forEach(tab => {
+  tab.addEventListener('click', () => {
+    document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+    document.querySelectorAll('.tab-panel').forEach(p => p.classList.remove('active'));
+    tab.classList.add('active');
+    document.querySelector('[data-panel="' + tab.dataset.tab + '"]').classList.add('active');
+  });
+});
+
+// ─── Run breakdown (background job + polling) ────────────────
+async function runBreakdown() {
+  const text = $('pasteInput').value.trim() || state.scriptText;
+  if (!text) { setStatus('Upload a file or paste script text first.', 'err'); return; }
+  state.scriptText = text;
+
+  $('goBtn').disabled = true;
+  const t0 = Date.now();
+  setStatus('<span class="spinner"></span> Queuing job...', 'info');
+
+  try {
+    // 1) Kick off background job
+    const r = await fetch('/.netlify/functions/script-dissect', {
+      method: 'POST',
+      headers: { 'content-type': 'application/json' },
+      body: JSON.stringify({
+        scriptText: text,
+        title: $('titleInput').value || 'Untitled',
+        format: $('formatInput').value
+      })
+    });
+    const start = await r.json();
+    if (!start.ok || !start.jobId) throw new Error(start.error || 'failed to queue');
+    const jobId = start.jobId;
+
+    // 2) Poll for result
+    const breakdown = await pollJob(jobId, (progress) => {
+      const sec = ((Date.now() - t0) / 1000).toFixed(0);
+      setStatus(`<span class="spinner"></span> Gemini is dissecting your script (${progress || 'processing'}) ${sec}s elapsed...`, 'info');
+    });
+
+    state.breakdown = breakdown;
+    render(breakdown);
+    $('results').style.display = 'block';
+    $('results').scrollIntoView({ behavior: 'smooth' });
+    const totalSec = ((Date.now() - t0) / 1000).toFixed(1);
+    setStatus(`Breakdown complete in ${totalSec}s. ${breakdown.scenes.length} scenes, ${breakdown.characters.length} characters tagged.`, 'ok');
+  } catch (e) {
+    setStatus('Breakdown failed: ' + (e.message || e), 'err');
+  } finally {
+    $('goBtn').disabled = false;
+  }
+}
+
+async function pollJob(jobId, onProgress, resultField = 'breakdown') {
+  const startTs = Date.now();
+  const TIMEOUT_MS = 12 * 60 * 1000; // 12 min ceiling
+  while (Date.now() - startTs < TIMEOUT_MS) {
+    await new Promise(r => setTimeout(r, 3000));
+    const r = await fetch('/.netlify/functions/script-result?jobId=' + encodeURIComponent(jobId));
+    if (!r.ok) {
+      if (r.status === 404) continue; // not yet visible
+      throw new Error('poll failed: ' + r.status);
+    }
+    const j = await r.json();
+    if (j.status === 'error') throw new Error(j.error || 'job errored');
+    if (j.status === 'complete' && j[resultField]) return j[resultField];
+    onProgress?.(j.progress);
+  }
+  throw new Error('timed out waiting for ' + resultField);
+}
+
+// ─── Run schedule (async) ────────────────────────────────────
+async function runSchedule() {
+  if (!state.breakdown) { setStatus('Run breakdown first.', 'err'); return; }
+  $('scheduleView').innerHTML = '<p style="color: var(--muted);"><span class="spinner"></span> Queuing schedule job...</p>';
+  try {
+    const r = await fetch('/.netlify/functions/script-schedule', {
+      method: 'POST',
+      headers: { 'content-type': 'application/json' },
+      body: JSON.stringify({
+        breakdown: state.breakdown,
+        constraints: {
+          shootDays: Number($('daysInput').value) || undefined,
+          maxHoursPerDay: 12
+        }
+      })
+    });
+    const start = await r.json();
+    if (!start.ok || !start.jobId) throw new Error(start.error || 'failed to queue');
+    const schedule = await pollJob(start.jobId, (p) => {
+      $('scheduleView').innerHTML = '<p style="color: var(--muted);"><span class="spinner"></span> ' + escapeHtml(p || 'processing') + '...</p>';
+    }, 'schedule');
+    state.schedule = schedule;
+    renderSchedule(schedule);
+  } catch (e) {
+    $('scheduleView').innerHTML = '<div class="status err active">Schedule failed: ' + escapeHtml(e.message) + '</div>';
+  }
+}
+
+// ─── Run budget (async) ──────────────────────────────────────
+async function runBudget() {
+  if (!state.breakdown) { setStatus('Run breakdown first.', 'err'); return; }
+  $('budgetView').innerHTML = '<p style="color: var(--muted);"><span class="spinner"></span> Queuing budget job...</p>';
+  try {
+    const r = await fetch('/.netlify/functions/script-budget', {
+      method: 'POST',
+      headers: { 'content-type': 'application/json' },
+      body: JSON.stringify({
+        breakdown: state.breakdown,
+        schedule: state.schedule,
+        context: {
+          budgetTier: $('tierInput').value,
+          customBudget: $('tierInput').value === 'custom' ? Number($('customBudgetInput').value) || null : null,
+          union: $('unionInput').value,
+          shootState: $('stateInput').value || 'unspecified',
+          region: 'US'
+        }
+      })
+    });
+    const start = await r.json();
+    if (!start.ok || !start.jobId) throw new Error(start.error || 'failed to queue');
+    const budget = await pollJob(start.jobId, (p) => {
+      $('budgetView').innerHTML = '<p style="color: var(--muted);"><span class="spinner"></span> ' + escapeHtml(p || 'processing') + '...</p>';
+    }, 'budget');
+    state.budget = budget;
+    renderBudget(budget);
+  } catch (e) {
+    $('budgetView').innerHTML = '<div class="status err active">Budget failed: ' + escapeHtml(e.message) + '</div>';
+  }
+}
+
+// ─── Renderers ───────────────────────────────────────────────
+function render(b) {
+  const totalEighths = (b.scenes || []).reduce((s, sc) => s + (sc.eighths || 0), 0);
+  const totalPages = totalEighths / 8;
+  const nightCount = (b.scenes || []).filter(s => s.timeOfDay === 'NIGHT').length;
+  const extCount = (b.scenes || []).filter(s => s.intExt === 'EXT').length;
+
+  $('overview').innerHTML = `
+    <div class="stats">
+      <div class="stat"><div class="stat-label">Scenes</div><div class="stat-value">${b.scenes.length}</div></div>
+      <div class="stat"><div class="stat-label">Pages</div><div class="stat-value">${totalPages.toFixed(2)}</div><div class="stat-sub">${totalEighths}/8 total</div></div>
+      <div class="stat"><div class="stat-label">Characters</div><div class="stat-value">${b.characters.length}</div></div>
+      <div class="stat"><div class="stat-label">Locations</div><div class="stat-value">${(b.locations || []).length}</div></div>
+      <div class="stat"><div class="stat-label">Night scenes</div><div class="stat-value">${nightCount}</div></div>
+      <div class="stat"><div class="stat-label">Exterior scenes</div><div class="stat-value">${extCount}</div></div>
+      <div class="stat"><div class="stat-label">Runtime</div><div class="stat-value">~${b.estimatedRuntimeMinutes || Math.round(totalPages)}<span style="font-size: 14px; color: var(--muted);">min</span></div></div>
+      <div class="stat"><div class="stat-label">Format</div><div class="stat-value" style="font-size: 16px;">${(b.format || '').toUpperCase()}</div></div>
+    </div>
+    ${b.logline ? '<div style="background: var(--panel); border: 1px solid var(--border); border-radius: 10px; padding: 16px; margin-bottom: 16px;"><div class="stat-label">Logline</div><div style="margin-top: 6px; font-size: 15px;">' + escapeHtml(b.logline) + '</div></div>' : ''}
+  `;
+
+  // Scenes table
+  const scenesTbody = document.querySelector('#scenesTable tbody');
+  scenesTbody.innerHTML = (b.scenes || []).map(s => {
+    const tags = [];
+    if ((s.weapons || []).length) tags.push('<span class="tag hot">WEAPON</span>');
+    if ((s.stunts || []).length) tags.push('<span class="tag hot">STUNT</span>');
+    if ((s.vfx || []).length) tags.push('<span class="tag">VFX</span>');
+    if ((s.sfx || []).length) tags.push('<span class="tag">SFX</span>');
+    if ((s.vehicles || []).length) tags.push('<span class="tag">VEH</span>');
+    if ((s.animals || []).length) tags.push('<span class="tag hot">ANIMAL</span>');
+    if (s.minorsOnSet) tags.push('<span class="tag hot">MINOR</span>');
+    if ((s.specialEquipment || []).length) tags.push('<span class="tag">GEAR</span>');
+    return `<tr>
+      <td><b>${escapeHtml(s.number)}</b></td>
+      <td>${escapeHtml(s.heading)}</td>
+      <td>${escapeHtml(s.location)}</td>
+      <td><span class="tag ${s.intExt === 'INT' ? 'int' : 'ext'}">${escapeHtml(s.intExt)}</span></td>
+      <td><span class="tag ${s.timeOfDay === 'NIGHT' ? 'night' : 'day'}">${escapeHtml(s.timeOfDay)}</span></td>
+      <td>${(s.pageCount || 0).toFixed(2)}<br><small style="color: var(--dim);">${s.eighths}/8</small></td>
+      <td style="font-size: 11px;">${(s.characters || []).map(escapeHtml).join(', ')}</td>
+      <td>${tags.join('')}</td>
+    </tr>`;
+  }).join('');
+
+  // Characters table
+  document.querySelector('#charTable tbody').innerHTML = (b.characters || []).map(c => `
+    <tr>
+      <td><b>${escapeHtml(c.name)}</b>${c.minor ? ' <span class="tag hot">MINOR</span>' : ''}</td>
+      <td><span class="tag">${escapeHtml(c.type || '')}</span></td>
+      <td>${escapeHtml(c.age || '')}</td>
+      <td>${c.sceneCount || 0}</td>
+      <td>${c.dialogueLineCount || 0}</td>
+      <td>${escapeHtml(c.firstScene || '')}</td>
+      <td>${escapeHtml(c.lastScene || '')}</td>
+      <td style="font-size: 11px;">${(c.specialSkillsRequired || []).map(escapeHtml).join(', ')}</td>
+    </tr>
+  `).join('');
+
+  // Locations
+  $('locView').innerHTML = '<div style="display: grid; gap: 10px;">' + (b.locations || []).map(l => `
+    <div style="background: var(--panel); border: 1px solid var(--border); border-radius: 10px; padding: 14px;">
+      <div style="display: flex; justify-content: space-between; align-items: center;">
+        <div>
+          <b>${escapeHtml(l.name)}</b>
+          <span class="tag">${escapeHtml(l.type || '')}</span>
+          <span class="tag ${l.intExt === 'INT' ? 'int' : 'ext'}">${escapeHtml(l.intExt || '')}</span>
+          <span class="tag ${l.complexity === 'high' ? 'hot' : ''}">${escapeHtml(l.complexity || '')} complexity</span>
+        </div>
+        <div style="color: var(--muted); font-size: 13px;">${(l.scenes || []).length} scenes &bull; ${l.totalEighths || 0}/8</div>
+      </div>
+      ${(l.permitRequirements || []).length ? '<div style="margin-top: 8px; font-size: 12px; color: var(--muted);">Permits: ' + l.permitRequirements.map(escapeHtml).join(', ') + '</div>' : ''}
+    </div>
+  `).join('') + '</div>';
+
+  // Flags
+  const pf = b.productionFlags || {};
+  const flagList = [
+    ['hasMinors', 'Minors on set'], ['hasStunts', 'Stunts'], ['hasFirearms', 'Firearms'],
+    ['hasAnimals', 'Animals'], ['hasVfx', 'Visual Effects'], ['hasNightWork', 'Night work'],
+    ['hasWaterWork', 'Water work'], ['hasVehicleAction', 'Vehicle action'], ['hasIntimacy', 'Intimacy scenes']
+  ];
+  $('flagsView').innerHTML = `
+    <div class="flag-grid">
+      ${flagList.map(([k, label]) => `
+        <div class="flag ${pf[k] ? 'flag-on' : 'flag-off'}">
+          <span>${label}</span>
+          <span class="flag-dot"></span>
+        </div>
+      `).join('')}
+    </div>
+    ${(pf.unionConsiderations || []).length ? '<div style="margin-top: 18px;"><div class="stat-label">Union considerations</div><ul style="margin-top: 8px; padding-left: 20px; color: var(--muted); font-size: 13px;">' + pf.unionConsiderations.map(u => '<li>' + escapeHtml(u) + '</li>').join('') + '</ul></div>' : ''}
+  `;
+
+  $('rawJson').textContent = JSON.stringify(b, null, 2);
+}
+
+function renderSchedule(s) {
+  const sum = s.summary || {};
+  $('scheduleView').innerHTML = `
+    <div class="stats">
+      <div class="stat"><div class="stat-label">Shoot days</div><div class="stat-value">${sum.totalShootDays || s.days?.length || 0}</div></div>
+      <div class="stat"><div class="stat-label">Avg pages/day</div><div class="stat-value">${((sum.avgEighthsPerDay || 0) / 8).toFixed(1)}</div></div>
+      <div class="stat"><div class="stat-label">Locations</div><div class="stat-value">${sum.totalLocations || 0}</div></div>
+      <div class="stat"><div class="stat-label">Company moves</div><div class="stat-value">${sum.totalCompanyMoves || 0}</div></div>
+      <div class="stat"><div class="stat-label">Night shoots</div><div class="stat-value">${sum.nightShoots || 0}</div></div>
+    </div>
+    <div class="tbl-scroll"><table><thead><tr>
+      <th>Day</th><th>Location</th><th>I/E</th><th>TOD</th><th>Scenes</th><th>Pages</th><th>Cast Called</th><th>Notes</th>
+    </tr></thead><tbody>
+    ${(s.days || []).map(d => `
+      <tr>
+        <td><b>${d.day}</b><br><small style="color: var(--dim);">${escapeHtml(d.date || '')}</small></td>
+        <td>${escapeHtml(d.location)}</td>
+        <td><span class="tag ${d.intExt === 'INT' ? 'int' : 'ext'}">${escapeHtml(d.intExt)}</span></td>
+        <td><span class="tag ${d.timeOfDay === 'NIGHT' ? 'night' : 'day'}">${escapeHtml(d.timeOfDay || '')}</span></td>
+        <td style="font-size: 11px;">${(d.scenes || []).map(sc => '#' + sc.number).join(', ')}</td>
+        <td>${(d.totalPages || d.totalEighths / 8 || 0).toFixed(2)}</td>
+        <td style="font-size: 11px;">${(d.castCalled || []).map(escapeHtml).join(', ')}</td>
+        <td style="font-size: 11px;">${d.minorHours ? '<span class="tag hot">MINOR HOURS</span> ' : ''}${escapeHtml((d.specialRequirements || []).join(', '))}</td>
+      </tr>
+    `).join('')}
+    </tbody></table></div>
+
+    ${(s.dayOutOfDays || []).length ? `
+      <h3 style="margin-top: 24px; margin-bottom: 10px; font-size: 18px;">Day-out-of-Days</h3>
+      <div class="tbl-scroll"><table><thead><tr>
+        <th>Character</th><th>Start</th><th>End</th><th>Work days</th><th>Hold days</th>
+      </tr></thead><tbody>
+      ${s.dayOutOfDays.map(d => `
+        <tr>
+          <td><b>${escapeHtml(d.character)}</b></td>
+          <td>${d.startDay}</td>
+          <td>${d.endDay}</td>
+          <td>${(d.workDays || []).join(', ')}</td>
+          <td style="color: var(--muted);">${(d.holdDays || []).join(', ')}</td>
+        </tr>
+      `).join('')}
+      </tbody></table></div>
+    ` : ''}
+  `;
+}
+
+function renderBudget(b) {
+  const t = b.topSheet || {};
+  $('budgetView').innerHTML = `
+    <div class="stats">
+      <div class="stat"><div class="stat-label">Grand total</div><div class="stat-value" style="color: var(--gold);">$${fmt(t.grandTotal)}</div><div class="stat-sub">${t.tier} tier</div></div>
+      <div class="stat"><div class="stat-label">ATL</div><div class="stat-value">$${fmt(t.atlTotal)}</div></div>
+      <div class="stat"><div class="stat-label">BTL Production</div><div class="stat-value">$${fmt(t.btlProductionTotal)}</div></div>
+      <div class="stat"><div class="stat-label">BTL Post</div><div class="stat-value">$${fmt(t.btlPostTotal)}</div></div>
+      <div class="stat"><div class="stat-label">Other</div><div class="stat-value">$${fmt(t.otherTotal)}</div></div>
+      <div class="stat"><div class="stat-label">Contingency</div><div class="stat-value">$${fmt(t.contingencyAmount)}</div><div class="stat-sub">${t.contingencyPct}%</div></div>
+    </div>
+
+    ${(b.categories || []).map(cat => `
+      <details style="background: var(--panel); border: 1px solid var(--border); border-radius: 10px; padding: 14px; margin-bottom: 8px;">
+        <summary style="cursor: pointer; display: flex; justify-content: space-between; align-items: center; font-weight: 700;">
+          <span><span class="tag">${escapeHtml(cat.section)}</span> ${escapeHtml(cat.name)}</span>
+          <span style="color: var(--gold);">$${fmt(cat.subtotal)}</span>
+        </summary>
+        <table style="margin-top: 12px;"><thead><tr>
+          <th>Line</th><th style="text-align: right;">Qty</th><th>Unit</th><th style="text-align: right;">Rate</th><th style="text-align: right;">Total</th><th>Notes</th>
+        </tr></thead><tbody>
+        ${(cat.lineItems || []).map(li => `
+          <tr>
+            <td>${escapeHtml(li.description)}</td>
+            <td style="text-align: right;">${li.quantity || ''}</td>
+            <td>${escapeHtml(li.unit || '')}</td>
+            <td style="text-align: right;">$${fmt(li.rate)}</td>
+            <td style="text-align: right;"><b>$${fmt(li.total)}</b></td>
+            <td style="color: var(--muted); font-size: 11px;">${escapeHtml(li.notes || '')}</td>
+          </tr>
+        `).join('')}
+        </tbody></table>
+      </details>
+    `).join('')}
+
+    ${(b.risks || []).length ? `
+      <h3 style="margin-top: 24px; margin-bottom: 10px; font-size: 18px;">Production risks</h3>
+      <div style="display: grid; gap: 10px;">
+      ${b.risks.map(r => `
+        <div style="background: var(--panel); border: 1px solid var(--border); border-left: 3px solid var(--red); border-radius: 8px; padding: 12px;">
+          <b>${escapeHtml(r.risk)}</b>
+          <div style="color: var(--muted); font-size: 13px; margin-top: 4px;"><b>Insurance:</b> ${escapeHtml(r.insuranceImpact || '')}</div>
+          <div style="color: var(--muted); font-size: 13px;"><b>Mitigation:</b> ${escapeHtml(r.mitigation || '')}</div>
+        </div>
+      `).join('')}
+      </div>
+    ` : ''}
+
+    ${(b.assumptions || []).length ? `
+      <h3 style="margin-top: 24px; margin-bottom: 10px; font-size: 18px;">Assumptions</h3>
+      <ul style="padding-left: 20px; color: var(--muted); font-size: 13px;">
+      ${b.assumptions.map(a => '<li>' + escapeHtml(a) + '</li>').join('')}
+      </ul>
+    ` : ''}
+  `;
+}
+
+// ─── Utils ───────────────────────────────────────────────────
+function setStatus(html, cls) {
+  const s = $('status');
+  s.innerHTML = html;
+  s.className = 'status' + (cls ? ' active ' + cls : '');
+}
+function escapeHtml(s) { return String(s ?? '').replace(/[&<>"']/g, c => ({ '&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;' }[c])); }
+function fmt(n) { if (n == null || isNaN(n)) return '0'; return Math.round(Number(n)).toLocaleString('en-US'); }
+
+// ─── Sample script (ultra-short for quick tests) ─────────────
+const SAMPLE_SCRIPT = `FADE IN:
+
+INT. DINER - DAY
+
+A greasy spoon on the edge of town. RAIN pours outside. MARIA (30s, sharp-eyed, ex-cop) sits at the counter nursing coffee. Her cell phone rings. She stares at it.
+
+MARIA
+(to herself)
+Don't answer it. Don't.
+
+She answers it.
+
+MARIA (CONT'D)
+What.
+
+JAKE (V.O.)
+(urgent)
+They know. You need to run.
+
+Maria drops the cup. Coffee everywhere. She bolts for the door.
+
+EXT. DINER PARKING LOT - CONTINUOUS
+
+Maria sprints to a beat-up CHEVY. A BLACK SUV screeches in, blocking her. Two MEN IN SUITS exit, guns drawn.
+
+MAN IN SUIT
+Ms. Vargas. Let's talk.
+
+Maria reaches for her waistband. BANG. She fires first. Glass shatters.
+
+INT. MARIA'S APARTMENT - NIGHT
+
+A dim room. Maria packs a go-bag. Cash. Passport. A photo of a LITTLE GIRL (8) - her daughter, EMMA.
+
+EMMA (O.S.)
+Mama?
+
+Maria freezes. Emma stands in the doorway, clutching a stuffed bear.
+
+MARIA
+Baby, we have to go. Now.
+
+FADE OUT.`;
+</script>
+
+</body>
+</html>
