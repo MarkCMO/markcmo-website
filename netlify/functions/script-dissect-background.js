@@ -13,9 +13,9 @@ const { setJob } = require('./_wetyr_jobs');
 
 const MODEL = process.env.GEMINI_MODEL || 'gemini-2.5-flash';
 const API_URL = `https://generativelanguage.googleapis.com/v1beta/models/${MODEL}:generateContent`;
-const CHUNK_CHARS = 60000;
+const CHUNK_CHARS = 40000;
 const MAX_OUTPUT_TOKENS = 8192;
-const MAX_CONCURRENCY = 3;
+const MAX_CONCURRENCY = 4;
 const RETRY_MS = 2500;
 
 const SYSTEM_META = `You are the WETYR Studios Script Breakdown Engine - a veteran 1st AD with 25 years of feature experience.
@@ -40,45 +40,39 @@ No prose. JSON only.`;
 
 const SYSTEM_CHUNK = `You are a 1st AD breaking down a CHUNK of a larger screenplay.
 
-Return JSON with ONLY scenes, characters, and locations found in THIS chunk. Do NOT produce title/logline/format - those are handled separately.
+Return JSON with EVERY scene, character, and location found in THIS chunk. Do NOT produce title/logline/format - those are handled separately. Be EXHAUSTIVE: do not summarize or skip scenes. Every scene heading in the chunk MUST appear in the output.
 
 RULES
-1. Tag every element: props, wardrobe, vehicles, weapons, animals, sfx, vfx, stunts, specialEquipment.
-2. Page count: 1 page = 8/8. pageCount is decimal; eighths is integer 1/8 units.
-3. Scene number: use the script's numbers if present; otherwise use the heading itself as the number.
-4. Characters: every speaking role + named non-speaking. minor:true if under 18. sceneCount/dialogueLineCount = count WITHIN THIS CHUNK only.
-5. Locations: consolidate equivalent spaces. totalEighths = eighths WITHIN THIS CHUNK only.
-6. Flag high-liability items aggressively (weapons, stunts, minors, firearms, animals, vehicle action, water).
-7. Return ONLY valid JSON. No prose, no fences.
+1. Page count: 1 page = 8/8. pageCount is decimal; eighths is integer 1/8 units.
+2. Scene number: use the script's numbers if present; otherwise use the heading text.
+3. Characters: every speaking role + named non-speaking. minor:true if under 18. sceneCount/dialogueLineCount = count WITHIN THIS CHUNK only.
+4. Locations: consolidate equivalent spaces (KITCHEN == JOHN'S KITCHEN if same physical space). totalEighths = eighths WITHIN THIS CHUNK.
+5. Flag high-liability items aggressively (weapons, stunts, minors, firearms, animals, vehicle action, water).
+6. Return ONLY valid JSON. No prose, no fences.
+7. SLIM tag arrays - 1-3 items max each. Skip empty arrays entirely.
 
-OUTPUT SCHEMA:
+OUTPUT SCHEMA (slim - per-scene fields kept tight to fit ALL scenes in output budget):
 {
   "scenes": [{
     "number": string, "heading": string,
     "intExt": "INT"|"EXT"|"INT/EXT"|"EXT/INT",
-    "location": string, "subLocation": string,
+    "location": string,
     "timeOfDay": "DAY"|"NIGHT"|"DAWN"|"DUSK"|"CONTINUOUS"|"LATER"|"MORNING"|"EVENING"|"MAGIC HOUR",
-    "pageCount": number, "eighths": number, "synopsis": string,
+    "pageCount": number, "eighths": number,
     "characters": [string],
-    "extras": {"count": number, "description": string},
-    "props": [string], "wardrobe": [string], "makeup": [string], "setDressing": [string],
-    "vehicles": [string], "animals": [string], "weapons": [string],
-    "sfx": [string], "vfx": [string], "stunts": [string],
-    "music": [string], "sound": [string], "specialEquipment": [string],
-    "minorsOnSet": bool, "nudity": bool, "intimacy": bool
+    "props": [string], "vehicles": [string], "weapons": [string], "animals": [string],
+    "sfx": [string], "vfx": [string], "stunts": [string], "specialEquipment": [string],
+    "minorsOnSet": bool
   }],
   "characters": [{
     "name": string, "type": "lead"|"supporting"|"day_player"|"extra"|"voice",
-    "age": string, "gender": string, "description": string,
     "sceneCount": number, "dialogueLineCount": number,
-    "firstScene": string, "lastScene": string,
-    "specialSkillsRequired": [string], "minor": bool
+    "minor": bool
   }],
   "locations": [{
     "name": string, "type": "practical"|"stage"|"location"|"backlot",
-    "intExt": "INT"|"EXT"|"BOTH", "scenes": [string],
-    "totalEighths": number, "complexity": "low"|"medium"|"high",
-    "permitRequirements": [string]
+    "intExt": "INT"|"EXT"|"BOTH", "totalEighths": number,
+    "complexity": "low"|"medium"|"high"
   }]
 }`;
 
