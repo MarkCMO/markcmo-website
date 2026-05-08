@@ -114,7 +114,15 @@ exports.handler = async (event) => {
 
     const tasks = [
       () => callGemini(key, SYSTEM_META, `Title hint: "${userTitle}". Format hint: ${userFormat}.\n\n${metaInput}`),
-      ...chunks.map((c, i) => () => callGemini(key, SYSTEM_CHUNK, `Chunk ${i + 1} of ${chunks.length}:\n\n${c}`))
+      ...chunks.map((c, i) => () => {
+        const sceneCount = (c.match(/^\s*(?:INT\.?\s|EXT\.?\s|INT\.?\/EXT\.?\s|I\/E\.?\s)/gmi) || []).length;
+        const userMsg =
+          `Chunk ${i + 1} of ${chunks.length}.\n` +
+          `This chunk contains EXACTLY ${sceneCount} scene headings (lines starting with INT. EXT. INT/EXT. or I/E.). ` +
+          `Your "scenes" array MUST contain ${sceneCount} entries - one per heading, in order. ` +
+          `Do not skip, summarize, or merge scenes. Even short scenes get their own entry.\n\n${c}`;
+        return callGemini(key, SYSTEM_CHUNK, userMsg);
+      })
     ];
     const results = await runConcurrent(tasks, MAX_CONCURRENCY);
     const [metaResult, ...chunkResults] = results;
