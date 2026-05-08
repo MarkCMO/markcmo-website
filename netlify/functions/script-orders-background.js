@@ -83,7 +83,7 @@ exports.handler = async (event) => {
     const orders = await callGeminiJSON({
       key, system: SYSTEM_PROMPT,
       user: 'Generate department-level purchase orders.\n\nCONTEXT:\n' + JSON.stringify(compact, null, 2),
-      maxOutputTokens: 8192
+      maxOutputTokens: 16384
     });
 
     await setJob(jobId, { status: 'complete', progress: 'done', orders: { ...orders, generatedAt: new Date().toISOString(), context } });
