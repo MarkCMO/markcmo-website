@@ -151,106 +151,49 @@ pre.json { background: #0f0f12; border: 1px solid var(--border); border-radius: 
 <meta name="twitter:title" content="WETYR Studios - Script to Production, Automated"/>
 <meta name="twitter:description" content="Upload a screenplay, get a full production breakdown: scenes, characters, schedule, budget, and every document a crew needs. Powered by Claude Opus."/>
 <meta name="twitter:image" content="https://markcmo.com/mark-photo.webp"/>
-<script type="application/ld+json">
-{
-  "@context": "https://schema.org",
-  "@type": "FAQPage",
-  "mainEntity": [
-    {
-      "@type": "Question",
-      "name": "What does a fractional CMO do for companies in this market?",
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": "A fractional CMO acts as your Chief Marketing Officer on a part-time basis - typically 2-3 days per week - with full executive accountability for strategy, team leadership, budget, and revenue outcomes. They own your entire marketing function and are accountable for pipeline generation and revenue attribution, not just deliverables."
-      }
-    },
-    {
-      "@type": "Question",
-      "name": "How quickly will I see results?",
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": "Most engagements produce measurable outputs within 30 days: a GTM strategy, ICP definition, messaging architecture, and demand generation plan. Pipeline movement typically appears in 60-90 days as campaigns launch. Long-term compounding results build over 6-12 months."
-      }
-    },
-    {
-      "@type": "Question",
-      "name": "Is there a long-term contract required?",
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": "No. Every MarkCMO engagement is month-to-month. There are no long-term contracts, no cancellation fees, and no lock-in. You stay because the results justify it. We offer a free GTM diagnostic before you commit to any paid engagement."
-      }
-    },
-    {
-      "@type": "Question",
-      "name": "Do I have to sign a long-term contract?",
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": "No. Every MarkCMO engagement is month-to-month. There are no long-term contracts, no cancellation fees, and no lock-in clauses. You stay because the results justify it - not because you are contractually obligated. We offer a free GTM diagnostic before you commit to any paid engagement so you can validate fit before spending a dollar."
-      }
-    },
-    {
-      "@type": "Question",
-      "name": "How does the engagement start?",
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": "Step one is a free 30-minute GTM diagnostic call. We review your current situation, revenue goals, team structure, and the biggest gap between where you are and where you need to be. If there is a clear fit, we outline a 30-60-90 day plan and agree on scope. Most engagements are live within 5-7 business days of the diagnostic call."
-      }
-    }
-  ],
-  "dateModified": "2026-05-08"
-}
-</script>
-<meta name="author" content="Mark Gabrielli"/>
-<link rel="author" href="https://markcmo.com/about.html"/>
-<script type="application/ld+json">
-{
-  "@context": "https://schema.org",
-  "@type": "WebPage",
-  "name": "WETYR Studios - Script to Production, Automated",
-  "description": "Upload a screenplay, get a full production breakdown: scenes, characters, schedule, budget, and every document a crew needs. Powered by Claude Opus.",
-  "url": "https://markcmo.com/wetyr-films",
-  "author": {
-    "@type": "Person",
-    "name": "Mark Gabrielli",
-    "url": "https://markcmo.com/about.html",
-    "sameAs": [
-      "https://www.linkedin.com/in/marklgabrielli/",
-      "https://markcmo.com"
-    ]
-  },
-  "publisher": {
-    "@type": "Organization",
-    "name": "MarkCMO",
-    "url": "https://markcmo.com",
-    "logo": {
-      "@type": "ImageObject",
-      "url": "https://markcmo.com/mark-photo.webp"
-    }
-  },
-  "dateModified": "2026-05-08",
-  "inLanguage": "en-US"
-}
-</script>
 </head>
 <body>
 
 <nav class="nav">
   <div class="wrap nav-inner">
-    <div class="brand"><span class="brand-dot"></span>WETYR</div>
+    <div class="brand"><span class="brand-dot"></span>WETYR <span style="color: var(--gold);">Studio</span> <span style="font-size: 11px; color: var(--dim); font-weight: 600; letter-spacing: 1px; margin-left: 6px;">INTERNAL</span></div>
     <div class="nav-links">
-      <a href="/wetyr-films" style="color: var(--gold);">Studios</a>
-      <a href="/wetyr-film">Film Intel</a>
-      <span style="color: var(--border-hot);">|</span>
-      <a href="#upload">Upload</a>
-      <a href="#results">Results</a>
-      <a href="#how">Roadmap</a>
+      <a href="/wetyr-films">Film Intel</a>
+      <a href="/wetyr-studio" style="color: var(--gold);">Studio</a>
+      <span style="color: var(--border-hot);" id="navSep" hidden>|</span>
+      <a href="#upload" id="navUpload" hidden>Upload</a>
+      <a href="#results" id="navResults" hidden>Results</a>
+      <a href="#how" id="navRoadmap" hidden>Roadmap</a>
+      <a href="#" id="navLogout" hidden style="color: var(--muted);">Sign out</a>
     </div>
   </div>
 </nav>
 
+<!-- AUTH GATE: shown until admin-auth verifies a session ─────────────── -->
+<section class="section" id="authGate">
+  <div class="wrap" style="max-width: 460px;">
+    <div style="background: var(--panel); border: 1px solid var(--border); border-radius: 14px; padding: 32px; margin: 60px auto;">
+      <div style="text-align: center; margin-bottom: 22px;">
+        <div style="font-size: 11px; color: var(--gold); font-weight: 800; letter-spacing: 2px; margin-bottom: 8px;">INTERNAL ACCESS</div>
+        <h2 style="font-size: 22px; margin-bottom: 6px;">WETYR Studio</h2>
+        <p style="color: var(--muted); font-size: 13px;">Script-to-production tooling. Sign in to continue.</p>
+      </div>
+      <div style="display: flex; flex-direction: column; gap: 10px;">
+        <input type="text" id="authUser" placeholder="Username" autocomplete="username" style="background: var(--panel-2); border: 1px solid var(--border); color: var(--text); padding: 11px 13px; border-radius: 6px; font-family: inherit; font-size: 14px;" />
+        <input type="password" id="authPass" placeholder="Password" autocomplete="current-password" style="background: var(--panel-2); border: 1px solid var(--border); color: var(--text); padding: 11px 13px; border-radius: 6px; font-family: inherit; font-size: 14px;" />
+        <button class="btn btn-primary" id="authSubmit" style="margin-top: 4px;">Sign in</button>
+      </div>
+      <div id="authMsg" style="margin-top: 14px; font-size: 13px; min-height: 20px; text-align: center;"></div>
+      <p style="color: var(--dim); font-size: 11px; text-align: center; margin-top: 18px;">Public dashboard is at <a href="/wetyr-films" style="color: var(--muted);">/wetyr-films</a>.</p>
+    </div>
+  </div>
+</section>
+
+<!-- APP: hidden until authed ─────────────────────────────────────────── -->
+<div id="appBody" hidden>
 <section class="hero">
   <div class="wrap">
-    <div class="eyebrow">WETYR Studios - Test Build</div>
+    <div class="eyebrow">WETYR Studio - Internal Tool</div>
     <h1>Script to <span>Production</span>, automated.</h1>
     <p>Upload a screenplay. Get a full breakdown, stripboard, shooting schedule, and budget in under 3 minutes. Every document a production needs, generated from page one.</p>
     <div style="display: flex; gap: 10px; justify-content: center; flex-wrap: wrap;">
@@ -259,29 +202,6 @@ pre.json { background: #0f0f12; border: 1px solid var(--border); border-radius: 
     </div>
   </div>
 </section>
-<div class="sp-proof-strip">
-<div class="sp-proof-item">
-<span class="sp-proof-num">4.9&#9733;</span>
-<span class="sp-proof-label">193 Reviews</span>
-</div>
-<div class="sp-proof-item">
-<span class="sp-proof-num">90%</span>
-<span class="sp-proof-label">Retention Rate</span>
-</div>
-<div class="sp-proof-item">
-<span class="sp-proof-num">19+</span>
-<span class="sp-proof-label">Ventures Built</span>
-</div>
-<div class="sp-proof-item">
-<span class="sp-proof-num">$50M+</span>
-<span class="sp-proof-label">Revenue Generated</span>
-</div>
-<div class="sp-proof-item">
-<span class="sp-proof-num">30</span>
-<span class="sp-proof-label">Days to First Results</span>
-</div>
-</div>
-
 
 <section class="section" id="upload">
   <div class="wrap">
@@ -437,50 +357,71 @@ pre.json { background: #0f0f12; border: 1px solid var(--border); border-radius: 
   </div>
 </section>
 
-<div class="sp-faq" style="padding:3rem 6vw;max-width:960px;margin:0 auto;">
-<h2 style="color:#ffffff;font-family:'Bebas Neue',sans-serif;font-size:clamp(1.6rem,2.8vw,2.2rem);letter-spacing:.04em;margin-bottom:1.5rem;">What You Get - Frequently Asked Questions</h2>
-<div class="sp-faq-item">
-<p class="sp-faq-q">What does a fractional CMO do for companies in this market?</p>
-<p class="sp-faq-a">A fractional CMO acts as your Chief Marketing Officer on a part-time basis -- typically 2-3 days per week -- with full executive accountability for strategy, team leadership, budget, and revenue outcomes. They own your entire marketing function and are accountable for pipeline generation and revenue attribution, not just deliverables.</p>
-</div>
-<div class="sp-faq-item">
-<p class="sp-faq-q">How quickly will I see results?</p>
-<p class="sp-faq-a">Most engagements produce measurable outputs within 30 days: a GTM strategy, ICP definition, messaging architecture, and demand generation plan. Pipeline movement typically appears in 60-90 days as campaigns launch. Long-term compounding results build over 6-12 months.</p>
-</div>
-<div class="sp-faq-item">
-<p class="sp-faq-q">Is there a long-term contract required?</p>
-<p class="sp-faq-a">No. Every MarkCMO engagement is month-to-month. There are no long-term contracts, no cancellation fees, and no lock-in. You stay because the results justify it. We offer a free GTM diagnostic before you commit to any paid engagement.</p>
-</div>
-<div class="sp-faq-item">
-<p class="sp-faq-q">Do I have to sign a long-term contract?</p>
-<p class="sp-faq-a">No. Every MarkCMO engagement is month-to-month. There are no long-term contracts, no cancellation fees, and no lock-in clauses. You stay because the results justify it -- not because you are contractually obligated. We offer a free GTM diagnostic before you commit to any paid engagement so you can validate fit before spending a dollar.</p>
-</div>
-<div class="sp-faq-item">
-<p class="sp-faq-q">How does the engagement start?</p>
-<p class="sp-faq-a">Step one is a free 30-minute GTM diagnostic call. We review your current situation, revenue goals, team structure, and the biggest gap between where you are and where you need to be. If there is a clear fit, we outline a 30-60-90 day plan and agree on scope. Most engagements are live within 5-7 business days of the diagnostic call.</p>
-</div>
-</div>
-<div class="sp-cta-closer">
-<div class="sp-cta-closer-inner">
-<span class="sp-cta-closer-tag">Free 30-Min Diagnostic</span>
-<h2>Ready to Build a Marketing Engine That Compounds?</h2>
-<p>Book a free GTM diagnostic call. No pitch. No pressure. We review your current situation, identify the single biggest gap in your marketing, and give you a clear path forward -- whether you hire us or not.</p>
-<div class="sp-cta-closer-btns">
-<a href="/book.html" class="sp-cta-primary">Book Free Strategy Call</a>
-<a href="/fractional-cmo.html" class="btn-ghost">Learn About Fractional CMO</a>
-</div>
-<p class="sp-cta-closer-trust"><span>4.9&#9733; rated</span><span>&nbsp;&bull;&nbsp;</span><span>193 client reviews</span><span>&nbsp;&bull;&nbsp;</span><span>No long-term contracts</span><span>&nbsp;&bull;&nbsp;</span><span>Month-to-month</span></p>
-</div>
-</div>
+</div><!-- /#appBody -->
 
 <footer class="footer">
   <div class="wrap">
-    WETYR Studios - a WETYR Corporation product &bull; Test build at markcmo.com/wetyr-films
+    WETYR Studio - internal tool &bull; markcmo.com/wetyr-studio
   </div>
 </footer>
 
 <script>
 const $ = (id) => document.getElementById(id);
+
+// ─── Admin auth gate ─────────────────────────────────────────
+// On load: ask /admin-auth?action=verify. If 200 + ok, reveal the app.
+// Otherwise show the login card; on successful sign-in, reveal the app.
+(async function authBootstrap() {
+  const gate = $('authGate'), app = $('appBody');
+  const setAuthed = () => {
+    gate.style.display = 'none';
+    app.hidden = false;
+    ['navSep','navUpload','navResults','navRoadmap','navLogout'].forEach(id => $(id).hidden = false);
+  };
+  try {
+    const r = await fetch('/.netlify/functions/admin-auth?action=verify', { credentials: 'include' });
+    if (r.ok) { const j = await r.json(); if (j.ok) { setAuthed(); return; } }
+  } catch (e) { /* fall through to login */ }
+
+  $('authSubmit').addEventListener('click', signIn);
+  $('authPass').addEventListener('keydown', e => { if (e.key === 'Enter') signIn(); });
+
+  async function signIn() {
+    const user = $('authUser').value.trim();
+    const pass = $('authPass').value;
+    const msg = $('authMsg');
+    if (!user || !pass) { msg.textContent = 'Enter username and password.'; msg.style.color = 'var(--red)'; return; }
+    msg.textContent = 'Signing in...'; msg.style.color = 'var(--muted)';
+    try {
+      const r = await fetch('/.netlify/functions/admin-auth', {
+        method: 'POST',
+        headers: { 'content-type': 'application/json' },
+        credentials: 'include',
+        body: JSON.stringify({ user, pass })
+      });
+      const j = await r.json();
+      if (!r.ok || !j.ok) { msg.textContent = j.error || 'Sign-in failed.'; msg.style.color = 'var(--red)'; return; }
+      setAuthed();
+    } catch (e) {
+      msg.textContent = e.message || 'Network error.'; msg.style.color = 'var(--red)';
+    }
+  }
+})();
+
+// Sign-out button (in nav)
+document.addEventListener('click', async (e) => {
+  if (e.target && e.target.id === 'navLogout') {
+    e.preventDefault();
+    try {
+      await fetch('/.netlify/functions/admin-auth', {
+        method: 'POST',
+        headers: { 'content-type': 'application/json' },
+        credentials: 'include',
+        body: JSON.stringify({ action: 'logout' })
+      });
+    } finally { location.reload(); }
+  }
+});
 
 let state = { scriptText: '', breakdown: null, schedule: null, budget: null };
 

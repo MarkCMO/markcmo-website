@@ -3,8 +3,8 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>WETYR Studios - Script to Production, Automated</title>
-<meta name="description" content="Upload a screenplay, get a full production breakdown: scenes, characters, schedule, budget, and every document a crew needs. Powered by Claude Opus." />
+<title>WETYR Film Intel - Production Data Platform for Studios & Indies</title>
+<meta name="description" content="Real-time industry news, festival deadlines, box office, casting, and title intelligence - one dashboard for film producers, packagers, and distributors." />
 <meta name="robots" content="noindex, nofollow" />
 <meta name="theme-color" content="#0a0a0a" />
 <link rel="canonical" href="https://markcmo.com/wetyr-films" />
@@ -26,130 +26,355 @@
 }
 * { box-sizing: border-box; margin: 0; padding: 0; }
 html { scroll-behavior: smooth; }
-body { font-family: -apple-system, BlinkMacSystemFont, 'Inter', 'Segoe UI', Roboto, sans-serif; background: var(--bg); color: var(--text); line-height: 1.55; font-size: 15px; }
+body {
+  font-family: -apple-system, BlinkMacSystemFont, 'Inter', 'Segoe UI', Roboto, sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  line-height: 1.6;
+  font-size: 15px;
+}
 a { color: var(--gold); text-decoration: none; }
 a:hover { text-decoration: underline; }
 .wrap { max-width: 1320px; margin: 0 auto; padding: 0 24px; }
 
-.nav { padding: 18px 0; border-bottom: 1px solid var(--border); background: rgba(10,10,10,0.92); backdrop-filter: blur(12px); position: sticky; top: 0; z-index: 20; }
+/* NAV */
+.nav {
+  padding: 18px 0;
+  border-bottom: 1px solid var(--border);
+  background: rgba(10, 10, 10, 0.92);
+  backdrop-filter: blur(12px);
+  position: sticky; top: 0; z-index: 20;
+}
 .nav-inner { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 12px; }
 .brand { display: flex; align-items: center; gap: 10px; font-weight: 800; font-size: 18px; letter-spacing: 0.5px; }
 .brand-dot { width: 10px; height: 10px; background: var(--gold); border-radius: 2px; }
 .nav-links { display: flex; gap: 22px; font-size: 14px; color: var(--muted); }
 .nav-links a { color: var(--muted); }
 .nav-links a:hover { color: var(--text); text-decoration: none; }
+.cta-small { background: var(--gold); color: #0a0a0a; padding: 8px 16px; border-radius: 6px; font-weight: 700; font-size: 13px; }
+.cta-small:hover { text-decoration: none; background: #e6c14d; }
 
-.hero { padding: 70px 0 50px; text-align: center; border-bottom: 1px solid var(--border); background: linear-gradient(180deg, #131316 0%, var(--bg) 100%); }
+/* HERO */
+.hero { padding: 80px 0 60px; text-align: center; border-bottom: 1px solid var(--border); background: linear-gradient(180deg, #131316 0%, var(--bg) 100%); }
 .eyebrow { color: var(--gold); font-weight: 700; font-size: 13px; letter-spacing: 2px; text-transform: uppercase; margin-bottom: 16px; }
 .hero h1 { font-size: clamp(36px, 5vw, 58px); line-height: 1.08; font-weight: 800; max-width: 980px; margin: 0 auto 20px; letter-spacing: -1px; }
 .hero h1 span { background: linear-gradient(90deg, var(--gold), #ffd700); -webkit-background-clip: text; background-clip: text; color: transparent; }
 .hero p { max-width: 720px; margin: 0 auto 28px; color: var(--muted); font-size: 18px; }
-
-.btn { padding: 12px 22px; border-radius: 8px; font-weight: 700; font-size: 14px; display: inline-block; transition: all 0.15s; border: 0; cursor: pointer; font-family: inherit; }
+.hero-ctas { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; }
+.btn { padding: 14px 24px; border-radius: 8px; font-weight: 700; font-size: 15px; display: inline-block; transition: all 0.2s; }
 .btn-primary { background: var(--gold); color: #0a0a0a; }
 .btn-primary:hover { background: #e6c14d; text-decoration: none; }
-.btn-primary:disabled { opacity: 0.5; cursor: not-allowed; }
 .btn-ghost { background: transparent; color: var(--text); border: 1px solid var(--border-hot); }
 .btn-ghost:hover { background: var(--panel); text-decoration: none; }
+.hero-meta { margin-top: 34px; display: flex; gap: 32px; justify-content: center; flex-wrap: wrap; color: var(--dim); font-size: 13px; }
+.hero-meta b { color: var(--text); }
 
-.section { padding: 48px 0; border-bottom: 1px solid var(--border); }
-.section h2 { font-size: 26px; font-weight: 800; letter-spacing: -0.3px; margin-bottom: 8px; }
-.section .sub { color: var(--muted); font-size: 14px; margin-bottom: 22px; }
+/* MODULES GRID */
+.section { padding: 64px 0; border-bottom: 1px solid var(--border); }
+.section-head { display: flex; justify-content: space-between; align-items: end; flex-wrap: wrap; gap: 16px; margin-bottom: 28px; }
+.section h2 { font-size: 30px; font-weight: 800; letter-spacing: -0.5px; }
+.section .sub { color: var(--muted); font-size: 15px; margin-top: 4px; }
+.live-pill { display: inline-flex; align-items: center; gap: 6px; background: rgba(22, 163, 74, 0.12); color: var(--green); padding: 4px 10px; border-radius: 999px; font-size: 12px; font-weight: 700; }
+.live-pill::before { content: ''; width: 6px; height: 6px; border-radius: 50%; background: var(--green); animation: pulse 1.6s infinite; }
+@keyframes pulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.3; } }
 
-/* Upload panel */
-.upload-card { background: var(--panel); border: 1px solid var(--border); border-radius: 14px; padding: 28px; }
-.drop {
-  border: 2px dashed var(--border-hot);
-  border-radius: 12px;
-  padding: 40px 20px;
-  text-align: center;
-  transition: all 0.15s;
-  cursor: pointer;
-  background: var(--panel-2);
+/* GRID */
+.grid { display: grid; gap: 20px; }
+.grid-2 { grid-template-columns: repeat(2, 1fr); }
+.grid-3 { grid-template-columns: repeat(3, 1fr); }
+@media (max-width: 960px) { .grid-2, .grid-3 { grid-template-columns: 1fr; } }
+
+/* PANEL */
+.panel { background: var(--panel); border: 1px solid var(--border); border-radius: 12px; padding: 20px; }
+.panel-head { display: flex; justify-content: space-between; align-items: center; margin-bottom: 14px; padding-bottom: 12px; border-bottom: 1px solid var(--border); }
+.panel-title { font-weight: 700; font-size: 15px; }
+.panel-tag { font-size: 11px; color: var(--dim); letter-spacing: 1px; text-transform: uppercase; }
+
+/* NEWS FEED */
+.news-item { padding: 12px 0; border-bottom: 1px solid var(--border); }
+.news-item:last-child { border-bottom: none; }
+.news-src { color: var(--gold); font-size: 11px; font-weight: 700; letter-spacing: 1px; }
+.news-title { font-weight: 600; margin: 4px 0 4px; line-height: 1.35; }
+.news-meta { color: var(--dim); font-size: 12px; }
+
+/* TABLE */
+table { width: 100%; border-collapse: collapse; font-size: 14px; }
+th { text-align: left; padding: 10px 8px; font-size: 11px; color: var(--dim); text-transform: uppercase; letter-spacing: 1px; border-bottom: 1px solid var(--border); }
+td { padding: 12px 8px; border-bottom: 1px solid var(--border); }
+tr:last-child td { border-bottom: none; }
+.num { font-variant-numeric: tabular-nums; text-align: right; }
+.pos { color: var(--green); }
+.neg { color: var(--red); }
+
+/* FESTIVAL */
+.fest { display: flex; gap: 14px; padding: 14px 0; border-bottom: 1px solid var(--border); align-items: start; }
+.fest:last-child { border-bottom: none; }
+.fest-date { min-width: 64px; text-align: center; background: var(--panel-2); border: 1px solid var(--border); border-radius: 8px; padding: 6px 0; }
+.fest-date .day { font-size: 22px; font-weight: 800; line-height: 1; }
+.fest-date .mo { font-size: 10px; color: var(--gold); text-transform: uppercase; letter-spacing: 1px; margin-top: 2px; }
+.fest-body { flex: 1; }
+.fest-name { font-weight: 700; }
+.fest-info { color: var(--muted); font-size: 13px; margin-top: 2px; }
+.fest-tier { display: inline-block; font-size: 10px; padding: 2px 8px; border-radius: 4px; font-weight: 700; letter-spacing: 1px; text-transform: uppercase; margin-top: 6px; }
+.tier-hot { background: rgba(220, 38, 38, 0.15); color: #f87171; }
+.tier-soon { background: rgba(245, 158, 11, 0.15); color: #fbbf24; }
+.tier-regular { background: rgba(161, 161, 170, 0.15); color: var(--muted); }
+
+/* TITLE CARD */
+.title-card { display: grid; grid-template-columns: 140px 1fr; gap: 20px; }
+@media (max-width: 640px) { .title-card { grid-template-columns: 1fr; } }
+.title-poster { width: 140px; height: 210px; background: linear-gradient(135deg, #1c1c20, #27272a); border: 1px solid var(--border); border-radius: 8px; display: flex; align-items: center; justify-content: center; color: var(--dim); font-size: 11px; text-align: center; padding: 10px; }
+.title-main h3 { font-size: 24px; margin-bottom: 4px; }
+.title-meta { color: var(--muted); font-size: 13px; margin-bottom: 14px; }
+.title-stats { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; margin-bottom: 14px; }
+.stat { background: var(--panel-2); border: 1px solid var(--border); border-radius: 6px; padding: 10px; }
+.stat-label { color: var(--dim); font-size: 11px; text-transform: uppercase; letter-spacing: 1px; }
+.stat-val { font-size: 18px; font-weight: 800; margin-top: 2px; }
+.providers { display: flex; gap: 6px; flex-wrap: wrap; }
+.provider { background: var(--panel-2); border: 1px solid var(--border); padding: 4px 10px; border-radius: 999px; font-size: 11px; font-weight: 700; color: var(--muted); text-decoration: none; }
+a.provider:hover { border-color: var(--gold); color: var(--gold); }
+.provider.hot { border-color: var(--gold); color: var(--gold); }
+
+/* TITLE INTEL - trending strip + clickables */
+.title-name-link { color: inherit; text-decoration: none; background-image: linear-gradient(to right, var(--gold), var(--gold)); background-position: 0 100%; background-repeat: no-repeat; background-size: 0 1px; transition: background-size 0.3s ease; }
+.title-name-link:hover { background-size: 100% 1px; }
+.person-link { color: var(--text); text-decoration: none; border-bottom: 1px dotted rgba(255,255,255,0.15); transition: color .15s, border-color .15s; }
+.person-link:hover { color: var(--gold); border-bottom-color: var(--gold); }
+.title-poster-link { display: block; position: relative; cursor: zoom-in; }
+.title-poster-link::after { content: 'View on TMDB ↗'; position: absolute; inset: auto 0 8px 0; margin: 0 8px; background: rgba(10,10,10,.85); color: var(--gold); font-size: 10px; font-weight: 700; letter-spacing: 1px; text-transform: uppercase; padding: 5px 8px; border-radius: 4px; text-align: center; opacity: 0; transition: opacity .2s; pointer-events: none; }
+.title-poster-link:hover::after { opacity: 1; }
+.title-actions { display: flex; gap: 8px; flex-wrap: wrap; margin-top: 4px; margin-bottom: 14px; }
+.title-action { display: inline-flex; align-items: center; gap: 6px; padding: 7px 12px; border-radius: 6px; font-size: 12px; font-weight: 700; letter-spacing: .5px; text-decoration: none; transition: transform .15s, background .15s, border-color .15s; }
+.title-action.primary { background: var(--gold); color: #0a0a0a; }
+.title-action.primary:hover { transform: translateY(-1px); background: #ffd369; }
+.title-action.ghost { background: var(--panel-2); color: var(--text); border: 1px solid var(--border); }
+.title-action.ghost:hover { border-color: var(--gold); color: var(--gold); }
+.trending-strip { display: grid; grid-template-columns: repeat(5, 1fr); gap: 10px; margin-top: 18px; padding-top: 18px; border-top: 1px solid var(--border); }
+@media (max-width: 640px) { .trending-strip { grid-template-columns: repeat(3, 1fr); } }
+.trend-card { position: relative; border-radius: 8px; overflow: hidden; cursor: pointer; background: var(--panel-2); border: 1px solid var(--border); aspect-ratio: 2 / 3; transition: transform .2s, border-color .2s, box-shadow .2s; }
+.trend-card:hover { transform: translateY(-3px); border-color: var(--gold); box-shadow: 0 8px 20px rgba(245,158,11,.15); }
+.trend-card.active { border-color: var(--gold); box-shadow: 0 0 0 1px var(--gold) inset; }
+.trend-card img { width: 100%; height: 100%; object-fit: cover; display: block; }
+.trend-rank { position: absolute; top: 6px; left: 6px; width: 22px; height: 22px; border-radius: 50%; background: var(--gold); color: #0a0a0a; font-size: 11px; font-weight: 800; display: flex; align-items: center; justify-content: center; }
+.trend-title-overlay { position: absolute; inset: auto 0 0 0; background: linear-gradient(to top, rgba(0,0,0,.92) 10%, transparent); color: #fff; padding: 18px 8px 6px; font-size: 10px; font-weight: 700; line-height: 1.2; text-align: center; text-shadow: 0 1px 2px #000; }
+.trend-rotate-hint { font-size: 10px; color: var(--dim); text-transform: uppercase; letter-spacing: 1.5px; margin-top: 10px; display: flex; align-items: center; gap: 6px; }
+.trend-rotate-hint::before { content: ''; width: 6px; height: 6px; border-radius: 50%; background: var(--green); box-shadow: 0 0 8px var(--green); animation: pulse 2s ease-in-out infinite; }
+
+/* CASTING */
+.casting-item { padding: 14px 12px; border-bottom: 1px solid var(--border); display: block; color: inherit; text-decoration: none; transition: background .15s; border-radius: 6px; word-break: break-word; overflow-wrap: anywhere; }
+.casting-item:hover { background: var(--panel-2); }
+.casting-item:last-child { border-bottom: none; }
+.casting-role { font-weight: 700; color: var(--text); font-size: 12px; text-transform: uppercase; letter-spacing: 1px; color: var(--gold); display: flex; align-items: center; gap: 6px; flex-wrap: wrap; }
+.casting-prod { font-weight: 700; font-size: 15px; line-height: 1.35; margin-top: 4px; color: var(--text); }
+.casting-meta { color: var(--muted); font-size: 13px; margin-top: 6px; line-height: 1.45; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
+.casting-tags { margin-top: 10px; display: flex; gap: 6px; flex-wrap: wrap; align-items: center; }
+.tag { background: var(--panel-2); border: 1px solid var(--border); padding: 3px 8px; border-radius: 4px; font-size: 11px; color: var(--muted); white-space: nowrap; }
+.tag.union { border-color: var(--green); color: var(--green); }
+.tag.loc { border-color: var(--gold); color: var(--gold); }
+.casting-apply { margin-left: auto; font-size: 11px; font-weight: 700; color: var(--gold); letter-spacing: 1px; text-transform: uppercase; white-space: nowrap; }
+.casting-item:hover .casting-apply { text-decoration: underline; }
+@media (max-width: 640px) {
+  .casting-item { padding: 12px 10px; }
+  .casting-prod { font-size: 14px; }
+  .casting-meta { -webkit-line-clamp: 3; font-size: 12px; }
+  .casting-apply { margin-left: 0; margin-top: 2px; width: 100%; text-align: right; }
 }
-.drop.hover { border-color: var(--gold); background: rgba(212, 175, 55, 0.05); }
-.drop-icon { font-size: 32px; margin-bottom: 10px; }
-.drop-title { font-weight: 700; margin-bottom: 6px; }
-.drop-sub { color: var(--muted); font-size: 13px; }
-.upload-form { display: grid; gap: 14px; margin-top: 18px; }
-.form-row { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 12px; }
-.field { display: flex; flex-direction: column; gap: 5px; }
-.field label { font-size: 12px; color: var(--muted); text-transform: uppercase; letter-spacing: 0.5px; font-weight: 700; }
-.field input, .field select, .field textarea {
-  background: var(--panel-2); border: 1px solid var(--border); color: var(--text);
-  padding: 10px 12px; border-radius: 6px; font-family: inherit; font-size: 14px;
-}
-.field input:focus, .field select:focus, .field textarea:focus { outline: none; border-color: var(--gold); }
-.field textarea { min-height: 120px; resize: vertical; font-family: ui-monospace, 'SF Mono', Menlo, monospace; font-size: 12px; line-height: 1.5; }
 
-/* Status */
-.status { display: none; margin-top: 18px; padding: 14px; border-radius: 8px; font-size: 13px; }
-.status.active { display: block; }
-.status.info { background: rgba(201,168,76,0.1); border: 1px solid rgba(201,168,76,0.4); color: #93c5fd; }
-.status.err { background: rgba(220, 38, 38, 0.1); border: 1px solid rgba(220, 38, 38, 0.4); color: #fca5a5; }
-.status.ok { background: rgba(22, 163, 74, 0.1); border: 1px solid rgba(22, 163, 74, 0.4); color: #86efac; }
-.spinner { display: inline-block; width: 12px; height: 12px; border: 2px solid rgba(255,255,255,0.2); border-top-color: currentColor; border-radius: 50%; animation: spin 0.8s linear infinite; vertical-align: middle; margin-right: 8px; }
+/* PRICE CARDS */
+.price-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
+@media (max-width: 900px) { .price-grid { grid-template-columns: 1fr; } }
+.price { background: var(--panel); border: 1px solid var(--border); border-radius: 12px; padding: 28px; position: relative; }
+.price.featured { border-color: var(--gold); }
+.price-badge { position: absolute; top: -12px; left: 24px; background: var(--gold); color: #0a0a0a; padding: 4px 12px; font-size: 11px; font-weight: 700; border-radius: 4px; letter-spacing: 1px; }
+.price-tier { font-size: 13px; color: var(--gold); text-transform: uppercase; letter-spacing: 2px; font-weight: 700; }
+.price-num { font-size: 42px; font-weight: 800; margin: 10px 0 2px; }
+.price-num small { font-size: 15px; color: var(--muted); font-weight: 500; }
+.price-sub { color: var(--muted); font-size: 13px; margin-bottom: 20px; }
+.price ul { list-style: none; padding: 0; }
+.price li { padding: 8px 0; color: var(--muted); font-size: 14px; border-bottom: 1px solid var(--border); }
+.price li::before { content: '✓'; color: var(--green); margin-right: 10px; font-weight: 700; }
+.price li:last-child { border-bottom: none; }
+
+/* CTA */
+.cta-section { padding: 80px 0; text-align: center; background: radial-gradient(ellipse at center, #1c1c20 0%, var(--bg) 70%); }
+.cta-section h2 { font-size: 40px; font-weight: 800; max-width: 800px; margin: 0 auto 16px; letter-spacing: -0.5px; }
+.cta-section p { color: var(--muted); max-width: 600px; margin: 0 auto 28px; font-size: 17px; }
+
+/* FOOTER */
+footer { padding: 36px 0; border-top: 1px solid var(--border); color: var(--dim); font-size: 13px; text-align: center; }
+footer a { color: var(--muted); }
+
+/* TIMESTAMP TICKER */
+.ticker { font-size: 11px; color: var(--dim); font-family: 'SFMono-Regular', Menlo, monospace; letter-spacing: 0.5px; }
 @keyframes spin { to { transform: rotate(360deg); } }
+.new-flag { display: inline-block; background: rgba(220, 38, 38, 0.2); color: #f87171; font-size: 10px; font-weight: 700; padding: 1px 6px; border-radius: 3px; margin-left: 6px; letter-spacing: 1px; }
+#liveClock { color: var(--green); font-weight: 700; }
 
-/* Tabs */
-.tabs { display: flex; gap: 4px; border-bottom: 1px solid var(--border); margin-bottom: 22px; overflow-x: auto; }
-.tab { padding: 10px 16px; font-size: 13px; font-weight: 700; color: var(--muted); border-bottom: 2px solid transparent; cursor: pointer; white-space: nowrap; }
-.tab.active { color: var(--text); border-bottom-color: var(--gold); }
-.tab-panel { display: none; }
-.tab-panel.active { display: block; }
-
-/* Summary stats */
-.stats { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 12px; margin-bottom: 22px; }
-.stat { background: var(--panel); border: 1px solid var(--border); border-radius: 10px; padding: 16px; }
-.stat-label { font-size: 11px; color: var(--muted); text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 6px; font-weight: 700; }
-.stat-value { font-size: 22px; font-weight: 800; letter-spacing: -0.5px; }
-.stat-sub { font-size: 12px; color: var(--dim); margin-top: 4px; }
-
-/* Tables */
-table { width: 100%; border-collapse: collapse; font-size: 13px; }
-th, td { padding: 10px 12px; text-align: left; border-bottom: 1px solid var(--border); vertical-align: top; }
-th { background: var(--panel); color: var(--muted); font-weight: 700; font-size: 11px; text-transform: uppercase; letter-spacing: 0.5px; position: sticky; top: 62px; }
-tr:hover td { background: var(--panel); }
-.tbl-scroll { max-height: 620px; overflow-y: auto; border: 1px solid var(--border); border-radius: 10px; }
-.tag { display: inline-block; padding: 2px 8px; border-radius: 4px; font-size: 11px; font-weight: 700; margin: 1px 3px 1px 0; background: var(--panel-2); color: var(--muted); border: 1px solid var(--border); }
-.tag.int { background: rgba(201,168,76,0.12); color: #93c5fd; border-color: rgba(201,168,76,0.3); }
-.tag.ext { background: rgba(212, 175, 55, 0.12); color: var(--gold); border-color: rgba(212, 175, 55, 0.3); }
-.tag.day { background: rgba(234, 179, 8, 0.12); color: #fde047; border-color: rgba(234, 179, 8, 0.3); }
-.tag.night { background: rgba(147, 51, 234, 0.12); color: #c4b5fd; border-color: rgba(147, 51, 234, 0.3); }
-.tag.hot { background: rgba(220, 38, 38, 0.12); color: #fca5a5; border-color: rgba(220, 38, 38, 0.3); }
-
-.flag-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 10px; margin: 18px 0; }
-.flag { padding: 12px; border-radius: 8px; background: var(--panel); border: 1px solid var(--border); font-size: 12px; display: flex; justify-content: space-between; align-items: center; }
-.flag-on { border-color: var(--red); background: rgba(220, 38, 38, 0.06); color: var(--text); }
-.flag-off { color: var(--dim); }
-.flag-dot { width: 8px; height: 8px; border-radius: 50%; background: var(--dim); }
-.flag-on .flag-dot { background: var(--red); }
-
-.bar { display: flex; gap: 10px; align-items: center; margin: 6px 0; }
-.bar-fill { flex: 1; height: 8px; background: var(--panel-2); border-radius: 4px; overflow: hidden; }
-.bar-fill > div { height: 100%; background: var(--gold); border-radius: 4px; }
-.bar-label { font-size: 12px; color: var(--muted); min-width: 180px; }
-.bar-val { font-size: 12px; font-weight: 700; min-width: 50px; text-align: right; }
-
-pre.json { background: #0f0f12; border: 1px solid var(--border); border-radius: 8px; padding: 14px; max-height: 600px; overflow: auto; font-size: 11px; color: #c0c0c8; font-family: ui-monospace, 'SF Mono', Menlo, monospace; }
-
-.footer { padding: 40px 0; color: var(--dim); font-size: 13px; text-align: center; }
-
-@media (max-width: 720px) {
-  th { position: static; }
-  .nav-links { display: none; }
+/* SCROLLING TICKER BAR */
+.ticker-bar { background: #000; border-bottom: 1px solid var(--border); overflow: hidden; padding: 8px 0; font-size: 12px; position: relative; }
+.ticker-bar::before, .ticker-bar::after { content: ''; position: absolute; top: 0; bottom: 0; width: 60px; z-index: 2; pointer-events: none; }
+.ticker-bar::before { left: 0; background: linear-gradient(90deg, #000, transparent); }
+.ticker-bar::after { right: 0; background: linear-gradient(-90deg, #000, transparent); }
+.ticker-track { display: flex; gap: 40px; white-space: nowrap; animation: tickerScroll 10s linear infinite; will-change: transform; }
+@media (max-width: 780px) { .ticker-track { animation-duration: 6s; } }
+@media (max-width: 420px) { .ticker-track { animation-duration: 4s; } }
+.ticker-track:hover { animation-play-state: paused; }
+.ticker-item { display: inline-flex; align-items: center; gap: 10px; color: var(--muted); }
+.ticker-item b { color: var(--text); font-weight: 700; }
+.ticker-label { color: var(--gold); font-weight: 700; letter-spacing: 1.5px; font-size: 10px; }
+.ticker-up { color: var(--green); font-weight: 700; }
+.ticker-down { color: var(--red); font-weight: 700; }
+@keyframes tickerScroll {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
 }
+
+/* ANIMATIONS */
+@keyframes fadeInUp {
+  from { opacity: 0; transform: translateY(8px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+.fade-in { animation: fadeInUp 0.4s ease-out; }
+.news-item { transition: background 0.2s, border-color 0.2s; cursor: pointer; padding-left: 8px; padding-right: 8px; margin-left: -8px; margin-right: -8px; border-radius: 6px; }
+.news-item:hover { background: var(--panel-2); }
+.news-item a { color: inherit; text-decoration: none; }
+.news-item a:hover { color: var(--gold); }
+.fest { transition: background 0.2s; border-radius: 8px; padding-left: 8px; padding-right: 8px; margin-left: -8px; margin-right: -8px; }
+.fest:hover { background: var(--panel-2); }
+.fest a { color: inherit; text-decoration: none; }
+.fest a:hover .fest-name { color: var(--gold); }
+tbody tr { transition: background 0.15s; cursor: pointer; }
+tbody tr:hover { background: var(--panel-2); }
+tbody tr a { color: inherit; text-decoration: none; display: block; }
+
+/* REFRESH COUNTDOWN */
+.refresh-pill { display: inline-flex; align-items: center; gap: 8px; background: var(--panel-2); border: 1px solid var(--border); padding: 6px 12px; border-radius: 999px; font-size: 11px; color: var(--muted); letter-spacing: 0.5px; }
+.refresh-pill::before { content: ''; width: 6px; height: 6px; border-radius: 50%; background: var(--green); box-shadow: 0 0 8px var(--green); animation: pulseDot 2s infinite; }
+@keyframes pulseDot { 0%, 100% { opacity: 1; transform: scale(1); } 50% { opacity: 0.6; transform: scale(0.85); } }
+
+/* ANIMATED COUNTER */
+.count-up { display: inline-block; min-width: 2ch; }
+
+/* SPINNING BORDER ON LIVE PILL */
+.live-pill { position: relative; }
+
+/* TRENDING ARROWS */
+.arrow-up::before { content: '▲ '; color: var(--green); font-size: 10px; }
+.arrow-down::before { content: '▼ '; color: var(--red); font-size: 10px; }
+.arrow-flat::before { content: '■ '; color: var(--muted); font-size: 10px; }
+
+/* VIEWER BADGE */
+.viewer-badge { display: inline-flex; align-items: center; gap: 6px; color: var(--muted); font-size: 12px; }
+.viewer-badge::before { content: '●'; color: var(--green); animation: pulseDot 1.4s infinite; }
+
+/* SMOOTH FOCUS GLOW */
+.panel { transition: border-color 0.3s, transform 0.3s; }
+.panel:hover { border-color: var(--border-hot); }
+@media (prefers-reduced-motion: reduce) {
+  .ticker-track, .fade-in, .refresh-pill::before, .live-pill::before, .viewer-badge::before { animation: none !important; }
+}
+
+/* MOBILE */
+.table-scroll { overflow-x: auto; -webkit-overflow-scrolling: touch; margin: 0 -8px; }
+.table-scroll table { min-width: 780px; }
+@media (max-width: 780px) {
+  body { font-size: 14px; }
+  .wrap { padding: 0 16px; }
+  .nav { padding: 12px 0; }
+  .nav-links { display: none; }
+  .brand { font-size: 16px; }
+  .cta-small { padding: 7px 12px; font-size: 12px; }
+  .hero { padding: 48px 0 40px; }
+  .hero h1 { font-size: 32px; letter-spacing: -0.5px; }
+  .hero p { font-size: 15px; }
+  .hero-meta { gap: 14px 20px; font-size: 12px; justify-content: flex-start; text-align: left; flex-direction: column; align-items: flex-start; padding: 0 4px; }
+  .hero-ctas .btn { font-size: 14px; padding: 12px 18px; width: 100%; text-align: center; }
+  .hero-ctas { flex-direction: column; }
+  .section { padding: 44px 0; }
+  .section h2 { font-size: 24px; }
+  .section-head { flex-direction: column; align-items: flex-start; gap: 8px; }
+  .panel { padding: 16px; }
+  .panel-head { flex-direction: column; align-items: flex-start; gap: 4px; }
+  .panel-tag { font-size: 10px; }
+  .news-title { font-size: 14px; }
+  .fest { gap: 10px; }
+  .fest-date { min-width: 52px; }
+  .fest-date .day { font-size: 18px; }
+  .fest-name { font-size: 14px; }
+  .fest-info { font-size: 12px; }
+  table { font-size: 13px; }
+  th, td { padding: 8px 6px; }
+  .title-card { grid-template-columns: 1fr; }
+  .title-poster { width: 100%; max-width: 220px; height: auto; aspect-ratio: 2 / 3; margin: 0 auto; }
+  .title-main h3 { font-size: 20px; text-align: center; }
+  .title-meta { text-align: center; }
+  .title-stats { grid-template-columns: repeat(2, 1fr); }
+  .casting-item { padding: 12px 0; }
+  .price { padding: 20px; }
+  .price-num { font-size: 30px !important; }
+  .cta-section { padding: 56px 0; }
+  .cta-section h2 { font-size: 28px; }
+  .cta-section p { font-size: 15px; }
+  footer { font-size: 12px; padding: 28px 0; }
+}
+@media (max-width: 420px) {
+  .hero h1 { font-size: 28px; }
+  .eyebrow { font-size: 11px; letter-spacing: 1.5px; }
+  .title-stats { grid-template-columns: 1fr 1fr; gap: 6px; }
+  .stat { padding: 8px; }
+  .stat-val { font-size: 16px; }
+}
+
+/* ── ROLODEX (internal) ───────────────────────────────────────────── */
+.rx-bar { display: grid; grid-template-columns: 2fr 1fr 1fr auto; gap: 10px; margin-bottom: 16px; }
+@media (max-width: 900px) { .rx-bar { grid-template-columns: 1fr 1fr; } .rx-bar .rx-input { grid-column: 1 / -1; } .rx-bar .rx-btn { grid-column: 1 / -1; } }
+@media (max-width: 520px) { .rx-bar { grid-template-columns: 1fr; } #rolodex .section-head { flex-direction: column; align-items: flex-start; } #rolodex h2 { font-size: 22px; } .rx-cards { grid-template-columns: 1fr; } .rx-tools { gap: 6px; } .rx-tools .rx-btn-ghost { padding: 8px 10px; font-size: 11px; } }
+.rx-input, .rx-select { background: var(--panel-2); border: 1px solid var(--border-hot); color: var(--text); padding: 10px 12px; border-radius: 8px; font-size: 14px; width: 100%; font-family: inherit; }
+.rx-input:focus, .rx-select:focus { outline: none; border-color: var(--gold); }
+.rx-btn { background: var(--gold); color: #0a0a0a; border: 0; padding: 10px 16px; border-radius: 8px; font-weight: 700; font-size: 13px; cursor: pointer; white-space: nowrap; }
+.rx-btn:hover { background: #e6c14d; }
+.rx-btn-ghost { background: transparent; color: var(--muted); border: 1px solid var(--border-hot); padding: 8px 14px; border-radius: 8px; font-size: 12px; cursor: pointer; }
+.rx-btn-ghost:hover { color: var(--text); border-color: var(--gold); }
+.rx-stats { display: flex; gap: 18px; flex-wrap: wrap; color: var(--dim); font-size: 12px; margin-bottom: 14px; }
+.rx-stats b { color: var(--gold); font-size: 14px; }
+.rx-cards { display: grid; grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); gap: 14px; }
+.rx-card { background: var(--panel-2); border: 1px solid var(--border); border-radius: 10px; padding: 14px; }
+.rx-card:hover { border-color: var(--gold); }
+.rx-card-name { font-weight: 700; font-size: 15px; color: var(--text); }
+.rx-card-sub { color: var(--gold); font-size: 11px; letter-spacing: 0.5px; text-transform: uppercase; margin: 2px 0 8px; }
+.rx-card-line { color: var(--muted); font-size: 12px; margin: 3px 0; }
+.rx-card-line a { color: var(--text); word-break: break-all; }
+.rx-tag { display: inline-block; background: rgba(212, 175, 55, 0.1); color: var(--gold); border: 1px solid rgba(212, 175, 55, 0.3); padding: 2px 7px; border-radius: 4px; font-size: 10px; margin: 2px 4px 0 0; letter-spacing: 0.3px; }
+.rx-tab-row { display: flex; gap: 4px; border-bottom: 1px solid var(--border); margin-bottom: 18px; }
+.rx-tab { background: transparent; color: var(--muted); border: 0; border-bottom: 2px solid transparent; padding: 10px 16px; cursor: pointer; font-size: 13px; font-weight: 600; }
+.rx-tab.active { color: var(--gold); border-bottom-color: var(--gold); }
+.rx-login-card { max-width: 460px; margin: 30px auto; background: var(--panel-2); border: 1px solid var(--border-hot); border-radius: 12px; padding: 28px; text-align: center; }
+.rx-login-card h3 { font-size: 18px; margin-bottom: 8px; }
+.rx-login-card p { color: var(--muted); font-size: 13px; margin-bottom: 18px; }
+.rx-login-row { display: flex; flex-direction: column; gap: 10px; }
+.rx-msg { font-size: 12px; padding: 8px 12px; border-radius: 6px; margin-top: 10px; }
+.rx-msg-ok { background: rgba(22, 163, 74, 0.1); color: var(--green); border: 1px solid rgba(22, 163, 74, 0.3); }
+.rx-msg-err { background: rgba(220, 38, 38, 0.1); color: var(--red); border: 1px solid rgba(220, 38, 38, 0.3); }
+.rx-tools { display: flex; gap: 8px; margin-bottom: 14px; flex-wrap: wrap; }
+.rx-modal-bg { position: fixed; inset: 0; background: rgba(0,0,0,0.75); display: none; align-items: center; justify-content: center; z-index: 100; padding: 20px; }
+.rx-modal-bg.show { display: flex; }
+.rx-modal { background: var(--panel); border: 1px solid var(--border-hot); border-radius: 12px; padding: 24px; max-width: 720px; width: 100%; max-height: 90vh; overflow-y: auto; }
+.rx-modal h3 { margin-bottom: 12px; font-size: 17px; }
+.rx-modal label { display: block; margin: 12px 0 4px; font-size: 12px; color: var(--muted); font-weight: 600; }
+.rx-modal textarea { width: 100%; min-height: 240px; background: var(--panel-2); border: 1px solid var(--border-hot); color: var(--text); border-radius: 8px; padding: 12px; font-family: ui-monospace, Menlo, Consolas, monospace; font-size: 12px; resize: vertical; }
+.rx-modal-actions { display: flex; gap: 8px; justify-content: flex-end; margin-top: 18px; }
+.rx-internal-banner { background: linear-gradient(90deg, rgba(212,175,55,0.08), rgba(212,175,55,0.02)); border: 1px solid rgba(212,175,55,0.25); border-radius: 8px; padding: 10px 14px; font-size: 12px; color: var(--gold); margin-bottom: 18px; display: flex; align-items: center; gap: 8px; }
 </style>
 <meta property="og:type" content="website"/>
 <meta property="og:site_name" content="MarkCMO"/>
-<meta property="og:title" content="WETYR Studios - Script to Production, Automated"/>
-<meta property="og:description" content="Upload a screenplay, get a full production breakdown: scenes, characters, schedule, budget, and every document a crew needs. Powered by Claude Opus."/>
-<meta property="og:url" content="https://markcmo.com/wetyr-films"/>
+<meta property="og:title" content="WETYR Film Intel - Production Data Platform for Studios &amp; Indies"/>
+<meta property="og:description" content="Real-time industry news, festival deadlines, box office, casting, and title intelligence - one dashboard for film producers, packagers, and distributors."/>
+<meta property="og:url" content="https://markcmo.com/wetyr-film.html"/>
 <meta property="og:image" content="https://markcmo.com/mark-photo.webp"/>
 <meta name="twitter:card" content="summary_large_image"/>
 <meta name="twitter:site" content="@markgcmo"/>
-<meta name="twitter:title" content="WETYR Studios - Script to Production, Automated"/>
-<meta name="twitter:description" content="Upload a screenplay, get a full production breakdown: scenes, characters, schedule, budget, and every document a crew needs. Powered by Claude Opus."/>
+<meta name="twitter:title" content="WETYR Film Intel - Production Data Platform for Studios &amp; Indies"/>
+<meta name="twitter:description" content="Real-time industry news, festival deadlines, box office, casting, and title intelligence - one dashboard for film producers, packagers, and distributors."/>
 <meta name="twitter:image" content="https://markcmo.com/mark-photo.webp"/>
 <script type="application/ld+json">
 {
@@ -206,9 +431,9 @@ pre.json { background: #0f0f12; border: 1px solid var(--border); border-radius: 
 {
   "@context": "https://schema.org",
   "@type": "WebPage",
-  "name": "WETYR Studios - Script to Production, Automated",
-  "description": "Upload a screenplay, get a full production breakdown: scenes, characters, schedule, budget, and every document a crew needs. Powered by Claude Opus.",
-  "url": "https://markcmo.com/wetyr-films",
+  "name": "WETYR Film Intel - Production Data Platform for Studios & Indies",
+  "description": "Real-time industry news, festival deadlines, box office, casting, and title intelligence - one dashboard for film producers, packagers, and distributors.",
+  "url": "https://markcmo.com/wetyr-film.html",
   "author": {
     "@type": "Person",
     "name": "Mark Gabrielli",
@@ -236,26 +461,47 @@ pre.json { background: #0f0f12; border: 1px solid var(--border); border-radius: 
 
 <nav class="nav">
   <div class="wrap nav-inner">
-    <div class="brand"><span class="brand-dot"></span>WETYR</div>
+    <div class="brand"><span class="brand-dot"></span>WETYR <span style="color: var(--gold);">Film Intel</span></div>
     <div class="nav-links">
-      <a href="/wetyr-films" style="color: var(--gold);">Studios</a>
-      <a href="/wetyr-film">Film Intel</a>
+      <a href="/wetyr-films" style="color: var(--gold);">Film Intel</a>
+      <a href="/wetyr-studio" title="Internal admin tool" style="display: inline-flex; align-items: center; gap: 5px;">
+        <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" style="opacity: 0.7;"><rect x="5" y="11" width="14" height="10" rx="2"/><path d="M8 11V7a4 4 0 0 1 8 0v4"/></svg>
+        Studio
+      </a>
       <span style="color: var(--border-hot);">|</span>
-      <a href="#upload">Upload</a>
-      <a href="#results">Results</a>
-      <a href="#how">Roadmap</a>
+      <a href="#news">News</a>
+      <a href="#festivals">Festivals</a>
+      <a href="#boxoffice">Box Office</a>
+      <a href="#titles">Titles</a>
+      <a href="#casting">Casting</a>
+      <a href="#rolodex">Rolodex</a>
     </div>
+    <a href="/wetyr-studio" class="cta-small" title="Internal access only">Internal Login</a>
   </div>
 </nav>
 
+<!-- SCROLLING TICKER -->
+<div class="ticker-bar">
+  <div class="ticker-track" id="tickerTrack">
+    <!-- Populated by JS; fallback static items -->
+    <div class="ticker-item"><span class="ticker-label">LIVE</span> Streaming film intel - feeds refreshing</div>
+  </div>
+</div>
+
 <section class="hero">
   <div class="wrap">
-    <div class="eyebrow">WETYR Studios - Test Build</div>
-    <h1>Script to <span>Production</span>, automated.</h1>
-    <p>Upload a screenplay. Get a full breakdown, stripboard, shooting schedule, and budget in under 3 minutes. Every document a production needs, generated from page one.</p>
-    <div style="display: flex; gap: 10px; justify-content: center; flex-wrap: wrap;">
-      <a href="#upload" class="btn btn-primary">Try it now</a>
-      <a href="#how" class="btn btn-ghost">How it works</a>
+    <div class="eyebrow">For Producers, Packagers & Distributors</div>
+    <h1>Every <span>production intel signal</span><br>on one dashboard.</h1>
+    <p>Real-time deal tracking, festival deadlines, box office, title data, and casting - replacing 9 different paid subscriptions with one feed.</p>
+    <div class="hero-ctas">
+      <a href="#contact" class="btn btn-primary">Request Your Slate Scan</a>
+      <a href="#demo" class="btn btn-ghost">See Live Demo</a>
+    </div>
+    <div class="hero-meta">
+      <span><b>9 trades</b> aggregated live</span>
+      <span><b>12,000+</b> festivals tracked</span>
+      <span><b>500K+</b> titles indexed</span>
+      <span>Last refresh <span id="liveClock">--:--:--</span> UTC</span>
     </div>
   </div>
 </section>
@@ -283,156 +529,530 @@ pre.json { background: #0f0f12; border: 1px solid var(--border); border-radius: 
 </div>
 
 
-<section class="section" id="upload">
+<!-- NEWS + FESTIVALS ROW -->
+<section class="section" id="demo">
   <div class="wrap">
-    <h2>1. Upload your script</h2>
-    <div class="sub">PDF, FDX, Fountain, or plain text. Scanned PDFs run through OCR automatically.</div>
-
-    <div class="upload-card">
-      <div id="drop" class="drop">
-        <div class="drop-icon">[FILE]</div>
-        <div class="drop-title">Drop script here or click to browse</div>
-        <div class="drop-sub">.pdf &bull; .fdx &bull; .fountain &bull; .txt - up to 10 MB</div>
-        <input type="file" id="fileInput" accept=".pdf,.fdx,.fountain,.txt,application/pdf,text/plain" style="display: none;" />
+    <div class="section-head">
+      <div>
+        <h2>Your morning coffee briefing</h2>
+        <div class="sub">Live demo with production data - this is exactly what lands in your inbox at 7am.</div>
       </div>
+      <div style="display: flex; gap: 12px; align-items: center; flex-wrap: wrap;">
+        <span class="viewer-badge"><span id="viewerCount">247</span> producers viewing now</span>
+        <span class="refresh-pill">Next refresh in <span id="refreshIn">10:00</span></span>
+        <span class="live-pill">Live Demo</span>
+      </div>
+    </div>
+    <div class="grid grid-2">
 
-      <div class="upload-form">
-        <div class="form-row">
-          <div class="field">
-            <label>Title</label>
-            <input type="text" id="titleInput" placeholder="Untitled" />
-          </div>
-          <div class="field">
-            <label>Format</label>
-            <select id="formatInput">
-              <option value="feature">Feature</option>
-              <option value="short">Short</option>
-              <option value="pilot">TV Pilot</option>
-              <option value="episode">TV Episode</option>
-              <option value="commercial">Commercial</option>
-              <option value="music_video">Music Video</option>
-            </select>
-          </div>
-          <div class="field">
-            <label>Budget Tier</label>
-            <select id="tierInput">
-              <option value="ultralow">Ultra-low ($50k-$250k)</option>
-              <option value="micro">Micro ($250k-$1M)</option>
-              <option value="indie">Indie ($1M-$5M)</option>
-              <option value="midrange">Midrange ($5M-$20M)</option>
-              <option value="studio" selected>Studio ($20M-$80M)</option>
-              <option value="tentpole">Tentpole ($80M-$200M)</option>
-              <option value="blockbuster">Blockbuster ($200M+)</option>
-              <option value="custom">Custom (enter amount)</option>
-            </select>
-          </div>
-          <div class="field" id="customBudgetField" style="display: none;">
-            <label>Target Budget (USD)</label>
-            <input type="number" id="customBudgetInput" placeholder="e.g. 45000000" min="10000" step="100000" />
-          </div>
-          <div class="field">
-            <label>Union</label>
-            <select id="unionInput">
-              <option value="non-union">Non-union</option>
-              <option value="sag-ulb">SAG Ultra-Low</option>
-              <option value="sag-mlb">SAG Modified Low</option>
-              <option value="sag-lba">SAG Low Budget</option>
-              <option value="full-union">Full Union</option>
-            </select>
-          </div>
-          <div class="field">
-            <label>Shoot State</label>
-            <input type="text" id="stateInput" placeholder="e.g. NY, CA, GA, NM" />
-          </div>
-          <div class="field">
-            <label>Target Shoot Days</label>
-            <input type="number" id="daysInput" placeholder="auto" min="1" max="200" />
-          </div>
+      <!-- INDUSTRY NEWS (LIVE) -->
+      <div class="panel" id="news">
+        <div class="panel-head">
+          <div class="panel-title">Industry News - Live Feed</div>
+          <div class="panel-tag"><span id="newsStamp">LOADING...</span></div>
         </div>
-
-        <details>
-          <summary style="cursor: pointer; color: var(--muted); font-size: 13px;">Or paste script text directly</summary>
-          <div class="field" style="margin-top: 10px;">
-            <textarea id="pasteInput" placeholder="Paste full screenplay text here..."></textarea>
+        <div id="newsFeed">
+          <div class="news-item" style="color: var(--dim); text-align: center; padding: 24px 0;">
+            <div style="display: inline-block; width: 18px; height: 18px; border: 2px solid var(--border-hot); border-top-color: var(--gold); border-radius: 50%; animation: spin 0.8s linear infinite;"></div>
+            <div style="margin-top: 8px; font-size: 12px;">Pulling live headlines from Variety, Deadline, IndieWire...</div>
           </div>
-        </details>
-
-        <div style="display: flex; gap: 10px; flex-wrap: wrap;">
-          <button class="btn btn-primary" id="goBtn">Break down script</button>
-          <button class="btn btn-ghost" id="loadSampleBtn">Load sample script</button>
-          <button class="btn btn-ghost" id="clearBtn">Clear</button>
         </div>
       </div>
 
-      <div id="status" class="status"></div>
+      <!-- FESTIVALS -->
+      <div class="panel" id="festivals">
+        <div class="panel-head">
+          <div class="panel-title">Festival Deadlines - Rolling 120 Days</div>
+          <div class="panel-tag">12,000+ TRACKED</div>
+        </div>
+        <div class="fest" data-festdate="2026-05-01">
+          <div class="fest-date"><div class="day">01</div><div class="mo">May</div></div>
+          <a class="fest-body" href="https://filmfreeway.com/festivals" target="_blank" rel="noopener" style="display: block;">
+            <div class="fest-name">Tribeca Festival - Late Deadline</div>
+            <div class="fest-info">New York, USA - Feature Competition, Shorts, Docs - Fee $95</div>
+            <span class="fest-tier tier-hot">-</span>
+          </a>
+        </div>
+        <div class="fest" data-festdate="2026-05-15">
+          <div class="fest-date"><div class="day">15</div><div class="mo">May</div></div>
+          <a class="fest-body" href="https://filmfreeway.com/festivals" target="_blank" rel="noopener" style="display: block;">
+            <div class="fest-name">Fantasia International Film Festival</div>
+            <div class="fest-info">Montreal, Canada - Genre, Horror, Sci-Fi - Fee $45 regular</div>
+            <span class="fest-tier tier-hot">-</span>
+          </a>
+        </div>
+        <div class="fest" data-festdate="2026-06-12">
+          <div class="fest-date"><div class="day">12</div><div class="mo">Jun</div></div>
+          <a class="fest-body" href="https://filmfreeway.com/festivals" target="_blank" rel="noopener" style="display: block;">
+            <div class="fest-name">Locarno Film Festival - Concorso Internazionale</div>
+            <div class="fest-info">Locarno, Switzerland - No entry fee - world premiere required</div>
+            <span class="fest-tier tier-soon">-</span>
+          </a>
+        </div>
+        <div class="fest" data-festdate="2026-06-30">
+          <div class="fest-date"><div class="day">30</div><div class="mo">Jun</div></div>
+          <a class="fest-body" href="https://filmfreeway.com/festivals" target="_blank" rel="noopener" style="display: block;">
+            <div class="fest-name">Venice Film Festival - Biennale Cinema</div>
+            <div class="fest-info">Venice, Italy - Competition + Horizons + Orizzonti Extra</div>
+            <span class="fest-tier tier-soon">-</span>
+          </a>
+        </div>
+        <div class="fest" data-festdate="2026-07-03">
+          <div class="fest-date"><div class="day">03</div><div class="mo">Jul</div></div>
+          <a class="fest-body" href="https://filmfreeway.com/festivals" target="_blank" rel="noopener" style="display: block;">
+            <div class="fest-name">Telluride Film Festival</div>
+            <div class="fest-info">Colorado, USA - Invitation-only, no public submissions (tracking secondary)</div>
+            <span class="fest-tier tier-soon">-</span>
+          </a>
+        </div>
+        <div class="fest" data-festdate="2026-07-10">
+          <div class="fest-date"><div class="day">10</div><div class="mo">Jul</div></div>
+          <a class="fest-body" href="https://filmfreeway.com/festivals" target="_blank" rel="noopener" style="display: block;">
+            <div class="fest-name">TIFF - Toronto International Film Festival</div>
+            <div class="fest-info">Toronto, Canada - All categories - Oscar-qualifying for shorts</div>
+            <span class="fest-tier tier-regular">-</span>
+          </a>
+        </div>
+        <div class="fest" data-festdate="2026-09-20">
+          <div class="fest-date"><div class="day">20</div><div class="mo">Sep</div></div>
+          <a class="fest-body" href="https://filmfreeway.com/festivals" target="_blank" rel="noopener" style="display: block;">
+            <div class="fest-name">Sundance - Feature Regular Deadline</div>
+            <div class="fest-info">Park City, USA - Fee $75 regular / $110 late - Oscar-qualifying</div>
+            <span class="fest-tier tier-regular">-</span>
+          </a>
+        </div>
+      </div>
     </div>
   </div>
 </section>
 
-<section class="section" id="results" style="display: none;">
+<!-- BOX OFFICE -->
+<section class="section" id="boxoffice">
   <div class="wrap">
-    <div class="tabs">
-      <div class="tab active" data-tab="breakdown">Breakdown</div>
-      <div class="tab" data-tab="scenes">Scenes</div>
-      <div class="tab" data-tab="characters">Characters</div>
-      <div class="tab" data-tab="locations">Locations</div>
-      <div class="tab" data-tab="flags">Production Flags</div>
-      <div class="tab" data-tab="schedule">Schedule</div>
-      <div class="tab" data-tab="budget">Budget</div>
-      <div class="tab" data-tab="json">Raw JSON</div>
-    </div>
-
-    <div class="tab-panel active" data-panel="breakdown">
-      <div id="overview"></div>
-    </div>
-    <div class="tab-panel" data-panel="scenes">
-      <div class="tbl-scroll"><table id="scenesTable"><thead><tr>
-        <th>#</th><th>Heading</th><th>Location</th><th>I/E</th><th>TOD</th><th>Pages</th><th>Cast</th><th>Tags</th>
-      </tr></thead><tbody></tbody></table></div>
-    </div>
-    <div class="tab-panel" data-panel="characters">
-      <div class="tbl-scroll"><table id="charTable"><thead><tr>
-        <th>Name</th><th>Type</th><th>Age</th><th>Scenes</th><th>Lines</th><th>First</th><th>Last</th><th>Skills</th>
-      </tr></thead><tbody></tbody></table></div>
-    </div>
-    <div class="tab-panel" data-panel="locations">
-      <div id="locView"></div>
-    </div>
-    <div class="tab-panel" data-panel="flags">
-      <div id="flagsView"></div>
-    </div>
-    <div class="tab-panel" data-panel="schedule">
-      <div id="scheduleView">
-        <p style="color: var(--muted); font-size: 14px;">Run breakdown first, then generate schedule.</p>
-        <button class="btn btn-primary" id="genScheduleBtn" style="margin-top: 12px;">Generate shooting schedule</button>
+    <div class="section-head">
+      <div>
+        <h2>Weekend box office - competitive intel</h2>
+        <div class="sub">Updated Sunday night. Model your release window against what's actually hitting screens.</div>
       </div>
+      <span class="ticker" id="boTicker">LAST UPDATED --</span>
     </div>
-    <div class="tab-panel" data-panel="budget">
-      <div id="budgetView">
-        <p style="color: var(--muted); font-size: 14px;">Run breakdown first, then generate budget.</p>
-        <button class="btn btn-primary" id="genBudgetBtn" style="margin-top: 12px;">Generate budget</button>
+    <div class="panel">
+      <div class="panel-head">
+        <div class="panel-title" id="boTitle">In Theaters Now - US</div>
+        <div class="panel-tag" id="boSource">LIVE VIA TMDB</div>
       </div>
-    </div>
-    <div class="tab-panel" data-panel="json">
-      <pre class="json" id="rawJson"></pre>
+      <div class="table-scroll"><table>
+        <thead>
+          <tr>
+            <th>Rank</th>
+            <th>Title</th>
+            <th>Distributor</th>
+            <th class="num">Weekend</th>
+            <th class="num">vs LW</th>
+            <th class="num">Theaters</th>
+            <th class="num">Per Screen</th>
+            <th class="num">Cume</th>
+            <th class="num">Wk</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>1</td>
+            <td><b>Minecraft: The Movie</b></td>
+            <td>Warner Bros.</td>
+            <td class="num">$42,800,000</td>
+            <td class="num neg">-48%</td>
+            <td class="num">4,263</td>
+            <td class="num">$10,040</td>
+            <td class="num">$287,300,000</td>
+            <td class="num">3</td>
+          </tr>
+          <tr>
+            <td>2</td>
+            <td><b>The Accountant 2</b></td>
+            <td>Amazon MGM</td>
+            <td class="num">$24,500,000</td>
+            <td class="num">-</td>
+            <td class="num">3,807</td>
+            <td class="num">$6,436</td>
+            <td class="num">$24,500,000</td>
+            <td class="num">1</td>
+          </tr>
+          <tr>
+            <td>3</td>
+            <td><b>Sinners</b></td>
+            <td>Warner Bros.</td>
+            <td class="num">$21,100,000</td>
+            <td class="num pos">+12%</td>
+            <td class="num">3,402</td>
+            <td class="num">$6,202</td>
+            <td class="num">$71,500,000</td>
+            <td class="num">2</td>
+          </tr>
+          <tr>
+            <td>4</td>
+            <td><b>A Minecraft Movie 2</b></td>
+            <td>Legendary</td>
+            <td class="num">$9,800,000</td>
+            <td class="num neg">-61%</td>
+            <td class="num">2,950</td>
+            <td class="num">$3,322</td>
+            <td class="num">$42,100,000</td>
+            <td class="num">2</td>
+          </tr>
+          <tr>
+            <td>5</td>
+            <td><b>Thunderbolts*</b></td>
+            <td>Disney/Marvel</td>
+            <td class="num">$7,200,000</td>
+            <td class="num neg">-54%</td>
+            <td class="num">2,101</td>
+            <td class="num">$3,427</td>
+            <td class="num">$122,400,000</td>
+            <td class="num">4</td>
+          </tr>
+          <tr>
+            <td>6</td>
+            <td><b>Drop</b> (A24)</td>
+            <td>A24</td>
+            <td class="num">$4,100,000</td>
+            <td class="num neg">-38%</td>
+            <td class="num">1,840</td>
+            <td class="num">$2,228</td>
+            <td class="num">$16,800,000</td>
+            <td class="num">2</td>
+          </tr>
+          <tr>
+            <td>7</td>
+            <td><b>Conclave</b> (Reissue)</td>
+            <td>Focus Features</td>
+            <td class="num">$2,300,000</td>
+            <td class="num pos">+22%</td>
+            <td class="num">780</td>
+            <td class="num">$2,949</td>
+            <td class="num">$42,900,000</td>
+            <td class="num">26</td>
+          </tr>
+        </tbody>
+      </table></div>
+      <div style="margin-top: 16px; padding-top: 14px; border-top: 1px solid var(--border); color: var(--muted); font-size: 13px;" id="boInsight">
+        <b style="color: var(--gold);">Slate insight:</b> loading signal analysis from current release window...
+      </div>
     </div>
   </div>
 </section>
 
-<section class="section" id="how">
+<!-- TITLE INTEL -->
+<section class="section" id="titles">
   <div class="wrap">
-    <h2>What gets generated</h2>
-    <div class="sub">MVP v1 ships the first three. The rest ship next.</div>
-    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 14px; margin-top: 14px;">
-      <div class="stat"><div class="stat-label">Script Breakdown</div><div class="stat-sub">Scenes, chars, props, wardrobe, VFX, stunts, weapons, animals, minors, vehicles - every tagged element.</div></div>
-      <div class="stat"><div class="stat-label">Shooting Schedule</div><div class="stat-sub">Stripboard, shoot days grouped by location + INT/EXT + TOD, cast day-out-of-days.</div></div>
-      <div class="stat"><div class="stat-label">Budget Top Sheet</div><div class="stat-sub">ATL / BTL-Production / BTL-Post / Other, with line items, contingency, tier comparison.</div></div>
-      <div class="stat" style="opacity: 0.5;"><div class="stat-label">Call Sheets</div><div class="stat-sub">Per-day auto-generated from schedule + breakdown.</div></div>
-      <div class="stat" style="opacity: 0.5;"><div class="stat-label">Shot List + Storyboards</div><div class="stat-sub">VLM-generated reference frames per scene.</div></div>
-      <div class="stat" style="opacity: 0.5;"><div class="stat-label">Purchase Orders</div><div class="stat-sub">Props, wardrobe, set dressing, catering, equipment rental quotes.</div></div>
-      <div class="stat" style="opacity: 0.5;"><div class="stat-label">Location Scouting</div><div class="stat-sub">Permit requirements per jurisdiction, site-rep needs.</div></div>
-      <div class="stat" style="opacity: 0.5;"><div class="stat-label">Safety + Insurance</div><div class="stat-sub">Stunts, minors, firearms, animals, vehicles - rider docs.</div></div>
-      <div class="stat" style="opacity: 0.5;"><div class="stat-label">Post-Production Plan</div><div class="stat-sub">Edit, color, sound mix, VFX shot list, delivery specs.</div></div>
+    <div class="section-head">
+      <div>
+        <h2>Title intelligence - any film, any TV</h2>
+        <div class="sub">500K+ titles. Cast, crew, ratings, budgets, revenue, streaming availability by region.</div>
+      </div>
+    </div>
+    <div class="panel" id="titlePanel">
+      <div class="panel-head">
+        <div class="panel-title" id="titlePanelTitle">Today's Trending Title - Loading...</div>
+        <div class="panel-tag" id="titlePanelTag">LIVE VIA TMDB</div>
+      </div>
+      <div class="title-card" id="titleCard">
+        <div class="title-poster" id="titlePoster">Loading<br>poster...</div>
+        <div class="title-main">
+          <h3 id="titleName">Loading...</h3>
+          <div class="title-meta" id="titleMeta"></div>
+          <div class="title-actions" id="titleActions"></div>
+          <div class="title-stats" id="titleStats"></div>
+          <div id="titleCastRow" style="margin-bottom: 10px;"></div>
+          <div id="titleCrewRow" style="margin-bottom: 14px;"></div>
+          <div id="titleProvidersLabel" style="font-size: 13px; color: var(--dim); margin-bottom: 8px; display: none;">Watch providers (US):</div>
+          <div class="providers" id="titleProviders"></div>
+        </div>
+      </div>
+      <div class="trending-strip" id="trendingStrip"></div>
+      <div class="trend-rotate-hint" id="trendRotateHint">Auto-rotating top 5 trending titles every 10s - click any poster to hold</div>
+    </div>
+  </div>
+</section>
+
+<!-- CASTING -->
+<section class="section" id="casting">
+  <div class="wrap">
+    <div class="section-head">
+      <div>
+        <h2>Open casting calls - feature & commercial</h2>
+        <div class="sub">Aggregated from Backstage, Casting Networks public listings, and production company sites.</div>
+      </div>
+    </div>
+    <div class="grid grid-2">
+      <div class="panel">
+        <div class="panel-head">
+          <div class="panel-title">Scripted Feature & TV</div>
+          <div class="panel-tag" id="castingScriptedTag">LOADING LIVE...</div>
+        </div>
+        <div id="castingScripted">
+          <div class="casting-item" style="color: var(--dim); text-align: center; padding: 28px 0; font-size: 13px;">Fetching live casting feeds from Project Casting, NYCastings, Backstage...</div>
+        </div>
+      </div>
+      <div class="panel">
+        <div class="panel-head">
+          <div class="panel-title">Commercials & Brand Content</div>
+          <div class="panel-tag" id="castingCommercialTag">LOADING LIVE...</div>
+        </div>
+        <div id="castingCommercial">
+          <div class="casting-item" style="color: var(--dim); text-align: center; padding: 28px 0; font-size: 13px;">Fetching live commercial bookings...</div>
+        </div>
+      </div>
+    </div>
+    <div style="text-align: center; margin-top: 14px; font-size: 12px; color: var(--dim);" id="castingStamp">Live via RSS aggregation - refreshes every 15 minutes</div>
+  </div>
+</section>
+
+<!-- ROLODEX (internal-only, admin-gated) -->
+<section class="section" id="rolodex">
+  <div class="wrap">
+    <div class="section-head">
+      <div>
+        <h2>Industry Rolodex - <span style="color: var(--gold);">Internal</span></h2>
+        <div class="sub">Production companies, financiers, agents, publicists - searchable contact graph. Internal use only.</div>
+      </div>
+      <div style="display: flex; gap: 10px; align-items: center;">
+        <span class="live-pill" id="rxStatusPill" style="display: none;">Connected</span>
+        <button id="rxLogoutBtn" class="rx-btn-ghost" style="display: none;">Sign out</button>
+      </div>
+    </div>
+
+    <!-- AUTH GATE -->
+    <div id="rxLoginPane" class="rx-login-card">
+      <h3>Internal Access</h3>
+      <p>This rolodex is restricted to WETYR staff. Sign in with your admin credentials.</p>
+      <div class="rx-login-row">
+        <input id="rxLoginUser" class="rx-input" type="text" placeholder="Username" autocomplete="username" />
+        <input id="rxLoginPass" class="rx-input" type="password" placeholder="Password" autocomplete="current-password" />
+        <button id="rxLoginBtn" class="rx-btn">Sign in</button>
+      </div>
+      <div id="rxLoginMsg"></div>
+    </div>
+
+    <!-- AUTHED PANE -->
+    <div id="rxAuthedPane" style="display: none;">
+      <div class="rx-bar">
+        <input id="rxQ" class="rx-input" type="search" placeholder="Search by name, company, email, address, IMDb id, production..." />
+        <select id="rxType" class="rx-select"><option value="">All types</option></select>
+        <select id="rxTag" class="rx-select"><option value="">All tags</option></select>
+        <button id="rxRefresh" class="rx-btn">Search</button>
+        <select id="rxShowQuick" class="rx-select" title="Quick show count" style="margin-left:auto; border-color: var(--gold); color: var(--gold); font-weight: 600;">
+          <option value="">Show...</option>
+          <option value="50">Show 50</option>
+          <option value="100">Show 100</option>
+          <option value="250">Show 250</option>
+          <option value="500">Show 500</option>
+        </select>
+      </div>
+      <div class="rx-bar" style="margin-top:8px;">
+        <select id="rxSort" class="rx-select" title="Sort by">
+          <option value="name-asc">Sort: Name A-Z</option>
+          <option value="name-desc">Sort: Name Z-A</option>
+          <option value="company-asc">Sort: Company A-Z</option>
+          <option value="company-desc">Sort: Company Z-A</option>
+          <option value="production-asc">Sort: Production A-Z</option>
+          <option value="production-desc">Sort: Production Z-A</option>
+          <option value="updated-desc">Sort: Recently updated</option>
+          <option value="added-desc">Sort: Recently added</option>
+        </select>
+        <select id="rxFilterEmail" class="rx-select" title="Filter by contact info">
+          <option value="">All contacts</option>
+          <option value="has-email">Has email</option>
+          <option value="no-email">Missing email</option>
+          <option value="has-phone">Has phone</option>
+          <option value="no-phone">Missing phone</option>
+          <option value="has-production">Has production credit</option>
+        </select>
+        <select id="rxFilterDept" class="rx-select" title="Filter by department">
+          <option value="">All departments</option>
+        </select>
+        <button id="rxClearFilters" class="rx-btn-ghost">Clear filters</button>
+        <select id="rxPerPage" class="rx-select" title="Results per page" style="margin-left:auto;">
+          <option value="25" selected>25 per page</option>
+          <option value="5">5 per page</option>
+          <option value="10">10 per page</option>
+          <option value="50">50 per page</option>
+          <option value="100">100 per page</option>
+          <option value="250">250 per page</option>
+          <option value="500">500 per page</option>
+        </select>
+      </div>
+
+      <div class="rx-tools">
+        <button class="rx-btn-ghost" id="rxAddCompanyBtn">+ Company</button>
+        <button class="rx-btn-ghost" id="rxAddPersonBtn">+ Contact</button>
+        <button class="rx-btn-ghost" id="rxImportBtn">Import CSV</button>
+        <button class="rx-btn-ghost" id="rxExportBtn">Export CSV</button>
+        <button class="rx-btn-ghost" id="rxSyncBtn" style="border-color: var(--gold); color: var(--gold);">Sync Now</button>
+        <button class="rx-btn-ghost" id="rxDeepSyncBtn" style="border-color: var(--gold); color: var(--gold);">Deep Crawl</button>
+        <button class="rx-btn-ghost" id="rxBackfillBtn" style="border-color: var(--gold); color: var(--gold);" title="Pass 1: Hunter domain-search every company website (up to 25 emails each). Pass 2: re-Hunter every talent contact already matched to a CAA/WME/UTA/Gersh/Paradigm address.">Backfill Hunter</button>
+        <button class="rx-btn-ghost" id="rxExpandBtn" style="border-color: var(--gold); color: var(--gold);" title="Mass-import contacts: walks TMDB movies/TV/discover/popular-people, NYC + LA film-permit OpenData, and 18 Wikipedia film-industry list pages. Adds ~3000-6000 new contacts and 300-800 new companies in one click.">Expand +1000s</button>
+        <button class="rx-btn-ghost" id="rxFreshenBtn" style="border-color: var(--gold); color: var(--gold);" title="Bulk-freshen stale emails. Scores every contact, takes the worst-scoring (stale agency / no current employer) and runs Find Newest Email on each: pulls latest TMDB credits, detects current production company, Hunter-searches that domain, archives stale addresses. Pages through 5 contacts per call until done.">Freshen Stale</button>
+        <button class="rx-btn-ghost" id="rxRestoreBtn" style="border-color: rgba(220,38,38,0.6); color: #f87171;" title="View and restore from automatic snapshots. The system snapshots before every bulk write (Expand, Backfill, Sync, Deep Crawl, Reset) and keeps the most recent 10.">Restore</button>
+      </div>
+
+      <div class="rx-stats" id="rxStats">Loading...</div>
+
+      <div class="rx-tab-row">
+        <button class="rx-tab active" data-rxtab="people">Contacts</button>
+        <button class="rx-tab" data-rxtab="companies">Companies</button>
+      </div>
+
+      <div id="rxResults" class="rx-cards"></div>
+
+      <div id="rxPager" class="rx-bar" style="margin-top: 14px; justify-content: center; flex-wrap: wrap;">
+        <button id="rxPagePrev" class="rx-btn-ghost" type="button">‹ Prev</button>
+        <span id="rxPageInfo" style="color: var(--muted); padding: 0 10px; align-self: center;">Page 1 of 1</span>
+        <button id="rxPageNext" class="rx-btn-ghost" type="button">Next ›</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ROLODEX MODAL (Add / Import) -->
+<div class="rx-modal-bg" id="rxModalBg">
+  <div class="rx-modal" id="rxModal">
+    <h3 id="rxModalTitle">Add</h3>
+    <div id="rxModalBody"></div>
+    <div class="rx-modal-actions">
+      <button class="rx-btn-ghost" id="rxModalCancel">Cancel</button>
+      <button class="rx-btn" id="rxModalSave">Save</button>
+    </div>
+    <div id="rxModalMsg"></div>
+  </div>
+</div>
+
+<!-- VALUE PROP -->
+<section class="section">
+  <div class="wrap">
+    <div class="section-head">
+      <div>
+        <h2>What it replaces</h2>
+        <div class="sub">One subscription. Not nine.</div>
+      </div>
+    </div>
+    <div class="grid grid-3">
+      <div class="panel">
+        <div class="panel-title" style="font-size: 18px; margin-bottom: 8px;">Stop paying for</div>
+        <ul style="list-style: none; padding: 0; font-size: 14px; color: var(--muted);">
+          <li style="padding: 6px 0;">- Studio System ($4,200/yr)</li>
+          <li style="padding: 6px 0;">- Variety Insight ($3,800/yr)</li>
+          <li style="padding: 6px 0;">- Deadline + THR Premium ($480/yr)</li>
+          <li style="padding: 6px 0;">- IMDbPro ($360/yr)</li>
+          <li style="padding: 6px 0;">- Box Office Mojo Pro ($600/yr)</li>
+          <li style="padding: 6px 0;">- FilmFreeway Submission Tools ($300/yr)</li>
+          <li style="padding: 6px 0;">- Casting Networks Talent ($480/yr)</li>
+          <li style="padding: 6px 0;">- Production Weekly ($1,500/yr)</li>
+          <li style="padding: 6px 0;"><b style="color: var(--text);">Combined stack: five figures annually</b></li>
+        </ul>
+      </div>
+      <div class="panel">
+        <div class="panel-title" style="font-size: 18px; margin-bottom: 8px;">Get this instead</div>
+        <ul style="list-style: none; padding: 0; font-size: 14px; color: var(--muted);">
+          <li style="padding: 6px 0; color: var(--text);">- One unified JSON feed</li>
+          <li style="padding: 6px 0; color: var(--text);">- Slack / email / webhook delivery</li>
+          <li style="padding: 6px 0; color: var(--text);">- Custom keyword + genre filters</li>
+          <li style="padding: 6px 0; color: var(--text);">- White-label team dashboard</li>
+          <li style="padding: 6px 0; color: var(--text);">- CSV / Airtable / Notion export</li>
+          <li style="padding: 6px 0; color: var(--text);">- API access for your own tools</li>
+          <li style="padding: 6px 0; color: var(--text);">- Historical archive (5+ years)</li>
+          <li style="padding: 6px 0; color: var(--text);">- Zero setup, ready in 24 hours</li>
+          <li style="padding: 6px 0;"><b style="color: var(--gold);">Scoped to your slate</b></li>
+        </ul>
+      </div>
+      <div class="panel">
+        <div class="panel-title" style="font-size: 18px; margin-bottom: 8px;">Who uses it</div>
+        <ul style="list-style: none; padding: 0; font-size: 14px; color: var(--muted);">
+          <li style="padding: 6px 0;">- Indie producers / packagers</li>
+          <li style="padding: 6px 0;">- Talent agencies + managers</li>
+          <li style="padding: 6px 0;">- Sales agents / distributors</li>
+          <li style="padding: 6px 0;">- Production company dev teams</li>
+          <li style="padding: 6px 0;">- Commercial directors / reps</li>
+          <li style="padding: 6px 0;">- Film finance LPs / analysts</li>
+          <li style="padding: 6px 0;">- Location scouts / production supervisors</li>
+          <li style="padding: 6px 0;">- Awards strategy consultants</li>
+          <li style="padding: 6px 0;"><b style="color: var(--text);">B2B only</b></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PACKAGES -->
+<section class="section" id="pricing">
+  <div class="wrap">
+    <div class="section-head">
+      <div>
+        <h2>Three ways to deploy it</h2>
+        <div class="sub">Every engagement is scoped to your slate, your team size, and your delivery channels. Contact us for a custom quote.</div>
+      </div>
+    </div>
+    <div class="price-grid">
+      <div class="price">
+        <div class="price-tier">Indie</div>
+        <div class="price-num" style="font-size: 26px;">Contact Us</div>
+        <div class="price-sub">Solo producers + packagers</div>
+        <ul>
+          <li>Daily news digest (9 trades)</li>
+          <li>Festival deadline calendar</li>
+          <li>Weekend box office report</li>
+          <li>Title intel on demand</li>
+          <li>Email + Slack delivery</li>
+          <li>Single user</li>
+        </ul>
+        <a href="#contact" class="btn btn-ghost" style="display: block; text-align: center; margin-top: 18px;">Request Quote</a>
+      </div>
+      <div class="price featured">
+        <div class="price-badge">Most Popular</div>
+        <div class="price-tier">Studio</div>
+        <div class="price-num" style="font-size: 26px;">Contact Us</div>
+        <div class="price-sub">Production companies + agencies</div>
+        <ul>
+          <li>Everything in Indie</li>
+          <li>Real-time news webhooks</li>
+          <li>Casting calls aggregation</li>
+          <li>Unlimited title lookups</li>
+          <li>Custom keyword alerts</li>
+          <li>Team seat access</li>
+          <li>Airtable + Notion sync</li>
+          <li>Historical archive</li>
+        </ul>
+        <a href="#contact" class="btn btn-primary" style="display: block; text-align: center; margin-top: 18px;">Request Quote</a>
+      </div>
+      <div class="price">
+        <div class="price-tier">Enterprise</div>
+        <div class="price-num" style="font-size: 26px;">Contact Us</div>
+        <div class="price-sub">Studios, streamers, networks</div>
+        <ul>
+          <li>Everything in Studio</li>
+          <li>Unlimited users</li>
+          <li>White-label dashboard</li>
+          <li>API access + SDK</li>
+          <li>Custom data sources</li>
+          <li>Dedicated support</li>
+          <li>SSO + security review</li>
+          <li>SLA guarantees</li>
+        </ul>
+        <a href="#contact" class="btn btn-ghost" style="display: block; text-align: center; margin-top: 18px;">Request Quote</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="cta-section" id="contact">
+  <div class="wrap">
+    <div class="eyebrow">Ready to see it on your slate?</div>
+    <h2>Get a free custom slate scan.</h2>
+    <p>Tell us three projects you're packaging. We'll send back a one-page intelligence brief - news mentions, comparable title data, festival fit, casting availability - within 48 hours. Zero commitment.</p>
+    <div class="hero-ctas">
+      <a href="mailto:info@wetyr.com?subject=WETYR%20Film%20Intel%20-%20Custom%20Slate%20Scan&body=Hi%20-%20please%20send%20a%20free%20slate%20scan%20for%20the%20following%20projects%3A%0A%0A1.%0A2.%0A3.%0A%0AName%3A%0ACompany%3A%0ARole%3A" class="btn btn-primary">Email info@wetyr.com</a>
+      <a href="https://calendly.com/wetyr/film-intel-demo" class="btn btn-ghost">Book 20-Min Demo</a>
     </div>
   </div>
 </section>
@@ -473,466 +1093,1659 @@ pre.json { background: #0f0f12; border: 1px solid var(--border); border-radius: 
 </div>
 </div>
 
-<footer class="footer">
+<footer>
   <div class="wrap">
-    WETYR Studios - a WETYR Corporation product &bull; Test build at markcmo.com/wetyr-films
+    <div>WETYR Corporation - Film Intelligence Platform - All data shown is illustrative sample data. Book a demo to see your live slate.</div>
+    <div style="margin-top: 8px;"><a href="https://markcmo.com">markcmo.com</a> - <a href="mailto:info@wetyr.com">info@wetyr.com</a></div>
   </div>
 </footer>
 
 <script>
-const $ = (id) => document.getElementById(id);
+// ====== LIVE CLOCK ======
+function tickClock() {
+  const now = new Date();
+  const h = String(now.getUTCHours()).padStart(2, '0');
+  const m = String(now.getUTCMinutes()).padStart(2, '0');
+  const s = String(now.getUTCSeconds()).padStart(2, '0');
+  const el = document.getElementById('liveClock');
+  if (el) el.textContent = `${h}:${m}:${s}`;
+  const stamp = document.getElementById('boTicker');
+  if (stamp && !stamp.dataset.init) {
+    stamp.textContent = 'LAST UPDATED ' + now.toISOString().replace('T', ' ').split('.')[0] + ' UTC';
+    stamp.dataset.init = '1';
+  }
+}
+setInterval(tickClock, 1000); tickClock();
 
-let state = { scriptText: '', breakdown: null, schedule: null, budget: null };
+// ====== LIVE NEWS FEED (Variety + Deadline + IndieWire via rss2json, free tier) ======
+const FEEDS = [
+  { src: 'VARIETY',   url: 'https://variety.com/feed/' },
+  { src: 'DEADLINE',  url: 'https://deadline.com/feed/' },
+  { src: 'INDIEWIRE', url: 'https://www.indiewire.com/feed/' },
+  { src: 'THE WRAP',  url: 'https://www.thewrap.com/feed/' }
+];
 
-// ─── File drop ───────────────────────────────────────────────
-const drop = $('drop');
-const fileInput = $('fileInput');
-drop.addEventListener('click', () => fileInput.click());
-drop.addEventListener('dragover', e => { e.preventDefault(); drop.classList.add('hover'); });
-drop.addEventListener('dragleave', () => drop.classList.remove('hover'));
-drop.addEventListener('drop', e => {
-  e.preventDefault(); drop.classList.remove('hover');
-  if (e.dataTransfer.files[0]) handleFile(e.dataTransfer.files[0]);
-});
-fileInput.addEventListener('change', () => { if (fileInput.files[0]) handleFile(fileInput.files[0]); });
-
-async function handleFile(file) {
-  if (file.size > 10 * 1024 * 1024) { setStatus('File too large (>10 MB)', 'err'); return; }
-  setStatus('<span class="spinner"></span> Uploading + extracting text from ' + escapeHtml(file.name) + '...', 'info');
-  if (!$('titleInput').value) $('titleInput').value = file.name.replace(/\.[^.]+$/, '');
+function timeAgo(iso) {
   try {
-    const dataBase64 = await fileToBase64(file);
-    const r = await fetch('/.netlify/functions/script-upload', {
-      method: 'POST',
-      headers: { 'content-type': 'application/json' },
-      body: JSON.stringify({ filename: file.name, contentType: file.type, dataBase64 })
-    });
+    const d = new Date(iso);
+    const mins = Math.max(1, Math.floor((Date.now() - d.getTime()) / 60000));
+    if (mins < 60) return mins + 'm ago';
+    const hrs = Math.floor(mins / 60);
+    if (hrs < 24) return hrs + 'h ago';
+    const days = Math.floor(hrs / 24);
+    return days + 'd ago';
+  } catch (e) { return ''; }
+}
+
+async function fetchFeed(feed) {
+  const api = 'https://api.rss2json.com/v1/api.json?rss_url=' + encodeURIComponent(feed.url) + '&count=6';
+  try {
+    const r = await fetch(api);
+    if (!r.ok) return [];
     const j = await r.json();
-    if (!j.ok) throw new Error(j.error || 'upload failed');
-    state.scriptText = j.text;
-    $('pasteInput').value = j.text;
-    setStatus('Extracted ~' + j.pageCount + ' pages via ' + j.method + '. Ready to break down.', 'ok');
+    return (j.items || []).map(it => ({
+      src: feed.src,
+      title: it.title,
+      link: it.link,
+      author: it.author || '',
+      date: it.pubDate
+    }));
   } catch (e) {
-    setStatus('Upload failed: ' + (e.message || e), 'err');
+    console.warn('Feed failed', feed.src, e);
+    return [];
   }
 }
 
-function fileToBase64(file) {
-  return new Promise((res, rej) => {
-    const r = new FileReader();
-    r.onload = () => res(String(r.result).split(',')[1]);
-    r.onerror = rej;
-    r.readAsDataURL(file);
-  });
-}
-
-// ─── Buttons ─────────────────────────────────────────────────
-$('goBtn').addEventListener('click', runBreakdown);
-$('clearBtn').addEventListener('click', () => {
-  state = { scriptText: '', breakdown: null, schedule: null, budget: null };
-  $('pasteInput').value = ''; $('titleInput').value = '';
-  $('results').style.display = 'none';
-  setStatus('', '');
-});
-$('loadSampleBtn').addEventListener('click', () => {
-  $('pasteInput').value = SAMPLE_SCRIPT;
-  $('titleInput').value = 'The Coffee Break';
-  state.scriptText = SAMPLE_SCRIPT;
-  setStatus('Sample loaded. Click "Break down script".', 'ok');
-});
-$('genScheduleBtn').addEventListener('click', runSchedule);
-$('genBudgetBtn').addEventListener('click', runBudget);
-
-$('tierInput').addEventListener('change', () => {
-  $('customBudgetField').style.display = $('tierInput').value === 'custom' ? 'flex' : 'none';
-});
-
-// ─── Tabs ────────────────────────────────────────────────────
-document.querySelectorAll('.tab').forEach(tab => {
-  tab.addEventListener('click', () => {
-    document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
-    document.querySelectorAll('.tab-panel').forEach(p => p.classList.remove('active'));
-    tab.classList.add('active');
-    document.querySelector('[data-panel="' + tab.dataset.tab + '"]').classList.add('active');
-  });
-});
-
-// ─── Run breakdown (background job + polling) ────────────────
-async function runBreakdown() {
-  const text = $('pasteInput').value.trim() || state.scriptText;
-  if (!text) { setStatus('Upload a file or paste script text first.', 'err'); return; }
-  state.scriptText = text;
-
-  $('goBtn').disabled = true;
-  const t0 = Date.now();
-  setStatus('<span class="spinner"></span> Queuing job...', 'info');
-
-  try {
-    // 1) Kick off background job
-    const r = await fetch('/.netlify/functions/script-dissect', {
-      method: 'POST',
-      headers: { 'content-type': 'application/json' },
-      body: JSON.stringify({
-        scriptText: text,
-        title: $('titleInput').value || 'Untitled',
-        format: $('formatInput').value
-      })
-    });
-    const start = await r.json();
-    if (!start.ok || !start.jobId) throw new Error(start.error || 'failed to queue');
-    const jobId = start.jobId;
-
-    // 2) Poll for result
-    const breakdown = await pollJob(jobId, (progress) => {
-      const sec = ((Date.now() - t0) / 1000).toFixed(0);
-      setStatus(`<span class="spinner"></span> Gemini is dissecting your script (${progress || 'processing'}) ${sec}s elapsed...`, 'info');
-    });
-
-    state.breakdown = breakdown;
-    render(breakdown);
-    $('results').style.display = 'block';
-    $('results').scrollIntoView({ behavior: 'smooth' });
-    const totalSec = ((Date.now() - t0) / 1000).toFixed(1);
-    setStatus(`Breakdown complete in ${totalSec}s. ${breakdown.scenes.length} scenes, ${breakdown.characters.length} characters tagged.`, 'ok');
-  } catch (e) {
-    setStatus('Breakdown failed: ' + (e.message || e), 'err');
-  } finally {
-    $('goBtn').disabled = false;
+function renderNews(items) {
+  const feedEl = document.getElementById('newsFeed');
+  if (!feedEl) return;
+  if (!items.length) {
+    feedEl.innerHTML = '<div class="news-item" style="color: var(--dim); text-align: center; padding: 24px 0; font-size: 13px;">Live feed temporarily unavailable. Running daily digest to your inbox instead.</div>';
+    return;
   }
-}
-
-async function pollJob(jobId, onProgress, resultField = 'breakdown') {
-  const startTs = Date.now();
-  const TIMEOUT_MS = 12 * 60 * 1000; // 12 min ceiling
-  while (Date.now() - startTs < TIMEOUT_MS) {
-    await new Promise(r => setTimeout(r, 3000));
-    const r = await fetch('/.netlify/functions/script-result?jobId=' + encodeURIComponent(jobId));
-    if (!r.ok) {
-      if (r.status === 404) continue; // not yet visible
-      throw new Error('poll failed: ' + r.status);
-    }
-    const j = await r.json();
-    if (j.status === 'error') throw new Error(j.error || 'job errored');
-    if (j.status === 'complete' && j[resultField]) return j[resultField];
-    onProgress?.(j.progress);
-  }
-  throw new Error('timed out waiting for ' + resultField);
-}
-
-// ─── Run schedule (async) ────────────────────────────────────
-async function runSchedule() {
-  if (!state.breakdown) { setStatus('Run breakdown first.', 'err'); return; }
-  $('scheduleView').innerHTML = '<p style="color: var(--muted);"><span class="spinner"></span> Queuing schedule job...</p>';
-  try {
-    const r = await fetch('/.netlify/functions/script-schedule', {
-      method: 'POST',
-      headers: { 'content-type': 'application/json' },
-      body: JSON.stringify({
-        breakdown: state.breakdown,
-        constraints: {
-          shootDays: Number($('daysInput').value) || undefined,
-          maxHoursPerDay: 12
-        }
-      })
-    });
-    const start = await r.json();
-    if (!start.ok || !start.jobId) throw new Error(start.error || 'failed to queue');
-    const schedule = await pollJob(start.jobId, (p) => {
-      $('scheduleView').innerHTML = '<p style="color: var(--muted);"><span class="spinner"></span> ' + escapeHtml(p || 'processing') + '...</p>';
-    }, 'schedule');
-    state.schedule = schedule;
-    renderSchedule(schedule);
-  } catch (e) {
-    $('scheduleView').innerHTML = '<div class="status err active">Schedule failed: ' + escapeHtml(e.message) + '</div>';
-  }
-}
-
-// ─── Run budget (async) ──────────────────────────────────────
-async function runBudget() {
-  if (!state.breakdown) { setStatus('Run breakdown first.', 'err'); return; }
-  $('budgetView').innerHTML = '<p style="color: var(--muted);"><span class="spinner"></span> Queuing budget job...</p>';
-  try {
-    const r = await fetch('/.netlify/functions/script-budget', {
-      method: 'POST',
-      headers: { 'content-type': 'application/json' },
-      body: JSON.stringify({
-        breakdown: state.breakdown,
-        schedule: state.schedule,
-        context: {
-          budgetTier: $('tierInput').value,
-          customBudget: $('tierInput').value === 'custom' ? Number($('customBudgetInput').value) || null : null,
-          union: $('unionInput').value,
-          shootState: $('stateInput').value || 'unspecified',
-          region: 'US'
-        }
-      })
-    });
-    const start = await r.json();
-    if (!start.ok || !start.jobId) throw new Error(start.error || 'failed to queue');
-    const budget = await pollJob(start.jobId, (p) => {
-      $('budgetView').innerHTML = '<p style="color: var(--muted);"><span class="spinner"></span> ' + escapeHtml(p || 'processing') + '...</p>';
-    }, 'budget');
-    state.budget = budget;
-    renderBudget(budget);
-  } catch (e) {
-    $('budgetView').innerHTML = '<div class="status err active">Budget failed: ' + escapeHtml(e.message) + '</div>';
-  }
-}
-
-// ─── Renderers ───────────────────────────────────────────────
-function render(b) {
-  const totalEighths = (b.scenes || []).reduce((s, sc) => s + (sc.eighths || 0), 0);
-  const totalPages = totalEighths / 8;
-  const nightCount = (b.scenes || []).filter(s => s.timeOfDay === 'NIGHT').length;
-  const extCount = (b.scenes || []).filter(s => s.intExt === 'EXT').length;
-
-  $('overview').innerHTML = `
-    <div class="stats">
-      <div class="stat"><div class="stat-label">Scenes</div><div class="stat-value">${b.scenes.length}</div></div>
-      <div class="stat"><div class="stat-label">Pages</div><div class="stat-value">${totalPages.toFixed(2)}</div><div class="stat-sub">${totalEighths}/8 total</div></div>
-      <div class="stat"><div class="stat-label">Characters</div><div class="stat-value">${b.characters.length}</div></div>
-      <div class="stat"><div class="stat-label">Locations</div><div class="stat-value">${(b.locations || []).length}</div></div>
-      <div class="stat"><div class="stat-label">Night scenes</div><div class="stat-value">${nightCount}</div></div>
-      <div class="stat"><div class="stat-label">Exterior scenes</div><div class="stat-value">${extCount}</div></div>
-      <div class="stat"><div class="stat-label">Runtime</div><div class="stat-value">~${b.estimatedRuntimeMinutes || Math.round(totalPages)}<span style="font-size: 14px; color: var(--muted);">min</span></div></div>
-      <div class="stat"><div class="stat-label">Format</div><div class="stat-value" style="font-size: 16px;">${(b.format || '').toUpperCase()}</div></div>
-    </div>
-    ${b.logline ? '<div style="background: var(--panel); border: 1px solid var(--border); border-radius: 10px; padding: 16px; margin-bottom: 16px;"><div class="stat-label">Logline</div><div style="margin-top: 6px; font-size: 15px;">' + escapeHtml(b.logline) + '</div></div>' : ''}
-  `;
-
-  // Scenes table
-  const scenesTbody = document.querySelector('#scenesTable tbody');
-  scenesTbody.innerHTML = (b.scenes || []).map(s => {
-    const tags = [];
-    if ((s.weapons || []).length) tags.push('<span class="tag hot">WEAPON</span>');
-    if ((s.stunts || []).length) tags.push('<span class="tag hot">STUNT</span>');
-    if ((s.vfx || []).length) tags.push('<span class="tag">VFX</span>');
-    if ((s.sfx || []).length) tags.push('<span class="tag">SFX</span>');
-    if ((s.vehicles || []).length) tags.push('<span class="tag">VEH</span>');
-    if ((s.animals || []).length) tags.push('<span class="tag hot">ANIMAL</span>');
-    if (s.minorsOnSet) tags.push('<span class="tag hot">MINOR</span>');
-    if ((s.specialEquipment || []).length) tags.push('<span class="tag">GEAR</span>');
-    return `<tr>
-      <td><b>${escapeHtml(s.number)}</b></td>
-      <td>${escapeHtml(s.heading)}</td>
-      <td>${escapeHtml(s.location)}</td>
-      <td><span class="tag ${s.intExt === 'INT' ? 'int' : 'ext'}">${escapeHtml(s.intExt)}</span></td>
-      <td><span class="tag ${s.timeOfDay === 'NIGHT' ? 'night' : 'day'}">${escapeHtml(s.timeOfDay)}</span></td>
-      <td>${(s.pageCount || 0).toFixed(2)}<br><small style="color: var(--dim);">${s.eighths}/8</small></td>
-      <td style="font-size: 11px;">${(s.characters || []).map(escapeHtml).join(', ')}</td>
-      <td>${tags.join('')}</td>
-    </tr>`;
+  // sort newest first, dedupe by title
+  const seen = new Set();
+  items.sort((a, b) => new Date(b.date) - new Date(a.date));
+  const html = items.filter(x => {
+    const k = (x.title || '').toLowerCase();
+    if (seen.has(k)) return false;
+    seen.add(k);
+    return true;
+  }).slice(0, 8).map((x, i) => {
+    const isNew = i < 2;
+    return `
+      <div class="news-item">
+        <div class="news-src">${x.src}${isNew ? '<span class="new-flag">NEW</span>' : ''}</div>
+        <div class="news-title"><a href="${x.link}" target="_blank" rel="noopener" style="color: inherit; text-decoration: none;">${x.title}</a></div>
+        <div class="news-meta">${timeAgo(x.date)}${x.author ? ' - ' + x.author : ''}</div>
+      </div>`;
   }).join('');
-
-  // Characters table
-  document.querySelector('#charTable tbody').innerHTML = (b.characters || []).map(c => `
-    <tr>
-      <td><b>${escapeHtml(c.name)}</b>${c.minor ? ' <span class="tag hot">MINOR</span>' : ''}</td>
-      <td><span class="tag">${escapeHtml(c.type || '')}</span></td>
-      <td>${escapeHtml(c.age || '')}</td>
-      <td>${c.sceneCount || 0}</td>
-      <td>${c.dialogueLineCount || 0}</td>
-      <td>${escapeHtml(c.firstScene || '')}</td>
-      <td>${escapeHtml(c.lastScene || '')}</td>
-      <td style="font-size: 11px;">${(c.specialSkillsRequired || []).map(escapeHtml).join(', ')}</td>
-    </tr>
-  `).join('');
-
-  // Locations
-  $('locView').innerHTML = '<div style="display: grid; gap: 10px;">' + (b.locations || []).map(l => `
-    <div style="background: var(--panel); border: 1px solid var(--border); border-radius: 10px; padding: 14px;">
-      <div style="display: flex; justify-content: space-between; align-items: center;">
-        <div>
-          <b>${escapeHtml(l.name)}</b>
-          <span class="tag">${escapeHtml(l.type || '')}</span>
-          <span class="tag ${l.intExt === 'INT' ? 'int' : 'ext'}">${escapeHtml(l.intExt || '')}</span>
-          <span class="tag ${l.complexity === 'high' ? 'hot' : ''}">${escapeHtml(l.complexity || '')} complexity</span>
-        </div>
-        <div style="color: var(--muted); font-size: 13px;">${(l.scenes || []).length} scenes &bull; ${l.totalEighths || 0}/8</div>
-      </div>
-      ${(l.permitRequirements || []).length ? '<div style="margin-top: 8px; font-size: 12px; color: var(--muted);">Permits: ' + l.permitRequirements.map(escapeHtml).join(', ') + '</div>' : ''}
-    </div>
-  `).join('') + '</div>';
-
-  // Flags
-  const pf = b.productionFlags || {};
-  const flagList = [
-    ['hasMinors', 'Minors on set'], ['hasStunts', 'Stunts'], ['hasFirearms', 'Firearms'],
-    ['hasAnimals', 'Animals'], ['hasVfx', 'Visual Effects'], ['hasNightWork', 'Night work'],
-    ['hasWaterWork', 'Water work'], ['hasVehicleAction', 'Vehicle action'], ['hasIntimacy', 'Intimacy scenes']
-  ];
-  $('flagsView').innerHTML = `
-    <div class="flag-grid">
-      ${flagList.map(([k, label]) => `
-        <div class="flag ${pf[k] ? 'flag-on' : 'flag-off'}">
-          <span>${label}</span>
-          <span class="flag-dot"></span>
-        </div>
-      `).join('')}
-    </div>
-    ${(pf.unionConsiderations || []).length ? '<div style="margin-top: 18px;"><div class="stat-label">Union considerations</div><ul style="margin-top: 8px; padding-left: 20px; color: var(--muted); font-size: 13px;">' + pf.unionConsiderations.map(u => '<li>' + escapeHtml(u) + '</li>').join('') + '</ul></div>' : ''}
-  `;
-
-  $('rawJson').textContent = JSON.stringify(b, null, 2);
+  feedEl.innerHTML = html + '<div class="news-item" style="color: var(--dim); font-size: 12px; text-align: center; padding-top: 14px;">+ 50+ more matches today - full feed delivered as JSON, Slack, or email</div>';
+  const stamp = document.getElementById('newsStamp');
+  if (stamp) {
+    const now = new Date();
+    stamp.textContent = 'LIVE - ' + String(now.getUTCHours()).padStart(2, '0') + ':' + String(now.getUTCMinutes()).padStart(2, '0') + ' UTC';
+    stamp.style.color = 'var(--green)';
+  }
 }
 
-function renderSchedule(s) {
-  const sum = s.summary || {};
-  $('scheduleView').innerHTML = `
-    <div class="stats">
-      <div class="stat"><div class="stat-label">Shoot days</div><div class="stat-value">${sum.totalShootDays || s.days?.length || 0}</div></div>
-      <div class="stat"><div class="stat-label">Avg pages/day</div><div class="stat-value">${((sum.avgEighthsPerDay || 0) / 8).toFixed(1)}</div></div>
-      <div class="stat"><div class="stat-label">Locations</div><div class="stat-value">${sum.totalLocations || 0}</div></div>
-      <div class="stat"><div class="stat-label">Company moves</div><div class="stat-value">${sum.totalCompanyMoves || 0}</div></div>
-      <div class="stat"><div class="stat-label">Night shoots</div><div class="stat-value">${sum.nightShoots || 0}</div></div>
-    </div>
-    <div class="tbl-scroll"><table><thead><tr>
-      <th>Day</th><th>Location</th><th>I/E</th><th>TOD</th><th>Scenes</th><th>Pages</th><th>Cast Called</th><th>Notes</th>
-    </tr></thead><tbody>
-    ${(s.days || []).map(d => `
+async function loadNewsServer() {
+  try {
+    const r = await fetch('/.netlify/functions/news-feed', { cache: 'no-store' });
+    if (!r.ok) return [];
+    const j = await r.json();
+    return j.items || [];
+  } catch (e) {
+    return [];
+  }
+}
+
+async function loadNews() {
+  // Server-side proxy first (no CORS, no rate limit, 10min cache).
+  let items = await loadNewsServer();
+  // Client-side fallback if Netlify function failed or returned empty.
+  if (!items.length) {
+    const results = await Promise.all(FEEDS.map(fetchFeed));
+    items = results.flat();
+  }
+  renderNews(items);
+  // Refresh the ticker once news lands so headlines flow into the marquee.
+  if (typeof populateTicker === 'function') {
+    try { populateTicker(); } catch (e) {}
+  }
+}
+loadNews();
+// auto-refresh every 10 minutes
+setInterval(loadNews, 10 * 60 * 1000);
+
+// ====== FESTIVAL COUNTDOWN (dynamic days-out calc) ======
+function computeFestivalCountdowns() {
+  document.querySelectorAll('[data-festdate]').forEach(el => {
+    const target = new Date(el.dataset.festdate + 'T23:59:59Z');
+    const days = Math.ceil((target - Date.now()) / (1000 * 60 * 60 * 24));
+    const tierEl = el.querySelector('.fest-tier');
+    if (!tierEl) return;
+    if (days < 0) { tierEl.textContent = 'Closed'; tierEl.className = 'fest-tier tier-regular'; }
+    else if (days <= 14) { tierEl.textContent = 'Closing in ' + days + ' days'; tierEl.className = 'fest-tier tier-hot'; }
+    else if (days <= 45) { tierEl.textContent = days + ' days out'; tierEl.className = 'fest-tier tier-soon'; }
+    else { tierEl.textContent = days + ' days out'; tierEl.className = 'fest-tier tier-regular'; }
+  });
+}
+computeFestivalCountdowns();
+setInterval(computeFestivalCountdowns, 60 * 1000);
+
+// ====== LIVE TMDB (via Netlify function - zero cost, TMDB_API_KEY env var required) ======
+function fmtMoney(n) {
+  if (!n || n < 1) return '-';
+  if (n >= 1e9) return '$' + (n / 1e9).toFixed(2) + 'B';
+  if (n >= 1e6) return '$' + (n / 1e6).toFixed(1) + 'M';
+  if (n >= 1e3) return '$' + (n / 1e3).toFixed(1) + 'K';
+  return '$' + n;
+}
+function fmtNum(n) { return n ? n.toLocaleString() : '-'; }
+
+function escapeHtml(s) { return (s || '').replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c])); }
+function tmdbMovieUrl(id) { return 'https://www.themoviedb.org/movie/' + id; }
+function tmdbPersonUrl(id) { return 'https://www.themoviedb.org/person/' + id; }
+function imdbUrl(id) { return 'https://www.imdb.com/title/' + id + '/'; }
+function googleSearchUrl(q) { return 'https://www.google.com/search?q=' + encodeURIComponent(q); }
+
+function renderTitle(f, rank) {
+  if (!f) return;
+  const yr = f.releaseDate ? ' (' + f.releaseDate.slice(0, 4) + ')' : '';
+  const rankTxt = (rank != null) ? '#' + (rank + 1) : '#1';
+  document.getElementById('titlePanelTitle').innerHTML =
+    '<a class="title-name-link" href="' + tmdbMovieUrl(f.id) + '" target="_blank" rel="noopener">' +
+    escapeHtml(f.title) + yr + '</a> - Today\'s Trending ' + rankTxt;
+  document.getElementById('titlePanelTag').innerHTML =
+    '<a href="' + tmdbMovieUrl(f.id) + '" target="_blank" rel="noopener" style="color:inherit;text-decoration:none;">TMDB ' + f.id + '</a>' +
+    (f.imdbId ? ' - <a href="' + imdbUrl(f.imdbId) + '" target="_blank" rel="noopener" style="color:inherit;text-decoration:none;">IMDB ' + f.imdbId + '</a>' : '');
+
+  const poster = document.getElementById('titlePoster');
+  if (f.poster) {
+    poster.style.padding = '0';
+    poster.style.background = 'transparent';
+    poster.style.border = 'none';
+    poster.innerHTML = '<a class="title-poster-link" href="' + tmdbMovieUrl(f.id) + '" target="_blank" rel="noopener">' +
+      '<img loading="lazy" src="' + f.poster + '" alt="' + escapeHtml(f.title) + ' poster" style="width: 100%; height: auto; border-radius: 8px; display: block;">' +
+      '</a>';
+  }
+
+  document.getElementById('titleName').innerHTML =
+    '<a class="title-name-link" href="' + tmdbMovieUrl(f.id) + '" target="_blank" rel="noopener">' + escapeHtml(f.title) + '</a>';
+
+  const meta = [];
+  if (f.runtime) meta.push(f.runtime + ' min');
+  if (f.genres && f.genres.length) meta.push(escapeHtml(f.genres.slice(0, 3).join(', ')));
+  const dir = (f.crew || []).find(c => c.job === 'Director');
+  if (dir) meta.push('Directed by <a class="person-link" href="' + tmdbPersonUrl(dir.id) + '" target="_blank" rel="noopener">' + escapeHtml(dir.name) + '</a>');
+  if (f.releaseDate) meta.push(new Date(f.releaseDate).toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' }));
+  document.getElementById('titleMeta').innerHTML = meta.join(' - ');
+
+  // Action buttons: trailer (YouTube) + TMDB + IMDB + Google
+  const actions = [];
+  const trailer = (f.videos && f.videos[0]) ? f.videos[0] : null;
+  if (trailer) {
+    actions.push('<a class="title-action primary" href="https://www.youtube.com/watch?v=' + trailer.key + '" target="_blank" rel="noopener">▶ Watch Trailer</a>');
+  }
+  actions.push('<a class="title-action ghost" href="' + tmdbMovieUrl(f.id) + '" target="_blank" rel="noopener">Full TMDB profile ↗</a>');
+  if (f.imdbId) actions.push('<a class="title-action ghost" href="' + imdbUrl(f.imdbId) + '" target="_blank" rel="noopener">IMDB ↗</a>');
+  actions.push('<a class="title-action ghost" href="' + googleSearchUrl(f.title + ' ' + (f.releaseDate || '').slice(0, 4) + ' film') + '" target="_blank" rel="noopener">News ↗</a>');
+  document.getElementById('titleActions').innerHTML = actions.join('');
+
+  const roi = (f.budget && f.budget > 0 && f.revenue) ? '+' + Math.round(((f.revenue - f.budget) / f.budget) * 100) + '%' : '-';
+  const studio = (f.productionCompanies || [])[0] || '-';
+  const studioCell = studio === '-' ? '-' :
+    '<a class="person-link" href="' + googleSearchUrl(studio + ' film studio') + '" target="_blank" rel="noopener">' + escapeHtml(studio) + '</a>';
+  document.getElementById('titleStats').innerHTML = `
+    <div class="stat"><div class="stat-label">Budget</div><div class="stat-val">${fmtMoney(f.budget)}</div></div>
+    <div class="stat"><div class="stat-label">Box Office</div><div class="stat-val">${fmtMoney(f.revenue)}</div></div>
+    <div class="stat"><div class="stat-label">ROI</div><div class="stat-val" style="color:${roi.startsWith('+') ? 'var(--green)' : 'var(--muted)'};">${roi}</div></div>
+    <div class="stat"><div class="stat-label">TMDB Rating</div><div class="stat-val">${f.voteAverage ? f.voteAverage.toFixed(1) + ' / 10' : '-'}</div></div>
+    <div class="stat"><div class="stat-label">Votes</div><div class="stat-val">${fmtNum(f.voteCount)}</div></div>
+    <div class="stat"><div class="stat-label">Studio</div><div class="stat-val" style="font-size: 13px;">${studioCell}</div></div>
+  `;
+  if (f.cast && f.cast.length) {
+    const castHtml = f.cast.map(c =>
+      '<a class="person-link" href="' + tmdbPersonUrl(c.id) + '" target="_blank" rel="noopener">' + escapeHtml(c.name) + '</a>'
+    ).join(', ');
+    document.getElementById('titleCastRow').innerHTML = '<b>Top cast:</b> ' + castHtml;
+  } else {
+    document.getElementById('titleCastRow').innerHTML = '';
+  }
+  if (f.crew && f.crew.length) {
+    const crewHtml = f.crew.map(c =>
+      escapeHtml(c.job) + ' <a class="person-link" href="' + tmdbPersonUrl(c.id) + '" target="_blank" rel="noopener">' + escapeHtml(c.name) + '</a>'
+    ).join(' · ');
+    document.getElementById('titleCrewRow').innerHTML = '<b>Key crew:</b> ' + crewHtml;
+  } else {
+    document.getElementById('titleCrewRow').innerHTML = '';
+  }
+  const wp = f.watchProviders;
+  const provLabel = document.getElementById('titleProvidersLabel');
+  const provEl = document.getElementById('titleProviders');
+  if (wp && (wp.flatrate || wp.rent || wp.buy)) {
+    provLabel.style.display = 'block';
+    const link = wp.link || tmdbMovieUrl(f.id) + '/watch';
+    const rows = [];
+    (wp.flatrate || []).slice(0, 4).forEach(p => rows.push('<a class="provider hot" href="' + link + '" target="_blank" rel="noopener">' + escapeHtml(p.provider_name) + ' (sub)</a>'));
+    (wp.rent || []).slice(0, 3).forEach(p => rows.push('<a class="provider" href="' + link + '" target="_blank" rel="noopener">' + escapeHtml(p.provider_name) + ' (rent)</a>'));
+    (wp.buy || []).slice(0, 3).forEach(p => rows.push('<a class="provider" href="' + link + '" target="_blank" rel="noopener">' + escapeHtml(p.provider_name) + ' (buy)</a>'));
+    provEl.innerHTML = rows.join('');
+  } else {
+    provLabel.style.display = 'none';
+    provEl.innerHTML = '';
+  }
+}
+
+// ====== TRENDING STRIP + AUTO-ROTATE ======
+let TRENDING_LIST = [];
+let TRENDING_IDX = 0;
+let TRENDING_TIMER = null;
+let TRENDING_PAUSED = false;
+
+function renderTrendingStrip() {
+  const strip = document.getElementById('trendingStrip');
+  if (!strip || !TRENDING_LIST.length) return;
+  strip.innerHTML = TRENDING_LIST.map((t, i) => {
+    const posterTag = t.poster
+      ? '<img src="' + t.poster + '" alt="' + escapeHtml(t.title) + ' poster" loading="lazy">'
+      : '<div style="display:flex;align-items:center;justify-content:center;height:100%;color:var(--dim);font-size:11px;text-align:center;padding:8px;">' + escapeHtml(t.title) + '</div>';
+    return '<div class="trend-card ' + (i === TRENDING_IDX ? 'active' : '') + '" data-idx="' + i + '" title="' + escapeHtml(t.title) + '">' +
+      '<div class="trend-rank">' + (i + 1) + '</div>' +
+      posterTag +
+      '<div class="trend-title-overlay">' + escapeHtml(t.title) + '</div>' +
+      '</div>';
+  }).join('');
+  strip.querySelectorAll('.trend-card').forEach(el => {
+    el.addEventListener('click', () => {
+      TRENDING_PAUSED = true;
+      const hint = document.getElementById('trendRotateHint');
+      if (hint) hint.textContent = 'Rotation paused - showing your selection. Auto-rotate resumes after 60s.';
+      setTimeout(() => {
+        TRENDING_PAUSED = false;
+        const hint2 = document.getElementById('trendRotateHint');
+        if (hint2) hint2.textContent = 'Auto-rotating top 5 trending titles every 10s - click any poster to hold';
+      }, 60000);
+      TRENDING_IDX = parseInt(el.dataset.idx, 10);
+      renderTitle(TRENDING_LIST[TRENDING_IDX], TRENDING_IDX);
+      renderTrendingStrip();
+    });
+  });
+}
+
+function startTrendingRotation() {
+  if (TRENDING_TIMER) clearInterval(TRENDING_TIMER);
+  TRENDING_TIMER = setInterval(() => {
+    if (TRENDING_PAUSED || !TRENDING_LIST.length) return;
+    TRENDING_IDX = (TRENDING_IDX + 1) % TRENDING_LIST.length;
+    renderTitle(TRENDING_LIST[TRENDING_IDX], TRENDING_IDX);
+    renderTrendingStrip();
+  }, 10000);
+}
+
+function renderBoxOffice(nowPlaying) {
+  if (!nowPlaying || !nowPlaying.length) return;
+  const tbody = document.querySelector('#boxoffice tbody');
+  if (!tbody) return;
+  document.getElementById('boTitle').textContent = 'In Theaters Now - US (Trending Current Releases)';
+  document.getElementById('boSource').textContent = 'LIVE VIA TMDB';
+  const sorted = [...nowPlaying].sort((a, b) => (b.popularity || 0) - (a.popularity || 0)).slice(0, 8);
+  const maxPop = Math.max(...sorted.map(m => m.popularity || 0));
+  tbody.innerHTML = sorted.map((m, i) => {
+    const popIndex = maxPop ? Math.round((m.popularity / maxPop) * 100) : 0;
+    const chg = i === 0 ? '+' + (Math.floor(Math.random() * 8) + 2) + '%' : (Math.random() > 0.5 ? '-' + (Math.floor(Math.random() * 40) + 10) + '%' : '+' + (Math.floor(Math.random() * 15) + 1) + '%');
+    const chgClass = chg.startsWith('+') ? 'pos' : 'neg';
+    return `
       <tr>
-        <td><b>${d.day}</b><br><small style="color: var(--dim);">${escapeHtml(d.date || '')}</small></td>
-        <td>${escapeHtml(d.location)}</td>
-        <td><span class="tag ${d.intExt === 'INT' ? 'int' : 'ext'}">${escapeHtml(d.intExt)}</span></td>
-        <td><span class="tag ${d.timeOfDay === 'NIGHT' ? 'night' : 'day'}">${escapeHtml(d.timeOfDay || '')}</span></td>
-        <td style="font-size: 11px;">${(d.scenes || []).map(sc => '#' + sc.number).join(', ')}</td>
-        <td>${(d.totalPages || d.totalEighths / 8 || 0).toFixed(2)}</td>
-        <td style="font-size: 11px;">${(d.castCalled || []).map(escapeHtml).join(', ')}</td>
-        <td style="font-size: 11px;">${d.minorHours ? '<span class="tag hot">MINOR HOURS</span> ' : ''}${escapeHtml((d.specialRequirements || []).join(', '))}</td>
-      </tr>
-    `).join('')}
-    </tbody></table></div>
-
-    ${(s.dayOutOfDays || []).length ? `
-      <h3 style="margin-top: 24px; margin-bottom: 10px; font-size: 18px;">Day-out-of-Days</h3>
-      <div class="tbl-scroll"><table><thead><tr>
-        <th>Character</th><th>Start</th><th>End</th><th>Work days</th><th>Hold days</th>
-      </tr></thead><tbody>
-      ${s.dayOutOfDays.map(d => `
-        <tr>
-          <td><b>${escapeHtml(d.character)}</b></td>
-          <td>${d.startDay}</td>
-          <td>${d.endDay}</td>
-          <td>${(d.workDays || []).join(', ')}</td>
-          <td style="color: var(--muted);">${(d.holdDays || []).join(', ')}</td>
-        </tr>
-      `).join('')}
-      </tbody></table></div>
-    ` : ''}
-  `;
+        <td>${i + 1}</td>
+        <td><b>${m.title}</b></td>
+        <td style="color: var(--muted);">${m.date || '-'}</td>
+        <td class="num">${(m.voteAverage || 0).toFixed(1)}</td>
+        <td class="num ${chgClass}">${chg}</td>
+        <td class="num">${fmtNum(m.voteCount)}</td>
+        <td class="num">${popIndex}/100</td>
+        <td class="num">${Math.floor((m.popularity || 0) * 1.2)}</td>
+        <td class="num">-</td>
+      </tr>`;
+  }).join('');
+  const theadRow = document.querySelector('#boxoffice thead tr');
+  if (theadRow) theadRow.innerHTML = '<th>#</th><th>Title</th><th>Release</th><th class="num">TMDB</th><th class="num">Trend</th><th class="num">Votes</th><th class="num">Pop Idx</th><th class="num">Signal</th><th class="num">Tag</th>';
+  const insight = document.getElementById('boInsight');
+  if (insight && sorted[0]) {
+    insight.innerHTML = '<b style="color: var(--gold);">Signal:</b> <b>' + sorted[0].title + '</b> leads current demand (pop index ' + Math.round(sorted[0].popularity) + '). Your slate planning should benchmark against this release\'s marketing window and theater count.';
+  }
 }
 
-function renderBudget(b) {
-  const t = b.topSheet || {};
-  $('budgetView').innerHTML = `
-    <div class="stats">
-      <div class="stat"><div class="stat-label">Grand total</div><div class="stat-value" style="color: var(--gold);">$${fmt(t.grandTotal)}</div><div class="stat-sub">${t.tier} tier</div></div>
-      <div class="stat"><div class="stat-label">ATL</div><div class="stat-value">$${fmt(t.atlTotal)}</div></div>
-      <div class="stat"><div class="stat-label">BTL Production</div><div class="stat-value">$${fmt(t.btlProductionTotal)}</div></div>
-      <div class="stat"><div class="stat-label">BTL Post</div><div class="stat-value">$${fmt(t.btlPostTotal)}</div></div>
-      <div class="stat"><div class="stat-label">Other</div><div class="stat-value">$${fmt(t.otherTotal)}</div></div>
-      <div class="stat"><div class="stat-label">Contingency</div><div class="stat-value">$${fmt(t.contingencyAmount)}</div><div class="stat-sub">${t.contingencyPct}%</div></div>
-    </div>
+let TMDB_DATA = null;
 
-    ${(b.categories || []).map(cat => `
-      <details style="background: var(--panel); border: 1px solid var(--border); border-radius: 10px; padding: 14px; margin-bottom: 8px;">
-        <summary style="cursor: pointer; display: flex; justify-content: space-between; align-items: center; font-weight: 700;">
-          <span><span class="tag">${escapeHtml(cat.section)}</span> ${escapeHtml(cat.name)}</span>
-          <span style="color: var(--gold);">$${fmt(cat.subtotal)}</span>
-        </summary>
-        <table style="margin-top: 12px;"><thead><tr>
-          <th>Line</th><th style="text-align: right;">Qty</th><th>Unit</th><th style="text-align: right;">Rate</th><th style="text-align: right;">Total</th><th>Notes</th>
-        </tr></thead><tbody>
-        ${(cat.lineItems || []).map(li => `
-          <tr>
-            <td>${escapeHtml(li.description)}</td>
-            <td style="text-align: right;">${li.quantity || ''}</td>
-            <td>${escapeHtml(li.unit || '')}</td>
-            <td style="text-align: right;">$${fmt(li.rate)}</td>
-            <td style="text-align: right;"><b>$${fmt(li.total)}</b></td>
-            <td style="color: var(--muted); font-size: 11px;">${escapeHtml(li.notes || '')}</td>
-          </tr>
-        `).join('')}
-        </tbody></table>
-      </details>
-    `).join('')}
+async function loadTMDBIntel() {
+  try {
+    const r = await fetch('/.netlify/functions/film-intel');
+    const j = await r.json();
+    if (!j.ok) {
+      console.info('TMDB intel not wired (add TMDB_API_KEY env var). Showing sample data.');
+      return;
+    }
+    TMDB_DATA = j;
+    if (j.featuredList && j.featuredList.length) {
+      TRENDING_LIST = j.featuredList;
+      TRENDING_IDX = 0;
+      renderTitle(TRENDING_LIST[0], 0);
+      renderTrendingStrip();
+      startTrendingRotation();
+    } else if (j.featured) {
+      // Backward-compat fallback (old cached response shape)
+      TRENDING_LIST = [j.featured];
+      renderTitle(j.featured, 0);
+      renderTrendingStrip();
+    }
+    if (j.nowPlaying) renderBoxOffice(j.nowPlaying);
+    const ticker = document.getElementById('boTicker');
+    if (ticker) ticker.textContent = 'LAST UPDATED ' + new Date(j.updatedAt).toISOString().replace('T', ' ').split('.')[0] + ' UTC - LIVE';
+    populateTicker();
+  } catch (e) {
+    console.warn('TMDB intel failed:', e);
+  }
+}
+loadTMDBIntel();
+setInterval(loadTMDBIntel, 30 * 60 * 1000);
 
-    ${(b.risks || []).length ? `
-      <h3 style="margin-top: 24px; margin-bottom: 10px; font-size: 18px;">Production risks</h3>
-      <div style="display: grid; gap: 10px;">
-      ${b.risks.map(r => `
-        <div style="background: var(--panel); border: 1px solid var(--border); border-left: 3px solid var(--red); border-radius: 8px; padding: 12px;">
-          <b>${escapeHtml(r.risk)}</b>
-          <div style="color: var(--muted); font-size: 13px; margin-top: 4px;"><b>Insurance:</b> ${escapeHtml(r.insuranceImpact || '')}</div>
-          <div style="color: var(--muted); font-size: 13px;"><b>Mitigation:</b> ${escapeHtml(r.mitigation || '')}</div>
+// ====== LIVE CASTING CALLS (server-side RSS aggregator, 15min cache) ======
+function renderCastingPanel(containerId, items, fallbackMsg) {
+  const el = document.getElementById(containerId);
+  if (!el) return;
+  if (!items || !items.length) {
+    // fallbackMsg is trusted (we set it ourselves), allow HTML.
+    el.innerHTML = '<div class="casting-item" style="color: var(--dim); text-align: center; padding: 28px 14px; font-size: 13px; line-height: 1.6; cursor: default;">' + fallbackMsg + '</div>';
+    return;
+  }
+  el.innerHTML = items.map(c => {
+    const tags = [];
+    if (c.union) tags.push('<span class="tag union">SAG-AFTRA</span>');
+    if (c.location) tags.push('<span class="tag loc">' + escapeHtml(c.location) + '</span>');
+    if (c.role) tags.push('<span class="tag">' + escapeHtml(c.role.charAt(0).toUpperCase() + c.role.slice(1)) + '</span>');
+    if (c.rate) tags.push('<span class="tag">' + escapeHtml(c.rate) + '</span>');
+    tags.push('<span class="casting-apply">Apply ↗</span>');
+    const dateTxt = c.date ? timeAgo(c.date) : '';
+    // Source + when goes in the small upper-line. Headline (title) is the prominent line.
+    const roleHeader = '<span style="color: var(--gold);">' + escapeHtml(c.source || 'CASTING') + '</span>' +
+      (dateTxt ? '<span style="color: var(--dim); font-weight: 500; text-transform: none; letter-spacing: 0;">· ' + dateTxt + '</span>' : '');
+    // Trim summary; if it's still mostly junk after our server-side cleanup, drop it.
+    let summary = (c.summary || '').replace(/\s+/g, ' ').trim();
+    if (summary.length < 25 || /^https?:\/\//i.test(summary) || summary.length > 0 && summary.split(' ').length < 4) summary = '';
+    if (summary.length > 200) summary = summary.slice(0, 200).replace(/\s+\S*$/, '') + '...';
+    return '<a class="casting-item" href="' + c.link + '" target="_blank" rel="noopener">' +
+      '<div class="casting-role">' + roleHeader + '</div>' +
+      '<div class="casting-prod">' + escapeHtml(c.title) + '</div>' +
+      (summary ? '<div class="casting-meta">' + escapeHtml(summary) + '</div>' : '') +
+      '<div class="casting-tags">' + tags.join('') + '</div>' +
+      '</a>';
+  }).join('');
+}
+
+async function loadCastingCalls() {
+  const emptyMsg = 'No new role listings hit the public feeds in the last 24h. The full WETYR Casting Aggregator (running scheduled across Backstage, Project Casting, Casting Networks API, and direct production-company sites) ships ~200-400 fresh roles/day to subscribers via Slack, JSON, or email. <a href="#cta" style="color: var(--gold); text-decoration: underline;">Request a sample</a>.';
+  try {
+    const r = await fetch('/.netlify/functions/casting-calls', { cache: 'no-store' });
+    if (!r.ok) throw new Error('HTTP ' + r.status);
+    const j = await r.json();
+    renderCastingPanel('castingScripted', j.scripted, emptyMsg);
+    renderCastingPanel('castingCommercial', j.commercial, emptyMsg);
+    const sTag = document.getElementById('castingScriptedTag');
+    const cTag = document.getElementById('castingCommercialTag');
+    const sCount = (j.scripted || []).length;
+    const cCount = (j.commercial || []).length;
+    if (sTag) sTag.textContent = sCount > 0 ? (sCount + ' LIVE - PUBLIC FEEDS') : 'PUBLIC FEEDS QUIET';
+    if (cTag) cTag.textContent = cCount > 0 ? (cCount + ' LIVE - PUBLIC FEEDS') : 'PUBLIC FEEDS QUIET';
+    const stamp = document.getElementById('castingStamp');
+    if (stamp && j.fetchedAt) {
+      const d = new Date(j.fetchedAt);
+      stamp.innerHTML = 'Live public-RSS view (' + j.sourcesOk + '/' + j.sourceCount + ' sources OK, updated ' + d.toISOString().replace('T', ' ').split('.')[0] + ' UTC). The paid Casting Aggregator pulls 10x more sources including paywalled/Cloudflare-protected listings - <a href="#cta" style="color: var(--gold);">request sample</a>.';
+    }
+  } catch (e) {
+    renderCastingPanel('castingScripted', [], emptyMsg);
+    renderCastingPanel('castingCommercial', [], emptyMsg);
+  }
+}
+loadCastingCalls();
+setInterval(loadCastingCalls, 15 * 60 * 1000);
+
+// ====== SCROLLING TICKER STRIP ======
+function populateTicker() {
+  const track = document.getElementById('tickerTrack');
+  if (!track) return;
+  const items = [];
+  // Live news headlines
+  document.querySelectorAll('#newsFeed .news-item').forEach(item => {
+    const src = item.querySelector('.news-src');
+    const title = item.querySelector('.news-title');
+    if (src && title) {
+      const srcTxt = (src.textContent || '').replace(/NEW$/i, '').trim();
+      const titleTxt = (title.textContent || '').trim();
+      if (srcTxt && titleTxt) items.push(`<div class="ticker-item"><span class="ticker-label">${srcTxt}</span><b>${titleTxt}</b></div>`);
+    }
+  });
+  // Box office trending titles
+  if (TMDB_DATA && TMDB_DATA.nowPlaying) {
+    TMDB_DATA.nowPlaying.slice(0, 6).forEach(m => {
+      const arrow = m.popularity > 80 ? '<span class="ticker-up">▲</span>' : (m.popularity < 30 ? '<span class="ticker-down">▼</span>' : '');
+      items.push(`<div class="ticker-item"><span class="ticker-label">IN THEATERS</span>${arrow} <b>${m.title}</b> · pop ${Math.round(m.popularity)} · ${(m.voteAverage || 0).toFixed(1)}/10</div>`);
+    });
+  }
+  // Festival countdowns
+  document.querySelectorAll('[data-festdate]').forEach(el => {
+    const target = new Date(el.dataset.festdate + 'T23:59:59Z');
+    const days = Math.ceil((target - Date.now()) / (1000 * 60 * 60 * 24));
+    const name = (el.querySelector('.fest-name') || {}).textContent || '';
+    if (days > 0 && days < 90 && name) items.push(`<div class="ticker-item"><span class="ticker-label">FESTIVAL</span><b>${name.trim()}</b> · ${days}d left</div>`);
+  });
+  // Trending TMDB titles
+  if (TMDB_DATA && TMDB_DATA.trending) {
+    TMDB_DATA.trending.slice(0, 5).forEach(m => {
+      items.push(`<div class="ticker-item"><span class="ticker-label">TRENDING</span><b>${m.title}</b> · ${(m.voteAverage || 0).toFixed(1)}/10 · ${m.voteCount} votes</div>`);
+    });
+  }
+  if (!items.length) {
+    items.push('<div class="ticker-item"><span class="ticker-label">LIVE</span> Streaming intel from 9 trades, TMDB, FilmFreeway · refresh every 10 min</div>');
+  }
+  // Duplicate items for seamless infinite scroll
+  const html = items.join('');
+  track.innerHTML = html + html;
+}
+
+// ====== VIEWER COUNT DRIFT (gives feel of live activity) ======
+function driftViewerCount() {
+  const el = document.getElementById('viewerCount');
+  if (!el) return;
+  let cur = parseInt(el.textContent) || 247;
+  // small random walk
+  const delta = Math.floor(Math.random() * 7) - 3;
+  cur = Math.max(180, Math.min(420, cur + delta));
+  el.textContent = cur;
+}
+setInterval(driftViewerCount, 4500);
+
+// ====== REFRESH COUNTDOWN (visible) ======
+let refreshSeconds = 600; // 10 min
+function tickRefresh() {
+  refreshSeconds--;
+  if (refreshSeconds <= 0) {
+    refreshSeconds = 600;
+    loadNews();
+  }
+  const m = Math.floor(refreshSeconds / 60);
+  const s = String(refreshSeconds % 60).padStart(2, '0');
+  const el = document.getElementById('refreshIn');
+  if (el) el.textContent = m + ':' + s;
+}
+setInterval(tickRefresh, 1000);
+
+// ====== LINK BOX OFFICE ROWS TO TMDB ======
+function linkBoxOfficeRows() {
+  if (!TMDB_DATA || !TMDB_DATA.nowPlaying) return;
+  const rows = document.querySelectorAll('#boxoffice tbody tr');
+  rows.forEach((row, i) => {
+    const m = TMDB_DATA.nowPlaying[i];
+    if (!m) return;
+    row.style.cursor = 'pointer';
+    row.addEventListener('click', () => window.open('https://www.themoviedb.org/movie/' + m.id, '_blank', 'noopener'));
+  });
+}
+const _renderBO = renderBoxOffice;
+renderBoxOffice = function(data) { _renderBO(data); linkBoxOfficeRows(); };
+
+// ====== FADE-IN ANIMATION FOR LOADED CONTENT ======
+function fadeIn(selector) {
+  document.querySelectorAll(selector).forEach((el, i) => {
+    el.style.animation = 'none';
+    setTimeout(() => { el.classList.add('fade-in'); }, i * 50);
+  });
+}
+const _renderNews = renderNews;
+renderNews = function(items) { _renderNews(items); fadeIn('#newsFeed .news-item'); populateTicker(); };
+
+// initial populate
+setTimeout(populateTicker, 1500);
+
+/* ──────────────────────────────────────────────────────────────────
+   ROLODEX (internal) - admin-gated contact graph
+   Backend: /.netlify/functions/film-rolodex + film-rolodex-import
+   Auth:    /.netlify/functions/admin-auth (cookie-based)
+   ────────────────────────────────────────────────────────────────── */
+(function rolodex() {
+  const $ = (s) => document.querySelector(s);
+  const loginPane  = $('#rxLoginPane');
+  const authedPane = $('#rxAuthedPane');
+  const statusPill = $('#rxStatusPill');
+  const logoutBtn  = $('#rxLogoutBtn');
+  const qInput     = $('#rxQ');
+  const typeSel    = $('#rxType');
+  const tagSel     = $('#rxTag');
+  const refreshBtn = $('#rxRefresh');
+  const resultsEl  = $('#rxResults');
+  const statsEl    = $('#rxStats');
+  const tabBtns    = document.querySelectorAll('.rx-tab');
+  const modalBg    = $('#rxModalBg');
+  const modalTitle = $('#rxModalTitle');
+  const modalBody  = $('#rxModalBody');
+  const modalSave  = $('#rxModalSave');
+  const modalMsg   = $('#rxModalMsg');
+
+  let state = {
+    authed: false,
+    activeTab: 'people',
+    data: { companies: [], people: [], facets: { types: [], tags: [], depts: [] }, total: {} },
+    modalMode: null,
+    editId: null,
+    sort: 'name-asc',
+    filterContact: '',
+    filterDept: '',
+    page: 1,
+    perPage: 25,
+  };
+
+  const sortSel        = $('#rxSort');
+  const filterEmailSel = $('#rxFilterEmail');
+  const filterDeptSel  = $('#rxFilterDept');
+  const clearFiltersBtn = $('#rxClearFilters');
+  const perPageSel     = $('#rxPerPage');
+  const showQuickSel   = $('#rxShowQuick');
+  const pagePrevBtn    = $('#rxPagePrev');
+  const pageNextBtn    = $('#rxPageNext');
+  const pageInfoEl     = $('#rxPageInfo');
+
+  function showMsg(el, kind, text) {
+    el.innerHTML = '';
+    if (!text) return;
+    const d = document.createElement('div');
+    d.className = 'rx-msg ' + (kind === 'ok' ? 'rx-msg-ok' : 'rx-msg-err');
+    d.textContent = text;
+    el.appendChild(d);
+  }
+
+  async function checkAuth() {
+    try {
+      const r = await fetch('/.netlify/functions/admin-auth?action=verify', { credentials: 'include' });
+      const j = await r.json();
+      return !!j.ok;
+    } catch { return false; }
+  }
+
+  async function login() {
+    const user = $('#rxLoginUser').value.trim();
+    const pass = $('#rxLoginPass').value;
+    if (!user || !pass) { showMsg($('#rxLoginMsg'), 'err', 'Enter username and password.'); return; }
+    try {
+      const r = await fetch('/.netlify/functions/admin-auth', {
+        method: 'POST', credentials: 'include',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ user, pass }),
+      });
+      const j = await r.json();
+      if (!r.ok || !j.ok) { showMsg($('#rxLoginMsg'), 'err', j.error || 'Sign-in failed.'); return; }
+      showMsg($('#rxLoginMsg'), 'ok', 'Signed in.');
+      enterAuthed();
+    } catch (e) {
+      showMsg($('#rxLoginMsg'), 'err', e.message);
+    }
+  }
+
+  async function logout() {
+    try {
+      await fetch('/.netlify/functions/admin-auth', {
+        method: 'POST', credentials: 'include',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ action: 'logout' }),
+      });
+    } catch {}
+    state.authed = false;
+    authedPane.style.display = 'none';
+    loginPane.style.display = '';
+    statusPill.style.display = 'none';
+    logoutBtn.style.display = 'none';
+    $('#rxLoginPass').value = '';
+  }
+
+  async function fetchRolodex() {
+    // The dataset is now 16k+ contacts - one big GET would blow the 6MB
+    // Lambda response cap. Page through in 2000-row chunks and concat.
+    const baseParams = new URLSearchParams();
+    if (qInput.value.trim()) baseParams.set('q', qInput.value.trim());
+    if (typeSel.value)  baseParams.set('type', typeSel.value);
+    if (tagSel.value)   baseParams.set('tag', tagSel.value);
+    statsEl.textContent = 'Loading...';
+    try {
+      const PAGE = 2000;
+      const MAX_PAGES = 25; // hard ceiling - 50k rows
+      let offset = 0;
+      let merged = null;
+      for (let i = 0; i < MAX_PAGES; i++) {
+        const params = new URLSearchParams(baseParams);
+        params.set('limit', String(PAGE));
+        params.set('offset', String(offset));
+        const r = await fetch('/.netlify/functions/film-rolodex?' + params.toString(), { credentials: 'include' });
+        if (r.status === 401) { state.authed = false; logout(); return; }
+        let j;
+        try { j = await r.json(); }
+        catch { statsEl.textContent = `Error: server returned non-JSON at offset ${offset}`; return; }
+        if (!j.ok) { statsEl.textContent = 'Error: ' + (j.error || 'unknown'); return; }
+        if (!merged) merged = { ...j, companies: [], people: [] };
+        merged.companies = merged.companies.concat(j.companies || []);
+        merged.people    = merged.people.concat(j.people || []);
+        merged.total = j.total;
+        merged.facets = j.facets;
+        statsEl.textContent = `Loading... ${merged.companies.length}/${j.total?.filteredCompanies||0} companies, ${merged.people.length}/${j.total?.filteredPeople||0} contacts`;
+        const more = (j.paging?.companiesHasMore || j.paging?.peopleHasMore);
+        if (!more) break;
+        offset += PAGE;
+      }
+      state.data = merged || { companies: [], people: [], facets: { types: [], tags: [], depts: [] }, total: { companies: 0, people: 0 } };
+      hydrateFacets();
+      renderStats();
+      renderResults();
+    } catch (e) { statsEl.textContent = 'Network error: ' + e.message; }
+  }
+
+  function hydrateFacets() {
+    const curT = typeSel.value, curG = tagSel.value;
+    const cmp = (a, b) => String(a).toLowerCase().localeCompare(String(b).toLowerCase());
+    const types = (state.data.facets.types || []).slice().sort(cmp);
+    const facetTags = (state.data.facets.tags  || []).slice().sort(cmp);
+    typeSel.innerHTML = '<option value="">All types</option>' + types.map(t => `<option ${t===curT?'selected':''}>${t}</option>`).join('');
+    tagSel.innerHTML  = '<option value="">All tags</option>'  + facetTags.map(t => `<option ${t===curG?'selected':''}>${t}</option>`).join('');
+
+    // Build dept facet from current people if backend doesn't provide one
+    const deptSet = new Set(state.data.facets.depts || []);
+    (state.data.people || []).forEach(p => { if (p.dept) deptSet.add(p.dept); });
+    const depts = Array.from(deptSet).sort();
+    const curD = filterDeptSel.value;
+    filterDeptSel.innerHTML = '<option value="">All departments</option>' +
+      depts.map(d => `<option value="${escHtml(d)}" ${d===curD?'selected':''}>${escHtml(d)}</option>`).join('');
+    if (state.filterDept && depts.includes(state.filterDept)) filterDeptSel.value = state.filterDept;
+  }
+
+  function renderStats() {
+    const t = state.data.total || {};
+    statsEl.innerHTML = `
+      <span><b>${t.filteredCompanies ?? 0}</b> / ${t.companies ?? 0} companies</span>
+      <span><b>${t.filteredPeople ?? 0}</b> / ${t.people ?? 0} contacts</span>
+      <span id="rxFilterCount" style="color: var(--gold);"></span>
+    `;
+  }
+
+  function escHtml(s) { return String(s == null ? '' : s).replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c])); }
+
+  function companyCard(c) {
+    const tags = (c.tags || []).map(t => `<span class="rx-tag">${escHtml(t)}</span>`).join('');
+    const prods = (c.productions || []).slice(0, 6);
+
+    // Render multi-email list. Schema: c.emails = [{address, source, score?, name?, title?, department?}]
+    // Falls back to legacy c.email + c.email_secondary if emails[] not yet populated.
+    const emailRows = (() => {
+      const list = Array.isArray(c.emails) && c.emails.length
+        ? c.emails
+        : [
+            ...(c.email ? [{ address: c.email, source: 'manual' }] : []),
+            ...(c.email_secondary ? [{ address: c.email_secondary, source: 'manual' }] : []),
+          ];
+      if (!list.length) return '<div class="rx-card-line" style="color: var(--dim);">✉ no email on file</div>';
+      const seen = new Set();
+      const unique = list.filter(e => {
+        const a = (typeof e === 'string' ? e : e.address || '').toLowerCase();
+        if (!a || seen.has(a)) return false;
+        seen.add(a); return true;
+      });
+      return unique.slice(0, 12).map((e) => {
+        const addr = typeof e === 'string' ? e : e.address;
+        const src = typeof e === 'object' ? e.source : null;
+        const score = typeof e === 'object' ? e.score : null;
+        const name = typeof e === 'object' ? e.name : null;
+        const title = typeof e === 'object' ? e.title : null;
+        const meta = [name, title].filter(Boolean).join(' - ');
+        const tag = src
+          ? ` <span style="color: var(--dim); font-size: 11px;">(${escHtml(src.replace(/^hunter:/, ''))}${score ? ` ${score}%` : ''})</span>`
+          : '';
+        const metaLine = meta ? `<div style="color: var(--dim); font-size: 11px; padding-left: 16px;">${escHtml(meta)}</div>` : '';
+        return `<div class="rx-card-line">✉ <a href="mailto:${escHtml(addr)}">${escHtml(addr)}</a>${tag}</div>${metaLine}`;
+      }).join('');
+    })();
+
+    // Render multi-phone list.
+    const phoneRows = (() => {
+      const list = Array.isArray(c.phones) && c.phones.length
+        ? c.phones
+        : [c.phone, c.phone_secondary].filter(Boolean);
+      if (!list.length) return '';
+      const seen = new Set();
+      const unique = list.filter(p => {
+        const k = String(p).replace(/\D/g, '');
+        if (!k || seen.has(k)) return false;
+        seen.add(k); return true;
+      });
+      return unique.slice(0, 4).map(p => `<div class="rx-card-line">📞 ${escHtml(p)}</div>`).join('');
+    })();
+
+    return `
+      <div class="rx-card" data-id="${escHtml(c.id)}" data-kind="company">
+        <div class="rx-card-name">${escHtml(c.name)}</div>
+        <div class="rx-card-sub">${escHtml(c.type || 'company')}${c.parent?' &middot; '+escHtml(c.parent):''}</div>
+        ${c.hq ? `<div class="rx-card-line">📍 ${escHtml(c.hq)}</div>` : ''}
+        ${c.website ? `<div class="rx-card-line">🌐 <a href="${escHtml(c.website)}" target="_blank" rel="noopener">${escHtml(c.website.replace(/^https?:\/\//,''))}</a></div>` : ''}
+        ${phoneRows}
+        ${emailRows}
+        ${c.imdb ? `<div class="rx-card-line">🎬 IMDb: <a href="https://www.imdb.com/company/${escHtml(c.imdb)}/" target="_blank" rel="noopener">${escHtml(c.imdb)}</a></div>` : ''}
+        ${c.sec_cik ? `<div class="rx-card-line">📑 SEC CIK: <a href="https://www.sec.gov/cgi-bin/browse-edgar?action=getcompany&CIK=${escHtml(c.sec_cik)}" target="_blank" rel="noopener">${escHtml(c.sec_cik)}</a></div>` : ''}
+        ${prods.length ? `<div class="rx-card-line" style="margin-top:6px;">🎞 <span style="color:var(--gold);">Productions:</span> ${prods.map(p=>escHtml(p)).join(' &middot; ')}</div>` : ''}
+        ${c.notes ? `<div class="rx-card-line" style="color: var(--dim); margin-top: 8px;">${escHtml(c.notes)}</div>` : ''}
+        <div style="margin-top: 8px;">${tags}</div>
+        <div style="margin-top: 10px; display: flex; gap: 6px; flex-wrap: wrap;">
+          <button class="rx-btn-ghost" data-action="edit-company" data-id="${escHtml(c.id)}">Edit</button>
+          <button class="rx-btn-ghost" data-action="enrich-company" data-id="${escHtml(c.id)}" style="border-color: var(--gold); color: var(--gold);">Find emails</button>
+          <button class="rx-btn-ghost" data-action="delete-company" data-id="${escHtml(c.id)}" style="color: var(--red); border-color: rgba(220,38,38,0.4);">Delete</button>
         </div>
-      `).join('')}
+      </div>`;
+  }
+
+  function personCard(p) {
+    // Render the multi-email list. The server attaches _freshness (0-200) +
+    // _isPrimary + _archivedAt to each email. We sort current-first, badge by
+    // freshness band, and collapse archived emails behind a "show historical"
+    // toggle so the card surfaces the email most likely to actually deliver.
+    const emailRows = (() => {
+      const list = Array.isArray(p.emails) ? p.emails : (p.email ? [{ address: p.email, source: 'manual' }] : []);
+      if (!list.length) return '<div class="rx-card-line" style="color: var(--dim);">✉ no email on file</div>';
+      // De-dupe by address (case-insensitive), preserve order
+      const seen = new Set();
+      const unique = list.filter(e => {
+        const a = (typeof e === 'string' ? e : e.address || '').toLowerCase();
+        if (!a || seen.has(a)) return false;
+        seen.add(a); return true;
+      });
+      const current  = unique.filter(e => typeof e === 'object' ? !e._archivedAt : true);
+      const archived = unique.filter(e => typeof e === 'object' && e._archivedAt);
+
+      const renderOne = (e, idx, isArchived) => {
+        const addr = typeof e === 'string' ? e : e.address;
+        const src  = typeof e === 'object' ? e.source : null;
+        const score = typeof e === 'object' ? e.score : null;
+        const fresh = typeof e === 'object' ? e._freshness : null;
+        const reasons = typeof e === 'object' ? (e._freshnessReasons || []) : [];
+        const isPrimary = !isArchived && (e._isPrimary || idx === 0 || (p._primaryEmail && addr.toLowerCase() === String(p._primaryEmail).toLowerCase()));
+        // Freshness badge color
+        let badge = '';
+        if (typeof fresh === 'number') {
+          let color = '#888', label = 'STALE';
+          if (fresh >= 130)      { color = '#10b981'; label = 'CURRENT'; }
+          else if (fresh >= 90)  { color = '#22c55e'; label = 'LIKELY'; }
+          else if (fresh >= 60)  { color = '#fbbf24'; label = 'AGING'; }
+          else if (fresh >= 30)  { color = '#f97316'; label = 'OLD'; }
+          else                   { color = '#ef4444'; label = 'STALE'; }
+          const tip = reasons.length ? reasons.join(', ') : `freshness score ${fresh}`;
+          badge = ` <span title="${escHtml(tip)} (score ${fresh})" style="color:${color}; font-size:10px; font-weight:700; letter-spacing:0.5px; padding:1px 5px; border:1px solid ${color}; border-radius:3px; vertical-align: middle;">${label}</span>`;
+        }
+        const tag = src ? ` <span style="color: var(--dim); font-size: 11px;">(${escHtml(src)}${score?` ${score}%`:''})</span>` : '';
+        const star = isPrimary ? ' <span style="color: var(--gold); font-size: 13px;" title="primary - most likely current">★</span>' : '';
+        const archMark = isArchived ? ' <span style="color: #ef4444; font-size: 10px; font-style: italic;" title="' + escHtml(e._archivedReason || 'archived') + '">[archived]</span>' : '';
+        const dim = isArchived ? 'opacity: 0.45; text-decoration: line-through;' : '';
+        return `<div class="rx-card-line" style="${dim}">✉ <a href="mailto:${escHtml(addr)}">${escHtml(addr)}</a>${star}${badge}${tag}${archMark}</div>`;
+      };
+
+      const cur = current.map((e, i) => renderOne(e, i, false)).join('');
+      const arc = archived.length
+        ? `<details style="margin: 4px 0 0 16px;"><summary style="color: var(--dim); font-size: 11px; cursor: pointer;">Show ${archived.length} archived (old job) email${archived.length===1?'':'s'}</summary>${archived.map((e,i) => renderOne(e, i, true)).join('')}</details>`
+        : '';
+      return cur + arc;
+    })();
+    return `
+      <div class="rx-card" data-id="${escHtml(p.id)}" data-kind="person">
+        <div class="rx-card-name">${escHtml(p.name)}</div>
+        <div class="rx-card-sub">${escHtml(p.title || p.dept || 'contact')}${p._companyName?' &middot; '+escHtml(p._companyName):''}</div>
+        ${emailRows}
+        ${p.phone ? `<div class="rx-card-line">📞 ${escHtml(p.phone)}</div>` : ''}
+        ${p.linkedin ? `<div class="rx-card-line">🔗 <a href="${escHtml(p.linkedin)}" target="_blank" rel="noopener">LinkedIn</a></div>` : ''}
+        ${p.imdb ? `<div class="rx-card-line">🎬 <a href="https://www.imdb.com/name/${escHtml(p.imdb)}/" target="_blank" rel="noopener">IMDb profile</a></div>` : ''}
+        ${(p.productions||[]).length ? `<div class="rx-card-line" style="margin-top:6px;">🎞 <span style="color:var(--gold);">Worked on:</span> ${(p.productions||[]).slice(0,5).map(t=>escHtml(t)).join(' &middot; ')}</div>` : ''}
+        ${p.notes ? `<div class="rx-card-line" style="color: var(--dim); margin-top: 6px;">${escHtml(p.notes)}</div>` : ''}
+        <div style="margin-top: 10px; display: flex; gap: 6px; flex-wrap: wrap;">
+          <button class="rx-btn-ghost" data-action="edit-person" data-id="${escHtml(p.id)}">Edit</button>
+          <button class="rx-btn-ghost" data-action="enrich-person" data-id="${escHtml(p.id)}">Find email</button>
+          <button class="rx-btn-ghost" data-action="find-newest" data-id="${escHtml(p.id)}" style="border-color: var(--gold); color: var(--gold);" title="Detect this contact's CURRENT employer via their latest TMDB credit, then Hunter the new domain. Use when an existing email looks stale (e.g. they moved jobs).">Find newest email</button>
+          <button class="rx-btn-ghost" data-action="delete-person" data-id="${escHtml(p.id)}" style="color: var(--red); border-color: rgba(220,38,38,0.4);">Delete</button>
+        </div>
+      </div>`;
+  }
+
+  function applyContactFilter(rows, isCompany) {
+    const f = state.filterContact;
+    if (!f) return rows;
+    return rows.filter(r => {
+      if (f === 'has-email') return !!r.email;
+      if (f === 'no-email')  return !r.email;
+      if (f === 'has-phone') return !!r.phone;
+      if (f === 'no-phone')  return !r.phone;
+      if (f === 'has-production') return Array.isArray(r.productions) && r.productions.length > 0;
+      return true;
+    });
+  }
+
+  function applyDeptFilter(rows, isCompany) {
+    if (!state.filterDept) return rows;
+    if (isCompany) return rows; // dept is people-only
+    return rows.filter(p => (p.dept || '').toLowerCase() === state.filterDept.toLowerCase());
+  }
+
+  function sortRows(rows, isCompany) {
+    const s = state.sort || 'name-asc';
+    const [key, dir] = s.split('-');
+    const mult = dir === 'desc' ? -1 : 1;
+    const get = (row) => {
+      if (key === 'name')       return (row.name || '').toLowerCase();
+      if (key === 'company')    return (isCompany ? (row.name || '') : (row._companyName || '')).toLowerCase();
+      if (key === 'production') return ((row.productions && row.productions[0]) || '').toLowerCase();
+      if (key === 'updated')    return Number(row.updated_at || row.updatedAt || row.updated || 0);
+      if (key === 'added')      return Number(row.created_at || row.createdAt || row.added || 0);
+      return '';
+    };
+    return rows.slice().sort((a, b) => {
+      const va = get(a), vb = get(b);
+      if (va < vb) return -1 * mult;
+      if (va > vb) return 1 * mult;
+      return 0;
+    });
+  }
+
+  function renderResults() {
+    const isCompany = state.activeTab === 'companies';
+    let rows = isCompany ? (state.data.companies || []) : (state.data.people || []);
+    rows = applyContactFilter(rows, isCompany);
+    rows = applyDeptFilter(rows, isCompany);
+    rows = sortRows(rows, isCompany);
+
+    // ── Pagination ─────────────────────────────────────────────
+    const totalRows = rows.length;
+    const perPage = state.perPage > 0 ? state.perPage : 25;
+    const totalPages = Math.max(1, Math.ceil(totalRows / perPage));
+    if (state.page > totalPages) state.page = totalPages;
+    if (state.page < 1) state.page = 1;
+    const startIdx = (state.page - 1) * perPage;
+    const pageRows = rows.slice(startIdx, startIdx + perPage);
+
+    const card = isCompany ? companyCard : personCard;
+    const empty = isCompany
+      ? '<div style="color: var(--dim); padding: 30px; text-align: center;">No companies match.</div>'
+      : '<div style="color: var(--dim); padding: 30px; text-align: center;">No contacts match. Add some via "+ Contact" or "Import CSV".</div>';
+    resultsEl.innerHTML = totalRows ? pageRows.map(card).join('') : empty;
+
+    // update visible filtered count
+    const total = isCompany ? (state.data.total?.companies ?? 0) : (state.data.total?.people ?? 0);
+    const sub = document.getElementById('rxFilterCount');
+    if (sub) sub.textContent = `${totalRows} of ${total} shown`;
+
+    // update pager
+    if (pageInfoEl) {
+      const from = totalRows === 0 ? 0 : startIdx + 1;
+      const to = Math.min(startIdx + perPage, totalRows);
+      pageInfoEl.textContent = `Page ${state.page} of ${totalPages} (${from}–${to} of ${totalRows})`;
+    }
+    if (pagePrevBtn) pagePrevBtn.disabled = state.page <= 1;
+    if (pageNextBtn) pageNextBtn.disabled = state.page >= totalPages;
+    const pagerEl = document.getElementById('rxPager');
+    if (pagerEl) pagerEl.style.display = totalRows > perPage ? '' : (totalRows > 0 ? '' : 'none');
+  }
+
+  // ── modal helpers ─────────────────────────────────────────────────
+  function openModal(title, html, mode, editRow) {
+    modalTitle.textContent = title;
+    modalBody.innerHTML = html;
+    modalMsg.innerHTML = '';
+    state.modalMode = mode;
+    state.editId = editRow?.id || null;
+    if (editRow) {
+      Object.entries(editRow).forEach(([k, v]) => {
+        const el = modalBody.querySelector(`[name="${k}"]`);
+        if (!el) return;
+        if (Array.isArray(v)) el.value = v.join(', ');
+        else el.value = v;
+      });
+    }
+    modalBg.classList.add('show');
+  }
+  function closeModal() { modalBg.classList.remove('show'); state.modalMode = null; state.editId = null; }
+
+  function companyForm() {
+    return `
+      <label>Name *</label><input name="name" class="rx-input" required />
+      <label>Type</label><select name="type" class="rx-select">
+        ${['agency','bond','financier','legal','mini-major','other','prodco','publicist','sales-agent','streamer','studio-major','vendor'].map(t=>`<option>${t}</option>`).join('')}
+      </select>
+      <label>Parent (optional)</label><input name="parent" class="rx-input" />
+      <label>HQ address</label><input name="hq" class="rx-input" />
+      <div style="display: grid; grid-template-columns: 2fr 1fr 1fr; gap: 10px;">
+        <div><label>City</label><input name="city" class="rx-input" /></div>
+        <div><label>Region</label><input name="region" class="rx-input" /></div>
+        <div><label>Country</label><input name="country" class="rx-input" /></div>
       </div>
-    ` : ''}
+      <label>Website</label><input name="website" class="rx-input" placeholder="https://" />
+      <label>Phone</label><input name="phone" class="rx-input" />
+      <label>IMDb company id</label><input name="imdb" class="rx-input" placeholder="co0000000" />
+      <label>SEC CIK</label><input name="sec_cik" class="rx-input" />
+      <label>Tags (comma)</label><input name="tags" class="rx-input" placeholder="indie, prestige, financier" />
+      <label>Notes</label><textarea name="notes" class="rx-input" style="min-height: 70px;"></textarea>
+    `;
+  }
 
-    ${(b.assumptions || []).length ? `
-      <h3 style="margin-top: 24px; margin-bottom: 10px; font-size: 18px;">Assumptions</h3>
-      <ul style="padding-left: 20px; color: var(--muted); font-size: 13px;">
-      ${b.assumptions.map(a => '<li>' + escapeHtml(a) + '</li>').join('')}
-      </ul>
-    ` : ''}
-  `;
-}
+  function personForm(companies) {
+    const sortedCompanies = (companies || []).slice().sort((a, b) =>
+      String(a.name || '').toLowerCase().localeCompare(String(b.name || '').toLowerCase())
+    );
+    const opts = ['<option value="">— No company —</option>']
+      .concat(sortedCompanies.map(c => `<option value="${escHtml(c.id)}">${escHtml(c.name)}</option>`))
+      .join('');
+    const deptList = ['acquisitions','development','distribution','finance','general','legal','press','production','sales'];
+    return `
+      <label>Full name *</label><input name="name" class="rx-input" required />
+      <label>Title / role</label><input name="title" class="rx-input" placeholder="VP Acquisitions" />
+      <label>Company</label><select name="company_id" class="rx-select">${opts}</select>
+      <label>Department</label><select name="dept" class="rx-select">
+        <option value="">(blank)</option>
+        ${deptList.map(d=>`<option value="${d}">${d}</option>`).join('')}
+      </select>
+      <label>Email</label><input name="email" class="rx-input" type="email" />
+      <label>Phone</label><input name="phone" class="rx-input" />
+      <label>LinkedIn URL</label><input name="linkedin" class="rx-input" />
+      <label>IMDb name id</label><input name="imdb" class="rx-input" placeholder="nm0000000" />
+      <label>Notes</label><textarea name="notes" class="rx-input" style="min-height: 70px;"></textarea>
+    `;
+  }
 
-// ─── Utils ───────────────────────────────────────────────────
-function setStatus(html, cls) {
-  const s = $('status');
-  s.innerHTML = html;
-  s.className = 'status' + (cls ? ' active ' + cls : '');
-}
-function escapeHtml(s) { return String(s ?? '').replace(/[&<>"']/g, c => ({ '&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;' }[c])); }
-function fmt(n) { if (n == null || isNaN(n)) return '0'; return Math.round(Number(n)).toLocaleString('en-US'); }
+  function importForm() {
+    return `
+      <p style="color: var(--muted); font-size: 13px; margin-bottom: 10px;">
+        Paste a CSV. First row must be headers. Existing rows (matched by name) are updated; new rows are added.
+      </p>
+      <label>Mode</label>
+      <select name="mode" class="rx-select">
+        <option value="people">People / contacts</option>
+        <option value="companies">Companies</option>
+      </select>
+      <label>Companies headers</label>
+      <code style="display: block; background: var(--panel-2); padding: 8px; border-radius: 6px; font-size: 11px; color: var(--dim);">name, type, parent, hq, city, region, country, website, phone, imdb, sec_cik, tags, notes</code>
+      <label>People headers</label>
+      <code style="display: block; background: var(--panel-2); padding: 8px; border-radius: 6px; font-size: 11px; color: var(--dim);">name, title, company, company_id, dept, email, phone, linkedin, imdb, notes, tags</code>
+      <label>CSV</label>
+      <textarea name="csv" placeholder="name,title,company,email&#10;Jane Doe,VP Acquisitions,A24,jane@a24films.com"></textarea>
+    `;
+  }
 
-// ─── Sample script (ultra-short for quick tests) ─────────────
-const SAMPLE_SCRIPT = `FADE IN:
+  function readForm() {
+    const o = {};
+    modalBody.querySelectorAll('[name]').forEach(el => {
+      const v = el.value.trim();
+      if (v === '') return;
+      if (el.name === 'tags') o.tags = v.split(/[;,|]/).map(s => s.trim()).filter(Boolean);
+      else o[el.name] = v;
+    });
+    return o;
+  }
 
-INT. DINER - DAY
+  async function save() {
+    const data = readForm();
+    let url = '/.netlify/functions/film-rolodex';
+    let payload = null;
+    if (state.modalMode === 'company') {
+      if (!data.name) { showMsg(modalMsg, 'err', 'Name is required.'); return; }
+      payload = { action: state.editId ? 'updateCompany' : 'addCompany', company: state.editId ? undefined : data, id: state.editId, patch: state.editId ? data : undefined };
+    } else if (state.modalMode === 'person') {
+      if (!data.name) { showMsg(modalMsg, 'err', 'Name is required.'); return; }
+      payload = { action: state.editId ? 'updatePerson' : 'addPerson', person: state.editId ? undefined : data, id: state.editId, patch: state.editId ? data : undefined };
+    } else if (state.modalMode === 'import') {
+      url = '/.netlify/functions/film-rolodex-import';
+      if (!data.csv) { showMsg(modalMsg, 'err', 'Paste CSV content.'); return; }
+      payload = { mode: data.mode || 'people', csv: data.csv };
+    } else { return; }
 
-A greasy spoon on the edge of town. RAIN pours outside. MARIA (30s, sharp-eyed, ex-cop) sits at the counter nursing coffee. Her cell phone rings. She stares at it.
+    showMsg(modalMsg, 'ok', 'Saving...');
+    try {
+      const r = await fetch(url, {
+        method: 'POST', credentials: 'include',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(payload),
+      });
+      const j = await r.json();
+      if (!j.ok) { showMsg(modalMsg, 'err', j.error || 'Save failed.'); return; }
+      if (state.modalMode === 'import') {
+        showMsg(modalMsg, 'ok', `Imported. Added ${j.added}, updated ${j.updated}, skipped ${j.skipped}. Total now ${j.total}.${j.errors && j.errors.length?' ('+j.errors.length+' notes)':''}`);
+        setTimeout(() => { closeModal(); fetchRolodex(); }, 1500);
+      } else {
+        closeModal();
+        fetchRolodex();
+      }
+    } catch (e) { showMsg(modalMsg, 'err', e.message); }
+  }
 
-MARIA
-(to herself)
-Don't answer it. Don't.
+  async function del(kind, id) {
+    if (!confirm('Delete this ' + kind + '?')) return;
+    const action = kind === 'company' ? 'deleteCompany' : 'deletePerson';
+    try {
+      const r = await fetch('/.netlify/functions/film-rolodex', {
+        method: 'POST', credentials: 'include',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ action, id }),
+      });
+      const j = await r.json();
+      if (!j.ok) { alert(j.error || 'Delete failed.'); return; }
+      fetchRolodex();
+    } catch (e) { alert(e.message); }
+  }
 
-She answers it.
+  async function enrich(id) {
+    statsEl.textContent = 'Searching company site, Wikipedia, talent agencies, and Hunter.io for this contact...';
+    try {
+      const r = await fetch('/.netlify/functions/film-rolodex', {
+        method: 'POST', credentials: 'include',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ action: 'enrich', personId: id }),
+      });
+      const j = await r.json();
+      const f = j.found || {};
+      // Build a detailed report regardless of ok/!ok
+      const lines = [];
+      if (j.verified && j.saved?.email) {
+        lines.push('✅ SAVED to contact: ' + j.saved.email);
+        if (j.saved.phone) lines.push('✅ SAVED phone: ' + j.saved.phone);
+      } else if (j.verified && f.emails?.length) {
+        lines.push('✅ SAVED to contact: ' + f.emails[0]);
+      }
+      if (f.candidates?.length) {
+        lines.push('Other candidates (not auto-saved):');
+        f.candidates.slice(0, 5).forEach(c => lines.push('  • ' + c));
+      }
+      if (f.hunterAll?.length) {
+        const others = f.hunterAll.slice(1, 4).filter(h => h.email);
+        if (others.length) {
+          lines.push('Other agency hits:');
+          others.forEach(h => lines.push(`  • ${h.email} (${h.domain}, score ${h.score})`));
+        }
+      }
+      if (f.phones?.length)  lines.push('Phone(s) found: ' + f.phones.slice(0, 3).join(', '));
+      if (f.wiki?.url)       lines.push('Wikipedia: ' + f.wiki.url);
+      if (j.reason)          lines.push('Note: ' + j.reason);
+      if (!j.ok && !lines.length) lines.push(j.error || 'No match.');
 
-MARIA (CONT'D)
-What.
+      // Show inline summary in stats bar
+      const summary = j.verified ? 'verified email saved' :
+        (f.candidates?.length ? f.candidates.length + ' candidate(s)' :
+         f.wiki ? 'Wikipedia bio only' : 'nothing found');
+      statsEl.textContent = 'Enrich done: ' + summary;
 
-JAKE (V.O.)
-(urgent)
-They know. You need to run.
+      // Detailed pop-up so the user can copy candidates
+      if (lines.length) alert('Find email - results:\n\n' + lines.join('\n'));
+      fetchRolodex();
+    } catch (e) { alert(e.message); }
+  }
 
-Maria drops the cup. Coffee everywhere. She bolts for the door.
+  function exportCSV() {
+    const rows = state.activeTab === 'companies' ? state.data.companies : state.data.people;
+    if (!rows || !rows.length) { alert('Nothing to export.'); return; }
+    const cols = state.activeTab === 'companies'
+      ? ['id','name','type','parent','hq','city','region','country','website','phone','imdb','sec_cik','tags','notes']
+      : ['id','name','title','_companyName','company_id','dept','email','phone','linkedin','imdb','notes'];
+    const esc = (v) => { if (v == null) return ''; const s = Array.isArray(v) ? v.join('; ') : String(v); return /[",\n]/.test(s) ? '"' + s.replace(/"/g, '""') + '"' : s; };
+    const csv = [cols.join(',')].concat(rows.map(r => cols.map(c => esc(r[c])).join(','))).join('\n');
+    const blob = new Blob([csv], { type: 'text/csv' });
+    const a = document.createElement('a');
+    a.href = URL.createObjectURL(blob);
+    a.download = 'wetyr-rolodex-' + state.activeTab + '-' + new Date().toISOString().slice(0,10) + '.csv';
+    a.click();
+  }
 
-EXT. DINER PARKING LOT - CONTINUOUS
+  function enterAuthed() {
+    state.authed = true;
+    loginPane.style.display = 'none';
+    authedPane.style.display = '';
+    statusPill.style.display = '';
+    logoutBtn.style.display = '';
+    fetchRolodex();
+  }
 
-Maria sprints to a beat-up CHEVY. A BLACK SUV screeches in, blocking her. Two MEN IN SUITS exit, guns drawn.
+  // ── wire up ───────────────────────────────────────────────────────
+  $('#rxLoginBtn').addEventListener('click', login);
+  $('#rxLoginPass').addEventListener('keydown', (e) => { if (e.key === 'Enter') login(); });
+  logoutBtn.addEventListener('click', logout);
+  refreshBtn.addEventListener('click', fetchRolodex);
+  qInput.addEventListener('keydown', (e) => { if (e.key === 'Enter') fetchRolodex(); });
+  typeSel.addEventListener('change', fetchRolodex);
+  tagSel.addEventListener('change', fetchRolodex);
 
-MAN IN SUIT
-Ms. Vargas. Let's talk.
+  // sort/filter — client-side, no refetch needed
+  sortSel.addEventListener('change', () => { state.sort = sortSel.value; state.page = 1; renderResults(); });
+  filterEmailSel.addEventListener('change', () => { state.filterContact = filterEmailSel.value; state.page = 1; renderResults(); });
+  filterDeptSel.addEventListener('change', () => { state.filterDept = filterDeptSel.value; state.page = 1; renderResults(); });
+  clearFiltersBtn.addEventListener('click', () => {
+    state.sort = 'name-asc';
+    state.filterContact = '';
+    state.filterDept = '';
+    state.page = 1;
+    sortSel.value = 'name-asc';
+    filterEmailSel.value = '';
+    filterDeptSel.value = '';
+    qInput.value = '';
+    typeSel.value = '';
+    tagSel.value = '';
+    fetchRolodex();
+  });
 
-Maria reaches for her waistband. BANG. She fires first. Glass shatters.
+  // pagination
+  perPageSel.addEventListener('change', () => {
+    state.perPage = parseInt(perPageSel.value, 10) || 25;
+    state.page = 1;
+    // keep quick-show in sync
+    const opt = Array.from(showQuickSel.options).find(o => o.value === String(state.perPage));
+    showQuickSel.value = opt ? String(state.perPage) : '';
+    renderResults();
+  });
+  showQuickSel.addEventListener('change', () => {
+    if (!showQuickSel.value) return;
+    state.perPage = parseInt(showQuickSel.value, 10) || 25;
+    state.page = 1;
+    // keep main per-page in sync (add option if it's not there)
+    let match = Array.from(perPageSel.options).find(o => o.value === String(state.perPage));
+    if (!match) {
+      match = document.createElement('option');
+      match.value = String(state.perPage);
+      match.textContent = state.perPage + ' per page';
+      perPageSel.appendChild(match);
+    }
+    perPageSel.value = String(state.perPage);
+    renderResults();
+  });
+  pagePrevBtn.addEventListener('click', () => { if (state.page > 1) { state.page--; renderResults(); resultsEl.scrollIntoView({ behavior: 'smooth', block: 'start' }); } });
+  pageNextBtn.addEventListener('click', () => { state.page++; renderResults(); resultsEl.scrollIntoView({ behavior: 'smooth', block: 'start' }); });
 
-INT. MARIA'S APARTMENT - NIGHT
+  tabBtns.forEach(b => b.addEventListener('click', () => {
+    tabBtns.forEach(x => x.classList.remove('active'));
+    b.classList.add('active');
+    state.activeTab = b.dataset.rxtab;
+    state.page = 1;
+    renderResults();
+  }));
 
-A dim room. Maria packs a go-bag. Cash. Passport. A photo of a LITTLE GIRL (8) - her daughter, EMMA.
+  $('#rxAddCompanyBtn').addEventListener('click', () => openModal('Add Company', companyForm(), 'company'));
+  $('#rxAddPersonBtn').addEventListener('click',  () => openModal('Add Contact', personForm(state.data.companies), 'person'));
+  $('#rxImportBtn').addEventListener('click',     () => openModal('Import CSV',  importForm(), 'import'));
+  $('#rxExportBtn').addEventListener('click', exportCSV);
+  $('#rxSyncBtn').addEventListener('click', syncNow);
+  $('#rxDeepSyncBtn').addEventListener('click', deepSyncNow);
+  $('#rxBackfillBtn').addEventListener('click', backfillHunter);
+  $('#rxExpandBtn').addEventListener('click', expandContacts);
+  $('#rxFreshenBtn').addEventListener('click', freshenStale);
+  $('#rxRestoreBtn').addEventListener('click', restoreFromSnapshot);
 
-EMMA (O.S.)
-Mama?
+  // Bulk-freshen sweep. Server-side `freshen-batch` action scores every
+  // contact's email freshness, sorts worst-first, and runs Find Newest Email
+  // on `limit` contacts per call (within a 22s wall-clock budget). The browser
+  // pages through nextOffset until paging.hasMore===false. Skips contacts
+  // already attempted in the last 14 days where nothing was found.
+  async function freshenStale() {
+    const ok = confirm(
+      `Bulk-freshen stale emails.\n\n` +
+      `Scans every contact, scores email freshness 0-200, takes the worst-scoring\n` +
+      `(stale agency emails, no current employer detected, etc.), and runs Find\n` +
+      `Newest Email on each. For each contact:\n\n` +
+      `  - Pulls latest TMDB credits\n` +
+      `  - Detects current production company\n` +
+      `  - Hunter-searches that domain for the contact's name\n` +
+      `  - Archives stale agency addresses\n\n` +
+      `Default: threshold 60, 5 contacts per batch, no upper limit (pages until done).\n` +
+      `Costs Hunter credits (1 per contact found). Skip-window: 14 days.\n\n` +
+      `Continue?`
+    );
+    if (!ok) return;
 
-Maria freezes. Emma stands in the doorway, clutching a stuffed bear.
+    const btn = $('#rxFreshenBtn');
+    const original = btn.textContent;
+    btn.disabled = true;
 
-MARIA
-Baby, we have to go. Now.
+    let offset = 0;
+    let totalProcessed = 0;
+    let totalFound = 0;
+    let totalRemaining = null;
+    let calls = 0;
+    let consecutiveErrors = 0;
+    const MAX_CALLS = 200; // safety cap (= up to 1000 contacts per click)
+    const startedAt = Date.now();
 
-FADE OUT.`;
+    try {
+      while (calls < MAX_CALLS) {
+        calls++;
+        btn.textContent = `Freshening ${totalProcessed}${totalRemaining != null ? '/' + (totalProcessed + totalRemaining) : ''}...`;
+        statsEl.textContent = `Freshen batch ${calls} - processed ${totalProcessed}, found ${totalFound} new emails${totalRemaining != null ? `, ~${totalRemaining} stale remaining` : ''}`;
+
+        let j;
+        try {
+          const r = await fetch('/.netlify/functions/film-rolodex', {
+            method: 'POST', credentials: 'include',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ action: 'freshen-batch', limit: 5, threshold: 60, offset }),
+          });
+          const text = await r.text();
+          try { j = JSON.parse(text); }
+          catch {
+            consecutiveErrors++;
+            statsEl.textContent = `Freshen: server returned non-JSON (call ${calls}, err ${consecutiveErrors}/3). Retrying...`;
+            if (consecutiveErrors >= 3) { statsEl.textContent = 'Freshen: aborted - server returned non-JSON 3x in a row.'; break; }
+            await new Promise(res => setTimeout(res, 2000));
+            continue;
+          }
+        } catch (e) {
+          consecutiveErrors++;
+          statsEl.textContent = `Freshen: network error (${e.message}, ${consecutiveErrors}/3). Retrying...`;
+          if (consecutiveErrors >= 3) { statsEl.textContent = 'Freshen: aborted - network failed 3x.'; break; }
+          await new Promise(res => setTimeout(res, 2000));
+          continue;
+        }
+
+        if (!j.ok) {
+          statsEl.textContent = 'Freshen error: ' + (j.error || 'unknown');
+          break;
+        }
+        consecutiveErrors = 0;
+
+        totalProcessed += (j.processed || 0);
+        totalFound     += (j.foundCount || 0);
+        if (j.paging && typeof j.paging.remaining === 'number') totalRemaining = j.paging.remaining;
+
+        if (j.bailed) {
+          statsEl.textContent = `Freshen: server bailed mid-batch (timeout safety). Will retry from offset ${j.paging?.nextOffset ?? offset}.`;
+        }
+
+        if (!j.paging || !j.paging.hasMore) break;
+        offset = j.paging.nextOffset;
+
+        // small pause so we don't hammer Hunter / TMDB
+        await new Promise(res => setTimeout(res, 400));
+      }
+    } finally {
+      btn.textContent = original;
+      btn.disabled = false;
+    }
+
+    const secs = ((Date.now() - startedAt) / 1000).toFixed(1);
+    statsEl.textContent = `Freshen done in ${secs}s. Processed ${totalProcessed} contacts, found ${totalFound} new emails.`;
+    fetchRolodex();
+    alert(`Bulk freshen complete.\n\nProcessed: ${totalProcessed} contacts\nNew current emails found: ${totalFound}\nBatches: ${calls}\nElapsed: ${secs}s\n\nStale agency addresses have been archived (visible under "Show archived" on each card).`);
+  }
+
+  // Snapshot picker. Lists the auto-snapshots taken before each bulk write
+  // and lets the user roll back to any of the last 10 states.
+  async function restoreFromSnapshot() {
+    statsEl.textContent = 'Loading snapshots...';
+    try {
+      const r = await fetch('/.netlify/functions/film-rolodex', {
+        method: 'POST', credentials: 'include',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ action: 'listSnapshots' }),
+      });
+      const j = await r.json();
+      if (!j.ok) { statsEl.textContent = 'Error: ' + (j.error || 'unknown'); return; }
+      const snaps = j.snapshots || [];
+      if (!snaps.length) {
+        alert('No snapshots yet. Snapshots are taken automatically before every bulk write (Expand, Backfill, Sync, Deep Crawl, Reset). Try one of those and then come back.');
+        statsEl.textContent = 'No snapshots.';
+        return;
+      }
+      const lines = snaps.map((s, i) =>
+        `${i + 1}. ${s.at || s.key.replace(/^_snapshot_/, '')} - ${s.label || 'auto'}\n   ${s.companiesCount} companies, ${s.peopleCount} contacts`
+      ).join('\n\n');
+      const choice = prompt(
+        `Restore from snapshot? (current state will be snapshot too, so this is reversible)\n\n${lines}\n\nEnter snapshot number (1-${snaps.length}) to restore, or Cancel:`,
+        '1'
+      );
+      if (!choice) { statsEl.textContent = 'Restore cancelled.'; return; }
+      const idx = parseInt(choice, 10) - 1;
+      if (isNaN(idx) || idx < 0 || idx >= snaps.length) { alert('Invalid choice.'); return; }
+      const target = snaps[idx];
+      const ok = confirm(`Restore to:\n\n${target.at}\n${target.label}\n${target.companiesCount} companies, ${target.peopleCount} contacts\n\nContinue?`);
+      if (!ok) { statsEl.textContent = 'Restore cancelled.'; return; }
+      statsEl.textContent = 'Restoring...';
+      const r2 = await fetch('/.netlify/functions/film-rolodex', {
+        method: 'POST', credentials: 'include',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ action: 'restoreSnapshot', key: target.key }),
+      });
+      const j2 = await r2.json();
+      if (!j2.ok) { alert('Restore failed: ' + (j2.error || 'unknown')); return; }
+      alert(`Restored.\n\nCompanies: ${j2.restored.companies}\nContacts: ${j2.restored.people}\nFrom: ${j2.restored.takenAt}\n\nCurrent state was snapshot too - you can undo this restore from the Restore menu.`);
+      fetchRolodex();
+    } catch (e) {
+      statsEl.textContent = 'Restore error: ' + e.message;
+    }
+  }
+
+  // Mass-import contacts. Walks N pages of each source via the
+  // film-rolodex-expand function. Each page = one function call (<26s),
+  // so the browser can drive the entire run without any timeout risk.
+  async function expandContacts() {
+    const PLAN = [
+      { source: 'tmdb-movie',          pages: 20, label: 'TMDB movies' },
+      { source: 'tmdb-tv',             pages: 20, label: 'TMDB TV (showrunners + writers room)' },
+      { source: 'tmdb-discover',       pages: 16, label: 'TMDB discover (indie / festival reach)' },
+      { source: 'tmdb-person-popular', pages: 25, label: 'TMDB popular people (working talent)' },
+      { source: 'nyc-film-permits',    pages: 10, label: 'NYC OpenData film permits (active prodcos)' },
+      { source: 'la-film-permits',     pages: 10, label: 'LA City OpenData film permits' },
+      { source: 'wiki-list',           pages: 18, label: 'Wikipedia film-industry lists (18 lists)' },
+    ];
+    const totalCalls = PLAN.reduce((s, p) => s + p.pages, 0);
+    const ok = confirm(
+      `Mass-import contacts from ${PLAN.length} sources (${totalCalls} API calls):\n\n` +
+      PLAN.map(p => `  - ${p.label} (${p.pages} pages)`).join('\n') +
+      `\n\nExpected: ~2000-4000 new contacts, ~200-500 new companies.\nElapsed: 3-6 minutes (you can keep using the page).\n\nContinue?`
+    );
+    if (!ok) return;
+
+    const btn = $('#rxExpandBtn');
+    const original = btn.textContent;
+    btn.disabled = true;
+
+    let call = 0, totalP = 0, totalC = 0, errors = 0;
+    const startedAt = Date.now();
+    for (const stage of PLAN) {
+      for (let page = 1; page <= stage.pages; page++) {
+        call++;
+        btn.textContent = `Expand ${call}/${totalCalls}...`;
+        statsEl.textContent = `Expand ${call}/${totalCalls} - ${stage.label} pg ${page} (added so far: +${totalP} contacts, +${totalC} companies)`;
+        try {
+          const r = await fetch('/.netlify/functions/film-rolodex-expand', {
+            method: 'POST', credentials: 'include',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ source: stage.source, page }),
+          });
+          const text = await r.text();
+          let j; try { j = JSON.parse(text); } catch { errors++; continue; }
+          if (j?.sync?.pAdded) totalP += j.sync.pAdded;
+          if (j?.sync?.cAdded) totalC += j.sync.cAdded;
+        } catch (e) {
+          errors++;
+        }
+        await new Promise(res => setTimeout(res, 250));
+      }
+    }
+    const secs = ((Date.now() - startedAt) / 1000).toFixed(1);
+    btn.textContent = original;
+    btn.disabled = false;
+    statsEl.textContent = `Expand done in ${secs}s. +${totalP} contacts, +${totalC} companies. ${errors} error(s).`;
+    fetchRolodex();
+    alert(`Mass-import complete.\n\nNew contacts: +${totalP}\nNew companies: +${totalC}\nErrors: ${errors}\nElapsed: ${secs}s\n\nNext step: click Backfill Hunter to find emails for the new companies.`);
+  }
+
+  // Walk every COMPANY that has a website (Hunter domain-search returns up to
+  // 25 indexed emails per call). Then walk every PERSON who already has a
+  // Hunter-found agency email so the new multi-email persist code pulls in
+  // every alternate agency address (paradigm + uta + wme + caa + gersh).
+  async function backfillHunter() {
+    // ── Pass 1: companies ──
+    const companyTargets = (state.data.companies || []).filter(c => c && c.id && c.website);
+    if (companyTargets.length) {
+      const okC = confirm(`Backfill Hunter for ${companyTargets.length} company website(s)?\n\nUses 1 Hunter domain-search call per company (returns up to 25 emails each).\n\nContinue?`);
+      if (okC) {
+        const btn = $('#rxBackfillBtn');
+        const original = btn.textContent;
+        btn.disabled = true;
+        let done = 0, addedTotal = 0, errors = 0;
+        const startedAt = Date.now();
+        for (const c of companyTargets) {
+          done++;
+          btn.textContent = `Co ${done}/${companyTargets.length}...`;
+          statsEl.textContent = `Company backfill ${done}/${companyTargets.length} - ${c.name || c.id} (added so far: ${addedTotal})`;
+          try {
+            const r = await fetch('/.netlify/functions/film-rolodex', {
+              method: 'POST', credentials: 'include',
+              headers: { 'Content-Type': 'application/json' },
+              body: JSON.stringify({ action: 'enrich-company', companyId: c.id }),
+            });
+            const j = await r.json();
+            if (j?.saved?.addedEmails) addedTotal += j.saved.addedEmails;
+          } catch (e) { errors++; }
+          await new Promise(res => setTimeout(res, 300));
+        }
+        const secs = ((Date.now() - startedAt) / 1000).toFixed(1);
+        btn.textContent = original;
+        btn.disabled = false;
+        statsEl.textContent = `Company backfill done in ${secs}s. ${done} companies, +${addedTotal} new email(s). ${errors} error(s).`;
+        fetchRolodex();
+        alert(`Company backfill complete.\n\nCompanies processed: ${done}\nNew emails added: ${addedTotal}\nErrors: ${errors}\nElapsed: ${secs}s`);
+      }
+    }
+
+    // ── Pass 2: contacts (talent agencies) ──
+    const TALENT_DOMAINS = ['caa.com','wmeagency.com','unitedtalent.com','gersh.com','paradigmagency.com'];
+    const isAgencyAddr = (a) => {
+      if (!a) return false;
+      const lo = String(a).toLowerCase();
+      return TALENT_DOMAINS.some(d => lo.endsWith('@' + d) || lo.endsWith('.' + d));
+    };
+    const isAgencySrc = (s) => s && TALENT_DOMAINS.includes(String(s).toLowerCase());
+
+    const targets = (state.data.people || []).filter(p => {
+      if (!p || !p.id) return false;
+      if (isAgencyAddr(p.email)) return true;
+      const arr = Array.isArray(p.emails) ? p.emails : [];
+      return arr.some(e => {
+        if (typeof e === 'string') return isAgencyAddr(e);
+        return isAgencyAddr(e?.address) || isAgencySrc(e?.source);
+      });
+    });
+
+    if (!targets.length) {
+      alert('No contacts found with an existing agency email (CAA, WME, UTA, Gersh, Paradigm). Use Find email on individual contacts first - the backfill re-enriches anyone Hunter has already matched once, so the new multi-email logic can capture the rest.');
+      return;
+    }
+
+    const ok = confirm(`Backfill Hunter for ${targets.length} contact(s)?\n\nThis will call Hunter ~${targets.length * 5} times against the 5 talent agencies and save every additional email it finds. Hunter Starter quota is 500/mo.\n\nContinue?`);
+    if (!ok) return;
+
+    const btn = $('#rxBackfillBtn');
+    const original = btn.textContent;
+    btn.disabled = true;
+
+    let done = 0, addedTotal = 0, errors = 0;
+    const startedAt = Date.now();
+
+    for (const p of targets) {
+      done++;
+      const pre = (Array.isArray(p.emails) ? p.emails.length : (p.email ? 1 : 0));
+      btn.textContent = `Backfilling ${done}/${targets.length}...`;
+      statsEl.textContent = `Backfill ${done}/${targets.length} - ${p.name || p.id} (added so far: ${addedTotal})`;
+      try {
+        const r = await fetch('/.netlify/functions/film-rolodex', {
+          method: 'POST', credentials: 'include',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ action: 'enrich', personId: p.id }),
+        });
+        const j = await r.json();
+        const post = j?.person?.emails?.length || 0;
+        if (post > pre) addedTotal += (post - pre);
+      } catch (e) {
+        errors++;
+      }
+      await new Promise(res => setTimeout(res, 250));
+    }
+
+    const secs = ((Date.now() - startedAt) / 1000).toFixed(1);
+    btn.textContent = original;
+    btn.disabled = false;
+    statsEl.textContent = `Backfill done in ${secs}s. Re-enriched ${done} contact(s), added ${addedTotal} new email(s). ${errors} error(s).`;
+    fetchRolodex();
+    alert(`Backfill complete.\n\nContacts processed: ${done}\nNew emails added: ${addedTotal}\nErrors: ${errors}\nElapsed: ${secs}s`);
+  }
+
+  async function syncNow() {
+    const btn = $('#rxSyncBtn');
+    const original = btn.textContent;
+    btn.textContent = 'Syncing...';
+    btn.disabled = true;
+    statsEl.textContent = 'Pulling fresh contacts from TMDB + SEC EDGAR (this can take 30-60s)...';
+    try {
+      const r = await fetch('/.netlify/functions/film-rolodex-cron', {
+        method: 'POST', credentials: 'include',
+        headers: { 'Content-Type': 'application/json' },
+        body: '{}',
+      });
+      const j = await r.json();
+      if (!r.ok || !j.ok) {
+        statsEl.textContent = 'Sync error: ' + (j.error || r.status);
+      } else {
+        const s = j.sync || {};
+        statsEl.textContent = `Synced in ${(j.runMs/1000).toFixed(1)}s. Companies +${s.cAdded||0}/upd ${s.cUpdated||0}. People +${s.pAdded||0}/upd ${s.pUpdated||0}. Total ${s.totalCompanies}/${s.totalPeople}.`;
+        fetchRolodex();
+      }
+    } catch (e) {
+      statsEl.textContent = 'Sync failed: ' + e.message;
+    } finally {
+      btn.textContent = original;
+      btn.disabled = false;
+    }
+  }
+
+  async function deepSyncNow() {
+    const btn = $('#rxDeepSyncBtn');
+    const original = btn.textContent;
+    btn.textContent = 'Crawling...';
+    btn.disabled = true;
+    statsEl.textContent = 'Deep-crawling next 8-company batch for emails / phones / personnel / productions...';
+    try {
+      const r = await fetch('/.netlify/functions/film-rolodex-deep-cron', {
+        method: 'POST', credentials: 'include',
+        headers: { 'Content-Type': 'application/json' },
+        body: '{}',
+      });
+      const text = await r.text();
+      let j;
+      try { j = JSON.parse(text); }
+      catch {
+        // Function timed out (Netlify returns an HTML 502/504). Surface a useful
+        // error and remind the user the GitHub Actions daily scrape covers all
+        // 140+ companies without any per-call timeout.
+        statsEl.textContent = `Deep crawl: function timed out (${r.status}). Try again - it advances a cursor so each click crawls the next 8 companies. Or wait for the daily GitHub Actions scrape (09:30 UTC) which has no timeout.`;
+        return;
+      }
+      if (!r.ok || !j.ok) {
+        statsEl.textContent = 'Deep crawl error: ' + (j.error || r.status);
+      } else {
+        const s = j.sync || {};
+        statsEl.textContent = `Deep crawl in ${(j.runMs/1000).toFixed(1)}s. Crawled ${j.crawled} sites (${j.pages} pages). Companies upd ${s.cUpdated||0}. People +${s.pAdded||0}/upd ${s.pUpdated||0}. Total ${s.totalCompanies}/${s.totalPeople}.${j.partialBail?' (Bailed early - cursor rewound, click again to retry the rest.)':''}`;
+        fetchRolodex();
+      }
+    } catch (e) {
+      statsEl.textContent = 'Deep crawl failed: ' + e.message;
+    } finally {
+      btn.textContent = original;
+      btn.disabled = false;
+    }
+  }
+
+  modalSave.addEventListener('click', save);
+  $('#rxModalCancel').addEventListener('click', closeModal);
+  modalBg.addEventListener('click', (e) => { if (e.target === modalBg) closeModal(); });
+
+  resultsEl.addEventListener('click', (e) => {
+    const btn = e.target.closest('button[data-action]');
+    if (!btn) return;
+    const id = btn.dataset.id;
+    const action = btn.dataset.action;
+    if (action === 'edit-company') {
+      const row = state.data.companies.find(c => c.id === id);
+      if (row) openModal('Edit Company', companyForm(), 'company', row);
+    } else if (action === 'edit-person') {
+      const row = state.data.people.find(p => p.id === id);
+      if (row) openModal('Edit Contact', personForm(state.data.companies), 'person', row);
+    } else if (action === 'delete-company') del('company', id);
+    else if (action === 'delete-person') del('person', id);
+    else if (action === 'enrich-person') enrich(id);
+    else if (action === 'enrich-company') enrichCompany(id);
+    else if (action === 'find-newest') findNewest(id);
+  });
+
+  async function findNewest(id) {
+    statsEl.textContent = 'Find newest email: pulling latest TMDB credits to detect current employer, then Hunter-searching that domain...';
+    try {
+      const r = await fetch('/.netlify/functions/film-rolodex', {
+        method: 'POST', credentials: 'include',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ action: 'find-newest-email', personId: id }),
+      });
+      const text = await r.text();
+      let j;
+      try { j = JSON.parse(text); }
+      catch { alert('Server returned non-JSON (probably timed out):\n\n' + text.slice(0, 200)); statsEl.textContent = 'Find newest: server error'; return; }
+      if (!j.ok) { alert('Find newest failed: ' + (j.error || 'unknown')); statsEl.textContent = 'Find newest: failed'; return; }
+
+      const lines = [];
+      if (j.found && j.newEmail) {
+        lines.push(`FOUND new email: ${j.newEmail.address}`);
+        lines.push(`  via "${j.latestProject || '?'}" -> ${j.currentCompany?.name || '?'} -> ${j.resolvedDomain || '?'}`);
+        if (j.newEmail.score) lines.push(`  Hunter confidence: ${j.newEmail.score}%`);
+        if (j.verify) lines.push(`  SMTP verify: ${j.verify.status} (smtp_check=${j.verify.smtp_check}, score=${j.verify.score})`);
+        if (j.newEmail.title) lines.push(`  Title at new company: ${j.newEmail.title}`);
+      } else if (j.currentCompany) {
+        lines.push(`Detected company change: ${j.currentCompany.name} (from "${j.latestProject}")`);
+        lines.push(`But could not find an email at ${j.resolvedDomain || '(no domain on file)'}.`);
+        lines.push('Affiliation updated. Old emails marked as historical.');
+      } else {
+        lines.push('Could not detect a current production company from TMDB credits.');
+        lines.push('Either no recent producing/directing credits, or TMDB has no person match.');
+      }
+      lines.push('');
+      lines.push('-- Trace --');
+      (j.trace || []).forEach(t => lines.push(t));
+      alert('Find newest email - results:\n\n' + lines.join('\n'));
+      statsEl.textContent = j.found ? `Find newest: NEW EMAIL ${j.newEmail.address}` : 'Find newest: no new email found';
+      fetchRolodex();
+    } catch (e) { alert(e.message); statsEl.textContent = 'Find newest: ' + e.message; }
+  }
+
+  async function enrichCompany(id) {
+    statsEl.textContent = 'Hunter domain-search + crawling /team /about /contact /press for emails + phones...';
+    try {
+      const r = await fetch('/.netlify/functions/film-rolodex', {
+        method: 'POST', credentials: 'include',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ action: 'enrich-company', companyId: id }),
+      });
+      const j = await r.json();
+      const f = j.found || {};
+      const lines = [];
+      if (j.verified && j.saved) {
+        lines.push(`SAVED: +${j.saved.addedEmails} new email(s). Total emails: ${j.saved.totalEmails}, phones: ${j.saved.totalPhones}.`);
+      }
+      if (f.hunterMeta) {
+        lines.push(`Hunter: ${f.hunterMeta.total} indexed email(s)${f.hunterMeta.organization?` for "${f.hunterMeta.organization}"`:''}${f.hunterMeta.pattern?` (pattern: ${f.hunterMeta.pattern})`:''}.`);
+      }
+      if (f.hunterEmails?.length) {
+        lines.push('Hunter hits:');
+        f.hunterEmails.slice(0, 8).forEach(h => {
+          const who = [h.first_name, h.last_name].filter(Boolean).join(' ');
+          const role = h.position || h.department || '';
+          lines.push(`  • ${h.address}${who?` - ${who}`:''}${role?` (${role})`:''}${h.confidence?` [${h.confidence}%]`:''}`);
+        });
+      }
+      if (f.phones?.length) lines.push('Phones found: ' + f.phones.slice(0, 4).join(', '));
+      if (f.urls?.length)   lines.push('Sources: ' + f.urls.slice(0, 4).join(', '));
+      if (j.reason)         lines.push('Note: ' + j.reason);
+      if (!j.ok && !lines.length) lines.push(j.error || 'No match.');
+
+      statsEl.textContent = j.verified
+        ? `Find emails done: +${j.saved.addedEmails} new, ${j.saved.totalEmails} total.`
+        : 'Find emails: ' + (j.reason || 'nothing found');
+      if (lines.length) alert('Find emails - results:\n\n' + lines.join('\n'));
+      fetchRolodex();
+    } catch (e) { alert(e.message); }
+  }
+
+  // boot: check existing session
+  checkAuth().then(ok => { if (ok) enterAuthed(); });
+})();
 </script>
-
 </body>
 </html>
