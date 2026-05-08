@@ -601,7 +601,7 @@ async function runBreakdown() {
   }
 }
 
-async function pollJob(jobId, onProgress) {
+async function pollJob(jobId, onProgress, resultField = 'breakdown') {
   const startTs = Date.now();
   const TIMEOUT_MS = 12 * 60 * 1000; // 12 min ceiling
   while (Date.now() - startTs < TIMEOUT_MS) {
@@ -613,16 +613,16 @@ async function pollJob(jobId, onProgress) {
     }
     const j = await r.json();
     if (j.status === 'error') throw new Error(j.error || 'job errored');
-    if (j.status === 'complete' && j.breakdown) return j.breakdown;
+    if (j.status === 'complete' && j[resultField]) return j[resultField];
     onProgress?.(j.progress);
   }
-  throw new Error('timed out waiting for breakdown');
+  throw new Error('timed out waiting for ' + resultField);
 }
 
-// ─── Run schedule ────────────────────────────────────────────
+// ─── Run schedule (async) ────────────────────────────────────
 async function runSchedule() {
   if (!state.breakdown) { setStatus('Run breakdown first.', 'err'); return; }
-  $('scheduleView').innerHTML = '<p style="color: var(--muted);"><span class="spinner"></span> Building stripboard + shoot days...</p>';
+  $('scheduleView').innerHTML = '<p style="color: var(--muted);"><span class="spinner"></span> Queuing schedule job...</p>';
   try {
     const r = await fetch('/.netlify/functions/script-schedule', {
       method: 'POST',
@@ -635,19 +635,22 @@ async function runSchedule() {
         }
       })
     });
-    const j = await r.json();
-    if (!j.ok) throw new Error(j.error);
-    state.schedule = j.schedule;
-    renderSchedule(j.schedule);
+    const start = await r.json();
+    if (!start.ok || !start.jobId) throw new Error(start.error || 'failed to queue');
+    const schedule = await pollJob(start.jobId, (p) => {
+      $('scheduleView').innerHTML = '<p style="color: var(--muted);"><span class="spinner"></span> ' + escapeHtml(p || 'processing') + '...</p>';
+    }, 'schedule');
+    state.schedule = schedule;
+    renderSchedule(schedule);
   } catch (e) {
     $('scheduleView').innerHTML = '<div class="status err active">Schedule failed: ' + escapeHtml(e.message) + '</div>';
   }
 }
 
-// ─── Run budget ──────────────────────────────────────────────
+// ─── Run budget (async) ──────────────────────────────────────
 async function runBudget() {
   if (!state.breakdown) { setStatus('Run breakdown first.', 'err'); return; }
-  $('budgetView').innerHTML = '<p style="color: var(--muted);"><span class="spinner"></span> Building budget top sheet...</p>';
+  $('budgetView').innerHTML = '<p style="color: var(--muted);"><span class="spinner"></span> Queuing budget job...</p>';
   try {
     const r = await fetch('/.netlify/functions/script-budget', {
       method: 'POST',
@@ -664,10 +667,13 @@ async function runBudget() {
         }
       })
     });
-    const j = await r.json();
-    if (!j.ok) throw new Error(j.error);
-    state.budget = j.budget;
-    renderBudget(j.budget);
+    const start = await r.json();
+    if (!start.ok || !start.jobId) throw new Error(start.error || 'failed to queue');
+    const budget = await pollJob(start.jobId, (p) => {
+      $('budgetView').innerHTML = '<p style="color: var(--muted);"><span class="spinner"></span> ' + escapeHtml(p || 'processing') + '...</p>';
+    }, 'budget');
+    state.budget = budget;
+    renderBudget(budget);
   } catch (e) {
     $('budgetView').innerHTML = '<div class="status err active">Budget failed: ' + escapeHtml(e.message) + '</div>';
   }

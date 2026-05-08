@@ -55,4 +55,28 @@ async function getJob(jobId) {
   return rows[0] || null;
 }
 
-module.exports = { setJob, getJob };
+// Generic kickoff helper for background-function-backed pipelines.
+// kind = "dissect" | "schedule" | "budget"
+async function kickoffJob({ kind, host, proto, body }) {
+  const jobId = Date.now().toString(36) + '-' + Math.random().toString(36).slice(2, 10);
+
+  await setJob(jobId, {
+    status: 'processing',
+    kind,
+    title: body.title || (body.breakdown && body.breakdown.title) || 'Untitled',
+    progress: 'queued'
+  });
+
+  const bgUrl = `${proto || 'https'}://${host || 'markcmo.com'}/.netlify/functions/script-${kind}-background`;
+  const r = await fetch(bgUrl, {
+    method: 'POST',
+    headers: { 'content-type': 'application/json' },
+    body: JSON.stringify({ jobId, ...body })
+  });
+  if (r.status !== 202 && !r.ok) {
+    throw new Error('Background trigger failed: HTTP ' + r.status);
+  }
+  return jobId;
+}
+
+module.exports = { setJob, getJob, kickoffJob };
