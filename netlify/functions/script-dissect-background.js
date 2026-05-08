@@ -11,6 +11,17 @@
 
 const { getStore } = require('@netlify/blobs');
 
+function openStore() {
+  try {
+    return getStore({ name: 'wetyr-jobs', consistency: 'strong' });
+  } catch (e) {
+    const siteID = process.env.NETLIFY_SITE_ID || process.env.SITE_ID || '609d74ca-5f2a-4caa-aa7c-3f6922a7bcb4';
+    const token = process.env.NETLIFY_TOKEN || process.env.NETLIFY_API_TOKEN || process.env.NETLIFY_AUTH_TOKEN;
+    if (!token) throw new Error('Blobs unavailable; set NETLIFY_TOKEN PAT on site');
+    return getStore({ name: 'wetyr-jobs', siteID, token, consistency: 'strong' });
+  }
+}
+
 const MODEL = process.env.GEMINI_MODEL || 'gemini-2.5-flash';
 const API_URL = `https://generativelanguage.googleapis.com/v1beta/models/${MODEL}:generateContent`;
 const CHUNK_CHARS = 60000;
@@ -84,7 +95,7 @@ OUTPUT SCHEMA:
 
 exports.handler = async (event) => {
   const t0 = Date.now();
-  const store = getStore({ name: 'wetyr-jobs' });
+  const store = openStore();
 
   let body;
   try { body = JSON.parse(event.body || '{}'); }
