@@ -38,6 +38,36 @@ exports.handler = async (event) => {
   const ua = event.headers?.['user-agent'] || event.headers?.['User-Agent'] || null;
   const referrer = event.headers?.referer || event.headers?.Referer || null;
 
+  // ─── INTERNAL VISITOR DETECTION ─────────────────────────────────
+  // Any request that carries the admin session cookie is Mark himself
+  // previewing his own client docs. Don't pollute mc_journey_events with
+  // his views — we only want real client touches in analytics.
+  // Also short-circuit when ?test=1 / ?preview=1 query params are set,
+  // which lets Mark share a doc URL for review without recording a touch.
+  const cookieHeader = event.headers?.cookie || event.headers?.Cookie || '';
+  const hasAdminCookie = /(?:^|;\s*)mcadmin_session=/.test(cookieHeader);
+  const isPreviewParam = q.test === '1' || q.preview === '1';
+  if (hasAdminCookie || isPreviewParam) {
+    // Honor pixel/redirect contracts for non-tracking callers so the user
+    // experience is unchanged. Just don't write to mc_journey_events.
+    if (method === 'GET' && q.t === 'click') {
+      const target = decodeUrl(q.u);
+      if (target) {
+        const finalUrl = target.includes('?') ? target : target + '?_mc=' + Date.now().toString(36);
+        return { statusCode: 302, headers: { Location: finalUrl, 'Cache-Control': 'no-store' }, body: '' };
+      }
+    }
+    if (method === 'GET' && q.t === 'pixel') {
+      return {
+        statusCode: 200,
+        headers: { 'Content-Type': 'image/gif', 'Cache-Control': 'no-store, no-cache, must-revalidate' },
+        body: PIXEL_GIF.toString('base64'),
+        isBase64Encoded: true,
+      };
+    }
+    if (method === 'POST') return json(200, { ok: true, ignored: 'internal' });
+  }
+
   // ─── POST: page view from a document page ────────────────────
   if (method === 'POST') {
     let body;

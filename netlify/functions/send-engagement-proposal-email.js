@@ -141,7 +141,13 @@ function buildEmailHtml({ client, engagement, docs, siteUrl, testMode, testRecip
   // open + click to a specific touchpoint (which CTA, which client) in
   // mc_journey_events. Falls back gracefully if the tracker is down (Resend
   // delivery completes either way; tracker logs are best-effort).
+  //
+  // EXCEPTION: when testMode is true (testRecipient set, e.g. mark@markcmo.com),
+  // we DO NOT wrap links in /track. Test sends should never write to
+  // mc_journey_events because they would skew open / click / conversion metrics
+  // for the actual client engagements. Real client touches stay clean.
   const trk = (kind, target) => {
+    if (testMode) return target;
     const u = Buffer.from(target).toString('base64').replace(/\+/g,'-').replace(/\//g,'_').replace(/=+$/,'');
     const eid = engagement?.id ? `&eid=${encodeURIComponent(engagement.id)}` : '';
     return `${siteUrl}/track?t=click&c=${encodeURIComponent(slug)}&k=${encodeURIComponent(kind)}${eid}&u=${u}`;

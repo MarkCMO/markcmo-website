@@ -70,6 +70,28 @@ exports.handler = async (event) => {
 
   console.log('Resend webhook:', eventType, resendEmailId || '(no id)', recipients[0] || '(no to)');
 
+  // ─── SKIP TEST EMAILS ────────────────────────────────────────────
+  // Test sends (testRecipient flow) MUST NOT touch mc_journey_events
+  // because they would skew open / click / conversion metrics for real
+  // client engagements. Three signals identify a test:
+  //   1. Subject starts with "[TEST] " (set by both send-engagement-proposal-email
+  //      and send-template-email when testRecipient is provided).
+  //   2. Recipient is one of our internal test addresses (mark@markcmo.com,
+  //      info@wetyr.com).
+  //   3. Tags include is_test=true (future-proof).
+  // Any one of these triggers an early return with success so the webhook
+  // doesn't retry and Resend's dashboard stays clean.
+  const TEST_RECIPIENTS = new Set(['mark@markcmo.com', 'info@wetyr.com']);
+  const isTestSubject  = typeof subject === 'string' && subject.startsWith('[TEST]');
+  const isTestRecipient = recipients.some(r => r && TEST_RECIPIENTS.has(String(r).trim().toLowerCase()));
+  const tags = Array.isArray(data.tags) ? data.tags : [];
+  const isTestTag = tags.some(t => (t?.name === 'is_test' && String(t?.value).toLowerCase() === 'true'));
+  if (isTestSubject || isTestRecipient || isTestTag) {
+    console.log('  → test email, skipping mc_journey_events insert',
+      JSON.stringify({ isTestSubject, isTestRecipient, isTestTag, recipient: recipients[0], subject }));
+    return { statusCode: 200, body: 'OK (test, skipped)' };
+  }
+
   // Resolve client by recipient email (case-insensitive). One event can
   // have multiple recipients; we attribute to the first matching mc_clients row.
   let client = null;

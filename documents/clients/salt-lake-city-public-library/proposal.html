@@ -96,6 +96,59 @@
   .doc-footer p{font-size:0.82rem;line-height:1.6;margin:0.4rem 0 0;color:rgba(255,255,255,0.55);}
   .doc-footer-meta{font-family:'DM Mono',monospace;font-size:0.68rem;letter-spacing:0.15em;text-transform:uppercase;color:rgba(255,255,255,0.4);text-align:right;}
   @media(max-width:600px){.doc-footer-meta{text-align:left;}}
+
+
+  /* ─── PRINT-FRIENDLY (used for "Download PDF" via browser print-to-PDF) ─── */
+  @page { size: Letter; margin: 0.5in 0.45in; }
+  @media print {
+    html, body { background: #FFFFFF !important; }
+    body { font-size: 11pt; line-height: 1.5; color: #0A1628; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+    /* Hide UI chrome that doesn't belong in a printed proposal */
+    .doc-nav, .doc-nav-links, .doc-pdf-btn, footer.doc-footer, .cta-row, .cta-primary, .cta-secondary,
+    button, .mc-btn, [onclick] { display: none !important; }
+    /* Hero collapses to a clean block */
+    .doc-hero, .cover-hero { background: #0A1628 !important; color: #FFFFFF !important; padding: 0.55in 0.45in 0.4in !important; box-shadow: none !important; page-break-inside: avoid; }
+    .doc-hero h1, .cover-hero h1 { color: #FFFFFF !important; font-size: 26pt !important; line-height: 1.1 !important; }
+    .doc-hero h1 em, .cover-hero h1 em { color: #F97316 !important; }
+    .doc-hero-eyebrow, .cover-eyebrow { color: #93C5FD !important; }
+    /* Content fits page width */
+    .doc-body, .cover-hero-inner, .doc-hero-inner, .doc-footer-inner { max-width: 100% !important; padding: 0.3in 0 !important; margin: 0 !important; }
+    /* Cards / sections shouldn't break across pages mid-card */
+    .module, .tier, .tier-row, .qual, .doc-card, .week, .phase-block, .accept-card, .three-q, .out-box, .warn-box, .cp-note, .read-order, .featured-cta, .invest-strip, .step, .coverage-col, .prepared-card { page-break-inside: avoid; break-inside: avoid; }
+    h2, h3 { page-break-after: avoid; break-after: avoid; }
+    /* Links: keep blue + show URL after for printed reference */
+    a { color: #2563EB !important; text-decoration: none !important; }
+    a[href^='http']::after { content: " (" attr(href) ")"; font-size: 8pt; color: #94A3B8; word-break: break-all; }
+    a[href^='/']::after, a[href^='#']::after, a[href^='mailto:']::after { content: ''; }
+    /* Tighter section spacing for print */
+    .section, section { margin-bottom: 1.4em !important; }
+    p { margin-bottom: 0.7em; }
+    /* Each major section starts on a fresh page if practical */
+    .section { page-break-before: auto; }
+    /* Background gradients turn into solid colors */
+    .invest-strip, .featured-cta { background: #0A1628 !important; }
+    .tier.featured, .phase-block.featured, .tier-row.featured { background: #0A1628 !important; }
+    /* Coverage bullet matrix should print readably */
+    .coverage-grid { display: block !important; }
+    .coverage-col { margin-bottom: 0.6em; page-break-inside: avoid; }
+  }
+
+  /* "Download PDF" floating button (desktop only; hides on print) */
+  .doc-pdf-btn {
+    position: fixed; bottom: 1.5rem; right: 1.5rem; z-index: 200;
+    background: #F97316; color: #FFFFFF !important;
+    padding: 0.85rem 1.25rem; border-radius: 999px; border: 0; cursor: pointer;
+    font-family: 'Barlow', sans-serif; font-size: 0.86rem; font-weight: 700;
+    letter-spacing: 0.06em; text-transform: uppercase;
+    box-shadow: 0 8px 24px rgba(249,115,22,0.35), 0 2px 6px rgba(15,32,64,0.15);
+    transition: transform 0.15s, box-shadow 0.15s, background 0.15s;
+    display: inline-flex; align-items: center; gap: 0.5rem;
+  }
+  .doc-pdf-btn:hover { background: #EA6C0A; transform: translateY(-2px); box-shadow: 0 12px 32px rgba(249,115,22,0.45), 0 2px 6px rgba(15,32,64,0.2); }
+  .doc-pdf-btn:active { transform: translateY(0); }
+  @media (max-width: 600px) {
+    .doc-pdf-btn { bottom: 1rem; right: 1rem; padding: 0.75rem 1rem; font-size: 0.78rem; }
+  }
 </style>
 </head>
 <body>
@@ -168,7 +221,7 @@
         <h3>Discovery &amp; Alignment Engagement</h3>
         <p>2 weeks. 6&ndash;8 leadership interviews, technology inventory, decision-flow snapshot, and a 5-page "Lay of the Land" memo with three framed options for what Phase 1 should look like (lighter / standard / deeper). Includes 60-minute leadership readout.</p>
       </div>
-      <div class="price">$28,500<small>USD &middot; Fixed</small></div>
+      <div class="price">$24,500<small>USD &middot; Fixed</small></div>
     </div>
 
     <div class="tier">
@@ -177,7 +230,7 @@
         <h3>Operational Assessment</h3>
         <p>8 weeks. 15&ndash;25 stakeholder interviews, full process mapping, alignment scoring, future-state design, board-ready presentation. Delivers complete answers to the three RFQ questions above. Phase 2 proposal included as part of the deliverable.</p>
       </div>
-      <div class="price">$98,500<small>USD &middot; Fixed</small></div>
+      <div class="price">$87,500<small>USD &middot; Fixed</small></div>
     </div>
 
     <div class="tier">
@@ -186,7 +239,7 @@
         <h3>Implementation Roadmap Build</h3>
         <p>12 weeks. 24-month technology roadmap, governance &amp; decision-making playbook, prioritized initiative briefs, RFP-ready scopes for any major buys identified in Phase 1. Fixed scope.</p>
       </div>
-      <div class="price">$185,000<small>USD &middot; Fixed</small></div>
+      <div class="price">$165,000<small>USD &middot; Fixed</small></div>
     </div>
 
     <div class="tier">
@@ -195,7 +248,7 @@
         <h3>Embedded Advisory Retainer</h3>
         <p>6-month minimum. Weekly leadership office hours, monthly steering, quarterly business review, on-call advisory for staff on technology decisions. Renewable in 3-month blocks.</p>
       </div>
-      <div class="price">$27,500<small>USD &middot; / Month</small></div>
+      <div class="price">$24,500<small>USD &middot; / Month</small></div>
     </div>
 
     <p style="margin-top:1.5rem;font-size:0.92rem;color:var(--text-mid);">Each engagement is a standalone fixed-fee contract. There are no credits, discounts, or contingencies between phases. You can stop after any engagement, choose either Phase 2 path (or both, or neither), and revisit on your own timeline.</p>
@@ -233,11 +286,11 @@
     <div class="accept-card">
       <div class="lbl">Acceptance &middot; Discovery &amp; Alignment Only</div>
       <h3>Sign here to start the 2-week clock.</h3>
-      <p>By signing electronically below, Salt Lake City Public Library accepts the Discovery &amp; Alignment engagement at <strong>$28,500 USD fixed</strong>, scope and methodology per <a href="scope-of-work.html">SLC-DA-002 (Scope of Work)</a>, delivery per <a href="timeline.html">SLC-DA-003 (Timeline)</a>.</p>
+      <p>By signing electronically below, Salt Lake City Public Library accepts the Discovery &amp; Alignment engagement at <strong>$24,500 USD fixed</strong>, scope and methodology per <a href="scope-of-work.html">SLC-DA-002 (Scope of Work)</a>, delivery per <a href="timeline.html">SLC-DA-003 (Timeline)</a>.</p>
 
       <div class="terms">
         <strong>Terms of acceptance.</strong>
-        Fee: $28,500 USD, paid in full via Square invoice within 10 business days of execution.
+        Fee: $24,500 USD, paid in full via Square invoice within 10 business days of execution.
         Engagement starts when both the executed proposal and a brief intake worksheet are returned.
         Confidentiality: all information shared during the engagement is held in confidence.
         Proposal validity: 30 days from <strong>issue date</strong> shown above.
@@ -284,5 +337,9 @@
   } catch(e) {}
 })();
 </script>
+
+<button type="button" class="doc-pdf-btn" onclick="window.print()" aria-label="Download as PDF">
+  &#128196; Download PDF
+</button>
 </body>
 </html>
