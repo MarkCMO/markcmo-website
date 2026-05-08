@@ -7,18 +7,7 @@
 // POST { scriptText, title?, format? }
 // -> { ok: true, jobId, status: 'processing' }
 
-const { getStore } = require('@netlify/blobs');
-
-function openStore() {
-  try {
-    return getStore({ name: 'wetyr-jobs', consistency: 'strong' });
-  } catch (e) {
-    const siteID = process.env.NETLIFY_SITE_ID || process.env.SITE_ID || '609d74ca-5f2a-4caa-aa7c-3f6922a7bcb4';
-    const token = process.env.NETLIFY_TOKEN || process.env.NETLIFY_API_TOKEN || process.env.NETLIFY_AUTH_TOKEN;
-    if (!token) throw new Error('Blobs unavailable; set NETLIFY_TOKEN PAT on site or upgrade context');
-    return getStore({ name: 'wetyr-jobs', siteID, token, consistency: 'strong' });
-  }
-}
+const { setJob } = require('./_wetyr_jobs');
 
 exports.handler = async (event) => {
   if (event.httpMethod === 'OPTIONS') return { statusCode: 204, headers: cors(), body: '' };
@@ -36,12 +25,10 @@ exports.handler = async (event) => {
 
   // Mark job as queued so polling sees it immediately.
   try {
-    const store = openStore();
-    await store.setJSON(jobId, {
+    await setJob(jobId, {
       status: 'processing',
       kind: 'dissect',
       title: body.title || 'Untitled',
-      createdAt: new Date().toISOString(),
       progress: 'queued'
     });
   } catch (e) {
