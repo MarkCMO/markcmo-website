@@ -13,8 +13,8 @@ const { setJob } = require('./_wetyr_jobs');
 
 const MODEL = process.env.GEMINI_MODEL || 'gemini-2.5-flash';
 const API_URL = `https://generativelanguage.googleapis.com/v1beta/models/${MODEL}:generateContent`;
-const CHUNK_CHARS = 40000;
-const MAX_OUTPUT_TOKENS = 8192;
+const CHUNK_CHARS = 30000;
+const MAX_OUTPUT_TOKENS = 16384;
 const MAX_CONCURRENCY = 4;
 const RETRY_MS = 2500;
 
@@ -115,12 +115,16 @@ exports.handler = async (event) => {
     const tasks = [
       () => callGemini(key, SYSTEM_META, `Title hint: "${userTitle}". Format hint: ${userFormat}.\n\n${metaInput}`),
       ...chunks.map((c, i) => () => {
-        const sceneCount = (c.match(/^\s*(?:INT\.?\s|EXT\.?\s|INT\.?\/EXT\.?\s|I\/E\.?\s)/gmi) || []).length;
+        // Pre-number each scene heading. Gemini's job becomes "fill in details
+        // for each numbered scene", which it does reliably - vs. "find scenes
+        // for me", which it skips on.
+        const numbered = numberScenesInChunk(c);
         const userMsg =
           `Chunk ${i + 1} of ${chunks.length}.\n` +
-          `This chunk contains EXACTLY ${sceneCount} scene headings (lines starting with INT. EXT. INT/EXT. or I/E.). ` +
-          `Your "scenes" array MUST contain ${sceneCount} entries - one per heading, in order. ` +
-          `Do not skip, summarize, or merge scenes. Even short scenes get their own entry.\n\n${c}`;
+          `This chunk has been pre-numbered with ${numbered.count} scenes labeled [SCENE_001] through [SCENE_${String(numbered.count).padStart(3, '0')}]. ` +
+          `Your "scenes" array MUST contain EXACTLY ${numbered.count} entries - one per pre-numbered scene, in order. ` +
+          `Use the numeric label as the scene "number" field (e.g. "SCENE_001"). ` +
+          `Do not skip, merge, or invent scenes.\n\n${numbered.text}`;
         return callGemini(key, SYSTEM_CHUNK, userMsg);
       })
     ];
@@ -173,6 +177,20 @@ function packChunks(parts, maxChars, sep) {
   }
   if (current) chunks.push(current);
   return chunks.length ? chunks : [parts.join(sep)];
+}
+
+// Inject [SCENE_NNN] labels above each INT./EXT. heading in a chunk. The label
+// becomes a forcing function for the model: it can't omit a scene without
+// leaving a gap in the numbering, which makes incomplete output obvious.
+function numberScenesInChunk(text) {
+  const sceneRegex = /^(\s*)(INT\.?\s|EXT\.?\s|INT\.?\/EXT\.?\s|I\/E\.?\s|INT\s+EXT)/gmi;
+  let count = 0;
+  const labeled = text.replace(sceneRegex, (match, leading, kind) => {
+    count += 1;
+    const label = `[SCENE_${String(count).padStart(3, '0')}]`;
+    return `${leading}${label} ${kind}`;
+  });
+  return { count, text: labeled };
 }
 
 function summariseForMeta(text) {
