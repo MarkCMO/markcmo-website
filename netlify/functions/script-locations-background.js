@@ -71,21 +71,29 @@ exports.handler = async (event) => {
 
     await setJob(jobId, { progress: 'analyzing locations' });
 
-    const locations = breakdown.locations?.length
+    const allLocs = breakdown.locations?.length
       ? breakdown.locations
       : aggregateLocationsFromScenes(breakdown.scenes);
+
+    // Cap to top 30 by eighths to keep output within Gemini's max token budget.
+    // For features with hundreds of locations, the long tail is one-line scenes
+    // that don't warrant a full scout packet.
+    const locations = [...allLocs]
+      .sort((a, b) => (b.totalEighths || 0) - (a.totalEighths || 0))
+      .slice(0, 30);
 
     const compact = {
       title: breakdown.title,
       shootState: context.shootState || 'CA',
       tier: context.budgetTier || 'indie',
+      truncationNote: allLocs.length > 30 ? `Top 30 of ${allLocs.length} locations by activity. Long-tail one-scene locations omitted.` : null,
       locations
     };
 
     const result = await callGeminiJSON({
       key, system: SYSTEM_PROMPT,
       user: 'Generate scout report and permit roadmap.\n\nCONTEXT:\n' + JSON.stringify(compact, null, 2),
-      maxOutputTokens: 16384
+      maxOutputTokens: 32768
     });
 
     await setJob(jobId, { status: 'complete', progress: 'done', locations: { ...result, generatedAt: new Date().toISOString() } });
