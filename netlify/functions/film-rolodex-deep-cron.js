@@ -5,7 +5,7 @@
 // Contact / Press / News / Slate" paths and regex-extracts:
 //   - phone numbers (NANP + intl)
 //   - email addresses (mailto + plain text + obfuscated)
-//   - personnel names with titles  (from "Name — Title" inline patterns)
+//   - personnel names with titles  (from "Name, Title" inline patterns)
 //   - production credits (titles in italics/quotes)
 // Writes harvested rows back to the same Netlify Blobs `film-rolodex` store
 // that the rolodex UI reads from. Idempotent: dedupes by slug.

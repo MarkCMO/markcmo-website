@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<meta name="robots" content="noindex,nofollow"/>
+<title>Client Portal · MarkCMO</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Barlow:wght@400;500;600;700;800&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet"/>
+<style>
+:root { --navy:#0A1628; --blue:#2563EB; --orange:#F97316; --white:#FFFFFF; --off-white:#F8FAFC; --text:#1E293B; --muted:#64748B; --border:#E2E8F0; --green:#10B981; --red:#DC2626; }
+* { box-sizing: border-box; }
+body { margin:0; padding:0; background:var(--off-white); color:var(--text); font-family:'Barlow',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif; line-height:1.5; }
+a { color:var(--blue); text-decoration:none; }
+a:hover { color:#1D4ED8; }
+.wrap { max-width:880px; margin:0 auto; padding:2rem 1.25rem 4rem; }
+.header { background:linear-gradient(135deg,var(--navy) 0%,#0F2040 50%,#162A4A 100%); color:#fff; padding:2.5rem 2rem; border-radius:16px; margin-bottom:1.5rem; box-shadow:0 24px 48px rgba(10,22,40,0.15); }
+.header .eyebrow { font-family:'DM Mono',monospace; font-size:0.7rem; letter-spacing:0.22em; text-transform:uppercase; color:#93C5FD; font-weight:600; margin-bottom:0.6rem; }
+.header h1 { font-family:'Bebas Neue',Impact,sans-serif; font-size:2.5rem; letter-spacing:0.02em; font-weight:400; margin:0 0 0.4rem; line-height:1.05; color:#fff; }
+.header .dba { font-size:0.95rem; color:#CBD5E1; margin-bottom:0.4rem; }
+.header .contact { font-size:0.86rem; color:#93C5FD; }
+.section { background:#fff; border:1px solid var(--border); border-radius:14px; padding:1.5rem 1.75rem; margin-bottom:1.25rem; box-shadow:0 4px 16px rgba(10,22,40,0.04); }
+.section h2 { font-family:'Bebas Neue',Impact,sans-serif; font-size:1.35rem; letter-spacing:0.025em; font-weight:400; color:var(--navy); margin:0 0 0.4rem; line-height:1.05; }
+.section .eyebrow { font-family:'DM Mono',monospace; font-size:0.62rem; letter-spacing:0.22em; text-transform:uppercase; color:var(--blue); font-weight:600; margin-bottom:0.3rem; }
+.engagement { padding:1rem 1.25rem; background:var(--off-white); border-radius:12px; margin-bottom:1rem; border:1px solid var(--border); }
+.engagement:last-child { margin-bottom:0; }
+.engagement-head { display:flex; justify-content:space-between; align-items:flex-start; gap:1rem; flex-wrap:wrap; margin-bottom:0.85rem; }
+.engagement-name { font-weight:700; color:var(--navy); font-size:1.05rem; }
+.fee { font-family:'Bebas Neue',Impact,sans-serif; font-size:1.4rem; color:var(--blue); letter-spacing:0.02em; }
+.fee small { font-size:0.7rem; color:var(--muted); display:block; font-family:'DM Mono',monospace; letter-spacing:0.1em; }
+.pill { display:inline-block; padding:0.2rem 0.6rem; border-radius:999px; font-family:'DM Mono',monospace; font-size:0.66rem; letter-spacing:0.08em; text-transform:lowercase; font-weight:700; }
+.pill.lead, .pill.draft { background:#F1F5F9; color:#475569; }
+.pill.proposal_sent { background:#DBEAFE; color:#1D4ED8; }
+.pill.signed { background:#EDE9FE; color:#5B21B6; }
+.pill.invoiced, .pill.sent { background:#FED7AA; color:#9A3412; }
+.pill.paid, .pill.delivered, .pill.executed { background:#D1FAE5; color:#065F46; }
+.pill.delivering { background:#EDE9FE; color:#5B21B6; }
+.timeline { display:grid; grid-template-columns:repeat(5,1fr); gap:0.5rem; margin-top:0.85rem; }
+@media(max-width:600px) { .timeline { grid-template-columns:repeat(5,1fr); gap:0.3rem; } }
+.timeline-step { background:#fff; padding:0.6rem 0.5rem; border-radius:8px; border:1px solid var(--border); text-align:center; font-size:0.7rem; }
+.timeline-step .label { font-family:'DM Mono',monospace; font-size:0.56rem; letter-spacing:0.12em; text-transform:uppercase; color:var(--muted); margin-bottom:0.2rem; }
+.timeline-step .v { font-weight:700; color:var(--navy); font-size:0.78rem; }
+.timeline-step.done { background:#ECFDF5; border-color:#10B981; }
+.timeline-step.done .v { color:var(--green); }
+.timeline-step.done .label { color:#065F46; }
+.btn { display:inline-block; padding:0.85rem 1.5rem; border-radius:10px; font-family:'Barlow',sans-serif; font-size:0.85rem; font-weight:700; letter-spacing:0.05em; text-transform:uppercase; cursor:pointer; border:none; text-decoration:none; transition:all 0.15s; margin:0.3rem 0.4rem 0 0; }
+.btn.primary { background:var(--orange); color:#fff; box-shadow:0 4px 14px rgba(249,115,22,0.3); }
+.btn.primary:hover { background:#EA6C0A; transform:translateY(-1px); color:#fff; }
+.btn.outline { background:#fff; color:var(--text); border:1.5px solid var(--border); }
+.btn.outline:hover { border-color:var(--blue); color:var(--blue); }
+.btn.green { background:var(--green); color:#fff; }
+.docs { display:grid; grid-template-columns:repeat(auto-fit,minmax(220px,1fr)); gap:0.6rem; margin-top:0.85rem; }
+.doc-card { background:#fff; padding:0.85rem 1rem; border:1px solid var(--border); border-radius:10px; transition:all 0.15s; cursor:pointer; }
+.doc-card:hover { border-color:var(--blue); transform:translateY(-2px); box-shadow:0 8px 20px rgba(10,22,40,0.08); }
+.doc-card .id { font-family:'DM Mono',monospace; font-size:0.62rem; letter-spacing:0.1em; color:var(--blue); font-weight:600; margin-bottom:0.2rem; }
+.doc-card .name { font-weight:700; color:var(--navy); font-size:0.86rem; margin-bottom:0.2rem; }
+.invoice-block { background:#FFFBEB; border:1px solid #F59E0B; border-radius:12px; padding:1.25rem 1.5rem; margin-top:1rem; }
+.invoice-block.paid { background:#ECFDF5; border-color:var(--green); }
+.invoice-amount { font-family:'Bebas Neue',Impact,sans-serif; font-size:2.4rem; color:var(--navy); letter-spacing:0.02em; line-height:1; }
+.invoice-meta { font-family:'DM Mono',monospace; font-size:0.7rem; color:var(--muted); margin-top:0.3rem; letter-spacing:0.05em; }
+.delivery-clock { background:#EFF6FF; border:1px solid rgba(37,99,235,0.25); border-radius:12px; padding:1.25rem 1.5rem; margin-top:1rem; text-align:center; }
+.delivery-clock.overdue { background:#FEE2E2; border-color:var(--red); }
+.delivery-clock .lab { font-family:'DM Mono',monospace; font-size:0.66rem; letter-spacing:0.18em; text-transform:uppercase; color:var(--blue); font-weight:600; }
+.delivery-clock.overdue .lab { color:var(--red); }
+.delivery-clock .v { font-family:'Bebas Neue',Impact,sans-serif; font-size:2.2rem; color:var(--navy); letter-spacing:0.02em; line-height:1; margin-top:0.3rem; }
+.delivery-clock.overdue .v { color:var(--red); }
+.footer { text-align:center; font-size:0.78rem; color:var(--muted); margin-top:2.5rem; }
+.loading { text-align:center; padding:4rem 2rem; color:var(--muted); }
+.error { background:#FEE2E2; border:1px solid var(--red); border-radius:12px; padding:1.25rem; color:#991B1B; }
+.error h2 { margin:0 0 0.4rem; color:#991B1B; font-family:'Bebas Neue',Impact,sans-serif; font-size:1.4rem; font-weight:400; }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div id="content">
+    <div class="loading">Loading your engagement…</div>
+  </div>
+  <div class="footer">
+    Mark Gabrielli &middot; Fractional CMO &middot; <a href="mailto:mark@markcmo.com">mark@markcmo.com</a>
+  </div>
+</div>
+
+<script>
+(function(){
+  const SLUG = (location.pathname.replace(/\/$/, '').split('/').pop() || '').toLowerCase();
+  const root = document.getElementById('content');
+
+  function escHtml(s) { return String(s ?? '').replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c])); }
+  function fmtUSD(n) { const v=Number(n); if(!isFinite(v)) return '$0'; return '$'+v.toLocaleString('en-US',{minimumFractionDigits:0,maximumFractionDigits:2}); }
+  function fmtDate(s) { if(!s) return '-'; try { return new Date(s).toLocaleDateString('en-US',{month:'short',day:'numeric',year:'numeric'}); } catch { return '-'; } }
+  function fmtDateTime(s) { if(!s) return '-'; try { return new Date(s).toLocaleString('en-US',{month:'short',day:'numeric',hour:'numeric',minute:'2-digit',timeZoneName:'short'}); } catch { return '-'; } }
+
+  function render(data) {
+    const c = data.client || {};
+    const engs = data.engagements || [];
+    const html = `
+      <div class="header">
+        <div class="eyebrow">Engagement Portal</div>
+        <h1>${escHtml(c.legal_name || 'Client')}</h1>
+        ${c.dba ? `<div class="dba">d/b/a ${escHtml(c.dba)}</div>` : ''}
+        <div class="contact">${escHtml(c.primary_contact_name || '')}</div>
+      </div>
+
+      ${engs.length === 0 ? `<div class="section"><h2>No active engagements</h2><p style="color:#64748B;font-size:.9rem;">Reach out to <a href="mailto:mark@markcmo.com">mark@markcmo.com</a> to get started.</p></div>` :
+        engs.map(eng => {
+          const stages = [
+            { key:'proposed', label:'Proposed', date:eng.proposed_at },
+            { key:'signed', label:'Signed', date:eng.accepted_at },
+            { key:'paid', label:'Paid', date:eng.paid_at },
+            { key:'started', label:'Started', date:eng.started_at },
+            { key:'delivered', label:'Delivered', date:eng.delivery_due_at && eng.status==='delivered' ? eng.delivery_due_at : null },
+          ];
+          const inv = eng.invoice;
+          const showSignButton = ['proposal_sent','draft','lead'].includes(eng.status) && !eng.accepted_at;
+          const showPayButton = inv && inv.status === 'sent';
+          const showClock = eng.paid_at && !['delivered','closed','archived'].includes(eng.status) && eng.delivery_due_at;
+          return `
+            <div class="section">
+              <div class="eyebrow">Engagement</div>
+              <div class="engagement-head">
+                <div>
+                  <div class="engagement-name">${escHtml(eng.name)}</div>
+                  <div style="margin-top:.4rem;"><span class="pill ${escHtml(eng.status||'')}">${escHtml(eng.status||'')}</span></div>
+                </div>
+                <div class="fee">${fmtUSD(eng.fee_usd)}<small>${eng.delivery_window_hrs ? eng.delivery_window_hrs + ' HR DELIVERY' : 'CUSTOM'}</small></div>
+              </div>
+              <div class="timeline">
+                ${stages.map(st => `<div class="timeline-step ${st.date?'done':''}"><div class="label">${escHtml(st.label)}</div><div class="v">${fmtDate(st.date)}</div></div>`).join('')}
+              </div>
+              ${showClock ? `<div class="delivery-clock ${eng.overdue?'overdue':''}">
+                <div class="lab">${eng.overdue?'Overdue · please contact mark immediately':'Delivery due'}</div>
+                <div class="v">${fmtDateTime(eng.delivery_due_at)}</div>
+              </div>` : ''}
+              <div style="margin-top:.85rem;">
+                ${showSignButton ? `<a href="${escHtml(eng.urls.sign)}" class="btn primary">Accept &amp; Sign Electronically &rarr;</a>` : ''}
+                ${showPayButton ? `<a href="${escHtml(inv.pay_url)}" class="btn primary">Pay ${fmtUSD(inv.amount_usd)} &rarr;</a>` : ''}
+                <a href="${escHtml(eng.urls.cover)}" class="btn outline">Open Document Package</a>
+              </div>
+              ${eng.documents && eng.documents.length ? `
+                <div style="margin-top:1.25rem;">
+                  <div class="eyebrow" style="margin-bottom:.4rem;">Documents</div>
+                  <div class="docs">
+                    ${eng.documents.map(d => {
+                      const url = d.doc_type === 'proposal' ? eng.urls.proposal :
+                                  d.doc_type === 'sow' ? eng.urls.sow :
+                                  d.doc_type === 'timeline' ? eng.urls.timeline :
+                                  eng.urls.cover;
+                      return `<a class="doc-card" href="${escHtml(url)}">
+                        <div class="id">${escHtml(d.doc_id)}</div>
+                        <div class="name">${escHtml(d.doc_name)}</div>
+                        <div style="margin-top:.3rem;"><span class="pill ${escHtml(d.status||'')}">${escHtml(d.status||'')}</span></div>
+                      </a>`;
+                    }).join('')}
+                  </div>
+                </div>` : ''}
+              ${inv ? `
+                <div class="invoice-block ${inv.status==='paid'?'paid':''}">
+                  <div style="display:flex;justify-content:space-between;align-items:flex-start;gap:1rem;flex-wrap:wrap;">
+                    <div>
+                      <div class="eyebrow">Invoice ${inv.status==='paid'?'· paid':inv.status==='sent'?'· awaiting payment':''}</div>
+                      <div class="invoice-amount">${fmtUSD(inv.amount_usd)}</div>
+                      <div class="invoice-meta">${inv.status==='paid' ? 'Paid ' + fmtDate(inv.paid_at) : 'Sent ' + fmtDate(inv.sent_at)}</div>
+                    </div>
+                    ${inv.status==='sent' ? `<a href="${escHtml(inv.pay_url)}" class="btn primary">Pay Now</a>` : '<div style="font-size:1.6rem;color:#10B981;">✓</div>'}
+                  </div>
+                </div>` : ''}
+            </div>
+          `;
+        }).join('')}
+    `;
+    root.innerHTML = html;
+  }
+
+  function showError(msg) {
+    root.innerHTML = `<div class="error"><h2>${escHtml(msg)}</h2><p>If you think this is wrong, please reply to your most recent email from <a href="mailto:mark@markcmo.com">mark@markcmo.com</a>.</p></div>`;
+  }
+
+  if (!SLUG || !/^[a-z0-9-]+$/.test(SLUG)) { showError('Invalid portal URL'); return; }
+
+  // Track page view via the existing tracker
+  try {
+    const sk='mc_jsid'; const sid=sessionStorage.getItem(sk)||('s_'+Math.random().toString(36).slice(2)+Date.now().toString(36));
+    sessionStorage.setItem(sk,sid);
+    fetch('/.netlify/functions/track',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({t:'view',client:SLUG,page:'cover',session_id:sid,url:location.pathname,title:document.title}),keepalive:true}).catch(()=>{});
+  } catch {}
+
+  fetch(`/.netlify/functions/client-portal-data?slug=${encodeURIComponent(SLUG)}`)
+    .then(r => { if (!r.ok) throw new Error(r.status === 404 ? 'Portal not found' : 'HTTP ' + r.status); return r.json(); })
+    .then(render)
+    .catch(e => showError(e.message));
+})();
+</script>
+</body>
+</html>

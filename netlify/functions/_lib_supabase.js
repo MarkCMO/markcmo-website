@@ -102,7 +102,32 @@ const corsHeaders = (event, allowed = ['https://markcmo.com']) => {
   };
 };
 
+// ─── Build the CC recipient list for client-facing emails ──────
+// Always includes Mark's Gmail (marklgabriellijr@gmail.com) so he has
+// a personal copy of every customer touchpoint. Then merges in
+// mc_clients.cc_emails (which the admin can edit per-client to loop in
+// CFO, partner, EA, etc).
+//
+// Pass null/undefined client to get just Mark's Gmail.
+// Pass [] for cc_emails to suppress all per-client CCs but keep Mark.
+function buildClientCcList(client) {
+  const out = new Set(['marklgabriellijr@gmail.com']);
+  if (Array.isArray(client?.cc_emails)) {
+    for (const e of client.cc_emails) {
+      if (typeof e === 'string' && /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(e.trim())) {
+        out.add(e.trim().toLowerCase());
+      }
+    }
+  }
+  // Don't CC the primary recipient
+  if (client?.primary_contact_email) {
+    out.delete(String(client.primary_contact_email).trim().toLowerCase());
+  }
+  return Array.from(out);
+}
+
 module.exports = {
   sb, sbSelect, sbUpdate, sbInsert,
   verifyAdminToken, parseCookies, isAdminAuthed, corsHeaders,
+  buildClientCcList,
 };

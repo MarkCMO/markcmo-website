@@ -569,9 +569,9 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js" crossorigin="anonymous" defer></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js" crossorigin="anonymous" defer></script>
 <style>
-/* â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+/* ══════════════════════════════════════════════
    MARKCMO - DARK AUTHORITY DESIGN 2026
-   â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• */
+   ══════════════════════════════════════════════ */
 
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 html { scroll-behavior: smooth; overflow-x: hidden; }
@@ -601,7 +601,7 @@ ul { list-style: none; }
   --text3:   #52525B;
 }
 
-/* â”€â”€â”€ NAV â”€â”€â”€ */
+/* ─── NAV ─── */
 .nav {
   position: fixed; top: 0; left: 0; right: 0; z-index: 100;
   height: 64px; padding: 0 5vw;
@@ -653,7 +653,7 @@ ul { list-style: none; }
 .mobile-drawer.open { display: flex; }
 .mobile-drawer a { font-size: 1.2rem; font-weight: 600; color: #fff; padding: 0.6rem 0; border-bottom: 1px solid var(--border); }
 
-/* â”€â”€â”€ HERO â”€â”€â”€ */
+/* ─── HERO ─── */
 .hero {
   min-height: 100vh; padding-top: 64px;
   display: flex; flex-direction: column; justify-content: center;
@@ -800,7 +800,7 @@ ul { list-style: none; }
 }
 .hero-float-stat span { font-size: 0.65rem; color: var(--text3); display: block; margin-top: 3px; }
 
-/* â”€â”€â”€ MARQUEE â”€â”€â”€ */
+/* ─── MARQUEE ─── */
 .marquee-band {
   border-top: 1px solid var(--border);
   border-bottom: 1px solid var(--border);
@@ -815,7 +815,7 @@ ul { list-style: none; }
 }
 @keyframes marquee { from{transform:translateX(0)} to{transform:translateX(-50%)} }
 
-/* â”€â”€â”€ STATS â”€â”€â”€ */
+/* ─── STATS ─── */
 .stats-section {
   background: var(--bg2);
   border-bottom: 1px solid var(--border);
@@ -839,7 +839,7 @@ ul { list-style: none; }
 .stat-block-num span { color: var(--accent); }
 .stat-block-label { font-size: 0.8125rem; color: var(--text3); font-weight: 500; }
 
-/* â”€â”€â”€ SERVICES â”€â”€â”€ */
+/* ─── SERVICES ─── */
 .services-section { padding: 8rem clamp(1.5rem,6vw,6rem); background: var(--bg); }
 .services-inner { max-width: 1440px; margin: 0 auto; }
 .section-eyebrow {
@@ -904,7 +904,7 @@ ul { list-style: none; }
   font-size: 0.85rem; color: var(--text2);
   display: flex; align-items: center; gap: 8px;
 }
-.svc-list-item::before { content:'â†’'; color:var(--accent); font-size:0.75rem; flex-shrink:0; }
+.svc-list-item::before { content:'&rarr;'; color:var(--accent); font-size:0.75rem; flex-shrink:0; }
 .svc-link {
   display: inline-flex; align-items: center; gap: 6px;
   font-size: 0.875rem; font-weight: 600; color: var(--accent);
@@ -912,7 +912,7 @@ ul { list-style: none; }
 }
 .svc-link:hover { gap: 10px; }
 
-/* â”€â”€â”€ ABOUT â”€â”€â”€ */
+/* ─── ABOUT ─── */
 .about-section { padding: 8rem clamp(1.5rem,6vw,6rem); background: var(--bg2); }
 .about-inner {
   max-width: 1440px; margin: 0 auto;
@@ -993,7 +993,7 @@ ul { list-style: none; }
 }
 .skill:hover { border-color:rgba(201,168,76,0.3); color:var(--accent); }
 
-/* â”€â”€â”€ TESTIMONIALS â”€â”€â”€ */
+/* ─── TESTIMONIALS ─── */
 .testi-section { padding: 8rem clamp(1.5rem,6vw,6rem); background: var(--bg); }
 .testi-inner { max-width: 1440px; margin: 0 auto; }
 .testi-header { display:flex; justify-content:space-between; align-items:flex-end; margin-bottom:3.5rem; flex-wrap:wrap; gap:1rem; }
@@ -1019,7 +1019,7 @@ ul { list-style: none; }
 .testi-name { font-weight:700; font-size:0.9rem; color:#fff; }
 .testi-role { font-size:0.75rem; color:var(--text3); margin-top:1px; }
 
-/* â”€â”€â”€ RESULTS TICKER â”€â”€â”€ */
+/* ─── RESULTS TICKER ─── */
 .results-ticker {
   background: linear-gradient(135deg, #0A1030 0%, #070C1E 100%);
   border-top: 1px solid rgba(201,168,76,0.2);
@@ -1051,7 +1051,7 @@ ul { list-style: none; }
   background: linear-gradient(to bottom, transparent, rgba(201,168,76,0.3), transparent);
 }
 
-/* â”€â”€â”€ MAGNET STRATEGY â”€â”€â”€ */
+/* ─── MAGNET STRATEGY ─── */
 .magnet-section {
   padding: 8rem clamp(1.5rem,6vw,6rem);
   background: var(--bg2);
@@ -1137,7 +1137,7 @@ ul { list-style: none; }
   width: 5px; height: 5px; border-radius: 50%;
   background: var(--cyan);
 }
-/* â”€â”€â”€ MAGNET LETTER CARDS â”€â”€â”€ */
+/* ─── MAGNET LETTER CARDS ─── */
 .magnet-letters {
   display: grid;
   grid-template-columns: repeat(6, 1fr);
@@ -1229,7 +1229,7 @@ ul { list-style: none; }
   font-weight: 700;
 }
 .magnet-letter-card:hover .mlc-arrow { opacity: 1; transform: translateX(5px); }
-/* â”€â”€â”€ MAGNET PHILOSOPHY STRIP â”€â”€â”€ */
+/* ─── MAGNET PHILOSOPHY STRIP ─── */
 .magnet-philosophy {
   background: var(--bg3);
   border: 1px solid var(--border);
@@ -1292,7 +1292,7 @@ ul { list-style: none; }
   white-space: nowrap;
 }
 
-/* â”€â”€â”€ PROCESS â”€â”€â”€ */
+/* ─── PROCESS ─── */
 .process-section {
   padding: 8rem clamp(1.5rem,6vw,6rem);
   background: var(--bg);
@@ -1354,7 +1354,7 @@ ul { list-style: none; }
   display: flex; gap: 1rem; margin-top: 3rem; flex-wrap: wrap; align-items: center;
 }
 
-/* â”€â”€â”€ PROOF STRIP â”€â”€â”€ */
+/* ─── PROOF STRIP ─── */
 .proof-strip-section {
   padding: 8rem clamp(1.5rem,6vw,6rem);
   background: var(--bg2);
@@ -1409,7 +1409,7 @@ ul { list-style: none; }
   border-top: 1px solid var(--border); padding-top: 1rem;
 }
 
-/* â”€â”€â”€ INDUSTRIES â”€â”€â”€ */
+/* ─── INDUSTRIES ─── */
 .industries-section { padding:6rem 6vw; background:var(--bg); border-top:1px solid var(--border); }
 .industries-inner { max-width:1440px; margin:0 auto; }
 .industries-header { display:flex; justify-content:space-between; align-items:flex-end; margin-bottom:2.5rem; flex-wrap:wrap; gap:1rem; }
@@ -1422,7 +1422,7 @@ ul { list-style: none; }
 }
 .ind-tag:hover { border-color:rgba(201,168,76,0.3); color:var(--accent); background:rgba(201,168,76,0.07); }
 
-/* â”€â”€â”€ SCORECARD â”€â”€â”€ */
+/* ─── SCORECARD ─── */
 .quiz-section { padding:8rem 6vw; background:var(--bg); }
 .quiz-wrap { max-width:700px; margin:0 auto; }
 .quiz-intro { text-align:center; margin-bottom:3rem; }
@@ -1487,7 +1487,7 @@ ul { list-style: none; }
 .q-submit:hover { opacity:0.9; transform:translateY(-2px); }
 .q-privacy { font-size:0.75rem; color:var(--text3); margin-top:0.75rem; }
 
-/* â”€â”€â”€ CTA / BOOK â”€â”€â”€ */
+/* ─── CTA / BOOK ─── */
 .cta-section {
   padding:8rem 6vw; background:var(--bg2);
   position:relative; overflow:hidden;
@@ -1513,7 +1513,7 @@ ul { list-style: none; }
   margin-bottom:2.5rem;
 }
 .cta-perk { font-size:0.875rem; color:var(--text2); display:flex; align-items:center; gap:6px; }
-.cta-perk::before { content:'âœ“'; color:var(--accent); font-weight:700; font-size:0.8rem; }
+.cta-perk::before { content:'&check;'; color:var(--accent); font-weight:700; font-size:0.8rem; }
 .cta-actions { display:flex; justify-content:center; flex-wrap:wrap; gap:1rem; margin-bottom:0; }
 /* Contact form */
 .cta-split {
@@ -1582,7 +1582,7 @@ textarea.cta-form-input { resize:vertical; min-height:100px; }
   .cta-form-row { grid-template-columns:1fr; }
 }
 
-/* â”€â”€â”€ BLOG â”€â”€â”€ */
+/* ─── BLOG ─── */
 .blog-section { padding:8rem 6vw; background:var(--bg); }
 .blog-inner { max-width:1440px; margin:0 auto; }
 .blog-header { display:flex; justify-content:space-between; align-items:flex-end; margin-bottom:3rem; flex-wrap:wrap; gap:1rem; }
@@ -1626,7 +1626,7 @@ textarea.cta-form-input { resize:vertical; min-height:100px; }
 }
 .blog-meta { font-size:0.75rem; color:var(--text3); }
 
-/* â”€â”€â”€ FOOTER â”€â”€â”€ */
+/* ─── FOOTER ─── */
 footer { background:var(--bg2); border-top:1px solid var(--border); }
 .footer-main {
   max-width:1400px; margin:0 auto; padding:4rem clamp(1.5rem,6vw,6rem) 3rem;
@@ -1667,7 +1667,7 @@ footer { background:var(--bg2); border-top:1px solid var(--border); }
 .footer-bar-links a { font-size:0.8rem; color:var(--text3); transition:color 0.15s; }
 .footer-bar-links a:hover { color:#fff; }
 
-/* â”€â”€â”€ MODALS â”€â”€â”€ */
+/* ─── MODALS ─── */
 .modal-overlay {
   position:fixed; inset:0; z-index:200;
   background:rgba(0,0,0,0.85); backdrop-filter:blur(6px);
@@ -1692,17 +1692,17 @@ footer { background:var(--bg2); border-top:1px solid var(--border); }
 .modal-content p { font-size:0.9375rem; line-height:1.75; color:var(--text2); margin-bottom:1rem; }
 .modal-content h3 { font-family:'Outfit',sans-serif; font-size:1.05rem; font-weight:800; color:#fff; margin:1.5rem 0 0.5rem; }
 
-/* â”€â”€â”€ NAV SCROLLED â”€â”€â”€ */
+/* ─── NAV SCROLLED ─── */
 .nav.scrolled {
   background: rgba(10,15,44,0.97);
   box-shadow: 0 4px 32px rgba(0,0,0,0.4);
 }
 
-/* â”€â”€â”€ REVEAL â”€â”€â”€ */
+/* ─── REVEAL ─── */
 .reveal { opacity:1; transform:translateY(0); transition:opacity 0.6s ease, transform 0.6s ease; }
 .reveal.preload { opacity:0; transform:translateY(28px); } .reveal.visible { opacity:1; transform:translateY(0); }
 
-/* â”€â”€â”€ RESPONSIVE â”€â”€â”€ */
+/* ─── RESPONSIVE ─── */
 @media (max-width:1100px) {
   .footer-main { grid-template-columns:1fr 1fr 1fr 1fr; }
   .footer-brand { grid-column:span 4; }
@@ -1810,7 +1810,7 @@ footer { background:var(--bg2); border-top:1px solid var(--border); }
   <ul class="nav-links">
     <li><a href="about.html">About</a></li>
     <li><a href="services.html">Services</a></li>
-    <li><a href="magnet-framework.html" style="color:var(--accent);font-weight:600;">MAGNETâ„¢</a></li>
+    <li><a href="magnet-framework.html" style="color:var(--accent);font-weight:600;">MAGNET&trade;</a></li>
     <li><a href="results.html">Results</a></li>
     <li><a href="blog.html">Insights</a></li>
     <li><a href="https://academy.markcmo.com" target="_blank" style="color:var(--accent);">Academy</a></li>
@@ -1824,11 +1824,11 @@ footer { background:var(--bg2); border-top:1px solid var(--border); }
 <div class="mobile-drawer" id="mobileDrawer">
   <a href="about.html">About</a>
   <a href="services.html">Services</a>
-  <a href="magnet-framework.html" style="color:var(--accent);font-weight:600;">MAGNET Frameworkâ„¢</a>
+  <a href="magnet-framework.html" style="color:var(--accent);font-weight:600;">MAGNET Framework&trade;</a>
   <a href="results.html">Results</a>
   <a href="blog.html">Insights</a>
   <a href="https://academy.markcmo.com" target="_blank">Academy</a>
-  <a href="book.html" style="color:var(--accent);font-weight:700;">Book a Free Strategy Call â†’</a>
+  <a href="book.html" style="color:var(--accent);font-weight:700;">Book a Free Strategy Call &rarr;</a>
 </div>
 
 <!-- HERO -->
@@ -1844,7 +1844,7 @@ footer { background:var(--bg2); border-top:1px solid var(--border); }
       </h1>
       <p class="hero-sub">15 years. Three continents. Healthcare, aerospace, SaaS, automotive, logistics. Built companies from zero and scaled global teams of 50+. I find what's broken, fix what matters, and build what lasts - without the full-time cost.</p>
       <div class="hero-actions">
-        <a href="book.html" class="btn-primary">Book a Free Strategy Call â†’</a>
+        <a href="book.html" class="btn-primary">Book a Free Strategy Call &rarr;</a>
         <a href="#scorecard" class="btn-secondary">Take the Business Scorecard</a>
       </div>
       <div class="hero-trust">
@@ -1960,8 +1960,8 @@ footer { background:var(--bg2); border-top:1px solid var(--border); }
   <div class="magnet-inner">
     <div class="magnet-header reveal">
       <div class="section-eyebrow">Proprietary Methodology</div>
-      <h2 class="section-h2">The MAGNET Frameworkâ„¢<br><em>Marketing + Operations. Unified.</em></h2>
-      <p class="section-body magnet-intro-p">Not tactics. Not templates. A complete operating system for revenue growth. The MAGNET Frameworkâ„¢ is the engine behind every engagement - sequencing the right actions in the right order so every dollar invested compounds, not evaporates.</p>
+      <h2 class="section-h2">The MAGNET Framework&trade;<br><em>Marketing + Operations. Unified.</em></h2>
+      <p class="section-body magnet-intro-p">Not tactics. Not templates. A complete operating system for revenue growth. The MAGNET Framework&trade; is the engine behind every engagement - sequencing the right actions in the right order so every dollar invested compounds, not evaporates.</p>
     </div>
 
     <!-- M-A-G-N-E-T Letter Cards -->
@@ -2051,10 +2051,10 @@ footer { background:var(--bg2); border-top:1px solid var(--border); }
 
     <div class="magnet-cta reveal">
       <div class="magnet-cta-card">
-        <div class="magnet-cta-label">The MAGNET Frameworkâ„¢ in Action</div>
-        <p class="magnet-cta-desc">The MAGNET Frameworkâ„¢ is the operating methodology behind every engagement Mark runs. It is not a template or a playbook - it is a living system built specifically for your company, your market, and your buyers. The output is a business that grows on compounding, predictable revenue.</p>
+        <div class="magnet-cta-label">The MAGNET Framework&trade; in Action</div>
+        <p class="magnet-cta-desc">The MAGNET Framework&trade; is the operating methodology behind every engagement Mark runs. It is not a template or a playbook - it is a living system built specifically for your company, your market, and your buyers. The output is a business that grows on compounding, predictable revenue.</p>
         <div class="magnet-cta-btns">
-          <a href="magnet-framework.html" class="btn-primary">Explore the Full Framework â†’</a>
+          <a href="magnet-framework.html" class="btn-primary">Explore the Full Framework &rarr;</a>
           <a href="book.html" class="btn-secondary">Book a Strategy Call</a>
         </div>
       </div>
@@ -2070,7 +2070,7 @@ footer { background:var(--bg2); border-top:1px solid var(--border); }
         <div class="section-eyebrow">What I Do</div>
         <h2 class="section-h2">C-suite expertise.<br><em>Fraction of the cost.</em></h2>
       </div>
-      <a href="services.html" class="btn-secondary">All Services â†’</a>
+      <a href="services.html" class="btn-secondary">All Services &rarr;</a>
     </div>
     <div class="services-grid">
       <div class="svc highlight reveal">
@@ -2090,7 +2090,7 @@ footer { background:var(--bg2); border-top:1px solid var(--border); }
           <div class="svc-list-item">AI-powered campaign systems</div>
           <div class="svc-list-item">KPI dashboards &amp; revenue ops</div>
         </div>
-        <a href="fractional-cmo.html" class="svc-link">Learn more â†’</a>
+        <a href="fractional-cmo.html" class="svc-link">Learn more &rarr;</a>
       </div>
       <div class="svc reveal" style="transition-delay:0.1s;">
         <div class="svc-tag">02 / Fractional COO</div>
@@ -2109,7 +2109,7 @@ footer { background:var(--bg2); border-top:1px solid var(--border); }
           <div class="svc-list-item">Hiring &amp; team structure</div>
           <div class="svc-list-item">OKR &amp; performance frameworks</div>
         </div>
-        <a href="fractional-coo.html" class="svc-link">Learn more â†’</a>
+        <a href="fractional-coo.html" class="svc-link">Learn more &rarr;</a>
       </div>
       <div class="svc reveal" style="transition-delay:0.2s;">
         <div class="svc-tag">03 / Executive Advisory</div>
@@ -2129,7 +2129,7 @@ footer { background:var(--bg2); border-top:1px solid var(--border); }
           <div class="svc-list-item">M&amp;A readiness &amp; positioning</div>
           <div class="svc-list-item">Crisis management &amp; turnaround</div>
         </div>
-        <a href="executive-advisory.html" class="svc-link">Learn more â†’</a>
+        <a href="executive-advisory.html" class="svc-link">Learn more &rarr;</a>
       </div>
     </div>
   </div>
@@ -2196,7 +2196,7 @@ footer { background:var(--bg2); border-top:1px solid var(--border); }
       </div>
     </div>
     <div class="process-cta reveal">
-      <a href="book.html" class="btn-primary">Start Your 90-Day Sprint â†’</a>
+      <a href="book.html" class="btn-primary">Start Your 90-Day Sprint &rarr;</a>
       <a href="services.html" class="btn-secondary">See Full Service Menu</a>
     </div>
   </div>
@@ -2258,7 +2258,7 @@ footer { background:var(--bg2); border-top:1px solid var(--border); }
         <div class="section-eyebrow">Social Proof</div>
         <h2 class="section-h2">What clients <em>say.</em></h2>
       </div>
-      <a href="testimonials.html" style="font-size:0.875rem;font-weight:600;color:var(--text3);display:flex;align-items:center;gap:6px;">All testimonials â†’</a>
+      <a href="testimonials.html" style="font-size:0.875rem;font-weight:600;color:var(--text3);display:flex;align-items:center;gap:6px;">All testimonials &rarr;</a>
     </div>
     <div class="testi-grid">
       <div class="testi-card reveal">
@@ -2490,7 +2490,7 @@ footer { background:var(--bg2); border-top:1px solid var(--border); }
             <label>What's your biggest challenge?</label>
             <textarea class="cta-form-input" name="message" placeholder="We're struggling with lead generation, need a go-to-market strategy..." rows="4"></textarea>
           </div>
-          <button type="submit" class="cta-form-btn" id="ctaSubmitBtn">Send Message to Mark â†’</button>
+          <button type="submit" class="cta-form-btn" id="ctaSubmitBtn">Send Message to Mark &rarr;</button>
           <p style="font-size:0.75rem;color:var(--text3);margin-top:0.75rem;text-align:center;">Replied to within 24 hours &middot; No spam &middot; No obligation</p>
         </form>
       </div>
@@ -2524,7 +2524,7 @@ footer { background:var(--bg2); border-top:1px solid var(--border); }
           </div>
         </div>
         <div class="cta-or">or book directly</div>
-        <a href="book.html" class="cta-book-direct">Schedule a Free Strategy Call â†’</a>
+        <a href="book.html" class="cta-book-direct">Schedule a Free Strategy Call &rarr;</a>
       </div>
     </div>
   </div>
@@ -2575,7 +2575,7 @@ footer { background:var(--bg2); border-top:1px solid var(--border); }
         <div class="section-eyebrow">Insights</div>
         <h2 class="section-h2">From the <em>field.</em></h2>
       </div>
-      <a href="blog.html" class="blog-link">All Articles â†’</a>
+      <a href="blog.html" class="blog-link">All Articles &rarr;</a>
     </div>
     <div class="blog-grid">
       <div class="blog-card reveal" onclick="openModal('blog1')">
@@ -2687,7 +2687,7 @@ footer { background:var(--bg2); border-top:1px solid var(--border); }
       <li><a href="fractional-cmo-near-me.html">CMO Near Me</a></li>
     </ul></div>
     <div class="footer-col"><h4>Learn</h4><ul>
-      <li><a href="magnet-framework.html" style="color:var(--accent);font-weight:600;">MAGNET Frameworkâ„¢</a></li>
+      <li><a href="magnet-framework.html" style="color:var(--accent);font-weight:600;">MAGNET Framework&trade;</a></li>
       <li><a href="blog.html">Insights &amp; Blog</a></li>
       <li><a href="about.html">About Mark</a></li>
       <li><a href="testimonials.html">Testimonials</a></li>
@@ -2868,7 +2868,7 @@ function handleCtaForm(e) {
 
 
 <script>
-/* â”€â”€ GSAP ANIMATIONS â”€â”€ */
+/* ── GSAP ANIMATIONS ── */
 window.addEventListener('load', function() {
   if (typeof gsap === 'undefined') return;
   gsap.registerPlugin(ScrollTrigger);

@@ -92,12 +92,12 @@ exports.handler = async (event) => {
     <div style="font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:#C6A654;margin-bottom:12px;">Submitted By</div>
     <table style="border-collapse:collapse;width:100%;">${fieldRows}</table>
   </div>
-  ${binId ? '' : '<div style="background:#1a1208;border:1px solid #3a2a10;border-radius:3px;padding:12px 16px;margin-bottom:16px;font-size:12px;color:#C6A654;">📎 Signed PDF attached — save it, then upload on the countersign page.</div>'}
+  ${binId ? '' : '<div style="background:#1a1208;border:1px solid #3a2a10;border-radius:3px;padding:12px 16px;margin-bottom:16px;font-size:12px;color:#C6A654;">📎 Signed PDF attached, save it, then upload on the countersign page.</div>'}
   <a href="${countersignUrl}" style="display:block;background:#C6A654;color:#000;font-weight:700;font-size:14px;letter-spacing:.08em;text-transform:uppercase;text-decoration:none;padding:16px 24px;border-radius:4px;text-align:center;margin-bottom:16px;">
     ✍ Review &amp; Countersign →
   </a>
   <div style="font-size:11px;color:#444;line-height:1.6;">
-    ${binId ? 'The document loads automatically on the countersign page — just draw your signature and click Execute.' : 'Download the attached PDF, then upload it on the countersign page.'}
+    ${binId ? 'The document loads automatically on the countersign page, just draw your signature and click Execute.' : 'Download the attached PDF, then upload it on the countersign page.'}
     Link expires: ${new Date(tokenPayload.expiresAt).toLocaleDateString('en-US', { dateStyle: 'long' })}
   </div>
 </div></body></html>`;
@@ -143,7 +143,7 @@ exports.handler = async (event) => {
       from: 'MarkCMO Documents <forms@markcmo.com>',
       to: ['mark@markcmo.com'],
       reply_to: clientEmail,
-      subject: `✍ Countersignature Needed: ${docName} — ${clientName || clientEmail}`,
+      subject: `✍ Countersignature Needed: ${docName}, ${clientName || clientEmail}`,
       html: markHtml,
       click_tracking: false,
       open_tracking: false,
@@ -152,7 +152,7 @@ exports.handler = async (event) => {
     {
       from: 'Mark Gabrielli <mark@markcmo.com>',
       to: [clientEmail],
-      subject: `📄 Received: ${docName} — Pending Countersignature`,
+      subject: `📄 Received: ${docName}, Pending Countersignature`,
       html: clientHtml,
       attachments: [{ filename: execFilename, content: pdfBase64 }],
     },

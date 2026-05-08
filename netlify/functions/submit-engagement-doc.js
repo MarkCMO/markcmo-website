@@ -135,7 +135,7 @@ exports.handler = async (event) => {
     clientName, clientEmail, clientTitle, clientCompany, clientPhone,
     clientSigBase64,
     markSig,                    // coords for countersign overlay
-    testMode,                   // bool — re-routes "client" emails to mark@markcmo.com
+    testMode,                   // bool, re-routes "client" emails to mark@markcmo.com
   } = body;
 
   if (!clientSlug)       return { statusCode: 400, headers: CORS, body: JSON.stringify({ error: 'Missing clientSlug' }) };
@@ -159,7 +159,7 @@ exports.handler = async (event) => {
   try {
     // ─── 1. Look up document by slug + docId ─────────────────────
     const docs = await sbSelect(
-      `mc_documents?doc_id=eq.${encodeURIComponent(docId)}&select=id,engagement_id,doc_id,doc_type,doc_name,status,storage_bucket,mc_engagements(id,client_id,name,fee_usd,delivery_window_hrs,doc_prefix,mc_clients(id,slug,legal_name,primary_contact_name,primary_contact_email))`
+      `mc_documents?doc_id=eq.${encodeURIComponent(docId)}&select=id,engagement_id,doc_id,doc_type,doc_name,status,storage_bucket,mc_engagements(id,client_id,name,fee_usd,delivery_window_hrs,doc_prefix,status,mc_clients(id,slug,legal_name,primary_contact_name,primary_contact_email,cc_emails,status))`
     );
     const doc = docs.find(d => d.mc_engagements?.mc_clients?.slug === clientSlug);
     if (!doc) {
@@ -195,11 +195,20 @@ exports.handler = async (event) => {
       },
     });
 
-    // ─── 4. Update mc_engagements status ─────────────────────────
-    await sbUpdate('mc_engagements', `id=eq.${engagementId}`, {
-      status: 'accepted',
-      accepted_at: submittedAt,
-    });
+    // ─── 4. Auto-advance pipeline status: → signed ──────────────
+    // The pipeline kanban uses 'signed' as the stage key. Don't
+    // overwrite later statuses (invoiced, paid, delivering, delivered).
+    const TERMINAL = ['invoiced','paid','delivering','delivered','closed'];
+    if (!TERMINAL.includes(doc.mc_engagements?.status)) {
+      await sbUpdate('mc_engagements', `id=eq.${engagementId}`, {
+        status: 'signed',
+        accepted_at: submittedAt,
+      });
+    }
+    // Bump client status the same way (only if they're earlier in pipeline)
+    if (clientId && !['paid','delivering','delivered','closed'].includes(doc.mc_engagements?.mc_clients?.status)) {
+      await sbUpdate('mc_clients', `id=eq.${clientId}`, { status: 'signed' });
+    }
 
     // ─── 5. Insert audit log ─────────────────────────────────────
     await sbInsert('mc_audit_log', {
@@ -243,7 +252,7 @@ exports.handler = async (event) => {
       .map(([k, v]) => `<tr><td style="padding:5px 16px 5px 0;color:#888;font-size:13px;white-space:nowrap;">${k}</td><td style="padding:5px 0;color:#1E293B;font-size:13px;">${String(v).substring(0, 200)}</td></tr>`)
       .join('');
 
-    // Mark's email — light/blue branded
+    // Mark's email, light/blue branded
     const markHtml = `<!DOCTYPE html><html><head><meta charset="UTF-8"/></head>
 <body style="background:#F8FAFC;margin:0;padding:0;font-family:Arial,sans-serif;">
 <div style="max-width:600px;margin:0 auto;padding:32px 24px;">
@@ -265,7 +274,7 @@ exports.handler = async (event) => {
   </div>
 </div></body></html>`;
 
-    // Client email — light branded
+    // Client email, light branded
     const clientHtml = `<!DOCTYPE html><html><head><meta charset="UTF-8"/></head>
 <body style="background:#F8FAFC;margin:0;padding:0;font-family:Arial,sans-serif;">
 <div style="max-width:600px;margin:0 auto;">
@@ -298,23 +307,30 @@ exports.handler = async (event) => {
 
     const execFilename = (filename || `${docName || docId}.pdf`).replace(/\.pdf$/i, '') + '-signed.pdf';
     const recipientForClientCopy = testMode ? 'mark@markcmo.com' : clientEmail;
-    // Always CC Mark's Gmail on client-facing emails as a record (in test mode the client copy already
-    // goes to mark@markcmo.com so we still CC the Gmail to confirm CC delivery is working too).
-    const clientCC = ['marklgabriellijr@gmail.com'];
+    // Always CC Mark's Gmail + any custom cc_emails configured on the client record
+    // (set via /admin#case-files Edit Client). In test mode the client copy goes to
+    // mark@markcmo.com but we still send the per-client CC list to confirm delivery.
+    const clientCcCustom = Array.isArray(doc.mc_engagements?.mc_clients?.cc_emails)
+      ? doc.mc_engagements.mc_clients.cc_emails.filter(e => typeof e === 'string' && e.includes('@'))
+      : [];
+    const clientCC = Array.from(new Set([
+      'marklgabriellijr@gmail.com',
+      ...clientCcCustom,
+    ])).filter(e => e !== clientEmail); // never CC the primary recipient
 
     const emailPayloads = [
       {
         from: 'MarkCMO Documents <forms@markcmo.com>',
         to: ['mark@markcmo.com'],
         reply_to: clientEmail,
-        subject: `${testMode ? '[TEST] ' : ''}Countersignature Needed: ${docName || doc.doc_name} — ${clientName || clientEmail}`,
+        subject: `${testMode ? '[TEST] ' : ''}Countersignature Needed: ${docName || doc.doc_name}, ${clientName || clientEmail}`,
         html: markHtml,
       },
       {
         from: 'Mark Gabrielli <mark@markcmo.com>',
         to: [recipientForClientCopy],
         cc: clientCC,
-        subject: `${testMode ? '[TEST] ' : ''}Received: ${docName || doc.doc_name} — Pending Countersignature`,
+        subject: `${testMode ? '[TEST] ' : ''}Received: ${docName || doc.doc_name}, Pending Countersignature`,
         html: clientHtml,
         attachments: [{ filename: execFilename, content: pdfBase64 }],
       },

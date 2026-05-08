@@ -123,7 +123,7 @@ async function handleInviteeCreated(p) {
   }
 
   // Create a placeholder engagement (status='lead')
-  // We don't auto-create documents yet — that happens after consultation when
+  // We don't auto-create documents yet, that happens after consultation when
   // Mark hits "Generate Engagement Docs" in the VDR.
   const existingLeadEng = await sbSelect(
     `mc_engagements?client_id=eq.${client.id}&status=eq.lead&select=id&limit=1`

@@ -1,5 +1,5 @@
 // netlify/functions/admin-data.js
-// Unified admin data proxy — serves both markcmo.com AND academy.markcmo.com data
+// Unified admin data proxy, serves both markcmo.com AND academy.markcmo.com data
 // Protected by a simple token check matching admin credentials
 
 const CORS = {
@@ -8,34 +8,6 @@ const CORS = {
   'Access-Control-Allow-Credentials': 'true',
   'Access-Control-Allow-Headers': 'Content-Type, x-admin-token',
 };
-
-async function supabaseQuery(url, key, table, params = '') {
-  const res = await fetch(`${url}/rest/v1/${table}${params}`, {
-    headers: {
-      'apikey': key,
-      'Authorization': `Bearer ${key}`,
-      'Content-Type': 'application/json',
-      'Prefer': 'return=representation',
-    }
-  });
-  if (!res.ok) throw new Error(`Supabase ${table} failed: ${res.status} ${await res.text()}`);
-  return res.json();
-}
-
-async function supabasePost(url, key, table, body, method = 'POST') {
-  const res = await fetch(`${url}/rest/v1/${table}`, {
-    method,
-    headers: {
-      'apikey': key,
-      'Authorization': `Bearer ${key}`,
-      'Content-Type': 'application/json',
-      'Prefer': 'return=representation',
-    },
-    body: JSON.stringify(body)
-  });
-  if (!res.ok) throw new Error(`Supabase ${table} ${method} failed: ${res.status} ${await res.text()}`);
-  return res.json();
-}
 
 async function jsonbinGet(binId, apiKey) {
   const res = await fetch(`https://api.jsonbin.io/v3/b/${binId}/latest`, {
@@ -72,12 +44,7 @@ exports.handler = async (event) => {
     JSONBIN_FOUNDING_BIN_ID,
     JSONBIN_INTL_BIN_ID,
     JSONBIN_NOTIFY_BIN_ID,
-    // MarkCMO Supabase (CRM/Engagements/Invoices)
-    MARKCMO_SUPABASE_URL,
-    MARKCMO_SUPABASE_SERVICE_KEY,
   } = process.env;
-  const SB_URL = MARKCMO_SUPABASE_URL;
-  const SB_KEY = MARKCMO_SUPABASE_SERVICE_KEY;
 
   // ── BIN MAP: all data types across both sites ────────────────────────────
   const BIN_MAP = {
@@ -130,52 +97,6 @@ exports.handler = async (event) => {
         return { statusCode: 500, headers: CORS, body: JSON.stringify({ error: err.message }) };
       }
     }
-    // ── Supabase: CRM Clients ─────────────────────────────────────────────────
-    if (type === 'clients') {
-      try {
-        const rows = await supabaseQuery(SB_URL, SB_KEY, 'mc_clients', '?order=created_at.desc');
-        return { statusCode: 200, headers: CORS, body: JSON.stringify({ clients: rows }) };
-      } catch(err) {
-        return { statusCode: 500, headers: CORS, body: JSON.stringify({ error: err.message }) };
-      }
-    }
-    // ── Supabase: Engagements ─────────────────────────────────────────────────
-    if (type === 'engagements') {
-      try {
-        const rows = await supabaseQuery(SB_URL, SB_KEY, 'mc_engagements', '?order=created_at.desc&select=*,mc_clients(company_name,contact_name,email)');
-        return { statusCode: 200, headers: CORS, body: JSON.stringify({ engagements: rows }) };
-      } catch(err) {
-        return { statusCode: 500, headers: CORS, body: JSON.stringify({ error: err.message }) };
-      }
-    }
-    // ── Supabase: Invoices ────────────────────────────────────────────────────
-    if (type === 'invoices') {
-      try {
-        const rows = await supabaseQuery(SB_URL, SB_KEY, 'mc_invoices', '?order=created_at.desc&select=*,mc_engagements(title,mc_clients(company_name))');
-        return { statusCode: 200, headers: CORS, body: JSON.stringify({ invoices: rows }) };
-      } catch(err) {
-        return { statusCode: 500, headers: CORS, body: JSON.stringify({ error: err.message }) };
-      }
-    }
-    // ── Supabase: Documents ───────────────────────────────────────────────────
-    if (type === 'supadocs') {
-      try {
-        const rows = await supabaseQuery(SB_URL, SB_KEY, 'mc_documents', '?order=created_at.desc&select=*,mc_engagements(title,mc_clients(company_name))');
-        return { statusCode: 200, headers: CORS, body: JSON.stringify({ supadocs: rows }) };
-      } catch(err) {
-        return { statusCode: 500, headers: CORS, body: JSON.stringify({ error: err.message }) };
-      }
-    }
-    // ── Supabase: Audit Log ───────────────────────────────────────────────────
-    if (type === 'audit') {
-      try {
-        const rows = await supabaseQuery(SB_URL, SB_KEY, 'mc_audit_log', '?order=created_at.desc&limit=200');
-        return { statusCode: 200, headers: CORS, body: JSON.stringify({ audit: rows }) };
-      } catch(err) {
-        return { statusCode: 500, headers: CORS, body: JSON.stringify({ error: err.message }) };
-      }
-    }
-
     const bin = BIN_MAP[type];
     if (!bin || !bin.id) {
       return { statusCode: 400, headers: CORS, body: JSON.stringify({ error: `Unknown type or missing bin ID: ${type}` }) };
@@ -212,7 +133,7 @@ exports.handler = async (event) => {
     if (body.action === 'launch' || body.action === 'notify-list') {
       try {
         if (!ADMIN_SECRET) {
-          return { statusCode: 500, headers: CORS, body: JSON.stringify({ error: 'ADMIN_SECRET not configured on markcmo.com — set it in Netlify environment variables' }) };
+          return { statusCode: 500, headers: CORS, body: JSON.stringify({ error: 'ADMIN_SECRET not configured on markcmo.com, set it in Netlify environment variables' }) };
         }
         const proxyBody = { ...body, adminSecret: ADMIN_SECRET };
         const r = await fetch('https://academy.markcmo.com/course-notify', {

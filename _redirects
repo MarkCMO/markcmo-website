@@ -15,6 +15,8 @@ https://www.markcmo.com/* https://markcmo.com/:splat 301!
 /results.html                        /results                       301!
 /book.html                           /book                          301!
 /blog.html                           /blog                          301!
+# Dynamic CMS blog posts: /blog/<slug> renders blog-post.html which fetches from public-blog
+/blog/:slug                          /blog-post.html?slug=:slug     200
 /contact.html                        /contact                       301!
 /faq.html                            /faq                           301!
 /industries.html                     /industries                    301!
@@ -185,9 +187,18 @@ https://www.markcmo.com/* https://markcmo.com/:splat 301!
 /documents/clients/wendal-enterprise/timeline  /documents/clients/wendal-enterprise/timeline.html      200
 /documents/clients/wendal-enterprise/sign      /forms/wendal-enterprise-audit.html                     200
 
-# ─── Admin VDR (Virtual Data Room — internal, auth-gated) ────
-/admin/vdr                                      /admin/vdr/index.html                                  200
-/admin/vdr/                                     /admin/vdr/index.html                                  200
+# Salt Lake City Public Library — engagement package
+/documents/clients/salt-lake-city-public-library            /documents/clients/salt-lake-city-public-library/index.html         200
+/documents/clients/salt-lake-city-public-library/proposal   /documents/clients/salt-lake-city-public-library/proposal.html      200
+/documents/clients/salt-lake-city-public-library/sow        /documents/clients/salt-lake-city-public-library/scope-of-work.html 200
+/documents/clients/salt-lake-city-public-library/timeline   /documents/clients/salt-lake-city-public-library/timeline.html      200
+/documents/clients/salt-lake-city-public-library/sign       /forms/salt-lake-city-public-library-discovery.html                 200
+
+# ─── Admin VDR (now embedded inside /admin as #case-files panel) ──
+# Backwards-compat: any old links to /admin/vdr* land on /admin#case-files
+/admin/vdr                                      /admin#case-files                                       301!
+/admin/vdr/                                     /admin#case-files                                       301!
+/admin/vdr/*                                    /admin#case-files                                       301!
 
 # ─── Location hub ───────────────────────────────────────────
 /location                      /location/index.html           200
@@ -343,14 +354,29 @@ https://www.markcmo.com/* https://markcmo.com/:splat 301!
 /courses/welcome               /courses/welcome.html          200
 /graduation                    /graduation.html               200
 
+# ─── Public client portal: /portal/{slug} ───────────────────
+# Slug-gated public page that fetches sanitized data via
+# /.netlify/functions/client-portal-data?slug=... — no admin auth,
+# but only exposes the fields explicitly whitelisted in the function.
+/portal/*                      /portal/index.html              200
+
+# ─── Customer-journey tracking redirects ─────────────────────
+# /pay/{mc_invoices.id} 302s to Square's payment URL after logging
+# the click. Lets us attribute payment-page opens to the channel
+# that drove them (email reminder vs admin "Send Payment Request").
+/pay/*                         /.netlify/functions/pay?id=:splat   200
+# /track/* surfaces the multi-purpose tracker for friendly URLs in
+# emails (e.g. /track/click?...). The function itself reads the
+# query string.
+/track/*                       /.netlify/functions/track   200
+
 # ─── Webinar Funnel + Admin ─────────────────────────────────
 /webinar                       /webinar.html                  200
 /webinar-confirmation          /webinar-confirmation.html     200
 /webinar-playbook-delivery     /webinar-playbook-delivery.html 200
 /webinar-strategy-guide        /webinar-strategy-guide.html   200
-/admin                         /index.html                    404
-/admin.html                    /index.html                    404
-/admin-c7x9k2m                 /admin-c7x9k2m.html            200
+# Admin: canonical URL handled in netlify.toml. The legacy obfuscated
+# /admin-c7x9k2m URL 301s to /admin to keep one admin surface alive.
 /access-required               /access-required.html          200
 
 # ─── Resume Pages ──────────────────────────────────────────

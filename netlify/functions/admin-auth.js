@@ -4,7 +4,7 @@
 // POST { action: 'logout' } → clears cookie
 
 const COOKIE_NAME = 'mcadmin_session';
-const COOKIE_MAX_AGE = 60 * 60 * 8; // 8 hours
+const COOKIE_MAX_AGE = 60 * 60 * 24 * 7; // 7 days (reduces frequent re-login interrupts during long admin sessions)
 
 const ALLOWED_ORIGINS = ['https://markcmo.com', 'https://academy.markcmo.com'];
 

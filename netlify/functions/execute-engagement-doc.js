@@ -23,6 +23,15 @@ function sb() {
   return { url, key };
 }
 
+async function sbSelect(path) {
+  const { url, key } = sb();
+  const res = await fetch(`${url}/rest/v1/${path}`, {
+    headers: { apikey: key, Authorization: `Bearer ${key}` },
+  });
+  if (!res.ok) throw new Error(`Supabase select ${path} failed: ${res.status} ${await res.text()}`);
+  return res.json();
+}
+
 async function sbUpdate(table, filter, body) {
   const { url, key } = sb();
   const res = await fetch(`${url}/rest/v1/${table}?${filter}`, {
@@ -223,7 +232,22 @@ exports.handler = async (event) => {
 
     const execFilename = (filename || `${docName}.pdf`).replace(/\.pdf$/i, '') + '-EXECUTED.pdf';
     const recipientForClientCopy = testMode ? 'mark@markcmo.com' : clientEmail;
-    const clientCC = ['marklgabriellijr@gmail.com']; // always CC Gmail on client-facing emails
+
+    // CC list = Mark's gmail + any cc_emails configured on mc_clients (via /admin Edit Client)
+    let clientCcCustom = [];
+    try {
+      const clientRows = await sbSelect(
+        `mc_engagements?id=eq.${encodeURIComponent(engagementId)}&select=mc_clients(cc_emails)`
+      );
+      const ccRaw = clientRows?.[0]?.mc_clients?.cc_emails;
+      if (Array.isArray(ccRaw)) {
+        clientCcCustom = ccRaw.filter(e => typeof e === 'string' && e.includes('@'));
+      }
+    } catch (e) { console.warn('cc_emails lookup failed:', e.message); }
+    const clientCC = Array.from(new Set([
+      'marklgabriellijr@gmail.com',
+      ...clientCcCustom,
+    ])).filter(e => e !== clientEmail);
 
     const results = await Promise.allSettled([
       fetch('https://api.resend.com/emails', {
@@ -246,7 +270,7 @@ exports.handler = async (event) => {
           from: 'MarkCMO Documents <forms@markcmo.com>',
           to: ['mark@markcmo.com'],
           reply_to: clientEmail,
-          subject: `${testMode ? '[TEST] ' : ''}Executed: ${docName} — ${clientName || clientEmail}`,
+          subject: `${testMode ? '[TEST] ' : ''}Executed: ${docName}, ${clientName || clientEmail}`,
           html: makeHtml('Mark'),
           attachments: [{ filename: execFilename, content: executedPdfBase64 }],
         }),

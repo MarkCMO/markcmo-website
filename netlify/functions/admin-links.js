@@ -1,5 +1,5 @@
 // netlify/functions/admin-links.js
-// CRUD for access link tokens — called by admin.html
+// CRUD for access link tokens, called by admin.html
 
 const crypto = require("crypto");
 

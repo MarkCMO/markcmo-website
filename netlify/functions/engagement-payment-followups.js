@@ -14,7 +14,7 @@
 //   curl -X POST https://markcmo.com/.netlify/functions/engagement-payment-followups \
 //     -H "x-admin-api-token: $TOK"
 // ═══════════════════════════════════════════════════════════════
-const { sbSelect, sbUpdate, sbInsert, isAdminAuthed, corsHeaders } = require('./_lib_supabase');
+const { sbSelect, sbUpdate, sbInsert, isAdminAuthed, corsHeaders, buildClientCcList } = require('./_lib_supabase');
 
 const HOURS = (n) => n * 60 * 60 * 1000;
 
@@ -97,7 +97,9 @@ async function sendReminder(inv, reminderSpec) {
 
   const amount = '$' + Number(inv.amount_usd).toLocaleString('en-US', { minimumFractionDigits: 0, maximumFractionDigits: 2 });
   const greetingName = (client.primary_contact_name || '').split(' ')[0] || 'there';
-  const paymentUrl = inv.square_invoice_url || '';
+  // Route through /pay/{invoice_id} so every click is logged to
+  // mc_journey_events before redirecting to Square.
+  const paymentUrl = inv.square_invoice_url ? `https://markcmo.com/pay/${inv.id}?src=reminder_${reminderSpec.key}` : '';
 
   const subjects = {
     friendly: `Quick check-in on the ${eng.name} invoice`,
@@ -136,7 +138,7 @@ async function sendReminder(inv, reminderSpec) {
     body: JSON.stringify({
       from: 'Mark Gabrielli <mark@markcmo.com>',
       to: [client.primary_contact_email],
-      cc: ['marklgabriellijr@gmail.com'],
+      cc: buildClientCcList(client),
       reply_to: 'mark@markcmo.com',
       subject: subjects[reminderSpec.tone],
       html,
@@ -152,6 +154,21 @@ async function sendReminder(inv, reminderSpec) {
     last_reminder_at: now,
     raw_payload: { ...(inv.raw_payload || {}), [reminderSpec.key]: { sent_at: now, resend_id: data.id } },
   });
+
+  // Customer-journey row for this reminder send
+  try {
+    await sbInsert('mc_journey_events', {
+      client_id: client.id,
+      engagement_id: inv.engagement_id,
+      invoice_id: inv.id,
+      category: 'email',
+      event: 'email_sent',
+      subject_or_url: subjects[reminderSpec.tone],
+      recipient_email: client.primary_contact_email,
+      resend_email_id: data?.id || null,
+      raw: { template: 'payment-followup', tone: reminderSpec.tone, count: newCount },
+    });
+  } catch (e) { console.warn('mc_journey_events insert failed:', e.message); }
 
   await sbInsert('mc_audit_log', {
     engagement_id: inv.engagement_id,

@@ -331,5 +331,28 @@
   </div>
 </footer>
 
+<!-- mc-track: customer-journey page view -->
+<script>
+(function(){
+  try {
+    var sk = 'mc_jsid';
+    var sid = sessionStorage.getItem(sk) || ('s_' + Math.random().toString(36).slice(2) + Date.now().toString(36));
+    sessionStorage.setItem(sk, sid);
+    fetch('/.netlify/functions/track', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        t: 'view',
+        client: 'wendal-enterprise',
+        page: 'cover',
+        session_id: sid,
+        url: location.pathname,
+        title: document.title
+      }),
+      keepalive: true
+    }).catch(function(){});
+  } catch(e) {}
+})();
+</script>
 </body>
 </html>

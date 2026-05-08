@@ -126,7 +126,7 @@ async function handleCreateDraft(body, headers, event) {
     customerId: cust.id,
     amountCents,
     name: isTest ? `[TEST $1] ${eng.name}` : eng.name,
-    note: `${eng.name} — ${client.legal_name}${isTest ? ' (TEST)' : ''}`,
+    note: `${eng.name}, ${client.legal_name}${isTest ? ' (TEST)' : ''}`,
   });
 
   // 3) Create draft invoice
@@ -223,6 +223,21 @@ async function handlePublish(body, headers, event) {
       public_url: published.public_url,
     },
   });
+
+  // Auto-advance pipeline: → invoiced (only on live invoices)
+  // Don't overwrite later statuses (paid, delivering, delivered, closed).
+  if (!inv.is_test && inv.engagement_id) {
+    try {
+      const ENG_TERMINAL = ['paid','delivering','delivered','closed'];
+      const engRow = inv.mc_engagements;
+      if (engRow && !ENG_TERMINAL.includes(engRow.status)) {
+        await sbUpdate('mc_engagements', `id=eq.${inv.engagement_id}`, { status: 'invoiced' });
+      }
+      if (engRow?.client_id && !['paid','delivering','delivered','closed'].includes(engRow?.mc_clients?.status)) {
+        await sbUpdate('mc_clients', `id=eq.${engRow.client_id}`, { status: 'invoiced' });
+      }
+    } catch (e) { console.warn('auto-advance after publish failed:', e.message); }
+  }
 
   return {
     statusCode: 200,
