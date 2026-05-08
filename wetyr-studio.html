@@ -338,6 +338,7 @@ pre.json { background: #0f0f12; border: 1px solid var(--border); border-radius: 
       <div class="tab" data-tab="locations">Location Scout</div>
       <div class="tab" data-tab="safety">Safety + Insurance</div>
       <div class="tab" data-tab="post">Post Plan</div>
+      <div class="tab" data-tab="workflow" style="background: rgba(212,175,55,0.08); color: var(--gold);">Master Workflow</div>
       <div class="tab" data-tab="exports">Exports</div>
       <div class="tab" data-tab="json">Raw JSON</div>
     </div>
@@ -408,6 +409,9 @@ pre.json { background: #0f0f12; border: 1px solid var(--border); border-radius: 
         <p style="color: var(--muted); font-size: 14px;">Editorial schedule, VFX shot list, color, sound, music, and distributor deliverables.</p>
         <button class="btn btn-primary" id="genPostBtn" style="margin-top: 12px;">Generate post-production plan</button>
       </div>
+    </div>
+    <div class="tab-panel" data-panel="workflow">
+      <div id="workflowView"></div>
     </div>
     <div class="tab-panel" data-panel="exports">
       <div id="exportsView">
@@ -692,6 +696,7 @@ async function runSchedule() {
     }, 'schedule');
     state.schedule = schedule;
     renderSchedule(schedule);
+    if (typeof renderWorkflow === 'function') renderWorkflow();
   } catch (e) {
     $('scheduleView').innerHTML = '<div class="status err active">Schedule failed: ' + escapeHtml(e.message) + '</div>';
   }
@@ -720,6 +725,7 @@ async function runCallsheet() {
     }, 'callsheet');
     state.callsheet = cs;
     renderCallsheet(cs);
+    if (typeof renderWorkflow === 'function') renderWorkflow();
   } catch (e) {
     $('callsheetView').innerHTML = '<div class="status err active">Call sheets failed: ' + escapeHtml(e.message) + '</div>';
   }
@@ -801,6 +807,301 @@ function exportItem(kind) {
   setTimeout(() => URL.revokeObjectURL(url), 1000);
 }
 
+// ─── MASTER WORKFLOW renderer ─────────────────────────────────────────
+// Stitches breakdown + schedule + budget + call sheets + shot list + orders
+// + locations + safety + post into a single chronological project plan:
+// Development -> Pre-Production (week-by-week) -> Production (day-by-day)
+// -> Post -> Delivery. Falls back gracefully when later deliverables aren't
+// generated yet.
+function renderWorkflow() {
+  const view = $('workflowView'); if (!view) return;
+  const b = state.breakdown;
+  if (!b) {
+    view.innerHTML = '<div style="padding: 40px 20px; text-align: center; color: var(--muted);">Run a script breakdown first - the master workflow stitches every deliverable into one chronological plan.</div>';
+    return;
+  }
+
+  const sch    = state.schedule;
+  const bud    = state.budget;
+  const cs     = state.callsheet;
+  const shots  = state.shotlist;
+  const ords   = state.orders;
+  const locs   = state.locations;
+  const safety = state.safety;
+  const post   = state.post;
+
+  const fmt$ = n => '$' + Math.round(Number(n) || 0).toLocaleString();
+  const numShootDays = sch?.days?.length || Math.ceil((b.pageCount || 0) / 4);
+
+  // Pre-production lead time = max permit lead time + buffer
+  const maxPermitLead = Math.max(0, ...((locs?.locations || []).map(l => l.permitLeadTimeDays || 0)));
+  const maxOrderLead  = Math.max(0, ...((ords?.orders   || []).map(o => o.leadTimeDays      || 0)));
+  const prePrepDays   = Math.max(56, maxPermitLead + 14, maxOrderLead + 14); // at least 8 weeks
+  const prePrepWeeks  = Math.ceil(prePrepDays / 7);
+
+  const phases = [
+    {
+      name: 'PHASE 1 - DEVELOPMENT',
+      color: 'var(--muted)',
+      duration: 'Complete (script locked)',
+      items: [
+        { when: 'DONE', task: 'Final draft locked: ' + (b.title || 'Untitled') + ' - ' + (b.pageCount || 0).toFixed(1) + ' pages, ' + (b.scenes?.length || 0) + ' scenes' },
+        { when: 'DONE', task: 'Tagged breakdown: ' + (b.characters?.length || 0) + ' speaking roles, ' + (b.locations?.length || 0) + ' locations' },
+        { when: 'DONE', task: 'Production flags: ' + Object.entries(b.productionFlags || {}).filter(([, v]) => v === true).map(([k]) => k.replace(/^has/, '')).join(', ') || 'none' }
+      ]
+    },
+    {
+      name: 'PHASE 2 - PRE-PRODUCTION (' + prePrepWeeks + ' weeks)',
+      color: 'var(--gold)',
+      duration: prePrepWeeks + ' weeks before Day 1',
+      groups: buildPrepWeeks(b, sch, bud, ords, locs, safety, prePrepWeeks)
+    },
+    {
+      name: 'PHASE 3 - PRODUCTION (' + numShootDays + ' shoot days)',
+      color: 'var(--red)',
+      duration: numShootDays + ' shoot days',
+      days: (sch?.days || []).map(d => ({
+        day: d.day,
+        date: d.date,
+        location: d.location,
+        intExt: d.intExt,
+        timeOfDay: d.timeOfDay,
+        pages: (d.totalPages || (d.totalEighths || 0) / 8 || 0).toFixed(2),
+        scenes: (d.scenes || []).map(sc => sc.number),
+        cast: d.castCalled || [],
+        callTime: d.estimatedCallTime || callsheetForDay(d.day)?.callTimes?.generalCrew || 'TBD',
+        wrapTime: d.estimatedWrapTime || 'TBD',
+        flags: { minorHours: !!d.minorHours, special: d.specialRequirements || [] }
+      }))
+    },
+    {
+      name: 'PHASE 4 - POST-PRODUCTION',
+      color: 'var(--blue)',
+      duration: post?.summary?.estimatedPostMonths ? post.summary.estimatedPostMonths + ' months' : '~6 months',
+      items: buildPostItems(post)
+    },
+    {
+      name: 'PHASE 5 - DELIVERY',
+      color: 'var(--green)',
+      duration: 'After picture lock',
+      items: (post?.deliverables || []).slice(0, 12).map(d => ({
+        when: d.dueDate || 'TBD',
+        task: d.distributor + ' &mdash; ' + d.format + ' (' + (d.specs || []).join(', ') + ')'
+      }))
+    }
+  ];
+
+  view.innerHTML = `
+    <div style="background: var(--panel); border: 1px solid var(--gold); border-radius: 12px; padding: 22px; margin-bottom: 22px;">
+      <div style="display: flex; justify-content: space-between; align-items: start; flex-wrap: wrap; gap: 12px;">
+        <div>
+          <div style="font-size: 11px; color: var(--gold); font-weight: 800; letter-spacing: 2px;">PROJECT PLAN</div>
+          <h2 style="font-size: 28px; margin-top: 4px;">${escapeHtml(b.title || 'Untitled')}</h2>
+          <div style="color: var(--muted); margin-top: 4px;">${escapeHtml((b.format || '').toUpperCase())} &middot; ${(b.pageCount || 0).toFixed(1)} pages &middot; ${b.scenes?.length || 0} scenes</div>
+        </div>
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(120px, 1fr)); gap: 10px; min-width: 280px;">
+          <div class="stat"><div class="stat-label">Pre-Prod</div><div class="stat-value">${prePrepWeeks}<span style="font-size: 13px;">wk</span></div></div>
+          <div class="stat"><div class="stat-label">Shoot</div><div class="stat-value">${numShootDays}<span style="font-size: 13px;">d</span></div></div>
+          <div class="stat"><div class="stat-label">Post</div><div class="stat-value">${post?.summary?.estimatedPostMonths || '~6'}<span style="font-size: 13px;">mo</span></div></div>
+          ${bud?.topSheet?.grandTotal ? `<div class="stat" style="border-color: var(--gold);"><div class="stat-label">Budget</div><div class="stat-value" style="color: var(--gold); font-size: 16px;">${fmt$(bud.topSheet.grandTotal)}</div></div>` : ''}
+        </div>
+      </div>
+    </div>
+
+    ${phases.map(p => `
+      <div style="border-left: 3px solid ${p.color}; padding-left: 18px; margin-bottom: 28px;">
+        <h3 style="font-size: 18px; font-weight: 800; color: ${p.color}; letter-spacing: 0.5px;">${p.name}</h3>
+        <div style="color: var(--muted); font-size: 12px; margin-bottom: 14px;">${escapeHtml(p.duration)}</div>
+
+        ${p.items ? `
+          <table style="width: 100%; font-size: 13px;">
+            <thead><tr><th style="text-align: left; width: 130px;">When</th><th style="text-align: left;">Task</th></tr></thead>
+            <tbody>${p.items.map(it => `<tr><td><b>${escapeHtml(it.when)}</b></td><td>${it.task}</td></tr>`).join('')}</tbody>
+          </table>
+        ` : ''}
+
+        ${p.groups ? p.groups.map(g => `
+          <details style="background: var(--panel); border: 1px solid var(--border); border-radius: 8px; padding: 12px; margin-bottom: 6px;">
+            <summary style="cursor: pointer; font-weight: 700; color: ${p.color};">${escapeHtml(g.title)} <span style="color: var(--muted); font-weight: 400; font-size: 12px;">(${g.tasks.length} tasks)</span></summary>
+            <table style="width: 100%; margin-top: 10px; font-size: 12px;">
+              <thead><tr><th style="text-align: left; width: 110px;">Owner</th><th style="text-align: left;">Task</th></tr></thead>
+              <tbody>${g.tasks.map(t => `<tr><td><b>${escapeHtml(t.owner)}</b></td><td>${t.task}</td></tr>`).join('')}</tbody>
+            </table>
+          </details>
+        `).join('') : ''}
+
+        ${p.days ? `
+          <div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 10px;">
+            ${p.days.map(d => `
+              <div style="background: var(--panel); border: 1px solid var(--border); border-radius: 8px; padding: 12px;">
+                <div style="display: flex; justify-content: space-between; align-items: start; gap: 8px;">
+                  <div>
+                    <div style="font-size: 18px; font-weight: 800; color: ${p.color};">DAY ${d.day}</div>
+                    <div style="color: var(--muted); font-size: 12px;">${escapeHtml(d.date || 'TBD')}</div>
+                  </div>
+                  <div style="text-align: right;">
+                    <div style="font-size: 13px; font-weight: 700; color: var(--gold);">${escapeHtml(d.callTime)}</div>
+                    <div style="color: var(--muted); font-size: 11px;">crew call</div>
+                  </div>
+                </div>
+                <div style="margin-top: 10px; font-size: 12px;">
+                  <div><b>${escapeHtml(d.location || '')}</b> &middot; ${escapeHtml(d.intExt || '')} &middot; ${escapeHtml(d.timeOfDay || '')}</div>
+                  <div style="color: var(--muted); margin-top: 3px;">${d.pages} pgs &middot; scenes ${d.scenes.map(escapeHtml).join(', ')}</div>
+                </div>
+                ${d.cast.length ? `<div style="margin-top: 6px; font-size: 11px;">${d.cast.slice(0, 5).map(c => '<span class="tag">' + escapeHtml(c) + '</span>').join('')}${d.cast.length > 5 ? ' <span style="color: var(--dim);">+' + (d.cast.length - 5) + '</span>' : ''}</div>` : ''}
+                ${d.flags.minorHours ? '<div style="margin-top: 6px;"><span class="tag hot">MINOR HRS</span></div>' : ''}
+                ${(d.flags.special || []).length ? '<div style="margin-top: 6px; font-size: 11px; color: var(--gold);">' + escapeHtml(d.flags.special.join(', ')) + '</div>' : ''}
+              </div>
+            `).join('')}
+          </div>
+        ` : ''}
+      </div>
+    `).join('')}
+
+    <div style="background: var(--panel-2); border: 1px dashed var(--border-hot); border-radius: 10px; padding: 18px; margin-top: 22px; font-size: 12px; color: var(--muted);">
+      <b style="color: var(--text);">Notes:</b> Phase durations and lead times are calculated from your generated deliverables. Generate the missing tabs (above) to populate this workflow with concrete data instead of placeholders.
+    </div>
+  `;
+}
+
+function buildPrepWeeks(b, sch, bud, ords, locs, safety, weeksOut) {
+  const flags = b.productionFlags || {};
+  const W = (n) => 'Week -' + n;
+
+  const weeks = [
+    { title: W(weeksOut) + ' (kickoff)', tasks: [
+      { owner: 'Producer',   task: 'Open production office, hire UPM + 1st AD' },
+      { owner: 'UPM',        task: 'Lock budget at ' + (bud?.topSheet?.grandTotal ? '$' + Math.round(bud.topSheet.grandTotal).toLocaleString() : 'TBD') + '; cash-flow plan to financiers' },
+      { owner: 'Director',   task: 'Final draft signed off; tone meeting with DP, PD, costume designer' },
+      { owner: 'Casting',    task: 'Send breakdowns to agents for ' + (b.characters?.filter(c => c.type === 'lead' || c.type === 'supporting').length || '?') + ' principal roles' }
+    ]},
+    { title: W(Math.max(1, weeksOut - 1)), tasks: [
+      { owner: 'Loc Manager',task: 'Begin scouting ' + (locs?.locations?.length || b.locations?.length || '?') + ' locations; deal memos drafted' },
+      { owner: '1st AD',     task: 'Stripboard locked; day-out-of-days circulated to cast agents' },
+      { owner: 'Casting',    task: 'First-round auditions; chemistry reads scheduled' },
+      { owner: 'PD',         task: 'Set design begins; build/dress vs. practical decisions' }
+    ]},
+    { title: W(Math.max(1, weeksOut - 2)), tasks: [
+      { owner: 'Loc Manager',task: 'File permits (longest lead: ' + (locs?.summary?.longestLeadTime || '?') + ' days)' },
+      { owner: 'UPM',        task: 'Finalize crew deal memos; sign IATSE/DGA paperwork' },
+      { owner: 'Casting',    task: 'Offers out to leads + supporting; start day-player breakdowns' },
+      { owner: 'Props/Ward', task: 'Send first-round POs (longest lead: ' + (ords?.summary?.longestLeadTime || '?') + ' days)' }
+    ]},
+    { title: W(Math.max(1, weeksOut - 3)), tasks: [
+      { owner: 'DP',         task: 'Camera package selected; lens tests; LUT chosen' },
+      { owner: 'Gaffer/Grip',task: 'Lighting + grip package booked; truck reserved' },
+      { owner: 'Sound',      task: 'Mixer hired; package booked; comms/walkie plan drafted' },
+      { owner: 'Stunts',     task: flags.hasStunts ? 'Stunt coordinator hired; rigging tests scheduled' : 'N/A - no stunts flagged' }
+    ]},
+    { title: W(Math.max(1, weeksOut - 4)), tasks: [
+      { owner: '1st AD',     task: 'Tech scouts at primary locations with full dept-head cohort' },
+      { owner: 'PD',         task: 'Set construction begins; dressing inventory consolidated' },
+      { owner: 'Costume',    task: 'Fittings with leads; vendor pulls accelerate' },
+      { owner: 'Safety',     task: safety ? safety.summary?.totalRiskCategories + ' risk categories addressed; rider docs filed' : 'Safety memos drafted' }
+    ]},
+    { title: W(Math.max(1, weeksOut - 5)), tasks: [
+      { owner: 'UPM',        task: 'COIs in hand for all locations + vendors; payroll service activated' },
+      { owner: 'Production', task: 'Office setup complete; production reports template ready' },
+      { owner: 'Transport',  task: 'Vehicles confirmed; driver list to UPM' },
+      { owner: 'Catering',   task: 'Caterer booked; first week menus + dietary roster' }
+    ]},
+    { title: W(Math.max(1, weeksOut - 6)), tasks: [
+      { owner: '1st AD',     task: 'Final tech scout; call sheet template locked' },
+      { owner: 'Director',   task: 'Rehearsals with leads; table read' },
+      { owner: 'Continuity', task: 'Script supervisor onboarded; one-liner schedule reviewed' },
+      { owner: 'Locations',  task: 'Site reps confirmed; neighbor notifications sent' }
+    ]},
+    { title: 'Week -1 (final prep)', tasks: [
+      { owner: 'All Depts',  task: 'Prep day(s) on stage / prime location; load equipment; pre-light' },
+      { owner: 'Producer',   task: 'All-hands kickoff meeting; safety bulletins distributed' },
+      { owner: '1st AD',     task: 'Day 1 call sheet released 24hrs before; cast wardrobe/MU calls confirmed' },
+      { owner: 'Insurance',  task: 'Master COI in hand; production package active by Day 1' }
+    ]}
+  ];
+
+  // Trim to actual weeks-out and reverse so kickoff is first.
+  return weeks.slice(0, Math.min(weeksOut + 1, weeks.length));
+}
+
+function buildPostItems(post) {
+  if (!post) {
+    return [
+      { when: 'Wrap + 1 day',   task: 'Editor begins assembly; assistant editor pulls and syncs dailies' },
+      { when: 'Wrap + 6 weeks', task: 'First cut delivered to director' },
+      { when: 'Wrap + 12 wks',  task: 'Director\'s cut to producers' },
+      { when: 'Wrap + 16 wks',  task: 'Picture lock; turn over to VFX, sound, color' },
+      { when: 'Lock + 8 wks',   task: 'VFX, color grading, sound design + mix complete' },
+      { when: 'Lock + 12 wks',  task: 'Final QC; deliverables to distributor' }
+    ];
+  }
+  const items = [];
+  if (post.schedule?.lockedPicture)  items.push({ when: 'Locked picture',  task: post.schedule.lockedPicture });
+  if (post.schedule?.vfxTurnover)    items.push({ when: 'VFX turnover',    task: post.schedule.vfxTurnover });
+  if (post.schedule?.soundTurnover)  items.push({ when: 'Sound turnover',  task: post.schedule.soundTurnover });
+  if (post.editorial)                items.push({ when: 'Editorial',       task: (post.editorial.editor || 'Editor') + ' &mdash; ' + (post.editorial.weeks || '?') + ' weeks &mdash; $' + Math.round(post.editorial.estimatedCost || 0).toLocaleString() });
+  if (post.vfx)                      items.push({ when: 'VFX',             task: (post.vfx.shotCount || 0) + ' shots &mdash; ' + (post.vfx.weeks || '?') + ' weeks &mdash; $' + Math.round(post.vfx.estimatedCost || 0).toLocaleString() });
+  if (post.color)                    items.push({ when: 'Color',           task: (post.color.colorist || 'Colorist') + ' &mdash; ' + (post.color.days || '?') + ' days &mdash; $' + Math.round(post.color.estimatedCost || 0).toLocaleString() });
+  if (post.sound)                    items.push({ when: 'Sound',           task: (post.sound.mixDays || '?') + ' mix days on ' + ((post.sound.mixFormat || []).join('/') || '5.1') + ' &mdash; $' + Math.round(post.sound.estimatedCost || 0).toLocaleString() });
+  if (post.music)                    items.push({ when: 'Music',           task: (post.music.composer || post.music.model || 'Composer') + ' &mdash; ' + (post.music.weeks || '?') + ' weeks &mdash; $' + Math.round(post.music.estimatedCost || 0).toLocaleString() });
+  if (post.schedule?.finalDelivery)  items.push({ when: 'Final delivery',  task: post.schedule.finalDelivery });
+  return items;
+}
+
+// ─── Cross-reference helpers (used by enriched renderers + Workflow tab) ──
+const _norm = s => String(s || '').toUpperCase().replace(/[^A-Z0-9]+/g, ' ').trim();
+
+function scenesByLocation(locName) {
+  const k = _norm(locName);
+  return (state.breakdown?.scenes || []).filter(s => _norm(s.location).startsWith(k) || k.startsWith(_norm(s.location)));
+}
+function dayForScene(sceneNum) {
+  const sn = String(sceneNum || '');
+  const day = (state.schedule?.days || []).find(d => (d.scenes || []).some(s => String(s.number) === sn));
+  return day || null;
+}
+function callsheetForDay(dayNum) {
+  return (state.callsheet?.days || []).find(d => d.day === dayNum) || null;
+}
+function shotsForScene(sceneNum) {
+  const sn = String(sceneNum || '');
+  const wrap = (state.shotlist?.scenes || []).find(sc => String(sc.sceneNumber) === sn);
+  return wrap ? (wrap.shots || []) : [];
+}
+function aggregateElements(scenes) {
+  const fields = ['props', 'wardrobe', 'vehicles', 'weapons', 'animals', 'sfx', 'vfx', 'stunts', 'specialEquipment'];
+  const out = {};
+  for (const f of fields) {
+    const set = new Set();
+    for (const s of scenes) for (const v of (s[f] || [])) set.add(v);
+    out[f] = [...set];
+  }
+  return out;
+}
+function totalEighths(scenes) {
+  return (scenes || []).reduce((sum, s) => sum + (s.eighths || 0), 0);
+}
+function uniqueChars(scenes) {
+  const set = new Set();
+  for (const s of scenes) for (const c of (s.characters || [])) set.add(c);
+  return [...set];
+}
+
+// Boilerplate prep-workflow steps for any location (best-practice template).
+function locationPrepSteps(loc) {
+  const lead = loc.permitLeadTimeDays || 30;
+  const fee = loc.permitFeeRange || 'TBD';
+  return [
+    { phase: 'T-' + (lead + 14) + ' days', task: 'Initial scout: photograph, measure, note sound concerns and access' },
+    { phase: 'T-' + (lead + 7) + ' days',  task: 'Negotiate location agreement + COI requirements (' + (loc.insuranceRequired || 'TBD coverage') + ')' },
+    { phase: 'T-' + lead + ' days',         task: 'File ' + (loc.permitType || 'film permit') + ' (fees: ' + fee + ')' },
+    { phase: 'T-7 days',                    task: 'Tech scout with key dept heads: DP, gaffer, sound mixer, key grip, AD, location manager' },
+    { phase: 'T-3 days',                    task: 'Confirm power (' + (loc.power?.generatorKVA ? loc.power.generatorKVA + ' kVA gen' : 'shore') + '), parking (' + (loc.parking?.crewSpots || '?') + ' crew + ' + (loc.parking?.baseCampSpots || '?') + ' BC), neighbor notifications' },
+    { phase: 'T-1 day',                     task: 'Pre-rig + dressing day if applicable; safety walk; final headcount to caterer' },
+    { phase: 'Shoot day',                   task: 'Site rep on site, permits posted, restrooms staged, walkies on assigned channel' },
+    { phase: 'Wrap',                        task: 'Restore to original condition, debrief, retain photos for end-of-shoot reconciliation' }
+  ];
+}
+
 // ─── Generic deliverable runner (shotlist/orders/locations/safety/post) ──
 async function runDeliverable(kind, label) {
   if (!state.breakdown) { setStatus('Run breakdown first.', 'err'); return; }
@@ -833,6 +1134,7 @@ async function runDeliverable(kind, label) {
     state[kind] = result;
     const renderer = { shotlist: renderShotlist, orders: renderOrders, locations: renderLocations, safety: renderSafety, post: renderPost }[kind];
     if (renderer) renderer(result); else view.innerHTML = '<pre class="json">' + escapeHtml(JSON.stringify(result, null, 2)) + '</pre>';
+    if (typeof renderWorkflow === 'function') renderWorkflow(); // refresh master plan
   } catch (e) {
     view.innerHTML = '<div class="status err active">' + escapeHtml(label) + ' failed: ' + escapeHtml(e.message) + '</div>';
   }
@@ -849,14 +1151,53 @@ function renderShotlist(s) {
       <div class="stat"><div class="stat-label">Special Gear</div><div class="stat-value">${(sum.specialEquipmentNeeded || []).length}</div></div>
     </div>
     ${(sum.specialEquipmentNeeded || []).length ? `<div style="margin-bottom: 16px;"><div class="stat-label" style="margin-bottom: 6px;">Special Equipment Required</div>${(sum.specialEquipmentNeeded || []).map(e => '<span class="tag">' + escapeHtml(e) + '</span>').join('')}</div>` : ''}
-    ${(s.scenes || []).map(sc => `
+    ${(s.scenes || []).map(sc => {
+      const breakdown = (state.breakdown?.scenes || []).find(b => String(b.number) === String(sc.sceneNumber)) || {};
+      const day = dayForScene(sc.sceneNumber);
+      const cs = day ? callsheetForDay(day.day) : null;
+      return `
       <details style="background: var(--panel); border: 1px solid var(--border); border-radius: 10px; padding: 14px; margin-bottom: 6px;">
-        <summary style="cursor: pointer; font-weight: 700;">Scene ${escapeHtml(sc.sceneNumber || '')} - ${escapeHtml((sc.heading || '').slice(0, 70))} <span style="color: var(--muted); font-weight: 400;">(${sc.totalShots || (sc.shots || []).length} shots, ${sc.estimatedSetups || '?'} setups)</span></summary>
-        <table style="width: 100%; margin-top: 10px; font-size: 12px;"><thead><tr><th style="text-align: left;">#</th><th>Type</th><th>Angle</th><th>Movement</th><th>Lens</th><th>Description</th></tr></thead><tbody>
-        ${(sc.shots || []).map(sh => `<tr ${sh.highRisk ? 'style="background: rgba(220,38,38,0.06);"' : ''}><td><b>${escapeHtml(sh.number || '')}</b></td><td>${escapeHtml(sh.type || '')}</td><td>${escapeHtml(sh.angle || '')}</td><td>${escapeHtml(sh.movement || '')}</td><td>${escapeHtml(sh.lens || '')}</td><td>${escapeHtml(sh.description || '')}${(sh.specialEquipment || []).length ? '<br/><small style="color: var(--gold);">' + escapeHtml(sh.specialEquipment.join(', ')) + '</small>' : ''}</td></tr>`).join('')}
-        </tbody></table>
+        <summary style="cursor: pointer; font-weight: 700; display: flex; justify-content: space-between; flex-wrap: wrap; gap: 10px;">
+          <span>Scene ${escapeHtml(sc.sceneNumber || '')} - ${escapeHtml((sc.heading || '').slice(0, 70))}</span>
+          <span style="font-weight: 400; color: var(--muted); font-size: 13px;">${sc.totalShots || (sc.shots || []).length} shots &middot; ${sc.estimatedSetups || '?'} setups${day ? ' &middot; <b style="color: var(--gold);">D' + day.day + '</b>' : ''}</span>
+        </summary>
+
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 10px; margin-top: 14px; font-size: 12px;">
+          <div class="stat"><div class="stat-label">Location</div><div>${escapeHtml(breakdown.location || '')}</div></div>
+          <div class="stat"><div class="stat-label">I/E &middot; TOD</div><div>${escapeHtml(breakdown.intExt || '')} &middot; ${escapeHtml(breakdown.timeOfDay || '')}</div></div>
+          <div class="stat"><div class="stat-label">Pages</div><div>${(breakdown.pageCount || 0).toFixed(2)}</div></div>
+          ${day ? `<div class="stat"><div class="stat-label">Shoot Day</div><div>D${day.day}${day.date ? ' &middot; ' + escapeHtml(day.date) : ''}</div></div>` : ''}
+          ${cs?.callTimes?.generalCrew ? `<div class="stat"><div class="stat-label">Crew Call</div><div>${escapeHtml(cs.callTimes.generalCrew)}</div></div>` : ''}
+        </div>
+
+        ${(breakdown.characters || []).length ? `<div style="margin-top: 12px; font-size: 12px;"><b>Cast:</b> ${(breakdown.characters || []).map(c => '<span class="tag">' + escapeHtml(c) + '</span>').join('')}</div>` : ''}
+        ${(breakdown.props || []).length ? `<div style="margin-top: 6px; font-size: 12px;"><b>Props:</b> ${(breakdown.props || []).map(c => '<span class="tag">' + escapeHtml(c) + '</span>').join('')}</div>` : ''}
+        ${(breakdown.specialEquipment || []).length ? `<div style="margin-top: 6px; font-size: 12px;"><b style="color: var(--gold);">Special gear:</b> ${(breakdown.specialEquipment || []).map(c => '<span class="tag">' + escapeHtml(c) + '</span>').join('')}</div>` : ''}
+
+        <h4 style="margin: 16px 0 6px; font-size: 12px; letter-spacing: 0.5px; color: var(--gold);">SHOT LIST (in shooting order)</h4>
+        <table style="width: 100%; font-size: 12px;">
+          <thead><tr><th style="text-align: left;">#</th><th>Type</th><th>Angle</th><th>Movement</th><th>Lens</th><th>Description</th><th>Notes</th></tr></thead>
+          <tbody>
+            ${(sc.shots || []).map(sh => `
+              <tr ${sh.highRisk ? 'style="background: rgba(220,38,38,0.06);"' : ''}>
+                <td><b>${escapeHtml(sh.number || '')}</b></td>
+                <td>${escapeHtml(sh.type || '')}</td>
+                <td>${escapeHtml(sh.angle || '')}</td>
+                <td>${escapeHtml(sh.movement || '')}</td>
+                <td>${escapeHtml(sh.lens || '')}</td>
+                <td>${escapeHtml(sh.description || '')}${(sh.specialEquipment || []).length ? '<br/><small style="color: var(--gold);">SPECIAL: ' + escapeHtml(sh.specialEquipment.join(', ')) + '</small>' : ''}</td>
+                <td style="font-size: 11px; color: var(--muted);">${escapeHtml(sh.notes || '')}${sh.highRisk ? '<br/><span class="tag hot">HIGH RISK</span>' : ''}</td>
+              </tr>
+            `).join('')}
+          </tbody>
+        </table>
+
+        <div style="margin-top: 14px; padding: 10px 12px; background: var(--panel-2); border-left: 3px solid var(--gold); border-radius: 4px; font-size: 12px;">
+          <b>On the day:</b> Master shot first, then coverage from wide to close. Allow ~25-35 min per setup including lighting reset.
+          Total estimated time at this scene: <b>${Math.max(45, ((sc.shots || []).length * 30))} minutes</b>.
+        </div>
       </details>
-    `).join('')}
+    `;}).join('')}
   `;
 }
 
@@ -869,18 +1210,58 @@ function renderOrders(o) {
       <div class="stat"><div class="stat-label">Line Items</div><div class="stat-value">${o.summary?.totalLineItems || 0}</div></div>
       <div class="stat"><div class="stat-label">Longest Lead</div><div class="stat-value">${o.summary?.longestLeadTime || 0}<span style="font-size: 13px;">d</span></div></div>
     </div>
-    ${(o.orders || []).map(po => `
+    ${(o.orders || []).map(po => {
+      const orderDate = new Date(); orderDate.setDate(orderDate.getDate() + 0); // PO date = today as anchor
+      const deliveryDate = new Date(); deliveryDate.setDate(deliveryDate.getDate() + (po.leadTimeDays || 14));
+      const fmtDate = d => d.toLocaleDateString('en-US', { month: 'short', day: 'numeric' });
+      return `
       <details style="background: var(--panel); border: 1px solid var(--border); border-radius: 10px; padding: 14px; margin-bottom: 6px;">
-        <summary style="cursor: pointer; display: flex; justify-content: space-between; font-weight: 700;">
+        <summary style="cursor: pointer; display: flex; justify-content: space-between; font-weight: 700; gap: 10px; flex-wrap: wrap;">
           <span>${escapeHtml(po.department)} - <span style="color: var(--muted); font-weight: 400;">${escapeHtml(po.vendor)}</span></span>
-          <span style="color: var(--gold);">${fmt(po.subtotal)}</span>
+          <span style="color: var(--gold);">${fmt(po.subtotal)} &middot; ${(po.items || []).length} items</span>
         </summary>
-        <div style="font-size: 12px; color: var(--muted); margin-top: 8px;">Lead time: ${po.leadTimeDays || '?'} days &middot; ${escapeHtml(po.vendorContact || 'TBD')}</div>
-        <table style="width: 100%; margin-top: 10px; font-size: 12px;"><thead><tr><th style="text-align: left;">Item</th><th>Qty</th><th>Unit</th><th style="text-align: right;">Rate</th><th style="text-align: right;">Total</th></tr></thead><tbody>
-        ${(po.items || []).map(it => `<tr><td>${escapeHtml(it.description || '')}</td><td>${it.quantity || ''}</td><td>${escapeHtml(it.unit || '')}</td><td style="text-align: right;">${fmt(it.unitPrice)}</td><td style="text-align: right;"><b>${fmt(it.lineTotal)}</b></td></tr>`).join('')}
-        </tbody></table>
+
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 10px; margin-top: 14px; font-size: 12px;">
+          <div class="stat"><div class="stat-label">Vendor</div><div>${escapeHtml(po.vendor || '')}<br/><small style="color: var(--muted);">${escapeHtml(po.vendorContact || 'Contact TBD')}</small></div></div>
+          <div class="stat"><div class="stat-label">Order By</div><div style="color: var(--gold); font-weight: 700;">${escapeHtml(fmtDate(orderDate))}</div></div>
+          <div class="stat"><div class="stat-label">Delivery</div><div>${escapeHtml(po.deliveryDate || fmtDate(deliveryDate))}</div></div>
+          <div class="stat"><div class="stat-label">Lead Time</div><div>${po.leadTimeDays || '?'} days</div></div>
+          ${po.tax ? `<div class="stat"><div class="stat-label">Tax</div><div>${fmt(po.tax)}</div></div>` : ''}
+        </div>
+
+        <h4 style="margin: 16px 0 6px; font-size: 12px; letter-spacing: 0.5px; color: var(--gold);">LINE ITEMS</h4>
+        <table style="width: 100%; font-size: 12px;">
+          <thead><tr><th style="text-align: left;">Item</th><th>Qty</th><th>Unit</th><th style="text-align: right;">Rate</th><th style="text-align: right;">Total</th><th>Used in</th></tr></thead>
+          <tbody>
+            ${(po.items || []).map(it => `<tr>
+              <td>${escapeHtml(it.description || '')}${it.notes ? '<br/><small style="color: var(--muted);">' + escapeHtml(it.notes) + '</small>' : ''}</td>
+              <td>${it.quantity || ''}</td>
+              <td>${escapeHtml(it.unit || '')}</td>
+              <td style="text-align: right;">${fmt(it.unitPrice)}</td>
+              <td style="text-align: right;"><b>${fmt(it.lineTotal)}</b></td>
+              <td style="font-size: 11px; color: var(--muted);">${escapeHtml((it.scenesUsed || []).slice(0, 5).join(', '))}</td>
+            </tr>`).join('')}
+          </tbody>
+        </table>
+
+        <h4 style="margin: 16px 0 6px; font-size: 12px; letter-spacing: 0.5px; color: var(--gold);">PROCUREMENT WORKFLOW</h4>
+        <table style="width: 100%; font-size: 12px;">
+          <thead><tr><th style="text-align: left; width: 110px;">When</th><th style="text-align: left;">Step</th></tr></thead>
+          <tbody>
+            <tr><td><b>Day 0</b></td><td>Send PO to ${escapeHtml(po.vendor)} (${escapeHtml(po.vendorContact || 'main contact')}) with line items + delivery address</td></tr>
+            <tr><td>+1 day</td><td>Get vendor confirmation; verify pricing, lead times, COI on file</td></tr>
+            <tr><td>+${Math.floor((po.leadTimeDays || 14) / 2)} days</td><td>Mid-point check-in: any backorders? Substitutions?</td></tr>
+            <tr><td>-2 days</td><td>Confirm delivery slot, dock contact, off-load crew available</td></tr>
+            <tr><td><b>Delivery day</b></td><td>Receive + check against PO; flag damaged/missing; sign packing slip; route to dept truck</td></tr>
+            <tr><td>+1 day</td><td>Reconcile PO vs invoice in production accounting</td></tr>
+            <tr><td>Wrap</td><td>Return rentals; pack out purchased items; finalize vendor payment</td></tr>
+          </tbody>
+        </table>
+
+        ${po.deliveryAddress ? `<div style="margin-top: 10px; font-size: 12px; color: var(--muted);"><b>Deliver to:</b> ${escapeHtml(po.deliveryAddress)}</div>` : ''}
+        ${po.notes ? `<div style="margin-top: 8px; padding: 8px 10px; background: var(--panel-2); border-radius: 4px; font-size: 12px;"><b>Notes:</b> ${escapeHtml(po.notes)}</div>` : ''}
       </details>
-    `).join('')}
+    `;}).join('')}
   `;
 }
 
@@ -893,19 +1274,86 @@ function renderLocations(l) {
       <div class="stat"><div class="stat-label">Longest Lead</div><div class="stat-value">${l.summary?.longestLeadTime || 0}<span style="font-size: 13px;">d</span></div></div>
       <div class="stat"><div class="stat-label">Complex</div><div class="stat-value" style="color: var(--red);">${l.summary?.complexLocations || 0}</div></div>
     </div>
-    ${(l.locations || []).map(loc => `
+    ${(l.locations || []).map(loc => {
+      const scenes  = scenesByLocation(loc.name);
+      const elems   = aggregateElements(scenes);
+      const cast    = uniqueChars(scenes);
+      const eighths = totalEighths(scenes) || loc.totalEighths || 0;
+      const days    = [...new Set(scenes.map(s => dayForScene(s.number)?.day).filter(Boolean))];
+      const prep    = locationPrepSteps(loc);
+      return `
       <details style="background: var(--panel); border: 1px solid var(--border); border-radius: 10px; padding: 14px; margin-bottom: 6px;">
-        <summary style="cursor: pointer; font-weight: 700;">${escapeHtml(loc.name)} <span class="tag ${loc.intExt === 'INT' ? 'int' : 'ext'}">${escapeHtml(loc.intExt || '')}</span> <span style="color: var(--muted); font-weight: 400;">${loc.totalScenes || 0} scenes &middot; ${loc.totalEighths || 0}/8</span></summary>
-        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 10px; margin-top: 12px; font-size: 13px;">
+        <summary style="cursor: pointer; font-weight: 700;">${escapeHtml(loc.name)} <span class="tag ${loc.intExt === 'INT' ? 'int' : 'ext'}">${escapeHtml(loc.intExt || '')}</span> <span style="color: var(--muted); font-weight: 400;">${scenes.length || loc.totalScenes || 0} scenes &middot; ${eighths}/8 &middot; ${days.length} day${days.length === 1 ? '' : 's'}</span></summary>
+
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 10px; margin-top: 14px; font-size: 13px;">
           <div><div class="stat-label">Permit</div><div>${escapeHtml(loc.permitType || '')}</div><div style="color: var(--muted); font-size: 12px;">${escapeHtml(loc.permitFeeRange || '')} &middot; ${loc.permitLeadTimeDays || '?'}d lead</div></div>
           <div><div class="stat-label">Insurance</div><div>${escapeHtml(loc.insuranceRequired || '')}</div></div>
-          <div><div class="stat-label">Parking</div><div>Crew: ${loc.parking?.crewSpots || '?'} &middot; BC: ${loc.parking?.baseCampSpots || '?'}</div></div>
+          <div><div class="stat-label">Parking</div><div>Crew ${loc.parking?.crewSpots || '?'} &middot; BC ${loc.parking?.baseCampSpots || '?'}</div></div>
           <div><div class="stat-label">Power</div><div>${loc.power?.generatorKVA ? loc.power.generatorKVA + ' kVA gen' : 'Shore: ' + (loc.power?.shorePowerAvailable ? 'yes' : 'no')}</div></div>
+          <div><div class="stat-label">Restrooms</div><div>${escapeHtml(loc.restrooms || 'TBD')}</div></div>
+          <div><div class="stat-label">Daily Fee Est.</div><div>${loc.estimatedDailyFee ? '$' + Number(loc.estimatedDailyFee).toLocaleString() : 'TBD'}</div></div>
         </div>
-        ${(loc.scoutChecklist || []).length ? `<div style="margin-top: 12px;"><div class="stat-label" style="margin-bottom: 4px;">Scout Checklist</div><ul style="padding-left: 20px; font-size: 12px;">${loc.scoutChecklist.map(c => '<li>' + escapeHtml(c) + '</li>').join('')}</ul></div>` : ''}
-        ${(loc.redFlags || []).length ? `<div style="margin-top: 8px; padding: 8px; background: rgba(220,38,38,0.08); border-radius: 6px; font-size: 12px;"><b style="color: var(--red);">Red flags:</b> ${escapeHtml(loc.redFlags.join('; '))}</div>` : ''}
+
+        ${scenes.length ? `
+          <h4 style="margin: 18px 0 6px; font-size: 13px; letter-spacing: 0.5px; color: var(--gold);">SCENES AT THIS LOCATION (${scenes.length})</h4>
+          <div class="tbl-scroll" style="max-height: 320px;">
+            <table style="width: 100%; font-size: 12px;">
+              <thead><tr><th>#</th><th>Heading</th><th>I/E</th><th>TOD</th><th>Pgs</th><th>Day</th><th>Cast</th><th>Tags</th></tr></thead>
+              <tbody>
+                ${scenes.map(s => {
+                  const day = dayForScene(s.number);
+                  const tags = [];
+                  if ((s.weapons || []).length)  tags.push('<span class="tag hot">WPN</span>');
+                  if ((s.stunts  || []).length)  tags.push('<span class="tag hot">STNT</span>');
+                  if ((s.vfx     || []).length)  tags.push('<span class="tag">VFX</span>');
+                  if ((s.sfx     || []).length)  tags.push('<span class="tag">SFX</span>');
+                  if ((s.vehicles|| []).length)  tags.push('<span class="tag">VEH</span>');
+                  if (s.minorsOnSet)             tags.push('<span class="tag hot">MIN</span>');
+                  return `<tr>
+                    <td><b>${escapeHtml(s.number)}</b></td>
+                    <td>${escapeHtml((s.heading || '').slice(0, 60))}</td>
+                    <td><span class="tag ${s.intExt === 'INT' ? 'int' : 'ext'}">${escapeHtml(s.intExt || '')}</span></td>
+                    <td><span class="tag ${s.timeOfDay === 'NIGHT' ? 'night' : 'day'}">${escapeHtml(s.timeOfDay || '')}</span></td>
+                    <td>${(s.pageCount || 0).toFixed(2)}</td>
+                    <td>${day ? '<b>D' + day.day + '</b>' : '<span style="color: var(--dim);">unsched</span>'}</td>
+                    <td style="font-size: 11px;">${escapeHtml((s.characters || []).slice(0, 3).join(', '))}</td>
+                    <td>${tags.join('')}</td>
+                  </tr>`;
+                }).join('')}
+              </tbody>
+            </table>
+          </div>
+        ` : ''}
+
+        ${days.length ? `<div style="margin-top: 14px; padding: 10px 12px; background: var(--panel-2); border-left: 3px solid var(--gold); border-radius: 4px; font-size: 13px;"><b>Shoot days at this location:</b> ${days.map(d => 'Day ' + d).join(', ')}</div>` : ''}
+
+        ${cast.length ? `<div style="margin-top: 12px;"><div class="stat-label" style="margin-bottom: 4px;">Cast required (${cast.length})</div><div style="font-size: 12px;">${cast.map(c => '<span class="tag">' + escapeHtml(c) + '</span>').join('')}</div></div>` : ''}
+
+        ${Object.entries(elems).filter(([, arr]) => arr.length).length ? `
+          <h4 style="margin: 18px 0 6px; font-size: 13px; letter-spacing: 0.5px; color: var(--gold);">ELEMENTS NEEDED ON SET</h4>
+          <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 10px; font-size: 12px;">
+            ${Object.entries(elems).filter(([, arr]) => arr.length).map(([field, arr]) => `
+              <div style="background: var(--panel-2); padding: 10px; border-radius: 6px;">
+                <div class="stat-label" style="text-transform: uppercase;">${field}</div>
+                <div style="margin-top: 4px;">${arr.slice(0, 12).map(v => '<span class="tag">' + escapeHtml(v) + '</span>').join('')}${arr.length > 12 ? ' <span style="color: var(--dim);">+' + (arr.length - 12) + ' more</span>' : ''}</div>
+              </div>
+            `).join('')}
+          </div>
+        ` : ''}
+
+        <h4 style="margin: 18px 0 6px; font-size: 13px; letter-spacing: 0.5px; color: var(--gold);">PREP WORKFLOW</h4>
+        <table style="width: 100%; font-size: 12px;">
+          <thead><tr><th style="text-align: left; width: 110px;">When</th><th style="text-align: left;">Task</th></tr></thead>
+          <tbody>${prep.map(p => `<tr><td><b>${escapeHtml(p.phase)}</b></td><td>${escapeHtml(p.task)}</td></tr>`).join('')}</tbody>
+        </table>
+
+        ${(loc.scoutChecklist || []).length ? `<h4 style="margin: 18px 0 6px; font-size: 13px; letter-spacing: 0.5px; color: var(--gold);">SCOUT VERIFICATION CHECKLIST</h4><ul style="padding-left: 20px; font-size: 12px;">${loc.scoutChecklist.map(c => '<li>' + escapeHtml(c) + '</li>').join('')}</ul>` : ''}
+
+        ${(loc.soundConcerns || []).length ? `<div style="margin-top: 12px; padding: 8px 10px; background: rgba(212,175,55,0.08); border-radius: 6px; font-size: 12px;"><b style="color: var(--gold);">Sound concerns:</b> ${escapeHtml(loc.soundConcerns.join('; '))}</div>` : ''}
+        ${(loc.redFlags || []).length ? `<div style="margin-top: 8px; padding: 8px 10px; background: rgba(220,38,38,0.08); border-radius: 6px; font-size: 12px;"><b style="color: var(--red);">Red flags:</b> ${escapeHtml(loc.redFlags.join('; '))}</div>` : ''}
+        ${loc.neighborNotification ? `<div style="margin-top: 8px; font-size: 12px; color: var(--muted);"><b>Neighbor notice:</b> ${escapeHtml(loc.neighborNotification.radius || '?')} radius, ${escapeHtml(loc.neighborNotification.form || 'standard')}, ${loc.neighborNotification.leadTimeDays || '?'}d lead</div>` : ''}
       </details>
-    `).join('')}
+    `;}).join('')}
   `;
 }
 
@@ -916,19 +1364,78 @@ function renderSafety(s) {
       <div class="stat"><div class="stat-label">High Severity</div><div class="stat-value" style="color: var(--red);">${s.summary?.highSeverity || 0}</div></div>
       <div class="stat"><div class="stat-label">Est. Insurance</div><div class="stat-value" style="font-size: 14px;">${escapeHtml(s.summary?.estimatedInsurancePremium || 'TBD')}</div></div>
     </div>
-    ${(s.riskMemos || []).map(rm => `
+    ${(s.riskMemos || []).map(rm => {
+      // Map every scene number affected to its shoot day from schedule
+      const sceneDays = (rm.scenesAffected || []).map(num => ({
+        num, day: dayForScene(num)?.day || null,
+        scene: (state.breakdown?.scenes || []).find(b => String(b.number) === String(num))
+      }));
+      const daysAffected = [...new Set(sceneDays.map(x => x.day).filter(Boolean))].sort((a, b) => a - b);
+      return `
       <details style="background: var(--panel); border: 1px solid var(--border); border-left: 3px solid var(--red); border-radius: 8px; padding: 14px; margin-bottom: 6px;">
-        <summary style="cursor: pointer; font-weight: 700;">${escapeHtml(rm.risk)} <span style="color: var(--muted); font-weight: 400;">(${(rm.scenesAffected || []).length} scenes)</span></summary>
-        <div style="font-size: 13px; margin-top: 10px;">
-          ${rm.iatsceBulletin ? '<div><b>Bulletin:</b> ' + escapeHtml(rm.iatsceBulletin) + '</div>' : ''}
-          ${rm.insuranceRider ? '<div style="margin-top: 6px;"><b>Insurance rider:</b> ' + escapeHtml(rm.insuranceRider) + '</div>' : ''}
-          ${(rm.requiredPersonnel || []).length ? '<div style="margin-top: 6px;"><b>Required personnel:</b> ' + escapeHtml(rm.requiredPersonnel.join(', ')) + '</div>' : ''}
-          ${(rm.requiredCertifications || []).length ? '<div style="margin-top: 6px;"><b>Certifications:</b> ' + escapeHtml(rm.requiredCertifications.join(', ')) + '</div>' : ''}
-          ${(rm.dailyMeetingTopics || []).length ? '<div style="margin-top: 6px;"><b>Daily meeting topics:</b><ul style="padding-left: 20px; margin-top: 4px;">' + rm.dailyMeetingTopics.map(t => '<li>' + escapeHtml(t) + '</li>').join('') + '</ul></div>' : ''}
-          ${(rm.stopWorkTriggers || []).length ? '<div style="margin-top: 6px;"><b>Stop-work triggers:</b> ' + escapeHtml(rm.stopWorkTriggers.join('; ')) + '</div>' : ''}
+        <summary style="cursor: pointer; font-weight: 700; display: flex; justify-content: space-between; flex-wrap: wrap; gap: 10px;">
+          <span>${escapeHtml(rm.risk)}</span>
+          <span style="font-weight: 400; color: var(--muted); font-size: 13px;">${(rm.scenesAffected || []).length} scenes &middot; ${daysAffected.length} shoot day${daysAffected.length === 1 ? '' : 's'}</span>
+        </summary>
+
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 10px; margin-top: 14px; font-size: 12px;">
+          <div class="stat"><div class="stat-label">Insurance Rider</div><div>${escapeHtml(rm.insuranceRider || 'TBD')}</div></div>
+          <div class="stat"><div class="stat-label">Bulletin</div><div>${escapeHtml(rm.iatsceBulletin || 'IATSE GCSP')}</div></div>
+          <div class="stat"><div class="stat-label">Affected Days</div><div>${daysAffected.length ? daysAffected.map(d => 'D' + d).join(', ') : 'TBD'}</div></div>
+          <div class="stat"><div class="stat-label">Cost Impact</div><div>${escapeHtml(rm.additionalCost || 'TBD')}</div></div>
         </div>
+
+        ${(rm.requiredPersonnel || []).length ? `
+          <h4 style="margin: 16px 0 6px; font-size: 12px; letter-spacing: 0.5px; color: var(--gold);">REQUIRED PERSONNEL</h4>
+          <div>${rm.requiredPersonnel.map(p => '<span class="tag hot">' + escapeHtml(p) + '</span>').join('')}</div>
+        ` : ''}
+
+        ${(rm.requiredCertifications || []).length ? `
+          <h4 style="margin: 14px 0 6px; font-size: 12px; letter-spacing: 0.5px; color: var(--gold);">REQUIRED CERTIFICATIONS</h4>
+          <ul style="padding-left: 20px; font-size: 12px;">${rm.requiredCertifications.map(c => '<li>' + escapeHtml(c) + '</li>').join('')}</ul>
+        ` : ''}
+
+        ${sceneDays.length ? `
+          <h4 style="margin: 16px 0 6px; font-size: 12px; letter-spacing: 0.5px; color: var(--gold);">AFFECTED SCENES</h4>
+          <table style="width: 100%; font-size: 12px;">
+            <thead><tr><th style="text-align: left;">#</th><th>Heading</th><th>Day</th><th>TOD</th></tr></thead>
+            <tbody>
+              ${sceneDays.map(({ num, day, scene }) => `<tr>
+                <td><b>${escapeHtml(num)}</b></td>
+                <td>${escapeHtml((scene?.heading || '').slice(0, 70))}</td>
+                <td>${day ? '<b>D' + day + '</b>' : '<span style="color: var(--dim);">unsched</span>'}</td>
+                <td>${escapeHtml(scene?.timeOfDay || '')}</td>
+              </tr>`).join('')}
+            </tbody>
+          </table>
+        ` : ''}
+
+        ${(rm.dailyMeetingTopics || []).length ? `
+          <h4 style="margin: 16px 0 6px; font-size: 12px; letter-spacing: 0.5px; color: var(--gold);">DAILY SAFETY MEETING TOPICS</h4>
+          <ul style="padding-left: 20px; font-size: 12px;">${rm.dailyMeetingTopics.map(t => '<li>' + escapeHtml(t) + '</li>').join('')}</ul>
+        ` : ''}
+
+        ${(rm.stopWorkTriggers || []).length ? `
+          <h4 style="margin: 16px 0 6px; font-size: 12px; letter-spacing: 0.5px; color: var(--red);">STOP-WORK TRIGGERS</h4>
+          <ul style="padding-left: 20px; font-size: 12px; color: #fca5a5;">${rm.stopWorkTriggers.map(t => '<li>' + escapeHtml(t) + '</li>').join('')}</ul>
+        ` : ''}
+
+        <h4 style="margin: 16px 0 6px; font-size: 12px; letter-spacing: 0.5px; color: var(--gold);">PROTOCOL ON SHOOT DAY</h4>
+        <table style="width: 100%; font-size: 12px;">
+          <thead><tr><th style="text-align: left; width: 90px;">When</th><th style="text-align: left;">Action</th></tr></thead>
+          <tbody>
+            <tr><td><b>Pre-call</b></td><td>${escapeHtml(rm.requiredPersonnel?.[0] || 'Specialty supervisor')} arrives 1hr before crew call; pre-rig check</td></tr>
+            <tr><td>Crew call</td><td>Mandatory all-hands safety meeting; sign-in sheet; AMPTP bulletin distributed</td></tr>
+            <tr><td>Pre-shot</td><td>Walk-through with stunt/effects coordinator + ${escapeHtml(rm.requiredPersonnel?.[0] || 'safety officer')}; clear set perimeter</td></tr>
+            <tr><td>Roll cameras</td><td>1st AD calls "lock it down" - non-essential personnel cleared; medic ready</td></tr>
+            <tr><td>Post-take</td><td>Safety officer cleared = OK to reset; if STOP-WORK trigger fires, cease immediately + investigate</td></tr>
+            <tr><td>End of day</td><td>Debrief log entry; OSHA 300 if applicable; restock kit; reset for next day</td></tr>
+          </tbody>
+        </table>
+
+        ${(rm.requiredForms || []).length ? `<div style="margin-top: 10px; font-size: 12px; color: var(--muted);"><b>Forms required:</b> ${escapeHtml(rm.requiredForms.join(', '))}</div>` : ''}
       </details>
-    `).join('')}
+    `;}).join('')}
     ${s.coiRequirements ? `
       <h3 style="margin: 22px 0 10px;">Master COI Requirements</h3>
       <div style="background: var(--panel); border: 1px solid var(--border); border-radius: 10px; padding: 14px; font-size: 13px;">
@@ -1004,6 +1511,7 @@ async function runBudget() {
     }, 'budget');
     state.budget = budget;
     renderBudget(budget);
+    if (typeof renderWorkflow === 'function') renderWorkflow();
   } catch (e) {
     $('budgetView').innerHTML = '<div class="status err active">Budget failed: ' + escapeHtml(e.message) + '</div>';
   }
@@ -1108,43 +1616,120 @@ function render(b) {
 
 function renderSchedule(s) {
   const sum = s.summary || {};
+  const dayCards = (s.days || []).map(d => {
+    const fullScenes = (d.scenes || []).map(sc => {
+      const full = (state.breakdown?.scenes || []).find(b => String(b.number) === String(sc.number));
+      return full ? { ...sc, ...full } : sc;
+    });
+    const elems = aggregateElements(fullScenes);
+    const cs = callsheetForDay(d.day);
+    const elemRows = Object.entries(elems).filter(([, arr]) => arr.length);
+
+    return `
+      <details style="background: var(--panel); border: 1px solid var(--border); border-radius: 10px; padding: 14px; margin-bottom: 6px;">
+        <summary style="cursor: pointer; font-weight: 700; display: flex; justify-content: space-between; align-items: center; gap: 10px; flex-wrap: wrap;">
+          <span><b style="color: var(--gold); font-size: 18px;">DAY ${d.day}</b> &middot; ${escapeHtml(d.date || 'TBD')} &middot; ${escapeHtml(d.location || '')}</span>
+          <span style="font-weight: 400; color: var(--muted); font-size: 13px;">
+            <span class="tag ${d.intExt === 'INT' ? 'int' : 'ext'}">${escapeHtml(d.intExt || '')}</span>
+            <span class="tag ${d.timeOfDay === 'NIGHT' ? 'night' : 'day'}">${escapeHtml(d.timeOfDay || '')}</span>
+            ${(d.totalPages || (d.totalEighths || 0) / 8 || 0).toFixed(2)} pgs
+            ${d.minorHours ? ' <span class="tag hot">MINOR HRS</span>' : ''}
+          </span>
+        </summary>
+
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(170px, 1fr)); gap: 10px; margin-top: 14px; font-size: 13px;">
+          <div class="stat"><div class="stat-label">Crew Call</div><div style="font-size: 18px; font-weight: 700; color: var(--gold);">${escapeHtml(d.estimatedCallTime || cs?.callTimes?.generalCrew || 'TBD')}</div></div>
+          <div class="stat"><div class="stat-label">Estimated Wrap</div><div style="font-size: 16px; font-weight: 700;">${escapeHtml(d.estimatedWrapTime || 'TBD')}</div></div>
+          <div class="stat"><div class="stat-label">Total Pages</div><div style="font-size: 18px; font-weight: 700;">${(d.totalPages || (d.totalEighths || 0) / 8 || 0).toFixed(2)}</div></div>
+          <div class="stat"><div class="stat-label">Setups (est)</div><div style="font-size: 18px; font-weight: 700;">${fullScenes.reduce((sum, sc) => sum + (shotsForScene(sc.number).length || 4), 0)}</div></div>
+        </div>
+
+        ${(d.castCalled || []).length ? `
+          <h4 style="margin: 16px 0 6px; font-size: 12px; letter-spacing: 0.5px; color: var(--gold);">CAST CALLED</h4>
+          <div>${d.castCalled.map(c => '<span class="tag">' + escapeHtml(c) + '</span>').join('')}</div>
+        ` : ''}
+
+        <h4 style="margin: 18px 0 6px; font-size: 12px; letter-spacing: 0.5px; color: var(--gold);">SCENES THIS DAY (${fullScenes.length})</h4>
+        <div class="tbl-scroll" style="max-height: 320px;">
+          <table style="width: 100%; font-size: 12px;">
+            <thead><tr><th>#</th><th>Heading</th><th>Pgs</th><th>Cast</th><th>Props</th><th>Tags</th></tr></thead>
+            <tbody>
+              ${fullScenes.map(sc => {
+                const tags = [];
+                if ((sc.weapons || []).length)  tags.push('<span class="tag hot">WPN</span>');
+                if ((sc.stunts  || []).length)  tags.push('<span class="tag hot">STNT</span>');
+                if ((sc.vfx     || []).length)  tags.push('<span class="tag">VFX</span>');
+                if ((sc.sfx     || []).length)  tags.push('<span class="tag">SFX</span>');
+                if ((sc.vehicles|| []).length)  tags.push('<span class="tag">VEH</span>');
+                if (sc.minorsOnSet)             tags.push('<span class="tag hot">MIN</span>');
+                return `<tr>
+                  <td><b>${escapeHtml(sc.number)}</b></td>
+                  <td>${escapeHtml((sc.heading || '').slice(0, 60))}</td>
+                  <td>${(sc.pageCount || 0).toFixed(2)}</td>
+                  <td style="font-size: 11px;">${escapeHtml((sc.characters || []).slice(0, 4).join(', '))}</td>
+                  <td style="font-size: 11px;">${escapeHtml((sc.props || []).slice(0, 4).join(', '))}</td>
+                  <td>${tags.join('')}</td>
+                </tr>`;
+              }).join('')}
+            </tbody>
+          </table>
+        </div>
+
+        ${elemRows.length ? `
+          <h4 style="margin: 18px 0 6px; font-size: 12px; letter-spacing: 0.5px; color: var(--gold);">ALL ELEMENTS THIS DAY</h4>
+          <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 10px; font-size: 12px;">
+            ${elemRows.map(([field, arr]) => `
+              <div style="background: var(--panel-2); padding: 10px; border-radius: 6px;">
+                <div class="stat-label" style="text-transform: uppercase;">${field}</div>
+                <div style="margin-top: 4px;">${arr.slice(0, 8).map(v => '<span class="tag">' + escapeHtml(v) + '</span>').join('')}${arr.length > 8 ? ' <span style="color: var(--dim);">+' + (arr.length - 8) + '</span>' : ''}</div>
+              </div>
+            `).join('')}
+          </div>
+        ` : ''}
+
+        <h4 style="margin: 18px 0 6px; font-size: 12px; letter-spacing: 0.5px; color: var(--gold);">SHOOT DAY TIMELINE</h4>
+        <table style="width: 100%; font-size: 12px;">
+          <thead><tr><th style="text-align: left; width: 90px;">Time</th><th style="text-align: left;">Event</th></tr></thead>
+          <tbody>
+            <tr><td><b>${escapeHtml(d.estimatedCallTime || cs?.callTimes?.generalCrew || '06:00')}</b></td><td>General crew call - safety meeting + breakfast</td></tr>
+            <tr><td>+15 min</td><td>Dept heads walk set, blocking review with director + DP</td></tr>
+            <tr><td>+45 min</td><td>First lighting setup (gaffer + grips); cast in MU/wardrobe</td></tr>
+            <tr><td>+90 min</td><td>Rehearsal on set with actors; final blocking; sound check</td></tr>
+            <tr><td>+2h</td><td><b>First shot called</b></td></tr>
+            <tr><td>~mid-day</td><td>Lunch (IATSE 6-hr rule: must break before hour 6 or pay meal penalty)</td></tr>
+            <tr><td>${escapeHtml(d.estimatedWrapTime || '~12h after call')}</td><td><b>Wrap</b> - struck set, equipment loaded, dailies sent</td></tr>
+            ${d.minorHours ? '<tr><td colspan="2" style="color: var(--red);"><b>Minor hours apply</b> - max 9.5 hrs on set incl. 1 hr meal + 3 hrs school. Studio teacher required.</td></tr>' : ''}
+          </tbody>
+        </table>
+
+        ${(d.specialRequirements || []).length ? `<div style="margin-top: 12px; padding: 8px 10px; background: rgba(212,175,55,0.08); border-radius: 6px; font-size: 12px;"><b style="color: var(--gold);">Special requirements:</b> ${escapeHtml(d.specialRequirements.join('; '))}</div>` : ''}
+        ${d.notes ? `<div style="margin-top: 8px; font-size: 12px; color: var(--muted);"><b>Notes:</b> ${escapeHtml(d.notes)}</div>` : ''}
+      </details>
+    `;
+  }).join('');
+
   $('scheduleView').innerHTML = `
     <div class="stats">
-      <div class="stat"><div class="stat-label">Shoot days</div><div class="stat-value">${sum.totalShootDays || s.days?.length || 0}</div></div>
-      <div class="stat"><div class="stat-label">Avg pages/day</div><div class="stat-value">${((sum.avgEighthsPerDay || 0) / 8).toFixed(1)}</div></div>
+      <div class="stat"><div class="stat-label">Shoot Days</div><div class="stat-value">${sum.totalShootDays || s.days?.length || 0}</div></div>
+      <div class="stat"><div class="stat-label">Avg Pages/Day</div><div class="stat-value">${((sum.avgEighthsPerDay || 0) / 8).toFixed(1)}</div></div>
       <div class="stat"><div class="stat-label">Locations</div><div class="stat-value">${sum.totalLocations || 0}</div></div>
-      <div class="stat"><div class="stat-label">Company moves</div><div class="stat-value">${sum.totalCompanyMoves || 0}</div></div>
-      <div class="stat"><div class="stat-label">Night shoots</div><div class="stat-value">${sum.nightShoots || 0}</div></div>
+      <div class="stat"><div class="stat-label">Company Moves</div><div class="stat-value">${sum.totalCompanyMoves || 0}</div></div>
+      <div class="stat"><div class="stat-label">Night Shoots</div><div class="stat-value">${sum.nightShoots || 0}</div></div>
     </div>
-    <div class="tbl-scroll"><table><thead><tr>
-      <th>Day</th><th>Location</th><th>I/E</th><th>TOD</th><th>Scenes</th><th>Pages</th><th>Cast Called</th><th>Notes</th>
-    </tr></thead><tbody>
-    ${(s.days || []).map(d => `
-      <tr>
-        <td><b>${d.day}</b><br><small style="color: var(--dim);">${escapeHtml(d.date || '')}</small></td>
-        <td>${escapeHtml(d.location)}</td>
-        <td><span class="tag ${d.intExt === 'INT' ? 'int' : 'ext'}">${escapeHtml(d.intExt)}</span></td>
-        <td><span class="tag ${d.timeOfDay === 'NIGHT' ? 'night' : 'day'}">${escapeHtml(d.timeOfDay || '')}</span></td>
-        <td style="font-size: 11px;">${(d.scenes || []).map(sc => '#' + sc.number).join(', ')}</td>
-        <td>${(d.totalPages || d.totalEighths / 8 || 0).toFixed(2)}</td>
-        <td style="font-size: 11px;">${(d.castCalled || []).map(escapeHtml).join(', ')}</td>
-        <td style="font-size: 11px;">${d.minorHours ? '<span class="tag hot">MINOR HOURS</span> ' : ''}${escapeHtml((d.specialRequirements || []).join(', '))}</td>
-      </tr>
-    `).join('')}
-    </tbody></table></div>
-
+    ${dayCards}
     ${(s.dayOutOfDays || []).length ? `
       <h3 style="margin-top: 24px; margin-bottom: 10px; font-size: 18px;">Day-out-of-Days</h3>
       <div class="tbl-scroll"><table><thead><tr>
-        <th>Character</th><th>Start</th><th>End</th><th>Work days</th><th>Hold days</th>
+        <th>Character</th><th>Start</th><th>End</th><th>Work Days</th><th>Hold</th><th>Total</th>
       </tr></thead><tbody>
       ${s.dayOutOfDays.map(d => `
         <tr>
           <td><b>${escapeHtml(d.character)}</b></td>
-          <td>${d.startDay}</td>
-          <td>${d.endDay}</td>
-          <td>${(d.workDays || []).join(', ')}</td>
-          <td style="color: var(--muted);">${(d.holdDays || []).join(', ')}</td>
+          <td>D${d.startDay}</td>
+          <td>D${d.endDay}</td>
+          <td style="font-size: 11px;">${(d.workDays || []).map(x => 'D' + x).join(', ')}</td>
+          <td style="color: var(--muted); font-size: 11px;">${(d.holdDays || []).map(x => 'D' + x).join(', ')}</td>
+          <td>${d.totalWorkDays || (d.workDays || []).length}</td>
         </tr>
       `).join('')}
       </tbody></table></div>
@@ -1366,6 +1951,7 @@ async function loadProject(projectId, project) {
     if (typeof renderLocations === 'function' && state.locations) renderLocations(state.locations);
     if (typeof renderSafety    === 'function' && state.safety)    renderSafety(state.safety);
     if (typeof renderPost      === 'function' && state.post)      renderPost(state.post);
+    if (typeof renderWorkflow  === 'function')                    renderWorkflow();
     document.getElementById('results').scrollIntoView({ behavior: 'smooth', block: 'start' });
     setStatus('Loaded "' + escapeHtml(state.breakdown.title || 'project') + '" - ' + (state.breakdown.scenes?.length || 0) + ' scenes. Switch tabs above to view all loaded deliverables.', 'ok');
   } else {
