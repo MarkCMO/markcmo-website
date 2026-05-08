@@ -2126,6 +2126,54 @@ h2 span                     { color: var(--accent) !important; }
   padding-top: 0.7rem;
 }
 
+/* ── Testimonials grid ── */
+.sp-testimonials {
+  padding: 3rem 6vw;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+.sp-testimonials h2 { color: #ffffff !important; margin-bottom: 0.4rem !important; }
+.sp-test-sub {
+  font-size: 0.85rem;
+  color: rgba(255,255,255,0.42);
+  margin-bottom: 2rem;
+}
+.sp-test-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px,1fr));
+  gap: 1.2rem;
+}
+.sp-test-card {
+  background: rgba(255,255,255,0.025);
+  border: 1px solid rgba(255,255,255,0.07);
+  border-radius: 6px;
+  padding: 1.6rem 1.4rem;
+  transition: border-color 0.2s;
+}
+.sp-test-card:hover { border-color: rgba(201,168,76,0.25); }
+.test-stars { color: var(--accent); font-size: 0.85rem; letter-spacing: 0.08em; margin-bottom: 0.8rem; }
+.test-text {
+  font-size: 0.875rem;
+  line-height: 1.7;
+  color: rgba(255,255,255,0.72);
+  margin-bottom: 1rem;
+  font-style: italic;
+}
+.test-name {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 0.95rem;
+  letter-spacing: 0.04em;
+  color: #ffffff;
+}
+.test-role {
+  font-family: 'DM Mono', monospace;
+  font-size: 0.6rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.35);
+  margin-top: 0.15rem;
+}
+
 /* ── How It Works process steps ── */
 .sp-process {
   padding: 3rem 6vw;
