@@ -185,7 +185,8 @@ async function callGemini(key, systemPrompt, userText, attempt = 0) {
       generationConfig: {
         responseMimeType: 'application/json',
         temperature: 0.2,
-        maxOutputTokens: MAX_OUTPUT_TOKENS
+        maxOutputTokens: MAX_OUTPUT_TOKENS,
+        thinkingConfig: { thinkingBudget: 0 }
       }
     })
   });
