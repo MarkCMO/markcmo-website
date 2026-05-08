@@ -2188,6 +2188,14 @@ h2 span                     { color: var(--accent) !important; }
 }
 .sp-cta-closer-trust span { white-space: nowrap; }
 
+/* ── sp-state-links (same-state sibling city links) ── */
+.sp-state-links { padding: 1.2rem 6vw; background: rgba(0,0,0,0.25); border-top: 1px solid rgba(255,255,255,0.05); }
+.sp-state-links-inner { max-width: 1200px; margin: 0 auto; display: flex; align-items: flex-start; gap: 1rem; flex-wrap: wrap; }
+.ssl-label { font-family: 'DM Mono', monospace; font-size: 0.62rem; letter-spacing: 0.16em; text-transform: uppercase; color: rgba(201,168,76,0.5); white-space: nowrap; padding-top: 0.35rem; flex-shrink: 0; }
+.ssl-links { display: flex; flex-wrap: wrap; gap: 0.4rem; }
+.ssl-link { font-family: 'DM Mono', monospace; font-size: 0.68rem; padding: 0.25rem 0.7rem; border: 1px solid rgba(201,168,76,0.15); color: rgba(255,255,255,0.5); text-decoration: none; border-radius: 999px; transition: all 0.15s; }
+.ssl-link:hover { border-color: rgba(201,168,76,0.45); color: var(--accent); }
+
 /* ── sp-city-services hub grid ── */
 .sp-city-services { padding: 2.5rem 6vw; background: rgba(15,21,53,0.7); border-top: 1px solid rgba(201,168,76,0.1); border-bottom: 1px solid rgba(201,168,76,0.1); }
 .sp-city-services-inner { max-width: 1200px; margin: 0 auto; }

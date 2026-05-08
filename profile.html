@@ -212,6 +212,8 @@ nav{border-bottom:1px solid var(--border);padding:0 48px;height:56px;display:fle
   ]
 }
 </script>
+<meta name="author" content="Mark Gabrielli"/>
+<link rel="author" href="https://markcmo.com/about.html"/>
 </head>
 <body>
 <nav class="nav" id="mainNav">
@@ -503,7 +505,7 @@ function renderProfile(g) {
   const photoEl = document.getElementById('hero-photo');
   const preview = document.getElementById('modal-photo-preview');
   if (g.photo) {
-    photoEl.innerHTML = `<img src="${g.photo}" alt="${esc(g.name)}">`;
+    photoEl.innerHTML = `<img loading="lazy" src="${g.photo}" alt="${esc(g.name)}">`;
   } else {
     const initials = getInitials(g.name);
     photoEl.textContent = initials;
@@ -590,7 +592,7 @@ function openEditModal() {
   document.getElementById('edit-twitter').value  = GRAD.twitter  || '';
   const prev = document.getElementById('modal-photo-preview');
   if (GRAD.photo) {
-    prev.innerHTML = `<img src="${GRAD.photo}" alt="photo">`;
+    prev.innerHTML = `<img loading="lazy" src="${GRAD.photo}" alt="photo">`;
   } else {
     prev.textContent = getInitials(GRAD.name);
     prev.style.fontSize = '28px';
@@ -645,7 +647,7 @@ function processModalPhoto(file) {
       ctx.drawImage(img, (img.width - size) / 2, (img.height - size) / 2, size, size, 0, 0, size, size);
       editPhotoDataUrl = canvas.toDataURL('image/jpeg', 0.82);
       const prev = document.getElementById('modal-photo-preview');
-      prev.innerHTML = `<img src="${editPhotoDataUrl}" alt="preview">`;
+      prev.innerHTML = `<img loading="lazy" src="${editPhotoDataUrl}" alt="preview">`;
       toast('Photo ready - save to apply', 'gold');
     };
     img.src = ev.target.result;
