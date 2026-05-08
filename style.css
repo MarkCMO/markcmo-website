@@ -2126,6 +2126,69 @@ h2 span                     { color: var(--accent) !important; }
   padding-top: 0.7rem;
 }
 
+/* ── How It Works process steps ── */
+.sp-process {
+  padding: 3rem 6vw;
+  background: rgba(15,21,53,0.6);
+  border-top: 1px solid rgba(201,168,76,0.1);
+  border-bottom: 1px solid rgba(201,168,76,0.1);
+}
+.sp-process-inner {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+.sp-process h2 { color: #ffffff !important; margin-bottom: 0.5rem !important; }
+.sp-process-sub {
+  font-size: 0.88rem;
+  color: rgba(255,255,255,0.45);
+  margin-bottom: 2rem;
+}
+.sp-process-steps {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px,1fr));
+  gap: 1.5rem;
+  position: relative;
+}
+.sp-process-step {
+  background: rgba(255,255,255,0.025);
+  border: 1px solid rgba(255,255,255,0.07);
+  border-radius: 6px;
+  padding: 1.6rem 1.4rem;
+  position: relative;
+  transition: border-color 0.2s;
+}
+.sp-process-step:hover { border-color: rgba(201,168,76,0.28); }
+.sp-step-num {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 2.8rem;
+  line-height: 1;
+  color: rgba(201,168,76,0.18);
+  position: absolute;
+  top: 1rem; right: 1.2rem;
+}
+.sp-step-tag {
+  font-family: 'DM Mono', monospace;
+  font-size: 0.58rem;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--accent);
+  margin-bottom: 0.6rem;
+  display: block;
+}
+.sp-process-step h4 {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 1.1rem;
+  letter-spacing: 0.04em;
+  color: #ffffff;
+  margin-bottom: 0.6rem;
+}
+.sp-process-step p {
+  font-size: 0.84rem;
+  line-height: 1.65;
+  color: rgba(255,255,255,0.62);
+  margin: 0 !important;
+}
+
 /* ── Mobile responsive ── */
 @media (max-width: 768px) {
   .sp-deliverables { padding: 1.5rem 1rem; }
@@ -2140,4 +2203,7 @@ h2 span                     { color: var(--accent) !important; }
   .sp-proof-item { padding: 0.4rem 1rem; }
   .sp-proof-num { font-size: 1.2rem; }
   .sp-proof-label { font-size: 0.52rem; }
+  .sp-process { padding: 2rem 1rem; }
+  .sp-process-steps { grid-template-columns: 1fr; gap: 1rem; }
+  .sp-step-num { font-size: 2rem; }
 }
