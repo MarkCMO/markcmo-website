@@ -1566,27 +1566,29 @@
 </div>
 </div>
 <div id="panel-crm-pipeline" class="panel">
-<div class="panel-header"><h1 class="panel-title">🔄 Sales Pipeline</h1>
+<div class="panel-header"><h1 class="panel-title">🔄 Engagement Pipeline</h1>
 <div class="panel-actions">
-<button class="btn btn-primary" onclick="loadPipeline()">↻ Refresh</button>
+<a href="/admin/vdr/" target="_blank" class="btn btn-outline">📁 Open VDR</a>
+<button class="btn btn-primary" onclick="loadEngagementPipeline()">↻ Refresh</button>
 </div>
 </div>
 <div class="content-body">
 <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(140px,1fr));gap:12px;margin-bottom:24px;">
-<div class="stat-card"><div class="stat-label">New Leads</div><div class="stat-value" id="pip-new" style="color:#60a5fa;">—</div></div>
-<div class="stat-card"><div class="stat-label">Qualified</div><div class="stat-value" id="pip-qualified" style="color:#a78bfa;">—</div></div>
-<div class="stat-card"><div class="stat-label">Proposal Sent</div><div class="stat-value" id="pip-proposal" style="color:#f0a050;">—</div></div>
-<div class="stat-card"><div class="stat-label">In Negotiation</div><div class="stat-value" id="pip-negotiation" style="color:var(--gold);">—</div></div>
-<div class="stat-card"><div class="stat-label">Closed Won</div><div class="stat-value" id="pip-won" style="color:#4CAF72;">—</div></div>
+<div class="stat-card"><div class="stat-label">Proposed</div><div class="stat-value" id="pip-new" style="color:#60a5fa;">—</div></div>
+<div class="stat-card"><div class="stat-label">Docs Sent</div><div class="stat-value" id="pip-qualified" style="color:#a78bfa;">—</div></div>
+<div class="stat-card"><div class="stat-label">Client Signed</div><div class="stat-value" id="pip-proposal" style="color:#f0a050;">—</div></div>
+<div class="stat-card"><div class="stat-label">Active / Invoiced</div><div class="stat-value" id="pip-negotiation" style="color:var(--gold);">—</div></div>
+<div class="stat-card"><div class="stat-label">Paid / Complete</div><div class="stat-value" id="pip-won" style="color:#4CAF72;">—</div></div>
 </div>
 <div class="table-wrap">
 <table class="data-table">
-<thead><tr><th>Name</th><th>Email</th><th>Company</th><th>Title</th><th>Stage</th><th>Source</th><th>Date</th></tr></thead>
+<thead><tr><th>Client</th><th>Engagement</th><th>Value</th><th>Proposal</th><th>Invoice</th><th>Status</th><th>Actions</th></tr></thead>
 <tbody id="pipeline-tbody">
 <tr><td colspan="7" style="text-align:center;color:var(--dim);padding:32px;">Loading pipeline...</td></tr>
 </tbody>
 </table>
 </div>
+<div style="font-size:11px;color:var(--dim);margin-top:10px;">Pipeline pulls from Supabase mc_engagements + mc_documents + mc_invoices. Create new engagements via <a onclick="window.open('/admin/vdr/','_blank')" style="color:var(--gold);cursor:pointer;">Case Files VDR →</a></div>
 </div>
 </div>
 <div id="panel-crm-notes" class="panel">
@@ -1672,6 +1674,7 @@
 <div id="panel-eng-invoices" class="panel">
 <div class="panel-header"><h1 class="panel-title">🧾 Invoices</h1>
 <div class="panel-actions">
+<a href="https://squareup.com/dashboard/invoices" target="_blank" class="btn btn-outline">Square Dashboard →</a>
 <button class="btn btn-primary" onclick="loadInvoices()">↻ Refresh</button>
 </div>
 </div>
@@ -1684,12 +1687,13 @@
 </div>
 <div class="table-wrap">
 <table class="data-table">
-<thead><tr><th>Invoice #</th><th>Client</th><th>Engagement</th><th>Amount</th><th>Status</th><th>Due Date</th><th>Paid Date</th></tr></thead>
+<thead><tr><th>Invoice #</th><th>Client</th><th>Engagement</th><th>Amount</th><th>Status</th><th>Due Date</th><th>Paid Date</th><th>Actions</th></tr></thead>
 <tbody id="invoices-tbody">
-<tr><td colspan="7" style="text-align:center;color:var(--dim);padding:32px;">Loading invoices...</td></tr>
+<tr><td colspan="8" style="text-align:center;color:var(--dim);padding:32px;">Loading invoices...</td></tr>
 </tbody>
 </table>
 </div>
+<div style="font-size:11px;color:var(--dim);margin-top:8px;">To prepare a new invoice for an engagement, open <a href="/admin/vdr/" target="_blank" style="color:var(--gold);">Case Files VDR →</a> and click Prepare Invoice on the engagement card.</div>
 </div>
 </div>
 <div id="panel-forms-hub" class="panel">
@@ -4082,27 +4086,68 @@ async function loadClients() {
 
 // ─── CRM PIPELINE (from webinar leads, staged by field) ──────────────────────
 let pipelineData = [];
-async function loadPipeline() {
-  document.getElementById('pipeline-tbody').innerHTML = '<tr><td colspan="7" style="text-align:center;color:var(--dim);padding:32px;">Loading...</td></tr>';
+// Legacy: kept for updateStats() compatibility
+async function loadPipeline() { return loadEngagementPipeline(); }
+
+// ─── ENGAGEMENT PIPELINE (engagements + docs + invoices combined) ─────────────
+async function loadEngagementPipeline() {
+  const tbody = document.getElementById('pipeline-tbody');
+  if (!tbody) return;
+  tbody.innerHTML = '<tr><td colspan="7" style="text-align:center;color:var(--dim);padding:32px;">Loading pipeline...</td></tr>';
   try {
-    const d = await adminFetch('leads');
-    pipelineData = (d.leads || []).slice().reverse();
-    const stages = ['new','qualified','proposal','negotiation','won'];
-    stages.forEach(st => {
-      const el = document.getElementById('pip-'+st);
-      if (el) el.textContent = pipelineData.filter(l=>(l.pipelineStage||'new')===st).length;
-    });
-    document.getElementById('pipeline-tbody').innerHTML = pipelineData.length ? pipelineData.map(l => `<tr>
-      <td style="font-weight:500;">${l.name||'—'}</td>
-      <td style="font-family:'DM Mono',monospace;font-size:11px;">${l.email||'—'}</td>
-      <td>${l.company||'—'}</td>
-      <td style="color:var(--dim);">${l.title||'—'}</td>
-      <td>${statusBadge(l.pipelineStage||'new')}</td>
-      <td><span style="font-size:11px;">${l.source||'webinar'}</span></td>
-      <td style="color:var(--dim);font-size:11px;">${fmtDate(l.registeredAt||l.date||l.ts)}</td>
-    </tr>`).join('') : '<tr><td colspan="7" style="text-align:center;color:var(--dim);padding:32px;">No leads in pipeline yet.</td></tr>';
+    const [eRes, dRes, iRes] = await Promise.all([
+      adminFetch('engagements').catch(()=>({engagements:[]})),
+      adminFetch('supadocs').catch(()=>({supadocs:[]})),
+      adminFetch('invoices').catch(()=>({invoices:[]})),
+    ]);
+    const engs = eRes.engagements || [];
+    const docs = dRes.supadocs || [];
+    const invs = iRes.invoices || [];
+
+    // Stage counts
+    const proposed = engs.filter(e=>e.status==='proposed'||e.status==='lead').length;
+    const docsSent = engs.filter(e=>docs.some(d=>d.engagement_id===e.id && d.status==='sent')).length;
+    const clientSigned = engs.filter(e=>docs.some(d=>d.engagement_id===e.id && d.client_signed_at)).length;
+    const activeInvoiced = engs.filter(e=>e.status==='active' || invs.some(i=>i.engagement_id===e.id)).length;
+    const paid = engs.filter(e=>invs.some(i=>i.engagement_id===e.id && i.status==='paid')).length;
+
+    const statMap = {new:proposed,qualified:docsSent,proposal:clientSigned,negotiation:activeInvoiced,won:paid};
+    Object.entries(statMap).forEach(([k,v])=>{const el=document.getElementById('pip-'+k);if(el)el.textContent=v;});
+    // Dashboard pipeline stat update
+    const dPipLeads = document.getElementById('d-pip-leads'); if(dPipLeads) dPipLeads.textContent = proposed + docsSent;
+    const dPipWon = document.getElementById('d-pip-won'); if(dPipWon) dPipWon.textContent = paid;
+
+    tbody.innerHTML = engs.length ? engs.map(e => {
+      const client = e.mc_clients?.company_name || '—';
+      const slug = e.mc_clients?.slug || '';
+      const engDocs = docs.filter(d=>d.engagement_id===e.id);
+      const engInv = invs.find(i=>i.engagement_id===e.id);
+      // Doc status
+      const hasSigned = engDocs.some(d=>d.client_signed_at);
+      const hasExecuted = engDocs.some(d=>d.executed_at);
+      const hasSent = engDocs.length > 0;
+      const docStatus = hasExecuted ? `<span style="color:#4CAF72;font-size:11px;">✓ Executed</span>`
+        : hasSigned ? `<span style="color:#f0a050;font-size:11px;">✓ Client Signed</span>`
+        : hasSent ? `<span style="color:#60a5fa;font-size:11px;">Sent / Pending</span>`
+        : `<span style="color:var(--dim);font-size:11px;">No docs yet</span>`;
+      // Invoice status
+      const invStatus = !engInv ? `<span style="color:var(--dim);font-size:11px;">—</span>`
+        : engInv.status==='paid' ? `<span style="color:#4CAF72;font-size:11px;">✓ Paid ${fmt$(engInv.amount_usd||engInv.amount)}</span>`
+        : engInv.status==='sent' ? `<span style="color:#f0a050;font-size:11px;">Sent ${fmt$(engInv.amount_usd||engInv.amount)}</span>`
+        : `<span style="color:#60a5fa;font-size:11px;">Draft ${fmt$(engInv.amount_usd||engInv.amount)}</span>`;
+      const vdrLink = slug ? `<a href="/admin/vdr/?slug=${slug}" target="_blank" style="color:var(--gold);font-size:11px;font-weight:600;">Open VDR →</a>` : '';
+      return `<tr>
+        <td style="font-weight:600;">${client}</td>
+        <td style="color:var(--dim);">${e.title||'—'}</td>
+        <td style="color:var(--gold);">${fmt$(e.fee_usd||e.value)}</td>
+        <td>${docStatus}</td>
+        <td>${invStatus}</td>
+        <td>${statusBadge(e.status)}</td>
+        <td>${vdrLink}</td>
+      </tr>`;
+    }).join('') : '<tr><td colspan="7" style="text-align:center;color:var(--dim);padding:32px;">No engagements yet. Create one in <a href="/admin/vdr/" target="_blank" style="color:var(--gold);">Case Files VDR →</a></td></tr>';
   } catch(e) {
-    document.getElementById('pipeline-tbody').innerHTML = `<tr><td colspan="7" style="text-align:center;color:#ef4444;padding:32px;">${e.message}</td></tr>`;
+    tbody.innerHTML = `<tr><td colspan="7" style="text-align:center;color:#ef4444;padding:32px;">${e.message}</td></tr>`;
   }
 }
 
@@ -4211,18 +4256,25 @@ async function loadInvoices() {
     ['inv-overdue','revinv-over'].forEach(id=>{const el=document.getElementById(id);if(el)el.textContent=fmt$(overdue);});
     const html = invoiceData.length ? invoiceData.map(r => {
       const client = r.mc_engagements?.mc_clients?.company_name || '—';
+      const slug = r.mc_engagements?.mc_clients?.slug || '';
       const eng = r.mc_engagements?.title || '—';
+      const sqUrl = r.square_invoice_url || '';
+      const actions = [
+        sqUrl ? `<a href="${sqUrl}" target="_blank" style="color:var(--gold);font-size:11px;margin-right:8px;">View Square →</a>` : '',
+        slug ? `<a href="/admin/vdr/?slug=${slug}" target="_blank" style="color:#60a5fa;font-size:11px;">VDR →</a>` : '',
+      ].filter(Boolean).join('') || '—';
       return `<tr>
-        <td style="font-family:'DM Mono',monospace;font-size:11px;">${r.invoice_number||r.id?.substring(0,8)||'—'}</td>
+        <td style="font-family:'DM Mono',monospace;font-size:11px;">${r.invoice_number||r.square_invoice_id?.substring(0,10)||r.id?.substring(0,8)||'—'}</td>
         <td style="font-weight:500;">${client}</td>
         <td style="color:var(--dim);">${eng}</td>
-        <td style="color:var(--gold);">${fmt$(r.amount)}</td>
+        <td style="color:var(--gold);">${fmt$(r.amount_usd||r.amount)}</td>
         <td>${statusBadge(r.status)}</td>
-        <td style="color:var(--dim);font-size:11px;">${fmtDate(r.due_date)}</td>
-        <td style="color:var(--dim);font-size:11px;">${fmtDate(r.paid_date)}</td>
+        <td style="color:var(--dim);font-size:11px;">${fmtDate(r.sent_at||r.due_date)}</td>
+        <td style="color:var(--dim);font-size:11px;">${r.paid_at ? `<span style="color:#4CAF72;">✓ ${fmtDate(r.paid_at)}</span>` : '—'}</td>
+        <td style="white-space:nowrap;">${actions}</td>
       </tr>`;
-    }).join('') : '<tr><td colspan="7" style="text-align:center;color:var(--dim);padding:32px;">No invoices yet. Add in Supabase → mc_invoices.</td></tr>';
-    targets.forEach(id => { const el=document.getElementById(id); if(el) el.innerHTML=html.replace('colspan="7"', el.id==='revinv-tbody'?'colspan="6"':'colspan="7"'); });
+    }).join('') : '<tr><td colspan="8" style="text-align:center;color:var(--dim);padding:32px;">No invoices yet. Prepare one via <a href="/admin/vdr/" target="_blank" style="color:var(--gold);">Case Files VDR →</a></td></tr>';
+    targets.forEach(id => { const el=document.getElementById(id); if(el) el.innerHTML=html; });
   } catch(e) {
     targets.forEach(id => { const el=document.getElementById(id); if(el) el.innerHTML=`<tr><td colspan="7" style="text-align:center;color:#ef4444;padding:32px;">${e.message}</td></tr>`; });
   }
