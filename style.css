@@ -1786,3 +1786,115 @@ li { color: rgba(255,255,255,0.78); }
   body { padding-top: 64px; }
   nav.nav .nav-hamburger { display: flex; }
 }
+
+/* ═══════════════════════════════════════════════════════
+   BLUE → GOLD ACCENT CONVERSION — dark theme
+   Overrides all remaining var(--blue-light) / var(--orange)
+   instances to the gold accent system (#C9A84C)
+   ═══════════════════════════════════════════════════════ */
+
+/* ── Hero headline spans ── */
+.sp-hero h1 span,
+.sp-hero-content h1 span    { color: var(--accent) !important; }
+.article-hero h1 span       { color: var(--accent) !important; }
+
+/* ── Hero eyebrow / sub ── */
+.sp-hero-content .eyebrow   { color: var(--accent) !important; }
+.sp-hero-content .eyebrow::before { background: var(--accent) !important; }
+.sp-hero-sub                { color: var(--accent) !important; }
+
+/* ── Breadcrumb ── */
+.sp-breadcrumb a            { color: var(--accent) !important; }
+.sp-breadcrumb a:hover      { color: #ffffff !important; }
+
+/* ── Stage badge (hero pill) ── */
+.sp-stage-badge {
+  color:       var(--accent) !important;
+  border-color: rgba(201,168,76,0.4) !important;
+  background:  rgba(201,168,76,0.08) !important;
+}
+
+/* ── sp-label eyebrow (city pages) ── */
+.sp-label                   { color: var(--accent) !important; }
+.sp-label::before           { background: var(--accent) !important; }
+
+/* ── page-eyebrow ── */
+.page-eyebrow               { color: var(--accent) !important; }
+.page-eyebrow::before       { background: var(--accent) !important; }
+
+/* ── section-label (used in services.html etc.) ── */
+.section-label              { color: var(--accent) !important; }
+.section-label::after       { background: var(--accent) !important; }
+
+/* ── h2 span (generic keyword highlight) ── */
+h2 span                     { color: var(--accent) !important; }
+
+/* ── article-tag (blog hero eyebrow) ── */
+.article-tag                { color: var(--accent) !important; }
+.article-tag::before        { background: var(--accent) !important; }
+
+/* ── ba-tag / ba-meta (blog article template) ── */
+.ba-tag                     { color: var(--accent) !important; }
+.ba-tag::before             { background: var(--accent) !important; }
+.ba-meta a                  { color: var(--accent) !important; }
+.ba-meta a:hover            { color: #ffffff !important; }
+
+/* ── Footer gold cleanup ── */
+.footer-logo span           { color: var(--accent) !important; }
+.footer-col h4              { color: var(--accent) !important; }
+.social-link:hover {
+  border-color: var(--accent) !important;
+  color:        var(--accent) !important;
+  background:   rgba(201,168,76,0.1) !important;
+}
+.footer-brand-tags span {
+  color:        var(--accent) !important;
+  border-color: rgba(201,168,76,0.3) !important;
+  background:   rgba(201,168,76,0.08) !important;
+}
+
+/* ── sp-case-study block (city pages) ── */
+.sp-case-study {
+  background:   rgba(201,168,76,0.05) !important;
+  border:       1px solid rgba(201,168,76,0.15) !important;
+  border-radius: 4px;
+  padding:      1.5rem !important;
+  margin:       1.5rem 0 !important;
+}
+.sp-cs-row {
+  display: flex; gap: 1rem; padding: 0.65rem 0;
+  border-bottom: 1px solid rgba(255,255,255,0.06) !important;
+}
+.sp-cs-row:last-child        { border-bottom: none !important; }
+.sp-cs-label                 { font-family: 'DM Mono', monospace; font-size: 0.68rem; letter-spacing: 0.1em; text-transform: uppercase; color: rgba(255,255,255,0.45) !important; min-width: 100px; flex-shrink: 0; }
+.sp-cs-val                   { font-size: 0.9rem; color: rgba(255,255,255,0.8) !important; }
+.sp-cs-result .sp-cs-val     { color: var(--accent) !important; font-weight: 600; }
+
+/* ── sp-quote-block (city pages) ── */
+.sp-quote-block {
+  border-left:  3px solid var(--accent) !important;
+  background:   rgba(201,168,76,0.06) !important;
+  padding:      1.5rem 2rem !important;
+  margin:       1.5rem 0 !important;
+}
+.sp-quote-mark               { font-family: 'Bebas Neue', sans-serif; font-size: 4rem; line-height: 1; color: rgba(201,168,76,0.3) !important; margin-bottom: -0.5rem; }
+.sp-quote-text               { font-size: 1.05rem; line-height: 1.75; color: rgba(255,255,255,0.85) !important; font-style: italic; margin-bottom: 0.75rem; }
+.sp-quote-author             { font-family: 'DM Mono', monospace; font-size: 0.7rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--accent) !important; }
+
+/* ── sp-bio-block / sp-bio-creds ── */
+.sp-bio-block p              { color: rgba(255,255,255,0.78) !important; }
+.sp-bio-creds {
+  display: flex; flex-wrap: wrap; gap: 0.5rem; margin-top: 1rem;
+}
+.sp-bio-creds span {
+  font-size: 0.82rem; color: rgba(255,255,255,0.72) !important;
+  background: rgba(201,168,76,0.08) !important;
+  border: 1px solid rgba(201,168,76,0.15) !important;
+  padding: 0.3rem 0.8rem; border-radius: 3px;
+}
+
+/* ── sp-testimonials (city pages) ── */
+.test-stars                  { color: var(--accent) !important; font-size: 0.9rem; letter-spacing: 0.1em; margin-bottom: 0.75rem; }
+.test-text                   { font-size: 0.92rem; line-height: 1.75; color: rgba(255,255,255,0.8) !important; font-style: italic; margin-bottom: 1rem; }
+.test-name                   { font-weight: 700; color: #ffffff !important; display: block; }
+.test-role                   { font-size: 0.78rem; color: rgba(255,255,255,0.45) !important; }
