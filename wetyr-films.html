@@ -557,16 +557,18 @@ document.querySelectorAll('.tab').forEach(tab => {
   });
 });
 
-// ─── Run breakdown ───────────────────────────────────────────
+// ─── Run breakdown (background job + polling) ────────────────
 async function runBreakdown() {
   const text = $('pasteInput').value.trim() || state.scriptText;
   if (!text) { setStatus('Upload a file or paste script text first.', 'err'); return; }
   state.scriptText = text;
 
   $('goBtn').disabled = true;
-  setStatus('<span class="spinner"></span> Gemini is reading your script and tagging every element. Can take 30-120s for a feature...', 'info');
+  const t0 = Date.now();
+  setStatus('<span class="spinner"></span> Queuing job...', 'info');
 
   try {
+    // 1) Kick off background job
     const r = await fetch('/.netlify/functions/script-dissect', {
       method: 'POST',
       headers: { 'content-type': 'application/json' },
@@ -576,18 +578,45 @@ async function runBreakdown() {
         format: $('formatInput').value
       })
     });
-    const j = await r.json();
-    if (!j.ok) throw new Error(j.error + (j.detail ? ': ' + j.detail : ''));
-    state.breakdown = j.breakdown;
-    render(j.breakdown);
+    const start = await r.json();
+    if (!start.ok || !start.jobId) throw new Error(start.error || 'failed to queue');
+    const jobId = start.jobId;
+
+    // 2) Poll for result
+    const breakdown = await pollJob(jobId, (progress) => {
+      const sec = ((Date.now() - t0) / 1000).toFixed(0);
+      setStatus(`<span class="spinner"></span> Gemini is dissecting your script (${progress || 'processing'}) ${sec}s elapsed...`, 'info');
+    });
+
+    state.breakdown = breakdown;
+    render(breakdown);
     $('results').style.display = 'block';
     $('results').scrollIntoView({ behavior: 'smooth' });
-    setStatus('Breakdown complete in ' + (j.ms / 1000).toFixed(1) + 's. ' + j.breakdown.scenes.length + ' scenes, ' + j.breakdown.characters.length + ' characters tagged.', 'ok');
+    const totalSec = ((Date.now() - t0) / 1000).toFixed(1);
+    setStatus(`Breakdown complete in ${totalSec}s. ${breakdown.scenes.length} scenes, ${breakdown.characters.length} characters tagged.`, 'ok');
   } catch (e) {
     setStatus('Breakdown failed: ' + (e.message || e), 'err');
   } finally {
     $('goBtn').disabled = false;
   }
+}
+
+async function pollJob(jobId, onProgress) {
+  const startTs = Date.now();
+  const TIMEOUT_MS = 12 * 60 * 1000; // 12 min ceiling
+  while (Date.now() - startTs < TIMEOUT_MS) {
+    await new Promise(r => setTimeout(r, 3000));
+    const r = await fetch('/.netlify/functions/script-result?jobId=' + encodeURIComponent(jobId));
+    if (!r.ok) {
+      if (r.status === 404) continue; // not yet visible
+      throw new Error('poll failed: ' + r.status);
+    }
+    const j = await r.json();
+    if (j.status === 'error') throw new Error(j.error || 'job errored');
+    if (j.status === 'complete' && j.breakdown) return j.breakdown;
+    onProgress?.(j.progress);
+  }
+  throw new Error('timed out waiting for breakdown');
 }
 
 // ─── Run schedule ────────────────────────────────────────────
