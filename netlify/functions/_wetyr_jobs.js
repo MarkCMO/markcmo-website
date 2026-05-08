@@ -96,19 +96,18 @@ async function listProjects({ limit = 30 } = {}) {
   if (!r.ok) throw new Error('Supabase list ' + r.status + ': ' + (await r.text()).slice(0, 200));
   const rows = await r.json();
 
+  const KINDS = ['dissect', 'schedule', 'budget', 'callsheet', 'shotlist', 'orders', 'locations', 'safety', 'post'];
+
   const projects = new Map();
   for (const row of rows) {
     const pid = row.project_id || row.job_id;
     if (!projects.has(pid)) {
-      projects.set(pid, {
-        project_id: pid,
-        title: row.title || 'Untitled',
-        dissect: null, schedule: null, budget: null, callsheet: null,
-        lastActivity: row.updated_at || row.created_at
-      });
+      const blank = { project_id: pid, title: row.title || 'Untitled', lastActivity: row.updated_at || row.created_at };
+      for (const k of KINDS) blank[k] = null;
+      projects.set(pid, blank);
     }
     const p = projects.get(pid);
-    if (row.kind && p[row.kind] === null) {
+    if (row.kind && KINDS.includes(row.kind) && p[row.kind] === null) {
       p[row.kind] = {
         job_id: row.job_id,
         status: row.status,

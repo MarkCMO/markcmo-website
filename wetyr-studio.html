@@ -300,6 +300,11 @@ pre.json { background: #0f0f12; border: 1px solid var(--border); border-radius: 
       <div class="tab" data-tab="schedule">Schedule</div>
       <div class="tab" data-tab="budget">Budget</div>
       <div class="tab" data-tab="callsheet">Call Sheets</div>
+      <div class="tab" data-tab="shotlist">Shot List</div>
+      <div class="tab" data-tab="orders">Purchase Orders</div>
+      <div class="tab" data-tab="locations">Location Scout</div>
+      <div class="tab" data-tab="safety">Safety + Insurance</div>
+      <div class="tab" data-tab="post">Post Plan</div>
       <div class="tab" data-tab="exports">Exports</div>
       <div class="tab" data-tab="json">Raw JSON</div>
     </div>
@@ -341,15 +346,50 @@ pre.json { background: #0f0f12; border: 1px solid var(--border); border-radius: 
         <button class="btn btn-primary" id="genCallsheetBtn" style="margin-top: 12px;">Generate call sheets</button>
       </div>
     </div>
+    <div class="tab-panel" data-panel="shotlist">
+      <div id="shotlistView">
+        <p style="color: var(--muted); font-size: 14px;">Director-style shot list per scene with type/angle/lens/movement and special-equipment flags.</p>
+        <button class="btn btn-primary" id="genShotlistBtn" style="margin-top: 12px;">Generate shot list</button>
+      </div>
+    </div>
+    <div class="tab-panel" data-panel="orders">
+      <div id="ordersView">
+        <p style="color: var(--muted); font-size: 14px;">Department-level purchase orders for props, wardrobe, set dressing, vehicles, weapons, SFX, catering, and equipment rentals.</p>
+        <button class="btn btn-primary" id="genOrdersBtn" style="margin-top: 12px;">Generate purchase orders</button>
+      </div>
+    </div>
+    <div class="tab-panel" data-panel="locations">
+      <div id="locationsView">
+        <p style="color: var(--muted); font-size: 14px;">Per-location scout report with permit type, fees, lead time, parking, power, and red-flag checklist.</p>
+        <button class="btn btn-primary" id="genLocationsBtn" style="margin-top: 12px;">Generate scout report</button>
+      </div>
+    </div>
+    <div class="tab-panel" data-panel="safety">
+      <div id="safetyView">
+        <p style="color: var(--muted); font-size: 14px;">Safety memos + insurance riders driven by production flags (firearms, stunts, animals, water, vehicles, minors).</p>
+        <button class="btn btn-primary" id="genSafetyBtn" style="margin-top: 12px;">Generate safety + insurance docs</button>
+      </div>
+    </div>
+    <div class="tab-panel" data-panel="post">
+      <div id="postView">
+        <p style="color: var(--muted); font-size: 14px;">Editorial schedule, VFX shot list, color, sound, music, and distributor deliverables.</p>
+        <button class="btn btn-primary" id="genPostBtn" style="margin-top: 12px;">Generate post-production plan</button>
+      </div>
+    </div>
     <div class="tab-panel" data-panel="exports">
       <div id="exportsView">
         <p style="color: var(--muted); font-size: 14px; margin-bottom: 14px;">Download the raw JSON for any deliverable. PDF export coming next.</p>
         <div style="display: flex; flex-wrap: wrap; gap: 10px;">
-          <button class="btn btn-ghost" data-export="breakdown">Download Breakdown JSON</button>
-          <button class="btn btn-ghost" data-export="schedule">Download Schedule JSON</button>
-          <button class="btn btn-ghost" data-export="budget">Download Budget JSON</button>
-          <button class="btn btn-ghost" data-export="callsheet">Download Call Sheets JSON</button>
-          <button class="btn btn-ghost" data-export="all">Download Full Project (ZIP-style JSON)</button>
+          <button class="btn btn-ghost" data-export="breakdown">Breakdown JSON</button>
+          <button class="btn btn-ghost" data-export="schedule">Schedule JSON</button>
+          <button class="btn btn-ghost" data-export="budget">Budget JSON</button>
+          <button class="btn btn-ghost" data-export="callsheet">Call Sheets JSON</button>
+          <button class="btn btn-ghost" data-export="shotlist">Shot List JSON</button>
+          <button class="btn btn-ghost" data-export="orders">Purchase Orders JSON</button>
+          <button class="btn btn-ghost" data-export="locations">Location Scout JSON</button>
+          <button class="btn btn-ghost" data-export="safety">Safety + Insurance JSON</button>
+          <button class="btn btn-ghost" data-export="post">Post Plan JSON</button>
+          <button class="btn btn-primary" data-export="all">Full Project Bundle</button>
         </div>
       </div>
     </div>
@@ -362,17 +402,17 @@ pre.json { background: #0f0f12; border: 1px solid var(--border); border-radius: 
 <section class="section" id="how">
   <div class="wrap">
     <h2>What gets generated</h2>
-    <div class="sub">MVP v1 ships the first three. The rest ship next.</div>
+    <div class="sub">All nine deliverables are live. Run breakdown first - downstream tools depend on it.</div>
     <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 14px; margin-top: 14px;">
-      <div class="stat"><div class="stat-label">Script Breakdown</div><div class="stat-sub">Scenes, chars, props, wardrobe, VFX, stunts, weapons, animals, minors, vehicles - every tagged element.</div></div>
-      <div class="stat"><div class="stat-label">Shooting Schedule</div><div class="stat-sub">Stripboard, shoot days grouped by location + INT/EXT + TOD, cast day-out-of-days.</div></div>
-      <div class="stat"><div class="stat-label">Budget Top Sheet</div><div class="stat-sub">ATL / BTL-Production / BTL-Post / Other, with line items, contingency, tier comparison.</div></div>
-      <div class="stat" style="opacity: 0.5;"><div class="stat-label">Call Sheets</div><div class="stat-sub">Per-day auto-generated from schedule + breakdown.</div></div>
-      <div class="stat" style="opacity: 0.5;"><div class="stat-label">Shot List + Storyboards</div><div class="stat-sub">VLM-generated reference frames per scene.</div></div>
-      <div class="stat" style="opacity: 0.5;"><div class="stat-label">Purchase Orders</div><div class="stat-sub">Props, wardrobe, set dressing, catering, equipment rental quotes.</div></div>
-      <div class="stat" style="opacity: 0.5;"><div class="stat-label">Location Scouting</div><div class="stat-sub">Permit requirements per jurisdiction, site-rep needs.</div></div>
-      <div class="stat" style="opacity: 0.5;"><div class="stat-label">Safety + Insurance</div><div class="stat-sub">Stunts, minors, firearms, animals, vehicles - rider docs.</div></div>
-      <div class="stat" style="opacity: 0.5;"><div class="stat-label">Post-Production Plan</div><div class="stat-sub">Edit, color, sound mix, VFX shot list, delivery specs.</div></div>
+      <div class="stat"><div class="stat-label" style="color: var(--gold);">Script Breakdown</div><div class="stat-sub">Scenes, chars, props, wardrobe, VFX, stunts, weapons, animals, minors, vehicles - every tagged element.</div></div>
+      <div class="stat"><div class="stat-label" style="color: var(--gold);">Shooting Schedule</div><div class="stat-sub">Stripboard, shoot days grouped by location + INT/EXT + TOD, cast day-out-of-days.</div></div>
+      <div class="stat"><div class="stat-label" style="color: var(--gold);">Budget Top Sheet</div><div class="stat-sub">ATL / BTL-Production / BTL-Post / Other, with line items, contingency, tier comparison.</div></div>
+      <div class="stat"><div class="stat-label" style="color: var(--gold);">Call Sheets</div><div class="stat-sub">Per-day auto-generated from schedule + breakdown with cast statuses + safety notes.</div></div>
+      <div class="stat"><div class="stat-label" style="color: var(--gold);">Shot List</div><div class="stat-sub">Director-style coverage per scene: type, angle, lens, movement, special-equipment flags.</div></div>
+      <div class="stat"><div class="stat-label" style="color: var(--gold);">Purchase Orders</div><div class="stat-sub">Department-level POs: props, wardrobe, set dressing, vehicles, weapons, SFX, catering, equipment rentals.</div></div>
+      <div class="stat"><div class="stat-label" style="color: var(--gold);">Location Scouting</div><div class="stat-sub">Per-location scout report: permit type, fees, lead time, parking, power, sound, scout checklist.</div></div>
+      <div class="stat"><div class="stat-label" style="color: var(--gold);">Safety + Insurance</div><div class="stat-sub">Risk memos per flag (firearms, stunts, animals, water, vehicles, minors) + master COI checklist.</div></div>
+      <div class="stat"><div class="stat-label" style="color: var(--gold);">Post-Production Plan</div><div class="stat-sub">Editorial schedule, VFX shot list, color, sound, music, distributor deliverables.</div></div>
     </div>
   </div>
 </section>
@@ -443,7 +483,11 @@ document.addEventListener('click', async (e) => {
   }
 });
 
-let state = { scriptText: '', breakdown: null, schedule: null, budget: null, callsheet: null, projectId: null };
+let state = {
+  scriptText: '', projectId: null,
+  breakdown: null, schedule: null, budget: null, callsheet: null,
+  shotlist: null, orders: null, locations: null, safety: null, post: null
+};
 
 // ─── File drop ───────────────────────────────────────────────
 const drop = $('drop');
@@ -490,7 +534,7 @@ function fileToBase64(file) {
 // ─── Buttons ─────────────────────────────────────────────────
 $('goBtn').addEventListener('click', runBreakdown);
 $('clearBtn').addEventListener('click', () => {
-  state = { scriptText: '', breakdown: null, schedule: null, budget: null, callsheet: null, projectId: null };
+  state = { scriptText: '', projectId: null, breakdown: null, schedule: null, budget: null, callsheet: null, shotlist: null, orders: null, locations: null, safety: null, post: null };
   $('pasteInput').value = ''; $('titleInput').value = '';
   $('results').style.display = 'none';
   setStatus('', '');
@@ -504,6 +548,11 @@ $('loadSampleBtn').addEventListener('click', () => {
 $('genScheduleBtn').addEventListener('click', runSchedule);
 $('genBudgetBtn').addEventListener('click', runBudget);
 $('genCallsheetBtn').addEventListener('click', runCallsheet);
+$('genShotlistBtn').addEventListener('click',  () => runDeliverable('shotlist',  'Shot list'));
+$('genOrdersBtn').addEventListener('click',    () => runDeliverable('orders',    'Purchase orders'));
+$('genLocationsBtn').addEventListener('click', () => runDeliverable('locations', 'Location scout report'));
+$('genSafetyBtn').addEventListener('click',    () => runDeliverable('safety',    'Safety + insurance docs'));
+$('genPostBtn').addEventListener('click',      () => runDeliverable('post',      'Post-production plan'));
 document.querySelectorAll('[data-export]').forEach(b => b.addEventListener('click', () => exportItem(b.dataset.export)));
 
 $('tierInput').addEventListener('change', () => {
@@ -688,23 +737,25 @@ function renderCallsheet(cs) {
 // ─── Exports ─────────────────────────────────────────────────
 function exportItem(kind) {
   let payload, name;
-  switch (kind) {
-    case 'breakdown': payload = state.breakdown; name = 'breakdown.json'; break;
-    case 'schedule':  payload = state.schedule;  name = 'schedule.json'; break;
-    case 'budget':    payload = state.budget;    name = 'budget.json'; break;
-    case 'callsheet': payload = state.callsheet; name = 'callsheets.json'; break;
-    case 'all':
-      payload = {
-        title: state.breakdown?.title || 'Untitled',
-        projectId: state.projectId,
-        exportedAt: new Date().toISOString(),
-        breakdown: state.breakdown,
-        schedule: state.schedule,
-        budget: state.budget,
-        callsheet: state.callsheet
-      };
-      name = (state.breakdown?.title || 'wetyr-project').replace(/[^a-z0-9]+/gi, '-').toLowerCase() + '-full.json';
-      break;
+  if (kind === 'all') {
+    payload = {
+      title: state.breakdown?.title || 'Untitled',
+      projectId: state.projectId,
+      exportedAt: new Date().toISOString(),
+      breakdown: state.breakdown,
+      schedule: state.schedule,
+      budget: state.budget,
+      callsheet: state.callsheet,
+      shotlist: state.shotlist,
+      orders: state.orders,
+      locations: state.locations,
+      safety: state.safety,
+      post: state.post
+    };
+    name = (state.breakdown?.title || 'wetyr-project').replace(/[^a-z0-9]+/gi, '-').toLowerCase() + '-full.json';
+  } else {
+    payload = state[kind];
+    name = kind + '.json';
   }
   if (!payload) { setStatus('No ' + kind + ' generated yet.', 'err'); return; }
   const blob = new Blob([JSON.stringify(payload, null, 2)], { type: 'application/json' });
@@ -713,6 +764,180 @@ function exportItem(kind) {
   a.href = url; a.download = name;
   document.body.appendChild(a); a.click(); a.remove();
   setTimeout(() => URL.revokeObjectURL(url), 1000);
+}
+
+// ─── Generic deliverable runner (shotlist/orders/locations/safety/post) ──
+async function runDeliverable(kind, label) {
+  if (!state.breakdown) { setStatus('Run breakdown first.', 'err'); return; }
+  const view = $(kind + 'View');
+  view.innerHTML = '<p style="color: var(--muted);"><span class="spinner"></span> Queuing ' + escapeHtml(label) + '...</p>';
+  try {
+    const r = await fetch('/.netlify/functions/script-' + kind, {
+      method: 'POST',
+      headers: { 'content-type': 'application/json' },
+      body: JSON.stringify({
+        projectId: state.projectId,
+        title: state.breakdown?.title || $('titleInput').value,
+        breakdown: state.breakdown,
+        schedule: state.schedule,
+        budget: state.budget,
+        context: {
+          budgetTier: $('tierInput').value,
+          customBudget: $('tierInput').value === 'custom' ? Number($('customBudgetInput').value) || null : null,
+          union: $('unionInput').value,
+          shootState: $('stateInput').value || 'CA',
+          region: 'US'
+        }
+      })
+    });
+    const start = await r.json();
+    if (!start.ok || !start.jobId) throw new Error(start.error || 'failed to queue');
+    const result = await pollJob(start.jobId, (p) => {
+      view.innerHTML = '<p style="color: var(--muted);"><span class="spinner"></span> ' + escapeHtml(p || 'processing') + '...</p>';
+    }, kind);
+    state[kind] = result;
+    const renderer = { shotlist: renderShotlist, orders: renderOrders, locations: renderLocations, safety: renderSafety, post: renderPost }[kind];
+    if (renderer) renderer(result); else view.innerHTML = '<pre class="json">' + escapeHtml(JSON.stringify(result, null, 2)) + '</pre>';
+  } catch (e) {
+    view.innerHTML = '<div class="status err active">' + escapeHtml(label) + ' failed: ' + escapeHtml(e.message) + '</div>';
+  }
+}
+
+// ─── Renderers for new deliverables ──────────────────────────
+function renderShotlist(s) {
+  const sum = s.summary || {};
+  $('shotlistView').innerHTML = `
+    <div class="stats">
+      <div class="stat"><div class="stat-label">Total Shots</div><div class="stat-value">${sum.totalShots || 0}</div></div>
+      <div class="stat"><div class="stat-label">Setups</div><div class="stat-value">${sum.totalSetups || 0}</div></div>
+      <div class="stat"><div class="stat-label">High-Risk Shots</div><div class="stat-value" style="color: var(--red);">${sum.highRiskCount || 0}</div></div>
+      <div class="stat"><div class="stat-label">Special Gear</div><div class="stat-value">${(sum.specialEquipmentNeeded || []).length}</div></div>
+    </div>
+    ${(sum.specialEquipmentNeeded || []).length ? `<div style="margin-bottom: 16px;"><div class="stat-label" style="margin-bottom: 6px;">Special Equipment Required</div>${(sum.specialEquipmentNeeded || []).map(e => '<span class="tag">' + escapeHtml(e) + '</span>').join('')}</div>` : ''}
+    ${(s.scenes || []).map(sc => `
+      <details style="background: var(--panel); border: 1px solid var(--border); border-radius: 10px; padding: 14px; margin-bottom: 6px;">
+        <summary style="cursor: pointer; font-weight: 700;">Scene ${escapeHtml(sc.sceneNumber || '')} - ${escapeHtml((sc.heading || '').slice(0, 70))} <span style="color: var(--muted); font-weight: 400;">(${sc.totalShots || (sc.shots || []).length} shots, ${sc.estimatedSetups || '?'} setups)</span></summary>
+        <table style="width: 100%; margin-top: 10px; font-size: 12px;"><thead><tr><th style="text-align: left;">#</th><th>Type</th><th>Angle</th><th>Movement</th><th>Lens</th><th>Description</th></tr></thead><tbody>
+        ${(sc.shots || []).map(sh => `<tr ${sh.highRisk ? 'style="background: rgba(220,38,38,0.06);"' : ''}><td><b>${escapeHtml(sh.number || '')}</b></td><td>${escapeHtml(sh.type || '')}</td><td>${escapeHtml(sh.angle || '')}</td><td>${escapeHtml(sh.movement || '')}</td><td>${escapeHtml(sh.lens || '')}</td><td>${escapeHtml(sh.description || '')}${(sh.specialEquipment || []).length ? '<br/><small style="color: var(--gold);">' + escapeHtml(sh.specialEquipment.join(', ')) + '</small>' : ''}</td></tr>`).join('')}
+        </tbody></table>
+      </details>
+    `).join('')}
+  `;
+}
+
+function renderOrders(o) {
+  const fmt = n => '$' + Math.round(Number(n) || 0).toLocaleString();
+  $('ordersView').innerHTML = `
+    <div class="stats">
+      <div class="stat" style="border-color: var(--gold);"><div class="stat-label">Grand Total</div><div class="stat-value" style="color: var(--gold);">${fmt(o.grandTotal)}</div></div>
+      <div class="stat"><div class="stat-label">Departments</div><div class="stat-value">${(o.orders || []).length}</div></div>
+      <div class="stat"><div class="stat-label">Line Items</div><div class="stat-value">${o.summary?.totalLineItems || 0}</div></div>
+      <div class="stat"><div class="stat-label">Longest Lead</div><div class="stat-value">${o.summary?.longestLeadTime || 0}<span style="font-size: 13px;">d</span></div></div>
+    </div>
+    ${(o.orders || []).map(po => `
+      <details style="background: var(--panel); border: 1px solid var(--border); border-radius: 10px; padding: 14px; margin-bottom: 6px;">
+        <summary style="cursor: pointer; display: flex; justify-content: space-between; font-weight: 700;">
+          <span>${escapeHtml(po.department)} - <span style="color: var(--muted); font-weight: 400;">${escapeHtml(po.vendor)}</span></span>
+          <span style="color: var(--gold);">${fmt(po.subtotal)}</span>
+        </summary>
+        <div style="font-size: 12px; color: var(--muted); margin-top: 8px;">Lead time: ${po.leadTimeDays || '?'} days &middot; ${escapeHtml(po.vendorContact || 'TBD')}</div>
+        <table style="width: 100%; margin-top: 10px; font-size: 12px;"><thead><tr><th style="text-align: left;">Item</th><th>Qty</th><th>Unit</th><th style="text-align: right;">Rate</th><th style="text-align: right;">Total</th></tr></thead><tbody>
+        ${(po.items || []).map(it => `<tr><td>${escapeHtml(it.description || '')}</td><td>${it.quantity || ''}</td><td>${escapeHtml(it.unit || '')}</td><td style="text-align: right;">${fmt(it.unitPrice)}</td><td style="text-align: right;"><b>${fmt(it.lineTotal)}</b></td></tr>`).join('')}
+        </tbody></table>
+      </details>
+    `).join('')}
+  `;
+}
+
+function renderLocations(l) {
+  const fmt = n => '$' + Math.round(Number(n) || 0).toLocaleString();
+  $('locationsView').innerHTML = `
+    <div class="stats">
+      <div class="stat"><div class="stat-label">Locations</div><div class="stat-value">${(l.locations || []).length}</div></div>
+      <div class="stat"><div class="stat-label">Est. Permit Fees</div><div class="stat-value">${fmt(l.summary?.totalEstimatedPermitFees)}</div></div>
+      <div class="stat"><div class="stat-label">Longest Lead</div><div class="stat-value">${l.summary?.longestLeadTime || 0}<span style="font-size: 13px;">d</span></div></div>
+      <div class="stat"><div class="stat-label">Complex</div><div class="stat-value" style="color: var(--red);">${l.summary?.complexLocations || 0}</div></div>
+    </div>
+    ${(l.locations || []).map(loc => `
+      <details style="background: var(--panel); border: 1px solid var(--border); border-radius: 10px; padding: 14px; margin-bottom: 6px;">
+        <summary style="cursor: pointer; font-weight: 700;">${escapeHtml(loc.name)} <span class="tag ${loc.intExt === 'INT' ? 'int' : 'ext'}">${escapeHtml(loc.intExt || '')}</span> <span style="color: var(--muted); font-weight: 400;">${loc.totalScenes || 0} scenes &middot; ${loc.totalEighths || 0}/8</span></summary>
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 10px; margin-top: 12px; font-size: 13px;">
+          <div><div class="stat-label">Permit</div><div>${escapeHtml(loc.permitType || '')}</div><div style="color: var(--muted); font-size: 12px;">${escapeHtml(loc.permitFeeRange || '')} &middot; ${loc.permitLeadTimeDays || '?'}d lead</div></div>
+          <div><div class="stat-label">Insurance</div><div>${escapeHtml(loc.insuranceRequired || '')}</div></div>
+          <div><div class="stat-label">Parking</div><div>Crew: ${loc.parking?.crewSpots || '?'} &middot; BC: ${loc.parking?.baseCampSpots || '?'}</div></div>
+          <div><div class="stat-label">Power</div><div>${loc.power?.generatorKVA ? loc.power.generatorKVA + ' kVA gen' : 'Shore: ' + (loc.power?.shorePowerAvailable ? 'yes' : 'no')}</div></div>
+        </div>
+        ${(loc.scoutChecklist || []).length ? `<div style="margin-top: 12px;"><div class="stat-label" style="margin-bottom: 4px;">Scout Checklist</div><ul style="padding-left: 20px; font-size: 12px;">${loc.scoutChecklist.map(c => '<li>' + escapeHtml(c) + '</li>').join('')}</ul></div>` : ''}
+        ${(loc.redFlags || []).length ? `<div style="margin-top: 8px; padding: 8px; background: rgba(220,38,38,0.08); border-radius: 6px; font-size: 12px;"><b style="color: var(--red);">Red flags:</b> ${escapeHtml(loc.redFlags.join('; '))}</div>` : ''}
+      </details>
+    `).join('')}
+  `;
+}
+
+function renderSafety(s) {
+  $('safetyView').innerHTML = `
+    <div class="stats">
+      <div class="stat"><div class="stat-label">Risk Categories</div><div class="stat-value">${s.summary?.totalRiskCategories || 0}</div></div>
+      <div class="stat"><div class="stat-label">High Severity</div><div class="stat-value" style="color: var(--red);">${s.summary?.highSeverity || 0}</div></div>
+      <div class="stat"><div class="stat-label">Est. Insurance</div><div class="stat-value" style="font-size: 14px;">${escapeHtml(s.summary?.estimatedInsurancePremium || 'TBD')}</div></div>
+    </div>
+    ${(s.riskMemos || []).map(rm => `
+      <details style="background: var(--panel); border: 1px solid var(--border); border-left: 3px solid var(--red); border-radius: 8px; padding: 14px; margin-bottom: 6px;">
+        <summary style="cursor: pointer; font-weight: 700;">${escapeHtml(rm.risk)} <span style="color: var(--muted); font-weight: 400;">(${(rm.scenesAffected || []).length} scenes)</span></summary>
+        <div style="font-size: 13px; margin-top: 10px;">
+          ${rm.iatsceBulletin ? '<div><b>Bulletin:</b> ' + escapeHtml(rm.iatsceBulletin) + '</div>' : ''}
+          ${rm.insuranceRider ? '<div style="margin-top: 6px;"><b>Insurance rider:</b> ' + escapeHtml(rm.insuranceRider) + '</div>' : ''}
+          ${(rm.requiredPersonnel || []).length ? '<div style="margin-top: 6px;"><b>Required personnel:</b> ' + escapeHtml(rm.requiredPersonnel.join(', ')) + '</div>' : ''}
+          ${(rm.requiredCertifications || []).length ? '<div style="margin-top: 6px;"><b>Certifications:</b> ' + escapeHtml(rm.requiredCertifications.join(', ')) + '</div>' : ''}
+          ${(rm.dailyMeetingTopics || []).length ? '<div style="margin-top: 6px;"><b>Daily meeting topics:</b><ul style="padding-left: 20px; margin-top: 4px;">' + rm.dailyMeetingTopics.map(t => '<li>' + escapeHtml(t) + '</li>').join('') + '</ul></div>' : ''}
+          ${(rm.stopWorkTriggers || []).length ? '<div style="margin-top: 6px;"><b>Stop-work triggers:</b> ' + escapeHtml(rm.stopWorkTriggers.join('; ')) + '</div>' : ''}
+        </div>
+      </details>
+    `).join('')}
+    ${s.coiRequirements ? `
+      <h3 style="margin: 22px 0 10px;">Master COI Requirements</h3>
+      <div style="background: var(--panel); border: 1px solid var(--border); border-radius: 10px; padding: 14px; font-size: 13px;">
+        <div><b>General Liability:</b> ${escapeHtml(s.coiRequirements.generalLiability || '')}</div>
+        <div><b>Auto Liability:</b> ${escapeHtml(s.coiRequirements.autoLiability || '')}</div>
+        <div><b>Workers Comp:</b> ${escapeHtml(s.coiRequirements.workersComp || '')}</div>
+        <div><b>Umbrella:</b> ${escapeHtml(s.coiRequirements.umbrella || '')}</div>
+        ${(s.coiRequirements.additionalInsureds || []).length ? '<div style="margin-top: 6px;"><b>Additional insureds:</b> ' + escapeHtml(s.coiRequirements.additionalInsureds.join(', ')) + '</div>' : ''}
+        ${(s.coiRequirements.specialRiders || []).length ? '<div style="margin-top: 6px;"><b>Special riders:</b> ' + escapeHtml(s.coiRequirements.specialRiders.join(', ')) + '</div>' : ''}
+      </div>
+    ` : ''}
+  `;
+}
+
+function renderPost(p) {
+  const fmt = n => '$' + Math.round(Number(n) || 0).toLocaleString();
+  $('postView').innerHTML = `
+    <div class="stats">
+      <div class="stat" style="border-color: var(--gold);"><div class="stat-label">Total Post Budget</div><div class="stat-value" style="color: var(--gold);">${fmt(p.summary?.totalPostBudget)}</div></div>
+      <div class="stat"><div class="stat-label">Post Months</div><div class="stat-value">${p.summary?.estimatedPostMonths || 0}</div></div>
+      <div class="stat"><div class="stat-label">VFX Shots</div><div class="stat-value">${p.vfx?.shotCount || 0}</div></div>
+      <div class="stat"><div class="stat-label">Mix Format</div><div class="stat-value" style="font-size: 13px;">${escapeHtml((p.sound?.mixFormat || []).join(', ') || 'TBD')}</div></div>
+    </div>
+    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 12px; margin-bottom: 18px;">
+      ${p.schedule ? `<div class="stat"><div class="stat-label">Locked Picture</div><div style="font-size: 14px; margin-top: 4px;">${escapeHtml(p.schedule.lockedPicture || 'TBD')}</div></div>` : ''}
+      ${p.schedule ? `<div class="stat"><div class="stat-label">VFX Turnover</div><div style="font-size: 14px; margin-top: 4px;">${escapeHtml(p.schedule.vfxTurnover || 'TBD')}</div></div>` : ''}
+      ${p.schedule ? `<div class="stat"><div class="stat-label">Final Delivery</div><div style="font-size: 14px; margin-top: 4px;">${escapeHtml(p.schedule.finalDelivery || 'TBD')}</div></div>` : ''}
+    </div>
+    ${['editorial','vfx','color','sound','music'].map(dept => p[dept] ? `
+      <details style="background: var(--panel); border: 1px solid var(--border); border-radius: 10px; padding: 14px; margin-bottom: 6px;">
+        <summary style="cursor: pointer; display: flex; justify-content: space-between; font-weight: 700;">
+          <span style="text-transform: capitalize;">${dept}</span>
+          <span style="color: var(--gold);">${fmt(p[dept].estimatedCost)}</span>
+        </summary>
+        <pre style="font-size: 12px; margin-top: 10px; white-space: pre-wrap; color: var(--muted);">${escapeHtml(JSON.stringify(p[dept], null, 2))}</pre>
+      </details>
+    ` : '').join('')}
+    ${(p.deliverables || []).length ? `
+      <h3 style="margin: 22px 0 10px;">Deliverables</h3>
+      <table style="width: 100%; font-size: 12px;"><thead><tr><th style="text-align: left;">Distributor</th><th>Format</th><th>Specs</th><th>Due</th></tr></thead><tbody>
+      ${p.deliverables.map(d => `<tr><td><b>${escapeHtml(d.distributor || '')}</b></td><td>${escapeHtml(d.format || '')}</td><td style="font-size: 11px;">${escapeHtml((d.specs || []).join(', '))}</td><td>${escapeHtml(d.dueDate || '')}</td></tr>`).join('')}
+      </tbody></table>
+    ` : ''}
+  `;
 }
 
 // ─── Run budget (async) ──────────────────────────────────────

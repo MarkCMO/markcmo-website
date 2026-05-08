@@ -77,6 +77,18 @@
 [functions.script-callsheet]
   timeout = 26
 
+# Additional WETYR Studio kickoffs (all async via background workers).
+[functions.script-shotlist]
+  timeout = 26
+[functions.script-orders]
+  timeout = 26
+[functions.script-locations]
+  timeout = 26
+[functions.script-safety]
+  timeout = 26
+[functions.script-post]
+  timeout = 26
+
 # script-jobs: admin-only project list reader (Supabase round trip).
 [functions.script-jobs]
   timeout = 10

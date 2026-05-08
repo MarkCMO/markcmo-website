@@ -1086,6 +1086,11 @@ tbody tr a { color: inherit; text-decoration: none; display: block; }
             ${pill('Schedule', p.schedule)}
             ${pill('Budget', p.budget)}
             ${pill('Call Sheets', p.callsheet)}
+            ${pill('Shot List', p.shotlist)}
+            ${pill('Orders', p.orders)}
+            ${pill('Locations', p.locations)}
+            ${pill('Safety', p.safety)}
+            ${pill('Post', p.post)}
           </div>
         </div>
       `;
@@ -1107,7 +1112,12 @@ tbody tr a { color: inherit; text-decoration: none; display: block; }
       { key: 'dissect',   label: 'Breakdown',   field: 'breakdown' },
       { key: 'schedule',  label: 'Schedule',    field: 'schedule' },
       { key: 'budget',    label: 'Budget',      field: 'budget' },
-      { key: 'callsheet', label: 'Call Sheets', field: 'callsheet' }
+      { key: 'callsheet', label: 'Call Sheets', field: 'callsheet' },
+      { key: 'shotlist',  label: 'Shot List',   field: 'shotlist' },
+      { key: 'orders',    label: 'Orders',      field: 'orders' },
+      { key: 'locations', label: 'Locations',   field: 'locations' },
+      { key: 'safety',    label: 'Safety',      field: 'safety' },
+      { key: 'post',      label: 'Post Plan',   field: 'post' }
     ];
     vdTabs.innerHTML = tabs.map((t, i) => {
       const job = openProject[t.key];
@@ -1154,6 +1164,11 @@ tbody tr a { color: inherit; text-decoration: none; display: block; }
     if (kind === 'schedule')  return renderScheduleView(data);
     if (kind === 'budget')    return renderBudgetView(data);
     if (kind === 'callsheet') return renderCallsheetView(data);
+    if (kind === 'shotlist')  return renderShotlistView(data);
+    if (kind === 'orders')    return renderOrdersView(data);
+    if (kind === 'locations') return renderLocationsView(data);
+    if (kind === 'safety')    return renderSafetyView(data);
+    if (kind === 'post')      return renderPostView(data);
     vdBody.innerHTML = '<pre style="font-size: 11px; overflow: auto; max-height: 500px;">' + escHtml(JSON.stringify(data, null, 2)) + '</pre>';
   }
 
@@ -1262,10 +1277,99 @@ tbody tr a { color: inherit; text-decoration: none; display: block; }
     if (!days.length) { vdBody.innerHTML = '<div style="padding: 20px; color: var(--muted);">No call sheets generated yet.</div>'; return; }
     vdBody.innerHTML = days.map(d => `
       <details style="background: var(--panel-2); border: 1px solid var(--border); border-radius: 8px; padding: 14px; margin-bottom: 8px;">
-        <summary style="cursor: pointer; font-weight: 700;">Day ${d.day || '?'} &mdash; ${escHtml(d.date || '')} &mdash; ${escHtml(d.location || '')}</summary>
-        <pre style="font-size: 12px; margin-top: 10px; white-space: pre-wrap;">${escHtml(JSON.stringify(d, null, 2))}</pre>
+        <summary style="cursor: pointer; font-weight: 700;">Day ${d.day || '?'} &mdash; ${escHtml(d.date || '')} &mdash; ${escHtml(d.location?.name || d.location || '')}</summary>
+        <div style="margin-top: 10px; font-size: 13px;">
+          ${d.callTimes ? `<div><b>General call:</b> ${escHtml(d.callTimes.generalCrew || 'TBD')}</div>` : ''}
+          ${(d.cast || []).length ? `<div style="margin-top: 6px;"><b>Cast:</b> ${escHtml(d.cast.map(c => c.character + ' (' + c.status + ')').join(', '))}</div>` : ''}
+          ${(d.safetyNotes || []).length ? `<div style="margin-top: 6px; color: #fca5a5;"><b>Safety:</b> ${escHtml(d.safetyNotes.join('; '))}</div>` : ''}
+        </div>
+        <pre style="font-size: 11px; margin-top: 10px; white-space: pre-wrap; color: var(--muted); max-height: 300px; overflow: auto;">${escHtml(JSON.stringify(d, null, 2))}</pre>
       </details>
     `).join('');
+  }
+
+  function renderShotlistView(s) {
+    const sum = s.summary || {};
+    vdBody.innerHTML = `
+      <div class="vd-stats">
+        <div class="vd-stat"><div class="vd-stat-label">Total Shots</div><div class="vd-stat-val">${sum.totalShots || 0}</div></div>
+        <div class="vd-stat"><div class="vd-stat-label">Setups</div><div class="vd-stat-val">${sum.totalSetups || 0}</div></div>
+        <div class="vd-stat"><div class="vd-stat-label">High-Risk</div><div class="vd-stat-val" style="color: #fca5a5;">${sum.highRiskCount || 0}</div></div>
+      </div>
+      ${(s.scenes || []).map(sc => `
+        <details style="background: var(--panel-2); border: 1px solid var(--border); border-radius: 8px; padding: 12px; margin-bottom: 6px;">
+          <summary style="cursor: pointer; font-weight: 700;">Scene ${escHtml(sc.sceneNumber || '')} &mdash; ${escHtml((sc.heading || '').slice(0, 70))} <span style="color: var(--muted); font-weight: 400;">(${(sc.shots || []).length} shots)</span></summary>
+          <table class="vd-table" style="margin-top: 8px;"><thead><tr><th>#</th><th>Type</th><th>Lens</th><th>Description</th></tr></thead><tbody>
+          ${(sc.shots || []).map(sh => `<tr><td><b>${escHtml(sh.number || '')}</b></td><td>${escHtml(sh.type || '')}</td><td>${escHtml(sh.lens || '')}</td><td>${escHtml(sh.description || '')}</td></tr>`).join('')}
+          </tbody></table>
+        </details>
+      `).join('')}
+    `;
+  }
+
+  function renderOrdersView(o) {
+    const fmt = n => '$' + Math.round(Number(n) || 0).toLocaleString();
+    vdBody.innerHTML = `
+      <div class="vd-stats">
+        <div class="vd-stat" style="border-color: var(--gold);"><div class="vd-stat-label">Grand Total</div><div class="vd-stat-val" style="color: var(--gold);">${fmt(o.grandTotal)}</div></div>
+        <div class="vd-stat"><div class="vd-stat-label">Departments</div><div class="vd-stat-val">${(o.orders || []).length}</div></div>
+        <div class="vd-stat"><div class="vd-stat-label">Line Items</div><div class="vd-stat-val">${o.summary?.totalLineItems || 0}</div></div>
+        <div class="vd-stat"><div class="vd-stat-label">Lead</div><div class="vd-stat-val">${o.summary?.longestLeadTime || 0}d</div></div>
+      </div>
+      ${(o.orders || []).map(po => `
+        <details style="background: var(--panel-2); border: 1px solid var(--border); border-radius: 8px; padding: 12px; margin-bottom: 6px;">
+          <summary style="cursor: pointer; display: flex; justify-content: space-between; font-weight: 700;"><span>${escHtml(po.department)} - ${escHtml(po.vendor)}</span><span style="color: var(--gold);">${fmt(po.subtotal)}</span></summary>
+          <table class="vd-table" style="margin-top: 8px;"><thead><tr><th>Item</th><th>Qty</th><th>Unit</th><th style="text-align: right;">Total</th></tr></thead><tbody>
+          ${(po.items || []).map(it => `<tr><td>${escHtml(it.description || '')}</td><td>${it.quantity || ''}</td><td>${escHtml(it.unit || '')}</td><td style="text-align: right;"><b>${fmt(it.lineTotal)}</b></td></tr>`).join('')}
+          </tbody></table>
+        </details>
+      `).join('')}
+    `;
+  }
+
+  function renderLocationsView(l) {
+    vdBody.innerHTML = (l.locations || []).map(loc => `
+      <details style="background: var(--panel-2); border: 1px solid var(--border); border-radius: 8px; padding: 12px; margin-bottom: 6px;">
+        <summary style="cursor: pointer; font-weight: 700;">${escHtml(loc.name || '')} <span style="color: var(--muted); font-weight: 400;">(${loc.totalScenes || 0} scenes, ${loc.permitFeeRange || 'TBD'} permit)</span></summary>
+        <div style="font-size: 13px; margin-top: 10px; display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 8px;">
+          <div><b>Permit:</b> ${escHtml(loc.permitType || '')}</div>
+          <div><b>Insurance:</b> ${escHtml(loc.insuranceRequired || '')}</div>
+          <div><b>Parking:</b> ${loc.parking?.crewSpots || '?'} crew / ${loc.parking?.baseCampSpots || '?'} BC</div>
+          <div><b>Power:</b> ${loc.power?.generatorKVA || '?'} kVA gen</div>
+        </div>
+        ${(loc.redFlags || []).length ? `<div style="margin-top: 8px; padding: 6px 8px; background: rgba(220,38,38,0.1); border-radius: 4px; font-size: 12px;"><b style="color: #fca5a5;">Red flags:</b> ${escHtml(loc.redFlags.join('; '))}</div>` : ''}
+      </details>
+    `).join('');
+  }
+
+  function renderSafetyView(s) {
+    vdBody.innerHTML = (s.riskMemos || []).map(rm => `
+      <details style="background: var(--panel-2); border-left: 3px solid #dc2626; border-radius: 8px; padding: 12px; margin-bottom: 6px;">
+        <summary style="cursor: pointer; font-weight: 700;">${escHtml(rm.risk || '')} <span style="color: var(--muted); font-weight: 400;">(${(rm.scenesAffected || []).length} scenes)</span></summary>
+        <div style="font-size: 13px; margin-top: 10px;">
+          ${rm.insuranceRider ? '<div><b>Rider:</b> ' + escHtml(rm.insuranceRider) + '</div>' : ''}
+          ${(rm.requiredPersonnel || []).length ? '<div style="margin-top: 4px;"><b>Personnel:</b> ' + escHtml(rm.requiredPersonnel.join(', ')) + '</div>' : ''}
+          ${(rm.requiredCertifications || []).length ? '<div style="margin-top: 4px;"><b>Certs:</b> ' + escHtml(rm.requiredCertifications.join(', ')) + '</div>' : ''}
+        </div>
+      </details>
+    `).join('');
+  }
+
+  function renderPostView(p) {
+    const fmt = n => '$' + Math.round(Number(n) || 0).toLocaleString();
+    vdBody.innerHTML = `
+      <div class="vd-stats">
+        <div class="vd-stat" style="border-color: var(--gold);"><div class="vd-stat-label">Post Budget</div><div class="vd-stat-val" style="color: var(--gold);">${fmt(p.summary?.totalPostBudget)}</div></div>
+        <div class="vd-stat"><div class="vd-stat-label">VFX Shots</div><div class="vd-stat-val">${p.vfx?.shotCount || 0}</div></div>
+        <div class="vd-stat"><div class="vd-stat-label">Months</div><div class="vd-stat-val">${p.summary?.estimatedPostMonths || 0}</div></div>
+      </div>
+      ${['editorial','vfx','color','sound','music'].map(d => p[d] ? `
+        <details style="background: var(--panel-2); border: 1px solid var(--border); border-radius: 8px; padding: 12px; margin-bottom: 6px;">
+          <summary style="cursor: pointer; display: flex; justify-content: space-between; font-weight: 700;"><span style="text-transform: capitalize;">${d}</span><span style="color: var(--gold);">${fmt(p[d].estimatedCost)}</span></summary>
+          <pre style="font-size: 11px; margin-top: 8px; white-space: pre-wrap; color: var(--muted);">${escHtml(JSON.stringify(p[d], null, 2))}</pre>
+        </details>
+      ` : '').join('')}
+    `;
   }
 
   function escHtml(s) { return String(s == null ? '' : s).replace(/[&<>"']/g, c => ({ '&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;' }[c])); }
