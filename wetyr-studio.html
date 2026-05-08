@@ -289,6 +289,39 @@ pre.json { background: #0f0f12; border: 1px solid var(--border); border-radius: 
   </div>
 </section>
 
+<!-- ═════════════════════════════════════════════════════════════════════
+     PAST PROJECTS - all jobs in wetyr_jobs grouped by project_id.
+     Click a card to load it back into the working state.
+     ═════════════════════════════════════════════════════════════════════ -->
+<section class="section" id="vaultSection" style="border-top: 1px solid var(--border-hot);">
+  <div class="wrap">
+    <div style="display: flex; justify-content: space-between; align-items: end; flex-wrap: wrap; gap: 12px; margin-bottom: 18px;">
+      <div>
+        <h2 style="font-size: 26px; font-weight: 800; letter-spacing: -0.3px;">Past Projects <span style="color: var(--gold); font-size: 13px; font-weight: 700; letter-spacing: 2px; margin-left: 8px;">YOUR VAULT</span></h2>
+        <div style="color: var(--muted); font-size: 14px; margin-top: 4px;">Click any project to load it back into the workspace, view results, generate more deliverables, or export.</div>
+      </div>
+      <button id="vaultRefresh" class="btn btn-ghost">Refresh</button>
+    </div>
+    <div id="vaultGrid" style="display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 14px;"></div>
+    <div id="vaultEmpty" style="display: none; padding: 36px 18px; text-align: center; color: var(--muted); border: 1px dashed var(--border-hot); border-radius: 12px;">
+      No past projects yet. Upload a script above to start your first.
+    </div>
+  </div>
+</section>
+
+<style>
+.vault-card { background: var(--panel); border: 1px solid var(--border); border-radius: 12px; padding: 18px; cursor: pointer; transition: border-color 0.15s, transform 0.15s; }
+.vault-card:hover { border-color: var(--gold); transform: translateY(-2px); }
+.vault-card .vc-title { font-weight: 800; font-size: 16px; margin-bottom: 6px; letter-spacing: -0.2px; }
+.vault-card .vc-time { font-size: 12px; color: var(--muted); margin-bottom: 12px; }
+.vault-card .vc-pills { display: flex; flex-wrap: wrap; gap: 5px; }
+.vc-pill { display: inline-flex; align-items: center; padding: 3px 9px; border-radius: 999px; font-size: 11px; font-weight: 700; letter-spacing: 0.4px; text-transform: uppercase; border: 1px solid var(--border-hot); background: var(--panel-2); color: var(--muted); }
+.vc-pill.ok { background: rgba(22, 163, 74, 0.10); color: #86efac; border-color: rgba(22, 163, 74, 0.4); }
+.vc-pill.run { background: rgba(212, 175, 55, 0.12); color: var(--gold); border-color: rgba(212, 175, 55, 0.45); }
+.vc-pill.err { background: rgba(220, 38, 38, 0.12); color: #fca5a5; border-color: rgba(220, 38, 38, 0.4); }
+.vc-pill.dim { opacity: 0.4; }
+</style>
+
 <section class="section" id="results" style="display: none;">
   <div class="wrap">
     <div class="tabs">
@@ -437,6 +470,8 @@ const $ = (id) => document.getElementById(id);
     gate.style.display = 'none';
     app.hidden = false;
     ['navSep','navUpload','navResults','navRoadmap','navLogout'].forEach(id => $(id).hidden = false);
+    // Vault is admin-only; load it once we're authed.
+    if (typeof loadVault === 'function') loadVault();
   };
   try {
     const r = await fetch('/.netlify/functions/admin-auth?action=verify', { credentials: 'include' });
@@ -1227,6 +1262,120 @@ MARIA
 Baby, we have to go. Now.
 
 FADE OUT.`;
+
+// ═════════════════════════════════════════════════════════════════════
+// PAST PROJECTS VAULT
+// Loads jobs from /script-jobs (admin-gated), renders cards. Clicking a
+// card hydrates state + renders the existing tabs. No separate viewer.
+// ═════════════════════════════════════════════════════════════════════
+async function loadVault() {
+  const grid  = document.getElementById('vaultGrid');
+  const empty = document.getElementById('vaultEmpty');
+  if (!grid) return;
+  grid.innerHTML = '<div style="grid-column: 1 / -1; color: var(--muted); padding: 20px; text-align: center;"><span class="spinner"></span> Loading projects...</div>';
+  empty.style.display = 'none';
+  try {
+    const r = await fetch('/.netlify/functions/script-jobs?limit=50', { credentials: 'include' });
+    const j = await r.json();
+    if (!r.ok || !j.ok) throw new Error(j.error || ('HTTP ' + r.status));
+    renderVault(j.projects || []);
+  } catch (e) {
+    grid.innerHTML = '<div style="grid-column: 1 / -1; color: #fca5a5; padding: 20px; text-align: center;">Failed to load: ' + escapeHtml(e.message) + '</div>';
+  }
+}
+
+function renderVault(projects) {
+  const grid  = document.getElementById('vaultGrid');
+  const empty = document.getElementById('vaultEmpty');
+  if (!projects.length) { grid.innerHTML = ''; empty.style.display = 'block'; return; }
+  empty.style.display = 'none';
+
+  const pill = (label, j) => {
+    if (!j) return '<span class="vc-pill dim">' + label + '</span>';
+    const cls = j.status === 'complete' ? 'ok' : j.status === 'error' ? 'err' : 'run';
+    return '<span class="vc-pill ' + cls + '">' + label + '</span>';
+  };
+
+  grid.innerHTML = projects.map(p => {
+    const dt = new Date(p.lastActivity);
+    const when = dt.toLocaleString(undefined, { month: 'short', day: 'numeric', hour: 'numeric', minute: '2-digit' });
+    return `
+      <div class="vault-card" data-pid="${escapeHtml(p.project_id)}">
+        <div class="vc-title">${escapeHtml(p.title || 'Untitled')}</div>
+        <div class="vc-time">${escapeHtml(when)}</div>
+        <div class="vc-pills">
+          ${pill('Breakdown', p.dissect)}
+          ${pill('Schedule',  p.schedule)}
+          ${pill('Budget',    p.budget)}
+          ${pill('Calls',     p.callsheet)}
+          ${pill('Shots',     p.shotlist)}
+          ${pill('POs',       p.orders)}
+          ${pill('Loc',       p.locations)}
+          ${pill('Safety',    p.safety)}
+          ${pill('Post',      p.post)}
+        </div>
+      </div>
+    `;
+  }).join('');
+
+  grid.querySelectorAll('.vault-card').forEach(card => {
+    card.addEventListener('click', () => loadProject(card.dataset.pid, projects.find(p => p.project_id === card.dataset.pid)));
+  });
+}
+
+// Click a card -> fetch every completed deliverable + hydrate state -> render
+async function loadProject(projectId, project) {
+  if (!project) return;
+  setStatus('<span class="spinner"></span> Loading "' + escapeHtml(project.title || 'Untitled') + '" from vault...', 'info');
+  state.projectId = projectId;
+
+  const KIND_TO_FIELD = {
+    dissect: 'breakdown', schedule: 'schedule', budget: 'budget', callsheet: 'callsheet',
+    shotlist: 'shotlist', orders: 'orders', locations: 'locations', safety: 'safety', post: 'post'
+  };
+
+  const fetches = [];
+  for (const kind of Object.keys(KIND_TO_FIELD)) {
+    const job = project[kind];
+    if (job && job.status === 'complete' && job.job_id) {
+      fetches.push(
+        fetch('/.netlify/functions/script-result?jobId=' + encodeURIComponent(job.job_id))
+          .then(r => r.json())
+          .then(j => ({ kind, payload: j[KIND_TO_FIELD[kind]] }))
+          .catch(() => ({ kind, payload: null }))
+      );
+    }
+  }
+
+  const results = await Promise.all(fetches);
+  for (const { kind, payload } of results) {
+    if (!payload) continue;
+    const field = KIND_TO_FIELD[kind];
+    state[field] = payload;
+  }
+
+  // Render whatever is loaded.
+  if (state.breakdown) {
+    render(state.breakdown);
+    document.getElementById('results').style.display = 'block';
+    if (typeof renderSchedule  === 'function' && state.schedule)  renderSchedule(state.schedule);
+    if (typeof renderBudget    === 'function' && state.budget)    renderBudget(state.budget);
+    if (typeof renderCallsheet === 'function' && state.callsheet) renderCallsheet(state.callsheet);
+    if (typeof renderShotlist  === 'function' && state.shotlist)  renderShotlist(state.shotlist);
+    if (typeof renderOrders    === 'function' && state.orders)    renderOrders(state.orders);
+    if (typeof renderLocations === 'function' && state.locations) renderLocations(state.locations);
+    if (typeof renderSafety    === 'function' && state.safety)    renderSafety(state.safety);
+    if (typeof renderPost      === 'function' && state.post)      renderPost(state.post);
+    document.getElementById('results').scrollIntoView({ behavior: 'smooth', block: 'start' });
+    setStatus('Loaded "' + escapeHtml(state.breakdown.title || 'project') + '" - ' + (state.breakdown.scenes?.length || 0) + ' scenes. Switch tabs above to view all loaded deliverables.', 'ok');
+  } else {
+    setStatus('No completed breakdown found in this project.', 'err');
+  }
+}
+
+document.addEventListener('click', (e) => {
+  if (e.target && e.target.id === 'vaultRefresh') { e.preventDefault(); loadVault(); }
+});
 </script>
 
 </body>
