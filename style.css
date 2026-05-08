@@ -1562,6 +1562,14 @@ a:focus-visible, button:focus-visible { outline:2px solid var(--blue); outline-o
 .sp-sidebar-links a { color: rgba(255,255,255,0.72) !important; border-bottom-color: rgba(255,255,255,0.07) !important; }
 .sp-sidebar-links a:hover { color: var(--accent) !important; }
 
+/* ── sp-main-detail (enriched service content block) ── */
+.sp-main-detail { margin: 2rem 0; }
+.sp-main-detail h2 { color: #ffffff !important; font-family: 'Bebas Neue', sans-serif; font-size: clamp(1.3rem,2.2vw,1.7rem) !important; letter-spacing: 0.04em; margin-bottom: 0.7rem !important; }
+.sp-main-detail > p { color: rgba(255,255,255,0.65) !important; font-size: 0.92rem; line-height: 1.75; margin-bottom: 1rem !important; }
+.sp-detail-list { list-style: none; padding: 0; margin: 0 0 1.8rem; display: flex; flex-direction: column; gap: 0.7rem; }
+.sp-detail-list li { padding: 0.8rem 1rem 0.8rem 1.2rem; background: rgba(201,168,76,0.04); border-left: 2px solid rgba(201,168,76,0.35); font-size: 0.875rem; line-height: 1.65; color: rgba(255,255,255,0.72) !important; }
+.sp-detail-list li strong { color: rgba(201,168,76,0.9) !important; font-weight: 600; }
+
 /* ── sp-faq ── */
 .sp-faq-item { border-bottom-color: rgba(255,255,255,0.08) !important; }
 .sp-faq-item h3, .sp-faq-q { color: #ffffff !important; }
@@ -2179,6 +2187,17 @@ h2 span                     { color: var(--accent) !important; }
   color: rgba(255,255,255,0.35);
 }
 .sp-cta-closer-trust span { white-space: nowrap; }
+
+/* ── sp-city-services hub grid ── */
+.sp-city-services { padding: 2.5rem 6vw; background: rgba(15,21,53,0.7); border-top: 1px solid rgba(201,168,76,0.1); border-bottom: 1px solid rgba(201,168,76,0.1); }
+.sp-city-services-inner { max-width: 1200px; margin: 0 auto; }
+.sp-city-services h2 { color: #ffffff !important; font-family: 'Bebas Neue', sans-serif; font-size: clamp(1.4rem,2.5vw,1.9rem) !important; letter-spacing: 0.04em; margin-bottom: 0.5rem !important; }
+.scs-sub { font-size: 0.84rem; color: rgba(255,255,255,0.42) !important; margin-bottom: 1.5rem !important; line-height: 1.6; }
+.scs-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 0.75rem; }
+.scs-card { display: flex; flex-direction: column; gap: 0.25rem; padding: 1rem 1.1rem; background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.07); border-radius: 5px; text-decoration: none; transition: border-color 0.18s, background 0.18s; }
+.scs-card:hover { border-color: rgba(201,168,76,0.35); background: rgba(201,168,76,0.05); }
+.scs-label { font-family: 'Bebas Neue', sans-serif; font-size: 1rem; letter-spacing: 0.05em; color: var(--accent) !important; }
+.scs-desc { font-size: 0.72rem; color: rgba(255,255,255,0.42) !important; line-height: 1.4; font-family: 'DM Mono', monospace; }
 
 /* ── Testimonials grid ── */
 .sp-testimonials {
