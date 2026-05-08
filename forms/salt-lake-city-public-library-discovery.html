@@ -120,7 +120,7 @@
   <div class="hero-inner">
     <div class="hero-eyebrow">Acceptance &amp; Electronic Signature</div>
     <h1>Accept the <em>Discovery &amp; Alignment Engagement.</em></h1>
-    <p>One signature, one click. Mark countersigns within 24 hours and you'll receive the fully executed PDF by email, followed by your Square invoice for $24,500 USD to start the 2-week clock.</p>
+    <p>One signature, one click. Mark countersigns within 24 hours and you'll receive the fully executed PDF by email, followed by your Square invoice for $24,500 USD. Engagement pacing is agreed at the kickoff call after payment clears.</p>
   </div>
 </header>
 
@@ -143,7 +143,7 @@
   <div class="summary-card">
     <div class="lbl">You're Accepting</div>
     <h2>Discovery &amp; Alignment Engagement · Salt Lake City Public Library</h2>
-    <p>This signature accepts the terms in <a href="/documents/clients/salt-lake-city-public-library/proposal" target="_blank">Proposal SLC-DA-001</a>, <a href="/documents/clients/salt-lake-city-public-library/sow" target="_blank">Scope of Work SLC-DA-002</a>, and <a href="/documents/clients/salt-lake-city-public-library/timeline" target="_blank">Timeline SLC-DA-003</a>, and authorizes WETYR Corp / MarkCMO to issue a Square invoice for $24,500 USD. The 2-week delivery clock begins when payment clears and the intake worksheet is returned.</p>
+    <p>This signature accepts the terms in <a href="/documents/clients/salt-lake-city-public-library/proposal" target="_blank">Proposal SLC-DA-001</a>, <a href="/documents/clients/salt-lake-city-public-library/sow" target="_blank">Scope of Work SLC-DA-002</a>, and <a href="/documents/clients/salt-lake-city-public-library/timeline" target="_blank">Phasing &amp; Lead Times SLC-DA-003</a>, and authorizes WETYR Corp / MarkCMO to issue a Square invoice for $24,500 USD. Engagement pacing and delivery date are agreed at the kickoff call after payment clears.</p>
     <div class="summary-grid">
       <div class="item"><div class="l">Investment</div><div class="v">$24,500 USD</div></div>
       <div class="item"><div class="l">Delivery</div><div class="v">2 WKS</div></div>
@@ -183,7 +183,7 @@
       <label>
         <input type="checkbox" id="accept_terms" required/>
         <span class="body">
-          <strong>I accept the terms of the proposal.</strong> I am authorized to bind Salt Lake City Public Library to this engagement. I understand the engagement is fixed-fee at $24,500 USD, paid up-front, with delivery within 2 weeks of payment clearance and intake worksheet return. I agree the documents at <code style="background:rgba(37,99,235,0.1);padding:1px 5px;border-radius:3px;font-size:0.82rem;">/documents/clients/salt-lake-city-public-library/</code> form the complete agreement.
+          <strong>I accept the terms of the proposal.</strong> I am authorized to bind Salt Lake City Public Library to this engagement. I understand the engagement is fixed-fee at $24,500 USD, paid up-front, with engagement pacing and delivery date agreed collaboratively at the kickoff call after payment clearance and intake worksheet return. I agree the documents at <code style="background:rgba(37,99,235,0.1);padding:1px 5px;border-radius:3px;font-size:0.82rem;">/documents/clients/salt-lake-city-public-library/</code> form the complete agreement.
         </span>
       </label>
     </div>
@@ -364,7 +364,7 @@ async function buildSignedPDF({ clientName, clientTitle, clientCompany, clientEm
 
   // Big headline
   p1.drawText('Salt Lake City Public Library', { x: M, y: H - 200, size: 32, font: bold, color: rgb(1,1,1) });
-  p1.drawText('2-Week Discovery & Alignment', { x: M, y: H - 234, size: 22, font: helv, color: rgb(0.65, 0.78, 1) });
+  p1.drawText('Discovery & Alignment Engagement', { x: M, y: H - 234, size: 22, font: helv, color: rgb(0.65, 0.78, 1) });
 
   // Meta block
   p1.drawText('PREPARED FOR', { x: M, y: H - 290, size: 7, font: bold, color: rgb(0.55, 0.75, 1) });
@@ -383,7 +383,7 @@ async function buildSignedPDF({ clientName, clientTitle, clientCompany, clientEm
   y -= 22;
   const termRows = [
     ['Investment', '$24,500 USD · One-time, fixed fee'],
-    ['Delivery', '2 weeks from payment + intake worksheet'],
+    ['Delivery', 'Pace agreed at kickoff (after payment + intake)'],
     ['Deliverables', 'Executive Brief, Audit Report, Workflow Map, Competitive Analysis, 30/90/6mo/12mo Roadmap, Walkthrough Call'],
     ['Post-Delivery', '14-day clarification window via email'],
     ['Governing Docs', 'Proposal SLC-DA-001 · SOW SLC-DA-002 · Timeline SLC-DA-003'],
@@ -449,7 +449,7 @@ async function buildSignedPDF({ clientName, clientTitle, clientCompany, clientEm
     'The undersigned, on behalf of Salt Lake City Public Library, accepts the terms of the Business Discovery',
     'Audit proposal (SLC-DA-001) and the companion Scope of Work (SLC-DA-002) and Deliverable',
     'Timeline (SLC-DA-003), and authorizes WETYR Corp d/b/a MarkCMO to issue a Square invoice for',
-    '$24,500 USD. The 2-week delivery clock begins when payment clears and the intake worksheet is',
+    '$24,500 USD. Engagement pacing and delivery date are agreed at the kickoff call after payment',
     'returned, whichever is later. The undersigned consents to electronic signature under the U.S. ESIGN',
     'Act and consents to electronic delivery of the executed agreement and all related invoices.',
   ];
@@ -575,7 +575,7 @@ async function generate() {
           'Phone': clientPhone || '(not provided)',
           'Engagement': 'Discovery & Alignment Engagement',
           'Investment': '$24,500 USD',
-          'Delivery': '2 weeks from payment + intake',
+          'Delivery': 'Pace agreed at kickoff',
           'Accepted At': new Date(signedAt).toLocaleString('en-US', { dateStyle:'long', timeStyle:'short', timeZone:'America/New_York' }) + ' ET',
           ...(TEST_MODE ? { 'Test Mode': 'YES, routed to test email' } : {}),
         },
