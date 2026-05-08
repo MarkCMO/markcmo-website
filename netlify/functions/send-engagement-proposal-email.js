@@ -179,7 +179,7 @@ function buildEmailHtml({ client, engagement, docs, siteUrl, testMode, testRecip
   const introHtml        = em.intro_html        || `Thanks for the conversation. As promised, the full <strong>${esc(engagement.name)}</strong> package is below. It's a fixed-fee engagement designed to give you an honest, evidence-based picture of what's working at <strong>${esc(client.dba || client.legal_name)}</strong>, where the bottlenecks are, and a sequenced 30 / 90 / 6-month / 12-month roadmap to execute against.`;
   const signOutroHtml    = em.sign_outro_html   || `One signature, one click. I'll countersign within 24 hours and the Square invoice for $${fee} USD goes out immediately. The ${deliveryPhrase} delivery clock starts when payment clears and the intake worksheet is returned.`;
   const signoffLine      = em.signoff_line      || 'Looking forward to digging in,';
-  const docProposalDesc  = em.doc_proposal_desc || `Why this engagement, what's covered, what's delivered, the $${fee} fee, and the 14-day acceptance window.`;
+  const docProposalDesc  = em.doc_proposal_desc || `Why this engagement, what's covered, what's delivered, the $${fee} fee, and the 60-day acceptance window.`;
   const docSowDesc       = em.doc_sow_desc      || `Modules, activities, inputs, outputs, out-of-scope items, and your obligations during the ${deliveryPhrase} window.`;
   const docTimelineDesc  = em.doc_timeline_desc || `Phase by phase, milestone by milestone. Who owns what, when, and what slips the timeline.`;
   const docTimelineTitle = em.doc_timeline_title || `${deliveryShort.replace(/\s+/g,'-')} Deliverable Timeline`;
@@ -298,7 +298,7 @@ ${testMode ? `
   <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0" bgcolor="#0A1628" style="background-color:#0A1628;border-collapse:collapse;border-top:4px solid #2563EB;">
     <tr>
       <td bgcolor="#0A1628" align="center" style="background-color:#0A1628;padding:18px 32px;font-size:11px;color:#94A3B8;">
-        Confidential &middot; prepared for ${esc(client.legal_name)} &middot; valid 14 days from issue
+        Confidential &middot; prepared for ${esc(client.legal_name)} &middot; valid 60 days from issue
       </td>
     </tr>
   </table>
