@@ -51,20 +51,24 @@
 <meta name="geo.position" content="28.3922;-80.6077" />
 <meta name="ICBM" content="28.3922, -80.6077" />
   <script type="application/ld+json">
-  {
-    "@context": "https://schema.org",
-    "@type": "WebPage",
-    "@id": "https://markcmo.com/contact.html",
-    "url": "https://markcmo.com/contact.html",
-    "name": "Contact Mark Gabrielli | Fractional CMO & COO | Cape Canaveral, FL",
-    "description": "Contact Mark Gabrielli, Fractional CMO, COO & executive advisor. Cape Canaveral, FL & global. Available for healthcare, aerospace, SaaS, automotive & international engagements.",
-    "isPartOf": {"@id": "https://markcmo.com/#website"},
-    "about": {"@id": "https://markcmo.com/#mark-gabrielli"},
-    "datePublished": "2025-01-01",
-    "dateModified": "2026-02-21",
-    "inLanguage": "en-US"
-  }
-  </script>
+{
+  "@context": "https://schema.org",
+  "@type": "WebPage",
+  "@id": "https://markcmo.com/contact.html",
+  "url": "https://markcmo.com/contact.html",
+  "name": "Contact Mark Gabrielli | Fractional CMO & COO | Cape Canaveral, FL",
+  "description": "Contact Mark Gabrielli, Fractional CMO, COO & executive advisor. Cape Canaveral, FL & global. Available for healthcare, aerospace, SaaS, automotive & international engagements.",
+  "isPartOf": {
+    "@id": "https://markcmo.com/#website"
+  },
+  "about": {
+    "@id": "https://markcmo.com/#mark-gabrielli"
+  },
+  "datePublished": "2025-01-01",
+  "dateModified": "2026-05-08",
+  "inLanguage": "en-US"
+}
+</script>
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
@@ -323,6 +327,11 @@
 </select>
 </div>
 <div class="nf-group"><label class="nf-label">Tell me about your situation *</label><textarea class="nf-input nf-textarea" name="message" required placeholder="Brief description of your business, what you're dealing with, and what outcome you're looking for..."></textarea></div>
+<!-- Spam check -->
+<div style="margin:16px 0">
+  <label for="captcha-answer" style="display:block;margin-bottom:6px;font-weight:600">Spam check: What is <span id="captcha-q"></span>?</label>
+  <input type="number" id="captcha-answer" name="captcha_answer" required style="width:80px;padding:8px;border:1px solid #ccc;border-radius:4px" placeholder="?">
+</div>
 <button type="submit" class="nf-submit">Send Message →</button>
 </form>
 <div class="form-success">
@@ -642,6 +651,20 @@
 })();
 </script>
 <script src="nav.js" defer></script>
+<script>
+(function(){
+  var a=Math.floor(Math.random()*9)+1, b=Math.floor(Math.random()*9)+1;
+  var q=document.getElementById('captcha-q');
+  if(q) q.textContent=a+' + '+b;
+  var form=document.querySelector('form');
+  if(form) form.addEventListener('submit',function(e){
+    var hp=form.querySelector('[name="website"]');
+    if(hp && hp.value){e.preventDefault();return;}
+    var ans=parseInt(document.getElementById('captcha-answer').value,10);
+    if(ans!==(a+b)){e.preventDefault();alert('Please answer the spam check question correctly.');}
+  });
+})();
+</script>
 <script>
 (function(){
   var nav=document.getElementById('mainNav');
