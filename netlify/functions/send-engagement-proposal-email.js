@@ -232,9 +232,12 @@ ${testMode ? `
           <div style="font-size:12px;color:#64748B;margin-top:4px;">USD &middot; one-time</div>
         </td>
         <td style="vertical-align:top;padding:0;text-align:right;">
-          <div style="font-family:'DM Mono',Menlo,monospace;font-size:11px;letter-spacing:0.18em;text-transform:uppercase;color:#2563EB;margin-bottom:4px;font-weight:600;">Delivery</div>
-          <div style="font-family:'Bebas Neue',Impact,sans-serif;font-size:30px;color:#0A1628;letter-spacing:0.02em;line-height:1;">${esc(deliveryShort)}</div>
-          <div style="font-size:12px;color:#64748B;margin-top:4px;">from payment + intake</div>
+          <div style="font-family:'DM Mono',Menlo,monospace;font-size:11px;letter-spacing:0.18em;text-transform:uppercase;color:#2563EB;margin-bottom:4px;font-weight:600;">${deliveryShort === 'TBD' ? 'Pace' : 'Delivery'}</div>
+          ${deliveryShort === 'TBD'
+            ? `<div style="font-family:'Bebas Neue',Impact,sans-serif;font-size:22px;color:#0A1628;letter-spacing:0.02em;line-height:1.1;">Set at kickoff</div>
+               <div style="font-size:12px;color:#64748B;margin-top:4px;">matched to your calendar</div>`
+            : `<div style="font-family:'Bebas Neue',Impact,sans-serif;font-size:30px;color:#0A1628;letter-spacing:0.02em;line-height:1;">${esc(deliveryShort)}</div>
+               <div style="font-size:12px;color:#64748B;margin-top:4px;">from payment + intake</div>`}
         </td>
       </tr>
     </table>

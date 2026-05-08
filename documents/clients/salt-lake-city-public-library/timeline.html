@@ -3,8 +3,8 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>Timeline &amp; Lead Times &middot; SLC-DA-003 &middot; Salt Lake City Public Library</title>
-<meta name="description" content="Timeline and lead times for the Discovery &amp; Alignment, Phase 1, and Phase 2 engagements with Salt Lake City Public Library." />
+<title>Phasing &amp; Lead Times &middot; SLC-DA-003 &middot; Salt Lake City Public Library</title>
+<meta name="description" content="Phasing and lead times for the Discovery &amp; Alignment, Phase 1, and Phase 2 engagements with Salt Lake City Public Library." />
 <meta name="robots" content="noindex, nofollow, noarchive, nosnippet, noimageindex" />
 <meta http-equiv="Cache-Control" content="no-store, no-cache, must-revalidate, private" />
 <link rel="preconnect" href="https://fonts.googleapis.com" crossorigin>
@@ -42,36 +42,33 @@
   p{margin-bottom:1rem;color:var(--text);font-size:0.96rem;}
   p strong{color:var(--navy);font-weight:700;}
 
-  /* Lead time table */
   .lt-table{background:var(--white);border:1px solid var(--border);border-radius:14px;padding:0.5rem 0;margin:1.5rem 0;overflow:hidden;}
   .lt-row{display:grid;grid-template-columns:240px 1fr;gap:1rem;padding:0.85rem 1.5rem;border-bottom:1px solid var(--border);font-size:0.94rem;}
   .lt-row:last-child{border-bottom:0;}
   .lt-row .k{font-family:'Barlow',sans-serif;font-weight:700;color:var(--navy);font-size:0.94rem;}
   .lt-row .v{color:var(--text);line-height:1.55;}
   .lt-row .v strong{color:var(--blue);font-family:'DM Mono',monospace;font-size:0.84rem;letter-spacing:0.06em;font-weight:700;}
+  @media(max-width:600px){.lt-row{grid-template-columns:1fr;gap:0.3rem;}}
 
-  /* Phase block */
-  .phase-block{background:var(--white);border:1px solid var(--border);border-radius:16px;padding:2rem 2.25rem;margin-bottom:2rem;}
+  .phase-block{background:var(--white);border:1px solid var(--border);border-radius:16px;padding:2rem 2.25rem;margin-bottom:1.25rem;}
   .phase-block.featured{background:linear-gradient(135deg,var(--navy),var(--navy-mid));color:var(--white);border-color:transparent;}
   .phase-block.featured .phase-eyebrow{color:var(--blue-light);}
   .phase-block.featured h3{color:var(--white);}
   .phase-block.featured .phase-sub{color:rgba(255,255,255,0.78);}
-  .phase-block.featured .week{background:rgba(255,255,255,0.04);border-color:rgba(255,255,255,0.1);}
-  .phase-block.featured .week-num{color:var(--orange-light);}
-  .phase-block.featured .week h4{color:var(--white);}
-  .phase-block.featured .week p{color:rgba(255,255,255,0.78);}
   .phase-eyebrow{font-family:'DM Mono',monospace;font-size:0.65rem;letter-spacing:0.2em;text-transform:uppercase;color:var(--blue);margin-bottom:0.5rem;font-weight:700;}
   .phase-block h3{font-family:'Bebas Neue',sans-serif;font-size:1.7rem;letter-spacing:0.04em;color:var(--navy);margin-bottom:0.5rem;font-weight:400;}
   .phase-sub{font-size:0.94rem;color:var(--text-mid);margin-bottom:1.25rem;line-height:1.5;}
 
-  .weeks{display:grid;grid-template-columns:repeat(2,1fr);gap:0.85rem;margin-top:1rem;}
-  @media(max-width:720px){.weeks{grid-template-columns:1fr;}}
-  .week{background:var(--off-white);border:1px solid var(--border);border-radius:12px;padding:1.1rem 1.25rem;}
-  .week-num{font-family:'Bebas Neue',sans-serif;font-size:1.25rem;color:var(--orange);letter-spacing:0.04em;margin-bottom:0.3rem;}
-  .week h4{font-family:'Barlow',sans-serif;font-size:0.95rem;font-weight:700;color:var(--navy);margin-bottom:0.4rem;}
-  .week p{font-size:0.86rem;margin:0;color:var(--text-mid);line-height:1.5;}
+  .seq{margin-top:1rem;}
+  .seq-row{display:grid;grid-template-columns:50px 1fr;gap:1rem;padding:0.85rem 0;border-top:1px solid var(--border);}
+  .phase-block.featured .seq-row{border-top-color:rgba(255,255,255,0.12);}
+  .seq-row:first-child{border-top:0;}
+  .seq-num{font-family:'Bebas Neue',sans-serif;font-size:1.5rem;color:var(--orange);letter-spacing:0.04em;line-height:1;}
+  .seq-body h4{font-family:'Barlow',sans-serif;font-size:0.95rem;font-weight:700;color:var(--navy);margin-bottom:0.3rem;}
+  .phase-block.featured .seq-body h4{color:var(--white);}
+  .seq-body p{font-size:0.86rem;margin:0;color:var(--text-mid);line-height:1.55;}
+  .phase-block.featured .seq-body p{color:rgba(255,255,255,0.78);}
 
-  /* Critical path note */
   .cp-note{background:#FFF7ED;border:1px solid rgba(249,115,22,0.3);border-radius:12px;padding:1.4rem 1.65rem;margin:1.5rem 0;}
   .cp-note .lbl{font-family:'DM Mono',monospace;font-size:0.65rem;letter-spacing:0.2em;text-transform:uppercase;color:#C2410C;margin-bottom:0.5rem;font-weight:700;}
   .cp-note p{margin:0;font-size:0.92rem;color:var(--text);}
@@ -86,43 +83,27 @@
   .doc-footer-meta{font-family:'DM Mono',monospace;font-size:0.68rem;letter-spacing:0.15em;text-transform:uppercase;color:rgba(255,255,255,0.4);text-align:right;}
   @media(max-width:600px){.doc-footer-meta{text-align:left;}}
 
-
-  /* ─── PRINT-FRIENDLY (used for "Download PDF" via browser print-to-PDF) ─── */
+  /* ─── PRINT-FRIENDLY ─── */
   @page { size: Letter; margin: 0.5in 0.45in; }
   @media print {
     html, body { background: #FFFFFF !important; }
     body { font-size: 11pt; line-height: 1.5; color: #0A1628; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
-    /* Hide UI chrome that doesn't belong in a printed proposal */
-    .doc-nav, .doc-nav-links, .doc-pdf-btn, footer.doc-footer, .cta-row, .cta-primary, .cta-secondary,
-    button, .mc-btn, [onclick] { display: none !important; }
-    /* Hero collapses to a clean block */
-    .doc-hero, .cover-hero { background: #0A1628 !important; color: #FFFFFF !important; padding: 0.55in 0.45in 0.4in !important; box-shadow: none !important; page-break-inside: avoid; }
-    .doc-hero h1, .cover-hero h1 { color: #FFFFFF !important; font-size: 26pt !important; line-height: 1.1 !important; }
-    .doc-hero h1 em, .cover-hero h1 em { color: #F97316 !important; }
-    .doc-hero-eyebrow, .cover-eyebrow { color: #93C5FD !important; }
-    /* Content fits page width */
-    .doc-body, .cover-hero-inner, .doc-hero-inner, .doc-footer-inner { max-width: 100% !important; padding: 0.3in 0 !important; margin: 0 !important; }
-    /* Cards / sections shouldn't break across pages mid-card */
-    .module, .tier, .tier-row, .qual, .doc-card, .week, .phase-block, .accept-card, .three-q, .out-box, .warn-box, .cp-note, .read-order, .featured-cta, .invest-strip, .step, .coverage-col, .prepared-card { page-break-inside: avoid; break-inside: avoid; }
+    .doc-nav, .doc-nav-links, .doc-pdf-btn, footer.doc-footer, .cta-row, .cta-primary, .cta-secondary, button, .mc-btn, [onclick] { display: none !important; }
+    .doc-hero { background: #0A1628 !important; color: #FFFFFF !important; padding: 0.55in 0.45in 0.4in !important; box-shadow: none !important; page-break-inside: avoid; }
+    .doc-hero h1 { color: #FFFFFF !important; font-size: 26pt !important; line-height: 1.1 !important; }
+    .doc-hero h1 em { color: #F97316 !important; }
+    .doc-hero-eyebrow { color: #93C5FD !important; }
+    .doc-body, .doc-hero-inner, .doc-footer-inner { max-width: 100% !important; padding: 0.3in 0 !important; margin: 0 !important; }
+    .phase-block, .lt-table, .cp-note { page-break-inside: avoid; break-inside: avoid; }
     h2, h3 { page-break-after: avoid; break-after: avoid; }
-    /* Links: keep blue + show URL after for printed reference */
     a { color: #2563EB !important; text-decoration: none !important; }
     a[href^='http']::after { content: " (" attr(href) ")"; font-size: 8pt; color: #94A3B8; word-break: break-all; }
     a[href^='/']::after, a[href^='#']::after, a[href^='mailto:']::after { content: ''; }
-    /* Tighter section spacing for print */
-    .section, section { margin-bottom: 1.4em !important; }
+    .section { margin-bottom: 1.4em !important; }
     p { margin-bottom: 0.7em; }
-    /* Each major section starts on a fresh page if practical */
-    .section { page-break-before: auto; }
-    /* Background gradients turn into solid colors */
-    .invest-strip, .featured-cta { background: #0A1628 !important; }
-    .tier.featured, .phase-block.featured, .tier-row.featured { background: #0A1628 !important; }
-    /* Coverage bullet matrix should print readably */
-    .coverage-grid { display: block !important; }
-    .coverage-col { margin-bottom: 0.6em; page-break-inside: avoid; }
+    .phase-block.featured { background: #0A1628 !important; }
   }
 
-  /* "Download PDF" floating button (desktop only; hides on print) */
   .doc-pdf-btn {
     position: fixed; bottom: 1.5rem; right: 1.5rem; z-index: 200;
     background: #F97316; color: #FFFFFF !important;
@@ -133,11 +114,8 @@
     transition: transform 0.15s, box-shadow 0.15s, background 0.15s;
     display: inline-flex; align-items: center; gap: 0.5rem;
   }
-  .doc-pdf-btn:hover { background: #EA6C0A; transform: translateY(-2px); box-shadow: 0 12px 32px rgba(249,115,22,0.45), 0 2px 6px rgba(15,32,64,0.2); }
-  .doc-pdf-btn:active { transform: translateY(0); }
-  @media (max-width: 600px) {
-    .doc-pdf-btn { bottom: 1rem; right: 1rem; padding: 0.75rem 1rem; font-size: 0.78rem; }
-  }
+  .doc-pdf-btn:hover { background: #EA6C0A; transform: translateY(-2px); }
+  @media (max-width: 600px) { .doc-pdf-btn { bottom: 1rem; right: 1rem; padding: 0.75rem 1rem; font-size: 0.78rem; } }
 </style>
 </head>
 <body>
@@ -149,35 +127,32 @@
     <a href="proposal.html">Proposal</a>
     <a href="scope-of-work.html">SOW</a>
   </div>
-  <div class="doc-nav-meta">SLC-DA-003 &middot; <strong>Timeline</strong></div>
+  <div class="doc-nav-meta">SLC-DA-003 &middot; <strong>Phasing</strong></div>
 </nav>
 
 <header class="doc-hero">
   <div class="doc-hero-inner">
-    <div class="doc-hero-eyebrow">SLC-DA-003 &middot; Timeline &amp; Lead Times</div>
-    <h1>From Yes Today To <em>Phase 1 In Hand.</em></h1>
-    <p class="doc-hero-sub">The operational document. Lead times for proposal acceptance, kickoff, and delivery for all three engagement options &mdash; Discovery &amp; Alignment, Phase 1 Operational Assessment, and the two Phase 2 paths. Public-procurement-friendly cadence assumed throughout.</p>
+    <div class="doc-hero-eyebrow">SLC-DA-003 &middot; Phasing &amp; Lead Times</div>
+    <h1>We Move At <em>Your Pace.</em></h1>
+    <p class="doc-hero-sub">Engagement durations are not pre-committed. Each phase has a fixed scope and fixed fee, but the calendar is set together at kickoff and matched to the library's seasonal load, board cadence, and staff availability. This document covers the sequence of work, the hard external lead times we don't control, and what causes phases to take longer or shorter.</p>
   </div>
 </header>
 
 <main class="doc-body">
 
   <section class="section">
-    <div class="section-eyebrow">Lead Times At A Glance</div>
-    <h2>End-To-End Runway. <span>Yes Today &rarr; Phase 1 Delivered.</span></h2>
-    <p>The shortest path from accepting Discovery &amp; Alignment today to having a Phase 1 Operational Assessment in hand is approximately <strong>14&ndash;16 weeks</strong>, assuming a standard procurement cadence on the library's side and no delays on either party's calendar.</p>
+    <div class="section-eyebrow">External Lead Times</div>
+    <h2>The Few Things <span>We Can Lock In Today.</span></h2>
+    <p>These are the only commitments we make on calendar before kickoff. Everything else (engagement duration, interview cadence, deliverable date) is agreed collaboratively at each engagement's kickoff so we don't push the library faster than your operations or board cycle can absorb.</p>
 
     <div class="lt-table">
       <div class="lt-row"><div class="k">Proposal validity</div><div class="v"><strong>30 days</strong> from issue date.</div></div>
-      <div class="lt-row"><div class="k">Acceptance to PO/contract</div><div class="v">Same business day to <strong>5 business days</strong> depending on library procurement workflow.</div></div>
+      <div class="lt-row"><div class="k">Acceptance to PO/contract</div><div class="v">Library's standard procurement workflow. We don't drive this lead time.</div></div>
       <div class="lt-row"><div class="k">PO to Square invoice</div><div class="v">Within <strong>1 business hour</strong> of PO receipt.</div></div>
       <div class="lt-row"><div class="k">Invoice to payment</div><div class="v"><strong>Net 10</strong> from issuance, or per library's standard public-vendor terms.</div></div>
-      <div class="lt-row"><div class="k">Payment + intake to kickoff</div><div class="v"><strong>1 week</strong> after both received (allows interview scheduling).</div></div>
-      <div class="lt-row"><div class="k">Discovery &amp; Alignment kickoff to delivery</div><div class="v"><strong>2 weeks</strong> from kickoff. Memo + readout delivered Week 2 Day 5.</div></div>
-      <div class="lt-row"><div class="k">Phase 1 contract execution</div><div class="v">Optional. Library decides within 60 days of Discovery readout (no commitment to do so).</div></div>
-      <div class="lt-row"><div class="k">Phase 1 kickoff to delivery</div><div class="v"><strong>8 weeks</strong> from kickoff. Board-ready presentation Week 8 Day 5.</div></div>
-      <div class="lt-row"><div class="k">Phase 2A (Roadmap) duration</div><div class="v"><strong>12 weeks</strong> from kickoff.</div></div>
-      <div class="lt-row"><div class="k">Phase 2B (Advisory) initial term</div><div class="v"><strong>6 months</strong> minimum from kickoff. Renewable in 3-month blocks.</div></div>
+      <div class="lt-row"><div class="k">Payment + intake to kickoff call</div><div class="v">30-minute kickoff call scheduled at the library's convenience after both are received.</div></div>
+      <div class="lt-row"><div class="k">Kickoff to delivery</div><div class="v">Engagement-specific. Agreed at kickoff between Mark and Tyler. Matched to the library's calendar.</div></div>
+      <div class="lt-row"><div class="k">Phase 1 / Phase 2 decision</div><div class="v">Library's choice, on library's timeline. No expiration on continuation. Each is a separate signed engagement.</div></div>
     </div>
   </section>
 
@@ -185,158 +160,152 @@
     <div class="section-eyebrow">Discovery &amp; Alignment</div>
 
     <div class="phase-block featured">
-      <div class="phase-eyebrow">SLC-DA &middot; 2 Weeks &middot; $24,500 USD Fixed</div>
-      <h3>Discovery &amp; Alignment Engagement</h3>
-      <p class="phase-sub">The 10 working days from kickoff to delivery. Scheduled to minimize disruption to library operations: leadership interviews bunched in Week 1, synthesis and writing in Week 2.</p>
+      <div class="phase-eyebrow">SLC-DA &middot; $24,500 USD Fixed</div>
+      <h3>Discovery &amp; Alignment Sequence</h3>
+      <p class="phase-sub">Five sequenced steps. Each one starts when its inputs are in hand. The library sets the calendar; we move the work along that calendar without rushing it.</p>
 
-      <div class="weeks">
-        <div class="week">
-          <div class="week-num">Week 1 &middot; Days 1&ndash;3</div>
-          <h4>Kickoff + Interview Sprint Begins</h4>
-          <p>30-min kickoff call with Tyler Bahr. Vendor list and org chart received. First 3 leadership interviews completed.</p>
-        </div>
-        <div class="week">
-          <div class="week-num">Week 1 &middot; Days 4&ndash;5</div>
-          <h4>Interview Sprint Continues</h4>
-          <p>Remaining 3&ndash;5 interviews completed. Light desk research on technology inventory begins. End-of-week informal status note to Tyler.</p>
-        </div>
-        <div class="week">
-          <div class="week-num">Week 2 &middot; Days 6&ndash;8</div>
-          <h4>Synthesis + Decision-Flow Mapping</h4>
-          <p>Interview synthesis. Technology inventory completed. Decision-flow patterns identified. Three Phase 1 options framed.</p>
-        </div>
-        <div class="week">
-          <div class="week-num">Week 2 &middot; Days 9&ndash;10</div>
-          <h4>Memo Delivery + Readout</h4>
-          <p>5-page Lay of the Land memo delivered Day 9. 60-minute leadership readout scheduled Day 10. 14-day Q&amp;A clarification window opens.</p>
-        </div>
+      <div class="seq">
+        <div class="seq-row"><div class="seq-num">01</div><div class="seq-body">
+          <h4>Kickoff &amp; calendar agreement</h4>
+          <p>30-minute call with Tyler. Scope confirmed, stakeholder set agreed, target delivery date agreed, intake worksheet handed off.</p>
+        </div></div>
+        <div class="seq-row"><div class="seq-num">02</div><div class="seq-body">
+          <h4>Stakeholder interviews</h4>
+          <p>Leadership conversations on the library's schedule. As few or as many as the library and Mark agree to at kickoff. No fixed interview count.</p>
+        </div></div>
+        <div class="seq-row"><div class="seq-num">03</div><div class="seq-body">
+          <h4>Technology + decision-flow snapshot</h4>
+          <p>Light inventory of systems in use plus a map of how technology decisions get made today. Built in parallel with interviews.</p>
+        </div></div>
+        <div class="seq-row"><div class="seq-num">04</div><div class="seq-body">
+          <h4>Synthesis &amp; memo drafting</h4>
+          <p>Anonymized interview synthesis. Three Phase 1 options framed (lighter / standard / deeper). Lay of the Land memo drafted.</p>
+        </div></div>
+        <div class="seq-row"><div class="seq-num">05</div><div class="seq-body">
+          <h4>Memo delivery + leadership readout</h4>
+          <p>PDF memo delivered to Tyler. Leadership readout scheduled at the library's convenience. 14-day Q&amp;A clarification window opens after readout.</p>
+        </div></div>
       </div>
     </div>
   </section>
 
   <section class="section">
-    <div class="section-eyebrow">Phase 1 (If/When Initiated)</div>
+    <div class="section-eyebrow">Phase 1 (If Initiated)</div>
 
     <div class="phase-block">
-      <div class="phase-eyebrow">SLC-P1 &middot; 8 Weeks &middot; $87,500 USD Fixed</div>
-      <h3>Operational Assessment</h3>
-      <p class="phase-sub">Phase 1 is presented here for context. It is a separate fixed-fee engagement with its own contract, not a continuation of Discovery &amp; Alignment. The library may or may not initiate Phase 1; there is no obligation either way.</p>
+      <div class="phase-eyebrow">SLC-P1 &middot; $87,500 USD Fixed</div>
+      <h3>Operational Assessment Sequence</h3>
+      <p class="phase-sub">Phase 1 is presented for context. It is a separate fixed-fee engagement with its own contract. The library may or may not initiate Phase 1; there is no obligation either way and no expiration on the option.</p>
 
-      <div class="weeks">
-        <div class="week">
-          <div class="week-num">Weeks 1&ndash;2</div>
-          <h4>Stakeholder Mobilization</h4>
-          <p>Full interview schedule built (15&ndash;25 interviews). System inventory deepens with read-only access. Branch + program staff outreach begins.</p>
-        </div>
-        <div class="week">
-          <div class="week-num">Weeks 3&ndash;4</div>
-          <h4>Interview Wave</h4>
-          <p>Leadership re-interviewed (deeper). Department heads, branch managers, programming staff, IT, finance, HR. Process maps drafted as interviews complete.</p>
-        </div>
-        <div class="week">
-          <div class="week-num">Week 5</div>
-          <h4>Process &amp; Decision-Flow Mapping</h4>
+      <div class="seq">
+        <div class="seq-row"><div class="seq-num">01</div><div class="seq-body">
+          <h4>Stakeholder mobilization</h4>
+          <p>Full interview schedule built around the library's calendar. Read-only access to inventory deepens. Branch and program staff outreach begins.</p>
+        </div></div>
+        <div class="seq-row"><div class="seq-num">02</div><div class="seq-body">
+          <h4>Interview wave</h4>
+          <p>Leadership re-interviewed deeper. Department heads, branch managers, programming staff, IT, finance, HR. Process maps drafted as interviews complete. Cadence set by the library.</p>
+        </div></div>
+        <div class="seq-row"><div class="seq-num">03</div><div class="seq-body">
+          <h4>Process &amp; decision-flow mapping</h4>
           <p>Cross-team workflow maps completed. Technology decision rights documented (RACI). Service-delivery models inventoried.</p>
-        </div>
-        <div class="week">
-          <div class="week-num">Week 6</div>
-          <h4>Alignment Scoring</h4>
+        </div></div>
+        <div class="seq-row"><div class="seq-num">04</div><div class="seq-body">
+          <h4>Alignment scoring</h4>
           <p>Each major service line scored against current technology, current org structure, and stated goals. Gap matrix produced.</p>
-        </div>
-        <div class="week">
-          <div class="week-num">Week 7</div>
-          <h4>Future-State Design</h4>
-          <p>Working session with library leadership. 3-year future-state vision drafted. Priority initiatives identified. Phase 2 options scoped.</p>
-        </div>
-        <div class="week">
-          <div class="week-num">Week 8</div>
-          <h4>Final Readout + Phase 2 Proposal</h4>
-          <p>Board-ready presentation delivered. Full Phase 1 deliverable (3 reports, 1 presentation, 1 future-state document) handed over. Phase 2 proposal issued separately.</p>
-        </div>
+        </div></div>
+        <div class="seq-row"><div class="seq-num">05</div><div class="seq-body">
+          <h4>Future-state design</h4>
+          <p>Working session(s) with library leadership. 3-year future-state vision drafted. Priority initiatives identified. Phase 2 options scoped.</p>
+        </div></div>
+        <div class="seq-row"><div class="seq-num">06</div><div class="seq-body">
+          <h4>Final readout + Phase 2 proposal</h4>
+          <p>Board-ready presentation delivered. Full Phase 1 deliverable handed over (3 reports, 1 presentation, 1 future-state document). Phase 2 proposal issued separately.</p>
+        </div></div>
       </div>
     </div>
   </section>
 
   <section class="section">
-    <div class="section-eyebrow">Phase 2 Paths (If/When Initiated)</div>
+    <div class="section-eyebrow">Phase 2 Paths (If Initiated)</div>
 
     <div class="phase-block">
-      <div class="phase-eyebrow">SLC-P2A &middot; 12 Weeks &middot; $165,000 USD Fixed</div>
+      <div class="phase-eyebrow">SLC-P2A &middot; $165,000 USD Fixed</div>
       <h3>Phase 2A &middot; Implementation Roadmap Build</h3>
-      <p class="phase-sub">Fixed-scope. Builds the actual playbook the library will execute against, with vendor RFPs, governance changes, and a 24-month tech roadmap. Output is a buy-list, a sequence, and a way to measure progress.</p>
+      <p class="phase-sub">Fixed-scope. Builds the playbook the library will execute against. Output is a 24-month roadmap, a governance playbook, and RFP-ready scopes for any major buys. Sequencing and delivery window agreed at kickoff.</p>
 
-      <div class="weeks">
-        <div class="week">
-          <div class="week-num">Weeks 1&ndash;3</div>
-          <h4>Roadmap Skeleton</h4>
-          <p>Initiative briefs drafted. Sequencing logic documented. Capacity model built (what library staff + budget can absorb in any 6-month window).</p>
-        </div>
-        <div class="week">
-          <div class="week-num">Weeks 4&ndash;7</div>
-          <h4>Governance + RFP Drafting</h4>
+      <div class="seq">
+        <div class="seq-row"><div class="seq-num">01</div><div class="seq-body">
+          <h4>Roadmap skeleton</h4>
+          <p>Initiative briefs drafted. Sequencing logic documented. Capacity model built (what library staff + budget can absorb in any rolling window).</p>
+        </div></div>
+        <div class="seq-row"><div class="seq-num">02</div><div class="seq-body">
+          <h4>Governance + RFP drafting</h4>
           <p>Decision-rights playbook drafted. RFP scopes drafted for each major buy. Vendor evaluation rubric set.</p>
-        </div>
-        <div class="week">
-          <div class="week-num">Weeks 8&ndash;10</div>
-          <h4>Roadmap Refinement</h4>
+        </div></div>
+        <div class="seq-row"><div class="seq-num">03</div><div class="seq-body">
+          <h4>Roadmap refinement</h4>
           <p>Working sessions with leadership to validate sequencing, dependencies, and trade-offs. Final 24-month roadmap locked.</p>
-        </div>
-        <div class="week">
-          <div class="week-num">Weeks 11&ndash;12</div>
-          <h4>Final Delivery + Handover</h4>
-          <p>Roadmap, governance playbook, and RFP-ready scopes packaged and delivered. Optional: standalone board / staff briefings included.</p>
-        </div>
+        </div></div>
+        <div class="seq-row"><div class="seq-num">04</div><div class="seq-body">
+          <h4>Final delivery + handover</h4>
+          <p>Roadmap, governance playbook, and RFP-ready scopes packaged and delivered. Optional standalone board / staff briefings included.</p>
+        </div></div>
       </div>
     </div>
 
     <div class="phase-block">
-      <div class="phase-eyebrow">SLC-P2B &middot; 6 Months Min &middot; $24,500/mo USD</div>
+      <div class="phase-eyebrow">SLC-P2B &middot; $24,500/mo USD</div>
       <h3>Phase 2B &middot; Embedded Advisory Retainer</h3>
-      <p class="phase-sub">Ongoing. The hands-on counterpart to Phase 2A. Mark stays engaged for 6+ months and is the on-call senior advisor for technology, organizational, and operational decisions.</p>
+      <p class="phase-sub">Ongoing. The hands-on counterpart to Phase 2A. Mark stays engaged as the on-call senior advisor for technology, organizational, and operational decisions. Initial term and renewal cadence agreed at engagement start.</p>
 
-      <div class="weeks">
-        <div class="week">
-          <div class="week-num">Each Week</div>
-          <h4>Leadership Office Hours</h4>
-          <p>1-hour standing call with CFO + Executive Director + IT lead. Working agenda. Decisions made or decisions queued for next week.</p>
-        </div>
-        <div class="week">
-          <div class="week-num">Each Month</div>
-          <h4>Steering Committee</h4>
-          <p>2-hour standing meeting with extended leadership. Roadmap progress reviewed. Risk + dependency discussion. Next-month commitments locked.</p>
-        </div>
-        <div class="week">
-          <div class="week-num">Each Quarter</div>
-          <h4>Quarterly Business Review</h4>
+      <div class="seq">
+        <div class="seq-row"><div class="seq-num">&middot;</div><div class="seq-body">
+          <h4>Standing leadership office hours</h4>
+          <p>Weekly call with CFO + Executive Director + IT lead. Working agenda. Decisions made or queued for next week.</p>
+        </div></div>
+        <div class="seq-row"><div class="seq-num">&middot;</div><div class="seq-body">
+          <h4>Monthly steering</h4>
+          <p>Standing meeting with extended leadership. Roadmap progress reviewed. Risk + dependency discussion. Next-month commitments locked.</p>
+        </div></div>
+        <div class="seq-row"><div class="seq-num">&middot;</div><div class="seq-body">
+          <h4>Quarterly business review</h4>
           <p>Formal review of progress vs. roadmap. Recommendations for course correction. Optional board readout.</p>
-        </div>
-        <div class="week">
-          <div class="week-num">Always-On</div>
-          <h4>On-Call Advisory</h4>
-          <p>Same-day email + voice access for staff with technology decisions in flight. Vendor-call attendance available with 48hr notice.</p>
-        </div>
+        </div></div>
+        <div class="seq-row"><div class="seq-num">&middot;</div><div class="seq-body">
+          <h4>Always-on advisory</h4>
+          <p>Same-day email + voice access for staff with technology decisions in flight. Vendor-call attendance available with reasonable notice.</p>
+        </div></div>
       </div>
     </div>
   </section>
 
   <section class="section">
-    <div class="section-eyebrow">Critical Path</div>
-    <h2>What Could Slip <span>The Timeline.</span></h2>
+    <div class="section-eyebrow">What Adjusts the Calendar</div>
+    <h2>Things That Take <span>Longer Or Shorter.</span></h2>
     <div class="cp-note">
-      <div class="lbl">Risks To Discovery &amp; Alignment Schedule</div>
-      <p><strong>Interview availability.</strong> Discovery requires 6&ndash;8 leadership conversations in Week 1. If 2 or more interviewees can't be scheduled within a 5-day window, Week 1 slips and Week 2 delivery slips with it. Mitigation: library schedules interviews during contract execution week, before kickoff.</p>
+      <div class="lbl">Library-side variables (we follow your lead)</div>
+      <p><strong>Stakeholder availability.</strong> Discovery and Phase 1 are interview-driven. Branch staff, programming staff, board liaisons, and seasonal leadership absences set the realistic cadence. The library tells us what's workable; we sequence around it.</p>
     </div>
     <div class="cp-note">
-      <div class="lbl">Risks To Phase 1 Schedule</div>
-      <p><strong>Branch + programming staff availability.</strong> Phase 1 reaches deeper into the org &mdash; 15&ndash;25 stakeholders. If the library's seasonal calendar (summer programming, school-break events, fundraising drive) collides with interview weeks 3&ndash;4, expect a 1&ndash;2 week extension at no additional cost. Mitigation: identify the right kickoff window during Discovery readout.</p>
+      <div class="lbl">Library-side variables (continued)</div>
+      <p><strong>Seasonal calendar.</strong> Summer programming, school-break events, fundraising drives, board-meeting cycles, end-of-fiscal-year cadences. We don't run interview waves through your peak periods unless you specifically want us to.</p>
     </div>
     <div class="cp-note">
-      <div class="lbl">Risks To Phase 2A Schedule</div>
-      <p><strong>Vendor &amp; RFP cooperation.</strong> The Roadmap build assumes the library wants RFP-ready scopes for vendor procurement. If the library's procurement office requires internal approvals to share RFP language with consultants, weeks 4&ndash;7 can slip. Mitigation: Phase 1 surfaces this early; we route around it in scope if needed.</p>
+      <div class="lbl">External variables (neither side controls)</div>
+      <p><strong>Procurement &amp; board approvals.</strong> The library's contract execution path, board approval cadence, and any external review processes set the floor on time-to-kickoff. We don't accelerate these &mdash; we wait for them.</p>
+    </div>
+    <div class="cp-note">
+      <div class="lbl">Quality bar (we hold the line on this)</div>
+      <p><strong>The deliverable.</strong> If the library wants to compress a phase aggressively, we issue a written change order before the work starts &mdash; never on the back end. The fixed fee covers a thorough engagement; faster work that risks the deliverable's quality is the only thing we say no to.</p>
     </div>
   </section>
 
 </main>
+
+<button type="button" class="doc-pdf-btn" onclick="window.print()" aria-label="Download as PDF">
+  &#128196; Download PDF
+</button>
 
 <footer class="doc-footer">
   <div class="doc-footer-inner">
@@ -345,7 +314,7 @@
       <p>Mark Gabrielli &middot; Fractional CMO &amp; COO &middot; WETYR Corp &middot; Cape Canaveral, FL &middot; <a style="color:var(--blue-light);" href="mailto:mark@markcmo.com">mark@markcmo.com</a></p>
     </div>
     <div class="doc-footer-meta">
-      SLC-DA-003 &middot; v1.0<br/>
+      SLC-DA-003 &middot; v2.0<br/>
       Confidential &middot; Salt Lake City Public Library
     </div>
   </div>
@@ -365,9 +334,5 @@
   } catch(e) {}
 })();
 </script>
-
-<button type="button" class="doc-pdf-btn" onclick="window.print()" aria-label="Download as PDF">
-  &#128196; Download PDF
-</button>
 </body>
 </html>
