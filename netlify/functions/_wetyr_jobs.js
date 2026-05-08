@@ -18,7 +18,7 @@ function authHeaders() {
 }
 
 // Known top-level columns; everything else gets folded into the JSONB payload.
-const COLUMNS = new Set(['status', 'kind', 'title', 'progress', 'error']);
+const COLUMNS = new Set(['status', 'kind', 'title', 'progress', 'error', 'project_id']);
 
 async function setJob(jobId, patch) {
   if (!REST || !SUPABASE_SERVICE_KEY) throw new Error('Supabase env not set (SUPABASE_URL/SUPABASE_SERVICE_KEY)');
@@ -56,13 +56,20 @@ async function getJob(jobId) {
 }
 
 // Generic kickoff helper for background-function-backed pipelines.
-// kind = "dissect" | "schedule" | "budget"
+// kind = "dissect" | "schedule" | "budget" | "callsheet"
+//
+// project_id rules:
+//   - "dissect" jobs: project_id = own jobId (a dissect IS a project root)
+//   - "schedule"/"budget"/"callsheet": project_id = body.projectId (passed by client),
+//     which is the dissect's jobId. Falls back to own jobId if not supplied.
 async function kickoffJob({ kind, host, proto, body }) {
   const jobId = Date.now().toString(36) + '-' + Math.random().toString(36).slice(2, 10);
+  const projectId = (kind === 'dissect') ? jobId : (body.projectId || jobId);
 
   await setJob(jobId, {
     status: 'processing',
     kind,
+    project_id: projectId,
     title: body.title || (body.breakdown && body.breakdown.title) || 'Untitled',
     progress: 'queued'
   });
@@ -79,4 +86,45 @@ async function kickoffJob({ kind, host, proto, body }) {
   return jobId;
 }
 
-module.exports = { setJob, getJob, kickoffJob };
+// Read jobs grouped as projects, newest first.
+// Returns: [{ project_id, title, dissect, schedule, budget, callsheet, lastActivity }]
+async function listProjects({ limit = 30 } = {}) {
+  if (!REST || !SUPABASE_SERVICE_KEY) throw new Error('Supabase env not set');
+  const r = await fetch(REST + '?select=*&order=created_at.desc&limit=' + (limit * 4), {
+    headers: authHeaders()
+  });
+  if (!r.ok) throw new Error('Supabase list ' + r.status + ': ' + (await r.text()).slice(0, 200));
+  const rows = await r.json();
+
+  const projects = new Map();
+  for (const row of rows) {
+    const pid = row.project_id || row.job_id;
+    if (!projects.has(pid)) {
+      projects.set(pid, {
+        project_id: pid,
+        title: row.title || 'Untitled',
+        dissect: null, schedule: null, budget: null, callsheet: null,
+        lastActivity: row.updated_at || row.created_at
+      });
+    }
+    const p = projects.get(pid);
+    if (row.kind && p[row.kind] === null) {
+      p[row.kind] = {
+        job_id: row.job_id,
+        status: row.status,
+        progress: row.progress,
+        error: row.error,
+        created_at: row.created_at,
+        updated_at: row.updated_at
+      };
+    }
+    if (row.title && row.title !== 'Untitled' && p.title === 'Untitled') p.title = row.title;
+    if (row.updated_at > p.lastActivity) p.lastActivity = row.updated_at;
+  }
+
+  return [...projects.values()]
+    .sort((a, b) => new Date(b.lastActivity) - new Date(a.lastActivity))
+    .slice(0, limit);
+}
+
+module.exports = { setJob, getJob, kickoffJob, listProjects };

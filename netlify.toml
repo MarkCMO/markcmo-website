@@ -73,6 +73,18 @@
 [functions.script-budget]
   timeout = 26
 
+# script-callsheet: kickoff for the per-day call sheet packet.
+[functions.script-callsheet]
+  timeout = 26
+
+# script-jobs: admin-only project list reader (Supabase round trip).
+[functions.script-jobs]
+  timeout = 10
+
+# script-result: cheap polling endpoint, single Supabase row read.
+[functions.script-result]
+  timeout = 10
+
 # ─── Scheduled Functions ──────────────────────────────────────
 [functions.email-drip]
   schedule = "0 * * * *"

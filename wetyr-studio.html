@@ -299,6 +299,8 @@ pre.json { background: #0f0f12; border: 1px solid var(--border); border-radius: 
       <div class="tab" data-tab="flags">Production Flags</div>
       <div class="tab" data-tab="schedule">Schedule</div>
       <div class="tab" data-tab="budget">Budget</div>
+      <div class="tab" data-tab="callsheet">Call Sheets</div>
+      <div class="tab" data-tab="exports">Exports</div>
       <div class="tab" data-tab="json">Raw JSON</div>
     </div>
 
@@ -331,6 +333,24 @@ pre.json { background: #0f0f12; border: 1px solid var(--border); border-radius: 
       <div id="budgetView">
         <p style="color: var(--muted); font-size: 14px;">Run breakdown first, then generate budget.</p>
         <button class="btn btn-primary" id="genBudgetBtn" style="margin-top: 12px;">Generate budget</button>
+      </div>
+    </div>
+    <div class="tab-panel" data-panel="callsheet">
+      <div id="callsheetView">
+        <p style="color: var(--muted); font-size: 14px;">Run breakdown + schedule first, then generate one call sheet per shoot day.</p>
+        <button class="btn btn-primary" id="genCallsheetBtn" style="margin-top: 12px;">Generate call sheets</button>
+      </div>
+    </div>
+    <div class="tab-panel" data-panel="exports">
+      <div id="exportsView">
+        <p style="color: var(--muted); font-size: 14px; margin-bottom: 14px;">Download the raw JSON for any deliverable. PDF export coming next.</p>
+        <div style="display: flex; flex-wrap: wrap; gap: 10px;">
+          <button class="btn btn-ghost" data-export="breakdown">Download Breakdown JSON</button>
+          <button class="btn btn-ghost" data-export="schedule">Download Schedule JSON</button>
+          <button class="btn btn-ghost" data-export="budget">Download Budget JSON</button>
+          <button class="btn btn-ghost" data-export="callsheet">Download Call Sheets JSON</button>
+          <button class="btn btn-ghost" data-export="all">Download Full Project (ZIP-style JSON)</button>
+        </div>
       </div>
     </div>
     <div class="tab-panel" data-panel="json">
@@ -423,7 +443,7 @@ document.addEventListener('click', async (e) => {
   }
 });
 
-let state = { scriptText: '', breakdown: null, schedule: null, budget: null };
+let state = { scriptText: '', breakdown: null, schedule: null, budget: null, callsheet: null, projectId: null };
 
 // ─── File drop ───────────────────────────────────────────────
 const drop = $('drop');
@@ -470,7 +490,7 @@ function fileToBase64(file) {
 // ─── Buttons ─────────────────────────────────────────────────
 $('goBtn').addEventListener('click', runBreakdown);
 $('clearBtn').addEventListener('click', () => {
-  state = { scriptText: '', breakdown: null, schedule: null, budget: null };
+  state = { scriptText: '', breakdown: null, schedule: null, budget: null, callsheet: null, projectId: null };
   $('pasteInput').value = ''; $('titleInput').value = '';
   $('results').style.display = 'none';
   setStatus('', '');
@@ -483,6 +503,8 @@ $('loadSampleBtn').addEventListener('click', () => {
 });
 $('genScheduleBtn').addEventListener('click', runSchedule);
 $('genBudgetBtn').addEventListener('click', runBudget);
+$('genCallsheetBtn').addEventListener('click', runCallsheet);
+document.querySelectorAll('[data-export]').forEach(b => b.addEventListener('click', () => exportItem(b.dataset.export)));
 
 $('tierInput').addEventListener('change', () => {
   $('customBudgetField').style.display = $('tierInput').value === 'custom' ? 'flex' : 'none';
@@ -522,6 +544,7 @@ async function runBreakdown() {
     const start = await r.json();
     if (!start.ok || !start.jobId) throw new Error(start.error || 'failed to queue');
     const jobId = start.jobId;
+    state.projectId = jobId; // dissect job IS the project root
 
     // 2) Poll for result
     const breakdown = await pollJob(jobId, (progress) => {
@@ -569,7 +592,9 @@ async function runSchedule() {
       method: 'POST',
       headers: { 'content-type': 'application/json' },
       body: JSON.stringify({
+        projectId: state.projectId,
         breakdown: state.breakdown,
+        title: state.breakdown?.title || $('titleInput').value,
         constraints: {
           shootDays: Number($('daysInput').value) || undefined,
           maxHoursPerDay: 12
@@ -588,6 +613,108 @@ async function runSchedule() {
   }
 }
 
+// ─── Run call sheets (async) ─────────────────────────────────
+async function runCallsheet() {
+  if (!state.breakdown) { setStatus('Run breakdown first.', 'err'); return; }
+  if (!state.schedule)  { setStatus('Run schedule first.', 'err'); return; }
+  $('callsheetView').innerHTML = '<p style="color: var(--muted);"><span class="spinner"></span> Queuing call sheet job...</p>';
+  try {
+    const r = await fetch('/.netlify/functions/script-callsheet', {
+      method: 'POST',
+      headers: { 'content-type': 'application/json' },
+      body: JSON.stringify({
+        projectId: state.projectId,
+        breakdown: state.breakdown,
+        schedule: state.schedule,
+        title: state.breakdown?.title || $('titleInput').value
+      })
+    });
+    const start = await r.json();
+    if (!start.ok || !start.jobId) throw new Error(start.error || 'failed to queue');
+    const cs = await pollJob(start.jobId, (p) => {
+      $('callsheetView').innerHTML = '<p style="color: var(--muted);"><span class="spinner"></span> ' + escapeHtml(p || 'processing') + '...</p>';
+    }, 'callsheet');
+    state.callsheet = cs;
+    renderCallsheet(cs);
+  } catch (e) {
+    $('callsheetView').innerHTML = '<div class="status err active">Call sheets failed: ' + escapeHtml(e.message) + '</div>';
+  }
+}
+
+function renderCallsheet(cs) {
+  const days = cs.days || [];
+  if (!days.length) { $('callsheetView').innerHTML = '<p style="color: var(--muted);">No call sheets generated.</p>'; return; }
+  $('callsheetView').innerHTML = `
+    <div class="stats" style="margin-bottom: 18px;">
+      <div class="stat"><div class="stat-label">Days</div><div class="stat-value">${days.length}</div></div>
+      <div class="stat"><div class="stat-label">Generated</div><div class="stat-value" style="font-size: 13px;">${escapeHtml(new Date(cs.generatedAt || Date.now()).toLocaleString())}</div></div>
+    </div>
+    ${days.map(d => `
+      <details style="background: var(--panel); border: 1px solid var(--border); border-radius: 10px; padding: 14px; margin-bottom: 8px;">
+        <summary style="cursor: pointer; font-weight: 700;">
+          Day ${d.day || '?'} &mdash; ${escapeHtml(d.date || '')} &mdash; ${escapeHtml(d.location?.name || d.location || '')}
+        </summary>
+        <div style="margin-top: 12px; display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 12px;">
+          ${d.location ? `<div class="stat"><div class="stat-label">Location</div><div style="font-size: 13px; margin-top: 4px;">${escapeHtml(d.location.name || '')}<br/><small style="color: var(--muted);">${escapeHtml(d.location.address || '')}</small></div></div>` : ''}
+          ${d.callTimes ? `<div class="stat"><div class="stat-label">General Call</div><div style="font-size: 18px; font-weight: 800;">${escapeHtml(d.callTimes.generalCrew || 'TBD')}</div></div>` : ''}
+          ${d.weather ? `<div class="stat"><div class="stat-label">Weather</div><div style="font-size: 13px;">${escapeHtml(d.weather.high || '')}/${escapeHtml(d.weather.low || '')} &middot; ${escapeHtml(d.weather.conditions || 'TBD')}<br/><small style="color: var(--muted);">Sun: ${escapeHtml(d.weather.sunrise || '?')} / ${escapeHtml(d.weather.sunset || '?')}</small></div></div>` : ''}
+          ${d.catering ? `<div class="stat"><div class="stat-label">Catering</div><div style="font-size: 12px;">B: ${escapeHtml(d.catering.breakfast || '?')}<br/>L: ${escapeHtml(d.catering.lunch || '?')}<br/>HC: ${d.catering.headCount || '?'}</div></div>` : ''}
+        </div>
+        ${(d.cast || []).length ? `
+          <h4 style="margin: 16px 0 6px; font-size: 14px;">Cast (${d.cast.length})</h4>
+          <table style="width: 100%; font-size: 12px;"><thead><tr><th style="text-align: left;">Character</th><th>Status</th><th>MU/Wardrobe</th><th>On Set</th></tr></thead><tbody>
+          ${d.cast.map(c => `<tr><td><b>${escapeHtml(c.character)}</b></td><td><span class="tag ${c.status === 'HOLD' ? '' : 'hot'}">${escapeHtml(c.status || '')}</span></td><td>${escapeHtml(c.makeupCall || '?')} / ${escapeHtml(c.wardrobeCall || '?')}</td><td>${escapeHtml(c.onSet || '?')}</td></tr>`).join('')}
+          </tbody></table>
+        ` : ''}
+        ${(d.scenes || []).length ? `
+          <h4 style="margin: 16px 0 6px; font-size: 14px;">Scenes (${d.scenes.length})</h4>
+          <table style="width: 100%; font-size: 12px;"><thead><tr><th style="text-align: left;">#</th><th>Heading</th><th>Pgs</th><th>Cast</th></tr></thead><tbody>
+          ${d.scenes.map(s => `<tr><td><b>${escapeHtml(s.number)}</b></td><td>${escapeHtml((s.heading || '').slice(0, 80))}</td><td>${(s.pageCount || 0).toFixed(2)}</td><td style="font-size: 11px;">${escapeHtml((s.cast || []).slice(0, 4).join(', '))}</td></tr>`).join('')}
+          </tbody></table>
+        ` : ''}
+        ${(d.safetyNotes || []).length ? `
+          <h4 style="margin: 16px 0 6px; font-size: 14px; color: var(--red);">Safety Notes</h4>
+          <ul style="padding-left: 20px; font-size: 13px; color: var(--text);">${d.safetyNotes.map(n => '<li>' + escapeHtml(n) + '</li>').join('')}</ul>
+        ` : ''}
+        ${(d.specialNotes || []).length ? `
+          <h4 style="margin: 16px 0 6px; font-size: 14px;">Special Notes</h4>
+          <ul style="padding-left: 20px; font-size: 13px; color: var(--muted);">${d.specialNotes.map(n => '<li>' + escapeHtml(n) + '</li>').join('')}</ul>
+        ` : ''}
+      </details>
+    `).join('')}
+  `;
+}
+
+// ─── Exports ─────────────────────────────────────────────────
+function exportItem(kind) {
+  let payload, name;
+  switch (kind) {
+    case 'breakdown': payload = state.breakdown; name = 'breakdown.json'; break;
+    case 'schedule':  payload = state.schedule;  name = 'schedule.json'; break;
+    case 'budget':    payload = state.budget;    name = 'budget.json'; break;
+    case 'callsheet': payload = state.callsheet; name = 'callsheets.json'; break;
+    case 'all':
+      payload = {
+        title: state.breakdown?.title || 'Untitled',
+        projectId: state.projectId,
+        exportedAt: new Date().toISOString(),
+        breakdown: state.breakdown,
+        schedule: state.schedule,
+        budget: state.budget,
+        callsheet: state.callsheet
+      };
+      name = (state.breakdown?.title || 'wetyr-project').replace(/[^a-z0-9]+/gi, '-').toLowerCase() + '-full.json';
+      break;
+  }
+  if (!payload) { setStatus('No ' + kind + ' generated yet.', 'err'); return; }
+  const blob = new Blob([JSON.stringify(payload, null, 2)], { type: 'application/json' });
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement('a');
+  a.href = url; a.download = name;
+  document.body.appendChild(a); a.click(); a.remove();
+  setTimeout(() => URL.revokeObjectURL(url), 1000);
+}
+
 // ─── Run budget (async) ──────────────────────────────────────
 async function runBudget() {
   if (!state.breakdown) { setStatus('Run breakdown first.', 'err'); return; }
@@ -597,8 +724,10 @@ async function runBudget() {
       method: 'POST',
       headers: { 'content-type': 'application/json' },
       body: JSON.stringify({
+        projectId: state.projectId,
         breakdown: state.breakdown,
         schedule: state.schedule,
+        title: state.breakdown?.title || $('titleInput').value,
         context: {
           budgetTier: $('tierInput').value,
           customBudget: $('tierInput').value === 'custom' ? Number($('customBudgetInput').value) || null : null,
