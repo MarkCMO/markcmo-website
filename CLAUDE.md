@@ -18,8 +18,8 @@ This is a hard rule. Em-dashes (`U+2014`) and en-dashes (`U+2013`) **must not ap
 | `Three documents [em-dash] one signature.` | `Three documents, one signature.` |
 | `Ages 5 [en-dash] 10` | `Ages 5 to 10` or `Ages 5-10` |
 | `Mark [en-dash] Tyler call` | `Mark-Tyler call` or `Mark and Tyler call` |
-| `&mdash;` (HTML entity) | `, ` or `:` or `.` whichever fits |
-| `&ndash;` (HTML entity) | `-` (hyphen) |
+| HTML em-dash entity (ampersand-m-dash-semicolon) | `, ` or `:` or `.` whichever fits |
+| HTML en-dash entity (ampersand-n-dash-semicolon) | `-` (hyphen) |
 
 **Replacements at a glance:**
 
@@ -27,8 +27,8 @@ This is a hard rule. Em-dashes (`U+2014`) and en-dashes (`U+2013`) **must not ap
 - em-dash with no surrounding spaces (mid-word) becomes `-` (hyphen)
 - space + en-dash + space becomes ` - ` (hyphen with same spacing)
 - en-dash in number ranges becomes `-` or ` to ` (e.g. "8 to 12 weeks")
-- `&mdash;` becomes `, ` or `-` based on context
-- `&ndash;` becomes `-`
+- HTML em-dash entity becomes `, ` or `-` based on context
+- HTML en-dash entity becomes `-`
 
 The site was swept clean on 2026-05-08 across `admin.html`, all 32 `netlify/functions/*.js`, all SLCPL client docs + sign form, `portal/index.html`, `blog-post.html`, and this `CLAUDE.md`. **Do not re-introduce dashes.**
 
