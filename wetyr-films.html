@@ -1021,13 +1021,18 @@ tbody tr a { color: inherit; text-decoration: none; display: block; }
 // Studio Outputs - admin-only viewer for breakdown/schedule/budget jobs
 // ═════════════════════════════════════════════════════════════════════
 (async function studioVault() {
-  // 1) Verify admin session. If not authed, vault stays hidden.
-  let authed = false;
-  try {
-    const r = await fetch('/.netlify/functions/admin-auth?action=verify', { credentials: 'include' });
-    if (r.ok) { const j = await r.json(); authed = !!j.ok; }
-  } catch {}
-  if (!authed) return;
+  // 1) Verify admin session (reuses the page-level check). If not authed, vault stays hidden.
+  if (typeof ensureAdminCheck === 'function') {
+    await ensureAdminCheck();
+    if (!WETYR_IS_ADMIN) return;
+  } else {
+    let authed = false;
+    try {
+      const r = await fetch('/.netlify/functions/admin-auth?action=verify', { credentials: 'include' });
+      if (r.ok) { const j = await r.json(); authed = !!j.ok; }
+    } catch {}
+    if (!authed) return;
+  }
 
   const vault    = document.getElementById('studioVault');
   const grid     = document.getElementById('vaultGrid');
@@ -1424,6 +1429,98 @@ function timeAgo(iso) {
   } catch (e) { return ''; }
 }
 
+// ─────────────────────────────────────────────────────────────────────
+// Admin detection. Logged-in admins see LIVE data on every panel.
+// Public visitors see polished MOCK data so the landing looks impressive
+// without exposing real industry feeds + costing API calls.
+// ─────────────────────────────────────────────────────────────────────
+let WETYR_IS_ADMIN = false;
+let WETYR_ADMIN_CHECKED = false;
+
+async function ensureAdminCheck() {
+  if (WETYR_ADMIN_CHECKED) return WETYR_IS_ADMIN;
+  try {
+    const r = await fetch('/.netlify/functions/admin-auth?action=verify', { credentials: 'include' });
+    if (r.ok) { const j = await r.json(); WETYR_IS_ADMIN = !!j.ok; }
+  } catch {}
+  WETYR_ADMIN_CHECKED = true;
+
+  // Show a "demo data" pill for non-admins so it's clear the dashboard is sample.
+  if (!WETYR_IS_ADMIN) {
+    const nav = document.querySelector('.nav-inner');
+    if (nav && !document.getElementById('demoBadge')) {
+      const badge = document.createElement('span');
+      badge.id = 'demoBadge';
+      badge.style.cssText = 'background: rgba(212,175,55,0.12); color: var(--gold); padding: 4px 10px; border-radius: 999px; font-size: 11px; font-weight: 700; letter-spacing: 1px; border: 1px solid rgba(212,175,55,0.4); margin-left: 8px;';
+      badge.textContent = 'DEMO DATA';
+      badge.title = 'Sample dashboard. Sign in for live feeds.';
+      const links = nav.querySelector('.nav-links');
+      if (links) links.appendChild(badge); else nav.appendChild(badge);
+    }
+  }
+  return WETYR_IS_ADMIN;
+}
+
+// ─── MOCK DATA for non-admin visitors ─────────────────────────────────
+const MOCK_NEWS_NOW = () => {
+  const headlines = [
+    { title: "A24 Closes Multi-Picture Deal With Robert Eggers Following 'Werewulf' Bow", source: 'Deadline', minsAgo: 12, link: 'https://deadline.com/' },
+    { title: "Apple Original Films Wins Bidding War for Untitled Bigelow Espionage Thriller", source: 'Variety', minsAgo: 47, link: 'https://variety.com/' },
+    { title: "Sundance 2027 Submissions Open: Festival Confirms Hybrid Format Returns", source: 'IndieWire', minsAgo: 95, link: 'https://www.indiewire.com/' },
+    { title: "Netflix Greenlights Limited Series From 'The Bear' Showrunner Christopher Storer", source: 'The Hollywood Reporter', minsAgo: 134, link: 'https://www.hollywoodreporter.com/' },
+    { title: "IATSE Local 600 Ratifies New Three-Year Contract With AMPTP", source: 'Variety', minsAgo: 168, link: 'https://variety.com/' },
+    { title: "Searchlight Acquires North American Rights to Cannes Standout 'The Quiet Land'", source: 'Deadline', minsAgo: 223, link: 'https://deadline.com/' },
+    { title: "Megan Ellison Re-Activates Annapurna Theatrical Slate, Sets Three Films for 2027", source: 'Variety', minsAgo: 312, link: 'https://variety.com/' },
+    { title: "Georgia Film Tax Credit Caps Survive Legislative Push, Industry Breathes", source: 'The Wrap', minsAgo: 401, link: 'https://www.thewrap.com/' },
+    { title: "Plan B Adds Three Producers, Expands Television Division Under Dede Gardner", source: 'Deadline', minsAgo: 522, link: 'https://deadline.com/' },
+    { title: "Ari Aster Reteams With A24 for $35M Period Drama 'Eddington' Follow-Up", source: 'IndieWire', minsAgo: 638, link: 'https://www.indiewire.com/' }
+  ];
+  const now = Date.now();
+  return headlines.map(h => ({
+    title: h.title, link: h.link, source: h.source,
+    pubDate: new Date(now - h.minsAgo * 60_000).toISOString(),
+    description: ''
+  }));
+};
+
+const MOCK_BOX_OFFICE = {
+  ok: true, cached: false,
+  nowPlaying: { results: [
+    { id: 1, title: 'Mickey 17',                 release_date: '2026-04-24', vote_average: 7.4, popularity: 312.5, poster_path: null },
+    { id: 2, title: 'The Brutalist',             release_date: '2026-04-18', vote_average: 8.1, popularity: 287.3, poster_path: null },
+    { id: 3, title: 'Companion',                 release_date: '2026-04-11', vote_average: 7.0, popularity: 244.8, poster_path: null },
+    { id: 4, title: 'Nosferatu',                 release_date: '2026-03-28', vote_average: 7.2, popularity: 219.1, poster_path: null },
+    { id: 5, title: 'Wicked',                    release_date: '2026-03-14', vote_average: 7.6, popularity: 198.4, poster_path: null }
+  ]},
+  trending: { results: [
+    { id: 1, title: 'Mickey 17',         vote_average: 7.4, popularity: 312.5 },
+    { id: 6, title: 'The Substance',     vote_average: 7.5, popularity: 268.2 },
+    { id: 2, title: 'The Brutalist',     vote_average: 8.1, popularity: 287.3 },
+    { id: 7, title: "Sinners",           vote_average: 7.8, popularity: 251.0 },
+    { id: 3, title: 'Companion',         vote_average: 7.0, popularity: 244.8 }
+  ]},
+  featuredDetails: [
+    { id: 1, title: 'Mickey 17', overview: 'Robert Pattinson stars in Bong Joon-ho\'s sci-fi adaptation. A disposable employee on an icy alien planet keeps coming back from the dead, until two of him exist at once.', release_date: '2026-04-24', vote_average: 7.4, runtime: 137, budget: 118000000, revenue: 312000000, genres: [{ name: 'Sci-Fi' }, { name: 'Comedy' }], credits: { cast: [{ name: 'Robert Pattinson', character: 'Mickey Barnes' }, { name: 'Mark Ruffalo', character: 'Kenneth Marshall' }, { name: 'Toni Collette', character: 'Ylfa Marshall' }] }, videos: { results: [] }, 'watch/providers': { results: { US: { flatrate: [{ provider_name: 'Max' }] } } } }
+  ]
+};
+
+const MOCK_CASTING = {
+  ok: true,
+  scripted: [
+    { title: 'Untitled A24 Feature - LEAD - Female 30s', source: 'Backstage', date: '2 days ago', link: 'https://www.backstage.com/' },
+    { title: 'Apple TV+ Limited Series - SUPPORTING - Male 20s, Latino', source: 'Casting Networks', date: '3 days ago', link: 'https://www.castingnetworks.com/' },
+    { title: 'Indie Feature \'Driftless\' - LEAD - Non-binary 18-25', source: 'Project Casting', date: '5 days ago', link: 'https://www.projectcasting.com/' },
+    { title: 'HBO Drama Pilot - SERIES REGULAR - Male 50s', source: 'Backstage', date: '6 days ago', link: 'https://www.backstage.com/' },
+    { title: 'Studio Action Tentpole - STUNT DOUBLE - Female athletic', source: 'Casting Networks', date: '1 week ago', link: 'https://www.castingnetworks.com/' }
+  ],
+  commercial: [
+    { title: 'National Auto Spot - Family of 4', source: 'Casting Frontier', date: '1 day ago', link: 'https://app.castingfrontier.com/' },
+    { title: 'Streaming Service Brand Spot - Real Couples', source: 'Backstage', date: '2 days ago', link: 'https://www.backstage.com/' },
+    { title: 'Tech Recruitment Video - Engineers, all backgrounds', source: 'Project Casting', date: '4 days ago', link: 'https://www.projectcasting.com/' },
+    { title: 'Pharma TV Spot - Active Adults 50+', source: 'Casting Networks', date: '5 days ago', link: 'https://www.castingnetworks.com/' }
+  ]
+};
+
 async function fetchFeed(feed) {
   const api = 'https://api.rss2json.com/v1/api.json?rss_url=' + encodeURIComponent(feed.url) + '&count=6';
   try {
@@ -1488,15 +1585,21 @@ async function loadNewsServer() {
 }
 
 async function loadNews() {
-  // Server-side proxy first (no CORS, no rate limit, 10min cache).
+  // Public visitors get curated mock headlines so the landing looks fresh
+  // without burning API calls on every pageview.
+  await ensureAdminCheck();
+  if (!WETYR_IS_ADMIN) {
+    renderNews(MOCK_NEWS_NOW());
+    if (typeof populateTicker === 'function') { try { populateTicker(); } catch (e) {} }
+    return;
+  }
+  // Admin path: server-side proxy first, client RSS fallback.
   let items = await loadNewsServer();
-  // Client-side fallback if Netlify function failed or returned empty.
   if (!items.length) {
     const results = await Promise.all(FEEDS.map(fetchFeed));
     items = results.flat();
   }
   renderNews(items);
-  // Refresh the ticker once news lands so headlines flow into the marquee.
   if (typeof populateTicker === 'function') {
     try { populateTicker(); } catch (e) {}
   }
@@ -1707,12 +1810,16 @@ function renderBoxOffice(nowPlaying) {
 let TMDB_DATA = null;
 
 async function loadTMDBIntel() {
+  await ensureAdminCheck();
   try {
-    const r = await fetch('/.netlify/functions/film-intel');
-    const j = await r.json();
-    if (!j.ok) {
-      console.info('TMDB intel not wired (add TMDB_API_KEY env var). Showing sample data.');
-      return;
+    let j;
+    if (WETYR_IS_ADMIN) {
+      const r = await fetch('/.netlify/functions/film-intel');
+      j = await r.json();
+      if (!j.ok) { console.info('TMDB intel not wired. Falling back to mock.'); j = MOCK_BOX_OFFICE; }
+      j.updatedAt = j.updatedAt || new Date().toISOString();
+    } else {
+      j = { ...MOCK_BOX_OFFICE, updatedAt: new Date().toISOString(), featuredList: MOCK_BOX_OFFICE.featuredDetails };
     }
     TMDB_DATA = j;
     if (j.featuredList && j.featuredList.length) {
@@ -1773,10 +1880,16 @@ function renderCastingPanel(containerId, items, fallbackMsg) {
 
 async function loadCastingCalls() {
   const emptyMsg = 'No new role listings hit the public feeds in the last 24h. The full WETYR Casting Aggregator (running scheduled across Backstage, Project Casting, Casting Networks API, and direct production-company sites) ships ~200-400 fresh roles/day to subscribers via Slack, JSON, or email. <a href="#cta" style="color: var(--gold); text-decoration: underline;">Request a sample</a>.';
+  await ensureAdminCheck();
   try {
-    const r = await fetch('/.netlify/functions/casting-calls', { cache: 'no-store' });
-    if (!r.ok) throw new Error('HTTP ' + r.status);
-    const j = await r.json();
+    let j;
+    if (WETYR_IS_ADMIN) {
+      const r = await fetch('/.netlify/functions/casting-calls', { cache: 'no-store' });
+      if (!r.ok) throw new Error('HTTP ' + r.status);
+      j = await r.json();
+    } else {
+      j = { ...MOCK_CASTING, fetchedAt: new Date().toISOString(), sourcesOk: 4, sourceCount: 4 };
+    }
     renderCastingPanel('castingScripted', j.scripted, emptyMsg);
     renderCastingPanel('castingCommercial', j.commercial, emptyMsg);
     const sTag = document.getElementById('castingScriptedTag');
