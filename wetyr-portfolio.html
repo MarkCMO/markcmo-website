@@ -396,18 +396,38 @@ footer .links { margin-bottom: 16px; display: flex; gap: 20px; justify-content: 
 </head>
 <body>
 
-<nav class="site-nav">
-  <div class="container site-nav-inner">
-    <div class="logo">WETYR</div>
-    <div class="nav-links">
-      <a href="#actors">Actors</a>
-      <a href="#verticals">Verticals</a>
-      <a href="#enterprise">Enterprise</a>
-      <a href="https://markcmo.com">MarkCMO</a>
-    </div>
-    <a href="https://apify.com/wetyr_corporation" class="cta-btn" target="_blank">Browse on Apify</a>
-  </div>
+<nav class="nav" id="mainNav">
+<a href="/index.html" class="nav-logo">
+<div class="nav-logo-avatar">
+<img src="/mark-photo.webp" alt="Mark Gabrielli" />
+</div>
+<div class="nav-logo-text">
+<strong>Mark Gabrielli</strong>
+<span>Fractional CMO &amp; COO</span>
+</div>
+</a>
+<ul class="nav-links">
+<li><a href="/about.html">About</a></li>
+<li><a href="/services.html">Services</a></li>
+<li><a href="/magnet-framework.html" style="color:#C9A84C;font-weight:600;">MAGNET&trade;</a></li>
+<li><a href="/results.html">Results</a></li>
+<li><a href="/blog.html">Insights</a></li>
+<li><a href="https://academy.markcmo.com" target="_blank" style="color:#C9A84C;">Academy</a></li>
+</ul>
+<div class="nav-right">
+<a href="/book.html" class="nav-btn">Book a Free Call</a>
+</div>
+<div class="nav-hamburger" id="navHam"><span></span><span></span><span></span></div>
 </nav>
+<div class="mobile-drawer" id="mobileDrawer">
+<a href="/about.html">About</a>
+<a href="/services.html">Services</a>
+<a href="/magnet-framework.html" style="color:#C9A84C;font-weight:600;">MAGNET Framework&trade;</a>
+<a href="/results.html">Results</a>
+<a href="/blog.html">Insights</a>
+<a href="https://academy.markcmo.com" target="_blank">Academy</a>
+<a href="/book.html" style="color:#C9A84C;font-weight:700;">Book a Free Strategy Call &rarr;</a>
+</div>
 
 <section class="hero">
   <div class="container">
@@ -682,5 +702,21 @@ document.querySelectorAll('.vertical-tab').forEach(btn => {
 renderActors('all');
 </script>
 
+<script>
+(function(){
+  var nav=document.getElementById('mainNav');
+  var ham=document.getElementById('navHam');
+  var drw=document.getElementById('mobileDrawer');
+  if(nav) window.addEventListener('scroll',function(){
+    nav.classList.toggle('scrolled',window.scrollY>20);
+  },{passive:true});
+  if(ham&&drw){
+    ham.addEventListener('click',function(){drw.classList.toggle('open');});
+    drw.querySelectorAll('a').forEach(function(a){
+      a.addEventListener('click',function(){drw.classList.remove('open');});
+    });
+  }
+})();
+</script>
 </body>
 </html>

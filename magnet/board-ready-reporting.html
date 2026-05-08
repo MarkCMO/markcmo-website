@@ -26,7 +26,37 @@
 <body>
 <div id="scroll-progress" style="position:fixed;top:0;left:0;height:3px;background:var(--accent);z-index:9999;width:0%;transition:width 0.1s;"></div>
 
-<nav><a href="../index.html" class="nav-logo"><div class="nav-avatar"><img src="../mark-photo.webp" alt="Mark Gabrielli" onerror="this.style.display='none';this.parentElement.style.background='var(--accent)';this.parentElement.innerHTML='<span style=\'font-family:Outfit,sans-serif;font-weight:900;font-size:1rem;color:#fff;display:flex;align-items:center;justify-content:center;width:100%;height:100%\'>M</span>'"/></div>Mark <span>Gabrielli</span></a><ul class="nav-links"><li><a href="../about.html">About</a></li><li><a href="../services.html">Services</a></li><li><a href="../portfolio.html">Portfolio</a></li><li><a href="../results.html">Results</a></li><li><a href="../blog.html">Insights</a></li><li><a href="../magnet-framework.html" style="color:var(--accent);font-weight:600;">MAGNET&#x2122;</a></li><li><a href="../book.html" class="nav-cta">Book a Free Call</a></li></ul><button class="nav-hamburger" id="navHam" aria-label="Open menu"><span></span><span></span><span></span></button></nav><div class="mobile-drawer" id="mobileDrawer"><button class="drawer-close" id="drawerClose" aria-label="Close menu">&#x2715;</button><a href="../index.html">Home</a><a href="../about.html">About</a><a href="../services.html">Services</a><a href="../magnet-framework.html" style="color:var(--accent);font-weight:600;">MAGNET Framework&#x2122;</a><a href="../results.html">Results</a><a href="../portfolio.html">Portfolio</a><a href="../blog.html">Insights</a><a href="https://academy.markcmo.com" target="_blank" rel="noopener">Academy</a><a href="../book.html" class="drawer-cta">Book a Free Strategy Call &#x2192;</a></div>
+<nav class="nav" id="mainNav">
+<a href="/index.html" class="nav-logo">
+<div class="nav-logo-avatar">
+<img src="/mark-photo.webp" alt="Mark Gabrielli" />
+</div>
+<div class="nav-logo-text">
+<strong>Mark Gabrielli</strong>
+<span>Fractional CMO &amp; COO</span>
+</div>
+</a>
+<ul class="nav-links">
+<li><a href="/about.html">About</a></li>
+<li><a href="/services.html">Services</a></li>
+<li><a href="/magnet-framework.html" style="color:#C9A84C;font-weight:600;">MAGNET&trade;</a></li>
+<li><a href="/results.html">Results</a></li>
+<li><a href="/blog.html">Insights</a></li>
+<li><a href="https://academy.markcmo.com" target="_blank" style="color:#C9A84C;">Academy</a></li>
+</ul>
+<div class="nav-right">
+<a href="/book.html" class="nav-btn">Book a Free Call</a>
+</div>
+<div class="nav-hamburger" id="navHam"><span></span><span></span><span></span></div>
+</nav><div class="mobile-drawer" id="mobileDrawer">
+<a href="/about.html">About</a>
+<a href="/services.html">Services</a>
+<a href="/magnet-framework.html" style="color:#C9A84C;font-weight:600;">MAGNET Framework&trade;</a>
+<a href="/results.html">Results</a>
+<a href="/blog.html">Insights</a>
+<a href="https://academy.markcmo.com" target="_blank">Academy</a>
+<a href="/book.html" style="color:#C9A84C;font-weight:700;">Book a Free Strategy Call &rarr;</a>
+</div>
 
 <div class="dl-page-wrap">
 
@@ -192,5 +222,21 @@
 <footer><div class="footer-mega"><div class="footer-brand-col"><div class="footer-logo-text">Mark <span>Gabrielli</span></div><p class="footer-about">Fractional CMO, COO &amp; Executive Consultant. I help businesses from $1M to $100M find what's broken, build what scales, and execute what others only talk about.</p><div class="footer-chips"><span class="footer-chip">WETYR Founder</span><span class="footer-chip">MAGNET Framework&#x2122;</span><span class="footer-chip">Fractional C-Suite</span><span class="footer-chip">CST Certified</span></div><div class="footer-socials"><a href="https://www.linkedin.com/in/marklgabrielli/" target="_blank" rel="noopener" class="footer-soc">in</a><a href="mailto:mark@markcmo.com" class="footer-soc">@</a></div></div><div class="footer-col"><h4>Framework</h4><ul><li><a href="../magnet-framework.html">MAGNET Overview</a></li><li><a href="../magnet-map.html">Map Phase</a></li><li><a href="../magnet-architect.html">Architect Phase</a></li><li><a href="../magnet-generate.html">Generate Phase</a></li><li><a href="../magnet-nurture.html">Nurture Phase</a></li><li><a href="../magnet-engineer.html">Engineer Phase</a></li><li><a href="../magnet-track.html">Track Phase</a></li></ul></div><div class="footer-col"><h4>Services</h4><ul><li><a href="../fractional-cmo.html">Fractional CMO</a></li><li><a href="../fractional-coo.html">Fractional COO</a></li><li><a href="../marketing-audit.html">Marketing Audit</a></li><li><a href="../demand-generation.html">Demand Generation</a></li><li><a href="../go-to-market-strategy.html">Go-to-Market</a></li><li><a href="../services.html">All Services</a></li></ul></div><div class="footer-col"><h4>Learn</h4><ul><li><a href="../about.html">About Mark</a></li><li><a href="../blog.html">Insights &amp; Blog</a></li><li><a href="../results.html">Results</a></li><li><a href="../faq.html">FAQ</a></li><li><a href="../contact.html">Contact</a></li><li><a href="../book.html" style="color:var(--accent);font-weight:600;">Book a Free Call</a></li></ul></div></div><div class="footer-bottom"><p>&copy; 2026 Mark Gabrielli &middot; markcmo.com &middot; All rights reserved.</p><p class="footer-bottom-tags">The MAGNET Framework&#x2122; &middot; Fractional CMO &middot; Revenue Operations</p></div></footer>
 
 <script>(function(){var bar=document.createElement('div');bar.id='scroll-progress';document.body.prepend(bar);var nav=document.querySelector('nav');window.addEventListener('scroll',function(){var h=document.documentElement,b=document.body;var pct=(h.scrollTop||b.scrollTop)/((h.scrollHeight||b.scrollHeight)-h.clientHeight)*100;bar.style.width=pct+'%';if((h.scrollTop||b.scrollTop)>80){nav&&nav.classList.add('scrolled');}else{nav&&nav.classList.remove('scrolled');}},{passive:true});})();</script><script src="../nav.js" defer></script>
+<script>
+(function(){
+  var nav=document.getElementById('mainNav');
+  var ham=document.getElementById('navHam');
+  var drw=document.getElementById('mobileDrawer');
+  if(nav) window.addEventListener('scroll',function(){
+    nav.classList.toggle('scrolled',window.scrollY>20);
+  },{passive:true});
+  if(ham&&drw){
+    ham.addEventListener('click',function(){drw.classList.toggle('open');});
+    drw.querySelectorAll('a').forEach(function(a){
+      a.addEventListener('click',function(){drw.classList.remove('open');});
+    });
+  }
+})();
+</script>
 </body>
 </html>
