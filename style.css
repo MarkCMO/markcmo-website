@@ -2126,6 +2126,60 @@ h2 span                     { color: var(--accent) !important; }
   padding-top: 0.7rem;
 }
 
+/* ── Final CTA closer panel ── */
+.sp-cta-closer {
+  background: linear-gradient(135deg, rgba(201,168,76,0.1) 0%, rgba(201,168,76,0.04) 100%);
+  border-top: 1px solid rgba(201,168,76,0.22);
+  padding: 4rem 6vw;
+  text-align: center;
+}
+.sp-cta-closer-inner {
+  max-width: 720px;
+  margin: 0 auto;
+}
+.sp-cta-closer-tag {
+  display: inline-block;
+  font-family: 'DM Mono', monospace;
+  font-size: 0.58rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--accent);
+  border: 1px solid rgba(201,168,76,0.35);
+  padding: 0.3rem 0.9rem;
+  border-radius: 2px;
+  margin-bottom: 1.2rem;
+}
+.sp-cta-closer h2 {
+  color: #ffffff !important;
+  font-size: clamp(1.6rem, 3vw, 2.4rem) !important;
+  margin-bottom: 1rem !important;
+}
+.sp-cta-closer p {
+  color: rgba(255,255,255,0.62);
+  font-size: 0.95rem;
+  line-height: 1.75;
+  margin-bottom: 2rem;
+}
+.sp-cta-closer-btns {
+  display: flex;
+  gap: 1rem;
+  justify-content: center;
+  flex-wrap: wrap;
+  margin-bottom: 1.6rem;
+}
+.sp-cta-closer-trust {
+  display: flex;
+  gap: 1.5rem;
+  justify-content: center;
+  flex-wrap: wrap;
+  font-family: 'DM Mono', monospace;
+  font-size: 0.62rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.35);
+}
+.sp-cta-closer-trust span { white-space: nowrap; }
+
 /* ── Testimonials grid ── */
 .sp-testimonials {
   padding: 3rem 6vw;
