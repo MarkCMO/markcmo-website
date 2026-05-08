@@ -53,6 +53,14 @@
   --card:        #0F1535;
   --card-border: rgba(255,255,255,0.08);
 
+  /* ── Dark text scale (for magnet/dl-* and about page Outfit font templates) ── */
+  --text2:       rgba(255,255,255,0.65);
+  --text3:       rgba(255,255,255,0.40);
+
+  /* ── Cyan accent (about page complementary color) ── */
+  --cyan:        #00C4CC;
+  --cyan-dim:    rgba(0,196,204,0.25);
+
   /* ── Radius scale ── */
   --r-xs:   8px;
   --r-sm:   14px;
@@ -80,6 +88,11 @@ body {
   color: var(--text-white);
   overflow-x: hidden;
   padding-top: 64px;
+  /* Dark theme CSS variable overrides — ensures var(--text) and var(--border)
+     resolve to dark-appropriate values when used in inline <style> blocks
+     (e.g. magnet/ and city-pages/ templates using dl-* and loc-* classes) */
+  --text:   rgba(255,255,255,0.85);
+  --border: rgba(255,255,255,0.08);
 }
 
 /* Subtle background pattern — light */
@@ -2043,6 +2056,76 @@ h2 span                     { color: var(--accent) !important; }
 .loc-stat-label { color: rgba(255,255,255,0.4) !important; }
 .loc-cta p { color: rgba(255,255,255,0.7) !important; }
 
+/* ── Social proof strip ── */
+.sp-proof-strip {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 0;
+  background: rgba(201,168,76,0.06);
+  border-top: 1px solid rgba(201,168,76,0.14);
+  border-bottom: 1px solid rgba(201,168,76,0.14);
+  padding: 0.75rem 2vw;
+  margin: 0;
+}
+.sp-proof-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 0.5rem 2rem;
+  position: relative;
+}
+.sp-proof-item + .sp-proof-item::before {
+  content: '';
+  position: absolute;
+  left: 0; top: 20%; height: 60%;
+  width: 1px;
+  background: rgba(201,168,76,0.2);
+}
+.sp-proof-num {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 1.45rem;
+  letter-spacing: 0.04em;
+  color: var(--accent);
+  line-height: 1;
+}
+.sp-proof-label {
+  font-family: 'DM Mono', monospace;
+  font-size: 0.58rem;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.42);
+  margin-top: 0.2rem;
+  white-space: nowrap;
+}
+
+/* ── FAQ accordion (sp-faq) ── */
+.sp-faq { margin: 2rem 0; }
+.sp-faq h2 { color: #ffffff !important; margin-bottom: 1.4rem !important; }
+.sp-faq-item {
+  border-bottom: 1px solid rgba(255,255,255,0.07);
+  padding: 1.1rem 0;
+}
+.sp-faq-q {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 1rem; letter-spacing: 0.04em;
+  color: #ffffff;
+  cursor: default;
+  display: flex; justify-content: space-between; align-items: center;
+}
+.sp-faq-q::after {
+  content: '+';
+  color: var(--accent);
+  font-size: 1.2rem; font-family: sans-serif; font-weight: 300;
+  margin-left: 1rem; flex-shrink: 0;
+}
+.sp-faq-a {
+  font-size: 0.875rem; line-height: 1.7;
+  color: rgba(255,255,255,0.65) !important;
+  padding-top: 0.7rem;
+}
+
 /* ── Mobile responsive ── */
 @media (max-width: 768px) {
   .sp-deliverables { padding: 1.5rem 1rem; }
@@ -2053,4 +2136,8 @@ h2 span                     { color: var(--accent) !important; }
   .sp-final-cta-btns { flex-direction: column; align-items: center; }
   .cmp-table { font-size: 0.78rem; }
   .cmp-table th, .cmp-table td { padding: 0.6rem 0.7rem; }
+  .sp-proof-strip { gap: 0; padding: 0.5rem 1rem; }
+  .sp-proof-item { padding: 0.4rem 1rem; }
+  .sp-proof-num { font-size: 1.2rem; }
+  .sp-proof-label { font-size: 0.52rem; }
 }
