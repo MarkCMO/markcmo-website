@@ -9,7 +9,7 @@
 // Security model:
 //   - Slug is the only token. Slugs are mostly-guessable (legal
 //     name) so this is "security through unguessability" only
-//     for THIS endpoint. We expose ONLY the fields below — no
+//     for THIS endpoint. We expose ONLY the fields below, no
 //     internal IDs, no IPs, no audit trail, no other clients.
 //   - Rate-limited via Netlify edge (~1 req/sec/IP is enough for
 //     a human browsing).

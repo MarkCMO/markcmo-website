@@ -5,33 +5,33 @@
 // the other CRM/engagement panels in /admin.
 //
 // Endpoints (all require valid mcadmin_session cookie):
-//   GET ?type=clients              — list of mc_clients with engagement summary
-//   GET ?type=case&slug={slug}     — full case file: client + engagements + docs + audit
-//   GET ?type=signed-url&path={p}  — short-lived signed URL for a Storage object
-//   GET ?type=audit&engagementId   — last 50 audit events for an engagement
-//   GET ?type=contacts             — every mc_clients row (CRM contacts panel)
-//   GET ?type=active-clients       — clients with at least one non-lead engagement
-//   GET ?type=pipeline             — all engagements grouped by status (kanban)
-//   GET ?type=projects             — engagements paid/delivering with delivery clock
-//   GET ?type=proposals            — mc_documents where doc_type='proposal'
-//   GET ?type=contracts            — mc_documents where doc_type IN (sow,agreement,nda,msa,timeline)
-//   GET ?type=invoices             — mc_invoices
-//   GET ?type=activity&limit=30    — last N audit_log events across all engagements
-//   GET ?type=summary              — counts for the dashboard tiles
-//   GET ?type=notes&clientId=X     — mc_notes (all or per-client, per-engagement)
-//   GET ?type=products             — mc_products service catalog
-//   GET ?type=templates&category=X — mc_email_templates
-//   GET ?type=webinars             — mc_webinar_events
-//   GET ?type=submissions          — every signed/executed mc_documents row
-//   GET ?type=transactions         — paid mc_invoices with Square payment IDs
-//   GET ?type=revenue-report       — monthly revenue from paid invoices
-//   GET ?type=funnel               — lead -> proposal -> signed -> paid conversion rates
-//   GET ?type=lead-sources         — mc_clients grouped by source with conversion %
-//   GET ?type=journey&clientId=X   — full customer journey timeline for a client
+//   GET ?type=clients             , list of mc_clients with engagement summary
+//   GET ?type=case&slug={slug}    , full case file: client + engagements + docs + audit
+//   GET ?type=signed-url&path={p} , short-lived signed URL for a Storage object
+//   GET ?type=audit&engagementId  , last 50 audit events for an engagement
+//   GET ?type=contacts            , every mc_clients row (CRM contacts panel)
+//   GET ?type=active-clients      , clients with at least one non-lead engagement
+//   GET ?type=pipeline            , all engagements grouped by status (kanban)
+//   GET ?type=projects            , engagements paid/delivering with delivery clock
+//   GET ?type=proposals           , mc_documents where doc_type='proposal'
+//   GET ?type=contracts           , mc_documents where doc_type IN (sow,agreement,nda,msa,timeline)
+//   GET ?type=invoices            , mc_invoices
+//   GET ?type=activity&limit=30   , last N audit_log events across all engagements
+//   GET ?type=summary             , counts for the dashboard tiles
+//   GET ?type=notes&clientId=X    , mc_notes (all or per-client, per-engagement)
+//   GET ?type=products            , mc_products service catalog
+//   GET ?type=templates&category=X, mc_email_templates
+//   GET ?type=webinars            , mc_webinar_events
+//   GET ?type=submissions         , every signed/executed mc_documents row
+//   GET ?type=transactions        , paid mc_invoices with Square payment IDs
+//   GET ?type=revenue-report      , monthly revenue from paid invoices
+//   GET ?type=funnel              , lead -> proposal -> signed -> paid conversion rates
+//   GET ?type=lead-sources        , mc_clients grouped by source with conversion %
+//   GET ?type=journey&clientId=X  , full customer journey timeline for a client
 //                                    (emails sent/opened/clicked, page views,
 //                                     payment-link clicks, all in chronological order)
-//   GET ?type=email-stats          — open/click/bounce rates rolled up
-//   GET ?type=meetings             — Calendly-booked engagements + client info,
+//   GET ?type=email-stats         , open/click/bounce rates rolled up
+//   GET ?type=meetings            , Calendly-booked engagements + client info,
 //                                    bucketed into upcoming / past / no_show / canceled
 // ═══════════════════════════════════════════════════════════════
 

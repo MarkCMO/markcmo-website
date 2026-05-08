@@ -1,5 +1,5 @@
 // ═══════════════════════════════════════════════════════════════
-// track.js — public tracker endpoint
+// track.js, public tracker endpoint
 //
 // Logs touchpoints to mc_journey_events. Public so client documents
 // + email links can hit it without auth. Validates inputs strictly
@@ -41,7 +41,7 @@ exports.handler = async (event) => {
   // ─── INTERNAL VISITOR DETECTION ─────────────────────────────────
   // Any request that carries the admin session cookie is Mark himself
   // previewing his own client docs. Don't pollute mc_journey_events with
-  // his views — we only want real client touches in analytics.
+  // his views, we only want real client touches in analytics.
   // Also short-circuit when ?test=1 / ?preview=1 query params are set,
   // which lets Mark share a doc URL for review without recording a touch.
   const cookieHeader = event.headers?.cookie || event.headers?.Cookie || '';

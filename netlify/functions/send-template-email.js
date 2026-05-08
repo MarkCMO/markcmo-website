@@ -102,7 +102,7 @@ exports.handler = async (event) => {
       headers,
       body: JSON.stringify({
         ok: false,
-        error: dryRun ? null : 'Unfilled template variables — refusing to send. Pass values in `variables` or set `allow_partial: true` to ignore (not recommended).',
+        error: dryRun ? null : 'Unfilled template variables, refusing to send. Pass values in `variables` or set `allow_partial: true` to ignore (not recommended).',
         missing_variables: Array.from(missing),
         rendered_subject: subject,
         rendered_preheader: preheader,

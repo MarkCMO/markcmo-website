@@ -135,7 +135,7 @@ exports.handler = async (event) => {
     clientName, clientEmail, clientTitle, clientCompany, clientPhone,
     clientSigBase64,
     markSig,                    // coords for countersign overlay
-    testMode,                   // bool — re-routes "client" emails to mark@markcmo.com
+    testMode,                   // bool, re-routes "client" emails to mark@markcmo.com
   } = body;
 
   if (!clientSlug)       return { statusCode: 400, headers: CORS, body: JSON.stringify({ error: 'Missing clientSlug' }) };
@@ -252,7 +252,7 @@ exports.handler = async (event) => {
       .map(([k, v]) => `<tr><td style="padding:5px 16px 5px 0;color:#888;font-size:13px;white-space:nowrap;">${k}</td><td style="padding:5px 0;color:#1E293B;font-size:13px;">${String(v).substring(0, 200)}</td></tr>`)
       .join('');
 
-    // Mark's email — light/blue branded
+    // Mark's email, light/blue branded
     const markHtml = `<!DOCTYPE html><html><head><meta charset="UTF-8"/></head>
 <body style="background:#F8FAFC;margin:0;padding:0;font-family:Arial,sans-serif;">
 <div style="max-width:600px;margin:0 auto;padding:32px 24px;">
@@ -274,7 +274,7 @@ exports.handler = async (event) => {
   </div>
 </div></body></html>`;
 
-    // Client email — light branded
+    // Client email, light branded
     const clientHtml = `<!DOCTYPE html><html><head><meta charset="UTF-8"/></head>
 <body style="background:#F8FAFC;margin:0;padding:0;font-family:Arial,sans-serif;">
 <div style="max-width:600px;margin:0 auto;">
@@ -323,14 +323,14 @@ exports.handler = async (event) => {
         from: 'MarkCMO Documents <forms@markcmo.com>',
         to: ['mark@markcmo.com'],
         reply_to: clientEmail,
-        subject: `${testMode ? '[TEST] ' : ''}Countersignature Needed: ${docName || doc.doc_name} — ${clientName || clientEmail}`,
+        subject: `${testMode ? '[TEST] ' : ''}Countersignature Needed: ${docName || doc.doc_name}, ${clientName || clientEmail}`,
         html: markHtml,
       },
       {
         from: 'Mark Gabrielli <mark@markcmo.com>',
         to: [recipientForClientCopy],
         cc: clientCC,
-        subject: `${testMode ? '[TEST] ' : ''}Received: ${docName || doc.doc_name} — Pending Countersignature`,
+        subject: `${testMode ? '[TEST] ' : ''}Received: ${docName || doc.doc_name}, Pending Countersignature`,
         html: clientHtml,
         attachments: [{ filename: execFilename, content: pdfBase64 }],
       },

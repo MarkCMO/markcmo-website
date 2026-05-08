@@ -747,7 +747,7 @@ exports.handler = async (event) => {
           if (company?.website) {
             domains.push(company.website.replace(/^https?:\/\//, '').replace(/\/.*$/, '').replace(/^www\./, ''));
           } else {
-            // Unaffiliated talent — fan out across agencies
+            // Unaffiliated talent, fan out across agencies
             domains.push(...TALENT_AGENCY_DOMAINS);
           }
           const hits = [];

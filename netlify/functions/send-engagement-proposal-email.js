@@ -354,7 +354,7 @@ exports.handler = async (event) => {
 
     const html = buildEmailHtml({ client, engagement, docs, siteUrl, testMode, testRecipient });
 
-    const subject = (testMode ? '[TEST] ' : '') + `${client.legal_name} — ${engagement.name} (Proposal)`.replace(/—/g, '-');
+    const subject = (testMode ? '[TEST] ' : '') + `${client.legal_name}, ${engagement.name} (Proposal)`.replace(/-/g, '-');
 
     // CC list logic:
     //   - If caller passes ccArg explicitly (array or null), honor it.
@@ -429,7 +429,7 @@ exports.handler = async (event) => {
     // ─── Auto-advance pipeline status on LIVE sends ─────────────
     // Move engagement out of 'lead'/'draft' to 'proposal_sent' so the
     // kanban + dashboard reflect reality without manual cleanup.
-    // Test sends do NOT advance status (deliberate — testMode means
+    // Test sends do NOT advance status (deliberate, testMode means
     // we're QA-ing the email, not progressing the pipeline).
     if (!testMode) {
       try {

@@ -88,8 +88,8 @@ a:hover { color:#1D4ED8; }
 
   function escHtml(s) { return String(s ?? '').replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c])); }
   function fmtUSD(n) { const v=Number(n); if(!isFinite(v)) return '$0'; return '$'+v.toLocaleString('en-US',{minimumFractionDigits:0,maximumFractionDigits:2}); }
-  function fmtDate(s) { if(!s) return '—'; try { return new Date(s).toLocaleDateString('en-US',{month:'short',day:'numeric',year:'numeric'}); } catch { return '—'; } }
-  function fmtDateTime(s) { if(!s) return '—'; try { return new Date(s).toLocaleString('en-US',{month:'short',day:'numeric',hour:'numeric',minute:'2-digit',timeZoneName:'short'}); } catch { return '—'; } }
+  function fmtDate(s) { if(!s) return '-'; try { return new Date(s).toLocaleDateString('en-US',{month:'short',day:'numeric',year:'numeric'}); } catch { return '-'; } }
+  function fmtDateTime(s) { if(!s) return '-'; try { return new Date(s).toLocaleString('en-US',{month:'short',day:'numeric',hour:'numeric',minute:'2-digit',timeZoneName:'short'}); } catch { return '-'; } }
 
   function render(data) {
     const c = data.client || {};
