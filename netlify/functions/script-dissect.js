@@ -41,12 +41,20 @@ exports.handler = async (event) => {
   const host = event.headers.host || 'markcmo.com';
   const bgUrl = `${proto}://${host}/.netlify/functions/script-dissect-background`;
 
-  // Don't await - fire and forget. Background fn picks up the work.
-  fetch(bgUrl, {
-    method: 'POST',
-    headers: { 'content-type': 'application/json' },
-    body: JSON.stringify({ jobId, ...body })
-  }).catch(() => { /* logged on Netlify side, job state will reflect failure */ });
+  // Netlify returns 202 immediately for -background functions, so awaiting
+  // is fast (~50ms). Without await, lambda shutdown kills the in-flight fetch.
+  try {
+    const r = await fetch(bgUrl, {
+      method: 'POST',
+      headers: { 'content-type': 'application/json' },
+      body: JSON.stringify({ jobId, ...body })
+    });
+    if (r.status !== 202 && !r.ok) {
+      return json(500, { ok: false, error: 'Background trigger failed: HTTP ' + r.status });
+    }
+  } catch (e) {
+    return json(500, { ok: false, error: 'Background trigger error: ' + e.message });
+  }
 
   return json(202, { ok: true, jobId, status: 'processing' });
 };
