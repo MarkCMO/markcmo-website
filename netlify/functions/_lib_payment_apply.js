@@ -93,7 +93,7 @@ async function applyInvoiceState({ sqInvoice, source = 'webhook' }) {
       if (!inv.is_test && client && eng) {
         await sendClientReceipt({ inv, eng, client });
         // Trigger the onboarding intake form post-payment (best-effort).
-        // If it fails it's not fatal — Mark can re-send manually from /admin.
+        // If it fails it's not fatal, Mark can re-send manually from /admin.
         try {
           await sendOnboardingIntake({ inv, eng, client });
         } catch (e) { console.warn('onboarding intake send failed:', e.message); }
@@ -277,7 +277,7 @@ function esc(s) {
   return String(s ?? '').replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 }
 
-// ─── Onboarding intake email — fires automatically on payment ───
+// ─── Onboarding intake email, fires automatically on payment ───
 async function sendOnboardingIntake({ inv, eng, client }) {
   const apiKey = process.env.RESEND_API_KEY;
   if (!apiKey) return;
@@ -300,7 +300,7 @@ async function sendOnboardingIntake({ inv, eng, client }) {
     </td></tr>
   </table>
   <div style="padding:32px;">
-    <p style="font-size:15px;line-height:1.65;margin:0 0 16px;">Payment confirmed — thanks. To stay on the ${deliveryHrs}-hour delivery promise for <strong>${esc(eng.name)}</strong>, I need a short intake worksheet to point the audit at the right places. It takes about 12 minutes.</p>
+    <p style="font-size:15px;line-height:1.65;margin:0 0 16px;">Payment confirmed, thanks. To stay on the ${deliveryHrs}-hour delivery promise for <strong>${esc(eng.name)}</strong>, I need a short intake worksheet to point the audit at the right places. It takes about 12 minutes.</p>
     <p style="font-size:15px;line-height:1.65;margin:0 0 22px;">What I need from you:</p>
     <ul style="font-size:14px;line-height:1.7;margin:0 0 22px;padding-left:1.1rem;">
       <li>Read-only access to your analytics + ad accounts (or screenshots if access is messy)</li>
@@ -317,7 +317,7 @@ async function sendOnboardingIntake({ inv, eng, client }) {
       </td></tr>
     </table>
     <p style="font-size:13px;color:#64748B;margin:14px 0 0;line-height:1.6;">Reply to this email if anything's unclear. Looking forward to seeing the data.</p>
-    <p style="font-size:14px;line-height:1.65;margin:22px 0 0;">— Mark</p>
+    <p style="font-size:14px;line-height:1.65;margin:22px 0 0;">, Mark</p>
   </div>
   <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0" bgcolor="#0A1628" style="background-color:#0A1628;border-collapse:collapse;">
     <tr><td bgcolor="#0A1628" align="center" style="background-color:#0A1628;padding:18px 32px;font-size:11px;color:#94A3B8;">Mark Gabrielli &middot; Fractional CMO &middot; markcmo.com</td></tr>
@@ -332,7 +332,7 @@ async function sendOnboardingIntake({ inv, eng, client }) {
       to: [client.primary_contact_email],
       cc,
       reply_to: 'mark@markcmo.com',
-      subject: `Intake worksheet — ${eng.name} starts now`,
+      subject: `Intake worksheet, ${eng.name} starts now`,
       html,
       tags: [{ name: 'template', value: 'onboarding-intake' }, { name: 'client', value: client.slug }],
     }),
@@ -349,7 +349,7 @@ async function sendOnboardingIntake({ inv, eng, client }) {
     await sbInsert('mc_journey_events', {
       client_id: client.id, engagement_id: eng.id,
       category: 'email', event: 'email_sent',
-      subject_or_url: `Intake worksheet — ${eng.name} starts now`,
+      subject_or_url: `Intake worksheet, ${eng.name} starts now`,
       recipient_email: client.primary_contact_email,
       resend_email_id: data?.id || null,
       raw: { template: 'onboarding-intake', auto: true },

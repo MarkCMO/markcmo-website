@@ -270,7 +270,7 @@ exports.handler = async (event) => {
           from: 'MarkCMO Documents <forms@markcmo.com>',
           to: ['mark@markcmo.com'],
           reply_to: clientEmail,
-          subject: `${testMode ? '[TEST] ' : ''}Executed: ${docName} — ${clientName || clientEmail}`,
+          subject: `${testMode ? '[TEST] ' : ''}Executed: ${docName}, ${clientName || clientEmail}`,
           html: makeHtml('Mark'),
           attachments: [{ filename: execFilename, content: executedPdfBase64 }],
         }),

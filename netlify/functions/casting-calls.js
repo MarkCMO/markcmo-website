@@ -52,7 +52,7 @@ function decodeEntities(s) {
     out = out
       .replace(/&amp;/g, '&').replace(/&lt;/g, '<').replace(/&gt;/g, '>')
       .replace(/&quot;/g, '"').replace(/&#039;/g, "'").replace(/&apos;/g, "'")
-      .replace(/&nbsp;/g, ' ').replace(/&hellip;/g, '...').replace(/&mdash;/g, '-').replace(/&ndash;/g, '-')
+      .replace(/&nbsp;/g, ' ').replace(/&hellip;/g, '...').replace(/-/g, '-').replace(/-/g, '-')
       .replace(/&#(\d+);/g, (_, n) => String.fromCharCode(parseInt(n, 10)))
       .replace(/&#x([0-9a-f]+);/gi, (_, n) => String.fromCharCode(parseInt(n, 16)));
   }

@@ -2,7 +2,7 @@
 // POST { token, courseId } → { valid, email, name, reason }
 // Called by learn.html on every page load before any content renders.
 // Checks token against enrollment records in JSONBin.
-// Token must match the specific courseId — prevents token sharing across courses.
+// Token must match the specific courseId, prevents token sharing across courses.
 
 const https = require('https');
 
@@ -73,7 +73,7 @@ exports.handler = async (event) => {
       return { statusCode: 200, headers, body: JSON.stringify({
         valid: false,
         reason: 'wrong_course',
-        message: `This token is for ${enrollment.courseId?.toUpperCase()} — not ${courseId?.toUpperCase()}.`
+        message: `This token is for ${enrollment.courseId?.toUpperCase()}, not ${courseId?.toUpperCase()}.`
       })};
     }
 

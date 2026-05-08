@@ -126,7 +126,7 @@ async function handleCreateDraft(body, headers, event) {
     customerId: cust.id,
     amountCents,
     name: isTest ? `[TEST $1] ${eng.name}` : eng.name,
-    note: `${eng.name} — ${client.legal_name}${isTest ? ' (TEST)' : ''}`,
+    note: `${eng.name}, ${client.legal_name}${isTest ? ' (TEST)' : ''}`,
   });
 
   // 3) Create draft invoice

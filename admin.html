@@ -11,7 +11,7 @@
 </script>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>MarkCMO — Admin</title>
+<title>MarkCMO, Admin</title>
 <link rel="preconnect" href="https://fonts.googleapis.com" crossorigin>
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Barlow:ital,wght@0,400;0,500;0,600;0,700;0,800&family=DM+Mono:wght@400;500&display=swap">
@@ -1055,18 +1055,18 @@
   .cs-icon { filter: none !important; }
 
   /* ════════════════════════════════════════════════════════════
-     ADMIN NAVIGATION — matches markcmo.com brand
+     ADMIN NAVIGATION, matches markcmo.com brand
      Sidebar: dark navy chrome. Nav items in white/blue, active in
      blue accent, sections labeled in DM Mono uppercase eyebrows.
      ════════════════════════════════════════════════════════════ */
-  /* Sidebar shell: fixed-width column flexbox. NO scroll on the shell —
+  /* Sidebar shell: fixed-width column flexbox. NO scroll on the shell,
      only the inner .admin-nav scrolls, so logo + footer stay pinned. */
   .sidebar { width: 260px !important; padding: 0 !important; overflow: hidden !important; max-height: 100vh; display: flex !important; flex-direction: column !important; }
   /* Bump main-content margin to match the new sidebar width so cards don't get clipped */
   .main-content { margin-left: 260px !important; }
   /* Bare panels (no top-bar / content-body / mc-panel wrapper) get default padding
      so their leftmost column doesn't sit flush against the sidebar. Wrapped panels
-     handle their own spacing internally. Modern browsers only (:has() — Chrome 105+,
+     handle their own spacing internally. Modern browsers only (:has(), Chrome 105+,
      Safari 15.4+, Firefox 121+, all current production browsers). */
   .panel:not(:has(> .top-bar)):not(:has(> .content-body)):not(:has(> .mc-panel)) {
     padding: 28px 32px;
@@ -1099,7 +1099,7 @@
   }
   .admin-nav::-webkit-scrollbar { width: 0; height: 0; display: none; } /* Chrome/Safari */
 
-  /* Top CTA — Case Files (VDR) */
+  /* Top CTA, Case Files (VDR) */
   .admin-nav-cta {
     display: flex; align-items: center; justify-content: center; gap: 0.5rem;
     margin: 0.25rem 0.75rem 1.25rem;
@@ -1181,7 +1181,7 @@
     padding: 0.85rem 1.1rem !important;
     border-top: 1px solid rgba(248,250,252,0.08) !important;
     background: rgba(0,0,0,0.15);
-    flex-shrink: 0;       /* never shrink — stays pinned at the bottom of the column */
+    flex-shrink: 0;       /* never shrink, stays pinned at the bottom of the column */
   }
   .sidebar-user {
     font-family: 'DM Mono', monospace !important;
@@ -1213,7 +1213,7 @@
   .top-bar a[href="/admin/vdr"] { display: none !important; }
 
   /* ════════════════════════════════════════════════════════════
-     PANEL TRANSITIONS — smoother fade + slide between admin panels
+     PANEL TRANSITIONS, smoother fade + slide between admin panels
      ════════════════════════════════════════════════════════════ */
   .panel { transition: opacity 0.18s ease, transform 0.18s ease; }
   .panel:not(.active) { opacity: 0; transform: translateY(8px); pointer-events: none; }
@@ -1222,7 +1222,7 @@
   .admin-nav-item, .admin-nav-cta { transition: background 0.14s ease, color 0.14s ease, border-color 0.14s ease, transform 0.14s ease, box-shadow 0.14s ease !important; }
 
   /* ════════════════════════════════════════════════════════════
-     CASE FILES PANEL — scoped to #panel-case-files (cf- prefix)
+     CASE FILES PANEL, scoped to #panel-case-files (cf- prefix)
      Modern light/blue palette matching markcmo.com brand.
      ════════════════════════════════════════════════════════════ */
   .cf-wrap { padding: 24px 32px; }
@@ -1606,11 +1606,11 @@
   .cf-err.fatal { background: #FEE2E2; border-color: rgba(220,38,38,0.3); color: #991B1B; }
 
 </style>
-<meta name="description" content="MarkCMO — Admin - MarkCMO provides fractional CMO and strategic marketing services for growth-stage companies.">
+<meta name="description" content="MarkCMO, Admin - MarkCMO provides fractional CMO and strategic marketing services for growth-stage companies.">
 <link rel="canonical" href="https://markcmo.com/admin.html">
 <meta property="og:type" content="website">
-<meta property="og:title" content="MarkCMO — Admin">
-<meta property="og:description" content="MarkCMO — Admin - MarkCMO provides fractional CMO and strategic marketing services for growth-stage companies.">
+<meta property="og:title" content="MarkCMO, Admin">
+<meta property="og:description" content="MarkCMO, Admin - MarkCMO provides fractional CMO and strategic marketing services for growth-stage companies.">
 <meta property="og:url" content="https://markcmo.com/admin.html">
 <meta property="og:site_name" content="MarkCMO">
 <script type="application/ld+json">
@@ -1782,10 +1782,10 @@
   <div class="mc-dash">
     <!-- Top KPI row -->
     <div class="mc-kpi-grid" id="mc-dash-kpis">
-      <div class="mc-kpi"><div class="l"><span class="ico">⏳</span>Loading</div><div class="v">—</div></div>
-      <div class="mc-kpi"><div class="l"><span class="ico">⏳</span>Loading</div><div class="v">—</div></div>
-      <div class="mc-kpi"><div class="l"><span class="ico">⏳</span>Loading</div><div class="v">—</div></div>
-      <div class="mc-kpi"><div class="l"><span class="ico">⏳</span>Loading</div><div class="v">—</div></div>
+      <div class="mc-kpi"><div class="l"><span class="ico">⏳</span>Loading</div><div class="v">-</div></div>
+      <div class="mc-kpi"><div class="l"><span class="ico">⏳</span>Loading</div><div class="v">-</div></div>
+      <div class="mc-kpi"><div class="l"><span class="ico">⏳</span>Loading</div><div class="v">-</div></div>
+      <div class="mc-kpi"><div class="l"><span class="ico">⏳</span>Loading</div><div class="v">-</div></div>
     </div>
 
     <!-- Pipeline-by-stage strip -->
@@ -1799,7 +1799,7 @@
           <a onclick="switchPanel('crm-pipeline', this)" style="cursor:pointer;">View Full Pipeline →</a>
         </div>
         <div class="mc-stage-strip" id="mc-dash-stages">
-          <div class="mc-stage"><div class="label">Loading</div><div class="count">—</div></div>
+          <div class="mc-stage"><div class="label">Loading</div><div class="count">-</div></div>
         </div>
       </div>
     </div>
@@ -1873,7 +1873,7 @@
         <h3>Recent Registrants</h3>
       </div>
       <div style="display:flex;align-items:center;gap:.6rem;">
-        <span style="font-family:'DM Mono',monospace;font-size:.66rem;color:#94A3B8;letter-spacing:.12em;text-transform:uppercase;">Total: <strong id="stat-total" style="color:#0A1628;">—</strong> · 7d: <strong id="stat-week" style="color:#0A1628;">—</strong> · Sent: <strong id="stat-sent" style="color:#0A1628;">—</strong></span>
+        <span style="font-family:'DM Mono',monospace;font-size:.66rem;color:#94A3B8;letter-spacing:.12em;text-transform:uppercase;">Total: <strong id="stat-total" style="color:#0A1628;">-</strong> · 7d: <strong id="stat-week" style="color:#0A1628;">-</strong> · Sent: <strong id="stat-sent" style="color:#0A1628;">-</strong></span>
         <a onclick="switchPanel('leads', this)" style="font-family:'DM Mono',monospace;font-size:.7rem;letter-spacing:.12em;text-transform:uppercase;color:#2563EB;text-decoration:none;font-weight:700;cursor:pointer;">View All Leads →</a>
       </div>
     </div>
@@ -1936,9 +1936,9 @@
 </div>
 <div class="content-body">
 <div class="stats-grid" style="grid-template-columns:repeat(3,1fr);max-width:500px;">
-<div class="stat-card"><div class="stat-label">Total</div><div class="stat-value" id="q-total">—</div></div>
-<div class="stat-card"><div class="stat-label">Pending</div><div class="stat-value" id="q-pending" style="color:var(--gold)">—</div></div>
-<div class="stat-card"><div class="stat-label">Sent</div><div class="stat-value" id="q-sent" style="color:var(--green)">—</div></div>
+<div class="stat-card"><div class="stat-label">Total</div><div class="stat-value" id="q-total">-</div></div>
+<div class="stat-card"><div class="stat-label">Pending</div><div class="stat-value" id="q-pending" style="color:var(--gold)">-</div></div>
+<div class="stat-card"><div class="stat-label">Sent</div><div class="stat-value" id="q-sent" style="color:var(--green)">-</div></div>
 </div>
 <div class="table-wrap">
 <div class="table-header">
@@ -2010,7 +2010,7 @@
 </div>
 
 <!-- ════════════════════════════════════════════════════════════════
-     CALENDLY MEETINGS — top-of-sidebar quick action
+     CALENDLY MEETINGS, top-of-sidebar quick action
      Shows upcoming + past Calendly bookings (mc_engagements rows
      with metadata.calendly_invitee_uri set, joined to mc_clients).
      ════════════════════════════════════════════════════════════════ -->
@@ -2034,7 +2034,7 @@
 </div>
 
 <!-- ════════════════════════════════════════════════════════════════
-     TASKS (CRM) — mc_tasks panel with create/complete UI
+     TASKS (CRM), mc_tasks panel with create/complete UI
      ════════════════════════════════════════════════════════════════ -->
 <div id="panel-crm-tasks" class="panel">
   <div class="mc-panel">
@@ -2055,7 +2055,7 @@
 </div>
 
 <!-- ════════════════════════════════════════════════════════════════
-     CASE FILES (VDR) — embedded panel (replaces /admin/vdr/)
+     CASE FILES (VDR), embedded panel (replaces /admin/vdr/)
      ════════════════════════════════════════════════════════════════ -->
 <div id="panel-case-files" class="panel">
   <div class="top-bar">
@@ -2069,7 +2069,7 @@
       <aside class="cf-aside">
         <div class="cf-aside-head">
           <div class="cf-aside-title">Clients</div>
-          <div class="cf-aside-count" id="cf-client-count">—</div>
+          <div class="cf-aside-count" id="cf-client-count">-</div>
         </div>
         <input type="text" class="cf-search" id="cf-search" placeholder="Search by name, email, slug…"/>
         <div class="cf-list" id="cf-clients-list">
@@ -2510,7 +2510,7 @@
 <div id="panel-rev-invoices" class="panel">
   <div class="mc-panel">
     <div class="mc-panel-head">
-      <div><div class="mc-eyebrow">Revenue · Billing</div><h2>All Invoices</h2><div class="mc-sub">Every Square invoice (drafted, sent, paid, voided). Same data as the engagement Invoices tab — different cut.</div></div>
+      <div><div class="mc-eyebrow">Revenue · Billing</div><h2>All Invoices</h2><div class="mc-sub">Every Square invoice (drafted, sent, paid, voided). Same data as the engagement Invoices tab, different cut.</div></div>
       <div class="mc-panel-actions">
         <input type="text" class="mc-search" id="mc-rev-invoices-search" placeholder="Search...">
         <button class="mc-btn" onclick="mcLoadInvoices(true)">↻ Refresh</button>
@@ -2523,7 +2523,7 @@
 <div id="panel-rev-products" class="panel">
   <div class="mc-panel">
     <div class="mc-panel-head">
-      <div><div class="mc-eyebrow">Revenue · Catalog</div><h2>Products &amp; Pricing</h2><div class="mc-sub">Service catalog. Each row is a fixed-fee or recurring offer — used by the proposal generator and the public pricing pages.</div></div>
+      <div><div class="mc-eyebrow">Revenue · Catalog</div><h2>Products &amp; Pricing</h2><div class="mc-sub">Service catalog. Each row is a fixed-fee or recurring offer, used by the proposal generator and the public pricing pages.</div></div>
       <div class="mc-panel-actions">
         <button class="mc-btn primary" onclick="mcOpenProductEditor(null)">+ Add Product</button>
         <button class="mc-btn" onclick="mcLoadProducts(true)">↻ Refresh</button>
@@ -2554,12 +2554,12 @@
 </div>
 <div class="content-body">
 <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(160px,1fr));gap:12px;margin-bottom:28px;" id="courses-stats">
-<div class="stat-card"><div class="stat-label">Total Enrollments</div><div class="stat-value" id="cs-total">—</div></div>
-<div class="stat-card"><div class="stat-label">Active Students</div><div class="stat-value" id="cs-active">—</div></div>
-<div class="stat-card"><div class="stat-label">Graduates</div><div class="stat-value" id="cs-grads">—</div></div>
-<div class="stat-card"><div class="stat-label">Est. Revenue</div><div class="stat-value" id="cs-revenue">—</div></div>
-<div class="stat-card"><div class="stat-label">Avg GPA</div><div class="stat-value" id="cs-gpa">—</div></div>
-<div class="stat-card"><div class="stat-label">Completion Rate</div><div class="stat-value" id="cs-completion">—</div></div>
+<div class="stat-card"><div class="stat-label">Total Enrollments</div><div class="stat-value" id="cs-total">-</div></div>
+<div class="stat-card"><div class="stat-label">Active Students</div><div class="stat-value" id="cs-active">-</div></div>
+<div class="stat-card"><div class="stat-label">Graduates</div><div class="stat-value" id="cs-grads">-</div></div>
+<div class="stat-card"><div class="stat-label">Est. Revenue</div><div class="stat-value" id="cs-revenue">-</div></div>
+<div class="stat-card"><div class="stat-label">Avg GPA</div><div class="stat-value" id="cs-gpa">-</div></div>
+<div class="stat-card"><div class="stat-label">Completion Rate</div><div class="stat-value" id="cs-completion">-</div></div>
 </div>
 <div class="table-wrap">
 <div class="table-header"><div class="table-title">Enrollments by Course</div></div>
@@ -2645,10 +2645,10 @@
 <div class="panel-header"><h1 class="panel-title">💵 Course Revenue</h1></div>
 <div class="content-body">
 <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:12px;margin-bottom:28px;">
-<div class="stat-card"><div class="stat-label">Total Est. Revenue</div><div class="stat-value" id="rev-total">—</div></div>
-<div class="stat-card"><div class="stat-label">Avg Course Value</div><div class="stat-value" id="rev-avg">—</div></div>
-<div class="stat-card"><div class="stat-label">New This Month</div><div class="stat-value" id="rev-month">—</div></div>
-<div class="stat-card"><div class="stat-label">Retakes Revenue</div><div class="stat-value" id="rev-retakes">—</div></div>
+<div class="stat-card"><div class="stat-label">Total Est. Revenue</div><div class="stat-value" id="rev-total">-</div></div>
+<div class="stat-card"><div class="stat-label">Avg Course Value</div><div class="stat-value" id="rev-avg">-</div></div>
+<div class="stat-card"><div class="stat-label">New This Month</div><div class="stat-value" id="rev-month">-</div></div>
+<div class="stat-card"><div class="stat-label">Retakes Revenue</div><div class="stat-value" id="rev-retakes">-</div></div>
 </div>
 <div class="table-wrap">
 <div class="table-header"><div class="table-title">Revenue by Course</div></div>
@@ -2676,12 +2676,12 @@ Actual revenue is confirmed in your Square Dashboard.
 </div>
 <div class="content-body">
 <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(160px,1fr));gap:12px;margin-bottom:28px;">
-<div class="stat-card"><div class="stat-label">Total Votes Cast</div><div class="stat-value" id="v-total">—</div></div>
-<div class="stat-card"><div class="stat-label">Courses With Votes</div><div class="stat-value" id="v-courses">—</div></div>
-<div class="stat-card"><div class="stat-label">#1 Most Wanted</div><div class="stat-value" id="v-top" style="font-size:13px;letter-spacing:0;">—</div></div>
+<div class="stat-card"><div class="stat-label">Total Votes Cast</div><div class="stat-value" id="v-total">-</div></div>
+<div class="stat-card"><div class="stat-label">Courses With Votes</div><div class="stat-value" id="v-courses">-</div></div>
+<div class="stat-card"><div class="stat-label">#1 Most Wanted</div><div class="stat-value" id="v-top" style="font-size:13px;letter-spacing:0;">-</div></div>
 </div>
 <div class="table-wrap">
-<div class="table-header"><div class="table-title">Votes by Course — Build Priority Order</div></div>
+<div class="table-header"><div class="table-title">Votes by Course, Build Priority Order</div></div>
 <table class="data-table">
 <thead><tr><th>Rank</th><th>Course</th><th>Category</th><th>Votes</th><th>Notify Signups</th><th>Action</th></tr></thead>
 <tbody id="votes-tbody">
@@ -2703,12 +2703,12 @@ Actual revenue is confirmed in your Square Dashboard.
 </div>
 <div class="content-body">
 <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(160px,1fr));gap:12px;margin-bottom:28px;">
-<div class="stat-card"><div class="stat-label">Total Signups</div><div class="stat-value" id="n-total">—</div></div>
-<div class="stat-card"><div class="stat-label">Courses Watched</div><div class="stat-value" id="n-courses">—</div></div>
-<div class="stat-card"><div class="stat-label">Emails Sent</div><div class="stat-value" id="n-sent">—</div></div>
+<div class="stat-card"><div class="stat-label">Total Signups</div><div class="stat-value" id="n-total">-</div></div>
+<div class="stat-card"><div class="stat-label">Courses Watched</div><div class="stat-value" id="n-courses">-</div></div>
+<div class="stat-card"><div class="stat-label">Emails Sent</div><div class="stat-value" id="n-sent">-</div></div>
 </div>
 <div class="table-wrap" style="margin-bottom:20px;">
-<div class="table-header"><div class="table-title">Signups by Course — Fire Launch Emails Here</div></div>
+<div class="table-header"><div class="table-title">Signups by Course, Fire Launch Emails Here</div></div>
 <table class="data-table">
 <thead><tr><th>Course</th><th>Signups</th><th>Last Signup</th><th>Launch Email Sent</th><th>Action</th></tr></thead>
 <tbody id="notify-summary-tbody">
@@ -2743,7 +2743,7 @@ style="background:var(--bg);border:1px solid var(--border);color:var(--text);pad
 <div class="upload-zone" id="upload-zone" onclick="document.getElementById('file-input').click()">
 <div class="upload-zone-icon">📎</div>
 <div class="upload-zone-text">Drop files here or click to upload</div>
-<div class="upload-zone-sub">PDF, DOCX, XLSX, ZIP, MP4 — any file type</div>
+<div class="upload-zone-sub">PDF, DOCX, XLSX, ZIP, MP4, any file type</div>
 </div>
 <input type="file" id="file-input" multiple onchange="handleFileUpload(this.files)">
 <div class="flex gap-2 mb-4" style="flex-wrap:wrap;">
@@ -2759,7 +2759,7 @@ style="background:var(--bg);border:1px solid var(--border);color:var(--text);pad
 <div class="table-wrap" style="margin-top:24px;">
 <div class="table-header">
 <div class="table-title">All Files</div>
-<div class="text-sm text-muted" id="doc-count">—</div>
+<div class="text-sm text-muted" id="doc-count">-</div>
 </div>
 <table>
 <thead><tr><th>File</th><th>Category</th><th>Size</th><th>Uploaded</th><th>Public URL</th><th></th></tr></thead>
@@ -2779,7 +2779,7 @@ style="background:var(--bg);border:1px solid var(--border);color:var(--text);pad
 <div class="content-body">
 <div style="background:var(--surface);border:1px solid var(--border);border-left:3px solid var(--gold);padding:16px 20px;margin-bottom:24px;">
 <div style="font-size:13px;color:var(--muted);line-height:1.6;">
-Generate unique tracked links to send clients to your forms and documents. Each link is different — click <strong style="color:var(--text)">Rotate</strong> on any link to get a fresh URL while keeping the same destination. Mark links as single-use to expire after one click.
+Generate unique tracked links to send clients to your forms and documents. Each link is different, click <strong style="color:var(--text)">Rotate</strong> on any link to get a fresh URL while keeping the same destination. Mark links as single-use to expire after one click.
 </div>
 </div>
 <div class="flex gap-2 mb-4" style="flex-wrap:wrap;align-items:center;">
@@ -2802,7 +2802,7 @@ Generate unique tracked links to send clients to your forms and documents. Each 
       <div>
         <div class="mc-eyebrow">Content · Insights Blog</div>
         <h2>Blog Manager</h2>
-        <div class="mc-sub">Draft, schedule, and publish posts to markcmo.com/blog. Posts are stored in Supabase (mc_blog_posts) and rendered live by the public-blog function — no static rebuild needed.</div>
+        <div class="mc-sub">Draft, schedule, and publish posts to markcmo.com/blog. Posts are stored in Supabase (mc_blog_posts) and rendered live by the public-blog function, no static rebuild needed.</div>
       </div>
       <div class="mc-panel-actions">
         <button class="mc-btn primary" onclick="mcBlogOpenEditor()">+ New Post</button>
@@ -2974,7 +2974,7 @@ Generate unique tracked links to send clients to your forms and documents. Each 
 <div class="settings-field">
 <label class="field-label">Admin Secret (from Netlify env: ADMIN_SECRET)</label>
 <input type="password" class="field-input" id="settings-admin-secret" placeholder="Paste your ADMIN_SECRET value here" autocomplete="off">
-<div style="font-size:11px;color:var(--dim);margin-top:6px;">Required to load the Notify List and fire launch emails. Never saved — re-enter each session.</div>
+<div style="font-size:11px;color:var(--dim);margin-top:6px;">Required to load the Notify List and fire launch emails. Never saved, re-enter each session.</div>
 </div>
 </div>
 </div>
@@ -3053,12 +3053,12 @@ Generate unique tracked links to send clients to your forms and documents. Each 
 <div style="padding:24px;background:var(--surface);border:1px solid var(--border);margin-bottom:24px;">
 <div class="settings-head" style="padding:0;border:none;margin-bottom:16px;">Environment Variables Required in Netlify</div>
 <div style="font-family:'DM Mono',monospace;font-size:11px;color:var(--muted);line-height:2;">
-<div><span style="color:var(--gold)">RESEND_API_KEY</span> — Your Resend.com API key</div>
-<div><span style="color:var(--gold)">JSONBIN_API_KEY</span> — JSONBin master key</div>
-<div><span style="color:var(--gold)">JSONBIN_BIN_ID</span> — Bin ID for webinar leads</div>
-<div><span style="color:var(--gold)">JSONBIN_DRIP_BIN_ID</span> — Bin ID for drip queue</div>
-<div><span style="color:var(--gold)">JSONBIN_DOCS_BIN_ID</span> — Bin ID for document metadata</div>
-<div><span style="color:var(--gold)">NOTIFY_EMAIL</span> — <a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="563b37243d163b37243d353b397835393b">[email&#160;protected]</a></div>
+<div><span style="color:var(--gold)">RESEND_API_KEY</span>, Your Resend.com API key</div>
+<div><span style="color:var(--gold)">JSONBIN_API_KEY</span>, JSONBin master key</div>
+<div><span style="color:var(--gold)">JSONBIN_BIN_ID</span>, Bin ID for webinar leads</div>
+<div><span style="color:var(--gold)">JSONBIN_DRIP_BIN_ID</span>, Bin ID for drip queue</div>
+<div><span style="color:var(--gold)">JSONBIN_DOCS_BIN_ID</span>, Bin ID for document metadata</div>
+<div><span style="color:var(--gold)">NOTIFY_EMAIL</span>, <a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="563b37243d163b37243d353b397835393b">[email&#160;protected]</a></div>
 </div>
 </div>
 </div>
@@ -3072,13 +3072,13 @@ Generate unique tracked links to send clients to your forms and documents. Each 
 </div>
 <div class="content-body">
 <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(160px,1fr));gap:12px;margin-bottom:28px;">
-<div class="stat-card"><div class="stat-label">Total Requests</div><div class="stat-value" id="intl-total">—</div></div>
-<div class="stat-card"><div class="stat-label">Pending</div><div class="stat-value" id="intl-pending" style="color:#f0a050;">—</div></div>
-<div class="stat-card"><div class="stat-label">Approved</div><div class="stat-value" id="intl-approved-count" style="color:#4CAF72;">—</div></div>
+<div class="stat-card"><div class="stat-label">Total Requests</div><div class="stat-value" id="intl-total">-</div></div>
+<div class="stat-card"><div class="stat-label">Pending</div><div class="stat-value" id="intl-pending" style="color:#f0a050;">-</div></div>
+<div class="stat-card"><div class="stat-label">Approved</div><div class="stat-value" id="intl-approved-count" style="color:#4CAF72;">-</div></div>
 </div>
 <div class="table-wrap">
 <div class="table-header">
-<div class="table-title">Access Requests — Click Approve to Send Magic Link</div>
+<div class="table-title">Access Requests, Click Approve to Send Magic Link</div>
 <input type="text" id="intl-search" placeholder="Search name, email, country…" oninput="filterIntlList()"
 style="background:var(--bg);border:1px solid var(--border);color:var(--text);padding:6px 10px;font-size:11px;outline:none;width:200px;">
 </div>
@@ -3101,7 +3101,7 @@ style="background:var(--bg);border:1px solid var(--border);color:var(--text);pad
 <div class="content-body">
 <div style="margin-bottom:32px;">
 <div style="font-size:13px;color:var(--muted);line-height:1.8;max-width:700px;">
-This is your legitimate social growth engine. Unlike bots or fake engagement tools, every feature here is powered by AI strategy and content intelligence — helping you grow real audiences on LinkedIn and Instagram through superior content, targeting clarity, and conversion funnels.
+This is your legitimate social growth engine. Unlike bots or fake engagement tools, every feature here is powered by AI strategy and content intelligence, helping you grow real audiences on LinkedIn and Instagram through superior content, targeting clarity, and conversion funnels.
 </div>
 </div>
 <div class="grid-4" style="margin-bottom:28px;">
@@ -3132,15 +3132,15 @@ This is your legitimate social growth engine. Unlike bots or fake engagement too
 <div class="card-body" style="display:grid;gap:12px;">
 <div style="display:flex;gap:12px;align-items:flex-start;font-size:12px;">
 <span style="color:var(--gold);font-size:16px;flex-shrink:0;">🎯</span>
-<div><strong style="color:var(--text);">Audience Intel</strong><br><span style="color:var(--muted);">Like Outfame's targeting engine — identify exactly who to attract and where they hang out.</span></div>
+<div><strong style="color:var(--text);">Audience Intel</strong><br><span style="color:var(--muted);">Like Outfame's targeting engine, identify exactly who to attract and where they hang out.</span></div>
 </div>
 <div style="display:flex;gap:12px;align-items:flex-start;font-size:12px;">
 <span style="color:var(--gold);font-size:16px;flex-shrink:0;">💬</span>
-<div><strong style="color:var(--text);">DM Funnel Builder</strong><br><span style="color:var(--muted);">Like Zeals' comment-to-DM system — build automated chat flows you deploy via ManyChat or Meta.</span></div>
+<div><strong style="color:var(--text);">DM Funnel Builder</strong><br><span style="color:var(--muted);">Like Zeals' comment-to-DM system, build automated chat flows you deploy via ManyChat or Meta.</span></div>
 </div>
 <div style="display:flex;gap:12px;align-items:flex-start;font-size:12px;">
 <span style="color:var(--gold);font-size:16px;flex-shrink:0;">📅</span>
-<div><strong style="color:var(--text);">Content Calendar</strong><br><span style="color:var(--muted);">Like Jetpack's scheduling engine — AI plans your full month of posts by type and optimal timing.</span></div>
+<div><strong style="color:var(--text);">Content Calendar</strong><br><span style="color:var(--muted);">Like Jetpack's scheduling engine, AI plans your full month of posts by type and optimal timing.</span></div>
 </div>
 <div style="display:flex;gap:12px;align-items:flex-start;font-size:12px;">
 <span style="color:var(--gold);font-size:16px;flex-shrink:0;">🔍</span>
@@ -3199,7 +3199,7 @@ This is your legitimate social growth engine. Unlike bots or fake engagement too
 </div>
 <div>
 <label class="field-label">Client Revenue Range / Company Size</label>
-<input id="aud-size" class="field-input" placeholder="e.g. $2M–$20M revenue, Series A–B, 10–150 employees">
+<input id="aud-size" class="field-input" placeholder="e.g. $2M-$20M revenue, Series A-B, 10-150 employees">
 </div>
 </div>
 </div>
@@ -3431,7 +3431,7 @@ This is your legitimate social growth engine. Unlike bots or fake engagement too
 <div class="content-body">
 <div class="card" style="margin-bottom:24px;">
 <div class="card-header">
-<div><div class="card-title">Build Comment-to-DM Conversion Funnels</div><div class="card-sub">Like Zeals — build automated chat flows triggered by post comments. Deploy via ManyChat or Meta.</div></div>
+<div><div class="card-title">Build Comment-to-DM Conversion Funnels</div><div class="card-sub">Like Zeals, build automated chat flows triggered by post comments. Deploy via ManyChat or Meta.</div></div>
 </div>
 <div class="card-body">
 <div class="gap-16">
@@ -3613,7 +3613,7 @@ This is your legitimate social growth engine. Unlike bots or fake engagement too
 <div class="table-wrap" style="margin-bottom:20px;">
 <div class="table-header">
 <div class="table-title">Your Voice Profile</div>
-<div class="text-sm text-muted" style="font-size:11px;color:var(--muted);">Set once — used in all replies</div>
+<div class="text-sm text-muted" style="font-size:11px;color:var(--muted);">Set once, used in all replies</div>
 </div>
 <div style="padding:16px 24px;display:grid;grid-template-columns:1fr 1fr 1fr;gap:16px;">
 <div>
@@ -3695,7 +3695,7 @@ This is your legitimate social growth engine. Unlike bots or fake engagement too
 <div class="table-title" style="color:var(--gold);">⏱ 60-Min Engagement Timer</div>
 </div>
 <div style="padding:16px 24px;display:grid;gap:10px;">
-<div style="font-size:11px;color:var(--muted);line-height:1.7;">Start this when you publish a post. Reply to all comments before the timer hits zero — that's the algorithm window.</div>
+<div style="font-size:11px;color:var(--muted);line-height:1.7;">Start this when you publish a post. Reply to all comments before the timer hits zero, that's the algorithm window.</div>
 <div style="display:flex;gap:8px;">
 <button class="btn btn-gold" style="font-size:10px;padding:8px 14px;" onclick="startTimer()">▶ START TIMER</button>
 <button class="btn btn-outline" style="font-size:10px;padding:8px 14px;" onclick="resetTimer()">↺ RESET</button>
@@ -3754,7 +3754,7 @@ async function doLogin() {
   if (u === ADMIN_USER.toLowerCase() && p === ADMIN_PASS) {
     sessionStorage.setItem('admin_auth', '1');
     // ALSO call the cookie-based admin-auth function so VDR + payment endpoints work.
-    // Failure here is non-fatal — legacy admin still works on sessionStorage alone.
+    // Failure here is non-fatal, legacy admin still works on sessionStorage alone.
     try {
       await fetch('/.netlify/functions/admin-auth', {
         method: 'POST',
@@ -3784,8 +3784,8 @@ function doLogout() {
 document.getElementById('login-pass').addEventListener('keydown', e => {
   if (e.key === 'Enter') doLogin();
 });
-// Check existing session — if present, show the app AND boot the data loaders
-// (without this, the dashboard sits forever at "—" / "LOADING…" because initApp() is skipped).
+// Check existing session, if present, show the app AND boot the data loaders
+// (without this, the dashboard sits forever at "-" / "LOADING…" because initApp() is skipped).
 //
 // IMPORTANT: sessionStorage flag and the mcadmin_session HTTP cookie have
 // independent lifetimes. The user can hit a state where sessionStorage says
@@ -3800,7 +3800,7 @@ if (sessionStorage.getItem('admin_auth') === '1') {
   fetch('/.netlify/functions/admin-engagement-data?type=summary', { credentials: 'include' })
     .then(r => {
       if (r.status === 401) {
-        // Cookie expired — clear sessionStorage flag, show login screen, no banner needed
+        // Cookie expired, clear sessionStorage flag, show login screen, no banner needed
         // (banner is for mid-session expiry; here we just route to login cleanly).
         sessionStorage.removeItem('admin_auth');
         document.getElementById('login-screen').style.display = 'flex';
@@ -3811,7 +3811,7 @@ if (sessionStorage.getItem('admin_auth') === '1') {
     })
     .then(r => {
       if (!r) return;
-      // Cookie is valid — boot the app
+      // Cookie is valid, boot the app
       setTimeout(() => { try { initApp(); } catch (e) { console.error('initApp on session restore failed:', e); } }, 0);
     })
     .catch(e => {
@@ -3824,7 +3824,7 @@ let allLeads = [];
 let allQueue = [];
 let allDocs = [];
 let settings = {};
-const JSONBIN_KEY = ''; // filled from env — read via admin API
+const JSONBIN_KEY = ''; // filled from env, read via admin API
 // For demo/admin UI, we'll use fetch to a Netlify function that proxies JSONBin
 // ─── INIT ────────────────────────────────────────────────────────────────────
 let _ADMIN_SECRET = '';
@@ -3956,7 +3956,7 @@ function openPanelFromHash() {
 window.addEventListener('hashchange', openPanelFromHash);
 
 // ════════════════════════════════════════════════════════════════
-// CASE FILES PANEL — embedded VDR
+// CASE FILES PANEL, embedded VDR
 // Pulls clients/engagements/documents/audit from Supabase via the
 // existing admin-engagement-data Netlify function. Same auth (cookie
 // or x-admin-api-token header).
@@ -3975,8 +3975,8 @@ let _cfClients = [];
 let _cfActiveSlug = null;
 let _cfLoadedOnce = false;
 
-const cfFmtDate = iso => iso ? new Date(iso).toLocaleString('en-US',{dateStyle:'medium',timeStyle:'short'}) : '—';
-const cfFmtDateShort = iso => iso ? new Date(iso).toLocaleDateString('en-US',{month:'short',day:'numeric',year:'numeric'}) : '—';
+const cfFmtDate = iso => iso ? new Date(iso).toLocaleString('en-US',{dateStyle:'medium',timeStyle:'short'}) : '-';
+const cfFmtDateShort = iso => iso ? new Date(iso).toLocaleDateString('en-US',{month:'short',day:'numeric',year:'numeric'}) : '-';
 const cfFmtUSD = n => '$' + Number(n||0).toLocaleString('en-US',{minimumFractionDigits:0,maximumFractionDigits:2});
 const cfEsc = s => String(s ?? '').replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 const cfPill = status => `<span class="cf-pill ${CF_STATUS_PILL[status] || 'cf-pill-grey'}">${cfEsc(status||'unknown')}</span>`;
@@ -4089,8 +4089,8 @@ function cfRenderCase(client, audit) {
         <button class="cf-edit-icon-btn" onclick="cfOpenEditClient('${cfEsc(client.id)}')">Edit Client</button>
       </div>
       <div class="cf-meta-grid">
-        <div><div class="l">Primary Contact</div><div class="v">${cfEsc(client.primary_contact_name || '—')}</div></div>
-        <div><div class="l">Email</div><div class="v"><a href="mailto:${cfEsc(client.primary_contact_email)}" style="color:#2563EB;">${cfEsc(client.primary_contact_email || '—')}</a></div></div>
+        <div><div class="l">Primary Contact</div><div class="v">${cfEsc(client.primary_contact_name || '-')}</div></div>
+        <div><div class="l">Email</div><div class="v"><a href="mailto:${cfEsc(client.primary_contact_email)}" style="color:#2563EB;">${cfEsc(client.primary_contact_email || '-')}</a></div></div>
         <div><div class="l">Status</div><div class="v">${cfPill(client.status)}</div></div>
         <div><div class="l">Engagement Total</div><div class="v">${cfFmtUSD(totalFee)}</div></div>
       </div>
@@ -4123,7 +4123,7 @@ function cfRenderCase(client, audit) {
       html += `<div class="cf-eng">
         <div class="cf-eng-head">
           <div><div class="cf-eng-name">${cfEsc(e.name)}</div><div style="margin-top:.4rem;display:flex;align-items:center;gap:.5rem;flex-wrap:wrap;">${cfPill(e.status)}<button class="cf-btn cf-btn-sm outline" style="padding:.2rem .55rem;font-size:.62rem;" onclick="cfEditEngagement('${cfEsc(e.id)}')">Edit Engagement</button><button class="cf-btn cf-btn-sm outline" style="padding:.2rem .55rem;font-size:.62rem;" onclick="cfChangeEngagementStatus('${cfEsc(e.id)}','${cfEsc(e.status||'draft')}')">Quick Stage…</button></div></div>
-          <div class="cf-fee">${cfFmtUSD(e.fee_usd)}<small>${e.delivery_window_hrs || '—'} HR DELIVERY</small></div>
+          <div class="cf-fee">${cfFmtUSD(e.fee_usd)}<small>${e.delivery_window_hrs || '-'} HR DELIVERY</small></div>
         </div>
         <div class="cf-eng-meta">
           <div><div class="l">Proposed</div><div class="v">${cfFmtDateShort(e.proposed_at)}</div></div>
@@ -4163,7 +4163,7 @@ function cfRenderCase(client, audit) {
       <ul class="cf-audit-list">
         ${audit.map(a => `<li class="cf-audit-item">
           <span class="cf-audit-event">${cfEsc(a.event)}</span>
-          <span class="cf-audit-detail">${cfEsc(a.payload?.docName || a.payload?.docId || a.payload?.recipient || a.payload?.amount_usd || '—')}${a.ip ? ` <span style="color:#94A3B8;font-family:'DM Mono',monospace;font-size:.7rem;">&middot; ${cfEsc(a.ip)}</span>` : ''}</span>
+          <span class="cf-audit-detail">${cfEsc(a.payload?.docName || a.payload?.docId || a.payload?.recipient || a.payload?.amount_usd || '-')}${a.ip ? ` <span style="color:#94A3B8;font-family:'DM Mono',monospace;font-size:.7rem;">&middot; ${cfEsc(a.ip)}</span>` : ''}</span>
           <span class="cf-audit-time">${cfFmtDate(a.created_at)}</span>
         </li>`).join('')}
       </ul>
@@ -4239,8 +4239,8 @@ function cfRenderJourney(data) {
   // Stats row
   const stats = `<div class="cf-journey-stats">
     <div class="cf-journey-stat"><div class="l">Emails Sent</div><div class="v">${s.emails_sent||0}</div></div>
-    <div class="cf-journey-stat"><div class="l">Opened</div><div class="v green">${s.emails_opened||0}</div><div class="s">${s.emails_sent ? Math.round((s.emails_opened||0)/s.emails_sent*100) + '%' : '—'} open rate</div></div>
-    <div class="cf-journey-stat"><div class="l">Clicked</div><div class="v green">${s.emails_clicked||0}</div><div class="s">${s.emails_sent ? Math.round((s.emails_clicked||0)/s.emails_sent*100) + '%' : '—'} click rate</div></div>
+    <div class="cf-journey-stat"><div class="l">Opened</div><div class="v green">${s.emails_opened||0}</div><div class="s">${s.emails_sent ? Math.round((s.emails_opened||0)/s.emails_sent*100) + '%' : '-'} open rate</div></div>
+    <div class="cf-journey-stat"><div class="l">Clicked</div><div class="v green">${s.emails_clicked||0}</div><div class="s">${s.emails_sent ? Math.round((s.emails_clicked||0)/s.emails_sent*100) + '%' : '-'} click rate</div></div>
     <div class="cf-journey-stat"><div class="l">Page Views</div><div class="v">${s.page_views_total||0}</div><div class="s">${Object.keys(s.page_views_by_kind||{}).length} pages</div></div>
     <div class="cf-journey-stat"><div class="l">Pay Link Clicks</div><div class="v orange">${s.payment_link_clicks||0}</div></div>
     ${s.emails_bounced ? `<div class="cf-journey-stat"><div class="l">Bounced</div><div class="v red">${s.emails_bounced}</div></div>` : ''}
@@ -4255,7 +4255,7 @@ function cfRenderJourney(data) {
         return `<div class="cf-journey-email-row">
           <div style="min-width:0;">
             <div class="cf-journey-email-subj">${cfEsc(em.subject || '(no subject)')}</div>
-            <div class="cf-journey-email-meta">to ${cfEsc(em.recipient || '—')} · sent ${cfFmtDate(em.sent_at || em.first_seen)}${em.open_count ? ` · opened ${em.open_count}×` : ''}${em.click_count ? ` · clicked ${em.click_count}×` : ''}</div>
+            <div class="cf-journey-email-meta">to ${cfEsc(em.recipient || '-')} · sent ${cfFmtDate(em.sent_at || em.first_seen)}${em.open_count ? ` · opened ${em.open_count}×` : ''}${em.click_count ? ` · clicked ${em.click_count}×` : ''}</div>
           </div>
           <div class="cf-journey-email-stages">
             ${stages.map(st => {
@@ -4297,7 +4297,7 @@ function cfRenderJourney(data) {
       else if (ev === 'note_call') { pillKind = 'note-call'; pillLabel = '📞 call note'; }
       else if (ev === 'note_meeting') { pillKind = 'note-meeting'; pillLabel = '🤝 meeting'; }
       else if (ev.startsWith('note_')) { pillKind = 'note'; pillLabel = '📝 ' + ev.replace('note_',''); }
-      const what = e.subject_or_url || (e.raw && (e.raw.kind || e.raw.template)) || '—';
+      const what = e.subject_or_url || (e.raw && (e.raw.kind || e.raw.template)) || '-';
       const ip = e.ip ? ` · ${cfEsc(e.ip)}` : '';
       return `<div class="cf-journey-event">
         <span class="cf-journey-pill ${pillKind}">${cfEsc(pillLabel)}</span>
@@ -4739,7 +4739,7 @@ async function cfGenerateDocs(slug) {
   }
   const products = (_mcCache.products?.products || []).filter(p => p.is_active);
   const productOpts = [
-    { value: '__custom', label: '— Custom (fill manually) —' },
+    { value: '__custom', label: ', Custom (fill manually),' },
     ...products.map(p => ({
       value: p.slug,
       label: `${p.name} · ${p.fee_usd ? '$' + Number(p.fee_usd).toLocaleString('en-US') : 'custom $'}${p.fee_type !== 'one_time' ? '/' + p.fee_type.replace('ly','') : ''}${p.delivery_window_hrs ? ' · ' + p.delivery_window_hrs + 'h' : ''}`,
@@ -4830,9 +4830,9 @@ const _mcSearch = {};  // search filter per panel
 
 function mcEsc(s) { return String(s ?? '').replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c])); }
 function mcFmtUSD(n) { const v = Number(n); if (!isFinite(v) || v === 0) return '$0'; return '$' + v.toLocaleString('en-US', { minimumFractionDigits: 0, maximumFractionDigits: 2 }); }
-function mcFmtDate(s) { if (!s) return '—'; try { const d = new Date(s); return d.toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' }); } catch { return '—'; } }
-function mcFmtDateTime(s) { if (!s) return '—'; try { const d = new Date(s); return d.toLocaleString('en-US', { month: 'short', day: 'numeric', hour: 'numeric', minute: '2-digit' }); } catch { return '—'; } }
-function mcFmtRelHrs(hrs) { if (hrs === null || hrs === undefined) return '—'; if (hrs < 0) return Math.round(-hrs) + 'h overdue'; if (hrs < 24) return hrs + 'h left'; return Math.round(hrs / 24) + 'd left'; }
+function mcFmtDate(s) { if (!s) return '-'; try { const d = new Date(s); return d.toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' }); } catch { return '-'; } }
+function mcFmtDateTime(s) { if (!s) return '-'; try { const d = new Date(s); return d.toLocaleString('en-US', { month: 'short', day: 'numeric', hour: 'numeric', minute: '2-digit' }); } catch { return '-'; } }
+function mcFmtRelHrs(hrs) { if (hrs === null || hrs === undefined) return '-'; if (hrs < 0) return Math.round(-hrs) + 'h overdue'; if (hrs < 24) return hrs + 'h left'; return Math.round(hrs / 24) + 'd left'; }
 
 function mcPill(status) {
   const s = String(status || '').toLowerCase();
@@ -4843,14 +4843,14 @@ function mcPill(status) {
   else if (['delivering','active','in_progress','in-progress'].some(k => s.includes(k))) kind = 'violet';
   else if (['overdue','escalated','urgent','reminder','final'].some(k => s.includes(k))) kind = 'red';
   else if (['void','cancelled','canceled','refunded','archived'].some(k => s.includes(k))) kind = 'orange';
-  return `<span class="mc-pill mc-pill-${kind}">${mcEsc(s || '—')}</span>`;
+  return `<span class="mc-pill mc-pill-${kind}">${mcEsc(s || '-')}</span>`;
 }
 
 // Fetch + cache + render. Calls renderFn(data) on success.
 async function mcFetch(type, renderFn, force) {
   // Optional convenience containers for the canonical case (e.g. mc-pipeline-body).
   // Many panels use renamed containers (mc-email-templates-body, mc-rev-reports-body)
-  // and rely on the renderer to find its own targets — so DON'T bail when these
+  // and rely on the renderer to find its own targets, so DON'T bail when these
   // canonical IDs are missing. Just skip the canonical loading UI.
   const bodyEl = document.getElementById(`mc-${type}-body`);
   const statsEl = document.getElementById(`mc-${type}-stats`);
@@ -4931,7 +4931,7 @@ function mcStatTile(label, value, sub, color) {
 //   - status in (lead, draft, proposal_sent) on the client OR engagement
 //   - OR no engagements at all
 function mcLoadLeads(force) {
-  // Re-uses contacts data — single fetch, two views
+  // Re-uses contacts data, single fetch, two views
   mcFetch('contacts', (data) => mcRenderLeads(data), force);
 }
 function mcRenderLeads(data) {
@@ -4972,9 +4972,9 @@ function mcRenderLeads(data) {
     const stale = ageDays > 14;
     return `<tr onclick="mcGoToCase('${mcEsc(c.slug)}')">
       <td><div class="name-cell">${mcEsc(c.legal_name)}</div>${c.dba ? `<div class="meta-cell">d/b/a ${mcEsc(c.dba)}</div>` : ''}</td>
-      <td>${mcEsc(c.primary_contact_name || '—')}<div class="meta-cell">${mcEsc(c.primary_contact_title || '')}</div></td>
-      <td><a href="mailto:${mcEsc(c.primary_contact_email)}" style="color:#2563EB;text-decoration:none;" onclick="event.stopPropagation()">${mcEsc(c.primary_contact_email || '—')}</a></td>
-      <td>${mcEsc([c.region, c.country].filter(Boolean).join(', ') || '—')}</td>
+      <td>${mcEsc(c.primary_contact_name || '-')}<div class="meta-cell">${mcEsc(c.primary_contact_title || '')}</div></td>
+      <td><a href="mailto:${mcEsc(c.primary_contact_email)}" style="color:#2563EB;text-decoration:none;" onclick="event.stopPropagation()">${mcEsc(c.primary_contact_email || '-')}</a></td>
+      <td>${mcEsc([c.region, c.country].filter(Boolean).join(', ') || '-')}</td>
       <td>${mcPill(c.source||'unknown')}</td>
       <td>${mcPill(c.latest_engagement_status || c.status || 'lead')}</td>
       <td><span style="font-family:'DM Mono',monospace;font-size:.7rem;color:${stale?'#DC2626':'#475569'};font-weight:${stale?'700':'500'};">${ageDays === 0 ? 'today' : ageDays + 'd'}${stale?' · stale':''}</span></td>
@@ -5083,9 +5083,9 @@ function mcRenderContacts(data) {
     }).join('');
     return `<tr onclick="mcGoToCase('${mcEsc(c.slug)}')">
       <td><div class="name-cell">${mcEsc(c.legal_name)}</div>${c.dba ? `<div class="meta-cell">d/b/a ${mcEsc(c.dba)}</div>` : ''}${tagChips ? `<div class="meta-cell" style="margin-top:.2rem;">${tagChips}</div>` : ''}</td>
-      <td>${mcEsc(c.primary_contact_name || '—')}${c.primary_contact_title ? `<div class="meta-cell">${mcEsc(c.primary_contact_title)}</div>` : ''}</td>
-      <td><a href="mailto:${mcEsc(c.primary_contact_email)}" style="color:#2563EB;text-decoration:none;" onclick="event.stopPropagation()">${mcEsc(c.primary_contact_email || '—')}</a>${ccChips ? `<div class="meta-cell" style="margin-top:.2rem;">${ccChips}</div>` : ''}</td>
-      <td>${mcEsc([c.region, c.country].filter(Boolean).join(', ') || '—')}</td>
+      <td>${mcEsc(c.primary_contact_name || '-')}${c.primary_contact_title ? `<div class="meta-cell">${mcEsc(c.primary_contact_title)}</div>` : ''}</td>
+      <td><a href="mailto:${mcEsc(c.primary_contact_email)}" style="color:#2563EB;text-decoration:none;" onclick="event.stopPropagation()">${mcEsc(c.primary_contact_email || '-')}</a>${ccChips ? `<div class="meta-cell" style="margin-top:.2rem;">${ccChips}</div>` : ''}</td>
+      <td>${mcEsc([c.region, c.country].filter(Boolean).join(', ') || '-')}</td>
       <td>${mcPill(c.source)}</td>
       <td>${mcPill(c.latest_engagement_status || c.status)}</td>
       <td class="amt-cell">${mcFmtUSD(c.engagement_total_usd)}</td>
@@ -5131,8 +5131,8 @@ function mcRenderActiveClients(data) {
     const eng = c.engagements[0] || {};
     return `<tr onclick="mcGoToCase('${mcEsc(c.slug)}')">
       <td><div class="name-cell">${mcEsc(c.legal_name)}</div>${c.dba ? `<div class="meta-cell">d/b/a ${mcEsc(c.dba)}</div>` : ''}</td>
-      <td>${mcEsc(c.primary_contact_name || '—')}<div class="meta-cell">${mcEsc(c.primary_contact_email || '')}</div></td>
-      <td>${mcEsc(eng.name || '—')}<div class="meta-cell">${c.engagements.length > 1 ? `+${c.engagements.length - 1} more` : ''}</div></td>
+      <td>${mcEsc(c.primary_contact_name || '-')}<div class="meta-cell">${mcEsc(c.primary_contact_email || '')}</div></td>
+      <td>${mcEsc(eng.name || '-')}<div class="meta-cell">${c.engagements.length > 1 ? `+${c.engagements.length - 1} more` : ''}</div></td>
       <td>${mcPill(eng.status)}</td>
       <td class="amt-cell">${mcFmtUSD(c.total_fee_usd)}</td>
       <td class="amt-cell" style="color:#10B981;">${mcFmtUSD(c.total_paid_usd)}</td>
@@ -5226,7 +5226,7 @@ function mcWireKanbanDragDrop() {
       try { e.dataTransfer.effectAllowed = 'move'; e.dataTransfer.setData('text/plain', _mcDragId); } catch {}
     });
     card.addEventListener('dragend', () => { card.classList.remove('dragging'); _mcDragId = null; _mcDragCurrent = null; });
-    // Click handler — only fire if not in middle of drag
+    // Click handler, only fire if not in middle of drag
     card.addEventListener('click', (e) => {
       // dragend fires before click, so _mcDragId is null after a drag
       mcGoToCase(card.dataset.clientSlug);
@@ -5328,8 +5328,8 @@ function mcRenderDocList(data, type, emptyText, emptyIco) {
   const rows = list.map(d => `<tr onclick="mcGoToCase('${mcEsc(d.client_slug)}')">
     <td><span class="id-cell">${mcEsc(d.doc_id)}</span></td>
     <td><div class="name-cell">${mcEsc(d.doc_name)}</div><div class="meta-cell">${mcEsc(d.doc_type)}</div></td>
-    <td>${mcEsc(d.client_name || '—')}<div class="meta-cell">${mcEsc(d.client_contact || '')}</div></td>
-    <td>${mcEsc(d.engagement_name || '—')}</td>
+    <td>${mcEsc(d.client_name || '-')}<div class="meta-cell">${mcEsc(d.client_contact || '')}</div></td>
+    <td>${mcEsc(d.engagement_name || '-')}</td>
     <td>${mcPill(d.status)}</td>
     <td>${mcFmtDate(d.client_signed_at)}</td>
     <td>${mcFmtDate(d.executed_at)}</td>
@@ -5371,9 +5371,9 @@ function mcRenderInvoices(data) {
   }
 
   const rows = list.map(i => `<tr onclick="mcGoToCase('${mcEsc(i.client_slug)}')">
-    <td><span class="id-cell">${mcEsc(i.square_invoice_id ? i.square_invoice_id.slice(-12) : '—')}</span>${i.is_test ? '<span class="test-tag">TEST</span>' : ''}</td>
-    <td><div class="name-cell">${mcEsc(i.client_name || '—')}</div><div class="meta-cell">${mcEsc(i.client_contact || '')}</div></td>
-    <td>${mcEsc(i.engagement_name || '—')}</td>
+    <td><span class="id-cell">${mcEsc(i.square_invoice_id ? i.square_invoice_id.slice(-12) : '-')}</span>${i.is_test ? '<span class="test-tag">TEST</span>' : ''}</td>
+    <td><div class="name-cell">${mcEsc(i.client_name || '-')}</div><div class="meta-cell">${mcEsc(i.client_contact || '')}</div></td>
+    <td>${mcEsc(i.engagement_name || '-')}</td>
     <td>${mcPill(i.status)}</td>
     <td class="amt-cell">${mcFmtUSD(i.amount_usd)}</td>
     <td>${mcFmtDate(i.draft_at)}</td>
@@ -5462,7 +5462,7 @@ async function mcLoadDashboard(force) {
     }
     console.warn('Dashboard load failed:', e);
     const grid = document.getElementById('mc-dash-kpis');
-    if (grid) grid.innerHTML = `<div class="mc-kpi"><div class="l">Error</div><div class="v red">—</div><div class="s">${mcEsc(e.message)}</div></div>`;
+    if (grid) grid.innerHTML = `<div class="mc-kpi"><div class="l">Error</div><div class="v red">-</div><div class="s">${mcEsc(e.message)}</div></div>`;
   }
 }
 
@@ -5502,7 +5502,7 @@ function mcRenderMeetings(data) {
       mcStatTile('Upcoming', stats.upcoming || 0, '', 'blue'),
       mcStatTile('Past 30 days', meetings.filter(m => m.bucket === 'past' && (Date.now() - new Date(m.scheduled_at).getTime()) < 30*86400000).length, ''),
       mcStatTile('No-shows', stats.no_shows || 0, stats.no_shows ? '' : '', stats.no_shows ? 'red' : 'grey'),
-      mcStatTile('Next call', next?.scheduled_at ? mcFmtRelTime(next.scheduled_at) : '—', next?.client_name ? mcEsc(next.client_name) : 'no scheduled meeting'),
+      mcStatTile('Next call', next?.scheduled_at ? mcFmtRelTime(next.scheduled_at) : '-', next?.client_name ? mcEsc(next.client_name) : 'no scheduled meeting'),
     ].join('');
   }
   if (!meetings.length) {
@@ -5515,14 +5515,14 @@ function mcRenderMeetings(data) {
   const recent = meetings.filter(m => m.bucket !== 'upcoming').sort((a, b) => new Date(b.scheduled_at || b.booked_at) - new Date(a.scheduled_at || a.booked_at));
 
   const renderRow = (m) => `<tr onclick="mcGoToCase('${mcEsc(m.client_slug)}')" style="cursor:pointer;">
-    <td>${m.scheduled_at ? `<div style="font-weight:700;color:#0A1628;font-size:.86rem;">${mcFmtDateTime(m.scheduled_at)}</div><div style="font-family:'DM Mono',monospace;font-size:.66rem;color:#94A3B8;">${mcFmtRelTime(m.scheduled_at)}</div>` : '<span style="color:#94A3B8;">—</span>'}</td>
+    <td>${m.scheduled_at ? `<div style="font-weight:700;color:#0A1628;font-size:.86rem;">${mcFmtDateTime(m.scheduled_at)}</div><div style="font-family:'DM Mono',monospace;font-size:.66rem;color:#94A3B8;">${mcFmtRelTime(m.scheduled_at)}</div>` : '<span style="color:#94A3B8;">-</span>'}</td>
     <td>
-      <div class="name-cell">${mcEsc(m.client_name || m.client_contact || '—')}</div>
+      <div class="name-cell">${mcEsc(m.client_name || m.client_contact || '-')}</div>
       <div class="meta-cell">${mcEsc(m.client_email || '')}${m.client_phone ? ' · ' + mcEsc(m.client_phone) : ''}</div>
     </td>
     <td>${mcEsc(m.event_type_name || 'Discovery Call')}</td>
     <td>${mcMeetingPill(m)}</td>
-    <td>${m.booked_at ? mcFmtRelTime(m.booked_at) : '—'}</td>
+    <td>${m.booked_at ? mcFmtRelTime(m.booked_at) : '-'}</td>
     <td onclick="event.stopPropagation()" style="white-space:nowrap;">
       ${m.calendly_event_uri ? `<a href="${mcEsc(m.calendly_event_uri)}" target="_blank" rel="noopener" class="mc-btn" style="padding:.3rem .6rem;font-size:.66rem;margin-right:.3rem;">Calendly ↗</a>` : ''}
       <button class="mc-btn" style="padding:.3rem .6rem;font-size:.66rem;" onclick="mcGoToCase('${mcEsc(m.client_slug)}')">Open Case</button>
@@ -5591,9 +5591,9 @@ function mcRenderTasks(data) {
         <div class="name-cell" style="${t.status === 'completed' ? 'text-decoration:line-through;' : ''}">${mcEsc(t.title || '(untitled)')}</div>
         ${t.description ? `<div class="meta-cell">${mcEsc((t.description || '').slice(0, 80))}${(t.description || '').length > 80 ? '…' : ''}</div>` : ''}
       </td>
-      <td>${mcEsc(t.client_name || '—')}</td>
+      <td>${mcEsc(t.client_name || '-')}</td>
       <td><span class="mc-pill ${priCls}">${priority}</span></td>
-      <td>${t.due_at ? `<span style="color:${isOverdue ? '#DC2626' : '#0A1628'};font-weight:${isOverdue ? '700' : '500'};">${mcFmtRelTime(t.due_at)}</span>` : '<span style="color:#94A3B8;">—</span>'}</td>
+      <td>${t.due_at ? `<span style="color:${isOverdue ? '#DC2626' : '#0A1628'};font-weight:${isOverdue ? '700' : '500'};">${mcFmtRelTime(t.due_at)}</span>` : '<span style="color:#94A3B8;">-</span>'}</td>
       <td>${mcEsc(t.assigned_to || 'mark')}</td>
       <td onclick="event.stopPropagation()" style="white-space:nowrap;">
         <button class="mc-btn" style="padding:.3rem .6rem;font-size:.66rem;" onclick="mcOpenTaskEditor('${mcEsc(t.id)}')">edit</button>
@@ -5647,7 +5647,7 @@ async function mcOpenTaskEditor(id) {
       { name: 'title',       label: 'Title',       type: 'text',     required: true, placeholder: 'Follow up with Wendal on proposal', full: true },
       { name: 'description', label: 'Description', type: 'textarea', rows: 3,        placeholder: 'Optional context, links, follow-up notes' },
       { name: 'client_id',   label: 'Client (optional)', type: 'select', full: true,
-        options: [{ value: '', label: '— No client —' }, ...contacts.map(c => ({ value: c.id, label: c.legal_name }))] },
+        options: [{ value: '', label: ', No client,' }, ...contacts.map(c => ({ value: c.id, label: c.legal_name }))] },
       { name: 'priority',    label: 'Priority', type: 'select',
         options: [{ value: 'low', label: 'Low' }, { value: 'normal', label: 'Normal' }, { value: 'high', label: 'High' }] },
       { name: 'status',      label: 'Status', type: 'select',
@@ -5724,7 +5724,7 @@ function mcRenderBlog(posts) {
     ].join('');
   }
   if (!posts.length) {
-    bodyEl.innerHTML = `<div class="mc-empty"><div class="ico">✏️</div><h3>No blog posts yet</h3><p>Click "+ New Post" above to draft your first one. Posts publish to markcmo.com/blog instantly — no static rebuild needed.</p></div>`;
+    bodyEl.innerHTML = `<div class="mc-empty"><div class="ico">✏️</div><h3>No blog posts yet</h3><p>Click "+ New Post" above to draft your first one. Posts publish to markcmo.com/blog instantly, no static rebuild needed.</p></div>`;
     return;
   }
   bodyEl.innerHTML = `<div class="mc-table-wrap"><table class="mc-table"><thead><tr>
@@ -6069,7 +6069,7 @@ async function mcLoadIntegrations() {
     cards.push({ name: 'Customer Journey Tracker', status: r.status === 400 ? 'ok' : 'warn', detail: 'Page-view + click + pixel tracker live', icon: '👁' });
   } catch { cards.push({ name: 'Customer Journey Tracker', status: 'err', detail: 'Network error', icon: '👁' }); }
 
-  // 6) Resend send (no probe — just inform)
+  // 6) Resend send (no probe, just inform)
   cards.push({ name: 'Resend Email Send', status: 'ok', detail: 'Outbound via Resend API. Open + click tracking should be on in Resend project settings.', icon: '📤' });
 
   // 7) Pay redirect
@@ -6362,12 +6362,12 @@ function mcRenderDashboardActivity(activityData) {
     else if (ev.includes('escalated')) { kind = 'red'; label = '⚠️ escalated'; }
     else if (ev.includes('client_updated')) { kind = ''; label = '✏️ client updated'; }
     else if (ev.includes('calendly')) { kind = 'violet'; label = '📅 calendly'; }
-    const who = e.client_name || e.recipient || '—';
+    const who = e.client_name || e.recipient || '-';
     const what = [e.engagement_name, e.doc_id, e.subject, e.amount_usd ? '$' + e.amount_usd : null].filter(Boolean).join(' · ');
     const onClick = e.client_slug ? `mcGoToCase('${mcEsc(e.client_slug)}')` : 'void(0)';
     return `<li class="mc-feed-item" onclick="${onClick}">
       <span class="mc-feed-event ${kind}">${mcEsc(label)}${e.is_test ? ' · TEST' : ''}</span>
-      <span class="mc-feed-meta"><span class="who">${mcEsc(who)}</span><span class="what">${mcEsc(what || '—')}</span></span>
+      <span class="mc-feed-meta"><span class="who">${mcEsc(who)}</span><span class="what">${mcEsc(what || '-')}</span></span>
       <span class="mc-feed-time">${mcFmtRelTime(e.created_at)}</span>
     </li>`;
   }).join('');
@@ -6386,7 +6386,7 @@ function mcRenderDashboardProjectsWidget(projectsData) {
     const close = p.hours_to_delivery !== null && p.hours_to_delivery >= 0 && p.hours_to_delivery < 12;
     return `<div class="mc-mini-row ${overdue ? 'overdue' : ''}" onclick="mcGoToCase('${mcEsc(p.client_slug)}')">
       <div class="left">
-        <div class="name">${mcEsc(p.client_name || p.name || '—')}</div>
+        <div class="name">${mcEsc(p.client_name || p.name || '-')}</div>
         <div class="sub">${mcEsc(p.name)} · ${mcEsc(p.docs_executed || 0)}/${mcEsc(p.docs_total || 0)} docs</div>
       </div>
       <div class="right">
@@ -6412,7 +6412,7 @@ function mcRenderDashboardOutstanding(invoicesData) {
     const reminderBadge = i.reminder_count ? ` · ${i.reminder_count} reminder${i.reminder_count===1?'':'s'} sent` : '';
     return `<div class="mc-mini-row" onclick="mcGoToCase('${mcEsc(i.client_slug)}')">
       <div class="left">
-        <div class="name">${mcEsc(i.client_name || '—')}</div>
+        <div class="name">${mcEsc(i.client_name || '-')}</div>
         <div class="sub">${mcEsc(i.engagement_name || '')} · sent ${ageDays}d ago${reminderBadge}</div>
       </div>
       <div class="right">
@@ -6424,7 +6424,7 @@ function mcRenderDashboardOutstanding(invoicesData) {
 }
 
 function mcFmtRelTime(s) {
-  if (!s) return '—';
+  if (!s) return '-';
   try {
     const t = new Date(s).getTime();
     const diff = Date.now() - t;
@@ -6433,7 +6433,7 @@ function mcFmtRelTime(s) {
     if (diff < 86400000) return Math.round(diff / 3600000) + 'h ago';
     if (diff < 604800000) return Math.round(diff / 86400000) + 'd ago';
     return new Date(s).toLocaleDateString('en-US', { month: 'short', day: 'numeric' });
-  } catch { return '—'; }
+  } catch { return '-'; }
 }
 
 // ════════════════════════════════════════════════════════════════
@@ -6461,7 +6461,7 @@ function mcConfirmDelete(table, id, label, refreshFn) {
     .catch(e => alert('Delete failed: ' + e.message));
 }
 
-// Generic modal — re-uses the same backdrop/modal markup as cf-modal.
+// Generic modal, re-uses the same backdrop/modal markup as cf-modal.
 // Usage: mcOpenModal({ title, fields: [...], submit: async (values) => {...} })
 function mcOpenModal({ title, eyebrow, fields, values, submit, onClose }) {
   // Build the modal DOM if it doesn't exist
@@ -6594,7 +6594,7 @@ function mcRenderNotes(data) {
 function mcOpenNoteEditor(id) {
   const existing = id ? (_mcCache.notes?.notes || []).find(n => n.id === id) : null;
   const contacts = _mcCache.contacts?.contacts || [];
-  const clientOpts = [{ value: '', label: '— No client / general note —' }, ...contacts.map(c => ({ value: c.id, label: c.legal_name }))];
+  const clientOpts = [{ value: '', label: ', No client / general note,' }, ...contacts.map(c => ({ value: c.id, label: c.legal_name }))];
   mcOpenModal({
     title: id ? 'Edit Note' : 'Add Note',
     eyebrow: 'CRM · Activity',
@@ -6650,8 +6650,8 @@ function mcRenderProducts(data) {
     <td>${mcPill(p.category)}</td>
     <td class="amt-cell">${p.fee_usd ? mcFmtUSD(p.fee_usd) : '<span style="color:#94A3B8;">custom</span>'}</td>
     <td><span style="font-family:'DM Mono',monospace;font-size:.7rem;">${mcEsc(p.fee_type)}</span></td>
-    <td>${p.delivery_window_hrs ? p.delivery_window_hrs + 'h' : '—'}</td>
-    <td><span class="id-cell">${mcEsc(p.doc_prefix||'—')}</span></td>
+    <td>${p.delivery_window_hrs ? p.delivery_window_hrs + 'h' : '-'}</td>
+    <td><span class="id-cell">${mcEsc(p.doc_prefix||'-')}</span></td>
     <td>${p.is_active ? '<span class="mc-pill mc-pill-green">active</span>' : '<span class="mc-pill mc-pill-grey">off</span>'}</td>
     <td onclick="event.stopPropagation()"><button class="mc-btn" style="padding:.3rem .6rem;font-size:.66rem;color:#DC2626;border-color:#FCA5A5;" onclick="mcConfirmDelete('products','${mcEsc(p.id)}','${mcEsc(p.name)}',mcLoadProducts)">×</button></td>
   </tr>`).join('')}</tbody></table></div>`;
@@ -6736,7 +6736,7 @@ function mcRenderTemplates(data) {
   renderInto('email-campaigns', t => t.category === 'campaign', 'campaigns');
   renderInto('email-sequences', t => t.category === 'sequence', 'sequences');
 }
-// Open the Compose Email modal — pick template + client, fill {{vars}}, send.
+// Open the Compose Email modal, pick template + client, fill {{vars}}, send.
 // Pre-fills from { templateId, templateSlug, clientId, clientSlug } if passed.
 async function mcOpenComposeEmail(opts = {}) {
   // Make sure templates + contacts are loaded
@@ -6752,8 +6752,8 @@ async function mcOpenComposeEmail(opts = {}) {
   if (!templates.length) { alert('No active email templates. Create one in /admin#email-templates first.'); return; }
   if (!contacts.length) { alert('No contacts. Add one in /admin#crm-contacts first.'); return; }
 
-  const tplOpts = templates.map(t => ({ value: t.id, label: `${t.name} — ${t.subject || ''}` }));
-  const cliOpts = [{ value: '', label: '— Pick a client —' }, ...contacts.map(c => ({ value: c.id, label: `${c.legal_name} — ${c.primary_contact_email || 'no email'}` }))];
+  const tplOpts = templates.map(t => ({ value: t.id, label: `${t.name}, ${t.subject || ''}` }));
+  const cliOpts = [{ value: '', label: ', Pick a client,' }, ...contacts.map(c => ({ value: c.id, label: `${c.legal_name}, ${c.primary_contact_email || 'no email'}` }))];
 
   // Pre-fill from opts
   let initialTpl = null, initialCli = null;
@@ -6807,11 +6807,11 @@ async function mcOpenComposeEmail(opts = {}) {
         throw new Error('Missing values for: ' + preview.missing_variables.join(', ') + '. Fill those fields above and try again.');
       }
 
-      // Rich preview modal — replaces the confirm() popup with an
+      // Rich preview modal, replaces the confirm() popup with an
       // iframe-isolated render of the actual email so Mark sees exactly
       // what the recipient will receive before he clicks Send.
       const confirmed = await mcShowEmailPreview(preview, !!values.testRecipient, values.testRecipient || null);
-      if (!confirmed) throw new Error('Cancelled — no email sent.');
+      if (!confirmed) throw new Error('Cancelled, no email sent.');
 
       const res = await fetch('/.netlify/functions/send-template-email', {
         method: 'POST', credentials: 'include', headers: { 'Content-Type': 'application/json' },
@@ -6847,7 +6847,7 @@ async function mcOpenComposeEmail(opts = {}) {
 
 // Rich email preview modal. Renders the dry_run output in an
 // iframe so the user sees the actual email exactly as the recipient
-// would. Returns a Promise<boolean> — true if they click "Send",
+// would. Returns a Promise<boolean>, true if they click "Send",
 // false if they Cancel.
 function mcShowEmailPreview(preview, isTest, testRecipient) {
   return new Promise((resolve) => {
@@ -6874,17 +6874,17 @@ function mcShowEmailPreview(preview, isTest, testRecipient) {
         </div>
         <div class="cf-modal-body" style="max-height:75vh;overflow-y:auto;">
           <div style="background:#F8FAFC;border:1px solid #E2E8F0;border-radius:8px;padding:.85rem 1rem;margin-bottom:1rem;font-family:'DM Mono',monospace;font-size:.78rem;line-height:1.7;">
-            <div><strong>To:</strong> ${escapeForAttr(preview.recipient_email || '—')}${isTest ? `<span style="color:#F97316;font-weight:700;margin-left:.5rem;">[TEST → ${escapeForAttr(testRecipient || '')}]</span>` : ''}</div>
+            <div><strong>To:</strong> ${escapeForAttr(preview.recipient_email || '-')}${isTest ? `<span style="color:#F97316;font-weight:700;margin-left:.5rem;">[TEST → ${escapeForAttr(testRecipient || '')}]</span>` : ''}</div>
             ${preview.cc?.length ? `<div><strong>CC:</strong> ${preview.cc.map(e => escapeForAttr(e)).join(', ')}</div>` : ''}
             <div><strong>Subject:</strong> ${escapeForAttr(subj)}</div>
             ${pre ? `<div><strong>Preheader:</strong> ${escapeForAttr(pre)}</div>` : ''}
-            <div><strong>Template:</strong> ${escapeForAttr(preview.template_slug || '—')}</div>
+            <div><strong>Template:</strong> ${escapeForAttr(preview.template_slug || '-')}</div>
           </div>
-          <div style="font-family:'DM Mono',monospace;font-size:.62rem;letter-spacing:.18em;text-transform:uppercase;color:#475569;font-weight:700;margin-bottom:.4rem;">Rendered Body — Recipient View</div>
+          <div style="font-family:'DM Mono',monospace;font-size:.62rem;letter-spacing:.18em;text-transform:uppercase;color:#475569;font-weight:700;margin-bottom:.4rem;">Rendered Body, Recipient View</div>
           <iframe id="mc-preview-iframe" sandbox="" style="width:100%;height:480px;border:1px solid #E2E8F0;border-radius:10px;background:#FFFFFF;"></iframe>
         </div>
         <div class="cf-modal-foot">
-          <button type="button" class="cf-btn outline" onclick="mcCloseEmailPreview(false)">Cancel — Don't Send</button>
+          <button type="button" class="cf-btn outline" onclick="mcCloseEmailPreview(false)">Cancel, Don't Send</button>
           <button type="button" class="cf-btn primary" onclick="mcCloseEmailPreview(true)">${isTest ? 'Send Test Email' : 'Send Live Email'}</button>
         </div>
       </div>`;
@@ -6926,7 +6926,7 @@ function mcOpenTemplateEditor(id, defaultCategory) {
       ]},
       { name: 'subject', label: 'Subject Line', required: true, full: true, placeholder: 'Quick {{topic}} call?' },
       { name: 'preheader', label: 'Preheader (preview text)', full: true, placeholder: 'I have a 30-min slot on {{date_window}} that might fit.' },
-      { name: 'html_body', label: 'HTML Body', type: 'textarea', rows: 10, required: true, full: true, placeholder: '<p>Hi {{first_name}},</p>...', hint: 'Use {{variable_name}} placeholders. Final HTML body — full <html> wrapping isn\'t needed.' },
+      { name: 'html_body', label: 'HTML Body', type: 'textarea', rows: 10, required: true, full: true, placeholder: '<p>Hi {{first_name}},</p>...', hint: 'Use {{variable_name}} placeholders. Final HTML body, full <html> wrapping isn\'t needed.' },
       { name: 'is_active', label: 'Active (available to send)', type: 'checkbox', default: true },
     ],
     values: existing || { is_active: true, category: defaultCategory || 'transactional' },
@@ -6969,12 +6969,12 @@ function mcRenderWebinars(data) {
       <th>Title</th><th>Topic</th><th>${panelId==='webinar-replay'?'Recorded':'Scheduled'}</th><th>Status</th><th>Registrants</th><th>${panelId==='webinar-replay'?'Replay Views':'Attendees'}</th><th>Link</th><th></th>
     </tr></thead><tbody>${list.map(w => `<tr onclick="mcOpenWebinarEditor('${mcEsc(w.id)}')">
       <td><div class="name-cell">${mcEsc(w.title)}</div><div class="meta-cell">${mcEsc(w.slug)}</div></td>
-      <td>${mcEsc(w.topic||'—')}</td>
+      <td>${mcEsc(w.topic||'-')}</td>
       <td>${mcFmtDateTime(w.scheduled_at)}</td>
       <td>${mcPill(w.status)}</td>
       <td>${w.registrant_count||0}</td>
       <td>${panelId==='webinar-replay' ? (w.replay_view_count||0) : (w.attendee_count||0)}</td>
-      <td>${(panelId==='webinar-replay'?w.replay_url:w.live_url) ? `<a class="mc-btn" style="padding:.3rem .6rem;font-size:.66rem;" href="${mcEsc(panelId==='webinar-replay'?w.replay_url:w.live_url)}" target="_blank" rel="noopener" onclick="event.stopPropagation()">open</a>` : '<span style="color:#94A3B8;font-size:.7rem;">—</span>'}</td>
+      <td>${(panelId==='webinar-replay'?w.replay_url:w.live_url) ? `<a class="mc-btn" style="padding:.3rem .6rem;font-size:.66rem;" href="${mcEsc(panelId==='webinar-replay'?w.replay_url:w.live_url)}" target="_blank" rel="noopener" onclick="event.stopPropagation()">open</a>` : '<span style="color:#94A3B8;font-size:.7rem;">-</span>'}</td>
       <td onclick="event.stopPropagation()"><button class="mc-btn" style="padding:.3rem .6rem;font-size:.66rem;color:#DC2626;border-color:#FCA5A5;" onclick="mcConfirmDelete('webinars','${mcEsc(w.id)}','${mcEsc(w.title)}',mcLoadWebinars)">×</button></td>
     </tr>`).join('')}</tbody></table></div>`;
   };
@@ -7058,12 +7058,12 @@ function mcRenderSubmissions(data) {
   </tr></thead><tbody>${list.map(s => `<tr onclick="mcGoToCase('${mcEsc(s.client_slug)}')">
     <td><span class="id-cell">${mcEsc(s.doc_id)}</span></td>
     <td><div class="name-cell">${mcEsc(s.doc_name)}</div><div class="meta-cell">${mcEsc(s.engagement_name || '')}</div></td>
-    <td>${mcEsc(s.client_name || '—')}<div class="meta-cell">${mcEsc(s.client_email || '')}</div></td>
+    <td>${mcEsc(s.client_name || '-')}<div class="meta-cell">${mcEsc(s.client_email || '')}</div></td>
     <td>${mcPill(s.doc_type)}</td>
     <td>${mcPill(s.status)}</td>
     <td>${mcFmtDate(s.client_signed_at)}</td>
     <td>${mcFmtDate(s.executed_at)}</td>
-    <td><span style="font-family:'DM Mono',monospace;font-size:.66rem;color:#94A3B8;">${mcEsc(s.client_ip||'—')}</span></td>
+    <td><span style="font-family:'DM Mono',monospace;font-size:.66rem;color:#94A3B8;">${mcEsc(s.client_ip||'-')}</span></td>
     <td>${s.storage_path ? `<button class="mc-btn" style="padding:.3rem .6rem;font-size:.66rem;" onclick="event.stopPropagation();cfOpenDoc('${mcEsc(s.storage_path)}')">PDF</button>` : ''}</td>
   </tr>`).join('')}</tbody></table></div>`;
 }
@@ -7096,11 +7096,11 @@ function mcRenderTransactions(data) {
     <th>Paid At</th><th>Client</th><th>Engagement</th><th>Amount</th><th>Square Invoice</th><th>Payment ID</th><th></th>
   </tr></thead><tbody>${list.map(t => `<tr onclick="mcGoToCase('${mcEsc(t.client_slug)}')">
     <td>${mcFmtDateTime(t.paid_at)}</td>
-    <td><div class="name-cell">${mcEsc(t.client_name || '—')}</div><div class="meta-cell">${mcEsc(t.client_contact || '')}</div></td>
-    <td>${mcEsc(t.engagement_name || '—')}</td>
+    <td><div class="name-cell">${mcEsc(t.client_name || '-')}</div><div class="meta-cell">${mcEsc(t.client_contact || '')}</div></td>
+    <td>${mcEsc(t.engagement_name || '-')}</td>
     <td class="amt-cell" style="color:#10B981;">${mcFmtUSD(t.amount_usd)}${t.is_test ? '<span class="test-tag">TEST</span>' : ''}</td>
-    <td><span class="id-cell">${mcEsc((t.square_invoice_id||'').slice(-12) || '—')}</span></td>
-    <td><span class="id-cell">${mcEsc((t.square_payment_id||'').slice(0,16) || '—')}</span></td>
+    <td><span class="id-cell">${mcEsc((t.square_invoice_id||'').slice(-12) || '-')}</span></td>
+    <td><span class="id-cell">${mcEsc((t.square_payment_id||'').slice(0,16) || '-')}</span></td>
     <td>${t.square_invoice_url ? `<a class="mc-btn" style="padding:.3rem .6rem;font-size:.66rem;" href="${mcEsc(t.square_invoice_url)}" target="_blank" rel="noopener" onclick="event.stopPropagation()">view</a>` : ''}</td>
   </tr>`).join('')}</tbody></table></div>`;
 }
@@ -7187,7 +7187,7 @@ function mcFunnelBiggestDrop(stages) {
     const drop = 1 - stages[i].count / prev;
     if (drop > worstPct) { worstPct = drop; worst = `${stages[i-1].stage} → ${stages[i].stage}`; }
   }
-  return worst ? `${(worstPct*100).toFixed(0)}%` : '—';
+  return worst ? `${(worstPct*100).toFixed(0)}%` : '-';
 }
 
 // ════════════════════════════════════════════════════════════════
@@ -7201,8 +7201,8 @@ function mcRenderLeadSources(data) {
   document.getElementById('mc-lead-sources-stats').innerHTML = [
     mcStatTile('Total Contacts', totalContacts, ''),
     mcStatTile('Sources', sources.length, ''),
-    mcStatTile('Top Source', sources[0]?.source || '—', sources[0] ? `${sources[0].contacts} contacts` : '', 'blue'),
-    mcStatTile('Best Conversion', sources.reduce((b,s) => s.conversion_pct > (b?.conversion_pct||0) ? s : b, null)?.source || '—', '', 'green'),
+    mcStatTile('Top Source', sources[0]?.source || '-', sources[0] ? `${sources[0].contacts} contacts` : '', 'blue'),
+    mcStatTile('Best Conversion', sources.reduce((b,s) => s.conversion_pct > (b?.conversion_pct||0) ? s : b, null)?.source || '-', '', 'green'),
   ].join('');
   if (!sources.length) {
     document.getElementById('mc-lead-sources-body').innerHTML = '<div class="mc-empty"><div class="ico">🎯</div><h3>No source data yet</h3><p>Sources auto-populate from Calendly, manual entry, or referral fields on mc_clients.</p></div>';
@@ -7217,7 +7217,7 @@ function mcRenderLeadSources(data) {
     <td><span class="mc-pill mc-pill-green">${s.paid}</span></td>
     <td class="amt-cell">${mcFmtUSD(s.revenue)}</td>
     <td><strong style="color:${s.conversion_pct > 30 ? '#10B981' : s.conversion_pct > 10 ? '#F97316' : '#94A3B8'};">${s.conversion_pct}%</strong></td>
-    <td class="amt-cell">${s.paid ? mcFmtUSD(s.revenue/s.paid) : '—'}</td>
+    <td class="amt-cell">${s.paid ? mcFmtUSD(s.revenue/s.paid) : '-'}</td>
   </tr>`).join('')}</tbody></table></div>`;
 }
 
@@ -7248,7 +7248,7 @@ function mcRenderTrafficSnapshot() {
     mcStatTile('Tracked Contacts', contacts.length, 'in CRM'),
     mcStatTile('Activity (7d)', last7Days.length, 'pipeline events'),
     mcStatTile('Form Touches', formActivity.length, 'sign / submit / test'),
-    mcStatTile('External', '—', 'open in Netlify Analytics'),
+    mcStatTile('External', '-', 'open in Netlify Analytics'),
   ];
   const body = `<div class="mc-card" style="margin-bottom:1rem;"><div class="mc-card-head"><h4>Server-Side Activity Window</h4><span style="font-family:'DM Mono',monospace;font-size:.66rem;color:#94A3B8;">last 100 events</span></div><div class="mc-card-body">
     <p style="font-size:.86rem;color:#475569;line-height:1.5;margin:0 0 .85rem;">Detailed page-level traffic data lives in Netlify Analytics + Google Analytics. Below are the in-app events that actually impact revenue (form submits, sign events, payment events) so you can correlate marketing spend with pipeline movement.</p>
@@ -7308,9 +7308,9 @@ function mcRenderSubscribers(data) {
   document.getElementById('mc-subscribers-body').innerHTML = `<div class="mc-table-wrap"><table class="mc-table"><thead><tr>
     <th>Email</th><th>Name</th><th>Company</th><th>Source</th><th>Engagements</th><th>Pipeline</th><th>CC List</th><th>Email</th>
   </tr></thead><tbody>${list.map(c => `<tr onclick="mcGoToCase('${mcEsc(c.slug)}')">
-    <td><a href="mailto:${mcEsc(c.primary_contact_email)}" style="color:#2563EB;text-decoration:none;" onclick="event.stopPropagation()">${mcEsc(c.primary_contact_email||'—')}</a></td>
-    <td>${mcEsc(c.primary_contact_name||'—')}</td>
-    <td>${mcEsc(c.legal_name||'—')}</td>
+    <td><a href="mailto:${mcEsc(c.primary_contact_email)}" style="color:#2563EB;text-decoration:none;" onclick="event.stopPropagation()">${mcEsc(c.primary_contact_email||'-')}</a></td>
+    <td>${mcEsc(c.primary_contact_name||'-')}</td>
+    <td>${mcEsc(c.legal_name||'-')}</td>
     <td>${mcPill(c.source)}</td>
     <td>${c.engagements_count || 0}</td>
     <td class="amt-cell">${mcFmtUSD(c.engagement_total_usd)}</td>
@@ -7343,11 +7343,11 @@ function mcRenderFormPanel(formType, panelKey) {
     <th>Doc ID</th><th>Client</th><th>Status</th><th>Signed</th><th>Executed</th><th>IP</th><th></th>
   </tr></thead><tbody>${list.slice(0, 25).map(s => `<tr onclick="mcGoToCase('${mcEsc(s.client_slug)}')">
     <td><span class="id-cell">${mcEsc(s.doc_id)}</span></td>
-    <td>${mcEsc(s.client_name || '—')}</td>
+    <td>${mcEsc(s.client_name || '-')}</td>
     <td>${mcPill(s.status)}</td>
     <td>${mcFmtDate(s.client_signed_at)}</td>
     <td>${mcFmtDate(s.executed_at)}</td>
-    <td><span style="font-family:'DM Mono',monospace;font-size:.66rem;color:#94A3B8;">${mcEsc(s.client_ip||'—')}</span></td>
+    <td><span style="font-family:'DM Mono',monospace;font-size:.66rem;color:#94A3B8;">${mcEsc(s.client_ip||'-')}</span></td>
     <td>${s.storage_path ? `<button class="mc-btn" style="padding:.3rem .6rem;font-size:.66rem;" onclick="event.stopPropagation();cfOpenDoc('${mcEsc(s.storage_path)}')">PDF</button>` : ''}</td>
   </tr>`).join('')}</tbody></table></div>`;
 }
@@ -7417,9 +7417,9 @@ function renderLeads(leads) {
     <tr>
       <td><strong>${esc(l.firstName)} ${esc(l.lastName || '')}</strong></td>
       <td class="td-mono td-muted">${esc(l.email)}</td>
-      <td>${esc(l.company || '—')}</td>
-      <td class="td-muted">${esc(l.revenue || '—')}</td>
-      <td style="max-width:180px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;" class="td-muted" title="${esc(l.challenge || '')}">${esc(l.challenge || '—')}</td>
+      <td>${esc(l.company || '-')}</td>
+      <td class="td-muted">${esc(l.revenue || '-')}</td>
+      <td style="max-width:180px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;" class="td-muted" title="${esc(l.challenge || '')}">${esc(l.challenge || '-')}</td>
       <td class="td-mono td-muted">${fmtDate(l.registeredAt)}</td>
       <td><button class="btn btn-outline" onclick="openLeadDrawer(${i})">View</button></td>
     </tr>
@@ -7436,8 +7436,8 @@ function renderDashLeads(leads) {
     <tr>
       <td><strong>${esc(l.firstName)} ${esc(l.lastName || '')}</strong></td>
       <td class="td-mono td-muted">${esc(l.email)}</td>
-      <td>${esc(l.company || '—')}</td>
-      <td class="td-muted">${esc(l.revenue || '—')}</td>
+      <td>${esc(l.company || '-')}</td>
+      <td class="td-muted">${esc(l.revenue || '-')}</td>
       <td class="td-mono td-muted">${fmtDate(l.registeredAt)}</td>
     </tr>
   `).join('');
@@ -7460,9 +7460,9 @@ function openLeadDrawer(idx) {
   document.getElementById('drawer-content').innerHTML = `
     <div class="detail-field"><div class="detail-label">Full Name</div><div class="detail-value">${esc(l.firstName)} ${esc(l.lastName || '')}</div></div>
     <div class="detail-field"><div class="detail-label">Email</div><div class="detail-value mono">${esc(l.email)}</div></div>
-    <div class="detail-field"><div class="detail-label">Company</div><div class="detail-value">${esc(l.company || '—')}</div></div>
-    <div class="detail-field"><div class="detail-label">Revenue Range</div><div class="detail-value">${esc(l.revenue || '—')}</div></div>
-    <div class="detail-field"><div class="detail-label">Biggest Challenge</div><div class="detail-value">${esc(l.challenge || '—')}</div></div>
+    <div class="detail-field"><div class="detail-label">Company</div><div class="detail-value">${esc(l.company || '-')}</div></div>
+    <div class="detail-field"><div class="detail-label">Revenue Range</div><div class="detail-value">${esc(l.revenue || '-')}</div></div>
+    <div class="detail-field"><div class="detail-label">Biggest Challenge</div><div class="detail-value">${esc(l.challenge || '-')}</div></div>
     <div class="detail-field"><div class="detail-label">Registered</div><div class="detail-value mono">${new Date(l.registeredAt).toLocaleString()}</div></div>
     <div class="detail-field"><div class="detail-label">Source</div><div class="detail-value td-muted">${esc(l.source || 'webinar-landing')}</div></div>
     <hr style="border:none;border-top:1px solid var(--border);margin:20px 0;">
@@ -7497,7 +7497,7 @@ function renderQueue(queue) {
       <td>${EMAIL_LABELS[q.emailType] || esc(q.emailType)}</td>
       <td class="td-mono td-muted">${fmtDate(q.sendAt)}</td>
       <td><span class="tag ${q.sent ? 'tag-sent' : q.error ? 'tag-error' : 'tag-pending'}">${q.sent ? 'Sent' : q.error ? 'Error' : 'Pending'}</span></td>
-      <td class="td-mono td-muted">${q.sentAt ? fmtDate(q.sentAt) : '—'}</td>
+      <td class="td-mono td-muted">${q.sentAt ? fmtDate(q.sentAt) : '-'}</td>
     </tr>
   `).join('');
 }
@@ -7535,7 +7535,7 @@ function renderDocs(docs) {
     <tr>
       <td>${fileIcon(d.name)} <strong>${esc(d.name)}</strong></td>
       <td><span class="tag tag-pending">${esc(d.category || 'other')}</span></td>
-      <td class="td-muted td-mono">${d.size || '—'}</td>
+      <td class="td-muted td-mono">${d.size || '-'}</td>
       <td class="td-mono td-muted">${fmtDate(d.uploadedAt)}</td>
       <td class="td-mono" style="font-size:11px;"><a href="${esc(d.url)}" style="color:var(--gold)">${esc(d.url)}</a></td>
       <td>
@@ -7869,7 +7869,7 @@ function esc(s) {
   return String(s || '').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
 }
 function fmtDate(iso) {
-  if (!iso) return '—';
+  if (!iso) return '-';
   try {
     return new Date(iso).toLocaleDateString('en-US', { month:'short', day:'numeric', year:'numeric', hour:'2-digit', minute:'2-digit' });
   } catch { return iso; }
@@ -7927,7 +7927,7 @@ function setLoading(id, msg = 'AI is analyzing') {
     <div class="card">
       <div class="ai-loading">
         <div class="ai-loading-text ai-loading-dots">${msg}</div>
-        <div style="font-size:11px;color:var(--dim);margin-top:8px;font-family:'DM Mono',monospace;">This takes 10–20 seconds</div>
+        <div style="font-size:11px;color:var(--dim);margin-top:8px;font-family:'DM Mono',monospace;">This takes 10-20 seconds</div>
       </div>
     </div>`;
 }
@@ -7989,7 +7989,7 @@ List 8 specific sub-audiences with:
 - Why they're a fit
 - Specific accounts/hashtags/communities where they hang out
 SECTION 4: CONTENT TRIGGERS
-10 specific topics/angles that will attract this exact audience. Not generic — be specific to their role and pains.
+10 specific topics/angles that will attract this exact audience. Not generic, be specific to their role and pains.
 SECTION 5: OUTREACH INTELLIGENCE
 How to identify and attract this audience without paid ads:
 - Engagement signals to watch for
@@ -8052,7 +8052,7 @@ TRIGGER MOMENTS (when they're most likely to hire/engage)
 - 5 specific trigger events that push them to take action
 - How to create content that appears right before those moments
 EMOTIONAL VOCABULARY
-30 specific words and phrases this audience uses — use these in your content to signal you understand them`, 2000);
+30 specific words and phrases this audience uses, use these in your content to signal you understand them`, 2000);
     renderOutput('aud-output', 'PAIN-TO-CONTENT MAP', result);
   } catch(e) { renderOutput('aud-output', 'Error', e.message); }
 }
@@ -8092,7 +8092,7 @@ Based on my differentiator (${val('comp-diff') || 'not specified'}):
 - How to position myself as the clear alternative
 - The narrative that beats their narrative
 COUNTER-POSITIONING STRATEGY
-How to make my content make theirs look incomplete — without mentioning them`, 2200);
+How to make my content make theirs look incomplete, without mentioning them`, 2200);
     renderOutput('comp-output', 'COMPETITOR INTELLIGENCE REPORT', result);
   } catch(e) { renderOutput('comp-output', 'Error', e.message); }
 }
@@ -8112,11 +8112,11 @@ For each gap:
 - The content opportunity for me
 - Sample post angle/hook
 UNDERSERVED AUDIENCE SEGMENTS
-5 audience sub-groups who exist in this niche but are being ignored by competitors — with content strategy for each.
+5 audience sub-groups who exist in this niche but are being ignored by competitors, with content strategy for each.
 THE "BLUE OCEAN" CONTENT ANGLES
-5 completely differentiated content approaches that no one in this niche is doing — that would attract massive engagement.
+5 completely differentiated content approaches that no one in this niche is doing, that would attract massive engagement.
 FORMAT GAPS
-Content formats nobody in this niche is fully exploiting — and how to use them first.`, 1800);
+Content formats nobody in this niche is fully exploiting, and how to use them first.`, 1800);
     renderOutput('comp-output', 'CONTENT GAP ANALYSIS', result);
   } catch(e) { renderOutput('comp-output', 'Error', e.message); }
 }
@@ -8373,7 +8373,7 @@ Return ONLY valid JSON (no markdown) in this exact format:
       </div>
       <div class="output-wrap">
         <div class="output-head">
-          <span class="output-title">✍️ AI REWRITE — OPTIMIZED VERSION</span>
+          <span class="output-title">✍️ AI REWRITE, OPTIMIZED VERSION</span>
           <button class="btn btn-ghost btn-sm" onclick="navigator.clipboard.writeText(document.getElementById('viral-rewrite').innerText);toast('Copied ✓')">📋 COPY</button>
         </div>
         <div class="output-body" id="viral-rewrite">${escHtml(parsed.rewrite || '')}</div>
@@ -8525,7 +8525,7 @@ Return ONLY valid JSON (no markdown) in this format:
           <div class="stat-sub">${parsed.summary || ''}</div>
         </div>
         <div class="card">
-          <div class="card-header"><div class="card-title">Quick Wins — Do These Today</div></div>
+          <div class="card-header"><div class="card-title">Quick Wins, Do These Today</div></div>
           <div class="card-body" style="display:grid;gap:8px;">
             ${(parsed.quickWins||[]).map(w => `<div style="display:flex;gap:8px;font-size:12px;"><span style="color:var(--gold);">→</span><span style="color:var(--text);">${escHtml(w)}</span></div>`).join('')}
             ${parsed.keywordStrategy ? `<div style="margin-top:8px;padding:10px;background:var(--black);font-size:11px;color:var(--dim);">🔍 ${escHtml(parsed.keywordStrategy)}</div>` : ''}
@@ -8538,7 +8538,7 @@ Return ONLY valid JSON (no markdown) in this format:
       html += `
         <div class="audit-section">
           <div class="audit-section-head" onclick="toggleAudit(this)">
-            <span class="audit-section-title">${escHtml(s.title)} <span style="color:var(--dim);font-weight:400;">— ${s.score}/${s.max}</span></span>
+            <span class="audit-section-title">${escHtml(s.title)} <span style="color:var(--dim);font-weight:400;">, ${s.score}/${s.max}</span></span>
             <span class="audit-score-pill score-${sc}">${s.score >= 8 ? '✓ STRONG' : s.score >= 6 ? '~ NEEDS WORK' : '✗ WEAK'}</span>
           </div>
           <div class="audit-section-body">
@@ -8708,24 +8708,24 @@ async function generateReply() {
   const typeInstructions = {
     positive:   'This is a positive/supportive comment. Reply warmly, add an extra insight to deepen the conversation, and ask a question to extend engagement.',
     question:   'This is a genuine question. Answer it directly and insightfully in 2-3 sentences. Add a follow-up question back to them.',
-    pushback:   'This is a disagreement or pushback. Acknowledge their perspective with respect, hold your ground with a new angle, and invite further discussion — don\'t cave but don\'t be defensive.',
-    short:      'This is a short one-liner comment (like "Great post!" or "🔥"). Reply in a way that extends the conversation and adds value — don\'t just say thanks.',
+    pushback:   'This is a disagreement or pushback. Acknowledge their perspective with respect, hold your ground with a new angle, and invite further discussion, don\'t cave but don\'t be defensive.',
+    short:      'This is a short one-liner comment (like "Great post!" or "🔥"). Reply in a way that extends the conversation and adds value, don\'t just say thanks.',
     spam:       'This looks like a spammy or promotional comment. Write a brief, polite, non-engaging reply that doesn\'t reward the spam or embarrass the commenter publicly.'
   };
   try {
     const result = await callEngageClaude(`You are ${name}, a ${role}. You just posted on ${platform}${topic ? ` about: "${topic}"` : ''}.
 Someone${commenter ? ` named ${commenter}` : ''} commented:
 "${comment}"
-COMMENT TYPE: ${ctype} — ${typeInstructions[ctype]}
+COMMENT TYPE: ${ctype}, ${typeInstructions[ctype]}
 TONE: ${tone}
 ${cta ? `OPTIONAL CTA TO WEAVE IN (only if natural): ${cta}` : ''}
 Write 4 different reply options. Each reply must:
-- Sound completely human and authentic — NOT like AI
+- Sound completely human and authentic, NOT like AI
 - Be conversational, not corporate
 - Be the right length for ${platform} (LinkedIn: 2-4 sentences max, Instagram: 1-3 sentences)
 - Use ${commenter ? `"${commenter}"` : 'their first name if known'} naturally if it fits
 - End with a question that invites them to reply again (except spam type)
-Return ONLY valid JSON — no markdown, no extra text:
+Return ONLY valid JSON, no markdown, no extra text:
 {
   "replies": [
     { "label": "Warm & Insightful", "text": "..." },
@@ -8773,7 +8773,7 @@ function copyReply(i, text) {
       if (label) { label.textContent = 'CLICK TO COPY'; label.style.color = ''; }
     }, 2000);
   }
-  engToast('Reply copied — paste it now ✓');
+  engToast('Reply copied, paste it now ✓');
 }
 function markReplied(i) {
   repliesReplied++;
@@ -8897,7 +8897,7 @@ function startTimer() {
       engToast('⚠ 60-minute window closed. Reply window has ended.');
     }
   }, 1000);
-  engToast('⏱ Timer started — reply to all comments now!');
+  engToast('⏱ Timer started, reply to all comments now!');
 }
 function resetTimer() {
   clearInterval(timerInterval);
@@ -8953,20 +8953,20 @@ async function regenerateSingle(i) {
     engToast('Reply regenerated ↺');
   } catch(e) {
     if (card) card.style.opacity = '1';
-    engToast('Regenerate failed — try again');
+    engToast('Regenerate failed, try again');
   }
 }
 </script>
 <script>
 // ═══════════════════════════════════════════════════════════════
-// COURSES ACADEMY — Admin JS
+// COURSES ACADEMY, Admin JS
 // ═══════════════════════════════════════════════════════════════
 const COURSE_PRICES = {
-  // Live courses — $248 founding class price, $28 retake
+  // Live courses, $248 founding class price, $28 retake
   cmo:    {title:'CMO Mastery',                         price:248, retake:28, lessons:50},
   cfo:    {title:'CFO Mastery',                         price:248, retake:28, lessons:50},
   coo:    {title:'COO Mastery',                         price:248, retake:28, lessons:50},
-  // Coming soon (future prices shown for planning — not yet live)
+  // Coming soon (future prices shown for planning, not yet live)
   ceo:    {title:'CEO Mastery',                         price:248, retake:28, lessons:50},
   cto:    {title:'CTO Mastery',                         price:248, retake:28},
   cpo:    {title:'Chief Product Officer Mastery',       price:248, retake:28},
@@ -9053,14 +9053,14 @@ function renderVotesTable() {
   const total = sorted.reduce((s,[,v])=>s+v,0);
   document.getElementById('v-total').textContent = total;
   document.getElementById('v-courses').textContent = sorted.length;
-  document.getElementById('v-top').textContent = sorted[0] ? (ALL_COURSE_TITLES[sorted[0][0]]||sorted[0][0]) : '—';
+  document.getElementById('v-top').textContent = sorted[0] ? (ALL_COURSE_TITLES[sorted[0][0]]||sorted[0][0]) : '-';
   if (!sorted.length) { tbody.innerHTML='<tr><td colspan="6" style="text-align:center;color:var(--dim);padding:32px;">No votes yet.</td></tr>'; return; }
   tbody.innerHTML = sorted.map(([id,votes],i) => {
     const rank = i===0?'🥇':i===1?'🥈':i===2?'🥉':`#${i+1}`;
     return `<tr>
       <td style="font-weight:700;color:var(--gold);">${rank}</td>
       <td style="font-weight:600;">${ALL_COURSE_TITLES[id]||id}</td>
-      <td style="color:var(--dim);font-size:11px;">${ALL_COURSE_CATS[id]||'—'}</td>
+      <td style="color:var(--dim);font-size:11px;">${ALL_COURSE_CATS[id]||'-'}</td>
       <td><span style="background:rgba(37,99,235,0.12);color:#2563EB;padding:3px 10px;font-weight:700;font-size:13px;">${votes}</span></td>
       <td>${(nc[id]||0)>0?`<span style="color:#7eb87e;">${nc[id]} signed up</span>`:'<span style="color:var(--dim);">0</span>'}</td>
       <td><button onclick="openLaunchModal('${id}')" style="background:none;border:1px solid rgba(37,99,235,0.3);color:#2563EB;padding:5px 12px;font-size:10px;font-weight:700;letter-spacing:1px;cursor:pointer;">🚀 LAUNCH</button></td>
@@ -9072,7 +9072,7 @@ async function loadNotifyData() {
   const adminSecret = (document.getElementById('settings-admin-secret')?.value || _ADMIN_SECRET);
   try {
     const r = await fetch('/.netlify/functions/admin-data?type=notify');
-    if (!r.ok) { document.getElementById('notify-tbody').innerHTML='<tr><td colspan="5" style="text-align:center;color:#e05555;padding:32px;">Error — check Admin Secret in Settings</td></tr>'; return; }
+    if (!r.ok) { document.getElementById('notify-tbody').innerHTML='<tr><td colspan="5" style="text-align:center;color:#e05555;padding:32px;">Error, check Admin Secret in Settings</td></tr>'; return; }
     ALL_NOTIFY = (await r.json()).signups || [];
   } catch(e) { ALL_NOTIFY = []; }
   renderNotifyTable();
@@ -9094,7 +9094,7 @@ function renderNotifyTable() {
     ? sumRows.map(([id,info]) => `<tr>
         <td style="font-weight:600;">${ALL_COURSE_TITLES[id]||id}</td>
         <td><span style="color:#2563EB;font-weight:700;">${info.count}</span></td>
-        <td style="color:var(--dim);font-size:11px;">${info.last?new Date(info.last).toLocaleDateString():'—'}</td>
+        <td style="color:var(--dim);font-size:11px;">${info.last?new Date(info.last).toLocaleDateString():'-'}</td>
         <td>${info.notified?'<span style="color:#7eb87e;">✓ Sent</span>':'<span style="color:var(--dim);">Not yet</span>'}</td>
         <td><button onclick="openLaunchModal('${id}')" style="background:none;border:1px solid rgba(37,99,235,0.3);color:#2563EB;padding:5px 12px;font-size:10px;font-weight:700;letter-spacing:1px;cursor:pointer;">🚀 FIRE</button></td>
       </tr>`).join('')
@@ -9110,7 +9110,7 @@ function filterNotifyList() {
         <td style="font-weight:600;">${s.name}</td>
         <td><a href="mailto:${s.email}" style="color:var(--gold);">${s.email}</a></td>
         <td style="font-size:11px;">${ALL_COURSE_TITLES[s.courseId]||s.courseId}</td>
-        <td style="color:var(--dim);font-size:11px;">${s.signedUpAt?new Date(s.signedUpAt).toLocaleDateString():'—'}</td>
+        <td style="color:var(--dim);font-size:11px;">${s.signedUpAt?new Date(s.signedUpAt).toLocaleDateString():'-'}</td>
         <td>${s.launchNotifiedAt?'<span style="color:#7eb87e;">✓ Notified</span>':'<span style="color:var(--dim);">Waiting</span>'}</td>
       </tr>`).join('')
     : '<tr><td colspan="5" style="text-align:center;color:var(--dim);padding:24px;">No results.</td></tr>';
@@ -9131,7 +9131,7 @@ function closeLaunchModal(e) {
   document.getElementById('launch-confirm-modal').style.display='none';
 }
 async function confirmLaunch() {
-  // Ensure secret is loaded — fetch it now if not already available
+  // Ensure secret is loaded, fetch it now if not already available
   if (!_ADMIN_SECRET) await fetchAdminSecret();
   const adminSecret = (document.getElementById('settings-admin-secret')?.value || _ADMIN_SECRET);
   const previewUrl  = document.getElementById('launch-preview-url').value.trim();
@@ -9186,9 +9186,9 @@ function renderIntlTable(list) {
       <td style="font-weight:600">${escHtml(e.name)}</td>
       <td style="color:var(--dim)">${escHtml(e.email)}</td>
       <td>${escHtml(e.country||'?')}</td>
-      <td style="color:var(--dim)">${escHtml(e.company||'—')}</td>
-      <td style="color:var(--dim);font-size:11px;max-width:180px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;" title="${escHtml(e.message||'')}">${escHtml(e.message||'—')}</td>
-      <td style="color:var(--dim);font-size:11px">${e.submittedAt ? new Date(e.submittedAt).toLocaleDateString() : '—'}</td>
+      <td style="color:var(--dim)">${escHtml(e.company||'-')}</td>
+      <td style="color:var(--dim);font-size:11px;max-width:180px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;" title="${escHtml(e.message||'')}">${escHtml(e.message||'-')}</td>
+      <td style="color:var(--dim);font-size:11px">${e.submittedAt ? new Date(e.submittedAt).toLocaleDateString() : '-'}</td>
       <td>${e.approved
         ? '<span style="color:#4CAF72;font-size:11px;font-weight:700;letter-spacing:1px;">✓ APPROVED</span>'
         : '<span style="color:#f0a050;font-size:11px;font-weight:700;letter-spacing:1px;">PENDING</span>'
@@ -9267,7 +9267,7 @@ function renderCoursesOverview() {
   const completion = total > 0 ? Math.round((grads/total)*100) : 0;
   const avgGpa = ALL_GRADUATES.length > 0
     ? (ALL_GRADUATES.reduce((s,g)=>s+(parseFloat(g.gpa)||0),0)/ALL_GRADUATES.length).toFixed(1)
-    : '—';
+    : '-';
   // Estimate revenue
   let totalRev = 0;
   ALL_ENROLLMENTS.forEach(e => {
@@ -9297,7 +9297,7 @@ function renderCoursesOverview() {
     const meta  = COURSE_PRICES[id];
     const stats = byId[id] || {enrollments:0,revenue:0};
     const gList = gradsByC[id] || [];
-    const avgG  = gList.length > 0 ? (gList.reduce((s,g)=>s+(parseFloat(g.gpa)||0),0)/gList.length).toFixed(1) : '—';
+    const avgG  = gList.length > 0 ? (gList.reduce((s,g)=>s+(parseFloat(g.gpa)||0),0)/gList.length).toFixed(1) : '-';
     return `<tr>
       <td><strong>${meta.title}</strong></td>
       <td style="color:var(--gold);">$${meta.price.toLocaleString()}</td>
@@ -9326,7 +9326,7 @@ function renderEnrollmentsTable() {
   const paged = filtered.slice(enrollPage * ENROLL_PAGE_SIZE, (enrollPage + 1) * ENROLL_PAGE_SIZE);
   document.getElementById('enroll-count').textContent =
     `${total} of ${ALL_ENROLLMENTS.length} enrollments` +
-    (totalPages > 1 ? ` — page ${enrollPage+1} of ${totalPages}` : '');
+    (totalPages > 1 ? `, page ${enrollPage+1} of ${totalPages}` : '');
   const tbody = document.getElementById('enrollments-tbody');
   if (!paged.length) {
     tbody.innerHTML = '<tr><td colspan="7" style="text-align:center;color:var(--dim);padding:32px;">No enrollments found</td></tr>';
@@ -9338,12 +9338,12 @@ function renderEnrollmentsTable() {
       ? Math.round((e.progress.completedLessons.length / totalLessons) * 100) + '%'
       : '0%';
     const meta = COURSE_PRICES[e.courseId];
-    const enrolled = e.enrolledAt ? new Date(e.enrolledAt).toLocaleDateString() : '—';
+    const enrolled = e.enrolledAt ? new Date(e.enrolledAt).toLocaleDateString() : '-';
     const hasFinal = e.progress?.finalScore != null;
     const key = `${e.email}|${e.courseId}`;
     return `<tr>
-      <td><strong>${escHtml(e.name||'—')}</strong></td>
-      <td><a href="mailto:${escHtml(e.email||'')}" style="color:var(--gold);">${escHtml(e.email||'—')}</a></td>
+      <td><strong>${escHtml(e.name||'-')}</strong></td>
+      <td><a href="mailto:${escHtml(e.email||'')}" style="color:var(--gold);">${escHtml(e.email||'-')}</a></td>
       <td style="font-size:11px;">${meta?.title||e.courseId}</td>
       <td style="font-size:11px;color:var(--dim);">${enrolled}</td>
       <td><div style="background:var(--border);height:4px;width:80px;display:inline-block;vertical-align:middle;margin-right:6px;"><div style="background:var(--gold);height:100%;width:${pct};"></div></div>${pct}</td>
@@ -9362,7 +9362,7 @@ function renderEnrollmentsTable() {
 }
 async function deleteEnrollment(key) {
   const [email, courseId] = key.split('|');
-  if (!confirm(`Delete enrollment for ${email} — ${courseId}?\n\nThis cannot be undone.`)) return;
+  if (!confirm(`Delete enrollment for ${email}, ${courseId}?\n\nThis cannot be undone.`)) return;
   try {
     const r = await fetch('https://academy.markcmo.com/.netlify/functions/course-enroll', {
       method: 'POST',
@@ -9402,14 +9402,14 @@ function renderGraduatesTable() {
     return;
   }
   tbody.innerHTML = ALL_GRADUATES.map(g => {
-    const date = g.completedAt ? new Date(g.completedAt).toLocaleDateString() : '—';
+    const date = g.completedAt ? new Date(g.completedAt).toLocaleDateString() : '-';
     const meta = COURSE_PRICES[g.course];
     return `<tr>
-      <td><strong>${escHtml(g.name||'—')}</strong>${g.linkedin?` <a href="${escHtml(g.linkedin)}" target="_blank" style="color:var(--gold);font-size:11px;">🔗</a>`:''}</td>
+      <td><strong>${escHtml(g.name||'-')}</strong>${g.linkedin?` <a href="${escHtml(g.linkedin)}" target="_blank" style="color:var(--gold);font-size:11px;">🔗</a>`:''}</td>
       <td style="font-size:11px;">${meta?.title||g.course}</td>
-      <td style="color:var(--gold);font-weight:700;">${g.gpa||'—'}</td>
-      <td style="font-size:11px;font-style:italic;color:var(--dim);">${g.designation||'—'}</td>
-      <td style="font-family:'DM Mono',monospace;font-size:10px;color:var(--dim);">${g.diplomaNumber||'—'}</td>
+      <td style="color:var(--gold);font-weight:700;">${g.gpa||'-'}</td>
+      <td style="font-size:11px;font-style:italic;color:var(--dim);">${g.designation||'-'}</td>
+      <td style="font-family:'DM Mono',monospace;font-size:10px;color:var(--dim);">${g.diplomaNumber||'-'}</td>
       <td style="font-size:11px;color:var(--dim);">${date}</td>
     </tr>`;
   }).join('');
@@ -9424,7 +9424,7 @@ function renderRevenueTable() {
     const meta = COURSE_PRICES[e.courseId];
     if (!meta) return;
     // Only count revenue that was explicitly recorded via paidAmount.
-    // Legacy records (no paidAmount field) = $0 — we cannot confirm payment.
+    // Legacy records (no paidAmount field) = $0, we cannot confirm payment.
     const val = (typeof e.paidAmount === 'number') ? e.paidAmount : 0;
     totalRev += val;
     if (e.isRetake) totalRetakeRev += val;
@@ -9476,10 +9476,10 @@ function escHtml(str) {
 <div id="launch-confirm-modal" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,0.85);z-index:99999;align-items:center;justify-content:center;" onclick="closeLaunchModal(event)">
 <div style="background:#F8FAFC;border:1px solid rgba(37,99,235,0.35);padding:36px;max-width:500px;width:90%;position:relative;box-shadow:0 20px 60px rgba(0,0,0,0.8);">
 <div style="font-size:10px;font-weight:900;letter-spacing:3px;color:#2563EB;margin-bottom:14px;">🚀 FIRE LAUNCH EMAILS</div>
-<div style="font-size:20px;font-weight:700;color:#fff;margin-bottom:8px;" id="launch-modal-title">—</div>
-<div style="font-size:13px;color:#666;line-height:1.6;margin-bottom:24px;" id="launch-modal-body">—</div>
+<div style="font-size:20px;font-weight:700;color:#fff;margin-bottom:8px;" id="launch-modal-title">-</div>
+<div style="font-size:13px;color:#666;line-height:1.6;margin-bottom:24px;" id="launch-modal-body">-</div>
 <div style="margin-bottom:20px;">
-<label style="font-size:10px;letter-spacing:2px;color:#555;font-weight:700;display:block;margin-bottom:8px;">PREVIEW URL (optional — defaults to academy course page)</label>
+<label style="font-size:10px;letter-spacing:2px;color:#555;font-weight:700;display:block;margin-bottom:8px;">PREVIEW URL (optional, defaults to academy course page)</label>
 <input type="text" id="launch-preview-url" placeholder="https://academy.markcmo.com/preview?course=..."
 style="width:100%;background:#F8FAFC;border:1px solid #2a2a2a;color:#e8e0e0;padding:10px 12px;font-size:12px;outline:none;box-sizing:border-box;">
 </div>

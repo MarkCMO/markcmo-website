@@ -1,4 +1,4 @@
-// course-graduate.js — Save & retrieve graduates
+// course-graduate.js, Save & retrieve graduates
 const https = require('https');
 
 const BIN_ID = process.env.JSONBIN_GRADS_BIN_ID;
@@ -38,7 +38,7 @@ exports.handler = async (event) => {
 
   if (event.httpMethod === 'OPTIONS') return { statusCode: 200, headers, body: '' };
 
-  // GET — return all graduates
+  // GET, return all graduates
   if (event.httpMethod === 'GET') {
     try {
       const data = await jsonbin('GET');
@@ -48,7 +48,7 @@ exports.handler = async (event) => {
     }
   }
 
-  // POST — add new graduate
+  // POST, add new graduate
   if (event.httpMethod === 'POST') {
     try {
       const grad = JSON.parse(event.body);
@@ -60,7 +60,7 @@ exports.handler = async (event) => {
         current = { graduates: [] };
       }
 
-      // Prevent duplicates — same name + course
+      // Prevent duplicates, same name + course
       const isDup = current.graduates.some(g =>
         g.name === grad.name && g.course === grad.course
       );

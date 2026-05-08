@@ -111,7 +111,7 @@ exports.handler = async (event) => {
       next_steps: [
         'Save this signature_key as SQUARE_WEBHOOK_SIGNATURE_KEY in Netlify env (all contexts).',
         'Re-deploy so the function picks it up.',
-        'Test by paying a $1 invoice — the webhook should fire and flip mc_invoices.paid_at automatically.',
+        'Test by paying a $1 invoice, the webhook should fire and flip mc_invoices.paid_at automatically.',
       ],
     }),
   };
