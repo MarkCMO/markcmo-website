@@ -21,7 +21,7 @@
 //
 // Bootstraps on first call by merging _film-rolodex-seed.js into Blobs.
 
-const { getStore } = require('@netlify/blobs');
+const { getStore } = require('./_blobs_shim');
 const { COMPANIES: SEED_COMPANIES, PEOPLE: SEED_PEOPLE } = require('./_film-rolodex-seed');
 
 const COOKIE_NAME = 'mcadmin_session';
@@ -108,9 +108,9 @@ async function loadStore() {
   if (!companies) { companies = SEED_COMPANIES.slice(); bootstrapped = true; }
   if (!people)    { people    = SEED_PEOPLE.slice();    bootstrapped = true; }
   if (bootstrapped) {
-    await store.setJSON('companies', companies);
-    await store.setJSON('people', people);
-    await store.setJSON('_meta', { bootstrappedAt: new Date().toISOString(), version: 1 });
+    await store.set('companies', JSON.stringify(companies));
+    await store.set('people', JSON.stringify(people));
+    await store.set('_meta', JSON.stringify( { bootstrappedAt: new Date().toISOString(), version: 1 }));
   }
   return { store, companies, people };
 }
@@ -125,14 +125,14 @@ async function snapshotBeforeWrite(store, label) {
     if (!c && !p) return null;
     const ts = new Date().toISOString().replace(/[:.]/g, '-');
     const key = `_snapshot_${ts}`;
-    await store.setJSON(key, {
+    await store.set(key, JSON.stringify({
       at: new Date().toISOString(),
       label: label || 'auto',
       companiesCount: (c || []).length,
       peopleCount: (p || []).length,
       companies: c || [],
       people: p || [],
-    });
+    }));
     const list = await store.list({ prefix: '_snapshot_' });
     const keys = (list.blobs || []).map(b => b.key).sort();
     while (keys.length > MAX_SNAPSHOTS) {
@@ -595,7 +595,7 @@ exports.handler = async (event) => {
       const id = c.id || makeId('c', c.name);
       const row = { ...c, id, _addedAt: new Date().toISOString(), _addedBy: auth.sub || 'admin' };
       const next = companies.filter(x => x.id !== id).concat(row);
-      await store.setJSON('companies', next);
+      await store.set('companies', JSON.stringify(next));
       return { statusCode: 200, headers, body: JSON.stringify({ ok: true, id }) };
     }
 
@@ -605,7 +605,7 @@ exports.handler = async (event) => {
       const id = p.id || makeId('p', p.name);
       const row = { ...p, id, _addedAt: new Date().toISOString(), _addedBy: auth.sub || 'admin' };
       const next = people.filter(x => x.id !== id).concat(row);
-      await store.setJSON('people', next);
+      await store.set('people', JSON.stringify(next));
       return { statusCode: 200, headers, body: JSON.stringify({ ok: true, id }) };
     }
 
@@ -617,7 +617,7 @@ exports.handler = async (event) => {
       const i = list.findIndex(x => x.id === id);
       if (i < 0) return { statusCode: 404, headers, body: JSON.stringify({ ok: false, error: 'not found' }) };
       list[i] = { ...list[i], ...patch, id, _updatedAt: new Date().toISOString() };
-      await store.setJSON(key, list);
+      await store.set(key, JSON.stringify(list));
       return { statusCode: 200, headers, body: JSON.stringify({ ok: true }) };
     }
 
@@ -626,7 +626,7 @@ exports.handler = async (event) => {
       const list = action === 'deleteCompany' ? companies : people;
       const id = body.id;
       const next = list.filter(x => x.id !== id);
-      await store.setJSON(key, next);
+      await store.set(key, JSON.stringify(next));
       return { statusCode: 200, headers, body: JSON.stringify({ ok: true, removed: list.length - next.length }) };
     }
 
@@ -896,7 +896,7 @@ exports.handler = async (event) => {
           _enrichSource: found.hunter ? 'hunter' : 'site-crawl',
           _hunterScore: found.hunter?.score,
         };
-        await store.setJSON('people', people);
+        await store.set('people', JSON.stringify(people));
         return { statusCode: 200, headers, body: JSON.stringify({
           ok: true,
           verified: true,
@@ -1088,7 +1088,7 @@ exports.handler = async (event) => {
           _enrichedAt: new Date().toISOString(),
           _enrichSource: found.hunterEmails.length ? 'hunter+crawl' : 'site-crawl',
         };
-        await store.setJSON('companies', companies);
+        await store.set('companies', JSON.stringify(companies));
         return { statusCode: 200, headers, body: JSON.stringify({
           ok: true,
           verified: true,
@@ -1180,8 +1180,8 @@ exports.handler = async (event) => {
 
       // Persist once at the end of the batch
       if (processed > 0) {
-        await store.setJSON('people', people);
-        if (companiesMutated) await store.setJSON('companies', companies);
+        await store.set('people', JSON.stringify(people));
+        if (companiesMutated) await store.set('companies', JSON.stringify(companies));
       }
 
       const nextOffset = offset + processed;
@@ -1214,8 +1214,8 @@ exports.handler = async (event) => {
       const res = await findNewestForPerson(person, companies, { foundVia: 'find-newest-email', skipVerify: false });
       const idx = people.findIndex(x => x.id === id);
       if (idx >= 0) people[idx] = res.updatedPerson;
-      await store.setJSON('people', people);
-      if (res.companiesChanged) await store.setJSON('companies', companies);
+      await store.set('people', JSON.stringify(people));
+      if (res.companiesChanged) await store.set('companies', JSON.stringify(companies));
 
       return { statusCode: 200, headers, body: JSON.stringify({
         ok: true,
@@ -1234,9 +1234,9 @@ exports.handler = async (event) => {
     if (action === 'reset') {
       // Wipe + re-seed (admin escape hatch). Snapshot first so it can be undone.
       await snapshotBeforeWrite(store, 'pre-reset');
-      await store.setJSON('companies', SEED_COMPANIES.slice());
-      await store.setJSON('people', SEED_PEOPLE.slice());
-      await store.setJSON('_meta', { resetAt: new Date().toISOString(), version: 1 });
+      await store.set('companies', JSON.stringify(SEED_COMPANIES.slice()));
+      await store.set('people', JSON.stringify(SEED_PEOPLE.slice()));
+      await store.set('_meta', JSON.stringify( { resetAt: new Date().toISOString(), version: 1 }));
       return { statusCode: 200, headers, body: JSON.stringify({ ok: true, reset: true }) };
     }
 
@@ -1274,8 +1274,8 @@ exports.handler = async (event) => {
       }
       // Snapshot the CURRENT state before restoring (so the restore is itself undoable)
       await snapshotBeforeWrite(store, 'pre-restore-of-' + key);
-      await store.setJSON('companies', snap.companies);
-      await store.setJSON('people', snap.people);
+      await store.set('companies', JSON.stringify(snap.companies));
+      await store.set('people', JSON.stringify(snap.people));
       return { statusCode: 200, headers, body: JSON.stringify({ ok: true, restored: { companies: snap.companies.length, people: snap.people.length, from: key, takenAt: snap.at } }) };
     }
 

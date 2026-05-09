@@ -9,7 +9,7 @@
 //
 // Same admin-cookie auth as film-rolodex.js.
 
-const { getStore } = require('@netlify/blobs');
+const { getStore } = require('./_blobs_shim');
 
 const COOKIE_NAME = 'mcadmin_session';
 const STORE_NAME = 'film-rolodex';
@@ -172,7 +172,7 @@ exports.handler = async (event) => {
           added++;
         }
       }
-      await store.setJSON('companies', existingCompanies);
+      await store.set('companies', JSON.stringify(existingCompanies));
     } else {
       // people
       const cByName = new Map(existingCompanies.map(c => [slug(c.name), c.id]));
@@ -216,7 +216,7 @@ exports.handler = async (event) => {
           added++;
         }
       }
-      await store.setJSON('people', existingPeople);
+      await store.set('people', JSON.stringify(existingPeople));
     }
 
     return {

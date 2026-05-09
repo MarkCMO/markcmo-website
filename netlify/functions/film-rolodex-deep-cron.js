@@ -14,7 +14,7 @@
 //   - Scheduled (GET): Netlify invokes this on its cron schedule.
 //   - Manual (POST with admin cookie): trigger immediately, returns summary.
 
-const { getStore } = require('@netlify/blobs');
+const { getStore } = require('./_blobs_shim');
 const { COMPANIES: SEED_COMPANIES, PEOPLE: SEED_PEOPLE } = require('./_film-rolodex-seed');
 
 const STORE_NAME = 'film-rolodex';
@@ -171,14 +171,14 @@ async function snapshotBeforeWrite(store, label) {
     if (!c && !p) return null;
     const ts = new Date().toISOString().replace(/[:.]/g, '-');
     const key = `_snapshot_${ts}`;
-    await store.setJSON(key, {
+    await store.set(key, JSON.stringify({
       at: new Date().toISOString(),
       label: label || 'deep-cron',
       companiesCount: (c || []).length,
       peopleCount:    (p || []).length,
       companies: c || [],
       people:    p || [],
-    });
+    }));
     // prune
     try {
       const list = await store.list({ prefix: '_snapshot_' });
@@ -265,9 +265,9 @@ async function syncToStore(crawls) {
     }
   }
 
-  await store.setJSON('companies', existingC);
-  await store.setJSON('people', existingP);
-  await store.setJSON('_lastDeepSync', { at: new Date().toISOString(), cUpdated, pAdded, pUpdated, productionsAdded });
+  await store.set('companies', JSON.stringify(existingC));
+  await store.set('people', JSON.stringify(existingP));
+  await store.set('_lastDeepSync', JSON.stringify( { at: new Date().toISOString(), cUpdated, pAdded, pUpdated, productionsAdded }));
 
   return { cUpdated, pAdded, pUpdated, productionsAdded, totalCompanies: existingC.length, totalPeople: existingP.length };
 }
@@ -284,7 +284,7 @@ async function pickCompaniesForRun(store) {
     slice.push(eligible[(cursor.idx + i) % eligible.length]);
   }
   const nextIdx = (cursor.idx + MAX_COMPANIES_PER_RUN) % Math.max(eligible.length, 1);
-  await store.setJSON('_deepCursor', { idx: nextIdx, lastAt: new Date().toISOString() });
+  await store.set('_deepCursor', JSON.stringify( { idx: nextIdx, lastAt: new Date().toISOString() }));
   return slice;
 }
 
@@ -315,7 +315,7 @@ async function runDeepSync() {
     const eligibleLen = all.filter(c => c.website && !c._noScrape).length;
     const cursor = (await store.get('_deepCursor', { type: 'json' })) || { idx: 0 };
     const adjusted = (cursor.idx - (targets.length - actuallyCrawled) + eligibleLen) % Math.max(eligibleLen, 1);
-    await store.setJSON('_deepCursor', { idx: adjusted, lastAt: new Date().toISOString(), partialBail: true });
+    await store.set('_deepCursor', JSON.stringify( { idx: adjusted, lastAt: new Date().toISOString(), partialBail: true }));
   }
   const sync = await syncToStore(crawls);
   return {
