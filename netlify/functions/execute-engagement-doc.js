@@ -171,17 +171,26 @@ exports.handler = async (event) => {
         ).then(r => r.json()).catch(() => []);
 
         if (!existingInvs?.length) {
-          // Self-call square-invoice-action with internal admin token
-          const siteUrl = process.env.URL || 'https://markcmo.com';
-          const draftRes = await fetch(`${siteUrl}/.netlify/functions/square-invoice-action`, {
-            method: 'POST',
-            headers: {
-              'Content-Type': 'application/json',
-              'x-admin-api-token': process.env.MARKCMO_ADMIN_API_TOKEN || '',
-            },
-            body: JSON.stringify({ action: 'create-draft', engagementId, isTest: !!testMode }),
-          });
-          const draftData = await draftRes.json().catch(() => ({}));
+          // In-process invocation of square-invoice-action. Cloudflare Pages
+          // can't reliably do same-zone fetch loopbacks (returns 405 on POST),
+          // so we require + invoke the handler directly.
+          let draftRes, draftData;
+          try {
+            const sqHandler = require('./square-invoice-action').handler;
+            const sqResult = await sqHandler({
+              httpMethod: 'POST',
+              headers: {
+                'content-type': 'application/json',
+                'x-admin-api-token': process.env.MARKCMO_ADMIN_API_TOKEN || ''
+              },
+              body: JSON.stringify({ action: 'create-draft', engagementId, isTest: !!testMode })
+            });
+            draftRes = { ok: (sqResult.statusCode || 0) >= 200 && (sqResult.statusCode || 0) < 300 };
+            try { draftData = JSON.parse(sqResult.body || '{}'); } catch { draftData = {}; }
+          } catch (e) {
+            draftRes = { ok: false };
+            draftData = { error: e.message };
+          }
           if (draftRes.ok && draftData.success) {
             draftInvoice = draftData.invoice;
             console.log('Draft invoice auto-created:', draftInvoice?.id);
