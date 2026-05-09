@@ -280,8 +280,9 @@ export async function onRequest(context) {
   // Only handle /.netlify/functions/* paths (and aliases set up in _redirects)
   const match = path.match(/^\/.netlify\/functions\/([^/?]+)/);
   if (!match) {
-    // Not a function path — pass through to CF Pages static file serving
-    return context.next();
+    // Not a function path — use ASSETS.fetch so _redirects rules are applied
+    // (context.next() skips _redirects; ASSETS.fetch goes through the full pipeline)
+    return context.env.ASSETS.fetch(request);
   }
 
   const fnName  = match[1];
