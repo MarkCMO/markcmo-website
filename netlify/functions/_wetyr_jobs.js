@@ -74,16 +74,36 @@ async function kickoffJob({ kind, host, proto, body }) {
     progress: 'queued'
   });
 
-  const bgUrl = `${proto || 'https'}://${host || 'markcmo.com'}/.netlify/functions/script-${kind}-background`;
-  const r = await fetch(bgUrl, {
-    method: 'POST',
-    headers: { 'content-type': 'application/json' },
-    body: JSON.stringify({ jobId, ...body })
-  });
-  if (r.status !== 202 && !r.ok) {
-    throw new Error('Background trigger failed: HTTP ' + r.status);
+  // Inter-function loopback fetch on Cloudflare Pages: the public-domain edge
+  // sometimes returns 405 for POST after caching an OPTIONS/GET response
+  // against the same URL. Bypass with a unique query param + no-cache headers.
+  const cacheBuster = jobId + '-' + Date.now().toString(36);
+  const baseHost = host || 'markcmo.com';
+  const candidates = [
+    `${proto || 'https'}://${baseHost}/.netlify/functions/script-${kind}-background?_=${cacheBuster}`,
+    `https://${baseHost}/.netlify/functions/script-${kind}-background?_=${cacheBuster}`,
+    `https://markcmo.com/.netlify/functions/script-${kind}-background?_=${cacheBuster}`
+  ];
+  let lastStatus = null, lastErr = null;
+  for (const bgUrl of candidates) {
+    try {
+      const r = await fetch(bgUrl, {
+        method: 'POST',
+        headers: {
+          'content-type': 'application/json',
+          'cache-control': 'no-cache, no-store',
+          'pragma': 'no-cache',
+          'x-wetyr-bg': '1'
+        },
+        body: JSON.stringify({ jobId, ...body })
+      });
+      lastStatus = r.status;
+      if (r.status === 202 || r.ok) return jobId;
+      // 405 specifically - try next candidate URL
+      if (r.status !== 405) break;
+    } catch (e) { lastErr = e; }
   }
-  return jobId;
+  throw new Error('Background trigger failed: HTTP ' + (lastStatus || 'network') + (lastErr ? ' ' + lastErr.message : ''));
 }
 
 // Read jobs grouped as projects, newest first.
