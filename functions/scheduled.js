@@ -5,7 +5,7 @@
  *
  * Cron schedule mapping:
  *   "0 * * * *"     → email-drip              (every hour)
- *   "0 */6 * * *"   → engagement-payment-followups + film-rolodex-cron (every 6 hrs)
+ *   "0 *\/6 * * *"  → engagement-payment-followups + film-rolodex-cron (every 6 hrs)
  *   "0 9 * * *"     → film-rolodex-deep-cron  (daily 09:00 UTC)
  */
 

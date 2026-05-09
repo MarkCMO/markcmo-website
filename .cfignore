@@ -1,0 +1,18 @@
+# Cloudflare Pages - files to exclude from deployment
+.claude/
+.netlify/
+node_modules/
+.git/
+scripts/
+*.py
+*.log
+*.zip
+*.pdf
+*.mp4
+*.mov
+.env
+.env.local
+.env.*.local
+tmp/
+.cursor/
+*.backup
