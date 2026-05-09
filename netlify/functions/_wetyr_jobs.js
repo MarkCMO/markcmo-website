@@ -74,36 +74,32 @@ async function kickoffJob({ kind, host, proto, body }) {
     progress: 'queued'
   });
 
-  // Inter-function loopback fetch on Cloudflare Pages: the public-domain edge
-  // sometimes returns 405 for POST after caching an OPTIONS/GET response
-  // against the same URL. Bypass with a unique query param + no-cache headers.
-  const cacheBuster = jobId + '-' + Date.now().toString(36);
-  const baseHost = host || 'markcmo.com';
-  const candidates = [
-    `${proto || 'https'}://${baseHost}/.netlify/functions/script-${kind}-background?_=${cacheBuster}`,
-    `https://${baseHost}/.netlify/functions/script-${kind}-background?_=${cacheBuster}`,
-    `https://markcmo.com/.netlify/functions/script-${kind}-background?_=${cacheBuster}`
-  ];
-  let lastStatus = null, lastErr = null;
-  for (const bgUrl of candidates) {
-    try {
-      const r = await fetch(bgUrl, {
-        method: 'POST',
-        headers: {
-          'content-type': 'application/json',
-          'cache-control': 'no-cache, no-store',
-          'pragma': 'no-cache',
-          'x-wetyr-bg': '1'
-        },
-        body: JSON.stringify({ jobId, ...body })
-      });
-      lastStatus = r.status;
-      if (r.status === 202 || r.ok) return jobId;
-      // 405 specifically - try next candidate URL
-      if (r.status !== 405) break;
-    } catch (e) { lastErr = e; }
+  // Cloudflare Pages can't reliably do inter-function fetch loopbacks (returns
+  // 405 to the kickoff's POST against /.netlify/functions/X-background).
+  // Instead, directly invoke the background handler in-process via require().
+  // Await keeps the kickoff alive for the work duration; the bg writes
+  // progress + final status to Supabase as it goes. Client polling at
+  // /script-result still reads the same row, so UX is identical.
+  let bgHandler;
+  try {
+    bgHandler = require('./script-' + kind + '-background').handler;
+  } catch (e) {
+    throw new Error('Background module not found for kind=' + kind + ': ' + e.message);
   }
-  throw new Error('Background trigger failed: HTTP ' + (lastStatus || 'network') + (lastErr ? ' ' + lastErr.message : ''));
+  if (typeof bgHandler !== 'function') {
+    throw new Error('Background handler missing for kind=' + kind);
+  }
+
+  // Invoke the bg handler with a Netlify-shaped event. Await to keep the
+  // function alive on Cloudflare Pages (no waitUntil available with
+  // exports.handler signature).
+  await bgHandler({
+    httpMethod: 'POST',
+    body: JSON.stringify({ jobId, ...body }),
+    headers: { 'content-type': 'application/json' }
+  });
+
+  return jobId;
 }
 
 // Read jobs grouped as projects, newest first.

@@ -13,7 +13,7 @@
 // This implementation uses Netlify Blobs (available on Netlify Pro/free with feature flag).
 // Enable at: app.netlify.com → Site settings → Feature flags → Netlify Blobs
 
-const { getStore } = require('@netlify/blobs');
+const { getStore } = require('./_blobs_shim');
 
 exports.handler = async (event) => {
   if (event.httpMethod !== 'POST') {
