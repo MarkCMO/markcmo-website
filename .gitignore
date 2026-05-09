@@ -43,3 +43,8 @@ sync-to-sheets.py
 *.pdf
 *.mp4
 *.mov
+
+# Local Netlify env-var inventory (contains secret values - DO NOT COMMIT)
+inventory/envvars/
+inventory/netlify_sites.json
+
