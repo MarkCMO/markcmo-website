@@ -1,0 +1,14 @@
+name = "markcmo"
+compatibility_date = "2026-05-01"
+compatibility_flags = ["nodejs_compat"]
+pages_build_output_dir = "."
+
+# ── Cron Triggers ─────────────────────────────────────────────────────────────
+# These mirror the Netlify scheduled functions from netlify.toml.
+# CF Pages scheduled events fire the onScheduled export in functions/scheduled.js.
+[triggers]
+crons = [
+  "0 * * * *",      # email-drip         – every hour
+  "0 */6 * * *",    # engagement-payment-followups + film-rolodex-cron – every 6 hrs
+  "0 9 * * *",      # film-rolodex-deep-cron – daily at 09:00 UTC
+]

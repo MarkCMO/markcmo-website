@@ -1,11 +1,11 @@
 # ═══════════════════════════════════════════════════════════
-# Netlify Redirects — markcmo.com
+# Redirects — markcmo.com  (Cloudflare Pages + Netlify compatible)
 # RULE: First match wins. Keep most-specific rules FIRST.
 # 404 catch-all MUST be last.
 # ═══════════════════════════════════════════════════════════
 
-# ─── www → non-www (disabled during CF Pages migration - apex DNS pending) ──
-# https://www.markcmo.com/* https://markcmo.com/:splat 301!
+# ─── www → non-www ──────────────────────────────────────────
+https://www.markcmo.com/* https://markcmo.com/:splat 301!
 
 # ─── Core pages: .html → clean URL (301 permanent) ─────────
 /index.html                          /                              301!
