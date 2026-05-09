@@ -269,7 +269,7 @@ function makeNetlifyContext(fnName) {
 
 // ── Main handler ──────────────────────────────────────────────────────────────
 export async function onRequest(context) {
-  const { request, env } = context;
+  let { request, env } = context;
 
   // Bridge CF env → process.env so all existing Netlify code can read it
   bridgeEnv(env);
@@ -277,16 +277,33 @@ export async function onRequest(context) {
   const url   = new URL(request.url);
   const path  = url.pathname;
 
-  // Only handle /.netlify/functions/* paths (and aliases set up in _redirects)
-  const match = path.match(/^\/.netlify\/functions\/([^/?]+)/);
-  if (!match) {
-    // Not a function path — use ASSETS.fetch so _redirects rules are applied
-    // (context.next() skips _redirects; ASSETS.fetch goes through the full pipeline)
-    return context.env.ASSETS.fetch(request);
-  }
+  // ── _redirects aliases ───────────────────────────────────────────────────────
+  // CF Pages routes functions BEFORE _redirects, so the catch-all intercepts
+  // /track and /pay/* before those redirect rules fire.  Handle them here.
+  let fnName, handler;
 
-  const fnName  = match[1];
-  const handler = HANDLERS[fnName];
+  if (path === '/track' || path.startsWith('/track/')) {
+    // _redirects: /track  → /.netlify/functions/track  302
+    fnName  = 'track';
+    handler = HANDLERS['track'];
+  } else if (path.startsWith('/pay/')) {
+    // _redirects: /pay/*  → /.netlify/functions/pay?id=:splat  200
+    const splat = path.slice('/pay/'.length);
+    url.searchParams.set('id', splat);
+    // Rebuild request with modified URL so toNetlifyEvent sees the injected id param
+    request = new Request(url.toString(), request);
+    fnName  = 'pay';
+    handler = HANDLERS['pay'];
+  } else {
+    // Only handle /.netlify/functions/* paths
+    const match = path.match(/^\/.netlify\/functions\/([^/?]+)/);
+    if (!match) {
+      // Pass through to CF Pages static file serving
+      return context.env.ASSETS.fetch(request);
+    }
+    fnName  = match[1];
+    handler = HANDLERS[fnName];
+  }
 
   if (!handler) {
     return new Response(
