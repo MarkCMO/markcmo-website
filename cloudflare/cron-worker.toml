@@ -1,0 +1,28 @@
+# cloudflare/cron-worker.toml
+# Standalone Worker that triggers MarkCMO's scheduled functions.
+# Pages Functions don't reliably support cron triggers, so this Worker
+# fan-outs to the deployed Pages function URLs on each schedule tick.
+#
+# Deploy:
+#   wrangler deploy --config cloudflare/cron-worker.toml
+#   wrangler secret put CRON_SHARED_SECRET --config cloudflare/cron-worker.toml
+
+name = "markcmo-cron"
+main = "cron-worker.js"
+compatibility_date = "2026-05-01"
+
+# Cron triggers - mirrors the Netlify schedule list from netlify.toml.
+# All times UTC. Cloudflare cron does NOT observe DST (matches Netlify).
+[triggers]
+crons = [
+  "0 * * * *",      # email-drip (hourly)
+  "0 */6 * * *",    # engagement-payment-followups + film-rolodex-cron (every 6 hrs)
+  "0 9 * * *",      # film-rolodex-deep-cron (daily 09:00 UTC)
+]
+
+[vars]
+PAGES_BASE_URL = "https://markcmo.com"
+# CRON_SHARED_SECRET is a secret, set via:
+#   wrangler secret put CRON_SHARED_SECRET --config cloudflare/cron-worker.toml
+# The Pages project must have the SAME secret value so functions can verify
+# x-cron-secret header on incoming cron calls.

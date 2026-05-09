@@ -3,12 +3,45 @@ compatibility_date = "2026-05-01"
 compatibility_flags = ["nodejs_compat"]
 pages_build_output_dir = "."
 
+# Pages Functions auto-route /.netlify/functions/* to netlify/functions/ via
+# Cloudflare Pages' built-in Netlify compat. No catch-all router needed for
+# basic function dispatch.
+
+# ── Non-secret env vars ──────────────────────────────────────────────────────
+[vars]
+SITE_URL = "https://markcmo.com"
+URL = "https://markcmo.com"          # legacy: process.env.URL is read by submit-document, send-engagement-proposal-email
+NODE_ENV = "production"
+
 # ── Cron Triggers ─────────────────────────────────────────────────────────────
 # These mirror the Netlify scheduled functions from netlify.toml.
-# CF Pages scheduled events fire the onScheduled export in functions/scheduled.js.
+#
+# IMPORTANT: Cloudflare Pages projects do NOT natively support cron triggers
+# on Pages Functions (only Workers do). If these crons in the Pages config
+# don't fire, the proper fallback is the standalone Worker in
+# `cloudflare/cron-worker.toml` which does the same fan-out via HTTP fetch.
+# Deploy the worker with:
+#   wrangler deploy --config cloudflare/cron-worker.toml
 [triggers]
 crons = [
-  "0 * * * *",      # email-drip         – every hour
-  "0 */6 * * *",    # engagement-payment-followups + film-rolodex-cron – every 6 hrs
-  "0 9 * * *",      # film-rolodex-deep-cron – daily at 09:00 UTC
+  "0 * * * *",      # email-drip                                         – every hour
+  "0 */6 * * *",    # engagement-payment-followups + film-rolodex-cron   – every 6 hrs
+  "0 9 * * *",      # film-rolodex-deep-cron                             – daily at 09:00 UTC
 ]
+
+# ── Required secrets (NOT stored here - set via dashboard or `wrangler pages secret put`) ──
+# WETYR Studio:        GEMINI_API_KEY, MISTRAL_API_KEY, TMDB_API_KEY
+# Supabase (primary):  SUPABASE_URL, SUPABASE_SERVICE_KEY
+# Supabase (engagement docs, separate project): MARKCMO_SUPABASE_URL, MARKCMO_SUPABASE_SERVICE_KEY
+# Admin auth:          ADMIN_USERS (JSON), ADMIN_USER, ADMIN_PASS, ADMIN_SESSION_SECRET, TOKEN_SECRET, EMAIL_ADMIN_SECRET
+# Email:               RESEND_API_KEY, WEBINAR_RESEND_KEY, NOTIFY_EMAIL
+# Square:              SQUARE_ACCESS_TOKEN, SQUARE_LOCATION_ID, SQUARE_APPLICATION_ID, SQUARE_ENV,
+#                      SQUARE_PLAN_VARIATION_PREMIUM, SQUARE_PLAN_VARIATION_ELITE, SQUARE_PLAN_VARIATION_SPONSOR,
+#                      SQUARE_WEBHOOK_SIGNATURE_KEY
+# Calendly:            CALENDLY_SIGNING_KEY
+# JSONBin (legacy):    JSONBIN_API_KEY, JSONBIN_LINKS_BIN_ID, JSONBIN_ENROLLMENTS_BIN_ID, JSONBIN_GRADS_BIN_ID,
+#                      JSONBIN_INTL_BIN_ID, JSONBIN_FOUNDING_BIN_ID, JSONBIN_LESSON_CACHE_BIN_ID,
+#                      JSONBIN_VOTES_BIN_ID, JSONBIN_DRIP_BIN_ID, JSONBIN_DOCS_BIN_ID, JSONBIN_BIN_ID
+# ElevenLabs:          ELEVENLABS_API_KEY
+# Cron auth:           CRON_SHARED_SECRET (set on this Pages project AND on the cron worker)
+# Internal API:        MARKCMO_ADMIN_API_TOKEN
