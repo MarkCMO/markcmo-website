@@ -4,8 +4,8 @@
 # 404 catch-all MUST be last.
 # ═══════════════════════════════════════════════════════════
 
-# ─── www → non-www ──────────────────────────────────────────
-https://www.markcmo.com/* https://markcmo.com/:splat 301!
+# ─── www → non-www (disabled during CF Pages migration - apex DNS pending) ──
+# https://www.markcmo.com/* https://markcmo.com/:splat 301!
 
 # ─── Core pages: .html → clean URL (301 permanent) ─────────
 /index.html                          /                              301!
@@ -370,7 +370,8 @@ https://www.markcmo.com/* https://markcmo.com/:splat 301!
 # /track/* surfaces the multi-purpose tracker for friendly URLs in
 # emails (e.g. /track/click?...). The function itself reads the
 # query string.
-/track/*                       /.netlify/functions/track   200
+/track                         /.netlify/functions/track   302
+/track/*                       /.netlify/functions/track   302
 
 # ─── Webinar Funnel + Admin ─────────────────────────────────
 /webinar                       /webinar.html                  200
