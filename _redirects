@@ -124,75 +124,18 @@ https://www.markcmo.com/* https://markcmo.com/:splat 301!
 /project-tablegreens.html    /project-tablegreens   301!
 
 # ─── Clean URL rewrites (serve .html at clean path) ─────────
-/about                         /about.html                    200
-/services                      /services.html                 200
-/portfolio                     /portfolio.html                200
-/results                       /results.html                  200
-/book                          /book.html                     200
-/blog                          /blog.html                     200
-/contact                       /contact.html                  200
-/faq                           /faq.html                      200
-/industries                    /industries.html               200
-/testimonials                  /testimonials.html             200
-/privacy                       /privacy.html                  200
-/thank-you                     /thank-you.html                200
-/wetyr                         /wetyr.html                    200
-/fractional-cmo                /fractional-cmo.html           200
-/press                         /press.html                    200
-/speaking                      /speaking.html                 200
-/case-studies                  /case-studies.html             200
-/fractional-coo                /fractional-coo.html           200
-/executive-advisory            /executive-advisory.html       200
-/marketing-strategy            /marketing-strategy.html       200
-/ai-automation                 /ai-automation.html            200
-/cybersecurity                 /cybersecurity.html            200
-/managed-it                    /managed-it.html               200
-/business-funding              /business-funding.html         200
-/saas-development              /saas-development.html         200
-/cloud-services                /cloud-services.html           200
-/executive-recruiting          /executive-recruiting.html     200
-/mergers-acquisitions          /mergers-acquisitions.html     200
-/blog-fractional-cmo-guide     /blog-fractional-cmo-guide.html     200
-/blog-fractional-vs-fulltime-cmo /blog-fractional-vs-fulltime-cmo.html 200
-/blog-healthcare-marketing-strategy /blog-healthcare-marketing-strategy.html 200
-/blog-operational-blind-spots  /blog-operational-blind-spots.html  200
-/blog-psychology-framework     /blog-psychology-framework.html     200
-/project-wetyr                 /project-wetyr.html            200
-/project-aileaders             /project-aileaders.html        200
-/project-aitoolbox             /project-aitoolbox.html        200
-/project-busbrother            /project-busbrother.html       200
-/project-butcherbud            /project-butcherbud.html       200
-/project-leadflow-cash         /project-leadflow-cash.html    200
-/project-letsleavenow          /project-letsleavenow.html     200
-/project-markcmo               /project-markcmo.html          200
-/project-microgreenusa         /project-microgreenusa.html    200
-/project-saasaf                /project-saasaf.html           200
-/project-swipehire365          /project-swipehire365.html     200
-/project-tablegreens           /project-tablegreens.html      200
 
 # ─── Document VDR (secure, noindex) ─────────────────────────
 /documents                     /documents/index.html          200
-/documents/nda                 /documents/nda.html            200
-/documents/mutual-nda          /documents/mutual-nda.html     200
-/documents/engagement          /documents/engagement.html     200
-/documents/msa                 /documents/msa.html            200
-/documents/referral            /documents/referral.html       200
-/documents/contractor          /documents/contractor.html     200
-/documents/onboarding          /documents/onboarding.html     200
-/documents/proposal            /documents/proposal.html       200
 
 # ─── Client case files (per-client VDR — confidential) ──────
 /documents/clients/wendal-enterprise           /documents/clients/wendal-enterprise/index.html         200
-/documents/clients/wendal-enterprise/proposal  /documents/clients/wendal-enterprise/proposal.html      200
 /documents/clients/wendal-enterprise/sow       /documents/clients/wendal-enterprise/scope-of-work.html 200
-/documents/clients/wendal-enterprise/timeline  /documents/clients/wendal-enterprise/timeline.html      200
 /documents/clients/wendal-enterprise/sign      /forms/wendal-enterprise-audit.html                     200
 
 # Salt Lake City Public Library — engagement package
 /documents/clients/salt-lake-city-public-library            /documents/clients/salt-lake-city-public-library/index.html         200
-/documents/clients/salt-lake-city-public-library/proposal   /documents/clients/salt-lake-city-public-library/proposal.html      200
 /documents/clients/salt-lake-city-public-library/sow        /documents/clients/salt-lake-city-public-library/scope-of-work.html 200
-/documents/clients/salt-lake-city-public-library/timeline   /documents/clients/salt-lake-city-public-library/timeline.html      200
 /documents/clients/salt-lake-city-public-library/sign       /forms/salt-lake-city-public-library-discovery.html                 200
 
 # ─── Admin VDR (now embedded inside /admin as #case-files panel) ──
@@ -205,115 +148,6 @@ https://www.markcmo.com/* https://markcmo.com/:splat 301!
 /location                      /location/index.html           200
 
 # ─── Location pages (110 pages — explicit rewrites) ─────────
-/location/fractional-cmo-alabama          /location/fractional-cmo-alabama.html          200
-/location/fractional-cmo-alaska           /location/fractional-cmo-alaska.html           200
-/location/fractional-cmo-albuquerque      /location/fractional-cmo-albuquerque.html      200
-/location/fractional-cmo-anaheim          /location/fractional-cmo-anaheim.html          200
-/location/fractional-cmo-arizona          /location/fractional-cmo-arizona.html          200
-/location/fractional-cmo-arkansas         /location/fractional-cmo-arkansas.html         200
-/location/fractional-cmo-arlington        /location/fractional-cmo-arlington.html        200
-/location/fractional-cmo-atlanta          /location/fractional-cmo-atlanta.html          200
-/location/fractional-cmo-austin           /location/fractional-cmo-austin.html           200
-/location/fractional-cmo-bakersfield      /location/fractional-cmo-bakersfield.html      200
-/location/fractional-cmo-baltimore        /location/fractional-cmo-baltimore.html        200
-/location/fractional-cmo-birmingham       /location/fractional-cmo-birmingham.html       200
-/location/fractional-cmo-boston           /location/fractional-cmo-boston.html           200
-/location/fractional-cmo-buffalo          /location/fractional-cmo-buffalo.html          200
-/location/fractional-cmo-california       /location/fractional-cmo-california.html       200
-/location/fractional-cmo-charlotte        /location/fractional-cmo-charlotte.html        200
-/location/fractional-cmo-chicago          /location/fractional-cmo-chicago.html          200
-/location/fractional-cmo-cincinnati       /location/fractional-cmo-cincinnati.html       200
-/location/fractional-cmo-cleveland        /location/fractional-cmo-cleveland.html        200
-/location/fractional-cmo-colorado-springs /location/fractional-cmo-colorado-springs.html 200
-/location/fractional-cmo-colorado         /location/fractional-cmo-colorado.html         200
-/location/fractional-cmo-columbus         /location/fractional-cmo-columbus.html         200
-/location/fractional-cmo-connecticut      /location/fractional-cmo-connecticut.html      200
-/location/fractional-cmo-dallas           /location/fractional-cmo-dallas.html           200
-/location/fractional-cmo-delaware         /location/fractional-cmo-delaware.html         200
-/location/fractional-cmo-denver           /location/fractional-cmo-denver.html           200
-/location/fractional-cmo-detroit          /location/fractional-cmo-detroit.html          200
-/location/fractional-cmo-el-paso          /location/fractional-cmo-el-paso.html          200
-/location/fractional-cmo-florida          /location/fractional-cmo-florida.html          200
-/location/fractional-cmo-fort-worth       /location/fractional-cmo-fort-worth.html       200
-/location/fractional-cmo-fresno           /location/fractional-cmo-fresno.html           200
-/location/fractional-cmo-georgia          /location/fractional-cmo-georgia.html          200
-/location/fractional-cmo-hartford         /location/fractional-cmo-hartford.html         200
-/location/fractional-cmo-hawaii           /location/fractional-cmo-hawaii.html           200
-/location/fractional-cmo-houston          /location/fractional-cmo-houston.html          200
-/location/fractional-cmo-idaho            /location/fractional-cmo-idaho.html            200
-/location/fractional-cmo-illinois         /location/fractional-cmo-illinois.html         200
-/location/fractional-cmo-indiana          /location/fractional-cmo-indiana.html          200
-/location/fractional-cmo-indianapolis     /location/fractional-cmo-indianapolis.html     200
-/location/fractional-cmo-iowa             /location/fractional-cmo-iowa.html             200
-/location/fractional-cmo-jacksonville     /location/fractional-cmo-jacksonville.html     200
-/location/fractional-cmo-kansas-city      /location/fractional-cmo-kansas-city.html      200
-/location/fractional-cmo-kansas           /location/fractional-cmo-kansas.html           200
-/location/fractional-cmo-kentucky         /location/fractional-cmo-kentucky.html         200
-/location/fractional-cmo-las-vegas        /location/fractional-cmo-las-vegas.html        200
-/location/fractional-cmo-lexington        /location/fractional-cmo-lexington.html        200
-/location/fractional-cmo-los-angeles      /location/fractional-cmo-los-angeles.html      200
-/location/fractional-cmo-louisiana        /location/fractional-cmo-louisiana.html        200
-/location/fractional-cmo-louisville       /location/fractional-cmo-louisville.html       200
-/location/fractional-cmo-maine            /location/fractional-cmo-maine.html            200
-/location/fractional-cmo-maryland         /location/fractional-cmo-maryland.html         200
-/location/fractional-cmo-massachusetts    /location/fractional-cmo-massachusetts.html    200
-/location/fractional-cmo-memphis          /location/fractional-cmo-memphis.html          200
-/location/fractional-cmo-mesa             /location/fractional-cmo-mesa.html             200
-/location/fractional-cmo-miami            /location/fractional-cmo-miami.html            200
-/location/fractional-cmo-michigan         /location/fractional-cmo-michigan.html         200
-/location/fractional-cmo-milwaukee        /location/fractional-cmo-milwaukee.html        200
-/location/fractional-cmo-minneapolis      /location/fractional-cmo-minneapolis.html      200
-/location/fractional-cmo-minnesota        /location/fractional-cmo-minnesota.html        200
-/location/fractional-cmo-mississippi      /location/fractional-cmo-mississippi.html      200
-/location/fractional-cmo-missouri         /location/fractional-cmo-missouri.html         200
-/location/fractional-cmo-montana          /location/fractional-cmo-montana.html          200
-/location/fractional-cmo-nashville        /location/fractional-cmo-nashville.html        200
-/location/fractional-cmo-nebraska         /location/fractional-cmo-nebraska.html         200
-/location/fractional-cmo-nevada           /location/fractional-cmo-nevada.html           200
-/location/fractional-cmo-new-hampshire    /location/fractional-cmo-new-hampshire.html    200
-/location/fractional-cmo-new-jersey       /location/fractional-cmo-new-jersey.html       200
-/location/fractional-cmo-new-mexico       /location/fractional-cmo-new-mexico.html       200
-/location/fractional-cmo-new-orleans      /location/fractional-cmo-new-orleans.html      200
-/location/fractional-cmo-new-york         /location/fractional-cmo-new-york.html         200
-/location/fractional-cmo-north-carolina   /location/fractional-cmo-north-carolina.html   200
-/location/fractional-cmo-north-dakota     /location/fractional-cmo-north-dakota.html     200
-/location/fractional-cmo-ohio             /location/fractional-cmo-ohio.html             200
-/location/fractional-cmo-oklahoma-city    /location/fractional-cmo-oklahoma-city.html    200
-/location/fractional-cmo-oklahoma         /location/fractional-cmo-oklahoma.html         200
-/location/fractional-cmo-omaha            /location/fractional-cmo-omaha.html            200
-/location/fractional-cmo-oregon           /location/fractional-cmo-oregon.html           200
-/location/fractional-cmo-orlando          /location/fractional-cmo-orlando.html          200
-/location/fractional-cmo-pennsylvania     /location/fractional-cmo-pennsylvania.html     200
-/location/fractional-cmo-philadelphia     /location/fractional-cmo-philadelphia.html     200
-/location/fractional-cmo-phoenix          /location/fractional-cmo-phoenix.html          200
-/location/fractional-cmo-pittsburgh       /location/fractional-cmo-pittsburgh.html       200
-/location/fractional-cmo-portland         /location/fractional-cmo-portland.html         200
-/location/fractional-cmo-raleigh          /location/fractional-cmo-raleigh.html          200
-/location/fractional-cmo-rhode-island     /location/fractional-cmo-rhode-island.html     200
-/location/fractional-cmo-richmond         /location/fractional-cmo-richmond.html         200
-/location/fractional-cmo-sacramento       /location/fractional-cmo-sacramento.html       200
-/location/fractional-cmo-salt-lake-city   /location/fractional-cmo-salt-lake-city.html   200
-/location/fractional-cmo-san-antonio      /location/fractional-cmo-san-antonio.html      200
-/location/fractional-cmo-san-diego        /location/fractional-cmo-san-diego.html        200
-/location/fractional-cmo-san-francisco    /location/fractional-cmo-san-francisco.html    200
-/location/fractional-cmo-san-jose         /location/fractional-cmo-san-jose.html         200
-/location/fractional-cmo-seattle          /location/fractional-cmo-seattle.html          200
-/location/fractional-cmo-south-carolina   /location/fractional-cmo-south-carolina.html   200
-/location/fractional-cmo-south-dakota     /location/fractional-cmo-south-dakota.html     200
-/location/fractional-cmo-st-louis         /location/fractional-cmo-st-louis.html         200
-/location/fractional-cmo-tampa            /location/fractional-cmo-tampa.html            200
-/location/fractional-cmo-tennessee        /location/fractional-cmo-tennessee.html        200
-/location/fractional-cmo-texas            /location/fractional-cmo-texas.html            200
-/location/fractional-cmo-tucson           /location/fractional-cmo-tucson.html           200
-/location/fractional-cmo-utah             /location/fractional-cmo-utah.html             200
-/location/fractional-cmo-vermont          /location/fractional-cmo-vermont.html          200
-/location/fractional-cmo-virginia-beach   /location/fractional-cmo-virginia-beach.html   200
-/location/fractional-cmo-virginia         /location/fractional-cmo-virginia.html         200
-/location/fractional-cmo-washington-dc    /location/fractional-cmo-washington-dc.html    200
-/location/fractional-cmo-washington       /location/fractional-cmo-washington.html       200
-/location/fractional-cmo-west-virginia    /location/fractional-cmo-west-virginia.html    200
-/location/fractional-cmo-wisconsin        /location/fractional-cmo-wisconsin.html        200
-/location/fractional-cmo-wyoming          /location/fractional-cmo-wyoming.html          200
 
 # ─── Document signing system ────────────────────────────────
 /sign  /sign/index.html  200
@@ -321,39 +155,12 @@ https://www.markcmo.com/* https://markcmo.com/:splat 301!
 
 # ─── Forms (PDF fill system) ─────────────────────────────────
 /forms                         /forms/index.html              200
-/forms/nda                     /forms/nda.html                200
-/forms/mutual-nda              /forms/mutual-nda.html         200
-/forms/engagement              /forms/engagement.html         200
-/forms/msa                     /forms/msa.html                200
-/forms/referral                /forms/referral.html           200
-/forms/contractor              /forms/contractor.html         200
-/forms/onboarding              /forms/onboarding.html         200
-/forms/proposal                /forms/proposal.html           200
 
 
-/forms/sow                     /forms/sow.html                200
-/forms/change-order            /forms/change-order.html       200
-/forms/testimonial-release     /forms/testimonial-release.html 200
-/forms/non-solicitation        /forms/non-solicitation.html   200
-/forms/conflict-of-interest    /forms/conflict-of-interest.html 200
-/forms/board-advisory          /forms/board-advisory.html     200
-/forms/equity-compensation     /forms/equity-compensation.html 200
 
-/documents/sow                 /documents/sow.html            200
-/documents/change-order        /documents/change-order.html   200
-/documents/testimonial-release /documents/testimonial-release.html 200
-/documents/non-solicitation    /documents/non-solicitation.html 200
-/documents/conflict-of-interest /documents/conflict-of-interest.html 200
-/documents/board-advisory      /documents/board-advisory.html 200
-/documents/equity-compensation /documents/equity-compensation.html 200
 
 # ─── Courses Platform ───────────────────────────────────────
 /courses                       /courses/index.html            200
-/courses/learn                 /courses/learn.html            200
-/courses/exam                  /courses/exam.html             200
-/courses/diploma               /courses/diploma.html          200
-/courses/welcome               /courses/welcome.html          200
-/graduation                    /graduation.html               200
 
 # ─── Public client portal: /portal/{slug} ───────────────────
 # Slug-gated public page that fetches sanitized data via
@@ -373,13 +180,8 @@ https://www.markcmo.com/* https://markcmo.com/:splat 301!
 /track/*                       /.netlify/functions/track   302
 
 # ─── Webinar Funnel + Admin ─────────────────────────────────
-/webinar                       /webinar.html                  200
-/webinar-confirmation          /webinar-confirmation.html     200
-/webinar-playbook-delivery     /webinar-playbook-delivery.html 200
-/webinar-strategy-guide        /webinar-strategy-guide.html   200
 # Admin: canonical URL handled in netlify.toml. The legacy obfuscated
 # /admin-c7x9k2m URL 301s to /admin to keep one admin surface alive.
-/access-required               /access-required.html          200
 
 # ─── Resume Pages ──────────────────────────────────────────
 /resume.html                     /resume                        301!
@@ -397,7 +199,6 @@ https://www.markcmo.com/* https://markcmo.com/:splat 301!
 /resume-hub.html                 /resumes                       301!
 
 /resume-professional   /MLG-Resume-Professional.html  200
-/resume                /resume.html                   200
 /resume-unfiltered     /MLG-Resume-Unfiltered.html    200
 /resume-terminal       /MLG-Resume-Terminal.html      200
 /resume-executive      /MLG-Resume-Executive.html     200
