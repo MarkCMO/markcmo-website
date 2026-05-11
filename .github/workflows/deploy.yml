@@ -16,6 +16,11 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
+      - name: Set up Node.js 22
+        uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+
       # Deploy only git-tracked files via git archive to avoid the wrangler
       # 20,000-file limit (the .claude/ session directory is not in git but
       # wrangler's hardcoded ignore list doesn't exclude it in direct-upload mode)
