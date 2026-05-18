@@ -1,0 +1,292 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-BXK5Y3DQBL"></script>
+<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-BXK5Y3DQBL');</script>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Fractional CMO Cost Calculator | Fractional vs Full-Time CMO Comparison</title>
+<meta name="description" content="Calculate the true cost difference between a fractional CMO and a full-time CMO hire. Includes salary, benefits, equity, and recruiting. See year 1 and year 3 savings.">
+<meta name="robots" content="index,follow,max-snippet:-1,max-image-preview:large">
+<meta name="author" content="Mark Gabrielli">
+<link rel="canonical" href="https://markcmo.com/fractional-cmo-cost-calculator">
+<meta property="og:type" content="website"><meta property="og:title" content="Fractional CMO Cost Calculator | Fractional vs Full-Time CMO Comparison">
+<meta property="og:description" content="Calculate the true cost difference between a fractional CMO and a full-time CMO hire. Includes salary, benefits, equity, and recruiting. See year 1 and year 3 savings."><meta property="og:url" content="https://markcmo.com/fractional-cmo-cost-calculator">
+<meta property="og:site_name" content="Mark Gabrielli | Fractional CMO">
+<meta property="og:image" content="https://markcmo.com/og-image.jpg">
+<meta name="twitter:card" content="summary_large_image"><meta name="twitter:title" content="Fractional CMO Cost Calculator | Fractional vs Full-Time CMO Comparison">
+<meta name="twitter:description" content="Calculate the true cost difference between a fractional CMO and a full-time CMO hire. Includes salary, benefits, equity, and recruiting. See year 1 and year 3 savings."><meta name="twitter:image" content="https://markcmo.com/og-image.jpg">
+<meta name="theme-color" content="#C9A84C"><link rel="manifest" href="/manifest.json"><link rel="icon" type="image/webp" href="/favicon.webp">
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"WebApplication","name":"Fractional CMO vs Full-Time CMO Cost Calculator","description":"Compare the true cost of a fractional CMO vs hiring a full-time CMO. Includes salary, benefits, equity, and recruiting costs.","url":"https://markcmo.com/fractional-cmo-cost-calculator","applicationCategory":"BusinessApplication","operatingSystem":"Any","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"}}</script>
+<link rel="preconnect" href="https://fonts.googleapis.com" crossorigin>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Barlow:wght@400;500;600;700;800&family=DM+Mono:wght@400;500&display=swap">
+<link rel="stylesheet" href="style.css">
+<style>
+.calc-wrap{max-width:920px;margin:0 auto;padding:0 1.5rem;}
+.calc-grid{display:grid;grid-template-columns:1fr 1fr;gap:2rem;margin-top:2rem;}
+@media(max-width:680px){.calc-grid{grid-template-columns:1fr;}}
+.calc-card{background:rgba(255,255,255,0.04);border:1px solid rgba(201,168,76,0.18);border-radius:12px;padding:1.75rem;}
+.calc-label{font-size:0.75rem;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:#C9A84C;margin-bottom:0.5rem;display:block;}
+.calc-input{width:100%;background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.12);border-radius:6px;padding:0.75rem 1rem;color:#fff;font-size:1rem;font-family:inherit;box-sizing:border-box;margin-bottom:1.25rem;}
+.calc-input:focus{outline:none;border-color:#C9A84C;}
+.calc-select{width:100%;background:#0d1b2a;border:1px solid rgba(255,255,255,0.12);border-radius:6px;padding:0.75rem 1rem;color:#fff;font-size:1rem;font-family:inherit;box-sizing:border-box;margin-bottom:1.25rem;}
+.calc-btn{width:100%;padding:1rem;background:#C9A84C;color:#0f0f0f;font-weight:800;font-size:1.05rem;border:none;border-radius:8px;cursor:pointer;font-family:inherit;transition:opacity 0.2s;}
+.calc-btn:hover{opacity:0.88;}
+.savings-box{background:rgba(34,197,94,0.08);border:1px solid rgba(34,197,94,0.25);border-radius:12px;padding:1.5rem;text-align:center;margin-top:1rem;}
+.cost-row{display:flex;justify-content:space-between;align-items:center;padding:0.6rem 0;border-bottom:1px solid rgba(255,255,255,0.06);font-size:0.88rem;}
+.cost-label{color:#94A3B8;}.cost-val{font-weight:700;color:#fff;}
+</style>
+</head>
+<body><style>
+.q-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:1.25rem;}
+.q-card{background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.09);border-radius:10px;padding:1.5rem;display:flex;flex-direction:column;transition:border-color 0.2s;}
+.q-card:hover{border-color:rgba(201,168,76,0.35);}
+.q-mark{font-size:2.5rem;color:#C9A84C;line-height:0.7;margin-bottom:0.75rem;font-family:Georgia,serif;}
+.q-text{color:#CBD5E1;font-size:0.9rem;line-height:1.75;flex:1;margin:0 0 1rem;font-style:italic;}
+.q-name{color:#fff;font-weight:700;font-size:0.88rem;}
+.q-role{color:#64748B;font-size:0.78rem;margin-top:0.2rem;}
+.q-filter{padding:0.4rem 1rem;border-radius:20px;border:1px solid rgba(255,255,255,0.15);background:transparent;color:#64748B;font-size:0.8rem;cursor:pointer;font-family:inherit;transition:all 0.2s;}
+.q-filter.active,.q-filter:hover{background:#C9A84C;border-color:#C9A84C;color:#0f0f0f;font-weight:700;}
+.q-cat-badge{font-size:0.7rem;padding:0.2rem 0.6rem;border-radius:10px;font-weight:700;text-transform:uppercase;letter-spacing:0.06em;}
+.q-cat-strategy{background:rgba(99,102,241,0.15);color:#818cf8;}
+.q-cat-revenue{background:rgba(34,197,94,0.12);color:#4ade80;}
+.q-cat-customers{background:rgba(251,191,36,0.12);color:#fbbf24;}
+.q-cat-content{background:rgba(14,165,233,0.12);color:#38bdf8;}
+.q-cat-leadership{background:rgba(201,168,76,0.15);color:#C9A84C;}
+.q-cat-growth{background:rgba(244,63,94,0.12);color:#fb7185;}
+.q-cat-digital{background:rgba(168,85,247,0.12);color:#c084fc;}
+.q-cat-classics{background:rgba(148,163,184,0.1);color:#94A3B8;}
+</style><nav class="nav" id="mainNav">
+<a href="/index.html" class="nav-logo">
+<div class="nav-logo-avatar"><img src="/mark-photo.webp" alt="Mark Gabrielli" /></div>
+<div class="nav-logo-text"><strong>Mark Gabrielli</strong><span>Fractional CMO &amp; COO</span></div>
+</a>
+<ul class="nav-links">
+<li><a href="/about.html">About</a></li>
+<li><a href="/services.html">Services</a></li>
+<li><a href="/magnet-framework.html" style="color:#C9A84C;font-weight:600;">MAGNET&trade;</a></li>
+<li><a href="/results.html">Results</a></li>
+<li><a href="/blog">Insights</a></li>
+<li><a href="https://academy.markcmo.com" target="_blank" style="color:#C9A84C;">Academy</a></li>
+</ul>
+<div class="nav-right"><a href="/book.html" class="nav-btn">Book a Free Call</a></div>
+<div class="nav-hamburger" id="navHam"><span></span><span></span><span></span></div>
+</nav>
+<div class="mobile-drawer" id="mobileDrawer">
+<a href="/about.html">About</a><a href="/services.html">Services</a>
+<a href="/magnet-framework.html" style="color:#C9A84C;font-weight:600;">MAGNET Framework&trade;</a>
+<a href="/results.html">Results</a><a href="/blog">Insights</a>
+<a href="https://academy.markcmo.com" target="_blank">Academy</a>
+<a href="/book.html" style="color:#C9A84C;font-weight:700;">Book a Free Strategy Call &rarr;</a>
+</div>
+<section style="background:linear-gradient(160deg,#050c1a 0%,#0a1628 60%,#0f1e35 100%);padding:5rem 1.5rem 3rem;border-bottom:1px solid rgba(201,168,76,0.15);">
+<div style="max-width:860px;margin:0 auto;text-align:center;">
+<p style="color:#C9A84C;font-size:0.78rem;letter-spacing:0.14em;text-transform:uppercase;margin:0 0 0.75rem;">Free Marketing Tool</p>
+<h1 style="font-family:'Bebas Neue',sans-serif;font-size:clamp(2.8rem,6vw,4.5rem);color:#fff;margin:0 0 1rem;line-height:1.05;">Fractional CMO Cost Calculator</h1>
+<p style="color:#94A3B8;font-size:1.15rem;max-width:640px;margin:0 auto 1.5rem;">See the true all-in cost comparison between hiring a fractional CMO vs a full-time CMO. Includes salary, benefits, equity value, recruiting fees, and ramp cost.</p>
+</div>
+</section>
+
+<div class="calc-wrap" style="padding-top:3rem;padding-bottom:4rem;">
+<div class="calc-grid">
+<div class="calc-card">
+<h2 style="font-family:'Bebas Neue',sans-serif;font-size:1.6rem;color:#fff;margin:0 0 1.5rem;">Your Situation</h2>
+<label class="calc-label" for="fRevenue">Your Annual Revenue ($)</label>
+<input class="calc-input" id="fRevenue" type="number" placeholder="e.g. 8000000" />
+<label class="calc-label" for="fHours">CMO Hours Needed Per Week</label>
+<select class="calc-select" id="fHours">
+<option value="5">1&ndash;5 hrs/week (Strategic advisory)</option>
+<option value="10" selected>5&ndash;15 hrs/week (Part-time strategic)</option>
+<option value="20">15&ndash;25 hrs/week (Active fractional)</option>
+<option value="30">25&ndash;35 hrs/week (Nearly full-time)</option>
+</select>
+<label class="calc-label" for="fLocation">Your Location (affects salary benchmarks)</label>
+<select class="calc-select" id="fLocation">
+<option value="1.3">SF Bay Area / NYC</option>
+<option value="1.15">Boston / Seattle / LA / Chicago</option>
+<option value="1.0" selected>Austin / Miami / Denver / Atlanta</option>
+<option value="0.88">Mid-Market US Cities</option>
+<option value="0.8">Smaller Markets</option>
+</select>
+<label class="calc-label" for="fEquity">Full-Time CMO Equity Grant (% of company)</label>
+<input class="calc-input" id="fEquity" type="number" min="0" max="5" step="0.1" value="0.75" placeholder="e.g. 0.75" />
+<label class="calc-label" for="fValuation">Company Valuation ($M) for Equity Calculation</label>
+<input class="calc-input" id="fValuation" type="number" placeholder="e.g. 20" />
+<button class="calc-btn" onclick="calcCMO()">Compare Costs &rarr;</button>
+</div>
+
+<div class="calc-card" id="fResults" style="display:none;">
+<h2 style="font-family:'Bebas Neue',sans-serif;font-size:1.6rem;color:#fff;margin:0 0 1.25rem;">Cost Comparison</h2>
+<div style="margin-bottom:1.25rem;">
+<div style="font-size:0.72rem;font-weight:700;color:#ef4444;letter-spacing:0.1em;text-transform:uppercase;margin-bottom:0.5rem;">Full-Time CMO (Year 1)</div>
+<div id="fFTRows"></div>
+<div style="display:flex;justify-content:space-between;padding:0.6rem 0;"><span style="color:#fff;font-weight:700;">Total Year 1 Cost</span><span id="fFTTotal" style="font-weight:800;color:#ef4444;font-size:1.1rem;"></span></div>
+</div>
+<div style="border-top:1px solid rgba(255,255,255,0.1);padding-top:1.25rem;margin-bottom:1.25rem;">
+<div style="font-size:0.72rem;font-weight:700;color:#22c55e;letter-spacing:0.1em;text-transform:uppercase;margin-bottom:0.5rem;">Fractional CMO (Year 1)</div>
+<div id="fFracRows"></div>
+<div style="display:flex;justify-content:space-between;padding:0.6rem 0;"><span style="color:#fff;font-weight:700;">Total Year 1 Cost</span><span id="fFracTotal" style="font-weight:800;color:#22c55e;font-size:1.1rem;"></span></div>
+</div>
+<div class="savings-box">
+<div style="font-size:0.75rem;font-weight:700;color:#22c55e;letter-spacing:0.1em;text-transform:uppercase;margin-bottom:0.4rem;">Year 1 Savings</div>
+<div style="font-family:'Bebas Neue',sans-serif;font-size:2.8rem;color:#22c55e;line-height:1;" id="fSavings">$0</div>
+<div style="font-size:0.8rem;color:#94A3B8;margin-top:0.4rem;" id="fSavingsNote"></div>
+</div>
+</div>
+<div class="calc-card" id="fPlaceholder" style="display:flex;align-items:center;justify-content:center;text-align:center;">
+<div>
+<div style="font-size:3rem;margin-bottom:0.75rem;">&#x1F4B8;</div>
+<p style="color:#64748B;font-size:0.9rem;">Fill in your details to see<br>the full cost comparison</p>
+</div>
+</div>
+</div>
+
+<div style="margin-top:3rem;padding:2rem;background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.07);border-radius:12px;">
+<h2 style="font-family:'Bebas Neue',sans-serif;font-size:1.8rem;color:#fff;margin:0 0 1.25rem;">The Hidden Costs of a Full-Time CMO Hire</h2>
+<div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:1.25rem;">
+<div style="padding:1.25rem;background:rgba(239,68,68,0.06);border-radius:8px;border:1px solid rgba(239,68,68,0.15);">
+<div style="font-weight:700;color:#f87171;margin-bottom:0.5rem;">&#x1F4C5; 3&ndash;6 Month Ramp</div>
+<p style="color:#94A3B8;font-size:0.85rem;line-height:1.7;margin:0;">A full-time CMO hire typically takes 3-6 months to produce strategic output. During this period, you are paying full salary with zero commercial return.</p>
+</div>
+<div style="padding:1.25rem;background:rgba(239,68,68,0.06);border-radius:8px;border:1px solid rgba(239,68,68,0.15);">
+<div style="font-weight:700;color:#f87171;margin-bottom:0.5rem;">&#x1F4B0; Benefits Overhead</div>
+<p style="color:#94A3B8;font-size:0.85rem;line-height:1.7;margin:0;">Healthcare, 401k match, PTO, and other benefits add 25-35% on top of base salary. A $280K CMO costs $350K+ fully loaded.</p>
+</div>
+<div style="padding:1.25rem;background:rgba(239,68,68,0.06);border-radius:8px;border:1px solid rgba(239,68,68,0.15);">
+<div style="font-weight:700;color:#f87171;margin-bottom:0.5rem;">&#x1F4C8; Equity Dilution</div>
+<p style="color:#94A3B8;font-size:0.85rem;line-height:1.7;margin:0;">Full-time CMOs typically receive 0.5-2% equity. At a $20M valuation, that is $100K-$400K of founder equity transferred on day one.</p>
+</div>
+<div style="padding:1.25rem;background:rgba(239,68,68,0.06);border-radius:8px;border:1px solid rgba(239,68,68,0.15);">
+<div style="font-weight:700;color:#f87171;margin-bottom:0.5rem;">&#x1F50D; Recruiting Cost</div>
+<p style="color:#94A3B8;font-size:0.85rem;line-height:1.7;margin:0;">Executive recruiting firms charge 20-25% of first-year salary. A $280K CMO search costs $56K-$70K in recruiter fees alone, before you have a single day of output.</p>
+</div>
+</div>
+</div>
+
+<div style="margin-top:2.5rem;padding:2rem;background:rgba(201,168,76,0.06);border:1px solid rgba(201,168,76,0.2);border-radius:12px;">
+<h3 style="color:#C9A84C;font-family:'Bebas Neue',sans-serif;font-size:1.5rem;margin:0 0 0.75rem;">What You Do With the Savings</h3>
+<p style="color:#94A3B8;line-height:1.8;margin:0 0 0.75rem;">The $150K-$250K difference between fractional and full-time CMO costs in year one is not a savings to pocket. It is capital to redeploy into the commercial engine itself. The optimal allocation: hire two senior marketing specialists (content + paid acquisition or demand generation) who execute the fractional CMO&#39;s strategy. You get CMO-level strategy directing a team of specialists, all within the budget a single full-time CMO would have consumed alone.</p>
+<div style="display:flex;gap:0.75rem;flex-wrap:wrap;margin-top:0.5rem;">
+<a href="/fractional-cmo-cost.html" style="color:#C9A84C;text-decoration:none;font-size:0.88rem;font-weight:600;">Full Pricing Guide &rarr;</a>
+<a href="/fractional-cmo.html" style="color:#94A3B8;text-decoration:none;font-size:0.88rem;">Hire a Fractional CMO</a>
+</div>
+</div>
+</div>
+<section style="background:linear-gradient(180deg,#0A1628 0%,rgba(14,18,30,0.97) 100%);padding:3.5rem 1.5rem 4rem;border-top:1px solid rgba(201,168,76,0.18);">
+  <div style="max-width:760px;margin:0 auto;">
+    <div style="text-align:center;margin-bottom:2rem;">
+      <p style="font-size:0.75rem;font-weight:700;letter-spacing:0.12em;text-transform:uppercase;color:#C9A84C;margin:0 0 0.5rem;">Free 30-Minute Strategy Call</p>
+      <h2 style="font-family:'Bebas Neue',sans-serif;font-size:clamp(1.8rem,4vw,2.6rem);font-weight:400;color:#fff;margin:0 0 0.75rem;">Want These Numbers Applied to Your Business?</h2>
+      <p style="color:#94A3B8;font-size:1rem;margin:0 auto;max-width:520px;">Mark reviews your real metrics, identifies your biggest growth constraint, and gives you a clear action plan. Free. No pitch.</p>
+    </div>
+    <form name="cmo_cost_calc" data-netlify="true" netlify-honeypot="bot-field" method="POST" action="/thank-you.html" style="background:rgba(255,255,255,0.04);border:1px solid rgba(201,168,76,0.2);border-radius:12px;padding:2rem;">
+      <input type="hidden" name="form-name" value="cmo_cost_calc" /><input type="hidden" name="bot-field" style="display:none" />
+      <div class="cta-form-row" style="margin-bottom:1rem;">
+        <div class="cta-form-field"><label>Your Name *</label><input class="cta-form-input" type="text" name="name" placeholder="John Smith" required /></div>
+        <div class="cta-form-field"><label>Company</label><input class="cta-form-input" type="text" name="company" placeholder="Acme Inc." /></div>
+      </div>
+      <div class="cta-form-field" style="margin-bottom:1rem;"><label>Business Email *</label><input class="cta-form-input" type="email" name="email" placeholder="you@company.com" required /></div>
+      <div class="cta-form-field" style="margin-bottom:1.5rem;"><label>What&#39;s your biggest challenge?</label><textarea class="cta-form-input" name="message" placeholder="Describe your situation..." rows="3"></textarea></div>
+      <button type="submit" class="cta-form-btn" style="width:100%;font-size:1.05rem;padding:1rem;background:#C9A84C;color:#0f0f0f;">Send Message to Mark &rarr;</button>
+      <p style="font-size:0.72rem;color:#64748B;margin-top:0.75rem;text-align:center;">Replied within 24 hours &middot; <a href="tel:+13219175738" style="color:#C9A84C;">+1 (321) 917-5738</a></p>
+    </form>
+  </div>
+</section><footer>
+<div class="footer-mega">
+<div class="footer-brand-col">
+<div class="footer-logo">Mark <span>Gabrielli</span></div>
+<p class="footer-desc">Fractional CMO, COO &amp; Executive Consultant helping businesses from $1M to $100M build marketing engines that compound.</p>
+<div class="footer-brand-tags"><span>WETYR Founder</span><span>Fractional C-Suite</span><span>AI Strategist</span><span>CST Certified</span></div>
+<div class="social-links" style="margin-top:1.2rem;">
+<a href="https://www.linkedin.com/in/marklgabrielli/" target="_blank" rel="noopener" class="social-link">in</a>
+<a href="mailto:mark@markcmo.com" class="social-link">@</a>
+</div>
+</div>
+<div class="footer-col"><h4>Free Tools</h4><ul>
+<li><a href="marketing-budget-calculator.html" style="color:#C9A84C;">Marketing Budget Calculator</a></li>
+<li><a href="cac-ltv-calculator.html" style="color:#C9A84C;">CAC &amp; LTV Calculator</a></li>
+<li><a href="pipeline-calculator.html" style="color:#C9A84C;">Pipeline Calculator</a></li>
+<li><a href="fractional-cmo-cost-calculator.html" style="color:#C9A84C;">CMO Cost Calculator</a></li>
+<li><a href="marketing-quotes.html">Marketing Quotes</a></li>
+<li><a href="cmo-readiness-quiz.html">CMO Readiness Quiz</a></li>
+</ul></div>
+<div class="footer-col"><h4>Fractional CMO</h4><ul>
+<li><a href="fractional-cmo.html">Hire a Fractional CMO</a></li>
+<li><a href="what-is-a-fractional-cmo.html">What Is a Fractional CMO?</a></li>
+<li><a href="fractional-cmo-cost.html">Fractional CMO Cost</a></li>
+<li><a href="fractional-cmo-definition.html">Fractional CMO Definition</a></li>
+<li><a href="best-fractional-cmo.html">Best Fractional CMO</a></li>
+<li><a href="faq.html">FAQ</a></li>
+</ul></div>
+<div class="footer-col"><h4>Company</h4><ul>
+<li><a href="about.html">About Mark</a></li>
+<li><a href="results.html">Results</a></li>
+<li><a href="contact.html">Contact</a></li>
+<li><a href="book.html">Book a Call</a></li>
+<li><a href="https://academy.markcmo.com" target="_blank" style="color:#C9A84C;">MarkCMO Academy</a></li>
+</ul></div>
+</div>
+<div class="footer-bottom">
+<p>&copy; 2026 Mark Gabrielli &middot; markcmo.com &middot; All rights reserved.</p>
+<p class="footer-bottom-tags">Fractional CMO &middot; Chief Marketing Officer &middot; CMO Cost Calculator &middot; Marketing Quotes &middot; Marketing Tools &middot; B2B Marketing</p>
+<p class="footer-bottom-social">
+<a href="https://www.linkedin.com/in/marklgabrielli/" target="_blank" rel="noopener">LinkedIn</a>
+<span>&middot;</span><a href="https://x.com/markgcmo" target="_blank" rel="noopener">X / Twitter</a>
+</p>
+</div>
+</footer>
+<script>
+(function(){
+  var nav=document.getElementById('mainNav');var ham=document.getElementById('navHam');var drw=document.getElementById('mobileDrawer');
+  if(nav)window.addEventListener('scroll',function(){nav.classList.toggle('scrolled',window.scrollY>20);},{passive:true});
+  if(ham&&drw){ham.addEventListener('click',function(){drw.classList.toggle('open');});drw.querySelectorAll('a').forEach(function(a){a.addEventListener('click',function(){drw.classList.remove('open');});});}
+})();
+</script>
+<script>
+function fmt(n){if(n>=1000000)return'$'+(n/1000000).toFixed(1)+'M';if(n>=1000)return'$'+(n/1000).toFixed(0)+'K';return'$'+Math.round(n).toLocaleString();}
+function calcCMO(){
+  var rev=parseFloat(document.getElementById('fRevenue').value)||0;
+  var hrs=parseFloat(document.getElementById('fHours').value)||10;
+  var loc=parseFloat(document.getElementById('fLocation').value)||1.0;
+  var eq=parseFloat(document.getElementById('fEquity').value)||0.75;
+  var val=(parseFloat(document.getElementById('fValuation').value)||0)*1000000;
+  if(!rev){alert('Please enter your annual revenue.');return;}
+  // Full-time costs
+  var baseSalary=Math.round(280000*loc);
+  var benefits=Math.round(baseSalary*0.30);
+  var recruiting=Math.round(baseSalary*0.22);
+  var ramp=Math.round(baseSalary*0.25); // 3mo ramp cost
+  var equityVal=val*(eq/100);
+  var ftTotal=baseSalary+benefits+recruiting+ramp+(equityVal*0.25); // 25% of equity value as cost proxy
+  // Fractional costs
+  var fracRates={5:4000,10:9000,20:15000,30:22000};
+  var monthlyFrac=fracRates[hrs]||9000;
+  var annualFrac=monthlyFrac*12;
+  var savings=ftTotal-annualFrac;
+  var ftRows=[
+    ['Base Salary',fmt(baseSalary)],
+    ['Benefits & Taxes (30%)',fmt(benefits)],
+    ['Executive Recruiting (22%)',fmt(recruiting)],
+    ['3-Month Ramp Cost',fmt(ramp)],
+  ];
+  if(val>0)ftRows.push(['Equity Value ('+eq+'% of '+fmt(val)+')',fmt(equityVal)+' in equity']);
+  var fracRows=[
+    ['Monthly Retainer',fmt(monthlyFrac)+'/mo'],
+    ['Annual Total',fmt(annualFrac)],
+    ['Benefits / Recruiting','$0'],
+    ['Equity Dilution','None'],
+    ['Ramp Time','7-14 days'],
+  ];
+  var rh='';ftRows.forEach(function(r){rh+='<div class="cost-row"><span class="cost-label">'+r[0]+'</span><span class="cost-val">'+r[1]+'</span></div>';});
+  document.getElementById('fFTRows').innerHTML=rh;
+  document.getElementById('fFTTotal').textContent=fmt(ftTotal)+'*';
+  var fh='';fracRows.forEach(function(r){fh+='<div class="cost-row"><span class="cost-label">'+r[0]+'</span><span style="font-weight:700;color:#22c55e;">'+r[1]+'</span></div>';});
+  document.getElementById('fFracRows').innerHTML=fh;
+  document.getElementById('fFracTotal').textContent=fmt(annualFrac);
+  document.getElementById('fSavings').textContent=fmt(savings);
+  document.getElementById('fSavingsNote').textContent='That saves you '+fmt(savings)+' in year 1 you can reinvest in demand generation and marketing hires.';
+  document.getElementById('fResults').style.display='block';
+  document.getElementById('fPlaceholder').style.display='none';
+}
+</script>
+</body></html>
