@@ -232,5 +232,21 @@ function handlePageForm(e,name){
   </div>
 </section>
 <script>const sp=document.getElementById('sp');window.addEventListener('scroll',()=>{const h=document.documentElement;sp.style.width=((h.scrollTop/(h.scrollHeight-h.clientHeight))*100)+'%'});</script>
+<style>
+@media(max-width:768px){
+  [style*="grid-template-columns:1fr 1.4fr"],[style*="grid-template-columns:1fr 1.2fr"],
+  [style*="grid-template-columns:1fr 1fr"],[style*="grid-template-columns:2fr 1fr"],
+  [style*="grid-template-columns:1fr 300px"],[style*="grid-template-columns:1fr 280px"]{
+    grid-template-columns:1fr !important;
+  }
+  [style*="grid-template-columns:repeat(2"]{grid-template-columns:1fr !important;}
+  [style*="grid-template-columns:repeat(3"]{grid-template-columns:1fr !important;}
+  [style*="grid-template-columns:repeat(4"]{grid-template-columns:1fr 1fr !important;}
+  nav>div>div:last-child{display:none !important;}
+}
+@media(max-width:480px){
+  [style*="grid-template-columns:repeat(4"]{grid-template-columns:1fr !important;}
+}
+</style>
 </body>
 </html>
