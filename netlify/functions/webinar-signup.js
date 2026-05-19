@@ -105,7 +105,7 @@ async function sendConfirmationEmail(lead, cfg) {
 
 async function sendNotificationEmail(lead, cfg) {
   await resendSend({
-    to: process.env.NOTIFY_EMAIL || 'mark@markcmo.com',
+    to: (process.env.NOTIFY_EMAIL || 'mark@markcmo.com,marklgabriellijr@gmail.com').split(',').map(s => s.trim()).filter(Boolean),
     subject: `🎯 New Webinar Registration: ${lead.firstName} ${lead.lastName}, ${lead.company || 'No company'}`,
     html: `<div style="font-family:monospace;padding:24px;background:#0a0a0a;color:#e8e8e8;">
       <h2 style="color:#C9A84C;">New Webinar Registration</h2>

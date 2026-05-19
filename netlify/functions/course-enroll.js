@@ -10,7 +10,7 @@ const ENROLL_BIN = process.env.JSONBIN_ENROLLMENTS_BIN_ID;
 const LEADS_BIN  = process.env.JSONBIN_BIN_ID;
 const API_KEY    = process.env.JSONBIN_API_KEY;
 const RESEND_KEY = process.env.RESEND_API_KEY;
-const NOTIFY     = process.env.NOTIFY_EMAIL || 'mark@markcmo.com';
+const NOTIFY     = (process.env.NOTIFY_EMAIL || 'mark@markcmo.com,marklgabriellijr@gmail.com').split(',').map(s => s.trim()).filter(Boolean);
 
 const COURSE_META = {
   // ── TOP 5 FLAGSHIP ──────────────────────────────────────────
