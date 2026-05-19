@@ -208,7 +208,7 @@ function handlePageForm(e,name){
   var success=document.getElementById('pgSuccess_'+name);
   btn.textContent='Sending...';btn.disabled=true;btn.style.opacity='0.7';
   var data=new FormData(form);
-  fetch('/',{method:'POST',headers:{'Content-Type':'application/x-www-form-urlencoded'},
+  fetch('/api/lead',{method:'POST',headers:{'Content-Type':'application/x-www-form-urlencoded'},
     body:new URLSearchParams({'form-name':name,'name':data.get('name')||'','email':data.get('email')||'','company':data.get('company')||'','phone':data.get('phone')||'','message':data.get('message')||''}).toString()
   }).then(function(){
     form.style.display='none';success.style.display='block';
@@ -249,4 +249,5 @@ function handlePageForm(e,name){
 }
 </style>
 </body>
+</html>
 </html>

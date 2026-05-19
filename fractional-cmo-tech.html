@@ -10,6 +10,18 @@
 <link rel="canonical" href="https://markcmo.com/fractional-cmo-tech">
 <meta property="og:title" content="Fractional CMO for Tech Companies | Mark Gabrielli">
 <meta property="og:description" content="Scale your tech brand without a full-time marketing executive. Get senior CMO leadership on a fractional basis.">
+<meta property="og:url" content="https:/<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<link rel="icon" type="image/webp" href="/favicon.webp"><link rel="apple-touch-icon" href="/mark-photo.webp">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Fractional CMO for Tech Companies | Mark Gabrielli</title>
+<meta name="description" content="Scale your tech brand without a full-time marketing executive. Get senior CMO leadership on a fractional basis. Mark Gabrielli brings fractional CMO expertise to Technology companies nationwide.">
+<meta name="keywords" content="fractional CMO for tech companies | tech startup marketing leadership | B2B tech CMO">
+<link rel="canonical" href="https://markcmo.com/fractional-cmo-tech">
+<meta property="og:title" content="Fractional CMO for Tech Companies | Mark Gabrielli">
+<meta property="og:description" content="Scale your tech brand without a full-time marketing executive. Get senior CMO leadership on a fractional basis.">
 <meta property="og:url" content="https://markcmo.com/fractional-cmo-tech">
 <meta property="og:type" content="website">
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-QPN4SZBHNJ"></script>
@@ -480,7 +492,7 @@ function handlePageForm(e,name){
   var success=document.getElementById('pgSuccess_'+name);
   btn.textContent='Sending...';btn.disabled=true;btn.style.opacity='0.7';
   var data=new FormData(form);
-  fetch('/',{method:'POST',headers:{'Content-Type':'application/x-www-form-urlencoded'},
+  fetch('/api/lead',{method:'POST',headers:{'Content-Type':'application/x-www-form-urlencoded'},
     body:new URLSearchParams({'form-name':name,'name':data.get('name')||'','email':data.get('email')||'','company':data.get('company')||'','phone':data.get('phone')||'','message':data.get('message')||''}).toString()
   }).then(function(){
     form.style.display='none';success.style.display='block';

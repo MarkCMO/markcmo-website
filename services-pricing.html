@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="UTF-8">
@@ -289,7 +289,7 @@ function handlePageForm(e,name){
   var payload={'form-name':name,'name':data.get('name')||'','email':data.get('email')||'','company':data.get('company')||'','phone':data.get('phone')||'','message':data.get('message')||''};
   // Save trace to localStorage
   try{localStorage.setItem('mc_lead_'+Date.now(),JSON.stringify(payload));}catch(x){}
-  fetch('/',{method:'POST',headers:{'Content-Type':'application/x-www-form-urlencoded'},
+  fetch('/api/lead',{method:'POST',headers:{'Content-Type':'application/x-www-form-urlencoded'},
     body:new URLSearchParams(payload).toString()
   }).then(function(){form.style.display='none';success.style.display='block';})
   .catch(function(){form.style.display='none';success.style.display='block';

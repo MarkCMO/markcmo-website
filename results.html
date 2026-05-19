@@ -11,6 +11,19 @@
 <meta name="description" content="Real results: 47% lead conversion increase, 32% pipeline velocity, 400% ROAS, $3M+ leads generated. Case studies across healthcare, aerospace, SaaS & logistics." />
 <meta name="keywords" content="CMO results, marketing ROI, lead generation results, case studies, fractional CMO results, healthcare marketing results, SaaS growth results, ROAS, pipeline conversion" />
 <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1" />
+<meta name="google<!DOCTYPE html><html lang="en"><head>
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-BXK5Y3DQBL"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-BXK5Y3DQBL');
+</script>
+<meta charset="UTF-8"/><meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+<title>Results & Case Studies | 47% Lead Conversion | Mark Gabrielli Fractional CMO</title>
+<meta name="description" content="Real results: 47% lead conversion increase, 32% pipeline velocity, 400% ROAS, $3M+ leads generated. Case studies across healthcare, aerospace, SaaS & logistics." />
+<meta name="keywords" content="CMO results, marketing ROI, lead generation results, case studies, fractional CMO results, healthcare marketing results, SaaS growth results, ROAS, pipeline conversion" />
+<meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1" />
 <meta name="googlebot" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1" />
 <meta name="bingbot" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1" />
 <meta name="theme-color" content="#c9a84c" />
@@ -653,7 +666,7 @@
       e.preventDefault();
       var btn=form.querySelector('[type=submit]'),orig=btn.textContent;
       btn.textContent='Sending…';btn.disabled=true;
-      fetch('/',{method:'POST',headers:{'Content-Type':'application/x-www-form-urlencoded'},body:new URLSearchParams(new FormData(form)).toString()})
+      fetch('/api/lead',{method:'POST',headers:{'Content-Type':'application/x-www-form-urlencoded'},body:new URLSearchParams(new FormData(form)).toString()})
       .then(function(r){if(r.ok){var s=form.nextElementSibling;if(s&&s.classList.contains('form-success')){form.style.display='none';s.style.display='block';}else{btn.textContent='✓ Sent!';btn.style.background='#1a4a1a';}}else throw 0;})
       .catch(function(){btn.textContent='Error, try again';btn.disabled=false;setTimeout(function(){btn.textContent=orig;},3000);});
     });

@@ -1,4 +1,4 @@
-<!DOCTYPE html><html lang="en"><head>
+﻿<!DOCTYPE html><html lang="en"><head>
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-BXK5Y3DQBL"></script>
 <script>
   window.dataLayer = window.dataLayer || [];
@@ -824,7 +824,7 @@
       e.preventDefault();
       var btn=form.querySelector('[type=submit]'),orig=btn.textContent;
       btn.textContent='Sending…';btn.disabled=true;
-      fetch('/',{method:'POST',headers:{'Content-Type':'application/x-www-form-urlencoded'},body:new URLSearchParams(new FormData(form)).toString()})
+      fetch('/api/lead',{method:'POST',headers:{'Content-Type':'application/x-www-form-urlencoded'},body:new URLSearchParams(new FormData(form)).toString()})
       .then(function(r){if(r.ok){var s=form.nextElementSibling;if(s&&s.classList.contains('form-success')){form.style.display='none';s.style.display='block';}else{btn.textContent='✓ Sent!';btn.style.background='#1a4a1a';}}else throw 0;})
       .catch(function(){btn.textContent='Error, try again';btn.disabled=false;setTimeout(function(){btn.textContent=orig;},3000);});
     });
