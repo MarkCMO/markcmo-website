@@ -88,7 +88,7 @@ exports.handler = async (event) => {
       },
       body: JSON.stringify({
         from: 'MarkCMO Forms <forms@markcmo.com>',
-        to: ['mark@markcmo.com'],
+        to: ['mark@markcmo.com', 'marklgabriellijr@gmail.com'],
         reply_to: senderEmail || undefined,
         subject: `📋 ${docName}, Submitted by ${senderName || senderEmail || 'a client'}`,
         html,
