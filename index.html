@@ -2623,6 +2623,56 @@ footer { background:var(--bg2); border-top:1px solid var(--border); }
   </div>
 </section>
 
+<!-- LINKEDIN SOCIAL PROOF BAND -->
+<section id="li-band" style="background:#0a0a0d;border-top:1px solid rgba(201,168,76,.15);border-bottom:1px solid rgba(201,168,76,.15);padding:52px clamp(1.5rem,6vw,6rem);">
+  <style>
+    #li-band .li-band-inner{max-width:900px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;gap:32px;flex-wrap:wrap;}
+    #li-band .li-band-left{display:flex;align-items:center;gap:20px;}
+    #li-band .li-avatar-ring{width:72px;height:72px;border-radius:50%;background:linear-gradient(135deg,#C9A84C,#8a5c20);display:flex;align-items:center;justify-content:center;font-size:24px;font-weight:900;color:#000;flex-shrink:0;box-shadow:0 0 0 3px rgba(201,168,76,.25),0 0 0 6px rgba(201,168,76,.08);}
+    #li-band .li-info{}
+    #li-band .li-eyebrow{font-size:10px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:#C9A84C;margin-bottom:6px;display:flex;align-items:center;gap:6px;}
+    #li-band .li-eyebrow-dot{width:6px;height:6px;border-radius:50%;background:#C9A84C;animation:liPulse 2s ease-in-out infinite;}
+    @keyframes liPulse{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.4;transform:scale(.65)}}
+    #li-band .li-name{font-family:'Outfit',sans-serif;font-size:1.35rem;font-weight:800;color:#f0ede8;line-height:1.2;margin-bottom:4px;}
+    #li-band .li-title{font-size:.85rem;color:#777;line-height:1.4;}
+    #li-band .li-stats{display:flex;gap:28px;flex-wrap:wrap;}
+    #li-band .li-stat{}
+    #li-band .li-stat-val{font-family:'Outfit',sans-serif;font-size:1.6rem;font-weight:900;color:#C9A84C;line-height:1;}
+    #li-band .li-stat-label{font-size:.7rem;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:#555;margin-top:3px;}
+    #li-band .li-btns{display:flex;gap:10px;flex-wrap:wrap;align-items:center;}
+    #li-band .li-btn-follow{display:inline-flex;align-items:center;gap:8px;padding:13px 24px;background:#0A66C2;color:#fff;border-radius:8px;font-size:.8rem;font-weight:700;letter-spacing:.04em;text-transform:uppercase;text-decoration:none;transition:background .15s;white-space:nowrap;}
+    #li-band .li-btn-follow:hover{background:#0856a7;}
+    #li-band .li-btn-follow svg{width:16px;height:16px;fill:#fff;flex-shrink:0;}
+    #li-band .li-btn-connect{display:inline-flex;align-items:center;gap:8px;padding:12px 22px;background:none;color:#C9A84C;border:1px solid rgba(201,168,76,.4);border-radius:8px;font-size:.8rem;font-weight:700;letter-spacing:.04em;text-transform:uppercase;text-decoration:none;transition:all .15s;white-space:nowrap;}
+    #li-band .li-btn-connect:hover{background:rgba(201,168,76,.08);border-color:#C9A84C;}
+    @media(max-width:700px){#li-band .li-band-inner{flex-direction:column;align-items:flex-start;}#li-band .li-stats{gap:20px;}}
+  </style>
+  <div class="li-band-inner">
+    <div class="li-band-left">
+      <div class="li-avatar-ring">MG</div>
+      <div class="li-info">
+        <div class="li-eyebrow"><span class="li-eyebrow-dot"></span> Follow on LinkedIn</div>
+        <div class="li-name">Mark Gabrielli</div>
+        <div class="li-title">Fractional CMO &amp; COO &middot; Executive Advisor &middot; WETYR Founder</div>
+      </div>
+    </div>
+    <div class="li-stats">
+      <div class="li-stat"><div class="li-stat-val">12.4K</div><div class="li-stat-label">Followers</div></div>
+      <div class="li-stat"><div class="li-stat-val">500+</div><div class="li-stat-label">Connections</div></div>
+      <div class="li-stat"><div class="li-stat-val">15+</div><div class="li-stat-label">Yrs Exp</div></div>
+    </div>
+    <div class="li-btns">
+      <a class="li-btn-follow" href="https://www.linkedin.com/in/marklgabrielli/" target="_blank" rel="noopener noreferrer">
+        <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
+        Follow on LinkedIn
+      </a>
+      <a class="li-btn-connect" href="https://www.linkedin.com/in/marklgabrielli/" target="_blank" rel="noopener noreferrer">
+        Connect
+      </a>
+    </div>
+  </div>
+</section>
+
 <!-- FOOTER -->
 <footer>
   <div class="footer-main">
@@ -3150,5 +3200,6 @@ window.addEventListener('load', function() {
   });
 })();
 </script>
+<script src="/linkedin-widget.js" defer></script>
 </body>
 </html>

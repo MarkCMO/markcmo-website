@@ -305,7 +305,8 @@ function downloadDiploma() {
     .d-date{font-family:'DM Mono',monospace;font-size:10px;color:#b0905a;letter-spacing:2px;position:absolute;bottom:20px;left:70px}
     .d-seal{width:80px;height:80px;border-radius:50%;background:radial-gradient(circle at 35% 35%, #d4a940, #8a6010);display:flex;align-items:center;justify-content:center;font-size:32px;box-shadow:0 0 0 3px #C9A84C,0 0 0 6px rgba(201,168,76,0.2);margin:0 auto 20px}
     </style>
-</head><body>${printContent}</body></html>`);
+</head><body>${printContent}<script src="/linkedin-widget.js" defer></script>
+</body></html>`);
 setTimeout(() => { w.document.close(); w.print(); }, 800);
 }
 // ── LINKEDIN SHARE ─────────────────────────────────────────────────────────────
