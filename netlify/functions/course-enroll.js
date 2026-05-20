@@ -16,6 +16,8 @@ const COURSE_META = {
   // ── TOP 5 FLAGSHIP ──────────────────────────────────────────
   cfo:         { title:'Fractional CFO Mastery',               price:1497, retake:497, tier:1 },
   cmo:         { title:'Fractional CMO Mastery',               price:1497, retake:497, tier:1 },
+  ceo:         { title:'CEO Mastery: Building & Leading a $50M Company', price:1497, retake:497, tier:1 },
+  cto:         { title:'Chief Technology Officer Mastery',      price:1497, retake:497, tier:1 },
   ae:          { title:'Account Executive Excellence',         price:997,  retake:397, tier:1 },
   growth:      { title:'Growth Manager Mastery',               price:997,  retake:397, tier:1 },
   vpsales:     { title:'VP of Sales Mastery',                  price:1297, retake:497, tier:1 },

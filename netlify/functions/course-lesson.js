@@ -8,7 +8,8 @@ const CMO_DATA = require('./cmo-static-data.js');
 const COO_DATA = require('./coo-static-data.js');
 const CEO_DATA = require('./ceo-static-data.js');
 const VPSALES_DATA = require('./vpsales-static-data.js');
-const STATIC_COURSES = { cfo: CFO_DATA, cmo: CMO_DATA, coo: COO_DATA, ceo: CEO_DATA, vpsales: VPSALES_DATA };
+const CTO_DATA = require('./cto-static-data.js');
+const STATIC_COURSES = { cfo: CFO_DATA, cmo: CMO_DATA, coo: COO_DATA, ceo: CEO_DATA, vpsales: VPSALES_DATA, cto: CTO_DATA };
 
 // ─── FULL CURRICULUM ──────────────────────────────────────────────────────────
 const CURRICULUM = {
@@ -977,6 +978,82 @@ const CURRICULUM = {
         {id:'l3',title:'CEO Communication, Leading Through Narrative, Clarity, and Presence',keywords:['CEO communication','all-hands design','leadership narrative','strategic clarity','internal communication']},
         {id:'l4',title:'CEO Wellbeing, Sustaining Performance Over the Long Arc',keywords:['CEO wellbeing','peer CEO group','executive coach','sustainable performance','impostor syndrome']},
         {id:'l5',title:'The CEO at $50M, Completing the Journey and Beginning the Next',keywords:['CEO at 50M','builder to leader transition','next stage growth','CEO development','company building mastery']},
+      ]},
+    ]
+  },
+  cto: {
+    title: 'Chief Technology Officer Mastery',
+    context: 'A rigorous executive program for fractional CTOs, VPs of Engineering, and technology leaders who want to architect, scale, and lead the technology organization that drives a company from startup to $50M+ and beyond.',
+    modules: [
+      { id:'m1', title:'The CTO Role & Technology Leadership', lessons:[
+        {id:'l1',title:'The Modern CTO: From Coder to Business Technology Architect',keywords:['CTO mandate','technology leadership','business technology architect','CTO vs engineer','executive technology role']},
+        {id:'l2',title:'CTO Archetypes: Startup, Scaling, and Enterprise Technology Leadership',keywords:['CTO archetypes','startup CTO','scaling CTO','VP engineering vs CTO','CTO role evolution']},
+        {id:'l3',title:'The CEO-CTO Partnership: Aligning Technology With Business Strategy',keywords:['CEO-CTO partnership','technology-business alignment','strategic technology','executive trust','decision rights']},
+        {id:'l4',title:'The First 90 Days as CTO: Diagnosing the Technology Organization',keywords:['CTO first 90 days','technology audit','engineering diagnosis','quick wins','technology assessment']},
+        {id:'l5',title:'Fractional CTO: Building a $200K+ Technology Advisory Practice',keywords:['fractional CTO','technology advisory','engagement design','fractional pricing','CTO consulting practice']},
+      ]},
+      { id:'m2', title:'Technology Strategy & Architecture', lessons:[
+        {id:'l1',title:'Technology Strategy: Aligning the Tech Roadmap to Business Goals',keywords:['technology strategy','tech roadmap','strategic alignment','technology vision','roadmap planning']},
+        {id:'l2',title:'System Architecture: Designing for Scale, Reliability, and Change',keywords:['system architecture','scalable design','architecture principles','monolith vs microservices','architecture trade-offs']},
+        {id:'l3',title:'Build vs Buy vs Partner: The Technology Investment Decision',keywords:['build vs buy','technology investment','vendor evaluation','core vs context','make or buy decision']},
+        {id:'l4',title:'Technical Debt: Measuring, Managing, and Communicating It',keywords:['technical debt','debt management','refactoring strategy','debt communication','code quality']},
+        {id:'l5',title:'Platform Thinking: Building Technology That Compounds',keywords:['platform thinking','platform strategy','reusable systems','internal platforms','compounding technology']},
+      ]},
+      { id:'m3', title:'Building & Leading Engineering Teams', lessons:[
+        {id:'l1',title:'Engineering Org Design: Team Topologies That Scale',keywords:['engineering org design','team topologies','team structure','Conway\'s law','org scaling']},
+        {id:'l2',title:'Hiring Elite Engineers: The Process That Predicts Performance',keywords:['engineering hiring','technical interviews','hiring scorecard','engineer assessment','recruiting top talent']},
+        {id:'l3',title:'Engineering Culture: Building a High-Performance Environment',keywords:['engineering culture','high-performance culture','psychological safety','engineering values','culture design']},
+        {id:'l4',title:'Engineering Managers: Developing the Leadership Layer',keywords:['engineering managers','manager development','leadership layer','manager hiring','management training']},
+        {id:'l5',title:'Retention & Performance: Keeping and Growing Your Best Engineers',keywords:['engineer retention','performance management','career ladders','growth paths','top performer retention']},
+      ]},
+      { id:'m4', title:'Software Delivery & Engineering Excellence', lessons:[
+        {id:'l1',title:'The Software Development Lifecycle: Designing How Work Flows',keywords:['software development lifecycle','SDLC design','agile delivery','workflow design','delivery process']},
+        {id:'l2',title:'Engineering Velocity: Measuring and Improving Delivery Speed',keywords:['engineering velocity','delivery speed','DORA metrics','cycle time','throughput']},
+        {id:'l3',title:'Quality Engineering: Testing, Code Review, and Standards',keywords:['quality engineering','testing strategy','code review','engineering standards','defect prevention']},
+        {id:'l4',title:'DevOps & CI/CD: The Pipeline That Ships Reliably',keywords:['DevOps','CI/CD pipeline','deployment automation','continuous delivery','release engineering']},
+        {id:'l5',title:'Engineering Metrics: What to Measure and What to Ignore',keywords:['engineering metrics','productivity metrics','DORA','measurement pitfalls','metrics that matter']},
+      ]},
+      { id:'m5', title:'Product & Engineering Partnership', lessons:[
+        {id:'l1',title:'The Product-Engineering Relationship: Designing It to Win',keywords:['product-engineering partnership','product collaboration','cross-functional teams','product trio','engineering-product alignment']},
+        {id:'l2',title:'Roadmap & Prioritization: Allocating Engineering Capacity',keywords:['roadmap planning','prioritization','capacity allocation','engineering investment mix','roadmap trade-offs']},
+        {id:'l3',title:'Estimation & Planning: Making Commitments You Can Keep',keywords:['estimation','planning','delivery commitments','forecasting delivery','planning under uncertainty']},
+        {id:'l4',title:'Discovery & Delivery: Building the Right Thing Right',keywords:['product discovery','dual-track agile','validating ideas','delivery execution','reducing waste']},
+        {id:'l5',title:'Shipping & Iteration: From Release to Learning',keywords:['shipping software','iteration','feature flags','release strategy','learning loops']},
+      ]},
+      { id:'m6', title:'Infrastructure, Reliability & Operations', lessons:[
+        {id:'l1',title:'Cloud Architecture & Infrastructure Strategy',keywords:['cloud architecture','infrastructure strategy','cloud provider selection','infrastructure as code','cloud design']},
+        {id:'l2',title:'Reliability Engineering: Uptime, SLAs, and Incident Management',keywords:['reliability engineering','SRE','SLA SLO','uptime','incident management']},
+        {id:'l3',title:'Scaling Systems: Handling 10x Growth Without Breaking',keywords:['scaling systems','10x growth','performance scaling','bottleneck analysis','capacity scaling']},
+        {id:'l4',title:'Cost Management: Controlling Cloud and Infrastructure Spend',keywords:['cloud cost management','FinOps','infrastructure spend','cost optimization','unit economics of infrastructure']},
+        {id:'l5',title:'Observability: Monitoring, Logging, and Knowing Your System',keywords:['observability','monitoring','logging','tracing','system visibility']},
+      ]},
+      { id:'m7', title:'Security, Risk & Compliance', lessons:[
+        {id:'l1',title:'Security Architecture: Building a Defensible Technology Organization',keywords:['security architecture','defense in depth','secure design','threat modeling','security posture']},
+        {id:'l2',title:'Data Privacy & Compliance: GDPR, SOC 2, and Regulatory Demands',keywords:['data privacy','GDPR','SOC 2','compliance','regulatory requirements']},
+        {id:'l3',title:'Risk Management: Identifying and Mitigating Technology Risk',keywords:['technology risk','risk management','risk assessment','risk mitigation','risk register']},
+        {id:'l4',title:'Incident Response: Preparing for and Managing Breaches',keywords:['incident response','breach management','security incidents','response plan','post-incident review']},
+        {id:'l5',title:'Security Culture: Making the Whole Organization Responsible',keywords:['security culture','shared responsibility','security awareness','secure development','security as habit']},
+      ]},
+      { id:'m8', title:'AI, Data & Emerging Technology', lessons:[
+        {id:'l1',title:'Data Architecture: Building the Data Foundation',keywords:['data architecture','data platform','data warehouse','data pipelines','single source of truth']},
+        {id:'l2',title:'AI & Machine Learning: Where to Deploy, Where to Avoid',keywords:['AI strategy','machine learning','AI use cases','AI risk','build vs buy AI']},
+        {id:'l3',title:'Evaluating Emerging Technology: Hype vs Genuine Advantage',keywords:['emerging technology','technology evaluation','hype cycle','adoption timing','innovation strategy']},
+        {id:'l4',title:'AI-Augmented Engineering: Transforming How Teams Build',keywords:['AI-augmented engineering','AI coding tools','developer productivity','AI in SDLC','engineering transformation']},
+        {id:'l5',title:'The Data-Driven Technology Organization',keywords:['data-driven organization','data culture','analytics','data governance','metrics-informed decisions']},
+      ]},
+      { id:'m9', title:'Technology Finance & Vendor Management', lessons:[
+        {id:'l1',title:'The Technology Budget: Planning and Defending Tech Spend',keywords:['technology budget','budget planning','defending tech spend','budget allocation','CapEx OpEx']},
+        {id:'l2',title:'Vendor & Tool Strategy: Selecting and Managing the Stack',keywords:['vendor management','tool strategy','technology stack','vendor selection','tool rationalization']},
+        {id:'l3',title:'Engineering ROI: Connecting Technology Investment to Business Value',keywords:['engineering ROI','technology value','investment justification','business value of engineering','value measurement']},
+        {id:'l4',title:'Technology Due Diligence: M&A and Investment Readiness',keywords:['technology due diligence','M&A tech diligence','investment readiness','tech audit','code and architecture review']},
+        {id:'l5',title:'Capacity Planning: Aligning Headcount to the Roadmap',keywords:['capacity planning','engineering headcount','hiring plan','resource planning','roadmap capacity']},
+      ]},
+      { id:'m10', title:'CTO Leadership & Executive Influence', lessons:[
+        {id:'l1',title:'The CTO in the Boardroom: Communicating Technology to Non-Technical Leaders',keywords:['CTO board communication','technology communication','board presentation','translating technology','executive influence']},
+        {id:'l2',title:'Cross-Functional Leadership: Sales, Marketing, Finance, and the CTO',keywords:['cross-functional leadership','executive collaboration','CTO stakeholders','organizational influence','leadership relationships']},
+        {id:'l3',title:'Leading Through Technology Change: Migrations, Rewrites, and Transformation',keywords:['technology change','migrations','rewrites','transformation leadership','change management']},
+        {id:'l4',title:'The CTO Career Path: From CTO to CEO, Board, or Advisory',keywords:['CTO career path','CTO to CEO','board roles','technology advisory','career architecture']},
+        {id:'l5',title:'Legacy: Building a Technology Organization That Outlasts You',keywords:['legacy leadership','durable organization','succession planning','self-sustaining teams','organizational resilience']},
       ]},
     ]
   }};
