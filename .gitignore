@@ -18,6 +18,9 @@ build/
 # Netlify
 .netlify/
 
+# Cloudflare Wrangler local state
+.wrangler/
+
 # Claude / IDE
 .claude/
 .cursor/
