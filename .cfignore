@@ -1,4 +1,8 @@
 # Cloudflare Pages - files to exclude from deployment
+# HTML pages are stored in KV (BLOBS_MARKCMO_PAGES_HTML) and served
+# by functions/[[path]].js catch-all + functions/blog/[[path]].js.
+# This keeps the static deployment under the 20,000-file CF Pages limit.
+*.html
 .claude/
 .netlify/
 node_modules/

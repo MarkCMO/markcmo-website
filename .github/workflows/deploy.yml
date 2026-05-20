@@ -21,9 +21,22 @@ jobs:
         with:
           node-version: '22'
 
-      # Deploy only git-tracked files via git archive to avoid the wrangler
-      # 20,000-file limit (the .claude/ session directory is not in git but
-      # wrangler's hardcoded ignore list doesn't exclude it in direct-upload mode)
+      # ── Step 1: Upload all HTML pages to KV ─────────────────────────
+      # HTML files are excluded from the static CF Pages deployment
+      # (.cfignore has *.html) to stay under the 20,000-file limit.
+      # The catch-all function (functions/[[path]].js) reads from this KV
+      # namespace at request time to serve any HTML page.
+      - name: Upload HTML pages to KV
+        run: node scripts/upload-html-to-kv.js
+        env:
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          CLOUDFLARE_ACCOUNT_ID: 5b4ea6b5589fe12f29bea5d7e43fe03c
+          KV_NAMESPACE_ID: 0340e4af3ed44224ac380d1d35014834
+
+      # ── Step 2: Deploy static assets to Cloudflare Pages ────────────
+      # Uses a clean git archive so no untracked workspace files leak in.
+      # .cfignore (which includes *.html) is extracted into the archive
+      # dir, so wrangler respects it and the static deploy stays <20K files.
       - name: Create clean deploy archive
         run: |
           mkdir -p /tmp/markcmo_deploy
