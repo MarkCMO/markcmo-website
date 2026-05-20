@@ -22,13 +22,13 @@ jobs:
           node-version: '22'
 
       # ── Step 1: Upload all HTML pages to KV ─────────────────────────
-      # HTML is excluded from the static CF Pages deployment (*.html in
-      # .cfignore) to stay under the 20,000-file limit.
-      # The catch-all (functions/[[path]].js) reads KV at request time.
+      # HTML is excluded from the static CF Pages deployment to stay under
+      # the 20,000-file limit.  The catch-all (functions/[[path]].js)
+      # reads KV at request time to serve any HTML page.
       #
       # Uses X-Auth-Email + X-Auth-Key (Global API Key) because the
       # scoped CLOUDFLARE_API_TOKEN only has Pages:Edit, not KV:Edit.
-      # Requires GitHub secret CF_API_KEY = your Cloudflare Global API Key.
+      # Requires GitHub secret CF_API_KEY = Cloudflare Global API Key.
       - name: Upload HTML pages to KV
         run: node scripts/upload-html-to-kv.js
         env:
@@ -37,18 +37,23 @@ jobs:
           CLOUDFLARE_ACCOUNT_ID: 5b4ea6b5589fe12f29bea5d7e43fe03c
           KV_NAMESPACE_ID: 0340e4af3ed44224ac380d1d35014834
 
-      # ── Step 2: Deploy static assets to Cloudflare Pages ────────────
-      # Clean git archive ensures no untracked workspace files leak.
-      # .cfignore (which includes *.html) is in the archive, so wrangler
-      # excludes HTML and the static deploy stays well under 20K files.
-      - name: Create clean deploy archive
+      # ── Step 2: Build static asset dist/ ────────────────────────────
+      # build-dist.js copies only CSS/JS/images/JSON/etc into dist/.
+      # It explicitly excludes .html files (those are in KV).
+      # Then we copy functions/ into dist/functions/ so CF Pages picks
+      # up the Functions bundle from the deploy directory.
+      - name: Build dist/ and copy functions
         run: |
-          mkdir -p /tmp/markcmo_deploy
-          git archive HEAD | tar -x -C /tmp/markcmo_deploy
+          node scripts/build-dist.js
+          cp -r functions/ dist/functions/
 
+      # ── Step 3: Deploy static assets + functions to CF Pages ────────
+      # wrangler reads wrangler.toml from the cwd (repo root) for KV
+      # bindings, and deploys static assets + functions from dist/.
+      # File count: ~100 static + ~103 functions = ~200 total (well under 20K).
       - name: Deploy to Cloudflare Pages
         run: |
-          npx wrangler@latest pages deploy /tmp/markcmo_deploy \
+          npx wrangler@latest pages deploy dist/ \
             --project-name markcmo \
             --branch main \
             --commit-hash "${{ github.sha }}" \
