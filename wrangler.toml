@@ -1,4 +1,4 @@
-﻿# wrangler.toml - Cloudflare Pages config for MarkCMO
+# wrangler.toml - Cloudflare Pages config for MarkCMO
 name = "markcmo"
 compatibility_date = "2026-05-01"
 compatibility_flags = ["nodejs_compat"]
@@ -10,4 +10,4 @@ NODE_ENV = "production"
 
 [[kv_namespaces]]
 binding = "BLOBS_DOCUMENTS"
-id = "REPLACE_WITH_KV_ID"
+id = "4e84c31e50304594a99544cd7e48e8c4"

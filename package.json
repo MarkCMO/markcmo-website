@@ -2,6 +2,11 @@
   "name": "markcmo",
   "version": "1.0.0",
   "description": "MarkCMO.com — Full site with webinar funnel, admin, WETYR Studio (Cloudflare Pages)",
+  "scripts": {
+    "deploy": "node scripts/build-pages-functions.js && node scripts/build-dist.js && wrangler pages deploy ./dist --project-name=markcmo",
+    "deploy:cron": "wrangler deploy --config cloudflare/cron-worker.toml",
+    "tail:cron": "wrangler tail markcmo-cron"
+  },
   "dependencies": {
     "pdf-parse": "^1.1.1"
   }

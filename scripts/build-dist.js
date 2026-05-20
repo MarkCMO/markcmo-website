@@ -1,0 +1,19 @@
+// build-dist.js - Builds CF Pages static asset output dir for MarkCMO
+const fs = require('fs');
+const path = require('path');
+const DIST = 'dist';
+const TOP_LEVEL_DIRS = ['blog', 'data', 'images', 'js', 'assets', '.well-known', 'css', 'fonts', 'documents', 'docs', 'forms', 'scripts-client'];
+const TOP_LEVEL_FILE_PATTERNS = [/\.html$/, /\.css$/, /\.js$/, /\.json$/, /\.txt$/, /\.xml$/, /\.ico$/, /\.svg$/, /\.png$/, /\.jpg$/, /\.webp$/, /\.pdf$/, /\.webmanifest$/];
+const TOP_LEVEL_LITERALS = ['_headers', '_redirects', 'robots.txt', 'humans.txt', 'manifest.json'];
+const NEVER = [/^node_modules/, /^\.netlify/, /^\.wrangler/, /^\.claude/, /^\.git/, /^functions/, /^netlify\b/, /^scripts/, /^cloudflare/, /^dist/, /^supabase/, /^\.env/, /\.local$/, /\.log$/, /^package(-lock)?\.json$/, /^wrangler\.toml$/];
+function shouldSkip(n) { return NEVER.some(p => p.test(n)); }
+function topLevelKeep(n) { if (shouldSkip(n)) return false; if (TOP_LEVEL_LITERALS.includes(n)) return true; if (TOP_LEVEL_FILE_PATTERNS.some(p => p.test(n))) return true; if (TOP_LEVEL_DIRS.includes(n)) return true; return false; }
+function cpRecursive(src, dst) { const s = fs.statSync(src); if (s.isDirectory()) { fs.mkdirSync(dst, { recursive: true }); for (const e of fs.readdirSync(src)) cpRecursive(path.join(src, e), path.join(dst, e)); } else fs.copyFileSync(src, dst); }
+fs.rmSync(DIST, { recursive: true, force: true }); fs.mkdirSync(DIST);
+let copied = 0;
+for (const e of fs.readdirSync('.')) { if (!topLevelKeep(e)) continue; cpRecursive(e, path.join(DIST, e)); copied++; }
+let total = 0;
+function countF(dir) { for (const e of fs.readdirSync(dir)) { const f = path.join(dir, e); if (fs.statSync(f).isDirectory()) countF(f); else total++; } }
+countF(DIST);
+console.log(`copied ${copied} entries; ${total} files in dist/`);
+if (total > 20000) { console.error(`!! ${total} > 20000 file cap`); process.exit(1); }
