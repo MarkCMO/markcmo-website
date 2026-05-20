@@ -1,0 +1,454 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>What Is Marketing Operations? Definition, Role, and Responsibilities | MarkCMO</title>
+<meta name="description" content="Marketing operations is the function responsible for marketing technology, data, processes, and analytics. Learn what marketing ops covers and why it is critical for scaling.">
+<link rel="canonical" href="https://markcmo.com/what-is-marketing-operations">
+<meta property="og:title" content="What Is Marketing Operations? Definition, Role, and Responsibilities | MarkCMO">
+<meta property="og:description" content="Marketing operations is the function responsible for marketing technology, data, processes, and analytics. Learn what marketing ops covers and why it is critical for scaling.">
+<meta property="og:url" content="https://markcmo.com/what-is-marketing-operations">
+<meta property="og:type" content="article">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="What Is Marketing Operations? Definition, Role, and Responsibilities | MarkCMO">
+<meta name="twitter:description" content="Marketing operations is the function responsible for marketing technology, data, processes, and analytics. Learn what marketing ops covers and why it is critical for scaling.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Bebas+Neue&display=swap">
+<script type="application/ld+json">{
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "headline": "What Is Marketing Operations?",
+  "description": "Marketing operations is the function responsible for marketing technology, data, processes, and analytics. Learn what marketing ops covers and why it is critical for scaling.",
+  "author": {
+    "@type": "Person",
+    "name": "Mark Gabrielli",
+    "url": "https://markcmo.com/about"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "MarkCMO",
+    "url": "https://markcmo.com"
+  },
+  "url": "https://markcmo.com/what-is-marketing-operations",
+  "datePublished": "2026-05-19",
+  "dateModified": "2026-05-19"
+}</script>
+<script type="application/ld+json">{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "What is marketing operations?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Marketing operations is the function responsible for marketing technology, data management, process documentation, and analytics within a marketing organization. Marketing ops ensures that marketing teams have the tools, data quality, and operational systems to execute campaigns efficiently, measure results accurately, and connect marketing activity to revenue. It is the infrastructure layer that makes scalable, measurable marketing possible."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "What does a marketing operations manager do?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "A marketing operations manager owns the marketing tech stack, ensures data quality, builds and maintains attribution reporting, manages campaign workflows and processes, oversees lead management and scoring, and builds the dashboards that give leadership visibility into marketing performance. In smaller companies, the fractional CMO or a senior marketer handles marketing ops responsibilities until the team is large enough to warrant a dedicated hire."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "What tools are in a marketing operations tech stack?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "A typical marketing operations tech stack includes: CRM (Salesforce, HubSpot), marketing automation (HubSpot, Marketo, Pardot), attribution (Bizible/Marketo Measure, Triple Whale, Northbeam), analytics (Google Analytics 4, Looker, Tableau), ABM (6sense, Demandbase), conversation intelligence (Gong, Chorus), and intent data (Bombora, G2). The specific stack depends on company size, budget, sales motion, and technical resources -- not every company needs enterprise tools."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Why is marketing attribution important?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Marketing attribution connects specific marketing touchpoints -- ads, content, emails, events -- to pipeline and revenue outcomes. Without attribution, marketing teams cannot determine which channels and campaigns are generating qualified pipeline and which are wasting budget. Most B2B companies underinvest in attribution and then make channel investment decisions based on guesswork rather than data. MarkCMO always prioritizes attribution infrastructure in the first 30 days of a new engagement."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "How is marketing operations different from demand generation?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Demand generation creates pipeline -- it is responsible for the campaigns, content, and channels that generate awareness, leads, and opportunities. Marketing operations enables demand generation -- it manages the technology, data, and processes that allow demand generation programs to execute efficiently, track accurately, and report reliably. Demand gen is the what; marketing ops is the how. Both are required for a high-performing marketing function."
+      }
+    }
+  ]
+}</script>
+<style>
+:root{--gold:#C9A84C;--dark:#050919;--navy:#0A1628}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Inter',system-ui,sans-serif;background:#050919;color:#e8e8e8;line-height:1.7}
+#scroll-progress{position:fixed;top:0;left:0;height:3px;background:var(--gold);z-index:9999;width:0;transition:width .1s}
+.nav{position:fixed;top:0;left:0;right:0;z-index:900;display:flex;align-items:center;padding:0 32px;height:64px;background:rgba(5,9,25,.92);backdrop-filter:blur(12px);border-bottom:1px solid rgba(255,255,255,.06);transition:box-shadow .3s}
+.nav.scrolled{box-shadow:0 2px 20px rgba(0,0,0,.4)}
+.nav-logo{display:flex;align-items:center;gap:10px;text-decoration:none;flex-shrink:0}
+.nav-logo-avatar{width:36px;height:36px;border-radius:50%;overflow:hidden;border:2px solid var(--gold)}
+.nav-logo-avatar img{width:100%;height:100%;object-fit:cover}
+.nav-logo-text strong{display:block;font-size:.85rem;color:#fff;line-height:1.2}
+.nav-logo-text span{display:block;font-size:.7rem;color:#94A3B8}
+.nav-links{display:flex;list-style:none;gap:28px;margin:0 auto;padding:0}
+.nav-links a{color:#CBD5E1;text-decoration:none;font-size:.88rem;transition:color .2s}
+.nav-links a:hover{color:#fff}
+.nav-btn{background:var(--gold);color:#0f0f0f;padding:8px 18px;border-radius:6px;font-size:.85rem;font-weight:700;text-decoration:none;white-space:nowrap}
+.nav-hamburger{display:none;flex-direction:column;gap:5px;cursor:pointer;padding:4px}
+.nav-hamburger span{display:block;width:22px;height:2px;background:#fff;border-radius:2px}
+.mobile-drawer{display:none;position:fixed;top:64px;left:0;right:0;background:#0a0f1e;border-bottom:1px solid #1e2640;padding:20px 24px;flex-direction:column;gap:16px;z-index:899}
+.mobile-drawer.open{display:flex}
+.mobile-drawer a{color:#CBD5E1;text-decoration:none;font-size:.95rem;padding:6px 0;border-bottom:1px solid #1a2035}
+@media(max-width:860px){.nav-links,.nav-right{display:none}.nav-hamburger{display:flex}}
+.sp-proof-strip{display:flex;justify-content:center;flex-wrap:wrap;gap:0;background:rgba(201,168,76,.07);border-top:1px solid rgba(201,168,76,.15);border-bottom:1px solid rgba(201,168,76,.15)}
+.sp-proof-item{display:flex;flex-direction:column;align-items:center;padding:14px 32px;border-right:1px solid rgba(201,168,76,.12)}
+.sp-proof-item:last-child{border-right:none}
+.sp-proof-num{font-size:1.35rem;font-weight:800;color:var(--gold);line-height:1}
+.sp-proof-label{font-size:.72rem;color:#94A3B8;text-transform:uppercase;letter-spacing:.08em;margin-top:3px}
+/* Glossary hero */
+.gl-hero{padding:120px 0 64px;background:linear-gradient(160deg,#050919 0%,#0a1628 60%,#0d1b27 100%);border-bottom:1px solid #1a2640}
+.gl-hero-inner{max-width:860px;margin:0 auto;padding:0 24px}
+.gl-tag{display:inline-block;background:rgba(201,168,76,.12);border:1px solid rgba(201,168,76,.3);color:var(--gold);font-size:.72rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;padding:5px 12px;border-radius:4px;margin-bottom:20px}
+.gl-hero h1{font-size:clamp(2rem,5vw,3.2rem);font-weight:800;color:#fff;line-height:1.1;margin-bottom:20px}
+.gl-def-lead{font-size:1.15rem;color:#CBD5E1;line-height:1.8;border-left:3px solid var(--gold);padding-left:20px;margin-bottom:0}
+/* Body layout */
+.gl-body{max-width:860px;margin:0 auto;padding:56px 24px 80px}
+.gl-section{margin-bottom:48px}
+.gl-section h2{font-size:1.5rem;font-weight:700;color:#fff;margin-bottom:16px;padding-bottom:10px;border-bottom:1px solid #1e2640}
+.gl-section p{color:#CBD5E1;line-height:1.8;margin-bottom:14px}
+.gl-section p:last-child{margin-bottom:0}
+.gl-quotable{background:rgba(201,168,76,.06);border-left:4px solid var(--gold);padding:18px 22px;border-radius:0 8px 8px 0;margin:24px 0;font-size:1.05rem;color:#e8e8e8;font-style:italic;line-height:1.7}
+.gl-components{list-style:none;padding:0;display:grid;gap:14px}
+.gl-components li{background:#0d1625;border:1px solid #1e2640;border-radius:8px;padding:16px 20px}
+.gl-components li strong{display:block;color:var(--gold);font-size:.9rem;margin-bottom:4px}
+.gl-components li span{color:#94A3B8;font-size:.88rem;line-height:1.6}
+/* FAQ */
+.gl-faq{display:grid;gap:12px}
+.gl-faq-item{background:#0d1625;border:1px solid #1e2640;border-radius:8px;overflow:hidden}
+.gl-faq-q{padding:16px 20px;font-weight:600;color:#e8e8e8;cursor:pointer;list-style:none;display:flex;justify-content:space-between;align-items:center;font-size:.95rem}
+.gl-faq-q::after{content:'+';color:var(--gold);font-size:1.2rem;flex-shrink:0;margin-left:12px}
+.gl-faq-item.open .gl-faq-q::after{content:'-'}
+.gl-faq-a{display:none;padding:0 20px 16px;color:#94A3B8;font-size:.88rem;line-height:1.8}
+.gl-faq-item.open .gl-faq-a{display:block}
+/* Related links */
+.gl-related{display:flex;flex-wrap:wrap;gap:10px;margin-top:8px}
+.gl-related a{background:#0d1625;border:1px solid #1e2640;color:#CBD5E1;padding:8px 16px;border-radius:6px;font-size:.85rem;text-decoration:none;transition:border-color .2s,color .2s}
+.gl-related a:hover{border-color:var(--gold);color:var(--gold)}
+/* CTA banner */
+.gl-cta{background:linear-gradient(135deg,#0a1628,#0d1b27);border:1px solid rgba(201,168,76,.2);border-radius:12px;padding:40px;text-align:center;margin:48px 0}
+.gl-cta h2{font-size:1.6rem;font-weight:700;color:#fff;margin-bottom:12px}
+.gl-cta p{color:#94A3B8;margin-bottom:24px;font-size:.95rem}
+.gl-cta a{background:var(--gold);color:#0f0f0f;padding:13px 28px;border-radius:6px;font-weight:700;text-decoration:none;font-size:.95rem;display:inline-block}
+/* Form styles */
+.mc-contact{background:linear-gradient(135deg,#050919 0%,#0A1628 60%,#0d1b27 100%);padding:64px 0;border-top:1px solid #2a2a2a}
+.mc-contact-inner{max-width:1100px;margin:0 auto;padding:0 24px;display:grid;grid-template-columns:1fr 1fr;gap:56px;align-items:start}
+.mc-contact-left h2{font-family:'Bebas Neue',sans-serif;font-size:clamp(1.8rem,4vw,2.8rem);font-weight:400;letter-spacing:.03em;color:#fff;margin:0 0 14px;line-height:1.1}
+.mc-contact-left h2 em{color:#C9A84C;font-style:normal}
+.mc-contact-left p{font-size:.92rem;color:#94A3B8;line-height:1.8;margin:0 0 24px}
+.mc-contact-proof{display:flex;flex-direction:column;gap:10px;margin-bottom:28px}
+.mc-contact-proof-item{display:flex;align-items:center;gap:10px;font-size:.85rem;color:#94A3B8}
+.mc-contact-proof-item span:first-child{color:#C9A84C;font-weight:700;font-size:1rem;flex-shrink:0}
+.mc-contact-direct{background:rgba(201,168,76,.08);border:1px solid rgba(201,168,76,.2);border-radius:8px;padding:14px 18px}
+.mc-contact-direct p{font-size:.75rem;color:#666;text-transform:uppercase;letter-spacing:.08em;margin:0 0 6px}
+.mc-contact-direct a{color:#C9A84C;font-weight:700;text-decoration:none;font-size:.88rem}
+.mc-form-card{background:#111;border:1px solid #2a2a2a;border-radius:12px;padding:28px}
+.mc-form-card h3{font-size:1.05rem;font-weight:700;color:#fff;margin:0 0 4px}
+.mc-form-card>p{font-size:.82rem;color:#64748B;margin:0 0 20px}
+.mc-field{margin-bottom:12px}
+.mc-field input,.mc-field textarea,.mc-field select{width:100%;padding:12px 14px;background:#1a1a1a;border:1px solid #2a2a2a;border-radius:6px;color:#e8e8e8;font-size:.88rem;font-family:inherit;box-sizing:border-box;transition:border-color .2s;outline:none}
+.mc-field input:focus,.mc-field textarea:focus{border-color:#C9A84C}
+.mc-field textarea{resize:vertical;min-height:80px}
+.mc-submit{width:100%;background:#C9A84C;color:#0f0f0f;border:none;padding:13px;border-radius:6px;font-size:.95rem;font-weight:700;cursor:pointer;font-family:inherit;transition:background .2s;margin-top:4px}
+.mc-submit:hover:not(:disabled){background:#b8952f}
+.mc-submit:disabled{opacity:.5;cursor:not-allowed}
+.mc-success{display:none;text-align:center;padding:28px 12px}
+.mc-success-icon{font-size:2.5rem;margin-bottom:10px;color:#C9A84C}
+.mc-success h3{color:#C9A84C;font-size:1.2rem;font-weight:700;margin:0 0 8px}
+.mc-success p{color:#94A3B8;font-size:.88rem;margin:0 0 18px;line-height:1.7}
+.mc-success a{color:#C9A84C;font-weight:700}
+footer{background:#020817;border-top:1px solid #1a2035;padding:60px 0 0}
+.footer-mega{max-width:1200px;margin:0 auto;padding:0 32px 48px;display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:40px}
+.footer-logo{font-size:1.4rem;font-weight:800;color:#fff;margin-bottom:12px}.footer-logo span{color:var(--gold)}
+.footer-desc{font-size:.82rem;color:#64748B;line-height:1.7;margin-bottom:16px}
+.footer-brand-tags{display:flex;flex-wrap:wrap;gap:6px}
+.footer-brand-tags span{background:#0d1625;border:1px solid #1e2640;color:#64748B;font-size:.7rem;padding:3px 8px;border-radius:4px}
+.social-links{display:flex;gap:8px}
+.social-link{display:flex;align-items:center;justify-content:center;width:32px;height:32px;background:#0d1625;border:1px solid #1e2640;border-radius:6px;color:#94A3B8;text-decoration:none;font-size:.8rem;font-weight:700;transition:border-color .2s,color .2s}
+.social-link:hover{border-color:var(--gold);color:var(--gold)}
+.footer-col h4{font-size:.8rem;text-transform:uppercase;letter-spacing:.1em;color:#64748B;margin-bottom:14px}
+.footer-col ul{list-style:none;padding:0;display:flex;flex-direction:column;gap:8px}
+.footer-col a{color:#94A3B8;text-decoration:none;font-size:.85rem;transition:color .2s}
+.footer-col a:hover{color:var(--gold)}
+.footer-bottom{border-top:1px solid #1a2035;padding:20px 32px;max-width:1200px;margin:0 auto;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:12px}
+.footer-bottom p{font-size:.78rem;color:#334155}
+.footer-bottom-social{display:flex;gap:14px;align-items:center}
+.footer-bottom-social a{color:#334155;text-decoration:none;font-size:.78rem;transition:color .2s}
+.footer-bottom-social a:hover{color:var(--gold)}
+.footer-bottom-social span{color:#1e2640}
+@media(max-width:860px){.footer-mega{grid-template-columns:1fr 1fr}.mc-contact-inner{grid-template-columns:1fr;gap:32px}}
+@media(max-width:540px){.footer-mega{grid-template-columns:1fr}.sp-proof-item{padding:10px 16px}}
+</style>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "DefinedTerm",
+    "name": "Marketing Operations",
+    "description": "Marketing operations is the function responsible for the processes, technology, data, and reporting that enable a marketing organization to operate efficiently and measure its impact on revenue.",
+    "url": "https://markcmo.com/what-is-marketing-operations",
+    "inDefinedTermSet": {
+      "@type": "DefinedTermSet",
+      "name": "Marketing & Business Leadership Glossary",
+      "url": "https://markcmo.com/glossary"
+    }
+  }
+  </script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      {
+        "@type": "ListItem",
+        "position": 1,
+        "name": "Home",
+        "item": "https://markcmo.com/"
+      },
+      {
+        "@type": "ListItem",
+        "position": 2,
+        "name": "Glossary",
+        "item": "https://markcmo.com/glossary"
+      },
+      {
+        "@type": "ListItem",
+        "position": 3,
+        "name": "What Is Marketing Operations",
+        "item": "https://markcmo.com/what-is-marketing-operations"
+      }
+    ]
+  }
+  </script>
+</head>
+<body>
+<div class="page-wrapper">
+<nav class="nav" id="mainNav">
+<a href="/index.html" class="nav-logo">
+<div class="nav-logo-avatar"><img src="/mark-photo.webp" alt="Mark Gabrielli" /></div>
+<div class="nav-logo-text"><strong>Mark Gabrielli</strong><span>Fractional CMO &amp; COO</span></div>
+</a>
+<ul class="nav-links">
+<li><a href="/about.html">About</a></li>
+<li><a href="/services.html">Services</a></li>
+<li><a href="/magnet-framework.html" style="color:#C9A84C;font-weight:600;">MAGNET&trade;</a></li>
+<li><a href="/results.html">Results</a></li>
+<li><a href="/blog">Insights</a></li>
+<li><a href="https://academy.markcmo.com" target="_blank" style="color:#C9A84C;">Academy</a></li>
+</ul>
+<div class="nav-right"><a href="/book.html" class="nav-btn">Book a Free Call</a></div>
+<div class="nav-hamburger" id="navHam"><span></span><span></span><span></span></div>
+</nav>
+<div class="mobile-drawer" id="mobileDrawer">
+<a href="/about.html">About</a><a href="/services.html">Services</a>
+<a href="/magnet-framework.html" style="color:#C9A84C;font-weight:600;">MAGNET Framework&trade;</a>
+<a href="/results.html">Results</a><a href="/blog">Insights</a>
+<a href="https://academy.markcmo.com" target="_blank">Academy</a>
+<a href="/book.html" style="color:#C9A84C;font-weight:700;">Book a Free Strategy Call &rarr;</a>
+</div>
+<main>
+
+<header class="gl-hero">
+<div class="gl-hero-inner">
+<div class="gl-tag">Marketing Glossary</div>
+<h1>What Is Marketing Operations?</h1>
+<p class="gl-def-lead">Marketing operations is the function responsible for the technology, data, processes, and analytics that enable marketing teams to plan, execute, measure, and optimize their activities at scale. Marketing operations -- often called Marketing Ops or MOps -- bridges the gap between marketing strategy and marketing execution by building and maintaining the systems that make efficient, measurable marketing possible. Without a strong marketing operations function, marketing teams lack the data to make informed decisions, the technology to automate at scale, and the processes to execute consistently -- resulting in wasted spend, inaccurate reporting, and an inability to connect marketing activity to revenue.</p>
+</div>
+</header>
+
+<div class="sp-proof-strip">
+<div class="sp-proof-item"><span class="sp-proof-num">4.9&#9733;</span><span class="sp-proof-label">193 Reviews</span></div>
+<div class="sp-proof-item"><span class="sp-proof-num">90%</span><span class="sp-proof-label">Retention Rate</span></div>
+<div class="sp-proof-item"><span class="sp-proof-num">19+</span><span class="sp-proof-label">Ventures Built</span></div>
+<div class="sp-proof-item"><span class="sp-proof-num">$50M+</span><span class="sp-proof-label">Revenue Generated</span></div>
+<div class="sp-proof-item"><span class="sp-proof-num">30</span><span class="sp-proof-label">Days to First Results</span></div>
+</div>
+<div style="background:#0d1b27;border-left:3px solid #2563EB;padding:1.25rem 1.5rem;margin:0;max-width:100%;border-radius:0 6px 6px 0;">
+<strong style="color:#C9A84C;font-size:.75rem;font-family:'DM Mono',monospace;text-transform:uppercase;letter-spacing:.1em;display:block;margin-bottom:.5rem;">Quick Answer</strong>
+<p style="color:#ccc;margin:0;line-height:1.75;font-size:.95rem;">Marketing operations is the function responsible for the technology, data, processes, and analytics that enable marketing teams to plan, execute, measure, and optimize their activities at scale. Marketing operations -- often called Marketing Ops or MOps -- bridges the gap between marketing strategy and marketing execution by building and maintaining the systems that make efficient, measurable marketing possible.</p>
+</div>
+
+<div class="gl-body">
+
+<section class="gl-section">
+<h2>What Marketing Operations Actually Manages</h2>
+<p>Marketing operations manages three core domains: technology, data, and process. On the technology side, marketing ops owns the marketing tech stack -- selecting, implementing, integrating, and maintaining the tools that marketing uses, from CRM and marketing automation to attribution platforms and analytics. On the data side, marketing ops ensures data quality, governance, and integrity -- clean lists, accurate attribution, reliable reporting, and a single source of truth for marketing performance. On the process side, marketing ops documents and systematizes how marketing work gets done -- campaign workflows, lead management processes, and the handoff between marketing and sales.</p>
+<p>Marketing operations has become increasingly strategic as the marketing technology landscape has expanded. The average B2B company now uses 15 to 20 marketing tools, generating data across dozens of touchpoints. Without a dedicated function to manage this complexity, marketing data becomes unreliable and marketing decisions become intuition-based rather than evidence-based. Marketing operations is the function that converts raw data and technology capability into reliable business intelligence.</p>
+
+<blockquote class="gl-quotable">Marketing operations is what separates marketing teams that know what is working from marketing teams that guess -- it is the operational foundation that makes every other marketing investment perform at its potential.</blockquote>
+</section>
+
+<section class="gl-section">
+<h2>Core Components of Marketing Operations</h2>
+<ul class="gl-components">
+<li><strong>Marketing Technology Stack Management</strong><span>Selecting, implementing, integrating, and maintaining the marketing tech stack -- CRM, marketing automation, attribution, analytics, ABM, chat, and conversion tools -- ensuring each system works together and delivers clean data.</span></li>
+<li><strong>Data Quality and Governance</strong><span>Managing the quality, completeness, and accuracy of marketing data: list hygiene, data enrichment, field standardization, duplicate management, and the governance policies that keep CRM data reliable and actionable.</span></li>
+<li><strong>Campaign Operations and Workflow</strong><span>Building and managing the operational infrastructure for campaign execution: campaign templates, asset libraries, approval workflows, QA checklists, and launch processes that allow marketing to execute at scale without sacrificing quality.</span></li>
+<li><strong>Attribution and Revenue Reporting</strong><span>Configuring and maintaining the attribution model that connects marketing touchpoints to pipeline and revenue -- building the reports and dashboards that give leadership accurate visibility into marketing ROI.</span></li>
+<li><strong>Lead Management and Scoring</strong><span>Designing and maintaining the lead management process: lead capture, enrichment, scoring, routing, and the SLA between marketing and sales that ensures qualified leads are followed up on promptly.</span></li>
+<li><strong>Marketing Analytics and Insights</strong><span>Building the reporting infrastructure that translates raw marketing data into strategic insights -- channel performance, campaign ROI, funnel conversion rates, CAC trends, and cohort analysis.</span></li>
+</ul>
+</section>
+
+<section class="gl-section">
+<h2>How MarkCMO Approaches This</h2>
+<p>MarkCMO marketing operations audits begin with the tech stack and attribution -- two areas where most growth-stage companies have the most significant gaps. A broken attribution model means leadership is making investment decisions on inaccurate data. Tech stack redundancy means teams are paying for tools that duplicate each other's functions without integrating properly.</p>
+<p>MarkCMO builds marketing operations infrastructure that is right-sized for the company -- not over-engineered for enterprise scale or under-built for the company's actual needs. Every marketing operations engagement produces documented processes, clean data, and a reporting structure that connects marketing activity directly to pipeline and revenue outcomes.</p>
+
+</section>
+
+<div class="gl-cta">
+<h2>Need a Senior Marketing Leader Who Executes?</h2>
+<p>MarkCMO delivers fractional CMO services that build strategy, install systems, and generate pipeline -- in 30 days or less.</p>
+<a href="/marketing-operations.html">See Marketing Operations Services &rarr;</a>
+</div>
+
+<section class="gl-section">
+<h2>Frequently Asked Questions</h2>
+<div class="gl-faq">
+<div class="gl-faq-item"><div class="gl-faq-q">What is marketing operations?</div><div class="gl-faq-a"><p>Marketing operations is the function responsible for marketing technology, data management, process documentation, and analytics within a marketing organization. Marketing ops ensures that marketing teams have the tools, data quality, and operational systems to execute campaigns efficiently, measure results accurately, and connect marketing activity to revenue. It is the infrastructure layer that makes scalable, measurable marketing possible.</p></div></div>
+<div class="gl-faq-item"><div class="gl-faq-q">What does a marketing operations manager do?</div><div class="gl-faq-a"><p>A marketing operations manager owns the marketing tech stack, ensures data quality, builds and maintains attribution reporting, manages campaign workflows and processes, oversees lead management and scoring, and builds the dashboards that give leadership visibility into marketing performance. In smaller companies, the fractional CMO or a senior marketer handles marketing ops responsibilities until the team is large enough to warrant a dedicated hire.</p></div></div>
+<div class="gl-faq-item"><div class="gl-faq-q">What tools are in a marketing operations tech stack?</div><div class="gl-faq-a"><p>A typical marketing operations tech stack includes: CRM (Salesforce, HubSpot), marketing automation (HubSpot, Marketo, Pardot), attribution (Bizible/Marketo Measure, Triple Whale, Northbeam), analytics (Google Analytics 4, Looker, Tableau), ABM (6sense, Demandbase), conversation intelligence (Gong, Chorus), and intent data (Bombora, G2). The specific stack depends on company size, budget, sales motion, and technical resources -- not every company needs enterprise tools.</p></div></div>
+<div class="gl-faq-item"><div class="gl-faq-q">Why is marketing attribution important?</div><div class="gl-faq-a"><p>Marketing attribution connects specific marketing touchpoints -- ads, content, emails, events -- to pipeline and revenue outcomes. Without attribution, marketing teams cannot determine which channels and campaigns are generating qualified pipeline and which are wasting budget. Most B2B companies underinvest in attribution and then make channel investment decisions based on guesswork rather than data. MarkCMO always prioritizes attribution infrastructure in the first 30 days of a new engagement.</p></div></div>
+<div class="gl-faq-item"><div class="gl-faq-q">How is marketing operations different from demand generation?</div><div class="gl-faq-a"><p>Demand generation creates pipeline -- it is responsible for the campaigns, content, and channels that generate awareness, leads, and opportunities. Marketing operations enables demand generation -- it manages the technology, data, and processes that allow demand generation programs to execute efficiently, track accurately, and report reliably. Demand gen is the what; marketing ops is the how. Both are required for a high-performing marketing function.</p></div></div>
+</div>
+</section>
+
+<section class="gl-section">
+<h2>Related Resources</h2>
+<div class="gl-related">
+<a href="/marketing-audit.html">Marketing Audit</a>
+<a href="/fractional-cmo.html">Fractional CMO</a>
+<a href="/what-is-marketing-analytics.html">What Is Marketing Analytics?</a>
+<a href="/what-is-marketing-tech-stack.html">What Is a Marketing Tech Stack?</a>
+<a href="/what-is-crm-automation.html">What Is CRM Automation?</a>
+</div>
+</section>
+
+</div><!-- /gl-body -->
+
+</main>
+
+<section class="mc-contact" id="contact">
+<div class="mc-contact-inner">
+<div class="mc-contact-left">
+<h2>Work With a <em>Fractional CMO</em> Who Executes</h2>
+<p>MarkCMO delivers senior marketing leadership at a fraction of the full-time cost -- with the strategy, systems, and execution your business needs to grow.</p>
+<div class="mc-contact-proof">
+<div class="mc-contact-proof-item"><span>$50M+</span><span>Revenue generated for clients</span></div>
+<div class="mc-contact-proof-item"><span>90%</span><span>Client retention rate</span></div>
+<div class="mc-contact-proof-item"><span>30 days</span><span>To first measurable results</span></div>
+</div>
+<div class="mc-contact-direct">
+<p>Direct line</p>
+<a href="mailto:mark@markcmo.com">mark@markcmo.com</a><br>
+<a href="tel:+13219175738">+1 (321) 917-5738</a>
+</div>
+</div>
+<div class="mc-form-card">
+<div id="mc-card">
+<h3>Book a Free Strategy Call</h3>
+<p>Tell us about your business and we will reach out within one business day.</p>
+<form id="mc-form" novalidate>
+<input type="hidden" name="form-name" value="glossary-contact">
+<div class="mc-field"><input type="text" name="name" placeholder="Full name" required></div>
+<div class="mc-field"><input type="email" name="email" placeholder="Work email" required></div>
+<div class="mc-field"><input type="text" name="company" placeholder="Company name"></div>
+<div class="mc-field"><input type="tel" name="phone" placeholder="Phone (optional)"></div>
+<div class="mc-field"><textarea name="message" placeholder="What are you trying to grow or fix?"></textarea></div>
+<button type="submit" class="mc-submit" id="mc-btn">Get My Free Strategy Call &rarr;</button>
+</form>
+</div>
+<div class="mc-success" id="mc-success">
+<div class="mc-success-icon">&#10003;</div>
+<h3>Request received.</h3>
+<p>Mark reviews every submission personally. Expect a reply within one business day.</p>
+<a href="/results.html">See client results &rarr;</a>
+</div>
+</div>
+</div>
+</section>
+
+<footer>
+<div class="footer-mega">
+<div class="footer-brand-col">
+<div class="footer-logo">Mark <span>Gabrielli</span></div>
+<p class="footer-desc">Fractional CMO, COO &amp; Executive Consultant. I help businesses from $1M to $100M find what's broken, build what scales, and execute what others only talk about.</p>
+<div class="footer-brand-tags"><span>WETYR Founder</span><span>Fractional C-Suite</span><span>AI Strategist</span><span>CST Certified</span></div>
+<div class="social-links" style="margin-top:1.2rem;">
+<a href="https://www.linkedin.com/in/marklgabrielli/" target="_blank" rel="noopener" class="social-link">in</a>
+<a href="mailto:mark@markcmo.com" class="social-link">@</a>
+</div>
+</div>
+<div class="footer-col"><h4>C-Suite Services</h4><ul>
+<li><a href="/fractional-cmo.html">Fractional CMO</a></li>
+<li><a href="/fractional-coo.html">Fractional COO</a></li>
+<li><a href="/services.html">All Services</a></li>
+</ul></div>
+<div class="footer-col"><h4>Marketing Services</h4><ul>
+<li><a href="/demand-generation.html">Demand Generation</a></li>
+<li><a href="/lead-generation.html">Lead Generation</a></li>
+<li><a href="/marketing-audit.html">Marketing Audit</a></li>
+<li><a href="/seo-services.html">SEO Services</a></li>
+</ul></div>
+<div class="footer-col"><h4>Learn &amp; Company</h4><ul>
+<li><a href="/about.html">About Mark</a></li>
+<li><a href="/blog.html">Insights &amp; Blog</a></li>
+<li><a href="/contact.html">Contact</a></li>
+<li><a href="https://academy.markcmo.com" target="_blank" style="color:var(--gold);font-weight:700;">&#127891; MarkCMO Academy</a></li>
+</ul></div>
+</div>
+<div class="footer-bottom">
+<p>&copy; 2026 Mark Gabrielli &middot; markcmo.com &middot; All rights reserved.</p>
+<p class="footer-bottom-social">
+<a href="https://www.linkedin.com/in/marklgabrielli/" target="_blank" rel="noopener">LinkedIn</a>
+<span>&middot;</span><a href="https://x.com/markgcmo" target="_blank" rel="noopener">X / Twitter</a>
+<span>&middot;</span><a href="https://medium.com/@mark_louis_gabrielli_jr" target="_blank" rel="noopener">Medium</a>
+</p>
+</div>
+</footer>
+
+<script>
+(function(){var bar=document.createElement('div');bar.id='scroll-progress';document.body.prepend(bar);
+window.addEventListener('scroll',function(){var h=document.documentElement,b=document.body,st='scrollTop',sh='scrollHeight';
+var pct=(h[st]||b[st])/((h[sh]||b[sh])-h.clientHeight)*100;bar.style.width=pct+'%';},{passive:true});})();
+</script>
+<script>
+(function(){var nav=document.getElementById('mainNav');var ham=document.getElementById('navHam');var drw=document.getElementById('mobileDrawer');
+if(nav)window.addEventListener('scroll',function(){nav.classList.toggle('scrolled',window.scrollY>20);},{passive:true});
+if(ham&&drw){ham.addEventListener('click',function(){drw.classList.toggle('open');});
+drw.querySelectorAll('a').forEach(function(a){a.addEventListener('click',function(){drw.classList.remove('open');});});}})();
+</script>
+<script src="/linkedin-widget.js" defer></script>
+<script>
+(function(){var form=document.getElementById('mc-form');if(!form)return;
+form.addEventListener('submit',function(e){e.preventDefault();
+var btn=document.getElementById('mc-btn'),card=document.getElementById('mc-card'),suc=document.getElementById('mc-success');
+if(!btn||!card||!suc)return;btn.textContent='Sending...';btn.disabled=true;
+var d=new FormData(form);
+var p={'form-name':d.get('form-name')||'glossary-contact','name':d.get('name')||'','email':d.get('email')||'','company':d.get('company')||'','phone':d.get('phone')||'','message':d.get('message')||''};
+fetch('/api/lead',{method:'POST',headers:{'Content-Type':'application/x-www-form-urlencoded'},body:new URLSearchParams(p).toString()})
+.then(function(){card.style.display='none';suc.style.display='block';})
+.catch(function(){card.style.display='none';suc.style.display='block';});});})();
+</script>
+<script>
+document.querySelectorAll('.gl-faq-q').forEach(function(q){
+  q.addEventListener('click',function(){
+    var item=this.closest('.gl-faq-item');
+    item.classList.toggle('open');
+  });
+});
+</script>
+</div>
+</body>
+</html>

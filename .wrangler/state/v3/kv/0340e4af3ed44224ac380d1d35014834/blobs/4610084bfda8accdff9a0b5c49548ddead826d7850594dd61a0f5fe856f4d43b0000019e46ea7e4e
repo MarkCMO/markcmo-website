@@ -1,0 +1,419 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta name="robots" content="noindex, nofollow">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>MarkCMO Academy - Access Your Course</title>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Barlow:wght@300;400;600;700;900&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/style.css">
+<style>
+:root{--black:#060606;--surface:#0d0d0d;--card:#131313;--border:#1e1e1e;--gold:#C9A84C;--gold-dim:rgba(201,168,76,0.1);--text:#f0f0f0;--dim:#666}
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:var(--black);color:var(--text);font-family:"Barlow",sans-serif;min-height:100vh;display:flex;flex-direction:column}
+.nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:16px 40px;display:flex;align-items:center;justify-content:space-between;background:rgba(6,6,6,0.97);backdrop-filter:blur(12px);border-bottom:1px solid rgba(201,168,76,0.1)}
+.nav-logo{font-family:"Bebas Neue",sans-serif;font-size:22px;letter-spacing:3px;color:var(--gold)}
+.main{flex:1;display:flex;align-items:center;justify-content:center;padding:100px 20px 60px;position:relative}
+.main::before{content:"";position:absolute;inset:0;background:radial-gradient(ellipse 60% 50% at 50% 30%,rgba(201,168,76,0.06) 0%,transparent 60%)}
+.card{background:var(--card);border:1px solid var(--border);width:100%;max-width:520px;position:relative;z-index:1}
+.card-header{background:linear-gradient(135deg,#0d0d0d,#1a1400);padding:40px 40px 32px;text-align:center;border-bottom:2px solid var(--gold)}
+.success-icon{font-size:48px;margin-bottom:16px}
+.card-eyebrow{font-size:10px;font-weight:700;letter-spacing:4px;text-transform:uppercase;color:var(--gold);margin-bottom:12px}
+.card-title{font-family:"Bebas Neue",sans-serif;font-size:42px;letter-spacing:2px;line-height:1;color:#fff;margin-bottom:8px}
+.card-course{font-size:15px;color:var(--gold);font-weight:600;letter-spacing:1px}
+.card-body{padding:40px}
+.info-box{background:var(--surface);border:1px solid var(--border);border-left:3px solid var(--gold);padding:16px 20px;margin-bottom:28px;font-size:13px;color:var(--dim);line-height:1.7}
+.info-box strong{color:var(--text);display:block;margin-bottom:4px;font-size:14px}
+.field{margin-bottom:20px}
+.field-label{font-size:10px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--dim);display:block;margin-bottom:8px}
+.field-input{width:100%;background:var(--black);border:1px solid var(--border);color:var(--text);font-family:"Barlow",sans-serif;font-size:15px;padding:12px 16px;outline:none;transition:border-color 0.2s}
+.field-input:focus{border-color:var(--gold)}
+.field-input::placeholder{color:var(--dim)}
+.submit-btn{width:100%;background:var(--gold);color:#000;border:none;font-family:"Barlow",sans-serif;font-size:13px;font-weight:900;letter-spacing:3px;text-transform:uppercase;padding:16px;transition:all 0.2s;margin-top:8px}
+.submit-btn:hover{background:#fff}
+.submit-btn:disabled{background:var(--border);color:var(--dim)}
+.disclaimer{font-size:11px;color:var(--dim);text-align:center;margin-top:20px;line-height:1.6}
+.disclaimer a{color:var(--gold)}
+.already-link{text-align:center;margin-top:24px;font-size:12px;color:var(--dim)}
+.already-link a{color:var(--gold)}
+.toast{position:fixed;bottom:30px;left:50%;transform:translateX(-50%) translateY(80px);background:var(--card);border:1px solid var(--border);color:var(--text);padding:12px 24px;font-size:12px;letter-spacing:1px;text-transform:uppercase;font-weight:700;transition:transform 0.3s;z-index:1000;white-space:nowrap}
+.toast.show{transform:translateX(-50%) translateY(0)}
+.toast.gold{border-color:var(--gold);color:var(--gold)}
+.toast.green{border-color:#4CAF72;color:#4CAF72}
+.toast.red{border-color:#e05555;color:#e05555}
+.success-panel{display:none;text-align:center}
+.success-panel.show{display:block}
+.form-panel{display:block}
+.form-panel.hide{display:none}
+@media(max-width:600px){
+  .nav{padding:14px 20px}
+  .card-header{padding:28px 24px 24px}
+  .card-body{padding:28px 24px}
+}
+    html, body, * { cursor: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAARCAYAAADUryzEAAAAV0lEQVR42mMQFBT8z0AJABlwbFnIf4oNINsQZAPIMgTdAJINwWYASYbgMoBoQ/AZQJQhhAwgaAguA4iOHXSFJMcKSANME4yNjEkKSLLzxcAbgBwWDPQGAEWguILiE6w1AAAAAElFTkSuQmCC') 0 0, default !important; }
+</style>
+<meta name="description" content="MarkCMO Academy - Access Your Course - MarkCMO provides fractional CMO and strategic marketing services for growth-stage companies.">
+<link rel="canonical" href="https://markcmo.com/welcome.html">
+<meta property="og:type" content="website">
+<meta property="og:title" content="MarkCMO Academy - Access Your Course">
+<meta property="og:description" content="MarkCMO Academy - Access Your Course - MarkCMO provides fractional CMO and strategic marketing services for growth-stage companies.">
+<meta property="og:url" content="https://markcmo.com/welcome.html">
+<meta property="og:site_name" content="MarkCMO">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position": 1,
+      "name": "Home",
+      "item": "https://markcmo.com/"
+    },
+    {
+      "@type": "ListItem",
+      "position": 2,
+      "name": "Welcome",
+      "item": "https://markcmo.com/welcome.html"
+    }
+  ]
+}
+</script>
+<meta name="author" content="Mark Gabrielli"/>
+<link rel="author" href="https://markcmo.com/about.html"/>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebPage",
+  "name": "MarkCMO Academy - Access Your Course",
+  "description": "MarkCMO Academy - Access Your Course - MarkCMO provides fractional CMO and strategic marketing services for growth-stage companies.",
+  "url": "https://markcmo.com/welcome.html",
+  "author": {
+    "@type": "Person",
+    "name": "Mark Gabrielli",
+    "url": "https://markcmo.com/about.html",
+    "sameAs": [
+      "https://www.linkedin.com/in/marklgabrielli/",
+      "https://markcmo.com"
+    ]
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "MarkCMO",
+    "url": "https://markcmo.com",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "https://markcmo.com/mark-photo.webp"
+    }
+  },
+  "dateModified": "2026-05-08",
+  "inLanguage": "en-US"
+}
+</script>
+</head>
+<body>
+<nav class="nav" id="mainNav">
+<a href="/index.html" class="nav-logo">
+<div class="nav-logo-avatar">
+<img src="/mark-photo.webp" alt="Mark Gabrielli" />
+</div>
+<div class="nav-logo-text">
+<strong>Mark Gabrielli</strong>
+<span>Fractional CMO &amp; COO</span>
+</div>
+</a>
+<ul class="nav-links">
+<li><a href="/about.html">About</a></li>
+<li><a href="/services.html">Services</a></li>
+<li><a href="/magnet-framework.html" style="color:#C9A84C;font-weight:600;">MAGNET&trade;</a></li>
+<li><a href="/results.html">Results</a></li>
+<li><a href="/blog">Insights</a></li>
+<li><a href="https://academy.markcmo.com" target="_blank" style="color:#C9A84C;">Academy</a></li>
+</ul>
+<div class="nav-right">
+<a href="/book.html" class="nav-btn">Book a Free Call</a>
+</div>
+<div class="nav-hamburger" id="navHam"><span></span><span></span><span></span></div>
+</nav>
+<div class="mobile-drawer" id="mobileDrawer">
+<a href="/about.html">About</a>
+<a href="/services.html">Services</a>
+<a href="/magnet-framework.html" style="color:#C9A84C;font-weight:600;">MAGNET Framework&trade;</a>
+<a href="/results.html">Results</a>
+<a href="/blog">Insights</a>
+<a href="https://academy.markcmo.com" target="_blank">Academy</a>
+<a href="/book.html" style="color:#C9A84C;font-weight:700;">Book a Free Strategy Call &rarr;</a>
+</div>
+<div class="main">
+<div class="card">
+<div class="card-header">
+<div class="success-icon">✅</div>
+<div class="card-eyebrow">Payment Confirmed</div>
+<div class="card-title">PAYMENT<br>RECEIVED</div>
+<div class="card-course" id="course-display">MarkCMO Academy Course</div>
+</div>
+<div class="card-body">
+<div class="info-box">
+<strong>One last step to open up your course</strong>
+Enter the email address used for your payment. We'll send your personal access link instantly - and you can start learning in under 60 seconds.
+</div>
+<div class="form-panel" id="form-panel">
+<div class="field">
+<label class="field-label" for="student-name">Your Name</label>
+<input class="field-input" type="text" id="student-name" placeholder="Jane Smith" autocomplete="name">
+</div>
+<div class="field">
+<label class="field-label" for="student-email">Email Address *</label>
+<input class="field-input" type="email" id="student-email" placeholder="jane@yourcompany.com" autocomplete="email" required>
+</div>
+<button class="submit-btn" id="submit-btn" onclick="claimAccess()">
+UNLOCK MY COURSE →
+</button>
+<p class="disclaimer">
+We'll send your access link to this email instantly.
+Questions? <a href="mailto:mark@markcmo.com">mark@markcmo.com</a>
+</p>
+</div>
+<div class="success-panel" id="success-panel">
+<div style="font-size:56px;margin-bottom:16px;">📧</div>
+<h2 style="font-family:'Bebas Neue',sans-serif;font-size:36px;letter-spacing:2px;color:var(--gold);margin-bottom:12px;">CHECK YOUR EMAIL</h2>
+<p style="color:var(--dim);font-size:15px;line-height:1.7;margin-bottom:24px;">
+Your course access link is on its way. It may take a minute or two to arrive - check your spam folder if you don't see it.
+</p>
+<p style="font-size:13px;color:var(--dim);margin-bottom:24px;">
+Or click below if you want to start immediately (save this link):
+</p>
+<a id="direct-link" href="/learn" style="display:inline-block;background:var(--gold);color:#1E293B;font-weight:900;font-size:12px;letter-spacing:3px;text-transform:uppercase;padding:14px 28px;text-decoration:none;margin-bottom:20px;">
+START COURSE NOW →
+</a>
+<p style="font-size:11px;color:var(--dim);">
+Having trouble? Email <a href="mailto:mark@markcmo.com" style="color:var(--gold);">mark@markcmo.com</a>
+</p>
+</div>
+<div class="already-link">
+Already have access? <a href="/learn" id="already-link">Go to my course →</a>
+</div>
+</div>
+</div>
+</div>
+<div class="toast" id="toast"></div>
+<script>
+const params = new URLSearchParams(location.search);
+const COURSE_ID = params.get('course') || 'cmo';
+const IS_RETAKE = params.get('retake') === '1';
+const COURSE_TITLES = {
+  cfo:'Fractional CFO Mastery', cmo:'Fractional CMO Mastery',
+  ae:'Account Executive Excellence', growth:'Growth Manager Mastery', vpsales:'VP of Sales Mastery',
+  coo:'Fractional COO Mastery', digital:'Digital Marketing Mastery',
+  linkedin:'LinkedIn Growth Machine', instagram:'Instagram for Business',
+  revenue:'Revenue Architecture & GTM', category:'Category Design & Market Leadership',
+  aimarketing:'AI-Powered Marketing', b2bdemand:'B2B Demand Generation',
+  leadership:'Executive Leadership for Consultants'
+};
+const courseTitle = COURSE_TITLES[COURSE_ID] || 'MarkCMO Academy Course';
+document.getElementById('course-display').textContent = courseTitle;
+document.getElementById('already-link').href = `/learn?course=${COURSE_ID}`;
+async function claimAccess() {
+  const name = document.getElementById('student-name').value.trim();
+  const email = document.getElementById('student-email').value.trim();
+  if (!email || !email.includes('@')) {
+    toast('Please enter a valid email address', 'red');
+    return;
+  }
+  const btn = document.getElementById('submit-btn');
+  btn.disabled = true;
+  btn.textContent = 'CREATING YOUR ACCESS...';
+  try {
+    const resp = await fetch('/.netlify/functions/course-enroll', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ name, email, courseId: COURSE_ID, isRetake: IS_RETAKE })
+    });
+    const data = await resp.json();
+    if (data.ok) {
+      // Show success
+      document.getElementById('form-panel').classList.add('hide');
+      document.getElementById('success-panel').classList.add('show');
+      if (data.accessUrl) {
+        document.getElementById('direct-link').href = data.accessUrl;
+      }
+    } else {
+      throw new Error(data.error || 'Failed');
+    }
+  } catch(e) {
+    toast('Something went wrong - please try again or email mark@markcmo.com', 'red');
+    btn.disabled = false;
+    btn.textContent = 'UNLOCK MY COURSE →';
+  }
+}
+document.getElementById('student-email').addEventListener('keydown', e => {
+  if (e.key === 'Enter') claimAccess();
+});
+let toastTimer;
+function toast(msg, type='gold') {
+  const el = document.getElementById('toast');
+  el.textContent = msg; el.className = `toast ${type} show`;
+  clearTimeout(toastTimer);
+  toastTimer = setTimeout(() => el.classList.remove('show'), 5000);
+}
+</script>
+<script>
+  // ─── Custom Cursor ───
+  var cur = document.getElementById('custom-cursor');
+  if (cur) {
+    document.addEventListener('mousemove', function(e) {
+      cur.style.left = e.clientX + 'px';
+      cur.style.top = e.clientY + 'px';
+    });
+    document.addEventListener('mousedown', function() { cur.classList.add('clicking'); });
+    document.addEventListener('mouseup', function() { cur.classList.remove('clicking'); });
+  }
+</script>
+<script>
+(function(){
+  var bar=document.createElement('div');bar.id='scroll-progress';
+  document.body.prepend(bar);
+  var nav=document.querySelector('nav');
+  window.addEventListener('scroll',function(){
+    var h=document.documentElement,b=document.body,
+        st='scrollTop',sh='scrollHeight';
+    var pct=(h[st]||b[st])/((h[sh]||b[sh])-h.clientHeight)*100;
+    bar.style.width=pct+'%';
+    if((h[st]||b[st])>80){nav&&nav.classList.add('scrolled');}
+    else{nav&&nav.classList.remove('scrolled');}
+  },{passive:true});
+})();
+</script>
+<script>
+(function(){
+  var nav=document.getElementById('mainNav');
+  var ham=document.getElementById('navHam');
+  var drw=document.getElementById('mobileDrawer');
+  if(nav) window.addEventListener('scroll',function(){
+    nav.classList.toggle('scrolled',window.scrollY>20);
+  },{passive:true});
+  if(ham&&drw){
+    ham.addEventListener('click',function(){drw.classList.toggle('open');});
+    drw.querySelectorAll('a').forEach(function(a){
+      a.addEventListener('click',function(){drw.classList.remove('open');});
+    });
+  }
+})();
+</script>
+<style id="mc-form-styles">
+.mc-contact{background:linear-gradient(135deg,#050919 0%,#0A1628 60%,#0d1b27 100%);padding:64px 0;border-top:1px solid #2a2a2a;margin-top:0}
+.mc-contact-inner{max-width:1100px;margin:0 auto;padding:0 24px;display:grid;grid-template-columns:1fr 1fr;gap:56px;align-items:start}
+.mc-contact-left h2{font-family:'Bebas Neue',Barlow,-apple-system,sans-serif;font-size:clamp(1.8rem,4vw,2.8rem);font-weight:400;letter-spacing:.03em;color:#fff;margin:0 0 14px;line-height:1.1}
+.mc-contact-left h2 em{color:#C9A84C;font-style:normal}
+.mc-contact-left p{font-size:.92rem;color:#94A3B8;line-height:1.8;margin:0 0 24px}
+.mc-contact-proof{display:flex;flex-direction:column;gap:10px;margin-bottom:28px}
+.mc-contact-proof-item{display:flex;align-items:center;gap:10px;font-size:.85rem;color:#94A3B8}
+.mc-contact-proof-item span:first-child{color:#C9A84C;font-weight:700;font-size:1rem;flex-shrink:0}
+.mc-contact-direct{background:rgba(201,168,76,.08);border:1px solid rgba(201,168,76,.2);border-radius:8px;padding:14px 18px}
+.mc-contact-direct p{font-size:.75rem;color:#666;text-transform:uppercase;letter-spacing:.08em;margin:0 0 6px}
+.mc-contact-direct a{color:#C9A84C;font-weight:700;text-decoration:none;font-size:.88rem}
+.mc-form-card{background:#111;border:1px solid #2a2a2a;border-radius:12px;padding:28px}
+.mc-form-card h3{font-size:1.05rem;font-weight:700;color:#fff;margin:0 0 4px}
+.mc-form-card>p{font-size:.82rem;color:#64748B;margin:0 0 20px}
+.mc-field{margin-bottom:12px}
+.mc-field input,.mc-field textarea,.mc-field select{width:100%;padding:12px 14px;background:#1a1a1a;border:1px solid #2a2a2a;border-radius:6px;color:#e8e8e8;font-size:.88rem;font-family:inherit;box-sizing:border-box;transition:border-color .2s;outline:none}
+.mc-field input:focus,.mc-field textarea:focus,.mc-field select:focus{border-color:#C9A84C}
+.mc-field input::placeholder,.mc-field textarea::placeholder{color:#3a3a3a}
+.mc-field textarea{resize:vertical;min-height:80px}
+.mc-field select{appearance:none;cursor:pointer;color:#e8e8e8}
+.mc-field select option{background:#1a1a1a}
+.mc-submit{width:100%;background:#C9A84C;color:#0f0f0f;border:none;padding:13px;border-radius:6px;font-size:.95rem;font-weight:700;cursor:pointer;font-family:inherit;transition:background .2s;margin-top:4px}
+.mc-submit:hover:not(:disabled){background:#b8952f}
+.mc-submit:disabled{opacity:.5;cursor:not-allowed}
+.mc-success{display:none;text-align:center;padding:28px 12px}
+.mc-success-icon{font-size:2.5rem;margin-bottom:10px;color:#C9A84C}
+.mc-success h3{color:#C9A84C;font-size:1.2rem;font-weight:700;margin:0 0 8px}
+.mc-success p{color:#94A3B8;font-size:.88rem;margin:0 0 18px;line-height:1.7}
+.mc-success a{color:#C9A84C;font-weight:700}
+@media(max-width:860px){.mc-contact-inner{grid-template-columns:1fr;gap:32px}}
+@media(max-width:540px){.mc-contact{padding:40px 0}.mc-form-card{padding:20px 16px}.mc-contact-inner{padding:0 14px}}
+</style>
+<section class="mc-contact" id="contact">
+  <div class="mc-contact-inner">
+    <div class="mc-contact-left">
+      <h2>Get a Free <em>Revenue Strategy Call</em></h2>
+      <p>30 minutes with Mark Gabrielli. No pitch. A direct read on your biggest marketing gaps and what moves revenue fastest. Responds personally within 24 hours.</p>
+      <div class="mc-contact-proof">
+        <div class="mc-contact-proof-item"><span>&#10003;</span><span>$135M+ in qualified B2B pipeline built for clients</span></div>
+        <div class="mc-contact-proof-item"><span>&#10003;</span><span>90% client retention rate</span></div>
+        <div class="mc-contact-proof-item"><span>&#10003;</span><span>Retainer starts at $8K/month, launches in 1-2 weeks</span></div>
+        <div class="mc-contact-proof-item"><span>&#10003;</span><span>4.9 stars across review platforms</span></div>
+      </div>
+      <div class="mc-contact-direct">
+        <p>Prefer to reach out directly?</p>
+        <a href="mailto:mark@markcmo.com">mark@markcmo.com</a>
+        &nbsp;&nbsp;&#183;&nbsp;&nbsp;
+        <a href="tel:+13219175738">+1 (321) 917-5738</a>
+      </div>
+    </div>
+    <div class="mc-form-card">
+      <h3>Book a Free Strategy Call</h3>
+      <p>60 seconds. Mark responds personally within 24 hours.</p>
+      <div id="mc-card">
+        <form id="mc-form" novalidate>
+          <input type="hidden" name="form-name" value="page-contact">
+          <input type="text" name="bot-field" style="display:none" tabindex="-1" autocomplete="off">
+          <div class="mc-field"><input type="text" name="name" placeholder="Your Full Name *" required autocomplete="name"></div>
+          <div class="mc-field"><input type="email" name="email" placeholder="Work Email *" required autocomplete="email"></div>
+          <div class="mc-field"><input type="text" name="company" placeholder="Company Name" autocomplete="organization"></div>
+          <div class="mc-field"><input type="tel" name="phone" placeholder="Phone (optional)" autocomplete="tel"></div>
+          <div class="mc-field">
+            <select name="service">
+              <option value="" disabled selected>What are you looking for?</option>
+              <option value="fractional-cmo">Fractional CMO Retainer ($8K-$20K/mo)</option>
+              <option value="revenue-audit">Revenue Leak Audit ($7,500)</option>
+              <option value="vip-day">CMO VIP Day ($4,500)</option>
+              <option value="founders-circle">Founders Circle ($25K/yr)</option>
+              <option value="fractional-coo">Fractional COO Services</option>
+              <option value="unsure">Not sure yet - need a consult</option>
+            </select>
+          </div>
+          <div class="mc-field"><textarea name="message" placeholder="Biggest revenue challenge right now? (optional)"></textarea></div>
+          <button type="submit" id="mc-btn" class="mc-submit">Book Free Strategy Call &#8594;</button>
+          <div style="margin-top:8px;font-size:.72rem;color:#3a3a3a;text-align:center">No spam. No sales team. Just Mark.</div>
+        </form>
+      </div>
+      <div id="mc-success" class="mc-success">
+        <div class="mc-success-icon">&#10003;</div>
+        <h3>You are in. Check your inbox.</h3>
+        <p>Mark will personally follow up within 24 hours.<br>Or reach him directly: <a href="mailto:mark@markcmo.com">mark@markcmo.com</a> &#183; <a href="tel:+13219175738">+1 (321) 917-5738</a></p>
+      </div>
+    </div>
+  </div>
+</section>
+<script>
+(function(){
+  var _t;
+  document.addEventListener('input',function(){
+    clearTimeout(_t);_t=setTimeout(function(){
+      var f=document.getElementById('mc-form');if(!f)return;
+      var d=new FormData(f),o={};d.forEach(function(v,k){if(v&&k!=='bot-field')o[k]=v;});
+      o._page=location.pathname;o._ts=new Date().toISOString();
+      try{localStorage.setItem('mc_partial',JSON.stringify(o));}catch(e){}
+    },3000);
+  });
+  var form=document.getElementById('mc-form');if(!form)return;
+  form.addEventListener('submit',function(e){
+    e.preventDefault();
+    var btn=document.getElementById('mc-btn'),card=document.getElementById('mc-card'),suc=document.getElementById('mc-success');
+    if(!btn||!card||!suc)return;
+    btn.textContent='Sending...';btn.disabled=true;
+    var d=new FormData(form);
+    var p={'form-name':d.get('form-name')||'page-contact','name':d.get('name')||'','email':d.get('email')||'','company':d.get('company')||'','phone':d.get('phone')||'','service':d.get('service')||'','message':d.get('message')||''};
+    try{localStorage.setItem('mc_lead_'+Date.now(),JSON.stringify(p));}catch(ex){}
+    fetch('/api/lead',{method:'POST',headers:{'Content-Type':'application/x-www-form-urlencoded'},body:new URLSearchParams(p).toString()})
+    .then(function(){card.style.display='none';suc.style.display='block';})
+    .catch(function(){card.style.display='none';suc.style.display='block';
+      setTimeout(function(){window.open('mailto:mark@markcmo.com?subject=Inquiry&body=Name:+'+encodeURIComponent(p.name)+'%0AEmail:+'+encodeURIComponent(p.email),'_blank');},400);
+    });
+  });
+})();
+</script>
+<script src="/linkedin-widget.js" defer></script>
+</body>
+</html>

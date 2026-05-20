@@ -5,9 +5,12 @@ compatibility_flags = ["nodejs_compat"]
 pages_build_output_dir = "./dist"
 
 [vars]
-SITE_URL = "https://markcmo.com"
 NODE_ENV = "production"
 
 [[kv_namespaces]]
 binding = "BLOBS_DOCUMENTS"
 id = "4e84c31e50304594a99544cd7e48e8c4"
+
+[[kv_namespaces]]
+binding = "BLOBS_MARKCMO_PAGES_HTML"
+id = "0340e4af3ed44224ac380d1d35014834"

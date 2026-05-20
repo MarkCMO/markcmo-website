@@ -1,0 +1,694 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<link rel="icon" type="image/webp" href="/favicon.webp"><link rel="apple-touch-icon" href="/mark-photo.webp">
+<meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+<title>MAGNET Generate Phase | Demand Generation & Paid Media | Mark Gabrielli Fractional CMO</title>
+<meta name="description" content="Phase 03 of the MAGNET Framework: the Generate phase. Mark Gabrielli launches demand generation, paid media, SEO, and full attribution tracking from day one. Every channel selected based on where buyers actually are." />
+<meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1" />
+<link rel="canonical" href="https://markcmo.com/magnet-generate.html" />
+<meta property="og:type" content="article" />
+<meta property="og:title" content="MAGNET Generate Phase | Demand Generation & Paid Media | Mark Gabrielli" />
+<meta property="og:description" content="The Generate phase turns the architecture on. Demand generation, paid media, SEO, and attribution from day one. No vanity campaigns, no spray-and-pray." />
+<meta property="og:url" content="https://markcmo.com/magnet-generate.html" />
+<meta property="og:site_name" content="Mark Gabrielli | Fractional CMO & COO" />
+<meta property="og:image" content="https://markcmo.com/og-image.jpg" />
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:title" content="MAGNET Generate Phase | Demand Generation & Paid Media" />
+<meta name="twitter:description" content="The Generate phase turns the architecture on. Demand generation, paid media, SEO, and attribution from day one." />
+<meta name="twitter:image" content="https://markcmo.com/og-image.jpg" />
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-BXK5Y3DQBL"></script>
+<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-BXK5Y3DQBL');</script>
+<link rel="stylesheet" href="style.css"/>
+<link rel="preconnect" href="https://fonts.googleapis.com" crossorigin>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;600;700;800;900&family=Space+Grotesk:wght@400;500;600;700&display=swap">
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://markcmo.com/"},{"@type":"ListItem","position":2,"name":"MAGNET Framework","item":"https://markcmo.com/magnet-framework.html"},{"@type":"ListItem","position":3,"name":"Generate Phase","item":"https://markcmo.com/magnet-generate.html"}]}
+</script>
+<style>
+.mag-hero{background:var(--bg);padding:8rem 6vw 5rem;position:relative;overflow:hidden;border-bottom:1px solid var(--border);}
+.mag-hero::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse at 70% 40%,rgba(201,168,76,0.09) 0%,transparent 60%);pointer-events:none;}
+.mag-hero-grid{position:absolute;inset:0;background-image:linear-gradient(rgba(201,168,76,0.03) 1px,transparent 1px),linear-gradient(90deg,rgba(201,168,76,0.03) 1px,transparent 1px);background-size:80px 80px;}
+.mag-hero-inner{max-width:1200px;margin:0 auto;display:grid;grid-template-columns:1fr 220px;gap:4rem;align-items:center;position:relative;z-index:1;}
+.mag-phase-label{font-size:0.72rem;font-weight:700;letter-spacing:0.15em;text-transform:uppercase;color:var(--accent);display:flex;align-items:center;gap:8px;margin-bottom:1rem;}
+.mag-phase-label::before{content:'';width:20px;height:2px;background:var(--accent);border-radius:2px;}
+.mag-hero h1{font-family:'Outfit',sans-serif;font-size:clamp(2.5rem,5vw,4.5rem);font-weight:900;letter-spacing:-0.04em;line-height:1.0;color:var(--text);margin-bottom:1.25rem;}
+.mag-hero h1 span{color:var(--accent);font-style:italic;}
+.mag-hero-sub{font-size:1.05rem;line-height:1.8;color:var(--text2);max-width:640px;margin-bottom:1.75rem;}
+.mag-big-letter{font-family:'Outfit',sans-serif;font-size:clamp(8rem,18vw,14rem);font-weight:900;color:var(--accent);line-height:0.85;opacity:0.18;text-align:center;user-select:none;}
+.mag-breadcrumb{display:flex;align-items:center;gap:0.5rem;font-size:0.78rem;color:var(--text3);margin-bottom:2rem;flex-wrap:wrap;}
+.mag-breadcrumb a{color:var(--text3);transition:color 0.15s;}.mag-breadcrumb a:hover{color:var(--accent);}
+.mag-breadcrumb span{color:var(--accent);}
+.mag-content{max-width:1100px;margin:0 auto;padding:5rem 6vw;}
+.mag-section{margin-bottom:4rem;}
+.mag-section h2{font-family:'Outfit',sans-serif;font-size:clamp(1.65rem,3vw,2.25rem);font-weight:800;letter-spacing:-0.03em;color:var(--text);margin-bottom:1rem;line-height:1.2;}
+.mag-section h2 span{color:var(--accent);font-style:italic;}
+.mag-section p{font-size:1rem;line-height:1.85;color:var(--text2);margin-bottom:1.1rem;}
+.mag-section h3{font-family:'Outfit',sans-serif;font-size:1.2rem;font-weight:700;color:var(--text);margin:2rem 0 0.6rem;letter-spacing:-0.01em;}
+.mag-section ul{margin:0.75rem 0 1.25rem 1.25rem;}
+.mag-section li{font-size:0.97rem;line-height:1.8;color:var(--text2);margin-bottom:0.35rem;padding-left:0.25rem;}
+.mag-quote{border-left:3px solid var(--accent);padding:1.25rem 1.75rem;background:var(--bg3);border-radius:0 14px 14px 0;margin:2rem 0;}
+.mag-quote p{font-size:1.05rem;font-style:italic;color:var(--text);margin:0;line-height:1.7;}
+.mag-del-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.1rem;margin:2rem 0;}
+.mag-del-card{background:var(--bg3);border:1px solid var(--border);border-radius:14px;padding:1.75rem;transition:border-color 0.2s,transform 0.2s;}
+.mag-del-card:hover{border-color:rgba(201,168,76,0.3);transform:translateY(-3px);}
+.mag-del-card svg{width:28px;height:28px;color:var(--accent);margin-bottom:0.75rem;}
+.mag-del-title{font-family:'Outfit',sans-serif;font-size:1rem;font-weight:700;color:var(--text);margin-bottom:0.4rem;}
+.mag-del-body{font-size:0.85rem;line-height:1.7;color:var(--text2);}
+.mag-phases-strip{background:var(--bg3);border:1px solid var(--border);border-radius:16px;padding:2rem;margin:3rem 0;display:grid;grid-template-columns:repeat(6,1fr);gap:0.5rem;}
+.mag-phase-pill{text-align:center;padding:1rem 0.5rem;border-radius:10px;transition:background 0.15s;}
+.mag-phase-pill.active{background:var(--accent-p);border:1px solid rgba(201,168,76,0.3);}
+.mag-phase-pill a{display:block;text-decoration:none;}
+.mag-phase-pill .pp-letter{font-family:'Outfit',sans-serif;font-size:1.75rem;font-weight:900;color:var(--accent);line-height:1;}
+.mag-phase-pill.active .pp-letter{color:var(--accent);}
+.mag-phase-pill .pp-name{font-size:0.68rem;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:var(--text3);margin-top:3px;}
+.mag-phase-pill.active .pp-name{color:var(--accent);}
+.mag-faq{background:var(--bg2);padding:5rem 6vw;}
+.mag-faq-inner{max-width:860px;margin:0 auto;}
+.mag-faq h2{font-family:'Outfit',sans-serif;font-size:clamp(1.75rem,3vw,2.5rem);font-weight:800;letter-spacing:-0.03em;color:var(--text);margin-bottom:2.5rem;}
+.faq-item{border-bottom:1px solid var(--border);padding:1.5rem 0;}
+.faq-q{font-family:'Outfit',sans-serif;font-size:1.05rem;font-weight:700;color:var(--text);margin-bottom:0.6rem;}
+.faq-a{font-size:0.95rem;line-height:1.8;color:var(--text2);}
+.mag-cta{background:linear-gradient(135deg,var(--accent),var(--accent-h));padding:5rem 6vw;text-align:center;}
+.mag-cta h2{font-family:'Outfit',sans-serif;font-size:clamp(2rem,4vw,3rem);font-weight:900;color:#000;margin-bottom:1rem;letter-spacing:-0.03em;}
+.mag-cta p{color:rgba(0,0,0,0.65);font-size:1rem;margin-bottom:2rem;max-width:580px;margin-left:auto;margin-right:auto;}
+.mag-cta-btn{display:inline-flex;align-items:center;gap:8px;background:#000;color:#fff;font-weight:700;font-size:0.9375rem;padding:1rem 2.25rem;border-radius:10px;text-decoration:none;transition:opacity 0.15s;}
+.mag-cta-btn:hover{opacity:0.85;}
+@media(max-width:900px){.mag-hero-inner{grid-template-columns:1fr;}.mag-big-letter{display:none;}.mag-del-grid{grid-template-columns:1fr 1fr;}.mag-phases-strip{grid-template-columns:repeat(3,1fr);}}
+@media(max-width:600px){.mag-del-grid{grid-template-columns:1fr;}.mag-phases-strip{grid-template-columns:repeat(2,1fr);}}
+</style>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "What does a fractional CMO do for companies in this market?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "A fractional CMO acts as your Chief Marketing Officer on a part-time basis - typically 2-3 days per week - with full executive accountability for strategy, team leadership, budget, and revenue outcomes. They own your entire marketing function and are accountable for pipeline generation and revenue attribution, not just deliverables."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "How quickly will I see results?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Most engagements produce measurable outputs within 30 days: a GTM strategy, ICP definition, messaging architecture, and demand generation plan. Pipeline movement typically appears in 60-90 days as campaigns launch. Long-term compounding results build over 6-12 months."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Is there a long-term contract required?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "No. Every MarkCMO engagement is month-to-month. There are no long-term contracts, no cancellation fees, and no lock-in. You stay because the results justify it. We offer a free GTM diagnostic before you commit to any paid engagement."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Do I have to sign a long-term contract?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "No. Every MarkCMO engagement is month-to-month. There are no long-term contracts, no cancellation fees, and no lock-in clauses. You stay because the results justify it - not because you are contractually obligated. We offer a free GTM diagnostic before you commit to any paid engagement so you can validate fit before spending a dollar."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "How does the engagement start?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Step one is a free 30-minute GTM diagnostic call. We review your current situation, revenue goals, team structure, and the biggest gap between where you are and where you need to be. If there is a clear fit, we outline a 30-60-90 day plan and agree on scope. Most engagements are live within 5-7 business days of the diagnostic call."
+      }
+    }
+  ],
+  "dateModified": "2026-05-08"
+}
+</script>
+<meta name="author" content="Mark Gabrielli"/>
+<link rel="author" href="https://markcmo.com/about.html"/>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebPage",
+  "name": "MAGNET Generate Phase | Demand Generation & Paid Media | Mark Gabrielli Fractional CMO",
+  "description": "Phase 03 of the MAGNET Framework: the Generate phase. Mark Gabrielli launches demand generation, paid media, SEO, and full attribution tracking from day one. Every channel selected based on where buyers actually are.",
+  "url": "https://markcmo.com/magnet-generate.html",
+  "author": {
+    "@type": "Person",
+    "name": "Mark Gabrielli",
+    "url": "https://markcmo.com/about.html",
+    "sameAs": [
+      "https://www.linkedin.com/in/marklgabrielli/",
+      "https://markcmo.com"
+    ]
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "MarkCMO",
+    "url": "https://markcmo.com",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "https://markcmo.com/mark-photo.webp"
+    }
+  },
+  "dateModified": "2026-05-08",
+  "inLanguage": "en-US"
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "HowTo",
+  "name": "How to Launch and Optimize B2B Demand Generation with the MAGNET Framework",
+  "description": "The MAGNET Generate phase launches the demand generation system with validated conversion infrastructure, attribution, channel setup, creative production, and systematic optimization.",
+  "step": [
+    {
+      "@type": "HowToStep",
+      "position": 1,
+      "name": "Conversion Infrastructure Verification",
+      "text": "Before any demand generation spend begins, verify that all conversion infrastructure is working: forms capture and route leads correctly, attribution tracking fires on every conversion event, CRM integration creates records with proper source data, and the qualification workflow routes leads to the right follow-up sequence. Launching demand generation into broken conversion infrastructure generates cost without pipeline."
+    },
+    {
+      "@type": "HowToStep",
+      "position": 2,
+      "name": "Attribution and Tracking Validation",
+      "text": "Validate that attribution is accurately capturing the source of every lead and tracing it through the pipeline stages to revenue. Test every conversion path: paid ad click to form fill to CRM record to attribution report. The attribution validation confirms that the commercial intelligence required to optimize demand generation spend is functioning before budget is committed to channel investment."
+    },
+    {
+      "@type": "HowToStep",
+      "position": 3,
+      "name": "Channel Setup and Audience Architecture",
+      "text": "Build the channel infrastructure for the two to three priority demand generation channels identified in the Architect phase. This includes: audience targeting parameters (who sees the content), creative specifications (what they see), conversion paths (what they can do), and performance measurement setup (how results are tracked). Channel setup should be validated with a small test budget before full investment is committed."
+    },
+    {
+      "@type": "HowToStep",
+      "position": 4,
+      "name": "Creative and Copy Production",
+      "text": "Produce the creative assets and copy needed for initial channel activation: ad creative, email sequences, landing page copy, and social content. All creative should be built from the validated messaging hierarchy and ICP insight developed in the Architect phase. Copy that is not grounded in ICP research produces engagement metrics that do not correlate with pipeline conversion."
+    },
+    {
+      "@type": "HowToStep",
+      "position": 5,
+      "name": "Staged Launch and First-Week Monitoring",
+      "text": "Launch channels in a staged sequence over the first two weeks, monitoring conversion data after each activation before proceeding to the next. The staged launch identifies technical issues before full budget is committed, and provides early conversion signal that can improve channel setup before investment scales. First-week monitoring focuses on conversion rate by channel, not impressions or clicks."
+    },
+    {
+      "@type": "HowToStep",
+      "position": 6,
+      "name": "30-Day Optimization and Channel Expansion Decision",
+      "text": "At 30 days, analyze channel performance against the pipeline generation targets established in the Architect phase. Channels producing pipeline at acceptable CAC receive accelerated investment. Channels with insufficient data receive a defined additional test period. Channels with clear negative signals are paused. This data-driven allocation ensures demand generation budget compounds toward what is working rather than dispersing across channels that cannot be optimized without evidence."
+    }
+  ]
+}
+</script>
+</head>
+<body>
+<nav class="nav" id="mainNav">
+<a href="/index.html" class="nav-logo">
+<div class="nav-logo-avatar">
+<img src="/mark-photo.webp" alt="Mark Gabrielli" />
+</div>
+<div class="nav-logo-text">
+<strong>Mark Gabrielli</strong>
+<span>Fractional CMO &amp; COO</span>
+</div>
+</a>
+<ul class="nav-links">
+<li><a href="/about.html">About</a></li>
+<li><a href="/services.html">Services</a></li>
+<li><a href="/magnet-framework.html" style="color:#C9A84C;font-weight:600;">MAGNET&trade;</a></li>
+<li><a href="/results.html">Results</a></li>
+<li><a href="/blog">Insights</a></li>
+<li><a href="https://academy.markcmo.com" target="_blank" style="color:#C9A84C;">Academy</a></li>
+</ul>
+<div class="nav-right">
+<a href="/book.html" class="nav-btn">Book a Free Call</a>
+</div>
+<div class="nav-hamburger" id="navHam"><span></span><span></span><span></span></div>
+</nav>
+<div class="mobile-drawer" id="mobileDrawer">
+<a href="/about.html">About</a>
+<a href="/services.html">Services</a>
+<a href="/magnet-framework.html" style="color:#C9A84C;font-weight:600;">MAGNET Framework&trade;</a>
+<a href="/results.html">Results</a>
+<a href="/blog">Insights</a>
+<a href="https://academy.markcmo.com" target="_blank">Academy</a>
+<a href="/book.html" style="color:#C9A84C;font-weight:700;">Book a Free Strategy Call &rarr;</a>
+</div>
+
+<section class="mag-hero">
+<div class="mag-hero-grid"></div>
+<div class="mag-hero-inner">
+<div class="reveal">
+<div class="mag-breadcrumb">
+<a href="index.html">Home</a> / <a href="magnet-framework.html">MAGNET Framework</a> / <span>Generate</span>
+</div>
+<div class="mag-phase-label">Phase 03 of 06</div>
+<h1><span>G</span> is for Generate.<br>Launch demand on<br>the right channels.</h1>
+<p class="mag-hero-sub">Turn the architecture on. Demand generation, paid media, SEO, attribution from day one. Every channel selected based on where buyers actually are. No vanity campaigns, no spray-and-pray.</p>
+<a href="book.html" class="btn">Start Generating Demand</a>
+</div>
+<div class="mag-big-letter">G</div>
+</div>
+</section>
+<div class="sp-proof-strip">
+<div class="sp-proof-item">
+<span class="sp-proof-num">4.9&#9733;</span>
+<span class="sp-proof-label">193 Reviews</span>
+</div>
+<div class="sp-proof-item">
+<span class="sp-proof-num">90%</span>
+<span class="sp-proof-label">Retention Rate</span>
+</div>
+<div class="sp-proof-item">
+<span class="sp-proof-num">19+</span>
+<span class="sp-proof-label">Ventures Built</span>
+</div>
+<div class="sp-proof-item">
+<span class="sp-proof-num">$50M+</span>
+<span class="sp-proof-label">Revenue Generated</span>
+</div>
+<div class="sp-proof-item">
+<span class="sp-proof-num">30</span>
+<span class="sp-proof-label">Days to First Results</span>
+</div>
+</div>
+<div style="background:#0d1b27;border-left:3px solid #2563EB;padding:1.25rem 1.5rem;margin:0 auto 0;max-width:1100px;border-radius:0 6px 6px 0;">
+<strong style="color:#C9A84C;font-size:.75rem;font-family:'DM Mono',monospace;text-transform:uppercase;letter-spacing:.1em;display:block;margin-bottom:.5rem;">Quick Answer</strong>
+<p style="color:#ccc;margin:0;line-height:1.75;font-size:.95rem;">MAGNET Generate is the activation phase of the MAGNET Framework -- where the demand generation systems built in the Engineer phase are launched, measured, and optimized to produce a consistent flow of qualified pipeline from marketing-attributed sources. The Generate phase is where most B2B marketing functions stall: generating pipeline at consistent volume requires disciplined ICP targeting, continuous content production, and the feedback loop between marketing and sales that improves lead quality over time -- which is why fractional CMO oversight of the Generate phase produces faster pipeline growth than leaving it to junior marketing managers without C-suite accountability.</p>
+</div>
+
+
+<div class="mag-content">
+
+<div class="mag-phases-strip reveal">
+<div class="mag-phase-pill">
+  <a href="magnet-map.html">
+    <div class="pp-letter">M</div>
+    <div class="pp-name">Map</div>
+  </a>
+</div>
+<div class="mag-phase-pill">
+  <a href="magnet-architect.html">
+    <div class="pp-letter">A</div>
+    <div class="pp-name">Architect</div>
+  </a>
+</div>
+<div class="mag-phase-pill active">
+  <a href="magnet-generate.html">
+    <div class="pp-letter">G</div>
+    <div class="pp-name">Generate</div>
+  </a>
+</div>
+<div class="mag-phase-pill">
+  <a href="magnet-nurture.html">
+    <div class="pp-letter">N</div>
+    <div class="pp-name">Nurture</div>
+  </a>
+</div>
+<div class="mag-phase-pill">
+  <a href="magnet-engineer.html">
+    <div class="pp-letter">E</div>
+    <div class="pp-name">Engineer</div>
+  </a>
+</div>
+<div class="mag-phase-pill">
+  <a href="magnet-track.html">
+    <div class="pp-letter">T</div>
+    <div class="pp-name">Track</div>
+  </a>
+</div>
+</div>
+
+<div class="mag-section reveal">
+<h2>What is the <span>Generate Phase?</span></h2>
+<p>The Generate phase is where the system switches on. Map has diagnosed your revenue infrastructure. Architect has designed the growth system. Now Generate activates it - launching demand across the channels where your buyers actually spend their time, with attribution running from the first impression to the closed deal so every dollar is accountable from day one.</p>
+<p>This is not a campaign launch. It is an engineered market entry with channel selection based on ICP data, conversion infrastructure ready before a single ad runs, and a testing protocol that produces learning and optimization from week one rather than month six. The difference between companies that scale through Generate and companies that burn budget here comes down to one thing: sequence. You cannot run effective paid media without a converting funnel. You cannot attribute revenue without tracking in place before launch. Generate is built around the correct sequence - and that sequence is what makes it efficient.</p>
+<div class="mag-quote"><p>"Running ads before your website converts is like pouring fuel on a broken engine. The spine comes first. Then scale."</p></div>
+</div>
+
+<div class="mag-section reveal">
+<h2>Why Attribution Must Come <span>Before Spend</span></h2>
+<p>The most common and expensive mistake in demand generation is launching campaigns before attribution is configured. The result is always the same: money moves, leads come in, and nobody can tell which channels, campaigns, or messages actually drove pipeline. Optimization is impossible because the data does not exist. Budget decisions get made on last-touch attribution models that routinely credit the wrong channel by a factor of two or three.</p>
+<h3>The Attribution-First Principle</h3>
+<p>In the Generate phase, no channel goes live until attribution is confirmed working. This is a hard rule with three components:</p>
+<ul>
+<li><strong>Source tracking at every form and conversion point:</strong> UTM parameters set and tested, form fields capturing source data, CRM mapping confirmed before any ad impression is purchased.</li>
+<li><strong>Multi-touch attribution configured:</strong> First touch, last touch, and linear attribution models running in parallel so channel contribution can be analyzed with complete data, not partial signals.</li>
+<li><strong>Pipeline-level tracking:</strong> Revenue attribution tied not just to lead creation but to opportunity creation and closed-won - so every channel can be evaluated on pipeline contribution, not lead volume alone.</li>
+</ul>
+<p>Companies that configure attribution before launch can make channel budget decisions with real data within 30 days. Companies that configure it after launch are guessing for the first six months, and some of those guesses cost significantly more than the attribution work would have.</p>
+</div>
+
+<div class="mag-section reveal">
+<h2>Channel Selection <span>Methodology</span></h2>
+<p>Every channel decision in the Generate phase is made against three criteria: ICP presence (are your buyers actually reachable on this platform in meaningful numbers), funnel stage fit (does this channel produce awareness, consideration, or decision-stage engagement), and budget efficiency (what is the realistic cost-per-opportunity given your deal size and sales cycle).</p>
+<p>For most B2B growth-stage companies, the Generate phase begins with a focused two-channel strategy rather than trying to activate everything at once. Spreading budget across six channels before any of them are optimized is the fastest way to generate impressive dashboards and poor pipeline. The Generate phase concentrates spend, proves the model, then expands - not the reverse.</p>
+<p>Typical channel selection considerations for B2B companies in the $1M-$20M revenue range include LinkedIn for direct ICP targeting with decision-maker precision, Google for intent-based bottom-of-funnel capture, SEO for compounding organic pipeline that reduces blended CAC over time, and programmatic retargeting to maintain presence across the full sales cycle for buyers who are actively researching but not yet ready to raise their hand.</p>
+</div>
+
+<div class="mag-section reveal">
+<h2>What the Generate Phase <span>Delivers</span></h2>
+<div class="mag-del-grid">
+<div class="mag-del-card">
+<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg>
+<div class="mag-del-title">Demand Generation Engine</div>
+<div class="mag-del-body">Multi-channel campaigns built for pipeline, every tactic tied to revenue. A coordinated system across paid, organic, and outbound that generates qualified demand rather than raw lead volume.</div>
+</div>
+<div class="mag-del-card">
+<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>
+<div class="mag-del-title">Paid Media Strategy</div>
+<div class="mag-del-body">Google, LinkedIn, Meta channel mix based on ICP and budget stage. Audience architecture, bid strategy, campaign structure, and budget allocation designed for pipeline efficiency from the first week.</div>
+</div>
+<div class="mag-del-card">
+<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
+<div class="mag-del-title">SEO + Content Engine</div>
+<div class="mag-del-body">Buyer-intent keywords, authority content, AI search optimization. A compounding organic strategy that builds search presence for high-intent queries and reduces blended cost-per-acquisition over time.</div>
+</div>
+<div class="mag-del-card">
+<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
+<div class="mag-del-title">Attribution from Day One</div>
+<div class="mag-del-body">Every channel and dollar tracked to pipeline before launch. Multi-touch attribution configured and verified. Pipeline-level reporting operational before the first impression is purchased.</div>
+</div>
+<div class="mag-del-card">
+<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 20h9"/><path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"/></svg>
+<div class="mag-del-title">Creative & Copy Direction</div>
+<div class="mag-del-body">Messaging around buyer pain, not product features. Ad creative, landing page copy, and content assets built from the messaging hierarchy so every touchpoint speaks the buyer's language and drives toward action.</div>
+</div>
+<div class="mag-del-card">
+<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>
+<div class="mag-del-title">Launch Playbook</div>
+<div class="mag-del-body">Step-by-step go-live sequence, testing protocol, and first-30-day optimization calendar. No guessing about what goes live when. A documented launch sequence with pre-launch checklists, day-one monitoring protocols, and week-by-week optimization priorities.</div>
+</div>
+</div>
+</div>
+
+<div class="mag-section reveal">
+<h2>How the Generate Phase <span>Works in Practice</span></h2>
+<p>The Generate phase runs across the first four to six weeks after Architect is complete. The first two weeks are pre-launch infrastructure. The final two to four weeks are live campaign management with real optimization data. The distinction matters because most agencies skip the pre-launch infrastructure and pay for it in the first month of wasted spend.</p>
+<h3>Step 1: Conversion Infrastructure Verification</h3>
+<p>Before any channel goes live, the Architect phase website blueprint is implemented and verified for conversion. Landing pages are live and tested. CTA flows are working end-to-end. CRM is receiving leads with source attribution intact. This step alone prevents the single most common demand generation failure: driving traffic to a funnel that does not convert.</p>
+<h3>Step 2: Attribution and Tracking Validation</h3>
+<p>Every tracking implementation is tested before launch. UTM parameters are working. Form submissions are creating CRM records with source fields populated. Google Analytics goals are firing. Paid platform pixels are confirmed active. This is not a five-minute check - it is a systematic pre-launch audit that validates the full data chain from ad impression to CRM record.</p>
+<h3>Step 3: Channel Setup and Audience Architecture</h3>
+<p>Paid channels are configured with audience architecture built from ICP data collected in the Map phase. For LinkedIn, this means job title, seniority, company size, and industry targeting layered with remarketing audiences. For Google, this means intent-based keyword strategy with negative keyword lists built before the first dollar is spent. For SEO, this means technical audit, content gap analysis, and editorial calendar mapped to buyer-intent search clusters.</p>
+<h3>Step 4: Creative and Copy Production</h3>
+<p>Ad creative and copy are produced from the messaging hierarchy designed in the Architect phase. Every asset is briefed against a specific buyer stage, a specific pain point, and a specific desired action. Minimum viable creative sets are produced for launch - typically three to five ad variations per campaign so testing can begin from day one.</p>
+<h3>Step 5: Staged Launch and First-Week Monitoring</h3>
+<p>Campaigns go live in a staged sequence rather than all at once. High-intent bottom-of-funnel channels typically launch first to capture existing demand before upper-funnel awareness spend begins. The first week is monitored daily with a defined set of leading indicators: click-through rate, landing page conversion rate, cost-per-lead, and lead quality score from sales team feedback.</p>
+<h3>Step 6: 30-Day Optimization and Channel Expansion Decision</h3>
+<p>At 30 days, the first real data review determines budget reallocation, creative refresh priorities, and whether the channel mix should be expanded. Campaigns that are generating pipeline at or below target cost-per-opportunity receive increased budget. Campaigns that are not receive a defined number of optimization cycles before being paused or restructured. Decisions are made on data, not instinct.</p>
+</div>
+
+<div class="mag-section reveal">
+<h2>What Makes This Approach <span>Different</span></h2>
+<p>Most demand generation programs fail for predictable reasons. The Generate phase is designed around each of them.</p>
+<ul>
+<li>Channels are selected based on ICP data, not on what the agency knows how to run or what the company spent on last year.</li>
+<li>Attribution is mandatory before launch, not an optional add-on when someone asks where the leads are coming from.</li>
+<li>Creative is built from a messaging hierarchy, not brainstormed at a creative sprint and approved based on what looks interesting rather than what converts.</li>
+<li>Budget decisions are made at 30 days with real pipeline data - not locked in at the start based on projections that have no relationship to what the market is actually doing.</li>
+<li>SEO is treated as a parallel pipeline channel, not a long-term PR exercise. Buyer-intent content is prioritized over brand publishing, and AI search optimization is built in from the start rather than retro-fitted.</li>
+</ul>
+<p>The companies that run Generate correctly can typically identify their top-performing channel-audience-message combination within the first 45 days and concentrate resources there while secondary channels continue to develop. That speed of learning is what separates efficient demand generation programs from expensive ones.</p>
+</div>
+
+</div>
+
+<section class="mag-faq">
+<div class="mag-faq-inner">
+<div class="section-label">FAQ</div>
+<h2>Questions About the <span style="color:var(--accent);font-style:italic;">Generate Phase</span></h2>
+
+<div class="faq-item">
+<div class="faq-q">What budget is needed to run the Generate phase effectively?</div>
+<div class="faq-a">The Generate phase is designed to work at multiple budget levels, but minimum viable paid media spend for B2B typically starts at $5,000 to $8,000 per month to generate enough data for meaningful optimization decisions. Below that threshold, learning cycles take too long and the signal-to-noise ratio in the data is too low to confidently allocate budget. The channel mix is adjusted based on available budget - lower budgets typically start with one primary paid channel and SEO running in parallel, then expand as performance data justifies increased spend.</div>
+</div>
+
+<div class="faq-item">
+<div class="faq-q">How long before we see pipeline from the Generate phase?</div>
+<div class="faq-a">For bottom-of-funnel intent-based channels like Google Search, first pipeline contributions typically appear within 14 to 21 days of launch. LinkedIn campaigns targeting cold audiences typically take four to six weeks to produce qualified pipeline because of the longer engagement cycle. SEO operates on a six to twelve month compounding timeline and is not expected to produce meaningful organic pipeline in the first 90 days. The Generate phase launch plan sets realistic expectations for each channel's lead-time before it is live.</div>
+</div>
+
+<div class="faq-item">
+<div class="faq-q">Do we need to build new landing pages or can we use existing pages?</div>
+<div class="faq-a">Existing pages can be used if they meet the conversion criteria established in the Architect phase website blueprint. In practice, most growth-stage companies have at least one or two pages that need to be updated or rebuilt before paid traffic runs to them. Sending paid traffic to a page that does not convert is one of the most expensive mistakes in demand generation - it is always worth the time to verify conversion rate before running spend.</div>
+</div>
+
+<div class="faq-item">
+<div class="faq-q">Can we run Generate without having completed the Architect phase?</div>
+<div class="faq-a">Technically yes, but the Generate phase performs significantly worse without the Architect phase foundation. Channel selection without ICP data is guesswork. Creative without a messaging hierarchy is inconsistent and typically performs at a fraction of its potential. Attribution without the tech stack design from Architect is incomplete. In cases where a company has existing brand positioning and a functioning funnel, Mark can adapt the Generate phase to build on what is already solid. But in most cases, skipping Architect means rebuilding parts of it during Generate at higher cost and slower speed.</div>
+</div>
+
+<div class="faq-item">
+<div class="faq-q">How is SEO handled in the Generate phase versus a traditional SEO agency?</div>
+<div class="faq-a">The Generate phase treats SEO as a pipeline channel, not a traffic channel. This means content is prioritized by buyer intent rather than search volume alone, conversion paths from organic landing pages are designed before the content is published, and AI search optimization - structured content, entity coverage, and citation-building for AI-generated results - is integrated from the start. Traditional SEO agencies typically optimize for rankings. The Generate phase optimizes for pipeline contribution from organic search.</div>
+</div>
+
+<div class="faq-item">
+<div class="faq-q">What phase comes after Generate?</div>
+<div class="faq-a">Generate feeds into Phase 04: <a href="magnet-nurture.html">Nurture</a>, where the demand generated is converted through multi-touch sequences, sales enablement, and structured marketing-to-sales handoffs. Most of the pipeline that Generate creates is not ready to buy immediately - Nurture is the system that builds the buyer journey from first engagement to confident purchase decision.</div>
+</div>
+</div>
+</section>
+
+<section class="mag-cta">
+<h2>Ready to Generate Real Pipeline?</h2>
+<p>Stop running campaigns without attribution. Build the demand engine that makes every dollar accountable.</p>
+<a href="book.html" class="mag-cta-btn">Book a Free Discovery Call</a>
+</section>
+
+<div class="sp-faq" style="padding:3rem 6vw;max-width:960px;margin:0 auto;">
+<h2 style="color:#ffffff;font-family:'Bebas Neue',sans-serif;font-size:clamp(1.6rem,2.8vw,2.2rem);letter-spacing:.04em;margin-bottom:1.5rem;">What You Get - Frequently Asked Questions</h2>
+<div class="sp-faq-item">
+<p class="sp-faq-q">What does a fractional CMO do for companies in this market?</p>
+<p class="sp-faq-a">A fractional CMO acts as your Chief Marketing Officer on a part-time basis -- typically 2-3 days per week -- with full executive accountability for strategy, team leadership, budget, and revenue outcomes. They own your entire marketing function and are accountable for pipeline generation and revenue attribution, not just deliverables.</p>
+</div>
+<div class="sp-faq-item">
+<p class="sp-faq-q">How quickly will I see results?</p>
+<p class="sp-faq-a">Most engagements produce measurable outputs within 30 days: a GTM strategy, ICP definition, messaging architecture, and demand generation plan. Pipeline movement typically appears in 60-90 days as campaigns launch. Long-term compounding results build over 6-12 months.</p>
+</div>
+<div class="sp-faq-item">
+<p class="sp-faq-q">Is there a long-term contract required?</p>
+<p class="sp-faq-a">No. Every MarkCMO engagement is month-to-month. There are no long-term contracts, no cancellation fees, and no lock-in. You stay because the results justify it. We offer a free GTM diagnostic before you commit to any paid engagement.</p>
+</div>
+<div class="sp-faq-item">
+<p class="sp-faq-q">Do I have to sign a long-term contract?</p>
+<p class="sp-faq-a">No. Every MarkCMO engagement is month-to-month. There are no long-term contracts, no cancellation fees, and no lock-in clauses. You stay because the results justify it -- not because you are contractually obligated. We offer a free GTM diagnostic before you commit to any paid engagement so you can validate fit before spending a dollar.</p>
+</div>
+<div class="sp-faq-item">
+<p class="sp-faq-q">How does the engagement start?</p>
+<p class="sp-faq-a">Step one is a free 30-minute GTM diagnostic call. We review your current situation, revenue goals, team structure, and the biggest gap between where you are and where you need to be. If there is a clear fit, we outline a 30-60-90 day plan and agree on scope. Most engagements are live within 5-7 business days of the diagnostic call.</p>
+</div>
+</div>
+<div class="sp-testimonials">
+<h2>What Clients Say About the MAGNET Framework</h2>
+<p class="sp-test-sub">Results measured in pipeline generated, CAC reduced, and revenue compounded -- not reports delivered or hours billed.</p>
+<div class="sp-test-grid">
+<div class="sp-test-card"><div class="test-stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div><p class="test-text">"The MAGNET framework gave us the first commercial architecture we had ever operated from. Before, marketing was a collection of activities. After, marketing was a system. The difference in pipeline predictability was immediate. We went from guessing what was working to knowing exactly which components of the framework were generating qualified pipeline and at what cost.",</p><div class="test-name">Rachel S.</div><div class="test-role">CEO, B2B SaaS Company, $14M ARR</div></div>
+<div class="sp-test-card"><div class="test-stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div><p class="test-text">"What I valued most about the MAGNET engagement was that it built something permanent. The framework, the attribution model, the demand generation playbook, the team accountability structure -- all of it outlived the engagement. Eighteen months later our marketing function still runs on the commercial infrastructure that was built during the MAGNET implementation.",</p><div class="test-name">Thomas H.</div><div class="test-role">COO, PE-Backed Technology Company, $22M Revenue</div></div>
+<div class="sp-test-card"><div class="test-stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div><p class="test-text">"The MAGNET Track phase was what changed our commercial decision-making permanently. For the first time we had attribution data that connected marketing spend to pipeline to closed revenue by channel. That data made every subsequent budget decision more defensible, more efficient, and more aligned with what was actually working. Pipeline grew 3.1x in the 12 months after implementation.",</p><div class="test-name">Jennifer W.</div><div class="test-role">CFO, Venture-Backed B2B Company, Series B</div></div>
+</div>
+</div>
+
+<div class="sp-cta-closer">
+<div class="sp-cta-closer-inner">
+<span class="sp-cta-closer-tag">Free 30-Min Diagnostic</span>
+<h2>Ready to Build a Marketing Engine That Compounds?</h2>
+<p>Book a free GTM diagnostic call. No pitch. No pressure. We review your current situation, identify the single biggest gap in your marketing, and give you a clear path forward -- whether you hire us or not.</p>
+<div class="sp-cta-closer-btns">
+<a href="/book.html" class="sp-cta-primary">Book Free Strategy Call</a>
+<a href="/fractional-cmo.html" class="btn-ghost">Learn About Fractional CMO</a>
+</div>
+<p class="sp-cta-closer-trust"><span>4.9&#9733; rated</span><span>&nbsp;&bull;&nbsp;</span><span>193 client reviews</span><span>&nbsp;&bull;&nbsp;</span><span>No long-term contracts</span><span>&nbsp;&bull;&nbsp;</span><span>Month-to-month</span></p>
+</div>
+</div>
+
+<footer>
+<div class="footer-mega">
+<div class="footer-brand-col">
+<div class="footer-brand">Mark <span>Gabrielli</span></div>
+<div class="footer-tagline">Fractional CMO &amp; COO</div>
+<p class="footer-desc">Embedded executive strategy for B2B growth-stage companies. 15+ years. 370+ cities served.</p>
+</div>
+<div>
+<div class="footer-col-title">MAGNET</div>
+<ul>
+<li><a href="magnet-framework.html">Overview</a></li>
+<li><a href="magnet-map.html">Map</a></li>
+<li><a href="magnet-architect.html">Architect</a></li>
+<li><a href="magnet-generate.html">Generate</a></li>
+<li><a href="magnet-nurture.html">Nurture</a></li>
+<li><a href="magnet-engineer.html">Engineer</a></li>
+<li><a href="magnet-track.html">Track</a></li>
+</ul>
+</div>
+<div>
+<div class="footer-col-title">Services</div>
+<ul>
+<li><a href="fractional-cmo.html">Fractional CMO</a></li>
+<li><a href="fractional-coo.html">Fractional COO</a></li>
+<li><a href="services.html">All Services</a></li>
+</ul>
+</div>
+<div>
+<div class="footer-col-title">Company</div>
+<ul>
+<li><a href="about.html">About Mark</a></li>
+<li><a href="results.html">Results</a></li>
+<li><a href="blog.html">Insights</a></li>
+<li><a href="book.html">Book a Call</a></li>
+</ul>
+</div>
+</div>
+<div class="footer-bottom">
+<p class="footer-copy">&copy; 2026 Mark Gabrielli / WETYR Corp. All rights reserved.</p>
+</div>
+</footer>
+
+<script>
+document.querySelectorAll('.reveal').forEach(function(el){
+  var o=new IntersectionObserver(function(entries){
+    entries.forEach(function(e){if(e.isIntersecting){e.target.classList.add('visible');}});
+  },{threshold:0.1});
+  o.observe(el);
+});
+</script>
+<script src="nav.js" defer></script>
+<script>
+(function(){
+  var nav=document.getElementById('mainNav');
+  var ham=document.getElementById('navHam');
+  var drw=document.getElementById('mobileDrawer');
+  if(nav) window.addEventListener('scroll',function(){
+    nav.classList.toggle('scrolled',window.scrollY>20);
+  },{passive:true});
+  if(ham&&drw){
+    ham.addEventListener('click',function(){drw.classList.toggle('open');});
+    drw.querySelectorAll('a').forEach(function(a){
+      a.addEventListener('click',function(){drw.classList.remove('open');});
+    });
+  }
+})();
+</script>
+<style id="mc-form-styles">
+.mc-contact{background:linear-gradient(135deg,#050919 0%,#0A1628 60%,#0d1b27 100%);padding:64px 0;border-top:1px solid #2a2a2a;margin-top:0}
+.mc-contact-inner{max-width:1100px;margin:0 auto;padding:0 24px;display:grid;grid-template-columns:1fr 1fr;gap:56px;align-items:start}
+.mc-contact-left h2{font-family:'Bebas Neue',Barlow,-apple-system,sans-serif;font-size:clamp(1.8rem,4vw,2.8rem);font-weight:400;letter-spacing:.03em;color:#fff;margin:0 0 14px;line-height:1.1}
+.mc-contact-left h2 em{color:#C9A84C;font-style:normal}
+.mc-contact-left p{font-size:.92rem;color:#94A3B8;line-height:1.8;margin:0 0 24px}
+.mc-contact-proof{display:flex;flex-direction:column;gap:10px;margin-bottom:28px}
+.mc-contact-proof-item{display:flex;align-items:center;gap:10px;font-size:.85rem;color:#94A3B8}
+.mc-contact-proof-item span:first-child{color:#C9A84C;font-weight:700;font-size:1rem;flex-shrink:0}
+.mc-contact-direct{background:rgba(201,168,76,.08);border:1px solid rgba(201,168,76,.2);border-radius:8px;padding:14px 18px}
+.mc-contact-direct p{font-size:.75rem;color:#666;text-transform:uppercase;letter-spacing:.08em;margin:0 0 6px}
+.mc-contact-direct a{color:#C9A84C;font-weight:700;text-decoration:none;font-size:.88rem}
+.mc-form-card{background:#111;border:1px solid #2a2a2a;border-radius:12px;padding:28px}
+.mc-form-card h3{font-size:1.05rem;font-weight:700;color:#fff;margin:0 0 4px}
+.mc-form-card>p{font-size:.82rem;color:#64748B;margin:0 0 20px}
+.mc-field{margin-bottom:12px}
+.mc-field input,.mc-field textarea,.mc-field select{width:100%;padding:12px 14px;background:#1a1a1a;border:1px solid #2a2a2a;border-radius:6px;color:#e8e8e8;font-size:.88rem;font-family:inherit;box-sizing:border-box;transition:border-color .2s;outline:none}
+.mc-field input:focus,.mc-field textarea:focus,.mc-field select:focus{border-color:#C9A84C}
+.mc-field input::placeholder,.mc-field textarea::placeholder{color:#3a3a3a}
+.mc-field textarea{resize:vertical;min-height:80px}
+.mc-field select{appearance:none;cursor:pointer;color:#e8e8e8}
+.mc-field select option{background:#1a1a1a}
+.mc-submit{width:100%;background:#C9A84C;color:#0f0f0f;border:none;padding:13px;border-radius:6px;font-size:.95rem;font-weight:700;cursor:pointer;font-family:inherit;transition:background .2s;margin-top:4px}
+.mc-submit:hover:not(:disabled){background:#b8952f}
+.mc-submit:disabled{opacity:.5;cursor:not-allowed}
+.mc-success{display:none;text-align:center;padding:28px 12px}
+.mc-success-icon{font-size:2.5rem;margin-bottom:10px;color:#C9A84C}
+.mc-success h3{color:#C9A84C;font-size:1.2rem;font-weight:700;margin:0 0 8px}
+.mc-success p{color:#94A3B8;font-size:.88rem;margin:0 0 18px;line-height:1.7}
+.mc-success a{color:#C9A84C;font-weight:700}
+@media(max-width:860px){.mc-contact-inner{grid-template-columns:1fr;gap:32px}}
+@media(max-width:540px){.mc-contact{padding:40px 0}.mc-form-card{padding:20px 16px}.mc-contact-inner{padding:0 14px}}
+</style>
+<section class="mc-contact" id="contact">
+  <div class="mc-contact-inner">
+    <div class="mc-contact-left">
+      <h2>Get a Free <em>Revenue Strategy Call</em></h2>
+      <p>30 minutes with Mark Gabrielli. No pitch. A direct read on your biggest marketing gaps and what moves revenue fastest. Responds personally within 24 hours.</p>
+      <div class="mc-contact-proof">
+        <div class="mc-contact-proof-item"><span>&#10003;</span><span>$135M+ in qualified B2B pipeline built for clients</span></div>
+        <div class="mc-contact-proof-item"><span>&#10003;</span><span>90% client retention rate</span></div>
+        <div class="mc-contact-proof-item"><span>&#10003;</span><span>Retainer starts at $8K/month, launches in 1-2 weeks</span></div>
+        <div class="mc-contact-proof-item"><span>&#10003;</span><span>4.9 stars across review platforms</span></div>
+      </div>
+      <div class="mc-contact-direct">
+        <p>Prefer to reach out directly?</p>
+        <a href="mailto:mark@markcmo.com">mark@markcmo.com</a>
+        &nbsp;&nbsp;&#183;&nbsp;&nbsp;
+        <a href="tel:+13219175738">+1 (321) 917-5738</a>
+      </div>
+    </div>
+    <div class="mc-form-card">
+      <h3>Book a Free Strategy Call</h3>
+      <p>60 seconds. Mark responds personally within 24 hours.</p>
+      <div id="mc-card">
+        <form id="mc-form" novalidate>
+          <input type="hidden" name="form-name" value="page-contact">
+          <input type="text" name="bot-field" style="display:none" tabindex="-1" autocomplete="off">
+          <div class="mc-field"><input type="text" name="name" placeholder="Your Full Name *" required autocomplete="name"></div>
+          <div class="mc-field"><input type="email" name="email" placeholder="Work Email *" required autocomplete="email"></div>
+          <div class="mc-field"><input type="text" name="company" placeholder="Company Name" autocomplete="organization"></div>
+          <div class="mc-field"><input type="tel" name="phone" placeholder="Phone (optional)" autocomplete="tel"></div>
+          <div class="mc-field">
+            <select name="service">
+              <option value="" disabled selected>What are you looking for?</option>
+              <option value="fractional-cmo">Fractional CMO Retainer ($8K-$20K/mo)</option>
+              <option value="revenue-audit">Revenue Leak Audit ($7,500)</option>
+              <option value="vip-day">CMO VIP Day ($4,500)</option>
+              <option value="founders-circle">Founders Circle ($25K/yr)</option>
+              <option value="fractional-coo">Fractional COO Services</option>
+              <option value="unsure">Not sure yet - need a consult</option>
+            </select>
+          </div>
+          <div class="mc-field"><textarea name="message" placeholder="Biggest revenue challenge right now? (optional)"></textarea></div>
+          <button type="submit" id="mc-btn" class="mc-submit">Book Free Strategy Call &#8594;</button>
+          <div style="margin-top:8px;font-size:.72rem;color:#3a3a3a;text-align:center">No spam. No sales team. Just Mark.</div>
+        </form>
+      </div>
+      <div id="mc-success" class="mc-success">
+        <div class="mc-success-icon">&#10003;</div>
+        <h3>You are in. Check your inbox.</h3>
+        <p>Mark will personally follow up within 24 hours.<br>Or reach him directly: <a href="mailto:mark@markcmo.com">mark@markcmo.com</a> &#183; <a href="tel:+13219175738">+1 (321) 917-5738</a></p>
+      </div>
+    </div>
+  </div>
+</section>
+<script>
+(function(){
+  var _t;
+  document.addEventListener('input',function(){
+    clearTimeout(_t);_t=setTimeout(function(){
+      var f=document.getElementById('mc-form');if(!f)return;
+      var d=new FormData(f),o={};d.forEach(function(v,k){if(v&&k!=='bot-field')o[k]=v;});
+      o._page=location.pathname;o._ts=new Date().toISOString();
+      try{localStorage.setItem('mc_partial',JSON.stringify(o));}catch(e){}
+    },3000);
+  });
+  var form=document.getElementById('mc-form');if(!form)return;
+  form.addEventListener('submit',function(e){
+    e.preventDefault();
+    var btn=document.getElementById('mc-btn'),card=document.getElementById('mc-card'),suc=document.getElementById('mc-success');
+    if(!btn||!card||!suc)return;
+    btn.textContent='Sending...';btn.disabled=true;
+    var d=new FormData(form);
+    var p={'form-name':d.get('form-name')||'page-contact','name':d.get('name')||'','email':d.get('email')||'','company':d.get('company')||'','phone':d.get('phone')||'','service':d.get('service')||'','message':d.get('message')||''};
+    try{localStorage.setItem('mc_lead_'+Date.now(),JSON.stringify(p));}catch(ex){}
+    fetch('/api/lead',{method:'POST',headers:{'Content-Type':'application/x-www-form-urlencoded'},body:new URLSearchParams(p).toString()})
+    .then(function(){card.style.display='none';suc.style.display='block';})
+    .catch(function(){card.style.display='none';suc.style.display='block';
+      setTimeout(function(){window.open('mailto:mark@markcmo.com?subject=Inquiry&body=Name:+'+encodeURIComponent(p.name)+'%0AEmail:+'+encodeURIComponent(p.email),'_blank');},400);
+    });
+  });
+})();
+</script>
+<script src="/linkedin-widget.js" defer></script>
+</body>
+</html>

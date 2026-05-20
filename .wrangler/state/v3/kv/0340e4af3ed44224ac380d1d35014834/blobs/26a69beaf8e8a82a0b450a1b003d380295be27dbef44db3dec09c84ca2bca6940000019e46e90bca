@@ -1,0 +1,1374 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<link rel="icon" type="image/webp" href="/favicon.webp"><link rel="apple-touch-icon" href="/mark-photo.webp">
+<meta name="robots" content="noindex, follow">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Mark Louis Gabrielli Jr. - Chief Marketing Officer</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" crossorigin>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Barlow:ital,wght@0,400;0,500;0,600;0,700;0,800&family=DM+Mono:wght@400;500&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Barlow:ital,wght@0,400;0,500;0,600;0,700;0,800&family=DM+Mono:wght@400;500&display=swap" media="print" onload="this.media='all'">
+<noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Barlow:ital,wght@0,400;0,500;0,600;0,700;0,800&family=DM+Mono:wght@400;500&display=swap"></noscript>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+:root{
+  --bg-dark:#1a1030;
+  --window-bg:rgba(255,255,255,.92);
+  --window-glass:rgba(255,255,255,.72);
+  --title-bar:#e8e8e8;
+  --text:#1d1d1f;
+  --text-secondary:#86868b;
+  --text-tertiary:#aeaeb2;
+  --accent:#007aff;
+  --accent-hover:#0066d6;
+  --green:#34c759;
+  --red:#ff3b30;
+  --yellow:#ffcc00;
+  --orange:#ff9500;
+  --purple:#af52de;
+  --sidebar:#f5f5f7;
+  --border:rgba(0,0,0,.08);
+  --border-dark:rgba(0,0,0,.12);
+  --shadow:0 22px 70px rgba(0,0,0,.35),0 0 0 1px rgba(255,255,255,.1);
+  --shadow-sm:0 4px 24px rgba(0,0,0,.15),0 0 0 1px rgba(255,255,255,.08);
+  --radius:10px;
+  --dock-height:68px;
+  --menu-height:25px;
+}
+html{font-size:16px;scroll-behavior:smooth}
+body{
+  font-family:'Inter',system-ui,-apple-system,sans-serif;
+  background:var(--bg-dark);
+  color:var(--text);
+  line-height:1.5;
+  -webkit-font-smoothing:antialiased;
+  overflow-x:hidden;
+  min-height:100vh;
+  padding-top:var(--menu-height);
+  padding-bottom:calc(var(--dock-height) + 24px);
+}
+::selection{background:rgba(0,122,255,.25)}
+a{color:var(--accent);text-decoration:none}
+a:hover{text-decoration:underline}
+/* macOS Wallpaper */
+.wallpaper{
+  position:fixed;inset:0;z-index:0;
+  background:
+    radial-gradient(ellipse at 20% 50%,#1e0a3c 0%,transparent 60%),
+    radial-gradient(ellipse at 80% 20%,#0c1445 0%,transparent 50%),
+    radial-gradient(ellipse at 50% 80%,#2d1b69 0%,transparent 50%),
+    radial-gradient(ellipse at 90% 90%,#0a2463 0%,transparent 40%),
+    linear-gradient(135deg,#0f0723 0%,#1a0e3a 25%,#141252 50%,#0d1f5c 75%,#0c1445 100%);
+}
+/* Menu Bar */
+.menu-bar{
+  position:fixed;top:0;left:0;right:0;z-index:10000;
+  height:var(--menu-height);
+  background:rgba(30,20,50,.65);
+  backdrop-filter:blur(30px) saturate(180%);
+  -webkit-backdrop-filter:blur(30px) saturate(180%);
+  display:flex;align-items:center;justify-content:space-between;
+  padding:0 12px;
+  font-size:13px;font-weight:500;
+  color:rgba(255,255,255,.9);
+  border-bottom:1px solid rgba(255,255,255,.1);
+}
+.menu-left{display:flex;align-items:center;gap:18px}
+.menu-apple{font-size:15px;cursor:pointer;opacity:.9}
+.menu-item{cursor:pointer;opacity:.85;transition:opacity .15s}
+.menu-item:hover{opacity:1}
+.menu-item.bold{font-weight:700}
+.menu-right{display:flex;align-items:center;gap:14px;font-size:12px}
+.menu-right span{opacity:.85}
+.menu-icon{opacity:.85;font-size:13px}
+/* Desktop Content Area */
+.desktop{
+  position:relative;z-index:1;
+  max-width:1200px;
+  margin:0 auto;
+  padding:20px 24px 40px;
+}
+/* Base Window Chrome */
+.window{
+  background:var(--window-glass);
+  backdrop-filter:blur(40px) saturate(180%);
+  -webkit-backdrop-filter:blur(40px) saturate(180%);
+  border-radius:var(--radius);
+  box-shadow:var(--shadow);
+  overflow:hidden;
+  margin-bottom:20px;
+  border:1px solid rgba(255,255,255,.3);
+  opacity:0;
+  transform:translateY(30px) scale(.97);
+  transition:opacity .6s cubic-bezier(.16,1,.3,1),transform .6s cubic-bezier(.16,1,.3,1);
+}
+.window.vis{opacity:1;transform:none}
+.title-bar{
+  background:linear-gradient(180deg,#e8e8e8 0%,#d6d6d6 100%);
+  border-bottom:1px solid rgba(0,0,0,.15);
+  padding:0 12px;
+  height:38px;
+  display:flex;align-items:center;
+  position:relative;
+  user-select:none;
+  flex-shrink:0;
+}
+.traffic-lights{display:flex;gap:8px;z-index:2}
+.tl-dot{
+  width:12px;height:12px;border-radius:50%;
+  border:1px solid rgba(0,0,0,.12);
+}
+.tl-close{background:#ff5f57}
+.tl-minimize{background:#ffbd2e}
+.tl-maximize{background:#27ca40}
+.title-text{
+  position:absolute;left:0;right:0;
+  text-align:center;
+  font-size:13px;font-weight:500;
+  color:var(--text);
+  pointer-events:none;
+}
+/* Dark title bar (for terminal) */
+.title-bar-dark{
+  background:linear-gradient(180deg,#3d3d3d 0%,#2d2d2d 100%);
+  border-bottom:1px solid rgba(0,0,0,.4);
+}
+.title-bar-dark .title-text{color:rgba(255,255,255,.85)}
+/* Finder Window */
+.finder-window{display:flex;flex-direction:column}
+.finder-body{display:flex;min-height:400px}
+.finder-sidebar{
+  width:180px;
+  background:rgba(246,246,248,.95);
+  border-right:1px solid var(--border-dark);
+  padding:8px 0;
+  flex-shrink:0;
+}
+.sidebar-section{padding:4px 12px;margin-top:8px}
+.sidebar-label{
+  font-size:11px;font-weight:600;
+  color:var(--text-secondary);
+  text-transform:uppercase;
+  letter-spacing:.03em;
+  margin-bottom:4px;
+}
+.sidebar-item{
+  display:flex;align-items:center;gap:6px;
+  padding:4px 8px;border-radius:5px;
+  font-size:12px;color:var(--text);
+  cursor:pointer;transition:background .15s;
+  text-decoration:none;
+}
+.sidebar-item:hover{background:rgba(0,0,0,.05);text-decoration:none}
+.sidebar-item.active{background:var(--accent);color:#fff}
+.sidebar-icon{font-size:14px;width:18px;text-align:center}
+.finder-content{flex:1;padding:20px 24px;overflow-y:auto}
+/* About This Mac style */
+.about-header{text-align:center;padding:20px 0 10px}
+.about-avatar{
+  width:80px;height:80px;
+  border-radius:50%;margin:0 auto 14px;
+  background:linear-gradient(135deg,var(--accent),var(--purple));
+  display:flex;align-items:center;justify-content:center;
+  font-size:28px;font-weight:700;color:#fff;
+  box-shadow:0 4px 16px rgba(0,122,255,.3);
+}
+.about-name{
+  font-size:22px;font-weight:700;
+  letter-spacing:-.02em;
+  color:var(--text);
+}
+.about-title{
+  font-size:13px;color:var(--text-secondary);
+  margin-top:2px;
+}
+.about-info{
+  margin-top:16px;
+  border-top:1px solid var(--border);
+  padding-top:12px;
+}
+.about-row{
+  display:flex;justify-content:space-between;
+  padding:6px 0;
+  font-size:13px;
+  border-bottom:1px solid rgba(0,0,0,.04);
+}
+.about-row:last-child{border:none}
+.about-key{color:var(--text-secondary);font-weight:500}
+.about-val{color:var(--text);font-weight:600;text-align:right}
+.stat-bar{
+  display:grid;grid-template-columns:repeat(4,1fr);
+  gap:1px;margin-top:16px;
+  background:var(--border);border-radius:8px;overflow:hidden;
+}
+.stat-cell{
+  background:rgba(255,255,255,.95);
+  padding:14px 8px;text-align:center;
+}
+.stat-val{
+  font-size:22px;font-weight:800;
+  color:var(--accent);
+  letter-spacing:-.02em;
+  font-family:'Inter',system-ui,sans-serif;
+}
+.stat-label{
+  font-size:10px;font-weight:500;
+  color:var(--text-secondary);
+  text-transform:uppercase;
+  letter-spacing:.04em;
+  margin-top:2px;
+}
+/* Notes Window */
+.notes-window .notes-body{
+  background:linear-gradient(180deg,#fef9e7 0%,#fefcf3 3%,#fff 6%);
+  padding:20px 24px;
+  min-height:200px;
+}
+.notes-body p{
+  font-size:14px;line-height:1.85;
+  color:var(--text);
+  border-bottom:1px solid rgba(0,0,0,.04);
+  padding-bottom:20px;
+}
+.notes-body .notes-date{
+  font-size:11px;color:var(--text-tertiary);
+  text-align:center;margin-bottom:12px;
+}
+.notes-body em{font-style:normal;color:var(--accent);font-weight:600}
+/* Terminal Window */
+.terminal-body{
+  background:#1e1e1e;
+  padding:16px 20px;
+  font-family:'JetBrains Mono',monospace;
+  font-size:12.5px;
+  line-height:1.7;
+  color:#d4d4d4;
+  min-height:300px;
+}
+.term-prompt{color:#27ca40}
+.term-cmd{color:#e5e5e5}
+.term-comment{color:#6a9955}
+.term-accent{color:#569cd6}
+.term-string{color:#ce9178}
+.term-gold{color:#dcdcaa}
+.term-highlight{color:#4fc1ff;font-weight:600}
+.term-separator{color:#555;display:block;margin:6px 0}
+.term-role{color:#c586c0;font-weight:600;font-size:13px}
+.term-org{color:#9cdcfe}
+.term-date{color:#b5cea8}
+/* Dashboard Widget */
+.widget-window{
+  background:rgba(40,40,50,.85);
+  backdrop-filter:blur(40px);
+  -webkit-backdrop-filter:blur(40px);
+  border:1px solid rgba(255,255,255,.12);
+}
+.widget-window .title-bar{
+  background:linear-gradient(180deg,rgba(60,60,70,.9) 0%,rgba(50,50,60,.9) 100%);
+  border-bottom:1px solid rgba(255,255,255,.08);
+}
+.widget-window .title-text{color:rgba(255,255,255,.85)}
+.widget-body{padding:20px}
+.widget-top{
+  display:flex;justify-content:space-between;align-items:center;
+  margin-bottom:16px;
+}
+.widget-label{
+  font-family:'JetBrains Mono',monospace;
+  font-size:10px;letter-spacing:.12em;
+  text-transform:uppercase;color:rgba(255,255,255,.45);
+}
+.widget-live{
+  display:flex;align-items:center;gap:5px;
+  font-family:'JetBrains Mono',monospace;
+  font-size:10px;color:var(--green);
+}
+.widget-pulse{
+  width:6px;height:6px;border-radius:50%;
+  background:var(--green);
+  animation:gpulse 2s infinite;
+}
+@keyframes gpulse{0%,100%{opacity:1;box-shadow:0 0 0 0 rgba(52,199,89,.4)}50%{opacity:.6;box-shadow:0 0 0 6px rgba(52,199,89,0)}}
+.widget-metrics{
+  display:grid;grid-template-columns:repeat(3,1fr);
+  gap:10px;margin-bottom:18px;
+}
+.wm{
+  background:rgba(255,255,255,.06);
+  border:1px solid rgba(255,255,255,.08);
+  border-radius:8px;padding:14px 12px;
+}
+.wm-label{
+  font-family:'JetBrains Mono',monospace;
+  font-size:9px;letter-spacing:.1em;
+  text-transform:uppercase;color:rgba(255,255,255,.4);
+  margin-bottom:6px;
+}
+.wm-val{
+  font-size:24px;font-weight:800;
+  color:#fff;letter-spacing:-.02em;
+}
+.wm-sub{font-size:11px;color:rgba(255,255,255,.35);margin-top:2px}
+.chart-box{position:relative;height:100px;margin-bottom:10px}
+.chart-box svg{width:100%;height:100%}
+.chart-grid{stroke:rgba(255,255,255,.06);stroke-width:1}
+.chart-path{fill:none;stroke:var(--accent);stroke-width:2.5;stroke-linecap:round;stroke-linejoin:round}
+.chart-fill{fill:url(#wGrad)}
+.chart-x{
+  display:flex;justify-content:space-between;
+  font-family:'JetBrains Mono',monospace;
+  font-size:9px;color:rgba(255,255,255,.3);
+}
+/* Safari Window / Tech Stack */
+.safari-toolbar{
+  display:flex;align-items:center;gap:8px;
+  padding:6px 12px;
+  background:rgba(246,246,248,.95);
+  border-bottom:1px solid var(--border);
+}
+.safari-url{
+  flex:1;background:rgba(0,0,0,.04);
+  border-radius:6px;padding:5px 10px;
+  font-size:12px;color:var(--text-secondary);
+  text-align:center;
+}
+.safari-body{padding:16px 20px;background:rgba(255,255,255,.95)}
+.tech-category{margin-bottom:16px}
+.tech-category:last-child{margin-bottom:0}
+.tech-cat-label{
+  font-family:'JetBrains Mono',monospace;
+  font-size:10px;font-weight:600;
+  letter-spacing:.08em;text-transform:uppercase;
+  color:var(--text-secondary);
+  margin-bottom:8px;
+  padding-bottom:4px;
+  border-bottom:1px solid var(--border);
+}
+.tech-grid{display:flex;flex-wrap:wrap;gap:6px}
+.tech-chip{
+  display:inline-flex;align-items:center;gap:4px;
+  font-size:11.5px;font-weight:500;
+  padding:5px 10px;
+  background:rgba(0,122,255,.06);
+  border:1px solid rgba(0,122,255,.12);
+  border-radius:6px;color:var(--text);
+  transition:all .15s;
+}
+.tech-chip:hover{
+  background:rgba(0,122,255,.12);
+  border-color:var(--accent);
+  color:var(--accent);
+}
+/* Finder List View / Competencies */
+.list-header{
+  display:grid;grid-template-columns:2fr 1fr 1fr;
+  padding:6px 16px;
+  font-size:11px;font-weight:600;
+  color:var(--text-secondary);
+  background:rgba(0,0,0,.03);
+  border-bottom:1px solid var(--border-dark);
+}
+.list-body{background:rgba(255,255,255,.95)}
+.list-row{
+  display:grid;grid-template-columns:2fr 1fr 1fr;
+  padding:7px 16px;
+  font-size:12.5px;
+  border-bottom:1px solid rgba(0,0,0,.04);
+  transition:background .1s;
+  cursor:default;
+}
+.list-row:last-child{border:none}
+.list-row:hover{background:rgba(0,122,255,.06)}
+.list-row .list-name{font-weight:500;color:var(--text);display:flex;align-items:center;gap:6px}
+.list-row .list-type{color:var(--text-secondary);font-size:11.5px}
+.list-row .list-date{color:var(--text-tertiary);font-size:11.5px}
+.list-icon{font-size:14px}
+/* Mail Window / Case Studies */
+.mail-body{background:rgba(255,255,255,.95)}
+.mail-sidebar-inner{
+  width:100%;
+  border-right:none;
+}
+.mail-item{
+  padding:12px 16px;
+  border-bottom:1px solid rgba(0,0,0,.06);
+  cursor:pointer;transition:background .1s;
+}
+.mail-item:hover{background:rgba(0,122,255,.04)}
+.mail-tag{
+  display:inline-block;
+  font-family:'JetBrains Mono',monospace;
+  font-size:9px;letter-spacing:.06em;
+  text-transform:uppercase;
+  padding:2px 6px;border-radius:3px;
+  margin-bottom:4px;font-weight:600;
+}
+.mail-tag.rev{background:rgba(52,199,89,.12);color:#1b8a3e}
+.mail-tag.perf{background:rgba(0,122,255,.1);color:var(--accent)}
+.mail-tag.ma{background:rgba(255,149,0,.12);color:#c77200}
+.mail-subject{font-size:13px;font-weight:600;color:var(--text);margin-bottom:2px}
+.mail-preview{font-size:12px;color:var(--text-secondary);line-height:1.4}
+.mail-metric{
+  display:inline-block;
+  font-family:'JetBrains Mono',monospace;
+  font-size:18px;font-weight:800;
+  color:var(--accent);margin-right:6px;
+}
+.mail-metric-label{
+  font-size:10px;color:var(--text-tertiary);
+  text-transform:uppercase;letter-spacing:.04em;
+}
+/* Reminders / Wins */
+.reminders-body{padding:16px 20px;background:rgba(255,255,255,.95)}
+.reminder-item{
+  display:flex;align-items:flex-start;gap:10px;
+  padding:10px 0;
+  border-bottom:1px solid rgba(0,0,0,.04);
+}
+.reminder-item:last-child{border:none}
+.reminder-check{
+  width:20px;height:20px;border-radius:50%;
+  border:2px solid var(--accent);
+  display:flex;align-items:center;justify-content:center;
+  flex-shrink:0;margin-top:1px;
+  background:var(--accent);
+}
+.reminder-check::after{
+  content:'';
+  width:6px;height:10px;
+  border:solid #fff;border-width:0 2px 2px 0;
+  transform:rotate(45deg) translate(-1px,-1px);
+}
+.reminder-text h4{font-size:13px;font-weight:600;color:var(--text)}
+.reminder-text p{font-size:12px;color:var(--text-secondary);line-height:1.4;margin-top:1px}
+/* M&A Deal Cards */
+.deal-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px;padding:16px 20px}
+.deal-card{
+  background:rgba(255,255,255,.95);
+  border:1px solid var(--border);
+  border-radius:8px;padding:16px;
+}
+.deal-type{
+  font-family:'JetBrains Mono',monospace;
+  font-size:9px;letter-spacing:.15em;
+  text-transform:uppercase;
+  color:var(--orange);font-weight:600;
+  margin-bottom:8px;
+}
+.deal-card h4{font-size:14px;font-weight:600;margin-bottom:10px;color:var(--text)}
+.deal-row{
+  display:flex;justify-content:space-between;
+  font-size:12px;padding:5px 0;
+  border-bottom:1px solid rgba(0,0,0,.04);
+}
+.deal-row:last-child{border:none}
+.deal-row span:first-child{color:var(--text-secondary)}
+.deal-row span:last-child{color:var(--text);font-weight:500}
+/* Dock */
+.dock-wrapper{
+  position:fixed;bottom:8px;left:50%;transform:translateX(-50%);
+  z-index:9999;
+}
+.dock{
+  display:flex;align-items:flex-end;
+  gap:4px;
+  padding:4px 8px;
+  background:rgba(30,30,40,.55);
+  backdrop-filter:blur(30px) saturate(180%);
+  -webkit-backdrop-filter:blur(30px) saturate(180%);
+  border-radius:18px;
+  border:1px solid rgba(255,255,255,.2);
+}
+.dock-item{
+  width:44px;height:44px;
+  border-radius:10px;
+  display:flex;align-items:center;justify-content:center;
+  font-size:22px;
+  cursor:pointer;
+  transition:transform .2s cubic-bezier(.16,1,.3,1),margin .2s;
+  position:relative;
+  text-decoration:none;
+}
+.dock-item:hover{
+  transform:scale(1.45) translateY(-8px);
+  margin:0 8px;
+}
+.dock-item:hover .dock-tooltip{opacity:1;transform:translateX(-50%) translateY(-4px)}
+.dock-tooltip{
+  position:absolute;bottom:100%;left:50%;
+  transform:translateX(-50%) translateY(4px);
+  background:rgba(30,30,40,.85);
+  color:#fff;font-size:11px;font-weight:500;
+  padding:4px 10px;border-radius:4px;
+  white-space:nowrap;
+  opacity:0;transition:all .15s;
+  pointer-events:none;
+  font-family:'Inter',sans-serif;
+}
+.dock-sep{
+  width:1px;height:36px;
+  background:rgba(255,255,255,.15);
+  margin:0 4px;flex-shrink:0;
+  align-self:center;
+}
+/* Spotlight Search */
+.spotlight-overlay{
+  position:fixed;inset:0;z-index:20000;
+  background:rgba(0,0,0,.4);
+  backdrop-filter:blur(8px);
+  -webkit-backdrop-filter:blur(8px);
+  display:none;align-items:flex-start;justify-content:center;
+  padding-top:18vh;
+}
+.spotlight-overlay.active{display:flex}
+.spotlight-box{
+  width:580px;max-width:90vw;
+  background:rgba(246,246,248,.97);
+  backdrop-filter:blur(40px);
+  -webkit-backdrop-filter:blur(40px);
+  border-radius:12px;
+  box-shadow:0 30px 90px rgba(0,0,0,.5),0 0 0 1px rgba(255,255,255,.2);
+  overflow:hidden;
+}
+.spotlight-input{
+  width:100%;padding:14px 18px;
+  border:none;outline:none;
+  font-size:20px;font-weight:400;
+  font-family:'Inter',system-ui,sans-serif;
+  background:transparent;
+  color:var(--text);
+}
+.spotlight-input::placeholder{color:var(--text-tertiary)}
+.spotlight-results{
+  border-top:1px solid var(--border);
+  max-height:340px;overflow-y:auto;
+}
+.spotlight-result{
+  display:flex;align-items:center;gap:10px;
+  padding:10px 18px;
+  cursor:pointer;transition:background .1s;
+  font-size:13px;color:var(--text);
+}
+.spotlight-result:hover,.spotlight-result.selected{background:var(--accent);color:#fff}
+.spotlight-result .sr-icon{font-size:16px;width:24px;text-align:center}
+.spotlight-result .sr-section{font-size:11px;opacity:.6;margin-left:auto}
+.spotlight-hint{
+  padding:8px 18px;
+  font-size:11px;color:var(--text-tertiary);
+  border-top:1px solid var(--border);
+  text-align:center;
+}
+/* Two-column layout for some windows */
+.col-2{display:grid;grid-template-columns:1fr 1fr;gap:20px}
+/* Counter animation */
+.counter{display:inline}
+/* Print */
+@media print{
+  .wallpaper,.menu-bar,.dock-wrapper,.spotlight-overlay{display:none!important}
+  body{background:#fff;padding:0;color:#111}
+  .desktop{max-width:100%;padding:0}
+  .window{
+    box-shadow:none!important;
+    border:1px solid #ddd!important;
+    backdrop-filter:none!important;
+    -webkit-backdrop-filter:none!important;
+    background:#fff!important;
+    opacity:1!important;
+    transform:none!important;
+    margin-bottom:12px;
+    page-break-inside:avoid;
+    border-radius:4px!important;
+  }
+  .title-bar,.title-bar-dark{
+    background:#f5f5f5!important;
+    border-bottom:1px solid #ddd!important;
+  }
+  .title-bar-dark .title-text{color:#333!important}
+  .widget-window{background:#fff!important;border-color:#ddd!important}
+  .widget-window .title-bar{background:#f5f5f5!important}
+  .widget-body{background:#fff}
+  .widget-body *{color:#111!important}
+  .wm{background:#f8f8f8!important;border-color:#ddd!important}
+  .wm-label,.wm-sub{color:#666!important}
+  .wm-val{color:var(--accent)!important}
+  .terminal-body{background:#1e1e1e!important;-webkit-print-color-adjust:exact;print-color-adjust:exact}
+  .dock-wrapper{display:none!important}
+  .stat-val{color:var(--accent)!important}
+  .col-2{grid-template-columns:1fr 1fr}
+}
+/* Responsive */
+@media(max-width:768px){
+  .desktop{padding:12px 10px 30px}
+  .menu-left .menu-item:not(.bold){display:none}
+  .finder-body{flex-direction:column}
+  .finder-sidebar{width:100%;border-right:none;border-bottom:1px solid var(--border-dark);padding:6px 8px;display:flex;flex-wrap:wrap;gap:2px}
+  .sidebar-section{margin-top:0;padding:2px 4px}
+  .sidebar-label{display:none}
+  .sidebar-item{font-size:11px;padding:4px 8px}
+  .stat-bar{grid-template-columns:repeat(2,1fr)}
+  .col-2{grid-template-columns:1fr}
+  .deal-grid{grid-template-columns:1fr}
+  .widget-metrics{grid-template-columns:1fr}
+  .dock{gap:2px;padding:3px 6px}
+  .dock-item{width:36px;height:36px;font-size:18px}
+  .dock-item:hover{transform:scale(1.3) translateY(-6px);margin:0 4px}
+  .list-header,.list-row{grid-template-columns:1fr 1fr;font-size:11px}
+  .list-row .list-date{display:none}
+  .list-header span:last-child{display:none}
+  .about-name{font-size:18px}
+  .terminal-body{font-size:11px}
+  .tech-grid{gap:4px}
+  .tech-chip{font-size:10.5px;padding:4px 7px}
+}
+</style>
+<meta name="description" content="Mark Louis Gabrielli Jr. - Chief Marketing Officer - MarkCMO provides fractional CMO and strategic marketing services for growth-stage companies.">
+<link rel="canonical" href="https://markcmo.com/MLG-Resume-Desktop.html">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Mark Louis Gabrielli Jr. - Chief Marketing Officer">
+<meta property="og:description" content="Mark Louis Gabrielli Jr. - Chief Marketing Officer - MarkCMO provides fractional CMO and strategic marketing services for growth-stage companies.">
+<meta property="og:url" content="https://markcmo.com/MLG-Resume-Desktop.html">
+<meta property="og:site_name" content="MarkCMO">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position": 1,
+      "name": "Home",
+      "item": "https://markcmo.com/"
+    },
+    {
+      "@type": "ListItem",
+      "position": 2,
+      "name": "Mlg Resume Desktop",
+      "item": "https://markcmo.com/MLG-Resume-Desktop.html"
+    }
+  ]
+}
+</script>
+<script src="/components.js" defer></script>
+<meta name="author" content="Mark Gabrielli"/>
+<link rel="author" href="https://markcmo.com/about.html"/>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebPage",
+  "name": "Mark Louis Gabrielli Jr. - Chief Marketing Officer",
+  "description": "Mark Louis Gabrielli Jr. - Chief Marketing Officer - MarkCMO provides fractional CMO and strategic marketing services for growth-stage companies.",
+  "url": "https://markcmo.com/MLG-Resume-Desktop.html",
+  "author": {
+    "@type": "Person",
+    "name": "Mark Gabrielli",
+    "url": "https://markcmo.com/about.html",
+    "sameAs": [
+      "https://www.linkedin.com/in/marklgabrielli/",
+      "https://markcmo.com"
+    ]
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "MarkCMO",
+    "url": "https://markcmo.com",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "https://markcmo.com/mark-photo.webp"
+    }
+  },
+  "dateModified": "2026-05-08",
+  "inLanguage": "en-US"
+}
+</script>
+</head>
+<body>
+<div style="background:#0d1b27;border-left:3px solid #2563EB;padding:1.25rem 1.5rem;margin:0 auto 0;max-width:1100px;border-radius:0 6px 6px 0;"><strong style="color:#C9A84C;font-size:.75rem;font-family:'DM Mono',monospace;text-transform:uppercase;letter-spacing:.1em;display:block;margin-bottom:.5rem;">Quick Answer</strong><p style="color:#ccc;margin:0;line-height:1.75;font-size:.95rem;">Mark Louis Gabrielli Jr. is a fractional Chief Marketing Officer (CMO) and COO with 15+ years of executive marketing and operations leadership, founder of WETYR Corp and 36 digital ventures, specializing in B2B revenue growth, demand generation, and go-to-market strategy for companies with $1M-$50M in revenue.</p></div>
+<div class="wallpaper"></div>
+<div class="menu-bar">
+<div class="menu-left">
+<span class="menu-apple">&#63743;</span>
+<span class="menu-item bold">Finder</span>
+<span class="menu-item">File</span>
+<span class="menu-item">Edit</span>
+<span class="menu-item">View</span>
+<span class="menu-item bold">MLG Resume</span>
+<span class="menu-item">Help</span>
+</div>
+<div class="menu-right">
+<span class="menu-icon">&#9889;</span>
+<span class="menu-icon" title="Wi-Fi">&#9679;</span>
+<span id="menuClock"></span>
+</div>
+</div>
+<div class="spotlight-overlay" id="spotlight">
+<div class="spotlight-box">
+<input class="spotlight-input" id="spotlightInput" type="text" placeholder="Spotlight Search" autocomplete="off">
+<div class="spotlight-results" id="spotlightResults"></div>
+<div class="spotlight-hint">Press Ctrl+K to open / Esc to close</div>
+</div>
+</div>
+<div class="desktop">
+<div class="window finder-window" id="sec-about">
+<div class="title-bar">
+<div class="traffic-lights">
+<div class="tl-dot tl-close"></div>
+<div class="tl-dot tl-minimize"></div>
+<div class="tl-dot tl-maximize"></div>
+</div>
+<div class="title-text">Mark Louis Gabrielli Jr. - About</div>
+</div>
+<div class="finder-body">
+<div class="finder-sidebar">
+<div class="sidebar-section">
+<div class="sidebar-label">Favorites</div>
+<a href="#sec-about" class="sidebar-item active"><span class="sidebar-icon">&#128100;</span> About</a>
+<a href="#sec-summary" class="sidebar-item"><span class="sidebar-icon">&#128221;</span> Summary</a>
+<a href="#sec-competencies" class="sidebar-item"><span class="sidebar-icon">&#128295;</span> Competencies</a>
+<a href="#sec-experience" class="sidebar-item"><span class="sidebar-icon">&#128187;</span> Experience</a>
+<a href="#sec-dashboard" class="sidebar-item"><span class="sidebar-icon">&#128200;</span> Dashboard</a>
+<a href="#sec-deals" class="sidebar-item"><span class="sidebar-icon">&#128176;</span> M&amp;A Deals</a>
+<a href="#sec-cases" class="sidebar-item"><span class="sidebar-icon">&#128236;</span> Case Studies</a>
+<a href="#sec-tech" class="sidebar-item"><span class="sidebar-icon">&#127760;</span> Tech Stack</a>
+<a href="#sec-wins" class="sidebar-item"><span class="sidebar-icon">&#9989;</span> Wins</a>
+</div>
+</div>
+<div class="finder-content">
+<div class="about-header">
+<div class="about-avatar">MLG</div>
+<div class="about-name">Mark Louis Gabrielli Jr.</div>
+<div class="about-title">Chief Marketing Officer / Growth Architect / Revenue Systems Builder</div>
+</div>
+<div class="about-info">
+<div class="about-row"><span class="about-key">Email</span><span class="about-val"><a href="mailto:mark@markcmo.com">mark@markcmo.com</a></span></div>
+<div class="about-row"><span class="about-key">LinkedIn</span><span class="about-val"><a href="https://linkedin.com/in/marklgabrielli" target="_blank">linkedin.com/in/marklgabrielli</a></span></div>
+<div class="about-row"><span class="about-key">Portfolio</span><span class="about-val"><a href="https://markcmo.com/portfolio" target="_blank" rel="noopener noreferrer">markcmo.com/portfolio</a></span></div>
+<div class="about-row"><span class="about-key">Book a Call</span><span class="about-val"><a href="https://markcmo.com/book" target="_blank" rel="noopener noreferrer">markcmo.com/book</a></span></div>
+<div class="about-row"><span class="about-key">Location</span><span class="about-val">South Florida</span></div>
+<div class="about-row"><span class="about-key">Status</span><span class="about-val" style="color:var(--green)">Available for Engagements</span></div>
+</div>
+<div class="stat-bar">
+<div class="stat-cell">
+<div class="stat-val"><span class="counter" data-target="10" data-prefix="$" data-suffix="M+">$10M+</span></div>
+<div class="stat-label">Revenue Scaled</div>
+</div>
+<div class="stat-cell">
+<div class="stat-val"><span class="counter" data-target="5" data-prefix="$" data-suffix="M+">$5M+</span></div>
+<div class="stat-label">Ad Spend Managed</div>
+</div>
+<div class="stat-cell">
+<div class="stat-val"><span class="counter" data-target="40" data-suffix="+">40+</span></div>
+<div class="stat-label">Team Members Led</div>
+</div>
+<div class="stat-cell">
+<div class="stat-val"><span class="counter" data-target="2">2</span></div>
+<div class="stat-label">M&amp;A Exits</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="window notes-window" id="sec-summary">
+<div class="title-bar">
+<div class="traffic-lights">
+<div class="tl-dot tl-close"></div>
+<div class="tl-dot tl-minimize"></div>
+<div class="tl-dot tl-maximize"></div>
+</div>
+<div class="title-text">Notes - Executive Summary</div>
+</div>
+<div class="notes-body">
+<div class="notes-date">Executive Resume / 2026</div>
+<p>Revenue-focused Chief Marketing Officer with a track record of <em>scaling companies from $5M to $10M+</em> through system-driven marketing architecture. Managed <em>$5M+ in annual advertising budgets</em> across Meta, Google, and emerging channels while building and leading <em>cross-functional teams of 40+</em> across growth, creative, analytics, and automation. Directly involved in <em>2 successful company exits</em> (buy-side and sell-side), aligning marketing performance with enterprise valuation drivers. Known for architecting <em>AI-powered marketing systems</em> and scalable infrastructure that reduce CAC, accelerate pipeline, and compound revenue - not just campaigns, but the operating systems behind them.</p>
+</div>
+</div>
+<div class="window" id="sec-competencies">
+<div class="title-bar">
+<div class="traffic-lights">
+<div class="tl-dot tl-close"></div>
+<div class="tl-dot tl-minimize"></div>
+<div class="tl-dot tl-maximize"></div>
+</div>
+<div class="title-text">Finder - Core Competencies (18)</div>
+</div>
+<div class="list-header">
+<span>Name</span>
+<span>Type</span>
+<span>Date Modified</span>
+</div>
+<div class="list-body">
+<div class="list-row"><span class="list-name"><span class="list-icon">&#128206;</span> Go-To-Market Strategy</span><span class="list-type">Strategy</span><span class="list-date">Active</span></div>
+<div class="list-row"><span class="list-name"><span class="list-icon">&#128206;</span> Demand Generation</span><span class="list-type">Growth</span><span class="list-date">Active</span></div>
+<div class="list-row"><span class="list-name"><span class="list-icon">&#128206;</span> Revenue Operations</span><span class="list-type">Operations</span><span class="list-date">Active</span></div>
+<div class="list-row"><span class="list-name"><span class="list-icon">&#128206;</span> Customer Acquisition &amp; Lifecycle</span><span class="list-type">Growth</span><span class="list-date">Active</span></div>
+<div class="list-row"><span class="list-name"><span class="list-icon">&#128206;</span> Brand Strategy &amp; Positioning</span><span class="list-type">Strategy</span><span class="list-date">Active</span></div>
+<div class="list-row"><span class="list-name"><span class="list-icon">&#128206;</span> Performance Marketing</span><span class="list-type">Marketing</span><span class="list-date">Active</span></div>
+<div class="list-row"><span class="list-name"><span class="list-icon">&#128206;</span> AI-Driven Marketing Systems</span><span class="list-type">Technology</span><span class="list-date">Active</span></div>
+<div class="list-row"><span class="list-name"><span class="list-icon">&#128206;</span> Marketing Automation</span><span class="list-type">Technology</span><span class="list-date">Active</span></div>
+<div class="list-row"><span class="list-name"><span class="list-icon">&#128206;</span> Martech Stack Development</span><span class="list-type">Technology</span><span class="list-date">Active</span></div>
+<div class="list-row"><span class="list-name"><span class="list-icon">&#128206;</span> Data Analytics &amp; Attribution</span><span class="list-type">Analytics</span><span class="list-date">Active</span></div>
+<div class="list-row"><span class="list-name"><span class="list-icon">&#128206;</span> Conversion Rate Optimization</span><span class="list-type">Growth</span><span class="list-date">Active</span></div>
+<div class="list-row"><span class="list-name"><span class="list-icon">&#128206;</span> Multi-Channel Growth</span><span class="list-type">Growth</span><span class="list-date">Active</span></div>
+<div class="list-row"><span class="list-name"><span class="list-icon">&#128206;</span> M&amp;A Marketing Integration</span><span class="list-type">Strategy</span><span class="list-date">Active</span></div>
+<div class="list-row"><span class="list-name"><span class="list-icon">&#128206;</span> Digital Transformation</span><span class="list-type">Technology</span><span class="list-date">Active</span></div>
+<div class="list-row"><span class="list-name"><span class="list-icon">&#128206;</span> Team Leadership &amp; Org Design</span><span class="list-type">Leadership</span><span class="list-date">Active</span></div>
+<div class="list-row"><span class="list-name"><span class="list-icon">&#128206;</span> Web Development &amp; Site Building</span><span class="list-type">Technology</span><span class="list-date">Active</span></div>
+<div class="list-row"><span class="list-name"><span class="list-icon">&#128206;</span> SEO &amp; Technical SEO</span><span class="list-type">Marketing</span><span class="list-date">Active</span></div>
+<div class="list-row"><span class="list-name"><span class="list-icon">&#128206;</span> ABM &amp; Buyer Intent Platforms</span><span class="list-type">Technology</span><span class="list-date">Active</span></div>
+</div>
+</div>
+<div class="window" id="sec-experience">
+<div class="title-bar title-bar-dark">
+<div class="traffic-lights">
+<div class="tl-dot tl-close"></div>
+<div class="tl-dot tl-minimize"></div>
+<div class="tl-dot tl-maximize"></div>
+</div>
+<div class="title-text">Terminal - Professional Experience</div>
+</div>
+<div class="terminal-body">
+<span class="term-prompt">mlg@career ~ % </span><span class="term-cmd">cat experience.log</span>
+<span class="term-separator">========================================================================</span>
+<span class="term-role">Chief Marketing Officer &amp; Growth Advisor</span>
+<span class="term-org">MarkCMO - Executive Marketing Consultancy</span> <span class="term-date">[2020 - Present]</span>
+<span class="term-comment"># Fractional CMO practice serving PE-backed firms, high-growth startups, and enterprise organizations.</span>
+<span class="term-highlight"> &gt;</span> Scaled <span class="term-gold">multiple client companies from $5M to $10M+</span> in annual revenue by architecting full-funnel GTM strategies across paid, organic, and partnership channels
+<span class="term-highlight"> &gt;</span> Managed <span class="term-gold">$5M+ in combined annual ad spend</span> across Meta, Google, TikTok, and LinkedIn with consistent ROAS optimization and attribution modeling
+<span class="term-highlight"> &gt;</span> Built and led <span class="term-gold">cross-functional teams of 40+</span> spanning growth marketing, creative production, analytics, and marketing automation
+<span class="term-highlight"> &gt;</span> Designed and deployed <span class="term-gold">AI-driven marketing systems</span> using Claude, ChatGPT, and custom automation pipelines that reduced CAC by 30%+ while increasing conversion rates
+<span class="term-highlight"> &gt;</span> Served as strategic marketing advisor during <span class="term-gold">2 successful company exits</span>, aligning marketing KPIs with valuation multiples for both buy-side and sell-side transactions
+<span class="term-highlight"> &gt;</span> Engineered scalable marketing infrastructure including CRM architecture, lead scoring models, and automated nurture systems that compound pipeline velocity quarter over quarter
+<span class="term-separator">------------------------------------------------------------------------</span>
+<span class="term-role">VP of Marketing &amp; Growth</span>
+<span class="term-org">Multi-Vertical Operating Company</span> <span class="term-date">[2017 - 2020]</span>
+<span class="term-comment"># High-growth portfolio company spanning e-commerce, SaaS, and services verticals.</span>
+<span class="term-highlight"> &gt;</span> Drove <span class="term-gold">120% revenue growth</span> over 3 years by redesigning the company's demand generation engine and implementing performance marketing at scale
+<span class="term-highlight"> &gt;</span> Established the company's first RevOps function, unifying marketing, sales, and customer success data into a single attribution framework
+<span class="term-highlight"> &gt;</span> Led <span class="term-gold">brand repositioning initiative</span> that increased qualified lead volume by 45% and improved sales cycle velocity by 22%
+<span class="term-highlight"> &gt;</span> Recruited, trained, and scaled the marketing organization from 8 to 28 team members across 4 functional areas
+<span class="term-highlight"> &gt;</span> Managed martech stack consolidation that reduced operational costs by <span class="term-gold">$380K annually</span> while improving campaign throughput
+<span class="term-separator">------------------------------------------------------------------------</span>
+<span class="term-role">Director of Digital Marketing</span>
+<span class="term-org">Growth-Stage Technology Company</span> <span class="term-date">[2014 - 2017]</span>
+<span class="term-comment"># Series B technology company focused on B2B SaaS solutions.</span>
+<span class="term-highlight"> &gt;</span> Built the digital marketing function from the ground up, establishing paid media, SEO, content, and email as scalable acquisition channels
+<span class="term-highlight"> &gt;</span> Launched and optimized <span class="term-gold">multi-channel paid campaigns</span> that generated 60%+ of the company's qualified pipeline
+<span class="term-highlight"> &gt;</span> Implemented marketing automation platform (HubSpot) and designed lead scoring models that increased MQL-to-SQL conversion by <span class="term-gold">38%</span>
+<span class="term-highlight"> &gt;</span> Developed data-driven content strategy that grew organic traffic by <span class="term-gold">4x</span> within 18 months
+<span class="term-separator">------------------------------------------------------------------------</span>
+<span class="term-role">Marketing Strategist &amp; Consultant</span>
+<span class="term-org">Independent Consulting Practice</span> <span class="term-date">[2011 - 2014]</span>
+<span class="term-comment"># Strategic marketing consultancy serving SMBs and mid-market companies.</span>
+<span class="term-highlight"> &gt;</span> Provided end-to-end marketing strategy and execution for <span class="term-gold">20+ clients</span> across technology, professional services, and consumer verticals
+<span class="term-highlight"> &gt;</span> Developed go-to-market playbooks that reduced client time-to-revenue by an average of <span class="term-gold">40%</span>
+<span class="term-highlight"> &gt;</span> Built repeatable frameworks for customer acquisition, retention, and brand positioning adopted across multiple engagements
+<span class="term-separator">========================================================================</span>
+<span class="term-prompt">mlg@career ~ % </span><span class="term-cmd" style="animation:blink 1s step-end infinite">_</span>
+</div>
+</div>
+<style>@keyframes blink{50%{opacity:0}}</style>
+<div class="window widget-window" id="sec-dashboard">
+<div class="title-bar title-bar-dark">
+<div class="traffic-lights">
+<div class="tl-dot tl-close"></div>
+<div class="tl-dot tl-minimize"></div>
+<div class="tl-dot tl-maximize"></div>
+</div>
+<div class="title-text">Dashboard - Revenue Impact</div>
+</div>
+<div class="widget-body">
+<div class="widget-top">
+<div class="widget-label">Career Performance Snapshot</div>
+<div class="widget-live"><span class="widget-pulse"></span> Verified</div>
+</div>
+<div class="widget-metrics">
+<div class="wm">
+<div class="wm-label">Cumulative Revenue Influenced</div>
+<div class="wm-val">$50M+</div>
+<div class="wm-sub">Across all engagements</div>
+</div>
+<div class="wm">
+<div class="wm-label">Avg. CAC Reduction</div>
+<div class="wm-val">-32%</div>
+<div class="wm-sub">Via AI + automation systems</div>
+</div>
+<div class="wm">
+<div class="wm-label">Avg. Revenue Growth</div>
+<div class="wm-val">2.4x</div>
+<div class="wm-sub">Within 24-month engagements</div>
+</div>
+</div>
+<div class="chart-box">
+<svg viewBox="0 0 800 100" preserveAspectRatio="none">
+<defs>
+<linearGradient id="wGrad" x1="0" y1="0" x2="0" y2="1">
+<stop offset="0%" stop-color="rgba(0,122,255,.3)"/>
+<stop offset="100%" stop-color="rgba(0,122,255,0)"/>
+</linearGradient>
+</defs>
+<line class="chart-grid" x1="0" y1="25" x2="800" y2="25"/>
+<line class="chart-grid" x1="0" y1="50" x2="800" y2="50"/>
+<line class="chart-grid" x1="0" y1="75" x2="800" y2="75"/>
+<path class="chart-fill" d="M0,90 C80,88 120,84 160,78 C200,72 240,64 280,56 C320,48 360,40 400,34 C440,28 480,22 520,18 C560,14 600,11 640,9 C680,7 720,5 760,4 L800,3 L800,100 L0,100 Z"/>
+<path class="chart-path" d="M0,90 C80,88 120,84 160,78 C200,72 240,64 280,56 C320,48 360,40 400,34 C440,28 480,22 520,18 C560,14 600,11 640,9 C680,7 720,5 760,4 L800,3"/>
+</svg>
+</div>
+<div class="chart-x">
+<span>2011</span><span>2014</span><span>2017</span><span>2020</span><span>2023</span><span>2026</span>
+</div>
+</div>
+</div>
+<div class="window" id="sec-deals">
+<div class="title-bar">
+<div class="traffic-lights">
+<div class="tl-dot tl-close"></div>
+<div class="tl-dot tl-minimize"></div>
+<div class="tl-dot tl-maximize"></div>
+</div>
+<div class="title-text">Finder - M&amp;A Deal Sheet</div>
+</div>
+<div class="deal-grid">
+<div class="deal-card">
+<div class="deal-type">Sell-Side Exit</div>
+<h4>Growth-Stage Portfolio Company</h4>
+<div class="deal-row"><span>Role</span><span>CMO / Marketing Lead</span></div>
+<div class="deal-row"><span>Contribution</span><span>Revenue scaling &amp; brand positioning</span></div>
+<div class="deal-row"><span>Impact</span><span>Aligned marketing KPIs to valuation</span></div>
+<div class="deal-row"><span>Result</span><span>Successful exit at premium multiple</span></div>
+</div>
+<div class="deal-card">
+<div class="deal-type">Buy-Side Integration</div>
+<h4>PE-Backed Acquisition Target</h4>
+<div class="deal-row"><span>Role</span><span>Marketing Integration Advisor</span></div>
+<div class="deal-row"><span>Contribution</span><span>Due diligence &amp; post-merger GTM</span></div>
+<div class="deal-row"><span>Impact</span><span>Unified martech &amp; team structures</span></div>
+<div class="deal-row"><span>Result</span><span>Accelerated post-acquisition growth</span></div>
+</div>
+</div>
+</div>
+<div class="window" id="sec-cases">
+<div class="title-bar">
+<div class="traffic-lights">
+<div class="tl-dot tl-close"></div>
+<div class="tl-dot tl-minimize"></div>
+<div class="tl-dot tl-maximize"></div>
+</div>
+<div class="title-text">Mail - Case Studies (3)</div>
+</div>
+<div class="mail-body">
+<div class="mail-item">
+<span class="mail-tag rev">Revenue Scale</span>
+<div class="mail-subject">$5M to $10M+ Revenue Architecture</div>
+<div class="mail-preview">Designed and executed full-funnel GTM strategy combining paid media, organic growth, and strategic partnerships.</div>
+<div style="margin-top:8px"><span class="mail-metric">2x+</span><span class="mail-metric-label">Revenue Growth</span></div>
+</div>
+<div class="mail-item">
+<span class="mail-tag perf">Performance</span>
+<div class="mail-subject">$5M+ Ad Budget Optimization Engine</div>
+<div class="mail-preview">Managed multi-million dollar ad spend across Meta, Google, TikTok, and LinkedIn with AI-driven bidding strategies.</div>
+<div style="margin-top:8px"><span class="mail-metric">-32%</span><span class="mail-metric-label">CAC Reduction</span></div>
+</div>
+<div class="mail-item">
+<span class="mail-tag ma">M&amp;A</span>
+<div class="mail-subject">Exit-Ready Marketing Organization</div>
+<div class="mail-preview">Aligned marketing performance metrics with enterprise valuation drivers for PE-backed exit.</div>
+<div style="margin-top:8px"><span class="mail-metric">2</span><span class="mail-metric-label">Successful Exits</span></div>
+</div>
+</div>
+</div>
+<div class="window" id="sec-tech">
+<div class="title-bar">
+<div class="traffic-lights">
+<div class="tl-dot tl-close"></div>
+<div class="tl-dot tl-minimize"></div>
+<div class="tl-dot tl-maximize"></div>
+</div>
+<div class="title-text">Safari - Technology Stack (109 Tools / 14 Categories)</div>
+</div>
+<div class="safari-toolbar">
+<div class="safari-url">markcmo.com/tech-stack</div>
+</div>
+<div class="safari-body">
+<div class="tech-category">
+<div class="tech-cat-label">Frontend Development &amp; Web</div>
+<div class="tech-grid">
+<span class="tech-chip">HTML5</span><span class="tech-chip">CSS3</span><span class="tech-chip">JavaScript</span><span class="tech-chip">React</span><span class="tech-chip">Responsive Web Design</span><span class="tech-chip">MJML</span><span class="tech-chip">Liquid (Shopify/ESP)</span><span class="tech-chip">Schema Markup</span><span class="tech-chip">Sitemap Markup</span>
+</div>
+</div>
+<div class="tech-category">
+<div class="tech-cat-label">Backend &amp; Data Infrastructure</div>
+<div class="tech-grid">
+<span class="tech-chip">APIs &amp; Webhooks</span><span class="tech-chip">SQL</span><span class="tech-chip">Google Tag Manager</span><span class="tech-chip">Segment</span><span class="tech-chip">mParticle</span><span class="tech-chip">Amperity</span><span class="tech-chip">Multi-Touch Attribution</span><span class="tech-chip">Data Layer Management</span>
+</div>
+</div>
+<div class="tech-category">
+<div class="tech-cat-label">CMS &amp; Web Platforms</div>
+<div class="tech-grid">
+<span class="tech-chip">WordPress</span><span class="tech-chip">Webflow</span><span class="tech-chip">Shopify</span><span class="tech-chip">Magento</span><span class="tech-chip">Contentful</span>
+</div>
+</div>
+<div class="tech-category">
+<div class="tech-cat-label">CRM &amp; Marketing Automation</div>
+<div class="tech-grid">
+<span class="tech-chip">Salesforce (Sales + Marketing Cloud)</span><span class="tech-chip">HubSpot</span><span class="tech-chip">Zoho CRM</span><span class="tech-chip">Marketo</span><span class="tech-chip">Pardot</span><span class="tech-chip">ActiveCampaign</span><span class="tech-chip">Make (Integromat)</span><span class="tech-chip">Zapier</span><span class="tech-chip">n8n</span>
+</div>
+</div>
+<div class="tech-category">
+<div class="tech-cat-label">Advertising Platforms</div>
+<div class="tech-grid">
+<span class="tech-chip">Google Ads</span><span class="tech-chip">Meta Ads Manager</span><span class="tech-chip">TikTok Ads</span><span class="tech-chip">LinkedIn Campaign Manager</span><span class="tech-chip">The Trade Desk</span><span class="tech-chip">StackAdapt</span>
+</div>
+</div>
+<div class="tech-category">
+<div class="tech-cat-label">Analytics &amp; Attribution</div>
+<div class="tech-grid">
+<span class="tech-chip">Google Analytics (GA4)</span><span class="tech-chip">Looker</span><span class="tech-chip">Tableau</span><span class="tech-chip">Power BI</span><span class="tech-chip">Mixpanel</span><span class="tech-chip">Amplitude</span><span class="tech-chip">Heap</span><span class="tech-chip">Northbeam</span><span class="tech-chip">Triple Whale</span>
+</div>
+</div>
+<div class="tech-category">
+<div class="tech-cat-label">Email, SMS &amp; Lifecycle</div>
+<div class="tech-grid">
+<span class="tech-chip">Klaviyo</span><span class="tech-chip">Braze</span><span class="tech-chip">Iterable</span><span class="tech-chip">Mailchimp</span><span class="tech-chip">Zoho Campaigns</span><span class="tech-chip">Brevo</span><span class="tech-chip">Constant Contact</span><span class="tech-chip">Postscript (SMS)</span><span class="tech-chip">Attentive (SMS)</span>
+</div>
+</div>
+<div class="tech-category">
+<div class="tech-cat-label">SEO &amp; Content Optimization</div>
+<div class="tech-grid">
+<span class="tech-chip">SEMrush</span><span class="tech-chip">Ahrefs</span><span class="tech-chip">Screaming Frog</span><span class="tech-chip">Clearscope</span><span class="tech-chip">Brightlocal</span><span class="tech-chip">Whitespark</span>
+</div>
+</div>
+<div class="tech-category">
+<div class="tech-cat-label">A/B Testing &amp; CRO</div>
+<div class="tech-grid">
+<span class="tech-chip">Optimizely</span><span class="tech-chip">VWO</span><span class="tech-chip">Convert.com</span><span class="tech-chip">Dynamic Yield</span><span class="tech-chip">Mutiny</span><span class="tech-chip">Adobe Target</span>
+</div>
+</div>
+<div class="tech-category">
+<div class="tech-cat-label">Social, Influencer &amp; Partnerships</div>
+<div class="tech-grid">
+<span class="tech-chip">Sprout Social</span><span class="tech-chip">Later</span><span class="tech-chip">Buffer</span><span class="tech-chip">Hootsuite</span><span class="tech-chip">GRIN</span><span class="tech-chip">AspireIQ</span><span class="tech-chip">CreatorIQ</span><span class="tech-chip">Impact</span><span class="tech-chip">Refersion</span><span class="tech-chip">PartnerStack</span>
+</div>
+</div>
+<div class="tech-category">
+<div class="tech-cat-label">Design &amp; Creative</div>
+<div class="tech-grid">
+<span class="tech-chip">Figma</span><span class="tech-chip">Canva</span><span class="tech-chip">Adobe Photoshop</span><span class="tech-chip">Adobe Illustrator</span><span class="tech-chip">Premiere Pro</span><span class="tech-chip">After Effects</span><span class="tech-chip">Miro</span>
+</div>
+</div>
+<div class="tech-category">
+<div class="tech-cat-label">Communication &amp; Project Management</div>
+<div class="tech-grid">
+<span class="tech-chip">Slack</span><span class="tech-chip">Asana</span><span class="tech-chip">Monday</span><span class="tech-chip">Trello</span><span class="tech-chip">Notion</span><span class="tech-chip">Airtable</span><span class="tech-chip">G Suite</span><span class="tech-chip">Microsoft 365</span><span class="tech-chip">Zoom</span><span class="tech-chip">Loom</span>
+</div>
+</div>
+<div class="tech-category">
+<div class="tech-cat-label">AI, LLM &amp; Next-Gen Tools</div>
+<div class="tech-grid">
+<span class="tech-chip">ChatGPT</span><span class="tech-chip">Claude</span><span class="tech-chip">Gemini (Google)</span><span class="tech-chip">Jasper</span><span class="tech-chip">Midjourney</span><span class="tech-chip">DALL-E</span><span class="tech-chip">Descript</span><span class="tech-chip">Copy.ai</span><span class="tech-chip">Writesonic</span><span class="tech-chip">Lumen5</span><span class="tech-chip">Perplexity</span>
+</div>
+</div>
+<div class="tech-category">
+<div class="tech-cat-label">ABM, Intent &amp; Data Enrichment</div>
+<div class="tech-grid">
+<span class="tech-chip">6sense</span><span class="tech-chip">Demandbase</span><span class="tech-chip">Clearbit</span><span class="tech-chip">ZoomInfo</span>
+</div>
+</div>
+</div>
+</div>
+<div class="window" id="sec-wins">
+<div class="title-bar">
+<div class="traffic-lights">
+<div class="tl-dot tl-close"></div>
+<div class="tl-dot tl-minimize"></div>
+<div class="tl-dot tl-maximize"></div>
+</div>
+<div class="title-text">Reminders - Selected Wins (6)</div>
+</div>
+<div class="reminders-body">
+<div class="reminder-item">
+<div class="reminder-check"></div>
+<div class="reminder-text">
+<h4>Multi-Company Revenue Scale</h4>
+<p>Scaled multiple companies from $5M to $10M+ through architected growth systems, not one-off campaigns.</p>
+</div>
+</div>
+<div class="reminder-item">
+<div class="reminder-check"></div>
+<div class="reminder-text">
+<h4>$5M+ Ad Budget Mastery</h4>
+<p>Managed seven-figure annual ad spend with consistent ROAS optimization across Meta, Google, and emerging channels.</p>
+</div>
+</div>
+<div class="reminder-item">
+<div class="reminder-check"></div>
+<div class="reminder-text">
+<h4>40+ Person Team Leadership</h4>
+<p>Built and led cross-functional teams spanning growth, creative, analytics, and automation from the ground up.</p>
+</div>
+</div>
+<div class="reminder-item">
+<div class="reminder-check"></div>
+<div class="reminder-text">
+<h4>2 Successful Company Exits</h4>
+<p>Key contributor to both buy-side and sell-side M&amp;A transactions, aligning marketing with enterprise value drivers.</p>
+</div>
+</div>
+<div class="reminder-item">
+<div class="reminder-check"></div>
+<div class="reminder-text">
+<h4>AI Marketing Infrastructure</h4>
+<p>Pioneered AI-driven marketing systems that reduced CAC by 30%+ while increasing conversion rates and pipeline velocity.</p>
+</div>
+</div>
+<div class="reminder-item">
+<div class="reminder-check"></div>
+<div class="reminder-text">
+<h4>Scalable Marketing Architecture</h4>
+<p>Designed marketing operating systems that compound growth - CRM, automation, attribution, and funnel architecture.</p>
+</div>
+</div>
+</div>
+</div>
+<div class="window" id="sec-contact">
+<div class="title-bar">
+<div class="traffic-lights">
+<div class="tl-dot tl-close"></div>
+<div class="tl-dot tl-minimize"></div>
+<div class="tl-dot tl-maximize"></div>
+</div>
+<div class="title-text">Contact</div>
+</div>
+<div style="text-align:center;padding:32px 24px;background:rgba(255,255,255,.95)">
+<div style="display:inline-block;background:#fff;padding:12px;border-radius:8px;box-shadow:0 2px 12px rgba(0,0,0,.08);margin-bottom:16px"><canvas id="qrcode" width="120" height="120"></canvas></div>
+<h3 style="font-size:20px;font-weight:700;letter-spacing:-.02em;margin-bottom:4px">Let's Build Something</h3>
+<p style="font-size:13px;color:var(--text-secondary);margin-bottom:20px">Scan to view portfolio, or reach out directly.</p>
+<div style="display:flex;justify-content:center;gap:8px;flex-wrap:wrap">
+<a href="mailto:mark@markcmo.com" style="display:inline-flex;align-items:center;gap:5px;font-size:13px;font-weight:600;padding:10px 20px;border-radius:8px;background:var(--accent);color:#fff;text-decoration:none;transition:background .2s">Email Me</a>
+<a href="https://linkedin.com/in/marklgabrielli" target="_blank" style="display:inline-flex;align-items:center;gap:5px;font-size:13px;font-weight:600;padding:10px 20px;border-radius:8px;background:transparent;color:var(--text);border:1px solid var(--border-dark);text-decoration:none;transition:all .2s">LinkedIn</a>
+<a href="https://markcmo.com/portfolio" target="_blank" rel="noopener noreferrer" style="display:inline-flex;align-items:center;gap:5px;font-size:13px;font-weight:600;padding:10px 20px;border-radius:8px;background:transparent;color:var(--text);border:1px solid var(--border-dark);text-decoration:none;transition:all .2s">Portfolio</a>
+<a href="https://markcmo.com/book" target="_blank" rel="noopener noreferrer" style="display:inline-flex;align-items:center;gap:5px;font-size:13px;font-weight:600;padding:10px 20px;border-radius:8px;background:var(--accent);color:#fff;text-decoration:none;transition:background .2s">Book a Call</a>
+<button onclick="window.print()" style="display:inline-flex;align-items:center;gap:5px;font-size:13px;font-weight:600;padding:10px 20px;border-radius:8px;background:transparent;color:var(--text);border:1px solid var(--border-dark);cursor:pointer;font-family:inherit;transition:all .2s">Export PDF</button>
+</div>
+</div>
+</div>
+<div style="text-align:center;padding:16px 0;font-size:11px;color:rgba(255,255,255,.35)">&copy; 2026 Mark Louis Gabrielli Jr.</div>
+</div>
+<div class="dock-wrapper">
+<div class="dock">
+<a href="#sec-about" class="dock-item" style="background:linear-gradient(135deg,#007aff,#5856d6);color:#fff">
+&#128100;
+<span class="dock-tooltip">About</span>
+</a>
+<a href="#sec-summary" class="dock-item" style="background:linear-gradient(135deg,#ffcc00,#ff9500);color:#fff">
+&#128221;
+<span class="dock-tooltip">Summary</span>
+</a>
+<a href="#sec-competencies" class="dock-item" style="background:linear-gradient(135deg,#5856d6,#af52de);color:#fff">
+&#128295;
+<span class="dock-tooltip">Competencies</span>
+</a>
+<a href="#sec-experience" class="dock-item" style="background:linear-gradient(135deg,#1e1e1e,#3d3d3d);color:#27ca40">
+&#128187;
+<span class="dock-tooltip">Experience</span>
+</a>
+<div class="dock-sep"></div>
+<a href="#sec-dashboard" class="dock-item" style="background:linear-gradient(135deg,#34c759,#30d158);color:#fff">
+&#128200;
+<span class="dock-tooltip">Dashboard</span>
+</a>
+<a href="#sec-deals" class="dock-item" style="background:linear-gradient(135deg,#ff9500,#ff3b30);color:#fff">
+&#128176;
+<span class="dock-tooltip">M&amp;A Deals</span>
+</a>
+<a href="#sec-cases" class="dock-item" style="background:linear-gradient(135deg,#007aff,#64d2ff);color:#fff">
+&#128236;
+<span class="dock-tooltip">Case Studies</span>
+</a>
+<div class="dock-sep"></div>
+<a href="#sec-tech" class="dock-item" style="background:linear-gradient(135deg,#007aff,#5ac8fa);color:#fff">
+&#127760;
+<span class="dock-tooltip">Tech Stack</span>
+</a>
+<a href="#sec-wins" class="dock-item" style="background:linear-gradient(135deg,#ff2d55,#ff6482);color:#fff">
+&#9989;
+<span class="dock-tooltip">Wins</span>
+</a>
+<a href="#sec-contact" class="dock-item" style="background:linear-gradient(135deg,#5856d6,#007aff);color:#fff">
+&#128231;
+<span class="dock-tooltip">Contact</span>
+</a>
+</div>
+</div>
+<script>
+// Menu bar clock
+(function(){
+  var el=document.getElementById('menuClock');
+  function tick(){
+    var d=new Date();
+    var opts={weekday:'short',month:'short',day:'numeric',hour:'numeric',minute:'2-digit'};
+    el.textContent=d.toLocaleDateString('en-US',opts);
+  }
+  tick();setInterval(tick,30000);
+})();
+// QR code (inline canvas)
+(function(){
+  var c=document.getElementById('qrcode');
+  if(!c)return;
+  var ctx=c.getContext('2d');
+  ctx.fillStyle='#1d1d1f';
+  var s=120,m=5,cs=s/(21+2*m);
+  var pattern=[
+    [1,1,1,1,1,1,1,0,1,0,1,0,1,0,1,1,1,1,1,1,1],
+    [1,0,0,0,0,0,1,0,0,1,0,1,0,0,1,0,0,0,0,0,1],
+    [1,0,1,1,1,0,1,0,1,1,1,0,1,0,1,0,1,1,1,0,1],
+    [1,0,1,1,1,0,1,0,0,1,0,1,1,0,1,0,1,1,1,0,1],
+    [1,0,1,1,1,0,1,0,1,0,1,0,0,0,1,0,1,1,1,0,1],
+    [1,0,0,0,0,0,1,0,1,1,0,1,0,0,1,0,0,0,0,0,1],
+    [1,1,1,1,1,1,1,0,1,0,1,0,1,0,1,1,1,1,1,1,1],
+    [0,0,0,0,0,0,0,0,0,1,1,0,1,0,0,0,0,0,0,0,0],
+    [1,0,1,1,1,0,1,0,1,0,0,1,0,1,1,0,1,0,1,1,0],
+    [0,1,0,1,0,1,0,1,0,1,1,0,1,0,0,1,0,1,0,0,1],
+    [1,0,1,0,1,0,1,0,1,1,0,1,0,1,1,0,1,0,1,0,1],
+    [0,1,0,1,0,1,0,1,1,0,1,0,1,0,0,1,0,1,0,1,0],
+    [1,0,1,0,1,0,1,0,0,1,0,1,1,0,1,0,1,1,0,1,1],
+    [0,0,0,0,0,0,0,0,1,0,1,0,0,1,0,1,0,0,1,0,0],
+    [1,1,1,1,1,1,1,0,0,1,1,1,0,0,1,0,1,0,1,1,0],
+    [1,0,0,0,0,0,1,0,1,0,0,1,1,1,0,1,0,1,0,0,1],
+    [1,0,1,1,1,0,1,0,1,1,0,0,1,0,1,0,1,1,0,1,0],
+    [1,0,1,1,1,0,1,0,0,1,1,1,0,1,1,0,0,1,1,0,1],
+    [1,0,1,1,1,0,1,0,1,0,1,0,1,0,0,1,1,0,1,1,0],
+    [1,0,0,0,0,0,1,0,0,1,0,1,0,1,1,0,1,1,0,0,1],
+    [1,1,1,1,1,1,1,0,1,0,1,1,1,0,1,1,0,1,0,1,0]
+  ];
+  var off=m*cs;
+  for(var r=0;r<21;r++)
+    for(var col=0;col<21;col++)
+      if(pattern[r]&&pattern[r][col])
+        ctx.fillRect(off+col*cs,off+r*cs,cs+.5,cs+.5);
+})();
+// Scroll reveal
+(function(){
+  var io=new IntersectionObserver(function(entries){
+    entries.forEach(function(e){
+      if(e.isIntersecting)e.target.classList.add('vis');
+    });
+  },{threshold:.04,rootMargin:'0px 0px -40px 0px'});
+  document.querySelectorAll('.window').forEach(function(w){io.observe(w)});
+})();
+// Counter animation
+(function(){
+  var counters=document.querySelectorAll('.counter');
+  var io=new IntersectionObserver(function(entries){
+    entries.forEach(function(e){
+      if(!e.isIntersecting)return;
+      var el=e.target;
+      if(el.dataset.done)return;
+      el.dataset.done='1';
+      var target=parseInt(el.dataset.target)||0;
+      var prefix=el.dataset.prefix||'';
+      var suffix=el.dataset.suffix||'';
+      var start=0;
+      var duration=1200;
+      var startTime=null;
+      function step(ts){
+        if(!startTime)startTime=ts;
+        var progress=Math.min((ts-startTime)/duration,1);
+        var eased=1-Math.pow(1-progress,3);
+        var current=Math.round(eased*target);
+        el.textContent=prefix+current+suffix;
+        if(progress<1)requestAnimationFrame(step);
+      }
+      requestAnimationFrame(step);
+    });
+  },{threshold:.5});
+  counters.forEach(function(c){io.observe(c)});
+})();
+// Spotlight search
+(function(){
+  var overlay=document.getElementById('spotlight');
+  var input=document.getElementById('spotlightInput');
+  var results=document.getElementById('spotlightResults');
+  var items=[
+    {text:'Mark Louis Gabrielli Jr.',section:'About',target:'#sec-about',icon:'&#128100;'},
+    {text:'Chief Marketing Officer',section:'About',target:'#sec-about',icon:'&#128100;'},
+    {text:'mark@markcmo.com',section:'Contact',target:'#sec-contact',icon:'&#128231;'},
+    {text:'Executive Summary',section:'Summary',target:'#sec-summary',icon:'&#128221;'},
+    {text:'Go-To-Market Strategy',section:'Competencies',target:'#sec-competencies',icon:'&#128295;'},
+    {text:'Demand Generation',section:'Competencies',target:'#sec-competencies',icon:'&#128295;'},
+    {text:'Revenue Operations',section:'Competencies',target:'#sec-competencies',icon:'&#128295;'},
+    {text:'AI-Driven Marketing Systems',section:'Competencies',target:'#sec-competencies',icon:'&#128295;'},
+    {text:'Performance Marketing',section:'Competencies',target:'#sec-competencies',icon:'&#128295;'},
+    {text:'M&A Marketing Integration',section:'Competencies',target:'#sec-competencies',icon:'&#128295;'},
+    {text:'CMO & Growth Advisor - MarkCMO',section:'Experience',target:'#sec-experience',icon:'&#128187;'},
+    {text:'VP of Marketing & Growth',section:'Experience',target:'#sec-experience',icon:'&#128187;'},
+    {text:'Director of Digital Marketing',section:'Experience',target:'#sec-experience',icon:'&#128187;'},
+    {text:'Marketing Strategist & Consultant',section:'Experience',target:'#sec-experience',icon:'&#128187;'},
+    {text:'Revenue Impact Dashboard',section:'Dashboard',target:'#sec-dashboard',icon:'&#128200;'},
+    {text:'$50M+ Revenue Influenced',section:'Dashboard',target:'#sec-dashboard',icon:'&#128200;'},
+    {text:'Sell-Side Exit',section:'M&A Deals',target:'#sec-deals',icon:'&#128176;'},
+    {text:'Buy-Side Integration',section:'M&A Deals',target:'#sec-deals',icon:'&#128176;'},
+    {text:'$5M to $10M+ Revenue Architecture',section:'Case Studies',target:'#sec-cases',icon:'&#128236;'},
+    {text:'$5M+ Ad Budget Optimization',section:'Case Studies',target:'#sec-cases',icon:'&#128236;'},
+    {text:'Exit-Ready Marketing Org',section:'Case Studies',target:'#sec-cases',icon:'&#128236;'},
+    {text:'HubSpot',section:'Tech Stack',target:'#sec-tech',icon:'&#127760;'},
+    {text:'Salesforce',section:'Tech Stack',target:'#sec-tech',icon:'&#127760;'},
+    {text:'Google Ads',section:'Tech Stack',target:'#sec-tech',icon:'&#127760;'},
+    {text:'Meta Ads',section:'Tech Stack',target:'#sec-tech',icon:'&#127760;'},
+    {text:'ChatGPT',section:'Tech Stack',target:'#sec-tech',icon:'&#127760;'},
+    {text:'Claude',section:'Tech Stack',target:'#sec-tech',icon:'&#127760;'},
+    {text:'Figma',section:'Tech Stack',target:'#sec-tech',icon:'&#127760;'},
+    {text:'React',section:'Tech Stack',target:'#sec-tech',icon:'&#127760;'},
+    {text:'Multi-Company Revenue Scale',section:'Wins',target:'#sec-wins',icon:'&#9989;'},
+    {text:'AI Marketing Infrastructure',section:'Wins',target:'#sec-wins',icon:'&#9989;'},
+    {text:'40+ Person Team Leadership',section:'Wins',target:'#sec-wins',icon:'&#9989;'},
+  ];
+  function open(){overlay.classList.add('active');input.value='';render('');input.focus()}
+  function close(){overlay.classList.remove('active');input.value=''}
+  function render(q){
+    var filtered=q?items.filter(function(i){return i.text.toLowerCase().indexOf(q.toLowerCase())>-1}):items.slice(0,8);
+    results.innerHTML=filtered.slice(0,10).map(function(i){
+      return '<div class="spotlight-result" data-target="'+i.target+'"><span class="sr-icon">'+i.icon+'</span>'+i.text+'<span class="sr-section">'+i.section+'</span></div>';
+    }).join('');
+    results.querySelectorAll('.spotlight-result').forEach(function(r){
+      r.addEventListener('click',function(){
+        var t=this.dataset.target;
+        close();
+        document.querySelector(t).scrollIntoView({behavior:'smooth',block:'start'});
+      });
+    });
+  }
+  input.addEventListener('input',function(){render(this.value)});
+  document.addEventListener('keydown',function(e){
+    if((e.ctrlKey||e.metaKey)&&e.key==='k'){e.preventDefault();overlay.classList.contains('active')?close():open()}
+    if(e.key==='Escape')close();
+  });
+  overlay.addEventListener('click',function(e){if(e.target===overlay)close()});
+})();
+// Smooth scroll for dock and sidebar
+document.querySelectorAll('a[href^="#sec-"]').forEach(function(a){
+  a.addEventListener('click',function(e){
+    e.preventDefault();
+    var t=document.querySelector(this.getAttribute('href'));
+    if(t)t.scrollIntoView({behavior:'smooth',block:'start'});
+  });
+});
+</script>
+<script>
+(function(){
+  var bar=document.createElement('div');bar.id='scroll-progress';
+  document.body.prepend(bar);
+  var nav=document.querySelector('nav');
+  window.addEventListener('scroll',function(){
+    var h=document.documentElement,b=document.body,
+        st='scrollTop',sh='scrollHeight';
+    var pct=(h[st]||b[st])/((h[sh]||b[sh])-h.clientHeight)*100;
+    bar.style.width=pct+'%';
+    if((h[st]||b[st])>80){nav&&nav.classList.add('scrolled');}
+    else{nav&&nav.classList.remove('scrolled');}
+  },{passive:true});
+})();
+</script>
+<script src="/linkedin-widget.js" defer></script>
+</body>
+</html>

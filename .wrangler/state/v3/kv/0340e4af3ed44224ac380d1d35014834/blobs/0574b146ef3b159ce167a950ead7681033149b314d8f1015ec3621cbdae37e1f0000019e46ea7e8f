@@ -1,0 +1,2084 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>WETYR Studio - Script to Production (Internal)</title>
+<meta name="description" content="Internal WETYR tooling - script breakdown, schedule, budget. Admin sign-in required." />
+<meta name="robots" content="noindex, nofollow" />
+<meta name="theme-color" content="#0a0a0a" />
+<link rel="canonical" href="https://markcmo.com/wetyr-studio" />
+<style>
+:root {
+  --bg: #0a0a0a;
+  --panel: #131316;
+  --panel-2: #1c1c20;
+  --border: #27272a;
+  --border-hot: #3f3f46;
+  --text: #fafafa;
+  --muted: #a1a1aa;
+  --dim: #71717a;
+  --gold: #d4af37;
+  --red: #dc2626;
+  --green: #16a34a;
+  --blue: #2563eb;
+  --purple: #9333ea;
+}
+* { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+body { font-family: -apple-system, BlinkMacSystemFont, 'Inter', 'Segoe UI', Roboto, sans-serif; background: var(--bg); color: var(--text); line-height: 1.55; font-size: 15px; }
+a { color: var(--gold); text-decoration: none; }
+a:hover { text-decoration: underline; }
+.wrap { max-width: 1320px; margin: 0 auto; padding: 0 24px; }
+
+.nav { padding: 18px 0; border-bottom: 1px solid var(--border); background: rgba(10,10,10,0.92); backdrop-filter: blur(12px); position: sticky; top: 0; z-index: 20; }
+.nav-inner { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 12px; }
+.brand { display: flex; align-items: center; gap: 10px; font-weight: 800; font-size: 18px; letter-spacing: 0.5px; }
+.brand-dot { width: 10px; height: 10px; background: var(--gold); border-radius: 2px; }
+.nav-links { display: flex; gap: 22px; font-size: 14px; color: var(--muted); }
+.nav-links a { color: var(--muted); }
+.nav-links a:hover { color: var(--text); text-decoration: none; }
+
+.hero { padding: 70px 0 50px; text-align: center; border-bottom: 1px solid var(--border); background: linear-gradient(180deg, #131316 0%, var(--bg) 100%); }
+.eyebrow { color: var(--gold); font-weight: 700; font-size: 13px; letter-spacing: 2px; text-transform: uppercase; margin-bottom: 16px; }
+.hero h1 { font-size: clamp(36px, 5vw, 58px); line-height: 1.08; font-weight: 800; max-width: 980px; margin: 0 auto 20px; letter-spacing: -1px; }
+.hero h1 span { background: linear-gradient(90deg, var(--gold), #ffd700); -webkit-background-clip: text; background-clip: text; color: transparent; }
+.hero p { max-width: 720px; margin: 0 auto 28px; color: var(--muted); font-size: 18px; }
+
+.btn { padding: 12px 22px; border-radius: 8px; font-weight: 700; font-size: 14px; display: inline-block; transition: all 0.15s; border: 0; cursor: pointer; font-family: inherit; }
+.btn-primary { background: var(--gold); color: #0a0a0a; }
+.btn-primary:hover { background: #e6c14d; text-decoration: none; }
+.btn-primary:disabled { opacity: 0.5; cursor: not-allowed; }
+.btn-ghost { background: transparent; color: var(--text); border: 1px solid var(--border-hot); }
+.btn-ghost:hover { background: var(--panel); text-decoration: none; }
+
+.section { padding: 48px 0; border-bottom: 1px solid var(--border); }
+.section h2 { font-size: 26px; font-weight: 800; letter-spacing: -0.3px; margin-bottom: 8px; }
+.section .sub { color: var(--muted); font-size: 14px; margin-bottom: 22px; }
+
+/* Upload panel */
+.upload-card { background: var(--panel); border: 1px solid var(--border); border-radius: 14px; padding: 28px; }
+.drop {
+  border: 2px dashed var(--border-hot);
+  border-radius: 12px;
+  padding: 40px 20px;
+  text-align: center;
+  transition: all 0.15s;
+  cursor: pointer;
+  background: var(--panel-2);
+}
+.drop.hover { border-color: var(--gold); background: rgba(212, 175, 55, 0.05); }
+.drop-icon { font-size: 32px; margin-bottom: 10px; }
+.drop-title { font-weight: 700; margin-bottom: 6px; }
+.drop-sub { color: var(--muted); font-size: 13px; }
+.upload-form { display: grid; gap: 14px; margin-top: 18px; }
+.form-row { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 12px; }
+.field { display: flex; flex-direction: column; gap: 5px; }
+.field label { font-size: 12px; color: var(--muted); text-transform: uppercase; letter-spacing: 0.5px; font-weight: 700; }
+.field input, .field select, .field textarea {
+  background: var(--panel-2); border: 1px solid var(--border); color: var(--text);
+  padding: 10px 12px; border-radius: 6px; font-family: inherit; font-size: 14px;
+}
+.field input:focus, .field select:focus, .field textarea:focus { outline: none; border-color: var(--gold); }
+.field textarea { min-height: 120px; resize: vertical; font-family: ui-monospace, 'SF Mono', Menlo, monospace; font-size: 12px; line-height: 1.5; }
+
+/* Status */
+.status { display: none; margin-top: 18px; padding: 14px; border-radius: 8px; font-size: 13px; }
+.status.active { display: block; }
+.status.info { background: rgba(201,168,76,0.1); border: 1px solid rgba(201,168,76,0.4); color: #93c5fd; }
+.status.err { background: rgba(220, 38, 38, 0.1); border: 1px solid rgba(220, 38, 38, 0.4); color: #fca5a5; }
+.status.ok { background: rgba(22, 163, 74, 0.1); border: 1px solid rgba(22, 163, 74, 0.4); color: #86efac; }
+.spinner { display: inline-block; width: 12px; height: 12px; border: 2px solid rgba(255,255,255,0.2); border-top-color: currentColor; border-radius: 50%; animation: spin 0.8s linear infinite; vertical-align: middle; margin-right: 8px; }
+@keyframes spin { to { transform: rotate(360deg); } }
+
+/* Tabs */
+.tabs { display: flex; gap: 4px; border-bottom: 1px solid var(--border); margin-bottom: 22px; overflow-x: auto; }
+.tab { padding: 10px 16px; font-size: 13px; font-weight: 700; color: var(--muted); border-bottom: 2px solid transparent; cursor: pointer; white-space: nowrap; }
+.tab.active { color: var(--text); border-bottom-color: var(--gold); }
+.tab-panel { display: none; }
+.tab-panel.active { display: block; }
+
+/* Summary stats */
+.stats { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 12px; margin-bottom: 22px; }
+.stat { background: var(--panel); border: 1px solid var(--border); border-radius: 10px; padding: 16px; }
+.stat-label { font-size: 11px; color: var(--muted); text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 6px; font-weight: 700; }
+.stat-value { font-size: 22px; font-weight: 800; letter-spacing: -0.5px; }
+.stat-sub { font-size: 12px; color: var(--dim); margin-top: 4px; }
+
+/* Tables */
+table { width: 100%; border-collapse: collapse; font-size: 13px; }
+th, td { padding: 10px 12px; text-align: left; border-bottom: 1px solid var(--border); vertical-align: top; }
+th { background: var(--panel); color: var(--muted); font-weight: 700; font-size: 11px; text-transform: uppercase; letter-spacing: 0.5px; position: sticky; top: 62px; }
+tr:hover td { background: var(--panel); }
+.tbl-scroll { max-height: 620px; overflow-y: auto; border: 1px solid var(--border); border-radius: 10px; }
+.tag { display: inline-block; padding: 2px 8px; border-radius: 4px; font-size: 11px; font-weight: 700; margin: 1px 3px 1px 0; background: var(--panel-2); color: var(--muted); border: 1px solid var(--border); }
+.tag.int { background: rgba(201,168,76,0.12); color: #93c5fd; border-color: rgba(201,168,76,0.3); }
+.tag.ext { background: rgba(212, 175, 55, 0.12); color: var(--gold); border-color: rgba(212, 175, 55, 0.3); }
+.tag.day { background: rgba(234, 179, 8, 0.12); color: #fde047; border-color: rgba(234, 179, 8, 0.3); }
+.tag.night { background: rgba(147, 51, 234, 0.12); color: #c4b5fd; border-color: rgba(147, 51, 234, 0.3); }
+.tag.hot { background: rgba(220, 38, 38, 0.12); color: #fca5a5; border-color: rgba(220, 38, 38, 0.3); }
+
+.flag-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 10px; margin: 18px 0; }
+.flag { padding: 12px; border-radius: 8px; background: var(--panel); border: 1px solid var(--border); font-size: 12px; display: flex; justify-content: space-between; align-items: center; }
+.flag-on { border-color: var(--red); background: rgba(220, 38, 38, 0.06); color: var(--text); }
+.flag-off { color: var(--dim); }
+.flag-dot { width: 8px; height: 8px; border-radius: 50%; background: var(--dim); }
+.flag-on .flag-dot { background: var(--red); }
+
+.bar { display: flex; gap: 10px; align-items: center; margin: 6px 0; }
+.bar-fill { flex: 1; height: 8px; background: var(--panel-2); border-radius: 4px; overflow: hidden; }
+.bar-fill > div { height: 100%; background: var(--gold); border-radius: 4px; }
+.bar-label { font-size: 12px; color: var(--muted); min-width: 180px; }
+.bar-val { font-size: 12px; font-weight: 700; min-width: 50px; text-align: right; }
+
+pre.json { background: #0f0f12; border: 1px solid var(--border); border-radius: 8px; padding: 14px; max-height: 600px; overflow: auto; font-size: 11px; color: #c0c0c8; font-family: ui-monospace, 'SF Mono', Menlo, monospace; }
+
+.footer { padding: 40px 0; color: var(--dim); font-size: 13px; text-align: center; }
+
+@media (max-width: 720px) {
+  th { position: static; }
+  .nav-links { display: none; }
+}
+</style>
+<meta property="og:type" content="website"/>
+<meta property="og:site_name" content="MarkCMO"/>
+<meta property="og:title" content="WETYR Studios - Script to Production, Automated"/>
+<meta property="og:description" content="Upload a screenplay, get a full production breakdown: scenes, characters, schedule, budget, and every document a crew needs. Powered by Claude Opus."/>
+<meta property="og:url" content="https://markcmo.com/wetyr-films"/>
+<meta property="og:image" content="https://markcmo.com/mark-photo.webp"/>
+<meta name="twitter:card" content="summary_large_image"/>
+<meta name="twitter:site" content="@markgcmo"/>
+<meta name="twitter:title" content="WETYR Studios - Script to Production, Automated"/>
+<meta name="twitter:description" content="Upload a screenplay, get a full production breakdown: scenes, characters, schedule, budget, and every document a crew needs. Powered by Claude Opus."/>
+<meta name="twitter:image" content="https://markcmo.com/mark-photo.webp"/>
+</head>
+<body>
+
+<nav class="nav">
+  <div class="wrap nav-inner">
+    <div class="brand"><span class="brand-dot"></span>WETYR <span style="color: var(--gold);">Studio</span> <span style="font-size: 11px; color: var(--dim); font-weight: 600; letter-spacing: 1px; margin-left: 6px;">INTERNAL</span></div>
+    <div class="nav-links">
+      <a href="/wetyr-films">Film Intel</a>
+      <a href="/wetyr-studio" style="color: var(--gold);">Studio</a>
+      <span style="color: var(--border-hot);" id="navSep" hidden>|</span>
+      <a href="#upload" id="navUpload" hidden>Upload</a>
+      <a href="#results" id="navResults" hidden>Results</a>
+      <a href="#how" id="navRoadmap" hidden>Roadmap</a>
+      <a href="#" id="navLogout" hidden style="color: var(--muted);">Sign out</a>
+    </div>
+  </div>
+</nav>
+
+<!-- AUTH GATE: shown until admin-auth verifies a session ─────────────── -->
+<section class="section" id="authGate">
+  <div class="wrap" style="max-width: 460px;">
+    <div style="background: var(--panel); border: 1px solid var(--border); border-radius: 14px; padding: 32px; margin: 60px auto;">
+      <div style="text-align: center; margin-bottom: 22px;">
+        <div style="font-size: 11px; color: var(--gold); font-weight: 800; letter-spacing: 2px; margin-bottom: 8px;">INTERNAL ACCESS</div>
+        <h2 style="font-size: 22px; margin-bottom: 6px;">WETYR Studio</h2>
+        <p style="color: var(--muted); font-size: 13px;">Script-to-production tooling. Sign in to continue.</p>
+      </div>
+      <div style="display: flex; flex-direction: column; gap: 10px;">
+        <input type="text" id="authUser" placeholder="Username" autocomplete="username" style="background: var(--panel-2); border: 1px solid var(--border); color: var(--text); padding: 11px 13px; border-radius: 6px; font-family: inherit; font-size: 14px;" />
+        <input type="password" id="authPass" placeholder="Password" autocomplete="current-password" style="background: var(--panel-2); border: 1px solid var(--border); color: var(--text); padding: 11px 13px; border-radius: 6px; font-family: inherit; font-size: 14px;" />
+        <button class="btn btn-primary" id="authSubmit" style="margin-top: 4px;">Sign in</button>
+      </div>
+      <div id="authMsg" style="margin-top: 14px; font-size: 13px; min-height: 20px; text-align: center;"></div>
+      <p style="color: var(--dim); font-size: 11px; text-align: center; margin-top: 18px;">Public dashboard is at <a href="/wetyr-films" style="color: var(--muted);">/wetyr-films</a>.</p>
+    </div>
+  </div>
+</section>
+<div style="background:#0d1b27;border-left:3px solid #2563EB;padding:1.25rem 1.5rem;margin:0 auto 0;max-width:1100px;border-radius:0 6px 6px 0;"><strong style="color:#C9A84C;font-size:.75rem;font-family:'DM Mono',monospace;text-transform:uppercase;letter-spacing:.1em;display:block;margin-bottom:.5rem;">Quick Answer</strong><p style="color:#ccc;margin:0;line-height:1.75;font-size:.95rem;">WETYR Studio is the creative media and content production arm of WETYR Corp, the business transformation collective founded by Mark Gabrielli, producing video, visual storytelling, and brand content for B2B companies and executive-led digital ventures.</p></div>
+
+<!-- APP: hidden until authed ─────────────────────────────────────────── -->
+<div id="appBody" hidden>
+<section class="hero">
+  <div class="wrap">
+    <div class="eyebrow">WETYR Studio - Internal Tool</div>
+    <h1>Script to <span>Production</span>, automated.</h1>
+    <p>Upload a screenplay. Get a full breakdown, stripboard, shooting schedule, and budget in under 3 minutes. Every document a production needs, generated from page one.</p>
+    <div style="display: flex; gap: 10px; justify-content: center; flex-wrap: wrap;">
+      <a href="#upload" class="btn btn-primary">Try it now</a>
+      <a href="#how" class="btn btn-ghost">How it works</a>
+    </div>
+  </div>
+</section>
+
+<section class="section" id="upload">
+  <div class="wrap">
+    <h2>1. Upload your script</h2>
+    <div class="sub">PDF, FDX, Fountain, or plain text. Scanned PDFs run through OCR automatically.</div>
+
+    <div class="upload-card">
+      <div id="drop" class="drop">
+        <div class="drop-icon">[FILE]</div>
+        <div class="drop-title">Drop script here or click to browse</div>
+        <div class="drop-sub">.pdf &bull; .fdx &bull; .fountain &bull; .txt - up to 10 MB</div>
+        <input type="file" id="fileInput" accept=".pdf,.fdx,.fountain,.txt,application/pdf,text/plain" style="display: none;" />
+      </div>
+
+      <div class="upload-form">
+        <div class="form-row">
+          <div class="field">
+            <label>Title</label>
+            <input type="text" id="titleInput" placeholder="Untitled" />
+          </div>
+          <div class="field">
+            <label>Format</label>
+            <select id="formatInput">
+              <option value="feature">Feature</option>
+              <option value="short">Short</option>
+              <option value="pilot">TV Pilot</option>
+              <option value="episode">TV Episode</option>
+              <option value="commercial">Commercial</option>
+              <option value="music_video">Music Video</option>
+            </select>
+          </div>
+          <div class="field">
+            <label>Budget Tier</label>
+            <select id="tierInput">
+              <option value="ultralow">Ultra-low ($50k-$250k)</option>
+              <option value="micro">Micro ($250k-$1M)</option>
+              <option value="indie">Indie ($1M-$5M)</option>
+              <option value="midrange">Midrange ($5M-$20M)</option>
+              <option value="studio" selected>Studio ($20M-$80M)</option>
+              <option value="tentpole">Tentpole ($80M-$200M)</option>
+              <option value="blockbuster">Blockbuster ($200M+)</option>
+              <option value="custom">Custom (enter amount)</option>
+            </select>
+          </div>
+          <div class="field" id="customBudgetField" style="display: none;">
+            <label>Target Budget (USD)</label>
+            <input type="number" id="customBudgetInput" placeholder="e.g. 45000000" min="10000" step="100000" />
+          </div>
+          <div class="field">
+            <label>Union</label>
+            <select id="unionInput">
+              <option value="non-union">Non-union</option>
+              <option value="sag-ulb">SAG Ultra-Low</option>
+              <option value="sag-mlb">SAG Modified Low</option>
+              <option value="sag-lba">SAG Low Budget</option>
+              <option value="full-union">Full Union</option>
+            </select>
+          </div>
+          <div class="field">
+            <label>Shoot State</label>
+            <input type="text" id="stateInput" placeholder="e.g. NY, CA, GA, NM" />
+          </div>
+          <div class="field">
+            <label>Target Shoot Days</label>
+            <input type="number" id="daysInput" placeholder="auto" min="1" max="200" />
+          </div>
+        </div>
+
+        <details>
+          <summary style="cursor: pointer; color: var(--muted); font-size: 13px;">Or paste script text directly</summary>
+          <div class="field" style="margin-top: 10px;">
+            <textarea id="pasteInput" placeholder="Paste full screenplay text here..."></textarea>
+          </div>
+        </details>
+
+        <div style="display: flex; gap: 10px; flex-wrap: wrap;">
+          <button class="btn btn-primary" id="goBtn">Break down script</button>
+          <button class="btn btn-ghost" id="loadSampleBtn">Load sample script</button>
+          <button class="btn btn-ghost" id="clearBtn">Clear</button>
+        </div>
+      </div>
+
+      <div id="status" class="status"></div>
+    </div>
+  </div>
+</section>
+
+<!-- ═════════════════════════════════════════════════════════════════════
+     PAST PROJECTS - all jobs in wetyr_jobs grouped by project_id.
+     Click a card to load it back into the working state.
+     ═════════════════════════════════════════════════════════════════════ -->
+<section class="section" id="vaultSection" style="border-top: 1px solid var(--border-hot);">
+  <div class="wrap">
+    <div style="display: flex; justify-content: space-between; align-items: end; flex-wrap: wrap; gap: 12px; margin-bottom: 18px;">
+      <div>
+        <h2 style="font-size: 26px; font-weight: 800; letter-spacing: -0.3px;">Past Projects <span style="color: var(--gold); font-size: 13px; font-weight: 700; letter-spacing: 2px; margin-left: 8px;">YOUR VAULT</span></h2>
+        <div style="color: var(--muted); font-size: 14px; margin-top: 4px;">Click any project to load it back into the workspace, view results, generate more deliverables, or export.</div>
+      </div>
+      <button id="vaultRefresh" class="btn btn-ghost">Refresh</button>
+    </div>
+    <div id="vaultGrid" style="display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 14px;"></div>
+    <div id="vaultEmpty" style="display: none; padding: 36px 18px; text-align: center; color: var(--muted); border: 1px dashed var(--border-hot); border-radius: 12px;">
+      No past projects yet. Upload a script above to start your first.
+    </div>
+  </div>
+</section>
+
+<style>
+.vault-card { background: var(--panel); border: 1px solid var(--border); border-radius: 12px; padding: 18px; cursor: pointer; transition: border-color 0.15s, transform 0.15s; }
+.vault-card:hover { border-color: var(--gold); transform: translateY(-2px); }
+.vault-card .vc-title { font-weight: 800; font-size: 16px; margin-bottom: 6px; letter-spacing: -0.2px; }
+.vault-card .vc-time { font-size: 12px; color: var(--muted); margin-bottom: 12px; }
+.vault-card .vc-pills { display: flex; flex-wrap: wrap; gap: 5px; }
+.vc-pill { display: inline-flex; align-items: center; padding: 3px 9px; border-radius: 999px; font-size: 11px; font-weight: 700; letter-spacing: 0.4px; text-transform: uppercase; border: 1px solid var(--border-hot); background: var(--panel-2); color: var(--muted); }
+.vc-pill.ok { background: rgba(22, 163, 74, 0.10); color: #86efac; border-color: rgba(22, 163, 74, 0.4); }
+.vc-pill.run { background: rgba(212, 175, 55, 0.12); color: var(--gold); border-color: rgba(212, 175, 55, 0.45); }
+.vc-pill.err { background: rgba(220, 38, 38, 0.12); color: #fca5a5; border-color: rgba(220, 38, 38, 0.4); }
+.vc-pill.dim { opacity: 0.4; }
+</style>
+
+<section class="section" id="results" style="display: none;">
+  <div class="wrap">
+    <div class="tabs">
+      <div class="tab active" data-tab="breakdown">Breakdown</div>
+      <div class="tab" data-tab="scenes">Scenes</div>
+      <div class="tab" data-tab="characters">Characters</div>
+      <div class="tab" data-tab="locations">Locations</div>
+      <div class="tab" data-tab="flags">Production Flags</div>
+      <div class="tab" data-tab="schedule">Schedule</div>
+      <div class="tab" data-tab="budget">Budget</div>
+      <div class="tab" data-tab="callsheet">Call Sheets</div>
+      <div class="tab" data-tab="shotlist">Shot List</div>
+      <div class="tab" data-tab="orders">Purchase Orders</div>
+      <div class="tab" data-tab="locations">Location Scout</div>
+      <div class="tab" data-tab="safety">Safety + Insurance</div>
+      <div class="tab" data-tab="post">Post Plan</div>
+      <div class="tab" data-tab="workflow" style="background: rgba(212,175,55,0.08); color: var(--gold);">Master Workflow</div>
+      <div class="tab" data-tab="exports">Exports</div>
+      <div class="tab" data-tab="json">Raw JSON</div>
+    </div>
+
+    <div class="tab-panel active" data-panel="breakdown">
+      <div id="overview"></div>
+    </div>
+    <div class="tab-panel" data-panel="scenes">
+      <div class="tbl-scroll"><table id="scenesTable"><thead><tr>
+        <th>#</th><th>Heading</th><th>Location</th><th>I/E</th><th>TOD</th><th>Pages</th><th>Cast</th><th>Tags</th>
+      </tr></thead><tbody></tbody></table></div>
+    </div>
+    <div class="tab-panel" data-panel="characters">
+      <div class="tbl-scroll"><table id="charTable"><thead><tr>
+        <th>Name</th><th>Type</th><th>Age</th><th>Scenes</th><th>Lines</th><th>First</th><th>Last</th><th>Skills</th>
+      </tr></thead><tbody></tbody></table></div>
+    </div>
+    <div class="tab-panel" data-panel="locations">
+      <div id="locView"></div>
+    </div>
+    <div class="tab-panel" data-panel="flags">
+      <div id="flagsView"></div>
+    </div>
+    <div class="tab-panel" data-panel="schedule">
+      <div id="scheduleView">
+        <p style="color: var(--muted); font-size: 14px;">Run breakdown first, then generate schedule.</p>
+        <button class="btn btn-primary" id="genScheduleBtn" style="margin-top: 12px;">Generate shooting schedule</button>
+      </div>
+    </div>
+    <div class="tab-panel" data-panel="budget">
+      <div id="budgetView">
+        <p style="color: var(--muted); font-size: 14px;">Run breakdown first, then generate budget.</p>
+        <button class="btn btn-primary" id="genBudgetBtn" style="margin-top: 12px;">Generate budget</button>
+      </div>
+    </div>
+    <div class="tab-panel" data-panel="callsheet">
+      <div id="callsheetView">
+        <p style="color: var(--muted); font-size: 14px;">Run breakdown + schedule first, then generate one call sheet per shoot day.</p>
+        <button class="btn btn-primary" id="genCallsheetBtn" style="margin-top: 12px;">Generate call sheets</button>
+      </div>
+    </div>
+    <div class="tab-panel" data-panel="shotlist">
+      <div id="shotlistView">
+        <p style="color: var(--muted); font-size: 14px;">Director-style shot list per scene with type/angle/lens/movement and special-equipment flags.</p>
+        <button class="btn btn-primary" id="genShotlistBtn" style="margin-top: 12px;">Generate shot list</button>
+      </div>
+    </div>
+    <div class="tab-panel" data-panel="orders">
+      <div id="ordersView">
+        <p style="color: var(--muted); font-size: 14px;">Department-level purchase orders for props, wardrobe, set dressing, vehicles, weapons, SFX, catering, and equipment rentals.</p>
+        <button class="btn btn-primary" id="genOrdersBtn" style="margin-top: 12px;">Generate purchase orders</button>
+      </div>
+    </div>
+    <div class="tab-panel" data-panel="locations">
+      <div id="locationsView">
+        <p style="color: var(--muted); font-size: 14px;">Per-location scout report with permit type, fees, lead time, parking, power, and red-flag checklist.</p>
+        <button class="btn btn-primary" id="genLocationsBtn" style="margin-top: 12px;">Generate scout report</button>
+      </div>
+    </div>
+    <div class="tab-panel" data-panel="safety">
+      <div id="safetyView">
+        <p style="color: var(--muted); font-size: 14px;">Safety memos + insurance riders driven by production flags (firearms, stunts, animals, water, vehicles, minors).</p>
+        <button class="btn btn-primary" id="genSafetyBtn" style="margin-top: 12px;">Generate safety + insurance docs</button>
+      </div>
+    </div>
+    <div class="tab-panel" data-panel="post">
+      <div id="postView">
+        <p style="color: var(--muted); font-size: 14px;">Editorial schedule, VFX shot list, color, sound, music, and distributor deliverables.</p>
+        <button class="btn btn-primary" id="genPostBtn" style="margin-top: 12px;">Generate post-production plan</button>
+      </div>
+    </div>
+    <div class="tab-panel" data-panel="workflow">
+      <div id="workflowView"></div>
+    </div>
+    <div class="tab-panel" data-panel="exports">
+      <div id="exportsView">
+        <p style="color: var(--muted); font-size: 14px; margin-bottom: 14px;">Download the raw JSON for any deliverable. PDF export coming next.</p>
+        <div style="display: flex; flex-wrap: wrap; gap: 10px;">
+          <button class="btn btn-ghost" data-export="breakdown">Breakdown JSON</button>
+          <button class="btn btn-ghost" data-export="schedule">Schedule JSON</button>
+          <button class="btn btn-ghost" data-export="budget">Budget JSON</button>
+          <button class="btn btn-ghost" data-export="callsheet">Call Sheets JSON</button>
+          <button class="btn btn-ghost" data-export="shotlist">Shot List JSON</button>
+          <button class="btn btn-ghost" data-export="orders">Purchase Orders JSON</button>
+          <button class="btn btn-ghost" data-export="locations">Location Scout JSON</button>
+          <button class="btn btn-ghost" data-export="safety">Safety + Insurance JSON</button>
+          <button class="btn btn-ghost" data-export="post">Post Plan JSON</button>
+          <button class="btn btn-primary" data-export="all">Full Project Bundle</button>
+        </div>
+      </div>
+    </div>
+    <div class="tab-panel" data-panel="json">
+      <pre class="json" id="rawJson"></pre>
+    </div>
+  </div>
+</section>
+
+<section class="section" id="how">
+  <div class="wrap">
+    <h2>What gets generated</h2>
+    <div class="sub">All nine deliverables are live. Run breakdown first - downstream tools depend on it.</div>
+    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 14px; margin-top: 14px;">
+      <div class="stat"><div class="stat-label" style="color: var(--gold);">Script Breakdown</div><div class="stat-sub">Scenes, chars, props, wardrobe, VFX, stunts, weapons, animals, minors, vehicles - every tagged element.</div></div>
+      <div class="stat"><div class="stat-label" style="color: var(--gold);">Shooting Schedule</div><div class="stat-sub">Stripboard, shoot days grouped by location + INT/EXT + TOD, cast day-out-of-days.</div></div>
+      <div class="stat"><div class="stat-label" style="color: var(--gold);">Budget Top Sheet</div><div class="stat-sub">ATL / BTL-Production / BTL-Post / Other, with line items, contingency, tier comparison.</div></div>
+      <div class="stat"><div class="stat-label" style="color: var(--gold);">Call Sheets</div><div class="stat-sub">Per-day auto-generated from schedule + breakdown with cast statuses + safety notes.</div></div>
+      <div class="stat"><div class="stat-label" style="color: var(--gold);">Shot List</div><div class="stat-sub">Director-style coverage per scene: type, angle, lens, movement, special-equipment flags.</div></div>
+      <div class="stat"><div class="stat-label" style="color: var(--gold);">Purchase Orders</div><div class="stat-sub">Department-level POs: props, wardrobe, set dressing, vehicles, weapons, SFX, catering, equipment rentals.</div></div>
+      <div class="stat"><div class="stat-label" style="color: var(--gold);">Location Scouting</div><div class="stat-sub">Per-location scout report: permit type, fees, lead time, parking, power, sound, scout checklist.</div></div>
+      <div class="stat"><div class="stat-label" style="color: var(--gold);">Safety + Insurance</div><div class="stat-sub">Risk memos per flag (firearms, stunts, animals, water, vehicles, minors) + master COI checklist.</div></div>
+      <div class="stat"><div class="stat-label" style="color: var(--gold);">Post-Production Plan</div><div class="stat-sub">Editorial schedule, VFX shot list, color, sound, music, distributor deliverables.</div></div>
+    </div>
+  </div>
+</section>
+
+</div><!-- /#appBody -->
+
+<footer class="footer">
+  <div class="wrap">
+    WETYR Studio - internal tool &bull; markcmo.com/wetyr-studio
+  </div>
+</footer>
+
+<script>
+const $ = (id) => document.getElementById(id);
+
+// ─── Admin auth gate ─────────────────────────────────────────
+// On load: ask /admin-auth?action=verify. If 200 + ok, reveal the app.
+// Otherwise show the login card; on successful sign-in, reveal the app.
+(async function authBootstrap() {
+  const gate = $('authGate'), app = $('appBody');
+  const setAuthed = () => {
+    gate.style.display = 'none';
+    app.hidden = false;
+    ['navSep','navUpload','navResults','navRoadmap','navLogout'].forEach(id => $(id).hidden = false);
+    // Vault is admin-only; load it once we're authed.
+    if (typeof loadVault === 'function') loadVault();
+  };
+  try {
+    const r = await fetch('/.netlify/functions/admin-auth?action=verify', { credentials: 'include' });
+    if (r.ok) { const j = await r.json(); if (j.ok) { setAuthed(); return; } }
+  } catch (e) { /* fall through to login */ }
+
+  $('authSubmit').addEventListener('click', signIn);
+  $('authPass').addEventListener('keydown', e => { if (e.key === 'Enter') signIn(); });
+
+  async function signIn() {
+    const user = $('authUser').value.trim();
+    const pass = $('authPass').value;
+    const msg = $('authMsg');
+    if (!user || !pass) { msg.textContent = 'Enter username and password.'; msg.style.color = 'var(--red)'; return; }
+    msg.textContent = 'Signing in...'; msg.style.color = 'var(--muted)';
+    try {
+      const r = await fetch('/.netlify/functions/admin-auth', {
+        method: 'POST',
+        headers: { 'content-type': 'application/json' },
+        credentials: 'include',
+        body: JSON.stringify({ user, pass })
+      });
+      const j = await r.json();
+      if (!r.ok || !j.ok) { msg.textContent = j.error || 'Sign-in failed.'; msg.style.color = 'var(--red)'; return; }
+      setAuthed();
+    } catch (e) {
+      msg.textContent = e.message || 'Network error.'; msg.style.color = 'var(--red)';
+    }
+  }
+})();
+
+// Sign-out button (in nav)
+document.addEventListener('click', async (e) => {
+  if (e.target && e.target.id === 'navLogout') {
+    e.preventDefault();
+    try {
+      await fetch('/.netlify/functions/admin-auth', {
+        method: 'POST',
+        headers: { 'content-type': 'application/json' },
+        credentials: 'include',
+        body: JSON.stringify({ action: 'logout' })
+      });
+    } finally { location.reload(); }
+  }
+});
+
+let state = {
+  scriptText: '', projectId: null,
+  breakdown: null, schedule: null, budget: null, callsheet: null,
+  shotlist: null, orders: null, locations: null, safety: null, post: null
+};
+
+// ─── File drop ───────────────────────────────────────────────
+const drop = $('drop');
+const fileInput = $('fileInput');
+drop.addEventListener('click', () => fileInput.click());
+drop.addEventListener('dragover', e => { e.preventDefault(); drop.classList.add('hover'); });
+drop.addEventListener('dragleave', () => drop.classList.remove('hover'));
+drop.addEventListener('drop', e => {
+  e.preventDefault(); drop.classList.remove('hover');
+  if (e.dataTransfer.files[0]) handleFile(e.dataTransfer.files[0]);
+});
+fileInput.addEventListener('change', () => { if (fileInput.files[0]) handleFile(fileInput.files[0]); });
+
+async function handleFile(file) {
+  if (file.size > 10 * 1024 * 1024) { setStatus('File too large (>10 MB)', 'err'); return; }
+  setStatus('<span class="spinner"></span> Uploading + extracting text from ' + escapeHtml(file.name) + '...', 'info');
+  if (!$('titleInput').value) $('titleInput').value = file.name.replace(/\.[^.]+$/, '');
+  try {
+    const dataBase64 = await fileToBase64(file);
+    const r = await fetch('/.netlify/functions/script-upload', {
+      method: 'POST',
+      headers: { 'content-type': 'application/json' },
+      body: JSON.stringify({ filename: file.name, contentType: file.type, dataBase64 })
+    });
+    const j = await r.json();
+    if (!j.ok) throw new Error(j.error || 'upload failed');
+    state.scriptText = j.text;
+    $('pasteInput').value = j.text;
+    setStatus('Extracted ~' + j.pageCount + ' pages via ' + j.method + '. Ready to break down.', 'ok');
+  } catch (e) {
+    setStatus('Upload failed: ' + (e.message || e), 'err');
+  }
+}
+
+function fileToBase64(file) {
+  return new Promise((res, rej) => {
+    const r = new FileReader();
+    r.onload = () => res(String(r.result).split(',')[1]);
+    r.onerror = rej;
+    r.readAsDataURL(file);
+  });
+}
+
+// ─── Buttons ─────────────────────────────────────────────────
+$('goBtn').addEventListener('click', runBreakdown);
+$('clearBtn').addEventListener('click', () => {
+  state = { scriptText: '', projectId: null, breakdown: null, schedule: null, budget: null, callsheet: null, shotlist: null, orders: null, locations: null, safety: null, post: null };
+  $('pasteInput').value = ''; $('titleInput').value = '';
+  $('results').style.display = 'none';
+  setStatus('', '');
+});
+$('loadSampleBtn').addEventListener('click', () => {
+  $('pasteInput').value = SAMPLE_SCRIPT;
+  $('titleInput').value = 'The Coffee Break';
+  state.scriptText = SAMPLE_SCRIPT;
+  setStatus('Sample loaded. Click "Break down script".', 'ok');
+});
+$('genScheduleBtn').addEventListener('click', runSchedule);
+$('genBudgetBtn').addEventListener('click', runBudget);
+$('genCallsheetBtn').addEventListener('click', runCallsheet);
+$('genShotlistBtn').addEventListener('click',  () => runDeliverable('shotlist',  'Shot list'));
+$('genOrdersBtn').addEventListener('click',    () => runDeliverable('orders',    'Purchase orders'));
+$('genLocationsBtn').addEventListener('click', () => runDeliverable('locations', 'Location scout report'));
+$('genSafetyBtn').addEventListener('click',    () => runDeliverable('safety',    'Safety + insurance docs'));
+$('genPostBtn').addEventListener('click',      () => runDeliverable('post',      'Post-production plan'));
+document.querySelectorAll('[data-export]').forEach(b => b.addEventListener('click', () => exportItem(b.dataset.export)));
+
+$('tierInput').addEventListener('change', () => {
+  $('customBudgetField').style.display = $('tierInput').value === 'custom' ? 'flex' : 'none';
+});
+
+// ─── Tabs ────────────────────────────────────────────────────
+document.querySelectorAll('.tab').forEach(tab => {
+  tab.addEventListener('click', () => {
+    document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+    document.querySelectorAll('.tab-panel').forEach(p => p.classList.remove('active'));
+    tab.classList.add('active');
+    document.querySelector('[data-panel="' + tab.dataset.tab + '"]').classList.add('active');
+  });
+});
+
+// ─── Run breakdown (background job + polling) ────────────────
+async function runBreakdown() {
+  const text = $('pasteInput').value.trim() || state.scriptText;
+  if (!text) { setStatus('Upload a file or paste script text first.', 'err'); return; }
+  state.scriptText = text;
+
+  $('goBtn').disabled = true;
+  const t0 = Date.now();
+  setStatus('<span class="spinner"></span> Queuing job...', 'info');
+
+  try {
+    // 1) Kick off background job
+    const r = await fetch('/.netlify/functions/script-dissect', {
+      method: 'POST',
+      headers: { 'content-type': 'application/json' },
+      body: JSON.stringify({
+        scriptText: text,
+        title: $('titleInput').value || 'Untitled',
+        format: $('formatInput').value
+      })
+    });
+    const start = await r.json();
+    if (!start.ok || !start.jobId) throw new Error(start.error || 'failed to queue');
+    const jobId = start.jobId;
+    state.projectId = jobId; // dissect job IS the project root
+
+    // 2) Poll for result
+    const breakdown = await pollJob(jobId, (progress) => {
+      const sec = ((Date.now() - t0) / 1000).toFixed(0);
+      setStatus(`<span class="spinner"></span> Gemini is dissecting your script (${progress || 'processing'}) ${sec}s elapsed...`, 'info');
+    });
+
+    state.breakdown = breakdown;
+    render(breakdown);
+    $('results').style.display = 'block';
+    $('results').scrollIntoView({ behavior: 'smooth' });
+    const totalSec = ((Date.now() - t0) / 1000).toFixed(1);
+    setStatus(`Breakdown complete in ${totalSec}s. ${breakdown.scenes.length} scenes, ${breakdown.characters.length} characters tagged.`, 'ok');
+  } catch (e) {
+    setStatus('Breakdown failed: ' + (e.message || e), 'err');
+  } finally {
+    $('goBtn').disabled = false;
+  }
+}
+
+async function pollJob(jobId, onProgress, resultField = 'breakdown') {
+  const startTs = Date.now();
+  const TIMEOUT_MS = 12 * 60 * 1000; // 12 min ceiling
+  while (Date.now() - startTs < TIMEOUT_MS) {
+    await new Promise(r => setTimeout(r, 3000));
+    const r = await fetch('/.netlify/functions/script-result?jobId=' + encodeURIComponent(jobId));
+    if (!r.ok) {
+      if (r.status === 404) continue; // not yet visible
+      throw new Error('poll failed: ' + r.status);
+    }
+    const j = await r.json();
+    if (j.status === 'error') throw new Error(j.error || 'job errored');
+    if (j.status === 'complete' && j[resultField]) return j[resultField];
+    onProgress?.(j.progress);
+  }
+  throw new Error('timed out waiting for ' + resultField);
+}
+
+// ─── Run schedule (async) ────────────────────────────────────
+async function runSchedule() {
+  if (!state.breakdown) { setStatus('Run breakdown first.', 'err'); return; }
+  $('scheduleView').innerHTML = '<p style="color: var(--muted);"><span class="spinner"></span> Queuing schedule job...</p>';
+  try {
+    const r = await fetch('/.netlify/functions/script-schedule', {
+      method: 'POST',
+      headers: { 'content-type': 'application/json' },
+      body: JSON.stringify({
+        projectId: state.projectId,
+        breakdown: state.breakdown,
+        title: state.breakdown?.title || $('titleInput').value,
+        constraints: {
+          shootDays: Number($('daysInput').value) || undefined,
+          maxHoursPerDay: 12
+        }
+      })
+    });
+    const start = await r.json();
+    if (!start.ok || !start.jobId) throw new Error(start.error || 'failed to queue');
+    const schedule = await pollJob(start.jobId, (p) => {
+      $('scheduleView').innerHTML = '<p style="color: var(--muted);"><span class="spinner"></span> ' + escapeHtml(p || 'processing') + '...</p>';
+    }, 'schedule');
+    state.schedule = schedule;
+    renderSchedule(schedule);
+    if (typeof renderWorkflow === 'function') renderWorkflow();
+  } catch (e) {
+    $('scheduleView').innerHTML = '<div class="status err active">Schedule failed: ' + escapeHtml(e.message) + '</div>';
+  }
+}
+
+// ─── Run call sheets (async) ─────────────────────────────────
+async function runCallsheet() {
+  if (!state.breakdown) { setStatus('Run breakdown first.', 'err'); return; }
+  if (!state.schedule)  { setStatus('Run schedule first.', 'err'); return; }
+  $('callsheetView').innerHTML = '<p style="color: var(--muted);"><span class="spinner"></span> Queuing call sheet job...</p>';
+  try {
+    const r = await fetch('/.netlify/functions/script-callsheet', {
+      method: 'POST',
+      headers: { 'content-type': 'application/json' },
+      body: JSON.stringify({
+        projectId: state.projectId,
+        breakdown: state.breakdown,
+        schedule: state.schedule,
+        title: state.breakdown?.title || $('titleInput').value
+      })
+    });
+    const start = await r.json();
+    if (!start.ok || !start.jobId) throw new Error(start.error || 'failed to queue');
+    const cs = await pollJob(start.jobId, (p) => {
+      $('callsheetView').innerHTML = '<p style="color: var(--muted);"><span class="spinner"></span> ' + escapeHtml(p || 'processing') + '...</p>';
+    }, 'callsheet');
+    state.callsheet = cs;
+    renderCallsheet(cs);
+    if (typeof renderWorkflow === 'function') renderWorkflow();
+  } catch (e) {
+    $('callsheetView').innerHTML = '<div class="status err active">Call sheets failed: ' + escapeHtml(e.message) + '</div>';
+  }
+}
+
+function renderCallsheet(cs) {
+  const days = cs.days || [];
+  if (!days.length) { $('callsheetView').innerHTML = '<p style="color: var(--muted);">No call sheets generated.</p>'; return; }
+  $('callsheetView').innerHTML = `
+    <div class="stats" style="margin-bottom: 18px;">
+      <div class="stat"><div class="stat-label">Days</div><div class="stat-value">${days.length}</div></div>
+      <div class="stat"><div class="stat-label">Generated</div><div class="stat-value" style="font-size: 13px;">${escapeHtml(new Date(cs.generatedAt || Date.now()).toLocaleString())}</div></div>
+    </div>
+    ${days.map(d => `
+      <details style="background: var(--panel); border: 1px solid var(--border); border-radius: 10px; padding: 14px; margin-bottom: 8px;">
+        <summary style="cursor: pointer; font-weight: 700;">
+          Day ${d.day || '?'} &mdash; ${escapeHtml(d.date || '')} &mdash; ${escapeHtml(d.location?.name || d.location || '')}
+        </summary>
+        <div style="margin-top: 12px; display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 12px;">
+          ${d.location ? `<div class="stat"><div class="stat-label">Location</div><div style="font-size: 13px; margin-top: 4px;">${escapeHtml(d.location.name || '')}<br/><small style="color: var(--muted);">${escapeHtml(d.location.address || '')}</small></div></div>` : ''}
+          ${d.callTimes ? `<div class="stat"><div class="stat-label">General Call</div><div style="font-size: 18px; font-weight: 800;">${escapeHtml(d.callTimes.generalCrew || 'TBD')}</div></div>` : ''}
+          ${d.weather ? `<div class="stat"><div class="stat-label">Weather</div><div style="font-size: 13px;">${escapeHtml(d.weather.high || '')}/${escapeHtml(d.weather.low || '')} &middot; ${escapeHtml(d.weather.conditions || 'TBD')}<br/><small style="color: var(--muted);">Sun: ${escapeHtml(d.weather.sunrise || '?')} / ${escapeHtml(d.weather.sunset || '?')}</small></div></div>` : ''}
+          ${d.catering ? `<div class="stat"><div class="stat-label">Catering</div><div style="font-size: 12px;">B: ${escapeHtml(d.catering.breakfast || '?')}<br/>L: ${escapeHtml(d.catering.lunch || '?')}<br/>HC: ${d.catering.headCount || '?'}</div></div>` : ''}
+        </div>
+        ${(d.cast || []).length ? `
+          <h4 style="margin: 16px 0 6px; font-size: 14px;">Cast (${d.cast.length})</h4>
+          <table style="width: 100%; font-size: 12px;"><thead><tr><th style="text-align: left;">Character</th><th>Status</th><th>MU/Wardrobe</th><th>On Set</th></tr></thead><tbody>
+          ${d.cast.map(c => `<tr><td><b>${escapeHtml(c.character)}</b></td><td><span class="tag ${c.status === 'HOLD' ? '' : 'hot'}">${escapeHtml(c.status || '')}</span></td><td>${escapeHtml(c.makeupCall || '?')} / ${escapeHtml(c.wardrobeCall || '?')}</td><td>${escapeHtml(c.onSet || '?')}</td></tr>`).join('')}
+          </tbody></table>
+        ` : ''}
+        ${(d.scenes || []).length ? `
+          <h4 style="margin: 16px 0 6px; font-size: 14px;">Scenes (${d.scenes.length})</h4>
+          <table style="width: 100%; font-size: 12px;"><thead><tr><th style="text-align: left;">#</th><th>Heading</th><th>Pgs</th><th>Cast</th></tr></thead><tbody>
+          ${d.scenes.map(s => `<tr><td><b>${escapeHtml(s.number)}</b></td><td>${escapeHtml((s.heading || '').slice(0, 80))}</td><td>${(s.pageCount || 0).toFixed(2)}</td><td style="font-size: 11px;">${escapeHtml((s.cast || []).slice(0, 4).join(', '))}</td></tr>`).join('')}
+          </tbody></table>
+        ` : ''}
+        ${(d.safetyNotes || []).length ? `
+          <h4 style="margin: 16px 0 6px; font-size: 14px; color: var(--red);">Safety Notes</h4>
+          <ul style="padding-left: 20px; font-size: 13px; color: var(--text);">${d.safetyNotes.map(n => '<li>' + escapeHtml(n) + '</li>').join('')}</ul>
+        ` : ''}
+        ${(d.specialNotes || []).length ? `
+          <h4 style="margin: 16px 0 6px; font-size: 14px;">Special Notes</h4>
+          <ul style="padding-left: 20px; font-size: 13px; color: var(--muted);">${d.specialNotes.map(n => '<li>' + escapeHtml(n) + '</li>').join('')}</ul>
+        ` : ''}
+      </details>
+    `).join('')}
+  `;
+}
+
+// ─── Exports ─────────────────────────────────────────────────
+function exportItem(kind) {
+  let payload, name;
+  if (kind === 'all') {
+    payload = {
+      title: state.breakdown?.title || 'Untitled',
+      projectId: state.projectId,
+      exportedAt: new Date().toISOString(),
+      breakdown: state.breakdown,
+      schedule: state.schedule,
+      budget: state.budget,
+      callsheet: state.callsheet,
+      shotlist: state.shotlist,
+      orders: state.orders,
+      locations: state.locations,
+      safety: state.safety,
+      post: state.post
+    };
+    name = (state.breakdown?.title || 'wetyr-project').replace(/[^a-z0-9]+/gi, '-').toLowerCase() + '-full.json';
+  } else {
+    payload = state[kind];
+    name = kind + '.json';
+  }
+  if (!payload) { setStatus('No ' + kind + ' generated yet.', 'err'); return; }
+  const blob = new Blob([JSON.stringify(payload, null, 2)], { type: 'application/json' });
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement('a');
+  a.href = url; a.download = name;
+  document.body.appendChild(a); a.click(); a.remove();
+  setTimeout(() => URL.revokeObjectURL(url), 1000);
+}
+
+// ─── MASTER WORKFLOW renderer ─────────────────────────────────────────
+// Stitches breakdown + schedule + budget + call sheets + shot list + orders
+// + locations + safety + post into a single chronological project plan:
+// Development -> Pre-Production (week-by-week) -> Production (day-by-day)
+// -> Post -> Delivery. Falls back gracefully when later deliverables aren't
+// generated yet.
+function renderWorkflow() {
+  const view = $('workflowView'); if (!view) return;
+  const b = state.breakdown;
+  if (!b) {
+    view.innerHTML = '<div style="padding: 40px 20px; text-align: center; color: var(--muted);">Run a script breakdown first - the master workflow stitches every deliverable into one chronological plan.</div>';
+    return;
+  }
+
+  const sch    = state.schedule;
+  const bud    = state.budget;
+  const cs     = state.callsheet;
+  const shots  = state.shotlist;
+  const ords   = state.orders;
+  const locs   = state.locations;
+  const safety = state.safety;
+  const post   = state.post;
+
+  const fmt$ = n => '$' + Math.round(Number(n) || 0).toLocaleString();
+  const numShootDays = sch?.days?.length || Math.ceil((b.pageCount || 0) / 4);
+
+  // Pre-production lead time = max permit lead time + buffer
+  const maxPermitLead = Math.max(0, ...((locs?.locations || []).map(l => l.permitLeadTimeDays || 0)));
+  const maxOrderLead  = Math.max(0, ...((ords?.orders   || []).map(o => o.leadTimeDays      || 0)));
+  const prePrepDays   = Math.max(56, maxPermitLead + 14, maxOrderLead + 14); // at least 8 weeks
+  const prePrepWeeks  = Math.ceil(prePrepDays / 7);
+
+  const phases = [
+    {
+      name: 'PHASE 1 - DEVELOPMENT',
+      color: 'var(--muted)',
+      duration: 'Complete (script locked)',
+      items: [
+        { when: 'DONE', task: 'Final draft locked: ' + (b.title || 'Untitled') + ' - ' + (b.pageCount || 0).toFixed(1) + ' pages, ' + (b.scenes?.length || 0) + ' scenes' },
+        { when: 'DONE', task: 'Tagged breakdown: ' + (b.characters?.length || 0) + ' speaking roles, ' + (b.locations?.length || 0) + ' locations' },
+        { when: 'DONE', task: 'Production flags: ' + Object.entries(b.productionFlags || {}).filter(([, v]) => v === true).map(([k]) => k.replace(/^has/, '')).join(', ') || 'none' }
+      ]
+    },
+    {
+      name: 'PHASE 2 - PRE-PRODUCTION (' + prePrepWeeks + ' weeks)',
+      color: 'var(--gold)',
+      duration: prePrepWeeks + ' weeks before Day 1',
+      groups: buildPrepWeeks(b, sch, bud, ords, locs, safety, prePrepWeeks)
+    },
+    {
+      name: 'PHASE 3 - PRODUCTION (' + numShootDays + ' shoot days)',
+      color: 'var(--red)',
+      duration: numShootDays + ' shoot days',
+      days: (sch?.days || []).map(d => ({
+        day: d.day,
+        date: d.date,
+        location: d.location,
+        intExt: d.intExt,
+        timeOfDay: d.timeOfDay,
+        pages: (d.totalPages || (d.totalEighths || 0) / 8 || 0).toFixed(2),
+        scenes: (d.scenes || []).map(sc => sc.number),
+        cast: d.castCalled || [],
+        callTime: d.estimatedCallTime || callsheetForDay(d.day)?.callTimes?.generalCrew || 'TBD',
+        wrapTime: d.estimatedWrapTime || 'TBD',
+        flags: { minorHours: !!d.minorHours, special: d.specialRequirements || [] }
+      }))
+    },
+    {
+      name: 'PHASE 4 - POST-PRODUCTION',
+      color: 'var(--blue)',
+      duration: post?.summary?.estimatedPostMonths ? post.summary.estimatedPostMonths + ' months' : '~6 months',
+      items: buildPostItems(post)
+    },
+    {
+      name: 'PHASE 5 - DELIVERY',
+      color: 'var(--green)',
+      duration: 'After picture lock',
+      items: (post?.deliverables || []).slice(0, 12).map(d => ({
+        when: d.dueDate || 'TBD',
+        task: d.distributor + ' &mdash; ' + d.format + ' (' + (d.specs || []).join(', ') + ')'
+      }))
+    }
+  ];
+
+  view.innerHTML = `
+    <div style="background: var(--panel); border: 1px solid var(--gold); border-radius: 12px; padding: 22px; margin-bottom: 22px;">
+      <div style="display: flex; justify-content: space-between; align-items: start; flex-wrap: wrap; gap: 12px;">
+        <div>
+          <div style="font-size: 11px; color: var(--gold); font-weight: 800; letter-spacing: 2px;">PROJECT PLAN</div>
+          <h2 style="font-size: 28px; margin-top: 4px;">${escapeHtml(b.title || 'Untitled')}</h2>
+          <div style="color: var(--muted); margin-top: 4px;">${escapeHtml((b.format || '').toUpperCase())} &middot; ${(b.pageCount || 0).toFixed(1)} pages &middot; ${b.scenes?.length || 0} scenes</div>
+        </div>
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(120px, 1fr)); gap: 10px; min-width: 280px;">
+          <div class="stat"><div class="stat-label">Pre-Prod</div><div class="stat-value">${prePrepWeeks}<span style="font-size: 13px;">wk</span></div></div>
+          <div class="stat"><div class="stat-label">Shoot</div><div class="stat-value">${numShootDays}<span style="font-size: 13px;">d</span></div></div>
+          <div class="stat"><div class="stat-label">Post</div><div class="stat-value">${post?.summary?.estimatedPostMonths || '~6'}<span style="font-size: 13px;">mo</span></div></div>
+          ${bud?.topSheet?.grandTotal ? `<div class="stat" style="border-color: var(--gold);"><div class="stat-label">Budget</div><div class="stat-value" style="color: var(--gold); font-size: 16px;">${fmt$(bud.topSheet.grandTotal)}</div></div>` : ''}
+        </div>
+      </div>
+    </div>
+
+    ${phases.map(p => `
+      <div style="border-left: 3px solid ${p.color}; padding-left: 18px; margin-bottom: 28px;">
+        <h3 style="font-size: 18px; font-weight: 800; color: ${p.color}; letter-spacing: 0.5px;">${p.name}</h3>
+        <div style="color: var(--muted); font-size: 12px; margin-bottom: 14px;">${escapeHtml(p.duration)}</div>
+
+        ${p.items ? `
+          <table style="width: 100%; font-size: 13px;">
+            <thead><tr><th style="text-align: left; width: 130px;">When</th><th style="text-align: left;">Task</th></tr></thead>
+            <tbody>${p.items.map(it => `<tr><td><b>${escapeHtml(it.when)}</b></td><td>${it.task}</td></tr>`).join('')}</tbody>
+          </table>
+        ` : ''}
+
+        ${p.groups ? p.groups.map(g => `
+          <details style="background: var(--panel); border: 1px solid var(--border); border-radius: 8px; padding: 12px; margin-bottom: 6px;">
+            <summary style="cursor: pointer; font-weight: 700; color: ${p.color};">${escapeHtml(g.title)} <span style="color: var(--muted); font-weight: 400; font-size: 12px;">(${g.tasks.length} tasks)</span></summary>
+            <table style="width: 100%; margin-top: 10px; font-size: 12px;">
+              <thead><tr><th style="text-align: left; width: 110px;">Owner</th><th style="text-align: left;">Task</th></tr></thead>
+              <tbody>${g.tasks.map(t => `<tr><td><b>${escapeHtml(t.owner)}</b></td><td>${t.task}</td></tr>`).join('')}</tbody>
+            </table>
+          </details>
+        `).join('') : ''}
+
+        ${p.days ? `
+          <div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 10px;">
+            ${p.days.map(d => `
+              <div style="background: var(--panel); border: 1px solid var(--border); border-radius: 8px; padding: 12px;">
+                <div style="display: flex; justify-content: space-between; align-items: start; gap: 8px;">
+                  <div>
+                    <div style="font-size: 18px; font-weight: 800; color: ${p.color};">DAY ${d.day}</div>
+                    <div style="color: var(--muted); font-size: 12px;">${escapeHtml(d.date || 'TBD')}</div>
+                  </div>
+                  <div style="text-align: right;">
+                    <div style="font-size: 13px; font-weight: 700; color: var(--gold);">${escapeHtml(d.callTime)}</div>
+                    <div style="color: var(--muted); font-size: 11px;">crew call</div>
+                  </div>
+                </div>
+                <div style="margin-top: 10px; font-size: 12px;">
+                  <div><b>${escapeHtml(d.location || '')}</b> &middot; ${escapeHtml(d.intExt || '')} &middot; ${escapeHtml(d.timeOfDay || '')}</div>
+                  <div style="color: var(--muted); margin-top: 3px;">${d.pages} pgs &middot; scenes ${d.scenes.map(escapeHtml).join(', ')}</div>
+                </div>
+                ${d.cast.length ? `<div style="margin-top: 6px; font-size: 11px;">${d.cast.slice(0, 5).map(c => '<span class="tag">' + escapeHtml(c) + '</span>').join('')}${d.cast.length > 5 ? ' <span style="color: var(--dim);">+' + (d.cast.length - 5) + '</span>' : ''}</div>` : ''}
+                ${d.flags.minorHours ? '<div style="margin-top: 6px;"><span class="tag hot">MINOR HRS</span></div>' : ''}
+                ${(d.flags.special || []).length ? '<div style="margin-top: 6px; font-size: 11px; color: var(--gold);">' + escapeHtml(d.flags.special.join(', ')) + '</div>' : ''}
+              </div>
+            `).join('')}
+          </div>
+        ` : ''}
+      </div>
+    `).join('')}
+
+    <div style="background: var(--panel-2); border: 1px dashed var(--border-hot); border-radius: 10px; padding: 18px; margin-top: 22px; font-size: 12px; color: var(--muted);">
+      <b style="color: var(--text);">Notes:</b> Phase durations and lead times are calculated from your generated deliverables. Generate the missing tabs (above) to populate this workflow with concrete data instead of placeholders.
+    </div>
+  `;
+}
+
+function buildPrepWeeks(b, sch, bud, ords, locs, safety, weeksOut) {
+  const flags = b.productionFlags || {};
+  const W = (n) => 'Week -' + n;
+
+  const weeks = [
+    { title: W(weeksOut) + ' (kickoff)', tasks: [
+      { owner: 'Producer',   task: 'Open production office, hire UPM + 1st AD' },
+      { owner: 'UPM',        task: 'Lock budget at ' + (bud?.topSheet?.grandTotal ? '$' + Math.round(bud.topSheet.grandTotal).toLocaleString() : 'TBD') + '; cash-flow plan to financiers' },
+      { owner: 'Director',   task: 'Final draft signed off; tone meeting with DP, PD, costume designer' },
+      { owner: 'Casting',    task: 'Send breakdowns to agents for ' + (b.characters?.filter(c => c.type === 'lead' || c.type === 'supporting').length || '?') + ' principal roles' }
+    ]},
+    { title: W(Math.max(1, weeksOut - 1)), tasks: [
+      { owner: 'Loc Manager',task: 'Begin scouting ' + (locs?.locations?.length || b.locations?.length || '?') + ' locations; deal memos drafted' },
+      { owner: '1st AD',     task: 'Stripboard locked; day-out-of-days circulated to cast agents' },
+      { owner: 'Casting',    task: 'First-round auditions; chemistry reads scheduled' },
+      { owner: 'PD',         task: 'Set design begins; build/dress vs. practical decisions' }
+    ]},
+    { title: W(Math.max(1, weeksOut - 2)), tasks: [
+      { owner: 'Loc Manager',task: 'File permits (longest lead: ' + (locs?.summary?.longestLeadTime || '?') + ' days)' },
+      { owner: 'UPM',        task: 'Finalize crew deal memos; sign IATSE/DGA paperwork' },
+      { owner: 'Casting',    task: 'Offers out to leads + supporting; start day-player breakdowns' },
+      { owner: 'Props/Ward', task: 'Send first-round POs (longest lead: ' + (ords?.summary?.longestLeadTime || '?') + ' days)' }
+    ]},
+    { title: W(Math.max(1, weeksOut - 3)), tasks: [
+      { owner: 'DP',         task: 'Camera package selected; lens tests; LUT chosen' },
+      { owner: 'Gaffer/Grip',task: 'Lighting + grip package booked; truck reserved' },
+      { owner: 'Sound',      task: 'Mixer hired; package booked; comms/walkie plan drafted' },
+      { owner: 'Stunts',     task: flags.hasStunts ? 'Stunt coordinator hired; rigging tests scheduled' : 'N/A - no stunts flagged' }
+    ]},
+    { title: W(Math.max(1, weeksOut - 4)), tasks: [
+      { owner: '1st AD',     task: 'Tech scouts at primary locations with full dept-head cohort' },
+      { owner: 'PD',         task: 'Set construction begins; dressing inventory consolidated' },
+      { owner: 'Costume',    task: 'Fittings with leads; vendor pulls accelerate' },
+      { owner: 'Safety',     task: safety ? safety.summary?.totalRiskCategories + ' risk categories addressed; rider docs filed' : 'Safety memos drafted' }
+    ]},
+    { title: W(Math.max(1, weeksOut - 5)), tasks: [
+      { owner: 'UPM',        task: 'COIs in hand for all locations + vendors; payroll service activated' },
+      { owner: 'Production', task: 'Office setup complete; production reports template ready' },
+      { owner: 'Transport',  task: 'Vehicles confirmed; driver list to UPM' },
+      { owner: 'Catering',   task: 'Caterer booked; first week menus + dietary roster' }
+    ]},
+    { title: W(Math.max(1, weeksOut - 6)), tasks: [
+      { owner: '1st AD',     task: 'Final tech scout; call sheet template locked' },
+      { owner: 'Director',   task: 'Rehearsals with leads; table read' },
+      { owner: 'Continuity', task: 'Script supervisor onboarded; one-liner schedule reviewed' },
+      { owner: 'Locations',  task: 'Site reps confirmed; neighbor notifications sent' }
+    ]},
+    { title: 'Week -1 (final prep)', tasks: [
+      { owner: 'All Depts',  task: 'Prep day(s) on stage / prime location; load equipment; pre-light' },
+      { owner: 'Producer',   task: 'All-hands kickoff meeting; safety bulletins distributed' },
+      { owner: '1st AD',     task: 'Day 1 call sheet released 24hrs before; cast wardrobe/MU calls confirmed' },
+      { owner: 'Insurance',  task: 'Master COI in hand; production package active by Day 1' }
+    ]}
+  ];
+
+  // Trim to actual weeks-out and reverse so kickoff is first.
+  return weeks.slice(0, Math.min(weeksOut + 1, weeks.length));
+}
+
+function buildPostItems(post) {
+  if (!post) {
+    return [
+      { when: 'Wrap + 1 day',   task: 'Editor begins assembly; assistant editor pulls and syncs dailies' },
+      { when: 'Wrap + 6 weeks', task: 'First cut delivered to director' },
+      { when: 'Wrap + 12 wks',  task: 'Director\'s cut to producers' },
+      { when: 'Wrap + 16 wks',  task: 'Picture lock; turn over to VFX, sound, color' },
+      { when: 'Lock + 8 wks',   task: 'VFX, color grading, sound design + mix complete' },
+      { when: 'Lock + 12 wks',  task: 'Final QC; deliverables to distributor' }
+    ];
+  }
+  const items = [];
+  if (post.schedule?.lockedPicture)  items.push({ when: 'Locked picture',  task: post.schedule.lockedPicture });
+  if (post.schedule?.vfxTurnover)    items.push({ when: 'VFX turnover',    task: post.schedule.vfxTurnover });
+  if (post.schedule?.soundTurnover)  items.push({ when: 'Sound turnover',  task: post.schedule.soundTurnover });
+  if (post.editorial)                items.push({ when: 'Editorial',       task: (post.editorial.editor || 'Editor') + ' &mdash; ' + (post.editorial.weeks || '?') + ' weeks &mdash; $' + Math.round(post.editorial.estimatedCost || 0).toLocaleString() });
+  if (post.vfx)                      items.push({ when: 'VFX',             task: (post.vfx.shotCount || 0) + ' shots &mdash; ' + (post.vfx.weeks || '?') + ' weeks &mdash; $' + Math.round(post.vfx.estimatedCost || 0).toLocaleString() });
+  if (post.color)                    items.push({ when: 'Color',           task: (post.color.colorist || 'Colorist') + ' &mdash; ' + (post.color.days || '?') + ' days &mdash; $' + Math.round(post.color.estimatedCost || 0).toLocaleString() });
+  if (post.sound)                    items.push({ when: 'Sound',           task: (post.sound.mixDays || '?') + ' mix days on ' + ((post.sound.mixFormat || []).join('/') || '5.1') + ' &mdash; $' + Math.round(post.sound.estimatedCost || 0).toLocaleString() });
+  if (post.music)                    items.push({ when: 'Music',           task: (post.music.composer || post.music.model || 'Composer') + ' &mdash; ' + (post.music.weeks || '?') + ' weeks &mdash; $' + Math.round(post.music.estimatedCost || 0).toLocaleString() });
+  if (post.schedule?.finalDelivery)  items.push({ when: 'Final delivery',  task: post.schedule.finalDelivery });
+  return items;
+}
+
+// ─── Cross-reference helpers (used by enriched renderers + Workflow tab) ──
+const _norm = s => String(s || '').toUpperCase().replace(/[^A-Z0-9]+/g, ' ').trim();
+
+function scenesByLocation(locName) {
+  const k = _norm(locName);
+  return (state.breakdown?.scenes || []).filter(s => _norm(s.location).startsWith(k) || k.startsWith(_norm(s.location)));
+}
+function dayForScene(sceneNum) {
+  const sn = String(sceneNum || '');
+  const day = (state.schedule?.days || []).find(d => (d.scenes || []).some(s => String(s.number) === sn));
+  return day || null;
+}
+function callsheetForDay(dayNum) {
+  return (state.callsheet?.days || []).find(d => d.day === dayNum) || null;
+}
+function shotsForScene(sceneNum) {
+  const sn = String(sceneNum || '');
+  const wrap = (state.shotlist?.scenes || []).find(sc => String(sc.sceneNumber) === sn);
+  return wrap ? (wrap.shots || []) : [];
+}
+function aggregateElements(scenes) {
+  const fields = ['props', 'wardrobe', 'vehicles', 'weapons', 'animals', 'sfx', 'vfx', 'stunts', 'specialEquipment'];
+  const out = {};
+  for (const f of fields) {
+    const set = new Set();
+    for (const s of scenes) for (const v of (s[f] || [])) set.add(v);
+    out[f] = [...set];
+  }
+  return out;
+}
+function totalEighths(scenes) {
+  return (scenes || []).reduce((sum, s) => sum + (s.eighths || 0), 0);
+}
+function uniqueChars(scenes) {
+  const set = new Set();
+  for (const s of scenes) for (const c of (s.characters || [])) set.add(c);
+  return [...set];
+}
+
+// Boilerplate prep-workflow steps for any location (best-practice template).
+function locationPrepSteps(loc) {
+  const lead = loc.permitLeadTimeDays || 30;
+  const fee = loc.permitFeeRange || 'TBD';
+  return [
+    { phase: 'T-' + (lead + 14) + ' days', task: 'Initial scout: photograph, measure, note sound concerns and access' },
+    { phase: 'T-' + (lead + 7) + ' days',  task: 'Negotiate location agreement + COI requirements (' + (loc.insuranceRequired || 'TBD coverage') + ')' },
+    { phase: 'T-' + lead + ' days',         task: 'File ' + (loc.permitType || 'film permit') + ' (fees: ' + fee + ')' },
+    { phase: 'T-7 days',                    task: 'Tech scout with key dept heads: DP, gaffer, sound mixer, key grip, AD, location manager' },
+    { phase: 'T-3 days',                    task: 'Confirm power (' + (loc.power?.generatorKVA ? loc.power.generatorKVA + ' kVA gen' : 'shore') + '), parking (' + (loc.parking?.crewSpots || '?') + ' crew + ' + (loc.parking?.baseCampSpots || '?') + ' BC), neighbor notifications' },
+    { phase: 'T-1 day',                     task: 'Pre-rig + dressing day if applicable; safety walk; final headcount to caterer' },
+    { phase: 'Shoot day',                   task: 'Site rep on site, permits posted, restrooms staged, walkies on assigned channel' },
+    { phase: 'Wrap',                        task: 'Restore to original condition, debrief, retain photos for end-of-shoot reconciliation' }
+  ];
+}
+
+// ─── Generic deliverable runner (shotlist/orders/locations/safety/post) ──
+async function runDeliverable(kind, label) {
+  if (!state.breakdown) { setStatus('Run breakdown first.', 'err'); return; }
+  const view = $(kind + 'View');
+  view.innerHTML = '<p style="color: var(--muted);"><span class="spinner"></span> Queuing ' + escapeHtml(label) + '...</p>';
+  try {
+    const r = await fetch('/.netlify/functions/script-' + kind, {
+      method: 'POST',
+      headers: { 'content-type': 'application/json' },
+      body: JSON.stringify({
+        projectId: state.projectId,
+        title: state.breakdown?.title || $('titleInput').value,
+        breakdown: state.breakdown,
+        schedule: state.schedule,
+        budget: state.budget,
+        context: {
+          budgetTier: $('tierInput').value,
+          customBudget: $('tierInput').value === 'custom' ? Number($('customBudgetInput').value) || null : null,
+          union: $('unionInput').value,
+          shootState: $('stateInput').value || 'CA',
+          region: 'US'
+        }
+      })
+    });
+    const start = await r.json();
+    if (!start.ok || !start.jobId) throw new Error(start.error || 'failed to queue');
+    const result = await pollJob(start.jobId, (p) => {
+      view.innerHTML = '<p style="color: var(--muted);"><span class="spinner"></span> ' + escapeHtml(p || 'processing') + '...</p>';
+    }, kind);
+    state[kind] = result;
+    const renderer = { shotlist: renderShotlist, orders: renderOrders, locations: renderLocations, safety: renderSafety, post: renderPost }[kind];
+    if (renderer) renderer(result); else view.innerHTML = '<pre class="json">' + escapeHtml(JSON.stringify(result, null, 2)) + '</pre>';
+    if (typeof renderWorkflow === 'function') renderWorkflow(); // refresh master plan
+  } catch (e) {
+    view.innerHTML = '<div class="status err active">' + escapeHtml(label) + ' failed: ' + escapeHtml(e.message) + '</div>';
+  }
+}
+
+// ─── Renderers for new deliverables ──────────────────────────
+function renderShotlist(s) {
+  const sum = s.summary || {};
+  $('shotlistView').innerHTML = `
+    <div class="stats">
+      <div class="stat"><div class="stat-label">Total Shots</div><div class="stat-value">${sum.totalShots || 0}</div></div>
+      <div class="stat"><div class="stat-label">Setups</div><div class="stat-value">${sum.totalSetups || 0}</div></div>
+      <div class="stat"><div class="stat-label">High-Risk Shots</div><div class="stat-value" style="color: var(--red);">${sum.highRiskCount || 0}</div></div>
+      <div class="stat"><div class="stat-label">Special Gear</div><div class="stat-value">${(sum.specialEquipmentNeeded || []).length}</div></div>
+    </div>
+    ${(sum.specialEquipmentNeeded || []).length ? `<div style="margin-bottom: 16px;"><div class="stat-label" style="margin-bottom: 6px;">Special Equipment Required</div>${(sum.specialEquipmentNeeded || []).map(e => '<span class="tag">' + escapeHtml(e) + '</span>').join('')}</div>` : ''}
+    ${(s.scenes || []).map(sc => {
+      const breakdown = (state.breakdown?.scenes || []).find(b => String(b.number) === String(sc.sceneNumber)) || {};
+      const day = dayForScene(sc.sceneNumber);
+      const cs = day ? callsheetForDay(day.day) : null;
+      return `
+      <details style="background: var(--panel); border: 1px solid var(--border); border-radius: 10px; padding: 14px; margin-bottom: 6px;">
+        <summary style="cursor: pointer; font-weight: 700; display: flex; justify-content: space-between; flex-wrap: wrap; gap: 10px;">
+          <span>Scene ${escapeHtml(sc.sceneNumber || '')} - ${escapeHtml((sc.heading || '').slice(0, 70))}</span>
+          <span style="font-weight: 400; color: var(--muted); font-size: 13px;">${sc.totalShots || (sc.shots || []).length} shots &middot; ${sc.estimatedSetups || '?'} setups${day ? ' &middot; <b style="color: var(--gold);">D' + day.day + '</b>' : ''}</span>
+        </summary>
+
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 10px; margin-top: 14px; font-size: 12px;">
+          <div class="stat"><div class="stat-label">Location</div><div>${escapeHtml(breakdown.location || '')}</div></div>
+          <div class="stat"><div class="stat-label">I/E &middot; TOD</div><div>${escapeHtml(breakdown.intExt || '')} &middot; ${escapeHtml(breakdown.timeOfDay || '')}</div></div>
+          <div class="stat"><div class="stat-label">Pages</div><div>${(breakdown.pageCount || 0).toFixed(2)}</div></div>
+          ${day ? `<div class="stat"><div class="stat-label">Shoot Day</div><div>D${day.day}${day.date ? ' &middot; ' + escapeHtml(day.date) : ''}</div></div>` : ''}
+          ${cs?.callTimes?.generalCrew ? `<div class="stat"><div class="stat-label">Crew Call</div><div>${escapeHtml(cs.callTimes.generalCrew)}</div></div>` : ''}
+        </div>
+
+        ${(breakdown.characters || []).length ? `<div style="margin-top: 12px; font-size: 12px;"><b>Cast:</b> ${(breakdown.characters || []).map(c => '<span class="tag">' + escapeHtml(c) + '</span>').join('')}</div>` : ''}
+        ${(breakdown.props || []).length ? `<div style="margin-top: 6px; font-size: 12px;"><b>Props:</b> ${(breakdown.props || []).map(c => '<span class="tag">' + escapeHtml(c) + '</span>').join('')}</div>` : ''}
+        ${(breakdown.specialEquipment || []).length ? `<div style="margin-top: 6px; font-size: 12px;"><b style="color: var(--gold);">Special gear:</b> ${(breakdown.specialEquipment || []).map(c => '<span class="tag">' + escapeHtml(c) + '</span>').join('')}</div>` : ''}
+
+        <h4 style="margin: 16px 0 6px; font-size: 12px; letter-spacing: 0.5px; color: var(--gold);">SHOT LIST (in shooting order)</h4>
+        <table style="width: 100%; font-size: 12px;">
+          <thead><tr><th style="text-align: left;">#</th><th>Type</th><th>Angle</th><th>Movement</th><th>Lens</th><th>Description</th><th>Notes</th></tr></thead>
+          <tbody>
+            ${(sc.shots || []).map(sh => `
+              <tr ${sh.highRisk ? 'style="background: rgba(220,38,38,0.06);"' : ''}>
+                <td><b>${escapeHtml(sh.number || '')}</b></td>
+                <td>${escapeHtml(sh.type || '')}</td>
+                <td>${escapeHtml(sh.angle || '')}</td>
+                <td>${escapeHtml(sh.movement || '')}</td>
+                <td>${escapeHtml(sh.lens || '')}</td>
+                <td>${escapeHtml(sh.description || '')}${(sh.specialEquipment || []).length ? '<br/><small style="color: var(--gold);">SPECIAL: ' + escapeHtml(sh.specialEquipment.join(', ')) + '</small>' : ''}</td>
+                <td style="font-size: 11px; color: var(--muted);">${escapeHtml(sh.notes || '')}${sh.highRisk ? '<br/><span class="tag hot">HIGH RISK</span>' : ''}</td>
+              </tr>
+            `).join('')}
+          </tbody>
+        </table>
+
+        <div style="margin-top: 14px; padding: 10px 12px; background: var(--panel-2); border-left: 3px solid var(--gold); border-radius: 4px; font-size: 12px;">
+          <b>On the day:</b> Master shot first, then coverage from wide to close. Allow ~25-35 min per setup including lighting reset.
+          Total estimated time at this scene: <b>${Math.max(45, ((sc.shots || []).length * 30))} minutes</b>.
+        </div>
+      </details>
+    `;}).join('')}
+  `;
+}
+
+function renderOrders(o) {
+  const fmt = n => '$' + Math.round(Number(n) || 0).toLocaleString();
+  $('ordersView').innerHTML = `
+    <div class="stats">
+      <div class="stat" style="border-color: var(--gold);"><div class="stat-label">Grand Total</div><div class="stat-value" style="color: var(--gold);">${fmt(o.grandTotal)}</div></div>
+      <div class="stat"><div class="stat-label">Departments</div><div class="stat-value">${(o.orders || []).length}</div></div>
+      <div class="stat"><div class="stat-label">Line Items</div><div class="stat-value">${o.summary?.totalLineItems || 0}</div></div>
+      <div class="stat"><div class="stat-label">Longest Lead</div><div class="stat-value">${o.summary?.longestLeadTime || 0}<span style="font-size: 13px;">d</span></div></div>
+    </div>
+    ${(o.orders || []).map(po => {
+      const orderDate = new Date(); orderDate.setDate(orderDate.getDate() + 0); // PO date = today as anchor
+      const deliveryDate = new Date(); deliveryDate.setDate(deliveryDate.getDate() + (po.leadTimeDays || 14));
+      const fmtDate = d => d.toLocaleDateString('en-US', { month: 'short', day: 'numeric' });
+      return `
+      <details style="background: var(--panel); border: 1px solid var(--border); border-radius: 10px; padding: 14px; margin-bottom: 6px;">
+        <summary style="cursor: pointer; display: flex; justify-content: space-between; font-weight: 700; gap: 10px; flex-wrap: wrap;">
+          <span>${escapeHtml(po.department)} - <span style="color: var(--muted); font-weight: 400;">${escapeHtml(po.vendor)}</span></span>
+          <span style="color: var(--gold);">${fmt(po.subtotal)} &middot; ${(po.items || []).length} items</span>
+        </summary>
+
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 10px; margin-top: 14px; font-size: 12px;">
+          <div class="stat"><div class="stat-label">Vendor</div><div>${escapeHtml(po.vendor || '')}<br/><small style="color: var(--muted);">${escapeHtml(po.vendorContact || 'Contact TBD')}</small></div></div>
+          <div class="stat"><div class="stat-label">Order By</div><div style="color: var(--gold); font-weight: 700;">${escapeHtml(fmtDate(orderDate))}</div></div>
+          <div class="stat"><div class="stat-label">Delivery</div><div>${escapeHtml(po.deliveryDate || fmtDate(deliveryDate))}</div></div>
+          <div class="stat"><div class="stat-label">Lead Time</div><div>${po.leadTimeDays || '?'} days</div></div>
+          ${po.tax ? `<div class="stat"><div class="stat-label">Tax</div><div>${fmt(po.tax)}</div></div>` : ''}
+        </div>
+
+        <h4 style="margin: 16px 0 6px; font-size: 12px; letter-spacing: 0.5px; color: var(--gold);">LINE ITEMS</h4>
+        <table style="width: 100%; font-size: 12px;">
+          <thead><tr><th style="text-align: left;">Item</th><th>Qty</th><th>Unit</th><th style="text-align: right;">Rate</th><th style="text-align: right;">Total</th><th>Used in</th></tr></thead>
+          <tbody>
+            ${(po.items || []).map(it => `<tr>
+              <td>${escapeHtml(it.description || '')}${it.notes ? '<br/><small style="color: var(--muted);">' + escapeHtml(it.notes) + '</small>' : ''}</td>
+              <td>${it.quantity || ''}</td>
+              <td>${escapeHtml(it.unit || '')}</td>
+              <td style="text-align: right;">${fmt(it.unitPrice)}</td>
+              <td style="text-align: right;"><b>${fmt(it.lineTotal)}</b></td>
+              <td style="font-size: 11px; color: var(--muted);">${escapeHtml((it.scenesUsed || []).slice(0, 5).join(', '))}</td>
+            </tr>`).join('')}
+          </tbody>
+        </table>
+
+        <h4 style="margin: 16px 0 6px; font-size: 12px; letter-spacing: 0.5px; color: var(--gold);">PROCUREMENT WORKFLOW</h4>
+        <table style="width: 100%; font-size: 12px;">
+          <thead><tr><th style="text-align: left; width: 110px;">When</th><th style="text-align: left;">Step</th></tr></thead>
+          <tbody>
+            <tr><td><b>Day 0</b></td><td>Send PO to ${escapeHtml(po.vendor)} (${escapeHtml(po.vendorContact || 'main contact')}) with line items + delivery address</td></tr>
+            <tr><td>+1 day</td><td>Get vendor confirmation; verify pricing, lead times, COI on file</td></tr>
+            <tr><td>+${Math.floor((po.leadTimeDays || 14) / 2)} days</td><td>Mid-point check-in: any backorders? Substitutions?</td></tr>
+            <tr><td>-2 days</td><td>Confirm delivery slot, dock contact, off-load crew available</td></tr>
+            <tr><td><b>Delivery day</b></td><td>Receive + check against PO; flag damaged/missing; sign packing slip; route to dept truck</td></tr>
+            <tr><td>+1 day</td><td>Reconcile PO vs invoice in production accounting</td></tr>
+            <tr><td>Wrap</td><td>Return rentals; pack out purchased items; finalize vendor payment</td></tr>
+          </tbody>
+        </table>
+
+        ${po.deliveryAddress ? `<div style="margin-top: 10px; font-size: 12px; color: var(--muted);"><b>Deliver to:</b> ${escapeHtml(po.deliveryAddress)}</div>` : ''}
+        ${po.notes ? `<div style="margin-top: 8px; padding: 8px 10px; background: var(--panel-2); border-radius: 4px; font-size: 12px;"><b>Notes:</b> ${escapeHtml(po.notes)}</div>` : ''}
+      </details>
+    `;}).join('')}
+  `;
+}
+
+function renderLocations(l) {
+  const fmt = n => '$' + Math.round(Number(n) || 0).toLocaleString();
+  $('locationsView').innerHTML = `
+    <div class="stats">
+      <div class="stat"><div class="stat-label">Locations</div><div class="stat-value">${(l.locations || []).length}</div></div>
+      <div class="stat"><div class="stat-label">Est. Permit Fees</div><div class="stat-value">${fmt(l.summary?.totalEstimatedPermitFees)}</div></div>
+      <div class="stat"><div class="stat-label">Longest Lead</div><div class="stat-value">${l.summary?.longestLeadTime || 0}<span style="font-size: 13px;">d</span></div></div>
+      <div class="stat"><div class="stat-label">Complex</div><div class="stat-value" style="color: var(--red);">${l.summary?.complexLocations || 0}</div></div>
+    </div>
+    ${(l.locations || []).map(loc => {
+      const scenes  = scenesByLocation(loc.name);
+      const elems   = aggregateElements(scenes);
+      const cast    = uniqueChars(scenes);
+      const eighths = totalEighths(scenes) || loc.totalEighths || 0;
+      const days    = [...new Set(scenes.map(s => dayForScene(s.number)?.day).filter(Boolean))];
+      const prep    = locationPrepSteps(loc);
+      return `
+      <details style="background: var(--panel); border: 1px solid var(--border); border-radius: 10px; padding: 14px; margin-bottom: 6px;">
+        <summary style="cursor: pointer; font-weight: 700;">${escapeHtml(loc.name)} <span class="tag ${loc.intExt === 'INT' ? 'int' : 'ext'}">${escapeHtml(loc.intExt || '')}</span> <span style="color: var(--muted); font-weight: 400;">${scenes.length || loc.totalScenes || 0} scenes &middot; ${eighths}/8 &middot; ${days.length} day${days.length === 1 ? '' : 's'}</span></summary>
+
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 10px; margin-top: 14px; font-size: 13px;">
+          <div><div class="stat-label">Permit</div><div>${escapeHtml(loc.permitType || '')}</div><div style="color: var(--muted); font-size: 12px;">${escapeHtml(loc.permitFeeRange || '')} &middot; ${loc.permitLeadTimeDays || '?'}d lead</div></div>
+          <div><div class="stat-label">Insurance</div><div>${escapeHtml(loc.insuranceRequired || '')}</div></div>
+          <div><div class="stat-label">Parking</div><div>Crew ${loc.parking?.crewSpots || '?'} &middot; BC ${loc.parking?.baseCampSpots || '?'}</div></div>
+          <div><div class="stat-label">Power</div><div>${loc.power?.generatorKVA ? loc.power.generatorKVA + ' kVA gen' : 'Shore: ' + (loc.power?.shorePowerAvailable ? 'yes' : 'no')}</div></div>
+          <div><div class="stat-label">Restrooms</div><div>${escapeHtml(loc.restrooms || 'TBD')}</div></div>
+          <div><div class="stat-label">Daily Fee Est.</div><div>${loc.estimatedDailyFee ? '$' + Number(loc.estimatedDailyFee).toLocaleString() : 'TBD'}</div></div>
+        </div>
+
+        ${scenes.length ? `
+          <h4 style="margin: 18px 0 6px; font-size: 13px; letter-spacing: 0.5px; color: var(--gold);">SCENES AT THIS LOCATION (${scenes.length})</h4>
+          <div class="tbl-scroll" style="max-height: 320px;">
+            <table style="width: 100%; font-size: 12px;">
+              <thead><tr><th>#</th><th>Heading</th><th>I/E</th><th>TOD</th><th>Pgs</th><th>Day</th><th>Cast</th><th>Tags</th></tr></thead>
+              <tbody>
+                ${scenes.map(s => {
+                  const day = dayForScene(s.number);
+                  const tags = [];
+                  if ((s.weapons || []).length)  tags.push('<span class="tag hot">WPN</span>');
+                  if ((s.stunts  || []).length)  tags.push('<span class="tag hot">STNT</span>');
+                  if ((s.vfx     || []).length)  tags.push('<span class="tag">VFX</span>');
+                  if ((s.sfx     || []).length)  tags.push('<span class="tag">SFX</span>');
+                  if ((s.vehicles|| []).length)  tags.push('<span class="tag">VEH</span>');
+                  if (s.minorsOnSet)             tags.push('<span class="tag hot">MIN</span>');
+                  return `<tr>
+                    <td><b>${escapeHtml(s.number)}</b></td>
+                    <td>${escapeHtml((s.heading || '').slice(0, 60))}</td>
+                    <td><span class="tag ${s.intExt === 'INT' ? 'int' : 'ext'}">${escapeHtml(s.intExt || '')}</span></td>
+                    <td><span class="tag ${s.timeOfDay === 'NIGHT' ? 'night' : 'day'}">${escapeHtml(s.timeOfDay || '')}</span></td>
+                    <td>${(s.pageCount || 0).toFixed(2)}</td>
+                    <td>${day ? '<b>D' + day.day + '</b>' : '<span style="color: var(--dim);">unsched</span>'}</td>
+                    <td style="font-size: 11px;">${escapeHtml((s.characters || []).slice(0, 3).join(', '))}</td>
+                    <td>${tags.join('')}</td>
+                  </tr>`;
+                }).join('')}
+              </tbody>
+            </table>
+          </div>
+        ` : ''}
+
+        ${days.length ? `<div style="margin-top: 14px; padding: 10px 12px; background: var(--panel-2); border-left: 3px solid var(--gold); border-radius: 4px; font-size: 13px;"><b>Shoot days at this location:</b> ${days.map(d => 'Day ' + d).join(', ')}</div>` : ''}
+
+        ${cast.length ? `<div style="margin-top: 12px;"><div class="stat-label" style="margin-bottom: 4px;">Cast required (${cast.length})</div><div style="font-size: 12px;">${cast.map(c => '<span class="tag">' + escapeHtml(c) + '</span>').join('')}</div></div>` : ''}
+
+        ${Object.entries(elems).filter(([, arr]) => arr.length).length ? `
+          <h4 style="margin: 18px 0 6px; font-size: 13px; letter-spacing: 0.5px; color: var(--gold);">ELEMENTS NEEDED ON SET</h4>
+          <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 10px; font-size: 12px;">
+            ${Object.entries(elems).filter(([, arr]) => arr.length).map(([field, arr]) => `
+              <div style="background: var(--panel-2); padding: 10px; border-radius: 6px;">
+                <div class="stat-label" style="text-transform: uppercase;">${field}</div>
+                <div style="margin-top: 4px;">${arr.slice(0, 12).map(v => '<span class="tag">' + escapeHtml(v) + '</span>').join('')}${arr.length > 12 ? ' <span style="color: var(--dim);">+' + (arr.length - 12) + ' more</span>' : ''}</div>
+              </div>
+            `).join('')}
+          </div>
+        ` : ''}
+
+        <h4 style="margin: 18px 0 6px; font-size: 13px; letter-spacing: 0.5px; color: var(--gold);">PREP WORKFLOW</h4>
+        <table style="width: 100%; font-size: 12px;">
+          <thead><tr><th style="text-align: left; width: 110px;">When</th><th style="text-align: left;">Task</th></tr></thead>
+          <tbody>${prep.map(p => `<tr><td><b>${escapeHtml(p.phase)}</b></td><td>${escapeHtml(p.task)}</td></tr>`).join('')}</tbody>
+        </table>
+
+        ${(loc.scoutChecklist || []).length ? `<h4 style="margin: 18px 0 6px; font-size: 13px; letter-spacing: 0.5px; color: var(--gold);">SCOUT VERIFICATION CHECKLIST</h4><ul style="padding-left: 20px; font-size: 12px;">${loc.scoutChecklist.map(c => '<li>' + escapeHtml(c) + '</li>').join('')}</ul>` : ''}
+
+        ${(loc.soundConcerns || []).length ? `<div style="margin-top: 12px; padding: 8px 10px; background: rgba(212,175,55,0.08); border-radius: 6px; font-size: 12px;"><b style="color: var(--gold);">Sound concerns:</b> ${escapeHtml(loc.soundConcerns.join('; '))}</div>` : ''}
+        ${(loc.redFlags || []).length ? `<div style="margin-top: 8px; padding: 8px 10px; background: rgba(220,38,38,0.08); border-radius: 6px; font-size: 12px;"><b style="color: var(--red);">Red flags:</b> ${escapeHtml(loc.redFlags.join('; '))}</div>` : ''}
+        ${loc.neighborNotification ? `<div style="margin-top: 8px; font-size: 12px; color: var(--muted);"><b>Neighbor notice:</b> ${escapeHtml(loc.neighborNotification.radius || '?')} radius, ${escapeHtml(loc.neighborNotification.form || 'standard')}, ${loc.neighborNotification.leadTimeDays || '?'}d lead</div>` : ''}
+      </details>
+    `;}).join('')}
+  `;
+}
+
+function renderSafety(s) {
+  $('safetyView').innerHTML = `
+    <div class="stats">
+      <div class="stat"><div class="stat-label">Risk Categories</div><div class="stat-value">${s.summary?.totalRiskCategories || 0}</div></div>
+      <div class="stat"><div class="stat-label">High Severity</div><div class="stat-value" style="color: var(--red);">${s.summary?.highSeverity || 0}</div></div>
+      <div class="stat"><div class="stat-label">Est. Insurance</div><div class="stat-value" style="font-size: 14px;">${escapeHtml(s.summary?.estimatedInsurancePremium || 'TBD')}</div></div>
+    </div>
+    ${(s.riskMemos || []).map(rm => {
+      // Map every scene number affected to its shoot day from schedule
+      const sceneDays = (rm.scenesAffected || []).map(num => ({
+        num, day: dayForScene(num)?.day || null,
+        scene: (state.breakdown?.scenes || []).find(b => String(b.number) === String(num))
+      }));
+      const daysAffected = [...new Set(sceneDays.map(x => x.day).filter(Boolean))].sort((a, b) => a - b);
+      return `
+      <details style="background: var(--panel); border: 1px solid var(--border); border-left: 3px solid var(--red); border-radius: 8px; padding: 14px; margin-bottom: 6px;">
+        <summary style="cursor: pointer; font-weight: 700; display: flex; justify-content: space-between; flex-wrap: wrap; gap: 10px;">
+          <span>${escapeHtml(rm.risk)}</span>
+          <span style="font-weight: 400; color: var(--muted); font-size: 13px;">${(rm.scenesAffected || []).length} scenes &middot; ${daysAffected.length} shoot day${daysAffected.length === 1 ? '' : 's'}</span>
+        </summary>
+
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 10px; margin-top: 14px; font-size: 12px;">
+          <div class="stat"><div class="stat-label">Insurance Rider</div><div>${escapeHtml(rm.insuranceRider || 'TBD')}</div></div>
+          <div class="stat"><div class="stat-label">Bulletin</div><div>${escapeHtml(rm.iatsceBulletin || 'IATSE GCSP')}</div></div>
+          <div class="stat"><div class="stat-label">Affected Days</div><div>${daysAffected.length ? daysAffected.map(d => 'D' + d).join(', ') : 'TBD'}</div></div>
+          <div class="stat"><div class="stat-label">Cost Impact</div><div>${escapeHtml(rm.additionalCost || 'TBD')}</div></div>
+        </div>
+
+        ${(rm.requiredPersonnel || []).length ? `
+          <h4 style="margin: 16px 0 6px; font-size: 12px; letter-spacing: 0.5px; color: var(--gold);">REQUIRED PERSONNEL</h4>
+          <div>${rm.requiredPersonnel.map(p => '<span class="tag hot">' + escapeHtml(p) + '</span>').join('')}</div>
+        ` : ''}
+
+        ${(rm.requiredCertifications || []).length ? `
+          <h4 style="margin: 14px 0 6px; font-size: 12px; letter-spacing: 0.5px; color: var(--gold);">REQUIRED CERTIFICATIONS</h4>
+          <ul style="padding-left: 20px; font-size: 12px;">${rm.requiredCertifications.map(c => '<li>' + escapeHtml(c) + '</li>').join('')}</ul>
+        ` : ''}
+
+        ${sceneDays.length ? `
+          <h4 style="margin: 16px 0 6px; font-size: 12px; letter-spacing: 0.5px; color: var(--gold);">AFFECTED SCENES</h4>
+          <table style="width: 100%; font-size: 12px;">
+            <thead><tr><th style="text-align: left;">#</th><th>Heading</th><th>Day</th><th>TOD</th></tr></thead>
+            <tbody>
+              ${sceneDays.map(({ num, day, scene }) => `<tr>
+                <td><b>${escapeHtml(num)}</b></td>
+                <td>${escapeHtml((scene?.heading || '').slice(0, 70))}</td>
+                <td>${day ? '<b>D' + day + '</b>' : '<span style="color: var(--dim);">unsched</span>'}</td>
+                <td>${escapeHtml(scene?.timeOfDay || '')}</td>
+              </tr>`).join('')}
+            </tbody>
+          </table>
+        ` : ''}
+
+        ${(rm.dailyMeetingTopics || []).length ? `
+          <h4 style="margin: 16px 0 6px; font-size: 12px; letter-spacing: 0.5px; color: var(--gold);">DAILY SAFETY MEETING TOPICS</h4>
+          <ul style="padding-left: 20px; font-size: 12px;">${rm.dailyMeetingTopics.map(t => '<li>' + escapeHtml(t) + '</li>').join('')}</ul>
+        ` : ''}
+
+        ${(rm.stopWorkTriggers || []).length ? `
+          <h4 style="margin: 16px 0 6px; font-size: 12px; letter-spacing: 0.5px; color: var(--red);">STOP-WORK TRIGGERS</h4>
+          <ul style="padding-left: 20px; font-size: 12px; color: #fca5a5;">${rm.stopWorkTriggers.map(t => '<li>' + escapeHtml(t) + '</li>').join('')}</ul>
+        ` : ''}
+
+        <h4 style="margin: 16px 0 6px; font-size: 12px; letter-spacing: 0.5px; color: var(--gold);">PROTOCOL ON SHOOT DAY</h4>
+        <table style="width: 100%; font-size: 12px;">
+          <thead><tr><th style="text-align: left; width: 90px;">When</th><th style="text-align: left;">Action</th></tr></thead>
+          <tbody>
+            <tr><td><b>Pre-call</b></td><td>${escapeHtml(rm.requiredPersonnel?.[0] || 'Specialty supervisor')} arrives 1hr before crew call; pre-rig check</td></tr>
+            <tr><td>Crew call</td><td>Mandatory all-hands safety meeting; sign-in sheet; AMPTP bulletin distributed</td></tr>
+            <tr><td>Pre-shot</td><td>Walk-through with stunt/effects coordinator + ${escapeHtml(rm.requiredPersonnel?.[0] || 'safety officer')}; clear set perimeter</td></tr>
+            <tr><td>Roll cameras</td><td>1st AD calls "lock it down" - non-essential personnel cleared; medic ready</td></tr>
+            <tr><td>Post-take</td><td>Safety officer cleared = OK to reset; if STOP-WORK trigger fires, cease immediately + investigate</td></tr>
+            <tr><td>End of day</td><td>Debrief log entry; OSHA 300 if applicable; restock kit; reset for next day</td></tr>
+          </tbody>
+        </table>
+
+        ${(rm.requiredForms || []).length ? `<div style="margin-top: 10px; font-size: 12px; color: var(--muted);"><b>Forms required:</b> ${escapeHtml(rm.requiredForms.join(', '))}</div>` : ''}
+      </details>
+    `;}).join('')}
+    ${s.coiRequirements ? `
+      <h3 style="margin: 22px 0 10px;">Master COI Requirements</h3>
+      <div style="background: var(--panel); border: 1px solid var(--border); border-radius: 10px; padding: 14px; font-size: 13px;">
+        <div><b>General Liability:</b> ${escapeHtml(s.coiRequirements.generalLiability || '')}</div>
+        <div><b>Auto Liability:</b> ${escapeHtml(s.coiRequirements.autoLiability || '')}</div>
+        <div><b>Workers Comp:</b> ${escapeHtml(s.coiRequirements.workersComp || '')}</div>
+        <div><b>Umbrella:</b> ${escapeHtml(s.coiRequirements.umbrella || '')}</div>
+        ${(s.coiRequirements.additionalInsureds || []).length ? '<div style="margin-top: 6px;"><b>Additional insureds:</b> ' + escapeHtml(s.coiRequirements.additionalInsureds.join(', ')) + '</div>' : ''}
+        ${(s.coiRequirements.specialRiders || []).length ? '<div style="margin-top: 6px;"><b>Special riders:</b> ' + escapeHtml(s.coiRequirements.specialRiders.join(', ')) + '</div>' : ''}
+      </div>
+    ` : ''}
+  `;
+}
+
+function renderPost(p) {
+  const fmt = n => '$' + Math.round(Number(n) || 0).toLocaleString();
+  $('postView').innerHTML = `
+    <div class="stats">
+      <div class="stat" style="border-color: var(--gold);"><div class="stat-label">Total Post Budget</div><div class="stat-value" style="color: var(--gold);">${fmt(p.summary?.totalPostBudget)}</div></div>
+      <div class="stat"><div class="stat-label">Post Months</div><div class="stat-value">${p.summary?.estimatedPostMonths || 0}</div></div>
+      <div class="stat"><div class="stat-label">VFX Shots</div><div class="stat-value">${p.vfx?.shotCount || 0}</div></div>
+      <div class="stat"><div class="stat-label">Mix Format</div><div class="stat-value" style="font-size: 13px;">${escapeHtml((p.sound?.mixFormat || []).join(', ') || 'TBD')}</div></div>
+    </div>
+    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 12px; margin-bottom: 18px;">
+      ${p.schedule ? `<div class="stat"><div class="stat-label">Locked Picture</div><div style="font-size: 14px; margin-top: 4px;">${escapeHtml(p.schedule.lockedPicture || 'TBD')}</div></div>` : ''}
+      ${p.schedule ? `<div class="stat"><div class="stat-label">VFX Turnover</div><div style="font-size: 14px; margin-top: 4px;">${escapeHtml(p.schedule.vfxTurnover || 'TBD')}</div></div>` : ''}
+      ${p.schedule ? `<div class="stat"><div class="stat-label">Final Delivery</div><div style="font-size: 14px; margin-top: 4px;">${escapeHtml(p.schedule.finalDelivery || 'TBD')}</div></div>` : ''}
+    </div>
+    ${['editorial','vfx','color','sound','music'].map(dept => p[dept] ? `
+      <details style="background: var(--panel); border: 1px solid var(--border); border-radius: 10px; padding: 14px; margin-bottom: 6px;">
+        <summary style="cursor: pointer; display: flex; justify-content: space-between; font-weight: 700;">
+          <span style="text-transform: capitalize;">${dept}</span>
+          <span style="color: var(--gold);">${fmt(p[dept].estimatedCost)}</span>
+        </summary>
+        <pre style="font-size: 12px; margin-top: 10px; white-space: pre-wrap; color: var(--muted);">${escapeHtml(JSON.stringify(p[dept], null, 2))}</pre>
+      </details>
+    ` : '').join('')}
+    ${(p.deliverables || []).length ? `
+      <h3 style="margin: 22px 0 10px;">Deliverables</h3>
+      <table style="width: 100%; font-size: 12px;"><thead><tr><th style="text-align: left;">Distributor</th><th>Format</th><th>Specs</th><th>Due</th></tr></thead><tbody>
+      ${p.deliverables.map(d => `<tr><td><b>${escapeHtml(d.distributor || '')}</b></td><td>${escapeHtml(d.format || '')}</td><td style="font-size: 11px;">${escapeHtml((d.specs || []).join(', '))}</td><td>${escapeHtml(d.dueDate || '')}</td></tr>`).join('')}
+      </tbody></table>
+    ` : ''}
+  `;
+}
+
+// ─── Run budget (async) ──────────────────────────────────────
+async function runBudget() {
+  if (!state.breakdown) { setStatus('Run breakdown first.', 'err'); return; }
+  $('budgetView').innerHTML = '<p style="color: var(--muted);"><span class="spinner"></span> Queuing budget job...</p>';
+  try {
+    const r = await fetch('/.netlify/functions/script-budget', {
+      method: 'POST',
+      headers: { 'content-type': 'application/json' },
+      body: JSON.stringify({
+        projectId: state.projectId,
+        breakdown: state.breakdown,
+        schedule: state.schedule,
+        title: state.breakdown?.title || $('titleInput').value,
+        context: {
+          budgetTier: $('tierInput').value,
+          customBudget: $('tierInput').value === 'custom' ? Number($('customBudgetInput').value) || null : null,
+          union: $('unionInput').value,
+          shootState: $('stateInput').value || 'unspecified',
+          region: 'US'
+        }
+      })
+    });
+    const start = await r.json();
+    if (!start.ok || !start.jobId) throw new Error(start.error || 'failed to queue');
+    const budget = await pollJob(start.jobId, (p) => {
+      $('budgetView').innerHTML = '<p style="color: var(--muted);"><span class="spinner"></span> ' + escapeHtml(p || 'processing') + '...</p>';
+    }, 'budget');
+    state.budget = budget;
+    renderBudget(budget);
+    if (typeof renderWorkflow === 'function') renderWorkflow();
+  } catch (e) {
+    $('budgetView').innerHTML = '<div class="status err active">Budget failed: ' + escapeHtml(e.message) + '</div>';
+  }
+}
+
+// ─── Renderers ───────────────────────────────────────────────
+function render(b) {
+  const totalEighths = (b.scenes || []).reduce((s, sc) => s + (sc.eighths || 0), 0);
+  const totalPages = totalEighths / 8;
+  const nightCount = (b.scenes || []).filter(s => s.timeOfDay === 'NIGHT').length;
+  const extCount = (b.scenes || []).filter(s => s.intExt === 'EXT').length;
+
+  $('overview').innerHTML = `
+    <div class="stats">
+      <div class="stat"><div class="stat-label">Scenes</div><div class="stat-value">${b.scenes.length}</div></div>
+      <div class="stat"><div class="stat-label">Pages</div><div class="stat-value">${totalPages.toFixed(2)}</div><div class="stat-sub">${totalEighths}/8 total</div></div>
+      <div class="stat"><div class="stat-label">Characters</div><div class="stat-value">${b.characters.length}</div></div>
+      <div class="stat"><div class="stat-label">Locations</div><div class="stat-value">${(b.locations || []).length}</div></div>
+      <div class="stat"><div class="stat-label">Night scenes</div><div class="stat-value">${nightCount}</div></div>
+      <div class="stat"><div class="stat-label">Exterior scenes</div><div class="stat-value">${extCount}</div></div>
+      <div class="stat"><div class="stat-label">Runtime</div><div class="stat-value">~${b.estimatedRuntimeMinutes || Math.round(totalPages)}<span style="font-size: 14px; color: var(--muted);">min</span></div></div>
+      <div class="stat"><div class="stat-label">Format</div><div class="stat-value" style="font-size: 16px;">${(b.format || '').toUpperCase()}</div></div>
+    </div>
+    ${b.logline ? '<div style="background: var(--panel); border: 1px solid var(--border); border-radius: 10px; padding: 16px; margin-bottom: 16px;"><div class="stat-label">Logline</div><div style="margin-top: 6px; font-size: 15px;">' + escapeHtml(b.logline) + '</div></div>' : ''}
+  `;
+
+  // Scenes table
+  const scenesTbody = document.querySelector('#scenesTable tbody');
+  scenesTbody.innerHTML = (b.scenes || []).map(s => {
+    const tags = [];
+    if ((s.weapons || []).length) tags.push('<span class="tag hot">WEAPON</span>');
+    if ((s.stunts || []).length) tags.push('<span class="tag hot">STUNT</span>');
+    if ((s.vfx || []).length) tags.push('<span class="tag">VFX</span>');
+    if ((s.sfx || []).length) tags.push('<span class="tag">SFX</span>');
+    if ((s.vehicles || []).length) tags.push('<span class="tag">VEH</span>');
+    if ((s.animals || []).length) tags.push('<span class="tag hot">ANIMAL</span>');
+    if (s.minorsOnSet) tags.push('<span class="tag hot">MINOR</span>');
+    if ((s.specialEquipment || []).length) tags.push('<span class="tag">GEAR</span>');
+    return `<tr>
+      <td><b>${escapeHtml(s.number)}</b></td>
+      <td>${escapeHtml(s.heading)}</td>
+      <td>${escapeHtml(s.location)}</td>
+      <td><span class="tag ${s.intExt === 'INT' ? 'int' : 'ext'}">${escapeHtml(s.intExt)}</span></td>
+      <td><span class="tag ${s.timeOfDay === 'NIGHT' ? 'night' : 'day'}">${escapeHtml(s.timeOfDay)}</span></td>
+      <td>${(s.pageCount || 0).toFixed(2)}<br><small style="color: var(--dim);">${s.eighths}/8</small></td>
+      <td style="font-size: 11px;">${(s.characters || []).map(escapeHtml).join(', ')}</td>
+      <td>${tags.join('')}</td>
+    </tr>`;
+  }).join('');
+
+  // Characters table
+  document.querySelector('#charTable tbody').innerHTML = (b.characters || []).map(c => `
+    <tr>
+      <td><b>${escapeHtml(c.name)}</b>${c.minor ? ' <span class="tag hot">MINOR</span>' : ''}</td>
+      <td><span class="tag">${escapeHtml(c.type || '')}</span></td>
+      <td>${escapeHtml(c.age || '')}</td>
+      <td>${c.sceneCount || 0}</td>
+      <td>${c.dialogueLineCount || 0}</td>
+      <td>${escapeHtml(c.firstScene || '')}</td>
+      <td>${escapeHtml(c.lastScene || '')}</td>
+      <td style="font-size: 11px;">${(c.specialSkillsRequired || []).map(escapeHtml).join(', ')}</td>
+    </tr>
+  `).join('');
+
+  // Locations
+  $('locView').innerHTML = '<div style="display: grid; gap: 10px;">' + (b.locations || []).map(l => `
+    <div style="background: var(--panel); border: 1px solid var(--border); border-radius: 10px; padding: 14px;">
+      <div style="display: flex; justify-content: space-between; align-items: center;">
+        <div>
+          <b>${escapeHtml(l.name)}</b>
+          <span class="tag">${escapeHtml(l.type || '')}</span>
+          <span class="tag ${l.intExt === 'INT' ? 'int' : 'ext'}">${escapeHtml(l.intExt || '')}</span>
+          <span class="tag ${l.complexity === 'high' ? 'hot' : ''}">${escapeHtml(l.complexity || '')} complexity</span>
+        </div>
+        <div style="color: var(--muted); font-size: 13px;">${(l.scenes || []).length} scenes &bull; ${l.totalEighths || 0}/8</div>
+      </div>
+      ${(l.permitRequirements || []).length ? '<div style="margin-top: 8px; font-size: 12px; color: var(--muted);">Permits: ' + l.permitRequirements.map(escapeHtml).join(', ') + '</div>' : ''}
+    </div>
+  `).join('') + '</div>';
+
+  // Flags
+  const pf = b.productionFlags || {};
+  const flagList = [
+    ['hasMinors', 'Minors on set'], ['hasStunts', 'Stunts'], ['hasFirearms', 'Firearms'],
+    ['hasAnimals', 'Animals'], ['hasVfx', 'Visual Effects'], ['hasNightWork', 'Night work'],
+    ['hasWaterWork', 'Water work'], ['hasVehicleAction', 'Vehicle action'], ['hasIntimacy', 'Intimacy scenes']
+  ];
+  $('flagsView').innerHTML = `
+    <div class="flag-grid">
+      ${flagList.map(([k, label]) => `
+        <div class="flag ${pf[k] ? 'flag-on' : 'flag-off'}">
+          <span>${label}</span>
+          <span class="flag-dot"></span>
+        </div>
+      `).join('')}
+    </div>
+    ${(pf.unionConsiderations || []).length ? '<div style="margin-top: 18px;"><div class="stat-label">Union considerations</div><ul style="margin-top: 8px; padding-left: 20px; color: var(--muted); font-size: 13px;">' + pf.unionConsiderations.map(u => '<li>' + escapeHtml(u) + '</li>').join('') + '</ul></div>' : ''}
+  `;
+
+  $('rawJson').textContent = JSON.stringify(b, null, 2);
+}
+
+function renderSchedule(s) {
+  const sum = s.summary || {};
+  const dayCards = (s.days || []).map(d => {
+    const fullScenes = (d.scenes || []).map(sc => {
+      const full = (state.breakdown?.scenes || []).find(b => String(b.number) === String(sc.number));
+      return full ? { ...sc, ...full } : sc;
+    });
+    const elems = aggregateElements(fullScenes);
+    const cs = callsheetForDay(d.day);
+    const elemRows = Object.entries(elems).filter(([, arr]) => arr.length);
+
+    return `
+      <details style="background: var(--panel); border: 1px solid var(--border); border-radius: 10px; padding: 14px; margin-bottom: 6px;">
+        <summary style="cursor: pointer; font-weight: 700; display: flex; justify-content: space-between; align-items: center; gap: 10px; flex-wrap: wrap;">
+          <span><b style="color: var(--gold); font-size: 18px;">DAY ${d.day}</b> &middot; ${escapeHtml(d.date || 'TBD')} &middot; ${escapeHtml(d.location || '')}</span>
+          <span style="font-weight: 400; color: var(--muted); font-size: 13px;">
+            <span class="tag ${d.intExt === 'INT' ? 'int' : 'ext'}">${escapeHtml(d.intExt || '')}</span>
+            <span class="tag ${d.timeOfDay === 'NIGHT' ? 'night' : 'day'}">${escapeHtml(d.timeOfDay || '')}</span>
+            ${(d.totalPages || (d.totalEighths || 0) / 8 || 0).toFixed(2)} pgs
+            ${d.minorHours ? ' <span class="tag hot">MINOR HRS</span>' : ''}
+          </span>
+        </summary>
+
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(170px, 1fr)); gap: 10px; margin-top: 14px; font-size: 13px;">
+          <div class="stat"><div class="stat-label">Crew Call</div><div style="font-size: 18px; font-weight: 700; color: var(--gold);">${escapeHtml(d.estimatedCallTime || cs?.callTimes?.generalCrew || 'TBD')}</div></div>
+          <div class="stat"><div class="stat-label">Estimated Wrap</div><div style="font-size: 16px; font-weight: 700;">${escapeHtml(d.estimatedWrapTime || 'TBD')}</div></div>
+          <div class="stat"><div class="stat-label">Total Pages</div><div style="font-size: 18px; font-weight: 700;">${(d.totalPages || (d.totalEighths || 0) / 8 || 0).toFixed(2)}</div></div>
+          <div class="stat"><div class="stat-label">Setups (est)</div><div style="font-size: 18px; font-weight: 700;">${fullScenes.reduce((sum, sc) => sum + (shotsForScene(sc.number).length || 4), 0)}</div></div>
+        </div>
+
+        ${(d.castCalled || []).length ? `
+          <h4 style="margin: 16px 0 6px; font-size: 12px; letter-spacing: 0.5px; color: var(--gold);">CAST CALLED</h4>
+          <div>${d.castCalled.map(c => '<span class="tag">' + escapeHtml(c) + '</span>').join('')}</div>
+        ` : ''}
+
+        <h4 style="margin: 18px 0 6px; font-size: 12px; letter-spacing: 0.5px; color: var(--gold);">SCENES THIS DAY (${fullScenes.length})</h4>
+        <div class="tbl-scroll" style="max-height: 320px;">
+          <table style="width: 100%; font-size: 12px;">
+            <thead><tr><th>#</th><th>Heading</th><th>Pgs</th><th>Cast</th><th>Props</th><th>Tags</th></tr></thead>
+            <tbody>
+              ${fullScenes.map(sc => {
+                const tags = [];
+                if ((sc.weapons || []).length)  tags.push('<span class="tag hot">WPN</span>');
+                if ((sc.stunts  || []).length)  tags.push('<span class="tag hot">STNT</span>');
+                if ((sc.vfx     || []).length)  tags.push('<span class="tag">VFX</span>');
+                if ((sc.sfx     || []).length)  tags.push('<span class="tag">SFX</span>');
+                if ((sc.vehicles|| []).length)  tags.push('<span class="tag">VEH</span>');
+                if (sc.minorsOnSet)             tags.push('<span class="tag hot">MIN</span>');
+                return `<tr>
+                  <td><b>${escapeHtml(sc.number)}</b></td>
+                  <td>${escapeHtml((sc.heading || '').slice(0, 60))}</td>
+                  <td>${(sc.pageCount || 0).toFixed(2)}</td>
+                  <td style="font-size: 11px;">${escapeHtml((sc.characters || []).slice(0, 4).join(', '))}</td>
+                  <td style="font-size: 11px;">${escapeHtml((sc.props || []).slice(0, 4).join(', '))}</td>
+                  <td>${tags.join('')}</td>
+                </tr>`;
+              }).join('')}
+            </tbody>
+          </table>
+        </div>
+
+        ${elemRows.length ? `
+          <h4 style="margin: 18px 0 6px; font-size: 12px; letter-spacing: 0.5px; color: var(--gold);">ALL ELEMENTS THIS DAY</h4>
+          <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 10px; font-size: 12px;">
+            ${elemRows.map(([field, arr]) => `
+              <div style="background: var(--panel-2); padding: 10px; border-radius: 6px;">
+                <div class="stat-label" style="text-transform: uppercase;">${field}</div>
+                <div style="margin-top: 4px;">${arr.slice(0, 8).map(v => '<span class="tag">' + escapeHtml(v) + '</span>').join('')}${arr.length > 8 ? ' <span style="color: var(--dim);">+' + (arr.length - 8) + '</span>' : ''}</div>
+              </div>
+            `).join('')}
+          </div>
+        ` : ''}
+
+        <h4 style="margin: 18px 0 6px; font-size: 12px; letter-spacing: 0.5px; color: var(--gold);">SHOOT DAY TIMELINE</h4>
+        <table style="width: 100%; font-size: 12px;">
+          <thead><tr><th style="text-align: left; width: 90px;">Time</th><th style="text-align: left;">Event</th></tr></thead>
+          <tbody>
+            <tr><td><b>${escapeHtml(d.estimatedCallTime || cs?.callTimes?.generalCrew || '06:00')}</b></td><td>General crew call - safety meeting + breakfast</td></tr>
+            <tr><td>+15 min</td><td>Dept heads walk set, blocking review with director + DP</td></tr>
+            <tr><td>+45 min</td><td>First lighting setup (gaffer + grips); cast in MU/wardrobe</td></tr>
+            <tr><td>+90 min</td><td>Rehearsal on set with actors; final blocking; sound check</td></tr>
+            <tr><td>+2h</td><td><b>First shot called</b></td></tr>
+            <tr><td>~mid-day</td><td>Lunch (IATSE 6-hr rule: must break before hour 6 or pay meal penalty)</td></tr>
+            <tr><td>${escapeHtml(d.estimatedWrapTime || '~12h after call')}</td><td><b>Wrap</b> - struck set, equipment loaded, dailies sent</td></tr>
+            ${d.minorHours ? '<tr><td colspan="2" style="color: var(--red);"><b>Minor hours apply</b> - max 9.5 hrs on set incl. 1 hr meal + 3 hrs school. Studio teacher required.</td></tr>' : ''}
+          </tbody>
+        </table>
+
+        ${(d.specialRequirements || []).length ? `<div style="margin-top: 12px; padding: 8px 10px; background: rgba(212,175,55,0.08); border-radius: 6px; font-size: 12px;"><b style="color: var(--gold);">Special requirements:</b> ${escapeHtml(d.specialRequirements.join('; '))}</div>` : ''}
+        ${d.notes ? `<div style="margin-top: 8px; font-size: 12px; color: var(--muted);"><b>Notes:</b> ${escapeHtml(d.notes)}</div>` : ''}
+      </details>
+    `;
+  }).join('');
+
+  $('scheduleView').innerHTML = `
+    <div class="stats">
+      <div class="stat"><div class="stat-label">Shoot Days</div><div class="stat-value">${sum.totalShootDays || s.days?.length || 0}</div></div>
+      <div class="stat"><div class="stat-label">Avg Pages/Day</div><div class="stat-value">${((sum.avgEighthsPerDay || 0) / 8).toFixed(1)}</div></div>
+      <div class="stat"><div class="stat-label">Locations</div><div class="stat-value">${sum.totalLocations || 0}</div></div>
+      <div class="stat"><div class="stat-label">Company Moves</div><div class="stat-value">${sum.totalCompanyMoves || 0}</div></div>
+      <div class="stat"><div class="stat-label">Night Shoots</div><div class="stat-value">${sum.nightShoots || 0}</div></div>
+    </div>
+    ${dayCards}
+    ${(s.dayOutOfDays || []).length ? `
+      <h3 style="margin-top: 24px; margin-bottom: 10px; font-size: 18px;">Day-out-of-Days</h3>
+      <div class="tbl-scroll"><table><thead><tr>
+        <th>Character</th><th>Start</th><th>End</th><th>Work Days</th><th>Hold</th><th>Total</th>
+      </tr></thead><tbody>
+      ${s.dayOutOfDays.map(d => `
+        <tr>
+          <td><b>${escapeHtml(d.character)}</b></td>
+          <td>D${d.startDay}</td>
+          <td>D${d.endDay}</td>
+          <td style="font-size: 11px;">${(d.workDays || []).map(x => 'D' + x).join(', ')}</td>
+          <td style="color: var(--muted); font-size: 11px;">${(d.holdDays || []).map(x => 'D' + x).join(', ')}</td>
+          <td>${d.totalWorkDays || (d.workDays || []).length}</td>
+        </tr>
+      `).join('')}
+      </tbody></table></div>
+    ` : ''}
+  `;
+}
+
+function renderBudget(b) {
+  const t = b.topSheet || {};
+  $('budgetView').innerHTML = `
+    <div class="stats">
+      <div class="stat"><div class="stat-label">Grand total</div><div class="stat-value" style="color: var(--gold);">$${fmt(t.grandTotal)}</div><div class="stat-sub">${t.tier} tier</div></div>
+      <div class="stat"><div class="stat-label">ATL</div><div class="stat-value">$${fmt(t.atlTotal)}</div></div>
+      <div class="stat"><div class="stat-label">BTL Production</div><div class="stat-value">$${fmt(t.btlProductionTotal)}</div></div>
+      <div class="stat"><div class="stat-label">BTL Post</div><div class="stat-value">$${fmt(t.btlPostTotal)}</div></div>
+      <div class="stat"><div class="stat-label">Other</div><div class="stat-value">$${fmt(t.otherTotal)}</div></div>
+      <div class="stat"><div class="stat-label">Contingency</div><div class="stat-value">$${fmt(t.contingencyAmount)}</div><div class="stat-sub">${t.contingencyPct}%</div></div>
+    </div>
+
+    ${(b.categories || []).map(cat => `
+      <details style="background: var(--panel); border: 1px solid var(--border); border-radius: 10px; padding: 14px; margin-bottom: 8px;">
+        <summary style="cursor: pointer; display: flex; justify-content: space-between; align-items: center; font-weight: 700;">
+          <span><span class="tag">${escapeHtml(cat.section)}</span> ${escapeHtml(cat.name)}</span>
+          <span style="color: var(--gold);">$${fmt(cat.subtotal)}</span>
+        </summary>
+        <table style="margin-top: 12px;"><thead><tr>
+          <th>Line</th><th style="text-align: right;">Qty</th><th>Unit</th><th style="text-align: right;">Rate</th><th style="text-align: right;">Total</th><th>Notes</th>
+        </tr></thead><tbody>
+        ${(cat.lineItems || []).map(li => `
+          <tr>
+            <td>${escapeHtml(li.description)}</td>
+            <td style="text-align: right;">${li.quantity || ''}</td>
+            <td>${escapeHtml(li.unit || '')}</td>
+            <td style="text-align: right;">$${fmt(li.rate)}</td>
+            <td style="text-align: right;"><b>$${fmt(li.total)}</b></td>
+            <td style="color: var(--muted); font-size: 11px;">${escapeHtml(li.notes || '')}</td>
+          </tr>
+        `).join('')}
+        </tbody></table>
+      </details>
+    `).join('')}
+
+    ${(b.risks || []).length ? `
+      <h3 style="margin-top: 24px; margin-bottom: 10px; font-size: 18px;">Production risks</h3>
+      <div style="display: grid; gap: 10px;">
+      ${b.risks.map(r => `
+        <div style="background: var(--panel); border: 1px solid var(--border); border-left: 3px solid var(--red); border-radius: 8px; padding: 12px;">
+          <b>${escapeHtml(r.risk)}</b>
+          <div style="color: var(--muted); font-size: 13px; margin-top: 4px;"><b>Insurance:</b> ${escapeHtml(r.insuranceImpact || '')}</div>
+          <div style="color: var(--muted); font-size: 13px;"><b>Mitigation:</b> ${escapeHtml(r.mitigation || '')}</div>
+        </div>
+      `).join('')}
+      </div>
+    ` : ''}
+
+    ${(b.assumptions || []).length ? `
+      <h3 style="margin-top: 24px; margin-bottom: 10px; font-size: 18px;">Assumptions</h3>
+      <ul style="padding-left: 20px; color: var(--muted); font-size: 13px;">
+      ${b.assumptions.map(a => '<li>' + escapeHtml(a) + '</li>').join('')}
+      </ul>
+    ` : ''}
+  `;
+}
+
+// ─── Utils ───────────────────────────────────────────────────
+function setStatus(html, cls) {
+  const s = $('status');
+  s.innerHTML = html;
+  s.className = 'status' + (cls ? ' active ' + cls : '');
+}
+function escapeHtml(s) { return String(s ?? '').replace(/[&<>"']/g, c => ({ '&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;' }[c])); }
+function fmt(n) { if (n == null || isNaN(n)) return '0'; return Math.round(Number(n)).toLocaleString('en-US'); }
+
+// ─── Sample script (ultra-short for quick tests) ─────────────
+const SAMPLE_SCRIPT = `FADE IN:
+
+INT. DINER - DAY
+
+A greasy spoon on the edge of town. RAIN pours outside. MARIA (30s, sharp-eyed, ex-cop) sits at the counter nursing coffee. Her cell phone rings. She stares at it.
+
+MARIA
+(to herself)
+Don't answer it. Don't.
+
+She answers it.
+
+MARIA (CONT'D)
+What.
+
+JAKE (V.O.)
+(urgent)
+They know. You need to run.
+
+Maria drops the cup. Coffee everywhere. She bolts for the door.
+
+EXT. DINER PARKING LOT - CONTINUOUS
+
+Maria sprints to a beat-up CHEVY. A BLACK SUV screeches in, blocking her. Two MEN IN SUITS exit, guns drawn.
+
+MAN IN SUIT
+Ms. Vargas. Let's talk.
+
+Maria reaches for her waistband. BANG. She fires first. Glass shatters.
+
+INT. MARIA'S APARTMENT - NIGHT
+
+A dim room. Maria packs a go-bag. Cash. Passport. A photo of a LITTLE GIRL (8) - her daughter, EMMA.
+
+EMMA (O.S.)
+Mama?
+
+Maria freezes. Emma stands in the doorway, clutching a stuffed bear.
+
+MARIA
+Baby, we have to go. Now.
+
+FADE OUT.`;
+
+// ═════════════════════════════════════════════════════════════════════
+// PAST PROJECTS VAULT
+// Loads jobs from /script-jobs (admin-gated), renders cards. Clicking a
+// card hydrates state + renders the existing tabs. No separate viewer.
+// ═════════════════════════════════════════════════════════════════════
+async function loadVault() {
+  const grid  = document.getElementById('vaultGrid');
+  const empty = document.getElementById('vaultEmpty');
+  if (!grid) return;
+  grid.innerHTML = '<div style="grid-column: 1 / -1; color: var(--muted); padding: 20px; text-align: center;"><span class="spinner"></span> Loading projects...</div>';
+  empty.style.display = 'none';
+  try {
+    const r = await fetch('/.netlify/functions/script-jobs?limit=50', { credentials: 'include' });
+    const j = await r.json();
+    if (!r.ok || !j.ok) throw new Error(j.error || ('HTTP ' + r.status));
+    renderVault(j.projects || []);
+  } catch (e) {
+    grid.innerHTML = '<div style="grid-column: 1 / -1; color: #fca5a5; padding: 20px; text-align: center;">Failed to load: ' + escapeHtml(e.message) + '</div>';
+  }
+}
+
+function renderVault(projects) {
+  const grid  = document.getElementById('vaultGrid');
+  const empty = document.getElementById('vaultEmpty');
+  if (!projects.length) { grid.innerHTML = ''; empty.style.display = 'block'; return; }
+  empty.style.display = 'none';
+
+  const pill = (label, j) => {
+    if (!j) return '<span class="vc-pill dim">' + label + '</span>';
+    const cls = j.status === 'complete' ? 'ok' : j.status === 'error' ? 'err' : 'run';
+    return '<span class="vc-pill ' + cls + '">' + label + '</span>';
+  };
+
+  grid.innerHTML = projects.map(p => {
+    const dt = new Date(p.lastActivity);
+    const when = dt.toLocaleString(undefined, { month: 'short', day: 'numeric', hour: 'numeric', minute: '2-digit' });
+    return `
+      <div class="vault-card" data-pid="${escapeHtml(p.project_id)}">
+        <div class="vc-title">${escapeHtml(p.title || 'Untitled')}</div>
+        <div class="vc-time">${escapeHtml(when)}</div>
+        <div class="vc-pills">
+          ${pill('Breakdown', p.dissect)}
+          ${pill('Schedule',  p.schedule)}
+          ${pill('Budget',    p.budget)}
+          ${pill('Calls',     p.callsheet)}
+          ${pill('Shots',     p.shotlist)}
+          ${pill('POs',       p.orders)}
+          ${pill('Loc',       p.locations)}
+          ${pill('Safety',    p.safety)}
+          ${pill('Post',      p.post)}
+        </div>
+      </div>
+    `;
+  }).join('');
+
+  grid.querySelectorAll('.vault-card').forEach(card => {
+    card.addEventListener('click', () => loadProject(card.dataset.pid, projects.find(p => p.project_id === card.dataset.pid)));
+  });
+}
+
+// Click a card -> fetch every completed deliverable + hydrate state -> render
+async function loadProject(projectId, project) {
+  if (!project) return;
+  setStatus('<span class="spinner"></span> Loading "' + escapeHtml(project.title || 'Untitled') + '" from vault...', 'info');
+  state.projectId = projectId;
+
+  const KIND_TO_FIELD = {
+    dissect: 'breakdown', schedule: 'schedule', budget: 'budget', callsheet: 'callsheet',
+    shotlist: 'shotlist', orders: 'orders', locations: 'locations', safety: 'safety', post: 'post'
+  };
+
+  const fetches = [];
+  for (const kind of Object.keys(KIND_TO_FIELD)) {
+    const job = project[kind];
+    if (job && job.status === 'complete' && job.job_id) {
+      fetches.push(
+        fetch('/.netlify/functions/script-result?jobId=' + encodeURIComponent(job.job_id))
+          .then(r => r.json())
+          .then(j => ({ kind, payload: j[KIND_TO_FIELD[kind]] }))
+          .catch(() => ({ kind, payload: null }))
+      );
+    }
+  }
+
+  const results = await Promise.all(fetches);
+  for (const { kind, payload } of results) {
+    if (!payload) continue;
+    const field = KIND_TO_FIELD[kind];
+    state[field] = payload;
+  }
+
+  // Render whatever is loaded.
+  if (state.breakdown) {
+    render(state.breakdown);
+    document.getElementById('results').style.display = 'block';
+    if (typeof renderSchedule  === 'function' && state.schedule)  renderSchedule(state.schedule);
+    if (typeof renderBudget    === 'function' && state.budget)    renderBudget(state.budget);
+    if (typeof renderCallsheet === 'function' && state.callsheet) renderCallsheet(state.callsheet);
+    if (typeof renderShotlist  === 'function' && state.shotlist)  renderShotlist(state.shotlist);
+    if (typeof renderOrders    === 'function' && state.orders)    renderOrders(state.orders);
+    if (typeof renderLocations === 'function' && state.locations) renderLocations(state.locations);
+    if (typeof renderSafety    === 'function' && state.safety)    renderSafety(state.safety);
+    if (typeof renderPost      === 'function' && state.post)      renderPost(state.post);
+    if (typeof renderWorkflow  === 'function')                    renderWorkflow();
+    document.getElementById('results').scrollIntoView({ behavior: 'smooth', block: 'start' });
+    setStatus('Loaded "' + escapeHtml(state.breakdown.title || 'project') + '" - ' + (state.breakdown.scenes?.length || 0) + ' scenes. Switch tabs above to view all loaded deliverables.', 'ok');
+  } else {
+    setStatus('No completed breakdown found in this project.', 'err');
+  }
+}
+
+document.addEventListener('click', (e) => {
+  if (e.target && e.target.id === 'vaultRefresh') { e.preventDefault(); loadVault(); }
+});
+</script>
+
+<style id="mc-form-styles">
+.mc-contact{background:linear-gradient(135deg,#050919 0%,#0A1628 60%,#0d1b27 100%);padding:64px 0;border-top:1px solid #2a2a2a;margin-top:0}
+.mc-contact-inner{max-width:1100px;margin:0 auto;padding:0 24px;display:grid;grid-template-columns:1fr 1fr;gap:56px;align-items:start}
+.mc-contact-left h2{font-family:'Bebas Neue',Barlow,-apple-system,sans-serif;font-size:clamp(1.8rem,4vw,2.8rem);font-weight:400;letter-spacing:.03em;color:#fff;margin:0 0 14px;line-height:1.1}
+.mc-contact-left h2 em{color:#C9A84C;font-style:normal}
+.mc-contact-left p{font-size:.92rem;color:#94A3B8;line-height:1.8;margin:0 0 24px}
+.mc-contact-proof{display:flex;flex-direction:column;gap:10px;margin-bottom:28px}
+.mc-contact-proof-item{display:flex;align-items:center;gap:10px;font-size:.85rem;color:#94A3B8}
+.mc-contact-proof-item span:first-child{color:#C9A84C;font-weight:700;font-size:1rem;flex-shrink:0}
+.mc-contact-direct{background:rgba(201,168,76,.08);border:1px solid rgba(201,168,76,.2);border-radius:8px;padding:14px 18px}
+.mc-contact-direct p{font-size:.75rem;color:#666;text-transform:uppercase;letter-spacing:.08em;margin:0 0 6px}
+.mc-contact-direct a{color:#C9A84C;font-weight:700;text-decoration:none;font-size:.88rem}
+.mc-form-card{background:#111;border:1px solid #2a2a2a;border-radius:12px;padding:28px}
+.mc-form-card h3{font-size:1.05rem;font-weight:700;color:#fff;margin:0 0 4px}
+.mc-form-card>p{font-size:.82rem;color:#64748B;margin:0 0 20px}
+.mc-field{margin-bottom:12px}
+.mc-field input,.mc-field textarea,.mc-field select{width:100%;padding:12px 14px;background:#1a1a1a;border:1px solid #2a2a2a;border-radius:6px;color:#e8e8e8;font-size:.88rem;font-family:inherit;box-sizing:border-box;transition:border-color .2s;outline:none}
+.mc-field input:focus,.mc-field textarea:focus,.mc-field select:focus{border-color:#C9A84C}
+.mc-field input::placeholder,.mc-field textarea::placeholder{color:#3a3a3a}
+.mc-field textarea{resize:vertical;min-height:80px}
+.mc-field select{appearance:none;cursor:pointer;color:#e8e8e8}
+.mc-field select option{background:#1a1a1a}
+.mc-submit{width:100%;background:#C9A84C;color:#0f0f0f;border:none;padding:13px;border-radius:6px;font-size:.95rem;font-weight:700;cursor:pointer;font-family:inherit;transition:background .2s;margin-top:4px}
+.mc-submit:hover:not(:disabled){background:#b8952f}
+.mc-submit:disabled{opacity:.5;cursor:not-allowed}
+.mc-success{display:none;text-align:center;padding:28px 12px}
+.mc-success-icon{font-size:2.5rem;margin-bottom:10px;color:#C9A84C}
+.mc-success h3{color:#C9A84C;font-size:1.2rem;font-weight:700;margin:0 0 8px}
+.mc-success p{color:#94A3B8;font-size:.88rem;margin:0 0 18px;line-height:1.7}
+.mc-success a{color:#C9A84C;font-weight:700}
+@media(max-width:860px){.mc-contact-inner{grid-template-columns:1fr;gap:32px}}
+@media(max-width:540px){.mc-contact{padding:40px 0}.mc-form-card{padding:20px 16px}.mc-contact-inner{padding:0 14px}}
+</style>
+<section class="mc-contact" id="contact">
+  <div class="mc-contact-inner">
+    <div class="mc-contact-left">
+      <h2>Get a Free <em>Revenue Strategy Call</em></h2>
+      <p>30 minutes with Mark Gabrielli. No pitch. A direct read on your biggest marketing gaps and what moves revenue fastest. Responds personally within 24 hours.</p>
+      <div class="mc-contact-proof">
+        <div class="mc-contact-proof-item"><span>&#10003;</span><span>$135M+ in qualified B2B pipeline built for clients</span></div>
+        <div class="mc-contact-proof-item"><span>&#10003;</span><span>90% client retention rate</span></div>
+        <div class="mc-contact-proof-item"><span>&#10003;</span><span>Retainer starts at $8K/month, launches in 1-2 weeks</span></div>
+        <div class="mc-contact-proof-item"><span>&#10003;</span><span>4.9 stars across review platforms</span></div>
+      </div>
+      <div class="mc-contact-direct">
+        <p>Prefer to reach out directly?</p>
+        <a href="mailto:mark@markcmo.com">mark@markcmo.com</a>
+        &nbsp;&nbsp;&#183;&nbsp;&nbsp;
+        <a href="tel:+13219175738">+1 (321) 917-5738</a>
+      </div>
+    </div>
+    <div class="mc-form-card">
+      <h3>Book a Free Strategy Call</h3>
+      <p>60 seconds. Mark responds personally within 24 hours.</p>
+      <div id="mc-card">
+        <form id="mc-form" novalidate>
+          <input type="hidden" name="form-name" value="page-contact">
+          <input type="text" name="bot-field" style="display:none" tabindex="-1" autocomplete="off">
+          <div class="mc-field"><input type="text" name="name" placeholder="Your Full Name *" required autocomplete="name"></div>
+          <div class="mc-field"><input type="email" name="email" placeholder="Work Email *" required autocomplete="email"></div>
+          <div class="mc-field"><input type="text" name="company" placeholder="Company Name" autocomplete="organization"></div>
+          <div class="mc-field"><input type="tel" name="phone" placeholder="Phone (optional)" autocomplete="tel"></div>
+          <div class="mc-field">
+            <select name="service">
+              <option value="" disabled selected>What are you looking for?</option>
+              <option value="fractional-cmo">Fractional CMO Retainer ($8K-$20K/mo)</option>
+              <option value="revenue-audit">Revenue Leak Audit ($7,500)</option>
+              <option value="vip-day">CMO VIP Day ($4,500)</option>
+              <option value="founders-circle">Founders Circle ($25K/yr)</option>
+              <option value="fractional-coo">Fractional COO Services</option>
+              <option value="unsure">Not sure yet - need a consult</option>
+            </select>
+          </div>
+          <div class="mc-field"><textarea name="message" placeholder="Biggest revenue challenge right now? (optional)"></textarea></div>
+          <button type="submit" id="mc-btn" class="mc-submit">Book Free Strategy Call &#8594;</button>
+          <div style="margin-top:8px;font-size:.72rem;color:#3a3a3a;text-align:center">No spam. No sales team. Just Mark.</div>
+        </form>
+      </div>
+      <div id="mc-success" class="mc-success">
+        <div class="mc-success-icon">&#10003;</div>
+        <h3>You are in. Check your inbox.</h3>
+        <p>Mark will personally follow up within 24 hours.<br>Or reach him directly: <a href="mailto:mark@markcmo.com">mark@markcmo.com</a> &#183; <a href="tel:+13219175738">+1 (321) 917-5738</a></p>
+      </div>
+    </div>
+  </div>
+</section>
+<script>
+(function(){
+  var _t;
+  document.addEventListener('input',function(){
+    clearTimeout(_t);_t=setTimeout(function(){
+      var f=document.getElementById('mc-form');if(!f)return;
+      var d=new FormData(f),o={};d.forEach(function(v,k){if(v&&k!=='bot-field')o[k]=v;});
+      o._page=location.pathname;o._ts=new Date().toISOString();
+      try{localStorage.setItem('mc_partial',JSON.stringify(o));}catch(e){}
+    },3000);
+  });
+  var form=document.getElementById('mc-form');if(!form)return;
+  form.addEventListener('submit',function(e){
+    e.preventDefault();
+    var btn=document.getElementById('mc-btn'),card=document.getElementById('mc-card'),suc=document.getElementById('mc-success');
+    if(!btn||!card||!suc)return;
+    btn.textContent='Sending...';btn.disabled=true;
+    var d=new FormData(form);
+    var p={'form-name':d.get('form-name')||'page-contact','name':d.get('name')||'','email':d.get('email')||'','company':d.get('company')||'','phone':d.get('phone')||'','service':d.get('service')||'','message':d.get('message')||''};
+    try{localStorage.setItem('mc_lead_'+Date.now(),JSON.stringify(p));}catch(ex){}
+    fetch('/api/lead',{method:'POST',headers:{'Content-Type':'application/x-www-form-urlencoded'},body:new URLSearchParams(p).toString()})
+    .then(function(){card.style.display='none';suc.style.display='block';})
+    .catch(function(){card.style.display='none';suc.style.display='block';
+      setTimeout(function(){window.open('mailto:mark@markcmo.com?subject=Inquiry&body=Name:+'+encodeURIComponent(p.name)+'%0AEmail:+'+encodeURIComponent(p.email),'_blank');},400);
+    });
+  });
+})();
+</script>
+<script src="/linkedin-widget.js" defer></script>
+</body>
+</html>

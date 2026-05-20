@@ -1,0 +1,568 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-BXK5Y3DQBL"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-BXK5Y3DQBL');
+</script>
+<meta charset="UTF-8"/>
+<link rel="icon" type="image/svg+xml" href="/favicon.svg"><link rel="icon" type="image/webp" href="/favicon.webp"><link rel="apple-touch-icon" href="/mark-photo.webp">
+<meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+<title>Free Marketing Assessment: Score Your B2B Marketing in 5 Minutes | Mark Gabrielli</title>
+<meta name="description" content="Free 5-minute marketing assessment for B2B companies. Answer 20 questions, get a personalized score, and a prioritized action list to fix your biggest marketing gaps." />
+<meta name="keywords" content="free marketing assessment, marketing audit tool, B2B marketing score, marketing gap analysis, fractional CMO assessment, marketing health check" />
+<meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1" />
+<meta name="theme-color" content="#c9a84c" />
+<meta name="mobile-web-app-capable" content="yes" />
+<link rel="manifest" href="/manifest.json" />
+<link rel="canonical" href="https://markcmo.com/marketing-assessment" />
+<meta property="og:type" content="website" />
+<meta property="og:title" content="Free Marketing Assessment: Score Your B2B Marketing in 5 Minutes" />
+<meta property="og:description" content="Free 5-minute marketing assessment. Answer 20 questions, get a personalized score and prioritized action list." />
+<meta property="og:url" content="https://markcmo.com/marketing-assessment" />
+<meta property="og:site_name" content="Mark Gabrielli | Fractional CMO &amp; COO" />
+<meta property="og:image" content="https://markcmo.com/og-image.jpg" />
+<meta property="og:image:width" content="1200" />
+<meta property="og:image:height" content="630" />
+<meta property="og:locale" content="en_US" />
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:title" content="Free Marketing Assessment: Score Your B2B Marketing" />
+<meta name="twitter:description" content="5-minute assessment. Get your marketing score and a personalized action list." />
+<meta name="twitter:image" content="https://markcmo.com/og-image.jpg" />
+<meta name="twitter:site" content="@markgabrielli" />
+<meta name="author" content="Mark Gabrielli" />
+<link rel="alternate" type="application/rss+xml" title="Mark Gabrielli | Insights RSS" href="/feed.xml" />
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "WebPage",
+      "@id": "https://markcmo.com/marketing-assessment",
+      "url": "https://markcmo.com/marketing-assessment",
+      "name": "Free Marketing Assessment: Score Your B2B Marketing in 5 Minutes",
+      "description": "Free 5-minute marketing assessment for B2B companies generating $1M-$100M. Answer 20 questions and get a personalized score with prioritized action list.",
+      "publisher": {"@type": "Organization", "@id": "https://markcmo.com/#organization"}
+    },
+    {
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {"@type": "ListItem", "position": 1, "name": "Home", "item": "https://markcmo.com"},
+        {"@type": "ListItem", "position": 2, "name": "Resources", "item": "https://markcmo.com/resources"},
+        {"@type": "ListItem", "position": 3, "name": "Marketing Assessment", "item": "https://markcmo.com/marketing-assessment"}
+      ]
+    }
+  ]
+}
+</script>
+<link rel="stylesheet" href="style.css"/>
+<style>
+:root { --accent: #C9A84C; --bg: #080E27; --bg2: #0D1235; --bg3: #111840; --border: rgba(255,255,255,0.08); --text: #fff; --text2: #A1A1AA; }
+body { background: var(--bg); color: var(--text); font-family: 'Outfit', system-ui, sans-serif; }
+.ass-hero { background: var(--bg); padding: 5rem 2rem 3rem; border-bottom: 1px solid var(--border); text-align: center; }
+.ass-eyebrow { font-size: 0.78rem; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase; color: var(--accent); margin-bottom: 1rem; }
+.ass-hero h1 { font-size: clamp(2rem, 4vw, 2.75rem); font-weight: 800; line-height: 1.15; margin-bottom: 1rem; }
+.ass-hero h1 em { color: var(--accent); font-style: normal; }
+.ass-hero p { font-size: 1.05rem; color: var(--text2); max-width: 620px; margin: 0 auto 1.5rem; line-height: 1.7; }
+.ass-trust { display: flex; justify-content: center; gap: 2rem; flex-wrap: wrap; font-size: 0.82rem; color: var(--text2); }
+.ass-trust span::before { content: "✓ "; color: var(--accent); }
+.ass-wrap { max-width: 760px; margin: 0 auto; padding: 2.5rem 1.5rem 5rem; }
+/* Progress */
+.ass-progress-wrap { margin-bottom: 2rem; }
+.ass-progress-label { display: flex; justify-content: space-between; font-size: 0.82rem; color: var(--text2); margin-bottom: 0.5rem; }
+.ass-progress-bar { height: 4px; background: var(--border); border-radius: 2px; overflow: hidden; }
+.ass-progress-fill { height: 100%; background: var(--accent); border-radius: 2px; transition: width 0.4s ease; }
+/* Questions */
+.ass-screen { display: none; }
+.ass-screen.active { display: block; }
+.ass-q-label { font-size: 0.78rem; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: var(--accent); margin-bottom: 0.75rem; }
+.ass-q-text { font-size: 1.25rem; font-weight: 700; line-height: 1.35; margin-bottom: 1.75rem; }
+.ass-options { display: flex; flex-direction: column; gap: 0.75rem; margin-bottom: 2rem; }
+.ass-opt { background: var(--bg2); border: 1.5px solid var(--border); border-radius: 12px; padding: 1rem 1.25rem; cursor: pointer; transition: border-color 0.15s, background 0.15s; font-size: 0.97rem; color: var(--text2); display: flex; align-items: center; gap: 0.75rem; }
+.ass-opt:hover { border-color: rgba(201,168,76,0.35); background: rgba(201,168,76,0.04); color: var(--text); }
+.ass-opt.selected { border-color: var(--accent); background: rgba(201,168,76,0.08); color: var(--text); }
+.ass-opt-letter { width: 28px; height: 28px; border-radius: 6px; border: 1.5px solid var(--border); display: flex; align-items: center; justify-content: center; font-size: 0.78rem; font-weight: 700; flex-shrink: 0; color: var(--text2); }
+.ass-opt.selected .ass-opt-letter { border-color: var(--accent); color: var(--accent); background: rgba(201,168,76,0.12); }
+.ass-nav { display: flex; justify-content: space-between; align-items: center; }
+.ass-btn { padding: 0.75rem 1.75rem; border-radius: 10px; font-weight: 700; font-size: 0.95rem; cursor: pointer; border: none; transition: opacity 0.15s, transform 0.15s; }
+.ass-btn:hover { opacity: 0.88; transform: translateY(-1px); }
+.ass-btn-next { background: var(--accent); color: #080E27; }
+.ass-btn-back { background: transparent; border: 1.5px solid var(--border); color: var(--text2); }
+.ass-btn:disabled { opacity: 0.35; cursor: not-allowed; transform: none; }
+/* Category headers */
+.ass-cat-header { background: var(--bg3); border: 1px solid var(--border); border-radius: 14px; padding: 1.25rem 1.5rem; margin-bottom: 1.75rem; display: flex; align-items: center; gap: 1rem; }
+.ass-cat-icon { font-size: 1.5rem; }
+.ass-cat-name { font-weight: 700; font-size: 1.05rem; }
+.ass-cat-desc { font-size: 0.85rem; color: var(--text2); }
+/* Lead capture */
+.ass-capture { background: var(--bg2); border: 1px solid var(--border); border-radius: 18px; padding: 2.5rem; text-align: center; }
+.ass-capture h2 { font-size: 1.5rem; font-weight: 800; margin-bottom: 0.75rem; }
+.ass-capture p { color: var(--text2); margin-bottom: 1.75rem; line-height: 1.7; }
+.ass-form input { width: 100%; background: var(--bg3); border: 1px solid var(--border); border-radius: 8px; padding: 0.8rem 1rem; color: var(--text); font-size: 0.97rem; margin-bottom: 0.75rem; box-sizing: border-box; font-family: inherit; }
+.ass-form input:focus { outline: none; border-color: var(--accent); }
+.ass-form input::placeholder { color: var(--text2); }
+.ass-form button { width: 100%; background: var(--accent); color: #080E27; border: none; border-radius: 10px; padding: 0.9rem; font-weight: 800; font-size: 1rem; cursor: pointer; transition: opacity 0.15s; margin-top: 0.25rem; }
+.ass-form button:hover { opacity: 0.88; }
+.ass-skip { font-size: 0.82rem; color: var(--text2); margin-top: 0.75rem; cursor: pointer; text-decoration: underline; }
+/* Results */
+.ass-result { text-align: center; }
+.score-ring-wrap { position: relative; width: 160px; height: 160px; margin: 0 auto 1.5rem; }
+.score-ring { transform: rotate(-90deg); }
+.score-ring-bg { fill: none; stroke: var(--border); stroke-width: 10; }
+.score-ring-fill { fill: none; stroke: var(--accent); stroke-width: 10; stroke-linecap: round; stroke-dasharray: 408; stroke-dashoffset: 408; transition: stroke-dashoffset 1.2s ease; }
+.score-ring-text { position: absolute; inset: 0; display: flex; flex-direction: column; align-items: center; justify-content: center; }
+.score-ring-num { font-size: 2.5rem; font-weight: 900; line-height: 1; }
+.score-ring-max { font-size: 0.78rem; color: var(--text2); }
+.score-grade { font-size: 1.1rem; font-weight: 700; margin-bottom: 0.5rem; }
+.score-summary { color: var(--text2); font-size: 0.97rem; line-height: 1.7; max-width: 560px; margin: 0 auto 2rem; }
+.result-cats { text-align: left; margin: 2rem 0; }
+.result-cat { background: var(--bg2); border: 1px solid var(--border); border-radius: 12px; padding: 1.25rem 1.5rem; margin-bottom: 1rem; }
+.result-cat-top { display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.75rem; }
+.result-cat-name { font-weight: 700; font-size: 0.95rem; }
+.result-cat-score { font-size: 0.85rem; color: var(--accent); font-weight: 700; }
+.result-bar { height: 6px; background: var(--border); border-radius: 3px; overflow: hidden; }
+.result-bar-fill { height: 100%; border-radius: 3px; transition: width 0.8s ease; }
+.result-action { font-size: 0.85rem; color: var(--text2); margin-top: 0.6rem; line-height: 1.5; }
+.result-cta { background: linear-gradient(135deg, var(--bg3), var(--bg2)); border: 1px solid var(--border); border-radius: 18px; padding: 2rem; margin-top: 2rem; }
+.result-cta h3 { font-size: 1.25rem; font-weight: 800; margin-bottom: 0.5rem; }
+.result-cta p { color: var(--text2); font-size: 0.95rem; line-height: 1.7; margin-bottom: 1.5rem; }
+.btn-gold { display: inline-flex; align-items: center; gap: 0.5rem; background: var(--accent); color: #080E27; font-weight: 700; padding: 0.875rem 2rem; border-radius: 10px; text-decoration: none; font-size: 1rem; transition: opacity 0.15s, transform 0.15s; }
+.btn-gold:hover { opacity: 0.9; transform: translateY(-2px); }
+.btn-outline { display: inline-flex; align-items: center; gap: 0.5rem; border: 1.5px solid rgba(201,168,76,0.4); color: var(--accent); font-weight: 600; padding: 0.8rem 1.75rem; border-radius: 10px; text-decoration: none; font-size: 0.95rem; margin-left: 0.75rem; transition: border-color 0.15s; }
+.btn-outline:hover { border-color: var(--accent); }
+@media(max-width:600px){ .btn-outline{margin-left:0;margin-top:0.75rem;} }
+</style>
+</head>
+<body>
+<section class="ass-hero">
+  <div class="ass-eyebrow">Free Tool</div>
+  <h1>Score Your <em>B2B Marketing</em> in 5 Minutes</h1>
+  <p>20 questions across five categories. Get a personalized score, a breakdown of your marketing gaps, and a priority action list based on your answers - no fluff, no sales pitch.</p>
+  <div class="ass-trust">
+    <span>Free, no credit card</span>
+    <span>Results in under 5 minutes</span>
+    <span>Personalized to your stage</span>
+    <span>Used by 500+ B2B leaders</span>
+  </div>
+</section>
+<div class="sp-proof-strip">
+<div class="sp-proof-item">
+<span class="sp-proof-num">4.9&#9733;</span>
+<span class="sp-proof-label">193 Reviews</span>
+</div>
+<div class="sp-proof-item">
+<span class="sp-proof-num">90%</span>
+<span class="sp-proof-label">Retention Rate</span>
+</div>
+<div class="sp-proof-item">
+<span class="sp-proof-num">19+</span>
+<span class="sp-proof-label">Ventures Built</span>
+</div>
+<div class="sp-proof-item">
+<span class="sp-proof-num">$50M+</span>
+<span class="sp-proof-label">Revenue Generated</span>
+</div>
+<div class="sp-proof-item">
+<span class="sp-proof-num">30</span>
+<span class="sp-proof-label">Days to First Results</span>
+</div>
+</div>
+<div style="background:#0d1b27;border-left:3px solid #2563EB;padding:1.25rem 1.5rem;margin:0 auto 0;max-width:1100px;border-radius:0 6px 6px 0;">
+<strong style="color:#C9A84C;font-size:.75rem;font-family:'DM Mono',monospace;text-transform:uppercase;letter-spacing:.1em;display:block;margin-bottom:.5rem;">Quick Answer</strong>
+<p style="color:#ccc;margin:0;line-height:1.75;font-size:.95rem;">A B2B marketing assessment is a structured audit of a company's marketing function -- evaluating ICP definition, positioning strength, channel performance, content quality, marketing technology stack, team capability, and the connection between marketing activity and revenue outcomes -- to identify the highest-leverage improvements available. MarkCMO marketing assessments deliver a prioritized action plan within 2 weeks: identifying the specific gaps holding back pipeline, the fixes required, and the 30/60/90 day roadmap to build a marketing function that produces predictable, measurable revenue.</p>
+</div>
+
+
+<div class="ass-wrap">
+  <div class="ass-progress-wrap">
+    <div class="ass-progress-label">
+      <span id="progressLabel">Question 1 of 20</span>
+      <span id="progressPct">0% complete</span>
+    </div>
+    <div class="ass-progress-bar"><div class="ass-progress-fill" id="progressFill" style="width:0%"></div></div>
+  </div>
+
+  <div id="assessmentContainer"></div>
+</div>
+
+<!-- Netlify form for lead capture (bot detection) -->
+<form name="marketing_assessment" data-netlify="true" netlify-honeypot="bot-field" hidden>
+  <input type="hidden" name="form-name" value="marketing_assessment"/>
+  <input type="text" name="name"/>
+  <input type="email" name="email"/>
+  <input type="text" name="company"/>
+  <input type="text" name="revenue_stage"/>
+  <input type="text" name="total_score"/>
+  <input type="text" name="grade"/>
+  <input type="text" name="weakest_category"/>
+</form>
+
+<script src="nav.js" defer></script>
+<script>
+(function(){
+'use strict';
+
+var questions = [
+  // Category 1: Strategy & Positioning
+  { cat: 'Strategy & Positioning', catIcon: '🎯', catDesc: 'How well-defined is your marketing direction', q: 'Do you have a documented go-to-market strategy with a defined ICP (Ideal Customer Profile)?', opts: ['Yes - documented, shared, and actively used', 'Partially - we have some documentation but it is outdated', 'No - it exists in people\'s heads but is not written down', 'No - we operate without a defined strategy'], scores: [4,2,1,0] },
+  { cat: 'Strategy & Positioning', q: 'Can your best customers describe what makes you different from competitors in one sentence?', opts: ['Yes - consistently and clearly', 'Most can, but the language varies significantly', 'Rarely - they describe what we do but not why we are better', 'No - our differentiation is unclear even to us'], scores: [4,2,1,0] },
+  { cat: 'Strategy & Positioning', q: 'How would you rate your brand\'s positioning in the market?', opts: ['Strong - we own a clear category or position', 'Decent - we are known but not distinctly differentiated', 'Weak - we blend in with competitors', 'Unknown - we have never formally defined our positioning'], scores: [4,2,1,0] },
+  { cat: 'Strategy & Positioning', q: 'How often do you conduct win/loss analysis on deals?', opts: ['Regularly - every quarter with documented insights', 'Occasionally - after major deals', 'Rarely - only when the CEO asks', 'Never'], scores: [4,3,1,0] },
+  // Category 2: Demand Generation & Pipeline
+  { cat: 'Demand Generation', catIcon: '📈', catDesc: 'Pipeline volume, quality, and predictability', q: 'How consistent is your inbound lead flow month over month?', opts: ['Very consistent - predictable within 20%', 'Somewhat consistent - 30-50% variance', 'Inconsistent - feast or famine depending on campaigns', 'Highly unpredictable - we never know what next month looks like'], scores: [4,2,1,0] },
+  { cat: 'Demand Generation', q: 'How many active demand generation channels do you operate?', opts: ['Four or more channels producing qualified leads', 'Two to three channels', 'One primary channel we rely on heavily', 'We do not have a structured demand generation system'], scores: [4,3,1,0] },
+  { cat: 'Demand Generation', q: 'What is your current MQL-to-closed-won conversion rate?', opts: ['Above 15% - we know this number precisely', '8-15% - roughly tracked', 'Below 8% - we know it is low', 'We do not track this metric'], scores: [4,3,1,0] },
+  { cat: 'Demand Generation', q: 'How would you describe the quality of leads your marketing generates?', opts: ['High quality - sales loves the leads', 'Mixed - some good, some waste of time', 'Low quality - sales ignores most marketing leads', 'We do not have a defined lead quality standard'], scores: [4,2,1,0] },
+  // Category 3: Measurement & Attribution
+  { cat: 'Measurement & Attribution', catIcon: '📊', catDesc: 'How well you track marketing performance to revenue', q: 'Can you tell which marketing channels produced your last 10 customers?', opts: ['Yes - precise attribution by channel and campaign', 'Roughly - we know the general source but not precisely', 'For some but not all', 'No - we have no reliable attribution'], scores: [4,3,1,0] },
+  { cat: 'Measurement & Attribution', q: 'Do you know your Customer Acquisition Cost (CAC) by channel?', opts: ['Yes - tracked monthly by channel', 'Yes - overall CAC but not broken down by channel', 'Estimated but not precisely measured', 'No'], scores: [4,2,1,0] },
+  { cat: 'Measurement & Attribution', q: 'How do you measure marketing ROI?', opts: ['Pipeline attribution, CAC, LTV, and revenue contribution are tracked', 'We track spend vs. leads generated', 'We look at traffic and engagement metrics', 'We do not have a marketing ROI measurement process'], scores: [4,2,1,0] },
+  { cat: 'Measurement & Attribution', q: 'How frequently does marketing present data to leadership?', opts: ['Weekly or biweekly with revenue-tied metrics', 'Monthly with activity metrics', 'Quarterly or when asked', 'Marketing rarely presents data to leadership'], scores: [4,2,1,0] },
+  // Category 4: Team & Leadership
+  { cat: 'Team & Leadership', catIcon: '👥', catDesc: 'Marketing leadership, team capacity, and alignment', q: 'Who provides strategic marketing leadership in your company?', opts: ['A dedicated CMO or VP of Marketing', 'A fractional CMO or senior marketing consultant', 'The CEO or founder doubles as marketing leader', 'No one - marketing operates without strategic leadership'], scores: [4,4,1,0] },
+  { cat: 'Team & Leadership', q: 'How aligned are your sales and marketing teams?', opts: ['Tightly aligned - shared goals, regular syncs, agreed-on MQL definition', 'Mostly aligned with some friction', 'Poorly aligned - frequent blame between teams', 'No formal alignment process exists'], scores: [4,2,1,0] },
+  { cat: 'Team & Leadership', q: 'How many marketing agencies have you changed in the last two years?', opts: ['None - strong agency relationship in place', 'One change', 'Two changes', 'Three or more changes'], scores: [4,3,1,0] },
+  { cat: 'Team & Leadership', q: 'Does your marketing team have clear quarterly OKRs tied to revenue?', opts: ['Yes - OKRs are set, tracked, and reviewed', 'Partially - goals exist but are not revenue-tied', 'No - the team operates on activity targets', 'No goals or targets beyond budget'], scores: [4,2,1,0] },
+  // Category 5: Content & Conversion
+  { cat: 'Content & Conversion', catIcon: '✍️', catDesc: 'Content quality, website performance, and conversion', q: 'Does your website convert visitors into leads at a measurable rate?', opts: ['Yes - we track CVR and optimize it actively', 'Somewhat - we get some leads but do not actively optimize', 'Poorly - the website generates few leads', 'We have no insight into website conversion rate'], scores: [4,2,1,0] },
+  { cat: 'Content & Conversion', q: 'How would you rate your content marketing maturity?', opts: ['Advanced - documented strategy, regular production, SEO-driven, measurable results', 'Intermediate - some content but inconsistent and not clearly tied to pipeline', 'Basic - occasional posts with no strategy', 'None - we produce minimal or no content'], scores: [4,2,1,0] },
+  { cat: 'Content & Conversion', q: 'How long has it been since you ran a comprehensive marketing audit?', opts: ['Within the last 6 months', '6-12 months ago', 'More than a year ago', 'Never'], scores: [4,3,1,0] },
+  { cat: 'Content & Conversion', q: 'Overall, how would you rate your company\'s marketing effectiveness?', opts: ['Strong - marketing is a clear competitive advantage', 'Decent - works but significant room for improvement', 'Weak - marketing is a frustrating cost center', 'Critical - marketing is broken and needs immediate attention'], scores: [4,2,1,0] }
+];
+
+var answers = new Array(questions.length).fill(null);
+var currentQ = 0;
+var emailCaptured = false;
+
+var container = document.getElementById('assessmentContainer');
+var progressFill = document.getElementById('progressFill');
+var progressLabel = document.getElementById('progressLabel');
+var progressPct = document.getElementById('progressPct');
+
+function updateProgress(){
+  var answered = answers.filter(function(a){ return a !== null; }).length;
+  var pct = Math.round((currentQ / questions.length) * 100);
+  progressFill.style.width = pct + '%';
+  progressLabel.textContent = currentQ < questions.length ? 'Question ' + (currentQ+1) + ' of ' + questions.length : 'Assessment Complete';
+  progressPct.textContent = pct + '% complete';
+}
+
+function renderQuestion(idx){
+  var q = questions[idx];
+  var showCatHeader = idx === 0 || questions[idx-1].cat !== q.cat;
+  var html = '';
+  if(showCatHeader){
+    html += '<div class="ass-cat-header"><div class="ass-cat-icon">'+(q.catIcon||'')+'</div><div><div class="ass-cat-name">'+q.cat+'</div><div class="ass-cat-desc">'+(q.catDesc||'')+'</div></div></div>';
+  }
+  html += '<div class="ass-q-label">Question '+(idx+1)+' of '+questions.length+'</div>';
+  html += '<div class="ass-q-text">'+q.q+'</div>';
+  html += '<div class="ass-options">';
+  var letters = ['A','B','C','D'];
+  q.opts.forEach(function(opt, i){
+    var sel = answers[idx] === i ? ' selected' : '';
+    html += '<div class="ass-opt'+sel+'" onclick="selectOpt('+idx+','+i+')"><div class="ass-opt-letter">'+letters[i]+'</div><span>'+opt+'</span></div>';
+  });
+  html += '</div>';
+  html += '<div class="ass-nav">';
+  if(idx > 0){ html += '<button class="ass-btn ass-btn-back" onclick="goBack()">&#8592; Back</button>'; } else { html += '<span></span>'; }
+  var nextLabel = idx === questions.length - 1 ? 'See My Results &rarr;' : 'Next &rarr;';
+  var disabled = answers[idx] === null ? ' disabled' : '';
+  html += '<button class="ass-btn ass-btn-next" id="nextBtn"'+disabled+' onclick="goNext()">'+nextLabel+'</button>';
+  html += '</div>';
+  container.innerHTML = html;
+}
+
+function selectOpt(qIdx, optIdx){
+  answers[qIdx] = optIdx;
+  renderQuestion(qIdx);
+}
+
+function goNext(){
+  if(answers[currentQ] === null) return;
+  currentQ++;
+  if(currentQ === questions.length){
+    // Check if we should show email capture at midpoint (already past it since all answered)
+    showResults();
+  } else {
+    // Show email capture after question 10
+    if(currentQ === 10 && !emailCaptured){
+      showEmailCapture();
+    } else {
+      updateProgress();
+      renderQuestion(currentQ);
+    }
+  }
+}
+
+function goBack(){
+  if(currentQ > 0){ currentQ--; updateProgress(); renderQuestion(currentQ); }
+}
+
+function showEmailCapture(){
+  container.innerHTML = '<div class="ass-capture">' +
+    '<h2>You\'re Halfway There</h2>' +
+    '<p>Enter your email to receive your personalized results report when you finish. We\'ll include your score, category breakdown, and a prioritized action list. No spam - ever.</p>' +
+    '<form class="ass-form" onsubmit="submitEmail(event)">' +
+    '<input type="text" id="capName" placeholder="Your name" required/>' +
+    '<input type="email" id="capEmail" placeholder="Work email" required/>' +
+    '<input type="text" id="capCompany" placeholder="Company name"/>' +
+    '<button type="submit">Continue to Results &rarr;</button>' +
+    '</form>' +
+    '<div class="ass-skip" onclick="skipEmail()">Skip - just show me the results</div>' +
+    '</div>';
+  updateProgress();
+}
+
+function skipEmail(){
+  emailCaptured = true;
+  updateProgress();
+  renderQuestion(currentQ);
+}
+
+function submitEmail(e){
+  e.preventDefault();
+  var name = document.getElementById('capName').value;
+  var email = document.getElementById('capEmail').value;
+  var company = document.getElementById('capCompany').value;
+  emailCaptured = true;
+  // Store for Netlify submission at end
+  window._assessmentLead = { name: name, email: email, company: company };
+  updateProgress();
+  renderQuestion(currentQ);
+}
+
+function calcScores(){
+  var cats = {};
+  var total = 0;
+  questions.forEach(function(q, idx){
+    if(!cats[q.cat]) cats[q.cat] = { icon: q.catIcon||'', score: 0, max: 0 };
+    var ans = answers[idx];
+    var s = ans !== null ? q.scores[ans] : 0;
+    cats[q.cat].score += s;
+    cats[q.cat].max += 4;
+    total += s;
+  });
+  return { cats: cats, total: total, max: questions.length * 4 };
+}
+
+function getGrade(pct){
+  if(pct >= 90) return { grade: 'S-Class - Marketing Machine', color: '#4ade80', summary: 'Your marketing infrastructure is elite. Focus on incremental optimization and competitive moat-building.' };
+  if(pct >= 75) return { grade: 'A - Strong Foundation', color: '#86efac', summary: 'You have solid marketing fundamentals. The gaps that remain are scale and system challenges, not foundational ones.' };
+  if(pct >= 60) return { grade: 'B - Solid but Leaking', color: '#fbbf24', summary: 'Marketing is working in pockets but not as a unified system. Fixing the measurement and leadership gaps will compound results significantly.' };
+  if(pct >= 45) return { grade: 'C - Average Performance', color: '#fb923c', summary: 'Marketing is generating activity but not consistently driving revenue. A strategic overhaul of demand generation and attribution is the priority.' };
+  if(pct >= 30) return { grade: 'D - Significant Gaps', color: '#f87171', summary: 'Core marketing infrastructure is missing or broken. Without foundational fixes, more spend and more tactics will produce the same frustrating results.' };
+  return { grade: 'F - Critical State', color: '#ef4444', summary: 'Marketing is not functioning as a growth engine. Immediate strategic leadership and a full marketing audit are required before investing further.' };
+}
+
+function getCatAction(catName, pct){
+  var actions = {
+    'Strategy & Positioning': pct < 60 ? 'Define your ICP and positioning before spending another dollar on demand generation. Without this foundation, every tactic underperforms.' : pct < 80 ? 'Formalize your go-to-market strategy in a documented playbook shared across marketing, sales, and leadership.' : 'Run quarterly positioning refreshes and competitive intelligence to maintain your advantage.',
+    'Demand Generation': pct < 60 ? 'Build a multi-channel demand generation system. Over-reliance on one channel is fragile. Prioritize SEO, content, and outbound in parallel.' : pct < 80 ? 'Add one to two new acquisition channels and implement a lead scoring system to improve MQL quality.' : 'Optimize for pipeline velocity - reduce time from MQL to SQL with better nurture sequences.',
+    'Measurement & Attribution': pct < 60 ? 'Implement multi-touch attribution immediately. Install UTM frameworks, clean your CRM data, and define your revenue metrics before anything else.' : pct < 80 ? 'Move from activity metrics to revenue metrics. Every marketing report should include pipeline contribution and CAC by channel.' : 'Build predictive revenue models using your attribution data to forecast pipeline 90 days out.',
+    'Team & Leadership': pct < 60 ? 'You need senior marketing leadership. A fractional CMO can provide strategic direction, manage agencies, and lead the team without the full-time CMO cost.' : pct < 80 ? 'Establish a marketing-sales SLA with shared MQL definitions, handoff process, and joint OKRs.' : 'Focus on team development and succession - document your marketing playbook so the function is not dependent on any single person.',
+    'Content & Conversion': pct < 60 ? 'Audit your website conversion rate and top landing pages immediately. Most B2B sites convert under 2% when 4-6% is achievable with strategic optimization.' : pct < 80 ? 'Build a content marketing engine tied to SEO and buyer-journey stages. Content should generate leads, not just traffic.' : 'Scale content production with an editorial calendar and test conversion optimization on your highest-traffic pages.'
+  };
+  return actions[catName] || 'Review and optimize this category based on your specific business context.';
+}
+
+function showResults(){
+  updateProgress();
+  var data = calcScores();
+  var pct = Math.round((data.total / data.max) * 100);
+  var gradeData = getGrade(pct);
+  var dashOffset = 408 - (408 * pct / 100);
+
+  // Submit to Netlify if we have lead data
+  if(window._assessmentLead){
+    var weakCat = Object.keys(data.cats).reduce(function(a,b){ return (data.cats[a].score/data.cats[a].max) < (data.cats[b].score/data.cats[b].max) ? a : b; });
+    fetch('/', {
+      method: 'POST',
+      headers: {'Content-Type': 'application/x-www-form-urlencoded'},
+      body: new URLSearchParams({
+        'form-name': 'marketing_assessment',
+        'name': window._assessmentLead.name,
+        'email': window._assessmentLead.email,
+        'company': window._assessmentLead.company || '',
+        'total_score': pct + '%',
+        'grade': gradeData.grade,
+        'weakest_category': weakCat
+      }).toString()
+    }).catch(function(){});
+  }
+
+  var catsHtml = '';
+  Object.keys(data.cats).forEach(function(catName){
+    var cat = data.cats[catName];
+    var catPct = Math.round((cat.score / cat.max) * 100);
+    var barColor = catPct >= 75 ? '#4ade80' : catPct >= 50 ? '#fbbf24' : '#f87171';
+    var action = getCatAction(catName, catPct);
+    catsHtml += '<div class="result-cat">' +
+      '<div class="result-cat-top"><span class="result-cat-name">'+(cat.icon ? cat.icon+' ':'')+catName+'</span><span class="result-cat-score">'+catPct+'%</span></div>' +
+      '<div class="result-bar"><div class="result-bar-fill" style="width:'+catPct+'%;background:'+barColor+'"></div></div>' +
+      '<div class="result-action">'+action+'</div>' +
+      '</div>';
+  });
+
+  container.innerHTML = '<div class="ass-result">' +
+    '<div style="font-size:0.78rem;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:var(--accent);margin-bottom:1rem;">Your Marketing Score</div>' +
+    '<div class="score-ring-wrap">' +
+    '<svg class="score-ring" width="160" height="160" viewBox="0 0 160 160">' +
+    '<circle class="score-ring-bg" cx="80" cy="80" r="65"/>' +
+    '<circle class="score-ring-fill" id="ringFill" cx="80" cy="80" r="65"/>' +
+    '</svg>' +
+    '<div class="score-ring-text"><div class="score-ring-num" style="color:'+gradeData.color+'">'+pct+'</div><div class="score-ring-max">out of 100</div></div>' +
+    '</div>' +
+    '<div class="score-grade" style="color:'+gradeData.color+'">'+gradeData.grade+'</div>' +
+    '<p class="score-summary">'+gradeData.summary+'</p>' +
+    '<div class="result-cats">'+catsHtml+'</div>' +
+    '<div class="result-cta">' +
+    '<h3>Get a Personalized Action Plan</h3>' +
+    '<p>Book a free 30-minute call with Mark Gabrielli to review your assessment results, identify your highest-leverage marketing fix, and get a clear next step - no obligation.</p>' +
+    '<a href="/contact.html" class="btn-gold">Book Free Strategy Call &rarr;</a>' +
+    '<a href="/why-hire-fractional-cmo.html" class="btn-outline">See If You Need a CMO</a>' +
+    '</div>' +
+    '<p style="color:var(--text2);font-size:0.82rem;margin-top:1.5rem;">Want to re-take the assessment? <span style="color:var(--accent);cursor:pointer;text-decoration:underline;" onclick="location.reload()">Start over</span></p>' +
+    '</div>';
+
+  // Animate ring
+  setTimeout(function(){
+    var ring = document.getElementById('ringFill');
+    if(ring) ring.style.strokeDashoffset = dashOffset;
+  }, 200);
+
+  // Animate bars
+  setTimeout(function(){
+    document.querySelectorAll('.result-bar-fill').forEach(function(bar){
+      var w = bar.style.width;
+      bar.style.width = '0%';
+      setTimeout(function(){ bar.style.width = w; }, 50);
+    });
+  }, 300);
+}
+
+// Initialize
+updateProgress();
+renderQuestion(0);
+
+})();
+</script>
+<style id="mc-form-styles">
+.mc-contact{background:linear-gradient(135deg,#050919 0%,#0A1628 60%,#0d1b27 100%);padding:64px 0;border-top:1px solid #2a2a2a;margin-top:0}
+.mc-contact-inner{max-width:1100px;margin:0 auto;padding:0 24px;display:grid;grid-template-columns:1fr 1fr;gap:56px;align-items:start}
+.mc-contact-left h2{font-family:'Bebas Neue',Barlow,-apple-system,sans-serif;font-size:clamp(1.8rem,4vw,2.8rem);font-weight:400;letter-spacing:.03em;color:#fff;margin:0 0 14px;line-height:1.1}
+.mc-contact-left h2 em{color:#C9A84C;font-style:normal}
+.mc-contact-left p{font-size:.92rem;color:#94A3B8;line-height:1.8;margin:0 0 24px}
+.mc-contact-proof{display:flex;flex-direction:column;gap:10px;margin-bottom:28px}
+.mc-contact-proof-item{display:flex;align-items:center;gap:10px;font-size:.85rem;color:#94A3B8}
+.mc-contact-proof-item span:first-child{color:#C9A84C;font-weight:700;font-size:1rem;flex-shrink:0}
+.mc-contact-direct{background:rgba(201,168,76,.08);border:1px solid rgba(201,168,76,.2);border-radius:8px;padding:14px 18px}
+.mc-contact-direct p{font-size:.75rem;color:#666;text-transform:uppercase;letter-spacing:.08em;margin:0 0 6px}
+.mc-contact-direct a{color:#C9A84C;font-weight:700;text-decoration:none;font-size:.88rem}
+.mc-form-card{background:#111;border:1px solid #2a2a2a;border-radius:12px;padding:28px}
+.mc-form-card h3{font-size:1.05rem;font-weight:700;color:#fff;margin:0 0 4px}
+.mc-form-card>p{font-size:.82rem;color:#64748B;margin:0 0 20px}
+.mc-field{margin-bottom:12px}
+.mc-field input,.mc-field textarea,.mc-field select{width:100%;padding:12px 14px;background:#1a1a1a;border:1px solid #2a2a2a;border-radius:6px;color:#e8e8e8;font-size:.88rem;font-family:inherit;box-sizing:border-box;transition:border-color .2s;outline:none}
+.mc-field input:focus,.mc-field textarea:focus,.mc-field select:focus{border-color:#C9A84C}
+.mc-field input::placeholder,.mc-field textarea::placeholder{color:#3a3a3a}
+.mc-field textarea{resize:vertical;min-height:80px}
+.mc-field select{appearance:none;cursor:pointer;color:#e8e8e8}
+.mc-field select option{background:#1a1a1a}
+.mc-submit{width:100%;background:#C9A84C;color:#0f0f0f;border:none;padding:13px;border-radius:6px;font-size:.95rem;font-weight:700;cursor:pointer;font-family:inherit;transition:background .2s;margin-top:4px}
+.mc-submit:hover:not(:disabled){background:#b8952f}
+.mc-submit:disabled{opacity:.5;cursor:not-allowed}
+.mc-success{display:none;text-align:center;padding:28px 12px}
+.mc-success-icon{font-size:2.5rem;margin-bottom:10px;color:#C9A84C}
+.mc-success h3{color:#C9A84C;font-size:1.2rem;font-weight:700;margin:0 0 8px}
+.mc-success p{color:#94A3B8;font-size:.88rem;margin:0 0 18px;line-height:1.7}
+.mc-success a{color:#C9A84C;font-weight:700}
+@media(max-width:860px){.mc-contact-inner{grid-template-columns:1fr;gap:32px}}
+@media(max-width:540px){.mc-contact{padding:40px 0}.mc-form-card{padding:20px 16px}.mc-contact-inner{padding:0 14px}}
+</style>
+<section class="mc-contact" id="contact">
+  <div class="mc-contact-inner">
+    <div class="mc-contact-left">
+      <h2>Get a Free <em>Revenue Strategy Call</em></h2>
+      <p>30 minutes with Mark Gabrielli. No pitch. A direct read on your biggest marketing gaps and what moves revenue fastest. Responds personally within 24 hours.</p>
+      <div class="mc-contact-proof">
+        <div class="mc-contact-proof-item"><span>&#10003;</span><span>$135M+ in qualified B2B pipeline built for clients</span></div>
+        <div class="mc-contact-proof-item"><span>&#10003;</span><span>90% client retention rate</span></div>
+        <div class="mc-contact-proof-item"><span>&#10003;</span><span>Retainer starts at $8K/month, launches in 1-2 weeks</span></div>
+        <div class="mc-contact-proof-item"><span>&#10003;</span><span>4.9 stars across review platforms</span></div>
+      </div>
+      <div class="mc-contact-direct">
+        <p>Prefer to reach out directly?</p>
+        <a href="mailto:mark@markcmo.com">mark@markcmo.com</a>
+        &nbsp;&nbsp;&#183;&nbsp;&nbsp;
+        <a href="tel:+13219175738">+1 (321) 917-5738</a>
+      </div>
+    </div>
+    <div class="mc-form-card">
+      <h3>Book a Free Strategy Call</h3>
+      <p>60 seconds. Mark responds personally within 24 hours.</p>
+      <div id="mc-card">
+        <form id="mc-form" novalidate>
+          <input type="hidden" name="form-name" value="page-contact">
+          <input type="text" name="bot-field" style="display:none" tabindex="-1" autocomplete="off">
+          <div class="mc-field"><input type="text" name="name" placeholder="Your Full Name *" required autocomplete="name"></div>
+          <div class="mc-field"><input type="email" name="email" placeholder="Work Email *" required autocomplete="email"></div>
+          <div class="mc-field"><input type="text" name="company" placeholder="Company Name" autocomplete="organization"></div>
+          <div class="mc-field"><input type="tel" name="phone" placeholder="Phone (optional)" autocomplete="tel"></div>
+          <div class="mc-field">
+            <select name="service">
+              <option value="" disabled selected>What are you looking for?</option>
+              <option value="fractional-cmo">Fractional CMO Retainer ($8K-$20K/mo)</option>
+              <option value="revenue-audit">Revenue Leak Audit ($7,500)</option>
+              <option value="vip-day">CMO VIP Day ($4,500)</option>
+              <option value="founders-circle">Founders Circle ($25K/yr)</option>
+              <option value="fractional-coo">Fractional COO Services</option>
+              <option value="unsure">Not sure yet - need a consult</option>
+            </select>
+          </div>
+          <div class="mc-field"><textarea name="message" placeholder="Biggest revenue challenge right now? (optional)"></textarea></div>
+          <button type="submit" id="mc-btn" class="mc-submit">Book Free Strategy Call &#8594;</button>
+          <div style="margin-top:8px;font-size:.72rem;color:#3a3a3a;text-align:center">No spam. No sales team. Just Mark.</div>
+        </form>
+      </div>
+      <div id="mc-success" class="mc-success">
+        <div class="mc-success-icon">&#10003;</div>
+        <h3>You are in. Check your inbox.</h3>
+        <p>Mark will personally follow up within 24 hours.<br>Or reach him directly: <a href="mailto:mark@markcmo.com">mark@markcmo.com</a> &#183; <a href="tel:+13219175738">+1 (321) 917-5738</a></p>
+      </div>
+    </div>
+  </div>
+</section>
+<script>
+(function(){
+  var _t;
+  document.addEventListener('input',function(){
+    clearTimeout(_t);_t=setTimeout(function(){
+      var f=document.getElementById('mc-form');if(!f)return;
+      var d=new FormData(f),o={};d.forEach(function(v,k){if(v&&k!=='bot-field')o[k]=v;});
+      o._page=location.pathname;o._ts=new Date().toISOString();
+      try{localStorage.setItem('mc_partial',JSON.stringify(o));}catch(e){}
+    },3000);
+  });
+  var form=document.getElementById('mc-form');if(!form)return;
+  form.addEventListener('submit',function(e){
+    e.preventDefault();
+    var btn=document.getElementById('mc-btn'),card=document.getElementById('mc-card'),suc=document.getElementById('mc-success');
+    if(!btn||!card||!suc)return;
+    btn.textContent='Sending...';btn.disabled=true;
+    var d=new FormData(form);
+    var p={'form-name':d.get('form-name')||'page-contact','name':d.get('name')||'','email':d.get('email')||'','company':d.get('company')||'','phone':d.get('phone')||'','service':d.get('service')||'','message':d.get('message')||''};
+    try{localStorage.setItem('mc_lead_'+Date.now(),JSON.stringify(p));}catch(ex){}
+    fetch('/api/lead',{method:'POST',headers:{'Content-Type':'application/x-www-form-urlencoded'},body:new URLSearchParams(p).toString()})
+    .then(function(){card.style.display='none';suc.style.display='block';})
+    .catch(function(){card.style.display='none';suc.style.display='block';
+      setTimeout(function(){window.open('mailto:mark@markcmo.com?subject=Inquiry&body=Name:+'+encodeURIComponent(p.name)+'%0AEmail:+'+encodeURIComponent(p.email),'_blank');},400);
+    });
+  });
+})();
+</script>
+<script src="/linkedin-widget.js" defer></script>
+</body>
+</html>

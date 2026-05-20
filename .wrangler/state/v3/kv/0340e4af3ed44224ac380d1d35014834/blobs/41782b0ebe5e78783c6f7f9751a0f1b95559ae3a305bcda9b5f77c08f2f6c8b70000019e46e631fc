@@ -1,0 +1,687 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<link rel="icon" type="image/webp" href="/favicon.webp"><link rel="apple-touch-icon" href="/mark-photo.webp">
+<meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+<title>MAGNET Architect Phase | Brand Positioning & Funnel Design | Mark Gabrielli Fractional CMO</title>
+<meta name="description" content="Phase 02 of the MAGNET Framework: the Architect phase. Mark Gabrielli designs your brand positioning, funnel architecture, messaging hierarchy, and tech stack before a dollar is spent on execution." />
+<meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1" />
+<link rel="canonical" href="https://markcmo.com/magnet-architect.html" />
+<meta property="og:type" content="article" />
+<meta property="og:title" content="MAGNET Architect Phase | Brand Positioning & Funnel Design | Mark Gabrielli" />
+<meta property="og:description" content="The Architect phase designs your brand positioning, funnel architecture, and messaging hierarchy before execution begins. Every downstream phase moves faster because of it." />
+<meta property="og:url" content="https://markcmo.com/magnet-architect.html" />
+<meta property="og:site_name" content="Mark Gabrielli | Fractional CMO & COO" />
+<meta property="og:image" content="https://markcmo.com/og-image.jpg" />
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:title" content="MAGNET Architect Phase | Brand Positioning & Funnel Design" />
+<meta name="twitter:description" content="The Architect phase designs your brand positioning, funnel architecture, and messaging hierarchy before execution begins." />
+<meta name="twitter:image" content="https://markcmo.com/og-image.jpg" />
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-BXK5Y3DQBL"></script>
+<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-BXK5Y3DQBL');</script>
+<link rel="stylesheet" href="style.css"/>
+<link rel="preconnect" href="https://fonts.googleapis.com" crossorigin>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;600;700;800;900&family=Space+Grotesk:wght@400;500;600;700&display=swap">
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://markcmo.com/"},{"@type":"ListItem","position":2,"name":"MAGNET Framework","item":"https://markcmo.com/magnet-framework.html"},{"@type":"ListItem","position":3,"name":"Architect Phase","item":"https://markcmo.com/magnet-architect.html"}]}
+</script>
+<style>
+.mag-hero{background:var(--bg);padding:8rem 6vw 5rem;position:relative;overflow:hidden;border-bottom:1px solid var(--border);}
+.mag-hero::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse at 70% 40%,rgba(201,168,76,0.09) 0%,transparent 60%);pointer-events:none;}
+.mag-hero-grid{position:absolute;inset:0;background-image:linear-gradient(rgba(201,168,76,0.03) 1px,transparent 1px),linear-gradient(90deg,rgba(201,168,76,0.03) 1px,transparent 1px);background-size:80px 80px;}
+.mag-hero-inner{max-width:1200px;margin:0 auto;display:grid;grid-template-columns:1fr 220px;gap:4rem;align-items:center;position:relative;z-index:1;}
+.mag-phase-label{font-size:0.72rem;font-weight:700;letter-spacing:0.15em;text-transform:uppercase;color:var(--accent);display:flex;align-items:center;gap:8px;margin-bottom:1rem;}
+.mag-phase-label::before{content:'';width:20px;height:2px;background:var(--accent);border-radius:2px;}
+.mag-hero h1{font-family:'Outfit',sans-serif;font-size:clamp(2.5rem,5vw,4.5rem);font-weight:900;letter-spacing:-0.04em;line-height:1.0;color:var(--text);margin-bottom:1.25rem;}
+.mag-hero h1 span{color:var(--accent);font-style:italic;}
+.mag-hero-sub{font-size:1.05rem;line-height:1.8;color:var(--text2);max-width:640px;margin-bottom:1.75rem;}
+.mag-big-letter{font-family:'Outfit',sans-serif;font-size:clamp(8rem,18vw,14rem);font-weight:900;color:var(--accent);line-height:0.85;opacity:0.18;text-align:center;user-select:none;}
+.mag-breadcrumb{display:flex;align-items:center;gap:0.5rem;font-size:0.78rem;color:var(--text3);margin-bottom:2rem;flex-wrap:wrap;}
+.mag-breadcrumb a{color:var(--text3);transition:color 0.15s;}.mag-breadcrumb a:hover{color:var(--accent);}
+.mag-breadcrumb span{color:var(--accent);}
+.mag-content{max-width:1100px;margin:0 auto;padding:5rem 6vw;}
+.mag-section{margin-bottom:4rem;}
+.mag-section h2{font-family:'Outfit',sans-serif;font-size:clamp(1.65rem,3vw,2.25rem);font-weight:800;letter-spacing:-0.03em;color:var(--text);margin-bottom:1rem;line-height:1.2;}
+.mag-section h2 span{color:var(--accent);font-style:italic;}
+.mag-section p{font-size:1rem;line-height:1.85;color:var(--text2);margin-bottom:1.1rem;}
+.mag-section h3{font-family:'Outfit',sans-serif;font-size:1.2rem;font-weight:700;color:var(--text);margin:2rem 0 0.6rem;letter-spacing:-0.01em;}
+.mag-section ul{margin:0.75rem 0 1.25rem 1.25rem;}
+.mag-section li{font-size:0.97rem;line-height:1.8;color:var(--text2);margin-bottom:0.35rem;padding-left:0.25rem;}
+.mag-quote{border-left:3px solid var(--accent);padding:1.25rem 1.75rem;background:var(--bg3);border-radius:0 14px 14px 0;margin:2rem 0;}
+.mag-quote p{font-size:1.05rem;font-style:italic;color:var(--text);margin:0;line-height:1.7;}
+.mag-del-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.1rem;margin:2rem 0;}
+.mag-del-card{background:var(--bg3);border:1px solid var(--border);border-radius:14px;padding:1.75rem;transition:border-color 0.2s,transform 0.2s;}
+.mag-del-card:hover{border-color:rgba(201,168,76,0.3);transform:translateY(-3px);}
+.mag-del-card svg{width:28px;height:28px;color:var(--accent);margin-bottom:0.75rem;}
+.mag-del-title{font-family:'Outfit',sans-serif;font-size:1rem;font-weight:700;color:var(--text);margin-bottom:0.4rem;}
+.mag-del-body{font-size:0.85rem;line-height:1.7;color:var(--text2);}
+.mag-phases-strip{background:var(--bg3);border:1px solid var(--border);border-radius:16px;padding:2rem;margin:3rem 0;display:grid;grid-template-columns:repeat(6,1fr);gap:0.5rem;}
+.mag-phase-pill{text-align:center;padding:1rem 0.5rem;border-radius:10px;transition:background 0.15s;}
+.mag-phase-pill.active{background:var(--accent-p);border:1px solid rgba(201,168,76,0.3);}
+.mag-phase-pill a{display:block;text-decoration:none;}
+.mag-phase-pill .pp-letter{font-family:'Outfit',sans-serif;font-size:1.75rem;font-weight:900;color:var(--accent);line-height:1;}
+.mag-phase-pill.active .pp-letter{color:var(--accent);}
+.mag-phase-pill .pp-name{font-size:0.68rem;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:var(--text3);margin-top:3px;}
+.mag-phase-pill.active .pp-name{color:var(--accent);}
+.mag-faq{background:var(--bg2);padding:5rem 6vw;}
+.mag-faq-inner{max-width:860px;margin:0 auto;}
+.mag-faq h2{font-family:'Outfit',sans-serif;font-size:clamp(1.75rem,3vw,2.5rem);font-weight:800;letter-spacing:-0.03em;color:var(--text);margin-bottom:2.5rem;}
+.faq-item{border-bottom:1px solid var(--border);padding:1.5rem 0;}
+.faq-q{font-family:'Outfit',sans-serif;font-size:1.05rem;font-weight:700;color:var(--text);margin-bottom:0.6rem;}
+.faq-a{font-size:0.95rem;line-height:1.8;color:var(--text2);}
+.mag-cta{background:linear-gradient(135deg,var(--accent),var(--accent-h));padding:5rem 6vw;text-align:center;}
+.mag-cta h2{font-family:'Outfit',sans-serif;font-size:clamp(2rem,4vw,3rem);font-weight:900;color:#000;margin-bottom:1rem;letter-spacing:-0.03em;}
+.mag-cta p{color:rgba(0,0,0,0.65);font-size:1rem;margin-bottom:2rem;max-width:580px;margin-left:auto;margin-right:auto;}
+.mag-cta-btn{display:inline-flex;align-items:center;gap:8px;background:#000;color:#fff;font-weight:700;font-size:0.9375rem;padding:1rem 2.25rem;border-radius:10px;text-decoration:none;transition:opacity 0.15s;}
+.mag-cta-btn:hover{opacity:0.85;}
+@media(max-width:900px){.mag-hero-inner{grid-template-columns:1fr;}.mag-big-letter{display:none;}.mag-del-grid{grid-template-columns:1fr 1fr;}.mag-phases-strip{grid-template-columns:repeat(3,1fr);}}
+@media(max-width:600px){.mag-del-grid{grid-template-columns:1fr;}.mag-phases-strip{grid-template-columns:repeat(2,1fr);}}
+</style>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "What does a fractional CMO do for companies in this market?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "A fractional CMO acts as your Chief Marketing Officer on a part-time basis - typically 2-3 days per week - with full executive accountability for strategy, team leadership, budget, and revenue outcomes. They own your entire marketing function and are accountable for pipeline generation and revenue attribution, not just deliverables."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "How quickly will I see results?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Most engagements produce measurable outputs within 30 days: a GTM strategy, ICP definition, messaging architecture, and demand generation plan. Pipeline movement typically appears in 60-90 days as campaigns launch. Long-term compounding results build over 6-12 months."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Is there a long-term contract required?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "No. Every MarkCMO engagement is month-to-month. There are no long-term contracts, no cancellation fees, and no lock-in. You stay because the results justify it. We offer a free GTM diagnostic before you commit to any paid engagement."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Do I have to sign a long-term contract?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "No. Every MarkCMO engagement is month-to-month. There are no long-term contracts, no cancellation fees, and no lock-in clauses. You stay because the results justify it - not because you are contractually obligated. We offer a free GTM diagnostic before you commit to any paid engagement so you can validate fit before spending a dollar."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "How does the engagement start?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Step one is a free 30-minute GTM diagnostic call. We review your current situation, revenue goals, team structure, and the biggest gap between where you are and where you need to be. If there is a clear fit, we outline a 30-60-90 day plan and agree on scope. Most engagements are live within 5-7 business days of the diagnostic call."
+      }
+    }
+  ],
+  "dateModified": "2026-05-08"
+}
+</script>
+<meta name="author" content="Mark Gabrielli"/>
+<link rel="author" href="https://markcmo.com/about.html"/>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebPage",
+  "name": "MAGNET Architect Phase | Brand Positioning & Funnel Design | Mark Gabrielli Fractional CMO",
+  "description": "Phase 02 of the MAGNET Framework: the Architect phase. Mark Gabrielli designs your brand positioning, funnel architecture, messaging hierarchy, and tech stack before a dollar is spent on execution.",
+  "url": "https://markcmo.com/magnet-architect.html",
+  "author": {
+    "@type": "Person",
+    "name": "Mark Gabrielli",
+    "url": "https://markcmo.com/about.html",
+    "sameAs": [
+      "https://www.linkedin.com/in/marklgabrielli/",
+      "https://markcmo.com"
+    ]
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "MarkCMO",
+    "url": "https://markcmo.com",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "https://markcmo.com/mark-photo.webp"
+    }
+  },
+  "dateModified": "2026-05-08",
+  "inLanguage": "en-US"
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "HowTo",
+  "name": "How to Architect a B2B Commercial Strategy with the MAGNET Framework",
+  "description": "The MAGNET Architect phase builds the commercial foundation: positioning, funnel design, messaging hierarchy, website conversion blueprint, tech stack, and team accountability structure.",
+  "step": [
+    {
+      "@type": "HowToStep",
+      "position": 1,
+      "name": "Position Workshop",
+      "text": "The position workshop establishes the commercial foundation: who the ideal customer is, what specific problem the business solves for them, how the positioning differentiates from alternatives, and what proof makes the positioning credible. This work produces the positioning framework that directs all downstream commercial decisions -- messaging, content, channel selection, and sales process."
+    },
+    {
+      "@type": "HowToStep",
+      "position": 2,
+      "name": "Funnel Stage Design",
+      "text": "Funnel stage design maps the buyer journey from first awareness to closed revenue, defining what happens at each stage, what triggers progression, and what marketing and sales activities support movement through each transition. The funnel design becomes the operational blueprint for the commercial system -- it specifies where investment is needed, what content is required at each stage, and how pipeline health is measured."
+    },
+    {
+      "@type": "HowToStep",
+      "position": 3,
+      "name": "Messaging Hierarchy Development",
+      "text": "The messaging hierarchy translates positioning into specific language for each channel, each buyer persona, and each stage of the funnel. It establishes the primary message (what the company does and who it serves), secondary messages for specific use cases and buyer segments, and proof statements that substantiate each claim. The hierarchy ensures that messaging is consistent across all commercial touchpoints while remaining relevant to the specific context where it appears."
+    },
+    {
+      "@type": "HowToStep",
+      "position": 4,
+      "name": "Website and Conversion Blueprint",
+      "text": "The conversion blueprint specifies how the website architecture, page structure, and content organization should be designed to convert ICP visitors into qualified pipeline. It defines the conversion paths for each ICP segment, the proof assets required at each stage, the calls to action that match buyer intent, and the technical infrastructure needed to track conversion through to revenue."
+    },
+    {
+      "@type": "HowToStep",
+      "position": 5,
+      "name": "Tech Stack Design and Gap Analysis",
+      "text": "The tech stack design identifies the systems required to execute the commercial strategy -- CRM, marketing automation, attribution, content management, and analytics -- and maps them against the current state. The gap analysis produces a prioritized list of tool investments or integrations needed to enable the commercial system, sequenced by the impact on commercial performance rather than by feature completeness."
+    },
+    {
+      "@type": "HowToStep",
+      "position": 6,
+      "name": "Team and Accountability Design",
+      "text": "The team and accountability design specifies who owns what in the commercial system, how performance is measured, and how decision-making is structured across marketing, sales, and revenue operations. Clear accountability prevents the organizational gaps that cause commercial systems to underperform despite strong strategy -- the situations where everyone is responsible for a result but no one specifically owns it."
+    }
+  ]
+}
+</script>
+</head>
+<body>
+<nav class="nav" id="mainNav">
+<a href="/index.html" class="nav-logo">
+<div class="nav-logo-avatar">
+<img src="/mark-photo.webp" alt="Mark Gabrielli" />
+</div>
+<div class="nav-logo-text">
+<strong>Mark Gabrielli</strong>
+<span>Fractional CMO &amp; COO</span>
+</div>
+</a>
+<ul class="nav-links">
+<li><a href="/about.html">About</a></li>
+<li><a href="/services.html">Services</a></li>
+<li><a href="/magnet-framework.html" style="color:#C9A84C;font-weight:600;">MAGNET&trade;</a></li>
+<li><a href="/results.html">Results</a></li>
+<li><a href="/blog">Insights</a></li>
+<li><a href="https://academy.markcmo.com" target="_blank" style="color:#C9A84C;">Academy</a></li>
+</ul>
+<div class="nav-right">
+<a href="/book.html" class="nav-btn">Book a Free Call</a>
+</div>
+<div class="nav-hamburger" id="navHam"><span></span><span></span><span></span></div>
+</nav>
+<div class="mobile-drawer" id="mobileDrawer">
+<a href="/about.html">About</a>
+<a href="/services.html">Services</a>
+<a href="/magnet-framework.html" style="color:#C9A84C;font-weight:600;">MAGNET Framework&trade;</a>
+<a href="/results.html">Results</a>
+<a href="/blog">Insights</a>
+<a href="https://academy.markcmo.com" target="_blank">Academy</a>
+<a href="/book.html" style="color:#C9A84C;font-weight:700;">Book a Free Strategy Call &rarr;</a>
+</div>
+
+<section class="mag-hero">
+<div class="mag-hero-grid"></div>
+<div class="mag-hero-inner">
+<div class="reveal">
+<div class="mag-breadcrumb">
+<a href="index.html">Home</a> / <a href="magnet-framework.html">MAGNET Framework</a> / <span>Architect</span>
+</div>
+<div class="mag-phase-label">Phase 02 of 06</div>
+<h1><span>A</span> is for Architect.<br>Design the system<br>before building it.</h1>
+<p class="mag-hero-sub">Design brand positioning, funnel architecture, messaging hierarchy, website blueprint, tech stack configuration, and org structure. Architecture done right means every downstream phase moves faster and costs less.</p>
+<a href="book.html" class="btn">Start with an Architect Session</a>
+</div>
+<div class="mag-big-letter">A</div>
+</div>
+</section>
+<div class="sp-proof-strip">
+<div class="sp-proof-item">
+<span class="sp-proof-num">4.9&#9733;</span>
+<span class="sp-proof-label">193 Reviews</span>
+</div>
+<div class="sp-proof-item">
+<span class="sp-proof-num">90%</span>
+<span class="sp-proof-label">Retention Rate</span>
+</div>
+<div class="sp-proof-item">
+<span class="sp-proof-num">19+</span>
+<span class="sp-proof-label">Ventures Built</span>
+</div>
+<div class="sp-proof-item">
+<span class="sp-proof-num">$50M+</span>
+<span class="sp-proof-label">Revenue Generated</span>
+</div>
+<div class="sp-proof-item">
+<span class="sp-proof-num">30</span>
+<span class="sp-proof-label">Days to First Results</span>
+</div>
+</div>
+<div style="background:#0d1b27;border-left:3px solid #2563EB;padding:1.25rem 1.5rem;margin:0 auto 0;max-width:1100px;border-radius:0 6px 6px 0;">
+<strong style="color:#C9A84C;font-size:.75rem;font-family:'DM Mono',monospace;text-transform:uppercase;letter-spacing:.1em;display:block;margin-bottom:.5rem;">Quick Answer</strong>
+<p style="color:#ccc;margin:0;line-height:1.75;font-size:.95rem;">MAGNET Architect is the Market and Awareness phases of the MAGNET Framework -- the strategic foundation stage where a fractional CMO defines the Ideal Customer Profile (ICP), total addressable market, competitive positioning, brand differentiation, and the awareness channels that reach target buyers before they enter an active buying cycle. The Architect phase produces the positioning document, ICP specification, and brand voice guidelines that inform every downstream marketing decision -- preventing the common failure of launching demand generation campaigns before strategy is defined, which produces activity without compound results.</p>
+</div>
+
+
+<div class="mag-content">
+
+<div class="mag-phases-strip reveal">
+<div class="mag-phase-pill">
+  <a href="magnet-map.html">
+    <div class="pp-letter">M</div>
+    <div class="pp-name">Map</div>
+  </a>
+</div>
+<div class="mag-phase-pill active">
+  <a href="magnet-architect.html">
+    <div class="pp-letter">A</div>
+    <div class="pp-name">Architect</div>
+  </a>
+</div>
+<div class="mag-phase-pill">
+  <a href="magnet-generate.html">
+    <div class="pp-letter">G</div>
+    <div class="pp-name">Generate</div>
+  </a>
+</div>
+<div class="mag-phase-pill">
+  <a href="magnet-nurture.html">
+    <div class="pp-letter">N</div>
+    <div class="pp-name">Nurture</div>
+  </a>
+</div>
+<div class="mag-phase-pill">
+  <a href="magnet-engineer.html">
+    <div class="pp-letter">E</div>
+    <div class="pp-name">Engineer</div>
+  </a>
+</div>
+<div class="mag-phase-pill">
+  <a href="magnet-track.html">
+    <div class="pp-letter">T</div>
+    <div class="pp-name">Track</div>
+  </a>
+</div>
+</div>
+
+<div class="mag-section reveal">
+<h2>What is the <span>Architect Phase?</span></h2>
+<p>The Architect phase is where strategy becomes structure. Armed with the Map phase findings, Mark Gabrielli designs the full operating system for your marketing and revenue function - before a single campaign goes live, before a landing page gets built, before a dollar moves into any channel. Everything that follows in Phases 03 through 06 runs on the foundation built here.</p>
+<p>Most B2B growth companies jump from audit to execution without ever designing the system. They hire content writers before they have a messaging hierarchy. They buy ad inventory before their funnel converts. They onboard a CRM before their pipeline stages are defined. The Architect phase stops that cycle by designing the full system first - brand positioning, funnel stages, messaging, pages, tech, and team - so every subsequent action has a clear home and a clear purpose.</p>
+<div class="mag-quote"><p>"You can't scale chaos. The Architect phase turns your business into a system that scales."</p></div>
+</div>
+
+<div class="mag-section reveal">
+<h2>Why Architecture Matters <span>Before Execution</span></h2>
+<p>The compulsion to execute is one of the most expensive impulses in growth-stage marketing. Speed feels like progress. But execution without architecture is just spending money faster. The Architect phase exists because the companies that grow efficiently design their system before they run it.</p>
+<h3>What Happens Without Architecture</h3>
+<p>Companies that skip the design phase consistently encounter the same set of expensive problems regardless of how talented their team or how large their budget:</p>
+<ul>
+<li><strong>Fragmented messaging:</strong> Every channel tells a different story because there is no agreed messaging hierarchy. Buyers get confused. Sales cycles extend. Close rates drop.</li>
+<li><strong>Funnel stages with no conversion logic:</strong> Leads move through a CRM without anyone having designed what behavior triggers stage progression or what content supports each stage.</li>
+<li><strong>Website that can't convert:</strong> Pages built around what the company wants to say rather than what the buyer needs to hear before they take action.</li>
+<li><strong>Tech stack assembled by accident:</strong> Tools purchased reactively, not integrated intentionally. Data siloed. Attribution broken. Revenue reporting impossible.</li>
+<li><strong>No accountability structure:</strong> Marketing, sales, and ops each own overlapping pieces with no clear handoff design - meaning things fall through the cracks at every stage.</li>
+</ul>
+<p>The Architect phase designs all of this before any of it gets built. The result is a growth system where every component knows what it is supposed to do, how it connects to the next stage, and how it will be measured.</p>
+</div>
+
+<div class="mag-section reveal">
+<h2>What the Architect Phase <span>Delivers</span></h2>
+<div class="mag-del-grid">
+<div class="mag-del-card">
+<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/></svg>
+<div class="mag-del-title">Brand Positioning</div>
+<div class="mag-del-body">Category design, differentiation, and "only we" statement that makes price irrelevant. Your market position defined with precision so buyers understand exactly why you and not anyone else.</div>
+</div>
+<div class="mag-del-card">
+<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
+<div class="mag-del-title">Funnel Architecture</div>
+<div class="mag-del-body">Full-funnel mapping from first touch to closed deal, every stage defined. Stage entry criteria, conversion triggers, handoff protocols, and content assignments for every point in the buyer journey.</div>
+</div>
+<div class="mag-del-card">
+<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+<div class="mag-del-title">Messaging Hierarchy</div>
+<div class="mag-del-body">Core message, proof points, objection responses in buyer language. The full messaging architecture that every channel, team member, and asset draws from - consistent and conversion-tested.</div>
+</div>
+<div class="mag-del-card">
+<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18"/><path d="M9 21V9"/></svg>
+<div class="mag-del-title">Website & Landing Page Blueprint</div>
+<div class="mag-del-body">Conversion infrastructure designed for the ICP, pages that sell. Page-by-page wireframe logic, CTA architecture, and conversion hierarchy mapped before a designer touches a pixel.</div>
+</div>
+<div class="mag-del-card">
+<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="18" cy="18" r="3"/><circle cx="6" cy="6" r="3"/><path d="M13 6h3a2 2 0 0 1 2 2v7"/><line x1="6" y1="9" x2="6" y2="21"/></svg>
+<div class="mag-del-title">Tech Stack Architecture</div>
+<div class="mag-del-body">CRM, automation, attribution, and analytics configured as a revenue machine. Every tool selected for a specific function, every integration designed for clean data flow from first touch to closed deal.</div>
+</div>
+<div class="mag-del-card">
+<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+<div class="mag-del-title">Org & Team Structure</div>
+<div class="mag-del-body">Who you need, when, and who owns what with accountability built in. Role definitions, hiring sequencing, and RACI design for your marketing and revenue function at current stage and next stage of growth.</div>
+</div>
+</div>
+</div>
+
+<div class="mag-section reveal">
+<h2>How the Architect Phase <span>Works in Practice</span></h2>
+<p>The Architect phase typically runs across two to three weeks following completion of the Map phase. It is a design and documentation sprint, not a strategy retreat. Every session produces a working artifact that moves directly into Phase 03.</p>
+<h3>Step 1: Position Workshop</h3>
+<p>A structured session with founders and senior leadership to define and stress-test the brand position. This is not a branding exercise about logos or colors. It is a strategic decision about what category you compete in, what you uniquely own, and how you eliminate price as the primary buying criteria for your ICP. The output is a single positioning statement and a supporting "only we" proof set.</p>
+<h3>Step 2: Funnel Stage Design</h3>
+<p>Your pipeline stages are designed from scratch based on buyer behavior, not CRM defaults. Each stage gets a clear entry criterion, an expected time-in-stage benchmark, a content assignment, and an exit trigger. Sales and marketing alignment is built into the design rather than patched on afterward. The result is a funnel where every stage is intentional and measurable.</p>
+<h3>Step 3: Messaging Hierarchy Development</h3>
+<p>Starting from the ICP data surfaced in the Map phase, the messaging hierarchy is built layer by layer: core value proposition at the top, primary proof points in the middle, objection-response messaging and buyer-language variations at the bottom. This becomes the master document that every channel, copywriter, sales rep, and campaign draws from.</p>
+<h3>Step 4: Website and Conversion Blueprint</h3>
+<p>Every page in your conversion infrastructure is mapped: homepage, solution pages, landing pages, case study pages, pricing page if applicable. For each page, the conversion hierarchy is defined - what the visitor should believe after reading, what action they should take, and what proof must appear before that CTA. This blueprint goes to design and development as a complete brief, not a vague request.</p>
+<h3>Step 5: Tech Stack Design and Gap Analysis</h3>
+<p>The current tech stack is reviewed against the architecture requirements for Phases 03 through 06. Missing integrations are identified. Tool redundancies are flagged for elimination. Attribution architecture is designed so every dollar can be traced from channel spend to closed revenue. The output is a complete tech stack specification with integration map and data flow diagram.</p>
+<h3>Step 6: Team and Accountability Design</h3>
+<p>The organizational structure for the marketing and revenue function is designed against the growth objectives. Current team gaps are identified with a prioritized hiring sequence. For every function, a clear owner is named, KPIs are assigned, and the reporting cadence is set. This eliminates the ambiguity that causes execution breakdowns in fast-growing teams.</p>
+</div>
+
+<div class="mag-section reveal">
+<h2>What Makes This Approach <span>Different</span></h2>
+<p>Strategy firms sell positioning decks. Agencies build websites without blueprints. Consultants deliver frameworks that gather dust. The Architect phase is different in three specific ways that make it actually executable.</p>
+<ul>
+<li>Every deliverable is built to be used by the team that executes it - not to impress in a board presentation. The messaging hierarchy is formatted for a copywriter. The funnel design goes directly into CRM configuration. The website blueprint becomes a development brief.</li>
+<li>Architecture decisions are made using the Map phase data, not assumptions. The positioning is tested against actual competitive gaps. The funnel stages reflect actual buyer behavior patterns from closed-won analysis. The tech stack decisions are based on what your pipeline actually needs to function.</li>
+<li>The Architect phase includes org design - not just marketing strategy. Growth companies consistently underhire or mismatch roles to functions because no one ever designed the organizational architecture. This phase closes that gap before it costs headcount and time.</li>
+</ul>
+<p>The output of the Architect phase is a complete, buildable system specification. When Phase 03 Generate begins, the team is not figuring out what to build. They are building what has already been designed.</p>
+</div>
+
+</div>
+
+<section class="mag-faq">
+<div class="mag-faq-inner">
+<div class="section-label">FAQ</div>
+<h2>Questions About the <span style="color:var(--accent);font-style:italic;">Architect Phase</span></h2>
+
+<div class="faq-item">
+<div class="faq-q">Do we need to complete the Map phase before starting Architect?</div>
+<div class="faq-a">Yes. The Architect phase is designed to consume the Map phase output. Brand positioning decisions are made against actual competitive gap data. Funnel architecture is built around real ICP behavior from closed-won analysis. Messaging hierarchy is grounded in actual buyer language from customer interviews. Skipping Map and jumping to Architect produces strategy built on assumption rather than evidence - which is precisely the pattern this framework is designed to prevent.</div>
+</div>
+
+<div class="faq-item">
+<div class="faq-q">We already have a brand and a website. Do we still need the Architect phase?</div>
+<div class="faq-a">Almost always, yes. Having a brand and a website is not the same as having a designed conversion system. Most companies that come to Mark have visual assets but no messaging hierarchy, a CRM but no designed funnel stages, and a website that was built for aesthetics rather than buyer conversion. The Architect phase rebuilds the system logic underneath your existing assets and identifies what needs to be rebuilt versus what can be retained and optimized.</div>
+</div>
+
+<div class="faq-item">
+<div class="faq-q">How involved does our team need to be in the Architect phase?</div>
+<div class="faq-a">The Position Workshop and Messaging Hierarchy sessions require active participation from your founding team and any senior revenue leadership. These decisions cannot be made by an external advisor working in isolation - they require your knowledge of the business, the market, and the customer. All other deliverables are drafted by Mark and reviewed with your team. The typical time commitment for your leadership is six to ten hours across the full Architect phase.</div>
+</div>
+
+<div class="faq-item">
+<div class="faq-q">Does the Architect phase include actual design or development work?</div>
+<div class="faq-a">No. The Architect phase produces specifications and blueprints - strategic and structural documents that brief design and development work. The website blueprint defines what every page needs to accomplish, what content it requires, and what conversion architecture it follows. Actual page design and development happens in Phase 03 Generate, executed either by your existing team or vendor partners working from the Architect phase brief.</div>
+</div>
+
+<div class="faq-item">
+<div class="faq-q">What if we disagree with the positioning or messaging recommendations?</div>
+<div class="faq-a">The Architect phase is a collaborative design process, not a consulting report handed over for sign-off. Every major architectural decision - positioning, funnel stage design, messaging hierarchy - is workshopped with your leadership team and tested against evidence before it is finalized. Disagreements are part of the process. The goal is to arrive at architecture your team believes in and can execute, not to impose a framework that doesn't fit the business.</div>
+</div>
+
+<div class="faq-item">
+<div class="faq-q">What phase comes after Architect?</div>
+<div class="faq-a">The Architect phase feeds directly into Phase 03: <a href="magnet-generate.html">Generate</a>, where the system gets activated. Campaigns launch, pages go live, demand generation begins. Because the architecture is complete before execution starts, Generate moves faster and produces measurable results from the first week rather than spending the first month figuring out what to build.</div>
+</div>
+</div>
+</section>
+
+<section class="mag-cta">
+<h2>Ready to Design Your Growth System?</h2>
+<p>Stop building on a broken foundation. Design the system first - then scale it.</p>
+<a href="book.html" class="mag-cta-btn">Book a Free Discovery Call</a>
+</section>
+
+<div class="sp-faq" style="padding:3rem 6vw;max-width:960px;margin:0 auto;">
+<h2 style="color:#ffffff;font-family:'Bebas Neue',sans-serif;font-size:clamp(1.6rem,2.8vw,2.2rem);letter-spacing:.04em;margin-bottom:1.5rem;">What You Get - Frequently Asked Questions</h2>
+<div class="sp-faq-item">
+<p class="sp-faq-q">What does a fractional CMO do for companies in this market?</p>
+<p class="sp-faq-a">A fractional CMO acts as your Chief Marketing Officer on a part-time basis -- typically 2-3 days per week -- with full executive accountability for strategy, team leadership, budget, and revenue outcomes. They own your entire marketing function and are accountable for pipeline generation and revenue attribution, not just deliverables.</p>
+</div>
+<div class="sp-faq-item">
+<p class="sp-faq-q">How quickly will I see results?</p>
+<p class="sp-faq-a">Most engagements produce measurable outputs within 30 days: a GTM strategy, ICP definition, messaging architecture, and demand generation plan. Pipeline movement typically appears in 60-90 days as campaigns launch. Long-term compounding results build over 6-12 months.</p>
+</div>
+<div class="sp-faq-item">
+<p class="sp-faq-q">Is there a long-term contract required?</p>
+<p class="sp-faq-a">No. Every MarkCMO engagement is month-to-month. There are no long-term contracts, no cancellation fees, and no lock-in. You stay because the results justify it. We offer a free GTM diagnostic before you commit to any paid engagement.</p>
+</div>
+<div class="sp-faq-item">
+<p class="sp-faq-q">Do I have to sign a long-term contract?</p>
+<p class="sp-faq-a">No. Every MarkCMO engagement is month-to-month. There are no long-term contracts, no cancellation fees, and no lock-in clauses. You stay because the results justify it -- not because you are contractually obligated. We offer a free GTM diagnostic before you commit to any paid engagement so you can validate fit before spending a dollar.</p>
+</div>
+<div class="sp-faq-item">
+<p class="sp-faq-q">How does the engagement start?</p>
+<p class="sp-faq-a">Step one is a free 30-minute GTM diagnostic call. We review your current situation, revenue goals, team structure, and the biggest gap between where you are and where you need to be. If there is a clear fit, we outline a 30-60-90 day plan and agree on scope. Most engagements are live within 5-7 business days of the diagnostic call.</p>
+</div>
+</div>
+<div class="sp-testimonials">
+<h2>What Clients Say About the MAGNET Framework</h2>
+<p class="sp-test-sub">Results measured in pipeline generated, CAC reduced, and revenue compounded -- not reports delivered or hours billed.</p>
+<div class="sp-test-grid">
+<div class="sp-test-card"><div class="test-stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div><p class="test-text">"The MAGNET framework gave us the first commercial architecture we had ever operated from. Before, marketing was a collection of activities. After, marketing was a system. The difference in pipeline predictability was immediate. We went from guessing what was working to knowing exactly which components of the framework were generating qualified pipeline and at what cost.",</p><div class="test-name">Rachel S.</div><div class="test-role">CEO, B2B SaaS Company, $14M ARR</div></div>
+<div class="sp-test-card"><div class="test-stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div><p class="test-text">"What I valued most about the MAGNET engagement was that it built something permanent. The framework, the attribution model, the demand generation playbook, the team accountability structure -- all of it outlived the engagement. Eighteen months later our marketing function still runs on the commercial infrastructure that was built during the MAGNET implementation.",</p><div class="test-name">Thomas H.</div><div class="test-role">COO, PE-Backed Technology Company, $22M Revenue</div></div>
+<div class="sp-test-card"><div class="test-stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div><p class="test-text">"The MAGNET Track phase was what changed our commercial decision-making permanently. For the first time we had attribution data that connected marketing spend to pipeline to closed revenue by channel. That data made every subsequent budget decision more defensible, more efficient, and more aligned with what was actually working. Pipeline grew 3.1x in the 12 months after implementation.",</p><div class="test-name">Jennifer W.</div><div class="test-role">CFO, Venture-Backed B2B Company, Series B</div></div>
+</div>
+</div>
+
+<div class="sp-cta-closer">
+<div class="sp-cta-closer-inner">
+<span class="sp-cta-closer-tag">Free 30-Min Diagnostic</span>
+<h2>Ready to Build a Marketing Engine That Compounds?</h2>
+<p>Book a free GTM diagnostic call. No pitch. No pressure. We review your current situation, identify the single biggest gap in your marketing, and give you a clear path forward -- whether you hire us or not.</p>
+<div class="sp-cta-closer-btns">
+<a href="/book.html" class="sp-cta-primary">Book Free Strategy Call</a>
+<a href="/fractional-cmo.html" class="btn-ghost">Learn About Fractional CMO</a>
+</div>
+<p class="sp-cta-closer-trust"><span>4.9&#9733; rated</span><span>&nbsp;&bull;&nbsp;</span><span>193 client reviews</span><span>&nbsp;&bull;&nbsp;</span><span>No long-term contracts</span><span>&nbsp;&bull;&nbsp;</span><span>Month-to-month</span></p>
+</div>
+</div>
+
+<footer>
+<div class="footer-mega">
+<div class="footer-brand-col">
+<div class="footer-brand">Mark <span>Gabrielli</span></div>
+<div class="footer-tagline">Fractional CMO &amp; COO</div>
+<p class="footer-desc">Embedded executive strategy for B2B growth-stage companies. 15+ years. 370+ cities served.</p>
+</div>
+<div>
+<div class="footer-col-title">MAGNET</div>
+<ul>
+<li><a href="magnet-framework.html">Overview</a></li>
+<li><a href="magnet-map.html">Map</a></li>
+<li><a href="magnet-architect.html">Architect</a></li>
+<li><a href="magnet-generate.html">Generate</a></li>
+<li><a href="magnet-nurture.html">Nurture</a></li>
+<li><a href="magnet-engineer.html">Engineer</a></li>
+<li><a href="magnet-track.html">Track</a></li>
+</ul>
+</div>
+<div>
+<div class="footer-col-title">Services</div>
+<ul>
+<li><a href="fractional-cmo.html">Fractional CMO</a></li>
+<li><a href="fractional-coo.html">Fractional COO</a></li>
+<li><a href="services.html">All Services</a></li>
+</ul>
+</div>
+<div>
+<div class="footer-col-title">Company</div>
+<ul>
+<li><a href="about.html">About Mark</a></li>
+<li><a href="results.html">Results</a></li>
+<li><a href="blog.html">Insights</a></li>
+<li><a href="book.html">Book a Call</a></li>
+</ul>
+</div>
+</div>
+<div class="footer-bottom">
+<p class="footer-copy">&copy; 2026 Mark Gabrielli / WETYR Corp. All rights reserved.</p>
+</div>
+</footer>
+
+<script>
+document.querySelectorAll('.reveal').forEach(function(el){
+  var o=new IntersectionObserver(function(entries){
+    entries.forEach(function(e){if(e.isIntersecting){e.target.classList.add('visible');}});
+  },{threshold:0.1});
+  o.observe(el);
+});
+</script>
+<script src="nav.js" defer></script>
+<script>
+(function(){
+  var nav=document.getElementById('mainNav');
+  var ham=document.getElementById('navHam');
+  var drw=document.getElementById('mobileDrawer');
+  if(nav) window.addEventListener('scroll',function(){
+    nav.classList.toggle('scrolled',window.scrollY>20);
+  },{passive:true});
+  if(ham&&drw){
+    ham.addEventListener('click',function(){drw.classList.toggle('open');});
+    drw.querySelectorAll('a').forEach(function(a){
+      a.addEventListener('click',function(){drw.classList.remove('open');});
+    });
+  }
+})();
+</script>
+<style id="mc-form-styles">
+.mc-contact{background:linear-gradient(135deg,#050919 0%,#0A1628 60%,#0d1b27 100%);padding:64px 0;border-top:1px solid #2a2a2a;margin-top:0}
+.mc-contact-inner{max-width:1100px;margin:0 auto;padding:0 24px;display:grid;grid-template-columns:1fr 1fr;gap:56px;align-items:start}
+.mc-contact-left h2{font-family:'Bebas Neue',Barlow,-apple-system,sans-serif;font-size:clamp(1.8rem,4vw,2.8rem);font-weight:400;letter-spacing:.03em;color:#fff;margin:0 0 14px;line-height:1.1}
+.mc-contact-left h2 em{color:#C9A84C;font-style:normal}
+.mc-contact-left p{font-size:.92rem;color:#94A3B8;line-height:1.8;margin:0 0 24px}
+.mc-contact-proof{display:flex;flex-direction:column;gap:10px;margin-bottom:28px}
+.mc-contact-proof-item{display:flex;align-items:center;gap:10px;font-size:.85rem;color:#94A3B8}
+.mc-contact-proof-item span:first-child{color:#C9A84C;font-weight:700;font-size:1rem;flex-shrink:0}
+.mc-contact-direct{background:rgba(201,168,76,.08);border:1px solid rgba(201,168,76,.2);border-radius:8px;padding:14px 18px}
+.mc-contact-direct p{font-size:.75rem;color:#666;text-transform:uppercase;letter-spacing:.08em;margin:0 0 6px}
+.mc-contact-direct a{color:#C9A84C;font-weight:700;text-decoration:none;font-size:.88rem}
+.mc-form-card{background:#111;border:1px solid #2a2a2a;border-radius:12px;padding:28px}
+.mc-form-card h3{font-size:1.05rem;font-weight:700;color:#fff;margin:0 0 4px}
+.mc-form-card>p{font-size:.82rem;color:#64748B;margin:0 0 20px}
+.mc-field{margin-bottom:12px}
+.mc-field input,.mc-field textarea,.mc-field select{width:100%;padding:12px 14px;background:#1a1a1a;border:1px solid #2a2a2a;border-radius:6px;color:#e8e8e8;font-size:.88rem;font-family:inherit;box-sizing:border-box;transition:border-color .2s;outline:none}
+.mc-field input:focus,.mc-field textarea:focus,.mc-field select:focus{border-color:#C9A84C}
+.mc-field input::placeholder,.mc-field textarea::placeholder{color:#3a3a3a}
+.mc-field textarea{resize:vertical;min-height:80px}
+.mc-field select{appearance:none;cursor:pointer;color:#e8e8e8}
+.mc-field select option{background:#1a1a1a}
+.mc-submit{width:100%;background:#C9A84C;color:#0f0f0f;border:none;padding:13px;border-radius:6px;font-size:.95rem;font-weight:700;cursor:pointer;font-family:inherit;transition:background .2s;margin-top:4px}
+.mc-submit:hover:not(:disabled){background:#b8952f}
+.mc-submit:disabled{opacity:.5;cursor:not-allowed}
+.mc-success{display:none;text-align:center;padding:28px 12px}
+.mc-success-icon{font-size:2.5rem;margin-bottom:10px;color:#C9A84C}
+.mc-success h3{color:#C9A84C;font-size:1.2rem;font-weight:700;margin:0 0 8px}
+.mc-success p{color:#94A3B8;font-size:.88rem;margin:0 0 18px;line-height:1.7}
+.mc-success a{color:#C9A84C;font-weight:700}
+@media(max-width:860px){.mc-contact-inner{grid-template-columns:1fr;gap:32px}}
+@media(max-width:540px){.mc-contact{padding:40px 0}.mc-form-card{padding:20px 16px}.mc-contact-inner{padding:0 14px}}
+</style>
+<section class="mc-contact" id="contact">
+  <div class="mc-contact-inner">
+    <div class="mc-contact-left">
+      <h2>Get a Free <em>Revenue Strategy Call</em></h2>
+      <p>30 minutes with Mark Gabrielli. No pitch. A direct read on your biggest marketing gaps and what moves revenue fastest. Responds personally within 24 hours.</p>
+      <div class="mc-contact-proof">
+        <div class="mc-contact-proof-item"><span>&#10003;</span><span>$135M+ in qualified B2B pipeline built for clients</span></div>
+        <div class="mc-contact-proof-item"><span>&#10003;</span><span>90% client retention rate</span></div>
+        <div class="mc-contact-proof-item"><span>&#10003;</span><span>Retainer starts at $8K/month, launches in 1-2 weeks</span></div>
+        <div class="mc-contact-proof-item"><span>&#10003;</span><span>4.9 stars across review platforms</span></div>
+      </div>
+      <div class="mc-contact-direct">
+        <p>Prefer to reach out directly?</p>
+        <a href="mailto:mark@markcmo.com">mark@markcmo.com</a>
+        &nbsp;&nbsp;&#183;&nbsp;&nbsp;
+        <a href="tel:+13219175738">+1 (321) 917-5738</a>
+      </div>
+    </div>
+    <div class="mc-form-card">
+      <h3>Book a Free Strategy Call</h3>
+      <p>60 seconds. Mark responds personally within 24 hours.</p>
+      <div id="mc-card">
+        <form id="mc-form" novalidate>
+          <input type="hidden" name="form-name" value="page-contact">
+          <input type="text" name="bot-field" style="display:none" tabindex="-1" autocomplete="off">
+          <div class="mc-field"><input type="text" name="name" placeholder="Your Full Name *" required autocomplete="name"></div>
+          <div class="mc-field"><input type="email" name="email" placeholder="Work Email *" required autocomplete="email"></div>
+          <div class="mc-field"><input type="text" name="company" placeholder="Company Name" autocomplete="organization"></div>
+          <div class="mc-field"><input type="tel" name="phone" placeholder="Phone (optional)" autocomplete="tel"></div>
+          <div class="mc-field">
+            <select name="service">
+              <option value="" disabled selected>What are you looking for?</option>
+              <option value="fractional-cmo">Fractional CMO Retainer ($8K-$20K/mo)</option>
+              <option value="revenue-audit">Revenue Leak Audit ($7,500)</option>
+              <option value="vip-day">CMO VIP Day ($4,500)</option>
+              <option value="founders-circle">Founders Circle ($25K/yr)</option>
+              <option value="fractional-coo">Fractional COO Services</option>
+              <option value="unsure">Not sure yet - need a consult</option>
+            </select>
+          </div>
+          <div class="mc-field"><textarea name="message" placeholder="Biggest revenue challenge right now? (optional)"></textarea></div>
+          <button type="submit" id="mc-btn" class="mc-submit">Book Free Strategy Call &#8594;</button>
+          <div style="margin-top:8px;font-size:.72rem;color:#3a3a3a;text-align:center">No spam. No sales team. Just Mark.</div>
+        </form>
+      </div>
+      <div id="mc-success" class="mc-success">
+        <div class="mc-success-icon">&#10003;</div>
+        <h3>You are in. Check your inbox.</h3>
+        <p>Mark will personally follow up within 24 hours.<br>Or reach him directly: <a href="mailto:mark@markcmo.com">mark@markcmo.com</a> &#183; <a href="tel:+13219175738">+1 (321) 917-5738</a></p>
+      </div>
+    </div>
+  </div>
+</section>
+<script>
+(function(){
+  var _t;
+  document.addEventListener('input',function(){
+    clearTimeout(_t);_t=setTimeout(function(){
+      var f=document.getElementById('mc-form');if(!f)return;
+      var d=new FormData(f),o={};d.forEach(function(v,k){if(v&&k!=='bot-field')o[k]=v;});
+      o._page=location.pathname;o._ts=new Date().toISOString();
+      try{localStorage.setItem('mc_partial',JSON.stringify(o));}catch(e){}
+    },3000);
+  });
+  var form=document.getElementById('mc-form');if(!form)return;
+  form.addEventListener('submit',function(e){
+    e.preventDefault();
+    var btn=document.getElementById('mc-btn'),card=document.getElementById('mc-card'),suc=document.getElementById('mc-success');
+    if(!btn||!card||!suc)return;
+    btn.textContent='Sending...';btn.disabled=true;
+    var d=new FormData(form);
+    var p={'form-name':d.get('form-name')||'page-contact','name':d.get('name')||'','email':d.get('email')||'','company':d.get('company')||'','phone':d.get('phone')||'','service':d.get('service')||'','message':d.get('message')||''};
+    try{localStorage.setItem('mc_lead_'+Date.now(),JSON.stringify(p));}catch(ex){}
+    fetch('/api/lead',{method:'POST',headers:{'Content-Type':'application/x-www-form-urlencoded'},body:new URLSearchParams(p).toString()})
+    .then(function(){card.style.display='none';suc.style.display='block';})
+    .catch(function(){card.style.display='none';suc.style.display='block';
+      setTimeout(function(){window.open('mailto:mark@markcmo.com?subject=Inquiry&body=Name:+'+encodeURIComponent(p.name)+'%0AEmail:+'+encodeURIComponent(p.email),'_blank');},400);
+    });
+  });
+})();
+</script>
+<script src="/linkedin-widget.js" defer></script>
+</body>
+</html>

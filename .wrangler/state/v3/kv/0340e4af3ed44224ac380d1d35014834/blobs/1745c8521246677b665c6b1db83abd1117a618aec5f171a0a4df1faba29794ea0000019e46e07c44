@@ -1,0 +1,741 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-BXK5Y3DQBL"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-BXK5Y3DQBL');
+</script>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Book a Free Strategy Call | Mark Gabrielli | Fractional CMO &amp; COO</title>
+<meta name="description" content="Book a free 30-minute Growth Discovery Call with Mark Gabrielli. Fractional CMO &amp; COO. No pitch, no pressure - just clarity on what's broken and what to fix first." />
+<meta name="robots" content="index, follow" />
+<link rel="canonical" href="https://markcmo.com/book" />
+<meta property="og:title" content="Book a Free Strategy Call | Mark Gabrielli" />
+<meta property="og:description" content="Free 30-min Growth Discovery Call. No pitch, no pressure. Walk away with a clear diagnosis of what's broken and what to fix first." />
+<meta property="og:url" content="https://markcmo.com/book" />
+<meta property="og:image" content="https://markcmo.com/og-image.jpg" />
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="theme-color" content="#0A0F2C" />
+<!-- Calendly CSS loaded early but non-blocking -->
+<link href="https://assets.calendly.com/assets/external/widget.css" rel="stylesheet" media="print" onload="this.media='all'" />
+<link rel="preconnect" href="https://fonts.googleapis.com" crossorigin>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="preconnect" href="https://calendly.com" crossorigin>
+<link rel="preconnect" href="https://assets.calendly.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;600;700;800;900&family=Space+Grotesk:wght@400;500;600;700&display=swap">
+<link rel="stylesheet" href="style.css" />
+<style>
+/* ═══ BOOK PAGE ═══════════════════════════════════════════════════ */
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+.book-page { padding-top: 64px; background: var(--bg); min-height: 100vh; }
+
+/* ── Hero ── */
+.book-hero {
+  padding: 6rem 6vw 4rem;
+  background: var(--bg);
+  position: relative;
+  overflow: hidden;
+}
+.book-hero::before {
+  content: '';
+  position: absolute;
+  top: -250px; left: 50%; transform: translateX(-50%);
+  width: 800px; height: 800px; border-radius: 50%;
+  background: radial-gradient(circle, rgba(201,168,76,0.07) 0%, transparent 65%);
+  pointer-events: none;
+}
+.book-hero::after {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0; height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(201,168,76,0.5), transparent);
+}
+.book-hero-inner {
+  max-width: 900px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 4rem;
+  align-items: center;
+  position: relative; z-index: 1;
+}
+.book-hero-text {}
+.book-eyebrow {
+  display: inline-flex; align-items: center; gap: 8px;
+  background: rgba(201,168,76,0.1);
+  border: 1px solid rgba(201,168,76,0.25);
+  border-radius: 30px; padding: 0.35rem 1rem;
+  font-size: 0.72rem; font-weight: 800; letter-spacing: 0.12em;
+  color: var(--accent); text-transform: uppercase;
+  margin-bottom: 1.5rem;
+}
+.book-h1 {
+  font-family: 'Outfit', sans-serif;
+  font-size: clamp(2.5rem, 6vw, 4rem);
+  font-weight: 900; letter-spacing: -0.04em;
+  color: var(--text); line-height: 1.05;
+  margin-bottom: 1.25rem;
+}
+.book-h1 em { color: var(--accent); font-style: italic; }
+.book-sub {
+  font-size: 1.05rem; color: var(--text2);
+  line-height: 1.7; margin-bottom: 2rem;
+  max-width: 520px;
+}
+.book-cta-btn {
+  display: inline-flex; align-items: center; gap: 10px;
+  background: var(--accent);
+  color: #0A0F2C !important;
+  font-family: 'Outfit', sans-serif;
+  font-size: 1.05rem; font-weight: 800;
+  padding: 1rem 2rem;
+  border-radius: 12px;
+  border: none; cursor: pointer;
+  box-shadow: 0 0 30px rgba(201,168,76,0.35), 0 4px 20px rgba(0,0,0,0.3);
+  transition: opacity 0.15s, transform 0.15s, box-shadow 0.15s;
+  text-decoration: none;
+}
+.book-cta-btn:hover {
+  opacity: 0.92;
+  transform: translateY(-3px);
+  box-shadow: 0 0 45px rgba(201,168,76,0.45), 0 8px 32px rgba(0,0,0,0.4);
+}
+.book-cta-arrow { font-size: 1.2rem; transition: transform 0.15s; }
+.book-cta-btn:hover .book-cta-arrow { transform: translateX(4px); }
+.book-cta-note {
+  font-size: 0.78rem; color: var(--text3);
+  margin-top: 0.75rem; display: block;
+}
+
+/* Mark's card (right side of hero) */
+.book-mark-card {
+  background: var(--bg3);
+  border: 1px solid rgba(201,168,76,0.2);
+  border-radius: 20px;
+  padding: 2rem 1.75rem;
+  text-align: center;
+  min-width: 230px;
+  box-shadow: 0 8px 40px rgba(0,0,0,0.35), 0 0 40px rgba(201,168,76,0.05);
+}
+.book-mark-photo {
+  width: 80px; height: 80px;
+  border-radius: 50%;
+  border: 3px solid var(--accent);
+  object-fit: cover;
+  margin: 0 auto 0.85rem;
+  display: block;
+  box-shadow: 0 0 20px rgba(201,168,76,0.25);
+}
+.book-mark-photo-fallback {
+  width: 80px; height: 80px;
+  border-radius: 50%;
+  border: 3px solid var(--accent);
+  background: var(--accent);
+  margin: 0 auto 0.85rem;
+  display: flex; align-items: center; justify-content: center;
+  font-family: 'Outfit', sans-serif;
+  font-size: 2rem; font-weight: 900; color: #fff;
+  box-shadow: 0 0 20px rgba(201,168,76,0.25);
+}
+.book-mark-name {
+  font-family: 'Outfit', sans-serif;
+  font-size: 1rem; font-weight: 800; color: var(--text);
+  margin-bottom: 0.25rem;
+}
+.book-mark-title {
+  font-size: 0.75rem; color: var(--text2);
+  margin-bottom: 1.25rem;
+}
+.book-mark-stats {
+  display: flex; gap: 1rem; justify-content: center;
+  border-top: 1px solid var(--border);
+  padding-top: 1.25rem;
+  flex-wrap: wrap;
+}
+.book-ms { text-align: center; }
+.book-ms-n {
+  font-family: 'Outfit', sans-serif;
+  font-size: 1.25rem; font-weight: 900; color: var(--accent);
+  letter-spacing: -0.02em; display: block; line-height: 1;
+}
+.book-ms-l { font-size: 0.65rem; color: var(--text3); display: block; margin-top: 2px; }
+
+/* ── What to Expect ── */
+.book-expect {
+  padding: 5rem 6vw;
+  background: var(--bg2);
+  border-top: 1px solid rgba(255,255,255,0.05);
+}
+.book-expect-inner { max-width: 900px; margin: 0 auto; }
+.book-section-label {
+  font-size: 0.7rem; font-weight: 800; letter-spacing: 0.15em;
+  color: var(--accent); text-transform: uppercase; margin-bottom: 1rem;
+  display: block;
+}
+.book-section-h2 {
+  font-family: 'Outfit', sans-serif;
+  font-size: clamp(1.6rem, 3.5vw, 2.25rem);
+  font-weight: 800; letter-spacing: -0.03em;
+  color: var(--text); margin-bottom: 2.5rem; line-height: 1.2;
+}
+.book-expect-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1rem;
+}
+.book-expect-item {
+  display: flex; gap: 1rem; align-items: flex-start;
+  background: var(--bg3);
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  padding: 1.25rem 1.5rem;
+  transition: border-color 0.2s;
+}
+.book-expect-item:hover { border-color: rgba(201,168,76,0.25); }
+.bei-icon {
+  width: 40px; height: 40px; border-radius: 10px;
+  background: rgba(201,168,76,0.1);
+  border: 1px solid rgba(201,168,76,0.2);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 1.1rem; flex-shrink: 0;
+}
+.bei-text {}
+.bei-title {
+  font-family: 'Outfit', sans-serif;
+  font-size: 0.92rem; font-weight: 700; color: var(--text);
+  margin-bottom: 0.3rem;
+}
+.bei-desc { font-size: 0.82rem; color: var(--text2); line-height: 1.6; }
+
+/* ── Proof / Manifesto ── */
+.book-manifesto {
+  padding: 5rem 6vw;
+  background: var(--bg);
+  border-top: 1px solid rgba(255,255,255,0.04);
+}
+.book-manifesto-inner { max-width: 900px; margin: 0 auto; }
+.book-manifesto-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1.25rem;
+}
+.book-manifesto-card {
+  background: var(--bg3);
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  padding: 1.5rem;
+}
+.bmc-stat {
+  font-family: 'Outfit', sans-serif;
+  font-size: 2rem; font-weight: 900; color: var(--accent);
+  letter-spacing: -0.03em; line-height: 1;
+  margin-bottom: 0.5rem;
+}
+.bmc-label { font-size: 0.8rem; color: var(--text2); line-height: 1.5; }
+.book-quote {
+  margin-top: 2rem;
+  padding: 2rem 2.5rem;
+  background: rgba(201,168,76,0.05);
+  border: 1px solid rgba(201,168,76,0.15);
+  border-radius: 16px;
+  font-family: 'Outfit', sans-serif;
+  font-size: 1.15rem; font-weight: 700; font-style: italic;
+  color: var(--text); line-height: 1.6;
+  text-align: center;
+}
+.book-quote cite {
+  display: block; font-size: 0.78rem; font-style: normal;
+  color: var(--accent); font-weight: 600; margin-top: 0.75rem;
+  text-transform: uppercase; letter-spacing: 0.08em;
+}
+
+/* ── FAQ ── */
+.book-faq {
+  padding: 5rem 6vw;
+  background: var(--bg2);
+  border-top: 1px solid rgba(255,255,255,0.04);
+}
+.book-faq-inner { max-width: 720px; margin: 0 auto; }
+.book-faq-list { display: flex; flex-direction: column; gap: 0; }
+.book-faq-item {
+  border-bottom: 1px solid var(--border);
+}
+.book-faq-q {
+  width: 100%; text-align: left;
+  background: none; border: none; cursor: pointer;
+  display: flex; align-items: center; justify-content: space-between;
+  gap: 1rem;
+  padding: 1.25rem 0;
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 0.95rem; font-weight: 600; color: var(--text);
+  transition: color 0.15s;
+}
+.book-faq-q:hover { color: var(--accent); }
+.book-faq-icon {
+  width: 24px; height: 24px; border-radius: 50%;
+  background: rgba(255,255,255,0.05);
+  border: 1px solid var(--border);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 1rem; color: var(--text2);
+  flex-shrink: 0;
+  transition: background 0.2s, transform 0.3s;
+}
+.book-faq-item.open .book-faq-icon {
+  background: rgba(201,168,76,0.15);
+  transform: rotate(45deg);
+  color: var(--accent);
+}
+.book-faq-a {
+  font-size: 0.875rem; color: var(--text2); line-height: 1.75;
+  max-height: 0; overflow: hidden;
+  transition: max-height 0.35s ease, padding 0.35s ease;
+}
+.book-faq-item.open .book-faq-a {
+  max-height: 400px;
+  padding-bottom: 1.25rem;
+}
+
+/* ── Final CTA ── */
+.book-final {
+  padding: 7rem 6vw;
+  background: var(--bg);
+  text-align: center;
+  position: relative; overflow: hidden;
+  border-top: 1px solid rgba(255,255,255,0.04);
+}
+.book-final::before {
+  content: '';
+  position: absolute;
+  bottom: -200px; left: 50%; transform: translateX(-50%);
+  width: 700px; height: 700px; border-radius: 50%;
+  background: radial-gradient(circle, rgba(201,168,76,0.07) 0%, transparent 65%);
+  pointer-events: none;
+}
+.book-final-inner { max-width: 640px; margin: 0 auto; position: relative; z-index: 1; }
+.book-final-h2 {
+  font-family: 'Outfit', sans-serif;
+  font-size: clamp(2rem, 5vw, 3.5rem);
+  font-weight: 900; letter-spacing: -0.04em;
+  color: var(--text); line-height: 1.05; margin-bottom: 1rem;
+}
+.book-final-h2 em { color: var(--accent); font-style: italic; }
+.book-final-p {
+  font-size: 1rem; color: var(--text2); line-height: 1.7;
+  margin-bottom: 2rem;
+}
+
+/* Responsive */
+@media (max-width: 900px) {
+  .book-hero-inner { grid-template-columns: 1fr; }
+  .book-mark-card { min-width: auto; max-width: 400px; }
+  .book-expect-grid { grid-template-columns: 1fr; }
+  .book-manifesto-grid { grid-template-columns: 1fr 1fr; }
+}
+@media (max-width: 600px) {
+  .book-h1 { font-size: 2.5rem; }
+  .book-manifesto-grid { grid-template-columns: 1fr 1fr; }
+  .book-mark-stats { gap: 0.75rem; }
+}
+</style>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "How long is the discovery call?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "The free discovery call is 30 minutes. Mark uses this time to understand your current marketing situation, growth goals, and whether a fractional CMO or COO engagement is the right solution. There is no pitch and no obligation - it is a genuine diagnostic conversation."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "What should I prepare for the call?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Come with your current revenue range, your primary growth goal for the next 12 months, and the specific challenge you are trying to solve. The more specific you are, the more useful the 30 minutes will be."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "How quickly can Mark start?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Most engagements start within 2 weeks of initial agreement. The first week is onboarding - CRM access, analytics, and account access. Full strategic output begins in week 2-3."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "What if I am not sure a fractional CMO is what I need?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "That is exactly what the discovery call is for. Mark will give you an honest assessment of whether fractional CMO or COO services are the right solution - or whether something else would serve you better. He turns down engagements that are not a strong fit."
+      }
+    }
+  ],
+  "dateModified": "2026-05-08"
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://markcmo.com/" },
+    { "@type": "ListItem", "position": 2, "name": "Book a Call", "item": "https://markcmo.com/book.html" }
+  ]
+}
+</script>
+<meta name="author" content="Mark Gabrielli"/>
+<link rel="author" href="https://markcmo.com/about.html"/>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebPage",
+  "name": "Book a Free Strategy Call | Mark Gabrielli | Fractional CMO &amp; COO",
+  "description": "Book a free 30-minute Growth Discovery Call with Mark Gabrielli. Fractional CMO &amp; COO. No pitch, no pressure - just clarity on what",
+  "url": "https://markcmo.com/book",
+  "author": {
+    "@type": "Person",
+    "name": "Mark Gabrielli",
+    "url": "https://markcmo.com/about.html",
+    "sameAs": [
+      "https://www.linkedin.com/in/marklgabrielli/",
+      "https://markcmo.com"
+    ]
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "MarkCMO",
+    "url": "https://markcmo.com",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "https://markcmo.com/mark-photo.webp"
+    }
+  },
+  "dateModified": "2026-05-08",
+  "inLanguage": "en-US"
+}
+</script>
+</head>
+<body>
+<div id="scroll-progress" style="position:fixed;top:0;left:0;height:3px;background:var(--accent);z-index:9999;width:0;transition:width 0.1s;"></div>
+
+<div class="book-page">
+
+<nav class="nav" id="mainNav">
+<a href="/index.html" class="nav-logo">
+<div class="nav-logo-avatar">
+<img src="/mark-photo.webp" alt="Mark Gabrielli" />
+</div>
+<div class="nav-logo-text">
+<strong>Mark Gabrielli</strong>
+<span>Fractional CMO &amp; COO</span>
+</div>
+</a>
+<ul class="nav-links">
+<li><a href="/about.html">About</a></li>
+<li><a href="/services.html">Services</a></li>
+<li><a href="/magnet-framework.html" style="color:#C9A84C;font-weight:600;">MAGNET&trade;</a></li>
+<li><a href="/results.html">Results</a></li>
+<li><a href="/blog">Insights</a></li>
+<li><a href="https://academy.markcmo.com" target="_blank" style="color:#C9A84C;">Academy</a></li>
+</ul>
+<div class="nav-right">
+<a href="/book.html" class="nav-btn">Book a Free Call</a>
+</div>
+<div class="nav-hamburger" id="navHam"><span></span><span></span><span></span></div>
+</nav>
+<div class="mobile-drawer" id="mobileDrawer">
+<a href="/about.html">About</a>
+<a href="/services.html">Services</a>
+<a href="/magnet-framework.html" style="color:#C9A84C;font-weight:600;">MAGNET Framework&trade;</a>
+<a href="/results.html">Results</a>
+<a href="/blog">Insights</a>
+<a href="https://academy.markcmo.com" target="_blank">Academy</a>
+<a href="/book.html" style="color:#C9A84C;font-weight:700;">Book a Free Strategy Call &rarr;</a>
+</div>
+
+<!-- ── HERO ── -->
+<section class="book-hero">
+  <div class="book-hero-inner">
+    <div class="book-hero-text">
+      <div class="book-eyebrow">Free 30-Minute Call  -  No Pitch, No Pressure</div>
+      <h1 class="book-h1">Let's talk.<br><em>Get clarity.</em></h1>
+      <p class="book-sub">Walk away from a free 30-minute Growth Discovery Call knowing exactly what's broken in your marketing or operations - and what to fix first. Guaranteed to be the most useful 30 minutes you spend this month.</p>
+      <button class="book-cta-btn" onclick="openCal()">
+        Book Your Free Strategy Call
+        <span class="book-cta-arrow">→</span>
+      </button>
+      <span class="book-cta-note">30 minutes &middot; No obligation &middot; Instant availability</span>
+      <p style="margin-top:1.1rem;font-size:0.83rem;color:rgba(255,255,255,0.45);">Not sure if you're ready? <a href="/marketing-assessment.html" style="color:var(--accent,#C9A84C);font-weight:600;text-decoration:none;">Take the free 20-question marketing assessment</a> or <a href="/fractional-cmo-roi-calculator.html" style="color:var(--accent,#C9A84C);font-weight:600;text-decoration:none;">calculate your ROI</a> first.</p>
+    </div>
+
+    <div class="book-mark-card">
+      <img src="/assets/mark-gabrielli.jpg" alt="Mark Gabrielli" class="book-mark-photo"
+        onerror="this.style.display='none';this.nextElementSibling.style.display='flex';"
+        width="80" height="80" loading="eager" />
+      <div class="book-mark-photo-fallback" style="display:none;">M</div>
+      <div class="book-mark-name">Mark Gabrielli</div>
+      <div class="book-mark-title">Fractional CMO &amp; COO</div>
+      <div class="book-mark-stats">
+        <div class="book-ms">
+          <span class="book-ms-n">$50M+</span>
+          <span class="book-ms-l">Revenue Led</span>
+        </div>
+        <div class="book-ms">
+          <span class="book-ms-n">15+</span>
+          <span class="book-ms-l">Years Exp</span>
+        </div>
+        <div class="book-ms">
+          <span class="book-ms-n">12+</span>
+          <span class="book-ms-l">Industries</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<div style="background:#0d1b27;border-left:3px solid #2563EB;padding:1.25rem 1.5rem;margin:0 auto 0;max-width:1100px;border-radius:0 6px 6px 0;"><strong style="color:#C9A84C;font-size:.75rem;font-family:'DM Mono',monospace;text-transform:uppercase;letter-spacing:.1em;display:block;margin-bottom:.5rem;">Quick Answer</strong><p style="color:#ccc;margin:0;line-height:1.75;font-size:.95rem;">A free 30-minute strategy call with Mark Gabrielli covers your current marketing situation, your biggest growth obstacles, and whether a fractional CMO engagement would move the needle. There is no sales pressure and no commitment required - every conversation is confidential and focused entirely on your specific business situation.</p></div>
+
+<!-- ── WHAT TO EXPECT ── -->
+<section class="book-expect">
+  <div class="book-expect-inner">
+    <span class="book-section-label">On the Call</span>
+    <h2 class="book-section-h2">What happens in<br>the 30 minutes.</h2>
+    <div class="book-expect-grid">
+      <div class="book-expect-item">
+        <div class="bei-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="28" height="28"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg></div>
+        <div class="bei-text">
+          <div class="bei-title">Your business gets diagnosed</div>
+          <div class="bei-desc">Mark asks the questions nobody else does. Revenue, channels, team, pipeline - where the real problems are, not the symptoms.</div>
+        </div>
+      </div>
+      <div class="book-expect-item">
+        <div class="bei-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="28" height="28"><line x1="9" y1="18" x2="15" y2="18"/><line x1="10" y1="22" x2="14" y2="22"/><path d="M15.09 14c.18-.98.65-1.74 1.41-2.5A4.65 4.65 0 0 0 18 8 6 6 0 0 0 6 8c0 1 .23 2.23 1.5 3.5A4.61 4.61 0 0 1 8.91 14"/></svg></div>
+        <div class="bei-text">
+          <div class="bei-title">At least 3 actionable insights</div>
+          <div class="bei-desc">You walk away with specific, immediate actions you can use - regardless of whether you engage Mark or not.</div>
+        </div>
+      </div>
+      <div class="book-expect-item">
+        <div class="bei-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="28" height="28"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg></div>
+        <div class="bei-text">
+          <div class="bei-title">An honest assessment</div>
+          <div class="bei-desc">Mark will tell you what your team won't. What your agency can't. What you need to hear - not what you want to hear.</div>
+        </div>
+      </div>
+      <div class="book-expect-item">
+        <div class="bei-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="28" height="28"><polygon points="1 6 1 22 8 18 16 22 23 18 23 2 16 6 8 2 1 6"/><line x1="8" y1="2" x2="8" y2="18"/><line x1="16" y1="6" x2="16" y2="22"/></svg></div>
+        <div class="bei-text">
+          <div class="bei-title">A preliminary roadmap</div>
+          <div class="bei-desc">If there's a fit, Mark will outline what a real engagement looks like - scope, timeline, and what you can expect to change.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── PROOF + MANIFESTO ── -->
+<section class="book-manifesto">
+  <div class="book-manifesto-inner">
+    <span class="book-section-label">The Track Record</span>
+    <h2 class="book-section-h2">Numbers don't lie.</h2>
+    <div class="book-manifesto-grid">
+      <div class="book-manifesto-card">
+        <div class="bmc-stat">340%</div>
+        <div class="bmc-label">Pipeline increase for SaaS client in 6 months</div>
+      </div>
+      <div class="book-manifesto-card">
+        <div class="bmc-stat">$42M</div>
+        <div class="bmc-label">Revenue unlocked through positioning overhaul</div>
+      </div>
+      <div class="book-manifesto-card">
+        <div class="bmc-stat">18 Days</div>
+        <div class="bmc-label">GTM strategy built and launched for aerospace startup</div>
+      </div>
+      <div class="book-manifesto-card">
+        <div class="bmc-stat">4x</div>
+        <div class="bmc-label">Lead conversion lift through funnel rebuild</div>
+      </div>
+      <div class="book-manifesto-card">
+        <div class="bmc-stat">60%</div>
+        <div class="bmc-label">Operational cost reduction through automation</div>
+      </div>
+      <div class="book-manifesto-card">
+        <div class="bmc-stat">$3.4M</div>
+        <div class="bmc-label">Healthcare client deal closed within 90-day engagement</div>
+      </div>
+    </div>
+    <blockquote class="book-quote">
+      "I don't do slide decks for a living. I build machines that make money. Then I hand you the keys and move on to the next founder who needs help."
+      <cite>- Mark Gabrielli, Founder &middot; MarkCMO.com</cite>
+    </blockquote>
+  </div>
+</section>
+
+<!-- ── FAQ ── -->
+<section class="book-faq">
+  <div class="book-faq-inner">
+    <span class="book-section-label">Common Questions</span>
+    <h2 class="book-section-h2">Before you book.</h2>
+    <div class="book-faq-list">
+      <div class="book-faq-item">
+        <button class="book-faq-q" aria-expanded="false">
+          How long is the discovery call?
+          <span class="book-faq-icon">+</span>
+        </button>
+        <div class="book-faq-a">The free discovery call is 30 minutes. Mark uses this time to understand your current marketing situation, growth goals, and whether a fractional CMO or COO engagement is the right solution for where you are right now. There is no pitch and no obligation - it is a genuine diagnostic conversation.</div>
+      </div>
+      <div class="book-faq-item">
+        <button class="book-faq-q" aria-expanded="false">
+          What should I prepare for the call?
+          <span class="book-faq-icon">+</span>
+        </button>
+        <div class="book-faq-a">Come with your current revenue range, your primary growth goal for the next 12 months, and the specific marketing or operational challenge you are trying to solve. The more specific you are, the more useful the 30 minutes will be. You do not need a deck or prepared presentation.</div>
+      </div>
+      <div class="book-faq-item">
+        <button class="book-faq-q" aria-expanded="false">
+          How quickly can Mark start an engagement?
+          <span class="book-faq-icon">+</span>
+        </button>
+        <div class="book-faq-a">Most engagements start within 2 weeks of initial agreement. The first week is typically onboarding - access to CRM, analytics, and marketing accounts, introduction to the team, and beginning the marketing audit. Full strategic output begins in week 2-3.</div>
+      </div>
+      <div class="book-faq-item">
+        <button class="book-faq-q" aria-expanded="false">
+          What if I am not sure a fractional CMO is what I need?
+          <span class="book-faq-icon">+</span>
+        </button>
+        <div class="book-faq-a">That is exactly what the discovery call is for. Mark will give you an honest assessment of whether fractional CMO or COO services are the right solution - or whether something else (an agency, a marketing director hire, or a standalone audit) would serve you better. He turns down engagements that are not a strong fit because bad-fit clients do not get good results.</div>
+      </div>
+      <div class="book-faq-item">
+        <button class="book-faq-q" aria-expanded="false">
+          What does a fractional CMO engagement cost?
+          <span class="book-faq-icon">+</span>
+        </button>
+        <div class="book-faq-a">Fractional CMO retainers typically range from $5,000 to $20,000 per month depending on scope and hours. This compares to a full-time CMO at $280,000-$450,000 per year in salary and benefits alone - making the fractional model 60-80% more cost-efficient. Scope and pricing are discussed on the discovery call based on your specific situation.</div>
+      </div>
+      <div class="book-faq-item">
+        <button class="book-faq-q" aria-expanded="false">
+          What is the MAGNET Framework&trade;?
+          <span class="book-faq-icon">+</span>
+        </button>
+        <div class="book-faq-a">The MAGNET Framework&trade; is Mark's proprietary 6-phase methodology: Map, Architect, Generate, Nurture, Engineer, Track. It is the operating system behind every engagement - sequencing marketing and operations in the right order so every dollar compounds instead of evaporates. <a href="magnet-framework.html" style="color:var(--accent);">Learn more about the framework →</a></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── FINAL CTA ── -->
+<section class="book-final">
+  <div class="book-final-inner">
+    <div class="book-eyebrow" style="display:inline-flex;margin-bottom:1.5rem;">Ready When You Are</div>
+    <h2 class="book-final-h2">Find what's broken.<br><em>Fix what matters.</em></h2>
+    <p class="book-final-p">30 minutes. No pitch. No pressure. Just an honest conversation about where your business is, where it needs to go, and what's standing in the way. The slot you book could be the conversation that changes your trajectory.</p>
+    <button class="book-cta-btn" onclick="openCal()" style="font-size:1.1rem;padding:1.1rem 2.25rem;">
+      Reserve Your Spot Now
+      <span class="book-cta-arrow">→</span>
+    </button>
+    <span class="book-cta-note" style="display:block;margin-top:0.75rem;">
+      <a href="mailto:mark@markcmo.com" style="color:var(--accent);">mark@markcmo.com</a>
+      &middot;
+      <a href="https://www.linkedin.com/in/marklgabrielli/" target="_blank" rel="noopener" style="color:var(--accent);">LinkedIn</a>
+    </span>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<div style="border-top:1px solid rgba(201,168,76,0.15);padding:1.5rem 4vw;">
+  <div style="max-width:1200px;margin:0 auto;display:flex;gap:2rem;align-items:baseline;flex-wrap:wrap;">
+    <span style="font-family:'Space Grotesk',sans-serif;font-size:0.62rem;font-weight:700;letter-spacing:0.15em;text-transform:uppercase;color:var(--accent);white-space:nowrap;flex-shrink:0;">Explore</span>
+    <div style="display:flex;gap:1.4rem;flex-wrap:wrap;">
+      <a href="/magnet-framework.html" style="font-size:0.8rem;color:var(--accent);font-weight:600;text-decoration:none;">MAGNET Framework&trade; →</a>
+      <a href="/fractional-cmo.html" style="font-size:0.8rem;color:rgba(136,136,136,0.7);text-decoration:none;">Fractional CMO</a>
+      <a href="/fractional-coo.html" style="font-size:0.8rem;color:rgba(136,136,136,0.7);text-decoration:none;">Fractional COO</a>
+      <a href="/services.html" style="font-size:0.8rem;color:rgba(136,136,136,0.7);text-decoration:none;">All Services</a>
+      <a href="/results.html" style="font-size:0.8rem;color:rgba(136,136,136,0.7);text-decoration:none;">Results</a>
+      <a href="/about.html" style="font-size:0.8rem;color:rgba(136,136,136,0.7);text-decoration:none;">About Mark</a>
+    </div>
+  </div>
+</div>
+<div class="footer-bottom">
+  <p>&copy; 2026 Mark Gabrielli &middot; markcmo.com &middot; All rights reserved.</p>
+  <p class="footer-bottom-social">
+    <a href="https://www.linkedin.com/in/marklgabrielli/" target="_blank" rel="noopener">LinkedIn</a>
+    <span>&middot;</span>
+    <a href="https://x.com/markgcmo" target="_blank" rel="noopener">X / Twitter</a>
+    <span>&middot;</span>
+    <a href="https://medium.com/@mark_louis_gabrielli_jr" target="_blank" rel="noopener">Medium</a>
+  </p>
+</div>
+
+</div><!-- .book-page -->
+
+<!-- Calendly popup widget JS (loads async, doesn't block page) -->
+<script src="https://assets.calendly.com/assets/external/widget.js" async></script>
+
+<script>
+// Open Calendly popup
+function openCal() {
+  if (typeof Calendly !== 'undefined') {
+    Calendly.initPopupWidget({
+      url: 'https://calendly.com/marklgabriellijr/discovery-call-marketing-clone?hide_gdpr_banner=1&background_color=0d1235&text_color=fafaf8&primary_color=c9a84c'
+    });
+  } else {
+    // Fallback: direct link if Calendly hasn't loaded yet
+    window.open('https://calendly.com/marklgabriellijr/discovery-call-marketing-clone', '_blank');
+  }
+  return false;
+}
+
+// FAQ accordion
+document.querySelectorAll('.book-faq-q').forEach(function(btn) {
+  btn.addEventListener('click', function() {
+    var item = this.closest('.book-faq-item');
+    var isOpen = item.classList.contains('open');
+    // Close all
+    document.querySelectorAll('.book-faq-item').forEach(function(i) { i.classList.remove('open'); });
+    // Open clicked if it was closed
+    if (!isOpen) { item.classList.add('open'); }
+  });
+});
+
+// Scroll progress
+window.addEventListener('scroll', function() {
+  var h = document.documentElement, b = document.body;
+  var pct = (h.scrollTop || b.scrollTop) / ((h.scrollHeight || b.scrollHeight) - h.clientHeight) * 100;
+  var bar = document.getElementById('scroll-progress');
+  if (bar) bar.style.width = pct + '%';
+  var nav = document.querySelector('nav');
+  if (nav) {
+    if ((h.scrollTop || b.scrollTop) > 80) nav.classList.add('scrolled');
+    else nav.classList.remove('scrolled');
+  }
+}, { passive: true });
+</script>
+<script src="nav.js" defer></script>
+<script>
+(function(){
+  var nav=document.getElementById('mainNav');
+  var ham=document.getElementById('navHam');
+  var drw=document.getElementById('mobileDrawer');
+  if(nav) window.addEventListener('scroll',function(){
+    nav.classList.toggle('scrolled',window.scrollY>20);
+  },{passive:true});
+  if(ham&&drw){
+    ham.addEventListener('click',function(){drw.classList.toggle('open');});
+    drw.querySelectorAll('a').forEach(function(a){
+      a.addEventListener('click',function(){drw.classList.remove('open');});
+    });
+  }
+})();
+</script>
+<script src="/linkedin-widget.js" defer></script>
+</body>
+</html>

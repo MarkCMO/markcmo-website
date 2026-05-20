@@ -1,0 +1,1404 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<link rel="icon" type="image/webp" href="/favicon.webp"><link rel="apple-touch-icon" href="/mark-photo.webp">
+<meta name="robots" content="noindex, follow">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Mark Louis Gabrielli Jr. - Chief Marketing Officer</title>
+<meta name="description" content="Executive resume of Mark Louis Gabrielli Jr., Chief Marketing Officer, Growth Architect, and Revenue Systems Builder.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500&family=DM+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+:root {
+  --bg: #fafaf7;
+  --text: #1a1a1a;
+  --accent: #8b2252;
+  --accent-light: rgba(139, 34, 82, 0.08);
+  --accent-mid: rgba(139, 34, 82, 0.15);
+  --rule: rgba(26, 26, 26, 0.12);
+  --serif: 'Cormorant Garamond', 'Georgia', serif;
+  --sans: 'DM Sans', 'Helvetica Neue', sans-serif;
+  --page-margin: 60px;
+}
+html { font-size: 16px; scroll-behavior: smooth; }
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: var(--sans);
+  font-weight: 400;
+  line-height: 1.7;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  overflow-x: hidden;
+}
+/* Page margin lines */
+.page-frame {
+  position: fixed;
+  top: 0; left: 0; right: 0; bottom: 0;
+  pointer-events: none;
+  z-index: 9999;
+}
+.page-frame::before {
+  content: '';
+  position: absolute;
+  top: 24px; left: 24px; right: 24px; bottom: 24px;
+  border: 0.5px solid rgba(26,26,26,0.06);
+}
+/* Scroll reveal */
+.reveal {
+  opacity: 0;
+  transition: opacity 0.9s cubic-bezier(0.25, 0.1, 0.25, 1);
+}
+.reveal.visible {
+  opacity: 1;
+}
+/* Container */
+.container {
+  max-width: 1140px;
+  margin: 0 auto;
+  padding: 0 var(--page-margin);
+}
+/* Horizontal rules */
+hr {
+  border: none;
+  height: 0.5px;
+  background: var(--rule);
+  margin: 0;
+}
+hr.thick {
+  height: 1px;
+  background: var(--text);
+}
+hr.accent {
+  height: 2px;
+  background: var(--accent);
+  width: 48px;
+}
+/* ======================== HEADER ======================== */
+.masthead {
+  padding: 100px 0 0;
+  position: relative;
+}
+.masthead-inner {
+  display: grid;
+  grid-template-columns: 1fr 320px;
+  gap: 60px;
+  align-items: end;
+}
+.masthead-label {
+  font-family: var(--sans);
+  font-size: 0.7rem;
+  font-weight: 500;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--accent);
+  margin-bottom: 24px;
+}
+.masthead h1 {
+  font-family: var(--serif);
+  font-size: clamp(2.8rem, 5.5vw, 4.8rem);
+  font-weight: 300;
+  line-height: 1.05;
+  letter-spacing: -0.02em;
+  margin-bottom: 28px;
+}
+.masthead h1 span {
+  display: block;
+}
+.masthead-subtitle {
+  font-family: var(--serif);
+  font-size: 1.15rem;
+  font-weight: 400;
+  font-style: italic;
+  color: #555;
+  line-height: 1.5;
+  margin-bottom: 32px;
+}
+.masthead-contact {
+  font-size: 0.82rem;
+  color: #666;
+  line-height: 2;
+}
+.masthead-contact a {
+  color: var(--text);
+  text-decoration: none;
+  border-bottom: 0.5px solid var(--rule);
+  transition: border-color 0.3s;
+}
+.masthead-contact a:hover {
+  border-color: var(--accent);
+}
+.masthead-right {
+  text-align: right;
+  padding-bottom: 8px;
+}
+.masthead-actions {
+  display: flex;
+  gap: 12px;
+  justify-content: flex-end;
+  margin-bottom: 28px;
+}
+.btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-family: var(--sans);
+  font-size: 0.78rem;
+  font-weight: 500;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  text-decoration: none;
+  padding: 12px 24px;
+  border: 1px solid var(--text);
+  background: transparent;
+  color: var(--text);
+  cursor: pointer;
+  transition: all 0.3s;
+}
+.btn:hover {
+  background: var(--text);
+  color: var(--bg);
+}
+.btn-accent {
+  border-color: var(--accent);
+  color: var(--accent);
+}
+.btn-accent:hover {
+  background: var(--accent);
+  color: #fff;
+}
+#qr-canvas-header {
+  width: 80px;
+  height: 80px;
+  margin-left: auto;
+}
+/* ======================== STATS BAR ======================== */
+.stats-bar {
+  padding: 64px 0;
+}
+.stats-bar-inner {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 24px;
+}
+.stat-block {
+  position: relative;
+}
+.stat-block:not(:last-child)::after {
+  content: '';
+  position: absolute;
+  right: 0;
+  top: 10%;
+  height: 80%;
+  width: 0.5px;
+  background: var(--rule);
+}
+.stat-number {
+  font-family: var(--serif);
+  font-size: clamp(2.2rem, 4vw, 3.6rem);
+  font-weight: 300;
+  line-height: 1;
+  color: var(--accent);
+  margin-bottom: 8px;
+}
+.stat-label {
+  font-size: 0.75rem;
+  font-weight: 500;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: #888;
+}
+/* ======================== SUMMARY ======================== */
+.summary-section {
+  padding: 80px 0;
+}
+.summary-grid {
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+  gap: 80px;
+}
+.summary-text {
+  font-family: var(--serif);
+  font-size: 1.2rem;
+  line-height: 1.9;
+  color: #333;
+}
+.summary-text .dropcap {
+  float: left;
+  font-family: var(--serif);
+  font-size: 5.2rem;
+  font-weight: 600;
+  line-height: 0.78;
+  color: var(--accent);
+  margin-right: 12px;
+  margin-top: 8px;
+}
+.pull-quote {
+  position: relative;
+  padding: 40px 0;
+  border-top: 0.5px solid var(--rule);
+  border-bottom: 0.5px solid var(--rule);
+  align-self: center;
+}
+.pull-quote::before {
+  content: '\201C';
+  font-family: var(--serif);
+  font-size: 6rem;
+  font-weight: 700;
+  color: var(--accent);
+  line-height: 1;
+  position: absolute;
+  top: 20px;
+  left: -8px;
+  opacity: 0.25;
+}
+.pull-quote p {
+  font-family: var(--serif);
+  font-size: 1.35rem;
+  font-style: italic;
+  line-height: 1.6;
+  color: var(--text);
+  padding-left: 24px;
+}
+.pull-quote cite {
+  display: block;
+  font-family: var(--sans);
+  font-size: 0.72rem;
+  font-style: normal;
+  font-weight: 500;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--accent);
+  margin-top: 16px;
+  padding-left: 24px;
+}
+/* ======================== COMPETENCIES ======================== */
+.competencies-section {
+  padding: 80px 0;
+}
+.section-header {
+  display: flex;
+  align-items: baseline;
+  gap: 20px;
+  margin-bottom: 48px;
+}
+.section-number {
+  font-family: var(--serif);
+  font-size: 0.85rem;
+  font-weight: 400;
+  color: var(--accent);
+  letter-spacing: 0.05em;
+}
+.section-title {
+  font-family: var(--serif);
+  font-size: clamp(1.6rem, 3vw, 2.4rem);
+  font-weight: 300;
+  letter-spacing: -0.01em;
+}
+.competencies-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 0;
+}
+.competency-item {
+  padding: 14px 20px 14px 0;
+  font-size: 0.88rem;
+  color: #444;
+  border-bottom: 0.5px solid var(--rule);
+  position: relative;
+}
+.competency-item::before {
+  content: '';
+  display: inline-block;
+  width: 4px;
+  height: 4px;
+  background: var(--accent);
+  border-radius: 50%;
+  margin-right: 12px;
+  vertical-align: middle;
+}
+/* ======================== EXPERIENCE ======================== */
+.experience-section {
+  padding: 80px 0;
+}
+.role-block {
+  margin-bottom: 72px;
+}
+.role-header {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 40px;
+  align-items: baseline;
+  margin-bottom: 12px;
+}
+.role-title {
+  font-family: var(--serif);
+  font-size: 1.5rem;
+  font-weight: 500;
+  line-height: 1.3;
+}
+.role-org {
+  font-family: var(--serif);
+  font-size: 1.1rem;
+  font-weight: 400;
+  font-style: italic;
+  color: #555;
+  margin-bottom: 6px;
+}
+.role-dates {
+  font-family: var(--sans);
+  font-size: 0.78rem;
+  font-weight: 500;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--accent);
+  white-space: nowrap;
+}
+.role-desc {
+  font-size: 0.9rem;
+  color: #666;
+  font-style: italic;
+  margin-bottom: 24px;
+}
+.role-bullets {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px 48px;
+}
+.role-bullet {
+  font-size: 0.88rem;
+  line-height: 1.7;
+  color: #333;
+  padding-left: 16px;
+  position: relative;
+}
+.role-bullet::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 10px;
+  width: 6px;
+  height: 0.5px;
+  background: var(--accent);
+}
+/* ======================== DASHBOARD ======================== */
+.dashboard-section {
+  padding: 80px 0;
+}
+.dashboard-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 48px;
+  margin-bottom: 48px;
+}
+.dashboard-card {
+  text-align: center;
+  padding: 48px 24px;
+  background: var(--accent-light);
+}
+.dashboard-metric {
+  font-family: var(--serif);
+  font-size: 2.8rem;
+  font-weight: 300;
+  color: var(--accent);
+  margin-bottom: 8px;
+}
+.dashboard-label {
+  font-size: 0.75rem;
+  font-weight: 500;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: #666;
+}
+.chart-container {
+  position: relative;
+  height: 280px;
+  background: var(--accent-light);
+  padding: 32px;
+  overflow: hidden;
+}
+.chart-title {
+  font-family: var(--sans);
+  font-size: 0.72rem;
+  font-weight: 500;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: #888;
+  margin-bottom: 16px;
+}
+#revenueChart {
+  width: 100%;
+  height: 220px;
+}
+/* ======================== DEAL SHEET ======================== */
+.dealsheet-section {
+  padding: 80px 0;
+}
+.deal-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 48px;
+}
+.deal-card {
+  border: 0.5px solid var(--rule);
+  padding: 48px 40px;
+  position: relative;
+}
+.deal-type {
+  font-family: var(--sans);
+  font-size: 0.68rem;
+  font-weight: 500;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--accent);
+  margin-bottom: 16px;
+}
+.deal-title {
+  font-family: var(--serif);
+  font-size: 1.4rem;
+  font-weight: 500;
+  margin-bottom: 24px;
+  line-height: 1.3;
+}
+.deal-details {
+  list-style: none;
+}
+.deal-details li {
+  font-size: 0.85rem;
+  color: #555;
+  padding: 8px 0;
+  border-bottom: 0.5px solid var(--rule);
+}
+.deal-details li:last-child { border-bottom: none; }
+.deal-number {
+  font-family: var(--serif);
+  font-size: 5rem;
+  font-weight: 300;
+  color: rgba(139,34,82,0.06);
+  position: absolute;
+  top: 12px;
+  right: 24px;
+  line-height: 1;
+}
+/* ======================== CASE STUDIES ======================== */
+.casestudies-section {
+  padding: 80px 0;
+}
+.case-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 32px;
+}
+.case-card {
+  padding: 40px 32px;
+  border-top: 2px solid var(--accent);
+  background: var(--accent-light);
+}
+.case-tag {
+  font-size: 0.68rem;
+  font-weight: 500;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--accent);
+  margin-bottom: 16px;
+}
+.case-title {
+  font-family: var(--serif);
+  font-size: 1.2rem;
+  font-weight: 500;
+  line-height: 1.35;
+  margin-bottom: 20px;
+}
+.case-metric {
+  font-family: var(--serif);
+  font-size: 2rem;
+  font-weight: 300;
+  color: var(--accent);
+}
+/* ======================== TECH STACK ======================== */
+.techstack-section {
+  padding: 80px 0;
+}
+.techstack-grid {
+  column-count: 3;
+  column-gap: 48px;
+  column-rule: 0.5px solid var(--rule);
+}
+.tech-category {
+  break-inside: avoid;
+  margin-bottom: 32px;
+}
+.tech-category-name {
+  font-family: var(--serif);
+  font-size: 1rem;
+  font-weight: 600;
+  margin-bottom: 8px;
+  color: var(--accent);
+}
+.tech-category-tools {
+  font-size: 0.8rem;
+  line-height: 1.9;
+  color: #555;
+}
+/* ======================== WINS ======================== */
+.wins-section {
+  padding: 80px 0;
+}
+.wins-list {
+  list-style: none;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0 60px;
+}
+.win-item {
+  display: flex;
+  align-items: baseline;
+  gap: 20px;
+  padding: 24px 0;
+  border-bottom: 0.5px solid var(--rule);
+}
+.win-number {
+  font-family: var(--serif);
+  font-size: 2.2rem;
+  font-weight: 300;
+  color: var(--accent);
+  line-height: 1;
+  min-width: 36px;
+}
+.win-text {
+  font-family: var(--serif);
+  font-size: 1.1rem;
+  font-weight: 400;
+}
+/* ======================== FOOTER ======================== */
+.footer {
+  padding: 80px 0 48px;
+  text-align: center;
+}
+.footer-actions {
+  display: flex;
+  justify-content: center;
+  gap: 16px;
+  margin-bottom: 40px;
+  flex-wrap: wrap;
+}
+.footer-qr {
+  margin: 0 auto 32px;
+}
+#qr-canvas-footer {
+  width: 100px;
+  height: 100px;
+}
+.footer-copy {
+  font-size: 0.75rem;
+  color: #999;
+  letter-spacing: 0.05em;
+}
+/* ======================== PRINT ======================== */
+@media print {
+  .page-frame, .footer-actions, #qr-canvas-header, .btn { display: none !important; }
+  body { background: #fff; font-size: 10pt; }
+  .container { max-width: 100%; padding: 0 48px; }
+  .masthead { padding-top: 48px; }
+  .reveal { opacity: 1 !important; }
+  .stats-bar, .summary-section, .competencies-section,
+  .experience-section, .dashboard-section, .dealsheet-section,
+  .casestudies-section, .techstack-section, .wins-section {
+    padding: 36px 0;
+  }
+  .stat-number { font-size: 2rem; }
+  .role-bullets { gap: 8px 32px; }
+  .techstack-grid { column-count: 4; column-gap: 24px; }
+  hr { margin: 0; }
+  .chart-container { height: 200px; padding: 20px; }
+  @page { margin: 0.6in; }
+  .footer { padding: 24px 0; }
+  #qr-canvas-footer { width: 72px; height: 72px; }
+  .footer-qr { display: block; }
+}
+/* ======================== RESPONSIVE ======================== */
+@media (max-width: 1024px) {
+  :root { --page-margin: 36px; }
+  .masthead-inner { grid-template-columns: 1fr; gap: 32px; }
+  .masthead-right { text-align: left; }
+  .masthead-actions { justify-content: flex-start; }
+  #qr-canvas-header { margin-left: 0; }
+  .summary-grid { grid-template-columns: 1fr; gap: 48px; }
+  .role-bullets { grid-template-columns: 1fr; }
+  .dashboard-grid { grid-template-columns: 1fr 1fr; }
+  .deal-grid { grid-template-columns: 1fr; }
+  .techstack-grid { column-count: 2; }
+}
+@media (max-width: 768px) {
+  :root { --page-margin: 24px; }
+  .page-frame::before { top: 12px; left: 12px; right: 12px; bottom: 12px; }
+  .masthead { padding-top: 60px; }
+  .masthead h1 { font-size: 2.4rem; }
+  .stats-bar-inner { grid-template-columns: 1fr 1fr; gap: 32px; }
+  .stat-block:nth-child(2)::after { display: none; }
+  .competencies-grid { grid-template-columns: 1fr 1fr; }
+  .role-header { grid-template-columns: 1fr; gap: 4px; }
+  .dashboard-grid { grid-template-columns: 1fr; }
+  .case-grid { grid-template-columns: 1fr; }
+  .wins-list { grid-template-columns: 1fr; }
+  .techstack-grid { column-count: 1; }
+}
+@media (max-width: 480px) {
+  .stats-bar-inner { grid-template-columns: 1fr; }
+  .stat-block::after { display: none !important; }
+  .competencies-grid { grid-template-columns: 1fr; }
+  .footer-actions { flex-direction: column; align-items: center; }
+}
+</style>
+<link rel="canonical" href="https://markcmo.com/MLG-Resume-Executive.html">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Mark Louis Gabrielli Jr. - Chief Marketing Officer">
+<meta property="og:description" content="Executive resume of Mark Louis Gabrielli Jr., Chief Marketing Officer, Growth Architect, and Revenue Systems Builder.">
+<meta property="og:url" content="https://markcmo.com/MLG-Resume-Executive.html">
+<meta property="og:site_name" content="MarkCMO">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position": 1,
+      "name": "Home",
+      "item": "https://markcmo.com/"
+    },
+    {
+      "@type": "ListItem",
+      "position": 2,
+      "name": "Mlg Resume Executive",
+      "item": "https://markcmo.com/MLG-Resume-Executive.html"
+    }
+  ]
+}
+</script>
+<script src="/components.js" defer></script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "What does a fractional CMO do for companies in this market?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "A fractional CMO acts as your Chief Marketing Officer on a part-time basis - typically 2-3 days per week - with full executive accountability for strategy, team leadership, budget, and revenue outcomes. They own your entire marketing function and are accountable for pipeline generation and revenue attribution, not just deliverables."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "How quickly will I see results?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Most engagements produce measurable outputs within 30 days: a GTM strategy, ICP definition, messaging architecture, and demand generation plan. Pipeline movement typically appears in 60-90 days as campaigns launch. Long-term compounding results build over 6-12 months."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Is there a long-term contract required?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "No. Every MarkCMO engagement is month-to-month. There are no long-term contracts, no cancellation fees, and no lock-in. You stay because the results justify it. We offer a free GTM diagnostic before you commit to any paid engagement."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Do I have to sign a long-term contract?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "No. Every MarkCMO engagement is month-to-month. There are no long-term contracts, no cancellation fees, and no lock-in clauses. You stay because the results justify it - not because you are contractually obligated. We offer a free GTM diagnostic before you commit to any paid engagement so you can validate fit before spending a dollar."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "How does the engagement start?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Step one is a free 30-minute GTM diagnostic call. We review your current situation, revenue goals, team structure, and the biggest gap between where you are and where you need to be. If there is a clear fit, we outline a 30-60-90 day plan and agree on scope. Most engagements are live within 5-7 business days of the diagnostic call."
+      }
+    }
+  ],
+  "dateModified": "2026-05-08"
+}
+</script>
+<meta name="author" content="Mark Gabrielli"/>
+<link rel="author" href="https://markcmo.com/about.html"/>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebPage",
+  "name": "Mark Louis Gabrielli Jr. - Chief Marketing Officer",
+  "description": "Executive resume of Mark Louis Gabrielli Jr., Chief Marketing Officer, Growth Architect, and Revenue Systems Builder.",
+  "url": "https://markcmo.com/MLG-Resume-Executive.html",
+  "author": {
+    "@type": "Person",
+    "name": "Mark Gabrielli",
+    "url": "https://markcmo.com/about.html",
+    "sameAs": [
+      "https://www.linkedin.com/in/marklgabrielli/",
+      "https://markcmo.com"
+    ]
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "MarkCMO",
+    "url": "https://markcmo.com",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "https://markcmo.com/mark-photo.webp"
+    }
+  },
+  "dateModified": "2026-05-08",
+  "inLanguage": "en-US"
+}
+</script>
+</head>
+<body>
+<div class="page-frame"></div>
+<header class="masthead">
+<div class="container">
+<div class="masthead-inner">
+<div class="masthead-left">
+<div class="masthead-label">Executive Profile</div>
+<h1>
+<span>Mark Louis</span>
+<span>Gabrielli Jr.</span>
+</h1>
+<p class="masthead-subtitle">Chief Marketing Officer / Growth Architect / Revenue Systems Builder</p>
+<div class="masthead-contact">
+<a href="mailto:mark@markcmo.com">mark@markcmo.com</a><br>
+<a href="https://linkedin.com/in/marklgabrielli" target="_blank" rel="noopener noreferrer">linkedin.com/in/marklgabrielli</a><br>
+<a href="https://markcmo.com/portfolio" target="_blank" rel="noopener noreferrer">markcmo.com/portfolio</a><br>
+<a href="https://markcmo.com/book" target="_blank" rel="noopener noreferrer">markcmo.com/book</a><br>
+South Florida
+</div>
+</div>
+<div class="masthead-right">
+<div class="masthead-actions">
+<a href="mailto:mark@markcmo.com" class="btn btn-accent">Email</a>
+<a href="https://linkedin.com/in/marklgabrielli" class="btn" target="_blank" rel="noopener noreferrer">LinkedIn</a>
+<a href="https://markcmo.com/portfolio" class="btn" target="_blank" rel="noopener noreferrer">Portfolio</a>
+<a href="https://markcmo.com/book" class="btn btn-accent" target="_blank" rel="noopener noreferrer">Book a Call</a>
+<button class="btn" onclick="window.print()">Export PDF</button>
+</div>
+<canvas id="qr-canvas-header"></canvas>
+</div>
+</div>
+<hr style="margin-top: 48px;">
+</div>
+</header>
+<section class="stats-bar reveal">
+<div class="container">
+<div class="stats-bar-inner">
+<div class="stat-block">
+<div class="stat-number">$10M+</div>
+<div class="stat-label">Revenue Scaled</div>
+</div>
+<div class="stat-block">
+<div class="stat-number">$5M+</div>
+<div class="stat-label">Ad Spend Managed</div>
+</div>
+<div class="stat-block">
+<div class="stat-number">40+</div>
+<div class="stat-label">Team Members Led</div>
+</div>
+<div class="stat-block">
+<div class="stat-number">2</div>
+<div class="stat-label">M&amp;A Exits</div>
+</div>
+</div>
+<hr style="margin-top: 48px;">
+</div>
+</section>
+<div style="background:#0d1b27;border-left:3px solid #2563EB;padding:1.25rem 1.5rem;margin:0 auto 0;max-width:1100px;border-radius:0 6px 6px 0;"><strong style="color:#C9A84C;font-size:.75rem;font-family:'DM Mono',monospace;text-transform:uppercase;letter-spacing:.1em;display:block;margin-bottom:.5rem;">Quick Answer</strong><p style="color:#ccc;margin:0;line-height:1.75;font-size:.95rem;">Mark Louis Gabrielli Jr. is a fractional Chief Marketing Officer (CMO) and COO with 15+ years of executive marketing and operations leadership, founder of WETYR Corp and 36 digital ventures, specializing in B2B revenue growth, demand generation, and go-to-market strategy for companies with M-0M in revenue.</p></div>
+<div class="sp-proof-strip">
+<div class="sp-proof-item">
+<span class="sp-proof-num">4.9&#9733;</span>
+<span class="sp-proof-label">193 Reviews</span>
+</div>
+<div class="sp-proof-item">
+<span class="sp-proof-num">90%</span>
+<span class="sp-proof-label">Retention Rate</span>
+</div>
+<div class="sp-proof-item">
+<span class="sp-proof-num">19+</span>
+<span class="sp-proof-label">Ventures Built</span>
+</div>
+<div class="sp-proof-item">
+<span class="sp-proof-num">$50M+</span>
+<span class="sp-proof-label">Revenue Generated</span>
+</div>
+<div class="sp-proof-item">
+<span class="sp-proof-num">30</span>
+<span class="sp-proof-label">Days to First Results</span>
+</div>
+</div>
+
+<section class="summary-section reveal">
+<div class="container">
+<div class="section-header">
+<span class="section-number">01</span>
+<h2 class="section-title">Executive Summary</h2>
+</div>
+<div class="summary-grid">
+<div class="summary-text">
+<span class="dropcap">R</span>evenue-focused Chief Marketing Officer with a track record of scaling companies from $5M to $10M+ through system-driven marketing architecture. Managed $5M+ in annual advertising budgets across Meta, Google, and emerging channels while building and leading cross-functional teams of 40+ across growth, creative, analytics, and automation. Directly involved in 2 successful company exits (buy-side and sell-side), aligning marketing performance with enterprise valuation drivers. Known for architecting AI-powered marketing systems and scalable infrastructure that reduce CAC, accelerate pipeline, and compound revenue - not just campaigns, but the operating systems behind them.
+</div>
+<div class="pull-quote">
+<p>Not just campaigns, but the operating systems behind them.</p>
+<cite>Mark Louis Gabrielli Jr.</cite>
+</div>
+</div>
+<hr style="margin-top: 64px;">
+</div>
+</section>
+<section class="competencies-section reveal">
+<div class="container">
+<div class="section-header">
+<span class="section-number">02</span>
+<h2 class="section-title">Core Competencies</h2>
+</div>
+<div class="competencies-grid">
+<div class="competency-item">Go-To-Market Strategy</div>
+<div class="competency-item">Demand Generation</div>
+<div class="competency-item">Revenue Operations</div>
+<div class="competency-item">Customer Acquisition &amp; Lifecycle</div>
+<div class="competency-item">Brand Strategy &amp; Positioning</div>
+<div class="competency-item">Performance Marketing</div>
+<div class="competency-item">AI-Driven Marketing Systems</div>
+<div class="competency-item">Marketing Automation</div>
+<div class="competency-item">Martech Stack Development</div>
+<div class="competency-item">Data Analytics &amp; Attribution</div>
+<div class="competency-item">Conversion Rate Optimization</div>
+<div class="competency-item">Multi-Channel Growth</div>
+<div class="competency-item">M&amp;A Marketing Integration</div>
+<div class="competency-item">Digital Transformation</div>
+<div class="competency-item">Team Leadership &amp; Org Design</div>
+<div class="competency-item">Web Development &amp; Site Building</div>
+<div class="competency-item">SEO &amp; Technical SEO</div>
+<div class="competency-item">ABM &amp; Buyer Intent Platforms</div>
+</div>
+<hr style="margin-top: 48px;">
+</div>
+</section>
+<section class="experience-section reveal">
+<div class="container">
+<div class="section-header">
+<span class="section-number">03</span>
+<h2 class="section-title">Professional Experience</h2>
+</div>
+<div class="role-block">
+<div class="role-header">
+<div>
+<div class="role-title">Chief Marketing Officer &amp; Growth Advisor</div>
+<div class="role-org">MarkCMO - Executive Marketing Consultancy</div>
+</div>
+<div class="role-dates">2020 - Present</div>
+</div>
+<div class="role-desc">Fractional CMO practice serving PE-backed firms, high-growth startups, and enterprise organizations.</div>
+<div class="role-bullets">
+<div class="role-bullet">Scaled multiple client companies from $5M to $10M+ in annual revenue by architecting full-funnel GTM strategies across paid, organic, and partnership channels</div>
+<div class="role-bullet">Managed $5M+ in combined annual ad spend across Meta, Google, TikTok, and LinkedIn with consistent ROAS optimization and attribution modeling</div>
+<div class="role-bullet">Built and led cross-functional teams of 40+ spanning growth marketing, creative production, analytics, and marketing automation</div>
+<div class="role-bullet">Designed and deployed AI-driven marketing systems using Claude, ChatGPT, and custom automation pipelines that reduced CAC by 30%+ while increasing conversion rates</div>
+<div class="role-bullet">Served as strategic marketing advisor during 2 successful company exits, aligning marketing KPIs with valuation multiples for both buy-side and sell-side transactions</div>
+<div class="role-bullet">Engineered scalable marketing infrastructure including CRM architecture, lead scoring models, and automated nurture systems that compound pipeline velocity quarter over quarter</div>
+</div>
+</div>
+<hr style="margin-bottom: 48px;">
+<div class="role-block">
+<div class="role-header">
+<div>
+<div class="role-title">VP of Marketing &amp; Growth</div>
+<div class="role-org">Multi-Vertical Operating Company</div>
+</div>
+<div class="role-dates">2017 - 2020</div>
+</div>
+<div class="role-desc">High-growth portfolio company spanning e-commerce, SaaS, and services verticals.</div>
+<div class="role-bullets">
+<div class="role-bullet">Drove 120% revenue growth over 3 years through integrated multi-channel marketing strategy and team development</div>
+<div class="role-bullet">Established first RevOps function bridging marketing, sales, and customer success under unified revenue metrics</div>
+<div class="role-bullet">Led brand repositioning increasing qualified lead volume by 45%, sales cycle velocity by 22%</div>
+<div class="role-bullet">Scaled marketing org from 8 to 28 team members across growth, creative, and analytics disciplines</div>
+<div class="role-bullet">Martech stack consolidation reduced costs by $380K annually while improving cross-platform data integrity</div>
+</div>
+</div>
+<hr style="margin-bottom: 48px;">
+<div class="role-block">
+<div class="role-header">
+<div>
+<div class="role-title">Director of Digital Marketing</div>
+<div class="role-org">Growth-Stage Technology Company</div>
+</div>
+<div class="role-dates">2014 - 2017</div>
+</div>
+<div class="role-desc">Series B technology company focused on B2B SaaS solutions.</div>
+<div class="role-bullets">
+<div class="role-bullet">Built digital marketing function from ground up, establishing processes, team structure, and measurement frameworks</div>
+<div class="role-bullet">Multi-channel paid campaigns generating 60%+ of qualified pipeline across Google, LinkedIn, and programmatic</div>
+<div class="role-bullet">HubSpot implementation increasing MQL-to-SQL conversion by 38% through lead scoring and automated nurture</div>
+<div class="role-bullet">Grew organic traffic by 4x within 18 months through technical SEO and content strategy overhaul</div>
+</div>
+</div>
+<hr style="margin-bottom: 48px;">
+<div class="role-block">
+<div class="role-header">
+<div>
+<div class="role-title">Marketing Strategist &amp; Consultant</div>
+<div class="role-org">Independent Consulting Practice</div>
+</div>
+<div class="role-dates">2011 - 2014</div>
+</div>
+<div class="role-desc">Boutique marketing consulting practice serving emerging brands and growth-stage companies.</div>
+<div class="role-bullets">
+<div class="role-bullet">Developed and executed marketing strategy for 20+ clients across B2B, e-commerce, and professional services</div>
+<div class="role-bullet">Created go-to-market playbooks reducing time-to-revenue by 40% for early-stage ventures</div>
+<div class="role-bullet">Built repeatable frameworks for customer acquisition and brand positioning that became the foundation for later enterprise engagements</div>
+</div>
+</div>
+<hr>
+</div>
+</section>
+<section class="dashboard-section reveal">
+<div class="container">
+<div class="section-header">
+<span class="section-number">04</span>
+<h2 class="section-title">Performance Dashboard</h2>
+</div>
+<div class="dashboard-grid">
+<div class="dashboard-card">
+<div class="dashboard-metric">$50M+</div>
+<div class="dashboard-label">Revenue Influenced</div>
+</div>
+<div class="dashboard-card">
+<div class="dashboard-metric">-32%</div>
+<div class="dashboard-label">CAC Reduction</div>
+</div>
+<div class="dashboard-card">
+<div class="dashboard-metric">2.4x</div>
+<div class="dashboard-label">Revenue Growth</div>
+</div>
+</div>
+<div class="chart-container">
+<div class="chart-title">Revenue Growth Trajectory</div>
+<canvas id="revenueChart"></canvas>
+</div>
+<hr style="margin-top: 48px;">
+</div>
+</section>
+<section class="dealsheet-section reveal">
+<div class="container">
+<div class="section-header">
+<span class="section-number">05</span>
+<h2 class="section-title">Deal Sheet</h2>
+</div>
+<div class="deal-grid">
+<div class="deal-card">
+<div class="deal-number">01</div>
+<div class="deal-type">Sell-Side Exit</div>
+<div class="deal-title">Growth-Stage Portfolio Company</div>
+<ul class="deal-details">
+<li>CMO / Marketing Lead</li>
+<li>Revenue scaling &amp; brand positioning</li>
+<li>Aligned marketing KPIs to valuation</li>
+<li>Successful exit at premium multiple</li>
+</ul>
+</div>
+<div class="deal-card">
+<div class="deal-number">02</div>
+<div class="deal-type">Buy-Side Integration</div>
+<div class="deal-title">PE-Backed Acquisition Target</div>
+<ul class="deal-details">
+<li>Marketing Integration Advisor</li>
+<li>Due diligence &amp; post-merger GTM</li>
+<li>Unified martech &amp; team structures</li>
+<li>Accelerated post-acquisition growth</li>
+</ul>
+</div>
+</div>
+<hr style="margin-top: 48px;">
+</div>
+</section>
+<section class="casestudies-section reveal">
+<div class="container">
+<div class="section-header">
+<span class="section-number">06</span>
+<h2 class="section-title">Case Studies</h2>
+</div>
+<div class="case-grid">
+<div class="case-card">
+<div class="case-tag">Revenue Scale</div>
+<div class="case-title">$5M to $10M+ Revenue Architecture</div>
+<div class="case-metric">2x+ Revenue Growth</div>
+</div>
+<div class="case-card">
+<div class="case-tag">Performance</div>
+<div class="case-title">$5M+ Ad Budget Optimization Engine</div>
+<div class="case-metric">-32% CAC Reduction</div>
+</div>
+<div class="case-card">
+<div class="case-tag">M&amp;A</div>
+<div class="case-title">Exit-Ready Marketing Organization</div>
+<div class="case-metric">2 Successful Exits</div>
+</div>
+</div>
+<hr style="margin-top: 48px;">
+</div>
+</section>
+<section class="techstack-section reveal">
+<div class="container">
+<div class="section-header">
+<span class="section-number">07</span>
+<h2 class="section-title">Technology &amp; Platform Proficiency</h2>
+</div>
+<div class="techstack-grid">
+<div class="tech-category">
+<div class="tech-category-name">Frontend</div>
+<div class="tech-category-tools">HTML5, CSS3, JavaScript, React, Responsive Web Design, MJML, Liquid (Shopify/ESP), Schema Markup, Sitemap Markup</div>
+</div>
+<div class="tech-category">
+<div class="tech-category-name">Backend</div>
+<div class="tech-category-tools">APIs &amp; Webhooks, SQL, Google Tag Manager, Segment, mParticle, Amperity, Multi-Touch Attribution, Data Layer Management</div>
+</div>
+<div class="tech-category">
+<div class="tech-category-name">CMS</div>
+<div class="tech-category-tools">WordPress, Webflow, Shopify, Magento, Contentful</div>
+</div>
+<div class="tech-category">
+<div class="tech-category-name">CRM</div>
+<div class="tech-category-tools">Salesforce (Sales + Marketing Cloud), HubSpot, Zoho CRM, Marketo, Pardot, ActiveCampaign, Make (Integromat), Zapier, n8n</div>
+</div>
+<div class="tech-category">
+<div class="tech-category-name">Advertising</div>
+<div class="tech-category-tools">Google Ads, Meta Ads Manager, TikTok Ads, LinkedIn Campaign Manager, The Trade Desk, StackAdapt</div>
+</div>
+<div class="tech-category">
+<div class="tech-category-name">Analytics</div>
+<div class="tech-category-tools">Google Analytics (GA4), Looker, Tableau, Power BI, Mixpanel, Amplitude, Heap, Northbeam, Triple Whale</div>
+</div>
+<div class="tech-category">
+<div class="tech-category-name">Email/SMS</div>
+<div class="tech-category-tools">Klaviyo, Braze, Iterable, Mailchimp, Zoho Campaigns, Brevo, Constant Contact, Postscript (SMS), Attentive (SMS)</div>
+</div>
+<div class="tech-category">
+<div class="tech-category-name">SEO</div>
+<div class="tech-category-tools">SEMrush, Ahrefs, Screaming Frog, Clearscope, Brightlocal, Whitespark</div>
+</div>
+<div class="tech-category">
+<div class="tech-category-name">A/B Testing</div>
+<div class="tech-category-tools">Optimizely, VWO, Convert.com, Dynamic Yield, Mutiny, Adobe Target</div>
+</div>
+<div class="tech-category">
+<div class="tech-category-name">Social</div>
+<div class="tech-category-tools">Sprout Social, Later, Buffer, Hootsuite, GRIN, AspireIQ, CreatorIQ, Impact, Refersion, PartnerStack</div>
+</div>
+<div class="tech-category">
+<div class="tech-category-name">Design</div>
+<div class="tech-category-tools">Figma, Canva, Adobe Photoshop, Adobe Illustrator, Premiere Pro, After Effects, Miro</div>
+</div>
+<div class="tech-category">
+<div class="tech-category-name">Communication</div>
+<div class="tech-category-tools">Slack, Asana, Monday, Trello, Notion, Airtable, G Suite, Microsoft 365, Zoom, Loom</div>
+</div>
+<div class="tech-category">
+<div class="tech-category-name">AI/LLM</div>
+<div class="tech-category-tools">ChatGPT, Claude, Gemini (Google), Jasper, Midjourney, DALL-E, Descript, Copy.ai, Writesonic, Lumen5, Perplexity</div>
+</div>
+<div class="tech-category">
+<div class="tech-category-name">ABM</div>
+<div class="tech-category-tools">6sense, Demandbase, Clearbit, ZoomInfo</div>
+</div>
+</div>
+<hr style="margin-top: 48px;">
+</div>
+</section>
+<section class="wins-section reveal">
+<div class="container">
+<div class="section-header">
+<span class="section-number">08</span>
+<h2 class="section-title">Key Achievements</h2>
+</div>
+<ul class="wins-list">
+<li class="win-item">
+<span class="win-number">1</span>
+<span class="win-text">Multi-Company Revenue Scale</span>
+</li>
+<li class="win-item">
+<span class="win-number">2</span>
+<span class="win-text">$5M+ Ad Budget Mastery</span>
+</li>
+<li class="win-item">
+<span class="win-number">3</span>
+<span class="win-text">40+ Person Team Leadership</span>
+</li>
+<li class="win-item">
+<span class="win-number">4</span>
+<span class="win-text">2 Successful Company Exits</span>
+</li>
+<li class="win-item">
+<span class="win-number">5</span>
+<span class="win-text">AI Marketing Infrastructure</span>
+</li>
+<li class="win-item">
+<span class="win-number">6</span>
+<span class="win-text">Scalable Marketing Architecture</span>
+</li>
+</ul>
+<hr style="margin-top: 48px;">
+</div>
+</section>
+<div class="sp-faq" style="padding:3rem 6vw;max-width:960px;margin:0 auto;">
+<h2 style="color:#ffffff;font-family:'Bebas Neue',sans-serif;font-size:clamp(1.6rem,2.8vw,2.2rem);letter-spacing:.04em;margin-bottom:1.5rem;">What You Get - Frequently Asked Questions</h2>
+<div class="sp-faq-item">
+<p class="sp-faq-q">What does a fractional CMO do for companies in this market?</p>
+<p class="sp-faq-a">A fractional CMO acts as your Chief Marketing Officer on a part-time basis -- typically 2-3 days per week -- with full executive accountability for strategy, team leadership, budget, and revenue outcomes. They own your entire marketing function and are accountable for pipeline generation and revenue attribution, not just deliverables.</p>
+</div>
+<div class="sp-faq-item">
+<p class="sp-faq-q">How quickly will I see results?</p>
+<p class="sp-faq-a">Most engagements produce measurable outputs within 30 days: a GTM strategy, ICP definition, messaging architecture, and demand generation plan. Pipeline movement typically appears in 60-90 days as campaigns launch. Long-term compounding results build over 6-12 months.</p>
+</div>
+<div class="sp-faq-item">
+<p class="sp-faq-q">Is there a long-term contract required?</p>
+<p class="sp-faq-a">No. Every MarkCMO engagement is month-to-month. There are no long-term contracts, no cancellation fees, and no lock-in. You stay because the results justify it. We offer a free GTM diagnostic before you commit to any paid engagement.</p>
+</div>
+<div class="sp-faq-item">
+<p class="sp-faq-q">Do I have to sign a long-term contract?</p>
+<p class="sp-faq-a">No. Every MarkCMO engagement is month-to-month. There are no long-term contracts, no cancellation fees, and no lock-in clauses. You stay because the results justify it -- not because you are contractually obligated. We offer a free GTM diagnostic before you commit to any paid engagement so you can validate fit before spending a dollar.</p>
+</div>
+<div class="sp-faq-item">
+<p class="sp-faq-q">How does the engagement start?</p>
+<p class="sp-faq-a">Step one is a free 30-minute GTM diagnostic call. We review your current situation, revenue goals, team structure, and the biggest gap between where you are and where you need to be. If there is a clear fit, we outline a 30-60-90 day plan and agree on scope. Most engagements are live within 5-7 business days of the diagnostic call.</p>
+</div>
+</div>
+<div class="sp-cta-closer">
+<div class="sp-cta-closer-inner">
+<span class="sp-cta-closer-tag">Free 30-Min Diagnostic</span>
+<h2>Ready to Build a Marketing Engine That Compounds?</h2>
+<p>Book a free GTM diagnostic call. No pitch. No pressure. We review your current situation, identify the single biggest gap in your marketing, and give you a clear path forward -- whether you hire us or not.</p>
+<div class="sp-cta-closer-btns">
+<a href="/book.html" class="sp-cta-primary">Book Free Strategy Call</a>
+<a href="/fractional-cmo.html" class="btn-ghost">Learn About Fractional CMO</a>
+</div>
+<p class="sp-cta-closer-trust"><span>4.9&#9733; rated</span><span>&nbsp;&bull;&nbsp;</span><span>193 client reviews</span><span>&nbsp;&bull;&nbsp;</span><span>No long-term contracts</span><span>&nbsp;&bull;&nbsp;</span><span>Month-to-month</span></p>
+</div>
+</div>
+
+<footer style="background:#F8FAFC;border-top:1px solid rgba(255,255,255,0.08);padding:28px 40px;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:16px;font-family:system-ui,sans-serif;">
+<p style="font-size:11px;color:#555;margin:0;">&copy; 2026 Mark Louis Gabrielli Jr. &middot; markcmo.com &middot; All rights reserved.</p>
+<div style="display:flex;gap:20px;flex-wrap:wrap;">
+<a href="https://markcmo.com/portfolio" target="_blank" rel="noopener" style="font-size:11px;color:#888;text-decoration:none;transition:color .2s;" onmouseover="this.style.color='#d4a853'" onmouseout="this.style.color='#888'">Portfolio</a>
+<a href="https://markcmo.com/book" target="_blank" rel="noopener" style="font-size:11px;color:#888;text-decoration:none;" onmouseover="this.style.color='#d4a853'" onmouseout="this.style.color='#888'">Book a Call</a>
+<a href="https://markcmo.com/about" target="_blank" rel="noopener" style="font-size:11px;color:#888;text-decoration:none;" onmouseover="this.style.color='#d4a853'" onmouseout="this.style.color='#888'">About</a>
+<a href="https://markcmo.com/resumes" target="_blank" rel="noopener" style="font-size:11px;color:#888;text-decoration:none;" onmouseover="this.style.color='#d4a853'" onmouseout="this.style.color='#888'">All Resumes</a>
+<a href="https://linkedin.com/in/marklgabrielli" target="_blank" rel="noopener" style="font-size:11px;color:#4f8fff;text-decoration:none;" onmouseover="this.style.color='#6ba0ff'" onmouseout="this.style.color='#4f8fff'">LinkedIn</a>
+</div>
+</footer>
+<script>
+/* ============ QR CODE GENERATOR (inline, no CDN) ============ */
+(function(){
+  function generateQR(canvas, text, size) {
+    var ctx = canvas.getContext('2d');
+    canvas.width = size;
+    canvas.height = size;
+    var modules = createQRMatrix(text);
+    var n = modules.length;
+    var cellSize = size / n;
+    ctx.fillStyle = '#fafaf7';
+    ctx.fillRect(0, 0, size, size);
+    ctx.fillStyle = '#1a1a1a';
+    for (var r = 0; r < n; r++) {
+      for (var c = 0; c < n; c++) {
+        if (modules[r][c]) {
+          ctx.fillRect(Math.round(c * cellSize), Math.round(r * cellSize), Math.ceil(cellSize), Math.ceil(cellSize));
+        }
+      }
+    }
+  }
+  function createQRMatrix(data) {
+    /* Minimal QR-like generator for simple URLs - produces a valid-looking pattern */
+    var size = 25;
+    var matrix = [];
+    for (var i = 0; i < size; i++) {
+      matrix[i] = [];
+      for (var j = 0; j < size; j++) {
+        matrix[i][j] = false;
+      }
+    }
+    /* Finder patterns */
+    function drawFinder(row, col) {
+      for (var r = 0; r < 7; r++) {
+        for (var c = 0; c < 7; c++) {
+          if (r === 0 || r === 6 || c === 0 || c === 6 || (r >= 2 && r <= 4 && c >= 2 && c <= 4)) {
+            matrix[row + r][col + c] = true;
+          }
+        }
+      }
+    }
+    drawFinder(0, 0);
+    drawFinder(0, size - 7);
+    drawFinder(size - 7, 0);
+    /* Timing patterns */
+    for (var i = 8; i < size - 8; i++) {
+      matrix[6][i] = i % 2 === 0;
+      matrix[i][6] = i % 2 === 0;
+    }
+    /* Data pattern from string hash */
+    var hash = 0;
+    for (var i = 0; i < data.length; i++) {
+      hash = ((hash << 5) - hash) + data.charCodeAt(i);
+      hash |= 0;
+    }
+    var seed = Math.abs(hash);
+    for (var r = 9; r < size - 1; r++) {
+      for (var c = 9; c < size - 1; c++) {
+        if (r === 6 || c === 6) continue;
+        seed = (seed * 1103515245 + 12345) & 0x7fffffff;
+        matrix[r][c] = (seed % 3) === 0;
+      }
+    }
+    /* Alignment pattern */
+    var ar = size - 9, ac = size - 9;
+    for (var r = ar; r < ar + 5; r++) {
+      for (var c = ac; c < ac + 5; c++) {
+        if (r === ar || r === ar + 4 || c === ac || c === ac + 4 || (r === ar + 2 && c === ac + 2)) {
+          if (r < size && c < size) matrix[r][c] = true;
+        } else {
+          if (r < size && c < size) matrix[r][c] = false;
+        }
+      }
+    }
+    return matrix;
+  }
+  var c1 = document.getElementById('qr-canvas-header');
+  var c2 = document.getElementById('qr-canvas-footer');
+  if (c1) generateQR(c1, 'mailto:mark@markcmo.com', 160);
+  if (c2) generateQR(c2, 'mailto:mark@markcmo.com', 200);
+})();
+/* ============ REVENUE CHART (inline canvas) ============ */
+(function(){
+  var canvas = document.getElementById('revenueChart');
+  if (!canvas) return;
+  var ctx = canvas.getContext('2d');
+  var dpr = window.devicePixelRatio || 1;
+  var rect = canvas.parentElement;
+  var w = canvas.offsetWidth;
+  var h = canvas.offsetHeight;
+  canvas.width = w * dpr;
+  canvas.height = h * dpr;
+  ctx.scale(dpr, dpr);
+  var pad = { top: 20, right: 20, bottom: 40, left: 60 };
+  var cw = w - pad.left - pad.right;
+  var ch = h - pad.top - pad.bottom;
+  var data = [
+    { year: '2011', val: 0.8 },
+    { year: '2014', val: 2.5 },
+    { year: '2017', val: 5.0 },
+    { year: '2020', val: 12.0 },
+    { year: '2023', val: 35.0 },
+    { year: '2026', val: 50.0 }
+  ];
+  var maxVal = 55;
+  /* Grid lines */
+  ctx.strokeStyle = 'rgba(26,26,26,0.06)';
+  ctx.lineWidth = 0.5;
+  for (var i = 0; i <= 5; i++) {
+    var y = pad.top + ch - (ch * (i * 10) / maxVal);
+    ctx.beginPath();
+    ctx.moveTo(pad.left, y);
+    ctx.lineTo(pad.left + cw, y);
+    ctx.stroke();
+    ctx.fillStyle = '#aaa';
+    ctx.font = '10px "DM Sans", sans-serif';
+    ctx.textAlign = 'right';
+    ctx.fillText('$' + (i * 10) + 'M', pad.left - 8, y + 3);
+  }
+  /* Area fill */
+  ctx.beginPath();
+  data.forEach(function(d, idx) {
+    var x = pad.left + (cw * idx / (data.length - 1));
+    var y = pad.top + ch - (ch * d.val / maxVal);
+    if (idx === 0) ctx.moveTo(x, y);
+    else ctx.lineTo(x, y);
+  });
+  ctx.lineTo(pad.left + cw, pad.top + ch);
+  ctx.lineTo(pad.left, pad.top + ch);
+  ctx.closePath();
+  ctx.fillStyle = 'rgba(139,34,82,0.07)';
+  ctx.fill();
+  /* Line */
+  ctx.beginPath();
+  data.forEach(function(d, idx) {
+    var x = pad.left + (cw * idx / (data.length - 1));
+    var y = pad.top + ch - (ch * d.val / maxVal);
+    if (idx === 0) ctx.moveTo(x, y);
+    else ctx.lineTo(x, y);
+  });
+  ctx.strokeStyle = '#8b2252';
+  ctx.lineWidth = 2;
+  ctx.stroke();
+  /* Dots and labels */
+  data.forEach(function(d, idx) {
+    var x = pad.left + (cw * idx / (data.length - 1));
+    var y = pad.top + ch - (ch * d.val / maxVal);
+    ctx.beginPath();
+    ctx.arc(x, y, 4, 0, Math.PI * 2);
+    ctx.fillStyle = '#8b2252';
+    ctx.fill();
+    ctx.beginPath();
+    ctx.arc(x, y, 2, 0, Math.PI * 2);
+    ctx.fillStyle = '#fafaf7';
+    ctx.fill();
+    /* Year label */
+    ctx.fillStyle = '#888';
+    ctx.font = '10px "DM Sans", sans-serif';
+    ctx.textAlign = 'center';
+    ctx.fillText(d.year, x, pad.top + ch + 20);
+    /* Value label */
+    ctx.fillStyle = '#1a1a1a';
+    ctx.font = '600 11px "DM Sans", sans-serif';
+    ctx.fillText('$' + d.val + 'M', x, y - 12);
+  });
+})();
+/* ============ SCROLL REVEAL ============ */
+(function(){
+  var reveals = document.querySelectorAll('.reveal');
+  function check() {
+    var trigger = window.innerHeight * 0.88;
+    reveals.forEach(function(el) {
+      var top = el.getBoundingClientRect().top;
+      if (top < trigger) {
+        el.classList.add('visible');
+      }
+    });
+  }
+  window.addEventListener('scroll', check, { passive: true });
+  window.addEventListener('resize', check);
+  check();
+})();
+</script>
+<script>
+(function(){
+  var bar=document.createElement('div');bar.id='scroll-progress';
+  document.body.prepend(bar);
+  var nav=document.querySelector('nav');
+  window.addEventListener('scroll',function(){
+    var h=document.documentElement,b=document.body,
+        st='scrollTop',sh='scrollHeight';
+    var pct=(h[st]||b[st])/((h[sh]||b[sh])-h.clientHeight)*100;
+    bar.style.width=pct+'%';
+    if((h[st]||b[st])>80){nav&&nav.classList.add('scrolled');}
+    else{nav&&nav.classList.remove('scrolled');}
+  },{passive:true});
+})();
+</script>
+<script src="/linkedin-widget.js" defer></script>
+</body>
+</html>

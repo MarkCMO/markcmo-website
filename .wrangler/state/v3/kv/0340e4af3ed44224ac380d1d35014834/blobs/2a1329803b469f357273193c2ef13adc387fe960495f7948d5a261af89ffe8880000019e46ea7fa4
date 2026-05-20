@@ -1,0 +1,454 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>What Is a Go-to-Market Strategy? GTM Definition and Framework | MarkCMO</title>
+<meta name="description" content="A go-to-market (GTM) strategy is a plan defining how a company reaches target customers and achieves competitive advantage. Learn what a GTM strategy includes and how to build one.">
+<link rel="canonical" href="https://markcmo.com/what-is-go-to-market-strategy">
+<meta property="og:title" content="What Is a Go-to-Market Strategy? GTM Definition and Framework | MarkCMO">
+<meta property="og:description" content="A go-to-market (GTM) strategy is a plan defining how a company reaches target customers and achieves competitive advantage. Learn what a GTM strategy includes and how to build one.">
+<meta property="og:url" content="https://markcmo.com/what-is-go-to-market-strategy">
+<meta property="og:type" content="article">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="What Is a Go-to-Market Strategy? GTM Definition and Framework | MarkCMO">
+<meta name="twitter:description" content="A go-to-market (GTM) strategy is a plan defining how a company reaches target customers and achieves competitive advantage. Learn what a GTM strategy includes and how to build one.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Bebas+Neue&display=swap">
+<script type="application/ld+json">{
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "headline": "What Is a Go-to-Market Strategy?",
+  "description": "A go-to-market (GTM) strategy is a plan defining how a company reaches target customers and achieves competitive advantage. Learn what a GTM strategy includes and how to build one.",
+  "author": {
+    "@type": "Person",
+    "name": "Mark Gabrielli",
+    "url": "https://markcmo.com/about"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "MarkCMO",
+    "url": "https://markcmo.com"
+  },
+  "url": "https://markcmo.com/what-is-go-to-market-strategy",
+  "datePublished": "2026-05-19",
+  "dateModified": "2026-05-19"
+}</script>
+<script type="application/ld+json">{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "What is a go-to-market strategy?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "A go-to-market strategy is the plan that defines how a company will bring a product or service to market and win customers. It covers: target customer definition (ICP), value proposition and positioning, messaging architecture, channel strategy, pricing model, and sales motion. A GTM strategy aligns marketing, sales, and product around a shared execution plan -- replacing the expensive trial and error of launching without a strategy."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "What is the difference between a GTM strategy and a marketing strategy?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "A GTM strategy defines the foundation: who the customer is, what the value proposition is, how the company is positioned, and which channels and sales motion it will use. A marketing strategy executes against that foundation -- defining the specific campaigns, content, channels, and programs that will generate awareness, demand, and pipeline. A marketing strategy without a clear GTM strategy is activity without direction; a GTM strategy without a marketing strategy is direction without execution."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "What does a GTM strategy include?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "A complete GTM strategy includes: ICP and buyer persona definitions, market sizing and segmentation, competitive landscape analysis, positioning and differentiation statement, messaging architecture by persona and buying stage, channel strategy with rationale, pricing and packaging model, sales motion and process definition, and a 90-day launch execution roadmap. The level of detail scales with company size and launch complexity."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "How long does it take to build a GTM strategy?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "MarkCMO GTM strategy engagements typically take 3 to 6 weeks: 1 to 2 weeks of customer and competitive research, 1 to 2 weeks of strategy development and internal testing, and 1 to 2 weeks of documentation, presentation, and launch planning. Companies often underestimate the research phase -- the quality of the GTM strategy is directly proportional to the quality of the customer and competitive intelligence that informs it."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "When does a company need a new GTM strategy?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "A company needs a new or revised GTM strategy when: launching a new product or entering a new market segment, experiencing growth plateau despite marketing and sales activity (usually signals a positioning or ICP problem), expanding from one customer segment to another, repositioning after competitive pressure or market change, or scaling from founder-led sales to a repeatable sales motion. Any time the answer to 'who is our customer and why do they choose us' becomes unclear, a GTM strategy refresh is needed."
+      }
+    }
+  ]
+}</script>
+<style>
+:root{--gold:#C9A84C;--dark:#050919;--navy:#0A1628}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Inter',system-ui,sans-serif;background:#050919;color:#e8e8e8;line-height:1.7}
+#scroll-progress{position:fixed;top:0;left:0;height:3px;background:var(--gold);z-index:9999;width:0;transition:width .1s}
+.nav{position:fixed;top:0;left:0;right:0;z-index:900;display:flex;align-items:center;padding:0 32px;height:64px;background:rgba(5,9,25,.92);backdrop-filter:blur(12px);border-bottom:1px solid rgba(255,255,255,.06);transition:box-shadow .3s}
+.nav.scrolled{box-shadow:0 2px 20px rgba(0,0,0,.4)}
+.nav-logo{display:flex;align-items:center;gap:10px;text-decoration:none;flex-shrink:0}
+.nav-logo-avatar{width:36px;height:36px;border-radius:50%;overflow:hidden;border:2px solid var(--gold)}
+.nav-logo-avatar img{width:100%;height:100%;object-fit:cover}
+.nav-logo-text strong{display:block;font-size:.85rem;color:#fff;line-height:1.2}
+.nav-logo-text span{display:block;font-size:.7rem;color:#94A3B8}
+.nav-links{display:flex;list-style:none;gap:28px;margin:0 auto;padding:0}
+.nav-links a{color:#CBD5E1;text-decoration:none;font-size:.88rem;transition:color .2s}
+.nav-links a:hover{color:#fff}
+.nav-btn{background:var(--gold);color:#0f0f0f;padding:8px 18px;border-radius:6px;font-size:.85rem;font-weight:700;text-decoration:none;white-space:nowrap}
+.nav-hamburger{display:none;flex-direction:column;gap:5px;cursor:pointer;padding:4px}
+.nav-hamburger span{display:block;width:22px;height:2px;background:#fff;border-radius:2px}
+.mobile-drawer{display:none;position:fixed;top:64px;left:0;right:0;background:#0a0f1e;border-bottom:1px solid #1e2640;padding:20px 24px;flex-direction:column;gap:16px;z-index:899}
+.mobile-drawer.open{display:flex}
+.mobile-drawer a{color:#CBD5E1;text-decoration:none;font-size:.95rem;padding:6px 0;border-bottom:1px solid #1a2035}
+@media(max-width:860px){.nav-links,.nav-right{display:none}.nav-hamburger{display:flex}}
+.sp-proof-strip{display:flex;justify-content:center;flex-wrap:wrap;gap:0;background:rgba(201,168,76,.07);border-top:1px solid rgba(201,168,76,.15);border-bottom:1px solid rgba(201,168,76,.15)}
+.sp-proof-item{display:flex;flex-direction:column;align-items:center;padding:14px 32px;border-right:1px solid rgba(201,168,76,.12)}
+.sp-proof-item:last-child{border-right:none}
+.sp-proof-num{font-size:1.35rem;font-weight:800;color:var(--gold);line-height:1}
+.sp-proof-label{font-size:.72rem;color:#94A3B8;text-transform:uppercase;letter-spacing:.08em;margin-top:3px}
+/* Glossary hero */
+.gl-hero{padding:120px 0 64px;background:linear-gradient(160deg,#050919 0%,#0a1628 60%,#0d1b27 100%);border-bottom:1px solid #1a2640}
+.gl-hero-inner{max-width:860px;margin:0 auto;padding:0 24px}
+.gl-tag{display:inline-block;background:rgba(201,168,76,.12);border:1px solid rgba(201,168,76,.3);color:var(--gold);font-size:.72rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;padding:5px 12px;border-radius:4px;margin-bottom:20px}
+.gl-hero h1{font-size:clamp(2rem,5vw,3.2rem);font-weight:800;color:#fff;line-height:1.1;margin-bottom:20px}
+.gl-def-lead{font-size:1.15rem;color:#CBD5E1;line-height:1.8;border-left:3px solid var(--gold);padding-left:20px;margin-bottom:0}
+/* Body layout */
+.gl-body{max-width:860px;margin:0 auto;padding:56px 24px 80px}
+.gl-section{margin-bottom:48px}
+.gl-section h2{font-size:1.5rem;font-weight:700;color:#fff;margin-bottom:16px;padding-bottom:10px;border-bottom:1px solid #1e2640}
+.gl-section p{color:#CBD5E1;line-height:1.8;margin-bottom:14px}
+.gl-section p:last-child{margin-bottom:0}
+.gl-quotable{background:rgba(201,168,76,.06);border-left:4px solid var(--gold);padding:18px 22px;border-radius:0 8px 8px 0;margin:24px 0;font-size:1.05rem;color:#e8e8e8;font-style:italic;line-height:1.7}
+.gl-components{list-style:none;padding:0;display:grid;gap:14px}
+.gl-components li{background:#0d1625;border:1px solid #1e2640;border-radius:8px;padding:16px 20px}
+.gl-components li strong{display:block;color:var(--gold);font-size:.9rem;margin-bottom:4px}
+.gl-components li span{color:#94A3B8;font-size:.88rem;line-height:1.6}
+/* FAQ */
+.gl-faq{display:grid;gap:12px}
+.gl-faq-item{background:#0d1625;border:1px solid #1e2640;border-radius:8px;overflow:hidden}
+.gl-faq-q{padding:16px 20px;font-weight:600;color:#e8e8e8;cursor:pointer;list-style:none;display:flex;justify-content:space-between;align-items:center;font-size:.95rem}
+.gl-faq-q::after{content:'+';color:var(--gold);font-size:1.2rem;flex-shrink:0;margin-left:12px}
+.gl-faq-item.open .gl-faq-q::after{content:'-'}
+.gl-faq-a{display:none;padding:0 20px 16px;color:#94A3B8;font-size:.88rem;line-height:1.8}
+.gl-faq-item.open .gl-faq-a{display:block}
+/* Related links */
+.gl-related{display:flex;flex-wrap:wrap;gap:10px;margin-top:8px}
+.gl-related a{background:#0d1625;border:1px solid #1e2640;color:#CBD5E1;padding:8px 16px;border-radius:6px;font-size:.85rem;text-decoration:none;transition:border-color .2s,color .2s}
+.gl-related a:hover{border-color:var(--gold);color:var(--gold)}
+/* CTA banner */
+.gl-cta{background:linear-gradient(135deg,#0a1628,#0d1b27);border:1px solid rgba(201,168,76,.2);border-radius:12px;padding:40px;text-align:center;margin:48px 0}
+.gl-cta h2{font-size:1.6rem;font-weight:700;color:#fff;margin-bottom:12px}
+.gl-cta p{color:#94A3B8;margin-bottom:24px;font-size:.95rem}
+.gl-cta a{background:var(--gold);color:#0f0f0f;padding:13px 28px;border-radius:6px;font-weight:700;text-decoration:none;font-size:.95rem;display:inline-block}
+/* Form styles */
+.mc-contact{background:linear-gradient(135deg,#050919 0%,#0A1628 60%,#0d1b27 100%);padding:64px 0;border-top:1px solid #2a2a2a}
+.mc-contact-inner{max-width:1100px;margin:0 auto;padding:0 24px;display:grid;grid-template-columns:1fr 1fr;gap:56px;align-items:start}
+.mc-contact-left h2{font-family:'Bebas Neue',sans-serif;font-size:clamp(1.8rem,4vw,2.8rem);font-weight:400;letter-spacing:.03em;color:#fff;margin:0 0 14px;line-height:1.1}
+.mc-contact-left h2 em{color:#C9A84C;font-style:normal}
+.mc-contact-left p{font-size:.92rem;color:#94A3B8;line-height:1.8;margin:0 0 24px}
+.mc-contact-proof{display:flex;flex-direction:column;gap:10px;margin-bottom:28px}
+.mc-contact-proof-item{display:flex;align-items:center;gap:10px;font-size:.85rem;color:#94A3B8}
+.mc-contact-proof-item span:first-child{color:#C9A84C;font-weight:700;font-size:1rem;flex-shrink:0}
+.mc-contact-direct{background:rgba(201,168,76,.08);border:1px solid rgba(201,168,76,.2);border-radius:8px;padding:14px 18px}
+.mc-contact-direct p{font-size:.75rem;color:#666;text-transform:uppercase;letter-spacing:.08em;margin:0 0 6px}
+.mc-contact-direct a{color:#C9A84C;font-weight:700;text-decoration:none;font-size:.88rem}
+.mc-form-card{background:#111;border:1px solid #2a2a2a;border-radius:12px;padding:28px}
+.mc-form-card h3{font-size:1.05rem;font-weight:700;color:#fff;margin:0 0 4px}
+.mc-form-card>p{font-size:.82rem;color:#64748B;margin:0 0 20px}
+.mc-field{margin-bottom:12px}
+.mc-field input,.mc-field textarea,.mc-field select{width:100%;padding:12px 14px;background:#1a1a1a;border:1px solid #2a2a2a;border-radius:6px;color:#e8e8e8;font-size:.88rem;font-family:inherit;box-sizing:border-box;transition:border-color .2s;outline:none}
+.mc-field input:focus,.mc-field textarea:focus{border-color:#C9A84C}
+.mc-field textarea{resize:vertical;min-height:80px}
+.mc-submit{width:100%;background:#C9A84C;color:#0f0f0f;border:none;padding:13px;border-radius:6px;font-size:.95rem;font-weight:700;cursor:pointer;font-family:inherit;transition:background .2s;margin-top:4px}
+.mc-submit:hover:not(:disabled){background:#b8952f}
+.mc-submit:disabled{opacity:.5;cursor:not-allowed}
+.mc-success{display:none;text-align:center;padding:28px 12px}
+.mc-success-icon{font-size:2.5rem;margin-bottom:10px;color:#C9A84C}
+.mc-success h3{color:#C9A84C;font-size:1.2rem;font-weight:700;margin:0 0 8px}
+.mc-success p{color:#94A3B8;font-size:.88rem;margin:0 0 18px;line-height:1.7}
+.mc-success a{color:#C9A84C;font-weight:700}
+footer{background:#020817;border-top:1px solid #1a2035;padding:60px 0 0}
+.footer-mega{max-width:1200px;margin:0 auto;padding:0 32px 48px;display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:40px}
+.footer-logo{font-size:1.4rem;font-weight:800;color:#fff;margin-bottom:12px}.footer-logo span{color:var(--gold)}
+.footer-desc{font-size:.82rem;color:#64748B;line-height:1.7;margin-bottom:16px}
+.footer-brand-tags{display:flex;flex-wrap:wrap;gap:6px}
+.footer-brand-tags span{background:#0d1625;border:1px solid #1e2640;color:#64748B;font-size:.7rem;padding:3px 8px;border-radius:4px}
+.social-links{display:flex;gap:8px}
+.social-link{display:flex;align-items:center;justify-content:center;width:32px;height:32px;background:#0d1625;border:1px solid #1e2640;border-radius:6px;color:#94A3B8;text-decoration:none;font-size:.8rem;font-weight:700;transition:border-color .2s,color .2s}
+.social-link:hover{border-color:var(--gold);color:var(--gold)}
+.footer-col h4{font-size:.8rem;text-transform:uppercase;letter-spacing:.1em;color:#64748B;margin-bottom:14px}
+.footer-col ul{list-style:none;padding:0;display:flex;flex-direction:column;gap:8px}
+.footer-col a{color:#94A3B8;text-decoration:none;font-size:.85rem;transition:color .2s}
+.footer-col a:hover{color:var(--gold)}
+.footer-bottom{border-top:1px solid #1a2035;padding:20px 32px;max-width:1200px;margin:0 auto;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:12px}
+.footer-bottom p{font-size:.78rem;color:#334155}
+.footer-bottom-social{display:flex;gap:14px;align-items:center}
+.footer-bottom-social a{color:#334155;text-decoration:none;font-size:.78rem;transition:color .2s}
+.footer-bottom-social a:hover{color:var(--gold)}
+.footer-bottom-social span{color:#1e2640}
+@media(max-width:860px){.footer-mega{grid-template-columns:1fr 1fr}.mc-contact-inner{grid-template-columns:1fr;gap:32px}}
+@media(max-width:540px){.footer-mega{grid-template-columns:1fr}.sp-proof-item{padding:10px 16px}}
+</style>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "DefinedTerm",
+    "name": "Go-to-Market Strategy",
+    "description": "A go-to-market (GTM) strategy is a plan that defines how a company will launch a product or service to market, including target customers, pricing, distribution channels, and messaging.",
+    "url": "https://markcmo.com/what-is-go-to-market-strategy",
+    "inDefinedTermSet": {
+      "@type": "DefinedTermSet",
+      "name": "Marketing & Business Leadership Glossary",
+      "url": "https://markcmo.com/glossary"
+    }
+  }
+  </script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      {
+        "@type": "ListItem",
+        "position": 1,
+        "name": "Home",
+        "item": "https://markcmo.com/"
+      },
+      {
+        "@type": "ListItem",
+        "position": 2,
+        "name": "Glossary",
+        "item": "https://markcmo.com/glossary"
+      },
+      {
+        "@type": "ListItem",
+        "position": 3,
+        "name": "What Is Go-to-Market Strategy",
+        "item": "https://markcmo.com/what-is-go-to-market-strategy"
+      }
+    ]
+  }
+  </script>
+</head>
+<body>
+<div class="page-wrapper">
+<nav class="nav" id="mainNav">
+<a href="/index.html" class="nav-logo">
+<div class="nav-logo-avatar"><img src="/mark-photo.webp" alt="Mark Gabrielli" /></div>
+<div class="nav-logo-text"><strong>Mark Gabrielli</strong><span>Fractional CMO &amp; COO</span></div>
+</a>
+<ul class="nav-links">
+<li><a href="/about.html">About</a></li>
+<li><a href="/services.html">Services</a></li>
+<li><a href="/magnet-framework.html" style="color:#C9A84C;font-weight:600;">MAGNET&trade;</a></li>
+<li><a href="/results.html">Results</a></li>
+<li><a href="/blog">Insights</a></li>
+<li><a href="https://academy.markcmo.com" target="_blank" style="color:#C9A84C;">Academy</a></li>
+</ul>
+<div class="nav-right"><a href="/book.html" class="nav-btn">Book a Free Call</a></div>
+<div class="nav-hamburger" id="navHam"><span></span><span></span><span></span></div>
+</nav>
+<div class="mobile-drawer" id="mobileDrawer">
+<a href="/about.html">About</a><a href="/services.html">Services</a>
+<a href="/magnet-framework.html" style="color:#C9A84C;font-weight:600;">MAGNET Framework&trade;</a>
+<a href="/results.html">Results</a><a href="/blog">Insights</a>
+<a href="https://academy.markcmo.com" target="_blank">Academy</a>
+<a href="/book.html" style="color:#C9A84C;font-weight:700;">Book a Free Strategy Call &rarr;</a>
+</div>
+<main>
+
+<header class="gl-hero">
+<div class="gl-hero-inner">
+<div class="gl-tag">Marketing Glossary</div>
+<h1>What Is a Go-to-Market Strategy?</h1>
+<p class="gl-def-lead">A go-to-market (GTM) strategy is a step-by-step plan that defines how a company will reach its target customers, communicate its value proposition, and achieve competitive advantage when launching a product or entering a new market. A complete GTM strategy covers the target customer, the problem being solved, the positioning and messaging, the channels for reaching buyers, the pricing model, and the sales motion -- aligning marketing, sales, and product around a unified execution plan. Companies without a documented GTM strategy consistently underperform on launch and waste significant budget discovering through trial and error what a strategic process would have determined in advance.</p>
+</div>
+</header>
+
+<div class="sp-proof-strip">
+<div class="sp-proof-item"><span class="sp-proof-num">4.9&#9733;</span><span class="sp-proof-label">193 Reviews</span></div>
+<div class="sp-proof-item"><span class="sp-proof-num">90%</span><span class="sp-proof-label">Retention Rate</span></div>
+<div class="sp-proof-item"><span class="sp-proof-num">19+</span><span class="sp-proof-label">Ventures Built</span></div>
+<div class="sp-proof-item"><span class="sp-proof-num">$50M+</span><span class="sp-proof-label">Revenue Generated</span></div>
+<div class="sp-proof-item"><span class="sp-proof-num">30</span><span class="sp-proof-label">Days to First Results</span></div>
+</div>
+<div style="background:#0d1b27;border-left:3px solid #2563EB;padding:1.25rem 1.5rem;margin:0;max-width:100%;border-radius:0 6px 6px 0;">
+<strong style="color:#C9A84C;font-size:.75rem;font-family:'DM Mono',monospace;text-transform:uppercase;letter-spacing:.1em;display:block;margin-bottom:.5rem;">Quick Answer</strong>
+<p style="color:#ccc;margin:0;line-height:1.75;font-size:.95rem;">A go-to-market (GTM) strategy is a step-by-step plan that defines how a company will reach its target customers, communicate its value proposition, and achieve competitive advantage when launching a product or entering a new market. A complete GTM strategy covers the target customer, the problem being solved, the positioning and messaging, the channels for reaching buyers, the pricing model, and the sales motion -- aligning marketing, sales, and product around a unified execution plan.</p>
+</div>
+
+<div class="gl-body">
+
+<section class="gl-section">
+<h2>What a GTM Strategy Actually Covers</h2>
+<p>A go-to-market strategy is not a marketing plan -- it is the foundation that a marketing plan executes against. The GTM strategy answers the strategic questions: who is the customer, what problem do we solve for them uniquely, why will they choose us over alternatives, how will they discover us, and how will we close the deal. Without clear answers to these questions, marketing activity produces noise rather than pipeline.</p>
+<p>GTM strategy applies not only to product launches but to entering new markets, launching new product lines, repositioning an existing offering, or accelerating growth after product-market fit. A growth-stage company that has found product-market fit in one segment and wants to expand into adjacent segments needs a GTM strategy for each new motion -- the channel, messaging, and sales approach that worked for the first segment often does not transfer directly to the next.</p>
+
+<blockquote class="gl-quotable">A go-to-market strategy is the plan that turns a good product into a growing business -- without it, companies substitute hope for direction and wonder why growth stalls.</blockquote>
+</section>
+
+<section class="gl-section">
+<h2>Core Components of Go-to-Market Strategy</h2>
+<ul class="gl-components">
+<li><strong>ICP and Market Segmentation</strong><span>Defining the ideal customer profile with precision: company size, industry, technology stack, pain points, buying triggers, and decision-making structure -- and segmenting the market to prioritize the highest-value opportunities first.</span></li>
+<li><strong>Positioning and Value Proposition</strong><span>Articulating how the product or service is different from alternatives and why that difference matters to the target customer -- a clear, defensible position that sales and marketing communicate consistently.</span></li>
+<li><strong>Messaging Architecture</strong><span>Developing the messaging hierarchy: the core promise, the supporting proof points, and the specific messages for each buyer persona and buying stage -- from awareness through decision.</span></li>
+<li><strong>Channel Strategy</strong><span>Selecting the channels through which target customers will be reached -- inbound vs. outbound, digital vs. field, self-serve vs. high-touch -- based on ICP behavior, deal economics, and competitive landscape.</span></li>
+<li><strong>Sales Motion and Process</strong><span>Defining the sales model: inside vs. field, product-led vs. sales-led, transactional vs. enterprise, and the specific sales process steps, qualification criteria, and handoff points.</span></li>
+<li><strong>Launch Plan and 90-Day Roadmap</strong><span>The specific execution plan: what launches when, which channels activate in which sequence, what success metrics are tracked, and what the first 30-60-90 day milestones look like.</span></li>
+</ul>
+</section>
+
+<section class="gl-section">
+<h2>How MarkCMO Approaches This</h2>
+<p>MarkCMO GTM strategy engagements produce a complete, executable strategy document -- not a presentation of frameworks. The deliverable includes the ICP definition, positioning statement, messaging architecture, channel strategy, sales motion, and launch roadmap -- tested against the competitive landscape and the client's existing commercial capabilities.</p>
+<p>Mark Gabrielli has built go-to-market strategies for companies across SaaS, professional services, healthcare technology, and e-commerce -- at stages from pre-launch to $50M in revenue. Every MarkCMO GTM strategy is built to execute, not to present to investors.</p>
+
+</section>
+
+<div class="gl-cta">
+<h2>Need a Senior Marketing Leader Who Executes?</h2>
+<p>MarkCMO delivers fractional CMO services that build strategy, install systems, and generate pipeline -- in 30 days or less.</p>
+<a href="/go-to-market-strategy.html">See GTM Strategy Services &rarr;</a>
+</div>
+
+<section class="gl-section">
+<h2>Frequently Asked Questions</h2>
+<div class="gl-faq">
+<div class="gl-faq-item"><div class="gl-faq-q">What is a go-to-market strategy?</div><div class="gl-faq-a"><p>A go-to-market strategy is the plan that defines how a company will bring a product or service to market and win customers. It covers: target customer definition (ICP), value proposition and positioning, messaging architecture, channel strategy, pricing model, and sales motion. A GTM strategy aligns marketing, sales, and product around a shared execution plan -- replacing the expensive trial and error of launching without a strategy.</p></div></div>
+<div class="gl-faq-item"><div class="gl-faq-q">What is the difference between a GTM strategy and a marketing strategy?</div><div class="gl-faq-a"><p>A GTM strategy defines the foundation: who the customer is, what the value proposition is, how the company is positioned, and which channels and sales motion it will use. A marketing strategy executes against that foundation -- defining the specific campaigns, content, channels, and programs that will generate awareness, demand, and pipeline. A marketing strategy without a clear GTM strategy is activity without direction; a GTM strategy without a marketing strategy is direction without execution.</p></div></div>
+<div class="gl-faq-item"><div class="gl-faq-q">What does a GTM strategy include?</div><div class="gl-faq-a"><p>A complete GTM strategy includes: ICP and buyer persona definitions, market sizing and segmentation, competitive landscape analysis, positioning and differentiation statement, messaging architecture by persona and buying stage, channel strategy with rationale, pricing and packaging model, sales motion and process definition, and a 90-day launch execution roadmap. The level of detail scales with company size and launch complexity.</p></div></div>
+<div class="gl-faq-item"><div class="gl-faq-q">How long does it take to build a GTM strategy?</div><div class="gl-faq-a"><p>MarkCMO GTM strategy engagements typically take 3 to 6 weeks: 1 to 2 weeks of customer and competitive research, 1 to 2 weeks of strategy development and internal testing, and 1 to 2 weeks of documentation, presentation, and launch planning. Companies often underestimate the research phase -- the quality of the GTM strategy is directly proportional to the quality of the customer and competitive intelligence that informs it.</p></div></div>
+<div class="gl-faq-item"><div class="gl-faq-q">When does a company need a new GTM strategy?</div><div class="gl-faq-a"><p>A company needs a new or revised GTM strategy when: launching a new product or entering a new market segment, experiencing growth plateau despite marketing and sales activity (usually signals a positioning or ICP problem), expanding from one customer segment to another, repositioning after competitive pressure or market change, or scaling from founder-led sales to a repeatable sales motion. Any time the answer to 'who is our customer and why do they choose us' becomes unclear, a GTM strategy refresh is needed.</p></div></div>
+</div>
+</section>
+
+<section class="gl-section">
+<h2>Related Resources</h2>
+<div class="gl-related">
+<a href="/fractional-cmo.html">Fractional CMO</a>
+<a href="/marketing-audit.html">Marketing Audit</a>
+<a href="/what-is-b2b-marketing.html">What Is B2B Marketing?</a>
+<a href="/what-is-brand-strategy.html">What Is Brand Strategy?</a>
+<a href="/demand-generation.html">Demand Generation</a>
+</div>
+</section>
+
+</div><!-- /gl-body -->
+
+</main>
+
+<section class="mc-contact" id="contact">
+<div class="mc-contact-inner">
+<div class="mc-contact-left">
+<h2>Work With a <em>Fractional CMO</em> Who Executes</h2>
+<p>MarkCMO delivers senior marketing leadership at a fraction of the full-time cost -- with the strategy, systems, and execution your business needs to grow.</p>
+<div class="mc-contact-proof">
+<div class="mc-contact-proof-item"><span>$50M+</span><span>Revenue generated for clients</span></div>
+<div class="mc-contact-proof-item"><span>90%</span><span>Client retention rate</span></div>
+<div class="mc-contact-proof-item"><span>30 days</span><span>To first measurable results</span></div>
+</div>
+<div class="mc-contact-direct">
+<p>Direct line</p>
+<a href="mailto:mark@markcmo.com">mark@markcmo.com</a><br>
+<a href="tel:+13219175738">+1 (321) 917-5738</a>
+</div>
+</div>
+<div class="mc-form-card">
+<div id="mc-card">
+<h3>Book a Free Strategy Call</h3>
+<p>Tell us about your business and we will reach out within one business day.</p>
+<form id="mc-form" novalidate>
+<input type="hidden" name="form-name" value="glossary-contact">
+<div class="mc-field"><input type="text" name="name" placeholder="Full name" required></div>
+<div class="mc-field"><input type="email" name="email" placeholder="Work email" required></div>
+<div class="mc-field"><input type="text" name="company" placeholder="Company name"></div>
+<div class="mc-field"><input type="tel" name="phone" placeholder="Phone (optional)"></div>
+<div class="mc-field"><textarea name="message" placeholder="What are you trying to grow or fix?"></textarea></div>
+<button type="submit" class="mc-submit" id="mc-btn">Get My Free Strategy Call &rarr;</button>
+</form>
+</div>
+<div class="mc-success" id="mc-success">
+<div class="mc-success-icon">&#10003;</div>
+<h3>Request received.</h3>
+<p>Mark reviews every submission personally. Expect a reply within one business day.</p>
+<a href="/results.html">See client results &rarr;</a>
+</div>
+</div>
+</div>
+</section>
+
+<footer>
+<div class="footer-mega">
+<div class="footer-brand-col">
+<div class="footer-logo">Mark <span>Gabrielli</span></div>
+<p class="footer-desc">Fractional CMO, COO &amp; Executive Consultant. I help businesses from $1M to $100M find what's broken, build what scales, and execute what others only talk about.</p>
+<div class="footer-brand-tags"><span>WETYR Founder</span><span>Fractional C-Suite</span><span>AI Strategist</span><span>CST Certified</span></div>
+<div class="social-links" style="margin-top:1.2rem;">
+<a href="https://www.linkedin.com/in/marklgabrielli/" target="_blank" rel="noopener" class="social-link">in</a>
+<a href="mailto:mark@markcmo.com" class="social-link">@</a>
+</div>
+</div>
+<div class="footer-col"><h4>C-Suite Services</h4><ul>
+<li><a href="/fractional-cmo.html">Fractional CMO</a></li>
+<li><a href="/fractional-coo.html">Fractional COO</a></li>
+<li><a href="/services.html">All Services</a></li>
+</ul></div>
+<div class="footer-col"><h4>Marketing Services</h4><ul>
+<li><a href="/demand-generation.html">Demand Generation</a></li>
+<li><a href="/lead-generation.html">Lead Generation</a></li>
+<li><a href="/marketing-audit.html">Marketing Audit</a></li>
+<li><a href="/seo-services.html">SEO Services</a></li>
+</ul></div>
+<div class="footer-col"><h4>Learn &amp; Company</h4><ul>
+<li><a href="/about.html">About Mark</a></li>
+<li><a href="/blog.html">Insights &amp; Blog</a></li>
+<li><a href="/contact.html">Contact</a></li>
+<li><a href="https://academy.markcmo.com" target="_blank" style="color:var(--gold);font-weight:700;">&#127891; MarkCMO Academy</a></li>
+</ul></div>
+</div>
+<div class="footer-bottom">
+<p>&copy; 2026 Mark Gabrielli &middot; markcmo.com &middot; All rights reserved.</p>
+<p class="footer-bottom-social">
+<a href="https://www.linkedin.com/in/marklgabrielli/" target="_blank" rel="noopener">LinkedIn</a>
+<span>&middot;</span><a href="https://x.com/markgcmo" target="_blank" rel="noopener">X / Twitter</a>
+<span>&middot;</span><a href="https://medium.com/@mark_louis_gabrielli_jr" target="_blank" rel="noopener">Medium</a>
+</p>
+</div>
+</footer>
+
+<script>
+(function(){var bar=document.createElement('div');bar.id='scroll-progress';document.body.prepend(bar);
+window.addEventListener('scroll',function(){var h=document.documentElement,b=document.body,st='scrollTop',sh='scrollHeight';
+var pct=(h[st]||b[st])/((h[sh]||b[sh])-h.clientHeight)*100;bar.style.width=pct+'%';},{passive:true});})();
+</script>
+<script>
+(function(){var nav=document.getElementById('mainNav');var ham=document.getElementById('navHam');var drw=document.getElementById('mobileDrawer');
+if(nav)window.addEventListener('scroll',function(){nav.classList.toggle('scrolled',window.scrollY>20);},{passive:true});
+if(ham&&drw){ham.addEventListener('click',function(){drw.classList.toggle('open');});
+drw.querySelectorAll('a').forEach(function(a){a.addEventListener('click',function(){drw.classList.remove('open');});});}})();
+</script>
+<script src="/linkedin-widget.js" defer></script>
+<script>
+(function(){var form=document.getElementById('mc-form');if(!form)return;
+form.addEventListener('submit',function(e){e.preventDefault();
+var btn=document.getElementById('mc-btn'),card=document.getElementById('mc-card'),suc=document.getElementById('mc-success');
+if(!btn||!card||!suc)return;btn.textContent='Sending...';btn.disabled=true;
+var d=new FormData(form);
+var p={'form-name':d.get('form-name')||'glossary-contact','name':d.get('name')||'','email':d.get('email')||'','company':d.get('company')||'','phone':d.get('phone')||'','message':d.get('message')||''};
+fetch('/api/lead',{method:'POST',headers:{'Content-Type':'application/x-www-form-urlencoded'},body:new URLSearchParams(p).toString()})
+.then(function(){card.style.display='none';suc.style.display='block';})
+.catch(function(){card.style.display='none';suc.style.display='block';});});})();
+</script>
+<script>
+document.querySelectorAll('.gl-faq-q').forEach(function(q){
+  q.addEventListener('click',function(){
+    var item=this.closest('.gl-faq-item');
+    item.classList.toggle('open');
+  });
+});
+</script>
+</div>
+</body>
+</html>

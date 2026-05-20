@@ -1,0 +1,689 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<link rel="icon" type="image/webp" href="/favicon.webp"><link rel="apple-touch-icon" href="/mark-photo.webp">
+<meta name="robots" content="noindex, follow">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Mark Louis Gabrielli Jr. - Chief Marketing Officer | Resume</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Garamond:ital,wght@0,400;0,600;0,700;1,400&family=EB+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=Inter:wght@400;500;600;700&display=swap">
+<style>
+/* ─── RESET ─────────────────────────────────────────────────── */
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+html { font-size: 16px; scroll-behavior: smooth; }
+/* ─── TOKENS ─────────────────────────────────────────────────── */
+:root {
+  --ink:       #1a1a1a;
+  --ink-mid:   #3d3d3d;
+  --ink-dim:   #666666;
+  --ink-light: #888888;
+  --rule:      #d0d0d0;
+  --rule-light:#e8e8e8;
+  --bg:        #ffffff;
+  --bg-soft:   #f7f7f5;
+  --accent:    #1a3a5c;   /* deep navy - professional, not flashy */
+  --accent-mid:#2a5080;
+  --serif:     'EB Garamond', Georgia, serif;
+  --sans:      'Inter', system-ui, sans-serif;
+}
+/* ─── BODY ───────────────────────────────────────────────────── */
+body {
+  font-family: var(--sans);
+  background: var(--bg);
+  color: var(--ink);
+  line-height: 1.55;
+  -webkit-font-smoothing: antialiased;
+}
+a { color: var(--accent); text-decoration: none; }
+a:hover { text-decoration: underline; }
+/* ─── PRINT SETUP ────────────────────────────────────────────── */
+@media print {
+  @page { margin: .55in .65in; size: letter; }
+  * { animation: none !important; transition: none !important; box-shadow: none !important; }
+  /* Strip outer shell */
+  .no-print, .topbar { display: none !important; }
+  body { background: #fff !important; font-size: 9.5pt !important; line-height: 1.45 !important; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+  .outer { background: #fff !important; padding: 0 !important; min-height: auto !important; }
+  .page { max-width: 100% !important; padding: 0 !important; box-shadow: none !important; border-radius: 0 !important; }
+  /* Header */
+  .resume-header { padding: 0 0 14pt !important; margin-bottom: 14pt !important; border-bottom: 2px solid #1a3a5c !important; }
+  .resume-name { font-size: 24pt !important; line-height: 1.05 !important; margin-bottom: 3pt !important; }
+  .resume-title { font-size: 10pt !important; margin-bottom: 6pt !important; }
+  .resume-contact { gap: 12pt !important; margin-bottom: 0 !important; font-size: 8pt !important; }
+  .resume-summary { font-size: 9pt !important; padding: 8pt 10pt !important; margin: 10pt 0 !important; }
+  /* Career highlights - keep compact */
+  .highlights-grid { grid-template-columns: repeat(4,1fr) !important; gap: 1px !important; background: #ccc !important; border-radius: 3pt !important; }
+  .highlight-card { background: #f8f8f8 !important; padding: 8pt 6pt !important; border: none !important; }
+  .highlight-number { font-size: 15pt !important; color: #1a3a5c !important; }
+  .highlight-label { font-size: 7pt !important; }
+  /* Sections */
+  .section { padding: 10pt 0 !important; border-top: 1px solid #d0d0d0 !important; page-break-inside: avoid !important; }
+  .section-title { font-size: 11pt !important; margin-bottom: 8pt !important; padding-bottom: 4pt !important; }
+  /* Experience */
+  .job { margin-bottom: 9pt !important; padding-bottom: 9pt !important; page-break-inside: avoid !important; }
+  .job-header { margin-bottom: 3pt !important; }
+  .job-title { font-size: 10pt !important; }
+  .job-company { font-size: 8.5pt !important; }
+  .job-meta { font-size: 7.5pt !important; margin-bottom: 4pt !important; }
+  .job-bullets li { font-size: 8pt !important; margin-bottom: 2pt !important; line-height: 1.4 !important; }
+  /* Competencies */
+  .comp-tags { gap: 4pt !important; }
+  .tag { font-size: 7pt !important; padding: 2pt 6pt !important; border-radius: 2pt !important; }
+  /* Tech grid */
+  .tech-grid { gap: 6pt !important; }
+  .tech-category { padding: 6pt !important; page-break-inside: avoid !important; }
+  .tech-cat-title { font-size: 7.5pt !important; margin-bottom: 3pt !important; }
+  .tech-items { font-size: 7pt !important; line-height: 1.5 !important; }
+  /* Force page 2 before competencies */
+  #competencies, section:has(.section-title:contains("Core Competencies")) { page-break-before: always !important; }
+  /* Footer - keep simple for print */
+  .resume-footer { border-top: 1px solid #ddd !important; padding: 8pt 0 0 !important; margin-top: 12pt !important; display: flex !important; justify-content: space-between !important; font-size: 7pt !important; color: #888 !important; }
+  .resume-footer-links { gap: 12pt !important; }
+  .resume-footer-links a { color: #555 !important; font-size: 7pt !important; }
+}
+/* ─── WRAPPER ────────────────────────────────────────────────── */
+.outer {
+  background: var(--bg-soft);
+  min-height: 100vh;
+  padding: 40px 20px 80px;
+}
+/* ─── NAV BAR ────────────────────────────────────────────────── */
+.topbar {
+  max-width: 860px;
+  margin: 0 auto 32px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  no-print: true;
+}
+.topbar-label {
+  font-size: .75rem;
+  font-weight: 600;
+  letter-spacing: .1em;
+  color: var(--ink-dim);
+  text-transform: uppercase;
+}
+.topbar-actions { display: flex; gap: 10px; }
+.btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 8px 18px;
+  border-radius: 4px;
+  font-family: var(--sans);
+  font-size: .75rem;
+  font-weight: 600;
+  letter-spacing: .04em;
+  cursor: pointer;
+  transition: all .2s;
+  text-decoration: none !important;
+  border: 1.5px solid transparent;
+}
+.btn-primary {
+  background: var(--accent);
+  color: #fff;
+  border-color: var(--accent);
+}
+.btn-primary:hover { background: var(--accent-mid); }
+.btn-outline {
+  background: transparent;
+  color: var(--accent);
+  border-color: var(--accent);
+}
+.btn-outline:hover { background: var(--accent); color: #fff; }
+/* ─── RESUME PAGE ────────────────────────────────────────────── */
+.page {
+  max-width: 860px;
+  margin: 0 auto;
+  background: var(--bg);
+  padding: 56px 72px;
+  box-shadow: 0 2px 24px rgba(0,0,0,.08), 0 1px 4px rgba(0,0,0,.06);
+  border-radius: 2px;
+}
+/* ─── HEADER ─────────────────────────────────────────────────── */
+.header {
+  border-bottom: 2px solid var(--accent);
+  padding-bottom: 18px;
+  margin-bottom: 22px;
+}
+.header-name {
+  font-family: var(--serif);
+  font-size: 2.4rem;
+  font-weight: 700;
+  letter-spacing: -.01em;
+  color: var(--ink);
+  line-height: 1.1;
+}
+.header-title {
+  font-family: var(--sans);
+  font-size: .88rem;
+  font-weight: 500;
+  color: var(--accent);
+  letter-spacing: .06em;
+  text-transform: uppercase;
+  margin-top: 6px;
+}
+.header-contact {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px 20px;
+  margin-top: 12px;
+  font-size: .78rem;
+  color: var(--ink-dim);
+}
+.header-contact span {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+.header-contact a { color: var(--ink-dim); }
+.header-contact a:hover { color: var(--accent); text-decoration: underline; }
+.contact-dot { color: var(--rule); }
+/* ─── SUMMARY ────────────────────────────────────────────────── */
+.summary-block {
+  margin-bottom: 24px;
+  padding: 16px 20px;
+  border-left: 3px solid var(--accent);
+  background: var(--bg-soft);
+  border-radius: 0 3px 3px 0;
+}
+.summary-block p {
+  font-family: var(--serif);
+  font-size: 1rem;
+  line-height: 1.65;
+  color: var(--ink-mid);
+  font-style: italic;
+}
+/* ─── SECTION ────────────────────────────────────────────────── */
+.section {
+  margin-bottom: 26px;
+}
+.section-title {
+  font-family: var(--sans);
+  font-size: .7rem;
+  font-weight: 700;
+  letter-spacing: .14em;
+  text-transform: uppercase;
+  color: var(--accent);
+  border-bottom: 1px solid var(--rule);
+  padding-bottom: 5px;
+  margin-bottom: 14px;
+}
+/* ─── EXPERIENCE ENTRY ───────────────────────────────────────── */
+.entry {
+  margin-bottom: 18px;
+}
+.entry-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  flex-wrap: wrap;
+  gap: 4px;
+}
+.entry-title {
+  font-family: var(--serif);
+  font-size: 1.05rem;
+  font-weight: 700;
+  color: var(--ink);
+}
+.entry-dates {
+  font-size: .75rem;
+  font-weight: 500;
+  color: var(--ink-light);
+  white-space: nowrap;
+  font-style: italic;
+}
+.entry-company {
+  font-size: .82rem;
+  font-weight: 600;
+  color: var(--accent-mid);
+  margin-top: 2px;
+}
+.entry-location {
+  font-size: .75rem;
+  color: var(--ink-light);
+  font-style: italic;
+}
+.entry-bullets {
+  margin-top: 7px;
+  padding-left: 16px;
+}
+.entry-bullets li {
+  font-size: .84rem;
+  color: var(--ink-mid);
+  line-height: 1.55;
+  margin-bottom: 4px;
+  list-style: disc;
+}
+.entry-bullets li::marker { color: var(--accent); }
+/* ─── SKILLS GRID ────────────────────────────────────────────── */
+.skills-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 10px 32px;
+}
+.skill-group-label {
+  font-size: .73rem;
+  font-weight: 700;
+  color: var(--ink);
+  letter-spacing: .02em;
+  margin-bottom: 2px;
+}
+.skill-group-items {
+  font-size: .78rem;
+  color: var(--ink-dim);
+  line-height: 1.5;
+}
+/* ─── COMPETENCY TAGS ────────────────────────────────────────── */
+.tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px 8px;
+  margin-top: 2px;
+}
+.tag {
+  font-size: .72rem;
+  font-weight: 500;
+  color: var(--accent);
+  background: #eef2f7;
+  border: 1px solid #c9d6e3;
+  border-radius: 3px;
+  padding: 3px 9px;
+  letter-spacing: .01em;
+}
+/* ─── TWO-COL STATS ──────────────────────────────────────────── */
+.stats-row {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 12px;
+  margin-bottom: 6px;
+}
+.stat-box {
+  border: 1px solid var(--rule);
+  border-top: 2.5px solid var(--accent);
+  border-radius: 2px;
+  padding: 10px 12px;
+  text-align: center;
+  background: var(--bg-soft);
+}
+.stat-value {
+  font-family: var(--serif);
+  font-size: 1.3rem;
+  font-weight: 700;
+  color: var(--accent);
+  display: block;
+  line-height: 1;
+}
+.stat-label {
+  font-size: .65rem;
+  font-weight: 600;
+  color: var(--ink-light);
+  text-transform: uppercase;
+  letter-spacing: .06em;
+  margin-top: 4px;
+  display: block;
+}
+/* ─── EDUCATION ──────────────────────────────────────────────── */
+.edu-entry {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  flex-wrap: wrap;
+  gap: 2px;
+  margin-bottom: 10px;
+}
+.edu-school { font-size: .9rem; font-weight: 700; color: var(--ink); }
+.edu-degree { font-size: .82rem; color: var(--ink-mid); font-style: italic; }
+.edu-dates  { font-size: .75rem; color: var(--ink-light); white-space: nowrap; }
+/* ─── RESUME HUB FOOTER ──────────────────────────────────────── */
+.resume-footer {
+  margin-top: 32px;
+  padding-top: 16px;
+  border-top: 1px solid var(--rule-light);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+.resume-footer-text {
+  font-size: .7rem;
+  color: var(--ink-light);
+}
+.resume-footer-links {
+  display: flex;
+  gap: 14px;
+}
+.resume-footer-links a {
+  font-size: .7rem;
+  color: var(--ink-dim);
+  text-decoration: none;
+  border-bottom: 1px solid var(--rule);
+  padding-bottom: 1px;
+  transition: color .2s, border-color .2s;
+}
+.resume-footer-links a:hover {
+  color: var(--accent);
+  border-color: var(--accent);
+  text-decoration: none;
+}
+/* ─── RESPONSIVE ─────────────────────────────────────────────── */
+@media (max-width: 680px) {
+  .page { padding: 32px 24px; }
+  .header-name { font-size: 1.8rem; }
+  .stats-row { grid-template-columns: repeat(2, 1fr); }
+  .skills-grid { grid-template-columns: 1fr; }
+  .topbar { flex-direction: column; gap: 12px; align-items: flex-start; }
+}
+</style>
+<script src="/components.js" defer></script>
+<meta property="og:type" content="website"/>
+<meta property="og:site_name" content="MarkCMO"/>
+<meta property="og:title" content="Mark Louis Gabrielli Jr. - Chief Marketing Officer | Resume"/>
+<meta property="og:description" content="Mark Louis Gabrielli Jr. - Chief Marketing Officer | Resume"/>
+<meta property="og:url" content="https://markcmo.com/MLG-Resume-Professional.html"/>
+<meta property="og:image" content="https://markcmo.com/mark-photo.webp"/>
+<meta name="twitter:card" content="summary_large_image"/>
+<meta name="twitter:site" content="@markgcmo"/>
+<meta name="twitter:title" content="Mark Louis Gabrielli Jr. - Chief Marketing Officer | Resume"/>
+<meta name="twitter:description" content="Mark Louis Gabrielli Jr. - Chief Marketing Officer | Resume"/>
+<meta name="twitter:image" content="https://markcmo.com/mark-photo.webp"/>
+<meta name="author" content="Mark Gabrielli"/>
+<link rel="author" href="https://markcmo.com/about.html"/>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebPage",
+  "name": "Mark Louis Gabrielli Jr. - Chief Marketing Officer | Resume",
+  "description": "Mark Louis Gabrielli Jr. - Chief Marketing Officer | Resume",
+  "url": "https://markcmo.com/MLG-Resume-Professional.html",
+  "author": {
+    "@type": "Person",
+    "name": "Mark Gabrielli",
+    "url": "https://markcmo.com/about.html",
+    "sameAs": [
+      "https://www.linkedin.com/in/marklgabrielli/",
+      "https://markcmo.com"
+    ]
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "MarkCMO",
+    "url": "https://markcmo.com",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "https://markcmo.com/mark-photo.webp"
+    }
+  },
+  "dateModified": "2026-05-08",
+  "inLanguage": "en-US"
+}
+</script>
+</head>
+<body>
+<div class="outer">
+<div class="topbar no-print">
+<span class="topbar-label">Professional Resume  -  Mark Louis Gabrielli Jr.</span>
+<div class="topbar-actions">
+<a href="https://markcmo.com/resumes" class="btn btn-outline">All Resume Styles</a>
+<a href="https://markcmo.com/book" class="btn btn-primary">Book a Call</a>
+<button class="btn btn-outline" onclick="window.print()">Print / Save PDF</button>
+</div>
+</div>
+<div class="page">
+<header class="header">
+<div class="header-name">Mark Louis Gabrielli Jr.</div>
+<div class="header-title">Chief Marketing Officer &nbsp;|&nbsp; Growth Architect &nbsp;|&nbsp; Revenue Systems Builder</div>
+<div class="header-contact">
+<span><a href="mailto:mark@markcmo.com">mark@markcmo.com</a></span>
+<span class="contact-dot">&bull;</span>
+<span>Florida, USA</span>
+<span class="contact-dot">&bull;</span>
+<span><a href="https://markcmo.com/portfolio" target="_blank">markcmo.com/portfolio</a></span>
+<span class="contact-dot">&bull;</span>
+<span><a href="https://markcmo.com/book" target="_blank">markcmo.com/book</a></span>
+<span class="contact-dot">&bull;</span>
+<span><a href="https://markcmo.com/about" target="_blank">Full Bio</a></span>
+</div>
+</header>
+<div class="summary-block">
+<p>Results-driven Chief Marketing Officer and Growth Architect with a track record of
+taking organizations from stagnant to scaled through systems-first leadership, precision
+media execution, and cross-functional alignment. Known for leading with diagnosis before
+prescription - building the marketing infrastructure, revenue architecture, and team
+frameworks that create durable, compounding growth. A culture-fit-first leader who earns
+trust quickly, stays dedicated through the long arc, and builds systems the team can run
+without him.</p>
+</div>
+<section class="section">
+<div class="section-title">Career Highlights</div>
+<div class="stats-row">
+<div class="stat-box">
+<span class="stat-value">Proven</span>
+<span class="stat-label">Revenue Builder</span>
+</div>
+<div class="stat-box">
+<span class="stat-value">40+</span>
+<span class="stat-label">Team Members Led</span>
+</div>
+<div class="stat-box">
+<span class="stat-value">2</span>
+<span class="stat-label">M&amp;A Exits</span>
+</div>
+<div class="stat-box">
+<span class="stat-value">Culture</span>
+<span class="stat-label">Fit-First Leader</span>
+</div>
+</div>
+</section>
+<div style="background:#0d1b27;border-left:3px solid #2563EB;padding:1.25rem 1.5rem;margin:0 auto 0;max-width:1100px;border-radius:0 6px 6px 0;"><strong style="color:#C9A84C;font-size:.75rem;font-family:'DM Mono',monospace;text-transform:uppercase;letter-spacing:.1em;display:block;margin-bottom:.5rem;">Quick Answer</strong><p style="color:#ccc;margin:0;line-height:1.75;font-size:.95rem;">Mark Louis Gabrielli Jr. is a fractional Chief Marketing Officer (CMO) and COO with 15+ years of executive marketing and operations leadership, founder of WETYR Corp and 36 digital ventures, specializing in B2B revenue growth, demand generation, and go-to-market strategy for companies with M-0M in revenue.</p></div>
+<div class="sp-proof-strip">
+<div class="sp-proof-item">
+<span class="sp-proof-num">4.9&#9733;</span>
+<span class="sp-proof-label">193 Reviews</span>
+</div>
+<div class="sp-proof-item">
+<span class="sp-proof-num">90%</span>
+<span class="sp-proof-label">Retention Rate</span>
+</div>
+<div class="sp-proof-item">
+<span class="sp-proof-num">19+</span>
+<span class="sp-proof-label">Ventures Built</span>
+</div>
+<div class="sp-proof-item">
+<span class="sp-proof-num">$50M+</span>
+<span class="sp-proof-label">Revenue Generated</span>
+</div>
+<div class="sp-proof-item">
+<span class="sp-proof-num">30</span>
+<span class="sp-proof-label">Days to First Results</span>
+</div>
+</div>
+
+<section class="section">
+<div class="section-title">Professional Experience</div>
+<div class="entry">
+<div class="entry-header">
+<div class="entry-title">Chief Marketing Officer / Fractional CMO</div>
+<div class="entry-dates">2018 - Present</div>
+</div>
+<div class="entry-company">WETYR Corp  -  Consulting &amp; Fractional Executive Practice &nbsp;&middot;&nbsp; <span class="entry-location">Florida, USA</span></div>
+<ul class="entry-bullets">
+<li>Served as fractional CMO and growth architect across multiple portfolio companies and private clients, building repeatable revenue systems from the ground up across diverse verticals.</li>
+<li>Architected full-funnel marketing and sales ecosystems - covering paid acquisition, CRM automation, creative direction, conversion optimization, and retention infrastructure.</li>
+<li>Led cross-functional teams of 40+ people across marketing, sales, creative, and operations, fostering a culture of accountability, loyalty, and performance.</li>
+<li>Drove meaningful organizational revenue growth through consulting, fractional leadership, and full-time executive roles across multiple engagements.</li>
+<li>Executed 2 successful mergers and acquisitions, overseeing due diligence, brand integration, and post-merger growth strategy.</li>
+<li>Managed multi-million dollar advertising budgets across Meta, Google, LinkedIn, TikTok, and programmatic channels, consistently delivering positive ROI.</li>
+<li>Developed and deployed the MarkCMO Academy - a full learning management system teaching marketing leadership and revenue systems to the next generation of CMOs.</li>
+</ul>
+</div>
+<div class="entry">
+<div class="entry-header">
+<div class="entry-title">Chief Marketing Officer</div>
+<div class="entry-dates">2015 - 2018</div>
+</div>
+<div class="entry-company">Executive Role  -  Private Organization &nbsp;&middot;&nbsp; <span class="entry-location">Florida, USA</span></div>
+<ul class="entry-bullets">
+<li>Owned the entire marketing and revenue function, scaling the organization through a combination of brand-building, performance marketing, and sales team development.</li>
+<li>Restructured the lead generation and CRM pipeline, reducing cost per acquisition while increasing close rates through tighter sales-marketing alignment.</li>
+<li>Built and managed a high-performing in-house creative and media buying team, reducing reliance on agencies and improving execution speed and quality.</li>
+<li>Established brand positioning that differentiated the organization in a competitive market, increasing inbound lead volume and improving customer retention.</li>
+<li>Partnered with executive leadership on P&amp;L ownership, unit economics analysis, and go-to-market strategy for new product lines.</li>
+</ul>
+</div>
+<div class="entry">
+<div class="entry-header">
+<div class="entry-title">Senior Marketing Director / Growth Lead</div>
+<div class="entry-dates">2011 - 2015</div>
+</div>
+<div class="entry-company">Marketing Leadership Role &nbsp;&middot;&nbsp; <span class="entry-location">Florida, USA</span></div>
+<ul class="entry-bullets">
+<li>Managed multi-channel marketing programs across digital, paid, content, and brand, building the foundational infrastructure for scalable growth.</li>
+<li>Spearheaded adoption of marketing automation and CRM platforms, cutting manual workflows and improving pipeline visibility across the sales organization.</li>
+<li>Launched and iterated on conversion-focused content strategies that drove sustained organic traffic growth and reduced dependence on paid channels.</li>
+<li>Mentored junior marketing team members, establishing a culture of testing, learning, and continuous improvement that improved team output and retention.</li>
+</ul>
+</div>
+</section>
+<section class="section" id="competencies">
+<div class="section-title">Core Competencies</div>
+<div class="tags">
+<span class="tag">Growth Strategy</span>
+<span class="tag">Revenue Architecture</span>
+<span class="tag">Media Buying</span>
+<span class="tag">Creative Direction</span>
+<span class="tag">Sales Alignment</span>
+<span class="tag">Retention Systems</span>
+<span class="tag">Team Building</span>
+<span class="tag">M&amp;A Due Diligence</span>
+<span class="tag">Funnel Optimization</span>
+<span class="tag">Brand Positioning</span>
+<span class="tag">CRM &amp; Automation</span>
+<span class="tag">P&amp;L Ownership</span>
+<span class="tag">Go-to-Market Strategy</span>
+<span class="tag">Unit Economics</span>
+<span class="tag">Data Analytics</span>
+<span class="tag">Content Strategy</span>
+<span class="tag">Conversion Rate Optimization</span>
+<span class="tag">Investor Relations</span>
+</div>
+</section>
+<section class="section">
+<div class="section-title">Technology &amp; Tools</div>
+<div class="skills-grid">
+<div>
+<div class="skill-group-label">Platforms</div>
+<div class="skill-group-items">HubSpot, Salesforce, Marketo, Klaviyo, ActiveCampaign, GoHighLevel</div>
+</div>
+<div>
+<div class="skill-group-label">Dev &amp; Deploy</div>
+<div class="skill-group-items">HTML/CSS/JS, Python, Node.js, Netlify, Vercel, AWS</div>
+</div>
+<div>
+<div class="skill-group-label">Advertising</div>
+<div class="skill-group-items">Meta Ads, Google Ads, LinkedIn Ads, TikTok Ads, Programmatic</div>
+</div>
+<div>
+<div class="skill-group-label">AI &amp; Automation</div>
+<div class="skill-group-items">Claude, GPT-4, Make.com, n8n, Zapier, Custom Agents</div>
+</div>
+<div>
+<div class="skill-group-label">Analytics</div>
+<div class="skill-group-items">GA4, Mixpanel, Hotjar, Looker Studio, Tableau, SQL</div>
+</div>
+<div>
+<div class="skill-group-label">Creative</div>
+<div class="skill-group-items">Figma, Adobe Suite, Canva, DaVinci Resolve, ElevenLabs</div>
+</div>
+</div>
+</section>
+<section class="section">
+<div class="section-title">Leadership Philosophy</div>
+<div class="skills-grid">
+<div>
+<div class="skill-group-label">The Archetype</div>
+<div class="skill-group-items">The Outlaw + The Sage. Courage and conviction backed by data, documentation, and demonstrated systems. Rejects complacency. Names problems directly. Every recommendation comes with supporting evidence.</div>
+</div>
+<div>
+<div class="skill-group-label">The Approach</div>
+<div class="skill-group-items">Leads with diagnosis, not pitch. Full operational audit of the marketing and sales ecosystem - first touch to closed deal. Identifies where value is being lost, prioritizes fixes by revenue impact, installs the system, and trains the team.</div>
+</div>
+<div style="margin-top: 10px;">
+<div class="skill-group-label">Culture &amp; Character</div>
+<div class="skill-group-items">Known as someone who earns trust quickly and becomes the person the team relies on. Stays dedicated long after the initial engagement ends. Loyal to the mission. A leader people genuinely want to work with again.</div>
+</div>
+<div style="margin-top: 10px;">
+<div class="skill-group-label">What Drives Him</div>
+<div class="skill-group-items">Walking into a broken operation knowing he can fix it. Delivering a system so well-built the client no longer needs him. Speaking hard truths to rooms that needed to hear them. Operating where field credibility meets business sophistication.</div>
+</div>
+</div>
+</section>
+<section class="section">
+<div class="section-title">Education &amp; Continuous Development</div>
+<div class="edu-entry">
+<div>
+<div class="edu-school">Self-Directed Executive Education</div>
+<div class="edu-degree">Marketing Systems, Revenue Architecture, AI &amp; Automation, Business Strategy</div>
+</div>
+<div class="edu-dates">Ongoing</div>
+</div>
+<div class="edu-entry">
+<div>
+<div class="edu-school">MarkCMO Academy</div>
+<div class="edu-degree">Founder &amp; Lead Instructor  -  CMO Leadership, Growth Systems, Marketing Operations</div>
+</div>
+<div class="edu-dates">2022 - Present</div>
+</div>
+<p style="font-size:.78rem; color:var(--ink-dim); margin-top:6px; font-style:italic;">
+Committed to the philosophy: <em>"If you are not learning while you are earning, you are giving up the better part of your compensation."</em>
+</p>
+</section>
+<section class="section">
+<div class="section-title">Personal</div>
+<div class="skills-grid">
+<div>
+<div class="skill-group-label">Family</div>
+<div class="skill-group-items">Married father of four. Children pursuing careers in medicine (D.O., U.S. Navy), public health, cybersecurity (U.S. Navy), and academic excellence.</div>
+</div>
+<div>
+<div class="skill-group-label">Outside the Boardroom</div>
+<div class="skill-group-items">Golf &bull; Fishing &bull; Hunting &bull; Swimming &bull; Collecting &bull; Cooking &bull; Travel &bull; Woodworking &bull; Art</div>
+</div>
+</div>
+</section>
+<section class="section no-print">
+<div class="section-title">Interactive Resume Portfolio</div>
+<p style="font-size:.8rem; color:var(--ink-dim); margin-bottom:12px;">
+This resume exists in 12 fully coded interactive formats - each a different creative direction built entirely from scratch. Explore them at <a href="https://markcmo.com/resumes" target="_blank">markcmo.com/resumes</a>.
+</p>
+<div class="tags">
+<a href="https://markcmo.com/resume" class="tag" target="_blank" style="text-decoration:none;">Dark Luxury</a>
+<a href="https://markcmo.com/resume-terminal" class="tag" target="_blank" style="text-decoration:none;">Bloomberg Terminal</a>
+<a href="https://markcmo.com/resume-executive" class="tag" target="_blank" style="text-decoration:none;">Luxury Magazine</a>
+<a href="https://markcmo.com/resume-classified" class="tag" target="_blank" style="text-decoration:none;">CIA Dossier</a>
+<a href="https://markcmo.com/resume-blueprint" class="tag" target="_blank" style="text-decoration:none;">Architect Blueprint</a>
+<a href="https://markcmo.com/resume-desktop" class="tag" target="_blank" style="text-decoration:none;">macOS Desktop</a>
+<a href="https://markcmo.com/resume-broadsheet" class="tag" target="_blank" style="text-decoration:none;">Wall Street Journal</a>
+<a href="https://markcmo.com/resume-datavis" class="tag" target="_blank" style="text-decoration:none;">Infographic</a>
+<a href="https://markcmo.com/resume-neon" class="tag" target="_blank" style="text-decoration:none;">Retro Futurism</a>
+<a href="https://markcmo.com/resume-unfiltered" class="tag" target="_blank" style="text-decoration:none;">Brutalist / Raw</a>
+<a href="https://markcmo.com/resume-comic" class="tag" target="_blank" style="text-decoration:none;">Comic Book</a>
+<a href="https://markcmo.com/resume-boarding" class="tag" target="_blank" style="text-decoration:none;">Boarding Pass</a>
+</div>
+</section>
+<div class="resume-footer">
+<span class="resume-footer-text">Mark Louis Gabrielli Jr.  -  Confidential Resume  -  2026</span>
+<div class="resume-footer-links">
+<a href="https://markcmo.com/portfolio" target="_blank">Portfolio</a>
+<a href="https://markcmo.com/book" target="_blank">Book a Call</a>
+<a href="https://markcmo.com/about" target="_blank">Full Bio</a>
+<a href="https://markcmo.com/resumes" target="_blank">All Resumes</a>
+</div>
+</div>
+</div>
+</div>
+<script src="/linkedin-widget.js" defer></script>
+</body>
+</html>

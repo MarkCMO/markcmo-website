@@ -1,0 +1,557 @@
+﻿<!DOCTYPE html>
+<html lang="en"><head>
+<meta charset="UTF-8"/>
+<link rel="icon" type="image/webp" href="/favicon.webp"><link rel="apple-touch-icon" href="/mark-photo.webp"><meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+<title>How to Run a Marketing Audit (Complete 2026 Guide) | MarkCMO.com</title><meta name="description" content="A complete step-by-step marketing audit guide. Learn how to audit every marketing channel, identify what's working, cut waste, and build a data-driven marketing plan."/>
+<meta name="robots" content="index, follow"/>
+<link rel="canonical" href="https://markcmo.com/blog-marketing-audit-guide"/>
+<link rel="stylesheet" href="style.css"/>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "headline": "How to Run a Marketing Audit: The Complete Guide",
+  "url": "https://markcmo.com/blog-marketing-audit-guide",
+  "author": {
+    "@type": "Person",
+    "name": "Mark Gabrielli",
+    "url": "https://markcmo.com"
+  },
+  "dateModified": "2026-05-20",
+  "datePublished": "2026-05-08"
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position": 1,
+      "name": "Home",
+      "item": "https://markcmo.com/"
+    },
+    {
+      "@type": "ListItem",
+      "position": 2,
+      "name": "Blog",
+      "item": "https://markcmo.com/blog"
+    },
+    {
+      "@type": "ListItem",
+      "position": 3,
+      "name": "Marketing Audit Guide",
+      "item": "https://markcmo.com/blog-marketing-audit-guide"
+    }
+  ]
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "HowTo",
+  "name": "How to Conduct a B2B Marketing Audit",
+  "description": "A complete step-by-step marketing audit guide. Learn how to audit every marketing channel, identify what's working, cut waste, and build a data-driven marketing plan.",
+  "author": {
+    "@id": "https://markcmo.com/#mark-gabrielli"
+  },
+  "datePublished": "2026-01-01",
+  "dateModified": "2026-05-20",
+  "step": [
+    {
+      "@type": "HowToStep",
+      "position": 1,
+      "name": "Audit Your Current Metrics and Baseline",
+      "text": "Pull 90 days of data: CAC, CPL, pipeline by channel, close rate, and marketing-attributed revenue. This is your baseline."
+    },
+    {
+      "@type": "HowToStep",
+      "position": 2,
+      "name": "Map Your ICP and Validate Positioning",
+      "text": "Interview 5 recent customers. Document the exact language they use to describe their problem. Compare against your current messaging."
+    },
+    {
+      "@type": "HowToStep",
+      "position": 3,
+      "name": "Audit Each Channel for Structural Issues",
+      "text": "Review paid accounts for targeting errors, bid strategy, and budget allocation. Check organic for keyword cannibalization and thin content."
+    },
+    {
+      "@type": "HowToStep",
+      "position": 4,
+      "name": "Identify the Bottleneck",
+      "text": "Where is the pipeline breaking down? Top-of-funnel volume, mid-funnel conversion, or bottom-funnel close rate? Fix the bottleneck first."
+    },
+    {
+      "@type": "HowToStep",
+      "position": 5,
+      "name": "Build the 90-Day Fix Plan",
+      "text": "Prioritize by impact and speed. Quick wins in 30 days, structural fixes in 60 days, system builds in 90 days."
+    }
+  ]
+}
+</script>
+<meta property="og:type" content="website"/>
+<meta property="og:site_name" content="MarkCMO"/>
+<meta property="og:title" content="How to Run a Marketing Audit (Complete 2026 Guide) | MarkCMO.com"/>
+<meta property="og:description" content="A complete step-by-step marketing audit guide. Learn how to audit every marketing channel, identify what"/>
+<meta property="og:url" content="https://markcmo.com/blog-marketing-audit-guide"/>
+<meta property="og:image" content="https://markcmo.com/mark-photo.webp"/>
+<meta name="twitter:card" content="summary_large_image"/>
+<meta name="twitter:site" content="@markgcmo"/>
+<meta name="twitter:title" content="How to Run a Marketing Audit (Complete 2026 Guide) | MarkCMO.com"/>
+<meta name="twitter:description" content="A complete step-by-step marketing audit guide. Learn how to audit every marketing channel, identify what"/>
+<meta name="twitter:image" content="https://markcmo.com/mark-photo.webp"/>
+<meta name="author" content="Mark Gabrielli"/>
+<link rel="author" href="https://markcmo.com/about.html"/>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebPage",
+  "name": "How to Run a Marketing Audit (Complete 2026 Guide) | MarkCMO.com",
+  "description": "A complete step-by-step marketing audit guide. Learn how to audit every marketing channel, identify what",
+  "url": "https://markcmo.com/blog-marketing-audit-guide",
+  "author": {
+    "@type": "Person",
+    "name": "Mark Gabrielli",
+    "url": "https://markcmo.com/about",
+    "sameAs": [
+      "https://www.linkedin.com/in/marklgabrielli/",
+      "https://markcmo.com"
+    ]
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "MarkCMO",
+    "url": "https://markcmo.com",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "https://markcmo.com/mark-photo.webp"
+    }
+  },
+  "dateModified": "2026-05-20",
+  "inLanguage": "en-US"
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "What does a B2B marketing audit cover?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "A comprehensive B2B marketing audit covers: pipeline attribution model quality (can you trace spend to revenue), ICP definition accuracy (are you attracting buyers who can actually purchase), channel performance analysis (CAC and pipeline quality by channel), content and messaging audit (is the messaging aligned with buyer language), website conversion analysis, CRM data quality assessment, competitive positioning review, and team and tool stack evaluation. The output is a prioritized list of gaps ranked by commercial impact -- not a comprehensive report on everything that could be improved."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "How often should a B2B company conduct a marketing audit?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Conduct a full commercial marketing audit at four specific triggers: when pipeline has been below target for two consecutive quarters, when CAC has increased by more than 20 percent without explanation, when a new commercial executive joins, or when the company enters a new market or stage. A lighter attribution and channel performance review should happen quarterly. The mistake is conducting audits on a calendar basis rather than a commercial trigger basis -- quarterly audits on a company with a functioning commercial system add overhead without value."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "What is the difference between a marketing audit and a marketing assessment?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "A marketing audit is a comprehensive review of the entire marketing function against specific commercial benchmarks, producing a gap analysis and prioritized recommendations. A marketing assessment is typically a shorter diagnostic focused on one or two specific questions: why is pipeline declining, why is CAC increasing, why is MQL-to-SQL conversion low. The assessment is faster and more targeted; the audit is more comprehensive and produces a broader roadmap. Use assessments for specific commercial questions; use full audits for transition moments or significant underperformance."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "What are the most common findings in a B2B marketing audit?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "The most common audit findings: attribution is broken or nonexistent (cannot trace marketing spend to pipeline), ICP is too broad (targeting everyone who could benefit rather than the best-fit buyers), channel budget is not proportional to channel pipeline performance, content is feature-focused rather than buyer-outcome-focused, MQL definition is too loose (inflating MQL volume while pipeline quality suffers), and marketing and sales alignment on lead qualification is absent. These findings recur across companies because they reflect the same systemic gap: marketing without commercial accountability."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Can a marketing audit be done internally or does it require an outside operator?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Internal marketing audits have limited value because they are subject to the same blind spots that created the gaps in the first place. An external operator brings two things an internal audit cannot: an independent commercial baseline from comparable engagements (what good actually looks like at this stage), and the ability to ask uncomfortable questions without political risk. The most valuable audits are conducted by operators who have built and run marketing functions at comparable companies and can identify gaps the internal team has normalized as acceptable."
+      }
+    }
+  ]
+}
+</script>
+</head><body><nav class="nav" id="mainNav">
+<a href="/index.html" class="nav-logo">
+<div class="nav-logo-avatar">
+<img src="/mark-photo.webp" alt="Mark Gabrielli" />
+</div>
+<div class="nav-logo-text">
+<strong>Mark Gabrielli</strong>
+<span>Fractional CMO &amp; COO</span>
+</div>
+</a>
+<ul class="nav-links">
+<li><a href="/about.html">About</a></li>
+<li><a href="/services.html">Services</a></li>
+<li><a href="/magnet-framework.html" style="color:#C9A84C;font-weight:600;">MAGNET&trade;</a></li>
+<li><a href="/results.html">Results</a></li>
+<li><a href="/blog">Insights</a></li>
+<li><a href="https://academy.markcmo.com" target="_blank" style="color:#C9A84C;">Academy</a></li>
+</ul>
+<div class="nav-right">
+<a href="/book.html" class="nav-btn">Book a Free Call</a>
+</div>
+<div class="nav-hamburger" id="navHam"><span></span><span></span><span></span></div>
+</nav>
+<div class="mobile-drawer" id="mobileDrawer">
+<a href="/about.html">About</a>
+<a href="/services.html">Services</a>
+<a href="/magnet-framework.html" style="color:#C9A84C;font-weight:600;">MAGNET Framework&trade;</a>
+<a href="/results.html">Results</a>
+<a href="/blog">Insights</a>
+<a href="https://academy.markcmo.com" target="_blank">Academy</a>
+<a href="/book.html" style="color:#C9A84C;font-weight:700;">Book a Free Strategy Call &rarr;</a>
+</div>
+<main class="ba-container">
+<article class="ba-article">
+<header class="ba-header">
+<div class="ba-breadcrumb"><a href="blog.html">Insights</a> &rsaquo; How to Run a Marketing Audit: The Complete Guide</div>
+<h1>How to Run a Marketing Audit: The Complete Guide</h1>
+<p style="color:#666;font-size:.8rem;font-family:'DM Mono',monospace;margin:.25rem 0 1.5rem;">By <a href="/about.html" style="color:#C9A84C;text-decoration:none;">Mark Gabrielli</a> &nbsp;&middot;&nbsp; Last updated: April 2026</p>
+<div class="ba-meta"><span>14 min read</span> &middot; <span>Mark Gabrielli</span> &middot; <span>April 2026</span></div>
+</header>
+<div style="background:#0d1b27;border-left:3px solid #2563EB;padding:1.25rem 1.5rem;margin:0 0 1.5rem;max-width:100%;border-radius:0 6px 6px 0;">
+<strong style="color:#C9A84C;font-size:.75rem;font-family:'DM Mono',monospace;text-transform:uppercase;letter-spacing:.1em;display:block;margin-bottom:.5rem;">Quick Answer</strong>
+<p style="color:#ccc;margin:0;line-height:1.75;font-size:.95rem;">A complete step-by-step marketing audit guide. Learn how to audit every marketing channel, identify what's working, cut waste, and build a data-driven marketing plan.</p>
+</div> <div class="ba-toc">
+<h2>Table of Contents</h2>
+<ol>
+<li><a href="#what-is">What Is a Marketing Audit?</a></li>
+<li><a href="#when">When to Run a Marketing Audit</a></li>
+<li><a href="#channels">Auditing Your Marketing Channels</a></li>
+<li><a href="#content">Content and Messaging Audit</a></li>
+<li><a href="#tech-stack">Marketing Technology Audit</a></li>
+<li><a href="#analytics">Analytics and Attribution Audit</a></li>
+<li><a href="#competitive">Competitive Analysis</a></li>
+<li><a href="#priorities">Turning Findings Into Priorities</a></li>
+<li><a href="#template">Audit Template</a></li>
+</ol>
+</div> <h2 id="what-is">What Is a Marketing Audit?</h2>
+<p>A marketing audit is a systematic review of everything your marketing function is doing - channels, messaging, team, technology, metrics, and competitive position. The goal is to understand what's working, what's not, what you're missing, and where you're wasting money or effort.</p>
+<p>A good marketing audit answers five questions:</p>
+<ol>
+<li>Which marketing activities are generating the most revenue per dollar spent?</li>
+<li>Which activities are consuming resources without producing results?</li>
+<li>What are we missing that our competitors are doing well?</li>
+<li>Do our messaging and positioning accurately reflect our differentiation?</li>
+<li>What is the highest-impact thing we should do next?</li>
+</ol>
+<p>Companies typically run marketing audits when new marketing leadership comes on board, when growth stalls, before a major budget planning cycle, or when preparing for a funding round or acquisition.</p> <h2 id="when">When to Run a Marketing Audit</h2>
+<p>The honest answer is: you should run some version of a marketing audit quarterly and a comprehensive audit annually. But if you've never done one, here are the triggers that make it urgent:</p>
+<ul>
+<li><strong>Growth has stalled</strong> and you don't understand why. Revenue was growing 30% year-over-year and now it's flat or declining. A marketing audit identifies whether this is a channel saturation problem, a messaging problem, a competitive problem, or a conversion funnel problem.</li>
+<li><strong>You're spending more on marketing without getting proportionally more results.</strong> The budget keeps growing but MQLs, pipeline, and revenue don't grow with it. There's almost always a waste problem and a prioritization problem.</li>
+<li><strong>New leadership is taking over marketing.</strong> Before inheriting a strategy, audit what exists and what's actually working vs. what the previous team believed was working.</li>
+<li><strong>You're preparing for a new growth initiative.</strong> Launching a new product, entering a new market, or preparing for a funding round - you need a clear picture of where you stand before committing resources to what's next.</li>
+</ul> <h2 id="channels">Auditing Your Marketing Channels</h2>
+<p>Channel auditing is where most marketing audits start - and where most companies find the most actionable quick wins. For each channel, you're answering three questions: Is it working? How much is it costing? And what would it take to improve performance?</p> <h3>SEO Audit</h3>
+<p>Pull data from Google Search Console and a tool like Ahrefs or Semrush. You're looking for:</p>
+<ul>
+<li>Which keywords are driving the most traffic and which are driving the most conversions (these are often different)</li>
+<li>Pages with high impressions but low click-through rates - title and meta description opportunities</li>
+<li>Technical issues: crawl errors, page speed, Core Web Vitals, mobile usability</li>
+<li>Your domain authority relative to competitors and the gap to close for target keywords</li>
+<li>Content gaps - valuable keywords your competitors rank for that you don't have pages for</li>
+</ul> <h3><a href="paid-media.html">Paid Media</a> Audit</h3>
+<p>For Google Ads, LinkedIn, Meta, and any other paid channels, you're looking at:</p>
+<ul>
+<li>Cost per lead (CPL) and cost per acquired customer (CAC) broken down by channel and campaign</li>
+<li>Quality Score and relevance metrics - low scores indicate wasted spend on poor targeting</li>
+<li>Conversion tracking setup - are you measuring actual business outcomes or just form fills?</li>
+<li>Audience targeting - are you reaching the right people or paying to reach anyone who'll click?</li>
+<li>Landing page quality - are your ad destinations optimized for conversion?</li>
+</ul> <h3><a href="email-marketing.html">Email Marketing</a> Audit</h3>
+<ul>
+<li>List health: deliverability rate, unsubscribe rate, spam complaint rate, open rates by segment</li>
+<li>Sequence performance: which automated sequences are driving revenue vs. which are just consuming credits</li>
+<li>Segmentation quality: are you sending the right content to the right people?</li>
+<li>List growth rate and sources: is your list growing organically or stagnating?</li>
+</ul> <h3>Content Marketing Audit</h3>
+<p>Inventory every piece of content you've published - blog posts, videos, guides, case studies, webinars. For each piece, track traffic (organic and referral), leads generated, and any revenue attribution you have. What you'll typically find:</p>
+<ul>
+<li>20% of your content generates 80% of the results</li>
+<li>A large number of old posts with minimal traffic that could be updated or consolidated</li>
+<li>Content gaps where your audience has questions you haven't answered</li>
+<li>Opportunities to repurpose high-performing content into other formats</li>
+</ul> <h2 id="content">Content and Messaging Audit</h2>
+<p>Beyond channel-level content audit, you need to audit your core messaging and positioning. This is where you assess whether how you're describing yourself to the market is actually differentiated and compelling.</p>
+<p>Pull up your homepage, your most-visited service pages, and your top three email nurture sequences. Ask:</p>
+<ul>
+<li>Does our messaging clearly articulate who we serve and what specific outcome we deliver?</li>
+<li>Is there a meaningful difference between how we describe ourselves and how our top three competitors describe themselves?</li>
+<li>Are we making claims we can substantiate with data, case studies, or social proof?</li>
+<li>Does our messaging speak to the stage of awareness our prospects are actually at when they first encounter us?</li>
+</ul>
+<p>The most common finding: everyone claims to be "strategic," "data-driven," "results-focused," and "a trusted partner." These are category-level claims that create zero differentiation. If you can delete a phrase from your messaging and it would apply equally to your competitor, it's not a differentiator - it's noise.</p> <h2 id="tech-stack">Marketing Technology Audit</h2>
+<p>List every marketing tool your team is paying for. For each tool, document: what it's used for, who uses it, how frequently, and whether you could get the same outcome with a tool you already own. Most companies have 15-30 marketing tools and could consolidate to 8-12 without losing any meaningful capability.</p>
+<p>Integration quality is as important as the tools themselves. Tools that don't talk to each other create data silos, manual work, and attribution blind spots. Your audit should map the integration between your core tools - CRM, marketing automation, paid platforms, analytics - and identify breaks in the data flow.</p> <h2 id="analytics">Analytics and Attribution Audit</h2>
+<p>This is often the most uncomfortable part of a marketing audit because it reveals how much marketing spending has been made without proper measurement. You're assessing:</p>
+<ul>
+<li><strong>Conversion tracking completeness:</strong> Are all the important actions - form fills, calls, purchases, demo bookings - tracked and flowing into your analytics?</li>
+<li><strong>Attribution model:</strong> How are you crediting channels for conversions? Last-click attribution dramatically undervalues top-of-funnel channels. Multi-touch attribution tells a more accurate story.</li>
+<li><strong>CRM data quality:</strong> Is lead source data populated consistently? Can you trace closed revenue back to its originating marketing activity?</li>
+<li><strong>Reporting infrastructure:</strong> Are you looking at vanity metrics (traffic, followers, impressions) or business metrics (MQLs, pipeline, revenue by channel)?</li>
+</ul> <h2 id="competitive">Competitive Analysis</h2>
+<p>A marketing audit without competitive context is incomplete. You need to know not just how you're doing in absolute terms, but how you're doing relative to competitors. For your top three to five competitors, research:</p>
+<ul>
+<li><strong>SEO positioning:</strong> Which keywords do they rank for that you don't? Use Semrush or Ahrefs to find their top organic keywords and compare against yours.</li>
+<li><strong>Ad spend and creative:</strong> Use the Meta Ad Library and Google Ads Transparency Center to see what they're running and how long they've been running it (longer-running ads are usually profitable).</li>
+<li><strong>Content strategy:</strong> How frequently are they publishing? What formats are they using? What topics are they dominating?</li>
+<li><strong>Positioning and messaging:</strong> How are they describing themselves? What makes you different from their positioning?</li>
+<li><strong>Review and reputation:</strong> G2, Capterra, Google reviews - what do customers love and hate about their experience?</li>
+</ul> <h2 id="priorities">Turning Findings Into Priorities</h2>
+<p>A marketing audit produces a long list of findings. The mistake is trying to act on all of them simultaneously. The output of a good audit is a prioritized list of no more than five actions, ranked by impact and feasibility.</p>
+<p>Use a simple 2x2 framework:</p>
+<ul>
+<li><strong>High impact, low effort:</strong> Do these immediately - quick wins that improve performance without major resource investment</li>
+<li><strong>High impact, high effort:</strong> Plan and resource these properly - these are your strategic bets for the next 90 days</li>
+<li><strong>Low impact, low effort:</strong> Batch these and do them when you have cycles - don't let them distract from the above</li>
+<li><strong>Low impact, high effort:</strong> Don't do these - stop doing them if you currently are</li>
+</ul> <h2 id="template">Marketing Audit Template</h2>
+<p>A complete marketing audit should produce a document covering:</p>
+<ol>
+<li>Executive summary - what you found and the top three recommendations</li>
+<li>Channel performance scorecard - metrics and grades for each channel</li>
+<li>Messaging and positioning assessment</li>
+<li>Technology stack review with consolidation recommendations</li>
+<li>Analytics and attribution gaps</li>
+<li>Competitive landscape comparison</li>
+<li>90-day action plan with owners and metrics</li>
+</ol>
+<p>Mark runs <a href="marketing-audit.html">marketing audits</a> as a standalone service for companies that want an independent assessment before committing to a longer engagement. The typical audit takes two weeks and produces a 15-20 page report with specific, prioritized action items. Most clients find that the audit pays for itself in the first 30 days of acting on the findings.</p> <div class="ba-cta"><h2>Work With Mark Directly</h2>
+<p>Book a free 30-minute strategy call to discuss your marketing challenges and whether fractional CMO services are the right fit.</p>
+<a href="book.html" class="btn-primary">Book Your Free Call</a>
+</div>
+<div style="margin:1.5rem 0;padding:1.5rem;background:rgba(201,168,76,0.05);border:1px solid rgba(201,168,76,0.15);border-radius:10px;display:flex;gap:0.9rem;flex-wrap:wrap;align-items:center;">
+<span style="color:rgba(255,255,255,0.5);font-size:0.8rem;white-space:nowrap;">Start with a self-audit:</span>
+<a href="/marketing-assessment.html" style="padding:0.55rem 1.1rem;background:rgba(201,168,76,0.12);border:1px solid rgba(201,168,76,0.3);color:#C9A84C;font-weight:600;font-size:0.82rem;border-radius:7px;text-decoration:none;">Take the Free Marketing Assessment &rarr;</a>
+<a href="/fractional-cmo-roi-calculator.html" style="padding:0.55rem 1.1rem;background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.1);color:rgba(255,255,255,0.7);font-size:0.82rem;border-radius:7px;text-decoration:none;">ROI Calculator</a>
+<a href="/resources.html" style="padding:0.55rem 1.1rem;background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.1);color:rgba(255,255,255,0.7);font-size:0.82rem;border-radius:7px;text-decoration:none;">Resource Library</a>
+</div>
+</article></main>
+<div class="sp-faq">
+<h2>Frequently Asked Questions: B2B Marketing Audit</h2>
+<div class="sp-faq-item">
+<div class="sp-faq-q">What does a B2B marketing audit cover?</div>
+<div class="sp-faq-a">A comprehensive B2B marketing audit covers: pipeline attribution model quality (can you trace spend to revenue), ICP definition accuracy (are you attracting buyers who can actually purchase), channel performance analysis (CAC and pipeline quality by channel), content and messaging audit (is the messaging aligned with buyer language), website conversion analysis, CRM data quality assessment, competitive positioning review, and team and tool stack evaluation. The output is a prioritized list of gaps ranked by commercial impact -- not a comprehensive report on everything that could be improved.</div>
+</div>
+<div class="sp-faq-item">
+<div class="sp-faq-q">How often should a B2B company conduct a marketing audit?</div>
+<div class="sp-faq-a">Conduct a full commercial marketing audit at four specific triggers: when pipeline has been below target for two consecutive quarters, when CAC has increased by more than 20 percent without explanation, when a new commercial executive joins, or when the company enters a new market or stage. A lighter attribution and channel performance review should happen quarterly. The mistake is conducting audits on a calendar basis rather than a commercial trigger basis -- quarterly audits on a company with a functioning commercial system add overhead without value.</div>
+</div>
+<div class="sp-faq-item">
+<div class="sp-faq-q">What is the difference between a marketing audit and a marketing assessment?</div>
+<div class="sp-faq-a">A marketing audit is a comprehensive review of the entire marketing function against specific commercial benchmarks, producing a gap analysis and prioritized recommendations. A marketing assessment is typically a shorter diagnostic focused on one or two specific questions: why is pipeline declining, why is CAC increasing, why is MQL-to-SQL conversion low. The assessment is faster and more targeted; the audit is more comprehensive and produces a broader roadmap. Use assessments for specific commercial questions; use full audits for transition moments or significant underperformance.</div>
+</div>
+<div class="sp-faq-item">
+<div class="sp-faq-q">What are the most common findings in a B2B marketing audit?</div>
+<div class="sp-faq-a">The most common audit findings: attribution is broken or nonexistent (cannot trace marketing spend to pipeline), ICP is too broad (targeting everyone who could benefit rather than the best-fit buyers), channel budget is not proportional to channel pipeline performance, content is feature-focused rather than buyer-outcome-focused, MQL definition is too loose (inflating MQL volume while pipeline quality suffers), and marketing and sales alignment on lead qualification is absent. These findings recur across companies because they reflect the same systemic gap: marketing without commercial accountability.</div>
+</div>
+<div class="sp-faq-item">
+<div class="sp-faq-q">Can a marketing audit be done internally or does it require an outside operator?</div>
+<div class="sp-faq-a">Internal marketing audits have limited value because they are subject to the same blind spots that created the gaps in the first place. An external operator brings two things an internal audit cannot: an independent commercial baseline from comparable engagements (what good actually looks like at this stage), and the ability to ask uncomfortable questions without political risk. The most valuable audits are conducted by operators who have built and run marketing functions at comparable companies and can identify gaps the internal team has normalized as acceptable.</div>
+</div>
+</div>
+
+<footer>
+<div class="footer-mega">
+<div class="footer-brand-col">
+<div class="footer-logo">Mark <span>Gabrielli</span></div>
+<p class="footer-desc">Fractional CMO, COO &amp; Executive Consultant. I help businesses from $1M to $100M find what's broken, build what scales, and execute what others only talk about.</p>
+<div class="footer-brand-tags">
+<span>WETYR Founder</span><span>Fractional C-Suite</span><span>AI Strategist</span><span>CST Certified</span>
+</div>
+<div class="social-links" style="margin-top:1.2rem;">
+<a href="https://www.linkedin.com/in/marklgabrielli/" target="_blank" rel="noopener" class="social-link">in</a>
+<a href="mailto:mark@markcmo.com" class="social-link">@</a>
+</div>
+</div>
+<div class="footer-col">
+<h4>C-Suite Services</h4>
+<ul>
+<li><a href="fractional-cmo.html">Fractional CMO</a></li>
+<li><a href="fractional-coo.html">Fractional COO</a></li>
+<li><a href="fractional-ceo.html">Fractional CEO</a></li>
+<li><a href="fractional-cto.html">Fractional CTO</a></li>
+<li><a href="fractional-cfo.html">Fractional CFO</a></li>
+<li><a href="executive-advisory.html">Executive Advisory</a></li>
+<li><a href="services.html">All Services</a></li>
+</ul>
+</div>
+<div class="footer-col">
+<h4>Marketing Services</h4>
+<ul>
+<li><a href="demand-generation.html">Demand Generation</a></li>
+<li><a href="b2b-marketing.html">B2B Marketing</a></li>
+<li><a href="content-marketing.html">Content Marketing</a></li>
+<li><a href="email-marketing.html">Email Marketing</a></li>
+<li><a href="digital-marketing.html">Digital Marketing</a></li>
+<li><a href="social-media-marketing.html">Social Media Marketing</a></li>
+<li><a href="linkedin-marketing.html">LinkedIn Marketing</a></li>
+<li><a href="paid-social.html">Paid Social Advertising</a></li>
+<li><a href="ppc-management.html">PPC Management</a></li>
+<li><a href="local-seo.html">Local SEO</a></li>
+<li><a href="crm-automation.html">CRM Automation</a></li>
+<li><a href="marketing-automation.html">Marketing Automation</a></li>
+<li><a href="account-based-marketing.html">Account-Based Marketing</a></li>
+<li><a href="go-to-market-strategy.html">Go-to-Market Strategy</a></li>
+<li><a href="marketing-audit.html">Marketing Audit</a></li>
+<li><a href="marketing-strategy.html">Marketing Strategy</a></li>
+</ul>
+</div>
+<div class="footer-col">
+<h4>Pricing &amp; Compare</h4>
+<ul>
+<li><a href="fractional-cmo-cost.html">Fractional CMO Cost</a></li>
+<li><a href="fractional-cmo-near-me.html">Fractional CMO Near Me</a></li>
+<li><a href="fractional-cmo-vs-full-time-cmo.html">Fractional vs Full-Time CMO</a></li>
+<li><a href="fractional-cmo-vs-agency.html">CMO vs Agency</a></li>
+<li><a href="fractional-cmo-vs-vp-marketing.html">CMO vs VP Marketing</a></li>
+<li><a href="fractional-cmo-vs-interim-cmo.html">Fractional vs Interim CMO</a></li>
+<li><a href="fractional-cmo-vs-marketing-consultant.html">CMO vs Consultant</a></li>
+<li><a href="chief-outsiders-alternative.html">Chief Outsiders Alternative</a></li>
+</ul>
+</div>
+<div class="footer-col">
+<h4>By Company Stage</h4>
+<ul>
+<li><a href="fractional-cmo-pre-revenue.html">Pre-Revenue Startups</a></li>
+<li><a href="fractional-cmo-series-a.html">Series A</a></li>
+<li><a href="fractional-cmo-series-b.html">Series B</a></li>
+<li><a href="fractional-cmo-bootstrapped-companies.html">Bootstrapped Companies</a></li>
+<li><a href="fractional-cmo-pe-backed-companies.html">PE-Backed Companies</a></li>
+<li><a href="fractional-cmo-private-equity.html">Private Equity Portfolio</a></li>
+<li><a href="fractional-cmo-venture-capital.html">VC-Backed Startups</a></li>
+<li><a href="best-fractional-cmo.html">Best Fractional CMO</a></li>
+</ul>
+</div>
+<div class="footer-col">
+<h4>By Industry</h4>
+<ul>
+<li><a href="fractional-cmo-saas.html">SaaS</a></li>
+<li><a href="fractional-cmo-healthcare.html">Healthcare</a></li>
+<li><a href="fractional-cmo-fintech.html">Fintech</a></li>
+<li><a href="fractional-cmo-ai.html">AI Companies</a></li>
+<li><a href="fractional-cmo-tech.html">Tech Companies</a></li>
+<li><a href="fractional-cmo-cybersecurity.html">Cybersecurity</a></li>
+<li><a href="fractional-cmo-b2b.html">B2B Companies</a></li>
+<li><a href="fractional-cmo-ecommerce.html">E-Commerce</a></li>
+<li><a href="fractional-cmo-private-equity.html">Private Equity</a></li>
+<li><a href="fractional-cmo-venture-capital.html">VC-Backed Startups</a></li>
+<li><a href="fractional-cmo-retail.html">Retail</a></li>
+<li><a href="fractional-cmo-energy.html">Energy</a></li>
+<li><a href="fractional-cmo-professional-services.html">Professional Services</a></li>
+<li><a href="industries.html">All Industries</a></li>
+</ul>
+</div>
+<div class="footer-col">
+<h4>Top Locations</h4>
+<ul>
+<li><a href="fractional-cmo-dallas-fort-worth.html">Dallas-Fort Worth</a></li>
+<li><a href="fractional-cmo-greater-houston.html">Greater Houston</a></li>
+<li><a href="fractional-cmo-greater-chicago.html">Greater Chicago</a></li>
+<li><a href="fractional-cmo-greater-atlanta.html">Greater Atlanta</a></li>
+<li><a href="fractional-cmo-greater-miami.html">Greater Miami</a></li>
+<li><a href="fractional-cmo-greater-boston.html">Greater Boston</a></li>
+<li><a href="fractional-cmo-near-me.html">Find CMO Near Me</a></li>
+</ul>
+</div>
+<div class="footer-col">
+<h4>Learn &amp; Company</h4>
+<ul>
+<li><a href="blog.html">Insights &amp; Blog</a></li>
+<li><a href="how-to-hire-a-fractional-cmo.html">How to Hire a Fractional CMO</a></li>
+<li><a href="when-do-you-need-a-fractional-cmo.html">When Do You Need a CMO?</a></li>
+<li><a href="questions-to-ask-a-fractional-cmo.html">Questions to Ask a CMO</a></li>
+<li><a href="fractional-cmo-first-90-days.html">First 90 Days</a></li>
+<li><a href="fractional-cmo-contract.html">CMO Contract Guide</a></li>
+<li><a href="about.html">About Mark</a></li>
+<li><a href="testimonials.html">Testimonials</a></li>
+<li><a href="faq.html">FAQ</a></li>
+<li><a href="contact.html">Contact</a></li>
+<li><a href="https://academy.markcmo.com" target="_blank" style="color:var(--gold);font-weight:700;">&#127891; MarkCMO Academy</a></li>
+</ul>
+</div>
+<div class="footer-col">
+<h4>Glossary</h4>
+<ul>
+<li><a href="what-is-a-fractional-cmo.html">What Is a Fractional CMO?</a></li>
+<li><a href="fractional-cmo-definition.html">Fractional CMO Definition</a></li>
+<li><a href="what-is-a-cmo.html">What Is a CMO?</a></li>
+<li><a href="what-is-coo.html">What Is a COO?</a></li>
+<li><a href="what-is-demand-generation.html">What Is Demand Generation?</a></li>
+<li><a href="what-is-go-to-market-strategy.html">What Is a GTM Strategy?</a></li>
+<li><a href="what-is-revenue-operations.html">What Is RevOps?</a></li>
+<li><a href="what-is-cac.html">What Is CAC?</a></li>
+<li><a href="what-is-ltv.html">What Is LTV?</a></li>
+<li><a href="marketing-qualified-lead.html">What Is an MQL?</a></li>
+<li><a href="ideal-customer-profile.html">What Is an ICP?</a></li>
+<li><a href="what-is-product-market-fit.html">What Is Product-Market Fit?</a></li>
+</ul>
+</div>
+</div>
+<div style="border-top:1px solid rgba(201,168,76,0.15);border-bottom:1px solid rgba(201,168,76,0.08);padding:1.6rem 4vw;">
+<div style="max-width:1400px;margin:0 auto;display:flex;gap:2rem;align-items:baseline;flex-wrap:wrap;">
+<span style="font-family:'DM Mono',monospace;font-size:0.62rem;letter-spacing:0.15em;text-transform:uppercase;color:#C9A84C;white-space:nowrap;flex-shrink:0;">Latest Articles</span>
+<div style="display:flex;gap:1.4rem;flex-wrap:wrap;">
+<a href="/blog" style="font-size:0.8rem;color:#C9A84C;font-weight:600;text-decoration:none;">All Insights &rarr;</a>
+<a href="/blog-what-is-a-fractional-cmo.html" style="font-size:0.8rem;color:rgba(136,136,136,0.7);text-decoration:none;">What is a Fractional CMO</a>
+<a href="/blog-go-to-market-strategy.html" style="font-size:0.8rem;color:rgba(136,136,136,0.7);text-decoration:none;">Go-to-Market Strategy</a>
+<a href="/blog-b2b-marketing-strategy.html" style="font-size:0.8rem;color:rgba(136,136,136,0.7);text-decoration:none;">B2B Marketing Strategy</a>
+<a href="/blog-demand-generation-guide.html" style="font-size:0.8rem;color:rgba(136,136,136,0.7);text-decoration:none;">Demand Generation Guide</a>
+<a href="/blog-saas-marketing-guide.html" style="font-size:0.8rem;color:rgba(136,136,136,0.7);text-decoration:none;">SaaS Marketing Guide</a>
+<a href="/blog-account-based-marketing-guide.html" style="font-size:0.8rem;color:rgba(136,136,136,0.7);text-decoration:none;">ABM Guide</a>
+<a href="/blog-marketing-roi-guide.html" style="font-size:0.8rem;color:rgba(136,136,136,0.7);text-decoration:none;">Marketing ROI Guide</a>
+<a href="/blog-how-to-hire-fractional-cmo.html" style="font-size:0.8rem;color:rgba(136,136,136,0.7);text-decoration:none;">How to Hire a Fractional CMO</a>
+<a href="/fractional-cmo-cost.html" style="font-size:0.8rem;color:rgba(136,136,136,0.7);text-decoration:none;">Fractional CMO Cost 2025</a>
+</div>
+</div>
+</div>
+<div class="footer-bottom">
+<p>&copy; 2026 Mark Gabrielli &middot; markcmo.com &middot; All rights reserved.</p>
+<p class="footer-bottom-tags">Fractional CMO &middot; Fractional COO &middot; Fractional CEO &middot; Chief Marketing Officer &middot; Chief Operating Officer &middot; Go-to-Market Strategy &middot; Demand Generation &middot; Marketing Audit &middot; AI Automation &middot; SaaS Strategy &middot; Executive Advisory &middot; Cape Canaveral, FL &middot; Global &middot; All 50 States &middot; Remote Available</p>
+<p class="footer-bottom-social">
+<a href="https://www.linkedin.com/in/marklgabrielli/" target="_blank" rel="noopener">LinkedIn</a>
+<span>&middot;</span>
+<a href="https://about.me/mark_gabrielli" target="_blank" rel="noopener">About.me</a>
+<span>&middot;</span>
+<a href="https://medium.com/@mark_louis_gabrielli_jr" target="_blank" rel="noopener">Medium</a>
+<span>&middot;</span>
+<a href="https://x.com/markgcmo" target="_blank" rel="noopener">X / Twitter</a>
+<span>&middot;</span>
+<a href="https://www.tiktok.com/@mark.gabrielli.cmo" target="_blank" rel="noopener">TikTok</a>
+<span>&middot;</span>
+<a href="https://www.digitalreference.co/insights/marketing-professionals/best-fractional-cmos-in-orlando" target="_blank" rel="noopener">Digital Reference</a>
+</p>
+</div>
+</footer><script src="nav.js" defer></script>
+<script>
+(function(){
+  var nav=document.getElementById('mainNav');
+  var ham=document.getElementById('navHam');
+  var drw=document.getElementById('mobileDrawer');
+  if(nav) window.addEventListener('scroll',function(){
+    nav.classList.toggle('scrolled',window.scrollY>20);
+  },{passive:true});
+  if(ham&&drw){
+    ham.addEventListener('click',function(){drw.classList.toggle('open');});
+    drw.querySelectorAll('a').forEach(function(a){
+      a.addEventListener('click',function(){drw.classList.remove('open');});
+    });
+  }
+})();
+</script>
+<script src="/linkedin-widget.js" defer></script>
+</body></html>

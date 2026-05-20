@@ -1,0 +1,1571 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-BXK5Y3DQBL"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-BXK5Y3DQBL');
+</script>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Free Webinar: The Revenue Leak Audit | Mark Gabrielli | Fractional CMO</title>
+<meta name="description" content="Join Mark Gabrielli for a live CMO-level audit framework webinar. Learn exactly what's silently killing your revenue, and how to fix it in 90 days." />
+<meta name="robots" content="index, follow" />
+<link rel="canonical" href="https://markcmo.com/webinar.html" />
+<meta property="og:title" content="Free Webinar: The Revenue Leak Audit — Mark Gabrielli" />
+<meta property="og:description" content="A live CMO-level framework to find and fix what's silently killing your revenue." />
+<meta property="og:url" content="https://markcmo.com/webinar.html" />
+<meta property="og:type" content="website" />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Barlow:ital,wght@0,400;0,500;0,600;0,700;0,800;1,400;1,700&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="style.css" />
+  <style>
+    /* ─── WEBINAR PAGE SPECIFIC ─── */
+    .webinar-hero {
+      min-height: 100vh;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 0;
+      position: relative;
+      overflow: hidden;
+    }
+    .webinar-hero::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(ellipse at 30% 50%, rgba(201,168,76,0.09) 0%, transparent 60%),
+                  radial-gradient(ellipse at 80% 20%, rgba(201,168,76,0.04) 0%, transparent 50%);
+      pointer-events: none;
+      z-index: 0;
+    }
+    .webinar-hero-grid {
+      position: absolute;
+      inset: 0;
+      background-image: linear-gradient(rgba(201,168,76,0.035) 1px, transparent 1px),
+                        linear-gradient(90deg, rgba(201,168,76,0.035) 1px, transparent 1px);
+      background-size: 80px 80px;
+      pointer-events: none;
+      z-index: 0;
+    }
+    /* LEFT: pitch */
+    .webinar-left {
+      padding: 7rem 5vw 5rem 6vw;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      position: relative;
+      z-index: 1;
+    }
+    .webinar-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.6rem;
+      background: rgba(201,168,76,0.08);
+      border: 1px solid rgba(201,168,76,0.25);
+      padding: 0.45rem 1rem;
+      border-radius: 2px;
+      font-family: 'DM Mono', monospace;
+      font-size: 0.65rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 1.8rem;
+      width: fit-content;
+    }
+    .webinar-badge .badge-dot {
+      width: 6px; height: 6px;
+      background: var(--gold);
+      border-radius: 50%;
+      animation: pulse-dot 1.8s ease-in-out infinite;
+    }
+    @keyframes pulse-dot {
+      0%,100% { opacity:1; transform:scale(1); }
+      50% { opacity:0.4; transform:scale(0.7); }
+    }
+    .webinar-left h1 {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: clamp(3.2rem, 6vw, 5.5rem);
+      line-height: 0.95;
+      letter-spacing: 0.01em;
+      color: var(--white);
+      margin-bottom: 1.5rem;
+    }
+    .webinar-left h1 em {
+      font-style: normal;
+      color: var(--gold);
+    }
+    .webinar-subtitle {
+      font-size: 1.05rem;
+      line-height: 1.7;
+      color: var(--light-grey);
+      max-width: 560px;
+      margin-bottom: 2.5rem;
+    }
+    /* webinar meta strip */
+    .webinar-meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1.5rem;
+      margin-bottom: 2.5rem;
+    }
+    .webinar-meta-item {
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+    }
+    .wm-icon {
+      width: 36px; height: 36px;
+      border: 1px solid rgba(201,168,76,0.3);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.9rem;
+      flex-shrink: 0;
+    }
+    .wm-text strong {
+      display: block;
+      font-size: 0.78rem;
+      font-weight: 700;
+      color: var(--white);
+      letter-spacing: 0.04em;
+    }
+    .wm-text span {
+      font-family: 'DM Mono', monospace;
+      font-size: 0.65rem;
+      color: var(--mid);
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+    /* what you'll learn */
+    .webinar-outcomes {
+      margin-bottom: 2.5rem;
+    }
+    .webinar-outcomes h3 {
+      font-family: 'DM Mono', monospace;
+      font-size: 0.68rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 1.2rem;
+    }
+    .outcome-list {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 0.75rem;
+    }
+    .outcome-list li {
+      display: flex;
+      align-items: flex-start;
+      gap: 0.75rem;
+      font-size: 0.88rem;
+      color: var(--light-grey);
+      line-height: 1.5;
+    }
+    .outcome-list li::before {
+      content: '→';
+      color: var(--gold);
+      font-size: 0.8rem;
+      flex-shrink: 0;
+      margin-top: 0.15rem;
+    }
+    /* playbook teaser */
+    .playbook-teaser {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      background: rgba(201,168,76,0.05);
+      border: 1px solid rgba(201,168,76,0.2);
+      border-left: 3px solid var(--gold);
+      padding: 1rem 1.2rem;
+      border-radius: 2px;
+    }
+    .playbook-icon { font-size: 1.6rem; }
+    .playbook-text strong {
+      display: block;
+      font-size: 0.82rem;
+      font-weight: 700;
+      color: var(--white);
+      margin-bottom: 0.2rem;
+    }
+    .playbook-text span {
+      font-size: 0.76rem;
+      color: var(--mid);
+    }
+    /* RIGHT: form */
+    .webinar-right {
+      padding: 4rem 6vw 4rem 4vw;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+      z-index: 1;
+    }
+    .webinar-form-card {
+      background: var(--charcoal);
+      border: 1px solid rgba(201,168,76,0.18);
+      padding: 2.8rem 2.5rem;
+      border-radius: 4px;
+      width: 100%;
+      max-width: 460px;
+      position: relative;
+    }
+    .webinar-form-card::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 2px;
+      background: linear-gradient(90deg, transparent, var(--gold), transparent);
+    }
+    .form-heading {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 1.8rem;
+      letter-spacing: 0.04em;
+      color: var(--white);
+      margin-bottom: 0.4rem;
+    }
+    .form-subheading {
+      font-size: 0.82rem;
+      color: var(--mid);
+      margin-bottom: 2rem;
+      line-height: 1.6;
+    }
+    .form-group {
+      margin-bottom: 1.2rem;
+    }
+    .form-group label {
+      display: block;
+      font-family: 'DM Mono', monospace;
+      font-size: 0.62rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 0.5rem;
+    }
+    .form-group input,
+    .form-group select {
+      width: 100%;
+      background: rgba(255,255,255,0.04);
+      border: 1px solid rgba(201,168,76,0.2);
+      color: var(--white);
+      font-family: 'Barlow', sans-serif;
+      font-size: 0.9rem;
+      padding: 0.85rem 1rem;
+      border-radius: 2px;
+      outline: none;
+      transition: border-color 0.2s;
+      cursor: none;
+    }
+    .form-group input:focus,
+    .form-group select:focus { border-color: var(--gold); }
+    .form-group input::placeholder { color: rgba(136,136,136,0.5); }
+    .form-group select option { background: #1c1c1c; color: var(--white); }
+    .btn-webinar-submit {
+      width: 100%;
+      background: var(--gold);
+      color: var(--black);
+      font-family: 'Barlow', sans-serif;
+      font-size: 0.85rem;
+      font-weight: 800;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      padding: 1.1rem 2rem;
+      border: none;
+      border-radius: 2px;
+      cursor: none;
+      transition: background 0.2s, transform 0.2s;
+      margin-top: 0.5rem;
+    }
+    .btn-webinar-submit:hover {
+      background: var(--gold-light);
+      transform: translateY(-2px);
+    }
+    .form-trust {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.5rem;
+      margin-top: 1rem;
+      font-size: 0.72rem;
+      color: var(--mid);
+    }
+    .form-trust::before { content: '🔒'; font-size: 0.75rem; }
+    .spots-left {
+      text-align: center;
+      margin-top: 1.2rem;
+      font-family: 'DM Mono', monospace;
+      font-size: 0.65rem;
+      letter-spacing: 0.1em;
+      color: rgba(201,168,76,0.7);
+    }
+    .spots-bar {
+      height: 3px;
+      background: rgba(201,168,76,0.15);
+      border-radius: 2px;
+      margin-top: 0.5rem;
+      overflow: hidden;
+    }
+    .spots-fill {
+      height: 100%;
+      width: 73%;
+      background: var(--gold);
+      border-radius: 2px;
+      animation: fill-pulse 3s ease-in-out infinite;
+    }
+    @keyframes fill-pulse {
+      0%,100% { opacity:1; } 50% { opacity:0.7; }
+    }
+    /* ─── SPEAKERS / HOST ─── */
+    .webinar-host {
+      padding: 5rem 6vw;
+      background: var(--off-black);
+      border-top: 1px solid rgba(201,168,76,0.08);
+    }
+    .host-grid {
+      max-width: 1100px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: auto 1fr;
+      gap: 3rem;
+      align-items: center;
+    }
+    .host-portrait {
+      width: 180px;
+      height: 180px;
+      border-radius: 50%;
+      border: 2px solid rgba(201,168,76,0.4);
+      overflow: hidden;
+      flex-shrink: 0;
+    }
+    .host-portrait img { width: 100%; height: 100%; object-fit: cover; object-position: center 10%; }
+    .host-tag {
+      font-family: 'DM Mono', monospace;
+      font-size: 0.62rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 0.8rem;
+    }
+    .host-name {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 2.8rem;
+      letter-spacing: 0.04em;
+      color: var(--white);
+      margin-bottom: 0.6rem;
+    }
+    .host-title {
+      font-size: 0.9rem;
+      color: var(--gold);
+      font-weight: 600;
+      margin-bottom: 1rem;
+    }
+    .host-bio {
+      font-size: 0.92rem;
+      color: var(--light-grey);
+      line-height: 1.75;
+      max-width: 600px;
+      margin-bottom: 1.2rem;
+    }
+    .host-creds {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.6rem;
+    }
+    .cred-tag {
+      font-family: 'DM Mono', monospace;
+      font-size: 0.62rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      background: rgba(201,168,76,0.06);
+      border: 1px solid rgba(201,168,76,0.2);
+      color: var(--gold);
+      padding: 0.3rem 0.7rem;
+      border-radius: 2px;
+    }
+    /* ─── CURRICULUM ─── */
+    .webinar-curriculum {
+      padding: 6rem 6vw;
+    }
+    .curriculum-grid {
+      max-width: 1100px;
+      margin: 2.5rem auto 0;
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1.5rem;
+    }
+    .module-card {
+      background: var(--charcoal);
+      border: 1px solid rgba(201,168,76,0.1);
+      padding: 2rem 1.8rem;
+      border-radius: 4px;
+      transition: border-color 0.2s, transform 0.2s;
+      position: relative;
+    }
+    .module-card:hover { border-color: rgba(201,168,76,0.35); transform: translateY(-3px); }
+    .module-num {
+      font-family: 'DM Mono', monospace;
+      font-size: 0.6rem;
+      letter-spacing: 0.18em;
+      color: var(--gold);
+      text-transform: uppercase;
+      margin-bottom: 0.8rem;
+    }
+    .module-title {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 1.4rem;
+      letter-spacing: 0.04em;
+      color: var(--white);
+      margin-bottom: 0.8rem;
+      line-height: 1.1;
+    }
+    .module-desc {
+      font-size: 0.82rem;
+      color: var(--mid);
+      line-height: 1.65;
+    }
+    .module-tag {
+      display: inline-block;
+      margin-top: 1rem;
+      font-family: 'DM Mono', monospace;
+      font-size: 0.58rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--gold);
+      opacity: 0.7;
+    }
+    /* ─── MONETIZATION / WHAT'S INCLUDED ─── */
+    .webinar-value {
+      padding: 6rem 6vw;
+      background: var(--off-black);
+      border-top: 1px solid rgba(201,168,76,0.08);
+    }
+    .value-grid {
+      max-width: 1100px;
+      margin: 2.5rem auto 0;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 2rem;
+    }
+    .value-item {
+      display: flex;
+      gap: 1.2rem;
+      align-items: flex-start;
+    }
+    .value-icon-wrap {
+      width: 48px; height: 48px;
+      background: rgba(201,168,76,0.07);
+      border: 1px solid rgba(201,168,76,0.2);
+      border-radius: 4px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.2rem;
+      flex-shrink: 0;
+    }
+    .value-text h4 {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 1.1rem;
+      letter-spacing: 0.06em;
+      color: var(--white);
+      margin-bottom: 0.4rem;
+    }
+    .value-text p {
+      font-size: 0.82rem;
+      color: var(--mid);
+      line-height: 1.6;
+    }
+    .value-price {
+      font-family: 'DM Mono', monospace;
+      font-size: 0.62rem;
+      letter-spacing: 0.1em;
+      color: var(--gold);
+      margin-top: 0.5rem;
+    }
+    /* ─── MONETIZATION PATHS ─── */
+    .webinar-paths {
+      padding: 6rem 6vw;
+    }
+    .paths-grid {
+      max-width: 1100px;
+      margin: 2.5rem auto 0;
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1.5rem;
+    }
+    .path-card {
+      background: var(--charcoal);
+      border: 1px solid rgba(201,168,76,0.12);
+      padding: 2.2rem;
+      border-radius: 4px;
+      transition: border-color 0.2s, transform 0.2s;
+      position: relative;
+    }
+    .path-card.featured {
+      border-color: rgba(201,168,76,0.45);
+      background: linear-gradient(135deg, rgba(201,168,76,0.05) 0%, var(--charcoal) 60%);
+    }
+    .path-card.featured::after {
+      content: 'MOST POPULAR';
+      position: absolute;
+      top: -1px; right: 1.5rem;
+      background: var(--gold);
+      color: var(--black);
+      font-family: 'DM Mono', monospace;
+      font-size: 0.55rem;
+      letter-spacing: 0.15em;
+      padding: 0.3rem 0.6rem;
+      border-radius: 0 0 2px 2px;
+    }
+    .path-card:hover { border-color: rgba(201,168,76,0.4); transform: translateY(-4px); }
+    .path-label {
+      font-family: 'DM Mono', monospace;
+      font-size: 0.6rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 0.8rem;
+    }
+    .path-title {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 1.5rem;
+      letter-spacing: 0.04em;
+      color: var(--white);
+      margin-bottom: 0.6rem;
+    }
+    .path-price {
+      font-size: 2rem;
+      font-weight: 800;
+      color: var(--gold);
+      margin-bottom: 1rem;
+    }
+    .path-price span {
+      font-size: 0.85rem;
+      font-weight: 400;
+      color: var(--mid);
+    }
+    .path-features {
+      list-style: none;
+      margin-bottom: 1.5rem;
+    }
+    .path-features li {
+      font-size: 0.82rem;
+      color: var(--light-grey);
+      padding: 0.4rem 0;
+      border-bottom: 1px solid rgba(255,255,255,0.05);
+      display: flex;
+      gap: 0.6rem;
+      align-items: flex-start;
+    }
+    .path-features li::before { content: '✓'; color: var(--gold); flex-shrink: 0; }
+    /* ─── TESTIMONIALS STRIP ─── */
+    .webinar-social-proof {
+      padding: 5rem 6vw;
+      background: var(--off-black);
+      border-top: 1px solid rgba(201,168,76,0.08);
+    }
+    .proof-grid {
+      max-width: 1100px;
+      margin: 2rem auto 0;
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1.5rem;
+    }
+    .proof-card {
+      background: var(--graphite);
+      border: 1px solid rgba(201,168,76,0.1);
+      padding: 1.8rem;
+      border-radius: 4px;
+    }
+    .proof-stars { color: var(--gold); font-size: 0.75rem; margin-bottom: 0.8rem; letter-spacing: 0.1em; }
+    .proof-quote {
+      font-size: 0.85rem;
+      color: var(--light-grey);
+      line-height: 1.65;
+      font-style: italic;
+      margin-bottom: 1.2rem;
+    }
+    .proof-author {
+      font-family: 'DM Mono', monospace;
+      font-size: 0.62rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--gold);
+    }
+    .proof-author span { color: var(--mid); font-size: 0.6rem; }
+    /* ─── BOTTOM CTA ─── */
+    .webinar-bottom-cta {
+      padding: 6rem 6vw;
+      text-align: center;
+    }
+    .webinar-bottom-cta h2 {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: clamp(2.5rem, 5vw, 4rem);
+      color: var(--white);
+      margin-bottom: 1rem;
+    }
+    .webinar-bottom-cta h2 em { font-style: normal; color: var(--gold); }
+    .webinar-bottom-cta p {
+      font-size: 1rem;
+      color: var(--mid);
+      max-width: 500px;
+      margin: 0 auto 2.5rem;
+      line-height: 1.7;
+    }
+    .cta-actions { display: flex; justify-content: center; gap: 1rem; flex-wrap: wrap; }
+    /* ─── SUCCESS STATE ─── */
+    .form-success {
+      display: none;
+      text-align: center;
+      padding: 2rem 0;
+    }
+    .form-success .success-icon { font-size: 3rem; margin-bottom: 1rem; }
+    .form-success h3 {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 1.8rem;
+      color: var(--gold);
+      margin-bottom: 0.6rem;
+    }
+    .form-success p { font-size: 0.85rem; color: var(--light-grey); line-height: 1.6; }
+    /* ─── ERROR state ─── */
+    .form-error {
+      display: none;
+      background: rgba(220,50,50,0.08);
+      border: 1px solid rgba(220,50,50,0.3);
+      padding: 0.8rem 1rem;
+      border-radius: 2px;
+      font-size: 0.8rem;
+      color: #ff6b6b;
+      margin-top: 0.8rem;
+    }
+    /* ─── RESPONSIVE ─── */
+    @media (max-width: 1000px) {
+      .webinar-hero { grid-template-columns: 1fr; min-height: auto; }
+      .webinar-left { padding: 8rem 6vw 3rem; }
+      .webinar-right { padding: 0 6vw 5rem; justify-content: flex-start; }
+      .webinar-form-card { max-width: 100%; }
+      .curriculum-grid { grid-template-columns: 1fr 1fr; }
+      .paths-grid { grid-template-columns: 1fr; max-width: 420px; margin-left: auto; margin-right: auto; }
+      .proof-grid { grid-template-columns: 1fr; }
+      .value-grid { grid-template-columns: 1fr; }
+      .host-grid { grid-template-columns: 1fr; }
+    }
+    @media (max-width: 600px) {
+      .curriculum-grid { grid-template-columns: 1fr; }
+      .webinar-meta { flex-direction: column; gap: 1rem; }
+    }
+  
+    html, body, * { cursor: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAARCAYAAADUryzEAAAAV0lEQVR42mMQFBT8z0AJABlwbFnIf4oNINsQZAPIMgTdAJINwWYASYbgMoBoQ/AZQJQhhAwgaAguA4iOHXSFJMcKSANME4yNjEkKSLLzxcAbgBwWDPQGAEWguILiE6w1AAAAAElFTkSuQmCC') 0 0, default !important; }
+</style>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position": 1,
+      "name": "Home",
+      "item": "https://markcmo.com/"
+    },
+    {
+      "@type": "ListItem",
+      "position": 2,
+      "name": "Webinar",
+      "item": "https://markcmo.com/webinar.html"
+    }
+  ]
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "What does a fractional CMO do for companies in this market?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "A fractional CMO acts as your Chief Marketing Officer on a part-time basis - typically 2-3 days per week - with full executive accountability for strategy, team leadership, budget, and revenue outcomes. They own your entire marketing function and are accountable for pipeline generation and revenue attribution, not just deliverables."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "How quickly will I see results?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Most engagements produce measurable outputs within 30 days: a GTM strategy, ICP definition, messaging architecture, and demand generation plan. Pipeline movement typically appears in 60-90 days as campaigns launch. Long-term compounding results build over 6-12 months."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Is there a long-term contract required?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "No. Every MarkCMO engagement is month-to-month. There are no long-term contracts, no cancellation fees, and no lock-in. You stay because the results justify it. We offer a free GTM diagnostic before you commit to any paid engagement."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Do I have to sign a long-term contract?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "No. Every MarkCMO engagement is month-to-month. There are no long-term contracts, no cancellation fees, and no lock-in clauses. You stay because the results justify it - not because you are contractually obligated. We offer a free GTM diagnostic before you commit to any paid engagement so you can validate fit before spending a dollar."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "How does the engagement start?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Step one is a free 30-minute GTM diagnostic call. We review your current situation, revenue goals, team structure, and the biggest gap between where you are and where you need to be. If there is a clear fit, we outline a 30-60-90 day plan and agree on scope. Most engagements are live within 5-7 business days of the diagnostic call."
+      }
+    }
+  ],
+  "dateModified": "2026-05-08"
+}
+</script>
+<meta name="author" content="Mark Gabrielli"/>
+<link rel="author" href="https://markcmo.com/about.html"/>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebPage",
+  "name": "Free Webinar: The Revenue Leak Audit | Mark Gabrielli | Fractional CMO",
+  "description": "Join Mark Gabrielli for a live CMO-level audit framework webinar. Learn exactly what",
+  "url": "https://markcmo.com/webinar.html",
+  "author": {
+    "@type": "Person",
+    "name": "Mark Gabrielli",
+    "url": "https://markcmo.com/about.html",
+    "sameAs": [
+      "https://www.linkedin.com/in/marklgabrielli/",
+      "https://markcmo.com"
+    ]
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "MarkCMO",
+    "url": "https://markcmo.com",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "https://markcmo.com/mark-photo.webp"
+    }
+  },
+  "dateModified": "2026-05-08",
+  "inLanguage": "en-US"
+}
+</script>
+</head>
+<body>
+<nav class="nav" id="mainNav">
+<a href="/index.html" class="nav-logo">
+<div class="nav-logo-avatar">
+<img src="/mark-photo.webp" alt="Mark Gabrielli" />
+</div>
+<div class="nav-logo-text">
+<strong>Mark Gabrielli</strong>
+<span>Fractional CMO &amp; COO</span>
+</div>
+</a>
+<ul class="nav-links">
+<li><a href="/about.html">About</a></li>
+<li><a href="/services.html">Services</a></li>
+<li><a href="/magnet-framework.html" style="color:#C9A84C;font-weight:600;">MAGNET&trade;</a></li>
+<li><a href="/results.html">Results</a></li>
+<li><a href="/blog">Insights</a></li>
+<li><a href="https://academy.markcmo.com" target="_blank" style="color:#C9A84C;">Academy</a></li>
+</ul>
+<div class="nav-right">
+<a href="/book.html" class="nav-btn">Book a Free Call</a>
+</div>
+<div class="nav-hamburger" id="navHam"><span></span><span></span><span></span></div>
+</nav>
+<div class="mobile-drawer" id="mobileDrawer">
+<a href="/about.html">About</a>
+<a href="/services.html">Services</a>
+<a href="/magnet-framework.html" style="color:#C9A84C;font-weight:600;">MAGNET Framework&trade;</a>
+<a href="/results.html">Results</a>
+<a href="/blog">Insights</a>
+<a href="https://academy.markcmo.com" target="_blank">Academy</a>
+<a href="/book.html" style="color:#C9A84C;font-weight:700;">Book a Free Strategy Call &rarr;</a>
+</div>
+<section class="webinar-hero" style="padding:0;">
+<div class="webinar-hero-grid"></div>
+<div class="webinar-left">
+<div class="webinar-badge">
+<span class="badge-dot"></span>
+Free Live Webinar · Limited Seats
+</div>
+<h1>
+The Revenue<br>
+<em>Leak</em> Audit:<br>
+Fix What's<br>
+Killing Growth
+</h1>
+<p class="webinar-subtitle">
+A live CMO-level framework to find the invisible gaps in your marketing, operations, and pipeline, then build a 90-day fix plan. No fluff. No slides. Just the exact process I use with 7- and 8-figure companies.
+</p>
+<div class="webinar-meta">
+<div class="webinar-meta-item">
+<div class="wm-icon">📅</div>
+<div class="wm-text">
+<strong>Live &amp; On-Demand</strong>
+<span>Upcoming Sessions</span>
+</div>
+</div>
+<div class="webinar-meta-item">
+<div class="wm-icon">⏱</div>
+<div class="wm-text">
+<strong>75 Minutes</strong>
+<span>+ Live Q&amp;A</span>
+</div>
+</div>
+<div class="webinar-meta-item">
+<div class="wm-icon">📍</div>
+<div class="wm-text">
+<strong>100% Online</strong>
+<span>Zoom · Recorded</span>
+</div>
+</div>
+</div>
+<div class="webinar-outcomes">
+<h3>What You'll Walk Away With</h3>
+<ul class="outcome-list">
+<li>The 7 silent revenue killers hiding in your current marketing stack</li>
+<li>A live audit walkthrough of a real $4M company's growth gap</li>
+<li>The exact prioritization matrix I use to triage and fix fast</li>
+<li>How to talk to your board or investors about the real problem</li>
+<li>The 90-day CMO sprint framework, yours to keep and execute</li>
+</ul>
+</div>
+<div class="playbook-teaser">
+<span class="playbook-icon">📘</span>
+<div class="playbook-text">
+<strong>Bonus: Revenue Leak Playbook PDF</strong>
+<span>Sent to every attendee at the end of the live session, a $197 standalone resource, free.</span>
+</div>
+</div>
+</div>
+<div class="webinar-right">
+<div class="webinar-form-card">
+<div class="form-heading">Reserve Your Seat</div>
+<p class="form-subheading">Free registration, takes 30 seconds. Your spot is held until 24 hours before showtime.</p>
+<form id="webinarForm">
+<div class="form-group">
+<label for="firstName">First Name</label>
+<input type="text" id="firstName" name="firstName" placeholder="Mark" required />
+</div>
+<div class="form-group">
+<label for="lastName">Last Name</label>
+<input type="text" id="lastName" name="lastName" placeholder="Gabrielli" required />
+</div>
+<div class="form-group">
+<label for="email">Work Email</label>
+<input type="email" id="email" name="email" placeholder="mark@company.com" required />
+</div>
+<div class="form-group">
+<label for="company">Company / Role</label>
+<input type="text" id="company" name="company" placeholder="CEO @ Acme Corp" />
+</div>
+<div class="form-group">
+<label for="revenue">Current Annual Revenue</label>
+<select id="revenue" name="revenue">
+<option value="">Select range…</option>
+<option value="pre-revenue">Pre-revenue / Startup</option>
+<option value="under-1m">Under $1M</option>
+<option value="1m-5m">$1M, $5M</option>
+<option value="5m-20m">$5M, $20M</option>
+<option value="20m-50m">$20M, $50M</option>
+<option value="50m-plus">$50M+</option>
+</select>
+</div>
+<div class="form-group">
+<label for="biggestChallenge">Biggest Growth Challenge Right Now</label>
+<select id="biggestChallenge" name="biggestChallenge">
+<option value="">Select one…</option>
+<option value="pipeline">Inconsistent pipeline / lead flow</option>
+<option value="conversion">Low conversion rates</option>
+<option value="brand">Brand positioning / differentiation</option>
+<option value="team">Marketing team or leadership gaps</option>
+<option value="reporting">No clear ROI on marketing spend</option>
+<option value="scaling">Scaling without falling apart</option>
+<option value="other">Other</option>
+</select>
+</div>
+<button type="submit" class="btn-webinar-submit" id="submitBtn">
+Save My Seat, It's Free →
+</button>
+<div class="form-trust">Your info is never sold. Unsubscribe anytime.</div>
+<div class="form-error" id="formError">Something went wrong. Please try again or email <a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="c6aba7b4ad86aba7b4ada5aba9e8a5a9ab">[email&#160;protected]</a>.</div>
+<div class="spots-left">
+<div>73% of seats already claimed</div>
+<div class="spots-bar"><div class="spots-fill"></div></div>
+</div>
+</form>
+<div class="form-success" id="formSuccess">
+<div class="success-icon">✅</div>
+<h3>You're In!</h3>
+<p>Check your inbox for your calendar invite and prep guide. We'll also send a reminder 24 hours before the session.<br><br>
+<strong style="color:var(--gold);">Look for an email from <a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="d8b5b9aab398b5b9aab3bbb5b7f6bbb7b5">[email&#160;protected]</a></strong></p>
+</div>
+</div>
+</div>
+</section>
+<div style="background:#0d1b27;border-left:3px solid #2563EB;padding:1.25rem 1.5rem;margin:0 auto 0;max-width:1100px;border-radius:0 6px 6px 0;"><strong style="color:#C9A84C;font-size:.75rem;font-family:'DM Mono',monospace;text-transform:uppercase;letter-spacing:.1em;display:block;margin-bottom:.5rem;">Quick Answer</strong><p style="color:#ccc;margin:0;line-height:1.75;font-size:.95rem;">The Revenue Leak Audit is a free live webinar where Mark Gabrielli walks B2B founders and CEOs through a 5-point diagnostic framework to identify where their marketing and sales systems are losing qualified buyers. The audit typically uncovers 3-5 specific revenue leaks - from messaging misalignment to funnel drop-off to attribution blind spots - that companies can fix in under 90 days without increasing ad spend.</p></div>
+<div class="sp-proof-strip">
+<div class="sp-proof-item">
+<span class="sp-proof-num">4.9&#9733;</span>
+<span class="sp-proof-label">193 Reviews</span>
+</div>
+<div class="sp-proof-item">
+<span class="sp-proof-num">90%</span>
+<span class="sp-proof-label">Retention Rate</span>
+</div>
+<div class="sp-proof-item">
+<span class="sp-proof-num">19+</span>
+<span class="sp-proof-label">Ventures Built</span>
+</div>
+<div class="sp-proof-item">
+<span class="sp-proof-num">$50M+</span>
+<span class="sp-proof-label">Revenue Generated</span>
+</div>
+<div class="sp-proof-item">
+<span class="sp-proof-num">30</span>
+<span class="sp-proof-label">Days to First Results</span>
+</div>
+</div>
+
+<section class="webinar-host">
+<div class="host-grid">
+<div class="host-portrait">
+<img loading="lazy" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Crect fill='%231c1c1c' width='180' height='180'/%3E%3Ccircle cx='90' cy='68' r='38' fill='%23C9A84C' opacity='.2'/%3E%3Ccircle cx='90' cy='60' r='28' fill='%23C9A84C' opacity='.25'/%3E%3Ctext x='90' y='70' font-family='serif' font-size='28' fill='%23C9A84C' text-anchor='middle' dominant-baseline='middle'%3EMG%3C/text%3E%3Crect x='45' y='110' width='90' height='70' rx='45' fill='%23C9A84C' opacity='.15'/%3E%3C/svg%3E" alt="Mark Gabrielli" />
+</div>
+<div class="host-info">
+<div class="host-tag">Your Host</div>
+<div class="host-name">Mark Gabrielli</div>
+<div class="host-title">Fractional CMO &amp; COO · Founder, WETYR Collective</div>
+<p class="host-bio">
+15+ years driving growth across healthcare, aerospace, SaaS, eCommerce, and automotive. I've audited hundreds of marketing programs, scaled global teams of 50+, and operated across three continents. I've been in the OR and on the shop floor. I know what breaks, and exactly how to fix it.
+</p>
+<div class="host-creds">
+<span class="cred-tag">Biological Sciences</span>
+<span class="cred-tag">CST Certified</span>
+<span class="cred-tag">15+ Yrs Exec</span>
+<span class="cred-tag">Healthcare &amp; Aerospace</span>
+<span class="cred-tag">SaaS &amp; eCommerce</span>
+<span class="cred-tag">Global CMO</span>
+</div>
+</div>
+</div>
+</section>
+<section class="webinar-curriculum">
+<div style="max-width:1100px;margin:0 auto;">
+<div class="section-label">Webinar Curriculum</div>
+<h2 style="font-family:'Bebas Neue',sans-serif;font-size:clamp(2rem,4vw,3.2rem);color:var(--white);margin-bottom:0.5rem;letter-spacing:0.02em;">
+75 Minutes That Change How You See Your Business
+</h2>
+<p class="section-body">No vague theory. No recycled slides. This is the live audit framework, structured like a real CMO engagement compressed into one session.</p>
+</div>
+<div class="curriculum-grid">
+<div class="module-card">
+<div class="module-num">Module 01 · 15 min</div>
+<div class="module-title">The Audit Mindset</div>
+<p class="module-desc">Why 90% of marketing problems aren't marketing problems. How to read the real signals, before you spend another dollar.</p>
+<span class="module-tag">Foundation</span>
+</div>
+<div class="module-card">
+<div class="module-num">Module 02 · 20 min</div>
+<div class="module-title">The 7 Revenue Leaks</div>
+<p class="module-desc">Live walkthrough of the most common (and costly) gaps: funnel friction, brand inconsistency, wrong channel mix, messaging misalignment, and more.</p>
+<span class="module-tag">Core Framework</span>
+</div>
+<div class="module-card">
+<div class="module-num">Module 03 · 15 min</div>
+<div class="module-title">Live Audit Demo</div>
+<p class="module-desc">I audit a real company (anonymized) in real time, showing you exactly how I score, prioritize, and present findings to a leadership team.</p>
+<span class="module-tag">Live Demo</span>
+</div>
+<div class="module-card">
+<div class="module-num">Module 04 · 15 min</div>
+<div class="module-title">The 90-Day Sprint</div>
+<p class="module-desc">The exact fix plan architecture I deploy with every new client, segmented by urgency, effort, and impact. You get the template.</p>
+<span class="module-tag">Action Framework</span>
+</div>
+<div class="module-card">
+<div class="module-num">Module 05 · 10 min</div>
+<div class="module-title">How to Present It Up</div>
+<p class="module-desc">The investor and board-level language that gets you the budget, buy-in, and headcount to actually execute. Steal this framing.</p>
+<span class="module-tag">Leadership</span>
+</div>
+<div class="module-card">
+<div class="module-num">Q&amp;A · Open</div>
+<div class="module-title">Open Q&amp;A</div>
+<p class="module-desc">Bring your specific situation. I answer live, no question too tactical, too strategic, or too embarrassing. This is where the real gold is.</p>
+<span class="module-tag">Live · Unscripted</span>
+</div>
+</div>
+</section>
+<section class="webinar-value">
+<div style="max-width:1100px;margin:0 auto;">
+<div class="section-label">What's Included, Free</div>
+<h2 style="font-family:'Bebas Neue',sans-serif;font-size:clamp(2rem,4vw,3rem);color:var(--white);letter-spacing:0.02em;">
+Everything You Need to Start Fixing Revenue Leaks
+</h2>
+</div>
+<div class="value-grid">
+<div class="value-item">
+<div class="value-icon-wrap">🎯</div>
+<div class="value-text">
+<h4>Live 75-Minute Session</h4>
+<p>A structured, high-intensity close look, not a recorded marketing pitch. Real frameworks. Real examples.</p>
+<div class="value-price">Value: $497 consulting equivalent</div>
+</div>
+</div>
+<div class="value-item">
+<div class="value-icon-wrap">📘</div>
+<div class="value-text">
+<h4>Revenue Leak Playbook PDF</h4>
+<p>The 20-page reference document delivered via email after the session. Audit checklist, sprint template, prioritization matrix.</p>
+<div class="value-price">Standalone value: $100</div>
+</div>
+</div>
+<div class="value-item">
+<div class="value-icon-wrap">📅</div>
+<div class="value-text">
+<h4>Calendar Invite + Reminder Emails</h4>
+<p>Instant confirmation with a .ics file, webinar link, and prep questions to maximize what you get out of the session.</p>
+<div class="value-price">Delivered immediately on signup</div>
+</div>
+</div>
+<div class="value-item">
+<div class="value-icon-wrap">🎥</div>
+<div class="value-text">
+<h4>Recording Access (48 Hours)</h4>
+<p>Can't make it live? A replay link is sent to registered attendees. Available for 48 hours post-session.</p>
+<div class="value-price">Included for all registrants</div>
+</div>
+</div>
+<div class="value-item">
+<div class="value-icon-wrap">💬</div>
+<div class="value-text">
+<h4>Live Q&amp;A with Mark</h4>
+<p>Direct access to a fractional CMO who has audited hundreds of companies. Bring your toughest marketing or ops question.</p>
+<div class="value-price">Included · Live only</div>
+</div>
+</div>
+<div class="value-item">
+<div class="value-icon-wrap">🤝</div>
+<div class="value-text">
+<h4>Optional: Free Strategy Call</h4>
+<p>Attendees are offered a complimentary 30-min strategy call to apply the audit framework to their specific business, no pitch, all signal.</p>
+<div class="value-price">Offered post-webinar · Limited spots</div>
+</div>
+</div>
+</div>
+</section>
+<section class="webinar-paths">
+<div style="max-width:1100px;margin:0 auto;">
+<div class="section-label">Choose Your Level of Engagement</div>
+<h2 style="font-family:'Bebas Neue',sans-serif;font-size:clamp(2rem,4vw,3rem);color:var(--white);letter-spacing:0.02em;">
+The Webinar is Free. Going Deeper Costs More.
+</h2>
+<p class="section-body">The live session and playbook are always free. If you want to go further, with your own audit, a working sprint, or ongoing executive support, here's how.</p>
+</div>
+<div class="paths-grid">
+<div class="path-card">
+<div class="path-label">Tier 1, Attend</div>
+<div class="path-title">Live Webinar</div>
+<div class="path-price">$0 <span>/ free</span></div>
+<ul class="path-features">
+<li>75-minute live session</li>
+<li>Revenue Leak Playbook PDF</li>
+<li>Calendar invite + reminders</li>
+<li>Live Q&amp;A access</li>
+<li>48-hour replay link</li>
+</ul>
+<a href="#webinarForm" class="btn-ghost" style="display:block;text-align:center;" onclick="document.getElementById('email').focus()">Register Free →</a>
+</div>
+<div class="path-card featured">
+<div class="path-label">Tier 2, Accelerate</div>
+<div class="path-title">CMO Audit + Sprint</div>
+<div class="path-price">Starts at $1,000 <span>/ one-time</span></div>
+<ul class="path-features">
+<li>Everything in Tier 1</li>
+<li>Personal 90-min audit of your business</li>
+<li>Custom 90-day sprint blueprint</li>
+<li>Priority deck for board / leadership</li>
+<li>2 implementation check-in calls</li>
+<li>Access to CMO Accelerator templates</li>
+</ul>
+<a href="https://square.link/u/kLKYt0W3" target="_blank" class="btn-primary" style="display:block;text-align:center;">Book Audit Session →</a>
+</div>
+<div class="path-card">
+<div class="path-label">Tier 3, Transform</div>
+<div class="path-title">Fractional CMO Engagement</div>
+<div class="path-price">Starts at $2,500 <span>/ project</span></div>
+<ul class="path-features">
+<li>Everything in Tier 2</li>
+<li>Ongoing fractional CMO / COO role</li>
+<li>Full marketing &amp; ops leadership</li>
+<li>Team building &amp; vendor oversight</li>
+<li>Board-level reporting &amp; strategy</li>
+<li>Revenue accountability partnership</li>
+</ul>
+<a href="https://square.link/u/xZr7xL1L2500" target="_blank" class="btn-ghost" style="display:block;text-align:center;">Apply for Engagement →</a>
+</div>
+</div>
+</section>
+<section class="webinar-social-proof">
+<div style="max-width:1100px;margin:0 auto;">
+<div class="section-label">What Past Attendees Say</div>
+<h2 style="font-family:'Bebas Neue',sans-serif;font-size:clamp(1.8rem,3.5vw,2.8rem);color:var(--white);letter-spacing:0.02em;">
+The Session That Made the Difference
+</h2>
+</div>
+<div class="proof-grid">
+<div class="proof-card">
+<div class="proof-stars">★★★★★</div>
+<p class="proof-quote">"I've sat through 50 marketing webinars. This was the first one where I left with an actual action plan. The live audit section alone was worth three consulting calls."</p>
+<div class="proof-author">Sarah K. <span>· COO, SaaS Platform · $12M ARR</span></div>
+</div>
+<div class="proof-card">
+<div class="proof-stars">★★★★★</div>
+<p class="proof-quote">"Mark walked through the 7 revenue leaks and I counted four that applied directly to us. We booked the audit session after and found $800K in recoverable pipeline. Not kidding."</p>
+<div class="proof-author">James M. <span>· Founder, Healthcare Tech · Series A</span></div>
+</div>
+<div class="proof-card">
+<div class="proof-stars">★★★★★</div>
+<p class="proof-quote">"The playbook PDF is still in my weekly rotation six months later. The prioritization matrix is the most practical tool I've gotten out of any marketing resource, free or paid."</p>
+<div class="proof-author">Andrea T. <span>· VP Marketing, eCommerce Brand</span></div>
+</div>
+</div>
+</section>
+<section class="webinar-bottom-cta">
+<h2>Stop Guessing What's<br><em>Leaking Your Revenue</em></h2>
+<p>Register for free. Get the playbook. Leave with a plan. Your next 90 days could look very different.</p>
+<div class="cta-actions">
+<a href="#" onclick="document.getElementById('email').focus();document.getElementById('webinarForm').scrollIntoView({behavior:'smooth'});return false;" class="btn-primary">Register for the Free Webinar →</a>
+<a href="https://square.link/u/kLKYt0W3" target="_blank" class="btn-ghost">Book a Strategy Call Instead</a>
+</div>
+</section>
+<div class="sp-faq" style="padding:3rem 6vw;max-width:960px;margin:0 auto;">
+<h2 style="color:#ffffff;font-family:'Bebas Neue',sans-serif;font-size:clamp(1.6rem,2.8vw,2.2rem);letter-spacing:.04em;margin-bottom:1.5rem;">What You Get - Frequently Asked Questions</h2>
+<div class="sp-faq-item">
+<p class="sp-faq-q">What does a fractional CMO do for companies in this market?</p>
+<p class="sp-faq-a">A fractional CMO acts as your Chief Marketing Officer on a part-time basis -- typically 2-3 days per week -- with full executive accountability for strategy, team leadership, budget, and revenue outcomes. They own your entire marketing function and are accountable for pipeline generation and revenue attribution, not just deliverables.</p>
+</div>
+<div class="sp-faq-item">
+<p class="sp-faq-q">How quickly will I see results?</p>
+<p class="sp-faq-a">Most engagements produce measurable outputs within 30 days: a GTM strategy, ICP definition, messaging architecture, and demand generation plan. Pipeline movement typically appears in 60-90 days as campaigns launch. Long-term compounding results build over 6-12 months.</p>
+</div>
+<div class="sp-faq-item">
+<p class="sp-faq-q">Is there a long-term contract required?</p>
+<p class="sp-faq-a">No. Every MarkCMO engagement is month-to-month. There are no long-term contracts, no cancellation fees, and no lock-in. You stay because the results justify it. We offer a free GTM diagnostic before you commit to any paid engagement.</p>
+</div>
+<div class="sp-faq-item">
+<p class="sp-faq-q">Do I have to sign a long-term contract?</p>
+<p class="sp-faq-a">No. Every MarkCMO engagement is month-to-month. There are no long-term contracts, no cancellation fees, and no lock-in clauses. You stay because the results justify it -- not because you are contractually obligated. We offer a free GTM diagnostic before you commit to any paid engagement so you can validate fit before spending a dollar.</p>
+</div>
+<div class="sp-faq-item">
+<p class="sp-faq-q">How does the engagement start?</p>
+<p class="sp-faq-a">Step one is a free 30-minute GTM diagnostic call. We review your current situation, revenue goals, team structure, and the biggest gap between where you are and where you need to be. If there is a clear fit, we outline a 30-60-90 day plan and agree on scope. Most engagements are live within 5-7 business days of the diagnostic call.</p>
+</div>
+</div>
+<div class="sp-cta-closer">
+<div class="sp-cta-closer-inner">
+<span class="sp-cta-closer-tag">Free 30-Min Diagnostic</span>
+<h2>Ready to Build a Marketing Engine That Compounds?</h2>
+<p>Book a free GTM diagnostic call. No pitch. No pressure. We review your current situation, identify the single biggest gap in your marketing, and give you a clear path forward -- whether you hire us or not.</p>
+<div class="sp-cta-closer-btns">
+<a href="/book.html" class="sp-cta-primary">Book Free Strategy Call</a>
+<a href="/fractional-cmo.html" class="btn-ghost">Learn About Fractional CMO</a>
+</div>
+<p class="sp-cta-closer-trust"><span>4.9&#9733; rated</span><span>&nbsp;&bull;&nbsp;</span><span>193 client reviews</span><span>&nbsp;&bull;&nbsp;</span><span>No long-term contracts</span><span>&nbsp;&bull;&nbsp;</span><span>Month-to-month</span></p>
+</div>
+</div>
+
+<footer>
+<div class="footer-mega">
+<div class="footer-brand-col">
+<div class="footer-logo">Mark <span>Gabrielli</span></div>
+<p class="footer-desc">Fractional CMO, COO &amp; Executive Consultant. I help businesses from $1M to $100M find what's broken, build what scales, and execute what others only talk about.</p>
+<div class="footer-brand-tags">
+<span>WETYR Founder</span><span>Fractional C-Suite</span><span>AI Strategist</span><span>CST Certified</span>
+</div>
+<div class="social-links" style="margin-top:1.2rem;">
+<a href="https://www.linkedin.com/in/marklgabrielli/" target="_blank" rel="noopener" class="social-link">in</a>
+<a href="mailto:mark@markcmo.com" class="social-link">@</a>
+</div>
+</div>
+<div class="footer-col">
+<h4>C-Suite Services</h4>
+<ul>
+<li><a href="fractional-cmo.html">Fractional CMO</a></li>
+<li><a href="fractional-coo.html">Fractional COO</a></li>
+<li><a href="fractional-ceo.html">Fractional CEO</a></li>
+<li><a href="fractional-cto.html">Fractional CTO</a></li>
+<li><a href="fractional-cfo.html">Fractional CFO</a></li>
+<li><a href="executive-advisory.html">Executive Advisory</a></li>
+<li><a href="services.html">All Services</a></li>
+</ul>
+</div>
+<div class="footer-col">
+<h4>Marketing Services</h4>
+<ul>
+<li><a href="demand-generation.html">Demand Generation</a></li>
+<li><a href="b2b-marketing.html">B2B Marketing</a></li>
+<li><a href="content-marketing.html">Content Marketing</a></li>
+<li><a href="email-marketing.html">Email Marketing</a></li>
+<li><a href="digital-marketing.html">Digital Marketing</a></li>
+<li><a href="social-media-marketing.html">Social Media Marketing</a></li>
+<li><a href="linkedin-marketing.html">LinkedIn Marketing</a></li>
+<li><a href="paid-social.html">Paid Social Advertising</a></li>
+<li><a href="ppc-management.html">PPC Management</a></li>
+<li><a href="local-seo.html">Local SEO</a></li>
+<li><a href="crm-automation.html">CRM Automation</a></li>
+<li><a href="marketing-automation.html">Marketing Automation</a></li>
+<li><a href="account-based-marketing.html">Account-Based Marketing</a></li>
+<li><a href="go-to-market-strategy.html">Go-to-Market Strategy</a></li>
+<li><a href="marketing-audit.html">Marketing Audit</a></li>
+<li><a href="marketing-strategy.html">Marketing Strategy</a></li>
+</ul>
+</div>
+<div class="footer-col">
+<h4>Pricing &amp; Compare</h4>
+<ul>
+<li><a href="fractional-cmo-cost.html">Fractional CMO Cost</a></li>
+<li><a href="fractional-cmo-near-me.html">Fractional CMO Near Me</a></li>
+<li><a href="fractional-cmo-vs-full-time-cmo.html">Fractional vs Full-Time CMO</a></li>
+<li><a href="fractional-cmo-vs-agency.html">CMO vs Agency</a></li>
+<li><a href="fractional-cmo-vs-vp-marketing.html">CMO vs VP Marketing</a></li>
+<li><a href="fractional-cmo-vs-interim-cmo.html">Fractional vs Interim CMO</a></li>
+<li><a href="fractional-cmo-vs-marketing-consultant.html">CMO vs Consultant</a></li>
+<li><a href="chief-outsiders-alternative.html">Chief Outsiders Alternative</a></li>
+</ul>
+</div>
+<div class="footer-col">
+<h4>By Company Stage</h4>
+<ul>
+<li><a href="fractional-cmo-pre-revenue.html">Pre-Revenue Startups</a></li>
+<li><a href="fractional-cmo-series-a.html">Series A</a></li>
+<li><a href="fractional-cmo-series-b.html">Series B</a></li>
+<li><a href="fractional-cmo-bootstrapped-companies.html">Bootstrapped Companies</a></li>
+<li><a href="fractional-cmo-pe-backed-companies.html">PE-Backed Companies</a></li>
+<li><a href="fractional-cmo-private-equity.html">Private Equity Portfolio</a></li>
+<li><a href="fractional-cmo-venture-capital.html">VC-Backed Startups</a></li>
+<li><a href="best-fractional-cmo.html">Best Fractional CMO</a></li>
+</ul>
+</div>
+<div class="footer-col">
+<h4>By Industry</h4>
+<ul>
+<li><a href="fractional-cmo-saas.html">SaaS</a></li>
+<li><a href="fractional-cmo-healthcare.html">Healthcare</a></li>
+<li><a href="fractional-cmo-fintech.html">Fintech</a></li>
+<li><a href="fractional-cmo-ai.html">AI Companies</a></li>
+<li><a href="fractional-cmo-tech.html">Tech Companies</a></li>
+<li><a href="fractional-cmo-cybersecurity.html">Cybersecurity</a></li>
+<li><a href="fractional-cmo-b2b.html">B2B Companies</a></li>
+<li><a href="fractional-cmo-ecommerce.html">E-Commerce</a></li>
+<li><a href="fractional-cmo-private-equity.html">Private Equity</a></li>
+<li><a href="fractional-cmo-venture-capital.html">VC-Backed Startups</a></li>
+<li><a href="fractional-cmo-retail.html">Retail</a></li>
+<li><a href="fractional-cmo-energy.html">Energy</a></li>
+<li><a href="fractional-cmo-professional-services.html">Professional Services</a></li>
+<li><a href="industries.html">All Industries</a></li>
+</ul>
+</div>
+<div class="footer-col">
+<h4>Top Locations</h4>
+<ul>
+<li><a href="fractional-cmo-dallas-fort-worth.html">Dallas-Fort Worth</a></li>
+<li><a href="fractional-cmo-greater-houston.html">Greater Houston</a></li>
+<li><a href="fractional-cmo-greater-chicago.html">Greater Chicago</a></li>
+<li><a href="fractional-cmo-greater-atlanta.html">Greater Atlanta</a></li>
+<li><a href="fractional-cmo-greater-miami.html">Greater Miami</a></li>
+<li><a href="fractional-cmo-greater-boston.html">Greater Boston</a></li>
+<li><a href="fractional-cmo-near-me.html">Find CMO Near Me</a></li>
+</ul>
+</div>
+<div class="footer-col">
+<h4>Learn &amp; Company</h4>
+<ul>
+<li><a href="blog.html">Insights &amp; Blog</a></li>
+<li><a href="how-to-hire-a-fractional-cmo.html">How to Hire a Fractional CMO</a></li>
+<li><a href="when-do-you-need-a-fractional-cmo.html">When Do You Need a CMO?</a></li>
+<li><a href="questions-to-ask-a-fractional-cmo.html">Questions to Ask a CMO</a></li>
+<li><a href="fractional-cmo-first-90-days.html">First 90 Days</a></li>
+<li><a href="fractional-cmo-contract.html">CMO Contract Guide</a></li>
+<li><a href="about.html">About Mark</a></li>
+<li><a href="testimonials.html">Testimonials</a></li>
+<li><a href="faq.html">FAQ</a></li>
+<li><a href="contact.html">Contact</a></li>
+<li><a href="https://academy.markcmo.com" target="_blank" style="color:var(--gold);font-weight:700;">&#127891; MarkCMO Academy</a></li>
+</ul>
+</div>
+<div class="footer-col">
+<h4>Glossary</h4>
+<ul>
+<li><a href="what-is-a-fractional-cmo.html">What Is a Fractional CMO?</a></li>
+<li><a href="fractional-cmo-definition.html">Fractional CMO Definition</a></li>
+<li><a href="what-is-a-cmo.html">What Is a CMO?</a></li>
+<li><a href="what-is-coo.html">What Is a COO?</a></li>
+<li><a href="what-is-demand-generation.html">What Is Demand Generation?</a></li>
+<li><a href="what-is-go-to-market-strategy.html">What Is a GTM Strategy?</a></li>
+<li><a href="what-is-revenue-operations.html">What Is RevOps?</a></li>
+<li><a href="what-is-cac.html">What Is CAC?</a></li>
+<li><a href="what-is-ltv.html">What Is LTV?</a></li>
+<li><a href="marketing-qualified-lead.html">What Is an MQL?</a></li>
+<li><a href="ideal-customer-profile.html">What Is an ICP?</a></li>
+<li><a href="what-is-product-market-fit.html">What Is Product-Market Fit?</a></li>
+</ul>
+</div>
+</div>
+<div style="border-top:1px solid rgba(201,168,76,0.15);border-bottom:1px solid rgba(201,168,76,0.08);padding:1.6rem 4vw;">
+<div style="max-width:1400px;margin:0 auto;display:flex;gap:2rem;align-items:baseline;flex-wrap:wrap;">
+<span style="font-family:'DM Mono',monospace;font-size:0.62rem;letter-spacing:0.15em;text-transform:uppercase;color:#C9A84C;white-space:nowrap;flex-shrink:0;">Latest Articles</span>
+<div style="display:flex;gap:1.4rem;flex-wrap:wrap;">
+<a href="/blog" style="font-size:0.8rem;color:#C9A84C;font-weight:600;text-decoration:none;">All Insights &rarr;</a>
+<a href="/blog-what-is-a-fractional-cmo.html" style="font-size:0.8rem;color:rgba(136,136,136,0.7);text-decoration:none;">What is a Fractional CMO</a>
+<a href="/blog-go-to-market-strategy.html" style="font-size:0.8rem;color:rgba(136,136,136,0.7);text-decoration:none;">Go-to-Market Strategy</a>
+<a href="/blog-b2b-marketing-strategy.html" style="font-size:0.8rem;color:rgba(136,136,136,0.7);text-decoration:none;">B2B Marketing Strategy</a>
+<a href="/blog-demand-generation-guide.html" style="font-size:0.8rem;color:rgba(136,136,136,0.7);text-decoration:none;">Demand Generation Guide</a>
+<a href="/blog-saas-marketing-guide.html" style="font-size:0.8rem;color:rgba(136,136,136,0.7);text-decoration:none;">SaaS Marketing Guide</a>
+<a href="/blog-account-based-marketing-guide.html" style="font-size:0.8rem;color:rgba(136,136,136,0.7);text-decoration:none;">ABM Guide</a>
+<a href="/blog-marketing-roi-guide.html" style="font-size:0.8rem;color:rgba(136,136,136,0.7);text-decoration:none;">Marketing ROI Guide</a>
+<a href="/blog-how-to-hire-fractional-cmo.html" style="font-size:0.8rem;color:rgba(136,136,136,0.7);text-decoration:none;">How to Hire a Fractional CMO</a>
+<a href="/fractional-cmo-cost.html" style="font-size:0.8rem;color:rgba(136,136,136,0.7);text-decoration:none;">Fractional CMO Cost 2025</a>
+</div>
+</div>
+</div>
+<div class="footer-bottom">
+<p>&copy; 2026 Mark Gabrielli &middot; markcmo.com &middot; All rights reserved.</p>
+<p class="footer-bottom-tags">Fractional CMO &middot; Fractional COO &middot; Fractional CEO &middot; Chief Marketing Officer &middot; Chief Operating Officer &middot; Go-to-Market Strategy &middot; Demand Generation &middot; Marketing Audit &middot; AI Automation &middot; SaaS Strategy &middot; Executive Advisory &middot; Cape Canaveral, FL &middot; Global &middot; All 50 States &middot; Remote Available</p>
+<p class="footer-bottom-social">
+<a href="https://www.linkedin.com/in/marklgabrielli/" target="_blank" rel="noopener">LinkedIn</a>
+<span>&middot;</span>
+<a href="https://about.me/mark_gabrielli" target="_blank" rel="noopener">About.me</a>
+<span>&middot;</span>
+<a href="https://medium.com/@mark_louis_gabrielli_jr" target="_blank" rel="noopener">Medium</a>
+<span>&middot;</span>
+<a href="https://x.com/markgcmo" target="_blank" rel="noopener">X / Twitter</a>
+<span>&middot;</span>
+<a href="https://www.tiktok.com/@mark.gabrielli.cmo" target="_blank" rel="noopener">TikTok</a>
+<span>&middot;</span>
+<a href="https://www.digitalreference.co/insights/marketing-professionals/best-fractional-cmos-in-orlando" target="_blank" rel="noopener">Digital Reference</a>
+</p>
+</div>
+</footer>
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+// ─── Custom Cursor ───
+var cur = document.getElementById('custom-cursor');
+if (cur) {
+document.addEventListener('mousemove', function(e) {
+cur.style.left = e.clientX + 'px';
+cur.style.top = e.clientY + 'px';
+});
+document.addEventListener('mousedown', function() { cur.classList.add('clicking'); });
+document.addEventListener('mouseup', function() { cur.classList.remove('clicking'); });
+}
+// ─── Form Submission ───
+document.getElementById('webinarForm').addEventListener('submit', async function(e) {
+e.preventDefault();
+const btn = document.getElementById('submitBtn');
+const errEl = document.getElementById('formError');
+const successEl = document.getElementById('formSuccess');
+const form = e.target;
+btn.textContent = 'Reserving Your Seat…';
+btn.disabled = true;
+errEl.style.display = 'none';
+const payload = {
+firstName: form.firstName.value.trim(),
+lastName: form.lastName.value.trim(),
+email: form.email.value.trim(),
+company: form.company.value.trim(),
+revenue: form.revenue.value,
+biggestChallenge: form.biggestChallenge.value,
+formType: 'webinar-signup',
+page: 'webinar.html',
+timestamp: new Date().toISOString()
+};
+try {
+const res = await fetch('/.netlify/functions/webinar-signup', {
+method: 'POST',
+headers: { 'Content-Type': 'application/json' },
+body: JSON.stringify(payload)
+});
+if (res.ok) {
+form.style.display = 'none';
+successEl.style.display = 'block';
+// Redirect to confirmation page after 2s
+setTimeout(() => {
+window.location.href = 'webinar-confirmation.html';
+}, 2000);
+} else {
+const data = await res.json().catch(() => ({}));
+errEl.textContent = data.error || 'Something went wrong. Please try again.';
+errEl.style.display = 'block';
+btn.textContent = 'Reserve My Seat →';
+btn.disabled = false;
+}
+} catch(err) {
+errEl.textContent = 'Network error. Please check your connection and try again.';
+errEl.style.display = 'block';
+btn.textContent = 'Reserve My Seat →';
+btn.disabled = false;
+}
+});
+</script>
+<script>
+(function(){
+  var bar=document.createElement('div');bar.id='scroll-progress';
+  document.body.prepend(bar);
+  var nav=document.querySelector('nav');
+  window.addEventListener('scroll',function(){
+    var h=document.documentElement,b=document.body,
+        st='scrollTop',sh='scrollHeight';
+    var pct=(h[st]||b[st])/((h[sh]||b[sh])-h.clientHeight)*100;
+    bar.style.width=pct+'%';
+    if((h[st]||b[st])>80){nav&&nav.classList.add('scrolled');}
+    else{nav&&nav.classList.remove('scrolled');}
+  },{passive:true});
+})();
+</script>
+<script>
+(function(){
+  var nav=document.getElementById('mainNav');
+  var ham=document.getElementById('navHam');
+  var drw=document.getElementById('mobileDrawer');
+  if(nav) window.addEventListener('scroll',function(){
+    nav.classList.toggle('scrolled',window.scrollY>20);
+  },{passive:true});
+  if(ham&&drw){
+    ham.addEventListener('click',function(){drw.classList.toggle('open');});
+    drw.querySelectorAll('a').forEach(function(a){
+      a.addEventListener('click',function(){drw.classList.remove('open');});
+    });
+  }
+})();
+</script>
+<style id="mc-form-styles">
+.mc-contact{background:linear-gradient(135deg,#050919 0%,#0A1628 60%,#0d1b27 100%);padding:64px 0;border-top:1px solid #2a2a2a;margin-top:0}
+.mc-contact-inner{max-width:1100px;margin:0 auto;padding:0 24px;display:grid;grid-template-columns:1fr 1fr;gap:56px;align-items:start}
+.mc-contact-left h2{font-family:'Bebas Neue',Barlow,-apple-system,sans-serif;font-size:clamp(1.8rem,4vw,2.8rem);font-weight:400;letter-spacing:.03em;color:#fff;margin:0 0 14px;line-height:1.1}
+.mc-contact-left h2 em{color:#C9A84C;font-style:normal}
+.mc-contact-left p{font-size:.92rem;color:#94A3B8;line-height:1.8;margin:0 0 24px}
+.mc-contact-proof{display:flex;flex-direction:column;gap:10px;margin-bottom:28px}
+.mc-contact-proof-item{display:flex;align-items:center;gap:10px;font-size:.85rem;color:#94A3B8}
+.mc-contact-proof-item span:first-child{color:#C9A84C;font-weight:700;font-size:1rem;flex-shrink:0}
+.mc-contact-direct{background:rgba(201,168,76,.08);border:1px solid rgba(201,168,76,.2);border-radius:8px;padding:14px 18px}
+.mc-contact-direct p{font-size:.75rem;color:#666;text-transform:uppercase;letter-spacing:.08em;margin:0 0 6px}
+.mc-contact-direct a{color:#C9A84C;font-weight:700;text-decoration:none;font-size:.88rem}
+.mc-form-card{background:#111;border:1px solid #2a2a2a;border-radius:12px;padding:28px}
+.mc-form-card h3{font-size:1.05rem;font-weight:700;color:#fff;margin:0 0 4px}
+.mc-form-card>p{font-size:.82rem;color:#64748B;margin:0 0 20px}
+.mc-field{margin-bottom:12px}
+.mc-field input,.mc-field textarea,.mc-field select{width:100%;padding:12px 14px;background:#1a1a1a;border:1px solid #2a2a2a;border-radius:6px;color:#e8e8e8;font-size:.88rem;font-family:inherit;box-sizing:border-box;transition:border-color .2s;outline:none}
+.mc-field input:focus,.mc-field textarea:focus,.mc-field select:focus{border-color:#C9A84C}
+.mc-field input::placeholder,.mc-field textarea::placeholder{color:#3a3a3a}
+.mc-field textarea{resize:vertical;min-height:80px}
+.mc-field select{appearance:none;cursor:pointer;color:#e8e8e8}
+.mc-field select option{background:#1a1a1a}
+.mc-submit{width:100%;background:#C9A84C;color:#0f0f0f;border:none;padding:13px;border-radius:6px;font-size:.95rem;font-weight:700;cursor:pointer;font-family:inherit;transition:background .2s;margin-top:4px}
+.mc-submit:hover:not(:disabled){background:#b8952f}
+.mc-submit:disabled{opacity:.5;cursor:not-allowed}
+.mc-success{display:none;text-align:center;padding:28px 12px}
+.mc-success-icon{font-size:2.5rem;margin-bottom:10px;color:#C9A84C}
+.mc-success h3{color:#C9A84C;font-size:1.2rem;font-weight:700;margin:0 0 8px}
+.mc-success p{color:#94A3B8;font-size:.88rem;margin:0 0 18px;line-height:1.7}
+.mc-success a{color:#C9A84C;font-weight:700}
+@media(max-width:860px){.mc-contact-inner{grid-template-columns:1fr;gap:32px}}
+@media(max-width:540px){.mc-contact{padding:40px 0}.mc-form-card{padding:20px 16px}.mc-contact-inner{padding:0 14px}}
+</style>
+<section class="mc-contact" id="contact">
+  <div class="mc-contact-inner">
+    <div class="mc-contact-left">
+      <h2>Get a Free <em>Revenue Strategy Call</em></h2>
+      <p>30 minutes with Mark Gabrielli. No pitch. A direct read on your biggest marketing gaps and what moves revenue fastest. Responds personally within 24 hours.</p>
+      <div class="mc-contact-proof">
+        <div class="mc-contact-proof-item"><span>&#10003;</span><span>$135M+ in qualified B2B pipeline built for clients</span></div>
+        <div class="mc-contact-proof-item"><span>&#10003;</span><span>90% client retention rate</span></div>
+        <div class="mc-contact-proof-item"><span>&#10003;</span><span>Retainer starts at $8K/month, launches in 1-2 weeks</span></div>
+        <div class="mc-contact-proof-item"><span>&#10003;</span><span>4.9 stars across review platforms</span></div>
+      </div>
+      <div class="mc-contact-direct">
+        <p>Prefer to reach out directly?</p>
+        <a href="mailto:mark@markcmo.com">mark@markcmo.com</a>
+        &nbsp;&nbsp;&#183;&nbsp;&nbsp;
+        <a href="tel:+13219175738">+1 (321) 917-5738</a>
+      </div>
+    </div>
+    <div class="mc-form-card">
+      <h3>Book a Free Strategy Call</h3>
+      <p>60 seconds. Mark responds personally within 24 hours.</p>
+      <div id="mc-card">
+        <form id="mc-form" novalidate>
+          <input type="hidden" name="form-name" value="page-contact">
+          <input type="text" name="bot-field" style="display:none" tabindex="-1" autocomplete="off">
+          <div class="mc-field"><input type="text" name="name" placeholder="Your Full Name *" required autocomplete="name"></div>
+          <div class="mc-field"><input type="email" name="email" placeholder="Work Email *" required autocomplete="email"></div>
+          <div class="mc-field"><input type="text" name="company" placeholder="Company Name" autocomplete="organization"></div>
+          <div class="mc-field"><input type="tel" name="phone" placeholder="Phone (optional)" autocomplete="tel"></div>
+          <div class="mc-field">
+            <select name="service">
+              <option value="" disabled selected>What are you looking for?</option>
+              <option value="fractional-cmo">Fractional CMO Retainer ($8K-$20K/mo)</option>
+              <option value="revenue-audit">Revenue Leak Audit ($7,500)</option>
+              <option value="vip-day">CMO VIP Day ($4,500)</option>
+              <option value="founders-circle">Founders Circle ($25K/yr)</option>
+              <option value="fractional-coo">Fractional COO Services</option>
+              <option value="unsure">Not sure yet - need a consult</option>
+            </select>
+          </div>
+          <div class="mc-field"><textarea name="message" placeholder="Biggest revenue challenge right now? (optional)"></textarea></div>
+          <button type="submit" id="mc-btn" class="mc-submit">Book Free Strategy Call &#8594;</button>
+          <div style="margin-top:8px;font-size:.72rem;color:#3a3a3a;text-align:center">No spam. No sales team. Just Mark.</div>
+        </form>
+      </div>
+      <div id="mc-success" class="mc-success">
+        <div class="mc-success-icon">&#10003;</div>
+        <h3>You are in. Check your inbox.</h3>
+        <p>Mark will personally follow up within 24 hours.<br>Or reach him directly: <a href="mailto:mark@markcmo.com">mark@markcmo.com</a> &#183; <a href="tel:+13219175738">+1 (321) 917-5738</a></p>
+      </div>
+    </div>
+  </div>
+</section>
+<script>
+(function(){
+  var _t;
+  document.addEventListener('input',function(){
+    clearTimeout(_t);_t=setTimeout(function(){
+      var f=document.getElementById('mc-form');if(!f)return;
+      var d=new FormData(f),o={};d.forEach(function(v,k){if(v&&k!=='bot-field')o[k]=v;});
+      o._page=location.pathname;o._ts=new Date().toISOString();
+      try{localStorage.setItem('mc_partial',JSON.stringify(o));}catch(e){}
+    },3000);
+  });
+  var form=document.getElementById('mc-form');if(!form)return;
+  form.addEventListener('submit',function(e){
+    e.preventDefault();
+    var btn=document.getElementById('mc-btn'),card=document.getElementById('mc-card'),suc=document.getElementById('mc-success');
+    if(!btn||!card||!suc)return;
+    btn.textContent='Sending...';btn.disabled=true;
+    var d=new FormData(form);
+    var p={'form-name':d.get('form-name')||'page-contact','name':d.get('name')||'','email':d.get('email')||'','company':d.get('company')||'','phone':d.get('phone')||'','service':d.get('service')||'','message':d.get('message')||''};
+    try{localStorage.setItem('mc_lead_'+Date.now(),JSON.stringify(p));}catch(ex){}
+    fetch('/api/lead',{method:'POST',headers:{'Content-Type':'application/x-www-form-urlencoded'},body:new URLSearchParams(p).toString()})
+    .then(function(){card.style.display='none';suc.style.display='block';})
+    .catch(function(){card.style.display='none';suc.style.display='block';
+      setTimeout(function(){window.open('mailto:mark@markcmo.com?subject=Inquiry&body=Name:+'+encodeURIComponent(p.name)+'%0AEmail:+'+encodeURIComponent(p.email),'_blank');},400);
+    });
+  });
+})();
+</script>
+<script src="/linkedin-widget.js" defer></script>
+</body>
+</html>

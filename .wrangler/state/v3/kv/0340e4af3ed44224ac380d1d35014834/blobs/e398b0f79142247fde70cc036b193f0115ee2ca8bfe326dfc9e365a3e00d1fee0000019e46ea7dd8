@@ -1,0 +1,415 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Verify Diploma - MarkCMO Academy</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Barlow:wght@400;600;700;900&family=DM+Mono&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/style.css">
+<style>
+:root{--black:#060606;--surface:#0d0d0d;--card:#131313;--card2:#181818;--border:#1e1e1e;--border2:#252525;--gold:#C9A84C;--gold-dim:rgba(201,168,76,0.12);--text:#f0f0f0;--dim:#777;--green:#4CAF72;--red:#e05555}
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:var(--black);color:var(--text);font-family:'Barlow',sans-serif;min-height:100vh;display:flex;flex-direction:column}
+nav{border-bottom:1px solid var(--border);padding:0 40px;height:56px;display:flex;align-items:center;justify-content:space-between;background:var(--surface)}
+.nav-logo{font-family:'Bebas Neue',sans-serif;font-size:22px;letter-spacing:3px;color:var(--gold);text-decoration:none}
+.nav-links{display:flex;gap:32px}
+.nav-links a{font-size:11px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--dim);text-decoration:none;transition:color 0.2s}
+.nav-links a:hover{color:var(--text)}
+.hero{text-align:center;padding:80px 40px 60px;border-bottom:1px solid var(--border)}
+.hero-eyebrow{font-size:10px;font-weight:700;letter-spacing:4px;text-transform:uppercase;color:var(--gold);margin-bottom:16px}
+.hero-title{font-family:'Bebas Neue',sans-serif;font-size:72px;letter-spacing:2px;line-height:1;margin-bottom:16px}
+.hero-sub{font-size:15px;color:var(--dim);max-width:520px;margin:0 auto}
+.verify-box{max-width:600px;margin:60px auto;padding:0 40px}
+.input-group{margin-bottom:24px}
+.input-label{font-size:10px;font-weight:700;letter-spacing:3px;text-transform:uppercase;color:var(--dim);margin-bottom:10px;display:block}
+.verify-input{width:100%;background:var(--card2);border:1px solid var(--border2);color:var(--text);padding:14px 16px;font-size:15px;font-family:'Barlow',sans-serif;font-weight:600;letter-spacing:2px;text-transform:uppercase;outline:none;transition:border-color 0.2s}
+.verify-input:focus{border-color:rgba(201,168,76,0.5)}
+.verify-input::placeholder{color:var(--dim);letter-spacing:1px;text-transform:none}
+.verify-btn{width:100%;background:var(--gold);color:#000;border:none;padding:16px;font-size:12px;font-weight:900;letter-spacing:3px;text-transform:uppercase;cursor:pointer;transition:background 0.2s;font-family:'Barlow',sans-serif}
+.verify-btn:hover{background:#fff}
+.verify-btn:disabled{opacity:0.5;cursor:not-allowed}
+.result-card{margin-top:40px;border:1px solid var(--border2);background:var(--card);padding:32px}
+.result-card.valid{border-color:var(--green)}
+.result-card.invalid{border-color:var(--red)}
+.result-badge{font-size:10px;font-weight:900;letter-spacing:3px;text-transform:uppercase;margin-bottom:20px;display:flex;align-items:center;gap:8px}
+.result-badge.valid{color:var(--green)}
+.result-badge.invalid{color:var(--red)}
+.result-badge::before{content:'';width:8px;height:8px;border-radius:50%;background:currentColor;display:inline-block}
+.result-name{font-family:'Bebas Neue',sans-serif;font-size:40px;letter-spacing:2px;margin-bottom:4px}
+.result-course{font-size:13px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--gold);margin-bottom:20px}
+.result-stats{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--border);margin-bottom:20px}
+.result-stat{background:var(--card2);padding:16px;text-align:center}
+.result-stat-val{font-family:'Bebas Neue',sans-serif;font-size:28px;letter-spacing:1px;color:var(--gold)}
+.result-stat-label{font-size:9px;letter-spacing:2px;text-transform:uppercase;color:var(--dim);margin-top:2px}
+.result-meta{display:flex;gap:24px;flex-wrap:wrap}
+.result-meta-item{font-size:12px;color:var(--dim)}
+.result-meta-item strong{color:var(--text);font-weight:700}
+.hidden{display:none}
+.divider{height:1px;background:var(--border);margin:20px 0}
+.trust-row{display:flex;justify-content:center;gap:48px;padding:40px;border-top:1px solid var(--border);margin-top:auto}
+.trust-item{text-align:center}
+.trust-val{font-family:'Bebas Neue',sans-serif;font-size:32px;color:var(--gold)}
+.trust-label{font-size:9px;letter-spacing:2px;text-transform:uppercase;color:var(--dim);margin-top:4px}
+.spinner{width:20px;height:20px;border:2px solid var(--border2);border-top-color:var(--gold);border-radius:50%;animation:spin 0.8s linear infinite;display:inline-block;vertical-align:middle;margin-right:8px}
+@keyframes spin{to{transform:rotate(360deg)}}
+
+    html, body, * { cursor: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAARCAYAAADUryzEAAAAV0lEQVR42mMQFBT8z0AJABlwbFnIf4oNINsQZAPIMgTdAJINwWYASYbgMoBoQ/AZQJQhhAwgaAguA4iOHXSFJMcKSANME4yNjEkKSLLzxcAbgBwWDPQGAEWguILiE6w1AAAAAElFTkSuQmCC') 0 0, default !important; }
+</style>
+
+  <meta name="description" content="Verify Diploma - MarkCMO Academy - MarkCMO provides fractional CMO and strategic marketing services for growth-stage companies.">
+  <link rel="canonical" href="https://markcmo.com/verify.html">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Verify Diploma - MarkCMO Academy">
+  <meta property="og:description" content="Verify Diploma - MarkCMO Academy - MarkCMO provides fractional CMO and strategic marketing services for growth-stage companies.">
+  <meta property="og:url" content="https://markcmo.com/verify.html">
+  <meta property="og:site_name" content="MarkCMO">
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position": 1,
+      "name": "Home",
+      "item": "https://markcmo.com/"
+    },
+    {
+      "@type": "ListItem",
+      "position": 2,
+      "name": "Verify",
+      "item": "https://markcmo.com/verify.html"
+    }
+  ]
+}
+</script>
+<meta name="author" content="Mark Gabrielli"/>
+<link rel="author" href="https://markcmo.com/about.html"/>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebPage",
+  "name": "Verify Diploma - MarkCMO Academy",
+  "description": "Verify Diploma - MarkCMO Academy - MarkCMO provides fractional CMO and strategic marketing services for growth-stage companies.",
+  "url": "https://markcmo.com/verify.html",
+  "author": {
+    "@type": "Person",
+    "name": "Mark Gabrielli",
+    "url": "https://markcmo.com/about.html",
+    "sameAs": [
+      "https://www.linkedin.com/in/marklgabrielli/",
+      "https://markcmo.com"
+    ]
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "MarkCMO",
+    "url": "https://markcmo.com",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "https://markcmo.com/mark-photo.webp"
+    }
+  },
+  "dateModified": "2026-05-08",
+  "inLanguage": "en-US"
+}
+</script>
+</head>
+<body>
+<nav class="nav" id="mainNav">
+<a href="/index.html" class="nav-logo">
+<div class="nav-logo-avatar">
+<img src="/mark-photo.webp" alt="Mark Gabrielli" />
+</div>
+<div class="nav-logo-text">
+<strong>Mark Gabrielli</strong>
+<span>Fractional CMO &amp; COO</span>
+</div>
+</a>
+<ul class="nav-links">
+<li><a href="/about.html">About</a></li>
+<li><a href="/services.html">Services</a></li>
+<li><a href="/magnet-framework.html" style="color:#C9A84C;font-weight:600;">MAGNET&trade;</a></li>
+<li><a href="/results.html">Results</a></li>
+<li><a href="/blog">Insights</a></li>
+<li><a href="https://academy.markcmo.com" target="_blank" style="color:#C9A84C;">Academy</a></li>
+</ul>
+<div class="nav-right">
+<a href="/book.html" class="nav-btn">Book a Free Call</a>
+</div>
+<div class="nav-hamburger" id="navHam"><span></span><span></span><span></span></div>
+</nav>
+<div class="mobile-drawer" id="mobileDrawer">
+<a href="/about.html">About</a>
+<a href="/services.html">Services</a>
+<a href="/magnet-framework.html" style="color:#C9A84C;font-weight:600;">MAGNET Framework&trade;</a>
+<a href="/results.html">Results</a>
+<a href="/blog">Insights</a>
+<a href="https://academy.markcmo.com" target="_blank">Academy</a>
+<a href="/book.html" style="color:#C9A84C;font-weight:700;">Book a Free Strategy Call &rarr;</a>
+</div>
+
+<div class="hero">
+  <div class="hero-eyebrow">Credential Verification</div>
+  <div style="background:#0d1b27;border-left:3px solid #2563EB;padding:1.25rem 1.5rem;margin:0 auto 0;max-width:1100px;border-radius:0 6px 6px 0;"><strong style="color:#C9A84C;font-size:.75rem;font-family:'DM Mono ',monospace;text-transform:uppercase;letter-spacing:.1em;display:block;margin-bottom:.5rem;">Quick Answer</strong><p style="color:#ccc;margin:0;line-height:1.75;font-size:.95rem;">MarkCMO Academy diplomas are verifiable digital credentials. Enter the diploma ID from your certificate to instantly confirm authenticity, the course completed, and the graduate name - useful for employers, clients, or partners reviewing your qualifications.</p></div>
+<h1 class="hero-title">VERIFY A DIPLOMA</h1>
+  <p class="hero-sub">Enter a diploma number to verify authenticity. All MarkCMO Academy credentials are permanently recorded and publicly verifiable.</p>
+</div>
+
+<div class="verify-box">
+  <div class="input-group">
+    <label class="input-label" for="diploma-input">Diploma Number</label>
+    <input id="diploma-input" class="verify-input" placeholder="e.g. CMO-2026-4821" maxlength="20" oninput="this.value=this.value.toUpperCase()">
+  </div>
+  <button class="verify-btn" id="verify-btn" onclick="verifyDiploma()">Verify Credential →</button>
+
+  <div id="result-area" class="hidden">
+    <div id="result-valid" class="result-card valid hidden">
+      <div class="result-badge valid">✓ Verified - Authentic Credential</div>
+      <div class="result-name" id="r-name"></div>
+      <div class="result-course" id="r-course"></div>
+      <div class="result-stats">
+        <div class="result-stat"><div class="result-stat-val" id="r-gpa"></div><div class="result-stat-label">GPA</div></div>
+        <div class="result-stat"><div class="result-stat-val" id="r-letter"></div><div class="result-stat-label">Grade</div></div>
+        <div class="result-stat"><div class="result-stat-val" id="r-year"></div><div class="result-stat-label">Year</div></div>
+      </div>
+      <div class="result-meta">
+        <div class="result-meta-item"><strong id="r-designation"></strong></div>
+        <div class="divider" style="width:100%;margin:12px 0"></div>
+        <div class="result-meta-item">Diploma # <strong id="r-dipnum"></strong></div>
+        <div class="result-meta-item">Completed <strong id="r-date"></strong></div>
+        <div class="result-meta-item">Issued by <strong>MarkCMO Academy - Mark Donnigan, Dean</strong></div>
+      </div>
+    </div>
+    <div id="result-invalid" class="result-card invalid hidden">
+      <div class="result-badge invalid">✗ Not Found - Diploma Not Verified</div>
+      <p style="color:var(--dim);font-size:14px;line-height:1.8">No credential matching this diploma number was found in our records. Please check the number and try again. If you believe this is an error, contact <a href="mailto:mark@markcmo.com" style="color:var(--gold)">mark@markcmo.com</a>.</p>
+    </div>
+  </div>
+</div>
+
+<div class="trust-row">
+  <div class="trust-item"><div class="trust-val">4.0</div><div class="trust-label">GPA Scale</div></div>
+  <div class="trust-item"><div class="trust-val">14</div><div class="trust-label">Courses</div></div>
+  <div class="trust-item"><div class="trust-val">600+</div><div class="trust-label">Lessons</div></div>
+  <div class="trust-item"><div class="trust-val">50Q</div><div class="trust-label">Final Exam</div></div>
+</div>
+
+<script>
+// Pre-fill from URL param
+const urlParam = new URLSearchParams(location.search).get('id');
+if (urlParam) {
+  document.getElementById('diploma-input').value = urlParam.toUpperCase();
+  setTimeout(verifyDiploma, 300);
+}
+
+async function verifyDiploma() {
+  const dipNum = document.getElementById('diploma-input').value.trim().toUpperCase();
+  if (!dipNum || dipNum.length < 5) { alert('Please enter a diploma number.'); return; }
+
+  const btn = document.getElementById('verify-btn');
+  btn.disabled = true;
+  btn.innerHTML = '<span class="spinner"></span>Verifying...';
+  document.getElementById('result-area').classList.add('hidden');
+  document.getElementById('result-valid').classList.add('hidden');
+  document.getElementById('result-invalid').classList.add('hidden');
+
+  try {
+    const resp = await fetch('/.netlify/functions/course-graduate');
+    const data = await resp.json();
+    const grads = data.graduates || [];
+    const grad = grads.find(g => g.diplomaNumber === dipNum);
+
+    document.getElementById('result-area').classList.remove('hidden');
+
+    if (grad) {
+      document.getElementById('r-name').textContent = grad.name.toUpperCase();
+      document.getElementById('r-course').textContent = grad.courseTitle || grad.course;
+      document.getElementById('r-gpa').textContent = grad.gpa;
+      document.getElementById('r-letter').textContent = grad.letter || '-';
+      document.getElementById('r-year').textContent = grad.completedAt ? new Date(grad.completedAt).getFullYear() : '2026';
+      document.getElementById('r-designation').textContent = grad.designation || '';
+      document.getElementById('r-dipnum').textContent = grad.diplomaNumber;
+      const d = grad.completedAt ? new Date(grad.completedAt) : new Date();
+      document.getElementById('r-date').textContent = d.toLocaleDateString('en-US', { month: 'long', year: 'numeric' });
+      document.getElementById('result-valid').classList.remove('hidden');
+    } else {
+      document.getElementById('result-invalid').classList.remove('hidden');
+    }
+  } catch(e) {
+    document.getElementById('result-area').classList.remove('hidden');
+    document.getElementById('result-invalid').classList.remove('hidden');
+  }
+
+  btn.disabled = false;
+  btn.textContent = 'Verify Credential →';
+}
+
+document.getElementById('diploma-input').addEventListener('keydown', e => {
+  if (e.key === 'Enter') verifyDiploma();
+});
+</script>
+
+<script>
+  // ─── Custom Cursor ───
+  var cur = document.getElementById('custom-cursor');
+  if (cur) {
+    document.addEventListener('mousemove', function(e) {
+      cur.style.left = e.clientX + 'px';
+      cur.style.top = e.clientY + 'px';
+    });
+    document.addEventListener('mousedown', function() { cur.classList.add('clicking'); });
+    document.addEventListener('mouseup', function() { cur.classList.remove('clicking'); });
+  }
+</script>
+<script>
+(function(){
+  var bar=document.createElement('div');bar.id='scroll-progress';
+  document.body.prepend(bar);
+  var nav=document.querySelector('nav');
+  window.addEventListener('scroll',function(){
+    var h=document.documentElement,b=document.body,
+        st='scrollTop',sh='scrollHeight';
+    var pct=(h[st]||b[st])/((h[sh]||b[sh])-h.clientHeight)*100;
+    bar.style.width=pct+'%';
+    if((h[st]||b[st])>80){nav&&nav.classList.add('scrolled');}
+    else{nav&&nav.classList.remove('scrolled');}
+  },{passive:true});
+})();
+</script>
+<script>
+(function(){
+  var nav=document.getElementById('mainNav');
+  var ham=document.getElementById('navHam');
+  var drw=document.getElementById('mobileDrawer');
+  if(nav) window.addEventListener('scroll',function(){
+    nav.classList.toggle('scrolled',window.scrollY>20);
+  },{passive:true});
+  if(ham&&drw){
+    ham.addEventListener('click',function(){drw.classList.toggle('open');});
+    drw.querySelectorAll('a').forEach(function(a){
+      a.addEventListener('click',function(){drw.classList.remove('open');});
+    });
+  }
+})();
+</script>
+<style id="mc-form-styles">
+.mc-contact{background:linear-gradient(135deg,#050919 0%,#0A1628 60%,#0d1b27 100%);padding:64px 0;border-top:1px solid #2a2a2a;margin-top:0}
+.mc-contact-inner{max-width:1100px;margin:0 auto;padding:0 24px;display:grid;grid-template-columns:1fr 1fr;gap:56px;align-items:start}
+.mc-contact-left h2{font-family:'Bebas Neue',Barlow,-apple-system,sans-serif;font-size:clamp(1.8rem,4vw,2.8rem);font-weight:400;letter-spacing:.03em;color:#fff;margin:0 0 14px;line-height:1.1}
+.mc-contact-left h2 em{color:#C9A84C;font-style:normal}
+.mc-contact-left p{font-size:.92rem;color:#94A3B8;line-height:1.8;margin:0 0 24px}
+.mc-contact-proof{display:flex;flex-direction:column;gap:10px;margin-bottom:28px}
+.mc-contact-proof-item{display:flex;align-items:center;gap:10px;font-size:.85rem;color:#94A3B8}
+.mc-contact-proof-item span:first-child{color:#C9A84C;font-weight:700;font-size:1rem;flex-shrink:0}
+.mc-contact-direct{background:rgba(201,168,76,.08);border:1px solid rgba(201,168,76,.2);border-radius:8px;padding:14px 18px}
+.mc-contact-direct p{font-size:.75rem;color:#666;text-transform:uppercase;letter-spacing:.08em;margin:0 0 6px}
+.mc-contact-direct a{color:#C9A84C;font-weight:700;text-decoration:none;font-size:.88rem}
+.mc-form-card{background:#111;border:1px solid #2a2a2a;border-radius:12px;padding:28px}
+.mc-form-card h3{font-size:1.05rem;font-weight:700;color:#fff;margin:0 0 4px}
+.mc-form-card>p{font-size:.82rem;color:#64748B;margin:0 0 20px}
+.mc-field{margin-bottom:12px}
+.mc-field input,.mc-field textarea,.mc-field select{width:100%;padding:12px 14px;background:#1a1a1a;border:1px solid #2a2a2a;border-radius:6px;color:#e8e8e8;font-size:.88rem;font-family:inherit;box-sizing:border-box;transition:border-color .2s;outline:none}
+.mc-field input:focus,.mc-field textarea:focus,.mc-field select:focus{border-color:#C9A84C}
+.mc-field input::placeholder,.mc-field textarea::placeholder{color:#3a3a3a}
+.mc-field textarea{resize:vertical;min-height:80px}
+.mc-field select{appearance:none;cursor:pointer;color:#e8e8e8}
+.mc-field select option{background:#1a1a1a}
+.mc-submit{width:100%;background:#C9A84C;color:#0f0f0f;border:none;padding:13px;border-radius:6px;font-size:.95rem;font-weight:700;cursor:pointer;font-family:inherit;transition:background .2s;margin-top:4px}
+.mc-submit:hover:not(:disabled){background:#b8952f}
+.mc-submit:disabled{opacity:.5;cursor:not-allowed}
+.mc-success{display:none;text-align:center;padding:28px 12px}
+.mc-success-icon{font-size:2.5rem;margin-bottom:10px;color:#C9A84C}
+.mc-success h3{color:#C9A84C;font-size:1.2rem;font-weight:700;margin:0 0 8px}
+.mc-success p{color:#94A3B8;font-size:.88rem;margin:0 0 18px;line-height:1.7}
+.mc-success a{color:#C9A84C;font-weight:700}
+@media(max-width:860px){.mc-contact-inner{grid-template-columns:1fr;gap:32px}}
+@media(max-width:540px){.mc-contact{padding:40px 0}.mc-form-card{padding:20px 16px}.mc-contact-inner{padding:0 14px}}
+</style>
+<section class="mc-contact" id="contact">
+  <div class="mc-contact-inner">
+    <div class="mc-contact-left">
+      <h2>Get a Free <em>Revenue Strategy Call</em></h2>
+      <p>30 minutes with Mark Gabrielli. No pitch. A direct read on your biggest marketing gaps and what moves revenue fastest. Responds personally within 24 hours.</p>
+      <div class="mc-contact-proof">
+        <div class="mc-contact-proof-item"><span>&#10003;</span><span>$135M+ in qualified B2B pipeline built for clients</span></div>
+        <div class="mc-contact-proof-item"><span>&#10003;</span><span>90% client retention rate</span></div>
+        <div class="mc-contact-proof-item"><span>&#10003;</span><span>Retainer starts at $8K/month, launches in 1-2 weeks</span></div>
+        <div class="mc-contact-proof-item"><span>&#10003;</span><span>4.9 stars across review platforms</span></div>
+      </div>
+      <div class="mc-contact-direct">
+        <p>Prefer to reach out directly?</p>
+        <a href="mailto:mark@markcmo.com">mark@markcmo.com</a>
+        &nbsp;&nbsp;&#183;&nbsp;&nbsp;
+        <a href="tel:+13219175738">+1 (321) 917-5738</a>
+      </div>
+    </div>
+    <div class="mc-form-card">
+      <h3>Book a Free Strategy Call</h3>
+      <p>60 seconds. Mark responds personally within 24 hours.</p>
+      <div id="mc-card">
+        <form id="mc-form" novalidate>
+          <input type="hidden" name="form-name" value="page-contact">
+          <input type="text" name="bot-field" style="display:none" tabindex="-1" autocomplete="off">
+          <div class="mc-field"><input type="text" name="name" placeholder="Your Full Name *" required autocomplete="name"></div>
+          <div class="mc-field"><input type="email" name="email" placeholder="Work Email *" required autocomplete="email"></div>
+          <div class="mc-field"><input type="text" name="company" placeholder="Company Name" autocomplete="organization"></div>
+          <div class="mc-field"><input type="tel" name="phone" placeholder="Phone (optional)" autocomplete="tel"></div>
+          <div class="mc-field">
+            <select name="service">
+              <option value="" disabled selected>What are you looking for?</option>
+              <option value="fractional-cmo">Fractional CMO Retainer ($8K-$20K/mo)</option>
+              <option value="revenue-audit">Revenue Leak Audit ($7,500)</option>
+              <option value="vip-day">CMO VIP Day ($4,500)</option>
+              <option value="founders-circle">Founders Circle ($25K/yr)</option>
+              <option value="fractional-coo">Fractional COO Services</option>
+              <option value="unsure">Not sure yet - need a consult</option>
+            </select>
+          </div>
+          <div class="mc-field"><textarea name="message" placeholder="Biggest revenue challenge right now? (optional)"></textarea></div>
+          <button type="submit" id="mc-btn" class="mc-submit">Book Free Strategy Call &#8594;</button>
+          <div style="margin-top:8px;font-size:.72rem;color:#3a3a3a;text-align:center">No spam. No sales team. Just Mark.</div>
+        </form>
+      </div>
+      <div id="mc-success" class="mc-success">
+        <div class="mc-success-icon">&#10003;</div>
+        <h3>You are in. Check your inbox.</h3>
+        <p>Mark will personally follow up within 24 hours.<br>Or reach him directly: <a href="mailto:mark@markcmo.com">mark@markcmo.com</a> &#183; <a href="tel:+13219175738">+1 (321) 917-5738</a></p>
+      </div>
+    </div>
+  </div>
+</section>
+<script>
+(function(){
+  var _t;
+  document.addEventListener('input',function(){
+    clearTimeout(_t);_t=setTimeout(function(){
+      var f=document.getElementById('mc-form');if(!f)return;
+      var d=new FormData(f),o={};d.forEach(function(v,k){if(v&&k!=='bot-field')o[k]=v;});
+      o._page=location.pathname;o._ts=new Date().toISOString();
+      try{localStorage.setItem('mc_partial',JSON.stringify(o));}catch(e){}
+    },3000);
+  });
+  var form=document.getElementById('mc-form');if(!form)return;
+  form.addEventListener('submit',function(e){
+    e.preventDefault();
+    var btn=document.getElementById('mc-btn'),card=document.getElementById('mc-card'),suc=document.getElementById('mc-success');
+    if(!btn||!card||!suc)return;
+    btn.textContent='Sending...';btn.disabled=true;
+    var d=new FormData(form);
+    var p={'form-name':d.get('form-name')||'page-contact','name':d.get('name')||'','email':d.get('email')||'','company':d.get('company')||'','phone':d.get('phone')||'','service':d.get('service')||'','message':d.get('message')||''};
+    try{localStorage.setItem('mc_lead_'+Date.now(),JSON.stringify(p));}catch(ex){}
+    fetch('/api/lead',{method:'POST',headers:{'Content-Type':'application/x-www-form-urlencoded'},body:new URLSearchParams(p).toString()})
+    .then(function(){card.style.display='none';suc.style.display='block';})
+    .catch(function(){card.style.display='none';suc.style.display='block';
+      setTimeout(function(){window.open('mailto:mark@markcmo.com?subject=Inquiry&body=Name:+'+encodeURIComponent(p.name)+'%0AEmail:+'+encodeURIComponent(p.email),'_blank');},400);
+    });
+  });
+})();
+</script>
+<script src="/linkedin-widget.js" defer></script>
+</body>
+</html>

@@ -1,0 +1,931 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta name="robots" content="noindex, nofollow">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Graduate Profile - MarkCMO Academy</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Barlow:ital,wght@0,300;0,400;0,600;0,700;0,900;1,400&family=DM+Mono:wght@400;500&family=Playfair+Display:ital,wght@0,400;1,400&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/style.css">
+<style>
+:root{
+  --black:#060606;--surface:#0d0d0d;--card:#131313;--card2:#181818;
+  --border:#1e1e1e;--border2:#252525;
+  --gold:#C9A84C;--gold-dim:rgba(201,168,76,0.1);--gold-mid:rgba(201,168,76,0.3);--gold-glow:rgba(201,168,76,0.06);
+  --text:#f0f0f0;--dim:#666;--dim2:#444;
+  --green:#4CAF72;--red:#e05555;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{background:var(--black);color:var(--text);font-family:'Barlow',sans-serif;min-height:100vh}
+a{text-decoration:none;color:inherit}
+button{cursor:pointer;font-family:'Barlow',sans-serif}
+/* ── NAV ── */
+nav{border-bottom:1px solid var(--border);padding:0 48px;height:56px;display:flex;align-items:center;justify-content:space-between;background:var(--surface);position:sticky;top:0;z-index:100}
+.nav-logo{font-family:'Bebas Neue',sans-serif;font-size:22px;letter-spacing:3px;color:var(--gold)}
+.nav-links{display:flex;gap:28px;align-items:center}
+.nav-link{font-size:11px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--dim);transition:color .2s}
+.nav-link:hover{color:var(--text)}
+.nav-btn{font-size:11px;font-weight:900;letter-spacing:2px;text-transform:uppercase;background:var(--gold);color:#000;padding:8px 20px;border:none;transition:background .2s}
+.nav-btn:hover{background:#fff}
+/* ── LOADING / ERROR STATES ── */
+.state{display:none}
+.state.active{display:block}
+.center-state{min-height:60vh;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:60px 40px;gap:16px}
+.spinner{width:48px;height:48px;border:2px solid var(--border2);border-top-color:var(--gold);border-radius:50%;animation:spin .8s linear infinite;margin:0 auto}
+@keyframes spin{to{transform:rotate(360deg)}}
+.state-title{font-family:'Bebas Neue',sans-serif;font-size:42px;letter-spacing:2px;color:var(--dim)}
+.state-sub{color:var(--dim);font-size:14px;max-width:400px;line-height:1.7}
+/* ── PROFILE HERO ── */
+.profile-hero{padding:60px 48px 0;max-width:1100px;margin:0 auto}
+.hero-top{display:grid;grid-template-columns:auto 1fr auto;gap:40px;align-items:flex-start}
+.hero-photo-wrap{position:relative}
+.hero-photo{width:120px;height:120px;border-radius:50%;border:3px solid var(--gold);background:var(--card2);display:flex;align-items:center;justify-content:center;font-size:42px;font-weight:700;overflow:hidden;flex-shrink:0;color:var(--gold);font-family:'Bebas Neue',sans-serif;letter-spacing:2px}
+.hero-photo img{width:100%;height:100%;object-fit:cover}
+.hero-info{padding-top:8px}
+.hero-name{font-family:'Bebas Neue',sans-serif;font-size:52px;letter-spacing:3px;line-height:.95;margin-bottom:10px}
+.hero-title-line{font-size:15px;font-weight:600;color:var(--text);margin-bottom:4px}
+.hero-company-line{font-size:14px;color:var(--dim);margin-bottom:4px}
+.hero-location-line{display:none;align-items:center;gap:6px;font-size:13px;color:var(--dim);margin-bottom:12px}
+.hero-bio{font-size:15px;color:#aaa;line-height:1.75;max-width:640px;margin-top:10px}
+.hero-bio-placeholder{font-size:14px;color:var(--dim2);font-style:italic;line-height:1.7;max-width:560px;margin-top:10px;border:1px dashed var(--border2);padding:16px 20px;display:none}
+.hero-social{display:flex;gap:10px;flex-wrap:wrap;margin-top:16px}
+.social-link{display:inline-flex;align-items:center;gap:6px;font-size:11px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--dim);border:1px solid var(--border2);padding:6px 14px;transition:all .2s}
+.social-link:hover{color:var(--gold);border-color:var(--gold-mid)}
+.hero-actions{display:flex;flex-direction:column;gap:10px;align-items:flex-end;padding-top:8px}
+.edit-btn{font-size:11px;font-weight:900;letter-spacing:2px;text-transform:uppercase;background:var(--gold);color:#000;padding:10px 20px;border:none;transition:all .2s;white-space:nowrap}
+.edit-btn:hover{background:#fff}
+.share-btn{font-size:11px;font-weight:700;letter-spacing:2px;text-transform:uppercase;background:none;color:var(--dim);border:1px solid var(--border2);padding:9px 18px;transition:all .2s;white-space:nowrap}
+.share-btn:hover{color:var(--text);border-color:var(--dim)}
+#edit-btn-area{display:none}
+/* ── COMPLETE PROFILE PROMPT (owner only) ── */
+.complete-prompt{max-width:1100px;margin:24px auto 0;padding:0 48px;display:none}
+.complete-prompt-inner{background:linear-gradient(135deg,rgba(201,168,76,0.06),transparent);border:1px solid rgba(201,168,76,0.25);padding:20px 28px;display:flex;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap}
+.complete-prompt p{font-size:13px;color:var(--dim);line-height:1.6}
+.complete-prompt p strong{color:var(--gold)}
+.complete-prompt-btn{font-size:11px;font-weight:900;letter-spacing:2px;text-transform:uppercase;background:var(--gold);color:#000;border:none;padding:10px 20px;white-space:nowrap;flex-shrink:0;transition:all .2s}
+.complete-prompt-btn:hover{background:#fff}
+/* ── CREDENTIAL BAND ── */
+.cred-band{max-width:1100px;margin:40px auto 0;padding:0 48px}
+.cred-band-inner{background:var(--card);border:1px solid var(--border2);display:grid;grid-template-columns:1fr 1fr 1fr 1fr auto;gap:0}
+.cred-cell{padding:20px 24px;border-right:1px solid var(--border);text-align:center}
+.cred-cell:last-child{border-right:none}
+.cred-val{font-family:'Bebas Neue',sans-serif;font-size:32px;color:var(--gold);line-height:1}
+.cred-label{font-size:9px;font-weight:700;letter-spacing:3px;text-transform:uppercase;color:var(--dim);margin-top:4px}
+.cred-honors-cell{padding:20px 24px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:4px;min-width:180px}
+.cred-verified{font-size:9px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--green);display:flex;align-items:center;gap:4px;margin-top:6px}
+.cred-verified::before{content:'';width:6px;height:6px;border-radius:50%;background:var(--green);display:inline-block}
+/* ── PROFILE BODY ── */
+.profile-body{max-width:1100px;margin:0 auto;padding:40px 48px 100px;display:grid;grid-template-columns:1fr 300px;gap:40px}
+.profile-main{}
+.profile-sidebar{}
+/* ── SECTIONS ── */
+.section{margin-bottom:40px}
+.section-eyebrow{font-size:9px;font-weight:900;letter-spacing:4px;text-transform:uppercase;color:var(--gold);margin-bottom:12px;padding-bottom:10px;border-bottom:1px solid var(--border)}
+.about-text{font-size:15px;color:#bbb;line-height:1.8}
+.about-empty{font-size:14px;color:var(--dim2);font-style:italic;line-height:1.7;border:1px dashed var(--border2);padding:20px;display:none}
+/* ── DIPLOMA CARD ── */
+.diploma-mini{background:#faf8f2;color:#1a1208;padding:32px 40px;position:relative;text-align:center;overflow:hidden;border:1px solid rgba(201,168,76,0.3)}
+.diploma-mini::before{content:'';position:absolute;inset:6px;border:1px solid rgba(201,168,76,0.4);pointer-events:none}
+.dm-seal{font-size:180px;position:absolute;top:50%;left:50%;transform:translate(-50%,-55%);opacity:0.04;line-height:1;pointer-events:none}
+.dm-content{position:relative;z-index:1}
+.dm-label{font-size:9px;letter-spacing:4px;text-transform:uppercase;color:rgba(201,168,76,0.8);margin-bottom:2px}
+.dm-academy{font-family:'Bebas Neue',sans-serif;font-size:22px;letter-spacing:4px;color:#C9A84C;line-height:1;margin-bottom:2px}
+.dm-established{font-size:8px;letter-spacing:3px;text-transform:uppercase;color:#9a7a3a;font-family:'DM Mono',monospace;margin-bottom:16px}
+.dm-div{height:1px;background:linear-gradient(90deg,transparent,rgba(201,168,76,0.4),transparent);margin:0 auto 14px;width:60%}
+.dm-certifies{font-size:10px;font-style:italic;color:#5a4a2a;margin-bottom:6px}
+.dm-name{font-family:'Playfair Display',serif;font-size:26px;font-weight:700;color:#1a1208;line-height:1;margin-bottom:10px}
+.dm-course{font-family:'Bebas Neue',sans-serif;font-size:14px;letter-spacing:2px;color:#1a1208;margin-bottom:14px}
+.dm-gpa-row{display:flex;justify-content:center;gap:28px;margin-bottom:10px}
+.dm-gpa-item{text-align:center}
+.dm-gpa-val{font-family:'DM Mono',monospace;font-size:18px;color:#C9A84C;font-weight:600;line-height:1;display:block}
+.dm-gpa-lbl{font-size:8px;letter-spacing:2px;text-transform:uppercase;color:#8a7050;margin-top:2px}
+.dm-honors{font-size:11px;font-style:italic;color:#8a6520;margin-bottom:14px}
+.dm-num{font-family:'DM Mono',monospace;font-size:9px;color:#b0905a;letter-spacing:1px;margin-top:8px}
+/* ── SIDEBAR ── */
+.sidebar-card{background:var(--card);border:1px solid var(--border);padding:24px;margin-bottom:20px}
+.sidebar-title{font-size:9px;font-weight:900;letter-spacing:3px;text-transform:uppercase;color:var(--gold);margin-bottom:16px;padding-bottom:10px;border-bottom:1px solid var(--border)}
+.meta-row{display:flex;flex-direction:column;gap:12px}
+.meta-item label{font-size:9px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--dim);display:block;margin-bottom:2px}
+.meta-item span,.meta-item a{font-size:13px;font-weight:600;color:var(--text);word-break:break-all}
+.meta-item a:hover{color:var(--gold)}
+.verified-badge{display:inline-flex;align-items:center;gap:6px;font-size:10px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--green);border:1px solid rgba(76,175,114,0.3);padding:6px 12px;margin-top:8px}
+.action-btns{display:flex;flex-direction:column;gap:8px}
+.action-btn{display:block;text-align:center;padding:12px;font-size:11px;font-weight:700;letter-spacing:2px;text-transform:uppercase;border:1px solid var(--border2);color:var(--dim);background:none;transition:all .2s;width:100%}
+.action-btn:hover{color:var(--gold);border-color:var(--gold-mid)}
+.action-btn.gold{background:var(--gold);color:#000;border-color:var(--gold)}
+.action-btn.gold:hover{background:#fff;border-color:#fff}
+/* ── EDIT MODAL ── */
+.modal-overlay{position:fixed;inset:0;background:rgba(0,0,0,0.88);z-index:999;display:none;align-items:flex-start;justify-content:center;padding:40px 20px;backdrop-filter:blur(6px);overflow-y:auto}
+.modal-overlay.open{display:flex}
+.modal{background:var(--surface);border:1px solid var(--border2);width:100%;max-width:700px;position:relative;margin:auto}
+.modal-header{position:sticky;top:0;background:var(--surface);border-bottom:1px solid var(--border);padding:22px 32px;display:flex;align-items:center;justify-content:space-between;z-index:10}
+.modal-title{font-family:'Bebas Neue',sans-serif;font-size:30px;letter-spacing:2px;color:var(--gold)}
+.modal-subtitle{font-size:12px;color:var(--dim);margin-top:2px}
+.modal-close{background:none;border:none;color:var(--dim);font-size:22px;line-height:1;padding:4px;transition:color .2s}
+.modal-close:hover{color:var(--text)}
+.modal-body{padding:32px}
+.modal-section{margin-bottom:32px}
+.modal-section:last-child{margin-bottom:0}
+.modal-section-title{font-size:10px;font-weight:900;letter-spacing:3px;text-transform:uppercase;color:var(--gold);margin-bottom:18px;padding-bottom:8px;border-bottom:1px solid var(--border)}
+.modal-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+.modal-field{display:flex;flex-direction:column;gap:7px}
+.modal-field.full{grid-column:1/-1}
+.modal-label{font-size:10px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--dim)}
+.modal-label em{color:var(--gold);font-style:normal;margin-left:3px}
+.modal-label .hint{font-weight:400;letter-spacing:0;text-transform:none;font-size:11px;color:var(--dim2);margin-left:6px}
+.modal-input{background:var(--card);border:1px solid var(--border2);color:var(--text);font-family:'Barlow',sans-serif;font-size:14px;padding:11px 14px;outline:none;transition:border-color .2s;width:100%}
+.modal-input:focus{border-color:rgba(201,168,76,0.5)}
+.modal-input::placeholder{color:var(--dim2)}
+.modal-textarea{background:var(--card);border:1px solid var(--border2);color:var(--text);font-family:'Barlow',sans-serif;font-size:14px;padding:11px 14px;outline:none;transition:border-color .2s;width:100%;resize:vertical;min-height:120px;line-height:1.65}
+.modal-textarea:focus{border-color:rgba(201,168,76,0.5)}
+.modal-textarea::placeholder{color:var(--dim2)}
+.char-counter{font-size:10px;color:var(--dim);text-align:right;margin-top:3px;font-family:'DM Mono',monospace}
+/* Photo upload in modal */
+.modal-photo-zone{border:2px dashed var(--border2);padding:28px 20px;text-align:center;transition:border-color .2s;position:relative;background:var(--card)}
+.modal-photo-zone:hover{border-color:var(--gold-mid);cursor:pointer}
+.modal-photo-zone.dragging{border-color:var(--gold);background:var(--gold-dim)}
+.modal-photo-preview{width:88px;height:88px;border-radius:50%;border:2px solid var(--gold);overflow:hidden;margin:0 auto 14px;display:flex;align-items:center;justify-content:center;font-size:28px;font-weight:700;font-family:'Bebas Neue',sans-serif;background:var(--card2);color:var(--gold)}
+.modal-photo-preview img{width:100%;height:100%;object-fit:cover}
+.modal-photo-hint{font-size:12px;color:var(--dim);line-height:1.5;margin-bottom:12px}
+.modal-photo-btn{font-size:10px;font-weight:700;letter-spacing:2px;text-transform:uppercase;background:none;border:1px solid var(--border2);color:var(--dim);padding:8px 18px;transition:all .2s}
+.modal-photo-btn:hover{border-color:var(--gold-mid);color:var(--gold)}
+/* Modal footer */
+.modal-footer{padding:20px 32px;border-top:1px solid var(--border);display:flex;gap:12px;position:sticky;bottom:0;background:var(--surface)}
+.modal-save-btn{flex:1;background:var(--gold);color:#000;border:none;padding:14px;font-size:12px;font-weight:900;letter-spacing:3px;text-transform:uppercase;transition:all .2s}
+.modal-save-btn:hover{background:#fff}
+.modal-save-btn:disabled{background:var(--dim2);color:var(--dim);cursor:not-allowed}
+.modal-cancel-btn{background:none;border:1px solid var(--border2);color:var(--dim);padding:14px 24px;font-size:11px;font-weight:700;letter-spacing:2px;text-transform:uppercase;transition:all .2s}
+.modal-cancel-btn:hover{border-color:var(--dim);color:var(--text)}
+/* ── TOAST ── */
+.toast{position:fixed;bottom:30px;left:50%;transform:translateX(-50%) translateY(80px);background:var(--card);border:1px solid var(--border);color:var(--text);padding:12px 24px;font-size:12px;font-weight:700;letter-spacing:1px;text-transform:uppercase;transition:transform .3s;z-index:9999;white-space:nowrap}
+.toast.show{transform:translateX(-50%) translateY(0)}
+.toast.gold{border-color:var(--gold);color:var(--gold)}
+.toast.green{border-color:var(--green);color:var(--green)}
+.toast.red{border-color:var(--red);color:var(--red)}
+/* ── RESPONSIVE ── */
+@media(max-width:900px){
+  .hero-top{grid-template-columns:auto 1fr;gap:24px}
+  .hero-actions{flex-direction:row;grid-column:1/-1}
+  .profile-body{grid-template-columns:1fr;padding:28px 20px 80px}
+  .cred-band-inner{grid-template-columns:repeat(3,1fr)}
+  .cred-honors-cell{grid-column:1/-1;flex-direction:row;justify-content:center;gap:16px}
+  nav{padding:0 20px}
+  .profile-hero{padding:40px 20px 0}
+  .cred-band{padding:0 20px}
+}
+@media(max-width:600px){
+  .hero-top{grid-template-columns:1fr}
+  .hero-photo-wrap{margin:0 auto}
+  .hero-info{text-align:center}
+  .hero-social{justify-content:center}
+  .modal-grid{grid-template-columns:1fr}
+  .modal-field.full{grid-column:unset}
+}
+    html, body, * { cursor: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAARCAYAAADUryzEAAAAV0lEQVR42mMQFBT8z0AJABlwbFnIf4oNINsQZAPIMgTdAJINwWYASYbgMoBoQ/AZQJQhhAwgaAguA4iOHXSFJMcKSANME4yNjEkKSLLzxcAbgBwWDPQGAEWguILiE6w1AAAAAElFTkSuQmCC') 0 0, default !important; }
+</style>
+<meta name="description" content="Graduate Profile - MarkCMO Academy - MarkCMO provides fractional CMO and strategic marketing services for growth-stage companies.">
+<link rel="canonical" href="https://markcmo.com/profile.html">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Graduate Profile - MarkCMO Academy">
+<meta property="og:description" content="Graduate Profile - MarkCMO Academy - MarkCMO provides fractional CMO and strategic marketing services for growth-stage companies.">
+<meta property="og:url" content="https://markcmo.com/profile.html">
+<meta property="og:site_name" content="MarkCMO">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position": 1,
+      "name": "Home",
+      "item": "https://markcmo.com/"
+    },
+    {
+      "@type": "ListItem",
+      "position": 2,
+      "name": "Profile",
+      "item": "https://markcmo.com/profile.html"
+    }
+  ]
+}
+</script>
+<meta name="author" content="Mark Gabrielli"/>
+<link rel="author" href="https://markcmo.com/about.html"/>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebPage",
+  "name": "Graduate Profile - MarkCMO Academy",
+  "description": "Graduate Profile - MarkCMO Academy - MarkCMO provides fractional CMO and strategic marketing services for growth-stage companies.",
+  "url": "https://markcmo.com/profile.html",
+  "author": {
+    "@type": "Person",
+    "name": "Mark Gabrielli",
+    "url": "https://markcmo.com/about.html",
+    "sameAs": [
+      "https://www.linkedin.com/in/marklgabrielli/",
+      "https://markcmo.com"
+    ]
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "MarkCMO",
+    "url": "https://markcmo.com",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "https://markcmo.com/mark-photo.webp"
+    }
+  },
+  "dateModified": "2026-05-08",
+  "inLanguage": "en-US"
+}
+</script>
+</head>
+<body>
+<nav class="nav" id="mainNav">
+<a href="/index.html" class="nav-logo">
+<div class="nav-logo-avatar">
+<img src="/mark-photo.webp" alt="Mark Gabrielli" />
+</div>
+<div class="nav-logo-text">
+<strong>Mark Gabrielli</strong>
+<span>Fractional CMO &amp; COO</span>
+</div>
+</a>
+<ul class="nav-links">
+<li><a href="/about.html">About</a></li>
+<li><a href="/services.html">Services</a></li>
+<li><a href="/magnet-framework.html" style="color:#C9A84C;font-weight:600;">MAGNET&trade;</a></li>
+<li><a href="/results.html">Results</a></li>
+<li><a href="/blog">Insights</a></li>
+<li><a href="https://academy.markcmo.com" target="_blank" style="color:#C9A84C;">Academy</a></li>
+</ul>
+<div class="nav-right">
+<a href="/book.html" class="nav-btn">Book a Free Call</a>
+</div>
+<div class="nav-hamburger" id="navHam"><span></span><span></span><span></span></div>
+</nav>
+<div class="mobile-drawer" id="mobileDrawer">
+<a href="/about.html">About</a>
+<a href="/services.html">Services</a>
+<a href="/magnet-framework.html" style="color:#C9A84C;font-weight:600;">MAGNET Framework&trade;</a>
+<a href="/results.html">Results</a>
+<a href="/blog">Insights</a>
+<a href="https://academy.markcmo.com" target="_blank">Academy</a>
+<a href="/book.html" style="color:#C9A84C;font-weight:700;">Book a Free Strategy Call &rarr;</a>
+</div>
+<div id="state-loading" class="state active">
+<div class="center-state">
+<div class="spinner"></div>
+<p style="font-size:12px;letter-spacing:2px;text-transform:uppercase;color:var(--dim);font-family:'DM Mono',monospace;margin-top:12px">Loading profile…</p>
+</div>
+</div>
+<div id="state-error" class="state">
+<div class="center-state">
+<div style="font-size:64px;margin-bottom:8px">🎓</div>
+<div class="state-title">Profile Not Found</div>
+<p class="state-sub">This diploma number doesn't match any graduate record. Double-check the link or search the <a href="/graduation" style="color:var(--gold)">Graduate Wall</a>.</p>
+<a href="/graduation" style="display:inline-block;margin-top:24px;background:var(--gold);color:#1E293B;padding:12px 28px;font-size:11px;font-weight:900;letter-spacing:3px;text-transform:uppercase">Graduate Wall →</a>
+</div>
+</div>
+<div id="state-profile" class="state">
+<div class="complete-prompt" id="complete-prompt">
+<div class="complete-prompt-inner">
+<p>👋 <strong>Your profile is live but incomplete.</strong> Add a photo, bio, and professional details so employers, clients, and peers can find you.</p>
+<button class="complete-prompt-btn" onclick="openEditModal()">Complete Profile →</button>
+</div>
+</div>
+<div class="profile-hero">
+<div class="hero-top">
+<div class="hero-photo-wrap">
+<div class="hero-photo" id="hero-photo">?</div>
+</div>
+<div class="hero-info">
+<div class="hero-name" id="hero-name">-</div>
+<div class="hero-title-line" id="hero-title" style="display:none"></div>
+<div class="hero-company-line" id="hero-company" style="display:none"></div>
+<div class="hero-location-line" id="hero-location">
+<span style="font-size:14px">📍</span>
+<span id="hero-location-text"></span>
+</div>
+<div class="hero-bio" id="hero-bio" style="display:none"></div>
+<div class="hero-social" id="hero-social"></div>
+</div>
+<div class="hero-actions">
+<div id="edit-btn-area">
+<button class="edit-btn" onclick="openEditModal()">✏ Edit Profile</button>
+</div>
+<button class="share-btn" onclick="copyProfileLink()">↗ Share Profile</button>
+</div>
+</div>
+</div>
+<div class="cred-band">
+<div class="cred-band-inner">
+<div class="cred-cell">
+<div class="cred-val" id="cred-gpa">-</div>
+<div class="cred-label">GPA</div>
+</div>
+<div class="cred-cell">
+<div class="cred-val" id="cred-letter">-</div>
+<div class="cred-label">Grade</div>
+</div>
+<div class="cred-cell">
+<div class="cred-val" id="cred-year">2026</div>
+<div class="cred-label">Year</div>
+</div>
+<div class="cred-cell" style="text-align:left">
+<div style="font-size:12px;font-weight:700;color:var(--text);line-height:1.3;margin-bottom:4px" id="cred-course">-</div>
+<div class="cred-label">Course Completed</div>
+</div>
+<div class="cred-honors-cell" id="cred-honors-wrap" style="display:none">
+<div style="font-size:13px;font-weight:700;font-style:italic;color:var(--gold)" id="cred-honors"></div>
+<a class="cred-verified" id="cred-verify-link" href="/verify" target="_blank">✓ Verified Credential</a>
+</div>
+</div>
+</div>
+<div class="profile-body">
+<div class="profile-main">
+<div class="section">
+<div class="section-eyebrow">About</div>
+<div class="about-text" id="about-text" style="display:none"></div>
+<div class="about-empty" id="about-empty">
+No bio added yet.
+<span id="about-empty-edit" style="display:none"> <a href="#" onclick="openEditModal();return false;" style="color:var(--gold)">Add your bio →</a></span>
+</div>
+</div>
+<div class="section">
+<div class="section-eyebrow">Credential</div>
+<div class="diploma-mini">
+<div class="dm-seal">🎓</div>
+<div class="dm-content">
+<div class="dm-label">Certificate of Completion</div>
+<div class="dm-academy">MARKCMO ACADEMY</div>
+<div class="dm-established">Established 2026 · Mark Donnigan, Founder & Dean</div>
+<div class="dm-div"></div>
+<div class="dm-certifies">This certifies that</div>
+<div class="dm-name" id="dp-name">-</div>
+<div class="dm-certifies" style="margin-bottom:6px">has successfully completed the rigorous course of study in</div>
+<div class="dm-course" id="dp-course">-</div>
+<div class="dm-gpa-row">
+<div class="dm-gpa-item"><span class="dm-gpa-val" id="dp-gpa">-</span><div class="dm-gpa-lbl">GPA</div></div>
+<div class="dm-gpa-item"><span class="dm-gpa-val" id="dp-letter">-</span><div class="dm-gpa-lbl">Grade</div></div>
+<div class="dm-gpa-item"><span class="dm-gpa-val" id="dp-year">2026</span><div class="dm-gpa-lbl">Year</div></div>
+</div>
+<div class="dm-honors" id="dp-honors"></div>
+<div class="dm-num" id="dp-num">-</div>
+</div>
+</div>
+</div>
+</div>
+<div class="profile-sidebar">
+<div class="sidebar-card">
+<div class="sidebar-title">Credential Details</div>
+<div class="meta-row">
+<div class="meta-item">
+<label>Diploma Number</label>
+<span id="meta-dipnum">-</span>
+</div>
+<div class="meta-item">
+<label>Completed</label>
+<span id="meta-date">-</span>
+</div>
+<div class="meta-item">
+<label>Issued By</label>
+<span>MarkCMO Academy<br><span style="font-size:11px;color:var(--dim)">Mark Donnigan, Dean</span></span>
+</div>
+</div>
+<a class="verified-badge" id="meta-verify" href="/verify" target="_blank">✓ Verify This Credential</a>
+</div>
+<div class="sidebar-card">
+<div class="sidebar-title">Actions</div>
+<div class="action-btns">
+<button class="action-btn gold" onclick="downloadDiploma()">⬇ Download Diploma</button>
+<button class="action-btn" onclick="shareLinkedIn()">🔗 Share on LinkedIn</button>
+<button class="action-btn" onclick="copyProfileLink()">↗ Copy Profile Link</button>
+<a href="/graduation" class="action-btn" style="text-align:center;display:block">🎓 Graduate Wall</a>
+</div>
+</div>
+<div class="sidebar-card" style="text-align:center">
+<div style="font-size:32px;margin-bottom:8px">🔒</div>
+<div style="font-size:11px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--gold);margin-bottom:8px">Authentic Credential</div>
+<p style="font-size:12px;color:var(--dim);line-height:1.7">All MarkCMO Academy diplomas are permanently recorded and publicly verifiable.</p>
+<a id="verify-link-btn" href="/verify" style="display:block;margin-top:14px;padding:10px;background:var(--gold-dim);border:1px solid rgba(201,168,76,0.25);font-size:10px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--gold);transition:all .2s" onmouseover="this.style.background='var(--gold)';this.style.color='#000'" onmouseout="this.style.background='var(--gold-dim)';this.style.color='var(--gold)'">Verify Certificate →</a>
+</div>
+</div>
+</div>
+</div>
+<div class="modal-overlay" id="edit-modal" onclick="handleOverlayClick(event)">
+<div class="modal">
+<div class="modal-header">
+<div>
+<div class="modal-title">Edit Profile</div>
+<div class="modal-subtitle">Changes are saved to your public profile and graduate wall listing</div>
+</div>
+<button class="modal-close" onclick="closeEditModal()">✕</button>
+</div>
+<div class="modal-body">
+<div class="modal-section">
+<div class="modal-section-title">Profile Photo</div>
+<div class="modal-photo-zone" id="modal-drop-zone"
+ondragover="modalDragOver(event)" ondragleave="modalDragLeave()"
+ondrop="modalDrop(event)" onclick="document.getElementById('modal-photo-input').click()">
+<div class="modal-photo-preview" id="modal-photo-preview">?</div>
+<div class="modal-photo-hint">Drag & drop a photo, or click to browse<br>Square crop recommended · Max 5MB</div>
+<button class="modal-photo-btn" type="button" onclick="event.stopPropagation();document.getElementById('modal-photo-input').click()">Choose Photo</button>
+<input type="file" id="modal-photo-input" accept="image/*" style="display:none" onchange="modalPhotoSelect(event)">
+</div>
+</div>
+<div class="modal-section">
+<div class="modal-section-title">Professional Info</div>
+<div class="modal-grid">
+<div class="modal-field">
+<label class="modal-label">Professional Title</label>
+<input class="modal-input" id="edit-title" type="text" placeholder="e.g. Fractional CMO, VP of Sales">
+</div>
+<div class="modal-field">
+<label class="modal-label">Company / Organization</label>
+<input class="modal-input" id="edit-company" type="text" placeholder="Company or 'Independent'">
+</div>
+<div class="modal-field full">
+<label class="modal-label">Location</label>
+<input class="modal-input" id="edit-location" type="text" placeholder="City, State or Country">
+</div>
+<div class="modal-field full">
+<label class="modal-label">Professional Bio <em>*</em> <span class="hint">- appears on your public profile</span></label>
+<textarea class="modal-textarea" id="edit-bio" maxlength="500"
+placeholder="Who you are, what you do, and what this credential means for your career. Be specific and compelling - clients and employers will read this."
+oninput="updateCharCounter(this,'bio-counter',500)"></textarea>
+<div class="char-counter" id="bio-counter">0 / 500</div>
+</div>
+</div>
+</div>
+<div class="modal-section">
+<div class="modal-section-title">Social & Web Links</div>
+<div class="modal-grid">
+<div class="modal-field full">
+<label class="modal-label">LinkedIn URL</label>
+<input class="modal-input" id="edit-linkedin" type="text" placeholder="linkedin.com/in/yourname">
+</div>
+<div class="modal-field">
+<label class="modal-label">Website</label>
+<input class="modal-input" id="edit-website" type="text" placeholder="yoursite.com">
+</div>
+<div class="modal-field">
+<label class="modal-label">Twitter / X</label>
+<input class="modal-input" id="edit-twitter" type="text" placeholder="@handle">
+</div>
+</div>
+</div>
+</div>
+<div class="modal-footer">
+<button class="modal-cancel-btn" onclick="closeEditModal()">Cancel</button>
+<button class="modal-save-btn" id="modal-save-btn" onclick="saveProfile()">Save Changes →</button>
+</div>
+</div>
+</div>
+<div class="toast" id="toast"></div>
+<script>
+// ── STATE ────────────────────────────────────────────────────────────────────
+let GRAD = null;
+let editPhotoDataUrl = undefined;
+const DIPLOMA_NUM = new URLSearchParams(location.search).get('id') || '';
+// ── BOOT ─────────────────────────────────────────────────────────────────────
+(function init() {
+  if (!DIPLOMA_NUM) { showState('error'); return; }
+  fetch(`/.netlify/functions/course-graduate?id=${encodeURIComponent(DIPLOMA_NUM)}`)
+    .then(r => r.json())
+    .then(data => {
+      if (data.success && data.graduate) {
+        GRAD = data.graduate;
+        renderProfile(GRAD);
+        showState('profile');
+        checkEditAuth();
+      } else {
+        showState('error');
+      }
+    })
+    .catch(() => showState('error'));
+})();
+function showState(s) {
+  ['loading','error','profile'].forEach(id => {
+    const el = document.getElementById('state-' + id);
+    el.classList.toggle('active', id === s);
+  });
+}
+// ── OWNER AUTH ────────────────────────────────────────────────────────────────
+function checkEditAuth() {
+  const myDiploma = localStorage.getItem('mcademy_my_diploma');
+  const isOwner = myDiploma === DIPLOMA_NUM;
+  if (isOwner) {
+    document.getElementById('edit-btn-area').style.display = 'block';
+    // Show complete profile prompt if bio is missing
+    if (!GRAD.bio || !GRAD.bio.trim()) {
+      document.getElementById('complete-prompt').style.display = 'block';
+      document.getElementById('about-empty-edit').style.display = 'inline';
+    }
+  }
+}
+// ── RENDER ────────────────────────────────────────────────────────────────────
+function renderProfile(g) {
+  // Photo
+  const photoEl = document.getElementById('hero-photo');
+  const preview = document.getElementById('modal-photo-preview');
+  if (g.photo) {
+    photoEl.innerHTML = `<img loading="lazy" src="${g.photo}" alt="${esc(g.name)}">`;
+  } else {
+    const initials = getInitials(g.name);
+    photoEl.textContent = initials;
+    preview.textContent = initials;
+  }
+  // Name
+  document.getElementById('hero-name').textContent = g.name || '-';
+  // Title
+  if (g.title) { const el = document.getElementById('hero-title'); el.textContent = g.title; el.style.display = 'block'; }
+  // Company
+  if (g.company) { const el = document.getElementById('hero-company'); el.textContent = g.company; el.style.display = 'block'; }
+  // Location
+  if (g.location) {
+    document.getElementById('hero-location').style.display = 'flex';
+    document.getElementById('hero-location-text').textContent = g.location;
+  }
+  // Bio
+  if (g.bio && g.bio.trim()) {
+    const el = document.getElementById('hero-bio');
+    el.textContent = g.bio;
+    el.style.display = 'block';
+    document.getElementById('about-text').textContent = g.bio;
+    document.getElementById('about-text').style.display = 'block';
+    document.getElementById('about-empty').style.display = 'none';
+  } else {
+    document.getElementById('about-empty').style.display = 'block';
+  }
+  // Social links
+  const social = document.getElementById('hero-social');
+  social.innerHTML = '';
+  if (g.linkedin) social.innerHTML += `<a href="${fixUrl(g.linkedin)}" target="_blank" rel="noopener" class="social-link">🔗 LinkedIn</a>`;
+  if (g.website)  social.innerHTML += `<a href="${fixUrl(g.website)}"  target="_blank" rel="noopener" class="social-link">🌐 Website</a>`;
+  if (g.twitter)  social.innerHTML += `<a href="https://twitter.com/${g.twitter.replace('@','')}" target="_blank" rel="noopener" class="social-link">✕ Twitter</a>`;
+  // Credential band
+  document.getElementById('cred-gpa').textContent    = g.gpa    || '-';
+  document.getElementById('cred-letter').textContent = g.letter || '-';
+  document.getElementById('cred-year').textContent   = g.completedAt ? new Date(g.completedAt).getFullYear() : '2026';
+  document.getElementById('cred-course').textContent = g.courseTitle || g.course || '-';
+  if (g.designation) {
+    const wrap = document.getElementById('cred-honors-wrap');
+    wrap.style.display = 'flex';
+    document.getElementById('cred-honors').textContent = g.designation;
+    const vl = document.getElementById('cred-verify-link');
+    vl.href = `/verify?id=${encodeURIComponent(g.diplomaNumber)}`;
+  }
+  // Diploma mini card
+  document.getElementById('dp-name').textContent   = g.name ? g.name.toUpperCase() : '-';
+  document.getElementById('dp-course').textContent = g.courseTitle || g.course || '-';
+  document.getElementById('dp-gpa').textContent    = g.gpa    || '-';
+  document.getElementById('dp-letter').textContent = g.letter || '-';
+  document.getElementById('dp-year').textContent   = g.completedAt ? new Date(g.completedAt).getFullYear() : '2026';
+  document.getElementById('dp-honors').textContent = g.designation || '';
+  document.getElementById('dp-num').textContent    = g.diplomaNumber;
+  // Sidebar
+  document.getElementById('meta-dipnum').textContent = g.diplomaNumber;
+  const d = g.completedAt ? new Date(g.completedAt) : new Date();
+  document.getElementById('meta-date').textContent   = d.toLocaleDateString('en-US',{month:'long',year:'numeric'});
+  const verifyUrl = `/verify?id=${encodeURIComponent(g.diplomaNumber)}`;
+  document.getElementById('meta-verify').href = verifyUrl;
+  document.getElementById('verify-link-btn').href   = verifyUrl;
+  // Page title
+  document.title = `${g.name} - MarkCMO Academy Graduate`;
+}
+function getInitials(name) {
+  return (name||'?').split(' ').slice(0,2).map(n => n[0] || '').join('').toUpperCase() || '?';
+}
+function fixUrl(url) {
+  if (!url) return '#';
+  return url.match(/^https?:\/\//) ? url : 'https://' + url;
+}
+function esc(s) {
+  return (s||'').replace(/&/g,'&amp;').replace(/"/g,'&quot;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
+}
+// ── EDIT MODAL ────────────────────────────────────────────────────────────────
+function openEditModal() {
+  if (!GRAD) return;
+  editPhotoDataUrl = undefined;
+  document.getElementById('edit-title').value    = GRAD.title    || '';
+  document.getElementById('edit-company').value  = GRAD.company  || '';
+  document.getElementById('edit-location').value = GRAD.location || '';
+  document.getElementById('edit-bio').value      = GRAD.bio      || '';
+  document.getElementById('edit-linkedin').value = GRAD.linkedin || '';
+  document.getElementById('edit-website').value  = GRAD.website  || '';
+  document.getElementById('edit-twitter').value  = GRAD.twitter  || '';
+  const prev = document.getElementById('modal-photo-preview');
+  if (GRAD.photo) {
+    prev.innerHTML = `<img loading="lazy" src="${GRAD.photo}" alt="photo">`;
+  } else {
+    prev.textContent = getInitials(GRAD.name);
+    prev.style.fontSize = '28px';
+  }
+  updateCharCounter(document.getElementById('edit-bio'), 'bio-counter', 500);
+  document.getElementById('edit-modal').classList.add('open');
+  document.body.style.overflow = 'hidden';
+  setTimeout(() => document.getElementById('edit-bio').focus(), 200);
+}
+function closeEditModal() {
+  document.getElementById('edit-modal').classList.remove('open');
+  document.body.style.overflow = '';
+}
+function handleOverlayClick(e) {
+  if (e.target === document.getElementById('edit-modal')) closeEditModal();
+}
+function updateCharCounter(el, id, max) {
+  const len = el.value.length;
+  const counter = document.getElementById(id);
+  if (!counter) return;
+  counter.textContent = `${len} / ${max}`;
+  counter.style.color = len > max ? 'var(--red)' : 'var(--dim)';
+}
+// ── PHOTO UPLOAD ──────────────────────────────────────────────────────────────
+function modalPhotoSelect(e) {
+  const file = e.target.files[0];
+  if (file && file.type.startsWith('image/')) processModalPhoto(file);
+}
+function modalDragOver(e) {
+  e.preventDefault();
+  document.getElementById('modal-drop-zone').classList.add('dragging');
+}
+function modalDragLeave() {
+  document.getElementById('modal-drop-zone').classList.remove('dragging');
+}
+function modalDrop(e) {
+  e.preventDefault();
+  document.getElementById('modal-drop-zone').classList.remove('dragging');
+  const file = e.dataTransfer.files[0];
+  if (file && file.type.startsWith('image/')) processModalPhoto(file);
+}
+function processModalPhoto(file) {
+  if (file.size > 5 * 1024 * 1024) { toast('File too large - max 5MB', 'red'); return; }
+  const reader = new FileReader();
+  reader.onload = ev => {
+    const img = new Image();
+    img.onload = () => {
+      const size = Math.min(img.width, img.height, 400);
+      const canvas = document.createElement('canvas');
+      canvas.width = canvas.height = size;
+      const ctx = canvas.getContext('2d');
+      ctx.drawImage(img, (img.width - size) / 2, (img.height - size) / 2, size, size, 0, 0, size, size);
+      editPhotoDataUrl = canvas.toDataURL('image/jpeg', 0.82);
+      const prev = document.getElementById('modal-photo-preview');
+      prev.innerHTML = `<img loading="lazy" src="${editPhotoDataUrl}" alt="preview">`;
+      toast('Photo ready - save to apply', 'gold');
+    };
+    img.src = ev.target.result;
+  };
+  reader.readAsDataURL(file);
+}
+// ── SAVE PROFILE ──────────────────────────────────────────────────────────────
+async function saveProfile() {
+  const bio = document.getElementById('edit-bio').value.trim();
+  if (!bio) { toast('Bio is required - tell people who you are', 'red'); document.getElementById('edit-bio').focus(); return; }
+  const btn = document.getElementById('modal-save-btn');
+  btn.disabled = true;
+  btn.textContent = 'Saving…';
+  const payload = {
+    diplomaNumber: DIPLOMA_NUM,
+    title:    document.getElementById('edit-title').value.trim(),
+    company:  document.getElementById('edit-company').value.trim(),
+    location: document.getElementById('edit-location').value.trim(),
+    bio,
+    linkedin: document.getElementById('edit-linkedin').value.trim(),
+    website:  document.getElementById('edit-website').value.trim(),
+    twitter:  document.getElementById('edit-twitter').value.trim(),
+  };
+  if (editPhotoDataUrl !== undefined) payload.photo = editPhotoDataUrl;
+  try {
+    const resp = await fetch('/.netlify/functions/course-graduate', {
+      method: 'PUT',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(payload)
+    });
+    const data = await resp.json();
+    if (data.success) {
+      GRAD = data.graduate;
+      renderProfile(GRAD);
+      closeEditModal();
+      // Hide the complete prompt if bio is now filled
+      if (GRAD.bio) document.getElementById('complete-prompt').style.display = 'none';
+      toast('Profile updated ✓', 'green');
+    } else {
+      throw new Error(data.error || 'Save failed');
+    }
+  } catch(e) {
+    toast('Save failed - please try again', 'red');
+  }
+  btn.disabled = false;
+  btn.textContent = 'Save Changes →';
+}
+// ── DOWNLOAD DIPLOMA ──────────────────────────────────────────────────────────
+function downloadDiploma() {
+  if (!GRAD) return;
+  const p = new URLSearchParams({
+    course: GRAD.course || '',
+    name:   GRAD.name   || '',
+    gpa:    GRAD.gpa    || '',
+    letter: GRAD.letter || '',
+    designation: GRAD.designation || ''
+  });
+  window.open(`/diploma?${p}`, '_blank');
+}
+// ── SHARING ──────────────────────────────────────────────────────────────────
+function copyProfileLink() {
+  const url = `https://markcmo-courses.netlify.app/profile?id=${DIPLOMA_NUM}`;
+  navigator.clipboard.writeText(url)
+    .then(() => toast('Profile link copied!', 'gold'))
+    .catch(() => {
+      const el = document.createElement('textarea');
+      el.value = url; document.body.appendChild(el); el.select();
+      document.execCommand('copy'); document.body.removeChild(el);
+      toast('Profile link copied!', 'gold');
+    });
+}
+function shareLinkedIn() {
+  if (!GRAD) return;
+  const profileUrl = `https://markcmo-courses.netlify.app/profile?id=${DIPLOMA_NUM}`;
+  const text = encodeURIComponent(
+    `I completed ${GRAD.courseTitle} at MarkCMO Academy with a ${GRAD.gpa} GPA - ${GRAD.designation}. View my verified credential: ${profileUrl} #MarkCMOAcademy #ExecutiveEducation`
+  );
+  window.open(`https://www.linkedin.com/sharing/share-offsite/?url=${encodeURIComponent(profileUrl)}&summary=${text}`, '_blank');
+}
+// ── TOAST ─────────────────────────────────────────────────────────────────────
+let _toastTimer;
+function toast(msg, type = 'gold') {
+  const el = document.getElementById('toast');
+  el.textContent = msg;
+  el.className = `toast ${type} show`;
+  clearTimeout(_toastTimer);
+  _toastTimer = setTimeout(() => el.classList.remove('show'), 4000);
+}
+// ── KEYBOARD ──────────────────────────────────────────────────────────────────
+document.addEventListener('keydown', e => { if (e.key === 'Escape') closeEditModal(); });
+</script>
+<script>
+  // ─── Custom Cursor ───
+  var cur = document.getElementById('custom-cursor');
+  if (cur) {
+    document.addEventListener('mousemove', function(e) {
+      cur.style.left = e.clientX + 'px';
+      cur.style.top = e.clientY + 'px';
+    });
+    document.addEventListener('mousedown', function() { cur.classList.add('clicking'); });
+    document.addEventListener('mouseup', function() { cur.classList.remove('clicking'); });
+  }
+</script>
+<script>
+(function(){
+  var bar=document.createElement('div');bar.id='scroll-progress';
+  document.body.prepend(bar);
+  var nav=document.querySelector('nav');
+  window.addEventListener('scroll',function(){
+    var h=document.documentElement,b=document.body,
+        st='scrollTop',sh='scrollHeight';
+    var pct=(h[st]||b[st])/((h[sh]||b[sh])-h.clientHeight)*100;
+    bar.style.width=pct+'%';
+    if((h[st]||b[st])>80){nav&&nav.classList.add('scrolled');}
+    else{nav&&nav.classList.remove('scrolled');}
+  },{passive:true});
+})();
+</script>
+<script>
+(function(){
+  var nav=document.getElementById('mainNav');
+  var ham=document.getElementById('navHam');
+  var drw=document.getElementById('mobileDrawer');
+  if(nav) window.addEventListener('scroll',function(){
+    nav.classList.toggle('scrolled',window.scrollY>20);
+  },{passive:true});
+  if(ham&&drw){
+    ham.addEventListener('click',function(){drw.classList.toggle('open');});
+    drw.querySelectorAll('a').forEach(function(a){
+      a.addEventListener('click',function(){drw.classList.remove('open');});
+    });
+  }
+})();
+</script>
+<style id="mc-form-styles">
+.mc-contact{background:linear-gradient(135deg,#050919 0%,#0A1628 60%,#0d1b27 100%);padding:64px 0;border-top:1px solid #2a2a2a;margin-top:0}
+.mc-contact-inner{max-width:1100px;margin:0 auto;padding:0 24px;display:grid;grid-template-columns:1fr 1fr;gap:56px;align-items:start}
+.mc-contact-left h2{font-family:'Bebas Neue',Barlow,-apple-system,sans-serif;font-size:clamp(1.8rem,4vw,2.8rem);font-weight:400;letter-spacing:.03em;color:#fff;margin:0 0 14px;line-height:1.1}
+.mc-contact-left h2 em{color:#C9A84C;font-style:normal}
+.mc-contact-left p{font-size:.92rem;color:#94A3B8;line-height:1.8;margin:0 0 24px}
+.mc-contact-proof{display:flex;flex-direction:column;gap:10px;margin-bottom:28px}
+.mc-contact-proof-item{display:flex;align-items:center;gap:10px;font-size:.85rem;color:#94A3B8}
+.mc-contact-proof-item span:first-child{color:#C9A84C;font-weight:700;font-size:1rem;flex-shrink:0}
+.mc-contact-direct{background:rgba(201,168,76,.08);border:1px solid rgba(201,168,76,.2);border-radius:8px;padding:14px 18px}
+.mc-contact-direct p{font-size:.75rem;color:#666;text-transform:uppercase;letter-spacing:.08em;margin:0 0 6px}
+.mc-contact-direct a{color:#C9A84C;font-weight:700;text-decoration:none;font-size:.88rem}
+.mc-form-card{background:#111;border:1px solid #2a2a2a;border-radius:12px;padding:28px}
+.mc-form-card h3{font-size:1.05rem;font-weight:700;color:#fff;margin:0 0 4px}
+.mc-form-card>p{font-size:.82rem;color:#64748B;margin:0 0 20px}
+.mc-field{margin-bottom:12px}
+.mc-field input,.mc-field textarea,.mc-field select{width:100%;padding:12px 14px;background:#1a1a1a;border:1px solid #2a2a2a;border-radius:6px;color:#e8e8e8;font-size:.88rem;font-family:inherit;box-sizing:border-box;transition:border-color .2s;outline:none}
+.mc-field input:focus,.mc-field textarea:focus,.mc-field select:focus{border-color:#C9A84C}
+.mc-field input::placeholder,.mc-field textarea::placeholder{color:#3a3a3a}
+.mc-field textarea{resize:vertical;min-height:80px}
+.mc-field select{appearance:none;cursor:pointer;color:#e8e8e8}
+.mc-field select option{background:#1a1a1a}
+.mc-submit{width:100%;background:#C9A84C;color:#0f0f0f;border:none;padding:13px;border-radius:6px;font-size:.95rem;font-weight:700;cursor:pointer;font-family:inherit;transition:background .2s;margin-top:4px}
+.mc-submit:hover:not(:disabled){background:#b8952f}
+.mc-submit:disabled{opacity:.5;cursor:not-allowed}
+.mc-success{display:none;text-align:center;padding:28px 12px}
+.mc-success-icon{font-size:2.5rem;margin-bottom:10px;color:#C9A84C}
+.mc-success h3{color:#C9A84C;font-size:1.2rem;font-weight:700;margin:0 0 8px}
+.mc-success p{color:#94A3B8;font-size:.88rem;margin:0 0 18px;line-height:1.7}
+.mc-success a{color:#C9A84C;font-weight:700}
+@media(max-width:860px){.mc-contact-inner{grid-template-columns:1fr;gap:32px}}
+@media(max-width:540px){.mc-contact{padding:40px 0}.mc-form-card{padding:20px 16px}.mc-contact-inner{padding:0 14px}}
+</style>
+<section class="mc-contact" id="contact">
+  <div class="mc-contact-inner">
+    <div class="mc-contact-left">
+      <h2>Get a Free <em>Revenue Strategy Call</em></h2>
+      <p>30 minutes with Mark Gabrielli. No pitch. A direct read on your biggest marketing gaps and what moves revenue fastest. Responds personally within 24 hours.</p>
+      <div class="mc-contact-proof">
+        <div class="mc-contact-proof-item"><span>&#10003;</span><span>$135M+ in qualified B2B pipeline built for clients</span></div>
+        <div class="mc-contact-proof-item"><span>&#10003;</span><span>90% client retention rate</span></div>
+        <div class="mc-contact-proof-item"><span>&#10003;</span><span>Retainer starts at $8K/month, launches in 1-2 weeks</span></div>
+        <div class="mc-contact-proof-item"><span>&#10003;</span><span>4.9 stars across review platforms</span></div>
+      </div>
+      <div class="mc-contact-direct">
+        <p>Prefer to reach out directly?</p>
+        <a href="mailto:mark@markcmo.com">mark@markcmo.com</a>
+        &nbsp;&nbsp;&#183;&nbsp;&nbsp;
+        <a href="tel:+13219175738">+1 (321) 917-5738</a>
+      </div>
+    </div>
+    <div class="mc-form-card">
+      <h3>Book a Free Strategy Call</h3>
+      <p>60 seconds. Mark responds personally within 24 hours.</p>
+      <div id="mc-card">
+        <form id="mc-form" novalidate>
+          <input type="hidden" name="form-name" value="page-contact">
+          <input type="text" name="bot-field" style="display:none" tabindex="-1" autocomplete="off">
+          <div class="mc-field"><input type="text" name="name" placeholder="Your Full Name *" required autocomplete="name"></div>
+          <div class="mc-field"><input type="email" name="email" placeholder="Work Email *" required autocomplete="email"></div>
+          <div class="mc-field"><input type="text" name="company" placeholder="Company Name" autocomplete="organization"></div>
+          <div class="mc-field"><input type="tel" name="phone" placeholder="Phone (optional)" autocomplete="tel"></div>
+          <div class="mc-field">
+            <select name="service">
+              <option value="" disabled selected>What are you looking for?</option>
+              <option value="fractional-cmo">Fractional CMO Retainer ($8K-$20K/mo)</option>
+              <option value="revenue-audit">Revenue Leak Audit ($7,500)</option>
+              <option value="vip-day">CMO VIP Day ($4,500)</option>
+              <option value="founders-circle">Founders Circle ($25K/yr)</option>
+              <option value="fractional-coo">Fractional COO Services</option>
+              <option value="unsure">Not sure yet - need a consult</option>
+            </select>
+          </div>
+          <div class="mc-field"><textarea name="message" placeholder="Biggest revenue challenge right now? (optional)"></textarea></div>
+          <button type="submit" id="mc-btn" class="mc-submit">Book Free Strategy Call &#8594;</button>
+          <div style="margin-top:8px;font-size:.72rem;color:#3a3a3a;text-align:center">No spam. No sales team. Just Mark.</div>
+        </form>
+      </div>
+      <div id="mc-success" class="mc-success">
+        <div class="mc-success-icon">&#10003;</div>
+        <h3>You are in. Check your inbox.</h3>
+        <p>Mark will personally follow up within 24 hours.<br>Or reach him directly: <a href="mailto:mark@markcmo.com">mark@markcmo.com</a> &#183; <a href="tel:+13219175738">+1 (321) 917-5738</a></p>
+      </div>
+    </div>
+  </div>
+</section>
+<script>
+(function(){
+  var _t;
+  document.addEventListener('input',function(){
+    clearTimeout(_t);_t=setTimeout(function(){
+      var f=document.getElementById('mc-form');if(!f)return;
+      var d=new FormData(f),o={};d.forEach(function(v,k){if(v&&k!=='bot-field')o[k]=v;});
+      o._page=location.pathname;o._ts=new Date().toISOString();
+      try{localStorage.setItem('mc_partial',JSON.stringify(o));}catch(e){}
+    },3000);
+  });
+  var form=document.getElementById('mc-form');if(!form)return;
+  form.addEventListener('submit',function(e){
+    e.preventDefault();
+    var btn=document.getElementById('mc-btn'),card=document.getElementById('mc-card'),suc=document.getElementById('mc-success');
+    if(!btn||!card||!suc)return;
+    btn.textContent='Sending...';btn.disabled=true;
+    var d=new FormData(form);
+    var p={'form-name':d.get('form-name')||'page-contact','name':d.get('name')||'','email':d.get('email')||'','company':d.get('company')||'','phone':d.get('phone')||'','service':d.get('service')||'','message':d.get('message')||''};
+    try{localStorage.setItem('mc_lead_'+Date.now(),JSON.stringify(p));}catch(ex){}
+    fetch('/api/lead',{method:'POST',headers:{'Content-Type':'application/x-www-form-urlencoded'},body:new URLSearchParams(p).toString()})
+    .then(function(){card.style.display='none';suc.style.display='block';})
+    .catch(function(){card.style.display='none';suc.style.display='block';
+      setTimeout(function(){window.open('mailto:mark@markcmo.com?subject=Inquiry&body=Name:+'+encodeURIComponent(p.name)+'%0AEmail:+'+encodeURIComponent(p.email),'_blank');},400);
+    });
+  });
+})();
+</script>
+<script src="/linkedin-widget.js" defer></script>
+</body>
+</html>
