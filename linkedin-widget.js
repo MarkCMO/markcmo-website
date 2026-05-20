@@ -1,21 +1,22 @@
 /**
  * LinkedIn Follow Widget — markcmo.com
  * Floating card with follow/connect CTAs + live stats display.
+ * Draggable on both desktop and mobile.
  *
  * ── UPDATE YOUR STATS BELOW ─────────────────────────────────────────────────
  */
 (function () {
   'use strict';
 
-  /* ── CONFIG — update these with your actual LinkedIn stats ── */
+  /* ── CONFIG ── */
   var CFG = {
     profileUrl:  'https://www.linkedin.com/in/marklgabrielli/',
     name:        'Mark Gabrielli',
     title:       'Fractional CMO & COO',
     company:     'WETYR Corp',
-    followers:   '12.4K',   // ← paste your real follower count here
-    connections: '500+',    // ← or exact number, e.g. "847"
+    photoUrl:    '/mark-photo.webp',
     storageKey:  'mgLiWidgetDismissed',
+    posKey:      'mgLiWidgetPos',
     hideDays:    30          // days to stay hidden after dismiss
   };
 
@@ -35,7 +36,7 @@
     '#mg-li-widget{',
       'position:fixed;bottom:28px;left:24px;z-index:9990;',
       'font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",system-ui,sans-serif;',
-      'transform:translateY(0);transition:transform .35s cubic-bezier(.22,.61,.36,1);',
+      'user-select:none;-webkit-user-select:none;',
     '}',
 
     /* Card */
@@ -55,22 +56,28 @@
       'to{opacity:1;transform:translateY(0) scale(1)}',
     '}',
 
-    /* Gold header bar */
+    /* Gold header bar — drag handle */
     '#mg-li-header{',
       'background:linear-gradient(135deg,rgba(201,168,76,.18) 0%,rgba(201,168,76,.06) 100%);',
       'border-bottom:1px solid rgba(201,168,76,.18);',
       'padding:14px 14px 12px;',
       'display:flex;align-items:flex-start;gap:10px;position:relative;',
+      'cursor:grab;',
     '}',
+    '#mg-li-header.dragging{cursor:grabbing;}',
 
-    /* Avatar */
+    /* Avatar — shows photo */
     '#mg-li-avatar{',
       'width:44px;height:44px;border-radius:50%;',
       'background:linear-gradient(135deg,#C9A84C 0%,#a07830 100%);',
       'display:flex;align-items:center;justify-content:center;',
       'font-size:16px;font-weight:800;color:#000;flex-shrink:0;',
       'border:2px solid rgba(201,168,76,.5);',
-      'letter-spacing:-.5px;',
+      'overflow:hidden;',
+    '}',
+    '#mg-li-avatar img{',
+      'width:100%;height:100%;object-fit:cover;border-radius:50%;',
+      'display:block;',
     '}',
 
     /* Name + title */
@@ -156,15 +163,6 @@
     '}',
     '#mg-li-connect:hover{background:rgba(201,168,76,.1);border-color:#C9A84C;}',
 
-    /* Pulse dot on follower count */
-    '#mg-li-pulse{',
-      'display:inline-block;width:6px;height:6px;',
-      'border-radius:50%;background:#C9A84C;',
-      'margin-right:4px;vertical-align:middle;',
-      'animation:mgPulse 2.2s ease-in-out infinite;',
-    '}',
-    '@keyframes mgPulse{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.4;transform:scale(.7)}}',
-
     /* Mobile: smaller */
     '@media(max-width:480px){',
       '#mg-li-widget{bottom:80px;left:12px;}',
@@ -180,9 +178,12 @@
   wrap.innerHTML = [
     '<div id="mg-li-card">',
 
-      /* Header */
+      /* Header / drag handle */
       '<div id="mg-li-header">',
-        '<div id="mg-li-avatar">MG</div>',
+        '<div id="mg-li-avatar">',
+          '<img src="', CFG.photoUrl, '" alt="Mark Gabrielli" ',
+               'onerror="this.style.display=\'none\';this.parentNode.innerHTML=\'MG\'">',
+        '</div>',
         '<div id="mg-li-info">',
           '<div id="mg-li-name">', CFG.name, '</div>',
           '<div id="mg-li-title">', CFG.title, ' &middot; ', CFG.company, '</div>',
@@ -201,16 +202,16 @@
       /* Stats */
       '<div id="mg-li-stats">',
         '<div class="mg-li-stat">',
-          '<div class="mg-li-stat-val"><span id="mg-li-pulse"></span>', CFG.followers, '</div>',
-          '<div class="mg-li-stat-label">Followers</div>',
-        '</div>',
-        '<div class="mg-li-stat">',
-          '<div class="mg-li-stat-val">', CFG.connections, '</div>',
-          '<div class="mg-li-stat-label">Connections</div>',
-        '</div>',
-        '<div class="mg-li-stat">',
           '<div class="mg-li-stat-val">15+</div>',
-          '<div class="mg-li-stat-label">Years Exp</div>',
+          '<div class="mg-li-stat-label">Yrs Exp</div>',
+        '</div>',
+        '<div class="mg-li-stat">',
+          '<div class="mg-li-stat-val">$135M+</div>',
+          '<div class="mg-li-stat-label">Pipeline</div>',
+        '</div>',
+        '<div class="mg-li-stat">',
+          '<div class="mg-li-stat-val">90%</div>',
+          '<div class="mg-li-stat-label">Retention</div>',
         '</div>',
       '</div>',
 
@@ -243,19 +244,101 @@
     '</div>',
   ].join('');
 
-  /* ── Mount + dismiss logic ───────────────────────────────────────────────── */
+  /* ── Mount + dismiss + drag logic ───────────────────────────────────────── */
   function mount() {
     document.body.appendChild(wrap);
 
-    document.getElementById('mg-li-dismiss').addEventListener('click', function () {
-      wrap.style.transform = 'translateY(120%)';
-      wrap.style.opacity = '0';
+    /* Restore saved position */
+    try {
+      var saved = JSON.parse(localStorage.getItem(CFG.posKey) || 'null');
+      if (saved && typeof saved.left === 'number' && typeof saved.top === 'number') {
+        wrap.style.left   = saved.left + 'px';
+        wrap.style.top    = saved.top  + 'px';
+        wrap.style.bottom = 'auto';
+        wrap.style.right  = 'auto';
+      }
+    } catch (e) {}
+
+    /* Dismiss */
+    document.getElementById('mg-li-dismiss').addEventListener('click', function (ev) {
+      ev.stopPropagation();
       wrap.style.transition = 'transform .3s ease, opacity .25s ease';
+      wrap.style.transform  = 'translateY(120%)';
+      wrap.style.opacity    = '0';
       setTimeout(function () {
         if (wrap.parentNode) wrap.parentNode.removeChild(wrap);
       }, 320);
-      try { localStorage.setItem(CFG.storageKey, String(Date.now())); } catch (e) {}
+      try { localStorage.setItem(CFG.storageKey, String(Date.now())); } catch (e2) {}
     });
+
+    /* ── Drag ───────────────────────────────────────────────────────────── */
+    var header = document.getElementById('mg-li-header');
+    var isDragging = false;
+    var startX, startY, origLeft, origTop;
+
+    function getPos() {
+      var rect = wrap.getBoundingClientRect();
+      return { left: rect.left, top: rect.top };
+    }
+
+    function clamp(val, min, max) { return Math.min(Math.max(val, min), max); }
+
+    function applyPos(left, top) {
+      var cardW = wrap.offsetWidth  || 260;
+      var cardH = wrap.offsetHeight || 200;
+      var maxL  = window.innerWidth  - cardW - 8;
+      var maxT  = window.innerHeight - cardH - 8;
+      wrap.style.left   = clamp(left, 8, maxL) + 'px';
+      wrap.style.top    = clamp(top,  8, maxT) + 'px';
+      wrap.style.bottom = 'auto';
+      wrap.style.right  = 'auto';
+    }
+
+    function onPointerDown(e) {
+      /* Only drag from header, not from buttons/links inside it */
+      if (e.target.closest('#mg-li-dismiss') || e.target.closest('#mg-li-badge')) return;
+      isDragging = true;
+      var p = e.touches ? e.touches[0] : e;
+      startX = p.clientX;
+      startY = p.clientY;
+      var pos = getPos();
+      origLeft = pos.left;
+      origTop  = pos.top;
+      header.classList.add('dragging');
+      /* Snap to absolute position so movement is relative to viewport */
+      applyPos(origLeft, origTop);
+      e.preventDefault();
+    }
+
+    function onPointerMove(e) {
+      if (!isDragging) return;
+      var p = e.touches ? e.touches[0] : e;
+      applyPos(origLeft + (p.clientX - startX), origTop + (p.clientY - startY));
+      e.preventDefault();
+    }
+
+    function onPointerUp() {
+      if (!isDragging) return;
+      isDragging = false;
+      header.classList.remove('dragging');
+      /* Persist position */
+      try {
+        localStorage.setItem(CFG.posKey, JSON.stringify({
+          left: parseInt(wrap.style.left,  10),
+          top:  parseInt(wrap.style.top,   10)
+        }));
+      } catch (e) {}
+    }
+
+    /* Mouse events */
+    header.addEventListener('mousedown',  onPointerDown);
+    document.addEventListener('mousemove', onPointerMove);
+    document.addEventListener('mouseup',   onPointerUp);
+
+    /* Touch events */
+    header.addEventListener('touchstart', onPointerDown, { passive: false });
+    document.addEventListener('touchmove',  onPointerMove, { passive: false });
+    document.addEventListener('touchend',   onPointerUp);
   }
 
   /* Small delay so it doesn't flash on first paint */
