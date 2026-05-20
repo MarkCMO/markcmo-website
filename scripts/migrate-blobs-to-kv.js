@@ -1,4 +1,3 @@
-﻿#!/usr/bin/env node
 // migrate-blobs-to-kv.js - Export Netlify Blobs -> Cloudflare KV for MarkCMO
 // export NETLIFY_AUTH_TOKEN=... && export NETLIFY_SITE_ID=609d74ca-5f2a-4caa-aa7c-3f6922a7bcb4
 const fs = require('fs');
