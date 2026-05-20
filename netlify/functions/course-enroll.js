@@ -14,23 +14,23 @@ const NOTIFY     = (process.env.NOTIFY_EMAIL || 'mark@markcmo.com,marklgabrielli
 
 const COURSE_META = {
   // ── TOP 5 FLAGSHIP ──────────────────────────────────────────
-  cfo:         { title:'Fractional CFO Mastery',               price:1497, retake:497, tier:1 },
-  cmo:         { title:'Fractional CMO Mastery',               price:1497, retake:497, tier:1 },
-  ceo:         { title:'CEO Mastery: Building & Leading a $50M Company', price:1497, retake:497, tier:1 },
-  cto:         { title:'Chief Technology Officer Mastery',      price:1497, retake:497, tier:1 },
-  ae:          { title:'Account Executive Excellence',         price:997,  retake:397, tier:1 },
-  growth:      { title:'Growth Manager Mastery',               price:997,  retake:397, tier:1 },
-  vpsales:     { title:'VP of Sales Mastery',                  price:1297, retake:497, tier:1 },
+  cfo:         { title:'Fractional CFO Mastery',               price:248, retake:28, tier:1 },
+  cmo:         { title:'Fractional CMO Mastery',               price:248, retake:28, tier:1 },
+  ceo:         { title:'CEO Mastery: Building & Leading a $50M Company', price:248, retake:28, tier:1 },
+  cto:         { title:'Chief Technology Officer Mastery',      price:248, retake:28, tier:1 },
+  ae:          { title:'Account Executive Excellence',         price:248, retake:28, tier:1 },
+  growth:      { title:'Growth Manager Mastery',               price:248, retake:28, tier:1 },
+  vpsales:     { title:'VP of Sales Mastery',                  price:248, retake:28, tier:1 },
   // ── EXTENDED LIBRARY ────────────────────────────────────────
-  coo:         { title:'Fractional COO Mastery',               price:1497, retake:497, tier:2 },
-  digital:     { title:'Digital Marketing Mastery',            price:997,  retake:397, tier:2 },
-  linkedin:    { title:'LinkedIn Growth Machine',              price:797,  retake:297, tier:2 },
-  instagram:   { title:'Instagram for Business',               price:597,  retake:197, tier:2 },
-  revenue:     { title:'Revenue Architecture & GTM',           price:1297, retake:497, tier:2 },
-  category:    { title:'Category Design & Market Leadership',  price:997,  retake:397, tier:2 },
-  aimarketing: { title:'AI-Powered Marketing',                 price:797,  retake:297, tier:2 },
-  b2bdemand:   { title:'B2B Demand Generation',                price:897,  retake:297, tier:2 },
-  leadership:  { title:'Executive Leadership for Consultants', price:697,  retake:247, tier:2 },
+  coo:         { title:'Fractional COO Mastery',               price:248, retake:28, tier:1 },
+  digital:     { title:'Digital Marketing Mastery',            price:248, retake:28, tier:2 },
+  linkedin:    { title:'LinkedIn Growth Machine',              price:248, retake:28, tier:2 },
+  instagram:   { title:'Instagram for Business',               price:248, retake:28, tier:2 },
+  revenue:     { title:'Revenue Architecture & GTM',           price:248, retake:28, tier:2 },
+  category:    { title:'Category Design & Market Leadership',  price:248, retake:28, tier:2 },
+  aimarketing: { title:'AI-Powered Marketing',                 price:248, retake:28, tier:2 },
+  b2bdemand:   { title:'B2B Demand Generation',                price:248, retake:28, tier:2 },
+  leadership:  { title:'Executive Leadership for Consultants', price:248, retake:28, tier:2 },
 };
 
 function jbReq(method, binId, data) {
