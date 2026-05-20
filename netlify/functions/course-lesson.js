@@ -7,7 +7,8 @@ const CFO_DATA = require('./cfo-static-data.js');
 const CMO_DATA = require('./cmo-static-data.js');
 const COO_DATA = require('./coo-static-data.js');
 const CEO_DATA = require('./ceo-static-data.js');
-const STATIC_COURSES = { cfo: CFO_DATA, cmo: CMO_DATA, coo: COO_DATA, ceo: CEO_DATA };
+const VPSALES_DATA = require('./vpsales-static-data.js');
+const STATIC_COURSES = { cfo: CFO_DATA, cmo: CMO_DATA, coo: COO_DATA, ceo: CEO_DATA, vpsales: VPSALES_DATA };
 
 // ─── FULL CURRICULUM ──────────────────────────────────────────────────────────
 const CURRICULUM = {
