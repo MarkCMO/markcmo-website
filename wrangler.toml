@@ -1,39 +1,13 @@
+﻿# wrangler.toml - Cloudflare Pages config for MarkCMO
 name = "markcmo"
 compatibility_date = "2026-05-01"
 compatibility_flags = ["nodejs_compat"]
-pages_build_output_dir = "."
+pages_build_output_dir = "./dist"
 
-# Pages Functions auto-route /.netlify/functions/* to netlify/functions/ via
-# Cloudflare Pages' built-in Netlify compat. No catch-all router needed for
-# basic function dispatch.
-
-# ── Non-secret env vars ──────────────────────────────────────────────────────
 [vars]
 SITE_URL = "https://markcmo.com"
-URL = "https://markcmo.com"          # legacy: process.env.URL is read by submit-document, send-engagement-proposal-email
 NODE_ENV = "production"
 
-# ── Cron Triggers ─────────────────────────────────────────────────────────────
-# CF Pages does NOT support [triggers] in wrangler.toml — crons must be set
-# in the CF Dashboard: Pages project → Settings → Functions → Cron Triggers.
-# Add these three schedules there pointing to functions/scheduled.js:
-#   "0 * * * *"     – email-drip (every hour)
-#   "0 */6 * * *"   – engagement-payment-followups + film-rolodex-cron (every 6h)
-#   "0 9 * * *"     – film-rolodex-deep-cron (daily 09:00 UTC)
-
-# ── Required secrets (NOT stored here - set via dashboard or `wrangler pages secret put`) ──
-# WETYR Studio:        GEMINI_API_KEY, MISTRAL_API_KEY, TMDB_API_KEY
-# Supabase (primary):  SUPABASE_URL, SUPABASE_SERVICE_KEY
-# Supabase (engagement docs, separate project): MARKCMO_SUPABASE_URL, MARKCMO_SUPABASE_SERVICE_KEY
-# Admin auth:          ADMIN_USERS (JSON), ADMIN_USER, ADMIN_PASS, ADMIN_SESSION_SECRET, TOKEN_SECRET, EMAIL_ADMIN_SECRET
-# Email:               RESEND_API_KEY, WEBINAR_RESEND_KEY, NOTIFY_EMAIL
-# Square:              SQUARE_ACCESS_TOKEN, SQUARE_LOCATION_ID, SQUARE_APPLICATION_ID, SQUARE_ENV,
-#                      SQUARE_PLAN_VARIATION_PREMIUM, SQUARE_PLAN_VARIATION_ELITE, SQUARE_PLAN_VARIATION_SPONSOR,
-#                      SQUARE_WEBHOOK_SIGNATURE_KEY
-# Calendly:            CALENDLY_SIGNING_KEY
-# JSONBin (legacy):    JSONBIN_API_KEY, JSONBIN_LINKS_BIN_ID, JSONBIN_ENROLLMENTS_BIN_ID, JSONBIN_GRADS_BIN_ID,
-#                      JSONBIN_INTL_BIN_ID, JSONBIN_FOUNDING_BIN_ID, JSONBIN_LESSON_CACHE_BIN_ID,
-#                      JSONBIN_VOTES_BIN_ID, JSONBIN_DRIP_BIN_ID, JSONBIN_DOCS_BIN_ID, JSONBIN_BIN_ID
-# ElevenLabs:          ELEVENLABS_API_KEY
-# Cron auth:           CRON_SHARED_SECRET (set on this Pages project AND on the cron worker)
-# Internal API:        MARKCMO_ADMIN_API_TOKEN
+[[kv_namespaces]]
+binding = "BLOBS_DOCUMENTS"
+id = "REPLACE_WITH_KV_ID"
