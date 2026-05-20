@@ -94,6 +94,75 @@
     ]
   }
   </script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Article",
+    "headline": "Marketing Tech Stack Architecture",
+    "description": "Mark Gabrielli architects CRM, automation, attribution, and analytics as a unified revenue machine. No isolated tools. No attribution blind spots.",
+    "url": "https://markcmo.com/magnet/tech-stack-architecture.html",
+    "datePublished": "2026-04-01",
+    "dateModified": "2026-05-20",
+    "author": {
+      "@type": "Person",
+      "name": "Mark Gabrielli",
+      "url": "https://markcmo.com/about"
+    },
+    "publisher": {
+      "@type": "Organization",
+      "name": "MarkCMO",
+      "url": "https://markcmo.com"
+    }
+  }
+  </script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "When should we invest in a dedicated RevOps resource vs. relying on a fractional?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "A dedicated RevOps hire makes sense when the volume and complexity of CRM management, automation workflows, and attribution analysis exceeds roughly fifteen to twenty hours per week on a sustained basis - typically around the $8M-$12M ARR stage for SaaS companies or similar complexity thresholds for other business models. Below that threshold, a fractional RevOps specialist (engaged for ten to fifteen hours per month) provides the architecture and oversight needed without the full-time cost. The key indicator is not company size but operational complexity: how many campaigns are running, how many workflows exist, and how much data is flowing through the stack."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "How do you handle the data migration when switching CRMs?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "CRM migration is a data quality project as much as a technical project. The migration plan includes: a full export and audit of the existing data to identify duplicates, outdated records, and inconsistent field values; a field mapping between old and new CRM data models; a validation pass that confirms the new CRM accurately reflects the current state of every live deal and contact; and a cutover plan that minimizes disruption to active sales conversations. Done well, a CRM migration is also an opportunity to clean three to five years of accumulated data debt and establish the data governance standards that will keep the new CRM clean going forward."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "What is the most common tech stack mistake at the $5M-$15M stage?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "The most common mistake is tool accumulation without integration. Companies at this stage typically have a CRM, a marketing automation platform, a chat tool, an ad platform, a video platform, a sales engagement tool, and a reporting tool - all purchased to solve specific point problems - but none of them are connected to create a unified view of the customer journey. The result is data fragmentation: each tool tells a partial story, no tool tells the full story, and the team spends more time reconciling data between systems than using it to make decisions. The fix is not buying more tools. It is integrating and governing the tools already in place."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Should we build our own data infrastructure or use an all-in-one platform like HubSpot?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "For companies under $25M, the all-in-one approach (HubSpot or similar) almost always wins on total cost of ownership and time-to-insight. Custom data infrastructure (Segment plus a data warehouse plus a BI tool) provides more flexibility and granularity but requires significant technical resources to build and maintain. The custom approach becomes appropriate when the business has outgrown the all-in-one platform's capabilities, when data volume and complexity exceeds platform limits, or when you have a dedicated data engineering resource. Before that threshold, building custom infrastructure typically diverts engineering resources from product work and creates maintenance debt that compounds over time."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "How do you evaluate whether a specific tool is worth keeping or replacing?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "The evaluation framework Mark uses has four questions: Is this tool actively contributing data to the revenue attribution chain? Is it being used by at least seventy percent of the team members who were supposed to adopt it? Is the data it produces being reviewed and acted upon at least monthly? And could its core function be handled by a tool already in the stack? Tools that fail two or more of these questions are candidates for replacement or elimination. Most companies at the $5M-$20M stage have three to five tools that would score poorly on this framework - representing both cost savings and simplification opportunities."
+        }
+      }
+    ]
+  }
+  </script>
 </head>
 <body>
 <div id="scroll-progress" style="position:fixed;top:0;left:0;height:3px;background:var(--accent);z-index:9999;width:0%;transition:width 0.1s;"></div>

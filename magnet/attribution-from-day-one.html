@@ -51,6 +51,75 @@
     ]
   }
   </script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Article",
+    "headline": "Marketing Attribution",
+    "description": "Mark Gabrielli builds multi-touch attribution models that connect every marketing dollar to pipeline and closed revenue. No launch without attribution in place.",
+    "url": "https://markcmo.com/magnet/attribution-from-day-one.html",
+    "datePublished": "2026-04-01",
+    "dateModified": "2026-05-20",
+    "author": {
+      "@type": "Person",
+      "name": "Mark Gabrielli",
+      "url": "https://markcmo.com/about"
+    },
+    "publisher": {
+      "@type": "Organization",
+      "name": "MarkCMO",
+      "url": "https://markcmo.com"
+    }
+  }
+  </script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "What tools do we need to implement proper marketing attribution?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "The minimum toolset for B2B multi-touch attribution is: a tag management system (Google Tag Manager) for deploying tracking code without developer dependency, an analytics platform (GA4) for capturing session-level data and conversion events, a CRM (HubSpot, Salesforce) with custom fields for UTM data capture, and a form platform that supports hidden fields for passing UTM data into the CRM. More sophisticated attribution can be added with dedicated multi-touch attribution tools such as HockeyStack, Triple Whale (for e-commerce adjacent B2B), or Bizible/Marketo Attribution, but the foundational toolset above handles the majority of attribution needs for companies under $50M in revenue."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "How do we handle attribution for offline conversions like phone calls?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Phone call attribution requires call tracking software - tools like CallRail or Invoca that assign dynamic tracking phone numbers to different traffic sources and record which UTM source generated a call. Dynamic number insertion swaps the phone number on your website based on the visitor's traffic source, allowing call conversions to be tied back to the same UTM parameters as form submissions. For high-call-volume businesses, offline conversion tracking through Google Ads and LinkedIn Campaign Manager can also pass call conversion events back to the ad platform for algorithmic optimization."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "What is the difference between marketing attribution and revenue attribution?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Marketing attribution connects marketing touchpoints to pipeline creation and deal creation. Revenue attribution connects marketing touchpoints all the way to closed-won revenue. Marketing attribution is available earlier in the process - you can measure pipeline attributed to marketing before those deals close. Revenue attribution requires a closed deal, which means it lags by the length of your sales cycle. Both are important: marketing attribution for optimization of running campaigns, revenue attribution for validating whether the pipeline marketing generates actually closes and at what rate by channel."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "How do we build buy-in for attribution investment from leadership?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "The most effective framing is not 'we need attribution to measure marketing' - it is 'we are spending X on marketing with no ability to determine which spend is productive. Attribution is what allows us to scale what works and stop funding what does not.' Leadership tends to respond to budget efficiency arguments more than measurement arguments. Present attribution as the infrastructure that converts marketing spend from a faith-based investment to a data-driven one. The initial investment in attribution infrastructure typically pays back within the first quarter through improved budget allocation decisions alone."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Can we retrofit attribution on campaigns that have already been running without it?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Partially. You can implement attribution going forward starting today, and within 90 days you will have meaningful data on channel performance for the newly attributed period. You cannot retroactively recover UTM data for leads and pipeline that were generated before attribution was implemented - those records will always show as 'unattributed' or 'direct.' The most valuable recovery action for historical data is self-reported attribution: add a 'How did you hear about us?' field to your forms, and have sales reps ask the question during discovery calls. This produces imperfect but directionally useful data on acquisition sources for the unattributed period."
+        }
+      }
+    ]
+  }
+  </script>
 </head>
 <body>
 <div class="dl-page-wrap">

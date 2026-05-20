@@ -48,6 +48,75 @@
     ]
   }
   </script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Article",
+    "headline": "A/B Testing Framework",
+    "description": "Mark Gabrielli builds systematic A/B testing frameworks that compound conversion rates over time. Subject lines, CTAs, timing, and messaging tested with statistical rigor.",
+    "url": "https://markcmo.com/magnet/ab-testing-framework.html",
+    "datePublished": "2026-04-01",
+    "dateModified": "2026-05-20",
+    "author": {
+      "@type": "Person",
+      "name": "Mark Gabrielli",
+      "url": "https://markcmo.com/about"
+    },
+    "publisher": {
+      "@type": "Organization",
+      "name": "MarkCMO",
+      "url": "https://markcmo.com"
+    }
+  }
+  </script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "How much traffic do we need before A/B testing is useful?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "The minimum useful traffic depends on the test type and the metric being measured. Email subject line tests can produce reliable results with 2,000 total recipients (1,000 per variant) for open rate tests. Landing page tests with conversion rates around 5% require approximately 5,000 visitors per variant for reliable results. At lower traffic volumes, prioritize qualitative research - user interviews, heatmaps, session recordings - which produces directional insights without requiring large sample sizes. Testing on insufficient traffic does not accelerate learning; it produces false confidence in unreliable results."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "How many variables should we test at once?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "One variable per test. Testing multiple variables simultaneously in a standard A/B test makes it impossible to attribute the result to a specific change. If you want to test multiple changes simultaneously, use a multivariate test methodology - but be aware that multivariate testing requires significantly larger sample sizes and more sophisticated analysis. For most B2B marketing teams, sequential single-variable testing is more practical and produces cleaner, more actionable insights than multivariate approaches."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "What is the right confidence level to use?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "95% confidence is the standard for making implementation decisions - meaning you are willing to accept a 5% probability that the observed difference was due to chance. For lower-stakes tests where the cost of implementing a false winner is low (email subject line tweaks, minor CTA copy changes), 90% confidence may be acceptable. For higher-stakes changes (homepage redesign, primary offer framing, pricing presentation), consider requiring 97% or 99% confidence before implementation. The stakes of implementation should scale the confidence threshold."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "How long should an A/B test run?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "At minimum, a test should run for the time required to collect the sample size needed for statistical significance at the target confidence level. Beyond that minimum, tests should also run for at least one full week to capture weekly behavioral cycles - behavior on Monday mornings is systematically different from behavior on Friday afternoons, and a test that runs only three days may over-represent one part of that cycle. For email tests, the minimum practical duration is the time to collect the required number of impressions. For website tests, a two-to-four week minimum is typically recommended."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "What do we do when a test produces no clear winner?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "A null result - where neither variant outperforms the other at statistical significance - is a valid and useful outcome. It tells you that the change you tested does not materially affect conversion rate for your specific audience, which is information. Document it in the test log, note the hypotheses it rules out, and move to the next highest-priority test. Null results are particularly common when the tested element is not actually the bottleneck in the conversion process - which is itself a signal to investigate what the real bottleneck is."
+        }
+      }
+    ]
+  }
+  </script>
 </head>
 <body class="dl-page-wrap">
 

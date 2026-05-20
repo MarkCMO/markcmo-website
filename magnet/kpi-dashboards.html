@@ -48,6 +48,75 @@
     ]
   }
   </script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Article",
+    "headline": "Marketing KPI Dashboards",
+    "description": "Mark Gabrielli builds real-time marketing KPI dashboards with the metrics that actually matter: pipeline velocity, CAC, LTV, ROAS, and MQL-to-close rate - not vanity metrics.",
+    "url": "https://markcmo.com/magnet/kpi-dashboards.html",
+    "datePublished": "2026-04-01",
+    "dateModified": "2026-05-20",
+    "author": {
+      "@type": "Person",
+      "name": "Mark Gabrielli",
+      "url": "https://markcmo.com/about"
+    },
+    "publisher": {
+      "@type": "Organization",
+      "name": "MarkCMO",
+      "url": "https://markcmo.com"
+    }
+  }
+  </script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "How many metrics should be on a marketing KPI dashboard?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "An executive KPI dashboard should contain 6 to 10 metrics maximum. More than that and the dashboard becomes a reporting document that requires time to interpret rather than a decision tool that delivers instant clarity. The discipline of limiting a dashboard to the metrics that matter most forces the important prioritization conversation about what you are actually managing the business toward. If you cannot get to 10 metrics or fewer, it is usually a symptom of unclear strategic priorities rather than a genuine measurement need."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "How do you connect CRM pipeline data to ad platform spend data in one dashboard?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "The most practical approach for most mid-market companies is Google Looker Studio with a combination of native connectors and a data blending layer. You connect your CRM (HubSpot or Salesforce via a partner connector), your ad platforms (Google Ads, LinkedIn, Meta directly), and Google Analytics 4. Looker Studio's data blending function lets you join these datasets on shared dimensions like campaign name or UTM source. For companies with more complex data needs, a purpose-built revenue operations platform like HubSpot's Marketing Hub Enterprise or a dedicated BI tool with a warehouse layer (BigQuery, Snowflake) will provide more flexibility and reliability."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "What is a good benchmark for MQL-to-opportunity conversion rate?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Industry benchmarks for MQL-to-opportunity conversion rates typically range from 20% to 40% for B2B technology and services companies. Below 20% suggests your MQL definition is too permissive and you are sending low-quality leads to sales. Above 40% can indicate your MQL threshold is too restrictive - you are only counting as MQLs the leads that are nearly at the decision stage, which means you are missing earlier-stage pipeline opportunities that a nurture sequence could develop. The right benchmark for your specific business depends on your sales cycle, deal complexity, and how your sales team defines 'opportunity.'"
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "How often should marketing KPI dashboards be reviewed?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Paid media and active campaign dashboards should be checked at least 3 times per week - more frequently when you are running time-sensitive campaigns with daily budget implications. The full marketing KPI dashboard should be formally reviewed weekly in the marketing team's operating cadence and monthly in a cross-functional review that includes sales leadership. The quarterly version feeds the QBR process and board reporting cycle. The mistake most teams make is either checking dashboards too infrequently (monthly reviews mean you cannot course-correct campaigns that are underperforming) or too frequently (daily full-funnel reviews on metrics that do not have enough volume to be meaningful at that cadence)."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "What is pipeline velocity and why does it matter?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Pipeline velocity is the average number of days it takes for a lead to move from MQL status to closed-won. It is a composite measure of lead quality, sales process efficiency, and competitive dynamics. When pipeline velocity slows, deals are getting stuck somewhere in the funnel - and identifying where the stall is happening (at MQL-to-SAL handoff, at demo-to-proposal stage, at proposal-to-close) tells you exactly where to focus attention. When velocity accelerates, it often means lead quality has improved (ICP-matched leads close faster), the sales process has been streamlined, or competitive differentiation has strengthened. Tracking velocity by channel also reveals important differences - leads from referrals typically move 40-60% faster than leads from paid media."
+        }
+      }
+    ]
+  }
+  </script>
 </head>
 <body>
 <div id="scroll-progress" style="position:fixed;top:0;left:0;height:3px;background:var(--accent);z-index:9999;width:0%;transition:width 0.1s;"></div>
