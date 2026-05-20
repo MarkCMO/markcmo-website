@@ -22,21 +22,25 @@ jobs:
           node-version: '22'
 
       # ── Step 1: Upload all HTML pages to KV ─────────────────────────
-      # HTML files are excluded from the static CF Pages deployment
-      # (.cfignore has *.html) to stay under the 20,000-file limit.
-      # The catch-all function (functions/[[path]].js) reads from this KV
-      # namespace at request time to serve any HTML page.
+      # HTML is excluded from the static CF Pages deployment (*.html in
+      # .cfignore) to stay under the 20,000-file limit.
+      # The catch-all (functions/[[path]].js) reads KV at request time.
+      #
+      # Uses X-Auth-Email + X-Auth-Key (Global API Key) because the
+      # scoped CLOUDFLARE_API_TOKEN only has Pages:Edit, not KV:Edit.
+      # Requires GitHub secret CF_API_KEY = your Cloudflare Global API Key.
       - name: Upload HTML pages to KV
         run: node scripts/upload-html-to-kv.js
         env:
-          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          CF_API_KEY: ${{ secrets.CF_API_KEY }}
+          CF_EMAIL: marklgabriellijr@gmail.com
           CLOUDFLARE_ACCOUNT_ID: 5b4ea6b5589fe12f29bea5d7e43fe03c
           KV_NAMESPACE_ID: 0340e4af3ed44224ac380d1d35014834
 
       # ── Step 2: Deploy static assets to Cloudflare Pages ────────────
-      # Uses a clean git archive so no untracked workspace files leak in.
-      # .cfignore (which includes *.html) is extracted into the archive
-      # dir, so wrangler respects it and the static deploy stays <20K files.
+      # Clean git archive ensures no untracked workspace files leak.
+      # .cfignore (which includes *.html) is in the archive, so wrangler
+      # excludes HTML and the static deploy stays well under 20K files.
       - name: Create clean deploy archive
         run: |
           mkdir -p /tmp/markcmo_deploy

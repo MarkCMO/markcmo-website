@@ -5,9 +5,14 @@
 // Called by .github/workflows/deploy.yml before `wrangler pages deploy`.
 //
 // Required env vars:
-//   CLOUDFLARE_API_TOKEN   — CF API token with KV:Edit permission
-//   CLOUDFLARE_ACCOUNT_ID  — CF account ID (5b4ea6b5589fe12f29bea5d7e43fe03c)
-//   KV_NAMESPACE_ID        — Target KV namespace (0340e4af3ed44224ac380d1d35014834)
+//   CF_API_KEY             — Cloudflare Global API Key (X-Auth-Key)
+//   CF_EMAIL               — Cloudflare account email (X-Auth-Email)
+//   CLOUDFLARE_ACCOUNT_ID  — CF account ID
+//   KV_NAMESPACE_ID        — Target KV namespace ID
+//
+// Uses X-Auth-Email + X-Auth-Key auth (Global API Key) because the
+// scoped CLOUDFLARE_API_TOKEN used for `wrangler pages deploy` only has
+// Cloudflare Pages:Edit permission and cannot write to Workers KV.
 //
 // KV key format: repo-relative path with .html stripped.
 //   index.html              → "index"
@@ -20,19 +25,20 @@ const fs    = require('fs');
 const path  = require('path');
 const https = require('https');
 
+const CF_API_KEY   = process.env.CF_API_KEY;
+const CF_EMAIL     = process.env.CF_EMAIL;
 const ACCOUNT_ID   = process.env.CLOUDFLARE_ACCOUNT_ID;
-const API_TOKEN    = process.env.CLOUDFLARE_API_TOKEN;
 const NAMESPACE_ID = process.env.KV_NAMESPACE_ID;
 
-// Directories to skip entirely (no HTML served from here)
+// Directories to skip entirely
 const SKIP_DIRS = new Set([
   'node_modules', 'dist', 'tmp', '.git', '.claude', '.netlify',
   '.wrangler', '.cursor', 'functions', 'netlify', 'scripts',
   'cloudflare', 'supabase', '.github',
 ]);
 
-// Max body size per CF KV bulk-put request (CF hard limit: 100 MB)
-const MAX_BATCH_BYTES = 75 * 1024 * 1024; // 75 MB safety margin
+// Max uncompressed body per CF KV bulk-put request (CF hard limit: 100 MB)
+const MAX_BATCH_BYTES = 75 * 1024 * 1024;
 
 // -----------------------------------------------------------------
 // Recursively find all .html files
@@ -43,7 +49,6 @@ function findHtml(dir, results) {
   try { entries = fs.readdirSync(dir); } catch (_) { return results; }
 
   for (const entry of entries) {
-    // Skip hidden dirs except .well-known
     if (entry.startsWith('.') && entry !== '.well-known') continue;
     if (SKIP_DIRS.has(entry)) continue;
 
@@ -70,8 +75,8 @@ function toKey(filePath) {
 }
 
 // -----------------------------------------------------------------
-// PUT a batch of {key, value} pairs to the CF KV Bulk Write API
-// https://developers.cloudflare.com/api/resources/kv/subresources/namespace_bulk/
+// PUT a batch of {key, value} pairs via CF KV Bulk Write API
+// Auth: X-Auth-Email + X-Auth-Key (Global API Key)
 // -----------------------------------------------------------------
 function bulkPut(pairs) {
   return new Promise((resolve, reject) => {
@@ -82,8 +87,9 @@ function bulkPut(pairs) {
       path:     `/client/v4/accounts/${ACCOUNT_ID}/storage/kv/namespaces/${NAMESPACE_ID}/bulk`,
       method:   'PUT',
       headers: {
-        'Authorization': `Bearer ${API_TOKEN}`,
-        'Content-Type':  'application/json',
+        'X-Auth-Email':   CF_EMAIL,
+        'X-Auth-Key':     CF_API_KEY,
+        'Content-Type':   'application/json',
         'Content-Length': body.length,
       },
     }, res => {
@@ -114,9 +120,11 @@ function bulkPut(pairs) {
 // Main
 // -----------------------------------------------------------------
 async function main() {
-  if (!ACCOUNT_ID || !API_TOKEN || !NAMESPACE_ID) {
+  if (!CF_API_KEY || !CF_EMAIL || !ACCOUNT_ID || !NAMESPACE_ID) {
     console.error(
-      'ERROR: Set CLOUDFLARE_ACCOUNT_ID, CLOUDFLARE_API_TOKEN, and KV_NAMESPACE_ID env vars.'
+      'ERROR: Set CF_API_KEY, CF_EMAIL, CLOUDFLARE_ACCOUNT_ID, and KV_NAMESPACE_ID env vars.\n' +
+      'CF_API_KEY must be the Cloudflare Global API Key (not the scoped Pages deploy token).\n' +
+      'Add it as a GitHub Actions secret named CF_API_KEY.'
     );
     process.exit(1);
   }
@@ -152,7 +160,6 @@ async function main() {
     }
 
     const key = toKey(file);
-    // Rough byte estimate: content + ~10% JSON escape overhead + key + structural overhead
     const est = Math.ceil(Buffer.byteLength(content, 'utf8') * 1.12) + key.length + 40;
 
     if (batchPairs.length > 0 && batchBytes + est > MAX_BATCH_BYTES) {
