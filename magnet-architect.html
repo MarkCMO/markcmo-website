@@ -501,73 +501,6 @@
 </div>
 </div>
 
-<footer>
-<div class="footer-mega">
-<div class="footer-brand-col">
-<div class="footer-brand">Mark <span>Gabrielli</span></div>
-<div class="footer-tagline">Fractional CMO &amp; COO</div>
-<p class="footer-desc">Embedded executive strategy for B2B growth-stage companies. 15+ years. 370+ cities served.</p>
-</div>
-<div>
-<div class="footer-col-title">MAGNET</div>
-<ul>
-<li><a href="magnet-framework.html">Overview</a></li>
-<li><a href="magnet-map.html">Map</a></li>
-<li><a href="magnet-architect.html">Architect</a></li>
-<li><a href="magnet-generate.html">Generate</a></li>
-<li><a href="magnet-nurture.html">Nurture</a></li>
-<li><a href="magnet-engineer.html">Engineer</a></li>
-<li><a href="magnet-track.html">Track</a></li>
-</ul>
-</div>
-<div>
-<div class="footer-col-title">Services</div>
-<ul>
-<li><a href="fractional-cmo.html">Fractional CMO</a></li>
-<li><a href="fractional-coo.html">Fractional COO</a></li>
-<li><a href="services.html">All Services</a></li>
-</ul>
-</div>
-<div>
-<div class="footer-col-title">Company</div>
-<ul>
-<li><a href="about.html">About Mark</a></li>
-<li><a href="results.html">Results</a></li>
-<li><a href="blog.html">Insights</a></li>
-<li><a href="book.html">Book a Call</a></li>
-</ul>
-</div>
-</div>
-<div class="footer-bottom">
-<p class="footer-copy">&copy; 2026 Mark Gabrielli / WETYR Corp. All rights reserved.</p>
-</div>
-</footer>
-
-<script>
-document.querySelectorAll('.reveal').forEach(function(el){
-  var o=new IntersectionObserver(function(entries){
-    entries.forEach(function(e){if(e.isIntersecting){e.target.classList.add('visible');}});
-  },{threshold:0.1});
-  o.observe(el);
-});
-</script>
-<script src="nav.js" defer></script>
-<script>
-(function(){
-  var nav=document.getElementById('mainNav');
-  var ham=document.getElementById('navHam');
-  var drw=document.getElementById('mobileDrawer');
-  if(nav) window.addEventListener('scroll',function(){
-    nav.classList.toggle('scrolled',window.scrollY>20);
-  },{passive:true});
-  if(ham&&drw){
-    ham.addEventListener('click',function(){drw.classList.toggle('open');});
-    drw.querySelectorAll('a').forEach(function(a){
-      a.addEventListener('click',function(){drw.classList.remove('open');});
-    });
-  }
-})();
-</script>
 <style id="mc-form-styles">
 .mc-contact{background:linear-gradient(135deg,#050919 0%,#0A1628 60%,#0d1b27 100%);padding:64px 0;border-top:1px solid #2a2a2a;margin-top:0}
 .mc-contact-inner{max-width:1100px;margin:0 auto;padding:0 24px;display:grid;grid-template-columns:1fr 1fr;gap:56px;align-items:start}
@@ -654,6 +587,74 @@ document.querySelectorAll('.reveal').forEach(function(el){
     </div>
   </div>
 </section>
+<footer>
+<div class="footer-mega">
+<div class="footer-brand-col">
+<div class="footer-brand">Mark <span>Gabrielli</span></div>
+<div class="footer-tagline">Fractional CMO &amp; COO</div>
+<p class="footer-desc">Embedded executive strategy for B2B growth-stage companies. 15+ years. 370+ cities served.</p>
+</div>
+<div>
+<div class="footer-col-title">MAGNET</div>
+<ul>
+<li><a href="magnet-framework.html">Overview</a></li>
+<li><a href="magnet-map.html">Map</a></li>
+<li><a href="magnet-architect.html">Architect</a></li>
+<li><a href="magnet-generate.html">Generate</a></li>
+<li><a href="magnet-nurture.html">Nurture</a></li>
+<li><a href="magnet-engineer.html">Engineer</a></li>
+<li><a href="magnet-track.html">Track</a></li>
+</ul>
+</div>
+<div>
+<div class="footer-col-title">Services</div>
+<ul>
+<li><a href="fractional-cmo.html">Fractional CMO</a></li>
+<li><a href="fractional-coo.html">Fractional COO</a></li>
+<li><a href="services.html">All Services</a></li>
+</ul>
+</div>
+<div>
+<div class="footer-col-title">Company</div>
+<ul>
+<li><a href="about.html">About Mark</a></li>
+<li><a href="results.html">Results</a></li>
+<li><a href="blog.html">Insights</a></li>
+<li><a href="book.html">Book a Call</a></li>
+</ul>
+</div>
+</div>
+<div class="footer-bottom">
+<p class="footer-copy">&copy; 2026 Mark Gabrielli / WETYR Corp. All rights reserved.</p>
+</div>
+</footer>
+
+<script>
+document.querySelectorAll('.reveal').forEach(function(el){
+  var o=new IntersectionObserver(function(entries){
+    entries.forEach(function(e){if(e.isIntersecting){e.target.classList.add('visible');}});
+  },{threshold:0.1});
+  o.observe(el);
+});
+</script>
+<script src="nav.js" defer></script>
+<script>
+(function(){
+  var nav=document.getElementById('mainNav');
+  var ham=document.getElementById('navHam');
+  var drw=document.getElementById('mobileDrawer');
+  if(nav) window.addEventListener('scroll',function(){
+    nav.classList.toggle('scrolled',window.scrollY>20);
+  },{passive:true});
+  if(ham&&drw){
+    ham.addEventListener('click',function(){drw.classList.toggle('open');});
+    drw.querySelectorAll('a').forEach(function(a){
+      a.addEventListener('click',function(){drw.classList.remove('open');});
+    });
+  }
+})();
+</script>
+
 <script>
 (function(){
   var _t;

@@ -470,27 +470,6 @@ footer a:hover{color:#fff}
   </div>
 </section>
 
-<footer>
-  <div class="container">
-    <p>&copy; 2025 MarkCMO - A WETYR Company. All rights reserved.</p>
-    <p style="margin-top:8px"><a href="/fractional-cmo/kentucky/">Kentucky Fractional CMO Services</a> &nbsp;|&nbsp; <a href="/fractional-cmo/">All Markets</a> &nbsp;|&nbsp; <a href="/#contact">Contact</a></p>
-  </div>
-</footer>
-
-<script src="../../../nav.js"></script>
-<script>
-const sp=document.getElementById('sp');
-window.addEventListener('scroll',()=>{
-  const h=document.documentElement;
-  sp.style.width=((h.scrollTop/(h.scrollHeight-h.clientHeight))*100)+'%'
-});
-document.querySelectorAll('.faq-q').forEach(q=>{
-  q.addEventListener('click',()=>{
-    const item=q.parentElement;
-    item.classList.toggle('open');
-  });
-});
-</script>
 <style id="mc-form-styles">
 .mc-contact{background:linear-gradient(135deg,#050919 0%,#0A1628 60%,#0d1b27 100%);padding:72px 0;border-top:1px solid #2a2a2a}
 .mc-contact-inner{max-width:1200px;margin:0 auto;padding:0 24px;display:grid;grid-template-columns:1fr 1fr;gap:64px;align-items:start}
@@ -576,6 +555,28 @@ document.querySelectorAll('.faq-q').forEach(q=>{
     </div>
   </div>
 </section>
+<footer>
+  <div class="container">
+    <p>&copy; 2025 MarkCMO - A WETYR Company. All rights reserved.</p>
+    <p style="margin-top:8px"><a href="/fractional-cmo/kentucky/">Kentucky Fractional CMO Services</a> &nbsp;|&nbsp; <a href="/fractional-cmo/">All Markets</a> &nbsp;|&nbsp; <a href="/#contact">Contact</a></p>
+  </div>
+</footer>
+
+<script src="../../../nav.js"></script>
+<script>
+const sp=document.getElementById('sp');
+window.addEventListener('scroll',()=>{
+  const h=document.documentElement;
+  sp.style.width=((h.scrollTop/(h.scrollHeight-h.clientHeight))*100)+'%'
+});
+document.querySelectorAll('.faq-q').forEach(q=>{
+  q.addEventListener('click',()=>{
+    const item=q.parentElement;
+    item.classList.toggle('open');
+  });
+});
+</script>
+
 <script>
 (function(){
   var _t;
