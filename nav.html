@@ -1,33 +1,101 @@
-<!-- noindex -->
+<style id="site-nav-css">
+/* ─── NAV ─── */
+.nav {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+  height: 64px; padding: 0 5vw;
+  display: flex; align-items: center; justify-content: space-between;
+  background: rgba(10,15,44,0.85);
+  backdrop-filter: blur(20px);
+  border-bottom: 1px solid var(--border);
+}
+.nav-logo {
+  font-family: 'Outfit', sans-serif; font-size: 1.1rem; font-weight: 700;
+  color: #fff; display: flex; align-items: center; gap: 10px;
+}
+.nav-logo-avatar {
+  width: 34px; height: 34px; border-radius: 50%;
+  overflow: hidden; flex-shrink: 0;
+  border: 2px solid var(--accent);
+  box-shadow: 0 0 10px rgba(201,168,76,0.35);
+}
+.nav-logo-avatar img { width: 100%; height: 100%; object-fit: cover; object-position: center top; }
+.nav-logo-text { display: flex; flex-direction: column; line-height: 1.1; }
+.nav-logo-text strong { font-size: 0.95rem; font-weight: 800; color: #fff; }
+.nav-logo-text span { font-size: 0.65rem; font-weight: 500; color: var(--text3); letter-spacing: 0.06em; text-transform: uppercase; }
+.nav-right { display: flex; align-items: center; gap: 1.5rem; }
+.nav-links { display: flex; align-items: center; gap: 2.5rem; }
+.nav-links a { font-size: 0.875rem; font-weight: 500; color: var(--text2); transition: color 0.15s; }
+.nav-links a:hover { color: #fff; }
+.nav-btn {
+  font-size: 0.875rem; font-weight: 600; color: #fff;
+  background: var(--accent); padding: 0.5rem 1.25rem;
+  border-radius: 8px; transition: opacity 0.15s, transform 0.15s;
+}
+.nav-btn:hover { opacity: 0.88; transform: translateY(-1px); }
+.nav-hamburger {
+  display: none; flex-direction: column; gap: 5px; cursor: pointer; padding: 4px;
+}
+.nav-hamburger span { display: block; width: 22px; height: 2px; background: #fff; border-radius: 2px; }
+.mobile-drawer {
+  display: none; position: fixed; inset: 0; z-index: 99;
+  background: var(--bg); padding: 80px 6vw 40px;
+  flex-direction: column; gap: 1.5rem;
+}
+.mobile-drawer.open { display: flex; }
+.mobile-drawer a { font-size: 1.2rem; font-weight: 600; color: #fff; padding: 0.6rem 0; border-bottom: 1px solid var(--border); }
+/* ─── NAV SCROLLED ─── */
+.nav.scrolled {
+  background: rgba(10,15,44,0.97);
+  box-shadow: 0 4px 32px rgba(0,0,0,0.4);
+}
+/* ─── NAV RESPONSIVE ─── */
+@media (max-width:1100px) {
+  .nav-links { display:none; }
+  .nav-right .nav-btn { display:none; }
+  .nav-hamburger { display:flex; }
+}
+</style>
 <nav class="nav" id="mainNav">
-<a href="/" class="nav-logo">
-<div class="nav-logo-avatar">
-<img src="/mark-photo.webp" alt="Mark Gabrielli" />
-</div>
-<div class="nav-logo-text">
-<strong>Mark Gabrielli</strong>
-<span>Fractional CMO &amp; COO</span>
-</div>
-</a>
-<ul class="nav-links">
-<li><a href="/about">About</a></li>
-<li><a href="/services">Services</a></li>
-<li><a href="/magnet-framework" style="color:#C9A84C;font-weight:600;">MAGNET&trade;</a></li>
-<li><a href="/results">Results</a></li>
-<li><a href="/blog">Insights</a></li>
-<li><a href="https://academy.markcmo.com" target="_blank" style="color:#C9A84C;">Academy</a></li>
-</ul>
-<div class="nav-right">
-<a href="/book" class="nav-btn">Book a Free Call</a>
-</div>
-<div class="nav-hamburger" id="navHam"><span></span><span></span><span></span></div>
+  <a href="/" class="nav-logo">
+    <div class="nav-logo-avatar">
+      <img src="/mark-photo.webp" alt="Mark Gabrielli" onerror="this.parentElement.innerHTML='<span style=\'display:flex;align-items:center;justify-content:center;width:100%;height:100%;font-family:Outfit,sans-serif;font-weight:900;font-size:1rem;color:#fff;background:var(--accent)\'>M</span>'" />
+    </div>
+    <div class="nav-logo-text">
+      <strong>Mark Gabrielli</strong>
+      <span>Fractional CMO &amp; COO</span>
+    </div>
+  </a>
+  <ul class="nav-links">
+    <li><a href="/about">About</a></li>
+    <li><a href="/services">Services</a></li>
+    <li><a href="/magnet-framework" style="color:var(--accent);font-weight:600;">MAGNET&trade;</a></li>
+    <li><a href="/results">Results</a></li>
+    <li><a href="/blog">Insights</a></li>
+    <li><a href="https://academy.markcmo.com" target="_blank" style="color:var(--accent);">Academy</a></li>
+  </ul>
+  <div class="nav-right">
+    <a href="/book" class="nav-btn">Book a Free Call</a>
+  </div>
+  <div class="nav-hamburger" id="navHam"><span></span><span></span><span></span></div>
 </nav>
 <div class="mobile-drawer" id="mobileDrawer">
-<a href="/about">About</a>
-<a href="/services">Services</a>
-<a href="/magnet-framework" style="color:#C9A84C;font-weight:600;">MAGNET Framework&trade;</a>
-<a href="/results">Results</a>
-<a href="/blog">Insights</a>
-<a href="https://academy.markcmo.com" target="_blank">Academy</a>
-<a href="/book" style="color:#C9A84C;font-weight:700;">Book a Free Strategy Call &rarr;</a>
+  <a href="/about">About</a>
+  <a href="/services">Services</a>
+  <a href="/magnet-framework" style="color:var(--accent);font-weight:600;">MAGNET Framework&trade;</a>
+  <a href="/results">Results</a>
+  <a href="/blog">Insights</a>
+  <a href="https://academy.markcmo.com" target="_blank">Academy</a>
+  <a href="/book" style="color:var(--accent);font-weight:700;">Book a Free Strategy Call &rarr;</a>
 </div>
+<script>
+(function(){
+  var nav=document.getElementById('mainNav');
+  if(nav) window.addEventListener('scroll',function(){nav.classList.toggle('scrolled',window.scrollY>20);},{passive:true});
+  var ham=document.getElementById('navHam');
+  var drawer=document.getElementById('mobileDrawer');
+  if(ham&&drawer){
+    ham.addEventListener('click',function(){drawer.classList.toggle('open');});
+    drawer.querySelectorAll('a').forEach(function(a){a.addEventListener('click',function(){drawer.classList.remove('open');});});
+  }
+})();
+</script>

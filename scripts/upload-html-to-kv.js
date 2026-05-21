@@ -178,7 +178,31 @@ async function main() {
   );
 }
 
-main().catch(err => {
-  console.error('upload-html-to-kv FAILED:', err.message || String(err));
-  process.exit(1);
-});
+// ─────────────────────────────────────────────────────────────────────────────
+// Upload shared components (footer.html → _footer, nav.html → _nav)
+// These are fetched by functions/[[path]].js at request time to inject into
+// every page served from KV.  Keyed with underscore prefix to distinguish them
+// from real page content.
+// ─────────────────────────────────────────────────────────────────────────────
+async function uploadSharedComponents() {
+  const pairs = [];
+  for (const [file, key] of [['footer.html', '_footer'], ['nav.html', '_nav']]) {
+    let value;
+    try { value = fs.readFileSync(path.join(process.cwd(), file), 'utf8'); } catch (e) {
+      console.warn(`  Skipping ${file}: ${e.message}`);
+      continue;
+    }
+    pairs.push({ key, value });
+  }
+  if (pairs.length === 0) return;
+  console.log(`Uploading shared components: ${pairs.map(p => p.key).join(', ')}...`);
+  await bulkPut(pairs);
+  console.log('  Shared components uploaded.');
+}
+
+main()
+  .then(uploadSharedComponents)
+  .catch(err => {
+    console.error('upload-html-to-kv FAILED:', err.message || String(err));
+    process.exit(1);
+  });

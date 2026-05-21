@@ -150,6 +150,7 @@ export async function onRequest(context) {
   }
 
   if (html !== null) {
+    html = await injectSharedComponents(html, kv);
     return new Response(html, {
       status: 200,
       headers: {
@@ -165,4 +166,39 @@ export async function onRequest(context) {
     status: 404,
     headers: { 'content-type': 'text/html; charset=utf-8' },
   });
+}
+
+// ── Shared nav + footer injection ────────────────────────────────────────────
+// nav.html    → KV key "_nav"    (style + <nav id="mainNav"> + mobile drawer + init script)
+// footer.html → KV key "_footer" (style + <footer>…</footer>)
+//
+// • Nav: injected right after <body> only on pages that lack id="mainNav"
+//         (compare/*, guides/*, etc. — pages with their own nav are left alone)
+// • Footer: every <footer>…</footer> is replaced with the shared version
+//           so all pages stay in sync when footer.html changes
+async function injectSharedComponents(html, kv) {
+  // Parallel KV fetch — edge-cached for 1 hour after first read
+  const [sharedNav, sharedFooter] = await Promise.all([
+    kv.get('_nav',    { type: 'text', cacheTtl: 3600 }),
+    kv.get('_footer', { type: 'text', cacheTtl: 3600 }),
+  ]);
+
+  // ── Nav ─────────────────────────────────────────────────────────────────
+  if (sharedNav && !html.includes('id="mainNav"')) {
+    html = html.replace('<body>', '<body>\n' + sharedNav);
+  }
+
+  // ── Footer ──────────────────────────────────────────────────────────────
+  // <footer…>…</footer> → shared footer (HTML forbids nested <footer> so this is safe)
+  if (sharedFooter) {
+    const footerRe = /<footer[\s\S]*?<\/footer>/i;
+    if (footerRe.test(html)) {
+      html = html.replace(footerRe, sharedFooter);
+    } else {
+      // No footer on this page — append before </body>
+      html = html.replace('</body>', sharedFooter + '\n</body>');
+    }
+  }
+
+  return html;
 }
