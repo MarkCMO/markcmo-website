@@ -14,7 +14,7 @@
     name:        'Mark Gabrielli',
     title:       'Fractional CMO & COO',
     company:     'WETYR Corp',
-    photoUrl:    '/mark-photo.webp',
+    photoUrl:    '/assets/mark-gabrielli.jpg',
     storageKey:  'mgLiWidgetDismissed',
     posKey:      'mgLiWidgetPos',
     hideDays:    30          // days to stay hidden after dismiss

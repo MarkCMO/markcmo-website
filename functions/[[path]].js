@@ -200,5 +200,13 @@ async function injectSharedComponents(html, kv) {
     }
   }
 
+  // ── LinkedIn widget ───────────────────────────────────────────────────────
+  // Inject on every page that doesn't already have it (script is idempotent
+  // via localStorage dismiss logic so double-loading is harmless, but skip
+  // it when already present to avoid duplicate widgets).
+  if (!html.includes('linkedin-widget.js')) {
+    html = html.replace('</body>', '<script src="/linkedin-widget.js" defer></script>\n</body>');
+  }
+
   return html;
 }

@@ -125,7 +125,7 @@
           datePublished: post.published_at,
           dateModified: post.updated_at,
           author: { '@type': 'Person', name: post.author_name || 'Mark Gabrielli' },
-          publisher: { '@type': 'Organization', name: 'MarkCMO', logo: { '@type': 'ImageObject', url: 'https://markcmo.com/mark-photo.webp' } },
+          publisher: { '@type': 'Organization', name: 'MarkCMO', logo: { '@type': 'ImageObject', url: 'https://markcmo.com/assets/mark-gabrielli.jpg' } },
           mainEntityOfPage: { '@type': 'WebPage', '@id': `https://markcmo.com/blog/${post.slug}` },
         });
         document.head.appendChild(schema);
