@@ -28,7 +28,33 @@
 
 /llms.txt
   Content-Type: text/plain; charset=utf-8
-  Cache-Control: public, max-age=86400
+  Access-Control-Allow-Origin: *
+  Cache-Control: public, max-age=3600
+
+/llms-full.txt
+  Content-Type: text/plain; charset=utf-8
+  Access-Control-Allow-Origin: *
+  Cache-Control: public, max-age=3600
+
+/llm.txt
+  Content-Type: text/plain; charset=utf-8
+  Access-Control-Allow-Origin: *
+  Cache-Control: public, max-age=3600
+
+/ai.txt
+  Content-Type: text/plain; charset=utf-8
+  Access-Control-Allow-Origin: *
+  Cache-Control: public, max-age=3600
+
+/humans.txt
+  Content-Type: text/plain; charset=utf-8
+  Cache-Control: public, max-age=3600
+
+/.well-known/llm.txt
+  Content-Type: text/plain; charset=utf-8
+  Access-Control-Allow-Origin: *
+  Cache-Control: public, max-age=3600
+
 # ─── DOCUMENT VDR SECURITY ───────────────────────────────────────────
 /documents/*
   X-Robots-Tag: noindex, nofollow, noarchive, nosnippet
