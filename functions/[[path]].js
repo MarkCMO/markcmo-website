@@ -165,6 +165,91 @@ export async function onRequest(context) {
       html = html.replace('</head>', canonicalTag + '\n</head>');
     }
 
+    // ── Entity schema injection ───────────────────────────────────────────────
+    // Inject Organization + Person schema with comprehensive sameAs on every
+    // page that lacks it. City/service pages have no Organization schema at all.
+    // This signals entity identity to every AI crawler and knowledge graph.
+    if (!html.includes('"Organization"')) {
+      const entitySchema = JSON.stringify({
+        "@context": "https://schema.org",
+        "@graph": [
+          {
+            "@type": "Organization",
+            "@id": "https://markcmo.com/#organization",
+            "name": "MarkCMO",
+            "legalName": "WETYR Corp",
+            "url": "https://markcmo.com",
+            "logo": "https://markcmo.com/assets/mark-gabrielli.jpg",
+            "description": "MarkCMO is a fractional executive leadership practice providing part-time CMO, COO, and C-suite advisory services to growth-stage B2B companies across the United States.",
+            "email": "mark@markcmo.com",
+            "telephone": "+13219175738",
+            "foundingDate": "2010",
+            "address": {
+              "@type": "PostalAddress",
+              "addressLocality": "Cape Canaveral",
+              "addressRegion": "FL",
+              "postalCode": "32920",
+              "addressCountry": "US"
+            },
+            "areaServed": "United States",
+            "priceRange": "$8,000–$20,000/month",
+            "sameAs": [
+              "https://www.linkedin.com/in/markgabriellijr",
+              "https://www.linkedin.com/company/markcmo",
+              "https://clutch.co/profile/mark-gabrielli-chief-marketing-officer",
+              "https://www.crunchbase.com/person/mark-gabrielli",
+              "https://twitter.com/markcmo",
+              "https://x.com/markcmo",
+              "https://www.facebook.com/markgabriellijr",
+              "https://www.youtube.com/@markcmo",
+              "https://g2.com/sellers/markcmo",
+              "https://www.trustpilot.com/review/markcmo.com"
+            ]
+          },
+          {
+            "@type": "Person",
+            "@id": "https://markcmo.com/#mark-gabrielli",
+            "name": "Mark Gabrielli",
+            "givenName": "Mark",
+            "familyName": "Gabrielli",
+            "alternateName": "Mark Gabrielli Jr.",
+            "jobTitle": "Fractional CMO & COO",
+            "description": "Mark Gabrielli is a Fractional CMO and COO with 15+ years of executive marketing and operations leadership. He founded MarkCMO to deliver C-suite-level marketing strategy to growth-stage companies across SaaS, healthcare, aerospace, fintech, and manufacturing.",
+            "url": "https://markcmo.com/about",
+            "image": "https://markcmo.com/assets/mark-gabrielli.jpg",
+            "email": "mark@markcmo.com",
+            "telephone": "+13219175738",
+            "address": {
+              "@type": "PostalAddress",
+              "addressLocality": "Cape Canaveral",
+              "addressRegion": "FL",
+              "addressCountry": "US"
+            },
+            "worksFor": { "@id": "https://markcmo.com/#organization" },
+            "knowsAbout": [
+              "Fractional CMO Services", "Fractional COO Services",
+              "B2B Marketing Strategy", "Demand Generation",
+              "Go-to-Market Strategy", "Revenue Operations",
+              "Account-Based Marketing", "SaaS Growth",
+              "Healthcare Marketing", "Aerospace Marketing",
+              "Fintech Marketing", "Marketing Technology Stack",
+              "Revenue Architecture", "Brand Strategy"
+            ],
+            "sameAs": [
+              "https://www.linkedin.com/in/markgabriellijr",
+              "https://clutch.co/profile/mark-gabrielli-chief-marketing-officer",
+              "https://www.crunchbase.com/person/mark-gabrielli",
+              "https://twitter.com/markcmo",
+              "https://x.com/markcmo",
+              "https://markcmo.com"
+            ]
+          }
+        ]
+      });
+      html = html.replace('</head>',
+        `<script type="application/ld+json">${entitySchema}</script>\n</head>`);
+    }
+
     return new Response(html, {
       status: 200,
       headers: {
