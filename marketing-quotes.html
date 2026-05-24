@@ -1074,9 +1074,8 @@
 </div>
 </section>
 <!-- MOBILE RESPONSIVE -->
-<style>@media(max-width:680px){section[style*="1080px"] > div{grid-template-columns:1fr !important;}}</style>
-<script>
-function handlePageForm(e,name){
+<style>@media(max-width:680px){section[*="1080px"] > div{grid-template-columns:1fr !important;}}</stylestyle>
+<script>ction handlePageForm(e,name){
   e.preventDefault();
   var btn=document.getElementById('pgBtn_'+name);
   var form=document.getElementById('pgForm_'+name);
@@ -1086,9 +1085,9 @@ function handlePageForm(e,name){
   fetch('/api/lead',{method:'POST',headers:{'Content-Type':'application/x-www-form-urlencoded'},
     body:new URLSearchParams({'form-name':name,'name':data.get('name')||'','email':data.get('email')||'','company':data.get('company')||'','phone':data.get('phone')||'','message':data.get('message')||''}).toString()
   }).then(function(){
-    form.style.display='none';success.style.display='block';
+    form.style.display='none';success.styl.style.display='block';
   }).catch(function(){
-    // Cloudflare Pages fallback: show success and open mailto
+    // Cloudflages fallback: show success and open mailto
     form.style.display='none';success.style.display='block';
     window.location.href='mailto:mark@markcmo.com?subject=Strategy+Inquiry+from+'+encodeURIComponent(window.location.pathname)+'&body='+encodeURIComponent('Name: '+data.get('name')+'\nEmail: '+data.get('email')+'\nCompany: '+data.get('company')+'\nMessage: '+data.get('message'));
   });
@@ -1126,7 +1125,7 @@ function handlePageForm(e,name){
 <li><a href="about.html">About Mark</a></li>
 <li><a href="results.html">Results</a></li>
 <li><a href="contact.html">Contact</a></li>
-<li><a href="book.html">Book a Call</a></li>
+<li><a href="/book">Book a Call</a></li>
 <li><a href="https://academy.markcmo.com" target="_blank" style="color:#C9A84C;">MarkCMO Academy</a></li>
 </ul></div>
 </div>
@@ -1141,9 +1140,9 @@ function handlePageForm(e,name){
 </footer>
 <script>
 (function(){
-  var nav=document.getElementById('mainNav');var ham=document.getElementById('navHam');var drw=document.getElementById('mobileDrawer');
+  var nav=document.getElementById('mainNav');var ham=document.getElementById('navHam');var drw=document.getElementById('mobileDbileDrawer');
   if(nav)window.addEventListener('scroll',function(){nav.classList.toggle('scrolled',window.scrollY>20);},{passive:true});
-  if(ham&&drw){ham.addEventListener('click',function(){drw.classList.toggle('open');});drw.querySelectorAll('a').forEach(function(a){a.addEventListener('click',function(){drw.classList.remove('open');});});}
+  if(ham&&drw){ham.adtListener('click',function(){drw.classList.toggle('open');});drw.querySelectorAll('a').forEach(function(a){a.addEventListener('click',function(){drw.classList.remove('open');});});}
 })();
 </script>
 <script>
@@ -1158,6 +1157,7 @@ function filterQ(btn,cat){
 <style>
 @media(max-width:768px){
   [style*="grid-template-columns:1fr 1.4fr"],[style*="grid-template-columns:1fr 1.2fr"],
+"],
   [style*="grid-template-columns:1fr 1fr"],[style*="grid-template-columns:2fr 1fr"],
   [style*="grid-template-columns:1fr 300px"],[style*="grid-template-columns:1fr 280px"]{
     grid-template-columns:1fr !important;
