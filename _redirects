@@ -265,12 +265,34 @@ https://www.markcmo.com/* https://markcmo.com/:splat 301!
 /core-strategy-positioning-2               /fractional-cmo  301
 /core-strategy-positioning-2/              /fractional-cmo  301
 
+# ─── Fix: /city-pages/* old URL structure → clean URL ───────
+# These were an old subfolder structure; redirect to canonical path
+/city-pages/*                              /:splat  301!
+
+# ─── Fix: Old fractional-coo/cmo subpath pages ──────────────
+# Old site had /fractional-coo/systems-tech-stack etc — redirect to service page
+/fractional-coo/*                          /fractional-coo  301!
+/fractional-cmo/b2b-saas                   /fractional-cmo  301!
+/fractional-cmo/b2b-saas.html              /fractional-cmo  301!
+/fractional-cmo/utah/*                     /fractional-cmo  301!
+/fractional-cmo/healthcare/*               /fractional-cmo  301!
+
 # ─── Fix: Old location format (city without state code) ─────
-/location/fractional-cmo-milwaukee         /fractional-cmo-milwaukee-wi  301
-/location/fractional-cmo-texas             /fractional-cmo-texas  301
-/location/results.html                     /results  301
-/location/marketing-strategy.html          /marketing-strategy  301
-/location/*                                /fractional-cmo  301
+/location/fractional-cmo-milwaukee         /fractional-cmo-milwaukee-wi  301!
+/location/fractional-cmo-texas             /fractional-cmo-texas         301!
+/location/results.html                     /results                       301!
+/location/marketing-strategy.html          /marketing-strategy            301!
+/location/services.html                    /services                      301!
+/location/privacy.html                     /privacy                       301!
+/location/contact.html                     /contact                       301!
+/location/book.html                        /book                          301!
+/location/portfolio.html                   /portfolio                     301!
+/location/ai-automation.html               /ai-automation                 301!
+/location/managed-it.html                  /managed-it                    301!
+/location/fractional-cmo.html              /fractional-cmo                301!
+/location/fractional-coo.html              /fractional-coo                301!
+# Pass-through: /location/fractional-cmo-xxx → /fractional-cmo-xxx
+/location/*                                /:splat  301!
 
 # ─── Fix: Misc old paths ────────────────────────────────────
 /page/                                     /  301

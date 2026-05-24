@@ -201,6 +201,54 @@ User-agent: Grok
 Allow: /
 Crawl-delay: 1
 
+User-agent: GrokBot
+Allow: /
+Crawl-delay: 1
+
+User-agent: DeepSeek-Spider
+Allow: /
+Crawl-delay: 1
+
+User-agent: DeepSeekBot
+Allow: /
+Crawl-delay: 1
+
+User-agent: QwenBot
+Allow: /
+Crawl-delay: 1
+
+User-agent: Qwen
+Allow: /
+Crawl-delay: 1
+
+User-agent: MoonshotBot
+Allow: /
+Crawl-delay: 1
+
+User-agent: HuggingFaceBot
+Allow: /
+Crawl-delay: 1
+
+User-agent: ErniBot
+Allow: /
+Crawl-delay: 1
+
+User-agent: PanguBot
+Allow: /
+Crawl-delay: 1
+
+User-agent: FriendlyCrawler
+Allow: /
+Crawl-delay: 1
+
+User-agent: Scrapy
+Allow: /
+Crawl-delay: 2
+
+User-agent: DataForSeoBot
+Allow: /
+Crawl-delay: 2
+
 User-agent: Webzio-Extended
 Allow: /
 Crawl-delay: 1
