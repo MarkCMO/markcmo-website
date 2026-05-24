@@ -43,8 +43,11 @@ let count = 0;
 for (const name of allFns) { generateFile(`${OUT_ROOT}/api/${name}.js`, name); count++; }
 
 // Dynamic page routes
+// Routes listed here get a simple shim that dispatches to the Netlify function.
+// Routes listed in HYBRID_PATTERN get a smart template that falls through to
+// the KV catch-all when the request has no ?action= API parameter — this lets
+// the same path serve both a rendered HTML page AND an API endpoint.
 const PATTERN = [
-  ['blog/[[path]].js',             'public-blog'],
   ['pay/[[path]].js',              'pay'],
   ['purchase-gate/[[path]].js',    'purchase-gate'],
   ['course-lesson/[[path]].js',    'course-lesson'],
@@ -63,8 +66,41 @@ const PATTERN = [
 ];
 for (const [route, handler] of PATTERN) { generateFile(`${OUT_ROOT}/${route}`, handler); count++; }
 
-// Root catch-all: serves pre-rendered HTML pages from BLOBS_MARKCMO_PAGES_HTML KV
-const catchAll = `// AUTO-GENERATED catch-all: serves HTML pages from KV
+// Hybrid routes: serve HTML page from KV when no ?action= param,
+// dispatch to API when ?action= is present.
+const HYBRID_PATTERN = [
+  ['blog/[[path]].js', 'public-blog'],
+];
+for (const [route, handler] of HYBRID_PATTERN) {
+  // Include OUT_ROOT in depth calculation so relative paths resolve correctly
+  const segs = `${OUT_ROOT}/${route}`.split('/');
+  const depth = segs.length - 2;
+  const shimUp = '../'.repeat(depth) || './';
+  const netlifyUp = '../'.repeat(depth + 1);
+  const hybridTpl = `// AUTO-GENERATED hybrid route: HTML page from KV, API via ?action= param
+import { dispatchSingle } from '${shimUp}_lib/netlify-shim.js';
+import * as mod from '${netlifyUp}netlify/functions/${handler}.js';
+export async function onRequest(context) {
+  const url = new URL(context.request.url);
+  // API calls include ?action= — dispatch to the Netlify function handler
+  if (url.searchParams.has('action')) {
+    return dispatchSingle(mod, context);
+  }
+  // No action param — fall through to root [[path]].js KV page server
+  return context.next();
+}
+`;
+  fs.mkdirSync(path.dirname(`${OUT_ROOT}/${route}`), { recursive: true });
+  fs.writeFileSync(`${OUT_ROOT}/${route}`, hybridTpl);
+  count++;
+}
+
+// Root catch-all (functions/[[path]].js) is MANUALLY MAINTAINED in git.
+// It contains schema injection, entity markup, SPA fallbacks, Netlify compat,
+// and context.next() static asset fallthrough. Do NOT overwrite it here.
+// If it is missing for some reason, write a minimal emergency fallback.
+if (!fs.existsSync(`${OUT_ROOT}/[[path]].js`)) {
+  const emergencyCatchAll = `// EMERGENCY fallback catch-all — real version is in git at functions/[[path]].js
 export async function onRequest(context) {
   const { request, env } = context;
   const url = new URL(request.url);
@@ -80,11 +116,15 @@ export async function onRequest(context) {
   if (html !== null) {
     return new Response(html, { status: 200, headers: { 'content-type': 'text/html; charset=utf-8', 'cache-control': 'public, max-age=3600' } });
   }
+  const staticResponse = await context.next();
+  if (staticResponse.status !== 404) return staticResponse;
   const notFound = await kv.get('404', { type: 'text' });
   return new Response(notFound || '<h1>404 Not Found</h1>', { status: 404, headers: { 'content-type': 'text/html; charset=utf-8' } });
 }
 `;
-fs.writeFileSync(`${OUT_ROOT}/[[path]].js`, catchAll);
+  fs.writeFileSync(`${OUT_ROOT}/[[path]].js`, emergencyCatchAll);
+  console.warn('WARNING: functions/[[path]].js was missing — wrote emergency fallback. Restore from git.');
+}
 count++;
 
 console.log(`generated ${count} Pages Function files`);
