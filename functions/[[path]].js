@@ -97,6 +97,9 @@ const SPA_INDEX = {
 // ── Nav/footer auto-injection ─────────────────────────────────────────────────
 // Pages that should NOT have nav/footer injected (special/admin/utility pages).
 const NO_INJECT = new Set([
+  // Homepage — has its own complete inline nav + footer; skip injection
+  'index',
+  // Special / admin / utility pages
   '404', 'access-required', 'nav', 'footer', 'blog-post',
   'resume-hub', 'welcome', 'verify', 'diploma', 'graduation',
   'exam', 'admin', 'admin-c7x9k2m', 'admin-directories', 'admin.html',
@@ -178,17 +181,20 @@ export async function onRequest(context) {
     // Automatically add/replace nav and footer on every page so all pages
     // share the same chrome, regardless of what HTML is stored in KV.
     //
-    // Three cases handled:
-    //  1. Page has NO footer  → inject SITE_FOOTER_HTML before </body>
-    //  2. Page has footer-mega → replace old footer with SITE_FOOTER_ELEMENT
-    //  3. Page already has footer-main → skip (already correct)
+    // Four cases handled:
+    //  1. Page has NO footer          → inject SITE_FOOTER_HTML before </body>
+    //  2. Page has footer-mega        → replace old footer with SITE_FOOTER_HTML
+    //  3. Page has footer-main but no site-footer-css → replace with SITE_FOOTER_HTML
+    //  4. Page has footer-main + site-footer-css  → skip (already correct)
     if (shouldInjectChrome(p) && html.includes('</body>')) {
-      const missingNav     = !html.includes('id="mainNav"');
-      const hasFooterMega  = html.includes('footer-mega') || html.includes('footer-brand-col');
-      const hasFooterMain  = html.includes('footer-main');
-      const missingFooter  = !html.includes('</footer>');
+      const missingNav         = !html.includes('id="mainNav"');
+      const hasFooterMega      = html.includes('footer-mega') || html.includes('footer-brand-col');
+      const hasFooterMain      = html.includes('footer-main');
+      const hasFooterCSS       = html.includes('site-footer-css');
+      const missingFooter      = !html.includes('</footer>');
+      const needsFooterReplace = hasFooterMega || (hasFooterMain && !hasFooterCSS);
 
-      if (missingNav || hasFooterMega || missingFooter) {
+      if (missingNav || needsFooterReplace || missingFooter) {
         // Ensure style.css is loaded (CSS variables + shared styles)
         if (!html.includes('style.css')) {
           html = html.replace('</head>',
@@ -206,22 +212,23 @@ export async function onRequest(context) {
         }
       }
 
-      if (hasFooterMega) {
-        // Replace old footer-mega with footer-main using string ops (more reliable
-        // than regex in edge bundles when content spans many lines).
-        const fStart = html.indexOf('<footer>');
+      if (needsFooterReplace) {
+        // Replace old footer (footer-mega or footer-main without self-contained CSS)
+        // with full SITE_FOOTER_HTML (includes inline <style> + 8-col footer-main).
+        // String ops are more reliable than regex in edge bundles.
+        const fStart = html.indexOf('<footer');
         const fEnd   = html.indexOf('</footer>', fStart);
         if (fStart !== -1 && fEnd !== -1) {
-          html = html.slice(0, fStart) + SITE_FOOTER_ELEMENT + html.slice(fEnd + '</footer>'.length);
+          html = html.slice(0, fStart) + SITE_FOOTER_HTML + html.slice(fEnd + '</footer>'.length);
         }
       } else if (missingFooter) {
-        // No footer at all — inject full footer (includes style tag for safety)
+        // No footer at all — inject full footer (includes style tag)
         const bodyClose = html.lastIndexOf('</body>');
         if (bodyClose !== -1) {
           html = html.slice(0, bodyClose) + SITE_FOOTER_HTML + '\n' + html.slice(bodyClose);
         }
       }
-      // hasFooterMain → already correct, do nothing
+      // hasFooterMain + hasFooterCSS → already correct, do nothing
     }
 
     // ── Canonical URL injection ───────────────────────────────────────────────
