@@ -1,4 +1,5 @@
 // functions/[[path]].js
+import { SITE_NAV_HTML, SITE_FOOTER_HTML } from './_lib/site-chrome.js';
 // Root catch-all for Cloudflare Pages.
 // Handles two responsibilities:
 //
@@ -93,6 +94,23 @@ const SPA_INDEX = {
   'admin':    'admin/index',
 };
 
+// ── Nav/footer auto-injection ─────────────────────────────────────────────────
+// Pages that should NOT have nav/footer injected (special/admin/utility pages).
+const NO_INJECT = new Set([
+  '404', 'access-required', 'nav', 'footer', 'blog-post',
+  'resume-hub', 'welcome', 'verify', 'diploma', 'graduation',
+  'exam', 'admin', 'admin-c7x9k2m', 'admin-directories', 'admin.html',
+  'learn',
+]);
+function shouldInjectChrome(pagePath) {
+  if (NO_INJECT.has(pagePath)) return false;
+  if (pagePath.startsWith('MLG-Resume')) return false;
+  if (pagePath.startsWith('admin/') || pagePath.startsWith('portal/') ||
+      pagePath.startsWith('sign/')  || pagePath.startsWith('exam/') ||
+      pagePath.startsWith('learn/')) return false;
+  return true;
+}
+
 export async function onRequest(context) {
   const { request, env } = context;
   const url = new URL(request.url);
@@ -156,6 +174,32 @@ export async function onRequest(context) {
   }
 
   if (html !== null) {
+    // ── Nav / footer injection ────────────────────────────────────────────────
+    // Automatically add the site nav and footer to any page that is missing
+    // them, so every page has consistent chrome without requiring individual
+    // HTML file edits.
+    if (shouldInjectChrome(p) && html.includes('</body>')) {
+      const missingNav    = !html.includes('id="mainNav"');
+      const missingFooter = !html.includes('</footer>');
+      if (missingNav || missingFooter) {
+        // Ensure style.css is loaded (provides CSS variables + shared styles)
+        if (!html.includes('style.css')) {
+          html = html.replace('</head>',
+            '<link rel="stylesheet" href="/style.css">\n</head>');
+        }
+      }
+      if (missingNav) {
+        // Insert nav immediately after <body> tag + add padding for fixed nav.
+        html = html.replace(
+          /<body([^>]*)>/,
+          `<body$1><style>body{padding-top:64px}</style>${SITE_NAV_HTML}`
+        );
+      }
+      if (missingFooter) {
+        html = html.replace('</body>', `${SITE_FOOTER_HTML}\n</body>`);
+      }
+    }
+
     // ── Canonical URL injection ───────────────────────────────────────────────
     // Ensure every page has a self-referencing canonical to prevent duplicate
     // content issues from www/non-www, .html suffix, and old path variants.

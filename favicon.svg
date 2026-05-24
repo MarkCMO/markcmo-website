@@ -1,23 +1,40 @@
-<?xml version="1.0" encoding="UTF-8"?>
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" width="64" height="64">
   <defs>
-    <clipPath id="c"><circle cx="32" cy="32" r="26"/></clipPath>
+    <style>
+      @keyframes zoom-pulse {
+        0%,100% { transform: scale(0.82); opacity: 0.72; }
+        50%      { transform: scale(1.0);  opacity: 1;    }
+      }
+      @keyframes ring-pulse {
+        0%,100% { opacity: 0.35; r: 29; }
+        50%      { opacity: 0.9;  r: 31; }
+      }
+      .m-letter {
+        transform-box: fill-box;
+        transform-origin: center;
+        animation: zoom-pulse 2.6s ease-in-out infinite;
+      }
+      .outer-ring {
+        animation: ring-pulse 2.6s ease-in-out infinite;
+      }
+    </style>
   </defs>
-  <!-- dark background -->
-  <circle cx="32" cy="32" r="32" fill="#080E27"/>
-  <!-- outer pulsing gold ring -->
-  <circle cx="32" cy="32" r="29" fill="none" stroke="#C9A84C" stroke-width="2">
-    <animate attributeName="r" values="27;30;27" dur="2s" repeatCount="indefinite"/>
-    <animate attributeName="opacity" values="0.9;0.2;0.9" dur="2s" repeatCount="indefinite"/>
-    <animate attributeName="stroke-width" values="2;3;2" dur="2s" repeatCount="indefinite"/>
-  </circle>
-  <!-- static inner ring -->
-  <circle cx="32" cy="32" r="27" fill="#080E27" stroke="#C9A84C" stroke-width="1.5"/>
-  <!-- Mark's photo clipped to circle -->
-  <image href="/mark-photo.webp" x="6" y="6" width="52" height="52" clip-path="url(#c)" preserveAspectRatio="xMidYMid slice"/>
-  <!-- second staggered pulse ring for depth -->
-  <circle cx="32" cy="32" r="27" fill="none" stroke="#C9A84C" stroke-width="1" opacity="0.35">
-    <animate attributeName="r" values="26;31;26" dur="2s" begin="1s" repeatCount="indefinite"/>
-    <animate attributeName="opacity" values="0.5;0;0.5" dur="2s" begin="1s" repeatCount="indefinite"/>
-  </circle>
+
+  <!-- Dark navy background with rounded corners -->
+  <rect width="64" height="64" rx="14" fill="#080E27"/>
+
+  <!-- Subtle outer glow ring -->
+  <circle class="outer-ring" cx="32" cy="32" r="30" fill="none"
+    stroke="#C9A84C" stroke-width="1.5" opacity="0.35"/>
+
+  <!-- Animated M -->
+  <text class="m-letter"
+    x="32" y="48"
+    font-family="'Outfit','Arial Black',Arial,sans-serif"
+    font-weight="900"
+    font-size="46"
+    fill="#C9A84C"
+    text-anchor="middle"
+    dominant-baseline="auto"
+    letter-spacing="-2">M</text>
 </svg>
