@@ -1,0 +1,306 @@
+# ═══════════════════════════════════════════════════════════
+# Redirects — markcmo.com  (Cloudflare Pages + Netlify compatible)
+# RULE: First match wins. Keep most-specific rules FIRST.
+# 404 catch-all MUST be last.
+# ═══════════════════════════════════════════════════════════
+
+# ─── www → non-www ──────────────────────────────────────────
+https://www.markcmo.com/* https://markcmo.com/:splat 301!
+
+# ─── Core pages: .html → clean URL (301 permanent) ─────────
+/index.html                          /                              301!
+/about.html                          /about                         301!
+/services.html                       /services                      301!
+/portfolio.html                      /portfolio                     301!
+/results.html                        /results                       301!
+/book.html                           /book                          301!
+# Blog index: serve blog.html at /blog
+/blog                                /blog.html                     200
+/blog/                               /blog.html                     200
+/blog.html                           /blog                          301!
+# Dynamic CMS blog posts: /blog/<slug> renders blog-post.html which fetches from public-blog
+/blog/:slug                          /blog-post.html?slug=:slug     200
+/contact.html                        /contact                       301!
+/faq.html                            /faq                           301!
+/industries.html                     /industries                    301!
+/testimonials.html                   /testimonials                  301!
+/privacy.html                        /privacy                       301!
+/thank-you.html                      /thank-you                     301!
+/wetyr.html                          /wetyr                         301!
+/wetyr-films.html                    /wetyr-films                   301!
+/wetyr-film.html                     /wetyr-films                   301!
+/wetyr-film                          /wetyr-films                   301!
+/wetyr-studio.html                   /wetyr-studio                  301!
+
+# ─── Service pages ──────────────────────────────────────────
+/fractional-cmo.html                 /fractional-cmo                301!
+/press.html                          /press                         301!
+/speaking.html                       /speaking                      301!
+/case-studies.html                   /case-studies                  301!
+/glossary.html                       /glossary                      301!
+
+# ─── Glossary clean URLs ─────────────────────────────────────
+/what-is-a-fractional-cmo.html       /what-is-a-fractional-cmo      301!
+/fractional-cmo-definition.html      /fractional-cmo-definition     301!
+/what-is-a-cmo.html                  /what-is-a-cmo                 301!
+/what-is-coo.html                    /what-is-coo                   301!
+/what-is-demand-generation.html      /what-is-demand-generation     301!
+/what-is-go-to-market-strategy.html  /what-is-go-to-market-strategy 301!
+/what-is-revenue-operations.html     /what-is-revenue-operations    301!
+/what-is-cac.html                    /what-is-cac                   301!
+/what-is-ltv.html                    /what-is-ltv                   301!
+/marketing-qualified-lead.html       /marketing-qualified-lead      301!
+/ideal-customer-profile.html         /ideal-customer-profile        301!
+/what-is-product-market-fit.html     /what-is-product-market-fit    301!
+/fractional-coo.html                 /fractional-coo                301!
+/executive-advisory.html             /executive-advisory            301!
+/marketing-strategy.html             /marketing-strategy            301!
+/ai-automation.html                  /ai-automation                 301!
+/cybersecurity.html                  /cybersecurity                 301!
+/managed-it.html                     /managed-it                    301!
+/business-funding.html               /business-funding              301!
+/saas-development.html               /saas-development              301!
+/cloud-services.html                 /cloud-services                301!
+/executive-recruiting.html           /executive-recruiting          301!
+/mergers-acquisitions.html           /mergers-acquisitions          301!
+
+# ─── Industry pages ─────────────────────────────────────────
+/fractional-cmo-tech.html                    /fractional-cmo-tech                    301!
+/fractional-cmo-retail.html                  /fractional-cmo-retail                  301!
+/fractional-cmo-energy.html                  /fractional-cmo-energy                  301!
+/fractional-cmo-media.html                   /fractional-cmo-media                   301!
+/fractional-cmo-ai.html                      /fractional-cmo-ai                      301!
+/fractional-cmo-cybersecurity.html           /fractional-cmo-cybersecurity           301!
+/fractional-cmo-private-equity.html          /fractional-cmo-private-equity          301!
+/fractional-cmo-venture-capital.html         /fractional-cmo-venture-capital         301!
+/fractional-cmo-home-services.html           /fractional-cmo-home-services           301!
+/fractional-cmo-cannabis.html                /fractional-cmo-cannabis                301!
+
+# ─── Guide / FAQ pages ──────────────────────────────────────
+/how-to-hire-a-fractional-cmo.html           /how-to-hire-a-fractional-cmo           301!
+/questions-to-ask-a-fractional-cmo.html      /questions-to-ask-a-fractional-cmo      301!
+/when-do-you-need-a-fractional-cmo.html      /when-do-you-need-a-fractional-cmo      301!
+/fractional-cmo-vs-vp-marketing.html         /fractional-cmo-vs-vp-marketing         301!
+/fractional-cmo-first-90-days.html           /fractional-cmo-first-90-days           301!
+/fractional-cmo-contract.html                /fractional-cmo-contract                301!
+/fractional-cmo-vs-interim-cmo.html          /fractional-cmo-vs-interim-cmo          301!
+/fractional-cmo-vs-marketing-consultant.html /fractional-cmo-vs-marketing-consultant 301!
+
+# ─── Competitor alternative pages ───────────────────────────
+/fractional-cmo-vs-marketerhire.html          /fractional-cmo-vs-marketerhire          301!
+/fractional-cmo-vs-growthmode.html            /fractional-cmo-vs-growthmode            301!
+/fractional-cmo-vs-toptal.html                /fractional-cmo-vs-toptal                301!
+/fractional-cmo-vs-hire-with-near.html        /fractional-cmo-vs-hire-with-near        301!
+/fractional-cmo-vs-sterling-chase.html        /fractional-cmo-vs-sterling-chase        301!
+/fractional-cmo-vs-cmo-alliance.html          /fractional-cmo-vs-cmo-alliance          301!
+
+# ─── Funding-stage pages ─────────────────────────────────────
+/fractional-cmo-series-a.html                 /fractional-cmo-series-a                 301!
+/fractional-cmo-series-b.html                 /fractional-cmo-series-b                 301!
+/fractional-cmo-bootstrapped-companies.html   /fractional-cmo-bootstrapped-companies   301!
+/fractional-cmo-pe-backed-companies.html      /fractional-cmo-pe-backed-companies      301!
+/fractional-cmo-pre-revenue.html              /fractional-cmo-pre-revenue              301!
+
+# ─── Authority pages ─────────────────────────────────────────
+/best-fractional-cmo.html                     /best-fractional-cmo                     301!
+/top-fractional-cmo-usa.html                  /top-fractional-cmo-usa                  301!
+/fractional-cmo-for-b2b-companies.html        /fractional-cmo-for-b2b-companies        301!
+
+# ─── Blog pages ─────────────────────────────────────────────
+/blog-fractional-cmo-guide.html          /blog-fractional-cmo-guide          301!
+/blog-fractional-vs-fulltime-cmo.html    /blog-fractional-vs-fulltime-cmo    301!
+/blog-healthcare-marketing-strategy.html /blog-healthcare-marketing-strategy 301!
+/blog-operational-blind-spots.html       /blog-operational-blind-spots       301!
+/blog-psychology-framework.html          /blog-psychology-framework          301!
+
+# ─── Project pages ──────────────────────────────────────────
+/project-wetyr.html          /project-wetyr         301!
+/project-aileaders.html      /project-aileaders     301!
+/project-aitoolbox.html      /project-aitoolbox     301!
+/project-busbrother.html     /project-busbrother    301!
+/project-butcherbud.html     /project-butcherbud    301!
+/project-leadflow-cash.html  /project-leadflow-cash 301!
+/project-letsleavenow.html   /project-letsleavenow  301!
+/project-markcmo.html        /project-markcmo       301!
+/project-microgreenusa.html  /project-microgreenusa 301!
+/project-saasaf.html         /project-saasaf        301!
+/project-swipehire365.html   /project-swipehire365  301!
+/project-tablegreens.html    /project-tablegreens   301!
+
+# ─── Clean URL rewrites (serve .html at clean path) ─────────
+
+# ─── Document VDR (secure, noindex) ─────────────────────────
+/documents                     /documents/index.html          200
+
+# ─── Client case files (per-client VDR — confidential) ──────
+/documents/clients/wendal-enterprise           /documents/clients/wendal-enterprise/index.html         200
+/documents/clients/wendal-enterprise/sow       /documents/clients/wendal-enterprise/scope-of-work.html 200
+/documents/clients/wendal-enterprise/sign      /forms/wendal-enterprise-audit.html                     200
+
+# Salt Lake City Public Library — engagement package
+/documents/clients/salt-lake-city-public-library            /documents/clients/salt-lake-city-public-library/index.html         200
+/documents/clients/salt-lake-city-public-library/sow        /documents/clients/salt-lake-city-public-library/scope-of-work.html 200
+/documents/clients/salt-lake-city-public-library/sign       /forms/salt-lake-city-public-library-discovery.html                 200
+
+# ─── Admin VDR (now embedded inside /admin as #case-files panel) ──
+# Backwards-compat: any old links to /admin/vdr* land on /admin#case-files
+/admin/vdr                                      /admin#case-files                                       301!
+/admin/vdr/                                     /admin#case-files                                       301!
+/admin/vdr/*                                    /admin#case-files                                       301!
+
+# ─── Location hub ───────────────────────────────────────────
+/location                      /location/index.html           200
+
+# ─── Location pages (110 pages — explicit rewrites) ─────────
+
+# ─── Document signing system ────────────────────────────────
+/sign  /sign/index.html  200
+/sign/*  /sign/index.html  200
+
+# ─── Forms (PDF fill system) ─────────────────────────────────
+/forms                         /forms/index.html              200
+
+
+
+
+# ─── Courses Platform ───────────────────────────────────────
+/courses                       /courses/index.html            200
+
+# ─── Public client portal: /portal/{slug} ───────────────────
+# Slug-gated public page that fetches sanitized data via
+# /.netlify/functions/client-portal-data?slug=... — no admin auth,
+# but only exposes the fields explicitly whitelisted in the function.
+/portal/*                      /portal/index.html              200
+
+# ─── Customer-journey tracking redirects ─────────────────────
+# /pay/{mc_invoices.id} 302s to Square's payment URL after logging
+# the click. Lets us attribute payment-page opens to the channel
+# that drove them (email reminder vs admin "Send Payment Request").
+/pay/*                         /.netlify/functions/pay?id=:splat   200
+# /track/* surfaces the multi-purpose tracker for friendly URLs in
+# emails (e.g. /track/click?...). The function itself reads the
+# query string.
+/track                         /.netlify/functions/track   302
+/track/*                       /.netlify/functions/track   302
+
+# ─── Webinar Funnel + Admin ─────────────────────────────────
+# Admin: canonical URL handled in netlify.toml. The legacy obfuscated
+# /admin-c7x9k2m URL 301s to /admin to keep one admin surface alive.
+
+# ─── Resume Pages ──────────────────────────────────────────
+/resume.html                     /resume                        301!
+/MLG-Resume-Unfiltered.html      /resume-unfiltered             301!
+/MLG-Resume-Terminal.html        /resume-terminal               301!
+/MLG-Resume-Executive.html       /resume-executive              301!
+/MLG-Resume-Neon.html            /resume-neon                   301!
+/MLG-Resume-Classified.html      /resume-classified             301!
+/MLG-Resume-Blueprint.html       /resume-blueprint              301!
+/MLG-Resume-Desktop.html         /resume-desktop                301!
+/MLG-Resume-Broadsheet.html      /resume-broadsheet             301!
+/MLG-Resume-Datavis.html         /resume-datavis                301!
+/MLG-Resume-Comic.html           /resume-comic                  301!
+/MLG-Resume-Boarding.html        /resume-boarding               301!
+/resume-hub.html                 /resumes                       301!
+
+/resume-professional   /MLG-Resume-Professional.html  200
+/resume-unfiltered     /MLG-Resume-Unfiltered.html    200
+/resume-terminal       /MLG-Resume-Terminal.html      200
+/resume-executive      /MLG-Resume-Executive.html     200
+/resume-neon           /MLG-Resume-Neon.html          200
+/resume-classified     /MLG-Resume-Classified.html    200
+/resume-blueprint      /MLG-Resume-Blueprint.html     200
+/resume-desktop        /MLG-Resume-Desktop.html       200
+/resume-broadsheet     /MLG-Resume-Broadsheet.html    200
+/resume-datavis        /MLG-Resume-Datavis.html       200
+/resume-comic          /MLG-Resume-Comic.html         200
+/resume-boarding       /MLG-Resume-Boarding.html      200
+/resumes               /resume-hub.html               200
+
+# ─── Fix: Broken Calendly URL concatenations ─────────────────
+# Old pages had a malformed CTA that appended the Calendly URL to the page path
+/*/https/calendly.com/*                    /book  301
+/*/https//calendly.com/*                   /book  301
+
+# ─── Fix: Old WordPress taxonomy + pagination ────────────────
+/tag/*                                     /blog  301
+/category/*                                /blog  301
+/page/*                                    /      301
+/downloads/category/*                      /      301
+/downloads/page/*                          /      301
+/downloads/0*/                             /      301
+
+# ─── Fix: Old WordPress blog patterns ───────────────────────
+/growth-strategies-of-*                    /blog  301
+/the-way-mark-moves-on-*                   /blog  301
+/mark_gabrielli_cmo_contact*               /contact  301
+/mark_gabrielli_chief-marketing-officer*   /book  301
+/mark_gabrielli_cmo_chief*                 /blog  301
+/hire-or-contract-*                        /book  301
+/buy-ebooks-audiobooks*                    /blog  301
+
+# ─── Fix: Academy + Webinar old paths ───────────────────────
+/academy/magnet-blueprint-enrollment*      /courses  301
+/academy/thank-you*                        /thank-you  301
+/academy/*                                 /courses  301
+
+# ─── Fix: Old WordPress individual page slugs ────────────────
+/privacy-policy                            /privacy  301
+/privacy-policy/                           /privacy  301
+/about-mark-cmo-gabrielli                  /about  301
+/about-mark-cmo-gabrielli/                 /about  301
+/mark-louis-gabrielli-jr                   /about  301
+/mark-louis-gabrielli-jr/                  /about  301
+/markgpt                                   /ai-automation  301
+/markgpt/                                  /ai-automation  301
+/ridemark                                  /about  301
+/ridemark/                                 /about  301
+/6068-2                                    /blog  301
+/6068-2/                                   /blog  301
+/custom-tag-sitemap.xml                    /sitemap.xml  301
+/wp-content/*                              /  301
+/instant-branding-kits                     /services  301
+/instant-branding-kits/                    /services  301
+/mark_gabrielli_cmo_chief_marketing_officer_fuel_blog  /blog  301
+/mark_gabrielli_cmo_chief_marketing_officer_fuel_blog/ /blog  301
+/core-strategy-positioning-2               /fractional-cmo  301
+/core-strategy-positioning-2/              /fractional-cmo  301
+
+# ─── Fix: /city-pages/* old URL structure → clean URL ───────
+# These were an old subfolder structure; redirect to canonical path
+/city-pages/*                              /:splat  301!
+
+# ─── Fix: Old fractional-coo/cmo subpath pages ──────────────
+# Old site had /fractional-coo/systems-tech-stack etc — redirect to service page
+/fractional-coo/*                          /fractional-coo  301!
+/fractional-cmo/b2b-saas                   /fractional-cmo  301!
+/fractional-cmo/b2b-saas.html              /fractional-cmo  301!
+/fractional-cmo/utah/*                     /fractional-cmo  301!
+/fractional-cmo/healthcare/*               /fractional-cmo  301!
+
+# ─── Fix: Old location format (city without state code) ─────
+/location/fractional-cmo-milwaukee         /fractional-cmo-milwaukee-wi  301!
+/location/fractional-cmo-texas             /fractional-cmo-texas         301!
+/location/results.html                     /results                       301!
+/location/marketing-strategy.html          /marketing-strategy            301!
+/location/services.html                    /services                      301!
+/location/privacy.html                     /privacy                       301!
+/location/contact.html                     /contact                       301!
+/location/book.html                        /book                          301!
+/location/portfolio.html                   /portfolio                     301!
+/location/ai-automation.html               /ai-automation                 301!
+/location/managed-it.html                  /managed-it                    301!
+/location/fractional-cmo.html              /fractional-cmo                301!
+/location/fractional-coo.html              /fractional-coo                301!
+# Pass-through: /location/fractional-cmo-xxx → /fractional-cmo-xxx
+/location/*                                /:splat  301!
+
+# ─── Fix: Misc old paths ────────────────────────────────────
+/page/                                     /  301
+/downloads/                                /  301
+/portfolio/                                /portfolio  301
+/industry-specific-marketing-playbooks     /services  301
+/industry-specific-marketing-playbooks/    /services  301
+
+# ─── 404 fallback — MUST BE LAST ────────────────────────────
+/*  /index.html  404
+

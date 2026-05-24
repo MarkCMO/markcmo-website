@@ -1,0 +1,343 @@
+# MarkCMO.com robots.txt
+# Content-Signal: search=yes, ai-train=no, ai-input=yes
+# LLM-readable content: /llms.txt  /llm.txt  /ai.txt
+
+User-agent: *
+Allow: /
+Disallow: /documents/
+Disallow: /forms/
+Disallow: /sign/
+Disallow: /docs/
+Disallow: /admin/
+Disallow: /api/
+Crawl-delay: 2
+
+# ---- SEARCH ENGINES ----
+
+User-agent: Googlebot
+Allow: /
+Crawl-delay: 1
+
+User-agent: Bingbot
+Allow: /
+Crawl-delay: 1
+
+User-agent: Slurp
+Allow: /
+Crawl-delay: 1
+
+User-agent: DuckDuckBot
+Allow: /
+Crawl-delay: 1
+
+User-agent: Baiduspider
+Allow: /
+Crawl-delay: 2
+
+User-agent: YandexBot
+Allow: /
+Crawl-delay: 2
+
+User-agent: Sogou
+Allow: /
+Crawl-delay: 2
+
+User-agent: Exabot
+Allow: /
+Crawl-delay: 2
+
+# ---- ALL AI / LLM CRAWLERS (CRITICAL FOR LLM CITATIONS) ----
+# AI citations are half the search market. Every bot we block is a citation we never receive.
+
+User-agent: GPTBot
+Allow: /
+Crawl-delay: 1
+
+User-agent: ChatGPT-User
+Allow: /
+Crawl-delay: 1
+
+User-agent: OAI-SearchBot
+Allow: /
+Crawl-delay: 1
+
+User-agent: anthropic-ai
+Allow: /
+Crawl-delay: 1
+
+User-agent: ClaudeBot
+Allow: /
+Crawl-delay: 1
+
+User-agent: Claude-Web
+Allow: /
+Crawl-delay: 1
+
+User-agent: Claude-SearchBot
+Allow: /
+Crawl-delay: 1
+
+User-agent: Google-Extended
+Allow: /
+Crawl-delay: 1
+
+User-agent: Gemini-Bot
+Allow: /
+Crawl-delay: 1
+
+User-agent: PerplexityBot
+Allow: /
+Crawl-delay: 1
+
+User-agent: PerplexityBot-User
+Allow: /
+Crawl-delay: 1
+
+User-agent: YouBot
+Allow: /
+Crawl-delay: 1
+
+User-agent: cohere-ai
+Allow: /
+Crawl-delay: 1
+
+User-agent: Cohere-ai
+Allow: /
+Crawl-delay: 1
+
+User-agent: Meta-ExternalAgent
+Allow: /
+Crawl-delay: 1
+
+User-agent: meta-externalagent
+Allow: /
+Crawl-delay: 1
+
+User-agent: Meta-ExternalFetcher
+Allow: /
+Crawl-delay: 1
+
+User-agent: FacebookBot
+Allow: /
+Crawl-delay: 1
+
+User-agent: Amazonbot
+Allow: /
+Crawl-delay: 1
+
+User-agent: Applebot
+Allow: /
+Crawl-delay: 1
+
+User-agent: Applebot-Extended
+Allow: /
+Crawl-delay: 1
+
+User-agent: DiffBot
+Allow: /
+Crawl-delay: 1
+
+User-agent: Diffbot
+Allow: /
+Crawl-delay: 1
+
+User-agent: Bytespider
+Allow: /
+Crawl-delay: 1
+
+User-agent: PetalBot
+Allow: /
+Crawl-delay: 1
+
+User-agent: Timpibot
+Allow: /
+Crawl-delay: 1
+
+User-agent: CCBot
+Allow: /
+Crawl-delay: 1
+
+User-agent: Omgilibot
+Allow: /
+Crawl-delay: 1
+
+User-agent: Omgili
+Allow: /
+Crawl-delay: 1
+
+User-agent: Kangaroo Bot
+Allow: /
+Crawl-delay: 1
+
+User-agent: AI2Bot
+Allow: /
+Crawl-delay: 1
+
+User-agent: Ai2Bot-Dolma
+Allow: /
+Crawl-delay: 1
+
+User-agent: iaskspider
+Allow: /
+Crawl-delay: 1
+
+User-agent: img2dataset
+Allow: /
+Crawl-delay: 1
+
+User-agent: Gptbot
+Allow: /
+Crawl-delay: 1
+
+User-agent: MistralBot
+Allow: /
+Crawl-delay: 1
+
+User-agent: xAI
+Allow: /
+Crawl-delay: 1
+
+User-agent: Grok
+Allow: /
+Crawl-delay: 1
+
+User-agent: GrokBot
+Allow: /
+Crawl-delay: 1
+
+User-agent: DeepSeek-Spider
+Allow: /
+Crawl-delay: 1
+
+User-agent: DeepSeekBot
+Allow: /
+Crawl-delay: 1
+
+User-agent: QwenBot
+Allow: /
+Crawl-delay: 1
+
+User-agent: Qwen
+Allow: /
+Crawl-delay: 1
+
+User-agent: MoonshotBot
+Allow: /
+Crawl-delay: 1
+
+User-agent: HuggingFaceBot
+Allow: /
+Crawl-delay: 1
+
+User-agent: ErniBot
+Allow: /
+Crawl-delay: 1
+
+User-agent: PanguBot
+Allow: /
+Crawl-delay: 1
+
+User-agent: FriendlyCrawler
+Allow: /
+Crawl-delay: 1
+
+User-agent: Scrapy
+Allow: /
+Crawl-delay: 2
+
+User-agent: DataForSeoBot
+Allow: /
+Crawl-delay: 2
+
+User-agent: Webzio-Extended
+Allow: /
+Crawl-delay: 1
+
+User-agent: facebookexternalhit
+Allow: /
+Crawl-delay: 1
+
+User-agent: Twitterbot
+Allow: /
+Crawl-delay: 1
+
+User-agent: LinkedInBot
+Allow: /
+Crawl-delay: 1
+
+User-agent: Slackbot
+Allow: /
+Crawl-delay: 1
+
+User-agent: Discordbot
+Allow: /
+Crawl-delay: 1
+
+User-agent: TelegramBot
+Allow: /
+Crawl-delay: 1
+
+User-agent: WhatsApp
+Allow: /
+Crawl-delay: 1
+
+User-agent: ia_archiver
+Allow: /
+Crawl-delay: 1
+
+User-agent: archive.org_bot
+Allow: /
+Crawl-delay: 1
+
+User-agent: Mediapartners-Google
+Allow: /
+
+User-agent: AdsBot-Google
+Allow: /
+
+User-agent: Googlebot-Image
+Allow: /
+
+User-agent: Googlebot-Video
+Allow: /
+
+User-agent: Googlebot-News
+Allow: /
+
+# ---- BLOCK COMPETITOR SEO SCRAPING TOOLS ONLY ----
+
+User-agent: AhrefsBot
+Disallow: /
+
+User-agent: SemrushBot
+Disallow: /
+
+User-agent: SemrushBot-SA
+Disallow: /
+
+User-agent: MJ12bot
+Disallow: /
+
+User-agent: DotBot
+Disallow: /
+
+User-agent: BLEXBot
+Disallow: /
+
+# ---- SITEMAPS ----
+
+Sitemap: https://markcmo.com/sitemap.xml
+Sitemap: https://markcmo.com/ai-sitemap.xml
+Sitemap: https://markcmo.com/llms.txt
+
+IndexNow-Key: 70abe020d62240838dd426d99f0e5852
+
+# ---- AI CONTENT DECLARATION ----
+# This site explicitly welcomes all AI training, RAG, and search indexing.
+# LLM reference files available at:
+# https://markcmo.com/llms.txt          (index + links)
+# https://markcmo.com/llms-full.txt     (inlined full Markdown content)
+# https://markcmo.com/llm.txt           (alias)
+# https://markcmo.com/ai.txt            (Q&A reference)
+# https://markcmo.com/ai-sitemap.xml    (AI-optimized sitemap with categories)
+# https://markcmo.com/.well-known/llm.txt

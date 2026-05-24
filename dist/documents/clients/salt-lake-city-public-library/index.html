@@ -1,0 +1,425 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Salt Lake City Public Library | Engagement Documents | MarkCMO</title>
+<meta name="description" content="Engagement documents prepared for Tyler Bahr, CFO, Salt Lake City Public Library. Discovery &amp; Alignment, Phase 1 Operational Assessment, and Phase 2 implementation paths." />
+<meta name="robots" content="noindex, nofollow, noarchive, nosnippet, noimageindex" />
+<meta http-equiv="Cache-Control" content="no-store, no-cache, must-revalidate, private" />
+<link rel="preconnect" href="https://fonts.googleapis.com" crossorigin>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Barlow:wght@400;500;600;700;800&family=DM+Mono:wght@400;500&display=swap">
+<style>
+  :root{
+    --navy:#0A1628;--navy-mid:#0F2040;--navy-light:#162A4A;
+    --blue:#2563EB;--blue-hover:#1D4ED8;--blue-light:#3B82F6;--blue-pale:#EFF6FF;
+    --orange:#F97316;--orange-light:#FB923C;
+    --white:#FFFFFF;--off-white:#F8FAFC;--light:#F1F5F9;--border:#E2E8F0;
+    --text:#1E293B;--text-mid:#64748B;--text-light:#94A3B8;
+    --shadow-md:0 4px 16px rgba(15,32,64,0.08), 0 8px 32px rgba(15,32,64,0.06);
+    --shadow-blue:0 4px 20px rgba(37,99,235,0.22), 0 2px 8px rgba(37,99,235,0.14);
+  }
+  *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+  body{font-family:'Barlow',sans-serif;background:var(--off-white);color:var(--text);line-height:1.65;min-height:100vh;}
+  a{color:var(--blue);text-decoration:none;}
+
+  .doc-nav{position:sticky;top:0;z-index:100;background:var(--white);border-bottom:1px solid var(--border);padding:0.9rem 2rem;display:flex;justify-content:space-between;align-items:center;}
+  .doc-nav-logo{font-family:'Bebas Neue',sans-serif;font-size:1.25rem;letter-spacing:0.12em;color:var(--blue);}
+  .doc-nav-logo span{color:var(--text);}
+  .doc-nav-meta{font-family:'DM Mono',monospace;font-size:0.7rem;letter-spacing:0.15em;text-transform:uppercase;color:var(--text-light);}
+  .doc-nav-meta strong{color:var(--blue);font-weight:600;}
+
+  .cover-hero{
+    background:linear-gradient(135deg,var(--navy) 0%,var(--navy-mid) 50%,var(--navy-light) 100%);
+    color:var(--white);
+    padding:5rem 2rem 4rem;position:relative;overflow:hidden;box-shadow:0 24px 60px -16px rgba(15,32,64,0.35);}
+
+  .cover-hero-inner{max-width:1080px;margin:0 auto;display:grid;grid-template-columns:1fr 1fr;gap:3rem;align-items:center;}
+  @media(max-width:860px){.cover-hero-inner{grid-template-columns:1fr;}}
+
+  .cover-eyebrow{font-family:'DM Mono',monospace;font-size:0.72rem;letter-spacing:0.25em;text-transform:uppercase;color:var(--blue-light);margin-bottom:1.2rem;display:flex;align-items:center;gap:0.75rem;}
+
+  .cover-hero h1{font-family:'Bebas Neue',sans-serif;font-size:clamp(2.4rem,5.5vw,3.8rem);font-weight:400;letter-spacing:0.02em;line-height:1.05;color:var(--white);margin-bottom:1rem;}
+  .cover-hero h1 em{color:var(--orange-light);font-style:normal;}
+  .cover-hero-sub{font-size:1.05rem;color:rgba(248,250,252,0.78);max-width:520px;line-height:1.55;margin-bottom:1.75rem;}
+
+  .client-card{
+    background:rgba(255,255,255,0.04);
+    border:1px solid rgba(255,255,255,0.1);
+    border-radius:16px;
+    padding:1.75rem 2rem;
+    backdrop-filter:blur(8px);
+  }
+  .client-card .lbl{font-family:'DM Mono',monospace;font-size:0.65rem;letter-spacing:0.2em;text-transform:uppercase;color:var(--blue-light);margin-bottom:0.6rem;}
+  .client-card h3{font-family:'Bebas Neue',sans-serif;font-size:1.7rem;letter-spacing:0.04em;color:var(--white);margin-bottom:0.4rem;font-weight:400;}
+  .client-card .who{color:rgba(255,255,255,0.85);font-size:1rem;margin-bottom:1rem;}
+  .client-card .who strong{color:var(--white);font-weight:700;}
+  .client-card .meta-grid{display:grid;grid-template-columns:1fr 1fr;gap:1.25rem;padding-top:1.25rem;border-top:1px solid rgba(255,255,255,0.1);}
+  .client-card .meta-grid .item .lbl{font-size:0.6rem;}
+  .client-card .meta-grid .item .val{font-family:'Bebas Neue',sans-serif;font-size:1.3rem;color:var(--white);letter-spacing:0.04em;}
+
+  .doc-body{max-width:1080px;margin:0 auto;padding:4rem 2rem;}
+  .section-eyebrow{font-family:'DM Mono',monospace;font-size:0.7rem;letter-spacing:0.2em;text-transform:uppercase;color:var(--blue);margin-bottom:0.85rem;font-weight:700;display:inline-block;padding:0.3rem 0.85rem;background:var(--blue-pale);border-radius:6px;}
+
+  h2{font-family:'Bebas Neue',sans-serif;font-size:clamp(1.8rem,3.4vw,2.5rem);font-weight:400;letter-spacing:0.02em;color:var(--navy);margin-bottom:1.25rem;line-height:1.15;}
+  h2 span{color:var(--blue);}
+  p{margin-bottom:1rem;font-size:0.98rem;}
+
+  .doc-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.5rem;margin:2rem 0 3rem;}
+  @media(max-width:860px){.doc-grid{grid-template-columns:1fr;}}
+  .doc-card{
+    background:var(--white);border:1px solid var(--border);border-radius:16px;padding:2rem;
+    display:flex;flex-direction:column;
+    transition:transform 0.2s, box-shadow 0.2s, border-color 0.2s;
+    text-decoration:none;color:inherit;position:relative;overflow:hidden;
+  }
+  .doc-card:hover{transform:translateY(-4px);box-shadow:var(--shadow-md);border-color:var(--blue);}
+  .doc-card .doc-id{font-family:'DM Mono',monospace;font-size:0.65rem;letter-spacing:0.2em;text-transform:uppercase;color:var(--blue);margin-bottom:0.75rem;font-weight:600;}
+  .doc-card .doc-num{font-family:'Bebas Neue',sans-serif;font-size:3rem;color:var(--blue-pale);letter-spacing:0.04em;line-height:1;position:absolute;top:1.5rem;right:1.75rem;}
+  .doc-card h3{font-family:'Bebas Neue',sans-serif;font-size:1.6rem;letter-spacing:0.03em;color:var(--navy);margin-bottom:0.5rem;font-weight:400;line-height:1.1;}
+  .doc-card .desc{font-size:0.94rem;color:var(--text-mid);margin-bottom:1.25rem;line-height:1.55;flex:1;}
+  .doc-card .meta{font-family:'DM Mono',monospace;font-size:0.68rem;letter-spacing:0.12em;color:var(--text-light);text-transform:uppercase;margin-bottom:1rem;}
+  .doc-card .open{display:inline-flex;align-items:center;gap:0.4rem;font-family:'Barlow',sans-serif;font-size:0.88rem;font-weight:700;color:var(--blue);text-transform:uppercase;letter-spacing:0.05em;}
+  .doc-card:hover .open{color:var(--blue-hover);}
+  .doc-card .open::after{content:'→';transition:transform 0.2s;}
+  .doc-card:hover .open::after{transform:translateX(4px);}
+
+  /* Engagement tier strip */
+  .tier-strip{
+    background:var(--white);border:1px solid var(--border);border-radius:16px;padding:0;
+    margin:2.5rem 0;overflow:hidden;
+  }
+  .tier-row{display:grid;grid-template-columns:1fr auto;gap:1.5rem;padding:1.75rem 2rem;align-items:center;border-bottom:1px solid var(--border);}
+  .tier-row:last-child{border-bottom:0;}
+  .tier-row.featured{background:linear-gradient(135deg,var(--navy),var(--navy-mid));color:var(--white);}
+  .tier-row.featured .lbl{color:var(--blue-light);}
+  .tier-row.featured h4{color:var(--white);}
+  .tier-row.featured .price{color:var(--white);}
+  .tier-row.featured small{color:var(--blue-light);}
+  .tier-row.featured p{color:rgba(255,255,255,0.78);}
+  .tier-row .lbl{font-family:'DM Mono',monospace;font-size:0.65rem;letter-spacing:0.2em;text-transform:uppercase;color:var(--text-light);font-weight:700;margin-bottom:0.4rem;}
+  .tier-row h4{font-family:'Bebas Neue',sans-serif;font-size:1.5rem;letter-spacing:0.04em;color:var(--navy);margin-bottom:0.3rem;font-weight:400;}
+  .tier-row p{font-size:0.92rem;color:var(--text-mid);margin:0;line-height:1.5;}
+  .tier-row .price{font-family:'Bebas Neue',sans-serif;font-size:2.2rem;letter-spacing:0.02em;color:var(--navy);text-align:right;line-height:1;}
+  .tier-row .price small{display:block;font-family:'DM Mono',monospace;font-size:0.66rem;color:var(--text-light);margin-top:0.4rem;letter-spacing:0.18em;text-transform:uppercase;}
+  @media(max-width:600px){.tier-row{grid-template-columns:1fr;}.tier-row .price{text-align:left;}}
+
+  .cta-row{display:flex;gap:0.75rem;flex-wrap:wrap;margin-top:1.25rem;}
+  .cta-primary{
+    display:inline-flex;align-items:center;gap:0.5rem;padding:0.95rem 1.75rem;
+    background:var(--orange);color:var(--white);font-weight:700;font-size:0.95rem;letter-spacing:0.02em;
+    border-radius:10px;transition:background 0.18s,transform 0.18s,box-shadow 0.18s;
+    box-shadow:0 4px 14px rgba(249,115,22,0.3);
+  }
+  .cta-primary:hover{background:#EA6C0A;transform:translateY(-1px);color:var(--white);box-shadow:0 6px 18px rgba(249,115,22,0.4);}
+  .cta-secondary{
+    display:inline-flex;align-items:center;gap:0.5rem;padding:0.95rem 1.75rem;
+    background:transparent;color:var(--white);border:1.5px solid rgba(255,255,255,0.4);
+    font-weight:600;font-size:0.95rem;letter-spacing:0.02em;border-radius:10px;transition:all 0.18s;
+  }
+  .cta-secondary:hover{border-color:var(--white);background:rgba(255,255,255,0.06);color:var(--white);}
+
+  .featured-cta{
+    background:linear-gradient(135deg,var(--navy) 0%,var(--navy-mid) 100%);
+    color:var(--white);border-radius:18px;padding:2.5rem;margin:3rem 0;
+    display:grid;grid-template-columns:1fr auto;gap:2rem;align-items:center;
+    box-shadow:var(--shadow-md);position:relative;overflow:hidden;
+  }
+  @media(max-width:720px){.featured-cta{grid-template-columns:1fr;text-align:left;}}
+  .featured-cta .lbl{font-family:'DM Mono',monospace;font-size:0.7rem;letter-spacing:0.2em;text-transform:uppercase;color:var(--blue-light);margin-bottom:0.5rem;}
+  .featured-cta h3{font-family:'Bebas Neue',sans-serif;font-size:1.8rem;letter-spacing:0.04em;color:var(--white);margin-bottom:0.5rem;font-weight:400;}
+  .featured-cta h3 span{color:var(--orange-light);}
+  .featured-cta p{color:rgba(255,255,255,0.78);margin:0;font-size:0.95rem;}
+  .price-tag{font-family:'Bebas Neue',sans-serif;font-size:3.5rem;letter-spacing:0.02em;line-height:1;color:var(--white);}
+  .price-tag small{display:block;font-family:'DM Mono',monospace;font-size:0.7rem;color:var(--blue-light);margin-top:0.4rem;letter-spacing:0.18em;}
+
+  .process{display:grid;grid-template-columns:repeat(3,1fr);gap:1rem;margin:1.5rem 0;}
+  @media(max-width:760px){.process{grid-template-columns:1fr;}}
+  .step{background:var(--white);border:1px solid var(--border);border-radius:14px;padding:1.5rem;}
+  .step .num{font-family:'Bebas Neue',sans-serif;font-size:1.6rem;color:var(--orange);letter-spacing:0.04em;margin-bottom:0.4rem;}
+  .step h4{font-family:'Barlow',sans-serif;font-size:1.05rem;font-weight:700;color:var(--navy);margin-bottom:0.4rem;}
+  .step p{font-size:0.9rem;margin:0;color:var(--text-mid);line-height:1.5;}
+
+  footer.doc-footer{background:var(--navy);color:rgba(255,255,255,0.6);padding:2.5rem 2rem;border-top:4px solid var(--blue);}
+  .doc-footer-inner{max-width:1080px;margin:0 auto;display:grid;grid-template-columns:1fr auto;gap:2rem;align-items:center;}
+  @media(max-width:600px){.doc-footer-inner{grid-template-columns:1fr;}}
+  .doc-footer-logo{font-family:'Bebas Neue',sans-serif;font-size:1.4rem;letter-spacing:0.12em;color:var(--white);}
+  .doc-footer-logo span{color:var(--blue-light);}
+  .doc-footer p{font-size:0.82rem;line-height:1.6;margin:0.4rem 0 0;color:rgba(255,255,255,0.55);}
+  .doc-footer-meta{font-family:'DM Mono',monospace;font-size:0.68rem;letter-spacing:0.15em;text-transform:uppercase;color:rgba(255,255,255,0.4);text-align:right;}
+  @media(max-width:600px){.doc-footer-meta{text-align:left;}}
+
+
+  /* ─── PRINT-FRIENDLY (used for "Download PDF" via browser print-to-PDF) ─── */
+  @page { size: Letter; margin: 0.5in 0.45in; }
+  @media print {
+    html, body { background: #FFFFFF !important; }
+    body { font-size: 11pt; line-height: 1.5; color: #0A1628; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+    /* Hide UI chrome that doesn't belong in a printed proposal */
+    .doc-nav, .doc-nav-links, .doc-pdf-btn, footer.doc-footer, .cta-row, .cta-primary, .cta-secondary,
+    button, .mc-btn, [onclick] { display: none !important; }
+    /* Hero collapses to a clean block */
+    .doc-hero, .cover-hero { background: #0A1628 !important; color: #FFFFFF !important; padding: 0.55in 0.45in 0.4in !important; box-shadow: none !important; page-break-inside: avoid; }
+    .doc-hero h1, .cover-hero h1 { color: #FFFFFF !important; font-size: 26pt !important; line-height: 1.1 !important; }
+    .doc-hero h1 em, .cover-hero h1 em { color: #F97316 !important; }
+    .doc-hero-eyebrow, .cover-eyebrow { color: #93C5FD !important; }
+    /* Content fits page width */
+    .doc-body, .cover-hero-inner, .doc-hero-inner, .doc-footer-inner { max-width: 100% !important; padding: 0.3in 0 !important; margin: 0 !important; }
+    /* Cards / sections shouldn't break across pages mid-card */
+    .module, .tier, .tier-row, .qual, .doc-card, .week, .phase-block, .accept-card, .three-q, .out-box, .warn-box, .cp-note, .read-order, .featured-cta, .invest-strip, .step, .coverage-col, .prepared-card { page-break-inside: avoid; break-inside: avoid; }
+    h2, h3 { page-break-after: avoid; break-after: avoid; }
+    /* Links: keep blue + show URL after for printed reference */
+    a { color: #2563EB !important; text-decoration: none !important; }
+    a[href^='http']::after { content: " (" attr(href) ")"; font-size: 8pt; color: #94A3B8; word-break: break-all; }
+    a[href^='/']::after, a[href^='#']::after, a[href^='mailto:']::after { content: ''; }
+    /* Tighter section spacing for print */
+    .section, section { margin-bottom: 1.4em !important; }
+    p { margin-bottom: 0.7em; }
+    /* Each major section starts on a fresh page if practical */
+    .section { page-break-before: auto; }
+    /* Background gradients turn into solid colors */
+    .invest-strip, .featured-cta { background: #0A1628 !important; }
+    .tier.featured, .phase-block.featured, .tier-row.featured { background: #0A1628 !important; }
+    /* Coverage bullet matrix should print readably */
+    .coverage-grid { display: block !important; }
+    .coverage-col { margin-bottom: 0.6em; page-break-inside: avoid; }
+  }
+
+  /* "Download PDF" floating button (desktop only; hides on print) */
+  .doc-pdf-btn {
+    position: fixed; bottom: 1.5rem; right: 1.5rem; z-index: 200;
+    background: #F97316; color: #FFFFFF !important;
+    padding: 0.85rem 1.25rem; border-radius: 999px; border: 0; cursor: pointer;
+    font-family: 'Barlow', sans-serif; font-size: 0.86rem; font-weight: 700;
+    letter-spacing: 0.06em; text-transform: uppercase;
+    box-shadow: 0 8px 24px rgba(249,115,22,0.35), 0 2px 6px rgba(15,32,64,0.15);
+    transition: transform 0.15s, box-shadow 0.15s, background 0.15s;
+    display: inline-flex; align-items: center; gap: 0.5rem;
+  }
+  .doc-pdf-btn:hover { background: #EA6C0A; transform: translateY(-2px); box-shadow: 0 12px 32px rgba(249,115,22,0.45), 0 2px 6px rgba(15,32,64,0.2); }
+  .doc-pdf-btn:active { transform: translateY(0); }
+  @media (max-width: 600px) {
+    .doc-pdf-btn { bottom: 1rem; right: 1rem; padding: 0.75rem 1rem; font-size: 0.78rem; }
+  }
+</style>
+</head>
+<body>
+
+<nav class="doc-nav">
+  <div class="doc-nav-logo">MARK<span>CMO</span></div>
+  <div class="doc-nav-meta">Engagement <strong>SLC-DA</strong> &middot; Salt Lake City Public Library &middot; Confidential</div>
+</nav>
+
+<header class="cover-hero">
+  <div class="cover-hero-inner">
+    <div>
+      <div class="cover-eyebrow">Engagement Documents &middot; v1.0</div>
+      <h1>Salt Lake City Public Library <em>Engagement Package.</em></h1>
+      <p class="cover-hero-sub">
+        Three documents covering a fixed-fee Discovery &amp; Alignment Engagement, an optional Phase 1 Operational Assessment, and two Phase 2 implementation paths. Pace and stakeholder set scoped collaboratively at each engagement's kickoff, we move at the library's calendar. Designed for the buyer who explicitly asked for brevity over a lengthy formal proposal.
+      </p>
+    </div>
+
+    <div class="client-card">
+      <div class="lbl">Prepared For</div>
+      <h3>Tyler Bahr</h3>
+      <div class="who">
+        <strong>Chief Financial Officer</strong><br/>
+        Salt Lake City Public Library<br/>
+        210 E. 400 S., Salt Lake City, UT 84111<br/>
+        $50M annual budget &middot; 250 FTEs
+      </div>
+      <div class="meta-grid">
+        <div class="item">
+          <div class="lbl">Starting Engagement</div>
+          <div class="val">Discovery &amp; Alignment</div>
+        </div>
+        <div class="item">
+          <div class="lbl">Pacing</div>
+          <div class="val">Set at kickoff</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</header>
+
+<main class="doc-body">
+
+  <section style="margin-bottom:3rem;">
+    <div class="section-eyebrow">Engagement Package</div>
+    <h2>Three Documents. <span>Read In Order.</span></h2>
+    <p>
+      The package is split into three documents so each one can stand alone. The Proposal is the decision document and contains the signature block for the Discovery &amp; Alignment engagement. The Scope of Work is the reference document with deliverables and methodology. The Phasing &amp; Lead Times document covers sequencing and the hard external lead times (proposal validity, kickoff after PO/intake, payment terms), engagement durations themselves are agreed at each kickoff so we can match the library's pace.
+    </p>
+
+    <div class="doc-grid">
+
+      <a href="proposal.html" class="doc-card">
+        <div class="doc-num">01</div>
+        <div class="doc-id">Doc &middot; SLC-DA-001</div>
+        <h3>Proposal</h3>
+        <div class="desc">
+          The decision document. Synopsis of what we heard, three engagement options with separate fixed prices, qualifications, and the acceptance signature block for Discovery &amp; Alignment.
+        </div>
+        <div class="meta">PDF-ready &middot; ~3 pages &middot; Sign &amp; return</div>
+        <span class="open">Open Proposal</span>
+      </a>
+
+      <a href="scope-of-work.html" class="doc-card">
+        <div class="doc-num">02</div>
+        <div class="doc-id">Doc &middot; SLC-DA-002</div>
+        <h3>Scope of Work</h3>
+        <div class="desc">
+          The reference document. Deliverables, methodology, stakeholder access required, exclusions, change-control terms, and the data-handling protocol for any patron information seen during the engagement.
+        </div>
+        <div class="meta">PDF-ready &middot; ~5 pages &middot; Reference</div>
+        <span class="open">Open Scope of Work</span>
+      </a>
+
+      <a href="timeline.html" class="doc-card">
+        <div class="doc-num">03</div>
+        <div class="doc-id">Doc &middot; SLC-DA-003</div>
+        <h3>Phasing &amp; Lead Times</h3>
+        <div class="desc">
+          The operational document. Engagement sequence (Discovery &rarr; Phase 1 &rarr; Phase 2), the hard external lead times (proposal validity, kickoff after contract, payment terms), and what causes phases to take longer or shorter. Engagement durations agreed at each kickoff.
+        </div>
+        <div class="meta">PDF-ready &middot; ~3 pages &middot; Operational</div>
+        <span class="open">Open Phasing</span>
+      </a>
+
+    </div>
+  </section>
+
+  <!-- Engagement options strip -->
+  <section style="margin-bottom:3rem;">
+    <div class="section-eyebrow">Three Engagement Options</div>
+    <h2>Discovery First. <span>Then Choose.</span></h2>
+    <p>
+      Each engagement is priced standalone with no contingencies. Discovery &amp; Alignment is the recommended starting point because it lets both sides confirm fit and produces a scoped recommendation for whichever Phase makes sense next.
+    </p>
+
+    <div class="tier-strip">
+      <div class="tier-row featured">
+        <div>
+          <div class="lbl">Recommended Starting Point</div>
+          <h4>Discovery &amp; Alignment Engagement</h4>
+          <p>Fixed-fee. Leadership conversations, technology inventory snapshot, decision-flow snapshot, and a Lay of the Land memo with three framed options for what Phase 1 should look like. Includes leadership readout. Stakeholder set, interview cadence, and delivery date all agreed at kickoff.</p>
+        </div>
+        <div class="price">$24,500<small>USD &middot; Fixed Fee</small></div>
+      </div>
+      <div class="tier-row">
+        <div>
+          <div class="lbl">Optional Continuation</div>
+          <h4>Phase 1 &middot; Operational Assessment</h4>
+          <p>Fixed-fee. Stakeholder interviews, full process mapping, alignment scoring, future-state design, and a board-ready presentation. Answers the three questions in your RFQ: where things stand, how aligned roles and systems are, and what a practical future state looks like. Stakeholder set and delivery window matched to the library's calendar at kickoff.</p>
+        </div>
+        <div class="price">$87,500<small>USD &middot; Fixed Fee</small></div>
+      </div>
+      <div class="tier-row">
+        <div>
+          <div class="lbl">Optional Phase 2 &middot; Path A</div>
+          <h4>Implementation Roadmap Build</h4>
+          <p>Fixed-fee. 24-month technology roadmap, governance &amp; decision-making playbook, prioritized initiative briefs, and RFP-ready scopes for any major buys. Fixed scope, fixed deliverable. Sequencing and delivery window agreed at kickoff.</p>
+        </div>
+        <div class="price">$165,000<small>USD &middot; Fixed Fee</small></div>
+      </div>
+      <div class="tier-row">
+        <div>
+          <div class="lbl">Optional Phase 2 &middot; Path B</div>
+          <h4>Embedded Advisory Retainer</h4>
+          <p>Monthly retainer. Weekly leadership office hours, monthly steering, quarterly business review, on-call advisory for staff on technology decisions. Initial term and renewal cadence agreed at engagement start.</p>
+        </div>
+        <div class="price">$24,500<small>USD &middot; Per Month</small></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Discovery & Alignment featured CTA -->
+  <section class="featured-cta">
+    <div>
+      <div class="lbl">Engagement Investment</div>
+      <h3>Discovery &amp; Alignment &middot; <span>Salt Lake City Public Library</span></h3>
+      <p>One-time, fixed-scope. 100% paid up-front to start. Leadership readout, Lay of the Land memo, and three framed Phase 1 options included. Pace and stakeholder set agreed at kickoff, we move at the library's calendar. No discount or credit applied to subsequent phases, each engagement stands alone with its own fixed price.</p>
+      <div class="cta-row">
+        <a class="cta-primary" href="/forms/salt-lake-city-public-library-discovery">
+          &check; Accept &amp; Sign Electronically
+        </a>
+        <a class="cta-secondary" href="proposal.html#accept">Review Proposal First</a>
+      </div>
+    </div>
+    <div class="price-tag">$24,500<small>USD &middot; One-time</small></div>
+  </section>
+
+  <!-- Process strip -->
+  <section style="margin-bottom:3rem;">
+    <div class="section-eyebrow">From Acceptance To Delivery</div>
+    <h2>Three Steps. <span>Then We Match Your Pace.</span></h2>
+    <div class="process">
+      <div class="step">
+        <div class="num">01</div>
+        <h4>Accept the proposal</h4>
+        <p>Sign SLC-DA-001 electronically or reply &ldquo;Accepted&rdquo; by email. Square invoice and intake worksheet sent within 1 business hour.</p>
+      </div>
+      <div class="step">
+        <div class="num">02</div>
+        <h4>Pay &amp; return intake</h4>
+        <p>Pay the Square invoice ($24,500 USD) and return the completed intake worksheet. Engagement begins when both are received.</p>
+      </div>
+      <div class="step">
+        <div class="num">03</div>
+        <h4>Kickoff &amp; pacing</h4>
+        <p>30-minute kickoff call with Tyler. Stakeholder set, interview cadence, and delivery date agreed together, matched to the library's calendar, not our calendar. Lay of the Land memo + leadership readout delivered when scope &amp; pace are met.</p>
+      </div>
+    </div>
+  </section>
+
+  <p style="font-size:0.86rem;color:var(--text-mid);text-align:center;margin-top:2rem;">
+    Questions before signing? Reply to the email this package was sent with, or write to <a href="mailto:mark@markcmo.com">mark@markcmo.com</a>. Response within 1 business day.
+  </p>
+
+</main>
+
+<footer class="doc-footer">
+  <div class="doc-footer-inner">
+    <div>
+      <div class="doc-footer-logo">MARK<span>CMO</span></div>
+      <p>Mark Gabrielli &middot; Fractional CMO &amp; COO &middot; WETYR Corp &middot; Cape Canaveral, FL &middot; <a style="color:var(--blue-light);" href="mailto:mark@markcmo.com">mark@markcmo.com</a></p>
+    </div>
+    <div class="doc-footer-meta">
+      Engagement SLC-DA &middot; v1.0<br/>
+      Confidential &middot; Salt Lake City Public Library
+    </div>
+  </div>
+</footer>
+
+<!-- mc-track: customer-journey page view -->
+<script>
+(function(){
+  try {
+    var sk = 'mc_jsid';
+    var sid = sessionStorage.getItem(sk) || ('s_' + Math.random().toString(36).slice(2) + Date.now().toString(36));
+    sessionStorage.setItem(sk, sid);
+    fetch('/.netlify/functions/track', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        t: 'view',
+        client: 'salt-lake-city-public-library',
+        page: 'cover',
+        session_id: sid,
+        url: location.pathname,
+        title: document.title
+      }),
+      keepalive: true
+    }).catch(function(){});
+  } catch(e) {}
+})();
+</script>
+
+<button type="button" class="doc-pdf-btn" onclick="window.print()" aria-label="Download as PDF">
+  &#128196; Download PDF
+</button>
+<script src="/linkedin-widget.js" defer></script>
+</body>
+</html>

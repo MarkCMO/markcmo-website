@@ -1,0 +1,78 @@
+# Netlify Headers — markcmo.com
+# Security + SEO performance headers
+
+/*
+  X-Frame-Options: SAMEORIGIN
+  X-Content-Type-Options: nosniff
+  X-XSS-Protection: 1; mode=block
+  Referrer-Policy: strict-origin-when-cross-origin
+  Permissions-Policy: camera=(), microphone=(), geolocation=()
+  Content-Security-Policy: default-src 'self' https: data: 'unsafe-inline' 'unsafe-eval'; img-src 'self' data: https:; font-src 'self' https://fonts.gstatic.com data:
+
+/*.html
+  Content-Type: text/html; charset=utf-8
+  Cache-Control: public, max-age=3600, must-revalidate
+  Vary: Accept-Encoding
+
+/style.css
+  Cache-Control: public, max-age=31536000, immutable
+  Vary: Accept-Encoding
+
+/sitemap.xml
+  Content-Type: application/xml; charset=utf-8
+  Cache-Control: public, max-age=86400
+
+/ai-sitemap.xml
+  Content-Type: application/xml; charset=utf-8
+  Access-Control-Allow-Origin: *
+  Cache-Control: public, max-age=3600
+
+/robots.txt
+  Content-Type: text/plain; charset=utf-8
+  Cache-Control: public, max-age=86400
+
+/llms.txt
+  Content-Type: text/plain; charset=utf-8
+  Access-Control-Allow-Origin: *
+  Cache-Control: public, max-age=3600
+
+/llms-full.txt
+  Content-Type: text/plain; charset=utf-8
+  Access-Control-Allow-Origin: *
+  Cache-Control: public, max-age=3600
+
+/llm.txt
+  Content-Type: text/plain; charset=utf-8
+  Access-Control-Allow-Origin: *
+  Cache-Control: public, max-age=3600
+
+/ai.txt
+  Content-Type: text/plain; charset=utf-8
+  Access-Control-Allow-Origin: *
+  Cache-Control: public, max-age=3600
+
+/humans.txt
+  Content-Type: text/plain; charset=utf-8
+  Cache-Control: public, max-age=3600
+
+/.well-known/llm.txt
+  Content-Type: text/plain; charset=utf-8
+  Access-Control-Allow-Origin: *
+  Cache-Control: public, max-age=3600
+
+# ─── DOCUMENT VDR SECURITY ───────────────────────────────────────────
+/documents/*
+  X-Robots-Tag: noindex, nofollow, noarchive, nosnippet
+  Cache-Control: no-store, no-cache, must-revalidate, private
+  Pragma: no-cache
+  X-Frame-Options: DENY
+  Content-Security-Policy: default-src 'self' https: data: 'unsafe-inline'; frame-ancestors 'none'
+  Referrer-Policy: no-referrer
+
+/docs/*
+  Cache-Control: no-store, no-cache, must-revalidate, private
+  Pragma: no-cache
+  X-Robots-Tag: noindex, nofollow, noarchive
+  X-Frame-Options: DENY
+  Content-Security-Policy: default-src 'self' https: data: 'unsafe-inline'; frame-ancestors 'none'
+  Referrer-Policy: no-referrer

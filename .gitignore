@@ -3,8 +3,7 @@ node_modules/
 .pnp
 .pnp.js
 
-# Build outputs
-dist/
+# Build outputs (dist/ is TRACKED — CF Pages GitHub auto-deploy needs it)
 build/
 .cache/
 .parcel-cache/
@@ -44,6 +43,7 @@ sync-to-sheets.py
 # Large binary/zip files
 *.zip
 *.pdf
+!dist/*.pdf
 *.mp4
 *.mov
 

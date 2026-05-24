@@ -303,7 +303,13 @@ export async function onRequest(context) {
     });
   }
 
-  // 5. Custom 404 page, or minimal inline fallback
+  // 5. Fall through to static assets (CSS, JS, images, fonts, etc.)
+  //    _routes.json excludes /*.css, /*.js, etc. so they never reach here,
+  //    but this is a belt-and-suspenders safety net.
+  const staticResponse = await context.next();
+  if (staticResponse.status !== 404) return staticResponse;
+
+  // 6. Custom 404 page, or minimal inline fallback
   const notFound = await kv.get('404', { type: 'text' });
   return new Response(notFound || '<h1>404 Not Found</h1>', {
     status: 404,
