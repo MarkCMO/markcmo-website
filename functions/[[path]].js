@@ -1,5 +1,5 @@
 // functions/[[path]].js
-import { SITE_NAV_HTML, SITE_FOOTER_HTML } from './_lib/site-chrome.js';
+import { SITE_NAV_HTML, SITE_FOOTER_HTML, SITE_FOOTER_ELEMENT } from './_lib/site-chrome.js';
 // Root catch-all for Cloudflare Pages.
 // Handles two responsibilities:
 //
@@ -175,29 +175,53 @@ export async function onRequest(context) {
 
   if (html !== null) {
     // ── Nav / footer injection ────────────────────────────────────────────────
-    // Automatically add the site nav and footer to any page that is missing
-    // them, so every page has consistent chrome without requiring individual
-    // HTML file edits.
+    // Automatically add/replace nav and footer on every page so all pages
+    // share the same chrome, regardless of what HTML is stored in KV.
+    //
+    // Three cases handled:
+    //  1. Page has NO footer  → inject SITE_FOOTER_HTML before </body>
+    //  2. Page has footer-mega → replace old footer with SITE_FOOTER_ELEMENT
+    //  3. Page already has footer-main → skip (already correct)
     if (shouldInjectChrome(p) && html.includes('</body>')) {
-      const missingNav    = !html.includes('id="mainNav"');
-      const missingFooter = !html.includes('</footer>');
-      if (missingNav || missingFooter) {
-        // Ensure style.css is loaded (provides CSS variables + shared styles)
+      const missingNav     = !html.includes('id="mainNav"');
+      const hasFooterMega  = html.includes('footer-mega') || html.includes('footer-brand-col');
+      const hasFooterMain  = html.includes('footer-main');
+      const missingFooter  = !html.includes('</footer>');
+
+      if (missingNav || hasFooterMega || missingFooter) {
+        // Ensure style.css is loaded (CSS variables + shared styles)
         if (!html.includes('style.css')) {
           html = html.replace('</head>',
             '<link rel="stylesheet" href="/style.css">\n</head>');
         }
       }
+
       if (missingNav) {
-        // Insert nav immediately after <body> tag + add padding for fixed nav.
-        html = html.replace(
-          /<body([^>]*)>/,
-          `<body$1><style>body{padding-top:64px}</style>${SITE_NAV_HTML}`
-        );
+        // Find <body> tag and insert nav + padding right after it
+        const bodyIdx = html.indexOf('<body');
+        const bodyEnd = html.indexOf('>', bodyIdx);
+        if (bodyIdx !== -1 && bodyEnd !== -1) {
+          const insertion = `<style>body{padding-top:64px}</style>${SITE_NAV_HTML}`;
+          html = html.slice(0, bodyEnd + 1) + insertion + html.slice(bodyEnd + 1);
+        }
       }
-      if (missingFooter) {
-        html = html.replace('</body>', `${SITE_FOOTER_HTML}\n</body>`);
+
+      if (hasFooterMega) {
+        // Replace old footer-mega with footer-main using string ops (more reliable
+        // than regex in edge bundles when content spans many lines).
+        const fStart = html.indexOf('<footer>');
+        const fEnd   = html.indexOf('</footer>', fStart);
+        if (fStart !== -1 && fEnd !== -1) {
+          html = html.slice(0, fStart) + SITE_FOOTER_ELEMENT + html.slice(fEnd + '</footer>'.length);
+        }
+      } else if (missingFooter) {
+        // No footer at all — inject full footer (includes style tag for safety)
+        const bodyClose = html.lastIndexOf('</body>');
+        if (bodyClose !== -1) {
+          html = html.slice(0, bodyClose) + SITE_FOOTER_HTML + '\n' + html.slice(bodyClose);
+        }
       }
+      // hasFooterMain → already correct, do nothing
     }
 
     // ── Canonical URL injection ───────────────────────────────────────────────
