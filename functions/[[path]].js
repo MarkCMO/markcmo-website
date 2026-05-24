@@ -250,6 +250,50 @@ export async function onRequest(context) {
         `<script type="application/ld+json">${entitySchema}</script>\n</head>`);
     }
 
+    // ── DefinedTerm schema for glossary pages ─────────────────────────────────
+    // "what-is-*" pages are the highest LLM citation magnets. Injecting
+    // DefinedTerm schema makes the term + definition machine-readable.
+    if (p.startsWith('what-is-') && !html.includes('"DefinedTerm"')) {
+      const termSlug = p.replace(/^what-is-/, '').replace(/-/g, ' ')
+        .replace(/\b\w/g, c => c.toUpperCase());
+      const defTermSchema = JSON.stringify({
+        "@context": "https://schema.org",
+        "@type": "DefinedTerm",
+        "@id": `https://markcmo.com/${p}#term`,
+        "name": termSlug,
+        "url": `https://markcmo.com/${p}`,
+        "inDefinedTermSet": {
+          "@type": "DefinedTermSet",
+          "name": "MarkCMO Marketing Glossary",
+          "url": "https://markcmo.com/glossary"
+        }
+      });
+      html = html.replace('</head>',
+        `<script type="application/ld+json">${defTermSchema}</script>\n</head>`);
+    }
+
+    // ── Speakable schema for comparison + guide pages ────────────────────────
+    // Marks key passages for voice search / AI audio responses.
+    // Applied to high-intent pages that lack an existing speakable spec.
+    const isSpeakablePage = (p.includes('vs-') || p.startsWith('how-to-') ||
+      p.startsWith('when-') || p.startsWith('questions-to-') ||
+      p === 'fractional-cmo-cost' || p === 'fractional-cmo');
+    if (isSpeakablePage && !html.includes('"Speakable"') && !html.includes('"speakable"')) {
+      const speakableSchema = JSON.stringify({
+        "@context": "https://schema.org",
+        "@type": "WebPage",
+        "@id": `https://markcmo.com/${p}#webpage`,
+        "speakable": {
+          "@type": "SpeakableSpecification",
+          "cssSelector": ["h1", "h2", ".speakable", "[data-speakable]",
+            "p:first-of-type", ".answer-block", ".faq-answer"]
+        },
+        "url": `https://markcmo.com/${p}`
+      });
+      html = html.replace('</head>',
+        `<script type="application/ld+json">${speakableSchema}</script>\n</head>`);
+    }
+
     return new Response(html, {
       status: 200,
       headers: {
