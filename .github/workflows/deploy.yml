@@ -1,13 +1,16 @@
 name: Deploy to Cloudflare Pages
 
+# ── Trigger ──────────────────────────────────────────────────────────────────
+# main    → production  (markcmo.com)       — full KV upload + deploy
+# staging → preview URL (staging.markcmo.pages.dev) — CSS/functions only, no KV
 on:
   push:
-    branches: [main]
+    branches: [main, staging]
 
 jobs:
   deploy:
     runs-on: ubuntu-latest
-    name: Deploy markcmo.com to Cloudflare Pages
+    name: Deploy (${{ github.ref_name }})
     permissions:
       contents: read
       deployments: write
@@ -21,15 +24,13 @@ jobs:
         with:
           node-version: '22'
 
-      # ── Step 1: Upload all HTML pages to KV ─────────────────────────
-      # HTML is excluded from the static CF Pages deployment to stay under
-      # the 20,000-file limit.  The catch-all (functions/[[path]].js)
-      # reads KV at request time to serve any HTML page.
-      #
-      # Uses X-Auth-Email + X-Auth-Key (Global API Key) because the
-      # scoped CLOUDFLARE_API_TOKEN only has Pages:Edit, not KV:Edit.
-      # Requires GitHub secret CF_API_KEY = Cloudflare Global API Key.
+      # ── Step 1: Upload HTML pages to KV (production only) ────────────
+      # HTML is excluded from the CF Pages static deploy to stay under the
+      # 20,000-file limit.  The catch-all function reads KV at request time.
+      # Staging skips this step — it reads from the same production KV so
+      # all real page content is available while testing CSS/function changes.
       - name: Upload HTML pages to KV
+        if: github.ref_name == 'main'
         run: node scripts/upload-html-to-kv.js
         env:
           CF_API_KEY: ${{ secrets.CF_API_KEY }}
@@ -38,26 +39,33 @@ jobs:
           KV_NAMESPACE_ID: 0340e4af3ed44224ac380d1d35014834
 
       # ── Step 2: Build static asset dist/ ────────────────────────────
-      # build-dist.js copies only CSS/JS/images/JSON/etc into dist/.
-      # It explicitly excludes .html files (those are in KV).
-      # Then we copy functions/ into dist/functions/ so CF Pages picks
-      # up the Functions bundle from the deploy directory.
       - name: Build dist/ and copy functions
         run: |
           node scripts/build-dist.js
           cp -r functions/ dist/functions/
 
-      # ── Step 3: Deploy static assets + functions to CF Pages ────────
-      # wrangler reads wrangler.toml from the cwd (repo root) for KV
-      # bindings, and deploys static assets + functions from dist/.
-      # File count: ~100 static + ~103 functions = ~200 total (well under 20K).
+      # ── Step 3: Deploy to Cloudflare Pages ──────────────────────────
+      # main    → production branch  → markcmo.com
+      # staging → staging branch     → staging.markcmo.pages.dev  (preview)
       - name: Deploy to Cloudflare Pages
         run: |
           npx wrangler@latest pages deploy dist/ \
             --project-name markcmo \
-            --branch main \
+            --branch "${{ github.ref_name }}" \
             --commit-hash "${{ github.sha }}" \
             --commit-dirty=false
         env:
           CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
           CLOUDFLARE_ACCOUNT_ID: 5b4ea6b5589fe12f29bea5d7e43fe03c
+
+      # ── Step 4: Print preview URL for staging ───────────────────────
+      - name: Print staging URL
+        if: github.ref_name == 'staging'
+        run: |
+          echo ""
+          echo "✅ Staging deployed!"
+          echo "   Preview URL: https://staging.markcmo.pages.dev"
+          echo "   (Hard-refresh with Ctrl+Shift+R to bypass cache)"
+          echo ""
+          echo "   To push to production:"
+          echo "   git checkout main && git merge staging && git push origin main"
