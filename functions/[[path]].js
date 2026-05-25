@@ -213,13 +213,20 @@ export async function onRequest(context) {
       }
 
       if (needsFooterReplace) {
-        // Replace old footer (footer-mega or footer-main without self-contained CSS)
-        // with full SITE_FOOTER_HTML (includes inline <style> + 8-col footer-main).
-        // String ops are more reliable than regex in edge bundles.
-        const fStart = html.indexOf('<footer');
-        const fEnd   = html.indexOf('</footer>', fStart);
-        if (fStart !== -1 && fEnd !== -1) {
-          html = html.slice(0, fStart) + SITE_FOOTER_HTML + html.slice(fEnd + '</footer>'.length);
+        // Replace from the start of <footer to </body> — this sweeps up the main
+        // footer element AND any orphaned footer-band divs (footer-glossary-band,
+        // footer-services-band, footer-bottom etc.) that may sit outside </footer>.
+        // We keep </body> and everything after it intact.
+        const fStart    = html.indexOf('<footer');
+        const bodyClose = html.lastIndexOf('</body>');
+        if (fStart !== -1 && bodyClose !== -1 && fStart < bodyClose) {
+          html = html.slice(0, fStart) + SITE_FOOTER_HTML + '\n' + html.slice(bodyClose);
+        } else if (fStart !== -1) {
+          // Fallback: replace just the footer element
+          const fEnd = html.indexOf('</footer>', fStart);
+          if (fEnd !== -1) {
+            html = html.slice(0, fStart) + SITE_FOOTER_HTML + html.slice(fEnd + '</footer>'.length);
+          }
         }
       } else if (missingFooter) {
         // No footer at all — inject full footer (includes style tag)
