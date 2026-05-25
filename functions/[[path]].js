@@ -213,16 +213,29 @@ export async function onRequest(context) {
       }
 
       if (needsFooterReplace) {
-        // Replace from the start of <footer to </body> — this sweeps up the main
-        // footer element AND any orphaned footer-band divs (footer-glossary-band,
-        // footer-services-band, footer-bottom etc.) that may sit outside </footer>.
-        // We keep </body> and everything after it intact.
+        // Strategy: replace everything from <footer to </body>, but first extract
+        // any <script> tags in that region so they are re-appended after the new
+        // footer. This removes orphaned footer-band divs (footer-glossary-band,
+        // footer-services-band etc.) while keeping inline scripts intact.
         const fStart    = html.indexOf('<footer');
         const bodyClose = html.lastIndexOf('</body>');
         if (fStart !== -1 && bodyClose !== -1 && fStart < bodyClose) {
-          html = html.slice(0, fStart) + SITE_FOOTER_HTML + '\n' + html.slice(bodyClose);
+          // Collect <script>...</script> blocks from between </footer> and </body>
+          const fEnd = html.indexOf('</footer>', fStart);
+          let keptScripts = '';
+          if (fEnd !== -1) {
+            let region = html.slice(fEnd + '</footer>'.length, bodyClose);
+            let si = region.indexOf('<script');
+            while (si !== -1) {
+              const se = region.indexOf('</script>', si);
+              if (se === -1) break;
+              keptScripts += region.slice(si, se + '</script>'.length) + '\n';
+              si = region.indexOf('<script', se + '</script>'.length);
+            }
+          }
+          html = html.slice(0, fStart) + SITE_FOOTER_HTML + '\n' + keptScripts + html.slice(bodyClose);
         } else if (fStart !== -1) {
-          // Fallback: replace just the footer element
+          // Fallback: no </body> found — replace just the footer element
           const fEnd = html.indexOf('</footer>', fStart);
           if (fEnd !== -1) {
             html = html.slice(0, fStart) + SITE_FOOTER_HTML + html.slice(fEnd + '</footer>'.length);
