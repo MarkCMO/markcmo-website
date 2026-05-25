@@ -452,19 +452,14 @@ p { line-height: 1.8; color: var(--text-mid); }
    FOOTER — dark navy
    ═══════════════════════════════════════════════════════ */
 footer {
-  background: var(--navy);
-  border-radius: var(--r-xl) var(--r-xl) 0 0;
-  margin-top: 2.5rem;
-  padding: 4rem 4vw 2rem;
-  position: relative;
+  background: var(--bg2, #050919);
+  border-top: 1px solid var(--border, rgba(255,255,255,0.08));
+  border-radius: 0;
+  margin-top: 0;
+  padding: 0;
+  position: static;
 }
-footer::before {
-  content: '';
-  position: absolute; top: 0; left: 10%; right: 10%;
-  height: 2px;
-  background: linear-gradient(90deg, transparent, var(--accent), #DFC06D, var(--accent), transparent);
-  border-radius: var(--r-pill); opacity: 0.7;
-}
+footer::before { display: none; content: none; }
 .footer-grid {
   max-width: 1200px; margin: 0 auto;
   display: grid; grid-template-columns: 2fr 1fr 1fr 1fr;
@@ -2393,10 +2388,10 @@ h2 span                     { color: var(--accent) !important; }
 .footer-main {
   max-width: 1400px;
   margin: 0 auto;
-  padding: 4rem clamp(1.5rem,6vw,6rem) 2.5rem;
+  padding: 4rem clamp(1.5rem,6vw,6rem) 3rem;
   display: grid;
-  grid-template-columns: 2.2fr 1fr 1fr 1fr 1fr 1fr;
-  gap: 2.5rem;
+  grid-template-columns: 2fr repeat(7, 1fr);
+  gap: 2rem;
 }
 .footer-logo-text {
   font-family: 'Outfit', sans-serif;

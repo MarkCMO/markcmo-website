@@ -9,7 +9,13 @@ footer {
   --f-text3:  rgba(255,255,255,0.40);
   background: var(--bg2, #050919);
   border-top: 1px solid var(--border, rgba(255,255,255,0.08));
+  /* Resets to cancel any global footer overrides */
+  border-radius: 0;
+  margin-top: 0;
+  padding: 0;
+  position: static;
 }
+footer::before { display: none; content: none; }
 .footer-main {
   max-width: 1400px; margin: 0 auto;
   padding: 4rem clamp(1.5rem,6vw,6rem) 3rem;
