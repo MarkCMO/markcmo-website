@@ -9362,25 +9362,152 @@ async function sendStudentAccessEmail(email) {
   }
 }
 
+// Tracks which membership rows are expanded (showing per-course breakdown)
+const _expandedStudents = new Set();
+function toggleStudentExpand(email) {
+  if (_expandedStudents.has(email)) _expandedStudents.delete(email);
+  else _expandedStudents.add(email);
+  renderEnrollmentsTable();
+}
+
+// Group flat enrollment records by email; surface 1 row per student.
+// Memberships (viaMembership=true or multi-course) get a summary row;
+// expanding reveals one sub-row per course.
+function groupEnrollmentsByStudent(records) {
+  const byEmail = new Map();
+  for (const r of records) {
+    const key = (r.email || '').toLowerCase();
+    if (!byEmail.has(key)) byEmail.set(key, []);
+    byEmail.get(key).push(r);
+  }
+  const groups = [];
+  for (const [email, items] of byEmail) {
+    const isMembership = items.length > 1 || items.some(i => i.viaMembership);
+    const first = items[0];
+    const totalLessonsAcross = items.reduce((s, i) => s + (COURSE_PRICES[i.courseId]?.lessons || 50), 0);
+    const completedAcross = items.reduce((s, i) => s + (i.progress?.completedLessons?.length || 0), 0);
+    const completedCourses = items.filter(i => i.progress?.finalScore != null).length;
+    const avgPct = totalLessonsAcross ? Math.round((completedAcross / totalLessonsAcross) * 100) : 0;
+    const earliest = items.reduce((d, i) => {
+      const t = i.enrolledAt || '';
+      return (!d || t < d) ? t : d;
+    }, '');
+    const membershipExpires = items.find(i => i.membershipExpires)?.membershipExpires;
+    groups.push({
+      email,
+      name: first.name || '-',
+      enrolledAt: earliest,
+      isMembership,
+      membershipExpires,
+      courseCount: items.length,
+      completedCourses,
+      avgPct,
+      records: items,
+    });
+  }
+  // Sort most-recently-enrolled first
+  groups.sort((a, b) => (b.enrolledAt || '').localeCompare(a.enrolledAt || ''));
+  return groups;
+}
+
 function renderEnrollmentsTable() {
-  let filtered = filterEnrollmentsList();
+  const filtered = filterEnrollmentsList();
+  const courseFilter = document.getElementById('enroll-course-filter')?.value || '';
+  const tbody = document.getElementById('enrollments-tbody');
+
+  // When a specific course is selected, show flat per-enrollment rows so you
+  // can see exactly who's in THIS course. Otherwise group by student.
+  const useGrouped = !courseFilter;
+
+  if (useGrouped) {
+    const groups = groupEnrollmentsByStudent(filtered);
+    const total = groups.length;
+    const totalPages = Math.max(1, Math.ceil(total / ENROLL_PAGE_SIZE));
+    if (enrollPage >= totalPages) enrollPage = Math.max(0, totalPages - 1);
+    const paged = groups.slice(enrollPage * ENROLL_PAGE_SIZE, (enrollPage + 1) * ENROLL_PAGE_SIZE);
+    const uniqueStudents = total;
+    document.getElementById('enroll-count').textContent =
+      `${uniqueStudents} student${uniqueStudents===1?'':'s'} · ${filtered.length} total enrollment${filtered.length===1?'':'s'}` +
+      (totalPages > 1 ? ` · page ${enrollPage+1}/${totalPages}` : '');
+
+    if (!paged.length) {
+      tbody.innerHTML = '<tr><td colspan="7" style="text-align:center;color:var(--dim);padding:32px;">No enrollments found</td></tr>';
+      return;
+    }
+
+    tbody.innerHTML = paged.map(g => {
+      const enrolled = g.enrolledAt ? new Date(g.enrolledAt).toLocaleDateString() : '-';
+      const expanded = _expandedStudents.has(g.email);
+      const expBtn = g.isMembership
+        ? `<button onclick="toggleStudentExpand('${escHtml(g.email)}')" style="background:none;border:none;color:var(--gold);font-size:14px;cursor:pointer;width:18px;padding:0;margin-right:4px;" title="${expanded?'Collapse':'Expand'} course list">${expanded?'▼':'▶'}</button>`
+        : '<span style="display:inline-block;width:22px;"></span>';
+      const courseCell = g.isMembership
+        ? `<span style="font-weight:600;color:var(--gold);">All-Access Membership</span> <span style="font-size:10px;color:var(--dim);">(${g.courseCount} course${g.courseCount===1?'':'s'})</span>`
+        : `${escHtml(COURSE_PRICES[g.records[0].courseId]?.title || g.records[0].courseTitle || g.records[0].courseId)}`;
+      const statusBadge = g.isMembership
+        ? `<span style="font-size:10px;font-weight:700;letter-spacing:1px;padding:2px 8px;background:rgba(201,168,76,0.15);color:var(--gold);">MEMBERSHIP</span>${g.completedCourses?` <span style="font-size:9px;font-weight:700;padding:2px 6px;background:rgba(76,175,114,0.15);color:#4CAF72;margin-left:4px;">${g.completedCourses} DONE</span>`:''}`
+        : `<span style="font-size:10px;font-weight:700;letter-spacing:1px;padding:2px 8px;background:rgba(37,99,235,0.1);color:var(--gold);">ACTIVE</span>`;
+      const expiresNote = g.membershipExpires
+        ? `<div style="font-size:10px;color:var(--dim);margin-top:2px;">renews ${new Date(g.membershipExpires).toLocaleDateString('en-US',{month:'short',day:'numeric',year:'numeric'})}</div>`
+        : '';
+      const mainRow = `<tr>
+        <td>${expBtn}<strong>${escHtml(g.name)}</strong>${expiresNote}</td>
+        <td><a href="mailto:${escHtml(g.email)}" style="color:var(--gold);">${escHtml(g.email)}</a></td>
+        <td style="font-size:11px;">${courseCell}</td>
+        <td style="font-size:11px;color:var(--dim);">${enrolled}</td>
+        <td><div style="background:var(--border);height:4px;width:80px;display:inline-block;vertical-align:middle;margin-right:6px;"><div style="background:var(--gold);height:100%;width:${g.avgPct}%;"></div></div>${g.avgPct}%</td>
+        <td>${statusBadge}</td>
+        <td>
+          <button onclick="sendStudentAccessEmail('${escHtml(g.email)}')" style="background:none;border:1px solid var(--gold);color:var(--gold);font-size:10px;letter-spacing:1px;padding:2px 8px;cursor:pointer;margin-right:4px;" title="Email this student their course access links">\u{1F4E7} EMAIL</button>
+          <button onclick="deleteAllEnrollmentsForStudent('${escHtml(g.email)}')" style="background:none;border:1px solid #444;color:#666;font-size:10px;letter-spacing:1px;padding:2px 8px;cursor:pointer;" onmouseover="this.style.borderColor='#c00';this.style.color='#c00'" onmouseout="this.style.borderColor='#444';this.style.color='#666'" title="Remove this student and ALL their enrollments">✕ DELETE</button>
+        </td>
+      </tr>`;
+
+      const subRows = (expanded && g.isMembership) ? g.records.map(r => {
+        const ttl = COURSE_PRICES[r.courseId]?.lessons || 50;
+        const pct = r.progress?.completedLessons?.length ? Math.round((r.progress.completedLessons.length / ttl) * 100) : 0;
+        const finalDone = r.progress?.finalScore != null;
+        const cKey = `${r.email}|${r.courseId}`;
+        return `<tr style="background:rgba(0,0,0,0.15);">
+          <td style="padding-left:42px;color:var(--dim);font-size:11px;">·</td>
+          <td></td>
+          <td style="font-size:11px;color:var(--text);">${escHtml(COURSE_PRICES[r.courseId]?.title || r.courseTitle || r.courseId)}</td>
+          <td style="font-size:10px;color:var(--dim);">${r.enrolledAt?new Date(r.enrolledAt).toLocaleDateString():'-'}</td>
+          <td><div style="background:var(--border);height:3px;width:80px;display:inline-block;vertical-align:middle;margin-right:6px;"><div style="background:var(--gold);height:100%;width:${pct}%;"></div></div><span style="font-size:10px;color:var(--dim);">${pct}%</span></td>
+          <td><span style="font-size:9px;font-weight:700;letter-spacing:1px;padding:1px 6px;background:${finalDone?'rgba(76,175,114,0.15)':'transparent'};color:${finalDone?'#4CAF72':'var(--dim)'};">${finalDone?'COMPLETED':'IN PROGRESS'}</span></td>
+          <td><button onclick="deleteEnrollment('${escHtml(cKey)}')" style="background:none;border:1px solid #333;color:#555;font-size:9px;letter-spacing:1px;padding:1px 6px;cursor:pointer;" title="Remove just this course">✕</button></td>
+        </tr>`;
+      }).join('') : '';
+
+      return mainRow + subRows;
+    }).join('');
+
+    // Pagination
+    const paginationHtml = totalPages > 1 ? `
+      <tr><td colspan="7" style="padding:12px;text-align:center;">
+        <button onclick="enrollPage=Math.max(0,enrollPage-1);renderEnrollmentsTable()" ${enrollPage===0?'disabled':''} style="background:var(--surface);border:1px solid var(--border);color:var(--text);padding:4px 12px;cursor:pointer;margin-right:8px;">← Prev</button>
+        <span style="font-size:11px;color:var(--dim);">Page ${enrollPage+1} / ${totalPages}</span>
+        <button onclick="enrollPage=Math.min(${totalPages-1},enrollPage+1);renderEnrollmentsTable()" ${enrollPage===totalPages-1?'disabled':''} style="background:var(--surface);border:1px solid var(--border);color:var(--text);padding:4px 12px;cursor:pointer;margin-left:8px;">Next →</button>
+      </td></tr>` : '';
+    tbody.innerHTML += paginationHtml;
+    return;
+  }
+
+  // ── Flat view (course filter active) ─────────────────────────────────
   const total = filtered.length;
-  const totalPages = Math.ceil(total / ENROLL_PAGE_SIZE);
+  const totalPages = Math.max(1, Math.ceil(total / ENROLL_PAGE_SIZE));
   if (enrollPage >= totalPages) enrollPage = Math.max(0, totalPages - 1);
   const paged = filtered.slice(enrollPage * ENROLL_PAGE_SIZE, (enrollPage + 1) * ENROLL_PAGE_SIZE);
   document.getElementById('enroll-count').textContent =
-    `${total} of ${ALL_ENROLLMENTS.length} enrollments` +
-    (totalPages > 1 ? `, page ${enrollPage+1} of ${totalPages}` : '');
-  const tbody = document.getElementById('enrollments-tbody');
+    `${total} enrollment${total===1?'':'s'} in this course` +
+    (totalPages > 1 ? ` · page ${enrollPage+1}/${totalPages}` : '');
   if (!paged.length) {
     tbody.innerHTML = '<tr><td colspan="7" style="text-align:center;color:var(--dim);padding:32px;">No enrollments found</td></tr>';
     return;
   }
   tbody.innerHTML = paged.map(e => {
     const totalLessons = COURSE_PRICES[e.courseId]?.lessons || 50;
-    const pct = e.progress?.completedLessons?.length
-      ? Math.round((e.progress.completedLessons.length / totalLessons) * 100) + '%'
-      : '0%';
+    const pct = e.progress?.completedLessons?.length ? Math.round((e.progress.completedLessons.length / totalLessons) * 100) + '%' : '0%';
     const meta = COURSE_PRICES[e.courseId];
     const enrolled = e.enrolledAt ? new Date(e.enrolledAt).toLocaleDateString() : '-';
     const hasFinal = e.progress?.finalScore != null;
@@ -9391,14 +9518,13 @@ function renderEnrollmentsTable() {
       <td style="font-size:11px;">${meta?.title || e.courseTitle || e.courseId}</td>
       <td style="font-size:11px;color:var(--dim);">${enrolled}</td>
       <td><div style="background:var(--border);height:4px;width:80px;display:inline-block;vertical-align:middle;margin-right:6px;"><div style="background:var(--gold);height:100%;width:${pct};"></div></div>${pct}</td>
-      <td><span style="font-size:10px;font-weight:700;letter-spacing:1px;padding:2px 8px;background:${hasFinal?'rgba(76,175,114,0.15)':'rgba(37,99,235,0.1)'};color:${hasFinal?'#4CAF72':'var(--gold)'};">${hasFinal?'COMPLETED':e.isRetake?'RETAKE':'ACTIVE'}</span>${(typeof e.paidAmount==='number'&&e.paidAmount===0)||e.accessCode?' <span style="font-size:9px;font-weight:700;padding:2px 6px;background:rgba(120,120,120,0.15);color:#666;margin-left:4px;">FREE</span>':''}</td>
+      <td><span style="font-size:10px;font-weight:700;letter-spacing:1px;padding:2px 8px;background:${hasFinal?'rgba(76,175,114,0.15)':'rgba(37,99,235,0.1)'};color:${hasFinal?'#4CAF72':'var(--gold)'};">${hasFinal?'COMPLETED':e.isRetake?'RETAKE':'ACTIVE'}</span>${e.viaMembership?' <span style="font-size:9px;font-weight:700;padding:2px 6px;background:rgba(201,168,76,0.1);color:var(--gold);margin-left:4px;">MEMBERSHIP</span>':''}</td>
       <td>
-        <button onclick="sendStudentAccessEmail('${escHtml(e.email||'')}')" style="background:none;border:1px solid var(--gold);color:var(--gold);font-size:10px;letter-spacing:1px;padding:2px 8px;cursor:pointer;margin-right:4px;" title="Email this student their course access links">📧 EMAIL</button>
+        <button onclick="sendStudentAccessEmail('${escHtml(e.email||'')}')" style="background:none;border:1px solid var(--gold);color:var(--gold);font-size:10px;letter-spacing:1px;padding:2px 8px;cursor:pointer;margin-right:4px;">\u{1F4E7} EMAIL</button>
         <button onclick="deleteEnrollment('${escHtml(key)}')" style="background:none;border:1px solid #444;color:#666;font-size:10px;letter-spacing:1px;padding:2px 8px;cursor:pointer;" onmouseover="this.style.borderColor='#c00';this.style.color='#c00'" onmouseout="this.style.borderColor='#444';this.style.color='#666'">✕ DELETE</button>
       </td>
     </tr>`;
   }).join('');
-  // Pagination controls
   const paginationHtml = totalPages > 1 ? `
     <tr><td colspan="7" style="padding:12px;text-align:center;">
       <button onclick="enrollPage=Math.max(0,enrollPage-1);renderEnrollmentsTable()" ${enrollPage===0?'disabled':''} style="background:var(--surface);border:1px solid var(--border);color:var(--text);padding:4px 12px;cursor:pointer;margin-right:8px;">← Prev</button>
@@ -9406,6 +9532,28 @@ function renderEnrollmentsTable() {
       <button onclick="enrollPage=Math.min(${totalPages-1},enrollPage+1);renderEnrollmentsTable()" ${enrollPage===totalPages-1?'disabled':''} style="background:var(--surface);border:1px solid var(--border);color:var(--text);padding:4px 12px;cursor:pointer;margin-left:8px;">Next →</button>
     </td></tr>` : '';
   tbody.innerHTML += paginationHtml;
+}
+
+async function deleteAllEnrollmentsForStudent(email) {
+  const lower = (email || '').toLowerCase();
+  const mine = ALL_ENROLLMENTS.filter(e => (e.email || '').toLowerCase() === lower);
+  if (!mine.length) return;
+  if (!confirm(`Remove ${mine.length} enrollment record${mine.length===1?'':'s'} for ${email}?\n\nThis cannot be undone.`)) return;
+  const kept = ALL_ENROLLMENTS.filter(e => (e.email || '').toLowerCase() !== lower);
+  try {
+    const r = await fetch('/api/admin-data', {
+      method: 'POST', credentials: 'include',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ type: 'enrollments', data: kept }),
+    });
+    const d = await r.json();
+    if (!r.ok || !d.ok) throw new Error(d.error || `HTTP ${r.status}`);
+    ALL_ENROLLMENTS = kept;
+    _expandedStudents.delete(lower);
+    renderEnrollmentsTable();
+  } catch (e) {
+    alert(`Delete failed: ${e.message}`);
+  }
 }
 async function deleteEnrollment(key) {
   const [email, courseId] = key.split('|');
