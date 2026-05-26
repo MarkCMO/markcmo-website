@@ -3020,7 +3020,7 @@ Generate unique tracked links to send clients to your forms and documents. Each 
 <div class="settings-row">
 <div class="settings-field">
 <label class="field-label">VIP Strategy Day ($2,500)</label>
-<input type="text" class="field-input" id="s-sq-vip" value="https://square.link/u/xZr7xL1L2500">
+<input type="text" class="field-input" id="s-sq-vip" value="https://square.link/u/ogZ0MUBL">
 </div>
 <div class="settings-field">
 <label class="field-label">Revenue Leak Playbook ($100)</label>
@@ -3954,6 +3954,31 @@ function openPanelFromHash() {
   if (navItem) navItem.click();
 }
 window.addEventListener('hashchange', openPanelFromHash);
+
+// ── Hide placeholder sidebar items that have no loader function ──────────
+// 15 tabs were defined in the sidebar but never wired to a data source.
+// Hiding them keeps the admin from looking broken. Re-enable by removing
+// the entry from PLACEHOLDER_PANELS once a loader function is implemented.
+const PLACEHOLDER_PANELS = new Set([
+  'content-resources', 'documents', 'emails', 'forms-hub', 'links',
+  'sg-overview', 'sg-calendar', 'sg-audience', 'sg-pillars', 'sg-hooks',
+  'sg-viral', 'sg-audit', 'sg-funnel', 'sg-competitor', 'social-engage',
+]);
+function hidePlaceholderPanels() {
+  document.querySelectorAll('.admin-nav-item, .admin-nav-cta').forEach(el => {
+    const onclick = el.getAttribute('onclick') || '';
+    const m = onclick.match(/switchPanel\('([a-z\-]+)'/);
+    if (m && PLACEHOLDER_PANELS.has(m[1])) {
+      el.style.display = 'none';
+      el.setAttribute('data-hidden-placeholder', '1');
+    }
+  });
+}
+if (document.readyState === 'loading') {
+  document.addEventListener('DOMContentLoaded', hidePlaceholderPanels);
+} else {
+  hidePlaceholderPanels();
+}
 
 // ════════════════════════════════════════════════════════════════
 // CASE FILES PANEL, embedded VDR
@@ -9345,7 +9370,7 @@ function renderEnrollmentsTable() {
     return `<tr>
       <td><strong>${escHtml(e.name||'-')}</strong></td>
       <td><a href="mailto:${escHtml(e.email||'')}" style="color:var(--gold);">${escHtml(e.email||'-')}</a></td>
-      <td style="font-size:11px;">${meta?.title||e.courseId}</td>
+      <td style="font-size:11px;">${meta?.title || e.courseTitle || e.courseId}</td>
       <td style="font-size:11px;color:var(--dim);">${enrolled}</td>
       <td><div style="background:var(--border);height:4px;width:80px;display:inline-block;vertical-align:middle;margin-right:6px;"><div style="background:var(--gold);height:100%;width:${pct};"></div></div>${pct}</td>
       <td><span style="font-size:10px;font-weight:700;letter-spacing:1px;padding:2px 8px;background:${hasFinal?'rgba(76,175,114,0.15)':'rgba(37,99,235,0.1)'};color:${hasFinal?'#4CAF72':'var(--gold)'};">${hasFinal?'COMPLETED':e.isRetake?'RETAKE':'ACTIVE'}</span>${(typeof e.paidAmount==='number'&&e.paidAmount===0)||e.accessCode?' <span style="font-size:9px;font-weight:700;padding:2px 6px;background:rgba(120,120,120,0.15);color:#666;margin-left:4px;">FREE</span>':''}</td>
