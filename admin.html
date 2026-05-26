@@ -3756,7 +3756,7 @@ async function doLogin() {
     // ALSO call the cookie-based admin-auth function so VDR + payment endpoints work.
     // Failure here is non-fatal, legacy admin still works on sessionStorage alone.
     try {
-      await fetch('/.netlify/functions/admin-auth', {
+      await fetch('/api/admin-auth', {
         method: 'POST',
         credentials: 'include',
         headers: { 'Content-Type': 'application/json' },
@@ -3774,7 +3774,7 @@ async function doLogin() {
 function doLogout() {
   sessionStorage.removeItem('admin_auth');
   // Also clear the cookie session
-  fetch('/.netlify/functions/admin-auth', {
+  fetch('/api/admin-auth', {
     method: 'POST',
     credentials: 'include',
     headers: { 'Content-Type': 'application/json' },
@@ -3797,7 +3797,7 @@ if (sessionStorage.getItem('admin_auth') === '1') {
   document.getElementById('login-screen').style.display = 'none';
   document.getElementById('app').style.display = 'block';
   // Probe the admin API for cookie validity before initApp fires.
-  fetch('/.netlify/functions/admin-engagement-data?type=summary', { credentials: 'include' })
+  fetch('/api/admin-engagement-data?type=summary', { credentials: 'include' })
     .then(r => {
       if (r.status === 401) {
         // Cookie expired, clear sessionStorage flag, show login screen, no banner needed
@@ -3830,7 +3830,7 @@ const JSONBIN_KEY = ''; // filled from env, read via admin API
 let _ADMIN_SECRET = '';
 async function fetchAdminSecret() {
   try {
-    const r = await fetch('/.netlify/functions/admin-data?type=secret');
+    const r = await fetch('/api/admin-data?type=secret');
     const d = await r.json();
     _ADMIN_SECRET = d.secret || '';
     // Also populate the settings field if it exists
@@ -3961,7 +3961,7 @@ window.addEventListener('hashchange', openPanelFromHash);
 // existing admin-engagement-data Netlify function. Same auth (cookie
 // or x-admin-api-token header).
 // ════════════════════════════════════════════════════════════════
-const CF_API = '/.netlify/functions/admin-engagement-data';
+const CF_API = '/api/admin-engagement-data';
 const CF_STATUS_PILL = {
   draft: 'cf-pill-grey', proposed: 'cf-pill-blue', accepted: 'cf-pill-blue',
   paid: 'cf-pill-green', in_progress: 'cf-pill-orange', delivered: 'cf-pill-green',
@@ -4824,7 +4824,7 @@ function cfShowAuthRequired() {
 // All data from /admin-engagement-data?type=...
 // Click any row to deep-link into Case Files for that client.
 // ════════════════════════════════════════════════════════════════
-const MC_API = '/.netlify/functions/admin-engagement-data';
+const MC_API = '/api/admin-engagement-data';
 const _mcCache = {};   // cached per-panel response, keyed by type
 const _mcSearch = {};  // search filter per panel
 
@@ -4902,7 +4902,7 @@ function mcReLogin() {
   sessionStorage.removeItem('admin_auth');
   // Clear the cookie too (best-effort)
   try {
-    fetch('/.netlify/functions/admin-auth', {
+    fetch('/api/admin-auth', {
       method: 'POST', credentials: 'include',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ action: 'logout' }),
@@ -5612,7 +5612,7 @@ function mcRenderTasks(data) {
 
 async function mcToggleTaskComplete(id, checked) {
   try {
-    const res = await fetch('/.netlify/functions/admin-mc-write', {
+    const res = await fetch('/api/admin-mc-write', {
       method: 'POST', credentials: 'include',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({
@@ -5667,7 +5667,7 @@ async function mcOpenTaskEditor(id) {
         due_at: out.due_at ? new Date(out.due_at).toISOString() : null,
       };
       if (out.status === 'completed' && !t.completed_at) data.completed_at = new Date().toISOString();
-      const res = await fetch('/.netlify/functions/admin-mc-write', {
+      const res = await fetch('/api/admin-mc-write', {
         method: 'POST', credentials: 'include',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ table: 'tasks', op: id ? 'update' : 'create', id, data }),
@@ -5682,7 +5682,7 @@ async function mcOpenTaskEditor(id) {
 // CONTENT · Blog Manager (mc_blog_posts via /admin-blog)
 // Full CRUD: list, draft, schedule, publish, archive, delete.
 // ════════════════════════════════════════════════════════════════
-const MC_BLOG_API = '/.netlify/functions/admin-blog';
+const MC_BLOG_API = '/api/admin-blog';
 let _mcBlogPosts = [];
 
 async function mcLoadBlog(force) {
@@ -6441,7 +6441,7 @@ function mcFmtRelTime(s) {
 // All admin-mc-write traffic flows through this so authentication,
 // audit logging, and error handling stay consistent.
 // ════════════════════════════════════════════════════════════════
-const MC_WRITE_API = '/.netlify/functions/admin-mc-write';
+const MC_WRITE_API = '/api/admin-mc-write';
 
 async function mcWrite(table, op, payload) {
   const body = { table, op, ...payload };
@@ -7355,7 +7355,7 @@ function mcRenderFormPanel(formType, panelKey) {
 // ─── DATA LOADING (via admin-proxy function) ──────────────────────────────────
 async function loadLeads() {
   try {
-    const res = await fetch('/.netlify/functions/admin-data?type=leads');
+    const res = await fetch('/api/admin-data?type=leads');
     if (!res.ok) throw new Error('Failed to load');
     const data = await res.json();
     allLeads = data.leads || [];
@@ -7368,7 +7368,7 @@ async function loadLeads() {
 }
 async function loadQueue() {
   try {
-    const res = await fetch('/.netlify/functions/admin-data?type=queue');
+    const res = await fetch('/api/admin-data?type=queue');
     if (!res.ok) throw new Error('Failed');
     const data = await res.json();
     allQueue = data.queue || [];
@@ -7380,7 +7380,7 @@ async function loadQueue() {
 }
 async function loadDocs() {
   try {
-    const res = await fetch('/.netlify/functions/admin-data?type=docs');
+    const res = await fetch('/api/admin-data?type=docs');
     if (!res.ok) throw new Error('Failed');
     const data = await res.json();
     allDocs = data.docs || [];
@@ -7565,7 +7565,7 @@ async function handleFileUpload(files) {
       const formData = new FormData();
       formData.append('file', file);
       formData.append('category', category);
-      const res = await fetch('/.netlify/functions/admin-upload', {
+      const res = await fetch('/api/admin-upload', {
         method: 'POST',
         body: formData
       });
@@ -7585,7 +7585,7 @@ async function deleteDoc(idx) {
   if (!confirm('Remove this document from the repository?')) return;
   allDocs.splice(idx, 1);
   try {
-    await fetch('/.netlify/functions/admin-data', {
+    await fetch('/api/admin-data', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ type: 'docs', docs: allDocs })
@@ -7650,7 +7650,7 @@ let generatedUrl = '';
 async function loadLinks() {
   document.getElementById('links-list').innerHTML = '<div class="loading">Loading links</div>';
   try {
-    const res = await fetch('/.netlify/functions/admin-links');
+    const res = await fetch('/api/admin-links');
     const data = await res.json();
     allLinks = data.links || [];
     document.getElementById('links-badge').textContent = allLinks.length;
@@ -7756,7 +7756,7 @@ async function createLink() {
   btn.textContent = 'Generating...';
   btn.disabled = true;
   try {
-    const res = await fetch('/.netlify/functions/admin-links', {
+    const res = await fetch('/api/admin-links', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({
@@ -7798,7 +7798,7 @@ async function rotateLink(id) {
   const link = allLinks.find(l => l.id === id);
   if (!confirm(`Rotate URL for "${link?.label}"?\n\nThe old link will stop working. You'll get a fresh URL for the same destination.`)) return;
   try {
-    const res = await fetch('/.netlify/functions/admin-links', {
+    const res = await fetch('/api/admin-links', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ action: 'rotate', id })
@@ -7819,7 +7819,7 @@ async function revokeLink(id) {
   const link = allLinks.find(l => l.id === id);
   if (!confirm(`Permanently revoke "${link?.label}"?\n\nAnyone who clicks this link will see an error. This cannot be undone.`)) return;
   try {
-    await fetch('/.netlify/functions/admin-links', {
+    await fetch('/api/admin-links', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ action: 'revoke', id })
@@ -9041,8 +9041,8 @@ let ALL_VOTES = {}, ALL_NOTIFY = [], _launchCourseId = null;
 async function loadVotesData() {
   if (!_ADMIN_SECRET) await fetchAdminSecret();
   const adminSecret = (document.getElementById('settings-admin-secret')?.value || _ADMIN_SECRET);
-  try { const r = await fetch('/.netlify/functions/admin-data?type=votes'); ALL_VOTES = (await r.json()).votes || {}; } catch(e) { ALL_VOTES = {}; }
-  try { const r = await fetch('/.netlify/functions/admin-data?type=notify'); if(r.ok) ALL_NOTIFY = (await r.json()).signups || []; } catch(e) {}
+  try { const r = await fetch('/api/admin-data?type=votes'); ALL_VOTES = (await r.json()).votes || {}; } catch(e) { ALL_VOTES = {}; }
+  try { const r = await fetch('/api/admin-data?type=notify'); if(r.ok) ALL_NOTIFY = (await r.json()).signups || []; } catch(e) {}
   renderVotesTable();
   document.getElementById('votes-badge').textContent = Object.values(ALL_VOTES).reduce((s,v)=>s+v,0) || '0';
 }
@@ -9072,7 +9072,7 @@ async function loadNotifyData() {
   if (!_ADMIN_SECRET) await fetchAdminSecret();
   const adminSecret = (document.getElementById('settings-admin-secret')?.value || _ADMIN_SECRET);
   try {
-    const r = await fetch('/.netlify/functions/admin-data?type=notify');
+    const r = await fetch('/api/admin-data?type=notify');
     if (!r.ok) { document.getElementById('notify-tbody').innerHTML='<tr><td colspan="5" style="text-align:center;color:#e05555;padding:32px;">Error, check Admin Secret in Settings</td></tr>'; return; }
     ALL_NOTIFY = (await r.json()).signups || [];
   } catch(e) { ALL_NOTIFY = []; }
@@ -9140,7 +9140,7 @@ async function confirmLaunch() {
   const btn         = document.getElementById('launch-send-btn');
   btn.textContent='Sending...'; btn.disabled=true; resultEl.style.display='none';
   try {
-    const r = await fetch('/.netlify/functions/admin-data',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({action:'launch',courseId:_launchCourseId,previewUrl})});
+    const r = await fetch('/api/admin-data',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({action:'launch',courseId:_launchCourseId,previewUrl})});
     const d = await r.json();
     if (d.ok) {
       resultEl.style.display='block'; resultEl.style.color='#7eb87e';
@@ -9161,7 +9161,7 @@ async function loadIntlData() {
   document.getElementById('intl-tbody').innerHTML =
     '<tr><td colspan="8" style="text-align:center;color:var(--dim);padding:32px;">Loading…</td></tr>';
   try {
-    const r = await fetch('/.netlify/functions/admin-data?type=intl');
+    const r = await fetch('/api/admin-data?type=intl');
     const d = await r.json();
     ALL_INTL = d.waitlist || [];
     renderIntlTable(ALL_INTL);
@@ -9207,7 +9207,7 @@ async function approveIntl(email, btn) {
   if (!confirm(`Approve ${email} and send them an access link?`)) return;
   btn.disabled = true; btn.textContent = 'Approving…';
   try {
-    const r = await fetch('/.netlify/functions/admin-data', {
+    const r = await fetch('/api/admin-data', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ action: 'approve-intl', email })
@@ -9242,7 +9242,7 @@ function escHtml(str) {
 async function loadCoursesData() {
   // Load enrollments via admin-data endpoint (no secret needed - uses Netlify env)
   try {
-    const r = await fetch('/.netlify/functions/admin-data?type=enrollments');
+    const r = await fetch('/api/admin-data?type=enrollments');
     const d = await r.json();
     ALL_ENROLLMENTS = d.enrollments || [];
   } catch(e) {
@@ -9250,7 +9250,7 @@ async function loadCoursesData() {
   }
   // Load graduates
   try {
-    const r2 = await fetch('/.netlify/functions/admin-data?type=graduates');
+    const r2 = await fetch('/api/admin-data?type=graduates');
     const d2 = await r2.json();
     ALL_GRADUATES = d2.graduates || [];
   } catch(e) {

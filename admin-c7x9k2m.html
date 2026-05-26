@@ -2852,7 +2852,7 @@ async function doLogin() {
   btn.disabled = true;
   btn.textContent = 'Verifying…';
   try {
-    const r = await fetch('/.netlify/functions/admin-auth', {
+    const r = await fetch('/api/admin-auth', {
       method: 'POST',
       credentials: 'include',
       headers: { 'Content-Type': 'application/json' },
@@ -2877,7 +2877,7 @@ async function doLogin() {
   }
 }
 function doLogout() {
-  fetch('/.netlify/functions/admin-auth', {
+  fetch('/api/admin-auth', {
     method: 'POST', credentials: 'include',
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify({ action: 'logout' })
@@ -2889,7 +2889,7 @@ document.getElementById('login-pass').addEventListener('keydown', e => {
 // Check existing session via server on load
 (async () => {
   try {
-    const r = await fetch('/.netlify/functions/admin-auth?action=verify', {
+    const r = await fetch('/api/admin-auth?action=verify', {
       credentials: 'include'
     });
     const d = await r.json();
@@ -2959,7 +2959,7 @@ function switchPanel(id, el) {
 // ─── DATA LOADING (via admin-proxy function) ──────────────────────────────────
 async function loadLeads() {
   try {
-    const res = await fetch('/.netlify/functions/admin-data?type=leads');
+    const res = await fetch('/api/admin-data?type=leads');
     if (!res.ok) throw new Error('Failed to load');
     const data = await res.json();
     allLeads = data.leads || [];
@@ -2972,7 +2972,7 @@ async function loadLeads() {
 }
 async function loadQueue() {
   try {
-    const res = await fetch('/.netlify/functions/admin-data?type=queue');
+    const res = await fetch('/api/admin-data?type=queue');
     if (!res.ok) throw new Error('Failed');
     const data = await res.json();
     allQueue = data.queue || [];
@@ -2984,7 +2984,7 @@ async function loadQueue() {
 }
 async function loadDocs() {
   try {
-    const res = await fetch('/.netlify/functions/admin-data?type=docs');
+    const res = await fetch('/api/admin-data?type=docs');
     if (!res.ok) throw new Error('Failed');
     const data = await res.json();
     allDocs = data.docs || [];
@@ -3169,7 +3169,7 @@ async function handleFileUpload(files) {
       const formData = new FormData();
       formData.append('file', file);
       formData.append('category', category);
-      const res = await fetch('/.netlify/functions/admin-upload', {
+      const res = await fetch('/api/admin-upload', {
         method: 'POST',
         body: formData
       });
@@ -3189,7 +3189,7 @@ async function deleteDoc(idx) {
   if (!confirm('Remove this document from the repository?')) return;
   allDocs.splice(idx, 1);
   try {
-    await fetch('/.netlify/functions/admin-data', {
+    await fetch('/api/admin-data', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ type: 'docs', docs: allDocs })
@@ -3254,7 +3254,7 @@ let generatedUrl = '';
 async function loadLinks() {
   document.getElementById('links-list').innerHTML = '<div class="loading">Loading links</div>';
   try {
-    const res = await fetch('/.netlify/functions/admin-links');
+    const res = await fetch('/api/admin-links');
     const data = await res.json();
     allLinks = data.links || [];
     document.getElementById('links-badge').textContent = allLinks.length;
@@ -3360,7 +3360,7 @@ async function createLink() {
   btn.textContent = 'Generating...';
   btn.disabled = true;
   try {
-    const res = await fetch('/.netlify/functions/admin-links', {
+    const res = await fetch('/api/admin-links', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({
@@ -3402,7 +3402,7 @@ async function rotateLink(id) {
   const link = allLinks.find(l => l.id === id);
   if (!confirm(`Rotate URL for "${link?.label}"?\n\nThe old link will stop working. You'll get a fresh URL for the same destination.`)) return;
   try {
-    const res = await fetch('/.netlify/functions/admin-links', {
+    const res = await fetch('/api/admin-links', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ action: 'rotate', id })
@@ -3423,7 +3423,7 @@ async function revokeLink(id) {
   const link = allLinks.find(l => l.id === id);
   if (!confirm(`Permanently revoke "${link?.label}"?\n\nAnyone who clicks this link will see an error. This cannot be undone.`)) return;
   try {
-    await fetch('/.netlify/functions/admin-links', {
+    await fetch('/api/admin-links', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ action: 'revoke', id })
