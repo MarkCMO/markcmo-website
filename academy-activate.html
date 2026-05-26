@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>Activate Your Academy Account - MarkCMO</title>
+<meta name="robots" content="noindex,nofollow" />
+<link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+<link rel="canonical" href="https://markcmo.com/academy-activate" />
+<style>
+  *,*::before,*::after { box-sizing: border-box; }
+  body { background: #050919; color: #fff; font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif; margin: 0; min-height: 100vh; }
+  .ty-shell { max-width: 720px; margin: 0 auto; padding: 4rem 1.5rem; }
+  .ty-eyebrow { font-size: 0.7rem; font-weight: 700; letter-spacing: 0.18em; text-transform: uppercase; color: #C9A84C; margin-bottom: 14px; }
+  .ty-title { font-family: 'Outfit', sans-serif; font-size: clamp(2rem, 5vw, 3rem); font-weight: 900; letter-spacing: -0.02em; line-height: 1.1; margin: 0 0 18px; }
+  .ty-sub { font-size: 1.05rem; line-height: 1.7; color: rgba(255,255,255,0.7); margin: 0 0 32px; }
+  .ty-card { background: #0E1438; border: 1px solid rgba(255,255,255,0.08); padding: 28px; border-radius: 6px; margin: 24px 0; }
+  .ty-card-label { font-size: 0.7rem; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase; color: #C9A84C; margin-bottom: 10px; }
+  .ty-form { display: flex; gap: 10px; margin: 20px 0; flex-wrap: wrap; }
+  .ty-input { flex: 1; min-width: 220px; background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.12); color: #fff; padding: 14px 16px; font-size: 1rem; border-radius: 4px; outline: none; font-family: inherit; }
+  .ty-input:focus { border-color: #C9A84C; }
+  .ty-btn { background: #C9A84C; color: #0A1628; border: none; padding: 14px 28px; font-weight: 800; font-size: 0.85rem; letter-spacing: 1px; text-transform: uppercase; cursor: pointer; border-radius: 4px; font-family: inherit; }
+  .ty-btn:disabled { opacity: 0.5; cursor: not-allowed; }
+  .ty-btn-ghost { background: transparent; border: 1px solid #C9A84C; color: #C9A84C; padding: 14px 28px; font-weight: 700; font-size: 0.85rem; letter-spacing: 1px; text-transform: uppercase; text-decoration: none; display: inline-block; border-radius: 4px; }
+  .ty-status { margin-top: 18px; padding: 14px 18px; border-radius: 4px; font-size: 0.95rem; line-height: 1.6; }
+  .ty-status.ok { background: rgba(76,175,114,0.1); border: 1px solid rgba(76,175,114,0.3); color: #6BBE89; }
+  .ty-status.warn { background: rgba(201,168,76,0.08); border: 1px solid rgba(201,168,76,0.25); color: #DFC06D; }
+  .ty-status.err { background: rgba(220,53,69,0.1); border: 1px solid rgba(220,53,69,0.3); color: #f08a98; }
+  .ty-loading { display: inline-block; width: 16px; height: 16px; border: 2px solid rgba(255,255,255,0.2); border-top-color: #C9A84C; border-radius: 50%; animation: spin 0.7s linear infinite; vertical-align: middle; margin-right: 8px; }
+  @keyframes spin { to { transform: rotate(360deg); } }
+  .ty-meta { color: rgba(255,255,255,0.5); font-size: 0.85rem; margin-top: 6px; }
+  a { color: #C9A84C; }
+</style>
+</head>
+<body>
+
+<div class="ty-shell">
+  <div class="ty-eyebrow">MarkCMO Academy</div>
+  <h1 class="ty-title">Thanks for joining.</h1>
+  <p class="ty-sub">Enter the email you used at Square checkout and we'll activate your All-Access account in seconds.</p>
+
+  <div class="ty-card" id="ty-form-card">
+    <div class="ty-card-label">Activate Your Account</div>
+    <div class="ty-form">
+      <input type="email" id="ty-email" class="ty-input" placeholder="you@company.com" autocomplete="email" />
+      <button id="ty-btn" class="ty-btn" onclick="activate()">Activate →</button>
+    </div>
+    <div id="ty-status"></div>
+  </div>
+
+  <div id="ty-success" style="display:none;">
+    <div class="ty-card">
+      <div class="ty-card-label">Your All-Access Membership Is Live</div>
+      <p class="ty-sub" id="ty-welcome-msg" style="margin:0 0 14px;">All-Access membership confirmed.</p>
+      <p class="ty-meta" id="ty-meta"></p>
+      <div style="margin-top:18px;">
+        <a id="ty-portal-link" href="#" class="ty-btn-ghost" target="_blank">Open My Courses →</a>
+      </div>
+    </div>
+
+    <p class="ty-meta">A confirmation email with your personalized course links was sent to your inbox. Bookmark this page or save the email for fast re-entry.</p>
+  </div>
+
+  <p class="ty-meta" style="margin-top:32px;">Need help? Email <a href="mailto:mark@markcmo.com">mark@markcmo.com</a></p>
+</div>
+
+<script>
+// Pre-fill email from URL (Square return URL or share link)
+(function() {
+  const u = new URL(location.href);
+  const fromUrl = u.searchParams.get('email') || u.searchParams.get('buyer_email_address') || '';
+  if (fromUrl) {
+    document.getElementById('ty-email').value = fromUrl;
+    setTimeout(() => activate(), 700);
+  }
+})();
+
+function showStatus(type, html) {
+  const el = document.getElementById('ty-status');
+  el.className = 'ty-status ' + type;
+  el.innerHTML = html;
+}
+
+async function activate() {
+  const emailInput = document.getElementById('ty-email');
+  const btn = document.getElementById('ty-btn');
+  const email = (emailInput.value || '').trim().toLowerCase();
+  if (!email || !email.includes('@')) {
+    showStatus('err', 'Please enter the email address you used at checkout.');
+    return;
+  }
+  btn.disabled = true;
+  btn.textContent = 'Activating...';
+  showStatus('warn', '<span class="ty-loading"></span>Looking up your Square subscription...');
+
+  try {
+    const r = await fetch('/api/process-academy-enrollment', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ email }),
+    });
+    const d = await r.json();
+
+    if (r.status === 402) {
+      showStatus('warn',
+        '<strong>Square subscription not found yet.</strong><br>' +
+        (d.message || '') +
+        '<br><br><strong>Just paid?</strong> Square sometimes takes 30-60 seconds to confirm. Wait a moment and click Try Again.<br>' +
+        '<strong>Used a different email at checkout?</strong> Enter that email instead.<br>' +
+        '<strong>Still stuck?</strong> Email <a href="mailto:mark@markcmo.com">mark@markcmo.com</a> with your Square receipt.'
+      );
+      btn.disabled = false;
+      btn.textContent = 'Try Again →';
+      return;
+    }
+    if (!r.ok || !d.ok) {
+      throw new Error(d.error || d.message || 'Activation failed');
+    }
+    showStatusSuccess(email, d);
+  } catch (e) {
+    showStatus('err', 'Something went wrong: ' + e.message + '<br><br>Email <a href="mailto:mark@markcmo.com">mark@markcmo.com</a> if this persists.');
+    btn.disabled = false;
+    btn.textContent = 'Activate →';
+  }
+}
+
+function showStatusSuccess(email, d) {
+  document.getElementById('ty-form-card').style.display = 'none';
+  document.getElementById('ty-success').style.display = 'block';
+
+  const expiry = d.membershipExpires
+    ? new Date(d.membershipExpires).toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' })
+    : null;
+
+  const welcome = d.alreadyEnrolled
+    ? 'Welcome back. Your All-Access membership is already active.'
+    : 'Your account is now active. Start any course below.';
+  document.getElementById('ty-welcome-msg').textContent = welcome;
+  document.getElementById('ty-meta').textContent =
+    'Plan: All-Access Membership' + (d.plan ? ' (' + d.plan + ')' : '') +
+    (expiry ? ' · Renews ' + expiry : '') +
+    (d.courseCount ? ' · ' + d.courseCount + ' courses unlocked' : '');
+
+  const portalUrl = 'https://academy.markcmo.com/?email=' + encodeURIComponent(email)
+    + '&token=' + encodeURIComponent(d.accessToken || '') + '&mycourses=1';
+  document.getElementById('ty-portal-link').href = portalUrl;
+}
+</script>
+
+</body>
+</html>

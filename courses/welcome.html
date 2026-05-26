@@ -147,24 +147,31 @@ async function claimAccess() {
   }
   const btn = document.getElementById('submit-btn');
   btn.disabled = true;
-  btn.textContent = 'CREATING YOUR ACCESS...';
+  btn.textContent = 'VERIFYING PAYMENT...';
+  // Route through realtime processor — verifies a paid Square subscription
+  // exists for this email before enrolling. Prevents free self-enrollment.
   try {
-    const resp = await fetch('/.netlify/functions/course-enroll', {
+    const resp = await fetch('/api/process-academy-enrollment', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ name, email, courseId: COURSE_ID, isRetake: IS_RETAKE })
+      body: JSON.stringify({ name, email })
     });
     const data = await resp.json();
-    if (data.ok) {
-      // Show success
-      document.getElementById('form-panel').classList.add('hide');
-      document.getElementById('success-panel').classList.add('show');
-      if (data.accessUrl) {
-        document.getElementById('direct-link').href = data.accessUrl;
-      }
-    } else {
-      throw new Error(data.error || 'Failed');
+    if (resp.status === 402) {
+      // No paid subscription found
+      toast(data.message || 'No Square subscription found for that email. If you just paid, try again in 30 seconds.', 'red');
+      btn.disabled = false;
+      btn.textContent = 'TRY AGAIN →';
+      return;
     }
+    if (!resp.ok || !data.ok) throw new Error(data.error || data.message || 'Failed');
+    // Show success
+    document.getElementById('form-panel').classList.add('hide');
+    document.getElementById('success-panel').classList.add('show');
+    const portalUrl = 'https://academy.markcmo.com/?email=' + encodeURIComponent(email) +
+      '&token=' + encodeURIComponent(data.accessToken || '') + '&mycourses=1';
+    const linkEl = document.getElementById('direct-link');
+    if (linkEl) linkEl.href = portalUrl;
   } catch(e) {
     toast('Something went wrong - please try again or email mark@markcmo.com', 'red');
     btn.disabled = false;
