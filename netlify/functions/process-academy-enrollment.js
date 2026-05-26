@@ -131,16 +131,21 @@ exports.handler = async (event) => {
       const enrollments = (data.enrollments || data.record?.enrollments || []).filter(
         e => (e.email || '').toLowerCase() === email
       );
-      const hasMembership = enrollments.some(e => e.courseId === 'membership');
+      const membership = enrollments.find(e => e.courseId === 'membership' || e.viaMembership);
+      const indivCourses = enrollments.filter(e => e.courseId !== 'membership');
       return {
         statusCode: 200,
         headers: CORS,
         body: JSON.stringify({
           enrolled: enrollments.length > 0,
-          isMember: hasMembership,
-          courseCount: enrollments.filter(e => e.courseId !== 'membership').length,
-          accessToken: enrollments[0]?.accessToken || null,
-          membershipExpires: enrollments.find(e => e.membershipExpires)?.membershipExpires || null,
+          isMember: !!membership,
+          courseCount: indivCourses.length,
+          accessToken: (membership || enrollments[0])?.accessToken || null,
+          membershipExpires: membership?.membershipExpires || null,
+          courses: indivCourses.map(e => ({
+            id: e.courseId,
+            title: e.courseTitle || e.courseId,
+          })),
         }),
       };
     } catch (e) {
@@ -166,21 +171,31 @@ exports.handler = async (event) => {
     return { statusCode: 503, headers: CORS, body: JSON.stringify({ error: 'Square not configured' }) };
   }
 
-  // ── Check if already enrolled (cron may have beat us) ──────────────────────
+  // ── Check if already enrolled (cron OR Whop webhook may have beat us) ─────
+  // This covers BOTH membership buyers (Square -> webhook -> course-enroll)
+  // AND individual course buyers (Whop -> whop-webhook -> course-enroll).
+  // Either way the source of truth is JSONBin enrollments.
   try {
     const data = await jbGet(process.env.JSONBIN_ENROLLMENTS_BIN_ID);
-    const existing = (data.enrollments || data.record?.enrollments || []).filter(
-      e => (e.email || '').toLowerCase() === email && e.courseId === 'membership'
-    );
-    if (existing.length > 0) {
+    const all = (data.enrollments || data.record?.enrollments || []);
+    const mine = all.filter(e => (e.email || '').toLowerCase() === email);
+    if (mine.length > 0) {
+      const membership = mine.find(e => e.courseId === 'membership' || e.viaMembership);
+      const indivCourses = mine.filter(e => e.courseId !== 'membership');
       return {
         statusCode: 200,
         headers: CORS,
         body: JSON.stringify({
           ok: true,
           alreadyEnrolled: true,
-          accessToken: existing[0].accessToken,
-          membershipExpires: existing[0].membershipExpires || null,
+          isMember: !!membership,
+          accessToken: (membership || mine[0]).accessToken,
+          membershipExpires: membership?.membershipExpires || null,
+          courseCount: indivCourses.length,
+          courses: indivCourses.map(e => ({
+            id: e.courseId,
+            title: e.courseTitle || e.courseId,
+          })),
         }),
       };
     }
@@ -188,7 +203,15 @@ exports.handler = async (event) => {
     console.warn('Pre-check enrollment lookup failed:', e.message);
   }
 
-  // ── Verify active Square subscription ──────────────────────────────────────
+  // ── No JSONBin enrollment yet -> verify Square subscription ────────────────
+  // (Individual Whop buyers should already be enrolled by the time they hit
+  // this endpoint because the Whop webhook fires immediately on payment. If
+  // they end up here, they're a membership buyer whose Square webhook hasn't
+  // fired yet OR a no-payment self-enroll attempt — Square verification gates
+  // both cases.)
+  if (!process.env.SQUARE_ACCESS_TOKEN && !process.env.SQUARE_ACADEMY_ACCESS_TOKEN) {
+    return { statusCode: 503, headers: CORS, body: JSON.stringify({ error: 'Square not configured' }) };
+  }
   const verification = await findActiveAcademySubscription(email);
   if (!verification) {
     return {
@@ -197,7 +220,7 @@ exports.handler = async (event) => {
       body: JSON.stringify({
         ok: false,
         error: 'No active subscription',
-        message: 'We could not find a Square subscription for ' + email + '. If you just paid, try again in 30 seconds. If you used a different email at checkout, please enter that one instead.',
+        message: 'We could not find a Square subscription or course purchase for ' + email + '. If you just paid, try again in 30 seconds. If you used a different email at checkout, please enter that one instead.',
       }),
     };
   }

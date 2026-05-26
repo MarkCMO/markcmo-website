@@ -126,20 +126,47 @@ async function activate() {
 
 function showStatusSuccess(email, d) {
   document.getElementById('ty-form-card').style.display = 'none';
-  document.getElementById('ty-success').style.display = 'block';
+  const success = document.getElementById('ty-success');
+  success.style.display = 'block';
 
   const expiry = d.membershipExpires
     ? new Date(d.membershipExpires).toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' })
     : null;
 
-  const welcome = d.alreadyEnrolled
-    ? 'Welcome back. Your All-Access membership is already active.'
-    : 'Your account is now active. Start any course below.';
-  document.getElementById('ty-welcome-msg').textContent = welcome;
-  document.getElementById('ty-meta').textContent =
-    'Plan: All-Access Membership' + (d.plan ? ' (' + d.plan + ')' : '') +
-    (expiry ? ' · Renews ' + expiry : '') +
-    (d.courseCount ? ' · ' + d.courseCount + ' courses unlocked' : '');
+  // Three flavors of success state, depending on what they bought:
+  //   1. Member (membership active)            -> "All-Access Membership"
+  //   2. Individual course buyer (1+ courses)  -> "X courses unlocked"
+  //   3. Combination (rare)                    -> shows membership banner
+  const isMember = d.isMember || d.plan;
+  const indivCount = d.courseCount || (d.courses ? d.courses.length : 0);
+
+  let label, msg, metaParts = [];
+  if (isMember) {
+    label = 'Your All-Access Membership Is Live';
+    msg = d.alreadyEnrolled
+      ? 'Welcome back. Your All-Access membership is already active.'
+      : 'Your account is now active. Start any course below.';
+    metaParts.push('Plan: All-Access Membership');
+    if (d.plan) metaParts.push('(' + d.plan + ')');
+    if (expiry) metaParts.push('Renews ' + expiry);
+    metaParts.push('All 24 courses unlocked');
+  } else if (indivCount > 0) {
+    label = indivCount === 1 ? 'Your Course Is Ready' : `Your ${indivCount} Courses Are Ready`;
+    msg = d.alreadyEnrolled
+      ? 'Welcome back. Your course access is already set up.'
+      : 'Your access is now active. Start your course below.';
+    metaParts.push(indivCount + (indivCount === 1 ? ' course' : ' courses') + ' unlocked');
+    if (d.courses && d.courses.length) {
+      metaParts.push('(' + d.courses.map(c => c.title).join(', ') + ')');
+    }
+  } else {
+    label = 'Your Account Is Live';
+    msg = 'Your access is now active.';
+  }
+
+  document.querySelector('#ty-success .ty-card-label').textContent = label;
+  document.getElementById('ty-welcome-msg').textContent = msg;
+  document.getElementById('ty-meta').textContent = metaParts.join(' · ');
 
   const portalUrl = 'https://academy.markcmo.com/?email=' + encodeURIComponent(email)
     + '&token=' + encodeURIComponent(d.accessToken || '') + '&mycourses=1';
