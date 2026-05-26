@@ -20,10 +20,15 @@
 const SQUARE_API = 'https://connect.squareup.com/v2';
 const SQUARE_VERSION = '2024-11-20';
 
-// Active academy plan variation IDs (matches academy-enrollment-reconcile.js)
+// Academy plan variation IDs across BOTH Square apps (legacy MarkCMO +
+// new MarkCMO Academy). Subscriptions from either app are honored.
 const ACADEMY_VARIATIONS = {
+  // Old MarkCMO app (where Robert + Khang live)
   '2FXFF44DSP2F7YHKD33YZ6KX': 'monthly',
   'WXXLU4TIVVPZ7KYXCVTGH4Z6': 'annual',
+  // New MarkCMO Academy app (all new signups)
+  'GNBQIPQB5O6TAI73ZEGDGZ7H': 'monthly',
+  'DT5FZDFTEBFSWYF6G6SISIWC': 'annual',
 };
 
 const CORS = {
@@ -33,11 +38,14 @@ const CORS = {
   'Access-Control-Allow-Methods': 'GET,POST,OPTIONS',
 };
 
-async function sq(path, init = {}) {
+// Try both Square app tokens. Same merchant, two apps (old MarkCMO +
+// new MarkCMO Academy). A token only sees its own app's resources, so
+// we query both and merge.
+async function sqWithToken(token, path, init = {}) {
   const r = await fetch(SQUARE_API + path, {
     ...init,
     headers: {
-      'Authorization': 'Bearer ' + process.env.SQUARE_ACCESS_TOKEN,
+      'Authorization': 'Bearer ' + token,
       'Square-Version': SQUARE_VERSION,
       'Content-Type': 'application/json',
       ...(init.headers || {}),
@@ -46,38 +54,56 @@ async function sq(path, init = {}) {
   const body = await r.json().catch(() => ({}));
   return { ok: r.ok, status: r.status, body };
 }
+async function sq(path, init = {}) {
+  // For backward compat — prefer academy token, fall through to legacy.
+  const academy = process.env.SQUARE_ACADEMY_ACCESS_TOKEN;
+  const legacy  = process.env.SQUARE_ACCESS_TOKEN;
+  if (academy) {
+    const r = await sqWithToken(academy, path, init);
+    if (r.ok) return r;
+  }
+  if (legacy) return sqWithToken(legacy, path, init);
+  return { ok: false, status: 503, body: { errors: [{ detail: 'No Square access token configured' }] } };
+}
 
 async function findActiveAcademySubscription(email) {
   if (!email) return null;
-  // 1. Search Square customers by email
-  const custRes = await sq('/customers/search', {
-    method: 'POST',
-    body: JSON.stringify({
-      query: { filter: { email_address: { exact: email } } },
-      limit: 5,
-    }),
-  });
-  if (!custRes.ok) return null;
-  const customers = custRes.body.customers || [];
-  if (!customers.length) return null;
+  // Search BOTH Square apps. Both tokens must be tried independently because
+  // a token can only see customers + subscriptions from its own app.
+  const tokens = [
+    process.env.SQUARE_ACADEMY_ACCESS_TOKEN,
+    process.env.SQUARE_ACCESS_TOKEN,
+  ].filter(Boolean);
 
-  // 2. For each matching customer, list active academy subscriptions
-  for (const customer of customers) {
-    const subRes = await sq('/subscriptions/search', {
+  for (const token of tokens) {
+    const custRes = await sqWithToken(token, '/customers/search', {
       method: 'POST',
-      body: JSON.stringify({ query: { filter: { customer_ids: [customer.id] } } }),
+      body: JSON.stringify({
+        query: { filter: { email_address: { exact: email } } },
+        limit: 5,
+      }),
     });
-    if (!subRes.ok) continue;
-    const subs = subRes.body.subscriptions || [];
-    const active = subs.find(s =>
-      s.status === 'ACTIVE' && ACADEMY_VARIATIONS[s.plan_variation_id]
-    );
-    if (active) {
-      return {
-        customer,
-        subscription: active,
-        plan: ACADEMY_VARIATIONS[active.plan_variation_id],
-      };
+    if (!custRes.ok) continue;
+    const customers = custRes.body.customers || [];
+
+    for (const customer of customers) {
+      const subRes = await sqWithToken(token, '/subscriptions/search', {
+        method: 'POST',
+        body: JSON.stringify({ query: { filter: { customer_ids: [customer.id] } } }),
+      });
+      if (!subRes.ok) continue;
+      const subs = subRes.body.subscriptions || [];
+      const active = subs.find(s =>
+        s.status === 'ACTIVE' && ACADEMY_VARIATIONS[s.plan_variation_id]
+      );
+      if (active) {
+        return {
+          customer,
+          subscription: active,
+          plan: ACADEMY_VARIATIONS[active.plan_variation_id],
+          sourceApp: token === process.env.SQUARE_ACADEMY_ACCESS_TOKEN ? 'academy' : 'legacy',
+        };
+      }
     }
   }
   return null;

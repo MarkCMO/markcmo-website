@@ -390,11 +390,15 @@ html,body,*,*::before,*::after{cursor:none!important}
 // course links right now. Every other course routes to the $99/mo membership
 // which unlocks all of them (and you can sell standalone later).
 const SQUARE_LINKS = {
-  membership:       'https://square.link/u/ogZ0MUBL', // $99/mo all-access
-  membershipAnnual: 'https://square.link/u/z3DVyevy', // $899/yr all-access
-  cmoCourse:        'https://square.link/u/VcZz4ReY', // CMO Mastery $248
-  cooCourse:        'https://square.link/u/9ur887Yl', // COO Mastery $248
-  cooRetake:        'https://square.link/u/PzvIQc7D', // COO Retake $28
+  // Membership URLs now point to the NEW MarkCMO Academy Square app so
+  // payments stay isolated from LeadFlow / Butcher Bud / MSC / consulting.
+  // The old MarkCMO app URLs (ogZ0MUBL, z3DVyevy) stay valid for Robert
+  // and Khang until they migrate naturally on next renewal.
+  membership:       'https://square.link/u/t2a1kzt7', // $99/mo all-access (new academy app)
+  membershipAnnual: 'https://square.link/u/fGhPbDfG', // $899/yr all-access (new academy app)
+  cmoCourse:        'https://square.link/u/VcZz4ReY', // CMO Mastery $248 (still in MarkCMO app)
+  cooCourse:        'https://square.link/u/9ur887Yl', // COO Mastery $248 (still in MarkCMO app)
+  cooRetake:        'https://square.link/u/PzvIQc7D', // COO Retake $28 (still in MarkCMO app)
 };
 const COURSES = {
   // ── TOP 5 FLAGSHIP ─────────────────────────────────────────────────────────
