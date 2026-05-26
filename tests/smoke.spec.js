@@ -19,22 +19,20 @@ const { test, expect, request } = require('@playwright/test');
 const PROD  = 'https://markcmo.com';
 const ACAD  = 'https://academy.markcmo.com';
 
-// All Square + Whop URLs the site currently uses. Any one of these going
-// dead is a critical revenue bug — the test SHOULD fail and block deploy.
+// Per WETYR Protocol §3.1, all payments now use embedded Square SDK on
+// our own /checkout page. Any of these returning non-200 = critical
+// revenue bug, smoke fails, deploy blocked.
 const REQUIRED_LIVE_PAYMENT_URLS = [
-  // Square Academy app (new) — memberships
-  'https://square.link/u/t2a1kzt7',  // $99/mo
-  'https://square.link/u/fGhPbDfG',  // $899/yr
-  // Whop — individual courses
-  'https://whop.com/checkout/plan_kEE61Ap2vqrRo',  // CMO Mastery $248
-  'https://whop.com/checkout/plan_zF15BEL4Sb1Si',  // COO Mastery $248
-  'https://whop.com/checkout/plan_Vr9YYVsS06Drw',  // CFO Mastery $248
-  'https://whop.com/checkout/plan_FefzKxs7zfQPd',  // CEO Mastery $248
-  // Legacy Square — products without replacements yet
-  'https://square.link/u/kLKYt0W3',  // CMO Audit $1,000
-  'https://square.link/u/xZr7xL1L',  // VIP Strategy Day $2,500
-  'https://square.link/u/vU2gDuuq',  // CMO Accelerator Kit $50
-  'https://square.link/u/aWWEtFwC',  // Revenue Leak Playbook $100
+  'https://markcmo.com/checkout?product=membership-monthly',
+  'https://markcmo.com/checkout?product=membership-annual',
+  'https://markcmo.com/checkout?product=course-cmo',
+  'https://markcmo.com/checkout?product=course-coo',
+  'https://markcmo.com/checkout?product=course-cfo',
+  'https://markcmo.com/checkout?product=course-ceo',
+  'https://markcmo.com/checkout?product=audit',
+  'https://markcmo.com/checkout?product=vip',
+  'https://markcmo.com/checkout?product=kit',
+  'https://markcmo.com/checkout?product=playbook',
 ];
 
 test.describe('Homepage + nav + footer', () => {

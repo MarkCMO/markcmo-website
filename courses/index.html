@@ -389,31 +389,20 @@ html,body,*,*::before,*::after{cursor:none!important}
 // buttons at the wrong product again. Only CMO + COO have individual $248
 // course links right now. Every other course routes to the $99/mo membership
 // which unlocks all of them (and you can sell standalone later).
-// Payment routing for every course button on this page.
-// Three vendors in play, each owns a different product class:
-//   * Square Academy app  -> recurring memberships ($99/mo, $899/yr)
-//   * Whop                -> individual course one-time ($248) + retakes ($28)
-//                            (already wired on academy.markcmo.com — same URLs)
-//   * Legacy Square       -> deprecated; some old URLs still resolve for
-//                            existing subscribers but no new traffic sent there.
-//
-// Retake URLs are intentionally NOT in this client-side map. The academy
-// gates retakes server-side via /netlify/functions/retake-access so the URL
-// is never exposed before enrollment is verified. Sending the user to
-// /preview?course=X on academy.markcmo.com lets that gate do its job.
+// All product buttons route through the unified embedded Square Web Payments
+// SDK checkout at /checkout?product=X. Per WETYR Protocol v1 §3.1, no
+// redirects to hosted Square or Whop checkouts. Every payment happens on
+// our own domain with card data tokenized client-side.
 const PAYMENT_LINKS = {
-  // Membership — embedded Square Web Payments SDK on our own domain
-  // (per WETYR Protocol v1 Section 3.1: no redirects to checkout.square.site)
-  membership:       'https://markcmo.com/academy-checkout?plan=monthly',  // $99/mo
-  membershipAnnual: 'https://markcmo.com/academy-checkout?plan=annual',   // $899/yr
-
-  // Individual course purchases (Whop)
-  cmoCourse:        'https://whop.com/checkout/plan_kEE61Ap2vqrRo',  // CMO Mastery $248
-  cooCourse:        'https://whop.com/checkout/plan_zF15BEL4Sb1Si',  // COO Mastery $248
-  cfoCourse:        'https://whop.com/checkout/plan_Vr9YYVsS06Drw',  // CFO Mastery $248
-  ceoCourse:        'https://whop.com/checkout/plan_FefzKxs7zfQPd',  // CEO Mastery $248
-
-  // Retake gate (server-side at academy)
+  membership:       'https://markcmo.com/checkout?product=membership-monthly',  // $99/mo
+  membershipAnnual: 'https://markcmo.com/checkout?product=membership-annual',   // $899/yr
+  cmoCourse:        'https://markcmo.com/checkout?product=course-cmo',          // CMO Mastery $248
+  cooCourse:        'https://markcmo.com/checkout?product=course-coo',          // COO Mastery $248
+  cfoCourse:        'https://markcmo.com/checkout?product=course-cfo',          // CFO Mastery $248
+  ceoCourse:        'https://markcmo.com/checkout?product=course-ceo',          // CEO Mastery $248
+  // Retakes still gated server-side at academy (verify enrollment before
+  // checkout link is shown). The gate redirects to /checkout?product=retake-X
+  // after passing.
   retakeGate:       (courseId) => `https://academy.markcmo.com/preview?course=${courseId}&action=retake`,
 };
 // Back-compat alias so legacy COURSES[] entries keep resolving.

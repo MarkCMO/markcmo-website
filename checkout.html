@@ -1,0 +1,345 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>Secure Checkout - MarkCMO</title>
+<meta name="robots" content="noindex,nofollow" />
+<link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+<link rel="canonical" href="https://markcmo.com/checkout" />
+<!--
+  WETYR Infrastructure Protocol v1 - Section 3.1 compliance.
+  Generic embedded Square Web Payments SDK checkout that adapts to any
+  product. ALL payments (memberships, courses, retakes, audits, VIP) run
+  through this single page. No redirects to Square hosted checkout.
+
+  Routes by ?product= query param:
+    membership-monthly  -> $99/mo subscription
+    membership-annual   -> $899/yr subscription
+    course-cmo          -> $248 one-time
+    course-coo          -> $248 one-time
+    course-cfo          -> $248 one-time
+    course-ceo          -> $248 one-time
+    retake-cmo|coo|cfo|ceo  -> $28 one-time (server-gated)
+    audit               -> $1,000 one-time
+    vip                 -> $2,500 one-time
+    kit                 -> $50 one-time
+    playbook            -> $100 one-time
+-->
+<script src="https://web.squarecdn.com/v1/square.js"></script>
+<style>
+  *,*::before,*::after { box-sizing: border-box; }
+  body { background: #050919; color: #fff; font-family: 'Inter','Barlow',-apple-system,BlinkMacSystemFont,sans-serif; margin: 0; min-height: 100vh; }
+  .co-shell { max-width: 760px; margin: 0 auto; padding: 3.5rem 1.5rem 4rem; }
+  .co-eyebrow { font-size: 0.7rem; font-weight: 700; letter-spacing: 0.18em; text-transform: uppercase; color: #C9A84C; margin-bottom: 14px; }
+  .co-title { font-family: 'Bebas Neue','Outfit',sans-serif; font-size: clamp(2rem,5vw,3rem); font-weight: 900; letter-spacing: -0.01em; line-height: 1.1; margin: 0 0 12px; }
+  .co-sub { font-size: 1.05rem; line-height: 1.65; color: rgba(255,255,255,0.7); margin: 0 0 28px; }
+  .co-card { background: #0E1438; border: 1px solid rgba(255,255,255,0.08); padding: 28px; border-radius: 6px; margin: 18px 0; }
+  .co-card-label { font-size: 0.7rem; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase; color: #C9A84C; margin-bottom: 14px; display: flex; justify-content: space-between; align-items: center; }
+  .co-plan-summary { display: flex; justify-content: space-between; align-items: baseline; }
+  .co-plan-name { font-weight: 700; font-size: 1.05rem; }
+  .co-plan-price { color: #C9A84C; font-weight: 800; font-size: 1.35rem; }
+  .co-plan-meta { color: rgba(255,255,255,0.55); font-size: 0.82rem; margin-top: 4px; }
+  .co-row { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 12px; }
+  .co-row.single { grid-template-columns: 1fr; }
+  .co-input { background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.12); color: #fff; padding: 13px 14px; font-size: 0.95rem; border-radius: 4px; outline: none; font-family: inherit; width: 100%; }
+  .co-input:focus { border-color: #C9A84C; }
+  .co-input::placeholder { color: rgba(255,255,255,0.4); }
+  .co-label { display: block; font-size: 0.72rem; letter-spacing: 0.08em; color: rgba(255,255,255,0.55); text-transform: uppercase; margin-bottom: 6px; font-weight: 600; }
+  #card-container { background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.12); border-radius: 4px; padding: 12px 14px; min-height: 52px; }
+  #card-container.sq-focus { border-color: #C9A84C; }
+  .co-submit { background: #C9A84C; color: #0A1628; border: none; padding: 16px 24px; font-weight: 900; font-size: 0.9rem; letter-spacing: 1.5px; text-transform: uppercase; cursor: pointer; border-radius: 4px; font-family: inherit; width: 100%; margin-top: 18px; transition: opacity 0.15s; }
+  .co-submit:disabled { opacity: 0.5; cursor: not-allowed; }
+  .co-submit:hover:not(:disabled) { background: #DFC06D; }
+  .co-trust { display: flex; align-items: center; gap: 16px; margin-top: 18px; font-size: 0.75rem; color: rgba(255,255,255,0.45); }
+  .co-trust svg { width: 14px; height: 14px; flex-shrink: 0; }
+  .co-status { margin-top: 18px; padding: 14px 18px; border-radius: 4px; font-size: 0.95rem; line-height: 1.6; }
+  .co-status.ok { background: rgba(76,175,114,0.1); border: 1px solid rgba(76,175,114,0.3); color: #6BBE89; }
+  .co-status.err { background: rgba(220,53,69,0.1); border: 1px solid rgba(220,53,69,0.3); color: #f08a98; }
+  .co-status.warn { background: rgba(201,168,76,0.08); border: 1px solid rgba(201,168,76,0.25); color: #DFC06D; }
+  .co-loading { display: inline-block; width: 14px; height: 14px; border: 2px solid rgba(255,255,255,0.2); border-top-color: #C9A84C; border-radius: 50%; animation: spin 0.7s linear infinite; vertical-align: middle; margin-right: 8px; }
+  @keyframes spin { to { transform: rotate(360deg); } }
+  .co-success-actions { display: flex; gap: 10px; margin-top: 18px; flex-wrap: wrap; }
+  .co-btn-primary { background: #C9A84C; color: #0A1628; padding: 14px 26px; font-weight: 800; font-size: 0.85rem; letter-spacing: 1px; text-transform: uppercase; text-decoration: none; display: inline-block; border-radius: 4px; }
+  .co-btn-ghost { background: transparent; border: 1px solid rgba(255,255,255,0.2); color: #fff; padding: 14px 26px; font-weight: 700; font-size: 0.85rem; letter-spacing: 1px; text-transform: uppercase; text-decoration: none; display: inline-block; border-radius: 4px; }
+  .co-meta { color: rgba(255,255,255,0.45); font-size: 0.85rem; margin-top: 8px; }
+  a { color: #C9A84C; }
+  @media (max-width: 600px) { .co-row { grid-template-columns: 1fr; } }
+</style>
+</head>
+<body>
+
+<div class="co-shell">
+  <div class="co-eyebrow">MarkCMO Secure Checkout</div>
+  <h1 class="co-title" id="co-title">Activate Your Purchase</h1>
+  <p class="co-sub" id="co-sub">Card processed directly here on markcmo.com. Powered by Square — your card details never leave this page.</p>
+
+  <div class="co-card" id="co-plan-card">
+    <div class="co-card-label">Your Order</div>
+    <div class="co-plan-summary">
+      <div>
+        <div class="co-plan-name" id="co-plan-name">…</div>
+        <div class="co-plan-meta" id="co-plan-meta">…</div>
+      </div>
+      <div class="co-plan-price" id="co-plan-price">…</div>
+    </div>
+  </div>
+
+  <form id="co-form" autocomplete="on" novalidate>
+    <div class="co-card">
+      <div class="co-card-label">Contact</div>
+      <div class="co-row">
+        <div>
+          <label class="co-label" for="co-first">First name</label>
+          <input type="text" id="co-first" class="co-input" autocomplete="given-name" required />
+        </div>
+        <div>
+          <label class="co-label" for="co-last">Last name</label>
+          <input type="text" id="co-last" class="co-input" autocomplete="family-name" required />
+        </div>
+      </div>
+      <div class="co-row single">
+        <div>
+          <label class="co-label" for="co-email">Email</label>
+          <input type="email" id="co-email" class="co-input" placeholder="you@company.com" autocomplete="email" required />
+        </div>
+      </div>
+    </div>
+
+    <div class="co-card">
+      <div class="co-card-label">
+        <span>Payment</span>
+        <span style="font-size:0.65rem;color:rgba(255,255,255,0.45);letter-spacing:0.1em;text-transform:none;">🔒 PCI-secure · Powered by Square</span>
+      </div>
+      <label class="co-label">Card details</label>
+      <div id="card-container"></div>
+      <div class="co-trust">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+        <span>Card data is encrypted and tokenized in your browser. We never see or store your card number.</span>
+      </div>
+    </div>
+
+    <button type="submit" id="co-submit" class="co-submit" disabled>
+      <span id="co-submit-label">Loading payment system…</span>
+    </button>
+    <div id="co-status"></div>
+  </form>
+
+  <div id="co-success" style="display:none;">
+    <div class="co-card">
+      <div class="co-card-label" id="co-success-label">Payment Complete</div>
+      <p style="margin:0 0 10px;font-size:1.05rem;line-height:1.6;" id="co-success-msg">Your purchase is complete.</p>
+      <p class="co-meta" id="co-success-meta"></p>
+      <div class="co-success-actions" id="co-success-actions">
+        <a id="co-portal-link" href="#" class="co-btn-primary" target="_blank">Open My Courses →</a>
+        <a href="https://markcmo.com" class="co-btn-ghost">Back to Home</a>
+      </div>
+    </div>
+    <p class="co-meta">A receipt was emailed to you. Bookmark this email for quick re-entry.</p>
+  </div>
+
+  <p class="co-meta" style="margin-top:32px;">
+    Need help? <a href="mailto:mark@markcmo.com">mark@markcmo.com</a> ·
+    <a href="https://markcmo.com/terms">Terms</a> ·
+    <a href="https://markcmo.com/privacy">Privacy</a>
+  </p>
+</div>
+
+<script>
+// ─── Product catalog (mirror server side) ────────────────────────────────
+const PRODUCTS = {
+  'membership-monthly': { type: 'subscription', name: 'MarkCMO Academy · Monthly',  price: 9900,   priceLabel: '$99',     cadenceLabel: '/mo',  description: 'All-Access Membership · 24 courses · Cancel anytime' },
+  'membership-annual':  { type: 'subscription', name: 'MarkCMO Academy · Annual',   price: 89900,  priceLabel: '$899',    cadenceLabel: '/yr',  description: 'All-Access Membership · 24 courses · Best value' },
+  'course-cmo':         { type: 'one-time',     name: 'Fractional CMO Mastery',     price: 24800,  priceLabel: '$248',    cadenceLabel: '',     description: 'One-time purchase · Lifetime access' },
+  'course-coo':         { type: 'one-time',     name: 'Fractional COO Mastery',     price: 24800,  priceLabel: '$248',    cadenceLabel: '',     description: 'One-time purchase · Lifetime access' },
+  'course-cfo':         { type: 'one-time',     name: 'Fractional CFO Mastery',     price: 24800,  priceLabel: '$248',    cadenceLabel: '',     description: 'One-time purchase · Lifetime access' },
+  'course-ceo':         { type: 'one-time',     name: 'CEO Mastery',                price: 24800,  priceLabel: '$248',    cadenceLabel: '',     description: 'One-time purchase · Lifetime access' },
+  'retake-cmo':         { type: 'one-time',     name: 'CMO Mastery · Exam Retake',  price: 2800,   priceLabel: '$28',     cadenceLabel: '',     description: 'Reset your final exam with new questions' },
+  'retake-coo':         { type: 'one-time',     name: 'COO Mastery · Exam Retake',  price: 2800,   priceLabel: '$28',     cadenceLabel: '',     description: 'Reset your final exam with new questions' },
+  'retake-cfo':         { type: 'one-time',     name: 'CFO Mastery · Exam Retake',  price: 2800,   priceLabel: '$28',     cadenceLabel: '',     description: 'Reset your final exam with new questions' },
+  'retake-ceo':         { type: 'one-time',     name: 'CEO Mastery · Exam Retake',  price: 2800,   priceLabel: '$28',     cadenceLabel: '',     description: 'Reset your final exam with new questions' },
+  'audit':              { type: 'one-time',     name: 'CMO Audit & Sprint',         price: 100000, priceLabel: '$1,000',  cadenceLabel: '',     description: '90-min audit of your business · Personalized 90-day plan' },
+  'vip':                { type: 'one-time',     name: 'CMO VIP Strategy Day',       price: 250000, priceLabel: '$2,500',  cadenceLabel: '',     description: 'Full-day strategy session · Implementation playbook' },
+  'kit':                { type: 'one-time',     name: 'CMO Accelerator Kit',        price: 5000,   priceLabel: '$50',     cadenceLabel: '',     description: 'Templates, frameworks, scripts · Instant download' },
+  'playbook':           { type: 'one-time',     name: 'Revenue Leak Playbook',      price: 10000,  priceLabel: '$100',    cadenceLabel: '',     description: 'The full diagnostic framework · Instant download' },
+};
+
+const params = new URL(location.href).searchParams;
+const productKey = params.get('product') || 'membership-monthly';
+const product = PRODUCTS[productKey];
+if (!product) {
+  document.querySelector('.co-shell').innerHTML = '<h1 class="co-title">Product not found</h1><p class="co-sub">Unknown product code <code>' + productKey + '</code>. <a href="https://markcmo.com">Return home</a>.</p>';
+  throw new Error('unknown product');
+}
+
+// ─── Render product summary ───────────────────────────────────────────────
+document.title = product.name + ' · Secure Checkout';
+document.getElementById('co-title').textContent = product.type === 'subscription' ? 'Start ' + product.name : 'Activate ' + product.name;
+document.getElementById('co-plan-name').textContent = product.name;
+document.getElementById('co-plan-meta').textContent = product.description;
+document.getElementById('co-plan-price').innerHTML =
+  product.priceLabel + (product.cadenceLabel ? '<span style="font-size:0.7rem;color:rgba(255,255,255,0.5);font-weight:500;"> ' + product.cadenceLabel + '</span>' : '');
+document.getElementById('co-submit-label').textContent =
+  (product.type === 'subscription' ? 'Start ' : 'Complete purchase · ') + product.priceLabel + (product.cadenceLabel ? ' ' + product.cadenceLabel : '');
+
+// Prefill email if Square return URL provides it
+const urlEmail = params.get('email') || params.get('buyer_email_address') || '';
+if (urlEmail) document.getElementById('co-email').value = urlEmail;
+
+function showStatus(type, html) {
+  const el = document.getElementById('co-status');
+  el.className = 'co-status ' + type;
+  el.innerHTML = html;
+}
+function clearStatus() { document.getElementById('co-status').innerHTML = ''; }
+
+// ─── Initialize Square SDK ───────────────────────────────────────────────
+const SQUARE_APP_ID    = 'sq0idp-gESxDq0u4h8eHPVS_CLbmQ';
+const SQUARE_LOCATION  = 'LVBWTHWMEP60S';
+let payments, card;
+(async function initSquare() {
+  if (!window.Square) {
+    showStatus('err', 'Could not load payment system. Refresh or email <a href="mailto:mark@markcmo.com">mark@markcmo.com</a>.');
+    return;
+  }
+  try {
+    payments = window.Square.payments(SQUARE_APP_ID, SQUARE_LOCATION);
+    card = await payments.card({
+      style: {
+        '.input-container': { borderColor: 'transparent', borderRadius: '4px' },
+        '.input-container.is-focus': { borderColor: '#C9A84C' },
+        '.message-text': { color: '#f08a98' },
+        '.message-text.is-error': { color: '#f08a98' },
+        input: { color: '#ffffff', fontSize: '15px', fontFamily: 'Inter, sans-serif' },
+        'input::placeholder': { color: 'rgba(255,255,255,0.4)' },
+      },
+    });
+    await card.attach('#card-container');
+    card.addEventListener('focusClassAdded', () => document.getElementById('card-container').classList.add('sq-focus'));
+    card.addEventListener('focusClassRemoved', () => document.getElementById('card-container').classList.remove('sq-focus'));
+    document.getElementById('co-submit').disabled = false;
+    document.getElementById('co-submit-label').textContent =
+      (product.type === 'subscription' ? 'Start ' : 'Complete purchase · ') + product.priceLabel + (product.cadenceLabel ? ' ' + product.cadenceLabel : '');
+  } catch (e) {
+    console.error('Square init failed:', e);
+    showStatus('err', 'Payment system failed to initialize. Refresh or email <a href="mailto:mark@markcmo.com">mark@markcmo.com</a>.');
+  }
+})();
+
+document.getElementById('co-form').addEventListener('submit', async (e) => {
+  e.preventDefault();
+  clearStatus();
+
+  const firstName = document.getElementById('co-first').value.trim();
+  const lastName  = document.getElementById('co-last').value.trim();
+  const email     = document.getElementById('co-email').value.trim().toLowerCase();
+
+  if (!firstName || !lastName || !email || !email.includes('@')) {
+    showStatus('err', 'Please fill all fields with a valid email.');
+    return;
+  }
+  if (!card) {
+    showStatus('err', 'Payment system not ready yet — wait a moment and retry.');
+    return;
+  }
+
+  const btn = document.getElementById('co-submit');
+  btn.disabled = true;
+  document.getElementById('co-submit-label').innerHTML = '<span class="co-loading"></span>Processing...';
+
+  let tokenResult;
+  try {
+    tokenResult = await card.tokenize();
+  } catch (tokErr) {
+    btn.disabled = false;
+    document.getElementById('co-submit-label').textContent = 'Try again · ' + product.priceLabel + (product.cadenceLabel ? ' ' + product.cadenceLabel : '');
+    showStatus('err', 'Could not read your card details. Please re-enter them.');
+    return;
+  }
+
+  if (tokenResult.status !== 'OK') {
+    btn.disabled = false;
+    document.getElementById('co-submit-label').textContent = 'Try again · ' + product.priceLabel + (product.cadenceLabel ? ' ' + product.cadenceLabel : '');
+    const errMsg = (tokenResult.errors && tokenResult.errors[0] && tokenResult.errors[0].message) || 'Card validation failed';
+    showStatus('err', errMsg + '. Check your card details.');
+    return;
+  }
+
+  try {
+    const r = await fetch('/api/checkout-process', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        sourceId: tokenResult.token,
+        verificationToken: tokenResult.verificationToken || null,
+        product: productKey,
+        firstName, lastName, email,
+      }),
+    });
+    const data = await r.json();
+
+    if (!r.ok || !data.ok) {
+      btn.disabled = false;
+      document.getElementById('co-submit-label').textContent = 'Try again · ' + product.priceLabel + (product.cadenceLabel ? ' ' + product.cadenceLabel : '');
+      const errCode = data.code || 'unknown';
+      const errMsg  = data.message || data.error || 'Payment failed';
+      showStatus('err',
+        '<strong>Payment could not be completed.</strong><br>' +
+        errMsg + ' (' + errCode + ')<br><br>' +
+        'If the charge appears on your statement, email <a href="mailto:mark@markcmo.com">mark@markcmo.com</a> with the time and we will reconcile manually.'
+      );
+      return;
+    }
+    showSuccess(email, data);
+  } catch (err) {
+    btn.disabled = false;
+    document.getElementById('co-submit-label').textContent = 'Try again · ' + product.priceLabel + (product.cadenceLabel ? ' ' + product.cadenceLabel : '');
+    showStatus('err', 'Network error: ' + err.message + '. Try again or email <a href="mailto:mark@markcmo.com">mark@markcmo.com</a>.');
+  }
+});
+
+function showSuccess(email, data) {
+  document.getElementById('co-plan-card').style.display = 'none';
+  document.getElementById('co-form').style.display = 'none';
+  document.getElementById('co-success').style.display = 'block';
+
+  // Customize success state per product type
+  if (product.type === 'subscription') {
+    document.getElementById('co-success-label').textContent = 'Subscription Active';
+    document.getElementById('co-success-msg').textContent =
+      'Welcome. Your ' + product.name + ' is active. Access links emailed to ' + email + '.';
+    const expiry = data.membershipExpires
+      ? new Date(data.membershipExpires).toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' })
+      : null;
+    document.getElementById('co-success-meta').textContent =
+      product.name + (expiry ? ' · Renews ' + expiry : '') + ' · 24 courses unlocked';
+    const portalUrl = 'https://academy.markcmo.com/?email=' + encodeURIComponent(email)
+      + '&token=' + encodeURIComponent(data.accessToken || '') + '&mycourses=1';
+    document.getElementById('co-portal-link').href = portalUrl;
+  } else if (productKey.startsWith('course-') || productKey.startsWith('retake-')) {
+    document.getElementById('co-success-label').textContent = 'Course Ready';
+    document.getElementById('co-success-msg').textContent =
+      'Your ' + product.name + ' access is now active. Access link emailed to ' + email + '.';
+    document.getElementById('co-success-meta').textContent = product.name + ' · ' + product.priceLabel;
+    const courseId = productKey.replace(/^(course|retake)-/, '');
+    const portalUrl = 'https://academy.markcmo.com/learn?course=' + encodeURIComponent(courseId)
+      + '&email=' + encodeURIComponent(email)
+      + '&token=' + encodeURIComponent(data.accessToken || '');
+    document.getElementById('co-portal-link').href = portalUrl;
+    document.getElementById('co-portal-link').textContent = 'Start Course →';
+  } else {
+    // Service product: audit, vip, kit, playbook
+    document.getElementById('co-success-label').textContent = 'Order Confirmed';
+    document.getElementById('co-success-msg').textContent =
+      'Thank you. Your ' + product.name + ' is confirmed. Mark will follow up by email at ' + email + ' within 24 hours.';
+    document.getElementById('co-success-meta').textContent = product.name + ' · ' + product.priceLabel;
+    // Hide portal button for services, just show home link
+    document.getElementById('co-portal-link').style.display = 'none';
+  }
+
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+</script>
+
+</body>
+</html>
