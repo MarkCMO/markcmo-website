@@ -190,6 +190,35 @@ exports.handler = async (event) => {
       return { statusCode: 200, headers: CORS, body: JSON.stringify({ env, count: orders.length, orders }) };
     }
 
+    // ── DELETED catalog items (with timestamps) ─────────────────────
+    if (type === 'deleted') {
+      // SearchCatalogObjects with include_deleted_objects:true
+      const r = await sqCall('POST', '/catalog/search', {
+        object_types: ['ITEM'],
+        include_deleted_objects: true,
+        limit: 1000,
+      });
+      if (!r.ok) return { statusCode: r.status, headers: CORS, body: JSON.stringify(r.data) };
+      const allItems = (r.data.objects || []).filter(o => o.type === 'ITEM');
+      const deleted = allItems.filter(o => o.is_deleted).map(o => ({
+        id: o.id,
+        name: o.item_data?.name || '',
+        deleted_at: o.updated_at,
+        version: o.version,
+      })).sort((a, b) => (b.deleted_at || '').localeCompare(a.deleted_at || ''));
+      const active = allItems.filter(o => !o.is_deleted).length;
+      return {
+        statusCode: 200,
+        headers: CORS,
+        body: JSON.stringify({
+          active_count: active,
+          deleted_count: deleted.length,
+          deleted_items: deleted,
+          note: 'Square does not expose which Square Account user performed the deletion. The deleted_at timestamp reflects the time the item was last updated (i.e. marked deleted).',
+        }),
+      };
+    }
+
     // ── SUMMARY (default) ───────────────────────────────────────────
     const [cat, cust, ord] = await Promise.all([
       sqCall('GET', '/catalog/list?types=ITEM'),
