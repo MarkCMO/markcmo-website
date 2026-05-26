@@ -5,9 +5,15 @@
   "scripts": {
     "deploy": "node scripts/build-pages-functions.js && node scripts/build-dist.js && wrangler pages deploy ./dist --project-name=markcmo",
     "deploy:cron": "wrangler deploy --config cloudflare/cron-worker.toml",
-    "tail:cron": "wrangler tail markcmo-cron"
+    "tail:cron": "wrangler tail markcmo-cron",
+    "test": "playwright test",
+    "test:headed": "playwright test --headed",
+    "test:ui": "playwright test --ui"
   },
   "dependencies": {
     "pdf-parse": "^1.1.1"
+  },
+  "devDependencies": {
+    "@playwright/test": "^1.48.0"
   }
 }

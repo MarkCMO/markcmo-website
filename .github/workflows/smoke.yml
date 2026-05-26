@@ -1,0 +1,48 @@
+name: Smoke tests
+
+# Runs Playwright smoke tests against LIVE production after every successful
+# deploy, plus nightly. If any test fails, opens a Slack alert (when wired)
+# and surfaces in GitHub Actions.
+
+on:
+  workflow_run:
+    workflows: ['Deploy to Cloudflare Pages']
+    types: [completed]
+    branches: [main]
+  schedule:
+    # Every day at 06:30 UTC (01:30 ET) — outside US business hours so
+    # we don't compete with real customer traffic.
+    - cron: '30 6 * * *'
+  workflow_dispatch:
+
+jobs:
+  smoke:
+    runs-on: ubuntu-latest
+    # Only run on successful deploys (don't bother if deploy already failed)
+    if: github.event_name != 'workflow_run' || github.event.workflow_run.conclusion == 'success'
+    timeout-minutes: 10
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up Node.js 22
+        uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+          cache: 'npm'
+
+      - name: Install Playwright
+        run: |
+          npm install --no-save @playwright/test@1
+          npx playwright install --with-deps chromium
+
+      - name: Run smoke tests
+        run: npx playwright test
+
+      - name: Upload HTML report on failure
+        if: failure()
+        uses: actions/upload-artifact@v4
+        with:
+          name: playwright-report
+          path: playwright-report/
+          retention-days: 14
