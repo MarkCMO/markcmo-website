@@ -402,9 +402,10 @@ html,body,*,*::before,*::after{cursor:none!important}
 // is never exposed before enrollment is verified. Sending the user to
 // /preview?course=X on academy.markcmo.com lets that gate do its job.
 const PAYMENT_LINKS = {
-  // Membership (Square Academy app — isolated from other products)
-  membership:       'https://square.link/u/t2a1kzt7',  // $99/mo
-  membershipAnnual: 'https://square.link/u/fGhPbDfG',  // $899/yr
+  // Membership — embedded Square Web Payments SDK on our own domain
+  // (per WETYR Protocol v1 Section 3.1: no redirects to checkout.square.site)
+  membership:       'https://markcmo.com/academy-checkout?plan=monthly',  // $99/mo
+  membershipAnnual: 'https://markcmo.com/academy-checkout?plan=annual',   // $899/yr
 
   // Individual course purchases (Whop)
   cmoCourse:        'https://whop.com/checkout/plan_kEE61Ap2vqrRo',  // CMO Mastery $248
