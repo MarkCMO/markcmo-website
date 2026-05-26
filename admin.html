@@ -9344,6 +9344,24 @@ function renderCoursesOverview() {
 }
 const ENROLL_PAGE_SIZE = 25;
 let enrollPage = 0;
+async function sendStudentAccessEmail(email) {
+  if (!email) return;
+  if (!confirm(`Send course access email to ${email}?`)) return;
+  try {
+    const r = await fetch('/api/admin-send-access-email', {
+      method: 'POST',
+      credentials: 'include',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ email }),
+    });
+    const d = await r.json();
+    if (!r.ok) throw new Error(d.error || `HTTP ${r.status}`);
+    alert(`✓ Sent to ${email}\n${d.course_count} course access links included.\nResend ID: ${d.resend_id || '-'}`);
+  } catch (e) {
+    alert(`✗ Failed: ${e.message}`);
+  }
+}
+
 function renderEnrollmentsTable() {
   let filtered = filterEnrollmentsList();
   const total = filtered.length;
@@ -9374,7 +9392,10 @@ function renderEnrollmentsTable() {
       <td style="font-size:11px;color:var(--dim);">${enrolled}</td>
       <td><div style="background:var(--border);height:4px;width:80px;display:inline-block;vertical-align:middle;margin-right:6px;"><div style="background:var(--gold);height:100%;width:${pct};"></div></div>${pct}</td>
       <td><span style="font-size:10px;font-weight:700;letter-spacing:1px;padding:2px 8px;background:${hasFinal?'rgba(76,175,114,0.15)':'rgba(37,99,235,0.1)'};color:${hasFinal?'#4CAF72':'var(--gold)'};">${hasFinal?'COMPLETED':e.isRetake?'RETAKE':'ACTIVE'}</span>${(typeof e.paidAmount==='number'&&e.paidAmount===0)||e.accessCode?' <span style="font-size:9px;font-weight:700;padding:2px 6px;background:rgba(120,120,120,0.15);color:#666;margin-left:4px;">FREE</span>':''}</td>
-      <td><button onclick="deleteEnrollment('${escHtml(key)}')" style="background:none;border:1px solid #444;color:#666;font-size:10px;letter-spacing:1px;padding:2px 8px;cursor:pointer;" onmouseover="this.style.borderColor='#c00';this.style.color='#c00'" onmouseout="this.style.borderColor='#444';this.style.color='#666'">✕ DELETE</button></td>
+      <td>
+        <button onclick="sendStudentAccessEmail('${escHtml(e.email||'')}')" style="background:none;border:1px solid var(--gold);color:var(--gold);font-size:10px;letter-spacing:1px;padding:2px 8px;cursor:pointer;margin-right:4px;" title="Email this student their course access links">📧 EMAIL</button>
+        <button onclick="deleteEnrollment('${escHtml(key)}')" style="background:none;border:1px solid #444;color:#666;font-size:10px;letter-spacing:1px;padding:2px 8px;cursor:pointer;" onmouseover="this.style.borderColor='#c00';this.style.color='#c00'" onmouseout="this.style.borderColor='#444';this.style.color='#666'">✕ DELETE</button>
+      </td>
     </tr>`;
   }).join('');
   // Pagination controls
