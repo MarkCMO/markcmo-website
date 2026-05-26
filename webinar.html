@@ -856,6 +856,11 @@ A live CMO-level framework to find the invisible gaps in your marketing, operati
 <div class="form-heading">Reserve Your Seat</div>
 <p class="form-subheading">Free registration, takes 30 seconds. Your spot is held until 24 hours before showtime.</p>
 <form id="webinarForm">
+<!-- Honeypot: hidden from humans, bots fill it. Server rejects if non-empty. -->
+<div style="position:absolute;left:-9999px;width:1px;height:1px;overflow:hidden;" aria-hidden="true">
+  <label for="company_url">Company URL (leave blank)</label>
+  <input type="text" id="company_url" name="company_url" tabindex="-1" autocomplete="off" />
+</div>
 <div class="form-group">
 <label for="firstName">First Name</label>
 <input type="text" id="firstName" name="firstName" placeholder="Mark" required />
@@ -1475,6 +1480,7 @@ email: form.email.value.trim(),
 company: form.company.value.trim(),
 revenue: form.revenue.value,
 biggestChallenge: form.biggestChallenge.value,
+company_url: form.company_url ? form.company_url.value : '',
 formType: 'webinar-signup',
 page: 'webinar.html',
 timestamp: new Date().toISOString()

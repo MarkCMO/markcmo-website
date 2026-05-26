@@ -31,8 +31,22 @@ exports.handler = async (event) => {
   try { body = JSON.parse(event.body); }
   catch { return { statusCode: 400, body: JSON.stringify({ error: 'Invalid JSON' }) }; }
 
-  const { firstName, lastName, email, company, revenue, challenge } = body;
+  const { firstName, lastName, email, company, revenue, challenge, company_url } = body;
   if (!firstName || !email) return { statusCode: 400, body: JSON.stringify({ error: 'Missing required fields' }) };
+
+  // ── Bot defense ─────────────────────────────────────────────────────────
+  // 1) Honeypot: hidden field `company_url` is invisible to humans. If a bot
+  //    fills it, silently 200-OK so the bot thinks it succeeded. Don't store.
+  // 2) Gibberish detection: 15+ char alphanumeric string with no whitespace
+  //    in firstName/lastName is the bot pattern observed in spam records.
+  const looksBot =
+    (company_url && company_url.trim()) ||
+    /^[A-Za-z0-9]{15,}$/.test((firstName || '').trim()) ||
+    (lastName && /^[A-Za-z0-9]{15,}$/.test(lastName.trim()));
+  if (looksBot) {
+    console.warn('[webinar-signup] bot rejected:', { email, firstName: (firstName||'').slice(0,20), honeypot: !!company_url });
+    return { statusCode: 200, headers: corsHeaders(), body: JSON.stringify({ success: true, name: firstName }) };
+  }
 
   const WEBINAR_CONFIG = getConfig();
   const registeredAt = new Date().toISOString();

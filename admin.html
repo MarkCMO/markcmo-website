@@ -7441,7 +7441,7 @@ function renderLeads(leads) {
   }
   tbody.innerHTML = leads.slice().reverse().map((l, i) => `
     <tr>
-      <td><strong>${esc(l.firstName)} ${esc(l.lastName || '')}</strong></td>
+      <td><strong>${esc(l.name || (l.firstName ? `${l.firstName} ${l.lastName || ''}`.trim() : '(no name)'))}</strong></td>
       <td class="td-mono td-muted">${esc(l.email)}</td>
       <td>${esc(l.company || '-')}</td>
       <td class="td-muted">${esc(l.revenue || '-')}</td>
@@ -7460,7 +7460,7 @@ function renderDashLeads(leads) {
   }
   tbody.innerHTML = recent.map(l => `
     <tr>
-      <td><strong>${esc(l.firstName)} ${esc(l.lastName || '')}</strong></td>
+      <td><strong>${esc(l.name || (l.firstName ? `${l.firstName} ${l.lastName || ''}`.trim() : '(no name)'))}</strong></td>
       <td class="td-mono td-muted">${esc(l.email)}</td>
       <td>${esc(l.company || '-')}</td>
       <td class="td-muted">${esc(l.revenue || '-')}</td>
