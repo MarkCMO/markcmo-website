@@ -1757,6 +1757,7 @@
 
   <!-- System -->
   <div class="admin-nav-section">System</div>
+  <a class="admin-nav-item" onclick="switchPanel('ops', this)"><span class="admin-nav-ico">🚦</span><span>Ops &amp; Health</span></a>
   <a class="admin-nav-item" onclick="switchPanel('settings', this)"><span class="admin-nav-ico">⚙️</span><span>Settings</span></a>
   <a href="/" class="admin-nav-item admin-nav-external"><span class="admin-nav-ico">↗</span><span>View Public Site</span></a>
 </nav>
@@ -2917,6 +2918,17 @@ Generate unique tracked links to send clients to your forms and documents. Each 
     <div id="mc-rev-analytics-body"><div class="mc-loading">Loading revenue analytics</div></div>
   </div>
 </div>
+<div id="panel-ops" class="panel">
+<div class="top-bar">
+<div class="page-title">OPS &amp; HEALTH</div>
+<div class="page-actions">
+<button class="btn btn-outline" onclick="mcLoadOps()">↻ Refresh</button>
+</div>
+</div>
+<div id="ops-body" style="padding:24px;">
+<div class="mc-loading">Loading system status...</div>
+</div>
+</div>
 <div id="panel-settings" class="panel">
 <div class="top-bar">
 <div class="page-title">SETTINGS</div>
@@ -3942,6 +3954,148 @@ function switchPanel(id, el) {
   else if (id === 'webinar-schedule')  { if (typeof mcLoadWebinars === 'function')    mcLoadWebinars(); }
   else if (id === 'content-blog')      { if (typeof mcLoadBlog === 'function')        mcLoadBlog(); }
   else if (id === 'settings')          { if (typeof mcLoadIntegrations === 'function') mcLoadIntegrations(); }
+  else if (id === 'ops')               { if (typeof mcLoadOps === 'function')          mcLoadOps(); }
+}
+
+// ── Ops dashboard (§5.2 + §5.3 + §5.4 + §7.3) ────────────────────────────
+async function mcLoadOps() {
+  const body = document.getElementById('ops-body');
+  if (!body) return;
+  body.innerHTML = '<div class="mc-loading">Loading system status...</div>';
+  try {
+    const r = await fetch('/api/admin-ops', { credentials: 'include' });
+    if (r.status === 401) { if (typeof mcHandleAuthExpired === 'function') mcHandleAuthExpired(); return; }
+    if (!r.ok) throw new Error('HTTP ' + r.status);
+    const d = await r.json();
+    body.innerHTML = mcRenderOps(d);
+  } catch (e) {
+    body.innerHTML = '<div style="color:#f08a98;padding:20px;background:rgba(220,53,69,0.1);border:1px solid rgba(220,53,69,0.3);border-radius:4px;">Failed to load: ' + e.message + '</div>';
+  }
+}
+
+function mcRenderOps(d) {
+  const ok = (v) => v ? '✓' : '✗';
+  const badge = (status, text) => {
+    const colors = { ok: '#4CAF72', warn: '#DFC06D', err: '#f08a98' };
+    const bgs    = { ok: 'rgba(76,175,114,0.15)', warn: 'rgba(201,168,76,0.15)', err: 'rgba(220,53,69,0.15)' };
+    return '<span style="font-size:10px;font-weight:700;letter-spacing:1px;padding:2px 8px;background:' + bgs[status] + ';color:' + colors[status] + ';">' + text + '</span>';
+  };
+  const checkBadge = (c) => c && c.ok ? badge('ok', 'OK') : (c ? badge('err', c.error || ('HTTP ' + (c.status || '-'))) : badge('err', 'MISSING'));
+
+  // Health section
+  let html = '<div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:24px;">';
+  for (const [prop, h] of Object.entries(d.health || {})) {
+    const propOk = h && h.ok && h.data && h.data.status === 'ok';
+    const checks = (h && h.data && h.data.checks) || {};
+    html += '<div style="background:var(--surface);border:1px solid var(--border);padding:16px;">';
+    html += '<div style="font-size:11px;letter-spacing:0.1em;color:var(--dim);margin-bottom:8px;">' + prop.toUpperCase() + ' /health</div>';
+    html += '<div style="font-size:18px;font-weight:800;color:' + (propOk ? '#4CAF72' : '#f08a98') + ';margin-bottom:10px;">' + (propOk ? 'HEALTHY' : 'DEGRADED') + '</div>';
+    if (Object.keys(checks).length) {
+      html += '<div style="display:grid;grid-template-columns:1fr 1fr;gap:6px;font-size:11px;">';
+      for (const [name, c] of Object.entries(checks)) {
+        html += '<div>' + name + ': ' + (c && c.ok ? '<span style="color:#4CAF72;">' + ok(true) + '</span>' : '<span style="color:#f08a98;">' + ok(false) + ' ' + (c && c.error ? c.error : '') + '</span>') + '</div>';
+      }
+      html += '</div>';
+    } else if (h && h.error) {
+      html += '<div style="font-size:11px;color:#f08a98;">Error: ' + escHtml(h.error) + '</div>';
+    } else if (h && h.status) {
+      html += '<div style="font-size:11px;color:var(--dim);">HTTP ' + h.status + '</div>';
+    }
+    html += '</div>';
+  }
+  html += '</div>';
+
+  // Errors summary
+  const e = d.errors || { recent: [], count_last_5min: 0, count_last_24h: 0 };
+  const errPanel = e.count_last_5min > 10 ? 'err' : (e.count_last_5min > 0 ? 'warn' : 'ok');
+  html += '<div style="background:var(--surface);border:1px solid var(--border);padding:16px;margin-bottom:24px;">';
+  html += '<div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:12px;">';
+  html += '<div style="font-size:13px;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:var(--gold);">Errors</div>';
+  html += '<div>' + badge(errPanel, e.count_last_5min + ' in 5m · ' + e.count_last_24h + ' in 24h') + '</div>';
+  html += '</div>';
+  if (!e.recent.length) {
+    html += '<div style="font-size:12px;color:var(--dim);">No errors in the central log.</div>';
+  } else {
+    html += '<table style="width:100%;font-size:11px;border-collapse:collapse;">';
+    html += '<thead><tr style="border-bottom:1px solid var(--border);"><th style="text-align:left;padding:6px;">When</th><th style="text-align:left;padding:6px;">Property</th><th style="text-align:left;padding:6px;">Source</th><th style="text-align:left;padding:6px;">Error</th></tr></thead><tbody>';
+    for (const er of e.recent.slice(0, 10)) {
+      html += '<tr style="border-bottom:1px solid rgba(255,255,255,0.04);">';
+      html += '<td style="padding:6px;color:var(--dim);">' + escHtml(er.created_at || '').slice(0, 19) + '</td>';
+      html += '<td style="padding:6px;">' + escHtml(er.property || '-') + '</td>';
+      html += '<td style="padding:6px;">' + escHtml(er.source || '-') + '</td>';
+      html += '<td style="padding:6px;color:#f08a98;">' + escHtml(er.error_message || '').slice(0, 80) + '</td>';
+      html += '</tr>';
+    }
+    html += '</tbody></table>';
+  }
+  html += '</div>';
+
+  // Cron heartbeats
+  const hbs = d.heartbeats || [];
+  const staleCount = hbs.filter(h => h.stale).length;
+  html += '<div style="background:var(--surface);border:1px solid var(--border);padding:16px;margin-bottom:24px;">';
+  html += '<div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:12px;">';
+  html += '<div style="font-size:13px;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:var(--gold);">Cron Heartbeats</div>';
+  html += '<div>' + (hbs.length === 0 ? badge('warn', 'no data yet') : (staleCount > 0 ? badge('err', staleCount + ' STALE') : badge('ok', hbs.length + ' active'))) + '</div>';
+  html += '</div>';
+  if (!hbs.length) {
+    html += '<div style="font-size:12px;color:var(--dim);">No heartbeats recorded yet. They appear after the first cron run.</div>';
+  } else {
+    html += '<table style="width:100%;font-size:11px;border-collapse:collapse;">';
+    html += '<thead><tr style="border-bottom:1px solid var(--border);"><th style="text-align:left;padding:6px;">Job</th><th style="text-align:left;padding:6px;">Last run</th><th style="text-align:left;padding:6px;">Age</th><th style="text-align:left;padding:6px;">Status</th><th style="text-align:left;padding:6px;">Duration</th></tr></thead><tbody>';
+    for (const h of hbs) {
+      const statusColor = h.last_status === 'ok' ? '#4CAF72' : (h.last_status === 'error' ? '#f08a98' : '#DFC06D');
+      html += '<tr style="border-bottom:1px solid rgba(255,255,255,0.04);">';
+      html += '<td style="padding:6px;"><code style="font-size:11px;">' + escHtml(h.name) + '</code></td>';
+      html += '<td style="padding:6px;color:var(--dim);">' + escHtml((h.last_run_at || '').slice(0, 19)) + '</td>';
+      html += '<td style="padding:6px;color:' + (h.stale ? '#f08a98' : 'var(--dim)') + ';">' + h.age_minutes + 'm</td>';
+      html += '<td style="padding:6px;color:' + statusColor + ';">' + escHtml(h.last_status || '-') + '</td>';
+      html += '<td style="padding:6px;color:var(--dim);">' + (h.last_duration_ms ? h.last_duration_ms + 'ms' : '-') + '</td>';
+      html += '</tr>';
+      if (h.last_error) {
+        html += '<tr><td colspan="5" style="padding:0 6px 6px 30px;color:#f08a98;font-size:10px;"><code>' + escHtml(h.last_error).slice(0, 200) + '</code></td></tr>';
+      }
+    }
+    html += '</tbody></table>';
+  }
+  html += '</div>';
+
+  // Webhook events
+  const ev = d.webhook_events || { recent: [], count: 0 };
+  html += '<div style="background:var(--surface);border:1px solid var(--border);padding:16px;margin-bottom:24px;">';
+  html += '<div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:12px;">';
+  html += '<div style="font-size:13px;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:var(--gold);">Webhook Events</div>';
+  html += '<div>' + badge('ok', ev.count + ' tracked') + '</div>';
+  html += '</div>';
+  if (!ev.recent.length) {
+    html += '<div style="font-size:12px;color:var(--dim);">No webhook events recorded yet. Idempotency table is empty until the first signed event lands.</div>';
+  } else {
+    html += '<table style="width:100%;font-size:11px;border-collapse:collapse;">';
+    html += '<thead><tr style="border-bottom:1px solid var(--border);"><th style="text-align:left;padding:6px;">When</th><th style="text-align:left;padding:6px;">Property</th><th style="text-align:left;padding:6px;">Event</th><th style="text-align:left;padding:6px;">Event ID</th></tr></thead><tbody>';
+    for (const w of ev.recent.slice(0, 15)) {
+      html += '<tr style="border-bottom:1px solid rgba(255,255,255,0.04);">';
+      html += '<td style="padding:6px;color:var(--dim);">' + escHtml((w.processed_at || '').slice(0, 19)) + '</td>';
+      html += '<td style="padding:6px;">' + escHtml(w.property || '-') + '</td>';
+      html += '<td style="padding:6px;">' + escHtml(w.event_type || '-') + '</td>';
+      html += '<td style="padding:6px;color:var(--dim);"><code style="font-size:10px;">' + escHtml((w.event_id || '').slice(0, 24)) + '</code></td>';
+      html += '</tr>';
+    }
+    html += '</tbody></table>';
+  }
+  html += '</div>';
+
+  // Ops bin state
+  const bins = d.ops_bins || {};
+  html += '<div style="background:var(--surface);border:1px solid var(--border);padding:16px;font-size:11px;color:var(--dim);">';
+  html += '<div style="font-size:13px;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:var(--gold);margin-bottom:8px;">Ops Bin Registry</div>';
+  for (const [name, status] of Object.entries(bins)) {
+    const color = status === 'configured' ? '#4CAF72' : '#DFC06D';
+    html += '<div>' + escHtml(name) + ': <span style="color:' + color + ';">' + escHtml(status) + '</span></div>';
+  }
+  html += '<div style="margin-top:8px;font-size:10px;">Generated: ' + escHtml(d.generated_at || '') + '</div>';
+  html += '</div>';
+
+  return html;
 }
 
 // Open a panel from a URL hash on page load (e.g. /admin#case-files)
