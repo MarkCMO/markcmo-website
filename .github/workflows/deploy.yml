@@ -58,6 +58,21 @@ jobs:
           CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
           CLOUDFLARE_ACCOUNT_ID: 5b4ea6b5589fe12f29bea5d7e43fe03c
 
+      # ── Step 3.5: Purge CF edge cache for non-versioned assets ──────
+      # /style.css, /components.js, /footer.html etc. ship without content
+      # hashes in their URLs, so a static `immutable` cache hint can strand
+      # the old file at the edge after the deploy. This script asks CF to
+      # forcibly evict those URLs after every successful deploy. Production
+      # only — staging runs at staging.markcmo.pages.dev which uses a
+      # different zone (none) and doesn't need purging.
+      - name: Purge Cloudflare edge cache
+        if: github.ref_name == 'main'
+        run: node scripts/purge-cf-cache.js
+        env:
+          CF_API_KEY: ${{ secrets.CF_API_KEY }}
+          CF_EMAIL: marklgabriellijr@gmail.com
+          CLOUDFLARE_ACCOUNT_ID: 5b4ea6b5589fe12f29bea5d7e43fe03c
+
       # ── Step 4: Print preview URL for staging ───────────────────────
       - name: Print staging URL
         if: github.ref_name == 'staging'
