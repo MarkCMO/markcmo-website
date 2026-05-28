@@ -428,6 +428,15 @@ ul { list-style: none; }
   /* Lifted from #52525B (2.4:1 on --bg, fails WCAG AA body) to #71717A (4.6:1
      on --bg, passes AA body). Fixes 30 small-text instances across the page. */
   --text3:   #71717A;
+
+  /* Defensive aliases for legacy inline `var(--name, fallback)` usages in the
+     Marketing Specializations channel tiles (lines ~1993-2041). Without these,
+     the page relies on the inline fallback values — if someone removes them
+     during a refactor, the tiles lose all color. Defining them here makes the
+     cascade self-healing. */
+  --charcoal: #162A4A;
+  --gold:     #C9A84C;
+  --white:    #FFFFFF;
 }
 
 /* ─── NAV ─── */
@@ -532,6 +541,10 @@ ul { list-style: none; }
   margin-bottom: 2rem;
 }
 .hero-h1 .line-accent {
+  /* Solid color first so the text NEVER renders invisible even if a browser
+     drops the webkit gradient-text trick (same defensive pattern that saved
+     us on .proof-card-result). */
+  color: #C9A84C;
   background: linear-gradient(135deg, #C9A84C 0%, #DFC06D 50%, #F0D898 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
@@ -686,11 +699,15 @@ ul { list-style: none; }
 .section-h2 em {
   font-style: normal;
   display: inline;
+  /* Solid color first so the text NEVER renders invisible even if a browser
+     drops the webkit gradient-text trick. Was `color: transparent` AFTER the
+     webkit line which guaranteed invisibility on failure — flipped to a real
+     gold color so the worst-case fallback is solid gold, not nothing. */
+  color: #C9A84C;
   background: linear-gradient(135deg, #C9A84C 0%, #DFC06D 50%, #F0D898 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
-  color: transparent;
 }
 .section-body { font-size: 1rem; line-height: 1.8; color: var(--text2); max-width: 560px; }
 .services-header { display: flex; justify-content: space-between; align-items: flex-end; margin-bottom: 3.5rem; flex-wrap: wrap; gap: 1.5rem; }

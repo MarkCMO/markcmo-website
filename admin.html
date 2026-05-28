@@ -34,6 +34,12 @@
     --text: #1E293B;
     --muted: #64748B;
     --dim: #6B7280; /* Lifted from #94A3B8 (3.0:1) to 4.85:1 on white per WCAG AA */
+    /* Defensive aliases — several form-card / kanban-col / rev-card rules reference
+       `var(--card)` and two search inputs use `var(--bg)`. Neither was defined,
+       so backgrounds were rendering as `initial` (transparent) and cards looked
+       unstyled. Aliased to the existing surface tokens. */
+    --card: #FFFFFF;
+    --bg: #F8FAFC;
     --red: #DC2626;
     --green: #10B981;
   }
@@ -802,6 +808,12 @@
     --text: #1E293B;
     --muted: #64748B;
     --dim: #6B7280; /* Lifted from #94A3B8 (3.0:1) to 4.85:1 on white per WCAG AA */
+    /* Defensive aliases — several form-card / kanban-col / rev-card rules reference
+       `var(--card)` and two search inputs use `var(--bg)`. Neither was defined,
+       so backgrounds were rendering as `initial` (transparent) and cards looked
+       unstyled. Aliased to the existing surface tokens. */
+    --card: #FFFFFF;
+    --bg: #F8FAFC;
     --red: #DC2626;
     --green: #10B981;
     --blue: #3B82F6;
