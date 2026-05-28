@@ -114,10 +114,92 @@ function shouldInjectChrome(pagePath) {
   return true;
 }
 
+// ── /health endpoint (inlined here because a separate functions/health.js
+// gets shadowed by this catch-all on CF Pages — single-file functions at
+// the functions/ root don't reliably beat [[path]].js on /health and the
+// alert flood on 2026-05-28 was caused by the catch-all returning the 404
+// page instead of the health JSON). WETYR Infrastructure Protocol §5.2.
+// Tiered like academy/health: Square + Resend = critical; KV + JSONBin =
+// warn-only — degraded body but still 200 so the synthetic monitor doesn't
+// flap on peripheral hiccups.
+const HEALTH_TIMEOUT_MS = 5000;
+async function _healthWithTimeout(p, ms, label) {
+  let t;
+  const timeout = new Promise((_, reject) => {
+    t = setTimeout(() => reject(new Error(label + ' timeout')), ms);
+  });
+  try { return await Promise.race([p, timeout]); } finally { clearTimeout(t); }
+}
+async function _healthCheckSquare(env) {
+  const token = env.SQUARE_ACADEMY_ACCESS_TOKEN || env.SQUARE_ACCESS_TOKEN;
+  if (!token) return { ok: false, error: 'no_token' };
+  try {
+    const r = await _healthWithTimeout(fetch('https://connect.squareup.com/v2/locations', {
+      headers: { 'Authorization': 'Bearer ' + token, 'Square-Version': '2024-11-20' },
+    }), HEALTH_TIMEOUT_MS, 'square');
+    if (!r.ok) return { ok: false, status: r.status, error: 'http_' + r.status };
+    const d = await r.json();
+    return { ok: true, locations: (d.locations || []).length };
+  } catch (e) { return { ok: false, error: e.message }; }
+}
+async function _healthCheckResend(env) {
+  if (!env.RESEND_API_KEY) return { ok: false, error: 'no_key' };
+  try {
+    const r = await _healthWithTimeout(fetch('https://api.resend.com/domains', {
+      headers: { 'Authorization': 'Bearer ' + env.RESEND_API_KEY },
+    }), HEALTH_TIMEOUT_MS, 'resend');
+    if (!r.ok) return { ok: false, status: r.status, error: 'http_' + r.status };
+    const d = await r.json();
+    return { ok: true, domains: (d.data || []).length };
+  } catch (e) { return { ok: false, error: e.message }; }
+}
+async function _healthCheckKv(env) {
+  const kv = env.BLOBS_MARKCMO_PAGES_HTML;
+  if (!kv) return { ok: false, error: 'no_binding' };
+  try {
+    await _healthWithTimeout(kv.get('index', { type: 'text' }), HEALTH_TIMEOUT_MS, 'kv');
+    return { ok: true };
+  } catch (e) { return { ok: false, error: e.message }; }
+}
+
+async function _handleHealth(env) {
+  const start = Date.now();
+  const [square, resend, kv] = await Promise.all([
+    _healthCheckSquare(env),
+    _healthCheckResend(env),
+    _healthCheckKv(env),
+  ]);
+  const checks = { square, resend, kv };
+  const critical = ['square', 'resend'];
+  const criticalOk = critical.every(k => checks[k] && checks[k].ok);
+  const allOk      = Object.values(checks).every(c => c && c.ok);
+  const status     = allOk ? 'ok' : (criticalOk ? 'degraded' : 'down');
+  const httpStatus = criticalOk ? 200 : 503;
+  return new Response(JSON.stringify({
+    status,
+    timestamp: new Date().toISOString(),
+    duration_ms: Date.now() - start,
+    property: 'markcmo.com',
+    checks,
+  }, null, 2), {
+    status: httpStatus,
+    headers: {
+      'Content-Type': 'application/json',
+      'Cache-Control': 'no-store, max-age=0',
+      'Access-Control-Allow-Origin': '*',
+    },
+  });
+}
+
 export async function onRequest(context) {
   const { request, env } = context;
   const url = new URL(request.url);
   let p = url.pathname;
+
+  // ── /health (inlined — see comment above _handleHealth) ──────────────────
+  if (p === '/health' || p === '/health/') {
+    return _handleHealth(env);
+  }
 
   // ── WordPress search URL (/?s=...) — redirect to homepage ────────────────
   // These are leftover WordPress search URLs that waste crawl budget.
@@ -387,6 +469,100 @@ export async function onRequest(context) {
       });
       html = html.replace('</head>',
         `<script type="application/ld+json">${speakableSchema}</script>\n</head>`);
+    }
+
+    // ── City/Service schema (brand-strategy-miami-fl pattern) ────────────────
+    // Inject Service + BreadcrumbList for programmatic city pages.
+    // Detection: last path segment is a 2-letter US state abbreviation.
+    const _US_STATES = {FL:'Florida',TX:'Texas',CA:'California',NY:'New York',
+      GA:'Georgia',IL:'Illinois',PA:'Pennsylvania',OH:'Ohio',NC:'North Carolina',
+      AZ:'Arizona',WA:'Washington',MA:'Massachusetts',CO:'Colorado',TN:'Tennessee',
+      MN:'Minnesota',MI:'Michigan',NJ:'New Jersey',VA:'Virginia',OR:'Oregon',
+      MO:'Missouri',WI:'Wisconsin',MD:'Maryland',SC:'South Carolina',
+      AL:'Alabama',KY:'Kentucky',LA:'Louisiana',OK:'Oklahoma',CT:'Connecticut',
+      UT:'Utah',IA:'Iowa',NV:'Nevada',AR:'Arkansas',KS:'Kansas',MS:'Mississippi',
+      NM:'New Mexico',NE:'Nebraska',ID:'Idaho',WV:'West Virginia',HI:'Hawaii',
+      ME:'Maine',NH:'New Hampshire',RI:'Rhode Island',MT:'Montana',DE:'Delaware',
+      SD:'South Dakota',ND:'North Dakota',AK:'Alaska',VT:'Vermont',WY:'Wyoming',DC:'DC'};
+    const _pParts   = p.split('-');
+    const _lastSeg  = _pParts[_pParts.length - 1];
+    const _stAbbr   = _lastSeg.toUpperCase();
+    if (_pParts.length >= 3 && _US_STATES[_stAbbr] && !html.includes('"Service"')) {
+      const _citySlug = _pParts[_pParts.length - 2];
+      const _svcSlug  = _pParts.slice(0, -2).join('-');
+      const _cityName = _citySlug.replace(/-/g,' ').replace(/\b\w/g,c=>c.toUpperCase());
+      const _svcName  = _svcSlug.replace(/-/g,' ').replace(/\b\w/g,c=>c.toUpperCase());
+      const _stName   = _US_STATES[_stAbbr];
+      const _cityServiceSchema = JSON.stringify({
+        "@context":"https://schema.org",
+        "@graph":[
+          {
+            "@type":"Service",
+            "@id":`https://markcmo.com/${p}#service`,
+            "name":`${_svcName} in ${_cityName}, ${_stName}`,
+            "description":`Expert ${_svcName.toLowerCase()} for businesses in ${_cityName}, ${_stName}. Delivered by Mark Gabrielli, Fractional CMO with 15+ years of executive marketing leadership.`,
+            "url":`https://markcmo.com/${p}`,
+            "provider":{"@id":"https://markcmo.com/#mark-gabrielli"},
+            "areaServed":{"@type":"City","name":_cityName,"containedInPlace":{"@type":"State","name":_stName,"containedInPlace":{"@type":"Country","name":"United States"}}},
+            "category":"Marketing Consulting",
+            "serviceType":_svcName,
+            "offers":{"@type":"Offer","priceCurrency":"USD","priceRange":"$8,000-$20,000","availability":"https://schema.org/InStock"}
+          },
+          {
+            "@type":"BreadcrumbList",
+            "@id":`https://markcmo.com/${p}#breadcrumb`,
+            "itemListElement":[
+              {"@type":"ListItem","position":1,"name":"Home","item":"https://markcmo.com/"},
+              {"@type":"ListItem","position":2,"name":_svcName,"item":`https://markcmo.com/${_svcSlug}`},
+              {"@type":"ListItem","position":3,"name":`${_cityName}, ${_stName}`,"item":`https://markcmo.com/${p}`}
+            ]
+          }
+        ]
+      });
+      html = html.replace('</head>',
+        `<script type="application/ld+json">${_cityServiceSchema}</script>\n</head>`);
+    }
+
+    // ── BreadcrumbList for all other pages ────────────────────────────────────
+    // Non-city pages get a simple 2-level breadcrumb for SERP display.
+    if (!html.includes('"BreadcrumbList"') && p !== 'index') {
+      const _h1m = html.match(/<h1[^>]*>([^<]+)<\/h1>/i);
+      const _pgTitle = _h1m
+        ? _h1m[1].trim()
+        : p.replace(/-/g,' ').replace(/\b\w/g,c=>c.toUpperCase());
+      const _bcSchema = JSON.stringify({
+        "@context":"https://schema.org",
+        "@type":"BreadcrumbList",
+        "@id":`https://markcmo.com/${p}#breadcrumb`,
+        "itemListElement":[
+          {"@type":"ListItem","position":1,"name":"Home","item":"https://markcmo.com/"},
+          {"@type":"ListItem","position":2,"name":_pgTitle,"item":`https://markcmo.com/${p}`}
+        ]
+      });
+      html = html.replace('</head>',
+        `<script type="application/ld+json">${_bcSchema}</script>\n</head>`);
+    }
+
+    // ── E-E-A-T author byline ─────────────────────────────────────────────────
+    // Inject a visible "By Mark Gabrielli" attribution line immediately after the
+    // first <h1> on content pages. Signals authorship to GSC and AI crawlers.
+    // Skipped on portal/sign/admin paths (handled upstream by shouldInjectChrome).
+    if (shouldInjectChrome(p) &&
+        !html.includes('data-eeat-byline="v1"') &&
+        !html.match(/<[^>]*class=["'][^"']*\bauthor\b/i) &&
+        !html.match(/\bBy\s+Mark\s+Gabrielli/i)) {
+      const _byline = '<div data-eeat-byline="v1" style="display:flex;align-items:center;' +
+        'gap:10px;margin:0.35rem 0 1.75rem;padding-left:12px;border-left:3px solid #c8001e;' +
+        'font-size:0.82rem;color:#666;line-height:1.4">' +
+        '<img src="/assets/mark-gabrielli.jpg" alt="Mark Gabrielli" loading="lazy" ' +
+        'width="32" height="32" style="border-radius:50%;flex-shrink:0;object-fit:cover">' +
+        '<span>By <strong style="color:#222">Mark Gabrielli</strong> &middot; ' +
+        'Fractional CMO &amp; COO &middot; Last updated: May 2026</span></div>';
+      if (/<\/h1>/i.test(html)) {
+        html = html.replace(/(<\/h1>)/i, '$1' + _byline);
+      } else if (/<main\b[^>]*>/i.test(html)) {
+        html = html.replace(/(<main\b[^>]*>)/i, '$1' + _byline);
+      }
     }
 
     return new Response(html, {
