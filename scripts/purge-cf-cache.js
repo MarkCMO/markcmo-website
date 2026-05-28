@@ -29,7 +29,22 @@ const ZONE_NAME  = process.env.CF_ZONE_NAME || 'markcmo.com';
 
 // URLs to nuke after each deploy. Add to this list when a new
 // non-versioned asset starts misbehaving on cache.
+//
+// Includes top-level HTML pages now too — the CF Pages catch-all function
+// returns Cache-Control: max-age=3600 for HTML, which means visitors who
+// loaded the page within an hour of a deploy keep seeing the old version.
+// Purging the canonical URLs forces all CF datacenters to fetch fresh.
 const URLS_TO_PURGE = [
+  // Top-level HTML (heaviest traffic, most likely to surface visual bugs)
+  'https://markcmo.com/',
+  'https://markcmo.com/about',
+  'https://markcmo.com/services',
+  'https://markcmo.com/results',
+  'https://markcmo.com/insights',
+  'https://markcmo.com/contact',
+  'https://markcmo.com/admin',
+  'https://markcmo.com/checkout',
+  // Non-versioned static assets
   'https://markcmo.com/style.css',
   'https://markcmo.com/components.js',
   'https://markcmo.com/components-loader.js',
