@@ -1238,8 +1238,17 @@ ul { list-style: none; }
 .proof-card-result {
   font-family: 'Outfit', sans-serif;
   font-size: 3rem; font-weight: 900; line-height: 1;
-  background: linear-gradient(135deg, var(--accent), var(--accent-l));
+  /* CRITICAL FIX: gradient used var(--accent-l) which was NEVER defined in
+     :root (only --accent2 exists). With an undefined gradient stop, the
+     background fails to render and -webkit-text-fill-color:transparent
+     leaves the numbers completely invisible — Mark spotted this when only
+     the SELECTED text ("3.4M") was visible. Switched to --accent2 (#DFC06D)
+     which is the actual lighter-gold defined in the palette. */
+  background: linear-gradient(135deg, var(--accent), var(--accent2));
   -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+  /* Fallback color in case any future browser drops the gradient again,
+     so the numbers never go invisible silently. */
+  color: var(--accent2);
   margin-bottom: 0.35rem;
 }
 .proof-card-metric {
