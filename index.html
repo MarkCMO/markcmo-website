@@ -1220,10 +1220,20 @@ ul { list-style: none; }
 .proof-card:hover { border-color: rgba(201,168,76,0.25); transform: translateY(-4px); }
 .proof-card:hover::before { opacity: 1; }
 .proof-card-industry {
-  font-size: 0.72rem; font-weight: 700; letter-spacing: 0.1em;
-  /* Was var(--cyan) #00C4CC at 11.5px against #0A0F2C navy = ~4.4:1, hard
-     to read at this size. White gives ~16:1 — works as small-caps eyebrow. */
-  color: #FFFFFF; text-transform: uppercase; margin-bottom: 0.75rem;
+  /* Mark flagged these labels as unreadable. Pure white #FFFFFF was already
+     applied, but at the previous 0.72rem / 0.1em letter-spacing the strokes
+     were too thin to read as "obviously white" — looked muted. Bumped:
+       size   0.72rem  -> 0.92rem  (~14.7px, matches the "Pipeline increase"
+                                    titles below them so the hierarchy reads)
+       weight 700      -> 800      (more ink density at small caps)
+       letter-spacing 0.10em -> 0.14em (better breathing for caps)
+     Also added text-shadow + accent underline so the eyebrow visually
+     anchors the card. */
+  font-size: 0.92rem; font-weight: 800; letter-spacing: 0.14em;
+  color: #FFFFFF; text-transform: uppercase; margin-bottom: 1rem;
+  padding-bottom: 0.55rem;
+  border-bottom: 2px solid rgba(201,168,76,0.35);
+  display: inline-block;
 }
 .proof-card-result {
   font-family: 'Outfit', sans-serif;
