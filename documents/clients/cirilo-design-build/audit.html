@@ -1,0 +1,356 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Cirilo Design + Build | Discovery Audit</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex, nofollow, noarchive, nosnippet, noimageindex">
+<meta http-equiv="Cache-Control" content="no-store, no-cache, must-revalidate, private">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=Inter:wght@300;400;500;600;700&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --gold-dark: #AB7E37;
+    --gold-mid: #D6BB89;
+    --gold-light: #E3D3B2;
+    --gold-pale: #F4ECDC;
+    --cream-bg: #FAF7F2;
+    --white: #FFFFFF;
+    --ink: #1A1A1A;
+    --body: #2E2E34;
+    --muted: #8F8F8F;
+    --border: #E2E2E2;
+    --red-flag: #B33A3A;
+    --green-flag: #5A8A4A;
+    --shadow: 0 8px 32px rgba(26, 26, 26, 0.06);
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: 'Inter', sans-serif; background: var(--cream-bg); color: var(--body); line-height: 1.65; font-size: 16px; }
+  .page { max-width: 920px; margin: 40px auto; background: var(--white); box-shadow: var(--shadow); padding: 80px 72px; }
+  h1, h2, h3, h4 { font-family: 'Cormorant Garamond', serif; color: var(--ink); font-weight: 500; line-height: 1.15; }
+  h1 { font-size: 3.4rem; margin-bottom: 0.4em; font-weight: 600; }
+  h2 { font-size: 2.4rem; margin-top: 2.4em; margin-bottom: 0.6em; padding-bottom: 0.4em; border-bottom: 1px solid var(--gold-light); }
+  h3 { font-size: 1.6rem; margin-top: 1.8em; margin-bottom: 0.5em; color: var(--gold-dark); }
+  h4 { font-size: 1.05rem; margin-top: 1.4em; margin-bottom: 0.4em; font-family: 'Inter', sans-serif; font-weight: 600; color: var(--ink); text-transform: uppercase; letter-spacing: 0.08em; }
+  p { margin-bottom: 1em; }
+  strong { color: var(--ink); font-weight: 600; }
+  a { color: var(--gold-dark); text-decoration: none; border-bottom: 1px solid var(--gold-light); }
+  ul, ol { margin: 0.5em 0 1.2em 1.4em; } li { margin-bottom: 0.4em; }
+
+  .brand-mark { text-align: center; margin-bottom: 56px; padding-bottom: 32px; border-bottom: 1px solid var(--border); }
+  .brand-mark .wordmark { font-family: 'Cormorant Garamond', serif; font-size: 3.2rem; font-weight: 600; letter-spacing: 0.18em; background: linear-gradient(135deg, #E5C2B0 0%, #D6BB89 35%, #F4D78C 65%, #AB7E37 100%); -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent; margin-bottom: 8px; }
+  .brand-mark .sub { font-family: 'DM Mono', monospace; font-size: 0.75rem; letter-spacing: 0.4em; color: var(--gold-dark); text-transform: uppercase; }
+  .doc-meta { font-family: 'DM Mono', monospace; font-size: 0.72rem; letter-spacing: 0.18em; text-transform: uppercase; color: var(--muted); text-align: center; margin-bottom: 56px; }
+
+  .hero-title { text-align: center; margin-bottom: 64px; }
+  .hero-title .eyebrow { font-family: 'DM Mono', monospace; font-size: 0.78rem; letter-spacing: 0.32em; color: var(--gold-dark); text-transform: uppercase; margin-bottom: 18px; }
+  .hero-title h1 { font-size: 3.6rem; margin-bottom: 0.3em; }
+  .hero-title .lede { font-family: 'Cormorant Garamond', serif; font-size: 1.4rem; font-style: italic; color: var(--body); max-width: 680px; margin: 0 auto; }
+
+  table { width: 100%; border-collapse: collapse; margin: 24px 0; font-size: 0.9rem; }
+  th { background: var(--ink); color: var(--white); padding: 14px 16px; text-align: left; font-family: 'DM Mono', monospace; font-size: 0.7rem; letter-spacing: 0.12em; text-transform: uppercase; font-weight: 500; }
+  td { padding: 12px 16px; border-bottom: 1px solid var(--border); vertical-align: top; }
+  tr:nth-child(even) td { background: var(--cream-bg); }
+
+  .callout { background: var(--gold-pale); border-left: 3px solid var(--gold-dark); padding: 24px 32px; margin: 28px 0; border-radius: 0 4px 4px 0; }
+  .callout .label { font-family: 'DM Mono', monospace; font-size: 0.7rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--gold-dark); margin-bottom: 8px; }
+
+  .red-flag { border-left-color: var(--red-flag); background: #FBF1F1; }
+  .red-flag .label { color: var(--red-flag); }
+  .green-flag { border-left-color: var(--green-flag); background: #F2F6EF; }
+  .green-flag .label { color: var(--green-flag); }
+
+  .flag-list { list-style: none; padding: 0; margin: 24px 0; }
+  .flag-list li { background: var(--white); border: 1px solid var(--border); border-left: 4px solid var(--red-flag); padding: 16px 20px 16px 56px; margin-bottom: 10px; border-radius: 0 4px 4px 0; position: relative; }
+  .flag-list li .num { position: absolute; left: 16px; top: 16px; font-family: 'DM Mono', monospace; font-size: 0.85rem; color: var(--red-flag); font-weight: 600; }
+
+  .grade-grid { display: grid; grid-template-columns: repeat(6, 1fr); gap: 12px; margin: 28px 0; }
+  .grade { background: var(--white); border: 1px solid var(--border); padding: 18px 12px; text-align: center; border-radius: 4px; }
+  .grade .score { font-family: 'Cormorant Garamond', serif; font-size: 2.4rem; font-weight: 600; line-height: 1; color: var(--red-flag); margin-bottom: 4px; }
+  .grade .score.ok { color: var(--gold-dark); }
+  .grade .score.good { color: var(--green-flag); }
+  .grade .lbl { font-family: 'DM Mono', monospace; font-size: 0.6rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--muted); }
+
+  .footer { margin-top: 80px; padding-top: 32px; border-top: 1px solid var(--border); text-align: center; font-family: 'DM Mono', monospace; font-size: 0.7rem; letter-spacing: 0.15em; text-transform: uppercase; color: var(--muted); }
+
+  @media print { body { background: white; } .page { box-shadow: none; margin: 0; padding: 40px; max-width: 100%; } h2 { page-break-after: avoid; } }
+  @media (max-width: 768px) { .page { padding: 40px 24px; } h1, .hero-title h1 { font-size: 2.4rem; } .grade-grid { grid-template-columns: repeat(2, 1fr); } }
+</style>
+</head>
+<body>
+
+<nav class="cdb-nav" style="position:sticky;top:0;z-index:100;background:#fff;border-bottom:1px solid #E2E2E2;padding:0.75rem 1.5rem;display:flex;justify-content:space-between;align-items:center;font-family:'Inter',sans-serif;flex-wrap:wrap;gap:0.5rem;">
+  <a href="/documents/clients/cirilo-design-build/" style="font-family:'Cormorant Garamond',serif;font-size:1.05rem;letter-spacing:0.08em;color:#2E2E34;text-decoration:none;">
+    <strong style="color:#AB7E37;letter-spacing:0.16em;">MARKCMO</strong> &nbsp;for&nbsp; <span style="letter-spacing:0.14em;">CIRILO DESIGN + BUILD</span>
+  </a>
+  <div style="display:flex;gap:1.5rem;align-items:center;font-family:'DM Mono',monospace;font-size:0.68rem;letter-spacing:0.12em;text-transform:uppercase;">
+    <a href="/documents/clients/cirilo-design-build/proposal.html" style="color:#8F8F8F;text-decoration:none;">Proposal</a>
+    <a href="/documents/clients/cirilo-design-build/roadmap.html" style="color:#8F8F8F;text-decoration:none;">Roadmap</a>
+    <a href="/documents/clients/cirilo-design-build/partnerships.html" style="color:#8F8F8F;text-decoration:none;">Playbook</a>
+    <a href="/forms/cirilo-design-build-sign.html" style="color:#fff;background:#AB7E37;padding:0.45rem 1rem;border-radius:3px;text-decoration:none;letter-spacing:0.14em;">Sign Proposal →</a>
+  </div>
+</nav>
+<style>@media print{.cdb-nav{display:none !important;}}</style>
+
+<div class="page">
+
+  <div class="brand-mark">
+    <div class="wordmark">CIRILO</div>
+    <div class="sub">DESIGN &nbsp;+&nbsp; BUILD</div>
+  </div>
+
+  <div class="doc-meta">Discovery Audit &nbsp;|&nbsp; Prepared 2026-05-28 &nbsp;|&nbsp; Private &amp; Confidential</div>
+
+  <div class="hero-title">
+    <div class="eyebrow">COMPLIMENTARY DISCOVERY DELIVERABLE</div>
+    <h1>What a $150K<br>buyer sees today.</h1>
+    <p class="lede">An independent audit of Cirilo Design + Build's online presence, search visibility, reputation, social, and ad surface, measured against the 17 most relevant Charlotte-metro pool builders.</p>
+  </div>
+
+  <div class="callout">
+    <div class="label">SCOPE OF AUDIT</div>
+    <p>The 9 live pages of cirilodb.com. Google, Bing, Yelp, Houzz, BBB, Angi, Thumbtack, Facebook, Instagram, YouTube, Pinterest, TikTok. Google Business Profile presence. Schema, sitemap, robots, OG, page speed, analytics, tracking pixels. Top 17 Charlotte-area pool competitors. 8 commercial-intent keyword SERPs across head terms and suburb modifiers. All data verified live on 2026-05-28.</p>
+  </div>
+
+  <h2>Headline Finding</h2>
+
+  <p>Cirilo Design + Build has a luxury-grade brand wrapper, real positioning (<em>"Luxury Design. Precision Build."</em>), and genuine differentiation (design-first family-operated, pool plus reno plus additions under one roof). It also has near-zero digital traction. A $150K+ pool buyer in Charlotte who does 20 minutes of online due diligence today will not find:</p>
+
+  <ul>
+    <li>A single Google review</li>
+    <li>A Google Business Profile or maps presence</li>
+    <li>An Instagram, Facebook page, YouTube, or Pinterest account</li>
+    <li>A financing partner or warranty</li>
+    <li>A project location, customer name, or video of a finished pool</li>
+    <li>A NC general contractor license number on the site</li>
+    <li>The brand ranking for any pool-buyer keyword on Google or Bing</li>
+  </ul>
+
+  <p>This is not a criticism. It is a description of a brand that has not yet been put online. Every item above is fixable inside 90 days. Most are free to fix. The opportunity is to do it before a competitor notices the same gap.</p>
+
+  <h2>Overall Scorecard</h2>
+
+  <div class="grade-grid">
+    <div class="grade"><div class="score">F</div><div class="lbl">SEO</div></div>
+    <div class="grade"><div class="score">F</div><div class="lbl">Reviews</div></div>
+    <div class="grade"><div class="score">F</div><div class="lbl">Social</div></div>
+    <div class="grade"><div class="score">F</div><div class="lbl">GBP</div></div>
+    <div class="grade"><div class="score ok">C-</div><div class="lbl">Site UX</div></div>
+    <div class="grade"><div class="score ok">C</div><div class="lbl">Brand</div></div>
+  </div>
+
+  <h2>1. Website Inventory</h2>
+
+  <p>The cirilodb.com sitemap exposes <strong>10 URLs</strong>, all last-modified 2026-02-12 (a 3+ month freeze). Platform is Wix.</p>
+
+  <table>
+    <tr><th>URL</th><th>Type</th><th>Notes</th></tr>
+    <tr><td>/</td><td>Homepage</td><td>Title: "HOME | Cirilo Design". No meta description. No geo modifier.</td></tr>
+    <tr><td>/about</td><td>About</td><td>Founder bios thin. No year founded, no project count, no certifications.</td></tr>
+    <tr><td>/custom-concrete-swimming-pools</td><td>Service</td><td>Good H2 structure. No price anchor, no warranty, no equipment brands, no finishes catalog.</td></tr>
+    <tr><td>/outdoor-living-spaces</td><td>Service</td><td>Light content. No project examples.</td></tr>
+    <tr><td>/home-renovations-and-remodeling</td><td>Service</td><td>Light content. No before/after.</td></tr>
+    <tr><td>/home-additions</td><td>Service</td><td>Light content. No process or timeline detail.</td></tr>
+    <tr><td>/portfolio</td><td>Portfolio</td><td>14 unlabeled photos in 5 categories. No captions, no locations, no testimonials, no video.</td></tr>
+    <tr><td>/contact</td><td>Contact</td><td>Basic form. 910 area code phone (not Charlotte).</td></tr>
+    <tr><td>/book-online</td><td>Booking</td><td>Wix Bookings 1-hour consultation. No qualification questions.</td></tr>
+    <tr><td>/copy-of-new-residential-construction</td><td>ORPHAN</td><td>Wix duplicate ships in public sitemap. Quality signal to Google. Looks unfinished to any buyer who lands there.</td></tr>
+  </table>
+
+  <h2>2. Technical Audit</h2>
+
+  <table>
+    <tr><th>Check</th><th>Status</th><th>Impact</th></tr>
+    <tr><td>HTTPS</td><td>Yes</td><td>Pass</td></tr>
+    <tr><td>GA4 / Google Tag Manager</td><td><strong style="color: var(--red-flag);">NOT INSTALLED</strong></td><td>No traffic source data, no funnel, no attribution</td></tr>
+    <tr><td>Meta Pixel</td><td><strong style="color: var(--red-flag);">NOT INSTALLED</strong></td><td>Cannot run effective Meta retargeting or lookalikes</td></tr>
+    <tr><td>CallRail / call tracking</td><td><strong style="color: var(--red-flag);">NOT INSTALLED</strong></td><td>Cannot tie inbound calls to source</td></tr>
+    <tr><td>Heatmap (Hotjar / Clarity)</td><td><strong style="color: var(--red-flag);">NOT INSTALLED</strong></td><td>No behavioral data, no rage-click signals</td></tr>
+    <tr><td>Schema.org markup</td><td><strong style="color: var(--red-flag);">NONE</strong></td><td>No LocalBusiness, Service, Product, Review, FAQ schema</td></tr>
+    <tr><td>Title tags</td><td>Brand-only, no geo or service modifiers</td><td>Zero ranking signal</td></tr>
+    <tr><td>Meta descriptions</td><td><strong style="color: var(--red-flag);">NONE on any page</strong></td><td>Google auto-generates, often poorly</td></tr>
+    <tr><td>OG / Twitter cards</td><td><strong style="color: var(--red-flag);">NONE</strong></td><td>Link previews on social and iMessage look broken</td></tr>
+    <tr><td>Sitemap quality</td><td>Orphan /copy-of-* URL shipping</td><td>Quality penalty risk</td></tr>
+    <tr><td>Image sitemap</td><td>Missing</td><td>Portfolio images not optimized for image search</td></tr>
+    <tr><td>Click-to-call CTA</td><td>Phone shown but not tap-to-call optimized in hero</td><td>Mobile leak</td></tr>
+  </table>
+
+  <h2>3. Search Visibility</h2>
+
+  <p>Tested 8 commercial-intent queries on Google. <strong>Cirilo ranks for zero of them in the first 50 results.</strong></p>
+
+  <table>
+    <tr><th>Keyword</th><th>Cirilo Rank</th><th>Who Owns the SERP</th></tr>
+    <tr><td>luxury pool builder charlotte NC</td><td><strong style="color: var(--red-flag);">Not in top 50</strong></td><td>Platinum, Blue Waters, Charlotte Pool Co, Waterscapes</td></tr>
+    <tr><td>custom pool builder charlotte</td><td><strong style="color: var(--red-flag);">Not in top 50</strong></td><td>Anthony &amp; Sylvan, Carolina Custom, Lombardo</td></tr>
+    <tr><td>gunite pool charlotte NC</td><td><strong style="color: var(--red-flag);">Not in top 50</strong></td><td>Blue Haven (paid+organic), Platinum, Majestic</td></tr>
+    <tr><td>infinity pool charlotte NC</td><td><strong style="color: var(--red-flag);">Not in top 50</strong></td><td>Infinity Pool Construction, Superior, Blue Waters</td></tr>
+    <tr><td>pool builder Lake Norman luxury</td><td><strong style="color: var(--red-flag);">Not in top 50</strong></td><td>LKN Signature, Lakeside Luxury, Majestic</td></tr>
+    <tr><td>pool builder Waxhaw custom</td><td><strong style="color: var(--red-flag);">Not in top 50</strong></td><td>MetroGreenscape, Aqua Pools, Aloha</td></tr>
+    <tr><td>pool builder Myers Park</td><td><strong style="color: var(--red-flag);">Not in top 50</strong></td><td>Waterscapes, Blue Waters, Craft Master</td></tr>
+    <tr><td>pool builder SouthPark / Ballantyne</td><td><strong style="color: var(--red-flag);">Not in top 50</strong></td><td>Anthony &amp; Sylvan, Aloha, Majestic</td></tr>
+  </table>
+
+  <h2>4. Reputation Surface</h2>
+
+  <table>
+    <tr><th>Surface</th><th>Status</th></tr>
+    <tr><td>Google Business Profile</td><td>Not confirmable (no knowledge panel, no maps pack, no stars on brand search)</td></tr>
+    <tr><td>Google reviews</td><td>0 visible</td></tr>
+    <tr><td>Yelp profile</td><td>Not found</td></tr>
+    <tr><td>Houzz profile</td><td>Not in Charlotte directory (110+ pros listed, Cirilo absent)</td></tr>
+    <tr><td>BBB listing</td><td>Not listed, not accredited</td></tr>
+    <tr><td>Angi profile</td><td>Not found</td></tr>
+    <tr><td>Thumbtack profile</td><td>Not found</td></tr>
+    <tr><td>Facebook business page</td><td>Not confirmable</td></tr>
+    <tr><td>NextDoor neighborhood presence</td><td>Not found</td></tr>
+  </table>
+
+  <div class="callout red-flag">
+    <div class="label">PRIORITY ISSUE</div>
+    <p>For a $150K+ purchase, the absence of reviews on every reputation surface is the single largest barrier to conversion. The first ad dollar Cirilo spends without a reviews scaffold in place will convert at a fraction of what it could.</p>
+  </div>
+
+  <h2>5. Social Media</h2>
+
+  <p>Footer of cirilodb.com displays icons for Facebook, Twitter, LinkedIn, Instagram. None resolve to confirmable, active, branded accounts for Cirilo Design + Build.</p>
+
+  <table>
+    <tr><th>Platform</th><th>Status</th><th>Industry Benchmark (Charlotte luxury)</th></tr>
+    <tr><td>Instagram</td><td>No active branded account found</td><td>3K to 25K followers, 3 to 5 posts/week</td></tr>
+    <tr><td>Facebook</td><td>No active page found</td><td>1K to 5K followers, weekly posts</td></tr>
+    <tr><td>TikTok</td><td>No presence</td><td>Optional, growing for build-day content</td></tr>
+    <tr><td>YouTube</td><td>No channel</td><td>4 to 12 episodes/year drives long-tail search</td></tr>
+    <tr><td>Pinterest</td><td>No presence</td><td>30+ boards, drives more $100K+ inquiries than FB</td></tr>
+    <tr><td>LinkedIn company page</td><td>No presence</td><td>For B2B partnerships, not lead gen</td></tr>
+  </table>
+
+  <p>Instagram is the most consequential miss. Luxury pool buyers shop visually on Instagram before they Google.</p>
+
+  <h2>6. Paid Media Surface</h2>
+
+  <table>
+    <tr><th>Channel</th><th>Cirilo Presence</th><th>Active Competitors</th></tr>
+    <tr><td>Google Search Ads</td><td>Not bidding</td><td>Blue Haven, Anthony &amp; Sylvan, Premier, Designer Pools By Ace</td></tr>
+    <tr><td>Google Local Service Ads</td><td>Not enrolled</td><td>Anthony &amp; Sylvan, Blue Haven, MetroGreenscape</td></tr>
+    <tr><td>Meta Ads (FB/IG)</td><td>None detected</td><td>CPC Pools, Premier, Blue Haven</td></tr>
+    <tr><td>YouTube Ads</td><td>None</td><td>None significant in market</td></tr>
+    <tr><td>Houzz Pro placement</td><td>Not enrolled</td><td>Aloha, Coogan's, MetroGreenscape</td></tr>
+  </table>
+
+  <h2>7. Competitive Landscape (Top 15 in Charlotte)</h2>
+
+  <table>
+    <tr><th>#</th><th>Company</th><th>Position</th><th>Reputation / Credential</th></tr>
+    <tr><td>1</td><td>Anthony &amp; Sylvan (Charlotte)</td><td>National luxury + remodel</td><td>4.8 / 2,900+, PHTA-certified, Lifetime structural warranty</td></tr>
+    <tr><td>2</td><td>CPC Pools (Denver NC)</td><td>Volume luxury LKN</td><td>4.5 / 140 Google, 1,317 IG, active YouTube</td></tr>
+    <tr><td>3</td><td>Aloha Pools</td><td>High-end custom</td><td>4.9 Houzz, only AquaTech builder in NC region</td></tr>
+    <tr><td>4</td><td>Lombardo Pools</td><td>Elite custom</td><td>5.0 Houzz, only Master Pools Guild member in Charlotte</td></tr>
+    <tr><td>5</td><td>Premier Pools &amp; Spas</td><td>Volume + custom franchise</td><td>92% rec FB, BBB A+</td></tr>
+    <tr><td>6</td><td>Blue Haven Pools</td><td>Mid-luxury, tech-forward</td><td>66 Yelp reviews, in-house financing</td></tr>
+    <tr><td>7</td><td>Ivy Creek Pools &amp; Patios</td><td>Family luxury, $100K min</td><td>"Charlotte's Best" 3 yrs running</td></tr>
+    <tr><td>8</td><td>Blue Waters Construction</td><td>Luxury gunite</td><td>BuildZoom 105, interactive cost estimator</td></tr>
+    <tr><td>9</td><td>MetroGreenscape</td><td>Pool + landscape</td><td>250+ Google reviews, 24 awards</td></tr>
+    <tr><td>10</td><td>Tidal Custom Pools</td><td>Engineering-first luxury</td><td>10-year in-house structural warranty</td></tr>
+    <tr><td>11</td><td>Coogan's Design-Build</td><td>Luxury design-build + landscape</td><td>BBB A+ since 2011, Best of Houzz 2015</td></tr>
+    <tr><td>12</td><td>Edgewater Pools</td><td>Custom res + commercial</td><td>Female-majority owned</td></tr>
+    <tr><td>13</td><td>LKN Signature Pools</td><td>Luxury LKN custom</td><td>A+ BBB, Lyon Financial</td></tr>
+    <tr><td>14</td><td>Charlotte Pool Company</td><td>Luxury custom</td><td>Only local Genesis CBP certified</td></tr>
+    <tr><td>15</td><td>Aqua Pools &amp; Outdoor Living</td><td>Luxury gunite + plunge</td><td>Enhancify + HFS financing</td></tr>
+  </table>
+
+  <h2>8. White Space Cirilo Can Actually Take</h2>
+
+  <div class="callout green-flag">
+    <div class="label">OPEN POSITIONING SEAT</div>
+    <p>No Charlotte builder occupies <strong>"design-led modern luxury with a modern marketing presence."</strong> The credentialed tier (Lombardo, Aloha, Tidal, Charlotte Pool Co.) wins on prestige but is invisible online. The volume tier wins on marketing but reads commodity. Cirilo's existing brand promise is already aimed at the open seat.</p>
+  </div>
+
+  <h4>Geographic white space</h4>
+  <p>Waxhaw, Weddington, Marvin, Tega Cay, Fort Mill SC. Competitors mention these zips in copy; nobody runs dedicated localized landing pages with neighborhood case studies, HOA-specific permitting content, or local schema.</p>
+
+  <h4>Content white space</h4>
+  <ul>
+    <li>"What does a $250K+ pool actually include in Charlotte"</li>
+    <li>"Permit + HOA timelines for Mecklenburg / Union counties"</li>
+    <li>"Pool resale value in Charlotte luxury zips"</li>
+    <li>"Lake Norman waterfront pool engineering"</li>
+    <li>"Wellness pool + cold plunge integration for the modern Charlotte estate"</li>
+  </ul>
+
+  <h4>Audience white space</h4>
+  <ul>
+    <li>Tech executives in SouthPark / Myers Park / Eastover wanting modern minimalist pools</li>
+    <li>Lake Norman second-home owners with $300K+ outdoor living budgets</li>
+    <li>Move-up custom-home buyers in Waxhaw / Weddington building $2M+ homes</li>
+  </ul>
+
+  <h4>Credential white space</h4>
+  <ul>
+    <li><strong>Genesis Certified Builder Professional (CBP):</strong> only Charlotte Pool Co holds locally. Cirilo can pursue.</li>
+    <li><strong>PHTA Certified Building Professional:</strong> mostly Anthony &amp; Sylvan. Cirilo principals should certify.</li>
+    <li>Master Pools Guild (Lombardo holds), AquaTech (Aloha holds): skip.</li>
+  </ul>
+
+  <h2>9. The 15 Red Flags a $150K Buyer Will See</h2>
+
+  <p>Ranked by how badly each will scare a luxury buyer doing 20 minutes of due diligence.</p>
+
+  <ol class="flag-list">
+    <li><span class="num">01</span><strong>Zero reviews anywhere.</strong> No social proof at any price point, let alone luxury.</li>
+    <li><span class="num">02</span><strong>No Google Business Profile / no maps presence.</strong> Invisible on mobile "near me" searches, which is how 60%+ of high-intent buyers start.</li>
+    <li><span class="num">03</span><strong>Portfolio is 14 captionless photos.</strong> No locations, no testimonials, no project narrative, no budget tier, no video. A buyer cannot verify the work is actually Cirilo's.</li>
+    <li><span class="num">04</span><strong>No NC GC license number, bonded/insured statement, or warranty on site.</strong> Standard expectation in this category.</li>
+    <li><span class="num">05</span><strong>No financing page.</strong> Every competitor has Lyon, HFS, LightStream, or GreenSky banners.</li>
+    <li><span class="num">06</span><strong>No price-anchoring content.</strong> Forces all qualification into the consultation, wasting calendar on tire-kickers.</li>
+    <li><span class="num">07</span><strong>No analytics installed.</strong> Cirilo cannot measure or improve anything. All marketing decisions are blind.</li>
+    <li><span class="num">08</span><strong>910 area code phone.</strong> On a Charlotte-targeted business, reads as "out of market."</li>
+    <li><span class="num">09</span><strong>Site has not been updated since 2026-02-12.</strong> A 3+ month freeze on a brand-new business signals "abandoned."</li>
+    <li><span class="num">10</span><strong>Orphan /copy-of-new-residential-construction URL</strong> ships in public sitemap.</li>
+    <li><span class="num">11</span><strong>No video of a single completed pool.</strong> Pool buying is emotional and visual. This is the format that closes.</li>
+    <li><span class="num">12</span><strong>No service-area pages.</strong> The I-77 luxury corridor (LKN, Cornelius, Davidson, Mooresville) and the south Charlotte corridor (Myers Park, SouthPark, Ballantyne, Waxhaw, Weddington) are completely uncontested by Cirilo.</li>
+    <li><span class="num">13</span><strong>No PR, press, or magazine placements.</strong> Waterscapes leads with Charlotte Magazine "Best of the Best 2021." Cirilo has nothing to counter with.</li>
+    <li><span class="num">14</span><strong>Founder bios are thin.</strong> "Six years ago" with no year, no project count, no certifications, no signature build.</li>
+    <li><span class="num">15</span><strong>Wix Bookings consultation is unscreened.</strong> No budget filter. Anyone can grab Tiffany's calendar.</li>
+  </ol>
+
+  <h2>10. What Cirilo Has Going For It (the positives nobody else can fake)</h2>
+
+  <div class="callout green-flag">
+    <div class="label">STRATEGIC ASSETS</div>
+    <p>The clean luxury wordmark, the "Luxury Design. Precision Build." line, husband-wife founder story, and the rare combination of pool + renovation + home addition under one design-build roof are genuine differentiators. None of the top 15 Charlotte competitors pair all four. This is the brand foundation. It needs distribution, not redesign.</p>
+  </div>
+
+  <ul>
+    <li>Beautiful, restrained luxury wordmark (rose-gold gradient, classical serif)</li>
+    <li>Clear positioning line that aims squarely at the open market seat</li>
+    <li>Husband-wife founder story (Ramon design, Tiffany operations) is rare in this market and Houzz-search-friendly</li>
+    <li>Design-build under one roof for pool + outdoor living + reno + additions: only competitor with same scope is Coogan's (dated brand) and MetroGreenscape (landscape-led)</li>
+    <li>Wix platform is rebuildable in 90 days without migrating off, lower friction than re-platforming</li>
+  </ul>
+
+  <h2>What the Recommended 90 Days Looks Like</h2>
+
+  <table>
+    <tr><th>Days</th><th>Sprint</th><th>Outcome</th></tr>
+    <tr><td>1 to 14</td><td>Foundation</td><td>GBP claimed and verified, 25 photos uploaded, analytics installed, schema and meta rewritten, 704/980 number ported, orphan URL killed, warranty + financing + license # published</td></tr>
+    <tr><td>15 to 45</td><td>Trust + portfolio</td><td>14 service-area pages live, 25+ Google reviews collected, Houzz Pro live with 40 photos, portfolio rebuilt with captions and locations, 2 completed projects re-shot (drone, dusk LED, build reel)</td></tr>
+    <tr><td>46 to 90</td><td>Demand capture</td><td>Google LSA + Search live, Meta video creative engine launched, Instagram and Pinterest live, first 5 builder/realtor partnerships signed, first PR pitch sent to Charlotte Magazine and LKN Magazine</td></tr>
+  </table>
+
+  <p>Full 12-month roadmap, channel plan, partnership target lists, PR outreach calendar, and tiered investment options are in the companion <strong>Marketing &amp; Growth Engagement Proposal</strong>.</p>
+
+  <div class="callout">
+    <div class="label">A NOTE ON THIS AUDIT</div>
+    <p>This audit is delivered as a free discovery deliverable, no strings. The companion proposal is the optional next step. If the audit findings are useful and Cirilo wants to handle the work in-house or with another partner, that is welcome. If the path forward is to engage Mark, the proposal lays out three tiers ranging from $230K to $802K in Year 1 investment.</p>
+  </div>
+
+  <div class="footer">
+    Prepared by Mark Gabrielli &nbsp;|&nbsp; markcmo.com &nbsp;|&nbsp; mark@markcmo.com &nbsp;|&nbsp; Private &amp; Confidential
+  </div>
+
+</div>
+
+</body>
+</html>

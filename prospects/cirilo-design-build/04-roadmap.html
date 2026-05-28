@@ -1,0 +1,522 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Cirilo Design + Build | 12-Month Roadmap</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=Inter:wght@300;400;500;600;700&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --gold-dark: #AB7E37;
+    --gold-mid: #D6BB89;
+    --gold-light: #E3D3B2;
+    --gold-pale: #F4ECDC;
+    --cream-bg: #FAF7F2;
+    --white: #FFFFFF;
+    --ink: #1A1A1A;
+    --body: #2E2E34;
+    --muted: #8F8F8F;
+    --border: #E2E2E2;
+    --phase-1: #AB7E37;
+    --phase-2: #D6BB89;
+    --phase-3: #8FA68E;
+    --phase-4: #5A8A4A;
+    --shadow: 0 8px 32px rgba(26, 26, 26, 0.06);
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: 'Inter', sans-serif; background: var(--cream-bg); color: var(--body); line-height: 1.65; font-size: 16px; }
+  .page { max-width: 1100px; margin: 40px auto; background: var(--white); box-shadow: var(--shadow); padding: 80px 64px; }
+  h1, h2, h3, h4 { font-family: 'Cormorant Garamond', serif; color: var(--ink); font-weight: 500; line-height: 1.15; }
+  h1 { font-size: 3.4rem; margin-bottom: 0.4em; font-weight: 600; }
+  h2 { font-size: 2.2rem; margin-top: 2.4em; margin-bottom: 0.6em; padding-bottom: 0.4em; border-bottom: 1px solid var(--gold-light); }
+  h3 { font-size: 1.5rem; margin-top: 1.8em; margin-bottom: 0.5em; color: var(--gold-dark); }
+  h4 { font-size: 1rem; margin-top: 1.4em; margin-bottom: 0.4em; font-family: 'Inter', sans-serif; font-weight: 600; color: var(--ink); text-transform: uppercase; letter-spacing: 0.08em; }
+  p { margin-bottom: 1em; }
+  strong { color: var(--ink); font-weight: 600; }
+  ul, ol { margin: 0.5em 0 1.2em 1.4em; } li { margin-bottom: 0.4em; }
+
+  .brand-mark { text-align: center; margin-bottom: 56px; padding-bottom: 32px; border-bottom: 1px solid var(--border); }
+  .brand-mark .wordmark { font-family: 'Cormorant Garamond', serif; font-size: 3.2rem; font-weight: 600; letter-spacing: 0.18em; background: linear-gradient(135deg, #E5C2B0 0%, #D6BB89 35%, #F4D78C 65%, #AB7E37 100%); -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent; margin-bottom: 8px; }
+  .brand-mark .sub { font-family: 'DM Mono', monospace; font-size: 0.75rem; letter-spacing: 0.4em; color: var(--gold-dark); text-transform: uppercase; }
+  .doc-meta { font-family: 'DM Mono', monospace; font-size: 0.72rem; letter-spacing: 0.18em; text-transform: uppercase; color: var(--muted); text-align: center; margin-bottom: 56px; }
+
+  .hero-title { text-align: center; margin-bottom: 56px; }
+  .hero-title .eyebrow { font-family: 'DM Mono', monospace; font-size: 0.78rem; letter-spacing: 0.32em; color: var(--gold-dark); text-transform: uppercase; margin-bottom: 18px; }
+  .hero-title h1 { font-size: 3.4rem; margin-bottom: 0.3em; }
+  .hero-title .lede { font-family: 'Cormorant Garamond', serif; font-size: 1.4rem; font-style: italic; color: var(--body); max-width: 720px; margin: 0 auto; }
+
+  .phase-legend { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; margin: 32px 0; }
+  .phase-chip { padding: 14px 18px; border-radius: 4px; color: var(--white); }
+  .phase-chip .ph-num { font-family: 'DM Mono', monospace; font-size: 0.7rem; letter-spacing: 0.18em; text-transform: uppercase; opacity: 0.85; }
+  .phase-chip .ph-name { font-family: 'Cormorant Garamond', serif; font-size: 1.4rem; }
+  .phase-chip .ph-window { font-family: 'DM Mono', monospace; font-size: 0.7rem; opacity: 0.85; }
+  .p1 { background: var(--phase-1); }
+  .p2 { background: var(--phase-2); color: var(--ink); }
+  .p3 { background: var(--phase-3); }
+  .p4 { background: var(--phase-4); }
+
+  .gantt { margin: 32px 0; border: 1px solid var(--border); border-radius: 4px; overflow: hidden; background: var(--white); }
+  .gantt-header { display: grid; grid-template-columns: 220px repeat(12, 1fr); background: var(--ink); color: var(--white); }
+  .gantt-header .gh-track-label { padding: 12px 16px; font-family: 'DM Mono', monospace; font-size: 0.65rem; letter-spacing: 0.12em; text-transform: uppercase; }
+  .gantt-header .gh-month { padding: 12px 4px; text-align: center; font-family: 'DM Mono', monospace; font-size: 0.65rem; letter-spacing: 0.1em; border-left: 1px solid rgba(255,255,255,0.1); }
+  .gantt-row { display: grid; grid-template-columns: 220px repeat(12, 1fr); border-top: 1px solid var(--border); min-height: 44px; align-items: center; }
+  .gantt-row:nth-child(odd) { background: var(--cream-bg); }
+  .gantt-row .track { padding: 10px 16px; font-size: 0.85rem; font-weight: 500; color: var(--ink); border-right: 1px solid var(--border); }
+  .gantt-cell { border-right: 1px solid var(--border); height: 100%; position: relative; }
+  .gantt-cell:last-child { border-right: none; }
+  .bar { position: absolute; top: 8px; bottom: 8px; left: 2px; right: 2px; border-radius: 3px; display: flex; align-items: center; justify-content: center; font-family: 'DM Mono', monospace; font-size: 0.6rem; color: var(--white); text-transform: uppercase; letter-spacing: 0.1em; overflow: hidden; padding: 0 6px; }
+  .bar.p1 { background: var(--phase-1); }
+  .bar.p2 { background: var(--phase-2); color: var(--ink); }
+  .bar.p3 { background: var(--phase-3); }
+  .bar.p4 { background: var(--phase-4); }
+  .bar.span-2 { right: -56px; } .bar.span-3 { right: -118px; } .bar.span-4 { right: -180px; }
+  .bar.span-5 { right: -242px; } .bar.span-6 { right: -304px; } .bar.span-7 { right: -366px; } .bar.span-8 { right: -428px; }
+  .bar.span-9 { right: -490px; } .bar.span-10 { right: -552px; } .bar.span-12 { right: -676px; }
+
+  .milestones { display: grid; grid-template-columns: repeat(4, 1fr); gap: 18px; margin: 32px 0; }
+  .milestone { background: var(--white); border: 1px solid var(--border); border-top: 4px solid var(--gold-dark); padding: 22px 20px; border-radius: 0 0 4px 4px; }
+  .milestone .mark { font-family: 'DM Mono', monospace; font-size: 0.7rem; letter-spacing: 0.15em; text-transform: uppercase; color: var(--gold-dark); margin-bottom: 8px; }
+  .milestone .title { font-family: 'Cormorant Garamond', serif; font-size: 1.3rem; color: var(--ink); margin-bottom: 10px; line-height: 1.2; }
+  .milestone .items { font-size: 0.85rem; }
+  .milestone .items div { padding: 4px 0; }
+
+  .kpi-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 18px; margin: 32px 0; }
+  .kpi { background: var(--gold-pale); border-left: 3px solid var(--gold-dark); padding: 20px; border-radius: 0 4px 4px 0; }
+  .kpi .v { font-family: 'Cormorant Garamond', serif; font-size: 2.2rem; color: var(--ink); font-weight: 600; line-height: 1; margin-bottom: 4px; }
+  .kpi .l { font-family: 'DM Mono', monospace; font-size: 0.65rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--gold-dark); }
+
+  table { width: 100%; border-collapse: collapse; margin: 18px 0; font-size: 0.88rem; }
+  th { background: var(--ink); color: var(--white); padding: 12px 14px; text-align: left; font-family: 'DM Mono', monospace; font-size: 0.68rem; letter-spacing: 0.1em; text-transform: uppercase; font-weight: 500; }
+  td { padding: 11px 14px; border-bottom: 1px solid var(--border); vertical-align: top; }
+  tr:nth-child(even) td { background: var(--cream-bg); }
+
+  .sprint { background: var(--white); border: 1px solid var(--border); border-radius: 4px; padding: 24px 28px; margin: 16px 0; }
+  .sprint .sp-header { display: flex; justify-content: space-between; align-items: baseline; border-bottom: 1px solid var(--gold-light); padding-bottom: 12px; margin-bottom: 16px; }
+  .sprint .sp-week { font-family: 'DM Mono', monospace; font-size: 0.7rem; letter-spacing: 0.18em; text-transform: uppercase; color: var(--gold-dark); }
+  .sprint .sp-title { font-family: 'Cormorant Garamond', serif; font-size: 1.5rem; color: var(--ink); }
+  .sprint .sp-owner { font-family: 'DM Mono', monospace; font-size: 0.7rem; color: var(--muted); text-transform: uppercase; letter-spacing: 0.1em; }
+  .sprint ul { margin: 6px 0 12px 1.4em; }
+  .sprint .sp-deliverable { background: var(--cream-bg); padding: 12px 16px; border-radius: 4px; font-size: 0.88rem; margin-top: 12px; }
+  .sprint .sp-deliverable strong { color: var(--gold-dark); font-family: 'DM Mono', monospace; font-size: 0.65rem; letter-spacing: 0.15em; text-transform: uppercase; }
+
+  .footer { margin-top: 80px; padding-top: 32px; border-top: 1px solid var(--border); text-align: center; font-family: 'DM Mono', monospace; font-size: 0.7rem; letter-spacing: 0.15em; text-transform: uppercase; color: var(--muted); }
+
+  @media print { body { background: white; } .page { box-shadow: none; margin: 0; padding: 30px; max-width: 100%; } h2, .gantt, .sprint, .milestone { page-break-inside: avoid; } }
+  @media (max-width: 900px) { .gantt { overflow-x: auto; } .gantt-header, .gantt-row { min-width: 920px; } .phase-legend, .milestones, .kpi-grid { grid-template-columns: 1fr 1fr; } }
+</style>
+</head>
+<body>
+
+<div class="page">
+
+  <div class="brand-mark">
+    <div class="wordmark">CIRILO</div>
+    <div class="sub">DESIGN &nbsp;+&nbsp; BUILD</div>
+  </div>
+
+  <div class="doc-meta">12-Month Strategic Roadmap &nbsp;|&nbsp; Prepared 2026-05-28</div>
+
+  <div class="hero-title">
+    <div class="eyebrow">EXECUTION PLAN</div>
+    <h1>365 days to<br>category leader.</h1>
+    <p class="lede">Week-by-week sprint plan, four phases, with milestones, owners, and KPIs. Built for Tier 2 (Growth) engagement. Scales up or down based on selected tier.</p>
+  </div>
+
+  <h2>Four Phases at a Glance</h2>
+
+  <div class="phase-legend">
+    <div class="phase-chip p1"><div class="ph-num">Phase 1</div><div class="ph-name">Foundation</div><div class="ph-window">Days 1 to 30</div></div>
+    <div class="phase-chip p2"><div class="ph-num">Phase 2</div><div class="ph-name">Acquisition</div><div class="ph-window">Days 31 to 90</div></div>
+    <div class="phase-chip p3"><div class="ph-num">Phase 3</div><div class="ph-name">Authority</div><div class="ph-window">Days 91 to 180</div></div>
+    <div class="phase-chip p4"><div class="ph-num">Phase 4</div><div class="ph-name">Dominance</div><div class="ph-window">Days 181 to 365</div></div>
+  </div>
+
+  <h2>Master Gantt</h2>
+
+  <div class="gantt">
+    <div class="gantt-header">
+      <div class="gh-track-label">Workstream</div>
+      <div class="gh-month">M1</div><div class="gh-month">M2</div><div class="gh-month">M3</div>
+      <div class="gh-month">M4</div><div class="gh-month">M5</div><div class="gh-month">M6</div>
+      <div class="gh-month">M7</div><div class="gh-month">M8</div><div class="gh-month">M9</div>
+      <div class="gh-month">M10</div><div class="gh-month">M11</div><div class="gh-month">M12</div>
+    </div>
+
+    <div class="gantt-row"><div class="track">Analytics + tracking</div>
+      <div class="gantt-cell"><div class="bar p1">Build</div></div>
+      <div class="gantt-cell"></div><div class="gantt-cell"></div><div class="gantt-cell"></div><div class="gantt-cell"></div><div class="gantt-cell"></div><div class="gantt-cell"></div><div class="gantt-cell"></div><div class="gantt-cell"></div><div class="gantt-cell"></div><div class="gantt-cell"></div><div class="gantt-cell"></div>
+    </div>
+
+    <div class="gantt-row"><div class="track">Google Business Profile</div>
+      <div class="gantt-cell"><div class="bar p1 span-12">Launch + ongoing optimization</div></div>
+      <div class="gantt-cell"></div><div class="gantt-cell"></div><div class="gantt-cell"></div><div class="gantt-cell"></div><div class="gantt-cell"></div><div class="gantt-cell"></div><div class="gantt-cell"></div><div class="gantt-cell"></div><div class="gantt-cell"></div><div class="gantt-cell"></div><div class="gantt-cell"></div>
+    </div>
+
+    <div class="gantt-row"><div class="track">Reviews velocity</div>
+      <div class="gantt-cell"><div class="bar p1 span-3">Past-client push</div></div>
+      <div class="gantt-cell"></div><div class="gantt-cell"></div>
+      <div class="gantt-cell"><div class="bar p3 span-9">Always-on system</div></div>
+      <div class="gantt-cell"></div><div class="gantt-cell"></div><div class="gantt-cell"></div><div class="gantt-cell"></div><div class="gantt-cell"></div><div class="gantt-cell"></div><div class="gantt-cell"></div><div class="gantt-cell"></div>
+    </div>
+
+    <div class="gantt-row"><div class="track">Trust stack (warranty, financing, license)</div>
+      <div class="gantt-cell"><div class="bar p1">Build</div></div>
+      <div class="gantt-cell"></div><div class="gantt-cell"></div><div class="gantt-cell"></div><div class="gantt-cell"></div><div class="gantt-cell"></div><div class="gantt-cell"></div><div class="gantt-cell"></div><div class="gantt-cell"></div><div class="gantt-cell"></div><div class="gantt-cell"></div><div class="gantt-cell"></div>
+    </div>
+
+    <div class="gantt-row"><div class="track">Service area pages (14)</div>
+      <div class="gantt-cell"></div>
+      <div class="gantt-cell"><div class="bar p2 span-2">Build + ship</div></div>
+      <div class="gantt-cell"></div><div class="gantt-cell"></div><div class="gantt-cell"></div><div class="gantt-cell"></div><div class="gantt-cell"></div><div class="gantt-cell"></div><div class="gantt-cell"></div><div class="gantt-cell"></div><div class="gantt-cell"></div><div class="gantt-cell"></div>
+    </div>
+
+    <div class="gantt-row"><div class="track">Portfolio reshoot + rebuild</div>
+      <div class="gantt-cell"></div>
+      <div class="gantt-cell"><div class="bar p2 span-2">Shoot + edit</div></div>
+      <div class="gantt-cell"></div><div class="gantt-cell"></div><div class="gantt-cell"></div><div class="gantt-cell"></div><div class="gantt-cell"></div><div class="gantt-cell"></div><div class="gantt-cell"></div><div class="gantt-cell"></div><div class="gantt-cell"></div><div class="gantt-cell"></div>
+    </div>
+
+    <div class="gantt-row"><div class="track">Google Search + LSA</div>
+      <div class="gantt-cell"></div><div class="gantt-cell"></div>
+      <div class="gantt-cell"><div class="bar p2 span-10">Launch and scale</div></div>
+      <div class="gantt-cell"></div><div class="gantt-cell"></div><div class="gantt-cell"></div><div class="gantt-cell"></div><div class="gantt-cell"></div><div class="gantt-cell"></div><div class="gantt-cell"></div><div class="gantt-cell"></div>
+    </div>
+
+    <div class="gantt-row"><div class="track">Meta video creative</div>
+      <div class="gantt-cell"></div><div class="gantt-cell"></div>
+      <div class="gantt-cell"><div class="bar p2 span-10">Always-on production + paid</div></div>
+      <div class="gantt-cell"></div><div class="gantt-cell"></div><div class="gantt-cell"></div><div class="gantt-cell"></div><div class="gantt-cell"></div><div class="gantt-cell"></div><div class="gantt-cell"></div><div class="gantt-cell"></div>
+    </div>
+
+    <div class="gantt-row"><div class="track">Houzz Pro + Pinterest</div>
+      <div class="gantt-cell"></div>
+      <div class="gantt-cell"><div class="bar p2 span-11">Build, optimize, scale</div></div>
+      <div class="gantt-cell"></div><div class="gantt-cell"></div><div class="gantt-cell"></div><div class="gantt-cell"></div><div class="gantt-cell"></div><div class="gantt-cell"></div><div class="gantt-cell"></div><div class="gantt-cell"></div><div class="gantt-cell"></div><div class="gantt-cell"></div>
+    </div>
+
+    <div class="gantt-row"><div class="track">Realtor + builder partnerships</div>
+      <div class="gantt-cell"></div>
+      <div class="gantt-cell"><div class="bar p2 span-2">Outreach 1</div></div>
+      <div class="gantt-cell"></div>
+      <div class="gantt-cell"><div class="bar p3 span-9">Activations + quarterly reviews</div></div>
+      <div class="gantt-cell"></div><div class="gantt-cell"></div><div class="gantt-cell"></div><div class="gantt-cell"></div><div class="gantt-cell"></div><div class="gantt-cell"></div><div class="gantt-cell"></div><div class="gantt-cell"></div>
+    </div>
+
+    <div class="gantt-row"><div class="track">YouTube series (12 episodes)</div>
+      <div class="gantt-cell"></div><div class="gantt-cell"></div><div class="gantt-cell"></div>
+      <div class="gantt-cell"><div class="bar p3 span-9">Episodes 1 to 12</div></div>
+      <div class="gantt-cell"></div><div class="gantt-cell"></div><div class="gantt-cell"></div><div class="gantt-cell"></div><div class="gantt-cell"></div><div class="gantt-cell"></div><div class="gantt-cell"></div><div class="gantt-cell"></div>
+    </div>
+
+    <div class="gantt-row"><div class="track">Cornerstone content (24 pieces)</div>
+      <div class="gantt-cell"></div><div class="gantt-cell"></div>
+      <div class="gantt-cell"><div class="bar p2 span-10">2 per month</div></div>
+      <div class="gantt-cell"></div><div class="gantt-cell"></div><div class="gantt-cell"></div><div class="gantt-cell"></div><div class="gantt-cell"></div><div class="gantt-cell"></div><div class="gantt-cell"></div><div class="gantt-cell"></div>
+    </div>
+
+    <div class="gantt-row"><div class="track">PR pitches + magazine outreach</div>
+      <div class="gantt-cell"></div><div class="gantt-cell"></div>
+      <div class="gantt-cell"><div class="bar p3 span-10">Monthly pitches</div></div>
+      <div class="gantt-cell"></div><div class="gantt-cell"></div><div class="gantt-cell"></div><div class="gantt-cell"></div><div class="gantt-cell"></div><div class="gantt-cell"></div><div class="gantt-cell"></div><div class="gantt-cell"></div>
+    </div>
+
+    <div class="gantt-row"><div class="track">Credentials (Genesis CBP, PHTA)</div>
+      <div class="gantt-cell"></div><div class="gantt-cell"></div>
+      <div class="gantt-cell"><div class="bar p3 span-4">Apply + earn</div></div>
+      <div class="gantt-cell"></div><div class="gantt-cell"></div><div class="gantt-cell"></div><div class="gantt-cell"></div><div class="gantt-cell"></div><div class="gantt-cell"></div><div class="gantt-cell"></div><div class="gantt-cell"></div><div class="gantt-cell"></div>
+    </div>
+
+    <div class="gantt-row"><div class="track">"Build My Dream Pool" tool</div>
+      <div class="gantt-cell"></div><div class="gantt-cell"></div>
+      <div class="gantt-cell"><div class="bar p3 span-2">Build</div></div>
+      <div class="gantt-cell"></div>
+      <div class="gantt-cell"><div class="bar p4 span-8">Live + iterate</div></div>
+      <div class="gantt-cell"></div><div class="gantt-cell"></div><div class="gantt-cell"></div><div class="gantt-cell"></div><div class="gantt-cell"></div><div class="gantt-cell"></div><div class="gantt-cell"></div>
+    </div>
+
+    <div class="gantt-row"><div class="track">Country club + sponsorships (Tier 3 add)</div>
+      <div class="gantt-cell"></div><div class="gantt-cell"></div><div class="gantt-cell"></div><div class="gantt-cell"></div>
+      <div class="gantt-cell"><div class="bar p4 span-8">Activations</div></div>
+      <div class="gantt-cell"></div><div class="gantt-cell"></div><div class="gantt-cell"></div><div class="gantt-cell"></div><div class="gantt-cell"></div><div class="gantt-cell"></div><div class="gantt-cell"></div>
+    </div>
+
+    <div class="gantt-row"><div class="track">"Most Beautiful Backyards" awards</div>
+      <div class="gantt-cell"></div><div class="gantt-cell"></div><div class="gantt-cell"></div><div class="gantt-cell"></div><div class="gantt-cell"></div><div class="gantt-cell"></div>
+      <div class="gantt-cell"><div class="bar p4 span-6">Plan + launch annual</div></div>
+      <div class="gantt-cell"></div><div class="gantt-cell"></div><div class="gantt-cell"></div><div class="gantt-cell"></div><div class="gantt-cell"></div>
+    </div>
+
+  </div>
+
+  <h2>Phase Milestones</h2>
+
+  <div class="milestones">
+    <div class="milestone">
+      <div class="mark">DAY 30 GATE</div>
+      <div class="title">Foundation Live</div>
+      <div class="items">
+        <div>GBP verified, 25 photos</div>
+        <div>Analytics + pixels installed</div>
+        <div>Schema + meta rewritten</div>
+        <div>704/980 number ported</div>
+        <div>10+ Google reviews flowing</div>
+        <div>Warranty + financing + license # published</div>
+      </div>
+    </div>
+    <div class="milestone">
+      <div class="mark">DAY 90 GATE</div>
+      <div class="title">Acquisition Turned On</div>
+      <div class="items">
+        <div>LSA + Google Search live</div>
+        <div>14 service area pages indexed</div>
+        <div>40+ Google reviews at 4.8</div>
+        <div>5 builder/realtor partners signed</div>
+        <div>Houzz Pro + Pinterest live</div>
+        <div>First 4 Meta video creatives in market</div>
+      </div>
+    </div>
+    <div class="milestone">
+      <div class="mark">DAY 180 GATE</div>
+      <div class="title">Authority Built</div>
+      <div class="items">
+        <div>Top-3 organic on 4 to 6 suburb keywords</div>
+        <div>60 to 100 reviews at 4.8+</div>
+        <div>4 YouTube episodes live</div>
+        <div>12 cornerstone pieces published</div>
+        <div>First magazine feature published</div>
+        <div>8 to 12 signed contracts to date</div>
+      </div>
+    </div>
+    <div class="milestone">
+      <div class="mark">DAY 365 GATE</div>
+      <div class="title">Category Leader</div>
+      <div class="items">
+        <div>100 to 150 reviews at 4.9</div>
+        <div>Best of Houzz Service 2027 earned</div>
+        <div>12 YouTube episodes complete</div>
+        <div>24 cornerstone pieces published</div>
+        <div>22 to 32 signed contracts</div>
+        <div>$4.95M to $7.20M pool revenue</div>
+      </div>
+    </div>
+  </div>
+
+  <h2>Year 1 KPIs Tracked</h2>
+
+  <div class="kpi-grid">
+    <div class="kpi"><div class="v">22-32</div><div class="l">Signed Contracts</div></div>
+    <div class="kpi"><div class="v">$5.9M</div><div class="l">Mid-Case Revenue</div></div>
+    <div class="kpi"><div class="v">$275</div><div class="l">Target Blended CPL</div></div>
+    <div class="kpi"><div class="v">35%</div><div class="l">Consult to Contract</div></div>
+    <div class="kpi"><div class="v">100+</div><div class="l">Google Reviews</div></div>
+    <div class="kpi"><div class="v">15K</div><div class="l">Instagram Followers</div></div>
+    <div class="kpi"><div class="v">4%</div><div class="l">Marketing Cost of Sale</div></div>
+    <div class="kpi"><div class="v">10-15x</div><div class="l">ROAS Target</div></div>
+  </div>
+
+  <h2>Phase 1: Foundation (Days 1 to 30)</h2>
+
+  <div class="sprint">
+    <div class="sp-header">
+      <div><div class="sp-week">WEEK 1</div><div class="sp-title">Kickoff + instrumentation</div></div>
+      <div class="sp-owner">Owner: Mark + WETYR build team</div>
+    </div>
+    <ul>
+      <li>90-minute kickoff with Ramon and Tiffany: capture brand voice, project archive, partnership wishlist, sales process, CRM/intake state</li>
+      <li>Install GA4, Google Tag Manager, Meta Pixel, CallRail on Wix</li>
+      <li>Audit current Wix admin, request domain registrar access</li>
+      <li>Pull NC GC license number, COI, bond doc</li>
+      <li>Past-client list export (target 30 to 80 names)</li>
+    </ul>
+    <div class="sp-deliverable"><strong>End-of-week deliverable</strong> &nbsp;Working analytics dashboard, kickoff brief, past-client list cleaned</div>
+  </div>
+
+  <div class="sprint">
+    <div class="sp-header">
+      <div><div class="sp-week">WEEK 2</div><div class="sp-title">Trust stack + GBP launch</div></div>
+      <div class="sp-owner">Owner: Mark + WETYR</div>
+    </div>
+    <ul>
+      <li>Claim and verify Google Business Profile, populate 25+ photos, full service-area config, categories, booking link</li>
+      <li>Port Charlotte 704 or 980 tracking number; route to (910) line</li>
+      <li>Publish warranty page (10-year structural minimum), financing page (Lyon Financial application), license + bonded/insured page</li>
+      <li>Delete or noindex /copy-of-new-residential-construction orphan</li>
+    </ul>
+    <div class="sp-deliverable"><strong>End-of-week deliverable</strong> &nbsp;GBP live, trust stack pages published, orphan URL killed</div>
+  </div>
+
+  <div class="sprint">
+    <div class="sp-header">
+      <div><div class="sp-week">WEEK 3</div><div class="sp-title">On-page SEO + schema</div></div>
+      <div class="sp-owner">Owner: WETYR</div>
+    </div>
+    <ul>
+      <li>Rewrite title tags + meta descriptions on all 9 live pages with geo + service modifiers</li>
+      <li>Add schema.org LocalBusiness, Service, Product, FAQ, Review markup</li>
+      <li>Add OG and Twitter card tags</li>
+      <li>Image-sitemap addition</li>
+      <li>Rewrite About page with founder story, project count, year founded, certifications</li>
+    </ul>
+    <div class="sp-deliverable"><strong>End-of-week deliverable</strong> &nbsp;All pages indexed correctly, link previews fixed, About relaunched</div>
+  </div>
+
+  <div class="sprint">
+    <div class="sp-header">
+      <div><div class="sp-week">WEEK 4</div><div class="sp-title">Reviews ignition + intake screener</div></div>
+      <div class="sp-owner">Owner: Mark + Tiffany</div>
+    </div>
+    <ul>
+      <li>SMS + email outreach to past-client list with personalized review request and one-tap Google review link</li>
+      <li>Target 10 Google reviews by Day 30, 25 by Day 45, 40 by Day 60</li>
+      <li>Add screening questions to Wix Bookings consultation: property address, lot size, target budget, timeline</li>
+      <li>Begin Houzz Pro setup, request reviews from past clients on Houzz</li>
+    </ul>
+    <div class="sp-deliverable"><strong>End-of-week deliverable</strong> &nbsp;Reviews flowing, calendar protected from tire-kickers, Houzz profile under construction</div>
+  </div>
+
+  <h2>Phase 2: Acquisition (Days 31 to 90)</h2>
+
+  <div class="sprint">
+    <div class="sp-header">
+      <div><div class="sp-week">WEEKS 5 TO 8</div><div class="sp-title">Service area page build + portfolio reshoot</div></div>
+      <div class="sp-owner">Owner: WETYR + photo/video team</div>
+    </div>
+    <ul>
+      <li>14 service area pages built with neighborhood case studies, local schema, embedded Google Maps, neighborhood photos: Charlotte, SouthPark, Myers Park, Ballantyne, Waxhaw, Weddington, Marvin, Davidson, Cornelius, Mooresville, Huntersville, Matthews, Tega Cay, Fort Mill SC</li>
+      <li>Drone + dusk LED + finish close-up + build-reel reshoot of 6 completed projects</li>
+      <li>Portfolio rebuilt: 14 detail pages with neighborhood, pool type, features, finish, equipment brands, budget tier, "Build me one like this" CTA</li>
+      <li>Houzz Pro Premium live with 40+ photos uploaded</li>
+    </ul>
+    <div class="sp-deliverable"><strong>End-of-sprint deliverable</strong> &nbsp;14 service area pages indexed, 6 reshot projects published, Houzz live</div>
+  </div>
+
+  <div class="sprint">
+    <div class="sp-header">
+      <div><div class="sp-week">WEEKS 9 TO 10</div><div class="sp-title">Paid acquisition turn-on</div></div>
+      <div class="sp-owner">Owner: Mark + WETYR ads team</div>
+    </div>
+    <ul>
+      <li>Google Local Service Ads + Google Guarantee enrollment (requires GC license, COI, background check)</li>
+      <li>Google Search campaign build: 40+ ad groups, 200+ keywords on long-tail geo + suburb terms (avoid head-term bidding war)</li>
+      <li>Meta video creative engine launch: first 6 cinematic reels (build films, drone reveals, founder-on-camera)</li>
+      <li>Pinterest setup: 30 boards organized by design style</li>
+      <li>Instagram launch: 12 portfolio posts queued</li>
+    </ul>
+    <div class="sp-deliverable"><strong>End-of-sprint deliverable</strong> &nbsp;All paid channels live, first leads tracking in GA4</div>
+  </div>
+
+  <div class="sprint">
+    <div class="sp-header">
+      <div><div class="sp-week">WEEKS 11 TO 12</div><div class="sp-title">Partnerships + PR ignition</div></div>
+      <div class="sp-owner">Owner: Mark</div>
+    </div>
+    <ul>
+      <li>Formal realtor referral program rolled out: co-branded one-pager, 3D site-fit rendering offer, agreement template, quarterly payout cadence</li>
+      <li>Outreach to top 10 luxury real estate teams (Dickens Mitchener, Cottingham Chalk, Allen Tate Luxury, Premier Sotheby's LKN)</li>
+      <li>Outreach to top 5 custom home builders (Arthur Rutenberg, Bonterra, Plattner, Grandfather Homes, Simonini)</li>
+      <li>First PR pitches to Charlotte Magazine, Charlotte Business Journal, LKN Magazine, QC Exclusive, SouthPark Magazine</li>
+      <li>File Genesis CBP and PHTA CBP applications</li>
+    </ul>
+    <div class="sp-deliverable"><strong>End-of-sprint deliverable</strong> &nbsp;5 partner agreements signed, 5 PR pitches in market, 2 credential apps filed</div>
+  </div>
+
+  <h2>Phase 3: Authority (Days 91 to 180)</h2>
+
+  <div class="sprint">
+    <div class="sp-header">
+      <div><div class="sp-week">MONTH 4</div><div class="sp-title">Content + video engine in production</div></div>
+      <div class="sp-owner">Owner: WETYR content team</div>
+    </div>
+    <ul>
+      <li>YouTube design-reveal series production starts: Episode 1 ("Inside a Lake Norman build")</li>
+      <li>Cornerstone content cadence: 2 long-form pieces per month (permit guide, $250K-pool breakdown, finishes catalog, equipment guide, LKN engineering, pool resale value)</li>
+      <li>"Build My Dream Pool" interactive tool development begins</li>
+      <li>Google Search budget scaled to $12K-$15K/mo as landing pages convert</li>
+      <li>First country club outreach (Carmel CC, Charlotte CC, The Peninsula at LKN)</li>
+    </ul>
+    <div class="sp-deliverable"><strong>End-of-month deliverable</strong> &nbsp;YouTube Ep 1 live, 2 cornerstone pieces published, tool in design review</div>
+  </div>
+
+  <div class="sprint">
+    <div class="sp-header">
+      <div><div class="sp-week">MONTH 5</div><div class="sp-title">PR placements + credential earn</div></div>
+      <div class="sp-owner">Owner: Mark</div>
+    </div>
+    <ul>
+      <li>Charlotte Business Journal founder profile pitched and confirmed</li>
+      <li>LKN Magazine outdoor living feature pitched</li>
+      <li>Genesis CBP and PHTA CBP exams scheduled</li>
+      <li>"Build My Dream Pool" tool launches</li>
+      <li>YouTube Episodes 2-3 shoot + edit</li>
+    </ul>
+    <div class="sp-deliverable"><strong>End-of-month deliverable</strong> &nbsp;Tool live, 1 magazine feature confirmed, credentials in progress</div>
+  </div>
+
+  <div class="sprint">
+    <div class="sp-header">
+      <div><div class="sp-week">MONTH 6</div><div class="sp-title">90-day mid-year review</div></div>
+      <div class="sp-owner">Owner: Mark + Ramon + Tiffany</div>
+    </div>
+    <ul>
+      <li>Full Year-Half QBR: P&amp;L impact, deal velocity, channel mix, CPA/CPL, ROAS</li>
+      <li>Decision: scale budget on best-performing channels for H2</li>
+      <li>YouTube Episode 4 live</li>
+      <li>BBB accreditation, NARI membership filed</li>
+      <li>Best of Houzz 2027 submission prep</li>
+    </ul>
+    <div class="sp-deliverable"><strong>End-of-month deliverable</strong> &nbsp;QBR deck, H2 budget reallocation, 8 to 12 signed contracts year-to-date</div>
+  </div>
+
+  <h2>Phase 4: Dominance (Days 181 to 365)</h2>
+
+  <div class="sprint">
+    <div class="sp-header">
+      <div><div class="sp-week">MONTHS 7 TO 9</div><div class="sp-title">Compounding + brand expansion</div></div>
+      <div class="sp-owner">Owner: Mark + WETYR</div>
+    </div>
+    <ul>
+      <li>Scale Meta video budget as creative library deepens</li>
+      <li>Direct mail sequence 1-2-3 drops to affluent zip households (Tier 3 only)</li>
+      <li>YouTube Episodes 5-9 (cinematic build reveals, founder Q&amp;A, design philosophy)</li>
+      <li>6 more cornerstone content pieces (12 total)</li>
+      <li>Second tier channel partnerships activate: Sub-Zero/Wolf dealer co-marketing, RH Outdoor partnership, smart home brand</li>
+      <li>Genesis CBP and PHTA CBP earned, site updated</li>
+    </ul>
+    <div class="sp-deliverable"><strong>End-of-sprint deliverable</strong> &nbsp;Top-3 organic locked on 6+ keywords, 15 to 25 qualified leads/month sustained</div>
+  </div>
+
+  <div class="sprint">
+    <div class="sp-header">
+      <div><div class="sp-week">MONTHS 10 TO 12</div><div class="sp-title">Year 1 close + Year 2 plan</div></div>
+      <div class="sp-owner">Owner: Mark + Ramon + Tiffany</div>
+    </div>
+    <ul>
+      <li>Charlotte Magazine "Best Of" 2027 finalist push</li>
+      <li>"Charlotte's Most Beautiful Backyards" annual awards program launched</li>
+      <li>Wellness pool / cold-plunge niche content + PR push (Huberman trend)</li>
+      <li>YouTube Episodes 10-12 (year-end best-of, 2027 design trends, founder Q&amp;A)</li>
+      <li>Year 1 final QBR + 2027 strategic plan</li>
+      <li>Tier upgrade / hold / step-down decision for Year 2</li>
+    </ul>
+    <div class="sp-deliverable"><strong>End-of-year deliverable</strong> &nbsp;100 to 150 reviews at 4.9, 22 to 32 contracts signed, Year 2 plan locked</div>
+  </div>
+
+  <h2>Reporting Cadence</h2>
+
+  <table>
+    <tr><th>Cadence</th><th>What ships</th><th>Audience</th></tr>
+    <tr><td>Weekly</td><td>Slack/email summary: leads in, leads qualified, leads booked, blockers</td><td>Ramon + Tiffany</td></tr>
+    <tr><td>Bi-weekly</td><td>30-min working session: priorities for next 2 weeks</td><td>Ramon + Tiffany + Mark</td></tr>
+    <tr><td>Monthly</td><td>Dashboard: CPL, CPA, ROAS, signed contracts, pipeline value, channel attribution, content output, partnership activity, reviews delta</td><td>Ramon + Tiffany</td></tr>
+    <tr><td>Quarterly</td><td>Full QBR: P&amp;L impact, what worked, what didn't, budget reallocation, next-quarter goals</td><td>Ramon + Tiffany + Mark + WETYR leads</td></tr>
+    <tr><td>Annual</td><td>Year-end retrospective + next-year strategic plan</td><td>All stakeholders</td></tr>
+  </table>
+
+  <div class="footer">Prepared by Mark Gabrielli &nbsp;|&nbsp; markcmo.com &nbsp;|&nbsp; Private &amp; Confidential</div>
+
+</div>
+
+</body>
+</html>

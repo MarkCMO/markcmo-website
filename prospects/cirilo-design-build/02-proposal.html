@@ -1,0 +1,725 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Cirilo Design + Build | Marketing & Growth Proposal</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=Inter:wght@300;400;500;600;700&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --gold-dark: #AB7E37;
+    --gold-mid: #D6BB89;
+    --gold-light: #E3D3B2;
+    --gold-pale: #F4ECDC;
+    --cream-bg: #FAF7F2;
+    --white: #FFFFFF;
+    --ink: #1A1A1A;
+    --body: #2E2E34;
+    --muted: #8F8F8F;
+    --border: #E2E2E2;
+    --shadow: 0 8px 32px rgba(26, 26, 26, 0.06);
+    --shadow-lg: 0 16px 48px rgba(26, 26, 26, 0.09);
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+  body {
+    font-family: 'Inter', sans-serif;
+    background: var(--cream-bg);
+    color: var(--body);
+    line-height: 1.65;
+    font-weight: 400;
+    font-size: 16px;
+  }
+  .page {
+    max-width: 920px;
+    margin: 0 auto;
+    background: var(--white);
+    box-shadow: var(--shadow);
+    padding: 80px 72px;
+    margin-top: 40px;
+    margin-bottom: 40px;
+  }
+  h1, h2, h3, h4 {
+    font-family: 'Cormorant Garamond', serif;
+    color: var(--ink);
+    font-weight: 500;
+    line-height: 1.15;
+    letter-spacing: 0.01em;
+  }
+  h1 { font-size: 3.4rem; margin-bottom: 0.4em; font-weight: 600; }
+  h2 { font-size: 2.4rem; margin-top: 2.4em; margin-bottom: 0.6em; padding-bottom: 0.4em; border-bottom: 1px solid var(--gold-light); }
+  h3 { font-size: 1.6rem; margin-top: 1.8em; margin-bottom: 0.5em; color: var(--gold-dark); }
+  h4 { font-size: 1.15rem; margin-top: 1.4em; margin-bottom: 0.4em; font-family: 'Inter', sans-serif; font-weight: 600; color: var(--ink); text-transform: uppercase; letter-spacing: 0.08em; }
+  p { margin-bottom: 1em; }
+  strong { color: var(--ink); font-weight: 600; }
+  a { color: var(--gold-dark); text-decoration: none; border-bottom: 1px solid var(--gold-light); }
+  a:hover { color: var(--ink); border-bottom-color: var(--gold-dark); }
+
+  .brand-mark {
+    text-align: center;
+    margin-bottom: 56px;
+    padding-bottom: 32px;
+    border-bottom: 1px solid var(--border);
+  }
+  .brand-mark .wordmark {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 3.2rem;
+    font-weight: 600;
+    letter-spacing: 0.18em;
+    background: linear-gradient(135deg, #E5C2B0 0%, #D6BB89 35%, #F4D78C 65%, #AB7E37 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    margin-bottom: 8px;
+  }
+  .brand-mark .sub {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.75rem;
+    letter-spacing: 0.4em;
+    color: var(--gold-dark);
+    text-transform: uppercase;
+  }
+  .doc-meta {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.72rem;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--muted);
+    text-align: center;
+    margin-bottom: 56px;
+  }
+
+  .hero-title {
+    text-align: center;
+    margin-bottom: 64px;
+  }
+  .hero-title .eyebrow {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.78rem;
+    letter-spacing: 0.32em;
+    color: var(--gold-dark);
+    text-transform: uppercase;
+    margin-bottom: 18px;
+  }
+  .hero-title h1 { font-size: 3.8rem; margin-bottom: 0.3em; }
+  .hero-title .lede {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.5rem;
+    font-style: italic;
+    color: var(--body);
+    max-width: 640px;
+    margin: 0 auto;
+  }
+
+  .signature-block {
+    margin-top: 48px;
+    padding: 32px 40px;
+    background: var(--gold-pale);
+    border-left: 3px solid var(--gold-dark);
+    border-radius: 2px;
+  }
+  .signature-block .sig-from {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.72rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--gold-dark);
+    margin-bottom: 8px;
+  }
+  .signature-block .sig-name {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.6rem;
+    color: var(--ink);
+    margin-bottom: 4px;
+  }
+  .signature-block .sig-role {
+    font-size: 0.95rem;
+    color: var(--muted);
+  }
+
+  .tier-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 24px;
+    margin: 40px 0;
+  }
+  .tier-card {
+    background: var(--white);
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    padding: 32px 28px;
+    position: relative;
+    transition: transform 0.2s, box-shadow 0.2s;
+  }
+  .tier-card.recommended {
+    border: 2px solid var(--gold-dark);
+    background: var(--gold-pale);
+    box-shadow: var(--shadow-lg);
+    transform: translateY(-8px);
+  }
+  .tier-card.recommended::before {
+    content: "RECOMMENDED";
+    position: absolute;
+    top: -12px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: var(--gold-dark);
+    color: var(--white);
+    font-family: 'DM Mono', monospace;
+    font-size: 0.65rem;
+    letter-spacing: 0.2em;
+    padding: 5px 14px;
+    border-radius: 2px;
+  }
+  .tier-card .tier-name {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.8rem;
+    color: var(--ink);
+    margin-bottom: 4px;
+  }
+  .tier-card .tier-sub {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.7rem;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--gold-dark);
+    margin-bottom: 24px;
+  }
+  .tier-card .tier-price {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 2.4rem;
+    color: var(--ink);
+    margin-bottom: 4px;
+    font-weight: 600;
+  }
+  .tier-card .tier-price-sub {
+    font-size: 0.82rem;
+    color: var(--muted);
+    margin-bottom: 24px;
+  }
+  .tier-card ul {
+    list-style: none;
+    padding: 0;
+    font-size: 0.88rem;
+    line-height: 1.55;
+  }
+  .tier-card li {
+    padding: 7px 0 7px 22px;
+    position: relative;
+    border-bottom: 1px solid rgba(0,0,0,0.04);
+  }
+  .tier-card li:last-child { border-bottom: none; }
+  .tier-card li::before {
+    content: "+";
+    position: absolute;
+    left: 0;
+    top: 7px;
+    color: var(--gold-dark);
+    font-weight: 600;
+  }
+
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 24px 0;
+    font-size: 0.92rem;
+  }
+  th {
+    background: var(--ink);
+    color: var(--white);
+    padding: 14px 16px;
+    text-align: left;
+    font-family: 'DM Mono', monospace;
+    font-size: 0.72rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    font-weight: 500;
+  }
+  td {
+    padding: 14px 16px;
+    border-bottom: 1px solid var(--border);
+    vertical-align: top;
+  }
+  tr:nth-child(even) td { background: var(--cream-bg); }
+
+  .callout {
+    background: var(--gold-pale);
+    border-left: 3px solid var(--gold-dark);
+    padding: 24px 32px;
+    margin: 28px 0;
+    border-radius: 0 4px 4px 0;
+  }
+  .callout .label {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.7rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--gold-dark);
+    margin-bottom: 8px;
+  }
+  .callout p:last-child { margin-bottom: 0; }
+
+  .stat-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 20px;
+    margin: 32px 0;
+  }
+  .stat {
+    background: var(--white);
+    border: 1px solid var(--border);
+    padding: 24px 20px;
+    border-radius: 4px;
+    text-align: center;
+  }
+  .stat .num {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 2.4rem;
+    color: var(--gold-dark);
+    font-weight: 600;
+    line-height: 1;
+    margin-bottom: 6px;
+  }
+  .stat .lbl {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.65rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--muted);
+  }
+
+  .sign-zone {
+    margin-top: 80px;
+    padding: 40px;
+    background: var(--ink);
+    color: var(--white);
+    border-radius: 4px;
+  }
+  .sign-zone h3 { color: var(--gold-mid); margin-top: 0; }
+  .sign-zone .sign-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 48px;
+    margin-top: 32px;
+  }
+  .sign-line {
+    border-bottom: 1px solid var(--gold-mid);
+    padding-bottom: 8px;
+    margin-bottom: 8px;
+    min-height: 44px;
+  }
+  .sign-label {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.7rem;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--gold-light);
+  }
+
+  ul, ol { margin: 0.5em 0 1.2em 1.4em; }
+  li { margin-bottom: 0.4em; }
+
+  .footer {
+    margin-top: 80px;
+    padding-top: 32px;
+    border-top: 1px solid var(--border);
+    text-align: center;
+    font-family: 'DM Mono', monospace;
+    font-size: 0.7rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--muted);
+  }
+
+  @media print {
+    body { background: white; }
+    .page { box-shadow: none; margin: 0; padding: 40px; max-width: 100%; }
+    .tier-card.recommended { transform: none; }
+    h2 { page-break-after: avoid; }
+    .tier-grid, .sign-zone, .callout { page-break-inside: avoid; }
+  }
+  @media (max-width: 768px) {
+    .page { padding: 40px 24px; }
+    h1 { font-size: 2.4rem; }
+    .hero-title h1 { font-size: 2.6rem; }
+    .tier-grid, .stat-grid { grid-template-columns: 1fr; }
+    .sign-zone .sign-grid { grid-template-columns: 1fr; }
+  }
+</style>
+</head>
+<body>
+
+<div class="page">
+
+  <div class="brand-mark">
+    <div class="wordmark">CIRILO</div>
+    <div class="sub">DESIGN &nbsp;+&nbsp; BUILD</div>
+  </div>
+
+  <div class="doc-meta">
+    Marketing &amp; Growth Engagement Proposal &nbsp;|&nbsp; Prepared 2026-05-28
+  </div>
+
+  <div class="hero-title">
+    <div class="eyebrow">PRIVATE &amp; CONFIDENTIAL</div>
+    <h1>Take the seat<br>nobody owns.</h1>
+    <p class="lede">A 12-month plan to make Cirilo Design + Build the recognized luxury pool and outdoor living brand in Charlotte by 2027.</p>
+  </div>
+
+  <div class="callout">
+    <div class="label">PREPARED FOR</div>
+    <p><strong>Ramon &amp; Tiffany Cirilo</strong>, Owners, Cirilo Design + Build<br>cirilodb.com &nbsp;|&nbsp; (910) 409-0648 &nbsp;|&nbsp; Tiffany@CiriloDB.com</p>
+  </div>
+
+  <div class="signature-block">
+    <div class="sig-from">PREPARED BY</div>
+    <div class="sig-name">Mark Gabrielli</div>
+    <div class="sig-role">Fractional CMO &nbsp;|&nbsp; markcmo.com &nbsp;|&nbsp; mark@markcmo.com</div>
+  </div>
+
+  <h2>The Opportunity in Charlotte</h2>
+
+  <p>Charlotte's luxury pool market has two competitor archetypes and one open seat.</p>
+
+  <p><strong>The volume archetype</strong> (Anthony &amp; Sylvan, CPC Pools, Blue Haven, Premier Pools &amp; Spas) wins on machine-marketing. Big ad budgets, national playbook, commodity feel. They convert the mid-tier customer who shops on price.</p>
+
+  <p><strong>The credentialed archetype</strong> (Lombardo, Aloha, Tidal, Charlotte Pool Co.) wins on prestige. Master Pools Guild, AquaTech, Genesis CBP. They convert the wealthy buyer who finds them through a referral. They have almost no marketing presence.</p>
+
+  <p><strong>What is missing</strong> is a Charlotte builder who pairs genuine design-led luxury craft with a modern marketing presence. That seat is open. Cirilo's positioning ("Luxury Design. Precision Build.") is already aimed at it. The brand exists. The digital footprint that earns it does not.</p>
+
+  <div class="callout">
+    <div class="label">THE THESIS</div>
+    <p>Cirilo can credibly occupy "design-led modern luxury with a modern marketing presence" inside 9 months because no Charlotte builder currently does. The opportunity is taking, not creating.</p>
+  </div>
+
+  <h2>Where Cirilo Stands Today</h2>
+
+  <p>We audited cirilodb.com against the 17 most relevant Charlotte-metro pool builders, plus the major reputation, search, and social surfaces a $150K to $400K buyer touches before booking a consultation. The full audit is delivered as a companion document. Headline findings:</p>
+
+  <div class="stat-grid">
+    <div class="stat"><div class="num">0</div><div class="lbl">Google Reviews</div></div>
+    <div class="stat"><div class="num">0</div><div class="lbl">Service Area Pages</div></div>
+    <div class="stat"><div class="num">0</div><div class="lbl">Tracking Pixels</div></div>
+    <div class="stat"><div class="num">0</div><div class="lbl">Money Keywords Ranking</div></div>
+  </div>
+
+  <p>No Google Business Profile is confirmable. No Yelp, Houzz, BBB, Angi, or Thumbtack listing exists. The portfolio is 14 unlabeled images with no locations, captions, testimonials, or video. There is no published warranty, no financing partner, no NC general contractor license number on the site. The phone number is a 910 area code (Fayetteville/Wilmington), not a Charlotte 704 or 980. The site has not been updated since 2026-02-12 and ships an orphan "/copy-of-new-residential-construction" URL in its public sitemap.</p>
+
+  <p>This is not a critique of the business. It is a description of a brand that has not yet been put online. Every item above is fixable inside 90 days and most are free to fix.</p>
+
+  <h2>The Strategy</h2>
+
+  <p>Three moves in sequence. Each unlocks the next.</p>
+
+  <h3>Move 1. Build the trust scaffolding (Days 0 to 60)</h3>
+  <p>Reviews, Google Business Profile, service-area pages, financing, warranty, analytics, video portfolio. No paid spend converts in the $150K+ pool category until the buyer can verify the business is real, credentialed, and respected. This is the part most marketing firms skip. We start here.</p>
+
+  <h3>Move 2. Capture demand the premium tier ignores (Days 30 to 120)</h3>
+  <p>Google Local Service Ads, long-tail geo Search on suburb terms (Waxhaw, Marvin, Myers Park, Lake Norman, Davidson), Houzz Pro, and a Meta video creative engine. Lombardo, Aloha, Tidal, and Charlotte Pool Co. do not bid on any of these surfaces. The volume tier does, but on commodity head terms. We take the high-intent long-tail.</p>
+
+  <h3>Move 3. Open the referral channel nobody is working (Days 60 to 180)</h3>
+  <p>A formal partnership program with Charlotte's top 5 luxury custom-home builders, top 10 luxury real estate teams, top 6 landscape architects, and select country clubs. The standard builder referral fee is 2.5 to 3 percent of project value. On a $250K build that is $6,250 to a partner, materially cheaper than acquiring the same customer cold. No Charlotte pool builder runs this systematically.</p>
+
+  <h2>The Numbers Behind the Proposal</h2>
+
+  <table>
+    <tr>
+      <th>Benchmark</th>
+      <th>Source / Range</th>
+      <th>Cirilo Assumption</th>
+    </tr>
+    <tr>
+      <td>Average build value (luxury custom gunite)</td>
+      <td>$150K to $400K</td>
+      <td><strong>$225K blended AOV</strong></td>
+    </tr>
+    <tr>
+      <td>Cost per lead (Google, luxury Sun Belt)</td>
+      <td>$150 to $500</td>
+      <td>$275 target blended</td>
+    </tr>
+    <tr>
+      <td>Inquiry to qualified consult</td>
+      <td>25% baseline, 40% with sub-1-min response</td>
+      <td>35% target</td>
+    </tr>
+    <tr>
+      <td>Qualified consult to signed contract</td>
+      <td>25% baseline, 45% well-run luxury</td>
+      <td>35% target</td>
+    </tr>
+    <tr>
+      <td>Marketing cost of sale (mature)</td>
+      <td>2 to 5% of project value</td>
+      <td>4% target Y1, 3% Y2</td>
+    </tr>
+    <tr>
+      <td>Sales cycle (inquiry to contract)</td>
+      <td>6 to 14 weeks</td>
+      <td>8 weeks target</td>
+    </tr>
+  </table>
+
+  <h2>Three Engagement Tiers</h2>
+
+  <p>Every tier includes strategy, execution oversight, monthly reporting, and quarterly business reviews. They differ in scope of one-time systems build, depth of monthly retainer, and committed paid media budget. The recommendation is Tier 2.</p>
+
+  <div class="tier-grid">
+
+    <div class="tier-card">
+      <div class="tier-name">Foundation</div>
+      <div class="tier-sub">Tier 1 / Launch</div>
+      <div class="tier-price">$230K</div>
+      <div class="tier-price-sub">Year 1 total investment</div>
+      <ul>
+        <li>$38,500 systems build (one-time)</li>
+        <li>$8,500 monthly retainer</li>
+        <li>$7,500 monthly media budget</li>
+        <li>Google Business Profile launch</li>
+        <li>Reviews velocity campaign</li>
+        <li>14 templated service area pages</li>
+        <li>Google Search + LSA management</li>
+        <li>1 cornerstone content piece per month</li>
+        <li>Monthly reporting dashboard</li>
+        <li>10 to 18 signed contracts target</li>
+      </ul>
+    </div>
+
+    <div class="tier-card recommended">
+      <div class="tier-name">Growth</div>
+      <div class="tier-sub">Tier 2 / Recommended</div>
+      <div class="tier-price">$487K</div>
+      <div class="tier-price-sub">Year 1 total investment</div>
+      <ul>
+        <li>$72,500 systems build (one-time)</li>
+        <li>$14,500 monthly retainer</li>
+        <li>$18,000 monthly media budget</li>
+        <li>Everything in Foundation, plus:</li>
+        <li>Custom service area pages with case studies</li>
+        <li>"Build My Dream Pool" interactive lead tool</li>
+        <li>Full portfolio reshoot (drone, dusk, build reels)</li>
+        <li>4 YouTube design-reveal episodes</li>
+        <li>Realtor + builder partnership program</li>
+        <li>Meta video creative engine</li>
+        <li>Pinterest + Houzz Pro Premium</li>
+        <li>Monthly PR pitch</li>
+        <li>Genesis CBP + PHTA CBP credential support</li>
+        <li>22 to 32 signed contracts target</li>
+      </ul>
+    </div>
+
+    <div class="tier-card">
+      <div class="tier-name">Dominate</div>
+      <div class="tier-sub">Tier 3 / Category Leader</div>
+      <div class="tier-price">$802K</div>
+      <div class="tier-price-sub">Year 1 total investment</div>
+      <ul>
+        <li>$118,000 systems build (one-time)</li>
+        <li>$22,000 monthly retainer</li>
+        <li>$36,000 monthly media budget</li>
+        <li>Everything in Growth, plus:</li>
+        <li>Full website rebuild (off Wix, luxury CMS)</li>
+        <li>12 YouTube episodes (full year series)</li>
+        <li>6-drop direct mail sequence to 5,000 homes</li>
+        <li>Country club + home-show sponsorships</li>
+        <li>Co-marketing with 3 luxury brands</li>
+        <li>"Charlotte's Most Beautiful Backyards" awards launch</li>
+        <li>Dedicated PR + partnership manager hours</li>
+        <li>Founder media training</li>
+        <li>32 to 50+ signed contracts target</li>
+      </ul>
+    </div>
+
+  </div>
+
+  <h2>Why Tier 2 Is the Recommendation</h2>
+
+  <p>Tier 1 funds the trust scaffolding but lacks the partnership program and the content engine that produce compounding returns past Month 6. Tier 3 makes sense if Cirilo has capital and wants to compress 18 months of category leadership into 9, which is genuinely possible but is not the safer path on a first engagement.</p>
+
+  <p>Tier 2 funds all three strategic moves. The trust scaffolding ships in 90 days. The partnership program turns on in Month 3. The content engine compounds from Month 4. Break-even sits at 27 signed pool contracts in Year 1, which is conservative against a realistic 22 to 32 outcome on a well-instrumented luxury operation in this market.</p>
+
+  <div class="callout">
+    <div class="label">PAYBACK MATH AT TIER 2</div>
+    <p><strong>$487K invested.</strong> At a $225K blended AOV and a target marketing cost of sale of 4 percent, the program needs to drive $12.2M in pool revenue to hit target. At 22 to 32 signed contracts, the program drives $4.95M to $7.20M in Year 1 pool revenue. <strong>Year 1 is foundation. Year 2 returns compound.</strong></p>
+  </div>
+
+  <h2>What "Systems Build" Includes (Tier 2)</h2>
+
+  <h4>Foundation &amp; Trust (Weeks 1 to 4)</h4>
+  <p>Google Business Profile claim, verification, 25+ photos, full service area configuration, categories, booking link. Install GA4, Google Tag Manager, Meta Pixel, CallRail tracking on the Wix property. Charlotte 704 or 980 tracking number port. Schema.org LocalBusiness, Service, Product, FAQ, Review markup across all pages. Title tag and meta description rewrite with geo and service modifiers. Sitemap cleanup. OG and Twitter card tags. NC GC license, bonded and insured statement, and published warranty page (10-year structural minimum). Financing page with Lyon Financial application link.</p>
+
+  <h4>Content &amp; Pages (Weeks 3 to 8)</h4>
+  <p>14 custom-built service area pages with local schema, embedded maps, neighborhood photos, FAQ schema, and neighborhood-specific case studies for: Charlotte, SouthPark, Myers Park, Ballantyne, Waxhaw, Weddington, Marvin, Davidson, Cornelius, Mooresville, Huntersville, Matthews, Tega Cay, Fort Mill SC. New pages: Process, Financing, Warranty, FAQ, About (rewritten with founder story, project count, certifications, license #).</p>
+
+  <h4>Portfolio &amp; Video (Weeks 4 to 10)</h4>
+  <p>Full reshoot of 6 completed projects including drone, dusk LED, finish close-up, tile detail, build-day reel. Portfolio rebuilt as detail pages with neighborhood, pool type, features, finish, equipment brands, budget tier, and "Build me one like this" CTA. First 4 YouTube design-reveal episodes shot and edited.</p>
+
+  <h4>Lead Engine (Weeks 6 to 12)</h4>
+  <p>"Build My Dream Pool" interactive web tool: style quiz, feature picker, budget calculator, lead capture, automated follow-up sequence. Wix Bookings consultation screener (property address, lot size, target budget, timeline) so Tiffany's calendar only fills with qualified consults. Email nurture sequences for cold, warm, and hot leads.</p>
+
+  <h4>Channel Activation (Weeks 8 to 12)</h4>
+  <p>Google Local Service Ads + Google Guarantee enrollment. Google Search campaign build (long-tail geo + suburb terms, 40+ ad groups, 200+ keywords, custom landing pages). Meta video creative engine launch (first 6 cinematic reels). Pinterest setup (30-board portfolio). Houzz Pro Premium with 40+ project uploads. Reviews velocity campaign to past clients via SMS and email.</p>
+
+  <h4>Partnerships &amp; PR (Weeks 6 to 12)</h4>
+  <p>Formal realtor referral program: co-branded one-pager, 3D site-fit rendering offer, agreement template, quarterly payout cadence. Outreach to top 10 luxury real estate teams and top 5 custom-home builders (Arthur Rutenberg, Bonterra, Plattner, Grandfather Homes, Simonini). First PR pitches to Charlotte Magazine, Charlotte Business Journal, LKN Magazine, QC Exclusive, SouthPark Magazine.</p>
+
+  <h2>What the Monthly Retainer Covers (Tier 2)</h2>
+
+  <ul>
+    <li>Weekly sprint reviews with Ramon and Tiffany</li>
+    <li>Google Search, LSA, Meta, Pinterest media management</li>
+    <li>Monthly content publishing (2 cornerstone pieces, 4 short-form posts)</li>
+    <li>Monthly founder content shoot (Instagram reels, YouTube b-roll)</li>
+    <li>Monthly PR pitch to 4 target outlets</li>
+    <li>Quarterly partnership reviews and new partner activation</li>
+    <li>Google Business Profile posting cadence (weekly)</li>
+    <li>Reviews management and response</li>
+    <li>Monthly attribution and funnel reporting (CPA, CPL, ROAS, deal velocity, channel mix)</li>
+    <li>Quarterly business review with full P&amp;L impact analysis</li>
+  </ul>
+
+  <h2>Timeline at a Glance</h2>
+
+  <table>
+    <tr>
+      <th>Phase</th>
+      <th>Window</th>
+      <th>Outcome</th>
+    </tr>
+    <tr>
+      <td>Foundation</td>
+      <td>Days 1 to 30</td>
+      <td>GBP live, analytics installed, trust stack published, reviews campaign running, portfolio captioned</td>
+    </tr>
+    <tr>
+      <td>Acquisition turn-on</td>
+      <td>Days 31 to 90</td>
+      <td>LSA live, Google Search live, service area pages indexed, partnership program signed with first 5 partners, 25+ Google reviews at 4.8 stars</td>
+    </tr>
+    <tr>
+      <td>Authority &amp; scale</td>
+      <td>Days 91 to 180</td>
+      <td>YouTube series live, cornerstone content compounding, first PR placement, top-3 organic on 4 to 6 suburb keywords, 15 to 25 qualified leads per month</td>
+    </tr>
+    <tr>
+      <td>Dominance &amp; brand</td>
+      <td>Days 181 to 365</td>
+      <td>Best of Houzz earned, magazine feature published, second-tier channel partnerships live, 25 to 40 qualified leads per month, 22 to 32 signed contracts year-to-date</td>
+    </tr>
+  </table>
+
+  <h2>Engagement Terms</h2>
+
+  <ul>
+    <li><strong>Duration:</strong> 12-month initial engagement, auto-renewing month-to-month after.</li>
+    <li><strong>Systems build payment:</strong> 50 percent at signing, 25 percent at Day 30, 25 percent at Day 60.</li>
+    <li><strong>Retainer payment:</strong> Net 5, invoiced first business day of each month.</li>
+    <li><strong>Media spend:</strong> Billed directly to Cirilo's card on each ad platform (Google Ads, Meta, Houzz, etc.). No agency markup on media at Tier 2.</li>
+    <li><strong>Performance review:</strong> Quarterly business review with go / no-go decision at Day 90 and Day 180.</li>
+    <li><strong>90-day mutual kill clause:</strong> Either party may exit with 30 days' notice within the first 90 days if the program is not earning its keep. After Day 90, 60 days' notice.</li>
+    <li><strong>Ownership:</strong> All accounts (Google Ads, Meta, GA4, GBP, Houzz, domain, CMS) remain owned by Cirilo. Mark is granted admin access for the duration.</li>
+    <li><strong>Reporting cadence:</strong> Weekly Slack or email summary, monthly dashboard, quarterly business review.</li>
+  </ul>
+
+  <h2>Investment Summary</h2>
+
+  <table>
+    <tr>
+      <th>Line Item</th>
+      <th>Tier 1</th>
+      <th>Tier 2</th>
+      <th>Tier 3</th>
+    </tr>
+    <tr>
+      <td>Systems build (one-time)</td>
+      <td>$38,500</td>
+      <td><strong>$72,500</strong></td>
+      <td>$118,000</td>
+    </tr>
+    <tr>
+      <td>Monthly retainer</td>
+      <td>$8,500</td>
+      <td><strong>$14,500</strong></td>
+      <td>$22,000</td>
+    </tr>
+    <tr>
+      <td>Monthly media (paid)</td>
+      <td>$7,500</td>
+      <td><strong>$18,000</strong></td>
+      <td>$36,000</td>
+    </tr>
+    <tr>
+      <td>Media management fee</td>
+      <td>included</td>
+      <td><strong>none at Tier 2</strong></td>
+      <td>12% of media (~$4,320)</td>
+    </tr>
+    <tr>
+      <td><strong>Year 1 total</strong></td>
+      <td><strong>~$230,500</strong></td>
+      <td><strong>~$486,500</strong></td>
+      <td><strong>~$801,840</strong></td>
+    </tr>
+    <tr>
+      <td>Target signed contracts</td>
+      <td>10 to 18</td>
+      <td>22 to 32</td>
+      <td>32 to 50+</td>
+    </tr>
+    <tr>
+      <td>Year 1 pool revenue (at $225K AOV)</td>
+      <td>$2.25M to $4.05M</td>
+      <td>$4.95M to $7.20M</td>
+      <td>$7.20M to $11.25M</td>
+    </tr>
+  </table>
+
+  <h2>Why Mark</h2>
+
+  <p>Mark Gabrielli operates as a fractional CMO under markcmo.com. He has built and run go-to-market for high-ticket service businesses across home services, financial services, and luxury hospitality. Specialty: turning beautiful brands that nobody can find into category leaders in their market. He is not an agency. There is no junior account team. The work in this proposal is his work.</p>
+
+  <p>Independent operations support: WETYR Corporation handles execution capacity (content production, ad ops, web build, partnership outreach). Mark is the strategy, the partner-facing relationship, and the accountable principal on every deliverable.</p>
+
+  <h2>Next Steps</h2>
+
+  <ol>
+    <li><strong>Discovery call</strong> (60 minutes, free): confirm AOV assumption, revenue goal, current pipeline, capital available for systems build, tier selection.</li>
+    <li><strong>Letter of intent + 50 percent systems build deposit</strong>: locks the start date.</li>
+    <li><strong>Day 0 kickoff</strong>: 90-minute working session with Ramon and Tiffany to capture brand voice, product details, project archive, partnership wishlist.</li>
+    <li><strong>Days 1 to 30</strong>: trust scaffolding ships.</li>
+    <li><strong>Day 30 review</strong>: green-light Day 31 to 90 acquisition turn-on.</li>
+  </ol>
+
+  <div class="sign-zone">
+    <h3>Authorization to Proceed</h3>
+    <p style="opacity: 0.85;">Signing below authorizes the engagement tier selected and the corresponding systems build deposit. Tier may be upgraded at any quarterly review without penalty.</p>
+    <div class="sign-grid">
+      <div>
+        <div class="sign-line">&nbsp;</div>
+        <div class="sign-label">Ramon Cirilo &nbsp;|&nbsp; Owner</div>
+        <div class="sign-line" style="margin-top: 28px;">&nbsp;</div>
+        <div class="sign-label">Tiffany Cirilo &nbsp;|&nbsp; Owner</div>
+        <div class="sign-line" style="margin-top: 28px;">&nbsp;</div>
+        <div class="sign-label">Tier Selected (1 / 2 / 3)</div>
+      </div>
+      <div>
+        <div class="sign-line">&nbsp;</div>
+        <div class="sign-label">Mark Gabrielli &nbsp;|&nbsp; Fractional CMO</div>
+        <div class="sign-line" style="margin-top: 28px;">&nbsp;</div>
+        <div class="sign-label">Date</div>
+        <div class="sign-line" style="margin-top: 28px;">&nbsp;</div>
+        <div class="sign-label">Start Date (Day 0)</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="footer">
+    Prepared by Mark Gabrielli &nbsp;|&nbsp; markcmo.com &nbsp;|&nbsp; Private &amp; Confidential
+  </div>
+
+</div>
+
+</body>
+</html>

@@ -389,6 +389,100 @@ export async function onRequest(context) {
         `<script type="application/ld+json">${speakableSchema}</script>\n</head>`);
     }
 
+    // ── City/Service schema (brand-strategy-miami-fl pattern) ────────────────
+    // Inject Service + BreadcrumbList for programmatic city pages.
+    // Detection: last path segment is a 2-letter US state abbreviation.
+    const _US_STATES = {FL:'Florida',TX:'Texas',CA:'California',NY:'New York',
+      GA:'Georgia',IL:'Illinois',PA:'Pennsylvania',OH:'Ohio',NC:'North Carolina',
+      AZ:'Arizona',WA:'Washington',MA:'Massachusetts',CO:'Colorado',TN:'Tennessee',
+      MN:'Minnesota',MI:'Michigan',NJ:'New Jersey',VA:'Virginia',OR:'Oregon',
+      MO:'Missouri',WI:'Wisconsin',MD:'Maryland',SC:'South Carolina',
+      AL:'Alabama',KY:'Kentucky',LA:'Louisiana',OK:'Oklahoma',CT:'Connecticut',
+      UT:'Utah',IA:'Iowa',NV:'Nevada',AR:'Arkansas',KS:'Kansas',MS:'Mississippi',
+      NM:'New Mexico',NE:'Nebraska',ID:'Idaho',WV:'West Virginia',HI:'Hawaii',
+      ME:'Maine',NH:'New Hampshire',RI:'Rhode Island',MT:'Montana',DE:'Delaware',
+      SD:'South Dakota',ND:'North Dakota',AK:'Alaska',VT:'Vermont',WY:'Wyoming',DC:'DC'};
+    const _pParts   = p.split('-');
+    const _lastSeg  = _pParts[_pParts.length - 1];
+    const _stAbbr   = _lastSeg.toUpperCase();
+    if (_pParts.length >= 3 && _US_STATES[_stAbbr] && !html.includes('"Service"')) {
+      const _citySlug = _pParts[_pParts.length - 2];
+      const _svcSlug  = _pParts.slice(0, -2).join('-');
+      const _cityName = _citySlug.replace(/-/g,' ').replace(/\b\w/g,c=>c.toUpperCase());
+      const _svcName  = _svcSlug.replace(/-/g,' ').replace(/\b\w/g,c=>c.toUpperCase());
+      const _stName   = _US_STATES[_stAbbr];
+      const _cityServiceSchema = JSON.stringify({
+        "@context":"https://schema.org",
+        "@graph":[
+          {
+            "@type":"Service",
+            "@id":`https://markcmo.com/${p}#service`,
+            "name":`${_svcName} in ${_cityName}, ${_stName}`,
+            "description":`Expert ${_svcName.toLowerCase()} for businesses in ${_cityName}, ${_stName}. Delivered by Mark Gabrielli, Fractional CMO with 15+ years of executive marketing leadership.`,
+            "url":`https://markcmo.com/${p}`,
+            "provider":{"@id":"https://markcmo.com/#mark-gabrielli"},
+            "areaServed":{"@type":"City","name":_cityName,"containedInPlace":{"@type":"State","name":_stName,"containedInPlace":{"@type":"Country","name":"United States"}}},
+            "category":"Marketing Consulting",
+            "serviceType":_svcName,
+            "offers":{"@type":"Offer","priceCurrency":"USD","priceRange":"$8,000-$20,000","availability":"https://schema.org/InStock"}
+          },
+          {
+            "@type":"BreadcrumbList",
+            "@id":`https://markcmo.com/${p}#breadcrumb`,
+            "itemListElement":[
+              {"@type":"ListItem","position":1,"name":"Home","item":"https://markcmo.com/"},
+              {"@type":"ListItem","position":2,"name":_svcName,"item":`https://markcmo.com/${_svcSlug}`},
+              {"@type":"ListItem","position":3,"name":`${_cityName}, ${_stName}`,"item":`https://markcmo.com/${p}`}
+            ]
+          }
+        ]
+      });
+      html = html.replace('</head>',
+        `<script type="application/ld+json">${_cityServiceSchema}</script>\n</head>`);
+    }
+
+    // ── BreadcrumbList for all other pages ────────────────────────────────────
+    // Non-city pages get a simple 2-level breadcrumb for SERP display.
+    if (!html.includes('"BreadcrumbList"') && p !== 'index') {
+      const _h1m = html.match(/<h1[^>]*>([^<]+)<\/h1>/i);
+      const _pgTitle = _h1m
+        ? _h1m[1].trim()
+        : p.replace(/-/g,' ').replace(/\b\w/g,c=>c.toUpperCase());
+      const _bcSchema = JSON.stringify({
+        "@context":"https://schema.org",
+        "@type":"BreadcrumbList",
+        "@id":`https://markcmo.com/${p}#breadcrumb`,
+        "itemListElement":[
+          {"@type":"ListItem","position":1,"name":"Home","item":"https://markcmo.com/"},
+          {"@type":"ListItem","position":2,"name":_pgTitle,"item":`https://markcmo.com/${p}`}
+        ]
+      });
+      html = html.replace('</head>',
+        `<script type="application/ld+json">${_bcSchema}</script>\n</head>`);
+    }
+
+    // ── E-E-A-T author byline ─────────────────────────────────────────────────
+    // Inject a visible "By Mark Gabrielli" attribution line immediately after the
+    // first <h1> on content pages. Signals authorship to GSC and AI crawlers.
+    // Skipped on portal/sign/admin paths (handled upstream by shouldInjectChrome).
+    if (shouldInjectChrome(p) &&
+        !html.includes('data-eeat-byline="v1"') &&
+        !html.match(/<[^>]*class=["'][^"']*\bauthor\b/i) &&
+        !html.match(/\bBy\s+Mark\s+Gabrielli/i)) {
+      const _byline = '<div data-eeat-byline="v1" style="display:flex;align-items:center;' +
+        'gap:10px;margin:0.35rem 0 1.75rem;padding-left:12px;border-left:3px solid #c8001e;' +
+        'font-size:0.82rem;color:#666;line-height:1.4">' +
+        '<img src="/assets/mark-gabrielli.jpg" alt="Mark Gabrielli" loading="lazy" ' +
+        'width="32" height="32" style="border-radius:50%;flex-shrink:0;object-fit:cover">' +
+        '<span>By <strong style="color:#222">Mark Gabrielli</strong> &middot; ' +
+        'Fractional CMO &amp; COO &middot; Last updated: May 2026</span></div>';
+      if (/<\/h1>/i.test(html)) {
+        html = html.replace(/(<\/h1>)/i, '$1' + _byline);
+      } else if (/<main\b[^>]*>/i.test(html)) {
+        html = html.replace(/(<main\b[^>]*>)/i, '$1' + _byline);
+      }
+    }
+
     return new Response(html, {
       status: 200,
       headers: {
