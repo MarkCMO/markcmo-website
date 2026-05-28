@@ -27,7 +27,8 @@
   /* ── Text ── */
   --text:        #1E293B;
   --text-mid:    #64748B;
-  --text-light:  #94A3B8;
+  /* Was #94A3B8 (3.0:1 on white, fails AA body). Lifted to #6B7280 (4.85:1). */
+  --text-light:  #6B7280;
   --text-white:  #F8FAFC;
 
   /* ── Legacy aliases (keep HTML working) ── */
@@ -54,8 +55,12 @@
   --card-border: rgba(255,255,255,0.08);
 
   /* ── Dark text scale (for magnet/dl-* and about page Outfit font templates) ── */
-  --text2:       rgba(255,255,255,0.65);
-  --text3:       rgba(255,255,255,0.40);
+  /* tier 2 lifted slightly to keep hierarchy after tier 3 floor raise */
+  --text2:       rgba(255,255,255,0.75);
+  /* Was rgba(255,255,255,0.40) (~3.7:1 on --bg, fails AA body). Lifted to 0.60
+     (~6.7:1) — fixes footer/breadcrumb/note/test-role copy across all pages
+     while keeping visible hierarchy below tier 2. */
+  --text3:       rgba(255,255,255,0.60);
 
   /* ── Cyan accent (about page complementary color) ── */
   --cyan:        #00C4CC;
@@ -473,7 +478,7 @@ footer::before { display: none; content: none; }
   width: 36px; height: 36px; border-radius: var(--r-sm);
   border: 1px solid rgba(255,255,255,0.12);
   display: flex; align-items: center; justify-content: center;
-  color: rgba(255,255,255,0.45); text-decoration: none;
+  color: rgba(255,255,255,0.65); text-decoration: none;
   font-size: 0.8rem; font-weight: 700;
   transition: all 0.2s;
 }
@@ -488,7 +493,7 @@ footer::before { display: none; content: none; }
 }
 .footer-col ul { list-style: none; }
 .footer-col li { margin-bottom: 0.6rem; }
-.footer-col a { font-size: 0.82rem; color: rgba(255,255,255,0.45); text-decoration: none; transition: color 0.2s; }
+.footer-col a { font-size: 0.82rem; color: rgba(255,255,255,0.65); text-decoration: none; transition: color 0.2s; }
 .footer-col a:hover { color: var(--text-white); }
 .footer-bottom {
   max-width: 1200px; margin: 0 auto; padding-top: 2rem;
@@ -508,7 +513,7 @@ footer::before { display: none; content: none; }
 }
 .footer-brand-col .footer-logo { font-family: 'Bebas Neue', sans-serif; font-size: 1.6rem; color: var(--text-white); }
 .footer-brand-col .footer-logo span { color: var(--accent); }
-.footer-brand-col .footer-desc { font-size: 0.82rem; color: rgba(255,255,255,0.45); line-height: 1.7; margin: 0.7rem 0 1rem; }
+.footer-brand-col .footer-desc { font-size: 0.82rem; color: rgba(255,255,255,0.65); line-height: 1.7; margin: 0.7rem 0 1rem; }
 .footer-brand-tags { display: flex; flex-wrap: wrap; gap: 0.4rem; }
 .footer-brand-tags span {
   font-family: 'DM Mono', monospace; font-size: 0.58rem;
@@ -518,13 +523,13 @@ footer::before { display: none; content: none; }
   background: rgba(37,99,235,0.08);
 }
 .footer-col ul { list-style: none; display: flex; flex-direction: column; gap: 0.5rem; }
-.footer-col ul li a { font-size: 0.83rem; color: rgba(255,255,255,0.45); text-decoration: none; transition: color 0.2s; }
+.footer-col ul li a { font-size: 0.83rem; color: rgba(255,255,255,0.65); text-decoration: none; transition: color 0.2s; }
 .footer-col ul li a:hover { color: var(--text-white); }
 .footer-bottom { max-width: 1440px; margin: 0 auto; padding: 1.4rem 4vw; display: flex; flex-direction: column; gap: 0.3rem; }
 .footer-bottom p { font-size: 0.75rem; color: rgba(255,255,255,0.2); }
 .footer-bottom-tags { font-family: 'DM Mono', monospace; font-size: 0.6rem; letter-spacing: 0.06em; color: rgba(201,168,76,0.25) !important; }
 .footer-bottom-social { font-family: 'DM Mono', monospace; font-size: 0.6rem; letter-spacing: 0.06em; color: rgba(255,255,255,0.2) !important; }
-.footer-bottom-social a { color: rgba(255,255,255,0.3); text-decoration: none; transition: color 0.2s; }
+.footer-bottom-social a { color: rgba(255,255,255,0.55); text-decoration: none; transition: color 0.2s; }
 .footer-bottom-social a:hover { color: var(--accent); }
 .footer-bottom-social span { margin: 0 0.3rem; }
 .footer-certifications { display: flex; flex-wrap: wrap; gap: 0.4rem; margin-top: 1rem; }
@@ -690,7 +695,7 @@ footer::before { display: none; content: none; }
 .article-meta { display: flex; gap: 2rem; flex-wrap: wrap; margin-bottom: 1.5rem; }
 .article-meta-item {
   font-family: 'DM Mono', monospace; font-size: 0.65rem;
-  color: rgba(255,255,255,0.45); letter-spacing: 0.1em; text-transform: uppercase;
+  color: rgba(255,255,255,0.65); letter-spacing: 0.1em; text-transform: uppercase;
 }
 .article-hero p.lead { font-size: 1.1rem; line-height: 1.8; color: rgba(255,255,255,0.75); max-width: 700px; }
 
@@ -848,7 +853,7 @@ footer::before { display: none; content: none; }
 .sp-stat-label,.sp-hs-l,.sp-stat-l {
   font-family:'DM Mono',monospace; font-size:0.6rem;
   letter-spacing:0.14em; text-transform:uppercase;
-  color:rgba(255,255,255,0.45); display:block;
+  color:rgba(255,255,255,0.65); display:block;
 }
 .sp-hero-cta { display:flex; gap:1rem; flex-wrap:wrap; align-items:center; }
 
@@ -1636,7 +1641,7 @@ a:focus-visible, button:focus-visible { outline:2px solid var(--blue); outline-o
 .sp-list li { color: rgba(255,255,255,0.78) !important; }
 .sp-list li strong { color: #fff !important; }
 .sp-list li::before { color: var(--accent) !important; }
-.sp-note { color: rgba(255,255,255,0.45) !important; border-left-color: rgba(201,168,76,0.3) !important; }
+.sp-note { color: rgba(255,255,255,0.65) !important; border-left-color: rgba(201,168,76,0.3) !important; }
 
 /* ── sp-card ── */
 .sp-card {
@@ -1790,7 +1795,7 @@ a:focus-visible, button:focus-visible { outline:2px solid var(--blue); outline-o
 .ba-article section li strong { color: #ffffff !important; }
 .ba-header h1   { color: #ffffff !important; }
 .ba-intro { background: rgba(201,168,76,0.08) !important; border-left-color: var(--accent) !important; color: rgba(255,255,255,0.85) !important; }
-.ba-breadcrumb  { color: rgba(255,255,255,0.45) !important; }
+.ba-breadcrumb  { color: rgba(255,255,255,0.65) !important; }
 
 /* ── Blog index / cards ── */
 .blog-card, .blog-post {
@@ -1828,7 +1833,7 @@ select, textarea {
   border-color: rgba(255,255,255,0.12) !important;
   color: #ffffff !important;
 }
-.nf-input::placeholder, input::placeholder, textarea::placeholder { color: rgba(255,255,255,0.35) !important; }
+.nf-input::placeholder, input::placeholder, textarea::placeholder { color: rgba(255,255,255,0.55) !important; }
 .nf-input:focus, input:focus, select:focus, textarea:focus {
   border-color: var(--accent) !important;
   box-shadow: 0 0 0 3px rgba(201,168,76,0.15) !important;
@@ -1932,7 +1937,7 @@ h2 span                     { color: var(--accent) !important; }
   border-bottom: 1px solid rgba(255,255,255,0.06) !important;
 }
 .sp-cs-row:last-child        { border-bottom: none !important; }
-.sp-cs-label                 { font-family: 'DM Mono', monospace; font-size: 0.68rem; letter-spacing: 0.1em; text-transform: uppercase; color: rgba(255,255,255,0.45) !important; min-width: 100px; flex-shrink: 0; }
+.sp-cs-label                 { font-family: 'DM Mono', monospace; font-size: 0.68rem; letter-spacing: 0.1em; text-transform: uppercase; color: rgba(255,255,255,0.65) !important; min-width: 100px; flex-shrink: 0; }
 .sp-cs-val                   { font-size: 0.9rem; color: rgba(255,255,255,0.8) !important; }
 .sp-cs-result .sp-cs-val     { color: var(--accent) !important; font-weight: 600; }
 
@@ -1963,7 +1968,7 @@ h2 span                     { color: var(--accent) !important; }
 .test-stars                  { color: var(--accent) !important; font-size: 0.9rem; letter-spacing: 0.1em; margin-bottom: 0.75rem; }
 .test-text                   { font-size: 0.92rem; line-height: 1.75; color: rgba(255,255,255,0.8) !important; font-style: italic; margin-bottom: 1rem; }
 .test-name                   { font-weight: 700; color: #ffffff !important; display: block; }
-.test-role                   { font-size: 0.78rem; color: rgba(255,255,255,0.45) !important; }
+.test-role                   { font-size: 0.78rem; color: rgba(255,255,255,0.65) !important; }
 
 /* ═══════════════════════════════════════════════════════
    MISSING COMPONENT STYLES — comparison table, final CTA,
@@ -2007,7 +2012,7 @@ h2 span                     { color: var(--accent) !important; }
 }
 .sp-cta-footnote {
   font-family: 'DM Mono', monospace; font-size: 0.62rem;
-  letter-spacing: 0.08em; color: rgba(255,255,255,0.3) !important;
+  letter-spacing: 0.08em; color: rgba(255,255,255,0.55) !important;
   text-transform: uppercase; margin-top: 1rem !important;
   display: block;
 }
@@ -2229,7 +2234,7 @@ h2 span                     { color: var(--accent) !important; }
   font-size: 0.62rem;
   letter-spacing: 0.1em;
   text-transform: uppercase;
-  color: rgba(255,255,255,0.35);
+  color: rgba(255,255,255,0.55);
 }
 .sp-cta-closer-trust span { white-space: nowrap; }
 
@@ -2296,7 +2301,7 @@ h2 span                     { color: var(--accent) !important; }
   font-size: 0.6rem;
   letter-spacing: 0.12em;
   text-transform: uppercase;
-  color: rgba(255,255,255,0.35);
+  color: rgba(255,255,255,0.55);
   margin-top: 0.15rem;
 }
 
@@ -2314,7 +2319,7 @@ h2 span                     { color: var(--accent) !important; }
 .sp-process h2 { color: #ffffff !important; margin-bottom: 0.5rem !important; }
 .sp-process-sub {
   font-size: 0.88rem;
-  color: rgba(255,255,255,0.45);
+  color: rgba(255,255,255,0.65);
   margin-bottom: 2rem;
 }
 .sp-process-steps {
@@ -2401,13 +2406,13 @@ h2 span                     { color: var(--accent) !important; }
 .footer-logo-text span { color: var(--accent, #C9A84C); }
 .footer-about {
   font-size: 0.825rem; line-height: 1.75;
-  color: var(--text3, rgba(255,255,255,0.45));
+  color: var(--text3, rgba(255,255,255,0.65));
   margin-bottom: 1.25rem; max-width: 300px;
 }
 .footer-chips { display: flex; flex-wrap: wrap; gap: 0.4rem; margin-bottom: 1.25rem; }
 .footer-chip {
   font-size: 0.63rem; font-weight: 600; letter-spacing: 0.07em;
-  text-transform: uppercase; color: var(--text3, rgba(255,255,255,0.45));
+  text-transform: uppercase; color: var(--text3, rgba(255,255,255,0.65));
   border: 1px solid var(--border, rgba(255,255,255,0.08));
   padding: 0.25rem 0.65rem; border-radius: 4px;
 }
@@ -2416,7 +2421,7 @@ h2 span                     { color: var(--accent) !important; }
   width: 34px; height: 34px; border-radius: 8px;
   background: var(--bg3, rgba(255,255,255,0.05));
   border: 1px solid var(--border, rgba(255,255,255,0.08));
-  color: var(--text3, rgba(255,255,255,0.45));
+  color: var(--text3, rgba(255,255,255,0.65));
   display: flex; align-items: center; justify-content: center;
   font-size: 0.8rem; font-weight: 700; transition: all 0.15s;
   text-decoration: none;
@@ -2424,12 +2429,12 @@ h2 span                     { color: var(--accent) !important; }
 .footer-soc:hover { background: var(--accent, #C9A84C); border-color: var(--accent, #C9A84C); color: #0A1628; }
 .footer-col h4 {
   font-size: 0.68rem; font-weight: 700; letter-spacing: 0.13em;
-  text-transform: uppercase; color: var(--text3, rgba(255,255,255,0.45));
+  text-transform: uppercase; color: var(--text3, rgba(255,255,255,0.65));
   margin-bottom: 1rem;
 }
 .footer-col ul { display: flex; flex-direction: column; gap: 0.55rem; list-style: none; padding: 0; margin: 0; }
 .footer-col ul li a {
-  font-size: 0.8125rem; color: var(--text3, rgba(255,255,255,0.45));
+  font-size: 0.8125rem; color: var(--text3, rgba(255,255,255,0.65));
   transition: color 0.15s; text-decoration: none;
 }
 .footer-col ul li a:hover { color: #fff; }
@@ -2441,7 +2446,7 @@ h2 span                     { color: var(--accent) !important; }
 }
 .footer-band-label {
   font-size: 0.65rem; font-weight: 700; letter-spacing: 0.14em;
-  text-transform: uppercase; color: var(--text3, rgba(255,255,255,0.35));
+  text-transform: uppercase; color: var(--text3, rgba(255,255,255,0.55));
   margin-bottom: 0.85rem;
 }
 .footer-tag-row { display: flex; flex-wrap: wrap; gap: 0.45rem; }
@@ -2463,9 +2468,9 @@ h2 span                     { color: var(--accent) !important; }
   display: flex; justify-content: space-between; align-items: center;
   flex-wrap: wrap; gap: 0.5rem;
 }
-.footer-copy { font-size: 0.78rem; color: var(--text3, rgba(255,255,255,0.35)); }
+.footer-copy { font-size: 0.78rem; color: var(--text3, rgba(255,255,255,0.55)); }
 .footer-bar-links { display: flex; gap: 1.25rem; flex-wrap: wrap; }
-.footer-bar-links a { font-size: 0.78rem; color: var(--text3, rgba(255,255,255,0.35)); transition: color 0.15s; text-decoration: none; }
+.footer-bar-links a { font-size: 0.78rem; color: var(--text3, rgba(255,255,255,0.55)); transition: color 0.15s; text-decoration: none; }
 .footer-bar-links a:hover { color: #fff; }
 @media (max-width: 1100px) {
   .footer-main { grid-template-columns: 1fr 1fr 1fr 1fr; }

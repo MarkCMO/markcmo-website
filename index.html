@@ -425,7 +425,9 @@ ul { list-style: none; }
   --cyan:    #00C4CC;
   --text:    #FFFFFF;
   --text2:   #A1A1AA;
-  --text3:   #52525B;
+  /* Lifted from #52525B (2.4:1 on --bg, fails WCAG AA body) to #71717A (4.6:1
+     on --bg, passes AA body). Fixes 30 small-text instances across the page. */
+  --text3:   #71717A;
 }
 
 /* ─── NAV ─── */
@@ -1219,7 +1221,9 @@ ul { list-style: none; }
 .proof-card:hover::before { opacity: 1; }
 .proof-card-industry {
   font-size: 0.72rem; font-weight: 700; letter-spacing: 0.1em;
-  color: var(--cyan); text-transform: uppercase; margin-bottom: 0.75rem;
+  /* Was var(--cyan) #00C4CC at 11.5px against #0A0F2C navy = ~4.4:1, hard
+     to read at this size. White gives ~16:1 — works as small-caps eyebrow. */
+  color: #FFFFFF; text-transform: uppercase; margin-bottom: 0.75rem;
 }
 .proof-card-result {
   font-family: 'Outfit', sans-serif;
@@ -2516,11 +2520,11 @@ footer { background:var(--bg2); border-top:1px solid var(--border); }
     #li-band .li-eyebrow-dot{width:6px;height:6px;border-radius:50%;background:#C9A84C;animation:liPulse 2s ease-in-out infinite;}
     @keyframes liPulse{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.4;transform:scale(.65)}}
     #li-band .li-name{font-family:'Outfit',sans-serif;font-size:1.35rem;font-weight:800;color:#f0ede8;line-height:1.2;margin-bottom:4px;}
-    #li-band .li-title{font-size:.85rem;color:#777;line-height:1.4;}
+    #li-band .li-title{font-size:.85rem;color:#A1A1AA;line-height:1.4;} /* was #777 (4.3:1) — #A1A1AA = 8:1 on #0a0a0d */
     #li-band .li-stats{display:flex;gap:28px;flex-wrap:wrap;}
     #li-band .li-stat{}
     #li-band .li-stat-val{font-family:'Outfit',sans-serif;font-size:1.6rem;font-weight:900;color:#C9A84C;line-height:1;}
-    #li-band .li-stat-label{font-size:.7rem;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:#555;margin-top:3px;}
+    #li-band .li-stat-label{font-size:.7rem;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:#9CA3AF;margin-top:3px;} /* was #555 (2.6:1 fails AA) — #9CA3AF = 7.1:1 */
     #li-band .li-btns{display:flex;gap:10px;flex-wrap:wrap;align-items:center;}
     #li-band .li-btn-follow{display:inline-flex;align-items:center;gap:8px;padding:13px 24px;background:#0A66C2;color:#fff;border-radius:8px;font-size:.8rem;font-weight:700;letter-spacing:.04em;text-transform:uppercase;text-decoration:none;transition:background .15s;white-space:nowrap;}
     #li-band .li-btn-follow:hover{background:#0856a7;}
@@ -2568,15 +2572,15 @@ footer { background:var(--bg2); border-top:1px solid var(--border); }
 .mc-contact-proof-item{display:flex;align-items:center;gap:10px;font-size:.85rem;color:#94A3B8}
 .mc-contact-proof-item span:first-child{color:#C9A84C;font-weight:700;font-size:1rem;flex-shrink:0}
 .mc-contact-direct{background:rgba(201,168,76,.08);border:1px solid rgba(201,168,76,.2);border-radius:8px;padding:14px 18px}
-.mc-contact-direct p{font-size:.75rem;color:#666;text-transform:uppercase;letter-spacing:.08em;margin:0 0 6px}
+.mc-contact-direct p{font-size:.75rem;color:#94A3B8;text-transform:uppercase;letter-spacing:.08em;margin:0 0 6px} /* was #666 (3.4:1) — #94A3B8 = 6.5:1 */
 .mc-contact-direct a{color:#C9A84C;font-weight:700;text-decoration:none;font-size:.88rem}
 .mc-form-card{background:#111;border:1px solid #2a2a2a;border-radius:12px;padding:28px}
 .mc-form-card h3{font-size:1.05rem;font-weight:700;color:#fff;margin:0 0 4px}
-.mc-form-card>p{font-size:.82rem;color:#64748B;margin:0 0 20px}
+.mc-form-card>p{font-size:.82rem;color:#94A3B8;margin:0 0 20px} /* was #64748B (3.0:1 on #111) — #94A3B8 = 6.5:1 */
 .mc-field{margin-bottom:12px}
 .mc-field input,.mc-field textarea,.mc-field select{width:100%;padding:12px 14px;background:#1a1a1a;border:1px solid #2a2a2a;border-radius:6px;color:#e8e8e8;font-size:.88rem;font-family:inherit;box-sizing:border-box;transition:border-color .2s;outline:none}
 .mc-field input:focus,.mc-field textarea:focus,.mc-field select:focus{border-color:#C9A84C}
-.mc-field input::placeholder,.mc-field textarea::placeholder{color:#3a3a3a}
+.mc-field input::placeholder,.mc-field textarea::placeholder{color:#6B7280} /* was #3a3a3a (1.6:1 invisible) — #6B7280 = 3.0:1 meets UI placeholder threshold */
 .mc-field textarea{resize:vertical;min-height:80px}
 .mc-field select{appearance:none;cursor:pointer;color:#e8e8e8}
 .mc-field select option{background:#1a1a1a}
@@ -2633,7 +2637,7 @@ footer { background:var(--bg2); border-top:1px solid var(--border); }
           </div>
           <div class="mc-field"><textarea name="message" placeholder="Biggest revenue challenge right now? (optional)"></textarea></div>
           <button type="submit" id="mc-btn" class="mc-submit">Book Free Strategy Call &#8594;</button>
-          <div style="margin-top:8px;font-size:.72rem;color:#3a3a3a;text-align:center">No spam. No sales team. Just Mark.</div>
+          <div style="margin-top:8px;font-size:.72rem;color:#9CA3AF;text-align:center">No spam. No sales team. Just Mark.</div>
         </form>
       </div>
       <div id="mc-success" class="mc-success">

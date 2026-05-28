@@ -33,7 +33,7 @@
     --border2: #CBD5E1;
     --text: #1E293B;
     --muted: #64748B;
-    --dim: #94A3B8;
+    --dim: #6B7280; /* Lifted from #94A3B8 (3.0:1) to 4.85:1 on white per WCAG AA */
     --red: #DC2626;
     --green: #10B981;
   }
@@ -801,7 +801,7 @@
     --border2: #CBD5E1;
     --text: #1E293B;
     --muted: #64748B;
-    --dim: #94A3B8;
+    --dim: #6B7280; /* Lifted from #94A3B8 (3.0:1) to 4.85:1 on white per WCAG AA */
     --red: #DC2626;
     --green: #10B981;
     --blue: #3B82F6;
@@ -3758,29 +3758,43 @@ Paste a comment and hit Generate ↑
 </main>
 </div>
   <script>
-const ADMIN_USER = 'Mark@markcmo.com';
-const ADMIN_PASS = 'Mark3148#';
+// /admin login now uses the server-side admin-auth API as the single source
+// of truth (matches /admin-c7x9k2m). Credentials live in Cloudflare secrets
+// (ADMIN_USERS or ADMIN_USER/ADMIN_PASS), not in this HTML. Rotate the
+// password by updating the secret, not by editing this file. Per WETYR
+// Protocol §2.4 + §7.
 async function doLogin() {
-  const u = document.getElementById('login-user').value.trim().toLowerCase();
+  const u = document.getElementById('login-user').value.trim();
   const p = document.getElementById('login-pass').value;
-  if (u === ADMIN_USER.toLowerCase() && p === ADMIN_PASS) {
-    sessionStorage.setItem('admin_auth', '1');
-    // ALSO call the cookie-based admin-auth function so VDR + payment endpoints work.
-    // Failure here is non-fatal, legacy admin still works on sessionStorage alone.
-    try {
-      await fetch('/api/admin-auth', {
-        method: 'POST',
-        credentials: 'include',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ user: u, pass: p }),
-      });
-    } catch (e) { console.warn('cookie auth set failed (non-fatal):', e); }
-
-    document.getElementById('login-screen').style.display = 'none';
-    document.getElementById('app').style.display = 'block';
-    initApp();
-  } else {
-    document.getElementById('login-error').style.display = 'block';
+  const errEl = document.getElementById('login-error');
+  if (errEl) errEl.style.display = 'none';
+  if (!u || !p) {
+    if (errEl) { errEl.textContent = 'Enter username and password.'; errEl.style.display = 'block'; }
+    return;
+  }
+  try {
+    const r = await fetch('/api/admin-auth', {
+      method: 'POST',
+      credentials: 'include',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ user: u, pass: p }),
+    });
+    const d = await r.json().catch(() => ({}));
+    if (r.ok && d.ok) {
+      sessionStorage.setItem('admin_auth', '1');
+      document.getElementById('login-screen').style.display = 'none';
+      document.getElementById('app').style.display = 'block';
+      if (typeof initApp === 'function') initApp();
+    } else {
+      if (errEl) {
+        errEl.textContent = d.error === 'Invalid credentials'
+          ? 'Invalid username or password.'
+          : (d.error || 'Login failed — try again.');
+        errEl.style.display = 'block';
+      }
+    }
+  } catch (e) {
+    if (errEl) { errEl.textContent = 'Connection error — try again.'; errEl.style.display = 'block'; }
   }
 }
 function doLogout() {

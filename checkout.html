@@ -44,14 +44,14 @@
   .co-row.single { grid-template-columns: 1fr; }
   .co-input { background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.12); color: #fff; padding: 13px 14px; font-size: 0.95rem; border-radius: 4px; outline: none; font-family: inherit; width: 100%; }
   .co-input:focus { border-color: #C9A84C; }
-  .co-input::placeholder { color: rgba(255,255,255,0.4); }
+  .co-input::placeholder { color: rgba(255,255,255,0.55); }
   .co-label { display: block; font-size: 0.72rem; letter-spacing: 0.08em; color: rgba(255,255,255,0.55); text-transform: uppercase; margin-bottom: 6px; font-weight: 600; }
   #card-container { background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.12); border-radius: 4px; padding: 12px 14px; min-height: 52px; }
   #card-container.sq-focus { border-color: #C9A84C; }
   .co-submit { background: #C9A84C; color: #0A1628; border: none; padding: 16px 24px; font-weight: 900; font-size: 0.9rem; letter-spacing: 1.5px; text-transform: uppercase; cursor: pointer; border-radius: 4px; font-family: inherit; width: 100%; margin-top: 18px; transition: opacity 0.15s; }
   .co-submit:disabled { opacity: 0.5; cursor: not-allowed; }
   .co-submit:hover:not(:disabled) { background: #DFC06D; }
-  .co-trust { display: flex; align-items: center; gap: 16px; margin-top: 18px; font-size: 0.75rem; color: rgba(255,255,255,0.45); }
+  .co-trust { display: flex; align-items: center; gap: 16px; margin-top: 18px; font-size: 0.75rem; color: rgba(255,255,255,0.65); }
   .co-trust svg { width: 14px; height: 14px; flex-shrink: 0; }
   .co-status { margin-top: 18px; padding: 14px 18px; border-radius: 4px; font-size: 0.95rem; line-height: 1.6; }
   .co-status.ok { background: rgba(76,175,114,0.1); border: 1px solid rgba(76,175,114,0.3); color: #6BBE89; }
@@ -62,7 +62,7 @@
   .co-success-actions { display: flex; gap: 10px; margin-top: 18px; flex-wrap: wrap; }
   .co-btn-primary { background: #C9A84C; color: #0A1628; padding: 14px 26px; font-weight: 800; font-size: 0.85rem; letter-spacing: 1px; text-transform: uppercase; text-decoration: none; display: inline-block; border-radius: 4px; }
   .co-btn-ghost { background: transparent; border: 1px solid rgba(255,255,255,0.2); color: #fff; padding: 14px 26px; font-weight: 700; font-size: 0.85rem; letter-spacing: 1px; text-transform: uppercase; text-decoration: none; display: inline-block; border-radius: 4px; }
-  .co-meta { color: rgba(255,255,255,0.45); font-size: 0.85rem; margin-top: 8px; }
+  .co-meta { color: rgba(255,255,255,0.65); font-size: 0.85rem; margin-top: 8px; }
   a { color: #C9A84C; }
   @media (max-width: 600px) { .co-row { grid-template-columns: 1fr; } }
 </style>
@@ -109,7 +109,7 @@
     <div class="co-card">
       <div class="co-card-label">
         <span>Payment</span>
-        <span style="font-size:0.65rem;color:rgba(255,255,255,0.45);letter-spacing:0.1em;text-transform:none;">🔒 PCI-secure · Powered by Square</span>
+        <span style="font-size:0.65rem;color:rgba(255,255,255,0.65);letter-spacing:0.1em;text-transform:none;">🔒 PCI-secure · Powered by Square</span>
       </div>
       <label class="co-label">Card details</label>
       <div id="card-container"></div>
@@ -211,7 +211,7 @@ let payments, card;
         '.message-text': { color: '#f08a98' },
         '.message-text.is-error': { color: '#f08a98' },
         input: { color: '#ffffff', fontSize: '15px', fontFamily: 'Inter, sans-serif' },
-        'input::placeholder': { color: 'rgba(255,255,255,0.4)' },
+        'input::placeholder': { color: 'rgba(255,255,255,0.55)' },
       },
     });
     await card.attach('#card-container');

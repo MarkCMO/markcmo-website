@@ -866,10 +866,10 @@
 #li-band-about .li-ring{width:72px;height:72px;border-radius:50%;background:linear-gradient(135deg,#C9A84C,#8a5c20);display:flex;align-items:center;justify-content:center;font-size:24px;font-weight:900;color:#000;flex-shrink:0;box-shadow:0 0 0 3px rgba(201,168,76,.25),0 0 0 6px rgba(201,168,76,.08);}
 #li-band-about .li-eyebrow{font-size:10px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:#C9A84C;margin-bottom:6px;}
 #li-band-about .li-nm{font-size:1.35rem;font-weight:800;color:#f0ede8;margin-bottom:4px;}
-#li-band-about .li-tl{font-size:.85rem;color:#777;}
+#li-band-about .li-tl{font-size:.85rem;color:#A1A1AA;} /* was #777 (4.3:1) — #A1A1AA = 8:1 */
 #li-band-about .li-stats{display:flex;gap:28px;flex-wrap:wrap;}
 #li-band-about .li-sv{font-size:1.6rem;font-weight:900;color:#C9A84C;line-height:1;}
-#li-band-about .li-sl{font-size:.7rem;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:#555;margin-top:3px;}
+#li-band-about .li-sl{font-size:.7rem;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:#9CA3AF;margin-top:3px;} /* was #555 (2.6:1 fails AA) — #9CA3AF = 7.1:1 */
 #li-band-about .li-btns{display:flex;gap:10px;flex-wrap:wrap;}
 #li-band-about .li-f{display:inline-flex;align-items:center;gap:8px;padding:13px 24px;background:#0A66C2;color:#fff;border-radius:8px;font-size:.8rem;font-weight:700;letter-spacing:.04em;text-transform:uppercase;text-decoration:none;transition:background .15s;}
 #li-band-about .li-f:hover{background:#0856a7;}
@@ -912,15 +912,15 @@
 .mc-contact-proof-item{display:flex;align-items:center;gap:10px;font-size:.85rem;color:#94A3B8}
 .mc-contact-proof-item span:first-child{color:#C9A84C;font-weight:700;font-size:1rem;flex-shrink:0}
 .mc-contact-direct{background:rgba(201,168,76,.08);border:1px solid rgba(201,168,76,.2);border-radius:8px;padding:14px 18px}
-.mc-contact-direct p{font-size:.75rem;color:#666;text-transform:uppercase;letter-spacing:.08em;margin:0 0 6px}
+.mc-contact-direct p{font-size:.75rem;color:#94A3B8;text-transform:uppercase;letter-spacing:.08em;margin:0 0 6px} /* was #666 (3.4:1) — #94A3B8 = 6.5:1 */
 .mc-contact-direct a{color:#C9A84C;font-weight:700;text-decoration:none;font-size:.88rem}
 .mc-form-card{background:#111;border:1px solid #2a2a2a;border-radius:12px;padding:28px}
 .mc-form-card h3{font-size:1.05rem;font-weight:700;color:#fff;margin:0 0 4px}
-.mc-form-card>p{font-size:.82rem;color:#64748B;margin:0 0 20px}
+.mc-form-card>p{font-size:.82rem;color:#94A3B8;margin:0 0 20px} /* was #64748B (3.0:1 on #111) — #94A3B8 = 6.5:1 */
 .mc-field{margin-bottom:12px}
 .mc-field input,.mc-field textarea,.mc-field select{width:100%;padding:12px 14px;background:#1a1a1a;border:1px solid #2a2a2a;border-radius:6px;color:#e8e8e8;font-size:.88rem;font-family:inherit;box-sizing:border-box;transition:border-color .2s;outline:none}
 .mc-field input:focus,.mc-field textarea:focus,.mc-field select:focus{border-color:#C9A84C}
-.mc-field input::placeholder,.mc-field textarea::placeholder{color:#3a3a3a}
+.mc-field input::placeholder,.mc-field textarea::placeholder{color:#6B7280} /* was #3a3a3a (1.6:1 invisible) — #6B7280 = 3.0:1 meets UI placeholder threshold */
 .mc-field textarea{resize:vertical;min-height:80px}
 .mc-field select{appearance:none;cursor:pointer;color:#e8e8e8}
 .mc-field select option{background:#1a1a1a}
@@ -977,7 +977,7 @@
           </div>
           <div class="mc-field"><textarea name="message" placeholder="Biggest revenue challenge right now? (optional)"></textarea></div>
           <button type="submit" id="mc-btn" class="mc-submit">Book Free Strategy Call &#8594;</button>
-          <div style="margin-top:8px;font-size:.72rem;color:#3a3a3a;text-align:center">No spam. No sales team. Just Mark.</div>
+          <div style="margin-top:8px;font-size:.72rem;color:#9CA3AF;text-align:center">No spam. No sales team. Just Mark.</div>
         </form>
       </div>
       <div id="mc-success" class="mc-success">
