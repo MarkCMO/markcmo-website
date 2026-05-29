@@ -1,0 +1,471 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Cirilo Design + Build | Partnership, Outreach & PR Playbook</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex, nofollow, noarchive, nosnippet, noimageindex">
+<meta http-equiv="Cache-Control" content="no-store, no-cache, must-revalidate, private">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=Inter:wght@300;400;500;600;700&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --gold-dark: #AB7E37; --gold-mid: #D6BB89; --gold-light: #E3D3B2; --gold-pale: #F4ECDC;
+    --cream-bg: #FAF7F2; --white: #FFFFFF; --ink: #1A1A1A; --body: #2E2E34; --muted: #8F8F8F; --border: #E2E2E2;
+    --shadow: 0 8px 32px rgba(26, 26, 26, 0.06);
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: 'Inter', sans-serif; background: var(--cream-bg); color: var(--body); line-height: 1.65; font-size: 16px; }
+  .page { max-width: 980px; margin: 40px auto; background: var(--white); box-shadow: var(--shadow); padding: 80px 64px; }
+  h1, h2, h3, h4 { font-family: 'Cormorant Garamond', serif; color: var(--ink); font-weight: 500; line-height: 1.15; }
+  h1 { font-size: 3.4rem; margin-bottom: 0.4em; font-weight: 600; }
+  h2 { font-size: 2.2rem; margin-top: 2.4em; margin-bottom: 0.6em; padding-bottom: 0.4em; border-bottom: 1px solid var(--gold-light); }
+  h3 { font-size: 1.5rem; margin-top: 1.8em; margin-bottom: 0.5em; color: var(--gold-dark); }
+  h4 { font-size: 1rem; margin-top: 1.4em; margin-bottom: 0.4em; font-family: 'Inter', sans-serif; font-weight: 600; color: var(--ink); text-transform: uppercase; letter-spacing: 0.08em; }
+  p { margin-bottom: 1em; }
+  strong { color: var(--ink); font-weight: 600; }
+  ul, ol { margin: 0.5em 0 1.2em 1.4em; } li { margin-bottom: 0.4em; }
+
+  .brand-mark { text-align: center; margin-bottom: 56px; padding-bottom: 32px; border-bottom: 1px solid var(--border); }
+  .brand-mark .wordmark { font-family: 'Cormorant Garamond', serif; font-size: 3.2rem; font-weight: 600; letter-spacing: 0.18em; background: linear-gradient(135deg, #E5C2B0 0%, #D6BB89 35%, #F4D78C 65%, #AB7E37 100%); -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent; margin-bottom: 8px; }
+  .brand-mark .sub { font-family: 'DM Mono', monospace; font-size: 0.75rem; letter-spacing: 0.4em; color: var(--gold-dark); text-transform: uppercase; }
+  .doc-meta { font-family: 'DM Mono', monospace; font-size: 0.72rem; letter-spacing: 0.18em; text-transform: uppercase; color: var(--muted); text-align: center; margin-bottom: 56px; }
+  .hero-title { text-align: center; margin-bottom: 56px; }
+  .hero-title .eyebrow { font-family: 'DM Mono', monospace; font-size: 0.78rem; letter-spacing: 0.32em; color: var(--gold-dark); text-transform: uppercase; margin-bottom: 18px; }
+  .hero-title h1 { font-size: 3.4rem; margin-bottom: 0.3em; }
+  .hero-title .lede { font-family: 'Cormorant Garamond', serif; font-size: 1.4rem; font-style: italic; color: var(--body); max-width: 720px; margin: 0 auto; }
+
+  table { width: 100%; border-collapse: collapse; margin: 18px 0; font-size: 0.88rem; }
+  th { background: var(--ink); color: var(--white); padding: 12px 14px; text-align: left; font-family: 'DM Mono', monospace; font-size: 0.68rem; letter-spacing: 0.1em; text-transform: uppercase; font-weight: 500; }
+  td { padding: 11px 14px; border-bottom: 1px solid var(--border); vertical-align: top; }
+  tr:nth-child(even) td { background: var(--cream-bg); }
+  td.priority { font-family: 'DM Mono', monospace; font-size: 0.72rem; color: var(--gold-dark); text-transform: uppercase; letter-spacing: 0.1em; }
+
+  .callout { background: var(--gold-pale); border-left: 3px solid var(--gold-dark); padding: 24px 32px; margin: 28px 0; border-radius: 0 4px 4px 0; }
+  .callout .label { font-family: 'DM Mono', monospace; font-size: 0.7rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--gold-dark); margin-bottom: 8px; }
+
+  .template { background: var(--white); border: 1px solid var(--border); border-left: 4px solid var(--gold-dark); padding: 24px 28px; margin: 20px 0; border-radius: 0 4px 4px 0; }
+  .template .t-header { font-family: 'DM Mono', monospace; font-size: 0.72rem; letter-spacing: 0.15em; text-transform: uppercase; color: var(--gold-dark); margin-bottom: 8px; }
+  .template .t-subject { font-family: 'Cormorant Garamond', serif; font-size: 1.3rem; color: var(--ink); margin-bottom: 16px; padding-bottom: 12px; border-bottom: 1px solid var(--border); }
+  .template .t-body { font-size: 0.92rem; line-height: 1.7; white-space: pre-wrap; font-family: 'Inter', sans-serif; }
+  .template .t-meta { font-family: 'DM Mono', monospace; font-size: 0.7rem; color: var(--muted); margin-top: 12px; padding-top: 12px; border-top: 1px solid var(--border); }
+
+  .target-card { background: var(--white); border: 1px solid var(--border); padding: 18px 22px; margin: 12px 0; border-radius: 4px; display: grid; grid-template-columns: 1.2fr 1fr 1fr 0.8fr; gap: 16px; align-items: center; }
+  .target-card .tc-name { font-family: 'Cormorant Garamond', serif; font-size: 1.2rem; color: var(--ink); }
+  .target-card .tc-meta { font-family: 'DM Mono', monospace; font-size: 0.7rem; color: var(--muted); text-transform: uppercase; letter-spacing: 0.08em; }
+  .target-card .tc-angle { font-size: 0.85rem; }
+  .target-card .tc-tier { font-family: 'DM Mono', monospace; font-size: 0.7rem; color: var(--gold-dark); text-transform: uppercase; letter-spacing: 0.12em; text-align: right; }
+
+  .pillar-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; margin: 28px 0; }
+  .pillar { background: var(--gold-pale); border-top: 3px solid var(--gold-dark); padding: 22px; border-radius: 0 0 4px 4px; }
+  .pillar .p-num { font-family: 'DM Mono', monospace; font-size: 0.7rem; letter-spacing: 0.15em; text-transform: uppercase; color: var(--gold-dark); }
+  .pillar .p-name { font-family: 'Cormorant Garamond', serif; font-size: 1.4rem; color: var(--ink); margin: 6px 0 10px; }
+  .pillar .p-body { font-size: 0.88rem; }
+
+  .calendar { display: grid; grid-template-columns: 110px 1fr 1fr 1fr; gap: 0; border: 1px solid var(--border); border-radius: 4px; overflow: hidden; margin: 24px 0; }
+  .cal-h { background: var(--ink); color: var(--white); padding: 10px 12px; font-family: 'DM Mono', monospace; font-size: 0.65rem; letter-spacing: 0.12em; text-transform: uppercase; }
+  .cal-c { padding: 12px; border-top: 1px solid var(--border); font-size: 0.85rem; }
+  .cal-c.month { background: var(--cream-bg); font-family: 'DM Mono', monospace; font-size: 0.75rem; color: var(--gold-dark); text-transform: uppercase; letter-spacing: 0.1em; font-weight: 600; }
+
+  .footer { margin-top: 80px; padding-top: 32px; border-top: 1px solid var(--border); text-align: center; font-family: 'DM Mono', monospace; font-size: 0.7rem; letter-spacing: 0.15em; text-transform: uppercase; color: var(--muted); }
+
+  @media print { body { background: white; } .page { box-shadow: none; margin: 0; padding: 30px; max-width: 100%; } .template, .target-card, .pillar { page-break-inside: avoid; } }
+  @media (max-width: 768px) { .page { padding: 40px 24px; } h1, .hero-title h1 { font-size: 2.4rem; } .target-card, .calendar, .pillar-grid { grid-template-columns: 1fr; } }
+</style>
+</head>
+<body>
+
+<nav class="cdb-nav" style="position:sticky;top:0;z-index:100;background:#fff;border-bottom:1px solid #E2E2E2;padding:0.75rem 1.5rem;display:flex;justify-content:space-between;align-items:center;font-family:'Inter',sans-serif;flex-wrap:wrap;gap:0.5rem;">
+  <a href="/documents/clients/cirilo-design-build/" style="font-family:'Cormorant Garamond',serif;font-size:1.05rem;letter-spacing:0.08em;color:#2E2E34;text-decoration:none;">
+    <strong style="color:#AB7E37;letter-spacing:0.16em;">MARKCMO</strong> &nbsp;for&nbsp; <span style="letter-spacing:0.14em;">CIRILO DESIGN + BUILD</span>
+  </a>
+  <div style="display:flex;gap:1.2rem;align-items:center;font-family:'DM Mono',monospace;font-size:0.66rem;letter-spacing:0.1em;text-transform:uppercase;flex-wrap:wrap;">
+    <a href="/documents/clients/cirilo-design-build/audit" style="color:#8F8F8F;text-decoration:none;">Audit</a>
+    <a href="/documents/clients/cirilo-design-build/blueprint" style="color:#8F8F8F;text-decoration:none;">Blueprint</a>
+    <a href="/documents/clients/cirilo-design-build/roadmap" style="color:#8F8F8F;text-decoration:none;">Roadmap</a>
+    <a href="https://markcmo.com/book" style="color:#fff;background:#AB7E37;padding:0.45rem 1rem;border-radius:3px;text-decoration:none;letter-spacing:0.14em;">Book Call →</a>
+  </div>
+</nav>
+<style>@media print{.cdb-nav{display:none !important;}}</style>
+
+<div class="page">
+
+  <div class="brand-mark">
+    <div class="wordmark">CIRILO</div>
+    <div class="sub">DESIGN &nbsp;+&nbsp; BUILD</div>
+  </div>
+
+  <div class="doc-meta">Partnership, Outreach &amp; PR Playbook &nbsp;|&nbsp; Prepared 2026-05-28</div>
+
+  <div class="hero-title">
+    <div class="eyebrow">CHANNEL STRATEGY</div>
+    <h1>The referral channel<br>nobody is working.</h1>
+    <p class="lede">Target lists, email templates, activation calendar, and PR pitch angles for the partnership and earned-media program that no Charlotte pool builder is running systematically.</p>
+  </div>
+
+  <div class="callout">
+    <div class="label">THE STRATEGIC PREMISE</div>
+    <p>Standard luxury builder referral fee is 2.5 to 3 percent of project value. On a $250K build, that is $6,250 to a partner. Materially cheaper than acquiring the same customer cold ($10,000 to $15,000 paid CPA). Done well, partnerships become Cirilo's largest single channel by Month 12, with the highest close rate and the lowest CPA.</p>
+  </div>
+
+  <h2>The 6 Partnership Pillars</h2>
+
+  <div class="pillar-grid">
+    <div class="pillar"><div class="p-num">PILLAR 1</div><div class="p-name">Luxury Real Estate</div><div class="p-body">Listing agents whose buyers want backyards. Highest-volume referrer category.</div></div>
+    <div class="pillar"><div class="p-num">PILLAR 2</div><div class="p-name">Custom Home Builders</div><div class="p-body">Pool is an afterthought to most GCs. Cirilo becomes their default sub.</div></div>
+    <div class="pillar"><div class="p-num">PILLAR 3</div><div class="p-name">Landscape Architects + Designers</div><div class="p-body">Spec the pool into the master plan. Highest-quality leads.</div></div>
+    <div class="pillar"><div class="p-num">PILLAR 4</div><div class="p-name">Country Clubs + Yacht Clubs</div><div class="p-body">Affluent, captive, peer-influenced audience. Member-introduced only.</div></div>
+    <div class="pillar"><div class="p-num">PILLAR 5</div><div class="p-name">Adjacent Luxury Brands</div><div class="p-body">Sub-Zero, RH Outdoor, smart home, boat dealers. Co-marketing.</div></div>
+    <div class="pillar"><div class="p-num">PILLAR 6</div><div class="p-name">PR &amp; Earned Media</div><div class="p-body">Magazines, podcasts, awards. Brand authority that compounds.</div></div>
+  </div>
+
+  <h2>Pillar 1: Luxury Real Estate Partnerships</h2>
+
+  <h4>Target list (10 priority firms)</h4>
+  <table>
+    <tr><th>Firm</th><th>Territory</th><th>Why prioritize</th><th>Priority</th></tr>
+    <tr><td>Dickens Mitchener &amp; Associates</td><td>Charlotte intown (Myers Park, Eastover, SouthPark)</td><td>Oldest luxury firm in Charlotte. Owns the old-money map.</td><td class="priority">A1</td></tr>
+    <tr><td>Cottingham Chalk</td><td>Charlotte luxury</td><td>Boutique, agent-led, repeat-client base. Pool is a frequent sale objection.</td><td class="priority">A1</td></tr>
+    <tr><td>Allen Tate Luxury Collection</td><td>Mecklenburg, Union, Iredell</td><td>Largest by volume. Wide referral base.</td><td class="priority">A1</td></tr>
+    <tr><td>Premier Sotheby's International Realty (Lake Norman)</td><td>LKN waterfront</td><td>Owns the LKN luxury inventory. Waterfront = pool buyers.</td><td class="priority">A1</td></tr>
+    <tr><td>Ivester Jackson Distinctive Properties</td><td>LKN + Charlotte luxury</td><td>Sotheby's affiliate, deep LKN roster.</td><td class="priority">A1</td></tr>
+    <tr><td>Helen Adams Realty</td><td>Charlotte luxury</td><td>Top producers in Myers Park / Dilworth.</td><td class="priority">A2</td></tr>
+    <tr><td>Compass Charlotte</td><td>Citywide luxury</td><td>Tech-forward team, easy to enable with tools.</td><td class="priority">A2</td></tr>
+    <tr><td>Corcoran HM Properties</td><td>SouthPark + LKN</td><td>Established luxury brand newer to Charlotte. Hungry for referral partners.</td><td class="priority">A2</td></tr>
+    <tr><td>Costello Real Estate &amp; Investments</td><td>Charlotte luxury</td><td>Founder-led, fast-decision firm.</td><td class="priority">B</td></tr>
+    <tr><td>Carolina Realty Advisors</td><td>Waxhaw / Weddington / Marvin</td><td>Owns south Mecklenburg / north Union luxury suburb.</td><td class="priority">B</td></tr>
+  </table>
+
+  <h4>The offer</h4>
+  <ul>
+    <li><strong>2.5% referral fee</strong> on signed contracts, paid 50% at deposit and 50% at substantial completion (industry standard, occasionally 3% for top producers)</li>
+    <li><strong>Free 3D site-fit rendering</strong> for any listing where the agent thinks a pool would lift sale price. Cirilo produces a $1,500-value rendering as a free pre-listing tool, the agent uses it to anchor the buyer or accelerate the sale</li>
+    <li><strong>Co-branded one-pager</strong> the agent can leave at showings: "Backyard transformation by Cirilo Design + Build"</li>
+    <li><strong>Direct access to Tiffany</strong> for emergency site walks within 48 hours when a contingency or repair credit is on the table</li>
+    <li><strong>Annual partner appreciation event</strong> at a finished Cirilo project (cocktails, pool reveal, agents bring spouses)</li>
+  </ul>
+
+  <h4>Cold-outreach email template (real estate)</h4>
+
+  <div class="template">
+    <div class="t-header">EMAIL 1 OF 3 &nbsp;|&nbsp; SEND DAY 0</div>
+    <div class="t-subject">A backyard tool your buyers in Myers Park might actually use</div>
+    <div class="t-body">Hi [First Name],
+
+I'm Tiffany Cirilo. I run Cirilo Design + Build here in Charlotte. We build custom concrete pools and outdoor living spaces, the $150K to $400K kind that get noticed in [neighborhood].
+
+I am reaching out because I think we can save your buyers a problem.
+
+When a buyer walks a listing and the backyard is "almost there," they discount or they pass. We have started giving listing agents like you a free 3D rendering of what the backyard could become with a Cirilo pool. You can use it pre-listing to anchor the price, mid-process to overcome an objection, or post-close as a thank-you gift the buyer actually wants.
+
+No catch. We do not charge for the rendering and we do not get in front of your buyer unless you introduce us. If the buyer hires us, we pay you a 2.5% referral on the signed contract.
+
+Would a 20-minute call next week make sense? I will bring three sample renderings we did for listings in SouthPark and Myers Park last quarter.
+
+Tiffany Cirilo
+Cirilo Design + Build
+(910) 409-0648 (Charlotte 704 number forwarding)
+cirilodb.com</div>
+    <div class="t-meta">Sent from Tiffany. Personalized neighborhood + recent listing reference per agent. Follow-up at Day 5 and Day 12.</div>
+  </div>
+
+  <div class="template">
+    <div class="t-header">EMAIL 2 OF 3 &nbsp;|&nbsp; SEND DAY 5</div>
+    <div class="t-subject">Re: A backyard tool your buyers in Myers Park might actually use</div>
+    <div class="t-body">Hi [First Name],
+
+Floating this back up. The 3D rendering offer is open through end of quarter. We are capping it at the first 15 agents we partner with, because We hand-render each one and we want it to stay a real tool, not a flyer.
+
+Easiest path: 15 minutes on the phone. Pick a time: [calendar link]
+
+Or if it is easier, send me a listing you have right now where the backyard is the soft spot. I will have a rendering back to you in 5 business days. No commitment.
+
+Tiffany</div>
+    <div class="t-meta">Send only if Email 1 not opened or no reply.</div>
+  </div>
+
+  <div class="template">
+    <div class="t-header">EMAIL 3 OF 3 &nbsp;|&nbsp; SEND DAY 12</div>
+    <div class="t-subject">Closing the loop on this</div>
+    <div class="t-body">Hi [First Name],
+
+Last note from me. We are about to lock in the 15 agents for the rendering partnership. If you want to keep the option open, just reply with "interested" and I will hold a spot. If now is not the right time, no worries at all. I will check back next quarter.
+
+Tiffany</div>
+    <div class="t-meta">Last touch. After this, drop into quarterly newsletter list only.</div>
+  </div>
+
+  <h2>Pillar 2: Custom Home Builder Partnerships</h2>
+
+  <h4>Target list (top 8 luxury custom home builders)</h4>
+  <table>
+    <tr><th>Builder</th><th>Territory / Style</th><th>Angle</th><th>Priority</th></tr>
+    <tr><td>Arthur Rutenberg Homes (Charlotte)</td><td>Custom $1M to $5M</td><td>National brand, established luxury custom franchise.</td><td class="priority">A1</td></tr>
+    <tr><td>Bonterra Builders</td><td>South Charlotte, Lake Norman</td><td>High-touch custom, repeat-client base.</td><td class="priority">A1</td></tr>
+    <tr><td>Plattner Custom Builders</td><td>Waxhaw, Weddington, Marvin</td><td>Owns the Union County luxury custom map.</td><td class="priority">A1</td></tr>
+    <tr><td>Grandfather Homes</td><td>Lake Norman, Mountain Island Lake</td><td>Waterfront specialist. Every house wants a pool.</td><td class="priority">A1</td></tr>
+    <tr><td>Simonini Builders</td><td>SouthPark, Myers Park, Eastover</td><td>Intown old-money custom. Every estate wants a pool.</td><td class="priority">A1</td></tr>
+    <tr><td>Andrew Roby General Contractors</td><td>Charlotte luxury renovations</td><td>Renovations of $2M+ homes, frequent outdoor scope.</td><td class="priority">A2</td></tr>
+    <tr><td>Augusta Homes</td><td>Waxhaw, Marvin</td><td>Mid-luxury custom, volume of 30+ homes/year.</td><td class="priority">A2</td></tr>
+    <tr><td>Pinnacle Custom Builders</td><td>Lake Norman</td><td>LKN custom waterfront.</td><td class="priority">B</td></tr>
+  </table>
+
+  <h4>The offer</h4>
+  <ul>
+    <li><strong>3% referral fee</strong> on signed contracts (builders usually expect a touch more than realtors)</li>
+    <li><strong>"Pool spec'd at framing"</strong> service: Cirilo joins the builder's preconstruction meeting, hands them a turnkey pool spec inside 7 days, ready to drop into the construction schedule. Saves the builder time. Saves the homeowner the "now what about the pool" surprise.</li>
+    <li><strong>Coordinated permitting:</strong> Cirilo handles HOA + county pool permit in parallel with the GC's house permit. One project, one timeline.</li>
+    <li><strong>Joint marketing:</strong> co-branded finished-project photography Cirilo pays for, both brands get the shots</li>
+    <li><strong>First-look:</strong> the GC's clients see Cirilo before any other pool sub bids</li>
+  </ul>
+
+  <div class="template">
+    <div class="t-header">BUILDER OUTREACH &nbsp;|&nbsp; FIRST TOUCH</div>
+    <div class="t-subject">A pool sub who actually hits your construction schedule</div>
+    <div class="t-body">[First Name],
+
+Tiffany Cirilo here. I build custom concrete pools and outdoor living in Charlotte. I know the pool conversation usually happens too late on a custom build, when the house is closing in 60 days and the homeowner suddenly wants a vanishing edge and a covered outdoor kitchen.
+
+We have built a "pool spec'd at framing" service specifically for builders who do not want to deal with this. We come to your preconstruction meeting, hand you a turnkey spec inside 7 days, run permitting parallel to your house permit, and stay on your timeline.
+
+A few builders we have done this for have told me it is the difference between losing the warm-bath conversation at close-out and handing the homeowner a backyard they actually love.
+
+Standard 3% referral on signed contracts. Co-branded finished-project photography that we pay for.
+
+15 minutes next week? I will bring two recent specs we did for [Bonterra/Plattner-style] builds.
+
+Tiffany Cirilo
+Cirilo Design + Build
+(910) 409-0648
+cirilodb.com</div>
+    <div class="t-meta">Sent from (peer-to-peer). Personalize with named example of similar-tier custom builder.</div>
+  </div>
+
+  <h2>Pillar 3: Landscape Architect + Designer Partnerships</h2>
+
+  <h4>Target list (top 6 firms)</h4>
+  <table>
+    <tr><th>Firm</th><th>Specialty</th><th>Angle</th><th>Priority</th></tr>
+    <tr><td>CR Studio Landscape Architects</td><td>Estate + commercial</td><td>Spec luxury pools into master plans. Most influential in market.</td><td class="priority">A1</td></tr>
+    <tr><td>Pursley Dixon Architecture</td><td>Custom residential</td><td>Modernist estates. Pools are integral, not afterthought.</td><td class="priority">A1</td></tr>
+    <tr><td>Meyer Greeson Paullin Benson</td><td>Luxury residential</td><td>Charlotte estate work. Frequently spec pools.</td><td class="priority">A1</td></tr>
+    <tr><td>LandDesign</td><td>Estate + master-planned</td><td>Charlotte-headquartered, large firm.</td><td class="priority">A2</td></tr>
+    <tr><td>Charlotte Landscape Group</td><td>Luxury residential</td><td>Active in Myers Park + SouthPark.</td><td class="priority">A2</td></tr>
+    <tr><td>New Leaf Landscape Architecture</td><td>Modern residential</td><td>Strong contemporary pool sensibility.</td><td class="priority">B</td></tr>
+  </table>
+
+  <h4>The offer</h4>
+  <ul>
+    <li><strong>3% referral fee</strong>, plus the architect retains design control</li>
+    <li><strong>Engineering on call:</strong> Cirilo's pool engineering team available to validate or push back on architect specs before client presentation</li>
+    <li><strong>Joint client presentations:</strong> Cirilo's design lead joins the architect's pitch meeting when pool is in scope</li>
+    <li><strong>Trade-only education sessions:</strong> quarterly half-day at Cirilo: new finishes, equipment, automation systems, code changes. CEU eligible when possible.</li>
+  </ul>
+
+  <h2>Pillar 4: Country Club + Yacht Club Activations</h2>
+
+  <h4>Target list</h4>
+  <table>
+    <tr><th>Club</th><th>Location</th><th>Activation Angle</th><th>Priority</th></tr>
+    <tr><td>Carmel Country Club</td><td>Charlotte (Carmel area)</td><td>Member-guest sponsorship, club magazine ad, hole sponsorship</td><td class="priority">A1</td></tr>
+    <tr><td>Charlotte Country Club</td><td>Myers Park</td><td>Oldest club, member-introduced only. Co-host a private dinner at finished member install.</td><td class="priority">A1</td></tr>
+    <tr><td>Quail Hollow Club</td><td>Charlotte</td><td>$150K initiation, ultra-private. Member-introduced only. Worth the patience.</td><td class="priority">A1</td></tr>
+    <tr><td>The Peninsula Club</td><td>Lake Norman / Cornelius</td><td>LKN's luxury club. Pool buyers concentrate here.</td><td class="priority">A1</td></tr>
+    <tr><td>Cowans Ford Country Club</td><td>Stanley NC (LKN west)</td><td>LKN secondary market, lower-cost entry sponsorships.</td><td class="priority">A2</td></tr>
+    <tr><td>Ballantyne Country Club</td><td>Ballantyne</td><td>South Charlotte premium country club.</td><td class="priority">A2</td></tr>
+    <tr><td>Trump National Charlotte</td><td>Mooresville (LKN)</td><td>LKN luxury membership base.</td><td class="priority">B</td></tr>
+    <tr><td>Lake Norman Yacht Club</td><td>Mooresville</td><td>Sailing membership = waterfront homeowners = pool buyers</td><td class="priority">B</td></tr>
+  </table>
+
+  <h4>Activation menu</h4>
+  <ul>
+    <li><strong>Member-guest tournament sponsorship:</strong> $2,500 to $15,000 per event. Includes hole sponsorship, gift bag insert, lunch presence, MC mention. Best when introduced by a member.</li>
+    <li><strong>Club magazine quarterly ad:</strong> $800 to $2,500/quarter. Pair with a member install case study.</li>
+    <li><strong>Private member event hosting:</strong> Cirilo hosts a "Backyard at Dusk" cocktail event at a recently finished member install. 20 to 40 members and spouses. Highest-converting single activation.</li>
+    <li><strong>Junior golf or junior tennis sponsorship:</strong> $1,500 to $5,000 per season. Indirect brand reach to the family decision-maker.</li>
+    <li><strong>Member-only pricing:</strong> 3% off contract for active members of partner clubs, framed as a "club benefit" the club promotes in their newsletter.</li>
+  </ul>
+
+  <div class="callout">
+    <div class="label">CRITICAL RULE FOR CLUBS</div>
+    <p>Never cold-pitch a country club. Every activation must be member-introduced. The first 90 days of country club outreach is asking Tiffany's existing client list "who is your member sponsor at Carmel / Peninsula / Charlotte CC, and would they be willing to introduce us?" Without the introduction, the General Manager will not return a call.</p>
+  </div>
+
+  <h2>Pillar 5: Adjacent Luxury Brand Co-Marketing</h2>
+
+  <h4>Target list</h4>
+  <table>
+    <tr><th>Partner Brand</th><th>Why</th><th>Activation</th><th>Priority</th></tr>
+    <tr><td>Queen City Audio Video &amp; Appliance (Sub-Zero/Wolf dealer)</td><td>Outdoor kitchens = Cirilo scope. Sub-Zero dealer has the affluent kitchen-remodel pipeline.</td><td>Co-marketed "Indoor + outdoor kitchen" event at showroom; cross-referral.</td><td class="priority">A1</td></tr>
+    <tr><td>Restoration Hardware Outdoor (SouthPark)</td><td>Outdoor furniture = Cirilo's pool deck buyer.</td><td>Co-branded "RH Outdoor x Cirilo" backyard reveals; in-store pool design consult days.</td><td class="priority">A1</td></tr>
+    <tr><td>Pursuit Boats / MarineMax Lake Norman</td><td>Waterfront boaters = waterfront pool buyers.</td><td>Joint LKN luxury living event; co-branded "your dock and your pool" content.</td><td class="priority">A2</td></tr>
+    <tr><td>Smart Home of the Carolinas (Crestron/Control4)</td><td>Pool automation cross-sells smart home.</td><td>Bundled "smart home + smart pool" package; cross-referral.</td><td class="priority">A2</td></tr>
+    <tr><td>Mercedes-Benz of South Charlotte / Foreign Cars Italia</td><td>Luxury auto = matching demographic.</td><td>Sponsor a private viewing event at a finished Cirilo install; AMG + outdoor living pairing.</td><td class="priority">B</td></tr>
+    <tr><td>The Inn at Pinehurst / Lake Norman Inn</td><td>Concierge channel for relocating executives.</td><td>Provide the inn's concierge with a "luxury Charlotte vendors" pocket guide.</td><td class="priority">B</td></tr>
+  </table>
+
+  <h2>Pillar 6: PR + Earned Media</h2>
+
+  <h4>Target outlets (Charlotte luxury media stack)</h4>
+  <table>
+    <tr><th>Outlet</th><th>Format</th><th>Pitch Angle</th><th>Priority</th></tr>
+    <tr><td>Charlotte Magazine</td><td>Monthly glossy</td><td>"5 Most Stunning Charlotte Backyards 2026"; founder profile; Best of the Best Pool Builder 2027 nomination</td><td class="priority">A1</td></tr>
+    <tr><td>Charlotte Observer Best Pools</td><td>Annual reader-vote</td><td>Mobilize past clients + partners to vote 2027. Anthony &amp; Sylvan won 3 years running.</td><td class="priority">A1</td></tr>
+    <tr><td>Charlotte Business Journal</td><td>Weekly + online</td><td>"Husband-wife team builds boutique luxury pool brand in Charlotte" founder profile</td><td class="priority">A1</td></tr>
+    <tr><td>SouthPark Magazine</td><td>Monthly glossy</td><td>Backyard reveal feature on a SouthPark-area install; full-page brand ad pair</td><td class="priority">A1</td></tr>
+    <tr><td>LKN Magazine (Lake Norman)</td><td>Monthly glossy</td><td>"The Engineering of a Lake Norman Infinity Edge" educational feature</td><td class="priority">A1</td></tr>
+    <tr><td>QC Exclusive</td><td>Quarterly luxury</td><td>Brand profile + photo essay of a signature install</td><td class="priority">A2</td></tr>
+    <tr><td>Luxury Home Magazine Greater Charlotte</td><td>Quarterly</td><td>Reverse-feature: instead of advertising the homes, advertise the pools that sold them</td><td class="priority">A2</td></tr>
+    <tr><td>Axios Charlotte newsletter</td><td>Daily email</td><td>"What it actually costs to build a luxury pool in Charlotte" data piece</td><td class="priority">A2</td></tr>
+    <tr><td>Charlotte Agenda</td><td>Daily digital</td><td>Listicle of "Coolest backyard transformations in Charlotte 2026"</td><td class="priority">A2</td></tr>
+    <tr><td>Houzz editorial</td><td>National</td><td>Submit completed projects for "Best of Houzz" editorial features</td><td class="priority">A1</td></tr>
+    <tr><td>Charlotte Home + Garden TV</td><td>Cable + streaming</td><td>"Inside the build" feature on a single signature project</td><td class="priority">B</td></tr>
+    <tr><td>Carolina Custom Builders podcast</td><td>Audio</td><td>Tiffany as guest, "Designing a pool that does not embarrass the architecture"</td><td class="priority">B</td></tr>
+    <tr><td>The Charlotte Ledger newsletter</td><td>Subscription email</td><td>Sponsored thought leadership on outdoor living trends</td><td class="priority">B</td></tr>
+  </table>
+
+  <h4>The 5 PR pitch angles to rotate</h4>
+  <ol>
+    <li><strong>"The economics" angle:</strong> "What a $250,000 pool actually buys you in Charlotte" - data-led, transparent pricing breakdown. Earns trust, attracts buyers, irritates competitors who keep prices hidden.</li>
+    <li><strong>"The local builder" angle:</strong> Husband-wife founder story, family operation, design-first philosophy. Charlotte loves a local entrepreneur story.</li>
+    <li><strong>"The trend" angle:</strong> Wellness pools + cold plunge integration; vanishing edges on Lake Norman; minimalist modern pool design for tech-money buyers. Rides cultural waves.</li>
+    <li><strong>"The case study" angle:</strong> Single signature install profiled in detail - architecture, engineering, finishes, photography. Earns design press.</li>
+    <li><strong>"The expert" angle:</strong> Tiffany quoted in any home, garden, or real estate piece that touches outdoor living. Build the journalist Rolodex.</li>
+  </ol>
+
+  <div class="template">
+    <div class="t-header">PR PITCH TEMPLATE &nbsp;|&nbsp; CHARLOTTE MAGAZINE</div>
+    <div class="t-subject">Pitch: "What a $250K pool actually buys you in Charlotte"</div>
+    <div class="t-body">Hi [Editor First Name],
+
+Charlotte's pool industry is famously opaque on pricing. The result is that affluent homeowners researching a build hit nothing but "contact us for a quote," which is why so many never start.
+
+I am Tiffany Cirilo, owner of Cirilo Design + Build. We just opened our books on what a luxury pool in Charlotte actually costs in 2026 and would be glad to walk a Charlotte Magazine writer through:
+
+- The four price tiers ($85K starter to $400K+ infinity edge)
+- The 12 line items most builders bury in "construction"
+- Why a Lake Norman waterfront pool runs 40% more than an identical pool in Myers Park
+- The 3 finishes that determine 60% of the budget
+- Real photos and real numbers from 4 recent Charlotte installs
+
+This is the kind of "honest money" piece Charlotte Magazine has done well with on real estate and contractor topics. I am the only Charlotte pool builder I know of willing to put real numbers on real photos.
+
+Half-day interview at one of our finished installs, full press kit, all photography rights granted.
+
+Worth a conversation?
+
+Tiffany Cirilo
+Cirilo Design + Build
+(910) 409-0648
+cirilodb.com</div>
+    <div class="t-meta">Send to Senior Editor or Home + Design Editor. Personalize with recent Charlotte Mag piece you liked.</div>
+  </div>
+
+  <h2>12-Month Activation Calendar</h2>
+
+  <div class="calendar">
+    <div class="cal-h">Month</div><div class="cal-h">Partnership Outreach</div><div class="cal-h">PR / Earned Media</div><div class="cal-h">Event / Sponsorship</div>
+
+    <div class="cal-c month">M1 Jun</div>
+    <div class="cal-c">Past-client list audit. Identify country club members in client base.</div>
+    <div class="cal-c">Draft Charlotte Magazine "honest money" pitch. Submit 4 Houzz projects.</div>
+    <div class="cal-c">No activations yet. Set Day 90 launch goal.</div>
+
+    <div class="cal-c month">M2 Jul</div>
+    <div class="cal-c">Real estate outreach Wave 1: 10 priority firms. Co-branded one-pager finalized.</div>
+    <div class="cal-c">Pitch Charlotte Magazine, LKN Magazine, SouthPark Magazine.</div>
+    <div class="cal-c">Begin country-club member-introducer asks.</div>
+
+    <div class="cal-c month">M3 Aug</div>
+    <div class="cal-c">Builder outreach Wave 1: 8 priority firms. Realtor follow-up Wave 2.</div>
+    <div class="cal-c">Charlotte Business Journal founder profile pitched.</div>
+    <div class="cal-c">Apply for Genesis CBP + PHTA CBP credentials.</div>
+
+    <div class="cal-c month">M4 Sep</div>
+    <div class="cal-c">Landscape architect outreach Wave 1: 6 firms. First quarterly trade education event scheduled.</div>
+    <div class="cal-c">LKN Magazine feature confirmed (or pivot).</div>
+    <div class="cal-c">Sponsor first member-guest at Carmel CC or Peninsula at LKN (Fall season).</div>
+
+    <div class="cal-c month">M5 Oct</div>
+    <div class="cal-c">First partner appreciation cocktail at finished install. 15 partners + spouses.</div>
+    <div class="cal-c">Charlotte Magazine piece in print (target).</div>
+    <div class="cal-c">Sponsor Charlotte Home + Remodeling Show booth presence.</div>
+
+    <div class="cal-c month">M6 Nov</div>
+    <div class="cal-c">Adjacent luxury brand outreach: Queen City (Sub-Zero), RH Outdoor.</div>
+    <div class="cal-c">Best of Houzz Service 2027 submission. Charlotte Observer Best Pools 2027 voter mobilization.</div>
+    <div class="cal-c">Club magazine quarterly ad placements (Q1 2027).</div>
+
+    <div class="cal-c month">M7 Dec</div>
+    <div class="cal-c">Q4 partner reviews. Renew agreements, drop low-performers, identify Wave 2 targets.</div>
+    <div class="cal-c">QC Exclusive winter feature pitched. Year-end "trends" media push.</div>
+    <div class="cal-c">Holiday partner gifts (custom Cirilo + outdoor brand co-branded).</div>
+
+    <div class="cal-c month">M8 Jan</div>
+    <div class="cal-c">Real estate Wave 2 outreach: smaller boutique firms. Builder follow-ups.</div>
+    <div class="cal-c">SouthPark Magazine spring feature. Axios Charlotte data piece.</div>
+    <div class="cal-c">RH Outdoor cross-event in showroom.</div>
+
+    <div class="cal-c month">M9 Feb</div>
+    <div class="cal-c">Trade education session #2 with landscape architects.</div>
+    <div class="cal-c">Charlotte Agenda "best backyards 2027" listicle pitched.</div>
+    <div class="cal-c">Sponsor junior tennis or junior golf at one priority club.</div>
+
+    <div class="cal-c month">M10 Mar</div>
+    <div class="cal-c">Spring peak season prep. All partners receive updated co-branded collateral.</div>
+    <div class="cal-c">Charlotte Magazine "Best of the Best 2027" results published (target finalist or winner).</div>
+    <div class="cal-c">"Backyard at Dusk" club member event at finished member install.</div>
+
+    <div class="cal-c month">M11 Apr</div>
+    <div class="cal-c">First annual "Charlotte's Most Beautiful Backyards" awards submissions open.</div>
+    <div class="cal-c">Spring peak press push: founder podcast circuit, LKN spring feature.</div>
+    <div class="cal-c">Member-guest tournament sponsorships (spring season).</div>
+
+    <div class="cal-c month">M12 May</div>
+    <div class="cal-c">Year 1 partner appreciation gala at signature install. 40+ attendees.</div>
+    <div class="cal-c">"Backyards 2027" awards published, press release distribution.</div>
+    <div class="cal-c">Year 1 close, Year 2 plan locked.</div>
+  </div>
+
+  <h2>Big-Idea Activations (Tier 3 add-ons)</h2>
+
+  <h4>"Charlotte's Most Beautiful Backyards" Annual Awards + Coffee Table Book</h4>
+  <p>Cirilo becomes the curator of luxury outdoor living in Charlotte. Annual nominations open in April, judged by a panel including the founders, a landscape architect, a local magazine editor. Winners featured in a 60-page hardcover coffee table book Cirilo produces and distributes free to partners, country club libraries, and luxury real estate offices. The book is the marketing asset. Cost: $35K to $60K Year 1, drops to $20K to $35K Year 2+. Returns: 30+ premium PR placements, brand equity Anthony &amp; Sylvan cannot manufacture, recurring lead source from every other home featured in the book.</p>
+
+  <h4>The "Build My Dream Pool" Interactive Lead Tool</h4>
+  <p>Style quiz, feature picker, budget calculator, lead capture, automated follow-up. Pre-qualifies budget so Tiffany only books real consultations. Lifts lead quality 2 to 3x vs generic contact form. Differentiator vs every Charlotte competitor. Build cost: $25K to $35K one-time. Ongoing: $1K/mo. Promote via Meta + Pinterest + Google Display.</p>
+
+  <h4>YouTube Design-Reveal Series</h4>
+  <p>12 episodes per year, one per finished build, 8 to 12 min each. Cinematic, drone, dusk LED, owner reveal moment. Builds proprietary library that doesn't depend on ad spend, compounds in search, and serves as a sales tool inside consultations. $3K to $5K per episode production. Single biggest brand asset Cirilo can build.</p>
+
+  <h4>The "Charlotte Pool Index" Annual Data Report</h4>
+  <p>Cirilo publishes an annual data report on Charlotte luxury pool market: average cost per neighborhood, average build time, top finishes, top features, ROI on resale. Picked up by Charlotte Business Journal, Axios Charlotte, Realtor blogs. Positions Cirilo as the data authority in market. Cost: $8K to $15K to research + design. Returns: 10+ press placements, evergreen reference cited in every Charlotte pool article that year.</p>
+
+  <h4>Wellness Pool + Cold Plunge Niche Ownership</h4>
+  <p>Riding Andrew Huberman wellness trend. Cirilo positions as the only Charlotte builder doing integrated luxury cold plunge + gunite spa + pool. Single signature install with full photo + video documentation. PR push to wellness, fitness, biohacker media on top of Charlotte luxury press. Niche moat that takes 18 months for a competitor to copy.</p>
+
+  <h2>Activation Budget by Tier</h2>
+
+  <table>
+    <tr><th>Activation</th><th>Tier 1</th><th>Tier 2</th><th>Tier 3</th></tr>
+    <tr><td>Partner one-pager + collateral design</td><td>Included</td><td>Included</td><td>Included</td></tr>
+    <tr><td>3D rendering offer (free to realtor partners, 25/year)</td><td>$0 (in retainer)</td><td>$0 (in retainer)</td><td>$0 (in retainer)</td></tr>
+    <tr><td>Trade education events (quarterly)</td><td>Skip</td><td>$2K/event</td><td>$5K/event</td></tr>
+    <tr><td>Partner appreciation cocktail (annual)</td><td>Skip</td><td>$8K</td><td>$15K</td></tr>
+    <tr><td>Country club sponsorships (per activation)</td><td>$2.5K</td><td>$5K to $10K</td><td>$10K to $25K</td></tr>
+    <tr><td>Club magazine ads (quarterly)</td><td>Skip</td><td>$1.5K/qtr</td><td>$3K/qtr</td></tr>
+    <tr><td>PR retainer (managed pitching)</td><td>In Mark's retainer</td><td>In Mark's retainer</td><td>Dedicated PR hours, $4K/mo</td></tr>
+    <tr><td>"Most Beautiful Backyards" awards launch</td><td>Year 2+</td><td>Year 2+</td><td>Y1: $45K</td></tr>
+    <tr><td>"Build My Dream Pool" tool</td><td>Skip Y1</td><td>$30K one-time</td><td>$35K one-time</td></tr>
+    <tr><td>YouTube series (12 episodes)</td><td>Skip Y1</td><td>4 episodes ($16K)</td><td>12 episodes ($48K)</td></tr>
+    <tr><td>"Charlotte Pool Index" annual report</td><td>Skip</td><td>Skip Y1</td><td>$12K</td></tr>
+  </table>
+
+  <div class="footer">Prepared by Mark Gabrielli &nbsp;|&nbsp; markcmo.com &nbsp;|&nbsp; Private &amp; Confidential</div>
+
+</div>
+
+<script>(function(){try{var k='mc_jsid';var s=sessionStorage.getItem(k)||('s_'+Math.random().toString(36).slice(2)+Date.now().toString(36));sessionStorage.setItem(k,s);fetch('/api/track',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({t:'view',client:'cirilo-design-build',page:'playbook',doc_id:'CDB-PLY-001',session_id:s,url:location.pathname,title:document.title}),keepalive:true}).catch(function(){});}catch(e){}})();</script>
+</body>
+</html>

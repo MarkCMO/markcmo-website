@@ -28,8 +28,23 @@ const { sbSelect, sbInsert } = require('./_lib_supabase');
 // 1x1 transparent GIF
 const PIXEL_GIF = Buffer.from('R0lGODlhAQABAIAAAP///wAAACH5BAEAAAAALAAAAAABAAEAAAICRAEAOw==', 'base64');
 
-const VALID_PAGE_KINDS = ['proposal','sow','timeline','sign','cover','intake','followup','receipt'];
-const VALID_CLICK_KINDS = ['sign','proposal','sow','timeline','cover','payment','followup','calendly','custom'];
+// Page kinds that the tracker accepts as the "page" field. Anything not in
+// this list is silently dropped (returns 400). When adding a new document
+// type (e.g. audit, roadmap, blueprint, playbook), add it here AND make sure
+// every doc HTML file that should be that kind POSTs the matching string.
+// Otherwise the tracker drops the event and the dashboard shows zero views.
+const VALID_PAGE_KINDS = [
+  // Legacy 3-doc engagement (proposal/sow/timeline) — kept for backward compat
+  'proposal','sow','timeline',
+  // Cirilo / programmatic engagement doc types
+  'audit','blueprint','roadmap','playbook',
+  // Funnel / lifecycle
+  'sign','cover','intake','followup','receipt',
+];
+const VALID_CLICK_KINDS = [
+  'sign','proposal','sow','timeline','audit','blueprint','roadmap','playbook',
+  'cover','payment','followup','calendly','custom',
+];
 
 exports.handler = async (event) => {
   const method = event.httpMethod;
