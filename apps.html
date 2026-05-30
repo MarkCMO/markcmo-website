@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Apps | MarkCMO</title>
+<meta name="description" content="Private app hub." />
+<meta name="robots" content="noindex, nofollow, noarchive, nosnippet, noimageindex" />
+<meta name="googlebot" content="noindex, nofollow, noarchive, nosnippet, noimageindex" />
+<meta name="bingbot" content="noindex, nofollow, noarchive" />
+<meta name="theme-color" content="#6C5CE7" />
+<link rel="canonical" href="https://markcmo.com/apps" />
+<link rel="stylesheet" href="/style.css" />
+<link rel="preconnect" href="https://fonts.googleapis.com" crossorigin>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Barlow:ital,wght@0,400;0,500;0,600;0,700;0,800&family=DM+Mono:wght@400;500&display=swap" media="print" onload="this.media='all'">
+<noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Barlow:ital,wght@0,400;0,500;0,600;0,700;0,800&family=DM+Mono:wght@400;500&display=swap"></noscript>
+<style>
+.apps-hero{background:var(--off-black);padding:8rem 6vw 3rem;position:relative;}
+.apps-hero-grid{position:absolute;inset:0;background-image:linear-gradient(rgba(108,92,231,.05) 1px,transparent 1px),linear-gradient(90deg,rgba(108,92,231,.05) 1px,transparent 1px);background-size:80px 80px;}
+.apps-hero-inner{position:relative;z-index:1;max-width:1100px;margin:0 auto;}
+.apps-eyebrow{font-family:'DM Mono',monospace;font-size:.7rem;letter-spacing:.2em;text-transform:uppercase;color:var(--gold);display:flex;align-items:center;gap:.6rem;margin-bottom:1rem;}
+.apps-eyebrow::before{content:'';display:block;width:2rem;height:1px;background:var(--gold);}
+.apps-hero-inner h1{font-family:'Bebas Neue',sans-serif;font-size:clamp(2.5rem,5vw,4.5rem);line-height:1;color:var(--white);margin-bottom:.5rem;}
+.apps-hero-inner p{font-size:.95rem;color:var(--mid);max-width:620px;line-height:1.7;}
+.apps-private-tag{display:inline-flex;align-items:center;gap:.5rem;margin-top:1.25rem;font-family:'DM Mono',monospace;font-size:.68rem;letter-spacing:.12em;text-transform:uppercase;color:#9d8cff;background:rgba(108,92,231,.12);border:1px solid rgba(108,92,231,.3);padding:.4rem .8rem;border-radius:999px;}
+.apps-body{background:var(--black);padding:3.5rem 6vw 6rem;}
+.apps-grid{max-width:1100px;margin:0 auto;display:grid;grid-template-columns:repeat(auto-fill,minmax(330px,1fr));gap:1.5rem;}
+.app-card{background:#13111c;border:1px solid rgba(108,92,231,.18);border-radius:16px;padding:1.75rem;display:flex;flex-direction:column;}
+.app-card-top{display:flex;align-items:center;gap:1rem;margin-bottom:1.1rem;}
+.app-icon{width:72px;height:72px;border-radius:18px;flex-shrink:0;background:linear-gradient(150deg,#7c6cf0,#5546d6);display:flex;align-items:center;justify-content:center;box-shadow:0 8px 24px rgba(108,92,231,.35);}
+.app-icon-card{width:42px;height:30px;background:#fff;border-radius:5px;padding:5px 6px;display:flex;flex-direction:column;justify-content:center;gap:3px;}
+.app-icon-line{height:3px;border-radius:2px;background:#d7d2f5;}
+.app-icon-line.read{background:#5546d6;width:70%;}
+.app-icon-line.short{width:55%;}
+.app-card-title h2{font-family:'Bebas Neue',sans-serif;font-size:1.8rem;color:var(--white);letter-spacing:.03em;line-height:1;margin:0 0 .25rem;}
+.app-card-title span{font-family:'DM Mono',monospace;font-size:.66rem;letter-spacing:.1em;text-transform:uppercase;color:var(--mid);}
+.app-card-desc{font-size:.88rem;line-height:1.7;color:var(--light-grey);margin-bottom:1.4rem;flex:1;}
+.app-platforms{display:flex;flex-direction:column;gap:.6rem;}
+.app-btn{display:flex;align-items:center;justify-content:space-between;gap:.6rem;padding:.8rem 1.1rem;border-radius:10px;font-size:.85rem;font-weight:600;text-decoration:none;transition:transform .12s ease,background .12s ease;}
+.app-btn.android{background:#6C5CE7;color:#fff;}
+.app-btn.android:hover{background:#5546d6;transform:translateY(-1px);}
+.app-btn.ios{background:rgba(255,255,255,.06);color:#9aa0aa;border:1px solid rgba(255,255,255,.1);cursor:default;}
+.app-btn .ab-meta{font-family:'DM Mono',monospace;font-size:.62rem;letter-spacing:.08em;text-transform:uppercase;opacity:.85;}
+.app-card-foot{margin-top:1.2rem;padding-top:1rem;border-top:1px solid rgba(255,255,255,.07);display:flex;gap:1.2rem;flex-wrap:wrap;}
+.app-card-foot a{font-size:.72rem;color:var(--gold);text-decoration:none;font-family:'DM Mono',monospace;letter-spacing:.06em;text-transform:uppercase;}
+.apps-note{max-width:1100px;margin:2rem auto 0;font-size:.78rem;color:var(--mid);line-height:1.7;}
+.apps-note code{font-family:'DM Mono',monospace;color:#9d8cff;background:rgba(108,92,231,.1);padding:.1rem .35rem;border-radius:4px;}
+</style>
+</head>
+<body>
+<main>
+<span data-eeat-byline="v1" style="display:none"></span>
+<section class="apps-hero">
+<div class="apps-hero-grid"></div>
+<div class="apps-hero-inner">
+<div class="apps-eyebrow">MarkCMO &middot; Internal</div>
+<h1>Apps</h1>
+<p>A private hub for the apps we are building and testing. Install links live here. This page is not indexed and is not linked from the public site.</p>
+<span class="apps-private-tag">Private &middot; Not indexed</span>
+</div>
+</section>
+<section class="apps-body">
+<div class="apps-grid">
+
+<div class="app-card">
+<div class="app-card-top">
+<div class="app-icon">
+<div class="app-icon-card">
+<div class="app-icon-line short"></div>
+<div class="app-icon-line"></div>
+<div class="app-icon-line read"></div>
+<div class="app-icon-line short"></div>
+</div>
+</div>
+<div class="app-card-title">
+<h2>Prompterly</h2>
+<span>Teleprompter &middot; v1.0.0</span>
+</div>
+</div>
+<p class="app-card-desc">Turn your phone into a teleprompter. Write a script, hit record, and read it straight off the screen while you film. Everything stays on your device.</p>
+<div class="app-platforms">
+<a class="app-btn android" href="https://expo.dev/artifacts/eas/3B7oFnNeFQDndGHyrr3ZAb.apk">
+<span>Download for Android (APK)</span>
+<span class="ab-meta">Install now</span>
+</a>
+<span class="app-btn ios">
+<span>iOS via TestFlight</span>
+<span class="ab-meta">Submitted - in review</span>
+</span>
+</div>
+<div class="app-card-foot">
+<a href="/prompterly-privacy">Privacy policy</a>
+<a href="https://expo.dev/accounts/markgabrielli/projects/prompterly" target="_blank" rel="noopener">Build dashboard</a>
+</div>
+</div>
+
+</div>
+<p class="apps-note">Android: open the download link on your phone, tap the downloaded <code>.apk</code>, and allow "install from unknown sources" once. iOS will appear here as a TestFlight link once the build is signed and submitted. To add another app to this hub, drop a new card in the grid.</p>
+</section>
+</main>
+</body>
+</html>
