@@ -1,0 +1,469 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-BXK5Y3DQBL"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-BXK5Y3DQBL');
+  // Fire a conversion event so we can count actual bookings, not just page hits.
+  gtag('event', 'booking_confirmed', { event_category: 'engagement', event_label: 'discovery_call' });
+</script>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>You're Booked - Prepare for Your Call | Mark Gabrielli</title>
+<meta name="description" content="Your Growth Discovery Call with Mark Gabrielli is confirmed. Here's exactly how to prepare so the 30 minutes are the most useful you spend this month." />
+<!-- noindex: this page is only useful immediately after booking; we don't want it
+     in organic search results competing with /book. -->
+<meta name="robots" content="noindex, nofollow" />
+<link rel="canonical" href="https://markcmo.com/call-prep" />
+<meta property="og:title" content="You're Booked - Prepare for Your Call | Mark Gabrielli" />
+<meta property="og:description" content="Confirmed. Here's how to prepare for your 30-minute Growth Discovery Call." />
+<meta property="og:url" content="https://markcmo.com/call-prep" />
+<meta property="og:image" content="https://markcmo.com/og-image.jpg" />
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="theme-color" content="#0A0F2C" />
+<link rel="preconnect" href="https://fonts.googleapis.com" crossorigin>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;600;700;800;900&family=Space+Grotesk:wght@400;500;600;700&display=swap">
+<link rel="stylesheet" href="style.css" />
+<style>
+/* ═══ CALL-PREP PAGE ═══════════════════════════════════════════════
+   Mirrors /book.html so the visual transition after booking feels
+   continuous. Only differences: green confirmation accents on the
+   hero, checklist styling, no Calendly widget (already booked). */
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+.cp-page { padding-top: 64px; background: var(--bg); min-height: 100vh; }
+
+/* ── Hero ── */
+.cp-hero {
+  padding: 5rem 6vw 3.5rem;
+  background: var(--bg);
+  position: relative;
+  overflow: hidden;
+}
+.cp-hero::before {
+  content: '';
+  position: absolute;
+  top: -250px; left: 50%; transform: translateX(-50%);
+  width: 800px; height: 800px; border-radius: 50%;
+  background: radial-gradient(circle, rgba(76,175,114,0.10) 0%, transparent 65%);
+  pointer-events: none;
+}
+.cp-hero::after {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0; height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(76,175,114,0.55), transparent);
+}
+.cp-hero-inner {
+  max-width: 900px;
+  margin: 0 auto;
+  position: relative; z-index: 1;
+  text-align: center;
+}
+.cp-eyebrow {
+  display: inline-flex; align-items: center; gap: 10px;
+  background: rgba(76,175,114,0.12);
+  border: 1px solid rgba(76,175,114,0.35);
+  border-radius: 30px; padding: 0.45rem 1.2rem;
+  font-size: 0.74rem; font-weight: 800; letter-spacing: 0.14em;
+  color: #4CAF72; text-transform: uppercase;
+  margin-bottom: 1.5rem;
+}
+.cp-eyebrow .dot {
+  width: 8px; height: 8px; border-radius: 50%;
+  background: #4CAF72;
+  box-shadow: 0 0 12px rgba(76,175,114,0.65);
+}
+.cp-h1 {
+  font-family: 'Outfit', sans-serif;
+  font-size: clamp(2.5rem, 6vw, 4rem);
+  font-weight: 900; letter-spacing: -0.04em;
+  line-height: 1.05; color: #fff;
+  margin-bottom: 1.4rem;
+}
+.cp-h1 em {
+  font-style: normal;
+  color: #4CAF72;
+}
+.cp-sub {
+  font-size: 1.05rem; line-height: 1.65;
+  color: rgba(255,255,255,0.78);
+  max-width: 620px;
+  margin: 0 auto 2rem;
+}
+.cp-confirm-card {
+  display: inline-flex; flex-direction: column; gap: 0.75rem;
+  background: rgba(255,255,255,0.04);
+  border: 1px solid rgba(255,255,255,0.10);
+  border-radius: 12px;
+  padding: 1.25rem 1.75rem;
+  font-size: 0.92rem; color: rgba(255,255,255,0.85);
+  margin-top: 0.5rem;
+  text-align: left;
+}
+.cp-confirm-card .row { display: flex; align-items: center; gap: 12px; }
+.cp-confirm-card .row svg { color: #4CAF72; flex-shrink: 0; }
+
+/* ── Section base ── */
+.cp-section { padding: 4rem 6vw; }
+.cp-section-inner { max-width: 980px; margin: 0 auto; }
+.cp-section-label {
+  display: inline-block;
+  font-family: 'DM Mono', monospace;
+  font-size: 0.68rem; letter-spacing: 0.18em; text-transform: uppercase;
+  color: var(--accent, #C9A84C);
+  font-weight: 700;
+  margin-bottom: 0.8rem;
+}
+.cp-section-h2 {
+  font-family: 'Outfit', sans-serif;
+  font-size: clamp(2rem, 4vw, 3rem);
+  font-weight: 900; letter-spacing: -0.03em; line-height: 1.1;
+  color: #fff;
+  margin-bottom: 2.5rem;
+}
+.cp-section-h2 em { font-style: normal; color: var(--accent, #C9A84C); }
+
+/* ── Checklist ── */
+.cp-checklist {
+  display: grid; gap: 1rem;
+  margin-top: 1rem;
+}
+.cp-check-item {
+  display: grid;
+  grid-template-columns: 56px 1fr;
+  gap: 1.4rem;
+  background: rgba(255,255,255,0.03);
+  border: 1px solid rgba(255,255,255,0.08);
+  border-radius: 12px;
+  padding: 1.5rem;
+  transition: border-color 0.2s, transform 0.2s;
+}
+.cp-check-item:hover {
+  border-color: rgba(201,168,76,0.4);
+  transform: translateX(4px);
+}
+.cp-check-num {
+  width: 56px; height: 56px;
+  display: flex; align-items: center; justify-content: center;
+  background: linear-gradient(135deg, var(--accent, #C9A84C), #DFC06D);
+  color: #0A1628;
+  border-radius: 50%;
+  font-family: 'Outfit', sans-serif;
+  font-size: 1.5rem;
+  font-weight: 900;
+  flex-shrink: 0;
+}
+.cp-check-title {
+  font-size: 1.1rem; font-weight: 700;
+  color: #fff;
+  margin-bottom: 0.4rem;
+}
+.cp-check-desc {
+  font-size: 0.92rem; line-height: 1.65;
+  color: rgba(255,255,255,0.72);
+}
+.cp-check-desc strong { color: var(--accent, #C9A84C); }
+
+/* ── Resources grid ── */
+.cp-resources {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 1rem;
+  margin-top: 1rem;
+}
+.cp-resource {
+  display: block;
+  background: rgba(255,255,255,0.03);
+  border: 1px solid rgba(255,255,255,0.08);
+  border-radius: 12px;
+  padding: 1.5rem;
+  text-decoration: none;
+  color: #fff;
+  transition: border-color 0.2s, transform 0.2s, background 0.2s;
+}
+.cp-resource:hover {
+  border-color: rgba(201,168,76,0.4);
+  background: rgba(255,255,255,0.05);
+  transform: translateY(-3px);
+}
+.cp-resource-eyebrow {
+  font-family: 'DM Mono', monospace;
+  font-size: 0.62rem; letter-spacing: 0.16em; text-transform: uppercase;
+  color: var(--accent, #C9A84C);
+  font-weight: 700;
+  margin-bottom: 0.6rem;
+}
+.cp-resource-title {
+  font-size: 1.05rem; font-weight: 700;
+  color: #fff;
+  margin-bottom: 0.45rem;
+}
+.cp-resource-desc {
+  font-size: 0.85rem; line-height: 1.55;
+  color: rgba(255,255,255,0.65);
+  margin-bottom: 0.75rem;
+}
+.cp-resource-arrow {
+  font-size: 0.82rem; color: var(--accent, #C9A84C); font-weight: 700;
+}
+
+/* ── After the call ── */
+.cp-after {
+  background: var(--bg2, #050919);
+  padding: 4rem 6vw;
+  border-top: 1px solid rgba(255,255,255,0.06);
+  border-bottom: 1px solid rgba(255,255,255,0.06);
+}
+.cp-after-inner { max-width: 760px; margin: 0 auto; }
+.cp-after-list { display: grid; gap: 1.5rem; margin-top: 1rem; }
+.cp-after-item {
+  display: grid; grid-template-columns: 36px 1fr; gap: 1rem;
+}
+.cp-after-item .step {
+  width: 36px; height: 36px; border-radius: 50%;
+  background: rgba(201,168,76,0.12);
+  border: 1px solid rgba(201,168,76,0.4);
+  color: var(--accent, #C9A84C);
+  display: flex; align-items: center; justify-content: center;
+  font-family: 'DM Mono', monospace;
+  font-weight: 700; font-size: 0.85rem;
+  flex-shrink: 0;
+}
+.cp-after-item .body {
+  font-size: 0.95rem; line-height: 1.65; color: rgba(255,255,255,0.78);
+}
+.cp-after-item .body strong { color: #fff; }
+
+/* ── Reschedule / contact ── */
+.cp-meta {
+  text-align: center;
+  padding: 3rem 6vw 5rem;
+}
+.cp-meta-inner { max-width: 700px; margin: 0 auto; }
+.cp-meta-h3 {
+  font-family: 'Outfit', sans-serif;
+  font-size: 1.5rem; font-weight: 800; color: #fff;
+  margin-bottom: 0.6rem;
+}
+.cp-meta-p {
+  font-size: 0.95rem; line-height: 1.7;
+  color: rgba(255,255,255,0.7);
+  margin-bottom: 1.5rem;
+}
+.cp-meta-p a {
+  color: var(--accent, #C9A84C);
+  font-weight: 600;
+  text-decoration: none;
+}
+.cp-meta-p a:hover { text-decoration: underline; }
+
+/* ── Mobile ── */
+@media (max-width: 720px) {
+  .cp-hero { padding: 3rem 5vw 2.5rem; }
+  .cp-section { padding: 3rem 5vw; }
+  .cp-after { padding: 3rem 5vw; }
+  .cp-h1 { font-size: clamp(2rem, 8vw, 2.75rem); }
+  .cp-check-item { grid-template-columns: 44px 1fr; padding: 1.2rem; gap: 1rem; }
+  .cp-check-num { width: 44px; height: 44px; font-size: 1.15rem; }
+}
+</style>
+</head>
+<body>
+<div class="cp-page">
+
+<nav class="nav" id="mainNav">
+<a href="/" class="nav-logo">
+<div class="nav-logo-avatar">
+<img src="/assets/mark-gabrielli.jpg" alt="Mark Gabrielli" />
+</div>
+<div class="nav-logo-text">
+<strong>Mark Gabrielli</strong>
+<span>Fractional CMO &amp; COO</span>
+</div>
+</a>
+<ul class="nav-links">
+<li><a href="/about">About</a></li>
+<li><a href="/services">Services</a></li>
+<li><a href="/magnet-framework" style="color:#C9A84C;font-weight:600;">MAGNET&trade;</a></li>
+<li><a href="/results">Results</a></li>
+<li><a href="/blog">Insights</a></li>
+<li><a href="https://academy.markcmo.com" target="_blank" style="color:#C9A84C;">Academy</a></li>
+</ul>
+<div class="nav-right">
+<a href="/book" class="nav-btn">Book a Free Call</a>
+</div>
+</nav>
+
+<!-- ── HERO: confirmation ── -->
+<section class="cp-hero">
+  <div class="cp-hero-inner">
+    <div class="cp-eyebrow"><span class="dot"></span>You're Booked &middot; Confirmed</div>
+    <h1 class="cp-h1">You're in. <em>Here's what's next.</em></h1>
+    <p class="cp-sub">
+      Your Growth Discovery Call with Mark is confirmed. Calendly just sent you the calendar invite and the meeting link. Below is the 5-step prep that makes the 30 minutes 10x more useful - read it before the call.
+    </p>
+    <div class="cp-confirm-card">
+      <div class="row">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M20 6 9 17l-5-5"/></svg>
+        <span>Calendar invite sent to your email</span>
+      </div>
+      <div class="row">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M20 6 9 17l-5-5"/></svg>
+        <span>Meeting link included in the invite</span>
+      </div>
+      <div class="row">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M20 6 9 17l-5-5"/></svg>
+        <span>Reminder coming 24 hours and 1 hour before</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── HOW TO PREP ── -->
+<section class="cp-section">
+  <div class="cp-section-inner">
+    <span class="cp-section-label">5-Step Prep</span>
+    <h2 class="cp-section-h2">Do this <em>before the call.</em></h2>
+    <p style="font-size:1rem;line-height:1.65;color:rgba(255,255,255,0.7);max-width:680px;margin-bottom:2rem;">
+      You don't need a deck. You don't need a presentation. You need clear answers to these 5 things so Mark can spend the 30 minutes diagnosing your business, not interviewing you.
+    </p>
+    <div class="cp-checklist">
+
+      <div class="cp-check-item">
+        <div class="cp-check-num">1</div>
+        <div>
+          <div class="cp-check-title">Know your numbers</div>
+          <div class="cp-check-desc">Current annual revenue range, monthly MRR if SaaS, and your primary growth metric (pipeline, leads, conversions). <strong>Round numbers are fine</strong> - you don't need to pull dashboards.</div>
+        </div>
+      </div>
+
+      <div class="cp-check-item">
+        <div class="cp-check-num">2</div>
+        <div>
+          <div class="cp-check-title">Name the bottleneck</div>
+          <div class="cp-check-desc">What's the ONE thing that, if fixed, unlocks the next stage of growth? Lead volume? Conversion rate? Sales cycle? Retention? Pick the biggest one - that's where Mark goes deep.</div>
+        </div>
+      </div>
+
+      <div class="cp-check-item">
+        <div class="cp-check-num">3</div>
+        <div>
+          <div class="cp-check-title">List what you've already tried</div>
+          <div class="cp-check-desc">Agencies, hires, channels, tools. What worked, what didn't, what's still running. This stops Mark from suggesting things you've already burned cycles on.</div>
+        </div>
+      </div>
+
+      <div class="cp-check-item">
+        <div class="cp-check-num">4</div>
+        <div>
+          <div class="cp-check-title">Define the 12-month goal</div>
+          <div class="cp-check-desc">Where do you want to be by next year - revenue, headcount, market position? A specific number anchors the entire conversation. <strong>"Grow"</strong> isn't a goal. <strong>"$5M ARR by Q3"</strong> is.</div>
+        </div>
+      </div>
+
+      <div class="cp-check-item">
+        <div class="cp-check-num">5</div>
+        <div>
+          <div class="cp-check-title">Have your calendar open</div>
+          <div class="cp-check-desc">If there's a clear fit, Mark may suggest a follow-up working session. Having availability in front of you lets you lock the next step without a 6-email back-and-forth.</div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ── PRE-CALL RESOURCES ── -->
+<section class="cp-section" style="background:var(--bg2, #050919); border-top:1px solid rgba(255,255,255,0.06); border-bottom:1px solid rgba(255,255,255,0.06);">
+  <div class="cp-section-inner">
+    <span class="cp-section-label">Optional Reading</span>
+    <h2 class="cp-section-h2">If you have <em>15 minutes</em> beforehand.</h2>
+    <p style="font-size:1rem;line-height:1.65;color:rgba(255,255,255,0.7);max-width:680px;margin-bottom:2rem;">
+      These aren't required. But people who skim one or two of these before the call get noticeably more out of the 30 minutes - because Mark doesn't have to spend 5 of them explaining his framework.
+    </p>
+    <div class="cp-resources">
+
+      <a href="/magnet-framework" class="cp-resource">
+        <div class="cp-resource-eyebrow">The Framework</div>
+        <div class="cp-resource-title">MAGNET Framework&trade;</div>
+        <div class="cp-resource-desc">The 6-phase operating system Mark uses in every engagement. Map, Architect, Generate, Nurture, Engineer, Track.</div>
+        <div class="cp-resource-arrow">Read &rarr;</div>
+      </a>
+
+      <a href="/fractional-cmo-roi-calculator" class="cp-resource">
+        <div class="cp-resource-eyebrow">2-Minute Calc</div>
+        <div class="cp-resource-title">Fractional CMO ROI Calculator</div>
+        <div class="cp-resource-desc">Plug in your revenue and current marketing spend. See the realistic ROI window of a fractional engagement vs full-time CMO.</div>
+        <div class="cp-resource-arrow">Calculate &rarr;</div>
+      </a>
+
+      <a href="/marketing-assessment.html" class="cp-resource">
+        <div class="cp-resource-eyebrow">20 Questions</div>
+        <div class="cp-resource-title">Marketing Maturity Assessment</div>
+        <div class="cp-resource-desc">Self-score your marketing across 5 dimensions in 4 minutes. Shows you which pillar is weakest before the call.</div>
+        <div class="cp-resource-arrow">Take it &rarr;</div>
+      </a>
+
+      <a href="/results" class="cp-resource">
+        <div class="cp-resource-eyebrow">Past Engagements</div>
+        <div class="cp-resource-title">Results &amp; Case Studies</div>
+        <div class="cp-resource-desc">Real numbers from real clients across SaaS, healthcare, aerospace, fintech, and logistics.</div>
+        <div class="cp-resource-arrow">View &rarr;</div>
+      </a>
+
+    </div>
+  </div>
+</section>
+
+<!-- ── WHAT HAPPENS AFTER ── -->
+<section class="cp-after">
+  <div class="cp-after-inner">
+    <span class="cp-section-label">After the Call</span>
+    <h2 class="cp-section-h2">What <em>happens next.</em></h2>
+    <div class="cp-after-list">
+
+      <div class="cp-after-item">
+        <div class="step">01</div>
+        <div class="body"><strong>Within 24 hours</strong> &mdash; Mark sends a written follow-up with the 3+ actionable insights from your call, plus any resources he referenced. This is yours to keep regardless of whether you engage.</div>
+      </div>
+
+      <div class="cp-after-item">
+        <div class="step">02</div>
+        <div class="body"><strong>If there's a fit</strong> &mdash; Mark sends a preliminary scope: what the engagement looks like, timeline, and rough investment range. You decide if there's reason for a deeper working session.</div>
+      </div>
+
+      <div class="cp-after-item">
+        <div class="step">03</div>
+        <div class="body"><strong>If there's not a fit</strong> &mdash; Mark says so directly and points you to the resource, agency, or hire that would actually serve you. Bad-fit clients don't get good results, so honest no's protect both sides.</div>
+      </div>
+
+      <div class="cp-after-item">
+        <div class="step">04</div>
+        <div class="body"><strong>No follow-up nags</strong> &mdash; Mark doesn't send drip sequences or "just circling back" emails. If the timing isn't right, the conversation stays open and you reach out when you're ready.</div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ── RESCHEDULE / CONTACT ── -->
+<section class="cp-meta">
+  <div class="cp-meta-inner">
+    <h3 class="cp-meta-h3">Need to reschedule?</h3>
+    <p class="cp-meta-p">
+      Use the link in your Calendly confirmation email to reschedule or cancel - no questions asked. For anything else, email <a href="mailto:mark@markcmo.com">mark@markcmo.com</a> directly and Mark responds personally within one business day.
+    </p>
+    <p class="cp-meta-p" style="font-size:0.85rem;color:rgba(255,255,255,0.5);">
+      Talk soon. <span style="color:var(--accent,#C9A84C);">- Mark</span>
+    </p>
+  </div>
+</section>
+
+</div><!-- .cp-page -->
+
+</body>
+</html>
