@@ -459,7 +459,7 @@ body{font-family:'Inter',sans-serif;background:#0a0a0a;color:#e8e6e1;line-height
 </div>
 </section>
 <!-- MOBILE RESPONSIVE -->
-<style>@media(max-width:680px){section[style*="1080px"] > div{grid-template-columns:1fr !important;}}</style>
+<style>@media(max-width:680px){section>div[style*="max-width:1080px"]{grid-template-columns:1fr !important;}section>div[style*="max-width:1080px"] div[style*="grid-template-columns:1fr 1fr"]{grid-template-columns:1fr !important;}}</style>
 <script>
 function handlePageForm(e,name){
   e.preventDefault();
