@@ -1659,6 +1659,9 @@ footer { background:var(--bg2); border-top:1px solid var(--border); }
   .hero-photo-frame { width:220px; height:270px; }
 }
 </style>
+<link rel="preconnect" href="https://assets.calendly.com" crossorigin />
+<link href="https://assets.calendly.com/assets/external/widget.css" rel="stylesheet" media="print" onload="this.media='all'"/>
+<script src="https://assets.calendly.com/assets/external/widget.js" async></script>
 <script src="/components.js" defer></script>
 </head>
 
@@ -1697,6 +1700,61 @@ footer { background:var(--bg2); border-top:1px solid var(--border); }
   <a href="https://academy.markcmo.com" target="_blank">Academy</a>
   <a href="/book" style="color:var(--accent);font-weight:700;">Book a Free Strategy Call &rarr;</a>
 </div>
+
+<!-- AUDIT OFFER BAND (top) -->
+<section id="home-audit-offer" style="background:linear-gradient(180deg,#0a0f2c 0%,#0d1235 100%);border-bottom:1px solid rgba(201,168,76,.18);padding:2.5rem 5vw 2.75rem;">
+  <div style="max-width:1100px;margin:0 auto;">
+    <div style="display:flex;flex-wrap:wrap;align-items:flex-end;justify-content:space-between;gap:1rem;margin-bottom:1.5rem;">
+      <div>
+        <div style="color:#C9A84C;font-size:.72rem;font-family:'DM Mono','Space Grotesk',monospace;text-transform:uppercase;letter-spacing:.14em;margin-bottom:.6rem;">Find the leak before it costs you the quarter</div>
+        <h2 style="margin:0;font-family:'Space Grotesk','Outfit',sans-serif;font-size:clamp(1.5rem,3.2vw,2.1rem);line-height:1.15;color:#fafaf8;font-weight:700;">Pick the audit that matches what's broken.</h2>
+        <p style="margin:.65rem 0 0;color:#b7bccb;max-width:56ch;line-height:1.6;font-size:.97rem;">Not sure which one? Run the free 2-minute self-audit first &mdash; it scores your nine growth leaks and tells you exactly which deep-dive to book.</p>
+      </div>
+      <a href="/leak-audit.html" style="white-space:nowrap;display:inline-flex;align-items:center;gap:.5rem;color:#C9A84C;border:1px solid rgba(201,168,76,.45);border-radius:8px;padding:.7rem 1.1rem;font-weight:600;font-size:.92rem;text-decoration:none;">Take the free self-audit &rarr;</a>
+    </div>
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:1rem;">
+      <div style="background:#0a0f2c;border:1px solid rgba(255,255,255,.08);border-radius:12px;padding:1.4rem;">
+        <div style="font-family:'Space Grotesk',sans-serif;font-weight:700;color:#fafaf8;font-size:1.08rem;margin-bottom:.35rem;">Brand &amp; Competitive Edge Audit</div>
+        <div style="color:#8b91a4;font-size:.9rem;line-height:1.55;margin-bottom:1rem;">Positioning, messaging, and where rivals are eating your share of voice.</div>
+        <div style="color:#C9A84C;font-family:'DM Mono',monospace;font-size:.85rem;margin-bottom:1rem;">Starting at $1,500</div>
+        <a href="#" data-audit="Brand &amp; Competitive Edge Audit" style="display:inline-block;color:#0a0f2c;background:#C9A84C;border-radius:7px;padding:.6rem 1rem;font-weight:700;font-size:.88rem;text-decoration:none;">Book to scope it &rarr;</a>
+      </div>
+      <div style="background:#0a0f2c;border:1px solid rgba(255,255,255,.08);border-radius:12px;padding:1.4rem;">
+        <div style="font-family:'Space Grotesk',sans-serif;font-weight:700;color:#fafaf8;font-size:1.08rem;margin-bottom:.35rem;">Funnel &amp; Conversion Audit</div>
+        <div style="color:#8b91a4;font-size:.9rem;line-height:1.55;margin-bottom:1rem;">Every step from click to closed &mdash; where leads stall, drop, and die.</div>
+        <div style="color:#C9A84C;font-family:'DM Mono',monospace;font-size:.85rem;margin-bottom:1rem;">Starting at $2,500</div>
+        <a href="#" data-audit="Funnel &amp; Conversion Audit" style="display:inline-block;color:#0a0f2c;background:#C9A84C;border-radius:7px;padding:.6rem 1rem;font-weight:700;font-size:.88rem;text-decoration:none;">Book to scope it &rarr;</a>
+      </div>
+      <div style="background:linear-gradient(180deg,#15193f 0%,#0a0f2c 100%);border:1px solid rgba(201,168,76,.5);border-radius:12px;padding:1.4rem;position:relative;">
+        <div style="position:absolute;top:-10px;right:14px;background:#C9A84C;color:#0a0f2c;font-size:.66rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;padding:.2rem .5rem;border-radius:5px;">Most complete</div>
+        <div style="font-family:'Space Grotesk',sans-serif;font-weight:700;color:#fafaf8;font-size:1.08rem;margin-bottom:.35rem;">Full Business Growth Audit</div>
+        <div style="color:#b7bccb;font-size:.9rem;line-height:1.55;margin-bottom:1rem;">All nine leaks, end to end, with a prioritized 90-day fix roadmap.</div>
+        <div style="color:#C9A84C;font-family:'DM Mono',monospace;font-size:.85rem;margin-bottom:1rem;">Starting at $7,500</div>
+        <a href="#" data-audit="Full Business Growth Audit" style="display:inline-block;color:#0a0f2c;background:#C9A84C;border-radius:7px;padding:.6rem 1rem;font-weight:700;font-size:.88rem;text-decoration:none;">Book to scope it &rarr;</a>
+      </div>
+    </div>
+  </div>
+</section>
+<script>
+(function(){
+  var CAL_URL='https://calendly.com/marklgabriellijr/discovery-call-marketing-clone?hide_gdpr_banner=1&background_color=0d1235&text_color=fafaf8&primary_color=c9a84c';
+  function openCal(audit){
+    audit=audit||'Not sure yet';
+    if(window.gtag)gtag('event','book_audit',{event_category:'home-audit-offer',event_label:audit});
+    if(typeof Calendly!=='undefined'){
+      Calendly.initPopupWidget({url:CAL_URL,utm:{utmCampaign:'audit-offer',utmSource:'homepage',utmContent:audit}});
+    }else{
+      window.open(CAL_URL+'&utm_campaign=audit-offer&utm_content='+encodeURIComponent(audit),'_blank');
+    }
+  }
+  var band=document.getElementById('home-audit-offer');
+  if(band)band.addEventListener('click',function(e){
+    var t=e.target.closest('[data-audit]');if(!t)return;
+    e.preventDefault();
+    openCal(t.getAttribute('data-audit'));
+  });
+})();
+</script>
 
 <!-- HERO -->
 <section class="hero" id="hero">

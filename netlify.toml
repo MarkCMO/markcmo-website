@@ -137,6 +137,12 @@
   status = 301
   force = true
 
+# Cirilo cover: ensure the no-trailing-slash directory URL resolves
+[[redirects]]
+  from = "/documents/clients/cirilo-design-build"
+  to = "/documents/clients/cirilo-design-build/"
+  status = 301
+
 [[redirects]]
   from = "/webinar"
   to = "/webinar.html"

@@ -1,0 +1,19 @@
+# Zero Pay Benefits - robots
+# When you point the final domain at this site, move this file to the
+# domain ROOT (e.g. zeropaybenefits.com/robots.txt) for full effect,
+# and update the Sitemap line to the live domain.
+
+User-agent: *
+Allow: /
+
+# AI / answer engines welcome
+User-agent: GPTBot
+Allow: /
+User-agent: PerplexityBot
+Allow: /
+User-agent: ClaudeBot
+Allow: /
+User-agent: Google-Extended
+Allow: /
+
+Sitemap: https://zeropaybenefits.com/sitemap.xml

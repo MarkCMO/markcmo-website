@@ -6,6 +6,21 @@ const FN_DIR = 'netlify/functions';
 const OUT_ROOT = 'functions';
 const EXCLUDE = new Set([]);
 
+// Hand-written native Cloudflare Pages routes (NOT generated from netlify/functions).
+// The cleaner must preserve these and the generator must never overwrite them.
+// Paths are relative to OUT_ROOT, forward-slash separated.
+const NATIVE_ROUTES = new Set([
+  'api/daily-content-email.js',
+  'api/ig-autopost.js',
+  'api/ig-token-refresh.js',
+  'api/post-dashboard.js',
+  // Social OAuth (TikTok + Facebook) hosted on the registered markcmo.com domain.
+  'connect/tiktok.js',
+  'connect/facebook.js',
+  'auth/tiktok/callback.js',
+  'auth/facebook/callback.js',
+]);
+
 const allFns = fs.readdirSync(FN_DIR)
   .filter(f => f.endsWith('.js') && !f.startsWith('_'))
   .map(f => f.replace(/\.js$/, ''))
@@ -13,6 +28,9 @@ const allFns = fs.readdirSync(FN_DIR)
   .sort();
 
 function generateFile(outRelPath, fnName) {
+  if (NATIVE_ROUTES.has(outRelPath.replace(/\\/g, '/').replace(/^functions\//, ''))) {
+    return; // never clobber a hand-written native route
+  }
   const segs = outRelPath.split('/');
   const depth = segs.length - 2;
   const shimUp = '../'.repeat(depth) || './';
@@ -28,13 +46,26 @@ export async function onRequest(context) { return dispatchSingle(mod, context); 
   fs.writeFileSync(outRelPath, tpl);
 }
 
+function cleanEntry(full, rel) {
+  const stat = fs.statSync(full);
+  if (stat.isDirectory()) {
+    for (const child of fs.readdirSync(full)) {
+      cleanEntry(path.join(full, child), `${rel}/${child}`);
+    }
+    if (fs.readdirSync(full).length === 0) fs.rmdirSync(full);
+    return;
+  }
+  if (NATIVE_ROUTES.has(rel.replace(/\\/g, '/'))) return; // preserve hand-written native route
+  fs.rmSync(full, { force: true });
+}
+
 function cleanOldFns() {
   if (!fs.existsSync(OUT_ROOT)) return;
   for (const entry of fs.readdirSync(OUT_ROOT)) {
     if (entry === '_lib') continue;
     if (entry === '_middleware.js') continue;
     if (entry === '[[path]].js') continue; // preserve KV catch-all
-    fs.rmSync(path.join(OUT_ROOT, entry), { recursive: true, force: true });
+    cleanEntry(path.join(OUT_ROOT, entry), entry);
   }
 }
 cleanOldFns();

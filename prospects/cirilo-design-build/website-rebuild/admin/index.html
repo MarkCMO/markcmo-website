@@ -1,0 +1,429 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Cirilo Admin | Pipeline &amp; CRM</title>
+<meta name="robots" content="noindex, nofollow">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@600;700&family=Inter:wght@400;500;600;700&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --gold:#AB7E37;--gold-mid:#D6BB89;--gold-pale:#F4ECDC;
+    --navy:#0A1628;--navy-2:#0F2040;--navy-3:#162A4A;
+    --ink:#1A1A1A;--body:#2E2E34;--muted:#8F8F8F;--border:#E2E2E2;
+    --bg:#F4F2EE;--white:#FFF;--green:#5A8A4A;--green-pale:#EAF2E6;--red:#B33A3A;--amber:#C99A3A;
+    --sb:248px;
+  }
+  *{box-sizing:border-box;margin:0;padding:0;}
+  body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--body);font-size:14px;line-height:1.5;-webkit-font-smoothing:antialiased;}
+  .mono{font-family:'DM Mono',monospace;}
+  .serif{font-family:'Cormorant Garamond',serif;}
+
+  /* ── Login gate ── */
+  #login{position:fixed;inset:0;z-index:1000;background:linear-gradient(135deg,var(--navy),var(--navy-3));display:flex;align-items:center;justify-content:center;}
+  #login .box{background:var(--white);border-radius:14px;padding:48px 44px;width:380px;max-width:92vw;box-shadow:0 30px 80px rgba(0,0,0,0.4);}
+  #login .wm{font-family:'Cormorant Garamond',serif;font-size:2.2rem;font-weight:700;letter-spacing:0.16em;background:linear-gradient(135deg,#E5C2B0,#D6BB89,#F4D78C,#AB7E37);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;text-align:center;}
+  #login .sub{font-family:'DM Mono',monospace;font-size:0.62rem;letter-spacing:0.36em;color:var(--gold);text-transform:uppercase;text-align:center;margin-bottom:28px;}
+  #login label{font-family:'DM Mono',monospace;font-size:0.65rem;letter-spacing:0.12em;text-transform:uppercase;color:var(--muted);display:block;margin-bottom:6px;}
+  #login input{width:100%;padding:0.8rem 0.9rem;border:1.5px solid var(--border);border-radius:8px;font-size:0.95rem;margin-bottom:16px;outline:none;}
+  #login input:focus{border-color:var(--gold);}
+  #login button{width:100%;padding:0.9rem;background:var(--gold);color:#fff;border:none;border-radius:8px;font-weight:600;font-size:0.95rem;cursor:pointer;}
+  #login button:hover{background:#8B6529;}
+  #login .err{color:var(--red);font-size:0.85rem;margin-bottom:12px;display:none;}
+
+  /* ── Shell ── */
+  .app{display:none;min-height:100vh;}
+  .sidebar{position:fixed;top:0;left:0;bottom:0;width:var(--sb);background:var(--navy);color:rgba(255,255,255,0.7);padding:24px 0;display:flex;flex-direction:column;z-index:50;}
+  .sb-brand{padding:0 24px 24px;border-bottom:1px solid rgba(255,255,255,0.08);}
+  .sb-brand .wm{font-family:'Cormorant Garamond',serif;font-size:1.5rem;font-weight:700;letter-spacing:0.14em;background:linear-gradient(135deg,#E5C2B0,#D6BB89,#F4D78C,#AB7E37);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;}
+  .sb-brand .sub{font-family:'DM Mono',monospace;font-size:0.55rem;letter-spacing:0.3em;color:var(--gold-mid);text-transform:uppercase;margin-top:2px;}
+  .sb-nav{padding:16px 0;flex:1;}
+  .sb-nav a{display:flex;align-items:center;gap:12px;padding:11px 24px;color:rgba(255,255,255,0.65);text-decoration:none;font-size:0.9rem;font-weight:500;border-left:3px solid transparent;cursor:pointer;}
+  .sb-nav a:hover{color:#fff;background:rgba(255,255,255,0.04);}
+  .sb-nav a.active{color:var(--gold-mid);border-left-color:var(--gold);background:rgba(171,126,55,0.08);}
+  .sb-nav .ico{width:18px;text-align:center;opacity:0.8;}
+  .sb-foot{padding:16px 24px;border-top:1px solid rgba(255,255,255,0.08);font-size:0.78rem;}
+  .sb-foot .who{color:#fff;font-weight:600;}
+  .sb-foot a{color:var(--gold-mid);text-decoration:none;font-size:0.72rem;}
+
+  .main{margin-left:var(--sb);padding:0;}
+  .topbar{position:sticky;top:0;z-index:40;background:rgba(244,242,238,0.92);backdrop-filter:blur(10px);border-bottom:1px solid var(--border);padding:18px 32px;display:flex;justify-content:space-between;align-items:center;}
+  .topbar h1{font-family:'Cormorant Garamond',serif;font-size:1.8rem;color:var(--ink);font-weight:700;}
+  .topbar .demo-badge{font-family:'DM Mono',monospace;font-size:0.6rem;letter-spacing:0.12em;text-transform:uppercase;background:var(--amber);color:#fff;padding:4px 10px;border-radius:4px;}
+  .topbar .live-badge{background:var(--green);}
+  .view{padding:32px;display:none;}
+  .view.active{display:block;}
+
+  /* ── KPI cards ── */
+  .kpis{display:grid;grid-template-columns:repeat(4,1fr);gap:18px;margin-bottom:28px;}
+  @media(max-width:1100px){.kpis{grid-template-columns:1fr 1fr;}}
+  .kpi{background:var(--white);border:1px solid var(--border);border-radius:12px;padding:22px 24px;position:relative;overflow:hidden;}
+  .kpi::after{content:'';position:absolute;top:0;left:0;width:3px;height:100%;background:var(--gold);}
+  .kpi .label{font-family:'DM Mono',monospace;font-size:0.62rem;letter-spacing:0.12em;text-transform:uppercase;color:var(--muted);}
+  .kpi .val{font-family:'Cormorant Garamond',serif;font-size:2.4rem;font-weight:700;color:var(--ink);line-height:1.1;margin-top:6px;}
+  .kpi .delta{font-size:0.78rem;margin-top:4px;}
+  .kpi .delta.up{color:var(--green);} .kpi .delta.down{color:var(--red);}
+
+  /* ── Section ── */
+  .panel{background:var(--white);border:1px solid var(--border);border-radius:12px;margin-bottom:24px;overflow:hidden;}
+  .panel-head{padding:18px 24px;border-bottom:1px solid var(--border);display:flex;justify-content:space-between;align-items:center;}
+  .panel-head h2{font-family:'Cormorant Garamond',serif;font-size:1.4rem;color:var(--ink);font-weight:700;}
+  .panel-head .meta{font-family:'DM Mono',monospace;font-size:0.7rem;color:var(--muted);text-transform:uppercase;letter-spacing:0.1em;}
+  .panel-body{padding:24px;}
+
+  /* ── Kanban ── */
+  .kanban-wrap{overflow-x:auto;padding:24px;}
+  .kanban{display:flex;gap:14px;min-width:max-content;}
+  .kcol{width:230px;flex-shrink:0;background:var(--bg);border-radius:10px;padding:10px;}
+  .kcol-head{display:flex;justify-content:space-between;align-items:center;padding:6px 8px 10px;}
+  .kcol-head .kname{font-family:'DM Mono',monospace;font-size:0.66rem;letter-spacing:0.08em;text-transform:uppercase;color:var(--ink);font-weight:500;}
+  .kcol-head .kcount{font-family:'DM Mono',monospace;font-size:0.7rem;color:#fff;background:var(--gold);border-radius:10px;padding:1px 8px;min-width:20px;text-align:center;}
+  .kcol-stage{font-family:'DM Mono',monospace;font-size:0.55rem;color:var(--muted);padding:0 8px 8px;}
+  .kcard{background:var(--white);border:1px solid var(--border);border-radius:8px;padding:12px;margin-bottom:8px;cursor:grab;transition:box-shadow .2s,transform .2s;}
+  .kcard:hover{box-shadow:0 6px 20px rgba(26,26,26,0.1);transform:translateY(-2px);}
+  .kcard.dragging{opacity:0.5;}
+  .kcard .ktitle{font-weight:600;color:var(--ink);font-size:0.9rem;margin-bottom:4px;}
+  .kcard .kval{font-family:'DM Mono',monospace;font-size:0.78rem;color:var(--gold);}
+  .kcard .kmeta{font-size:0.74rem;color:var(--muted);margin-top:6px;display:flex;justify-content:space-between;}
+  .kcol.drop-target{outline:2px dashed var(--gold);outline-offset:-2px;}
+
+  /* ── Tables ── */
+  table{width:100%;border-collapse:collapse;}
+  th{text-align:left;font-family:'DM Mono',monospace;font-size:0.62rem;letter-spacing:0.1em;text-transform:uppercase;color:var(--muted);padding:12px 16px;border-bottom:1px solid var(--border);}
+  td{padding:14px 16px;border-bottom:1px solid var(--border);font-size:0.88rem;vertical-align:middle;}
+  tr:last-child td{border-bottom:none;}
+  tr:hover td{background:var(--bg);}
+  .pill{display:inline-block;padding:3px 10px;border-radius:20px;font-size:0.7rem;font-weight:600;font-family:'DM Mono',monospace;letter-spacing:0.04em;}
+  .pill.new{background:#E8F0FB;color:#2563EB;} .pill.contacted{background:var(--gold-pale);color:var(--gold);}
+  .pill.qualified{background:var(--green-pale);color:var(--green);} .pill.consult{background:#F3E8FB;color:#8B3FBF;}
+  .pill.converted{background:var(--green);color:#fff;} .pill.lost{background:#F3F3F3;color:var(--muted);}
+  .resp-fast{color:var(--green);font-weight:600;} .resp-slow{color:var(--red);font-weight:600;}
+
+  /* ── Analytics ── */
+  .analytics-grid{display:grid;grid-template-columns:1.4fr 1fr;gap:24px;}
+  @media(max-width:1000px){.analytics-grid{grid-template-columns:1fr;}}
+  .bar-row{display:flex;align-items:center;gap:12px;margin-bottom:12px;}
+  .bar-label{width:120px;font-size:0.82rem;color:var(--body);flex-shrink:0;}
+  .bar-track{flex:1;background:var(--bg);border-radius:6px;height:24px;overflow:hidden;}
+  .bar-fill{height:100%;background:linear-gradient(90deg,var(--gold),var(--gold-mid));border-radius:6px;display:flex;align-items:center;justify-content:flex-end;padding-right:8px;color:#fff;font-size:0.72rem;font-weight:600;font-family:'DM Mono',monospace;}
+  .funnel-step{display:flex;justify-content:space-between;padding:12px 0;border-bottom:1px solid var(--border);}
+  .funnel-step .fname{font-size:0.88rem;}
+  .funnel-step .fval{font-family:'Cormorant Garamond',serif;font-size:1.3rem;font-weight:700;color:var(--ink);}
+  .funnel-step .fpct{font-family:'DM Mono',monospace;font-size:0.7rem;color:var(--gold);}
+
+  .empty{text-align:center;padding:40px;color:var(--muted);}
+
+  /* ── Needs Attention ── */
+  .panel.attn{border-color:var(--gold);box-shadow:0 0 0 1px var(--gold-pale);}
+  .attn-row{display:flex;align-items:center;gap:14px;padding:14px 24px;border-bottom:1px solid var(--border);}
+  .attn-row:last-child{border-bottom:none;}
+  .attn-dot{width:8px;height:8px;border-radius:50%;background:var(--gold);flex-shrink:0;}
+  .attn-t{flex:1;color:var(--ink);font-weight:500;}
+  .attn-cta{background:var(--navy);color:var(--gold-mid);border:none;border-radius:6px;font-family:'DM Mono',monospace;font-size:0.6rem;letter-spacing:0.1em;text-transform:uppercase;padding:8px 14px;cursor:pointer;}
+  .attn-cta:hover{background:var(--navy-3);}
+
+  /* ── Modal ── */
+  #mc-modal{position:fixed;inset:0;z-index:2000;background:rgba(7,12,22,0.55);backdrop-filter:blur(4px);display:none;align-items:center;justify-content:center;padding:24px;}
+  #mc-modal.on{display:flex;}
+  #mc-modal .mbox{background:var(--white);border-radius:14px;width:480px;max-width:96vw;max-height:90vh;overflow:auto;box-shadow:0 40px 100px rgba(0,0,0,0.4);animation:mcpop .22s cubic-bezier(.16,1,.3,1);}
+  @keyframes mcpop{from{opacity:0;transform:translateY(14px) scale(.98);}to{opacity:1;transform:none;}}
+  #mc-modal .mhead{padding:22px 26px 6px;}
+  #mc-modal .mhead h3{font-family:'Cormorant Garamond',serif;font-size:1.6rem;color:var(--ink);font-weight:700;}
+  #mc-modal .mhead p{color:var(--muted);font-size:0.85rem;margin-top:2px;}
+  #mc-modal .mbody{padding:14px 26px 8px;}
+  #mc-modal .mfield{margin-bottom:14px;}
+  #mc-modal label{display:block;font-family:'DM Mono',monospace;font-size:0.62rem;letter-spacing:0.12em;text-transform:uppercase;color:var(--muted);margin-bottom:6px;}
+  #mc-modal input,#mc-modal textarea,#mc-modal select{width:100%;border:1.5px solid var(--border);border-radius:8px;padding:0.7rem 0.85rem;font-family:'Inter',sans-serif;font-size:0.95rem;outline:none;background:var(--white);color:var(--body);}
+  #mc-modal input:focus,#mc-modal textarea:focus{border-color:var(--gold);box-shadow:0 0 0 3px rgba(171,126,55,0.1);}
+  #mc-modal .mfoot{padding:12px 26px 24px;display:flex;gap:10px;justify-content:flex-end;}
+  #mc-modal .mbtn{border:none;border-radius:8px;font-family:'DM Mono',monospace;font-size:0.66rem;letter-spacing:0.12em;text-transform:uppercase;padding:11px 18px;cursor:pointer;}
+  #mc-modal .mbtn.go{background:var(--navy);color:var(--gold-mid);}
+  #mc-modal .mbtn.go:hover{background:var(--navy-3);}
+  #mc-modal .mbtn.cancel{background:transparent;border:1px solid var(--border);color:var(--muted);}
+  #mc-modal .merr{color:var(--red);font-size:0.82rem;padding:0 26px;display:none;}
+
+  /* ── Toasts ── */
+  #mc-toasts{position:fixed;bottom:22px;right:22px;z-index:2200;display:flex;flex-direction:column;gap:10px;}
+  .mc-toast{background:var(--navy);color:#fff;border-radius:10px;padding:14px 18px;min-width:240px;max-width:360px;box-shadow:0 20px 50px -16px rgba(0,0,0,0.5);font-size:0.9rem;display:flex;gap:12px;align-items:flex-start;animation:mctin .25s cubic-bezier(.16,1,.3,1);border-left:3px solid var(--gold);}
+  .mc-toast.success{border-left-color:var(--green);}
+  .mc-toast.error{border-left-color:var(--red);}
+  .mc-toast .mt-ico{font-size:1rem;}
+  .mc-toast .mt-x{margin-left:auto;cursor:pointer;color:rgba(255,255,255,0.5);}
+  @keyframes mctin{from{opacity:0;transform:translateX(24px);}to{opacity:1;transform:none;}}
+
+  /* ── Mobile ── */
+  .mobile-menu{display:none;background:none;border:1px solid var(--border);border-radius:8px;padding:7px 11px;cursor:pointer;font-size:1.1rem;color:var(--ink);}
+  @media(max-width:900px){
+    .sidebar{transform:translateX(-100%);transition:transform .28s cubic-bezier(.16,1,.3,1);box-shadow:0 0 60px rgba(0,0,0,0.4);}
+    .sidebar.open{transform:none;}
+    .main{margin-left:0;}
+    .mobile-menu{display:inline-flex;}
+    .kpis{grid-template-columns:1fr 1fr;}
+  }
+</style>
+</head>
+<body>
+
+<!-- ═══ LOGIN ═══ -->
+<div id="login">
+  <div class="box">
+    <div class="wm">CIRILO</div>
+    <div class="sub">Admin Console</div>
+    <div class="err" id="login-err">Incorrect credentials.</div>
+    <label>Email</label>
+    <input type="email" id="li-email" value="mark@markcmo.com" autocomplete="username">
+    <label>Password</label>
+    <input type="password" id="li-pass" autocomplete="current-password">
+    <button onclick="doLogin()">Sign In</button>
+  </div>
+</div>
+
+<!-- ═══ APP ═══ -->
+<div class="app" id="app">
+  <aside class="sidebar">
+    <div class="sb-brand">
+      <div class="wm">CIRILO</div>
+      <div class="sub">Design + Build</div>
+    </div>
+    <nav class="sb-nav">
+      <a data-view="dashboard" class="active"><span class="ico">&#9632;</span> Dashboard</a>
+      <a data-view="activity"><span class="ico">&#9788;</span> Activity</a>
+      <a data-view="pipeline"><span class="ico">&#9776;</span> Pipeline</a>
+      <a data-view="leads"><span class="ico">&#9993;</span> Leads</a>
+      <a data-view="clients"><span class="ico">&#9787;</span> Clients</a>
+      <a data-view="proposals"><span class="ico">&#9998;</span> Proposals</a>
+      <a data-view="analytics"><span class="ico">&#9650;</span> Analytics</a>
+      <a data-view="referrals"><span class="ico">&#9856;</span> Referrals</a>
+      <a data-view="payments"><span class="ico">&#9679;</span> Payments</a>
+      <a data-view="financials"><span class="ico">&#9650;</span> Financials</a>
+      <a data-view="email"><span class="ico">&#9993;</span> Email</a>
+      <a data-view="vendors"><span class="ico">&#9874;</span> Vendors</a>
+      <a data-view="partners"><span class="ico">&#9733;</span> Partners</a>
+      <a data-view="documents"><span class="ico">&#9783;</span> Documents</a>
+    </nav>
+    <div class="sb-foot">
+      <div class="who" id="who">Tiffany Cirilo</div>
+      <a onclick="logout()">Sign out</a>
+    </div>
+  </aside>
+
+  <div class="main">
+    <div class="topbar">
+      <div style="display:flex;align-items:center;gap:12px;">
+        <button class="mobile-menu" onclick="document.querySelector('.sidebar').classList.toggle('open')" aria-label="Menu">&#9776;</button>
+        <h1 id="view-title">Dashboard</h1>
+      </div>
+      <div style="display:flex;align-items:center;gap:14px;">
+        <button id="bell" onclick="showActivity()" title="Activity" style="position:relative;background:none;border:1px solid var(--border);border-radius:8px;padding:8px 12px;cursor:pointer;font-size:1rem;">&#9788;<span id="bell-count" style="display:none;position:absolute;top:-7px;right:-7px;background:var(--gold);color:#fff;font-family:'DM Mono',monospace;font-size:0.6rem;min-width:18px;height:18px;line-height:18px;text-align:center;border-radius:9px;padding:0 4px;">0</span></button>
+        <span class="demo-badge" id="data-badge">Demo Data</span>
+      </div>
+    </div>
+
+    <!-- ACTIVITY -->
+    <section class="view" id="view-activity">
+      <div class="panel">
+        <div class="panel-head"><h2>Activity Feed</h2><span class="meta">Everything happening across your business</span></div>
+        <div class="panel-body" id="activity-feed"><p class="empty">Loading activity...</p></div>
+      </div>
+    </section>
+
+    <!-- DASHBOARD -->
+    <section class="view active" id="view-dashboard">
+      <div class="panel attn" id="attn-panel" style="display:none;">
+        <div class="panel-head"><h2>Needs Attention</h2><span class="meta">Your action items</span></div>
+        <div id="attn-list"></div>
+      </div>
+      <div class="panel" id="sys-health" style="margin-bottom:18px;">
+        <div class="panel-head"><h2>System Health</h2><span class="meta" id="health-mode"></span></div>
+        <div id="health-chips" style="padding:14px 24px;display:flex;gap:10px;flex-wrap:wrap;"></div>
+        <div style="padding:0 24px 16px;display:flex;align-items:center;gap:12px;flex-wrap:wrap;border-top:1px solid var(--line);margin-top:4px;padding-top:14px;">
+          <span style="font-family:'DM Mono',monospace;font-size:0.62rem;letter-spacing:0.08em;text-transform:uppercase;color:var(--muted);">Data retention</span>
+          <button class="kcount" style="cursor:pointer;border:1px solid var(--line);background:#fff;padding:6px 12px;border-radius:8px;" onclick="adminPurgeEvents()">Purge analytics older than 180 days</button>
+          <span id="maint-status" style="font-size:0.82rem;color:var(--muted);"></span>
+        </div>
+      </div>
+      <div class="panel" id="qbo-panel" style="margin-bottom:18px;">
+        <div class="panel-head"><h2>Accounting (QuickBooks)</h2><span class="meta" id="qbo-mode"></span></div>
+        <div id="qbo-body" style="padding:16px 24px;display:flex;align-items:center;gap:14px;flex-wrap:wrap;">
+          <span id="qbo-status" style="font-size:0.9rem;color:var(--muted);">Checking...</span>
+          <span id="qbo-actions" style="display:flex;gap:8px;flex-wrap:wrap;"></span>
+        </div>
+      </div>
+      <div class="kpis" id="kpis"></div>
+      <div class="panel">
+        <div class="panel-head"><h2>Active Pipeline</h2><span class="meta" id="pipe-summary"></span></div>
+        <div class="kanban-wrap"><div class="kanban" id="mini-kanban"></div></div>
+      </div>
+      <div class="panel">
+        <div class="panel-head"><h2>New Leads</h2><span class="meta">Last 7 days</span></div>
+        <div class="panel-body" style="padding:0;"><div id="dash-leads"></div></div>
+      </div>
+    </section>
+
+    <!-- PIPELINE -->
+    <section class="view" id="view-pipeline">
+      <div class="panel">
+        <div class="panel-head"><h2>14-Stage Build Pipeline</h2><span class="meta">Drag a project to advance its stage</span></div>
+        <div class="kanban-wrap"><div class="kanban" id="full-kanban"></div></div>
+      </div>
+    </section>
+
+    <!-- LEADS -->
+    <section class="view" id="view-leads">
+      <div class="panel">
+        <div class="panel-head"><h2>Leads Inbox</h2><span class="meta" id="leads-count"></span></div>
+        <div id="leads-table"></div>
+      </div>
+    </section>
+
+    <!-- CLIENTS -->
+    <section class="view" id="view-clients">
+      <div class="panel">
+        <div class="panel-head"><h2>Clients</h2><span class="meta" id="clients-count"></span></div>
+        <div id="clients-table"></div>
+      </div>
+    </section>
+
+    <!-- PROPOSALS -->
+    <section class="view" id="view-proposals">
+      <div class="panel">
+        <div class="panel-head"><h2>Proposals</h2><button onclick="createProposal()" style="background:var(--gold);color:#fff;border:none;border-radius:6px;font-family:'DM Mono',monospace;font-size:0.62rem;letter-spacing:0.1em;text-transform:uppercase;padding:8px 14px;cursor:pointer;">New proposal</button></div>
+        <div class="panel-body" style="padding:14px 24px;color:var(--muted);font-size:0.85rem;">Create a proposal to get a unique link to send your prospect. When they sign it, they become a client with Owner Suite access automatically.</div>
+        <div id="proposals-table"></div>
+      </div>
+    </section>
+
+    <!-- ANALYTICS -->
+    <section class="view" id="view-analytics">
+      <div class="analytics-grid">
+        <div class="panel">
+          <div class="panel-head"><h2>Lead Source Attribution</h2><span class="meta">Last 30 days</span></div>
+          <div class="panel-body" id="source-bars"></div>
+        </div>
+        <div class="panel">
+          <div class="panel-head"><h2>Conversion Funnel</h2><span class="meta">Inquiry to signed</span></div>
+          <div class="panel-body" id="funnel"></div>
+        </div>
+      </div>
+      <div class="panel">
+        <div class="panel-head"><h2>Top Pages</h2><span class="meta">By views, last 30 days</span></div>
+        <div class="panel-body" id="page-bars"></div>
+      </div>
+    </section>
+
+    <!-- REFERRALS -->
+    <section class="view" id="view-referrals">
+      <div class="kpis" id="ref-kpis"></div>
+      <div class="panel">
+        <div class="panel-head"><h2>Referrals</h2><span class="meta" id="ref-count"></span></div>
+        <div id="referrals-table"></div>
+      </div>
+    </section>
+
+    <!-- EMAIL -->
+    <section class="view" id="view-email">
+      <div class="panel">
+        <div class="panel-head"><h2>Email Templates</h2><span class="meta">Used across the journey</span></div>
+        <div class="panel-body" id="email-templates"></div>
+      </div>
+      <div class="panel">
+        <div class="panel-head">
+          <h2>Automated Follow-ups</h2>
+          <button onclick="previewFollowups()" style="background:var(--gold);color:#fff;border:none;border-radius:6px;font-family:'DM Mono',monospace;font-size:0.62rem;letter-spacing:0.1em;text-transform:uppercase;padding:8px 14px;cursor:pointer;">Preview queue (dry run)</button>
+        </div>
+        <div class="panel-body">
+          <p style="background:var(--gold-pale);color:var(--gold);padding:12px 16px;border-radius:8px;font-size:0.85rem;margin-bottom:16px;">Sending is disabled. Nothing is emailed automatically. This preview shows what the system would send once you turn it on.</p>
+          <div id="email-queue"><p class="empty">Click "Preview queue" to see due follow-ups.</p></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- VENDORS -->
+    <section class="view" id="view-vendors">
+      <div class="kpis" id="ven-kpis"></div>
+      <div class="panel">
+        <div class="panel-head"><h2>Build Schedule</h2><span class="meta">Assignments by due date</span></div>
+        <div id="schedule-table"></div>
+      </div>
+      <div class="panel">
+        <div class="panel-head"><h2>Vendors</h2><button onclick="adminAddVendor()" style="background:var(--gold);color:#fff;border:none;border-radius:6px;font-family:'DM Mono',monospace;font-size:0.62rem;letter-spacing:0.1em;text-transform:uppercase;padding:8px 14px;cursor:pointer;">Add vendor</button></div>
+        <div id="vendors-table"></div>
+      </div>
+      <div class="panel">
+        <div class="panel-head"><h2>Assignments</h2><span><button onclick="qboSyncVendorsAll()" style="background:var(--navy);color:var(--gold-mid);border:none;border-radius:6px;font-family:'DM Mono',monospace;font-size:0.62rem;letter-spacing:0.1em;text-transform:uppercase;padding:8px 14px;cursor:pointer;">Sync vendors to QB</button> <span class="meta">Vendors on active jobs</span></span></div>
+        <div id="assign-table"></div>
+      </div>
+      <div class="panel">
+        <div class="panel-head"><h2>Open Jobs for Bid</h2><button onclick="adminPostJob()" style="background:var(--navy);color:var(--gold-mid);border:none;border-radius:6px;font-family:'DM Mono',monospace;font-size:0.62rem;letter-spacing:0.1em;text-transform:uppercase;padding:8px 14px;cursor:pointer;">Post a job</button></div>
+        <div id="jobs-table"></div>
+      </div>
+      <div class="panel">
+        <div class="panel-head"><h2>Bids Received</h2><span class="meta">Award to assign the job</span></div>
+        <div id="bids-table"></div>
+      </div>
+    </section>
+
+    <!-- PARTNERS -->
+    <section class="view" id="view-partners">
+      <div class="kpis" id="partner-kpis"></div>
+      <div class="panel">
+        <div class="panel-head"><h2>Partner Applications</h2><span class="meta" id="partner-count"></span></div>
+        <div id="partners-table"></div>
+      </div>
+      <div class="panel">
+        <div class="panel-head"><h2>3D Rendering Requests</h2><span class="meta" id="rendering-count"></span></div>
+        <div id="renderings-table"></div>
+      </div>
+    </section>
+
+    <!-- DOCUMENTS -->
+    <section class="view" id="view-documents">
+      <div class="panel">
+        <div class="panel-head">
+          <h2>Document Vault</h2>
+          <span><input type="file" id="admin-doc-file" style="display:none;" onchange="adminDocUpload(this)"><button onclick="document.getElementById('admin-doc-file').click()" style="background:var(--gold);color:#fff;border:none;border-radius:6px;font-family:'DM Mono',monospace;font-size:0.62rem;letter-spacing:0.1em;text-transform:uppercase;padding:8px 14px;cursor:pointer;">Upload</button> <span id="admin-doc-status" style="font-size:0.8rem;color:var(--muted);"></span></span>
+        </div>
+        <div id="documents-list"></div>
+      </div>
+    </section>
+
+    <!-- PAYMENTS -->
+    <section class="view" id="view-payments">
+      <div class="kpis" id="pay-kpis"></div>
+      <div class="panel">
+        <div class="panel-head"><h2>Billing &amp; Draws</h2><span><button onclick="setupBilling()" style="background:var(--gold);color:#fff;border:none;border-radius:6px;font-family:'DM Mono',monospace;font-size:0.62rem;letter-spacing:0.1em;text-transform:uppercase;padding:8px 14px;cursor:pointer;">Set up billing</button> <span class="meta" id="pay-count"></span></span></div>
+        <div id="payments-table"></div>
+      </div>
+    </section>
+
+    <!-- FINANCIALS -->
+    <section class="view" id="view-financials">
+      <div class="kpis" id="fin-kpis"></div>
+      <div class="panel">
+        <div class="panel-head"><h2>Project Financials</h2><span class="meta">Gross margin before overhead</span></div>
+        <div id="fin-table"></div>
+      </div>
+    </section>
+
+  </div>
+</div>
+
+<!-- Modal + toasts -->
+<div id="mc-modal">
+  <div class="mbox">
+    <div class="mhead"><h3 id="mc-title">Title</h3><p id="mc-sub" style="display:none;"></p></div>
+    <div class="merr" id="mc-err"></div>
+    <div class="mbody" id="mc-fields"></div>
+    <div class="mfoot">
+      <button class="mbtn cancel" id="mc-cancel">Cancel</button>
+      <button class="mbtn go" id="mc-ok">Save</button>
+    </div>
+  </div>
+</div>
+<div id="mc-toasts"></div>
+
+<script src="/admin/admin.js"></script>
+</body>
+</html>

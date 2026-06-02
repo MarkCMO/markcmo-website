@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 800" preserveAspectRatio="xMidYMid slice" role="img" aria-label="Step by step rollout from discovery call to active plan">
+  <rect width="1000" height="800" fill="#F3E9DA"/>
+  <circle cx="-20" cy="830" r="260" fill="#586B4D"/>
+  <circle cx="1030" cy="-30" r="240" fill="#BE4E2B"/>
+  <circle cx="160" cy="140" r="34" fill="#C6892F" opacity=".5"/>
+  <circle cx="500" cy="400" r="250" fill="#FBF6EE"/>
+  <path d="M330 540 C420 470 432 558 510 480 C588 404 562 364 660 302" fill="none" stroke="#C6892F" stroke-width="6" stroke-linecap="round" stroke-dasharray="2 18"/>
+  <circle cx="330" cy="540" r="20" fill="#FBF6EE" stroke="#9C3C1E" stroke-width="6"/>
+  <circle cx="510" cy="480" r="20" fill="#FBF6EE" stroke="#9C3C1E" stroke-width="6"/>
+  <circle cx="660" cy="302" r="20" fill="#FBF6EE" stroke="#9C3C1E" stroke-width="6"/>
+  <line x1="660" y1="302" x2="660" y2="248" stroke="#221C15" stroke-width="6" stroke-linecap="round"/>
+  <path d="M660 250 L716 266 L660 282 Z" fill="#BE4E2B"/>
+</svg>

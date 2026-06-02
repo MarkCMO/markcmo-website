@@ -1,0 +1,859 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Your Project | Cirilo Design + Build</title>
+<meta name="robots" content="noindex, nofollow">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;0,700;1,500&family=Inter:wght@300;400;500;600;700&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --gold:#AB7E37;--gold-mid:#D6BB89;--gold-lite:#E3D3B2;--gold-pale:#F4ECDC;
+    --navy:#0A1628;--navy-2:#0F2040;--navy-3:#162A4A;--navy-glass:rgba(10,22,40,0.72);
+    --ink:#15151A;--body:#3A3A42;--muted:#8C8C94;--line:#E7E3DA;
+    --bg:#F6F3ED;--paper:#FCFAF6;--white:#FFF;
+    --green:#5A8A4A;--green-pale:#EAF2E6;--amber:#C99A3A;
+    --shadow:0 30px 70px -30px rgba(20,18,12,0.32);
+    --shadow-sm:0 12px 30px -16px rgba(20,18,12,0.30);
+  }
+  *{box-sizing:border-box;margin:0;padding:0;}
+  html{scroll-behavior:smooth;}
+  body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--body);font-size:15px;line-height:1.65;-webkit-font-smoothing:antialiased;overflow-x:hidden;}
+  .serif{font-family:'Cormorant Garamond',serif;}
+  .mono{font-family:'DM Mono',monospace;}
+  ::selection{background:var(--gold-mid);color:var(--navy);}
+
+  /* film grain overlay */
+  body::after{content:'';position:fixed;inset:0;pointer-events:none;z-index:9999;opacity:0.035;mix-blend-mode:multiply;
+    background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");}
+
+  .eyebrow{font-family:'DM Mono',monospace;font-size:0.62rem;letter-spacing:0.4em;text-transform:uppercase;color:var(--gold);}
+
+  /* ─────────────────  LOGIN  ───────────────── */
+  #gate{position:fixed;inset:0;z-index:1000;background:var(--navy);display:flex;align-items:center;justify-content:center;overflow:hidden;}
+  #gate .bgimg{position:absolute;inset:0;background:linear-gradient(140deg,rgba(10,22,40,0.86),rgba(10,22,40,0.55)),url('https://images.unsplash.com/photo-1572331165267-854da2b10ccc?auto=format&fit=crop&w=1600&q=80') center/cover;animation:kb 24s ease-in-out infinite alternate;}
+  @keyframes kb{from{transform:scale(1.04)}to{transform:scale(1.16)}}
+  #gate .vsig{position:absolute;inset:0;background:radial-gradient(ellipse at 50% 40%,transparent 30%,rgba(5,11,22,0.55) 100%);}
+  #gate .box{position:relative;z-index:2;width:430px;max-width:92vw;background:rgba(252,250,246,0.97);border:1px solid rgba(214,187,137,0.4);border-radius:4px;padding:54px 48px 46px;box-shadow:0 50px 120px -30px rgba(0,0,0,0.7);}
+  #gate .crest{width:54px;height:54px;margin:0 auto 22px;border:1px solid var(--gold);border-radius:50%;display:flex;align-items:center;justify-content:center;}
+  #gate .crest span{font-family:'Cormorant Garamond',serif;font-size:1.5rem;font-weight:700;color:var(--gold);}
+  #gate .wm{font-family:'Cormorant Garamond',serif;font-size:2.5rem;font-weight:700;letter-spacing:0.16em;text-align:center;color:var(--navy);line-height:1;}
+  #gate .sub{font-family:'DM Mono',monospace;font-size:0.6rem;letter-spacing:0.42em;color:var(--gold);text-transform:uppercase;text-align:center;margin-top:10px;}
+  #gate .welcome{text-align:center;font-family:'Cormorant Garamond',serif;font-style:italic;font-size:1.15rem;color:var(--body);margin:26px 0 24px;}
+  #gate label{font-family:'DM Mono',monospace;font-size:0.6rem;letter-spacing:0.18em;text-transform:uppercase;color:var(--muted);display:block;margin-bottom:7px;}
+  #gate input{width:100%;padding:0.85rem 1rem;border:1px solid var(--line);border-radius:3px;font-family:'Inter',sans-serif;font-size:0.98rem;margin-bottom:18px;outline:none;background:var(--white);transition:border-color .2s;}
+  #gate input:focus{border-color:var(--gold);box-shadow:0 0 0 3px rgba(171,126,55,0.08);}
+  #gate .btn{width:100%;padding:0.95rem;background:var(--navy);color:var(--gold-lite);border:none;border-radius:3px;font-family:'DM Mono',monospace;font-size:0.75rem;letter-spacing:0.22em;text-transform:uppercase;cursor:pointer;transition:background .25s,letter-spacing .25s;}
+  #gate .btn:hover{background:var(--navy-3);letter-spacing:0.3em;}
+  #gate .err{color:#B33A3A;font-size:0.82rem;text-align:center;margin-bottom:14px;display:none;}
+  #gate .hint{text-align:center;font-size:0.78rem;color:var(--muted);margin-top:22px;line-height:1.6;}
+  #gate .hint a{color:var(--gold);text-decoration:none;}
+  #gate .modes{display:flex;gap:6px;background:var(--gold-pale);border-radius:4px;padding:5px;margin:24px 0 22px;}
+  #gate .modes button{flex:1;padding:11px 8px;border:none;background:transparent;border-radius:3px;font-family:'DM Mono',monospace;font-size:0.6rem;letter-spacing:0.16em;text-transform:uppercase;color:var(--muted);cursor:pointer;transition:.2s;}
+  #gate .modes button.on{background:var(--white);color:var(--navy);box-shadow:0 2px 8px rgba(20,18,12,0.12);}
+  #gate .field.hide{display:none;}
+
+  /* ─────────────────  APP SHELL  ───────────────── */
+  .app{display:none;}
+  .topnav{position:fixed;top:0;left:0;right:0;z-index:200;display:flex;justify-content:space-between;align-items:center;padding:16px 40px;background:var(--navy-glass);backdrop-filter:blur(16px) saturate(150%);border-bottom:1px solid rgba(214,187,137,0.16);}
+  .topnav .brand{font-family:'Cormorant Garamond',serif;font-size:1.5rem;font-weight:700;letter-spacing:0.18em;color:var(--gold-lite);}
+  .topnav .brand small{display:block;font-family:'DM Mono',monospace;font-size:0.48rem;letter-spacing:0.36em;color:var(--gold-mid);margin-top:1px;}
+  .topnav .right{display:flex;align-items:center;gap:22px;}
+  .topnav .uname{color:rgba(255,255,255,0.82);font-size:0.85rem;}
+  .topnav .uname b{color:#fff;font-weight:600;}
+  .topnav .out{font-family:'DM Mono',monospace;font-size:0.62rem;letter-spacing:0.16em;text-transform:uppercase;color:var(--gold-mid);text-decoration:none;cursor:pointer;border:1px solid rgba(214,187,137,0.3);padding:7px 14px;border-radius:3px;transition:.2s;}
+  .topnav .out:hover{background:rgba(214,187,137,0.12);color:#fff;}
+  @media(max-width:640px){.topnav{padding:14px 20px;}.topnav .uname{display:none;}}
+
+  /* ─────────────────  HERO  ───────────────── */
+  .phero{position:relative;min-height:88vh;display:flex;align-items:flex-end;overflow:hidden;color:#fff;}
+  .phero .img{position:absolute;inset:0;background-position:center;background-size:cover;animation:kb 30s ease-in-out infinite alternate;}
+  .phero .scrim{position:absolute;inset:0;background:linear-gradient(180deg,rgba(10,22,40,0.45) 0%,rgba(10,22,40,0.15) 35%,rgba(10,22,40,0.55) 75%,rgba(10,22,40,0.92) 100%);}
+  .phero .inner{position:relative;z-index:2;width:100%;max-width:1180px;margin:0 auto;padding:0 40px 64px;}
+  .phero .eyebrow{color:var(--gold-lite);}
+  .phero h1{font-family:'Cormorant Garamond',serif;font-weight:700;font-size:clamp(2.6rem,6vw,4.8rem);line-height:1.02;margin:14px 0 10px;letter-spacing:-0.01em;text-shadow:0 2px 30px rgba(0,0,0,0.4);}
+  .phero .loc{font-family:'DM Mono',monospace;font-size:0.8rem;letter-spacing:0.12em;color:rgba(255,255,255,0.85);}
+  .phero .progwrap{margin-top:34px;max-width:560px;}
+  .phero .progtop{display:flex;justify-content:space-between;align-items:baseline;margin-bottom:10px;}
+  .phero .progtop .stage{font-family:'Cormorant Garamond',serif;font-style:italic;font-size:1.4rem;color:#fff;}
+  .phero .progtop .pct{font-family:'Cormorant Garamond',serif;font-size:2.6rem;font-weight:700;color:var(--gold-lite);line-height:1;}
+  .phero .track{height:6px;background:rgba(255,255,255,0.18);border-radius:6px;overflow:hidden;}
+  .phero .fill{height:100%;width:0;background:linear-gradient(90deg,var(--gold),var(--gold-lite));border-radius:6px;transition:width 1.6s cubic-bezier(.16,1,.3,1);box-shadow:0 0 18px rgba(214,187,137,0.6);}
+  .phero .next{margin-top:14px;font-size:0.86rem;color:rgba(255,255,255,0.8);}
+  .phero .next b{color:var(--gold-lite);font-weight:600;}
+  .scrollcue{position:absolute;left:50%;bottom:24px;transform:translateX(-50%);z-index:3;color:rgba(255,255,255,0.6);font-family:'DM Mono',monospace;font-size:0.55rem;letter-spacing:0.3em;text-transform:uppercase;animation:bob 2.4s ease-in-out infinite;}
+  @keyframes bob{0%,100%{transform:translate(-50%,0);opacity:.5}50%{transform:translate(-50%,8px);opacity:1}}
+
+  /* ─────────────────  CONTENT  ───────────────── */
+  .wrap{max-width:1180px;margin:0 auto;padding:0 40px;}
+  @media(max-width:640px){.wrap,.phero .inner{padding-left:20px;padding-right:20px;}}
+  section.block{padding:76px 0;}
+  .sec-head{margin-bottom:40px;}
+  .sec-head h2{font-family:'Cormorant Garamond',serif;font-size:clamp(1.9rem,3.6vw,2.8rem);font-weight:700;color:var(--ink);line-height:1.05;margin-top:8px;}
+  .sec-head p{color:var(--muted);max-width:560px;margin-top:8px;}
+
+  /* reveal */
+  [data-rv]{opacity:0;transform:translateY(28px);transition:opacity .9s cubic-bezier(.16,1,.3,1),transform .9s cubic-bezier(.16,1,.3,1);}
+  [data-rv].in{opacity:1;transform:none;}
+  [data-rv][data-d="1"]{transition-delay:.08s}[data-rv][data-d="2"]{transition-delay:.16s}[data-rv][data-d="3"]{transition-delay:.24s}[data-rv][data-d="4"]{transition-delay:.32s}
+
+  /* snapshot stat band */
+  .snap{background:var(--navy);color:#fff;}
+  .snap .grid{display:grid;grid-template-columns:repeat(4,1fr);}
+  .snap .cell{padding:46px 30px;border-right:1px solid rgba(255,255,255,0.08);text-align:center;}
+  .snap .cell:last-child{border-right:none;}
+  .snap .k{font-family:'Cormorant Garamond',serif;font-size:2.8rem;font-weight:700;color:var(--gold-lite);line-height:1;}
+  .snap .l{font-family:'DM Mono',monospace;font-size:0.6rem;letter-spacing:0.2em;text-transform:uppercase;color:rgba(255,255,255,0.6);margin-top:10px;}
+  @media(max-width:760px){.snap .grid{grid-template-columns:1fr 1fr;}.snap .cell:nth-child(2){border-right:none;}.snap .cell:nth-child(1),.snap .cell:nth-child(2){border-bottom:1px solid rgba(255,255,255,0.08);}}
+
+  /* ── TIMELINE (14 stages) ── */
+  .timeline{position:relative;}
+  .tl-track{position:absolute;left:21px;top:8px;bottom:8px;width:2px;background:var(--line);}
+  .tl-prog{position:absolute;left:21px;top:8px;width:2px;background:linear-gradient(180deg,var(--gold),var(--gold-mid));transition:height 1.8s cubic-bezier(.16,1,.3,1);}
+  .tl-step{position:relative;display:flex;gap:24px;padding:12px 0;}
+  .tl-dot{position:relative;z-index:2;width:44px;height:44px;flex-shrink:0;border-radius:50%;background:var(--paper);border:2px solid var(--line);display:flex;align-items:center;justify-content:center;font-family:'DM Mono',monospace;font-size:0.72rem;color:var(--muted);transition:.4s;}
+  .tl-step.done .tl-dot{background:var(--gold);border-color:var(--gold);color:#fff;}
+  .tl-step.current .tl-dot{background:var(--navy);border-color:var(--gold);color:var(--gold-lite);box-shadow:0 0 0 5px rgba(171,126,55,0.16);transform:scale(1.08);}
+  .tl-body{padding:9px 0;flex:1;border-bottom:1px solid var(--line);}
+  .tl-step:last-child .tl-body{border-bottom:none;}
+  .tl-name{font-family:'Cormorant Garamond',serif;font-size:1.35rem;font-weight:600;color:var(--ink);}
+  .tl-step.upcoming .tl-name{color:var(--muted);}
+  .tl-meta{font-family:'DM Mono',monospace;font-size:0.68rem;letter-spacing:0.06em;color:var(--muted);text-transform:uppercase;margin-top:2px;}
+  .tl-step.current .tl-meta{color:var(--gold);}
+  .tl-badge{display:inline-block;margin-left:10px;font-family:'DM Mono',monospace;font-size:0.55rem;letter-spacing:0.12em;text-transform:uppercase;padding:2px 9px;border-radius:20px;vertical-align:middle;}
+  .tl-step.current .tl-badge{background:var(--navy);color:var(--gold-lite);}
+  .tl-step.done .tl-badge{background:var(--green-pale);color:var(--green);}
+  .tl-desc{font-size:0.9rem;color:var(--body);margin-top:6px;max-width:600px;}
+
+  /* ── GALLERY ── */
+  .gallery{display:grid;grid-template-columns:repeat(12,1fr);gap:14px;}
+  .gi{position:relative;overflow:hidden;border-radius:4px;cursor:pointer;background:var(--navy);min-height:180px;}
+  .gi img{width:100%;height:100%;object-fit:cover;display:block;transition:transform 1.1s cubic-bezier(.16,1,.3,1);}
+  .gi:hover img{transform:scale(1.07);}
+  .gi .cap{position:absolute;left:0;right:0;bottom:0;padding:26px 18px 14px;background:linear-gradient(transparent,rgba(10,22,40,0.85));color:#fff;}
+  .gi .cap .t{font-family:'Cormorant Garamond',serif;font-size:1.1rem;font-weight:600;}
+  .gi .cap .d{font-family:'DM Mono',monospace;font-size:0.58rem;letter-spacing:0.14em;text-transform:uppercase;color:var(--gold-lite);}
+  .gi.big{grid-column:span 6;min-height:380px;}
+  .gi.med{grid-column:span 6;min-height:380px;}
+  .gi.sm{grid-column:span 4;}
+  @media(max-width:760px){.gi.big,.gi.med,.gi.sm{grid-column:span 12;min-height:240px;}}
+
+  /* ── DOCS + DRAW columns ── */
+  .two{display:grid;grid-template-columns:1.15fr 1fr;gap:30px;}
+  @media(max-width:900px){.two{grid-template-columns:1fr;}}
+  .card{background:var(--paper);border:1px solid var(--line);border-radius:6px;box-shadow:var(--shadow-sm);overflow:hidden;}
+  .card-h{padding:22px 26px;border-bottom:1px solid var(--line);display:flex;justify-content:space-between;align-items:baseline;}
+  .card-h h3{font-family:'Cormorant Garamond',serif;font-size:1.5rem;font-weight:700;color:var(--ink);}
+  .card-h .meta{font-family:'DM Mono',monospace;font-size:0.62rem;letter-spacing:0.1em;text-transform:uppercase;color:var(--muted);}
+  .doc{display:flex;align-items:center;gap:16px;padding:16px 26px;border-bottom:1px solid var(--line);text-decoration:none;color:inherit;transition:background .2s;}
+  .doc:last-child{border-bottom:none;}
+  .doc:hover{background:var(--gold-pale);}
+  .doc .dico{width:40px;height:40px;flex-shrink:0;border-radius:4px;background:var(--navy);color:var(--gold-lite);display:flex;align-items:center;justify-content:center;font-family:'DM Mono',monospace;font-size:0.6rem;letter-spacing:0.05em;}
+  .doc .dn{flex:1;}
+  .doc .dn .t{font-weight:600;color:var(--ink);font-size:0.94rem;}
+  .doc .dn .s{font-size:0.76rem;color:var(--muted);}
+  .doc .stat{font-family:'DM Mono',monospace;font-size:0.58rem;letter-spacing:0.1em;text-transform:uppercase;padding:3px 10px;border-radius:20px;}
+  .stat.signed,.stat.executed,.stat.paid{background:var(--green-pale);color:var(--green);}
+  .stat.sent,.stat.draft{background:var(--gold-pale);color:var(--gold);}
+  .doc .arrow{color:var(--gold);font-size:1.1rem;}
+
+  .draw{display:flex;align-items:center;gap:14px;padding:16px 26px;border-bottom:1px solid var(--line);}
+  .draw:last-child{border-bottom:none;}
+  .draw .num{width:30px;height:30px;border-radius:50%;border:1px solid var(--line);display:flex;align-items:center;justify-content:center;font-family:'DM Mono',monospace;font-size:0.72rem;color:var(--muted);flex-shrink:0;}
+  .draw.paid .num{background:var(--green);border-color:var(--green);color:#fff;}
+  .draw.due .num{background:var(--navy);border-color:var(--gold);color:var(--gold-lite);}
+  .draw .dl{flex:1;}
+  .draw .dl .t{font-weight:600;color:var(--ink);font-size:0.92rem;}
+  .draw .dl .s{font-size:0.76rem;color:var(--muted);}
+  .draw .amt{font-family:'Cormorant Garamond',serif;font-size:1.3rem;font-weight:700;color:var(--ink);}
+  .draw.paid .amt{color:var(--green);}
+  .draw-total{display:flex;justify-content:space-between;align-items:baseline;padding:18px 26px;background:var(--navy);color:#fff;}
+  .draw-total .l{font-family:'DM Mono',monospace;font-size:0.66rem;letter-spacing:0.16em;text-transform:uppercase;color:rgba(255,255,255,0.7);}
+  .draw-total .v{font-family:'Cormorant Garamond',serif;font-size:1.7rem;font-weight:700;color:var(--gold-lite);}
+  .draw-pay{margin-left:12px;background:var(--gold);color:#fff;border:none;border-radius:4px;font-family:'DM Mono',monospace;font-size:0.58rem;letter-spacing:0.12em;text-transform:uppercase;padding:8px 14px;cursor:pointer;transition:background .2s;}
+  .draw-pay:hover{background:#8B6529;}
+  .draw .reported{margin-left:12px;font-family:'DM Mono',monospace;font-size:0.56rem;letter-spacing:0.1em;text-transform:uppercase;color:var(--amber);}
+
+  /* payment modal */
+  #pay{position:fixed;inset:0;z-index:1500;background:rgba(7,12,22,0.7);backdrop-filter:blur(4px);display:none;align-items:center;justify-content:center;padding:24px;}
+  #pay .pbox{background:var(--paper);border-radius:8px;max-width:540px;width:100%;max-height:90vh;overflow:auto;box-shadow:0 40px 100px rgba(0,0,0,0.5);}
+  #pay .phead{background:var(--navy);color:#fff;padding:24px 28px;}
+  #pay .phead .e{font-family:'DM Mono',monospace;font-size:0.58rem;letter-spacing:0.2em;text-transform:uppercase;color:var(--gold-mid);}
+  #pay .phead h3{font-family:'Cormorant Garamond',serif;font-size:1.7rem;font-weight:700;color:#fff;margin-top:4px;}
+  #pay .phead .amt{font-family:'Cormorant Garamond',serif;font-size:2.2rem;font-weight:700;color:var(--gold-lite);margin-top:6px;}
+  #pay .pbody{padding:26px 28px;}
+  #pay .ptabs{display:flex;gap:8px;background:var(--gold-pale);border-radius:5px;padding:5px;margin-bottom:20px;}
+  #pay .ptabs button{flex:1;padding:10px;border:none;background:transparent;border-radius:4px;font-family:'DM Mono',monospace;font-size:0.62rem;letter-spacing:0.12em;text-transform:uppercase;color:var(--muted);cursor:pointer;}
+  #pay .ptabs button.on{background:#fff;color:var(--navy);box-shadow:0 2px 8px rgba(20,18,12,0.12);}
+  #pay .pinstr{display:none;}
+  #pay .pinstr.on{display:block;}
+  #pay .prow{display:flex;justify-content:space-between;padding:11px 0;border-bottom:1px solid var(--line);font-size:0.9rem;}
+  #pay .prow:last-child{border-bottom:none;}
+  #pay .prow .k{font-family:'DM Mono',monospace;font-size:0.6rem;letter-spacing:0.1em;text-transform:uppercase;color:var(--muted);}
+  #pay .prow .v{color:var(--ink);font-weight:600;text-align:right;}
+  #pay .pnote{font-size:0.8rem;color:var(--muted);margin-top:14px;line-height:1.5;}
+  #pay label{display:block;font-family:'DM Mono',monospace;font-size:0.62rem;letter-spacing:0.1em;text-transform:uppercase;color:var(--muted);margin:18px 0 6px;}
+  #pay input{width:100%;background:#fff;border:1.5px solid var(--line);border-radius:5px;font-family:'Inter',sans-serif;font-size:0.95rem;padding:0.7rem 0.85rem;outline:none;}
+  #pay input:focus{border-color:var(--gold);}
+  #pay .pacts{display:flex;gap:10px;margin-top:22px;}
+  #pay .pbtn{flex:1;padding:13px;border:none;border-radius:5px;font-family:'DM Mono',monospace;font-size:0.66rem;letter-spacing:0.14em;text-transform:uppercase;cursor:pointer;}
+  #pay .pbtn.go{background:var(--navy);color:var(--gold-lite);}
+  #pay .pbtn.cancel{background:transparent;border:1px solid var(--line);color:var(--muted);}
+  #pay .pdone{display:none;text-align:center;padding:10px 0;}
+  #pay .pdone .c{width:54px;height:54px;margin:0 auto 14px;border-radius:50%;background:var(--green);color:#fff;display:flex;align-items:center;justify-content:center;font-size:1.5rem;}
+
+  /* ── TEAM / CONCIERGE ── */
+  .concierge{background:linear-gradient(140deg,var(--navy),var(--navy-3));color:#fff;border-radius:8px;padding:54px 50px;display:grid;grid-template-columns:1fr auto;gap:40px;align-items:center;box-shadow:var(--shadow);}
+  @media(max-width:760px){.concierge{grid-template-columns:1fr;padding:40px 28px;text-align:center;}}
+  .concierge h2{font-family:'Cormorant Garamond',serif;font-size:2.2rem;font-weight:700;color:#fff;line-height:1.08;}
+  .concierge p{color:rgba(255,255,255,0.78);margin-top:12px;max-width:520px;}
+  .concierge .who{margin-top:22px;display:flex;align-items:center;gap:14px;}
+  @media(max-width:760px){.concierge .who{justify-content:center;}}
+  .concierge .av{width:52px;height:52px;border-radius:50%;background:linear-gradient(135deg,var(--gold-mid),var(--gold));display:flex;align-items:center;justify-content:center;font-family:'Cormorant Garamond',serif;font-weight:700;font-size:1.3rem;color:var(--navy);}
+  .concierge .who .n{font-weight:600;color:#fff;}
+  .concierge .who .r{font-family:'DM Mono',monospace;font-size:0.6rem;letter-spacing:0.14em;text-transform:uppercase;color:var(--gold-mid);}
+  .concierge .acts{display:flex;flex-direction:column;gap:12px;}
+  .concierge .cbtn{display:inline-block;text-align:center;padding:14px 30px;border-radius:3px;font-family:'DM Mono',monospace;font-size:0.7rem;letter-spacing:0.18em;text-transform:uppercase;text-decoration:none;transition:.25s;white-space:nowrap;}
+  .concierge .cbtn.gold{background:var(--gold);color:#fff;}
+  .concierge .cbtn.gold:hover{background:var(--gold-lite);color:var(--navy);}
+  .concierge .cbtn.ghost{border:1px solid rgba(214,187,137,0.4);color:var(--gold-lite);}
+  .concierge .cbtn.ghost:hover{background:rgba(214,187,137,0.12);}
+
+  /* ── ACTIVITY FEED ── */
+  .feed{list-style:none;}
+  .feed li{display:flex;gap:18px;padding:16px 0;border-bottom:1px solid var(--line);}
+  .feed li:last-child{border-bottom:none;}
+  .feed .fdot{width:10px;height:10px;border-radius:50%;background:var(--gold);margin-top:6px;flex-shrink:0;}
+  .feed .ft{font-weight:600;color:var(--ink);font-size:0.92rem;}
+  .feed .fd{font-size:0.84rem;color:var(--body);}
+  .feed .fwhen{font-family:'DM Mono',monospace;font-size:0.62rem;letter-spacing:0.08em;text-transform:uppercase;color:var(--muted);margin-top:3px;}
+
+  /* ── COMPLETION & CARE ── */
+  .comp-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:18px;}
+  @media(max-width:900px){.comp-grid{grid-template-columns:1fr 1fr;}}
+  @media(max-width:560px){.comp-grid{grid-template-columns:1fr;}}
+  .comp-card{background:var(--paper);border:1px solid var(--line);border-radius:6px;padding:26px 22px;box-shadow:var(--shadow-sm);transition:border-color .3s;}
+  .comp-ic{width:42px;height:42px;border-radius:50%;background:var(--gold-pale);color:var(--gold);display:flex;align-items:center;justify-content:center;font-size:1.1rem;margin-bottom:14px;}
+  .comp-card h3{font-family:'Cormorant Garamond',serif;font-size:1.3rem;font-weight:700;color:var(--ink);margin-bottom:6px;}
+  .comp-card p{font-size:0.88rem;color:var(--body);}
+  .comp-act{display:inline-block;margin-top:14px;font-family:'DM Mono',monospace;font-size:0.62rem;letter-spacing:0.12em;text-transform:uppercase;color:var(--muted);text-decoration:none;border-bottom:1px solid transparent;}
+  .comp-act.on{color:var(--gold);border-bottom-color:var(--gold-mid);cursor:pointer;}
+  #sec-complete.unlocked .comp-act{color:var(--gold);border-bottom-color:var(--gold-mid);cursor:pointer;}
+  #sec-complete.unlocked .comp-card{border-color:var(--gold-mid);}
+  .refer-link{display:flex;gap:6px;margin:12px 0 6px;}
+  .refer-link input{flex:1;min-width:0;border:1px solid var(--line);border-radius:4px;padding:7px 9px;font-family:'DM Mono',monospace;font-size:0.66rem;color:var(--ink);background:var(--white);}
+  .refer-link button{background:var(--navy);color:var(--gold-lite);border:none;border-radius:4px;font-family:'DM Mono',monospace;font-size:0.58rem;letter-spacing:0.1em;text-transform:uppercase;padding:0 12px;cursor:pointer;}
+  .refer-link button:hover{background:var(--navy-3);}
+
+  /* footer */
+  .pfoot{background:var(--navy);color:rgba(255,255,255,0.55);text-align:center;padding:48px 20px;}
+  .pfoot .wm{font-family:'Cormorant Garamond',serif;font-size:1.6rem;font-weight:700;letter-spacing:0.16em;color:var(--gold-lite);}
+  .pfoot .sub{font-family:'DM Mono',monospace;font-size:0.55rem;letter-spacing:0.3em;text-transform:uppercase;color:var(--gold-mid);margin-top:4px;}
+  .pfoot .fine{font-size:0.74rem;margin-top:18px;}
+
+  /* lightbox */
+  #lb{position:fixed;inset:0;z-index:2000;background:rgba(7,12,22,0.94);display:none;align-items:center;justify-content:center;padding:30px;cursor:zoom-out;}
+  #lb img{max-width:92vw;max-height:88vh;border-radius:4px;box-shadow:0 40px 120px rgba(0,0,0,0.6);}
+
+  .demo-flag{position:fixed;bottom:16px;right:16px;z-index:500;font-family:'DM Mono',monospace;font-size:0.55rem;letter-spacing:0.14em;text-transform:uppercase;background:var(--amber);color:#fff;padding:6px 12px;border-radius:3px;opacity:0.88;}
+</style>
+</head>
+<body>
+
+<!-- ═══════════ GATE ═══════════ -->
+<div id="gate">
+  <div class="bgimg"></div><div class="vsig"></div>
+  <div class="box">
+    <div class="crest"><span>C</span></div>
+    <div class="wm">CIRILO</div>
+    <div class="sub">Owner&#39;s Suite</div>
+    <p class="welcome serif">Welcome back.</p>
+
+    <div class="modes">
+      <button id="mode-home" class="on" onclick="setMode('home')">Homeowner</button>
+      <button id="mode-team" onclick="setMode('team')">Cirilo Team</button>
+    </div>
+
+    <div class="err" id="gate-err">We could not verify those details. Please check and try again.</div>
+
+    <!-- Homeowner -->
+    <div class="field" id="f-home">
+      <label>Email on file</label>
+      <input type="email" id="g-email" autocomplete="email" placeholder="you@email.com">
+      <label>Access code</label>
+      <input type="text" id="g-code" autocomplete="off" placeholder="Provided in your welcome message">
+      <button class="btn" onclick="enter()">Enter Your Suite</button>
+      <p class="hint">Lost your access code? <a href="mailto:Tiffany@CiriloDB.com">Contact your project lead</a></p>
+    </div>
+
+    <!-- Cirilo Team -->
+    <div class="field hide" id="f-team">
+      <label>Team email</label>
+      <input type="email" id="t-email" autocomplete="username" placeholder="you@cirilodb.com" value="mark@markcmo.com">
+      <label>Password</label>
+      <input type="password" id="t-pass" autocomplete="current-password" placeholder="Your team password">
+      <button class="btn" onclick="enter()">Sign In</button>
+      <p class="hint">Cirilo team access. <a href="/admin/">Open the full admin console</a></p>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════ APP ═══════════ -->
+<div class="app" id="app">
+
+  <nav class="topnav">
+    <div class="brand">CIRILO<small>DESIGN + BUILD</small></div>
+    <div class="right">
+      <div class="uname">Signed in as <b id="nav-name">&nbsp;</b></div>
+      <a class="out" id="admin-link" href="/admin/" style="display:none;">Admin Console</a>
+      <a class="out" onclick="signout()">Sign Out</a>
+    </div>
+  </nav>
+
+  <!-- HERO -->
+  <header class="phero">
+    <div class="img" id="hero-img"></div>
+    <div class="scrim"></div>
+    <div class="inner">
+      <div class="eyebrow">Your Project &middot; <span id="hero-id">CDB</span></div>
+      <h1 id="hero-name">Your Project</h1>
+      <div class="loc" id="hero-loc"></div>
+      <div class="progwrap">
+        <div class="progtop">
+          <div class="stage" id="hero-stage">In Progress</div>
+          <div class="pct" id="hero-pct">0%</div>
+        </div>
+        <div class="track"><div class="fill" id="hero-fill"></div></div>
+        <div class="next">Up next: <b id="hero-next">.</b></div>
+      </div>
+    </div>
+    <div class="scrollcue">Scroll &#8595;</div>
+  </header>
+
+  <!-- SNAPSHOT -->
+  <section class="snap">
+    <div class="wrap"><div class="grid" id="snap"></div></div>
+  </section>
+
+  <!-- TIMELINE -->
+  <section class="block" id="sec-timeline">
+    <div class="wrap">
+      <div class="sec-head" data-rv>
+        <div class="eyebrow">The Journey</div>
+        <h2>Your build, stage by stage</h2>
+        <p>Every Cirilo pool moves through fourteen craftsmanship stages. Here is exactly where yours stands today.</p>
+      </div>
+      <div class="timeline" id="timeline"></div>
+    </div>
+  </section>
+
+  <!-- GALLERY -->
+  <section class="block" style="background:var(--paper);border-top:1px solid var(--line);border-bottom:1px solid var(--line);">
+    <div class="wrap">
+      <div class="sec-head" data-rv>
+        <div class="eyebrow">Progress Gallery</div>
+        <h2>Watch it come to life</h2>
+        <p>Fresh photography from the field, added by your project lead as milestones are reached.</p>
+      </div>
+      <div class="gallery" id="gallery"></div>
+    </div>
+  </section>
+
+  <!-- DOCS + DRAWS -->
+  <section class="block">
+    <div class="wrap two">
+      <div data-rv>
+        <div class="card">
+          <div class="card-h"><h3>Documents</h3><span class="meta">Secure &middot; Private</span></div>
+          <div id="docs"></div>
+          <div style="padding:14px 26px;border-top:1px solid var(--line);display:flex;align-items:center;gap:12px;">
+            <input type="file" id="doc-file" style="display:none;" onchange="portalUpload(this)">
+            <button type="button" onclick="document.getElementById('doc-file').click()" style="background:var(--navy);color:var(--gold-lite);border:none;border-radius:4px;font-family:'DM Mono',monospace;font-size:0.6rem;letter-spacing:0.12em;text-transform:uppercase;padding:9px 14px;cursor:pointer;">Upload a document</button>
+            <span id="doc-up-status" style="font-size:0.8rem;color:var(--muted);"></span>
+          </div>
+        </div>
+      </div>
+      <div data-rv data-d="1">
+        <div class="card">
+          <div class="card-h"><h3>Investment &amp; Draws</h3><span class="meta">Draw Schedule</span></div>
+          <div id="draws"></div>
+          <div class="draw-total"><span class="l">Contract Value</span><span class="v" id="draw-total">$0</span></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ACTIVITY -->
+  <section class="block" style="background:var(--paper);border-top:1px solid var(--line);">
+    <div class="wrap">
+      <div class="sec-head" data-rv>
+        <div class="eyebrow">Recent Activity</div>
+        <h2>Everything that&#39;s moved lately</h2>
+      </div>
+      <ul class="feed" id="feed" data-rv data-d="1"></ul>
+    </div>
+  </section>
+
+  <!-- COMPLETION & CARE -->
+  <section class="block" id="sec-complete" style="background:var(--paper);border-top:1px solid var(--line);">
+    <div class="wrap">
+      <div class="sec-head" data-rv>
+        <div class="eyebrow">At Handover</div>
+        <h2 id="complete-h">When your pool is complete</h2>
+        <p id="complete-sub">Everything you will need the day we hand over the keys to your backyard.</p>
+      </div>
+      <div class="comp-grid" data-rv data-d="1">
+        <div class="comp-card">
+          <div class="comp-ic">&#9733;</div>
+          <h3>10-Year Structural Warranty</h3>
+          <p>Your gunite shell is warranted for ten years. The certificate is issued the day your build completes.</p>
+          <a class="comp-act" id="cc-warranty-a" href="#" onclick="return false;">Issued at handover</a>
+        </div>
+        <div class="comp-card">
+          <div class="comp-ic">&#9826;</div>
+          <h3>Care &amp; Maintenance Guide</h3>
+          <p>Water chemistry, equipment, and seasonal care, written for your exact build and finishes.</p>
+          <a class="comp-act" id="cc-care-a" href="#" onclick="return false;">Ready at handover</a>
+        </div>
+        <div class="comp-card">
+          <div class="comp-ic">&#9734;</div>
+          <h3>Share Your Experience</h3>
+          <p>Proud of your new backyard? A few words from you helps another family find us.</p>
+          <a class="comp-act on" id="cc-review-a" href="https://www.google.com/search?q=Cirilo+Design+Build+Charlotte" target="_blank" rel="noopener">Leave a review</a>
+        </div>
+        <div class="comp-card" id="refer-card">
+          <div class="comp-ic">&#10070;</div>
+          <h3>Refer a Friend</h3>
+          <p id="refer-count">Know someone dreaming of a pool? Share your private link and you will both be looked after.</p>
+          <div class="refer-link" id="refer-link-wrap" style="display:none;">
+            <input id="refer-link" readonly>
+            <button type="button" id="refer-copy">Copy</button>
+          </div>
+          <a class="comp-act on" id="cc-refer-a" href="mailto:Tiffany@CiriloDB.com?subject=A%20referral%20for%20Cirilo">Make an introduction</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CONCIERGE -->
+  <section class="block">
+    <div class="wrap" data-rv>
+      <div class="concierge">
+        <div>
+          <div class="eyebrow" style="color:var(--gold-mid);">Your Project Lead</div>
+          <h2>Questions? We&#39;re a message away.</h2>
+          <p>Your dedicated lead knows your build inside and out. Reach out any time, you will hear back the same day.</p>
+          <div class="who">
+            <div class="av" id="lead-av">T</div>
+            <div><div class="n" id="lead-name">Tiffany Cirilo</div><div class="r" id="lead-role">Founder &amp; Project Lead</div></div>
+          </div>
+        </div>
+        <div class="acts">
+          <a class="cbtn gold" id="lead-email" href="mailto:Tiffany@CiriloDB.com">Message Your Lead</a>
+          <a class="cbtn ghost" id="lead-call" href="tel:+17040000000">Call (704) 000-0000</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <footer class="pfoot">
+    <div class="wm">CIRILO</div>
+    <div class="sub">Design + Build</div>
+    <div class="fine">Licensed &middot; Bonded &middot; Insured &nbsp;|&nbsp; Charlotte, North Carolina<br>This portal is private to you. &copy; <span id="yr">2026</span> Cirilo Design + Build.</div>
+  </footer>
+</div>
+
+<!-- payment modal -->
+<div id="pay">
+  <div class="pbox">
+    <div class="phead">
+      <div class="e">Pay by Check or ACH</div>
+      <h3 id="pay-label">Draw</h3>
+      <div class="amt" id="pay-amt">$0</div>
+    </div>
+    <div class="pbody" id="pay-form">
+      <div class="ptabs">
+        <button id="pt-check" class="on" onclick="payTab('check')">Check</button>
+        <button id="pt-ach" onclick="payTab('ach')">ACH / Bank Transfer</button>
+      </div>
+
+      <div class="pinstr on" id="pi-check">
+        <div class="prow"><span class="k">Payable to</span><span class="v" id="pi-payee">Cirilo Design + Build</span></div>
+        <div class="prow"><span class="k">Mail to</span><span class="v" id="pi-mail">[mailing address on file]</span></div>
+        <div class="prow"><span class="k">Memo</span><span class="v" id="pi-memo-c">Draw</span></div>
+        <p class="pnote">Please write the memo line exactly so we can match your payment to this draw. Allow 5 to 7 business days for mail and clearing.</p>
+      </div>
+
+      <div class="pinstr" id="pi-ach">
+        <div class="prow"><span class="k">Bank</span><span class="v" id="pi-bank">[bank on file]</span></div>
+        <div class="prow"><span class="k">Routing</span><span class="v" id="pi-routing">[routing on file]</span></div>
+        <div class="prow"><span class="k">Account</span><span class="v" id="pi-acct">[account on file]</span></div>
+        <div class="prow"><span class="k">Memo</span><span class="v" id="pi-memo-a">Draw</span></div>
+        <p class="pnote">Use your bank's bill-pay or transfer with the memo above. ACH typically settles in 1 to 3 business days.</p>
+      </div>
+
+      <label id="pay-ref-label">Confirmation or check number (optional)</label>
+      <input type="text" id="pay-ref" placeholder="e.g. check #1042 or ACH confirmation">
+
+      <div class="pacts">
+        <button class="pbtn cancel" onclick="closePay()">Cancel</button>
+        <button class="pbtn go" id="pay-go">I&#39;ve Sent Payment</button>
+      </div>
+    </div>
+    <div class="pbody pdone" id="pay-done">
+      <div class="c">&#10003;</div>
+      <h3 style="font-family:'Cormorant Garamond',serif;font-size:1.5rem;color:var(--ink);">Thank you. Payment reported.</h3>
+      <p style="color:var(--body);margin:8px 0 18px;">We will confirm receipt and update your draw status. You will see it reflected here.</p>
+      <button class="pbtn cancel" style="max-width:200px;margin:0 auto;" onclick="closePay()">Close</button>
+    </div>
+  </div>
+</div>
+
+<div id="lb" onclick="this.style.display='none'"><img id="lb-img" src="" alt=""></div>
+<div class="demo-flag" id="demo-flag" style="display:none;">Preview Data</div>
+
+<script>
+/* ════════ 14 canonical stages ════════ */
+var STAGES=[
+  {k:'consultation',n:'Design Consultation',d:'We sat down to understand your vision, site, and lifestyle.'},
+  {k:'design',n:'Design &amp; 3D Rendering',d:'Your custom pool rendered in 3D, refined until it is exactly right.'},
+  {k:'proposal',n:'Proposal &amp; Scope',d:'Detailed scope, finishes, and investment presented for your approval.'},
+  {k:'contract',n:'Contract Signed',d:'Agreement executed and your build slot reserved on our calendar.'},
+  {k:'excavation',n:'Excavation',d:'The dig begins. Your pool shape is carved into the landscape.'},
+  {k:'rebar_bonding',n:'Steel &amp; Bonding',d:'Structural rebar tied and electrically bonded to code.'},
+  {k:'plumbing_electrical',n:'Plumbing &amp; Electrical',d:'Circulation, returns, and electrical lines roughed in.'},
+  {k:'inspections',n:'Inspections',d:'County inspections of steel, plumbing, and bonding.'},
+  {k:'shotcrete',n:'Shotcrete Shell',d:'The gunite shell is pneumatically applied and cured. This is your pool taking shape.'},
+  {k:'tile_coping',n:'Tile &amp; Coping',d:'Waterline tile and coping set by hand, the jewelry of your pool.'},
+  {k:'equipment',n:'Equipment Set',d:'Pumps, heater, automation, and lighting installed and wired.'},
+  {k:'decking',n:'Decking &amp; Hardscape',d:'Surrounding deck, patio, and hardscape poured and finished.'},
+  {k:'interior_finish',n:'Interior Finish',d:'Plaster, pebble, or quartz interior applied, the final surface.'},
+  {k:'fill_startup',n:'Fill &amp; Startup',d:'Filling, water chemistry balanced, systems started. Time to swim.'}
+];
+
+/* ════════ DEMO DATA (luxurious placeholder until live) ════════ */
+var PHOTOS=[
+  'photo-1572331165267-854da2b10ccc','photo-1571902943202-507ec2618e8f','photo-1613490493576-7fde63acd811',
+  'photo-1600585154340-be6161a56a0c','photo-1505691938895-1758d7feb511','photo-1564540583246-934409427776'
+];
+function ph(i,w){return 'https://images.unsplash.com/'+PHOTOS[i%PHOTOS.length]+'?auto=format&fit=crop&w='+(w||1200)+'&q=80';}
+
+var DEMO={
+  client:{name:'The Harrington Residence',first:'James',lead:{name:'Tiffany Cirilo',role:'Founder &amp; Project Lead',email:'Tiffany@CiriloDB.com',phone:'+17040000000',phone_disp:'(704) 000-0000'}},
+  project:{
+    id:'CDB-2041',name:'Myers Park Vanishing Edge',neighborhood:'Myers Park, Charlotte',
+    pool_type:'Vanishing-Edge Gunite',stage:'shotcrete',contract_value:312000,
+    start:'Apr 2026',target:'Aug 2026',hero:ph(0,1800)
+  },
+  snapshot:[{k:'68%',l:'Complete'},{k:'Stage 9',l:'of 14'},{k:'Aug 2026',l:'Est. Completion'},{k:'On Track',l:'Schedule'}],
+  photos:[
+    {img:ph(0,1400),t:'The vanishing edge wall',d:'Shotcrete &middot; This week',cls:'big'},
+    {img:ph(2,1400),t:'Shell from the terrace',d:'Shotcrete &middot; This week',cls:'med'},
+    {img:ph(1,900),t:'Spa spillway formed',d:'Steel stage',cls:'sm'},
+    {img:ph(4,900),t:'Excavation complete',d:'May 2026',cls:'sm'},
+    {img:ph(5,900),t:'3D rendering approved',d:'Design stage',cls:'sm'}
+  ],
+  docs:[
+    {t:'Construction Agreement',s:'Signed Apr 12, 2026',type:'PDF',stat:'executed'},
+    {t:'3D Design Rendering Set',s:'12 pages',type:'PDF',stat:'signed'},
+    {t:'County Building Permit',s:'Permit #MC-2026-4471',type:'PDF',stat:'signed'},
+    {t:'Equipment Specification',s:'Pentair automation package',type:'PDF',stat:'sent'},
+    {t:'10-Year Structural Warranty',s:'Issued at completion',type:'PDF',stat:'draft'}
+  ],
+  draws:[
+    {n:1,t:'Deposit',s:'Paid Apr 12',amt:46800,paid:true},
+    {n:2,t:'Excavation',s:'Paid May 6',amt:62400,paid:true},
+    {n:3,t:'Shotcrete shell',s:'Due now',amt:78000,paid:false,due:true},
+    {n:4,t:'Tile, coping &amp; equipment',s:'Upcoming',amt:62400,paid:false},
+    {n:5,t:'Final, on completion',s:'Upcoming',amt:62400,paid:false}
+  ],
+  feed:[
+    {t:'Shotcrete shell applied',d:'Your gunite shell was sprayed and is now curing. Up next: tile and coping.',w:'2 days ago'},
+    {t:'Photos added',d:'5 new progress photos from the field.',w:'2 days ago'},
+    {t:'Steel inspection passed',d:'County signed off on rebar and bonding.',w:'1 week ago'},
+    {t:'Draw 2 received, thank you',d:'Excavation draw posted to your account.',w:'3 weeks ago'}
+  ],
+  referral:{code:'HARR4821',count:2}
+};
+
+/* ════════ AUTH ════════ */
+var SESS=null;
+var MODE='home';
+window.setMode=function(m){
+  MODE=m;
+  document.getElementById('mode-home').classList.toggle('on',m==='home');
+  document.getElementById('mode-team').classList.toggle('on',m==='team');
+  document.getElementById('f-home').classList.toggle('hide',m!=='home');
+  document.getElementById('f-team').classList.toggle('hide',m!=='team');
+  document.getElementById('gate-err').style.display='none';
+};
+
+function enter(){
+  var err=document.getElementById('gate-err');
+  err.style.display='none';
+  var email, payload;
+  if(MODE==='team'){
+    email=(document.getElementById('t-email').value||'').trim();
+    var pass=(document.getElementById('t-pass').value||'');
+    if(!email||!pass){err.textContent='Please enter your email and password.';err.style.display='block';return;}
+    payload={mode:'team',email:email,password:pass};
+  } else {
+    email=(document.getElementById('g-email').value||'').trim();
+    var code=(document.getElementById('g-code').value||'').trim();
+    if(!email||!code){err.textContent='Please enter your email and access code.';err.style.display='block';return;}
+    payload={mode:'home',email:email,code:code};
+  }
+  fetch('/api/portal-auth',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(payload)})
+    .then(function(r){return r.json().then(function(j){return {status:r.status,j:j};});})
+    .then(function(res){
+      var j=res.j;
+      if(j&&j.ok){
+        SESS={email:email,token:j.token,role:j.role||'client'};
+        try{sessionStorage.setItem('cdb_portal',JSON.stringify(SESS));}catch(e){}
+        loadData(j.role==='admin'?null:j.data, SESS.role);
+        return;
+      }
+      if(res.status===503){ err.textContent='Sign-in is not configured yet. Please contact your project lead.'; }
+      else if(j&&j.error==='unavailable'){ err.textContent='Homeowner accounts are being set up. Please contact your project lead for access.'; }
+      else { err.textContent='We could not verify those details. Please check and try again.'; }
+      err.style.display='block';
+    })
+    .catch(function(){ err.textContent='Could not reach the server. Please try again.';err.style.display='block'; });
+}
+function signout(){try{sessionStorage.removeItem('cdb_portal');}catch(e){};location.reload();}
+
+/* ════════ RENDER ════════ */
+function money(n){return '$'+(n||0).toLocaleString('en-US');}
+
+function loadData(live, role){
+  var D=(live&&live.project)?normalize(live):DEMO;
+  var isDemo=!(live&&live.project);
+  document.getElementById('gate').style.display='none';
+  document.getElementById('app').style.display='block';
+  var flag=document.getElementById('demo-flag');
+  if(role==='admin'){
+    document.getElementById('admin-link').style.display='inline-block';
+    flag.textContent='Admin Preview · sample project';
+    flag.style.display='block';
+  } else if(isDemo){
+    flag.style.display='block';
+  }
+  document.getElementById('yr').textContent='2026';
+
+  // identity
+  document.getElementById('nav-name').textContent=D.client.name;
+  document.getElementById('lead-name').innerHTML=D.client.lead.name;
+  document.getElementById('lead-role').innerHTML=D.client.lead.role;
+  document.getElementById('lead-av').textContent=(D.client.lead.name||'T').charAt(0);
+  document.getElementById('lead-email').href='mailto:'+D.client.lead.email;
+  document.getElementById('lead-call').href='tel:'+D.client.lead.phone;
+  document.getElementById('lead-call').textContent='Call '+D.client.lead.phone_disp;
+
+  // hero
+  var stageIdx=STAGES.map(function(s){return s.k;}).indexOf(D.project.stage);
+  if(stageIdx<0)stageIdx=0;
+  var pct=Math.round(((stageIdx+1)/STAGES.length)*100);
+  document.getElementById('hero-img').style.backgroundImage='url('+D.project.hero+')';
+  document.getElementById('hero-id').textContent=D.project.id;
+  document.getElementById('hero-name').textContent=D.project.name;
+  document.getElementById('hero-loc').innerHTML='&#9711; '+D.project.neighborhood+' &nbsp;&middot;&nbsp; '+D.project.pool_type;
+  document.getElementById('hero-stage').innerHTML=STAGES[stageIdx].n;
+  document.getElementById('hero-next').innerHTML=(stageIdx<STAGES.length-1)?STAGES[stageIdx+1].n:'Completion &amp; handover';
+  setTimeout(function(){document.getElementById('hero-fill').style.width=pct+'%';document.getElementById('hero-pct').textContent=pct+'%';},400);
+
+  // snapshot
+  var snap=D.snapshot||[{k:pct+'%',l:'Complete'},{k:'Stage '+(stageIdx+1),l:'of 14'},{k:D.project.target||'.',l:'Est. Completion'},{k:'On Track',l:'Schedule'}];
+  document.getElementById('snap').innerHTML=snap.map(function(c){return '<div class="cell" data-rv><div class="k">'+c.k+'</div><div class="l">'+c.l+'</div></div>';}).join('');
+
+  // timeline
+  var tl=STAGES.map(function(s,i){
+    var cls=i<stageIdx?'done':(i===stageIdx?'current':'upcoming');
+    var badge=i<stageIdx?'<span class="tl-badge">Complete</span>':(i===stageIdx?'<span class="tl-badge">In Progress</span>':'');
+    var label=i<stageIdx?'Done':(i===stageIdx?'Happening now':'Upcoming');
+    return '<div class="tl-step '+cls+'"><div class="tl-dot">'+(i<stageIdx?'&#10003;':(i+1))+'</div><div class="tl-body">'+
+      '<div class="tl-name">'+s.n+badge+'</div><div class="tl-meta">'+label+'</div>'+
+      (i===stageIdx?'<div class="tl-desc">'+s.d+'</div>':'')+'</div></div>';
+  }).join('');
+  document.getElementById('timeline').innerHTML='<div class="tl-track"></div><div class="tl-prog" id="tl-prog"></div>'+tl;
+  setTimeout(function(){var p=document.getElementById('tl-prog');var steps=document.querySelectorAll('.tl-step');if(steps.length){var h=(stageIdx/(steps.length-1))*100;p.style.height=h+'%';}},600);
+
+  // gallery
+  document.getElementById('gallery').innerHTML=(D.photos||[]).map(function(g){
+    return '<div class="gi '+(g.cls||'sm')+'" onclick="zoom(\''+g.img+'\')"><img loading="lazy" src="'+g.img+'" alt="'+g.t+'"><div class="cap"><div class="d">'+g.d+'</div><div class="t">'+g.t+'</div></div></div>';
+  }).join('');
+
+  // docs
+  document.getElementById('docs').innerHTML=(D.docs||[]).map(function(x){
+    return '<a class="doc" href="#" onclick="return false;"><div class="dico">'+(x.type||'PDF')+'</div><div class="dn"><div class="t">'+x.t+'</div><div class="s">'+x.s+'</div></div><span class="stat '+x.stat+'">'+x.stat+'</span><span class="arrow">&#8594;</span></a>';
+  }).join('');
+
+  // draws
+  window.__draws=D.draws||[];
+  window.__proj=D.project||{};
+  renderDraws();
+  document.getElementById('draw-total').textContent=money(D.project.contract_value);
+
+  // feed
+  document.getElementById('feed').innerHTML=(D.feed||[]).map(function(f){
+    return '<li><span class="fdot"></span><div><div class="ft">'+f.t+'</div><div class="fd">'+f.d+'</div><div class="fwhen">'+f.w+'</div></div></li>';
+  }).join('');
+
+  // completion & care stage
+  var complete=stageIdx>=STAGES.length-1;
+  var sec=document.getElementById('sec-complete');
+  if(complete){
+    sec.classList.add('unlocked');
+    document.getElementById('complete-h').textContent='Your pool is complete';
+    document.getElementById('complete-sub').textContent='Congratulations. Everything below is ready for you.';
+    document.getElementById('cc-warranty-a').textContent='Download certificate';
+    document.getElementById('cc-warranty-a').setAttribute('onclick','');
+    document.getElementById('cc-care-a').textContent='Open care guide';
+    document.getElementById('cc-care-a').setAttribute('onclick','');
+  }
+
+  // referral link
+  var refData=D.referral||null;
+  if(refData&&refData.code){
+    var refUrl='https://cirilodb.com/book?ref='+refData.code;
+    document.getElementById('refer-link').value=refUrl;
+    document.getElementById('refer-link-wrap').style.display='flex';
+    var n=refData.count||0;
+    document.getElementById('refer-count').textContent = n ? (n+' '+(n===1?'friend':'friends')+' referred so far. Share your link to introduce more.') : 'Share your private link and you will both be looked after.';
+    var copyBtn=document.getElementById('refer-copy');
+    copyBtn.onclick=function(){ var inp=document.getElementById('refer-link'); inp.select(); try{ (navigator.clipboard&&navigator.clipboard.writeText(inp.value))||document.execCommand('copy'); }catch(e){} copyBtn.textContent='Copied'; setTimeout(function(){copyBtn.textContent='Copy';},1600); };
+    document.getElementById('cc-refer-a').href='mailto:?subject='+encodeURIComponent('You have to see Cirilo Design + Build')+'&body='+encodeURIComponent('I am building with Cirilo Design + Build and thought of you. Start here: '+refUrl);
+  }
+
+  initReveal();
+  track('portal_view');
+}
+
+/* map live API shape -> render shape (best-effort; falls back to demo fields) */
+function normalize(live){
+  var p=live.project,c=live.client||{},lead=live.lead||DEMO.client.lead;
+  return {
+    client:{name:c.name||'Your Residence',first:(c.name||'').split(' ')[0],lead:{
+      name:lead.name||DEMO.client.lead.name,role:lead.role||DEMO.client.lead.role,
+      email:lead.email||DEMO.client.lead.email,phone:lead.phone||DEMO.client.lead.phone,phone_disp:lead.phone_disp||DEMO.client.lead.phone_disp}},
+    project:{id:p.id_disp||('CDB-'+(p.id||'').slice(0,4)),name:p.name,neighborhood:p.neighborhood||c.neighborhood||'Charlotte, NC',
+      pool_type:p.pool_type||'Custom Gunite',stage:p.stage||'consultation',contract_value:+p.contract_value||0,
+      start:p.start||'',target:p.target||'',hero:p.hero||DEMO.project.hero},
+    snapshot:live.snapshot,photos:(live.photos&&live.photos.length)?live.photos:DEMO.photos,
+    docs:(live.docs&&live.docs.length)?live.docs:[],draws:(live.draws&&live.draws.length)?live.draws:[],
+    feed:(live.feed&&live.feed.length)?live.feed:[],
+    referral:live.referral||null
+  };
+}
+
+function zoom(src){document.getElementById('lb-img').src=src;document.getElementById('lb').style.display='flex';}
+
+/* ════════ DOCUMENT UPLOAD (homeowner) ════════ */
+function fileToB64(file){ return new Promise(function(res,rej){ var r=new FileReader(); r.onload=function(){ res(String(r.result)); }; r.onerror=rej; r.readAsDataURL(file); }); }
+function portalUpload(input){
+  var file=input.files&&input.files[0]; if(!file) return;
+  var st=document.getElementById('doc-up-status');
+  if(file.size>10*1024*1024){ st.textContent='File too large (10MB max).'; return; }
+  st.textContent='Uploading '+file.name+'...';
+  fileToB64(file).then(function(b64){
+    return fetch('/api/doc-upload',{method:'POST',headers:{'Content-Type':'application/json','x-cdb-portal':(SESS&&SESS.token)||''},body:JSON.stringify({filename:file.name,content_base64:b64,mime:file.type,doc_type:'client_upload',doc_name:file.name})});
+  }).then(function(r){return r.json();}).then(function(j){
+    if(j&&j.ok){ st.textContent='Uploaded: '+file.name; prependDoc(file.name,'uploaded'); }
+    else { st.textContent='Upload could not be saved.'; }
+    input.value='';
+  }).catch(function(){ st.textContent='Upload failed. Please try again.'; input.value=''; });
+}
+function prependDoc(name,stat){
+  var wrap=document.getElementById('docs');
+  var row='<a class="doc" href="#" onclick="return false;"><div class="dico">DOC</div><div class="dn"><div class="t">'+name+'</div><div class="s">Uploaded by you</div></div><span class="stat '+(stat||'sent')+'">'+(stat||'sent')+'</span><span class="arrow">&#8594;</span></a>';
+  wrap.innerHTML=row+wrap.innerHTML;
+}
+
+/* ════════ PAYMENTS (check + ACH) ════════ */
+/* Update PAY_INFO with real payee/mailing + bank details once available. */
+var PAY_INFO={
+  payee:'Cirilo Design + Build',
+  mail:'PO Box [____], Charlotte, NC [_____]',
+  bank:'[bank name on file]',
+  routing:'[routing number on file]',
+  account:'[account number on file]'
+};
+var PAY_METHOD='check', PAY_IDX=null;
+
+function renderDraws(){
+  var draws=window.__draws||[];
+  document.getElementById('draws').innerHTML=draws.map(function(x,i){
+    var cls=x.paid?'paid':(x.due?'due':'');
+    var action = x.paid ? '' : (x.reported ? '<span class="reported">Reported</span>' : (x.due ? '<button class="draw-pay" onclick="openPay('+i+')">Pay</button>' : ''));
+    return '<div class="draw '+cls+'"><div class="num">'+(x.paid?'&#10003;':x.n)+'</div><div class="dl"><div class="t">Draw '+x.n+' &middot; '+x.t+'</div><div class="s">'+x.s+'</div></div><div class="amt">'+money(x.amt)+'</div>'+action+'</div>';
+  }).join('');
+}
+function payTab(m){
+  PAY_METHOD=m;
+  document.getElementById('pt-check').classList.toggle('on',m==='check');
+  document.getElementById('pt-ach').classList.toggle('on',m==='ach');
+  document.getElementById('pi-check').classList.toggle('on',m==='check');
+  document.getElementById('pi-ach').classList.toggle('on',m==='ach');
+}
+function openPay(i){
+  var x=(window.__draws||[])[i]; if(!x) return;
+  PAY_IDX=i; payTab('check');
+  var proj=window.__proj||{};
+  var memo=(proj.id||'CDB')+' Draw '+x.n;
+  document.getElementById('pay-label').textContent='Draw '+x.n+' &middot; '+x.t;
+  document.getElementById('pay-label').innerHTML='Draw '+x.n+' &middot; '+x.t;
+  document.getElementById('pay-amt').textContent=money(x.amt);
+  document.getElementById('pi-payee').textContent=PAY_INFO.payee;
+  document.getElementById('pi-mail').textContent=PAY_INFO.mail;
+  document.getElementById('pi-bank').textContent=PAY_INFO.bank;
+  document.getElementById('pi-routing').textContent=PAY_INFO.routing;
+  document.getElementById('pi-acct').textContent=PAY_INFO.account;
+  document.getElementById('pi-memo-c').textContent=memo;
+  document.getElementById('pi-memo-a').textContent=memo;
+  document.getElementById('pay-ref').value='';
+  document.getElementById('pay-form').style.display='block';
+  document.getElementById('pay-done').style.display='none';
+  document.getElementById('pay').style.display='flex';
+}
+function closePay(){ document.getElementById('pay').style.display='none'; PAY_IDX=null; }
+document.getElementById('pay-go').addEventListener('click',function(){
+  var x=(window.__draws||[])[PAY_IDX]; if(!x) return;
+  var btn=this; btn.disabled=true; btn.textContent='Reporting...';
+  var payload={ draw_id:x.pid||null, draw_label:'Draw '+x.n+' '+x.t, draw_number:x.n, amount:x.amt, method:PAY_METHOD, reference:document.getElementById('pay-ref').value||null };
+  fetch('/api/portal-payment',{method:'POST',headers:{'Content-Type':'application/json','x-cdb-portal':(SESS&&SESS.token)||''},body:JSON.stringify(payload)})
+    .then(function(r){return r.json();})
+    .then(function(j){
+      x.reported=true; x.due=false; renderDraws();
+      document.getElementById('pay-form').style.display='none';
+      document.getElementById('pay-done').style.display='block';
+      try{fetch('/api/track',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({t:'click',page:'portal',detail:{action:'payment_reported',method:PAY_METHOD}})});}catch(e){}
+    })
+    .catch(function(){ btn.disabled=false; btn.textContent="I've Sent Payment"; })
+    .then(function(){ btn.disabled=false; btn.textContent="I've Sent Payment"; });
+});
+
+/* scroll reveal */
+function initReveal(){
+  var els=document.querySelectorAll('[data-rv]');
+  if(!('IntersectionObserver' in window)){els.forEach(function(e){e.classList.add('in');});return;}
+  var io=new IntersectionObserver(function(en){en.forEach(function(x){if(x.isIntersecting){x.target.classList.add('in');io.unobserve(x.target);}});},{threshold:0.12,rootMargin:'0px 0px -8% 0px'});
+  els.forEach(function(e){io.observe(e);});
+}
+
+/* lightweight analytics ping */
+function track(t){try{fetch('/api/track',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({t:'view',page:'portal',url:location.href,detail:{action:t}})});}catch(e){}}
+
+/* auto-resume session */
+(function(){
+  try{var s=sessionStorage.getItem('cdb_portal');if(!s)return;SESS=JSON.parse(s);
+    if(SESS.role==='admin'){loadData(null,'admin');return;}
+    fetch('/api/portal-data',{headers:{'x-cdb-portal':SESS.token||''}}).then(function(r){return r.json();}).then(function(j){ if(j&&j.ok){loadData(j.data,'client');} else { try{sessionStorage.removeItem('cdb_portal');}catch(e){} } }).catch(function(){ try{sessionStorage.removeItem('cdb_portal');}catch(e){} });
+  }catch(e){}
+})();
+
+/* enter key submits */
+document.addEventListener('keydown',function(e){if(e.key==='Enter'&&document.getElementById('gate').style.display!=='none'){enter();}});
+</script>
+</body>
+</html>

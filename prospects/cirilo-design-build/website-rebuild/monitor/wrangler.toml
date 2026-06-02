@@ -1,0 +1,17 @@
+name = "cirilodb-monitor"
+main = "worker.js"
+compatibility_date = "2024-11-01"
+account_id = "5b4ea6b5589fe12f29bea5d7e43fe03c"
+
+# Ping the live health endpoint every 15 minutes.
+[triggers]
+crons = ["*/15 * * * *"]
+
+[vars]
+CDB_HEALTH_URL = "https://cirilodb-rebuild.pages.dev"
+
+# Secrets (set after first deploy, do NOT commit):
+#   npx wrangler secret put CDB_MONITOR_SECRET   # must match the Pages project value
+#   npx wrangler secret put CDB_ALERT_WEBHOOK    # optional Slack/Discord/webhook URL
+#
+# If wrangler asks for an account, add:  account_id = "<your-cloudflare-account-id>"

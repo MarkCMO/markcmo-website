@@ -1,0 +1,15 @@
+- generic [ref=e4]:
+  - generic [ref=e6]: C
+  - generic [ref=e7]: CIRILO
+  - generic [ref=e8]: Owner's Suite
+  - paragraph [ref=e9]: Welcome to your private project suite.
+  - generic [ref=e10]: Email on file
+  - textbox "you@email.com" [ref=e11]
+  - generic [ref=e12]: Access code
+  - textbox "Provided in your welcome message" [ref=e13]
+  - button "Enter Your Suite" [ref=e14] [cursor=pointer]
+  - paragraph [ref=e15]:
+    - text: Lost your access code?
+    - link "Contact your project lead" [ref=e16] [cursor=pointer]:
+      - /url: mailto:Tiffany@CiriloDB.com
+    - text: or call (704) 000-0000.

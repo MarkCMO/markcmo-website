@@ -1,0 +1,14 @@
+# wrangler.toml - Cloudflare Pages config for cirilodb-rebuild
+name = "cirilodb-rebuild"
+compatibility_date = "2026-05-30"
+compatibility_flags = ["nodejs_compat"]
+pages_build_output_dir = "./dist"
+
+[vars]
+NODE_ENV = "production"
+SITE_URL = "https://cirilodb-rebuild.pages.dev"
+
+# Rate-limiting KV (used by _lib_security.rateLimited). Fails open if absent.
+[[kv_namespaces]]
+binding = "CDB_RL"
+id = "5bdb46f18a3d4c69b5f773f99b24c71b"

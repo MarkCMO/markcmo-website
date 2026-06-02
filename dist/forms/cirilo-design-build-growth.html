@@ -1,0 +1,620 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Sign and Accept: Marketing & Growth Engagement | Cirilo Design + Build</title>
+<meta name="description" content="Accept and electronically sign the Cirilo Design + Build marketing and growth engagement proposal." />
+<meta name="robots" content="noindex, nofollow, noarchive, nosnippet, noimageindex" />
+<meta http-equiv="Cache-Control" content="no-store, no-cache, must-revalidate, private" />
+<link rel="preconnect" href="https://fonts.googleapis.com" crossorigin>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Cormorant+Garamond:wght@500;600&family=Barlow:wght@400;500;600;700;800&family=DM+Mono:wght@400;500&family=Dancing+Script:wght@700&display=swap">
+<script src="https://unpkg.com/pdf-lib@1.17.1/dist/pdf-lib.min.js"></script>
+<style>
+  :root{
+    --navy:#0A1628;--navy-mid:#0F2040;--navy-light:#162A4A;
+    --gold-dark:#AB7E37;--gold-mid:#D6BB89;--gold-light:#E3D3B2;--gold-pale:#F4ECDC;
+    --cream:#FAF7F2;--ink:#1A1A1A;--body:#2E2E34;
+    --orange:#F97316;--orange-pale:#FFF7ED;
+    --green:#10B981;--green-pale:#ECFDF5;
+    --white:#FFFFFF;--off-white:#F8FAFC;--border:#E2E2E2;
+    --text:#2E2E34;--text-mid:#64748B;--text-light:#94A3B8;--muted:#8F8F8F;
+    --shadow-md:0 4px 16px rgba(15,32,64,0.08), 0 8px 32px rgba(15,32,64,0.06);
+    --shadow-gold:0 4px 20px rgba(171,126,55,0.22), 0 2px 8px rgba(171,126,55,0.14);
+  }
+  *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+  body{font-family:'Barlow',sans-serif;background:var(--cream);color:var(--text);line-height:1.6;}
+  a{color:var(--gold-dark);text-decoration:none;}
+
+  .doc-nav{position:sticky;top:0;z-index:100;background:var(--white);border-bottom:1px solid var(--border);padding:0.9rem 2rem;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:0.5rem;}
+  .doc-nav-logo{font-family:'Bebas Neue',sans-serif;font-size:1.25rem;letter-spacing:0.12em;color:var(--gold-dark);}
+  .doc-nav-logo span{color:var(--ink);}
+  .doc-nav-meta{font-family:'DM Mono',monospace;font-size:0.7rem;letter-spacing:0.15em;text-transform:uppercase;color:var(--text-light);}
+  .doc-nav-meta strong{color:var(--gold-dark);font-weight:600;}
+  .doc-nav-back{font-family:'DM Mono',monospace;font-size:0.7rem;letter-spacing:0.12em;color:var(--text-mid);text-transform:uppercase;}
+  .doc-nav-back:hover{color:var(--gold-dark);}
+
+  .hero{background:linear-gradient(135deg,var(--navy) 0%,var(--navy-mid) 50%,var(--navy-light) 100%);color:var(--white);padding:3rem 2rem 2.5rem;position:relative;overflow:hidden;box-shadow:0 24px 60px -16px rgba(15,32,64,0.35);}
+  .hero::before{content:'';position:absolute;inset:0;background:radial-gradient(circle at 80% 30%,rgba(171,126,55,0.18) 0%,transparent 55%);pointer-events:none;}
+  .hero-inner{max-width:720px;margin:0 auto;position:relative;z-index:1;}
+  .hero-wordmark{font-family:'Cormorant Garamond',serif;font-size:2rem;font-weight:600;letter-spacing:0.18em;background:linear-gradient(135deg,#E5C2B0 0%,#D6BB89 35%,#F4D78C 65%,#AB7E37 100%);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;line-height:1;margin-bottom:0.1rem;}
+  .hero-wordmark-sub{font-family:'DM Mono',monospace;font-size:0.66rem;letter-spacing:0.36em;color:var(--gold-mid);text-transform:uppercase;margin-bottom:1.2rem;}
+  .hero-eyebrow{font-family:'DM Mono',monospace;font-size:0.7rem;letter-spacing:0.25em;text-transform:uppercase;color:var(--gold-mid);margin-bottom:0.85rem;}
+  .hero h1{font-family:'Bebas Neue',sans-serif;font-size:clamp(1.8rem,4vw,2.6rem);font-weight:400;letter-spacing:0.02em;line-height:1.1;margin-bottom:0.6rem;}
+  .hero h1 em{color:var(--gold-mid);font-style:normal;}
+  .hero p{font-size:0.98rem;color:rgba(248,250,252,0.82);max-width:540px;}
+
+  .wrap{max-width:720px;margin:0 auto;padding:2.5rem 1.5rem 4rem;}
+
+  .summary-card{background:var(--white);border:1px solid rgba(171,126,55,0.18);border-radius:16px;padding:1.5rem 1.75rem;margin-bottom:2rem;box-shadow:0 1px 2px rgba(15,32,64,0.04), 0 12px 32px rgba(171,126,55,0.10), 0 32px 64px -16px rgba(171,126,55,0.08);}
+  .summary-card .lbl{font-family:'DM Mono',monospace;font-size:0.65rem;letter-spacing:0.2em;text-transform:uppercase;color:var(--gold-dark);font-weight:600;margin-bottom:0.6rem;}
+  .summary-card h2{font-family:'Bebas Neue',sans-serif;font-size:1.6rem;letter-spacing:0.03em;color:var(--navy);font-weight:400;margin-bottom:0.75rem;}
+  .summary-card p{font-size:0.95rem;color:var(--text);margin-bottom:0.75rem;}
+  .summary-card p:last-child{margin-bottom:0;}
+  .summary-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1rem;margin-top:1rem;padding-top:1rem;border-top:1px solid var(--border);}
+  @media(max-width:600px){.summary-grid{grid-template-columns:1fr 1fr;}}
+  .summary-grid .item .l{font-family:'DM Mono',monospace;font-size:0.6rem;letter-spacing:0.18em;text-transform:uppercase;color:var(--text-light);margin-bottom:0.25rem;}
+  .summary-grid .item .v{font-family:'Bebas Neue',sans-serif;font-size:1.2rem;color:var(--navy);letter-spacing:0.03em;}
+
+  .form-section{background:var(--white);border:1px solid var(--border);border-radius:14px;padding:1.75rem 2rem;margin-bottom:1.25rem;}
+  .form-section-label{font-family:'DM Mono',monospace;font-size:0.7rem;font-weight:700;letter-spacing:0.18em;text-transform:uppercase;color:var(--gold-dark);border-bottom:1px solid var(--gold-light);padding-bottom:0.6rem;margin-bottom:1.25rem;}
+  .form-row{margin-bottom:1.1rem;}
+  .form-row:last-child{margin-bottom:0;}
+  .form-row label{display:block;font-family:'DM Mono',monospace;font-size:0.68rem;font-weight:600;letter-spacing:0.1em;text-transform:uppercase;color:var(--text-mid);margin-bottom:0.4rem;}
+  .form-row label .req{color:var(--gold-dark);}
+  .form-row input,.form-row select,.form-row textarea{width:100%;background:var(--white);border:1.5px solid var(--border);border-radius:8px;color:var(--text);font-family:'Barlow',sans-serif;font-size:0.95rem;padding:0.75rem 0.9rem;outline:none;transition:border-color .15s, box-shadow .15s;}
+  .form-row input:focus,.form-row select:focus,.form-row textarea:focus{border-color:var(--gold-dark);box-shadow:0 0 0 3px rgba(171,126,55,0.12);}
+  .form-row .hint{font-size:0.78rem;color:var(--text-light);margin-top:0.35rem;}
+
+  .tier-radio-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:0.75rem;}
+  @media(max-width:600px){.tier-radio-grid{grid-template-columns:1fr;}}
+  .tier-radio{position:relative;cursor:pointer;}
+  .tier-radio input{position:absolute;opacity:0;pointer-events:none;}
+  .tier-radio .tier-box{background:var(--white);border:1.5px solid var(--border);border-radius:10px;padding:1rem 1rem;transition:all .15s;}
+  .tier-radio input:checked + .tier-box{border-color:var(--gold-dark);background:var(--gold-pale);box-shadow:var(--shadow-gold);}
+  .tier-radio .tier-name{font-family:'Bebas Neue',sans-serif;font-size:1.1rem;letter-spacing:0.04em;color:var(--navy);}
+  .tier-radio .tier-price{font-family:'Cormorant Garamond',serif;font-size:1.4rem;color:var(--gold-dark);font-weight:600;margin:0.2rem 0;}
+  .tier-radio .tier-meta{font-family:'DM Mono',monospace;font-size:0.62rem;letter-spacing:0.1em;text-transform:uppercase;color:var(--muted);}
+  .tier-radio .recommended-flag{position:absolute;top:-8px;right:8px;background:var(--gold-dark);color:var(--white);font-family:'DM Mono',monospace;font-size:0.55rem;letter-spacing:0.15em;padding:3px 8px;border-radius:3px;}
+
+  .acceptance-box{background:var(--gold-pale);border:1px solid rgba(171,126,55,0.25);border-radius:10px;padding:1.1rem 1.25rem;margin:1rem 0;}
+  .acceptance-box label{display:flex;gap:0.65rem;align-items:flex-start;cursor:pointer;}
+  .acceptance-box input[type=checkbox]{margin-top:0.25rem;width:1.1rem;height:1.1rem;accent-color:var(--gold-dark);flex-shrink:0;}
+  .acceptance-box .body{font-size:0.88rem;color:var(--navy);line-height:1.55;}
+  .acceptance-box .body strong{color:var(--navy);}
+
+  .sig-tabs{display:flex;border-bottom:1.5px solid var(--border);margin-bottom:0;}
+  .sig-tab{font-family:'DM Mono',monospace;font-size:0.7rem;letter-spacing:0.12em;text-transform:uppercase;padding:0.6rem 1.1rem;cursor:pointer;color:var(--text-light);border:none;background:none;border-bottom:2px solid transparent;transition:all .15s;}
+  .sig-tab.active{color:var(--gold-dark);border-bottom-color:var(--gold-dark);}
+  .sig-canvas-wrap{background:var(--off-white);border:1.5px solid var(--border);border-top:none;border-radius:0 0 8px 8px;height:140px;position:relative;}
+  canvas.client-sig-canvas{width:100%;height:100%;touch-action:none;cursor:crosshair;display:block;}
+  .sig-type-wrap{display:none;height:140px;align-items:center;justify-content:center;border:1.5px solid var(--border);border-top:none;background:var(--off-white);border-radius:0 0 8px 8px;}
+  .sig-type-wrap.visible{display:flex;}
+  .sig-type-preview{font-family:'Dancing Script',cursive;font-size:2.4rem;color:var(--gold-dark);text-align:center;}
+  .sig-actions{display:flex;justify-content:space-between;align-items:center;margin-top:0.75rem;}
+  .sig-clear-btn{font-family:'DM Mono',monospace;font-size:0.65rem;letter-spacing:0.12em;text-transform:uppercase;color:var(--text-mid);background:none;border:1.5px solid var(--border);border-radius:6px;padding:0.4rem 0.85rem;cursor:pointer;transition:all .15s;}
+  .sig-clear-btn:hover{color:var(--gold-dark);border-color:var(--gold-dark);}
+  .sig-hint{font-size:0.78rem;color:var(--text-light);font-style:italic;}
+  .sig-legal{font-size:0.78rem;color:var(--text-mid);line-height:1.6;margin-top:1rem;padding:1rem 1.25rem;background:var(--off-white);border-radius:8px;border:1px solid var(--border);}
+  .sig-legal strong{color:var(--navy);}
+
+  .signer-block{background:var(--off-white);border:1px solid var(--border);border-radius:10px;padding:1.25rem 1.5rem;margin-bottom:1rem;}
+  .signer-block-title{font-family:'Cormorant Garamond',serif;font-size:1.2rem;color:var(--ink);margin-bottom:0.75rem;}
+
+  #generate-btn{display:flex;align-items:center;justify-content:center;gap:0.5rem;width:100%;background:var(--gold-dark);color:var(--white);border:none;border-radius:10px;font-family:'Barlow',sans-serif;font-size:1rem;font-weight:700;letter-spacing:0.02em;padding:1.1rem 2rem;cursor:pointer;transition:all .15s;margin-top:1rem;box-shadow:0 4px 14px rgba(171,126,55,0.3);}
+  #generate-btn:hover:not(:disabled){background:#8B6529;transform:translateY(-1px);box-shadow:0 6px 18px rgba(171,126,55,0.4);}
+  #generate-btn:active:not(:disabled){transform:translateY(0);}
+  #generate-btn:disabled{opacity:0.6;cursor:not-allowed;background:var(--text-light);box-shadow:none;}
+
+  .form-status{margin-top:1rem;padding:1rem 1.25rem;border-radius:10px;font-size:0.92rem;line-height:1.6;display:none;}
+  .form-status.loading{display:block;background:var(--gold-pale);color:var(--gold-dark);border:1px solid rgba(171,126,55,0.25);}
+  .form-status.success{display:block;background:var(--green-pale);color:#065F46;border:1px solid rgba(16,185,129,0.3);}
+  .form-status.error{display:block;background:var(--orange-pale);color:#9A3412;border:1px solid rgba(249,115,22,0.3);}
+
+  .test-banner{background:var(--orange-pale);border:1px solid rgba(249,115,22,0.4);color:#9A3412;padding:0.75rem 1.25rem;border-radius:8px;margin-bottom:1.25rem;font-size:0.85rem;display:none;}
+  .test-banner.on{display:block;}
+  .test-banner strong{color:#9A3412;}
+
+  footer.doc-footer{background:var(--navy);color:rgba(255,255,255,0.6);padding:2rem;border-top:3px solid var(--gold-dark);margin-top:2rem;}
+  .doc-footer-inner{max-width:720px;margin:0 auto;text-align:center;}
+  .doc-footer-logo{font-family:'Bebas Neue',sans-serif;font-size:1.3rem;letter-spacing:0.12em;color:var(--white);}
+  .doc-footer-logo span{color:var(--gold-mid);}
+  .doc-footer p{font-size:0.78rem;line-height:1.6;margin:0.5rem 0 0;color:rgba(255,255,255,0.5);}
+</style>
+</head>
+<body>
+
+<nav class="doc-nav">
+  <div class="doc-nav-logo">MARK<span>CMO</span></div>
+  <a class="doc-nav-back" href="/documents/clients/cirilo-design-build/proposal">← Back to Proposal</a>
+  <div class="doc-nav-meta">Doc <strong>CDB-PRO-001</strong> &middot; Sign &amp; Accept</div>
+</nav>
+
+<header class="hero">
+  <div class="hero-inner">
+    <div class="hero-wordmark">CIRILO</div>
+    <div class="hero-wordmark-sub">DESIGN &nbsp;+&nbsp; BUILD</div>
+    <div class="hero-eyebrow">Acceptance &amp; Electronic Signature</div>
+    <h1>Accept the <em>Marketing &amp; Growth Engagement.</em></h1>
+    <p>Pick your tier, sign, and Mark countersigns within 24 hours. The combined upfront invoice (engagement fee + 50% systems-build deposit + first month retainer) goes out immediately after countersignature. Day 0 kickoff is the Monday after sign.</p>
+  </div>
+</header>
+
+<main class="wrap">
+
+  <div class="test-banner" id="test-banner">
+    🧪 <strong>Test Mode is ON.</strong> Submissions will be tagged "[TEST]" and routed to mark@markcmo.com. Toggle off before sending to a real client.
+  </div>
+
+  <form name="cirilo-acceptance" data-netlify="true" hidden>
+    <input type="text" name="client_name"/>
+    <input type="text" name="client_company"/>
+    <input type="email" name="client_email"/>
+    <input type="text" name="client_title"/>
+    <input type="text" name="tier_selected"/>
+    <input type="text" name="accepted_at"/>
+  </form>
+
+  <div class="summary-card">
+    <div class="lbl">You're Accepting</div>
+    <h2>Marketing &amp; Growth Engagement &middot; Cirilo Design + Build</h2>
+    <p>This signature accepts the terms in <a href="/documents/clients/cirilo-design-build/proposal" target="_blank">Proposal CDB-PRO-001</a>, <a href="/documents/clients/cirilo-design-build/roadmap" target="_blank">Roadmap CDB-RDM-001</a>, and <a href="/documents/clients/cirilo-design-build/partnerships" target="_blank">Playbook CDB-PLY-001</a>, and authorizes WETYR Corp / MarkCMO to issue a Square invoice for the combined upfront (engagement fee + 50% systems-build deposit + first month retainer) of the selected tier.</p>
+    <div class="summary-grid">
+      <div class="item"><div class="l">Recommended</div><div class="v">TIER 2</div></div>
+      <div class="item"><div class="l">Engagement</div><div class="v">12 MONTHS</div></div>
+      <div class="item"><div class="l">Valid Through</div><div class="v" id="valid-through">14 Days</div></div>
+    </div>
+  </div>
+
+  <div class="form-section">
+    <div class="form-section-label">Tier Selection</div>
+    <div class="tier-radio-grid">
+      <label class="tier-radio">
+        <input type="radio" name="tier" value="1" id="tier-1"/>
+        <div class="tier-box">
+          <div class="tier-name">Foundation</div>
+          <div class="tier-price">$155K</div>
+          <div style="font-size:0.65rem;color:#8F8F8F;font-family:'DM Mono',monospace;letter-spacing:0.08em;text-transform:uppercase;margin-bottom:6px;">Paid to Mark, Year 1</div>
+          <div class="tier-meta">$15K engagement<br/>$38.5K build<br/>$8.5K/mo retainer<br/><span style="color:#2F5530;">+ $7.5K/mo marketing fuel<br/>(billed direct to platforms)</span></div>
+        </div>
+      </label>
+      <label class="tier-radio">
+        <input type="radio" name="tier" value="2" id="tier-2" checked/>
+        <div class="tier-box">
+          <div class="recommended-flag">RECOMMENDED</div>
+          <div class="tier-name">Growth</div>
+          <div class="tier-price">$335K</div>
+          <div style="font-size:0.65rem;color:#8F8F8F;font-family:'DM Mono',monospace;letter-spacing:0.08em;text-transform:uppercase;margin-bottom:6px;">Paid to Mark, Year 1</div>
+          <div class="tier-meta">$20K engagement<br/>$87.5K build (SEO + competitive)<br/>$19K/mo retainer (SEO + competitive)<br/><span style="color:#2F5530;">+ $18.75K/mo marketing fuel<br/>(billed direct to platforms)</span></div>
+        </div>
+      </label>
+      <label class="tier-radio">
+        <input type="radio" name="tier" value="3" id="tier-3"/>
+        <div class="tier-box">
+          <div class="tier-name">Dominate</div>
+          <div class="tier-price">$497K</div>
+          <div style="font-size:0.65rem;color:#8F8F8F;font-family:'DM Mono',monospace;letter-spacing:0.08em;text-transform:uppercase;margin-bottom:6px;">Paid to Mark, Year 1</div>
+          <div class="tier-meta">$25K engagement<br/>$148K build (SEO + competitive)<br/>$27K/mo retainer (SEO + competitive)<br/><span style="color:#2F5530;">+ $37.5K/mo marketing fuel<br/>(billed direct to platforms)</span></div>
+        </div>
+      </label>
+    </div>
+  </div>
+
+  <div class="form-section">
+    <div class="form-section-label">Primary Signer (Authorized Owner)</div>
+    <div class="form-row">
+      <label>Full Legal Name <span class="req">*</span></label>
+      <input type="text" id="client_name" value="Tiffany Cirilo" required/>
+    </div>
+    <div class="form-row">
+      <label>Title <span class="req">*</span></label>
+      <input type="text" id="client_title" value="Owner" required/>
+    </div>
+    <div class="form-row">
+      <label>Company <span class="req">*</span></label>
+      <input type="text" id="client_company" value="Cirilo Design + Build" required/>
+    </div>
+    <div class="form-row">
+      <label>Email <span class="req">*</span></label>
+      <input type="email" id="client_email" value="Tiffany@CiriloDB.com" required/>
+      <div class="hint">Your signed copy and the combined upfront invoice (engagement fee + 50% systems-build + first month retainer) will be sent here.</div>
+    </div>
+    <div class="form-row">
+      <label>Phone</label>
+      <input type="tel" id="client_phone" value="(910) 409-0648"/>
+    </div>
+  </div>
+
+  <div class="form-section">
+    <div class="form-section-label">Acceptance</div>
+    <div class="acceptance-box">
+      <label>
+        <input type="checkbox" id="accept_terms" required/>
+        <span class="body">
+          <strong>I accept the terms of the proposal.</strong> I am authorized to bind Cirilo Design + Build to this engagement. I understand the engagement is a 12-month initial term, auto-renewing month-to-month after. Systems build paid 50% at signing / 25% at Day 30 / 25% at Day 60. Monthly retainer billed first business day of each month, Net 5. Media spend billed directly to Cirilo's card on each platform. 90-day mutual kill clause within first 90 days with 30 days' notice. After Day 90, 60 days' notice. All accounts (Google Ads, Meta, GA4, GBP, Houzz, domain, CMS) remain owned by Cirilo.
+        </span>
+      </label>
+    </div>
+    <div class="acceptance-box">
+      <label>
+        <input type="checkbox" id="accept_esign" required/>
+        <span class="body">
+          <strong>I consent to electronic signature.</strong> Under the U.S. ESIGN Act (15 U.S.C. § 7001 et seq.), I agree my electronic signature on this form is legally binding and equivalent to a handwritten signature. I consent to electronic delivery of the executed agreement, my signed copy, and any invoices. My IP address, timestamp, and user agent will be recorded as part of the audit trail.
+        </span>
+      </label>
+    </div>
+  </div>
+
+  <div class="form-section">
+    <div class="form-section-label">Electronic Signature</div>
+
+    <div class="sig-tabs">
+      <button class="sig-tab active" type="button" onclick="switchSigMode('draw')">✍ Draw</button>
+      <button class="sig-tab" type="button" onclick="switchSigMode('type')">⌨ Type</button>
+    </div>
+    <div class="sig-canvas-wrap" id="client-draw-wrap">
+      <canvas id="client-sig-canvas" class="client-sig-canvas"></canvas>
+    </div>
+    <div class="sig-type-wrap" id="client-type-wrap">
+      <div class="sig-type-preview" id="client-typed-sig">Tiffany Cirilo</div>
+    </div>
+    <div class="sig-actions">
+      <button class="sig-clear-btn" type="button" onclick="clearClientSig()">Clear</button>
+      <span class="sig-hint">Draw with your mouse or finger, or switch to "Type."</span>
+    </div>
+
+    <div class="sig-legal">
+      <strong>By clicking "Sign &amp; Submit"</strong> you confirm: (1) you have read, understood, and agree to the proposal terms; (2) your electronic signature is intended as your legal signature; (3) you consent to electronic delivery of the executed document. Your IP address, timestamp, and user agent will be recorded as part of the audit trail.
+    </div>
+
+    <button id="generate-btn" type="button" onclick="generate()">✍ Sign &amp; Submit for Countersignature</button>
+    <div id="form-status" class="form-status"></div>
+  </div>
+
+</main>
+
+<footer class="doc-footer">
+  <div class="doc-footer-inner">
+    <div class="doc-footer-logo">MARK<span>CMO</span></div>
+    <p>Mark Gabrielli &middot; Fractional CMO &middot; WETYR Corp &middot; <a style="color:var(--gold-mid);" href="mailto:mark@markcmo.com">mark@markcmo.com</a></p>
+  </div>
+</footer>
+
+<script>
+const URL_PARAMS = new URLSearchParams(window.location.search);
+const TEST_MODE = URL_PARAMS.get('test') === '1';
+const TEST_EMAIL = 'mark@markcmo.com';
+
+if (TEST_MODE) {
+  document.getElementById('test-banner').classList.add('on');
+}
+
+(function(){
+  const d = new Date(); d.setDate(d.getDate() + 14);
+  document.getElementById('valid-through').textContent =
+    d.toLocaleDateString('en-US', { month:'short', day:'numeric' });
+})();
+
+const TIERS = {
+  '1': { name: 'Foundation', total: '$245,500', engagementFee: '$15,000', build: '$38,500', retainer: '$8,500', media: '$7,500', deposit: '$42,750' },
+  '2': { name: 'Growth',     total: '$560,500', engagementFee: '$20,000', build: '$87,500', retainer: '$19,000', media: '$18,750', deposit: '$82,750' },
+  '3': { name: 'Dominate',   total: '$947,000', engagementFee: '$25,000', build: '$148,000', retainer: '$27,000', media: '$37,500', deposit: '$126,000' },
+};
+
+const { PDFDocument, rgb, StandardFonts } = PDFLib;
+let _sigMode = 'draw';
+let _hasSig = false;
+
+(function initSigPad() {
+  const canvas = document.getElementById('client-sig-canvas');
+  const ctx = canvas.getContext('2d');
+  let drawing = false, lx = 0, ly = 0;
+
+  function resize() {
+    const dpr = window.devicePixelRatio || 1;
+    canvas.width = canvas.parentElement.offsetWidth * dpr;
+    canvas.height = canvas.parentElement.offsetHeight * dpr;
+    canvas.style.width = canvas.parentElement.offsetWidth + 'px';
+    canvas.style.height = canvas.parentElement.offsetHeight + 'px';
+    ctx.scale(dpr, dpr);
+    ctx.strokeStyle = '#AB7E37';
+    ctx.lineWidth = 2.4;
+    ctx.lineCap = 'round';
+    ctx.lineJoin = 'round';
+  }
+  resize();
+  window.addEventListener('resize', resize);
+
+  function pt(e) {
+    const r = canvas.getBoundingClientRect();
+    return [e.clientX - r.left, e.clientY - r.top];
+  }
+  canvas.addEventListener('mousedown', e => { drawing = true; [lx, ly] = pt(e); _hasSig = true; });
+  canvas.addEventListener('mousemove', e => { if(!drawing) return; ctx.beginPath(); ctx.moveTo(lx,ly); ctx.lineTo(...pt(e)); ctx.stroke(); [lx,ly]=pt(e); });
+  canvas.addEventListener('mouseup', () => drawing = false);
+  canvas.addEventListener('mouseleave', () => drawing = false);
+  canvas.addEventListener('touchstart', e => { e.preventDefault(); drawing = true; [lx,ly] = pt(e.touches[0]); _hasSig = true; }, {passive:false});
+  canvas.addEventListener('touchmove', e => { e.preventDefault(); if(!drawing) return; ctx.beginPath(); ctx.moveTo(lx,ly); ctx.lineTo(...pt(e.touches[0])); ctx.stroke(); [lx,ly]=pt(e.touches[0]); }, {passive:false});
+  canvas.addEventListener('touchend', () => drawing = false);
+
+  document.getElementById('client_name').addEventListener('input', e => {
+    document.getElementById('client-typed-sig').textContent = e.target.value || 'Your Name';
+  });
+})();
+
+function switchSigMode(m) {
+  _sigMode = m;
+  document.querySelectorAll('.sig-tab').forEach((t, i) => t.classList.toggle('active', (i===0) === (m==='draw')));
+  document.getElementById('client-draw-wrap').style.display = m === 'draw' ? 'block' : 'none';
+  document.getElementById('client-type-wrap').classList.toggle('visible', m === 'type');
+  if (m === 'type') _hasSig = !!document.getElementById('client_name').value.trim();
+}
+
+function clearClientSig() {
+  const canvas = document.getElementById('client-sig-canvas');
+  const ctx = canvas.getContext('2d');
+  ctx.clearRect(0, 0, canvas.width, canvas.height);
+  _hasSig = false;
+}
+
+function getClientSigDataURL(name) {
+  if (_sigMode === 'type') {
+    const oc = document.createElement('canvas');
+    oc.width = 480; oc.height = 110;
+    const c = oc.getContext('2d');
+    c.font = 'bold 52px "Dancing Script", cursive';
+    c.fillStyle = '#AB7E37';
+    c.textAlign = 'center';
+    c.textBaseline = 'middle';
+    c.fillText(name || 'Signature', 240, 55);
+    return oc.toDataURL('image/png');
+  }
+  return document.getElementById('client-sig-canvas').toDataURL('image/png');
+}
+
+async function buildSignedPDF({ tierKey, clientName, clientTitle, clientCompany, clientEmail, clientPhone, signedAt, sigDataUrl }) {
+  const pdf = await PDFDocument.create();
+  const helv = await pdf.embedFont(StandardFonts.Helvetica);
+  const bold = await pdf.embedFont(StandardFonts.HelveticaBold);
+  const NAVY  = rgb(0.039, 0.086, 0.157);
+  const GOLD  = rgb(0.671, 0.494, 0.216);
+  const GOLDLT= rgb(0.839, 0.733, 0.537);
+  const GREY  = rgb(0.4, 0.45, 0.51);
+  const DARK  = rgb(0.117, 0.16, 0.231);
+  const W = 612, H = 792;
+  const M = 56;
+
+  const tier = TIERS[tierKey] || TIERS['2'];
+
+  const drawHeader = (page) => {
+    page.drawRectangle({ x: 0, y: H - 6, width: W, height: 6, color: GOLD });
+    page.drawRectangle({ x: W*0.45, y: H - 6, width: W*0.15, height: 6, color: GOLDLT });
+    page.drawText('MARKCMO', { x: M, y: H - 38, size: 14, font: bold, color: GOLD });
+    page.drawText('for CIRILO DESIGN + BUILD', { x: M + 75, y: H - 36, size: 9, font: helv, color: GREY });
+    page.drawText('Doc CDB-PRO-001 · Confidential', { x: W - M - 175, y: H - 36, size: 8, font: helv, color: GREY });
+  };
+  const drawFooter = (page, n, total) => {
+    page.drawLine({ start: {x: M, y: 50}, end: {x: W-M, y: 50}, thickness: 0.5, color: rgb(0.88,0.9,0.94) });
+    page.drawText('Mark Gabrielli · Fractional CMO · markcmo.com · mark@markcmo.com', {
+      x: M, y: 36, size: 8, font: helv, color: GREY,
+    });
+    page.drawText(`${n} / ${total}`, { x: W - M - 30, y: 36, size: 8, font: helv, color: GREY });
+  };
+
+  const p1 = pdf.addPage([W, H]);
+  drawHeader(p1);
+
+  p1.drawRectangle({ x: 0, y: H - 360, width: W, height: 290, color: NAVY });
+  p1.drawText('MARKETING & GROWTH ENGAGEMENT', { x: M, y: H - 130, size: 11, font: bold, color: GOLDLT });
+  p1.drawText('PROPOSAL · ACCEPTED & SIGNED', { x: M, y: H - 145, size: 8, font: helv, color: GOLDLT });
+
+  p1.drawText('Cirilo Design + Build', { x: M, y: H - 200, size: 28, font: bold, color: rgb(1,1,1) });
+  p1.drawText(`Tier ${tierKey} · ${tier.name}`, { x: M, y: H - 234, size: 20, font: helv, color: GOLDLT });
+
+  p1.drawText('PREPARED FOR', { x: M, y: H - 290, size: 7, font: bold, color: GOLDLT });
+  p1.drawText(clientName, { x: M, y: H - 305, size: 11, font: bold, color: rgb(1,1,1) });
+  p1.drawText(`${clientTitle} · ${clientCompany}`, { x: M, y: H - 320, size: 9, font: helv, color: rgb(0.85,0.88,0.95) });
+  p1.drawText(clientEmail, { x: M, y: H - 335, size: 9, font: helv, color: rgb(0.85,0.88,0.95) });
+
+  p1.drawText('PREPARED BY', { x: M + 280, y: H - 290, size: 7, font: bold, color: GOLDLT });
+  p1.drawText('Mark Gabrielli', { x: M + 280, y: H - 305, size: 11, font: bold, color: rgb(1,1,1) });
+  p1.drawText('Fractional CMO · markcmo.com', { x: M + 280, y: H - 320, size: 9, font: helv, color: rgb(0.85,0.88,0.95) });
+  p1.drawText('mark@markcmo.com', { x: M + 280, y: H - 335, size: 9, font: helv, color: rgb(0.85,0.88,0.95) });
+
+  let y = H - 410;
+  p1.drawText('ENGAGEMENT TERMS', { x: M, y: y, size: 8, font: bold, color: GOLD });
+  y -= 22;
+  const termRows = [
+    ['Tier', `Tier ${tierKey} · ${tier.name}`],
+    ['Year 1 Total', tier.total],
+    ['Systems Build', tier.build + ' one-time'],
+    ['Monthly Retainer', tier.retainer + ' / month'],
+    ['Monthly Media', tier.media + ' / month (billed direct to Cirilo)'],
+    ['Initial Upfront', tier.deposit + ' (engagement fee ' + tier.engagementFee + ' + 50% of systems build + first month retainer ' + tier.retainer + ', due at sign)'],
+    ['Term', '12 months initial, then month-to-month'],
+    ['Kill Clause', '90-day mutual, 30 days notice within first 90 days'],
+    ['Governing Docs', 'Proposal CDB-PRO-001 · Roadmap CDB-RDM-001 · Playbook CDB-PLY-001 · Audit CDB-AUD-001'],
+  ];
+  const wrapText = (text, font, size, maxW) => {
+    const words = text.split(' ');
+    const lines = [];
+    let cur = '';
+    for (const w of words) {
+      const trial = cur ? cur + ' ' + w : w;
+      if (font.widthOfTextAtSize(trial, size) > maxW && cur) { lines.push(cur); cur = w; }
+      else { cur = trial; }
+    }
+    if (cur) lines.push(cur);
+    return lines;
+  };
+  termRows.forEach(([k, v]) => {
+    p1.drawText(k.toUpperCase(), { x: M, y: y, size: 7, font: bold, color: GOLD });
+    const lines = wrapText(v, helv, 9, W - M - 180);
+    lines.forEach((line, i) => {
+      p1.drawText(line, { x: M + 130, y: y - (i * 12), size: 9, font: helv, color: DARK });
+    });
+    y -= Math.max(18, lines.length * 12 + 4);
+  });
+
+  drawFooter(p1, 1, 2);
+
+  const p2 = pdf.addPage([W, H]);
+  drawHeader(p2);
+
+  p2.drawText('CLIENT ACCEPTANCE', { x: M, y: H - 80, size: 9, font: bold, color: GOLD });
+  p2.drawText('Cirilo Design + Build', { x: M, y: H - 100, size: 22, font: bold, color: NAVY });
+  p2.drawText('Acceptance confirms binding agreement to the terms of CDB-PRO-001, CDB-RDM-001, CDB-PLY-001 and authorizes the combined upfront invoice (engagement fee + 50% systems-build deposit + first month retainer).', {
+    x: M, y: H - 124, size: 9, font: helv, color: GREY, maxWidth: W - 2*M, lineHeight: 13,
+  });
+
+  let cy = H - 180;
+  p2.drawText('CLIENT SIGNATURE BLOCK', { x: M, y: cy, size: 8, font: bold, color: GOLD });
+  cy -= 30;
+  const sigPng = await pdf.embedPng(sigDataUrl);
+  const sigDims = sigPng.scale(0.35);
+  const sigW = Math.min(sigDims.width, 220);
+  const sigH = (sigDims.height / sigDims.width) * sigW;
+  p2.drawImage(sigPng, { x: M, y: cy - 35, width: sigW, height: Math.min(sigH, 45) });
+  p2.drawLine({ start: { x: M, y: cy - 38 }, end: { x: M + 240, y: cy - 38 }, thickness: 0.8, color: NAVY });
+  p2.drawText(clientName, { x: M, y: cy - 56, size: 10, font: bold, color: NAVY });
+  p2.drawText(`${clientTitle} · ${clientCompany}`, { x: M, y: cy - 70, size: 8, font: helv, color: GREY });
+  const acceptedET = new Date(signedAt).toLocaleString('en-US', { dateStyle:'long', timeStyle:'short', timeZone:'America/New_York' }) + ' ET';
+  p2.drawText(`Signed ${acceptedET}`, { x: M, y: cy - 84, size: 8, font: helv, color: GREY });
+
+  cy -= 130;
+  p2.drawText('COUNTERSIGNATURE (MARKCMO)', { x: M, y: cy, size: 8, font: bold, color: GOLD });
+  cy -= 30;
+  p2.drawLine({ start: { x: M + 316, y: cy - 38 }, end: { x: M + 316 + 240, y: cy - 38 }, thickness: 0.8, color: NAVY });
+  p2.drawText('Mark Gabrielli', { x: M + 316, y: cy - 56, size: 10, font: bold, color: NAVY });
+  p2.drawText('Fractional CMO · WETYR Corp', { x: M + 316, y: cy - 70, size: 8, font: helv, color: GREY });
+  p2.drawText('Pending countersignature', { x: M + 316, y: cy - 84, size: 8, font: helv, color: GREY });
+
+  drawFooter(p2, 2, 2);
+
+  return await pdf.save();
+}
+
+async function generate() {
+  const btn = document.getElementById('generate-btn');
+  const status = document.getElementById('form-status');
+
+  const clientName = document.getElementById('client_name').value.trim();
+  const clientTitle = document.getElementById('client_title').value.trim();
+  const clientCompany = document.getElementById('client_company').value.trim();
+  const clientEmail = document.getElementById('client_email').value.trim();
+  const clientPhone = document.getElementById('client_phone').value.trim();
+  const tierKey = document.querySelector('input[name="tier"]:checked').value;
+  const tier = TIERS[tierKey];
+
+  if (!clientName || !clientTitle || !clientCompany || !clientEmail) {
+    status.textContent = 'Fill out all required fields.';
+    status.className = 'form-status error';
+    return;
+  }
+  if (!document.getElementById('accept_terms').checked || !document.getElementById('accept_esign').checked) {
+    status.textContent = 'You must check both acceptance boxes.';
+    status.className = 'form-status error';
+    return;
+  }
+  if (!_hasSig && _sigMode === 'draw') {
+    status.textContent = 'Please draw or type your signature.';
+    status.className = 'form-status error';
+    return;
+  }
+
+  const signedAt = new Date().toISOString();
+  const sigDataUrl = getClientSigDataURL(clientName);
+
+  btn.disabled = true;
+  btn.textContent = 'Building signed PDF...';
+  status.textContent = 'Generating your signed PDF and submitting for countersignature...';
+  status.className = 'form-status loading';
+
+  try {
+    const pdfBytes = await buildSignedPDF({ tierKey, clientName, clientTitle, clientCompany, clientEmail, clientPhone, signedAt, sigDataUrl });
+    const pdfBase64 = btoa(String.fromCharCode(...new Uint8Array(pdfBytes)));
+
+    const filename = `Cirilo-Design-Build-Engagement-Tier${tierKey}-Signed.pdf`;
+    const docName = `Marketing & Growth Engagement Proposal (Tier ${tierKey} ${tier.name})`;
+
+    const res = await fetch('/.netlify/functions/submit-engagement-doc', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        clientSlug: 'cirilo-design-build',
+        docId: 'CDB-PRO-001',
+        docName,
+        filename,
+        testMode: TEST_MODE,
+        fields: {
+          'Client': clientName,
+          'Title': clientTitle,
+          'Company': clientCompany,
+          'Email': clientEmail,
+          'Phone': clientPhone || '(not provided)',
+          'Engagement': `Marketing & Growth (Tier ${tierKey} ${tier.name})`,
+          'Year 1 Total': tier.total,
+          'Systems Build': tier.build,
+          'Monthly Retainer': tier.retainer,
+          'Monthly Media': tier.media,
+          'Initial Deposit Due': tier.deposit,
+          'Accepted At': new Date(signedAt).toLocaleString('en-US', { dateStyle:'long', timeStyle:'short', timeZone:'America/New_York' }) + ' ET',
+          ...(TEST_MODE ? { 'Test Mode': 'YES, routed to test email' } : {}),
+        },
+        pdfBase64,
+        clientName,
+        clientTitle,
+        clientCompany,
+        clientPhone,
+        clientEmail,
+        clientSigBase64: sigDataUrl.split(',')[1],
+        markSig: {
+          page: 2,
+          sigY: 540,
+          nameY: 524,
+          titleY: 510,
+          dateY: 496,
+        },
+      }),
+    });
+
+    let result;
+    try { result = await res.json(); } catch(e) { result = {}; }
+    if (!res.ok) throw new Error(result.error || `Server error ${res.status}`);
+
+    const fd = new FormData();
+    fd.append('form-name', 'cirilo-acceptance');
+    fd.append('client_name', clientName);
+    fd.append('client_company', clientCompany);
+    fd.append('client_email', clientEmail);
+    fd.append('client_title', clientTitle);
+    fd.append('tier_selected', `Tier ${tierKey} ${tier.name}`);
+    fd.append('accepted_at', signedAt);
+    fetch('/', { method: 'POST', body: fd }).catch(() => {});
+
+    const sentTo = TEST_MODE ? TEST_EMAIL : clientEmail;
+    status.innerHTML = `
+      <strong style="display:block;font-size:1.05rem;margin-bottom:0.5rem;">Submitted successfully.</strong>
+      Your signed copy of <strong>${docName}</strong> has been sent to <strong>${sentTo}</strong>.<br/>
+      Mark countersigns within 24 hours. You will receive the fully executed PDF and the Square invoice for <strong>${tier.deposit}</strong> (${tier.engagementFee} engagement fee + 50% of the ${tier.build} systems-build fee + first month retainer ${tier.retainer}) by email immediately after.<br/>
+      <span style="font-size:0.82rem;display:block;margin-top:0.6rem;color:#065F46;">Confirmation: ${(result.docUuid || signedAt).toString().substring(0, 12)}</span>
+    `;
+    status.className = 'form-status success';
+    btn.textContent = '✅ Submitted, Awaiting Countersignature';
+    btn.style.opacity = '0.5';
+
+  } catch (err) {
+    console.error(err);
+    status.textContent = 'Error: ' + err.message + ', please try again or email mark@markcmo.com.';
+    status.className = 'form-status error';
+    btn.disabled = false;
+    btn.textContent = '✍ Sign & Submit for Countersignature';
+  }
+}
+</script>
+
+<script>(function(){try{var k='mc_jsid';var s=sessionStorage.getItem(k)||('s_'+Math.random().toString(36).slice(2)+Date.now().toString(36));sessionStorage.setItem(k,s);fetch('/.netlify/functions/track',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({t:'view',client:'cirilo-design-build',page:'sign',doc_id:'CDB-PRO-001',session_id:s,url:location.pathname,title:document.title}),keepalive:true}).catch(function(){});}catch(e){}})();</script>
+
+</body>
+</html>

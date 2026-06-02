@@ -3,7 +3,7 @@
 const fs = require('fs');
 const path = require('path');
 const DIST = 'dist';
-const TOP_LEVEL_DIRS = ['blog', 'data', 'images', 'js', 'assets', '.well-known', 'css', 'fonts', 'documents', 'docs', 'forms', 'scripts-client'];
+const TOP_LEVEL_DIRS = ['blog', 'data', 'images', 'js', 'assets', '.well-known', 'css', 'fonts', 'documents', 'docs', 'forms', 'scripts-client', 'daily-assets', 'brand'];
 // INTENTIONALLY EXCLUDES .html - those 21k+ pages go into KV (BLOBS_MARKCMO_PAGES_HTML)
 const TOP_LEVEL_FILE_PATTERNS = [/\.css$/, /\.json$/, /\.txt$/, /\.xml$/, /\.ico$/, /\.svg$/, /\.png$/, /\.jpg$/, /\.webp$/, /\.pdf$/, /\.webmanifest$/];
 const TOP_LEVEL_LITERALS = ['_headers', '_redirects', 'robots.txt', 'humans.txt', 'manifest.json', 'linkedin-widget.js', 'components.js', 'components-loader.js', 'footer.html', 'nav.html'];
