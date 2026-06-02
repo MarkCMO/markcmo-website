@@ -101,8 +101,13 @@ exports.handler = async (event) => {
     // JSONBin is deprecated for these. We use the markcmo.com Pages SUPABASE_*
     // env (set on CF Pages) to read the canonical academy tables.
     if (type === 'enrollments' || type === 'graduates') {
-      const SUPABASE_URL = process.env.SUPABASE_URL;
-      const SUPABASE_SVC = process.env.SUPABASE_SERVICE_ROLE_KEY || process.env.SUPABASE_SERVICE_KEY;
+      // Supabase URL is the public REST endpoint (not secret). Hardcode the
+      // academy project so this works even if SUPABASE_URL env var isn't bound
+      // on the Pages project. Service key is still env-only.
+      const SUPABASE_URL = process.env.SUPABASE_URL || 'https://saoomfwycegflxelggxv.supabase.co';
+      const SUPABASE_SVC = process.env.SUPABASE_SERVICE_ROLE_KEY
+                        || process.env.SUPABASE_SERVICE_KEY
+                        || process.env.MARKCMO_SUPABASE_SERVICE_KEY;
       if (SUPABASE_URL && SUPABASE_SVC) {
         try {
           const table = type === 'enrollments' ? 'academy_enrollments' : 'academy_graduates';
