@@ -97,6 +97,53 @@ exports.handler = async (event) => {
         return { statusCode: 500, headers: CORS, body: JSON.stringify({ error: err.message }) };
       }
     }
+    // Supabase-first for enrollments + graduates (post-JSONBin migration).
+    // JSONBin is deprecated for these. We use the markcmo.com Pages SUPABASE_*
+    // env (set on CF Pages) to read the canonical academy tables.
+    if (type === 'enrollments' || type === 'graduates') {
+      const SUPABASE_URL = process.env.SUPABASE_URL;
+      const SUPABASE_SVC = process.env.SUPABASE_SERVICE_ROLE_KEY || process.env.SUPABASE_SERVICE_KEY;
+      if (SUPABASE_URL && SUPABASE_SVC) {
+        try {
+          const table = type === 'enrollments' ? 'academy_enrollments' : 'academy_graduates';
+          const order = type === 'enrollments' ? 'enrolled_at.desc' : 'added_at.desc';
+          const r = await fetch(`${SUPABASE_URL}/rest/v1/${table}?select=*&order=${order}`, {
+            headers: {
+              apikey: SUPABASE_SVC,
+              Authorization: `Bearer ${SUPABASE_SVC}`,
+            }
+          });
+          if (!r.ok) {
+            const detail = await r.text().catch(() => '');
+            return { statusCode: 500, headers: CORS, body: JSON.stringify({ error: `Supabase ${r.status}: ${detail.slice(0,180)}` }) };
+          }
+          const rows = await r.json();
+          // Match the JSONBin shape the admin UI expects
+          const key = type === 'enrollments' ? 'enrollments' : 'graduates';
+          // Normalize column names back to the camelCase the admin UI uses
+          const normalized = (rows || []).map(r => ({
+            ...r,
+            // camelCase aliases
+            enrolledAt: r.enrolled_at,
+            accessToken: r.access_token,
+            courseId: r.course_id,
+            courseTitle: r.course_title,
+            paymentSource: r.payment_source,
+            paidAmount: r.paid_amount,
+            isRetake: r.is_retake,
+            isViaMembership: r.is_via_membership,
+            membershipPlan: r.membership_plan,
+            addedAt: r.added_at,
+            completedAt: r.completed_at,
+            diplomaNumber: r.diploma_number,
+          }));
+          return { statusCode: 200, headers: CORS, body: JSON.stringify({ [key]: normalized }) };
+        } catch (err) {
+          return { statusCode: 500, headers: CORS, body: JSON.stringify({ error: 'Supabase read failed: ' + err.message }) };
+        }
+      }
+      // If Supabase not configured, fall through to JSONBin (legacy)
+    }
     const bin = BIN_MAP[type];
     if (!bin || !bin.id) {
       return { statusCode: 400, headers: CORS, body: JSON.stringify({ error: `Unknown type or missing bin ID: ${type}` }) };
