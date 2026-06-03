@@ -52,13 +52,14 @@
   td{padding:7px 10px;border-bottom:1px solid var(--line);}
   td.red{color:var(--red);font-weight:700;}
 
-  .offer{background:var(--bg-soft-2);border-left:5px solid var(--red);padding:16px 22px;border-radius:0 4px 4px 0;margin-bottom:20px;}
+  .offer{background:var(--bg-soft-2);border:1px solid #F1D5CE;padding:16px 22px;border-radius:12px;margin-bottom:20px;box-shadow:0 6px 22px rgba(250,41,5,0.06);}
   .offer .l{font-family:'Roboto';font-size:0.64rem;letter-spacing:0.12em;text-transform:uppercase;color:var(--red);font-weight:700;margin-bottom:5px;}
   .offer b{color:var(--charcoal);}
 
   .tiers{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-bottom:20px;}
   @media(max-width:620px){.tiers{grid-template-columns:1fr;}}
-  .tier{border:1px solid var(--line);border-radius:7px;padding:14px 16px;}
+  .tier{border:1px solid var(--line);border-radius:10px;padding:14px 16px;transition:transform .18s ease,box-shadow .18s ease,border-color .18s ease;}
+  .tier:hover{transform:translateY(-4px);box-shadow:var(--shadow,0 10px 30px rgba(0,0,0,.1));border-color:#E4B9AE;}
   .tier.rec{border:2px solid var(--red);}
   .tier .tn{font-weight:800;text-transform:uppercase;font-size:0.9rem;color:var(--charcoal);}
   .tier .g{font-size:0.74rem;color:var(--gray);margin:4px 0 8px;min-height:48px;}
@@ -131,7 +132,7 @@
     <div class="tiers">
       <div class="tier"><div class="tn">Foothold</div><div class="g">Own ROC's Volusia home core and prove the model.</div><div class="ld">10-15</div><div class="ldl">leads / month</div></div>
       <div class="tier rec"><div class="tn">Growth</div><div class="g">20 to 30 leads across all 3 counties, take the soft packs this year.</div><div class="ld">20-30</div><div class="ldl">leads / month</div></div>
-      <div class="tier"><div class="tn">Domination</div><div class="g">Market leadership and full storm-surge capture.</div><div class="ld">40+</div><div class="ldl">leads / month</div></div>
+      <div class="tier"><div class="tn">Enterprise</div><div class="g">Market leadership and full storm-surge capture.</div><div class="ld">40+</div><div class="ldl">leads / month</div></div>
     </div>
   </div>
 

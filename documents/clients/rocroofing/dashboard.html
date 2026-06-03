@@ -34,12 +34,15 @@
   .sample-flag{background:var(--amber);color:#1F1F1F;font-family:'Roboto';font-size:0.62rem;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;padding:4px 10px;border-radius:3px;}
 
   .wrap{max-width:1140px;margin:0 auto;padding:28px;}
-  .note{background:#FFF8E6;border-left:4px solid var(--amber);padding:12px 18px;border-radius:0 4px 4px 0;font-size:0.84rem;color:#7A5E00;margin-bottom:24px;}
+  .note{background:#FFF8E6;border:1px solid #F2E2B0;padding:13px 18px;border-radius:10px;font-size:0.84rem;color:#7A5E00;margin-bottom:24px;}
 
   /* KPI ROW */
   .kpis{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;margin-bottom:18px;}
   @media(max-width:860px){.kpis{grid-template-columns:1fr 1fr;}}
-  .kpi{background:#fff;border:1px solid var(--line);border-radius:10px;padding:20px 22px;box-shadow:var(--shadow);border-top:4px solid var(--red);}
+  .kpi{background:#fff;border:1px solid var(--line);border-radius:12px;padding:20px 22px;box-shadow:var(--shadow);position:relative;overflow:hidden;transition:transform .2s ease,box-shadow .2s ease,border-color .2s ease;}
+  .kpi::before{content:'';position:absolute;left:0;right:0;top:0;height:0;background:var(--red);transition:height .2s ease;}
+  .kpi:hover{transform:translateY(-4px);box-shadow:var(--shadow-lg);border-color:#E4B9AE;}
+  .kpi:hover::before{height:3px;}
   .kpi .k{font-family:'Roboto';font-size:0.66rem;letter-spacing:0.1em;text-transform:uppercase;color:var(--muted);font-weight:700;}
   .kpi .n{font-family:'Montserrat';font-weight:900;font-size:2.3rem;color:var(--charcoal);line-height:1.05;margin-top:6px;}
   .kpi .d{font-family:'Roboto';font-size:0.74rem;font-weight:500;margin-top:4px;}
@@ -47,7 +50,8 @@
 
   .grid2{display:grid;grid-template-columns:1.3fr 1fr;gap:18px;margin-bottom:18px;}
   @media(max-width:860px){.grid2{grid-template-columns:1fr;}}
-  .card{background:#fff;border:1px solid var(--line);border-radius:10px;padding:22px 24px;box-shadow:var(--shadow);}
+  .card{background:#fff;border:1px solid var(--line);border-radius:12px;padding:22px 24px;box-shadow:var(--shadow);transition:transform .2s ease,box-shadow .2s ease;}
+  .card:hover{transform:translateY(-3px);box-shadow:var(--shadow-lg);}
   .card h3{font-size:1.05rem;text-transform:uppercase;letter-spacing:0.02em;margin-bottom:4px;}
   .card .sub{font-family:'Roboto';font-size:0.72rem;color:var(--muted);text-transform:uppercase;letter-spacing:0.06em;margin-bottom:16px;}
 
