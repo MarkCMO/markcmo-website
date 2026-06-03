@@ -229,11 +229,11 @@
           <label>Email (for the executed copy and payment link)</label>
           <input type="text" class="signer-email" inputmode="email" placeholder="name@company.com">
           <div class="sigtabs">
-            <div class="sigtab active" data-mode="type">Type</div>
-            <div class="sigtab" data-mode="draw">Draw</div>
+            <div class="sigtab" data-mode="type">Type</div>
+            <div class="sigtab active" data-mode="draw">Draw</div>
           </div>
-          <div class="sigwrap sig-type"><div class="sig-type-preview"></div></div>
-          <div class="sigwrap sig-draw" style="display:none;">
+          <div class="sigwrap sig-type" style="display:none;"><div class="sig-type-preview"></div></div>
+          <div class="sigwrap sig-draw">
             <canvas></canvas>
             <div class="sig-baseline"></div><div class="sig-x">X</div>
             <div class="sigrow"><button type="button" class="sig-clear">Clear</button></div>
@@ -259,11 +259,11 @@
           <label>Email (for your executed copy)</label>
           <input type="text" class="signer-email" inputmode="email" value="mark@markcmo.com">
           <div class="sigtabs">
-            <div class="sigtab active" data-mode="type">Type</div>
-            <div class="sigtab" data-mode="draw">Draw</div>
+            <div class="sigtab" data-mode="type">Type</div>
+            <div class="sigtab active" data-mode="draw">Draw</div>
           </div>
-          <div class="sigwrap sig-type"><div class="sig-type-preview"></div></div>
-          <div class="sigwrap sig-draw" style="display:none;">
+          <div class="sigwrap sig-type" style="display:none;"><div class="sig-type-preview"></div></div>
+          <div class="sigwrap sig-draw">
             <canvas></canvas>
             <div class="sig-baseline"></div><div class="sig-x">X</div>
             <div class="sigrow"><button type="button" class="sig-clear">Clear</button></div>
@@ -331,7 +331,7 @@
     var typeWrap=panel.querySelector('.sig-type');
     var canvas=panel.querySelector('canvas');
     var ctx=canvas.getContext('2d');
-    var mode='type', drawing=false, hasDrawn=false, last=null, sized=false;
+    var mode='draw', drawing=false, hasDrawn=false, last=null, sized=false;
 
     function syncType(){ typePrev.textContent=nameInput.value.trim(); fitPreview(typePrev); }
     nameInput.addEventListener('input', syncType); syncType();
@@ -367,6 +367,7 @@
       hasInk:function(){ return mode==='draw'?hasDrawn:!!nameInput.value.trim(); },
       data:function(){ return mode==='draw'?(hasDrawn?canvas.toDataURL('image/png'):null):(nameInput.value.trim()?renderType(nameInput.value):null); }
     };
+    setTimeout(sizeCanvas, 40); // draw is the default mode, size the canvas on load
   }
 
   Array.prototype.forEach.call(document.querySelectorAll('.sigpanel'), initPanel);
