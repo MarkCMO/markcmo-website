@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>ROC Roofing | Monthly Performance Dashboard (Sample)</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex, nofollow, noarchive, nosnippet, noimageindex">
+<meta http-equiv="Cache-Control" content="no-store, no-cache, must-revalidate, private">
+<link rel="icon" href="https://rocroofingfl.com/wp-content/uploads/2025/03/ROC-300x300-1.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800;900&family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --red:#FA2905; --red-dark:#C81F02; --charcoal:#1F1F1F; --charcoal-2:#2C2C2C; --charcoal-3:#3A3A3A;
+    --gray:#54595F; --text:#333; --muted:#757B82; --line:#E4E4E6; --line-dark:#3D3D3D; --white:#fff;
+    --bg-soft:#F5F5F6; --green:#2E8B57; --amber:#E0A800; --blue:#2563EB;
+    --shadow:0 8px 30px rgba(0,0,0,0.08);
+  }
+  *{box-sizing:border-box;margin:0;padding:0;}
+  body{font-family:'Montserrat',sans-serif;background:var(--bg-soft);color:var(--text);font-size:15px;line-height:1.55;-webkit-font-smoothing:antialiased;}
+  h1,h2,h3,h4{font-family:'Montserrat';color:var(--charcoal);font-weight:800;line-height:1.15;}
+  .eyebrow{font-family:'Roboto';font-size:0.68rem;letter-spacing:0.22em;text-transform:uppercase;color:var(--red);font-weight:700;}
+  a{color:var(--red);text-decoration:none;}
+
+  /* TOP BAR */
+  .bar{background:var(--charcoal);color:#fff;padding:16px 30px;display:flex;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap;position:sticky;top:0;z-index:20;}
+  .bar .l{display:flex;align-items:center;gap:14px;}
+  .bar .l img{height:42px;background:#fff;border-radius:6px;padding:3px;}
+  .bar .l .t{font-weight:800;text-transform:uppercase;letter-spacing:0.03em;font-size:0.95rem;line-height:1.1;}
+  .bar .l .t span{color:var(--red);}
+  .bar .meta{font-family:'Roboto';font-size:0.72rem;letter-spacing:0.08em;text-transform:uppercase;color:#B9B9B9;text-align:right;}
+  .bar .meta b{color:#fff;}
+  .sample-flag{background:var(--amber);color:#1F1F1F;font-family:'Roboto';font-size:0.62rem;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;padding:4px 10px;border-radius:3px;}
+
+  .wrap{max-width:1140px;margin:0 auto;padding:28px;}
+  .note{background:#FFF8E6;border-left:4px solid var(--amber);padding:12px 18px;border-radius:0 4px 4px 0;font-size:0.84rem;color:#7A5E00;margin-bottom:24px;}
+
+  /* KPI ROW */
+  .kpis{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;margin-bottom:18px;}
+  @media(max-width:860px){.kpis{grid-template-columns:1fr 1fr;}}
+  .kpi{background:#fff;border:1px solid var(--line);border-radius:10px;padding:20px 22px;box-shadow:var(--shadow);border-top:4px solid var(--red);}
+  .kpi .k{font-family:'Roboto';font-size:0.66rem;letter-spacing:0.1em;text-transform:uppercase;color:var(--muted);font-weight:700;}
+  .kpi .n{font-family:'Montserrat';font-weight:900;font-size:2.3rem;color:var(--charcoal);line-height:1.05;margin-top:6px;}
+  .kpi .d{font-family:'Roboto';font-size:0.74rem;font-weight:500;margin-top:4px;}
+  .kpi .d.up{color:var(--green);} .kpi .d.down{color:var(--red);} .kpi .d.flat{color:var(--muted);}
+
+  .grid2{display:grid;grid-template-columns:1.3fr 1fr;gap:18px;margin-bottom:18px;}
+  @media(max-width:860px){.grid2{grid-template-columns:1fr;}}
+  .card{background:#fff;border:1px solid var(--line);border-radius:10px;padding:22px 24px;box-shadow:var(--shadow);}
+  .card h3{font-size:1.05rem;text-transform:uppercase;letter-spacing:0.02em;margin-bottom:4px;}
+  .card .sub{font-family:'Roboto';font-size:0.72rem;color:var(--muted);text-transform:uppercase;letter-spacing:0.06em;margin-bottom:16px;}
+
+  /* channel table */
+  table{width:100%;border-collapse:collapse;font-size:0.86rem;}
+  th{background:var(--charcoal);color:#fff;padding:10px 12px;text-align:left;font-family:'Roboto';font-size:0.62rem;letter-spacing:0.08em;text-transform:uppercase;font-weight:700;}
+  td{padding:10px 12px;border-bottom:1px solid var(--line);}
+  td.r,th.r{text-align:right;}
+  tr:last-child td{border-bottom:none;}
+  tfoot td{font-weight:800;background:var(--bg-soft);border-top:2px solid var(--charcoal);}
+  .chip{display:inline-block;width:10px;height:10px;border-radius:3px;margin-right:7px;vertical-align:middle;}
+
+  /* bar list */
+  .barrow{margin-bottom:14px;}
+  .barrow .lab{display:flex;justify-content:space-between;font-size:0.82rem;margin-bottom:5px;}
+  .barrow .lab b{font-weight:700;color:var(--charcoal);}
+  .track{height:13px;background:var(--bg-soft);border-radius:7px;overflow:hidden;}
+  .fill{height:100%;border-radius:7px;}
+
+  /* review progress */
+  .reviewbig{display:flex;align-items:baseline;gap:12px;}
+  .reviewbig .now{font-family:'Montserrat';font-weight:900;font-size:3rem;color:var(--charcoal);line-height:1;}
+  .reviewbig .goal{font-family:'Roboto';font-size:0.8rem;color:var(--muted);text-transform:uppercase;letter-spacing:0.06em;}
+  .progress{height:16px;background:var(--bg-soft);border-radius:8px;overflow:hidden;margin:14px 0 6px;}
+  .progress .fill{height:100%;background:linear-gradient(90deg,var(--red),var(--red-dark));border-radius:8px;}
+
+  /* map pack rank list */
+  .rank{display:flex;align-items:center;justify-content:space-between;padding:9px 0;border-bottom:1px solid var(--line);font-size:0.86rem;}
+  .rank:last-child{border-bottom:none;}
+  .rank .pos{font-family:'Montserrat';font-weight:900;font-size:1.1rem;width:42px;}
+  .rank .pos.p1,.rank .pos.p2,.rank .pos.p3{color:var(--green);}
+  .rank .pos.px{color:var(--muted);}
+  .rank .delta{font-family:'Roboto';font-size:0.72rem;font-weight:700;}
+  .rank .delta.up{color:var(--green);} .rank .delta.flat{color:var(--muted);}
+
+  .legend{font-family:'Roboto';font-size:0.72rem;color:var(--muted);margin-top:10px;}
+  .legend span{margin-right:16px;}
+
+  footer{background:#141414;color:#888;padding:24px 30px;font-family:'Roboto';font-size:0.72rem;letter-spacing:0.04em;display:flex;justify-content:space-between;flex-wrap:wrap;gap:10px;}
+  footer b{color:var(--red);}
+  .backlink{font-family:'Roboto';font-size:0.74rem;text-transform:uppercase;letter-spacing:0.08em;}
+</style>
+</head>
+<body>
+
+<div class="bar">
+  <div class="l">
+    <img src="https://rocroofingfl.com/wp-content/uploads/2025/03/ROC-300x300-1.png" alt="ROC Roofing">
+    <div class="t">ROC ROOFING<br><span>PERFORMANCE DASHBOARD</span></div>
+  </div>
+  <div class="meta">
+    Reporting period: <b>Sample Month 6</b><br>
+    <span class="sample-flag">Sample data &middot; illustration only</span>
+  </div>
+</div>
+
+<div class="wrap">
+  <div class="note">This is a sample of the live dashboard ROC receives every month. Numbers shown are illustrative targets for a mature month, not actual results. The real dashboard updates automatically and is reviewed together on the monthly strategy call.</div>
+
+  <!-- KPI ROW -->
+  <div class="kpis">
+    <div class="kpi"><div class="k">Total Leads</div><div class="n">27</div><div class="d up">+ 5 vs last month</div></div>
+    <div class="kpi"><div class="k">Cost / Lead (blended)</div><div class="n">$96</div><div class="d up">down from $128</div></div>
+    <div class="kpi"><div class="k">Booked Jobs</div><div class="n">7</div><div class="d up">26% close rate</div></div>
+    <div class="kpi"><div class="k">New 5-Star Reviews</div><div class="n">12</div><div class="d up">on pace, 8 to 15 goal</div></div>
+  </div>
+
+  <!-- LEADS BY CHANNEL + COST -->
+  <div class="grid2">
+    <div class="card">
+      <h3>Leads by Channel</h3>
+      <div class="sub">Where the 27 leads came from this month</div>
+      <table>
+        <thead><tr><th>Channel</th><th class="r">Spend</th><th class="r">Leads</th><th class="r">Cost / Lead</th><th class="r">Booked</th></tr></thead>
+        <tbody>
+          <tr><td><span class="chip" style="background:var(--red)"></span>Local Service Ads</td><td class="r">$1,450</td><td class="r">14</td><td class="r">$104</td><td class="r">4</td></tr>
+          <tr><td><span class="chip" style="background:var(--blue)"></span>Google Search</td><td class="r">$2,050</td><td class="r">7</td><td class="r">$293</td><td class="r">2</td></tr>
+          <tr><td><span class="chip" style="background:var(--amber)"></span>Meta (Facebook/IG)</td><td class="r">$900</td><td class="r">4</td><td class="r">$225</td><td class="r">1</td></tr>
+          <tr><td><span class="chip" style="background:var(--green)"></span>Organic / GBP (free)</td><td class="r">$0</td><td class="r">2</td><td class="r">$0</td><td class="r">0</td></tr>
+        </tbody>
+        <tfoot><tr><td>Total</td><td class="r">$4,400</td><td class="r">27</td><td class="r">$96</td><td class="r">7</td></tr></tfoot>
+      </table>
+      <div class="legend"><span><span class="chip" style="background:var(--green)"></span>Organic leads grow each quarter as SEO matures, pulling blended cost / lead down.</span></div>
+    </div>
+
+    <div class="card">
+      <h3>Review Growth</h3>
+      <div class="sub">The moat that beats incumbents</div>
+      <div class="reviewbig"><div class="now">112</div><div class="goal">/ 150 target</div></div>
+      <div class="progress"><div class="fill" style="width:74%"></div></div>
+      <div style="font-family:'Roboto';font-size:0.78rem;color:var(--muted);">Started at 46 &middot; +66 in 6 months &middot; 4.8 average</div>
+      <div style="margin-top:18px;">
+        <div class="barrow"><div class="lab"><span>Month 1</span><b>+9</b></div><div class="track"><div class="fill" style="width:36%;background:var(--red)"></div></div></div>
+        <div class="barrow"><div class="lab"><span>Month 3</span><b>+11</b></div><div class="track"><div class="fill" style="width:55%;background:var(--red)"></div></div></div>
+        <div class="barrow"><div class="lab"><span>Month 6</span><b>+12</b></div><div class="track"><div class="fill" style="width:72%;background:var(--red)"></div></div></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- MAP PACK RANKINGS + SPEND TREND -->
+  <div class="grid2">
+    <div class="card">
+      <h3>Map Pack Rankings</h3>
+      <div class="sub">Local 3-pack position by city (lower is better)</div>
+      <div class="rank"><span><span class="pos p2">#2</span> Deltona</span><span class="delta up">up from #5</span></div>
+      <div class="rank"><span><span class="pos p3">#3</span> Orange City</span><span class="delta up">up from off-map</span></div>
+      <div class="rank"><span><span class="pos p3">#3</span> Lake Mary</span><span class="delta up">up from #7</span></div>
+      <div class="rank"><span><span class="pos px">#4</span> Sanford</span><span class="delta up">up from #9</span></div>
+      <div class="rank"><span><span class="pos px">#6</span> Melbourne</span><span class="delta up">up from off-map</span></div>
+      <div class="legend"><span style="color:var(--green)">Green = in the 3-pack. Goal: all core Volusia and Seminole cities in the pack by month 12.</span></div>
+    </div>
+
+    <div class="card">
+      <h3>Lead Volume Trend</h3>
+      <div class="sub">Total qualified leads per month</div>
+      <div style="margin-top:6px;">
+        <div class="barrow"><div class="lab"><span>M1</span><b>11</b></div><div class="track"><div class="fill" style="width:31%;background:var(--charcoal-3)"></div></div></div>
+        <div class="barrow"><div class="lab"><span>M2</span><b>16</b></div><div class="track"><div class="fill" style="width:46%;background:var(--charcoal-3)"></div></div></div>
+        <div class="barrow"><div class="lab"><span>M3</span><b>19</b></div><div class="track"><div class="fill" style="width:54%;background:var(--gray)"></div></div></div>
+        <div class="barrow"><div class="lab"><span>M4</span><b>22</b></div><div class="track"><div class="fill" style="width:63%;background:var(--gray)"></div></div></div>
+        <div class="barrow"><div class="lab"><span>M5</span><b>22</b></div><div class="track"><div class="fill" style="width:63%;background:var(--red)"></div></div></div>
+        <div class="barrow"><div class="lab"><span>M6</span><b>27</b></div><div class="track"><div class="fill" style="width:77%;background:var(--red)"></div></div></div>
+      </div>
+      <div class="legend"><span>Target band: 20 to 30 / month reached by month 4 and held.</span></div>
+    </div>
+  </div>
+
+  <!-- WHAT WE DID / NEXT -->
+  <div class="card">
+    <h3>This Month: What We Did and What's Next</h3>
+    <div class="sub">Plain-English summary on every report</div>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:24px;">
+      <div>
+        <h4 style="font-size:0.8rem;text-transform:uppercase;color:var(--green);letter-spacing:0.06em;margin-bottom:8px;">Shipped</h4>
+        <ul style="margin-left:1.1em;font-size:0.86rem;">
+          <li>Published 4 unique city pages (Deltona, Orange City, DeBary, Sanford)</li>
+          <li>Sent 41 review requests, 12 new 5-star reviews landed</li>
+          <li>Launched Google Search ads on the new landing pages</li>
+          <li>Responded to all reviews within 24 hours</li>
+        </ul>
+      </div>
+      <div>
+        <h4 style="font-size:0.8rem;text-transform:uppercase;color:var(--red);letter-spacing:0.06em;margin-bottom:8px;">Next Month</h4>
+        <ul style="margin-left:1.1em;font-size:0.86rem;">
+          <li>Open Oviedo and Altamonte (soft Seminole packs at 66 to 77)</li>
+          <li>Begin GAF Master Elite application</li>
+          <li>Storm-kit on standby (season ramping)</li>
+          <li>Scale LSA budget into the cities now ranking</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
+
+<footer>
+  <div><a class="backlink" href="index.html">&laquo; Back to the full proposal</a> &nbsp;|&nbsp; Prepared by <b>MarkCMO</b> for ROC Roofing</div>
+  <div>Sample dashboard &middot; June 2026</div>
+</footer>
+
+</body>
+</html>
