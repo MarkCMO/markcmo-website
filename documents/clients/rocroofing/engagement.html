@@ -77,9 +77,12 @@
 
   /* digital signatures */
   .esign{margin-top:38px;padding-top:28px;border-top:2px solid var(--charcoal);}
-  .esign-grid{display:grid;grid-template-columns:1fr 1fr;gap:22px;margin-top:18px;}
-  @media(max-width:680px){.esign-grid{grid-template-columns:1fr;}}
-  .sigpanel{border:1px solid var(--line);border-radius:14px;padding:22px 22px;background:#fff;box-shadow:var(--shadow);transition:box-shadow .22s ease,border-color .22s ease,transform .22s ease;}
+  .esign-grid{display:grid;grid-template-columns:1fr 1fr;gap:22px;margin-top:18px;align-items:stretch;}
+  @media(max-width:680px){.esign-grid{grid-template-columns:1fr;gap:18px;}}
+  .sigpanel{display:flex;flex-direction:column;min-width:0;border:1px solid var(--line);border-radius:14px;padding:24px;background:#fff;box-shadow:var(--shadow);transition:box-shadow .22s ease,border-color .22s ease,transform .22s ease;}
+  .sigpanel .sig-form{flex:1;display:flex;flex-direction:column;min-width:0;}
+  .sigpanel input[type=text],.sigwrap,.sigtabs{min-width:0;max-width:100%;}
+  .sigpanel .sig-form .sig-btn{margin-top:auto;}
   .sigpanel:hover{box-shadow:var(--shadow-lg);transform:translateY(-3px);}
   .sigpanel.signed{border-color:var(--green);background:#FAFFFB;}
   .sigpanel .prole{font-family:'Roboto';font-size:0.64rem;letter-spacing:0.12em;text-transform:uppercase;color:var(--muted);font-weight:700;margin-bottom:12px;}
@@ -97,8 +100,9 @@
   .sig-x{position:absolute;left:18px;bottom:30px;font-family:'Roboto';color:#B7B7BD;font-size:0.95rem;pointer-events:none;}
   .sigrow{display:flex;align-items:center;justify-content:flex-end;margin-top:6px;}
   .sig-clear{font-family:'Roboto';font-size:0.66rem;text-transform:uppercase;letter-spacing:0.06em;color:var(--red);background:none;border:none;cursor:pointer;font-weight:700;}
-  .consent{display:flex;gap:9px;align-items:flex-start;margin:14px 0 2px;font-size:0.78rem;color:var(--gray);line-height:1.45;}
-  .consent input{margin-top:2px;width:16px;height:16px;accent-color:var(--red);flex:none;}
+  .sigpanel label.consent{display:flex;gap:10px;align-items:flex-start;margin:16px 0 2px;font-family:'Montserrat',sans-serif;font-size:0.76rem;font-weight:400;letter-spacing:0;text-transform:none;color:var(--gray);line-height:1.5;cursor:pointer;}
+  .sigpanel label.consent span{font-weight:400;text-transform:none;letter-spacing:0;}
+  .consent input{margin-top:2px;width:17px;height:17px;accent-color:var(--red);flex:none;cursor:pointer;}
   .sig-btn{width:100%;margin-top:14px;background:var(--red);color:#fff;font-family:'Roboto';font-weight:700;font-size:0.76rem;letter-spacing:0.06em;text-transform:uppercase;padding:13px;border:none;border-radius:7px;cursor:pointer;transition:background .15s ease,transform .15s ease;}
   .sig-btn:hover{background:var(--red-dark);transform:translateY(-2px);}
   .sig-btn:disabled{background:#C9C9CC;cursor:default;transform:none;}
@@ -118,6 +122,13 @@
   .btn-download{background:var(--charcoal);color:#fff;font-family:'Roboto';font-weight:700;font-size:0.76rem;letter-spacing:0.06em;text-transform:uppercase;padding:13px 26px;border:none;border-radius:7px;cursor:pointer;transition:transform .15s ease,background .15s ease;}
   .btn-download:hover{transform:translateY(-2px);background:#000;}
 
+  @media(max-width:680px){
+    table{font-size:0.72rem;}
+    th,td{padding:8px 7px;}
+    .esign-actions{flex-direction:column;align-items:stretch;}
+    .esign-actions .sig-btn,.esign-actions .btn-download{width:100%!important;text-align:center;}
+    .esign-status{text-align:center;}
+  }
   .disc{font-size:0.78rem;color:var(--muted);margin-top:26px;line-height:1.55;border-top:1px solid var(--line);padding-top:16px;}
 
   footer{max-width:880px;margin:0 auto 40px;padding:0 64px;font-family:'Roboto';font-size:0.72rem;color:var(--muted);display:flex;justify-content:space-between;flex-wrap:wrap;gap:10px;}
@@ -245,6 +256,8 @@
           <input type="text" class="signer-name" value="Mark Gabrielli" autocomplete="name">
           <label>Title</label>
           <input type="text" class="signer-title" value="Fractional CMO">
+          <label>Email (for your executed copy)</label>
+          <input type="text" class="signer-email" inputmode="email" value="mark@markcmo.com">
           <div class="sigtabs">
             <div class="sigtab active" data-mode="type">Type</div>
             <div class="sigtab" data-mode="draw">Draw</div>
@@ -298,12 +311,17 @@
     o.fillText(name, 22, 78);
     return oc.toDataURL('image/png');
   }
+  var _measure = document.createElement('canvas').getContext('2d');
   function fitPreview(el){
-    el.style.fontSize='';
-    var base=parseFloat(getComputedStyle(el).fontSize)||32;
-    if(el.clientWidth>0 && el.scrollWidth>el.clientWidth){
-      el.style.fontSize=Math.max(13, base*(el.clientWidth-18)/el.scrollWidth)+'px';
-    }
+    var name = (el.textContent||'').trim();
+    if(!name){ el.style.fontSize=''; return; }
+    var box = el.clientWidth - 38;
+    if(box <= 0) { el.style.fontSize=''; return; }
+    var size = 34; // ~2.1rem reference
+    _measure.font = size + 'px ' + CURSIVE_FAMILY;
+    var w = _measure.measureText(name).width;
+    if(w > box) size = Math.max(14, size * (box / w) * 0.96);
+    el.style.fontSize = size + 'px';
   }
 
   function initPanel(panel){
