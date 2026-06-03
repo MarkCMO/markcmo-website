@@ -723,7 +723,7 @@
       <h3>Book a Free Strategy Call</h3>
       <p>60 seconds. Mark responds personally within 24 hours.</p>
       <div id="mc-card">
-        <form id="mc-form" novalidate>
+        <form id="mc-form">
           <input type="hidden" name="form-name" value="page-contact">
           <input type="text" name="bot-field" style="display:none" tabindex="-1" autocomplete="off">
           <div class="mc-field"><input type="text" name="name" placeholder="Your Full Name *" required autocomplete="name"></div>
@@ -962,12 +962,7 @@
     btn.textContent='Sending...';btn.disabled=true;
     var d=new FormData(form);
     var p={'form-name':d.get('form-name')||'page-contact','name':d.get('name')||'','email':d.get('email')||'','company':d.get('company')||'','phone':d.get('phone')||'','service':d.get('service')||'','message':d.get('message')||''};
-    try{localStorage.setItem('mc_lead_'+Date.now(),JSON.stringify(p));}catch(ex){}
-    fetch('/api/lead',{method:'POST',headers:{'Content-Type':'application/x-www-form-urlencoded'},body:new URLSearchParams(p).toString()})
-    .then(function(){card.style.display='none';suc.style.display='block';})
-    .catch(function(){card.style.display='none';suc.style.display='block';
-      setTimeout(function(){window.open('mailto:mark@markcmo.com?subject=Inquiry&body=Name:+'+encodeURIComponent(p.name)+'%0AEmail:+'+encodeURIComponent(p.email),'_blank');},400);
-    });
+    var __mcErr=function(msg){var n=document.getElementById('mc-err');if(!n){n=document.createElement('div');n.id='mc-err';n.style.cssText='margin:12px 0;padding:12px 14px;background:#3a1212;border:1px solid #b94a4a;border-radius:6px;color:#ffd9d9;font-size:14px;font-family:Inter,Arial,sans-serif;';(card||document.getElementById('mc-form')||document.body).insertBefore(n,(card||document.getElementById('mc-form')||document.body).firstChild);}n.textContent=msg;n.scrollIntoView({behavior:'smooth',block:'center'});};var __mcName=(p.name||'').trim(),__mcEmail=(p.email||'').trim();if(__mcName.length<2){__mcErr('Please enter your full name.');var f=document.querySelector('[name="name"]');if(f)f.focus();return;}if(!__mcEmail||!/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(__mcEmail)){__mcErr('Please enter a valid work email.');var f=document.querySelector('[name="email"]');if(f)f.focus();return;}try{localStorage.setItem('mc_lead_'+Date.now(),JSON.stringify(p));}catch(ex){}fetch('/api/lead',{method:'POST',headers:{'Content-Type':'application/x-www-form-urlencoded'},body:new URLSearchParams(p).toString()}).then(function(r){if(!r.ok){return r.json().then(function(j){var msg=(j&&j.errors&&j.errors[0]&&j.errors[0].message)||'Submission failed. Please try again.';throw new Error(msg);},function(){throw new Error('Submission failed. Please try again.');});}card.style.display='none';suc.style.display='block';}).catch(function(e){__mcErr((e&&e.message)||'Network error. Please email mark@markcmo.com directly.');});
   });
 })();
 </script>

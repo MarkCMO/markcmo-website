@@ -1,8 +1,8 @@
 ﻿// cloudflare/cron-worker.js - MarkCMO cron fan-out worker
 const CRON_TO_FUNCTIONS = {
   '0 */6 * * *': ['engagement-payment-followups', 'film-rolodex-cron'],
-  '0 * * * *':   ['email-drip'],
-  '0 9 * * *':   ['film-rolodex-deep-cron'],
+  '0 * * * *':   ['email-drip', 'daily-content-email', 'ig-autopost'],
+  '0 9 * * *':   ['film-rolodex-deep-cron', 'health-check', 'ig-token-refresh'],
 };
 
 export default {

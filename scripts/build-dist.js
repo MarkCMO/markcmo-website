@@ -3,10 +3,10 @@
 const fs = require('fs');
 const path = require('path');
 const DIST = 'dist';
-const TOP_LEVEL_DIRS = ['blog', 'data', 'images', 'js', 'assets', '.well-known', 'css', 'fonts', 'documents', 'docs', 'forms', 'scripts-client'];
+const TOP_LEVEL_DIRS = ['blog', 'data', 'images', 'js', 'assets', '.well-known', 'css', 'fonts', 'documents', 'docs', 'forms', 'scripts-client', 'daily-assets', 'brand'];
 // INTENTIONALLY EXCLUDES .html - those 21k+ pages go into KV (BLOBS_MARKCMO_PAGES_HTML)
 const TOP_LEVEL_FILE_PATTERNS = [/\.css$/, /\.json$/, /\.txt$/, /\.xml$/, /\.ico$/, /\.svg$/, /\.png$/, /\.jpg$/, /\.webp$/, /\.pdf$/, /\.webmanifest$/];
-const TOP_LEVEL_LITERALS = ['_headers', '_redirects', 'robots.txt', 'humans.txt', 'manifest.json', 'linkedin-widget.js', 'components.js', 'components-loader.js', 'footer.html', 'nav.html'];
+const TOP_LEVEL_LITERALS = ['_headers', '_redirects', 'robots.txt', 'humans.txt', 'manifest.json', 'linkedin-widget.js', 'components.js', 'components-loader.js', 'footer.html', 'nav.html', 'ach-instructions.html'];
 const NEVER = [/^node_modules/, /^\.netlify/, /^\.wrangler/, /^\.claude/, /^\.git/, /^functions/, /^netlify\b/, /^scripts/, /^cloudflare/, /^dist/, /^supabase/, /^\.env/, /\.local$/, /\.log$/, /^package(-lock)?\.json$/, /^wrangler\.toml$/, /\.py$/, /\.sh$/, /\.md$/, /\.example$/, /\.gitignore/, /\.courses-bak/, /\.cfignore/, /\.wranglerignore/];
 function shouldSkip(n) { return NEVER.some(p => p.test(n)); }
 function topLevelKeep(n) { if (shouldSkip(n)) return false; if (TOP_LEVEL_LITERALS.includes(n)) return true; if (TOP_LEVEL_FILE_PATTERNS.some(p => p.test(n))) return true; if (TOP_LEVEL_DIRS.includes(n)) return true; return false; }

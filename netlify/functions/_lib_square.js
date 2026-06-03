@@ -113,11 +113,11 @@ async function createDraftInvoice({ orderId, customerId, recipientEmail, title, 
       title: title || 'Invoice',
       description: description || '',
       accepted_payment_methods: {
-        card: true,
+        card: false,
         square_gift_card: false,
         bank_account: true,
         buy_now_pay_later: false,
-        cash_app_pay: true,
+        cash_app_pay: false,
       },
     },
   });

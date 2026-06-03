@@ -2485,3 +2485,29 @@ h2 span                     { color: var(--accent) !important; }
   .footer-brand { grid-column: span 2; }
   .footer-tag { font-size: 0.72rem; padding: 0.25rem 0.65rem; }
 }
+
+/* ═══════════════════════════════════════════════════════
+   MOBILE FORM FIT (global)
+   Capture/contact forms sat in a narrow, heavily padded
+   card on phones. Let them use the full screen width.
+   Loaded site-wide via /style.css; !important overrides
+   the per-page inline <style> padding on equal selectors.
+   ═══════════════════════════════════════════════════════ */
+@media (max-width: 600px) {
+  /* leak-audit funnel (leak-audit.html) */
+  .la-grid { padding-left: 12px !important; padding-right: 12px !important; }
+  .la-card { padding: 18px 14px !important; }
+
+  /* programmatic SEO + service contact cards (.mc-*) -
+     section + inner + card each added a gutter; flatten
+     the nested padding so the card uses the full width */
+  .mc-contact { padding-left: 12px !important; padding-right: 12px !important; }
+  .mc-contact-inner { padding-left: 0 !important; padding-right: 0 !important; }
+  .mc-form-card { padding: 18px 16px !important; }
+
+  /* shared netlify form controls stay edge-to-edge */
+  .nf-form .nf-input,
+  .nf-form .nf-textarea,
+  .nf-form .nf-select,
+  .nf-submit { width: 100% !important; box-sizing: border-box; }
+}
