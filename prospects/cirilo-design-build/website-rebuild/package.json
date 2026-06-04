@@ -1,0 +1,12 @@
+{
+  "name": "cirilodb-rebuild",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Cirilo Design + Build website rebuild on Cloudflare Pages",
+  "scripts": {
+    "gen": "node scripts/gen-service-areas.js && node scripts/gen-neighborhoods.js && node scripts/gen-zips.js && node scripts/gen-nc-cities.js && node scripts/gen-near-me.js && node scripts/gen-partners.js",
+    "build": "node scripts/build.js",
+    "deploy": "node scripts/build.js && npx wrangler pages deploy ./dist --project-name=cirilodb-rebuild --branch=main --commit-dirty=true",
+    "preview": "npx wrangler pages dev ./dist --port=8788"
+  }
+}

@@ -1,0 +1,437 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Cirilo Design + Build | Model B: Profit-Share Aligned Proposal</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex, nofollow, noarchive, nosnippet, noimageindex">
+<meta http-equiv="Cache-Control" content="no-store, no-cache, must-revalidate, private">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=Inter:wght@300;400;500;600;700&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --gold-dark: #AB7E37;
+    --gold-mid: #D6BB89;
+    --gold-light: #E3D3B2;
+    --gold-pale: #F4ECDC;
+    --cream-bg: #FAF7F2;
+    --white: #FFFFFF;
+    --ink: #1A1A1A;
+    --body: #2E2E34;
+    --muted: #8F8F8F;
+    --border: #E2E2E2;
+    --shadow: 0 8px 32px rgba(26, 26, 26, 0.06);
+    --shadow-lg: 0 16px 48px rgba(26, 26, 26, 0.09);
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: 'Inter', sans-serif; background: var(--cream-bg); color: var(--body); line-height: 1.65; font-size: 16px; }
+  .page { max-width: 920px; margin: 40px auto; background: var(--white); box-shadow: var(--shadow); padding: 80px 72px; }
+  h1, h2, h3, h4 { font-family: 'Cormorant Garamond', serif; color: var(--ink); font-weight: 500; line-height: 1.15; }
+  h1 { font-size: 3.4rem; margin-bottom: 0.4em; font-weight: 600; }
+  h2 { font-size: 2.4rem; margin-top: 2.4em; margin-bottom: 0.6em; padding-bottom: 0.4em; border-bottom: 1px solid var(--gold-light); }
+  h3 { font-size: 1.6rem; margin-top: 1.8em; margin-bottom: 0.5em; color: var(--gold-dark); }
+  h4 { font-size: 1.15rem; margin-top: 1.4em; margin-bottom: 0.4em; font-family: 'Inter', sans-serif; font-weight: 600; color: var(--ink); text-transform: uppercase; letter-spacing: 0.08em; }
+  p { margin-bottom: 1em; }
+  strong { color: var(--ink); font-weight: 600; }
+  a { color: var(--gold-dark); text-decoration: none; border-bottom: 1px solid var(--gold-light); }
+  ul, ol { margin: 0.5em 0 1.2em 1.4em; } li { margin-bottom: 0.4em; }
+  table { width: 100%; border-collapse: collapse; margin: 24px 0; font-size: 0.92rem; }
+  th { background: var(--ink); color: var(--white); padding: 14px 16px; text-align: left; font-family: 'DM Mono', monospace; font-size: 0.72rem; letter-spacing: 0.12em; text-transform: uppercase; font-weight: 500; }
+  td { padding: 14px 16px; border-bottom: 1px solid var(--border); vertical-align: top; }
+  tr:nth-child(even) td { background: var(--cream-bg); }
+  .brand-mark { text-align: center; margin-bottom: 56px; padding-bottom: 32px; border-bottom: 1px solid var(--border); }
+  .brand-mark .wordmark { font-family: 'Cormorant Garamond', serif; font-size: 3.2rem; font-weight: 600; letter-spacing: 0.18em; background: linear-gradient(135deg, #E5C2B0 0%, #D6BB89 35%, #F4D78C 65%, #AB7E37 100%); -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent; margin-bottom: 8px; }
+  .brand-mark .sub { font-family: 'DM Mono', monospace; font-size: 0.75rem; letter-spacing: 0.4em; color: var(--gold-dark); text-transform: uppercase; }
+  .doc-meta { font-family: 'DM Mono', monospace; font-size: 0.72rem; letter-spacing: 0.18em; text-transform: uppercase; color: var(--muted); text-align: center; margin-bottom: 56px; }
+  .hero-title { text-align: center; margin-bottom: 64px; }
+  .hero-title .eyebrow { font-family: 'DM Mono', monospace; font-size: 0.78rem; letter-spacing: 0.32em; color: var(--gold-dark); text-transform: uppercase; margin-bottom: 18px; }
+  .hero-title h1 { font-size: 3.6rem; margin-bottom: 0.3em; }
+  .hero-title .lede { font-family: 'Cormorant Garamond', serif; font-size: 1.5rem; font-style: italic; color: var(--body); max-width: 680px; margin: 0 auto; }
+
+  .tier-grid { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 24px; margin: 40px 0; }
+  .tier-card { background: var(--white); border: 1px solid var(--border); border-radius: 4px; padding: 32px 28px; position: relative; transition: transform 0.2s, box-shadow 0.2s; }
+  .tier-card.recommended { border: 2px solid var(--gold-dark); background: var(--gold-pale); box-shadow: var(--shadow-lg); transform: translateY(-8px); }
+  .tier-card.recommended::before { content: "RECOMMENDED"; position: absolute; top: -12px; left: 50%; transform: translateX(-50%); background: var(--gold-dark); color: var(--white); font-family: 'DM Mono', monospace; font-size: 0.65rem; letter-spacing: 0.2em; padding: 5px 14px; border-radius: 2px; }
+  .tier-card .tier-name { font-family: 'Cormorant Garamond', serif; font-size: 1.8rem; color: var(--ink); margin-bottom: 4px; }
+  .tier-card .tier-sub { font-family: 'DM Mono', monospace; font-size: 0.7rem; letter-spacing: 0.18em; text-transform: uppercase; color: var(--gold-dark); margin-bottom: 24px; }
+  .tier-card .tier-price { font-family: 'Cormorant Garamond', serif; font-size: 2.4rem; color: var(--ink); margin-bottom: 4px; font-weight: 600; }
+  .tier-card .tier-price-sub { font-size: 0.82rem; color: var(--muted); margin-bottom: 24px; }
+  .tier-block-label { font-family: 'DM Mono', monospace; font-size: 0.65rem; letter-spacing: 0.15em; text-transform: uppercase; color: var(--gold-dark); font-weight: 600; margin: 16px 0 6px; padding-top: 12px; border-top: 1px solid rgba(171,126,55,0.18); }
+  .tier-block-label:first-of-type { margin-top: 4px; padding-top: 0; border-top: none; }
+  .tier-block-body { font-size: 0.82rem; line-height: 1.6; }
+  .tier-block-body strong { color: var(--ink); }
+  .tier-revshare { background: rgba(171,126,55,0.07); padding: 10px 12px; border-radius: 4px; font-size: 0.78rem; line-height: 1.45; margin-top: 4px; }
+  .tier-revshare .pct { font-family: 'Cormorant Garamond', serif; font-size: 1.6rem; color: var(--gold-dark); font-weight: 600; }
+  .tier-fuel { background: #F2F6EF; border-left: 3px solid #5A8A4A; padding: 12px 14px; border-radius: 0 4px 4px 0; margin-top: 6px; }
+  .tier-fuel .fuel-label { font-family: 'DM Mono', monospace; font-size: 0.62rem; letter-spacing: 0.15em; text-transform: uppercase; color: #2F5530; font-weight: 600; margin-bottom: 4px; }
+  .tier-fuel .fuel-amount { font-family: 'Cormorant Garamond', serif; font-size: 1.4rem; color: #2F5530; font-weight: 600; line-height: 1.1; }
+  .tier-fuel .fuel-sub { font-size: 0.74rem; color: #2F5530; line-height: 1.45; margin-top: 4px; }
+  .tier-total { background: #F5F5F5; border-top: 1px solid var(--border); padding: 12px 14px; margin: 16px -28px -32px -28px; text-align: center; }
+  .tier-total .total-label { font-family: 'DM Mono', monospace; font-size: 0.6rem; letter-spacing: 0.15em; text-transform: uppercase; color: var(--muted); margin-bottom: 2px; }
+  .tier-total .total-amount { font-family: 'Cormorant Garamond', serif; font-size: 1.2rem; color: var(--body); font-weight: 500; line-height: 1.3; }
+  .tier-equation { background: linear-gradient(135deg, rgba(90,138,74,0.07) 0%, rgba(171,126,55,0.08) 100%); border-radius: 6px; padding: 14px 14px; margin: 10px 0 22px; text-align: center; font-family: 'Cormorant Garamond', serif; font-size: 1.05rem; line-height: 1.65; color: var(--ink); font-weight: 500; }
+  .tier-equation .eq-fuel { color: #2F5530; font-weight: 600; white-space: nowrap; }
+  .tier-equation .eq-mark { color: var(--gold-dark); font-weight: 600; white-space: nowrap; }
+  .tier-equation .eq-total { color: var(--ink); font-weight: 700; font-size: 1.15em; white-space: nowrap; }
+  .tier-equation .eq-op { color: var(--muted); margin: 0 4px; }
+
+  .callout { background: var(--gold-pale); border-left: 3px solid var(--gold-dark); padding: 24px 32px; margin: 28px 0; border-radius: 0 4px 4px 0; }
+  .callout .label { font-family: 'DM Mono', monospace; font-size: 0.7rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--gold-dark); margin-bottom: 8px; }
+  .footer { margin-top: 80px; padding-top: 32px; border-top: 1px solid var(--border); text-align: center; font-family: 'DM Mono', monospace; font-size: 0.7rem; letter-spacing: 0.15em; text-transform: uppercase; color: var(--muted); }
+  @media print { body { background: white; } .page { box-shadow: none; margin: 0; padding: 40px; max-width: 100%; } .tier-card.recommended { transform: none; } h2 { page-break-after: avoid; } .tier-grid { page-break-inside: avoid; } }
+  @media (max-width: 768px) { .page { padding: 40px 24px; } h1 { font-size: 2.4rem; } .hero-title h1 { font-size: 2.6rem; } .tier-grid { grid-template-columns: 1fr; } }
+</style>
+</head>
+<body>
+
+<nav class="cdb-nav" style="position:sticky;top:0;z-index:100;background:#fff;border-bottom:1px solid #E2E2E2;padding:0.75rem 1.5rem;display:flex;justify-content:space-between;align-items:center;font-family:'Inter',sans-serif;flex-wrap:wrap;gap:0.5rem;">
+  <a href="/documents/clients/cirilo-design-build/" style="font-family:'Cormorant Garamond',serif;font-size:1.05rem;letter-spacing:0.08em;color:#2E2E34;text-decoration:none;">
+    <strong style="color:#AB7E37;letter-spacing:0.16em;">MARKCMO</strong> &nbsp;for&nbsp; <span style="letter-spacing:0.14em;">CIRILO DESIGN + BUILD</span>
+  </a>
+  <div style="display:flex;gap:1.5rem;align-items:center;font-family:'DM Mono',monospace;font-size:0.68rem;letter-spacing:0.12em;text-transform:uppercase;">
+    <a href="/documents/clients/cirilo-design-build/proposal" style="color:#8F8F8F;text-decoration:none;">Model A</a>
+    <a href="/documents/clients/cirilo-design-build/audit" style="color:#8F8F8F;text-decoration:none;">Audit</a>
+    <a href="/documents/clients/cirilo-design-build/roadmap" style="color:#8F8F8F;text-decoration:none;">Roadmap</a>
+    <a href="/forms/cirilo-design-build-growth" style="color:#fff;background:#AB7E37;padding:0.45rem 1rem;border-radius:3px;text-decoration:none;letter-spacing:0.14em;">Sign Proposal &rarr;</a>
+  </div>
+</nav>
+<style>@media print{.cdb-nav{display:none !important;}}</style>
+
+<div class="page">
+
+  <div class="brand-mark">
+    <div class="wordmark">CIRILO</div>
+    <div class="sub">DESIGN &nbsp;+&nbsp; BUILD</div>
+  </div>
+
+  <div class="doc-meta">Marketing &amp; Growth Engagement &middot; Model B &middot; Prepared 2026-05-28</div>
+
+  <div class="hero-title">
+    <div class="eyebrow">MODEL B &middot; PROFIT-SHARE ALIGNED</div>
+    <h1>Lower upfront,<br>shared upside.</h1>
+    <p class="lede">Same systems build, capabilities, and $25,000 engagement fee as Model A. Lower monthly retainer, and Mark earns a percentage of pool profit on every signed contract. Best when Cirilo wants Mark's compensation tied to actual signed work.</p>
+  </div>
+
+  <div class="callout">
+    <div class="label">HOW MODEL B DIFFERS FROM MODEL A</div>
+    <p>Identical systems build, capabilities, marketing fuel, and Year 1 targets as <a href="/documents/clients/cirilo-design-build/proposal">Model A (Fixed-Fee Premium)</a>. The only differences: <strong>monthly retainer is reduced by 15 to 20 percent</strong> and <strong>Mark earns a percentage of profit on each signed pool</strong>. The <strong>$25,000 engagement fee is the same as Model A</strong>. Profit assumption: <strong>30 percent margin per build</strong>, which on a $225,000 average pool is <strong>$67,500 in profit per signed contract</strong>.</p>
+  </div>
+
+  <div class="callout">
+    <div class="label">Included in every tier: the full operating dashboard</div>
+    <p>The systems build is not just the public website. It is a complete, custom-built operating platform that Cirilo owns outright:</p>
+    <ul>
+      <li><strong>Admin console</strong> for the business: CRM and lead pipeline, proposal builder with e-signature, invoicing and milestone draw billing, document vault, analytics and KPIs, and QuickBooks accounting sync.</li>
+      <li><strong>Customer Owner Suite</strong> for each homeowner: live project status, progress photos, documents, draw payments by check or ACH, and a personal referral link.</li>
+      <li><strong>Vendor portal</strong> for trades: post jobs out for bid, receive and compare vendor bids, award the job, schedule by build stage, and track vendor payments and lien waivers.</li>
+    </ul>
+    <p style="margin-bottom:0;">Customer, admin, and vendor all run from one connected dashboard. This is a full software build, not an off-the-shelf template.</p>
+  </div>
+
+  <div class="callout" style="background:#F2F6EF;border-left-color:#5A8A4A;">
+    <div class="label" style="color:#2F5530;">HOW TO READ THE PRICING</div>
+    <p>Each tier shows <strong>three separate numbers</strong>. The headline is <strong>"Paid to Mark"</strong> &ndash; the engagement fee, systems build, and monthly retainer that go to MarkCMO / WETYR. The gold <strong>"Rev Share"</strong> block is what Mark earns per signed pool (variable upside). The green <strong>"Marketing Fuel"</strong> block is ad spend and media production (Google, Meta, Houzz, video production) billed directly to Cirilo's card on each platform. <strong>Marketing fuel never passes through Mark.</strong></p>
+  </div>
+
+  <h2>The Three Tiers (Model B)</h2>
+
+  <p>Rev share % is calibrated so the lower the fixed fees, the higher the percentage. Tier 1 has the most rev share (Mark takes more upside per win because fixed is smallest); Tier 3 has the least (fixed is already substantial).</p>
+
+  <div class="tier-grid">
+
+    <div class="tier-card">
+      <div class="tier-name">Foundation</div>
+      <div class="tier-sub">Tier 1 / Launch</div>
+
+      <div class="tier-equation">
+        <span class="eq-fuel">Marketing Fuel $90K</span>
+        <span class="eq-op">+</span>
+        <span class="eq-mark">MarkCMO $196K</span>
+        <span class="eq-op">=</span>
+        <span class="eq-total">~$286K Total Year 1</span>
+        <div style="font-family:'DM Mono',monospace;font-size:0.6rem;letter-spacing:0.1em;text-transform:uppercase;color:var(--muted);margin-top:6px;">At mid-target, includes rev share</div>
+      </div>
+
+      <div class="tier-block-label">Year 1 Target</div>
+      <div class="tier-block-body">
+        <strong>10 to 18</strong> signed contracts<br>
+        <strong>$2.25M to $4.05M</strong> pool revenue<br>
+        At mid-target (12 deals): Mark earns ~$196K total
+      </div>
+
+      <div class="tier-block-label">Mark's Engagement (paid to MarkCMO / WETYR)</div>
+      <div class="tier-block-body">
+        <strong>$25,000</strong> engagement fee (one-time)<br>
+        <strong>$30,000</strong> systems build (50 / 25 / 25)<br>
+        <strong>$7,000</strong> monthly retainer ($84K / year)
+      </div>
+
+      <div class="tier-block-label">Rev Share (paid to Mark per signed pool)</div>
+      <div class="tier-revshare">
+        <span class="pct">7%</span> of profit per signed pool <br>
+        <span style="color:var(--muted);font-size:0.74rem;">= ~$4,725 per pool at 30% margin. At 12 deals = ~$57K added to Mark Year 1.</span>
+      </div>
+
+      <div class="tier-block-label">Marketing Fuel (paid to Google, Meta, Houzz, etc.)</div>
+      <div class="tier-fuel">
+        <div class="fuel-label">Ad spend &amp; media production</div>
+        <div class="fuel-amount">$7,500 / month</div>
+        <div class="fuel-sub">$90,000 / year. Billed direct to Cirilo's card. <strong>Never billed to Mark.</strong></div>
+      </div>
+    </div>
+
+    <div class="tier-card recommended">
+      <div class="tier-name">Growth</div>
+      <div class="tier-sub">Tier 2 / Recommended</div>
+
+      <div class="tier-equation">
+        <span class="eq-fuel">Marketing Fuel $225K</span>
+        <span class="eq-op">+</span>
+        <span class="eq-mark">MarkCMO $360K</span>
+        <span class="eq-op">=</span>
+        <span class="eq-total">~$585K Total Year 1</span>
+        <div style="font-family:'DM Mono',monospace;font-size:0.6rem;letter-spacing:0.1em;text-transform:uppercase;color:var(--muted);margin-top:6px;">At mid-target, includes rev share</div>
+      </div>
+
+      <div class="tier-block-label">Year 1 Target</div>
+      <div class="tier-block-body">
+        <strong>22 to 32</strong> signed contracts<br>
+        <strong>$4.95M to $7.20M</strong> pool revenue<br>
+        At mid-target (27 deals): Mark earns ~$360K total
+      </div>
+
+      <div class="tier-block-label">Mark's Engagement (paid to MarkCMO / WETYR)</div>
+      <div class="tier-block-body">
+        <strong>$25,000</strong> engagement fee (one-time)<br>
+        <strong>$70,000</strong> systems build (incl. $10K SEO + $5K competitive intel)<br>
+        <strong>$14,500</strong> monthly retainer ($174K / year, incl. $2K SEO + $1K competitive)
+      </div>
+
+      <div class="tier-block-label">Rev Share (paid to Mark per signed pool)</div>
+      <div class="tier-revshare">
+        <span class="pct">5%</span> of profit per signed pool <br>
+        <span style="color:var(--muted);font-size:0.74rem;">= ~$3,375 per pool at 30% margin. At 27 deals = ~$91K added to Mark Year 1.</span>
+      </div>
+
+      <div class="tier-block-label">Marketing Fuel (paid to Google, Meta, Houzz, etc.)</div>
+      <div class="tier-fuel">
+        <div class="fuel-label">Ad spend, media production, SEO &amp; competitive intel tools</div>
+        <div class="fuel-amount">$18,750 / month</div>
+        <div class="fuel-sub">$225,000 / year. Includes $500/mo SEO tools + $250/mo competitive intel. Billed direct to Cirilo's card. <strong>Never billed to Mark.</strong></div>
+      </div>
+    </div>
+
+    <div class="tier-card">
+      <div class="tier-name">Dominate</div>
+      <div class="tier-sub">Tier 3 / Category Leader</div>
+
+      <div class="tier-equation">
+        <span class="eq-fuel">Marketing Fuel $450K</span>
+        <span class="eq-op">+</span>
+        <span class="eq-mark">MarkCMO $529K</span>
+        <span class="eq-op">=</span>
+        <span class="eq-total">~$979K Total Year 1</span>
+        <div style="font-family:'DM Mono',monospace;font-size:0.6rem;letter-spacing:0.1em;text-transform:uppercase;color:var(--muted);margin-top:6px;">At mid-target, includes rev share</div>
+      </div>
+
+      <div class="tier-block-label">Year 1 Target</div>
+      <div class="tier-block-body">
+        <strong>32 to 50+</strong> signed contracts<br>
+        <strong>$7.20M to $11.25M</strong> pool revenue<br>
+        At mid-target (40 deals): Mark earns ~$529K total
+      </div>
+
+      <div class="tier-block-label">Mark's Engagement (paid to MarkCMO / WETYR)</div>
+      <div class="tier-block-body">
+        <strong>$25,000</strong> engagement fee (one-time)<br>
+        <strong>$120,000</strong> systems build (incl. $20K SEO + $10K competitive intel)<br>
+        <strong>$23,000</strong> monthly retainer ($276K / year, incl. $3K SEO + $2K competitive)
+      </div>
+
+      <div class="tier-block-label">Rev Share (paid to Mark per signed pool)</div>
+      <div class="tier-revshare">
+        <span class="pct">4%</span> of profit per signed pool <br>
+        <span style="color:var(--muted);font-size:0.74rem;">= ~$2,700 per pool at 30% margin. At 40 deals = ~$108K added to Mark Year 1.</span>
+      </div>
+
+      <div class="tier-block-label">Marketing Fuel (paid to Google, Meta, Houzz, etc.)</div>
+      <div class="tier-fuel">
+        <div class="fuel-label">Ad spend, media production, SEO &amp; competitive intel tools</div>
+        <div class="fuel-amount">$37,500 / month</div>
+        <div class="fuel-sub">$450,000 / year. Includes $1K SEO + $500 competitive intel. Billed direct to Cirilo's card. <strong>Never billed to Mark.</strong></div>
+      </div>
+    </div>
+
+  </div>
+
+  <h2>The Math (Tier 2, Recommended)</h2>
+
+  <p>Working through Tier 2 (Growth) end-to-end. Assumes $225,000 average pool revenue and 30 percent profit margin per build = $67,500 profit per signed pool.</p>
+
+  <table>
+    <tr>
+      <th>Scenario</th>
+      <th>Signed Deals</th>
+      <th>Rev Share Earned (5% of profit)</th>
+      <th>Model B Total Cost</th>
+      <th>vs Model A ($482,500)</th>
+    </tr>
+    <tr>
+      <td>Below target (under-performance)</td>
+      <td>15 deals</td>
+      <td>15 &times; $3,375 = $50,625</td>
+      <td>$421,500 + $50,625 = <strong>$472,125</strong></td>
+      <td><strong>Cirilo saves $10K</strong></td>
+    </tr>
+    <tr>
+      <td>At target (mid-case)</td>
+      <td>27 deals</td>
+      <td>27 &times; $3,375 = $91,125</td>
+      <td>$421,500 + $91,125 = <strong>$512,625</strong></td>
+      <td>Cirilo pays $30K MORE</td>
+    </tr>
+    <tr>
+      <td>Above target (out-performance)</td>
+      <td>40 deals</td>
+      <td>40 &times; $3,375 = $135,000</td>
+      <td>$421,500 + $135,000 = <strong>$556,500</strong></td>
+      <td>Cirilo pays $74K MORE</td>
+    </tr>
+  </table>
+
+  <div class="callout">
+    <div class="label">WHAT MARK EARNS UNDER MODEL B (TIER 2)</div>
+    <p><strong>Model A Tier 2 net to Mark (no rev share):</strong> $25K engagement + $72.5K build + $174K retainer = <strong>$271,500</strong> over Year 1.</p>
+    <p><strong>Model B Tier 2 net to Mark (at mid-target):</strong> $25K engagement + $55K build + $138K retainer + $91,125 rev share = <strong>$309,125</strong> over Year 1.</p>
+    <p>If results hit target: <strong>Mark earns ~$30K more than Model A; Cirilo pays ~$30K more.</strong> If results lag target, Mark earns less and Cirilo pays less. Above-target results: Mark earns substantially more.</p>
+  </div>
+
+  <h2>Investment Summary (Model B &middot; Profit-Share Aligned)</h2>
+
+  <table>
+    <tr>
+      <th>Line Item</th>
+      <th>Tier 1</th>
+      <th>Tier 2</th>
+      <th>Tier 3</th>
+    </tr>
+    <tr>
+      <td>Engagement fee (one-time, non-refundable)</td>
+      <td>$25,000</td>
+      <td><strong>$25,000</strong></td>
+      <td>$25,000</td>
+    </tr>
+    <tr>
+      <td>Systems build (one-time, 50 / 25 / 25)</td>
+      <td>$30,000</td>
+      <td><strong>$55,000</strong></td>
+      <td>$90,000</td>
+    </tr>
+    <tr>
+      <td>Monthly retainer (12 months)</td>
+      <td>$7,000 ($84,000 / yr)</td>
+      <td><strong>$11,500 ($138,000 / yr)</strong></td>
+      <td>$18,000 ($216,000 / yr)</td>
+    </tr>
+    <tr>
+      <td>Monthly media (12 months, billed direct)</td>
+      <td>$7,500 ($90,000 / yr)</td>
+      <td><strong>$18,000 ($216,000 / yr)</strong></td>
+      <td>$36,000 ($432,000 / yr)</td>
+    </tr>
+    <tr>
+      <td>Rev share per signed pool</td>
+      <td>7% of profit (~$4,725)</td>
+      <td><strong>5% of profit (~$3,375)</strong></td>
+      <td>4% of profit (~$2,700)</td>
+    </tr>
+    <tr>
+      <td><strong>Year 1 fixed</strong> (before rev share)</td>
+      <td><strong>~$229,000</strong></td>
+      <td><strong>~$434,000</strong></td>
+      <td><strong>~$763,000</strong></td>
+    </tr>
+    <tr>
+      <td><strong>Year 1 estimated at target</strong></td>
+      <td>$229K + ~$57K = <strong>~$286K</strong> (12 deals)</td>
+      <td><strong>$434K + ~$91K = ~$525K</strong> (27 deals)</td>
+      <td>$763K + ~$108K = <strong>~$871K</strong> (40 deals)</td>
+    </tr>
+    <tr>
+      <td>Target signed contracts</td>
+      <td>10 to 18</td>
+      <td>22 to 32</td>
+      <td>32 to 50+</td>
+    </tr>
+    <tr>
+      <td>Year 1 pool revenue (at $225K AOV)</td>
+      <td>$2.25M to $4.05M</td>
+      <td>$4.95M to $7.20M</td>
+      <td>$7.20M to $11.25M</td>
+    </tr>
+  </table>
+
+  <h2>How Rev Share Is Tracked, Earned, and Paid</h2>
+
+  <ul>
+    <li><strong>Earned event:</strong> Rev share earns the moment a pool contract is signed by the homeowner and a deposit clears via Square. No earn on leads, consults, proposals not signed, or cancelled contracts.</li>
+    <li><strong>Profit basis:</strong> Calculated on the signed pool contract value at the 30 percent profit margin assumption stated in this proposal. Cirilo and Mark can true up to actual margin annually at the Year-end QBR if material variance.</li>
+    <li><strong>Payment:</strong> Invoiced monthly, net 30 from invoice. Itemized list of signed contracts with Square invoice IDs accompanies each invoice. Cirilo retains 30-day audit window.</li>
+    <li><strong>Verification:</strong> Mark's reporting dashboard pulls signed-contract events from the Square invoice ledger. Both parties see the same source of truth.</li>
+    <li><strong>Attribution-agnostic:</strong> Rev share earns on every signed pool during the engagement period, not only marketing-attributed deals. This keeps the math simple and aligns incentives (referral pools also count).</li>
+    <li><strong>Tail clause:</strong> If Model B engagement terminates, rev share continues for 90 days on signed contracts (because pipeline built during the engagement may close after termination).</li>
+  </ul>
+
+  <h2>What's Identical to Model A</h2>
+
+  <ul>
+    <li><strong>Systems build scope and capabilities</strong> (see <a href="/documents/clients/cirilo-design-build/proposal">Model A proposal</a> for the per-tier breakdown).</li>
+    <li><strong>Monthly media budget composition</strong> (Google Search + LSA + Meta + Pinterest + Houzz + videography production; see Model A for the per-tier breakdown).</li>
+    <li><strong>12-month engagement duration</strong>, 90-day mutual kill clause, account ownership terms, reporting cadence.</li>
+    <li><strong>Target signed contracts and Year 1 pool revenue projections.</strong></li>
+  </ul>
+
+  <h2>When to Choose Model B</h2>
+
+  <ul>
+    <li>When Cirilo wants Mark's compensation directly tied to <strong>signed contracts</strong>, not just retainer.</li>
+    <li>When Cirilo wants <strong>downside protection</strong>: if results lag, Cirilo pays less than Model A.</li>
+    <li>When Cirilo is <strong>cash-constrained at launch</strong> and wants lower upfront / lower monthly.</li>
+    <li>When Cirilo expects to <strong>hit or beat target</strong> and is comfortable with Mark earning more if so.</li>
+  </ul>
+
+  <h2>When NOT to Choose Model B</h2>
+
+  <ul>
+    <li>When Cirilo prefers fully predictable cost (no variable rev share). <strong>Choose Model A.</strong></li>
+    <li>When Cirilo wants to keep 100 percent of upside above plan. <strong>Choose Model A.</strong></li>
+  </ul>
+
+  <h2>Next Steps</h2>
+
+  <ol>
+    <li>Compare Models A, B, and C in the <a href="/documents/clients/cirilo-design-build/">cover sheet</a>.</li>
+    <li>Pick a model and a tier.</li>
+    <li><strong>Letter of intent</strong> (proposal signature) + <strong>50 percent systems build deposit</strong> + <strong>first month retainer</strong> = upfront at signing.</li>
+    <li>Day 0 kickoff Monday after sign. Rev share earns from first signed pool onward.</li>
+  </ol>
+
+  <div style="text-align:center;margin:48px 0 32px;">
+    <a href="/forms/cirilo-design-build-growth" style="display:inline-block;background:#AB7E37;color:#FFFFFF;font-family:'Inter',sans-serif;font-size:1.05rem;font-weight:600;padding:1.1rem 2.6rem;border-radius:6px;text-decoration:none;letter-spacing:0.03em;box-shadow:0 4px 14px rgba(171,126,55,0.3);border-bottom:none;">
+      Sign &amp; Accept Proposal &nbsp;&rarr;
+    </a>
+    <div style="font-family:'DM Mono',monospace;font-size:0.7rem;letter-spacing:0.15em;text-transform:uppercase;color:#8F8F8F;margin-top:12px;">
+      Opens the sign form with tier selector and electronic signature
+    </div>
+  </div>
+
+  <div class="footer">
+    Prepared by Mark Gabrielli &nbsp;|&nbsp; WETYR Corporation &nbsp;|&nbsp; markcmo.com &nbsp;|&nbsp; Private &amp; Confidential
+  </div>
+
+</div>
+
+<script>(function(){try{var k='mc_jsid';var s=sessionStorage.getItem(k)||('s_'+Math.random().toString(36).slice(2)+Date.now().toString(36));sessionStorage.setItem(k,s);fetch('/api/track',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({t:'view',client:'cirilo-design-build',page:'proposal',doc_id:'CDB-PRO-001',session_id:s,url:location.pathname,title:document.title}),keepalive:true}).catch(function(){});}catch(e){}})();</script>
+</body>
+</html>

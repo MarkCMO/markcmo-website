@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Cirilo Design + Build , Onboarding Punchlist</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600;700&family=Inter:wght@400;500;600;700&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root{--navy:#0E1B2A;--gold:#AB7E37;--gold2:#C8A04E;--paper:#F7F4EE;--card:#FFFFFF;--ink:#1B2330;--muted:#6B7280;--line:#E4DFD4;--green:#2F7A4E;}
+  *{box-sizing:border-box;margin:0;padding:0;}
+  body{font-family:'Inter',sans-serif;color:var(--ink);background:var(--paper);line-height:1.55;font-size:13.5px;}
+  .page{width:8.5in;min-height:11in;padding:0.7in 0.8in;margin:0 auto;background:var(--paper);position:relative;page-break-after:always;}
+  .page:last-child{page-break-after:auto;}
+  h1,h2,h3{font-family:'Cormorant Garamond',serif;color:var(--navy);font-weight:700;line-height:1.12;}
+  .eyebrow{font-family:'DM Mono',monospace;font-size:10px;letter-spacing:3px;text-transform:uppercase;color:var(--gold);}
+  p{margin-bottom:9px;}
+  .muted{color:var(--muted);}
+  /* cover band */
+  .band{background:var(--navy);color:#fff;border-radius:14px;padding:30px 34px;margin-bottom:24px;position:relative;overflow:hidden;}
+  .band::after{content:'';position:absolute;inset:0;background:radial-gradient(circle at 100% 0%,rgba(171,126,55,0.25),transparent 55%);}
+  .band > *{position:relative;z-index:1;}
+  .band .wm{font-family:'Cormorant Garamond',serif;font-size:30px;letter-spacing:1px;}
+  .band .wm span{color:var(--gold2);}
+  .band .sub{font-family:'DM Mono',monospace;font-size:10px;letter-spacing:4px;text-transform:uppercase;color:#A9B6C6;margin-top:4px;}
+  .band h1{color:#fff;font-size:34px;margin-top:18px;}
+  .band p{color:#C8D2DD;font-size:13px;margin:8px 0 0;max-width:5.2in;}
+  /* engagement summary box */
+  .summary{display:grid;grid-template-columns:1fr 1fr;gap:0;border:1px solid var(--line);border-radius:12px;overflow:hidden;background:var(--card);margin-bottom:24px;}
+  .summary div{padding:12px 16px;border-bottom:1px solid var(--line);}
+  .summary div:nth-child(odd){border-right:1px solid var(--line);}
+  .summary .k{font-family:'DM Mono',monospace;font-size:9px;letter-spacing:1.5px;text-transform:uppercase;color:var(--gold);margin-bottom:3px;}
+  .summary .v{font-size:14px;font-weight:600;color:var(--navy);}
+  .fill{color:var(--gold);font-weight:600;}
+  h2.sec{font-size:23px;margin:24px 0 4px;display:flex;align-items:center;gap:10px;}
+  h2.sec .num{display:inline-flex;align-items:center;justify-content:center;width:26px;height:26px;border-radius:50%;background:var(--navy);color:var(--gold2);font-family:'DM Mono',monospace;font-size:12px;flex:0 0 26px;}
+  .sec-note{color:var(--muted);font-size:12px;margin:2px 0 12px 36px;}
+  ul.check{list-style:none;margin:0 0 6px 36px;}
+  ul.check li{position:relative;padding:7px 0 7px 28px;border-bottom:1px solid var(--line);font-size:12.8px;}
+  ul.check li::before{content:'';position:absolute;left:0;top:8px;width:15px;height:15px;border:1.5px solid var(--gold);border-radius:4px;}
+  ul.check li b{color:var(--navy);}
+  ul.check li .hint{color:var(--muted);font-size:11.5px;}
+  .lead-in{margin-left:36px;font-size:12.8px;margin-bottom:8px;}
+  .timeline{margin-left:36px;}
+  .timeline .row{display:flex;gap:12px;padding:7px 0;border-bottom:1px solid var(--line);font-size:12.8px;}
+  .timeline .when{font-family:'DM Mono',monospace;font-size:10.5px;color:var(--gold);flex:0 0 84px;padding-top:2px;letter-spacing:0.5px;}
+  .deliver{background:#FBF8F2;border:1px solid var(--line);border-radius:10px;padding:14px 18px;margin-left:36px;font-size:12.6px;}
+  .deliver b{color:var(--navy);}
+  .pathtag{display:inline-block;background:var(--navy);color:var(--gold2);font-family:'DM Mono',monospace;font-size:9px;letter-spacing:1.5px;text-transform:uppercase;padding:2px 8px;border-radius:20px;margin-left:8px;vertical-align:middle;}
+  .contact{display:flex;gap:24px;margin-left:36px;margin-top:6px;}
+  .contact .c{font-size:12.5px;}
+  .contact .c .role{font-family:'DM Mono',monospace;font-size:9px;letter-spacing:1.5px;text-transform:uppercase;color:var(--gold);}
+  .foot{position:absolute;bottom:0.45in;left:0.8in;right:0.8in;display:flex;justify-content:space-between;font-family:'DM Mono',monospace;font-size:9px;letter-spacing:1px;color:#A6AEBA;border-top:1px solid var(--line);padding-top:8px;text-transform:uppercase;}
+</style>
+</head>
+<body>
+
+<!-- PAGE 1 -->
+<div class="page">
+  <div class="band">
+    <div class="wm">CIRILO<span>.</span></div>
+    <div class="sub">Design + Build</div>
+    <div class="eyebrow" style="color:var(--gold2);margin-top:16px;">Welcome Aboard</div>
+    <h1>Onboarding Punchlist</h1>
+    <p>Your deposit is in and we are officially underway. This is everything we need from you to hit the ground running, plus exactly what happens next. Most of it takes a few minutes to gather. The faster we have it, the faster the leads start.</p>
+  </div>
+
+  <div class="summary">
+    <div><div class="k">Engagement</div><div class="v">Starter Sprint</div></div>
+    <div><div class="k">Term</div><div class="v">60 to 90 days</div></div>
+    <div><div class="k">Structure</div><div class="v">Fixed fee, no retainer</div></div>
+    <div><div class="k">Plan</div><div class="v">Path <span class="fill">A / B</span></div></div>
+    <div><div class="k">Deposit Received</div><div class="v"><span class="fill">$__________</span></div></div>
+    <div style="border-right:none;"><div class="k">Balance (Day 45)</div><div class="v"><span class="fill">$__________</span></div></div>
+  </div>
+
+  <h2 class="sec"><span class="num">1</span> What happens next</h2>
+  <p class="sec-note">Your first two weeks, at a glance.</p>
+  <div class="timeline">
+    <div class="row"><div class="when">Day 1 to 2</div><div>You send the items in this punchlist. We confirm receipt and lock your kickoff call.</div></div>
+    <div class="row"><div class="when">Day 3</div><div>Kickoff call: we align on target neighborhoods, ideal clients, the services to push, and the offer.</div></div>
+    <div class="row"><div class="when">Week 1</div><div>We stand up tracking, the landing page, and the lead flow. You approve copy and creative.</div></div>
+    <div class="row"><div class="when">Week 2</div><div>The lead engine goes live. Qualified inquiries start routing to you with a follow-up system behind them.</div></div>
+    <div class="row"><div class="when">Weekly</div><div>You get a short numbers update: leads in, consultations booked, what is working.</div></div>
+  </div>
+
+  <h2 class="sec"><span class="num">2</span> Brand and assets</h2>
+  <p class="sec-note">The raw material we turn into pages, ads, and proof. High quality in, high quality out.</p>
+  <ul class="check">
+    <li><b>Logo files</b> <span class="hint">vector (SVG, EPS, or AI) and a high-res PNG if you have them</span></li>
+    <li><b>Photos of completed projects</b> <span class="hint">15 to 30 of your best pools, outdoor spaces, and builds, highest resolution available</span></li>
+    <li><b>Any video</b> <span class="hint">walkthroughs, drone footage, before-and-afters, even phone clips</span></li>
+    <li><b>Brand colors and fonts</b> <span class="hint">if you have a brand guide or specific preferences; if not, we will guide it</span></li>
+    <li><b>Existing materials</b> <span class="hint">brochures, current proposals, anything you hand clients today</span></li>
+  </ul>
+</div>
+
+<!-- PAGE 2 -->
+<div class="page">
+  <h2 class="sec"><span class="num">3</span> Access and accounts</h2>
+  <p class="sec-note">So we can publish, advertise, and measure. If an account does not exist yet, just note that and we will create it in your name. You always own everything.</p>
+  <ul class="check">
+    <li><b>Domain access</b> <span class="hint">registrar login or DNS access for cirilodb.com (and the new domain when chosen)</span></li>
+    <li><b>Google Business Profile</b> <span class="hint">add us as a manager, or share the login</span></li>
+    <li><b>Google Analytics and Search Console</b> <span class="hint">access, or permission to create them</span></li>
+    <li><b>Meta Business (Facebook and Instagram)</b> <span class="hint">access to the business page and ad account</span></li>
+    <li><b>Existing ad accounts</b> <span class="hint">Google Ads or Meta Ads, if you have run anything before</span></li>
+    <li><b>Current leads and contacts</b> <span class="hint">any list or spreadsheet of past inquiries and clients to export</span></li>
+  </ul>
+
+  <h2 class="sec"><span class="num">4</span> Business details</h2>
+  <p class="sec-note">The inputs that make the targeting and the messaging accurate. A few quick answers on the kickoff call covers most of this.</p>
+  <ul class="check">
+    <li><b>Service area</b> <span class="hint">the towns and neighborhoods you most want to win work in</span></li>
+    <li><b>Top services to push</b> <span class="hint">the 3 you want more of, with rough price ranges for qualifying leads</span></li>
+    <li><b>Ideal client</b> <span class="hint">who your best projects come from, so we target more of them</span></li>
+    <li><b>Reviews and testimonials</b> <span class="hint">your 3 to 5 best, with permission to use names or initials</span></li>
+    <li><b>License, insurance, warranty</b> <span class="hint">NC license number, insured and bonded status, warranty terms, for trust signals</span></li>
+    <li><b>What makes Cirilo different</b> <span class="hint">in your words, why clients choose you over the other builder</span></li>
+  </ul>
+
+  <h2 class="sec"><span class="num">5</span> Platform setup <span class="pathtag">If Path B</span></h2>
+  <p class="sec-note">Only if your plan includes turning on the management system. Skip this section if you are on Path A.</p>
+  <ul class="check">
+    <li><b>Vendor and trade list</b> <span class="hint">your subs and suppliers to load into the vendor portal</span></li>
+    <li><b>Banking for invoicing</b> <span class="hint">we will collect this securely and directly, never by email or in this document</span></li>
+    <li><b>Current and upcoming projects</b> <span class="hint">so we can seed the dashboard with your real pipeline on day one</span></li>
+  </ul>
+
+  <div class="foot"><span>Cirilo Design + Build</span><span>Onboarding Punchlist</span></div>
+</div>
+
+<!-- PAGE 3 -->
+<div class="page">
+  <h2 class="sec"><span class="num">6</span> What we deliver</h2>
+  <p class="sec-note">So you know exactly what you are getting over the sprint.</p>
+  <div class="deliver">
+    <p style="margin-bottom:8px;"><b>Path A, Pipeline Sprint.</b> A focused lead engine to put qualified pool projects in front of you, a high-converting landing page and proposal flow, done-for-you follow-up so no lead goes cold, and a weekly numbers update so you see exactly what is working.</p>
+    <p style="margin:0;"><b>Path B, Pipeline + Platform.</b> Everything in Path A, plus we switch on the management system built for you: the homeowner portal, the admin dashboard, and the vendor bidding portal, so every new project runs cleaner from day one.</p>
+  </div>
+
+  <h2 class="sec"><span class="num">7</span> Your logins</h2>
+  <p class="sec-note">We will send these privately once your accounts are provisioned. Placeholder here so you know what is coming.</p>
+  <ul class="check">
+    <li><b>Admin dashboard</b> <span class="hint">your command center for leads, projects, and financials</span></li>
+    <li><b>Homeowner portal</b> <span class="hint">the branded suite your clients log into</span></li>
+    <li><b>Vendor portal</b> <span class="hint">where your trades bid and update jobs</span></li>
+  </ul>
+
+  <h2 class="sec"><span class="num">8</span> Stay in touch</h2>
+  <p class="sec-note">One team, one point of contact, no runaround.</p>
+  <div class="contact">
+    <div class="c"><div class="role">Your Lead</div>Mark Gabrielli<br>WETYR Corporation / MarkCMO</div>
+    <div class="c"><div class="role">Email</div>info@wetyr.com</div>
+    <div class="c"><div class="role">Best Way to Send Files</div>Reply to your welcome email with a shared drive link or attachments</div>
+  </div>
+
+  <div style="background:var(--navy);color:#fff;border-radius:12px;padding:20px 24px;margin:28px 0 0;position:relative;overflow:hidden;">
+    <div style="position:absolute;inset:0;background:radial-gradient(circle at 100% 50%,rgba(171,126,55,0.22),transparent 55%);"></div>
+    <div style="position:relative;z-index:1;">
+      <div class="eyebrow" style="color:var(--gold2);">The Fast Path</div>
+      <h3 style="color:#fff;font-size:21px;margin:4px 0;">Send the assets and access, and we book your kickoff.</h3>
+      <p style="color:#C8D2DD;font-size:12.5px;margin:0;">You do not need every item to start. Send what you have now, and we will chase the rest together on the call. The sooner the photos and access land, the sooner the leads do.</p>
+    </div>
+  </div>
+
+  <div class="foot"><span>Cirilo Design + Build</span><span>Prepared by WETYR &middot; MarkCMO</span></div>
+</div>
+
+</body>
+</html>

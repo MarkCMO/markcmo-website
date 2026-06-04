@@ -1,0 +1,424 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Book Your Private Consultation | Cirilo Design + Build, Charlotte NC</title>
+<meta name="description" content="Reserve a private design consultation with Cirilo Design + Build. Choose your project, budget, and a time that suits you. Luxury custom pools and outdoor living across Charlotte and North Carolina.">
+<link rel="canonical" href="https://cirilodb.com/book">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Book Your Private Consultation | Cirilo Design + Build">
+<meta property="og:description" content="Reserve a private, no-obligation design consultation. Pick a time that works for you.">
+<meta property="og:url" content="https://cirilodb.com/book">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;0,700;1,500&family=Inter:wght@400;500;600;700&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/assets/css/brand.css">
+</head>
+<body>
+
+<!--#include file="_header.html" -->
+
+<main>
+
+  <section class="book-hero">
+    <div class="container">
+      <div class="eyebrow mb-sm" style="color:var(--gold-light);">By Invitation to Your Property</div>
+      <h1 style="font-size:var(--fs-hero);max-width:18ch;margin-bottom:var(--space-sm);">Reserve your private consultation</h1>
+      <p style="font-size:1.15rem;color:rgba(255,255,255,0.82);max-width:620px;">
+        Four short steps. Tell us about your vision, choose a time that suits you, and we will confirm within one business hour. No obligation, ever.
+      </p>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container book-wrap">
+
+      <div id="bk-referred" style="display:none;background:var(--gold-pale);border:1px solid rgba(171,126,55,0.25);border-radius:var(--radius);padding:0.9rem 1.1rem;margin-bottom:var(--space-lg);font-size:0.95rem;color:var(--gold-dark);">
+        <strong>You were referred by a Cirilo homeowner.</strong> Welcome. We will take good care of you, and your friend will be looked after too.
+      </div>
+
+      <!-- progress -->
+      <div class="bk-progress" id="bk-progress">
+        <div class="bk-step-dot on" data-s="1"><span>1</span><label>Project</label></div>
+        <div class="bk-line"></div>
+        <div class="bk-step-dot" data-s="2"><span>2</span><label>Scope</label></div>
+        <div class="bk-line"></div>
+        <div class="bk-step-dot" data-s="3"><span>3</span><label>Time</label></div>
+        <div class="bk-line"></div>
+        <div class="bk-step-dot" data-s="4"><span>4</span><label>Details</label></div>
+      </div>
+
+      <form id="book-form" class="bk-card">
+        <input type="text" name="company_website" id="bk-hp" tabindex="-1" autocomplete="off" aria-hidden="true" style="position:absolute !important;left:-9999px !important;width:1px;height:1px;opacity:0;" hidden>
+
+        <!-- STEP 1: project type -->
+        <div class="bk-step active" data-step="1">
+          <h2 class="bk-q">What are we creating together?</h2>
+          <p class="bk-sub">Choose the closest fit. We will refine every detail on site.</p>
+          <div class="bk-options" id="opt-project">
+            <button type="button" class="bk-opt" data-val="Custom Concrete Pool">
+              <span class="bk-opt-t">Custom Concrete Pool</span>
+              <span class="bk-opt-d">Gunite, vanishing-edge, plunge, spa-integrated</span>
+            </button>
+            <button type="button" class="bk-opt" data-val="Pool + Outdoor Living">
+              <span class="bk-opt-t">Pool + Outdoor Living</span>
+              <span class="bk-opt-d">Pool with kitchen, fire, pergola, hardscape</span>
+            </button>
+            <button type="button" class="bk-opt" data-val="Outdoor Living Only">
+              <span class="bk-opt-t">Outdoor Living</span>
+              <span class="bk-opt-d">Kitchens, pavilions, fire features, decking</span>
+            </button>
+            <button type="button" class="bk-opt" data-val="Home Renovation">
+              <span class="bk-opt-t">Home Renovation</span>
+              <span class="bk-opt-d">Interior and exterior remodeling</span>
+            </button>
+            <button type="button" class="bk-opt" data-val="Home Addition">
+              <span class="bk-opt-t">Home Addition</span>
+              <span class="bk-opt-d">Square footage, suites, indoor-outdoor</span>
+            </button>
+            <button type="button" class="bk-opt" data-val="Multiple / Not Sure">
+              <span class="bk-opt-t">Not Sure Yet</span>
+              <span class="bk-opt-d">Help me explore what is possible</span>
+            </button>
+          </div>
+          <div class="bk-nav">
+            <span></span>
+            <button type="button" class="btn btn-primary bk-next" disabled>Continue</button>
+          </div>
+        </div>
+
+        <!-- STEP 2: budget + timeline -->
+        <div class="bk-step" data-step="2">
+          <h2 class="bk-q">What range are you planning around?</h2>
+          <p class="bk-sub">A guide only. It helps us bring the right ideas to your consultation.</p>
+          <div class="bk-field-label">Target investment</div>
+          <div class="bk-options bk-pills" id="opt-budget">
+            <button type="button" class="bk-opt sm" data-val="Under $100K">Under $100K</button>
+            <button type="button" class="bk-opt sm" data-val="$100K - $150K">$100K to $150K</button>
+            <button type="button" class="bk-opt sm" data-val="$150K - $250K">$150K to $250K</button>
+            <button type="button" class="bk-opt sm" data-val="$250K - $400K">$250K to $400K</button>
+            <button type="button" class="bk-opt sm" data-val="$400K+">$400K and above</button>
+            <button type="button" class="bk-opt sm" data-val="Not sure yet">Not sure yet</button>
+          </div>
+          <div class="bk-field-label" style="margin-top:var(--space-lg);">Ideal timeline</div>
+          <div class="bk-options bk-pills" id="opt-timeline">
+            <button type="button" class="bk-opt sm" data-val="As soon as possible">As soon as possible</button>
+            <button type="button" class="bk-opt sm" data-val="Next 3 months">Next 3 months</button>
+            <button type="button" class="bk-opt sm" data-val="3 to 6 months">3 to 6 months</button>
+            <button type="button" class="bk-opt sm" data-val="6 to 12 months">6 to 12 months</button>
+            <button type="button" class="bk-opt sm" data-val="Just exploring">Just exploring</button>
+          </div>
+          <div class="bk-nav">
+            <button type="button" class="btn btn-ghost bk-back">Back</button>
+            <button type="button" class="btn btn-primary bk-next" disabled>Continue</button>
+          </div>
+        </div>
+
+        <!-- STEP 3: date + time -->
+        <div class="bk-step" data-step="3">
+          <h2 class="bk-q">When shall we visit?</h2>
+          <p class="bk-sub">Pick a preferred day and window. We will confirm the exact time with you.</p>
+          <div class="bk-field-label">Choose a day</div>
+          <div class="bk-days" id="bk-days"></div>
+          <div class="bk-field-label" style="margin-top:var(--space-lg);">Preferred window</div>
+          <div class="bk-options bk-pills" id="opt-time">
+            <button type="button" class="bk-opt sm" data-val="Morning (9am to 12pm)">Morning</button>
+            <button type="button" class="bk-opt sm" data-val="Midday (12pm to 2pm)">Midday</button>
+            <button type="button" class="bk-opt sm" data-val="Afternoon (2pm to 5pm)">Afternoon</button>
+            <button type="button" class="bk-opt sm" data-val="Evening (after 5pm)">Evening</button>
+          </div>
+          <div class="bk-nav">
+            <button type="button" class="btn btn-ghost bk-back">Back</button>
+            <button type="button" class="btn btn-primary bk-next" disabled>Continue</button>
+          </div>
+        </div>
+
+        <!-- STEP 4: details -->
+        <div class="bk-step" data-step="4">
+          <h2 class="bk-q">Where shall we send the confirmation?</h2>
+          <p class="bk-sub">We respond within one business hour during the week.</p>
+          <div class="bk-grid2">
+            <div class="form-row">
+              <label>Full name <span class="req">*</span></label>
+              <input type="text" name="name" required autocomplete="name">
+            </div>
+            <div class="form-row">
+              <label>Phone <span class="req">*</span></label>
+              <input type="tel" name="phone" required autocomplete="tel">
+            </div>
+          </div>
+          <div class="form-row">
+            <label>Email <span class="req">*</span></label>
+            <input type="email" name="email" required autocomplete="email">
+          </div>
+          <div class="form-row">
+            <label>Property address or neighborhood <span class="req">*</span></label>
+            <input type="text" name="address" placeholder="Street or neighborhood, city" required>
+            <div class="hint">Helps us assess lot, access, and setbacks before we arrive.</div>
+          </div>
+          <div class="form-row">
+            <label>Anything you would like us to know?</label>
+            <textarea name="message" rows="3" placeholder="Inspiration, features you love, how you will use the space..."></textarea>
+          </div>
+
+          <div class="bk-summary" id="bk-summary"></div>
+
+          <div class="bk-nav">
+            <button type="button" class="btn btn-ghost bk-back">Back</button>
+            <span style="display:flex;flex-direction:column;align-items:flex-end;gap:8px;"><span id="cf-widget"></span><button type="submit" class="btn btn-primary" id="bk-submit">Confirm My Consultation</button></span>
+          </div>
+          <div id="bk-status" class="form-status"></div>
+          <p class="form-fineprint">By submitting, you agree to be contacted by Cirilo Design + Build about your project. We never share your information.</p>
+        </div>
+
+      </form>
+
+      <!-- SUCCESS -->
+      <div class="bk-done" id="bk-done">
+        <div class="bk-done-crest">&#10003;</div>
+        <div class="eyebrow mb-sm" style="color:var(--gold-dark);">Consultation Requested</div>
+        <h2 class="bk-done-h">Thank you. Your request is in.</h2>
+        <p class="bk-done-p" id="bk-done-detail">We will confirm your time within one business hour.</p>
+        <div class="bk-timeline">
+          <div class="bk-tl"><span class="bk-tl-n">1</span><div><strong>Within one business hour</strong><br>A brief call to confirm fit, scope, and your time.</div></div>
+          <div class="bk-tl"><span class="bk-tl-n">2</span><div><strong>On-site consultation</strong><br>60 minutes walking your property and shaping the vision.</div></div>
+          <div class="bk-tl"><span class="bk-tl-n">3</span><div><strong>Design concepts and investment</strong><br>Presented within about a week of your visit.</div></div>
+        </div>
+        <div class="bk-done-actions">
+          <a class="btn btn-primary" href="/portfolio">See Our Work</a>
+          <a class="btn btn-ghost" href="/process">How We Build</a>
+        </div>
+      </div>
+
+      <aside class="bk-trust">
+        <div class="bk-trust-i">NC Licensed GC</div>
+        <div class="bk-trust-i">Bonded &amp; Insured</div>
+        <div class="bk-trust-i">10-Year Structural Warranty</div>
+        <div class="bk-trust-i">Financing Available</div>
+        <div class="bk-trust-i">Charlotte + North Carolina</div>
+      </aside>
+
+    </div>
+  </section>
+
+</main>
+
+<!--#include file="_footer.html" -->
+
+<script>
+(function(){
+  // session + page-view tracking (self-tracked; footer skips this page)
+  window.__cdb_pageTracked=true;
+  window.__cdb_formStart=Date.now();
+  var CDB_TURNSTILE_SITEKEY='';
+  window.cdbCfCb=function(t){ window.__cf_token=t; };
+  if(CDB_TURNSTILE_SITEKEY){ var _s=document.createElement('script'); _s.src='https://challenges.cloudflare.com/turnstile/v0/api.js'; _s.async=true; _s.defer=true; document.head.appendChild(_s); var _w=document.getElementById('cf-widget'); if(_w){ _w.className='cf-turnstile'; _w.setAttribute('data-sitekey',CDB_TURNSTILE_SITEKEY); _w.setAttribute('data-callback','cdbCfCb'); } }
+  try{var k='cdb_jsid';var s=sessionStorage.getItem(k)||('s_'+Math.random().toString(36).slice(2)+Date.now().toString(36));sessionStorage.setItem(k,s);window.__cdb_sid=s;
+    var utm=null;try{utm=JSON.parse(sessionStorage.getItem('cdb_utm')||'null');}catch(e){}
+    fetch('/api/track',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({t:'view',page:'book',session_id:s,url:location.pathname,title:document.title,referrer:document.referrer||null,ref:sessionStorage.getItem('cdb_ref')||null,utm:utm}),keepalive:true}).catch(function(){});
+    if(sessionStorage.getItem('cdb_ref')){ var rb=document.getElementById('bk-referred'); if(rb) rb.style.display='block'; }}catch(e){}
+
+  var state={ project_type:'', budget:'', timeline:'', day:'', time:'' };
+  var step=1, MAX=4;
+
+  // ----- build day chips (next 12 weekdays + Saturdays) -----
+  var days=document.getElementById('bk-days');
+  var DOW=['Sun','Mon','Tue','Wed','Thu','Fri','Sat'];
+  var MON=['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+  var d=new Date(); d.setDate(d.getDate()+1); var added=0;
+  while(added<10){
+    var dow=d.getDay();
+    if(dow!==0){ // skip Sundays
+      var label=DOW[dow]+' '+MON[d.getMonth()]+' '+d.getDate();
+      var val=d.getFullYear()+'-'+String(d.getMonth()+1).padStart(2,'0')+'-'+String(d.getDate()).padStart(2,'0');
+      var b=document.createElement('button');
+      b.type='button'; b.className='bk-day'; b.dataset.val=val; b.dataset.label=label;
+      b.innerHTML='<span class="bk-day-dow">'+DOW[dow]+'</span><span class="bk-day-num">'+d.getDate()+'</span><span class="bk-day-mon">'+MON[d.getMonth()]+'</span>';
+      days.appendChild(b); added++;
+    }
+    d.setDate(d.getDate()+1);
+  }
+
+  // ----- option selection (single-select groups) -----
+  function wireGroup(containerId, key, selClass){
+    var c=document.getElementById(containerId); if(!c) return;
+    c.addEventListener('click',function(e){
+      var btn=e.target.closest('.'+selClass); if(!btn) return;
+      c.querySelectorAll('.'+selClass).forEach(function(x){x.classList.remove('sel');});
+      btn.classList.add('sel');
+      state[key]=btn.dataset.val;
+      refreshNav();
+    });
+  }
+  wireGroup('opt-project','project_type','bk-opt');
+  wireGroup('opt-budget','budget','bk-opt');
+  wireGroup('opt-timeline','timeline','bk-opt');
+  wireGroup('opt-time','time','bk-opt');
+  document.getElementById('bk-days').addEventListener('click',function(e){
+    var btn=e.target.closest('.bk-day'); if(!btn) return;
+    this.querySelectorAll('.bk-day').forEach(function(x){x.classList.remove('sel');});
+    btn.classList.add('sel'); state.day=btn.dataset.val; state.dayLabel=btn.dataset.label;
+    refreshNav();
+  });
+
+  // ----- step validation -----
+  function stepValid(n){
+    if(n===1) return !!state.project_type;
+    if(n===2) return !!state.budget && !!state.timeline;
+    if(n===3) return !!state.day && !!state.time;
+    return true;
+  }
+  function refreshNav(){
+    var cur=document.querySelector('.bk-step[data-step="'+step+'"]');
+    var next=cur && cur.querySelector('.bk-next');
+    if(next) next.disabled=!stepValid(step);
+  }
+
+  // ----- step navigation -----
+  function go(n){
+    step=Math.max(1,Math.min(MAX,n));
+    document.querySelectorAll('.bk-step').forEach(function(s){ s.classList.toggle('active', +s.dataset.step===step); });
+    document.querySelectorAll('.bk-step-dot').forEach(function(dt){
+      var sn=+dt.dataset.s; dt.classList.toggle('on', sn<=step); dt.classList.toggle('done', sn<step);
+    });
+    if(step===4) renderSummary();
+    refreshNav();
+    window.scrollTo({top:document.querySelector('.book-wrap').offsetTop-30, behavior:'smooth'});
+  }
+  document.querySelectorAll('.bk-next').forEach(function(b){ b.addEventListener('click',function(){ if(stepValid(step)) go(step+1); }); });
+  document.querySelectorAll('.bk-back').forEach(function(b){ b.addEventListener('click',function(){ go(step-1); }); });
+
+  function renderSummary(){
+    document.getElementById('bk-summary').innerHTML=
+      '<div class="bk-sum-row"><span>Project</span><strong>'+(state.project_type||'-')+'</strong></div>'+
+      '<div class="bk-sum-row"><span>Investment</span><strong>'+(state.budget||'-')+'</strong></div>'+
+      '<div class="bk-sum-row"><span>Timeline</span><strong>'+(state.timeline||'-')+'</strong></div>'+
+      '<div class="bk-sum-row"><span>Preferred</span><strong>'+(state.dayLabel||'-')+', '+(state.time||'-')+'</strong></div>';
+  }
+
+  // ----- submit -----
+  document.getElementById('book-form').addEventListener('submit', async function(e){
+    e.preventDefault();
+    var f=this, btn=document.getElementById('bk-submit'), status=document.getElementById('bk-status');
+    var fd=Object.fromEntries(new FormData(f).entries());
+    if(!fd.name||!fd.email||!fd.phone||!fd.address){ status.className='form-status error'; status.textContent='Please complete the required fields.'; return; }
+    var pretty=(state.dayLabel||state.day)+', '+state.time;
+    var payload={
+      name:fd.name, email:fd.email, phone:fd.phone, address:fd.address,
+      project_type:state.project_type, budget:state.budget, timeline:state.timeline,
+      message:'Requested consultation: '+pretty+(fd.message?(' | '+fd.message):''),
+      preferred_date:state.day, preferred_window:state.time,
+      source:'booking', status:'consult_requested',
+      company_website:(document.getElementById('bk-hp')||{}).value||'',
+      form_started_at:window.__cdb_formStart||null,
+      cf_turnstile_token:window.__cf_token||null,
+      referred_by_code:sessionStorage.getItem('cdb_ref')||null,
+      utm:(function(){try{return JSON.parse(sessionStorage.getItem('cdb_utm')||'null');}catch(e){return null;}})(),
+      session_id:window.__cdb_sid||null, submitted_at:new Date().toISOString()
+    };
+    btn.disabled=true; btn.textContent='Reserving...';
+    status.className='form-status loading'; status.textContent='Reserving your consultation...';
+    try{
+      var res=await fetch('/api/contact',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(payload)});
+      if(!res.ok) throw new Error('bad');
+      try{fetch('/api/track',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({t:'click',page:'book',session_id:window.__cdb_sid,detail:{action:'consult_booked'}})});}catch(_){}
+      document.getElementById('book-form').style.display='none';
+      document.getElementById('bk-progress').style.display='none';
+      document.getElementById('bk-done-detail').textContent='We will confirm '+pretty+' within one business hour. A note is on its way to '+fd.email+'.';
+      var done=document.getElementById('bk-done'); done.style.display='block';
+      window.scrollTo({top:document.querySelector('.book-wrap').offsetTop-30, behavior:'smooth'});
+    }catch(err){
+      var body=encodeURIComponent('Name: '+fd.name+'\nEmail: '+fd.email+'\nPhone: '+fd.phone+'\nAddress: '+fd.address+'\nProject: '+state.project_type+'\nBudget: '+state.budget+'\nTimeline: '+state.timeline+'\nPreferred: '+pretty+'\n\n'+(fd.message||''));
+      status.className='form-status error';
+      status.innerHTML='Connection issue. <a href="mailto:Tiffany@CiriloDB.com?subject=Consultation Request&body='+body+'">Email us directly</a> or call (910) 409-0648.';
+      btn.disabled=false; btn.textContent='Confirm My Consultation';
+    }
+  });
+})();
+</script>
+
+<style>
+  .book-hero{ background:linear-gradient(140deg,var(--navy),#13294d); color:#fff; padding:calc(var(--space-2xl) + 30px) 0 var(--space-2xl); }
+  .book-wrap{ display:grid; grid-template-columns:1fr; gap:var(--space-lg); max-width:840px; }
+
+  /* progress */
+  .bk-progress{ display:flex; align-items:center; justify-content:center; gap:0; margin-bottom:var(--space-lg); }
+  .bk-step-dot{ display:flex; flex-direction:column; align-items:center; gap:6px; }
+  .bk-step-dot span{ width:38px; height:38px; border-radius:50%; display:flex; align-items:center; justify-content:center; background:var(--white); border:1.5px solid var(--border); color:var(--muted); font-family:var(--font-mono); font-size:0.85rem; transition:all var(--t-fast); }
+  .bk-step-dot label{ font-family:var(--font-mono); font-size:0.58rem; letter-spacing:0.12em; text-transform:uppercase; color:var(--muted); }
+  .bk-step-dot.on span{ background:var(--gold-dark); border-color:var(--gold-dark); color:#fff; }
+  .bk-step-dot.on label{ color:var(--gold-dark); }
+  .bk-step-dot.done span{ background:var(--navy); border-color:var(--navy); color:var(--gold-light); }
+  .bk-line{ flex:1; max-width:70px; height:1.5px; background:var(--border); margin:0 4px 20px; }
+
+  .bk-card{ background:var(--white); border:1px solid var(--border); border-radius:var(--radius-lg); padding:var(--space-xl); box-shadow:0 30px 70px -40px rgba(20,18,12,0.3); }
+  .bk-step{ display:none; }
+  .bk-step.active{ display:block; animation:bkfade .5s ease; }
+  @keyframes bkfade{ from{opacity:0; transform:translateY(10px);} to{opacity:1; transform:none;} }
+  .bk-q{ font-family:var(--font-display); font-size:clamp(1.6rem,3vw,2.2rem); color:var(--ink); margin-bottom:6px; }
+  .bk-sub{ color:var(--muted); margin-bottom:var(--space-lg); }
+  .bk-field-label{ font-family:var(--font-mono); font-size:0.66rem; letter-spacing:0.14em; text-transform:uppercase; color:var(--gold-dark); margin-bottom:var(--space-sm); }
+
+  .bk-options{ display:grid; grid-template-columns:1fr 1fr; gap:12px; }
+  @media(max-width:560px){ .bk-options{ grid-template-columns:1fr; } }
+  .bk-pills{ display:flex; flex-wrap:wrap; gap:10px; }
+  .bk-opt{ text-align:left; background:var(--white); border:1.5px solid var(--border); border-radius:var(--radius); padding:16px 18px; cursor:pointer; transition:all var(--t-fast); display:flex; flex-direction:column; gap:4px; }
+  .bk-opt:hover{ border-color:var(--gold); transform:translateY(-2px); box-shadow:0 10px 24px -16px rgba(20,18,12,0.4); }
+  .bk-opt.sel{ border-color:var(--gold-dark); background:var(--gold-pale); box-shadow:0 0 0 3px rgba(171,126,55,0.12); }
+  .bk-opt-t{ font-weight:600; color:var(--ink); }
+  .bk-opt-d{ font-size:0.82rem; color:var(--muted); }
+  .bk-opt.sm{ flex-direction:row; align-items:center; padding:11px 18px; font-weight:500; color:var(--body); font-size:0.92rem; }
+  .bk-opt.sm.sel{ color:var(--gold-dark); font-weight:600; }
+
+  .bk-days{ display:grid; grid-template-columns:repeat(5,1fr); gap:10px; }
+  @media(max-width:560px){ .bk-days{ grid-template-columns:repeat(3,1fr); } }
+  .bk-day{ display:flex; flex-direction:column; align-items:center; gap:2px; background:var(--white); border:1.5px solid var(--border); border-radius:var(--radius); padding:12px 6px; cursor:pointer; transition:all var(--t-fast); }
+  .bk-day:hover{ border-color:var(--gold); transform:translateY(-2px); }
+  .bk-day.sel{ border-color:var(--gold-dark); background:var(--gold-pale); box-shadow:0 0 0 3px rgba(171,126,55,0.12); }
+  .bk-day-dow{ font-family:var(--font-mono); font-size:0.58rem; letter-spacing:0.1em; text-transform:uppercase; color:var(--muted); }
+  .bk-day-num{ font-family:var(--font-display); font-size:1.5rem; font-weight:700; color:var(--ink); line-height:1; }
+  .bk-day-mon{ font-family:var(--font-mono); font-size:0.58rem; text-transform:uppercase; color:var(--muted); }
+
+  .bk-grid2{ display:grid; grid-template-columns:1fr 1fr; gap:var(--space-md); }
+  @media(max-width:560px){ .bk-grid2{ grid-template-columns:1fr; } }
+  .bk-card .form-row{ margin-bottom:var(--space-md); }
+  .bk-card label{ display:block; font-family:var(--font-mono); font-size:0.7rem; font-weight:600; letter-spacing:0.1em; text-transform:uppercase; color:var(--muted); margin-bottom:0.4rem; }
+  .bk-card .req{ color:var(--gold-dark); }
+  .bk-card input, .bk-card textarea{ width:100%; background:var(--white); border:1.5px solid var(--border); border-radius:var(--radius); color:var(--body); font-family:var(--font-body); font-size:0.98rem; padding:0.8rem 0.9rem; outline:none; transition:border-color var(--t-fast),box-shadow var(--t-fast); }
+  .bk-card input:focus, .bk-card textarea:focus{ border-color:var(--gold-dark); box-shadow:0 0 0 3px rgba(171,126,55,0.12); }
+  .bk-card .hint{ font-size:0.8rem; color:var(--muted); margin-top:0.35rem; }
+
+  .bk-summary{ background:var(--off-white,#F6F3ED); border:1px solid var(--border); border-radius:var(--radius); padding:var(--space-md) var(--space-lg); margin:var(--space-md) 0; }
+  .bk-sum-row{ display:flex; justify-content:space-between; padding:7px 0; border-bottom:1px solid var(--border); font-size:0.92rem; }
+  .bk-sum-row:last-child{ border-bottom:none; }
+  .bk-sum-row span{ font-family:var(--font-mono); font-size:0.66rem; letter-spacing:0.1em; text-transform:uppercase; color:var(--muted); }
+  .bk-sum-row strong{ color:var(--ink); text-align:right; }
+
+  .bk-nav{ display:flex; justify-content:space-between; align-items:center; margin-top:var(--space-lg); }
+
+  .form-status{ margin-top:var(--space-md); padding:0.9rem 1.1rem; border-radius:var(--radius); font-size:0.92rem; display:none; }
+  .form-status.loading{ display:block; background:var(--gold-pale); color:var(--gold-dark); }
+  .form-status.success{ display:block; background:var(--green-pale); color:#2F5530; }
+  .form-status.error{ display:block; background:var(--red-pale,#FBEAEA); color:var(--red,#B33A3A); }
+  .form-fineprint{ font-size:0.78rem; color:var(--muted); margin-top:var(--space-sm); }
+
+  /* success */
+  .bk-done{ display:none; background:var(--white); border:1px solid var(--border); border-radius:var(--radius-lg); padding:var(--space-2xl) var(--space-xl); text-align:center; box-shadow:0 30px 70px -40px rgba(20,18,12,0.3); }
+  .bk-done-crest{ width:64px; height:64px; margin:0 auto var(--space-md); border-radius:50%; background:var(--gold-dark); color:#fff; display:flex; align-items:center; justify-content:center; font-size:1.8rem; }
+  .bk-done-h{ font-family:var(--font-display); font-size:clamp(1.8rem,3.4vw,2.6rem); color:var(--ink); margin-bottom:var(--space-sm); }
+  .bk-done-p{ color:var(--body); max-width:520px; margin:0 auto var(--space-lg); }
+  .bk-timeline{ max-width:480px; margin:0 auto var(--space-lg); text-align:left; }
+  .bk-tl{ display:flex; gap:14px; padding:12px 0; border-bottom:1px solid var(--border); }
+  .bk-tl:last-child{ border-bottom:none; }
+  .bk-tl-n{ width:28px; height:28px; flex-shrink:0; border-radius:50%; background:var(--gold-pale); color:var(--gold-dark); display:flex; align-items:center; justify-content:center; font-family:var(--font-mono); font-size:0.8rem; }
+  .bk-tl div{ font-size:0.92rem; color:var(--body); }
+  .bk-done-actions{ display:flex; gap:12px; justify-content:center; flex-wrap:wrap; }
+
+  .bk-trust{ display:flex; flex-wrap:wrap; gap:10px; justify-content:center; }
+  .bk-trust-i{ font-family:var(--font-mono); font-size:0.64rem; letter-spacing:0.1em; text-transform:uppercase; color:var(--gold-dark); background:var(--gold-pale); border-radius:20px; padding:7px 14px; }
+</style>
+
+</body>
+</html>

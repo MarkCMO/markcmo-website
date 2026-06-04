@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Cirilo Design + Build | Onboarding & Closing Punch List</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=Inter:wght@300;400;500;600;700&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --gold-dark:#AB7E37; --gold-mid:#D6BB89; --gold-light:#E3D3B2; --gold-pale:#F4ECDC;
+    --cream-bg:#FAF7F2; --white:#FFFFFF; --ink:#1A1A1A; --body:#2E2E34; --muted:#8F8F8F;
+    --border:#E2E2E2; --shadow:0 8px 32px rgba(26,26,26,0.06);
+  }
+  * { box-sizing:border-box; margin:0; padding:0; }
+  body { font-family:'Inter',sans-serif; background:var(--cream-bg); color:var(--body); line-height:1.6; font-size:16px; }
+  .page { max-width:920px; margin:40px auto; background:var(--white); box-shadow:var(--shadow); padding:80px 72px; }
+  h1,h2,h3,h4 { font-family:'Cormorant Garamond',serif; color:var(--ink); font-weight:500; line-height:1.15; }
+  h1 { font-size:3.4rem; margin-bottom:0.3em; font-weight:600; }
+  h2 { font-size:1.9rem; margin-top:2em; margin-bottom:0.5em; padding-bottom:0.35em; border-bottom:1px solid var(--gold-light); }
+  h3 { font-size:1.25rem; margin-top:1.4em; margin-bottom:0.4em; color:var(--gold-dark); }
+  p { margin-bottom:1em; }
+  strong { color:var(--ink); font-weight:600; }
+  .brand-mark { text-align:center; margin-bottom:40px; padding-bottom:28px; border-bottom:1px solid var(--border); }
+  .brand-mark .wordmark { font-family:'Cormorant Garamond',serif; font-size:3rem; font-weight:600; letter-spacing:0.18em;
+    background:linear-gradient(135deg,#E5C2B0 0%,#D6BB89 35%,#F4D78C 65%,#AB7E37 100%); -webkit-background-clip:text; background-clip:text; -webkit-text-fill-color:transparent; margin-bottom:8px; }
+  .brand-mark .sub { font-family:'DM Mono',monospace; font-size:0.72rem; letter-spacing:0.4em; color:var(--gold-dark); text-transform:uppercase; }
+  .doc-meta { font-family:'DM Mono',monospace; font-size:0.72rem; letter-spacing:0.18em; text-transform:uppercase; color:var(--muted); text-align:center; margin-bottom:48px; }
+  .hero-title { text-align:center; margin-bottom:40px; }
+  .hero-title .eyebrow { font-family:'DM Mono',monospace; font-size:0.78rem; letter-spacing:0.32em; color:var(--gold-dark); text-transform:uppercase; margin-bottom:18px; }
+  .hero-title .lede { font-family:'Cormorant Garamond',serif; font-size:1.35rem; font-style:italic; color:var(--body); max-width:660px; margin:0.4em auto 0; }
+  .callout { background:var(--gold-pale); border-left:3px solid var(--gold-dark); padding:22px 28px; margin:24px 0; border-radius:0 4px 4px 0; }
+  .callout .label { font-family:'DM Mono',monospace; font-size:0.68rem; letter-spacing:0.2em; text-transform:uppercase; color:var(--gold-dark); margin-bottom:8px; }
+  .callout ul { margin:0 0 0 1.1em; } .callout li { margin-bottom:0.3em; }
+  table { width:100%; border-collapse:collapse; margin:14px 0 8px; font-size:0.9rem; }
+  th { background:var(--ink); color:var(--white); padding:11px 12px; text-align:left; font-family:'DM Mono',monospace; font-size:0.66rem; letter-spacing:0.1em; text-transform:uppercase; font-weight:500; }
+  td { padding:10px 12px; border-bottom:1px solid var(--border); vertical-align:top; }
+  tr:nth-child(even) td { background:var(--cream-bg); }
+  th.c, td.c { width:34px; text-align:center; }
+  .chk { display:inline-block; width:15px; height:15px; border:1.5px solid var(--gold-dark); border-radius:3px; vertical-align:middle; }
+  .item-note { font-size:0.8rem; color:var(--muted); }
+  .sig-grid { display:grid; grid-template-columns:1fr 1fr; gap:36px; margin-top:24px; }
+  .sig .line { height:40px; border-bottom:1px solid var(--border); margin-bottom:8px; }
+  .who { font-family:'DM Mono',monospace; font-size:0.66rem; letter-spacing:0.16em; text-transform:uppercase; color:var(--muted); }
+  .nm { font-family:'Cormorant Garamond',serif; font-size:1.2rem; color:var(--ink); }
+  .note { font-size:0.82rem; color:var(--muted); }
+  .doc-footer { margin-top:52px; padding-top:24px; border-top:1px solid var(--border); text-align:center; font-family:'DM Mono',monospace; font-size:0.68rem; letter-spacing:0.14em; text-transform:uppercase; color:var(--muted); }
+  @media print { body { background:#fff; } .page { box-shadow:none; margin:0; padding:30px 26px; max-width:none; } h2 { margin-top:1.2em; } }
+  @media (max-width:640px){ .page{padding:40px 22px;} .sig-grid{grid-template-columns:1fr;} h1{font-size:2.4rem;} }
+</style>
+</head>
+<body>
+<div class="page">
+
+  <div class="brand-mark">
+    <div class="wordmark">CIRILO</div>
+    <div class="sub">Design + Build</div>
+  </div>
+  <div class="doc-meta">Onboarding &amp; Closing Punch List &middot; Private &amp; Confidential</div>
+
+  <div class="hero-title">
+    <div class="eyebrow">Everything We Gather to Start</div>
+    <h1>The Punch List</h1>
+    <p class="lede">A shared checklist so nothing stalls the launch. Cirilo provides access and assets; WETYR provides the paperwork and the plan.</p>
+  </div>
+
+  <p>Work through this together at closing and finish anything outstanding within five business days. The few <strong>Day-0 must-haves</strong> below are what we need before the build can begin; the rest can follow during the first week. Send credentials through a secure method (a shared password manager invite or an encrypted note), never plain email.</p>
+
+  <div class="callout">
+    <div class="label">Day-0 must-haves (start the build)</div>
+    <ul>
+      <li>Wix admin access (or contributor invite to WETYR)</li>
+      <li>Google Business Profile access (or permission to create and verify)</li>
+      <li>NC General Contractor license number</li>
+      <li>Google Ads + Meta access with a payment method on file (or approval to create them)</li>
+      <li>Accounting contact to receive WETYR invoices (paid by ACH or wire)</li>
+    </ul>
+  </div>
+
+  <h2>Part 1 &middot; What Cirilo Provides</h2>
+
+  <h3>Website &amp; Domain</h3>
+  <table>
+    <thead><tr><th class="c"></th><th>Item</th><th>Notes / where to find it</th></tr></thead>
+    <tbody>
+      <tr><td class="c"><span class="chk"></span></td><td><strong>Wix account access</strong></td><td>Admin login, or add WETYR as a contributor/admin. Needed to install tracking and edit pages.</td></tr>
+      <tr><td class="c"><span class="chk"></span></td><td><strong>Domain registrar login</strong></td><td>Where cirilodb.com is registered (GoDaddy, Google Domains, etc.) for DNS, tracking subdomain, and email records.</td></tr>
+      <tr><td class="c"><span class="chk"></span></td><td><strong>Business email / Workspace admin</strong></td><td>For verification emails and any new mailboxes.</td></tr>
+    </tbody>
+  </table>
+
+  <h3>Licensing, Insurance &amp; Entity</h3>
+  <table>
+    <thead><tr><th class="c"></th><th>Item</th><th>Notes / where to find it</th></tr></thead>
+    <tbody>
+      <tr><td class="c"><span class="chk"></span></td><td><strong>NC General Contractor license number</strong></td><td>Plus a copy of the license. Published on the site builds trust and is required by some ad platforms.</td></tr>
+      <tr><td class="c"><span class="chk"></span></td><td><strong>Any specialty / local licenses</strong></td><td>County or municipal trade permits, pool-specific certifications (Genesis, PHTA, etc.).</td></tr>
+      <tr><td class="c"><span class="chk"></span></td><td><strong>Certificate of Insurance</strong></td><td>General liability and bond. Used for the warranty/trust page and partner program.</td></tr>
+      <tr><td class="c"><span class="chk"></span></td><td><strong>Legal entity name, EIN, business address</strong></td><td>Exact registered name for listings, schema, and invoices.</td></tr>
+      <tr><td class="c"><span class="chk"></span></td><td><strong>Published warranty terms</strong></td><td>Years and coverage (target 10-year structural). For the warranty page.</td></tr>
+    </tbody>
+  </table>
+
+  <h3>Marketing Accounts (grant access or approve creation)</h3>
+  <table>
+    <thead><tr><th class="c"></th><th>Item</th><th>Notes / where to find it</th></tr></thead>
+    <tbody>
+      <tr><td class="c"><span class="chk"></span></td><td><strong>Google Business Profile</strong></td><td>Owner/manager access, or permission to create and verify (postcard/phone).</td></tr>
+      <tr><td class="c"><span class="chk"></span></td><td><strong>Google Ads</strong></td><td>Account + billing card on file (or approve a new account). Manager access to WETYR.</td></tr>
+      <tr><td class="c"><span class="chk"></span></td><td><strong>Google Analytics + Tag Manager</strong></td><td>Or approve creation. Needed for tracking and conversions.</td></tr>
+      <tr><td class="c"><span class="chk"></span></td><td><strong>Meta Business Manager</strong></td><td>Facebook Page, Instagram, ad account, and a payment method on file.</td></tr>
+      <tr><td class="c"><span class="chk"></span></td><td><strong>Houzz Pro, Yelp, Angi</strong></td><td>Existing logins or approval to claim/create listings.</td></tr>
+      <tr><td class="c"><span class="chk"></span></td><td><strong>Pinterest + YouTube channel</strong></td><td>For the portfolio boards and design-reveal episodes.</td></tr>
+      <tr><td class="c"><span class="chk"></span></td><td><strong>Email marketing tool</strong></td><td>Mailchimp, Constant Contact, or similar, if any exists.</td></tr>
+    </tbody>
+  </table>
+
+  <h3>Phone &amp; Call Tracking</h3>
+  <table>
+    <thead><tr><th class="c"></th><th>Item</th><th>Notes / where to find it</th></tr></thead>
+    <tbody>
+      <tr><td class="c"><span class="chk"></span></td><td><strong>Current phone number(s)</strong></td><td>Main business line and any existing tracking lines.</td></tr>
+      <tr><td class="c"><span class="chk"></span></td><td><strong>Authorization to set up CallRail + a 704/980 tracking number</strong></td><td>So calls route to Cirilo while we measure ad-driven calls (current 910 number is Fayetteville/Wilmington).</td></tr>
+    </tbody>
+  </table>
+
+  <h3>Payments &amp; Banking</h3>
+  <table>
+    <thead><tr><th class="c"></th><th>Item</th><th>Notes / where to find it</th></tr></thead>
+    <tbody>
+      <tr><td class="c"><span class="chk"></span></td><td><strong>Merchant account / payment processor</strong></td><td>Processor name and merchant ID (for Cirilo to collect customer draws). Needed if we wire online deposits later.</td></tr>
+      <tr><td class="c"><span class="chk"></span></td><td><strong>Accounting / AP contact</strong></td><td>Who receives and pays WETYR invoices. WETYR invoices are paid by ACH or wire using the remittance details on each invoice (no debit authorization needed).</td></tr>
+      <tr><td class="c"><span class="chk"></span></td><td><strong>Financing partner</strong></td><td>Lyon Financial / HFS account or intro, for the financing page application link.</td></tr>
+    </tbody>
+  </table>
+
+  <h3>Brand &amp; Content Assets</h3>
+  <table>
+    <thead><tr><th class="c"></th><th>Item</th><th>Notes / where to find it</th></tr></thead>
+    <tbody>
+      <tr><td class="c"><span class="chk"></span></td><td><strong>Logo files + brand colors/fonts</strong></td><td>Vector logo (SVG/AI/EPS) and any brand guide.</td></tr>
+      <tr><td class="c"><span class="chk"></span></td><td><strong>Past project list</strong></td><td>Addresses or neighborhoods, pool type, budget tier, finishes, equipment brands, and homeowner permission to feature.</td></tr>
+      <tr><td class="c"><span class="chk"></span></td><td><strong>Existing photos &amp; video</strong></td><td>Raw and edited, for the portfolio reshoot and reels.</td></tr>
+      <tr><td class="c"><span class="chk"></span></td><td><strong>Founder bios, headshots, the numbers</strong></td><td>Year founded, total projects completed, certifications, the Tiffany and Ramon story.</td></tr>
+      <tr><td class="c"><span class="chk"></span></td><td><strong>Pricing sheets + finishes/equipment catalog</strong></td><td>Internal reference for accurate page copy and the lead tool.</td></tr>
+      <tr><td class="c"><span class="chk"></span></td><td><strong>Past client contacts</strong></td><td>For the reviews velocity campaign (with permission to contact).</td></tr>
+    </tbody>
+  </table>
+
+  <h3>Systems &amp; Scheduling</h3>
+  <table>
+    <thead><tr><th class="c"></th><th>Item</th><th>Notes / where to find it</th></tr></thead>
+    <tbody>
+      <tr><td class="c"><span class="chk"></span></td><td><strong>Current CRM / booking tool</strong></td><td>Logins if any (Wix Bookings, HubSpot, spreadsheet, etc.).</td></tr>
+      <tr><td class="c"><span class="chk"></span></td><td><strong>Calendar access</strong></td><td>For the consultation scheduler so only qualified consults book time.</td></tr>
+      <tr><td class="c"><span class="chk"></span></td><td><strong>Existing lead sources</strong></td><td>Any current lead lists, referral sources, or vendor relationships.</td></tr>
+    </tbody>
+  </table>
+
+  <h2>Part 2 &middot; What WETYR Provides</h2>
+  <table>
+    <thead><tr><th class="c"></th><th>Item</th><th>Notes</th></tr></thead>
+    <tbody>
+      <tr><td class="c"><span class="chk"></span></td><td><strong>Signed Proposal, Engagement Agreement, and Schedule A</strong></td><td>Countersigned copies for Cirilo's records.</td></tr>
+      <tr><td class="c"><span class="chk"></span></td><td><strong>Executed Mutual NDA</strong></td><td>Covers access to financial, merchant, and system data.</td></tr>
+      <tr><td class="c"><span class="chk"></span></td><td><strong>WETYR W-9</strong></td><td>For Cirilo's bookkeeping and 1099.</td></tr>
+      <tr><td class="c"><span class="chk"></span></td><td><strong>ACH and wire remittance instructions</strong></td><td>Included on every WETYR invoice. Cirilo pays by ACH or wire; no auto-debit.</td></tr>
+      <tr><td class="c"><span class="chk"></span></td><td><strong>90-day roadmap + project plan</strong></td><td>Week-by-week build schedule with owners and dates.</td></tr>
+      <tr><td class="c"><span class="chk"></span></td><td><strong>Reporting dashboard access</strong></td><td>Live KPIs once tracking is installed.</td></tr>
+      <tr><td class="c"><span class="chk"></span></td><td><strong>Single point of contact</strong></td><td>Mark Gabrielli, plus escalation path.</td></tr>
+      <tr><td class="c"><span class="chk"></span></td><td><strong>Kickoff meeting scheduled</strong></td><td>Within 5 business days of signing.</td></tr>
+    </tbody>
+  </table>
+
+  <h2>Sign-off</h2>
+  <p>We confirm the items above were reviewed at closing and an owner has been assigned to each outstanding item.</p>
+  <div class="sig-grid">
+    <div>
+      <div class="who">Cirilo Design + Build</div>
+      <div class="line"></div>
+      <p><span class="nm">Tiffany / Ramon Cirilo</span><br><span class="note">Date: <span style="display:inline-block;min-width:140px;border-bottom:1px solid var(--border);">&nbsp;</span></span></p>
+    </div>
+    <div>
+      <div class="who">WETYR Corporation &middot; MarkCMO</div>
+      <div class="line"></div>
+      <p><span class="nm">Mark Gabrielli</span><br><span class="note">Date: <span style="display:inline-block;min-width:140px;border-bottom:1px solid var(--border);">&nbsp;</span></span></p>
+    </div>
+  </div>
+
+  <div class="doc-footer">Cirilo Design + Build &times; WETYR Corporation &middot; Onboarding Punch List &middot; Prepared 2026-06-02</div>
+
+</div>
+</body>
+</html>

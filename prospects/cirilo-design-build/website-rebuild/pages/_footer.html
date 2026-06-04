@@ -1,0 +1,147 @@
+<!-- ────────────────────────────────────────────────────────────
+     Cirilo Design + Build - Shared Site Footer
+     ──────────────────────────────────────────────────────────── -->
+<footer class="site-footer">
+  <div class="container">
+
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <span class="wordmark" style="font-size:2rem;">CIRILO</span>
+        <span class="wordmark-sub">Design + Build</span>
+        <p class="footer-tagline">Luxury Design. Precision Build.</p>
+        <p class="footer-bio">Charlotte, NC luxury custom pool builder. Design-build under one roof for pools, outdoor living, renovations, and additions. Serving the Charlotte metro today, expanding across North Carolina.</p>
+      </div>
+
+      <div class="footer-col">
+        <h4>Services</h4>
+        <ul>
+          <li><a href="/custom-concrete-swimming-pools">Custom Concrete Pools</a></li>
+          <li><a href="/outdoor-living-spaces">Outdoor Living</a></li>
+          <li><a href="/home-renovations-and-remodeling">Renovations</a></li>
+          <li><a href="/home-additions">Home Additions</a></li>
+        </ul>
+      </div>
+
+      <div class="footer-col">
+        <h4>Company</h4>
+        <ul>
+          <li><a href="/about">About</a></li>
+          <li><a href="/portfolio">Portfolio</a></li>
+          <li><a href="/process">Our Process</a></li>
+          <li><a href="/service-areas/">Service Areas</a></li>
+          <li><a href="/guides/">Guides</a></li>
+          <li><a href="/partners/">Partner With Us</a></li>
+          <li><a href="/vendor-signup">Trades &amp; Vendors</a></li>
+          <li><a href="/press">Press &amp; Media</a></li>
+          <li><a href="/financing">Financing</a></li>
+          <li><a href="/warranty">Warranty</a></li>
+          <li><a href="/faq">FAQ</a></li>
+        </ul>
+      </div>
+
+      <div class="footer-col">
+        <h4>Contact</h4>
+        <ul class="contact-list">
+          <li><a href="tel:+19104090648">(910) 409-0648</a></li>
+          <li><a href="mailto:Tiffany@CiriloDB.com">Tiffany@CiriloDB.com</a></li>
+          <li>Charlotte, NC</li>
+        </ul>
+        <a href="/book" class="btn btn-primary" style="margin-top:1rem;">Book Consultation</a>
+      </div>
+    </div>
+
+    <div class="footer-bar">
+      <div class="footer-trust">
+        <span>NC Licensed General Contractor</span>
+        <span>Bonded &amp; Insured</span>
+        <span>10-Year Structural Warranty</span>
+      </div>
+      <div class="footer-meta">
+        &copy; <span id="footer-year">2026</span> Cirilo Design + Build. All rights reserved.
+        &nbsp;|&nbsp; <a href="/privacy">Privacy</a> &nbsp;|&nbsp; <a href="/terms">Terms</a>
+      </div>
+    </div>
+
+  </div>
+</footer>
+
+<style>
+  .site-footer {
+    background: var(--navy);
+    color: rgba(255,255,255,0.7);
+    padding: var(--space-2xl) 0 var(--space-md);
+    margin-top: var(--space-3xl);
+  }
+  .footer-grid {
+    display: grid;
+    grid-template-columns: 2fr 1fr 1fr 1.2fr;
+    gap: var(--space-lg);
+    padding-bottom: var(--space-xl);
+    border-bottom: 1px solid rgba(255,255,255,0.1);
+  }
+  @media (max-width: 860px) { .footer-grid { grid-template-columns: 1fr 1fr; } }
+  @media (max-width: 520px) { .footer-grid { grid-template-columns: 1fr; } }
+
+  .footer-brand .wordmark { background: linear-gradient(135deg,#E5C2B0,#D6BB89,#F4D78C,#AB7E37); -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent; }
+  .footer-tagline { font-family: var(--font-display); font-style: italic; color: var(--gold-mid); margin-top: 0.75rem; margin-bottom: 0.75rem; }
+  .footer-bio { font-size: 0.88rem; line-height: 1.6; color: rgba(255,255,255,0.6); max-width: 320px; }
+
+  .footer-col h4 { color: var(--gold-mid); margin-bottom: 1rem; font-family: var(--font-mono); font-size: 0.7rem; letter-spacing: 0.18em; }
+  .footer-col ul { list-style: none; margin: 0; }
+  .footer-col li { padding: 0.3rem 0; font-size: 0.92rem; }
+  .footer-col a, .contact-list a { color: rgba(255,255,255,0.75); border-bottom: none; }
+  .footer-col a:hover, .contact-list a:hover { color: var(--gold-mid); }
+
+  .footer-bar {
+    padding-top: var(--space-md);
+    display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap;
+    gap: var(--space-sm);
+    font-family: var(--font-mono);
+    font-size: 0.7rem;
+    letter-spacing: 0.08em;
+    color: rgba(255,255,255,0.5);
+  }
+  .footer-trust { display: flex; gap: 1.5rem; flex-wrap: wrap; }
+  .footer-trust strong { color: var(--gold-mid); }
+  .footer-meta a { color: rgba(255,255,255,0.5); border-bottom: none; }
+  .footer-meta a:hover { color: var(--gold-mid); }
+</style>
+<script>document.getElementById('footer-year').textContent = new Date().getFullYear();</script>
+<!-- Attribution capture: persist ?ref= and utm_* across the journey -->
+<script>
+(function(){try{
+  var p=new URLSearchParams(location.search);
+  var ref=p.get('ref');
+  if(ref && !sessionStorage.getItem('cdb_ref')) sessionStorage.setItem('cdb_ref', ref.slice(0,24));
+  var utm={}; ['utm_source','utm_medium','utm_campaign','utm_term','utm_content'].forEach(function(k){ if(p.get(k)) utm[k]=p.get(k).slice(0,60); });
+  if(Object.keys(utm).length && !sessionStorage.getItem('cdb_utm')) sessionStorage.setItem('cdb_utm', JSON.stringify(utm));
+}catch(e){}})();
+</script>
+<!-- Page-view tracking for every marketing page (skips pages that self-track) -->
+<script>
+window.addEventListener('DOMContentLoaded',function(){
+  if(window.__cdb_pageTracked) return; // page handled its own tracking
+  try{
+    var k='cdb_jsid';var sid=sessionStorage.getItem(k)||('s_'+Math.random().toString(36).slice(2)+Date.now().toString(36));sessionStorage.setItem(k,sid);window.__cdb_sid=sid;
+    var page=(location.pathname.replace(/\/$/,'')||'/');
+    var utm=null; try{utm=JSON.parse(sessionStorage.getItem('cdb_utm')||'null');}catch(e){}
+    fetch('/api/track',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({t:'view',page:page,title:document.title,url:location.pathname,referrer:document.referrer||null,session_id:sid,ref:sessionStorage.getItem('cdb_ref')||null,utm:utm}),keepalive:true}).catch(function(){});
+  }catch(e){}
+});
+</script>
+<!-- Self-healing: capture client JS errors to the analytics stream (sampled, capped) -->
+<script>
+(function(){
+  var sent=0;
+  function report(msg,src,line){
+    if(sent>=3) return; sent++;
+    try{ fetch('/api/track',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({t:'error',page:location.pathname,detail:{action:'js_error',msg:String(msg).slice(0,200),src:String(src||'').slice(0,120),line:line||0},url:location.href}),keepalive:true}).catch(function(){}); }catch(e){}
+  }
+  window.addEventListener('error',function(e){ report(e.message,e.filename,e.lineno); });
+  window.addEventListener('unhandledrejection',function(e){ report((e.reason&&e.reason.message)||e.reason||'unhandledrejection','',0); });
+  // Small fetch retry helper available to pages (1 retry on network failure).
+  window.cdbFetch=function(url,opts,retries){ retries=(retries==null)?1:retries; return fetch(url,opts).catch(function(err){ if(retries>0) return new Promise(function(r){setTimeout(r,600);}).then(function(){return window.cdbFetch(url,opts,retries-1);}); throw err; }); };
+}());
+</script>
+<!-- Motion engine: scroll reveals, parallax, count-up, nav state, magnetic hovers -->
+<script src="/assets/js/motion.js" defer></script>

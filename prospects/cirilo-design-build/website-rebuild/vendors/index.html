@@ -1,0 +1,316 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Vendor Portal | Cirilo Design + Build</title>
+<meta name="robots" content="noindex, nofollow">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@600;700&family=Inter:wght@400;500;600;700&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --gold:#AB7E37;--gold-mid:#D6BB89;--gold-lite:#E3D3B2;--gold-pale:#F4ECDC;
+    --navy:#0A1628;--navy-2:#0F2040;--navy-3:#162A4A;
+    --ink:#1A1A1A;--body:#2E2E34;--muted:#8C8C94;--line:#E2E2E2;
+    --bg:#F4F2EE;--white:#FFF;--paper:#FCFAF6;--green:#5A8A4A;--green-pale:#EAF2E6;--amber:#C99A3A;--red:#B33A3A;
+  }
+  *{box-sizing:border-box;margin:0;padding:0;}
+  body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--body);font-size:14px;line-height:1.5;-webkit-font-smoothing:antialiased;}
+  .mono{font-family:'DM Mono',monospace;}
+  .serif{font-family:'Cormorant Garamond',serif;}
+
+  /* login */
+  #gate{position:fixed;inset:0;z-index:1000;background:linear-gradient(135deg,var(--navy),var(--navy-3));display:flex;align-items:center;justify-content:center;padding:20px;}
+  #gate .box{background:var(--white);border-radius:12px;padding:46px 42px;width:400px;max-width:94vw;box-shadow:0 40px 90px rgba(0,0,0,0.45);}
+  #gate .wm{font-family:'Cormorant Garamond',serif;font-size:2rem;font-weight:700;letter-spacing:0.16em;text-align:center;color:var(--navy);}
+  #gate .sub{font-family:'DM Mono',monospace;font-size:0.58rem;letter-spacing:0.34em;color:var(--gold);text-transform:uppercase;text-align:center;margin-top:6px;margin-bottom:26px;}
+  #gate label{font-family:'DM Mono',monospace;font-size:0.6rem;letter-spacing:0.14em;text-transform:uppercase;color:var(--muted);display:block;margin-bottom:6px;}
+  #gate input{width:100%;padding:0.8rem 0.9rem;border:1.5px solid var(--line);border-radius:7px;font-size:0.95rem;margin-bottom:16px;outline:none;}
+  #gate input:focus{border-color:var(--gold);}
+  #gate button{width:100%;padding:0.9rem;background:var(--navy);color:var(--gold-lite);border:none;border-radius:7px;font-family:'DM Mono',monospace;font-size:0.72rem;letter-spacing:0.2em;text-transform:uppercase;cursor:pointer;}
+  #gate button:hover{background:var(--navy-3);}
+  #gate .err{color:var(--red);font-size:0.84rem;text-align:center;margin-bottom:12px;display:none;}
+  #gate .hint{text-align:center;font-size:0.78rem;color:var(--muted);margin-top:18px;}
+  #gate .hint a{color:var(--gold);text-decoration:none;}
+
+  .app{display:none;}
+  .topnav{position:sticky;top:0;z-index:40;display:flex;justify-content:space-between;align-items:center;padding:16px 28px;background:var(--navy);color:#fff;}
+  .topnav .brand{font-family:'Cormorant Garamond',serif;font-size:1.4rem;font-weight:700;letter-spacing:0.16em;color:var(--gold-lite);}
+  .topnav .brand small{display:block;font-family:'DM Mono',monospace;font-size:0.5rem;letter-spacing:0.3em;color:var(--gold-mid);}
+  .topnav .right{display:flex;align-items:center;gap:18px;}
+  .topnav .who{font-size:0.84rem;color:rgba(255,255,255,0.8);}
+  .topnav .out{font-family:'DM Mono',monospace;font-size:0.6rem;letter-spacing:0.14em;text-transform:uppercase;color:var(--gold-mid);cursor:pointer;border:1px solid rgba(214,187,137,0.3);padding:7px 13px;border-radius:5px;}
+  .wrap{max-width:1080px;margin:0 auto;padding:28px;}
+  .demo-flag{position:fixed;bottom:14px;right:14px;font-family:'DM Mono',monospace;font-size:0.55rem;letter-spacing:0.12em;text-transform:uppercase;background:var(--amber);color:#fff;padding:6px 12px;border-radius:4px;display:none;}
+
+  h2.sec{font-family:'Cormorant Garamond',serif;font-size:1.7rem;color:var(--ink);margin:8px 0 16px;}
+  .kpis{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-bottom:26px;}
+  @media(max-width:640px){.kpis{grid-template-columns:1fr;}}
+  .kpi{background:var(--white);border:1px solid var(--line);border-radius:10px;padding:20px;}
+  .kpi .l{font-family:'DM Mono',monospace;font-size:0.6rem;letter-spacing:0.12em;text-transform:uppercase;color:var(--muted);}
+  .kpi .v{font-family:'Cormorant Garamond',serif;font-size:2.1rem;font-weight:700;color:var(--ink);margin-top:4px;}
+
+  .cards{display:grid;grid-template-columns:1fr 1fr;gap:16px;}
+  @media(max-width:760px){.cards{grid-template-columns:1fr;}}
+  .jcard{background:var(--white);border:1px solid var(--line);border-radius:10px;padding:20px 22px;}
+  .jcard .top{display:flex;justify-content:space-between;align-items:flex-start;gap:10px;}
+  .jcard h3{font-family:'Cormorant Garamond',serif;font-size:1.3rem;color:var(--ink);}
+  .jcard .proj{font-family:'DM Mono',monospace;font-size:0.6rem;letter-spacing:0.1em;text-transform:uppercase;color:var(--gold);margin-top:2px;}
+  .jcard .scope{font-size:0.9rem;color:var(--body);margin:10px 0;}
+  .jcard .meta{display:flex;gap:18px;flex-wrap:wrap;font-size:0.82rem;color:var(--muted);margin-bottom:12px;}
+  .jcard .amt{font-family:'Cormorant Garamond',serif;font-size:1.3rem;font-weight:700;color:var(--ink);}
+  .pill{display:inline-block;padding:3px 10px;border-radius:20px;font-size:0.62rem;font-weight:600;font-family:'DM Mono',monospace;letter-spacing:0.04em;text-transform:uppercase;}
+  .pill.assigned{background:var(--gold-pale);color:var(--gold);}
+  .pill.accepted{background:#E8F0FB;color:#2563EB;}
+  .pill.in_progress{background:#F3E8FB;color:#8B3FBF;}
+  .pill.complete{background:var(--green-pale);color:var(--green);}
+  .pill.submitted{background:var(--gold-pale);color:var(--gold);}
+  .pill.awarded{background:var(--green);color:#fff;}
+  .btnrow{display:flex;gap:8px;flex-wrap:wrap;}
+  .vbtn{border:none;border-radius:6px;font-family:'DM Mono',monospace;font-size:0.58rem;letter-spacing:0.1em;text-transform:uppercase;padding:8px 12px;cursor:pointer;}
+  .vbtn.go{background:var(--navy);color:var(--gold-lite);}
+  .vbtn.ghost{background:transparent;border:1px solid var(--line);color:var(--body);}
+  .vbtn.gold{background:var(--gold);color:#fff;}
+  .empty{color:var(--muted);padding:18px;text-align:center;}
+  .blk{margin-bottom:34px;}
+  table{width:100%;border-collapse:collapse;background:var(--white);border:1px solid var(--line);border-radius:10px;overflow:hidden;}
+  th{text-align:left;font-family:'DM Mono',monospace;font-size:0.58rem;letter-spacing:0.1em;text-transform:uppercase;color:var(--muted);padding:12px 14px;border-bottom:1px solid var(--line);}
+  td{padding:12px 14px;border-bottom:1px solid var(--line);font-size:0.86rem;}
+  tr:last-child td{border-bottom:none;}
+
+  /* bid modal */
+  #bid{position:fixed;inset:0;z-index:1500;background:rgba(7,12,22,0.7);display:none;align-items:center;justify-content:center;padding:20px;}
+  #bid .bx{background:var(--white);border-radius:10px;max-width:460px;width:100%;overflow:hidden;}
+  #bid .h{background:var(--navy);color:#fff;padding:20px 24px;}
+  #bid .h h3{font-family:'Cormorant Garamond',serif;font-size:1.4rem;color:#fff;}
+  #bid .h .p{font-family:'DM Mono',monospace;font-size:0.58rem;letter-spacing:0.1em;text-transform:uppercase;color:var(--gold-mid);margin-top:3px;}
+  #bid .b{padding:22px 24px;}
+  #bid label{display:block;font-family:'DM Mono',monospace;font-size:0.6rem;letter-spacing:0.1em;text-transform:uppercase;color:var(--muted);margin:14px 0 6px;}
+  #bid input,#bid textarea{width:100%;border:1.5px solid var(--line);border-radius:6px;padding:0.7rem 0.85rem;font-family:'Inter',sans-serif;font-size:0.95rem;outline:none;}
+  #bid input:focus,#bid textarea:focus{border-color:var(--gold);}
+  #bid .acts{display:flex;gap:10px;margin-top:20px;}
+  #bid .acts button{flex:1;padding:12px;border:none;border-radius:6px;font-family:'DM Mono',monospace;font-size:0.64rem;letter-spacing:0.12em;text-transform:uppercase;cursor:pointer;}
+</style>
+</head>
+<body>
+
+<div id="gate">
+  <div class="box">
+    <div class="wm">CIRILO</div>
+    <div class="sub">Vendor Portal</div>
+    <div class="err" id="gate-err">We could not verify those details.</div>
+    <label>Email</label>
+    <input type="email" id="v-email" autocomplete="username" placeholder="you@company.com">
+    <label>Access code</label>
+    <input type="text" id="v-code" autocomplete="off" placeholder="Provided by Cirilo">
+    <button onclick="venter()">Sign In</button>
+    <p class="hint">Need access? <a href="mailto:Tiffany@CiriloDB.com">Contact Cirilo</a></p>
+  </div>
+</div>
+
+<div class="app" id="app">
+  <nav class="topnav">
+    <div class="brand">CIRILO<small>Vendor Portal</small></div>
+    <div class="right">
+      <div class="who" id="v-who">&nbsp;</div>
+      <a class="out" onclick="vsignout()">Sign Out</a>
+    </div>
+  </nav>
+
+  <div class="wrap">
+    <div class="kpis" id="v-kpis"></div>
+
+    <div class="blk">
+      <h2 class="sec">Your Assigned Jobs</h2>
+      <div class="cards" id="v-assignments"></div>
+    </div>
+
+    <div class="blk">
+      <h2 class="sec">Open Jobs for Bid</h2>
+      <div class="cards" id="v-jobs"></div>
+    </div>
+
+    <div class="blk">
+      <h2 class="sec">Your Bids</h2>
+      <div id="v-bids"></div>
+    </div>
+
+    <div class="blk">
+      <h2 class="sec">Your Documents</h2>
+      <p style="color:var(--muted);margin-bottom:12px;">Upload your certificate of insurance, W-9, and licenses. Cirilo keeps these in your vendor file.</p>
+      <input type="file" id="vdoc-file" style="display:none;" onchange="vendorUpload(this)">
+      <button class="vbtn go" onclick="document.getElementById('vdoc-file').click()">Upload document</button>
+      <span id="vdoc-status" style="margin-left:12px;color:var(--muted);font-size:0.84rem;"></span>
+      <div id="vdoc-list" style="margin-top:14px;"></div>
+    </div>
+  </div>
+</div>
+
+<div id="bid">
+  <div class="bx">
+    <div class="h"><div class="p" id="bid-proj">Project</div><h3 id="bid-title">Job</h3></div>
+    <div class="b">
+      <label>Your bid amount (USD)</label>
+      <input type="number" id="bid-amount" placeholder="e.g. 24000">
+      <label>Timeline</label>
+      <input type="text" id="bid-timeline" placeholder="e.g. 5 working days">
+      <label>Notes (optional)</label>
+      <textarea id="bid-notes" rows="3" placeholder="Inclusions, exclusions, scheduling..."></textarea>
+      <div class="acts">
+        <button class="vbtn ghost" style="background:transparent;border:1px solid var(--line);" onclick="closeBid()">Cancel</button>
+        <button class="vbtn go" id="bid-go" style="background:var(--navy);color:var(--gold-lite);">Submit Bid</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="demo-flag" id="demo-flag">Preview Data</div>
+
+<script>
+var VDEMO={
+  vendor:{name:'Apex Gunite Co.',company:'Apex Gunite Co.',trade:'Gunite / Shotcrete',email:'ops@apexgunite.com'},
+  assignments:[
+    {id:'a1',project:'Myers Park Vanishing Edge',stage:'Shotcrete / Gunite',scope:'Apply and cure gunite shell incl. vanishing-edge wall',amount:54000,status:'in_progress',due:'2026-06-18'},
+    {id:'a2',project:'Weddington Estate Pool',stage:'Shotcrete / Gunite',scope:'Standard gunite shell, 640 sq ft',amount:38000,status:'assigned',due:'2026-07-02'}
+  ],
+  jobs:[
+    {id:'j1',project:'Lake Norman Infinity Spa',title:'Gunite shell + raised spa',trade:'Gunite',stage:'Shotcrete',scope:'Infinity-edge shell with integrated raised spa',budget:62000,deadline:'2026-06-20',my_bid:null},
+    {id:'j2',project:'Ballantyne Outdoor Living',title:'Plunge pool shell',trade:'Gunite',stage:'Shotcrete',scope:'Compact plunge pool, 280 sq ft',budget:24000,deadline:'2026-06-25',my_bid:null}
+  ],
+  bids:[
+    {id:'b1',job_id:'j0',amount:41000,timeline:'6 working days',status:'submitted',title:'Davidson Lakefront shell'}
+  ]
+};
+
+var VSESS=null, BID_JOB=null;
+function venter(){
+  var email=(document.getElementById('v-email').value||'').trim();
+  var code=(document.getElementById('v-code').value||'').trim();
+  var err=document.getElementById('gate-err'); err.style.display='none';
+  if(!email||!code){err.textContent='Please enter your email and access code.';err.style.display='block';return;}
+  fetch('/api/vendor-auth',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({email:email,code:code})})
+    .then(function(r){return r.json().then(function(j){return {status:r.status,j:j};});})
+    .then(function(res){
+      var j=res.j;
+      if(j&&j.ok){ VSESS={email:email,token:j.token,role:j.role}; try{sessionStorage.setItem('cdb_vendor',JSON.stringify(VSESS));}catch(e){}
+        loadVendor(j.role==='admin'?null:j.data, j.role); return; }
+      if(res.status===503){ err.textContent='Sign-in is not configured yet.'; }
+      else if(j&&j.error==='unavailable'){ err.textContent='Vendor accounts are being set up. Contact Cirilo for access.'; }
+      else { err.textContent='We could not verify those details.'; }
+      err.style.display='block';
+    })
+    .catch(function(){ err.textContent='Could not reach the server.';err.style.display='block'; });
+}
+function vsignout(){ try{sessionStorage.removeItem('cdb_vendor');}catch(e){}; location.reload(); }
+function money(n){return '$'+(n||0).toLocaleString('en-US');}
+
+function loadVendor(data, role){
+  var D=(data&&data.vendor)?data:VDEMO;
+  document.getElementById('gate').style.display='none';
+  document.getElementById('app').style.display='block';
+  if(!(data&&data.vendor)) document.getElementById('demo-flag').style.display='block';
+  document.getElementById('v-who').textContent=D.vendor.company||D.vendor.name;
+  window.__vdata=D;
+
+  var active=(D.assignments||[]).filter(function(a){return a.status!=='complete';}).length;
+  var open=(D.jobs||[]).length;
+  var pend=(D.bids||[]).filter(function(b){return b.status==='submitted';}).length;
+  document.getElementById('v-kpis').innerHTML=[
+    ['Active Jobs',active],['Open for Bid',open],['Pending Bids',pend]
+  ].map(function(x){return '<div class="kpi"><div class="l">'+x[0]+'</div><div class="v">'+x[1]+'</div></div>';}).join('');
+
+  renderAssignments(); renderJobs(); renderBids();
+}
+
+function renderAssignments(){
+  var D=window.__vdata, list=D.assignments||[];
+  document.getElementById('v-assignments').innerHTML = list.length ? list.map(function(a){
+    var next = a.status==='assigned' ? '<button class="vbtn gold" onclick="setStatus(\''+a.id+'\',\'accepted\')">Accept</button>' :
+               a.status==='accepted' ? '<button class="vbtn go" onclick="setStatus(\''+a.id+'\',\'in_progress\')">Start work</button>' :
+               a.status==='in_progress' ? '<button class="vbtn go" onclick="setStatus(\''+a.id+'\',\'complete\')">Mark complete</button>' : '';
+    var payTxt = a.pay_status==='paid' ? '<span style="color:var(--green);font-weight:600;">Paid</span>' : (a.status==='complete' ? '<span style="color:var(--amber);font-weight:600;">Awaiting payment</span>' : '');
+    return '<div class="jcard"><div class="top"><div><h3>'+a.stage+'</h3><div class="proj">'+a.project+'</div></div><span class="pill '+a.status+'">'+a.status.replace("_"," ")+'</span></div>'+
+      '<div class="scope">'+a.scope+'</div><div class="meta"><span>Due '+(a.due||'TBD')+'</span>'+(payTxt?('<span>'+payTxt+'</span>'):'')+'</div>'+
+      '<div class="top"><span class="amt">'+money(a.amount)+'</span><div class="btnrow">'+next+'</div></div></div>';
+  }).join('') : '<div class="empty">No assigned jobs yet.</div>';
+}
+function renderJobs(){
+  var D=window.__vdata, list=D.jobs||[];
+  document.getElementById('v-jobs').innerHTML = list.length ? list.map(function(j){
+    var act = j.my_bid!=null ? '<span class="pill submitted">Bid '+money(j.my_bid)+'</span>' : '<button class="vbtn gold" onclick="openBid(\''+j.id+'\')">Place bid</button>';
+    return '<div class="jcard"><div class="top"><div><h3>'+j.title+'</h3><div class="proj">'+j.project+'</div></div><span class="pill assigned">Open</span></div>'+
+      '<div class="scope">'+j.scope+'</div><div class="meta"><span>Budget '+money(j.budget)+'</span><span>Bids close '+(j.deadline||'TBD')+'</span></div>'+
+      '<div class="btnrow">'+act+'</div></div>';
+  }).join('') : '<div class="empty">No open jobs right now.</div>';
+}
+function renderBids(){
+  var D=window.__vdata, list=D.bids||[];
+  document.getElementById('v-bids').innerHTML = list.length ? '<table><thead><tr><th>Job</th><th>Amount</th><th>Timeline</th><th>Status</th></tr></thead><tbody>'+
+    list.map(function(b){ return '<tr><td>'+(b.title||b.job_id)+'</td><td class="mono">'+money(b.amount)+'</td><td>'+(b.timeline||'')+'</td><td><span class="pill '+(b.status==='awarded'?'awarded':'submitted')+'">'+b.status+'</span></td></tr>'; }).join('')+
+    '</tbody></table>' : '<div class="empty">You have not placed any bids yet.</div>';
+}
+
+function setStatus(id, status){
+  var lien=false;
+  if(status==='complete'){
+    if(!confirm('By marking this job complete you acknowledge a conditional lien waiver for the work performed to date, upon payment. Continue?')) return;
+    lien=true;
+  }
+  var a=(window.__vdata.assignments||[]).find(function(x){return x.id===id;}); if(a){ a.status=status; if(lien) a.lien_waiver=true; renderAssignments(); }
+  fetch('/api/vendor-action',{method:'POST',headers:{'Content-Type':'application/json','x-cdb-vendor':(VSESS&&VSESS.token)||''},body:JSON.stringify({op:'assignment_status',assignment_id:id,status:status,lien_waiver:lien})}).catch(function(){});
+}
+
+function openBid(jobId){
+  BID_JOB=jobId;
+  var j=(window.__vdata.jobs||[]).find(function(x){return x.id===jobId;}); if(!j) return;
+  document.getElementById('bid-proj').textContent=j.project;
+  document.getElementById('bid-title').textContent=j.title;
+  document.getElementById('bid-amount').value=''; document.getElementById('bid-timeline').value=''; document.getElementById('bid-notes').value='';
+  document.getElementById('bid').style.display='flex';
+}
+function closeBid(){ document.getElementById('bid').style.display='none'; BID_JOB=null; }
+document.getElementById('bid-go').addEventListener('click',function(){
+  var amount=document.getElementById('bid-amount').value;
+  if(!amount){ document.getElementById('bid-amount').focus(); return; }
+  var btn=this; btn.disabled=true; btn.textContent='Submitting...';
+  var payload={op:'bid',job_id:BID_JOB,amount:+amount,timeline:document.getElementById('bid-timeline').value||null,notes:document.getElementById('bid-notes').value||null};
+  fetch('/api/vendor-action',{method:'POST',headers:{'Content-Type':'application/json','x-cdb-vendor':(VSESS&&VSESS.token)||''},body:JSON.stringify(payload)})
+    .then(function(r){return r.json();})
+    .then(function(){
+      var j=(window.__vdata.jobs||[]).find(function(x){return x.id===BID_JOB;}); if(j) j.my_bid=+amount;
+      (window.__vdata.bids=window.__vdata.bids||[]).unshift({id:'new',job_id:BID_JOB,title:j?j.title:'',amount:+amount,timeline:payload.timeline,status:'submitted'});
+      renderJobs(); renderBids(); closeBid();
+    })
+    .catch(function(){})
+    .then(function(){ btn.disabled=false; btn.textContent='Submit Bid'; });
+});
+
+function vFileToB64(file){ return new Promise(function(res,rej){ var r=new FileReader(); r.onload=function(){res(String(r.result));}; r.onerror=rej; r.readAsDataURL(file); }); }
+function vendorUpload(input){
+  var file=input.files&&input.files[0]; if(!file) return;
+  var st=document.getElementById('vdoc-status');
+  if(file.size>10*1024*1024){ st.textContent='File too large (10MB max).'; return; }
+  st.textContent='Uploading '+file.name+'...';
+  vFileToB64(file).then(function(b64){
+    return fetch('/api/doc-upload',{method:'POST',headers:{'Content-Type':'application/json','x-cdb-vendor':(VSESS&&VSESS.token)||''},body:JSON.stringify({filename:file.name,content_base64:b64,mime:file.type,doc_type:'vendor_doc',doc_name:file.name})});
+  }).then(function(r){return r.json();}).then(function(j){
+    if(j&&j.ok){ st.textContent='Uploaded: '+file.name;
+      var l=document.getElementById('vdoc-list'); l.innerHTML='<div style="padding:10px 0;border-bottom:1px solid var(--line);"><strong>'+file.name+'</strong> <span class="pill submitted" style="margin-left:8px;">uploaded</span></div>'+l.innerHTML;
+    } else { st.textContent='Upload could not be saved.'; }
+    input.value='';
+  }).catch(function(){ st.textContent='Upload failed.'; input.value=''; });
+}
+
+document.addEventListener('keydown',function(e){ if(e.key==='Enter'&&document.getElementById('gate').style.display!=='none'){ venter(); } });
+
+/* auto-resume */
+(function(){
+  try{var s=sessionStorage.getItem('cdb_vendor'); if(!s)return; VSESS=JSON.parse(s);
+    if(VSESS.role==='admin'){ loadVendor(null,'admin'); return; }
+    fetch('/api/vendor-data',{headers:{'x-cdb-vendor':VSESS.token||''}}).then(function(r){return r.json();}).then(function(j){ if(j&&j.ok){loadVendor(j.data,'vendor');} else { try{sessionStorage.removeItem('cdb_vendor');}catch(e){} } }).catch(function(){ try{sessionStorage.removeItem('cdb_vendor');}catch(e){} });
+  }catch(e){}
+})();
+</script>
+</body>
+</html>

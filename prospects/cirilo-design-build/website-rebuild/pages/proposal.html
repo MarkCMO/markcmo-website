@@ -1,0 +1,318 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Your Proposal | Cirilo Design + Build</title>
+<meta name="robots" content="noindex, nofollow">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;0,700;1,500;1,600&family=Inter:wght@400;500;600;700&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/assets/css/brand.css">
+<style>
+  :root{ --pp-max:880px; }
+  body{ background:var(--off-white,#F6F3ED); }
+  .pp-bar{ position:sticky; top:0; z-index:50; display:flex; justify-content:space-between; align-items:center; padding:14px 28px; background:rgba(10,22,40,0.96); backdrop-filter:blur(10px); color:#fff; }
+  .pp-bar .wm{ font-family:var(--font-display); font-size:1.4rem; font-weight:700; letter-spacing:0.16em; color:var(--gold-light,#E3D3B2); }
+  .pp-bar .tag{ font-family:var(--font-mono); font-size:0.6rem; letter-spacing:0.22em; text-transform:uppercase; color:rgba(255,255,255,0.6); }
+  .pp-wrap{ max-width:var(--pp-max); margin:0 auto; padding:0 24px 80px; }
+
+  .pp-hero{ background:linear-gradient(140deg,var(--navy,#0A1628),#13294d); color:#fff; padding:64px 0 72px; margin-bottom:-40px; }
+  .pp-hero .in{ max-width:var(--pp-max); margin:0 auto; padding:0 24px; }
+  .pp-hero .ey{ font-family:var(--font-mono); font-size:0.62rem; letter-spacing:0.32em; text-transform:uppercase; color:var(--gold-light,#E3D3B2); }
+  .pp-hero h1{ font-family:var(--font-display); font-size:clamp(2.2rem,5vw,3.6rem); line-height:1.04; margin:12px 0 8px; color:#fff; }
+  .pp-hero .for{ font-family:var(--font-display); font-style:italic; font-size:1.3rem; color:rgba(255,255,255,0.85); }
+  .pp-hero .meta{ display:flex; flex-wrap:wrap; gap:24px; margin-top:24px; }
+  .pp-hero .meta div{ }
+  .pp-hero .meta .k{ font-family:var(--font-mono); font-size:0.58rem; letter-spacing:0.14em; text-transform:uppercase; color:rgba(255,255,255,0.55); }
+  .pp-hero .meta .v{ font-size:1.02rem; color:#fff; font-weight:500; margin-top:3px; }
+
+  .pp-card{ background:var(--white); border:1px solid var(--border); border-radius:var(--radius-lg,12px); padding:36px 40px; margin-bottom:22px; box-shadow:0 24px 60px -40px rgba(20,18,12,0.3); }
+  @media(max-width:560px){ .pp-card{ padding:26px 22px; } }
+  .pp-card h2{ font-family:var(--font-display); font-size:1.7rem; color:var(--ink); margin-bottom:14px; }
+  .pp-card p{ color:var(--body); }
+  .pp-eyebrow{ font-family:var(--font-mono); font-size:0.62rem; letter-spacing:0.18em; text-transform:uppercase; color:var(--gold-dark,#8B6529); margin-bottom:8px; }
+
+  .pp-incl{ list-style:none; padding:0; margin:8px 0 0; display:grid; grid-template-columns:1fr 1fr; gap:10px 28px; }
+  @media(max-width:560px){ .pp-incl{ grid-template-columns:1fr; } }
+  .pp-incl li{ position:relative; padding-left:26px; color:var(--body); font-size:0.95rem; padding-top:4px; padding-bottom:4px; }
+  .pp-incl li::before{ content:'\2713'; position:absolute; left:0; top:4px; width:18px; height:18px; border-radius:50%; background:var(--gold-pale,#F4ECDC); color:var(--gold-dark,#8B6529); font-size:0.7rem; display:flex; align-items:center; justify-content:center; }
+
+  .pp-specs{ display:grid; grid-template-columns:repeat(3,1fr); gap:14px; }
+  @media(max-width:560px){ .pp-specs{ grid-template-columns:1fr 1fr; } }
+  .pp-spec{ border:1px solid var(--border); border-radius:var(--radius); padding:16px; }
+  .pp-spec .k{ font-family:var(--font-mono); font-size:0.56rem; letter-spacing:0.12em; text-transform:uppercase; color:var(--muted); }
+  .pp-spec .v{ font-family:var(--font-display); font-size:1.2rem; color:var(--ink); font-weight:600; margin-top:4px; }
+
+  .pp-invest{ background:var(--navy,#0A1628); color:#fff; }
+  .pp-invest h2{ color:#fff; }
+  .pp-total{ display:flex; justify-content:space-between; align-items:baseline; padding:18px 0; border-bottom:1px solid rgba(255,255,255,0.12); }
+  .pp-total .l{ font-family:var(--font-mono); font-size:0.66rem; letter-spacing:0.14em; text-transform:uppercase; color:rgba(255,255,255,0.6); }
+  .pp-total .v{ font-family:var(--font-display); font-size:2.4rem; font-weight:700; color:var(--gold-light,#E3D3B2); }
+  .pp-draw{ display:flex; justify-content:space-between; padding:11px 0; border-bottom:1px solid rgba(255,255,255,0.08); font-size:0.92rem; }
+  .pp-draw:last-child{ border-bottom:none; }
+  .pp-draw .dn{ color:rgba(255,255,255,0.82); }
+  .pp-draw .da{ font-family:var(--font-mono); color:#fff; }
+
+  /* sign */
+  .pp-sign label{ display:block; font-family:var(--font-mono); font-size:0.66rem; letter-spacing:0.12em; text-transform:uppercase; color:var(--muted); margin:14px 0 6px; }
+  .pp-sign input[type=text], .pp-sign input[type=email]{ width:100%; background:var(--white); border:1.5px solid var(--border); border-radius:var(--radius); font-family:var(--font-body); font-size:1rem; padding:0.8rem 0.9rem; outline:none; }
+  .pp-sign input:focus{ border-color:var(--gold-dark,#8B6529); box-shadow:0 0 0 3px rgba(171,126,55,0.12); }
+  .pp-two{ display:grid; grid-template-columns:1fr 1fr; gap:16px; }
+  @media(max-width:560px){ .pp-two{ grid-template-columns:1fr; } }
+  .pp-padwrap{ position:relative; margin-top:6px; }
+  #pp-pad{ width:100%; height:150px; background:#fff; border:1.5px dashed var(--border); border-radius:var(--radius); touch-action:none; cursor:crosshair; display:block; }
+  .pp-padline{ position:absolute; left:18px; right:18px; bottom:34px; border-bottom:1px solid var(--border); pointer-events:none; }
+  .pp-padhint{ position:absolute; left:18px; bottom:14px; font-family:var(--font-mono); font-size:0.6rem; letter-spacing:0.1em; text-transform:uppercase; color:var(--muted); pointer-events:none; }
+  .pp-clear{ background:none; border:none; color:var(--gold-dark,#8B6529); font-family:var(--font-mono); font-size:0.66rem; letter-spacing:0.08em; text-transform:uppercase; cursor:pointer; margin-top:8px; }
+  .pp-agree{ display:flex; gap:12px; align-items:flex-start; margin:18px 0 6px; }
+  .pp-agree input{ margin-top:3px; width:18px; height:18px; flex-shrink:0; accent-color:var(--gold-dark,#8B6529); }
+  .pp-agree label{ margin:0; font-family:var(--font-body); text-transform:none; letter-spacing:0; font-size:0.9rem; color:var(--body); }
+  .pp-submit{ width:100%; justify-content:center; margin-top:18px; }
+  .pp-status{ margin-top:14px; padding:0.9rem 1.1rem; border-radius:var(--radius); font-size:0.92rem; display:none; }
+  .pp-status.loading{ display:block; background:var(--gold-pale,#F4ECDC); color:var(--gold-dark,#8B6529); }
+  .pp-status.error{ display:block; background:var(--red-pale,#FBEAEA); color:var(--red,#B33A3A); }
+  .pp-fine{ font-size:0.76rem; color:var(--muted); margin-top:12px; }
+
+  /* success overlay */
+  #pp-done{ position:fixed; inset:0; z-index:200; background:linear-gradient(140deg,var(--navy,#0A1628),#13294d); color:#fff; display:none; align-items:center; justify-content:center; padding:24px; overflow:auto; }
+  #pp-done .box{ max-width:520px; width:100%; text-align:center; padding:30px 10px; }
+  #pp-done .crest{ width:74px; height:74px; margin:0 auto 22px; border-radius:50%; background:var(--gold,#AB7E37); display:flex; align-items:center; justify-content:center; font-size:2rem; }
+  #pp-done .ey{ font-family:var(--font-mono); font-size:0.62rem; letter-spacing:0.3em; text-transform:uppercase; color:var(--gold-light,#E3D3B2); }
+  #pp-done h2{ font-family:var(--font-display); font-size:clamp(2rem,5vw,3rem); color:#fff; margin:10px 0 12px; }
+  #pp-done p{ color:rgba(255,255,255,0.82); max-width:420px; margin:0 auto 26px; }
+  .pp-codecard{ background:rgba(255,255,255,0.06); border:1px solid rgba(214,187,137,0.4); border-radius:10px; padding:24px; margin:0 auto 26px; max-width:360px; }
+  .pp-codecard .k{ font-family:var(--font-mono); font-size:0.58rem; letter-spacing:0.16em; text-transform:uppercase; color:rgba(255,255,255,0.55); }
+  .pp-codecard .email{ font-size:0.95rem; color:#fff; margin-top:4px; }
+  .pp-codecard .code{ font-family:var(--font-mono); font-size:2rem; letter-spacing:0.4em; color:var(--gold-light,#E3D3B2); margin-top:14px; padding-left:0.4em; }
+  #pp-done .btn-primary{ background:var(--gold,#AB7E37); }
+  .pp-preview-note{ font-size:0.72rem; color:rgba(255,255,255,0.5); margin-top:16px; }
+</style>
+</head>
+<body>
+
+<div class="pp-bar">
+  <span class="wm">CIRILO</span>
+  <span class="tag">Private Proposal</span>
+</div>
+
+<header class="pp-hero">
+  <div class="in">
+    <div class="ey">Proposal &middot; <span id="pp-id">CDB-2041</span></div>
+    <h1 id="pp-title">Myers Park Vanishing Edge</h1>
+    <div class="for">Prepared for <span id="pp-client">the Harrington Residence</span></div>
+    <div class="meta">
+      <div><div class="k">Project Type</div><div class="v" id="pp-type">Vanishing-Edge Gunite Pool</div></div>
+      <div><div class="k">Location</div><div class="v" id="pp-loc">Myers Park, Charlotte</div></div>
+      <div><div class="k">Prepared</div><div class="v" id="pp-date">June 2026</div></div>
+    </div>
+  </div>
+</header>
+
+<main class="pp-wrap">
+
+  <div class="pp-card">
+    <div class="pp-eyebrow">The Vision</div>
+    <h2>An edge that disappears into the skyline</h2>
+    <p id="pp-vision">A vanishing-edge gunite pool engineered to mirror the horizon from your terrace, with an integrated spa spillway, sun shelf, and automated water features. Designed for evening entertaining and quiet mornings alike, finished to the standard your home deserves.</p>
+  </div>
+
+  <div class="pp-card">
+    <div class="pp-eyebrow">Scope &amp; Inclusions</div>
+    <h2>Everything in your build</h2>
+    <ul class="pp-incl" id="pp-incl">
+      <li>Engineered gunite shell, 10-year structural warranty</li>
+      <li>Vanishing edge with catch basin and surge tank</li>
+      <li>Integrated spa with spillway</li>
+      <li>Sun shelf with bubbler and umbrella sleeve</li>
+      <li>Pentair automation, app-controlled</li>
+      <li>LED color lighting package</li>
+      <li>Quartz interior finish</li>
+      <li>Waterline tile and natural stone coping</li>
+      <li>Surrounding deck and hardscape</li>
+      <li>Equipment set, plumbing, and electrical</li>
+      <li>Permits, inspections, and engineering</li>
+      <li>Full startup and water chemistry balance</li>
+    </ul>
+  </div>
+
+  <div class="pp-card">
+    <div class="pp-eyebrow">Specifications</div>
+    <h2>The particulars</h2>
+    <div class="pp-specs">
+      <div class="pp-spec"><div class="k">Pool Type</div><div class="v">Gunite</div></div>
+      <div class="pp-spec"><div class="k">Finish</div><div class="v">Quartz</div></div>
+      <div class="pp-spec"><div class="k">Feature</div><div class="v">Vanishing Edge</div></div>
+      <div class="pp-spec"><div class="k">Spa</div><div class="v">Integrated</div></div>
+      <div class="pp-spec"><div class="k">Automation</div><div class="v">Pentair</div></div>
+      <div class="pp-spec"><div class="k">Build Window</div><div class="v">~16 wks</div></div>
+    </div>
+  </div>
+
+  <div class="pp-card pp-invest">
+    <div class="pp-eyebrow" style="color:var(--gold-light,#E3D3B2);">Investment</div>
+    <h2>Your investment and draw schedule</h2>
+    <div class="pp-total"><span class="l">Total Contract</span><span class="v" id="pp-total">$312,000</span></div>
+    <div id="pp-draws" style="margin-top:8px;">
+      <div class="pp-draw"><span class="dn">Draw 1 &middot; Deposit (15%)</span><span class="da">$46,800</span></div>
+      <div class="pp-draw"><span class="dn">Draw 2 &middot; Excavation (20%)</span><span class="da">$62,400</span></div>
+      <div class="pp-draw"><span class="dn">Draw 3 &middot; Shotcrete shell (25%)</span><span class="da">$78,000</span></div>
+      <div class="pp-draw"><span class="dn">Draw 4 &middot; Tile, coping &amp; equipment (20%)</span><span class="da">$62,400</span></div>
+      <div class="pp-draw"><span class="dn">Draw 5 &middot; Final, on completion (20%)</span><span class="da">$62,400</span></div>
+    </div>
+  </div>
+
+  <div class="pp-card pp-sign">
+    <div class="pp-eyebrow">Acceptance</div>
+    <h2>Accept and sign</h2>
+    <p style="margin-bottom:8px;">Sign below to accept this proposal. The moment you sign, your private Owner's Suite opens so you can track every stage of your build.</p>
+
+    <div class="pp-two">
+      <div>
+        <label>Full legal name <span style="color:var(--gold-dark,#8B6529);">*</span></label>
+        <input type="text" id="pp-name" autocomplete="name" placeholder="Your full name">
+      </div>
+      <div>
+        <label>Email <span style="color:var(--gold-dark,#8B6529);">*</span></label>
+        <input type="email" id="pp-email" autocomplete="email" placeholder="you@email.com">
+      </div>
+    </div>
+
+    <label>Signature <span style="color:var(--gold-dark,#8B6529);">*</span></label>
+    <div class="pp-padwrap">
+      <canvas id="pp-pad"></canvas>
+      <div class="pp-padline"></div>
+      <div class="pp-padhint">Sign here</div>
+    </div>
+    <button type="button" class="pp-clear" id="pp-clear">Clear signature</button>
+
+    <div class="pp-agree">
+      <input type="checkbox" id="pp-ck">
+      <label for="pp-ck">I accept this proposal and authorize Cirilo Design + Build to proceed. I understand the contract total and draw schedule shown above.</label>
+    </div>
+
+    <button type="button" class="btn btn-primary pp-submit" id="pp-go">Accept &amp; Sign</button>
+    <div class="pp-status" id="pp-status"></div>
+    <p class="pp-fine">An executed copy will be saved to your Owner's Suite. Questions before you sign? Email <a href="mailto:Tiffany@CiriloDB.com">Tiffany@CiriloDB.com</a> or call (704) 000-0000.</p>
+  </div>
+
+</main>
+
+<!-- success / onboarding handoff -->
+<div id="pp-done">
+  <div class="box">
+    <div class="crest">&#10003;</div>
+    <div class="ey">Welcome to Cirilo</div>
+    <h2 id="pp-done-h">It's official. Let's build.</h2>
+    <p id="pp-done-p">Your proposal is signed and your project is open. Use the access code below to enter your private Owner's Suite any time.</p>
+    <div class="pp-codecard">
+      <div class="k">Your Owner's Suite access</div>
+      <div class="email" id="pp-done-email">you@email.com</div>
+      <div class="k" style="margin-top:14px;">Access code</div>
+      <div class="code" id="pp-done-code">ABC123</div>
+    </div>
+    <a class="btn btn-primary" id="pp-enter" href="/portal/">Enter Your Owner's Suite</a>
+    <div class="pp-preview-note" id="pp-preview-note" style="display:none;">Preview mode: this code activates once the database is connected.</div>
+  </div>
+</div>
+
+<script>
+(function(){
+  // session + tracking
+  try{var k='cdb_jsid';var s=sessionStorage.getItem(k)||('s_'+Math.random().toString(36).slice(2)+Date.now().toString(36));sessionStorage.setItem(k,s);window.__cdb_sid=s;
+    fetch('/api/track',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({t:'view',page:'proposal',session_id:s,url:location.pathname}),keepalive:true}).catch(function(){});}catch(e){}
+
+  // Demo proposal context (matches the portal showcase). A real build reads
+  // ?c=<slug> and loads the client's proposal; demo defaults shown here.
+  var PROPOSAL = {
+    id:'CDB-2041', title:'Myers Park Vanishing Edge', client:'the Harrington Residence',
+    project_type:'Vanishing-Edge Gunite', pool_type:'Vanishing-Edge Gunite',
+    neighborhood:'Myers Park, Charlotte', contract_value:312000, project_name:'Myers Park Vanishing Edge'
+  };
+
+  // ----- signature pad -----
+  var pad=document.getElementById('pp-pad'), ctx=pad.getContext('2d'), drawing=false, hasSig=false, last=null;
+  function sizePad(){ var r=pad.getBoundingClientRect(); var dpr=window.devicePixelRatio||1; pad.width=r.width*dpr; pad.height=r.height*dpr; ctx.scale(dpr,dpr); ctx.lineWidth=2.2; ctx.lineCap='round'; ctx.lineJoin='round'; ctx.strokeStyle='#15151A'; }
+  sizePad();
+  var rt; window.addEventListener('resize',function(){ clearTimeout(rt); rt=setTimeout(function(){ var d=hasSig; sizePad(); },200); });
+  function pos(e){ var r=pad.getBoundingClientRect(); var t=e.touches?e.touches[0]:e; return { x:t.clientX-r.left, y:t.clientY-r.top }; }
+  function start(e){ e.preventDefault(); drawing=true; last=pos(e); }
+  function move(e){ if(!drawing)return; e.preventDefault(); var p=pos(e); ctx.beginPath(); ctx.moveTo(last.x,last.y); ctx.lineTo(p.x,p.y); ctx.stroke(); last=p; hasSig=true; document.querySelector('.pp-padhint').style.display='none'; }
+  function end(){ drawing=false; }
+  pad.addEventListener('mousedown',start); pad.addEventListener('mousemove',move); window.addEventListener('mouseup',end);
+  pad.addEventListener('touchstart',start,{passive:false}); pad.addEventListener('touchmove',move,{passive:false}); pad.addEventListener('touchend',end);
+  document.getElementById('pp-clear').addEventListener('click',function(){ ctx.clearRect(0,0,pad.width,pad.height); hasSig=false; document.querySelector('.pp-padhint').style.display='block'; });
+
+  // ----- submit -----
+  document.getElementById('pp-go').addEventListener('click', async function(){
+    var name=(document.getElementById('pp-name').value||'').trim();
+    var email=(document.getElementById('pp-email').value||'').trim();
+    var ck=document.getElementById('pp-ck').checked;
+    var status=document.getElementById('pp-status');
+    status.className='pp-status';
+    if(!name||!email){ status.className='pp-status error'; status.textContent='Please enter your full name and email.'; return; }
+    if(!hasSig){ status.className='pp-status error'; status.textContent='Please add your signature above.'; return; }
+    if(!ck){ status.className='pp-status error'; status.textContent='Please check the box to authorize.'; return; }
+
+    var btn=this; btn.disabled=true; btn.textContent='Signing...';
+    status.className='pp-status loading'; status.textContent='Recording your signature and opening your suite...';
+    var payload={
+      name:name, email:email, neighborhood:PROPOSAL.neighborhood,
+      project_name:PROPOSAL.project_name, project_type:PROPOSAL.project_type, pool_type:PROPOSAL.pool_type,
+      contract_value:PROPOSAL.contract_value, proposal_id:PROPOSAL.id, proposal_slug:PROPOSAL.slug||null,
+      signature:pad.toDataURL('image/png'), session_id:window.__cdb_sid||null, signed_at:new Date().toISOString()
+    };
+    try{
+      var res=await fetch('/api/portal-onboard',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(payload)});
+      var j=await res.json();
+      if(!j||!j.ok) throw new Error('failed');
+      try{fetch('/api/track',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({t:'click',page:'proposal',session_id:window.__cdb_sid,detail:{action:'proposal_signed'}})});}catch(_){}
+      document.getElementById('pp-done-email').textContent=email;
+      document.getElementById('pp-done-code').textContent=j.code||'------';
+      if(j.demo){ document.getElementById('pp-preview-note').style.display='block'; }
+      document.getElementById('pp-done').style.display='flex';
+      window.scrollTo(0,0);
+    }catch(err){
+      status.className='pp-status error';
+      status.innerHTML='Something went wrong. Please email <a href="mailto:Tiffany@CiriloDB.com">Tiffany@CiriloDB.com</a> or call (704) 000-0000.';
+      btn.disabled=false; btn.textContent='Accept & Sign';
+    }
+  });
+
+  // render from PROPOSAL (header always; vision/inclusions/draws if provided)
+  function renderProposal(){
+    document.getElementById('pp-id').textContent=PROPOSAL.id||'CDB';
+    document.getElementById('pp-title').textContent=PROPOSAL.title;
+    document.getElementById('pp-client').textContent=PROPOSAL.client;
+    document.getElementById('pp-type').textContent=PROPOSAL.project_type;
+    document.getElementById('pp-loc').textContent=PROPOSAL.neighborhood;
+    document.getElementById('pp-total').textContent='$'+(PROPOSAL.contract_value||0).toLocaleString('en-US');
+    if(PROPOSAL.vision) document.getElementById('pp-vision').textContent=PROPOSAL.vision;
+    if(PROPOSAL.inclusions && PROPOSAL.inclusions.length){ document.getElementById('pp-incl').innerHTML=PROPOSAL.inclusions.map(function(x){return '<li>'+x+'</li>';}).join(''); }
+    if(PROPOSAL.draws && PROPOSAL.draws.length){ document.getElementById('pp-draws').innerHTML=PROPOSAL.draws.map(function(dr,i){return '<div class="pp-draw"><span class="dn">Draw '+(i+1)+' &middot; '+dr.label+'</span><span class="da">$'+(dr.amount||0).toLocaleString('en-US')+'</span></div>';}).join(''); }
+  }
+  renderProposal();
+
+  // per-client hydrate from ?c=slug
+  (function(){
+    var slug=new URLSearchParams(location.search).get('c');
+    if(!slug) return;
+    PROPOSAL.slug=slug; PROPOSAL.id='CDB-'+slug.slice(-4).toUpperCase();
+    fetch('/api/proposal-data?c='+encodeURIComponent(slug)).then(function(r){return r.json();}).then(function(j){
+      if(j&&j.ok&&j.proposal){
+        var p=j.proposal;
+        PROPOSAL.title=p.title||PROPOSAL.title; PROPOSAL.project_name=p.title||PROPOSAL.project_name;
+        PROPOSAL.client=p.client_name||PROPOSAL.client; PROPOSAL.neighborhood=p.neighborhood||PROPOSAL.neighborhood;
+        PROPOSAL.project_type=p.project_type||PROPOSAL.project_type; PROPOSAL.pool_type=p.pool_type||PROPOSAL.pool_type;
+        if(p.contract_value) PROPOSAL.contract_value=p.contract_value;
+        PROPOSAL.vision=p.vision||PROPOSAL.vision; PROPOSAL.inclusions=p.inclusions||PROPOSAL.inclusions; PROPOSAL.draws=p.draws||PROPOSAL.draws;
+        if(p.client_email && !document.getElementById('pp-email').value) document.getElementById('pp-email').value=p.client_email;
+        renderProposal();
+      }
+    }).catch(function(){});
+  })();
+})();
+</script>
+
+</body>
+</html>

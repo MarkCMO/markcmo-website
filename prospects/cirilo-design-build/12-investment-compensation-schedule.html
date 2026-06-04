@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Cirilo Design + Build | Investment, Media Budget & Compensation Schedule</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=Inter:wght@300;400;500;600;700&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --gold-dark:#AB7E37; --gold-mid:#D6BB89; --gold-light:#E3D3B2; --gold-pale:#F4ECDC;
+    --cream-bg:#FAF7F2; --white:#FFFFFF; --ink:#1A1A1A; --body:#2E2E34; --muted:#8F8F8F;
+    --border:#E2E2E2; --shadow:0 8px 32px rgba(26,26,26,0.06); --shadow-lg:0 16px 48px rgba(26,26,26,0.09);
+  }
+  * { box-sizing:border-box; margin:0; padding:0; }
+  body { font-family:'Inter',sans-serif; background:var(--cream-bg); color:var(--body); line-height:1.65; font-size:16px; }
+  .page { max-width:920px; margin:40px auto; background:var(--white); box-shadow:var(--shadow); padding:80px 72px; }
+  h1,h2,h3,h4 { font-family:'Cormorant Garamond',serif; color:var(--ink); font-weight:500; line-height:1.15; }
+  h1 { font-size:3.4rem; margin-bottom:0.3em; font-weight:600; }
+  h2 { font-size:2.1rem; margin-top:2em; margin-bottom:0.6em; padding-bottom:0.4em; border-bottom:1px solid var(--gold-light); }
+  h3 { font-size:1.4rem; margin-top:1.6em; margin-bottom:0.5em; color:var(--gold-dark); }
+  h4 { font-size:1.05rem; margin-top:1.2em; margin-bottom:0.4em; font-family:'Inter',sans-serif; font-weight:600; color:var(--ink); text-transform:uppercase; letter-spacing:0.08em; }
+  p { margin-bottom:1em; }
+  strong { color:var(--ink); font-weight:600; }
+  ul { margin:0 0 1em 1.2em; } li { margin-bottom:0.4em; }
+  .brand-mark { text-align:center; margin-bottom:40px; padding-bottom:28px; border-bottom:1px solid var(--border); }
+  .brand-mark .wordmark { font-family:'Cormorant Garamond',serif; font-size:3rem; font-weight:600; letter-spacing:0.18em;
+    background:linear-gradient(135deg,#E5C2B0 0%,#D6BB89 35%,#F4D78C 65%,#AB7E37 100%); -webkit-background-clip:text; background-clip:text; -webkit-text-fill-color:transparent; margin-bottom:8px; }
+  .brand-mark .sub { font-family:'DM Mono',monospace; font-size:0.72rem; letter-spacing:0.4em; color:var(--gold-dark); text-transform:uppercase; }
+  .doc-meta { font-family:'DM Mono',monospace; font-size:0.72rem; letter-spacing:0.18em; text-transform:uppercase; color:var(--muted); text-align:center; margin-bottom:48px; }
+  .hero-title { text-align:center; margin-bottom:48px; }
+  .hero-title .eyebrow { font-family:'DM Mono',monospace; font-size:0.78rem; letter-spacing:0.32em; color:var(--gold-dark); text-transform:uppercase; margin-bottom:18px; }
+  .hero-title .lede { font-family:'Cormorant Garamond',serif; font-size:1.35rem; font-style:italic; color:var(--body); max-width:640px; margin:0.4em auto 0; }
+  table { width:100%; border-collapse:collapse; margin:20px 0; font-size:0.92rem; }
+  th { background:var(--ink); color:var(--white); padding:13px 14px; text-align:left; font-family:'DM Mono',monospace; font-size:0.68rem; letter-spacing:0.1em; text-transform:uppercase; font-weight:500; }
+  td { padding:13px 14px; border-bottom:1px solid var(--border); vertical-align:top; }
+  tr:nth-child(even) td { background:var(--cream-bg); }
+  td.num, th.num { text-align:right; font-variant-numeric:tabular-nums; }
+  .sel-row.on td { background:var(--gold-pale) !important; }
+  .callout { background:var(--gold-pale); border-left:3px solid var(--gold-dark); padding:22px 28px; margin:24px 0; border-radius:0 4px 4px 0; }
+  .callout .label { font-family:'DM Mono',monospace; font-size:0.68rem; letter-spacing:0.2em; text-transform:uppercase; color:var(--gold-dark); margin-bottom:8px; }
+  .callout p:last-child { margin-bottom:0; }
+  .note { font-size:0.82rem; color:var(--muted); }
+  .chk { display:inline-block; width:16px; height:16px; border:1.5px solid var(--gold-dark); border-radius:3px; vertical-align:middle; }
+  .opt { display:flex; gap:10px; align-items:flex-start; padding:12px 0; border-bottom:1px solid var(--border); }
+  .opt:last-child { border-bottom:none; }
+  .sig-grid { display:grid; grid-template-columns:1fr 1fr; gap:36px; margin-top:28px; }
+  .sig { border-top:1px solid var(--ink); padding-top:8px; }
+  .sig .line { height:42px; border-bottom:1px solid var(--border); margin-bottom:8px; }
+  .sig .who { font-family:'DM Mono',monospace; font-size:0.66rem; letter-spacing:0.16em; text-transform:uppercase; color:var(--muted); }
+  .sig .nm { font-family:'Cormorant Garamond',serif; font-size:1.25rem; color:var(--ink); }
+  .fine { font-size:0.8rem; color:var(--muted); margin-top:8px; }
+  .doc-footer { margin-top:56px; padding-top:24px; border-top:1px solid var(--border); text-align:center; font-family:'DM Mono',monospace; font-size:0.68rem; letter-spacing:0.14em; text-transform:uppercase; color:var(--muted); }
+  @media print { body { background:#fff; } .page { box-shadow:none; margin:0; padding:32px 28px; max-width:none; } }
+  @media (max-width:640px){ .page{padding:40px 22px;} .sig-grid{grid-template-columns:1fr;} h1{font-size:2.4rem;} }
+</style>
+</head>
+<body>
+<div class="page">
+
+  <div class="brand-mark">
+    <div class="wordmark">CIRILO</div>
+    <div class="sub">Design + Build</div>
+  </div>
+  <div class="doc-meta">Schedule A to the Engagement Agreement &middot; Private &amp; Confidential</div>
+
+  <div class="hero-title">
+    <div class="eyebrow">Investment, Media Budget &amp; Compensation</div>
+    <h1>The Commitment</h1>
+    <p class="lede">One page that locks the tier, what Cirilo invests in advertising, and how WETYR is compensated.</p>
+  </div>
+
+  <p>This Schedule is executed alongside the Marketing &amp; Growth Engagement Proposal and Agreement between <strong>Cirilo Design + Build</strong> ("Client") and <strong>WETYR Corporation</strong>, d/b/a MarkCMO ("WETYR"). It records (1) the engagement tier the Client selects, (2) the Client's committed monthly advertising (media) budget, and (3) WETYR's compensation. The advertising budget and WETYR's compensation are separate commitments and are described separately below.</p>
+
+  <h2>1. Select the Engagement Tier</h2>
+  <p>Mark one. Each tier includes strategy, execution oversight, monthly reporting, and quarterly business reviews, as detailed in the Proposal. The recommendation is Tier 2 (Growth).</p>
+  <table>
+    <thead>
+      <tr><th style="width:34px;"></th><th>Tier</th><th class="num">Engagement Fee<br><span style="font-weight:400;text-transform:none;letter-spacing:0;">one-time, WETYR</span></th><th class="num">Systems Build<br><span style="font-weight:400;text-transform:none;letter-spacing:0;">one-time, WETYR</span></th><th class="num">Monthly Retainer<br><span style="font-weight:400;text-transform:none;letter-spacing:0;">WETYR</span></th><th class="num">Monthly Media<br><span style="font-weight:400;text-transform:none;letter-spacing:0;">Client ad spend</span></th><th class="num">Year 1 Total<sup>*</sup></th></tr>
+    </thead>
+    <tbody>
+      <tr class="sel-row"><td><span class="chk"></span></td><td><strong>Tier 1 &middot; Foundation</strong></td><td class="num">$25,000</td><td class="num">$38,500</td><td class="num">$8,500</td><td class="num">$7,500</td><td class="num">$255,500</td></tr>
+      <tr class="sel-row on"><td><span class="chk"></span></td><td><strong>Tier 2 &middot; Growth</strong> (recommended)</td><td class="num">$25,000</td><td class="num">$72,500</td><td class="num">$14,500</td><td class="num">$18,000</td><td class="num">$487,500</td></tr>
+      <tr class="sel-row"><td><span class="chk"></span></td><td><strong>Tier 3 &middot; Dominate</strong></td><td class="num">$25,000</td><td class="num">$118,000</td><td class="num">$22,000</td><td class="num">$36,000</td><td class="num">$839,000</td></tr>
+    </tbody>
+  </table>
+  <p class="note"><sup>*</sup> Year 1 Total = Engagement Fee + Systems Build + (Monthly Retainer x 12) + (Monthly Media x 12). It is the sum of the line items in this Schedule and is the governing figure for this engagement.</p>
+
+  <h2>2. Advertising (Media) Budget Commitment <span style="font-size:1rem;color:var(--muted);">&middot; Client's spend</span></h2>
+  <p>The media budget is <strong>Cirilo's advertising spend</strong>, paid to advertising platforms (Google, Meta, Houzz, and similar) to place ads. It is <strong>not</strong> WETYR compensation. WETYR plans, builds, and manages the spend at no percentage markup; management is included in the monthly retainer.</p>
+  <p><strong>Committed monthly media budget (selected tier):</strong> <span style="display:inline-block;min-width:160px;border-bottom:1px solid var(--ink);">&nbsp;</span> per month.</p>
+  <h4>Ramp</h4>
+  <p>To avoid spending before the trust scaffolding converts, media may ramp: approximately 50 percent of the committed budget in the first 30 to 60 days while reviews, the Google Business Profile, service-area pages, and tracking go live, then the full committed budget from channel activation (about Week 8).</p>
+  <h4>How the media budget is funded</h4>
+  <div style="border:1px solid var(--border);border-radius:4px;padding:8px 22px;margin:10px 0 0;">
+    <div class="opt"><span class="chk"></span><div><strong>Option A (recommended): Client-billed platform accounts.</strong> Ads run on Cirilo's own Google Ads, Meta, and Houzz accounts with a Cirilo payment method on file. The platforms charge Cirilo directly. No advertising funds pass through WETYR. WETYR receives manager access to build and optimize.</div></div>
+    <div class="opt"><span class="chk"></span><div><strong>Option B: WETYR-managed budget.</strong> Cirilo pre-funds the monthly media budget to WETYR by ACH or wire on the 1st, per the invoice instructions. WETYR pays the platforms and reconciles actual spend in the monthly report. Any underspend carries forward or is refunded at engagement end.</div></div>
+  </div>
+  <p class="note" style="margin-top:10px;">The media budget is committed for the initial 90-day foundation period, then adjustable up or down by Cirilo with 30 days written notice.</p>
+
+  <h2>3. WETYR Compensation <span style="font-size:1rem;color:var(--muted);">&middot; what Cirilo pays WETYR</span></h2>
+  <table>
+    <tbody>
+      <tr><td style="width:42%;"><strong>1. Engagement fee to get started</strong><div class="note">One-time fee to engage WETYR and reserve the fractional CMO seat. Same for every tier. Earned on signing, non-refundable.</div></td><td><strong>$25,000</strong> (all tiers)<div class="note" style="margin-top:6px;">Paid first, in full at signing.</div></td></tr>
+      <tr><td><strong>2. Monthly retainer</strong><div class="note">Strategy, execution oversight, optimization, reporting dashboard, quarterly business reviews. Includes the managed software/tools listed in the Proposal.</div></td><td>Selected tier amount: <span style="display:inline-block;min-width:120px;border-bottom:1px solid var(--ink);">&nbsp;</span> per month<div class="note" style="margin-top:6px;">Begins at signing (Month 1), then invoiced on the 1st in advance. Initial term 12 months.</div></td></tr>
+      <tr><td><strong>3. Systems build (paid gradually)</strong><div class="note">Foundation, content and pages, portfolio and video, lead engine, channel activation, partnerships setup, per the Proposal.</div></td><td>Selected tier amount: <span style="display:inline-block;min-width:120px;border-bottom:1px solid var(--ink);">&nbsp;</span> total<div class="note" style="margin-top:6px;">Paid by the Client in 6 equal monthly installments beginning Month 2, invoiced alongside the retainer. Tier 2 example: $72,500 over 6 months = $12,083.33 per month.</div></td></tr>
+      <tr><td><strong>Due at signing today</strong></td><td>$25,000 engagement fee + Month 1 retainer.<div class="note" style="margin-top:6px;">Tier 2 example: $25,000 + $14,500 = <strong>$39,500</strong>. The systems build is not due at signing; it is billed in monthly increments starting Month 2.</div></td></tr>
+    </tbody>
+  </table>
+  <p class="note" style="margin-top:6px;"><strong>Payment sequence.</strong> The engagement fee and the first monthly retainer are paid at signing. The systems build is then paid gradually in equal monthly increments, so the largest one-time cost is spread out rather than due up front. Installment count is adjustable by agreement.</p>
+
+  <h2>4. Terms</h2>
+  <ul>
+    <li><strong>Term and renewal.</strong> 12-month initial term from the signing date. Thereafter month-to-month, cancellable by either party with 30 days written notice.</li>
+    <li><strong>Billing.</strong> WETYR invoices the engagement fee at signing and the monthly retainer and systems-build installments on a monthly basis. Each invoice includes ACH and wire remittance instructions, and is due on receipt. The media budget is funded per the option selected in Section 2.</li>
+    <li><strong>What is included.</strong> Everything in the selected tier of the Proposal. Third-party subscriptions named in the Proposal are included in the retainer unless noted.</li>
+    <li><strong>What is separate.</strong> Advertising media spend (Section 2). Optional add-ons, paid sponsorships, print, video production beyond the included scope, and any tier upgrade are quoted as change orders.</li>
+    <li><strong>Late payment.</strong> Balances unpaid 10 days past due accrue 1.5 percent per month.</li>
+    <li><strong>Pause and underspend.</strong> Media can be paused with 5 business days notice; retainer continues during an active engagement. Unspent Option B media carries forward.</li>
+    <li><strong>Confidentiality.</strong> Both parties keep the other's non-public information confidential, per the Engagement Agreement.</li>
+  </ul>
+
+  <div class="callout">
+    <div class="label">In plain terms</div>
+    <p>The <strong>media budget</strong> is your money buying ads. <strong>WETYR's compensation</strong> is the build fee plus the monthly retainer. They are tracked separately so you always know what you are paying for ads versus what you are paying us.</p>
+  </div>
+
+  <h2>5. Signatures</h2>
+  <p>By signing, the Client selects the tier marked in Section 1, commits to the corresponding monthly media budget, and authorizes WETYR's compensation as set out above. This Schedule is incorporated into and governed by the Engagement Agreement.</p>
+
+  <div class="sig-grid">
+    <div>
+      <div class="who">Client &middot; Cirilo Design + Build</div>
+      <div class="line"></div>
+      <div class="sig"><span class="who">Signature</span></div>
+      <p style="margin-top:14px;"><span class="nm">Tiffany Cirilo</span><br><span class="note">Owner</span></p>
+      <div class="line" style="margin-top:22px;"></div>
+      <div class="sig"><span class="who">Signature</span></div>
+      <p style="margin-top:14px;"><span class="nm">Ramon Cirilo</span><br><span class="note">Owner</span></p>
+      <p class="note" style="margin-top:14px;">Date: <span style="display:inline-block;min-width:150px;border-bottom:1px solid var(--border);">&nbsp;</span></p>
+    </div>
+    <div>
+      <div class="who">WETYR Corporation &middot; MarkCMO</div>
+      <div class="line"></div>
+      <div class="sig"><span class="who">Signature</span></div>
+      <p style="margin-top:14px;"><span class="nm">Mark Gabrielli</span><br><span class="note">Fractional CMO, WETYR Corporation</span></p>
+      <p class="note" style="margin-top:14px;">Date: <span style="display:inline-block;min-width:150px;border-bottom:1px solid var(--border);">&nbsp;</span></p>
+      <p class="fine" style="margin-top:28px;">mark@markcmo.com &middot; markcmo.com</p>
+    </div>
+  </div>
+
+  <div class="doc-footer">Cirilo Design + Build &times; WETYR Corporation &middot; Schedule A &middot; Prepared 2026-06-02</div>
+
+</div>
+</body>
+</html>

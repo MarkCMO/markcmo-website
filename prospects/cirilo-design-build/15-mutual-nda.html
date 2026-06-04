@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Cirilo Design + Build | Mutual Non-Disclosure Agreement</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=Inter:wght@300;400;500;600;700&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root { --gold-dark:#AB7E37; --gold-pale:#F4ECDC; --cream-bg:#FAF7F2; --white:#FFFFFF; --ink:#1A1A1A; --body:#2E2E34; --muted:#8F8F8F; --border:#E2E2E2; --shadow:0 8px 32px rgba(26,26,26,0.06); }
+  * { box-sizing:border-box; margin:0; padding:0; }
+  body { font-family:'Inter',sans-serif; background:var(--cream-bg); color:var(--body); line-height:1.62; font-size:15.5px; }
+  .page { max-width:920px; margin:40px auto; background:var(--white); box-shadow:var(--shadow); padding:80px 72px; }
+  h1,h2 { font-family:'Cormorant Garamond',serif; color:var(--ink); font-weight:500; line-height:1.15; }
+  h1 { font-size:3.2rem; margin-bottom:0.3em; font-weight:600; }
+  p { margin-bottom:0.9em; } strong { color:var(--ink); font-weight:600; }
+  ol.clauses { counter-reset:c; list-style:none; padding:0; }
+  ol.clauses > li { counter-increment:c; margin:1.3em 0; padding-left:2.4em; position:relative; }
+  ol.clauses > li::before { content:counter(c); position:absolute; left:0; top:0; font-family:'DM Mono',monospace; font-size:0.8rem; color:var(--white); background:var(--gold-dark); width:1.7em; height:1.7em; border-radius:50%; display:flex; align-items:center; justify-content:center; }
+  ol.clauses > li > .h { font-family:'Inter',sans-serif; font-weight:700; color:var(--ink); text-transform:uppercase; letter-spacing:0.06em; font-size:0.82rem; display:block; margin-bottom:0.3em; }
+  ul.sub { margin:0.4em 0 0 1.2em; } ul.sub li { margin-bottom:0.3em; }
+  .brand-mark { text-align:center; margin-bottom:36px; padding-bottom:26px; border-bottom:1px solid var(--border); }
+  .brand-mark .wordmark { font-family:'Cormorant Garamond',serif; font-size:2.8rem; font-weight:600; letter-spacing:0.18em; background:linear-gradient(135deg,#E5C2B0 0%,#D6BB89 35%,#F4D78C 65%,#AB7E37 100%); -webkit-background-clip:text; background-clip:text; -webkit-text-fill-color:transparent; margin-bottom:8px; }
+  .brand-mark .sub { font-family:'DM Mono',monospace; font-size:0.7rem; letter-spacing:0.4em; color:var(--gold-dark); text-transform:uppercase; }
+  .doc-meta { font-family:'DM Mono',monospace; font-size:0.7rem; letter-spacing:0.18em; text-transform:uppercase; color:var(--muted); text-align:center; margin-bottom:40px; }
+  .hero-title { text-align:center; margin-bottom:36px; }
+  .hero-title .eyebrow { font-family:'DM Mono',monospace; font-size:0.76rem; letter-spacing:0.3em; color:var(--gold-dark); text-transform:uppercase; margin-bottom:16px; }
+  .disclaimer { background:#FBF4F1; border:1px solid #E7C9BC; color:#7A4A36; padding:16px 22px; border-radius:4px; margin:22px 0; font-size:0.86rem; }
+  .parties { background:var(--cream-bg); border:1px solid var(--border); border-radius:4px; padding:20px 26px; margin:18px 0; font-size:0.95rem; }
+  .sig-grid { display:grid; grid-template-columns:1fr 1fr; gap:36px; margin-top:24px; }
+  .sig .line { height:42px; border-bottom:1px solid var(--ink); margin-bottom:8px; }
+  .who { font-family:'DM Mono',monospace; font-size:0.66rem; letter-spacing:0.16em; text-transform:uppercase; color:var(--muted); }
+  .nm { font-family:'Cormorant Garamond',serif; font-size:1.2rem; color:var(--ink); }
+  .note { font-size:0.82rem; color:var(--muted); } .fill { display:inline-block; min-width:150px; border-bottom:1px solid var(--ink); }
+  .doc-footer { margin-top:48px; padding-top:22px; border-top:1px solid var(--border); text-align:center; font-family:'DM Mono',monospace; font-size:0.66rem; letter-spacing:0.14em; text-transform:uppercase; color:var(--muted); }
+  @media print { body{background:#fff;} .page{box-shadow:none;margin:0;padding:30px 26px;max-width:none;} }
+  @media (max-width:640px){ .page{padding:40px 22px;} .sig-grid{grid-template-columns:1fr;} h1{font-size:2.2rem;} }
+</style>
+</head>
+<body>
+<div class="page">
+
+  <div class="brand-mark"><div class="wordmark">CIRILO</div><div class="sub">Design + Build</div></div>
+  <div class="doc-meta">Mutual Non-Disclosure Agreement &middot; Private &amp; Confidential</div>
+
+  <div class="hero-title">
+    <div class="eyebrow">Confidentiality</div>
+    <h1>Mutual NDA</h1>
+  </div>
+
+  <div class="disclaimer"><strong>Please note.</strong> This is a working template for the parties' discussion, not legal advice. Have it reviewed by your attorney before signing.</div>
+
+  <p>This Mutual Non-Disclosure Agreement (the "NDA") is entered into as of <span class="fill">&nbsp;</span> between:</p>
+  <div class="parties">
+    <p style="margin-bottom:0.5em;"><strong>WETYR Corporation</strong>, doing business as MarkCMO, and</p>
+    <p style="margin-bottom:0;"><strong>Cirilo Design + Build</strong>.</p>
+    <p class="note" style="margin-top:10px;margin-bottom:0;">Each may act as the "Disclosing Party" or the "Receiving Party."</p>
+  </div>
+
+  <ol class="clauses">
+    <li><span class="h">Purpose</span> The Parties wish to share confidential information in connection with a marketing and growth engagement (the "Purpose"). This NDA protects that information.</li>
+
+    <li><span class="h">Confidential Information</span> "Confidential Information" means non-public information disclosed by one Party to the other, in any form, that is marked confidential or that a reasonable person would understand to be confidential. It includes, without limitation: business and financial information, pricing and margins, customer and lead lists, vendor terms, merchant and banking details, account credentials and system access, marketing strategy, creative, analytics, and the terms of the engagement.</li>
+
+    <li><span class="h">Exclusions</span> Confidential Information does not include information that:
+      <ul class="sub">
+        <li>is or becomes public through no fault of the Receiving Party;</li>
+        <li>was rightfully known before disclosure;</li>
+        <li>is rightfully received from a third party without restriction; or</li>
+        <li>is independently developed without use of the Confidential Information.</li>
+      </ul>
+    </li>
+
+    <li><span class="h">Obligations</span> The Receiving Party will:
+      <ul class="sub">
+        <li>use the Confidential Information only for the Purpose;</li>
+        <li>protect it with at least reasonable care, and no less care than it uses for its own confidential information;</li>
+        <li>limit access to personnel and contractors who need it for the Purpose and are bound by similar obligations; and</li>
+        <li>not disclose it to any other third party without the Disclosing Party's written consent.</li>
+      </ul>
+    </li>
+
+    <li><span class="h">Credentials and System Access</span> Account credentials and system access shared for the engagement are Confidential Information, will be stored securely (for example in a shared password manager), will be used only as authorized in the Account Access and Marketing Authorization, and will be returned or revoked at the Disclosing Party's request or at the end of the engagement.</li>
+
+    <li><span class="h">Compelled Disclosure</span> If the Receiving Party is legally compelled to disclose Confidential Information, it will give prompt notice (where lawful) so the Disclosing Party may seek protection, and will disclose only what is legally required.</li>
+
+    <li><span class="h">No License</span> No license or ownership in any Confidential Information or intellectual property is granted by this NDA. All Confidential Information remains the property of the Disclosing Party.</li>
+
+    <li><span class="h">Term</span> This NDA applies to information disclosed during the engagement and for two (2) years after it ends. Obligations for trade secrets continue for as long as the information remains a trade secret under applicable law.</li>
+
+    <li><span class="h">Return or Destruction</span> On request or at the end of the engagement, the Receiving Party will return or destroy the Confidential Information in its possession, except for routine archival backups and copies required by law, which remain subject to this NDA.</li>
+
+    <li><span class="h">Remedies</span> The Parties agree that unauthorized disclosure may cause irreparable harm for which money damages are inadequate, and that the Disclosing Party may seek injunctive relief in addition to other remedies.</li>
+
+    <li><span class="h">Governing Law</span> This NDA is governed by the laws of the State of North Carolina, with venue in Mecklenburg County, North Carolina.</li>
+
+    <li><span class="h">General</span> This NDA is the entire agreement on its subject, may be signed in counterparts and by electronic signature, and may be amended only in a writing signed by both Parties. If any provision is unenforceable, the rest remains in effect.</li>
+  </ol>
+
+  <h2>Signatures</h2>
+  <div class="sig-grid">
+    <div>
+      <div class="who">Cirilo Design + Build</div>
+      <div class="line"></div>
+      <p><span class="nm">Tiffany / Ramon Cirilo</span><br><span class="note">Owner &middot; Date: <span class="fill" style="min-width:120px;">&nbsp;</span></span></p>
+    </div>
+    <div>
+      <div class="who">WETYR Corporation &middot; MarkCMO</div>
+      <div class="line"></div>
+      <p><span class="nm">Mark Gabrielli</span><br><span class="note">Fractional CMO &middot; Date: <span class="fill" style="min-width:110px;">&nbsp;</span></span></p>
+    </div>
+  </div>
+
+  <div class="doc-footer">Cirilo Design + Build &times; WETYR Corporation &middot; Mutual NDA &middot; Prepared 2026-06-02</div>
+</div>
+</body>
+</html>

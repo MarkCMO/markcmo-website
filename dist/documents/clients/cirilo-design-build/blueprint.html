@@ -1,0 +1,526 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Cirilo Design + Build | Systems & Operations Blueprint</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex, nofollow, noarchive, nosnippet, noimageindex">
+<meta http-equiv="Cache-Control" content="no-store, no-cache, must-revalidate, private">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=Inter:wght@300;400;500;600;700&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --gold-dark: #AB7E37;
+    --gold-mid: #D6BB89;
+    --gold-light: #E3D3B2;
+    --gold-pale: #F4ECDC;
+    --cream-bg: #FAF7F2;
+    --white: #FFFFFF;
+    --ink: #1A1A1A;
+    --body: #2E2E34;
+    --muted: #8F8F8F;
+    --border: #E2E2E2;
+    --red-flag: #B33A3A;
+    --green-flag: #5A8A4A;
+    --blue: #2563EB;
+    --shadow: 0 8px 32px rgba(26, 26, 26, 0.06);
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: 'Inter', sans-serif; background: var(--cream-bg); color: var(--body); line-height: 1.65; font-size: 16px; }
+  .page { max-width: 980px; margin: 40px auto; background: var(--white); box-shadow: var(--shadow); padding: 80px 64px; }
+  h1, h2, h3, h4 { font-family: 'Cormorant Garamond', serif; color: var(--ink); font-weight: 500; line-height: 1.15; }
+  h1 { font-size: 3.4rem; margin-bottom: 0.4em; font-weight: 600; }
+  h2 { font-size: 2.2rem; margin-top: 2.4em; margin-bottom: 0.6em; padding-bottom: 0.4em; border-bottom: 1px solid var(--gold-light); }
+  h3 { font-size: 1.5rem; margin-top: 1.8em; margin-bottom: 0.5em; color: var(--gold-dark); }
+  h4 { font-size: 1.05rem; margin-top: 1.4em; margin-bottom: 0.4em; font-family: 'Inter', sans-serif; font-weight: 600; color: var(--ink); text-transform: uppercase; letter-spacing: 0.08em; }
+  p { margin-bottom: 1em; }
+  strong { color: var(--ink); font-weight: 600; }
+  a { color: var(--gold-dark); text-decoration: none; border-bottom: 1px solid var(--gold-light); }
+  ul, ol { margin: 0.5em 0 1.2em 1.4em; } li { margin-bottom: 0.4em; }
+  table { width: 100%; border-collapse: collapse; margin: 24px 0; font-size: 0.9rem; }
+  th { background: var(--ink); color: var(--white); padding: 14px 16px; text-align: left; font-family: 'DM Mono', monospace; font-size: 0.7rem; letter-spacing: 0.12em; text-transform: uppercase; font-weight: 500; }
+  td { padding: 12px 16px; border-bottom: 1px solid var(--border); vertical-align: top; }
+  tr:nth-child(even) td { background: var(--cream-bg); }
+
+  .brand-mark { text-align: center; margin-bottom: 56px; padding-bottom: 32px; border-bottom: 1px solid var(--border); }
+  .brand-mark .wordmark { font-family: 'Cormorant Garamond', serif; font-size: 3.2rem; font-weight: 600; letter-spacing: 0.18em; background: linear-gradient(135deg, #E5C2B0 0%, #D6BB89 35%, #F4D78C 65%, #AB7E37 100%); -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent; margin-bottom: 8px; }
+  .brand-mark .sub { font-family: 'DM Mono', monospace; font-size: 0.75rem; letter-spacing: 0.4em; color: var(--gold-dark); text-transform: uppercase; }
+  .doc-meta { font-family: 'DM Mono', monospace; font-size: 0.72rem; letter-spacing: 0.18em; text-transform: uppercase; color: var(--muted); text-align: center; margin-bottom: 56px; }
+  .hero-title { text-align: center; margin-bottom: 56px; }
+  .hero-title .eyebrow { font-family: 'DM Mono', monospace; font-size: 0.78rem; letter-spacing: 0.32em; color: var(--gold-dark); text-transform: uppercase; margin-bottom: 18px; }
+  .hero-title h1 { font-size: 3.4rem; margin-bottom: 0.3em; }
+  .hero-title .lede { font-family: 'Cormorant Garamond', serif; font-size: 1.4rem; font-style: italic; color: var(--body); max-width: 720px; margin: 0 auto; }
+
+  .callout { background: var(--gold-pale); border-left: 3px solid var(--gold-dark); padding: 24px 32px; margin: 28px 0; border-radius: 0 4px 4px 0; }
+  .callout .label { font-family: 'DM Mono', monospace; font-size: 0.7rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--gold-dark); margin-bottom: 8px; }
+  .callout-green { background: #F2F6EF; border-left-color: var(--green-flag); }
+  .callout-green .label { color: var(--green-flag); }
+
+  .two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; margin: 24px 0; }
+  @media (max-width: 768px) { .two-col { grid-template-columns: 1fr; } }
+  .col-card { background: var(--white); border: 1px solid var(--border); border-radius: 4px; padding: 24px; }
+  .col-card.current { border-left: 3px solid var(--red-flag); }
+  .col-card.recommended { border-left: 3px solid var(--green-flag); }
+  .col-card .card-label { font-family: 'DM Mono', monospace; font-size: 0.65rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--muted); margin-bottom: 8px; }
+  .col-card.current .card-label { color: var(--red-flag); }
+  .col-card.recommended .card-label { color: var(--green-flag); }
+  .col-card h3 { margin-top: 0; color: var(--ink); font-size: 1.3rem; }
+  .col-card ul { margin: 8px 0 0 1.2em; font-size: 0.92rem; line-height: 1.55; }
+
+  .stack-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 18px; margin: 24px 0; }
+  @media (max-width: 768px) { .stack-grid { grid-template-columns: 1fr; } }
+  .stack-card { background: var(--white); border: 1px solid var(--border); border-radius: 4px; padding: 22px 24px; border-top: 3px solid var(--gold-dark); }
+  .stack-card .stack-num { font-family: 'DM Mono', monospace; font-size: 0.7rem; letter-spacing: 0.15em; text-transform: uppercase; color: var(--gold-dark); font-weight: 600; }
+  .stack-card .stack-name { font-family: 'Cormorant Garamond', serif; font-size: 1.4rem; color: var(--ink); margin: 6px 0 8px; }
+  .stack-card .stack-mirror { font-family: 'DM Mono', monospace; font-size: 0.65rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--muted); margin-bottom: 12px; }
+  .stack-card .stack-desc { font-size: 0.88rem; line-height: 1.55; }
+  .stack-card ul { font-size: 0.85rem; margin: 8px 0 0 1.1em; line-height: 1.5; }
+
+  .integration-diagram { background: var(--cream-bg); border: 1px solid var(--border); padding: 32px; border-radius: 6px; margin: 24px 0; font-family: 'DM Mono', monospace; font-size: 0.78rem; line-height: 1.9; color: var(--ink); white-space: pre; overflow-x: auto; }
+
+  .phase-block { background: var(--white); border: 1px solid var(--border); border-radius: 4px; padding: 24px 28px; margin: 16px 0; border-left: 4px solid var(--gold-dark); }
+  .phase-block .phase-window { font-family: 'DM Mono', monospace; font-size: 0.7rem; letter-spacing: 0.15em; text-transform: uppercase; color: var(--gold-dark); }
+  .phase-block .phase-name { font-family: 'Cormorant Garamond', serif; font-size: 1.5rem; color: var(--ink); margin: 4px 0 12px; }
+  .phase-block ul { margin: 8px 0 12px 1.3em; font-size: 0.92rem; line-height: 1.55; }
+  .phase-block .phase-outcome { background: var(--gold-pale); padding: 10px 14px; border-radius: 4px; font-size: 0.86rem; color: var(--ink); margin-top: 8px; }
+  .phase-block .phase-outcome strong { color: var(--gold-dark); font-family: 'DM Mono', monospace; font-size: 0.7rem; letter-spacing: 0.15em; text-transform: uppercase; }
+
+  .time-back { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; margin: 28px 0; }
+  @media (max-width: 768px) { .time-back { grid-template-columns: 1fr 1fr; } }
+  .tb-card { background: var(--gold-pale); border-left: 3px solid var(--gold-dark); padding: 18px 20px; border-radius: 0 4px 4px 0; }
+  .tb-card .tb-hrs { font-family: 'Cormorant Garamond', serif; font-size: 2rem; color: var(--gold-dark); font-weight: 600; line-height: 1; }
+  .tb-card .tb-area { font-family: 'DM Mono', monospace; font-size: 0.62rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--muted); margin-top: 4px; }
+
+  .footer { margin-top: 80px; padding-top: 32px; border-top: 1px solid var(--border); text-align: center; font-family: 'DM Mono', monospace; font-size: 0.7rem; letter-spacing: 0.15em; text-transform: uppercase; color: var(--muted); }
+
+  @media print { body { background: white; } .page { box-shadow: none; margin: 0; padding: 40px; max-width: 100%; } h2 { page-break-after: avoid; } .two-col, .stack-card, .phase-block, .integration-diagram { page-break-inside: avoid; } }
+  @media (max-width: 768px) { .page { padding: 40px 24px; } h1, .hero-title h1 { font-size: 2.4rem; } }
+</style>
+</head>
+<body>
+
+<nav class="cdb-nav" style="position:sticky;top:0;z-index:100;background:#fff;border-bottom:1px solid #E2E2E2;padding:0.75rem 1.5rem;display:flex;justify-content:space-between;align-items:center;font-family:'Inter',sans-serif;flex-wrap:wrap;gap:0.5rem;">
+  <a href="/documents/clients/cirilo-design-build/" style="font-family:'Cormorant Garamond',serif;font-size:1.05rem;letter-spacing:0.08em;color:#2E2E34;text-decoration:none;">
+    <strong style="color:#AB7E37;letter-spacing:0.16em;">MARKCMO</strong> &nbsp;for&nbsp; <span style="letter-spacing:0.14em;">CIRILO DESIGN + BUILD</span>
+  </a>
+  <div style="display:flex;gap:1.2rem;align-items:center;font-family:'DM Mono',monospace;font-size:0.66rem;letter-spacing:0.1em;text-transform:uppercase;flex-wrap:wrap;">
+    <a href="/documents/clients/cirilo-design-build/audit" style="color:#8F8F8F;text-decoration:none;">Audit</a>
+    <a href="/documents/clients/cirilo-design-build/roadmap" style="color:#8F8F8F;text-decoration:none;">Roadmap</a>
+    <a href="/documents/clients/cirilo-design-build/partnerships" style="color:#8F8F8F;text-decoration:none;">Playbook</a>
+    <a href="https://markcmo.com/book" style="color:#fff;background:#AB7E37;padding:0.45rem 1rem;border-radius:3px;text-decoration:none;letter-spacing:0.14em;">Book Discovery Call →</a>
+  </div>
+</nav>
+<style>@media print{.cdb-nav{display:none !important;}}</style>
+
+<div class="page">
+
+  <div class="brand-mark">
+    <div class="wordmark">CIRILO</div>
+    <div class="sub">DESIGN &nbsp;+&nbsp; BUILD</div>
+  </div>
+
+  <div class="doc-meta">Systems &amp; Operations Blueprint &nbsp;|&nbsp; CDB-BPT-001 &nbsp;|&nbsp; Prepared 2026-05-28</div>
+
+  <div class="hero-title">
+    <div class="eyebrow">FROM WHERE YOU ARE &middot; TO WHERE YOU NEED TO BE</div>
+    <h1>The systems plan,<br>built for your reality.</h1>
+    <p class="lede">An operational blueprint specifically for Cirilo Design + Build. Maps the current stack (Pool Studio, QuickBooks Online, Outlook, physical folders) to a recommended operational core that keeps what works, replaces what doesn't, and adds the integrations that turn two pools a month into a repeatable system.</p>
+  </div>
+
+  <div class="callout">
+    <div class="label">PREPARED IN RESPONSE TO TIFFANY'S OPERATIONS OVERVIEW</div>
+    <p>Tiffany's own description: "this is probably going to make you realize just how much of my business currently runs on Outlook reminders, sticky notes, coffee, and pure determination." That is exactly the right kind of honesty to start from. This document is the answer.</p>
+  </div>
+
+  <h2>The Current State (Your Words, Mapped)</h2>
+
+  <p>Tiffany's email lays out the operating reality clearly. The current stack works, but it is held together by Tiffany's personal memory and follow-through. Every hat is on her head except the physical labor. That works at one project per month. It does not scale to two.</p>
+
+  <h3>What's working (keep)</h3>
+
+  <table>
+    <tr><th>Tool</th><th>Purpose</th><th>Status</th></tr>
+    <tr><td>Pool Studio (Structure Studios)</td><td>3D pool design</td><td><strong>KEEP.</strong> Industry standard for luxury custom builders. Integrates into the recommended stack.</td></tr>
+    <tr><td>QuickBooks Online</td><td>Accounting, invoicing, draws</td><td><strong>KEEP.</strong> Stays as the financial system of record. Recommended stack pushes data into QBO, not around it.</td></tr>
+    <tr><td>Outlook Calendar</td><td>Scheduling</td><td><strong>KEEP, but reduce reliance.</strong> Outlook becomes a sync target, not the primary source of truth. Project pipeline tool takes over as the calendar driver.</td></tr>
+    <tr><td>Physical project folders</td><td>Document storage</td><td><strong>REPLACE.</strong> Each project moves to a digital VDR (virtual data room). Physical folder for permits stays in the truck; everything else lives in the VDR.</td></tr>
+    <tr><td>Notes on phone and legal pads</td><td>Everything else</td><td><strong>REPLACE.</strong> Notes become CRM activities; legal pads become structured project records.</td></tr>
+  </table>
+
+  <h3>What's missing (the operational gaps)</h3>
+
+  <div class="two-col">
+    <div class="col-card current">
+      <div class="card-label">Current State</div>
+      <h3>What you do not have today</h3>
+      <ul>
+        <li>No CRM (clients in your head, Outlook, and QBO)</li>
+        <li>No lead-capture system (no website form, no instant-response automation)</li>
+        <li>No project management software (14-stage pool build tracked in physical folders + Tiffany's memory)</li>
+        <li>No customer portal (every status update is a phone call or text)</li>
+        <li>No document signing pipeline (contracts and change orders go back and forth via email and PDF)</li>
+        <li>No automated follow-up (warm leads go cold because there is no system to nudge them)</li>
+        <li>No marketing automation (no email sequences, no SMS, no review request flows)</li>
+        <li>No reporting dashboard (no view of pipeline health, subcontractor performance, profitability per project, or marketing ROI)</li>
+      </ul>
+    </div>
+    <div class="col-card recommended">
+      <div class="card-label">Recommended State</div>
+      <h3>What we build for you</h3>
+      <ul>
+        <li>Custom CRM (your data, your rules, no per-seat fees)</li>
+        <li>Lead-capture forms + Calendly + LSA inbox integration, sub-1-minute auto-response</li>
+        <li>14-stage project pipeline tracker tied to your construction sequence</li>
+        <li>Customer portal: each pool client logs in to see project status, photos, invoices, documents</li>
+        <li>Document signing pipeline: contracts, change orders, milestone acceptances, all e-signed and archived</li>
+        <li>Email + SMS automation: lead nurture, design follow-up, milestone notifications, review requests</li>
+        <li>Marketing automation tied to CRM: every lead source attributed, every campaign measured</li>
+        <li>Admin dashboard: kanban pipeline of every active project across all 14 stages, drag-drop to advance, real-time metrics</li>
+      </ul>
+    </div>
+  </div>
+
+  <h2>The Reference Architecture (Mark Has Built This Before)</h2>
+
+  <p>The operational stack we are recommending for Cirilo is modeled directly on the backend Mark runs for markcmo.com: an admin dashboard, a customer CRM, an engagement pipeline, a customer portal, a document signing system, and a virtual data room. All of it custom-built, all of it interoperating, all of it owned by the business (not rented from a SaaS vendor at $399 per user per month).</p>
+
+  <p><strong>Why this matters:</strong> a builder at your stage spends $400 to $1,500 per month per software seat across CRM, PM, signing, and portal SaaS. That stack is functional but never quite fits the actual workflow. The custom build pays for itself within 12 to 18 months, fits your 14-stage pool process exactly, and the data stays in your hands. No data export when you switch vendors. No per-project surcharges. No "this feature is in our Enterprise tier."</p>
+
+  <h2>The Recommended System Stack</h2>
+
+  <p>Eight components, each one mirroring a proven piece of the markcmo.com backend, adapted for the pool-build workflow.</p>
+
+  <div class="stack-grid">
+
+    <div class="stack-card">
+      <div class="stack-num">01 &middot; CORE</div>
+      <div class="stack-name">Admin Dashboard</div>
+      <div class="stack-mirror">Mirrors: markcmo.com /admin</div>
+      <div class="stack-desc">Tiffany's command center. Single screen, every active pool project, every active lead, every open invoice, every scheduled milestone. Drag-drop kanban of the 14-stage pool build pipeline. Tap a project to drill in.</div>
+      <ul>
+        <li>Pipeline view: all projects across 14 stages</li>
+        <li>Lead inbox: new inbound, awaiting follow-up</li>
+        <li>Today's calendar (consults, site visits, inspections)</li>
+        <li>This week's milestones at risk</li>
+        <li>Revenue dashboard: signed YTD, in-pipeline, projected</li>
+        <li>Reviews monitor (Google, Houzz, BBB) with one-click respond</li>
+      </ul>
+    </div>
+
+    <div class="stack-card">
+      <div class="stack-num">02 &middot; CORE</div>
+      <div class="stack-name">Customer CRM</div>
+      <div class="stack-mirror">Mirrors: mc_clients (markcmo backend)</div>
+      <div class="stack-desc">Every lead, every prospect, every customer in one database. Contact info, project value, status, source attribution, all communication history. Linked to projects, invoices, and the customer portal.</div>
+      <ul>
+        <li>Lead source tracking (Google, Houzz, referral, partnership)</li>
+        <li>Activity timeline: every call, email, SMS, meeting</li>
+        <li>Tags + segmentation (consultation booked, design pending, contract out)</li>
+        <li>Linked to Square customer ID for invoicing</li>
+        <li>Linked to QBO customer for accounting</li>
+        <li>Tiffany's notes per client (the legal-pad replacement)</li>
+      </ul>
+    </div>
+
+    <div class="stack-card">
+      <div class="stack-num">03 &middot; CORE</div>
+      <div class="stack-name">Project Pipeline (14 Stages)</div>
+      <div class="stack-mirror">Mirrors: mc_engagements + mc_documents</div>
+      <div class="stack-desc">Custom-built around Tiffany's exact 14-stage pool construction sequence. Each pool project is one record. Each stage has its own milestone, owner, documents, photos, and inspection requirements.</div>
+      <ul>
+        <li>Stages: Excavation, Rebar &amp; Bonding, Long Plumbing, Electrical Rough-In, Gas, Inspections, Shotcrete/Gunite, Tile &amp; Coping, Equipment, Decking, Interior Finish, Fill &amp; Startup, Final Inspection, Closeout</li>
+        <li>Each stage: subcontractor assignment, target date, actual date, photos, inspection result</li>
+        <li>Permit tracking with submission and approval timestamps</li>
+        <li>Draw schedule auto-syncs to QBO invoicing</li>
+        <li>Subcontractor coordination panel (call/text/email from inside the project)</li>
+        <li>Outlook calendar sync (all milestones appear in Tiffany's calendar)</li>
+      </ul>
+    </div>
+
+    <div class="stack-card">
+      <div class="stack-num">04 &middot; CORE</div>
+      <div class="stack-name">Customer Portal</div>
+      <div class="stack-mirror">Mirrors: markcmo.com /portal/</div>
+      <div class="stack-desc">Each pool client logs in to a branded Cirilo portal. Sees current stage, photo progress, plans, invoices, payment status, upcoming milestones. Reduces inbound "where are we?" calls by 60 to 80 percent.</div>
+      <ul>
+        <li>Current stage and what comes next</li>
+        <li>Photo gallery (auto-updated as Tiffany uploads)</li>
+        <li>Document library (plans, permits, contracts, warranties)</li>
+        <li>Invoice and payment status</li>
+        <li>Direct message thread to Tiffany</li>
+        <li>Upcoming milestone calendar</li>
+        <li>Final orientation video + warranty page at closeout</li>
+      </ul>
+    </div>
+
+    <div class="stack-card">
+      <div class="stack-num">05 &middot; CORE</div>
+      <div class="stack-name">Document Signing</div>
+      <div class="stack-mirror">Mirrors: submit-engagement-doc pipeline</div>
+      <div class="stack-desc">Custom e-signature flow for contracts, change orders, milestone acceptances, and warranty registrations. No DocuSign per-envelope fees. Audit log on every signature. Fully integrated with CRM and VDR.</div>
+      <ul>
+        <li>Initial contract signing with deposit collection (Square)</li>
+        <li>Change order signing (homeowner approves, Tiffany countersigns)</li>
+        <li>Milestone acceptance signing (e.g., excavation done, homeowner confirms layout)</li>
+        <li>Final closeout + warranty registration signing</li>
+        <li>Every signed PDF stored in the project VDR</li>
+      </ul>
+    </div>
+
+    <div class="stack-card">
+      <div class="stack-num">06 &middot; CORE</div>
+      <div class="stack-name">Virtual Data Room (per Project)</div>
+      <div class="stack-mirror">Mirrors: markcmo.com /admin/vdr/</div>
+      <div class="stack-desc">Replaces physical project folders. Every plan, permit, contract, photo, invoice, inspection report, and warranty doc for every project. Cirilo retains control; the homeowner sees a curated subset via the customer portal.</div>
+      <ul>
+        <li>Pool Studio design exports (auto-deposited)</li>
+        <li>CAD plans and engineering docs</li>
+        <li>Permit applications and approvals</li>
+        <li>Subcontractor agreements</li>
+        <li>Invoices and draws (QBO synced)</li>
+        <li>Stage-by-stage photos</li>
+        <li>Inspection reports</li>
+        <li>Final closeout package</li>
+      </ul>
+    </div>
+
+    <div class="stack-card">
+      <div class="stack-num">07 &middot; AUTOMATION</div>
+      <div class="stack-name">Email + SMS Engine</div>
+      <div class="stack-mirror">Mirrors: Resend + Twilio integration</div>
+      <div class="stack-desc">The "follow-up automation" Tiffany said was missing. Every lead, prospect, customer, and past client is in an appropriate cadence. Sub-1-minute response on inbound leads (conversion is 391 percent higher when contacted within 60 seconds).</div>
+      <ul>
+        <li>Lead auto-response (web form, LSA call, Houzz message)</li>
+        <li>Consultation reminder (24h + 2h before)</li>
+        <li>Design phase nudges (decision-pending follow-up)</li>
+        <li>Proposal nudge sequence (3 / 7 / 14 day)</li>
+        <li>Construction milestone notifications (homeowner alerts)</li>
+        <li>Inspection scheduling automation</li>
+        <li>Project completion + review request automation</li>
+        <li>Long-term referral nudges (1-year anniversary, summer prep)</li>
+      </ul>
+    </div>
+
+    <div class="stack-card">
+      <div class="stack-num">08 &middot; AUTOMATION</div>
+      <div class="stack-name">Reporting &amp; Dashboards</div>
+      <div class="stack-mirror">Mirrors: admin mc-dash-* widgets</div>
+      <div class="stack-desc">What Tiffany needs to make decisions: pipeline health, source attribution, subcontractor scorecards, profitability per project, marketing ROI. All auto-calculated from the underlying CRM, pipeline, and QBO data.</div>
+      <ul>
+        <li>Pipeline value (leads + active deals + signed)</li>
+        <li>Source attribution (which channels drive signed contracts)</li>
+        <li>Profit margin per project (real, not estimated)</li>
+        <li>Subcontractor performance (on-time delivery, defect rate)</li>
+        <li>Reviews velocity + star rating trend</li>
+        <li>Marketing spend ROI by channel</li>
+        <li>Time-from-lead-to-signed-contract</li>
+        <li>Weekly + monthly + quarterly auto-generated reports</li>
+      </ul>
+    </div>
+
+  </div>
+
+  <h2>Integration Map (How It All Connects)</h2>
+
+  <p>The recommended stack is not eight isolated tools. It is one operational core with eight surfaces. Data flows in one direction wherever possible. Pool Studio designs flow to the VDR. QBO invoices flow to and from the project pipeline. The customer portal reads from the same source of truth Tiffany uses in the admin dashboard.</p>
+
+  <div class="integration-diagram">                      Inbound lead
+                      (web form, LSA, Houzz, referral)
+                                |
+                                v
+              +-----------------+----------------+
+              |        CUSTOMER CRM (#02)        |
+              |  contact + source + activity log |
+              +-----------------+----------------+
+                                |
+                                v
+              +-----------------+----------------+        +-------------------------+
+              |  AUTO-RESPONSE (#07)             |&lt;------|  Calendly / phone / SMS |
+              |  email + SMS within 60 sec       |        +-------------------------+
+              +-----------------+----------------+
+                                |
+                                v
+                       Design consult booked
+                                |
+                                v
+              +---------------------------------+
+              |  POOL STUDIO (existing tool)    |&lt;-- Tiffany designs in PS
+              +-----------------+---------------+
+                                |
+                                v  [auto-export]
+              +---------------------------------+
+              |  VDR per project (#06)          |
+              +-----------------+---------------+
+                                |
+                                v
+              +---------------------------------+        +--------------------------+
+              |  DOCUMENT SIGNING (#05)         |&lt;------>|  Square (deposit + pay)  |
+              |  contract + deposit + signature |        +-----------+--------------+
+              +-----------------+---------------+                    |
+                                |                                    v
+                                v                       +--------------------------+
+              +---------------------------------+       |  QuickBooks Online       |
+              |  PROJECT PIPELINE (#03)         |&lt;----->|  invoices + draws + GL   |
+              |  14 stages, milestones, photos  |       +--------------------------+
+              +--------+----------------+-------+
+                       |                |
+                       v                v
+              +-----------------+   +---------------------------+
+              | OUTLOOK SYNC    |   | CUSTOMER PORTAL (#04)     |
+              | (existing cal)  |   | stage + photos + invoices |
+              +-----------------+   +---------------------------+
+                                                |
+                                                v
+              +-----------------------------------------------+
+              |  REPORTING DASHBOARDS (#08) -> ADMIN (#01)    |
+              +-----------------------------------------------+
+  </div>
+
+  <h2>Build vs. Buy (What's Custom, What's SaaS)</h2>
+
+  <table>
+    <tr><th>Function</th><th>Recommendation</th><th>Why</th></tr>
+    <tr><td>CRM</td><td><strong>Custom build</strong></td><td>HubSpot Pro is $1,170/mo at 5 seats. Custom CRM owns your data, costs near-zero per month at scale, fits Cirilo's actual workflow. Same code pattern proven on markcmo.com.</td></tr>
+    <tr><td>Project Pipeline (14 stages)</td><td><strong>Custom build</strong></td><td>Buildertrend is $399/mo and uses a generic 4-phase model. Your 14-stage sequence does not map to it. Custom = exact fit + lower TCO at 18 months.</td></tr>
+    <tr><td>Customer Portal</td><td><strong>Custom build</strong></td><td>Your brand, your design language (rose gold and Cormorant), no Buildertrend or CoConstruct logo on the homeowner experience. Owns the relationship.</td></tr>
+    <tr><td>Document Signing</td><td><strong>Custom build</strong></td><td>DocuSign is $25/envelope at the Enterprise tier. Two pools a month with 8+ signed docs per project = $400/mo and growing. Custom = zero per-envelope cost, already-proven pattern.</td></tr>
+    <tr><td>Virtual Data Room</td><td><strong>Custom build</strong></td><td>ShareFile or Box charges per user and per GB. Custom = unlimited users (homeowner + subs + Tiffany), unlimited storage.</td></tr>
+    <tr><td>Email + SMS automation</td><td><strong>Custom build</strong> (Resend + Twilio)</td><td>HubSpot is great until you hit the contact tier ceiling. Resend ($20/mo) + Twilio (pay per message) = pennies per active client.</td></tr>
+    <tr><td>Pool design</td><td><strong>BUY (keep Pool Studio)</strong></td><td>Industry standard. No reason to rebuild. Integrates via design export to VDR.</td></tr>
+    <tr><td>Accounting</td><td><strong>BUY (keep QuickBooks Online)</strong></td><td>Stays as the system of record for financials. Project pipeline pushes invoices to QBO via API.</td></tr>
+    <tr><td>Calendar booking</td><td><strong>BUY (Calendly initially)</strong></td><td>$12/mo, mature product, works immediately. Migrate to custom inside customer portal in Phase 3.</td></tr>
+    <tr><td>Phone tracking</td><td><strong>BUY (CallRail)</strong></td><td>$45/mo. Industry standard. Attribution layer that ties phone leads back to source channels.</td></tr>
+    <tr><td>SMS sending</td><td><strong>BUY (Twilio)</strong></td><td>Pay-per-message. Wired into the custom Email + SMS Engine.</td></tr>
+    <tr><td>Email sending</td><td><strong>BUY (Resend)</strong></td><td>$20/mo + per-message. Powers the Email + SMS Engine. Same provider used on markcmo.com.</td></tr>
+  </table>
+
+  <div class="callout">
+    <div class="label">THE BUILD-VS-BUY HEURISTIC</div>
+    <p><strong>Build custom anything that touches the homeowner experience or your core workflow.</strong> The customer portal, the project pipeline, the CRM, the signing flow, the VDR. These are differentiators. You should own them.</p>
+    <p><strong>Buy SaaS for commodity infrastructure.</strong> Email delivery (Resend), SMS delivery (Twilio), phone tracking (CallRail), calendar booking (Calendly), accounting (QBO), and design (Pool Studio). These are utilities. Pay the fee and move on.</p>
+  </div>
+
+  <h2>Phased Rollout (Aligned to the Marketing Roadmap)</h2>
+
+  <p>The systems build deploys in parallel with the marketing roadmap. By Day 90, the trust scaffolding (marketing) and the operational core (systems) are both live. By Day 180, automation is running. By Day 365, the business operates as a system, not as Tiffany.</p>
+
+  <div class="phase-block">
+    <div class="phase-window">DAYS 1 TO 30 &middot; FOUNDATION</div>
+    <div class="phase-name">Core CRM and Lead Capture</div>
+    <ul>
+      <li>Custom CRM database stood up (mc_clients pattern for Cirilo)</li>
+      <li>Existing client list migrated from QBO into CRM</li>
+      <li>Lead capture form on cirilodb.com pushes to CRM</li>
+      <li>Auto-response email and SMS to new inbound leads (sub-1-minute)</li>
+      <li>Calendly published for design consult booking</li>
+      <li>Pool Studio design auto-export to VDR per project</li>
+    </ul>
+    <div class="phase-outcome"><strong>Outcome:</strong> Every lead from Day 1 lands in a tracked system. Tiffany never loses a contact again.</div>
+  </div>
+
+  <div class="phase-block">
+    <div class="phase-window">DAYS 31 TO 60 &middot; PIPELINE</div>
+    <div class="phase-name">14-Stage Project Pipeline + Subcontractor Coordination</div>
+    <ul>
+      <li>Custom 14-stage pipeline tool deployed (matches Tiffany's construction sequence)</li>
+      <li>Active projects backfilled into the pipeline</li>
+      <li>Subcontractor coordination panel (one-click call, text, or email from inside a project)</li>
+      <li>Permit tracking with submission and approval timestamps</li>
+      <li>Outlook calendar two-way sync for all milestones</li>
+      <li>Stage-by-stage photo upload (mobile-friendly)</li>
+    </ul>
+    <div class="phase-outcome"><strong>Outcome:</strong> Physical project folders retired. Every active pool has a digital pipeline record. Tiffany's calendar fills itself from project milestones.</div>
+  </div>
+
+  <div class="phase-block">
+    <div class="phase-window">DAYS 61 TO 90 &middot; PORTAL + SIGNING</div>
+    <div class="phase-name">Customer Portal and Document Signing</div>
+    <ul>
+      <li>Customer portal launched (Cirilo-branded, mobile responsive)</li>
+      <li>Each existing client gets login credentials</li>
+      <li>Document signing pipeline live (contracts, change orders, milestone acceptances)</li>
+      <li>VDR populated with all current project documents</li>
+      <li>Square deposit collection wired into contract signing</li>
+      <li>QBO invoicing tied to project draws (auto-create on milestone)</li>
+    </ul>
+    <div class="phase-outcome"><strong>Outcome:</strong> Homeowners self-serve project status. "Where are we?" calls drop 60 to 80 percent. Contracts and deposits sign and clear in one online flow.</div>
+  </div>
+
+  <div class="phase-block">
+    <div class="phase-window">DAYS 91 TO 180 &middot; AUTOMATION</div>
+    <div class="phase-name">Email + SMS Engine and Nurture Sequences</div>
+    <ul>
+      <li>Lead nurture sequences live (cold, warm, hot)</li>
+      <li>Design-phase decision-pending nudges live (the "I'll think about it" rescue sequence)</li>
+      <li>Construction milestone auto-notifications to homeowner (excavation done, shotcrete in, etc.)</li>
+      <li>Inspection scheduling automation</li>
+      <li>Review request automation post-completion (auto-send 7 days after fill)</li>
+      <li>1-year anniversary referral nudge</li>
+    </ul>
+    <div class="phase-outcome"><strong>Outcome:</strong> Warm leads stop going cold. Reviews compound. Past clients become referral sources without Tiffany remembering to ask.</div>
+  </div>
+
+  <div class="phase-block">
+    <div class="phase-window">DAYS 181 TO 365 &middot; OPTIMIZATION</div>
+    <div class="phase-name">Reporting Dashboards and Decision Layer</div>
+    <ul>
+      <li>Source attribution dashboard (which channels drive signed contracts)</li>
+      <li>Profit margin per project tracking (real, not estimated)</li>
+      <li>Subcontractor performance scorecards (on-time delivery, defect rate)</li>
+      <li>Marketing spend ROI by channel</li>
+      <li>Time-from-lead-to-signed-contract by source</li>
+      <li>Weekly + monthly + quarterly auto-reports to Tiffany's inbox</li>
+    </ul>
+    <div class="phase-outcome"><strong>Outcome:</strong> Tiffany makes decisions from data, not from gut. The first hires (PM, designer, foreman) are scoped against real numbers, not best guesses.</div>
+  </div>
+
+  <h2>Time-Back Estimate for Tiffany</h2>
+
+  <p>The whole point. Tiffany said she is wearing every hat. The systems build is measured not in features, but in hours of her week handed back. Conservative estimates, Day 90 onward, against a typical week today:</p>
+
+  <div class="time-back">
+    <div class="tb-card"><div class="tb-hrs">5</div><div class="tb-area">Lead Intake &amp; Follow-Up</div></div>
+    <div class="tb-card"><div class="tb-hrs">8</div><div class="tb-area">Project Tracking</div></div>
+    <div class="tb-card"><div class="tb-hrs">4</div><div class="tb-area">Customer Communications</div></div>
+    <div class="tb-card"><div class="tb-hrs">3</div><div class="tb-area">Invoicing &amp; Draws</div></div>
+  </div>
+
+  <div class="callout callout-green">
+    <div class="label">TIME-BACK SUMMARY</div>
+    <p><strong>~20 hours per week back.</strong> That is roughly a half-time hire Tiffany does not need to make this year. By Day 180, it is closer to 25 hours per week as the automation engine matures. The first real hire (a project coordinator) gets made out of growth confidence, not survival pressure.</p>
+  </div>
+
+  <h2>How This Fits With the Marketing Engagement</h2>
+
+  <p>The systems build and the marketing engagement are two halves of the same plan. The marketing engagement (covered in the 12-Month Roadmap and the Partnership &amp; PR Playbook) generates the leads. The systems build catches them, converts them, manages them through 14 stages of construction, and turns them into reviews and referrals at closeout.</p>
+
+  <p>The marketing engagement without the systems build = leaky bucket. Leads come in, get lost in Outlook, no one follows up, the ad spend wastes itself.</p>
+
+  <p>The systems build without the marketing engagement = beautifully organized empty pipeline. The system works, but there is nothing in it to manage.</p>
+
+  <p>Both are scoped in the pricing proposals (Models A, B, and C). On the discovery call we will match the tier and pricing model to Tiffany's cash position, growth goal (two pools per month), and risk tolerance.</p>
+
+  <h2>Next Step</h2>
+
+  <ol>
+    <li>Read the <a href="/documents/clients/cirilo-design-build/audit">Discovery Audit</a> (8 minutes) for the marketing-side gap analysis.</li>
+    <li>Skim the <a href="/documents/clients/cirilo-design-build/roadmap">12-Month Roadmap</a> (5 minutes) for how marketing executes.</li>
+    <li>Book a discovery call. We will walk through this blueprint together and match the right pricing model to Cirilo's reality.</li>
+  </ol>
+
+  <div style="text-align:center;margin:48px 0;">
+    <a href="https://markcmo.com/book" style="display:inline-block;background:var(--gold-dark);color:var(--white);font-family:'Inter',sans-serif;font-size:1rem;font-weight:600;padding:1rem 2.4rem;border-radius:6px;text-decoration:none;letter-spacing:0.02em;box-shadow:0 4px 14px rgba(171,126,55,0.3);">
+      Book the Discovery Call &nbsp;&rarr;
+    </a>
+  </div>
+
+  <div class="footer">
+    Prepared by Mark Gabrielli &nbsp;|&nbsp; WETYR Corporation &nbsp;|&nbsp; markcmo.com &nbsp;|&nbsp; Private &amp; Confidential
+  </div>
+
+</div>
+
+<script>(function(){try{var k='mc_jsid';var s=sessionStorage.getItem(k)||('s_'+Math.random().toString(36).slice(2)+Date.now().toString(36));sessionStorage.setItem(k,s);fetch('/api/track',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({t:'view',client:'cirilo-design-build',page:'blueprint',doc_id:'CDB-BPT-001',session_id:s,url:location.pathname,title:document.title}),keepalive:true}).catch(function(){});}catch(e){}})();</script>
+</body>
+</html>

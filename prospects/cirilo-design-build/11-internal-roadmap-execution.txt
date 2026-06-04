@@ -1,0 +1,225 @@
+INTERNAL — MARK ONLY. EXECUTION ROADMAP + SPEND SEQUENCING.
+DO NOT SHARE WITH TIFFANY. This is the operational map: what we
+build, in what order, and when each dollar of ad spend turns on.
+═══════════════════════════════════════════════════════════════
+Cirilo Design + Build — Path to 2 Luxury Pool Clients / Month
+═══════════════════════════════════════════════════════════════
+
+Prepared: 2026-06-01
+Author: Mark Gabrielli
+
+THE ONE THING TO REMEMBER:
+Do NOT scale paid ad spend until the trust scaffolding is live.
+Spend before scaffolding = CPL doubles, money burns, 4-6% close
+instead of 12%. The roadmap below is sequenced so we never spend
+into a leaky funnel.
+
+
+═══════════════════════════════════════════════════════════════
+THE TARGET (what all of this is for)
+═══════════════════════════════════════════════════════════════
+
+  2 signed pool contracts / month = 24 / year
+  $225K blended AOV = $5.4M annual pool revenue
+  Need ~17 qualified inquiries / month at a 12.25% end-to-end
+  close rate (35% inquiry-to-consult x 35% consult-to-contract)
+
+  Industry baseline close rate is 6% which would need 33
+  inquiries/mo and DOUBLE the spend. The whole roadmap exists to
+  earn the 12% instead of the 6%.
+
+
+═══════════════════════════════════════════════════════════════
+PHASE 0 — PREREQUISITE SCAFFOLDING (Days 1-45)
+"Build the bucket before pouring water in."
+SPEND ON ADS THIS PHASE: ~$0 to $2,000 (LSA only, see below)
+═══════════════════════════════════════════════════════════════
+
+These five items are the gate. Until ALL FIVE are live, do not
+turn on Google Search or Meta at scale. Each one, if missing,
+raises CPL 30-50%.
+
+  [ ] 1. REVIEWS SCAFFOLD — 40+ Google reviews at 4.8 stars
+         - Past-client SMS + email outreach campaign, one-tap
+           review links
+         - Target: 10 reviews by Day 30, 25 by Day 45, 40 by D60
+         - WHY: without this, close rate is 4-6% not 12%. This
+           is the single highest-leverage prerequisite.
+         - BUILD: review request automation (cdb backend), past
+           client list export from Tiffany
+
+  [ ] 2. SUB-1-MINUTE LEAD RESPONSE — automated SMS + email
+         - Every web form, LSA call, Houzz msg gets auto-response
+           inside 60 seconds
+         - WHY: 391% higher conversion at 1-min vs 5-min response
+         - Tiffany currently does this MANUALLY on Outlook + phone.
+           The Systems Blueprint fixes it. This is why the systems
+           build matters to the ad math, not just operations.
+         - BUILD: cdb contact form -> Resend + Twilio auto-reply
+
+  [ ] 3. TRUST PAGES LIVE on the website
+         - Financing page (Lyon Financial application link)
+         - Warranty page (10-yr structural)
+         - NC GC license # displayed (NEED FROM TIFFANY)
+         - Bonded + insured statement
+         - WHY: paid traffic bounces off a site with no trust
+           signals at the $150K+ price point
+         - BUILD: 4 audit-fix pages (process/financing/warranty/faq)
+           — ALREADY QUEUED in the website rebuild
+
+  [ ] 4. GOOGLE BUSINESS PROFILE claimed + verified + 25 photos
+         - Categories, service area, booking link, Q&A
+         - WHY: LSA eligibility REQUIRES a verified GBP. No GBP =
+           no Local Service Ads = lose the cheapest qualified
+           lead channel.
+         - BUILD: claim + verify (Tiffany has to confirm postcard
+           or video verification), 25 photos from portfolio
+
+  [ ] 5. SERVICE-AREA PAGES indexed (14 Charlotte metro)
+         - SouthPark, Myers Park, Ballantyne, Waxhaw, Weddington,
+           Marvin, Davidson, Cornelius, Mooresville, Huntersville,
+           Matthews, Tega Cay, Fort Mill SC, Charlotte core
+         - WHY: lifts both LSA proximity ranking and organic. Takes
+           60-90 days to rank so MUST start Day 1.
+         - BUILD: 14 templated pages — ALREADY QUEUED in rebuild
+
+  ONLY AD SPEND ALLOWED IN PHASE 0:
+  - Google LSA at $2,000/mo CAN start as soon as GBP is verified
+    (item 4) even before reviews hit 40, because LSA is pay-per-
+    booked-call and Google Guarantee screens for us. But keep it
+    capped low until reviews build.
+
+
+═══════════════════════════════════════════════════════════════
+PHASE 1 — TURN ON DEMAND CAPTURE (Days 46-90)
+SPEND ON ADS THIS PHASE: ramp $8,500 -> $13,500 / mo
+═══════════════════════════════════════════════════════════════
+
+Once the 5 scaffolding items are live, turn on paid in this order:
+
+  WEEK 7-8:
+  [ ] Google LSA scaled to $2,500/mo (7-9 qualified calls/mo)
+  [ ] Google Search Ads launch $4,000/mo
+      - Long-tail geo + suburb terms ONLY
+      - AVOID head terms (Anthony & Sylvan + Blue Haven bid those
+        up — we do not fight the volume players on "pool builder
+        charlotte")
+      - Target: "custom gunite pool waxhaw", "myers park pool
+        builder", "luxury pool lake norman", etc.
+      - 6-8 form-fills/mo expected
+
+  WEEK 9-10:
+  [ ] Meta paid social launch $1,500/mo
+      - REQUIRES the videography production retainer to be running
+        (see below) — Meta CPL doubles without cinematic creative
+      - Lead-form objective, lookalikes off the past-client CRM
+      - 4-6 form-fills/mo expected
+
+  [ ] Houzz Pro Premium $400/mo (2-3 directory leads/mo)
+
+  ONGOING PRODUCTION (turn on Week 5, runs forever):
+  [ ] Videography production retainer $3,500/mo
+      - 1 cinematic build reel + 4 short-form reels / month
+      - This is the creative engine. Meta + Pinterest + YouTube
+        + organic ALL feed off this. Skipping it doubles Meta CPL.
+  [ ] SEO tools $500/mo (Ahrefs + BrightLocal + SurferSEO)
+  [ ] Competitive intel $250/mo (SpyFu + Meta Ad Library + Mention)
+
+  END OF PHASE 1: ~19-26 inquiries/mo -> 2-3 signed contracts/mo
+  if scaffolding is solid. First signed contract attributable to
+  the program: Month 3-4. (Sales cycle is 6-14 weeks from inquiry.)
+
+
+═══════════════════════════════════════════════════════════════
+PHASE 2 — LOCK IT IN + COMPOUND (Days 91-180)
+SPEND ON ADS THIS PHASE: $18,500 / mo (full Tier 2 fuel)
+═══════════════════════════════════════════════════════════════
+
+  [ ] Scale Google Search to full budget as landing pages convert
+  [ ] Add local sponsorships reserve $1,000/mo
+      (country club magazine quarterly, junior golf, home show)
+  [ ] Organic service-area pages now ranking (60-90 day payoff)
+      — start shifting some paid budget toward the compounding
+      organic + partnership channels
+  [ ] Partnership referral program live (realtors + builders) —
+      this is the channel that eventually carries the pipeline
+      so paid can scale BACK in Year 2
+
+  END OF PHASE 2: consistent 2-2.7 signed contracts/mo.
+  Mix shifting from 100% paid toward paid + organic + referral.
+
+
+═══════════════════════════════════════════════════════════════
+THE FULL MONTHLY FUEL BREAKDOWN (Tier 2 / $18,650)
+═══════════════════════════════════════════════════════════════
+
+  Google LSA + Guarantee ............ $2,500   pay-per-call
+  Google Search Ads ................. $4,000   PPC long-tail geo
+  Meta paid social .................. $1,500   video-first
+  Houzz Pro Premium ................. $400      directory
+  Videography production ............ $3,500   the creative engine
+  SEO tools ......................... $500      Ahrefs/BrightLocal/Surfer
+  Competitive intel tools ........... $250      SpyFu/Mention
+  Local sponsorships ................ $1,000    seasonal reserve
+  ────────────────────────────────────────────
+  TOTAL MARKETING FUEL .............. $18,650 / mo = $223,800/yr
+
+  (All bills direct to Cirilo's card per platform. Never through
+   Mark. This is the "Marketing Fuel" half of the proposal
+   equation. Mark's services are the separate, smaller number.)
+
+
+═══════════════════════════════════════════════════════════════
+SPEND-TIER FALLBACKS (if Tiffany can't do $18.5K)
+═══════════════════════════════════════════════════════════════
+
+  $8,500/mo  BARE MIN — paid ads only, no production retainer.
+             Only works if scaffolding is 100% done. Skinny margin,
+             one bad month misses target. Frame as "90-day test."
+
+  $13,500/mo RECOMMENDED — adds production + SEO tools. 90%
+             confident on 2/mo. This is the real floor for
+             predictable results.
+
+  $18,500/mo LOCK-IT-IN — full Tier 2. Calibrated for 22-32/yr.
+             The number in the proposal.
+
+  BELOW $8,500/mo: cannot reliably hit 2/mo. Pitch Tier 1
+  Foundation instead (calibrated 10-18 deals/yr = 1-1.5/mo) and
+  set expectation that month 1-3 is 0-1 closes while foundation
+  builds.
+
+
+═══════════════════════════════════════════════════════════════
+HOW THIS MAPS TO THE 4 PUBLISHED ROADMAP DOCS
+═══════════════════════════════════════════════════════════════
+
+  - The PUBLIC roadmap doc (CDB-RDM-001) shows phases + milestones
+    but NOT this spend sequencing or the close-rate math.
+  - The Systems Blueprint (CDB-BPT-001) is WHY scaffolding item #2
+    (sub-1-min response) is possible — the CRM + automation build.
+  - The proposal Marketing Fuel = these exact channel numbers.
+  - This doc is the connective tissue: it tells ME the order to
+    turn things on so we never spend into a leaky funnel.
+
+  Companion internal doc: 10-internal-paid-ads-math.txt
+  (that one is call-prep / objection handling; this one is
+   build-and-spend sequencing)
+
+
+═══════════════════════════════════════════════════════════════
+OUTSTANDING ITEMS NEEDED FROM TIFFANY TO EXECUTE PHASE 0
+═══════════════════════════════════════════════════════════════
+
+  [ ] NC GC license # (for trust pages + LSA Google Guarantee)
+  [ ] COI + bond docs (for LSA Google Guarantee screening)
+  [ ] Past-client list w/ contact info (for reviews campaign)
+  [ ] GBP access OR willingness to do video/postcard verification
+  [ ] Confirmed financing partner (Lyon? HFS? both?)
+  [ ] Warranty terms (10-yr structural — confirm exact coverage)
+  [ ] Wix admin + domain registrar access (for DNS cutover later)
+  [ ] 6 completed projects available to photograph/film (for the
+      production retainer + portfolio rebuild)
+
+  Until these land, Phase 0 cannot fully complete, which means
+  paid spend cannot scale. Make these the Day-0 kickoff ask.

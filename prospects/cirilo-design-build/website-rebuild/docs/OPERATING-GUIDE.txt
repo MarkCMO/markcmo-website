@@ -1,0 +1,126 @@
+CIRILO DESIGN + BUILD : OPERATING GUIDE
+=======================================
+Everything in your new website + back office, and how to run it.
+Live preview: https://cirilodb-rebuild.pages.dev
+
+
+1. THE THREE LOGINS
+-------------------
+ADMIN CONSOLE (you + Mark)
+  URL:   /admin/        (https://cirilodb-rebuild.pages.dev/admin/)
+  Login: mark@markcmo.com  /  [your standard admin password]
+         tiffany@cirilodb.com  /  [same password]
+  This is your command center. Everything below lives here.
+
+HOMEOWNER OWNER SUITE (your clients)
+  URL:   /portal/
+  Login: client email + their 6-character access code
+         (issued automatically the moment they sign a proposal)
+  You can preview it: open /portal/, click "Cirilo Team", sign in with
+  your admin login to see the sample suite.
+
+VENDOR PORTAL (your subs)
+  URL:   /vendors/
+  Login: vendor email + their access code
+  Team preview: sign in with your admin login.
+
+
+2. THE CUSTOMER JOURNEY (front to back)
+---------------------------------------
+  1. Discover ....... 27 marketing + service-area pages, SEO ready
+  2. Inquire ........ /contact form
+  3. Book ........... /book  (4-step wizard with date + time picker)
+  4. Review + sign .. /proposal  (luxury proposal + e-signature)
+  5. Onboard ........ signing auto-creates the client + project and
+                      shows them their Owner Suite access code
+  6. Track .......... /portal  (14-stage timeline, photos, docs, draws)
+  7. Pay ............ in the Owner Suite: check or ACH, with a
+                      "I've sent payment" report
+  8. Refer .......... each client gets a personal referral link
+  9. Complete ....... warranty, care guide, review, referral at handover
+
+
+3. ADMIN CONSOLE : WHAT EACH TAB DOES
+-------------------------------------
+  Dashboard ... KPIs, active pipeline, newest leads
+  Activity .... one feed of everything: leads, payments, bids,
+                referrals, stage changes (bell shows the count)
+  Pipeline .... the 14-stage kanban; drag a project to advance it
+  Leads ....... every inquiry with first-response time
+  Clients ..... signed customers
+  Analytics ... lead sources, conversion funnel, top pages
+  Referrals ... who referred whom, and status
+  Payments .... draws clients reported; "Confirm received" -> "Mark cleared"
+  Email ....... your 6 templates + a dry-run preview of due follow-ups
+                (NOTE: nothing is emailed automatically; sending is off)
+  Vendors ..... build schedule, vendors, assignments (with lien-waiver
+                and paid/unpaid), open jobs, and bids
+                Actions: Add vendor, Post a job, Award bid, Mark paid,
+                Set due date
+  Documents ... the document vault: everything uploaded by you, clients,
+                and vendors, with downloads
+
+
+4. VENDORS, JOBS, AND BIDDING
+-----------------------------
+  - Post a job in Admin > Vendors > "Post a job".
+  - Vendors see open jobs in their portal and place bids.
+  - In Admin > Vendors > Bids, click "Award" : this marks the bid won,
+    declines the others, and AUTO-CREATES the vendor assignment.
+  - Vendors accept -> start -> mark complete. Marking complete requires
+    them to acknowledge a lien waiver (you'll see "Signed" in admin).
+  - Set a due date per assignment; the Build Schedule sorts by it.
+  - Mark a vendor assignment "Paid" when you've paid the sub.
+
+
+5. PAYMENTS (current setup: CHECK + ACH)
+----------------------------------------
+  Clients pay by check or ACH from inside their Owner Suite.
+  Before go-live, set the real payment details (one place in code):
+    file: portal/index.html  ->  PAY_INFO object near the top of the
+    script. Fill in:
+      payee   = who checks are payable to
+      mail    = mailing address for checks
+      bank / routing / account = your ACH details
+  When you add a card/merchant processor later, that becomes a 3rd tab.
+
+
+6. GO-LIVE CHECKLIST (Mark / developer)
+---------------------------------------
+  [ ] Set Cloudflare Pages secret MARKCMO_SUPABASE_SERVICE_KEY
+      (CLIPOS service-role key).
+  [ ] Apply docs/cdb-schema.sql in Supabase.
+  [ ] Apply docs/cdb-schema-journey.sql in Supabase.
+  [ ] Create a PRIVATE Supabase Storage bucket named: cdb-files
+  [ ] Fill PAY_INFO in portal/index.html (payee + bank details).
+  [ ] (Optional) Seed the showcase for testing:
+        POST /api/seed-cirilo  with header x-cdb-admin: mark@markcmo.com
+        and body {"confirm":"SEED"}
+        Creates a sample client (Owner Suite login:
+        james@harrington.example / HARRY1), project, vendors, a job + bid.
+  Until the key is set, everything runs in safe DEMO mode and still
+  demonstrates the full experience.
+
+
+7. WHAT IS AND IS NOT AUTOMATED
+-------------------------------
+  Automated:   lead capture, proposal signing -> client creation +
+               access code, payment reporting, referral capture,
+               page + event tracking, award -> assignment.
+  NOT automated (on purpose): email sending. Templates and a follow-up
+               queue exist, but no email goes out until it is explicitly
+               enabled. Use the dry-run preview to see what would send.
+
+
+8. EVERYDAY FLOW FOR TIFFANY
+----------------------------
+  - New inquiry? It appears in Leads and Activity within seconds.
+  - Ready to pitch? Send the client to /proposal (or a per-client
+    version later). When they sign, they're a client with portal access.
+  - During the build: drag the project across the Pipeline; clients watch
+    progress live in their Owner Suite.
+  - Need a sub? Post a job, review bids, award the winner.
+  - Got a check or ACH? Confirm it in Payments.
+  - Paid a sub? Mark the assignment paid.
+
+Questions: this whole system mirrors what Mark runs for markcmo.com.
