@@ -72,7 +72,7 @@
     </div>
     <table class="items">
       <tr><th>Description</th><th class="r">Amount</th></tr>
-      <tr><td><strong id="lineTitle">Growth Engagement Fee (Foundation Build)</strong><div class="desc">One-time engagement fee, due at signing. Confirms commitment and unlocks the 6-week Foundation Build Sprint and Day 0 kickoff. Non-refundable.</div></td><td class="r" id="lineAmt">$12,000.00</td></tr>
+      <tr><td><strong id="lineTitle">Growth Engagement Fee (Foundation Build)</strong><div class="desc" id="lineDesc">One-time engagement fee, due at signing. Confirms commitment and unlocks the 6-week Foundation Build Sprint and Day 0 kickoff. Non-refundable.</div></td><td class="r" id="lineAmt">$12,000.00</td></tr>
     </table>
     <div class="totals"><table>
       <tr><td>Subtotal</td><td class="r" id="subAmt">$12,000.00</td></tr>
@@ -104,13 +104,15 @@
     var APP_ID = 'sq0idp-M6mj_j8fX2VDNwuOmX3QEQ';
     var LOCATION_ID = 'LVBWTHWMEP60S';
     var TIERS = {
+      launch:     { name:'Launch-to-Scale', amount:5000,  plan:'roc-launch-engagement',     inv:'ROC-INV-L01' },
       foothold:   { name:'Foothold',   amount:9000,  plan:'roc-foothold-engagement',   inv:'ROC-INV-F01' },
       growth:     { name:'Growth',     amount:12000, plan:'roc-growth-engagement',     inv:'ROC-INV-G01' },
-      enterprise: { name:'Enterprise', amount:18000, plan:'roc-enterprise-engagement', inv:'ROC-INV-E01' }
+      enterprise: { name:'Enterprise', amount:18000, plan:'roc-enterprise-engagement', inv:'ROC-INV-E01' },
+      scale:      { name:'Scale True-Up', amount:7000, plan:'roc-scale-balance',        inv:'ROC-INV-S01' }
     };
     var params = new URLSearchParams(location.search);
-    var tierKey = (params.get('tier')||'growth').toLowerCase();
-    if(!TIERS[tierKey]) tierKey = 'growth';
+    var tierKey = (params.get('tier')||'launch').toLowerCase();
+    if(!TIERS[tierKey]) tierKey = 'launch';
     var tier = TIERS[tierKey];
     var isTest = params.get('test') === '1';
     var email = params.get('email') || '';
@@ -120,6 +122,7 @@
     document.getElementById('memoNo').textContent = tier.inv;
     document.getElementById('invTier').textContent = tier.name + ' tier';
     document.getElementById('lineTitle').textContent = tier.name + ' Engagement Fee (Foundation Build)';
+    if(tierKey === 'launch'){ document.getElementById('lineDesc').textContent = 'Launch-to-Scale starting engagement fee, due at signing. Unlocks the 6-week Foundation Build and Day 0 kickoff. Management starts at $2,500/mo and scales up as leads are delivered; the $7,000 balance becomes due at the Scale stage, per the signed agreement. Non-refundable.'; }
     document.getElementById('lineAmt').textContent = money(tier.amount);
     document.getElementById('subAmt').textContent = money(tier.amount);
     document.getElementById('totAmt').textContent = money(tier.amount);

@@ -32,9 +32,11 @@ exports.handler = async (event) => {
 
   // ── Fixed-price plans (server-side amounts; never trust the client) ──
   const PLANS = {
+    'roc-launch-engagement':     { cents: 500000,  note: 'ROC Roofing Launch-to-Scale engagement fee' },
     'roc-foothold-engagement':   { cents: 900000,  note: 'ROC Roofing Foothold engagement fee' },
     'roc-growth-engagement':     { cents: 1200000, note: 'ROC Roofing Growth engagement fee' },
     'roc-enterprise-engagement': { cents: 1800000, note: 'ROC Roofing Enterprise engagement fee' },
+    'roc-scale-balance':         { cents: 700000,  note: 'ROC Roofing engagement fee balance (Scale true-up)' },
   };
 
   // ── Decide amount SERVER-SIDE (never trust the client) ──
