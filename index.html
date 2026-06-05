@@ -594,13 +594,19 @@ ul { list-style: none; }
   display: flex; align-items: center; justify-content: center;
 }
 .hero-photo-frame {
-  position: relative; width: 340px; height: 420px;
+  position: relative; width: 380px; height: 480px;
+  display: flex; align-items: flex-end; justify-content: center;
+}
+.hero-photo-frame::before {
+  /* Soft gold glow behind cutout */
+  content: ''; position: absolute; inset: 8% 6% 4% 6%;
+  background: radial-gradient(circle at 50% 55%, rgba(201,168,76,0.22) 0%, rgba(201,168,76,0.08) 40%, transparent 70%);
+  filter: blur(40px); z-index: 0; pointer-events: none;
 }
 .hero-photo-frame img {
-  width: 100%; height: 100%; object-fit: cover; object-position: center top;
-  border-radius: 20px;
-  border: 1px solid rgba(201,168,76,0.2);
-  box-shadow: 0 24px 80px rgba(0,0,0,0.5), 0 0 0 1px rgba(201,168,76,0.1);
+  position: relative; z-index: 1;
+  width: 100%; height: 100%; object-fit: contain; object-position: bottom center;
+  filter: drop-shadow(0 24px 40px rgba(0,0,0,0.55));
 }
 .hero-photo-fallback {
   width: 100%; height: 100%; border-radius: 20px;
@@ -609,11 +615,7 @@ ul { list-style: none; }
   font-family: 'Outfit', sans-serif; font-size: 6rem; font-weight: 900;
   color: var(--accent);
 }
-.hero-photo-overlay {
-  position: absolute; inset: 0; border-radius: 20px;
-  background: linear-gradient(to bottom, transparent 50%, rgba(10,15,44,0.8) 100%);
-  pointer-events: none;
-}
+.hero-photo-overlay { display: none; }
 .hero-badge-available {
   position: absolute; bottom: -18px; left: 50%; transform: translateX(-50%);
   background: rgba(10,15,44,0.92); backdrop-filter: blur(16px);
@@ -1814,11 +1816,10 @@ main > nav[aria-label="Breadcrumb"] a:hover { color: #C9A84C !important; }
     </div>
     <div class="hero-photo-side reveal" style="transition-delay:0.2s;">
       <div class="hero-photo-frame">
-        <img loading="lazy" src="/assets/mark-gabrielli.jpg" alt="Mark Gabrielli - Fractional CMO &amp; COO"
-             width="380" height="460" fetchpriority="high"
-             onerror="this.style.display='none';this.nextElementSibling.style.display='flex'" />
+        <img src="/assets/mark-gabrielli-transparent.gif" alt="Mark Gabrielli - Fractional CMO &amp; COO"
+             width="380" height="480" fetchpriority="high"
+             onerror="this.onerror=null;this.src='/assets/mark-gabrielli.jpg';" />
         <div class="hero-photo-fallback" style="display:none;">M</div>
-        <div class="hero-photo-overlay"></div>
         <!-- Floating stats -->
         <div class="hero-float-stat" style="top:14%;right:-28px;">
           <strong>4.9</strong>
