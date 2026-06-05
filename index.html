@@ -514,14 +514,17 @@ ul { list-style: none; }
   pointer-events: none;
 }
 .hero-inner {
-  max-width: 1440px; margin: 0 auto; width: 100%;
-  display: grid; grid-template-columns: 1fr 560px;
+  max-width: 1600px; margin: 0 auto; width: 100%;
+  display: grid; grid-template-columns: 1fr 740px;
   align-items: center; gap: 4rem;
   position: relative; z-index: 1;
   padding: 5rem 0;
 }
-@media (max-width: 1280px) {
-  .hero-inner { grid-template-columns: 1fr 460px; gap: 3rem; }
+@media (max-width: 1440px) {
+  .hero-inner { grid-template-columns: 1fr 620px; gap: 3rem; }
+}
+@media (max-width: 1180px) {
+  .hero-inner { grid-template-columns: 1fr 480px; gap: 2.5rem; }
 }
 .hero-left { max-width: 820px; }
 .hero-kicker {
@@ -597,11 +600,14 @@ ul { list-style: none; }
   display: flex; align-items: center; justify-content: center;
 }
 .hero-photo-frame {
-  position: relative; width: 540px; height: 680px;
+  position: relative; width: 720px; height: 900px;
   display: flex; align-items: flex-end; justify-content: center;
 }
-@media (max-width: 1280px) {
-  .hero-photo-frame { width: 440px; height: 560px; }
+@media (max-width: 1440px) {
+  .hero-photo-frame { width: 600px; height: 760px; }
+}
+@media (max-width: 1180px) {
+  .hero-photo-frame { width: 460px; height: 580px; }
 }
 .hero-photo-frame::before {
   /* Soft gold glow behind cutout */
@@ -1768,7 +1774,7 @@ main > nav[aria-label="Breadcrumb"] a:hover { color: #C9A84C !important; }
     <div class="hero-photo-side reveal" style="transition-delay:0.2s;">
       <div class="hero-photo-frame">
         <img src="/assets/mark-gabrielli-transparent.gif" alt="Mark Gabrielli - Fractional CMO &amp; COO"
-             width="540" height="680" fetchpriority="high"
+             width="720" height="900" fetchpriority="high"
              onerror="this.onerror=null;this.src='/assets/mark-gabrielli.jpg';" />
         <div class="hero-photo-fallback" style="display:none;">M</div>
         <!-- Floating stats -->
