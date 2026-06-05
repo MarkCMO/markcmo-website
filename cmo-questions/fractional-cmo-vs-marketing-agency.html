@@ -42,6 +42,37 @@
 {"@type":"ListItem","position":3,"name":"Fractional CMO","item":"https://markcmo.com/cmo-questions#fractional-cmo"},
 {"@type":"ListItem","position":4,"name":"What is the difference between a fractional CMO and a marketing agency?"}]}
 </script>
+<style id="bulletproof-nav-css">
+/* Bulletproof nav + footer rules - high specificity, !important to beat any conflict */
+body { padding-top: 64px !important; background: #0A0F2C !important; color: #fff !important; }
+nav.nav#mainNav { position: fixed !important; top: 0 !important; left: 0 !important; right: 0 !important; z-index: 1000 !important; display: flex !important; align-items: center !important; justify-content: space-between !important; height: 64px !important; padding: 0 5vw !important; background: rgba(10,15,44,0.97) !important; backdrop-filter: blur(14px) !important; -webkit-backdrop-filter: blur(14px) !important; border-bottom: 1px solid rgba(201,168,76,0.18) !important; box-shadow: 0 2px 20px rgba(0,0,0,0.3) !important; border-radius: 0 !important; margin: 0 !important; }
+nav.nav#mainNav .nav-logo { display: flex !important; align-items: center !important; gap: 10px !important; text-decoration: none !important; color: #fff !important; flex-shrink: 0 !important; font-family: 'Barlow', sans-serif !important; }
+nav.nav#mainNav .nav-logo-avatar { width: 34px !important; height: 34px !important; border-radius: 50% !important; overflow: hidden !important; border: 2px solid #C9A84C !important; flex-shrink: 0 !important; }
+nav.nav#mainNav .nav-logo-avatar img { width: 100% !important; height: 100% !important; object-fit: cover !important; display: block !important; }
+nav.nav#mainNav .nav-logo-text { display: flex !important; flex-direction: column !important; line-height: 1.1 !important; }
+nav.nav#mainNav .nav-logo-text strong { font-size: 0.95rem !important; font-weight: 800 !important; color: #fff !important; }
+nav.nav#mainNav .nav-logo-text span { font-size: 0.62rem !important; font-weight: 500 !important; color: rgba(255,255,255,0.55) !important; letter-spacing: 0.07em !important; text-transform: uppercase !important; }
+nav.nav#mainNav .nav-links { display: flex !important; align-items: center !important; gap: 0.15rem !important; list-style: none !important; margin: 0 0 0 auto !important; padding: 0 !important; }
+nav.nav#mainNav .nav-links li { position: relative !important; list-style: none !important; }
+nav.nav#mainNav .nav-links a { display: inline-block !important; padding: 0.55rem 0.95rem !important; color: rgba(255,255,255,0.85) !important; text-decoration: none !important; font-size: 0.9rem !important; font-weight: 500 !important; border-radius: 6px !important; transition: color 0.15s, background 0.15s !important; }
+nav.nav#mainNav .nav-links a:hover { color: #C9A84C !important; background: rgba(201,168,76,0.08) !important; }
+nav.nav#mainNav .nav-right { margin-left: 1rem !important; }
+nav.nav#mainNav .nav-btn { display: inline-block !important; padding: 0.55rem 1.1rem !important; background: #C9A84C !important; color: #0A0F2C !important; font-weight: 700 !important; font-size: 0.9rem !important; text-decoration: none !important; border-radius: 8px !important; transition: transform 0.15s, box-shadow 0.15s !important; }
+nav.nav#mainNav .nav-btn:hover { transform: translateY(-1px) !important; box-shadow: 0 6px 18px rgba(201,168,76,0.4) !important; }
+nav.nav#mainNav .nav-hamburger { display: none !important; flex-direction: column !important; gap: 4px !important; cursor: pointer !important; padding: 6px !important; }
+nav.nav#mainNav .nav-hamburger span { display: block !important; width: 22px !important; height: 2px !important; background: #fff !important; border-radius: 2px !important; }
+@media (max-width: 880px) {
+  nav.nav#mainNav .nav-links, nav.nav#mainNav .nav-right { display: none !important; }
+  nav.nav#mainNav .nav-hamburger { display: flex !important; }
+}
+.mobile-drawer { position: fixed !important; top: 64px !important; right: -100% !important; width: 80% !important; max-width: 320px !important; height: calc(100vh - 64px) !important; background: rgba(10,15,44,0.99) !important; padding: 2rem 1.5rem !important; transition: right 0.3s !important; z-index: 999 !important; }
+.mobile-drawer.open { right: 0 !important; }
+.mobile-drawer a { display: block !important; padding: 0.9rem 0 !important; color: rgba(255,255,255,0.85) !important; text-decoration: none !important; font-size: 1rem !important; border-bottom: 1px solid rgba(255,255,255,0.08) !important; }
+main { background: transparent !important; }
+main > nav[aria-label="Breadcrumb"] { background: transparent !important; color: rgba(255,255,255,0.55) !important; }
+main > nav[aria-label="Breadcrumb"] a { color: rgba(255,255,255,0.7) !important; text-decoration: none !important; }
+main > nav[aria-label="Breadcrumb"] a:hover { color: #C9A84C !important; }
+</style>
 </head>
 <body>
 
