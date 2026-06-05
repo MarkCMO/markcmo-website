@@ -1,103 +1,432 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>Apps | MarkCMO</title>
-<meta name="description" content="Private app hub." />
-<meta name="robots" content="noindex, nofollow, noarchive, nosnippet, noimageindex" />
-<meta name="googlebot" content="noindex, nofollow, noarchive, nosnippet, noimageindex" />
-<meta name="bingbot" content="noindex, nofollow, noarchive" />
-<meta name="theme-color" content="#6C5CE7" />
-<link rel="canonical" href="https://markcmo.com/apps" />
-<link rel="stylesheet" href="/style.css" />
-<link rel="preconnect" href="https://fonts.googleapis.com" crossorigin>
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Barlow:ital,wght@0,400;0,500;0,600;0,700;0,800&family=DM+Mono:wght@400;500&display=swap" media="print" onload="this.media='all'">
-<noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Barlow:ital,wght@0,400;0,500;0,600;0,700;0,800&family=DM+Mono:wght@400;500&display=swap"></noscript>
-<style>
-.apps-hero{background:var(--off-black);padding:8rem 6vw 3rem;position:relative;}
-.apps-hero-grid{position:absolute;inset:0;background-image:linear-gradient(rgba(108,92,231,.05) 1px,transparent 1px),linear-gradient(90deg,rgba(108,92,231,.05) 1px,transparent 1px);background-size:80px 80px;}
-.apps-hero-inner{position:relative;z-index:1;max-width:1100px;margin:0 auto;}
-.apps-eyebrow{font-family:'DM Mono',monospace;font-size:.7rem;letter-spacing:.2em;text-transform:uppercase;color:var(--gold);display:flex;align-items:center;gap:.6rem;margin-bottom:1rem;}
-.apps-eyebrow::before{content:'';display:block;width:2rem;height:1px;background:var(--gold);}
-.apps-hero-inner h1{font-family:'Bebas Neue',sans-serif;font-size:clamp(2.5rem,5vw,4.5rem);line-height:1;color:var(--white);margin-bottom:.5rem;}
-.apps-hero-inner p{font-size:.95rem;color:var(--mid);max-width:620px;line-height:1.7;}
-.apps-private-tag{display:inline-flex;align-items:center;gap:.5rem;margin-top:1.25rem;font-family:'DM Mono',monospace;font-size:.68rem;letter-spacing:.12em;text-transform:uppercase;color:#9d8cff;background:rgba(108,92,231,.12);border:1px solid rgba(108,92,231,.3);padding:.4rem .8rem;border-radius:999px;}
-.apps-body{background:var(--black);padding:3.5rem 6vw 6rem;}
-.apps-grid{max-width:1100px;margin:0 auto;display:grid;grid-template-columns:repeat(auto-fill,minmax(330px,1fr));gap:1.5rem;}
-.app-card{background:#13111c;border:1px solid rgba(108,92,231,.18);border-radius:16px;padding:1.75rem;display:flex;flex-direction:column;}
-.app-card-top{display:flex;align-items:center;gap:1rem;margin-bottom:1.1rem;}
-.app-icon{width:72px;height:72px;border-radius:18px;flex-shrink:0;background:linear-gradient(150deg,#7c6cf0,#5546d6);display:flex;align-items:center;justify-content:center;box-shadow:0 8px 24px rgba(108,92,231,.35);}
-.app-icon-card{width:42px;height:30px;background:#fff;border-radius:5px;padding:5px 6px;display:flex;flex-direction:column;justify-content:center;gap:3px;}
-.app-icon-line{height:3px;border-radius:2px;background:#d7d2f5;}
-.app-icon-line.read{background:#5546d6;width:70%;}
-.app-icon-line.short{width:55%;}
-.app-card-title h2{font-family:'Bebas Neue',sans-serif;font-size:1.8rem;color:var(--white);letter-spacing:.03em;line-height:1;margin:0 0 .25rem;}
-.app-card-title span{font-family:'DM Mono',monospace;font-size:.66rem;letter-spacing:.1em;text-transform:uppercase;color:var(--mid);}
-.app-card-desc{font-size:.88rem;line-height:1.7;color:var(--light-grey);margin-bottom:1.4rem;flex:1;}
-.app-platforms{display:flex;flex-direction:column;gap:.6rem;}
-.app-btn{display:flex;align-items:center;justify-content:space-between;gap:.6rem;padding:.8rem 1.1rem;border-radius:10px;font-size:.85rem;font-weight:600;text-decoration:none;transition:transform .12s ease,background .12s ease;}
-.app-btn.android{background:#6C5CE7;color:#fff;}
-.app-btn.android:hover{background:#5546d6;transform:translateY(-1px);}
-.app-btn.ios{background:rgba(255,255,255,.06);color:#9aa0aa;border:1px solid rgba(255,255,255,.1);cursor:default;}
-.app-btn .ab-meta{font-family:'DM Mono',monospace;font-size:.62rem;letter-spacing:.08em;text-transform:uppercase;opacity:.85;}
-.app-card-foot{margin-top:1.2rem;padding-top:1rem;border-top:1px solid rgba(255,255,255,.07);display:flex;gap:1.2rem;flex-wrap:wrap;}
-.app-card-foot a{font-size:.72rem;color:var(--gold);text-decoration:none;font-family:'DM Mono',monospace;letter-spacing:.06em;text-transform:uppercase;}
-.apps-note{max-width:1100px;margin:2rem auto 0;font-size:.78rem;color:var(--mid);line-height:1.7;}
-.apps-note code{font-family:'DM Mono',monospace;color:#9d8cff;background:rgba(108,92,231,.1);padding:.1rem .35rem;border-radius:4px;}
+<meta charset="UTF-8">
+<link rel="icon" type="image/webp" href="/favicon.webp"><link rel="apple-touch-icon" href="/assets/mark-gabrielli.jpg">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Apps by Mark Gabrielli + WETYR - Calculator Plug, Prompterly, Moguly, CashStacker | MarkCMO</title>
+<meta name="description" content="Apps built by Mark Gabrielli + WETYR Corp. Calculator Plug (450+ real-world calculators), Prompterly (teleprompter), Moguly, CashStacker. iOS App Store + Google Play Store. Built internally, no third-party plugins.">
+<link rel="canonical" href="https://markcmo.com/apps">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Apps by Mark Gabrielli + WETYR">
+<meta property="og:description" content="Calculator Plug, Prompterly, Moguly, CashStacker. iOS App Store + Google Play apps built by Mark Gabrielli.">
+<meta property="og:url" content="https://markcmo.com/apps">
+<meta property="og:image" content="https://markcmo.com/assets/mark-gabrielli.jpg">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="stylesheet" href="style.css">
+
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"CollectionPage","name":"Apps by Mark Gabrielli + WETYR","description":"iOS + Android apps built by Mark Gabrielli and WETYR Corp.","url":"https://markcmo.com/apps","mainEntity":{"@type":"ItemList","itemListElement":[
+{"@type":"ListItem","position":1,"item":{"@type":"MobileApplication","name":"Calculator Plug","operatingSystem":"iOS 15.1+","applicationCategory":"UtilitiesApplication","url":"https://apps.apple.com/us/app/calculator-plug/id6775307587","installUrl":"https://apps.apple.com/us/app/id6775307587","author":{"@type":"Person","name":"Mark Gabrielli"},"offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},"image":"https://is1-ssl.mzstatic.com/image/thumb/Purple211/v4/7e/92/1e/7e921e9e-d448-4f7a-2d28-89c3fc3b8b30/AppIcon-0-0-1x_U007epad-0-1-85-220.png/512x512bb.jpg","description":"450+ real-world calculators in one fast, clean app. Construction, finance, health, math, science, trades, trading, conversions, and more. Built for people who need a real answer, not a search engine full of pop-ups."}},
+{"@type":"ListItem","position":2,"item":{"@type":"MobileApplication","name":"Prompterly","operatingSystem":"iOS, Android","applicationCategory":"ProductivityApplication","url":"https://markcmo.com/apps","author":{"@type":"Person","name":"Mark Gabrielli"},"offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},"description":"Turn your phone into a professional teleprompter. Write a script, hit record, and read it off the screen while you film."}},
+{"@type":"ListItem","position":3,"item":{"@type":"MobileApplication","name":"Moguly","operatingSystem":"iOS","applicationCategory":"FinanceApplication","url":"https://markcmo.com/apps","author":{"@type":"Person","name":"Mark Gabrielli"},"offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},"description":"Mogul mindset finance + business app for builders."}},
+{"@type":"ListItem","position":4,"item":{"@type":"MobileApplication","name":"CashStacker","operatingSystem":"iOS","applicationCategory":"FinanceApplication","url":"https://markcmo.com/apps","author":{"@type":"Person","name":"Mark Gabrielli"},"offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},"description":"Track + grow your cash. Money management for stackers."}}
+]}}
+</script>
+
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"MobileApplication","name":"Calculator Plug","operatingSystem":"iOS 15.1+","applicationCategory":"UtilitiesApplication","url":"https://apps.apple.com/us/app/calculator-plug/id6775307587","installUrl":"https://apps.apple.com/us/app/id6775307587","downloadUrl":"https://apps.apple.com/us/app/id6775307587","screenshot":[],"image":"https://is1-ssl.mzstatic.com/image/thumb/Purple211/v4/7e/92/1e/7e921e9e-d448-4f7a-2d28-89c3fc3b8b30/AppIcon-0-0-1x_U007epad-0-1-85-220.png/512x512bb.jpg","author":{"@type":"Person","name":"Mark Gabrielli","url":"https://markcmo.com"},"publisher":{"@type":"Organization","name":"WETYR Corp","url":"https://wetyr.com"},"offers":{"@type":"Offer","price":"0","priceCurrency":"USD","availability":"https://schema.org/InStock"},"softwareVersion":"1.0","datePublished":"2026-06-05","fileSize":"35.3 MB","description":"450+ real-world calculators in one fast, clean app. Construction, finance, health, math, science, trades, trading, conversions, weather, tides, and more. Pro and Pro+ tiers unlock the full library. Built for people who need a real answer, not a search engine full of pop-ups."}
+</script>
+
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[
+{"@type":"ListItem","position":1,"name":"Home","item":"https://markcmo.com"},
+{"@type":"ListItem","position":2,"name":"Apps","item":"https://markcmo.com/apps"}]}
+</script>
+
+<style id="bulletproof-nav-css">
+body { padding-top: 64px !important; background: #0A0F2C !important; color: #fff !important; margin: 0 !important; font-family: 'Barlow', sans-serif !important; }
+nav.nav#mainNav { position: fixed !important; top: 0 !important; left: 0 !important; right: 0 !important; z-index: 1000 !important; display: flex !important; align-items: center !important; justify-content: space-between !important; height: 64px !important; padding: 0 5vw !important; background: rgba(10,15,44,0.97) !important; backdrop-filter: blur(14px) !important; -webkit-backdrop-filter: blur(14px) !important; border-bottom: 1px solid rgba(201,168,76,0.18) !important; box-shadow: 0 2px 20px rgba(0,0,0,0.3) !important; border-radius: 0 !important; margin: 0 !important; }
+nav.nav#mainNav .nav-logo { display: flex !important; align-items: center !important; gap: 10px !important; text-decoration: none !important; color: #fff !important; flex-shrink: 0 !important; }
+nav.nav#mainNav .nav-logo-avatar { width: 34px !important; height: 34px !important; border-radius: 50% !important; overflow: hidden !important; border: 2px solid #C9A84C !important; flex-shrink: 0 !important; }
+nav.nav#mainNav .nav-logo-avatar img { width: 100% !important; height: 100% !important; object-fit: cover !important; display: block !important; }
+nav.nav#mainNav .nav-logo-text { display: flex !important; flex-direction: column !important; line-height: 1.1 !important; }
+nav.nav#mainNav .nav-logo-text strong { font-size: 0.95rem !important; font-weight: 800 !important; color: #fff !important; }
+nav.nav#mainNav .nav-logo-text span { font-size: 0.62rem !important; font-weight: 500 !important; color: rgba(255,255,255,0.55) !important; letter-spacing: 0.07em !important; text-transform: uppercase !important; }
+nav.nav#mainNav .nav-links { display: flex !important; align-items: center !important; gap: 0.15rem !important; list-style: none !important; margin: 0 0 0 auto !important; padding: 0 !important; }
+nav.nav#mainNav .nav-links li { position: relative !important; list-style: none !important; }
+nav.nav#mainNav .nav-links a { display: inline-block !important; padding: 0.55rem 0.95rem !important; color: rgba(255,255,255,0.85) !important; text-decoration: none !important; font-size: 0.9rem !important; font-weight: 500 !important; border-radius: 6px !important; }
+nav.nav#mainNav .nav-links a:hover { color: #C9A84C !important; background: rgba(201,168,76,0.08) !important; }
+nav.nav#mainNav .nav-right { margin-left: 1rem !important; }
+nav.nav#mainNav .nav-btn { display: inline-block !important; padding: 0.55rem 1.1rem !important; background: #C9A84C !important; color: #0A0F2C !important; font-weight: 700 !important; font-size: 0.9rem !important; text-decoration: none !important; border-radius: 8px !important; }
+nav.nav#mainNav .nav-hamburger { display: none !important; flex-direction: column !important; gap: 4px !important; cursor: pointer !important; padding: 6px !important; }
+nav.nav#mainNav .nav-hamburger span { display: block !important; width: 22px !important; height: 2px !important; background: #fff !important; border-radius: 2px !important; }
+@media (max-width: 880px) {
+  nav.nav#mainNav .nav-links, nav.nav#mainNav .nav-right { display: none !important; }
+  nav.nav#mainNav .nav-hamburger { display: flex !important; }
+}
+.mobile-drawer { position: fixed !important; top: 64px !important; right: -100% !important; width: 80% !important; max-width: 320px !important; height: calc(100vh - 64px) !important; background: rgba(10,15,44,0.99) !important; padding: 2rem 1.5rem !important; transition: right 0.3s !important; z-index: 999 !important; }
+.mobile-drawer.open { right: 0 !important; }
+.mobile-drawer a { display: block !important; padding: 0.9rem 0 !important; color: rgba(255,255,255,0.85) !important; text-decoration: none !important; font-size: 1rem !important; border-bottom: 1px solid rgba(255,255,255,0.08) !important; }
+
+/* Apps page custom styles */
+.apps-hero { padding: 4rem 5vw 3rem; background: linear-gradient(180deg, #050919 0%, #0A0F2C 100%); border-bottom: 1px solid rgba(201,168,76,0.15); }
+.apps-hero-inner { max-width: 1100px; margin: 0 auto; text-align: center; }
+.apps-eyebrow { font-family: 'DM Mono', monospace; font-size: 0.7rem; letter-spacing: 0.2em; text-transform: uppercase; color: #C9A84C; margin: 0 0 1rem; }
+.apps-hero h1 { font-family: 'Bebas Neue', sans-serif; font-size: clamp(2.6rem, 5.5vw, 4.6rem); line-height: 1; color: #fff; margin: 0 0 1rem; letter-spacing: 0.02em; }
+.apps-hero h1 em { color: #C9A84C; font-style: normal; }
+.apps-hero-sub { font-size: 1.05rem; line-height: 1.65; color: rgba(255,255,255,0.7); max-width: 700px; margin: 0 auto; }
+
+.featured-app { padding: 5rem 5vw 4rem; background: #0A0F2C; }
+.featured-app-inner { max-width: 1100px; margin: 0 auto; display: grid; grid-template-columns: 320px 1fr; gap: 3rem; align-items: center; }
+@media (max-width: 880px) { .featured-app-inner { grid-template-columns: 1fr; text-align: center; } }
+.featured-app-icon { width: 280px; height: 280px; border-radius: 60px; box-shadow: 0 30px 60px rgba(0,0,0,0.5), 0 0 0 1px rgba(201,168,76,0.15); margin: 0 auto; display: block; }
+.featured-app-eyebrow { display: inline-flex; align-items: center; gap: 0.5rem; font-family: 'DM Mono', monospace; font-size: 0.7rem; letter-spacing: 0.2em; text-transform: uppercase; color: #C9A84C; background: rgba(201,168,76,0.08); border: 1px solid rgba(201,168,76,0.25); padding: 0.4rem 0.85rem; border-radius: 999px; margin: 0 0 1rem; }
+.featured-app h2 { font-family: 'Bebas Neue', sans-serif; font-size: clamp(2.4rem, 4.5vw, 3.8rem); line-height: 1; color: #fff; margin: 0 0 0.6rem; letter-spacing: 0.02em; }
+.featured-app-tagline { font-size: 1.2rem; line-height: 1.5; color: #C9A84C; font-weight: 600; margin: 0 0 1.5rem; }
+.featured-app-body p { font-size: 1rem; line-height: 1.75; color: rgba(255,255,255,0.78); margin: 0 0 1rem; }
+.featured-app-cta { margin-top: 1.8rem; display: flex; gap: 1rem; flex-wrap: wrap; align-items: center; }
+@media (max-width: 880px) { .featured-app-cta { justify-content: center; } }
+.app-store-badge { display: inline-flex; align-items: center; gap: 0.7rem; background: #fff; color: #0A0F2C; padding: 0.85rem 1.6rem; font-weight: 700; text-decoration: none; border-radius: 10px; transition: transform 0.15s, box-shadow 0.15s; font-size: 0.95rem; }
+.app-store-badge:hover { transform: translateY(-2px); box-shadow: 0 8px 24px rgba(255,255,255,0.15); }
+.app-store-badge svg { width: 22px; height: 22px; }
+.app-store-badge-text { display: flex; flex-direction: column; line-height: 1.1; text-align: left; }
+.app-store-badge-text small { font-size: 0.62rem; font-weight: 500; color: rgba(10,15,44,0.6); letter-spacing: 0.05em; text-transform: uppercase; }
+.app-store-badge-text strong { font-size: 1rem; font-weight: 800; }
+.featured-app-meta { display: flex; gap: 1.8rem; flex-wrap: wrap; font-family: 'DM Mono', monospace; font-size: 0.72rem; letter-spacing: 0.08em; text-transform: uppercase; color: rgba(255,255,255,0.5); margin-top: 1.5rem; }
+.featured-app-meta strong { color: #C9A84C; }
+
+.app-categories { padding: 4rem 5vw; background: #050919; border-top: 1px solid rgba(201,168,76,0.08); }
+.app-categories-inner { max-width: 1100px; margin: 0 auto; }
+.app-categories h2 { font-family: 'Bebas Neue', sans-serif; font-size: clamp(2rem, 4vw, 3rem); color: #fff; margin: 0 0 0.5rem; text-align: center; letter-spacing: 0.02em; }
+.app-categories-sub { text-align: center; color: rgba(255,255,255,0.6); font-size: 1rem; margin: 0 0 3rem; }
+.cat-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 1rem; }
+.cat-card { background: rgba(255,255,255,0.03); border: 1px solid rgba(201,168,76,0.1); padding: 1.2rem 1.4rem; border-radius: 10px; transition: border-color 0.15s, background 0.15s; }
+.cat-card:hover { border-color: rgba(201,168,76,0.3); background: rgba(255,255,255,0.05); }
+.cat-card-title { font-family: 'DM Mono', monospace; font-size: 0.68rem; letter-spacing: 0.15em; text-transform: uppercase; color: #C9A84C; margin: 0 0 0.5rem; }
+.cat-card-body { font-size: 0.9rem; line-height: 1.55; color: rgba(255,255,255,0.78); margin: 0; }
+
+.app-features { padding: 4rem 5vw; background: #0A0F2C; }
+.app-features-inner { max-width: 1100px; margin: 0 auto; }
+.app-features h2 { font-family: 'Bebas Neue', sans-serif; font-size: clamp(2rem, 4vw, 3rem); color: #fff; margin: 0 0 2.5rem; text-align: center; letter-spacing: 0.02em; }
+.feat-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 1.5rem; }
+.feat-card { background: linear-gradient(135deg, #0E1438, #0A0F2C); border: 1px solid rgba(201,168,76,0.15); padding: 1.8rem; border-radius: 12px; }
+.feat-card-num { font-family: 'DM Mono', monospace; font-size: 0.7rem; letter-spacing: 0.18em; color: #C9A84C; margin: 0 0 0.8rem; }
+.feat-card-title { font-family: 'Bebas Neue', sans-serif; font-size: 1.4rem; color: #fff; margin: 0 0 0.6rem; letter-spacing: 0.02em; line-height: 1.1; }
+.feat-card-body { font-size: 0.92rem; line-height: 1.65; color: rgba(255,255,255,0.7); margin: 0; }
+
+.other-apps { padding: 5rem 5vw; background: #050919; border-top: 1px solid rgba(201,168,76,0.1); }
+.other-apps-inner { max-width: 1100px; margin: 0 auto; }
+.other-apps h2 { font-family: 'Bebas Neue', sans-serif; font-size: clamp(2rem, 4vw, 3rem); color: #fff; margin: 0 0 0.5rem; text-align: center; letter-spacing: 0.02em; }
+.other-apps-sub { text-align: center; color: rgba(255,255,255,0.6); font-size: 1rem; margin: 0 0 3rem; }
+.other-apps-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 1.5rem; }
+.other-app-card { background: rgba(255,255,255,0.03); border: 1px solid rgba(201,168,76,0.12); padding: 1.8rem; border-radius: 14px; display: flex; flex-direction: column; }
+.other-app-card-top { display: flex; align-items: center; gap: 1rem; margin-bottom: 1.2rem; }
+.other-app-icon { width: 60px; height: 60px; border-radius: 14px; flex-shrink: 0; background: linear-gradient(135deg, #C9A84C, #8b6f1d); display: flex; align-items: center; justify-content: center; font-family: 'Bebas Neue', sans-serif; font-size: 1.6rem; color: #0A0F2C; letter-spacing: 0; }
+.other-app-card h3 { font-family: 'Bebas Neue', sans-serif; font-size: 1.5rem; color: #fff; margin: 0 0 0.25rem; letter-spacing: 0.02em; line-height: 1.1; }
+.other-app-card-cat { font-family: 'DM Mono', monospace; font-size: 0.65rem; letter-spacing: 0.12em; text-transform: uppercase; color: rgba(255,255,255,0.5); }
+.other-app-card-body { font-size: 0.92rem; line-height: 1.65; color: rgba(255,255,255,0.75); margin: 0 0 1.4rem; flex: 1; }
+.other-app-card-status { display: inline-flex; align-items: center; gap: 0.4rem; font-family: 'DM Mono', monospace; font-size: 0.65rem; letter-spacing: 0.12em; text-transform: uppercase; color: #C9A84C; background: rgba(201,168,76,0.1); border: 1px solid rgba(201,168,76,0.25); padding: 0.35rem 0.75rem; border-radius: 999px; align-self: flex-start; }
+.other-app-card-status.live { color: #4ade80; background: rgba(74,222,128,0.08); border-color: rgba(74,222,128,0.25); }
+
+.apps-cta { padding: 5rem 5vw; background: linear-gradient(135deg, #C9A84C 0%, #a37e2f 100%); text-align: center; }
+.apps-cta-inner { max-width: 720px; margin: 0 auto; }
+.apps-cta h2 { font-family: 'Bebas Neue', sans-serif; font-size: clamp(2rem, 4vw, 3rem); color: #0A0F2C; margin: 0 0 1rem; letter-spacing: 0.02em; }
+.apps-cta p { font-size: 1.05rem; line-height: 1.6; color: #0A0F2C; margin: 0 0 1.8rem; opacity: 0.85; }
+.apps-cta-btn { display: inline-block; background: #0A0F2C; color: #C9A84C; padding: 14px 36px; font-family: 'DM Mono', monospace; font-size: 0.85rem; letter-spacing: 0.16em; text-transform: uppercase; font-weight: 700; text-decoration: none; border-radius: 6px; transition: transform 0.15s; }
+.apps-cta-btn:hover { transform: translateY(-2px); }
+
+footer { background: #050919; padding: 4rem 5vw 2rem; border-top: 1px solid rgba(201,168,76,0.1); }
+footer .footer-inner { max-width: 1100px; margin: 0 auto; display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 3rem; }
+@media (max-width: 880px) { footer .footer-inner { grid-template-columns: 1fr; gap: 2rem; } }
+footer h4 { font-family: 'DM Mono', monospace; font-size: 0.7rem; letter-spacing: 0.15em; text-transform: uppercase; color: #C9A84C; margin: 0 0 1rem; }
+footer ul { list-style: none; padding: 0; margin: 0; }
+footer ul li { margin-bottom: 0.6rem; }
+footer ul li a { color: rgba(255,255,255,0.7); text-decoration: none; font-size: 0.9rem; }
+footer ul li a:hover { color: #C9A84C; }
+.footer-brand-logo { font-family: 'Bebas Neue', sans-serif; font-size: 1.6rem; color: #fff; margin: 0 0 0.8rem; letter-spacing: 0.02em; }
+.footer-brand-logo span { color: #C9A84C; }
+.footer-brand-desc { font-size: 0.9rem; line-height: 1.6; color: rgba(255,255,255,0.65); }
+.footer-bar { max-width: 1100px; margin: 3rem auto 0; padding-top: 1.5rem; border-top: 1px solid rgba(255,255,255,0.08); font-size: 0.8rem; color: rgba(255,255,255,0.5); text-align: center; }
 </style>
 </head>
 <body>
+
+<nav class="nav" id="mainNav">
+  <a href="/" class="nav-logo">
+    <div class="nav-logo-avatar">
+      <img src="/assets/mark-gabrielli.jpg" alt="Mark Gabrielli" onerror="this.parentElement.innerHTML='<span style=\'display:flex;align-items:center;justify-content:center;width:100%;height:100%;font-family:Outfit,sans-serif;font-weight:900;font-size:1rem;color:#fff;background:var(--accent)\'>M</span>'" />
+    </div>
+    <div class="nav-logo-text">
+      <strong>Mark Gabrielli</strong>
+      <span>Fractional CMO &amp; COO</span>
+    </div>
+  </a>
+  <ul class="nav-links">
+    <li><a href="/about">About</a></li>
+    <li><a href="/services">Services</a></li>
+    <li><a href="/magnet-framework" style="color:#C9A84C;font-weight:600;">MAGNET&trade;</a></li>
+    <li><a href="/apps" style="color:#C9A84C;font-weight:600;">Apps</a></li>
+    <li><a href="/results">Results</a></li>
+    <li><a href="/blog">Insights</a></li>
+  </ul>
+  <div class="nav-right">
+    <a href="/book" class="nav-btn">Book a Free Call</a>
+  </div>
+  <div class="nav-hamburger" id="navHam"><span></span><span></span><span></span></div>
+</nav>
+
+<div class="mobile-drawer" id="mobileDrawer">
+  <a href="/about">About</a>
+  <a href="/services">Services</a>
+  <a href="/magnet-framework" style="color:#C9A84C;font-weight:600;">MAGNET Framework&trade;</a>
+  <a href="/apps" style="color:#C9A84C;font-weight:600;">Apps</a>
+  <a href="/results">Results</a>
+  <a href="/blog">Insights</a>
+  <a href="https://academy.markcmo.com" target="_blank">Academy</a>
+  <a href="/book" style="color:#C9A84C;font-weight:700;">Book a Free Strategy Call &rarr;</a>
+</div>
+
+<script>
+(function(){
+  var nav = document.getElementById('mainNav');
+  if (nav) window.addEventListener('scroll', function(){ nav.classList.toggle('scrolled', window.scrollY > 20); });
+  var ham = document.getElementById('navHam');
+  var drawer = document.getElementById('mobileDrawer');
+  if (ham && drawer) {
+    ham.addEventListener('click', function(){ drawer.classList.toggle('open'); });
+    drawer.querySelectorAll('a').forEach(function(a){ a.addEventListener('click', function(){ drawer.classList.remove('open'); }); });
+  }
+})();
+</script>
+
 <main>
-<span data-eeat-byline="v1" style="display:none"></span>
+
 <section class="apps-hero">
-<div class="apps-hero-grid"></div>
-<div class="apps-hero-inner">
-<div class="apps-eyebrow">MarkCMO &middot; Internal</div>
-<h1>Apps</h1>
-<p>A private hub for the apps we are building and testing. Install links live here. This page is not indexed and is not linked from the public site.</p>
-<span class="apps-private-tag">Private &middot; Not indexed</span>
-</div>
+  <div class="apps-hero-inner">
+    <p class="apps-eyebrow">Built by Mark Gabrielli &middot; WETYR Corp</p>
+    <h1>Apps That Actually <em>Ship</em></h1>
+    <p class="apps-hero-sub">Real apps in the iOS App Store. Built internally with no third-party plugins. Calculator Plug headlines the lineup with 450+ real-world calculators in one fast, clean app. More apps below.</p>
+  </div>
 </section>
-<section class="apps-body">
-<div class="apps-grid">
 
-<div class="app-card">
-<div class="app-card-top">
-<div class="app-icon">
-<div class="app-icon-card">
-<div class="app-icon-line short"></div>
-<div class="app-icon-line"></div>
-<div class="app-icon-line read"></div>
-<div class="app-icon-line short"></div>
-</div>
-</div>
-<div class="app-card-title">
-<h2>Prompterly</h2>
-<span>Teleprompter &middot; v1.0.0</span>
-</div>
-</div>
-<p class="app-card-desc">Turn your phone into a teleprompter. Write a script, hit record, and read it straight off the screen while you film. Everything stays on your device.</p>
-<div class="app-platforms">
-<a class="app-btn android" href="https://expo.dev/artifacts/eas/kaBq36Y6LLqNq5c2iWuZQ8.apk">
-<span>Download for Android (APK)</span>
-<span class="ab-meta">Install now</span>
-</a>
-<span class="app-btn ios">
-<span>iOS via TestFlight</span>
-<span class="ab-meta">Submitted - in review</span>
-</span>
-</div>
-<div class="app-card-foot">
-<a href="/prompterly-privacy">Privacy policy</a>
-<a href="https://expo.dev/accounts/markgabrielli/projects/prompterly" target="_blank" rel="noopener">Build dashboard</a>
-</div>
-</div>
-
-</div>
-<p class="apps-note">Android: open the download link on your phone, tap the downloaded <code>.apk</code>, and allow "install from unknown sources" once. iOS will appear here as a TestFlight link once the build is signed and submitted. To add another app to this hub, drop a new card in the grid.</p>
+<section class="featured-app" id="calculator-plug">
+  <div class="featured-app-inner">
+    <img src="https://is1-ssl.mzstatic.com/image/thumb/Purple211/v4/7e/92/1e/7e921e9e-d448-4f7a-2d28-89c3fc3b8b30/AppIcon-0-0-1x_U007epad-0-1-85-220.png/512x512bb.jpg" alt="Calculator Plug icon" class="featured-app-icon">
+    <div class="featured-app-body">
+      <span class="featured-app-eyebrow">New &middot; Live on the App Store</span>
+      <h2>Calculator Plug</h2>
+      <p class="featured-app-tagline">450+ real-world calculators in one fast, clean app.</p>
+      <p>Built for people who need a real answer, not a search engine full of pop-ups. Construction, finance, health, math, trades, trading, conversions, weather, tides - one app, every calculator you actually use, searchable in a tap.</p>
+      <p>Works offline. Clean dark interface, no clutter. Free to use with a core set. Pro and Pro+ unlock the full library.</p>
+      <div class="featured-app-cta">
+        <a class="app-store-badge" href="https://apps.apple.com/us/app/calculator-plug/id6775307587" target="_blank" rel="noopener">
+          <svg viewBox="0 0 384 512" fill="#0A0F2C" xmlns="http://www.w3.org/2000/svg"><path d="M318.7 268.7c-.2-36.7 16.4-64.4 50-84.8-18.8-26.9-47.2-41.7-84.7-44.6-35.5-2.8-74.3 20.7-88.5 20.7-15 0-49.4-19.7-76.4-19.7C63.3 141.2 4 184.8 4 273.5q0 39.3 14.4 81.2c12.8 36.7 59 126.7 107.2 125.2 25.2-.6 43-17.9 75.8-17.9 31.8 0 48.3 17.9 76.4 17.9 48.6-.7 90.4-82.5 102.6-119.3-65.2-30.7-61.7-90-61.7-91.9zm-56.6-164.2c27.3-32.4 24.8-61.9 24-72.5-24.1 1.4-52 16.4-67.9 34.9-17.5 19.8-27.8 44.3-25.6 71.9 26.1 2 49.9-11.4 69.5-34.3z"/></svg>
+          <span class="app-store-badge-text">
+            <small>Download on the</small>
+            <strong>App Store</strong>
+          </span>
+        </a>
+        <a class="app-store-badge" href="https://apps.apple.com/us/app/id6775307587" target="_blank" rel="noopener" style="background:rgba(255,255,255,0.08);color:#fff;border:1px solid rgba(255,255,255,0.15);">
+          <span class="app-store-badge-text" style="text-align:center;">
+            <strong style="color:#C9A84C;">Quick link</strong>
+            <small style="color:rgba(255,255,255,0.6);">apps.apple.com/us/app/id6775307587</small>
+          </span>
+        </a>
+      </div>
+      <div class="featured-app-meta">
+        <span><strong>Category</strong> Utilities</span>
+        <span><strong>iOS</strong> 15.1+</span>
+        <span><strong>Size</strong> 35.3 MB</span>
+        <span><strong>Price</strong> Free + Pro</span>
+        <span><strong>Developer</strong> Mark Gabrielli</span>
+      </div>
+    </div>
+  </div>
 </section>
+
+<section class="app-categories">
+  <div class="app-categories-inner">
+    <h2>What Calculator Plug Covers</h2>
+    <p class="app-categories-sub">450+ calculators across 10 real-world categories.</p>
+    <div class="cat-grid">
+      <div class="cat-card">
+        <p class="cat-card-title">Construction + Home</p>
+        <p class="cat-card-body">Concrete, drywall, flooring, roofing, framing, square footage, brick, paint coverage, lumber, deck materials.</p>
+      </div>
+      <div class="cat-card">
+        <p class="cat-card-title">Finance + Money</p>
+        <p class="cat-card-body">Mortgage, loan amortization, refinance, compound interest, ROI, retirement, tax, savings goal, debt payoff.</p>
+      </div>
+      <div class="cat-card">
+        <p class="cat-card-title">Health + Fitness</p>
+        <p class="cat-card-body">BMI, body fat, calories, macros, heart rate, pace, hydration, one-rep max, BMR, TDEE.</p>
+      </div>
+      <div class="cat-card">
+        <p class="cat-card-title">Math + Science</p>
+        <p class="cat-card-body">Algebra, geometry, statistics, chemistry, physics, trigonometry, calculus helpers, scientific notation.</p>
+      </div>
+      <div class="cat-card">
+        <p class="cat-card-title">Trades</p>
+        <p class="cat-card-body">Electrical (Ohm's Law, voltage drop, wire size), plumbing, HVAC (load, duct sizing), welding, structural.</p>
+      </div>
+      <div class="cat-card">
+        <p class="cat-card-title">Trading + Investing</p>
+        <p class="cat-card-body">Position size, pip value, cost basis, capital gains, dividend yield, options Greeks, risk-reward.</p>
+      </div>
+      <div class="cat-card">
+        <p class="cat-card-title">Conversions</p>
+        <p class="cat-card-body">Length, weight, volume, temperature, area, speed, energy, pressure, currency, time zones.</p>
+      </div>
+      <div class="cat-card">
+        <p class="cat-card-title">Automotive</p>
+        <p class="cat-card-body">MPG, lease vs buy, loan, gear ratio, tire size, towing capacity, fuel cost.</p>
+      </div>
+      <div class="cat-card">
+        <p class="cat-card-title">Business</p>
+        <p class="cat-card-body">Pricing, margin, markup, breakeven, sales tax, tip, invoice math, payroll.</p>
+      </div>
+      <div class="cat-card">
+        <p class="cat-card-title">Field Pack</p>
+        <p class="cat-card-body">Local weather, tides, sunrise + sunset, moon phases, GPS, dates, time math.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="app-features">
+  <div class="app-features-inner">
+    <h2>Why Calculator Plug Wins</h2>
+    <div class="feat-grid">
+      <div class="feat-card">
+        <p class="feat-card-num">01</p>
+        <h3 class="feat-card-title">One App, 450+ Calculators</h3>
+        <p class="feat-card-body">Stop hunting through search engines + pop-up-ridden sites for the formula you need. Everything in one place, searchable in a tap.</p>
+      </div>
+      <div class="feat-card">
+        <p class="feat-card-num">02</p>
+        <h3 class="feat-card-title">Works Offline</h3>
+        <p class="feat-card-body">Job site with no signal? Field work in the middle of nowhere? Calculator Plug runs offline (except live weather + tides). No subscription paywalls behind every calculation.</p>
+      </div>
+      <div class="feat-card">
+        <p class="feat-card-num">03</p>
+        <h3 class="feat-card-title">Real-World Categories</h3>
+        <p class="feat-card-body">Built around what people actually need - construction trades, finance, health, trading - not abstract math homework problems.</p>
+      </div>
+      <div class="feat-card">
+        <p class="feat-card-num">04</p>
+        <h3 class="feat-card-title">Clean Dark Interface</h3>
+        <p class="feat-card-body">No clutter. No tracking pixels. No ads inside the calculator screens. Designed to get out of your way and give you the answer.</p>
+      </div>
+      <div class="feat-card">
+        <p class="feat-card-num">05</p>
+        <h3 class="feat-card-title">Free Core + Pro Unlocks</h3>
+        <p class="feat-card-body">Free to use with a core set of the most-used calculators. Pro unlocks every calculator in the library. Pro+ adds the professional trades suite.</p>
+      </div>
+      <div class="feat-card">
+        <p class="feat-card-num">06</p>
+        <h3 class="feat-card-title">Built Internally</h3>
+        <p class="feat-card-body">WETYR Corp builds its apps internally with no third-party plugins or open-source AI dependencies. Native iOS, fast, owned-end-to-end.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="other-apps">
+  <div class="other-apps-inner">
+    <h2>The Rest of the Lineup</h2>
+    <p class="other-apps-sub">More apps in the App Store + Google Play coming through the WETYR pipeline.</p>
+    <div class="other-apps-grid">
+
+      <div class="other-app-card">
+        <div class="other-app-card-top">
+          <div class="other-app-icon">P</div>
+          <div>
+            <h3>Prompterly</h3>
+            <span class="other-app-card-cat">Productivity &middot; Teleprompter</span>
+          </div>
+        </div>
+        <p class="other-app-card-body">Turn your phone into a teleprompter. Write a script, hit record, and read it straight off the screen while you film. Everything stays on your device. 5 free sessions then auto-renew subs (Weekly $4.99 / Monthly $14.99) via Apple IAP.</p>
+        <span class="other-app-card-status">In Review</span>
+      </div>
+
+      <div class="other-app-card">
+        <div class="other-app-card-top">
+          <div class="other-app-icon">M</div>
+          <div>
+            <h3>Moguly</h3>
+            <span class="other-app-card-cat">Finance &middot; Builder mindset</span>
+          </div>
+        </div>
+        <p class="other-app-card-body">Mogul mindset finance + business app for builders. Track the real metrics that matter for cash flow, growth, and compounding ownership. Designed for entrepreneurs and side hustlers stacking real assets.</p>
+        <span class="other-app-card-status">Submitted</span>
+      </div>
+
+      <div class="other-app-card">
+        <div class="other-app-card-top">
+          <div class="other-app-icon">$</div>
+          <div>
+            <h3>CashStacker</h3>
+            <span class="other-app-card-cat">Finance &middot; Cash management</span>
+          </div>
+        </div>
+        <p class="other-app-card-body">Track + grow your cash. Money management for stackers - know where every dollar is, where it should be, and the next move to stack faster. No advice, no fluff, just the dashboard you actually open.</p>
+        <span class="other-app-card-status">Submitted</span>
+      </div>
+
+      <div class="other-app-card">
+        <div class="other-app-card-top">
+          <div class="other-app-icon">I</div>
+          <div>
+            <h3>Idle Tycoon</h3>
+            <span class="other-app-card-cat">Games &middot; Idle business sim</span>
+          </div>
+        </div>
+        <p class="other-app-card-body">Build your business empire one idle click at a time. Hire workers, upgrade businesses, automate revenue, unlock new industries. Free with optional Remove-Ads IAP. Built on Expo for iOS + Android.</p>
+        <span class="other-app-card-status">In Development</span>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<section class="apps-cta">
+  <div class="apps-cta-inner">
+    <h2>Need an App Built Like This?</h2>
+    <p>Mark Gabrielli + WETYR Corp build apps for clients too - from concept to App Store submission to ongoing growth. If you need an app shipped that actually makes it through review, book a 30-minute scoping call.</p>
+    <a href="/book" class="apps-cta-btn">Book a 30-minute call &rarr;</a>
+  </div>
+</section>
+
 </main>
+
+<footer>
+  <div class="footer-inner">
+    <div>
+      <p class="footer-brand-logo">Mark <span>Gabrielli</span></p>
+      <p class="footer-brand-desc">Fractional CMO, COO &amp; Executive Consultant. WETYR Founder. Apps + ventures + marketing leadership for $1M-$100M companies.</p>
+    </div>
+    <div>
+      <h4>Apps</h4>
+      <ul>
+        <li><a href="#calculator-plug">Calculator Plug</a></li>
+        <li><a href="https://apps.apple.com/us/app/id6775307587" target="_blank" rel="noopener">Download iOS</a></li>
+        <li><a href="/prompterly-privacy">Prompterly Privacy</a></li>
+      </ul>
+    </div>
+    <div>
+      <h4>Services</h4>
+      <ul>
+        <li><a href="/fractional-cmo">Fractional CMO</a></li>
+        <li><a href="/fractional-coo">Fractional COO</a></li>
+        <li><a href="/services">All Services</a></li>
+        <li><a href="/magnet-framework">MAGNET Framework</a></li>
+      </ul>
+    </div>
+    <div>
+      <h4>Company</h4>
+      <ul>
+        <li><a href="/about">About Mark</a></li>
+        <li><a href="/results">Results</a></li>
+        <li><a href="/blog">Insights</a></li>
+        <li><a href="/book">Book a Call</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bar">
+    &copy; 2026 Mark Gabrielli &middot; WETYR Corp &middot; markcmo.com &middot; All rights reserved.
+  </div>
+</footer>
+
 </body>
 </html>
