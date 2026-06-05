@@ -559,12 +559,13 @@ ul { list-style: none; }
 .hero-actions { display: flex; flex-wrap: wrap; gap: 1rem; margin-bottom: 3rem; }
 .btn-primary {
   display: inline-flex; align-items: center; gap: 8px;
-  background: var(--accent); color: #fff;
+  background: var(--accent); color: #0A0F2C;
   font-family: 'Space Grotesk', sans-serif;
-  font-size: 0.9375rem; font-weight: 700;
+  font-size: 0.9375rem; font-weight: 800;
   padding: 0.875rem 2rem; border-radius: 10px;
   transition: transform 0.2s, box-shadow 0.2s;
   box-shadow: 0 0 32px var(--accent-glow);
+  text-shadow: none;
 }
 .btn-primary:hover { transform: translateY(-3px); box-shadow: 0 8px 40px rgba(201,168,76,0.45); }
 .btn-secondary {
@@ -2523,8 +2524,13 @@ main > nav[aria-label="Breadcrumb"] a:hover { color: #C9A84C !important; }
 
 <style>
 @media (max-width: 880px) {
-  #apps-promo > div > div:nth-child(2) { grid-template-columns: 1fr !important; text-align: center; padding: 1.5rem !important; }
-  #apps-promo > div > div:nth-child(2) > div:last-child { justify-self: center; }
+  #apps-promo > div > div:nth-child(2),
+  #apps-promo > div > div:nth-child(3) { grid-template-columns: 1fr !important; text-align: center; padding: 1.5rem !important; gap: 1rem !important; }
+  #apps-promo > div > div:nth-child(2) > div:last-child,
+  #apps-promo > div > div:nth-child(3) > div:last-child,
+  #apps-promo > div > div:nth-child(3) > a { justify-self: center; }
+  #apps-promo img,
+  #apps-promo > div > div:nth-child(3) > div:first-child { justify-self: center; margin: 0 auto; }
 }
 </style>
 
