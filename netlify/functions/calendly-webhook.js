@@ -230,18 +230,24 @@ async function sendInviteeConfirmation({ inviteeEmail, inviteeName, eventName, s
   }
 
   const firstName = (inviteeName || '').split(' ')[0] || 'there';
-  // Day name like "Tuesday" - matches how Mark naturally refers to the meeting
-  const whenDay = scheduledAt
-    ? new Date(scheduledAt).toLocaleString('en-US', { weekday: 'long', timeZone: 'America/New_York' })
-    : 'our scheduled time';
+  // Day + time formatting in US/Eastern. "Tuesday" / "2:00 PM ET" /
+  // combined "Tuesday at 2:00 PM ET" for the opening confirmation line.
+  const _dt = scheduledAt ? new Date(scheduledAt) : null;
+  const whenDay = _dt
+    ? _dt.toLocaleString('en-US', { weekday: 'long', timeZone: 'America/New_York' })
+    : 'our scheduled day';
+  const whenTime = _dt
+    ? _dt.toLocaleString('en-US', { hour: 'numeric', minute: '2-digit', hour12: true, timeZone: 'America/New_York' }) + ' ET'
+    : '';
+  const whenDayTime = whenTime ? `${whenDay} at ${whenTime}` : whenDay;
 
-  const subject = `Confirming our meeting on ${whenDay}`;
+  const subject = `Confirming our meeting on ${whenDayTime}`;
 
   // Plain text version (deliverability + clients that block HTML).
   // Length + tone match Mark's actual sent example - short, warm, not salesy.
   const text = `Hi ${firstName},
 
-Confirming our meeting on ${whenDay}.
+Confirming our meeting on ${whenDayTime}.
 
 If there are any details you can provide prior to our meeting I would love to have a contextual foundation going into ${whenDay}.
 
@@ -257,7 +263,7 @@ MarkCMO.com`;
 <body style="margin:0;padding:0;background:#ffffff;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif;color:#1a1a1a;">
   <div style="max-width:560px;margin:0 auto;padding:24px;font-size:15px;line-height:1.6;">
     <p style="margin:0 0 14px;">Hi ${esc(firstName)},</p>
-    <p style="margin:0 0 14px;">Confirming our meeting on ${esc(whenDay)}.</p>
+    <p style="margin:0 0 14px;">Confirming our meeting on ${esc(whenDayTime)}.</p>
     <p style="margin:0 0 14px;">If there are any details you can provide prior to our meeting I would love to have a contextual foundation going into ${esc(whenDay)}.</p>
     <p style="margin:0 0 18px;">Thank you!</p>
     <p style="margin:0;">Mark Gabrielli<br><a href="https://markcmo.com" style="color:#1a1a1a;text-decoration:none;">MarkCMO.com</a></p>
