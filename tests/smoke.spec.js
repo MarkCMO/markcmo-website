@@ -76,6 +76,32 @@ test.describe('Homepage + nav + footer', () => {
     // The headline must say the visitor is "in"
     await expect(page.locator('h1, .welcome-h1').first()).toContainText(/in the MarkCMO Club|You’re in|You're in/i);
   });
+
+  // Welcome page is adaptive across 4 modes (discovery / paid / interview /
+  // wetyr). Each mode must brand correctly so we don't show "MarkCMO Club" to
+  // someone who booked a WETYR deal call, or "Discovery" copy to someone who
+  // just paid $880 for a CMO Power Session.
+  test('welcome page detects discovery mode for Consultation Discovery', async ({ page }) => {
+    await page.goto(`${PROD}/welcome-to-the-markcmo-club?event_type_name=Consultation+Discovery&event_start_time=2026-12-31T15:00:00-05:00`);
+    await expect(page.locator('body')).toHaveAttribute('data-booking-mode', 'discovery');
+    await expect(page.locator('.welcome-eyebrow')).toContainText(/Booking Confirmed/i);
+  });
+  test('welcome page detects paid mode for CMO Power Session $880', async ({ page }) => {
+    await page.goto(`${PROD}/welcome-to-the-markcmo-club?event_type_name=60-Min+CMO+Power+Session+%E2%80%93+%24880&event_start_time=2026-12-31T15:00:00-05:00`);
+    await expect(page.locator('body')).toHaveAttribute('data-booking-mode', 'paid');
+    await expect(page.locator('.welcome-eyebrow')).toContainText(/Payment.*Confirmed/i);
+  });
+  test('welcome page detects interview mode', async ({ page }) => {
+    await page.goto(`${PROD}/welcome-to-the-markcmo-club?event_type_name=Initial+Interview+%7C+Discussion&event_start_time=2026-12-31T15:00:00-05:00`);
+    await expect(page.locator('body')).toHaveAttribute('data-booking-mode', 'interview');
+    await expect(page.locator('.welcome-eyebrow')).toContainText(/Interview Confirmed/i);
+  });
+  test('welcome page detects wetyr mode + rebrands the page', async ({ page }) => {
+    await page.goto(`${PROD}/welcome-to-the-markcmo-club?event_type_name=WETYR+%7C+Introduction+Meeting&event_start_time=2026-12-31T15:00:00-05:00`);
+    await expect(page.locator('body')).toHaveAttribute('data-booking-mode', 'wetyr');
+    await expect(page.locator('.welcome-eyebrow')).toContainText(/WETYR.*Confirmed/i);
+    await expect(page.locator('.welcome-h1')).toContainText(/WETYR/i);
+  });
 });
 
 test.describe('Admin pages', () => {

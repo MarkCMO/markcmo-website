@@ -241,32 +241,82 @@ async function sendInviteeConfirmation({ inviteeEmail, inviteeName, eventName, s
     : '';
   const whenDayTime = whenTime ? `${whenDay} at ${whenTime}` : whenDay;
 
-  const subject = `Confirming our meeting on ${whenDayTime}`;
+  // Detect mode from the Calendly event name. Same logic as the welcome page so
+  // the email + landing page tell a consistent story for every event type.
+  //   wetyr     - any event name containing "WETYR"
+  //   paid      - "$" in the name, or audit/strategy/power/execution session keywords
+  //   interview - any event with "interview" in the name
+  //   discovery - default (Consultation Discovery, Discovery Call, Meeting with Mark)
+  const _n = (eventName || '').toLowerCase();
+  let mode = 'discovery';
+  if (_n.indexOf('wetyr') >= 0) mode = 'wetyr';
+  else if (_n.indexOf('$') >= 0 || /audit call|strategy session|power session|execution edition|cmo-as-a-service/.test(_n)) mode = 'paid';
+  else if (_n.indexOf('interview') >= 0) mode = 'interview';
+
+  // Mode-specific copy bundle. Keeps Mark's short personal voice intact, but
+  // varies the opener + ask to match what the prospect actually booked.
+  const MODE_COPY = {
+    discovery: {
+      subject: `Confirming our meeting on ${whenDayTime}`,
+      from: 'Mark Gabrielli <mark@markcmo.com>',
+      replyTo: 'mark@markcmo.com',
+      signOff: 'Mark Gabrielli',
+      signOffLink: { href: 'https://markcmo.com', label: 'MarkCMO.com' },
+      bodyText: `Confirming our meeting on ${whenDayTime}.\n\nIf there are any details you can provide prior to our meeting I would love to have a contextual foundation going into ${whenDay}.`,
+    },
+    paid: {
+      subject: `Confirming our paid session on ${whenDayTime}`,
+      from: 'Mark Gabrielli <mark@markcmo.com>',
+      replyTo: 'mark@markcmo.com',
+      signOff: 'Mark Gabrielli',
+      signOffLink: { href: 'https://markcmo.com', label: 'MarkCMO.com' },
+      bodyText: `Thank you for booking the ${eventName || 'paid session'}. We are locked in for ${whenDayTime}.\n\nSo I can make every minute count, would you send me the 1-3 specific outcomes you want from our time together along with anything you would like me to review beforehand (numbers, dashboards, landing pages, decks, ad accounts)?\n\nI will work through whatever you send so we spend our session on decisions, not data dumps.`,
+    },
+    interview: {
+      subject: `Confirming our interview on ${whenDayTime}`,
+      from: 'Mark Gabrielli <mark@markcmo.com>',
+      replyTo: 'mark@markcmo.com',
+      signOff: 'Mark Gabrielli',
+      signOffLink: { href: 'https://markcmo.com', label: 'MarkCMO.com' },
+      bodyText: `Confirming our interview on ${whenDayTime}.\n\nIf there is anything you would like me to review before we talk (a portfolio piece, a project, a writeup, a deck), please send it over. And bring your top questions about the role going into ${whenDay} - these go best when both sides come ready to interview.`,
+    },
+    wetyr: {
+      subject: `Confirming our WETYR meeting on ${whenDayTime}`,
+      from: 'WETYR <info@wetyr.com>',
+      replyTo: 'info@wetyr.com',
+      signOff: 'Mark Gabrielli',
+      signOffLink: { href: 'https://wetyr.com', label: 'WETYR.com' },
+      bodyText: `Confirming our WETYR meeting on ${whenDayTime}.\n\nIf there are any details you can share before we meet (the property, the situation, the timeline, the outcome you are after), I would love to have that context going into ${whenDay} so we can use the time to talk through your number, not background.`,
+    },
+  };
+  const copy = MODE_COPY[mode];
+
+  const subject = copy.subject;
 
   // Plain text version (deliverability + clients that block HTML).
-  // Length + tone match Mark's actual sent example - short, warm, not salesy.
   const text = `Hi ${firstName},
 
-Confirming our meeting on ${whenDayTime}.
-
-If there are any details you can provide prior to our meeting I would love to have a contextual foundation going into ${whenDay}.
+${copy.bodyText}
 
 Thank you!
 
-Mark Gabrielli
-MarkCMO.com`;
+${copy.signOff}
+${copy.signOffLink.label}`;
 
   // HTML version - plain readable email, looks like Mark typed it personally.
   // No designed template, no nav bars, no fancy callouts. Just text.
+  const htmlBodyParagraphs = copy.bodyText
+    .split('\n\n')
+    .map(p => `<p style="margin:0 0 14px;">${esc(p)}</p>`)
+    .join('');
   const html = `<!DOCTYPE html>
 <html><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1"></head>
 <body style="margin:0;padding:0;background:#ffffff;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif;color:#1a1a1a;">
   <div style="max-width:560px;margin:0 auto;padding:24px;font-size:15px;line-height:1.6;">
     <p style="margin:0 0 14px;">Hi ${esc(firstName)},</p>
-    <p style="margin:0 0 14px;">Confirming our meeting on ${esc(whenDayTime)}.</p>
-    <p style="margin:0 0 14px;">If there are any details you can provide prior to our meeting I would love to have a contextual foundation going into ${esc(whenDay)}.</p>
+    ${htmlBodyParagraphs}
     <p style="margin:0 0 18px;">Thank you!</p>
-    <p style="margin:0;">Mark Gabrielli<br><a href="https://markcmo.com" style="color:#1a1a1a;text-decoration:none;">MarkCMO.com</a></p>
+    <p style="margin:0;">${esc(copy.signOff)}<br><a href="${esc(copy.signOffLink.href)}" style="color:#1a1a1a;text-decoration:none;">${esc(copy.signOffLink.label)}</a></p>
   </div>
 </body></html>`;
 
@@ -276,15 +326,16 @@ MarkCMO.com`;
       method: 'POST',
       headers: { Authorization: `Bearer ${apiKey}`, 'Content-Type': 'application/json' },
       body: JSON.stringify({
-        from: 'Mark Gabrielli <mark@markcmo.com>',
+        from: copy.from,
         to: [inviteeEmail],
         cc: ['marklgabriellijr@gmail.com'],
-        reply_to: 'mark@markcmo.com',
+        reply_to: copy.replyTo,
         subject,
         html,
         text,
         tags: [
           { name: 'category', value: 'calendly_confirmation' },
+          { name: 'mode', value: mode },
           { name: 'isnew', value: isNew ? 'true' : 'false' },
         ],
       }),
@@ -302,7 +353,7 @@ MarkCMO.com`;
   try {
     await sbInsert('mc_audit_log', {
       event: sentOk ? 'invitee_confirmation_sent' : 'invitee_confirmation_failed',
-      payload: { invitee_email: inviteeEmail, invitee_name: inviteeName, invitee_uri: inviteeUri || '', event_name: eventName, scheduled_at: scheduledAt },
+      payload: { invitee_email: inviteeEmail, invitee_name: inviteeName, invitee_uri: inviteeUri || '', event_name: eventName, scheduled_at: scheduledAt, mode },
     });
   } catch (e) {
     console.warn('Audit log write failed for invitee confirmation:', e.message);

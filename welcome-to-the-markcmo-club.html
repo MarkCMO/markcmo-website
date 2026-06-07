@@ -176,21 +176,152 @@ nav.nav#mainNav .nav-hamburger span { display: block !important; width: 22px !im
 </main>
 
 <script>
-// Pull Calendly redirect params and fill in the booking card.
+// Adaptive post-booking page. Detects mode from Calendly's event_type_name
+// param and rebrands accordingly. Supports all 11 of Mark's event types:
+//   - WETYR mode: "WETYR | Introduction Meeting" + "WETYR Team Meeting"
+//   - Paid mode: "20-Min Audit Call - $220", "40-Min Strategy Session - $440",
+//                "60-Min CMO Power Session - $880", "CMO-as-a-Service: Execution Edition - $1,660"
+//   - Interview mode: "Initial Interview | Discussion", "Second Interview | Discussion"
+//   - Discovery mode (default): everything else
 (function(){
   var qs = new URLSearchParams(window.location.search);
-  // Meeting type name (Calendly param: event_type_name)
-  var typeName = qs.get('event_type_name') || qs.get('event_type') || '';
-  if (typeName) {
-    document.getElementById('meetingType').textContent = typeName.replace(/\+/g, ' ');
-  }
-  // Meeting start time (Calendly param: event_start_time = ISO 8601 with TZ offset)
+  var typeName = (qs.get('event_type_name') || qs.get('event_type') || '').replace(/\+/g, ' ');
   var startRaw = qs.get('event_start_time');
+
+  // Detect mode
+  var mode = 'discovery';
+  var n = typeName.toLowerCase();
+  if (n.indexOf('wetyr') >= 0) mode = 'wetyr';
+  else if (n.indexOf('$') >= 0 || /audit call|strategy session|power session|execution edition|cmo-as-a-service/.test(n)) mode = 'paid';
+  else if (n.indexOf('interview') >= 0) mode = 'interview';
+
+  // Mode-specific copy bundle. Each mode swaps eyebrow, headline, sub line,
+  // 3-step "what next" block, and the gold CTA below.
+  var COPY = {
+    discovery: {
+      eyebrow: 'Booking Confirmed',
+      h1Pre: "You're in the ",
+      h1Em: 'MarkCMO Club',
+      h1Post: '',
+      sub: 'Your call with Mark is locked in. A personal confirmation email is already on its way.',
+      subWithDay: function(d){ return "Your call with Mark is locked in for " + d + ". A personal confirmation email is already on its way."; },
+      steps: [
+        { title: 'Check your email', body: 'Calendly just sent a calendar invite. I also sent you a short personal note from <strong style="color:#C9A84C;">mark@markcmo.com</strong> asking what you would most like clarity on before we talk. If you have any context to share, just hit reply.' },
+        { title: 'Take 2 minutes to do the free leak audit (optional)', body: "You will get a 9-point score showing exactly where your growth is leaking. It makes our call sharper. Link below." },
+        { title: 'Show up', body: "If life happens, the rescheduling link is in your Calendly confirmation email. Or just reply to my email and I will move it for you." }
+      ],
+      ctaTitle: 'Want to make the call count?',
+      ctaBody: 'Run the free 2-minute leak audit before we talk. You will get a 9-point score on the exact growth leaks costing you revenue right now.',
+      ctaBtn: 'Take the leak audit &rarr;',
+      ctaHref: '/leak-audit.html',
+      contact: 'mark@markcmo.com'
+    },
+    paid: {
+      eyebrow: 'Payment + Booking Confirmed',
+      h1Pre: 'Payment ',
+      h1Em: 'Received',
+      h1Post: '. See you soon.',
+      sub: "Your paid session with Mark is locked in. A receipt and a personal prep email are on their way.",
+      subWithDay: function(d){ return "Your paid session with Mark is locked in for " + d + ". A receipt and a personal prep email are on their way."; },
+      steps: [
+        { title: 'Check your email for the receipt + invite', body: 'Calendly sent the calendar invite. Stripe sent the receipt. I also sent you a personal note from <strong style="color:#C9A84C;">mark@markcmo.com</strong> asking what specific outcome you want from our paid time together.' },
+        { title: 'Send me anything you want me to review before we meet', body: "Numbers, dashboards, landing pages, pitch decks, ad accounts - whatever the call is about. Send to mark@markcmo.com and I will work through it before our time starts so we spend the session on decisions, not data dumps." },
+        { title: 'Show up ready', body: "Have your top 1-3 questions written down. Paid time should compound - one specific decision per call is better than ten loose threads." }
+      ],
+      ctaTitle: 'Want a head start before we talk?',
+      ctaBody: 'Run the free 2-minute leak audit so we can dig into the highest-priority leak first instead of spending session time mapping the landscape.',
+      ctaBtn: 'Take the leak audit &rarr;',
+      ctaHref: '/leak-audit.html',
+      contact: 'mark@markcmo.com'
+    },
+    interview: {
+      eyebrow: 'Interview Confirmed',
+      h1Pre: 'Interview ',
+      h1Em: 'Scheduled',
+      h1Post: '',
+      sub: "Your interview with Mark is locked in. Calendar invite + a short prep note are on their way.",
+      subWithDay: function(d){ return "Your interview with Mark is locked in for " + d + ". Calendar invite + a short prep note are on their way."; },
+      steps: [
+        { title: 'Check your email', body: 'Calendly sent the calendar invite. I also sent a short prep note from <strong style="color:#C9A84C;">mark@markcmo.com</strong> with a few things to think about before the conversation.' },
+        { title: 'Bring questions about the role + the company', body: "These calls go best when both sides come ready to interview. Bring your top 3-5 questions about what you would actually own and what success looks like in the first 90 days." },
+        { title: 'Be on time', body: "If you need to reschedule, the link is in your Calendly invite or just reply to my email." }
+      ],
+      ctaTitle: 'Read up before we talk',
+      ctaBody: 'Spend 10 minutes on the About page + a few Insights posts. It will make the conversation sharper for both of us.',
+      ctaBtn: 'Read About Mark &rarr;',
+      ctaHref: '/about',
+      contact: 'mark@markcmo.com'
+    },
+    wetyr: {
+      eyebrow: 'WETYR Meeting Confirmed',
+      h1Pre: "You're booked with ",
+      h1Em: 'WETYR',
+      h1Post: '',
+      sub: 'Your meeting is locked in. WETYR will send a confirmation email shortly.',
+      subWithDay: function(d){ return "Your meeting is locked in for " + d + ". WETYR will send a confirmation email shortly."; },
+      steps: [
+        { title: 'Check your email', body: 'Calendly sent the calendar invite. A confirmation email from WETYR is on its way from <strong style="color:#C9A84C;">info@wetyr.com</strong>.' },
+        { title: 'Share any context up front', body: "If there are details that would help us be prepared, hit reply to the confirmation email and send anything relevant - listings, deal docs, current situation, or what outcome you are after." },
+        { title: 'Show up', body: "Reschedule link is in your Calendly invite. Or reply to the confirmation email and we will move it for you." }
+      ],
+      ctaTitle: 'Get a head start on the deal',
+      ctaBody: 'WETYR makes direct cash offers in 14 days with a 48-hour first response. Run your instant valuation to see your number before we talk.',
+      ctaBtn: 'Run instant valuation &rarr;',
+      ctaHref: 'https://wetyr.com/tools/instant-valuation/',
+      contact: 'info@wetyr.com'
+    }
+  };
+
+  var copy = COPY[mode];
+
+  // Apply copy bundle
+  document.querySelector('.welcome-eyebrow').textContent = copy.eyebrow;
+  var h1 = document.querySelector('.welcome-h1');
+  h1.innerHTML = copy.h1Pre + '<em>' + copy.h1Em + '</em>' + copy.h1Post;
+  document.getElementById('welcomeSubLine').textContent = copy.sub;
+
+  // Steps
+  var stepListEl = document.querySelector('.next-step-list');
+  if (stepListEl && copy.steps && copy.steps.length === 3) {
+    var items = stepListEl.querySelectorAll('.next-step');
+    copy.steps.forEach(function(step, i){
+      if (items[i]) {
+        var title = items[i].querySelector('.next-step-body p');
+        var body = items[i].querySelector('.next-step-body small');
+        if (title) title.textContent = step.title;
+        if (body) body.innerHTML = step.body;
+      }
+    });
+  }
+
+  // Gold CTA block
+  var ctaH3 = document.querySelector('.welcome-prep-cta h3');
+  var ctaP = document.querySelector('.welcome-prep-cta p');
+  var ctaA = document.querySelector('.welcome-prep-cta a');
+  if (ctaH3) ctaH3.textContent = copy.ctaTitle;
+  if (ctaP) ctaP.textContent = copy.ctaBody;
+  if (ctaA) {
+    ctaA.innerHTML = copy.ctaBtn;
+    ctaA.href = copy.ctaHref;
+  }
+
+  // Contact email line at the bottom
+  var contactLink = document.querySelector('.welcome-meta a[href^="mailto:"]');
+  if (contactLink) {
+    contactLink.textContent = copy.contact;
+    contactLink.href = 'mailto:' + copy.contact;
+  }
+
+  // Meeting type name (booking card)
+  if (typeName) {
+    document.getElementById('meetingType').textContent = typeName;
+  }
+
+  // Meeting start time (booking card + sub line)
   if (startRaw) {
     try {
       var d = new Date(startRaw);
       if (!isNaN(d.getTime())) {
-        // Format: Tuesday, July 1, 2026 at 11:00 AM (local browser tz)
         var dayName = d.toLocaleDateString(undefined, { weekday: 'long' });
         var dateStr = d.toLocaleDateString(undefined, { month: 'long', day: 'numeric', year: 'numeric' });
         var timeStr = d.toLocaleTimeString(undefined, { hour: 'numeric', minute: '2-digit' });
@@ -203,13 +334,13 @@ nav.nav#mainNav .nav-hamburger span { display: block !important; width: 22px !im
         document.getElementById('meetingWhen').innerHTML =
           '<strong>' + dayName + '</strong> &middot; ' + dateStr + '<br>' +
           '<span style="font-size:0.92rem;color:rgba(255,255,255,0.7);font-weight:500;">' + timeStr + tzAbbr + '</span>';
-
-        // Friendly day mention in the sub copy
-        document.getElementById('welcomeSubLine').textContent =
-          "Your call with Mark is locked in for " + dayName + ". A personal confirmation email is already on its way.";
+        document.getElementById('welcomeSubLine').textContent = copy.subWithDay(dayName);
       }
     } catch(e) { /* leave default */ }
   }
+
+  // Tag body with the detected mode so we can target with CSS or analytics later
+  document.body.setAttribute('data-booking-mode', mode);
 })();
 </script>
 
