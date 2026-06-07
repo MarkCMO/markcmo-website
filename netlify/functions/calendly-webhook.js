@@ -163,8 +163,23 @@ async function handleInviteeCreated(p) {
     },
   });
 
-  // Notify Mark
+  // Notify Mark (internal alert)
   await notifyNewBooking({ client, engagement, eventName, scheduledAt, qa, isNew: !existing.length });
+
+  // Send personal confirmation email to the invitee asking for topic of discussion
+  // so Mark can prepare a sharper agenda. From mark@markcmo.com, replies go to
+  // mark@markcmo.com. Skips re-send for returning clients who already received it.
+  await sendInviteeConfirmation({
+    inviteeEmail,
+    inviteeName,
+    eventName,
+    scheduledAt,
+    cancelUrl,
+    rescheduleUrl,
+    qa,
+    isNew: !existing.length,
+    inviteeUri: calendlyInviteeUri,
+  });
 
   return {
     statusCode: 200,
@@ -186,6 +201,157 @@ async function handleInviteeCanceled(p) {
     payload: { invitee_email: inviteeEmail, name: p.name, cancel_reason: p.cancellation?.reason || null },
   });
   return { statusCode: 200, body: 'OK' };
+}
+
+// ═══════════════════════════════════════════════════════════════
+// sendInviteeConfirmation
+// Sends a personal warm email FROM mark@markcmo.com TO the invitee
+// confirming the meeting + asking for the desired topic of discussion
+// so Mark can prepare a sharper agenda. Replies route back to Mark's
+// real inbox. Idempotent: dedupes against Supabase mc_audit_log so
+// reschedules / replays don't spam the invitee.
+// ═══════════════════════════════════════════════════════════════
+async function sendInviteeConfirmation({ inviteeEmail, inviteeName, eventName, scheduledAt, cancelUrl, rescheduleUrl, qa, isNew, inviteeUri }) {
+  const apiKey = process.env.RESEND_API_KEY;
+  if (!apiKey || !inviteeEmail) return;
+
+  // Idempotency: skip if we already sent for this invitee URI
+  try {
+    const prior = await sbSelect(
+      `mc_audit_log?event=eq.invitee_confirmation_sent&payload->>invitee_uri=eq.${encodeURIComponent(inviteeUri || '')}&select=id&limit=1`
+    );
+    if (prior && prior.length) {
+      console.log('Invitee confirmation already sent for', inviteeUri, '- skipping');
+      return;
+    }
+  } catch (e) {
+    // Soft-fail the dedupe check; better to risk a dupe than skip a real send
+    console.warn('Confirmation dedupe check failed:', e.message);
+  }
+
+  const firstName = (inviteeName || '').split(' ')[0] || 'there';
+  const whenLong = scheduledAt
+    ? new Date(scheduledAt).toLocaleString('en-US', { dateStyle: 'full', timeStyle: 'short', timeZone: 'America/New_York' }) + ' ET'
+    : 'our scheduled time';
+  const whenShort = scheduledAt
+    ? new Date(scheduledAt).toLocaleString('en-US', { weekday: 'long', month: 'short', day: 'numeric', timeZone: 'America/New_York' })
+    : 'our call';
+
+  const subject = `Quick prep question before ${whenShort} - Mark Gabrielli`;
+
+  // Plain text version (deliverability + clients that block HTML)
+  const text = `Hi ${firstName},
+
+Mark Gabrielli here - confirming our call on ${whenLong}.
+
+I keep my booking form short on purpose (LinkedIn + website only), but I do want to be prepared for your time. Quick favor: what is the one specific topic you would most like to walk away with clarity on?
+
+A few examples to get the wheels turning:
+  - A specific marketing or operations problem you are stuck on
+  - A decision you are weighing (hire a CMO? launch a category? rebrand? change positioning?)
+  - A target outcome you want to hit in the next 90 days
+  - A market or competitor situation you want a second opinion on
+
+Anything from a one-liner to a paragraph helps me build a sharper agenda before we get on the call. Just hit reply.
+
+If life happens before ${whenShort}:
+  - Reschedule: ${rescheduleUrl || 'reply and tell me what works'}
+  - Cancel: ${cancelUrl || 'reply and let me know'}
+
+Looking forward to it.
+
+Mark Gabrielli
+Fractional CMO + COO
+markcmo.com | wetyr.com
+mark@markcmo.com`;
+
+  // HTML version - matches markcmo.com brand (navy + gold)
+  const html = `<!DOCTYPE html>
+<html><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1"></head>
+<body style="margin:0;padding:0;background:#f8f8f5;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif;color:#1a1a1a;">
+  <div style="max-width:600px;margin:0 auto;padding:32px 24px;">
+    <p style="font-size:15px;line-height:1.65;margin:0 0 14px;">Hi ${esc(firstName)},</p>
+
+    <p style="font-size:15px;line-height:1.65;margin:0 0 14px;">
+      Mark Gabrielli here - confirming our call on <strong>${esc(whenLong)}</strong>.
+    </p>
+
+    <p style="font-size:15px;line-height:1.65;margin:0 0 14px;">
+      I keep my booking form short on purpose (LinkedIn + website only), but I do want to be prepared for your time. Quick favor: <strong>what is the one specific topic you would most like to walk away with clarity on?</strong>
+    </p>
+
+    <p style="font-size:15px;line-height:1.65;margin:0 0 10px;">A few examples to get the wheels turning:</p>
+    <ul style="font-size:15px;line-height:1.7;margin:0 0 14px;padding-left:22px;color:#333;">
+      <li>A specific marketing or operations problem you are stuck on</li>
+      <li>A decision you are weighing (hire a CMO? launch a category? rebrand? change positioning?)</li>
+      <li>A target outcome you want to hit in the next 90 days</li>
+      <li>A market or competitor situation you want a second opinion on</li>
+    </ul>
+
+    <p style="font-size:15px;line-height:1.65;margin:0 0 18px;">
+      Anything from a one-liner to a paragraph helps me build a sharper agenda before we get on the call. <strong>Just hit reply.</strong>
+    </p>
+
+    <div style="background:#fcfcf9;border-left:3px solid #C9A84C;padding:12px 16px;margin:18px 0 22px;font-size:13px;line-height:1.6;color:#555;border-radius:0 4px 4px 0;">
+      <strong style="color:#1a1a1a;">If life happens before ${esc(whenShort)}:</strong><br>
+      ${rescheduleUrl ? `&middot; <a href="${esc(rescheduleUrl)}" style="color:#C9A84C;text-decoration:underline;">Reschedule</a><br>` : ''}
+      ${cancelUrl ? `&middot; <a href="${esc(cancelUrl)}" style="color:#C9A84C;text-decoration:underline;">Cancel</a><br>` : ''}
+      &middot; Or just reply to this email
+    </div>
+
+    <p style="font-size:15px;line-height:1.65;margin:0 0 20px;">Looking forward to it.</p>
+
+    <div style="border-top:1px solid #e8e6df;padding-top:16px;margin-top:18px;font-size:13px;line-height:1.5;color:#555;">
+      <div style="font-weight:700;color:#1a1a1a;font-size:14px;margin-bottom:2px;">Mark Gabrielli</div>
+      <div style="color:#777;font-size:12px;margin-bottom:8px;">Fractional CMO + COO</div>
+      <div>
+        <a href="https://markcmo.com" style="color:#C9A84C;text-decoration:none;font-weight:600;">markcmo.com</a>
+        &nbsp;|&nbsp;
+        <a href="https://wetyr.com" style="color:#C9A84C;text-decoration:none;font-weight:600;">wetyr.com</a>
+      </div>
+      <div style="color:#777;font-size:12px;margin-top:4px;">
+        <a href="mailto:mark@markcmo.com" style="color:#777;text-decoration:none;">mark@markcmo.com</a>
+      </div>
+    </div>
+  </div>
+</body></html>`;
+
+  let sentOk = false;
+  try {
+    const r = await fetch('https://api.resend.com/emails', {
+      method: 'POST',
+      headers: { Authorization: `Bearer ${apiKey}`, 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        from: 'Mark Gabrielli <mark@markcmo.com>',
+        to: [inviteeEmail],
+        reply_to: 'mark@markcmo.com',
+        subject,
+        html,
+        text,
+        tags: [
+          { name: 'category', value: 'calendly_confirmation' },
+          { name: 'isnew', value: isNew ? 'true' : 'false' },
+        ],
+      }),
+    });
+    sentOk = r.ok;
+    if (!r.ok) {
+      const errBody = await r.text().catch(() => '');
+      console.warn('Invitee confirmation send failed', r.status, errBody.slice(0, 300));
+    }
+  } catch (err) {
+    console.warn('Invitee confirmation send error:', err.message);
+  }
+
+  // Audit log either way so dedupe works on next webhook event for same invitee
+  try {
+    await sbInsert('mc_audit_log', {
+      event: sentOk ? 'invitee_confirmation_sent' : 'invitee_confirmation_failed',
+      payload: { invitee_email: inviteeEmail, invitee_name: inviteeName, invitee_uri: inviteeUri || '', event_name: eventName, scheduled_at: scheduledAt },
+    });
+  } catch (e) {
+    console.warn('Audit log write failed for invitee confirmation:', e.message);
+  }
 }
 
 async function notifyNewBooking({ client, engagement, eventName, scheduledAt, qa, isNew }) {
