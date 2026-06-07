@@ -43,6 +43,7 @@ jobs:
         run: |
           node scripts/build-dist.js
           cp -r functions/ dist/functions/
+          cp -r netlify/ dist/netlify/
 
       # ── Step 3: Deploy to Cloudflare Pages ──────────────────────────
       # main    → production branch  → markcmo.com
