@@ -1668,7 +1668,7 @@ setTimeout(populateTicker, 1500);
 
 /* ──────────────────────────────────────────────────────────────────
    ROLODEX (internal) - admin-gated contact graph
-   Backend: /.netlify/functions/film-rolodex + film-rolodex-import
+   Backend: /film-rolodex + film-rolodex-import
    Auth:    /.netlify/functions/admin-auth (cookie-based)
    ────────────────────────────────────────────────────────────────── */
 (function rolodex() {
@@ -1782,7 +1782,7 @@ setTimeout(populateTicker, 1500);
         const params = new URLSearchParams(baseParams);
         params.set('limit', String(PAGE));
         params.set('offset', String(offset));
-        const r = await fetch('/.netlify/functions/film-rolodex?' + params.toString(), { credentials: 'include' });
+        const r = await fetch('/film-rolodex?' + params.toString(), { credentials: 'include' });
         if (r.status === 401) { state.authed = false; logout(); return; }
         let j;
         try { j = await r.json(); }
@@ -2149,7 +2149,7 @@ setTimeout(populateTicker, 1500);
 
   async function save() {
     const data = readForm();
-    let url = '/.netlify/functions/film-rolodex';
+    let url = '/film-rolodex';
     let payload = null;
     if (state.modalMode === 'company') {
       if (!data.name) { showMsg(modalMsg, 'err', 'Name is required.'); return; }
@@ -2186,7 +2186,7 @@ setTimeout(populateTicker, 1500);
     if (!confirm('Delete this ' + kind + '?')) return;
     const action = kind === 'company' ? 'deleteCompany' : 'deletePerson';
     try {
-      const r = await fetch('/.netlify/functions/film-rolodex', {
+      const r = await fetch('/film-rolodex', {
         method: 'POST', credentials: 'include',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ action, id }),
@@ -2200,7 +2200,7 @@ setTimeout(populateTicker, 1500);
   async function enrich(id) {
     statsEl.textContent = 'Searching company site, Wikipedia, talent agencies, and Hunter.io for this contact...';
     try {
-      const r = await fetch('/.netlify/functions/film-rolodex', {
+      const r = await fetch('/film-rolodex', {
         method: 'POST', credentials: 'include',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ action: 'enrich', personId: id }),
@@ -2382,7 +2382,7 @@ setTimeout(populateTicker, 1500);
 
         let j;
         try {
-          const r = await fetch('/.netlify/functions/film-rolodex', {
+          const r = await fetch('/film-rolodex', {
             method: 'POST', credentials: 'include',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({ action: 'freshen-batch', limit: 5, threshold: 60, offset }),
@@ -2440,7 +2440,7 @@ setTimeout(populateTicker, 1500);
   async function restoreFromSnapshot() {
     statsEl.textContent = 'Loading snapshots...';
     try {
-      const r = await fetch('/.netlify/functions/film-rolodex', {
+      const r = await fetch('/film-rolodex', {
         method: 'POST', credentials: 'include',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ action: 'listSnapshots' }),
@@ -2467,7 +2467,7 @@ setTimeout(populateTicker, 1500);
       const ok = confirm(`Restore to:\n\n${target.at}\n${target.label}\n${target.companiesCount} companies, ${target.peopleCount} contacts\n\nContinue?`);
       if (!ok) { statsEl.textContent = 'Restore cancelled.'; return; }
       statsEl.textContent = 'Restoring...';
-      const r2 = await fetch('/.netlify/functions/film-rolodex', {
+      const r2 = await fetch('/film-rolodex', {
         method: 'POST', credentials: 'include',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ action: 'restoreSnapshot', key: target.key }),
@@ -2557,7 +2557,7 @@ setTimeout(populateTicker, 1500);
           btn.textContent = `Co ${done}/${companyTargets.length}...`;
           statsEl.textContent = `Company backfill ${done}/${companyTargets.length} - ${c.name || c.id} (added so far: ${addedTotal})`;
           try {
-            const r = await fetch('/.netlify/functions/film-rolodex', {
+            const r = await fetch('/film-rolodex', {
               method: 'POST', credentials: 'include',
               headers: { 'Content-Type': 'application/json' },
               body: JSON.stringify({ action: 'enrich-company', companyId: c.id }),
@@ -2616,7 +2616,7 @@ setTimeout(populateTicker, 1500);
       btn.textContent = `Backfilling ${done}/${targets.length}...`;
       statsEl.textContent = `Backfill ${done}/${targets.length} - ${p.name || p.id} (added so far: ${addedTotal})`;
       try {
-        const r = await fetch('/.netlify/functions/film-rolodex', {
+        const r = await fetch('/film-rolodex', {
           method: 'POST', credentials: 'include',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({ action: 'enrich', personId: p.id }),
@@ -2728,7 +2728,7 @@ setTimeout(populateTicker, 1500);
   async function findNewest(id) {
     statsEl.textContent = 'Find newest email: pulling latest TMDB credits to detect current employer, then Hunter-searching that domain...';
     try {
-      const r = await fetch('/.netlify/functions/film-rolodex', {
+      const r = await fetch('/film-rolodex', {
         method: 'POST', credentials: 'include',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ action: 'find-newest-email', personId: id }),
@@ -2766,7 +2766,7 @@ setTimeout(populateTicker, 1500);
   async function enrichCompany(id) {
     statsEl.textContent = 'Hunter domain-search + crawling /team /about /contact /press for emails + phones...';
     try {
-      const r = await fetch('/.netlify/functions/film-rolodex', {
+      const r = await fetch('/film-rolodex', {
         method: 'POST', credentials: 'include',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ action: 'enrich-company', companyId: id }),
