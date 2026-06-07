@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<link rel="icon" type="image/webp" href="/favicon.webp"><link rel="apple-touch-icon" href="/assets/mark-gabrielli.jpg">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>You're in - Welcome to the MarkCMO Club | Mark Gabrielli</title>
+<meta name="description" content="Your call with Mark Gabrielli is booked. Confirmation email and prep instructions on their way.">
+<meta name="robots" content="noindex, follow">
+<link rel="canonical" href="https://markcmo.com/welcome-to-the-markcmo-club">
+<link rel="stylesheet" href="/style.css">
+
+<style id="bulletproof-nav-css">
+body { padding-top: 64px !important; background: #0A0F2C !important; color: #fff !important; margin: 0 !important; font-family: 'Barlow', sans-serif !important; }
+nav.nav#mainNav { position: fixed !important; top: 0 !important; left: 0 !important; right: 0 !important; z-index: 1000 !important; display: flex !important; align-items: center !important; justify-content: space-between !important; height: 64px !important; padding: 0 5vw !important; background: rgba(10,15,44,0.97) !important; backdrop-filter: blur(14px) !important; -webkit-backdrop-filter: blur(14px) !important; border-bottom: 1px solid rgba(201,168,76,0.18) !important; box-shadow: 0 2px 20px rgba(0,0,0,0.3) !important; border-radius: 0 !important; margin: 0 !important; }
+nav.nav#mainNav .nav-logo { display: flex !important; align-items: center !important; gap: 10px !important; text-decoration: none !important; color: #fff !important; flex-shrink: 0 !important; }
+nav.nav#mainNav .nav-logo-avatar { width: 34px !important; height: 34px !important; border-radius: 50% !important; overflow: hidden !important; border: 2px solid #C9A84C !important; flex-shrink: 0 !important; }
+nav.nav#mainNav .nav-logo-avatar img { width: 100% !important; height: 100% !important; object-fit: cover !important; display: block !important; }
+nav.nav#mainNav .nav-logo-text { display: flex !important; flex-direction: column !important; line-height: 1.1 !important; }
+nav.nav#mainNav .nav-logo-text strong { font-size: 0.95rem !important; font-weight: 800 !important; color: #fff !important; }
+nav.nav#mainNav .nav-logo-text span { font-size: 0.62rem !important; font-weight: 500 !important; color: rgba(255,255,255,0.55) !important; letter-spacing: 0.07em !important; text-transform: uppercase !important; }
+nav.nav#mainNav .nav-links { display: flex !important; align-items: center !important; gap: 0.15rem !important; list-style: none !important; margin: 0 0 0 auto !important; padding: 0 !important; }
+nav.nav#mainNav .nav-links li { position: relative !important; list-style: none !important; }
+nav.nav#mainNav .nav-links a { display: inline-block !important; padding: 0.55rem 0.95rem !important; color: rgba(255,255,255,0.85) !important; text-decoration: none !important; font-size: 0.9rem !important; font-weight: 500 !important; border-radius: 6px !important; }
+nav.nav#mainNav .nav-links a:hover { color: #C9A84C !important; background: rgba(201,168,76,0.08) !important; }
+nav.nav#mainNav .nav-right { margin-left: 1rem !important; }
+nav.nav#mainNav .nav-btn { display: inline-block !important; padding: 0.55rem 1.1rem !important; background: #C9A84C !important; color: #0A0F2C !important; font-weight: 800 !important; font-size: 0.9rem !important; text-decoration: none !important; border-radius: 8px !important; }
+nav.nav#mainNav .nav-hamburger { display: none !important; flex-direction: column !important; gap: 4px !important; cursor: pointer !important; padding: 6px !important; }
+nav.nav#mainNav .nav-hamburger span { display: block !important; width: 22px !important; height: 2px !important; background: #fff !important; border-radius: 2px !important; }
+@media (max-width: 880px) {
+  nav.nav#mainNav .nav-links, nav.nav#mainNav .nav-right { display: none !important; }
+  nav.nav#mainNav .nav-hamburger { display: flex !important; }
+}
+.mobile-drawer { position: fixed !important; top: 64px !important; right: -100% !important; width: 80% !important; max-width: 320px !important; height: calc(100vh - 64px) !important; background: rgba(10,15,44,0.99) !important; padding: 2rem 1.5rem !important; transition: right 0.3s !important; z-index: 999 !important; }
+.mobile-drawer.open { right: 0 !important; }
+.mobile-drawer a { display: block !important; padding: 0.9rem 0 !important; color: rgba(255,255,255,0.85) !important; text-decoration: none !important; font-size: 1rem !important; border-bottom: 1px solid rgba(255,255,255,0.08) !important; }
+
+.welcome-wrap { max-width: 760px; margin: 0 auto; padding: 4rem 1.5rem 5rem; }
+.welcome-hero { text-align: center; margin-bottom: 3rem; }
+.welcome-check { width: 80px; height: 80px; margin: 0 auto 1.5rem; background: #22c55e; border-radius: 50%; display: flex; align-items: center; justify-content: center; box-shadow: 0 10px 30px rgba(34,197,94,0.35); }
+.welcome-check svg { width: 44px; height: 44px; stroke: #052e16; }
+.welcome-eyebrow { font-family: 'DM Mono', monospace; font-size: 0.7rem; letter-spacing: 0.2em; text-transform: uppercase; color: #C9A84C; margin: 0 0 1rem; }
+.welcome-h1 { font-family: 'Bebas Neue', sans-serif; font-size: clamp(2.4rem, 5vw, 4rem); line-height: 1; color: #fff; margin: 0 0 1rem; letter-spacing: 0.02em; }
+.welcome-h1 em { color: #C9A84C; font-style: normal; }
+.welcome-sub { font-size: 1.1rem; line-height: 1.65; color: rgba(255,255,255,0.78); max-width: 560px; margin: 0 auto; }
+
+.booking-card { background: linear-gradient(135deg, #0E1438 0%, #0A0F2C 100%); border: 1px solid rgba(201,168,76,0.25); border-radius: 14px; padding: 2rem; margin-bottom: 2.5rem; }
+.booking-card-row { display: flex; justify-content: space-between; align-items: baseline; padding: 0.7rem 0; border-bottom: 1px solid rgba(255,255,255,0.07); gap: 1.5rem; }
+.booking-card-row:last-child { border-bottom: none; }
+.booking-card-label { font-family: 'DM Mono', monospace; font-size: 0.7rem; letter-spacing: 0.15em; text-transform: uppercase; color: rgba(255,255,255,0.55); flex-shrink: 0; }
+.booking-card-value { color: #fff; font-size: 1rem; font-weight: 600; text-align: right; }
+.booking-card-value strong { color: #C9A84C; }
+
+.next-steps h2 { font-family: 'Bebas Neue', sans-serif; font-size: 1.8rem; color: #fff; margin: 0 0 1.2rem; letter-spacing: 0.02em; }
+.next-step-list { display: flex; flex-direction: column; gap: 1rem; padding: 0; list-style: none; }
+.next-step { display: flex; gap: 1rem; padding: 1.2rem; background: rgba(255,255,255,0.03); border: 1px solid rgba(201,168,76,0.12); border-radius: 10px; }
+.next-step-num { width: 32px; height: 32px; border-radius: 50%; background: #C9A84C; color: #0A0F2C; display: flex; align-items: center; justify-content: center; font-weight: 800; font-size: 0.95rem; flex-shrink: 0; }
+.next-step-body p { margin: 0 0 0.3rem; font-size: 1rem; line-height: 1.5; color: #fff; font-weight: 600; }
+.next-step-body small { display: block; font-size: 0.88rem; line-height: 1.55; color: rgba(255,255,255,0.7); }
+
+.welcome-prep-cta { background: linear-gradient(135deg, #C9A84C 0%, #a37e2f 100%); color: #0A0F2C; padding: 2rem; border-radius: 12px; margin: 2.5rem 0 1.5rem; text-align: center; }
+.welcome-prep-cta h3 { font-family: 'Bebas Neue', sans-serif; font-size: 1.7rem; margin: 0 0 0.6rem; letter-spacing: 0.02em; }
+.welcome-prep-cta p { font-size: 0.98rem; line-height: 1.55; margin: 0 0 1.2rem; opacity: 0.88; }
+.welcome-prep-cta a { display: inline-block; background: #0A0F2C; color: #C9A84C; padding: 12px 28px; font-family: 'DM Mono', monospace; font-size: 0.82rem; letter-spacing: 0.14em; text-transform: uppercase; font-weight: 800; text-decoration: none; border-radius: 6px; }
+
+.welcome-meta { text-align: center; font-size: 0.85rem; color: rgba(255,255,255,0.5); margin: 1.5rem 0 0; }
+.welcome-meta a { color: #C9A84C; text-decoration: none; }
+</style>
+</head>
+<body>
+
+<nav class="nav" id="mainNav">
+  <a href="/" class="nav-logo">
+    <div class="nav-logo-avatar"><img src="/assets/mark-gabrielli.jpg" alt="Mark Gabrielli"/></div>
+    <div class="nav-logo-text"><strong>Mark Gabrielli</strong><span>Fractional CMO &amp; COO</span></div>
+  </a>
+  <ul class="nav-links">
+    <li><a href="/about">About</a></li>
+    <li><a href="/services">Services</a></li>
+    <li><a href="/magnet-framework" style="color:#C9A84C;font-weight:600;">MAGNET&trade;</a></li>
+    <li><a href="/apps" style="color:#C9A84C;font-weight:600;">Apps</a></li>
+    <li><a href="/results">Results</a></li>
+    <li><a href="/blog">Insights</a></li>
+  </ul>
+  <div class="nav-right">
+    <a href="/book" class="nav-btn">Book a Free Call</a>
+  </div>
+  <div class="nav-hamburger" id="navHam"><span></span><span></span><span></span></div>
+</nav>
+
+<div class="mobile-drawer" id="mobileDrawer">
+  <a href="/about">About</a>
+  <a href="/services">Services</a>
+  <a href="/magnet-framework" style="color:#C9A84C;font-weight:600;">MAGNET Framework&trade;</a>
+  <a href="/apps" style="color:#C9A84C;font-weight:600;">Apps</a>
+  <a href="/results">Results</a>
+  <a href="/blog">Insights</a>
+</div>
+
+<script>
+(function(){
+  var nav = document.getElementById('mainNav');
+  if (nav) window.addEventListener('scroll', function(){ nav.classList.toggle('scrolled', window.scrollY > 20); });
+  var ham = document.getElementById('navHam');
+  var drawer = document.getElementById('mobileDrawer');
+  if (ham && drawer) {
+    ham.addEventListener('click', function(){ drawer.classList.toggle('open'); });
+    drawer.querySelectorAll('a').forEach(function(a){ a.addEventListener('click', function(){ drawer.classList.remove('open'); }); });
+  }
+})();
+</script>
+
+<main>
+  <div class="welcome-wrap">
+    <section class="welcome-hero">
+      <div class="welcome-check" aria-label="Booking confirmed">
+        <svg viewBox="0 0 24 24" fill="none" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" xmlns="http://www.w3.org/2000/svg"><polyline points="20 6 9 17 4 12"/></svg>
+      </div>
+      <p class="welcome-eyebrow">Booking Confirmed</p>
+      <h1 class="welcome-h1">You're in the <em>MarkCMO Club</em></h1>
+      <p class="welcome-sub" id="welcomeSubLine">Your call with Mark is locked in. A personal confirmation email is already on its way.</p>
+    </section>
+
+    <section class="booking-card" id="bookingCard">
+      <div class="booking-card-row">
+        <span class="booking-card-label">Meeting</span>
+        <span class="booking-card-value" id="meetingType">Discovery Call</span>
+      </div>
+      <div class="booking-card-row">
+        <span class="booking-card-label">When</span>
+        <span class="booking-card-value" id="meetingWhen">&mdash;</span>
+      </div>
+      <div class="booking-card-row">
+        <span class="booking-card-label">With</span>
+        <span class="booking-card-value">Mark Gabrielli</span>
+      </div>
+    </section>
+
+    <section class="next-steps">
+      <h2>What happens next</h2>
+      <ul class="next-step-list">
+        <li class="next-step">
+          <div class="next-step-num">1</div>
+          <div class="next-step-body">
+            <p>Check your email</p>
+            <small>Calendly just sent a calendar invite. I also sent you a short personal note from <strong style="color:#C9A84C;">mark@markcmo.com</strong> asking what you'd most like clarity on before we talk. If you have any context to share, just hit reply.</small>
+          </div>
+        </li>
+        <li class="next-step">
+          <div class="next-step-num">2</div>
+          <div class="next-step-body">
+            <p>Take 2 minutes to do the free leak audit (optional)</p>
+            <small>You'll get a 9-point score showing exactly where your growth is leaking. It makes our call sharper. Link below.</small>
+          </div>
+        </li>
+        <li class="next-step">
+          <div class="next-step-num">3</div>
+          <div class="next-step-body">
+            <p>Show up</p>
+            <small>If life happens, the rescheduling link is in your Calendly confirmation email. Or just reply to my email and I'll move it for you.</small>
+          </div>
+        </li>
+      </ul>
+    </section>
+
+    <div class="welcome-prep-cta">
+      <h3>Want to make the call count?</h3>
+      <p>Run the free 2-minute leak audit before we talk. You'll get a 9-point score on the exact growth leaks costing you revenue right now.</p>
+      <a href="/leak-audit.html">Take the leak audit &rarr;</a>
+    </div>
+
+    <p class="welcome-meta">
+      Questions before the call? Email me at <a href="mailto:mark@markcmo.com">mark@markcmo.com</a>
+    </p>
+  </div>
+</main>
+
+<script>
+// Pull Calendly redirect params and fill in the booking card.
+(function(){
+  var qs = new URLSearchParams(window.location.search);
+  // Meeting type name (Calendly param: event_type_name)
+  var typeName = qs.get('event_type_name') || qs.get('event_type') || '';
+  if (typeName) {
+    document.getElementById('meetingType').textContent = typeName.replace(/\+/g, ' ');
+  }
+  // Meeting start time (Calendly param: event_start_time = ISO 8601 with TZ offset)
+  var startRaw = qs.get('event_start_time');
+  if (startRaw) {
+    try {
+      var d = new Date(startRaw);
+      if (!isNaN(d.getTime())) {
+        // Format: Tuesday, July 1, 2026 at 11:00 AM (local browser tz)
+        var dayName = d.toLocaleDateString(undefined, { weekday: 'long' });
+        var dateStr = d.toLocaleDateString(undefined, { month: 'long', day: 'numeric', year: 'numeric' });
+        var timeStr = d.toLocaleTimeString(undefined, { hour: 'numeric', minute: '2-digit' });
+        var tzAbbr = '';
+        try {
+          var parts = new Intl.DateTimeFormat(undefined, { hour: 'numeric', timeZoneName: 'short' }).formatToParts(d);
+          var tzPart = parts.find(function(p){ return p.type === 'timeZoneName'; });
+          if (tzPart) tzAbbr = ' ' + tzPart.value;
+        } catch(_) {}
+        document.getElementById('meetingWhen').innerHTML =
+          '<strong>' + dayName + '</strong> &middot; ' + dateStr + '<br>' +
+          '<span style="font-size:0.92rem;color:rgba(255,255,255,0.7);font-weight:500;">' + timeStr + tzAbbr + '</span>';
+
+        // Friendly day mention in the sub copy
+        document.getElementById('welcomeSubLine').textContent =
+          "Your call with Mark is locked in for " + dayName + ". A personal confirmation email is already on its way.";
+      }
+    } catch(e) { /* leave default */ }
+  }
+})();
+</script>
+
+<footer style="background:#050919;padding:3rem 5vw 2rem;border-top:1px solid rgba(201,168,76,0.1);text-align:center;color:rgba(255,255,255,0.5);font-size:0.85rem;">
+  <p style="margin:0 0 0.5rem;">&copy; 2026 Mark Gabrielli &middot; markcmo.com &middot; All rights reserved.</p>
+  <p style="margin:0;"><a href="/" style="color:#C9A84C;text-decoration:none;">Back to home</a> &middot; <a href="/apps" style="color:#C9A84C;text-decoration:none;">Apps</a> &middot; <a href="/about" style="color:#C9A84C;text-decoration:none;">About Mark</a></p>
+</footer>
+
+</body>
+</html>
