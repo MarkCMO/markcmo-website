@@ -102,6 +102,24 @@ test.describe('Homepage + nav + footer', () => {
     await expect(page.locator('.welcome-eyebrow')).toContainText(/WETYR.*Confirmed/i);
     await expect(page.locator('.welcome-h1')).toContainText(/WETYR/i);
   });
+
+  // wetyr.com has its OWN brand-native welcome page for WETYR Calendly events.
+  // markcmo.com's adaptive wetyr-mode is a fallback only - the canonical setup
+  // points the two WETYR event types directly at wetyr.com/welcome.html so the
+  // prospect lands on a WETYR-branded surface (navy + gold, info@wetyr.com).
+  test('wetyr.com/welcome.html reachable + WETYR-branded for WETYR Introduction', async ({ page }) => {
+    const resp = await page.goto(`https://wetyr.com/welcome.html?event_type_name=WETYR+%7C+Introduction+Meeting&event_start_time=2026-12-31T15:00:00-05:00`);
+    expect(resp.status()).toBe(200);
+    await expect(page).toHaveTitle(/WETYR/i);
+    await expect(page.locator('body')).toHaveAttribute('data-booking-mode', 'wetyr');
+    await expect(page.locator('.w-welcome-eyebrow')).toContainText(/WETYR Meeting Confirmed/i);
+    await expect(page.locator('.w-welcome-h1')).toContainText(/WETYR/i);
+  });
+  test('wetyr.com/welcome.html detects team mode for WETYR Team Meeting', async ({ page }) => {
+    await page.goto(`https://wetyr.com/welcome.html?event_type_name=WETYR+Team+Meeting&event_start_time=2026-12-31T15:00:00-05:00`);
+    await expect(page.locator('body')).toHaveAttribute('data-booking-mode', 'team');
+    await expect(page.locator('.w-welcome-eyebrow')).toContainText(/Team Meeting Confirmed/i);
+  });
 });
 
 test.describe('Admin pages', () => {
