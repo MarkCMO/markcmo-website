@@ -358,6 +358,13 @@ ${copy.signOffLink.label}`;
   </div>
 </body></html>`;
 
+  // Schedule the confirmation for 5 minutes after the webhook fires. Gives the
+  // Calendly system-generated confirmation a head start so the prospect sees
+  // it first, and our personal note lands a few minutes later when their
+  // attention is still on the booking. ISO 8601 UTC, accepted by Resend's
+  // scheduled_at field.
+  const sendAt = new Date(Date.now() + 5 * 60 * 1000).toISOString();
+
   let sentOk = false;
   try {
     const r = await fetch('https://api.resend.com/emails', {
@@ -371,6 +378,7 @@ ${copy.signOffLink.label}`;
         subject,
         html,
         text,
+        scheduled_at: sendAt,
         tags: [
           { name: 'category', value: 'calendly_confirmation' },
           { name: 'mode', value: mode },
@@ -391,7 +399,7 @@ ${copy.signOffLink.label}`;
   try {
     await sbInsert('mc_audit_log', {
       event: sentOk ? 'invitee_confirmation_sent' : 'invitee_confirmation_failed',
-      payload: { invitee_email: inviteeEmail, invitee_name: inviteeName, invitee_uri: inviteeUri || '', event_name: eventName, scheduled_at: scheduledAt, mode },
+      payload: { invitee_email: inviteeEmail, invitee_name: inviteeName, invitee_uri: inviteeUri || '', event_name: eventName, scheduled_at: scheduledAt, mode, send_scheduled_for: sendAt },
     });
   } catch (e) {
     console.warn('Audit log write failed for invitee confirmation:', e.message);
