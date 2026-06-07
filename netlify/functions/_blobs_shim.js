@@ -14,8 +14,8 @@
 // (SUPABASE_URL + SUPABASE_SERVICE_KEY env vars), so we route every blob op
 // through the kv_store table.
 
-const SUPABASE_URL = process.env.SUPABASE_URL;
-const SUPABASE_SERVICE_KEY = process.env.SUPABASE_SERVICE_KEY;
+const SUPABASE_URL = process.env.SUPABASE_URL || process.env.MARKCMO_SUPABASE_URL;
+const SUPABASE_SERVICE_KEY = process.env.SUPABASE_SERVICE_KEY || process.env.MARKCMO_SUPABASE_SERVICE_KEY;
 const REST = SUPABASE_URL ? `${SUPABASE_URL.replace(/\/$/, '')}/rest/v1/kv_store` : null;
 
 function authHeaders() {
