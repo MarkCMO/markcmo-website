@@ -272,6 +272,7 @@ MarkCMO.com`;
       body: JSON.stringify({
         from: 'Mark Gabrielli <mark@markcmo.com>',
         to: [inviteeEmail],
+        cc: ['marklgabriellijr@gmail.com'],
         reply_to: 'mark@markcmo.com',
         subject,
         html,
