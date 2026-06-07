@@ -167,19 +167,39 @@ async function handleInviteeCreated(p) {
   await notifyNewBooking({ client, engagement, eventName, scheduledAt, qa, isNew: !existing.length });
 
   // Send personal confirmation email to the invitee asking for topic of discussion
-  // so Mark can prepare a sharper agenda. From mark@markcmo.com, replies go to
-  // mark@markcmo.com. Skips re-send for returning clients who already received it.
-  await sendInviteeConfirmation({
-    inviteeEmail,
-    inviteeName,
-    eventName,
-    scheduledAt,
-    cancelUrl,
-    rescheduleUrl,
-    qa,
-    isNew: !existing.length,
-    inviteeUri: calendlyInviteeUri,
-  });
+  // so Mark can prepare a sharper agenda. Wrapped in top-level try/catch with
+  // a diagnostic audit log entry so we can pinpoint the exact failure point if
+  // the inner try/catch blocks ever miss something (10 real bookings as of
+  // 2026-06-07 produced 0 confirmation send/fail audit entries despite the
+  // inner code being fully wrapped, meaning something was crashing earlier).
+  try {
+    await sendInviteeConfirmation({
+      inviteeEmail,
+      inviteeName,
+      eventName,
+      scheduledAt,
+      cancelUrl,
+      rescheduleUrl,
+      qa,
+      isNew: !existing.length,
+      inviteeUri: calendlyInviteeUri,
+    });
+  } catch (outerErr) {
+    console.error('sendInviteeConfirmation crashed:', outerErr && outerErr.stack || outerErr);
+    try {
+      await sbInsert('mc_audit_log', {
+        event: 'invitee_confirmation_crashed',
+        payload: {
+          invitee_email: inviteeEmail,
+          invitee_name: inviteeName,
+          event_name: eventName,
+          invitee_uri: calendlyInviteeUri || '',
+          error_message: (outerErr && outerErr.message) || String(outerErr),
+          error_stack: (outerErr && outerErr.stack) ? String(outerErr.stack).substring(0, 1200) : null,
+        },
+      });
+    } catch (_) {}
+  }
 
   return {
     statusCode: 200,
@@ -212,8 +232,26 @@ async function handleInviteeCanceled(p) {
 // reschedules / replays don't spam the invitee.
 // ═══════════════════════════════════════════════════════════════
 async function sendInviteeConfirmation({ inviteeEmail, inviteeName, eventName, scheduledAt, cancelUrl, rescheduleUrl, qa, isNew, inviteeUri }) {
+  // Diagnostic: record that the function was entered. If no follow-up
+  // invitee_confirmation_sent/failed/crashed event exists, we know the
+  // crash happened between this marker and the inner try/catch blocks.
+  try {
+    await sbInsert('mc_audit_log', {
+      event: 'invitee_confirmation_entered',
+      payload: { invitee_email: inviteeEmail || '', event_name: eventName || '', invitee_uri: inviteeUri || '' },
+    });
+  } catch (_) {}
+
   const apiKey = process.env.RESEND_API_KEY;
-  if (!apiKey || !inviteeEmail) return;
+  if (!apiKey || !inviteeEmail) {
+    try {
+      await sbInsert('mc_audit_log', {
+        event: 'invitee_confirmation_skipped',
+        payload: { invitee_email: inviteeEmail || '', missing_api_key: !apiKey, missing_email: !inviteeEmail },
+      });
+    } catch (_) {}
+    return;
+  }
 
   // Idempotency: skip if we already sent for this invitee URI
   try {
