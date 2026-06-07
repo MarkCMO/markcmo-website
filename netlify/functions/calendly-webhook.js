@@ -66,7 +66,9 @@ async function handleInviteeCreated(p) {
   // Extract invitee details (Calendly v2 webhook payload shape)
   const inviteeEmail = p.email || '';
   const inviteeName  = p.name || '';
-  const eventName    = p.event_type?.name || p.event_name || 'Consultation';
+  // Calendly v2 invitee.created payload puts the event type name at
+  // scheduled_event.name. The older event_type.name path is a fallback.
+  const eventName    = p.scheduled_event?.name || p.event_type?.name || p.event_name || 'Consultation';
   const scheduledAt  = p.event?.start_time || p.scheduled_event?.start_time || null;
   const eventEndAt   = p.event?.end_time   || p.scheduled_event?.end_time   || null;
   const cancelUrl    = p.cancel_url || '';
@@ -167,6 +169,18 @@ async function handleInviteeCreated(p) {
   // Notify Mark (internal alert)
   await notifyNewBooking({ client, engagement, eventName, scheduledAt, qa, isNew: !existing.length });
 
+  // Control-flow marker. Proves handleInviteeCreated reached the point
+  // where it tries to call sendInviteeConfirmation. If this entry exists
+  // in the audit log but invitee_confirmation_* does not, the issue is
+  // inside the function call itself (e.g., function not defined, sync
+  // throw before the try/finally inside the function body).
+  try {
+    await sbInsert('mc_audit_log', {
+      event: 'calendly_pre_confirmation_call',
+      payload: { invitee_email: inviteeEmail || '', invitee_uri: calendlyInviteeUri || '', event_name: eventName || '' },
+    });
+  } catch (_) {}
+
   // Send personal confirmation email (5 min after webhook fires) + schedule
   // post-meeting follow-up email (30 min after meeting end). Both wrapped
   // independently so one's failure cannot block the other or the outer
@@ -180,7 +194,20 @@ async function handleInviteeCreated(p) {
     });
   } catch (outerErr) {
     console.error('sendInviteeConfirmation outer crash:', outerErr && outerErr.stack || outerErr);
+    try {
+      await sbInsert('mc_audit_log', {
+        event: 'invitee_confirmation_outer_crashed',
+        payload: { invitee_email: inviteeEmail, invitee_uri: calendlyInviteeUri || '', error_message: (outerErr && outerErr.message) || String(outerErr), error_stack: (outerErr && outerErr.stack) ? String(outerErr.stack).substring(0, 1500) : null },
+      });
+    } catch (_) {}
   }
+
+  try {
+    await sbInsert('mc_audit_log', {
+      event: 'calendly_pre_followup_call',
+      payload: { invitee_email: inviteeEmail || '', invitee_uri: calendlyInviteeUri || '' },
+    });
+  } catch (_) {}
 
   try {
     await schedulePostMeetingFollowup({
@@ -189,6 +216,12 @@ async function handleInviteeCreated(p) {
     });
   } catch (outerErr) {
     console.error('schedulePostMeetingFollowup outer crash:', outerErr && outerErr.stack || outerErr);
+    try {
+      await sbInsert('mc_audit_log', {
+        event: 'invitee_followup_outer_crashed',
+        payload: { invitee_email: inviteeEmail, invitee_uri: calendlyInviteeUri || '', error_message: (outerErr && outerErr.message) || String(outerErr), error_stack: (outerErr && outerErr.stack) ? String(outerErr.stack).substring(0, 1500) : null },
+      });
+    } catch (_) {}
   }
 
   return {
