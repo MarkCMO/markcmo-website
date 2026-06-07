@@ -60,6 +60,22 @@ test.describe('Homepage + nav + footer', () => {
     await expect(page.locator('#mainNav')).toBeVisible();
     await expect(page.locator('footer')).toBeVisible();
   });
+
+  // Calendly post-booking redirect lands here. Regression on 2026-06-07
+  // (404 because Calendly URL was set but the KV page was missing) cost a
+  // live prospect a broken experience right after they booked. Hard guard:
+  // every deploy must keep this page reachable + carrying the booking
+  // card markup so the dynamic params render correctly.
+  test('/welcome-to-the-markcmo-club post-booking page is reachable + intact', async ({ page }) => {
+    const resp = await page.goto(`${PROD}/welcome-to-the-markcmo-club?event_type_name=Test+Event&event_start_time=2026-12-31T15:00:00-05:00`);
+    expect(resp.status()).toBe(200);
+    await expect(page).toHaveTitle(/MarkCMO Club|MarkCMO/i);
+    // Booking card placeholders that the inline script fills from Calendly params
+    await expect(page.locator('#meetingType')).toBeVisible();
+    await expect(page.locator('#meetingWhen')).toBeVisible();
+    // The headline must say the visitor is "in"
+    await expect(page.locator('h1, .welcome-h1').first()).toContainText(/in the MarkCMO Club|You’re in|You're in/i);
+  });
 });
 
 test.describe('Admin pages', () => {
