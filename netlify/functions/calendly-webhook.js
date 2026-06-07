@@ -230,89 +230,37 @@ async function sendInviteeConfirmation({ inviteeEmail, inviteeName, eventName, s
   }
 
   const firstName = (inviteeName || '').split(' ')[0] || 'there';
-  const whenLong = scheduledAt
-    ? new Date(scheduledAt).toLocaleString('en-US', { dateStyle: 'full', timeStyle: 'short', timeZone: 'America/New_York' }) + ' ET'
+  // Day name like "Tuesday" - matches how Mark naturally refers to the meeting
+  const whenDay = scheduledAt
+    ? new Date(scheduledAt).toLocaleString('en-US', { weekday: 'long', timeZone: 'America/New_York' })
     : 'our scheduled time';
-  const whenShort = scheduledAt
-    ? new Date(scheduledAt).toLocaleString('en-US', { weekday: 'long', month: 'short', day: 'numeric', timeZone: 'America/New_York' })
-    : 'our call';
 
-  const subject = `Quick prep question before ${whenShort} - Mark Gabrielli`;
+  const subject = `Confirming our meeting on ${whenDay}`;
 
-  // Plain text version (deliverability + clients that block HTML)
+  // Plain text version (deliverability + clients that block HTML).
+  // Length + tone match Mark's actual sent example - short, warm, not salesy.
   const text = `Hi ${firstName},
 
-Mark Gabrielli here - confirming our call on ${whenLong}.
+Confirming our meeting on ${whenDay}.
 
-I keep my booking form short on purpose (LinkedIn + website only), but I do want to be prepared for your time. Quick favor: what is the one specific topic you would most like to walk away with clarity on?
+If there are any details you can provide prior to our meeting I would love to have a contextual foundation going into ${whenDay}.
 
-A few examples to get the wheels turning:
-  - A specific marketing or operations problem you are stuck on
-  - A decision you are weighing (hire a CMO? launch a category? rebrand? change positioning?)
-  - A target outcome you want to hit in the next 90 days
-  - A market or competitor situation you want a second opinion on
-
-Anything from a one-liner to a paragraph helps me build a sharper agenda before we get on the call. Just hit reply.
-
-If life happens before ${whenShort}:
-  - Reschedule: ${rescheduleUrl || 'reply and tell me what works'}
-  - Cancel: ${cancelUrl || 'reply and let me know'}
-
-Looking forward to it.
+Thank you!
 
 Mark Gabrielli
-Fractional CMO + COO
-markcmo.com | wetyr.com
-mark@markcmo.com`;
+MarkCMO.com`;
 
-  // HTML version - matches markcmo.com brand (navy + gold)
+  // HTML version - plain readable email, looks like Mark typed it personally.
+  // No designed template, no nav bars, no fancy callouts. Just text.
   const html = `<!DOCTYPE html>
 <html><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1"></head>
-<body style="margin:0;padding:0;background:#f8f8f5;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif;color:#1a1a1a;">
-  <div style="max-width:600px;margin:0 auto;padding:32px 24px;">
-    <p style="font-size:15px;line-height:1.65;margin:0 0 14px;">Hi ${esc(firstName)},</p>
-
-    <p style="font-size:15px;line-height:1.65;margin:0 0 14px;">
-      Mark Gabrielli here - confirming our call on <strong>${esc(whenLong)}</strong>.
-    </p>
-
-    <p style="font-size:15px;line-height:1.65;margin:0 0 14px;">
-      I keep my booking form short on purpose (LinkedIn + website only), but I do want to be prepared for your time. Quick favor: <strong>what is the one specific topic you would most like to walk away with clarity on?</strong>
-    </p>
-
-    <p style="font-size:15px;line-height:1.65;margin:0 0 10px;">A few examples to get the wheels turning:</p>
-    <ul style="font-size:15px;line-height:1.7;margin:0 0 14px;padding-left:22px;color:#333;">
-      <li>A specific marketing or operations problem you are stuck on</li>
-      <li>A decision you are weighing (hire a CMO? launch a category? rebrand? change positioning?)</li>
-      <li>A target outcome you want to hit in the next 90 days</li>
-      <li>A market or competitor situation you want a second opinion on</li>
-    </ul>
-
-    <p style="font-size:15px;line-height:1.65;margin:0 0 18px;">
-      Anything from a one-liner to a paragraph helps me build a sharper agenda before we get on the call. <strong>Just hit reply.</strong>
-    </p>
-
-    <div style="background:#fcfcf9;border-left:3px solid #C9A84C;padding:12px 16px;margin:18px 0 22px;font-size:13px;line-height:1.6;color:#555;border-radius:0 4px 4px 0;">
-      <strong style="color:#1a1a1a;">If life happens before ${esc(whenShort)}:</strong><br>
-      ${rescheduleUrl ? `&middot; <a href="${esc(rescheduleUrl)}" style="color:#C9A84C;text-decoration:underline;">Reschedule</a><br>` : ''}
-      ${cancelUrl ? `&middot; <a href="${esc(cancelUrl)}" style="color:#C9A84C;text-decoration:underline;">Cancel</a><br>` : ''}
-      &middot; Or just reply to this email
-    </div>
-
-    <p style="font-size:15px;line-height:1.65;margin:0 0 20px;">Looking forward to it.</p>
-
-    <div style="border-top:1px solid #e8e6df;padding-top:16px;margin-top:18px;font-size:13px;line-height:1.5;color:#555;">
-      <div style="font-weight:700;color:#1a1a1a;font-size:14px;margin-bottom:2px;">Mark Gabrielli</div>
-      <div style="color:#777;font-size:12px;margin-bottom:8px;">Fractional CMO + COO</div>
-      <div>
-        <a href="https://markcmo.com" style="color:#C9A84C;text-decoration:none;font-weight:600;">markcmo.com</a>
-        &nbsp;|&nbsp;
-        <a href="https://wetyr.com" style="color:#C9A84C;text-decoration:none;font-weight:600;">wetyr.com</a>
-      </div>
-      <div style="color:#777;font-size:12px;margin-top:4px;">
-        <a href="mailto:mark@markcmo.com" style="color:#777;text-decoration:none;">mark@markcmo.com</a>
-      </div>
-    </div>
+<body style="margin:0;padding:0;background:#ffffff;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif;color:#1a1a1a;">
+  <div style="max-width:560px;margin:0 auto;padding:24px;font-size:15px;line-height:1.6;">
+    <p style="margin:0 0 14px;">Hi ${esc(firstName)},</p>
+    <p style="margin:0 0 14px;">Confirming our meeting on ${esc(whenDay)}.</p>
+    <p style="margin:0 0 14px;">If there are any details you can provide prior to our meeting I would love to have a contextual foundation going into ${esc(whenDay)}.</p>
+    <p style="margin:0 0 18px;">Thank you!</p>
+    <p style="margin:0;">Mark Gabrielli<br><a href="https://markcmo.com" style="color:#1a1a1a;text-decoration:none;">MarkCMO.com</a></p>
   </div>
 </body></html>`;
 
