@@ -16,7 +16,7 @@
 // HANDLER_VERSION below is a sentinel I bump on every deploy so we can
 // verify in the audit log that the function bundle is fresh.
 // ═══════════════════════════════════════════════════════════════
-const HANDLER_VERSION = 'v6-full-sequence-2026-06-08';
+const HANDLER_VERSION = 'v7-attendance-noshow-2026-06-08';
 
 export async function onRequest(context) {
   const { request, env } = context;
@@ -352,6 +352,21 @@ async function handleInviteeCreated(p, env) {
     try {
       await sbInsert(env, 'mc_audit_log', {
         event: 'invitee_1h_reminder_outer_crashed',
+        payload: { invitee_email: inviteeEmail, error_message: (e && e.message) || String(e), error_stack: (e && e.stack) ? String(e.stack).substring(0, 1200) : null },
+      });
+    } catch (_) {}
+  }
+
+  // ───── T-15min attendance-confirmation ping (with "I'll be there" button) ─────
+  try {
+    await scheduleAttendanceConfirmation(env, {
+      inviteeEmail, inviteeName, eventName, scheduledAt,
+      meetingLink, calendlyInviteeUri, engagementId: engagement.id,
+    });
+  } catch (e) {
+    try {
+      await sbInsert(env, 'mc_audit_log', {
+        event: 'invitee_15min_confirm_outer_crashed',
         payload: { invitee_email: inviteeEmail, error_message: (e && e.message) || String(e), error_stack: (e && e.stack) ? String(e.stack).substring(0, 1200) : null },
       });
     } catch (_) {}
@@ -1153,6 +1168,193 @@ Mark`;
   }
 }
 
+// ───── signAttendanceToken (HMAC-signed one-click confirm token) ─
+// Returns a URL-safe token that the /api/confirm-attendance endpoint
+// verifies before recording a confirmation. Format:
+//   base64url(JSON({u, e}))  '.'  base64url(hmac)
+// where u=inviteeUri (the canonical Calendly invitee URI), e=expiry ms.
+// Signed with CRON_SHARED_SECRET so only our own emails can produce
+// valid tokens.
+async function signAttendanceToken(env, { inviteeUri, expiryMs }) {
+  const secret = env.CRON_SHARED_SECRET || env.ADMIN_SECRET || 'fallback-key';
+  const payload = JSON.stringify({ u: inviteeUri, e: expiryMs });
+  const payloadB64 = b64urlEncode(payload);
+  const sig = await hmacSha256Base64Url(secret, payloadB64);
+  return `${payloadB64}.${sig}`;
+}
+
+async function hmacSha256Base64Url(secret, message) {
+  const key = await crypto.subtle.importKey(
+    'raw',
+    new TextEncoder().encode(secret),
+    { name: 'HMAC', hash: 'SHA-256' },
+    false,
+    ['sign']
+  );
+  const sigBytes = await crypto.subtle.sign('HMAC', key, new TextEncoder().encode(message));
+  let bin = '';
+  const b = new Uint8Array(sigBytes);
+  for (let i = 0; i < b.length; i++) bin += String.fromCharCode(b[i]);
+  return btoa(bin).replace(/\+/g, '-').replace(/\//g, '_').replace(/=+$/, '');
+}
+
+function b64urlEncode(str) {
+  const bytes = new TextEncoder().encode(str);
+  let bin = '';
+  for (let i = 0; i < bytes.length; i++) bin += String.fromCharCode(bytes[i]);
+  return btoa(bin).replace(/\+/g, '-').replace(/\//g, '_').replace(/=+$/, '');
+}
+
+// ───── scheduleAttendanceConfirmation (T-15min "I'll be there" ping) ─
+// Drops a short email 15 minutes before the meeting with one prominent
+// "I'll be there ✓" button. Clicking lands on /api/confirm-attendance
+// which records the confirmation + emails Mark "[Name] confirmed".
+//
+// Why 15 min: late enough that they've already decided they're joining,
+// early enough to take action if they need to send Mark anything before.
+// Skips if booking is < 15 min + 5 min away when this fires.
+async function scheduleAttendanceConfirmation(env, { inviteeEmail, inviteeName, eventName, scheduledAt, meetingLink, calendlyInviteeUri, engagementId }) {
+  const auditPayload = {
+    invitee_email: inviteeEmail || '',
+    invitee_name: inviteeName || '',
+    invitee_uri: calendlyInviteeUri || '',
+    event_name: eventName || '',
+    scheduled_at: scheduledAt || null,
+    send_at: null,
+    confirm_url: null,
+    resend_status: null,
+    resend_id: null,
+    resend_error: null,
+    error_message: null,
+    error_stack: null,
+    engagement_id: engagementId || null,
+    step: 'init',
+    mode: null,
+    handler_version: HANDLER_VERSION,
+  };
+  let auditEvent = 'invitee_15min_confirm_attempted';
+
+  try {
+    if (!inviteeEmail || !scheduledAt) { auditPayload.step = 'no_email_or_time'; auditEvent = 'invitee_15min_confirm_skipped'; return; }
+    const apiKey = env.RESEND_API_KEY;
+    if (!apiKey) { auditPayload.step = 'no_resend_api_key'; auditEvent = 'invitee_15min_confirm_skipped'; return; }
+
+    const startMs = new Date(scheduledAt).getTime();
+    if (isNaN(startMs)) { auditPayload.step = 'bad_start_time'; auditEvent = 'invitee_15min_confirm_skipped'; return; }
+
+    const sendAtMs = startMs - 15 * 60 * 1000;
+    if (sendAtMs < Date.now() + 5 * 60 * 1000) { auditPayload.step = 'too_close'; auditEvent = 'invitee_15min_confirm_skipped'; return; }
+    if (sendAtMs - Date.now() > 28 * 24 * 60 * 60 * 1000) {
+      auditPayload.step = 'deferred_to_cron';
+      auditPayload.send_at = new Date(sendAtMs).toISOString();
+      auditEvent = 'invitee_15min_confirm_deferred';
+      return;
+    }
+    const sendAt = new Date(sendAtMs).toISOString();
+    auditPayload.send_at = sendAt;
+
+    const _n = (eventName || '').toLowerCase();
+    const isWetyr = _n.indexOf('wetyr') >= 0;
+    auditPayload.mode = isWetyr ? 'wetyr' : 'markcmo';
+
+    const dt = new Date(scheduledAt);
+    const whenTime = dt.toLocaleString('en-US', { hour: 'numeric', minute: '2-digit', hour12: true, timeZone: 'America/New_York' }) + ' ET';
+    const firstName = (inviteeName || '').split(' ')[0] || 'there';
+
+    // Build the signed confirmation URL. Token expires 4 hours after
+    // meeting start (covers meeting + buffer + slack for late clicks).
+    const expiryMs = startMs + 4 * 60 * 60 * 1000;
+    const token = await signAttendanceToken(env, { inviteeUri: calendlyInviteeUri, expiryMs });
+    const baseOrigin = isWetyr ? 'https://wetyr.com' : 'https://markcmo.com';
+    const confirmUrl = `${baseOrigin}/api/confirm-attendance?token=${token}`;
+    auditPayload.confirm_url = confirmUrl;
+
+    const fromAddr = isWetyr ? 'WETYR <info@wetyr.com>' : 'Mark Gabrielli <mark@markcmo.com>';
+    const replyTo = isWetyr ? 'info@wetyr.com' : 'mark@markcmo.com';
+    const subject = `See you in 15 minutes`;
+
+    const joinLine = meetingLink || 'Check the calendar invite for the join link.';
+    const text = `Hi ${firstName},
+
+See you in 15 min at ${whenTime}.
+
+Quick favor - tap this to confirm you're joining so I know to wait:
+
+${confirmUrl}
+
+${meetingLink ? 'Join the meeting: ' + meetingLink : ''}
+
+Mark`;
+
+    const html = `<!DOCTYPE html>
+<html><head><meta charset="UTF-8"></head>
+<body style="margin:0;padding:0;background:#ffffff;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif;color:#1a1a1a;">
+  <div style="max-width:560px;margin:0 auto;padding:24px;font-size:15px;line-height:1.6;">
+    <p style="margin:0 0 14px;">Hi ${esc(firstName)},</p>
+    <p style="margin:0 0 14px;">See you in 15 min at <strong>${esc(whenTime)}</strong>.</p>
+    <p style="margin:0 0 14px;">Quick favor - tap below to confirm you're joining so I know to wait:</p>
+    <p style="margin:0 0 18px;"><a href="${esc(confirmUrl)}" style="display:inline-block;background:#2EBA73;color:#fff;padding:13px 26px;text-decoration:none;border-radius:8px;font-weight:700;font-size:16px;">I'll be there ✓</a></p>
+    ${meetingLink ? `<p style="margin:0 0 14px;">Or join now: <a href="${esc(meetingLink)}" style="color:#1a4d8c;">${esc(meetingLink.replace(/^https?:\/\//,''))}</a></p>` : ''}
+    <p style="margin:0;">Mark</p>
+  </div>
+</body></html>`;
+
+    auditPayload.step = 'queuing';
+    const r = await fetch('https://api.resend.com/emails', {
+      method: 'POST',
+      headers: {
+        Authorization: `Bearer ${apiKey}`,
+        'Content-Type': 'application/json',
+        'Idempotency-Key': `cal-15min-${calendlyInviteeUri || inviteeEmail}`.substring(0, 256),
+      },
+      body: JSON.stringify({
+        from: fromAddr,
+        to: [inviteeEmail],
+        cc: ['marklgabriellijr@gmail.com'],
+        reply_to: replyTo,
+        subject, html, text,
+        scheduled_at: sendAt,
+        tags: [
+          { name: 'category', value: 'calendly_15min_confirm' },
+          { name: 'mode', value: isWetyr ? 'wetyr' : 'markcmo' },
+        ],
+      }),
+    });
+    auditPayload.resend_status = r.status;
+
+    if (r.ok) {
+      const respJson = await r.json().catch(() => null);
+      const resendId = respJson && respJson.id || null;
+      auditPayload.resend_id = resendId;
+      auditPayload.step = 'queued';
+      auditEvent = 'invitee_15min_confirm_sent';
+
+      if (engagementId && resendId) {
+        try {
+          const eng = await sbSelect(env, `mc_engagements?id=eq.${encodeURIComponent(engagementId)}&select=metadata&limit=1`);
+          const meta = (eng && eng[0] && eng[0].metadata) || {};
+          meta.confirm_15min_resend_id = resendId;
+          meta.confirm_15min_send_at = sendAt;
+          await sbUpdate(env, 'mc_engagements', `id=eq.${encodeURIComponent(engagementId)}`, { metadata: meta });
+        } catch (_) {}
+      }
+    } else {
+      auditPayload.resend_error = (await r.text().catch(() => '')).slice(0, 600);
+      auditPayload.step = 'resend_rejected';
+      auditEvent = 'invitee_15min_confirm_failed';
+    }
+  } catch (err) {
+    auditPayload.step = (auditPayload.step || 'unknown') + '_then_crashed';
+    auditPayload.error_message = (err && err.message) || String(err);
+    auditPayload.error_stack = (err && err.stack) ? String(err.stack).substring(0, 1500) : null;
+    auditEvent = 'invitee_15min_confirm_crashed';
+  } finally {
+    try {
+      await sbInsert(env, 'mc_audit_log', { event: auditEvent, payload: auditPayload });
+    } catch (_) {}
+  }
+}
+
 // ───── scheduleRebookCta (T+72h after meeting end) ───────────────
 // Soft follow-up 3 days after the meeting: "worth another conversation?"
 // with the same Calendly booking link. Mark's voice. No-pressure rebook
@@ -1340,6 +1542,7 @@ async function cancelScheduledFollowup(env, { inviteeEmail, inviteeUri }) {
     const idsToCancel = [
       meta.reminder_24h_resend_id,
       meta.reminder_1h_resend_id,
+      meta.confirm_15min_resend_id,   // T-15min "I'll be there" confirm ping
       meta.followup_resend_id,        // the recap (legacy key name)
       meta.rebook_cta_resend_id,      // T+72h rebook CTA
     ].filter(Boolean);
