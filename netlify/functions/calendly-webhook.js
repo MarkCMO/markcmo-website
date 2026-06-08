@@ -166,8 +166,39 @@ async function handleInviteeCreated(p) {
     },
   });
 
-  // Notify Mark (internal alert)
-  await notifyNewBooking({ client, engagement, eventName, scheduledAt, qa, isNew: !existing.length });
+  // Diagnostic: marker BEFORE notifyNewBooking. If we see this in the
+  // audit log but no other invitee_* events, the issue is notifyNewBooking
+  // (or downstream) throwing in a way that bypasses both inner try/catch
+  // blocks. If we DON'T see this marker, the deploy isn't picking up our
+  // latest changes (something in the build chain is stale).
+  try {
+    await sbInsert('mc_audit_log', {
+      event: 'calendly_pre_notify_call',
+      payload: { invitee_email: inviteeEmail || '', invitee_uri: calendlyInviteeUri || '', commit_marker: 'a1b2c3' },
+    });
+  } catch (_) {}
+
+  // Notify Mark (internal alert). Wrapped so any throw lands in the audit
+  // log rather than escaping silently into the outer handler try/catch.
+  try {
+    await notifyNewBooking({ client, engagement, eventName, scheduledAt, qa, isNew: !existing.length });
+  } catch (notifyErr) {
+    try {
+      await sbInsert('mc_audit_log', {
+        event: 'calendly_notify_crashed',
+        payload: { invitee_email: inviteeEmail || '', error_message: (notifyErr && notifyErr.message) || String(notifyErr), error_stack: (notifyErr && notifyErr.stack) ? String(notifyErr.stack).substring(0, 1200) : null },
+      });
+    } catch (_) {}
+  }
+
+  // Diagnostic: marker AFTER notifyNewBooking returned. If pre_notify
+  // fires but post_notify doesn't, notifyNewBooking is killing execution.
+  try {
+    await sbInsert('mc_audit_log', {
+      event: 'calendly_post_notify_call',
+      payload: { invitee_email: inviteeEmail || '' },
+    });
+  } catch (_) {}
 
   // Control-flow marker. Proves handleInviteeCreated reached the point
   // where it tries to call sendInviteeConfirmation. If this entry exists
