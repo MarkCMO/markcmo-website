@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Executive Business Funding Solutions | 90-Day Build &amp; Launch Roadmap</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex, nofollow, noarchive, nosnippet, noimageindex">
+<meta http-equiv="Cache-Control" content="no-store, no-cache, must-revalidate, private">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Barlow:wght@400;500;600;700;800&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --navy:#0A1628;--navy-mid:#0F2040;--navy-light:#162A4A;
+    --blue:#2563EB;--blue-hover:#1D4ED8;--blue-light:#3B82F6;--blue-pale:#EFF6FF;
+    --steel:#475569;--orange:#F97316;
+    --white:#FFFFFF;--off-white:#F8FAFC;--light:#F1F5F9;--border:#E2E8F0;
+    --text:#1E293B;--text-mid:#64748B;--text-light:#94A3B8;
+    --green:#15803D;--green-pale:#F0FDF4;
+    --shadow:0 8px 32px rgba(15,32,64,0.06);
+  }
+  *{box-sizing:border-box;margin:0;padding:0;}
+  body{font-family:'Barlow',sans-serif;background:var(--off-white);color:var(--text);line-height:1.65;font-size:16px;}
+  .page{max-width:980px;margin:40px auto;background:var(--white);box-shadow:var(--shadow);padding:72px 64px;border-radius:6px;}
+  h1,h2,h3,h4{font-family:'Bebas Neue',sans-serif;color:var(--navy);font-weight:400;line-height:1.1;letter-spacing:0.02em;}
+  h1{font-size:3.4rem;margin-bottom:0.3em;}
+  h2{font-size:2.1rem;margin-top:2em;margin-bottom:0.6em;padding-bottom:0.35em;border-bottom:2px solid var(--blue-pale);}
+  h2 span{color:var(--blue);}
+  h3{font-size:1.45rem;margin-top:1.6em;margin-bottom:0.5em;color:var(--blue);letter-spacing:0.03em;}
+  h4{font-size:0.95rem;font-family:'Barlow',sans-serif;font-weight:700;text-transform:uppercase;letter-spacing:0.08em;color:var(--navy);margin-top:1.4em;margin-bottom:0.4em;}
+  p{margin-bottom:1em;}
+  strong{color:var(--navy);font-weight:700;}
+  a{color:var(--blue);text-decoration:none;}
+  ul,ol{margin:0.5em 0 1.2em 1.4em;}
+  li{margin-bottom:0.45em;}
+  table{width:100%;border-collapse:collapse;margin:24px 0;font-size:0.9rem;}
+  th{background:var(--navy);color:#fff;padding:13px 15px;text-align:left;font-family:'DM Mono',monospace;font-size:0.68rem;letter-spacing:0.1em;text-transform:uppercase;font-weight:500;}
+  td{padding:12px 15px;border-bottom:1px solid var(--border);vertical-align:top;}
+  tr:nth-child(even) td{background:var(--off-white);}
+  td strong{color:var(--navy);}
+
+  .brand-mark{display:flex;justify-content:space-between;align-items:center;margin-bottom:40px;padding-bottom:24px;border-bottom:1px solid var(--border);}
+  .brand-mark .wm{font-family:'Bebas Neue',sans-serif;font-size:1.5rem;letter-spacing:0.12em;color:var(--blue);}
+  .brand-mark .wm span{color:var(--navy);}
+  .brand-mark .doc-id{font-family:'DM Mono',monospace;font-size:0.66rem;letter-spacing:0.15em;text-transform:uppercase;color:var(--text-light);text-align:right;}
+
+  .hero-block{margin-bottom:40px;}
+  .eyebrow{font-family:'DM Mono',monospace;font-size:0.72rem;letter-spacing:0.28em;text-transform:uppercase;color:var(--blue);margin-bottom:14px;}
+  .lede{font-size:1.15rem;color:var(--text-mid);max-width:720px;line-height:1.55;}
+
+  .callout{background:var(--blue-pale);border:1px solid rgba(37,99,235,0.18);padding:20px 26px;margin:24px 0;border-radius:10px;}
+  .callout .label{font-family:'DM Mono',monospace;font-size:0.68rem;letter-spacing:0.18em;text-transform:uppercase;color:var(--blue);margin-bottom:8px;font-weight:600;}
+  .callout p:last-child{margin-bottom:0;}
+  .callout.green{background:var(--green-pale);border-color:rgba(21,128,61,0.22);}
+  .callout.green .label{color:var(--green);}
+  .callout.navy{background:var(--navy);border:none;color:rgba(255,255,255,0.85);}
+  .callout.navy .label{color:var(--blue-light);}
+  .callout.navy strong{color:#fff;}
+
+  .phase{background:var(--white);border:1px solid var(--border);border-left:4px solid var(--blue);border-radius:12px;padding:24px 28px;margin:20px 0;}
+  .phase .ph-head{display:flex;justify-content:space-between;align-items:baseline;flex-wrap:wrap;gap:8px;margin-bottom:6px;}
+  .phase .ph-name{font-family:'Bebas Neue',sans-serif;font-size:1.5rem;letter-spacing:0.03em;color:var(--navy);}
+  .phase .ph-window{font-family:'DM Mono',monospace;font-size:0.7rem;letter-spacing:0.12em;text-transform:uppercase;color:var(--blue);background:var(--blue-pale);padding:0.25rem 0.7rem;border-radius:5px;}
+  .phase .ph-goal{font-size:0.92rem;color:var(--text-mid);margin-bottom:10px;font-style:italic;}
+  .phase ul{margin:0.4em 0 0 1.3em;}
+
+  .gantt td.on{background:var(--blue) !important;color:#fff;text-align:center;font-family:'DM Mono',monospace;font-size:0.62rem;letter-spacing:0.05em;}
+  .gantt td.lite{background:var(--blue-pale) !important;text-align:center;}
+  .gantt td:first-child{text-align:left;font-size:0.85rem;}
+  .gantt th{font-size:0.6rem;text-align:center;}
+
+  .stat-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;margin:28px 0;}
+  @media(max-width:760px){.stat-grid{grid-template-columns:1fr 1fr;}}
+  .stat{background:var(--white);border:1px solid var(--border);border-top:3px solid var(--blue);padding:20px 16px;border-radius:10px;text-align:center;}
+  .stat .num{font-family:'Bebas Neue',sans-serif;font-size:2.3rem;color:var(--blue);line-height:1;margin-bottom:6px;letter-spacing:0.02em;}
+  .stat .lbl{font-family:'DM Mono',monospace;font-size:0.62rem;letter-spacing:0.12em;text-transform:uppercase;color:var(--text-mid);}
+
+  .nav-strip{position:sticky;top:0;z-index:50;background:#fff;border-bottom:1px solid var(--border);padding:0.7rem 1.5rem;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:0.5rem;font-family:'DM Mono',monospace;font-size:0.66rem;letter-spacing:0.1em;text-transform:uppercase;}
+  .nav-strip a{color:var(--text-mid);}
+  .nav-strip a.sign{background:var(--blue);color:#fff;padding:0.4rem 0.9rem;border-radius:4px;}
+  .footer{margin-top:60px;padding-top:28px;border-top:1px solid var(--border);text-align:center;font-family:'DM Mono',monospace;font-size:0.68rem;letter-spacing:0.14em;text-transform:uppercase;color:var(--text-light);}
+
+  @media print{.nav-strip,#cdb-gate{display:none !important;}.page{box-shadow:none;margin:0;padding:30px;}}
+  @media(max-width:600px){.page{padding:40px 22px;}h1{font-size:2.4rem;}.stat-grid{grid-template-columns:1fr 1fr;}}
+</style>
+</head>
+<body>
+<!-- ACCESS GATE -->
+<div id="cdb-gate" role="dialog" aria-modal="true" aria-label="Private document access">
+  <div class="cdb-gate-card">
+    <div class="cdb-gate-eyebrow">Confidential Document</div>
+    <div class="cdb-gate-lock" aria-hidden="true">&#128274;</div>
+    <h1>Private Access</h1>
+    <p>This document is confidential and prepared for a single recipient. Please enter your access code to continue.</p>
+    <form id="cdb-gate-form" autocomplete="off">
+      <input id="cdb-gate-code" type="password" placeholder="Access code" aria-label="Access code" autocomplete="off" spellcheck="false">
+      <button type="submit">Unlock Document</button>
+      <div id="cdb-gate-err" class="cdb-gate-err" hidden>That code is not right. Please try again.</div>
+    </form>
+    <div class="cdb-gate-foot">Need access? Contact Mark at mark@markcmo.com</div>
+  </div>
+</div>
+<style>
+  body:not(.cdb-unlocked){overflow:hidden !important;}
+  body:not(.cdb-unlocked) > *:not(#cdb-gate):not(script):not(style){display:none !important;}
+  body.cdb-unlocked #cdb-gate{display:none !important;}
+  #cdb-gate{position:fixed;inset:0;z-index:2147483647;display:flex;align-items:center;justify-content:center;padding:24px;background:#0A1628;background-image:radial-gradient(circle at 80% 8%, rgba(37,99,235,0.30), transparent 55%);font-family:'Barlow',system-ui,sans-serif;}
+  #cdb-gate .cdb-gate-card{width:100%;max-width:430px;background:#fff;border:1px solid #E2E8F0;border-radius:16px;padding:40px 34px;text-align:center;box-shadow:0 30px 80px rgba(0,0,0,0.45);}
+  #cdb-gate .cdb-gate-eyebrow{font-family:'DM Mono',monospace;font-size:10px;letter-spacing:4px;text-transform:uppercase;color:#2563EB;}
+  #cdb-gate .cdb-gate-lock{font-size:30px;margin:14px 0 4px;}
+  #cdb-gate h1{font-family:'Bebas Neue',sans-serif;font-weight:400;letter-spacing:0.04em;font-size:32px;color:#0A1628;margin:6px 0 8px;}
+  #cdb-gate p{font-size:14px;color:#5b6470;line-height:1.6;margin:0 0 22px;}
+  #cdb-gate-form{display:flex;flex-direction:column;gap:12px;}
+  #cdb-gate-code{width:100%;padding:13px 16px;border:1px solid #cbd5e1;border-radius:10px;font-size:16px;font-family:inherit;background:#fff;color:#1A1A1A;text-align:center;letter-spacing:2px;}
+  #cdb-gate-code:focus{outline:none;border-color:#2563EB;box-shadow:0 0 0 3px rgba(37,99,235,0.18);}
+  #cdb-gate-form button{padding:13px 16px;border:none;border-radius:10px;background:#2563EB;color:#fff;font-size:15px;font-weight:700;font-family:inherit;cursor:pointer;}
+  #cdb-gate-form button:hover{background:#1D4ED8;}
+  #cdb-gate .cdb-gate-err{color:#b3261e;font-size:13px;}
+  #cdb-gate .cdb-gate-foot{margin-top:22px;font-size:12px;color:#8F8F8F;}
+  #cdb-gate .cdb-shake{animation:cdbShake .4s;}
+  @keyframes cdbShake{0%,100%{transform:translateX(0)}20%,60%{transform:translateX(-7px)}40%,80%{transform:translateX(7px)}}
+</style>
+<script>
+(function(){
+  var HASH='69de26d413c1f3b738bcecd1514038b54cc0a7ef3e60d932a08c5b069e6e79c0';
+  var KEY='ebfs_doc_access';
+  function unlock(){try{document.body.classList.add('cdb-unlocked');}catch(e){}var g=document.getElementById('cdb-gate');if(g)g.parentNode&&g.parentNode.removeChild(g);}
+  try{if(sessionStorage.getItem(KEY)==='1'){if(document.body)unlock();else document.addEventListener('DOMContentLoaded',unlock);return;}}catch(e){}
+  async function sha256(s){try{var b=new TextEncoder().encode(s);var h=await crypto.subtle.digest('SHA-256',b);return Array.from(new Uint8Array(h)).map(function(x){return x.toString(16).padStart(2,'0');}).join('');}catch(e){return null;}}
+  document.addEventListener('DOMContentLoaded',function(){
+    var form=document.getElementById('cdb-gate-form');var input=document.getElementById('cdb-gate-code');
+    var err=document.getElementById('cdb-gate-err');var card=document.querySelector('#cdb-gate .cdb-gate-card');
+    if(input)input.focus();if(!form)return;
+    form.addEventListener('submit',async function(e){
+      e.preventDefault();
+      var hashed=await sha256((input.value||'').toLowerCase().trim());
+      if(hashed===HASH){try{sessionStorage.setItem(KEY,'1');}catch(e){}unlock();}
+      else{if(err)err.hidden=false;if(card){card.classList.remove('cdb-shake');void card.offsetWidth;card.classList.add('cdb-shake');}input.value='';input.focus();}
+    });
+  });
+})();
+</script>
+<!-- /ACCESS GATE -->
+
+<nav class="nav-strip">
+  <a href="/documents/clients/ebfs-llc/"><strong style="color:#2563EB;">MARKCMO</strong> for EBFS</a>
+  <div style="display:flex;gap:1rem;align-items:center;flex-wrap:wrap;">
+    <a href="/documents/clients/ebfs-llc/blueprint">Blueprint</a>
+    <a href="/documents/clients/ebfs-llc/sow">Game Plan</a>
+    <a href="/documents/clients/ebfs-llc/proposal">Proposal</a>
+    <a class="sign" href="/forms/ebfs-llc-outreach">Sign &rarr;</a>
+  </div>
+</nav>
+
+<div class="page">
+
+  <div class="brand-mark">
+    <div class="wm">MARK<span>CMO</span></div>
+    <div class="doc-id">Doc EBFS-RDM-001<br/>Confidential &middot; v1.0</div>
+  </div>
+
+  <div class="hero-block">
+    <div class="eyebrow">90-Day Build &amp; Launch Roadmap</div>
+    <h1>From signature to a calendar full of calls, in 90 days.</h1>
+    <p class="lede">Cold outreach is not a switch you flip. Domains have to warm. Lists have to be built and validated. Copy has to be written and tested. This roadmap sequences all of it so the first sends go out clean and the program is at full volume, booking 20 to 30 calls a month, by Day 90.</p>
+  </div>
+
+  <div class="callout navy">
+    <div class="label">The shape of the 90 days</div>
+    <p style="margin:0;"><strong>Weeks 1 to 2:</strong> stand up the infrastructure and start warmup. <strong>Weeks 2 to 4:</strong> build and validate the first lists, write the sequences. <strong>Weeks 4 to 6:</strong> soft launch as warmup completes. <strong>Weeks 6 to 12:</strong> ramp to full volume and optimize into the 20 to 30 call range.</p>
+  </div>
+
+  <h2>Phase Plan</h2>
+
+  <div class="phase">
+    <div class="ph-head"><div class="ph-name">Phase 0 &middot; Kickoff</div><div class="ph-window">Day 0</div></div>
+    <div class="ph-goal">Everything we need to start building, captured in one 90-minute session.</div>
+    <ul>
+      <li>Kickoff with Terry: confirm ICP filters (manufacturing, distribution, warehousing, logistics, construction, large restaurant groups; real estate excluded), target titles (owner / CEO / CFO), and the intent sources.</li>
+      <li>Confirm access to your data and intent sources (ZoomInfo, Bombora, Prospero) and your calendar.</li>
+      <li>Capture EBFS positioning, the liquidity and senior-lender-replacement angles, proof points, and any flyers / promotional assets for the branded touches.</li>
+      <li>Confirm the calendar / booking tool and where booked calls hand off to your close process.</li>
+      <li>Agree on suppression rules (existing clients, do-not-contact, active deals).</li>
+    </ul>
+  </div>
+
+  <div class="phase">
+    <div class="ph-head"><div class="ph-name">Phase 1 &middot; Infrastructure</div><div class="ph-window">Days 1 to 14</div></div>
+    <div class="ph-goal">The sending backbone goes up and starts warming on day one. This is the long pole, so it starts first.</div>
+    <ul>
+      <li>Stand up your outreach infrastructure, built in your name and owned by you.</li>
+      <li><strong>Warmup starts immediately</strong> (the 3 to 4 week clock begins now). This is what earns the system its place in the inbox later.</li>
+      <li>Connect your data and intent sources, your calendar, and the CRM.</li>
+      <li>Stand up the reporting dashboard so you can see the funnel from day one.</li>
+    </ul>
+  </div>
+
+  <div class="phase">
+    <div class="ph-head"><div class="ph-name">Phase 2 &middot; List &amp; Copy</div><div class="ph-window">Days 10 to 30</div></div>
+    <div class="ph-goal">While domains warm, we build the ammunition: intent-scored validated lists and tested sequences.</div>
+    <ul>
+      <li>Build and validate the first target lists so outreach starts clean.</li>
+      <li>Write the full multi-channel sequence and create your prospect materials (funding playbook, case pieces, professional signature).</li>
+      <li>Wire the booking links and the behavior-based follow-up so interested prospects self-schedule and the hottest get fast attention.</li>
+      <li>Set up reply handling and routing so booked calls reach you cleanly.</li>
+    </ul>
+  </div>
+
+  <div class="phase">
+    <div class="ph-head"><div class="ph-name">Phase 3 &middot; Soft Launch</div><div class="ph-window">Days 28 to 45</div></div>
+    <div class="ph-goal">First real sends as warmup completes. Low volume, watch everything.</div>
+    <ul>
+      <li>Begin sending at reduced volume as each domain clears warmup.</li>
+      <li>Monitor deliverability, bounce, open, and reply closely. Hold bounce under 2 percent.</li>
+      <li>Launch the parallel LinkedIn motion and intent-triggered cold-call tasks on the same contacts.</li>
+      <li>First booked calls start landing. Tune copy, ICP, and intent thresholds against live reply data.</li>
+    </ul>
+  </div>
+
+  <div class="phase">
+    <div class="ph-head"><div class="ph-name">Phase 4 &middot; Ramp &amp; Optimize</div><div class="ph-window">Days 45 to 90</div></div>
+    <div class="ph-goal">Scale to full volume and settle into the 20 to 30 call range.</div>
+    <ul>
+      <li>Ramp to full daily send volume.</li>
+      <li>Double down on the winning subject lines, angles, segments, and intent thresholds. Cut what underperforms.</li>
+      <li>Expand list pulls to keep ~800 fresh validated contacts (intent-scored) flowing each week.</li>
+      <li>Weekly reporting, monthly optimization review. Steady-state 20 to 30 booked calls a month.</li>
+    </ul>
+  </div>
+
+  <h2>Build <span>Timeline</span> at a Glance</h2>
+  <table class="gantt">
+    <tr><th>Workstream</th><th>Wk1</th><th>Wk2</th><th>Wk3</th><th>Wk4</th><th>Wk5</th><th>Wk6</th><th>Wk7-8</th><th>Wk9-12</th></tr>
+    <tr><td>Infrastructure stand-up</td><td class="on">build</td><td class="lite"></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+    <tr><td>Warmup (3 to 4 weeks)</td><td class="on">warm</td><td class="on">warm</td><td class="on">warm</td><td class="on">warm</td><td class="lite"></td><td></td><td></td><td></td></tr>
+    <tr><td>Lists + targeting</td><td></td><td class="on">build</td><td class="on">run</td><td class="on">run</td><td class="on">run</td><td class="on">run</td><td class="on">run</td><td class="on">run</td></tr>
+    <tr><td>Sequence + materials</td><td></td><td class="on">write</td><td class="on">write</td><td class="lite"></td><td></td><td></td><td></td><td></td></tr>
+    <tr><td>Soft launch (low volume)</td><td></td><td></td><td></td><td class="lite"></td><td class="on">send</td><td class="on">send</td><td class="lite"></td><td></td></tr>
+    <tr><td>Full volume ramp</td><td></td><td></td><td></td><td></td><td></td><td class="lite"></td><td class="on">scale</td><td class="on">full</td></tr>
+    <tr><td>Reporting + optimization</td><td></td><td></td><td></td><td></td><td class="on">wkly</td><td class="on">wkly</td><td class="on">wkly</td><td class="on">wkly</td></tr>
+  </table>
+
+  <h2>Milestones</h2>
+  <table>
+    <tr><th>Milestone</th><th>By</th><th>What is true</th></tr>
+    <tr><td>Infrastructure live</td><td>Day 14</td><td>Your outreach system is built and warming, and your data, intent, and calendar are connected.</td></tr>
+    <tr><td>Lists + sequences ready</td><td>Day 30</td><td>Target lists built and validated, copy written, booking and follow-up wired.</td></tr>
+    <tr><td>Soft launch live, first calls</td><td>Day 45</td><td>Sending at reduced volume, LinkedIn and cold-call motion on, first booked calls landing.</td></tr>
+    <tr><td>Full volume, in the range</td><td>Day 90</td><td>~20,000 sends a month, multi-channel, intent-prioritized, booking 20 to 30 calls a month.</td></tr>
+  </table>
+
+  <div class="callout">
+    <div class="label">A note on month one expectations</div>
+    <p style="margin:0;">Because warmup runs 3 to 4 weeks, the first full sends land around week 5. That means the first 30 days are build, not booked calls. Calls begin in the back half of month one to early month two, and climb into the 20 to 30 range as volume reaches full and copy is tuned to live data. This is normal and it is the right way to do it. Rushing warmup is how programs die. It is also why the <strong>monthly retainer does not start until the engine goes live</strong> around Day 30: you pay the at-signing build cost to start, and the monthly only begins when sending is actually running.</p>
+  </div>
+
+  <h2>KPI <span>Scorecard</span></h2>
+  <div class="stat-grid">
+    <div class="stat"><div class="num">&lt;2%</div><div class="lbl">Bounce Rate</div></div>
+    <div class="stat"><div class="num">95%+</div><div class="lbl">Inbox Placement</div></div>
+    <div class="stat"><div class="num">4-8%</div><div class="lbl">Reply Rate</div></div>
+    <div class="stat"><div class="num">20-30</div><div class="lbl">Calls / Month</div></div>
+  </div>
+  <p>Reported weekly by email, visible live on the dashboard, and reviewed together once a month. If a number drifts, we see it the same week and act on it.</p>
+
+  <div class="callout navy" style="margin-top:36px;">
+    <div class="label">Next</div>
+    <p style="margin:0;">The proposal lays out the three options (Small Start, Immediate Growth, Scale Up), what each costs, and the payback math against a single funded deal. Immediate Growth is the one built to hit the 20 to 30 call target in this roadmap.</p>
+  </div>
+
+  <div style="text-align:center;margin:40px 0 10px;">
+    <a href="/documents/clients/ebfs-llc/proposal" style="display:inline-block;background:var(--blue);color:#fff;font-weight:700;padding:0.9rem 2rem;border-radius:8px;letter-spacing:0.02em;margin:0 6px 10px;">See the Proposal &rarr;</a>
+    <a href="/forms/ebfs-llc-outreach" style="display:inline-block;background:var(--navy);color:#fff;font-weight:700;padding:0.9rem 2rem;border-radius:8px;letter-spacing:0.02em;margin:0 6px 10px;">Sign &amp; Get Started &rarr;</a>
+  </div>
+
+  <div class="footer">
+    Prepared by Mark Gabrielli &middot; markcmo.com &middot; Private &amp; Confidential
+  </div>
+
+</div>
+
+<script>(function(){try{var k='mc_jsid';var s=sessionStorage.getItem(k)||('s_'+Math.random().toString(36).slice(2)+Date.now().toString(36));sessionStorage.setItem(k,s);fetch('/.netlify/functions/track',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({t:'view',client:'ebfs-llc',page:'roadmap',doc_id:'EBFS-RDM-001',session_id:s,url:location.pathname,title:document.title}),keepalive:true}).catch(function(){});}catch(e){}})();</script>
+</body>
+</html>

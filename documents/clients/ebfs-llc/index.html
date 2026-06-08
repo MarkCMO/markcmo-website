@@ -1,0 +1,498 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Executive Business Funding Solutions | Outbound Lead Engine | MarkCMO</title>
+<meta name="description" content="Engagement documents prepared for Terry at Executive Business Funding Solutions. Outbound System Blueprint, 90-Day Roadmap, and Three-Tier Engagement Proposal." />
+<meta name="robots" content="noindex, nofollow, noarchive, nosnippet, noimageindex" />
+<meta http-equiv="Cache-Control" content="no-store, no-cache, must-revalidate, private" />
+<link rel="preconnect" href="https://fonts.googleapis.com" crossorigin>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Barlow:wght@400;500;600;700;800&family=DM+Mono:wght@400;500&display=swap">
+<style>
+  :root{
+    --navy:#0A1628;--navy-mid:#0F2040;--navy-light:#162A4A;
+    --blue:#2563EB;--blue-hover:#1D4ED8;--blue-light:#3B82F6;--blue-pale:#EFF6FF;
+    --steel:#475569;--orange:#F97316;--orange-light:#FB923C;
+    --white:#FFFFFF;--off-white:#F8FAFC;--light:#F1F5F9;--border:#E2E8F0;
+    --text:#1E293B;--text-mid:#64748B;--text-light:#94A3B8;
+    --shadow-md:0 4px 16px rgba(15,32,64,0.08), 0 8px 32px rgba(15,32,64,0.06);
+    --shadow-blue:0 4px 20px rgba(37,99,235,0.20), 0 2px 8px rgba(37,99,235,0.12);
+  }
+  *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+  body{font-family:'Barlow',sans-serif;background:var(--off-white);color:var(--text);line-height:1.65;min-height:100vh;}
+  a{color:var(--blue);text-decoration:none;}
+
+  .doc-nav{position:sticky;top:0;z-index:100;background:var(--white);border-bottom:1px solid var(--border);padding:0.9rem 2rem;display:flex;justify-content:space-between;align-items:center;}
+  .doc-nav-logo{font-family:'Bebas Neue',sans-serif;font-size:1.25rem;letter-spacing:0.12em;color:var(--blue);}
+  .doc-nav-logo span{color:var(--text);}
+  .doc-nav-meta{font-family:'DM Mono',monospace;font-size:0.7rem;letter-spacing:0.15em;text-transform:uppercase;color:var(--text-light);}
+  .doc-nav-meta strong{color:var(--blue);font-weight:600;}
+
+  .cover-hero{
+    background:linear-gradient(135deg,var(--navy) 0%,var(--navy-mid) 50%,var(--navy-light) 100%);
+    color:var(--white);
+    padding:5rem 2rem 4rem;position:relative;overflow:hidden;box-shadow:0 24px 60px -16px rgba(15,32,64,0.35);
+  }
+  .cover-hero::before{
+    content:'';position:absolute;inset:0;
+    background:radial-gradient(circle at 80% 20%, rgba(37,99,235,0.22) 0%, transparent 50%);
+    pointer-events:none;
+  }
+  .cover-hero-inner{max-width:1080px;margin:0 auto;display:grid;grid-template-columns:1fr 1fr;gap:3rem;align-items:center;position:relative;z-index:1;}
+  @media(max-width:860px){.cover-hero-inner{grid-template-columns:1fr;}}
+
+  .cover-wordmark{
+    font-family:'Bebas Neue',sans-serif;font-size:3.4rem;font-weight:400;letter-spacing:0.06em;
+    color:var(--white);margin-bottom:0.1rem;line-height:1;
+  }
+  .cover-wordmark span{color:var(--blue-light);}
+  .cover-wordmark-sub{font-family:'DM Mono',monospace;font-size:0.72rem;letter-spacing:0.3em;color:var(--blue-light);text-transform:uppercase;margin-bottom:1.8rem;}
+
+  .cover-eyebrow{font-family:'DM Mono',monospace;font-size:0.72rem;letter-spacing:0.25em;text-transform:uppercase;color:var(--blue-light);margin-bottom:1rem;display:flex;align-items:center;gap:0.75rem;}
+
+  .cover-hero h1{font-family:'Bebas Neue',sans-serif;font-size:clamp(2.2rem,4.8vw,3.4rem);font-weight:400;letter-spacing:0.02em;line-height:1.05;color:var(--white);margin-bottom:1rem;}
+  .cover-hero h1 em{color:var(--blue-light);font-style:normal;}
+  .cover-hero-sub{font-size:1.05rem;color:rgba(248,250,252,0.78);max-width:520px;line-height:1.55;margin-bottom:1.75rem;}
+
+  .client-card{
+    background:rgba(255,255,255,0.04);
+    border:1px solid rgba(59,130,246,0.20);
+    border-radius:16px;
+    padding:1.75rem 2rem;
+    backdrop-filter:blur(8px);
+  }
+  .client-card .lbl{font-family:'DM Mono',monospace;font-size:0.65rem;letter-spacing:0.2em;text-transform:uppercase;color:var(--blue-light);margin-bottom:0.6rem;}
+  .client-card h3{font-family:'Bebas Neue',sans-serif;font-size:1.7rem;letter-spacing:0.04em;color:var(--white);margin-bottom:0.4rem;font-weight:400;}
+  .client-card .who{color:rgba(255,255,255,0.85);font-size:1rem;margin-bottom:1rem;}
+  .client-card .who strong{color:var(--white);font-weight:700;}
+  .client-card .meta-grid{display:grid;grid-template-columns:1fr 1fr;gap:1.25rem;padding-top:1.25rem;border-top:1px solid rgba(59,130,246,0.20);}
+  .client-card .meta-grid .item .lbl{font-size:0.6rem;}
+  .client-card .meta-grid .item .val{font-family:'Bebas Neue',sans-serif;font-size:1.3rem;color:var(--blue-light);letter-spacing:0.04em;}
+
+  .doc-body{max-width:1080px;margin:0 auto;padding:4rem 2rem;}
+  .section-eyebrow{font-family:'DM Mono',monospace;font-size:0.7rem;letter-spacing:0.2em;text-transform:uppercase;color:var(--blue);margin-bottom:0.85rem;font-weight:700;display:inline-block;padding:0.3rem 0.85rem;background:var(--blue-pale);border-radius:6px;}
+
+  h2{font-family:'Bebas Neue',sans-serif;font-size:clamp(1.8rem,3.4vw,2.5rem);font-weight:400;letter-spacing:0.02em;color:var(--navy);margin-bottom:1.25rem;line-height:1.15;}
+  h2 span{color:var(--blue);}
+  p{margin-bottom:1rem;font-size:0.98rem;}
+
+  .doc-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:1.5rem;margin:2rem 0 3rem;}
+  @media(max-width:760px){.doc-grid{grid-template-columns:1fr;}}
+  .doc-card{
+    background:var(--white);
+    border:1px solid var(--border);
+    border-radius:16px;
+    padding:2rem;
+    display:flex;flex-direction:column;
+    transition:transform 0.2s, box-shadow 0.2s, border-color 0.2s;
+    text-decoration:none;color:inherit;
+    position:relative;overflow:hidden;min-height:240px;
+  }
+  .doc-card:hover{transform:translateY(-4px);box-shadow:var(--shadow-md);border-color:var(--blue);}
+  .doc-card .doc-id{font-family:'DM Mono',monospace;font-size:0.65rem;letter-spacing:0.2em;text-transform:uppercase;color:var(--blue);margin-bottom:0.75rem;font-weight:600;}
+  .doc-card .doc-num{font-family:'Bebas Neue',sans-serif;font-size:3.2rem;color:var(--blue-pale);letter-spacing:0.04em;line-height:1;position:absolute;top:1.4rem;right:1.75rem;}
+  .doc-card h3{font-family:'Bebas Neue',sans-serif;font-size:1.6rem;letter-spacing:0.03em;color:var(--navy);margin-bottom:0.5rem;font-weight:400;line-height:1.1;}
+  .doc-card .desc{font-size:0.94rem;color:var(--text-mid);margin-bottom:1.25rem;line-height:1.55;flex:1;}
+  .doc-card .meta{font-family:'DM Mono',monospace;font-size:0.68rem;letter-spacing:0.12em;color:var(--text-light);text-transform:uppercase;margin-bottom:1rem;}
+  .doc-card .open{display:inline-flex;align-items:center;gap:0.4rem;font-family:'Barlow',sans-serif;font-size:0.88rem;font-weight:700;color:var(--blue);text-transform:uppercase;letter-spacing:0.05em;}
+  .doc-card:hover .open{color:var(--navy);}
+  .doc-card .open::after{content:'\2192';transition:transform 0.2s;}
+  .doc-card:hover .open::after{transform:translateX(4px);}
+  .doc-card.sign-card{border-color:var(--blue);background:linear-gradient(135deg,#fff 0%,var(--blue-pale) 100%);box-shadow:var(--shadow-blue);}
+  .doc-card.sign-card .doc-num{color:var(--blue-light);}
+
+  .read-order{
+    background:var(--blue-pale);
+    border:1px solid rgba(37,99,235,0.20);
+    border-radius:14px;
+    padding:1.75rem 2rem;
+    margin:2rem 0;
+  }
+  .read-order .lbl{font-family:'DM Mono',monospace;font-size:0.7rem;letter-spacing:0.2em;text-transform:uppercase;color:var(--blue);font-weight:600;margin-bottom:0.6rem;}
+  .read-order h3{font-family:'Bebas Neue',sans-serif;font-size:1.5rem;letter-spacing:0.03em;color:var(--navy);margin-bottom:0.75rem;font-weight:400;}
+  .read-order ol{padding-left:1.4rem;margin-top:0.75rem;}
+  .read-order ol li{margin-bottom:0.4rem;color:var(--navy);font-size:0.95rem;}
+  .read-order ol li strong{color:var(--blue);}
+
+  .invest-strip{
+    background:linear-gradient(135deg,var(--navy) 0%,var(--navy-mid) 100%);
+    color:var(--white);
+    border-radius:18px;
+    padding:2.5rem;
+    margin:3rem 0;
+    display:grid;grid-template-columns:1fr auto;gap:2rem;align-items:center;
+    box-shadow:var(--shadow-md);position:relative;overflow:hidden;
+  }
+  .invest-strip::before{content:'';position:absolute;inset:0;background:radial-gradient(circle at 90% 50%,rgba(37,99,235,0.25) 0%,transparent 60%);pointer-events:none;}
+  @media(max-width:720px){.invest-strip{grid-template-columns:1fr;text-align:left;}}
+  .invest-strip > *{position:relative;z-index:1;}
+  .invest-strip .lbl{font-family:'DM Mono',monospace;font-size:0.7rem;letter-spacing:0.2em;text-transform:uppercase;color:var(--blue-light);margin-bottom:0.5rem;}
+  .invest-strip h3{font-family:'Bebas Neue',sans-serif;font-size:1.8rem;letter-spacing:0.04em;color:var(--white);margin-bottom:0.5rem;font-weight:400;}
+  .invest-strip h3 span{color:var(--blue-light);}
+  .invest-strip p{color:rgba(255,255,255,0.78);margin:0;font-size:0.95rem;}
+  .price-tag{font-family:'Bebas Neue',sans-serif;font-size:3.5rem;letter-spacing:0.02em;line-height:1;color:var(--white);}
+  .price-tag small{display:block;font-family:'DM Mono',monospace;font-size:0.7rem;color:var(--blue-light);margin-top:0.4rem;letter-spacing:0.18em;}
+
+  .cta-row{display:flex;gap:0.75rem;flex-wrap:wrap;margin-top:1.25rem;}
+  .cta-primary{display:inline-flex;align-items:center;gap:0.5rem;padding:0.95rem 1.75rem;background:var(--blue);color:var(--white);font-weight:700;font-size:0.95rem;letter-spacing:0.02em;border-radius:10px;transition:background 0.18s,transform 0.18s,box-shadow 0.18s;box-shadow:0 4px 14px rgba(37,99,235,0.3);}
+  .cta-primary:hover{background:var(--blue-hover);transform:translateY(-1px);color:var(--white);box-shadow:0 6px 18px rgba(37,99,235,0.4);}
+  .cta-secondary{display:inline-flex;align-items:center;gap:0.5rem;padding:0.95rem 1.75rem;background:transparent;color:var(--white);border:1.5px solid rgba(59,130,246,0.45);font-weight:600;font-size:0.95rem;letter-spacing:0.02em;border-radius:10px;transition:all 0.18s;}
+  .cta-secondary:hover{border-color:var(--blue-light);background:rgba(59,130,246,0.08);color:var(--white);}
+
+  .process{display:grid;grid-template-columns:repeat(4,1fr);gap:1rem;margin:1.5rem 0;}
+  @media(max-width:860px){.process{grid-template-columns:1fr 1fr;}}
+  @media(max-width:520px){.process{grid-template-columns:1fr;}}
+  .step{background:var(--white);border:1px solid var(--border);border-top:3px solid var(--blue);border-radius:14px;padding:1.5rem;}
+  .step .num{font-family:'Bebas Neue',sans-serif;font-size:1.6rem;color:var(--blue);letter-spacing:0.04em;margin-bottom:0.4rem;}
+  .step h4{font-family:'Barlow',sans-serif;font-size:1.05rem;font-weight:700;color:var(--navy);margin-bottom:0.4rem;}
+  .step p{font-size:0.88rem;margin:0;color:var(--text-mid);line-height:1.5;}
+
+  footer.doc-footer{background:var(--navy);color:rgba(255,255,255,0.6);padding:2.5rem 2rem;border-top:3px solid var(--blue);}
+  .doc-footer-inner{max-width:1080px;margin:0 auto;display:grid;grid-template-columns:1fr auto;gap:2rem;align-items:center;}
+  @media(max-width:600px){.doc-footer-inner{grid-template-columns:1fr;}}
+  .doc-footer-logo{font-family:'Bebas Neue',sans-serif;font-size:1.4rem;letter-spacing:0.12em;color:var(--white);}
+  .doc-footer-logo span{color:var(--blue-light);}
+  .doc-footer p{font-size:0.82rem;line-height:1.6;margin:0.4rem 0 0;color:rgba(255,255,255,0.55);}
+  .doc-footer-meta{font-family:'DM Mono',monospace;font-size:0.68rem;letter-spacing:0.15em;text-transform:uppercase;color:rgba(255,255,255,0.4);text-align:right;}
+  @media(max-width:600px){.doc-footer-meta{text-align:left;}}
+</style>
+</head>
+<body>
+<!-- ACCESS GATE (private until the client moves forward). Remove this block to make the doc public. -->
+<div id="cdb-gate" role="dialog" aria-modal="true" aria-label="Private document access">
+  <div class="cdb-gate-card">
+    <div class="cdb-gate-eyebrow">Confidential Document</div>
+    <div class="cdb-gate-lock" aria-hidden="true">&#128274;</div>
+    <h1>Private Access</h1>
+    <p>This document is confidential and prepared for a single recipient. Please enter your access code to continue.</p>
+    <form id="cdb-gate-form" autocomplete="off">
+      <input id="cdb-gate-code" type="password" placeholder="Access code" aria-label="Access code" autocomplete="off" spellcheck="false">
+      <button type="submit">Unlock Document</button>
+      <div id="cdb-gate-err" class="cdb-gate-err" hidden>That code is not right. Please try again.</div>
+    </form>
+    <div class="cdb-gate-foot">Need access? Contact Mark at mark@markcmo.com</div>
+  </div>
+</div>
+<style>
+  body:not(.cdb-unlocked) { overflow: hidden !important; }
+  body:not(.cdb-unlocked) > *:not(#cdb-gate):not(script):not(style) { display: none !important; }
+  body.cdb-unlocked #cdb-gate { display: none !important; }
+  #cdb-gate { position: fixed; inset: 0; z-index: 2147483647; display: flex; align-items: center; justify-content: center; padding: 24px; background: #0A1628; background-image: radial-gradient(circle at 80% 8%, rgba(37,99,235,0.30), transparent 55%); font-family: 'Barlow', system-ui, -apple-system, sans-serif; }
+  #cdb-gate .cdb-gate-card { width: 100%; max-width: 430px; background: #FFFFFF; border: 1px solid #E2E8F0; border-radius: 16px; padding: 40px 34px; text-align: center; box-shadow: 0 30px 80px rgba(0,0,0,0.45); }
+  #cdb-gate .cdb-gate-eyebrow { font-family: 'DM Mono', monospace; font-size: 10px; letter-spacing: 4px; text-transform: uppercase; color: #2563EB; }
+  #cdb-gate .cdb-gate-lock { font-size: 30px; margin: 14px 0 4px; }
+  #cdb-gate h1 { font-family: 'Bebas Neue', sans-serif; font-weight: 400; letter-spacing: 0.04em; font-size: 32px; color: #0A1628; margin: 6px 0 8px; }
+  #cdb-gate p { font-size: 14px; color: #5b6470; line-height: 1.6; margin: 0 0 22px; }
+  #cdb-gate-form { display: flex; flex-direction: column; gap: 12px; }
+  #cdb-gate-code { width: 100%; padding: 13px 16px; border: 1px solid #cbd5e1; border-radius: 10px; font-size: 16px; font-family: inherit; background: #fff; color: #1A1A1A; text-align: center; letter-spacing: 2px; }
+  #cdb-gate-code:focus { outline: none; border-color: #2563EB; box-shadow: 0 0 0 3px rgba(37,99,235,0.18); }
+  #cdb-gate-form button { padding: 13px 16px; border: none; border-radius: 10px; background: #2563EB; color: #fff; font-size: 15px; font-weight: 700; font-family: inherit; cursor: pointer; letter-spacing: 0.3px; }
+  #cdb-gate-form button:hover { background: #1D4ED8; }
+  #cdb-gate .cdb-gate-err { color: #b3261e; font-size: 13px; }
+  #cdb-gate .cdb-gate-foot { margin-top: 22px; font-size: 12px; color: #8F8F8F; }
+  #cdb-gate .cdb-shake { animation: cdbShake .4s; }
+  @keyframes cdbShake { 0%,100%{transform:translateX(0)} 20%,60%{transform:translateX(-7px)} 40%,80%{transform:translateX(7px)} }
+</style>
+<script>
+(function(){
+  var HASH='69de26d413c1f3b738bcecd1514038b54cc0a7ef3e60d932a08c5b069e6e79c0';
+  var KEY='ebfs_doc_access';
+  function unlock(){ try{ document.body.classList.add('cdb-unlocked'); }catch(e){} var g=document.getElementById('cdb-gate'); if(g) g.parentNode && g.parentNode.removeChild(g); }
+  try { if (sessionStorage.getItem(KEY)==='1') { if(document.body) unlock(); else document.addEventListener('DOMContentLoaded', unlock); return; } } catch(e){}
+  async function sha256(s){ try{ var b=new TextEncoder().encode(s); var h=await crypto.subtle.digest('SHA-256', b); return Array.from(new Uint8Array(h)).map(function(x){return x.toString(16).padStart(2,'0');}).join(''); }catch(e){ return null; } }
+  document.addEventListener('DOMContentLoaded', function(){
+    var form=document.getElementById('cdb-gate-form'); var input=document.getElementById('cdb-gate-code');
+    var err=document.getElementById('cdb-gate-err'); var card=document.querySelector('#cdb-gate .cdb-gate-card');
+    if(input) input.focus(); if(!form) return;
+    form.addEventListener('submit', async function(e){
+      e.preventDefault();
+      var hashed=await sha256((input.value||'').toLowerCase().trim());
+      if(hashed===HASH){ try{ sessionStorage.setItem(KEY,'1'); }catch(e){} unlock(); }
+      else { if(err) err.hidden=false; if(card){ card.classList.remove('cdb-shake'); void card.offsetWidth; card.classList.add('cdb-shake'); } input.value=''; input.focus(); }
+    });
+  });
+})();
+</script>
+<!-- /ACCESS GATE -->
+
+
+<nav class="doc-nav">
+  <div class="doc-nav-logo">MARK<span>CMO</span></div>
+  <div class="doc-nav-meta">Engagement <strong>EBFS</strong> &middot; Executive Business Funding Solutions &middot; Confidential</div>
+</nav>
+
+<header class="cover-hero">
+  <div class="cover-hero-inner">
+    <div>
+      <div class="cover-wordmark">EBFS<span>.</span></div>
+      <div class="cover-wordmark-sub">Executive Business Funding Solutions</div>
+      <div class="cover-eyebrow">Engagement Documents &middot; v1.0</div>
+      <h1>An outbound engine that books <em>20 to 30 qualified calls a month.</em></h1>
+      <p class="cover-hero-sub">
+        Four documents. One engagement. An intent-driven cold email, LinkedIn, and cold-call system, built on enterprise infrastructure you own end-to-end, that fills your calendar with US manufacturers, distributors, logistics, construction, and large restaurant groups doing 5M dollars and up in revenue.
+      </p>
+    </div>
+
+    <div class="client-card">
+      <div class="lbl">Prepared For</div>
+      <h3>Terry Stavropoulos</h3>
+      <div class="who">
+        <strong>Principal</strong><br/>
+        Executive Business Funding Solutions<br/>
+        Corporate Debt &amp; Private Credit<br/>
+        ebfsllc.com
+      </div>
+      <div class="meta-grid">
+        <div class="item">
+          <div class="lbl">Goal</div>
+          <div class="val">20 CLOSES / MO</div>
+        </div>
+        <div class="item">
+          <div class="lbl">Channels</div>
+          <div class="val">EMAIL + LI + CALL</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</header>
+
+<main class="doc-body">
+
+  <style>
+    .how-flow{display:grid;grid-template-columns:repeat(5,1fr);gap:12px;margin:1.75rem 0 1rem;}
+    @media(max-width:860px){.how-flow{grid-template-columns:1fr 1fr;}}
+    @media(max-width:480px){.how-flow{grid-template-columns:1fr;}}
+    .fl{background:var(--white);border:1px solid var(--border);border-top:3px solid var(--blue);border-radius:12px;padding:1.1rem 1.1rem;}
+    .fl .fn{width:30px;height:30px;border-radius:50%;background:var(--navy);color:#fff;display:flex;align-items:center;justify-content:center;font-family:'Bebas Neue',sans-serif;font-size:1.05rem;letter-spacing:0.04em;margin-bottom:0.6rem;}
+    .fl h4{font-family:'Bebas Neue',sans-serif;font-size:1.2rem;letter-spacing:0.03em;color:var(--navy);margin-bottom:0.3rem;font-weight:400;}
+    .fl p{font-size:0.82rem;color:var(--text-mid);line-height:1.45;margin:0;}
+    .svc-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1rem;margin-top:1.5rem;}
+    @media(max-width:860px){.svc-grid{grid-template-columns:1fr 1fr;}}
+    @media(max-width:560px){.svc-grid{grid-template-columns:1fr;}}
+    .svc{background:var(--off-white);border:1px solid var(--border);border-radius:12px;padding:1.25rem 1.3rem;}
+    .svc-tag{font-family:'DM Mono',monospace;font-size:0.58rem;letter-spacing:0.14em;text-transform:uppercase;color:var(--blue);margin-bottom:0.4rem;}
+    .svc-tag.addon{color:var(--orange);}
+    .svc h4{font-family:'Bebas Neue',sans-serif;font-size:1.2rem;letter-spacing:0.03em;color:var(--navy);margin-bottom:0.5rem;font-weight:400;}
+    .svc p{font-size:0.85rem;line-height:1.5;margin-bottom:0.4rem;color:var(--text-mid);}
+    .svc p b{color:var(--navy);}
+    .svc p:last-child{margin-bottom:0;}
+  </style>
+
+  <section style="margin-bottom:3rem;">
+    <div class="section-eyebrow">How It Works</div>
+    <h2>The Whole System, <span>In Plain English</span></h2>
+    <p>No jargon. Each piece does one simple job, and together they turn the right strangers into booked calls and funded deals. Here is the flow, start to finish.</p>
+
+    <div class="how-flow">
+      <div class="fl"><div class="fn">1</div><h4>Find</h4><p>We build a clean list of the right companies and the decision-makers inside them.</p></div>
+      <div class="fl"><div class="fn">2</div><h4>Reach</h4><p>We contact them by email, LinkedIn, and phone with a message about their real need, timed to when they are looking for capital.</p></div>
+      <div class="fl"><div class="fn">3</div><h4>Land</h4><p>Interested prospects land on your professional page that proves EBFS is real and the right fit.</p></div>
+      <div class="fl"><div class="fn">4</div><h4>Book</h4><p>They book a quick call onto your calendar, a 15-minute diagnostic, then a funding assessment.</p></div>
+      <div class="fl"><div class="fn">5</div><h4>Close</h4><p>You take the call and fund the deal. We report the numbers and keep improving.</p></div>
+    </div>
+    <p style="font-size:0.92rem;color:var(--text-mid);"><strong style="color:var(--navy);">The growth add-ons</strong> (SEO, Google Ads, and retargeting) simply pour more of the right people into the top of this same flow.</p>
+
+    <h3 style="font-family:'Bebas Neue',sans-serif;font-size:1.5rem;letter-spacing:0.03em;color:var(--navy);font-weight:400;margin:2rem 0 0;">Every service, broken down simply</h3>
+
+    <div class="svc-grid">
+      <div class="svc">
+        <div class="svc-tag">Core &middot; Find</div>
+        <h4>Targeting &amp; Data</h4>
+        <p><b>In plain terms:</b> we find the right businesses (5 million dollars and up in your industries) and the decision-makers inside them.</p>
+        <p><b>How it helps:</b> every message reaches someone who can actually say yes. No wasted effort on the wrong companies.</p>
+      </div>
+      <div class="svc">
+        <div class="svc-tag">Core &middot; Find</div>
+        <h4>List Validation</h4>
+        <p><b>In plain terms:</b> we double-check every email address before we ever send to it.</p>
+        <p><b>How it helps:</b> your emails land in the inbox instead of spam, and your reputation as a sender stays healthy so you keep landing.</p>
+      </div>
+      <div class="svc">
+        <div class="svc-tag">Core &middot; Reach</div>
+        <h4>The Outreach Engine</h4>
+        <p><b>In plain terms:</b> we reach each prospect several times across email, LinkedIn, and phone with a message about their real need.</p>
+        <p><b>How it helps:</b> far more replies and booked calls than any single channel could ever get on its own.</p>
+      </div>
+      <div class="svc">
+        <div class="svc-tag">Core &middot; Land</div>
+        <h4>Credibility Landing Page</h4>
+        <p><b>In plain terms:</b> a sharp, professional web page where interested prospects learn about EBFS and book a call.</p>
+        <p><b>How it helps:</b> turns "who is this?" into a booked call, and makes you look as credible and established as you are.</p>
+      </div>
+      <div class="svc">
+        <div class="svc-tag">Core &middot; Book</div>
+        <h4>Booking &amp; Calls</h4>
+        <p><b>In plain terms:</b> two easy ways to start, a 15-minute diagnostic and a 30-minute funding assessment, straight onto your calendar.</p>
+        <p><b>How it helps:</b> a low-pressure first step gets far more prospects to say yes than asking for a big commitment up front.</p>
+      </div>
+      <div class="svc">
+        <div class="svc-tag">Core &middot; Improve</div>
+        <h4>Reporting &amp; Optimization</h4>
+        <p><b>In plain terms:</b> you see the numbers every week, and we keep tuning what is working.</p>
+        <p><b>How it helps:</b> no black box. You always know what you are getting, and the system books more calls every month.</p>
+      </div>
+      <div class="svc">
+        <div class="svc-tag addon">Add-On &middot; Inbound</div>
+        <h4>Organic SEO</h4>
+        <p><b>In plain terms:</b> we get your site to show up on Google when business owners search for funding.</p>
+        <p><b>How it helps:</b> a steady stream of free leads that grows over time and lowers your overall cost per call.</p>
+      </div>
+      <div class="svc">
+        <div class="svc-tag addon">Add-On &middot; Inbound</div>
+        <h4>Google Ads (PPC)</h4>
+        <p><b>In plain terms:</b> we pay to put you at the top of Google the moment someone searches for funding.</p>
+        <p><b>How it helps:</b> fast, high-intent leads coming in within weeks, with volume you can turn up or down.</p>
+      </div>
+      <div class="svc">
+        <div class="svc-tag addon">Add-On &middot; Recover</div>
+        <h4>Retargeting</h4>
+        <p><b>In plain terms:</b> we gently follow up online with people who visited your page but did not book.</p>
+        <p><b>How it helps:</b> brings back lost prospects cheaply, so fewer of the people you already reached slip away.</p>
+      </div>
+    </div>
+  </section>
+
+  <section style="margin-bottom:3rem;">
+    <div class="section-eyebrow">Engagement Package</div>
+    <h2>Four Documents. <span>Read In Order.</span></h2>
+    <p>
+      A complete picture of the engagement: the gap in the market for commercial lending outreach, how we time outreach to buying intent, the reverse-engineering from the calls you want down to the daily numbers and the 90-day ramp, and three engagement options to choose from on our next call. Pricing is included in the proposal so you can review it before we talk.
+    </p>
+
+    <div class="doc-grid">
+
+      <a href="blueprint" class="doc-card">
+        <div class="doc-num">01</div>
+        <div class="doc-id">Doc &middot; EBFS-BPT-001</div>
+        <h3>Outbound Blueprint</h3>
+        <div class="desc">
+          The case and the math. The gap in the market, exactly who we target, how we time outreach to buying intent, and the conservative funnel that turns a list into 20 to 30 booked calls a month. The strategy and the numbers behind your results.
+        </div>
+        <div class="meta">~14 pages &middot; Read first</div>
+        <span class="open">Open Blueprint</span>
+      </a>
+
+      <a href="sow" class="doc-card">
+        <div class="doc-num">02</div>
+        <div class="doc-id">Doc &middot; EBFS-SOW-001</div>
+        <h3>Game Plan</h3>
+        <div class="desc">
+          Your numbers and your timeline. The reverse-engineering from the calls you want back to the daily, weekly, and monthly activity that produces them, the 90-day ramp showing how it scales up, and what the outreach feels like to a prospect. The outcomes, in plain numbers.
+        </div>
+        <div class="meta">~10 pages &middot; The numbers</div>
+        <span class="open">Open Game Plan</span>
+      </a>
+
+      <a href="roadmap" class="doc-card">
+        <div class="doc-num">03</div>
+        <div class="doc-id">Doc &middot; EBFS-RDM-001</div>
+        <h3>90-Day Build &amp; Launch Roadmap</h3>
+        <div class="desc">
+          What gets built and when. System stand-up and warmup, list build and validation, sequence copywriting, soft launch, and the ramp to full send volume. Week-by-week plan, milestones at Day 14 / 30 / 60 / 90, and the KPI scorecard we report against.
+        </div>
+        <div class="meta">~12 pages &middot; Operational</div>
+        <span class="open">Open Roadmap</span>
+      </a>
+
+      <a href="proposal" class="doc-card sign-card">
+        <div class="doc-num">04</div>
+        <div class="doc-id">Doc &middot; EBFS-PRO-001</div>
+        <h3>Three-Option Engagement Proposal</h3>
+        <div class="desc">
+          The offer. Three options (Small Start, Immediate Growth, Scale Up), each with an engagement fee, a one-time setup and systems build, and a monthly retainer. Recommended option, payback math against funded-deal value, full terms, and the electronic signature to get started.
+        </div>
+        <div class="meta">~12 pages &middot; Pricing &amp; sign</div>
+        <span class="open">Open Proposal</span>
+      </a>
+
+      <a href="/forms/ebfs-llc-outreach" class="doc-card">
+        <div class="doc-num">&#9998;</div>
+        <div class="doc-id">Doc &middot; EBFS-PRO-001</div>
+        <h3>Sign &amp; Accept</h3>
+        <div class="desc">
+          Ready to move? Pick an option, sign electronically, and Mark countersigns within 24 hours. The at-signing invoice (engagement fee plus setup and systems build) follows immediately, and the build slot is locked. The monthly retainer starts only when the engine goes live.
+        </div>
+        <div class="meta">2 minutes &middot; ESIGN compliant</div>
+        <span class="open">Open Sign Form</span>
+      </a>
+
+    </div>
+
+    <div class="read-order">
+      <div class="lbl">Suggested Reading Order</div>
+      <h3>35 Minutes Total</h3>
+      <p>If you have 35 minutes today, this is the right way to read the package:</p>
+      <ol>
+        <li>Open <strong>EBFS-BPT-001 (Blueprint)</strong> first. The funnel math and the infrastructure plan tell you exactly how 20 to 30 calls a month get manufactured, in about 12 minutes.</li>
+        <li>Read <strong>EBFS-SOW-001 (Game Plan)</strong>. The reverse-engineering to your calls-per-day, the daily / weekly / monthly numbers, and the 90-day ramp in 8 minutes.</li>
+        <li>Skim <strong>EBFS-RDM-001 (Roadmap)</strong>. The 90-day build timeline and the Day 30 / 60 / 90 milestones in 7 minutes.</li>
+        <li>Read <strong>EBFS-PRO-001 (Proposal)</strong>. The three options, the recommended one, the tooling budget, and the payback math in 6 minutes.</li>
+      </ol>
+    </div>
+  </section>
+
+  <section class="invest-strip">
+    <div>
+      <div class="lbl">Next Step</div>
+      <h3>Book the <span>Strategy Call</span></h3>
+      <p>30 to 45 minutes. We walk through the blueprint, confirm the ICP and your data API, review the sending math, and pick the tier that matches your appetite. Then you sign and we start the build, or you keep the blueprint and roadmap, no strings.</p>
+      <div class="cta-row">
+        <a href="https://markcmo.com/book" class="cta-primary">Book Strategy Call</a>
+        <a href="blueprint" class="cta-secondary">Read the Blueprint</a>
+      </div>
+    </div>
+    <div class="price-tag" style="font-size:2.6rem;line-height:1.1;">
+      30-45 MIN
+      <small>NO COST &middot; NO PRESSURE</small>
+    </div>
+  </section>
+
+  <section style="margin-bottom:3rem;">
+    <div class="section-eyebrow">What Happens Next</div>
+    <h2>Four Steps. <span>To First Send.</span></h2>
+
+    <div class="process">
+      <div class="step">
+        <div class="num">01</div>
+        <h4>Review</h4>
+        <p>Terry reads the three documents and brings questions to the call.</p>
+      </div>
+      <div class="step">
+        <div class="num">02</div>
+        <h4>Strategy Call</h4>
+        <p>30 to 45 minutes with Mark. Confirm ICP, data API, send math, and tier selection.</p>
+      </div>
+      <div class="step">
+        <div class="num">03</div>
+        <h4>Sign &amp; Kickoff</h4>
+        <p>Pick a tier, sign, pay the combined upfront. Day 0 kickoff is the Monday after sign.</p>
+      </div>
+      <div class="step">
+        <div class="num">04</div>
+        <h4>Build &amp; Warm</h4>
+        <p>Your outreach system stood up and warming inside week one. First sends inside 3 to 4 weeks.</p>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer class="doc-footer">
+  <div class="doc-footer-inner">
+    <div>
+      <div class="doc-footer-logo">MARK<span>CMO</span></div>
+      <p>Prepared by Mark Gabrielli &middot; markcmo.com &middot; mark@markcmo.com</p>
+      <p style="margin-top:0.2rem;">For Terry Stavropoulos, Executive Business Funding Solutions.</p>
+    </div>
+    <div class="doc-footer-meta">
+      Engagement EBFS &middot; v1.0<br/>
+      Confidential &middot; Do Not Distribute
+    </div>
+  </div>
+</footer>
+
+<script>(function(){try{var k='mc_jsid';var s=sessionStorage.getItem(k)||('s_'+Math.random().toString(36).slice(2)+Date.now().toString(36));sessionStorage.setItem(k,s);fetch('/.netlify/functions/track',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({t:'view',client:'ebfs-llc',page:'cover',session_id:s,url:location.pathname,title:document.title}),keepalive:true}).catch(function(){});}catch(e){}})();</script>
+</body>
+</html>
