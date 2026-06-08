@@ -37,8 +37,15 @@ const SKIP_DIRS = new Set([
   'cloudflare', 'supabase', '.github',
 ]);
 
-// Max uncompressed body per CF KV bulk-put request (CF hard limit: 100 MB)
-const MAX_BATCH_BYTES = 75 * 1024 * 1024;
+// Max uncompressed body per CF KV bulk-put request. CF's hard limit is
+// 100 MB but in practice 75 MB batches over many requests would push
+// individual requests past CF's edge 100s timeout (HTTP 524). 8 MB keeps
+// each upload comfortably under 30s wall clock even on slow runners.
+const MAX_BATCH_BYTES = 8 * 1024 * 1024;
+
+// Retry config for CF transient errors (524 gateway timeout, 5xx)
+const MAX_RETRIES = 3;
+const RETRY_BACKOFF_MS = 2000;
 
 // -----------------------------------------------------------------
 // Recursively find all .html files
@@ -78,7 +85,7 @@ function toKey(filePath) {
 // PUT a batch of {key, value} pairs via CF KV Bulk Write API
 // Auth: X-Auth-Email + X-Auth-Key (Global API Key)
 // -----------------------------------------------------------------
-function bulkPut(pairs) {
+function bulkPutOnce(pairs) {
   return new Promise((resolve, reject) => {
     const body = Buffer.from(JSON.stringify(pairs), 'utf8');
 
@@ -92,10 +99,15 @@ function bulkPut(pairs) {
         'Content-Type':   'application/json',
         'Content-Length': body.length,
       },
+      timeout: 90 * 1000, // socket timeout before CF's 100s edge timeout
     }, res => {
       let data = '';
       res.on('data', chunk => { data += chunk; });
       res.on('end', () => {
+        // Transient CF errors (502/503/504/524) should be retried, not parsed
+        if (res.statusCode === 502 || res.statusCode === 503 || res.statusCode === 504 || res.statusCode === 524) {
+          return reject(new Error(`CF transient ${res.statusCode}`));
+        }
         let parsed;
         try { parsed = JSON.parse(data); } catch (_) {
           return reject(new Error(
@@ -111,9 +123,30 @@ function bulkPut(pairs) {
     });
 
     req.on('error', reject);
+    req.on('timeout', () => { req.destroy(new Error('socket timeout')); });
     req.write(body);
     req.end();
   });
+}
+
+// Retry wrapper: retries on transient CF errors + socket timeouts with
+// exponential backoff. After MAX_RETRIES the original error escapes.
+async function bulkPut(pairs) {
+  let lastErr = null;
+  for (let attempt = 0; attempt <= MAX_RETRIES; attempt++) {
+    try {
+      return await bulkPutOnce(pairs);
+    } catch (e) {
+      lastErr = e;
+      const msg = (e && e.message) || String(e);
+      const transient = /transient|timeout|ECONN|ETIMEDOUT|EAI_AGAIN/i.test(msg);
+      if (!transient || attempt === MAX_RETRIES) throw e;
+      const wait = RETRY_BACKOFF_MS * Math.pow(2, attempt);
+      console.warn(`  retry ${attempt + 1}/${MAX_RETRIES} after ${wait}ms (reason: ${msg.slice(0,60)})`);
+      await new Promise(r => setTimeout(r, wait));
+    }
+  }
+  throw lastErr;
 }
 
 // -----------------------------------------------------------------
