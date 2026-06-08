@@ -16,7 +16,7 @@
 // HANDLER_VERSION below is a sentinel I bump on every deploy so we can
 // verify in the audit log that the function bundle is fresh.
 // ═══════════════════════════════════════════════════════════════
-const HANDLER_VERSION = 'v5-recap-bullets-2026-06-08';
+const HANDLER_VERSION = 'v6-full-sequence-2026-06-08';
 
 export async function onRequest(context) {
   const { request, env } = context;
@@ -360,13 +360,28 @@ async function handleInviteeCreated(p, env) {
   // ───── Post-meeting RECAP (30 min after meeting end) ─────
   try {
     await schedulePostMeetingFollowup(env, {
-      inviteeEmail, inviteeName, eventName, scheduledAt, eventEndAt,
+      inviteeEmail, inviteeName, eventName, scheduledAt, eventEndAt, qa,
       inviteeUri: calendlyInviteeUri, engagementId: engagement.id,
     });
   } catch (e) {
     try {
       await sbInsert(env, 'mc_audit_log', {
         event: 'invitee_recap_outer_crashed',
+        payload: { invitee_email: inviteeEmail, error_message: (e && e.message) || String(e), error_stack: (e && e.stack) ? String(e.stack).substring(0, 1200) : null },
+      });
+    } catch (_) {}
+  }
+
+  // ───── T+72h rebook CTA ("worth another conversation?") ─────
+  try {
+    await scheduleRebookCta(env, {
+      inviteeEmail, inviteeName, eventName, scheduledAt, eventEndAt,
+      inviteeUri: calendlyInviteeUri, engagementId: engagement.id,
+    });
+  } catch (e) {
+    try {
+      await sbInsert(env, 'mc_audit_log', {
+        event: 'invitee_rebook_cta_outer_crashed',
         payload: { invitee_email: inviteeEmail, error_message: (e && e.message) || String(e), error_stack: (e && e.stack) ? String(e.stack).substring(0, 1200) : null },
       });
     } catch (_) {}
@@ -644,7 +659,7 @@ async function sendInviteeConfirmation(env, { inviteeEmail, inviteeName, eventNa
 }
 
 // ───── schedulePostMeetingFollowup (30 min after meeting end) ────
-async function schedulePostMeetingFollowup(env, { inviteeEmail, inviteeName, eventName, scheduledAt, eventEndAt, inviteeUri, engagementId }) {
+async function schedulePostMeetingFollowup(env, { inviteeEmail, inviteeName, eventName, scheduledAt, eventEndAt, qa, inviteeUri, engagementId }) {
   const auditPayload = {
     invitee_email: inviteeEmail || '',
     invitee_name: inviteeName || '',
@@ -703,23 +718,39 @@ async function schedulePostMeetingFollowup(env, { inviteeEmail, inviteeName, eve
 
     const firstName = (inviteeName || '').split(' ')[0] || 'there';
     // Recap email - Mark's voice. Thanks them + clear bullets on what
-    // happens next from his side and what he needs from theirs. Templated
-    // version sends if Calendly Notetaker integration isn't ready by
-    // T+30min (which it usually isn't). Future enhancement: a cron worker
-    // will poll Notetaker and override with a personalized version when
-    // notes are available before the scheduled send.
+    // happens next from his side and what he needs from theirs.
+    //
+    // v1 personalization: if the prospect listed a website/outcome/topic
+    // in the booking Q&A, reference it in one bullet to show we listened.
+    // No Notetaker dependency for this level of personalization.
+    //
+    // v2 personalization (planned, task #85): a cron worker will pull
+    // Calendly Notetaker transcript + summary before this email sends,
+    // generate fully-personalized bullets via Cloudflare Workers AI, and
+    // override this templated version. Skips gracefully if Notetaker
+    // is not available.
+    const qaOutcome = (qa && (qa['what is the 1 outcome you want from this call?'] || qa['what is the #1 outcome you want from this call?'] || qa['what is the #1 outcome you want from this call'] || qa['outcome'] || qa['goal'] || qa['what would you like to discuss?'])) || '';
+    const qaWebsite = (qa && (qa['website url\n\n'] || qa['website url'] || qa['website'] || qa['site'])) || '';
+    const qaTopic = qaOutcome || qaWebsite;
     const subject = isWetyr
       ? `Following up on our WETYR meeting`
       : `Recap from our meeting`;
+    // Personalize one bullet with the prospect's stated topic if we have it.
+    // The trimmed snippet is used in the body so it reads naturally.
+    const topicSnippet = qaTopic ? String(qaTopic).trim().substring(0, 120).replace(/\.$/, '') : '';
     const expectFromMe = isWetyr
       ? [
           'A direct cash offer or pass with reasons within 48 hours',
-          'A clean term sheet if we move forward (no surprises)',
+          topicSnippet
+            ? `A clean term sheet on ${topicSnippet} if we move forward (no surprises)`
+            : 'A clean term sheet if we move forward (no surprises)',
           'Direct line to me at info@wetyr.com for any questions',
         ]
       : [
           'A follow-up note within 24 hours with the agenda we agreed on',
-          'A specific proposal aligned with the outcomes you want',
+          topicSnippet
+            ? `A specific proposal aligned with what you flagged on the call (${topicSnippet})`
+            : 'A specific proposal aligned with the outcomes you want',
           'Direct access via mark@markcmo.com for any questions',
         ];
     const needFromYou = isWetyr
@@ -1122,6 +1153,152 @@ Mark`;
   }
 }
 
+// ───── scheduleRebookCta (T+72h after meeting end) ───────────────
+// Soft follow-up 3 days after the meeting: "worth another conversation?"
+// with the same Calendly booking link. Mark's voice. No-pressure rebook
+// nudge for prospects who didn't lock in a follow-up during the call.
+//
+// Skip logic: if invitee already has a future scheduled event with us
+// at send time, the existing engagement metadata will get checked by a
+// future cron worker pre-send. v1 just schedules unconditionally - the
+// idempotency key on the Resend send prevents dupes across webhook
+// retries, and a manual cancel works via cancelScheduledFollowup.
+async function scheduleRebookCta(env, { inviteeEmail, inviteeName, eventName, scheduledAt, eventEndAt, inviteeUri, engagementId }) {
+  const auditPayload = {
+    invitee_email: inviteeEmail || '',
+    invitee_name: inviteeName || '',
+    invitee_uri: inviteeUri || '',
+    event_name: eventName || '',
+    scheduled_at: scheduledAt || null,
+    send_at: null,
+    resend_status: null,
+    resend_id: null,
+    resend_error: null,
+    error_message: null,
+    error_stack: null,
+    engagement_id: engagementId || null,
+    step: 'init',
+    mode: null,
+    handler_version: HANDLER_VERSION,
+  };
+  let auditEvent = 'invitee_rebook_cta_attempted';
+
+  try {
+    if (!inviteeEmail) { auditPayload.step = 'no_invitee_email'; auditEvent = 'invitee_rebook_cta_skipped'; return; }
+    const apiKey = env.RESEND_API_KEY;
+    if (!apiKey) { auditPayload.step = 'no_resend_api_key'; auditEvent = 'invitee_rebook_cta_skipped'; return; }
+
+    // Send 72h after meeting end (or 72h+1.5h = 73.5h after start if no end)
+    let sendAtMs = null;
+    if (eventEndAt) {
+      const dt = new Date(eventEndAt);
+      if (!isNaN(dt.getTime())) sendAtMs = dt.getTime() + 72 * 60 * 60 * 1000;
+    }
+    if (!sendAtMs && scheduledAt) {
+      const dt = new Date(scheduledAt);
+      if (!isNaN(dt.getTime())) sendAtMs = dt.getTime() + 72 * 60 * 60 * 1000 + 30 * 60 * 1000;
+    }
+    if (!sendAtMs) { auditPayload.step = 'no_send_time'; auditEvent = 'invitee_rebook_cta_skipped'; return; }
+    const minSendAtMs = Date.now() + 30 * 60 * 1000;
+    if (sendAtMs < minSendAtMs) sendAtMs = minSendAtMs;
+
+    // Resend caps scheduled_at at 30 days
+    if (sendAtMs - Date.now() > 28 * 24 * 60 * 60 * 1000) {
+      auditPayload.step = 'deferred_to_cron';
+      auditPayload.send_at = new Date(sendAtMs).toISOString();
+      auditEvent = 'invitee_rebook_cta_deferred';
+      return;
+    }
+    const sendAt = new Date(sendAtMs).toISOString();
+    auditPayload.send_at = sendAt;
+
+    const _n = (eventName || '').toLowerCase();
+    const isWetyr = _n.indexOf('wetyr') >= 0;
+    auditPayload.mode = isWetyr ? 'wetyr' : 'markcmo';
+
+    const firstName = (inviteeName || '').split(' ')[0] || 'there';
+    const fromAddr = isWetyr ? 'WETYR <info@wetyr.com>' : 'Mark Gabrielli <mark@markcmo.com>';
+    const replyTo = isWetyr ? 'info@wetyr.com' : 'mark@markcmo.com';
+    const bookingUrl = isWetyr
+      ? 'https://wetyr.com/contact.html'  // WETYR doesn't have a public booking page; route to contact
+      : 'https://markcmo.com/book';
+    const subject = isWetyr ? `Want to keep going on the deal?` : `Worth another conversation?`;
+
+    const text = isWetyr
+      ? `Hi ${firstName},\n\nBeen a few days since we talked. If the deal still makes sense and you want to dig deeper, grab another slot here:\n\n${bookingUrl}\n\nIf you've moved on, no worries - just reply and let me know.\n\nMark`
+      : `Hi ${firstName},\n\nA few days out from our call. If something we discussed is worth a deeper conversation, here is the easiest way to book another slot:\n\n${bookingUrl}\n\nIf you've decided to go a different direction, no worries - just hit reply and let me know.\n\nMark`;
+
+    const html = `<!DOCTYPE html>
+<html><head><meta charset="UTF-8"></head>
+<body style="margin:0;padding:0;background:#ffffff;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif;color:#1a1a1a;">
+  <div style="max-width:560px;margin:0 auto;padding:24px;font-size:15px;line-height:1.6;">
+    <p style="margin:0 0 14px;">Hi ${esc(firstName)},</p>
+    <p style="margin:0 0 14px;">${isWetyr
+      ? `Been a few days since we talked. If the deal still makes sense and you want to dig deeper, grab another slot here:`
+      : `A few days out from our call. If something we discussed is worth a deeper conversation, here is the easiest way to book another slot:`
+    }</p>
+    <p style="margin:0 0 18px;"><a href="${esc(bookingUrl)}" style="display:inline-block;background:#C9A84C;color:#0a0f2c;padding:11px 22px;text-decoration:none;border-radius:6px;font-weight:700;">Book another slot</a></p>
+    <p style="margin:0 0 14px;">If you've ${isWetyr ? 'moved on' : 'decided to go a different direction'}, no worries - just hit reply and let me know.</p>
+    <p style="margin:0;">Mark</p>
+  </div>
+</body></html>`;
+
+    auditPayload.step = 'queuing';
+    const r = await fetch('https://api.resend.com/emails', {
+      method: 'POST',
+      headers: {
+        Authorization: `Bearer ${apiKey}`,
+        'Content-Type': 'application/json',
+        'Idempotency-Key': `cal-rebook-${inviteeUri || inviteeEmail}`.substring(0, 256),
+      },
+      body: JSON.stringify({
+        from: fromAddr,
+        to: [inviteeEmail],
+        cc: ['marklgabriellijr@gmail.com'],
+        reply_to: replyTo,
+        subject, html, text,
+        scheduled_at: sendAt,
+        tags: [
+          { name: 'category', value: 'calendly_rebook_cta' },
+          { name: 'mode', value: isWetyr ? 'wetyr' : 'markcmo' },
+        ],
+      }),
+    });
+    auditPayload.resend_status = r.status;
+
+    if (r.ok) {
+      const respJson = await r.json().catch(() => null);
+      const resendId = respJson && respJson.id || null;
+      auditPayload.resend_id = resendId;
+      auditPayload.step = 'queued';
+      auditEvent = 'invitee_rebook_cta_sent';
+
+      if (engagementId && resendId) {
+        try {
+          const eng = await sbSelect(env, `mc_engagements?id=eq.${encodeURIComponent(engagementId)}&select=metadata&limit=1`);
+          const meta = (eng && eng[0] && eng[0].metadata) || {};
+          meta.rebook_cta_resend_id = resendId;
+          meta.rebook_cta_send_at = sendAt;
+          await sbUpdate(env, 'mc_engagements', `id=eq.${encodeURIComponent(engagementId)}`, { metadata: meta });
+        } catch (_) {}
+      }
+    } else {
+      auditPayload.resend_error = (await r.text().catch(() => '')).slice(0, 600);
+      auditPayload.step = 'resend_rejected';
+      auditEvent = 'invitee_rebook_cta_failed';
+    }
+  } catch (err) {
+    auditPayload.step = (auditPayload.step || 'unknown') + '_then_crashed';
+    auditPayload.error_message = (err && err.message) || String(err);
+    auditPayload.error_stack = (err && err.stack) ? String(err.stack).substring(0, 1500) : null;
+    auditEvent = 'invitee_rebook_cta_crashed';
+  } finally {
+    try {
+      await sbInsert(env, 'mc_audit_log', { event: auditEvent, payload: auditPayload });
+    } catch (_) {}
+  }
+}
+
 // ───── cancelScheduledFollowup (on invitee.canceled) ─────────────
 async function cancelScheduledFollowup(env, { inviteeEmail, inviteeUri }) {
   const auditPayload = {
@@ -1163,7 +1340,8 @@ async function cancelScheduledFollowup(env, { inviteeEmail, inviteeUri }) {
     const idsToCancel = [
       meta.reminder_24h_resend_id,
       meta.reminder_1h_resend_id,
-      meta.followup_resend_id,  // the recap (legacy key name)
+      meta.followup_resend_id,        // the recap (legacy key name)
+      meta.rebook_cta_resend_id,      // T+72h rebook CTA
     ].filter(Boolean);
 
     if (!idsToCancel.length) {
