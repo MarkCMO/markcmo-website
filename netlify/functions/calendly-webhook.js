@@ -153,7 +153,10 @@ async function handleInviteeCreated(p) {
     engagement = engInserted[0];
   }
 
-  // Audit log
+  // Audit log. handler_version is a sentinel I bump each deploy so we can
+  // verify in the audit log whether the live function is running the latest
+  // code or whether CF Pages is serving a stale build. Look for this value
+  // on any future calendly_booking_created entry to confirm freshness.
   await sbInsert('mc_audit_log', {
     client_id: client.id,
     engagement_id: engagement.id,
@@ -163,6 +166,7 @@ async function handleInviteeCreated(p) {
       invitee_name: inviteeName,
       event_name: eventName,
       scheduled_at: scheduledAt,
+      handler_version: 'v2-bisect-2026-06-08',
     },
   });
 
