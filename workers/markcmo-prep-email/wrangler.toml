@@ -1,0 +1,16 @@
+name = "markcmo-prep-email"
+main = "src/index.js"
+compatibility_date = "2026-06-01"
+compatibility_flags = ["nodejs_compat"]
+
+# This worker receives inbound emails routed to prep@markcmo.com via
+# Cloudflare Email Routing. After deploy, configure the email routing
+# rule in CF dashboard:
+#
+#   Email > markcmo.com > Routing rules
+#   Add rule: "prep@markcmo.com" -> Send to a Worker -> markcmo-prep-email
+#
+# Required env vars (set as secrets via `wrangler secret put`):
+#   RESEND_API_KEY
+#   MARKCMO_SUPABASE_URL
+#   MARKCMO_SUPABASE_SERVICE_KEY

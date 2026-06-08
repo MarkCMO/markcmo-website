@@ -878,7 +878,7 @@ Mark`;
     auditPayload.step = 'composed';
 
     const fromAddr = isWetyr ? 'WETYR <info@wetyr.com>' : 'Mark Gabrielli <mark@markcmo.com>';
-    const replyTo = isWetyr ? 'info@wetyr.com' : 'mark@markcmo.com';
+    const replyTo = isWetyr ? 'prep@wetyr.com' : 'prep@markcmo.com';
     const idempotencyKey = `cal-followup-${inviteeUri || inviteeEmail || 'unknown'}`.substring(0, 256);
 
     auditPayload.step = 'queuing';
@@ -1004,7 +1004,7 @@ async function scheduleDayBeforeReminder(env, { inviteeEmail, inviteeName, event
     const firstName = (inviteeName || '').split(' ')[0] || 'there';
 
     const fromAddr = isWetyr ? 'WETYR <info@wetyr.com>' : 'Mark Gabrielli <mark@markcmo.com>';
-    const replyTo = isWetyr ? 'info@wetyr.com' : 'mark@markcmo.com';
+    const replyTo = isWetyr ? 'prep@wetyr.com' : 'prep@markcmo.com';
     const subject = `Tomorrow at ${whenTime} - confirm to hold your slot`;
 
     // Generate a signed token for the "I'll be there" button so the
@@ -1174,7 +1174,7 @@ async function scheduleHourBeforeReminder(env, { inviteeEmail, inviteeName, even
     const firstName = (inviteeName || '').split(' ')[0] || 'there';
 
     const fromAddr = isWetyr ? 'WETYR <info@wetyr.com>' : 'Mark Gabrielli <mark@markcmo.com>';
-    const replyTo = isWetyr ? 'info@wetyr.com' : 'mark@markcmo.com';
+    const replyTo = isWetyr ? 'prep@wetyr.com' : 'prep@markcmo.com';
     const subject = `See you in an hour`;
 
     const joinLine = meetingLink ? meetingLink : 'Check the Calendly invite for the join link.';
@@ -1315,7 +1315,7 @@ async function scheduleSixHoursBeforeReminder(env, { inviteeEmail, inviteeName, 
     auditPayload.confirm_url = confirmUrl;
 
     const fromAddr = isWetyr ? 'WETYR <info@wetyr.com>' : 'Mark Gabrielli <mark@markcmo.com>';
-    const replyTo = isWetyr ? 'info@wetyr.com' : 'mark@markcmo.com';
+    const replyTo = isWetyr ? 'prep@wetyr.com' : 'prep@markcmo.com';
     const subject = `Last call - your meeting at ${whenTime}`;
 
     const text = `Hi ${firstName},
@@ -1497,7 +1497,7 @@ async function scheduleAttendanceConfirmation(env, { inviteeEmail, inviteeName, 
     auditPayload.confirm_url = confirmUrl;
 
     const fromAddr = isWetyr ? 'WETYR <info@wetyr.com>' : 'Mark Gabrielli <mark@markcmo.com>';
-    const replyTo = isWetyr ? 'info@wetyr.com' : 'mark@markcmo.com';
+    const replyTo = isWetyr ? 'prep@wetyr.com' : 'prep@markcmo.com';
     const subject = `See you in 15 minutes`;
 
     const joinLine = meetingLink || 'Check the calendar invite for the join link.';
@@ -1647,7 +1647,7 @@ async function scheduleRebookCta(env, { inviteeEmail, inviteeName, eventName, sc
 
     const firstName = (inviteeName || '').split(' ')[0] || 'there';
     const fromAddr = isWetyr ? 'WETYR <info@wetyr.com>' : 'Mark Gabrielli <mark@markcmo.com>';
-    const replyTo = isWetyr ? 'info@wetyr.com' : 'mark@markcmo.com';
+    const replyTo = isWetyr ? 'prep@wetyr.com' : 'prep@markcmo.com';
     const bookingUrl = isWetyr
       ? 'https://wetyr.com/contact.html'  // WETYR doesn't have a public booking page; route to contact
       : 'https://markcmo.com/book';

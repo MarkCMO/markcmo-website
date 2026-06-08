@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Bookings Intel - MarkCMO Admin</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<style>
+  :root { --bg:#0a0f2c; --card:#0F1828; --border:rgba(255,255,255,.08); --muted:rgba(255,255,255,.6); --text:#fff; --gold:#C9A84C; --green:#2EBA73; --red:#e74c3c; --blue:#1a4d8c; --amber:#F2C744; }
+  * { box-sizing:border-box; }
+  body { margin:0; padding:0; background:var(--bg); color:var(--text); font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif; }
+  header { padding:24px 32px; border-bottom:1px solid var(--border); display:flex; align-items:center; justify-content:space-between; }
+  header h1 { margin:0; font-size:18px; font-weight:600; letter-spacing:-0.02em; }
+  header .actions { display:flex; gap:12px; align-items:center; }
+  header button { background:transparent; border:1px solid var(--border); color:var(--text); padding:8px 16px; border-radius:6px; font-size:13px; cursor:pointer; }
+  header button:hover { background:rgba(255,255,255,.05); }
+  main { padding:32px; max-width:1400px; margin:0 auto; }
+  .auth-box { background:var(--card); border:1px solid var(--border); padding:24px; border-radius:10px; max-width:400px; margin:60px auto; }
+  .auth-box input { width:100%; padding:10px 12px; background:#070b1f; border:1px solid var(--border); color:var(--text); border-radius:6px; font-size:14px; margin:8px 0 16px; }
+  .auth-box button { background:var(--gold); color:#0a0f2c; border:none; padding:10px 20px; border-radius:6px; font-weight:600; cursor:pointer; width:100%; font-size:14px; }
+  .stats { display:grid; grid-template-columns:repeat(auto-fit,minmax(180px,1fr)); gap:14px; margin-bottom:24px; }
+  .stat { background:var(--card); border:1px solid var(--border); border-radius:8px; padding:14px 18px; }
+  .stat .l { font-size:11px; letter-spacing:.18em; text-transform:uppercase; color:var(--muted); margin-bottom:6px; }
+  .stat .v { font-size:24px; font-weight:600; }
+  table { width:100%; border-collapse:collapse; background:var(--card); border:1px solid var(--border); border-radius:8px; overflow:hidden; }
+  th { text-align:left; padding:12px 16px; font-size:11px; letter-spacing:.16em; text-transform:uppercase; color:var(--muted); font-weight:600; background:rgba(255,255,255,.02); border-bottom:1px solid var(--border); }
+  td { padding:14px 16px; border-bottom:1px solid var(--border); font-size:13px; vertical-align:top; }
+  tr:last-child td { border-bottom:none; }
+  tr:hover { background:rgba(255,255,255,.02); }
+  .prob { display:inline-block; padding:3px 10px; border-radius:12px; font-size:11px; font-weight:600; letter-spacing:.05em; }
+  .prob-high { background:rgba(46,186,115,.15); color:#5ED99A; border:1px solid rgba(46,186,115,.4); }
+  .prob-mid { background:rgba(242,199,68,.13); color:#F2C744; border:1px solid rgba(242,199,68,.35); }
+  .prob-low { background:rgba(231,76,60,.13); color:#FF7B6E; border:1px solid rgba(231,76,60,.4); }
+  .badge { display:inline-block; padding:2px 8px; border-radius:10px; font-size:10px; letter-spacing:.08em; text-transform:uppercase; margin-right:4px; }
+  .b-confirmed { background:rgba(46,186,115,.15); color:#5ED99A; }
+  .b-prep { background:rgba(26,77,140,.3); color:#7BA7E0; }
+  .b-cancel { background:rgba(231,76,60,.15); color:#FF7B6E; }
+  .b-question { background:rgba(201,168,76,.2); color:var(--gold); }
+  .signals { font-size:10px; color:var(--muted); font-family:'SF Mono',Menlo,monospace; }
+  .signal-pill { display:inline-block; padding:1px 5px; border-radius:3px; background:rgba(255,255,255,.05); margin-right:3px; margin-bottom:3px; }
+  .name { font-weight:600; }
+  .email { color:var(--muted); font-size:11px; }
+  .when { font-size:12px; color:var(--gold); }
+  .prep-preview { font-size:11px; color:var(--muted); font-style:italic; max-width:280px; overflow:hidden; text-overflow:ellipsis; }
+  .empty { text-align:center; padding:60px; color:var(--muted); }
+  .loader { display:inline-block; width:14px; height:14px; border:2px solid var(--border); border-top-color:var(--gold); border-radius:50%; animation:spin 0.8s linear infinite; vertical-align:middle; }
+  @keyframes spin { to { transform:rotate(360deg); } }
+</style>
+</head>
+<body>
+<header>
+  <h1>Bookings Intel</h1>
+  <div class="actions">
+    <span id="updated" style="color:var(--muted);font-size:12px;"></span>
+    <button onclick="loadData()">Refresh</button>
+  </div>
+</header>
+<main>
+  <div id="auth" class="auth-box" style="display:none;">
+    <div style="margin-bottom:8px;">Admin secret required</div>
+    <input id="secret" type="password" placeholder="ADMIN_SECRET" autofocus>
+    <button onclick="saveSecret()">Unlock</button>
+  </div>
+  <div id="content" style="display:none;">
+    <div class="stats" id="stats"></div>
+    <div id="bookings"></div>
+  </div>
+  <div id="loading" class="empty"><span class="loader"></span> Loading...</div>
+</main>
+<script>
+  const SECRET_KEY = 'mc_admin_secret';
+  let secret = sessionStorage.getItem(SECRET_KEY) || '';
+
+  async function loadData() {
+    document.getElementById('loading').style.display = '';
+    document.getElementById('content').style.display = 'none';
+    document.getElementById('auth').style.display = 'none';
+
+    try {
+      const r = await fetch('/api/bookings-intel', {
+        headers: { 'X-Admin-Secret': secret },
+      });
+      if (r.status === 401) {
+        document.getElementById('loading').style.display = 'none';
+        document.getElementById('auth').style.display = '';
+        return;
+      }
+      const d = await r.json();
+      render(d);
+    } catch (e) {
+      document.getElementById('loading').innerHTML = 'Error: ' + e.message;
+    }
+  }
+
+  function saveSecret() {
+    secret = document.getElementById('secret').value;
+    sessionStorage.setItem(SECRET_KEY, secret);
+    loadData();
+  }
+
+  function probClass(p) {
+    if (p >= 70) return 'prob-high';
+    if (p >= 40) return 'prob-mid';
+    return 'prob-low';
+  }
+
+  function escapeHtml(s) {
+    return String(s ?? '').replace(/[&<>"']/g, c => ({ '&':'&amp;', '<':'&lt;', '>':'&gt;', '"':'&quot;', "'":'&#39;' }[c]));
+  }
+
+  function fmtTime(iso) {
+    if (!iso) return '-';
+    const d = new Date(iso);
+    return d.toLocaleString('en-US', { dateStyle: 'short', timeStyle: 'short' });
+  }
+
+  function render(d) {
+    document.getElementById('loading').style.display = 'none';
+    document.getElementById('content').style.display = '';
+    document.getElementById('updated').textContent = 'Updated ' + new Date().toLocaleTimeString();
+
+    const bookings = d.bookings || [];
+    const upcoming = bookings.filter(b => b.scheduled_at && new Date(b.scheduled_at) > new Date());
+    const confirmed = upcoming.filter(b => b.attended_confirmed_at).length;
+    const high = upcoming.filter(b => b.show_probability >= 70).length;
+    const low = upcoming.filter(b => b.show_probability < 40).length;
+    const replied = bookings.filter(b => b.last_reply_at).length;
+
+    document.getElementById('stats').innerHTML = `
+      <div class="stat"><div class="l">Upcoming</div><div class="v">${upcoming.length}</div></div>
+      <div class="stat"><div class="l">Confirmed</div><div class="v">${confirmed}</div></div>
+      <div class="stat"><div class="l">High prob (70+)</div><div class="v">${high}</div></div>
+      <div class="stat"><div class="l">At risk (<40)</div><div class="v">${low}</div></div>
+      <div class="stat"><div class="l">Replied</div><div class="v">${replied}</div></div>
+    `;
+
+    if (!bookings.length) {
+      document.getElementById('bookings').innerHTML = '<div class="empty">No bookings in the last 30 days.</div>';
+      return;
+    }
+
+    const rows = bookings.map(b => {
+      const badges = [];
+      if (b.attended_confirmed_at) badges.push(`<span class="badge b-confirmed">✓ Confirmed</span>`);
+      if (b.last_reply_classification === 'prep_details') badges.push(`<span class="badge b-prep">Prep sent</span>`);
+      if (b.last_reply_classification === 'confirmation') badges.push(`<span class="badge b-confirmed">Replied</span>`);
+      if (b.last_reply_classification === 'cancellation') badges.push(`<span class="badge b-cancel">Wants out</span>`);
+      if (b.last_reply_classification === 'question') badges.push(`<span class="badge b-question">Has Q</span>`);
+      if (b.cancel_requested_at) badges.push(`<span class="badge b-cancel">Cancelled</span>`);
+      if (b.has_bounce) badges.push(`<span class="badge b-cancel">Bounced</span>`);
+
+      const signalPills = [];
+      const sig = b.signal_summary || {};
+      for (const k of ['confirmation','reminder_24h','reminder_6h','reminder_1h','confirm_15min']) {
+        const s = sig[k];
+        if (!s || !s.sent) continue;
+        const parts = [];
+        if (s.opens) parts.push(`${s.opens}o`);
+        if (s.clicks) parts.push(`${s.clicks}c`);
+        signalPills.push(`<span class="signal-pill" title="${k}">${k.replace('_',' ').slice(0,8)} ${parts.join('/') || '·'}</span>`);
+      }
+
+      return `<tr>
+        <td>
+          <div class="name">${escapeHtml(b.invitee_name)}</div>
+          <div class="email">${escapeHtml(b.invitee_email)}</div>
+        </td>
+        <td><span class="when">${fmtTime(b.scheduled_at)}</span></td>
+        <td><span class="prob ${probClass(b.show_probability)}">${b.show_probability}%</span></td>
+        <td>${badges.join(' ') || '<span style="color:var(--muted);">-</span>'}</td>
+        <td>${b.total_opens || 0} / ${b.total_clicks || 0}</td>
+        <td class="signals">${signalPills.join('') || '<span style="color:var(--muted);">-</span>'}</td>
+        <td class="prep-preview">${b.prep_details ? escapeHtml(b.prep_details.substring(0,160)) : (b.last_reply_preview ? escapeHtml(b.last_reply_preview.substring(0,160)) : '<span style="color:rgba(255,255,255,.3);">No prep</span>')}</td>
+      </tr>`;
+    }).join('');
+
+    document.getElementById('bookings').innerHTML = `
+      <table>
+        <thead><tr>
+          <th>Invitee</th><th>When</th><th>Show prob</th><th>Status</th><th>Opens / Clicks</th><th>Emails</th><th>Prep / Last reply</th>
+        </tr></thead>
+        <tbody>${rows}</tbody>
+      </table>
+    `;
+  }
+
+  loadData();
+  // Auto-refresh every 60 sec
+  setInterval(loadData, 60000);
+</script>
+</body>
+</html>
