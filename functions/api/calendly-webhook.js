@@ -16,7 +16,7 @@
 // HANDLER_VERSION below is a sentinel I bump on every deploy so we can
 // verify in the audit log that the function bundle is fresh.
 // ═══════════════════════════════════════════════════════════════
-const HANDLER_VERSION = 'v4-inline-ics-2026-06-08';
+const HANDLER_VERSION = 'v5-recap-bullets-2026-06-08';
 
 export async function onRequest(context) {
   const { request, env } = context;
@@ -327,7 +327,37 @@ async function handleInviteeCreated(p, env) {
     } catch (_) {}
   }
 
-  // ───── Post-meeting follow-up scheduler (30 min after meeting end) ─────
+  // ───── T-24h pre-call reminder (day before, with Meet link + .ics) ─────
+  try {
+    await scheduleDayBeforeReminder(env, {
+      inviteeEmail, inviteeName, eventName, scheduledAt, eventEndAt,
+      meetingLink, calendlyInviteeUri, engagementId: engagement.id,
+    });
+  } catch (e) {
+    try {
+      await sbInsert(env, 'mc_audit_log', {
+        event: 'invitee_24h_reminder_outer_crashed',
+        payload: { invitee_email: inviteeEmail, error_message: (e && e.message) || String(e), error_stack: (e && e.stack) ? String(e.stack).substring(0, 1200) : null },
+      });
+    } catch (_) {}
+  }
+
+  // ───── T-1h pre-call reminder (one hour before, just the join link) ─────
+  try {
+    await scheduleHourBeforeReminder(env, {
+      inviteeEmail, inviteeName, eventName, scheduledAt,
+      meetingLink, calendlyInviteeUri, engagementId: engagement.id,
+    });
+  } catch (e) {
+    try {
+      await sbInsert(env, 'mc_audit_log', {
+        event: 'invitee_1h_reminder_outer_crashed',
+        payload: { invitee_email: inviteeEmail, error_message: (e && e.message) || String(e), error_stack: (e && e.stack) ? String(e.stack).substring(0, 1200) : null },
+      });
+    } catch (_) {}
+  }
+
+  // ───── Post-meeting RECAP (30 min after meeting end) ─────
   try {
     await schedulePostMeetingFollowup(env, {
       inviteeEmail, inviteeName, eventName, scheduledAt, eventEndAt,
@@ -336,7 +366,7 @@ async function handleInviteeCreated(p, env) {
   } catch (e) {
     try {
       await sbInsert(env, 'mc_audit_log', {
-        event: 'invitee_followup_outer_crashed',
+        event: 'invitee_recap_outer_crashed',
         payload: { invitee_email: inviteeEmail, error_message: (e && e.message) || String(e), error_stack: (e && e.stack) ? String(e.stack).substring(0, 1200) : null },
       });
     } catch (_) {}
@@ -672,14 +702,61 @@ async function schedulePostMeetingFollowup(env, { inviteeEmail, inviteeName, eve
     auditPayload.mode = isWetyr ? 'wetyr' : 'markcmo';
 
     const firstName = (inviteeName || '').split(' ')[0] || 'there';
-    const subject = isWetyr ? `Quick follow-up on our meeting` : `How did our meeting go?`;
-    const text = `Hi ${firstName},\n\nI really enjoyed our meeting. How do you think the meeting went from your end?\n\nMark`;
+    // Recap email - Mark's voice. Thanks them + clear bullets on what
+    // happens next from his side and what he needs from theirs. Templated
+    // version sends if Calendly Notetaker integration isn't ready by
+    // T+30min (which it usually isn't). Future enhancement: a cron worker
+    // will poll Notetaker and override with a personalized version when
+    // notes are available before the scheduled send.
+    const subject = isWetyr
+      ? `Following up on our WETYR meeting`
+      : `Recap from our meeting`;
+    const expectFromMe = isWetyr
+      ? [
+          'A direct cash offer or pass with reasons within 48 hours',
+          'A clean term sheet if we move forward (no surprises)',
+          'Direct line to me at info@wetyr.com for any questions',
+        ]
+      : [
+          'A follow-up note within 24 hours with the agenda we agreed on',
+          'A specific proposal aligned with the outcomes you want',
+          'Direct access via mark@markcmo.com for any questions',
+        ];
+    const needFromYou = isWetyr
+      ? [
+          'The property details (address, condition, any liens or issues)',
+          'Your number and timeline',
+          'Decision-maker confirmation if more than one party is involved',
+        ]
+      : [
+          'The materials we discussed (slides, dashboards, ad accounts, KPIs)',
+          'The 1-3 specific outcomes you want from our engagement',
+          'A signoff on the proposal scope before I begin work',
+        ];
+    const text = `Hi ${firstName},
+
+Thanks for the time today. Really enjoyed the conversation.
+
+Here's what you can expect from me:
+${expectFromMe.map(b => `- ${b}`).join('\n')}
+
+Here's what I'll need from you:
+${needFromYou.map(b => `- ${b}`).join('\n')}
+
+Reply to this email with anything I missed. Looking forward to the next step.
+
+Mark`;
     const html = `<!DOCTYPE html>
 <html><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1"></head>
 <body style="margin:0;padding:0;background:#ffffff;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif;color:#1a1a1a;">
   <div style="max-width:560px;margin:0 auto;padding:24px;font-size:15px;line-height:1.6;">
     <p style="margin:0 0 14px;">Hi ${esc(firstName)},</p>
-    <p style="margin:0 0 14px;">I really enjoyed our meeting. How do you think the meeting went from your end?</p>
+    <p style="margin:0 0 14px;">Thanks for the time today. Really enjoyed the conversation.</p>
+    <p style="margin:0 0 8px;"><strong>Here's what you can expect from me:</strong></p>
+    <ul style="margin:0 0 14px;padding-left:22px;">${expectFromMe.map(b => `<li style="margin:0 0 4px;">${esc(b)}</li>`).join('')}</ul>
+    <p style="margin:0 0 8px;"><strong>Here's what I'll need from you:</strong></p>
+    <ul style="margin:0 0 14px;padding-left:22px;">${needFromYou.map(b => `<li style="margin:0 0 4px;">${esc(b)}</li>`).join('')}</ul>
+    <p style="margin:0 0 14px;">Reply to this email with anything I missed. Looking forward to the next step.</p>
     <p style="margin:0;">Mark</p>
   </div>
 </body></html>`;
@@ -719,7 +796,7 @@ async function schedulePostMeetingFollowup(env, { inviteeEmail, inviteeName, eve
       const resendId = respJson && respJson.id || null;
       auditPayload.resend_id = resendId;
       auditPayload.step = 'queued';
-      auditEvent = 'invitee_followup_sent';
+      auditEvent = 'invitee_recap_sent';
 
       // Persist the Resend email_id on the engagement metadata
       if (engagementId && resendId) {
@@ -751,6 +828,300 @@ async function schedulePostMeetingFollowup(env, { inviteeEmail, inviteeName, eve
   }
 }
 
+// ───── scheduleDayBeforeReminder (T-24h pre-call ping) ───────────
+// Drops a short reminder 24 hours before the meeting with the join
+// link + .ics. NO prep questions - we already asked those in the
+// T+5min confirmation email; double-asking is friction.
+// Skips if booking is less than 24 hours away (no time to schedule).
+async function scheduleDayBeforeReminder(env, { inviteeEmail, inviteeName, eventName, scheduledAt, eventEndAt, meetingLink, calendlyInviteeUri, engagementId }) {
+  const auditPayload = {
+    invitee_email: inviteeEmail || '',
+    invitee_name: inviteeName || '',
+    invitee_uri: calendlyInviteeUri || '',
+    event_name: eventName || '',
+    scheduled_at: scheduledAt || null,
+    send_at: null,
+    resend_status: null,
+    resend_id: null,
+    resend_error: null,
+    error_message: null,
+    error_stack: null,
+    engagement_id: engagementId || null,
+    step: 'init',
+    mode: null,
+    handler_version: HANDLER_VERSION,
+  };
+  let auditEvent = 'invitee_24h_reminder_attempted';
+
+  try {
+    if (!inviteeEmail || !scheduledAt) { auditPayload.step = 'no_email_or_time'; auditEvent = 'invitee_24h_reminder_skipped'; return; }
+    const apiKey = env.RESEND_API_KEY;
+    if (!apiKey) { auditPayload.step = 'no_resend_api_key'; auditEvent = 'invitee_24h_reminder_skipped'; return; }
+
+    const startMs = new Date(scheduledAt).getTime();
+    if (isNaN(startMs)) { auditPayload.step = 'bad_start_time'; auditEvent = 'invitee_24h_reminder_skipped'; return; }
+
+    const sendAtMs = startMs - 24 * 60 * 60 * 1000;
+    // If booking is < 24h + 5min away, skip (no time to schedule)
+    if (sendAtMs < Date.now() + 5 * 60 * 1000) {
+      auditPayload.step = 'too_close';
+      auditEvent = 'invitee_24h_reminder_skipped';
+      return;
+    }
+    // Resend caps scheduled_at at 30 days
+    if (sendAtMs - Date.now() > 28 * 24 * 60 * 60 * 1000) {
+      auditPayload.step = 'deferred_to_cron';
+      auditPayload.send_at = new Date(sendAtMs).toISOString();
+      auditEvent = 'invitee_24h_reminder_deferred';
+      return;
+    }
+    const sendAt = new Date(sendAtMs).toISOString();
+    auditPayload.send_at = sendAt;
+
+    const _n = (eventName || '').toLowerCase();
+    const isWetyr = _n.indexOf('wetyr') >= 0;
+    auditPayload.mode = isWetyr ? 'wetyr' : 'markcmo';
+
+    // Format day + time in US/Eastern
+    const dt = new Date(scheduledAt);
+    const whenDay = dt.toLocaleString('en-US', { weekday: 'long', timeZone: 'America/New_York' });
+    const whenTime = dt.toLocaleString('en-US', { hour: 'numeric', minute: '2-digit', hour12: true, timeZone: 'America/New_York' }) + ' ET';
+    const firstName = (inviteeName || '').split(' ')[0] || 'there';
+
+    const fromAddr = isWetyr ? 'WETYR <info@wetyr.com>' : 'Mark Gabrielli <mark@markcmo.com>';
+    const replyTo = isWetyr ? 'info@wetyr.com' : 'mark@markcmo.com';
+    const subject = `See you tomorrow at ${whenTime}`;
+
+    const joinLine = meetingLink ? `Join: ${meetingLink}` : 'Join link is in the Calendly invite.';
+    const text = `Hi ${firstName},
+
+Quick reminder - we're on for tomorrow, ${whenDay} at ${whenTime}.
+
+${joinLine}
+
+Mark`;
+    const html = `<!DOCTYPE html>
+<html><head><meta charset="UTF-8"></head>
+<body style="margin:0;padding:0;background:#ffffff;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif;color:#1a1a1a;">
+  <div style="max-width:560px;margin:0 auto;padding:24px;font-size:15px;line-height:1.6;">
+    <p style="margin:0 0 14px;">Hi ${esc(firstName)},</p>
+    <p style="margin:0 0 14px;">Quick reminder - we're on for tomorrow, <strong>${esc(whenDay)} at ${esc(whenTime)}</strong>.</p>
+    ${meetingLink ? `<div style="background:#f5f7fb;border-left:3px solid #C9A84C;padding:12px 16px;margin:0 0 14px;border-radius:4px;"><strong>Join:</strong> <a href="${esc(meetingLink)}" style="color:#1a4d8c;">${esc(meetingLink.replace(/^https?:\/\//,''))}</a></div>` : '<p style="margin:0 0 14px;">Join link is in the Calendly invite.</p>'}
+    <p style="margin:0;">Mark</p>
+  </div>
+</body></html>`;
+
+    // Build .ics for this reminder too (belt-and-suspenders)
+    let icsAttachment = null;
+    if (scheduledAt) {
+      try {
+        const organizerEmail = isWetyr ? 'info@wetyr.com' : 'mark@markcmo.com';
+        const organizerName = isWetyr ? 'WETYR' : 'Mark Gabrielli';
+        const icsBase64 = buildIcsBase64({
+          uid: (calendlyInviteeUri || `${inviteeEmail}-${scheduledAt}`).replace(/[^a-z0-9-]/gi, ''),
+          startUtcIso: scheduledAt,
+          endUtcIso: eventEndAt,
+          summary: isWetyr ? `WETYR meeting with Mark Gabrielli` : `${eventName} with Mark Gabrielli`,
+          description: meetingLink ? `Join: ${meetingLink}` : 'Calendly meeting',
+          location: meetingLink || '',
+          organizerEmail,
+          organizerName,
+          attendeeEmail: inviteeEmail,
+          attendeeName: inviteeName || inviteeEmail,
+        });
+        icsAttachment = { filename: 'meeting-with-mark.ics', content: icsBase64, content_type: 'text/calendar' };
+      } catch (_) {}
+    }
+
+    const sendBody = {
+      from: fromAddr,
+      to: [inviteeEmail],
+      cc: ['marklgabriellijr@gmail.com'],
+      reply_to: replyTo,
+      subject, html, text,
+      scheduled_at: sendAt,
+      tags: [
+        { name: 'category', value: 'calendly_24h_reminder' },
+        { name: 'mode', value: isWetyr ? 'wetyr' : 'markcmo' },
+      ],
+    };
+    if (icsAttachment) sendBody.attachments = [icsAttachment];
+
+    auditPayload.step = 'queuing';
+    const r = await fetch('https://api.resend.com/emails', {
+      method: 'POST',
+      headers: {
+        Authorization: `Bearer ${apiKey}`,
+        'Content-Type': 'application/json',
+        'Idempotency-Key': `cal-24h-${calendlyInviteeUri || inviteeEmail}`.substring(0, 256),
+      },
+      body: JSON.stringify(sendBody),
+    });
+    auditPayload.resend_status = r.status;
+
+    if (r.ok) {
+      const respJson = await r.json().catch(() => null);
+      const resendId = respJson && respJson.id || null;
+      auditPayload.resend_id = resendId;
+      auditPayload.step = 'queued';
+      auditEvent = 'invitee_24h_reminder_sent';
+
+      // Store resend_id on engagement so we can cancel on invitee.canceled
+      if (engagementId && resendId) {
+        try {
+          const eng = await sbSelect(env, `mc_engagements?id=eq.${encodeURIComponent(engagementId)}&select=metadata&limit=1`);
+          const meta = (eng && eng[0] && eng[0].metadata) || {};
+          meta.reminder_24h_resend_id = resendId;
+          meta.reminder_24h_send_at = sendAt;
+          await sbUpdate(env, 'mc_engagements', `id=eq.${encodeURIComponent(engagementId)}`, { metadata: meta });
+        } catch (_) {}
+      }
+    } else {
+      auditPayload.resend_error = (await r.text().catch(() => '')).slice(0, 600);
+      auditPayload.step = 'resend_rejected';
+      auditEvent = 'invitee_24h_reminder_failed';
+    }
+  } catch (err) {
+    auditPayload.step = (auditPayload.step || 'unknown') + '_then_crashed';
+    auditPayload.error_message = (err && err.message) || String(err);
+    auditPayload.error_stack = (err && err.stack) ? String(err.stack).substring(0, 1500) : null;
+    auditEvent = 'invitee_24h_reminder_crashed';
+  } finally {
+    try {
+      await sbInsert(env, 'mc_audit_log', { event: auditEvent, payload: auditPayload });
+    } catch (_) {}
+  }
+}
+
+// ───── scheduleHourBeforeReminder (T-1h pre-call ping) ───────────
+// Final reminder 1 hour before with just the join link. Short, mobile-
+// friendly, no .ics attachment (they have it from earlier sends).
+async function scheduleHourBeforeReminder(env, { inviteeEmail, inviteeName, eventName, scheduledAt, meetingLink, calendlyInviteeUri, engagementId }) {
+  const auditPayload = {
+    invitee_email: inviteeEmail || '',
+    invitee_name: inviteeName || '',
+    invitee_uri: calendlyInviteeUri || '',
+    event_name: eventName || '',
+    scheduled_at: scheduledAt || null,
+    send_at: null,
+    resend_status: null,
+    resend_id: null,
+    resend_error: null,
+    error_message: null,
+    error_stack: null,
+    engagement_id: engagementId || null,
+    step: 'init',
+    mode: null,
+    handler_version: HANDLER_VERSION,
+  };
+  let auditEvent = 'invitee_1h_reminder_attempted';
+
+  try {
+    if (!inviteeEmail || !scheduledAt) { auditPayload.step = 'no_email_or_time'; auditEvent = 'invitee_1h_reminder_skipped'; return; }
+    const apiKey = env.RESEND_API_KEY;
+    if (!apiKey) { auditPayload.step = 'no_resend_api_key'; auditEvent = 'invitee_1h_reminder_skipped'; return; }
+
+    const startMs = new Date(scheduledAt).getTime();
+    if (isNaN(startMs)) { auditPayload.step = 'bad_start_time'; auditEvent = 'invitee_1h_reminder_skipped'; return; }
+
+    const sendAtMs = startMs - 60 * 60 * 1000;
+    if (sendAtMs < Date.now() + 5 * 60 * 1000) { auditPayload.step = 'too_close'; auditEvent = 'invitee_1h_reminder_skipped'; return; }
+    if (sendAtMs - Date.now() > 28 * 24 * 60 * 60 * 1000) {
+      auditPayload.step = 'deferred_to_cron';
+      auditPayload.send_at = new Date(sendAtMs).toISOString();
+      auditEvent = 'invitee_1h_reminder_deferred';
+      return;
+    }
+    const sendAt = new Date(sendAtMs).toISOString();
+    auditPayload.send_at = sendAt;
+
+    const _n = (eventName || '').toLowerCase();
+    const isWetyr = _n.indexOf('wetyr') >= 0;
+    auditPayload.mode = isWetyr ? 'wetyr' : 'markcmo';
+
+    const dt = new Date(scheduledAt);
+    const whenTime = dt.toLocaleString('en-US', { hour: 'numeric', minute: '2-digit', hour12: true, timeZone: 'America/New_York' }) + ' ET';
+    const firstName = (inviteeName || '').split(' ')[0] || 'there';
+
+    const fromAddr = isWetyr ? 'WETYR <info@wetyr.com>' : 'Mark Gabrielli <mark@markcmo.com>';
+    const replyTo = isWetyr ? 'info@wetyr.com' : 'mark@markcmo.com';
+    const subject = `See you in an hour`;
+
+    const joinLine = meetingLink ? meetingLink : 'Check the Calendly invite for the join link.';
+    const text = `Hi ${firstName},
+
+See you at ${whenTime}.
+
+${joinLine}
+
+Mark`;
+    const html = `<!DOCTYPE html>
+<html><head><meta charset="UTF-8"></head>
+<body style="margin:0;padding:0;background:#ffffff;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif;color:#1a1a1a;">
+  <div style="max-width:560px;margin:0 auto;padding:24px;font-size:15px;line-height:1.6;">
+    <p style="margin:0 0 14px;">Hi ${esc(firstName)},</p>
+    <p style="margin:0 0 14px;">See you at <strong>${esc(whenTime)}</strong>.</p>
+    ${meetingLink ? `<p style="margin:0 0 14px;"><a href="${esc(meetingLink)}" style="display:inline-block;background:#1a4d8c;color:#fff;padding:10px 18px;text-decoration:none;border-radius:6px;font-weight:600;">Join the meeting</a></p>` : '<p style="margin:0 0 14px;">Check the Calendly invite for the join link.</p>'}
+    <p style="margin:0;">Mark</p>
+  </div>
+</body></html>`;
+
+    auditPayload.step = 'queuing';
+    const r = await fetch('https://api.resend.com/emails', {
+      method: 'POST',
+      headers: {
+        Authorization: `Bearer ${apiKey}`,
+        'Content-Type': 'application/json',
+        'Idempotency-Key': `cal-1h-${calendlyInviteeUri || inviteeEmail}`.substring(0, 256),
+      },
+      body: JSON.stringify({
+        from: fromAddr,
+        to: [inviteeEmail],
+        cc: ['marklgabriellijr@gmail.com'],
+        reply_to: replyTo,
+        subject, html, text,
+        scheduled_at: sendAt,
+        tags: [
+          { name: 'category', value: 'calendly_1h_reminder' },
+          { name: 'mode', value: isWetyr ? 'wetyr' : 'markcmo' },
+        ],
+      }),
+    });
+    auditPayload.resend_status = r.status;
+
+    if (r.ok) {
+      const respJson = await r.json().catch(() => null);
+      const resendId = respJson && respJson.id || null;
+      auditPayload.resend_id = resendId;
+      auditPayload.step = 'queued';
+      auditEvent = 'invitee_1h_reminder_sent';
+
+      if (engagementId && resendId) {
+        try {
+          const eng = await sbSelect(env, `mc_engagements?id=eq.${encodeURIComponent(engagementId)}&select=metadata&limit=1`);
+          const meta = (eng && eng[0] && eng[0].metadata) || {};
+          meta.reminder_1h_resend_id = resendId;
+          meta.reminder_1h_send_at = sendAt;
+          await sbUpdate(env, 'mc_engagements', `id=eq.${encodeURIComponent(engagementId)}`, { metadata: meta });
+        } catch (_) {}
+      }
+    } else {
+      auditPayload.resend_error = (await r.text().catch(() => '')).slice(0, 600);
+      auditPayload.step = 'resend_rejected';
+      auditEvent = 'invitee_1h_reminder_failed';
+    }
+  } catch (err) {
+    auditPayload.step = (auditPayload.step || 'unknown') + '_then_crashed';
+    auditPayload.error_message = (err && err.message) || String(err);
+    auditPayload.error_stack = (err && err.stack) ? String(err.stack).substring(0, 1500) : null;
+    auditEvent = 'invitee_1h_reminder_crashed';
+  } finally {
+    try {
+      await sbInsert(env, 'mc_audit_log', { event: auditEvent, payload: auditPayload });
+    } catch (_) {}
+  }
+}
+
 // ───── cancelScheduledFollowup (on invitee.canceled) ─────────────
 async function cancelScheduledFollowup(env, { inviteeEmail, inviteeUri }) {
   const auditPayload = {
@@ -778,25 +1149,48 @@ async function cancelScheduledFollowup(env, { inviteeEmail, inviteeUri }) {
         eng = await sbSelect(env, `mc_engagements?client_id=eq.${client[0].id}&select=id,metadata&order=created_at.desc&limit=1`).catch(() => []);
       }
     }
-    if (!eng || !eng.length || !eng[0].metadata || !eng[0].metadata.followup_resend_id) {
-      auditPayload.step = 'no_followup_id_found';
+    if (!eng || !eng.length || !eng[0].metadata) {
+      auditPayload.step = 'no_engagement_found';
       auditEvent = 'invitee_followup_cancel_skipped';
       return;
     }
 
-    const resendId = eng[0].metadata.followup_resend_id;
-    auditPayload.resend_id = resendId;
-    auditPayload.step = 'deleting';
+    // Cancel ALL scheduled emails for this booking - 24h reminder, 1h
+    // reminder, and the post-meeting recap. Anything we already queued
+    // at Resend with a scheduled_at can be DELETE'd as long as it has
+    // not yet been sent.
+    const meta = eng[0].metadata;
+    const idsToCancel = [
+      meta.reminder_24h_resend_id,
+      meta.reminder_1h_resend_id,
+      meta.followup_resend_id,  // the recap (legacy key name)
+    ].filter(Boolean);
 
-    const r = await fetch(`https://api.resend.com/emails/${encodeURIComponent(resendId)}`, {
-      method: 'DELETE',
-      headers: { Authorization: `Bearer ${apiKey}` },
-    });
-    auditPayload.cancel_status = r.status;
-    if (r.ok) { auditPayload.step = 'cancelled'; auditEvent = 'invitee_followup_cancelled'; }
+    if (!idsToCancel.length) {
+      auditPayload.step = 'nothing_to_cancel';
+      auditEvent = 'invitee_followup_cancel_skipped';
+      return;
+    }
+
+    auditPayload.resend_id = idsToCancel.join(',');
+    auditPayload.step = 'deleting';
+    const results = [];
+    for (const resendId of idsToCancel) {
+      try {
+        const r = await fetch(`https://api.resend.com/emails/${encodeURIComponent(resendId)}`, {
+          method: 'DELETE',
+          headers: { Authorization: `Bearer ${apiKey}` },
+        });
+        results.push({ id: resendId, status: r.status, ok: r.ok });
+      } catch (e) {
+        results.push({ id: resendId, status: 0, error: (e && e.message) || String(e) });
+      }
+    }
+    auditPayload.cancel_status = results.map(r => `${r.id}=${r.status}`).join(';');
+    if (results.every(r => r.ok)) { auditPayload.step = 'cancelled'; auditEvent = 'invitee_followup_cancelled'; }
     else {
-      auditPayload.cancel_error = (await r.text().catch(() => '')).slice(0, 400);
-      auditPayload.step = 'resend_rejected';
+      auditPayload.cancel_error = JSON.stringify(results).slice(0, 600);
+      auditPayload.step = 'partial_cancel';
       auditEvent = 'invitee_followup_cancel_failed';
     }
   } catch (err) {
