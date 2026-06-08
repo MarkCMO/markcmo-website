@@ -62,21 +62,26 @@ export async function onRequest(context) {
     const auditQuery = `mc_audit_log?event=eq.calendly_booking_created&created_at=gte.${encodeURIComponent(new Date(Date.now() - 7 * 24 * 60 * 60 * 1000).toISOString())}&order=created_at.desc&limit=200&select=engagement_id,client_id,payload`;
     const recentBookings = await sbSelect(env, auditQuery);
 
-    // Filter to bookings whose scheduled meeting end was in the last
-    // RECAP_LOOKBACK_MIN minutes (Gemini docs typically appear 5-10 min
-    // after meeting end, so this is the right window to look for them)
+    // Filter to bookings that are in one of two interesting windows:
+    //   1. Meeting STARTED 5-30 min ago, NOT YET ENDED -> candidate for
+    //      auto-cancel if no attendance confirmation came in
+    //   2. Meeting ENDED 5-60 min ago -> candidate for Gemini recap
+    //      lookup OR fallback no-show detection
+    // The per-candidate logic below decides which path applies.
     const now = Date.now();
     const candidates = [];
     for (const row of recentBookings) {
       const p = row.payload || {};
       const startAt = p.scheduled_at ? new Date(p.scheduled_at).getTime() : null;
       if (!startAt || isNaN(startAt)) continue;
-      // Assume 30-min default duration when end_time isn't stored. Gemini
-      // takes long enough that we want to look 5-65 min after the meeting
-      // SHOULD HAVE ENDED.
       const assumedEndMs = startAt + 30 * 60 * 1000;
+      const minutesSinceStart = (now - startAt) / 60000;
       const minutesSinceEnd = (now - assumedEndMs) / 60000;
-      if (minutesSinceEnd < 5 || minutesSinceEnd > RECAP_LOOKBACK_MIN) continue;
+      // Include if: in start+5..start+30 window (pre-end auto-cancel)
+      //          OR in end+5..end+60 window (recap / fallback no-show)
+      const inAutoCancelWindow = minutesSinceStart >= 5 && minutesSinceStart <= 30;
+      const inRecapWindow = minutesSinceEnd >= 5 && minutesSinceEnd <= RECAP_LOOKBACK_MIN;
+      if (!inAutoCancelWindow && !inRecapWindow) continue;
       candidates.push({
         engagement_id: row.engagement_id,
         client_id: row.client_id,
@@ -85,16 +90,25 @@ export async function onRequest(context) {
         event_name: p.event_name,
         scheduled_at: p.scheduled_at,
         assumed_end_ms: assumedEndMs,
+        in_auto_cancel_window: inAutoCancelWindow,
+        in_recap_window: inRecapWindow,
+        minutes_since_start: minutesSinceStart,
+        minutes_since_end: minutesSinceEnd,
       });
     }
     run.candidates_found = candidates.length;
 
-    // Skip engagements that already have a gemini_recap_sent audit entry
+    // Skip engagements that already have a terminal recap/cancel audit
+    // entry. Terminal events:
+    //   - gemini_recap_sent: personalized recap already sent
+    //   - invitee_no_show_handled: templated no-show already sent
+    //   - invitee_auto_cancelled: Calendly event already auto-cancelled
     const candidateIds = candidates.map(c => c.engagement_id).filter(Boolean);
-    let alreadyProcessedIds = new Set();
+    const alreadyProcessedIds = new Set();
     if (candidateIds.length) {
       const inList = candidateIds.map(id => `"${id}"`).join(',');
-      const processedQuery = `mc_audit_log?event=eq.gemini_recap_sent&engagement_id=in.(${inList})&select=engagement_id`;
+      const terminalEvents = `(gemini_recap_sent,invitee_no_show_handled,invitee_auto_cancelled)`;
+      const processedQuery = `mc_audit_log?event=in.${terminalEvents}&engagement_id=in.(${inList})&select=engagement_id`;
       try {
         const processed = await sbSelect(env, processedQuery);
         for (const r of processed) {
@@ -147,6 +161,57 @@ export async function onRequest(context) {
       let event = 'gemini_recap_attempted';
 
       try {
+        // ─── AUTO-CANCEL BRANCH (start+5min, no confirmation) ───
+        // If the meeting is in the auto-cancel window (started 5-30 min
+        // ago, still nominally in progress), check if the invitee ever
+        // clicked the "I'll be there" button. If not, auto-cancel the
+        // Calendly event (releases the slot for someone else) and send
+        // the no-show emails. This fires BEFORE the recap window so
+        // we never wait for the meeting to end before acting.
+        const engForCheck = engagementsById[cand.engagement_id];
+        const metaForCheck = engForCheck?.metadata || {};
+        const wasConfirmedEarly = !!metaForCheck.attended_confirmed_at;
+        if (cand.in_auto_cancel_window && !cand.in_recap_window) {
+          if (wasConfirmedEarly) {
+            // Confirmed - wait for Gemini notes to appear via end+5 window
+            candAudit.step = 'confirmed_skipping_until_end';
+            event = 'gemini_recap_skipped';
+            run.skipped.push({ engagement_id: cand.engagement_id, reason: 'confirmed_waiting_for_end' });
+            continue;
+          }
+          // No confirmation, 5+ min past start - AUTO-CANCEL
+          candAudit.step = 'auto_cancelling';
+          const calendlyEventUri = metaForCheck.calendly_event_uri || '';
+          try {
+            const cancelRes = await cancelCalendlyEvent(env, {
+              calendlyEventUri,
+              reason: "Auto-cancelled: invitee did not confirm attendance and was not present 5 minutes into the meeting. The Calendly slot has been released for rebooking.",
+            });
+            candAudit.calendly_cancel_status = cancelRes.status;
+            candAudit.calendly_cancel_ok = cancelRes.ok;
+            // Calendly will fire invitee.canceled webhook -> our existing
+            // cancellation flow deletes all scheduled emails. We do NOT
+            // need to delete them here.
+          } catch (e) {
+            candAudit.calendly_cancel_error = (e && e.message) || String(e);
+          }
+          try {
+            const noShowResult = await sendNoShowEmails(env, { cand });
+            candAudit.no_show_invitee_resend_id = noShowResult.invitee_resend_id;
+            candAudit.no_show_alert_resend_id = noShowResult.alert_resend_id;
+          } catch (e) {
+            candAudit.no_show_email_error = (e && e.message) || String(e);
+          }
+          candAudit.step = 'auto_cancelled';
+          event = 'invitee_auto_cancelled';
+          run.processed.push({
+            engagement_id: cand.engagement_id,
+            action: 'auto_cancelled_no_confirm',
+            invitee_email: cand.invitee_email,
+          });
+          continue;
+        }
+
         // Find the Gemini notes doc
         candAudit.step = 'searching_drive';
         const match = await findGeminiMeetingNotes(env, {
@@ -390,6 +455,36 @@ Mark`;
   let resendId = null;
   try { const j = await r.json(); resendId = j?.id || null; } catch (_) {}
   return { ok: r.ok, status: r.status, resend_id: resendId };
+}
+
+// ───── cancelCalendlyEvent (POST to Calendly cancellation endpoint) ─
+// Cancels a scheduled Calendly event via the v2 API. Mark wants this
+// to release the slot back to the booking page so someone else can
+// take it. Triggers the invitee.canceled webhook downstream which
+// runs cancelScheduledFollowup to delete every queued email for the
+// engagement.
+//
+// The URI format is the full
+// https://api.calendly.com/scheduled_events/{uuid} URI. The cancellation
+// endpoint is POST {uri}/cancellation with body { reason }.
+async function cancelCalendlyEvent(env, { calendlyEventUri, reason }) {
+  const token = env.CALENDLY_API_TOKEN;
+  if (!token) return { ok: false, status: 0, error: 'no CALENDLY_API_TOKEN' };
+  if (!calendlyEventUri) return { ok: false, status: 0, error: 'no calendly_event_uri' };
+  const url = `${calendlyEventUri.replace(/\/+$/,'')}/cancellation`;
+  try {
+    const r = await fetch(url, {
+      method: 'POST',
+      headers: {
+        Authorization: `Bearer ${token}`,
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({ reason: (reason || 'Auto-cancelled').slice(0, 500) }),
+    });
+    return { ok: r.ok, status: r.status, body: await r.text().catch(() => '') };
+  } catch (e) {
+    return { ok: false, status: 0, error: (e && e.message) || String(e) };
+  }
 }
 
 // ───── sendNoShowEmails (to invitee + alert to Mark) ──────────────
