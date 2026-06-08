@@ -37,7 +37,12 @@ export default {
     };
 
     try {
-      audit.from = (message.from || '').toLowerCase().trim();
+      // message.from is the SMTP envelope MAIL FROM, which for emails sent
+      // via Resend / SES / SendGrid is typically a bounce-tracking address
+      // like 0100019ea899b2a2-cd7d9856-d7ea@bounces.amazonses.com - NOT the
+      // human sender. We use it only as a fallback. The real sender is in
+      // the parsed "From:" header.
+      const envelopeFrom = (message.from || '').toLowerCase().trim();
       audit.to = (message.to || '').toLowerCase().trim();
 
       const rawText = await readStreamToString(message.raw);
@@ -46,7 +51,12 @@ export default {
       audit.body_preview = parsed.body.substring(0, 300);
       audit.step = 'parsed';
 
-      // Look up engagement by sender email
+      // Extract the actual sender email from the parsed "From:" header
+      const headerFromEmail = extractEmailAddress(parsed.fromRaw).toLowerCase();
+      audit.from = headerFromEmail || envelopeFrom;
+      audit.envelope_from = envelopeFrom;
+
+      // Look up engagement by sender email (prefer header From over envelope From)
       let engagement = null;
       let client = null;
       const senderEmail = audit.from;
@@ -273,6 +283,20 @@ function extractDisplayName(fromRaw) {
   if (!fromRaw) return '';
   const m = fromRaw.match(/^([^<]+?)\s*<([^>]+)>$/) || fromRaw.match(/"([^"]+)"\s*<([^>]+)>/);
   return m ? m[1].trim().replace(/^"|"$/g, '') : '';
+}
+
+// Pull the email address out of a "From:" header value. Handles formats:
+//   "Display Name" <user@example.com>
+//   Display Name <user@example.com>
+//   user@example.com
+function extractEmailAddress(fromRaw) {
+  if (!fromRaw) return '';
+  // angle-bracket form
+  const angle = fromRaw.match(/<\s*([^>\s]+@[^>\s]+)\s*>/);
+  if (angle) return angle[1].trim();
+  // bare email (anywhere in the string)
+  const bare = fromRaw.match(/([A-Za-z0-9._%+\-]+@[A-Za-z0-9.\-]+\.[A-Za-z]{2,})/);
+  return bare ? bare[1].trim() : '';
 }
 
 async function readStreamToString(stream) {
