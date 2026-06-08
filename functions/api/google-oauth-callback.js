@@ -11,8 +11,11 @@
 //
 // Required env vars:
 //   GOOGLE_OAUTH_CLIENT_ID, GOOGLE_OAUTH_CLIENT_SECRET (set first)
-//   CF_ACCOUNT_ID                                      (for env var PATCH)
-//   CLOUDFLARE_API_TOKEN                               (Pages:Edit scope)
+//   CF_ACCOUNT_ID                                      (for env var PATCH; defaults to markcmo account)
+//
+// Auth for the secret-write (either of these works - Bearer preferred):
+//   CLOUDFLARE_API_TOKEN                               (modern Bearer token, Pages:Edit scope)
+//   CLOUDFLARE_EMAIL + CLOUDFLARE_API_KEY              (legacy Global API Key)
 //
 // After this endpoint succeeds, GOOGLE_OAUTH_REFRESH_TOKEN is set on the
 // markcmo Pages project automatically. No copy/paste required.
@@ -79,18 +82,29 @@ export async function onRequest(context) {
   } catch (_) {}
 
   // ─── Persist refresh token to CF Pages project secrets ────────
+  // Auth strategy: prefer modern API token (Bearer) if configured, fall
+  // back to legacy Global API Key (X-Auth-Email + X-Auth-Key) which we
+  // already have on Pages because it's used elsewhere for DNS edits.
   const accountId = env.CF_ACCOUNT_ID || '5b4ea6b5589fe12f29bea5d7e43fe03c';
   const apiToken = env.CLOUDFLARE_API_TOKEN;
+  const globalKey = env.CLOUDFLARE_API_KEY;
+  const globalEmail = env.CLOUDFLARE_EMAIL;
   let secretStored = false;
   let secretError = null;
+  let authMode = null;
+  let patchHeaders = null;
   if (apiToken) {
+    authMode = 'bearer';
+    patchHeaders = { Authorization: `Bearer ${apiToken}`, 'Content-Type': 'application/json' };
+  } else if (globalKey && globalEmail) {
+    authMode = 'global_key';
+    patchHeaders = { 'X-Auth-Email': globalEmail, 'X-Auth-Key': globalKey, 'Content-Type': 'application/json' };
+  }
+  if (patchHeaders) {
     try {
       const patchRes = await fetch(`https://api.cloudflare.com/client/v4/accounts/${accountId}/pages/projects/markcmo`, {
         method: 'PATCH',
-        headers: {
-          Authorization: `Bearer ${apiToken}`,
-          'Content-Type': 'application/json',
-        },
+        headers: patchHeaders,
         body: JSON.stringify({
           deployment_configs: {
             production: {
@@ -108,13 +122,13 @@ export async function onRequest(context) {
       if (patchJson.success) {
         secretStored = true;
       } else {
-        secretError = JSON.stringify(patchJson.errors || patchJson);
+        secretError = `auth=${authMode}, errors=` + JSON.stringify(patchJson.errors || patchJson);
       }
     } catch (e) {
-      secretError = (e && e.message) || String(e);
+      secretError = `auth=${authMode}, err=` + ((e && e.message) || String(e));
     }
   } else {
-    secretError = 'CLOUDFLARE_API_TOKEN not configured - refresh token captured but NOT persisted to Pages secrets.';
+    secretError = 'No Cloudflare API auth configured (need CLOUDFLARE_API_TOKEN or CLOUDFLARE_EMAIL + CLOUDFLARE_API_KEY)';
   }
 
   // ─── Render success page ──────────────────────────────────────
