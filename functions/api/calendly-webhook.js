@@ -1732,8 +1732,10 @@ async function cancelScheduledFollowup(env, { inviteeEmail, inviteeUri }) {
     const results = [];
     for (const resendId of idsToCancel) {
       try {
-        const r = await fetch(`https://api.resend.com/emails/${encodeURIComponent(resendId)}`, {
-          method: 'DELETE',
+        // Resend uses POST /emails/{id}/cancel to cancel a scheduled
+        // email (DELETE is not supported - returns 405 method_not_allowed).
+        const r = await fetch(`https://api.resend.com/emails/${encodeURIComponent(resendId)}/cancel`, {
+          method: 'POST',
           headers: { Authorization: `Bearer ${apiKey}` },
         });
         results.push({ id: resendId, status: r.status, ok: r.ok });

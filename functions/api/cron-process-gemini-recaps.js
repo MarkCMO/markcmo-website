@@ -249,8 +249,9 @@ export async function onRequest(context) {
             const cancelResults = [];
             for (const rid of cancelIds) {
               try {
-                const dRes = await fetch(`https://api.resend.com/emails/${encodeURIComponent(rid)}`, {
-                  method: 'DELETE',
+                // POST /cancel, not DELETE - Resend's actual endpoint
+                const dRes = await fetch(`https://api.resend.com/emails/${encodeURIComponent(rid)}/cancel`, {
+                  method: 'POST',
                   headers: { Authorization: `Bearer ${env.RESEND_API_KEY}` },
                 });
                 cancelResults.push({ id: rid, status: dRes.status });
@@ -303,8 +304,9 @@ export async function onRequest(context) {
         if (oldRecapId) {
           candAudit.old_recap_id = oldRecapId;
           try {
-            const delRes = await fetch(`https://api.resend.com/emails/${encodeURIComponent(oldRecapId)}`, {
-              method: 'DELETE',
+            // POST /cancel - Resend doesn't support DELETE on scheduled emails
+            const delRes = await fetch(`https://api.resend.com/emails/${encodeURIComponent(oldRecapId)}/cancel`, {
+              method: 'POST',
               headers: { Authorization: `Bearer ${env.RESEND_API_KEY}` },
             });
             candAudit.old_recap_cancel_status = delRes.status;
