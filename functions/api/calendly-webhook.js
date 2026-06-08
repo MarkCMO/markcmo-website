@@ -567,7 +567,7 @@ async function notifyNewBooking(env, { client, eventName, scheduledAt, qa, isNew
   </td></tr>` : ''}
 
   <tr><td style="padding:32px 40px 40px;">
-    <a href="https://markcmo.com/admin/bookings" style="display:inline-block;padding:14px 28px;background:#C9A84C;color:#0a0f2c;font-weight:600;font-size:14px;letter-spacing:0.01em;text-decoration:none;border-radius:8px;">Open in admin →</a>
+    <a href="https://markcmo.com/admin/bookings" style="padding:14px 28px;background:#C9A84C;color:#0a0f2c;font-weight:600;font-size:14px;letter-spacing:0.01em;text-decoration:none;border-radius:8px;">Open in admin →</a>
   </td></tr>
 
   <tr><td style="padding:24px 40px;background:rgba(0,0,0,0.2);border-top:1px solid rgba(255,255,255,0.06);">
@@ -676,16 +676,16 @@ async function sendInviteeConfirmation(env, { inviteeEmail, inviteeName, eventNa
     const text = `Hi ${firstName},\n\n${copy.bodyText}\n\nThank you!\n\n${copy.signOff}\n${copy.signOffLink.label}`;
     const htmlBodyParagraphs = copy.bodyText
       .split('\n\n')
-      .map(par => `<p style="margin:0 0 14px;">${esc(par)}</p>`)
+      .map(par => `<p>${esc(par)}</p>`)
       .join('');
     const html = `<!DOCTYPE html>
 <html><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1"></head>
-<body style="margin:0;padding:0;background:#ffffff;font-family:-apple-system,BlinkMacSystemFont,'SF Pro Text','Inter','Segoe UI',Roboto,Helvetica,Arial,sans-serif;color:#0a0f2c;-webkit-font-smoothing:antialiased;">
-  <div style="max-width:560px;margin:0 auto;padding:24px;font-size:15px;line-height:1.6;">
-    <p style="margin:0 0 14px;">Hi ${esc(firstName)},</p>
+<body>
+  <div>
+    <p>Hi ${esc(firstName)},</p>
     ${htmlBodyParagraphs}
-    <p style="margin:0 0 18px;">Thank you!</p>
-    <p style="margin:0;">${esc(copy.signOff)}<br><a href="${esc(copy.signOffLink.href)}" style="color:#1a1a1a;text-decoration:none;">${esc(copy.signOffLink.label)}</a></p>
+    <p>Thank you!</p>
+    <p>${esc(copy.signOff)}<br><a href="${esc(copy.signOffLink.href)}" >${esc(copy.signOffLink.label)}</a></p>
   </div>
 </body></html>`;
     auditPayload.step = 'composed';
@@ -910,16 +910,16 @@ Reply to this email with anything I missed. Looking forward to the next step.
 Mark`;
     const html = `<!DOCTYPE html>
 <html><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1"></head>
-<body style="margin:0;padding:0;background:#ffffff;font-family:-apple-system,BlinkMacSystemFont,'SF Pro Text','Inter','Segoe UI',Roboto,Helvetica,Arial,sans-serif;color:#0a0f2c;-webkit-font-smoothing:antialiased;">
-  <div style="max-width:560px;margin:0 auto;padding:24px;font-size:15px;line-height:1.6;">
-    <p style="margin:0 0 14px;">Hi ${esc(firstName)},</p>
-    <p style="margin:0 0 14px;">Thanks for the time today. Really enjoyed the conversation.</p>
-    <p style="margin:0 0 8px;"><strong>Here's what you can expect from me:</strong></p>
-    <ul style="margin:0 0 14px;padding-left:22px;">${expectFromMe.map(b => `<li style="margin:0 0 4px;">${esc(b)}</li>`).join('')}</ul>
-    <p style="margin:0 0 8px;"><strong>Here's what I'll need from you:</strong></p>
-    <ul style="margin:0 0 14px;padding-left:22px;">${needFromYou.map(b => `<li style="margin:0 0 4px;">${esc(b)}</li>`).join('')}</ul>
-    <p style="margin:0 0 14px;">Reply to this email with anything I missed. Looking forward to the next step.</p>
-    <p style="margin:0;">Mark</p>
+<body>
+  <div>
+    <p>Hi ${esc(firstName)},</p>
+    <p>Thanks for the time today. Really enjoyed the conversation.</p>
+    <p><strong>Here's what you can expect from me:</strong></p>
+    <ul>${expectFromMe.map(b => `<li>${esc(b)}</li>`).join('')}</ul>
+    <p><strong>Here's what I'll need from you:</strong></p>
+    <ul>${needFromYou.map(b => `<li>${esc(b)}</li>`).join('')}</ul>
+    <p>Reply to this email with anything I missed. Looking forward to the next step.</p>
+    <p>Mark</p>
   </div>
 </body></html>`;
     auditPayload.step = 'composed';
@@ -1077,14 +1077,14 @@ ${joinLine}
 Mark`;
     const html = `<!DOCTYPE html>
 <html><head><meta charset="UTF-8"></head>
-<body style="margin:0;padding:0;background:#ffffff;font-family:-apple-system,BlinkMacSystemFont,'SF Pro Text','Inter','Segoe UI',Roboto,Helvetica,Arial,sans-serif;color:#0a0f2c;-webkit-font-smoothing:antialiased;">
-  <div style="max-width:560px;margin:0 auto;padding:24px;font-size:15px;line-height:1.6;">
-    <p style="margin:0 0 14px;">Hi ${esc(firstName)},</p>
-    <p style="margin:0 0 14px;">Heads up - Mark's calendar is packed this week. To keep your slot at <strong>${esc(whenDay)} ${esc(whenTime)}</strong> active, please confirm you'll be there or reply with any meeting details you'd like Mark to review beforehand.</p>
-    <p style="margin:0 0 14px;color:rgba(0,0,0,.65);font-size:.92rem;">If we don't hear back, the slot will be released for someone else 5 minutes after the meeting start time.</p>
-    <p style="margin:0 0 18px;"><a href="${esc(confirmUrl)}" style="display:inline-block;background:#C9A84C;color:#0a0f2c;padding:14px 28px;text-decoration:none;border-radius:8px;font-weight:600;font-size:14px;letter-spacing:0.01em;">I'll be there ✓</a></p>
-    ${meetingLink ? `<p style="margin:0 0 14px;font-size:.92rem;">Join link: <a href="${esc(meetingLink)}" style="color:#0a0f2c;border-bottom:1px solid rgba(10,15,44,0.2);text-decoration:none;">${esc(meetingLink.replace(/^https?:\/\//,''))}</a></p>` : ''}
-    <p style="margin:0;">Mark</p>
+<body>
+  <div>
+    <p>Hi ${esc(firstName)},</p>
+    <p>Heads up - Mark's calendar is packed this week. To keep your slot at <strong>${esc(whenDay)} ${esc(whenTime)}</strong> active, please confirm you'll be there or reply with any meeting details you'd like Mark to review beforehand.</p>
+    <p>If we don't hear back, the slot will be released for someone else 5 minutes after the meeting start time.</p>
+    <p><a href="${esc(confirmUrl)}">I'll be there ✓</a></p>
+    ${meetingLink ? `<p>Join link: <a href="${esc(meetingLink)}">${esc(meetingLink.replace(/^https?:\/\//,''))}</a></p>` : ''}
+    <p>Mark</p>
   </div>
 </body></html>`;
 
@@ -1234,12 +1234,12 @@ ${joinLine}
 Mark`;
     const html = `<!DOCTYPE html>
 <html><head><meta charset="UTF-8"></head>
-<body style="margin:0;padding:0;background:#ffffff;font-family:-apple-system,BlinkMacSystemFont,'SF Pro Text','Inter','Segoe UI',Roboto,Helvetica,Arial,sans-serif;color:#0a0f2c;-webkit-font-smoothing:antialiased;">
-  <div style="max-width:560px;margin:0 auto;padding:24px;font-size:15px;line-height:1.6;">
-    <p style="margin:0 0 14px;">Hi ${esc(firstName)},</p>
-    <p style="margin:0 0 14px;">See you at <strong>${esc(whenTime)}</strong>.</p>
-    ${meetingLink ? `<p style="margin:0 0 14px;"><a href="${esc(meetingLink)}" style="display:inline-block;background:#1a4d8c;color:#fff;padding:10px 18px;text-decoration:none;border-radius:6px;font-weight:600;">Join the meeting</a></p>` : '<p style="margin:0 0 14px;">Check the Calendly invite for the join link.</p>'}
-    <p style="margin:0;">Mark</p>
+<body>
+  <div>
+    <p>Hi ${esc(firstName)},</p>
+    <p>See you at <strong>${esc(whenTime)}</strong>.</p>
+    ${meetingLink ? `<p><a href="${esc(meetingLink)}" style="background:#1a4d8c;color:#fff;padding:10px 18px;text-decoration:none;border-radius:6px;font-weight:600;">Join the meeting</a></p>` : '<p>Check the Calendly invite for the join link.</p>'}
+    <p>Mark</p>
   </div>
 </body></html>`;
 
@@ -1376,13 +1376,13 @@ Or just reply with anything you'd like Mark to review beforehand.
 Mark`;
     const html = `<!DOCTYPE html>
 <html><head><meta charset="UTF-8"></head>
-<body style="margin:0;padding:0;background:#ffffff;font-family:-apple-system,BlinkMacSystemFont,'SF Pro Text','Inter','Segoe UI',Roboto,Helvetica,Arial,sans-serif;color:#0a0f2c;-webkit-font-smoothing:antialiased;">
-  <div style="max-width:560px;margin:0 auto;padding:24px;font-size:15px;line-height:1.6;">
-    <p style="margin:0 0 14px;">Hi ${esc(firstName)},</p>
-    <p style="margin:0 0 14px;">Haven't heard back on your meeting today at <strong>${esc(whenTime)}</strong>. Last call - if we don't hear from you, the slot will be released 5 minutes after the start time so someone else can book it.</p>
-    <p style="margin:0 0 18px;"><a href="${esc(confirmUrl)}" style="display:inline-block;background:#C9A84C;color:#0a0f2c;padding:14px 28px;text-decoration:none;border-radius:8px;font-weight:600;font-size:14px;letter-spacing:0.01em;">I'll be there ✓</a></p>
-    <p style="margin:0 0 14px;font-size:.92rem;color:rgba(0,0,0,.65);">Or just reply with anything you'd like Mark to review beforehand.</p>
-    <p style="margin:0;">Mark</p>
+<body>
+  <div>
+    <p>Hi ${esc(firstName)},</p>
+    <p>Haven't heard back on your meeting today at <strong>${esc(whenTime)}</strong>. Last call - if we don't hear from you, the slot will be released 5 minutes after the start time so someone else can book it.</p>
+    <p><a href="${esc(confirmUrl)}">I'll be there ✓</a></p>
+    <p>Or just reply with anything you'd like Mark to review beforehand.</p>
+    <p>Mark</p>
   </div>
 </body></html>`;
 
@@ -1562,14 +1562,14 @@ Mark`;
 
     const html = `<!DOCTYPE html>
 <html><head><meta charset="UTF-8"></head>
-<body style="margin:0;padding:0;background:#ffffff;font-family:-apple-system,BlinkMacSystemFont,'SF Pro Text','Inter','Segoe UI',Roboto,Helvetica,Arial,sans-serif;color:#0a0f2c;-webkit-font-smoothing:antialiased;">
-  <div style="max-width:560px;margin:0 auto;padding:24px;font-size:15px;line-height:1.6;">
-    <p style="margin:0 0 14px;">Hi ${esc(firstName)},</p>
-    <p style="margin:0 0 14px;">See you in 15 min at <strong>${esc(whenTime)}</strong>.</p>
-    <p style="margin:0 0 14px;">Quick favor - tap below to confirm you're joining so I know to wait:</p>
-    <p style="margin:0 0 18px;"><a href="${esc(confirmUrl)}" style="display:inline-block;background:#C9A84C;color:#0a0f2c;padding:14px 28px;text-decoration:none;border-radius:8px;font-weight:600;font-size:14px;letter-spacing:0.01em;">I'll be there ✓</a></p>
-    ${meetingLink ? `<p style="margin:0 0 14px;">Or join now: <a href="${esc(meetingLink)}" style="color:#0a0f2c;border-bottom:1px solid rgba(10,15,44,0.2);text-decoration:none;">${esc(meetingLink.replace(/^https?:\/\//,''))}</a></p>` : ''}
-    <p style="margin:0;">Mark</p>
+<body>
+  <div>
+    <p>Hi ${esc(firstName)},</p>
+    <p>See you in 15 min at <strong>${esc(whenTime)}</strong>.</p>
+    <p>Quick favor - tap below to confirm you're joining so I know to wait:</p>
+    <p><a href="${esc(confirmUrl)}">I'll be there ✓</a></p>
+    ${meetingLink ? `<p>Or join now: <a href="${esc(meetingLink)}">${esc(meetingLink.replace(/^https?:\/\//,''))}</a></p>` : ''}
+    <p>Mark</p>
   </div>
 </body></html>`;
 
@@ -1706,16 +1706,16 @@ async function scheduleRebookCta(env, { inviteeEmail, inviteeName, eventName, sc
 
     const html = `<!DOCTYPE html>
 <html><head><meta charset="UTF-8"></head>
-<body style="margin:0;padding:0;background:#ffffff;font-family:-apple-system,BlinkMacSystemFont,'SF Pro Text','Inter','Segoe UI',Roboto,Helvetica,Arial,sans-serif;color:#0a0f2c;-webkit-font-smoothing:antialiased;">
-  <div style="max-width:560px;margin:0 auto;padding:24px;font-size:15px;line-height:1.6;">
-    <p style="margin:0 0 14px;">Hi ${esc(firstName)},</p>
-    <p style="margin:0 0 14px;">${isWetyr
+<body>
+  <div>
+    <p>Hi ${esc(firstName)},</p>
+    <p>${isWetyr
       ? `Been a few days since we talked. If the deal still makes sense and you want to dig deeper, grab another slot here:`
       : `A few days out from our call. If something we discussed is worth a deeper conversation, here is the easiest way to book another slot:`
     }</p>
-    <p style="margin:0 0 18px;"><a href="${esc(bookingUrl)}" style="display:inline-block;background:#C9A84C;color:#0a0f2c;padding:11px 22px;text-decoration:none;border-radius:6px;font-weight:700;">Book another slot</a></p>
-    <p style="margin:0 0 14px;">If you've ${isWetyr ? 'moved on' : 'decided to go a different direction'}, no worries - just hit reply and let me know.</p>
-    <p style="margin:0;">Mark</p>
+    <p><a href="${esc(bookingUrl)}" style="background:#C9A84C;color:#0a0f2c;padding:11px 22px;text-decoration:none;border-radius:6px;font-weight:700;">Book another slot</a></p>
+    <p>If you've ${isWetyr ? 'moved on' : 'decided to go a different direction'}, no worries - just hit reply and let me know.</p>
+    <p>Mark</p>
   </div>
 </body></html>`;
 
