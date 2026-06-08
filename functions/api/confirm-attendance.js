@@ -89,22 +89,40 @@ export async function onRequest(context) {
     } catch (_) {}
   }
 
-  // ─── Render success page ───
-  const html = `<!DOCTYPE html>
-<html><head><meta charset="UTF-8"><title>Confirmed - See you soon</title>
+  // ─── Render success page (WETYR design system) ───
+  const html = `<!doctype html>
+<html lang="en"><head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>Confirmed</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Newsreader:wght@400;500&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
 <style>
-  body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif;background:#0a0f2c;color:#fff;margin:0;padding:0;display:flex;align-items:center;justify-content:center;min-height:100vh;}
-  .card{background:#0F1828;border:1px solid rgba(46,186,115,0.3);border-radius:14px;padding:36px 40px;max-width:480px;width:100%;text-align:center;}
-  .checkmark{width:72px;height:72px;border-radius:50%;background:linear-gradient(135deg,#2EBA73,#1A9755);display:flex;align-items:center;justify-content:center;margin:0 auto 22px;}
-  h1{font-size:1.7rem;margin:0 0 12px;color:#fff;}
-  p{line-height:1.55;color:rgba(255,255,255,.78);margin:0 0 14px;}
-</style></head><body>
-<div class="card">
-  <div class="checkmark"><svg viewBox="0 0 24 24" width="40" height="40" fill="none" stroke="#fff" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="4 12 10 18 20 6"></polyline></svg></div>
-  <h1>You're confirmed</h1>
-  <p>Got it. Mark just got the heads-up that you're joining.</p>
-  <p style="font-size:.88rem;color:rgba(255,255,255,.55);">If you need to reschedule, reply to the confirmation email and we'll handle it.</p>
-</div>
+  *{box-sizing:border-box;}
+  html,body{margin:0;padding:0;background:#0a0f2c;color:#fff;font-family:-apple-system,BlinkMacSystemFont,'Inter','SF Pro Text','Segoe UI',Roboto,Helvetica,Arial,sans-serif;-webkit-font-smoothing:antialiased;}
+  .page{min-height:100vh;display:flex;align-items:center;justify-content:center;padding:48px 24px;}
+  .card{max-width:560px;width:100%;}
+  .eyebrow{display:inline-block;padding:6px 14px;background:rgba(46,186,115,0.12);border-radius:9999px;font-size:11px;letter-spacing:0.18em;text-transform:uppercase;color:#5ED99A;font-weight:600;margin-bottom:24px;}
+  h1{font-family:'Newsreader','Charter','Iowan Old Style',Georgia,serif;font-weight:500;font-size:56px;line-height:1.05;letter-spacing:-0.03em;margin:0 0 20px;color:#fff;}
+  .subhead{font-size:17px;line-height:1.55;color:rgba(255,255,255,0.72);margin:0 0 40px;max-width:480px;}
+  .stat{padding:24px 0;border-top:1px solid rgba(255,255,255,0.08);border-bottom:1px solid rgba(255,255,255,0.08);margin-bottom:32px;}
+  .stat-label{font-size:11px;letter-spacing:0.16em;text-transform:uppercase;color:rgba(255,255,255,0.45);font-weight:600;margin-bottom:6px;}
+  .stat-value{font-family:'SF Mono',ui-monospace,'JetBrains Mono',Menlo,Consolas,monospace;font-size:18px;color:#fff;font-weight:500;}
+  .stat-when{color:#C9A84C;font-size:24px;line-height:1.1;}
+  .help{font-size:13px;line-height:1.6;color:rgba(255,255,255,0.45);font-family:'SF Mono',ui-monospace,Menlo,monospace;letter-spacing:0;}
+  .help a{color:#C9A84C;text-decoration:none;border-bottom:1px solid rgba(201,168,76,0.4);}
+</style></head>
+<body>
+  <div class="page"><div class="card">
+    <div class="eyebrow">✓ confirmed</div>
+    <h1>You're in.</h1>
+    <p class="subhead">Mark just got the signal that you're joining. He'll come prepared with the context you sent.</p>
+    <div class="stat">
+      <div class="stat-label">your seat</div>
+      <div class="stat-value">${eng?.metadata?.scheduled_at ? `<span class="stat-when">${new Date(eng.metadata.scheduled_at).toLocaleString('en-US', { weekday: 'long', month: 'short', day: 'numeric', hour: 'numeric', minute: '2-digit', hour12: true, timeZone: 'America/New_York' }) + ' ET'}</span>` : 'reserved'}</div>
+    </div>
+    <p class="help">Need to reschedule? Reply to any of Mark's emails and we'll handle it. The join link stays in your calendar invite — search <em>"Consultation Discovery"</em> if you can't find it.</p>
+  </div></div>
 </body></html>`;
   return new Response(html, { status: 200, headers: { 'Content-Type': 'text/html; charset=UTF-8' } });
 }
@@ -207,13 +225,31 @@ function esc(s) {
 }
 
 function errorPage(msg) {
-  const html = `<!DOCTYPE html>
-<html><head><meta charset="UTF-8"><title>Confirmation Error</title>
-<style>body{font-family:Arial,sans-serif;background:#0a0f2c;color:#fff;padding:40px;line-height:1.6;}.err{background:rgba(231,76,60,0.1);border-left:3px solid #e74c3c;padding:12px 16px;border-radius:4px;color:#ffb3aa;}</style>
-</head><body>
-<h1>Could not confirm</h1>
-<div class="err">${esc(msg)}</div>
-<p style="color:#aaa;margin-top:20px;">Try replying directly to the meeting email. We will still see you on the call.</p>
+  const html = `<!doctype html>
+<html lang="en"><head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>Confirmation error</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Newsreader:wght@500&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  *{box-sizing:border-box;}
+  html,body{margin:0;padding:0;background:#0a0f2c;color:#fff;font-family:-apple-system,BlinkMacSystemFont,'Inter','SF Pro Text','Segoe UI',Roboto,Helvetica,Arial,sans-serif;-webkit-font-smoothing:antialiased;}
+  .page{min-height:100vh;display:flex;align-items:center;justify-content:center;padding:48px 24px;}
+  .card{max-width:520px;width:100%;}
+  .eyebrow{display:inline-block;padding:6px 14px;background:rgba(231,76,60,0.10);border-radius:9999px;font-size:11px;letter-spacing:0.18em;text-transform:uppercase;color:#FF7B6E;font-weight:600;margin-bottom:24px;}
+  h1{font-family:'Newsreader','Charter',Georgia,serif;font-weight:500;font-size:48px;line-height:1.05;letter-spacing:-0.03em;margin:0 0 20px;color:#fff;}
+  .err{font-size:15px;line-height:1.55;color:rgba(255,255,255,0.85);margin:0 0 32px;padding:0 0 0 20px;border-left:2px solid #e74c3c;}
+  .help{font-size:13px;line-height:1.65;color:rgba(255,255,255,0.45);}
+  .help strong{color:rgba(255,255,255,0.72);font-weight:500;}
+</style></head>
+<body>
+  <div class="page"><div class="card">
+    <div class="eyebrow">could not confirm</div>
+    <h1>Link issue.</h1>
+    <div class="err">${esc(msg)}</div>
+    <p class="help"><strong>What to do:</strong> Reply to any of Mark's emails and we'll mark you as confirmed manually. You'll still be on the call — this is only the in-system flag that didn't update.</p>
+  </div></div>
 </body></html>`;
   return new Response(html, { status: 400, headers: { 'Content-Type': 'text/html; charset=UTF-8' } });
 }

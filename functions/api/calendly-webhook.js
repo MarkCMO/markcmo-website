@@ -510,26 +510,73 @@ async function notifyNewBooking(env, { client, eventName, scheduledAt, qa, isNew
   const when = scheduledAt
     ? new Date(scheduledAt).toLocaleString('en-US', { dateStyle: 'full', timeStyle: 'short', timeZone: 'America/New_York' }) + ' ET'
     : 'time TBD';
+  // WETYR design system - dark navy, gold accent, editorial serif headline
   const qaRows = Object.entries(qa).filter(([, v]) => v).map(([k, v]) =>
-    `<tr><td style="padding:4px 12px 4px 0;color:#64748B;font-size:12px;text-transform:capitalize;">${esc(k)}</td><td style="padding:4px 0;color:#1E293B;font-size:13px;">${esc(String(v).substring(0, 200))}</td></tr>`
+    `<tr>
+      <td style="padding:14px 0;border-bottom:1px solid rgba(255,255,255,0.06);width:140px;vertical-align:top;">
+        <div style="font-size:11px;letter-spacing:0.16em;text-transform:uppercase;color:rgba(255,255,255,0.45);font-weight:600;">${esc(k)}</div>
+      </td>
+      <td style="padding:14px 0 14px 16px;border-bottom:1px solid rgba(255,255,255,0.06);">
+        <div style="font-size:15px;line-height:1.55;color:rgba(255,255,255,0.92);">${esc(String(v).substring(0, 400))}</div>
+      </td>
+    </tr>`
   ).join('');
 
-  const html = `<!DOCTYPE html>
-<html><head><meta charset="UTF-8"/></head>
-<body style="margin:0;padding:24px;background:#F8FAFC;font-family:Arial,sans-serif;">
-<div style="max-width:600px;margin:0 auto;background:#fff;border-radius:12px;overflow:hidden;">
-  <div style="background:#0A1628;color:#fff;padding:20px 24px;">
-    <div style="font-size:11px;letter-spacing:.18em;text-transform:uppercase;color:#3B82F6;margin-bottom:6px;">${isNew ? 'NEW LEAD' : 'RETURNING'} &middot; CALENDLY</div>
-    <h1 style="font-size:20px;margin:0;font-weight:700;">${esc(client.primary_contact_name)} - ${esc(client.legal_name)}</h1>
-    <div style="font-size:13px;color:#94A3B8;margin-top:4px;">${esc(eventName)} - ${esc(when)}</div>
-  </div>
-  <div style="padding:20px 24px;">
-    <p style="font-size:14px;line-height:1.65;margin:0 0 12px;color:#1E293B;">
-      <strong>${esc(client.primary_contact_name)}</strong> just booked a Calendly consultation.
-    </p>
-    ${qaRows ? `<table style="border-collapse:collapse;width:100%;margin:12px 0;">${qaRows}</table>` : ''}
-  </div>
-</div></body></html>`;
+  const eyebrow = isNew ? 'new lead' : 'returning contact';
+  const eyebrowColor = isNew ? '#C9A84C' : '#7BA7E0';
+  const eyebrowBg = isNew ? 'rgba(201,168,76,0.12)' : 'rgba(58,123,213,0.10)';
+
+  const html = `<!doctype html>
+<html lang="en">
+<head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0"><title>Booking</title></head>
+<body style="margin:0;padding:0;background:#0a0f2c;font-family:-apple-system,BlinkMacSystemFont,'SF Pro Text','Inter','Segoe UI',Roboto,Helvetica,Arial,sans-serif;color:#ffffff;-webkit-font-smoothing:antialiased;">
+<table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0" style="background:#0a0f2c;">
+<tr><td align="center" style="padding:48px 16px;">
+<table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0" style="max-width:600px;background:#0F1828;border-radius:16px;overflow:hidden;">
+
+  <tr><td style="padding:40px 40px 0;">
+    <table role="presentation" cellpadding="0" cellspacing="0" border="0" style="margin-bottom:24px;">
+      <tr><td style="padding:6px 14px;background:${eyebrowBg};border-radius:9999px;">
+        <span style="font-size:11px;letter-spacing:0.18em;text-transform:uppercase;color:${eyebrowColor};font-weight:600;">${eyebrow}</span>
+      </td></tr>
+    </table>
+    <h1 style="margin:0;font-family:'Newsreader','Charter','Iowan Old Style',Georgia,'Times New Roman',serif;font-size:32px;line-height:1.1;letter-spacing:-0.02em;font-weight:500;color:#ffffff;">${esc(client.primary_contact_name)}</h1>
+    <div style="margin:8px 0 0;font-size:15px;color:rgba(255,255,255,0.72);">${esc(client.legal_name)}</div>
+  </td></tr>
+
+  <tr><td style="padding:32px 40px 0;">
+    <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0">
+      <tr><td style="padding:20px 0;border-top:1px solid rgba(255,255,255,0.08);border-bottom:1px solid rgba(255,255,255,0.08);">
+        <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0"><tr>
+          <td valign="top" style="width:50%;padding-right:16px;">
+            <div style="font-size:11px;letter-spacing:0.16em;text-transform:uppercase;color:rgba(255,255,255,0.45);font-weight:600;">when</div>
+            <div style="margin-top:6px;font-family:'SF Mono',ui-monospace,'JetBrains Mono',Menlo,Consolas,monospace;font-size:18px;line-height:1.25;color:#C9A84C;font-weight:500;">${esc(when)}</div>
+          </td>
+          <td valign="top" style="width:50%;">
+            <div style="font-size:11px;letter-spacing:0.16em;text-transform:uppercase;color:rgba(255,255,255,0.45);font-weight:600;">event type</div>
+            <div style="margin-top:6px;font-size:15px;line-height:1.3;color:rgba(255,255,255,0.92);">${esc(eventName)}</div>
+          </td>
+        </tr></table>
+      </td></tr>
+    </table>
+  </td></tr>
+
+  ${qaRows ? `<tr><td style="padding:32px 40px 0;">
+    <div style="font-size:11px;letter-spacing:0.18em;text-transform:uppercase;color:#C9A84C;font-weight:600;margin-bottom:14px;">prep details</div>
+    <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0">${qaRows}</table>
+  </td></tr>` : ''}
+
+  <tr><td style="padding:32px 40px 40px;">
+    <a href="https://markcmo.com/admin/bookings" style="display:inline-block;padding:14px 28px;background:#C9A84C;color:#0a0f2c;font-weight:600;font-size:14px;letter-spacing:0.01em;text-decoration:none;border-radius:8px;">Open in admin →</a>
+  </td></tr>
+
+  <tr><td style="padding:24px 40px;background:rgba(0,0,0,0.2);border-top:1px solid rgba(255,255,255,0.06);">
+    <div style="font-size:11px;letter-spacing:0.04em;color:rgba(255,255,255,0.28);font-family:'SF Mono',ui-monospace,Menlo,Consolas,monospace;">${esc((client.primary_contact_email || '').toLowerCase())} &middot; ${isNew ? 'first contact' : 'has prior engagement'}</div>
+  </td></tr>
+
+</table>
+</td></tr></table>
+</body></html>`;
 
   await fetch('https://api.resend.com/emails', {
     method: 'POST',
@@ -633,7 +680,7 @@ async function sendInviteeConfirmation(env, { inviteeEmail, inviteeName, eventNa
       .join('');
     const html = `<!DOCTYPE html>
 <html><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1"></head>
-<body style="margin:0;padding:0;background:#ffffff;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif;color:#1a1a1a;">
+<body style="margin:0;padding:0;background:#ffffff;font-family:-apple-system,BlinkMacSystemFont,'SF Pro Text','Inter','Segoe UI',Roboto,Helvetica,Arial,sans-serif;color:#0a0f2c;-webkit-font-smoothing:antialiased;">
   <div style="max-width:560px;margin:0 auto;padding:24px;font-size:15px;line-height:1.6;">
     <p style="margin:0 0 14px;">Hi ${esc(firstName)},</p>
     ${htmlBodyParagraphs}
@@ -863,7 +910,7 @@ Reply to this email with anything I missed. Looking forward to the next step.
 Mark`;
     const html = `<!DOCTYPE html>
 <html><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1"></head>
-<body style="margin:0;padding:0;background:#ffffff;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif;color:#1a1a1a;">
+<body style="margin:0;padding:0;background:#ffffff;font-family:-apple-system,BlinkMacSystemFont,'SF Pro Text','Inter','Segoe UI',Roboto,Helvetica,Arial,sans-serif;color:#0a0f2c;-webkit-font-smoothing:antialiased;">
   <div style="max-width:560px;margin:0 auto;padding:24px;font-size:15px;line-height:1.6;">
     <p style="margin:0 0 14px;">Hi ${esc(firstName)},</p>
     <p style="margin:0 0 14px;">Thanks for the time today. Really enjoyed the conversation.</p>
@@ -1030,13 +1077,13 @@ ${joinLine}
 Mark`;
     const html = `<!DOCTYPE html>
 <html><head><meta charset="UTF-8"></head>
-<body style="margin:0;padding:0;background:#ffffff;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif;color:#1a1a1a;">
+<body style="margin:0;padding:0;background:#ffffff;font-family:-apple-system,BlinkMacSystemFont,'SF Pro Text','Inter','Segoe UI',Roboto,Helvetica,Arial,sans-serif;color:#0a0f2c;-webkit-font-smoothing:antialiased;">
   <div style="max-width:560px;margin:0 auto;padding:24px;font-size:15px;line-height:1.6;">
     <p style="margin:0 0 14px;">Hi ${esc(firstName)},</p>
     <p style="margin:0 0 14px;">Heads up - Mark's calendar is packed this week. To keep your slot at <strong>${esc(whenDay)} ${esc(whenTime)}</strong> active, please confirm you'll be there or reply with any meeting details you'd like Mark to review beforehand.</p>
     <p style="margin:0 0 14px;color:rgba(0,0,0,.65);font-size:.92rem;">If we don't hear back, the slot will be released for someone else 5 minutes after the meeting start time.</p>
-    <p style="margin:0 0 18px;"><a href="${esc(confirmUrl)}" style="display:inline-block;background:#2EBA73;color:#fff;padding:13px 26px;text-decoration:none;border-radius:8px;font-weight:700;font-size:16px;">I'll be there ✓</a></p>
-    ${meetingLink ? `<p style="margin:0 0 14px;font-size:.92rem;">Join link: <a href="${esc(meetingLink)}" style="color:#1a4d8c;">${esc(meetingLink.replace(/^https?:\/\//,''))}</a></p>` : ''}
+    <p style="margin:0 0 18px;"><a href="${esc(confirmUrl)}" style="display:inline-block;background:#C9A84C;color:#0a0f2c;padding:14px 28px;text-decoration:none;border-radius:8px;font-weight:600;font-size:14px;letter-spacing:0.01em;">I'll be there ✓</a></p>
+    ${meetingLink ? `<p style="margin:0 0 14px;font-size:.92rem;">Join link: <a href="${esc(meetingLink)}" style="color:#0a0f2c;border-bottom:1px solid rgba(10,15,44,0.2);text-decoration:none;">${esc(meetingLink.replace(/^https?:\/\//,''))}</a></p>` : ''}
     <p style="margin:0;">Mark</p>
   </div>
 </body></html>`;
@@ -1187,7 +1234,7 @@ ${joinLine}
 Mark`;
     const html = `<!DOCTYPE html>
 <html><head><meta charset="UTF-8"></head>
-<body style="margin:0;padding:0;background:#ffffff;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif;color:#1a1a1a;">
+<body style="margin:0;padding:0;background:#ffffff;font-family:-apple-system,BlinkMacSystemFont,'SF Pro Text','Inter','Segoe UI',Roboto,Helvetica,Arial,sans-serif;color:#0a0f2c;-webkit-font-smoothing:antialiased;">
   <div style="max-width:560px;margin:0 auto;padding:24px;font-size:15px;line-height:1.6;">
     <p style="margin:0 0 14px;">Hi ${esc(firstName)},</p>
     <p style="margin:0 0 14px;">See you at <strong>${esc(whenTime)}</strong>.</p>
@@ -1329,11 +1376,11 @@ Or just reply with anything you'd like Mark to review beforehand.
 Mark`;
     const html = `<!DOCTYPE html>
 <html><head><meta charset="UTF-8"></head>
-<body style="margin:0;padding:0;background:#ffffff;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif;color:#1a1a1a;">
+<body style="margin:0;padding:0;background:#ffffff;font-family:-apple-system,BlinkMacSystemFont,'SF Pro Text','Inter','Segoe UI',Roboto,Helvetica,Arial,sans-serif;color:#0a0f2c;-webkit-font-smoothing:antialiased;">
   <div style="max-width:560px;margin:0 auto;padding:24px;font-size:15px;line-height:1.6;">
     <p style="margin:0 0 14px;">Hi ${esc(firstName)},</p>
     <p style="margin:0 0 14px;">Haven't heard back on your meeting today at <strong>${esc(whenTime)}</strong>. Last call - if we don't hear from you, the slot will be released 5 minutes after the start time so someone else can book it.</p>
-    <p style="margin:0 0 18px;"><a href="${esc(confirmUrl)}" style="display:inline-block;background:#2EBA73;color:#fff;padding:13px 26px;text-decoration:none;border-radius:8px;font-weight:700;font-size:16px;">I'll be there ✓</a></p>
+    <p style="margin:0 0 18px;"><a href="${esc(confirmUrl)}" style="display:inline-block;background:#C9A84C;color:#0a0f2c;padding:14px 28px;text-decoration:none;border-radius:8px;font-weight:600;font-size:14px;letter-spacing:0.01em;">I'll be there ✓</a></p>
     <p style="margin:0 0 14px;font-size:.92rem;color:rgba(0,0,0,.65);">Or just reply with anything you'd like Mark to review beforehand.</p>
     <p style="margin:0;">Mark</p>
   </div>
@@ -1515,13 +1562,13 @@ Mark`;
 
     const html = `<!DOCTYPE html>
 <html><head><meta charset="UTF-8"></head>
-<body style="margin:0;padding:0;background:#ffffff;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif;color:#1a1a1a;">
+<body style="margin:0;padding:0;background:#ffffff;font-family:-apple-system,BlinkMacSystemFont,'SF Pro Text','Inter','Segoe UI',Roboto,Helvetica,Arial,sans-serif;color:#0a0f2c;-webkit-font-smoothing:antialiased;">
   <div style="max-width:560px;margin:0 auto;padding:24px;font-size:15px;line-height:1.6;">
     <p style="margin:0 0 14px;">Hi ${esc(firstName)},</p>
     <p style="margin:0 0 14px;">See you in 15 min at <strong>${esc(whenTime)}</strong>.</p>
     <p style="margin:0 0 14px;">Quick favor - tap below to confirm you're joining so I know to wait:</p>
-    <p style="margin:0 0 18px;"><a href="${esc(confirmUrl)}" style="display:inline-block;background:#2EBA73;color:#fff;padding:13px 26px;text-decoration:none;border-radius:8px;font-weight:700;font-size:16px;">I'll be there ✓</a></p>
-    ${meetingLink ? `<p style="margin:0 0 14px;">Or join now: <a href="${esc(meetingLink)}" style="color:#1a4d8c;">${esc(meetingLink.replace(/^https?:\/\//,''))}</a></p>` : ''}
+    <p style="margin:0 0 18px;"><a href="${esc(confirmUrl)}" style="display:inline-block;background:#C9A84C;color:#0a0f2c;padding:14px 28px;text-decoration:none;border-radius:8px;font-weight:600;font-size:14px;letter-spacing:0.01em;">I'll be there ✓</a></p>
+    ${meetingLink ? `<p style="margin:0 0 14px;">Or join now: <a href="${esc(meetingLink)}" style="color:#0a0f2c;border-bottom:1px solid rgba(10,15,44,0.2);text-decoration:none;">${esc(meetingLink.replace(/^https?:\/\//,''))}</a></p>` : ''}
     <p style="margin:0;">Mark</p>
   </div>
 </body></html>`;
@@ -1659,7 +1706,7 @@ async function scheduleRebookCta(env, { inviteeEmail, inviteeName, eventName, sc
 
     const html = `<!DOCTYPE html>
 <html><head><meta charset="UTF-8"></head>
-<body style="margin:0;padding:0;background:#ffffff;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif;color:#1a1a1a;">
+<body style="margin:0;padding:0;background:#ffffff;font-family:-apple-system,BlinkMacSystemFont,'SF Pro Text','Inter','Segoe UI',Roboto,Helvetica,Arial,sans-serif;color:#0a0f2c;-webkit-font-smoothing:antialiased;">
   <div style="max-width:560px;margin:0 auto;padding:24px;font-size:15px;line-height:1.6;">
     <p style="margin:0 0 14px;">Hi ${esc(firstName)},</p>
     <p style="margin:0 0 14px;">${isWetyr
