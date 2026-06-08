@@ -1010,7 +1010,7 @@ async function scheduleDayBeforeReminder(env, { inviteeEmail, inviteeName, event
     // Generate a signed token for the "I'll be there" button so the
     // attendance can be confirmed straight from this email instead of
     // waiting for the T-15min ping. Same token works for both emails.
-    const startMs = new Date(scheduledAt).getTime();
+    // (startMs already declared at top of function, reusing it.)
     const confirmExpiryMs = startMs + 4 * 60 * 60 * 1000;
     const confirmToken = await signAttendanceToken(env, { inviteeUri: calendlyInviteeUri, expiryMs: confirmExpiryMs });
     const baseOrigin = isWetyr ? 'https://wetyr.com' : 'https://markcmo.com';
