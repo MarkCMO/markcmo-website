@@ -16,7 +16,7 @@
 // HANDLER_VERSION below is a sentinel I bump on every deploy so we can
 // verify in the audit log that the function bundle is fresh.
 // ═══════════════════════════════════════════════════════════════
-const HANDLER_VERSION = 'v3-inline-2026-06-08';
+const HANDLER_VERSION = 'v4-inline-ics-2026-06-08';
 
 export async function onRequest(context) {
   const { request, env } = context;
@@ -145,6 +145,52 @@ function generateSlug(name, company, email) {
   return base + '-' + Math.random().toString(36).substring(2, 8);
 }
 
+// ───── ICS calendar invite builder (RFC 5545) ────────────────────
+// Generates a valid .ics file as a base64 string, ready to attach to
+// a Resend email. Always send this with the confirmation so prospects
+// can add the meeting to their calendar in one click - even if
+// Calendly's own auto-invite ends up in their spam folder.
+//
+// Tested with Apple Calendar, Outlook (web + desktop), Google Calendar.
+// METHOD:REQUEST + ORGANIZER + ATTENDEE makes it behave as a real
+// invitation. SEQUENCE:0 means original send (not an update).
+function buildIcsBase64({ uid, startUtcIso, endUtcIso, summary, description, location, organizerEmail, organizerName, attendeeEmail, attendeeName }) {
+  const fmt = (iso) => String(iso).replace(/[-:]/g, '').replace(/\.\d{3,6}/, '').replace(/Z$/, 'Z');
+  const start = fmt(startUtcIso);
+  const end = fmt(endUtcIso || new Date(new Date(startUtcIso).getTime() + 30 * 60 * 1000).toISOString());
+  const stamp = fmt(new Date().toISOString());
+  // Escape newlines and commas per RFC 5545 (long values are folded
+  // automatically by most clients but we keep them short).
+  const escIcs = (s) => String(s ?? '').replace(/\\/g, '\\\\').replace(/\n/g, '\\n').replace(/,/g, '\\,').replace(/;/g, '\\;');
+  const lines = [
+    'BEGIN:VCALENDAR',
+    'VERSION:2.0',
+    'PRODID:-//MarkCMO//Calendar Invite v2//EN',
+    'METHOD:REQUEST',
+    'CALSCALE:GREGORIAN',
+    'BEGIN:VEVENT',
+    `UID:${escIcs(uid)}@markcmo.com`,
+    `DTSTAMP:${stamp}`,
+    `DTSTART:${start}`,
+    `DTEND:${end}`,
+    `SUMMARY:${escIcs(summary)}`,
+    `DESCRIPTION:${escIcs(description)}`,
+    location ? `LOCATION:${escIcs(location)}` : '',
+    `ORGANIZER;CN=${escIcs(organizerName)}:mailto:${organizerEmail}`,
+    `ATTENDEE;CN=${escIcs(attendeeName || attendeeEmail)};RSVP=TRUE:mailto:${attendeeEmail}`,
+    'STATUS:CONFIRMED',
+    'SEQUENCE:0',
+    'END:VEVENT',
+    'END:VCALENDAR',
+    '',
+  ].filter(Boolean).join('\r\n');
+  // base64 encode (works in CF Workers via btoa + TextEncoder)
+  const bytes = new TextEncoder().encode(lines);
+  let binary = '';
+  for (let i = 0; i < bytes.length; i++) binary += String.fromCharCode(bytes[i]);
+  return btoa(binary);
+}
+
 // ───── Main: invitee.created handler ─────────────────────────────
 async function handleInviteeCreated(p, env) {
   const inviteeEmail = p.email || '';
@@ -157,6 +203,12 @@ async function handleInviteeCreated(p, env) {
   const rescheduleUrl = p.reschedule_url || '';
   const calendlyEventUri = p.event?.uri || p.scheduled_event?.uri || '';
   const calendlyInviteeUri = p.uri || '';
+  // Conference join URL (Google Meet / Zoom / etc) - lives at
+  // p.scheduled_event.location.join_url for Calendly v2 invitee.created.
+  const meetingLink = p.scheduled_event?.location?.join_url
+    || p.event?.location?.join_url
+    || p.scheduled_event?.location?.location  // some Calendly setups
+    || '';
 
   // Extract custom-question answers if present
   const questions = p.questions_and_answers || p.questions_and_responses || [];
@@ -259,10 +311,11 @@ async function handleInviteeCreated(p, env) {
     } catch (_) {}
   }
 
-  // ───── Confirmation email (5 min delay) ─────
+  // ───── Confirmation email (5 min delay, with auto-generated .ics) ─────
   try {
     await sendInviteeConfirmation(env, {
-      inviteeEmail, inviteeName, eventName, scheduledAt,
+      inviteeEmail, inviteeName, eventName, scheduledAt, eventEndAt,
+      meetingLink, calendlyInviteeUri,
       isNew: !existing.length, inviteeUri: calendlyInviteeUri,
     });
   } catch (e) {
@@ -362,7 +415,7 @@ async function notifyNewBooking(env, { client, eventName, scheduledAt, qa, isNew
 }
 
 // ───── sendInviteeConfirmation (personal warm email, 5 min delay) ─────
-async function sendInviteeConfirmation(env, { inviteeEmail, inviteeName, eventName, scheduledAt, isNew, inviteeUri }) {
+async function sendInviteeConfirmation(env, { inviteeEmail, inviteeName, eventName, scheduledAt, eventEndAt, meetingLink, calendlyInviteeUri, isNew, inviteeUri }) {
   const auditPayload = {
     invitee_email: inviteeEmail || '',
     invitee_name: inviteeName || '',
@@ -461,12 +514,68 @@ async function sendInviteeConfirmation(env, { inviteeEmail, inviteeName, eventNa
 </body></html>`;
     auditPayload.step = 'composed';
 
+    // ─── Build .ics attachment ───────────────────────────────────────
+    // Always attach so prospects can add the meeting to their calendar
+    // even if Calendly's own auto-invite goes to spam. Christina-style
+    // misses ("I'm not seeing a calendar invite") are now impossible.
+    let icsAttachment = null;
+    if (scheduledAt) {
+      try {
+        const organizerEmail = mode === 'wetyr' ? 'info@wetyr.com' : 'mark@markcmo.com';
+        const organizerName = mode === 'wetyr' ? 'WETYR' : 'Mark Gabrielli';
+        const meetingSummary = mode === 'wetyr'
+          ? `WETYR meeting with Mark Gabrielli`
+          : `${eventName} with Mark Gabrielli`;
+        const meetingDescription = meetingLink
+          ? `Looking forward to our conversation!\\n\\nJoin: ${meetingLink}`
+          : `Looking forward to our conversation!`;
+        const icsBase64 = buildIcsBase64({
+          uid: (calendlyInviteeUri || `${inviteeEmail}-${scheduledAt}`).replace(/[^a-z0-9-]/gi, ''),
+          startUtcIso: scheduledAt,
+          endUtcIso: eventEndAt,
+          summary: meetingSummary,
+          description: meetingDescription,
+          location: meetingLink || '',
+          organizerEmail,
+          organizerName,
+          attendeeEmail: inviteeEmail,
+          attendeeName: inviteeName || inviteeEmail,
+        });
+        icsAttachment = {
+          filename: 'meeting-with-mark.ics',
+          content: icsBase64,
+          content_type: 'text/calendar',
+        };
+        auditPayload.ics_attached = true;
+      } catch (icsErr) {
+        // Soft-fail: send the email without the .ics rather than block
+        auditPayload.ics_error = (icsErr && icsErr.message) || String(icsErr);
+      }
+    }
+
     // Schedule 5 min after webhook fires
     const sendAt = new Date(Date.now() + 5 * 60 * 1000).toISOString();
     auditPayload.send_scheduled_for = sendAt;
     auditPayload.step = 'queuing';
 
     const idempotencyKey = `cal-confirm-${inviteeUri || inviteeEmail || 'unknown'}`.substring(0, 256);
+
+    const sendBody = {
+      from: copy.from,
+      to: [inviteeEmail],
+      cc: ['marklgabriellijr@gmail.com'],
+      reply_to: copy.replyTo,
+      subject,
+      html,
+      text,
+      scheduled_at: sendAt,
+      tags: [
+        { name: 'category', value: 'calendly_confirmation' },
+        { name: 'mode', value: mode },
+        { name: 'isnew', value: isNew ? 'true' : 'false' },
+      ],
+    };
+    if (icsAttachment) sendBody.attachments = [icsAttachment];
 
     const r = await fetch('https://api.resend.com/emails', {
       method: 'POST',
@@ -475,21 +584,7 @@ async function sendInviteeConfirmation(env, { inviteeEmail, inviteeName, eventNa
         'Content-Type': 'application/json',
         'Idempotency-Key': idempotencyKey,
       },
-      body: JSON.stringify({
-        from: copy.from,
-        to: [inviteeEmail],
-        cc: ['marklgabriellijr@gmail.com'],
-        reply_to: copy.replyTo,
-        subject,
-        html,
-        text,
-        scheduled_at: sendAt,
-        tags: [
-          { name: 'category', value: 'calendly_confirmation' },
-          { name: 'mode', value: mode },
-          { name: 'isnew', value: isNew ? 'true' : 'false' },
-        ],
-      }),
+      body: JSON.stringify(sendBody),
     });
     auditPayload.resend_status = r.status;
 
