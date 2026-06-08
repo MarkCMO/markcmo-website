@@ -80,7 +80,10 @@ const NETLIFY_FN_MAP = {
   'script-schedule-background':     '/api/script-schedule-background',
   // Calendar
   'calendly-sync-history':          '/api/calendly-sync-history',
-  'calendly-webhook':               '/api/calendly-webhook',
+  // calendly-webhook removed from the Netlify-compat map on 2026-06-08.
+  // The Calendly webhook subscription was repointed directly to
+  // /api/calendly-webhook so it bypasses the legacy /.netlify/functions/*
+  // worker route entirely. Native Cloudflare Pages function only.
   // Misc
   'founding-status':                '/api/founding-status',
   'webinar-signup':                 '/api/webinar-signup',
