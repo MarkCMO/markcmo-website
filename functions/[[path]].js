@@ -551,12 +551,18 @@ export async function onRequest(context) {
         !html.includes('data-eeat-byline="v1"') &&
         !html.match(/<[^>]*class=["'][^"']*\bauthor\b/i) &&
         !html.match(/\bBy\s+Mark\s+Gabrielli/i)) {
+      // Name in brand gold (#C9A84C) so it pops on both dark-navy pages
+      // (like /welcome-to-the-markcmo-club) and light-bg pages. Previous
+      // color #222 was invisible on the dark welcome page. Wrapper color
+      // bumped from #666 to #888 for slightly better dark-mode legibility
+      // without losing readability on light surfaces. Left-border accent
+      // also switched from red to brand gold for visual consistency.
       const _byline = '<div data-eeat-byline="v1" style="display:flex;align-items:center;' +
-        'gap:10px;margin:0.35rem 0 1.75rem;padding-left:12px;border-left:3px solid #c8001e;' +
-        'font-size:0.82rem;color:#666;line-height:1.4">' +
+        'gap:10px;margin:0.35rem 0 1.75rem;padding-left:12px;border-left:3px solid #C9A84C;' +
+        'font-size:0.82rem;color:#888;line-height:1.4">' +
         '<img src="/assets/mark-gabrielli.jpg" alt="Mark Gabrielli" loading="lazy" ' +
         'width="32" height="32" style="border-radius:50%;flex-shrink:0;object-fit:cover">' +
-        '<span>By <strong style="color:#222">Mark Gabrielli</strong> &middot; ' +
+        '<span>By <strong style="color:#C9A84C">Mark Gabrielli</strong> &middot; ' +
         'Fractional CMO &amp; COO &middot; Last updated: May 2026</span></div>';
       if (/<\/h1>/i.test(html)) {
         html = html.replace(/(<\/h1>)/i, '$1' + _byline);
