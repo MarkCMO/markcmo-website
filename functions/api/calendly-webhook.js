@@ -130,6 +130,46 @@ async function sbUpdate(env, table, filter, body) {
   return res.json();
 }
 
+// ───── resendPost (rate-limit-tolerant Resend POST wrapper) ──────
+// Resend caps at 5 requests/second. Booking a Calendly slot fires 7-8
+// scheduled emails (confirmation, 24h, 6h, 1h, 15min, recap, rebook,
+// notify) back-to-back which tripped HTTP 429 rate_limit_exceeded on
+// the last 2-3 emails (cost us the rebook CTA on a real test booking).
+//
+// This helper retries on 429 + 5xx with backoff, honoring the
+// Retry-After header when present. Max 4 attempts.
+async function resendPost(env, body, idempotencyKey) {
+  const apiKey = env.RESEND_API_KEY;
+  const headers = {
+    Authorization: `Bearer ${apiKey}`,
+    'Content-Type': 'application/json',
+  };
+  if (idempotencyKey) headers['Idempotency-Key'] = idempotencyKey;
+
+  let lastResponse = null;
+  for (let attempt = 0; attempt < 4; attempt++) {
+    const r = await fetch('https://api.resend.com/emails', {
+      method: 'POST',
+      headers,
+      body: JSON.stringify(body),
+    });
+    lastResponse = r;
+
+    if (r.status === 429 || r.status === 502 || r.status === 503 || r.status === 504) {
+      if (attempt === 3) return r; // give up, return the last 429
+      const retryAfterRaw = r.headers.get('retry-after') || '';
+      const retryAfterSec = parseInt(retryAfterRaw, 10);
+      const ms = !isNaN(retryAfterSec) && retryAfterSec > 0
+        ? retryAfterSec * 1000
+        : (attempt + 1) * 400;  // 400ms, 800ms, 1200ms
+      await new Promise(resolve => setTimeout(resolve, ms));
+      continue;
+    }
+    return r;
+  }
+  return lastResponse;
+}
+
 // ───── HTML escape ───────────────────────────────────────────────
 function esc(s) {
   return String(s ?? '').replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
@@ -311,6 +351,14 @@ async function handleInviteeCreated(p, env) {
     } catch (_) {}
   }
 
+  // Resend rate-limit: max 5 req/s. We fire 7 scheduled emails in this
+  // sequence + the internal notify above = 8 POSTs. Add 250ms delay
+  // between calls so we stay at ~4 req/s comfortably under the cap.
+  // Each delay is a hot await, total adds ~1.5s to booking processing
+  // time which is well within Calendly's 10s webhook timeout.
+  const RATE_LIMIT_DELAY_MS = 250;
+  const sleep = () => new Promise(r => setTimeout(r, RATE_LIMIT_DELAY_MS));
+
   // ───── Confirmation email (5 min delay, with auto-generated .ics) ─────
   try {
     await sendInviteeConfirmation(env, {
@@ -326,6 +374,7 @@ async function handleInviteeCreated(p, env) {
       });
     } catch (_) {}
   }
+  await sleep();
 
   // ───── T-24h pre-call reminder (day before, with Meet link + .ics) ─────
   try {
@@ -341,6 +390,7 @@ async function handleInviteeCreated(p, env) {
       });
     } catch (_) {}
   }
+  await sleep();
 
   // ───── T-1h pre-call reminder (one hour before, just the join link) ─────
   try {
@@ -356,6 +406,7 @@ async function handleInviteeCreated(p, env) {
       });
     } catch (_) {}
   }
+  await sleep();
 
   // ───── T-6h last-call reminder ─────
   try {
@@ -371,6 +422,7 @@ async function handleInviteeCreated(p, env) {
       });
     } catch (_) {}
   }
+  await sleep();
 
   // ───── T-15min attendance-confirmation ping (with "I'll be there" button) ─────
   try {
@@ -386,6 +438,7 @@ async function handleInviteeCreated(p, env) {
       });
     } catch (_) {}
   }
+  await sleep();
 
   // ───── Post-meeting RECAP (30 min after meeting end) ─────
   try {
@@ -401,6 +454,7 @@ async function handleInviteeCreated(p, env) {
       });
     } catch (_) {}
   }
+  await sleep();
 
   // ───── T+72h rebook CTA ("worth another conversation?") ─────
   try {
