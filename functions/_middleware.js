@@ -449,6 +449,47 @@ class FooterInjector {
   }
 }
 
+// Strips the OLD inline nav (`<nav class="nav" id="mainNav">`) and the
+// mobile drawer (`<div class="mobile-drawer" id="mobileDrawer">`) from
+// pages where we're injecting the master. Without this, pillar pages
+// stack two navs - the old inline one + the new master one - and the
+// user sees doubled chrome.
+//
+// Same logic for the OLD footer (any `<footer>` with .footer-main or
+// .site-footer class) - we remove it and let the injected master
+// footer be the only one.
+class OldNavRemover {
+  element(el) {
+    const id = el.getAttribute('id') || '';
+    const cls = el.getAttribute('class') || '';
+    // Match the old inline nav (id=mainNav) but NOT the master nav
+    // (id=mcMasterNav, class includes mc-master-nav).
+    if (id === 'mainNav' || (/\bnav\b/.test(cls) && !/\bmc-master-nav\b/.test(cls))) {
+      el.remove();
+    }
+  }
+}
+class OldDrawerRemover {
+  element(el) {
+    const id = el.getAttribute('id') || '';
+    const cls = el.getAttribute('class') || '';
+    if (id === 'mobileDrawer' || /\bmobile-drawer\b/.test(cls)) {
+      // Don't remove the master drawer
+      if (id === 'mcMasterDrawer' || /\bmc-master-nav-drawer\b/.test(cls)) return;
+      el.remove();
+    }
+  }
+}
+class OldFooterRemover {
+  element(el) {
+    const cls = el.getAttribute('class') || '';
+    // Skip the master footer
+    if (/\bmc-master-footer\b/.test(cls)) return;
+    // Remove any other <footer> element
+    el.remove();
+  }
+}
+
 // ────────────────────────────────────────────────────────────────────
 // 2. Maintenance banner (legacy - kept for ops use)
 // ────────────────────────────────────────────────────────────────────
@@ -513,6 +554,16 @@ export async function onRequest(context) {
   if (injectChrome) {
     const navHtml = getMasterNav();
     const footHtml = getMasterFooter();
+
+    // Strip the page's OLD inline nav/drawer/footer so we don't render
+    // doubled chrome. HTMLRewriter handlers fire in DOM order during the
+    // same streaming pass - el.remove() runs before el.prepend()/append()
+    // on <body>, so the removed elements are gone by the time the master
+    // ones get appended/prepended.
+    rewriter.on('nav', new OldNavRemover());
+    rewriter.on('div', new OldDrawerRemover());
+    rewriter.on('footer', new OldFooterRemover());
+
     if (navHtml) rewriter.on('body', new NavInjector(navHtml));
     if (footHtml) rewriter.on('body', new FooterInjector(footHtml));
   }
