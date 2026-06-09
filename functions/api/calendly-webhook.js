@@ -636,6 +636,10 @@ async function sendInviteeConfirmation(env, { inviteeEmail, inviteeName, eventNa
     auditPayload.mode = mode;
     auditPayload.step = 'mode_detected';
 
+    // Mark's directive: WETYR bookings get the EXACT same emails as MarkCMO.
+    // Keep mode='wetyr' for audit/analytics, but use the discovery copy.
+    if (mode === 'wetyr') mode = 'discovery';
+
     const COPY = {
       discovery: {
         subject: `Confirming our meeting on ${whenDayTime}`,
@@ -697,11 +701,9 @@ async function sendInviteeConfirmation(env, { inviteeEmail, inviteeName, eventNa
     let icsAttachment = null;
     if (scheduledAt) {
       try {
-        const organizerEmail = mode === 'wetyr' ? 'info@wetyr.com' : 'mark@markcmo.com';
-        const organizerName = mode === 'wetyr' ? 'WETYR' : 'Mark Gabrielli';
-        const meetingSummary = mode === 'wetyr'
-          ? `WETYR meeting with Mark Gabrielli`
-          : `${eventName} with Mark Gabrielli`;
+        const organizerEmail = 'mark@markcmo.com';
+        const organizerName = 'Mark Gabrielli';
+        const meetingSummary = `${eventName} with Mark Gabrielli`;
         const meetingDescription = meetingLink
           ? `Looking forward to our conversation!\\n\\nJoin: ${meetingLink}`
           : `Looking forward to our conversation!`;
@@ -844,8 +846,8 @@ async function schedulePostMeetingFollowup(env, { inviteeEmail, inviteeName, eve
     auditPayload.step = 'computed_send_at';
 
     const _n = (eventName || '').toLowerCase();
-    const isWetyr = _n.indexOf('wetyr') >= 0;
-    auditPayload.mode = isWetyr ? 'wetyr' : 'markcmo';
+    const isWetyr = false; // Mark's directive - WETYR bookings use MarkCMO emails
+    auditPayload.mode = (_n.indexOf('wetyr') >= 0) ? 'wetyr' : 'markcmo';
 
     const firstName = (inviteeName || '').split(' ')[0] || 'there';
     // Recap email - Mark's voice. Thanks them + clear bullets on what
@@ -924,8 +926,8 @@ Mark`;
 </body></html>`;
     auditPayload.step = 'composed';
 
-    const fromAddr = isWetyr ? 'WETYR <info@wetyr.com>' : 'Mark Gabrielli <mark@markcmo.com>';
-    const replyTo = isWetyr ? 'prep@wetyr.com' : 'prep@markcmo.com';
+    const fromAddr = 'Mark Gabrielli <mark@markcmo.com>';
+    const replyTo = 'prep@markcmo.com';
     const idempotencyKey = `cal-followup-${inviteeUri || inviteeEmail || 'unknown'}`.substring(0, 256);
 
     auditPayload.step = 'queuing';
@@ -947,7 +949,7 @@ Mark`;
         scheduled_at: sendAt,
         tags: [
           { name: 'category', value: 'calendly_followup' },
-          { name: 'mode', value: isWetyr ? 'wetyr' : 'markcmo' },
+          { name: 'mode', value: (_n.indexOf('wetyr') >= 0) ? 'wetyr' : 'markcmo' },
         ],
       }),
     });
@@ -1041,8 +1043,8 @@ async function scheduleDayBeforeReminder(env, { inviteeEmail, inviteeName, event
     auditPayload.send_at = sendAt;
 
     const _n = (eventName || '').toLowerCase();
-    const isWetyr = _n.indexOf('wetyr') >= 0;
-    auditPayload.mode = isWetyr ? 'wetyr' : 'markcmo';
+    const isWetyr = false; // Mark's directive - WETYR bookings use MarkCMO emails
+    auditPayload.mode = (_n.indexOf('wetyr') >= 0) ? 'wetyr' : 'markcmo';
 
     // Format day + time in US/Eastern
     const dt = new Date(scheduledAt);
@@ -1050,8 +1052,8 @@ async function scheduleDayBeforeReminder(env, { inviteeEmail, inviteeName, event
     const whenTime = dt.toLocaleString('en-US', { hour: 'numeric', minute: '2-digit', hour12: true, timeZone: 'America/New_York' }) + ' ET';
     const firstName = (inviteeName || '').split(' ')[0] || 'there';
 
-    const fromAddr = isWetyr ? 'WETYR <info@wetyr.com>' : 'Mark Gabrielli <mark@markcmo.com>';
-    const replyTo = isWetyr ? 'prep@wetyr.com' : 'prep@markcmo.com';
+    const fromAddr = 'Mark Gabrielli <mark@markcmo.com>';
+    const replyTo = 'prep@markcmo.com';
     const subject = `Tomorrow at ${whenTime} - confirm to hold your slot`;
 
     // Generate a signed token for the "I'll be there" button so the
@@ -1060,7 +1062,7 @@ async function scheduleDayBeforeReminder(env, { inviteeEmail, inviteeName, event
     // (startMs already declared at top of function, reusing it.)
     const confirmExpiryMs = startMs + 4 * 60 * 60 * 1000;
     const confirmToken = await signAttendanceToken(env, { inviteeUri: calendlyInviteeUri, expiryMs: confirmExpiryMs });
-    const baseOrigin = isWetyr ? 'https://wetyr.com' : 'https://markcmo.com';
+    const baseOrigin = 'https://markcmo.com';
     const confirmUrl = `${baseOrigin}/api/confirm-attendance?token=${confirmToken}`;
 
     const joinLine = meetingLink ? `Join: ${meetingLink}` : 'Join link is in the Calendly invite.';
@@ -1092,13 +1094,13 @@ Mark`;
     let icsAttachment = null;
     if (scheduledAt) {
       try {
-        const organizerEmail = isWetyr ? 'info@wetyr.com' : 'mark@markcmo.com';
-        const organizerName = isWetyr ? 'WETYR' : 'Mark Gabrielli';
+        const organizerEmail = 'mark@markcmo.com';
+        const organizerName = 'Mark Gabrielli';
         const icsBase64 = buildIcsBase64({
           uid: (calendlyInviteeUri || `${inviteeEmail}-${scheduledAt}`).replace(/[^a-z0-9-]/gi, ''),
           startUtcIso: scheduledAt,
           endUtcIso: eventEndAt,
-          summary: isWetyr ? `WETYR meeting with Mark Gabrielli` : `${eventName} with Mark Gabrielli`,
+          summary: `${eventName} with Mark Gabrielli`,
           description: meetingLink ? `Join: ${meetingLink}` : 'Calendly meeting',
           location: meetingLink || '',
           organizerEmail,
@@ -1119,7 +1121,7 @@ Mark`;
       scheduled_at: sendAt,
       tags: [
         { name: 'category', value: 'calendly_24h_reminder' },
-        { name: 'mode', value: isWetyr ? 'wetyr' : 'markcmo' },
+        { name: 'mode', value: (_n.indexOf('wetyr') >= 0) ? 'wetyr' : 'markcmo' },
       ],
     };
     if (icsAttachment) sendBody.attachments = [icsAttachment];
@@ -1213,15 +1215,15 @@ async function scheduleHourBeforeReminder(env, { inviteeEmail, inviteeName, even
     auditPayload.send_at = sendAt;
 
     const _n = (eventName || '').toLowerCase();
-    const isWetyr = _n.indexOf('wetyr') >= 0;
-    auditPayload.mode = isWetyr ? 'wetyr' : 'markcmo';
+    const isWetyr = false; // Mark's directive - WETYR bookings use MarkCMO emails
+    auditPayload.mode = (_n.indexOf('wetyr') >= 0) ? 'wetyr' : 'markcmo';
 
     const dt = new Date(scheduledAt);
     const whenTime = dt.toLocaleString('en-US', { hour: 'numeric', minute: '2-digit', hour12: true, timeZone: 'America/New_York' }) + ' ET';
     const firstName = (inviteeName || '').split(' ')[0] || 'there';
 
-    const fromAddr = isWetyr ? 'WETYR <info@wetyr.com>' : 'Mark Gabrielli <mark@markcmo.com>';
-    const replyTo = isWetyr ? 'prep@wetyr.com' : 'prep@markcmo.com';
+    const fromAddr = 'Mark Gabrielli <mark@markcmo.com>';
+    const replyTo = 'prep@markcmo.com';
     const subject = `See you in an hour`;
 
     const joinLine = meetingLink ? meetingLink : 'Check the Calendly invite for the join link.';
@@ -1260,7 +1262,7 @@ Mark`;
         scheduled_at: sendAt,
         tags: [
           { name: 'category', value: 'calendly_1h_reminder' },
-          { name: 'mode', value: isWetyr ? 'wetyr' : 'markcmo' },
+          { name: 'mode', value: (_n.indexOf('wetyr') >= 0) ? 'wetyr' : 'markcmo' },
         ],
       }),
     });
@@ -1347,8 +1349,8 @@ async function scheduleSixHoursBeforeReminder(env, { inviteeEmail, inviteeName, 
     auditPayload.send_at = sendAt;
 
     const _n = (eventName || '').toLowerCase();
-    const isWetyr = _n.indexOf('wetyr') >= 0;
-    auditPayload.mode = isWetyr ? 'wetyr' : 'markcmo';
+    const isWetyr = false; // Mark's directive - WETYR bookings use MarkCMO emails
+    auditPayload.mode = (_n.indexOf('wetyr') >= 0) ? 'wetyr' : 'markcmo';
 
     const dt = new Date(scheduledAt);
     const whenTime = dt.toLocaleString('en-US', { hour: 'numeric', minute: '2-digit', hour12: true, timeZone: 'America/New_York' }) + ' ET';
@@ -1357,12 +1359,12 @@ async function scheduleSixHoursBeforeReminder(env, { inviteeEmail, inviteeName, 
     // Same signed confirm token as the T-24h and T-15min emails
     const confirmExpiryMs = startMs + 4 * 60 * 60 * 1000;
     const confirmToken = await signAttendanceToken(env, { inviteeUri: calendlyInviteeUri, expiryMs: confirmExpiryMs });
-    const baseOrigin = isWetyr ? 'https://wetyr.com' : 'https://markcmo.com';
+    const baseOrigin = 'https://markcmo.com';
     const confirmUrl = `${baseOrigin}/api/confirm-attendance?token=${confirmToken}`;
     auditPayload.confirm_url = confirmUrl;
 
-    const fromAddr = isWetyr ? 'WETYR <info@wetyr.com>' : 'Mark Gabrielli <mark@markcmo.com>';
-    const replyTo = isWetyr ? 'prep@wetyr.com' : 'prep@markcmo.com';
+    const fromAddr = 'Mark Gabrielli <mark@markcmo.com>';
+    const replyTo = 'prep@markcmo.com';
     const subject = `Last call - your meeting at ${whenTime}`;
 
     const text = `Hi ${firstName},
@@ -1403,7 +1405,7 @@ Mark`;
         scheduled_at: sendAt,
         tags: [
           { name: 'category', value: 'calendly_6h_lastcall' },
-          { name: 'mode', value: isWetyr ? 'wetyr' : 'markcmo' },
+          { name: 'mode', value: (_n.indexOf('wetyr') >= 0) ? 'wetyr' : 'markcmo' },
         ],
       }),
     });
@@ -1528,8 +1530,8 @@ async function scheduleAttendanceConfirmation(env, { inviteeEmail, inviteeName, 
     auditPayload.send_at = sendAt;
 
     const _n = (eventName || '').toLowerCase();
-    const isWetyr = _n.indexOf('wetyr') >= 0;
-    auditPayload.mode = isWetyr ? 'wetyr' : 'markcmo';
+    const isWetyr = false; // Mark's directive - WETYR bookings use MarkCMO emails
+    auditPayload.mode = (_n.indexOf('wetyr') >= 0) ? 'wetyr' : 'markcmo';
 
     const dt = new Date(scheduledAt);
     const whenTime = dt.toLocaleString('en-US', { hour: 'numeric', minute: '2-digit', hour12: true, timeZone: 'America/New_York' }) + ' ET';
@@ -1539,12 +1541,12 @@ async function scheduleAttendanceConfirmation(env, { inviteeEmail, inviteeName, 
     // meeting start (covers meeting + buffer + slack for late clicks).
     const expiryMs = startMs + 4 * 60 * 60 * 1000;
     const token = await signAttendanceToken(env, { inviteeUri: calendlyInviteeUri, expiryMs });
-    const baseOrigin = isWetyr ? 'https://wetyr.com' : 'https://markcmo.com';
+    const baseOrigin = 'https://markcmo.com';
     const confirmUrl = `${baseOrigin}/api/confirm-attendance?token=${token}`;
     auditPayload.confirm_url = confirmUrl;
 
-    const fromAddr = isWetyr ? 'WETYR <info@wetyr.com>' : 'Mark Gabrielli <mark@markcmo.com>';
-    const replyTo = isWetyr ? 'prep@wetyr.com' : 'prep@markcmo.com';
+    const fromAddr = 'Mark Gabrielli <mark@markcmo.com>';
+    const replyTo = 'prep@markcmo.com';
     const subject = `See you in 15 minutes`;
 
     const joinLine = meetingLink || 'Check the calendar invite for the join link.';
@@ -1590,7 +1592,7 @@ Mark`;
         scheduled_at: sendAt,
         tags: [
           { name: 'category', value: 'calendly_15min_confirm' },
-          { name: 'mode', value: isWetyr ? 'wetyr' : 'markcmo' },
+          { name: 'mode', value: (_n.indexOf('wetyr') >= 0) ? 'wetyr' : 'markcmo' },
         ],
       }),
     });
@@ -1689,12 +1691,12 @@ async function scheduleRebookCta(env, { inviteeEmail, inviteeName, eventName, sc
     auditPayload.send_at = sendAt;
 
     const _n = (eventName || '').toLowerCase();
-    const isWetyr = _n.indexOf('wetyr') >= 0;
-    auditPayload.mode = isWetyr ? 'wetyr' : 'markcmo';
+    const isWetyr = false; // Mark's directive - WETYR bookings use MarkCMO emails
+    auditPayload.mode = (_n.indexOf('wetyr') >= 0) ? 'wetyr' : 'markcmo';
 
     const firstName = (inviteeName || '').split(' ')[0] || 'there';
-    const fromAddr = isWetyr ? 'WETYR <info@wetyr.com>' : 'Mark Gabrielli <mark@markcmo.com>';
-    const replyTo = isWetyr ? 'prep@wetyr.com' : 'prep@markcmo.com';
+    const fromAddr = 'Mark Gabrielli <mark@markcmo.com>';
+    const replyTo = 'prep@markcmo.com';
     const bookingUrl = isWetyr
       ? 'https://wetyr.com/contact.html'  // WETYR doesn't have a public booking page; route to contact
       : 'https://markcmo.com/book';
@@ -1736,7 +1738,7 @@ async function scheduleRebookCta(env, { inviteeEmail, inviteeName, eventName, sc
         scheduled_at: sendAt,
         tags: [
           { name: 'category', value: 'calendly_rebook_cta' },
-          { name: 'mode', value: isWetyr ? 'wetyr' : 'markcmo' },
+          { name: 'mode', value: (_n.indexOf('wetyr') >= 0) ? 'wetyr' : 'markcmo' },
         ],
       }),
     });
