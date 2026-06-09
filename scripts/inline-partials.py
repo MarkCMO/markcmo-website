@@ -1,6 +1,10 @@
 #!/usr/bin/env python
-"""Inline partials/master-*.html into functions/_middleware.js."""
-import sys, os
+"""Re-inline partials/master-*.html into functions/_middleware.js.
+
+Updates the existing MASTER_NAV_HTML and MASTER_FOOTER_HTML constants.
+Run after editing either partial file.
+"""
+import os, re
 
 base = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 os.chdir(base)
@@ -9,36 +13,53 @@ with open('partials/master-nav.html', encoding='utf-8') as f: nav = f.read()
 with open('partials/master-footer.html', encoding='utf-8') as f: foot = f.read()
 with open('functions/_middleware.js', encoding='utf-8') as f: mw = f.read()
 
+
 def to_js(s):
-    return chr(96) + s.replace(chr(92), chr(92)+chr(92)).replace(chr(96), chr(92)+chr(96)).replace('${', chr(92)+'${') + chr(96)
+    BT = chr(96)  # backtick
+    BS = chr(92)  # backslash
+    return BT + s.replace(BS, BS + BS).replace(BT, BS + BT).replace('${', BS + '${') + BT
+
 
 nav_lit = to_js(nav)
 foot_lit = to_js(foot)
 
-start_marker = 'let _navPartial = null;'
-end_marker = 'async function getMasterFooter(env) {'
-s_idx = mw.find(start_marker)
-e_idx_start = mw.find(end_marker)
-e_idx_end_brace = mw.find('\n}', e_idx_start)
-if s_idx < 0 or e_idx_start < 0 or e_idx_end_brace < 0:
-    raise SystemExit('markers not found')
+# Replace MASTER_NAV_HTML constant
+m_nav = re.search(r'const MASTER_NAV_HTML = `', mw)
+if not m_nav:
+    raise SystemExit('MASTER_NAV_HTML marker not found')
+# Find the matching closing backtick (accounting for nested backticks via JS escapes)
+start = m_nav.end() - 1  # position of opening backtick
+depth = 0
+i = start + 1
+while i < len(mw):
+    c = mw[i]
+    if c == chr(92) and i + 1 < len(mw):
+        i += 2  # skip escaped char
+        continue
+    if c == chr(96):
+        break
+    i += 1
+nav_end = i  # position of closing backtick
+mw = mw[:start] + nav_lit + mw[nav_end + 1:]
 
-new_block = (
-    '// Inlined partials - single source of truth.\n'
-    '// To edit nav/footer, modify partials/master-nav.html or master-footer.html\n'
-    '// and re-run: python scripts/inline-partials.py\n'
-    'const MASTER_NAV_HTML = ' + nav_lit + ';\n\n'
-    'const MASTER_FOOTER_HTML = ' + foot_lit + ';\n\n'
-    'function getMasterNav() { return MASTER_NAV_HTML; }\n'
-    'function getMasterFooter() { return MASTER_FOOTER_HTML; }'
-)
-
-mw_new = mw[:s_idx] + new_block + mw[e_idx_end_brace + 2:]
-mw_new = mw_new.replace('getMasterNav(env)', 'getMasterNav()')
-mw_new = mw_new.replace('getMasterFooter(env)', 'getMasterFooter()')
+# Replace MASTER_FOOTER_HTML constant
+m_foot = re.search(r'const MASTER_FOOTER_HTML = `', mw)
+if not m_foot:
+    raise SystemExit('MASTER_FOOTER_HTML marker not found')
+start = m_foot.end() - 1
+i = start + 1
+while i < len(mw):
+    c = mw[i]
+    if c == chr(92) and i + 1 < len(mw):
+        i += 2
+        continue
+    if c == chr(96):
+        break
+    i += 1
+foot_end = i
+mw = mw[:start] + foot_lit + mw[foot_end + 1:]
 
 with open('functions/_middleware.js', 'w', encoding='utf-8') as f:
-    f.write(mw_new)
-
+    f.write(mw)
 print('inlined nav', len(nav), 'chars + footer', len(foot), 'chars')
-print('middleware:', len(mw_new), 'chars')
+print('middleware:', len(mw), 'chars')
