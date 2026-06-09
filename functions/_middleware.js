@@ -396,14 +396,18 @@ function getMasterNav() { return MASTER_NAV_HTML; }
 function getMasterFooter() { return MASTER_FOOTER_HTML; }
 
 // Exact paths that already have their own nav/footer inlined and should
-// NOT receive injection. The homepage is the canonical source of truth;
-// admin/auth/checkout pages have their own chrome.
+// NOT receive injection.
 //
-// NOTE: this is matched by exact path (with and without trailing
-// /index.html), not a prefix. For prefix-based skips, see SKIP_PATH_PREFIXES.
+// HISTORY: '/' and '/index.html' USED to be here so the homepage kept its
+// inline nav + footer. But some script on the homepage was removing the
+// inline <footer> from the DOM at load time, leaving the page footerless.
+// Solution: remove them from this set so middleware injects the master
+// nav + master footer on the homepage too. The master nav is a faithful
+// copy of the homepage's inline nav, so this is functionally identical
+// for users but eliminates the footer-removal bug.
 const PATHS_WITH_OWN_CHROME = new Set([
-  '/',
-  '/index.html',
+  // Empty for now - all paths get master injection unless matched by
+  // SKIP_PATH_PREFIXES below.
 ]);
 
 // Path prefixes that should NEVER have nav/footer injected (admin
