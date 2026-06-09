@@ -452,19 +452,28 @@ class FooterInjector {
 // Strips the OLD inline nav (`<nav class="nav" id="mainNav">`) and the
 // mobile drawer (`<div class="mobile-drawer" id="mobileDrawer">`) from
 // pages where we're injecting the master. Without this, pillar pages
-// stack two navs - the old inline one + the new master one - and the
-// user sees doubled chrome.
+// stack two navs - the old inline one + the new master one.
 //
-// Same logic for the OLD footer (any `<footer>` with .footer-main or
-// .site-footer class) - we remove it and let the injected master
-// footer be the only one.
+// Same logic for the OLD footer (any `<footer>` not the master) - we
+// remove it and let the injected master footer be the only one.
+//
+// IMPORTANT: identity checks use exact class strings, NOT regex \bword\b,
+// because hyphens are word boundaries in JS regex. /\bnav\b/.test('mc-master-nav')
+// returns TRUE because the regex matches the trailing "nav" segment after
+// the hyphen. So we use a token-aware containsClass helper that splits on
+// whitespace and checks for exact membership.
+function hasClass(el, name) {
+  const cls = el.getAttribute('class') || '';
+  return cls.split(/\s+/).indexOf(name) >= 0;
+}
+
 class OldNavRemover {
   element(el) {
     const id = el.getAttribute('id') || '';
-    const cls = el.getAttribute('class') || '';
-    // Match the old inline nav (id=mainNav) but NOT the master nav
-    // (id=mcMasterNav, class includes mc-master-nav).
-    if (id === 'mainNav' || (/\bnav\b/.test(cls) && !/\bmc-master-nav\b/.test(cls))) {
+    // Skip the master nav explicitly
+    if (id === 'mcMasterNav' || hasClass(el, 'mc-master-nav')) return;
+    // Remove the legacy homepage-style inline nav
+    if (id === 'mainNav' || hasClass(el, 'nav')) {
       el.remove();
     }
   }
@@ -472,20 +481,18 @@ class OldNavRemover {
 class OldDrawerRemover {
   element(el) {
     const id = el.getAttribute('id') || '';
-    const cls = el.getAttribute('class') || '';
-    if (id === 'mobileDrawer' || /\bmobile-drawer\b/.test(cls)) {
-      // Don't remove the master drawer
-      if (id === 'mcMasterDrawer' || /\bmc-master-nav-drawer\b/.test(cls)) return;
+    // Skip the master drawer
+    if (id === 'mcMasterDrawer' || hasClass(el, 'mc-master-nav-drawer')) return;
+    if (id === 'mobileDrawer' || hasClass(el, 'mobile-drawer')) {
       el.remove();
     }
   }
 }
 class OldFooterRemover {
   element(el) {
-    const cls = el.getAttribute('class') || '';
+    const id = el.getAttribute('id') || '';
     // Skip the master footer
-    if (/\bmc-master-footer\b/.test(cls)) return;
-    // Remove any other <footer> element
+    if (id === 'mcMasterFooter' || hasClass(el, 'mc-master-footer')) return;
     el.remove();
   }
 }
