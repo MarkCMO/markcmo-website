@@ -161,20 +161,38 @@ export async function onRequest(context) {
 
   const response = await next();
   const ct = response.headers.get('content-type') || '';
-  if (!ct.includes('text/html')) return response;
+
+  // Always tag responses with a debug header so we can verify middleware
+  // is firing. Remove once nav injection is confirmed working.
+  const dbg = { ct: ct.slice(0, 30), path: url.pathname.slice(0, 60) };
+
+  if (!ct.includes('text/html')) {
+    const out = new Response(response.body, response);
+    out.headers.set('X-MW', `skip:nothtml ct=${dbg.ct}`);
+    return out;
+  }
 
   const message = (env.MAINTENANCE_MESSAGE || '').trim();
   const injectChrome = shouldInjectChrome(url);
+  dbg.injectChrome = injectChrome;
+  dbg.hasAssets = !!(env.ASSETS && typeof env.ASSETS.fetch === 'function');
 
-  if (!message && !injectChrome) return response;
+  if (!message && !injectChrome) {
+    const out = new Response(response.body, response);
+    out.headers.set('X-MW', `skip:nochrome path=${dbg.path}`);
+    return out;
+  }
 
   const rewriter = new HTMLRewriter();
+  let navLen = 0, footLen = 0;
 
   if (injectChrome) {
     const [navHtml, footHtml] = await Promise.all([
       getMasterNav(env),
       getMasterFooter(env),
     ]);
+    navLen = navHtml ? navHtml.length : 0;
+    footLen = footHtml ? footHtml.length : 0;
     if (navHtml) rewriter.on('body', new NavInjector(navHtml));
     if (footHtml) rewriter.on('body', new FooterInjector(footHtml));
   }
@@ -184,5 +202,10 @@ export async function onRequest(context) {
     rewriter.on('body', new BannerInjector(message));
   }
 
-  return rewriter.transform(response);
+  const transformed = rewriter.transform(response);
+  // Clone so we can add a debug header (transformed responses' headers
+  // are read-only on the streaming Response).
+  const out = new Response(transformed.body, transformed);
+  out.headers.set('X-MW', `inject path=${dbg.path} assets=${dbg.hasAssets} nav=${navLen} foot=${footLen}`);
+  return out;
 }
