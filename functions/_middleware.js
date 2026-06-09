@@ -19,36 +19,377 @@
 // In-memory cache per worker isolate. Workers stay warm so we avoid
 // re-fetching the partials on every HTML hit. To bust after editing,
 // just redeploy (which spawns fresh isolates).
-let _navPartial = null;
-let _footPartial = null;
+// Inlined partials - single source of truth.
+// To edit nav/footer, modify partials/master-nav.html or master-footer.html
+// and re-run: python scripts/inline-partials.py
+const MASTER_NAV_HTML = `<!--
+  master-nav.html  —  CANONICAL TOP NAV for markcmo.com
+  ───────────────────────────────────────────────────────────────────
+  This is the single source of truth for the site header. It is read
+  by functions/_middleware.js at request time and injected into the
+  start of <body> on every HTML page that does NOT already contain
+  <nav class="nav" id="mainNav"> (e.g. the homepage, which has it
+  inlined for SEO/perf).
 
-async function loadPartial(env, path) {
-  try {
-    const url = `https://placeholder.invalid${path}`;
-    const res = await env.ASSETS.fetch(new Request(url));
-    if (!res.ok) {
-      console.warn(`master-partial fetch ${path} -> HTTP ${res.status}`);
-      return '';
-    }
-    return await res.text();
-  } catch (e) {
-    console.warn(`master-partial fetch ${path} crashed:`, e && e.message);
-    return '';
-  }
+  ANY change here propagates to every page in the site on next request
+  (modulo edge cache TTL). DO NOT edit per-page navs — edit here.
+
+  Includes:
+    - Scoped CSS variables (mc-* prefix to avoid colliding with page CSS)
+    - The <nav> element + <div class="mobile-drawer">
+    - Hamburger toggle JS
+
+  Mobile breakpoint: collapses links + button into hamburger drawer
+  at max-width 1100px (matches homepage).
+-->
+
+<style id="mc-master-nav-css">
+/* Scoped CSS variables - safe to embed even if the page already has them */
+.mc-master-nav,.mc-master-nav-drawer {
+  --mc-bg:      #0A0F2C;
+  --mc-accent:  #C9A84C;
+  --mc-border:  rgba(255,255,255,0.08);
+  --mc-text2:   #A1A1AA;
+  --mc-text3:   #71717A;
 }
 
-async function getMasterNav(env) {
-  if (_navPartial === null) {
-    _navPartial = await loadPartial(env, '/partials/master-nav.html');
-  }
-  return _navPartial;
+.mc-master-nav {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+  height: 64px; padding: 0 5vw;
+  display: flex; align-items: center; justify-content: space-between;
+  background: rgba(10,15,44,0.85);
+  -webkit-backdrop-filter: blur(20px);
+  backdrop-filter: blur(20px);
+  border-bottom: 1px solid var(--mc-border);
+  font-family: -apple-system, BlinkMacSystemFont, 'Outfit', 'Inter', 'SF Pro Text', 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
 }
-async function getMasterFooter(env) {
-  if (_footPartial === null) {
-    _footPartial = await loadPartial(env, '/partials/master-footer.html');
-  }
-  return _footPartial;
+.mc-master-nav a { text-decoration: none; color: inherit; }
+
+.mc-master-nav .mc-logo {
+  display: flex; align-items: center; gap: 10px;
+  font-family: 'Outfit', sans-serif; font-size: 1.1rem; font-weight: 700;
+  color: #fff;
 }
+.mc-master-nav .mc-logo-avatar {
+  width: 34px; height: 34px; border-radius: 50%;
+  overflow: hidden; flex-shrink: 0;
+  border: 2px solid var(--mc-accent);
+  box-shadow: 0 0 10px rgba(201,168,76,0.35);
+}
+.mc-master-nav .mc-logo-avatar img {
+  width: 100%; height: 100%; object-fit: cover; object-position: center top;
+}
+.mc-master-nav .mc-logo-text { display: flex; flex-direction: column; line-height: 1.1; }
+.mc-master-nav .mc-logo-text strong { font-size: 0.95rem; font-weight: 800; color: #fff; }
+.mc-master-nav .mc-logo-text span { font-size: 0.65rem; font-weight: 500; color: var(--mc-text3); letter-spacing: 0.06em; text-transform: uppercase; }
+
+.mc-master-nav .mc-links {
+  display: flex; align-items: center; gap: 2.5rem;
+  list-style: none; margin: 0; padding: 0;
+}
+.mc-master-nav .mc-links a {
+  font-size: 0.875rem; font-weight: 500; color: var(--mc-text2);
+  transition: color 0.15s;
+}
+.mc-master-nav .mc-links a:hover { color: #fff; }
+.mc-master-nav .mc-links a.mc-accent { color: var(--mc-accent); font-weight: 600; }
+
+.mc-master-nav .mc-right { display: flex; align-items: center; gap: 1.5rem; }
+.mc-master-nav .mc-btn {
+  font-size: 0.875rem; font-weight: 600; color: #0a0f2c;
+  background: var(--mc-accent); padding: 0.55rem 1.25rem;
+  border-radius: 8px; transition: opacity 0.15s, transform 0.15s;
+  letter-spacing: 0.01em;
+}
+.mc-master-nav .mc-btn:hover { opacity: 0.88; transform: translateY(-1px); }
+
+.mc-master-nav .mc-ham {
+  display: none; flex-direction: column; gap: 5px;
+  cursor: pointer; padding: 4px;
+}
+.mc-master-nav .mc-ham span {
+  display: block; width: 22px; height: 2px;
+  background: #fff; border-radius: 2px;
+  transition: transform 0.2s, opacity 0.2s;
+}
+
+.mc-master-nav-drawer {
+  display: none; position: fixed; inset: 0; z-index: 99;
+  background: var(--mc-bg); padding: 80px 6vw 40px;
+  flex-direction: column; gap: 1.25rem;
+  font-family: -apple-system, BlinkMacSystemFont, 'Outfit', 'Inter', sans-serif;
+}
+.mc-master-nav-drawer.mc-open { display: flex; }
+.mc-master-nav-drawer a {
+  font-size: 1.2rem; font-weight: 600; color: #fff;
+  padding: 0.6rem 0; border-bottom: 1px solid var(--mc-border);
+  text-decoration: none;
+}
+.mc-master-nav-drawer a.mc-accent { color: var(--mc-accent); font-weight: 700; }
+
+/* Spacer so page content doesn't render under the fixed nav */
+.mc-master-nav-spacer { height: 64px; }
+
+/* Mobile collapse - hide links + button, show hamburger */
+@media (max-width: 1100px) {
+  .mc-master-nav .mc-links { display: none; }
+  .mc-master-nav .mc-right .mc-btn { display: none; }
+  .mc-master-nav .mc-ham { display: flex; }
+}
+</style>
+
+<nav class="mc-master-nav" id="mcMasterNav">
+  <a href="/" class="mc-logo">
+    <div class="mc-logo-avatar">
+      <img src="/assets/mark-gabrielli.jpg" alt="Mark Gabrielli" onerror="this.parentElement.innerHTML='<span style=\\'display:flex;align-items:center;justify-content:center;width:100%;height:100%;font-family:Outfit,sans-serif;font-weight:900;font-size:1rem;color:#fff;background:#C9A84C\\'>M</span>'" />
+    </div>
+    <div class="mc-logo-text">
+      <strong>Mark Gabrielli</strong>
+      <span>Fractional CMO &amp; COO</span>
+    </div>
+  </a>
+  <ul class="mc-links">
+    <li><a href="/about">About</a></li>
+    <li><a href="/services">Services</a></li>
+    <li><a href="/magnet-framework" class="mc-accent">MAGNET&trade;</a></li>
+    <li><a href="/apps" class="mc-accent">Apps</a></li>
+    <li><a href="/results">Results</a></li>
+    <li><a href="/blog">Insights</a></li>
+    <li><a href="https://academy.markcmo.com" target="_blank" rel="noopener" class="mc-accent">Academy</a></li>
+  </ul>
+  <div class="mc-right">
+    <a href="/book" class="mc-btn">Book a Free Call</a>
+  </div>
+  <div class="mc-ham" id="mcMasterHam" aria-label="Menu" role="button" tabindex="0"><span></span><span></span><span></span></div>
+</nav>
+
+<div class="mc-master-nav-drawer" id="mcMasterDrawer">
+  <a href="/about">About</a>
+  <a href="/services">Services</a>
+  <a href="/magnet-framework" class="mc-accent">MAGNET Framework&trade;</a>
+  <a href="/apps" class="mc-accent">Apps</a>
+  <a href="/results">Results</a>
+  <a href="/blog">Insights</a>
+  <a href="https://academy.markcmo.com" target="_blank" rel="noopener">Academy</a>
+  <a href="/book" class="mc-accent">Book a Free Strategy Call &rarr;</a>
+</div>
+
+<div class="mc-master-nav-spacer" aria-hidden="true"></div>
+
+<script id="mc-master-nav-js">
+(function(){
+  var ham = document.getElementById('mcMasterHam');
+  var drawer = document.getElementById('mcMasterDrawer');
+  if (!ham || !drawer) return;
+  function toggle(){ drawer.classList.toggle('mc-open'); }
+  function close(){ drawer.classList.remove('mc-open'); }
+  ham.addEventListener('click', toggle);
+  ham.addEventListener('keydown', function(e){ if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); toggle(); } });
+  drawer.querySelectorAll('a').forEach(function(a){ a.addEventListener('click', close); });
+})();
+</script>
+`;
+
+const MASTER_FOOTER_HTML = `<!--
+  master-footer.html  —  CANONICAL FOOTER for markcmo.com
+  ───────────────────────────────────────────────────────────────────
+  Single source of truth for the site footer. Injected by
+  functions/_middleware.js into every HTML page that does NOT
+  already contain <footer class="mc-master-footer"> or the legacy
+  homepage <footer> with .footer-main inside.
+
+  Mirrors the homepage footer exactly: brand block + 7 link columns
+  + bottom bar with social links. Mobile collapses to 2 columns.
+
+  DO NOT edit per-page footers — edit here. Change here propagates
+  to every page on next request.
+-->
+
+<style id="mc-master-footer-css">
+.mc-master-footer {
+  --mc-bg:      #0A0F2C;
+  --mc-bg2:     #050919;
+  --mc-bg3:     #0E1438;
+  --mc-accent:  #C9A84C;
+  --mc-border:  rgba(255,255,255,0.08);
+  --mc-text3:   #71717A;
+
+  background: var(--mc-bg2);
+  color: var(--mc-text3);
+  font-family: -apple-system, BlinkMacSystemFont, 'Outfit', 'Inter', 'SF Pro Text', 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+  border-top: 1px solid var(--mc-border);
+  margin-top: 4rem;
+}
+.mc-master-footer a { color: var(--mc-text3); text-decoration: none; transition: color 0.15s; }
+.mc-master-footer a:hover { color: #fff; }
+.mc-master-footer ul { list-style: none; margin: 0; padding: 0; }
+
+.mc-master-footer .mc-foot-main {
+  max-width: 1400px; margin: 0 auto;
+  padding: 4rem clamp(1.5rem, 6vw, 6rem) 3rem;
+  display: grid; grid-template-columns: 2fr repeat(7, 1fr); gap: 2rem;
+}
+.mc-master-footer .mc-foot-brand { }
+.mc-master-footer .mc-foot-logo-text {
+  font-family: 'Outfit', sans-serif; font-size: 1.1rem; font-weight: 800;
+  color: #fff; margin-bottom: 0.75rem;
+}
+.mc-master-footer .mc-foot-logo-text span { color: var(--mc-accent); }
+.mc-master-footer .mc-foot-about {
+  font-size: 0.825rem; line-height: 1.7; color: var(--mc-text3); margin-bottom: 1.25rem;
+}
+.mc-master-footer .mc-foot-chips {
+  display: flex; flex-wrap: wrap; gap: 0.4rem; margin-bottom: 1.25rem;
+}
+.mc-master-footer .mc-foot-chip {
+  font-size: 0.65rem; font-weight: 600; letter-spacing: 0.06em; text-transform: uppercase;
+  color: var(--mc-text3); border: 1px solid var(--mc-border);
+  padding: 0.25rem 0.6rem; border-radius: 4px;
+}
+.mc-master-footer .mc-foot-socials { display: flex; gap: 0.6rem; }
+.mc-master-footer .mc-foot-soc {
+  width: 34px; height: 34px; border-radius: 8px;
+  background: var(--mc-bg3); border: 1px solid var(--mc-border);
+  color: var(--mc-text3); display: flex; align-items: center; justify-content: center;
+  font-size: 0.8rem; font-weight: 700; transition: all 0.15s;
+}
+.mc-master-footer .mc-foot-soc:hover { background: var(--mc-accent); border-color: var(--mc-accent); color: #fff; }
+.mc-master-footer .mc-foot-col h4 {
+  font-size: 0.7rem; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase;
+  color: var(--mc-text3); margin: 0 0 1rem; font-family: inherit;
+}
+.mc-master-footer .mc-foot-col ul { display: flex; flex-direction: column; gap: 0.6rem; }
+.mc-master-footer .mc-foot-col ul li a {
+  font-size: 0.8125rem; color: var(--mc-text3); transition: color 0.15s;
+}
+.mc-master-footer .mc-foot-col ul li a.mc-accent { color: var(--mc-accent); font-weight: 600; }
+.mc-master-footer .mc-foot-col ul li a:hover { color: #fff; }
+.mc-master-footer .mc-foot-bar {
+  border-top: 1px solid var(--mc-border);
+  padding: 1.5rem clamp(1.5rem, 6vw, 6rem);
+  max-width: 1400px; margin: 0 auto;
+  display: flex; justify-content: space-between; align-items: center;
+  flex-wrap: wrap; gap: 0.5rem;
+}
+.mc-master-footer .mc-foot-copy { font-size: 0.8rem; color: var(--mc-text3); }
+.mc-master-footer .mc-foot-bar-links { display: flex; gap: 1.25rem; }
+.mc-master-footer .mc-foot-bar-links a { font-size: 0.8rem; color: var(--mc-text3); transition: color 0.15s; }
+.mc-master-footer .mc-foot-bar-links a:hover { color: #fff; }
+
+@media (max-width: 1100px) {
+  .mc-master-footer .mc-foot-main { grid-template-columns: 1fr 1fr 1fr 1fr; }
+  .mc-master-footer .mc-foot-brand { grid-column: span 4; }
+}
+@media (max-width: 900px) {
+  .mc-master-footer .mc-foot-main { grid-template-columns: 1fr 1fr; }
+  .mc-master-footer .mc-foot-brand { grid-column: span 2; }
+}
+</style>
+
+<footer class="mc-master-footer" id="mcMasterFooter">
+  <div class="mc-foot-main">
+    <div class="mc-foot-brand">
+      <div class="mc-foot-logo-text">Mark <span>Gabrielli</span></div>
+      <p class="mc-foot-about">Fractional CMO, COO &amp; Executive Consultant. I help businesses from $1M to $100M find what's broken, build what scales, and execute what others only talk about.</p>
+      <div class="mc-foot-chips">
+        <span class="mc-foot-chip">WETYR Founder</span>
+        <span class="mc-foot-chip">Fractional C-Suite</span>
+        <span class="mc-foot-chip">AI Strategist</span>
+        <span class="mc-foot-chip">CST Certified</span>
+      </div>
+      <div class="mc-foot-socials">
+        <a href="https://www.linkedin.com/in/marklgabrielli/" target="_blank" rel="noopener" class="mc-foot-soc" aria-label="LinkedIn">in</a>
+        <a href="mailto:mark@markcmo.com" class="mc-foot-soc" aria-label="Email">@</a>
+      </div>
+    </div>
+    <div class="mc-foot-col"><h4>C-Suite</h4><ul>
+      <li><a href="/fractional-cmo">Fractional CMO</a></li>
+      <li><a href="/fractional-coo">Fractional COO</a></li>
+      <li><a href="/fractional-ceo">Fractional CEO</a></li>
+      <li><a href="/fractional-cto">Fractional CTO</a></li>
+      <li><a href="/fractional-cfo">Fractional CFO</a></li>
+      <li><a href="/executive-advisory">Executive Advisory</a></li>
+      <li><a href="/services">All Services</a></li>
+    </ul></div>
+    <div class="mc-foot-col"><h4>Marketing</h4><ul>
+      <li><a href="/demand-generation">Demand Generation</a></li>
+      <li><a href="/lead-generation">Lead Generation</a></li>
+      <li><a href="/b2b-marketing">B2B Marketing</a></li>
+      <li><a href="/content-marketing">Content Marketing</a></li>
+      <li><a href="/email-marketing">Email Marketing</a></li>
+      <li><a href="/digital-marketing">Digital Marketing</a></li>
+      <li><a href="/social-media-marketing">Social Media</a></li>
+      <li><a href="/linkedin-marketing">LinkedIn Marketing</a></li>
+      <li><a href="/paid-social">Paid Social</a></li>
+      <li><a href="/ppc-management">PPC Management</a></li>
+      <li><a href="/local-seo">Local SEO</a></li>
+      <li><a href="/crm-automation">CRM Automation</a></li>
+      <li><a href="/marketing-automation">Marketing Automation</a></li>
+      <li><a href="/account-based-marketing">ABM</a></li>
+      <li><a href="/go-to-market-strategy">Go-to-Market</a></li>
+      <li><a href="/marketing-audit">Marketing Audit</a></li>
+      <li><a href="/marketing-strategy">Marketing Strategy</a></li>
+    </ul></div>
+    <div class="mc-foot-col"><h4>Compare</h4><ul>
+      <li><a href="/fractional-cmo-cost">CMO Cost</a></li>
+      <li><a href="/compare/fractional-cmo-vs-full-time-cmo/">vs Full-Time CMO</a></li>
+      <li><a href="/compare/fractional-cmo-vs-marketing-agency/">vs Agency</a></li>
+      <li><a href="/compare/fractional-cmo-vs-vp-of-marketing/">vs VP of Marketing</a></li>
+      <li><a href="/compare/fractional-cmo-vs-consultant/">vs Consultant</a></li>
+      <li><a href="/compare/fractional-cmo-vs-interim-cmo/">vs Interim CMO</a></li>
+      <li><a href="/chief-outsiders-alternative">Chief Outsiders Alt.</a></li>
+    </ul></div>
+    <div class="mc-foot-col"><h4>By Stage</h4><ul>
+      <li><a href="/fractional-cmo-pre-revenue">Pre-Revenue</a></li>
+      <li><a href="/fractional-cmo-series-a">Series A</a></li>
+      <li><a href="/fractional-cmo-series-b">Series B</a></li>
+      <li><a href="/fractional-cmo-bootstrapped-companies">Bootstrapped</a></li>
+      <li><a href="/fractional-cmo-pe-backed-companies">PE-Backed</a></li>
+      <li><a href="/fractional-cmo-venture-capital">VC-Backed</a></li>
+      <li><a href="/best-fractional-cmo">Best Fractional CMO</a></li>
+    </ul></div>
+    <div class="mc-foot-col"><h4>Industries</h4><ul>
+      <li><a href="/fractional-cmo-saas">SaaS</a></li>
+      <li><a href="/fractional-cmo-healthcare">Healthcare</a></li>
+      <li><a href="/fractional-cmo-fintech">Fintech</a></li>
+      <li><a href="/fractional-cmo-ai">AI Companies</a></li>
+      <li><a href="/fractional-cmo-b2b">B2B</a></li>
+      <li><a href="/fractional-cmo-ecommerce">eCommerce</a></li>
+      <li><a href="/industries">All Industries</a></li>
+    </ul></div>
+    <div class="mc-foot-col"><h4>Cities</h4><ul>
+      <li><a href="/fractional-cmo-dallas-fort-worth">Dallas-Fort Worth</a></li>
+      <li><a href="/fractional-cmo-greater-houston">Houston</a></li>
+      <li><a href="/fractional-cmo-greater-chicago">Chicago</a></li>
+      <li><a href="/fractional-cmo-greater-atlanta">Atlanta</a></li>
+      <li><a href="/fractional-cmo-greater-miami">Miami</a></li>
+      <li><a href="/fractional-cmo-greater-boston">Boston</a></li>
+      <li><a href="/fractional-cmo-near-me">CMO Near Me</a></li>
+    </ul></div>
+    <div class="mc-foot-col"><h4>Learn</h4><ul>
+      <li><a href="/magnet-framework" class="mc-accent">MAGNET Framework&trade;</a></li>
+      <li><a href="/blog">Insights &amp; Blog</a></li>
+      <li><a href="/about">About Mark</a></li>
+      <li><a href="/testimonials">Testimonials</a></li>
+      <li><a href="/faq">FAQ</a></li>
+      <li><a href="/contact">Contact</a></li>
+      <li><a href="https://academy.markcmo.com" target="_blank" rel="noopener" class="mc-accent">Academy</a></li>
+    </ul></div>
+  </div>
+  <div class="mc-foot-bar">
+    <span class="mc-foot-copy">&copy; 2026 Mark Gabrielli &middot; markcmo.com &middot; All rights reserved.</span>
+    <div class="mc-foot-bar-links">
+      <a href="https://www.linkedin.com/in/marklgabrielli/" target="_blank" rel="noopener">LinkedIn</a>
+      <a href="https://x.com/markgcmo" target="_blank" rel="noopener">X / Twitter</a>
+      <a href="https://medium.com/@mark_louis_gabrielli_jr" target="_blank" rel="noopener">Medium</a>
+      <a href="https://www.tiktok.com/@mark.gabrielli.cmo" target="_blank" rel="noopener">TikTok</a>
+    </div>
+  </div>
+</footer>
+`;
+
+function getMasterNav() { return MASTER_NAV_HTML; }
+function getMasterFooter() { return MASTER_FOOTER_HTML; }
 
 // Exact paths that already have their own nav/footer inlined and should
 // NOT receive injection. The homepage is the canonical source of truth;
@@ -161,38 +502,17 @@ export async function onRequest(context) {
 
   const response = await next();
   const ct = response.headers.get('content-type') || '';
-
-  // Always tag responses with a debug header so we can verify middleware
-  // is firing. Remove once nav injection is confirmed working.
-  const dbg = { ct: ct.slice(0, 30), path: url.pathname.slice(0, 60) };
-
-  if (!ct.includes('text/html')) {
-    const out = new Response(response.body, response);
-    out.headers.set('X-MW', `skip:nothtml ct=${dbg.ct}`);
-    return out;
-  }
+  if (!ct.includes('text/html')) return response;
 
   const message = (env.MAINTENANCE_MESSAGE || '').trim();
   const injectChrome = shouldInjectChrome(url);
-  dbg.injectChrome = injectChrome;
-  dbg.hasAssets = !!(env.ASSETS && typeof env.ASSETS.fetch === 'function');
-
-  if (!message && !injectChrome) {
-    const out = new Response(response.body, response);
-    out.headers.set('X-MW', `skip:nochrome path=${dbg.path}`);
-    return out;
-  }
+  if (!message && !injectChrome) return response;
 
   const rewriter = new HTMLRewriter();
-  let navLen = 0, footLen = 0;
 
   if (injectChrome) {
-    const [navHtml, footHtml] = await Promise.all([
-      getMasterNav(env),
-      getMasterFooter(env),
-    ]);
-    navLen = navHtml ? navHtml.length : 0;
-    footLen = footHtml ? footHtml.length : 0;
+    const navHtml = getMasterNav();
+    const footHtml = getMasterFooter();
     if (navHtml) rewriter.on('body', new NavInjector(navHtml));
     if (footHtml) rewriter.on('body', new FooterInjector(footHtml));
   }
@@ -202,10 +522,5 @@ export async function onRequest(context) {
     rewriter.on('body', new BannerInjector(message));
   }
 
-  const transformed = rewriter.transform(response);
-  // Clone so we can add a debug header (transformed responses' headers
-  // are read-only on the streaming Response).
-  const out = new Response(transformed.body, transformed);
-  out.headers.set('X-MW', `inject path=${dbg.path} assets=${dbg.hasAssets} nav=${navLen} foot=${footLen}`);
-  return out;
+  return rewriter.transform(response);
 }
