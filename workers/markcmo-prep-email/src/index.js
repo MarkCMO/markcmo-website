@@ -76,6 +76,16 @@ export default {
       }
       audit.step = engagement ? 'matched_engagement' : 'no_engagement_match';
 
+      // If sender doesn't match any known client, this isn't a prospect
+      // reply - just a random inbound email (newsletter, vendor, spam,
+      // etc). Forward raw to Mark's Gmail and exit. No audit log entry,
+      // no summary email - we don't want to clutter Mark's inbox with
+      // "no matched booking" classifier notes for every random email.
+      if (!engagement) {
+        try { await message.forward('marklgabriellijr@gmail.com'); } catch (_) {}
+        return;
+      }
+
       // Classify
       const cls = classifyReply(parsed.body, audit.subject);
       audit.classification = cls.label;
