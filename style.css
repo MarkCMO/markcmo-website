@@ -115,9 +115,19 @@ html, body, * {
 #custom-cursor { display: none !important; }
 
 /* ═══════════════════════════════════════════════════════
-   NAV — white glass floating bar
-   ═══════════════════════════════════════════════════════ */
-nav {
+   NAV — DISABLED bare `nav` selector
+   ═══════════════════════════════════════════════════════
+   This rule used to style EVERY <nav> element on the site as a
+   white-glass floating bar at z-index:1000. That hijacked EVERY
+   <nav> on every pillar page including <nav aria-label="Breadcrumb">
+   - turning breadcrumbs into floating bars that covered the
+   actual master nav. Mark spotted this on /best-chief-marketing-officer-skokie-il
+   ("a bar covering up the menu this could cost me jobs").
+   The rule is scoped to .legacy-glass-nav now - elements have to
+   opt IN. Nothing on the live site currently opts in. The block
+   is preserved here in case a future page wants this aesthetic.
+*/
+.legacy-glass-nav {
   position: fixed;
   top: 14px; left: 14px; right: 14px;
   z-index: 1000;
@@ -135,7 +145,7 @@ nav {
   overflow: visible;
   transition: box-shadow 0.2s, border-color 0.2s;
 }
-nav.scrolled {
+.legacy-glass-nav.scrolled {
   box-shadow: var(--shadow-md);
   border-color: rgba(37,99,235,0.18);
 }

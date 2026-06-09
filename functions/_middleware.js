@@ -138,7 +138,7 @@ const MASTER_NAV_HTML = `<!--
 }
 </style>
 
-<div class="mc-master-nav" id="mcMasterNav" role="navigation" aria-label="Main">
+<nav class="mc-master-nav" id="mcMasterNav" aria-label="Main">
   <a href="/" class="mc-logo">
     <div class="mc-logo-avatar">
       <img src="/assets/mark-gabrielli.jpg" alt="Mark Gabrielli" onerror="this.parentElement.innerHTML='<span style=\\'display:flex;align-items:center;justify-content:center;width:100%;height:100%;font-family:Outfit,sans-serif;font-weight:900;font-size:1rem;color:#fff;background:#C9A84C\\'>M</span>'" />
@@ -163,7 +163,7 @@ const MASTER_NAV_HTML = `<!--
     <a href="/book" class="mc-btn">Book a Free Call</a>
   </div>
   <div class="mc-ham" id="mcMasterHam" aria-label="Menu" role="button" tabindex="0"><span></span><span></span><span></span></div>
-</div>
+</nav>
 
 <div class="mc-master-nav-drawer" id="mcMasterDrawer">
   <a href="/about">About</a>
@@ -290,7 +290,7 @@ const MASTER_FOOTER_HTML = `<!--
 }
 </style>
 
-<div class="mc-master-footer" id="mcMasterFooter" role="contentinfo">
+<footer class="mc-master-footer" id="mcMasterFooter">
   <div class="mc-foot-main">
     <div class="mc-foot-brand">
       <div class="mc-foot-logo-text">Mark <span>Gabrielli</span></div>
@@ -389,7 +389,7 @@ const MASTER_FOOTER_HTML = `<!--
       <a href="https://www.tiktok.com/@mark.gabrielli.cmo" target="_blank" rel="noopener">TikTok</a>
     </div>
   </div>
-</div>
+</footer>
 `;
 
 function getMasterNav() { return MASTER_NAV_HTML; }
