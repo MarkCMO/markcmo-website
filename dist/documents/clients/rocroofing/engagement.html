@@ -1,0 +1,455 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>ROC Roofing | Engagement Agreement</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex, nofollow, noarchive, nosnippet, noimageindex">
+<meta http-equiv="Cache-Control" content="no-store, no-cache, must-revalidate, private">
+<link rel="icon" href="https://rocroofingfl.com/wp-content/uploads/2025/03/ROC-300x300-1.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800;900&family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+  :root{--red:#FA2905;--red-dark:#C81F02;--charcoal:#1F1F1F;--charcoal-2:#2C2C2C;--gray:#54595F;--text:#333;--muted:#757B82;--line:#E4E4E6;--white:#fff;--bg-soft:#F5F5F6;--bg-soft-2:#FBEDEA;--green:#2E8B57;--shadow:0 10px 40px rgba(0,0,0,0.08);}
+  *{box-sizing:border-box;margin:0;padding:0;}
+  body{font-family:'Montserrat',sans-serif;background:var(--bg-soft);color:var(--text);font-size:15px;line-height:1.62;-webkit-font-smoothing:antialiased;}
+  h1,h2,h3,h4{font-family:'Montserrat';color:var(--charcoal);font-weight:800;line-height:1.18;}
+  a{color:var(--red);text-decoration:none;}
+  strong{color:var(--charcoal);font-weight:700;}
+
+  .topnav{background:#fff;border-bottom:1px solid var(--line);display:flex;align-items:center;justify-content:space-between;padding:12px 28px;gap:14px;flex-wrap:wrap;}
+  .topnav .brand{display:flex;align-items:center;gap:12px;}
+  .topnav .brand img{height:42px;}
+  .topnav .brand .bt{font-weight:800;text-transform:uppercase;font-size:0.9rem;line-height:1.05;color:var(--charcoal);}
+  .topnav .brand .bt span{color:var(--red);}
+  .topnav .links a{font-family:'Roboto';font-size:0.74rem;text-transform:uppercase;letter-spacing:0.08em;color:var(--gray);margin-left:18px;}
+  .topnav .links a:hover{color:var(--red);}
+
+  .doc{max-width:880px;margin:34px auto;background:#fff;box-shadow:var(--shadow);padding:64px 64px 54px;}
+  @media(max-width:720px){.doc{padding:36px 26px;}}
+
+  .head{border-bottom:3px solid var(--red);padding-bottom:24px;margin-bottom:30px;display:flex;justify-content:space-between;align-items:flex-end;gap:20px;flex-wrap:wrap;}
+  .head .eyebrow{font-family:'Roboto';font-size:0.68rem;letter-spacing:0.22em;text-transform:uppercase;color:var(--red);font-weight:700;}
+  .head h1{font-size:2.2rem;text-transform:uppercase;margin-top:8px;}
+  .head .ver{font-family:'Roboto';font-size:0.7rem;letter-spacing:0.1em;text-transform:uppercase;color:var(--muted);text-align:right;}
+
+  .parties{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:30px;}
+  @media(max-width:620px){.parties{grid-template-columns:1fr;}}
+  .party{background:#fff;border:1px solid var(--line);border-radius:10px;padding:20px 22px;box-shadow:var(--shadow);position:relative;overflow:hidden;transition:transform .2s ease,box-shadow .2s ease,border-color .2s ease;}
+  .party::before{content:'';position:absolute;left:0;top:0;bottom:0;width:0;background:var(--gray);transition:width .2s ease;}
+  .party.provider::before{background:var(--red);}
+  .party:hover{transform:translateY(-4px);box-shadow:var(--shadow-lg);border-color:#DEDEE1;}
+  .party:hover::before{width:4px;}
+  .party .role{font-family:'Roboto';font-size:0.64rem;letter-spacing:0.12em;text-transform:uppercase;color:var(--muted);font-weight:700;margin-bottom:6px;}
+  .party .name{font-weight:800;color:var(--charcoal);font-size:1.05rem;}
+  .party .det{font-size:0.82rem;color:var(--gray);margin-top:4px;}
+
+  h2{font-size:1.05rem;text-transform:uppercase;letter-spacing:0.03em;margin:30px 0 10px;padding-bottom:7px;border-bottom:1px solid var(--line);}
+  h2 .num{color:var(--red);font-family:'Roboto';font-weight:700;margin-right:8px;}
+  p{margin-bottom:12px;}
+  ul,ol{margin:8px 0 14px 1.3em;} li{margin-bottom:6px;font-size:0.92rem;}
+
+  /* tier select */
+  .selrow{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin:14px 0 8px;}
+  @media(max-width:620px){.selrow{grid-template-columns:1fr;}}
+  .sel{border:1.5px solid var(--line);border-radius:10px;padding:16px 18px;position:relative;cursor:pointer;transition:transform .18s ease,box-shadow .18s ease,border-color .18s ease;}
+  .sel:hover{transform:translateY(-3px);box-shadow:var(--shadow);border-color:#E4B9AE;}
+  .sel.chosen{border-color:var(--red);background:var(--bg-soft-2);box-shadow:0 8px 26px rgba(250,41,5,0.12);}
+  .sel .box{width:16px;height:16px;border:2px solid var(--muted);border-radius:3px;display:inline-block;vertical-align:middle;margin-right:8px;}
+  .sel.chosen .box{background:var(--red);border-color:var(--red);}
+  .sel .tn{font-weight:800;text-transform:uppercase;color:var(--charcoal);font-size:0.95rem;}
+  .sel .pr{font-family:'Roboto';font-size:0.78rem;color:var(--gray);margin-top:6px;}
+  .sel .chip{position:absolute;top:-10px;right:12px;background:var(--red);color:#fff;font-family:'Roboto';font-size:0.55rem;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;padding:3px 8px;border-radius:3px;}
+
+  table{width:100%;border-collapse:collapse;margin:14px 0;font-size:0.88rem;}
+  th{background:var(--charcoal);color:#fff;padding:10px 12px;text-align:left;font-family:'Roboto';font-size:0.62rem;letter-spacing:0.08em;text-transform:uppercase;}
+  td{padding:9px 12px;border-bottom:1px solid var(--line);}
+  td.r{text-align:right;}
+  tbody tr:hover td{background:#FCEAE6;transition:background .15s ease;}
+  tfoot td{font-weight:800;background:var(--bg-soft);}
+
+  .note{background:var(--bg-soft-2);border:1px solid #F1D5CE;padding:16px 20px;border-radius:12px;font-size:0.86rem;margin:16px 0;box-shadow:0 6px 22px rgba(250,41,5,0.06);}
+  .party::after{content:'';position:absolute;top:14px;right:14px;width:8px;height:8px;background:var(--red);border-radius:2px;transform:rotate(45deg);opacity:.9;}
+  .sigpanel:not(.signed):hover{box-shadow:0 20px 52px rgba(250,41,5,0.14);}
+  .accent-bar{box-shadow:0 2px 10px rgba(250,41,5,0.35);}
+  .note .l{font-family:'Roboto';font-size:0.64rem;letter-spacing:0.12em;text-transform:uppercase;color:var(--red);font-weight:700;margin-bottom:4px;}
+
+  /* digital signatures */
+  .esign{margin-top:38px;padding-top:28px;border-top:2px solid var(--charcoal);}
+  .esign-grid{display:grid;grid-template-columns:1fr 1fr;gap:22px;margin-top:18px;align-items:stretch;}
+  @media(max-width:680px){.esign-grid{grid-template-columns:1fr;gap:18px;}}
+  .sigpanel{display:flex;flex-direction:column;min-width:0;border:1px solid var(--line);border-radius:14px;padding:24px;background:#fff;box-shadow:var(--shadow);transition:box-shadow .22s ease,border-color .22s ease,transform .22s ease;}
+  .sigpanel .sig-form{flex:1;display:flex;flex-direction:column;min-width:0;}
+  .sigpanel input[type=text],.sigwrap,.sigtabs{min-width:0;max-width:100%;}
+  .sigpanel .sig-form .sig-btn{margin-top:auto;}
+  .sigpanel:hover{box-shadow:var(--shadow-lg);transform:translateY(-3px);}
+  .sigpanel.signed{border-color:var(--green);background:#FAFFFB;}
+  .sigpanel .prole{font-family:'Roboto';font-size:0.64rem;letter-spacing:0.12em;text-transform:uppercase;color:var(--muted);font-weight:700;margin-bottom:12px;}
+  .sigpanel label{display:block;font-family:'Roboto';font-size:0.64rem;letter-spacing:0.06em;text-transform:uppercase;color:var(--gray);font-weight:700;margin:10px 0 4px;}
+  .sigpanel input[type=text]{width:100%;padding:10px 12px;border:1px solid var(--line);border-radius:7px;font-family:'Montserrat';font-size:0.9rem;color:var(--charcoal);transition:border-color .15s ease,box-shadow .15s ease;}
+  .sigpanel input[type=text]:focus{outline:none;border-color:var(--red);box-shadow:0 0 0 3px rgba(250,41,5,0.12);}
+  .sigtabs{display:flex;gap:6px;margin:14px 0 8px;}
+  .sigtab{flex:1;text-align:center;font-family:'Roboto';font-size:0.68rem;font-weight:700;text-transform:uppercase;letter-spacing:0.05em;padding:9px;border:1px solid var(--line);border-radius:7px;cursor:pointer;color:var(--gray);background:#fff;transition:all .15s ease;}
+  .sigtab:hover{border-color:var(--red);color:var(--red);}
+  .sigtab.active{background:var(--charcoal);color:#fff;border-color:var(--charcoal);}
+  .sigwrap{border:1.5px dashed #CBCBD2;border-radius:9px;background:#FCFCFD;height:120px;position:relative;overflow:hidden;}
+  .sigwrap canvas{width:100%;height:100%;display:block;touch-action:none;cursor:crosshair;}
+  .sig-type-preview{display:flex;align-items:center;justify-content:center;height:100%;font-family:'Brush Script MT','Segoe Script','Snell Roundhand',cursive;font-size:2.1rem;color:var(--charcoal);padding:0 16px;text-align:center;white-space:nowrap;overflow:hidden;}
+  .sig-baseline{position:absolute;left:16px;right:16px;bottom:28px;border-bottom:1px solid #D8D8DD;pointer-events:none;}
+  .sig-x{position:absolute;left:18px;bottom:30px;font-family:'Roboto';color:#B7B7BD;font-size:0.95rem;pointer-events:none;}
+  .sigrow{display:flex;align-items:center;justify-content:flex-end;margin-top:6px;}
+  .sig-clear{font-family:'Roboto';font-size:0.66rem;text-transform:uppercase;letter-spacing:0.06em;color:var(--red);background:none;border:none;cursor:pointer;font-weight:700;}
+  .sigpanel label.consent{display:flex;gap:10px;align-items:flex-start;margin:16px 0 2px;font-family:'Montserrat',sans-serif;font-size:0.76rem;font-weight:400;letter-spacing:0;text-transform:none;color:var(--gray);line-height:1.5;cursor:pointer;}
+  .sigpanel label.consent span{font-weight:400;text-transform:none;letter-spacing:0;}
+  .consent input{margin-top:2px;width:17px;height:17px;accent-color:var(--red);flex:none;cursor:pointer;}
+  .sig-btn{width:100%;margin-top:14px;background:var(--red);color:#fff;font-family:'Roboto';font-weight:700;font-size:0.76rem;letter-spacing:0.06em;text-transform:uppercase;padding:13px;border:none;border-radius:7px;cursor:pointer;transition:background .15s ease,transform .15s ease;}
+  .sig-btn:hover{background:var(--red-dark);transform:translateY(-2px);}
+  .sig-btn:disabled{background:#C9C9CC;cursor:default;transform:none;}
+  .sig-form{display:block;}
+  .signed-state{display:none;}
+  .sigpanel.signed .sig-form{display:none;}
+  .sigpanel.signed .signed-state{display:block;}
+  .signed-badge{display:inline-flex;align-items:center;gap:7px;font-family:'Roboto';font-size:0.6rem;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:var(--green);background:#EAF6EE;padding:5px 11px;border-radius:20px;margin-bottom:12px;}
+  .signed-badge::before{content:'';width:7px;height:7px;border-radius:50%;background:var(--green);}
+  .signed-img{max-height:78px;max-width:100%;display:block;}
+  .signed-rule{border-bottom:1px solid var(--charcoal);margin:2px 0 6px;}
+  .signed-name{font-family:'Montserrat';font-weight:700;color:var(--charcoal);font-size:0.95rem;}
+  .signed-meta{font-family:'Roboto';font-size:0.7rem;color:var(--gray);margin-top:6px;line-height:1.55;}
+  .signed-meta b{color:var(--charcoal);}
+  .esign-actions{margin-top:24px;display:flex;gap:14px;align-items:center;flex-wrap:wrap;}
+  .esign-status{font-family:'Roboto';font-size:0.8rem;color:var(--gray);font-weight:500;}
+  .btn-download{background:var(--charcoal);color:#fff;font-family:'Roboto';font-weight:700;font-size:0.76rem;letter-spacing:0.06em;text-transform:uppercase;padding:13px 26px;border:none;border-radius:7px;cursor:pointer;transition:transform .15s ease,background .15s ease;}
+  .btn-download:hover{transform:translateY(-2px);background:#000;}
+
+  @media(max-width:680px){
+    table{font-size:0.72rem;}
+    th,td{padding:8px 7px;}
+    .esign-actions{flex-direction:column;align-items:stretch;}
+    .esign-actions .sig-btn,.esign-actions .btn-download{width:100%!important;text-align:center;}
+    .esign-status{text-align:center;}
+  }
+  .disc{font-size:0.78rem;color:var(--muted);margin-top:26px;line-height:1.55;border-top:1px solid var(--line);padding-top:16px;}
+
+  footer{max-width:880px;margin:0 auto 40px;padding:0 64px;font-family:'Roboto';font-size:0.72rem;color:var(--muted);display:flex;justify-content:space-between;flex-wrap:wrap;gap:10px;}
+  footer b{color:var(--red);}
+  @media print{.topnav{display:none;} body{background:#fff;} .doc{box-shadow:none;margin:0;} .sigtabs,.consent,.sig-btn,.esign-actions,.sig-form .sigwrap+.sigrow{display:none!important;} .sigpanel{box-shadow:none;break-inside:avoid;} .sigpanel:not(.signed) .sig-form input{border:none;border-bottom:1px solid #999;border-radius:0;} }
+</style>
+</head>
+<body>
+
+<nav class="topnav">
+  <div class="brand"><img src="https://rocroofingfl.com/wp-content/uploads/2025/03/ROC-300x300-1.png" alt="ROC Roofing"><div class="bt">ROC ROOFING<br><span>ENGAGEMENT</span></div></div>
+  <div class="links"><a href="index.html">Proposal</a><a href="competitors.html">Competitors</a><a href="proposal.html">Tiers</a><a href="onboarding.html">Onboarding</a><a href="dashboard.html">Dashboard</a></div>
+</nav>
+
+<div class="doc">
+  <div class="head">
+    <div>
+      <div class="eyebrow">Marketing Services Engagement</div>
+      <h1>Engagement Agreement</h1>
+    </div>
+    <div class="ver">Draft v1 &middot; June 2026<br>Confidential</div>
+  </div>
+
+  <p>This Engagement Agreement (the "Agreement") is entered into between the parties below for the design and operation of a roofing lead-generation program across Volusia, Seminole, and Brevard Counties, Florida.</p>
+
+  <div class="parties">
+    <div class="party provider">
+      <div class="role">Provider</div>
+      <div class="name">MarkCMO (WETYR Corporation)</div>
+      <div class="det">Mark Gabrielli, Fractional CMO<br>mark@markcmo.com &middot; markcmo.com</div>
+    </div>
+    <div class="party">
+      <div class="role">Client</div>
+      <div class="name">ROC Roofing Inc</div>
+      <div class="det">620 S Volusia Ave, Orange City, FL 32763<br>FL Lic. CCC1329191 &middot; (386) 960-7004</div>
+    </div>
+  </div>
+
+  <h2><span class="num">1.</span>Selected Engagement Tier</h2>
+  <p>Client selects the following program tier (full scope defined in the <a href="proposal.html">Proposal &amp; Tier Options</a>). Mark one:</p>
+  <div class="selrow">
+    <div class="sel chosen" data-tier="launch" data-fee="5,000" style="grid-column:1/-1;border-color:var(--red);">
+      <span class="chip">ROC's plan</span><span class="box"></span><span class="tn">Launch-to-Scale</span>
+      <div class="pr"><strong style="color:var(--charcoal);">$5,000 to start, then $2,500/mo that scales up automatically as leads are delivered.</strong> Management steps to $5,000/mo at 10+ qualified leads, $7,500/mo at 20+, and $10,500/mo at 30+ sustained (the $7,000 engagement balance comes due at that Scale step, truing up to the full $12,000). Marketing fuel is funded separately from day one (minimum $3,500/mo). Full schedule and triggers in Section 4.</div>
+    </div>
+    <div class="sel" data-tier="foothold" data-fee="9,000"><span class="box"></span><span class="tn">Foothold</span><div class="pr">Volusia only &middot; 10-15 leads/mo<br>$6,000/mo + $4,000-5,000 fuel<br>$9,000 engagement fee</div></div>
+    <div class="sel" data-tier="growth" data-fee="12,000"><span class="box"></span><span class="tn">Growth (fixed)</span><div class="pr">3 counties &middot; 20-30 leads/mo<br>$10,500/mo + $6,000-8,000 fuel<br>$12,000 engagement fee</div></div>
+    <div class="sel" data-tier="enterprise" data-fee="18,000"><span class="box"></span><span class="tn">Enterprise</span><div class="pr">Metro-wide &middot; 40+ leads/mo<br>$15,000/mo + $10,000-15,000 fuel<br>$18,000 engagement fee</div></div>
+  </div>
+  <p style="font-size:0.82rem;color:var(--muted);"><strong>Launch-to-Scale</strong> is the structure built for ROC: a low $5,000 start and $2,500/mo while leads ramp, with the management fee increasing automatically as the program delivers leads (see Section 4). Foothold, Growth, and Enterprise are the alternative fixed-fee tiers. Fixed-tier figures reflect the Art Limonta Discount (25% off the standard published rate). Client may change structure with 30 days written notice.</p>
+
+  <h2><span class="num">2.</span>Term</h2>
+  <p>The initial term is <strong>twelve (12) months</strong> beginning on the Effective Date below, comprising a 6-week Foundation Build Sprint followed by the ongoing managed program. After the initial term, the Agreement continues month to month and either party may end it with <strong>30 days written notice</strong>. The Foundation Build is a one-time charge and is non-refundable once work begins.</p>
+
+  <h2><span class="num">3.</span>Scope of Services</h2>
+  <p><strong>Foundation Build Sprint (weeks 1 to 6):</strong> Google Business Profile network setup and optimization per county, review-generation system, website conversion and credibility fixes, schema markup, five material and service pages, Local Service Ads setup and verification, call tracking and lead attribution, and the pre-built storm-response kit.</p>
+  <p><strong>Ongoing Managed Program (months 1 to 12):</strong> paid media management (Local Service Ads, and at Growth and above, Google Search and Meta), local SEO and content production, unique city landing pages, ongoing review-engine operation, per-county GBP management, monthly reporting and strategy call, and storm-response readiness. Exact inclusions follow the selected tier.</p>
+
+  <h2><span class="num">4.</span>Fees, Marketing Fuel, and the Scale-Up Schedule</h2>
+  <p>Fees are split into two separate buckets so Client always sees where every dollar goes: the <strong>management retainer</strong> (Provider's fee) and the <strong>marketing fuel</strong> (ad spend, billed at cost). For the selected <strong>Launch-to-Scale</strong> structure, the management retainer starts low and increases automatically as the program delivers qualified leads.</p>
+
+  <h4 style="color:var(--charcoal);margin:14px 0 6px;">Launch-to-Scale management schedule</h4>
+  <table>
+    <thead><tr><th>Stage</th><th class="r">Trigger: qualified leads delivered / mo</th><th class="r">Management retainer / mo</th></tr></thead>
+    <tbody>
+      <tr><td><strong>Launch</strong></td><td class="r">Build phase, 0 to 9</td><td class="r">$2,500</td></tr>
+      <tr><td><strong>Ramp</strong></td><td class="r">10 to 19</td><td class="r">$5,000</td></tr>
+      <tr><td><strong>Growth</strong></td><td class="r">20 to 29</td><td class="r">$7,500</td></tr>
+      <tr><td><strong>Scale</strong></td><td class="r">30 or more, two consecutive months</td><td class="r">$10,500</td></tr>
+    </tbody>
+    <tfoot><tr><td>Engagement fee</td><td class="r">$5,000 at signing</td><td class="r">+ $7,000 balance at Scale</td></tr></tfoot>
+  </table>
+  <div class="note">
+    <div class="l">How the scale-up works (binding)</div>
+    <p>The management retainer adjusts the month after a lead threshold is reached and is <strong>sticky</strong>: once a stage is achieved it does not step down for a single slow month (it adjusts down only after two consecutive months below the prior stage's floor). When the program reaches the <strong>Scale</strong> stage (30+ qualified leads per month for two consecutive months), the retainer holds at <strong>$10,500 per month</strong> and the <strong>$7,000 balance of the engagement fee becomes due</strong>, bringing the one-time engagement fee to the standard $12,000. A "qualified lead" is a new prospective customer delivered through a program-tracked channel (Local Service Ads, Google or Meta ads, program landing-page forms, or tracked Google Business Profile calls and messages), counted on the shared monthly dashboard. Lead counts are measured on Provider's delivery, independent of Client's close rate.</p>
+  </div>
+  <div class="note">
+    <div class="l">Beyond Scale: shared upside on overage volume</div>
+    <p>The schedule above is sized for an anticipated maximum of about 30 qualified leads and roughly 8 booked jobs per month. When the program <strong>exceeds that anticipated volume</strong>, the additional upside is shared: in any month at the Scale stage, for each program-sourced job <strong>beyond the 8th in that month</strong>, Provider earns a performance fee of <strong>8% of that job's collected revenue, or a flat $1,000 per job, whichever Client prefers</strong>, in addition to the $10,500 monthly retainer. The performance fee is invoiced monthly on <strong>collected</strong> revenue (after Client is paid) and only on new, program-sourced jobs tracked on the shared dashboard. The parties further acknowledge that for volume <strong>sustained materially above the Scale stage</strong> (for example 40 or more qualified leads per month), the monthly retainer and ad-spend management scope may <strong>increase by mutual written agreement</strong> to reflect the added work at that volume. Either party may propose, at the quarterly review, converting the overage share into a higher fixed retainer.</p>
+  </div>
+  <div class="note">
+    <div class="l">Marketing fuel is required for the schedule to work</div>
+    <p>Marketing fuel is the ad budget paid to Google and Meta to buy the leads. It is separate from the management retainer, billed at cost with no markup, and <strong>funded by Client from day one at a minimum of $3,500 per month</strong> (scaling up in hurricane season). The lead targets that drive the scale-up assume the fuel is funded at or above this minimum; underfunding the fuel reduces lead volume and shifts the timeline. Target: enough lead volume in the first 60 to 90 days to reach the Ramp and Growth stages.</p>
+  </div>
+  <p style="font-size:0.84rem;color:var(--gray);"><strong>Fixed-fee alternatives.</strong> In place of Launch-to-Scale, Client may instead select a fixed tier: Foothold ($9,000 engagement + $6,000/mo), Growth ($12,000 + $10,500/mo), or Enterprise ($18,000 + $15,000/mo), each with marketing fuel separate and at cost.</p>
+
+  <h2><span class="num">5.</span>Client Responsibilities</h2>
+  <ul>
+    <li>Provide timely access to the Google Business Profile, website, and FL license and insurance documents needed for Local Service Ads verification.</li>
+    <li>Respond to leads quickly. The fastest responder usually wins the roof, and lead-to-job results depend on Client follow-up speed.</li>
+    <li>Run the review system in the field: crews ask at job completion, and Client supports the review request cadence.</li>
+    <li>Approve marketing fuel budgets, storm-season surges, and any new location decisions.</li>
+    <li>Provide job-site photos and project details for content and gallery use.</li>
+  </ul>
+
+  <h2><span class="num">6.</span>Performance Expectations</h2>
+  <p>Lead targets are good-faith estimates based on the live June 2026 competitive scoreboard and Florida roofing benchmarks. Provider commits to the work, the system, and the spend discipline. Provider does not guarantee specific search rankings, a specific number of leads, or a specific number of booked jobs, because Google ranking, ad auctions, storm timing, and Client follow-up speed are outside Provider control. Results compound over the term as the review and organic moat builds and blended cost per lead falls.</p>
+
+  <h2><span class="num">7.</span>Confidentiality and Ownership</h2>
+  <p>Each party keeps the other's non-public information confidential. Marketing assets, content, and accounts created for Client (website pages, GBP, ad accounts, review profiles) belong to Client and remain with Client at the end of the engagement. Provider may reference the engagement and anonymized results as a case study unless Client requests otherwise in writing.</p>
+
+  <h2><span class="num">8.</span>Effective Date and Signatures</h2>
+  <div class="esign">
+    <p style="font-size:0.86rem;color:var(--gray);margin-bottom:4px;">Sign electronically below. Type or draw your signature, confirm consent, and apply. Each signature is time-stamped and recorded. Download or print the executed copy when both parties have signed.</p>
+    <div class="esign-grid">
+
+      <div class="sigpanel" data-party="client">
+        <div class="prole">Client &middot; ROC Roofing Inc</div>
+        <div class="sig-form">
+          <label>Full legal name of signer</label>
+          <input type="text" class="signer-name" value="Calogero (Chuck) Orlando" autocomplete="name">
+          <label>Title</label>
+          <input type="text" class="signer-title" value="President">
+          <label>Email (for the executed copy and payment link)</label>
+          <input type="text" class="signer-email" inputmode="email" placeholder="name@company.com">
+          <div class="sigtabs">
+            <div class="sigtab" data-mode="type">Type</div>
+            <div class="sigtab active" data-mode="draw">Draw</div>
+          </div>
+          <div class="sigwrap sig-type" style="display:none;"><div class="sig-type-preview"></div></div>
+          <div class="sigwrap sig-draw">
+            <canvas></canvas>
+            <div class="sig-baseline"></div><div class="sig-x">X</div>
+            <div class="sigrow"><button type="button" class="sig-clear">Clear</button></div>
+          </div>
+          <label class="consent"><input type="checkbox" class="consent-check"><span>I agree that typing or drawing my name above is my legal electronic signature on this agreement, and that it is as binding as a handwritten signature.</span></label>
+          <button type="button" class="sig-btn">Adopt &amp; Sign</button>
+        </div>
+        <div class="signed-state">
+          <div class="signed-badge">Signed</div>
+          <img class="signed-img" alt="signature"><div class="signed-rule"></div>
+          <div class="signed-name"></div>
+          <div class="signed-meta"><span class="signed-time"></span><br><span class="signed-ref"></span></div>
+        </div>
+      </div>
+
+      <div class="sigpanel" data-party="provider">
+        <div class="prole">Provider &middot; MarkCMO (WETYR Corporation)</div>
+        <div class="sig-form">
+          <label>Full legal name of signer</label>
+          <input type="text" class="signer-name" value="Mark Gabrielli" autocomplete="name">
+          <label>Title</label>
+          <input type="text" class="signer-title" value="Fractional CMO">
+          <label>Email (for your executed copy)</label>
+          <input type="text" class="signer-email" inputmode="email" value="mark@markcmo.com">
+          <div class="sigtabs">
+            <div class="sigtab" data-mode="type">Type</div>
+            <div class="sigtab active" data-mode="draw">Draw</div>
+          </div>
+          <div class="sigwrap sig-type" style="display:none;"><div class="sig-type-preview"></div></div>
+          <div class="sigwrap sig-draw">
+            <canvas></canvas>
+            <div class="sig-baseline"></div><div class="sig-x">X</div>
+            <div class="sigrow"><button type="button" class="sig-clear">Clear</button></div>
+          </div>
+          <label class="consent"><input type="checkbox" class="consent-check"><span>I agree that typing or drawing my name above is my legal electronic signature on this agreement, and that it is as binding as a handwritten signature.</span></label>
+          <button type="button" class="sig-btn">Adopt &amp; Sign</button>
+        </div>
+        <div class="signed-state">
+          <div class="signed-badge">Signed</div>
+          <img class="signed-img" alt="signature"><div class="signed-rule"></div>
+          <div class="signed-name"></div>
+          <div class="signed-meta"><span class="signed-time"></span><br><span class="signed-ref"></span></div>
+        </div>
+      </div>
+
+    </div>
+    <div class="esign-actions">
+      <button type="button" class="sig-btn" style="width:auto;margin-top:0;" id="submitBtn">Submit &amp; Pay Engagement Fee</button>
+      <button type="button" class="btn-download" id="downloadSigned">Download / Print Executed Copy</button>
+      <span class="esign-status" id="esignStatus">0 of 2 parties signed.</span>
+    </div>
+    <p style="font-size:0.74rem;color:var(--muted);margin-top:10px;">After the client signs and submits, they are taken to a secure ACH invoice for the selected tier's engagement fee. MarkCMO counter-signs to fully execute. Choose a tier in Section 1 above.</p>
+    <p style="font-size:0.74rem;color:var(--muted);margin-top:12px;">Executed electronically under the U.S. ESIGN Act and UETA. Each signature records a timestamp and a unique reference. Effective Date is the date of the first signature.</p>
+  </div>
+
+  <p class="disc">This document is a plain-language engagement draft prepared by MarkCMO to start the working relationship. It is not legal advice and is not a final contract. Both parties should review and adjust terms before signing, and may wish to have it reviewed by counsel. Pricing reflects the Growth tier as the recommended option; the figures update automatically if a different tier is selected in Section 1.</p>
+</div>
+
+<footer>
+  <div><a href="index.html">&laquo; Full proposal</a> &middot; Prepared by <b>MarkCMO</b> for ROC Roofing Inc</div>
+  <div>Confidential &middot; June 2026</div>
+</footer>
+
+<script>
+(function(){
+  var AGREEMENT_URL = location.origin + location.pathname;
+  var CURSIVE_FAMILY = '"Brush Script MT","Segoe Script","Snell Roundhand",cursive';
+
+  function renderType(name){
+    name=(name||'').trim();
+    var oc=document.createElement('canvas'); oc.width=620; oc.height=140;
+    var o=oc.getContext('2d'); o.fillStyle='#1F1F1F'; o.textBaseline='middle';
+    var size=54; o.font=size+'px '+CURSIVE_FAMILY;
+    while(size>16 && o.measureText(name).width > oc.width-44){ size-=2; o.font=size+'px '+CURSIVE_FAMILY; }
+    o.fillText(name, 22, 78);
+    return oc.toDataURL('image/png');
+  }
+  var _measure = document.createElement('canvas').getContext('2d');
+  function fitPreview(el){
+    var name = (el.textContent||'').trim();
+    if(!name){ el.style.fontSize=''; return; }
+    var box = el.clientWidth - 38;
+    if(box <= 0) { el.style.fontSize=''; return; }
+    var size = 34; // ~2.1rem reference
+    _measure.font = size + 'px ' + CURSIVE_FAMILY;
+    var w = _measure.measureText(name).width;
+    if(w > box) size = Math.max(14, size * (box / w) * 0.96);
+    el.style.fontSize = size + 'px';
+  }
+
+  function initPanel(panel){
+    var nameInput=panel.querySelector('.signer-name');
+    var typePrev=panel.querySelector('.sig-type-preview');
+    var drawWrap=panel.querySelector('.sig-draw');
+    var typeWrap=panel.querySelector('.sig-type');
+    var canvas=panel.querySelector('canvas');
+    var ctx=canvas.getContext('2d');
+    var mode='draw', drawing=false, hasDrawn=false, last=null, sized=false;
+
+    function syncType(){ typePrev.textContent=nameInput.value.trim(); fitPreview(typePrev); }
+    nameInput.addEventListener('input', syncType); syncType();
+
+    function sizeCanvas(){
+      var r=canvas.getBoundingClientRect(); if(!r.width) return;
+      var dpr=window.devicePixelRatio||1;
+      canvas.width=r.width*dpr; canvas.height=r.height*dpr;
+      ctx.setTransform(dpr,0,0,dpr,0,0);
+      ctx.lineWidth=2.3; ctx.lineCap='round'; ctx.lineJoin='round'; ctx.strokeStyle='#1F1F1F';
+      sized=true;
+    }
+    function pos(e){ var r=canvas.getBoundingClientRect(); var t=(e.touches&&e.touches[0])||e; return {x:t.clientX-r.left,y:t.clientY-r.top}; }
+    function start(e){ if(!sized) sizeCanvas(); drawing=true; last=pos(e); e.preventDefault(); }
+    function move(e){ if(!drawing) return; var p=pos(e); ctx.beginPath(); ctx.moveTo(last.x,last.y); ctx.lineTo(p.x,p.y); ctx.stroke(); last=p; hasDrawn=true; e.preventDefault(); }
+    function stop(){ drawing=false; }
+    canvas.addEventListener('mousedown',start); canvas.addEventListener('mousemove',move); window.addEventListener('mouseup',stop);
+    canvas.addEventListener('touchstart',start,{passive:false}); canvas.addEventListener('touchmove',move,{passive:false}); canvas.addEventListener('touchend',stop);
+    panel.querySelector('.sig-clear').addEventListener('click',function(){ ctx.clearRect(0,0,canvas.width,canvas.height); hasDrawn=false; });
+
+    Array.prototype.forEach.call(panel.querySelectorAll('.sigtab'),function(t){
+      t.addEventListener('click',function(){
+        mode=t.getAttribute('data-mode');
+        Array.prototype.forEach.call(panel.querySelectorAll('.sigtab'),function(x){ x.classList.toggle('active',x===t); });
+        typeWrap.style.display=mode==='type'?'block':'none';
+        drawWrap.style.display=mode==='draw'?'block':'none';
+        if(mode==='draw') setTimeout(sizeCanvas,10);
+      });
+    });
+
+    panel._sig={
+      mode:function(){ return mode; },
+      hasInk:function(){ return mode==='draw'?hasDrawn:!!nameInput.value.trim(); },
+      data:function(){ return mode==='draw'?(hasDrawn?canvas.toDataURL('image/png'):null):(nameInput.value.trim()?renderType(nameInput.value):null); }
+    };
+    setTimeout(sizeCanvas, 40); // draw is the default mode, size the canvas on load
+  }
+
+  Array.prototype.forEach.call(document.querySelectorAll('.sigpanel'), initPanel);
+
+  function updateStatus(){
+    var total=document.querySelectorAll('.sigpanel').length;
+    var signed=document.querySelectorAll('.sigpanel.signed').length;
+    var el=document.getElementById('esignStatus');
+    if(el) el.textContent=signed+' of '+total+' parties signed.';
+  }
+
+  Array.prototype.forEach.call(document.querySelectorAll('.sig-btn'), function(btn){
+    btn.addEventListener('click', function(){
+      var panel=btn.closest('.sigpanel');
+      var party=panel.getAttribute('data-party');
+      var name=panel.querySelector('.signer-name').value.trim();
+      var title=panel.querySelector('.signer-title').value.trim();
+      var consent=panel.querySelector('.consent-check').checked;
+      var sig=panel._sig;
+      if(name.length<2){ alert('Please enter the full legal name of the signer.'); return; }
+      if(!consent){ alert('Please check the consent box to apply your electronic signature.'); return; }
+      if(!sig.hasInk()){ alert(sig.mode()==='draw'?'Please draw your signature.':'Please type the signer name above.'); return; }
+      var data=sig.data();
+      if(!data){ alert('Signature is empty.'); return; }
+      btn.disabled=true; btn.textContent='Recording...';
+      var tierEl=document.querySelector('.sel.chosen .tn');
+      var tier=(tierEl?tierEl.textContent:'Growth').trim();
+      var signedAt=new Date().toISOString();
+      panel.querySelector('.signed-img').src=data;
+      panel.querySelector('.signed-name').textContent=name+(title?', '+title:'');
+      panel.querySelector('.signed-time').textContent='Signed '+new Date().toLocaleString('en-US');
+      panel.classList.add('signed');
+      updateStatus();
+      fetch('/api/sign-engagement',{method:'POST',headers:{'content-type':'application/json'},
+        body:JSON.stringify({doc:'rocroofing-engagement',party:party,signerName:name,signerTitle:title,tier:tier,signatureType:sig.mode(),signatureData:data,consent:true,signedAt:signedAt,agreementUrl:AGREEMENT_URL})})
+        .then(function(r){ return r.json().catch(function(){return {};}); })
+        .then(function(j){ panel.querySelector('.signed-ref').textContent=j.ok?('Recorded · ref '+String(j.reference).slice(0,8)):('Signed (server note: '+(j.error||'unavailable')+')'); })
+        .catch(function(){ panel.querySelector('.signed-ref').textContent='Signed offline. Download a copy and send it to MarkCMO.'; });
+    });
+  });
+
+  var dl=document.getElementById('downloadSigned');
+  if(dl) dl.addEventListener('click', function(){ window.print(); });
+
+  // Tier selection (checkmark, single-select)
+  Array.prototype.forEach.call(document.querySelectorAll('.sel[data-tier]'), function(sel){
+    sel.addEventListener('click', function(){
+      Array.prototype.forEach.call(document.querySelectorAll('.sel[data-tier]'), function(s){ s.classList.remove('chosen'); });
+      sel.classList.add('chosen');
+    });
+  });
+
+  // Submit -> route the client to the ACH invoice for the selected tier
+  var submitBtn=document.getElementById('submitBtn');
+  if(submitBtn) submitBtn.addEventListener('click', function(){
+    var client=document.querySelector('.sigpanel[data-party="client"]');
+    if(!client || !client.classList.contains('signed')){ alert('Please have the client sign above before submitting and paying.'); return; }
+    var chosen=document.querySelector('.sel.chosen[data-tier]') || document.querySelector('.sel[data-tier="growth"]');
+    var tier=chosen?chosen.getAttribute('data-tier'):'growth';
+    var emailEl=client.querySelector('.signer-email');
+    var email=emailEl?emailEl.value.trim():'';
+    var url='invoice.html?tier='+encodeURIComponent(tier)+(email?'&email='+encodeURIComponent(email):'');
+    window.location.href=url;
+  });
+})();
+</script>
+
+</body>
+</html>

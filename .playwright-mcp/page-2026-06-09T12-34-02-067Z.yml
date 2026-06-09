@@ -1,0 +1,262 @@
+- generic [active] [ref=e1]:
+  - banner [ref=e7]:
+    - generic [ref=e8]:
+      - link "LOCKUP" [ref=e10] [cursor=pointer]:
+        - /url: https://secondlifemac.com
+        - img "LOCKUP" [ref=e11]
+      - navigation "Menu" [ref=e12]:
+        - list [ref=e13]:
+          - listitem [ref=e14]:
+            - link "Who We Help" [ref=e15] [cursor=pointer]:
+              - /url: "#"
+            - button "Toggle submenu for Who We Help" [ref=e16] [cursor=pointer]:
+              - img [ref=e17]
+          - listitem [ref=e19]:
+            - link "How it Works" [ref=e20] [cursor=pointer]:
+              - /url: "#"
+            - button "Toggle submenu for How it Works" [ref=e21] [cursor=pointer]:
+              - img [ref=e22]
+          - listitem [ref=e24]:
+            - link "Resource Center" [ref=e25] [cursor=pointer]:
+              - /url: "#"
+            - button "Toggle submenu for Resource Center" [ref=e26] [cursor=pointer]:
+              - img [ref=e27]
+          - listitem [ref=e29]:
+            - link "About Us" [ref=e30] [cursor=pointer]:
+              - /url: https://secondlifemac.com/about-us/
+            - button "Toggle submenu for About Us" [ref=e31] [cursor=pointer]:
+              - img [ref=e32]
+      - generic [ref=e34]:
+        - link "Contact" [ref=e35] [cursor=pointer]:
+          - /url: /contact-us
+          - generic [ref=e36]: Contact
+        - link "Get a Refresh Plan" [ref=e37] [cursor=pointer]:
+          - /url: /get-your-refresh-plan
+          - img [ref=e38]
+          - generic [ref=e43]: Get a Refresh Plan
+  - main [ref=e44]:
+    - generic [ref=e46]:
+      - generic [ref=e48]:
+        - heading "WE TURN OLD APPLE DEVICES INTO NEW OPPORTUNITIES" [level=1] [ref=e50]
+        - paragraph [ref=e52]: "We make it easy for schools, districts and organizations to securely refresh and resell their used Apple devices, so they have more to reinvest in updating their inventory with the latest and greatest. Here’s the best part: you don’t pay us to do it—we pay you."
+        - link "Get A Refresh Plan" [ref=e54] [cursor=pointer]:
+          - /url: https://secondlifemac.com/get-a-quote/
+          - generic [ref=e56]: Get A Refresh Plan
+      - generic [ref=e59]:
+        - generic [ref=e62]:
+          - img [ref=e65]
+          - generic [ref=e67]:
+            - heading "3M" [level=3] [ref=e68]
+            - paragraph [ref=e69]:
+              - text: APPLE DEVICES
+              - text: PURCHASED
+        - generic [ref=e72]:
+          - img [ref=e75]
+          - generic [ref=e77]:
+            - heading "5000+" [level=3] [ref=e78]
+            - paragraph [ref=e79]:
+              - text: REFRESHES
+              - text: NATIONWIDE
+        - generic [ref=e82]:
+          - img [ref=e85]
+          - generic [ref=e94]:
+            - heading "2000+" [level=3] [ref=e95]
+            - paragraph [ref=e96]:
+              - text: ORGANIZATIONS
+              - text: SERVED
+      - generic [ref=e106]:
+        - generic [ref=e107]:
+          - generic [ref=e110]: "1"
+          - heading "CONNECT" [level=2] [ref=e111]
+        - paragraph [ref=e112]: It’s not as simple as waiting until your devices break or become obsolete. We start by learning about your goals, challenges, and current tech needs, then use our experience purchasing, refurbishing, and reselling millions of Apple devices to shape a Refresh Plan tailored to your timelines.
+      - generic [ref=e153]:
+        - generic [ref=e154]:
+          - heading "Apple Device Buyback 101" [level=2] [ref=e156]
+          - heading "A Guide for Schools - Turning Yesterday's Tech into Tomorrow's Opportunities" [level=4] [ref=e158]
+          - paragraph [ref=e162]: Complete beginner’s guide to understanding how school device buyback works, why it matters, and how to transform old Apple technology into valuable budget resources.
+        - iframe [ref=e169]:
+          - generic [ref=f42e2]:
+            - paragraph [ref=f42e3]:
+              - generic [ref=f42e4]: First Name
+              - textbox "First Name" [ref=f42e5]
+            - paragraph [ref=f42e6]:
+              - generic [ref=f42e7]: Last Name
+              - textbox "Last Name" [ref=f42e8]
+            - paragraph [ref=f42e9]:
+              - generic [ref=f42e10]: Email
+              - textbox "Email" [ref=f42e11]
+            - paragraph [ref=f42e12]
+            - generic [ref=f42e13]:
+              - iframe [ref=f42e17]:
+                - generic [ref=f47e2]:
+                  - generic [ref=f47e3]:
+                    - checkbox "I'm not a robot" [ref=f47e7]
+                    - generic [ref=f47e11]: I'm not a robot
+                  - generic [ref=f47e15]: reCAPTCHA
+              - generic [ref=f42e18]:
+                - link "Privacy" [ref=f42e19] [cursor=pointer]:
+                  - /url: https://www.salesforce.com/company/legal/privacy/#privacy-statement
+                - text: "-"
+                - link "Terms" [ref=f42e20] [cursor=pointer]:
+                  - /url: https://www.salesforce.com/company/legal/sfdc-website-terms-of-service/
+            - paragraph [ref=f42e21]
+            - paragraph [ref=f42e22]:
+              - button "SUBMIT" [ref=f42e23] [cursor=pointer]
+      - generic [ref=e179]:
+        - button "Previous" [ref=e180] [cursor=pointer]:
+          - img [ref=e181]
+        - button "Next" [ref=e183] [cursor=pointer]:
+          - img [ref=e184]
+        - tablist [ref=e186]:
+          - tab "1 of 2" [selected] [ref=e187] [cursor=pointer]: "1"
+          - tab "2 of 2" [ref=e188] [cursor=pointer]: "2"
+          - tab "3 of 2" [ref=e189] [cursor=pointer]: "3"
+          - tab "4 of 2" [ref=e190] [cursor=pointer]: "4"
+          - tab "5 of 2" [ref=e191] [cursor=pointer]: "5"
+  - contentinfo [ref=e197]:
+    - generic [ref=e199]:
+      - generic [ref=e200]:
+        - link [ref=e202] [cursor=pointer]:
+          - /url: /
+        - paragraph [ref=e204]: Hello@SecondLifeMac.com
+        - paragraph [ref=e206]: 847-376-2757
+        - paragraph [ref=e208]:
+          - text: 7603 New Gross Point Road
+          - text: Skokie, IL 60077
+      - generic [ref=e209]:
+        - list [ref=e211]:
+          - listitem [ref=e212]:
+            - generic [ref=e213]: WHO WE HELP
+          - listitem [ref=e214]:
+            - link "Education" [ref=e215] [cursor=pointer]:
+              - /url: https://secondlifemac.com/school-it-asset-disposition/
+              - generic [ref=e216]: Education
+          - listitem [ref=e217]:
+            - link "Business" [ref=e218] [cursor=pointer]:
+              - /url: https://secondlifemac.com/enterprise-itad/
+              - generic [ref=e219]: Business
+          - listitem [ref=e220]:
+            - link "Healthcare" [ref=e221] [cursor=pointer]:
+              - /url: https://secondlifemac.com/healthcare-it-asset-disposition/
+              - generic [ref=e222]: Healthcare
+          - listitem [ref=e223]:
+            - generic [ref=e224]: HOW IT WORKS
+          - listitem [ref=e225]:
+            - link "Buyback Process" [ref=e226] [cursor=pointer]:
+              - /url: https://secondlifemac.com/apple-device-buyback/
+              - generic [ref=e227]: Buyback Process
+          - listitem [ref=e228]:
+            - link "What We Buy" [ref=e229] [cursor=pointer]:
+              - /url: https://secondlifemac.com/what-we-buy/
+              - generic [ref=e230]: What We Buy
+          - listitem [ref=e231]:
+            - link "Data Security" [ref=e232] [cursor=pointer]:
+              - /url: https://secondlifemac.com/data-security/
+              - generic [ref=e233]: Data Security
+          - listitem [ref=e234]:
+            - link "Get a Refresh Plan" [ref=e235] [cursor=pointer]:
+              - /url: https://secondlifemac.com/get-a-quote/
+              - generic [ref=e236]: Get a Refresh Plan
+        - list [ref=e238]:
+          - listitem [ref=e239]:
+            - link "RESOURCE CENTER" [ref=e240] [cursor=pointer]:
+              - /url: "#"
+              - generic [ref=e241]: RESOURCE CENTER
+          - listitem [ref=e242]:
+            - link "The Refresh Report" [ref=e243] [cursor=pointer]:
+              - /url: /about-us/
+              - generic [ref=e244]: The Refresh Report
+          - listitem [ref=e245]:
+            - link "White Papers" [ref=e246] [cursor=pointer]:
+              - /url: https://secondlifemac.com/white-papers/
+              - generic [ref=e247]: White Papers
+          - listitem [ref=e248]:
+            - link "Video Library" [ref=e249] [cursor=pointer]:
+              - /url: https://secondlifemac.com/videos/
+              - generic [ref=e250]: Video Library
+          - listitem [ref=e251]:
+            - link "Case Studies" [ref=e252] [cursor=pointer]:
+              - /url: https://secondlifemac.com/case-studies/
+              - generic [ref=e253]: Case Studies
+          - listitem [ref=e254]:
+            - link "ABOUT US" [ref=e255] [cursor=pointer]:
+              - /url: "#"
+              - generic [ref=e256]: ABOUT US
+          - listitem [ref=e257]:
+            - link "Who We Are" [ref=e258] [cursor=pointer]:
+              - /url: https://secondlifemac.com/about-us/
+              - generic [ref=e259]: Who We Are
+          - listitem [ref=e260]:
+            - link "Careers" [ref=e261] [cursor=pointer]:
+              - /url: https://secondlifemac.com/careers/
+              - generic [ref=e262]: Careers
+          - listitem [ref=e263]:
+            - link "Buy From Us" [ref=e264] [cursor=pointer]:
+              - /url: https://secondlifemac.com/buy-from-us/
+              - generic [ref=e265]: Buy From Us
+          - listitem [ref=e266]:
+            - link "Contact Us" [ref=e267] [cursor=pointer]:
+              - /url: https://secondlifemac.com/contact-us/
+              - generic [ref=e268]: Contact Us
+      - generic [ref=e269]:
+        - list [ref=e271]:
+          - listitem [ref=e272]:
+            - link "Linkedin" [ref=e273] [cursor=pointer]:
+              - /url: https://www.linkedin.com/company/secondlifemac/
+              - generic [ref=e274]: Linkedin
+              - img [ref=e275]
+          - listitem [ref=e277]:
+            - link "X-twitter" [ref=e278] [cursor=pointer]:
+              - /url: https://x.com/SecondLifeMac
+              - generic [ref=e279]: X-twitter
+              - img [ref=e280]
+          - listitem [ref=e282]:
+            - link "Facebook" [ref=e283] [cursor=pointer]:
+              - /url: https://www.facebook.com/secondlifemac/
+              - generic [ref=e284]: Facebook
+              - img [ref=e285]
+          - listitem [ref=e287]:
+            - link "Instagram" [ref=e288] [cursor=pointer]:
+              - /url: https://www.instagram.com/secondlifemac/
+              - generic [ref=e289]: Instagram
+              - img [ref=e290]
+          - listitem [ref=e292]:
+            - link "Vimeo" [ref=e293] [cursor=pointer]:
+              - /url: https://vimeo.com/user224115180
+              - generic [ref=e294]: Vimeo
+              - img [ref=e295]
+        - paragraph [ref=e298]: Stay ahead with the latest tips, insights, and industry news—delivered straight to your inbox. Join our newsletter today!
+        - iframe [ref=e300]:
+          - generic [ref=f43e2]:
+            - paragraph [ref=f43e3]:
+              - generic [ref=f43e4]: Email
+              - textbox "Email" [ref=f43e5]
+            - paragraph [ref=f43e6]
+            - generic [ref=f43e7]:
+              - iframe [ref=f43e11]:
+                - generic [ref=f46e2]:
+                  - generic [ref=f46e3]:
+                    - checkbox "I'm not a robot" [ref=f46e7]
+                    - generic [ref=f46e11]: I'm not a robot
+                  - generic [ref=f46e15]: reCAPTCHA
+              - generic [ref=f43e12]:
+                - link "Privacy" [ref=f43e13] [cursor=pointer]:
+                  - /url: https://www.salesforce.com/company/legal/privacy/#privacy-statement
+                - text: "-"
+                - link "Terms" [ref=f43e14] [cursor=pointer]:
+                  - /url: https://www.salesforce.com/company/legal/sfdc-website-terms-of-service/
+            - paragraph [ref=f43e15]
+            - paragraph [ref=f43e16]:
+              - button "SUBMIT" [ref=f43e17] [cursor=pointer]
+      - list [ref=e303]:
+        - listitem [ref=e304]:
+          - generic [ref=e305]: ©2026 Second Life Mac. All Rights Reserved.
+        - listitem [ref=e306]:
+          - link "PRIVACY POLICY" [ref=e307] [cursor=pointer]:
+            - /url: https://secondlifemac.com/privacy-policy/
+            - generic [ref=e308]: PRIVACY POLICY
+        - listitem [ref=e309]:
+          - link "TERMS OF USE" [ref=e310] [cursor=pointer]:
+            - /url: https://secondlifemac.com/terms-of-use/
+            - generic [ref=e311]: TERMS OF USE
+  - generic [ref=e312]: desktop

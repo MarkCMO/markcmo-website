@@ -1,0 +1,52 @@
+name: iOS build and submit
+
+# Builds the iOS app on a free GitHub macOS runner with `eas build --local`
+# (does NOT use EAS cloud build quota) and submits to TestFlight.
+# Public repo -> GitHub-hosted macOS runners are free.
+#
+# Required repository secrets (Settings -> Secrets and variables -> Actions):
+#   EXPO_TOKEN   an Expo access token (expo.dev -> Settings -> Access tokens).
+#                Lets eas authenticate non-interactively and fetch the iOS
+#                credentials already configured on your EAS account.
+#   ASC_KEY_B64  your AuthKey_YRMDQTX998.p8, base64-encoded, for `eas submit`.
+
+on:
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: macos-15
+    timeout-minutes: 90
+    env:
+      EXPO_TOKEN: ${{ secrets.EXPO_TOKEN }}
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Install EAS CLI
+        run: npm i -g eas-cli
+
+      - name: Restore App Store Connect API key
+        run: |
+          mkdir -p asc
+          echo "${{ secrets.ASC_KEY_B64 }}" | base64 --decode > asc/AuthKey.p8
+
+      - name: Build iOS (local, no EAS quota)
+        run: eas build --platform ios --profile production --local --non-interactive --output ./app.ipa
+
+      - name: Submit to TestFlight
+        run: eas submit --platform ios --profile ci --path ./app.ipa --non-interactive
+
+      - name: Upload IPA artifact
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: pet-chores-ipa
+          path: ./app.ipa
+          if-no-files-found: ignore

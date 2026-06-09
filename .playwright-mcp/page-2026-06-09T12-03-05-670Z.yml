@@ -1,0 +1,1189 @@
+- generic [active] [ref=e1]:
+  - generic:
+    - generic:
+      - link "Skip to main content" [ref=e2] [cursor=pointer]
+      - link "Accessibility help" [ref=e3] [cursor=pointer]:
+        - /url: https://support.google.com/websearch/answer/181196?hl=en
+  - generic [ref=e8]:
+    - search [ref=e9]:
+      - generic [ref=e11]:
+        - link "Go to Google Home" [ref=e13] [cursor=pointer]:
+          - /url: https://www.google.com/webhp?hl=en&sa=X&ved=0ahUKEwjDwbHGjvqUAxXAwvACHfhUA14QPAgI
+          - img [ref=e14]
+        - generic [ref=e21]:
+          - generic [ref=e22]:
+            - combobox "Search" [ref=e25]: refurbished macbooks for schools refurbished macbooks for schools
+            - generic [ref=e26]:
+              - button "Clear" [ref=e28] [cursor=pointer]:
+                - img [ref=e30]
+              - generic [ref=e33]:
+                - button "Search by voice" [ref=e34] [cursor=pointer]:
+                  - img [ref=e35]
+                - button "Search by image" [ref=e37] [cursor=pointer]:
+                  - img [ref=e38]
+          - button "Search" [ref=e40] [cursor=pointer]:
+            - img [ref=e43]
+    - generic [ref=e45]:
+      - button "Settings" [ref=e47] [cursor=pointer]:
+        - img [ref=e50]
+      - generic [ref=e53]:
+        - button "Google apps" [ref=e55] [cursor=pointer]:
+          - img [ref=e56]
+        - link "Sign in" [ref=e60] [cursor=pointer]:
+          - /url: https://accounts.google.com/ServiceLogin?hl=en&passive=true&continue=https://www.google.com/search%3Fq%3Drefurbished%2Bmacbooks%2Bfor%2Bschools%26num%3D20&ec=futura_srp_og_si_72236_p
+  - generic [ref=e62]:
+    - navigation [ref=e68]:
+      - generic [ref=e74]:
+        - list [ref=e75]:
+          - listitem [ref=e76]:
+            - link "AI Mode" [ref=e79] [cursor=pointer]:
+              - /url: /search?q=refurbished+macbooks+for+schools&sca_esv=09892958edd89daa&udm=50&fbs=ADc_l-aN0CWEZBOHjofHoaMMDiKp9lEhFAN_4ain3HSNQWw-mBcFY_b7_fFBjPEsWR5sze70UoGyE3eK9xvjeO54So6L8mXuRSzXiWrBNFiE6k4PN-awUaWFFUL02GiLsPTK0wn7sgREs4OSnFR1mXnsUhpHw178OzPXdULQV6LmjNVsRUFXl7zmNHtd2THLHuKFAaMUwnibyaDRC1xA7jufqvcz2dDiGA&aep=1&ntc=1&sa=X&ved=2ahUKEwjDwbHGjvqUAxXAwvACHfhUA14Q2J8OegQIDRAD
+              - generic [ref=e82]: AI Mode
+          - listitem [ref=e83]:
+            - link "All" [disabled] [ref=e84]:
+              - generic [ref=e86]: All
+          - listitem [ref=e87]:
+            - link "Shopping" [ref=e88] [cursor=pointer]:
+              - /url: /search?sca_esv=09892958edd89daa&udm=28&fbs=ADc_l-aN0CWEZBOHjofHoaMMDiKp9lEhFAN_4ain3HSNQWw-mBcFY_b7_fFBjPEsWR5sze70UoGyE3eK9xvjeO54So6L8mXuRSzXiWrBNFiE6k4PN-awUaWFFUL02GiLsPTK0wn7sgREs4OSnFR1mXnsUhpHw178OzPXdULQV6LmjNVsRUFXl7zmNHtd2THLHuKFAaMUwnibyaDRC1xA7jufqvcz2dDiGA&q=refurbished+macbooks+for+schools&ved=1t:220175&ictx=111
+              - generic [ref=e90]: Shopping
+          - listitem [ref=e91]:
+            - link "News" [ref=e92] [cursor=pointer]:
+              - /url: /search?sca_esv=09892958edd89daa&q=refurbished+macbooks+for+schools&tbm=nws&source=lnms&fbs=ADc_l-aN0CWEZBOHjofHoaMMDiKp9lEhFAN_4ain3HSNQWw-mBcFY_b7_fFBjPEsWR5sze70UoGyE3eK9xvjeO54So6L8mXuRSzXiWrBNFiE6k4PN-awUaWFFUL02GiLsPTK0wn7sgREs4OSnFR1mXnsUhpHw178OzPXdULQV6LmjNVsRUFXl7zmNHtd2THLHuKFAaMUwnibyaDRC1xA7jufqvcz2dDiGA&sa=X&ved=2ahUKEwjDwbHGjvqUAxXAwvACHfhUA14Q0pQJegQIERAB
+              - generic [ref=e94]: News
+          - listitem [ref=e95]:
+            - link "Short videos" [ref=e96] [cursor=pointer]:
+              - /url: /search?sca_esv=09892958edd89daa&udm=39&fbs=ADc_l-aN0CWEZBOHjofHoaMMDiKp9lEhFAN_4ain3HSNQWw-mBcFY_b7_fFBjPEsWR5sze70UoGyE3eK9xvjeO54So6L8mXuRSzXiWrBNFiE6k4PN-awUaWFFUL02GiLsPTK0wn7sgREs4OSnFR1mXnsUhpHw178OzPXdULQV6LmjNVsRUFXl7zmNHtd2THLHuKFAaMUwnibyaDRC1xA7jufqvcz2dDiGA&q=refurbished+macbooks+for+schools&sa=X&ved=2ahUKEwjDwbHGjvqUAxXAwvACHfhUA14Qs6gLegQIExAB
+              - generic [ref=e98]: Short videos
+          - listitem [ref=e99]:
+            - link "Images" [ref=e100] [cursor=pointer]:
+              - /url: /search?sca_esv=09892958edd89daa&udm=2&fbs=ADc_l-aN0CWEZBOHjofHoaMMDiKp9lEhFAN_4ain3HSNQWw-mBcFY_b7_fFBjPEsWR5sze70UoGyE3eK9xvjeO54So6L8mXuRSzXiWrBNFiE6k4PN-awUaWFFUL02GiLsPTK0wn7sgREs4OSnFR1mXnsUhpHw178OzPXdULQV6LmjNVsRUFXl7zmNHtd2THLHuKFAaMUwnibyaDRC1xA7jufqvcz2dDiGA&q=refurbished+macbooks+for+schools&sa=X&ved=2ahUKEwjDwbHGjvqUAxXAwvACHfhUA14QtKgLegQIDxAB
+              - generic [ref=e102]: Images
+          - listitem [ref=e103]:
+            - link "Forums" [ref=e104] [cursor=pointer]:
+              - /url: /search?sca_esv=09892958edd89daa&udm=18&fbs=ADc_l-aN0CWEZBOHjofHoaMMDiKp9lEhFAN_4ain3HSNQWw-mBcFY_b7_fFBjPEsWR5sze70UoGyE3eK9xvjeO54So6L8mXuRSzXiWrBNFiE6k4PN-awUaWFFUL02GiLsPTK0wn7sgREs4OSnFR1mXnsUhpHw178OzPXdULQV6LmjNVsRUFXl7zmNHtd2THLHuKFAaMUwnibyaDRC1xA7jufqvcz2dDiGA&q=refurbished+macbooks+for+schools&sa=X&ved=2ahUKEwjDwbHGjvqUAxXAwvACHfhUA14Qs6gLegQIFhAB
+              - generic [ref=e106]: Forums
+          - listitem [ref=e107]:
+            - button "More filters" [ref=e108] [cursor=pointer]:
+              - generic "More filters" [ref=e109]:
+                - generic [ref=e110]:
+                  - generic [ref=e111]: More
+                  - img [ref=e113]
+        - button "Tools" [ref=e116] [cursor=pointer]:
+          - generic [ref=e118]:
+            - generic [ref=e119]: Tools
+            - img [ref=e121]
+    - heading "Search Results" [level=1] [ref=e123]
+    - navigation "Refinement" [ref=e131]:
+      - generic [ref=e133]:
+        - list [ref=e135]:
+          - list [ref=e136]:
+            - button "All filters." [pressed] [ref=e137] [cursor=pointer]:
+              - img [ref=e139]
+            - listitem [ref=e141] [cursor=pointer]:
+              - link "Nearby filter. Not selected." [ref=e142]:
+                - /url: /search?q=refurbished+macbooks+for+schools+nearby&shoprs=CAEYAyogcmVmdXJiaXNoZWQgbWFjYm9va3MgZm9yIHNjaG9vbHMyDAgDEgZOZWFyYnkYAliLqiBgAQ&sa=X&ved=2ahUKEwjDwbHGjvqUAxXAwvACHfhUA14Qip4GKAF6BQgoEIsB
+                - generic [ref=e143]:
+                  - img [ref=e147]
+                  - generic [ref=e150]: Nearby
+            - listitem [ref=e151] [cursor=pointer]:
+              - link "MacBook Pro filter. Not selected." [ref=e152]:
+                - /url: /search?q=macbook+pro+refurbished+macbooks+for+schools&shoprs=CAEYASogcmVmdXJiaXNoZWQgbWFjYm9va3MgZm9yIHNjaG9vbHMyGwgBEgtNYWNCb29rIFBybzoKCMniORDK4jkwBFiLqiBgAQ&sa=X&ved=2ahUKEwjDwbHGjvqUAxXAwvACHfhUA14Qip4GKAJ6BQgoEIwB
+                - generic [ref=e154]: MacBook Pro
+            - listitem [ref=e155] [cursor=pointer]:
+              - link "Under $250 filter. Not selected." [ref=e156]:
+                - /url: /search?q=refurbished+macbooks+for+schools+under+$250&shoprs=CAESDRILEQAAAABlza1BGAEYBSogcmVmdXJiaXNoZWQgbWFjYm9va3MgZm9yIHNjaG9vbHMyIwgFEgpVbmRlciAkMjUwGAIiDRILEQAAAABlza1BGAEqAhgBWIuqIGAB&sa=X&ved=2ahUKEwjDwbHGjvqUAxXAwvACHfhUA14Qip4GKAN6BQgoEI0B
+                - generic [ref=e158]: Under $250
+            - listitem [ref=e159] [cursor=pointer]:
+              - link "MacBook Air filter. Not selected." [ref=e160]:
+                - /url: /search?q=macbook+air+refurbished+macbooks+for+schools&shoprs=CAEYASogcmVmdXJiaXNoZWQgbWFjYm9va3MgZm9yIHNjaG9vbHMyGwgBEgtNYWNCb29rIEFpcjoKCMniORDL4jkwBFiLqiBgAQ&sa=X&ved=2ahUKEwjDwbHGjvqUAxXAwvACHfhUA14Qip4GKAR6BQgoEI4B
+                - generic [ref=e162]: MacBook Air
+            - listitem [ref=e163] [cursor=pointer]:
+              - link "13.3 – 14 inches filter. Not selected." [ref=e164]:
+                - /url: /search?q=13.3+inches+to+14+inches+refurbished+macbooks+for+schools&shoprs=CAESGioYCMakPhISCQAAAKAY5EBAEQAAACCux0FAGAEqIHJlZnVyYmlzaGVkIG1hY2Jvb2tzIGZvciBzY2hvb2xzMloIARISMTMuMyDigJMgMTQgaW5jaGVzIhoqGAjGpD4SEgkAAACgGORAQBEAAAAgrsdBQCocChgxMy4zIGluY2hlcyB0byAxNCBpbmNoZXMYAToICMakPhAAMAZYi6ogYAE&sa=X&ved=2ahUKEwjDwbHGjvqUAxXAwvACHfhUA14Qip4GKAV6BQgoEI8B
+                - generic [ref=e166]: 13.3 – 14 inches
+            - listitem [ref=e167] [cursor=pointer]:
+              - link "On sale filter. Not selected." [ref=e168]:
+                - /url: /search?q=refurbished+macbooks+for+schools+sale&shoprs=CAESBEoCGAEYBiogcmVmdXJiaXNoZWQgbWFjYm9va3MgZm9yIHNjaG9vbHMyEwgGEgdPbiBzYWxlGAIiBEoCGAFYi6ogYAE&sa=X&ved=2ahUKEwjDwbHGjvqUAxXAwvACHfhUA14Qip4GKAZ6BQgoEJAB
+                - generic [ref=e170]: On sale
+            - listitem [ref=e171] [cursor=pointer]:
+              - link "Over 15 inches filter. Not selected." [ref=e172]:
+                - /url: /search?q=over+15+inches+refurbished+macbooks+for+schools&shoprs=CAESESoPCMakPhIJCQAAAMDMDENAGAEqIHJlZnVyYmlzaGVkIG1hY2Jvb2tzIGZvciBzY2hvb2xzMjMIARIOT3ZlciAxNSBpbmNoZXMiESoPCMakPhIJCQAAAMDMDENAKgIYAToICMakPhAAMAZYi6ogYAE&sa=X&ved=2ahUKEwjDwbHGjvqUAxXAwvACHfhUA14Qip4GKAd6BQgoEJEB
+                - generic [ref=e174]: Over 15 inches
+            - listitem [ref=e175] [cursor=pointer]:
+              - link "Under 13.3 inches filter. Not selected." [ref=e176]:
+                - /url: /search?q=under+13.3+inches+refurbished+macbooks+for+schools&shoprs=CAESESoPCMakPhIJEQAAAKAY5EBAGAEqIHJlZnVyYmlzaGVkIG1hY2Jvb2tzIGZvciBzY2hvb2xzMjYIARIRVW5kZXIgMTMuMyBpbmNoZXMiESoPCMakPhIJEQAAAKAY5EBAKgIYAToICMakPhAAMAZYi6ogYAE&sa=X&ved=2ahUKEwjDwbHGjvqUAxXAwvACHfhUA14Qip4GKAh6BQgoEJIB
+                - generic [ref=e178]: Under 13.3 inches
+            - listitem [ref=e179] [cursor=pointer]:
+              - link "14 – 15 inches filter. Not selected." [ref=e180]:
+                - /url: /search?q=14+inches+to+15+inches+refurbished+macbooks+for+schools&shoprs=CAESGioYCMakPhISCQAAACCux0FAEQAAAMDMDENAGAEqIHJlZnVyYmlzaGVkIG1hY2Jvb2tzIGZvciBzY2hvb2xzMlYIARIQMTQg4oCTIDE1IGluY2hlcyIaKhgIxqQ-EhIJAAAAIK7HQUARAAAAwMwMQ0AqGgoWMTQgaW5jaGVzIHRvIDE1IGluY2hlcxgBOggIxqQ-EAAwBliLqiBgAQ&sa=X&ved=2ahUKEwjDwbHGjvqUAxXAwvACHfhUA14Qip4GKAl6BQgoEJMB
+                - generic [ref=e182]: 14 – 15 inches
+            - listitem [ref=e183] [cursor=pointer]:
+              - link "Over 16 GB RAM filter. Not selected." [ref=e184]:
+                - /url: /search?q=over+16+gb+ram+refurbished+macbooks+for+schools&shoprs=CAESESoPCLCmPhIJCQAAAAAAADBAGAEqIHJlZnVyYmlzaGVkIG1hY2Jvb2tzIGZvciBzY2hvb2xzMjMIARIOT3ZlciAxNiBHQiBSQU0iESoPCLCmPhIJCQAAAAAAADBAKgIYAToICLCmPhAAMAZYi6ogYAE&sa=X&ved=2ahUKEwjDwbHGjvqUAxXAwvACHfhUA14Qip4GKAp6BQgoEJQB
+                - generic [ref=e186]: Over 16 GB RAM
+            - listitem [ref=e187] [cursor=pointer]:
+              - link "8 – 16 GB RAM filter. Not selected." [ref=e188]:
+                - /url: /search?q=8+gb+ram+to+16+gb+ram+refurbished+macbooks+for+schools&shoprs=CAESGioYCLCmPhISCQAAAAAAACBAEQAAAAAAADBAGAEqIHJlZnVyYmlzaGVkIG1hY2Jvb2tzIGZvciBzY2hvb2xzMlQIARIPOCDigJMgMTYgR0IgUkFNIhoqGAiwpj4SEgkAAAAAAAAgQBEAAAAAAAAwQCoZChU4IEdCIFJBTSB0byAxNiBHQiBSQU0YAToICLCmPhAAMAZYi6ogYAE&sa=X&ved=2ahUKEwjDwbHGjvqUAxXAwvACHfhUA14Qip4GKAt6BQgoEJUB
+                - generic [ref=e190]: 8 – 16 GB RAM
+            - listitem [ref=e191] [cursor=pointer]:
+              - link "Online filter. Not selected." [ref=e192]:
+                - /url: /search?q=online+refurbished+macbooks+for+schools&shoprs=CAEYEiogcmVmdXJiaXNoZWQgbWFjYm9va3MgZm9yIHNjaG9vbHMyCggSEgZPbmxpbmVgAQ&sa=X&ved=2ahUKEwjDwbHGjvqUAxXAwvACHfhUA14Qip4GKAx6BQgoEJYB
+                - generic [ref=e194]: Online
+            - listitem [ref=e195] [cursor=pointer]:
+              - link "Laptops filter. Not selected." [ref=e196]:
+                - /url: /search?q=laptops+refurbished+macbooks+for+schools&shoprs=CAEYCSogcmVmdXJiaXNoZWQgbWFjYm9va3MgZm9yIHNjaG9vbHMyCwgJEgdMYXB0b3BzYAE&sa=X&ved=2ahUKEwjDwbHGjvqUAxXAwvACHfhUA14Qip4GKA16BQgoEJcB
+                - generic [ref=e198]: Laptops
+            - listitem [ref=e199] [cursor=pointer]:
+              - link "4 – 8 GB RAM filter. Not selected." [ref=e200]:
+                - /url: /search?q=4+gb+ram+to+8+gb+ram+refurbished+macbooks+for+schools&shoprs=CAESGioYCLCmPhISCQAAAAAAABBAEQAAAAAAACBAGAEqIHJlZnVyYmlzaGVkIG1hY2Jvb2tzIGZvciBzY2hvb2xzMlIIARIONCDigJMgOCBHQiBSQU0iGioYCLCmPhISCQAAAAAAABBAEQAAAAAAACBAKhgKFDQgR0IgUkFNIHRvIDggR0IgUkFNGAE6CAiwpj4QADAGWIuqIGAB&sa=X&ved=2ahUKEwjDwbHGjvqUAxXAwvACHfhUA14Qip4GKA56BQgoEJgB
+                - generic [ref=e202]: 4 – 8 GB RAM
+            - listitem [ref=e203] [cursor=pointer]:
+              - link "For Sale filter. Not selected." [ref=e204]:
+                - /url: /search?q=refurbished+macbooks+for+schools+sale&shoprs=CAEYEiogcmVmdXJiaXNoZWQgbWFjYm9va3MgZm9yIHNjaG9vbHMyDAgSEghGb3IgU2FsZWAB&sa=X&ved=2ahUKEwjDwbHGjvqUAxXAwvACHfhUA14Qip4GKA96BQgoEJkB
+                - generic [ref=e206]: For Sale
+            - listitem [ref=e207] [cursor=pointer]:
+              - link "Buy filter. Not selected." [ref=e208]:
+                - /url: /search?q=buy+refurbished+macbooks+for+schools&shoprs=CAEYEiogcmVmdXJiaXNoZWQgbWFjYm9va3MgZm9yIHNjaG9vbHMyBwgSEgNCdXlgAQ&sa=X&ved=2ahUKEwjDwbHGjvqUAxXAwvACHfhUA14Qip4GKBB6BQgoEJoB
+                - generic [ref=e210]: Buy
+            - listitem [ref=e211] [cursor=pointer]:
+              - link "Solid State Drive filter. Not selected." [ref=e212]:
+                - /url: /search?q=solid+state+drive+refurbished+macbooks+for+schools&shoprs=CAEYASogcmVmdXJiaXNoZWQgbWFjYm9va3MgZm9yIHNjaG9vbHMyIQgBEhFTb2xpZCBTdGF0ZSBEcml2ZToKCJHTOhCT0zowAliLqiBgAQ&sa=X&ved=2ahUKEwjDwbHGjvqUAxXAwvACHfhUA14Qip4GKBF6BQgoEJsB
+                - generic [ref=e214]: Solid State Drive
+            - listitem [ref=e215] [cursor=pointer]:
+              - link "256 – 512 GB drive filter. Not selected." [ref=e216]:
+                - /url: /search?q=256+gb+drive+to+512+gb+drive+refurbished+macbooks+for+schools&shoprs=CAESGioYCMSkPhISCQAAAAAAAHBAEQAAAAAAAIBAGAEqIHJlZnVyYmlzaGVkIG1hY2Jvb2tzIGZvciBzY2hvb2xzMmAIARIUMjU2IOKAkyA1MTIgR0IgZHJpdmUiGioYCMSkPhISCQAAAAAAAHBAEQAAAAAAAIBAKiAKHDI1NiBHQiBkcml2ZSB0byA1MTIgR0IgZHJpdmUYAToICMSkPhAAMAZYi6ogYAE&sa=X&ved=2ahUKEwjDwbHGjvqUAxXAwvACHfhUA14Qip4GKBJ6BQgoEJwB
+                - generic [ref=e218]: 256 – 512 GB drive
+            - listitem [ref=e219] [cursor=pointer]:
+              - link "Free filter. Not selected." [ref=e220]:
+                - /url: /search?q=free+refurbished+macbooks+for+schools&shoprs=CAEYEiogcmVmdXJiaXNoZWQgbWFjYm9va3MgZm9yIHNjaG9vbHMyCAgSEgRGcmVlYAE&sa=X&ved=2ahUKEwjDwbHGjvqUAxXAwvACHfhUA14Qip4GKBN6BQgoEJ0B
+                - generic [ref=e222]: Free
+            - listitem [ref=e223] [cursor=pointer]:
+              - link "Intel CPU filter. Not selected." [ref=e224]:
+                - /url: /search?q=intel+cpu+refurbished+macbooks+for+schools&shoprs=CAEYASogcmVmdXJiaXNoZWQgbWFjYm9va3MgZm9yIHNjaG9vbHMyGQgBEglJbnRlbCBDUFU6Cgj9-yoQ_vsqMABYi6ogYAE&sa=X&ved=2ahUKEwjDwbHGjvqUAxXAwvACHfhUA14Qip4GKBR6BQgoEJ4B
+                - generic [ref=e226]: Intel CPU
+            - listitem [ref=e227] [cursor=pointer]:
+              - link "512 GB drive – 1 TB drive filter. Not selected." [ref=e228]:
+                - /url: /search?q=512+gb+drive+to+1+tb+drive+refurbished+macbooks+for+schools&shoprs=CAESGioYCMSkPhISCQAAAAAAAIBAEQAAAAAAQI9AGAEqIHJlZnVyYmlzaGVkIG1hY2Jvb2tzIGZvciBzY2hvb2xzMmUIARIbNTEyIEdCIGRyaXZlIOKAkyAxIFRCIGRyaXZlIhoqGAjEpD4SEgkAAAAAAACAQBEAAAAAAECPQCoeCho1MTIgR0IgZHJpdmUgdG8gMSBUQiBkcml2ZRgBOggIxKQ-EAAwBliLqiBgAQ&sa=X&ved=2ahUKEwjDwbHGjvqUAxXAwvACHfhUA14Qip4GKBV6BQgoEJ8B
+                - generic [ref=e230]: 512 GB drive – 1 TB drive
+            - listitem [ref=e231] [cursor=pointer]:
+              - link "Under 4 GB RAM filter. Not selected." [ref=e232]:
+                - /url: /search?q=under+4+gb+ram+refurbished+macbooks+for+schools&shoprs=CAESESoPCLCmPhIJEQAAAAAAABBAGAEqIHJlZnVyYmlzaGVkIG1hY2Jvb2tzIGZvciBzY2hvb2xzMjMIARIOVW5kZXIgNCBHQiBSQU0iESoPCLCmPhIJEQAAAAAAABBAKgIYAToICLCmPhAAMAZYi6ogYAE&sa=X&ved=2ahUKEwjDwbHGjvqUAxXAwvACHfhUA14Qip4GKBZ6BQgoEKAB
+                - generic [ref=e234]: Under 4 GB RAM
+            - listitem [ref=e235] [cursor=pointer]:
+              - link "Over 1 TB drive filter. Not selected." [ref=e236]:
+                - /url: /search?q=over+1+tb+drive+refurbished+macbooks+for+schools&shoprs=CAESESoPCMSkPhIJCQAAAAAAQI9AGAEqIHJlZnVyYmlzaGVkIG1hY2Jvb2tzIGZvciBzY2hvb2xzMjQIARIPT3ZlciAxIFRCIGRyaXZlIhEqDwjEpD4SCQkAAAAAAECPQCoCGAE6CAjEpD4QADAGWIuqIGAB&sa=X&ved=2ahUKEwjDwbHGjvqUAxXAwvACHfhUA14Qip4GKBd6BQgoEKEB
+                - generic [ref=e238]: Over 1 TB drive
+            - listitem [ref=e239] [cursor=pointer]:
+              - link "Under 256 GB drive filter. Not selected." [ref=e240]:
+                - /url: /search?q=under+256+gb+drive+refurbished+macbooks+for+schools&shoprs=CAESESoPCMSkPhIJEQAAAAAAAHBAGAEqIHJlZnVyYmlzaGVkIG1hY2Jvb2tzIGZvciBzY2hvb2xzMjcIARISVW5kZXIgMjU2IEdCIGRyaXZlIhEqDwjEpD4SCREAAAAAAABwQCoCGAE6CAjEpD4QADAGWIuqIGAB&sa=X&ved=2ahUKEwjDwbHGjvqUAxXAwvACHfhUA14Qip4GKBh6BQgoEKIB
+                - generic [ref=e242]: Under 256 GB drive
+            - listitem [ref=e243] [cursor=pointer]:
+              - link "Price filter. Not selected." [ref=e244]:
+                - /url: /search?q=price+refurbished+macbooks+for+schools&shoprs=CAEYEiogcmVmdXJiaXNoZWQgbWFjYm9va3MgZm9yIHNjaG9vbHMyCQgSEgVQcmljZWAB&sa=X&ved=2ahUKEwjDwbHGjvqUAxXAwvACHfhUA14Qip4GKBl6BQgoEKMB
+                - generic [ref=e246]: Price
+        - button [ref=e247] [cursor=pointer]
+    - generic [ref=e251]:
+      - generic [ref=e252]:
+        - region "Ads" [ref=e257]:
+          - generic [ref=e258]:
+            - heading "Sponsored results" [level=2] [ref=e265]
+            - generic [ref=e266]:
+              - generic [ref=e273]:
+                - generic [ref=e279]:
+                  - generic [ref=e280]:
+                    - link "Affordable bulk pricing Securranty https://www.securranty.com › education" [ref=e281] [cursor=pointer]:
+                      - /url: https://securranty.com/Education.aspx
+                      - heading "Affordable bulk pricing" [level=3] [ref=e282]
+                      - generic [ref=e288]:
+                        - generic [ref=e290]: Securranty
+                        - generic [ref=e291]: https://www.securranty.com › education
+                    - button "Why this ad?" [ref=e294] [cursor=pointer]:
+                      - img [ref=e296]
+                  - generic [ref=e301]:
+                    - text: Cover new & used devices — Securranty insurance is trusted by
+                    - emphasis [ref=e302]: schools
+                    - text: for fast repairs and full device protection. Get instant quotes, $0 deductibles & repairs in 5 days. No fees. no surprises. Best Price Guarantee.
+                  - generic [ref=e303]:
+                    - link "Securranty for Schools" [ref=e306] [cursor=pointer]:
+                      - /url: https://securranty.com/Education.aspx%7Bignore%7D?https://securranty.com/Education.aspx=&sa=X&ved=2ahUKEwjDwbHGjvqUAxXAwvACHfhUA14QwgUoAXoECBAQEA#get-a-quote
+                      - img [ref=e308]
+                      - generic [ref=e310]: Securranty for Schools
+                    - link "Chromebook & iPad plans" [ref=e313] [cursor=pointer]:
+                      - /url: /aclk?sa=L&pf=1&ai=DChsSEwjI5rbGjvqUAxULMggFHQZHEUsYACICCAEQBhoCbWQ&co=1&ase=2&gclid=EAIaIQobChMIyOa2xo76lAMVCzIIBR0GRxFLEAAYASADEgJST_D_BwE&cid=CAAS0gHkaCrkcHDfV6EVFSl-8vGmCBMxjQYnaVze_wCQRlM0ByuKmnlxCg4NabqpFSubNiJNlfw2JuOYXd3_XJnqUURa524LRIstajW8b-GTVVXIjJPEw_R2QQyh5MAnaCguW7S-6j-LUu6352iPSvPZK9ADH80PwTRRXpYyO2HapUzO-Zj_Hw-pn9UbmO-DB79ocBiFplR_ZVFHBrkXZ-1elfZ7SVfCs8j_Ix2gjf5Lr7wnKFxiXTIsp4H3qCxkiJmpdZYfCMNLoAGvcV3uJDR-sCDEPOg&cce=2&category=acrcp_v1_32&sig=AOD64_3GWfcTvdwktUiNTRoU9hL9SRhmnQ&q=&ved=2ahUKEwjDwbHGjvqUAxXAwvACHfhUA14QwgUoA3oECBAQEg&adurl=https://securranty.com/Education.aspx%3Fhttps://securranty.com/Education.aspx%26utm_source%3Dgoogle%26utm_medium%3Dcpc%26utm_id%3D23322250074%26utm_term%3Dschool%2520technology%2520insurance%26utm_content%3D786861210464%26utm_adgroup%3D190318654555%26utm_campaign%3DTOFU-Education-High_intent-Search%26gad_source%3D1%26gad_campaignid%3D23322250074%26gbraid%3D0AAAAADpfd-nTzljkcSQZgqyAjervha5lU%26gclid%3DEAIaIQobChMIyOa2xo76lAMVCzIIBR0GRxFLEAAYASADEgJST_D_BwE
+                      - img [ref=e315]
+                      - generic [ref=e317]: Chromebook & iPad plans
+                    - link "School Devices Coverage" [ref=e320] [cursor=pointer]:
+                      - /url: https://securranty.com/Education.aspx?sa=X&ved=2ahUKEwjDwbHGjvqUAxXAwvACHfhUA14QwgUoBXoECBAQFA
+                      - img [ref=e322]
+                      - generic [ref=e324]: School Devices Coverage
+                    - link "Businesses, Schools & Homes" [ref=e327] [cursor=pointer]:
+                      - /url: https://securranty.com/Education.aspx%7Bignore%7D?https://securranty.com/Education.aspx=&sa=X&ved=2ahUKEwjDwbHGjvqUAxXAwvACHfhUA14QwgUoB3oECBAQFg#get-a-quote
+                      - img [ref=e329]
+                      - generic [ref=e331]: Businesses, Schools & Homes
+                    - link "Partner Programs" [ref=e334] [cursor=pointer]:
+                      - /url: https://securranty.com/Partners.aspx?sa=X&ved=2ahUKEwjDwbHGjvqUAxXAwvACHfhUA14QwgUoCXoECBAQGA
+                      - img [ref=e336]
+                      - generic [ref=e338]: Partner Programs
+                - generic [ref=e345]:
+                  - generic [ref=e346]:
+                    - link "MacBooks for schools - Wholesale MacBook Distribution macbookdistributors.com https://www.macbookdistributors.com" [ref=e347] [cursor=pointer]:
+                      - /url: https://macbookdistributors.com/
+                      - heading "MacBooks for schools - Wholesale MacBook Distribution" [level=3] [ref=e348]
+                      - generic [ref=e350]:
+                        - img [ref=e355]
+                        - generic [ref=e357]:
+                          - generic [ref=e359]: macbookdistributors.com
+                          - generic [ref=e360]: https://www.macbookdistributors.com
+                    - button "Why this ad?" [ref=e363] [cursor=pointer]:
+                      - img [ref=e365]
+                  - generic [ref=e370]:
+                    - text: Buy
+                    - emphasis [ref=e371]: MacBooks
+                    - text: In Bulk At Wholesale Prices. Ideal For Resellers, It Firms & Enterprises.
+                    - emphasis [ref=e372]: Refurbished MacBook
+                    - text: Wholesale Deals With Ready Stock. Buy In Bulk Today. Bulk
+                    - emphasis [ref=e373]: MacBook
+                    - text: Deals.
+                  - generic [ref=e374]:
+                    - link "MacBooks for Large Orders" [ref=e377] [cursor=pointer]:
+                      - /url: /aclk?sa=L&pf=1&ai=DChsSEwjI5rbGjvqUAxULMggFHQZHEUsYACICCAEQAhoCbWQ&co=1&ase=2&gclid=EAIaIQobChMIyOa2xo76lAMVCzIIBR0GRxFLEAAYAiABEgIbuPD_BwE&cid=CAAS0gHkaCrkcHDfV6EVFSl-8vGmCBMxjQYnaVze_wCQRlM0ByuKmnlxCg4NabqpFSubNiJNlfw2JuOYXd3_XJnqUURa524LRIstajW8b-GTVVXIjJPEw_R2QQyh5MAnaCguW7S-6j-LUu6352iPSvPZK9ADH80PwTRRXpYyO2HapUzO-Zj_Hw-pn9UbmO-DB79ocBiFplR_ZVFHBrkXZ-1elfZ7SVfCs8j_Ix2gjf5Lr7wnKFxiXTIsp4H3qCxkiJmpdZYfCMNLoAGvcV3uJDR-sCDEPOg&cce=2&category=acrcp_v1_32&sig=AOD64_0kDeDlLaSnAdKp9wpATNRqnurAIQ&q=&ved=2ahUKEwjDwbHGjvqUAxXAwvACHfhUA14QwgUoAXoECA4QEA&adurl=https://macbookdistributors.com/%3Futm_source%3Dgoogle%26utm_medium%3Dcpc%26utm_campaign%3D%7Bcampaignname%7D%26utm_adgroup%3D%7Badgroupname%7D%26utm_term%3Dmacbooks%2520for%2520schools%26gad_source%3D1%26gad_campaignid%3D23845746390%26gbraid%3D0AAAABDoYdCTjC5NjR0WXPdbq3o6EyBb8v%26gclid%3DEAIaIQobChMIyOa2xo76lAMVCzIIBR0GRxFLEAAYAiABEgIbuPD_BwE
+                      - img [ref=e379]
+                      - generic [ref=e381]: MacBooks for Large Orders
+                    - link "Business MacBook Wholesale" [ref=e384] [cursor=pointer]:
+                      - /url: /aclk?sa=L&pf=1&ai=DChsSEwjI5rbGjvqUAxULMggFHQZHEUsYACICCAEQBBoCbWQ&co=1&ase=2&gclid=EAIaIQobChMIyOa2xo76lAMVCzIIBR0GRxFLEAAYAiACEgKegfD_BwE&cid=CAAS0gHkaCrkcHDfV6EVFSl-8vGmCBMxjQYnaVze_wCQRlM0ByuKmnlxCg4NabqpFSubNiJNlfw2JuOYXd3_XJnqUURa524LRIstajW8b-GTVVXIjJPEw_R2QQyh5MAnaCguW7S-6j-LUu6352iPSvPZK9ADH80PwTRRXpYyO2HapUzO-Zj_Hw-pn9UbmO-DB79ocBiFplR_ZVFHBrkXZ-1elfZ7SVfCs8j_Ix2gjf5Lr7wnKFxiXTIsp4H3qCxkiJmpdZYfCMNLoAGvcV3uJDR-sCDEPOg&cce=2&category=acrcp_v1_32&sig=AOD64_3a8Z9YjU7N9CTF8aMexWYAwQhmHw&q=&ved=2ahUKEwjDwbHGjvqUAxXAwvACHfhUA14QwgUoA3oECA4QEg&adurl=https://macbookdistributors.com/%3Futm_source%3Dgoogle%26utm_medium%3Dcpc%26utm_campaign%3D%7Bcampaignname%7D%26utm_adgroup%3D%7Badgroupname%7D%26utm_term%3Dmacbooks%2520for%2520schools%26gad_source%3D1%26gad_campaignid%3D23845746390%26gbraid%3D0AAAABDoYdCTjC5NjR0WXPdbq3o6EyBb8v%26gclid%3DEAIaIQobChMIyOa2xo76lAMVCzIIBR0GRxFLEAAYAiACEgKegfD_BwE
+                      - img [ref=e386]
+                      - generic [ref=e388]: Business MacBook Wholesale
+              - button "Hide sponsored results" [ref=e391] [cursor=pointer]:
+                - separator [ref=e392]
+                - generic [ref=e393]:
+                  - generic [ref=e394]: Hide sponsored results
+                  - img [ref=e396]
+        - generic [ref=e412]:
+          - heading "Searching Thinking a little longer" [level=2] [ref=e416]:
+            - generic [ref=e417]:
+              - generic [ref=e419]: Searching
+              - generic [ref=e429]: Thinking a little longer
+          - progressbar [ref=e431]
+      - main [ref=e473]:
+        - generic [ref=e477]:
+          - generic [ref=e481]:
+            - heading "Web results" [level=2] [ref=e482]
+            - generic [ref=e483]:
+              - generic [ref=e486]:
+                - link "Refurbished Apple Macs for School Human-I-T Store https://store.human-i-t.org › Computers" [ref=e488] [cursor=pointer]:
+                  - /url: https://store.human-i-t.org/mac-for-school/
+                  - heading "Refurbished Apple Macs for School" [level=3] [ref=e489]
+                  - generic [ref=e494]:
+                    - generic [ref=e496]: Human-I-T Store
+                    - generic [ref=e498]: https://store.human-i-t.org › Computers
+                - button "About this result" [ref=e499] [cursor=pointer]:
+                  - img [ref=e502]
+              - generic [ref=e506]:
+                - emphasis [ref=e507]: Explore our range of low-cost, refurbished Apple devices
+                - text: ", including the Macbook Pro, Macbook Air, and iPad."
+              - generic [ref=e509]:
+                - generic [ref=e511]:
+                  - img "Rated 4.6 out of 5," [ref=e513]:
+                    - text: "4.6"
+                    - img [ref=e514]
+                  - generic [ref=e517]:
+                    - text: store rating (
+                    - link "394 user reviews" [ref=e518] [cursor=pointer]:
+                      - /url: https://www.google.com/m/storepages?q=human-i-t.org&c=US&hl=en-US
+                      - text: "394"
+                    - text: )
+                - text: ·
+                - generic [ref=e519]: Free delivery
+                - text: ·
+                - generic [ref=e520]: Free 60-day returns
+          - generic [ref=e525]:
+            - generic [ref=e528]:
+              - link "Apple MacBooks for Schools Tech to School https://techtoschool.com › collections › macbooks" [ref=e530] [cursor=pointer]:
+                - /url: https://techtoschool.com/collections/macbooks?srsltid=AfmBOoo9nrtkLjiVZxmxo156SXLrh8tKRfFK_rQi5KcqUUsH-lZtEa4j
+                - heading "Apple MacBooks for Schools" [level=3] [ref=e531]
+                - generic [ref=e536]:
+                  - generic [ref=e538]: Tech to School
+                  - generic [ref=e540]: https://techtoschool.com › collections › macbooks
+              - button "About this result" [ref=e541] [cursor=pointer]:
+                - img [ref=e544]
+            - link "refurbished macbooks for schools images from techtoschool.com" [ref=e548] [cursor=pointer]:
+              - /url: https://techtoschool.com/collections/macbooks?srsltid=AfmBOoo9nrtkLjiVZxmxo156SXLrh8tKRfFK_rQi5KcqUUsH-lZtEa4j
+            - generic [ref=e563]:
+              - generic [ref=e564]:
+                - text: Get volume education discounts when buying Apple MacBooks for K-12 schools.
+                - emphasis [ref=e565]: All MacBooks are fully tested and ready for the K-12 classroom
+                - text: .
+              - link "Read more" [ref=e566] [cursor=pointer]:
+                - /url: https://techtoschool.com/collections/macbooks?srsltid=AfmBOoo9nrtkLjiVZxmxo156SXLrh8tKRfFK_rQi5KcqUUsH-lZtEa4j#:~:text=Get%20volume%20education%20discounts%20when,ready%20for%20the%20K%2D12%20classroom.
+            - generic [ref=e569]: 30-day returns
+          - generic [ref=e574]:
+            - generic [ref=e577]:
+              - link "Refurbished Mac Deals Apple https://www.apple.com › shop › refurbished › mac" [ref=e579] [cursor=pointer]:
+                - /url: https://www.apple.com/shop/refurbished/mac
+                - heading "Refurbished Mac Deals" [level=3] [ref=e580]
+                - generic [ref=e585]:
+                  - generic [ref=e587]: Apple
+                  - generic [ref=e589]: https://www.apple.com › shop › refurbished › mac
+              - button "About this result" [ref=e590] [cursor=pointer]:
+                - img [ref=e593]
+            - generic [ref=e597]:
+              - emphasis [ref=e598]: Save up to 15% on a refurbished Mac
+              - text: . Tested and certified by Apple including a 1-year warranty. Free delivery and returns.
+            - link "refurbished macbooks for schools from www.apple.com" [ref=e601] [cursor=pointer]:
+              - /url: https://www.apple.com/shop/refurbished/mac
+              - img "refurbished macbooks for schools from www.apple.com" [ref=e603]
+            - generic [ref=e605]:
+              - generic [ref=e607]:
+                - img "Rated 4.7 out of 5," [ref=e609]:
+                  - text: "4.7"
+                  - img [ref=e610]
+                - generic [ref=e613]:
+                  - text: store rating (
+                  - link "15K user reviews" [ref=e614] [cursor=pointer]:
+                    - /url: https://www.google.com/m/storepages?q=apple.com&c=US&hl=en-US
+                    - text: 15K
+                  - text: )
+              - text: ·
+              - generic [ref=e615]: $200 to $1,439
+              - text: ·
+              - generic [ref=e616]: Free delivery
+              - text: ·
+              - generic [ref=e617]: Free 14-day returns
+          - generic [ref=e622]:
+            - generic [ref=e625]:
+              - link "Shop Certified Refurbished MacBooks TekReplay https://tekreplay.com › collections › all-macbooks" [ref=e627] [cursor=pointer]:
+                - /url: https://tekreplay.com/collections/all-macbooks?srsltid=AfmBOoq5eVooombO22dUm6nWH19NBTgLKhlQ9ocnQUd1XCtCO7_Lm4cS
+                - heading "Shop Certified Refurbished MacBooks" [level=3] [ref=e628]
+                - generic [ref=e633]:
+                  - generic [ref=e635]: TekReplay
+                  - generic [ref=e637]: https://tekreplay.com › collections › all-macbooks
+              - button "About this result" [ref=e638] [cursor=pointer]:
+                - img [ref=e641]
+            - link "refurbished macbooks for schools images from tekreplay.com" [ref=e645] [cursor=pointer]:
+              - /url: https://tekreplay.com/collections/all-macbooks?srsltid=AfmBOoq5eVooombO22dUm6nWH19NBTgLKhlQ9ocnQUd1XCtCO7_Lm4cS
+            - generic [ref=e660]:
+              - generic [ref=e661]:
+                - text: Each
+                - emphasis [ref=e662]: MacBook is professionally restored, thoroughly tested, and backed by a 1-year warranty
+                - text: ", 30-day return policy, and free shipping, so you can shop with ..."
+              - link "Read more" [ref=e663] [cursor=pointer]:
+                - /url: https://tekreplay.com/collections/all-macbooks?srsltid=AfmBOoq5eVooombO22dUm6nWH19NBTgLKhlQ9ocnQUd1XCtCO7_Lm4cS#:~:text=Explore%20refurbished%20MacBooks%20that%20combine,so%20you%20can%20shop%20with
+            - generic [ref=e665]:
+              - generic [ref=e666]: Free delivery
+              - text: ·
+              - generic [ref=e667]: Free 30-day returns
+          - generic [ref=e672]:
+            - heading "Sponsored result" [level=2] [ref=e679]
+            - generic [ref=e680]:
+              - generic [ref=e692]:
+                - generic [ref=e693]:
+                  - link "Securranty for Schools Securranty https://www.securranty.com" [ref=e694] [cursor=pointer]:
+                    - /url: https://securranty.com/Education.aspx
+                    - heading "Securranty for Schools" [level=3] [ref=e695]
+                    - generic [ref=e701]:
+                      - generic [ref=e703]: Securranty
+                      - generic [ref=e704]: https://www.securranty.com
+                  - button "Why this ad?" [ref=e707] [cursor=pointer]:
+                    - img [ref=e709]
+                - generic [ref=e714]:
+                  - text: Securranty Laptop Plans — Affordable Warranty Insurance and Protection for New, Used, And
+                  - emphasis [ref=e715]: Refurbished
+                  - text: Laptops. Securranty's
+                  - emphasis [ref=e716]: School
+                  - text: "Devices Coverage. Best Price Guarantee. Affordable Insurance Plan. 5-Star Reviews - BBB A+ $0 Deductible. Models: Laptop Insurance Quote, Tablet Insurance Quote, Surface Tablet Insurance."
+                - generic [ref=e718]:
+                  - img "Rated 4.5 out of 5," [ref=e719]:
+                    - img [ref=e720]
+                  - generic [ref=e723]:
+                    - link "Rating" [ref=e724] [cursor=pointer]:
+                      - /url: https://www.google.com/shopping/ratings/account/metrics?q=securranty.com&c=US&v=19
+                    - text: "for securranty.com: 4.5 - 1,184 reviews"
+                - generic [ref=e726]:
+                  - text: ‎
+                  - link "Affordable bulk pricing" [ref=e727] [cursor=pointer]:
+                    - /url: https://securranty.com/Education.aspx%7Bignore%7D?https://securranty.com/Education.aspx
+                  - text: · ‎
+                  - link "Chromebook & iPad plans" [ref=e728] [cursor=pointer]:
+                    - /url: https://securranty.com/Education.aspx%7Bignore%7D?https://securranty.com/Education.aspx
+                  - text: · ‎
+                  - link "Starting at $18" [ref=e729] [cursor=pointer]:
+                    - /url: /aclk?sa=L&ai=DChsSEwjI5rbGjvqUAxULMggFHQZHEUsYACICCAIQAxoCbWQ&co=1&ase=2&gclid=EAIaIQobChMIyOa2xo76lAMVCzIIBR0GRxFLEAMYASADEgI97PD_BwE&cid=CAAS0gHkaCrkcHDfV6EVFSl-8vGmCBMxjQYnaVze_wCQRlM0ByuKmnlxCg4NabqpFSubNiJNlfw2JuOYXd3_XJnqUURa524LRIstajW8b-GTVVXIjJPEw_R2QQyh5MAnaCguW7S-6j-LUu6352iPSvPZK9ADH80PwTRRXpYyO2HapUzO-Zj_Hw-pn9UbmO-DB79ocBiFplR_ZVFHBrkXZ-1elfZ7SVfCs8j_Ix2gjf5Lr7wnKFxiXTIsp4H3qCxkiJmpdZYfCMNLoAGvcV3uJDR-sCDEPOg&cce=2&category=acrcp_v1_32&sig=AOD64_0ehvXJUhleXTN3TWH2eHTWDQ3XBQ&adurl=&q=
+                  - text: · ‎
+                  - link "Partner Programs" [ref=e730] [cursor=pointer]:
+                    - /url: https://securranty.com/Partners.aspx
+                  - text: · ‎
+                  - link "Contact Us" [ref=e731] [cursor=pointer]:
+                    - /url: https://securranty.com/Contact-us.aspx
+              - button "Hide sponsored result" [ref=e733] [cursor=pointer]:
+                - separator [ref=e734]
+                - generic [ref=e735]:
+                  - generic [ref=e736]: Hide sponsored result
+                  - img [ref=e738]
+          - generic [ref=e744]:
+            - generic [ref=e747]:
+              - link "Refurbished Apple for Schools, Colleges, and Universities Mac of All Trades https://www.macofalltrades.com › refurbished-apple-for..." [ref=e749] [cursor=pointer]:
+                - /url: https://www.macofalltrades.com/refurbished-apple-for-schools-colleges-and-universities/?srsltid=AfmBOor4KRWHN5rMQsESxm-Bq0ck5O5R6jcQAYdnxf0a7QbxlwjHFd1I
+                - heading "Refurbished Apple for Schools, Colleges, and Universities" [level=3] [ref=e750]
+                - generic [ref=e755]:
+                  - generic [ref=e757]: Mac of All Trades
+                  - generic [ref=e759]: https://www.macofalltrades.com › refurbished-apple-for...
+              - button "About this result" [ref=e760] [cursor=pointer]:
+                - img [ref=e763]
+            - generic [ref=e766]:
+              - generic [ref=e767]:
+                - text: The first step is to get pricing information. This allows your school to compare options for
+                - emphasis [ref=e768]: refurbished Apple products
+                - text: . Call Us For A Quote Today 813-925 ...
+              - link "Read more" [ref=e769] [cursor=pointer]:
+                - /url: https://www.macofalltrades.com/refurbished-apple-for-schools-colleges-and-universities/?srsltid=AfmBOor4KRWHN5rMQsESxm-Bq0ck5O5R6jcQAYdnxf0a7QbxlwjHFd1I#:~:text=The%20first%20step%20is%20to,For%20A%20Quote%20Today%20813%2D925%2D1181
+          - generic [ref=e774]:
+            - generic [ref=e777]:
+              - link "MacBook Laptops ThinkEDU https://thinkedu.com › collections › mac-refurbs" [ref=e779] [cursor=pointer]:
+                - /url: https://thinkedu.com/collections/mac-refurbs
+                - heading "MacBook Laptops" [level=3] [ref=e780]
+                - generic [ref=e785]:
+                  - generic [ref=e787]: ThinkEDU
+                  - generic [ref=e789]: https://thinkedu.com › collections › mac-refurbs
+              - button "About this result" [ref=e790] [cursor=pointer]:
+                - img [ref=e793]
+            - link "refurbished macbooks for schools images from thinkedu.com" [ref=e797] [cursor=pointer]:
+              - /url: https://thinkedu.com/collections/mac-refurbs
+            - generic [ref=e812]:
+              - generic [ref=e813]:
+                - text: Save 63%. Apple
+                - emphasis [ref=e814]: MacBook
+                - text: Air (2017) 13.3" Intel Core i5 8GB RAM 256GB/512GB SSD with Office 2024 (
+                - emphasis [ref=e815]: Refurbished
+                - text: ) $629.90 From $229.95 /. No reviews. Save 79%.
+              - link "Read more" [ref=e816] [cursor=pointer]:
+                - /url: https://thinkedu.com/collections/mac-refurbs#:~:text=Save%2063%25,Save%2079%25
+          - generic [ref=e821]:
+            - generic [ref=e824]:
+              - link "Looking to get a refurbished MacBook Air for college. ... Reddit · r/macbookair 7 comments · 4 years ago" [ref=e826] [cursor=pointer]:
+                - /url: https://www.reddit.com/r/macbookair/comments/saam75/looking_to_get_a_refurbished_macbook_air_for/
+                - heading "Looking to get a refurbished MacBook Air for college. ..." [level=3] [ref=e827]
+                - generic [ref=e832]:
+                  - generic [ref=e834]: Reddit · r/macbookair
+                  - generic [ref=e836]: 7 comments · 4 years ago
+              - button "About this result" [ref=e837] [cursor=pointer]:
+                - img [ref=e840]
+            - generic [ref=e843]: I’m looking to buy a refurbished MacBook Air for college and I’m trying to decide between 3 different ones. I need it solely for school/work. I’ll ...
+            - generic [ref=e848]:
+              - link "7 answers" [ref=e849] [cursor=pointer]:
+                - /url: https://www.reddit.com/r/macbookair/comments/saam75/looking_to_get_a_refurbished_macbook_air_for/htsbleg/
+              - generic [ref=e850]: ·
+              - generic [ref=e851]: "Top answer:"
+              - generic [ref=e852]: Double your budget and get a base M1 MBA from Apple for $850. Seriously. Saving money is ...
+          - generic [ref=e857]:
+            - generic [ref=e859]:
+              - heading "Popular products" [level=2] [ref=e860]
+              - button "About this result" [ref=e861] [cursor=pointer]:
+                - img [ref=e864]
+            - list [ref=e875]:
+              - listitem [ref=e877]:
+                - 'button "Apple MacBook Air 11 inch - Certified Used Refurbished at UpTrade Current Price: $114.00. Refurbished. UpTrade Free delivery Rated 4.7 out of 5. 22K reviews." [ref=e880]':
+                  - generic [ref=e884] [cursor=pointer]:
+                    - generic [ref=e889]:
+                      - img [ref=e894]
+                      - generic [ref=e895]: Apple MacBook Air 11 inch - Certified Used Refurbished at UpTrade
+                      - 'group "Current Price: $114.00. Refurbished." [ref=e896]':
+                        - generic [ref=e898]:
+                          - generic [ref=e899]: $114.00
+                          - generic [ref=e900]: Refurbished
+                      - generic [ref=e905]: UpTrade
+                      - generic [ref=e907]: Free delivery
+                      - img "Rated 4.7 out of 5. 22K reviews." [ref=e908]:
+                        - img "Rated 4.7 out of 5, 22K user reviews" [ref=e909]:
+                          - text: "4.7"
+                          - img [ref=e910]
+                          - text: (22K)
+                    - button [ref=e913]
+              - listitem [ref=e915]:
+                - 'button "Apple MacBook Pro Intel i5 16GB - Certified Used Refurbished at UpTrade Current Price: $299.00. Refurbished. UpTrade Free delivery Rated 4.7 out of 5. 1.2K reviews." [ref=e918]':
+                  - generic [ref=e922] [cursor=pointer]:
+                    - generic [ref=e927]:
+                      - img [ref=e932]
+                      - generic [ref=e933]: Apple MacBook Pro Intel i5 16GB - Certified Used Refurbished at UpTrade
+                      - 'group "Current Price: $299.00. Refurbished." [ref=e934]':
+                        - generic [ref=e936]:
+                          - generic [ref=e937]: $299.00
+                          - generic [ref=e938]: Refurbished
+                      - generic [ref=e943]: UpTrade
+                      - generic [ref=e945]: Free delivery
+                      - img "Rated 4.7 out of 5. 1.2K reviews." [ref=e946]:
+                        - img "Rated 4.7 out of 5, 1.2K user reviews" [ref=e947]:
+                          - text: "4.7"
+                          - img [ref=e948]
+                          - text: (1.2K)
+                    - button [ref=e951]
+              - listitem [ref=e953]:
+                - 'button "76% OFF. Apple MacBook Pro 13\" i5 128GB SSD macOS X Grey Laptop Current Price: $280.99. Refurbished. Back Market & more Rated 4.5 out of 5. 1.4K reviews." [ref=e956]':
+                  - generic [ref=e960] [cursor=pointer]:
+                    - generic [ref=e965]:
+                      - generic [ref=e967]:
+                        - img "76% OFF." [ref=e968]:
+                          - generic [ref=e970]: 76% OFF
+                        - img [ref=e973]
+                      - generic [ref=e974]: Apple MacBook Pro 13" i5 128GB SSD macOS X Grey Laptop
+                      - 'group "Current Price: $280.99. Refurbished." [ref=e975]':
+                        - generic [ref=e977]:
+                          - generic [ref=e978]: $280.99
+                          - generic [ref=e979]: Refurbished
+                      - generic [ref=e980]:
+                        - generic [ref=e984]: Back Market
+                        - generic [ref=e985]: "& more"
+                      - img "Rated 4.5 out of 5. 1.4K reviews." [ref=e986]:
+                        - img "Rated 4.5 out of 5, 1.4K user reviews" [ref=e987]:
+                          - text: "4.5"
+                          - img [ref=e988]
+                          - text: (1.4K)
+                    - button [ref=e991]
+              - listitem [ref=e993]:
+                - 'button "Apple MacBook Pro 16-inch M4 Max Chip (Refurbished) Current Price: $2,119.00. Refurbished. Apple & more Free next-day delivery Rated 4.8 out of 5. 2.2K reviews." [ref=e996]':
+                  - generic [ref=e1000] [cursor=pointer]:
+                    - generic [ref=e1005]:
+                      - img [ref=e1010]
+                      - generic [ref=e1011]: Apple MacBook Pro 16-inch M4 Max Chip (Refurbished)
+                      - 'group "Current Price: $2,119.00. Refurbished." [ref=e1012]':
+                        - generic [ref=e1014]:
+                          - generic [ref=e1015]: $2,119.00
+                          - generic [ref=e1016]: Refurbished
+                      - generic [ref=e1017]:
+                        - generic [ref=e1021]: Apple
+                        - generic [ref=e1022]: "& more"
+                      - generic [ref=e1024]: Free next-day delivery
+                      - img "Rated 4.8 out of 5. 2.2K reviews." [ref=e1025]:
+                        - img "Rated 4.8 out of 5, 2.2K user reviews" [ref=e1026]:
+                          - text: "4.8"
+                          - img [ref=e1027]
+                          - text: (2.2K)
+                    - button [ref=e1030]
+              - listitem [ref=e1032]:
+                - 'button "Apple MacBook Air Current Price: $229.00. Refurbished. Groupon.com & more Rated 4.4 out of 5. 9.5K reviews." [ref=e1035]':
+                  - generic [ref=e1039] [cursor=pointer]:
+                    - generic [ref=e1044]:
+                      - img [ref=e1049]
+                      - generic [ref=e1050]: Apple MacBook Air
+                      - 'group "Current Price: $229.00. Refurbished." [ref=e1051]':
+                        - generic [ref=e1053]:
+                          - generic [ref=e1054]: $229.00
+                          - generic [ref=e1055]: Refurbished
+                      - generic [ref=e1056]:
+                        - generic [ref=e1060]: Groupon.com
+                        - generic [ref=e1061]: "& more"
+                      - img "Rated 4.4 out of 5. 9.5K reviews." [ref=e1062]:
+                        - img "Rated 4.4 out of 5, 9.5K user reviews" [ref=e1063]:
+                          - text: "4.4"
+                          - img [ref=e1064]
+                          - text: (9.5K)
+                    - button [ref=e1067]
+              - listitem [ref=e1069]:
+                - 'button "8% OFF. Apple MacBook Air Core Current Price: $251.85. Refurbished. Walmart - Reebelo & more Free delivery Rated 4.7 out of 5. 16K reviews." [ref=e1072]':
+                  - generic [ref=e1076] [cursor=pointer]:
+                    - generic [ref=e1081]:
+                      - generic [ref=e1083]:
+                        - img "8% OFF." [ref=e1084]:
+                          - generic [ref=e1086]: 8% OFF
+                        - img [ref=e1089]
+                      - generic [ref=e1090]: Apple MacBook Air Core
+                      - 'group "Current Price: $251.85. Refurbished." [ref=e1091]':
+                        - generic [ref=e1093]:
+                          - generic [ref=e1094]: $251.85
+                          - generic [ref=e1095]: Refurbished
+                      - generic [ref=e1096]:
+                        - generic [ref=e1100]: Walmart - Reebelo
+                        - generic [ref=e1101]: "& more"
+                      - generic [ref=e1103]: Free delivery
+                      - img "Rated 4.7 out of 5. 16K reviews." [ref=e1104]:
+                        - img "Rated 4.7 out of 5, 16K user reviews" [ref=e1105]:
+                          - text: "4.7"
+                          - img [ref=e1106]
+                          - text: (16K)
+                    - button [ref=e1109]
+              - listitem [ref=e1111]:
+                - 'button "59% OFF. MacBook Air Apple M1 Current Price: $400.00. Refurbished. Back Market & more Rated 4.7 out of 5. 22K reviews." [ref=e1114]':
+                  - generic [ref=e1118] [cursor=pointer]:
+                    - generic [ref=e1123]:
+                      - generic [ref=e1125]:
+                        - img "59% OFF." [ref=e1126]:
+                          - generic [ref=e1128]: 59% OFF
+                        - img [ref=e1131]
+                      - generic [ref=e1132]: MacBook Air Apple M1
+                      - 'group "Current Price: $400.00. Refurbished." [ref=e1133]':
+                        - generic [ref=e1135]:
+                          - generic [ref=e1136]: $400.00
+                          - generic [ref=e1137]: Refurbished
+                      - generic [ref=e1138]:
+                        - generic [ref=e1142]: Back Market
+                        - generic [ref=e1143]: "& more"
+                      - img "Rated 4.7 out of 5. 22K reviews." [ref=e1144]:
+                        - img "Rated 4.7 out of 5, 22K user reviews" [ref=e1145]:
+                          - text: "4.7"
+                          - img [ref=e1146]
+                          - text: (22K)
+                    - button [ref=e1149]
+              - listitem [ref=e1151]:
+                - 'button "Apple MacBook Pro M1 Pro Current Price: $764.99. Refurbished. Best Buy & more Free delivery Rated 4.7 out of 5. 2K reviews." [ref=e1154]':
+                  - generic [ref=e1158] [cursor=pointer]:
+                    - generic [ref=e1163]:
+                      - img [ref=e1168]
+                      - generic [ref=e1169]: Apple MacBook Pro M1 Pro
+                      - 'group "Current Price: $764.99. Refurbished." [ref=e1170]':
+                        - generic [ref=e1172]:
+                          - generic [ref=e1173]: $764.99
+                          - generic [ref=e1174]: Refurbished
+                      - generic [ref=e1175]:
+                        - generic [ref=e1179]: Best Buy
+                        - generic [ref=e1180]: "& more"
+                      - generic [ref=e1182]: Free delivery
+                      - img "Rated 4.7 out of 5. 2K reviews." [ref=e1183]:
+                        - img "Rated 4.7 out of 5, 2K user reviews" [ref=e1184]:
+                          - text: "4.7"
+                          - img [ref=e1185]
+                          - text: (2K)
+                    - button [ref=e1188]
+              - listitem [ref=e1190]:
+                - 'button "MacBook Apple M1 Pro Chip Current Price: $329.99. Refurbished. Heartland America Rated 4.7 out of 5. 5.5K reviews." [ref=e1193]':
+                  - generic [ref=e1197] [cursor=pointer]:
+                    - generic [ref=e1202]:
+                      - img [ref=e1207]
+                      - generic [ref=e1208]: MacBook Apple M1 Pro Chip
+                      - 'group "Current Price: $329.99. Refurbished." [ref=e1209]':
+                        - generic [ref=e1211]:
+                          - generic [ref=e1212]: $329.99
+                          - generic [ref=e1213]: Refurbished
+                      - generic [ref=e1218]: Heartland America
+                      - img "Rated 4.7 out of 5. 5.5K reviews." [ref=e1219]:
+                        - img "Rated 4.7 out of 5, 5.5K user reviews" [ref=e1220]:
+                          - text: "4.7"
+                          - img [ref=e1221]
+                          - text: (5.5K)
+                    - button [ref=e1224]
+              - listitem [ref=e1226]:
+                - 'button "MacBook Pro 13.3\" Intel Core i5 (Pre-Owned) Current Price: $299.00. Refurbished. Walmart - ElectroCell Free delivery Rated 3.8 out of 5. 5 reviews." [ref=e1229]':
+                  - generic [ref=e1233] [cursor=pointer]:
+                    - generic [ref=e1238]:
+                      - img [ref=e1243]
+                      - generic [ref=e1244]: MacBook Pro 13.3" Intel Core i5 (Pre-Owned)
+                      - 'group "Current Price: $299.00. Refurbished." [ref=e1245]':
+                        - generic [ref=e1247]:
+                          - generic [ref=e1248]: $299.00
+                          - generic [ref=e1249]: Refurbished
+                      - generic [ref=e1254]: Walmart - ElectroCell
+                      - generic [ref=e1256]: Free delivery
+                      - img "Rated 3.8 out of 5. 5 reviews." [ref=e1257]:
+                        - img "Rated 3.8 out of 5, 5 user reviews" [ref=e1258]:
+                          - text: "3.8"
+                          - img [ref=e1259]
+                          - text: (5)
+                    - button [ref=e1262]
+          - generic [ref=e1268]:
+            - heading "Discussions and forums" [level=2] [ref=e1270]
+            - generic [ref=e1271]:
+              - generic [ref=e1274]:
+                - generic [ref=e1276] [cursor=pointer]:
+                  - generic [ref=e1279]:
+                    - link "Should I Get a Refurbished M1, M2, or Intel MacBook Air? Reddit · r/macbookair · 30+ comments · 1 year ago" [ref=e1280]:
+                      - /url: https://www.reddit.com/r/macbookair/comments/1g0h57p/high_school_student_on_a_tight_budget_should_i/
+                      - generic [ref=e1281]:
+                        - heading "Should I Get a Refurbished M1, M2, or Intel MacBook Air?" [level=3] [ref=e1282]:
+                          - link "Should I Get a Refurbished M1, M2, or Intel MacBook Air?" [ref=e1283]
+                        - generic [ref=e1290]:
+                          - generic [ref=e1291]: Reddit ·
+                          - generic [ref=e1293]:
+                            - generic [ref=e1294]:
+                              - generic [ref=e1295]: r/macbookair
+                              - generic [ref=e1296]:
+                                - generic [ref=e1297]: ·
+                                - generic [ref=e1298]: 30+ comments
+                            - generic [ref=e1299]:
+                              - generic [ref=e1300]: ·
+                              - generic [ref=e1301]: 1 year ago
+                    - generic [ref=e1307]:
+                      - generic [ref=e1311]: ·
+                      - button "About this result" [ref=e1316]:
+                        - img [ref=e1319]
+                  - button "Should I Get a Refurbished M1, M2, or Intel MacBook Air? Reddit · r/macbookair · 30+ comments · 1 year ago" [expanded] [ref=e1321]:
+                    - img [ref=e1324]
+                - list [ref=e1333]:
+                  - listitem [ref=e1334]:
+                    - generic [ref=e1338]:
+                      - link "M1 or M2 or M3 is the way to go More discussions on Should I Get a Refurbished M1, M2, or Intel MacBook Air? Top answer · 4 votes · a year ago":
+                        - /url: https://www.reddit.com/r/macbookair/comments/1g0h57p/high_school_student_on_a_tight_budget_should_i/lr8oxyx/
+                      - generic [ref=e1340]:
+                        - text: M1 or M2 or M3 is the way to go
+                        - link [ref=e1341] [cursor=pointer]:
+                          - /url: https://www.reddit.com/r/macbookair/comments/1g0h57p/high_school_student_on_a_tight_budget_should_i/lr8oxyx/
+                          - generic [ref=e1342]: More
+                          - img [ref=e1344]
+                      - generic [ref=e1346]:
+                        - generic [ref=e1347]:
+                          - img [ref=e1349]
+                          - text: Top answer
+                        - text: · 4 votes · a year ago
+                  - listitem [ref=e1351]:
+                    - generic [ref=e1355]:
+                      - link "An M1 MBA is superior to an intel MBP in my opinion. As a high schooler it should fully support ... More discussions on Should I Get a Refurbished M1, M2, or Intel MacBook Air? 3 votes · a year ago":
+                        - /url: https://www.reddit.com/r/macbookair/comments/1g0h57p/high_school_student_on_a_tight_budget_should_i/lr8svl7/
+                      - generic [ref=e1357]:
+                        - text: An M1 MBA is superior to an intel MBP in my opinion. As a high schooler it should fully support ...
+                        - link [ref=e1358] [cursor=pointer]:
+                          - /url: https://www.reddit.com/r/macbookair/comments/1g0h57p/high_school_student_on_a_tight_budget_should_i/lr8svl7/
+                          - generic [ref=e1359]: More
+                          - img [ref=e1361]
+                      - generic [ref=e1363]: 3 votes · a year ago
+                  - listitem [ref=e1364]:
+                    - generic [ref=e1368]:
+                      - link "refurbished M2 air. i don't think anything intel is advisable these days. M1 air has thicker ... More discussions on Should I Get a Refurbished M1, M2, or Intel MacBook Air? 2 votes · a year ago":
+                        - /url: https://www.reddit.com/r/macbookair/comments/1g0h57p/high_school_student_on_a_tight_budget_should_i/lr8r8vb/
+                      - generic [ref=e1370]:
+                        - text: refurbished M2 air. i don't think anything intel is advisable these days. M1 air has thicker ...
+                        - link [ref=e1371] [cursor=pointer]:
+                          - /url: https://www.reddit.com/r/macbookair/comments/1g0h57p/high_school_student_on_a_tight_budget_should_i/lr8r8vb/
+                          - generic [ref=e1372]: More
+                          - img [ref=e1374]
+                      - generic [ref=e1376]: 2 votes · a year ago
+              - generic [ref=e1381] [cursor=pointer]:
+                - generic [ref=e1384]:
+                  - link "Refurbished macbook for work and school? Facebook · Pc, Gaming, Setups, and buildi… · 60+ comments · 9 months ago" [ref=e1385]:
+                    - /url: https://www.facebook.com/groups/372119787729533/posts/1124824515792386/
+                    - generic [ref=e1386]:
+                      - heading "Refurbished macbook for work and school?" [level=3] [ref=e1387]:
+                        - link "Refurbished macbook for work and school?" [ref=e1388]
+                      - generic [ref=e1395]:
+                        - generic [ref=e1396]: Facebook ·
+                        - generic [ref=e1398]:
+                          - generic [ref=e1399]:
+                            - generic [ref=e1400]: Pc, Gaming, Setups, and buildi…
+                            - generic [ref=e1401]:
+                              - generic [ref=e1402]: ·
+                              - generic [ref=e1403]: 60+ comments
+                          - generic [ref=e1404]:
+                            - generic [ref=e1405]: ·
+                            - generic [ref=e1406]: 9 months ago
+                  - generic [ref=e1412]:
+                    - generic [ref=e1416]: ·
+                    - button "About this result" [ref=e1421]:
+                      - img [ref=e1424]
+                - button "Refurbished macbook for work and school? Facebook · Pc, Gaming, Setups, and buildi… · 60+ comments · 9 months ago" [ref=e1426]:
+                  - img [ref=e1429]
+              - generic [ref=e1435] [cursor=pointer]:
+                - generic [ref=e1438]:
+                  - link "Refurbished MacBook Pro for school and vlogging Apple Support Communities · 5 answers · 1 year ago" [ref=e1439]:
+                    - /url: https://discussions.apple.com/thread/255951035
+                    - generic [ref=e1440]:
+                      - heading "Refurbished MacBook Pro for school and vlogging" [level=3] [ref=e1441]:
+                        - link "Refurbished MacBook Pro for school and vlogging" [ref=e1442]
+                      - generic [ref=e1449]:
+                        - generic [ref=e1450]: Apple Support Communities ·
+                        - generic [ref=e1453]:
+                          - generic [ref=e1454]: 5 answers
+                          - generic [ref=e1455]:
+                            - generic [ref=e1456]: ·
+                            - generic [ref=e1457]: 1 year ago
+                  - generic [ref=e1463]:
+                    - generic [ref=e1467]: ·
+                    - button "About this result" [ref=e1472]:
+                      - img [ref=e1475]
+                - button "Refurbished MacBook Pro for school and vlogging Apple Support Communities · 5 answers · 1 year ago" [ref=e1477]:
+                  - img [ref=e1480]
+              - link "See more discussions" [ref=e1483] [cursor=pointer]:
+                - /url: /search?q=refurbished+macbooks+for+schools&sca_esv=09892958edd89daa&udm=18&sa=X&ved=2ahUKEwjDwbHGjvqUAxXAwvACHfhUA14Q8poLegQISBAE
+                - separator [ref=e1484]
+                - generic [ref=e1485]:
+                  - generic [ref=e1486]: See more
+                  - img [ref=e1488]
+          - generic [ref=e1494]:
+            - generic [ref=e1496]:
+              - heading "More products" [level=2] [ref=e1497]
+              - button "About this result" [ref=e1498] [cursor=pointer]:
+                - img [ref=e1501]
+            - list [ref=e1512]:
+              - listitem [ref=e1514]:
+                - 'button "57% OFF. Apple 2022 MacBook Air M2 Current Price: $506.00. Refurbished. Back Market & more Rated 4.7 out of 5. 7.3K reviews." [ref=e1517]':
+                  - generic [ref=e1521] [cursor=pointer]:
+                    - generic [ref=e1526]:
+                      - generic [ref=e1528]:
+                        - img "57% OFF." [ref=e1529]:
+                          - generic [ref=e1531]: 57% OFF
+                        - img [ref=e1534]
+                      - generic [ref=e1535]: Apple 2022 MacBook Air M2
+                      - 'group "Current Price: $506.00. Refurbished." [ref=e1536]':
+                        - generic [ref=e1538]:
+                          - generic [ref=e1539]: $506.00
+                          - generic [ref=e1540]: Refurbished
+                      - generic [ref=e1541]:
+                        - generic [ref=e1545]: Back Market
+                        - generic [ref=e1546]: "& more"
+                      - img "Rated 4.7 out of 5. 7.3K reviews." [ref=e1547]:
+                        - img "Rated 4.7 out of 5, 7.3K user reviews" [ref=e1548]:
+                          - text: "4.7"
+                          - img [ref=e1549]
+                          - text: (7.3K)
+                    - button [ref=e1552]
+              - listitem [ref=e1554]:
+                - 'button "81% OFF. Apple MacBook Pro Core Current Price: $369.00. Refurbished. Back Market & more Rated 4.8 out of 5. 20K reviews." [ref=e1557]':
+                  - generic [ref=e1561] [cursor=pointer]:
+                    - generic [ref=e1566]:
+                      - generic [ref=e1568]:
+                        - img "81% OFF." [ref=e1569]:
+                          - generic [ref=e1571]: 81% OFF
+                        - img [ref=e1574]
+                      - generic [ref=e1575]: Apple MacBook Pro Core
+                      - 'group "Current Price: $369.00. Refurbished." [ref=e1576]':
+                        - generic [ref=e1578]:
+                          - generic [ref=e1579]: $369.00
+                          - generic [ref=e1580]: Refurbished
+                      - generic [ref=e1581]:
+                        - generic [ref=e1585]: Back Market
+                        - generic [ref=e1586]: "& more"
+                      - img "Rated 4.8 out of 5. 20K reviews." [ref=e1587]:
+                        - img "Rated 4.8 out of 5, 20K user reviews" [ref=e1588]:
+                          - text: "4.8"
+                          - img [ref=e1589]
+                          - text: (20K)
+                    - button [ref=e1592]
+              - listitem [ref=e1594]:
+                - 'button "Restored Apple Macbook Air Laptop, 13.3 inch, Intel Core i5, 8GB Ram, 128gb Ssd, Mac OS, Silver, Mqd32ll/a-r (Refurbished) Current Price: $144.03. Refurbished. Walmart - TekReplay Rated 4.4 out of 5. 9.5K reviews." [ref=e1597]':
+                  - generic [ref=e1601] [cursor=pointer]:
+                    - generic [ref=e1606]:
+                      - img [ref=e1611]
+                      - generic [ref=e1612]: Restored Apple Macbook Air Laptop, 13.3 inch, Intel Core i5, 8GB Ram, 128gb Ssd, Mac OS, Silver, Mqd32ll/a-r (Refurbished)
+                      - 'group "Current Price: $144.03. Refurbished." [ref=e1613]':
+                        - generic [ref=e1615]:
+                          - generic [ref=e1616]: $144.03
+                          - generic [ref=e1617]: Refurbished
+                      - generic [ref=e1622]: Walmart - TekReplay
+                      - img "Rated 4.4 out of 5. 9.5K reviews." [ref=e1623]:
+                        - img "Rated 4.4 out of 5, 9.5K user reviews" [ref=e1624]:
+                          - text: "4.4"
+                          - img [ref=e1625]
+                          - text: (9.5K)
+                    - button [ref=e1628]
+              - listitem [ref=e1630]:
+                - 'button "23% OFF. Apple 13\" MacBook Air M4 Current Price: $768.13. Refurbished. Back Market & more Rated 4.8 out of 5. 6.7K reviews." [ref=e1633]':
+                  - generic [ref=e1637] [cursor=pointer]:
+                    - generic [ref=e1642]:
+                      - generic [ref=e1644]:
+                        - img "23% OFF." [ref=e1645]:
+                          - generic [ref=e1647]: 23% OFF
+                        - img [ref=e1650]
+                      - generic [ref=e1651]: Apple 13" MacBook Air M4
+                      - 'group "Current Price: $768.13. Refurbished." [ref=e1652]':
+                        - generic [ref=e1654]:
+                          - generic [ref=e1655]: $768.13
+                          - generic [ref=e1656]: Refurbished
+                      - generic [ref=e1657]:
+                        - generic [ref=e1661]: Back Market
+                        - generic [ref=e1662]: "& more"
+                      - img "Rated 4.8 out of 5. 6.7K reviews." [ref=e1663]:
+                        - img "Rated 4.8 out of 5, 6.7K user reviews" [ref=e1664]:
+                          - text: "4.8"
+                          - img [ref=e1665]
+                          - text: (6.7K)
+                    - button [ref=e1668]
+              - listitem [ref=e1670]:
+                - 'button "84% OFF. Apple MacBook Pro Current Price: $229.99. Refurbished. PickYourPlum & more Free delivery Rated 4.1 out of 5. 498 reviews." [ref=e1673]':
+                  - generic [ref=e1677] [cursor=pointer]:
+                    - generic [ref=e1682]:
+                      - generic [ref=e1684]:
+                        - img "84% OFF." [ref=e1685]:
+                          - generic [ref=e1687]: 84% OFF
+                        - img [ref=e1690]
+                      - generic [ref=e1691]: Apple MacBook Pro
+                      - 'group "Current Price: $229.99. Refurbished." [ref=e1692]':
+                        - generic [ref=e1694]:
+                          - generic [ref=e1695]: $229.99
+                          - generic [ref=e1696]: Refurbished
+                      - generic [ref=e1697]:
+                        - generic [ref=e1701]: PickYourPlum
+                        - generic [ref=e1702]: "& more"
+                      - generic [ref=e1704]: Free delivery
+                      - img "Rated 4.1 out of 5. 498 reviews." [ref=e1705]:
+                        - img "Rated 4.1 out of 5, 498 user reviews" [ref=e1706]:
+                          - text: "4.1"
+                          - img [ref=e1707]
+                          - text: (498)
+                    - button [ref=e1710]
+              - listitem [ref=e1712]:
+                - 'button "80% OFF. Apple MacBook Pro Core i5 Current Price: $209.99. Refurbished. PickYourPlum & more Free delivery Rated 4.8 out of 5. 19K reviews." [ref=e1715]':
+                  - generic [ref=e1719] [cursor=pointer]:
+                    - generic [ref=e1724]:
+                      - generic [ref=e1726]:
+                        - img "80% OFF." [ref=e1727]:
+                          - generic [ref=e1729]: 80% OFF
+                        - img [ref=e1732]
+                      - generic [ref=e1733]: Apple MacBook Pro Core i5
+                      - 'group "Current Price: $209.99. Refurbished." [ref=e1734]':
+                        - generic [ref=e1736]:
+                          - generic [ref=e1737]: $209.99
+                          - generic [ref=e1738]: Refurbished
+                      - generic [ref=e1739]:
+                        - generic [ref=e1743]: PickYourPlum
+                        - generic [ref=e1744]: "& more"
+                      - generic [ref=e1746]: Free delivery
+                      - img "Rated 4.8 out of 5. 19K reviews." [ref=e1747]:
+                        - img "Rated 4.8 out of 5, 19K user reviews" [ref=e1748]:
+                          - text: "4.8"
+                          - img [ref=e1749]
+                          - text: (19K)
+                    - button [ref=e1752]
+              - listitem [ref=e1754]:
+                - 'button "14% OFF. Apple MacBook Air Core i5 Current Price: $170.00. Refurbished. Walmart - ASN Depot, Inc. Rated 4.7 out of 5. 16K reviews." [ref=e1757]':
+                  - generic [ref=e1761] [cursor=pointer]:
+                    - generic [ref=e1766]:
+                      - generic [ref=e1768]:
+                        - img "14% OFF." [ref=e1769]:
+                          - generic [ref=e1771]: 14% OFF
+                        - img [ref=e1774]
+                      - generic [ref=e1775]: Apple MacBook Air Core i5
+                      - 'group "Current Price: $170.00. Refurbished." [ref=e1776]':
+                        - generic [ref=e1778]:
+                          - generic [ref=e1779]: $170.00
+                          - generic [ref=e1780]: Refurbished
+                      - generic [ref=e1785]: Walmart - ASN Depot, Inc.
+                      - img "Rated 4.7 out of 5. 16K reviews." [ref=e1786]:
+                        - img "Rated 4.7 out of 5, 16K user reviews" [ref=e1787]:
+                          - text: "4.7"
+                          - img [ref=e1788]
+                          - text: (16K)
+                    - button [ref=e1791]
+              - listitem [ref=e1793]:
+                - 'button "28% OFF. Apple 15-inch MacBook Air M4 10-core CPU 10-core Current Price: $861.54. Refurbished. Back Market & more Rated 4.8 out of 5. 2.1K reviews." [ref=e1796]':
+                  - generic [ref=e1800] [cursor=pointer]:
+                    - generic [ref=e1805]:
+                      - generic [ref=e1807]:
+                        - img "28% OFF." [ref=e1808]:
+                          - generic [ref=e1810]: 28% OFF
+                        - img [ref=e1813]
+                      - generic [ref=e1814]: Apple 15-inch MacBook Air M4 10-core CPU 10-core
+                      - 'group "Current Price: $861.54. Refurbished." [ref=e1815]':
+                        - generic [ref=e1817]:
+                          - generic [ref=e1818]: $861.54
+                          - generic [ref=e1819]: Refurbished
+                      - generic [ref=e1820]:
+                        - generic [ref=e1824]: Back Market
+                        - generic [ref=e1825]: "& more"
+                      - img "Rated 4.8 out of 5. 2.1K reviews." [ref=e1826]:
+                        - img "Rated 4.8 out of 5, 2.1K user reviews" [ref=e1827]:
+                          - text: "4.8"
+                          - img [ref=e1828]
+                          - text: (2.1K)
+                    - button [ref=e1831]
+              - listitem [ref=e1833]:
+                - 'button "21% OFF. Apple MacBook Air M3 Current Price: $779.99. Refurbished. Best Buy & more Free delivery by Mon Rated 4.8 out of 5. 1.4K reviews." [ref=e1836]':
+                  - generic [ref=e1840] [cursor=pointer]:
+                    - generic [ref=e1845]:
+                      - generic [ref=e1847]:
+                        - img "21% OFF." [ref=e1848]:
+                          - generic [ref=e1850]: 21% OFF
+                        - img [ref=e1853]
+                      - generic [ref=e1854]: Apple MacBook Air M3
+                      - 'group "Current Price: $779.99. Refurbished." [ref=e1855]':
+                        - generic [ref=e1857]:
+                          - generic [ref=e1858]: $779.99
+                          - generic [ref=e1859]: Refurbished
+                      - generic [ref=e1860]:
+                        - generic [ref=e1864]: Best Buy
+                        - generic [ref=e1865]: "& more"
+                      - generic [ref=e1867]: Free delivery by Mon
+                      - img "Rated 4.8 out of 5. 1.4K reviews." [ref=e1868]:
+                        - img "Rated 4.8 out of 5, 1.4K user reviews" [ref=e1869]:
+                          - text: "4.8"
+                          - img [ref=e1870]
+                          - text: (1.4K)
+                    - button [ref=e1873]
+              - listitem [ref=e1875]:
+                - 'button "50% OFF. Apple MacBook Pro M2 Current Price: $644.95. Refurbished. Back Market & more Rated 4.7 out of 5. 1.2K reviews." [ref=e1878]':
+                  - generic [ref=e1882] [cursor=pointer]:
+                    - generic [ref=e1887]:
+                      - generic [ref=e1889]:
+                        - img "50% OFF." [ref=e1890]:
+                          - generic [ref=e1892]: 50% OFF
+                        - img [ref=e1895]
+                      - generic [ref=e1896]: Apple MacBook Pro M2
+                      - 'group "Current Price: $644.95. Refurbished." [ref=e1897]':
+                        - generic [ref=e1899]:
+                          - generic [ref=e1900]: $644.95
+                          - generic [ref=e1901]: Refurbished
+                      - generic [ref=e1902]:
+                        - generic [ref=e1906]: Back Market
+                        - generic [ref=e1907]: "& more"
+                      - img "Rated 4.7 out of 5. 1.2K reviews." [ref=e1908]:
+                        - img "Rated 4.7 out of 5, 1.2K user reviews" [ref=e1909]:
+                          - text: "4.7"
+                          - img [ref=e1910]
+                          - text: (1.2K)
+                    - button [ref=e1913]
+          - generic [ref=e1918]:
+            - generic [ref=e1920]:
+              - heading "What people are saying" [level=2] [ref=e1921]:
+                - generic [ref=e1923]: What people are saying
+              - generic [ref=e1933]: Trending posts and discussions
+            - list [ref=e1937]:
+              - generic [ref=e1938]:
+                - listitem [ref=e1939]:
+                  - generic [ref=e1943]:
+                    - link "With the Education eligibility change - all the low-end models of macbook air/pro are all sold out. Popular comment · i hadn’t considered the edu discount change, you’re probs right.. been watching it for a week and a half i haven’t seen a SINGLE air drop and the non-preposterous levels of RAM pros don’t last an hour . 20+ comments · 3 weeks ago r/macbook Reddit" [ref=e1944] [cursor=pointer]:
+                      - /url: https://www.reddit.com/r/macbook/comments/1tii6kp/with_the_education_eligibility_change_all_the/
+                      - generic [ref=e1945]:
+                        - heading "With the Education eligibility change - all the low-end models of macbook air/pro are all sold out." [level=3] [ref=e1947]
+                        - generic [ref=e1948]:
+                          - generic [ref=e1949]: Popular comment · i hadn’t considered the edu discount change, you’re probs right.. been watching it for a week and a half i haven’t seen a SINGLE air drop and the non-preposterous levels of RAM pros don’t last an hour
+                          - generic [ref=e1950]: .
+                        - generic [ref=e1951]: 20+ comments · 3 weeks ago
+                        - generic [ref=e1960]:
+                          - generic [ref=e1961]: r/macbook
+                          - generic [ref=e1962]: Reddit
+                    - button "About this result" [ref=e1966] [cursor=pointer]:
+                      - img [ref=e1969]
+                - listitem [ref=e1971]:
+                  - generic [ref=e1975]:
+                    - link [ref=e1976] [cursor=pointer]:
+                      - /url: https://www.reddit.com/r/CostcoCanada/comments/1sqhdep/apple_store_education_discount_vs_apple/
+                      - generic [ref=e1977]:
+                        - heading "Apple store education discount vs apple refurbished vs costco" [level=3] [ref=e1979]
+                        - generic [ref=e1980]:
+                          - generic [ref=e1981]: Popular comment · I got a great deal about 5 weeks ago on an M4 512. In total with apple care it was $1805. This was a day before the Neo came out. So last week i did the math with the education discount and the M5 512 was 2 cents more. I returned the M4 and got the M5 at Apple. If you want a refurb you can’t get the M5 yet. Once the new models come out then the M5 will be under the Refurb section. I’m not sure if you need to pay monthly but if you do, you can’t do that at Costco or any Apple refurb products. The best option if you can wait is go into an Apple Store in Aug before school starts. If you have your student card you can get the educational discount and they usually offer around 100-150 bucks in Apple gift cards. So keep that in mind. I needed a laptop asap so that’s why i just got the educational discount. Sometimes Apple checks for a student card. They did last year so i couldn’t use the discount since im not in school. Good luck.
+                          - generic [ref=e1982]: .
+                        - generic [ref=e1983]: 40+ comments · 1 month ago
+                        - generic [ref=e1992]:
+                          - generic [ref=e1993]: r/CostcoCanada
+                          - generic [ref=e1994]: Reddit
+                    - button "About this result" [ref=e1998] [cursor=pointer]:
+                      - img [ref=e2001]
+                - listitem [ref=e2003]:
+                  - generic [ref=e2007]:
+                    - link "Refurbished vs New 10+ comments · 1 month ago r/mac Reddit" [ref=e2008] [cursor=pointer]:
+                      - /url: https://www.reddit.com/r/mac/comments/1swqmvp/refurbished_vs_new/
+                      - generic [ref=e2012]:
+                        - heading "Refurbished vs New" [level=3] [ref=e2014]
+                        - generic [ref=e2015]: 10+ comments · 1 month ago
+                        - generic [ref=e2024]:
+                          - generic [ref=e2025]: r/mac
+                          - generic [ref=e2026]: Reddit
+                    - button "About this result" [ref=e2030] [cursor=pointer]:
+                      - img [ref=e2033]
+          - generic [ref=e2038]:
+            - heading "Web results" [level=2] [ref=e2039]
+            - generic [ref=e2040]:
+              - generic [ref=e2043]:
+                - link "Back to School Refurbished Mac Laptop Guide for Students GainSaver https://www.gainsaver.com › Blog" [ref=e2045] [cursor=pointer]:
+                  - /url: https://www.gainsaver.com/back-to-school-refurbished-mac-laptop-guide-for-students-33?srsltid=AfmBOoqsxemJiZHQlsv1yUDMG6nVxE6U5JNVRmacgs6k_GcQnmny0nZ1
+                  - heading "Back to School Refurbished Mac Laptop Guide for Students" [level=3] [ref=e2046]
+                  - generic [ref=e2051]:
+                    - generic [ref=e2053]: GainSaver
+                    - generic [ref=e2055]: https://www.gainsaver.com › Blog
+                - button "About this result" [ref=e2056] [cursor=pointer]:
+                  - img [ref=e2059]
+              - generic [ref=e2062]:
+                - generic [ref=e2063]:
+                  - text: The most significant advantage of refurbished Macbook Airs for students is their smaller size and weight.
+                  - emphasis [ref=e2064]: They come with both 11-inch and 13-inch screen sizes
+                  - text: ", ..."
+                - link "Read more" [ref=e2065] [cursor=pointer]:
+                  - /url: https://www.gainsaver.com/back-to-school-refurbished-mac-laptop-guide-for-students-33?srsltid=AfmBOoqsxemJiZHQlsv1yUDMG6nVxE6U5JNVRmacgs6k_GcQnmny0nZ1#:~:text=The%20most%20significant%20advantage%20of,11%2Dinch%20and%2013%2Dinch%20screen%20sizes%2C
+              - link "refurbished macbooks for schools from www.gainsaver.com" [ref=e2068] [cursor=pointer]:
+                - /url: https://www.gainsaver.com/back-to-school-refurbished-mac-laptop-guide-for-students-33?srsltid=AfmBOoqsxemJiZHQlsv1yUDMG6nVxE6U5JNVRmacgs6k_GcQnmny0nZ1
+                - img "refurbished macbooks for schools from www.gainsaver.com" [ref=e2070]
+        - generic [ref=e2072]:
+          - generic [ref=e2077]:
+            - heading "People also search for" [level=2] [ref=e2079]
+            - generic [ref=e2081]:
+              - generic [ref=e2082]:
+                - link "Refurbished macbooks for schools nearby" [ref=e2086] [cursor=pointer]:
+                  - /url: /search?sca_esv=09892958edd89daa&q=Refurbished+macbooks+for+schools+nearby&sa=X&ved=2ahUKEwjDwbHGjvqUAxXAwvACHfhUA14Q1QJ6BAhWEAE
+                  - generic [ref=e2087]:
+                    - generic [ref=e2092]: Refurbished macbooks for schools nearby
+                    - img [ref=e2096]
+                - link "Refurbished macbooks for schools near me" [ref=e2101] [cursor=pointer]:
+                  - /url: /search?sca_esv=09892958edd89daa&q=Refurbished+macbooks+for+schools+near+me&sa=X&ved=2ahUKEwjDwbHGjvqUAxXAwvACHfhUA14Q1QJ6BAhlEAE
+                  - generic [ref=e2102]:
+                    - generic [ref=e2107]: Refurbished macbooks for schools near me
+                    - img [ref=e2111]
+                - link "Refurbished macbooks for schools cheap" [ref=e2116] [cursor=pointer]:
+                  - /url: /search?sca_esv=09892958edd89daa&q=Refurbished+macbooks+for+schools+cheap&sa=X&ved=2ahUKEwjDwbHGjvqUAxXAwvACHfhUA14Q1QJ6BAhkEAE
+                  - generic [ref=e2117]:
+                    - generic [ref=e2122]: Refurbished macbooks for schools cheap
+                    - img [ref=e2126]
+                - link "Refurbished MacBook Pro" [ref=e2131] [cursor=pointer]:
+                  - /url: /search?sca_esv=09892958edd89daa&q=Refurbished+MacBook+Pro&sa=X&ved=2ahUKEwjDwbHGjvqUAxXAwvACHfhUA14Q1QJ6BAhiEAE
+                  - generic [ref=e2132]:
+                    - generic [ref=e2137]: Refurbished MacBook Pro
+                    - img [ref=e2141]
+              - generic [ref=e2143]:
+                - link "Refurbished MacBook Air" [ref=e2147] [cursor=pointer]:
+                  - /url: /search?sca_esv=09892958edd89daa&q=Refurbished+MacBook+Air&sa=X&ved=2ahUKEwjDwbHGjvqUAxXAwvACHfhUA14Q1QJ6BAheEAE
+                  - generic [ref=e2148]:
+                    - generic [ref=e2153]: Refurbished MacBook Air
+                    - img [ref=e2157]
+                - link "Amazon refurbished MacBook" [ref=e2162] [cursor=pointer]:
+                  - /url: /search?sca_esv=09892958edd89daa&q=Amazon+refurbished+MacBook&sa=X&ved=2ahUKEwjDwbHGjvqUAxXAwvACHfhUA14Q1QJ6BAhbEAE
+                  - generic [ref=e2163]:
+                    - generic [ref=e2168]: Amazon refurbished MacBook
+                    - img [ref=e2172]
+                - link "Best place to buy refurbished MacBook" [ref=e2177] [cursor=pointer]:
+                  - /url: /search?sca_esv=09892958edd89daa&q=Best+place+to+buy+refurbished+MacBook&sa=X&ved=2ahUKEwjDwbHGjvqUAxXAwvACHfhUA14Q1QJ6BAhYEAE
+                  - generic [ref=e2178]:
+                    - generic [ref=e2183]: Best place to buy refurbished MacBook
+                    - img [ref=e2187]
+                - link "Refurbished MacBook M1" [ref=e2192] [cursor=pointer]:
+                  - /url: /search?sca_esv=09892958edd89daa&q=Refurbished+MacBook+M1&sa=X&ved=2ahUKEwjDwbHGjvqUAxXAwvACHfhUA14Q1QJ6BAhXEAE
+                  - generic [ref=e2193]:
+                    - generic [ref=e2198]: Refurbished MacBook M1
+                    - img [ref=e2202]
+          - navigation [ref=e2204]:
+            - heading "Page Navigation" [level=1] [ref=e2205]
+            - text: "1"
+            - link "Page 2" [ref=e2208] [cursor=pointer]:
+              - /url: /search?q=refurbished+macbooks+for+schools&sca_esv=09892958edd89daa&ei=-AAoasPlEMCFw8cP-KmN8AU&start=10&sa=N&sstk=AU9db-Az8RrHbb-VVcFUpM_9eVSVf9ZQZtbgwaQvo--RbQuI1xe_spJN0GjxDFjsId5DMSI5ADHlAt0E1SKssBhXYo90m_cD8pX2ng&ved=2ahUKEwjDwbHGjvqUAxXAwvACHfhUA14Q8tMDegQISRAE
+              - text: "2"
+            - link "Page 3" [ref=e2210] [cursor=pointer]:
+              - /url: /search?q=refurbished+macbooks+for+schools&sca_esv=09892958edd89daa&ei=-AAoasPlEMCFw8cP-KmN8AU&start=20&sa=N&sstk=AU9db-Az8RrHbb-VVcFUpM_9eVSVf9ZQZtbgwaQvo--RbQuI1xe_spJN0GjxDFjsId5DMSI5ADHlAt0E1SKssBhXYo90m_cD8pX2ng&ved=2ahUKEwjDwbHGjvqUAxXAwvACHfhUA14Q8tMDegQISRAG
+              - text: "3"
+            - link "Page 4" [ref=e2212] [cursor=pointer]:
+              - /url: /search?q=refurbished+macbooks+for+schools&sca_esv=09892958edd89daa&ei=-AAoasPlEMCFw8cP-KmN8AU&start=30&sa=N&sstk=AU9db-Az8RrHbb-VVcFUpM_9eVSVf9ZQZtbgwaQvo--RbQuI1xe_spJN0GjxDFjsId5DMSI5ADHlAt0E1SKssBhXYo90m_cD8pX2ng&ved=2ahUKEwjDwbHGjvqUAxXAwvACHfhUA14Q8tMDegQISRAI
+              - text: "4"
+            - link "Page 5" [ref=e2214] [cursor=pointer]:
+              - /url: /search?q=refurbished+macbooks+for+schools&sca_esv=09892958edd89daa&ei=-AAoasPlEMCFw8cP-KmN8AU&start=40&sa=N&sstk=AU9db-Az8RrHbb-VVcFUpM_9eVSVf9ZQZtbgwaQvo--RbQuI1xe_spJN0GjxDFjsId5DMSI5ADHlAt0E1SKssBhXYo90m_cD8pX2ng&ved=2ahUKEwjDwbHGjvqUAxXAwvACHfhUA14Q8tMDegQISRAK
+              - text: "5"
+            - link "Page 6" [ref=e2216] [cursor=pointer]:
+              - /url: /search?q=refurbished+macbooks+for+schools&sca_esv=09892958edd89daa&ei=-AAoasPlEMCFw8cP-KmN8AU&start=50&sa=N&sstk=AU9db-Az8RrHbb-VVcFUpM_9eVSVf9ZQZtbgwaQvo--RbQuI1xe_spJN0GjxDFjsId5DMSI5ADHlAt0E1SKssBhXYo90m_cD8pX2ng&ved=2ahUKEwjDwbHGjvqUAxXAwvACHfhUA14Q8tMDegQISRAM
+              - text: "6"
+            - link "Page 7" [ref=e2218] [cursor=pointer]:
+              - /url: /search?q=refurbished+macbooks+for+schools&sca_esv=09892958edd89daa&ei=-AAoasPlEMCFw8cP-KmN8AU&start=60&sa=N&sstk=AU9db-Az8RrHbb-VVcFUpM_9eVSVf9ZQZtbgwaQvo--RbQuI1xe_spJN0GjxDFjsId5DMSI5ADHlAt0E1SKssBhXYo90m_cD8pX2ng&ved=2ahUKEwjDwbHGjvqUAxXAwvACHfhUA14Q8tMDegQISRAO
+              - text: "7"
+            - link "Page 8" [ref=e2220] [cursor=pointer]:
+              - /url: /search?q=refurbished+macbooks+for+schools&sca_esv=09892958edd89daa&ei=-AAoasPlEMCFw8cP-KmN8AU&start=70&sa=N&sstk=AU9db-Az8RrHbb-VVcFUpM_9eVSVf9ZQZtbgwaQvo--RbQuI1xe_spJN0GjxDFjsId5DMSI5ADHlAt0E1SKssBhXYo90m_cD8pX2ng&ved=2ahUKEwjDwbHGjvqUAxXAwvACHfhUA14Q8tMDegQISRAQ
+              - text: "8"
+            - link "Page 9" [ref=e2222] [cursor=pointer]:
+              - /url: /search?q=refurbished+macbooks+for+schools&sca_esv=09892958edd89daa&ei=-AAoasPlEMCFw8cP-KmN8AU&start=80&sa=N&sstk=AU9db-Az8RrHbb-VVcFUpM_9eVSVf9ZQZtbgwaQvo--RbQuI1xe_spJN0GjxDFjsId5DMSI5ADHlAt0E1SKssBhXYo90m_cD8pX2ng&ved=2ahUKEwjDwbHGjvqUAxXAwvACHfhUA14Q8tMDegQISRAS
+              - text: "9"
+            - link "Page 10" [ref=e2224] [cursor=pointer]:
+              - /url: /search?q=refurbished+macbooks+for+schools&sca_esv=09892958edd89daa&ei=-AAoasPlEMCFw8cP-KmN8AU&start=90&sa=N&sstk=AU9db-Az8RrHbb-VVcFUpM_9eVSVf9ZQZtbgwaQvo--RbQuI1xe_spJN0GjxDFjsId5DMSI5ADHlAt0E1SKssBhXYo90m_cD8pX2ng&ved=2ahUKEwjDwbHGjvqUAxXAwvACHfhUA14Q8tMDegQISRAU
+              - text: "10"
+            - heading "Next" [level=2] [ref=e2226]:
+              - link "Next" [ref=e2227] [cursor=pointer]:
+                - /url: /search?q=refurbished+macbooks+for+schools&sca_esv=09892958edd89daa&ei=-AAoasPlEMCFw8cP-KmN8AU&start=10&sa=N&sstk=AU9db-Az8RrHbb-VVcFUpM_9eVSVf9ZQZtbgwaQvo--RbQuI1xe_spJN0GjxDFjsId5DMSI5ADHlAt0E1SKssBhXYo90m_cD8pX2ng&ved=2ahUKEwjDwbHGjvqUAxXAwvACHfhUA14Q8NMDegQISRAW
+                - generic [ref=e2229]: Next
+        - navigation
+    - contentinfo [ref=e2230]:
+      - heading "Footer Links" [level=1] [ref=e2231]
+      - generic [ref=e2235]:
+        - generic [ref=e2239]:
+          - button "Cape Canaveral, Florida - Based on your past activity" [ref=e2241] [cursor=pointer]:
+            - generic [ref=e2242]: Cape Canaveral, Florida
+            - generic [ref=e2244]:
+              - text: "-"
+              - generic [ref=e2245]: Based on your past activity
+          - text: "-"
+          - button "Update location" [ref=e2247] [cursor=pointer]: Update location
+        - generic [ref=e2250]:
+          - link "Help" [ref=e2251] [cursor=pointer]:
+            - /url: https://support.google.com/websearch/?p=ws_results_help&hl=en&fg=1
+          - link "Send feedback" [ref=e2252] [cursor=pointer]:
+            - /url: "#"
+          - link "Privacy" [ref=e2253] [cursor=pointer]:
+            - /url: https://policies.google.com/privacy?hl=en&fg=1
+          - link "Terms" [ref=e2254] [cursor=pointer]:
+            - /url: https://policies.google.com/terms?hl=en&fg=1

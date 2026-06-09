@@ -1,0 +1,27 @@
+OVERVIEW
+WETYR Film Intel is a professional market-intelligence app for film producers and
+distributors. Four of the five tabs (Titles, Box Office, Briefing, Casting) work
+immediately with no account and show live, read-only public data. The fifth tab
+(Rolodex) is a private contact directory that requires a sign-in.
+
+HOW TO REVIEW THE PUBLIC TABS
+1. Launch the app. The Titles tab loads trending film data. Tap a poster to switch.
+2. Box Office shows in-theaters and trending lists. Tap any row for detail.
+3. Briefing shows live industry headlines and festival deadlines. Tap to open.
+4. Casting shows open scripted and commercial roles from public feeds.
+
+HOW TO REVIEW THE ROLODEX (sign-in)
+1. Open the Rolodex tab and sign in with the demo account in the credentials fields.
+2. You can search contacts, filter by type or department, and open a record to see
+   contact details. Adding, editing, and enrichment actions are also available.
+
+DATA AND PRIVACY
+The app talks only to the developer's own backend at markcmo.com. Public tabs read
+public film data (sourced via TMDB and public RSS). The Rolodex contains the
+developer's own business contacts and is access-controlled. No third-party
+advertising or tracking SDKs are present; no IDFA is used.
+
+NOTE TO SELF (remove before submit): provide a review-only sign-in. Add a dedicated
+entry to the ADMIN_USERS env var on Netlify (for example user "appreview") with a
+throwaway password, and put that user/password in the demo credential fields. Do NOT
+use the real admin password.

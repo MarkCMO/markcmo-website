@@ -1,0 +1,16 @@
+No account or login is required; the app is fully offline.
+
+How to review:
+1. Complete onboarding: enter a child name and age, then set a 4 digit Parent PIN
+   (you choose it on the setup screen, remember it for the next step), pick any pet,
+   and choose a training length.
+2. The Home tab shows today's care tasks. Tap a task, then tap Done to complete it.
+3. Parent Mode: tap the "Grown-ups" lock button on the Home screen and enter the PIN
+   you set. From there you can Verify Tasks, change Settings, view the Readiness
+   Report, Manage Pets, and reach Unlock.
+4. In-app purchase: the single non-consumable unlock ("petchores.unlock.full") and the
+   Restore Purchases button live only inside PIN-gated Parent Mode -> Unlock. A child
+   cannot reach any purchase UI.
+
+Privacy: no data is collected and nothing leaves the device. Optional photo proof is
+stored locally only. The app contains no ads and no third party SDKs.

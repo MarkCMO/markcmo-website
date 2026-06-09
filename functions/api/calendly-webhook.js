@@ -850,64 +850,25 @@ async function schedulePostMeetingFollowup(env, { inviteeEmail, inviteeName, eve
     auditPayload.mode = (_n.indexOf('wetyr') >= 0) ? 'wetyr' : 'markcmo';
 
     const firstName = (inviteeName || '').split(' ')[0] || 'there';
-    // Recap email - Mark's voice. Thanks them + clear bullets on what
-    // happens next from his side and what he needs from theirs.
+    // Recap email - safe placeholder ONLY. Do NOT fabricate what was
+    // discussed, agreed on, or what comes next. This template fires
+    // at end_time+30min regardless of whether we actually have meeting
+    // notes. If we DO have notes (Notetaker transcript + Workers AI
+    // summary via the cron-process-gemini-recaps worker), this version
+    // is CANCELLED and replaced with the personalized recap before
+    // delivery. If we don't, this generic note is what goes out -
+    // it must not assume any detail of the conversation.
     //
-    // v1 personalization: if the prospect listed a website/outcome/topic
-    // in the booking Q&A, reference it in one bullet to show we listened.
-    // No Notetaker dependency for this level of personalization.
-    //
-    // v2 personalization (planned, task #85): a cron worker will pull
-    // Calendly Notetaker transcript + summary before this email sends,
-    // generate fully-personalized bullets via Cloudflare Workers AI, and
-    // override this templated version. Skips gracefully if Notetaker
-    // is not available.
-    const qaOutcome = (qa && (qa['what is the 1 outcome you want from this call?'] || qa['what is the #1 outcome you want from this call?'] || qa['what is the #1 outcome you want from this call'] || qa['outcome'] || qa['goal'] || qa['what would you like to discuss?'])) || '';
-    const qaWebsite = (qa && (qa['website url\n\n'] || qa['website url'] || qa['website'] || qa['site'])) || '';
-    const qaTopic = qaOutcome || qaWebsite;
-    const subject = isWetyr
-      ? `Following up on our WETYR meeting`
-      : `Recap from our meeting`;
-    // Personalize one bullet with the prospect's stated topic if we have it.
-    // The trimmed snippet is used in the body so it reads naturally.
-    const topicSnippet = qaTopic ? String(qaTopic).trim().substring(0, 120).replace(/\.$/, '') : '';
-    const expectFromMe = isWetyr
-      ? [
-          'A direct cash offer or pass with reasons within 48 hours',
-          topicSnippet
-            ? `A clean term sheet on ${topicSnippet} if we move forward (no surprises)`
-            : 'A clean term sheet if we move forward (no surprises)',
-          'Direct line to me at info@wetyr.com for any questions',
-        ]
-      : [
-          'A follow-up note within 24 hours with the agenda we agreed on',
-          topicSnippet
-            ? `A specific proposal aligned with what you flagged on the call (${topicSnippet})`
-            : 'A specific proposal aligned with the outcomes you want',
-          'Direct access via mark@markcmo.com for any questions',
-        ];
-    const needFromYou = isWetyr
-      ? [
-          'The property details (address, condition, any liens or issues)',
-          'Your number and timeline',
-          'Decision-maker confirmation if more than one party is involved',
-        ]
-      : [
-          'The materials we discussed (slides, dashboards, ad accounts, KPIs)',
-          'The 1-3 specific outcomes you want from our engagement',
-          'A signoff on the proposal scope before I begin work',
-        ];
+    // Mark's directive: "dont send this after the meeting if you are
+    // not sure what we discussed". So we say nothing specific. Just
+    // a thank-you + signal that a real follow-up is coming, leaving
+    // room for Mark to send the actual specifics manually.
+    const subject = `Thanks for the time today`;
     const text = `Hi ${firstName},
 
-Thanks for the time today. Really enjoyed the conversation.
+Thanks for the time today. I appreciated the conversation.
 
-Here's what you can expect from me:
-${expectFromMe.map(b => `- ${b}`).join('\n')}
-
-Here's what I'll need from you:
-${needFromYou.map(b => `- ${b}`).join('\n')}
-
-Reply to this email with anything I missed. Looking forward to the next step.
+I'll follow up shortly with specifics from what we covered and the next step on my end. If anything came up that you'd like me to circle back on first, just reply to this email.
 
 Mark`;
     const html = `<!DOCTYPE html>
@@ -915,12 +876,8 @@ Mark`;
 <body>
   <div>
     <p>Hi ${esc(firstName)},</p>
-    <p>Thanks for the time today. Really enjoyed the conversation.</p>
-    <p><strong>Here's what you can expect from me:</strong></p>
-    <ul>${expectFromMe.map(b => `<li>${esc(b)}</li>`).join('')}</ul>
-    <p><strong>Here's what I'll need from you:</strong></p>
-    <ul>${needFromYou.map(b => `<li>${esc(b)}</li>`).join('')}</ul>
-    <p>Reply to this email with anything I missed. Looking forward to the next step.</p>
+    <p>Thanks for the time today. I appreciated the conversation.</p>
+    <p>I'll follow up shortly with specifics from what we covered and the next step on my end. If anything came up that you'd like me to circle back on first, just reply to this email.</p>
     <p>Mark</p>
   </div>
 </body></html>`;

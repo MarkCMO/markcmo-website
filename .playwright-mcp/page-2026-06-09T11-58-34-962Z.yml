@@ -1,0 +1,628 @@
+- generic [active] [ref=e1]:
+  - generic:
+    - generic:
+      - link "Skip to main content" [ref=e2] [cursor=pointer]
+      - link "Accessibility help" [ref=e3] [cursor=pointer]:
+        - /url: https://support.google.com/websearch/answer/181196?hl=en
+  - generic [ref=e8]:
+    - search [ref=e9]:
+      - generic [ref=e11]:
+        - link "Go to Google Home" [ref=e13] [cursor=pointer]:
+          - /url: https://www.google.com/webhp?hl=en&sa=X&ved=0ahUKEwjWgMHFjfqUAxVW1fACHcpFJEcQPAgI
+          - img [ref=e14]
+        - generic [ref=e21]:
+          - generic [ref=e22]:
+            - combobox "Search" [ref=e25]: apple device buyback apple device buyback
+            - generic [ref=e26]:
+              - button "Clear" [ref=e28] [cursor=pointer]:
+                - img [ref=e30]
+              - generic [ref=e33]:
+                - button "Search by voice" [ref=e34] [cursor=pointer]:
+                  - img [ref=e35]
+                - button "Search by image" [ref=e37] [cursor=pointer]:
+                  - img [ref=e38]
+          - button "Search" [ref=e40] [cursor=pointer]:
+            - img [ref=e43]
+    - generic [ref=e45]:
+      - button "Settings" [ref=e47] [cursor=pointer]:
+        - img [ref=e50]
+      - generic [ref=e53]:
+        - button "Google apps" [ref=e55] [cursor=pointer]:
+          - img [ref=e56]
+        - link "Sign in" [ref=e60] [cursor=pointer]:
+          - /url: https://accounts.google.com/ServiceLogin?hl=en&passive=true&continue=https://www.google.com/search%3Fq%3Dapple%2Bdevice%2Bbuyback%26num%3D20&ec=futura_srp_og_si_72236_p
+  - generic [ref=e62]:
+    - navigation [ref=e68]:
+      - generic [ref=e74]:
+        - list [ref=e75]:
+          - listitem [ref=e76]:
+            - link "AI Mode" [ref=e79] [cursor=pointer]:
+              - /url: /search?q=apple+device+buyback&sca_esv=09892958edd89daa&udm=50&fbs=ADc_l-aN0CWEZBOHjofHoaMMDiKp9lEhFAN_4ain3HSNQWw-mBcFY_b7_fFBjPEsWR5sze4Jv2k-M9OrzQl4nN8HxVBZpPuzH9uQiRZujvkzICXg83d79_3i758v9e3ZTcjJ5DKap2vpPsf_DYf71Y7rZxxxUgJbAqHoWsEOmIKF2Vvc3Y9qlUUsddeSHerdaIprtKApJIFnyk4xtYYXbQ2nllb3As2aog&aep=1&ntc=1&sa=X&ved=2ahUKEwjWgMHFjfqUAxVW1fACHcpFJEcQ2J8OegQIDhAD
+              - generic [ref=e82]: AI Mode
+          - listitem [ref=e83]:
+            - link "All" [disabled] [ref=e84]:
+              - generic [ref=e86]: All
+          - listitem [ref=e87]:
+            - link "Shopping" [ref=e88] [cursor=pointer]:
+              - /url: /search?sca_esv=09892958edd89daa&udm=28&fbs=ADc_l-aN0CWEZBOHjofHoaMMDiKp9lEhFAN_4ain3HSNQWw-mBcFY_b7_fFBjPEsWR5sze4Jv2k-M9OrzQl4nN8HxVBZpPuzH9uQiRZujvkzICXg83d79_3i758v9e3ZTcjJ5DKap2vpPsf_DYf71Y7rZxxxUgJbAqHoWsEOmIKF2Vvc3Y9qlUUsddeSHerdaIprtKApJIFnyk4xtYYXbQ2nllb3As2aog&q=apple+device+buyback&ved=1t:220175&ictx=111
+              - generic [ref=e90]: Shopping
+          - listitem [ref=e91]:
+            - link "News" [ref=e92] [cursor=pointer]:
+              - /url: /search?sca_esv=09892958edd89daa&q=apple+device+buyback&tbm=nws&source=lnms&fbs=ADc_l-aN0CWEZBOHjofHoaMMDiKp9lEhFAN_4ain3HSNQWw-mBcFY_b7_fFBjPEsWR5sze4Jv2k-M9OrzQl4nN8HxVBZpPuzH9uQiRZujvkzICXg83d79_3i758v9e3ZTcjJ5DKap2vpPsf_DYf71Y7rZxxxUgJbAqHoWsEOmIKF2Vvc3Y9qlUUsddeSHerdaIprtKApJIFnyk4xtYYXbQ2nllb3As2aog&sa=X&ved=2ahUKEwjWgMHFjfqUAxVW1fACHcpFJEcQ0pQJegQIFRAB
+              - generic [ref=e94]: News
+          - listitem [ref=e95]:
+            - link "Videos" [ref=e96] [cursor=pointer]:
+              - /url: /search?sca_esv=09892958edd89daa&udm=7&fbs=ADc_l-aN0CWEZBOHjofHoaMMDiKp9lEhFAN_4ain3HSNQWw-mBcFY_b7_fFBjPEsWR5sze4Jv2k-M9OrzQl4nN8HxVBZpPuzH9uQiRZujvkzICXg83d79_3i758v9e3ZTcjJ5DKap2vpPsf_DYf71Y7rZxxxUgJbAqHoWsEOmIKF2Vvc3Y9qlUUsddeSHerdaIprtKApJIFnyk4xtYYXbQ2nllb3As2aog&q=apple+device+buyback&sa=X&ved=2ahUKEwjWgMHFjfqUAxVW1fACHcpFJEcQtKgLegQIFhAB
+              - generic [ref=e98]: Videos
+          - listitem [ref=e99]:
+            - link "Short videos" [ref=e100] [cursor=pointer]:
+              - /url: /search?sca_esv=09892958edd89daa&udm=39&fbs=ADc_l-aN0CWEZBOHjofHoaMMDiKp9lEhFAN_4ain3HSNQWw-mBcFY_b7_fFBjPEsWR5sze4Jv2k-M9OrzQl4nN8HxVBZpPuzH9uQiRZujvkzICXg83d79_3i758v9e3ZTcjJ5DKap2vpPsf_DYf71Y7rZxxxUgJbAqHoWsEOmIKF2Vvc3Y9qlUUsddeSHerdaIprtKApJIFnyk4xtYYXbQ2nllb3As2aog&q=apple+device+buyback&sa=X&ved=2ahUKEwjWgMHFjfqUAxVW1fACHcpFJEcQs6gLegQIFxAB
+              - generic [ref=e102]: Short videos
+          - listitem [ref=e103]:
+            - link "Images" [ref=e104] [cursor=pointer]:
+              - /url: /search?sca_esv=09892958edd89daa&udm=2&fbs=ADc_l-aN0CWEZBOHjofHoaMMDiKp9lEhFAN_4ain3HSNQWw-mBcFY_b7_fFBjPEsWR5sze4Jv2k-M9OrzQl4nN8HxVBZpPuzH9uQiRZujvkzICXg83d79_3i758v9e3ZTcjJ5DKap2vpPsf_DYf71Y7rZxxxUgJbAqHoWsEOmIKF2Vvc3Y9qlUUsddeSHerdaIprtKApJIFnyk4xtYYXbQ2nllb3As2aog&q=apple+device+buyback&sa=X&ved=2ahUKEwjWgMHFjfqUAxVW1fACHcpFJEcQtKgLegQIGRAB
+              - generic [ref=e106]: Images
+          - listitem [ref=e107]:
+            - button "More filters" [ref=e108] [cursor=pointer]:
+              - generic "More filters" [ref=e109]:
+                - generic [ref=e110]:
+                  - generic [ref=e111]: More
+                  - img [ref=e113]
+        - button "Tools" [ref=e116] [cursor=pointer]:
+          - generic [ref=e118]:
+            - generic [ref=e119]: Tools
+            - img [ref=e121]
+    - heading "Search Results" [level=1] [ref=e123]
+    - main [ref=e129]:
+      - region "Ads" [ref=e132]:
+        - generic [ref=e133]:
+          - heading "Sponsored results" [level=2] [ref=e140]
+          - generic [ref=e141]:
+            - generic [ref=e148]:
+              - generic [ref=e154]:
+                - generic [ref=e155]:
+                  - link "Highest Payout For Laptop - High Quotes, Fastest Payments BuyBackTronics.com https://www.buybacktronics.com" [ref=e156] [cursor=pointer]:
+                    - /url: https://www.buybacktronics.com/category/macbook
+                    - heading "Highest Payout For Laptop - High Quotes, Fastest Payments" [level=3] [ref=e157]
+                    - generic [ref=e163]:
+                      - generic [ref=e165]: BuyBackTronics.com
+                      - generic [ref=e166]: https://www.buybacktronics.com
+                  - button "Why this ad?" [ref=e169] [cursor=pointer]:
+                    - img [ref=e171]
+                - generic [ref=e176]:
+                  - text: Quick, Easy, Painless - Get A No Obligation Quote To
+                  - emphasis [ref=e177]: Trade-In
+                  - text: Your Laptop.
+                - generic [ref=e178]:
+                  - link "Sell MacBook" [ref=e181] [cursor=pointer]:
+                    - /url: https://www.buybacktronics.com/category/macbook?sa=X&ved=2ahUKEwjWgMHFjfqUAxVW1fACHcpFJEcQwgUoAXoECBIQEA
+                    - img [ref=e183]
+                    - generic [ref=e185]: Sell MacBook
+                  - link "iPhone" [ref=e188] [cursor=pointer]:
+                    - /url: https://www.buybacktronics.com/category/iphone?sa=X&ved=2ahUKEwjWgMHFjfqUAxVW1fACHcpFJEcQwgUoA3oECBIQEg
+                    - img [ref=e190]
+                    - generic [ref=e192]: iPhone
+                  - link "Apple Watch" [ref=e195] [cursor=pointer]:
+                    - /url: https://www.buybacktronics.com/category/apple-watch?sa=X&ved=2ahUKEwjWgMHFjfqUAxVW1fACHcpFJEcQwgUoBXoECBIQFA
+                    - img [ref=e197]
+                    - generic [ref=e199]: Apple Watch
+              - generic [ref=e206]:
+                - generic [ref=e207]:
+                  - link "Apple Official Site | Trade in apple.com https://www.apple.com" [ref=e208] [cursor=pointer]:
+                    - /url: https://www.apple.com/shop/trade-in
+                    - heading "Apple Official Site | Trade in" [level=3] [ref=e209]
+                    - generic [ref=e215]:
+                      - generic [ref=e217]: apple.com
+                      - generic [ref=e218]: https://www.apple.com
+                  - button "Why this ad?" [ref=e221] [cursor=pointer]:
+                    - img [ref=e223]
+                - generic [ref=e228]:
+                  - emphasis [ref=e229]: Trade in
+                  - text: the
+                  - emphasis [ref=e230]: device
+                  - text: you have to save on the one you want. Learn more and shop now.
+                  - emphasis [ref=e231]: Trade in
+                  - text: your
+                  - emphasis [ref=e232]: device
+                  - text: for credit towards a new one. Or get an
+                  - emphasis [ref=e233]: Apple
+                  - text: Gift Card. Online or in store. Good for the planet.
+              - generic [ref=e239]:
+                - link "Image from itsworthmore.com" [ref=e241] [cursor=pointer]:
+                  - /url: https://www.google.com/aclk?sa=L&ai=DChsSEwiozcbFjfqUAxXRREcBHdIGI4QYACICCAEQBRoCcXU&co=1&ase=2&gclid=EAIaIQobChMIqM3GxY36lAMV0URHAR3SBiOEEAAYAyABEgICAvD_BwE&cid=CAAS0gHkaKlMAVgPSTiLFlkxsvjEkAnCarNd_7mHYEOLsg7moCrGd442lefuWcXKiZCakAih6O1ZUwEoZiihqXY4YIrumI2tFH6E5-LqyOr7YBoYEpDGq1Kt7J8TagBVF-9zbK3Wqx-uN_KREEwgkHpw6toe-_er6AUVdZKaq85cq58x5Ka29Gkf2mWxQAWQeae-5Nv7-7dbKVIWFzyhGJtvRiVpGLA7067mwBZXg6VtkJv85fGJk0_qf45ku_MAPfLhBoUXoJIht8valmJg_NlfU8SQbAI&cce=2&category=acrcp_v1_32&sig=AOD64_2HgmUYfhUcWsLt2mAt6UlsucNd6Q&q=&nis=4&ved=2ahUKEwjWgMHFjfqUAxVW1fACHcpFJEcQh78CegQIEBAB&adurl=
+                  - img "Image from itsworthmore.com" [ref=e243]
+                - generic [ref=e244]:
+                  - link "Highest Payout for MacBook | Highest Cash For Your MacBook ItsWorthMore.com https://www.itsworthmore.com › sell › macbook" [ref=e245] [cursor=pointer]:
+                    - /url: https://www.itsworthmore.com/sell/macbook
+                    - heading "Highest Payout for MacBook | Highest Cash For Your MacBook" [level=3] [ref=e247]
+                    - generic [ref=e253]:
+                      - generic [ref=e255]: ItsWorthMore.com
+                      - generic [ref=e256]: https://www.itsworthmore.com › sell › macbook
+                  - button "Why this ad?" [ref=e259] [cursor=pointer]:
+                    - img [ref=e261]
+                - generic [ref=e265]: Quicker, Easier, And Safer Way To Sell Your MacBook. Multiple Payment Options. Sell your phone, tablet, or laptop for more...
+              - generic [ref=e271]:
+                - generic [ref=e272]:
+                  - link "We Pay More Than Anyone Else - Apple Buyback GadgetPickup LLC https://www.gadgetpickup.com › sell › iphone" [ref=e273] [cursor=pointer]:
+                    - /url: https://gadgetpickup.com/sell/cell-phone/apple-cell-phone/
+                    - heading "We Pay More Than Anyone Else - Apple Buyback" [level=3] [ref=e274]
+                    - generic [ref=e280]:
+                      - generic [ref=e282]: GadgetPickup LLC
+                      - generic [ref=e283]: https://www.gadgetpickup.com › sell › iphone
+                  - button "Why this ad?" [ref=e286] [cursor=pointer]:
+                    - img [ref=e288]
+                - generic [ref=e293]:
+                  - text: Highest Cash For Your
+                  - emphasis [ref=e294]: iPhone
+                  - text: . Instant And Reliable Quotes.
+            - button "Hide sponsored results" [ref=e296] [cursor=pointer]:
+              - separator [ref=e297]
+              - generic [ref=e298]:
+                - generic [ref=e299]: Hide sponsored results
+                - img [ref=e301]
+      - generic [ref=e306]:
+        - generic [ref=e309]:
+          - heading "Web Result with Site Links" [level=2] [ref=e310]
+          - generic [ref=e311]:
+            - generic [ref=e315]:
+              - generic [ref=e317]:
+                - link "Apple Trade In Apple https://www.apple.com › shop › trade-in" [ref=e319] [cursor=pointer]:
+                  - /url: https://www.apple.com/shop/trade-in
+                  - heading "Apple Trade In" [level=3] [ref=e320]
+                  - generic [ref=e325]:
+                    - generic [ref=e327]: Apple
+                    - generic [ref=e329]: https://www.apple.com › shop › trade-in
+                - button "About this result" [ref=e330] [cursor=pointer]:
+                  - img [ref=e333]
+              - generic [ref=e337]:
+                - text: With
+                - emphasis [ref=e338]: Apple Trade In
+                - text: ", you can get great value for your current"
+                - emphasis [ref=e339]: device
+                - text: and apply it toward a new one, online or at an
+                - emphasis [ref=e340]: Apple
+                - text: Store.
+            - group "Personalized recommendations based on your history" [ref=e341]:
+              - rowgroup [ref=e342]:
+                - row "Apple Trade In With Apple Trade In, you can get a great value for your current ..." [ref=e343]:
+                  - cell "Apple Trade In With Apple Trade In, you can get a great value for your current ..." [ref=e344]:
+                    - generic [ref=e350]:
+                      - heading "Apple Trade In" [level=3] [ref=e351]:
+                        - link "Apple Trade In" [ref=e352] [cursor=pointer]:
+                          - /url: https://www.apple.com/sa-en/shop/trade-in
+                          - text: Apple Trade In
+                      - generic [ref=e355]: With Apple Trade In, you can get a great value for your current ...
+                - row "How To Trade In Answer a few questions about your current smartphone when ..." [ref=e356]:
+                  - cell "How To Trade In Answer a few questions about your current smartphone when ..." [ref=e357]:
+                    - generic [ref=e363]:
+                      - heading "How To Trade In" [level=3] [ref=e364]:
+                        - link "How To Trade In" [ref=e365] [cursor=pointer]:
+                          - /url: https://www.apple.com/in/shop/trade-in/how-to
+                          - text: How To Trade In
+                      - generic [ref=e368]: Answer a few questions about your current smartphone when ...
+                - row "Education With Apple Trade In, you can get great value for your current ..." [ref=e369]:
+                  - cell "Education With Apple Trade In, you can get great value for your current ..." [ref=e370]:
+                    - generic [ref=e376]:
+                      - heading "Education" [level=3] [ref=e377]:
+                        - link "Education" [ref=e378] [cursor=pointer]:
+                          - /url: https://www.apple.com/us-edu/shop/trade-in
+                          - text: Education
+                      - generic [ref=e381]: With Apple Trade In, you can get great value for your current ...
+                - row "Apple (CA) With Apple Trade In, you can get a great price for your current ..." [ref=e382]:
+                  - cell "Apple (CA) With Apple Trade In, you can get a great price for your current ..." [ref=e383]:
+                    - generic [ref=e389]:
+                      - heading "Apple (CA)" [level=3] [ref=e390]:
+                        - link "Apple (CA)" [ref=e391] [cursor=pointer]:
+                          - /url: https://www.apple.com/ca/shop/trade-in
+                          - text: Apple (CA)
+                      - generic [ref=e394]: With Apple Trade In, you can get a great price for your current ...
+                - row "iPhone Exchange Offer Pay less. Enjoy more. Exchange any eligible smartphone and ..." [ref=e395]:
+                  - cell "iPhone Exchange Offer Pay less. Enjoy more. Exchange any eligible smartphone and ..." [ref=e396]:
+                    - generic [ref=e402]:
+                      - heading "iPhone Exchange Offer" [level=3] [ref=e403]:
+                        - link "iPhone Exchange Offer" [ref=e404] [cursor=pointer]:
+                          - /url: https://www.apple.com/in/shop/trade-in
+                          - text: iPhone Exchange Offer
+                      - generic [ref=e407]: Pay less. Enjoy more. Exchange any eligible smartphone and ...
+                - row "More results from apple.com »" [ref=e409]:
+                  - cell "More results from apple.com »" [ref=e410]:
+                    - link "More results from apple.com »" [ref=e412] [cursor=pointer]:
+                      - /url: /search?q=apple+device+buyback+site:apple.com&sca_esv=09892958edd89daa&sa=X&ved=2ahUKEwjWgMHFjfqUAxVW1fACHcpFJEcQrAN6BAgkEAE
+        - generic [ref=e417]:
+          - heading "People also ask" [level=2] [ref=e419]
+          - generic [ref=e420]:
+            - button "Will Apple buy back old devices?" [ref=e426] [cursor=pointer]:
+              - generic [ref=e428]: Will Apple buy back old devices?
+              - img [ref=e431]
+            - button "What is the Apple Buyback program?" [ref=e440] [cursor=pointer]:
+              - generic [ref=e442]: What is the Apple Buyback program?
+              - img [ref=e445]
+            - button "What iPhones will no longer be supported in 2026?" [ref=e454] [cursor=pointer]:
+              - generic [ref=e456]: What iPhones will no longer be supported in 2026?
+              - img [ref=e459]
+            - button "What to do before wiping an iPhone?" [ref=e468] [cursor=pointer]:
+              - generic [ref=e470]: What to do before wiping an iPhone?
+              - img [ref=e473]
+        - generic [ref=e478]:
+          - heading "Web results" [level=2] [ref=e479]
+          - generic [ref=e480]:
+            - generic [ref=e483]:
+              - link "Apple Trade-In Offers Best Buy https://www.bestbuy.com › Name Brands › Apple" [ref=e485] [cursor=pointer]:
+                - /url: https://www.bestbuy.com/site/apple/apple-trade-in/pcmcat1705087945785.c?id=pcmcat1705087945785
+                - heading "Apple Trade-In Offers" [level=3] [ref=e486]
+                - generic [ref=e491]:
+                  - generic [ref=e493]: Best Buy
+                  - generic [ref=e495]: https://www.bestbuy.com › Name Brands › Apple
+              - button "About this result" [ref=e496] [cursor=pointer]:
+                - img [ref=e499]
+            - generic [ref=e503]:
+              - text: Learn how you can
+              - emphasis [ref=e504]: trade in
+              - text: your iPad, MacBook, iMac or
+              - emphasis [ref=e505]: Apple
+              - text: Watch and apply it to your new
+              - emphasis [ref=e506]: Apple device
+              - text: .
+        - generic [ref=e510]:
+          - generic [ref=e513]:
+            - link "What to do before you sell, give away, or trade in your ... Apple Support https://support.apple.com › en-us" [ref=e515] [cursor=pointer]:
+              - /url: https://support.apple.com/en-us/109511
+              - heading "What to do before you sell, give away, or trade in your ..." [level=3] [ref=e516]
+              - generic [ref=e521]:
+                - generic [ref=e523]: Apple Support
+                - generic [ref=e525]: https://support.apple.com › en-us
+            - button "About this result" [ref=e526] [cursor=pointer]:
+              - img [ref=e529]
+          - generic [ref=e532]:
+            - generic [ref=e533]: May 29, 2026 —
+            - generic [ref=e534]:
+              - emphasis [ref=e535]: Use these steps to transfer information to your new device
+              - text: and, if applicable, remove your personal information from your old device.
+        - generic [ref=e539]:
+          - generic [ref=e542]:
+            - link "SellYourMac's Apple Trade In / Apple Sell Back Program SellYourMac.com https://www.sellyourmac.com › apple-trade-in" [ref=e544] [cursor=pointer]:
+              - /url: https://www.sellyourmac.com/apple-trade-in.html
+              - heading "SellYourMac's Apple Trade In / Apple Sell Back Program" [level=3] [ref=e545]
+              - generic [ref=e550]:
+                - generic [ref=e552]: SellYourMac.com
+                - generic [ref=e554]: https://www.sellyourmac.com › apple-trade-in
+            - button "About this result" [ref=e555] [cursor=pointer]:
+              - img [ref=e558]
+          - generic [ref=e561]:
+            - generic [ref=e562]:
+              - text: For online trade in, you can mail your device for free and
+              - emphasis [ref=e563]: Apple will automatically apply the amount as store credit
+              - text: towards a new purchase if the device was ...
+            - link "Read more" [ref=e564] [cursor=pointer]:
+              - /url: https://www.sellyourmac.com/apple-trade-in.html#:~:text=For%20online%20trade%20in%2C%20you,was%20already%20paid%20in%20full.
+        - generic [ref=e568]:
+          - heading "Sponsored results" [level=2] [ref=e575]
+          - generic [ref=e576]:
+            - generic [ref=e583]:
+              - generic [ref=e588]:
+                - generic [ref=e589]:
+                  - link "Highest Payout For Laptop | We Pay Cash For Mac Computers BuyBackTronics.com https://www.buybacktronics.com › sell › laptop" [ref=e590] [cursor=pointer]:
+                    - /url: https://www.buybacktronics.com/category/macbook
+                    - heading "Highest Payout For Laptop | We Pay Cash For Mac Computers" [level=3] [ref=e591]
+                    - generic [ref=e597]:
+                      - generic [ref=e599]: BuyBackTronics.com
+                      - generic [ref=e600]: https://www.buybacktronics.com › sell › laptop
+                  - button "Why this ad?" [ref=e603] [cursor=pointer]:
+                    - img [ref=e605]
+                - generic [ref=e609]: Sell Your Laptop And Get Paid Super Fast. Quick, Easy, Painless. BBB Accredited (A). BBB A+ Rated, Shipping Kits at checkout, fast pay & best value. Highest Cash Offers. Super Fast Payments. Free Shipping. Great Customer Service.
+                - generic [ref=e611]:
+                  - img "Rated 4.6 out of 5," [ref=e612]:
+                    - img [ref=e613]
+                  - generic [ref=e616]:
+                    - link "Rating" [ref=e617] [cursor=pointer]:
+                      - /url: https://www.google.com/shopping/ratings/account/metrics?q=buybacktronics.com&c=US&v=19
+                    - text: "for buybacktronics.com: 4.6 - 517 reviews"
+                - generic [ref=e619]:
+                  - text: ‎
+                  - link "Highest Payout For MacBook" [ref=e620] [cursor=pointer]:
+                    - /url: https://www.buybacktronics.com/category/macbook
+                  - text: · ‎
+                  - link "We Pay The Most for Macs" [ref=e621] [cursor=pointer]:
+                    - /url: https://www.buybacktronics.com/category/macbook
+                  - text: · ‎
+                  - link "Sell MacBook Pro" [ref=e622] [cursor=pointer]:
+                    - /url: https://www.buybacktronics.com/category/Macbook-pro
+                  - text: · ‎
+                  - link "iPhone" [ref=e623] [cursor=pointer]:
+                    - /url: https://www.buybacktronics.com/category/iphone
+                  - text: · ‎
+                  - link "Apple Watch" [ref=e624] [cursor=pointer]:
+                    - /url: https://www.buybacktronics.com/category/apple-watch
+                - generic [ref=e629]: 10K+ visits in past month
+              - generic [ref=e634]:
+                - generic [ref=e635]:
+                  - link "Melbourne Tech Buyback PayMore https://www.paymore.com" [ref=e636] [cursor=pointer]:
+                    - /url: https://paymore.com/
+                    - heading "Melbourne Tech Buyback" [level=3] [ref=e637]
+                    - generic [ref=e643]:
+                      - generic [ref=e645]: PayMore
+                      - generic [ref=e646]: https://www.paymore.com
+                  - button "Why this ad?" [ref=e649] [cursor=pointer]:
+                    - img [ref=e651]
+                - generic [ref=e656]:
+                  - text: Melbourne | Walk In Today — Local Tech
+                  - emphasis [ref=e657]: Buyback
+                  - text: in Melbourne | Walk In Today & Get Paid Cash On The Spot. Sell Your
+                  - emphasis [ref=e658]: iPhone
+                  - text: ", Laptop or Gaming"
+                  - emphasis [ref=e659]: Device
+                  - text: in Melbourne | Same Day Cash Paid.
+                  - emphasis [ref=e660]: Buyback
+                  - text: Store Melbourne. Melbourne Tech Trade. Walk in Tech
+                  - emphasis [ref=e661]: Buyback
+                  - text: Now. We PayMore than GameStore. Walk-In Store Melbourne.
+                - generic [ref=e663]:
+                  - img "Rated 4.8 out of 5," [ref=e664]:
+                    - img [ref=e665]
+                  - generic [ref=e668]:
+                    - link "Rating" [ref=e669] [cursor=pointer]:
+                      - /url: https://www.google.com/shopping/ratings/account/metrics?q=paymore.com&c=US&v=19
+                    - text: "for paymore.com: 4.8 - 1,464 reviews"
+                  - text: "- Return policy: Most items 30+ days"
+                - generic [ref=e671]:
+                  - text: ‎
+                  - link "How it Works" [ref=e672] [cursor=pointer]:
+                    - /url: https://www.paymore.com/how-it-works/
+                  - text: · ‎
+                  - link "Local Tech Buyback Near You" [ref=e673] [cursor=pointer]:
+                    - /url: /aclk?sa=L&ai=DChsSEwiozcbFjfqUAxXRREcBHdIGI4QYACICCAIQLRoCcXU&co=1&ase=2&gclid=EAIaIQobChMIqM3GxY36lAMV0URHAR3SBiOEEAMYAiAlEgL4vPD_BwE&cid=CAAS0gHkaKlMAVgPSTiLFlkxsvjEkAnCarNd_7mHYEOLsg7moCrGd442lefuWcXKiZCakAih6O1ZUwEoZiihqXY4YIrumI2tFH6E5-LqyOr7YBoYEpDGq1Kt7J8TagBVF-9zbK3Wqx-uN_KREEwgkHpw6toe-_er6AUVdZKaq85cq58x5Ka29Gkf2mWxQAWQeae-5Nv7-7dbKVIWFzyhGJtvRiVpGLA7067mwBZXg6VtkJv85fGJk0_qf45ku_MAPfLhBoUXoJIht8valmJg_NlfU8SQbAI&cce=2&category=acrcp_v1_32&sig=AOD64_2Xt6VQ0P37UFeHhthuXrF0Ov1CXQ&adurl=&q=
+                  - text: · ‎
+                  - link "PayMore Store Locations" [ref=e674] [cursor=pointer]:
+                    - /url: https://www.paymore.com/locations/
+                  - text: · ‎
+                  - link "Sell Your iPhone for Cash" [ref=e675] [cursor=pointer]:
+                    - /url: /aclk?sa=L&ai=DChsSEwiozcbFjfqUAxXRREcBHdIGI4QYACICCAIQLhoCcXU&co=1&ase=2&gclid=EAIaIQobChMIqM3GxY36lAMV0URHAR3SBiOEEAMYAiAmEgJiwvD_BwE&cid=CAAS0gHkaKlMAVgPSTiLFlkxsvjEkAnCarNd_7mHYEOLsg7moCrGd442lefuWcXKiZCakAih6O1ZUwEoZiihqXY4YIrumI2tFH6E5-LqyOr7YBoYEpDGq1Kt7J8TagBVF-9zbK3Wqx-uN_KREEwgkHpw6toe-_er6AUVdZKaq85cq58x5Ka29Gkf2mWxQAWQeae-5Nv7-7dbKVIWFzyhGJtvRiVpGLA7067mwBZXg6VtkJv85fGJk0_qf45ku_MAPfLhBoUXoJIht8valmJg_NlfU8SQbAI&cce=2&category=acrcp_v1_32&sig=AOD64_0Y-3ikKAg5klI1mVrZWlFsXfNCtQ&adurl=&q=
+                - generic [ref=e677]:
+                  - link "3202 Lake Washington Road, Melbourne, FL" [ref=e678] [cursor=pointer]:
+                    - /url: https://www.google.com/aclk?sa=L&ai=DChsSEwiozcbFjfqUAxXRREcBHdIGI4QYACICCAIQDBoCcXU&co=1&ase=2&gclid=EAIaIQobChMIqM3GxY36lAMV0URHAR3SBiOEEAMYAiAGEgJjLfD_BwE&cid=CAAS0gHkaKlMAVgPSTiLFlkxsvjEkAnCarNd_7mHYEOLsg7moCrGd442lefuWcXKiZCakAih6O1ZUwEoZiihqXY4YIrumI2tFH6E5-LqyOr7YBoYEpDGq1Kt7J8TagBVF-9zbK3Wqx-uN_KREEwgkHpw6toe-_er6AUVdZKaq85cq58x5Ka29Gkf2mWxQAWQeae-5Nv7-7dbKVIWFzyhGJtvRiVpGLA7067mwBZXg6VtkJv85fGJk0_qf45ku_MAPfLhBoUXoJIht8valmJg_NlfU8SQbAI&cce=2&category=acrcp_v1_32&sig=AOD64_2pqR721t2z3h8q3nd1G4rc4ExZMw&ctype=107&nis=4&ved=2ahUKEwjWgMHFjfqUAxVW1fACHcpFJEcQmxB6BAhWEBo&adurl=
+                    - text: 3202 Lake Washington Road, Melbourne, FL
+                  - text: ‎ - +1 321-607-3006‎ -
+                  - button "Open today · 10:00 AM – 6:00 PM" [ref=e681] [cursor=pointer]:
+                    - generic [ref=e682]: Open today · 10:00 AM – 6:00 PM
+            - button "Hide sponsored results" [ref=e685] [cursor=pointer]:
+              - separator [ref=e686]
+              - generic [ref=e687]:
+                - generic [ref=e688]: Hide sponsored results
+                - img [ref=e690]
+        - generic [ref=e695]:
+          - generic [ref=e698]:
+            - link "how does the trade in /store credit works? Apple Support Community https://discussions.apple.com › thread" [ref=e700] [cursor=pointer]:
+              - /url: https://discussions.apple.com/thread/255730801
+              - heading "how does the trade in /store credit works?" [level=3] [ref=e701]
+              - generic [ref=e706]:
+                - generic [ref=e708]: Apple Support Community
+                - generic [ref=e710]: https://discussions.apple.com › thread
+            - button "About this result" [ref=e711] [cursor=pointer]:
+              - img [ref=e714]
+          - generic [ref=e717]:
+            - generic [ref=e718]: Aug 23, 2024 —
+            - generic [ref=e719]:
+              - emphasis [ref=e720]: Here's how the Apple Trade In program works
+              - text: ", with Apple Trade In, you can get a great value for your current device and apply it toward a new one."
+            - link "Read more" [ref=e721] [cursor=pointer]:
+              - /url: https://discussions.apple.com/thread/255730801#:~:text=Here's%20how%20the%20Apple%20Trade,it%20toward%20a%20new%20one.
+        - generic [ref=e725]:
+          - generic [ref=e727]:
+            - heading "Videos" [level=2] [ref=e728]
+            - button "About this result" [ref=e729] [cursor=pointer]:
+              - img [ref=e732]
+          - generic [ref=e735]:
+            - generic [ref=e740]:
+              - generic [ref=e741]:
+                - generic [ref=e742]:
+                  - link "Inside Apple's Secretive Trade-In Program YouTube Apple Explained 2 weeks ago" [ref=e744] [cursor=pointer]:
+                    - /url: https://www.youtube.com/watch?v=yYLg9Kmx8e8
+                    - heading "Inside Apple's Secretive Trade-In Program YouTube Apple Explained 2 weeks ago" [level=3] [ref=e745]:
+                      - generic [ref=e748]: Inside Apple's Secretive Trade-In Program
+                      - generic [ref=e750]:
+                        - generic [ref=e751]:
+                          - text: YouTube
+                          - generic [ref=e752]: · Apple Explained
+                        - generic [ref=e753]: 2 weeks ago
+                  - generic:
+                    - generic:
+                      - generic:
+                        - generic:
+                          - generic:
+                            - text: YouTube
+                            - generic: · Apple Explained
+                      - button "About this result" [ref=e754] [cursor=pointer]:
+                        - img [ref=e757]
+                - button "Inside Apple's Secretive Trade-In Program by Apple Explained on YouTube. Play on Google. 8:50" [ref=e759] [cursor=pointer]:
+                  - generic [ref=e760]:
+                    - img [ref=e763]
+                    - generic [ref=e766]:
+                      - generic [ref=e767]: 8:50
+                      - img [ref=e770]
+              - button "Apple's trade-in program is a global business run by third-party companies that refurbish and resell 99% of old iPhones for profit." [ref=e773] [cursor=pointer]:
+                - generic [ref=e777]: Apple's trade-in program is a global business run by third-party companies that refurbish and resell 99% of old iPhones for profit.
+            - generic [ref=e782]:
+              - generic [ref=e783]:
+                - link "This is one of the easiest and quickest ways to transform your ... Instagram Niels | Apple & iPhone Expert Mar 30, 2026" [ref=e785] [cursor=pointer]:
+                  - /url: https://www.instagram.com/reel/DWg6d2mDJDE/?hl=en
+                  - heading "This is one of the easiest and quickest ways to transform your ... Instagram Niels | Apple & iPhone Expert Mar 30, 2026" [level=3] [ref=e786]:
+                    - generic [ref=e789]: This is one of the easiest and quickest ways to transform your ...
+                    - generic [ref=e791]:
+                      - generic [ref=e792]:
+                        - text: Instagram
+                        - generic [ref=e793]: · Niels | Apple & iPhone Expert
+                      - generic [ref=e794]: Mar 30, 2026
+                - generic:
+                  - generic:
+                    - generic:
+                      - generic:
+                        - generic:
+                          - text: Instagram
+                          - generic: · Niels | Apple & iPhone Expert
+                    - button "About this result" [ref=e795] [cursor=pointer]:
+                      - img [ref=e798]
+              - link "This is one of the easiest and quickest ways to transform your ... by Niels | Apple & iPhone Expert on Instagram. Play on Instagram. 0:46" [ref=e800] [cursor=pointer]:
+                - /url: https://www.instagram.com/reel/DWg6d2mDJDE/?hl=en
+                - generic [ref=e801]:
+                  - img [ref=e804]
+                  - generic [ref=e808]: 0:46
+            - generic [ref=e813]:
+              - generic [ref=e814]:
+                - link "This is one of the easiest and quickest ways to transform your ... Facebook AppleDsign Mar 30, 2026" [ref=e816] [cursor=pointer]:
+                  - /url: https://www.facebook.com/AppleDsign/videos/this-is-one-of-the-easiest-and-quickest-ways-to-transform-your-old-hardware-into/1555824916543385/
+                  - heading "This is one of the easiest and quickest ways to transform your ... Facebook AppleDsign Mar 30, 2026" [level=3] [ref=e817]:
+                    - generic [ref=e820]: This is one of the easiest and quickest ways to transform your ...
+                    - generic [ref=e822]:
+                      - generic [ref=e823]:
+                        - text: Facebook
+                        - generic [ref=e824]: · AppleDsign
+                      - generic [ref=e825]: Mar 30, 2026
+                - generic:
+                  - generic:
+                    - generic:
+                      - generic:
+                        - generic:
+                          - text: Facebook
+                          - generic: · AppleDsign
+                    - button "About this result" [ref=e826] [cursor=pointer]:
+                      - img [ref=e829]
+              - link "This is one of the easiest and quickest ways to transform your ... by AppleDsign on Facebook. Play on Facebook. 0:47" [ref=e831] [cursor=pointer]:
+                - /url: https://www.facebook.com/AppleDsign/videos/this-is-one-of-the-easiest-and-quickest-ways-to-transform-your-old-hardware-into/1555824916543385/
+                - generic [ref=e832]:
+                  - img [ref=e835]
+                  - generic [ref=e839]: 0:47
+          - link "View all videos" [ref=e842] [cursor=pointer]:
+            - /url: /search?sca_esv=09892958edd89daa&udm=7&q=apple+device+buyback&sa=X&ved=2ahUKEwjWgMHFjfqUAxVW1fACHcpFJEcQ8ccDKAJ6BAhGEAQ
+            - separator [ref=e843]
+            - generic [ref=e844]:
+              - generic [ref=e845]: View all
+              - img [ref=e847]
+        - generic [ref=e851]:
+          - heading "Web results" [level=2] [ref=e852]
+          - generic [ref=e853]:
+            - generic [ref=e856]:
+              - link "Prepare your iPhone, Apple Watch, or Android device for ... Apple Support https://support.apple.com › en-us" [ref=e858] [cursor=pointer]:
+                - /url: https://support.apple.com/en-us/102914
+                - heading "Prepare your iPhone, Apple Watch, or Android device for ..." [level=3] [ref=e859]
+                - generic [ref=e864]:
+                  - generic [ref=e866]: Apple Support
+                  - generic [ref=e868]: https://support.apple.com › en-us
+              - button "About this result" [ref=e869] [cursor=pointer]:
+                - img [ref=e872]
+            - generic [ref=e875]:
+              - generic [ref=e876]: Apr 29, 2026 —
+              - generic [ref=e877]:
+                - text: When you
+                - emphasis [ref=e878]: trade in
+                - text: a
+                - emphasis [ref=e879]: device
+                - text: with your purchase of a new
+                - emphasis [ref=e880]: iPhone
+                - text: or
+                - emphasis [ref=e881]: Apple
+                - text: Watch, you'll receive a kit that has everything that you need to send your
+                - emphasis [ref=e882]: trade-in
+                - text: ...
+              - link "Read more" [ref=e883] [cursor=pointer]:
+                - /url: https://support.apple.com/en-us/102914#:~:text=When%20you%20trade%20in%20a,your%20trade%2Din%20device%20to%20Apple.
+      - generic [ref=e885]:
+        - generic [ref=e890]:
+          - heading "People also search for" [level=2] [ref=e892]
+          - generic [ref=e894]:
+            - generic [ref=e895]:
+              - link "Apple trade-in calculator" [ref=e899] [cursor=pointer]:
+                - /url: /search?sca_esv=09892958edd89daa&q=Apple+trade-in+calculator&sa=X&ved=2ahUKEwjWgMHFjfqUAxVW1fACHcpFJEcQ1QJ6BAgwEAE
+                - generic [ref=e900]:
+                  - generic [ref=e905]: Apple trade-in calculator
+                  - img [ref=e909]
+              - link "Best Buy trade in" [ref=e914] [cursor=pointer]:
+                - /url: /search?sca_esv=09892958edd89daa&q=Best+Buy+trade+in&sa=X&ved=2ahUKEwjWgMHFjfqUAxVW1fACHcpFJEcQ1QJ6BAhKEAE
+                - generic [ref=e915]:
+                  - generic [ref=e920]: Best Buy trade in
+                  - img [ref=e924]
+              - link "Apple trade-in us" [ref=e929] [cursor=pointer]:
+                - /url: /search?sca_esv=09892958edd89daa&q=Apple+trade-in+us&sa=X&ved=2ahUKEwjWgMHFjfqUAxVW1fACHcpFJEcQ1QJ6BAhIEAE
+                - generic [ref=e930]:
+                  - generic [ref=e935]: Apple trade-in us
+                  - img [ref=e939]
+              - link "Apple trade-in appointment" [ref=e944] [cursor=pointer]:
+                - /url: /search?sca_esv=09892958edd89daa&q=Apple+trade-in+appointment&sa=X&ved=2ahUKEwjWgMHFjfqUAxVW1fACHcpFJEcQ1QJ6BAhBEAE
+                - generic [ref=e945]:
+                  - generic [ref=e950]: Apple trade-in appointment
+                  - img [ref=e954]
+            - generic [ref=e956]:
+              - link "iPhone 17 trade-in deals" [ref=e960] [cursor=pointer]:
+                - /url: /search?sca_esv=09892958edd89daa&q=iPhone+17+trade-in+deals&sa=X&ved=2ahUKEwjWgMHFjfqUAxVW1fACHcpFJEcQ1QJ6BAg5EAE
+                - generic [ref=e961]:
+                  - generic [ref=e966]: iPhone 17 trade-in deals
+                  - img [ref=e970]
+              - link "Best Buy Apple trade-in" [ref=e975] [cursor=pointer]:
+                - /url: /search?sca_esv=09892958edd89daa&q=Best+Buy+Apple+trade-in&sa=X&ved=2ahUKEwjWgMHFjfqUAxVW1fACHcpFJEcQ1QJ6BAg3EAE
+                - generic [ref=e976]:
+                  - generic [ref=e981]: Best Buy Apple trade-in
+                  - img [ref=e985]
+              - link "iPhone trade-in value" [ref=e990] [cursor=pointer]:
+                - /url: /search?sca_esv=09892958edd89daa&q=iPhone+trade-in+value&sa=X&ved=2ahUKEwjWgMHFjfqUAxVW1fACHcpFJEcQ1QJ6BAg2EAE
+                - generic [ref=e991]:
+                  - generic [ref=e996]: iPhone trade-in value
+                  - img [ref=e1000]
+              - link "How to prepare iPhone for trade in Verizon" [ref=e1005] [cursor=pointer]:
+                - /url: /search?sca_esv=09892958edd89daa&q=How+to+prepare+iPhone+for+trade+in+Verizon&sa=X&ved=2ahUKEwjWgMHFjfqUAxVW1fACHcpFJEcQ1QJ6BAgxEAE
+                - generic [ref=e1006]:
+                  - generic [ref=e1011]: How to prepare iPhone for trade in Verizon
+                  - img [ref=e1015]
+        - navigation [ref=e1017]:
+          - heading "Page Navigation" [level=1] [ref=e1018]
+          - text: "1"
+          - link "Page 2" [ref=e1021] [cursor=pointer]:
+            - /url: /search?q=apple+device+buyback&sca_esv=09892958edd89daa&ei=6f8napboPNaqw8cPyouRuQQ&start=10&sa=N&sstk=AU9db-BitCttNC6dGGvOqeV-W9cp-VNKAREDDpLOHFsQuxVCv2Up5HZESkFvyDCV_WrERbEP94cSqqqDEjPsMZyNcC1KN4YLJV-ytw&ved=2ahUKEwjWgMHFjfqUAxVW1fACHcpFJEcQ8tMDegQILhAE
+            - text: "2"
+          - link "Page 3" [ref=e1023] [cursor=pointer]:
+            - /url: /search?q=apple+device+buyback&sca_esv=09892958edd89daa&ei=6f8napboPNaqw8cPyouRuQQ&start=20&sa=N&sstk=AU9db-BitCttNC6dGGvOqeV-W9cp-VNKAREDDpLOHFsQuxVCv2Up5HZESkFvyDCV_WrERbEP94cSqqqDEjPsMZyNcC1KN4YLJV-ytw&ved=2ahUKEwjWgMHFjfqUAxVW1fACHcpFJEcQ8tMDegQILhAG
+            - text: "3"
+          - link "Page 4" [ref=e1025] [cursor=pointer]:
+            - /url: /search?q=apple+device+buyback&sca_esv=09892958edd89daa&ei=6f8napboPNaqw8cPyouRuQQ&start=30&sa=N&sstk=AU9db-BitCttNC6dGGvOqeV-W9cp-VNKAREDDpLOHFsQuxVCv2Up5HZESkFvyDCV_WrERbEP94cSqqqDEjPsMZyNcC1KN4YLJV-ytw&ved=2ahUKEwjWgMHFjfqUAxVW1fACHcpFJEcQ8tMDegQILhAI
+            - text: "4"
+          - link "Page 5" [ref=e1027] [cursor=pointer]:
+            - /url: /search?q=apple+device+buyback&sca_esv=09892958edd89daa&ei=6f8napboPNaqw8cPyouRuQQ&start=40&sa=N&sstk=AU9db-BitCttNC6dGGvOqeV-W9cp-VNKAREDDpLOHFsQuxVCv2Up5HZESkFvyDCV_WrERbEP94cSqqqDEjPsMZyNcC1KN4YLJV-ytw&ved=2ahUKEwjWgMHFjfqUAxVW1fACHcpFJEcQ8tMDegQILhAK
+            - text: "5"
+          - link "Page 6" [ref=e1029] [cursor=pointer]:
+            - /url: /search?q=apple+device+buyback&sca_esv=09892958edd89daa&ei=6f8napboPNaqw8cPyouRuQQ&start=50&sa=N&sstk=AU9db-BitCttNC6dGGvOqeV-W9cp-VNKAREDDpLOHFsQuxVCv2Up5HZESkFvyDCV_WrERbEP94cSqqqDEjPsMZyNcC1KN4YLJV-ytw&ved=2ahUKEwjWgMHFjfqUAxVW1fACHcpFJEcQ8tMDegQILhAM
+            - text: "6"
+          - link "Page 7" [ref=e1031] [cursor=pointer]:
+            - /url: /search?q=apple+device+buyback&sca_esv=09892958edd89daa&ei=6f8napboPNaqw8cPyouRuQQ&start=60&sa=N&sstk=AU9db-BitCttNC6dGGvOqeV-W9cp-VNKAREDDpLOHFsQuxVCv2Up5HZESkFvyDCV_WrERbEP94cSqqqDEjPsMZyNcC1KN4YLJV-ytw&ved=2ahUKEwjWgMHFjfqUAxVW1fACHcpFJEcQ8tMDegQILhAO
+            - text: "7"
+          - link "Page 8" [ref=e1033] [cursor=pointer]:
+            - /url: /search?q=apple+device+buyback&sca_esv=09892958edd89daa&ei=6f8napboPNaqw8cPyouRuQQ&start=70&sa=N&sstk=AU9db-BitCttNC6dGGvOqeV-W9cp-VNKAREDDpLOHFsQuxVCv2Up5HZESkFvyDCV_WrERbEP94cSqqqDEjPsMZyNcC1KN4YLJV-ytw&ved=2ahUKEwjWgMHFjfqUAxVW1fACHcpFJEcQ8tMDegQILhAQ
+            - text: "8"
+          - link "Page 9" [ref=e1035] [cursor=pointer]:
+            - /url: /search?q=apple+device+buyback&sca_esv=09892958edd89daa&ei=6f8napboPNaqw8cPyouRuQQ&start=80&sa=N&sstk=AU9db-BitCttNC6dGGvOqeV-W9cp-VNKAREDDpLOHFsQuxVCv2Up5HZESkFvyDCV_WrERbEP94cSqqqDEjPsMZyNcC1KN4YLJV-ytw&ved=2ahUKEwjWgMHFjfqUAxVW1fACHcpFJEcQ8tMDegQILhAS
+            - text: "9"
+          - link "Page 10" [ref=e1037] [cursor=pointer]:
+            - /url: /search?q=apple+device+buyback&sca_esv=09892958edd89daa&ei=6f8napboPNaqw8cPyouRuQQ&start=90&sa=N&sstk=AU9db-BitCttNC6dGGvOqeV-W9cp-VNKAREDDpLOHFsQuxVCv2Up5HZESkFvyDCV_WrERbEP94cSqqqDEjPsMZyNcC1KN4YLJV-ytw&ved=2ahUKEwjWgMHFjfqUAxVW1fACHcpFJEcQ8tMDegQILhAU
+            - text: "10"
+          - heading "Next" [level=2] [ref=e1039]:
+            - link "Next" [ref=e1040] [cursor=pointer]:
+              - /url: /search?q=apple+device+buyback&sca_esv=09892958edd89daa&ei=6f8napboPNaqw8cPyouRuQQ&start=10&sa=N&sstk=AU9db-BitCttNC6dGGvOqeV-W9cp-VNKAREDDpLOHFsQuxVCv2Up5HZESkFvyDCV_WrERbEP94cSqqqDEjPsMZyNcC1KN4YLJV-ytw&ved=2ahUKEwjWgMHFjfqUAxVW1fACHcpFJEcQ8NMDegQILhAW
+              - generic [ref=e1042]: Next
+      - navigation
+    - contentinfo [ref=e1043]:
+      - heading "Footer Links" [level=1] [ref=e1044]
+      - generic [ref=e1048]:
+        - generic [ref=e1052]:
+          - button "Cape Canaveral, Florida - Based on your past activity" [ref=e1054] [cursor=pointer]:
+            - generic [ref=e1055]: Cape Canaveral, Florida
+            - generic [ref=e1057]:
+              - text: "-"
+              - generic [ref=e1058]: Based on your past activity
+          - text: "-"
+          - button "Update location" [ref=e1060] [cursor=pointer]: Update location
+        - generic [ref=e1063]:
+          - link "Help" [ref=e1064] [cursor=pointer]:
+            - /url: https://support.google.com/websearch/?p=ws_results_help&hl=en&fg=1
+          - link "Send feedback" [ref=e1065] [cursor=pointer]:
+            - /url: "#"
+          - link "Privacy" [ref=e1066] [cursor=pointer]:
+            - /url: https://policies.google.com/privacy?hl=en&fg=1
+          - link "Terms" [ref=e1067] [cursor=pointer]:
+            - /url: https://policies.google.com/terms?hl=en&fg=1

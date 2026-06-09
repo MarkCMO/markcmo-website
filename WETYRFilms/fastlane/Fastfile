@@ -1,0 +1,111 @@
+# WETYR Films release automation (run on a Mac with Xcode + fastlane installed).
+#
+# Authentication uses an App Store Connect API key (.p8). Create one at
+# App Store Connect -> Users and Access -> Integrations -> App Store Connect API.
+# Keep the .p8 file OFF git. Provide these env vars before running a lane:
+#   ASC_KEY_ID      the key id, e.g. ABC123XYZ
+#   ASC_ISSUER_ID   the issuer id (a UUID shown on the same page)
+#   ASC_KEY_PATH    absolute path to AuthKey_ABC123XYZ.p8 on your Mac
+#   TEAM_ID         (optional) your 10-char Apple Developer Team ID for signing
+#
+# One-time prep on the Mac:
+#   brew install fastlane xcodegen
+#   cd WETYRFilms && xcodegen generate   (creates WETYRFilms.xcodeproj)
+#   open the project once and set your signing Team (Signing & Capabilities).
+#
+# Then, in order:
+#   fastlane setup_app   one-time: create the app record on App Store Connect
+#   fastlane beta        build, sign, upload to TestFlight
+#   fastlane meta        push listing text + screenshots only (no build)
+#   fastlane release     build, upload, set metadata, submit for App Review
+
+default_platform(:ios)
+
+APP_ID   = "com.wetyr.films"
+APP_NAME = "WETYR Film Intel"
+SCHEME   = "WETYRFilms"
+
+platform :ios do
+  before_all do
+    app_store_connect_api_key(
+      key_id: ENV["ASC_KEY_ID"],
+      issuer_id: ENV["ASC_ISSUER_ID"],
+      key_filepath: ENV["ASC_KEY_PATH"],
+      in_house: false
+    )
+  end
+
+  desc "Regenerate the Xcode project from project.yml"
+  lane :gen do
+    sh("cd .. && xcodegen generate")
+  end
+
+  desc "One-time: create the app record on App Store Connect"
+  lane :setup_app do
+    produce(
+      app_identifier: APP_ID,
+      app_name: APP_NAME,
+      language: "English",
+      app_version: "1.0",
+      sku: "wetyr-films-001",
+      company_name: ENV["COMPANY_NAME"] || "WETYR Corporation"
+    )
+  end
+
+  desc "Push metadata and screenshots only (no binary)"
+  lane :meta do
+    upload_to_app_store(
+      app_identifier: APP_ID,
+      skip_binary_upload: true,
+      skip_screenshots: false,
+      submit_for_review: false,
+      force: true,                       # do not open the HTML summary prompt
+      precheck_include_in_app_purchases: false
+    )
+  end
+
+  desc "Add device frames and captions to raw screenshots in fastlane/screenshots/<locale>/."
+  lane :frames do
+    frame_screenshots(path: "./fastlane/screenshots")
+  end
+
+  # Shared build step. Uses Xcode automatic signing driven by the App Store Connect
+  # API key, so a macOS CI runner can create/fetch the distribution cert and profile
+  # on the fly (-allowProvisioningUpdates). On a developer's own Mac with signing
+  # already set up in Xcode, this also works unchanged.
+  private_lane :build_ios do
+    gen
+    team = ENV["TEAM_ID"]
+    build_app(
+      scheme: SCHEME,
+      export_method: "app-store",
+      xcargs: team.to_s.empty? ? "-allowProvisioningUpdates" :
+              "-allowProvisioningUpdates DEVELOPMENT_TEAM=#{team} CODE_SIGN_STYLE=Automatic",
+      export_options: team.to_s.empty? ? {} : { teamID: team }
+    )
+  end
+
+  desc "Build and upload a build to TestFlight"
+  lane :beta do
+    build_ios
+    upload_to_testflight(
+      app_identifier: APP_ID,
+      skip_waiting_for_build_processing: true
+    )
+  end
+
+  desc "Build, upload, set metadata, and submit for App Review"
+  lane :release do
+    build_ios
+    upload_to_app_store(
+      app_identifier: APP_ID,
+      submit_for_review: true,
+      automatic_release: true,
+      force: true,
+      precheck_include_in_app_purchases: false,
+      submission_information: {
+        add_id_info_uses_idfa: false     # no ad identifier; matches the privacy manifest
+      }
+    )
+  end
+end

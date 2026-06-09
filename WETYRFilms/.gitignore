@@ -1,0 +1,22 @@
+# Generated Xcode project (recreate with `xcodegen generate`)
+WETYRFilms.xcodeproj/
+
+# Build artifacts
+build/
+DerivedData/
+*.ipa
+*.app.dSYM.zip
+*.xcarchive
+
+# fastlane
+fastlane/report.xml
+fastlane/Preview.html
+fastlane/screenshots/**/*.png
+fastlane/test_output/
+
+# App Store Connect API key, NEVER commit this
+*.p8
+AuthKey_*.p8
+
+# macOS
+.DS_Store

@@ -1,0 +1,408 @@
+- generic [active] [ref=e1]:
+  - generic:
+    - generic:
+      - link "Skip to main content" [ref=e2] [cursor=pointer]
+      - link "Accessibility help" [ref=e3] [cursor=pointer]:
+        - /url: https://support.google.com/websearch/answer/181196?hl=en
+  - generic [ref=e8]:
+    - search [ref=e9]:
+      - generic [ref=e11]:
+        - link "Go to Google Home" [ref=e13] [cursor=pointer]:
+          - /url: https://www.google.com/webhp?hl=en&sa=X&ved=0ahUKEwjMzMW0jfqUAxX_VTABHUQ_FL8QPAgI
+          - img [ref=e14]
+        - generic [ref=e21]:
+          - generic [ref=e22]:
+            - combobox "Search" [ref=e25]: apple device buyback for schools apple device buyback for schools
+            - generic [ref=e26]:
+              - button "Clear" [ref=e28] [cursor=pointer]:
+                - img [ref=e30]
+              - generic [ref=e33]:
+                - button "Search by voice" [ref=e34] [cursor=pointer]:
+                  - img [ref=e35]
+                - button "Search by image" [ref=e37] [cursor=pointer]:
+                  - img [ref=e38]
+          - button "Search" [ref=e40] [cursor=pointer]:
+            - img [ref=e43]
+    - generic [ref=e45]:
+      - button "Settings" [ref=e47] [cursor=pointer]:
+        - img [ref=e50]
+      - generic [ref=e53]:
+        - button "Google apps" [ref=e55] [cursor=pointer]:
+          - img [ref=e56]
+        - link "Sign in" [ref=e60] [cursor=pointer]:
+          - /url: https://accounts.google.com/ServiceLogin?hl=en&passive=true&continue=https://www.google.com/search%3Fq%3Dapple%2Bdevice%2Bbuyback%2Bfor%2Bschools%26num%3D20&ec=futura_srp_og_si_72236_p
+  - generic [ref=e62]:
+    - navigation [ref=e68]:
+      - generic [ref=e74]:
+        - list [ref=e75]:
+          - listitem [ref=e76]:
+            - link "AI Mode" [ref=e79] [cursor=pointer]:
+              - /url: /search?q=apple+device+buyback+for+schools&sca_esv=09892958edd89daa&udm=50&fbs=ADc_l-aN0CWEZBOHjofHoaMMDiKp9lEhFAN_4ain3HSNQWw-mBcFY_b7_fFBjPEsWR5sze4Ib_Vy4O5-_cdDoJI0Oxtkd6Pm7xp2OaKfrkzv2wOAicNl_MV4S54jUJFJ2-yTequMQ7FKI6pQtL1g4KVWEUcxfEsn5ysoLD3VZsfDcwl-7o-eibh8-eAkWAZz6_SrFNiLAMyFbP-fCMoPF8171dTriOe6gg&aep=1&ntc=1&sa=X&ved=2ahUKEwjMzMW0jfqUAxX_VTABHUQ_FL8Q2J8OegQIEBAD
+              - generic [ref=e82]: AI Mode
+          - listitem [ref=e83]:
+            - link "All" [disabled] [ref=e84]:
+              - generic [ref=e86]: All
+          - listitem [ref=e87]:
+            - link "Shopping" [ref=e88] [cursor=pointer]:
+              - /url: /search?sca_esv=09892958edd89daa&udm=28&fbs=ADc_l-aN0CWEZBOHjofHoaMMDiKp9lEhFAN_4ain3HSNQWw-mBcFY_b7_fFBjPEsWR5sze4Ib_Vy4O5-_cdDoJI0Oxtkd6Pm7xp2OaKfrkzv2wOAicNl_MV4S54jUJFJ2-yTequMQ7FKI6pQtL1g4KVWEUcxfEsn5ysoLD3VZsfDcwl-7o-eibh8-eAkWAZz6_SrFNiLAMyFbP-fCMoPF8171dTriOe6gg&q=apple+device+buyback+for+schools&ved=1t:220175&ictx=111
+              - generic [ref=e90]: Shopping
+          - listitem [ref=e91]:
+            - link "News" [ref=e92] [cursor=pointer]:
+              - /url: /search?sca_esv=09892958edd89daa&q=apple+device+buyback+for+schools&tbm=nws&source=lnms&fbs=ADc_l-aN0CWEZBOHjofHoaMMDiKp9lEhFAN_4ain3HSNQWw-mBcFY_b7_fFBjPEsWR5sze4Ib_Vy4O5-_cdDoJI0Oxtkd6Pm7xp2OaKfrkzv2wOAicNl_MV4S54jUJFJ2-yTequMQ7FKI6pQtL1g4KVWEUcxfEsn5ysoLD3VZsfDcwl-7o-eibh8-eAkWAZz6_SrFNiLAMyFbP-fCMoPF8171dTriOe6gg&sa=X&ved=2ahUKEwjMzMW0jfqUAxX_VTABHUQ_FL8Q0pQJegQIEhAB
+              - generic [ref=e94]: News
+          - listitem [ref=e95]:
+            - link "Images" [ref=e96] [cursor=pointer]:
+              - /url: /search?sca_esv=09892958edd89daa&udm=2&fbs=ADc_l-aN0CWEZBOHjofHoaMMDiKp9lEhFAN_4ain3HSNQWw-mBcFY_b7_fFBjPEsWR5sze4Ib_Vy4O5-_cdDoJI0Oxtkd6Pm7xp2OaKfrkzv2wOAicNl_MV4S54jUJFJ2-yTequMQ7FKI6pQtL1g4KVWEUcxfEsn5ysoLD3VZsfDcwl-7o-eibh8-eAkWAZz6_SrFNiLAMyFbP-fCMoPF8171dTriOe6gg&q=apple+device+buyback+for+schools&sa=X&ved=2ahUKEwjMzMW0jfqUAxX_VTABHUQ_FL8QtKgLegQIFRAB
+              - generic [ref=e98]: Images
+          - listitem [ref=e99]:
+            - link "Videos" [ref=e100] [cursor=pointer]:
+              - /url: /search?sca_esv=09892958edd89daa&udm=7&fbs=ADc_l-aN0CWEZBOHjofHoaMMDiKp9lEhFAN_4ain3HSNQWw-mBcFY_b7_fFBjPEsWR5sze4Ib_Vy4O5-_cdDoJI0Oxtkd6Pm7xp2OaKfrkzv2wOAicNl_MV4S54jUJFJ2-yTequMQ7FKI6pQtL1g4KVWEUcxfEsn5ysoLD3VZsfDcwl-7o-eibh8-eAkWAZz6_SrFNiLAMyFbP-fCMoPF8171dTriOe6gg&q=apple+device+buyback+for+schools&sa=X&ved=2ahUKEwjMzMW0jfqUAxX_VTABHUQ_FL8QtKgLegQIFBAB
+              - generic [ref=e102]: Videos
+          - listitem [ref=e103]:
+            - link "Forums" [ref=e104] [cursor=pointer]:
+              - /url: /search?sca_esv=09892958edd89daa&udm=18&fbs=ADc_l-aN0CWEZBOHjofHoaMMDiKp9lEhFAN_4ain3HSNQWw-mBcFY_b7_fFBjPEsWR5sze4Ib_Vy4O5-_cdDoJI0Oxtkd6Pm7xp2OaKfrkzv2wOAicNl_MV4S54jUJFJ2-yTequMQ7FKI6pQtL1g4KVWEUcxfEsn5ysoLD3VZsfDcwl-7o-eibh8-eAkWAZz6_SrFNiLAMyFbP-fCMoPF8171dTriOe6gg&q=apple+device+buyback+for+schools&sa=X&ved=2ahUKEwjMzMW0jfqUAxX_VTABHUQ_FL8Qs6gLegQIFhAB
+              - generic [ref=e106]: Forums
+          - listitem [ref=e107]:
+            - button "More filters" [ref=e108] [cursor=pointer]:
+              - generic "More filters" [ref=e109]:
+                - generic [ref=e110]:
+                  - generic [ref=e111]: More
+                  - img [ref=e113]
+        - button "Tools" [ref=e116] [cursor=pointer]:
+          - generic [ref=e118]:
+            - generic [ref=e119]: Tools
+            - img [ref=e121]
+    - heading "Search Results" [level=1] [ref=e123]
+    - generic [ref=e128]:
+      - generic [ref=e129]:
+        - region "Ads" [ref=e134]:
+          - generic [ref=e135]:
+            - heading "Sponsored result" [level=2] [ref=e142]
+            - generic [ref=e143]:
+              - generic [ref=e156]:
+                - generic [ref=e157]:
+                  - link "We Buy Used Enterprise Tech | Technology Buyback Made Easy ITAMG.com https://www.itamg.com" [ref=e158] [cursor=pointer]:
+                    - /url: https://www.itamg.com/sell-used-it-equipment/
+                    - heading "We Buy Used Enterprise Tech | Technology Buyback Made Easy" [level=3] [ref=e159]
+                    - generic [ref=e165]:
+                      - generic [ref=e167]: ITAMG.com
+                      - generic [ref=e168]: https://www.itamg.com
+                  - button "Why this ad?" [ref=e171] [cursor=pointer]:
+                    - img [ref=e173]
+                - generic [ref=e178]:
+                  - text: IT Equipment
+                  - emphasis [ref=e179]: Buyback
+                  - text: Program for Enterprises. Eco-friendly IT Equipment Recycling For Businesses. Maximize Value and Ensure Compliance. White-Glove ITAD Services. Certified R2v3 RIOS NAID. IT Asset Liquidation. Get Free ITAD Resources. Free ITAD Consultation. Call Us Today.
+                - generic [ref=e180]:
+                  - link "We Buy Used IT In Large QTY" [ref=e183] [cursor=pointer]:
+                    - /url: /aclk?sa=L&pf=1&ai=DChsSEwj6lsu0jfqUAxWmswMAHcK7CJ8YACICCAEQBBoCb2E&co=1&ase=2&gclid=EAIaIQobChMI-pbLtI36lAMVprMDAB3CuwifEAAYASAEEgLj6vD_BwE&cid=CAAS0gHkaFDCt5qMeMqeDYLQoLk7aWcRxhRrFLf4YH6dqBC7rNBYGrJ1IJuS21iwGg6B0gFpRiUeoI--bhLtny5dLg0mDVNbqMj04rsWn1XTpa1M34sQ00bajt4j380q_clCQRn6zqkgjRIFVFSLj7kPkwzU6yFOR3PXKy_dej9b7ZBEKe-R_DRVn78glKp7XlUMCKwOQc3C4sAsVBbieXwHy25IUasBDwt4E1vECTks2lckGLw7-CVwt09-1P4SfBTFGfh6D6ajUvY37GylHaEICBkbC0M&cce=2&category=acrcp_v1_32&sig=AOD64_0kgrKI5t-IC2TVshwCZpyx_L_hoA&q=&ved=2ahUKEwjMzMW0jfqUAxX_VTABHUQ_FL8QwgUoAXoECBgQEA&adurl=https://www.itamg.com/sell-used-it-equipment%3Futm_term%3Dsell%2520your%2520old%2520technology%26utm_campaign%3DRichy_Sell_Used_IT_Equipment%26utm_source%3Dadwords%26utm_medium%3Dppc%26hsa_acc%3D1761834321%26hsa_cam%3D22376637110%26hsa_grp%3D180077639227%26hsa_ad%3D706619335389%26hsa_src%3Dg%26hsa_tgt%3Dkwd-383456945465%26hsa_kw%3Dsell%2520your%2520old%2520technology%26hsa_mt%3Db%26hsa_net%3Dadwords%26hsa_ver%3D3%26gad_source%3D1%26gad_campaignid%3D22376637110%26gbraid%3D0AAAAADyaAgsIveGx860dn-X-7Ec-nrNGT%26gclid%3DEAIaIQobChMI-pbLtI36lAMVprMDAB3CuwifEAAYASAEEgLj6vD_BwE
+                    - img [ref=e185]
+                    - generic [ref=e187]: We Buy Used IT In Large QTY
+                  - link "We Buy Business IT Equipment" [ref=e190] [cursor=pointer]:
+                    - /url: /aclk?sa=L&pf=1&ai=DChsSEwj6lsu0jfqUAxWmswMAHcK7CJ8YACICCAEQBRoCb2E&co=1&ase=2&gclid=EAIaIQobChMI-pbLtI36lAMVprMDAB3CuwifEAAYASAFEgLHAPD_BwE&cid=CAAS0gHkaFDCt5qMeMqeDYLQoLk7aWcRxhRrFLf4YH6dqBC7rNBYGrJ1IJuS21iwGg6B0gFpRiUeoI--bhLtny5dLg0mDVNbqMj04rsWn1XTpa1M34sQ00bajt4j380q_clCQRn6zqkgjRIFVFSLj7kPkwzU6yFOR3PXKy_dej9b7ZBEKe-R_DRVn78glKp7XlUMCKwOQc3C4sAsVBbieXwHy25IUasBDwt4E1vECTks2lckGLw7-CVwt09-1P4SfBTFGfh6D6ajUvY37GylHaEICBkbC0M&cce=2&category=acrcp_v1_32&sig=AOD64_16BnLX2_cPnNfh8TC_Pup4Vl9zBg&q=&ved=2ahUKEwjMzMW0jfqUAxX_VTABHUQ_FL8QwgUoA3oECBgQEg&adurl=https://www.itamg.com/sell-used-it-equipment%3Futm_term%3Dsell%2520your%2520old%2520technology%26utm_campaign%3DRichy_Sell_Used_IT_Equipment%26utm_source%3Dadwords%26utm_medium%3Dppc%26hsa_acc%3D1761834321%26hsa_cam%3D22376637110%26hsa_grp%3D180077639227%26hsa_ad%3D706619335389%26hsa_src%3Dg%26hsa_tgt%3Dkwd-383456945465%26hsa_kw%3Dsell%2520your%2520old%2520technology%26hsa_mt%3Db%26hsa_net%3Dadwords%26hsa_ver%3D3%26gad_source%3D1%26gad_campaignid%3D22376637110%26gbraid%3D0AAAAADyaAgsIveGx860dn-X-7Ec-nrNGT%26gclid%3DEAIaIQobChMI-pbLtI36lAMVprMDAB3CuwifEAAYASAFEgLHAPD_BwE
+                    - img [ref=e192]
+                    - generic [ref=e194]: We Buy Business IT Equipment
+                  - link "IT Liquidation Services" [ref=e197] [cursor=pointer]:
+                    - /url: http://www.itamg.com/services?sa=X&ved=2ahUKEwjMzMW0jfqUAxX_VTABHUQ_FL8QwgUoBXoECBgQFA
+                    - img [ref=e199]
+                    - generic [ref=e201]: IT Liquidation Services
+                  - link "Our Certifications" [ref=e204] [cursor=pointer]:
+                    - /url: https://www.itamg.com/policies?sa=X&ved=2ahUKEwjMzMW0jfqUAxX_VTABHUQ_FL8QwgUoB3oECBgQFg
+                    - img [ref=e206]
+                    - generic [ref=e208]: Our Certifications
+                  - link "Data Center Decommission" [ref=e211] [cursor=pointer]:
+                    - /url: https://www.itamg.com/data-center-decommissioning?sa=X&ved=2ahUKEwjMzMW0jfqUAxX_VTABHUQ_FL8QwgUoCXoECBgQGA
+                    - img [ref=e213]
+                    - generic [ref=e215]: Data Center Decommission
+              - button "Hide sponsored result" [ref=e218] [cursor=pointer]:
+                - separator [ref=e219]
+                - generic [ref=e220]:
+                  - generic [ref=e221]: Hide sponsored result
+                  - img [ref=e223]
+        - generic [ref=e239]:
+          - heading "Searching Thinking a little longer" [level=2] [ref=e243]:
+            - generic [ref=e244]:
+              - generic [ref=e246]: Searching
+              - generic [ref=e256]: Thinking a little longer
+          - progressbar [ref=e258]
+      - main [ref=e300]:
+        - generic [ref=e304]:
+          - generic [ref=e307]:
+            - heading "Web results" [level=2] [ref=e308]
+            - generic [ref=e309]:
+              - generic [ref=e312]:
+                - link "Apple Trade In - Education Apple https://www.apple.com › us-edu › shop › trade-in" [ref=e314] [cursor=pointer]:
+                  - /url: https://www.apple.com/us-edu/shop/trade-in
+                  - heading "Apple Trade In - Education" [level=3] [ref=e315]
+                  - generic [ref=e320]:
+                    - generic [ref=e322]: Apple
+                    - generic [ref=e324]: https://www.apple.com › us-edu › shop › trade-in
+                - button "About this result" [ref=e325] [cursor=pointer]:
+                  - img [ref=e328]
+              - generic [ref=e332]:
+                - emphasis [ref=e333]: Trade in your iPhone, iPad, Mac, Watch or any other device
+                - text: for credit towards a new one, or recycle it responsibly for free with Apple Trade In.
+          - generic [ref=e337]:
+            - generic [ref=e340]:
+              - link "K-12 Device Buyback Program For Schools Secured Tech https://securedtech.com › Services" [ref=e342] [cursor=pointer]:
+                - /url: https://securedtech.com/services/device-buyback/
+                - heading "K-12 Device Buyback Program For Schools" [level=3] [ref=e343]
+                - generic [ref=e348]:
+                  - generic [ref=e350]: Secured Tech
+                  - generic [ref=e352]: https://securedtech.com › Services
+              - button "About this result" [ref=e353] [cursor=pointer]:
+                - img [ref=e356]
+            - generic [ref=e359]:
+              - generic [ref=e360]:
+                - text: Community
+                - emphasis [ref=e361]: Buyback
+                - text: ℠ puts
+                - emphasis [ref=e362]: devices
+                - text: back in the hands of the families, while returning value to your district. We sell your retired
+                - emphasis [ref=e363]: Apple devices
+                - text: directly to your ...
+              - link "Read more" [ref=e364] [cursor=pointer]:
+                - /url: https://securedtech.com/services/device-buyback/#:~:text=Community%20Buyback%E2%84%A0%20puts%20devices%20back,families%2C%20and%20students%E2%80%94at%20affordable%20prices.
+          - generic [ref=e368]:
+            - generic [ref=e371]:
+              - 'link "Apple Device Buyback 101: A Guide for Schools Second Life Mac https://secondlifemac.com › white-paper › apple-device..." [ref=e373] [cursor=pointer]':
+                - /url: https://secondlifemac.com/white-paper/apple-device-buyback-101/
+                - 'heading "Apple Device Buyback 101: A Guide for Schools" [level=3] [ref=e374]'
+                - generic [ref=e379]:
+                  - generic [ref=e381]: Second Life Mac
+                  - generic [ref=e383]: https://secondlifemac.com › white-paper › apple-device...
+              - button "About this result" [ref=e384] [cursor=pointer]:
+                - img [ref=e387]
+            - generic [ref=e391]:
+              - text: New to device buyback? This complete guide shows schools
+              - emphasis [ref=e392]: how to turn used Apple devices into valuable resources
+              - text: ", recover technology investments, ..."
+          - generic [ref=e396]:
+            - generic [ref=e399]:
+              - link "Education Device Buyback Services for Schools & ... DES Technologies https://des3tech.com › education-device-buyback-services" [ref=e401] [cursor=pointer]:
+                - /url: https://des3tech.com/education-device-buyback-services/
+                - heading "Education Device Buyback Services for Schools & ..." [level=3] [ref=e402]
+                - generic [ref=e407]:
+                  - generic [ref=e409]: DES Technologies
+                  - generic [ref=e411]: https://des3tech.com › education-device-buyback-services
+              - button "About this result" [ref=e412] [cursor=pointer]:
+                - img [ref=e415]
+            - generic [ref=e419]:
+              - text: Looking to retire or replace school technology?
+              - emphasis [ref=e420]: DES Technologies offers secure Education Device Buyback programs
+              - text: for K-12 schools, colleges, ...
+          - generic [ref=e424]:
+            - generic [ref=e427]:
+              - link "Education Buyback Mac of All Trades https://www.macofalltrades.com › education-buyback" [ref=e429] [cursor=pointer]:
+                - /url: https://www.macofalltrades.com/education-buyback?srsltid=AfmBOorz0pfzgcjWLsyku_jsSPXl7uTOThpiOP-9y58fQqau6c52OHp6
+                - heading "Education Buyback" [level=3] [ref=e430]
+                - generic [ref=e435]:
+                  - generic [ref=e437]: Mac of All Trades
+                  - generic [ref=e439]: https://www.macofalltrades.com › education-buyback
+              - button "About this result" [ref=e440] [cursor=pointer]:
+                - img [ref=e443]
+            - generic [ref=e447]:
+              - emphasis [ref=e448]: Mac of all trades offers quality education buyback services
+              - text: for K-12 schools and districts nationwide. Over 50 years of combined experience in Apple ...
+          - generic [ref=e452]:
+            - generic [ref=e455]:
+              - link "Trade In Your Apple Devices | Get Quote Tech to School https://techtoschool.com › pages › trade-in-your-apple-..." [ref=e457] [cursor=pointer]:
+                - /url: https://techtoschool.com/pages/trade-in-your-apple-devices?srsltid=AfmBOorIYEmpv7C7RdOAxfTBuvcdBXkyEykLOLc8rSNxZ4YZ7q7UgUuK
+                - heading "Trade In Your Apple Devices | Get Quote" [level=3] [ref=e458]
+                - generic [ref=e463]:
+                  - generic [ref=e465]: Tech to School
+                  - generic [ref=e467]: https://techtoschool.com › pages › trade-in-your-apple-...
+              - button "About this result" [ref=e468] [cursor=pointer]:
+                - img [ref=e471]
+            - generic [ref=e475]:
+              - text: Looking to upgrade your school's Apple devices?
+              - emphasis [ref=e476]: Trade them in with Tech to School
+              - text: and get a great price for your used tech. Start the process today!
+          - generic [ref=e480]:
+            - generic [ref=e483]:
+              - link "ConnectED Apple https://www.apple.com › connectED" [ref=e485] [cursor=pointer]:
+                - /url: https://www.apple.com/connectED/index.html
+                - heading "ConnectED" [level=3] [ref=e486]
+                - generic [ref=e491]:
+                  - generic [ref=e493]: Apple
+                  - generic [ref=e495]: https://www.apple.com › connectED
+              - button "About this result" [ref=e496] [cursor=pointer]:
+                - img [ref=e499]
+            - generic [ref=e502]:
+              - generic [ref=e503]:
+                - text: We've donated an iPad to every student, a Mac and iPad to every teacher, and an
+                - emphasis [ref=e504]: Apple
+                - text: TV to every classroom. And we've implemented a process that provides ...
+              - link "Read more" [ref=e505] [cursor=pointer]:
+                - /url: https://www.apple.com/connectED/index.html#:~:text=We've%20donated%20an%20iPad%20to,the%20transformational%20power%20of%20technology.
+            - generic [ref=e507]:
+              - text: "Missing: buyback ‎| Show results with:"
+              - link "buyback" [ref=e508] [cursor=pointer]:
+                - /url: /search?sca_esv=09892958edd89daa&q=apple+device+%22buyback%22+for+schools&sa=X&ved=2ahUKEwjMzMW0jfqUAxX_VTABHUQ_FL8Q5t4CegQIQRAB
+          - generic [ref=e513]:
+            - heading "People also ask" [level=2] [ref=e515]
+            - generic [ref=e516]:
+              - button "Is Apple doing any back to school deals?" [ref=e522] [cursor=pointer]:
+                - generic [ref=e524]: Is Apple doing any back to school deals?
+                - img [ref=e527]
+              - button "What is the Apple back to school deal 2026?" [ref=e536] [cursor=pointer]:
+                - generic [ref=e538]: What is the Apple back to school deal 2026?
+                - img [ref=e541]
+              - button "Does Apple do a buyback program?" [ref=e550] [cursor=pointer]:
+                - generic [ref=e552]: Does Apple do a buyback program?
+                - img [ref=e555]
+              - button "How to get Apple back to school discount?" [ref=e564] [cursor=pointer]:
+                - generic [ref=e566]: How to get Apple back to school discount?
+                - img [ref=e569]
+          - generic [ref=e574]:
+            - heading "Web results" [level=2] [ref=e575]
+            - generic [ref=e576]:
+              - generic [ref=e579]:
+                - link "Why buybacks? 7 tips for schools seeking Second Life with ... District Administration https://districtadministration.com › event › why-buyback..." [ref=e581] [cursor=pointer]:
+                  - /url: https://districtadministration.com/event/why-buybacks-7-tips-for-schools-seeking-second-life-with-apple-devices/
+                  - heading "Why buybacks? 7 tips for schools seeking Second Life with ..." [level=3] [ref=e582]
+                  - generic [ref=e587]:
+                    - generic [ref=e589]: District Administration
+                    - generic [ref=e591]: https://districtadministration.com › event › why-buyback...
+                - button "About this result" [ref=e592] [cursor=pointer]:
+                  - img [ref=e595]
+              - generic [ref=e598]:
+                - generic [ref=e599]: Jul 20, 2021 —
+                - generic [ref=e600]:
+                  - text: We can talk to you about
+                  - emphasis [ref=e601]: how you purchase Apple products to buybacks
+                  - text: . It's full service. If you want to lease or pay cash, we can walk you ...
+                - link "Read more" [ref=e602] [cursor=pointer]:
+                  - /url: https://districtadministration.com/event/why-buybacks-7-tips-for-schools-seeking-second-life-with-apple-devices/#:~:text=We%20can%20talk%20to%20you,can%20walk%20you%20through%20that.
+          - generic [ref=e606]:
+            - generic [ref=e609]:
+              - link "Apple Education Back To School deal works retroactively if ... Reddit · r/apple 30+ comments · 4 years ago" [ref=e611] [cursor=pointer]:
+                - /url: https://www.reddit.com/r/apple/comments/olf27w/psa_apple_education_back_to_school_deal_works/
+                - heading "Apple Education Back To School deal works retroactively if ..." [level=3] [ref=e612]
+                - generic [ref=e617]:
+                  - generic [ref=e619]: Reddit · r/apple
+                  - generic [ref=e621]: 30+ comments · 4 years ago
+              - button "About this result" [ref=e622] [cursor=pointer]:
+                - img [ref=e625]
+            - generic [ref=e628]:
+              - generic [ref=e629]:
+                - text: "PSA:"
+                - emphasis [ref=e630]: Apple Education Back To School deal works retroactively
+                - text: if you ordered your device before it started. Apple Retail.
+              - link "Read more" [ref=e631] [cursor=pointer]:
+                - /url: https://www.reddit.com/r/apple/comments/olf27w/psa_apple_education_back_to_school_deal_works/#:~:text=PSA%3A%20Apple%20Education%20Back%20To,Apple%20Retail
+          - generic [ref=e635]:
+            - generic [ref=e638]:
+              - link "K-12 Device Trade-In Program | Sell School iPads and ... SmartphonesPLUS https://www.smartphonesplus.com › k12-device-trade-in" [ref=e640] [cursor=pointer]:
+                - /url: https://www.smartphonesplus.com/k12-device-trade-in/?srsltid=AfmBOoq4O47-2wbDN_hcQc525A9r4exsIWqCXoo42Dpm1f81GEoRF3XT
+                - heading "K-12 Device Trade-In Program | Sell School iPads and ..." [level=3] [ref=e641]
+                - generic [ref=e646]:
+                  - generic [ref=e648]: SmartphonesPLUS
+                  - generic [ref=e650]: https://www.smartphonesplus.com › k12-device-trade-in
+              - button "About this result" [ref=e651] [cursor=pointer]:
+                - img [ref=e654]
+            - generic [ref=e658]:
+              - text: We buy
+              - emphasis [ref=e659]: used school iPads, Chromebooks, & MacBooks
+              - text: in bulk. K-12 buyback with free shipping, certified data erasure, & hands off process.
+        - generic [ref=e661]:
+          - generic [ref=e666]:
+            - heading "People also search for" [level=2] [ref=e668]
+            - generic [ref=e670]:
+              - generic [ref=e671]:
+                - link "Apple device buyback for schools near me" [ref=e675] [cursor=pointer]:
+                  - /url: /search?sca_esv=09892958edd89daa&q=Apple+device+buyback+for+schools+near+me&sa=X&ved=2ahUKEwjMzMW0jfqUAxX_VTABHUQ_FL8Q1QJ6BAgnEAE
+                  - generic [ref=e676]:
+                    - generic [ref=e681]: Apple device buyback for schools near me
+                    - img [ref=e685]
+                - link "Apple trade-in estimate" [ref=e690] [cursor=pointer]:
+                  - /url: /search?sca_esv=09892958edd89daa&q=Apple+trade-in+estimate&sa=X&ved=2ahUKEwjMzMW0jfqUAxX_VTABHUQ_FL8Q1QJ6BAhGEAE
+                  - generic [ref=e691]:
+                    - generic [ref=e696]: Apple trade-in estimate
+                    - img [ref=e700]
+                - link "Apple trade in united states" [ref=e705] [cursor=pointer]:
+                  - /url: /search?sca_esv=09892958edd89daa&q=Apple+trade+in+united+states&sa=X&ved=2ahUKEwjMzMW0jfqUAxX_VTABHUQ_FL8Q1QJ6BAhHEAE
+                  - generic [ref=e706]:
+                    - generic [ref=e711]: Apple trade in united states
+                    - img [ref=e715]
+                - link "Apple trade-in tool" [ref=e720] [cursor=pointer]:
+                  - /url: /search?sca_esv=09892958edd89daa&q=Apple+trade-in+tool&sa=X&ved=2ahUKEwjMzMW0jfqUAxX_VTABHUQ_FL8Q1QJ6BAhKEAE
+                  - generic [ref=e721]:
+                    - generic [ref=e726]: Apple trade-in tool
+                    - img [ref=e730]
+              - generic [ref=e732]:
+                - link "Apple mac trade in estimate" [ref=e736] [cursor=pointer]:
+                  - /url: /search?sca_esv=09892958edd89daa&q=Apple+mac+trade+in+estimate&sa=X&ved=2ahUKEwjMzMW0jfqUAxX_VTABHUQ_FL8Q1QJ6BAhFEAE
+                  - generic [ref=e737]:
+                    - generic [ref=e742]: Apple mac trade in estimate
+                    - img [ref=e746]
+                - link "Apple trade in us online" [ref=e751] [cursor=pointer]:
+                  - /url: /search?sca_esv=09892958edd89daa&q=Apple+trade+in+us+online&sa=X&ved=2ahUKEwjMzMW0jfqUAxX_VTABHUQ_FL8Q1QJ6BAg-EAE
+                  - generic [ref=e752]:
+                    - generic [ref=e757]: Apple trade in us online
+                    - img [ref=e761]
+                - link "Apple trade in prepare iphone" [ref=e766] [cursor=pointer]:
+                  - /url: /search?sca_esv=09892958edd89daa&q=Apple+trade+in+prepare+iphone&sa=X&ved=2ahUKEwjMzMW0jfqUAxX_VTABHUQ_FL8Q1QJ6BAgxEAE
+                  - generic [ref=e767]:
+                    - generic [ref=e772]: Apple trade in prepare iphone
+                    - img [ref=e776]
+                - link "Apple trade in - education" [ref=e781] [cursor=pointer]:
+                  - /url: /search?sca_esv=09892958edd89daa&q=Apple+trade+in+-+education&sa=X&ved=2ahUKEwjMzMW0jfqUAxX_VTABHUQ_FL8Q1QJ6BAgvEAE
+                  - generic [ref=e782]:
+                    - generic [ref=e787]: Apple trade in - education
+                    - img [ref=e791]
+          - navigation [ref=e793]:
+            - heading "Page Navigation" [level=1] [ref=e794]
+            - text: "1"
+            - link "Page 2" [ref=e797] [cursor=pointer]:
+              - /url: /search?q=apple+device+buyback+for+schools&sca_esv=09892958edd89daa&ei=xv8naszRGf-rwbkPxP7Q-As&start=10&sa=N&sstk=AU9db-CKFJX6hZ6aaZ_MIKvZnJsbqieGDqmQ25U6nRF3s2OIZgzH0FcKA09hJpwAJJFgjXCohjOfRtx9DIqHUn7dbN-mSAiGJ9HiGA&ved=2ahUKEwjMzMW0jfqUAxX_VTABHUQ_FL8Q8tMDegQIJRAE
+              - text: "2"
+            - link "Page 3" [ref=e799] [cursor=pointer]:
+              - /url: /search?q=apple+device+buyback+for+schools&sca_esv=09892958edd89daa&ei=xv8naszRGf-rwbkPxP7Q-As&start=20&sa=N&sstk=AU9db-CKFJX6hZ6aaZ_MIKvZnJsbqieGDqmQ25U6nRF3s2OIZgzH0FcKA09hJpwAJJFgjXCohjOfRtx9DIqHUn7dbN-mSAiGJ9HiGA&ved=2ahUKEwjMzMW0jfqUAxX_VTABHUQ_FL8Q8tMDegQIJRAG
+              - text: "3"
+            - link "Page 4" [ref=e801] [cursor=pointer]:
+              - /url: /search?q=apple+device+buyback+for+schools&sca_esv=09892958edd89daa&ei=xv8naszRGf-rwbkPxP7Q-As&start=30&sa=N&sstk=AU9db-CKFJX6hZ6aaZ_MIKvZnJsbqieGDqmQ25U6nRF3s2OIZgzH0FcKA09hJpwAJJFgjXCohjOfRtx9DIqHUn7dbN-mSAiGJ9HiGA&ved=2ahUKEwjMzMW0jfqUAxX_VTABHUQ_FL8Q8tMDegQIJRAI
+              - text: "4"
+            - link "Page 5" [ref=e803] [cursor=pointer]:
+              - /url: /search?q=apple+device+buyback+for+schools&sca_esv=09892958edd89daa&ei=xv8naszRGf-rwbkPxP7Q-As&start=40&sa=N&sstk=AU9db-CKFJX6hZ6aaZ_MIKvZnJsbqieGDqmQ25U6nRF3s2OIZgzH0FcKA09hJpwAJJFgjXCohjOfRtx9DIqHUn7dbN-mSAiGJ9HiGA&ved=2ahUKEwjMzMW0jfqUAxX_VTABHUQ_FL8Q8tMDegQIJRAK
+              - text: "5"
+            - link "Page 6" [ref=e805] [cursor=pointer]:
+              - /url: /search?q=apple+device+buyback+for+schools&sca_esv=09892958edd89daa&ei=xv8naszRGf-rwbkPxP7Q-As&start=50&sa=N&sstk=AU9db-CKFJX6hZ6aaZ_MIKvZnJsbqieGDqmQ25U6nRF3s2OIZgzH0FcKA09hJpwAJJFgjXCohjOfRtx9DIqHUn7dbN-mSAiGJ9HiGA&ved=2ahUKEwjMzMW0jfqUAxX_VTABHUQ_FL8Q8tMDegQIJRAM
+              - text: "6"
+            - link "Page 7" [ref=e807] [cursor=pointer]:
+              - /url: /search?q=apple+device+buyback+for+schools&sca_esv=09892958edd89daa&ei=xv8naszRGf-rwbkPxP7Q-As&start=60&sa=N&sstk=AU9db-CKFJX6hZ6aaZ_MIKvZnJsbqieGDqmQ25U6nRF3s2OIZgzH0FcKA09hJpwAJJFgjXCohjOfRtx9DIqHUn7dbN-mSAiGJ9HiGA&ved=2ahUKEwjMzMW0jfqUAxX_VTABHUQ_FL8Q8tMDegQIJRAO
+              - text: "7"
+            - link "Page 8" [ref=e809] [cursor=pointer]:
+              - /url: /search?q=apple+device+buyback+for+schools&sca_esv=09892958edd89daa&ei=xv8naszRGf-rwbkPxP7Q-As&start=70&sa=N&sstk=AU9db-CKFJX6hZ6aaZ_MIKvZnJsbqieGDqmQ25U6nRF3s2OIZgzH0FcKA09hJpwAJJFgjXCohjOfRtx9DIqHUn7dbN-mSAiGJ9HiGA&ved=2ahUKEwjMzMW0jfqUAxX_VTABHUQ_FL8Q8tMDegQIJRAQ
+              - text: "8"
+            - link "Page 9" [ref=e811] [cursor=pointer]:
+              - /url: /search?q=apple+device+buyback+for+schools&sca_esv=09892958edd89daa&ei=xv8naszRGf-rwbkPxP7Q-As&start=80&sa=N&sstk=AU9db-CKFJX6hZ6aaZ_MIKvZnJsbqieGDqmQ25U6nRF3s2OIZgzH0FcKA09hJpwAJJFgjXCohjOfRtx9DIqHUn7dbN-mSAiGJ9HiGA&ved=2ahUKEwjMzMW0jfqUAxX_VTABHUQ_FL8Q8tMDegQIJRAS
+              - text: "9"
+            - link "Page 10" [ref=e813] [cursor=pointer]:
+              - /url: /search?q=apple+device+buyback+for+schools&sca_esv=09892958edd89daa&ei=xv8naszRGf-rwbkPxP7Q-As&start=90&sa=N&sstk=AU9db-CKFJX6hZ6aaZ_MIKvZnJsbqieGDqmQ25U6nRF3s2OIZgzH0FcKA09hJpwAJJFgjXCohjOfRtx9DIqHUn7dbN-mSAiGJ9HiGA&ved=2ahUKEwjMzMW0jfqUAxX_VTABHUQ_FL8Q8tMDegQIJRAU
+              - text: "10"
+            - heading "Next" [level=2] [ref=e815]:
+              - link "Next" [ref=e816] [cursor=pointer]:
+                - /url: /search?q=apple+device+buyback+for+schools&sca_esv=09892958edd89daa&ei=xv8naszRGf-rwbkPxP7Q-As&start=10&sa=N&sstk=AU9db-CKFJX6hZ6aaZ_MIKvZnJsbqieGDqmQ25U6nRF3s2OIZgzH0FcKA09hJpwAJJFgjXCohjOfRtx9DIqHUn7dbN-mSAiGJ9HiGA&ved=2ahUKEwjMzMW0jfqUAxX_VTABHUQ_FL8Q8NMDegQIJRAW
+                - generic [ref=e818]: Next
+        - navigation
+    - contentinfo [ref=e819]:
+      - heading "Footer Links" [level=1] [ref=e820]
+      - generic [ref=e824]:
+        - generic [ref=e828]:
+          - button "Cape Canaveral, Florida - From your IP address" [ref=e830] [cursor=pointer]:
+            - generic [ref=e831]: Cape Canaveral, Florida
+            - generic [ref=e833]:
+              - text: "-"
+              - generic [ref=e834]: From your IP address
+          - text: "-"
+          - button "Update location" [ref=e836] [cursor=pointer]: Update location
+        - generic [ref=e839]:
+          - link "Help" [ref=e840] [cursor=pointer]:
+            - /url: https://support.google.com/websearch/?p=ws_results_help&hl=en&fg=1
+          - link "Send feedback" [ref=e841] [cursor=pointer]:
+            - /url: "#"
+          - link "Privacy" [ref=e842] [cursor=pointer]:
+            - /url: https://policies.google.com/privacy?hl=en&fg=1
+          - link "Terms" [ref=e843] [cursor=pointer]:
+            - /url: https://policies.google.com/terms?hl=en&fg=1

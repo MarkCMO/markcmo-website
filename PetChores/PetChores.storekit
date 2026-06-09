@@ -1,0 +1,30 @@
+{
+  "identifier" : "PETCHORES_STOREKIT_CONFIG",
+  "nonRenewingSubscriptions" : [],
+  "products" : [
+    {
+      "displayPrice" : "4.99",
+      "familyShareable" : true,
+      "internalID" : "PCUNLOCKFULL01",
+      "localizations" : [
+        {
+          "description" : "Unlock all pets, run several pets at once, photo proof, and Readiness Report export.",
+          "displayName" : "Pet Chores Full Unlock",
+          "locale" : "en_US"
+        }
+      ],
+      "productID" : "petchores.unlock.full",
+      "referenceName" : "Full Unlock",
+      "type" : "NonConsumable"
+    }
+  ],
+  "settings" : {
+    "_failTransactionsEnabled" : false,
+    "_askToBuyEnabled" : false
+  },
+  "subscriptionGroups" : [],
+  "version" : {
+    "major" : 3,
+    "minor" : 0
+  }
+}

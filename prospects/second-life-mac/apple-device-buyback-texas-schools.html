@@ -1,0 +1,442 @@
+<!DOCTYPE html>
+<!--
+  CONCEPT DEMO prepared by Mark Gabrielli (markcmo.com) for Second Life Mac.
+  Purpose: one tile of a programmatic [ICP] x [service] x [geo] SEO matrix.
+  Visual system mirrors secondlifemac.com: white canvas, navy #122133, sky #4798D1,
+  deeper blue #215BAA, gold #ECD497 / cream gradient bands, "neighbor" heavy uppercase
+  display headings (Adobe Typekit kit pev8zwb) with Archivo/Inter fallback, Inter body,
+  150px pill buttons (sky-blue primary, navy ghost), photo hero with navy overlay card.
+  Copy is original. Brand terms (Refresh Plan, Touchless Trade-in, Blue Glove) are SLM's.
+  Sibling geo URLs are illustrative of the matrix.
+-->
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Apple Device Buyback for Texas Schools | Second Life Mac</title>
+<meta name="description" content="Texas school districts: turn retired MacBooks and iPads into funding for your next refresh. FERPA and Texas-compliant data erasure, free statewide Blue Glove pickup, and a transparent Refresh Plan. We pay you.">
+<link rel="canonical" href="https://secondlifemac.com/apple-device-buyback-texas-schools/">
+<meta property="og:title" content="Apple Device Buyback for Texas Schools | Second Life Mac">
+<meta property="og:description" content="Turn your district's retired Apple devices into budget for new technology. Texas-compliant, secure, free statewide pickup.">
+<meta property="og:type" content="website">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://use.typekit.net/pev8zwb.css">
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@600;700;800;900&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --navy:#122133; --sky:#4798D1; --blue:#215BAA; --gold:#ECD497; --cream:#F7EFD9;
+    --off:#F5F8FB; --ink:#1d2939; --muted:#5a6675; --line:#e6ebf1;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth}
+  body{font-family:Inter,system-ui,sans-serif;color:var(--ink);background:#fff;line-height:1.7;font-size:17px}
+  h1,h2,h3,.disp{font-family:"neighbor",Archivo,Inter,sans-serif;font-weight:900;text-transform:uppercase;line-height:1.06;letter-spacing:-.3px}
+  h2{font-size:clamp(28px,3.6vw,42px);color:var(--navy)}
+  h3{font-size:20px;color:var(--navy);letter-spacing:0}
+  p{margin-bottom:1.1em}
+  a{color:var(--blue);text-decoration:none}
+  a:hover{text-decoration:underline}
+  .wrap{max-width:1120px;margin:0 auto;padding:0 24px}
+  .center{text-align:center}
+  .center .lede{margin-left:auto;margin-right:auto}
+  .lede{font-size:19px;color:var(--muted);max-width:74ch;margin-bottom:8px}
+  .eyebrow{display:inline-block;color:var(--sky);font-weight:800;font-size:13px;letter-spacing:2px;text-transform:uppercase;margin-bottom:14px}
+  .btn{display:inline-block;border-radius:150px;font-weight:700;font-size:15px;padding:13px 30px;cursor:pointer;border:2px solid transparent;transition:.15s}
+  .btn-blue{background:var(--sky);color:#fff;border-color:var(--sky)}
+  .btn-blue:hover{background:#3a86bf;text-decoration:none}
+  .btn-ghost{background:transparent;color:var(--navy);border-color:var(--navy)}
+  .btn-ghost:hover{background:var(--navy);color:#fff;text-decoration:none}
+  .btn-ghost-light{background:transparent;color:#fff;border-color:rgba(255,255,255,.6)}
+  .btn-ghost-light:hover{background:rgba(255,255,255,.12);text-decoration:none}
+
+  .demo{background:var(--navy);color:var(--gold);text-align:center;font-size:12px;font-weight:600;padding:6px 12px;letter-spacing:.3px}
+
+  /* header */
+  header{background:#fff;position:sticky;top:0;z-index:60;border-bottom:1px solid var(--line)}
+  .nav{display:flex;align-items:center;justify-content:space-between;gap:20px;padding:14px 24px;max-width:1240px;margin:0 auto}
+  .nav .logo{height:32px}
+  .nav nav{display:flex;align-items:center;gap:24px}
+  .nav nav a{color:var(--navy);font-size:14px;font-weight:600}
+  .nav nav a:hover{color:var(--sky);text-decoration:none}
+  .nav .actions{display:flex;gap:10px;align-items:center}
+  .nav .actions .btn{padding:9px 22px;font-size:14px}
+  @media(max-width:980px){.nav nav{display:none}}
+
+  /* hero */
+  .hero{position:relative;background:var(--navy) center/cover no-repeat;background-image:linear-gradient(90deg,rgba(10,20,35,.78) 0%,rgba(10,20,35,.35) 55%,rgba(10,20,35,.15) 100%),url('https://images.unsplash.com/photo-1580582932707-520aed937b7b?auto=format&fit=crop&w=1700&q=80');}
+  .hero .wrap{display:grid;grid-template-columns:1.05fr .95fr;gap:30px;padding:70px 24px 76px;align-items:center}
+  .hero-card{background:rgba(15,28,46,.86);backdrop-filter:blur(2px);border:1px solid rgba(255,255,255,.10);border-radius:18px;padding:38px 40px;color:#fff;justify-self:end;max-width:540px}
+  .hero-card h1{font-size:clamp(30px,3.4vw,42px);color:var(--sky);margin-bottom:20px}
+  .checks{list-style:none;margin:0 0 22px}
+  .checks li{position:relative;padding-left:30px;margin-bottom:11px;color:#e7eef6;font-size:15.5px}
+  .checks li:before{content:"\2713";position:absolute;left:0;top:0;color:var(--gold);font-weight:900}
+  .hero-card .pay{font-family:"neighbor",Archivo,sans-serif;text-transform:uppercase;color:#fff;font-weight:900;font-size:18px;letter-spacing:.3px;margin:4px 0 20px}
+  @media(max-width:860px){.hero .wrap{grid-template-columns:1fr;padding:48px 24px}.hero-card{justify-self:stretch}}
+
+  /* stat strip */
+  .stats{background:var(--off);border-bottom:1px solid var(--line)}
+  .stats .wrap{display:flex;justify-content:space-around;gap:18px;padding:30px 24px;flex-wrap:wrap;text-align:center}
+  .stats .n{font-family:"neighbor",Archivo,sans-serif;font-weight:900;font-size:40px;color:var(--sky);line-height:1}
+  .stats .l{font-size:12.5px;font-weight:700;text-transform:uppercase;letter-spacing:.6px;color:var(--navy);opacity:.75;margin-top:4px}
+
+  .breadcrumb{font-size:13px;color:var(--muted);padding:16px 0}
+  .breadcrumb a{color:var(--muted)}
+
+  section.block{padding:70px 0}
+  section.alt{background:var(--off)}
+  .gradient{background:linear-gradient(160deg,var(--sky) 0%,#7bb6dc 45%,var(--cream) 100%)}
+  .navyband{background:var(--navy);color:#fff}
+  .navyband h2,.navyband h3{color:#fff}
+  .navyband a{color:var(--gold)}
+
+  .steps{display:grid;grid-template-columns:repeat(3,1fr);gap:26px;margin-top:40px}
+  @media(max-width:820px){.steps{grid-template-columns:1fr}}
+  .step .num{display:inline-flex;width:44px;height:44px;align-items:center;justify-content:center;border-radius:50%;background:var(--sky);color:#fff;font-family:"neighbor",Archivo,sans-serif;font-weight:900;font-size:20px;margin-bottom:14px}
+  .step h3{margin-bottom:6px}
+  .step p{color:var(--muted);font-size:15.5px}
+
+  .two{display:grid;grid-template-columns:1fr 1fr;gap:40px;margin-top:36px}
+  @media(max-width:820px){.two{grid-template-columns:1fr}}
+  .two h3{margin-bottom:6px}
+  .two p{color:var(--muted);font-size:16px}
+
+  .pill-list{list-style:none;display:flex;flex-wrap:wrap;gap:10px;justify-content:center;margin:24px 0 4px}
+  .pill-list li{background:#fff;border:1px solid var(--line);border-radius:150px;padding:10px 20px;font-weight:600;font-size:14px;color:var(--navy)}
+
+  .quote{max-width:78ch;margin:0 auto;text-align:center;font-size:22px;font-style:italic;color:var(--navy);line-height:1.5}
+  .quote cite{display:block;font-style:normal;font-weight:700;font-size:14px;margin-top:16px;color:var(--muted)}
+
+  .regions{display:flex;flex-wrap:wrap;gap:10px;justify-content:center;margin-top:20px}
+  .regions a{background:#fff;border:1px solid var(--line);border-radius:150px;padding:10px 20px;font-size:14px;font-weight:600;color:var(--navy)}
+  .regions a:hover{background:var(--sky);color:#fff;border-color:var(--sky);text-decoration:none}
+
+  details{background:#fff;border:1px solid var(--line);border-radius:12px;padding:18px 22px;margin-bottom:12px;text-align:left}
+  details summary{font-weight:700;color:var(--navy);cursor:pointer;font-size:17px;list-style:none}
+  details summary::-webkit-details-marker{display:none}
+  details summary:after{content:"+";float:right;color:var(--sky);font-weight:900;font-size:20px;line-height:1}
+  details[open] summary:after{content:"\2212"}
+  details p{margin:14px 0 2px;color:var(--muted)}
+  .faqwrap{max-width:820px;margin:36px auto 0}
+
+  .ctaband{text-align:center;padding:78px 0}
+  .ctaband h2{color:var(--navy);max-width:20ch;margin:0 auto .4em}
+
+  footer{background:var(--navy);color:#aeb9c8;padding:58px 0 24px;font-size:14px}
+  footer .cols{display:grid;grid-template-columns:1.5fr 1fr 1fr 1fr;gap:30px}
+  @media(max-width:820px){footer .cols{grid-template-columns:1fr 1fr}}
+  footer h4{color:#fff;font-size:12.5px;letter-spacing:.6px;text-transform:uppercase;margin-bottom:14px}
+  footer a{color:#aeb9c8;display:block;margin-bottom:9px}
+  footer a:hover{color:var(--gold);text-decoration:none}
+  footer .logo{height:30px;margin-bottom:16px}
+  footer .contact{color:var(--sky);font-weight:700;margin-bottom:4px}
+  .socials{display:flex;gap:14px;margin-top:6px}
+  .socials a{display:inline;margin:0;color:#cdd6e2;font-weight:700}
+  .legal{border-top:1px solid rgba(255,255,255,.12);margin-top:34px;padding-top:18px;text-align:center;font-size:12px;color:#7e8a9b}
+  .legal a{display:inline;color:#7e8a9b}
+</style>
+</head>
+<body>
+
+<div class="demo">Concept page prepared by Mark Gabrielli as a programmatic SEO demonstration for Second Life Mac. Not a live page.</div>
+
+<header>
+  <div class="nav">
+    <a href="https://secondlifemac.com/"><img class="logo" src="https://secondlifemac.com/wp-content/uploads/2025/11/LOCKUP.svg" alt="Second Life Mac"></a>
+    <nav>
+      <a href="https://secondlifemac.com/school-it-asset-disposition/">Education</a>
+      <a href="https://secondlifemac.com/enterprise-itad/">Business</a>
+      <a href="https://secondlifemac.com/healthcare-it-asset-disposition/">Healthcare</a>
+      <a href="https://secondlifemac.com/apple-device-buyback/">How It Works</a>
+      <a href="https://secondlifemac.com/case-studies/">Resources</a>
+    </nav>
+    <div class="actions">
+      <a class="btn btn-ghost" href="https://secondlifemac.com/contact-us/">Contact</a>
+      <a class="btn btn-blue" href="https://secondlifemac.com/get-a-quote/">Get a Refresh Plan</a>
+    </div>
+  </div>
+</header>
+
+<section class="hero">
+  <div class="wrap">
+    <div></div>
+    <div class="hero-card">
+      <span class="eyebrow" style="color:var(--gold)">Apple Device Buyback / Texas</span>
+      <h1>Apple device buyback for Texas schools</h1>
+      <ul class="checks">
+        <li>FERPA and Texas-compliant data erasure (NIST 800-88)</li>
+        <li>100% U.S.-based processing, never outsourced</li>
+        <li>Free Blue Glove pickup anywhere in Texas</li>
+        <li>Dedicated client success support</li>
+        <li>Trusted by 2,000+ organizations nationwide</li>
+      </ul>
+      <p class="pay">You do not pay us. We pay you.</p>
+      <a class="btn btn-blue" href="https://secondlifemac.com/get-a-quote/">Get your Texas Refresh Plan</a>
+    </div>
+  </div>
+</section>
+
+<div class="stats">
+  <div class="wrap">
+    <div><div class="n">3M+</div><div class="l">Apple devices processed</div></div>
+    <div><div class="n">2,000+</div><div class="l">Organizations served</div></div>
+    <div><div class="n">93%+</div><div class="l">Client satisfaction</div></div>
+    <div><div class="n">100%</div><div class="l">U.S.-based processing</div></div>
+  </div>
+</div>
+
+<div class="wrap breadcrumb">
+  <a href="https://secondlifemac.com/">Home</a> / <a href="https://secondlifemac.com/school-it-asset-disposition/">Education</a> / <a href="https://secondlifemac.com/apple-device-buyback/">Apple Device Buyback</a> / Texas
+</div>
+
+<section class="block">
+  <div class="wrap center">
+    <span class="eyebrow">Texas school technology funding</span>
+    <h2>Texas districts are sitting on millions in untapped budget</h2>
+    <p class="lede">When Texas schools deployed Apple devices at scale during the one to one and remote learning years, they built fleets that are now reaching the end of their useful classroom life. Those MacBook Airs, iPads, and Mac minis still hold real residual value, but only for a limited window. Every semester a device sits in a storage closet, its resale value depreciates and the chance to reinvest that value slips away.</p>
+  </div>
+  <div class="wrap" style="max-width:840px;margin-top:8px">
+    <p>Second Life Mac helps Texas school districts, charter networks, community colleges, and university systems recover that value and put it back where it belongs: in the classroom. We purchase your retired Apple devices outright, handle secure data erasure and logistics, and pay you a transparent price per device. The proceeds become budget you can apply toward your next purchase of MacBooks, iPads, or any other technology your students need.</p>
+    <p>This is not a recycling program where you pay for disposal. It is a buyback partnership where retired hardware becomes a funding source. For a Texas district managing tens of thousands of devices across dozens of campuses, the difference can be hundreds of thousands of dollars per refresh cycle. <a href="https://secondlifemac.com/school-districts/">Learn more about our work with school districts.</a></p>
+  </div>
+</section>
+
+<section class="block alt" id="how">
+  <div class="wrap center">
+    <span class="eyebrow">How it works</span>
+    <h2>The Refresh Plan, built for Texas</h2>
+    <p class="lede">Our process is built so a busy technology director never has to babysit a buyback. It is the same proven workflow we have run for thousands of organizations, adapted to the realities of Texas procurement and logistics.</p>
+  </div>
+  <div class="wrap">
+    <div class="steps">
+      <div class="step"><div class="num">1</div><h3>Valuation</h3><p>Send us your device inventory and we return a clear, itemized buyback estimate. We help you understand depreciation curves so you can time your refresh for maximum value, whether that is end of school year, end of lease, or the close of a one to one program.</p></div>
+      <div class="step"><div class="num">2</div><h3>Touchless Trade-in</h3><p>Our Touchless Trade-in process means your staff does not have to wipe, sort, or stage devices. We coordinate free statewide pickup, our Blue Glove team handles the heavy lifting, and your team stays focused on the term ahead.</p></div>
+      <div class="step"><div class="num">3</div><h3>Secure processing</h3><p>At our U.S.-based facility, every device is cleaned, tested, graded, and erased to recognized data destruction standards, then logged by serial number. You receive a detailed audit report for your records and your board.</p></div>
+      <div class="step"><div class="num">4</div><h3>You get paid</h3><p>Once processing is complete, you are paid the agreed value. That money flows straight back into your technology budget, with no disposal invoice and no surprise fees.</p></div>
+      <div class="step"><div class="num">5</div><h3>Ongoing partnership</h3><p>The best districts do not refresh once. We build a multi year plan so each cohort of devices is sold back at the right moment, turning device lifecycle management into a predictable source of funding.</p></div>
+      <div class="step"><div class="num">6</div><h3>Community options</h3><p>Want to give families and staff first access to refurbished devices? Our optional community sale programs let your district share the value of a refresh with the people it serves.</p></div>
+    </div>
+    <div class="center" style="margin-top:38px"><a class="btn btn-blue" href="https://secondlifemac.com/apple-device-buyback/">See the full buyback process</a></div>
+  </div>
+</section>
+
+<section class="block">
+  <div class="wrap center">
+    <span class="eyebrow">Compliance and procurement</span>
+    <h2>Built for Texas compliance and Texas procurement</h2>
+    <p class="lede">Selling district hardware is not just a logistics question. It is a data privacy, records, and procurement question, and Texas has its own rules. Second Life Mac is built to make compliance the easy part.</p>
+  </div>
+  <div class="wrap">
+    <div class="two">
+      <div>
+        <h3>Student data privacy, handled correctly</h3>
+        <p>Texas districts are accountable under both the federal <a href="https://studentprivacy.ed.gov/" target="_blank" rel="noopener">Family Educational Rights and Privacy Act (FERPA)</a> and state law, including the student data protections in the <a href="https://statutes.capitol.texas.gov/Docs/ED/htm/ED.32.htm" target="_blank" rel="noopener">Texas Education Code</a>. Before any device leaves our facility for resale, its data is destroyed using methods aligned with the <a href="https://csrc.nist.gov/pubs/sp/800/88/r1/final" target="_blank" rel="noopener">NIST 800-88 media sanitization guidelines</a>, documented per serial number so your district has defensible proof. <a href="https://secondlifemac.com/data-security/">Read about our data security standards.</a></p>
+      </div>
+      <div>
+        <h3>Responsible, Texas-compliant recycling</h3>
+        <p>Devices that cannot be resold are recycled responsibly rather than landfilled, in line with the spirit of the <a href="https://www.tceq.texas.gov/" target="_blank" rel="noopener">Texas Commission on Environmental Quality</a> electronics recycling expectations and the Texas computer equipment recycling program. We work to recognized industry standards such as <a href="https://sustainableelectronics.org/r2-standard/" target="_blank" rel="noopener">R2</a> and e-Stewards so your sustainability reporting holds up to scrutiny.</p>
+      </div>
+      <div>
+        <h3>Works with how Texas districts actually buy</h3>
+        <p>Texas schools procure through vehicles like <a href="https://dir.texas.gov/" target="_blank" rel="noopener">Texas DIR</a> contracts, regional Education Service Centers, and cooperative purchasing programs such as <a href="https://www.buyboard.com/" target="_blank" rel="noopener">BuyBoard</a> and <a href="https://www.tips-usa.com/" target="_blank" rel="noopener">TIPS</a>. We structure buyback agreements to fit cleanly alongside the contract vehicles your business office already trusts.</p>
+      </div>
+      <div>
+        <h3>Records and board-ready reporting</h3>
+        <p>Every engagement closes with documentation your technology director, business manager, and board can rely on: itemized device lists, grades, data destruction certificates, and payment records. When the <a href="https://tea.texas.gov/" target="_blank" rel="noopener">Texas Education Agency</a> or an auditor asks how retired assets were handled, the answer is already on file.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="block alt">
+  <div class="wrap center">
+    <span class="eyebrow">What we buy</span>
+    <h2>What we buy from Texas schools</h2>
+    <p class="lede">We purchase the full range of Apple hardware your district has deployed, in nearly any condition, in volumes from a single lab to a district-wide one to one rollout.</p>
+    <ul class="pill-list">
+      <li>MacBook Air</li><li>MacBook Pro</li><li>iMac</li><li>Mac mini</li><li>Mac Pro</li>
+      <li>iPad</li><li>iPad Air</li><li>iPad Pro</li><li>iPad mini</li>
+      <li>Apple Pencil</li><li>Magic Keyboard</li><li>AirPods</li><li>Apple TV</li>
+    </ul>
+    <p style="max-width:74ch;margin:18px auto 0;color:var(--muted)">Not sure whether your devices still hold value? Older and even non-working units are often worth more than districts expect, and we will tell you honestly what each cohort is worth. <a href="https://secondlifemac.com/what-we-buy/">See everything we buy.</a></p>
+  </div>
+</section>
+
+<section class="block navyband">
+  <div class="wrap center" style="max-width:820px">
+    <span class="eyebrow" style="color:var(--gold)">2026 timing</span>
+    <h2>The 2026 device wave is a Texas timing opportunity</h2>
+    <p style="font-size:19px;color:#d7e0ea;margin-bottom:26px">Texas is one of the largest one to one device markets in the country, and the fleets purchased during the remote and hybrid learning years are now aging out together. Districts that act before the wave peaks capture the strongest residual values, because resale prices soften as the market floods with identical models. Acting early is not just good operations, it is more money back into your classrooms.</p>
+    <a class="btn btn-blue" href="https://secondlifemac.com/get-a-quote/">Start your Texas valuation</a>
+  </div>
+</section>
+
+<section class="block">
+  <div class="wrap center">
+    <span class="eyebrow">Why timing matters</span>
+    <h2>Why timing is everything for a Texas buyback</h2>
+    <p class="lede">The single biggest factor in how much a district recovers is not which devices it owns. It is when it sells them.</p>
+  </div>
+  <div class="wrap" style="max-width:840px">
+    <p>Apple devices depreciate on a predictable curve. A MacBook Air or iPad holds a strong share of its value in the first two to three years, then the decline steepens as newer models arrive and supply of the older generation grows. For a Texas district, this curve interacts with two local realities. First, most districts refresh on a summer cadence, which means thousands of identical models hit the resale market at the same moment every year. Second, the fleets purchased during the remote and hybrid learning surge are now aging out together across the entire state, compounding that supply pressure.</p>
+    <p>The practical lesson is simple. A district that plans its buyback twelve to eighteen months ahead, and sells before the market floods with the same model, consistently recovers more per device than one that waits until devices are obsolete and stacked in a storage room. This is exactly why the Refresh Plan is built around timing, not just transactions. We map your fleet against the depreciation curve and tell you the optimal window to sell each cohort, so value goes back to your students instead of evaporating on a shelf.</p>
+    <p>For districts winding down technology funded by one-time federal relief dollars, timing matters even more. Recovering residual value from those fleets can help bridge the gap as one-time funding ends and recurring budgets take over. <a href="https://secondlifemac.com/get-a-quote/">Ask us to model your district's depreciation timeline.</a></p>
+  </div>
+</section>
+
+<section class="block alt">
+  <div class="wrap center">
+    <span class="eyebrow">Who we serve in Texas</span>
+    <h2>Texas institutions we partner with</h2>
+    <p class="lede">Public, charter, and higher education institutions across Texas use Second Life Mac to fund their refresh cycles. The program scales from a single campus to a statewide system.</p>
+  </div>
+  <div class="wrap">
+    <div class="steps">
+      <div class="step"><h3>School districts</h3><p>From large urban districts to rural systems served by their regional Education Service Center, we handle district-wide one to one retirements, lab refreshes, and lease returns with documentation your business office and board can rely on.</p></div>
+      <div class="step"><h3>Charter networks</h3><p>Multi-campus charter management organizations often run on tight, grant-driven budgets. Recovering value from retired Apple devices turns a sunk cost into reinvestable funding across the network.</p></div>
+      <div class="step"><h3>Community colleges</h3><p>Texas community colleges cycle through MacBooks and iPads in labs, libraries, and lending programs. We help recover value at each refresh and keep data destruction defensible.</p></div>
+      <div class="step"><h3>University systems</h3><p>Large Texas university systems manage Apple fleets across departments, residence halls, and research groups. We coordinate at scale while keeping each unit's reporting clean.</p></div>
+      <div class="step"><h3>Private and magnet schools</h3><p>Independent and magnet programs use buyback proceeds to stretch technology budgets further and keep classroom devices current without raising tuition pressure.</p></div>
+      <div class="step"><h3>Special education programs</h3><p>Assistive and adaptive Apple devices reach end of life too. We handle these with the same secure, documented care and return value to the programs that need it most.</p></div>
+    </div>
+  </div>
+</section>
+
+<section class="block">
+  <div class="wrap center">
+    <span class="eyebrow">Why a dedicated partner</span>
+    <h2>What sets Second Life Mac apart for Texas schools</h2>
+    <p class="lede">Districts have options when it comes time to retire Apple hardware. Here is what makes a dedicated buyback partner different from the alternatives.</p>
+  </div>
+  <div class="wrap">
+    <div class="two">
+      <div><h3>More value than a generic trade-in</h3><p>Manufacturer trade-in programs are convenient but typically return store credit at modest values. As an Apple device specialist that refurbishes and resells at scale, we are built to pay competitive, transparent prices, often more than a one-size-fits-all credit program, and we pay it back as budget you control.</p></div>
+      <div><h3>Less work than doing it yourself</h3><p>Selling devices piecemeal on the open market turns your team into a part-time resale operation: wiping, photographing, listing, shipping, and chasing payments. Our Touchless Trade-in and Blue Glove service remove all of that. You hand off the fleet, we handle everything, you get a report and a check.</p></div>
+      <div><h3>More accountability than a recycler</h3><p>A pure recycler hauls devices away and may even charge for it. We treat your hardware as the asset it is, recover its value, and still recycle responsibly what cannot be resold, so you get funding and a clean sustainability story.</p></div>
+      <div><h3>Experience that protects you</h3><p>We have processed millions of Apple devices and served thousands of organizations. That experience shows up where it matters: accurate valuations, airtight data destruction documentation, and a process that does not break down at scale.</p></div>
+    </div>
+  </div>
+</section>
+
+<section class="block gradient">
+  <div class="wrap center">
+    <blockquote class="quote">
+      Working with a partner who handled the logistics, the data security, and the reporting meant our team could refresh thousands of devices without slowing down the start of the school year, and the funding we recovered went straight back into new technology for students.
+      <cite>Representative outcome from a district Refresh Plan. See our <a href="https://secondlifemac.com/case-studies/" style="color:var(--navy);text-decoration:underline">case studies</a> for documented results.</cite>
+    </blockquote>
+  </div>
+</section>
+
+<section class="block">
+  <div class="wrap center">
+    <span class="eyebrow">By region</span>
+    <h2>Texas school device buyback, by region</h2>
+    <p class="lede">Wherever your campuses are, our free statewide pickup and U.S.-based processing reach you. Explore device buyback in your Texas market.</p>
+    <div class="regions">
+      <a href="https://secondlifemac.com/school-device-buyback-houston-tx/">Houston</a>
+      <a href="https://secondlifemac.com/school-device-buyback-dallas-tx/">Dallas</a>
+      <a href="https://secondlifemac.com/school-device-buyback-fort-worth-tx/">Fort Worth</a>
+      <a href="https://secondlifemac.com/school-device-buyback-austin-tx/">Austin</a>
+      <a href="https://secondlifemac.com/school-device-buyback-san-antonio-tx/">San Antonio</a>
+      <a href="https://secondlifemac.com/school-device-buyback-el-paso-tx/">El Paso</a>
+      <a href="https://secondlifemac.com/school-device-buyback-corpus-christi-tx/">Corpus Christi</a>
+      <a href="https://secondlifemac.com/school-device-buyback-lubbock-tx/">Lubbock</a>
+      <a href="https://secondlifemac.com/school-device-buyback-mcallen-tx/">McAllen / RGV</a>
+    </div>
+    <p style="margin-top:24px;color:var(--muted)">Looking beyond Texas? We run the same program in every state, including <a href="https://secondlifemac.com/apple-device-buyback-california/">California</a>, <a href="https://secondlifemac.com/apple-device-buyback-florida/">Florida</a>, and <a href="https://secondlifemac.com/apple-device-buyback-new-york/">New York</a>.</p>
+  </div>
+</section>
+
+<section class="block alt">
+  <div class="wrap center">
+    <span class="eyebrow">Questions</span>
+    <h2>Texas Apple buyback FAQ</h2>
+  </div>
+  <div class="faqwrap">
+    <details open><summary>How much are our retired Apple devices worth?</summary><p>Value depends on model, age, condition, and current market demand. We provide an itemized, transparent estimate per device before you commit to anything, and we help you time your refresh so you capture peak value rather than selling into a flooded market.</p></details>
+    <details><summary>Is our student data safe when we sell devices?</summary><p>Yes. Every device is erased using methods aligned with NIST 800-88 media sanitization standards before resale, with destruction documented by serial number so your district stays defensible under FERPA and Texas student data privacy requirements. See our <a href="https://secondlifemac.com/data-security/">data security page</a> for details.</p></details>
+    <details><summary>Do we have to wipe or prepare the devices first?</summary><p>No. Our Touchless Trade-in process is designed so your staff does not have to wipe, sort, or stage anything. Our Blue Glove team coordinates free pickup and handles processing for you.</p></details>
+    <details><summary>Can this work with our Texas cooperative purchasing contracts?</summary><p>Yes. We structure buyback agreements to align with the procurement vehicles Texas districts already use, including DIR contracts, Education Service Center arrangements, and co-ops like BuyBoard and TIPS.</p></details>
+    <details><summary>What happens to devices that cannot be resold?</summary><p>They are recycled responsibly to recognized industry standards rather than landfilled, supporting your district's sustainability commitments and reporting.</p></details>
+    <details><summary>Do you serve rural Texas districts, not just the big metros?</summary><p>Yes. Our free statewide pickup reaches districts of every size, from the largest urban systems to small districts served by their regional Education Service Center. Volume helps with logistics planning, but it is not a barrier to getting fair value.</p></details>
+    <details><summary>Can we sell devices that are broken, very old, or missing chargers?</summary><p>Often, yes. Non-working and older units frequently retain more value than districts expect, whether for refurbishment or responsible parts recovery and recycling. We give you an honest assessment of every cohort rather than turning hardware away.</p></details>
+    <details><summary>How quickly do we get paid after pickup?</summary><p>Payment follows the completion of processing, once each device has been tested, graded, erased, and logged. You receive itemized documentation alongside payment so your business office can reconcile the funds against your inventory.</p></details>
+    <details><summary>How do we get started?</summary><p>Request a Refresh Plan and send your device inventory. We return a valuation, schedule pickup, and handle the rest. <a href="https://secondlifemac.com/get-a-quote/">Start here.</a></p></details>
+  </div>
+</section>
+
+<section class="ctaband">
+  <div class="wrap">
+    <h2>Turn your Texas district's old Apple devices into new opportunities</h2>
+    <p class="lede center" style="font-size:19px">Get a transparent buyback estimate, free statewide pickup, and funding you can reinvest in students. You do not pay us. We pay you.</p>
+    <div style="margin-top:24px"><a class="btn btn-blue" href="https://secondlifemac.com/get-a-quote/">Get your Texas Refresh Plan</a></div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <div class="cols">
+      <div>
+        <img class="logo" src="https://secondlifemac.com/wp-content/uploads/2025/11/LOCKUP.svg" alt="Second Life Mac">
+        <div class="contact">Hello@SecondLifeMac.com</div>
+        <div class="contact">847-376-2757</div>
+        <p style="color:#8b97a8;margin-top:6px">7603 New Gross Point Road<br>Skokie, IL 60077</p>
+        <div class="socials">
+          <a href="https://www.linkedin.com/company/secondlifemac/" target="_blank" rel="noopener">LinkedIn</a>
+          <a href="https://x.com/SecondLifeMac" target="_blank" rel="noopener">X</a>
+          <a href="https://www.facebook.com/secondlifemac/" target="_blank" rel="noopener">Facebook</a>
+          <a href="https://www.instagram.com/secondlifemac/" target="_blank" rel="noopener">Instagram</a>
+        </div>
+      </div>
+      <div>
+        <h4>Who We Help</h4>
+        <a href="https://secondlifemac.com/school-it-asset-disposition/">Education</a>
+        <a href="https://secondlifemac.com/enterprise-itad/">Business</a>
+        <a href="https://secondlifemac.com/healthcare-it-asset-disposition/">Healthcare</a>
+        <a href="https://secondlifemac.com/school-districts/">School Districts</a>
+        <a href="https://secondlifemac.com/university-systems/">University Systems</a>
+      </div>
+      <div>
+        <h4>How It Works</h4>
+        <a href="https://secondlifemac.com/apple-device-buyback/">Buyback Process</a>
+        <a href="https://secondlifemac.com/what-we-buy/">What We Buy</a>
+        <a href="https://secondlifemac.com/data-security/">Data Security</a>
+        <a href="https://secondlifemac.com/get-a-quote/">Get a Refresh Plan</a>
+      </div>
+      <div>
+        <h4>Resource Center</h4>
+        <a href="https://secondlifemac.com/white-papers/">White Papers</a>
+        <a href="https://secondlifemac.com/case-studies/">Case Studies</a>
+        <a href="https://secondlifemac.com/videos/">Video Library</a>
+        <a href="https://secondlifemac.com/about-us/">About Us</a>
+      </div>
+    </div>
+    <div class="legal">
+      &copy; 2026 Second Life Mac. Concept demonstration page prepared by Mark Gabrielli, not affiliated live content. &nbsp; <a href="https://secondlifemac.com/privacy-policy/">Privacy Policy</a> &nbsp; <a href="https://secondlifemac.com/terms-of-use/">Terms of Use</a>
+    </div>
+  </div>
+</footer>
+
+<script type="application/ld+json">
+{
+  "@context":"https://schema.org",
+  "@graph":[
+    {"@type":"Service","name":"Apple Device Buyback for Texas Schools","serviceType":"Apple device buyback and IT asset disposition","areaServed":{"@type":"State","name":"Texas"},"audience":{"@type":"EducationalAudience","educationalRole":"school district"},"provider":{"@type":"Organization","name":"Second Life Mac","url":"https://secondlifemac.com/"},"description":"Secure Apple device buyback for Texas school districts, charter networks, community colleges, and university systems, with FERPA and Texas-compliant data erasure and free statewide pickup."},
+    {"@type":"BreadcrumbList","itemListElement":[
+      {"@type":"ListItem","position":1,"name":"Home","item":"https://secondlifemac.com/"},
+      {"@type":"ListItem","position":2,"name":"Education","item":"https://secondlifemac.com/school-it-asset-disposition/"},
+      {"@type":"ListItem","position":3,"name":"Apple Device Buyback","item":"https://secondlifemac.com/apple-device-buyback/"},
+      {"@type":"ListItem","position":4,"name":"Texas"}
+    ]},
+    {"@type":"FAQPage","mainEntity":[
+      {"@type":"Question","name":"How much are our retired Apple devices worth?","acceptedAnswer":{"@type":"Answer","text":"Value depends on model, age, condition, and market demand. We provide an itemized, transparent estimate per device before you commit, and help you time your refresh to capture peak value."}},
+      {"@type":"Question","name":"Is our student data safe when we sell devices?","acceptedAnswer":{"@type":"Answer","text":"Yes. Every device is erased using methods aligned with NIST 800-88 standards before resale, with destruction documented by serial number to keep your district defensible under FERPA and Texas student data privacy requirements."}},
+      {"@type":"Question","name":"Do we have to wipe or prepare the devices first?","acceptedAnswer":{"@type":"Answer","text":"No. Our Touchless Trade-in process means staff do not wipe, sort, or stage devices. Our Blue Glove team coordinates free pickup and handles processing."}},
+      {"@type":"Question","name":"Can this work with our Texas cooperative purchasing contracts?","acceptedAnswer":{"@type":"Answer","text":"Yes. We structure buyback agreements to align with Texas procurement vehicles including DIR contracts, Education Service Centers, and co-ops like BuyBoard and TIPS."}}
+    ]}
+  ]
+}
+</script>
+
+</body>
+</html>

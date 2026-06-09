@@ -1,0 +1,10 @@
+# Keep the EAS upload small; the build server reinstalls deps from package-lock.json.
+node_modules/
+dist/
+.expo/
+*.log
+install-step1.log
+install-step2.log
+export-check.log
+eas-build.log
+.git/

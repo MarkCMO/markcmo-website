@@ -293,39 +293,50 @@ export async function onRequest(context) {
         };
         candAudit.step = 'composed';
 
-        // DELETE the scheduled templated recap so the prospect doesn't
-        // receive both. Use the followup_resend_id stored on engagement
-        // metadata during the original booking.
-        let oldRecapId = null;
-        try {
-          const eng = await sbSelect(env, `mc_engagements?id=eq.${encodeURIComponent(cand.engagement_id)}&select=metadata&limit=1`);
-          oldRecapId = eng[0]?.metadata?.followup_resend_id || null;
-        } catch (_) {}
-        if (oldRecapId) {
-          candAudit.old_recap_id = oldRecapId;
-          try {
-            // POST /cancel - Resend doesn't support DELETE on scheduled emails
-            const delRes = await fetch(`https://api.resend.com/emails/${encodeURIComponent(oldRecapId)}/cancel`, {
-              method: 'POST',
-              headers: { Authorization: `Bearer ${env.RESEND_API_KEY}` },
-            });
-            candAudit.old_recap_cancel_status = delRes.status;
-          } catch (e) {
-            candAudit.old_recap_cancel_status = `err: ${(e && e.message) || String(e)}`;
-          }
-        }
-
-        // Send the personalized recap NOW (if the templated one was
-        // already scheduled to send in <30 min, sending now is fine -
-        // recipient gets exactly one recap email either way).
+        // Compose the personalized recap FIRST. If Gemini extracted no
+        // usable content (no summary AND no action items), the function
+        // returns { skipped: true } - in that case we leave the original
+        // safe placeholder alone so SOMETHING benign goes out. Only when
+        // a real personalized recap is going out do we cancel the placeholder.
         candAudit.step = 'sending_personalized';
         const sendResult = await sendPersonalizedRecap(env, { cand, sections });
-        candAudit.new_recap_id = sendResult.resend_id;
-        candAudit.new_recap_status = sendResult.status;
-        candAudit.step = sendResult.ok ? 'sent' : 'send_failed';
-        event = sendResult.ok ? 'gemini_recap_sent' : 'gemini_recap_failed';
 
-        run.processed.push({ engagement_id: cand.engagement_id, doc: match.name, resend_id: sendResult.resend_id });
+        if (sendResult.skipped) {
+          // Empty Gemini doc - keep the safe placeholder, don't fabricate.
+          candAudit.new_recap_id = null;
+          candAudit.new_recap_status = 0;
+          candAudit.personalized_skipped_reason = sendResult.reason;
+          candAudit.step = 'personalized_skipped_kept_placeholder';
+          event = 'gemini_recap_skipped_empty';
+          run.skipped.push({ engagement_id: cand.engagement_id, reason: 'gemini_doc_empty' });
+        } else {
+          // Real personalized recap sent. Now cancel the safe placeholder
+          // so the prospect doesn't receive two emails.
+          let oldRecapId = null;
+          try {
+            const eng = await sbSelect(env, `mc_engagements?id=eq.${encodeURIComponent(cand.engagement_id)}&select=metadata&limit=1`);
+            oldRecapId = eng[0]?.metadata?.followup_resend_id || null;
+          } catch (_) {}
+          if (oldRecapId) {
+            candAudit.old_recap_id = oldRecapId;
+            try {
+              // POST /cancel - Resend doesn't support DELETE on scheduled emails
+              const delRes = await fetch(`https://api.resend.com/emails/${encodeURIComponent(oldRecapId)}/cancel`, {
+                method: 'POST',
+                headers: { Authorization: `Bearer ${env.RESEND_API_KEY}` },
+              });
+              candAudit.old_recap_cancel_status = delRes.status;
+            } catch (e) {
+              candAudit.old_recap_cancel_status = `err: ${(e && e.message) || String(e)}`;
+            }
+          }
+
+          candAudit.new_recap_id = sendResult.resend_id;
+          candAudit.new_recap_status = sendResult.status;
+          candAudit.step = sendResult.ok ? 'sent' : 'send_failed';
+          event = sendResult.ok ? 'gemini_recap_sent' : 'gemini_recap_failed';
+          run.processed.push({ engagement_id: cand.engagement_id, doc: match.name, resend_id: sendResult.resend_id });
+        }
       } catch (err) {
         candAudit.error_message = (err && err.message) || String(err);
         candAudit.error_stack = (err && err.stack) ? String(err.stack).substring(0, 1500) : null;
@@ -347,23 +358,36 @@ export async function onRequest(context) {
 }
 
 // ───── Send personalized recap via Resend ────────────────────────
+// HARD RULE (Mark's directive): never send a recap that fabricates what
+// was discussed. We only include content that came directly from the
+// Gemini Notetaker doc. If a section is empty, we OMIT it - we do NOT
+// fall back to canned bullets.
+//
+// Decision matrix based on what Gemini extracted:
+//   - summary + action items   -> full personalized recap with bullets
+//   - summary only             -> short note with summary, no bullets
+//   - action items only        -> short note with bullets, no summary
+//   - neither                  -> RETURN { skip: true } and let the
+//                                 safe placeholder from booking time
+//                                 go out instead (it fabricates nothing)
 async function sendPersonalizedRecap(env, { cand, sections }) {
   const _n = (cand.event_name || '').toLowerCase();
   const isWetyr = _n.indexOf('wetyr') >= 0;
   const firstName = (cand.invitee_name || '').split(' ')[0] || 'there';
-  const fromAddr = isWetyr ? 'WETYR <info@wetyr.com>' : 'Mark Gabrielli <mark@markcmo.com>';
-  const replyTo = isWetyr ? 'info@wetyr.com' : 'mark@markcmo.com';
-  const subject = isWetyr ? `Following up on our WETYR meeting` : `Recap from our meeting`;
+  // Mark's directive: WETYR bookings get MarkCMO-branded mail (unified)
+  const fromAddr = 'Mark Gabrielli <mark@markcmo.com>';
+  const replyTo = 'mark@markcmo.com';
 
-  // ─── Compose body with the actual Gemini-pulled content ───
-  // Falls back gracefully if Gemini didn't produce a given section.
-  const summary = sections.summary || '';
+  const summary = (sections.summary || '').trim();
   const actionItems = sections.actionItems?.length ? sections.actionItems : [];
-  const keyPoints = sections.keyPoints?.length ? sections.keyPoints : [];
+  // Empty content - bail out, let the safe placeholder (no bullets, no
+  // assumptions) go through unmodified.
+  if (!summary && !actionItems.length) {
+    return { ok: true, skipped: true, reason: 'no_extractable_content', resend_id: null, status: 0 };
+  }
 
-  // Split action items into "Mark's" vs "theirs" - actions mentioning
-  // "Mark", "I will", "follow up" lean Mark; "you", "send", "share"
-  // lean prospect. Heuristic but it works on Gemini's standard output.
+  // Split action items into "Mark's" vs "theirs" using simple keyword
+  // heuristics on Gemini's standard "Action Items" output.
   const yoursWords = ['mark', 'i will', "i'll", 'follow up', 'send you', 'share with', 'review', 'put together', 'draft'];
   const theirsWords = ['you ', 'your ', 'send me', 'share', 'provide', 'forward'];
   const yoursActions = [];
@@ -375,48 +399,38 @@ async function sendPersonalizedRecap(env, { cand, sections }) {
     if (theirsScore > yoursScore) theirsActions.push(item);
     else yoursActions.push(item);
   }
+  const expectFromMe = yoursActions.slice(0, 4);
+  const needFromYou = theirsActions.slice(0, 4);
 
-  // Sensible defaults if no actions were extracted
-  const fallbackYours = isWetyr ? [
-    'A direct cash offer or pass with reasons within 48 hours',
-    'A clean term sheet if we move forward',
-    'Direct line at info@wetyr.com for questions',
-  ] : [
-    'A follow-up note within 24 hours with the agenda we agreed on',
-    'A specific proposal aligned with the outcomes you want',
-    'Direct access at mark@markcmo.com for any questions',
-  ];
-  const fallbackTheirs = isWetyr ? [
-    'The property details (address, condition, any liens)',
-    'Your number and timeline',
-    'Decision-maker confirmation if more than one party is involved',
-  ] : [
-    'The materials we discussed (slides, dashboards, ad accounts, KPIs)',
-    'The 1-3 specific outcomes you want from our engagement',
-    'A signoff on the proposal scope before I begin work',
-  ];
-
-  const expectFromMe = yoursActions.length ? yoursActions.slice(0, 4) : fallbackYours;
-  const needFromYou = theirsActions.length ? theirsActions.slice(0, 4) : fallbackTheirs;
-
-  // Optional opening line if Gemini produced a summary
+  const subject = `Recap from our meeting`;
   const opener = summary
-    ? `Thanks for the time today. Quick recap of what stood out: ${summary.substring(0, 320)}`
-    : `Thanks for the time today. Really enjoyed the conversation.`;
+    ? `Thanks for the time today. Quick recap of what stood out: ${summary.substring(0, 480)}`
+    : `Thanks for the time today.`;
+
+  // Build body sections only when we have real content for them
+  const yoursBlock = expectFromMe.length
+    ? `\n\nHere's what you can expect from me:\n${expectFromMe.map(b => `- ${b}`).join('\n')}`
+    : '';
+  const theirsBlock = needFromYou.length
+    ? `\n\nHere's what I'll need from you:\n${needFromYou.map(b => `- ${b}`).join('\n')}`
+    : '';
 
   const text = `Hi ${firstName},
 
-${opener}
-
-Here's what you can expect from me:
-${expectFromMe.map(b => `- ${b}`).join('\n')}
-
-Here's what I'll need from you:
-${needFromYou.map(b => `- ${b}`).join('\n')}
+${opener}${yoursBlock}${theirsBlock}
 
 Reply to this email with anything I missed. Looking forward to the next step.
 
 Mark`;
+
+  const yoursBlockHtml = expectFromMe.length
+    ? `<p style="margin:0 0 8px;"><strong>Here's what you can expect from me:</strong></p>
+       <ul style="margin:0 0 14px;padding-left:22px;">${expectFromMe.map(b => `<li style="margin:0 0 4px;">${esc(b)}</li>`).join('')}</ul>`
+    : '';
+  const theirsBlockHtml = needFromYou.length
+    ? `<p style="margin:0 0 8px;"><strong>Here's what I'll need from you:</strong></p>
+       <ul style="margin:0 0 14px;padding-left:22px;">${needFromYou.map(b => `<li style="margin:0 0 4px;">${esc(b)}</li>`).join('')}</ul>`
+    : '';
 
   const html = `<!DOCTYPE html>
 <html><head><meta charset="UTF-8"></head>
@@ -424,10 +438,8 @@ Mark`;
   <div style="max-width:560px;margin:0 auto;padding:24px;font-size:15px;line-height:1.6;">
     <p style="margin:0 0 14px;">Hi ${esc(firstName)},</p>
     <p style="margin:0 0 14px;">${esc(opener)}</p>
-    <p style="margin:0 0 8px;"><strong>Here's what you can expect from me:</strong></p>
-    <ul style="margin:0 0 14px;padding-left:22px;">${expectFromMe.map(b => `<li style="margin:0 0 4px;">${esc(b)}</li>`).join('')}</ul>
-    <p style="margin:0 0 8px;"><strong>Here's what I'll need from you:</strong></p>
-    <ul style="margin:0 0 14px;padding-left:22px;">${needFromYou.map(b => `<li style="margin:0 0 4px;">${esc(b)}</li>`).join('')}</ul>
+    ${yoursBlockHtml}
+    ${theirsBlockHtml}
     <p style="margin:0 0 14px;">Reply to this email with anything I missed. Looking forward to the next step.</p>
     <p style="margin:0;">Mark</p>
   </div>

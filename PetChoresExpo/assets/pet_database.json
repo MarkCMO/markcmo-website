@@ -1,0 +1,390 @@
+{
+  "schemaVersion": "1.0",
+  "currency": "USD",
+  "note": "Costs are 2026 US ballpark ranges for training/simulation realism. Tasks drive the notification engine. difficulty 1=easiest, 5=hardest. recommendedMinAge is a guideline for the real animal, not the app.",
+  "pets": [
+    {
+      "id": "dog",
+      "name": "Dog",
+      "category": "mammal",
+      "difficulty": 4,
+      "recommendedMinAge": 8,
+      "lifespanYears": "10-15",
+      "blurb": "Loyal and loving but the highest daily commitment of common pets. Needs walks, training, and cleanup every single day.",
+      "supplies": [
+        {"item": "Food bowl + water bowl set", "cost": 20, "frequency": "once"},
+        {"item": "Collar, leash, ID tag", "cost": 35, "frequency": "once"},
+        {"item": "Crate or bed", "cost": 70, "frequency": "once"},
+        {"item": "Poop bags (monthly)", "cost": 10, "frequency": "monthly"},
+        {"item": "Dog food (monthly)", "cost": 60, "frequency": "monthly"},
+        {"item": "Toys + chews (monthly)", "cost": 20, "frequency": "monthly"},
+        {"item": "Annual vet checkup + vaccines", "cost": 250, "frequency": "yearly"},
+        {"item": "Flea/tick/heartworm prevention (monthly)", "cost": 40, "frequency": "monthly"}
+      ],
+      "startupCost": 125,
+      "monthlyCost": 130,
+      "yearlyCost": 1810,
+      "tasks": [
+        {"id": "dog_feed_am", "label": "Feed breakfast", "frequency": "daily", "timesPerDay": 1, "suggestedTime": "07:30", "difficulty": 1, "realAction": "Measure food, fill bowl, refresh water.", "consequence": "A hungry dog gets cranky and may chew things."},
+        {"id": "dog_feed_pm", "label": "Feed dinner", "frequency": "daily", "timesPerDay": 1, "suggestedTime": "18:00", "difficulty": 1, "realAction": "Measure food, fill bowl.", "consequence": "Skipping meals harms growth and energy."},
+        {"id": "dog_water", "label": "Refresh water", "frequency": "daily", "timesPerDay": 2, "suggestedTime": "07:30", "difficulty": 1, "realAction": "Dump old water, rinse bowl, refill fresh.", "consequence": "Dirty water spreads germs."},
+        {"id": "dog_walk_am", "label": "Morning walk", "frequency": "daily", "timesPerDay": 1, "suggestedTime": "08:00", "difficulty": 2, "realAction": "Leash up and walk 15-20 minutes.", "consequence": "No walk means accidents in the house and pent-up energy."},
+        {"id": "dog_walk_pm", "label": "Evening walk", "frequency": "daily", "timesPerDay": 1, "suggestedTime": "17:30", "difficulty": 2, "realAction": "Leash up and walk 15-20 minutes.", "consequence": "Dogs need daily exercise to stay healthy."},
+        {"id": "dog_poop_yard", "label": "Pick up poop in the yard", "frequency": "daily", "timesPerDay": 1, "suggestedTime": "16:00", "difficulty": 3, "realAction": "Take a bag, find the poop, scoop it, tie the bag, throw it in the trash. Wash hands.", "consequence": "Leaving poop attracts flies, smells, and is unhealthy."},
+        {"id": "dog_play", "label": "Play / training time", "frequency": "daily", "timesPerDay": 1, "suggestedTime": "16:30", "difficulty": 2, "realAction": "Fetch, tug, or practice a command for 10 minutes.", "consequence": "Bored dogs misbehave."},
+        {"id": "dog_brush", "label": "Brush coat", "frequency": "weekly", "timesPerDay": 1, "suggestedTime": "10:00", "difficulty": 2, "realAction": "Brush fur to remove loose hair and check for ticks.", "consequence": "Matting and shedding everywhere."},
+        {"id": "dog_bath", "label": "Bath", "frequency": "monthly", "timesPerDay": 1, "suggestedTime": "11:00", "difficulty": 3, "realAction": "Wet, shampoo, rinse, towel dry.", "consequence": "A smelly, itchy dog."},
+        {"id": "dog_nails", "label": "Nail trim", "frequency": "monthly", "timesPerDay": 1, "suggestedTime": "11:30", "difficulty": 4, "realAction": "Ask a grown-up to trim or file nails.", "consequence": "Long nails hurt the dog's paws."},
+        {"id": "dog_vet", "label": "Vet checkup", "frequency": "yearly", "timesPerDay": 1, "suggestedTime": "09:00", "difficulty": 3, "realAction": "Annual exam, vaccines, weigh-in.", "consequence": "Missed checkups let illness go unnoticed."}
+      ]
+    },
+    {
+      "id": "cat",
+      "name": "Cat",
+      "category": "mammal",
+      "difficulty": 3,
+      "recommendedMinAge": 7,
+      "lifespanYears": "12-18",
+      "blurb": "More independent than a dog but the litter box is a daily, non-negotiable job.",
+      "supplies": [
+        {"item": "Litter box + scoop", "cost": 30, "frequency": "once"},
+        {"item": "Food + water bowls", "cost": 15, "frequency": "once"},
+        {"item": "Scratching post", "cost": 30, "frequency": "once"},
+        {"item": "Cat litter (monthly)", "cost": 20, "frequency": "monthly"},
+        {"item": "Cat food (monthly)", "cost": 40, "frequency": "monthly"},
+        {"item": "Toys (monthly)", "cost": 10, "frequency": "monthly"},
+        {"item": "Annual vet + vaccines", "cost": 200, "frequency": "yearly"},
+        {"item": "Flea prevention (monthly)", "cost": 15, "frequency": "monthly"}
+      ],
+      "startupCost": 75,
+      "monthlyCost": 85,
+      "yearlyCost": 1220,
+      "tasks": [
+        {"id": "cat_feed_am", "label": "Feed breakfast", "frequency": "daily", "timesPerDay": 1, "suggestedTime": "07:30", "difficulty": 1, "realAction": "Measure food, fill bowl.", "consequence": "Hungry cats meow and beg all day."},
+        {"id": "cat_feed_pm", "label": "Feed dinner", "frequency": "daily", "timesPerDay": 1, "suggestedTime": "18:00", "difficulty": 1, "realAction": "Measure food, fill bowl.", "consequence": "Cats need regular meals."},
+        {"id": "cat_water", "label": "Refresh water", "frequency": "daily", "timesPerDay": 1, "suggestedTime": "07:30", "difficulty": 1, "realAction": "Fresh water daily.", "consequence": "Cats avoid dirty water and can get dehydrated."},
+        {"id": "cat_litter_scoop", "label": "Scoop the litter box", "frequency": "daily", "timesPerDay": 1, "suggestedTime": "08:00", "difficulty": 3, "realAction": "Scoop clumps into a bag, tie it, throw it away. Wash hands.", "consequence": "A dirty box makes the cat pee outside it."},
+        {"id": "cat_play", "label": "Play time", "frequency": "daily", "timesPerDay": 1, "suggestedTime": "16:30", "difficulty": 1, "realAction": "Wand toy or laser for 10 minutes.", "consequence": "Bored cats get destructive."},
+        {"id": "cat_litter_full", "label": "Full litter change", "frequency": "weekly", "timesPerDay": 1, "suggestedTime": "10:00", "difficulty": 3, "realAction": "Dump all litter, wash the box, add fresh litter.", "consequence": "Smell builds up fast."},
+        {"id": "cat_brush", "label": "Brush coat", "frequency": "weekly", "timesPerDay": 1, "suggestedTime": "10:30", "difficulty": 2, "realAction": "Brush to reduce hairballs and shedding.", "consequence": "Hairballs and matting."},
+        {"id": "cat_nails", "label": "Nail trim", "frequency": "monthly", "timesPerDay": 1, "suggestedTime": "11:00", "difficulty": 4, "realAction": "Grown-up helps trim nails.", "consequence": "Scratched furniture and snagged claws."},
+        {"id": "cat_vet", "label": "Vet checkup", "frequency": "yearly", "timesPerDay": 1, "suggestedTime": "09:00", "difficulty": 3, "realAction": "Annual exam and vaccines.", "consequence": "Hidden illness."}
+      ]
+    },
+    {
+      "id": "rabbit",
+      "name": "Rabbit",
+      "category": "mammal",
+      "difficulty": 3,
+      "recommendedMinAge": 8,
+      "lifespanYears": "8-12",
+      "blurb": "Quiet and soft but needs a big clean space, daily hay, and gentle handling.",
+      "supplies": [
+        {"item": "Hutch or large pen", "cost": 90, "frequency": "once"},
+        {"item": "Water bottle + food bowl", "cost": 15, "frequency": "once"},
+        {"item": "Litter box", "cost": 15, "frequency": "once"},
+        {"item": "Hay (monthly)", "cost": 25, "frequency": "monthly"},
+        {"item": "Pellets + greens (monthly)", "cost": 25, "frequency": "monthly"},
+        {"item": "Bedding (monthly)", "cost": 15, "frequency": "monthly"},
+        {"item": "Annual vet (exotic)", "cost": 120, "frequency": "yearly"}
+      ],
+      "startupCost": 120,
+      "monthlyCost": 65,
+      "yearlyCost": 1020,
+      "tasks": [
+        {"id": "rabbit_hay", "label": "Refill hay", "frequency": "daily", "timesPerDay": 1, "suggestedTime": "08:00", "difficulty": 1, "realAction": "Top up unlimited fresh hay.", "consequence": "Rabbits must eat hay constantly or their tummy stops working."},
+        {"id": "rabbit_water", "label": "Fresh water", "frequency": "daily", "timesPerDay": 1, "suggestedTime": "08:00", "difficulty": 1, "realAction": "Clean and refill water bottle.", "consequence": "Dehydration."},
+        {"id": "rabbit_greens", "label": "Give fresh greens", "frequency": "daily", "timesPerDay": 1, "suggestedTime": "17:00", "difficulty": 1, "realAction": "A handful of washed leafy greens.", "consequence": "Poor diet and unhappy bunny."},
+        {"id": "rabbit_spot_clean", "label": "Spot-clean litter corner", "frequency": "daily", "timesPerDay": 1, "suggestedTime": "08:30", "difficulty": 2, "realAction": "Scoop the dirty corner, wash hands.", "consequence": "Ammonia smell harms their lungs."},
+        {"id": "rabbit_exercise", "label": "Out-of-pen play", "frequency": "daily", "timesPerDay": 1, "suggestedTime": "16:30", "difficulty": 2, "realAction": "Supervised hop time in a safe space.", "consequence": "Bored, unhealthy rabbit."},
+        {"id": "rabbit_deep_clean", "label": "Deep clean hutch", "frequency": "weekly", "timesPerDay": 1, "suggestedTime": "10:00", "difficulty": 3, "realAction": "Replace all bedding, scrub the floor.", "consequence": "Disease and flies."},
+        {"id": "rabbit_brush", "label": "Brush fur", "frequency": "weekly", "timesPerDay": 1, "suggestedTime": "10:30", "difficulty": 2, "realAction": "Brush gently, especially when shedding.", "consequence": "Swallowed fur can block their gut."},
+        {"id": "rabbit_nails", "label": "Nail trim", "frequency": "monthly", "timesPerDay": 1, "suggestedTime": "11:00", "difficulty": 4, "realAction": "Grown-up trims nails.", "consequence": "Painful overgrown nails."},
+        {"id": "rabbit_vet", "label": "Vet checkup", "frequency": "yearly", "timesPerDay": 1, "suggestedTime": "09:00", "difficulty": 3, "realAction": "Exotic vet exam.", "consequence": "Hidden illness, rabbits hide pain."}
+      ]
+    },
+    {
+      "id": "hamster",
+      "name": "Hamster",
+      "category": "small_mammal",
+      "difficulty": 2,
+      "recommendedMinAge": 8,
+      "lifespanYears": "2-3",
+      "blurb": "Small, cheap, and nocturnal. A good starter pet but still needs daily care and a weekly cage clean.",
+      "supplies": [
+        {"item": "Cage with wheel", "cost": 50, "frequency": "once"},
+        {"item": "Water bottle + food dish", "cost": 12, "frequency": "once"},
+        {"item": "Hideout + chew toys", "cost": 15, "frequency": "once"},
+        {"item": "Bedding (monthly)", "cost": 12, "frequency": "monthly"},
+        {"item": "Food (monthly)", "cost": 10, "frequency": "monthly"},
+        {"item": "Treats (monthly)", "cost": 5, "frequency": "monthly"}
+      ],
+      "startupCost": 77,
+      "monthlyCost": 27,
+      "yearlyCost": 401,
+      "tasks": [
+        {"id": "hamster_food", "label": "Refill food", "frequency": "daily", "timesPerDay": 1, "suggestedTime": "19:00", "difficulty": 1, "realAction": "Top up the food dish in the evening.", "consequence": "Hungry hamster."},
+        {"id": "hamster_water", "label": "Check water bottle", "frequency": "daily", "timesPerDay": 1, "suggestedTime": "19:00", "difficulty": 1, "realAction": "Make sure the bottle works and is full.", "consequence": "A stuck bottle means no water."},
+        {"id": "hamster_spot_clean", "label": "Spot-clean potty corner", "frequency": "daily", "timesPerDay": 1, "suggestedTime": "19:15", "difficulty": 1, "realAction": "Scoop the wet corner.", "consequence": "Smell and germs."},
+        {"id": "hamster_handle", "label": "Gentle handling", "frequency": "daily", "timesPerDay": 1, "suggestedTime": "20:00", "difficulty": 2, "realAction": "Let it come to your hand, hold low over a soft surface.", "consequence": "Untamed, nippy hamster."},
+        {"id": "hamster_clean", "label": "Full cage clean", "frequency": "weekly", "timesPerDay": 1, "suggestedTime": "10:00", "difficulty": 3, "realAction": "Replace bedding, wash dishes and wheel.", "consequence": "Bad smell, sick pet."}
+      ]
+    },
+    {
+      "id": "guinea_pig",
+      "name": "Guinea Pig",
+      "category": "small_mammal",
+      "difficulty": 3,
+      "recommendedMinAge": 7,
+      "lifespanYears": "5-7",
+      "blurb": "Social and vocal, best kept in pairs. Needs daily hay, vitamin C, and frequent cleaning.",
+      "supplies": [
+        {"item": "Large cage", "cost": 70, "frequency": "once"},
+        {"item": "Water bottle + hay rack", "cost": 18, "frequency": "once"},
+        {"item": "Hideout", "cost": 15, "frequency": "once"},
+        {"item": "Hay (monthly)", "cost": 25, "frequency": "monthly"},
+        {"item": "Pellets + veggies (monthly)", "cost": 30, "frequency": "monthly"},
+        {"item": "Bedding (monthly)", "cost": 18, "frequency": "monthly"},
+        {"item": "Annual vet (exotic)", "cost": 100, "frequency": "yearly"}
+      ],
+      "startupCost": 103,
+      "monthlyCost": 73,
+      "yearlyCost": 1079,
+      "tasks": [
+        {"id": "gp_hay", "label": "Refill hay", "frequency": "daily", "timesPerDay": 1, "suggestedTime": "08:00", "difficulty": 1, "realAction": "Unlimited fresh hay.", "consequence": "Their gut needs constant hay."},
+        {"id": "gp_water", "label": "Fresh water", "frequency": "daily", "timesPerDay": 1, "suggestedTime": "08:00", "difficulty": 1, "realAction": "Clean and refill bottle.", "consequence": "Dehydration."},
+        {"id": "gp_veggies", "label": "Vitamin C veggies", "frequency": "daily", "timesPerDay": 1, "suggestedTime": "17:00", "difficulty": 1, "realAction": "Bell pepper or leafy greens daily.", "consequence": "Guinea pigs get sick without vitamin C."},
+        {"id": "gp_spot_clean", "label": "Spot-clean cage", "frequency": "daily", "timesPerDay": 1, "suggestedTime": "08:30", "difficulty": 2, "realAction": "Remove wet bedding and droppings.", "consequence": "Smell and foot infections."},
+        {"id": "gp_floor_time", "label": "Floor time / cuddle", "frequency": "daily", "timesPerDay": 1, "suggestedTime": "16:30", "difficulty": 1, "realAction": "Supervised lap or pen time.", "consequence": "Lonely, stressed pet."},
+        {"id": "gp_clean", "label": "Full cage clean", "frequency": "weekly", "timesPerDay": 1, "suggestedTime": "10:00", "difficulty": 3, "realAction": "Replace all bedding, wash the cage.", "consequence": "Disease."},
+        {"id": "gp_vet", "label": "Vet checkup", "frequency": "yearly", "timesPerDay": 1, "suggestedTime": "09:00", "difficulty": 3, "realAction": "Exotic vet exam.", "consequence": "Hidden illness."}
+      ]
+    },
+    {
+      "id": "fish",
+      "name": "Fish (Freshwater Tank)",
+      "category": "aquatic",
+      "difficulty": 3,
+      "recommendedMinAge": 6,
+      "lifespanYears": "2-5",
+      "blurb": "Looks easy but water chemistry is the real job. Overfeeding is the number one killer.",
+      "supplies": [
+        {"item": "10-20 gal tank + lid + light", "cost": 80, "frequency": "once"},
+        {"item": "Filter + heater", "cost": 50, "frequency": "once"},
+        {"item": "Gravel + decor + net", "cost": 30, "frequency": "once"},
+        {"item": "Water test kit", "cost": 20, "frequency": "once"},
+        {"item": "Fish food (monthly)", "cost": 8, "frequency": "monthly"},
+        {"item": "Water conditioner (monthly)", "cost": 7, "frequency": "monthly"},
+        {"item": "Replacement filter media (monthly)", "cost": 8, "frequency": "monthly"}
+      ],
+      "startupCost": 180,
+      "monthlyCost": 23,
+      "yearlyCost": 456,
+      "tasks": [
+        {"id": "fish_feed", "label": "Feed fish (small pinch)", "frequency": "daily", "timesPerDay": 1, "suggestedTime": "17:00", "difficulty": 1, "realAction": "A tiny pinch they finish in 2 minutes. No more.", "consequence": "Overfeeding fouls the water and kills fish."},
+        {"id": "fish_observe", "label": "Check fish + temperature", "frequency": "daily", "timesPerDay": 1, "suggestedTime": "17:05", "difficulty": 1, "realAction": "Count the fish, watch how they swim, read the thermometer.", "consequence": "Catch sickness early."},
+        {"id": "fish_test", "label": "Test water", "frequency": "weekly", "timesPerDay": 1, "suggestedTime": "10:00", "difficulty": 3, "realAction": "Test ammonia, nitrite, pH with the kit.", "consequence": "Bad water poisons fish silently."},
+        {"id": "fish_water_change", "label": "25% water change", "frequency": "weekly", "timesPerDay": 1, "suggestedTime": "10:30", "difficulty": 3, "realAction": "Siphon out a quarter, add conditioned water of the same temperature.", "consequence": "Waste builds up and harms fish."},
+        {"id": "fish_glass", "label": "Wipe glass + check filter", "frequency": "weekly", "timesPerDay": 1, "suggestedTime": "11:00", "difficulty": 2, "realAction": "Wipe algae, make sure the filter flows.", "consequence": "Green tank, weak filtration."},
+        {"id": "fish_filter_media", "label": "Rinse/replace filter media", "frequency": "monthly", "timesPerDay": 1, "suggestedTime": "11:00", "difficulty": 2, "realAction": "Rinse media in tank water, replace if clogged.", "consequence": "Clogged filter."}
+      ]
+    },
+    {
+      "id": "betta",
+      "name": "Betta Fish",
+      "category": "aquatic",
+      "difficulty": 2,
+      "recommendedMinAge": 6,
+      "lifespanYears": "2-4",
+      "blurb": "A great solo starter fish, but it still needs a heated, filtered 5 gallon tank, not a tiny bowl.",
+      "supplies": [
+        {"item": "5 gal tank + lid", "cost": 40, "frequency": "once"},
+        {"item": "Small filter + heater", "cost": 35, "frequency": "once"},
+        {"item": "Thermometer + decor", "cost": 20, "frequency": "once"},
+        {"item": "Water test strips", "cost": 12, "frequency": "once"},
+        {"item": "Betta pellets (monthly)", "cost": 6, "frequency": "monthly"},
+        {"item": "Water conditioner (monthly)", "cost": 6, "frequency": "monthly"}
+      ],
+      "startupCost": 107,
+      "monthlyCost": 12,
+      "yearlyCost": 251,
+      "tasks": [
+        {"id": "betta_feed", "label": "Feed 2-3 pellets", "frequency": "daily", "timesPerDay": 1, "suggestedTime": "17:00", "difficulty": 1, "realAction": "Just 2-3 pellets. One fast day per week is healthy.", "consequence": "Overfeeding causes bloat and dirty water."},
+        {"id": "betta_check", "label": "Check temperature + fish", "frequency": "daily", "timesPerDay": 1, "suggestedTime": "17:05", "difficulty": 1, "realAction": "Heater should hold 78-80F.", "consequence": "Cold bettas get sluggish and sick."},
+        {"id": "betta_water_change", "label": "25% water change", "frequency": "weekly", "timesPerDay": 1, "suggestedTime": "10:00", "difficulty": 2, "realAction": "Swap a quarter of the water with conditioned, temp-matched water.", "consequence": "Waste buildup."},
+        {"id": "betta_test", "label": "Test water", "frequency": "weekly", "timesPerDay": 1, "suggestedTime": "10:15", "difficulty": 2, "realAction": "Dip a test strip, check the chart.", "consequence": "Hidden water problems."}
+      ]
+    },
+    {
+      "id": "parakeet",
+      "name": "Parakeet / Budgie",
+      "category": "bird",
+      "difficulty": 3,
+      "recommendedMinAge": 8,
+      "lifespanYears": "7-10",
+      "blurb": "Smart, social birds best kept in pairs. Daily cage cleaning and lots of interaction.",
+      "supplies": [
+        {"item": "Cage + perches", "cost": 80, "frequency": "once"},
+        {"item": "Food + water cups", "cost": 12, "frequency": "once"},
+        {"item": "Toys + cuttlebone", "cost": 20, "frequency": "once"},
+        {"item": "Seed/pellet mix (monthly)", "cost": 15, "frequency": "monthly"},
+        {"item": "Cage liner + millet (monthly)", "cost": 10, "frequency": "monthly"},
+        {"item": "Avian vet (yearly)", "cost": 90, "frequency": "yearly"}
+      ],
+      "startupCost": 112,
+      "monthlyCost": 25,
+      "yearlyCost": 502,
+      "tasks": [
+        {"id": "bird_food", "label": "Fresh food", "frequency": "daily", "timesPerDay": 1, "suggestedTime": "08:00", "difficulty": 1, "realAction": "Empty seed hulls, refill with fresh food.", "consequence": "Empty hulls look full but starve the bird."},
+        {"id": "bird_water", "label": "Fresh water", "frequency": "daily", "timesPerDay": 1, "suggestedTime": "08:00", "difficulty": 1, "realAction": "Clean and refill water cup.", "consequence": "Birds foul water fast."},
+        {"id": "bird_liner", "label": "Change cage liner", "frequency": "daily", "timesPerDay": 1, "suggestedTime": "08:15", "difficulty": 2, "realAction": "Swap the paper liner at the bottom.", "consequence": "Droppings smell and breed germs."},
+        {"id": "bird_social", "label": "Talk / play time", "frequency": "daily", "timesPerDay": 1, "suggestedTime": "17:00", "difficulty": 1, "realAction": "Talk, whistle, or supervised out-of-cage time.", "consequence": "Lonely birds pluck feathers."},
+        {"id": "bird_deep_clean", "label": "Deep clean cage", "frequency": "weekly", "timesPerDay": 1, "suggestedTime": "10:00", "difficulty": 3, "realAction": "Wash bars, perches, dishes, and toys.", "consequence": "Disease."},
+        {"id": "bird_vet", "label": "Avian vet checkup", "frequency": "yearly", "timesPerDay": 1, "suggestedTime": "09:00", "difficulty": 3, "realAction": "Yearly exam with a bird vet.", "consequence": "Birds hide illness well."}
+      ]
+    },
+    {
+      "id": "turtle",
+      "name": "Turtle (Aquatic)",
+      "category": "reptile",
+      "difficulty": 4,
+      "recommendedMinAge": 10,
+      "lifespanYears": "20-40",
+      "blurb": "A decades-long commitment with serious tank, heat, and UVB needs. Can carry salmonella so hand-washing is critical.",
+      "supplies": [
+        {"item": "40+ gal tank", "cost": 150, "frequency": "once"},
+        {"item": "Filter (oversized)", "cost": 80, "frequency": "once"},
+        {"item": "Basking lamp + UVB bulb", "cost": 70, "frequency": "once"},
+        {"item": "Basking dock + thermometer", "cost": 40, "frequency": "once"},
+        {"item": "Turtle pellets (monthly)", "cost": 12, "frequency": "monthly"},
+        {"item": "Greens + treats (monthly)", "cost": 10, "frequency": "monthly"},
+        {"item": "UVB bulb replacement (yearly)", "cost": 35, "frequency": "yearly"},
+        {"item": "Exotic vet (yearly)", "cost": 120, "frequency": "yearly"}
+      ],
+      "startupCost": 340,
+      "monthlyCost": 22,
+      "yearlyCost": 759,
+      "tasks": [
+        {"id": "turtle_feed", "label": "Feed turtle", "frequency": "daily", "timesPerDay": 1, "suggestedTime": "16:00", "difficulty": 1, "realAction": "Feed a portion the size of its head. Wash hands after.", "consequence": "Overfeeding pollutes the tank fast."},
+        {"id": "turtle_basking", "label": "Check heat + UVB lamps", "frequency": "daily", "timesPerDay": 1, "suggestedTime": "08:00", "difficulty": 2, "realAction": "Basking spot 90F, water 75-78F, lamps on a timer.", "consequence": "Cold turtles get sick; no UVB causes shell disease."},
+        {"id": "turtle_skim", "label": "Skim uneaten food", "frequency": "daily", "timesPerDay": 1, "suggestedTime": "16:15", "difficulty": 1, "realAction": "Net out leftover food.", "consequence": "Rotting food fouls water."},
+        {"id": "turtle_water_change", "label": "25% water change", "frequency": "weekly", "timesPerDay": 1, "suggestedTime": "10:00", "difficulty": 3, "realAction": "Siphon and replace a quarter with conditioned water.", "consequence": "Dirty water causes shell and eye infections."},
+        {"id": "turtle_clean", "label": "Clean filter + dock", "frequency": "weekly", "timesPerDay": 1, "suggestedTime": "10:30", "difficulty": 3, "realAction": "Rinse filter media, scrub the basking dock.", "consequence": "Clogged filter, slimy dock."},
+        {"id": "turtle_uvb", "label": "Replace UVB bulb", "frequency": "yearly", "timesPerDay": 1, "suggestedTime": "09:00", "difficulty": 2, "realAction": "UVB output fades; replace yearly even if it still lights.", "consequence": "Invisible UVB loss leads to bone disease."},
+        {"id": "turtle_vet", "label": "Vet checkup", "frequency": "yearly", "timesPerDay": 1, "suggestedTime": "09:00", "difficulty": 3, "realAction": "Reptile vet exam.", "consequence": "Hidden illness."}
+      ]
+    },
+    {
+      "id": "leopard_gecko",
+      "name": "Leopard Gecko",
+      "category": "reptile",
+      "difficulty": 3,
+      "recommendedMinAge": 9,
+      "lifespanYears": "10-20",
+      "blurb": "A calm, hardy reptile but needs live insects, correct heat, and a humid hide for shedding.",
+      "supplies": [
+        {"item": "20 gal terrarium + lid", "cost": 90, "frequency": "once"},
+        {"item": "Under-tank heat + thermostat", "cost": 50, "frequency": "once"},
+        {"item": "3 hides + thermometer", "cost": 35, "frequency": "once"},
+        {"item": "Substrate + water dish", "cost": 20, "frequency": "once"},
+        {"item": "Live insects (monthly)", "cost": 25, "frequency": "monthly"},
+        {"item": "Calcium + vitamin dust (monthly)", "cost": 6, "frequency": "monthly"},
+        {"item": "Exotic vet (yearly)", "cost": 90, "frequency": "yearly"}
+      ],
+      "startupCost": 195,
+      "monthlyCost": 31,
+      "yearlyCost": 657,
+      "tasks": [
+        {"id": "gecko_water", "label": "Fresh water + check humidity", "frequency": "daily", "timesPerDay": 1, "suggestedTime": "18:00", "difficulty": 1, "realAction": "Refresh the water dish, mist the humid hide.", "consequence": "Stuck shed and dehydration."},
+        {"id": "gecko_temp", "label": "Check temperatures", "frequency": "daily", "timesPerDay": 1, "suggestedTime": "08:00", "difficulty": 2, "realAction": "Warm side ~90F, cool side ~75F.", "consequence": "Wrong temps stop digestion."},
+        {"id": "gecko_feed", "label": "Feed dusted insects", "frequency": "daily", "timesPerDay": 1, "suggestedTime": "19:00", "difficulty": 2, "realAction": "Offer calcium-dusted insects (young geckos daily, adults every other day).", "consequence": "Poor diet causes weak bones."},
+        {"id": "gecko_spot_clean", "label": "Spot-clean poop", "frequency": "daily", "timesPerDay": 1, "suggestedTime": "19:10", "difficulty": 1, "realAction": "Remove droppings from the potty corner.", "consequence": "Bacteria buildup."},
+        {"id": "gecko_clean", "label": "Clean enclosure", "frequency": "weekly", "timesPerDay": 1, "suggestedTime": "10:00", "difficulty": 3, "realAction": "Wipe surfaces, wash hides and dish.", "consequence": "Mold and mites."},
+        {"id": "gecko_vet", "label": "Vet checkup", "frequency": "yearly", "timesPerDay": 1, "suggestedTime": "09:00", "difficulty": 3, "realAction": "Reptile vet exam.", "consequence": "Hidden illness."}
+      ]
+    },
+    {
+      "id": "tortoise",
+      "name": "Tortoise",
+      "category": "reptile",
+      "difficulty": 4,
+      "recommendedMinAge": 10,
+      "lifespanYears": "50-80",
+      "blurb": "A lifelong, even multi-generational pet. Needs a large space, UVB, and a constant supply of greens.",
+      "supplies": [
+        {"item": "Large enclosure / tortoise table", "cost": 160, "frequency": "once"},
+        {"item": "UVB + basking lamp", "cost": 70, "frequency": "once"},
+        {"item": "Substrate + hide + dish", "cost": 40, "frequency": "once"},
+        {"item": "Greens + weeds (monthly)", "cost": 30, "frequency": "monthly"},
+        {"item": "Calcium block (monthly)", "cost": 5, "frequency": "monthly"},
+        {"item": "UVB bulb replacement (yearly)", "cost": 35, "frequency": "yearly"},
+        {"item": "Exotic vet (yearly)", "cost": 110, "frequency": "yearly"}
+      ],
+      "startupCost": 270,
+      "monthlyCost": 35,
+      "yearlyCost": 835,
+      "tasks": [
+        {"id": "tortoise_food", "label": "Fresh greens", "frequency": "daily", "timesPerDay": 1, "suggestedTime": "09:00", "difficulty": 1, "realAction": "A salad of safe greens and weeds.", "consequence": "Poor diet causes shell deformities."},
+        {"id": "tortoise_water", "label": "Fresh water + soak", "frequency": "daily", "timesPerDay": 1, "suggestedTime": "09:00", "difficulty": 2, "realAction": "Clean water dish; young tortoises soak a few times a week.", "consequence": "Dehydration."},
+        {"id": "tortoise_lamps", "label": "Check UVB + heat", "frequency": "daily", "timesPerDay": 1, "suggestedTime": "08:00", "difficulty": 2, "realAction": "Basking ~95F, lamps on a timer.", "consequence": "No UVB means soft, deformed shell."},
+        {"id": "tortoise_spot_clean", "label": "Spot-clean enclosure", "frequency": "daily", "timesPerDay": 1, "suggestedTime": "16:00", "difficulty": 2, "realAction": "Remove waste and old food.", "consequence": "Bacteria and flies."},
+        {"id": "tortoise_clean", "label": "Deep clean enclosure", "frequency": "weekly", "timesPerDay": 1, "suggestedTime": "10:00", "difficulty": 3, "realAction": "Replace soiled substrate, scrub dishes.", "consequence": "Disease."},
+        {"id": "tortoise_uvb", "label": "Replace UVB bulb", "frequency": "yearly", "timesPerDay": 1, "suggestedTime": "09:00", "difficulty": 2, "realAction": "Replace yearly.", "consequence": "Invisible UVB loss harms the shell."},
+        {"id": "tortoise_vet", "label": "Vet checkup", "frequency": "yearly", "timesPerDay": 1, "suggestedTime": "09:00", "difficulty": 3, "realAction": "Reptile vet exam.", "consequence": "Hidden illness."}
+      ]
+    },
+    {
+      "id": "chicken",
+      "name": "Backyard Chickens",
+      "category": "poultry",
+      "difficulty": 4,
+      "recommendedMinAge": 9,
+      "lifespanYears": "5-10",
+      "blurb": "Fun and rewarding with fresh eggs, but daily letting-out, locking-up, and coop cleaning are essential, plus predator safety.",
+      "supplies": [
+        {"item": "Coop + run (per small flock)", "cost": 400, "frequency": "once"},
+        {"item": "Feeder + waterer", "cost": 40, "frequency": "once"},
+        {"item": "Bedding (monthly)", "cost": 20, "frequency": "monthly"},
+        {"item": "Layer feed (monthly)", "cost": 30, "frequency": "monthly"},
+        {"item": "Grit + oyster shell (monthly)", "cost": 8, "frequency": "monthly"},
+        {"item": "Vet / meds (yearly)", "cost": 60, "frequency": "yearly"}
+      ],
+      "startupCost": 440,
+      "monthlyCost": 58,
+      "yearlyCost": 1196,
+      "tasks": [
+        {"id": "chicken_open", "label": "Open the coop", "frequency": "daily", "timesPerDay": 1, "suggestedTime": "07:00", "difficulty": 1, "realAction": "Let the hens out into the run at sunrise.", "consequence": "Cooped-up, stressed birds."},
+        {"id": "chicken_feed", "label": "Feed + fresh water", "frequency": "daily", "timesPerDay": 1, "suggestedTime": "07:10", "difficulty": 1, "realAction": "Fill feeder and clean waterer.", "consequence": "Hens stop laying without food and water."},
+        {"id": "chicken_eggs", "label": "Collect eggs", "frequency": "daily", "timesPerDay": 1, "suggestedTime": "16:00", "difficulty": 1, "realAction": "Gather eggs from the nesting boxes.", "consequence": "Left eggs get broken or eaten."},
+        {"id": "chicken_close", "label": "Lock up the coop", "frequency": "daily", "timesPerDay": 1, "suggestedTime": "19:30", "difficulty": 2, "realAction": "Count the birds and lock the door at dusk.", "consequence": "Open coops let predators in overnight."},
+        {"id": "chicken_clean_run", "label": "Tidy the run", "frequency": "weekly", "timesPerDay": 1, "suggestedTime": "10:00", "difficulty": 2, "realAction": "Rake droppings, check fencing.", "consequence": "Disease and pests."},
+        {"id": "chicken_coop_clean", "label": "Deep clean coop", "frequency": "weekly", "timesPerDay": 1, "suggestedTime": "10:30", "difficulty": 3, "realAction": "Replace bedding, scrub nesting boxes.", "consequence": "Mites, smell, and sickness."},
+        {"id": "chicken_health", "label": "Health + predator check", "frequency": "weekly", "timesPerDay": 1, "suggestedTime": "11:00", "difficulty": 2, "realAction": "Check each bird and inspect fencing for gaps.", "consequence": "Missed illness or a weak spot in the fence."}
+      ]
+    },
+    {
+      "id": "tarantula",
+      "name": "Tarantula",
+      "category": "invertebrate",
+      "difficulty": 2,
+      "recommendedMinAge": 12,
+      "lifespanYears": "10-20 (females)",
+      "blurb": "Low daily effort and fascinating, but a hands-off, observation pet. Teaches patience and respect, not cuddling.",
+      "supplies": [
+        {"item": "Terrarium + lid", "cost": 40, "frequency": "once"},
+        {"item": "Substrate + hide", "cost": 20, "frequency": "once"},
+        {"item": "Water dish + thermometer", "cost": 12, "frequency": "once"},
+        {"item": "Live insects (monthly)", "cost": 12, "frequency": "monthly"}
+      ],
+      "startupCost": 72,
+      "monthlyCost": 12,
+      "yearlyCost": 216,
+      "tasks": [
+        {"id": "tarantula_water", "label": "Check water dish", "frequency": "daily", "timesPerDay": 1, "suggestedTime": "18:00", "difficulty": 1, "realAction": "Keep the small dish full of clean water.", "consequence": "Dehydration."},
+        {"id": "tarantula_observe", "label": "Observe + check humidity", "frequency": "daily", "timesPerDay": 1, "suggestedTime": "18:05", "difficulty": 1, "realAction": "Look but do not handle. Note if it is hiding to molt.", "consequence": "Disturbing a molting spider can kill it."},
+        {"id": "tarantula_feed", "label": "Feed insects", "frequency": "weekly", "timesPerDay": 1, "suggestedTime": "19:00", "difficulty": 2, "realAction": "Offer 1-3 insects weekly. Remove uneaten prey. Do not feed while molting.", "consequence": "Leftover crickets can hurt the spider."},
+        {"id": "tarantula_clean", "label": "Tidy enclosure", "frequency": "weekly", "timesPerDay": 1, "suggestedTime": "10:00", "difficulty": 2, "realAction": "Remove boluses (food leftovers) and old molts.", "consequence": "Mold and mites."}
+      ]
+    }
+  ]
+}

@@ -1,0 +1,54 @@
+- generic [active] [ref=e1]:
+  - banner [ref=e2]:
+    - button "Skip to content" [ref=e3] [cursor=pointer]:
+      - generic [ref=e5]: Skip to content
+    - button "Accessibility Feedback" [ref=e6] [cursor=pointer]:
+      - generic [ref=e8]: Accessibility Feedback
+    - generic [ref=e9]:
+      - link "Back to Bing search" [ref=e10] [cursor=pointer]:
+        - /url: /?FORM=Z9FD1
+        - heading "Back to Bing search" [level=1] [ref=e11]
+      - search [ref=e12]:
+        - button "Search" [ref=e15] [cursor=pointer]
+        - searchbox "Enter your search here - Search suggestions will show as you type" [ref=e16]: apple device buyback for schools
+        - button "Search using an image" [ref=e19] [cursor=pointer]
+    - complementary "Account Rewards and Preferences" [ref=e21]:
+      - button "Microsoft Rewards"
+      - link "Sign in" [ref=e22] [cursor=pointer]:
+        - /url: javascript:void(0)
+        - generic "Sign in" [ref=e23]
+    - navigation "Search Filter" [ref=e24]:
+      - list [ref=e25]:
+        - listitem [ref=e26]:
+          - link "All" [ref=e27] [cursor=pointer]:
+            - /url: /?scope=web&FORM=HDRSC1
+        - listitem [ref=e28]:
+          - link "Search" [ref=e29] [cursor=pointer]:
+            - /url: /copilotsearch?q=apple+device+buyback+for+schools&FORM=CSSCOP
+            - img [ref=e30]
+            - text: Search
+        - listitem [ref=e32]:
+          - link "Images" [ref=e33] [cursor=pointer]:
+            - /url: https://www.bing.com/ck/a?!&&p=817d5665787596e7d95173437b0b37c74a35b6dfdacadf3dd736a1e74236c9e5JmltdHM9MTc4MDk2MzIwMA&ptn=3&ver=2&hsh=4&fclid=0e70986d-bfe9-678b-2020-8f1ebebf66f6&u=a1L2ltYWdlcy9zZWFyY2g_cT1hcHBsZStkZXZpY2UrYnV5YmFjaytmb3Irc2Nob29scyZGT1JNPUhEUlNDMg&ntb=1
+        - listitem [ref=e34]:
+          - link "Videos" [ref=e35] [cursor=pointer]:
+            - /url: https://www.bing.com/ck/a?!&&p=d196c3fdeb4cfc6b47158041818677b3112997b94fb3702aa3cf8e4f4001a682JmltdHM9MTc4MDk2MzIwMA&ptn=3&ver=2&hsh=4&fclid=0e70986d-bfe9-678b-2020-8f1ebebf66f6&u=a1L3ZpZGVvcy9zZWFyY2g_cT1hcHBsZStkZXZpY2UrYnV5YmFjaytmb3Irc2Nob29scyZGT1JNPUhEUlNDMw&ntb=1
+        - listitem [ref=e36]:
+          - link "Maps" [ref=e37] [cursor=pointer]:
+            - /url: https://www.bing.com/ck/a?!&&p=4a98ee1f059fc3b3f35adde266b51ce609e8d8778726e59cebd6c1135b534c60JmltdHM9MTc4MDk2MzIwMA&ptn=3&ver=2&hsh=4&fclid=0e70986d-bfe9-678b-2020-8f1ebebf66f6&u=a1L21hcHM_cT1hcHBsZStkZXZpY2UrYnV5YmFjaytmb3Irc2Nob29scyZGT1JNPUhEUlNDNA&ntb=1
+        - listitem [ref=e38]:
+          - link "News" [ref=e39] [cursor=pointer]:
+            - /url: https://www.bing.com/ck/a?!&&p=823496568e2b3b7839469c592a4a21d5a846a755bafec3c73d13291f993ed989JmltdHM9MTc4MDk2MzIwMA&ptn=3&ver=2&hsh=4&fclid=0e70986d-bfe9-678b-2020-8f1ebebf66f6&u=a1L25ld3Mvc2VhcmNoP3E9YXBwbGUrZGV2aWNlK2J1eWJhY2srZm9yK3NjaG9vbHMmRk9STT1IRFJTQzY&ntb=1
+        - listitem [ref=e40]:
+          - button "More" [ref=e41] [cursor=pointer]:
+            - img [ref=e43]
+            - text: More
+  - contentinfo [ref=e45]:
+    - generic [ref=e46]:
+      - list:
+        - listitem [ref=e47]:
+          - link "Privacy" [ref=e48] [cursor=pointer]:
+            - /url: https://www.bing.com/ck/a?!&&p=0a839ff0eb404c78304f797c49214909153956b3d2f91880560ec9ea5ad0d921JmltdHM9MTc4MDk2MzIwMA&ptn=3&ver=2&hsh=4&fclid=0e70986d-bfe9-678b-2020-8f1ebebf66f6&u=a1aHR0cDovL2dvLm1pY3Jvc29mdC5jb20vZndsaW5rLz9MaW5rSWQ9NTIxODM5&ntb=1
+        - listitem [ref=e49]:
+          - link "Terms" [ref=e50] [cursor=pointer]:
+            - /url: https://www.bing.com/ck/a?!&&p=dc146d7a215a68207d7d3998eb31caacd0c69a58ec60b985197d41aaadc84626JmltdHM9MTc4MDk2MzIwMA&ptn=3&ver=2&hsh=4&fclid=0e70986d-bfe9-678b-2020-8f1ebebf66f6&u=a1aHR0cDovL2dvLm1pY3Jvc29mdC5jb20vZndsaW5rLz9MaW5rSUQ9MjQ2MzM4&ntb=1

@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>ROC Roofing | Engagement Invoice</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex, nofollow, noarchive, nosnippet, noimageindex">
+<meta http-equiv="Cache-Control" content="no-store, no-cache, must-revalidate, private">
+<link rel="icon" href="https://rocroofingfl.com/wp-content/uploads/2025/03/ROC-300x300-1.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800;900&family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+  :root{--red:#FA2905;--red-dark:#C81F02;--charcoal:#1F1F1F;--gray:#54595F;--text:#333;--muted:#757B82;--line:#E4E4E6;--white:#fff;--bg-soft:#F5F5F6;--green:#15803D;--amber:#946A00;--shadow:0 10px 40px rgba(0,0,0,0.08);}
+  *{box-sizing:border-box;margin:0;padding:0;}
+  body{font-family:'Montserrat',sans-serif;background:var(--bg-soft);color:var(--text);font-size:15px;line-height:1.6;-webkit-font-smoothing:antialiased;}
+  h1,h2,h3,h4{font-family:'Montserrat';color:var(--charcoal);font-weight:800;}
+  a{color:var(--red);text-decoration:none;}
+  .sheet{max-width:740px;margin:34px auto;background:#fff;box-shadow:var(--shadow);border-radius:14px;overflow:hidden;}
+  .head{background:var(--charcoal);color:#fff;padding:30px 40px;display:flex;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap;}
+  .head .l{display:flex;align-items:center;gap:14px;}
+  .head .l img{height:48px;background:#fff;border-radius:8px;padding:3px;}
+  .head .l .t{font-weight:900;text-transform:uppercase;font-size:1.05rem;letter-spacing:0.02em;line-height:1.05;}
+  .head .l .t span{color:var(--red);}
+  .head .lbl{font-family:'Roboto';font-size:0.7rem;letter-spacing:0.2em;text-transform:uppercase;color:#B9B9B9;text-align:right;}
+  .head .lbl b{color:#fff;display:block;font-size:0.95rem;letter-spacing:0.04em;}
+  .body{padding:32px 40px 40px;}
+  @media(max-width:560px){.head,.body{padding:24px 22px;}}
+  .pill{display:inline-block;background:#FFF4E0;color:var(--amber);font-family:'Roboto';font-size:0.64rem;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;padding:5px 11px;border-radius:20px;margin-bottom:18px;}
+  .meta{display:grid;grid-template-columns:1fr 1fr;gap:18px;margin-bottom:24px;}
+  @media(max-width:560px){.meta{grid-template-columns:1fr;}}
+  .meta h4{font-family:'Roboto';font-size:0.64rem;letter-spacing:0.1em;text-transform:uppercase;color:var(--muted);margin-bottom:6px;}
+  .meta .blk{font-size:0.9rem;color:var(--charcoal);}
+  table.items{width:100%;border-collapse:collapse;margin:8px 0;}
+  table.items th{background:var(--charcoal);color:#fff;padding:11px 14px;text-align:left;font-family:'Roboto';font-size:0.62rem;letter-spacing:0.08em;text-transform:uppercase;}
+  table.items th.r,table.items td.r{text-align:right;}
+  table.items td{padding:14px;border-bottom:1px solid var(--line);}
+  table.items .desc{font-size:0.82rem;color:var(--gray);margin-top:4px;}
+  .totals{display:flex;justify-content:flex-end;margin-top:8px;}
+  .totals table{font-size:0.92rem;}
+  .totals td{padding:5px 0 5px 40px;}
+  .totals .grand td{font-family:'Montserrat';font-weight:800;font-size:1.05rem;color:var(--charcoal);border-top:2px solid var(--charcoal);padding-top:10px;}
+  .pay{margin-top:34px;text-align:center;padding:30px;background:linear-gradient(180deg,#fff,var(--bg-soft));border:1px solid var(--line);border-radius:14px;box-shadow:0 12px 40px rgba(250,41,5,0.08);}
+  .pay .due{font-family:'Roboto';font-size:0.7rem;letter-spacing:0.12em;text-transform:uppercase;color:var(--muted);}
+  .pay .amt{font-family:'Montserrat';font-weight:900;font-size:2.8rem;color:var(--charcoal);line-height:1;margin:6px 0 22px;}
+  #payform{display:flex;flex-direction:column;align-items:center;gap:14px;}
+  #acctName{width:100%;max-width:340px;padding:12px 14px;border:1px solid var(--line);border-radius:8px;font-family:'Montserrat';font-size:0.95rem;text-align:center;}
+  #acctName:focus{outline:none;border-color:var(--red);box-shadow:0 0 0 3px rgba(250,41,5,0.12);}
+  .paybtn{display:inline-flex;align-items:center;gap:10px;background:var(--red);color:#fff;font-family:'Roboto';font-weight:700;font-size:0.92rem;letter-spacing:0.04em;text-transform:uppercase;padding:16px 38px;border:none;border-radius:8px;cursor:pointer;box-shadow:0 10px 28px rgba(250,41,5,0.32);transition:transform .15s ease,background .15s ease;}
+  .paybtn:hover{background:var(--red-dark);transform:translateY(-2px);}
+  .paybtn:disabled{opacity:.6;cursor:wait;transform:none;}
+  .paybtn .arw{transition:transform .18s ease;font-size:1.2rem;}
+  .paybtn:hover .arw{transform:translateX(5px);}
+  .securenote{font-family:'Roboto';font-size:0.78rem;color:var(--muted);margin-top:6px;}
+  .securenote b{color:var(--charcoal);}
+  .memo,.terms{font-size:0.82rem;color:var(--gray);margin-top:18px;line-height:1.55;}
+  .foot{display:flex;justify-content:space-between;margin-top:26px;padding-top:16px;border-top:1px solid var(--line);font-family:'Roboto';font-size:0.66rem;letter-spacing:0.1em;text-transform:uppercase;color:var(--muted);}
+  .backlink{display:inline-block;margin:18px auto 0;font-family:'Roboto';font-size:0.72rem;text-transform:uppercase;letter-spacing:0.08em;}
+</style>
+</head>
+<body>
+<div class="sheet">
+  <div class="head">
+    <div class="l"><img src="https://rocroofingfl.com/wp-content/uploads/2025/03/ROC-300x300-1.png" alt="ROC Roofing"><div class="t">ROC ROOFING<br><span>ENGAGEMENT INVOICE</span></div></div>
+    <div class="lbl">Invoice<b id="invNo">ROC-INV-001</b><span id="invTier">Growth tier</span></div>
+  </div>
+  <div class="body">
+    <div class="pill" id="testpill" style="display:none;">Test mode &middot; pay button runs a $1 live ACH test</div>
+    <div class="meta">
+      <div><h4>Bill To</h4><div class="blk"><strong>ROC Roofing Inc</strong><br>620 S Volusia Ave<br>Orange City, FL 32763<br><span id="billEmail"></span></div></div>
+      <div style="text-align:right;"><h4>Remit To</h4><div class="blk"><strong>WETYR Corporation</strong><br>MarkCMO<br>mark@markcmo.com<br>markcmo.com</div></div>
+    </div>
+    <table class="items">
+      <tr><th>Description</th><th class="r">Amount</th></tr>
+      <tr><td><strong id="lineTitle">Growth Engagement Fee (Foundation Build)</strong><div class="desc" id="lineDesc">One-time engagement fee, due at signing. Confirms commitment and unlocks the 6-week Foundation Build Sprint and Day 0 kickoff. Non-refundable.</div></td><td class="r" id="lineAmt">$12,000.00</td></tr>
+    </table>
+    <div class="totals"><table>
+      <tr><td>Subtotal</td><td class="r" id="subAmt">$12,000.00</td></tr>
+      <tr><td>Tax</td><td class="r">$0.00</td></tr>
+      <tr class="grand"><td>Total Due</td><td class="r" id="totAmt">$12,000.00</td></tr>
+    </table></div>
+
+    <div class="pay">
+      <div class="due">Amount due</div>
+      <div class="amt" id="dueAmt">$12,000.00</div>
+      <div id="payform">
+        <input id="acctName" type="text" autocomplete="name" placeholder="Name on your bank account">
+        <button id="paybtn" type="button" class="paybtn">Pay by Bank Transfer <span class="arw">&rarr;</span></button>
+      </div>
+      <div id="paystatus" class="securenote" role="status" aria-live="polite" style="min-height:20px;"></div>
+      <div class="securenote">Pay by <b>bank transfer (ACH)</b> right here on this page. No card fees. Encrypted and secure via Square.</div>
+    </div>
+
+    <div class="memo">Reference invoice <strong id="memoNo">ROC-INV-001</strong> on your payment. Questions? Email mark@markcmo.com.</div>
+    <div class="terms"><strong>Terms.</strong> Payment due upon receipt by bank transfer (ACH). This engagement fee is one-time and non-refundable, and unlocks Day 0 kickoff of the Roofing Lead-Gen Engagement. The monthly retainer and marketing fuel are billed separately per the signed agreement.</div>
+    <div class="foot"><span>WETYR CORPORATION</span><span>MARKCMO.COM</span></div>
+    <div style="text-align:center;"><a class="backlink" href="engagement.html">&laquo; Back to the engagement agreement</a></div>
+  </div>
+</div>
+
+<script src="https://web.squarecdn.com/v1/square.js"></script>
+<script>
+  (function(){
+    var APP_ID = 'sq0idp-M6mj_j8fX2VDNwuOmX3QEQ';
+    var LOCATION_ID = 'LVBWTHWMEP60S';
+    var TIERS = {
+      launch:     { name:'Launch-to-Scale', amount:5000,  plan:'roc-launch-engagement',     inv:'ROC-INV-L01' },
+      foothold:   { name:'Foothold',   amount:9000,  plan:'roc-foothold-engagement',   inv:'ROC-INV-F01' },
+      growth:     { name:'Growth',     amount:12000, plan:'roc-growth-engagement',     inv:'ROC-INV-G01' },
+      enterprise: { name:'Enterprise', amount:18000, plan:'roc-enterprise-engagement', inv:'ROC-INV-E01' },
+      scale:      { name:'Scale True-Up', amount:7000, plan:'roc-scale-balance',        inv:'ROC-INV-S01' }
+    };
+    var params = new URLSearchParams(location.search);
+    var tierKey = (params.get('tier')||'launch').toLowerCase();
+    if(!TIERS[tierKey]) tierKey = 'launch';
+    var tier = TIERS[tierKey];
+    var isTest = params.get('test') === '1';
+    var email = params.get('email') || '';
+    function money(n){ return '$' + n.toLocaleString('en-US') + '.00'; }
+
+    document.getElementById('invNo').textContent = tier.inv;
+    document.getElementById('memoNo').textContent = tier.inv;
+    document.getElementById('invTier').textContent = tier.name + ' tier';
+    document.getElementById('lineTitle').textContent = tier.name + ' Engagement Fee (Foundation Build)';
+    if(tierKey === 'launch'){ document.getElementById('lineDesc').textContent = 'Launch-to-Scale starting engagement fee, due at signing. Unlocks the 6-week Foundation Build and Day 0 kickoff. Management starts at $2,500/mo and scales up as leads are delivered; the $7,000 balance becomes due at the Scale stage, per the signed agreement. Non-refundable.'; }
+    document.getElementById('lineAmt').textContent = money(tier.amount);
+    document.getElementById('subAmt').textContent = money(tier.amount);
+    document.getElementById('totAmt').textContent = money(tier.amount);
+    document.getElementById('dueAmt').textContent = isTest ? '$1.00' : money(tier.amount);
+    if(email) document.getElementById('billEmail').textContent = email;
+    if(isTest) document.getElementById('testpill').style.display = 'inline-block';
+
+    var ach = null;
+    var statusEl = document.getElementById('paystatus');
+    var btn = document.getElementById('paybtn');
+    function setStatus(msg, ok){ statusEl.textContent = msg; statusEl.style.color = ok ? '#15803D' : '#B45309'; }
+    async function init(){
+      if(!window.Square){ setStatus('Payment library failed to load. Refresh and try again.'); return; }
+      try{ var payments = window.Square.payments(APP_ID, LOCATION_ID); ach = await payments.ach(); }
+      catch(e){ setStatus('Could not start secure payment: ' + e.message); }
+    }
+    btn.addEventListener('click', async function(){
+      var name = (document.getElementById('acctName').value || '').trim();
+      if(name.length < 2){ setStatus('Enter the name on your bank account first.'); return; }
+      if(!ach){ setStatus('Payment not ready yet, one moment...'); await init(); if(!ach) return; }
+      btn.disabled = true; setStatus('Opening your secure bank connection...');
+      try{
+        var result = await ach.tokenize({ accountHolderName: name, intent: 'CHARGE', amount: String(isTest?1:tier.amount) + '.00', currency: 'USD' });
+        if(result.status !== 'OK'){
+          var em = (result.errors && result.errors[0] && result.errors[0].message) || result.status;
+          setStatus('Bank not authorized: ' + em); btn.disabled = false; return;
+        }
+        setStatus('Submitting your payment...');
+        var payload = isTest ? { token: result.token, sample: true } : { token: result.token, plan: tier.plan };
+        if(email) payload.buyerEmail = email;
+        var r = await fetch('/api/invoice-pay', { method:'POST', headers:{'Content-Type':'application/json'}, body: JSON.stringify(payload) });
+        var d = await r.json();
+        if(d.ok){
+          document.getElementById('payform').style.display = 'none';
+          setStatus('Payment submitted. Bank transfers clear in 1-3 business days. Status: ' + d.status, true);
+        } else { setStatus('Payment failed: ' + (d.error || 'unknown error')); btn.disabled = false; }
+      }catch(e){ setStatus('Error: ' + e.message); btn.disabled = false; }
+    });
+    init();
+  })();
+</script>
+</body>
+</html>

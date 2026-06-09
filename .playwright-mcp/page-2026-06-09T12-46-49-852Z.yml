@@ -1,0 +1,243 @@
+- generic [active] [ref=e1]:
+  - alert [ref=e2]: Press Alt+1 for screen-reader mode, Alt+0 to cancel
+  - button "Use Website In a Screen-Reader Mode" [ref=e3]
+  - link "Accessibility Screen-Reader Guide, Feedback, and Issue Reporting | New window" [ref=e4] [cursor=pointer]:
+    - /url: https://accessibe.com/blog/knowledgebase/screen-reader-guide
+  - generic:
+    - generic:
+      - region "Skip Links":
+        - generic:
+          - link "Skip to Content":
+            - /url: "#acsbContent"
+            - text: Skip to Content
+            - generic:
+              - generic: ↵
+              - text: ENTER
+  - dialog [ref=e5]:
+    - generic [ref=e6]:
+      - img [ref=e7]
+      - text: Simplify Text
+    - button [ref=e9] [cursor=pointer]:
+      - img [ref=e10]
+  - 'button "Open accessiBe: accessibility options, statement and help" [ref=e13] [cursor=pointer]':
+    - generic:
+      - img [ref=e14]
+      - img
+      - img
+  - banner [ref=e22]:
+    - generic [ref=e23]:
+      - link "LOCKUP" [ref=e25] [cursor=pointer]:
+        - /url: https://secondlifemac.com
+        - img "LOCKUP" [ref=e26]
+      - navigation "Menu" [ref=e27]:
+        - list [ref=e28]:
+          - listitem [ref=e29]:
+            - link "Who We Help" [ref=e30] [cursor=pointer]:
+              - /url: "#"
+            - button "Toggle submenu for Who We Help" [ref=e31] [cursor=pointer]:
+              - img [ref=e32]
+          - listitem [ref=e34]:
+            - link "How it Works" [ref=e35] [cursor=pointer]:
+              - /url: "#"
+            - button "Toggle submenu for How it Works" [ref=e36] [cursor=pointer]:
+              - img [ref=e37]
+          - listitem [ref=e39]:
+            - link "Resource Center" [ref=e40] [cursor=pointer]:
+              - /url: "#"
+            - button "Toggle submenu for Resource Center" [ref=e41] [cursor=pointer]:
+              - img [ref=e42]
+          - listitem [ref=e44]:
+            - link "About Us" [ref=e45] [cursor=pointer]:
+              - /url: https://secondlifemac.com/about-us/
+            - button "Toggle submenu for About Us" [ref=e46] [cursor=pointer]:
+              - img [ref=e47]
+      - generic [ref=e49]:
+        - link "Contact" [ref=e50] [cursor=pointer]:
+          - /url: /contact-us
+          - generic [ref=e51]: Contact
+        - link "Get a Refresh Plan" [ref=e52] [cursor=pointer]:
+          - /url: /get-your-refresh-plan
+          - img [ref=e53]
+          - generic [ref=e58]: Get a Refresh Plan
+  - main [ref=e59]:
+    - generic [ref=e61]:
+      - generic [ref=e65]:
+        - heading "Why Schools & Districts Choose Second Life Mac" [level=1] [ref=e67]
+        - paragraph [ref=e69]:
+          - text: ✓ FERPA-compliant data erasure (NIST 800-88)
+          - text: ✓ 100% US-based processing—never outsourced
+          - text: ✓ Blue Glove on-site pickup service
+          - text: ✓ Dedicated Client Success support
+          - text: ✓ Built for schools—1,800+ education partners
+      - generic [ref=e71]:
+        - heading "We put schools first" [level=2] [ref=e73]
+        - generic [ref=e74]:
+          - paragraph [ref=e75]: Education is a tough job, and students, teachers, and administrators deserve the best tools and technologies for that job. That’s where we can help.
+          - paragraph [ref=e76]: We pay schools competitive prices for their used Apple devices. Then we refresh those devices so they can go to others in need. Schools can then turn around and reinvest their payment in new devices for their students, faculty, and administrators.
+          - paragraph [ref=e77]: Oh, and we do it all with clear and upfront pricing, and no hidden fees, so you’ll know exactly what to expect.
+      - link "Get A Refresh Plan" [ref=e82] [cursor=pointer]:
+        - /url: https://secondlifemac.com/get-a-quote/
+        - generic [ref=e84]: Get A Refresh Plan
+      - link "Get Your Refresh Plan" [ref=e97] [cursor=pointer]:
+        - /url: https://secondlifemac.com/get-a-quote/
+        - generic [ref=e99]: Get Your Refresh Plan
+      - generic [ref=e104]:
+        - button "Previous" [ref=e105] [cursor=pointer]:
+          - img [ref=e106]
+        - button "Next" [ref=e108] [cursor=pointer]:
+          - img [ref=e109]
+        - tablist [ref=e111]:
+          - tab "1 of 2" [selected] [ref=e112] [cursor=pointer]: "1"
+          - tab "2 of 2" [ref=e113] [cursor=pointer]: "2"
+          - tab "3 of 2" [ref=e114] [cursor=pointer]: "3"
+          - tab "4 of 2" [ref=e115] [cursor=pointer]: "4"
+          - tab "5 of 2" [ref=e116] [cursor=pointer]: "5"
+          - tab "6 of 2" [ref=e117] [cursor=pointer]: "6"
+          - tab "7 of 2" [ref=e118] [cursor=pointer]: "7"
+  - contentinfo [ref=e121]:
+    - generic [ref=e123]:
+      - generic [ref=e124]:
+        - link [ref=e126] [cursor=pointer]:
+          - /url: /
+        - paragraph [ref=e128]: Hello@SecondLifeMac.com
+        - paragraph [ref=e130]: 847-376-2757
+        - paragraph [ref=e132]:
+          - text: 7603 New Gross Point Road
+          - text: Skokie, IL 60077
+      - generic [ref=e133]:
+        - list [ref=e135]:
+          - listitem [ref=e136]:
+            - generic [ref=e137]: WHO WE HELP
+          - listitem [ref=e138]:
+            - link "Education" [ref=e139] [cursor=pointer]:
+              - /url: https://secondlifemac.com/school-it-asset-disposition/
+              - generic [ref=e140]: Education
+          - listitem [ref=e141]:
+            - link "Business" [ref=e142] [cursor=pointer]:
+              - /url: https://secondlifemac.com/enterprise-itad/
+              - generic [ref=e143]: Business
+          - listitem [ref=e144]:
+            - link "Healthcare" [ref=e145] [cursor=pointer]:
+              - /url: https://secondlifemac.com/healthcare-it-asset-disposition/
+              - generic [ref=e146]: Healthcare
+          - listitem [ref=e147]:
+            - generic [ref=e148]: HOW IT WORKS
+          - listitem [ref=e149]:
+            - link "Buyback Process" [ref=e150] [cursor=pointer]:
+              - /url: https://secondlifemac.com/apple-device-buyback/
+              - generic [ref=e151]: Buyback Process
+          - listitem [ref=e152]:
+            - link "What We Buy" [ref=e153] [cursor=pointer]:
+              - /url: https://secondlifemac.com/what-we-buy/
+              - generic [ref=e154]: What We Buy
+          - listitem [ref=e155]:
+            - link "Data Security" [ref=e156] [cursor=pointer]:
+              - /url: https://secondlifemac.com/data-security/
+              - generic [ref=e157]: Data Security
+          - listitem [ref=e158]:
+            - link "Get a Refresh Plan" [ref=e159] [cursor=pointer]:
+              - /url: https://secondlifemac.com/get-a-quote/
+              - generic [ref=e160]: Get a Refresh Plan
+        - list [ref=e162]:
+          - listitem [ref=e163]:
+            - link "RESOURCE CENTER" [ref=e164] [cursor=pointer]:
+              - /url: "#"
+              - generic [ref=e165]: RESOURCE CENTER
+          - listitem [ref=e166]:
+            - link "The Refresh Report" [ref=e167] [cursor=pointer]:
+              - /url: /about-us/
+              - generic [ref=e168]: The Refresh Report
+          - listitem [ref=e169]:
+            - link "White Papers" [ref=e170] [cursor=pointer]:
+              - /url: https://secondlifemac.com/white-papers/
+              - generic [ref=e171]: White Papers
+          - listitem [ref=e172]:
+            - link "Video Library" [ref=e173] [cursor=pointer]:
+              - /url: https://secondlifemac.com/videos/
+              - generic [ref=e174]: Video Library
+          - listitem [ref=e175]:
+            - link "Case Studies" [ref=e176] [cursor=pointer]:
+              - /url: https://secondlifemac.com/case-studies/
+              - generic [ref=e177]: Case Studies
+          - listitem [ref=e178]:
+            - link "ABOUT US" [ref=e179] [cursor=pointer]:
+              - /url: "#"
+              - generic [ref=e180]: ABOUT US
+          - listitem [ref=e181]:
+            - link "Who We Are" [ref=e182] [cursor=pointer]:
+              - /url: https://secondlifemac.com/about-us/
+              - generic [ref=e183]: Who We Are
+          - listitem [ref=e184]:
+            - link "Careers" [ref=e185] [cursor=pointer]:
+              - /url: https://secondlifemac.com/careers/
+              - generic [ref=e186]: Careers
+          - listitem [ref=e187]:
+            - link "Buy From Us" [ref=e188] [cursor=pointer]:
+              - /url: https://secondlifemac.com/buy-from-us/
+              - generic [ref=e189]: Buy From Us
+          - listitem [ref=e190]:
+            - link "Contact Us" [ref=e191] [cursor=pointer]:
+              - /url: https://secondlifemac.com/contact-us/
+              - generic [ref=e192]: Contact Us
+      - generic [ref=e193]:
+        - list [ref=e195]:
+          - listitem [ref=e196]:
+            - link "Linkedin" [ref=e197] [cursor=pointer]:
+              - /url: https://www.linkedin.com/company/secondlifemac/
+              - generic [ref=e198]: Linkedin
+              - img [ref=e199]
+          - listitem [ref=e201]:
+            - link "X-twitter" [ref=e202] [cursor=pointer]:
+              - /url: https://x.com/SecondLifeMac
+              - generic [ref=e203]: X-twitter
+              - img [ref=e204]
+          - listitem [ref=e206]:
+            - link "Facebook" [ref=e207] [cursor=pointer]:
+              - /url: https://www.facebook.com/secondlifemac/
+              - generic [ref=e208]: Facebook
+              - img [ref=e209]
+          - listitem [ref=e211]:
+            - link "Instagram" [ref=e212] [cursor=pointer]:
+              - /url: https://www.instagram.com/secondlifemac/
+              - generic [ref=e213]: Instagram
+              - img [ref=e214]
+          - listitem [ref=e216]:
+            - link "Vimeo" [ref=e217] [cursor=pointer]:
+              - /url: https://vimeo.com/user224115180
+              - generic [ref=e218]: Vimeo
+              - img [ref=e219]
+        - paragraph [ref=e222]: Stay ahead with the latest tips, insights, and industry news—delivered straight to your inbox. Join our newsletter today!
+        - iframe [ref=e224]:
+          - generic [ref=f66e2]:
+            - paragraph [ref=f66e3]:
+              - generic [ref=f66e4]: Email
+              - textbox "Email" [ref=f66e5]
+            - paragraph [ref=f66e6]
+            - generic [ref=f66e7]:
+              - iframe [ref=f66e11]:
+                - generic [ref=f70e2]:
+                  - generic [ref=f70e3]:
+                    - checkbox "I'm not a robot" [ref=f70e7]
+                    - generic [ref=f70e11]: I'm not a robot
+                  - generic [ref=f70e15]: reCAPTCHA
+              - generic [ref=f66e12]:
+                - link "Privacy" [ref=f66e13] [cursor=pointer]:
+                  - /url: https://www.salesforce.com/company/legal/privacy/#privacy-statement
+                - text: "-"
+                - link "Terms" [ref=f66e14] [cursor=pointer]:
+                  - /url: https://www.salesforce.com/company/legal/sfdc-website-terms-of-service/
+            - paragraph [ref=f66e15]
+            - paragraph [ref=f66e16]:
+              - button "SUBMIT" [ref=f66e17] [cursor=pointer]
+      - list [ref=e227]:
+        - listitem [ref=e228]:
+          - generic [ref=e229]: ©2026 Second Life Mac. All Rights Reserved.
+        - listitem [ref=e230]:
+          - link "PRIVACY POLICY" [ref=e231] [cursor=pointer]:
+            - /url: https://secondlifemac.com/privacy-policy/
+            - generic [ref=e232]: PRIVACY POLICY
+        - listitem [ref=e233]:
+          - link "TERMS OF USE" [ref=e234] [cursor=pointer]:
+            - /url: https://secondlifemac.com/terms-of-use/
+            - generic [ref=e235]: TERMS OF USE
+  - generic [ref=e236]: desktop

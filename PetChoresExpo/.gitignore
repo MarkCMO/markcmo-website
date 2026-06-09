@@ -1,0 +1,14 @@
+node_modules/
+.expo/
+dist/
+web-build/
+*.log
+install-step1.log
+install-step2.log
+export-check.log
+eas-build.log
+asc/
+*.p8
+ios/
+android/
+.DS_Store

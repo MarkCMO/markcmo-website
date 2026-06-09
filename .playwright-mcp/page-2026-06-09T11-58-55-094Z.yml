@@ -1,0 +1,650 @@
+- generic [active] [ref=e1]:
+  - generic:
+    - generic:
+      - link "Skip to main content" [ref=e2] [cursor=pointer]
+      - link "Accessibility help" [ref=e3] [cursor=pointer]:
+        - /url: https://support.google.com/websearch/answer/181196?hl=en
+  - generic [ref=e8]:
+    - search [ref=e9]:
+      - generic [ref=e11]:
+        - link "Go to Google Home" [ref=e13] [cursor=pointer]:
+          - /url: https://www.google.com/webhp?hl=en&sa=X&ved=0ahUKEwjYq_POjfqUAxUqAHkGHYKeFJ4QPAgI
+          - img [ref=e14]
+        - generic [ref=e21]:
+          - generic [ref=e22]:
+            - combobox "Search" [ref=e25]: bulk apple device buyback for business bulk apple device buyback for business
+            - generic [ref=e26]:
+              - button "Clear" [ref=e28] [cursor=pointer]:
+                - img [ref=e30]
+              - generic [ref=e33]:
+                - button "Search by voice" [ref=e34] [cursor=pointer]:
+                  - img [ref=e35]
+                - button "Search by image" [ref=e37] [cursor=pointer]:
+                  - img [ref=e38]
+          - button "Search" [ref=e40] [cursor=pointer]:
+            - img [ref=e43]
+    - generic [ref=e45]:
+      - button "Settings" [ref=e47] [cursor=pointer]:
+        - img [ref=e50]
+      - generic [ref=e53]:
+        - button "Google apps" [ref=e55] [cursor=pointer]:
+          - img [ref=e56]
+        - link "Sign in" [ref=e60] [cursor=pointer]:
+          - /url: https://accounts.google.com/ServiceLogin?hl=en&passive=true&continue=https://www.google.com/search%3Fq%3Dbulk%2Bapple%2Bdevice%2Bbuyback%2Bfor%2Bbusiness%26num%3D20&ec=futura_srp_og_si_72236_p
+  - generic [ref=e62]:
+    - navigation [ref=e68]:
+      - generic [ref=e74]:
+        - list [ref=e75]:
+          - listitem [ref=e76]:
+            - link "AI Mode" [ref=e79] [cursor=pointer]:
+              - /url: /search?q=bulk+apple+device+buyback+for+business&sca_esv=09892958edd89daa&udm=50&fbs=ADc_l-aN0CWEZBOHjofHoaMMDiKp9lEhFAN_4ain3HSNQWw-mI4C1ELY88XaJ57aZGHEMB0sDPEZOyCrtf4QOGPg1PH01eDLubGUV-2tI7YrtstgpVYfpGgsluASK2HXzf_NDJLri6yrqKGgwRgtT-ikFRnmF2gHQf29yjHpcmDBQ4Z0puox1libFHtrkt8T-hmUlL3PhHaW3l5QYIZXdcAu8HcP9Pvh8w&aep=1&ntc=1&sa=X&ved=2ahUKEwjYq_POjfqUAxUqAHkGHYKeFJ4Q2J8OegQIDBAD
+              - generic [ref=e82]: AI Mode
+          - listitem [ref=e83]:
+            - link "All" [disabled] [ref=e84]:
+              - generic [ref=e86]: All
+          - listitem [ref=e87]:
+            - link "Shopping" [ref=e88] [cursor=pointer]:
+              - /url: /search?sca_esv=09892958edd89daa&udm=28&fbs=ADc_l-aN0CWEZBOHjofHoaMMDiKp9lEhFAN_4ain3HSNQWw-mI4C1ELY88XaJ57aZGHEMB0sDPEZOyCrtf4QOGPg1PH01eDLubGUV-2tI7YrtstgpVYfpGgsluASK2HXzf_NDJLri6yrqKGgwRgtT-ikFRnmF2gHQf29yjHpcmDBQ4Z0puox1libFHtrkt8T-hmUlL3PhHaW3l5QYIZXdcAu8HcP9Pvh8w&q=bulk+apple+device+buyback+for+business&ved=1t:220175&ictx=111
+              - generic [ref=e90]: Shopping
+          - listitem [ref=e91]:
+            - link "Videos" [ref=e92] [cursor=pointer]:
+              - /url: /search?sca_esv=09892958edd89daa&udm=7&fbs=ADc_l-aN0CWEZBOHjofHoaMMDiKp9lEhFAN_4ain3HSNQWw-mI4C1ELY88XaJ57aZGHEMB0sDPEZOyCrtf4QOGPg1PH01eDLubGUV-2tI7YrtstgpVYfpGgsluASK2HXzf_NDJLri6yrqKGgwRgtT-ikFRnmF2gHQf29yjHpcmDBQ4Z0puox1libFHtrkt8T-hmUlL3PhHaW3l5QYIZXdcAu8HcP9Pvh8w&q=bulk+apple+device+buyback+for+business&sa=X&ved=2ahUKEwjYq_POjfqUAxUqAHkGHYKeFJ4QtKgLegQIGxAB
+              - generic [ref=e94]: Videos
+          - listitem [ref=e95]:
+            - link "Images" [ref=e96] [cursor=pointer]:
+              - /url: /search?sca_esv=09892958edd89daa&udm=2&fbs=ADc_l-aN0CWEZBOHjofHoaMMDiKp9lEhFAN_4ain3HSNQWw-mI4C1ELY88XaJ57aZGHEMB0sDPEZOyCrtf4QOGPg1PH01eDLubGUV-2tI7YrtstgpVYfpGgsluASK2HXzf_NDJLri6yrqKGgwRgtT-ikFRnmF2gHQf29yjHpcmDBQ4Z0puox1libFHtrkt8T-hmUlL3PhHaW3l5QYIZXdcAu8HcP9Pvh8w&q=bulk+apple+device+buyback+for+business&sa=X&ved=2ahUKEwjYq_POjfqUAxUqAHkGHYKeFJ4QtKgLegQIGBAB
+              - generic [ref=e98]: Images
+          - listitem [ref=e99]:
+            - link "Forums" [ref=e100] [cursor=pointer]:
+              - /url: /search?sca_esv=09892958edd89daa&udm=18&fbs=ADc_l-aN0CWEZBOHjofHoaMMDiKp9lEhFAN_4ain3HSNQWw-mI4C1ELY88XaJ57aZGHEMB0sDPEZOyCrtf4QOGPg1PH01eDLubGUV-2tI7YrtstgpVYfpGgsluASK2HXzf_NDJLri6yrqKGgwRgtT-ikFRnmF2gHQf29yjHpcmDBQ4Z0puox1libFHtrkt8T-hmUlL3PhHaW3l5QYIZXdcAu8HcP9Pvh8w&q=bulk+apple+device+buyback+for+business&sa=X&ved=2ahUKEwjYq_POjfqUAxUqAHkGHYKeFJ4Qs6gLegQIFhAB
+              - generic [ref=e102]: Forums
+          - listitem [ref=e103]:
+            - link "News" [ref=e104] [cursor=pointer]:
+              - /url: /search?sca_esv=09892958edd89daa&q=bulk+apple+device+buyback+for+business&tbm=nws&source=lnms&fbs=ADc_l-aN0CWEZBOHjofHoaMMDiKp9lEhFAN_4ain3HSNQWw-mI4C1ELY88XaJ57aZGHEMB0sDPEZOyCrtf4QOGPg1PH01eDLubGUV-2tI7YrtstgpVYfpGgsluASK2HXzf_NDJLri6yrqKGgwRgtT-ikFRnmF2gHQf29yjHpcmDBQ4Z0puox1libFHtrkt8T-hmUlL3PhHaW3l5QYIZXdcAu8HcP9Pvh8w&sa=X&ved=2ahUKEwjYq_POjfqUAxUqAHkGHYKeFJ4Q0pQJegQIFRAB
+              - generic [ref=e106]: News
+          - listitem [ref=e107]:
+            - button "More filters" [ref=e108] [cursor=pointer]:
+              - generic "More filters" [ref=e109]:
+                - generic [ref=e110]:
+                  - generic [ref=e111]: More
+                  - img [ref=e113]
+        - button "Tools" [ref=e116] [cursor=pointer]:
+          - generic [ref=e118]:
+            - generic [ref=e119]: Tools
+            - img [ref=e121]
+    - heading "Search Results" [level=1] [ref=e123]
+    - generic [ref=e128]:
+      - generic [ref=e129]:
+        - region "Ads" [ref=e134]:
+          - generic [ref=e135]:
+            - heading "Sponsored results" [level=2] [ref=e142]
+            - generic [ref=e143]:
+              - generic [ref=e150]:
+                - generic [ref=e156]:
+                  - generic [ref=e157]:
+                    - link "We Buy Business IT Equipment | We Buy Corporate IT Nationwide ITAMG.com https://www.itamg.com" [ref=e158] [cursor=pointer]:
+                      - /url: https://www.itamg.com/sell-used-it-equipment/
+                      - heading "We Buy Business IT Equipment | We Buy Corporate IT Nationwide" [level=3] [ref=e159]
+                      - generic [ref=e165]:
+                        - generic [ref=e167]: ITAMG.com
+                        - generic [ref=e168]: https://www.itamg.com
+                    - button "Why this ad?" [ref=e171] [cursor=pointer]:
+                      - img [ref=e173]
+                  - generic [ref=e178]:
+                    - text: IT Equipment
+                    - emphasis [ref=e179]: Buyback
+                    - text: Program for Enterprises. Eco-friendly IT Equipment Recycling For
+                    - emphasis [ref=e180]: Businesses
+                    - text: . Maximize Value and Ensure Compliance. IT Asset Liquidation. Certified R2v3 RIOS NAID.
+                  - generic [ref=e182]:
+                    - text: ‎
+                    - link "We Buy Used IT In Large QTY" [ref=e183] [cursor=pointer]:
+                      - /url: /aclk?sa=L&pf=1&ai=DChsSEwje1fjOjfqUAxU7c0cBHTLoET4YACICCAEQCxoCcXU&co=1&ase=2&gclid=EAIaIQobChMI3tX4zo36lAMVO3NHAR0y6BE-EAAYASADEgICcPD_BwE&cid=CAAS0gHkaEc6W_-p4r8jbYISvAyxqCDjYmC_jRHTy29AwGuzMhv9A1th4XRKKZhzXiYFZYn1rqA2NoLiuPmTYjsbiqsYw2Ss05ZuMI9pgI79aDzv0MHDf-BXP48x6aHyd-1iUKmZx_Rr6nS5rlcUvwiZjiMPn0655PHhE7Bfdg9i9IleXHng40sMPL0vq_ht9wIvDQE-_Z_gq56Rs-ASv1cHav6T7x5r-0nS5jGGzmZuuxwyHIAMgPPfwc5sQn-oVf2OTg4kCyZpkMjpW9-BpFznhw6YWoU&cce=2&category=acrcp_v1_32&sig=AOD64_0v4Gl9GpaSlqB5V2OIG1hwWhsL4A&adurl=https://www.itamg.com/sell-used-it-equipment%3Futm_term%3Dsell%2520old%2520tech%2520equipment%26utm_campaign%3DRichy_Sell_Used_IT_Equipment%26utm_source%3Dadwords%26utm_medium%3Dppc%26hsa_acc%3D1761834321%26hsa_cam%3D22376637110%26hsa_grp%3D180077639227%26hsa_ad%3D706619335389%26hsa_src%3Dg%26hsa_tgt%3Dkwd-384128154853%26hsa_kw%3Dsell%2520old%2520tech%2520equipment%26hsa_mt%3Db%26hsa_net%3Dadwords%26hsa_ver%3D3%26gad_source%3D1%26gad_campaignid%3D22376637110%26gbraid%3D0AAAAADyaAgsIveGx860dn-X-7Ec-nrNGT%26gclid%3DEAIaIQobChMI3tX4zo36lAMVO3NHAR0y6BE-EAAYASADEgICcPD_BwE&q=
+                    - text: · ‎
+                    - link "Sell Used IT Equipment" [ref=e184] [cursor=pointer]:
+                      - /url: /aclk?sa=L&pf=1&ai=DChsSEwje1fjOjfqUAxU7c0cBHTLoET4YACICCAEQDRoCcXU&co=1&ase=2&gclid=EAIaIQobChMI3tX4zo36lAMVO3NHAR0y6BE-EAAYASAEEgLgefD_BwE&cid=CAAS0gHkaEc6W_-p4r8jbYISvAyxqCDjYmC_jRHTy29AwGuzMhv9A1th4XRKKZhzXiYFZYn1rqA2NoLiuPmTYjsbiqsYw2Ss05ZuMI9pgI79aDzv0MHDf-BXP48x6aHyd-1iUKmZx_Rr6nS5rlcUvwiZjiMPn0655PHhE7Bfdg9i9IleXHng40sMPL0vq_ht9wIvDQE-_Z_gq56Rs-ASv1cHav6T7x5r-0nS5jGGzmZuuxwyHIAMgPPfwc5sQn-oVf2OTg4kCyZpkMjpW9-BpFznhw6YWoU&cce=2&category=acrcp_v1_32&sig=AOD64_06Zjx8CneaYgxnbMwTGXGNzLH5eg&adurl=https://www.itamg.com/sell-used-it-equipment%3Futm_term%3Dsell%2520old%2520tech%2520equipment%26utm_campaign%3DRichy_Sell_Used_IT_Equipment%26utm_source%3Dadwords%26utm_medium%3Dppc%26hsa_acc%3D1761834321%26hsa_cam%3D22376637110%26hsa_grp%3D180077639227%26hsa_ad%3D706619335389%26hsa_src%3Dg%26hsa_tgt%3Dkwd-384128154853%26hsa_kw%3Dsell%2520old%2520tech%2520equipment%26hsa_mt%3Db%26hsa_net%3Dadwords%26hsa_ver%3D3%26gad_source%3D1%26gad_campaignid%3D22376637110%26gbraid%3D0AAAAADyaAgsIveGx860dn-X-7Ec-nrNGT%26gclid%3DEAIaIQobChMI3tX4zo36lAMVO3NHAR0y6BE-EAAYASAEEgLgefD_BwE&q=
+                    - text: · ‎
+                    - link "IT Liquidation Services" [ref=e185] [cursor=pointer]:
+                      - /url: http://www.itamg.com/services
+                    - text: · ‎
+                    - link "Contact ITAMG" [ref=e186] [cursor=pointer]:
+                      - /url: http://www.itamg.com/contact
+                - generic [ref=e192]:
+                  - generic [ref=e193]:
+                    - 'link "SellYourMac: Bulk Buyback Pros Sell Your Mac https://www.sellyourmac.com" [ref=e194] [cursor=pointer]':
+                      - /url: https://www.sellyourmac.com/mac-bulk-buy-back.html
+                      - 'heading "SellYourMac: Bulk Buyback Pros" [level=3] [ref=e195]'
+                      - generic [ref=e201]:
+                        - generic [ref=e203]: Sell Your Mac
+                        - generic [ref=e204]: https://www.sellyourmac.com
+                    - button "Why this ad?" [ref=e207] [cursor=pointer]:
+                      - img [ref=e209]
+                  - generic [ref=e214]:
+                    - text: Sell
+                    - emphasis [ref=e215]: Apple Products
+                    - text: In
+                    - emphasis [ref=e216]: Bulk
+                    - text: — Selling Macs in
+                    - emphasis [ref=e217]: bulk
+                    - text: shouldn’t be hard. We make it fast, easy, and worth your while. Choose Us For Mac And
+                    - emphasis [ref=e218]: Apple Product Bulk
+                    - text: Buybacks. Fast, Transparent Process.
+                  - generic [ref=e220]:
+                    - text: ‎
+                    - link "Bulk Buy Back" [ref=e221] [cursor=pointer]:
+                      - /url: https://www.sellyourmac.com/mac-bulk-buy-back.html
+                    - text: · ‎
+                    - link "How It Works" [ref=e222] [cursor=pointer]:
+                      - /url: https://www.sellyourmac.com/how-it-works.html
+                    - text: · ‎
+                    - link "Sell Your Old Business Macs" [ref=e223] [cursor=pointer]:
+                      - /url: /aclk?sa=L&pf=1&ai=DChsSEwje1fjOjfqUAxU7c0cBHTLoET4YACICCAEQFRoCcXU&co=1&ase=2&gclid=EAIaIQobChMI3tX4zo36lAMVO3NHAR0y6BE-EAAYAiAFEgJRRvD_BwE&cid=CAAS0gHkaEc6W_-p4r8jbYISvAyxqCDjYmC_jRHTy29AwGuzMhv9A1th4XRKKZhzXiYFZYn1rqA2NoLiuPmTYjsbiqsYw2Ss05ZuMI9pgI79aDzv0MHDf-BXP48x6aHyd-1iUKmZx_Rr6nS5rlcUvwiZjiMPn0655PHhE7Bfdg9i9IleXHng40sMPL0vq_ht9wIvDQE-_Z_gq56Rs-ASv1cHav6T7x5r-0nS5jGGzmZuuxwyHIAMgPPfwc5sQn-oVf2OTg4kCyZpkMjpW9-BpFznhw6YWoU&cce=2&category=acrcp_v1_32&sig=AOD64_3I1QbTiib0XGkoJHOTwRCpTVYjbg&adurl=https://www.sellyourmac.com/mac-bulk-buy-back.html%3Fgad_source%3D1%26gad_campaignid%3D20295294867%26gbraid%3D0AAAAAD8on-xMrGENkgqu80kVyyww86fI5%26gclid%3DEAIaIQobChMI3tX4zo36lAMVO3NHAR0y6BE-EAAYAiAFEgJRRvD_BwE&q=
+                    - text: · ‎
+                    - link "Contact Us" [ref=e224] [cursor=pointer]:
+                      - /url: https://www.sellyourmac.com/contact.html
+                    - text: · ‎
+                    - link "FAQs" [ref=e225] [cursor=pointer]:
+                      - /url: https://www.sellyourmac.com/faqs.html
+                - generic [ref=e231]:
+                  - link "Image from verizon.com" [ref=e233] [cursor=pointer]:
+                    - /url: https://www.google.com/aclk?sa=L&ai=DChsSEwje1fjOjfqUAxU7c0cBHTLoET4YACICCAEQGRoCcXU&ae=2&co=1&ase=2&gclid=EAIaIQobChMI3tX4zo36lAMVO3NHAR0y6BE-EAAYAyAIEgLgSPD_BwE&cid=CAAS0gHkaEc6W_-p4r8jbYISvAyxqCDjYmC_jRHTy29AwGuzMhv9A1th4XRKKZhzXiYFZYn1rqA2NoLiuPmTYjsbiqsYw2Ss05ZuMI9pgI79aDzv0MHDf-BXP48x6aHyd-1iUKmZx_Rr6nS5rlcUvwiZjiMPn0655PHhE7Bfdg9i9IleXHng40sMPL0vq_ht9wIvDQE-_Z_gq56Rs-ASv1cHav6T7x5r-0nS5jGGzmZuuxwyHIAMgPPfwc5sQn-oVf2OTg4kCyZpkMjpW9-BpFznhw6YWoU&cce=2&category=acrcp_v1_71&sig=AOD64_27fL2tLFK0ggaTUqj78krAi1OysA&q=&nis=4&ved=2ahUKEwjYq_POjfqUAxUqAHkGHYKeFJ4Qh78CegQIERAB&adurl=
+                    - img "Image from verizon.com" [ref=e235]
+                  - generic [ref=e236]:
+                    - link "Verizon Business Official Site Verizon https://www.verizon.com › verizonbusiness › iphone17" [ref=e237] [cursor=pointer]:
+                      - /url: https://www.verizon.com/business/shop/products/devices/smartphones/apple-iphone-17
+                      - heading "Verizon Business Official Site" [level=3] [ref=e239]
+                      - generic [ref=e245]:
+                        - generic [ref=e247]: Verizon
+                        - generic [ref=e248]: https://www.verizon.com › verizonbusiness › iphone17
+                    - button "Why this ad?" [ref=e251] [cursor=pointer]:
+                      - img [ref=e253]
+                  - generic [ref=e255]:
+                    - generic [ref=e258]:
+                      - emphasis [ref=e259]: Apple
+                      - text: iPhones for
+                      - emphasis [ref=e260]: Business
+                      - text: — Learn how you can save when you switch to Verizon
+                      - emphasis [ref=e261]: Business
+                      - text: . Explore special offers. Shop
+                      - emphasis [ref=e262]: iPhone
+                      - text: ...
+                    - generic [ref=e263]: Business to business service · Merritt Island · Closed · Opens 9 AM
+                  - generic [ref=e265]:
+                    - text: ‎
+                    - link "Bring Your Own Device" [ref=e266] [cursor=pointer]:
+                      - /url: https://www.verizon.com/business/shop/products/devices/smartphones/byod/
+                    - text: · ‎
+                    - link "Switch to Verizon Business" [ref=e267] [cursor=pointer]:
+                      - /url: /aclk?sa=L&ai=DChsSEwje1fjOjfqUAxU7c0cBHTLoET4YACICCAEQIxoCcXU&ae=2&co=1&ase=2&gclid=EAIaIQobChMI3tX4zo36lAMVO3NHAR0y6BE-EAAYAyASEgJWkfD_BwE&cid=CAAS0gHkaEc6W_-p4r8jbYISvAyxqCDjYmC_jRHTy29AwGuzMhv9A1th4XRKKZhzXiYFZYn1rqA2NoLiuPmTYjsbiqsYw2Ss05ZuMI9pgI79aDzv0MHDf-BXP48x6aHyd-1iUKmZx_Rr6nS5rlcUvwiZjiMPn0655PHhE7Bfdg9i9IleXHng40sMPL0vq_ht9wIvDQE-_Z_gq56Rs-ASv1cHav6T7x5r-0nS5jGGzmZuuxwyHIAMgPPfwc5sQn-oVf2OTg4kCyZpkMjpW9-BpFznhw6YWoU&cce=2&category=acrcp_v1_71&sig=AOD64_2QeOouMSDYQdxgFcnngGQ22taiUg&adurl=&q=
+                    - text: · ‎
+                    - link "Order at Verizon Business" [ref=e268] [cursor=pointer]:
+                      - /url: https://www.verizon.com/business/shop/products/devices/smartphones/apple-iphone-17%7Bignore%7D?cmp=knc:ggl:ac:wls:dpr:8773990957_ds_cid_%7B_dscampaignid%7D_ds_agid_%7B_dsadgroupid%7D&utm_term=%7Bkeyword%7D&utm_medium=cpc&utm_source=google&utm_campaign=%7B_dscampaign%7D&utm_content=SuperPromoQ42025&gclsrc=aw.ds&%7B_dsmrktparam%7D
+                    - text: · ‎
+                    - link "Switch and Save" [ref=e269] [cursor=pointer]:
+                      - /url: /aclk?sa=L&ai=DChsSEwje1fjOjfqUAxU7c0cBHTLoET4YACICCAEQJBoCcXU&ae=2&co=1&ase=2&gclid=EAIaIQobChMI3tX4zo36lAMVO3NHAR0y6BE-EAAYAyATEgK84fD_BwE&cid=CAAS0gHkaEc6W_-p4r8jbYISvAyxqCDjYmC_jRHTy29AwGuzMhv9A1th4XRKKZhzXiYFZYn1rqA2NoLiuPmTYjsbiqsYw2Ss05ZuMI9pgI79aDzv0MHDf-BXP48x6aHyd-1iUKmZx_Rr6nS5rlcUvwiZjiMPn0655PHhE7Bfdg9i9IleXHng40sMPL0vq_ht9wIvDQE-_Z_gq56Rs-ASv1cHav6T7x5r-0nS5jGGzmZuuxwyHIAMgPPfwc5sQn-oVf2OTg4kCyZpkMjpW9-BpFznhw6YWoU&cce=2&category=acrcp_v1_71&sig=AOD64_099rvZIuIOytScBsnsry6hGltOaQ&adurl=&q=
+                - generic [ref=e275]:
+                  - generic [ref=e276]:
+                    - link "We Buy Used POS Equipment - We Buy Credit Card Terminals POSRG https://www.posrg.com" [ref=e277] [cursor=pointer]:
+                      - /url: https://www.posrg.com/trade-in-sell-used-pos-systems-ad/
+                      - heading "We Buy Used POS Equipment - We Buy Credit Card Terminals" [level=3] [ref=e278]
+                      - generic [ref=e284]:
+                        - generic [ref=e286]: POSRG
+                        - generic [ref=e287]: https://www.posrg.com
+                    - button "Why this ad?" [ref=e290] [cursor=pointer]:
+                      - img [ref=e292]
+                  - generic [ref=e296]: We offer competitive prices and rebates for a wide range of used POS equipment. Contact us. Time to upgrade, or just looking to sell your point of sale equipment? Let POSRG help you.
+                  - generic [ref=e298]:
+                    - text: ‎
+                    - link "Sell Your Used Pos to POSRG" [ref=e299] [cursor=pointer]:
+                      - /url: /aclk?sa=L&ai=DChsSEwje1fjOjfqUAxU7c0cBHTLoET4YACICCAEQDBoCcXU&co=1&ase=2&gclid=EAIaIQobChMI3tX4zo36lAMVO3NHAR0y6BE-EAAYBCACEgKaLvD_BwE&cid=CAAS0gHkaEc6W_-p4r8jbYISvAyxqCDjYmC_jRHTy29AwGuzMhv9A1th4XRKKZhzXiYFZYn1rqA2NoLiuPmTYjsbiqsYw2Ss05ZuMI9pgI79aDzv0MHDf-BXP48x6aHyd-1iUKmZx_Rr6nS5rlcUvwiZjiMPn0655PHhE7Bfdg9i9IleXHng40sMPL0vq_ht9wIvDQE-_Z_gq56Rs-ASv1cHav6T7x5r-0nS5jGGzmZuuxwyHIAMgPPfwc5sQn-oVf2OTg4kCyZpkMjpW9-BpFznhw6YWoU&cce=2&category=acrcp_v1_32&sig=AOD64_0Tlpcf-XEUEcPlqgNOFjrLzHADCQ&adurl=&q=
+                    - text: · ‎
+                    - link "Looking To Sell Your Old POS?" [ref=e300] [cursor=pointer]:
+                      - /url: /aclk?sa=L&ai=DChsSEwje1fjOjfqUAxU7c0cBHTLoET4YACICCAEQEBoCcXU&co=1&ase=2&gclid=EAIaIQobChMI3tX4zo36lAMVO3NHAR0y6BE-EAAYBCADEgKqefD_BwE&cid=CAAS0gHkaEc6W_-p4r8jbYISvAyxqCDjYmC_jRHTy29AwGuzMhv9A1th4XRKKZhzXiYFZYn1rqA2NoLiuPmTYjsbiqsYw2Ss05ZuMI9pgI79aDzv0MHDf-BXP48x6aHyd-1iUKmZx_Rr6nS5rlcUvwiZjiMPn0655PHhE7Bfdg9i9IleXHng40sMPL0vq_ht9wIvDQE-_Z_gq56Rs-ASv1cHav6T7x5r-0nS5jGGzmZuuxwyHIAMgPPfwc5sQn-oVf2OTg4kCyZpkMjpW9-BpFznhw6YWoU&cce=2&category=acrcp_v1_32&sig=AOD64_34CnquxUrT_Na3c4k2Z4Ua9FulPQ&adurl=&q=
+                    - text: · ‎
+                    - link "Trade-In or Sell Used POS" [ref=e301] [cursor=pointer]:
+                      - /url: https://www.posrg.com/sell-used-pos-systems/
+              - button "Hide sponsored results" [ref=e303] [cursor=pointer]:
+                - separator [ref=e304]
+                - generic [ref=e305]:
+                  - generic [ref=e306]: Hide sponsored results
+                  - img [ref=e308]
+        - generic [ref=e324]:
+          - heading "Searching Thinking a little longer" [level=2] [ref=e328]:
+            - generic [ref=e329]:
+              - generic [ref=e336]: Searching
+              - generic [ref=e346]: Thinking a little longer
+          - progressbar [ref=e348]
+      - main [ref=e390]:
+        - generic [ref=e394]:
+          - generic [ref=e397]:
+            - heading "Web results" [level=2] [ref=e398]
+            - generic [ref=e399]:
+              - generic [ref=e402]:
+                - link "Sell Mac and Apple Devices in Bulk SellYourMac.com https://www.sellyourmac.com › mac-bulk-buy-back" [ref=e404] [cursor=pointer]:
+                  - /url: https://www.sellyourmac.com/mac-bulk-buy-back.html
+                  - heading "Sell Mac and Apple Devices in Bulk" [level=3] [ref=e405]
+                  - generic [ref=e410]:
+                    - generic [ref=e412]: SellYourMac.com
+                    - generic [ref=e414]: https://www.sellyourmac.com › mac-bulk-buy-back
+                - button "About this result" [ref=e415] [cursor=pointer]:
+                  - img [ref=e418]
+              - generic [ref=e421]:
+                - generic [ref=e422]:
+                  - emphasis [ref=e423]: SellYourMac provides Bulk Buy Back Services
+                  - text: for businesses, schools, and organizations looking to recoup value from their used Apple products.
+                - link "Read more" [ref=e424] [cursor=pointer]:
+                  - /url: https://www.sellyourmac.com/mac-bulk-buy-back.html#:~:text=SellYourMac%20provides%20Bulk%20Buy%20Back,from%20their%20used%20Apple%20products
+          - generic [ref=e428]:
+            - generic [ref=e431]:
+              - link "Apple Business Trade-In Program Insight Enterprises https://www.insight.com › en_US › shop › partner › ap..." [ref=e433] [cursor=pointer]:
+                - /url: https://www.insight.com/en_US/shop/partner/apple/apple-business-trade-in.html
+                - heading "Apple Business Trade-In Program" [level=3] [ref=e434]
+                - generic [ref=e439]:
+                  - generic [ref=e441]: Insight Enterprises
+                  - generic [ref=e443]: https://www.insight.com › en_US › shop › partner › ap...
+              - button "About this result" [ref=e444] [cursor=pointer]:
+                - img [ref=e447]
+            - generic [ref=e451]:
+              - emphasis [ref=e452]: Apple's Business Trade-In
+              - text: is a device trade-in program where companies can provide their current Apple devices and receive credit for them at Insight.
+            - generic [ref=e454]:
+              - text: "Missing: buyback ‎| Show results with:"
+              - link "buyback" [ref=e455] [cursor=pointer]:
+                - /url: /search?sca_esv=09892958edd89daa&q=bulk+apple+device+%22buyback%22+for+business&sa=X&ved=2ahUKEwjYq_POjfqUAxUqAHkGHYKeFJ4Q5t4CegQIJBAB
+          - generic [ref=e459]:
+            - generic [ref=e462]:
+              - link "Sell Devices in Bulk | Apple, Business & School Buyback GoRoostr https://goroostr.com › bulk" [ref=e464] [cursor=pointer]:
+                - /url: https://goroostr.com/bulk
+                - heading "Sell Devices in Bulk | Apple, Business & School Buyback" [level=3] [ref=e465]
+                - generic [ref=e470]:
+                  - generic [ref=e472]: GoRoostr
+                  - generic [ref=e474]: https://goroostr.com › bulk
+              - button "About this result" [ref=e475] [cursor=pointer]:
+                - img [ref=e478]
+            - generic [ref=e481]:
+              - generic [ref=e482]:
+                - text: Sell multiple devices without the back-and-forth. Use
+                - emphasis [ref=e483]: instant pricing, upload a device list, or request a bulk assessment
+                - text: .
+              - link "Read more" [ref=e484] [cursor=pointer]:
+                - /url: https://goroostr.com/bulk#:~:text=Sell%20multiple%20devices%20without%20the,or%20request%20a%20bulk%20assessment.
+          - generic [ref=e489]:
+            - heading "Discussions and forums" [level=2] [ref=e491]
+            - generic [ref=e492]:
+              - generic [ref=e495]:
+                - generic [ref=e497] [cursor=pointer]:
+                  - generic [ref=e500]:
+                    - link "Are there limits for bulk MacBook trade-ins at Apple Stores? Apple Communities · 2 months ago" [ref=e501]:
+                      - /url: https://discussions.apple.com/thread/256273993
+                      - generic [ref=e502]:
+                        - heading "Are there limits for bulk MacBook trade-ins at Apple Stores?" [level=3] [ref=e503]:
+                          - link "Are there limits for bulk MacBook trade-ins at Apple Stores?" [ref=e504]
+                        - generic [ref=e511]:
+                          - generic [ref=e512]: Apple Communities ·
+                          - generic [ref=e516]: 2 months ago
+                    - generic [ref=e522]:
+                      - generic [ref=e526]: ·
+                      - button "About this result" [ref=e531]:
+                        - img [ref=e534]
+                  - button "Are there limits for bulk MacBook trade-ins at Apple Stores? Apple Communities · 2 months ago" [expanded] [ref=e536]:
+                    - img [ref=e539]
+                - list [ref=e548]:
+                  - listitem [ref=e549]:
+                    - generic [ref=e553]:
+                      - link "At our organization, we purchase macOS devices through our Apple Business account and provide new MacBooks to new hires. As employees are ... More discussions on Are there limits for bulk MacBook trade-ins at Apple Stores?":
+                        - /url: https://discussions.apple.com/thread/256273993
+                      - generic [ref=e555]:
+                        - text: At our organization, we purchase macOS devices through our Apple Business account and provide new MacBooks to new hires. As employees are ...
+                        - link [ref=e556] [cursor=pointer]:
+                          - /url: https://discussions.apple.com/thread/256273993
+                          - generic [ref=e557]: More
+                          - img [ref=e559]
+              - generic [ref=e565] [cursor=pointer]:
+                - generic [ref=e568]:
+                  - link "Can I trade in multiple devices to get credit towards the price of new device? Apple Communities · 1 answer · 5 years ago" [ref=e569]:
+                    - /url: https://discussions.apple.com/thread/252259487
+                    - generic [ref=e570]:
+                      - heading "Can I trade in multiple devices to get credit towards the price of new device?" [level=3] [ref=e571]:
+                        - link "Can I trade in multiple devices to get credit towards the price of new device?" [ref=e572]
+                      - generic [ref=e579]:
+                        - generic [ref=e580]: Apple Communities ·
+                        - generic [ref=e583]:
+                          - generic [ref=e584]: 1 answer
+                          - generic [ref=e585]:
+                            - generic [ref=e586]: ·
+                            - generic [ref=e587]: 5 years ago
+                  - generic [ref=e593]:
+                    - generic [ref=e597]: ·
+                    - button "About this result" [ref=e602]:
+                      - img [ref=e605]
+                - button "Can I trade in multiple devices to get credit towards the price of new device? Apple Communities · 1 answer · 5 years ago" [ref=e607]:
+                  - img [ref=e610]
+              - link "See more discussions" [ref=e613] [cursor=pointer]:
+                - /url: /search?q=bulk+apple+device+buyback+for+business&sca_esv=09892958edd89daa&udm=18&sa=X&ved=2ahUKEwjYq_POjfqUAxUqAHkGHYKeFJ4Q8poLegQIFxAD
+                - separator [ref=e614]
+                - generic [ref=e615]:
+                  - generic [ref=e616]: See more
+                  - img [ref=e618]
+          - generic [ref=e623]:
+            - heading "Sponsored results" [level=2] [ref=e630]
+            - generic [ref=e631]:
+              - generic [ref=e638]:
+                - generic [ref=e643]:
+                  - link "Image from itamg.com" [ref=e645] [cursor=pointer]:
+                    - /url: https://www.google.com/aclk?sa=L&ai=DChsSEwje1fjOjfqUAxU7c0cBHTLoET4YACICCAIQBxoCcXU&co=1&ase=2&gclid=EAIaIQobChMI3tX4zo36lAMVO3NHAR0y6BE-EAMYASADEgJSofD_BwE&cid=CAAS0gHkaEc6W_-p4r8jbYISvAyxqCDjYmC_jRHTy29AwGuzMhv9A1th4XRKKZhzXiYFZYn1rqA2NoLiuPmTYjsbiqsYw2Ss05ZuMI9pgI79aDzv0MHDf-BXP48x6aHyd-1iUKmZx_Rr6nS5rlcUvwiZjiMPn0655PHhE7Bfdg9i9IleXHng40sMPL0vq_ht9wIvDQE-_Z_gq56Rs-ASv1cHav6T7x5r-0nS5jGGzmZuuxwyHIAMgPPfwc5sQn-oVf2OTg4kCyZpkMjpW9-BpFznhw6YWoU&cce=2&category=acrcp_v1_32&sig=AOD64_3Uv9SsIxMCHguI88retA0mIj5ZmQ&q=&nis=4&ved=2ahUKEwjYq_POjfqUAxUqAHkGHYKeFJ4Qh78CegQIYxAB&adurl=
+                    - img "Image from itamg.com" [ref=e647]
+                  - generic [ref=e648]:
+                    - link "We Buy Business IT Equipment | Sell Your Old Technology ITAMG.com https://www.itamg.com" [ref=e649] [cursor=pointer]:
+                      - /url: https://www.itamg.com/sell-used-it-equipment/
+                      - heading "We Buy Business IT Equipment | Sell Your Old Technology" [level=3] [ref=e651]
+                      - generic [ref=e657]:
+                        - generic [ref=e659]: ITAMG.com
+                        - generic [ref=e660]: https://www.itamg.com
+                    - button "Why this ad?" [ref=e663] [cursor=pointer]:
+                      - img [ref=e665]
+                  - generic [ref=e670]:
+                    - text: IT Equipment
+                    - emphasis [ref=e671]: Buyback
+                    - text: Program for Enterprises. We Pay Top Dollar for Corporate IT equipment. Sell your
+                    - emphasis [ref=e672]: Business
+                    - text: IT hardware Today. IT Asset Liquidation. White-Glove ITAD Services. Certified R2v3 RIOS NAID. Get Destruction Quote.
+                  - generic [ref=e674]:
+                    - text: ‎
+                    - link "We Buy Used IT In Large QTY" [ref=e675] [cursor=pointer]:
+                      - /url: /aclk?sa=L&ai=DChsSEwje1fjOjfqUAxU7c0cBHTLoET4YACICCAIQCRoCcXU&co=1&ase=2&gclid=EAIaIQobChMI3tX4zo36lAMVO3NHAR0y6BE-EAMYASAEEgKZs_D_BwE&cid=CAAS0gHkaEc6W_-p4r8jbYISvAyxqCDjYmC_jRHTy29AwGuzMhv9A1th4XRKKZhzXiYFZYn1rqA2NoLiuPmTYjsbiqsYw2Ss05ZuMI9pgI79aDzv0MHDf-BXP48x6aHyd-1iUKmZx_Rr6nS5rlcUvwiZjiMPn0655PHhE7Bfdg9i9IleXHng40sMPL0vq_ht9wIvDQE-_Z_gq56Rs-ASv1cHav6T7x5r-0nS5jGGzmZuuxwyHIAMgPPfwc5sQn-oVf2OTg4kCyZpkMjpW9-BpFznhw6YWoU&cce=2&category=acrcp_v1_32&sig=AOD64_3pBzA3vg59ZYNB-vZM1NzHllROEw&adurl=&q=
+                    - text: · ‎
+                    - link "Sell Used IT Equipment" [ref=e676] [cursor=pointer]:
+                      - /url: /aclk?sa=L&ai=DChsSEwje1fjOjfqUAxU7c0cBHTLoET4YACICCAIQChoCcXU&co=1&ase=2&gclid=EAIaIQobChMI3tX4zo36lAMVO3NHAR0y6BE-EAMYASAFEgIc5vD_BwE&cid=CAAS0gHkaEc6W_-p4r8jbYISvAyxqCDjYmC_jRHTy29AwGuzMhv9A1th4XRKKZhzXiYFZYn1rqA2NoLiuPmTYjsbiqsYw2Ss05ZuMI9pgI79aDzv0MHDf-BXP48x6aHyd-1iUKmZx_Rr6nS5rlcUvwiZjiMPn0655PHhE7Bfdg9i9IleXHng40sMPL0vq_ht9wIvDQE-_Z_gq56Rs-ASv1cHav6T7x5r-0nS5jGGzmZuuxwyHIAMgPPfwc5sQn-oVf2OTg4kCyZpkMjpW9-BpFznhw6YWoU&cce=2&category=acrcp_v1_32&sig=AOD64_2ImWtZRyHaG42pzjoYo44miOAaJQ&adurl=&q=
+                    - text: · ‎
+                    - link "IT Liquidation Services" [ref=e677] [cursor=pointer]:
+                      - /url: http://www.itamg.com/services
+                    - text: · ‎
+                    - link "Contact ITAMG" [ref=e678] [cursor=pointer]:
+                      - /url: http://www.itamg.com/contact
+                - generic [ref=e683]:
+                  - generic [ref=e684]:
+                    - link "Sell Your Apple Display for Cash – Fast & Easy | Sell Your Apple Display BuyBackTronics.com https://www.buybacktronics.com" [ref=e685] [cursor=pointer]:
+                      - /url: https://www.buybacktronics.com/category/displays
+                      - heading "Sell Your Apple Display for Cash – Fast & Easy | Sell Your Apple Display" [level=3] [ref=e686]
+                      - generic [ref=e692]:
+                        - generic [ref=e694]: BuyBackTronics.com
+                        - generic [ref=e695]: https://www.buybacktronics.com
+                    - button "Why this ad?" [ref=e698] [cursor=pointer]:
+                      - img [ref=e700]
+                  - generic [ref=e705]:
+                    - text: Sell Your
+                    - emphasis [ref=e706]: Apple
+                    - text: "Display for Cash – Fast & Easy | BuyBackTronics.com. Super Fast Payments. Highest Cash Offers. Free Shipping. Great Customer Service. Types: iPhones, iPads, Samsungs, MacBooks, AirPods."
+                  - generic [ref=e708]:
+                    - img "Rated 4.6 out of 5," [ref=e709]:
+                      - img [ref=e710]
+                    - generic [ref=e713]:
+                      - link "Rating" [ref=e714] [cursor=pointer]:
+                        - /url: https://www.google.com/shopping/ratings/account/metrics?q=buybacktronics.com&c=US&v=19
+                      - text: "for buybacktronics.com: 4.6 - 517 reviews"
+                  - generic [ref=e716]:
+                    - text: ‎
+                    - link "Sell Your Laptop for Cash" [ref=e717] [cursor=pointer]:
+                      - /url: https://www.buybacktronics.com/category/displays
+                    - text: · ‎
+                    - link "Highest Cash For Your Laptop" [ref=e718] [cursor=pointer]:
+                      - /url: https://www.buybacktronics.com/category/displays
+                    - text: · ‎
+                    - link "Sell MacBook Pro" [ref=e719] [cursor=pointer]:
+                      - /url: https://www.buybacktronics.com/category/Macbook-pro
+                    - text: · ‎
+                    - link "Sell MSI Laptop" [ref=e720] [cursor=pointer]:
+                      - /url: https://www.buybacktronics.com/category/msi
+                  - generic [ref=e725]: 10K+ visits in past month
+              - button "Hide sponsored results" [ref=e727] [cursor=pointer]:
+                - separator [ref=e728]
+                - generic [ref=e729]:
+                  - generic [ref=e730]: Hide sponsored results
+                  - img [ref=e732]
+          - generic [ref=e736]:
+            - heading "Web results" [level=2] [ref=e737]
+            - generic [ref=e738]:
+              - generic [ref=e741]:
+                - link "Bulk Buy Back Program Cash For Your Mac https://www.cashforyourmac.com › bulk_buy_back" [ref=e743] [cursor=pointer]:
+                  - /url: https://www.cashforyourmac.com/bulk_buy_back
+                  - heading "Bulk Buy Back Program" [level=3] [ref=e744]
+                  - generic [ref=e749]:
+                    - generic [ref=e751]: Cash For Your Mac
+                    - generic [ref=e753]: https://www.cashforyourmac.com › bulk_buy_back
+                - button "About this result" [ref=e754] [cursor=pointer]:
+                  - img [ref=e757]
+              - generic [ref=e760]:
+                - generic [ref=e761]:
+                  - text: We're proud to offer the
+                  - emphasis [ref=e762]: best Bulk Buy Back Program for businesses
+                  - text: ", schools and organizations looking to recoup value from used Apple products."
+                - link "Read more" [ref=e763] [cursor=pointer]:
+                  - /url: https://www.cashforyourmac.com/bulk_buy_back#:~:text=We're%20proud%20to%20offer%20the,value%20from%20used%20Apple%20products.
+          - generic [ref=e767]:
+            - generic [ref=e770]:
+              - link "Sell Your Devices With Bulk BuyBack in Three Easy Steps BuyBackWorld.com https://www.buybackworld.com › bulkbuyback" [ref=e772] [cursor=pointer]:
+                - /url: https://www.buybackworld.com/bulkbuyback
+                - heading "Sell Your Devices With Bulk BuyBack in Three Easy Steps" [level=3] [ref=e773]
+                - generic [ref=e775]:
+                  - img [ref=e779]
+                  - generic [ref=e781]:
+                    - generic [ref=e783]: BuyBackWorld.com
+                    - generic [ref=e785]: https://www.buybackworld.com › bulkbuyback
+              - button "About this result" [ref=e786] [cursor=pointer]:
+                - img [ref=e789]
+            - generic [ref=e792]:
+              - generic [ref=e793]:
+                - text: "1."
+                - emphasis [ref=e794]: Fill Out Our Bulk BuyBack Form
+                - text: . List the models, condition and quantity of each device. You will then receive an upfront, no risk, no obligation quote for ...
+              - link "Read more" [ref=e795] [cursor=pointer]:
+                - /url: https://www.buybackworld.com/bulkbuyback#:~:text=1.%20Fill%20Out%20Our%20Bulk,BuyBack%20Form&text=List%20the%20models%2C%20condition%20and,obligation%20quote%20for%20your%20devices.
+          - generic [ref=e799]:
+            - generic [ref=e802]:
+              - link "Buy Apple Devices in Bulk for Business Red Stone USA Inc https://redstoneusainc.com › buy-apple-devices-bulk-bu..." [ref=e804] [cursor=pointer]:
+                - /url: https://redstoneusainc.com/buy-apple-devices-bulk-business/
+                - heading "Buy Apple Devices in Bulk for Business" [level=3] [ref=e805]
+                - generic [ref=e810]:
+                  - generic [ref=e812]: Red Stone USA Inc
+                  - generic [ref=e814]: https://redstoneusainc.com › buy-apple-devices-bulk-bu...
+              - button "About this result" [ref=e815] [cursor=pointer]:
+                - img [ref=e818]
+            - generic [ref=e822]:
+              - emphasis [ref=e823]: Buy Apple devices in bulk for your business
+              - text: from an Redstone USA Inc. Tailored pricing, AppleCare support, and fast shipping. Order today!
+            - generic [ref=e825]:
+              - text: "Missing: buyback ‎| Show results with:"
+              - link "buyback" [ref=e826] [cursor=pointer]:
+                - /url: /search?sca_esv=09892958edd89daa&q=bulk+apple+device+%22buyback%22+for+business&sa=X&ved=2ahUKEwjYq_POjfqUAxUqAHkGHYKeFJ4Q5t4CegQIRBAB
+          - generic [ref=e830]:
+            - generic [ref=e833]:
+              - link "Apple Pricing and Programs for Startups Buying iPhone ... Mac Business Solutions https://mbsdirect.com › apple-pricing-and-programs-for..." [ref=e835] [cursor=pointer]:
+                - /url: https://mbsdirect.com/apple-pricing-and-programs-for-startups-buying-iphone-and-ipad-devices-and-mac-computers-in-bulk
+                - heading "Apple Pricing and Programs for Startups Buying iPhone ..." [level=3] [ref=e836]
+                - generic [ref=e841]:
+                  - generic [ref=e843]: Mac Business Solutions
+                  - generic [ref=e845]: https://mbsdirect.com › apple-pricing-and-programs-for...
+              - button "About this result" [ref=e846] [cursor=pointer]:
+                - img [ref=e849]
+            - generic [ref=e852]:
+              - generic [ref=e853]: Dec 18, 2025 —
+              - generic [ref=e854]:
+                - text: Through partnerships with
+                - emphasis [ref=e855]: Apple
+                - text: resellers like MBS, startups may qualify for volume pricing on orders as small as 5–10
+                - emphasis [ref=e856]: devices
+                - text: ", depending on ..."
+              - link "Read more" [ref=e857] [cursor=pointer]:
+                - /url: https://mbsdirect.com/apple-pricing-and-programs-for-startups-buying-iphone-and-ipad-devices-and-mac-computers-in-bulk#:~:text=Through%20partnerships%20with%20Apple%20resellers,depending%20on%20model%20and%20configuration.
+            - generic [ref=e859]:
+              - text: "Missing: buyback ‎| Show results with:"
+              - link "buyback" [ref=e860] [cursor=pointer]:
+                - /url: /search?sca_esv=09892958edd89daa&q=bulk+apple+device+%22buyback%22+for+business&sa=X&ved=2ahUKEwjYq_POjfqUAxUqAHkGHYKeFJ4Q5t4CegQISBAB
+          - generic [ref=e864]:
+            - generic [ref=e867]:
+              - 'link "Bulk iPhone Selling for Businesses: Best Practices & Tips SmartphonesPLUS https://www.smartphonesplus.com › General" [ref=e869] [cursor=pointer]':
+                - /url: https://www.smartphonesplus.com/blog/how-to-sell-iphones-in-bulk-step-by-step-guide-for-businesses/?srsltid=AfmBOooQHvSf-SK2oyiVe6lg0O4VZrPKuLUBSuQGPveuCnu4msLZmliU
+                - 'heading "Bulk iPhone Selling for Businesses: Best Practices & Tips" [level=3] [ref=e870]'
+                - generic [ref=e875]:
+                  - generic [ref=e877]: SmartphonesPLUS
+                  - generic [ref=e879]: https://www.smartphonesplus.com › General
+              - button "About this result" [ref=e880] [cursor=pointer]:
+                - img [ref=e883]
+            - generic [ref=e886]:
+              - generic [ref=e887]: Oct 10, 2025 —
+              - generic [ref=e888]:
+                - emphasis [ref=e889]: Sell iPhones in bulk quickly with our step-by-step guide
+                - text: . We explain data security tips, shipping practices, and ways to maximize value.
+            - list [ref=e891]:
+              - listitem [ref=e892]:
+                - link "3. Local Bulk Buyers Or..." [ref=e893] [cursor=pointer]:
+                  - /url: https://www.smartphonesplus.com/blog/how-to-sell-iphones-in-bulk-step-by-step-guide-for-businesses/#:~:text=3.%20Local%20Bulk%20Buyers%20or%20Recyclers
+                  - generic [ref=e895]: 3. Local Bulk Buyers Or...
+              - listitem [ref=e896]:
+                - link "4. Auction Sites &..." [ref=e897] [cursor=pointer]:
+                  - /url: https://www.smartphonesplus.com/blog/how-to-sell-iphones-in-bulk-step-by-step-guide-for-businesses/#:~:text=4.%20Auction%20Sites%20%26%20Liquidators
+                  - generic [ref=e899]: 4. Auction Sites &...
+              - listitem [ref=e900]:
+                - 'link "Step 4: Shipping & Handling..." [ref=e901] [cursor=pointer]':
+                  - /url: https://www.smartphonesplus.com/blog/how-to-sell-iphones-in-bulk-step-by-step-guide-for-businesses/#:~:text=Step%204%3A%20Shipping%20%26%20Handling%20Best%20Practices,-Now%2C%20you%27ve%20gotten
+                  - generic [ref=e903]: "Step 4: Shipping & Handling..."
+          - generic [ref=e908]:
+            - heading "People also ask" [level=2] [ref=e910]
+            - generic [ref=e911]:
+              - button "Does Apple do a buyback program?" [ref=e917] [cursor=pointer]:
+                - generic [ref=e919]: Does Apple do a buyback program?
+                - img [ref=e922]
+              - button "Does Apple do bulk orders?" [ref=e931] [cursor=pointer]:
+                - generic [ref=e933]: Does Apple do bulk orders?
+                - img [ref=e936]
+              - button "What is the Apple take back scheme?" [ref=e945] [cursor=pointer]:
+                - generic [ref=e947]: What is the Apple take back scheme?
+                - img [ref=e950]
+              - button "Does Mac have a buyback program?" [ref=e959] [cursor=pointer]:
+                - generic [ref=e961]: Does Mac have a buyback program?
+                - img [ref=e964]
+          - generic [ref=e969]:
+            - heading "Web results" [level=2] [ref=e970]
+            - generic [ref=e971]:
+              - generic [ref=e974]:
+                - link "Multi buy - Apple Community Apple Support Community https://discussions.apple.com › thread" [ref=e976] [cursor=pointer]:
+                  - /url: https://discussions.apple.com/thread/253517963
+                  - heading "Multi buy - Apple Community" [level=3] [ref=e977]
+                  - generic [ref=e982]:
+                    - generic [ref=e984]: Apple Support Community
+                    - generic [ref=e986]: https://discussions.apple.com › thread
+                - button "About this result" [ref=e987] [cursor=pointer]:
+                  - img [ref=e990]
+              - generic [ref=e993]:
+                - generic [ref=e994]: Dec 30, 2021 —
+                - generic [ref=e995]:
+                  - text: You'll need to visit www.apple.com/business or reach out to the business team at your local store to
+                  - emphasis [ref=e996]: make bulk purchases as a business
+                  - text: .
+                - link "Read more" [ref=e997] [cursor=pointer]:
+                  - /url: https://discussions.apple.com/thread/253517963#:~:text=You'll%20need%20to%20visit%20www.apple.com%2Fbusiness,bulk%20purchases%20as%20a%20business.
+              - generic [ref=e999]:
+                - text: "Missing: buyback ‎| Show results with:"
+                - link "buyback" [ref=e1000] [cursor=pointer]:
+                  - /url: /search?sca_esv=09892958edd89daa&q=bulk+apple+device+%22buyback%22+for+business&sa=X&ved=2ahUKEwjYq_POjfqUAxUqAHkGHYKeFJ4Q5t4CegQIRhAB
+        - generic [ref=e1002]:
+          - generic [ref=e1007]:
+            - heading "People also search for" [level=2] [ref=e1009]
+            - generic [ref=e1011]:
+              - generic [ref=e1012]:
+                - link "Companies that buy apple products" [ref=e1016] [cursor=pointer]:
+                  - /url: /search?sca_esv=09892958edd89daa&q=Companies+that+buy+apple+products&sa=X&ved=2ahUKEwjYq_POjfqUAxUqAHkGHYKeFJ4Q1QJ6BAgsEAE
+                  - generic [ref=e1017]:
+                    - generic [ref=e1022]: Companies that buy apple products
+                    - img [ref=e1026]
+                - link "Best place to sell old Apple products" [ref=e1031] [cursor=pointer]:
+                  - /url: /search?sca_esv=09892958edd89daa&q=Best+place+to+sell+old+Apple+products&sa=X&ved=2ahUKEwjYq_POjfqUAxUqAHkGHYKeFJ4Q1QJ6BAhFEAE
+                  - generic [ref=e1032]:
+                    - generic [ref=e1037]: Best place to sell old Apple products
+                    - img [ref=e1041]
+                - link "Who pays the most for apple products" [ref=e1046] [cursor=pointer]:
+                  - /url: /search?sca_esv=09892958edd89daa&q=Who+pays+the+most+for+apple+products&sa=X&ved=2ahUKEwjYq_POjfqUAxUqAHkGHYKeFJ4Q1QJ6BAg-EAE
+                  - generic [ref=e1047]:
+                    - generic [ref=e1052]: Who pays the most for apple products
+                    - img [ref=e1056]
+                - link "Apple devices for cash" [ref=e1061] [cursor=pointer]:
+                  - /url: /search?sca_esv=09892958edd89daa&q=Apple+devices+for+cash&sa=X&ved=2ahUKEwjYq_POjfqUAxUqAHkGHYKeFJ4Q1QJ6BAg4EAE
+                  - generic [ref=e1062]:
+                    - generic [ref=e1067]: Apple devices for cash
+                    - img [ref=e1071]
+              - generic [ref=e1073]:
+                - link "Where to sell unopened apple products" [ref=e1077] [cursor=pointer]:
+                  - /url: /search?sca_esv=09892958edd89daa&q=Where+to+sell+unopened+apple+products&sa=X&ved=2ahUKEwjYq_POjfqUAxUqAHkGHYKeFJ4Q1QJ6BAgrEAE
+                  - generic [ref=e1078]:
+                    - generic [ref=e1083]: Where to sell unopened apple products
+                    - img [ref=e1087]
+                - link "Apple buyers" [ref=e1092] [cursor=pointer]:
+                  - /url: /search?sca_esv=09892958edd89daa&q=Apple+buyers&sa=X&ved=2ahUKEwjYq_POjfqUAxUqAHkGHYKeFJ4Q1QJ6BAg2EAE
+                  - generic [ref=e1093]:
+                    - generic [ref=e1098]: Apple buyers
+                    - img [ref=e1102]
+                - link "Sell old apple products near me" [ref=e1107] [cursor=pointer]:
+                  - /url: /search?sca_esv=09892958edd89daa&q=Sell+old+apple+products+near+me&sa=X&ved=2ahUKEwjYq_POjfqUAxUqAHkGHYKeFJ4Q1QJ6BAg0EAE
+                  - generic [ref=e1108]:
+                    - generic [ref=e1113]: Sell old apple products near me
+                    - img [ref=e1117]
+                - link "Sell Apple products" [ref=e1122] [cursor=pointer]:
+                  - /url: /search?sca_esv=09892958edd89daa&q=Sell+Apple+products&sa=X&ved=2ahUKEwjYq_POjfqUAxUqAHkGHYKeFJ4Q1QJ6BAgtEAE
+                  - generic [ref=e1123]:
+                    - generic [ref=e1128]: Sell Apple products
+                    - img [ref=e1132]
+          - navigation [ref=e1134]:
+            - heading "Page Navigation" [level=1] [ref=e1135]
+            - text: "1"
+            - link "Page 2" [ref=e1138] [cursor=pointer]:
+              - /url: /search?q=bulk+apple+device+buyback+for+business&sca_esv=09892958edd89daa&ei=_f8napi5KqqA5OMPgr3S8Ak&start=10&sa=N&sstk=AU9db-DxxfmMlMBhUMjwyfDtGi7Nxvp0tiENrt1kn_eBeph84Gq10hggy-ZZXmXqfUFSAzBvjkP2xB6fNnEd22YQXgIuBOYcbsoepg&ved=2ahUKEwjYq_POjfqUAxUqAHkGHYKeFJ4Q8tMDegQIKRAE
+              - text: "2"
+            - link "Page 3" [ref=e1140] [cursor=pointer]:
+              - /url: /search?q=bulk+apple+device+buyback+for+business&sca_esv=09892958edd89daa&ei=_f8napi5KqqA5OMPgr3S8Ak&start=20&sa=N&sstk=AU9db-DxxfmMlMBhUMjwyfDtGi7Nxvp0tiENrt1kn_eBeph84Gq10hggy-ZZXmXqfUFSAzBvjkP2xB6fNnEd22YQXgIuBOYcbsoepg&ved=2ahUKEwjYq_POjfqUAxUqAHkGHYKeFJ4Q8tMDegQIKRAG
+              - text: "3"
+            - link "Page 4" [ref=e1142] [cursor=pointer]:
+              - /url: /search?q=bulk+apple+device+buyback+for+business&sca_esv=09892958edd89daa&ei=_f8napi5KqqA5OMPgr3S8Ak&start=30&sa=N&sstk=AU9db-DxxfmMlMBhUMjwyfDtGi7Nxvp0tiENrt1kn_eBeph84Gq10hggy-ZZXmXqfUFSAzBvjkP2xB6fNnEd22YQXgIuBOYcbsoepg&ved=2ahUKEwjYq_POjfqUAxUqAHkGHYKeFJ4Q8tMDegQIKRAI
+              - text: "4"
+            - link "Page 5" [ref=e1144] [cursor=pointer]:
+              - /url: /search?q=bulk+apple+device+buyback+for+business&sca_esv=09892958edd89daa&ei=_f8napi5KqqA5OMPgr3S8Ak&start=40&sa=N&sstk=AU9db-DxxfmMlMBhUMjwyfDtGi7Nxvp0tiENrt1kn_eBeph84Gq10hggy-ZZXmXqfUFSAzBvjkP2xB6fNnEd22YQXgIuBOYcbsoepg&ved=2ahUKEwjYq_POjfqUAxUqAHkGHYKeFJ4Q8tMDegQIKRAK
+              - text: "5"
+            - link "Page 6" [ref=e1146] [cursor=pointer]:
+              - /url: /search?q=bulk+apple+device+buyback+for+business&sca_esv=09892958edd89daa&ei=_f8napi5KqqA5OMPgr3S8Ak&start=50&sa=N&sstk=AU9db-DxxfmMlMBhUMjwyfDtGi7Nxvp0tiENrt1kn_eBeph84Gq10hggy-ZZXmXqfUFSAzBvjkP2xB6fNnEd22YQXgIuBOYcbsoepg&ved=2ahUKEwjYq_POjfqUAxUqAHkGHYKeFJ4Q8tMDegQIKRAM
+              - text: "6"
+            - link "Page 7" [ref=e1148] [cursor=pointer]:
+              - /url: /search?q=bulk+apple+device+buyback+for+business&sca_esv=09892958edd89daa&ei=_f8napi5KqqA5OMPgr3S8Ak&start=60&sa=N&sstk=AU9db-DxxfmMlMBhUMjwyfDtGi7Nxvp0tiENrt1kn_eBeph84Gq10hggy-ZZXmXqfUFSAzBvjkP2xB6fNnEd22YQXgIuBOYcbsoepg&ved=2ahUKEwjYq_POjfqUAxUqAHkGHYKeFJ4Q8tMDegQIKRAO
+              - text: "7"
+            - link "Page 8" [ref=e1150] [cursor=pointer]:
+              - /url: /search?q=bulk+apple+device+buyback+for+business&sca_esv=09892958edd89daa&ei=_f8napi5KqqA5OMPgr3S8Ak&start=70&sa=N&sstk=AU9db-DxxfmMlMBhUMjwyfDtGi7Nxvp0tiENrt1kn_eBeph84Gq10hggy-ZZXmXqfUFSAzBvjkP2xB6fNnEd22YQXgIuBOYcbsoepg&ved=2ahUKEwjYq_POjfqUAxUqAHkGHYKeFJ4Q8tMDegQIKRAQ
+              - text: "8"
+            - link "Page 9" [ref=e1152] [cursor=pointer]:
+              - /url: /search?q=bulk+apple+device+buyback+for+business&sca_esv=09892958edd89daa&ei=_f8napi5KqqA5OMPgr3S8Ak&start=80&sa=N&sstk=AU9db-DxxfmMlMBhUMjwyfDtGi7Nxvp0tiENrt1kn_eBeph84Gq10hggy-ZZXmXqfUFSAzBvjkP2xB6fNnEd22YQXgIuBOYcbsoepg&ved=2ahUKEwjYq_POjfqUAxUqAHkGHYKeFJ4Q8tMDegQIKRAS
+              - text: "9"
+            - link "Page 10" [ref=e1154] [cursor=pointer]:
+              - /url: /search?q=bulk+apple+device+buyback+for+business&sca_esv=09892958edd89daa&ei=_f8napi5KqqA5OMPgr3S8Ak&start=90&sa=N&sstk=AU9db-DxxfmMlMBhUMjwyfDtGi7Nxvp0tiENrt1kn_eBeph84Gq10hggy-ZZXmXqfUFSAzBvjkP2xB6fNnEd22YQXgIuBOYcbsoepg&ved=2ahUKEwjYq_POjfqUAxUqAHkGHYKeFJ4Q8tMDegQIKRAU
+              - text: "10"
+            - heading "Next" [level=2] [ref=e1156]:
+              - link "Next" [ref=e1157] [cursor=pointer]:
+                - /url: /search?q=bulk+apple+device+buyback+for+business&sca_esv=09892958edd89daa&ei=_f8napi5KqqA5OMPgr3S8Ak&start=10&sa=N&sstk=AU9db-DxxfmMlMBhUMjwyfDtGi7Nxvp0tiENrt1kn_eBeph84Gq10hggy-ZZXmXqfUFSAzBvjkP2xB6fNnEd22YQXgIuBOYcbsoepg&ved=2ahUKEwjYq_POjfqUAxUqAHkGHYKeFJ4Q8NMDegQIKRAW
+                - generic [ref=e1159]: Next
+        - navigation
+    - contentinfo [ref=e1160]:
+      - heading "Footer Links" [level=1] [ref=e1161]
+      - generic [ref=e1165]:
+        - generic [ref=e1169]:
+          - button "Cape Canaveral, Florida - Based on your past activity" [ref=e1171] [cursor=pointer]:
+            - generic [ref=e1172]: Cape Canaveral, Florida
+            - generic [ref=e1174]:
+              - text: "-"
+              - generic [ref=e1175]: Based on your past activity
+          - text: "-"
+          - button "Update location" [ref=e1177] [cursor=pointer]: Update location
+        - generic [ref=e1180]:
+          - link "Help" [ref=e1181] [cursor=pointer]:
+            - /url: https://support.google.com/websearch/?p=ws_results_help&hl=en&fg=1
+          - link "Send feedback" [ref=e1182] [cursor=pointer]:
+            - /url: "#"
+          - link "Privacy" [ref=e1183] [cursor=pointer]:
+            - /url: https://policies.google.com/privacy?hl=en&fg=1
+          - link "Terms" [ref=e1184] [cursor=pointer]:
+            - /url: https://policies.google.com/terms?hl=en&fg=1

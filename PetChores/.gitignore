@@ -1,0 +1,26 @@
+# Xcode / build artifacts (the project is generated from project.yml via XcodeGen)
+PetChores.xcodeproj/
+*.xcworkspace/
+xcuserdata/
+DerivedData/
+build/
+*.ipa
+*.dSYM.zip
+*.dSYM
+
+# macOS
+.DS_Store
+
+# Swift Package Manager
+.swiftpm/
+.build/
+
+# Secrets and fastlane output (never commit the App Store Connect API key)
+*.p8
+fastlane/.keys/
+fastlane/report.xml
+fastlane/Preview.html
+fastlane/screenshots/**/*_framed.png
+fastlane/test_output/
+*.ipa
+*.app.dSYM.zip

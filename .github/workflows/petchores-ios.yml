@@ -1,0 +1,59 @@
+name: Pet Chores iOS Release
+
+# Manual-only. Builds, signs, and uploads the Pet Chores iOS app from a macOS
+# runner, so no personal Mac is required. Scoped entirely to the PetChores/ folder
+# and never runs on push, so it does not affect the markcmo.com site or its deploys.
+#
+# One-time setup: add these repository secrets (Settings -> Secrets and variables ->
+# Actions). All come from App Store Connect -> Users and Access -> Integrations ->
+# App Store Connect API (create a key with "App Manager" access):
+#   ASC_KEY_ID        the key id (e.g. ABC123XYZ)
+#   ASC_ISSUER_ID     the issuer id (a UUID)
+#   ASC_KEY_BASE64    the AuthKey_XXXX.p8 file, base64-encoded
+#                       macOS/Linux:  base64 -i AuthKey_XXXX.p8 | pbcopy
+#   APPLE_TEAM_ID     your 10-char Apple Developer Team ID
+#
+# Then: Actions tab -> "Pet Chores iOS Release" -> Run workflow -> pick a lane:
+#   meta     push listing text/screenshots only (no build) - safe first test
+#   beta     build, sign, upload to TestFlight
+#   release  build, sign, upload, set metadata, submit for App Review
+
+on:
+  workflow_dispatch:
+    inputs:
+      lane:
+        description: "fastlane lane"
+        required: true
+        default: "beta"
+        type: choice
+        options: [setup_app, create_iap, frames, meta, beta, release]
+
+jobs:
+  build:
+    runs-on: macos-14
+    defaults:
+      run:
+        working-directory: PetChores
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Install XcodeGen and fastlane
+        run: |
+          brew install xcodegen
+          gem install fastlane --no-document
+
+      - name: Write App Store Connect API key
+        run: |
+          mkdir -p fastlane/.keys
+          echo "$ASC_KEY_BASE64" | base64 --decode > fastlane/.keys/AuthKey.p8
+        env:
+          ASC_KEY_BASE64: ${{ secrets.ASC_KEY_BASE64 }}
+
+      - name: Run fastlane ${{ github.event.inputs.lane }}
+        run: fastlane ios ${{ github.event.inputs.lane }}
+        env:
+          ASC_KEY_ID: ${{ secrets.ASC_KEY_ID }}
+          ASC_ISSUER_ID: ${{ secrets.ASC_ISSUER_ID }}
+          ASC_KEY_PATH: ${{ github.workspace }}/PetChores/fastlane/.keys/AuthKey.p8
+          TEAM_ID: ${{ secrets.APPLE_TEAM_ID }}

@@ -1,0 +1,53 @@
+{
+  "expo": {
+    "name": "Pet Chores",
+    "slug": "pet-chores",
+    "version": "1.0.0",
+    "orientation": "portrait",
+    "icon": "./assets/icon.png",
+    "scheme": "petchores",
+    "userInterfaceStyle": "automatic",
+    "newArchEnabled": true,
+    "splash": {
+      "backgroundColor": "#FFFAF7"
+    },
+    "ios": {
+      "supportsTablet": true,
+      "bundleIdentifier": "com.petchores.app",
+      "buildNumber": "1",
+      "infoPlist": {
+        "ITSAppUsesNonExemptEncryption": false,
+        "NSCameraUsageDescription": "Pet Chores can let you take a photo as proof a chore was done, like a clean litter box. Photos stay on this device and are never uploaded.",
+        "NSPhotoLibraryAddUsageDescription": "Pet Chores can attach a photo as proof a chore was done. Photos stay on this device and are never uploaded."
+      }
+    },
+    "android": {
+      "package": "com.petchores.app",
+      "adaptiveIcon": {
+        "foregroundImage": "./assets/adaptive-icon.png",
+        "backgroundColor": "#5AB0F5"
+      }
+    },
+    "plugins": [
+      "expo-router",
+      [
+        "expo-notifications",
+        {
+          "icon": "./assets/icon.png",
+          "color": "#2563EB"
+        }
+      ],
+      "react-native-iap"
+    ],
+    "experiments": {
+      "typedRoutes": true
+    },
+    "extra": {
+      "router": {},
+      "eas": {
+        "projectId": "844a85a9-b476-4ca7-82c3-4daca5e01768"
+      }
+    },
+    "owner": "markgabrielli"
+  }
+}

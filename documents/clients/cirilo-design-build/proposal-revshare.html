@@ -84,6 +84,63 @@
 </style>
 </head>
 <body>
+<!-- ACCESS GATE (private until the client moves forward). Remove this block to make the doc public. -->
+<div id="cdb-gate" role="dialog" aria-modal="true" aria-label="Private document access">
+  <div class="cdb-gate-card">
+    <div class="cdb-gate-eyebrow">Confidential Document</div>
+    <div class="cdb-gate-lock" aria-hidden="true">&#128274;</div>
+    <h1>Private Access</h1>
+    <p>This document is confidential and prepared for a single recipient. Please enter your access code to continue.</p>
+    <form id="cdb-gate-form" autocomplete="off">
+      <input id="cdb-gate-code" type="password" placeholder="Access code" aria-label="Access code" autocomplete="off" spellcheck="false">
+      <button type="submit">Unlock Document</button>
+      <div id="cdb-gate-err" class="cdb-gate-err" hidden>That code is not right. Please try again.</div>
+    </form>
+    <div class="cdb-gate-foot">Need access? Contact Mark at info@wetyr.com</div>
+  </div>
+</div>
+<style>
+  body:not(.cdb-unlocked) { overflow: hidden !important; }
+  body:not(.cdb-unlocked) > *:not(#cdb-gate):not(script):not(style) { display: none !important; }
+  body.cdb-unlocked #cdb-gate { display: none !important; }
+  #cdb-gate { position: fixed; inset: 0; z-index: 2147483647; display: flex; align-items: center; justify-content: center; padding: 24px; background: #0E1B2A; background-image: radial-gradient(circle at 80% 8%, rgba(171,126,55,0.25), transparent 55%); font-family: 'Inter', system-ui, -apple-system, sans-serif; }
+  #cdb-gate .cdb-gate-card { width: 100%; max-width: 430px; background: #FAF7F2; border: 1px solid #E2D9C7; border-radius: 16px; padding: 40px 34px; text-align: center; box-shadow: 0 30px 80px rgba(0,0,0,0.45); }
+  #cdb-gate .cdb-gate-eyebrow { font-family: 'DM Mono', monospace; font-size: 10px; letter-spacing: 4px; text-transform: uppercase; color: #AB7E37; }
+  #cdb-gate .cdb-gate-lock { font-size: 30px; margin: 14px 0 4px; }
+  #cdb-gate h1 { font-family: 'Cormorant Garamond', Georgia, serif; font-weight: 700; font-size: 30px; color: #0E1B2A; margin: 6px 0 8px; }
+  #cdb-gate p { font-size: 14px; color: #5b6470; line-height: 1.6; margin: 0 0 22px; }
+  #cdb-gate-form { display: flex; flex-direction: column; gap: 12px; }
+  #cdb-gate-code { width: 100%; padding: 13px 16px; border: 1px solid #d8cdb8; border-radius: 10px; font-size: 16px; font-family: inherit; background: #fff; color: #1A1A1A; text-align: center; letter-spacing: 2px; }
+  #cdb-gate-code:focus { outline: none; border-color: #AB7E37; box-shadow: 0 0 0 3px rgba(171,126,55,0.18); }
+  #cdb-gate-form button { padding: 13px 16px; border: none; border-radius: 10px; background: #AB7E37; color: #fff; font-size: 15px; font-weight: 600; font-family: inherit; cursor: pointer; letter-spacing: 0.3px; }
+  #cdb-gate-form button:hover { background: #946c2c; }
+  #cdb-gate .cdb-gate-err { color: #b3261e; font-size: 13px; }
+  #cdb-gate .cdb-gate-foot { margin-top: 22px; font-size: 12px; color: #8F8F8F; }
+  #cdb-gate .cdb-shake { animation: cdbShake .4s; }
+  @keyframes cdbShake { 0%,100%{transform:translateX(0)} 20%,60%{transform:translateX(-7px)} 40%,80%{transform:translateX(7px)} }
+</style>
+<script>
+(function(){
+  var HASH='bfecfa6e44c63e847a2c28c2348ec41907262d09aebc73cf6a45e9832e3ee0dd';
+  var KEY='cdb_doc_access';
+  function unlock(){ try{ document.body.classList.add('cdb-unlocked'); }catch(e){} var g=document.getElementById('cdb-gate'); if(g) g.parentNode && g.parentNode.removeChild(g); }
+  try { if (sessionStorage.getItem(KEY)==='1') { if(document.body) unlock(); else document.addEventListener('DOMContentLoaded', unlock); return; } } catch(e){}
+  async function sha256(s){ try{ var b=new TextEncoder().encode(s); var h=await crypto.subtle.digest('SHA-256', b); return Array.from(new Uint8Array(h)).map(function(x){return x.toString(16).padStart(2,'0');}).join(''); }catch(e){ return null; } }
+  document.addEventListener('DOMContentLoaded', function(){
+    var form=document.getElementById('cdb-gate-form'); var input=document.getElementById('cdb-gate-code');
+    var err=document.getElementById('cdb-gate-err'); var card=document.querySelector('#cdb-gate .cdb-gate-card');
+    if(input) input.focus(); if(!form) return;
+    form.addEventListener('submit', async function(e){
+      e.preventDefault();
+      var hashed=await sha256((input.value||'').toLowerCase().trim());
+      if(hashed===HASH){ try{ sessionStorage.setItem(KEY,'1'); }catch(e){} unlock(); }
+      else { if(err) err.hidden=false; if(card){ card.classList.remove('cdb-shake'); void card.offsetWidth; card.classList.add('cdb-shake'); } input.value=''; input.focus(); }
+    });
+  });
+})();
+</script>
+<!-- /ACCESS GATE -->
+
 
 <nav class="cdb-nav" style="position:sticky;top:0;z-index:100;background:#fff;border-bottom:1px solid #E2E2E2;padding:0.75rem 1.5rem;display:flex;justify-content:space-between;align-items:center;font-family:'Inter',sans-serif;flex-wrap:wrap;gap:0.5rem;">
   <a href="/documents/clients/cirilo-design-build/" style="font-family:'Cormorant Garamond',serif;font-size:1.05rem;letter-spacing:0.08em;color:#2E2E34;text-decoration:none;">

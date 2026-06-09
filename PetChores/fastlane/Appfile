@@ -1,0 +1,4 @@
+# Fill in your Apple Team ID (App Store Connect -> Membership) before running.
+app_identifier("com.petchores.app")
+itc_team_id("YOUR_APP_STORE_CONNECT_TEAM_ID")
+team_id("YOUR_DEVELOPER_TEAM_ID")
