@@ -1,0 +1,196 @@
+<!--
+  master-footer.html  —  CANONICAL FOOTER for markcmo.com
+  ───────────────────────────────────────────────────────────────────
+  Single source of truth for the site footer. Injected by
+  functions/_middleware.js into every HTML page that does NOT
+  already contain <footer class="mc-master-footer"> or the legacy
+  homepage <footer> with .footer-main inside.
+
+  Mirrors the homepage footer exactly: brand block + 7 link columns
+  + bottom bar with social links. Mobile collapses to 2 columns.
+
+  DO NOT edit per-page footers — edit here. Change here propagates
+  to every page on next request.
+-->
+
+<style id="mc-master-footer-css">
+.mc-master-footer {
+  --mc-bg:      #0A0F2C;
+  --mc-bg2:     #050919;
+  --mc-bg3:     #0E1438;
+  --mc-accent:  #C9A84C;
+  --mc-border:  rgba(255,255,255,0.08);
+  --mc-text3:   #71717A;
+
+  background: var(--mc-bg2);
+  color: var(--mc-text3);
+  font-family: -apple-system, BlinkMacSystemFont, 'Outfit', 'Inter', 'SF Pro Text', 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+  border-top: 1px solid var(--mc-border);
+  margin-top: 4rem;
+}
+.mc-master-footer a { color: var(--mc-text3); text-decoration: none; transition: color 0.15s; }
+.mc-master-footer a:hover { color: #fff; }
+.mc-master-footer ul { list-style: none; margin: 0; padding: 0; }
+
+.mc-master-footer .mc-foot-main {
+  max-width: 1400px; margin: 0 auto;
+  padding: 4rem clamp(1.5rem, 6vw, 6rem) 3rem;
+  display: grid; grid-template-columns: 2fr repeat(7, 1fr); gap: 2rem;
+}
+.mc-master-footer .mc-foot-brand { }
+.mc-master-footer .mc-foot-logo-text {
+  font-family: 'Outfit', sans-serif; font-size: 1.1rem; font-weight: 800;
+  color: #fff; margin-bottom: 0.75rem;
+}
+.mc-master-footer .mc-foot-logo-text span { color: var(--mc-accent); }
+.mc-master-footer .mc-foot-about {
+  font-size: 0.825rem; line-height: 1.7; color: var(--mc-text3); margin-bottom: 1.25rem;
+}
+.mc-master-footer .mc-foot-chips {
+  display: flex; flex-wrap: wrap; gap: 0.4rem; margin-bottom: 1.25rem;
+}
+.mc-master-footer .mc-foot-chip {
+  font-size: 0.65rem; font-weight: 600; letter-spacing: 0.06em; text-transform: uppercase;
+  color: var(--mc-text3); border: 1px solid var(--mc-border);
+  padding: 0.25rem 0.6rem; border-radius: 4px;
+}
+.mc-master-footer .mc-foot-socials { display: flex; gap: 0.6rem; }
+.mc-master-footer .mc-foot-soc {
+  width: 34px; height: 34px; border-radius: 8px;
+  background: var(--mc-bg3); border: 1px solid var(--mc-border);
+  color: var(--mc-text3); display: flex; align-items: center; justify-content: center;
+  font-size: 0.8rem; font-weight: 700; transition: all 0.15s;
+}
+.mc-master-footer .mc-foot-soc:hover { background: var(--mc-accent); border-color: var(--mc-accent); color: #fff; }
+.mc-master-footer .mc-foot-col h4 {
+  font-size: 0.7rem; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase;
+  color: var(--mc-text3); margin: 0 0 1rem; font-family: inherit;
+}
+.mc-master-footer .mc-foot-col ul { display: flex; flex-direction: column; gap: 0.6rem; }
+.mc-master-footer .mc-foot-col ul li a {
+  font-size: 0.8125rem; color: var(--mc-text3); transition: color 0.15s;
+}
+.mc-master-footer .mc-foot-col ul li a.mc-accent { color: var(--mc-accent); font-weight: 600; }
+.mc-master-footer .mc-foot-col ul li a:hover { color: #fff; }
+.mc-master-footer .mc-foot-bar {
+  border-top: 1px solid var(--mc-border);
+  padding: 1.5rem clamp(1.5rem, 6vw, 6rem);
+  max-width: 1400px; margin: 0 auto;
+  display: flex; justify-content: space-between; align-items: center;
+  flex-wrap: wrap; gap: 0.5rem;
+}
+.mc-master-footer .mc-foot-copy { font-size: 0.8rem; color: var(--mc-text3); }
+.mc-master-footer .mc-foot-bar-links { display: flex; gap: 1.25rem; }
+.mc-master-footer .mc-foot-bar-links a { font-size: 0.8rem; color: var(--mc-text3); transition: color 0.15s; }
+.mc-master-footer .mc-foot-bar-links a:hover { color: #fff; }
+
+@media (max-width: 1100px) {
+  .mc-master-footer .mc-foot-main { grid-template-columns: 1fr 1fr 1fr 1fr; }
+  .mc-master-footer .mc-foot-brand { grid-column: span 4; }
+}
+@media (max-width: 900px) {
+  .mc-master-footer .mc-foot-main { grid-template-columns: 1fr 1fr; }
+  .mc-master-footer .mc-foot-brand { grid-column: span 2; }
+}
+</style>
+
+<footer class="mc-master-footer" id="mcMasterFooter">
+  <div class="mc-foot-main">
+    <div class="mc-foot-brand">
+      <div class="mc-foot-logo-text">Mark <span>Gabrielli</span></div>
+      <p class="mc-foot-about">Fractional CMO, COO &amp; Executive Consultant. I help businesses from $1M to $100M find what's broken, build what scales, and execute what others only talk about.</p>
+      <div class="mc-foot-chips">
+        <span class="mc-foot-chip">WETYR Founder</span>
+        <span class="mc-foot-chip">Fractional C-Suite</span>
+        <span class="mc-foot-chip">AI Strategist</span>
+        <span class="mc-foot-chip">CST Certified</span>
+      </div>
+      <div class="mc-foot-socials">
+        <a href="https://www.linkedin.com/in/marklgabrielli/" target="_blank" rel="noopener" class="mc-foot-soc" aria-label="LinkedIn">in</a>
+        <a href="mailto:mark@markcmo.com" class="mc-foot-soc" aria-label="Email">@</a>
+      </div>
+    </div>
+    <div class="mc-foot-col"><h4>C-Suite</h4><ul>
+      <li><a href="/fractional-cmo">Fractional CMO</a></li>
+      <li><a href="/fractional-coo">Fractional COO</a></li>
+      <li><a href="/fractional-ceo">Fractional CEO</a></li>
+      <li><a href="/fractional-cto">Fractional CTO</a></li>
+      <li><a href="/fractional-cfo">Fractional CFO</a></li>
+      <li><a href="/executive-advisory">Executive Advisory</a></li>
+      <li><a href="/services">All Services</a></li>
+    </ul></div>
+    <div class="mc-foot-col"><h4>Marketing</h4><ul>
+      <li><a href="/demand-generation">Demand Generation</a></li>
+      <li><a href="/lead-generation">Lead Generation</a></li>
+      <li><a href="/b2b-marketing">B2B Marketing</a></li>
+      <li><a href="/content-marketing">Content Marketing</a></li>
+      <li><a href="/email-marketing">Email Marketing</a></li>
+      <li><a href="/digital-marketing">Digital Marketing</a></li>
+      <li><a href="/social-media-marketing">Social Media</a></li>
+      <li><a href="/linkedin-marketing">LinkedIn Marketing</a></li>
+      <li><a href="/paid-social">Paid Social</a></li>
+      <li><a href="/ppc-management">PPC Management</a></li>
+      <li><a href="/local-seo">Local SEO</a></li>
+      <li><a href="/crm-automation">CRM Automation</a></li>
+      <li><a href="/marketing-automation">Marketing Automation</a></li>
+      <li><a href="/account-based-marketing">ABM</a></li>
+      <li><a href="/go-to-market-strategy">Go-to-Market</a></li>
+      <li><a href="/marketing-audit">Marketing Audit</a></li>
+      <li><a href="/marketing-strategy">Marketing Strategy</a></li>
+    </ul></div>
+    <div class="mc-foot-col"><h4>Compare</h4><ul>
+      <li><a href="/fractional-cmo-cost">CMO Cost</a></li>
+      <li><a href="/compare/fractional-cmo-vs-full-time-cmo/">vs Full-Time CMO</a></li>
+      <li><a href="/compare/fractional-cmo-vs-marketing-agency/">vs Agency</a></li>
+      <li><a href="/compare/fractional-cmo-vs-vp-of-marketing/">vs VP of Marketing</a></li>
+      <li><a href="/compare/fractional-cmo-vs-consultant/">vs Consultant</a></li>
+      <li><a href="/compare/fractional-cmo-vs-interim-cmo/">vs Interim CMO</a></li>
+      <li><a href="/chief-outsiders-alternative">Chief Outsiders Alt.</a></li>
+    </ul></div>
+    <div class="mc-foot-col"><h4>By Stage</h4><ul>
+      <li><a href="/fractional-cmo-pre-revenue">Pre-Revenue</a></li>
+      <li><a href="/fractional-cmo-series-a">Series A</a></li>
+      <li><a href="/fractional-cmo-series-b">Series B</a></li>
+      <li><a href="/fractional-cmo-bootstrapped-companies">Bootstrapped</a></li>
+      <li><a href="/fractional-cmo-pe-backed-companies">PE-Backed</a></li>
+      <li><a href="/fractional-cmo-venture-capital">VC-Backed</a></li>
+      <li><a href="/best-fractional-cmo">Best Fractional CMO</a></li>
+    </ul></div>
+    <div class="mc-foot-col"><h4>Industries</h4><ul>
+      <li><a href="/fractional-cmo-saas">SaaS</a></li>
+      <li><a href="/fractional-cmo-healthcare">Healthcare</a></li>
+      <li><a href="/fractional-cmo-fintech">Fintech</a></li>
+      <li><a href="/fractional-cmo-ai">AI Companies</a></li>
+      <li><a href="/fractional-cmo-b2b">B2B</a></li>
+      <li><a href="/fractional-cmo-ecommerce">eCommerce</a></li>
+      <li><a href="/industries">All Industries</a></li>
+    </ul></div>
+    <div class="mc-foot-col"><h4>Cities</h4><ul>
+      <li><a href="/fractional-cmo-dallas-fort-worth">Dallas-Fort Worth</a></li>
+      <li><a href="/fractional-cmo-greater-houston">Houston</a></li>
+      <li><a href="/fractional-cmo-greater-chicago">Chicago</a></li>
+      <li><a href="/fractional-cmo-greater-atlanta">Atlanta</a></li>
+      <li><a href="/fractional-cmo-greater-miami">Miami</a></li>
+      <li><a href="/fractional-cmo-greater-boston">Boston</a></li>
+      <li><a href="/fractional-cmo-near-me">CMO Near Me</a></li>
+    </ul></div>
+    <div class="mc-foot-col"><h4>Learn</h4><ul>
+      <li><a href="/magnet-framework" class="mc-accent">MAGNET Framework&trade;</a></li>
+      <li><a href="/blog">Insights &amp; Blog</a></li>
+      <li><a href="/about">About Mark</a></li>
+      <li><a href="/testimonials">Testimonials</a></li>
+      <li><a href="/faq">FAQ</a></li>
+      <li><a href="/contact">Contact</a></li>
+      <li><a href="https://academy.markcmo.com" target="_blank" rel="noopener" class="mc-accent">Academy</a></li>
+    </ul></div>
+  </div>
+  <div class="mc-foot-bar">
+    <span class="mc-foot-copy">&copy; 2026 Mark Gabrielli &middot; markcmo.com &middot; All rights reserved.</span>
+    <div class="mc-foot-bar-links">
+      <a href="https://www.linkedin.com/in/marklgabrielli/" target="_blank" rel="noopener">LinkedIn</a>
+      <a href="https://x.com/markgcmo" target="_blank" rel="noopener">X / Twitter</a>
+      <a href="https://medium.com/@mark_louis_gabrielli_jr" target="_blank" rel="noopener">Medium</a>
+      <a href="https://www.tiktok.com/@mark.gabrielli.cmo" target="_blank" rel="noopener">TikTok</a>
+    </div>
+  </div>
+</footer>

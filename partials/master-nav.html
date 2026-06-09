@@ -1,0 +1,166 @@
+<!--
+  master-nav.html  —  CANONICAL TOP NAV for markcmo.com
+  ───────────────────────────────────────────────────────────────────
+  This is the single source of truth for the site header. It is read
+  by functions/_middleware.js at request time and injected into the
+  start of <body> on every HTML page that does NOT already contain
+  <nav class="nav" id="mainNav"> (e.g. the homepage, which has it
+  inlined for SEO/perf).
+
+  ANY change here propagates to every page in the site on next request
+  (modulo edge cache TTL). DO NOT edit per-page navs — edit here.
+
+  Includes:
+    - Scoped CSS variables (mc-* prefix to avoid colliding with page CSS)
+    - The <nav> element + <div class="mobile-drawer">
+    - Hamburger toggle JS
+
+  Mobile breakpoint: collapses links + button into hamburger drawer
+  at max-width 1100px (matches homepage).
+-->
+
+<style id="mc-master-nav-css">
+/* Scoped CSS variables - safe to embed even if the page already has them */
+.mc-master-nav,.mc-master-nav-drawer {
+  --mc-bg:      #0A0F2C;
+  --mc-accent:  #C9A84C;
+  --mc-border:  rgba(255,255,255,0.08);
+  --mc-text2:   #A1A1AA;
+  --mc-text3:   #71717A;
+}
+
+.mc-master-nav {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+  height: 64px; padding: 0 5vw;
+  display: flex; align-items: center; justify-content: space-between;
+  background: rgba(10,15,44,0.85);
+  -webkit-backdrop-filter: blur(20px);
+  backdrop-filter: blur(20px);
+  border-bottom: 1px solid var(--mc-border);
+  font-family: -apple-system, BlinkMacSystemFont, 'Outfit', 'Inter', 'SF Pro Text', 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+}
+.mc-master-nav a { text-decoration: none; color: inherit; }
+
+.mc-master-nav .mc-logo {
+  display: flex; align-items: center; gap: 10px;
+  font-family: 'Outfit', sans-serif; font-size: 1.1rem; font-weight: 700;
+  color: #fff;
+}
+.mc-master-nav .mc-logo-avatar {
+  width: 34px; height: 34px; border-radius: 50%;
+  overflow: hidden; flex-shrink: 0;
+  border: 2px solid var(--mc-accent);
+  box-shadow: 0 0 10px rgba(201,168,76,0.35);
+}
+.mc-master-nav .mc-logo-avatar img {
+  width: 100%; height: 100%; object-fit: cover; object-position: center top;
+}
+.mc-master-nav .mc-logo-text { display: flex; flex-direction: column; line-height: 1.1; }
+.mc-master-nav .mc-logo-text strong { font-size: 0.95rem; font-weight: 800; color: #fff; }
+.mc-master-nav .mc-logo-text span { font-size: 0.65rem; font-weight: 500; color: var(--mc-text3); letter-spacing: 0.06em; text-transform: uppercase; }
+
+.mc-master-nav .mc-links {
+  display: flex; align-items: center; gap: 2.5rem;
+  list-style: none; margin: 0; padding: 0;
+}
+.mc-master-nav .mc-links a {
+  font-size: 0.875rem; font-weight: 500; color: var(--mc-text2);
+  transition: color 0.15s;
+}
+.mc-master-nav .mc-links a:hover { color: #fff; }
+.mc-master-nav .mc-links a.mc-accent { color: var(--mc-accent); font-weight: 600; }
+
+.mc-master-nav .mc-right { display: flex; align-items: center; gap: 1.5rem; }
+.mc-master-nav .mc-btn {
+  font-size: 0.875rem; font-weight: 600; color: #0a0f2c;
+  background: var(--mc-accent); padding: 0.55rem 1.25rem;
+  border-radius: 8px; transition: opacity 0.15s, transform 0.15s;
+  letter-spacing: 0.01em;
+}
+.mc-master-nav .mc-btn:hover { opacity: 0.88; transform: translateY(-1px); }
+
+.mc-master-nav .mc-ham {
+  display: none; flex-direction: column; gap: 5px;
+  cursor: pointer; padding: 4px;
+}
+.mc-master-nav .mc-ham span {
+  display: block; width: 22px; height: 2px;
+  background: #fff; border-radius: 2px;
+  transition: transform 0.2s, opacity 0.2s;
+}
+
+.mc-master-nav-drawer {
+  display: none; position: fixed; inset: 0; z-index: 99;
+  background: var(--mc-bg); padding: 80px 6vw 40px;
+  flex-direction: column; gap: 1.25rem;
+  font-family: -apple-system, BlinkMacSystemFont, 'Outfit', 'Inter', sans-serif;
+}
+.mc-master-nav-drawer.mc-open { display: flex; }
+.mc-master-nav-drawer a {
+  font-size: 1.2rem; font-weight: 600; color: #fff;
+  padding: 0.6rem 0; border-bottom: 1px solid var(--mc-border);
+  text-decoration: none;
+}
+.mc-master-nav-drawer a.mc-accent { color: var(--mc-accent); font-weight: 700; }
+
+/* Spacer so page content doesn't render under the fixed nav */
+.mc-master-nav-spacer { height: 64px; }
+
+/* Mobile collapse - hide links + button, show hamburger */
+@media (max-width: 1100px) {
+  .mc-master-nav .mc-links { display: none; }
+  .mc-master-nav .mc-right .mc-btn { display: none; }
+  .mc-master-nav .mc-ham { display: flex; }
+}
+</style>
+
+<nav class="mc-master-nav" id="mcMasterNav">
+  <a href="/" class="mc-logo">
+    <div class="mc-logo-avatar">
+      <img src="/assets/mark-gabrielli.jpg" alt="Mark Gabrielli" onerror="this.parentElement.innerHTML='<span style=\'display:flex;align-items:center;justify-content:center;width:100%;height:100%;font-family:Outfit,sans-serif;font-weight:900;font-size:1rem;color:#fff;background:#C9A84C\'>M</span>'" />
+    </div>
+    <div class="mc-logo-text">
+      <strong>Mark Gabrielli</strong>
+      <span>Fractional CMO &amp; COO</span>
+    </div>
+  </a>
+  <ul class="mc-links">
+    <li><a href="/about">About</a></li>
+    <li><a href="/services">Services</a></li>
+    <li><a href="/magnet-framework" class="mc-accent">MAGNET&trade;</a></li>
+    <li><a href="/apps" class="mc-accent">Apps</a></li>
+    <li><a href="/results">Results</a></li>
+    <li><a href="/blog">Insights</a></li>
+    <li><a href="https://academy.markcmo.com" target="_blank" rel="noopener" class="mc-accent">Academy</a></li>
+  </ul>
+  <div class="mc-right">
+    <a href="/book" class="mc-btn">Book a Free Call</a>
+  </div>
+  <div class="mc-ham" id="mcMasterHam" aria-label="Menu" role="button" tabindex="0"><span></span><span></span><span></span></div>
+</nav>
+
+<div class="mc-master-nav-drawer" id="mcMasterDrawer">
+  <a href="/about">About</a>
+  <a href="/services">Services</a>
+  <a href="/magnet-framework" class="mc-accent">MAGNET Framework&trade;</a>
+  <a href="/apps" class="mc-accent">Apps</a>
+  <a href="/results">Results</a>
+  <a href="/blog">Insights</a>
+  <a href="https://academy.markcmo.com" target="_blank" rel="noopener">Academy</a>
+  <a href="/book" class="mc-accent">Book a Free Strategy Call &rarr;</a>
+</div>
+
+<div class="mc-master-nav-spacer" aria-hidden="true"></div>
+
+<script id="mc-master-nav-js">
+(function(){
+  var ham = document.getElementById('mcMasterHam');
+  var drawer = document.getElementById('mcMasterDrawer');
+  if (!ham || !drawer) return;
+  function toggle(){ drawer.classList.toggle('mc-open'); }
+  function close(){ drawer.classList.remove('mc-open'); }
+  ham.addEventListener('click', toggle);
+  ham.addEventListener('keydown', function(e){ if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); toggle(); } });
+  drawer.querySelectorAll('a').forEach(function(a){ a.addEventListener('click', close); });
+})();
+</script>
