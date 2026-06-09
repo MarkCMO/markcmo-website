@@ -584,5 +584,21 @@ export async function onRequest(context) {
     rewriter.on('body', new BannerInjector(message));
   }
 
-  return rewriter.transform(response);
+  const transformed = rewriter.transform(response);
+
+  // Cache-Control override: HTML pages used to ship with max-age=3600
+  // (1 hour browser cache), which meant nav/footer changes wouldn't
+  // appear in returning visitors' browsers for up to an hour. For pages
+  // we inject the master chrome into, shorten the browser TTL so nav
+  // updates propagate fast, while keeping a longer edge TTL so CF still
+  // caches at the edge.
+  //   max-age=60       browser caches for 60 sec
+  //   s-maxage=300     CF edge caches for 5 min
+  //   must-revalidate  stale content forces a fresh check
+  if (injectChrome) {
+    const out = new Response(transformed.body, transformed);
+    out.headers.set('Cache-Control', 'public, max-age=60, s-maxage=300, must-revalidate');
+    return out;
+  }
+  return transformed;
 }
