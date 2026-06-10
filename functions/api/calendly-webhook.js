@@ -16,7 +16,187 @@
 // HANDLER_VERSION below is a sentinel I bump on every deploy so we can
 // verify in the audit log that the function bundle is fresh.
 // ═══════════════════════════════════════════════════════════════
-const HANDLER_VERSION = 'v8-confirm-or-cancel-2026-06-08';
+const HANDLER_VERSION = 'v9-domain-intelligence-2026-06-09';
+
+// ───── Booking intelligence (inlined - file deliberately self-contained) ─────
+// Classifies an inbound booking by domain history to decide whether the
+// auto-fire 7-email sequence is appropriate. Returns one of:
+//   - cold / cold_personal: send the standard cold-template sequence
+//   - returning_person: same email has booked before
+//   - warm_domain: NEW person at a domain we already have contacts/emails at
+//                  (e.g. Christina booking for Scott @secondlifemac.com)
+// The brief is rendered into the single internal-alert email so Mark sees
+// the relationship context at the moment the booking lands.
+
+const BI_PERSONAL_DOMAINS = new Set([
+  'gmail.com', 'yahoo.com', 'hotmail.com', 'outlook.com', 'icloud.com',
+  'aol.com', 'me.com', 'mac.com', 'live.com', 'msn.com', 'ymail.com',
+  'protonmail.com', 'proton.me', 'pm.me', 'gmx.com', 'gmx.us',
+  'comcast.net', 'verizon.net', 'att.net', 'sbcglobal.net', 'cox.net',
+  'mail.com', 'mail.ru', 'qq.com', '163.com', 'inbox.com',
+]);
+
+const BI_PROSPECT_EVENTS = [
+  'invitee_confirmation_sent', 'invitee_recap_sent', 'invitee_followup_sent',
+  'invitee_24h_reminder_sent', 'invitee_1h_reminder_sent', 'invitee_6h_reminder_sent',
+  'invitee_15min_confirm_sent', 'invitee_rebook_cta_sent', 'gemini_recap_sent',
+];
+
+const BI_RECENT_DAYS = 90;
+
+function biDaysAgo(n) { return new Date(Date.now() - n * 86400000).toISOString(); }
+
+function biDomain(email) {
+  if (!email) return '';
+  const at = email.lastIndexOf('@');
+  return at < 0 ? '' : email.slice(at + 1).trim().toLowerCase();
+}
+
+async function biSbSafe(env, path) {
+  try {
+    const res = await fetch(`${env.MARKCMO_SUPABASE_URL}/rest/v1/${path}`, { headers: sbHeaders(env) });
+    if (!res.ok) return [];
+    return await res.json();
+  } catch (_) { return []; }
+}
+
+async function classifyBooking(env, { inviteeEmail, inviteeName }) {
+  const emailLower = (inviteeEmail || '').toLowerCase();
+  const domain = biDomain(emailLower);
+  const isPersonal = BI_PERSONAL_DOMAINS.has(domain);
+
+  if (!domain) {
+    return {
+      tier: 'cold', domain: '', is_personal_domain: false,
+      signals: biEmptySignals(),
+      recommend: 'AUTO_SEND', reason: 'no_domain_extractable',
+      brief: 'No domain on invitee email. Treating as cold.',
+    };
+  }
+
+  if (isPersonal) {
+    const personalIntel = await biLookupSamePerson(env, emailLower);
+    const tier = personalIntel.same_person_prior_bookings > 0 ? 'returning_person' : 'cold_personal';
+    return {
+      tier, domain, is_personal_domain: true,
+      signals: { ...biEmptySignals(), ...personalIntel },
+      recommend: tier === 'returning_person' && personalIntel.recent_emails_to_same_person > 3
+        ? 'REQUEST_APPROVAL' : 'AUTO_SEND',
+      reason: tier === 'returning_person' ? 'returning_person_personal_domain' : 'first_contact_personal_domain',
+      brief: biBrief({ tier, domain, signals: personalIntel, inviteeEmail: emailLower, inviteeName }),
+    };
+  }
+
+  const [domainClients, recentEmailsDomain, recentEmailsSamePerson, samePersonBookings] = await Promise.all([
+    biSbSafe(env, `mc_clients?primary_contact_email=ilike.*@${encodeURIComponent(domain)}&select=id,primary_contact_email,primary_contact_name,status,created_at,legal_name&order=created_at.desc&limit=50`),
+    biSbSafe(env, `mc_audit_log?event=in.(${BI_PROSPECT_EVENTS.join(',')})&payload->>invitee_email=ilike.*@${encodeURIComponent(domain)}&created_at=gte.${biDaysAgo(BI_RECENT_DAYS)}&select=created_at,event,payload&order=created_at.desc&limit=100`),
+    biSbSafe(env, `mc_audit_log?event=in.(${BI_PROSPECT_EVENTS.join(',')})&payload->>invitee_email=eq.${encodeURIComponent(emailLower)}&created_at=gte.${biDaysAgo(BI_RECENT_DAYS)}&select=created_at,event&order=created_at.desc&limit=50`),
+    biSbSafe(env, `mc_audit_log?event=eq.calendly_booking_created&payload->>invitee_email=eq.${encodeURIComponent(emailLower)}&select=created_at,payload&order=created_at.desc&limit=10`),
+  ]);
+
+  const samePersonClient = domainClients.find(c => (c.primary_contact_email || '').toLowerCase() === emailLower);
+  const otherContacts = domainClients
+    .filter(c => (c.primary_contact_email || '').toLowerCase() !== emailLower)
+    .map(c => ({
+      email: c.primary_contact_email,
+      name: c.primary_contact_name || '',
+      status: c.status || '',
+      created_at: c.created_at,
+      legal_name: c.legal_name || '',
+    }));
+
+  const signals = {
+    same_person_prior_bookings: samePersonBookings.length,
+    same_person_last_booking_at: samePersonBookings[0]?.created_at || null,
+    other_contacts_in_domain: otherContacts.slice(0, 10),
+    other_contacts_in_domain_count: otherContacts.length,
+    recent_prospect_emails_sent: recentEmailsDomain.length,
+    recent_emails_to_same_person: recentEmailsSamePerson.length,
+    last_email_to_domain_at: recentEmailsDomain[0]?.created_at || null,
+    last_email_to_same_person_at: recentEmailsSamePerson[0]?.created_at || null,
+  };
+
+  let tier, recommend, reason;
+  if (samePersonBookings.length > 0 || samePersonClient) {
+    tier = 'returning_person';
+    if (signals.recent_emails_to_same_person >= 7) {
+      recommend = 'REQUEST_APPROVAL';
+      reason = 'returning_person_with_recent_high_email_volume';
+    } else if (signals.same_person_prior_bookings >= 2) {
+      recommend = 'REQUEST_APPROVAL';
+      reason = 'returning_person_multiple_prior_bookings';
+    } else {
+      recommend = 'AUTO_SEND';
+      reason = 'returning_person_single_prior_booking';
+    }
+  } else if (otherContacts.length > 0 || recentEmailsDomain.length > 0) {
+    tier = 'warm_domain';
+    recommend = 'REQUEST_APPROVAL';
+    reason = otherContacts.length > 0 ? 'warm_domain_existing_contacts' : 'warm_domain_recent_outbound';
+  } else {
+    tier = 'cold';
+    recommend = 'AUTO_SEND';
+    reason = 'first_contact_from_business_domain';
+  }
+
+  return {
+    tier, domain, is_personal_domain: false, signals, recommend, reason,
+    brief: biBrief({ tier, domain, signals, inviteeEmail: emailLower, inviteeName }),
+  };
+}
+
+async function biLookupSamePerson(env, emailLower) {
+  const [sameClient, sameBookings, sameEmails] = await Promise.all([
+    biSbSafe(env, `mc_clients?primary_contact_email=eq.${encodeURIComponent(emailLower)}&select=id&limit=1`),
+    biSbSafe(env, `mc_audit_log?event=eq.calendly_booking_created&payload->>invitee_email=eq.${encodeURIComponent(emailLower)}&select=created_at&order=created_at.desc&limit=10`),
+    biSbSafe(env, `mc_audit_log?event=in.(${BI_PROSPECT_EVENTS.join(',')})&payload->>invitee_email=eq.${encodeURIComponent(emailLower)}&created_at=gte.${biDaysAgo(BI_RECENT_DAYS)}&select=created_at&order=created_at.desc&limit=50`),
+  ]);
+  return {
+    same_person_prior_bookings: sameBookings.length,
+    same_person_last_booking_at: sameBookings[0]?.created_at || null,
+    other_contacts_in_domain: [], other_contacts_in_domain_count: 0,
+    recent_prospect_emails_sent: 0,
+    recent_emails_to_same_person: sameEmails.length,
+    last_email_to_domain_at: null,
+    last_email_to_same_person_at: sameEmails[0]?.created_at || null,
+  };
+}
+
+function biEmptySignals() {
+  return {
+    same_person_prior_bookings: 0, same_person_last_booking_at: null,
+    other_contacts_in_domain: [], other_contacts_in_domain_count: 0,
+    recent_prospect_emails_sent: 0, recent_emails_to_same_person: 0,
+    last_email_to_domain_at: null, last_email_to_same_person_at: null,
+  };
+}
+
+function biBrief({ tier, domain, signals, inviteeEmail, inviteeName }) {
+  const name = inviteeName || inviteeEmail;
+  const lines = [];
+  if (tier === 'cold' || tier === 'cold_personal') {
+    lines.push(`${name} is a first-time contact${tier === 'cold' ? ` from @${domain}` : ''}.`);
+    lines.push('No prior bookings, no prior emails. Treating as cold lead.');
+  } else if (tier === 'returning_person') {
+    lines.push(`${name} has booked with us ${signals.same_person_prior_bookings} time(s) before.`);
+    if (signals.last_email_to_same_person_at) {
+      const d = Math.floor((Date.now() - new Date(signals.last_email_to_same_person_at).getTime()) / 86400000);
+      lines.push(`Last email to them: ${d} day(s) ago. ${signals.recent_emails_to_same_person} email(s) in last 90 days.`);
+    }
+  } else if (tier === 'warm_domain') {
+    lines.push(`${name} is NEW to us, but @${domain} is not.`);
+    if (signals.other_contacts_in_domain.length > 0) {
+      const others = signals.other_contacts_in_domain.slice(0, 3).map(c => `${c.name || c.email}`).join(', ');
+      lines.push(`We have ${signals.other_contacts_in_domain_count} other contact(s) at @${domain}: ${others}${signals.other_contacts_in_domain_count > 3 ? '...' : ''}.`);
+    }
+    if (signals.recent_prospect_emails_sent > 0) {
+      lines.push(`We sent ${signals.recent_prospect_emails_sent} email(s) to people @${domain} in the last 90 days.`);
+    }
+    lines.push('Sending the standard cold-template confirmation + prep email might read as robotic to a relationship we already have.');
+  }
+  return lines.join(' ');
+}
+// ───── end booking intelligence ─────────────────────────────────
 
 export async function onRequest(context) {
   const { request, env } = context;
@@ -339,9 +519,40 @@ async function handleInviteeCreated(p, env) {
     },
   });
 
-  // ───── Internal notify email to Mark (wrapped) ─────
+  // ───── Booking intelligence (domain history classifier) ─────
+  // Determines whether this is a cold, warm-domain, or returning-person
+  // booking. Result goes into notifyNewBooking's brief so Mark sees the
+  // relationship context at the moment the booking lands.
+  let intel = null;
   try {
-    await notifyNewBooking(env, { client, eventName, scheduledAt, qa, isNew: !existing.length });
+    intel = await classifyBooking(env, { inviteeEmail, inviteeName });
+    await sbInsert(env, 'mc_audit_log', {
+      client_id: client.id,
+      engagement_id: engagement.id,
+      event: 'booking_intelligence_computed',
+      payload: {
+        invitee_email: inviteeEmail,
+        tier: intel.tier,
+        recommend: intel.recommend,
+        reason: intel.reason,
+        domain: intel.domain,
+        signals: intel.signals,
+      },
+    });
+  } catch (e) {
+    try {
+      await sbInsert(env, 'mc_audit_log', {
+        event: 'booking_intelligence_crashed',
+        payload: { invitee_email: inviteeEmail, error_message: (e && e.message) || String(e) },
+      });
+    } catch (_) {}
+  }
+
+  // ───── Internal notify email to Mark (wrapped) ─────
+  // Now intelligence-aware. ONE email per booking with the full relationship
+  // context, replacing the 7 CC'd emails we used to spam Mark with.
+  try {
+    await notifyNewBooking(env, { client, eventName, scheduledAt, qa, isNew: !existing.length, intel });
   } catch (e) {
     try {
       await sbInsert(env, 'mc_audit_log', {
@@ -502,8 +713,8 @@ async function handleInviteeCanceled(p, env) {
   return new Response('OK', { status: 200 });
 }
 
-// ───── notifyNewBooking (internal alert email) ───────────────────
-async function notifyNewBooking(env, { client, eventName, scheduledAt, qa, isNew }) {
+// ───── notifyNewBooking (internal alert email, intel-aware) ──────
+async function notifyNewBooking(env, { client, eventName, scheduledAt, qa, isNew, intel }) {
   const apiKey = env.RESEND_API_KEY;
   if (!apiKey) return;
 
@@ -522,9 +733,55 @@ async function notifyNewBooking(env, { client, eventName, scheduledAt, qa, isNew
     </tr>`
   ).join('');
 
-  const eyebrow = isNew ? 'new lead' : 'returning contact';
-  const eyebrowColor = isNew ? '#C9A84C' : '#7BA7E0';
-  const eyebrowBg = isNew ? 'rgba(201,168,76,0.12)' : 'rgba(58,123,213,0.10)';
+  // Intelligence eyebrow + tier color
+  // Cold = gold (default), warm_domain = orange (caution),
+  // returning_person = blue (already in relationship).
+  const tier = intel?.tier || (isNew ? 'cold' : 'returning_person');
+  const tierConfig = {
+    cold:             { label: 'cold lead',          color: '#C9A84C', bg: 'rgba(201,168,76,0.14)' },
+    cold_personal:    { label: 'cold (personal email)', color: '#C9A84C', bg: 'rgba(201,168,76,0.14)' },
+    warm_domain:      { label: 'warm domain - new person', color: '#E89B5F', bg: 'rgba(232,155,95,0.16)' },
+    returning_person: { label: 'returning contact',  color: '#7BA7E0', bg: 'rgba(123,167,224,0.14)' },
+  }[tier] || { label: isNew ? 'new lead' : 'returning contact', color: '#C9A84C', bg: 'rgba(201,168,76,0.12)' };
+  const eyebrow = tierConfig.label;
+  const eyebrowColor = tierConfig.color;
+  const eyebrowBg = tierConfig.bg;
+
+  // Intel block - the actionable bit Mark cares about
+  const recommendLabel = intel?.recommend === 'REQUEST_APPROVAL'
+    ? 'Review before send'
+    : intel?.recommend === 'AUTO_SEND' ? 'Auto-sending standard sequence' : '';
+  const recommendColor = intel?.recommend === 'REQUEST_APPROVAL' ? '#E89B5F' : '#7DB87D';
+
+  // Other contacts at the same domain (for warm_domain tier)
+  const otherContacts = intel?.signals?.other_contacts_in_domain || [];
+  const otherContactsRows = otherContacts.slice(0, 5).map(c => {
+    const d = c.created_at ? Math.floor((Date.now() - new Date(c.created_at).getTime()) / 86400000) : null;
+    return `<tr>
+      <td style="padding:8px 0;border-bottom:1px solid rgba(255,255,255,0.04);">
+        <div style="font-size:13px;color:rgba(255,255,255,0.85);">${esc(c.name || '(no name)')}</div>
+        <div style="font-size:11px;color:rgba(255,255,255,0.45);font-family:'SF Mono',ui-monospace,Menlo,Consolas,monospace;">${esc(c.email)}</div>
+      </td>
+      <td style="padding:8px 0;border-bottom:1px solid rgba(255,255,255,0.04);text-align:right;vertical-align:top;">
+        ${c.status ? `<span style="font-size:10px;letter-spacing:0.08em;text-transform:uppercase;color:rgba(255,255,255,0.5);">${esc(c.status)}</span>` : ''}
+        ${d !== null ? `<div style="font-size:11px;color:rgba(255,255,255,0.4);">${d}d ago</div>` : ''}
+      </td>
+    </tr>`;
+  }).join('');
+
+  const intelBlock = intel ? `
+  <tr><td style="padding:24px 40px 0;">
+    <div style="padding:20px;background:rgba(${tier === 'warm_domain' ? '232,155,95' : tier === 'returning_person' ? '123,167,224' : '201,168,76'},0.06);border-left:3px solid ${eyebrowColor};border-radius:0 8px 8px 0;">
+      <div style="font-size:10px;letter-spacing:0.18em;text-transform:uppercase;color:${eyebrowColor};font-weight:700;margin-bottom:10px;">relationship intelligence</div>
+      <div style="font-size:14px;line-height:1.6;color:rgba(255,255,255,0.88);margin-bottom:14px;">${esc(intel.brief)}</div>
+      ${recommendLabel ? `<div style="display:inline-block;padding:5px 12px;background:rgba(${tier === 'warm_domain' ? '232,155,95' : '125,184,125'},0.18);border-radius:4px;font-size:11px;letter-spacing:0.06em;text-transform:uppercase;color:${recommendColor};font-weight:700;">${esc(recommendLabel)}</div>` : ''}
+    </div>
+  </td></tr>
+  ${otherContactsRows ? `<tr><td style="padding:24px 40px 0;">
+    <div style="font-size:11px;letter-spacing:0.18em;text-transform:uppercase;color:rgba(255,255,255,0.55);font-weight:600;margin-bottom:12px;">other contacts @ ${esc(intel.domain)}</div>
+    <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0">${otherContactsRows}</table>
+  </td></tr>` : ''}
+  ` : '';
 
   const html = `<!doctype html>
 <html lang="en">
@@ -561,6 +818,8 @@ async function notifyNewBooking(env, { client, eventName, scheduledAt, qa, isNew
     </table>
   </td></tr>
 
+  ${intelBlock}
+
   ${qaRows ? `<tr><td style="padding:32px 40px 0;">
     <div style="font-size:11px;letter-spacing:0.18em;text-transform:uppercase;color:#C9A84C;font-weight:600;margin-bottom:14px;">prep details</div>
     <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0">${qaRows}</table>
@@ -571,20 +830,32 @@ async function notifyNewBooking(env, { client, eventName, scheduledAt, qa, isNew
   </td></tr>
 
   <tr><td style="padding:24px 40px;background:rgba(0,0,0,0.2);border-top:1px solid rgba(255,255,255,0.06);">
-    <div style="font-size:11px;letter-spacing:0.04em;color:rgba(255,255,255,0.28);font-family:'SF Mono',ui-monospace,Menlo,Consolas,monospace;">${esc((client.primary_contact_email || '').toLowerCase())} &middot; ${isNew ? 'first contact' : 'has prior engagement'}</div>
+    <div style="font-size:11px;letter-spacing:0.04em;color:rgba(255,255,255,0.28);font-family:'SF Mono',ui-monospace,Menlo,Consolas,monospace;">${esc((client.primary_contact_email || '').toLowerCase())} &middot; tier: ${esc(tier)}</div>
   </td></tr>
 
 </table>
 </td></tr></table>
 </body></html>`;
 
+  // Subject line carries the tier signal so Mark can triage from the inbox
+  // without opening the email. WARM and RETURNING prefixes flag "look at
+  // this before the auto-emails fire" cases.
+  const subjectPrefix = tier === 'warm_domain'
+    ? '⚠ WARM DOMAIN'
+    : tier === 'returning_person'
+      ? '↻ RETURNING'
+      : isNew ? 'New lead' : 'Booking';
+
   await fetch('https://api.resend.com/emails', {
     method: 'POST',
     headers: { Authorization: `Bearer ${apiKey}`, 'Content-Type': 'application/json' },
     body: JSON.stringify({
       from: 'MarkCMO <forms@markcmo.com>',
-      to: ['mark@markcmo.com', 'marklgabriellijr@gmail.com'],
-      subject: `${isNew ? 'New lead' : 'Returning'} booked: ${client.primary_contact_name} - ${eventName}`,
+      // Single recipient. Previously CC'd marklgabriellijr@gmail.com here
+      // PLUS on all 7 prospect-facing scheduled emails - 8 emails per
+      // booking. Now this is the ONE consolidated notification.
+      to: ['mark@markcmo.com'],
+      subject: `${subjectPrefix} booked: ${client.primary_contact_name} - ${eventName}`,
       html,
     }),
   });
@@ -741,7 +1012,9 @@ async function sendInviteeConfirmation(env, { inviteeEmail, inviteeName, eventNa
     const sendBody = {
       from: copy.from,
       to: [inviteeEmail],
-      cc: ['marklgabriellijr@gmail.com'],
+      // CC removed 2026-06-09 per Mark's directive: "too much redundancy".
+      // Mark gets ONE consolidated intel email per booking via notifyNewBooking
+      // instead of being CC'd on every prospect-facing scheduled send.
       reply_to: copy.replyTo,
       subject,
       html,
@@ -898,7 +1171,9 @@ Mark`;
       body: JSON.stringify({
         from: fromAddr,
         to: [inviteeEmail],
-        cc: ['marklgabriellijr@gmail.com'],
+        // CC removed 2026-06-09 per Mark's directive: "too much redundancy".
+      // Mark gets ONE consolidated intel email per booking via notifyNewBooking
+      // instead of being CC'd on every prospect-facing scheduled send.
         reply_to: replyTo,
         subject,
         html,
@@ -1072,7 +1347,9 @@ Mark`;
     const sendBody = {
       from: fromAddr,
       to: [inviteeEmail],
-      cc: ['marklgabriellijr@gmail.com'],
+      // CC removed 2026-06-09 per Mark's directive: "too much redundancy".
+      // Mark gets ONE consolidated intel email per booking via notifyNewBooking
+      // instead of being CC'd on every prospect-facing scheduled send.
       reply_to: replyTo,
       subject, html, text,
       scheduled_at: sendAt,
@@ -1213,7 +1490,9 @@ Mark`;
       body: JSON.stringify({
         from: fromAddr,
         to: [inviteeEmail],
-        cc: ['marklgabriellijr@gmail.com'],
+        // CC removed 2026-06-09 per Mark's directive: "too much redundancy".
+      // Mark gets ONE consolidated intel email per booking via notifyNewBooking
+      // instead of being CC'd on every prospect-facing scheduled send.
         reply_to: replyTo,
         subject, html, text,
         scheduled_at: sendAt,
@@ -1356,7 +1635,9 @@ Mark`;
       body: JSON.stringify({
         from: fromAddr,
         to: [inviteeEmail],
-        cc: ['marklgabriellijr@gmail.com'],
+        // CC removed 2026-06-09 per Mark's directive: "too much redundancy".
+      // Mark gets ONE consolidated intel email per booking via notifyNewBooking
+      // instead of being CC'd on every prospect-facing scheduled send.
         reply_to: replyTo,
         subject, html, text,
         scheduled_at: sendAt,
@@ -1543,7 +1824,9 @@ Mark`;
       body: JSON.stringify({
         from: fromAddr,
         to: [inviteeEmail],
-        cc: ['marklgabriellijr@gmail.com'],
+        // CC removed 2026-06-09 per Mark's directive: "too much redundancy".
+      // Mark gets ONE consolidated intel email per booking via notifyNewBooking
+      // instead of being CC'd on every prospect-facing scheduled send.
         reply_to: replyTo,
         subject, html, text,
         scheduled_at: sendAt,
@@ -1689,7 +1972,9 @@ async function scheduleRebookCta(env, { inviteeEmail, inviteeName, eventName, sc
       body: JSON.stringify({
         from: fromAddr,
         to: [inviteeEmail],
-        cc: ['marklgabriellijr@gmail.com'],
+        // CC removed 2026-06-09 per Mark's directive: "too much redundancy".
+      // Mark gets ONE consolidated intel email per booking via notifyNewBooking
+      // instead of being CC'd on every prospect-facing scheduled send.
         reply_to: replyTo,
         subject, html, text,
         scheduled_at: sendAt,
