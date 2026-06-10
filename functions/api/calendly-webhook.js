@@ -16,7 +16,240 @@
 // HANDLER_VERSION below is a sentinel I bump on every deploy so we can
 // verify in the audit log that the function bundle is fresh.
 // ═══════════════════════════════════════════════════════════════
-const HANDLER_VERSION = 'v9-domain-intelligence-2026-06-09';
+const HANDLER_VERSION = 'v10-approval-queue-2026-06-09';
+
+// ───── Approval queue helper (Mark's directive 2026-06-09) ──────
+// "all emails need to go to me first before you send them. dont blow
+// these deals for me with too much sending without approvals."
+//
+// Every prospect-facing email is queued in mc_pending_outbound_emails
+// with status='pending'. Mark gets a single per-booking approval-request
+// email with previews + Approve/Edit/Decline links for each. On approve,
+// /api/approval/decide POSTs to Resend with scheduled_at preserved.
+//
+// Internal alerts to Mark (notifyNewBooking, error logs) STILL fire
+// directly - they're not prospect-facing.
+
+function generateApprovalToken() {
+  // 32 random bytes → base64url. Cryptographically secure via Web Crypto.
+  const bytes = crypto.getRandomValues(new Uint8Array(32));
+  return btoa(String.fromCharCode(...bytes))
+    .replace(/\+/g, '-').replace(/\//g, '_').replace(/=+$/, '');
+}
+
+// Queue an email for Mark's approval instead of firing it directly.
+// Returns the row id of the queued email (or null on failure - caller
+// should log and continue).
+//
+// emailSpec: {
+//   from, to (email string), recipient_name, reply_to, cc (array),
+//   subject, body_text, body_html, attachments_json, tags_json,
+//   idempotency_key, scheduled_send_at (ISO or null = send-now)
+// }
+// context: { source, engagement_id, client_id, approval_group_id, metadata }
+async function queueForApproval(env, emailSpec, context) {
+  const approvalToken = generateApprovalToken();
+  const row = {
+    recipient_email: emailSpec.to,
+    recipient_name: emailSpec.recipient_name || null,
+    from_addr: emailSpec.from,
+    reply_to: emailSpec.reply_to || null,
+    cc: Array.isArray(emailSpec.cc) && emailSpec.cc.length > 0 ? emailSpec.cc : null,
+    subject: emailSpec.subject,
+    body_text: emailSpec.body_text,
+    body_html: emailSpec.body_html || null,
+    attachments_json: emailSpec.attachments_json || null,
+    tags_json: emailSpec.tags_json || null,
+    resend_idempotency_key: emailSpec.idempotency_key || null,
+    scheduled_send_at: emailSpec.scheduled_send_at || null,
+    source: context.source,
+    engagement_id: context.engagement_id || null,
+    client_id: context.client_id || null,
+    approval_group_id: context.approval_group_id || null,
+    metadata: context.metadata || {},
+    status: 'pending',
+    approval_token: approvalToken,
+  };
+  try {
+    const inserted = await sbInsert(env, 'mc_pending_outbound_emails', row);
+    return { id: inserted[0]?.id, approval_token: approvalToken, scheduled_send_at: emailSpec.scheduled_send_at };
+  } catch (e) {
+    // Log loudly but don't break the webhook. If the table doesn't exist
+    // yet (Mark hasn't run the SQL), the error message tells us.
+    try {
+      await sbInsert(env, 'mc_audit_log', {
+        event: 'queue_for_approval_failed',
+        payload: {
+          source: context.source, engagement_id: context.engagement_id,
+          recipient_email: emailSpec.to, subject: emailSpec.subject,
+          error_message: (e && e.message) || String(e),
+          handler_version: HANDLER_VERSION,
+        },
+      });
+    } catch (_) {}
+    return null;
+  }
+}
+
+// Sends Mark ONE consolidated approval-request email containing previews
+// of all queued emails for a booking, with Approve / Edit / Decline links
+// per email. Returns the Resend ID of the notification.
+async function sendApprovalRequestEmail(env, { client, engagement, eventName, scheduledAt, intel, queuedEmails }) {
+  const apiKey = env.RESEND_API_KEY;
+  if (!apiKey || !queuedEmails || queuedEmails.length === 0) return null;
+  const baseOrigin = 'https://markcmo.com';
+  const when = scheduledAt
+    ? new Date(scheduledAt).toLocaleString('en-US', { dateStyle: 'full', timeStyle: 'short', timeZone: 'America/New_York' }) + ' ET'
+    : 'time TBD';
+
+  // Render each queued email as a preview card with action buttons
+  const previewBlocks = queuedEmails.map((q, i) => {
+    if (!q || !q.approval_token) return '';
+    const whenStr = q.scheduled_send_at
+      ? new Date(q.scheduled_send_at).toLocaleString('en-US', { timeZone: 'America/New_York', dateStyle: 'medium', timeStyle: 'short' }) + ' ET'
+      : 'send now on approval';
+    const approveUrl = `${baseOrigin}/api/approval/decide?token=${encodeURIComponent(q.approval_token)}&action=approve`;
+    const declineUrl = `${baseOrigin}/api/approval/decide?token=${encodeURIComponent(q.approval_token)}&action=decline`;
+    const editUrl = `${baseOrigin}/api/approval/edit?token=${encodeURIComponent(q.approval_token)}`;
+    return `
+<tr><td style="padding:24px 36px 0;">
+<div style="font-size:11px;letter-spacing:0.18em;text-transform:uppercase;color:#C9A84C;font-weight:700;margin-bottom:6px;">${i + 1} of ${queuedEmails.length} · ${esc(q.label || q.source || 'email')}</div>
+<div style="font-size:15px;font-weight:600;color:#fff;margin-bottom:2px;">${esc(q.subject)}</div>
+<div style="font-size:12px;color:rgba(255,255,255,0.55);font-family:'SF Mono',ui-monospace,Menlo,Consolas,monospace;margin-bottom:12px;">Scheduled: ${esc(whenStr)}</div>
+<div style="background:#fff;color:#1E293B;padding:16px 18px;border-radius:8px;font-size:13px;line-height:1.55;white-space:pre-wrap;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif;">${esc((q.body_text || '').substring(0, 800))}${(q.body_text || '').length > 800 ? '...' : ''}</div>
+<div style="margin-top:14px;display:flex;gap:8px;flex-wrap:wrap;">
+<a href="${esc(approveUrl)}" style="padding:9px 18px;background:#7DB87D;color:#0a0f2c;text-decoration:none;border-radius:6px;font-weight:700;font-size:13px;">Approve send</a>
+<a href="${esc(editUrl)}" style="padding:9px 18px;background:rgba(255,255,255,0.06);color:#fff;text-decoration:none;border-radius:6px;font-weight:600;font-size:13px;border:1px solid rgba(255,255,255,0.16);">Edit first</a>
+<a href="${esc(declineUrl)}" style="padding:9px 18px;background:transparent;color:#e74c3c;text-decoration:none;border-radius:6px;font-weight:600;font-size:13px;border:1px solid rgba(231,76,60,0.4);">Decline</a>
+</div>
+</td></tr>`;
+  }).join('');
+
+  const tier = intel?.tier || 'cold';
+  const tierConfig = {
+    cold:             { label: 'cold lead',          color: '#C9A84C' },
+    cold_personal:    { label: 'cold (personal email)', color: '#C9A84C' },
+    warm_domain:      { label: 'warm domain · new person', color: '#E89B5F' },
+    returning_person: { label: 'returning contact',  color: '#7BA7E0' },
+  }[tier] || { label: 'lead', color: '#C9A84C' };
+
+  const html = `<!DOCTYPE html>
+<html><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1"></head>
+<body style="margin:0;padding:0;background:#0a0f2c;font-family:-apple-system,BlinkMacSystemFont,'SF Pro Text','Inter',Arial,sans-serif;color:#fff;">
+<table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="background:#0a0f2c;"><tr><td align="center" style="padding:32px 16px;">
+<table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="max-width:700px;background:#0F1828;border-radius:16px;overflow:hidden;">
+<tr><td style="padding:36px 36px 0;">
+<div style="display:inline-block;padding:6px 14px;background:rgba(232,155,95,0.16);border-radius:9999px;margin-bottom:16px;">
+<span style="font-size:11px;letter-spacing:0.18em;text-transform:uppercase;color:#E89B5F;font-weight:700;">approval needed · ${queuedEmails.length} emails held</span>
+</div>
+<h1 style="margin:0;font-family:'Newsreader','Charter',Georgia,serif;font-size:28px;line-height:1.15;font-weight:500;color:#fff;">${esc(client.primary_contact_name)} - ${esc(when)}</h1>
+<div style="margin:8px 0 0;font-size:14px;color:rgba(255,255,255,0.65);">${esc(client.primary_contact_email)} · <span style="color:${tierConfig.color};">${esc(tierConfig.label)}</span></div>
+${intel?.brief ? `<div style="margin:14px 0 0;padding:12px 14px;background:rgba(255,255,255,0.04);border-left:3px solid ${tierConfig.color};border-radius:0 6px 6px 0;font-size:13px;line-height:1.55;color:rgba(255,255,255,0.85);">${esc(intel.brief)}</div>` : ''}
+</td></tr>
+${previewBlocks}
+<tr><td style="padding:28px 36px;background:rgba(0,0,0,0.25);border-top:1px solid rgba(255,255,255,0.06);">
+<div style="font-size:12px;color:rgba(255,255,255,0.55);line-height:1.5;">Click <strong style="color:#7DB87D;">Approve send</strong> to queue the email with its original timing. Click <strong style="color:#C9A84C;">Edit first</strong> to modify before sending. Click <strong style="color:#e74c3c;">Decline</strong> to permanently suppress. No action = email stays held.</div>
+</td></tr>
+</table></td></tr></table>
+</body></html>`;
+
+  const text = `${queuedEmails.length} prospect-facing emails to ${client.primary_contact_email} are held pending your approval.
+
+Meeting: ${client.primary_contact_name} · ${when}
+Tier: ${tierConfig.label}
+${intel?.brief ? '\n' + intel.brief + '\n' : ''}
+
+` + queuedEmails.map((q, i) => {
+    if (!q || !q.approval_token) return '';
+    const whenStr = q.scheduled_send_at
+      ? new Date(q.scheduled_send_at).toLocaleString('en-US', { timeZone: 'America/New_York', dateStyle: 'medium', timeStyle: 'short' }) + ' ET'
+      : 'send now on approval';
+    return `
+${i + 1}. [${q.label || q.source}] ${q.subject}
+   Scheduled: ${whenStr}
+   Preview: ${(q.body_text || '').substring(0, 300).replace(/\n/g, ' ')}...
+   APPROVE:  ${baseOrigin}/api/approval/decide?token=${q.approval_token}&action=approve
+   EDIT:     ${baseOrigin}/api/approval/edit?token=${q.approval_token}
+   DECLINE:  ${baseOrigin}/api/approval/decide?token=${q.approval_token}&action=decline
+`;
+  }).join('\n');
+
+  const r = await fetch('https://api.resend.com/emails', {
+    method: 'POST',
+    headers: { Authorization: `Bearer ${apiKey}`, 'Content-Type': 'application/json' },
+    body: JSON.stringify({
+      from: 'MarkCMO Approval <forms@markcmo.com>',
+      to: ['mark@markcmo.com'],
+      subject: `[APPROVE] ${queuedEmails.length} emails to ${client.primary_contact_email}`,
+      html, text,
+      tags: [
+        { name: 'category', value: 'approval_request' },
+        { name: 'tier', value: tier },
+      ],
+    }),
+  });
+  let resendId = null;
+  try { const j = await r.json(); resendId = j?.id || null; } catch (_) {}
+  return resendId;
+}
+// Drop-in replacement for `fetch('https://api.resend.com/emails', ...)`
+// used by all 7 prospect-facing schedule functions. Builds a row in
+// mc_pending_outbound_emails (status='pending') instead of hitting
+// Resend. Returns a Response-LIKE object {ok, status, json(), text()}
+// so the existing `if (r.ok) { respJson.id }` logic in each function
+// continues to work unchanged - we just record the pending queue id
+// where the Resend id used to live.
+async function submitForProspectDelivery(env, sendBody, idempotencyKey, { source, engagement_id, label, approval_group_id }) {
+  const approvalToken = generateApprovalToken();
+  const to = Array.isArray(sendBody.to) ? sendBody.to[0] : sendBody.to;
+  const row = {
+    recipient_email: to,
+    from_addr: sendBody.from,
+    reply_to: sendBody.reply_to || null,
+    cc: Array.isArray(sendBody.cc) && sendBody.cc.length > 0 ? sendBody.cc : null,
+    subject: sendBody.subject,
+    body_text: sendBody.text || '',
+    body_html: sendBody.html || null,
+    attachments_json: Array.isArray(sendBody.attachments) ? sendBody.attachments : null,
+    tags_json: Array.isArray(sendBody.tags) ? sendBody.tags : null,
+    resend_idempotency_key: idempotencyKey || null,
+    scheduled_send_at: sendBody.scheduled_at || null,
+    source,
+    engagement_id: engagement_id || null,
+    approval_group_id: approval_group_id || null,
+    metadata: { label: label || source, handler_version: HANDLER_VERSION },
+    status: 'pending',
+    approval_token: approvalToken,
+  };
+  try {
+    const inserted = await sbInsert(env, 'mc_pending_outbound_emails', row);
+    const queuedId = inserted[0]?.id || null;
+    return {
+      ok: !!queuedId,
+      status: queuedId ? 202 : 500,  // 202 Accepted = queued
+      _queuedId: queuedId,
+      _approvalToken: approvalToken,
+      _queued: true,
+      json: async () => ({ id: queuedId, approval_token: approvalToken, queued: true }),
+      text: async () => queuedId ? '' : 'queue_insert_returned_no_id',
+      headers: { get: () => null },
+    };
+  } catch (e) {
+    const msg = (e && e.message) || String(e);
+    console.error('submitForProspectDelivery failed:', msg);
+    return {
+      ok: false,
+      status: 500,
+      _queuedId: null,
+      _approvalToken: null,
+      _queued: false,
+      json: async () => ({ id: null, error: msg }),
+      text: async () => `queue_failed: ${msg}`,
+      headers: { get: () => null },
+    };
+  }
+}
+// ───── end approval queue helper ────────────────────────────────
 
 // ───── Booking intelligence (inlined - file deliberately self-contained) ─────
 // Classifies an inbound booking by domain history to decide whether the
@@ -576,6 +809,7 @@ async function handleInviteeCreated(p, env) {
       inviteeEmail, inviteeName, eventName, scheduledAt, eventEndAt,
       meetingLink, calendlyInviteeUri,
       isNew: !existing.length, inviteeUri: calendlyInviteeUri,
+      engagementId: engagement.id,
     });
   } catch (e) {
     try {
@@ -682,6 +916,37 @@ async function handleInviteeCreated(p, env) {
     } catch (_) {}
   }
 
+  // ───── Send Mark the consolidated approval-request email ─────
+  // After all 7 schedule functions have queued their emails, query the
+  // queue for this engagement and send Mark ONE email with all previews
+  // + Approve/Edit/Decline links per email.
+  try {
+    const queued = await sbSelect(env,
+      `mc_pending_outbound_emails?engagement_id=eq.${encodeURIComponent(engagement.id)}&status=eq.pending&order=scheduled_send_at.asc.nullsfirst&select=id,subject,body_text,scheduled_send_at,approval_token,source,metadata,recipient_email`);
+    if (queued && queued.length > 0) {
+      const queuedForEmail = queued.map(q => ({
+        approval_token: q.approval_token,
+        subject: q.subject,
+        body_text: q.body_text,
+        scheduled_send_at: q.scheduled_send_at,
+        source: q.source,
+        label: q.metadata?.label || q.source,
+      }));
+      await sendApprovalRequestEmail(env, {
+        client, engagement, eventName, scheduledAt, intel, queuedEmails: queuedForEmail,
+      });
+    }
+  } catch (e) {
+    try {
+      await sbInsert(env, 'mc_audit_log', {
+        client_id: client.id,
+        engagement_id: engagement.id,
+        event: 'approval_request_email_failed',
+        payload: { error_message: (e && e.message) || String(e), handler_version: HANDLER_VERSION },
+      });
+    } catch (_) {}
+  }
+
   return new Response(JSON.stringify({ success: true, client_id: client.id, engagement_id: engagement.id, slug: client.slug, handler_version: HANDLER_VERSION }), {
     status: 200,
     headers: { 'Content-Type': 'application/json' },
@@ -705,6 +970,17 @@ async function handleInviteeCanceled(p, env) {
   if (!existing.length) return new Response('No matching client, ignored', { status: 200 });
 
   const client = existing[0];
+
+  // Mark any pending-approval emails as 'superseded' so they don't appear
+  // in the approval queue UI for a meeting that's been cancelled.
+  try {
+    await sbUpdate(env, 'mc_pending_outbound_emails',
+      `recipient_email=eq.${encodeURIComponent(inviteeEmail)}&status=eq.pending`,
+      { status: 'superseded', decision_via: 'cancel_webhook', declined_at: new Date().toISOString() });
+  } catch (e) {
+    console.warn('Failed to mark pending emails superseded on cancel:', e && e.message);
+  }
+
   await sbInsert(env, 'mc_audit_log', {
     client_id: client.id,
     event: 'calendly_booking_canceled',
@@ -862,7 +1138,7 @@ async function notifyNewBooking(env, { client, eventName, scheduledAt, qa, isNew
 }
 
 // ───── sendInviteeConfirmation (personal warm email, 5 min delay) ─────
-async function sendInviteeConfirmation(env, { inviteeEmail, inviteeName, eventName, scheduledAt, eventEndAt, meetingLink, calendlyInviteeUri, isNew, inviteeUri }) {
+async function sendInviteeConfirmation(env, { inviteeEmail, inviteeName, eventName, scheduledAt, eventEndAt, meetingLink, calendlyInviteeUri, isNew, inviteeUri, engagementId }) {
   const auditPayload = {
     invitee_email: inviteeEmail || '',
     invitee_name: inviteeName || '',
@@ -1028,27 +1304,23 @@ async function sendInviteeConfirmation(env, { inviteeEmail, inviteeName, eventNa
     };
     if (icsAttachment) sendBody.attachments = [icsAttachment];
 
-    const r = await fetch('https://api.resend.com/emails', {
-      method: 'POST',
-      headers: {
-        Authorization: `Bearer ${apiKey}`,
-        'Content-Type': 'application/json',
-        'Idempotency-Key': idempotencyKey,
-      },
-      body: JSON.stringify(sendBody),
+    // Mark's directive 2026-06-09: gate ALL prospect-facing emails through
+    // approval queue. Queue instead of POSTing to Resend.
+    const q = await submitForProspectDelivery(env, sendBody, idempotencyKey, {
+      source: 'calendly_confirmation',
+      engagement_id: engagementId,
+      label: 'Booking confirmation (5min after booking)',
     });
-    auditPayload.resend_status = r.status;
-
-    if (r.ok) {
-      const respJson = await r.json().catch(() => null);
-      auditPayload.resend_id = respJson && respJson.id || null;
-      auditPayload.step = 'queued';
-      auditEvent = 'invitee_confirmation_sent';
+    auditPayload.queue_status = q.status;
+    auditPayload.queued_id = q.queued_id;
+    auditPayload.approval_token = q.approval_token;
+    if (q.status === 'queued') {
+      auditPayload.step = 'queued_for_approval';
+      auditEvent = 'invitee_confirmation_queued_for_approval';
     } else {
-      const errText = await r.text().catch(() => '');
-      auditPayload.resend_error = errText.slice(0, 600);
-      auditPayload.step = 'resend_rejected';
-      auditEvent = 'invitee_confirmation_failed';
+      auditPayload.queue_error = q.error || null;
+      auditPayload.step = 'queue_failed';
+      auditEvent = 'invitee_confirmation_queue_failed';
     }
   } catch (err) {
     auditPayload.step = (auditPayload.step || 'unknown') + '_then_crashed';
@@ -1160,32 +1432,20 @@ Mark`;
     const replyTo = 'prep@markcmo.com';
     const idempotencyKey = `cal-followup-${inviteeUri || inviteeEmail || 'unknown'}`.substring(0, 256);
 
-    auditPayload.step = 'queuing';
-    const r = await fetch('https://api.resend.com/emails', {
-      method: 'POST',
-      headers: {
-        Authorization: `Bearer ${apiKey}`,
-        'Content-Type': 'application/json',
-        'Idempotency-Key': idempotencyKey,
-      },
-      body: JSON.stringify({
-        from: fromAddr,
-        to: [inviteeEmail],
-        // CC removed 2026-06-09 per Mark's directive: "too much redundancy".
-      // Mark gets ONE consolidated intel email per booking via notifyNewBooking
-      // instead of being CC'd on every prospect-facing scheduled send.
-        reply_to: replyTo,
-        subject,
-        html,
-        text,
-        scheduled_at: sendAt,
-        tags: [
-          { name: 'category', value: 'calendly_followup' },
-          { name: 'mode', value: (_n.indexOf('wetyr') >= 0) ? 'wetyr' : 'markcmo' },
-        ],
-      }),
+    auditPayload.step = 'queuing_for_approval';
+    const _sendBody_followup = {
+      from: fromAddr, to: [inviteeEmail], reply_to: replyTo,
+      subject, html, text, scheduled_at: sendAt,
+      tags: [
+        { name: 'category', value: 'calendly_followup' },
+        { name: 'mode', value: (_n.indexOf('wetyr') >= 0) ? 'wetyr' : 'markcmo' },
+      ],
+    };
+    const r = await submitForProspectDelivery(env, _sendBody_followup, idempotencyKey, {
+      source: 'calendly_recap_placeholder', engagement_id: engagementId,
+      label: 'Post-meeting recap placeholder (T+30min)',
     });
-    auditPayload.resend_status = r.status;
+    auditPayload.queue_status = r.status;
 
     if (r.ok) {
       const respJson = await r.json().catch(() => null);
@@ -1360,17 +1620,12 @@ Mark`;
     };
     if (icsAttachment) sendBody.attachments = [icsAttachment];
 
-    auditPayload.step = 'queuing';
-    const r = await fetch('https://api.resend.com/emails', {
-      method: 'POST',
-      headers: {
-        Authorization: `Bearer ${apiKey}`,
-        'Content-Type': 'application/json',
-        'Idempotency-Key': `cal-24h-${calendlyInviteeUri || inviteeEmail}`.substring(0, 256),
-      },
-      body: JSON.stringify(sendBody),
+    auditPayload.step = 'queuing_for_approval';
+    const r = await submitForProspectDelivery(env, sendBody, `cal-24h-${calendlyInviteeUri || inviteeEmail}`.substring(0, 256), {
+      source: 'calendly_t24h_reminder', engagement_id: engagementId,
+      label: 'T-24h reminder (confirm to hold your slot)',
     });
-    auditPayload.resend_status = r.status;
+    auditPayload.queue_status = r.status;
 
     if (r.ok) {
       const respJson = await r.json().catch(() => null);
@@ -1479,30 +1734,20 @@ Mark`;
   </div>
 </body></html>`;
 
-    auditPayload.step = 'queuing';
-    const r = await fetch('https://api.resend.com/emails', {
-      method: 'POST',
-      headers: {
-        Authorization: `Bearer ${apiKey}`,
-        'Content-Type': 'application/json',
-        'Idempotency-Key': `cal-1h-${calendlyInviteeUri || inviteeEmail}`.substring(0, 256),
-      },
-      body: JSON.stringify({
-        from: fromAddr,
-        to: [inviteeEmail],
-        // CC removed 2026-06-09 per Mark's directive: "too much redundancy".
-      // Mark gets ONE consolidated intel email per booking via notifyNewBooking
-      // instead of being CC'd on every prospect-facing scheduled send.
-        reply_to: replyTo,
-        subject, html, text,
-        scheduled_at: sendAt,
-        tags: [
-          { name: 'category', value: 'calendly_1h_reminder' },
-          { name: 'mode', value: (_n.indexOf('wetyr') >= 0) ? 'wetyr' : 'markcmo' },
-        ],
-      }),
+    auditPayload.step = 'queuing_for_approval';
+    const _sendBody_1h = {
+      from: fromAddr, to: [inviteeEmail], reply_to: replyTo,
+      subject, html, text, scheduled_at: sendAt,
+      tags: [
+        { name: 'category', value: 'calendly_1h_reminder' },
+        { name: 'mode', value: (_n.indexOf('wetyr') >= 0) ? 'wetyr' : 'markcmo' },
+      ],
+    };
+    const r = await submitForProspectDelivery(env, _sendBody_1h, `cal-1h-${calendlyInviteeUri || inviteeEmail}`.substring(0, 256), {
+      source: 'calendly_t1h_reminder', engagement_id: engagementId,
+      label: 'T-1h reminder (See you in an hour)',
     });
-    auditPayload.resend_status = r.status;
+    auditPayload.queue_status = r.status;
 
     if (r.ok) {
       const respJson = await r.json().catch(() => null);
@@ -1626,30 +1871,20 @@ Mark`;
   </div>
 </body></html>`;
 
-    auditPayload.step = 'queuing';
-    const r = await fetch('https://api.resend.com/emails', {
-      method: 'POST',
-      headers: {
-        Authorization: `Bearer ${apiKey}`,
-        'Content-Type': 'application/json',
-        'Idempotency-Key': `cal-6h-${calendlyInviteeUri || inviteeEmail}`.substring(0, 256),
-      },
-      body: JSON.stringify({
-        from: fromAddr,
-        to: [inviteeEmail],
-        // CC removed 2026-06-09 per Mark's directive: "too much redundancy".
-      // Mark gets ONE consolidated intel email per booking via notifyNewBooking
-      // instead of being CC'd on every prospect-facing scheduled send.
-        reply_to: replyTo,
-        subject, html, text,
-        scheduled_at: sendAt,
-        tags: [
-          { name: 'category', value: 'calendly_6h_lastcall' },
-          { name: 'mode', value: (_n.indexOf('wetyr') >= 0) ? 'wetyr' : 'markcmo' },
-        ],
-      }),
+    auditPayload.step = 'queuing_for_approval';
+    const _sendBody_8h = {
+      from: fromAddr, to: [inviteeEmail], reply_to: replyTo,
+      subject, html, text, scheduled_at: sendAt,
+      tags: [
+        { name: 'category', value: 'calendly_final_nudge' },
+        { name: 'mode', value: (_n.indexOf('wetyr') >= 0) ? 'wetyr' : 'markcmo' },
+      ],
+    };
+    const r = await submitForProspectDelivery(env, _sendBody_8h, `cal-6h-${calendlyInviteeUri || inviteeEmail}`.substring(0, 256), {
+      source: 'calendly_final_nudge', engagement_id: engagementId,
+      label: 'T-8h final nudge (confirm in next 2 hours)',
     });
-    auditPayload.resend_status = r.status;
+    auditPayload.queue_status = r.status;
 
     if (r.ok) {
       const respJson = await r.json().catch(() => null);
@@ -1815,30 +2050,20 @@ Mark`;
   </div>
 </body></html>`;
 
-    auditPayload.step = 'queuing';
-    const r = await fetch('https://api.resend.com/emails', {
-      method: 'POST',
-      headers: {
-        Authorization: `Bearer ${apiKey}`,
-        'Content-Type': 'application/json',
-        'Idempotency-Key': `cal-15min-${calendlyInviteeUri || inviteeEmail}`.substring(0, 256),
-      },
-      body: JSON.stringify({
-        from: fromAddr,
-        to: [inviteeEmail],
-        // CC removed 2026-06-09 per Mark's directive: "too much redundancy".
-      // Mark gets ONE consolidated intel email per booking via notifyNewBooking
-      // instead of being CC'd on every prospect-facing scheduled send.
-        reply_to: replyTo,
-        subject, html, text,
-        scheduled_at: sendAt,
-        tags: [
-          { name: 'category', value: 'calendly_15min_confirm' },
-          { name: 'mode', value: (_n.indexOf('wetyr') >= 0) ? 'wetyr' : 'markcmo' },
-        ],
-      }),
+    auditPayload.step = 'queuing_for_approval';
+    const _sendBody_15min = {
+      from: fromAddr, to: [inviteeEmail], reply_to: replyTo,
+      subject, html, text, scheduled_at: sendAt,
+      tags: [
+        { name: 'category', value: 'calendly_15min_confirm' },
+        { name: 'mode', value: (_n.indexOf('wetyr') >= 0) ? 'wetyr' : 'markcmo' },
+      ],
+    };
+    const r = await submitForProspectDelivery(env, _sendBody_15min, `cal-15min-${calendlyInviteeUri || inviteeEmail}`.substring(0, 256), {
+      source: 'calendly_t15min_confirm', engagement_id: engagementId,
+      label: 'T-15min confirmation ping (See you in 15 minutes)',
     });
-    auditPayload.resend_status = r.status;
+    auditPayload.queue_status = r.status;
 
     if (r.ok) {
       const respJson = await r.json().catch(() => null);
@@ -1963,30 +2188,20 @@ async function scheduleRebookCta(env, { inviteeEmail, inviteeName, eventName, sc
   </div>
 </body></html>`;
 
-    auditPayload.step = 'queuing';
-    const r = await fetch('https://api.resend.com/emails', {
-      method: 'POST',
-      headers: {
-        Authorization: `Bearer ${apiKey}`,
-        'Content-Type': 'application/json',
-        'Idempotency-Key': `cal-rebook-${inviteeUri || inviteeEmail}`.substring(0, 256),
-      },
-      body: JSON.stringify({
-        from: fromAddr,
-        to: [inviteeEmail],
-        // CC removed 2026-06-09 per Mark's directive: "too much redundancy".
-      // Mark gets ONE consolidated intel email per booking via notifyNewBooking
-      // instead of being CC'd on every prospect-facing scheduled send.
-        reply_to: replyTo,
-        subject, html, text,
-        scheduled_at: sendAt,
-        tags: [
-          { name: 'category', value: 'calendly_rebook_cta' },
-          { name: 'mode', value: (_n.indexOf('wetyr') >= 0) ? 'wetyr' : 'markcmo' },
-        ],
-      }),
+    auditPayload.step = 'queuing_for_approval';
+    const _sendBody_rebook = {
+      from: fromAddr, to: [inviteeEmail], reply_to: replyTo,
+      subject, html, text, scheduled_at: sendAt,
+      tags: [
+        { name: 'category', value: 'calendly_rebook_cta' },
+        { name: 'mode', value: (_n.indexOf('wetyr') >= 0) ? 'wetyr' : 'markcmo' },
+      ],
+    };
+    const r = await submitForProspectDelivery(env, _sendBody_rebook, `cal-rebook-${inviteeUri || inviteeEmail}`.substring(0, 256), {
+      source: 'calendly_rebook_cta', engagement_id: engagementId,
+      label: 'T+72h rebook CTA (Worth another conversation?)',
     });
-    auditPayload.resend_status = r.status;
+    auditPayload.queue_status = r.status;
 
     if (r.ok) {
       const respJson = await r.json().catch(() => null);
