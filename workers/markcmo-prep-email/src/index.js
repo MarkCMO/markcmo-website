@@ -1,19 +1,50 @@
 // markcmo-prep-email worker
 //
-// Receives inbound emails routed to prep@markcmo.com (and prep@wetyr.com
-// in the future) via Cloudflare Email Routing. Classifies each reply as
-// confirmation / prep_details / cancellation / question, updates the
-// matching mc_engagements row in Supabase, writes an audit-log entry,
-// and forwards a structured summary to mark@markcmo.com so he sees the
-// reply in his inbox AND the system records the signal.
+// Receives inbound emails routed to prep@markcmo.com (and prep@wetyr.com)
+// via Cloudflare Email Routing. Classifies each reply as confirmation /
+// prep_details / cancellation / question, updates the matching mc_engagements
+// row in Supabase, and writes an audit-log entry.
 //
-// This is the inbound half of the calendly booking communication system.
-// The outbound side lives in functions/api/calendly-webhook.js.
+// Mark's directive 2026-06-09: "do not send prep received emails to me.
+// you keep that internally and if something fails self heal it."
+// So this worker NO LONGER emails Mark on classified replies, NO LONGER
+// emails him on crashes. All signals flow into mc_engagements.metadata +
+// mc_audit_log only. Mark sees the data via /admin/bookings instead of
+// his inbox. Transient failures retry with backoff before being logged
+// as terminal errors.
+//
+// The only remaining outbound is the catch-all forward of UNMATCHED
+// inbound (random external email to prep@markcmo.com) to Mark's Gmail -
+// this is the email-routing safety net for legit new prospects emailing
+// prep@ directly, NOT a prep notification.
 //
 // Self-contained - no external packages. Parses the raw RFC 822 email
 // using simple header + body splitting + quoted-printable decoding.
 
-const HANDLER_VERSION = 'prep-email-v1-2026-06-08';
+const HANDLER_VERSION = 'prep-email-v2-self-heal-no-notify-2026-06-09';
+
+// Self-heal: retry Supabase writes with exponential backoff before
+// giving up. Transient 502/504/timeout on Supabase shouldn't lose data.
+async function withRetry(fn, label) {
+  const delays = [0, 500, 2000]; // 3 attempts: immediate, 500ms, 2s
+  let lastErr = null;
+  for (let i = 0; i < delays.length; i++) {
+    if (delays[i] > 0) await new Promise(r => setTimeout(r, delays[i]));
+    try {
+      return await fn();
+    } catch (e) {
+      lastErr = e;
+      // Don't retry on client-side errors (4xx) - only transient (5xx/network)
+      const msg = (e && e.message) || String(e);
+      if (/\b4\d\d\b/.test(msg) && !/\b408\b|\b429\b/.test(msg)) {
+        throw e; // permanent failure
+      }
+    }
+  }
+  // All retries exhausted - log loud, no email to Mark
+  console.error(`prep-email self-heal exhausted: ${label} failed after 3 attempts:`, (lastErr && lastErr.message) || lastErr);
+  throw lastErr;
+}
 
 export default {
   // Inbound email handler. Called by CF Email Routing when an email
@@ -77,12 +108,36 @@ export default {
       audit.step = engagement ? 'matched_engagement' : 'no_engagement_match';
 
       // If sender doesn't match any known client, this isn't a prospect
-      // reply - just a random inbound email (newsletter, vendor, spam,
-      // etc). Forward raw to Mark's Gmail and exit. No audit log entry,
-      // no summary email - we don't want to clutter Mark's inbox with
-      // "no matched booking" classifier notes for every random email.
+      // reply. Per Mark's directive 2026-06-09 ("do not send prep received
+      // emails to me, keep internal"), we no longer forward unmatched
+      // inbound to Mark's Gmail. Instead we log to audit_log so /admin
+      // can surface unmatched inbound as a triage queue when Mark wants
+      // to browse it. The prep@markcmo.com address is for SYSTEM replies
+      // (Calendly Reply-To); external contact should use mark@markcmo.com.
       if (!engagement) {
-        try { await message.forward('marklgabriellijr@gmail.com'); } catch (_) {}
+        try {
+          await withRetry(
+            () => sbInsert(env, 'mc_audit_log', {
+              event: 'prep_inbound_unmatched',
+              payload: {
+                from: audit.from,
+                envelope_from: audit.envelope_from,
+                to: audit.to,
+                subject: audit.subject,
+                body_preview: parsed.body.substring(0, 1500),
+                handler_version: HANDLER_VERSION,
+              },
+            }),
+            'unmatched_inbound_log',
+          );
+        } catch (e) {
+          // Last-resort: structured log so it can be reconstructed from tail
+          console.error('UNMATCHED_INBOUND_LOG_FAILED', JSON.stringify({
+            from: audit.from,
+            subject: audit.subject,
+            error: (e && e.message) || String(e),
+          }));
+        }
         return;
       }
 
@@ -118,49 +173,61 @@ export default {
         meta.last_reply_classification = cls.label;
         meta.last_reply_preview = parsed.body.substring(0, 400);
 
+        // Self-heal: retry the engagement update on transient failures.
+        // Per Mark's directive: do NOT email him on failure - just keep
+        // trying and log the final outcome to audit_log.
         try {
-          await sbUpdate(env, 'mc_engagements',
-            `id=eq.${encodeURIComponent(engagement.id)}`, { metadata: meta });
+          await withRetry(
+            () => sbUpdate(env, 'mc_engagements',
+              `id=eq.${encodeURIComponent(engagement.id)}`, { metadata: meta }),
+            `engagement_update:${engagement.id}`,
+          );
           audit.step = 'engagement_updated';
         } catch (e) {
-          audit.step = 'engagement_update_failed';
+          audit.step = 'engagement_update_failed_after_retry';
           audit.error_message = (e && e.message) || String(e);
+          // The reply STILL classified successfully - the data lives in
+          // the audit_log payload below even if the engagement row didn't
+          // get updated. /admin/bookings can reconcile from the audit log.
         }
       }
 
-      // Audit log
+      // Audit log (also retried - this is the durable record)
       try {
-        await sbInsert(env, 'mc_audit_log', {
-          client_id: audit.client_id,
-          engagement_id: audit.engagement_id,
-          event: 'invitee_reply_received',
-          payload: {
-            from: audit.from,
-            to: audit.to,
-            subject: audit.subject,
-            body_preview: audit.body_preview,
-            classification: audit.classification,
-            classification_confidence: audit.classification_confidence,
-            keyword_hits: audit.keyword_hits,
-            handler_version: HANDLER_VERSION,
-          },
-        });
-      } catch (_) {}
-
-      // Forward structured summary
-      try {
-        await forwardToMark(env, {
-          senderEmail: audit.from,
-          senderName: client?.primary_contact_name || extractDisplayName(parsed.fromRaw) || audit.from,
-          subject: audit.subject,
-          body: parsed.body,
-          classification: cls,
-          engagement,
-        });
-        audit.forwarded = true;
+        await withRetry(
+          () => sbInsert(env, 'mc_audit_log', {
+            client_id: audit.client_id,
+            engagement_id: audit.engagement_id,
+            event: 'invitee_reply_received',
+            payload: {
+              from: audit.from,
+              to: audit.to,
+              subject: audit.subject,
+              body_preview: audit.body_preview,
+              body_full: parsed.body.substring(0, 8000),
+              classification: audit.classification,
+              classification_confidence: audit.classification_confidence,
+              keyword_hits: audit.keyword_hits,
+              engagement_update_step: audit.step,
+              handler_version: HANDLER_VERSION,
+            },
+          }),
+          'audit_log_insert',
+        );
       } catch (e) {
-        audit.forward_status = `err: ${(e && e.message) || String(e)}`;
+        // Audit log write exhausted retries. No email. Log loud to CF
+        // tail so /admin can surface this on the ops dashboard later.
+        console.error('AUDIT_LOG_TERMINAL_FAILURE', JSON.stringify({
+          from: audit.from,
+          classification: audit.classification,
+          subject: audit.subject,
+          error: (e && e.message) || String(e),
+        }));
       }
+
+      // NO forwardToMark call - removed per Mark's directive.
+      // Reply signals live in mc_engagements.metadata + mc_audit_log.
+      // Mark sees them in /admin/bookings dashboard, not his inbox.
 
       audit.step = 'done';
       console.log('prep-email handled', JSON.stringify({
@@ -171,16 +238,23 @@ export default {
     } catch (err) {
       audit.error_message = (err && err.message) || String(err);
       audit.step = 'crashed';
+      // Log to CF tail for ops visibility. NO email forward to Mark
+      // per his directive - "if something fails self heal it" means
+      // log + retry + fix, never email.
       console.error('prep-email crashed', audit.error_message, err && err.stack);
-      try {
-        await message.forward('mark@markcmo.com');
-      } catch (_) {}
+      // One last attempt to record the crash to the audit log so it's
+      // visible from /admin without checking CF tail. Best-effort, no
+      // retry (we're already in the crash branch).
       try {
         await sbInsert(env, 'mc_audit_log', {
           event: 'invitee_reply_crashed',
           payload: audit,
         });
-      } catch (_) {}
+      } catch (_) {
+        // Final fallback: structured JSON in CF logs so the alert can
+        // be reconstructed from tail. No email.
+        console.error('CRASH_AUDIT_INSERT_FAILED', JSON.stringify(audit));
+      }
     }
   },
 };
@@ -362,63 +436,10 @@ function classifyReply(body, subject) {
   return { label: 'other', confidence: 0.3, hits };
 }
 
-// ───── forwardToMark ───────────────────────────────────────────
-async function forwardToMark(env, { senderEmail, senderName, subject, body, classification, engagement }) {
-  const apiKey = env.RESEND_API_KEY;
-  if (!apiKey) return;
-
-  const labelColors = {
-    confirmation: '#2EBA73', prep_details: '#1a4d8c', cancellation: '#e74c3c',
-    question: '#C9A84C', other: '#64748B',
-  };
-  const labelText = {
-    confirmation: '✓ CONFIRMED', prep_details: '📋 PREP DETAILS',
-    cancellation: '✗ CANCELLATION REQUEST', question: '? QUESTION', other: '✉ REPLY',
-  };
-  const color = labelColors[classification.label] || '#64748B';
-  const label = labelText[classification.label] || 'REPLY';
-  const confidencePct = Math.round(classification.confidence * 100);
-  const sched = engagement?.metadata?.scheduled_at || '';
-  const whenStr = sched
-    ? new Date(sched).toLocaleString('en-US', { dateStyle: 'short', timeStyle: 'short', timeZone: 'America/New_York' }) + ' ET'
-    : '(no matched booking)';
-  const showProb = engagement ? computeShowProbability(engagement.metadata || {}) : null;
-  const showProbLine = showProb != null ? `Show prob: ${showProb}%` : '';
-
-  const html = `<!DOCTYPE html>
-<html><head><meta charset="UTF-8"></head>
-<body style="margin:0;padding:24px;background:#F8FAFC;font-family:-apple-system,BlinkMacSystemFont,Arial,sans-serif;">
-<div style="max-width:600px;margin:0 auto;background:#fff;border-radius:12px;overflow:hidden;border-top:4px solid ${color};">
-  <div style="padding:20px 24px;">
-    <div style="font-size:11px;letter-spacing:.18em;text-transform:uppercase;color:${color};margin-bottom:6px;font-weight:700;">${label}</div>
-    <h1 style="font-size:18px;margin:0 0 6px;color:#0a0f2c;">${esc(senderName)}</h1>
-    <div style="font-size:13px;color:#64748B;margin-bottom:4px;">${esc(senderEmail)} · ${esc(whenStr)}</div>
-    <div style="font-size:11px;color:#94A3B8;margin-bottom:16px;">Confidence ${confidencePct}% · ${esc(classification.hits.slice(0, 6).join(', ') || 'no keyword hits')}${showProbLine ? ` · ${esc(showProbLine)}` : ''}</div>
-    <div style="background:#F8FAFC;border-left:3px solid ${color};padding:14px 16px;border-radius:4px;font-size:14px;line-height:1.6;color:#1E293B;white-space:pre-wrap;">${esc(body.substring(0, 4000))}</div>
-    ${engagement?.id ? `<div style="margin-top:14px;font-size:12px;color:#94A3B8;">Engagement <code style="background:#F1F5F9;padding:2px 6px;border-radius:3px;">${esc(engagement.id)}</code></div>` : ''}
-  </div>
-</div>
-</body></html>`;
-
-  const text = `${label} from ${senderName} (${senderEmail})\nFor meeting: ${whenStr}\nConfidence: ${confidencePct}%  ${showProbLine}\nKeywords: ${classification.hits.slice(0, 6).join(', ') || 'none'}\n\n---ORIGINAL---\nSubject: ${subject}\n\n${body}\n\n---\nEngagement: ${engagement?.id || '(no match)'}`;
-
-  await fetch('https://api.resend.com/emails', {
-    method: 'POST',
-    headers: { Authorization: `Bearer ${apiKey}`, 'Content-Type': 'application/json' },
-    body: JSON.stringify({
-      from: 'MarkCMO Prep <forms@markcmo.com>',
-      to: ['mark@markcmo.com', 'marklgabriellijr@gmail.com'],
-      reply_to: senderEmail || 'mark@markcmo.com',
-      subject: `${label} from ${senderName}`,
-      html,
-      text,
-      tags: [
-        { name: 'category', value: 'inbound_reply_summary' },
-        { name: 'classification', value: classification.label },
-      ],
-    }),
-  });
-}
+// forwardToMark() removed 2026-06-09 per Mark's directive: "do not send
+// prep received emails to me. you keep that internally and if something
+// fails self heal it." Classification signals now flow ONLY into
+// mc_engagements.metadata + mc_audit_log, viewable via /admin/bookings.
 
 function computeShowProbability(meta) {
   let score = 50;
