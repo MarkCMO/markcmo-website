@@ -1,0 +1,385 @@
+<!DOCTYPE html>
+<!--
+  Acquisition Engine Proposal for Second Life Mac.
+  Prepared by Mark Gabrielli / MarkCMO. Hosted on markcmo.com behind an access code.
+  Visual system mirrors secondlifemac.com (navy #122133, sky #4798D1, blue #215BAA,
+  gold #ECD497 / cream gradient, neighbor->Archivo->Inter headings, Inter body, pill buttons).
+-->
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>Acquisition Engine Proposal | Second Life Mac x MarkCMO</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://use.typekit.net/pev8zwb.css">
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@600;700;800;900&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+  :root{--navy:#122133;--sky:#4798D1;--blue:#215BAA;--gold:#ECD497;--cream:#F7EFD9;--off:#F5F8FB;--ink:#1d2939;--muted:#5a6675;--line:#e6ebf1}
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth}
+  body{font-family:Inter,system-ui,sans-serif;color:var(--ink);background:#fff;line-height:1.7;font-size:17px}
+  h1,h2,h3,h4,.disp{font-family:"neighbor",Archivo,Inter,sans-serif;font-weight:900;text-transform:uppercase;line-height:1.07;letter-spacing:-.3px}
+  h2{font-size:clamp(26px,3.4vw,40px);color:var(--navy)}
+  h3{font-size:20px;color:var(--navy);letter-spacing:0}
+  p{margin-bottom:1.05em}
+  a{color:var(--blue);text-decoration:none}a:hover{text-decoration:underline}
+  .wrap{max-width:1080px;margin:0 auto;padding:0 24px}
+  .center{text-align:center}.center .lede{margin-left:auto;margin-right:auto}
+  .lede{font-size:19px;color:var(--muted);max-width:72ch;margin-bottom:8px}
+  .eyebrow{display:inline-block;color:var(--sky);font-weight:800;font-size:13px;letter-spacing:2px;text-transform:uppercase;margin-bottom:14px}
+  .btn{display:inline-block;border-radius:150px;font-weight:700;font-size:15px;padding:13px 30px;cursor:pointer;border:2px solid transparent;transition:.15s}
+  .btn-blue{background:var(--sky);color:#fff;border-color:var(--sky)}.btn-blue:hover{background:#3a86bf;text-decoration:none}
+  .btn-gold{background:var(--gold);color:var(--navy);border-color:var(--gold)}.btn-gold:hover{background:#e3c372;text-decoration:none}
+
+  /* gate */
+  #gate{position:fixed;inset:0;z-index:999;background:linear-gradient(150deg,var(--navy),#0c1726);display:flex;align-items:center;justify-content:center;padding:24px}
+  #gate .box{background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.12);border-radius:18px;padding:46px 40px;max-width:440px;width:100%;text-align:center;color:#fff}
+  #gate img{height:34px;margin-bottom:26px}
+  #gate h2{color:#fff;font-size:24px;margin-bottom:8px}
+  #gate p{color:#aeb9c8;font-size:15px;margin-bottom:22px}
+  #gate input{width:100%;padding:14px 18px;border-radius:150px;border:1px solid rgba(255,255,255,.25);background:rgba(255,255,255,.06);color:#fff;font-size:16px;text-align:center;letter-spacing:1px;margin-bottom:14px}
+  #gate input::placeholder{color:#8b97a8}
+  #gate .btn{width:100%}
+  #err{color:#ffb4c6;font-size:14px;margin-top:14px;display:none}
+  #gate .from{margin-top:22px;font-size:12px;color:#7e8a9b;letter-spacing:.5px}
+
+  .demo{background:var(--navy);color:var(--gold);text-align:center;font-size:12px;font-weight:600;padding:7px 12px;letter-spacing:.3px}
+  header{background:#fff;position:sticky;top:0;z-index:60;border-bottom:1px solid var(--line)}
+  .nav{display:flex;align-items:center;justify-content:space-between;gap:20px;padding:13px 24px;max-width:1200px;margin:0 auto}
+  .nav .logo{height:30px}
+  .nav .by{font-size:12px;color:var(--muted);font-weight:600}
+  .nav .by b{color:var(--navy)}
+
+  .hero{position:relative;background:var(--navy) center/cover no-repeat;background-image:linear-gradient(90deg,rgba(10,20,35,.9) 0%,rgba(10,20,35,.6) 60%,rgba(10,20,35,.35) 100%),url('https://images.unsplash.com/photo-1517245386807-bb43f82c33c4?auto=format&fit=crop&w=1700&q=80');color:#fff}
+  .hero .wrap{padding:78px 24px 82px}
+  .hero .eyebrow{color:var(--gold)}
+  .hero h1{font-size:clamp(32px,4.6vw,54px);color:#fff;max-width:20ch;margin-bottom:18px}
+  .hero p{font-size:20px;color:#d7e0ea;max-width:62ch;margin-bottom:14px}
+  .hero .meta{font-size:14px;color:#9fb0c4;margin-top:18px}
+
+  section.block{padding:64px 0}
+  section.alt{background:var(--off)}
+  .navyband{background:var(--navy);color:#fff}.navyband h2,.navyband h3,.navyband h4{color:#fff}.navyband a{color:var(--gold)}
+  .gradient{background:linear-gradient(160deg,var(--sky) 0%,#7bb6dc 45%,var(--cream) 100%)}
+
+  .two{display:grid;grid-template-columns:1fr 1fr;gap:36px;margin-top:30px}
+  @media(max-width:820px){.two{grid-template-columns:1fr}}
+  .two h3{margin-bottom:6px}.two p{color:var(--muted);font-size:16px}
+  .navyband .two p{color:#cdd6e2}
+
+  .steps{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;margin-top:36px}
+  @media(max-width:820px){.steps{grid-template-columns:1fr}}
+  .step .num{display:inline-flex;width:42px;height:42px;align-items:center;justify-content:center;border-radius:50%;background:var(--sky);color:#fff;font-family:"neighbor",Archivo,sans-serif;font-weight:900;font-size:19px;margin-bottom:12px}
+  .step h3{margin-bottom:5px}.step p{color:var(--muted);font-size:15px}
+
+  /* pricing */
+  .tiers{display:grid;grid-template-columns:repeat(3,1fr);gap:22px;margin-top:42px;align-items:start}
+  @media(max-width:900px){.tiers{grid-template-columns:1fr}}
+  .tier{background:#fff;border:1px solid var(--line);border-radius:18px;padding:30px 26px;box-shadow:0 12px 34px rgba(18,33,51,.06)}
+  .tier.feat{border:2px solid var(--sky);box-shadow:0 18px 44px rgba(33,91,170,.16);position:relative}
+  .tier.feat .flag{position:absolute;top:-13px;left:50%;transform:translateX(-50%);background:var(--sky);color:#fff;font-size:11px;font-weight:800;letter-spacing:1px;text-transform:uppercase;padding:5px 16px;border-radius:150px;white-space:nowrap}
+  .tier .tname{font-family:"neighbor",Archivo,sans-serif;font-weight:900;text-transform:uppercase;color:var(--navy);font-size:20px}
+  .tier .tsub{color:var(--muted);font-size:13.5px;margin:4px 0 16px;min-height:38px}
+  .tier .price{font-family:"neighbor",Archivo,sans-serif;font-weight:900;color:var(--sky);font-size:34px;line-height:1}
+  .tier .price small{display:block;font-family:Inter;font-weight:600;font-size:13px;color:var(--muted);text-transform:none;letter-spacing:0;margin-top:4px}
+  .tier .build{font-size:13.5px;color:var(--navy);font-weight:700;margin:12px 0 16px;padding:10px 14px;background:var(--off);border-radius:10px}
+  .tier ul{list-style:none;margin:8px 0 20px}
+  .tier li{position:relative;padding-left:26px;margin-bottom:9px;font-size:14.5px;color:var(--ink)}
+  .tier li:before{content:"\2713";position:absolute;left:0;color:var(--sky);font-weight:900}
+  .tier .btn{width:100%;text-align:center}
+
+  table.cmp{width:100%;border-collapse:collapse;margin-top:24px;font-size:15px}
+  table.cmp th,table.cmp td{padding:13px 14px;border-bottom:1px solid var(--line);text-align:left;vertical-align:top}
+  table.cmp th{background:var(--navy);color:#fff;font-size:13px;text-transform:uppercase;letter-spacing:.5px}
+  table.cmp td:first-child{font-weight:700;color:var(--navy)}
+  table.cmp tr:nth-child(even) td{background:var(--off)}
+
+  .model{background:#fff;border:1px solid var(--line);border-radius:16px;padding:28px 30px}
+  .model h3{color:var(--sky);margin-bottom:8px}
+  .model .tag{display:inline-block;font-size:12px;font-weight:800;letter-spacing:1px;text-transform:uppercase;color:#fff;background:var(--navy);padding:5px 14px;border-radius:150px;margin-bottom:14px}
+  .model ul{list-style:none;margin:6px 0}
+  .model li{position:relative;padding-left:24px;margin-bottom:9px;color:var(--muted);font-size:15.5px}
+  .model li:before{content:"\2013";position:absolute;left:0;color:var(--sky);font-weight:900}
+
+  .stat3{display:flex;justify-content:space-around;gap:18px;flex-wrap:wrap;text-align:center;margin-top:30px}
+  .stat3 .n{font-family:"neighbor",Archivo,sans-serif;font-weight:900;font-size:38px;color:var(--gold);line-height:1}
+  .stat3 .l{font-size:13px;color:#cdd6e2;margin-top:6px;max-width:24ch}
+
+  .ctaband{text-align:center;padding:72px 0}
+  .ctaband h2{max-width:22ch;margin:0 auto .4em}
+  footer{background:var(--navy);color:#aeb9c8;padding:48px 0 24px;font-size:14px;text-align:center}
+  footer .logo{height:30px;margin-bottom:14px}
+  footer .by{color:#cdd6e2;margin-bottom:6px}
+  footer .legal{border-top:1px solid rgba(255,255,255,.12);margin-top:26px;padding-top:18px;font-size:12px;color:#7e8a9b}
+  .note{font-size:13px;color:var(--muted);font-style:italic}
+</style>
+</head>
+<body data-eeat-byline="v1">
+<!-- markers below suppress markcmo.com catch-all chrome injection (nav/style.css/byline) so this page renders standalone in SLM brand -->
+<span id="mainNav" hidden></span>
+
+<!-- ACCESS GATE -->
+<div id="gate">
+  <div class="box">
+    <img src="https://secondlifemac.com/wp-content/uploads/2025/11/LOCKUP.svg" alt="Second Life Mac">
+    <h2>Private Proposal</h2>
+    <p>This document was prepared for Second Life Mac. Please enter your access code to continue.</p>
+    <input id="code" type="text" placeholder="Access code" autocomplete="off" onkeydown="if(event.key==='Enter')unlock()">
+    <button class="btn btn-blue" onclick="unlock()">View Proposal</button>
+    <div id="err">That code is not recognized. Please try again.</div>
+    <div class="from">Prepared by Mark Gabrielli, MarkCMO</div>
+  </div>
+</div>
+
+<div class="demo">Private proposal prepared by Mark Gabrielli (MarkCMO) for Second Life Mac. Confidential.</div>
+
+<header>
+  <div class="nav">
+    <img class="logo" src="https://secondlifemac.com/wp-content/uploads/2025/11/LOCKUP.svg" alt="Second Life Mac">
+    <div class="by">Acquisition Engine Proposal &nbsp;|&nbsp; prepared by <b>MarkCMO</b></div>
+  </div>
+</header>
+
+<section class="hero">
+  <div class="wrap">
+    <span class="eyebrow">Supply-Side Growth Proposal</span>
+    <h1>The Apple acquisition engine for Second Life Mac</h1>
+    <p>A built-for-you outreach system that wins more device fleets from universities and enterprises the moment they upgrade, before Diamond Assets gets there first.</p>
+    <div class="meta">Prepared for Scott Pauga and the Second Life Mac leadership team &nbsp;&middot;&nbsp; Confidential</div>
+  </div>
+</section>
+
+<section class="block">
+  <div class="wrap center">
+    <span class="eyebrow">The objective</span>
+    <h2>Acquire more devices, from bigger fleets, more predictably</h2>
+    <p class="lede">Blaine framed the goal clearly: Second Life Mac wants a repeatable acquisition funnel that brings in more Apple devices from universities and enterprise organizations as they refresh and upgrade their fleets. Today most of that supply comes from relationships, referrals, and inbound. That is valuable, but it is not a system, and it does not scale on demand.</p>
+  </div>
+  <div class="wrap" style="max-width:820px;margin-top:6px">
+    <p>The opportunity in front of Second Life Mac is timing. Every university IT department and every enterprise running Mac fleets upgrades on a cycle. The window to win their old devices opens the moment they commit to new hardware, and it closes fast as competitors, trade-in programs, and recyclers move in. The company that systematically reaches those buyers at the upgrade moment wins the fleet. Right now, no one in this category does that at scale, including Diamond Assets, who grew through sales and partnerships rather than a built demand engine.</p>
+    <p>This proposal lays out the acquisition engine I would build and run for you: the email infrastructure, the multichannel outreach, the data and targeting, and the senior leadership to operate it, structured so a meaningful share of the cost can be tied directly to the devices it brings in.</p>
+  </div>
+</section>
+
+<section class="block alt">
+  <div class="wrap center">
+    <span class="eyebrow">The strategy</span>
+    <h2>Reach the fleet at the upgrade moment</h2>
+    <p class="lede">We target university and enterprise accounts at the exact point they are retiring Apple hardware, using signals competitors ignore.</p>
+  </div>
+  <div class="wrap">
+    <div class="steps">
+      <div class="step"><div class="num">1</div><h3>Find the upgrade signal</h3><p>Lease expirations, end-of-life Apple models, new deployment announcements, fiscal year-end, grant and bond cycles, and refresh patterns flag accounts that are about to have fleets to sell.</p></div>
+      <div class="step"><div class="num">2</div><h3>Reach the right owner</h3><p>We build targeted lists of IT directors, asset managers, CIOs, and procurement leads at universities and enterprises, enriched and verified, not scraped and stale.</p></div>
+      <div class="step"><div class="num">3</div><h3>Open with value</h3><p>The message is simple and strong: you upgraded, we pay you for the old fleet, securely and with zero hassle. Sequenced across email and LinkedIn until they respond.</p></div>
+      <div class="step"><div class="num">4</div><h3>Route to your team</h3><p>Qualified replies flow straight into Pardot and to your procurement team with full context, so nothing leaks and every fleet gets worked.</p></div>
+      <div class="step"><div class="num">5</div><h3>Multiply the channels</h3><p>Cold email and LinkedIn lead. Then we layer partnerships, retargeting, and the geo and segment SEO matrix so inbound compounds over time.</p></div>
+      <div class="step"><div class="num">6</div><h3>Measure and scale</h3><p>Every account is tracked from first touch to acquired fleet, so we know cost per acquired device and double down on what works.</p></div>
+    </div>
+  </div>
+</section>
+
+<section class="block navyband">
+  <div class="wrap center">
+    <span class="eyebrow" style="color:var(--gold)">What we build</span>
+    <h2>The systems, built and owned by you</h2>
+    <p class="lede" style="color:#d7e0ea">The engagement fee covers a real infrastructure build, not a slide deck. This is the machine that runs the outreach.</p>
+  </div>
+  <div class="wrap">
+    <div class="two">
+      <div><h3>Cold email infrastructure</h3><p>Dedicated secondary sending domains to protect your primary reputation, full authentication (SPF, DKIM, DMARC), provisioned and warmed mailboxes, a managed sending platform with inbox rotation, and continuous deliverability monitoring.</p></div>
+      <div><h3>Targeting and data</h3><p>Enriched, verified contact lists of university and enterprise IT and procurement decision makers, plus upgrade-signal triggers (lease end, EOL models, deployments) so we reach fleets at the right moment.</p></div>
+      <div><h3>Outreach sequences and copy</h3><p>Multi-step email and LinkedIn sequences written and tested for the acquisition message, with A/B testing built in so response rates climb over time.</p></div>
+      <div><h3>LinkedIn engine</h3><p>A Sales Navigator and tooling workflow that runs connection and message sequences to the same target accounts in parallel with email.</p></div>
+      <div><h3>CRM and routing</h3><p>Clean integration with Salesforce Pardot, lead scoring, and routing so qualified fleets land with your procurement team instantly and nothing falls through.</p></div>
+      <div><h3>Dashboards and attribution</h3><p>A single view from first touch to acquired fleet: accounts reached, replies, opportunities, devices acquired, and cost per acquired device, so spend is always tied to outcomes.</p></div>
+    </div>
+  </div>
+</section>
+
+<section class="block">
+  <div class="wrap center">
+    <span class="eyebrow">Investment</span>
+    <h2>Three tiers, built to your stage</h2>
+    <p class="lede">Each tier includes a one-time systems build (the engagement fee) plus a monthly fractional retainer. Pricing shown is the flat model. The performance model below can be applied to any tier.</p>
+  </div>
+  <div class="wrap">
+    <div class="tiers">
+      <div class="tier">
+        <div class="tname">Pipeline Launch</div>
+        <div class="tsub">Prove the channel in one segment. Best for a focused start with universities or enterprise.</div>
+        <div class="price">$6,500<small>per month retainer (flat)</small></div>
+        <div class="build">One-time systems build: $7,500</div>
+        <ul>
+          <li>Cold email infrastructure build</li>
+          <li>One segment (universities OR enterprise)</li>
+          <li>Targeted, enriched lead lists</li>
+          <li>Email sequences and copy</li>
+          <li>Pardot routing to your team</li>
+          <li>Core performance dashboard</li>
+          <li>Monthly strategy and reporting</li>
+        </ul>
+        <a class="btn btn-blue" href="#models">Choose a model</a>
+      </div>
+      <div class="tier feat">
+        <div class="flag">Recommended</div>
+        <div class="tname">Acquisition Engine</div>
+        <div class="tsub">The full supply-side machine across both target segments and multiple channels.</div>
+        <div class="price">$11,000<small>per month retainer (flat)</small></div>
+        <div class="build">One-time systems build: $15,000</div>
+        <ul>
+          <li>Everything in Pipeline Launch, plus:</li>
+          <li>Universities AND enterprise</li>
+          <li>LinkedIn outreach engine</li>
+          <li>Upgrade-signal trigger targeting</li>
+          <li>Geo and segment SEO matrix kickoff</li>
+          <li>A/B testing and optimization</li>
+          <li>Full attribution to cost per acquired device</li>
+        </ul>
+        <a class="btn btn-blue" href="#models">Choose a model</a>
+      </div>
+      <div class="tier">
+        <div class="tname">Market Dominance</div>
+        <div class="tsub">Full fractional CMO leadership across every channel and segment, including healthcare.</div>
+        <div class="price">$16,500<small>per month retainer (flat)</small></div>
+        <div class="build">One-time systems build: $25,000</div>
+        <ul>
+          <li>Everything in Acquisition Engine, plus:</li>
+          <li>Healthcare segment added</li>
+          <li>Paid channels and retargeting</li>
+          <li>Partnership and referral programs</li>
+          <li>Category positioning vs Diamond</li>
+          <li>Leadership and mentoring of your marketing team</li>
+          <li>Executive dashboard for Scott</li>
+        </ul>
+        <a class="btn btn-blue" href="#models">Choose a model</a>
+      </div>
+    </div>
+    <p class="note center" style="margin-top:22px">Suggested initial term: 3 months for Pipeline Launch, 6 months for Acquisition Engine and Market Dominance, then month to month. Systems built remain yours.</p>
+  </div>
+</section>
+
+<section class="block alt" id="models">
+  <div class="wrap center">
+    <span class="eyebrow">Two ways to structure it</span>
+    <h2>Choose how we get paid</h2>
+    <p class="lede">Apply either model to any tier above. One rewards predictability, the other ties my upside directly to the devices the engine brings in.</p>
+  </div>
+  <div class="wrap">
+    <div class="two" style="gap:26px">
+      <div class="model">
+        <span class="tag">Model A &middot; Performance</span>
+        <h3>Lower base, bonus on units acquired</h3>
+        <p style="color:var(--muted)">My incentive is aligned with your supply. We reduce the monthly retainer and add a bonus tied to the fleets the engine actually wins.</p>
+        <ul>
+          <li>Monthly retainer reduced about 30% from the flat rate</li>
+          <li>Plus a bonus, you choose the mechanism that fits your accounting:</li>
+          <li><b>$1.50 per device acquired</b> from a marketing-sourced account, OR</li>
+          <li><b>$1,500 per net-new fleet acquisition</b> (a university or enterprise account that completes a buyback), scaling up for large fleets</li>
+          <li>Only marketing-sourced and marketing-influenced accounts count, tracked in Pardot</li>
+          <li>Monthly bonus capped at 1.5x the base retainer to protect your cash flow</li>
+        </ul>
+        <p class="note">Best when you want my compensation tied to results and you are confident in the volume opportunity.</p>
+      </div>
+      <div class="model">
+        <span class="tag">Model B &middot; Flat</span>
+        <h3>Predictable engagement and retainer</h3>
+        <p style="color:var(--muted)">Simple, fixed, easy to budget. The one-time engagement fee plus a flat monthly retainer, with no per-unit component.</p>
+        <ul>
+          <li>One-time systems build (engagement fee) as listed per tier</li>
+          <li>Flat monthly retainer as listed per tier</li>
+          <li>No per-device or per-account bonus</li>
+          <li>Fully predictable spend for finance and board planning</li>
+          <li>All systems, channels, and reporting included per tier</li>
+        </ul>
+        <p class="note">Best when finance prefers a fixed line item and clean forecasting.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="block navyband">
+  <div class="wrap center">
+    <span class="eyebrow" style="color:var(--gold)">Pricing in context</span>
+    <h2>A fraction of a full-time hire, a fraction of a point of revenue</h2>
+    <p class="lede" style="color:#d7e0ea">Benchmarked against what senior marketing leadership actually costs, and against what Second Life Mac can comfortably support.</p>
+  </div>
+  <div class="wrap">
+    <div class="stat3">
+      <div><div class="n">$250K+</div><div class="l">All-in cost of a full-time CMO, with benefits, ramp, and risk</div></div>
+      <div><div class="n">0.7% to 1.9%</div><div class="l">These tiers as a share of estimated annual revenue</div></div>
+      <div><div class="n">Day one</div><div class="l">A built system running, not a 6 month hiring and ramp cycle</div></div>
+    </div>
+    <table class="cmp">
+      <tr><th>Option</th><th>Year one all-in (flat model)</th><th>As a share of revenue*</th><th>What you get</th></tr>
+      <tr><td>Pipeline Launch</td><td>about $85,500</td><td>roughly 0.6% to 0.9%</td><td>One-segment acquisition channel, built and run</td></tr>
+      <tr><td>Acquisition Engine</td><td>about $147,000</td><td>roughly 1.0% to 1.5%</td><td>Full multichannel engine, both segments</td></tr>
+      <tr><td>Market Dominance</td><td>about $223,000</td><td>roughly 1.5% to 2.2%</td><td>Fractional CMO, all channels, team leadership</td></tr>
+      <tr><td>Full-time CMO hire</td><td>$250,000 to $320,000+</td><td>roughly 2% to 3%</td><td>One leader, no built system, months to ramp</td></tr>
+    </table>
+    <p class="note" style="color:#9fb0c4;margin-top:14px">*Based on an estimated $10M to $15M revenue range. The fractional CMO market typically runs $8,000 to $25,000 per month. Every tier here sits at or below market for senior leadership, and includes a systems build a standard fractional engagement does not.</p>
+  </div>
+</section>
+
+<section class="block">
+  <div class="wrap center">
+    <span class="eyebrow">Rollout</span>
+    <h2>The first 90 days</h2>
+  </div>
+  <div class="wrap">
+    <div class="steps">
+      <div class="step"><div class="num">1</div><h3>Days 1 to 30: Build</h3><p>Stand up the email infrastructure, provision and warm domains and mailboxes, build the first target lists and upgrade-signal triggers, and integrate with Pardot. Align with your procurement team on handoff.</p></div>
+      <div class="step"><div class="num">2</div><h3>Days 30 to 60: Launch</h3><p>Go live with the first sequences to universities and enterprise. Tune copy, targeting, and deliverability. First qualified fleets begin routing to your team.</p></div>
+      <div class="step"><div class="num">3</div><h3>Days 60 to 90: Scale</h3><p>Add LinkedIn and additional channels, expand lists, and report cost per acquired device. Lock in what works and increase volume on the winning plays.</p></div>
+    </div>
+  </div>
+</section>
+
+<section class="block gradient">
+  <div class="wrap center" style="max-width:820px">
+    <h2 style="color:var(--navy)">Why me, and why now</h2>
+    <p style="color:var(--navy);font-size:18px">Second Life Mac already beats Diamond Assets where it counts in 2026: you are named first in Google's AI answers for school device buyback and cited as the best district option by Perplexity, while Diamond does not appear. You have the brand and the trust. What you do not yet have is a built system to win university and enterprise fleets on demand. I build and run exactly that kind of engine, and I have already shown I can operate inside your brand. The 2026 upgrade wave makes the next 12 months the moment to move.</p>
+  </div>
+</section>
+
+<section class="ctaband">
+  <div class="wrap">
+    <h2>Let's build the engine that wins the next fleet</h2>
+    <p class="lede center" style="font-size:19px">Tell me which tier and which model fit best, and I will turn this into a one-page agreement and a 90-day build plan.</p>
+    <div style="margin-top:24px">
+      <a class="btn btn-blue" href="mailto:mark@markcmo.com?subject=Second%20Life%20Mac%20Acquisition%20Engine">Reply to move forward</a>
+      <a class="btn btn-gold" href="https://markcmo.com" style="margin-left:8px">About MarkCMO</a>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <img class="logo" src="https://secondlifemac.com/wp-content/uploads/2025/11/LOCKUP.svg" alt="Second Life Mac">
+    <div class="by">Acquisition Engine Proposal prepared by Mark Gabrielli, MarkCMO</div>
+    <div class="by">mark@markcmo.com &nbsp;&middot;&nbsp; markcmo.com</div>
+    <div class="legal">Confidential. Prepared exclusively for Second Life Mac. Pricing valid for 30 days from review. Figures referencing revenue are external estimates for illustration.</div>
+  </div>
+</footer>
+
+<script>
+  var CODE="slm2026";
+  function unlock(){
+    var v=(document.getElementById('code').value||'').trim().toLowerCase();
+    if(v===CODE){
+      document.getElementById('gate').style.display='none';
+      try{localStorage.setItem('slm_unlock','1');}catch(e){}
+      document.body.style.overflow='auto';
+    } else {
+      document.getElementById('err').style.display='block';
+    }
+  }
+  (function(){
+    try{ if(localStorage.getItem('slm_unlock')==='1'){ var g=document.getElementById('gate'); if(g) g.style.display='none'; } }catch(e){}
+  })();
+</script>
+
+</body>
+</html>
