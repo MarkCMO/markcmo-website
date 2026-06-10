@@ -135,6 +135,33 @@
   .orgline{width:2px;height:24px;background:#cdd6e2;margin:0 auto}
   .orgrow{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:14px}
   @media(max-width:760px){.tabs{flex-wrap:nowrap;overflow-x:auto;justify-content:flex-start}.tab{font-size:12px;padding:11px 15px}.orgrow{grid-template-columns:1fr}}
+  /* responsive */
+  .tabs{scrollbar-width:none;-ms-overflow-style:none}
+  .tabs::-webkit-scrollbar{display:none}
+  .tablescroll{overflow-x:auto;-webkit-overflow-scrolling:touch}
+  img{max-width:100%;height:auto}
+  @media(max-width:760px){
+    .nav{padding:12px 18px;gap:12px}
+    .nav .by{display:none}
+    .wrap{padding:0 20px}
+    section.block{padding:46px 0}
+    .hero .wrap{padding:46px 20px 50px}
+    .hero h1{font-size:clamp(27px,7.5vw,40px)}
+    .hero p{font-size:17px}
+    h2{font-size:clamp(24px,6vw,34px)}
+    .lede{font-size:17px}
+    .stat3{gap:26px}
+    .stat3 .n{font-size:32px}
+    .tablescroll{margin-top:20px;border:1px solid var(--line);border-radius:12px}
+    table.cmp{min-width:580px;margin-top:0}
+    .navyband .lede,.gradient p,.navyband p{font-size:16px}
+    .model{padding:22px 20px}
+    .ctaband{padding:54px 0}
+  }
+  @media(max-width:430px){
+    .tab{font-size:11px;padding:10px 13px;letter-spacing:.2px}
+    .tabs{gap:8px;padding:10px 16px}
+  }
 </style>
 </head>
 <body data-eeat-byline="v1">
@@ -368,14 +395,14 @@
   </section>
   <section class="block navyband">
     <div class="wrap center"><span class="eyebrow" style="color:var(--gold)">Competitive landscape</span><h2>Where Second Life Mac stands</h2><p class="lede" style="color:#d7e0ea">You pioneered this category in 2012. One PE-backed rival outgrew you on capital and sales. Here is the honest picture.</p></div>
-    <div class="wrap"><table class="cmp">
+    <div class="wrap"><div class="tablescroll"><table class="cmp">
       <tr><th>Company</th><th>Scale</th><th>Edge</th><th>Weakness</th></tr>
       <tr><td>Second Life Mac</td><td>Est. $10M to $15M, founder-owned</td><td>Category pioneer, service, US processing, content and AI-search authority</td><td>Smaller budget, narrow paid channels</td></tr>
       <tr><td>Diamond Assets</td><td>Est. $40M+, PE-backed, 100+ staff</td><td>MDM-integrated valuation software, capital, sales machine, $250M+ paid to schools</td><td>Weak in organic and AI search</td></tr>
       <tr><td>Mac of All Trades</td><td>Est. $21M, since 1995</td><td>Longevity, direct resale</td><td>Thin education positioning</td></tr>
       <tr><td>SellYourMac (OWC)</td><td>Consumer-focused</td><td>Reviews, consumer trust</td><td>Not built for fleet scale</td></tr>
       <tr><td>Apple Trade In</td><td>Apple program</td><td>Brand, convenience</td><td>Lower payouts, no service</td></tr>
-    </table></div>
+    </table></div></div>
   </section>
   <section class="block alt">
     <div class="wrap center"><span class="eyebrow">The hidden edge</span><h2>You are already beating Diamond in AI search</h2><p class="lede">This is the most important thing we found. As buyers move from blue links to AI answers, Second Life Mac is winning education, and Diamond is invisible.</p></div>
@@ -415,7 +442,7 @@
   </section>
   <section class="block">
     <div class="wrap center"><span class="eyebrow">Where the technology stacks up</span><h2>Second Life Mac vs Diamond Assets, on capability</h2><p class="lede">Diamond leads on platform and capital. You lead where the market is heading: search and AI visibility. The plan plays to that asymmetry.</p></div>
-    <div class="wrap"><table class="cmp light">
+    <div class="wrap"><div class="tablescroll"><table class="cmp light">
       <tr><th>Capability</th><th>Second Life Mac</th><th>Diamond Assets</th></tr>
       <tr><td>Category experience</td><td>Since 2012, 3M+ devices processed</td><td>Since 2014</td></tr>
       <tr><td>Capital backing</td><td>Founder-owned, bootstrapped</td><td>Private-equity backed</td></tr>
@@ -424,7 +451,7 @@
       <tr><td>AI-search visibility (education)</td><td>Named first by Google AI and Perplexity</td><td>Not cited</td></tr>
       <tr><td>Content and organic authority</td><td>Strong, currently underleveraged</td><td>Weak in organic search</td></tr>
       <tr><td>Paid channels</td><td>Google Ads and LinkedIn live</td><td>Broader paid spend</td></tr>
-    </table></div>
+    </table></div></div>
   </section>
   <section class="block alt">
     <div class="wrap center"><span class="eyebrow">The acquisition tech stack</span><h2>What we deploy to reach fleets at the upgrade moment</h2></div>
@@ -456,14 +483,14 @@
   </div></div></section>
   <section class="block">
     <div class="wrap center"><span class="eyebrow">Live search audit</span><h2>Where you win, and where the gaps are</h2><p class="lede">From live testing of Google, Google AI Overviews, and Perplexity in June 2026.</p></div>
-    <div class="wrap"><table class="cmp light">
+    <div class="wrap"><div class="tablescroll"><table class="cmp light">
       <tr><th>Buyer search</th><th>Where Second Life Mac stands</th><th>The opportunity</th></tr>
       <tr><td>apple device buyback for schools</td><td>#3 organic, named first in Google AI Overview, cited by Perplexity</td><td>Lock organic to #1 and defend the AI lead</td></tr>
       <tr><td>best buyback companies for schools (AI)</td><td>Cited as the best district option, Diamond absent</td><td>Own the AI citation outright</td></tr>
       <tr><td>bulk apple device buyback for business</td><td>Not in the top results</td><td>Wide-open enterprise lane to claim</td></tr>
       <tr><td>refurbished macbooks for schools (buy side)</td><td>Not in the top results</td><td>Capture resale demand for your store</td></tr>
       <tr><td>apple device buyback (head term)</td><td>Consumer-owned by Apple and Best Buy</td><td>Not your buyer, do not chase it</td></tr>
-    </table></div>
+    </table></div></div>
   </section>
   <section class="block alt">
     <div class="wrap center"><span class="eyebrow">Quick wins</span><h2>Five fixes we can make in the first 30 days</h2><p class="lede">All found in your own site and stack during the audit, fast credibility and fast returns.</p></div>
