@@ -134,10 +134,11 @@
   .orgbox.mgr{background:var(--sky);color:#fff;border-color:var(--sky);display:inline-block}
   .orgline{width:2px;height:24px;background:#cdd6e2;margin:0 auto}
   .orgrow{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:14px}
-  @media(max-width:760px){.tabs{flex-wrap:nowrap;overflow-x:auto;justify-content:flex-start}.tab{font-size:12px;padding:11px 15px}.orgrow{grid-template-columns:1fr}}
+  @media(max-width:760px){.tabs{display:grid;grid-template-columns:1fr 1fr;gap:8px}.tab{font-size:13px;padding:13px 8px;white-space:nowrap;text-align:center}.t-full{display:none}.t-short{display:inline}.orgrow{grid-template-columns:1fr}}
   /* responsive */
   .tabs{scrollbar-width:none;-ms-overflow-style:none}
   .tabs::-webkit-scrollbar{display:none}
+  @media(min-width:761px){.t-short{display:none}}
   .tablescroll{overflow-x:auto;-webkit-overflow-scrolling:touch}
   img{max-width:100%;height:auto}
   @media(max-width:760px){
@@ -192,10 +193,10 @@
 
 <div class="tabsbar">
   <div class="tabs">
-    <button class="tab active" data-tab="research">Research &amp; Competitive</button>
-    <button class="tab" data-tab="tech">Technology Ahead</button>
-    <button class="tab" data-tab="strategy">Strategic Advances</button>
-    <button class="tab" data-tab="proposal">The Plan</button>
+    <button class="tab active" data-tab="research"><span class="t-full">Research &amp; Competitive</span><span class="t-short">Research</span></button>
+    <button class="tab" data-tab="tech"><span class="t-full">Technology Ahead</span><span class="t-short">Technology</span></button>
+    <button class="tab" data-tab="strategy"><span class="t-full">Strategic Advances</span><span class="t-short">Strategy</span></button>
+    <button class="tab" data-tab="proposal"><span class="t-full">The Plan</span><span class="t-short">The Plan</span></button>
   </div>
 </div>
 
