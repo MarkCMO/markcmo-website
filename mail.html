@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Mail · mark@markcmo.com</title>
+<meta name="robots" content="noindex,nofollow">
+<style>
+:root{
+  --ink:#0a0f2c; --ink2:#0F1828; --ink3:#1a2342;
+  --gold:#C9A84C; --text:#fff; --text2:rgba(255,255,255,0.72); --text3:rgba(255,255,255,0.45);
+  --border:rgba(255,255,255,0.08); --border2:rgba(255,255,255,0.16);
+  --ok:#7DB87D; --warn:#E89B5F; --err:#e74c3c; --info:#7BA7E0;
+  --mono:'SF Mono',ui-monospace,'JetBrains Mono',Menlo,Consolas,monospace;
+  --serif:'Newsreader','Charter','Iowan Old Style',Georgia,serif;
+  --sans:-apple-system,BlinkMacSystemFont,'SF Pro Text','Inter','Segoe UI',Roboto,Arial,sans-serif;
+}
+*{box-sizing:border-box}
+html,body{margin:0;padding:0;background:var(--ink);color:var(--text);font-family:var(--sans);min-height:100vh}
+a{color:var(--gold);text-decoration:none}
+
+#app{display:grid;grid-template-rows:auto 1fr;min-height:100vh}
+header.topbar{display:flex;align-items:center;justify-content:space-between;padding:14px 24px;border-bottom:1px solid var(--border);background:rgba(0,0,0,0.2)}
+header h1{margin:0;font-family:var(--serif);font-size:22px;font-weight:500;letter-spacing:-0.01em}
+header .who{font-size:13px;color:var(--text3);font-family:var(--mono)}
+header .actions{display:flex;gap:10px}
+button{font-family:inherit;font-size:13px;font-weight:600;padding:8px 16px;border-radius:8px;border:1px solid var(--border2);background:rgba(255,255,255,0.04);color:var(--text);cursor:pointer;transition:background 0.1s}
+button:hover{background:rgba(255,255,255,0.08)}
+button.primary{background:var(--gold);color:var(--ink);border-color:var(--gold)}
+button.primary:hover{opacity:0.9}
+button.danger{border-color:rgba(231,76,60,0.4);color:var(--err)}
+
+main{display:grid;grid-template-columns:200px 1fr;min-height:0}
+aside.nav{border-right:1px solid var(--border);padding:16px 0;background:rgba(0,0,0,0.15)}
+aside .nav-item{display:flex;align-items:center;gap:10px;padding:10px 20px;cursor:pointer;font-size:14px;color:var(--text2);border-left:3px solid transparent}
+aside .nav-item:hover{background:rgba(255,255,255,0.04)}
+aside .nav-item.active{color:var(--text);border-left-color:var(--gold);background:rgba(201,168,76,0.06)}
+aside .nav-divider{height:1px;background:var(--border);margin:12px 16px}
+
+section.content{padding:24px;overflow:auto}
+
+/* Inbox list */
+.inbox-list{display:flex;flex-direction:column;gap:1px;background:var(--border)}
+.inbox-row{padding:14px 18px;background:var(--ink2);cursor:pointer;display:grid;grid-template-columns:200px 1fr 100px;gap:12px;align-items:start}
+.inbox-row:hover{background:var(--ink3)}
+.inbox-row.unread{font-weight:600}
+.inbox-row .from{font-size:14px;color:var(--text);overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.inbox-row .from-email{display:block;font-size:11px;color:var(--text3);font-family:var(--mono);font-weight:400;margin-top:2px}
+.inbox-row .body{font-size:13px;color:var(--text2);overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.inbox-row .subj{font-size:14px;color:var(--text);margin-bottom:3px}
+.inbox-row .when{font-size:11px;color:var(--text3);font-family:var(--mono);text-align:right}
+
+/* Compose */
+.compose{max-width:760px}
+.compose h2{margin:0 0 20px;font-family:var(--serif);font-size:28px;font-weight:500;letter-spacing:-0.02em}
+.compose label{display:block;font-size:11px;letter-spacing:0.16em;text-transform:uppercase;color:var(--text3);font-weight:600;margin:18px 0 8px}
+.compose input,.compose textarea{width:100%;background:rgba(255,255,255,0.05);border:1px solid var(--border);border-radius:8px;padding:12px 14px;font-size:14px;color:var(--text);font-family:var(--sans);outline:none}
+.compose input:focus,.compose textarea:focus{border-color:var(--gold);background:rgba(255,255,255,0.07)}
+.compose textarea{min-height:280px;resize:vertical;line-height:1.55}
+.compose .row{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.compose .actions{margin-top:24px;display:flex;gap:10px;align-items:center}
+.compose .status{font-size:13px;color:var(--text2)}
+.compose .status.ok{color:var(--ok)}
+.compose .status.err{color:var(--err)}
+
+/* Empty state */
+.empty{padding:60px 20px;text-align:center;color:var(--text3);font-size:14px}
+</style>
+</head>
+<body>
+<div id="app">
+
+<header class="topbar">
+  <div>
+    <h1>Mail</h1>
+    <div class="who" id="whoami">— signed out —</div>
+  </div>
+  <div class="actions">
+    <button id="composeBtn" class="primary" onclick="showCompose()">Compose</button>
+    <button onclick="refresh()">Refresh</button>
+  </div>
+</header>
+
+<main>
+<aside class="nav">
+  <div class="nav-item active" data-folder="inbox" onclick="switchFolder('inbox')">Inbox</div>
+  <div class="nav-item" data-folder="sent" onclick="switchFolder('sent')">Sent</div>
+  <div class="nav-divider"></div>
+  <div class="nav-item" style="cursor:default;color:var(--text3);font-size:12px;font-family:var(--mono)">mark@markcmo.com</div>
+</aside>
+
+<section class="content" id="content">
+  <div class="empty">Loading…</div>
+</section>
+</main>
+
+</div>
+
+<script>
+const AUTH_STORAGE_KEY = 'mc_mail_basic_auth';
+let currentFolder = 'inbox';
+let currentAuth = null;
+
+async function getAuth() {
+  let stored = sessionStorage.getItem(AUTH_STORAGE_KEY);
+  if (stored) return stored;
+  const user = prompt('Username (default: mark@markcmo.com)') || 'mark@markcmo.com';
+  const pass = prompt('Password');
+  if (!pass) return null;
+  const basic = 'Basic ' + btoa(user + ':' + pass);
+  sessionStorage.setItem(AUTH_STORAGE_KEY, basic);
+  return basic;
+}
+
+async function authedFetch(url, init = {}) {
+  if (!currentAuth) currentAuth = await getAuth();
+  if (!currentAuth) return null;
+  init.headers = { ...(init.headers || {}), Authorization: currentAuth };
+  const r = await fetch(url, init);
+  if (r.status === 401) {
+    sessionStorage.removeItem(AUTH_STORAGE_KEY);
+    currentAuth = null;
+    alert('Wrong credentials. Try again.');
+    return null;
+  }
+  return r;
+}
+
+function fmtTime(iso) {
+  if (!iso) return '';
+  const d = new Date(iso);
+  const now = new Date();
+  const diff = (now - d) / 1000;
+  if (diff < 60) return Math.floor(diff) + 's';
+  if (diff < 3600) return Math.floor(diff/60) + 'm';
+  if (diff < 86400) return Math.floor(diff/3600) + 'h';
+  if (diff < 86400*7) return Math.floor(diff/86400) + 'd';
+  return d.toLocaleDateString('en-US', { month:'short', day:'numeric' });
+}
+
+function esc(s) {
+  return String(s ?? '').replace(/[&<>"']/g, c => ({ '&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;' }[c]));
+}
+
+async function loadFolder(folder) {
+  document.getElementById('content').innerHTML = '<div class="empty">Loading…</div>';
+  const r = await authedFetch('/api/mail/list?folder=' + encodeURIComponent(folder) + '&limit=100');
+  if (!r) return;
+  if (!r.ok) {
+    document.getElementById('content').innerHTML = '<div class="empty">Error: ' + r.status + '</div>';
+    return;
+  }
+  const d = await r.json();
+  document.getElementById('whoami').textContent = 'mark@markcmo.com';
+  renderInbox(d.items || [], folder);
+}
+
+function renderInbox(items, folder) {
+  const c = document.getElementById('content');
+  if (!items.length) {
+    c.innerHTML = '<div class="empty">' + (folder === 'sent' ? 'No sent messages yet. Click <strong>Compose</strong> to send one.' : 'Inbox empty. (Inbound capture lands here in a future build; for now inbound forwards to info@wetyr.com.)') + '</div>';
+    return;
+  }
+  const rows = items.map(it => {
+    const fromName = it.from_name || (it.from_addr || '').split('@')[0];
+    const fromEmail = (it.direction === 'outbound') ? (Array.isArray(it.to_addrs) ? it.to_addrs.join(', ') : '') : it.from_addr;
+    const fromLabel = (it.direction === 'outbound') ? 'to: ' + fromEmail : fromName;
+    return `<div class="inbox-row ${!it.read_at ? 'unread' : ''}">
+      <div class="from">${esc(fromLabel)}<span class="from-email">${esc(fromEmail || '')}</span></div>
+      <div><div class="subj">${esc(it.subject || '(no subject)')}</div><div class="body">${esc(it.body_preview || '')}</div></div>
+      <div class="when">${esc(fmtTime(it.created_at))}</div>
+    </div>`;
+  }).join('');
+  c.innerHTML = '<div class="inbox-list">' + rows + '</div>';
+}
+
+function switchFolder(folder) {
+  currentFolder = folder;
+  document.querySelectorAll('.nav-item[data-folder]').forEach(el => {
+    el.classList.toggle('active', el.dataset.folder === folder);
+  });
+  loadFolder(folder);
+}
+
+function refresh() {
+  loadFolder(currentFolder);
+}
+
+function showCompose() {
+  const c = document.getElementById('content');
+  c.innerHTML = `<div class="compose">
+    <h2>New message</h2>
+    <label>To</label>
+    <input type="text" id="cTo" placeholder="recipient@example.com">
+    <div class="row">
+      <div><label>Cc</label><input type="text" id="cCc" placeholder="(optional)"></div>
+      <div><label>Bcc</label><input type="text" id="cBcc" placeholder="(optional)"></div>
+    </div>
+    <label>Subject</label>
+    <input type="text" id="cSubj">
+    <label>Body</label>
+    <textarea id="cBody" placeholder="Type your message..."></textarea>
+    <div class="actions">
+      <button class="primary" onclick="doSend()">Send</button>
+      <button onclick="switchFolder(currentFolder)">Cancel</button>
+      <span class="status" id="cStatus"></span>
+    </div>
+  </div>`;
+}
+
+async function doSend() {
+  const to = document.getElementById('cTo').value.trim();
+  const cc = document.getElementById('cCc').value.trim();
+  const bcc = document.getElementById('cBcc').value.trim();
+  const subj = document.getElementById('cSubj').value.trim();
+  const body = document.getElementById('cBody').value;
+  const status = document.getElementById('cStatus');
+
+  if (!to) { status.className = 'status err'; status.textContent = 'To: required'; return; }
+  if (!subj) { status.className = 'status err'; status.textContent = 'Subject: required'; return; }
+  if (!body.trim()) { status.className = 'status err'; status.textContent = 'Body: required'; return; }
+
+  status.className = 'status';
+  status.textContent = 'Sending…';
+
+  const r = await authedFetch('/api/mail/send', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ to, cc, bcc, subject: subj, body_text: body }),
+  });
+  if (!r) { status.className = 'status err'; status.textContent = 'Auth failed.'; return; }
+  const d = await r.json().catch(() => ({}));
+  if (r.ok && d.ok) {
+    status.className = 'status ok';
+    status.textContent = '✓ Sent (' + (d.resend_id || 'ok') + '). Switching to Sent…';
+    setTimeout(() => { switchFolder('sent'); }, 900);
+  } else {
+    status.className = 'status err';
+    status.textContent = '✗ Failed: ' + (d.send_error || d.error || ('HTTP ' + r.status));
+  }
+}
+
+// boot
+(async function init(){
+  currentAuth = await getAuth();
+  if (currentAuth) loadFolder('inbox');
+})();
+</script>
+</body>
+</html>
