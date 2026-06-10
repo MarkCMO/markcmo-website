@@ -419,6 +419,7 @@ const SKIP_PATH_PREFIXES = [
   '/.well-known/',
   '/courses/',         // course player chrome differs
   '/access/',          // access portals
+  '/proposals/',       // client proposals are standalone branded docs
 ];
 
 // Static asset extensions - skip middleware entirely
