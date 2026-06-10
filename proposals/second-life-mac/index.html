@@ -115,6 +115,22 @@
   footer .by{color:#cdd6e2;margin-bottom:6px}
   footer .legal{border-top:1px solid rgba(255,255,255,.12);margin-top:26px;padding-top:18px;font-size:12px;color:#7e8a9b}
   .note{font-size:13px;color:var(--muted);font-style:italic}
+  /* tabs */
+  header{position:static}
+  .tabsbar{position:sticky;top:0;z-index:60;background:#fff;border-bottom:1px solid var(--line);box-shadow:0 4px 14px rgba(18,33,51,.07)}
+  .tabs{display:flex;gap:10px;flex-wrap:wrap;padding:12px 24px;justify-content:center;max-width:1200px;margin:0 auto}
+  .tab{font-family:"neighbor",Archivo,Inter,sans-serif;font-weight:800;text-transform:uppercase;letter-spacing:.4px;font-size:14px;padding:13px 24px;border-radius:150px;border:2px solid var(--sky);background:var(--sky);color:#fff;cursor:pointer;transition:.15s;white-space:nowrap}
+  .tab:hover{background:#3a86bf;border-color:#3a86bf}
+  .tab.active{background:var(--navy);border-color:var(--navy)}
+  .panel{display:none}
+  .panel.active{display:block}
+  .orgchart{max-width:900px;margin:36px auto 0;text-align:center}
+  .orgbox{background:#fff;border:1px solid var(--line);border-radius:14px;padding:16px 20px;font-weight:600;color:var(--navy);box-shadow:0 8px 22px rgba(18,33,51,.05)}
+  .orgbox.lead{background:var(--navy);color:#fff;border-color:var(--navy)}
+  .orgbox.mgr{background:var(--sky);color:#fff;border-color:var(--sky);display:inline-block}
+  .orgline{width:2px;height:24px;background:#cdd6e2;margin:0 auto}
+  .orgrow{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:14px}
+  @media(max-width:760px){.tabs{flex-wrap:nowrap;overflow-x:auto;justify-content:flex-start}.tab{font-size:12px;padding:11px 15px}.orgrow{grid-template-columns:1fr}}
 </style>
 </head>
 <body data-eeat-byline="v1">
@@ -142,6 +158,18 @@
     <div class="by">Acquisition Engine Proposal &nbsp;|&nbsp; prepared by <b>MarkCMO</b></div>
   </div>
 </header>
+
+<div class="tabsbar">
+  <div class="tabs">
+    <button class="tab active" data-tab="proposal">The Proposal</button>
+    <button class="tab" data-tab="research">Research &amp; Competitive</button>
+    <button class="tab" data-tab="tech">Technology Ahead</button>
+    <button class="tab" data-tab="strategy">Strategic Advances</button>
+    <button class="tab" data-tab="team">Team &amp; Automation</button>
+  </div>
+</div>
+
+<div class="panel active" id="panel-proposal">
 
 <section class="hero">
   <div class="wrap">
@@ -367,6 +395,140 @@
   </div>
 </section>
 
+</div><!-- /panel-proposal -->
+
+<!-- ============ RESEARCH & COMPETITIVE ============ -->
+<div class="panel" id="panel-research">
+  <section class="hero" style="background-image:linear-gradient(90deg,rgba(10,20,35,.92),rgba(10,20,35,.55)),url('https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&w=1700&q=80')">
+    <div class="wrap">
+      <span class="eyebrow" style="color:var(--gold)">Research &amp; Competitive</span>
+      <h1>What we know about your market and your rivals</h1>
+      <p>A condensed view of the research behind this proposal: the market, the competition, and the one place Second Life Mac is already winning that almost no one has noticed.</p>
+    </div>
+  </section>
+  <section class="block">
+    <div class="wrap center"><span class="eyebrow">The market</span><h2>A growing market with a 2026 surge</h2><p class="lede">The tailwind is real, and the timing is now.</p></div>
+    <div class="wrap"><div class="steps">
+      <div class="step"><h3>Refurbished electronics</h3><p>Roughly $62B in 2025, growing toward about $122B by 2032, near 10% a year. Refurbished Apple hardware is a core driver.</p></div>
+      <div class="step"><h3>IT asset disposition</h3><p>About $17.5B in 2025, heading to roughly $40B by 2035, near 9% a year, as organizations professionalize device retirement.</p></div>
+      <div class="step"><h3>The 2026 wave</h3><p>Pandemic-era one to one fleets, end-of-life cutoffs, and AI-PC upgrades are converging into the largest simultaneous device retirement schools have ever seen.</p></div>
+    </div></div>
+  </section>
+  <section class="block navyband">
+    <div class="wrap center"><span class="eyebrow" style="color:var(--gold)">Competitive landscape</span><h2>Where Second Life Mac stands</h2><p class="lede" style="color:#d7e0ea">You pioneered this category in 2012. One PE-backed rival outgrew you on capital and sales. Here is the honest picture.</p></div>
+    <div class="wrap"><table class="cmp">
+      <tr><th>Company</th><th>Scale</th><th>Edge</th><th>Weakness</th></tr>
+      <tr><td>Second Life Mac</td><td>Est. $10M to $15M, founder-owned</td><td>Category pioneer, service, US processing, content and AI-search authority</td><td>Smaller budget, narrow paid channels</td></tr>
+      <tr><td>Diamond Assets</td><td>Est. $40M+, PE-backed, 100+ staff</td><td>MDM-integrated valuation software, capital, sales machine, $250M+ paid to schools</td><td>Weak in organic and AI search</td></tr>
+      <tr><td>Mac of All Trades</td><td>Est. $21M, since 1995</td><td>Longevity, direct resale</td><td>Thin education positioning</td></tr>
+      <tr><td>SellYourMac (OWC)</td><td>Consumer-focused</td><td>Reviews, consumer trust</td><td>Not built for fleet scale</td></tr>
+      <tr><td>Apple Trade In</td><td>Apple program</td><td>Brand, convenience</td><td>Lower payouts, no service</td></tr>
+    </table></div>
+  </section>
+  <section class="block alt">
+    <div class="wrap center"><span class="eyebrow">The hidden edge</span><h2>You are already beating Diamond in AI search</h2><p class="lede">This is the most important thing we found. As buyers move from blue links to AI answers, Second Life Mac is winning education, and Diamond is invisible.</p></div>
+    <div class="wrap"><div class="two">
+      <div class="model"><h3>Google AI Overview</h3><p style="color:var(--muted)">For "apple device buyback for schools," Google's AI names Second Life Mac first. Diamond Assets does not appear.</p></div>
+      <div class="model"><h3>Perplexity</h3><p style="color:var(--muted)">Cites Second Life Mac as the best district-specific option, alongside Apple. Diamond Assets does not appear.</p></div>
+      <div class="model"><h3>The open gap</h3><p style="color:var(--muted)">On enterprise and business queries, Second Life Mac is absent. That lane is wide open to claim first.</p></div>
+      <div class="model"><h3>Your martech today</h3><p style="color:var(--muted)">You already run Google Ads, LinkedIn, and Salesforce Pardot, and even A/B test. The gaps: no Bing, missing meta descriptions, thin schema.</p></div>
+    </div></div>
+  </section>
+</div>
+
+<!-- ============ TECHNOLOGY AHEAD ============ -->
+<div class="panel" id="panel-tech">
+  <section class="hero" style="background-image:linear-gradient(90deg,rgba(10,20,35,.92),rgba(10,20,35,.5)),url('https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&w=1700&q=80')">
+    <div class="wrap">
+      <span class="eyebrow" style="color:var(--gold)">Technology Ahead</span>
+      <h1>The shifts that decide the next three years</h1>
+      <p>Where device retirement, buyer behavior, and the tools to reach them are heading, and how Second Life Mac stays ahead of it.</p>
+    </div>
+  </section>
+  <section class="block"><div class="wrap"><div class="steps">
+    <div class="step"><div class="num">1</div><h3>The 2026 device supercycle</h3><p>One to one fleets bought during remote learning, end-of-life cutoffs, and the first AI-PC upgrade wave are retiring together. Volume spikes, then prices soften as identical models flood the market. Timing wins.</p></div>
+    <div class="step"><div class="num">2</div><h3>AI answer engines</h3><p>Buyers increasingly research through ChatGPT, Perplexity, and Google AI Overviews, not ten blue links. Being the cited source is the new page-one ranking. You already lead here in education.</p></div>
+    <div class="step"><div class="num">3</div><h3>MDM-integrated valuation</h3><p>Rivals are bolting buyback onto device-management platforms to show live resale value. We either offer a light version or deliberately own the human, white-glove alternative to "another dashboard."</p></div>
+    <div class="step"><div class="num">4</div><h3>Outreach automation</h3><p>Modern cold email infrastructure, intent and upgrade-signal triggers, AI-assisted personalization, and LinkedIn automation make systematic acquisition possible at a fraction of old costs.</p></div>
+    <div class="step"><div class="num">5</div><h3>Compliance as a selling point</h3><p>NIST 800-88 erasure and state student-data-privacy rules are becoming buying criteria. Your secure, documented, US-based process is a competitive weapon, not just a checkbox.</p></div>
+    <div class="step"><div class="num">6</div><h3>Two-sided device flow</h3><p>The same trends that flood you with supply also create demand for affordable refurbished devices. Technology lets you run both sides from one engine.</p></div>
+  </div></div></section>
+</div>
+
+<!-- ============ STRATEGIC ADVANCES ============ -->
+<div class="panel" id="panel-strategy">
+  <section class="hero" style="background-image:linear-gradient(90deg,rgba(10,20,35,.9),rgba(10,20,35,.5)),url('https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?auto=format&fit=crop&w=1700&q=80')">
+    <div class="wrap">
+      <span class="eyebrow" style="color:var(--gold)">Strategic Advances</span>
+      <h1>The moves I would make</h1>
+      <p>Six plays that turn your reputation and your hidden AI-search lead into durable, compounding growth Diamond cannot easily copy.</p>
+    </div>
+  </section>
+  <section class="block"><div class="wrap"><div class="steps">
+    <div class="step"><div class="num">1</div><h3>Supply-side acquisition engine</h3><p>Reach university and enterprise fleets at the upgrade moment with systematic outreach. The core of this proposal.</p></div>
+    <div class="step"><div class="num">2</div><h3>Programmatic geo and ICP matrix</h3><p>Hundreds of state, metro, and segment pages across education, healthcare, and enterprise. A long-tail search moat Diamond has no footprint to defend.</p></div>
+    <div class="step"><div class="num">3</div><h3>Claim the open AI lanes</h3><p>Publish the authoritative enterprise and healthcare buyback content so AI engines cite you there too, before anyone else does.</p></div>
+    <div class="step"><div class="num">4</div><h3>Defend the education lead</h3><p>Lock in the AI-search and organic advantage you already hold in K-12 with schema, content depth, and freshness.</p></div>
+    <div class="step"><div class="num">5</div><h3>Diversify the channels</h3><p>Add Bing, where education and government buyers actually are, plus retargeting and partnerships with leasing firms, resellers, and MSPs.</p></div>
+    <div class="step"><div class="num">6</div><h3>Run both sides of the flow</h3><p>Drive device supply through buyback outreach and device demand through the refurbished resale store, from one coordinated engine.</p></div>
+  </div></div></section>
+  <section class="block navyband"><div class="wrap center" style="max-width:820px">
+    <h2 style="color:#fff">The throughline</h2>
+    <p style="color:#d7e0ea;font-size:18px">Diamond is bigger, but it grew on capital and sales, not search, content, or systems. A leaner Second Life Mac wins by owning the long tail, the AI citations, and the upgrade moment, the places a sales-led competitor cannot quickly follow.</p>
+  </div></section>
+</div>
+
+<!-- ============ TEAM & AUTOMATION ============ -->
+<div class="panel" id="panel-team">
+  <section class="hero" style="background-image:linear-gradient(90deg,rgba(10,20,35,.9),rgba(10,20,35,.5)),url('https://images.unsplash.com/photo-1522071820081-009f0129c71c?auto=format&fit=crop&w=1700&q=80')">
+    <div class="wrap">
+      <span class="eyebrow" style="color:var(--gold)">Team &amp; Automation</span>
+      <h1>The structure that keeps the wheels turning</h1>
+      <p>Strategy alone does not scale. Here is the lean team and the automation I recommend building underneath the engine, so it runs every day without bottlenecking on any one person.</p>
+    </div>
+  </section>
+  <section class="block">
+    <div class="wrap center">
+      <span class="eyebrow">Recommended structure</span>
+      <h2>One manager, two to three assistants, leveraged by automation</h2>
+      <p class="lede">I set strategy and own the number as your fractional CMO. A Marketing Manager runs the day to day. Two to three assistants execute underneath. Automation does the repetitive work so headcount stays lean.</p>
+      <div class="orgchart">
+        <div class="orgbox lead">Fractional CMO (Mark Gabrielli), strategy, systems, accountability</div>
+        <div class="orgline"></div>
+        <div class="orgbox mgr">Marketing Manager, owns day-to-day execution and the team</div>
+        <div class="orgline"></div>
+        <div class="orgrow">
+          <div class="orgbox">Assistant: Outreach &amp; Pipeline</div>
+          <div class="orgbox">Assistant: Content &amp; SEO</div>
+          <div class="orgbox">Assistant: Ops, Data &amp; Automation</div>
+        </div>
+      </div>
+    </div>
+  </section>
+  <section class="block alt"><div class="wrap"><div class="two">
+    <div class="model"><span class="tag">Marketing Manager</span><h3>Runs the engine daily</h3><p style="color:var(--muted)">Owns the campaign calendar, manages the assistants and tools, keeps outreach and content on schedule, and reports results up to me and to Scott. The single point of accountability for execution.</p></div>
+    <div class="model"><span class="tag">Outreach &amp; Pipeline</span><h3>Feeds the funnel</h3><p style="color:var(--muted)">Builds and verifies target lists, monitors email and LinkedIn sequences and deliverability, handles replies, and routes qualified fleets to procurement.</p></div>
+    <div class="model"><span class="tag">Content &amp; SEO</span><h3>Builds the moat</h3><p style="color:var(--muted)">Produces the geo and segment pages, case studies, and social content that win organic and AI-search visibility across education, healthcare, and enterprise.</p></div>
+    <div class="model"><span class="tag">Ops, Data &amp; Automation</span><h3>Keeps it clean and measured</h3><p style="color:var(--muted)">Maintains Pardot hygiene, dashboards, attribution, and the automations, so every fleet is tracked from first touch to acquired devices.</p></div>
+  </div></div></section>
+  <section class="block">
+    <div class="wrap center"><span class="eyebrow">Built-in efficiency</span><h2>Automations that do the repetitive work</h2><p class="lede">The team stays small because the system carries the load.</p></div>
+    <div class="wrap"><div class="steps">
+      <div class="step"><h3>Self-running outreach</h3><p>Mailbox warmup, sending rotation, and sequenced follow-ups run automatically, with deliverability monitored in the background.</p></div>
+      <div class="step"><h3>Signal-triggered lists</h3><p>Upgrade signals like lease end, end-of-life models, and new deployments auto-build target lists so the team works the hottest accounts first.</p></div>
+      <div class="step"><h3>Pardot routing and scoring</h3><p>Replies are scored and routed to procurement instantly, with no manual handoffs and nothing lost.</p></div>
+      <div class="step"><h3>Templated geo pages</h3><p>The SEO matrix is generated from templates, so one assistant can publish dozens of localized pages, not one at a time.</p></div>
+      <div class="step"><h3>AI-assisted content</h3><p>Drafting, personalization, and repurposing are AI-accelerated, multiplying what a small team can produce.</p></div>
+      <div class="step"><h3>Auto-reporting dashboards</h3><p>Live dashboards refresh themselves, so reporting to Scott takes minutes, not days, and decisions use current numbers.</p></div>
+    </div></div>
+  </section>
+  <section class="block navyband"><div class="wrap center" style="max-width:820px">
+    <span class="eyebrow" style="color:var(--gold)">How it fits</span>
+    <h2 style="color:#fff">This builds on Meaghan and the team you have</h2>
+    <p style="color:#d7e0ea;font-size:18px">This is not a teardown. Your existing marketing talent can step into the manager seat or anchor a specialist role, with me developing the team and the automation doing the heavy lifting. You get senior leadership, a built system, and a small high-leverage team, for a fraction of a full in-house department.</p>
+  </div></section>
+</div>
+
 <footer>
   <div class="wrap">
     <img class="logo" src="https://secondlifemac.com/wp-content/uploads/2025/11/LOCKUP.svg" alt="Second Life Mac">
@@ -391,6 +553,18 @@
   (function(){
     try{ if(localStorage.getItem('slm_unlock')==='1'){ var g=document.getElementById('gate'); if(g) g.style.display='none'; } }catch(e){}
   })();
+
+  // tabs
+  document.querySelectorAll('.tab').forEach(function(t){
+    t.addEventListener('click', function(){
+      var id = t.getAttribute('data-tab');
+      document.querySelectorAll('.tab').forEach(function(x){ x.classList.remove('active'); });
+      document.querySelectorAll('.panel').forEach(function(p){ p.classList.remove('active'); });
+      t.classList.add('active');
+      var panel = document.getElementById('panel-' + id);
+      if (panel) { panel.classList.add('active'); window.scrollTo({ top: 0, behavior: 'smooth' }); }
+    });
+  });
 </script>
 
 </body>
