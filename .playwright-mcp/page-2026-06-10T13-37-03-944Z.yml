@@ -1,0 +1,247 @@
+- generic [active] [ref=e1]:
+  - generic [ref=e3]:
+    - img "Second Life Mac" [ref=e4]
+    - heading "Private Proposal" [level=2] [ref=e5]
+    - paragraph [ref=e6]: This document was prepared for Second Life Mac. Please enter your access code to continue.
+    - textbox "Access code" [ref=e7]
+    - button "View Proposal" [ref=e8] [cursor=pointer]
+    - generic [ref=e9]: Prepared by Mark Gabrielli, MarkCMO
+  - generic [ref=e10]: Private proposal prepared by Mark Gabrielli (MarkCMO) for Second Life Mac. Confidential.
+  - banner [ref=e11]:
+    - generic [ref=e12]:
+      - img "Second Life Mac" [ref=e13]
+      - generic [ref=e14]: Acquisition Engine Proposal | prepared by MarkCMO
+  - generic [ref=e16]:
+    - generic [ref=e17]: Supply-Side Growth Proposal
+    - heading "The Apple acquisition engine for Second Life Mac" [level=1] [ref=e18]
+    - paragraph [ref=e19]: A built-for-you outreach system that wins more device fleets from universities and enterprises the moment they upgrade, before Diamond Assets gets there first.
+    - generic [ref=e20]: Prepared for Scott Pauga and the Second Life Mac leadership team · Confidential
+  - generic [ref=e21]:
+    - generic [ref=e22]:
+      - generic [ref=e23]: The objective
+      - heading "Acquire more devices, from bigger fleets, more predictably" [level=2] [ref=e24]
+      - paragraph [ref=e25]: "Blaine framed the goal clearly: Second Life Mac wants a repeatable acquisition funnel that brings in more Apple devices from universities and enterprise organizations as they refresh and upgrade their fleets. Today most of that supply comes from relationships, referrals, and inbound. That is valuable, but it is not a system, and it does not scale on demand."
+    - generic [ref=e26]:
+      - paragraph [ref=e27]: The opportunity in front of Second Life Mac is timing. Every university IT department and every enterprise running Mac fleets upgrades on a cycle. The window to win their old devices opens the moment they commit to new hardware, and it closes fast as competitors, trade-in programs, and recyclers move in. The company that systematically reaches those buyers at the upgrade moment wins the fleet. Right now, no one in this category does that at scale, including Diamond Assets, who grew through sales and partnerships rather than a built demand engine.
+      - paragraph [ref=e28]: "This proposal lays out the acquisition engine I would build and run for you: the email infrastructure, the multichannel outreach, the data and targeting, and the senior leadership to operate it, structured so a meaningful share of the cost can be tied directly to the devices it brings in."
+  - generic [ref=e29]:
+    - generic [ref=e30]:
+      - generic [ref=e31]: The strategy
+      - heading "Reach the fleet at the upgrade moment" [level=2] [ref=e32]
+      - paragraph [ref=e33]: We target university and enterprise accounts at the exact point they are retiring Apple hardware, using signals competitors ignore.
+    - generic [ref=e35]:
+      - generic [ref=e36]:
+        - generic [ref=e37]: "1"
+        - heading "Find the upgrade signal" [level=3] [ref=e38]
+        - paragraph [ref=e39]: Lease expirations, end-of-life Apple models, new deployment announcements, fiscal year-end, grant and bond cycles, and refresh patterns flag accounts that are about to have fleets to sell.
+      - generic [ref=e40]:
+        - generic [ref=e41]: "2"
+        - heading "Reach the right owner" [level=3] [ref=e42]
+        - paragraph [ref=e43]: We build targeted lists of IT directors, asset managers, CIOs, and procurement leads at universities and enterprises, enriched and verified, not scraped and stale.
+      - generic [ref=e44]:
+        - generic [ref=e45]: "3"
+        - heading "Open with value" [level=3] [ref=e46]
+        - paragraph [ref=e47]: "The message is simple and strong: you upgraded, we pay you for the old fleet, securely and with zero hassle. Sequenced across email and LinkedIn until they respond."
+      - generic [ref=e48]:
+        - generic [ref=e49]: "4"
+        - heading "Route to your team" [level=3] [ref=e50]
+        - paragraph [ref=e51]: Qualified replies flow straight into Pardot and to your procurement team with full context, so nothing leaks and every fleet gets worked.
+      - generic [ref=e52]:
+        - generic [ref=e53]: "5"
+        - heading "Multiply the channels" [level=3] [ref=e54]
+        - paragraph [ref=e55]: Cold email and LinkedIn lead. Then we layer partnerships, retargeting, and the geo and segment SEO matrix so inbound compounds over time.
+      - generic [ref=e56]:
+        - generic [ref=e57]: "6"
+        - heading "Measure and scale" [level=3] [ref=e58]
+        - paragraph [ref=e59]: Every account is tracked from first touch to acquired fleet, so we know cost per acquired device and double down on what works.
+  - generic [ref=e60]:
+    - generic [ref=e61]:
+      - generic [ref=e62]: What we build
+      - heading "The systems, built and owned by you" [level=2] [ref=e63]
+      - paragraph [ref=e64]: The engagement fee covers a real infrastructure build, not a slide deck. This is the machine that runs the outreach.
+    - generic [ref=e66]:
+      - generic [ref=e67]:
+        - heading "Cold email infrastructure" [level=3] [ref=e68]
+        - paragraph [ref=e69]: Dedicated secondary sending domains to protect your primary reputation, full authentication (SPF, DKIM, DMARC), provisioned and warmed mailboxes, a managed sending platform with inbox rotation, and continuous deliverability monitoring.
+      - generic [ref=e70]:
+        - heading "Targeting and data" [level=3] [ref=e71]
+        - paragraph [ref=e72]: Enriched, verified contact lists of university and enterprise IT and procurement decision makers, plus upgrade-signal triggers (lease end, EOL models, deployments) so we reach fleets at the right moment.
+      - generic [ref=e73]:
+        - heading "Outreach sequences and copy" [level=3] [ref=e74]
+        - paragraph [ref=e75]: Multi-step email and LinkedIn sequences written and tested for the acquisition message, with A/B testing built in so response rates climb over time.
+      - generic [ref=e76]:
+        - heading "LinkedIn engine" [level=3] [ref=e77]
+        - paragraph [ref=e78]: A Sales Navigator and tooling workflow that runs connection and message sequences to the same target accounts in parallel with email.
+      - generic [ref=e79]:
+        - heading "CRM and routing" [level=3] [ref=e80]
+        - paragraph [ref=e81]: Clean integration with Salesforce Pardot, lead scoring, and routing so qualified fleets land with your procurement team instantly and nothing falls through.
+      - generic [ref=e82]:
+        - heading "Dashboards and attribution" [level=3] [ref=e83]
+        - paragraph [ref=e84]: "A single view from first touch to acquired fleet: accounts reached, replies, opportunities, devices acquired, and cost per acquired device, so spend is always tied to outcomes."
+  - generic [ref=e85]:
+    - generic [ref=e86]:
+      - generic [ref=e87]: Investment
+      - heading "Three tiers, built to your stage" [level=2] [ref=e88]
+      - paragraph [ref=e89]: Each tier includes a one-time systems build (the engagement fee) plus a monthly fractional retainer. Pricing shown is the flat model. The performance model below can be applied to any tier.
+    - generic [ref=e90]:
+      - generic [ref=e91]:
+        - generic [ref=e92]:
+          - generic [ref=e93]: Pipeline Launch
+          - generic [ref=e94]: Prove the channel in one segment. Best for a focused start with universities or enterprise.
+          - generic [ref=e95]:
+            - text: $6,500
+            - generic [ref=e96]: per month retainer (flat)
+          - generic [ref=e97]: "One-time systems build: $7,500"
+          - list [ref=e98]:
+            - listitem [ref=e99]: ✓ Cold email infrastructure build
+            - listitem [ref=e100]: ✓ One segment (universities OR enterprise)
+            - listitem [ref=e101]: ✓ Targeted, enriched lead lists
+            - listitem [ref=e102]: ✓ Email sequences and copy
+            - listitem [ref=e103]: ✓ Pardot routing to your team
+            - listitem [ref=e104]: ✓ Core performance dashboard
+            - listitem [ref=e105]: ✓ Monthly strategy and reporting
+          - link "Choose a model" [ref=e106] [cursor=pointer]:
+            - /url: "#models"
+        - generic [ref=e107]:
+          - generic [ref=e108]: Recommended
+          - generic [ref=e109]: Acquisition Engine
+          - generic [ref=e110]: The full supply-side machine across both target segments and multiple channels.
+          - generic [ref=e111]:
+            - text: $11,000
+            - generic [ref=e112]: per month retainer (flat)
+          - generic [ref=e113]: "One-time systems build: $15,000"
+          - list [ref=e114]:
+            - listitem [ref=e115]: "✓ Everything in Pipeline Launch, plus:"
+            - listitem [ref=e116]: ✓ Universities AND enterprise
+            - listitem [ref=e117]: ✓ LinkedIn outreach engine
+            - listitem [ref=e118]: ✓ Upgrade-signal trigger targeting
+            - listitem [ref=e119]: ✓ Geo and segment SEO matrix kickoff
+            - listitem [ref=e120]: ✓ A/B testing and optimization
+            - listitem [ref=e121]: ✓ Full attribution to cost per acquired device
+          - link "Choose a model" [ref=e122] [cursor=pointer]:
+            - /url: "#models"
+        - generic [ref=e123]:
+          - generic [ref=e124]: Market Dominance
+          - generic [ref=e125]: Full fractional CMO leadership across every channel and segment, including healthcare.
+          - generic [ref=e126]:
+            - text: $16,500
+            - generic [ref=e127]: per month retainer (flat)
+          - generic [ref=e128]: "One-time systems build: $25,000"
+          - list [ref=e129]:
+            - listitem [ref=e130]: "✓ Everything in Acquisition Engine, plus:"
+            - listitem [ref=e131]: ✓ Healthcare segment added
+            - listitem [ref=e132]: ✓ Paid channels and retargeting
+            - listitem [ref=e133]: ✓ Partnership and referral programs
+            - listitem [ref=e134]: ✓ Category positioning vs Diamond
+            - listitem [ref=e135]: ✓ Leadership and mentoring of your marketing team
+            - listitem [ref=e136]: ✓ Executive dashboard for Scott
+          - link "Choose a model" [ref=e137] [cursor=pointer]:
+            - /url: "#models"
+      - paragraph [ref=e138]: "Suggested initial term: 3 months for Pipeline Launch, 6 months for Acquisition Engine and Market Dominance, then month to month. Systems built remain yours."
+  - generic [ref=e139]:
+    - generic [ref=e140]:
+      - generic [ref=e141]: Two ways to structure it
+      - heading "Choose how we get paid" [level=2] [ref=e142]
+      - paragraph [ref=e143]: Apply either model to any tier above. One rewards predictability, the other ties my upside directly to the devices the engine brings in.
+    - generic [ref=e145]:
+      - generic [ref=e146]:
+        - generic [ref=e147]: Model A · Performance
+        - heading "Lower base, bonus on units acquired" [level=3] [ref=e148]
+        - paragraph [ref=e149]: My incentive is aligned with your supply. We reduce the monthly retainer and add a bonus tied to the fleets the engine actually wins.
+        - list [ref=e150]:
+          - listitem [ref=e151]: – Monthly retainer reduced about 30% from the flat rate
+          - listitem [ref=e152]: "– Plus a bonus, you choose the mechanism that fits your accounting:"
+          - listitem [ref=e153]: – $1.50 per device acquired from a marketing-sourced account, OR
+          - listitem [ref=e154]: – $1,500 per net-new fleet acquisition (a university or enterprise account that completes a buyback), scaling up for large fleets
+          - listitem [ref=e155]: – Only marketing-sourced and marketing-influenced accounts count, tracked in Pardot
+          - listitem [ref=e156]: – Monthly bonus capped at 1.5x the base retainer to protect your cash flow
+        - paragraph [ref=e157]: Best when you want my compensation tied to results and you are confident in the volume opportunity.
+      - generic [ref=e158]:
+        - generic [ref=e159]: Model B · Flat
+        - heading "Predictable engagement and retainer" [level=3] [ref=e160]
+        - paragraph [ref=e161]: Simple, fixed, easy to budget. The one-time engagement fee plus a flat monthly retainer, with no per-unit component.
+        - list [ref=e162]:
+          - listitem [ref=e163]: – One-time systems build (engagement fee) as listed per tier
+          - listitem [ref=e164]: – Flat monthly retainer as listed per tier
+          - listitem [ref=e165]: – No per-device or per-account bonus
+          - listitem [ref=e166]: – Fully predictable spend for finance and board planning
+          - listitem [ref=e167]: – All systems, channels, and reporting included per tier
+        - paragraph [ref=e168]: Best when finance prefers a fixed line item and clean forecasting.
+  - generic [ref=e169]:
+    - generic [ref=e170]:
+      - generic [ref=e171]: Pricing in context
+      - heading "A fraction of a full-time hire, a fraction of a point of revenue" [level=2] [ref=e172]
+      - paragraph [ref=e173]: Benchmarked against what senior marketing leadership actually costs, and against what Second Life Mac can comfortably support.
+    - generic [ref=e174]:
+      - generic [ref=e175]:
+        - generic [ref=e176]:
+          - generic [ref=e177]: $250K+
+          - generic [ref=e178]: All-in cost of a full-time CMO, with benefits, ramp, and risk
+        - generic [ref=e179]:
+          - generic [ref=e180]: 0.7% to 1.9%
+          - generic [ref=e181]: These tiers as a share of estimated annual revenue
+        - generic [ref=e182]:
+          - generic [ref=e183]: Day one
+          - generic [ref=e184]: A built system running, not a 6 month hiring and ramp cycle
+      - table [ref=e185]:
+        - rowgroup [ref=e186]:
+          - row "Option Year one all-in (flat model) As a share of revenue* What you get" [ref=e187]:
+            - columnheader "Option" [ref=e188]
+            - columnheader "Year one all-in (flat model)" [ref=e189]
+            - columnheader "As a share of revenue*" [ref=e190]
+            - columnheader "What you get" [ref=e191]
+          - row "Pipeline Launch about $85,500 roughly 0.6% to 0.9% One-segment acquisition channel, built and run" [ref=e192]:
+            - cell "Pipeline Launch" [ref=e193]
+            - cell "about $85,500" [ref=e194]
+            - cell "roughly 0.6% to 0.9%" [ref=e195]
+            - cell "One-segment acquisition channel, built and run" [ref=e196]
+          - row "Acquisition Engine about $147,000 roughly 1.0% to 1.5% Full multichannel engine, both segments" [ref=e197]:
+            - cell "Acquisition Engine" [ref=e198]
+            - cell "about $147,000" [ref=e199]
+            - cell "roughly 1.0% to 1.5%" [ref=e200]
+            - cell "Full multichannel engine, both segments" [ref=e201]
+          - row "Market Dominance about $223,000 roughly 1.5% to 2.2% Fractional CMO, all channels, team leadership" [ref=e202]:
+            - cell "Market Dominance" [ref=e203]
+            - cell "about $223,000" [ref=e204]
+            - cell "roughly 1.5% to 2.2%" [ref=e205]
+            - cell "Fractional CMO, all channels, team leadership" [ref=e206]
+          - row "Full-time CMO hire $250,000 to $320,000+ roughly 2% to 3% One leader, no built system, months to ramp" [ref=e207]:
+            - cell "Full-time CMO hire" [ref=e208]
+            - cell "$250,000 to $320,000+" [ref=e209]
+            - cell "roughly 2% to 3%" [ref=e210]
+            - cell "One leader, no built system, months to ramp" [ref=e211]
+      - paragraph [ref=e212]: "*Based on an estimated $10M to $15M revenue range. The fractional CMO market typically runs $8,000 to $25,000 per month. Every tier here sits at or below market for senior leadership, and includes a systems build a standard fractional engagement does not."
+  - generic [ref=e213]:
+    - generic [ref=e214]:
+      - generic [ref=e215]: Rollout
+      - heading "The first 90 days" [level=2] [ref=e216]
+    - generic [ref=e218]:
+      - generic [ref=e219]:
+        - generic [ref=e220]: "1"
+        - 'heading "Days 1 to 30: Build" [level=3] [ref=e221]'
+        - paragraph [ref=e222]: Stand up the email infrastructure, provision and warm domains and mailboxes, build the first target lists and upgrade-signal triggers, and integrate with Pardot. Align with your procurement team on handoff.
+      - generic [ref=e223]:
+        - generic [ref=e224]: "2"
+        - 'heading "Days 30 to 60: Launch" [level=3] [ref=e225]'
+        - paragraph [ref=e226]: Go live with the first sequences to universities and enterprise. Tune copy, targeting, and deliverability. First qualified fleets begin routing to your team.
+      - generic [ref=e227]:
+        - generic [ref=e228]: "3"
+        - 'heading "Days 60 to 90: Scale" [level=3] [ref=e229]'
+        - paragraph [ref=e230]: Add LinkedIn and additional channels, expand lists, and report cost per acquired device. Lock in what works and increase volume on the winning plays.
+  - generic [ref=e232]:
+    - heading "Why me, and why now" [level=2] [ref=e233]
+    - paragraph [ref=e234]: "Second Life Mac already beats Diamond Assets where it counts in 2026: you are named first in Google's AI answers for school device buyback and cited as the best district option by Perplexity, while Diamond does not appear. You have the brand and the trust. What you do not yet have is a built system to win university and enterprise fleets on demand. I build and run exactly that kind of engine, and I have already shown I can operate inside your brand. The 2026 upgrade wave makes the next 12 months the moment to move."
+  - generic [ref=e236]:
+    - heading "Let's build the engine that wins the next fleet" [level=2] [ref=e237]
+    - paragraph [ref=e238]: Tell me which tier and which model fit best, and I will turn this into a one-page agreement and a 90-day build plan.
+    - generic [ref=e239]:
+      - link "Reply to move forward" [ref=e240] [cursor=pointer]:
+        - /url: mailto:mark@markcmo.com?subject=Second%20Life%20Mac%20Acquisition%20Engine
+      - link "About MarkCMO" [ref=e241] [cursor=pointer]:
+        - /url: https://markcmo.com
+  - contentinfo [ref=e242]:
+    - generic [ref=e243]:
+      - img "Second Life Mac" [ref=e244]
+      - generic [ref=e245]: Acquisition Engine Proposal prepared by Mark Gabrielli, MarkCMO
+      - generic [ref=e246]: mark@markcmo.com · markcmo.com
+      - generic [ref=e247]: Confidential. Prepared exclusively for Second Life Mac. Pricing valid for 30 days from review. Figures referencing revenue are external estimates for illustration.
