@@ -113,7 +113,7 @@ function shouldInjectChrome(pagePath) {
   if (pagePath.startsWith('MLG-Resume')) return false;
   if (pagePath.startsWith('admin/') || pagePath.startsWith('portal/') ||
       pagePath.startsWith('sign/')  || pagePath.startsWith('exam/') ||
-      pagePath.startsWith('learn/')) return false;
+      pagePath.startsWith('learn/') || pagePath.startsWith('proposals/')) return false;
   return true;
 }
 
