@@ -1302,7 +1302,7 @@ async function scheduleDayBeforeReminder(env, { inviteeEmail, inviteeName, event
 
 Heads up - Mark's calendar is packed this week. To keep your slot at ${whenDay} ${whenTime} active, please confirm you'll be there or reply with any meeting details you'd like Mark to review beforehand.
 
-If we don't hear back, the slot will be released for someone else 5 minutes after the meeting start time.
+If we don't hear back by 6 hours before the meeting, the slot will be released so someone else can book it.
 
 Confirm here: ${confirmUrl}
 
@@ -1315,7 +1315,7 @@ Mark`;
   <div>
     <p>Hi ${esc(firstName)},</p>
     <p>Heads up - Mark's calendar is packed this week. To keep your slot at <strong>${esc(whenDay)} ${esc(whenTime)}</strong> active, please confirm you'll be there or reply with any meeting details you'd like Mark to review beforehand.</p>
-    <p>If we don't hear back, the slot will be released for someone else 5 minutes after the meeting start time.</p>
+    <p>If we don't hear back by 6 hours before the meeting, the slot will be released so someone else can book it.</p>
     <p><a href="${esc(confirmUrl)}">I'll be there ✓</a></p>
     ${meetingLink ? `<p>Join link: <a href="${esc(meetingLink)}">${esc(meetingLink.replace(/^https?:\/\//,''))}</a></p>` : ''}
     <p>Mark</p>
@@ -1537,13 +1537,14 @@ Mark`;
   }
 }
 
-// ───── scheduleSixHoursBeforeReminder (T-6h "last call") ─────────
-// Fires 6 hours before the meeting. Aggressive copy: "Mark's calendar
-// is packed, confirm or we'll release your slot 5 min into the meeting
-// if you don't show." Same one-click "I'll be there" button as the
-// T-24h and T-15min emails (all share the same signed token).
+// ───── scheduleSixHoursBeforeReminder (final nudge BEFORE T-6h cancel) ──
+// Fires 8 hours before the meeting (function name kept for backward
+// compat with audit_log queries on invitee_6h_reminder_* events).
+// The auto-cancel cron fires AT T-6h, so this email lands 2 hours before
+// that cutoff - a final nudge window to confirm before the slot is released.
+// Same one-click "I'll be there" button as the T-24h and T-15min emails.
 //
-// Skips if booking is < 6h+5min away when this fires.
+// Skips if booking is < 8h + 5min away when this fires.
 async function scheduleSixHoursBeforeReminder(env, { inviteeEmail, inviteeName, eventName, scheduledAt, meetingLink, calendlyInviteeUri, engagementId }) {
   const auditPayload = {
     invitee_email: inviteeEmail || '',
@@ -1573,7 +1574,8 @@ async function scheduleSixHoursBeforeReminder(env, { inviteeEmail, inviteeName, 
     const startMs = new Date(scheduledAt).getTime();
     if (isNaN(startMs)) { auditPayload.step = 'bad_start_time'; auditEvent = 'invitee_6h_reminder_skipped'; return; }
 
-    const sendAtMs = startMs - 6 * 60 * 60 * 1000;
+    // Fires at T-8h (2h before the T-6h auto-cancel cutoff).
+    const sendAtMs = startMs - 8 * 60 * 60 * 1000;
     if (sendAtMs < Date.now() + 5 * 60 * 1000) { auditPayload.step = 'too_close'; auditEvent = 'invitee_6h_reminder_skipped'; return; }
     if (sendAtMs - Date.now() > 28 * 24 * 60 * 60 * 1000) {
       auditPayload.step = 'deferred_to_cron';
@@ -1601,11 +1603,11 @@ async function scheduleSixHoursBeforeReminder(env, { inviteeEmail, inviteeName, 
 
     const fromAddr = 'Mark Gabrielli <mark@markcmo.com>';
     const replyTo = 'prep@markcmo.com';
-    const subject = `Last call - your meeting at ${whenTime}`;
+    const subject = `Final nudge - confirm in the next 2 hours`;
 
     const text = `Hi ${firstName},
 
-Haven't heard back on your meeting today at ${whenTime}. Last call - if we don't hear from you, the slot will be released 5 minutes after the start time so someone else can book it.
+Quick final nudge on your meeting at ${whenTime}. We need a confirmation in the next 2 hours, otherwise the slot will be released 6 hours before the meeting so someone else can book it.
 
 Confirm here: ${confirmUrl}
 
@@ -1617,7 +1619,7 @@ Mark`;
 <body>
   <div>
     <p>Hi ${esc(firstName)},</p>
-    <p>Haven't heard back on your meeting today at <strong>${esc(whenTime)}</strong>. Last call - if we don't hear from you, the slot will be released 5 minutes after the start time so someone else can book it.</p>
+    <p>Quick final nudge on your meeting at <strong>${esc(whenTime)}</strong>. We need a confirmation in the next 2 hours, otherwise the slot will be released 6 hours before the meeting so someone else can book it.</p>
     <p><a href="${esc(confirmUrl)}">I'll be there ✓</a></p>
     <p>Or just reply with anything you'd like Mark to review beforehand.</p>
     <p>Mark</p>

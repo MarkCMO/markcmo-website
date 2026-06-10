@@ -59,27 +59,46 @@ export async function onRequest(context) {
     // logic in calendly-webhook so we check the audit log for the
     // calendly_booking_created event (which has scheduled_at) and pair
     // it with the engagement.
-    const auditQuery = `mc_audit_log?event=eq.calendly_booking_created&created_at=gte.${encodeURIComponent(new Date(Date.now() - 7 * 24 * 60 * 60 * 1000).toISOString())}&order=created_at.desc&limit=200&select=engagement_id,client_id,payload`;
+    const auditQuery = `mc_audit_log?event=eq.calendly_booking_created&created_at=gte.${encodeURIComponent(new Date(Date.now() - 7 * 24 * 60 * 60 * 1000).toISOString())}&order=created_at.desc&limit=200&select=engagement_id,client_id,payload,created_at`;
     const recentBookings = await sbSelect(env, auditQuery);
 
     // Filter to bookings that are in one of two interesting windows:
-    //   1. Meeting STARTED 5-30 min ago, NOT YET ENDED -> candidate for
-    //      auto-cancel if no attendance confirmation came in
+    //   1. Meeting is UP TO 6 HOURS AWAY but hasn't started yet, AND was
+    //      booked at least 6h before start (gave invitee time to confirm).
+    //      No confirmation by this point -> AUTO-CANCEL so the slot can
+    //      be rebooked. Previously this was start+5..start+30 (cancel AFTER
+    //      meeting started, useless). Mark's directive 2026-06-09: "cancel
+    //      6 hours prior if they dont respond to keep slots open."
     //   2. Meeting ENDED 5-60 min ago -> candidate for Gemini recap
     //      lookup OR fallback no-show detection
     // The per-candidate logic below decides which path applies.
     const now = Date.now();
     const candidates = [];
+    // Window: from T-6h up to T-0 (the start time). We want to fire AS SOON
+    // as we cross the T-6h threshold so the slot is freed with maximum
+    // lead time. The first cron tick after T-6h catches it.
+    const AUTO_CANCEL_LEAD_MIN = 0;   // closest we'll auto-cancel: at start
+    const AUTO_CANCEL_LEAD_MAX = 360; // earliest we'll auto-cancel: T-6h
+    // Bookings made within 6h of the meeting get a grace period - no time
+    // for the invitee to see/respond to the confirm-or-cancel email yet.
+    const MIN_LEAD_FOR_AUTO_CANCEL_MIN = 360;
     for (const row of recentBookings) {
       const p = row.payload || {};
       const startAt = p.scheduled_at ? new Date(p.scheduled_at).getTime() : null;
       if (!startAt || isNaN(startAt)) continue;
       const assumedEndMs = startAt + 30 * 60 * 1000;
-      const minutesSinceStart = (now - startAt) / 60000;
+      const minutesUntilStart = (startAt - now) / 60000;
       const minutesSinceEnd = (now - assumedEndMs) / 60000;
-      // Include if: in start+5..start+30 window (pre-end auto-cancel)
-      //          OR in end+5..end+60 window (recap / fallback no-show)
-      const inAutoCancelWindow = minutesSinceStart >= 5 && minutesSinceStart <= 30;
+      const minutesSinceStart = (now - startAt) / 60000;
+      // Booking lead time: how long between when the booking was created
+      // and when the meeting starts. If short, skip auto-cancel.
+      const bookingCreatedAt = row.created_at ? new Date(row.created_at).getTime() : startAt;
+      const bookingLeadMin = (startAt - bookingCreatedAt) / 60000;
+      const hasEnoughLead = bookingLeadMin >= MIN_LEAD_FOR_AUTO_CANCEL_MIN;
+      // T-6h..T-0 window AND booking had at least 6h of confirmation runway
+      const inAutoCancelWindow = minutesUntilStart >= AUTO_CANCEL_LEAD_MIN
+                              && minutesUntilStart <= AUTO_CANCEL_LEAD_MAX
+                              && hasEnoughLead;
       const inRecapWindow = minutesSinceEnd >= 5 && minutesSinceEnd <= RECAP_LOOKBACK_MIN;
       if (!inAutoCancelWindow && !inRecapWindow) continue;
       candidates.push({
@@ -92,8 +111,10 @@ export async function onRequest(context) {
         assumed_end_ms: assumedEndMs,
         in_auto_cancel_window: inAutoCancelWindow,
         in_recap_window: inRecapWindow,
+        minutes_until_start: minutesUntilStart,
         minutes_since_start: minutesSinceStart,
         minutes_since_end: minutesSinceEnd,
+        booking_lead_min: bookingLeadMin,
       });
     }
     run.candidates_found = candidates.length;
@@ -161,31 +182,33 @@ export async function onRequest(context) {
       let event = 'gemini_recap_attempted';
 
       try {
-        // ─── AUTO-CANCEL BRANCH (start+5min, no confirmation) ───
-        // If the meeting is in the auto-cancel window (started 5-30 min
-        // ago, still nominally in progress), check if the invitee ever
-        // clicked the "I'll be there" button. If not, auto-cancel the
-        // Calendly event (releases the slot for someone else) and send
-        // the no-show emails. This fires BEFORE the recap window so
-        // we never wait for the meeting to end before acting.
+        // ─── AUTO-CANCEL BRANCH (T-6h, no confirmation) ───
+        // If the meeting is within 6 hours of starting AND we have not yet
+        // received an "I'll be there" confirmation, cancel the Calendly
+        // event so the slot can be rebooked. Previously this fired 5 min
+        // AFTER meeting start (useless - Mark was already on the call by
+        // then). Now it fires AT or BEFORE T-6h so there's real lead time.
         const engForCheck = engagementsById[cand.engagement_id];
         const metaForCheck = engForCheck?.metadata || {};
         const wasConfirmedEarly = !!metaForCheck.attended_confirmed_at;
         if (cand.in_auto_cancel_window && !cand.in_recap_window) {
           if (wasConfirmedEarly) {
-            // Confirmed - wait for Gemini notes to appear via end+5 window
+            // Confirmed - meeting stays on the calendar. Cron will revisit
+            // after meeting ends for the recap step.
             candAudit.step = 'confirmed_skipping_until_end';
             event = 'gemini_recap_skipped';
             run.skipped.push({ engagement_id: cand.engagement_id, reason: 'confirmed_waiting_for_end' });
             continue;
           }
-          // No confirmation, 5+ min past start - AUTO-CANCEL
+          // No confirmation by T-6h - AUTO-CANCEL to free the slot
           candAudit.step = 'auto_cancelling';
+          candAudit.minutes_until_start = cand.minutes_until_start;
+          candAudit.booking_lead_min = cand.booking_lead_min;
           const calendlyEventUri = metaForCheck.calendly_event_uri || '';
           try {
             const cancelRes = await cancelCalendlyEvent(env, {
               calendlyEventUri,
-              reason: "Auto-cancelled: invitee did not confirm attendance and was not present 5 minutes into the meeting. The Calendly slot has been released for rebooking.",
+              reason: "Auto-cancelled: no attendance confirmation received with at least 6 hours remaining before the meeting. The Calendly slot has been released so the time can be rebooked.",
             });
             candAudit.calendly_cancel_status = cancelRes.status;
             candAudit.calendly_cancel_ok = cancelRes.ok;
