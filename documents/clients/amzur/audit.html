@@ -1,0 +1,474 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Forensic Digital Footprint Audit | Amzur Technologies | MarkCMO</title>
+<meta name="description" content="Forensic audit of the Amzur Technologies digital footprint: six evidence-based findings across technical delivery, on-page, architecture, and AI search visibility." />
+<meta name="robots" content="noindex, nofollow, noarchive, nosnippet, noimageindex" />
+<meta http-equiv="Cache-Control" content="no-store, no-cache, must-revalidate, private" />
+<link rel="preconnect" href="https://fonts.googleapis.com" crossorigin>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=DM+Mono:wght@400;500&display=swap">
+<style>
+  :root{
+    --navy:#0B2239;--navy-mid:#0F2D4A;--navy-light:#16395E;
+    --blue:#066AAB;--blue-hover:#055A92;--blue-light:#4FBFE4;--blue-pale:#ECF6FC;
+    --green:#22C55E;--green-pale:#ECFDF3;--amber:#F59E0B;--amber-pale:#FFF7ED;--red:#DC2626;--red-pale:#FEF2F2;
+    --white:#FFFFFF;--off-white:#F8FAFC;--light:#F1F5F9;--border:#E5E7EB;
+    --text:#1F2937;--text-mid:#64748B;--text-light:#94A3B8;
+    --shadow-md:0 4px 16px rgba(11,34,57,0.08), 0 8px 32px rgba(11,34,57,0.06);
+  }
+  *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+  body{font-family:'Inter',system-ui,-apple-system,sans-serif;background:var(--off-white);color:var(--text);line-height:1.65;-webkit-font-smoothing:antialiased;}
+  a{color:var(--blue);text-decoration:none;}
+
+  .doc-nav{position:sticky;top:0;z-index:100;background:var(--white);border-bottom:1px solid var(--border);padding:0.9rem 2rem;display:flex;justify-content:space-between;align-items:center;}
+  .doc-nav-logo{font-family:'Inter',sans-serif;font-weight:800;font-size:1.15rem;letter-spacing:0.04em;color:var(--blue);}
+  .doc-nav-logo span{color:var(--text);}
+  .doc-nav-back{font-family:'DM Mono',monospace;font-size:0.7rem;letter-spacing:0.12em;text-transform:uppercase;color:var(--text-light);}
+  .doc-nav-back a{color:var(--blue);font-weight:600;}
+
+  .cover-hero{background:linear-gradient(135deg,var(--navy) 0%,var(--navy-mid) 50%,var(--navy-light) 100%);color:var(--white);padding:3.5rem 2rem;position:relative;overflow:hidden;box-shadow:0 24px 60px -16px rgba(11,34,57,0.35);}
+  .cover-hero::before{content:'';position:absolute;inset:0;background:radial-gradient(circle at 85% 15%, rgba(79,191,228,0.20) 0%, transparent 52%);pointer-events:none;}
+  .cover-hero-inner{max-width:920px;margin:0 auto;position:relative;z-index:1;}
+  .cover-logo{height:30px;width:auto;margin-bottom:1.4rem;display:block;}
+  .doc-id-tag{font-family:'DM Mono',monospace;font-size:0.72rem;letter-spacing:0.2em;text-transform:uppercase;color:var(--blue-light);margin-bottom:0.9rem;}
+  .cover-hero h1{font-family:'Inter',sans-serif;font-size:clamp(2rem,4.4vw,2.9rem);font-weight:800;letter-spacing:-0.02em;line-height:1.08;color:var(--white);margin-bottom:1rem;}
+  .cover-hero h1 em{color:var(--blue-light);font-style:normal;}
+  .cover-hero-sub{font-size:1.04rem;color:rgba(248,250,252,0.80);max-width:640px;line-height:1.6;}
+
+  .doc-body{max-width:920px;margin:0 auto;padding:3.5rem 2rem;}
+  .section-eyebrow{font-family:'DM Mono',monospace;font-size:0.7rem;letter-spacing:0.18em;text-transform:uppercase;color:var(--blue);margin-bottom:0.85rem;font-weight:500;display:inline-block;padding:0.35rem 0.85rem;background:var(--blue-pale);border-radius:6px;}
+  h2{font-family:'Inter',sans-serif;font-size:clamp(1.5rem,3vw,2rem);font-weight:800;letter-spacing:-0.02em;color:var(--navy);margin-bottom:1.1rem;line-height:1.15;}
+  h2 span{color:var(--blue);}
+  p{margin-bottom:1rem;font-size:0.99rem;}
+  strong{color:var(--navy);font-weight:700;}
+
+  .gates{display:grid;grid-template-columns:repeat(3,1fr);gap:1rem;margin:1.75rem 0 0;}
+  @media(max-width:760px){.gates{grid-template-columns:1fr;}}
+  .gate{background:var(--white);border:1px solid var(--border);border-radius:14px;padding:1.5rem;box-shadow:var(--shadow-md);}
+  .gate .gnum{font-family:'Inter',sans-serif;font-weight:800;font-size:1.3rem;color:var(--blue);margin-bottom:0.4rem;}
+  .gate h4{font-family:'Inter',sans-serif;font-size:1.02rem;font-weight:700;color:var(--navy);margin-bottom:0.4rem;}
+  .gate p{font-size:0.88rem;margin:0;color:var(--text-mid);line-height:1.5;}
+
+  .finding{background:var(--white);border:1px solid var(--border);border-radius:18px;padding:0;margin:1.75rem 0;box-shadow:var(--shadow-md);overflow:hidden;}
+  .finding-head{display:flex;align-items:flex-start;gap:1rem;padding:1.6rem 1.8rem 1.2rem;border-bottom:1px solid var(--border);}
+  .finding-no{font-family:'Inter',sans-serif;font-weight:800;font-size:1.6rem;color:var(--blue-pale);background:var(--navy);width:48px;height:48px;border-radius:12px;display:flex;align-items:center;justify-content:center;flex-shrink:0;}
+  .finding-head-txt{flex:1;}
+  .finding-head h3{font-family:'Inter',sans-serif;font-weight:700;font-size:1.25rem;letter-spacing:-0.01em;color:var(--navy);line-height:1.2;margin-bottom:0.35rem;}
+  .sev{display:inline-block;font-family:'DM Mono',monospace;font-size:0.6rem;letter-spacing:0.14em;text-transform:uppercase;padding:0.25rem 0.6rem;border-radius:5px;font-weight:500;}
+  .sev.critical{background:var(--red-pale);color:var(--red);}
+  .sev.high{background:var(--amber-pale);color:var(--amber);}
+  .sev.med{background:var(--blue-pale);color:var(--blue);}
+  .sev.win{background:var(--green-pale);color:#15803D;}
+  .finding-body{padding:1.4rem 1.8rem 1.8rem;}
+  .fr{margin-bottom:1.1rem;}
+  .fr:last-child{margin-bottom:0;}
+  .fr .fr-lbl{font-family:'DM Mono',monospace;font-size:0.64rem;letter-spacing:0.16em;text-transform:uppercase;font-weight:500;margin-bottom:0.35rem;display:flex;align-items:center;gap:0.5rem;}
+  .fr.cur .fr-lbl{color:var(--text-mid);}
+  .fr.fix .fr-lbl{color:var(--blue);}
+  .fr.risk .fr-lbl{color:var(--red);}
+  .fr.rec .fr-lbl{color:#15803D;}
+  .fr p{font-size:0.94rem;margin:0;line-height:1.6;color:var(--text);}
+  .fr.rec{background:var(--green-pale);border-left:3px solid var(--green);padding:0.9rem 1.1rem;border-radius:0 8px 8px 0;}
+  .evidence{background:var(--navy);color:#cfe6f5;border-radius:10px;padding:1rem 1.2rem;margin:0.4rem 0 1.1rem;font-family:'DM Mono',monospace;font-size:0.78rem;line-height:1.7;letter-spacing:0.01em;overflow-x:auto;}
+  .evidence .ev-lbl{color:var(--blue-light);text-transform:uppercase;letter-spacing:0.16em;font-size:0.62rem;display:block;margin-bottom:0.5rem;}
+  .evidence b{color:#fff;}
+
+  .callout{background:var(--blue-pale);border:1px solid rgba(6,106,171,0.18);border-radius:14px;padding:1.6rem 1.8rem;margin:2rem 0;}
+  .callout .lbl{font-family:'DM Mono',monospace;font-size:0.66rem;letter-spacing:0.18em;text-transform:uppercase;color:var(--blue);font-weight:500;margin-bottom:0.5rem;}
+  .callout h3{font-family:'Inter',sans-serif;font-weight:700;font-size:1.2rem;color:var(--navy);margin-bottom:0.6rem;letter-spacing:-0.01em;}
+  .callout p{font-size:0.95rem;margin-bottom:0.6rem;}
+  .callout p:last-child{margin-bottom:0;}
+
+  .ai-proof{background:#fff;border:1px solid var(--border);border-radius:12px;padding:1.2rem 1.4rem;margin:0.4rem 0 1.1rem;}
+  .ai-proof .q{font-weight:700;color:var(--navy);font-size:0.92rem;margin-bottom:0.5rem;}
+  .ai-proof .a{font-size:0.9rem;color:var(--text-mid);line-height:1.6;margin-bottom:0.6rem;}
+  .ai-proof .named{display:flex;flex-wrap:wrap;gap:0.4rem;margin-bottom:0.6rem;}
+  .ai-proof .named .chip{background:var(--light);border:1px solid var(--border);border-radius:6px;padding:0.25rem 0.6rem;font-size:0.76rem;color:var(--text);font-family:'DM Mono',monospace;}
+  .ai-proof .verdict{font-size:0.9rem;color:var(--red);font-weight:600;}
+
+  .cta-strip{background:linear-gradient(135deg,var(--navy) 0%,var(--navy-mid) 100%);color:var(--white);border-radius:18px;padding:2.4rem;margin:3rem 0 1rem;text-align:center;position:relative;overflow:hidden;box-shadow:var(--shadow-md);}
+  .cta-strip::before{content:'';position:absolute;inset:0;background:radial-gradient(circle at 80% 30%,rgba(79,191,228,0.22) 0%,transparent 60%);}
+  .cta-strip > *{position:relative;z-index:1;}
+  .cta-strip h3{font-family:'Inter',sans-serif;font-weight:800;font-size:1.5rem;color:var(--white);margin-bottom:0.6rem;letter-spacing:-0.01em;}
+  .cta-strip p{color:rgba(255,255,255,0.80);max-width:560px;margin:0 auto 1.4rem;font-size:0.96rem;}
+  .cta-primary{display:inline-flex;align-items:center;gap:0.5rem;padding:0.95rem 1.9rem;background:var(--blue);color:var(--white);font-weight:700;font-size:0.95rem;border-radius:10px;transition:all 0.18s;box-shadow:0 4px 14px rgba(6,106,171,0.3);}
+  .cta-primary:hover{background:var(--blue-hover);transform:translateY(-1px);color:#fff;}
+  .cta-ghost{display:inline-flex;align-items:center;gap:0.5rem;padding:0.95rem 1.9rem;background:transparent;color:#fff;border:1.5px solid rgba(79,191,228,0.45);font-weight:600;font-size:0.95rem;border-radius:10px;margin-left:0.5rem;}
+
+  footer.doc-footer{background:var(--navy);color:rgba(255,255,255,0.6);padding:2.5rem 2rem;border-top:3px solid var(--blue);}
+  .doc-footer-inner{max-width:920px;margin:0 auto;display:grid;grid-template-columns:1fr auto;gap:2rem;align-items:center;}
+  @media(max-width:600px){.doc-footer-inner{grid-template-columns:1fr;}}
+  .doc-footer-logo{font-family:'Inter',sans-serif;font-weight:800;font-size:1.25rem;letter-spacing:0.03em;color:var(--white);}
+  .doc-footer-logo span{color:var(--blue-light);}
+  .doc-footer p{font-size:0.82rem;line-height:1.6;margin:0.4rem 0 0;color:rgba(255,255,255,0.55);}
+  .doc-footer-meta{font-family:'DM Mono',monospace;font-size:0.68rem;letter-spacing:0.12em;text-transform:uppercase;color:rgba(255,255,255,0.4);text-align:right;}
+  @media(max-width:600px){.doc-footer-meta{text-align:left;}}
+</style>
+</head>
+<body>
+<!-- ACCESS GATE. Code: amzur2026 -->
+<div id="cdb-gate" role="dialog" aria-modal="true" aria-label="Private document access">
+  <div class="cdb-gate-card">
+    <div class="cdb-gate-eyebrow">Confidential Document</div>
+    <div class="cdb-gate-lock" aria-hidden="true">&#128274;</div>
+    <h1>Private Access</h1>
+    <p>This document is confidential and prepared for the Amzur Technologies leadership team. Please enter your access code to continue.</p>
+    <form id="cdb-gate-form" autocomplete="off">
+      <input id="cdb-gate-code" type="password" placeholder="Access code" aria-label="Access code" autocomplete="off" spellcheck="false">
+      <button type="submit">Unlock Document</button>
+      <div id="cdb-gate-err" class="cdb-gate-err" hidden>That code is not right. Please try again.</div>
+    </form>
+    <div class="cdb-gate-foot">Need access? Contact Mark at mark@markcmo.com</div>
+  </div>
+</div>
+<style>
+  body:not(.cdb-unlocked) { overflow: hidden !important; }
+  body:not(.cdb-unlocked) > *:not(#cdb-gate):not(script):not(style) { display: none !important; }
+  body.cdb-unlocked #cdb-gate { display: none !important; }
+  #cdb-gate { position: fixed; inset: 0; z-index: 2147483647; display: flex; align-items: center; justify-content: center; padding: 24px; background: #0B2239; background-image: radial-gradient(circle at 80% 8%, rgba(6,106,171,0.35), transparent 55%); font-family: 'Inter', system-ui, sans-serif; }
+  #cdb-gate .cdb-gate-card { width: 100%; max-width: 430px; background: #FFFFFF; border: 1px solid #E5E7EB; border-radius: 16px; padding: 40px 34px; text-align: center; box-shadow: 0 30px 80px rgba(0,0,0,0.45); }
+  #cdb-gate .cdb-gate-eyebrow { font-family: 'DM Mono', monospace; font-size: 10px; letter-spacing: 4px; text-transform: uppercase; color: #066AAB; }
+  #cdb-gate .cdb-gate-lock { font-size: 30px; margin: 14px 0 4px; }
+  #cdb-gate h1 { font-family: 'Inter', sans-serif; font-weight: 800; letter-spacing: -0.01em; font-size: 28px; color: #0B2239; margin: 6px 0 8px; }
+  #cdb-gate p { font-size: 14px; color: #5b6470; line-height: 1.6; margin: 0 0 22px; }
+  #cdb-gate-form { display: flex; flex-direction: column; gap: 12px; }
+  #cdb-gate-code { width: 100%; padding: 13px 16px; border: 1px solid #cbd5e1; border-radius: 10px; font-size: 16px; font-family: inherit; background: #fff; color: #1F2937; text-align: center; letter-spacing: 2px; }
+  #cdb-gate-code:focus { outline: none; border-color: #066AAB; box-shadow: 0 0 0 3px rgba(6,106,171,0.18); }
+  #cdb-gate-form button { padding: 13px 16px; border: none; border-radius: 10px; background: #066AAB; color: #fff; font-size: 15px; font-weight: 700; font-family: inherit; cursor: pointer; }
+  #cdb-gate-form button:hover { background: #055A92; }
+  #cdb-gate .cdb-gate-err { color: #b3261e; font-size: 13px; }
+  #cdb-gate .cdb-gate-foot { margin-top: 22px; font-size: 12px; color: #8F8F8F; }
+  #cdb-gate .cdb-shake { animation: cdbShake .4s; }
+  @keyframes cdbShake { 0%,100%{transform:translateX(0)} 20%,60%{transform:translateX(-7px)} 40%,80%{transform:translateX(7px)} }
+</style>
+<script>
+(function(){
+  var HASH='24c70c56999f4b29707be3c9dc36d4f49791e2b583133be3bb9ada3f8c331c54';
+  var KEY='amzur_doc_access';
+  function unlock(){ try{ document.body.classList.add('cdb-unlocked'); }catch(e){} var g=document.getElementById('cdb-gate'); if(g) g.parentNode && g.parentNode.removeChild(g); }
+  try { if (sessionStorage.getItem(KEY)==='1') { if(document.body) unlock(); else document.addEventListener('DOMContentLoaded', unlock); return; } } catch(e){}
+  async function sha256(s){ try{ var b=new TextEncoder().encode(s); var h=await crypto.subtle.digest('SHA-256', b); return Array.from(new Uint8Array(h)).map(function(x){return x.toString(16).padStart(2,'0');}).join(''); }catch(e){ return null; } }
+  document.addEventListener('DOMContentLoaded', function(){
+    var form=document.getElementById('cdb-gate-form'); var input=document.getElementById('cdb-gate-code');
+    var err=document.getElementById('cdb-gate-err'); var card=document.querySelector('#cdb-gate .cdb-gate-card');
+    if(input) input.focus(); if(!form) return;
+    form.addEventListener('submit', async function(e){
+      e.preventDefault();
+      var hashed=await sha256((input.value||'').toLowerCase().trim());
+      if(hashed===HASH){ try{ sessionStorage.setItem(KEY,'1'); }catch(e){} unlock(); }
+      else { if(err) err.hidden=false; if(card){ card.classList.remove('cdb-shake'); void card.offsetWidth; card.classList.add('cdb-shake'); } input.value=''; input.focus(); }
+    });
+  });
+})();
+</script>
+<!-- /ACCESS GATE -->
+
+<nav class="doc-nav">
+  <div class="doc-nav-logo">MARK<span>CMO</span></div>
+  <div class="doc-nav-back">Doc AMZ-AUD-001 &middot; <a href="./">Back to package</a></div>
+</nav>
+
+<header class="cover-hero">
+  <div class="cover-hero-inner">
+    <img class="cover-logo" src="https://amzur.com/wp-content/uploads/2024/08/Amzur_white_logo.png" alt="Amzur Technologies" />
+    <div class="doc-id-tag">AMZ-AUD-001 &middot; Forensic Digital Footprint Audit</div>
+    <h1>Six findings on <em>why a 20-year-old domain underperforms its age.</em></h1>
+    <p class="cover-hero-sub">Every finding below was pulled directly from your live site. No assumptions, no generic checklist. Each one shows the current state with the evidence, the fix, the risk of leaving it, and my recommendation.</p>
+  </div>
+</header>
+
+<main class="doc-body">
+
+  <section style="margin-bottom:2.5rem;">
+    <div class="section-eyebrow">The Frame</div>
+    <h2>Three Gates Decide <span>Every Ranking</span></h2>
+    <p>Before the findings, the lens I use. Ranking is not one thing you win or lose. It is three gates a page has to clear, in order. Amzur is leaking at all three, worst at the first and the third.</p>
+    <div class="gates">
+      <div class="gate">
+        <div class="gnum">01</div>
+        <h4>Can it be trusted technically?</h4>
+        <p>Can Google and AI crawlers load, render, and trust the page fast enough to count it. This is where Amzur leaks the most.</p>
+      </div>
+      <div class="gate">
+        <div class="gnum">02</div>
+        <h4>Does it deserve the click?</h4>
+        <p>Does the page clearly answer the intent behind the search. Mixed: deep service pages are strong, the homepage and architecture are not.</p>
+      </div>
+      <div class="gate">
+        <div class="gnum">03</div>
+        <h4>Does the domain have the weight?</h4>
+        <p>Enough authority, citations, and third-party mentions to outrank incumbents and be picked by AI engines. The second-biggest leak.</p>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="section-eyebrow">The Findings</div>
+    <h2>What The Live Site <span>Actually Shows</span></h2>
+
+    <!-- FINDING 1 -->
+    <div class="finding">
+      <div class="finding-head">
+        <div class="finding-no">1</div>
+        <div class="finding-head-txt">
+          <h3>Technical delivery is the single biggest drag</h3>
+          <span class="sev critical">Critical &middot; Gate 1</span>
+        </div>
+      </div>
+      <div class="finding-body">
+        <div class="fr cur">
+          <div class="fr-lbl">Current State</div>
+          <p>The homepage loads dozens of separate stylesheets and scripts from Elementor and its add-ons, and it is served from a single origin server with no CDN and no caching headers. The page is heavy before a single image loads.</p>
+        </div>
+        <div class="evidence">
+          <span class="ev-lbl">Evidence pulled from amzur.com</span>
+          Homepage external CSS files: <b>47</b><br/>
+          Homepage script tags: <b>73</b><br/>
+          Raw HTML payload: <b>~377 KB</b> (before images)<br/>
+          Server: <b>Apache/2.4.41 (Ubuntu), no CDN detected</b><br/>
+          Cache-Control header: <b>none returned</b>
+        </div>
+        <div class="fr fix">
+          <div class="fr-lbl">The Fix</div>
+          <p>Put the site behind a CDN such as Cloudflare, turn on edge caching and Brotli compression, and consolidate and defer the CSS and JavaScript. Remove unused Elementor add-ons that ship their own stylesheets.</p>
+        </div>
+        <div class="fr risk">
+          <div class="fr-lbl">Risk If Ignored</div>
+          <p>Core Web Vitals almost certainly fail on mobile, which is both a direct ranking factor and a conversion killer. Every organic visit and every paid click lands on a slow page, so you are paying for traffic that bounces. Global buyers on the UAE, ANZ, and Africa pages get the worst of it with no CDN in front of them.</p>
+        </div>
+        <div class="fr rec">
+          <div class="fr-lbl">My Recommendation</div>
+          <p>This is the highest-leverage, lowest-drama fix in the audit. A CDN plus a render-path cleanup can move mobile load from poor to good in days, and it lifts every other page on the site at once. I want a live Core Web Vitals field-data pull to put exact numbers on it, which is part of the access I requested.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- FINDING 2 -->
+    <div class="finding">
+      <div class="finding-head">
+        <div class="finding-no">2</div>
+        <div class="finding-head-txt">
+          <h3>The homepage throws away its most valuable on-page signal</h3>
+          <span class="sev high">High &middot; Gate 2</span>
+        </div>
+      </div>
+      <div class="finding-body">
+        <div class="fr cur">
+          <div class="fr-lbl">Current State</div>
+          <p>The homepage uses four H1 tags, and every one of them is the brand slogan, not a keyword. The single most important on-page element points at zero commercial intent, and having four H1s breaks the page's semantic structure.</p>
+        </div>
+        <div class="evidence">
+          <span class="ev-lbl">Evidence pulled from amzur.com</span>
+          H1 tags on homepage: <b>4</b> (should be 1)<br/>
+          H1 text: <b>"Accelerate the SHIFT"</b> (brand slogan, no keyword)<br/>
+          Title tag: <b>good</b> ("Accelerate Digital Transformation with AI &amp; ERP | Amzur")
+        </div>
+        <div class="fr fix">
+          <div class="fr-lbl">The Fix</div>
+          <p>One H1 that names what you sell and who it is for, for example "AI, ERP, and Cloud Services for Mid-Market Operations." Demote the slogan to a styled headline so it stays on brand without spending your strongest on-page signal.</p>
+        </div>
+        <div class="fr risk">
+          <div class="fr-lbl">Risk If Ignored</div>
+          <p>Your strongest page by authority tells Google nothing about what to rank it for. You are spending your best on-page real estate on a tagline that no buyer searches.</p>
+        </div>
+        <div class="fr rec">
+          <div class="fr-lbl">My Recommendation</div>
+          <p>Easy win, done in week one. Brand slogans belong in the visual design, never in the H1.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- FINDING 3 -->
+    <div class="finding">
+      <div class="finding-head">
+        <div class="finding-no">3</div>
+        <div class="finding-head-txt">
+          <h3>Deep service pages are strong, which is the good news</h3>
+          <span class="sev win">Strength &middot; Gate 2</span>
+        </div>
+      </div>
+      <div class="finding-body">
+        <div class="fr cur">
+          <div class="fr-lbl">Current State</div>
+          <p>The NetSuite Implementation page has a clean title, a single H1, real depth, and valid FAQ schema. Rank Math is installed and even generating an llms.txt. This is not a team that cannot execute on-page. The skill is there, it is just applied unevenly across the site.</p>
+        </div>
+        <div class="evidence">
+          <span class="ev-lbl">Evidence: amzur.com/erp/netsuite/netsuite-implementation-services/</span>
+          H1 tags: <b>1</b> (correct) &middot; H2 sections: <b>22</b><br/>
+          FAQ schema: <b>present</b> (FAQPage + 4 Questions)<br/>
+          Title: <b>"NetSuite Implementation Services | Amzur ERP Experts"</b>
+        </div>
+        <div class="fr fix">
+          <div class="fr-lbl">The Fix</div>
+          <p>Standardize what the NetSuite page already does well across every money page, then build internal links from the blog into them so authority flows where it converts.</p>
+        </div>
+        <div class="fr risk">
+          <div class="fr-lbl">Risk If Ignored</div>
+          <p>Your best work stays isolated on a few pages instead of compounding into topical authority across the whole site.</p>
+        </div>
+        <div class="fr rec">
+          <div class="fr-lbl">My Recommendation</div>
+          <p>Do not rebuild, replicate. The winning pattern already exists in-house. This makes the rest of the engagement faster and cheaper.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- FINDING 4 -->
+    <div class="finding">
+      <div class="finding-head">
+        <div class="finding-no">4</div>
+        <div class="finding-head-txt">
+          <h3>The URL architecture is fractured, and it is the refocus scar</h3>
+          <span class="sev high">High &middot; Gate 2 + 3</span>
+        </div>
+      </div>
+      <div class="finding-body">
+        <div class="fr cur">
+          <div class="fr-lbl">Current State</div>
+          <p>The sitemap mixes two URL trees for the same concept: most industry pages sit under /industry/, but at least one sits under /industries/. Same idea, two paths. That splits topical authority and signals a past migration that was never cleaned up, which lines up exactly with the refocus you mentioned hurting your SEO.</p>
+        </div>
+        <div class="evidence">
+          <span class="ev-lbl">Evidence: page-sitemap.xml</span>
+          /industry/retail, /industry/manufacturing, /industry/insurance,<br/>
+          /industry/healthcare, /industry/energy-utilities<br/>
+          <b>but:</b> /industries/government-services &nbsp;(split path)
+        </div>
+        <div class="fr fix">
+          <div class="fr-lbl">The Fix</div>
+          <p>Pick one path, 301-redirect the orphans into it, consolidate the cluster, and fix the internal links to match. Audit for any other old refocus URLs leaking equity the same way.</p>
+        </div>
+        <div class="fr risk">
+          <div class="fr-lbl">Risk If Ignored</div>
+          <p>Google sees two half-built industries sections instead of one authoritative one, so neither ranks to its potential. This is precisely how a business refocus quietly bleeds the equity a 20-year-old domain should be compounding.</p>
+        </div>
+        <div class="fr rec">
+          <div class="fr-lbl">My Recommendation</div>
+          <p>A redirect-and-consolidation pass. Unglamorous, high return, and it directly addresses the thing you already suspect went wrong.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- FINDING 5 -->
+    <div class="finding">
+      <div class="finding-head">
+        <div class="finding-no">5</div>
+        <div class="finding-head-txt">
+          <h3>Technical hygiene gaps that are quick to close</h3>
+          <span class="sev med">Medium &middot; Gate 1</span>
+        </div>
+      </div>
+      <div class="finding-body">
+        <div class="fr cur">
+          <div class="fr-lbl">Current State</div>
+          <p>The robots.txt sitemap directive is malformed with a trailing slash, which can impair sitemap discovery. Schema coverage is solid on the homepage (Organization, LocalBusiness, Service) but thin or missing on most interior pages.</p>
+        </div>
+        <div class="evidence">
+          <span class="ev-lbl">Evidence: robots.txt</span>
+          Sitemap: <b>https://amzur.com/sitemap_index.xml/</b> &nbsp;(trailing slash, should be none)
+        </div>
+        <div class="fr fix">
+          <div class="fr-lbl">The Fix</div>
+          <p>Correct the robots directive and roll out Service, Breadcrumb, and Organization schema sitewide so every page is machine-readable.</p>
+        </div>
+        <div class="fr risk">
+          <div class="fr-lbl">Risk If Ignored</div>
+          <p>Minor individually, but together they signal a site that is not actively maintained, and small crawl and parse issues compound over hundreds of pages.</p>
+        </div>
+        <div class="fr rec">
+          <div class="fr-lbl">My Recommendation</div>
+          <p>Batch these into the first technical sprint. Low effort, and they remove friction from everything else.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- FINDING 6 -->
+    <div class="finding">
+      <div class="finding-head">
+        <div class="finding-no">6</div>
+        <div class="finding-head-txt">
+          <h3>Invisible in AI answer engines, the gap that should worry you most</h3>
+          <span class="sev critical">Critical &middot; Gate 3</span>
+        </div>
+      </div>
+      <div class="finding-body">
+        <div class="fr cur">
+          <div class="fr-lbl">Current State</div>
+          <p>I asked an AI answer engine the exact question your buyer asks it, and Amzur did not appear at all. The reason is structural: AI engines do not read your marketing. They assemble answers from third-party sources, the directories, review platforms, and listicles. Amzur's footprint is almost entirely first-party, so there is nothing external for an AI to cite, and it names the firms that are listed instead.</p>
+        </div>
+        <div class="ai-proof">
+          <div class="q">Query tested: "Best NetSuite implementation partners for mid-market manufacturing and distribution in the US?"</div>
+          <div class="a">The answer engine named, with citations:</div>
+          <div class="named">
+            <span class="chip">RSM US</span><span class="chip">Bryant Park Consulting</span><span class="chip">Concentrus</span><span class="chip">Eide Bailly</span><span class="chip">Myers-Holum</span><span class="chip">Sikich</span>
+          </div>
+          <div class="verdict">Amzur was not mentioned. Not in the list, not as an honorable mention.</div>
+        </div>
+        <div class="ai-proof">
+          <div class="q">Then I searched Amzur's own name.</div>
+          <div class="a">The only results were Amzur's own website pages plus a single directory listing. The engine itself flagged that the results were "primarily from Amzur's own website and case studies, rather than independent third-party reviews." That one sentence is the whole diagnosis.</div>
+        </div>
+        <div class="fr cur" style="margin-top:0.4rem;">
+          <div class="fr-lbl">The llms.txt red herring</div>
+          <p>Amzur has an llms.txt file (Rank Math generated it). It does nothing today. ChatGPT, Gemini, Perplexity, and Google AI Overviews do not use llms.txt for retrieval or ranking. It is a checkbox that creates a false sense of being covered. Real AI visibility comes from third-party corroboration, not a file on the server.</p>
+        </div>
+        <div class="fr fix">
+          <div class="fr-lbl">The Fix</div>
+          <p>A Generative Engine Optimization push. Get Amzur placed and reviewed on the exact sources AI engines pull from (G2, Clutch, Goodfirms, ERP Research, SoftwareConnect, the official Oracle NetSuite partner directory), earn mentions in the top-partners listicles that already rank, and restructure key pages so answer engines can lift clean, attributable claims.</p>
+        </div>
+        <div class="fr risk">
+          <div class="fr-lbl">Risk If Ignored</div>
+          <p>This is the one that should scare you. Buyer research is moving into AI answers now, and that shift favors whoever the model already knows. Every month Amzur stays uncited, competitors with directory and review presence get recommended by default to buyers who never run a Google search at all. Classic SEO is a slow bleed. AI invisibility is future pipeline walking to a competitor before you are ever in the consideration set.</p>
+        </div>
+        <div class="fr rec">
+          <div class="fr-lbl">My Recommendation</div>
+          <p>Pair this with the technical fixes as the two headline moves of the engagement. The SEO floor makes your pages competitive. The GEO push makes you exist in the channel buyers are migrating to. It is also fast and visible: getting onto three or four authoritative sources and earning a couple of listicle placements can change what the AI says within a quarter. That is a result you can screenshot and show the board. Here is what the AI said in week one. Here is what it says now.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section style="margin-top:2.5rem;">
+    <div class="callout">
+      <div class="lbl">Still To Be Quantified</div>
+      <h3>Two findings need your data to size</h3>
+      <p>Two of the items above are diagnosed from strong proxies and need real data to put exact numbers on, which is exactly what my information request covers:</p>
+      <p><strong>Authority and backlinks</strong> (Ahrefs or Semrush): to show the precise gap versus the firms outranking you and to map the winnable terms.</p>
+      <p><strong>Core Web Vitals field data and Search Console</strong>: page 2 is where the fastest revenue lives, the queries where you already sit just below the fold, ready to be pushed up. I cannot see that without Search Console access.</p>
+    </div>
+  </section>
+
+  <section>
+    <div class="section-eyebrow">The Reframe</div>
+    <h2>Not Number One Everywhere. <span>Number One Where It Pays.</span></h2>
+    <p>The goal is not to rank first for everything. It is to fix the technical floor so every page can compete, consolidate the architecture so authority compounds instead of splits, then concentrate firepower on the 15 to 30 high-intent terms where you can realistically win and that actually convert to pipeline, while building the third-party presence that gets you cited in AI answers. That is a 90-day technical and architecture phase, then an ongoing authority and AI-visibility phase. The Scope of Work lays out exactly how.</p>
+  </section>
+
+  <div class="cta-strip">
+    <h3>Send the data, then let's walk it together</h3>
+    <p>Once the Search Console and analytics access is in, I put real numbers on the authority and Core Web Vitals gaps and we pick the path on a 45-minute working session.</p>
+    <a href="scope-of-work" class="cta-primary">Read the Scope of Work</a>
+    <a href="https://markcmo.com/book" class="cta-ghost">Book the Session</a>
+  </div>
+
+</main>
+
+<footer class="doc-footer">
+  <div class="doc-footer-inner">
+    <div>
+      <div class="doc-footer-logo">MARK<span>CMO</span></div>
+      <p>Prepared by Mark Gabrielli &middot; markcmo.com &middot; mark@markcmo.com</p>
+      <p style="margin-top:0.2rem;">Forensic Digital Footprint Audit for Amzur Technologies. Evidence captured from the live site.</p>
+    </div>
+    <div class="doc-footer-meta">
+      Doc AMZ-AUD-001 &middot; v1.0<br/>
+      Confidential &middot; Do Not Distribute
+    </div>
+  </div>
+</footer>
+
+<script>(function(){try{var k='mc_jsid';var s=sessionStorage.getItem(k)||('s_'+Math.random().toString(36).slice(2)+Date.now().toString(36));sessionStorage.setItem(k,s);fetch('/.netlify/functions/track',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({t:'view',client:'amzur',page:'audit',session_id:s,url:location.pathname,title:document.title}),keepalive:true}).catch(function(){});}catch(e){}})();</script>
+</body>
+</html>

@@ -1,0 +1,339 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Scope of Work | Amzur Technologies | MarkCMO</title>
+<meta name="description" content="Scope of work for the Amzur Technologies engagement: a two-phase plan covering technical and architecture repair, then authority and AI-visibility growth." />
+<meta name="robots" content="noindex, nofollow, noarchive, nosnippet, noimageindex" />
+<meta http-equiv="Cache-Control" content="no-store, no-cache, must-revalidate, private" />
+<link rel="preconnect" href="https://fonts.googleapis.com" crossorigin>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=DM+Mono:wght@400;500&display=swap">
+<style>
+  :root{
+    --navy:#0B2239;--navy-mid:#0F2D4A;--navy-light:#16395E;
+    --blue:#066AAB;--blue-hover:#055A92;--blue-light:#4FBFE4;--blue-pale:#ECF6FC;
+    --green:#22C55E;--green-pale:#ECFDF3;--amber:#F59E0B;
+    --white:#FFFFFF;--off-white:#F8FAFC;--light:#F1F5F9;--border:#E5E7EB;
+    --text:#1F2937;--text-mid:#64748B;--text-light:#94A3B8;
+    --shadow-md:0 4px 16px rgba(11,34,57,0.08), 0 8px 32px rgba(11,34,57,0.06);
+  }
+  *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+  body{font-family:'Inter',system-ui,-apple-system,sans-serif;background:var(--off-white);color:var(--text);line-height:1.65;-webkit-font-smoothing:antialiased;}
+  a{color:var(--blue);text-decoration:none;}
+  .doc-nav{position:sticky;top:0;z-index:100;background:var(--white);border-bottom:1px solid var(--border);padding:0.9rem 2rem;display:flex;justify-content:space-between;align-items:center;}
+  .doc-nav-logo{font-weight:800;font-size:1.15rem;letter-spacing:0.04em;color:var(--blue);}
+  .doc-nav-logo span{color:var(--text);}
+  .doc-nav-back{font-family:'DM Mono',monospace;font-size:0.7rem;letter-spacing:0.12em;text-transform:uppercase;color:var(--text-light);}
+  .doc-nav-back a{color:var(--blue);font-weight:600;}
+  .cover-hero{background:linear-gradient(135deg,var(--navy) 0%,var(--navy-mid) 50%,var(--navy-light) 100%);color:var(--white);padding:3.5rem 2rem;position:relative;overflow:hidden;box-shadow:0 24px 60px -16px rgba(11,34,57,0.35);}
+  .cover-hero::before{content:'';position:absolute;inset:0;background:radial-gradient(circle at 85% 15%, rgba(79,191,228,0.20) 0%, transparent 52%);pointer-events:none;}
+  .cover-hero-inner{max-width:920px;margin:0 auto;position:relative;z-index:1;}
+  .cover-logo{height:30px;width:auto;margin-bottom:1.4rem;display:block;}
+  .doc-id-tag{font-family:'DM Mono',monospace;font-size:0.72rem;letter-spacing:0.2em;text-transform:uppercase;color:var(--blue-light);margin-bottom:0.9rem;}
+  .cover-hero h1{font-size:clamp(2rem,4.4vw,2.9rem);font-weight:800;letter-spacing:-0.02em;line-height:1.08;margin-bottom:1rem;}
+  .cover-hero h1 em{color:var(--blue-light);font-style:normal;}
+  .cover-hero-sub{font-size:1.04rem;color:rgba(248,250,252,0.80);max-width:640px;line-height:1.6;}
+  .doc-body{max-width:920px;margin:0 auto;padding:3.5rem 2rem;}
+  .section-eyebrow{font-family:'DM Mono',monospace;font-size:0.7rem;letter-spacing:0.18em;text-transform:uppercase;color:var(--blue);margin-bottom:0.85rem;font-weight:500;display:inline-block;padding:0.35rem 0.85rem;background:var(--blue-pale);border-radius:6px;}
+  h2{font-size:clamp(1.5rem,3vw,2rem);font-weight:800;letter-spacing:-0.02em;color:var(--navy);margin-bottom:1.1rem;line-height:1.15;}
+  h2 span{color:var(--blue);}
+  p{margin-bottom:1rem;font-size:0.99rem;}
+  strong{color:var(--navy);font-weight:700;}
+
+  .phase{background:var(--white);border:1px solid var(--border);border-radius:18px;margin:1.75rem 0;box-shadow:var(--shadow-md);overflow:hidden;}
+  .phase-head{padding:1.6rem 1.8rem;background:linear-gradient(135deg,var(--navy),var(--navy-mid));color:#fff;position:relative;overflow:hidden;}
+  .phase-head::before{content:'';position:absolute;inset:0;background:radial-gradient(circle at 90% 30%,rgba(79,191,228,0.22),transparent 60%);}
+  .phase-head > *{position:relative;z-index:1;}
+  .phase-tag{font-family:'DM Mono',monospace;font-size:0.66rem;letter-spacing:0.18em;text-transform:uppercase;color:var(--blue-light);margin-bottom:0.5rem;}
+  .phase-head h3{font-weight:800;font-size:1.45rem;letter-spacing:-0.01em;color:#fff;margin-bottom:0.35rem;}
+  .phase-head .phase-when{font-size:0.9rem;color:rgba(255,255,255,0.78);}
+  .phase-body{padding:1.6rem 1.8rem;}
+  .wi{display:flex;gap:0.9rem;padding:0.9rem 0;border-bottom:1px solid var(--light);}
+  .wi:last-child{border-bottom:none;}
+  .wi .wi-ck{flex-shrink:0;width:24px;height:24px;border-radius:7px;background:var(--blue-pale);color:var(--blue);display:flex;align-items:center;justify-content:center;font-size:0.8rem;font-weight:800;margin-top:0.1rem;}
+  .wi .wi-txt h4{font-size:1rem;font-weight:700;color:var(--navy);margin-bottom:0.2rem;}
+  .wi .wi-txt p{font-size:0.9rem;color:var(--text-mid);margin:0;line-height:1.55;}
+  .wi .wi-txt .maps{font-family:'DM Mono',monospace;font-size:0.62rem;letter-spacing:0.1em;text-transform:uppercase;color:var(--blue);margin-top:0.3rem;display:inline-block;}
+
+  .twocol{display:grid;grid-template-columns:1fr 1fr;gap:1.25rem;margin:1.5rem 0;}
+  @media(max-width:680px){.twocol{grid-template-columns:1fr;}}
+  .panel{border:1px solid var(--border);border-radius:14px;padding:1.4rem 1.5rem;background:var(--white);box-shadow:var(--shadow-md);}
+  .panel.you{border-top:3px solid var(--blue);}
+  .panel.them{border-top:3px solid var(--green);}
+  .panel h4{font-weight:700;font-size:1.05rem;color:var(--navy);margin-bottom:0.7rem;}
+  .panel ul{list-style:none;}
+  .panel ul li{font-size:0.9rem;color:var(--text-mid);padding:0.35rem 0 0.35rem 1.3rem;position:relative;line-height:1.5;}
+  .panel ul li::before{content:'\2192';position:absolute;left:0;color:var(--blue);font-weight:700;}
+  .panel.them ul li::before{color:var(--green);}
+
+  .cadence{background:var(--blue-pale);border:1px solid rgba(6,106,171,0.18);border-radius:14px;padding:1.6rem 1.8rem;margin:2rem 0;}
+  .cadence .lbl{font-family:'DM Mono',monospace;font-size:0.66rem;letter-spacing:0.18em;text-transform:uppercase;color:var(--blue);font-weight:500;margin-bottom:0.5rem;}
+  .cadence h3{font-weight:700;font-size:1.2rem;color:var(--navy);margin-bottom:0.6rem;letter-spacing:-0.01em;}
+  .cadence p{font-size:0.94rem;margin-bottom:0;}
+
+  .cta-strip{background:linear-gradient(135deg,var(--navy) 0%,var(--navy-mid) 100%);color:#fff;border-radius:18px;padding:2.4rem;margin:3rem 0 1rem;text-align:center;position:relative;overflow:hidden;box-shadow:var(--shadow-md);}
+  .cta-strip::before{content:'';position:absolute;inset:0;background:radial-gradient(circle at 80% 30%,rgba(79,191,228,0.22) 0%,transparent 60%);}
+  .cta-strip > *{position:relative;z-index:1;}
+  .cta-strip h3{font-weight:800;font-size:1.5rem;color:#fff;margin-bottom:0.6rem;letter-spacing:-0.01em;}
+  .cta-strip p{color:rgba(255,255,255,0.80);max-width:560px;margin:0 auto 1.4rem;font-size:0.96rem;}
+  .cta-primary{display:inline-flex;align-items:center;gap:0.5rem;padding:0.95rem 1.9rem;background:var(--blue);color:#fff;font-weight:700;font-size:0.95rem;border-radius:10px;transition:all 0.18s;box-shadow:0 4px 14px rgba(6,106,171,0.3);}
+  .cta-primary:hover{background:var(--blue-hover);transform:translateY(-1px);color:#fff;}
+  .cta-ghost{display:inline-flex;align-items:center;gap:0.5rem;padding:0.95rem 1.9rem;background:transparent;color:#fff;border:1.5px solid rgba(79,191,228,0.45);font-weight:600;font-size:0.95rem;border-radius:10px;margin-left:0.5rem;}
+
+  footer.doc-footer{background:var(--navy);color:rgba(255,255,255,0.6);padding:2.5rem 2rem;border-top:3px solid var(--blue);}
+  .doc-footer-inner{max-width:920px;margin:0 auto;display:grid;grid-template-columns:1fr auto;gap:2rem;align-items:center;}
+  @media(max-width:600px){.doc-footer-inner{grid-template-columns:1fr;}}
+  .doc-footer-logo{font-weight:800;font-size:1.25rem;letter-spacing:0.03em;color:#fff;}
+  .doc-footer-logo span{color:var(--blue-light);}
+  .doc-footer p{font-size:0.82rem;line-height:1.6;margin:0.4rem 0 0;color:rgba(255,255,255,0.55);}
+  .doc-footer-meta{font-family:'DM Mono',monospace;font-size:0.68rem;letter-spacing:0.12em;text-transform:uppercase;color:rgba(255,255,255,0.4);text-align:right;}
+  @media(max-width:600px){.doc-footer-meta{text-align:left;}}
+</style>
+</head>
+<body>
+<!-- ACCESS GATE. Code: amzur2026 -->
+<div id="cdb-gate" role="dialog" aria-modal="true" aria-label="Private document access">
+  <div class="cdb-gate-card">
+    <div class="cdb-gate-eyebrow">Confidential Document</div>
+    <div class="cdb-gate-lock" aria-hidden="true">&#128274;</div>
+    <h1>Private Access</h1>
+    <p>This document is confidential and prepared for the Amzur Technologies leadership team. Please enter your access code to continue.</p>
+    <form id="cdb-gate-form" autocomplete="off">
+      <input id="cdb-gate-code" type="password" placeholder="Access code" aria-label="Access code" autocomplete="off" spellcheck="false">
+      <button type="submit">Unlock Document</button>
+      <div id="cdb-gate-err" class="cdb-gate-err" hidden>That code is not right. Please try again.</div>
+    </form>
+    <div class="cdb-gate-foot">Need access? Contact Mark at mark@markcmo.com</div>
+  </div>
+</div>
+<style>
+  body:not(.cdb-unlocked) { overflow: hidden !important; }
+  body:not(.cdb-unlocked) > *:not(#cdb-gate):not(script):not(style) { display: none !important; }
+  body.cdb-unlocked #cdb-gate { display: none !important; }
+  #cdb-gate { position: fixed; inset: 0; z-index: 2147483647; display: flex; align-items: center; justify-content: center; padding: 24px; background: #0B2239; background-image: radial-gradient(circle at 80% 8%, rgba(6,106,171,0.35), transparent 55%); font-family: 'Inter', system-ui, sans-serif; }
+  #cdb-gate .cdb-gate-card { width: 100%; max-width: 430px; background: #FFFFFF; border: 1px solid #E5E7EB; border-radius: 16px; padding: 40px 34px; text-align: center; box-shadow: 0 30px 80px rgba(0,0,0,0.45); }
+  #cdb-gate .cdb-gate-eyebrow { font-family: 'DM Mono', monospace; font-size: 10px; letter-spacing: 4px; text-transform: uppercase; color: #066AAB; }
+  #cdb-gate .cdb-gate-lock { font-size: 30px; margin: 14px 0 4px; }
+  #cdb-gate h1 { font-family: 'Inter', sans-serif; font-weight: 800; letter-spacing: -0.01em; font-size: 28px; color: #0B2239; margin: 6px 0 8px; }
+  #cdb-gate p { font-size: 14px; color: #5b6470; line-height: 1.6; margin: 0 0 22px; }
+  #cdb-gate-form { display: flex; flex-direction: column; gap: 12px; }
+  #cdb-gate-code { width: 100%; padding: 13px 16px; border: 1px solid #cbd5e1; border-radius: 10px; font-size: 16px; font-family: inherit; background: #fff; color: #1F2937; text-align: center; letter-spacing: 2px; }
+  #cdb-gate-code:focus { outline: none; border-color: #066AAB; box-shadow: 0 0 0 3px rgba(6,106,171,0.18); }
+  #cdb-gate-form button { padding: 13px 16px; border: none; border-radius: 10px; background: #066AAB; color: #fff; font-size: 15px; font-weight: 700; font-family: inherit; cursor: pointer; }
+  #cdb-gate-form button:hover { background: #055A92; }
+  #cdb-gate .cdb-gate-err { color: #b3261e; font-size: 13px; }
+  #cdb-gate .cdb-gate-foot { margin-top: 22px; font-size: 12px; color: #8F8F8F; }
+  #cdb-gate .cdb-shake { animation: cdbShake .4s; }
+  @keyframes cdbShake { 0%,100%{transform:translateX(0)} 20%,60%{transform:translateX(-7px)} 40%,80%{transform:translateX(7px)} }
+</style>
+<script>
+(function(){
+  var HASH='24c70c56999f4b29707be3c9dc36d4f49791e2b583133be3bb9ada3f8c331c54';
+  var KEY='amzur_doc_access';
+  function unlock(){ try{ document.body.classList.add('cdb-unlocked'); }catch(e){} var g=document.getElementById('cdb-gate'); if(g) g.parentNode && g.parentNode.removeChild(g); }
+  try { if (sessionStorage.getItem(KEY)==='1') { if(document.body) unlock(); else document.addEventListener('DOMContentLoaded', unlock); return; } } catch(e){}
+  async function sha256(s){ try{ var b=new TextEncoder().encode(s); var h=await crypto.subtle.digest('SHA-256', b); return Array.from(new Uint8Array(h)).map(function(x){return x.toString(16).padStart(2,'0');}).join(''); }catch(e){ return null; } }
+  document.addEventListener('DOMContentLoaded', function(){
+    var form=document.getElementById('cdb-gate-form'); var input=document.getElementById('cdb-gate-code');
+    var err=document.getElementById('cdb-gate-err'); var card=document.querySelector('#cdb-gate .cdb-gate-card');
+    if(input) input.focus(); if(!form) return;
+    form.addEventListener('submit', async function(e){
+      e.preventDefault();
+      var hashed=await sha256((input.value||'').toLowerCase().trim());
+      if(hashed===HASH){ try{ sessionStorage.setItem(KEY,'1'); }catch(e){} unlock(); }
+      else { if(err) err.hidden=false; if(card){ card.classList.remove('cdb-shake'); void card.offsetWidth; card.classList.add('cdb-shake'); } input.value=''; input.focus(); }
+    });
+  });
+})();
+</script>
+<!-- /ACCESS GATE -->
+
+<nav class="doc-nav">
+  <div class="doc-nav-logo">MARK<span>CMO</span></div>
+  <div class="doc-nav-back">Doc AMZ-SOW-001 &middot; <a href="./">Back to package</a></div>
+</nav>
+
+<header class="cover-hero">
+  <div class="cover-hero-inner">
+    <img class="cover-logo" src="https://amzur.com/wp-content/uploads/2024/08/Amzur_white_logo.png" alt="Amzur Technologies" />
+    <div class="doc-id-tag">AMZ-SOW-001 &middot; Scope of Work</div>
+    <h1>Two phases. <em>Fix the floor, then build the authority.</em></h1>
+    <p class="cover-hero-sub">Phase One repairs the technical floor and consolidates the architecture so every page can compete. Phase Two builds the authority and AI visibility that gets Amzur ranked and cited. Every work item below maps back to a finding in the audit.</p>
+  </div>
+</header>
+
+<main class="doc-body">
+
+  <section style="margin-bottom:2rem;">
+    <div class="section-eyebrow">How This Engagement Works</div>
+    <h2>Strategic Oversight, <span>Plus Hands-On Execution</span></h2>
+    <p>I run this as a short, high-impact engagement, not an open-ended retainer. I do the forensic work, set the strategy, and either execute directly or direct your India marketing team against a clear plan so they shift from tactical output to strategic output. You always see the numbers. Nothing is a black box.</p>
+    <p>The work splits into two phases. Phase One is finite and front-loaded: the technical and architecture repairs that unlock everything else. Phase Two is the ongoing growth engine. You can stop after Phase One with a materially healthier site, or continue into the authority and AI-visibility work where the compounding pipeline lives.</p>
+  </section>
+
+  <!-- PHASE 1 -->
+  <div class="phase">
+    <div class="phase-head">
+      <div class="phase-tag">Phase One &middot; Weeks 1 to 12</div>
+      <h3>Technical Floor &amp; Architecture Repair</h3>
+      <div class="phase-when">Finite, front-loaded. Makes every page able to compete.</div>
+    </div>
+    <div class="phase-body">
+      <div class="wi">
+        <div class="wi-ck">&#10003;</div>
+        <div class="wi-txt">
+          <h4>CDN and Core Web Vitals remediation</h4>
+          <p>Cloudflare in front of the site, edge caching and Brotli on, render path cleaned up, CSS and JavaScript consolidated and deferred, unused Elementor add-ons removed.</p>
+          <span class="maps">Maps to Finding 1 (Critical)</span>
+        </div>
+      </div>
+      <div class="wi">
+        <div class="wi-ck">&#10003;</div>
+        <div class="wi-txt">
+          <h4>Homepage and on-page signal fix</h4>
+          <p>Single keyword-driven H1, corrected heading hierarchy, title and meta alignment on the priority pages, slogan demoted to styled design.</p>
+          <span class="maps">Maps to Finding 2 (High)</span>
+        </div>
+      </div>
+      <div class="wi">
+        <div class="wi-ck">&#10003;</div>
+        <div class="wi-txt">
+          <h4>Service-page standardization</h4>
+          <p>Roll the winning NetSuite-page pattern (depth, schema, FAQ, clean structure) across the other money pages, then wire internal links from the blog into them.</p>
+          <span class="maps">Maps to Finding 3 (Strength)</span>
+        </div>
+      </div>
+      <div class="wi">
+        <div class="wi-ck">&#10003;</div>
+        <div class="wi-txt">
+          <h4>URL architecture consolidation</h4>
+          <p>Resolve the /industry/ versus /industries/ split, 301 the orphans, consolidate the cluster, fix internal links, and audit for other refocus URLs leaking equity.</p>
+          <span class="maps">Maps to Finding 4 (High)</span>
+        </div>
+      </div>
+      <div class="wi">
+        <div class="wi-ck">&#10003;</div>
+        <div class="wi-txt">
+          <h4>Technical hygiene and schema rollout</h4>
+          <p>Fix the robots.txt sitemap directive, validate indexation, and roll out Service, Breadcrumb, and Organization schema sitewide.</p>
+          <span class="maps">Maps to Finding 5 (Medium)</span>
+        </div>
+      </div>
+      <div class="wi">
+        <div class="wi-ck">&#10003;</div>
+        <div class="wi-txt">
+          <h4>Baseline and keyword strategy</h4>
+          <p>Full backlink and Search Console pull to set the baseline, map the 15 to 30 winnable high-intent terms, and identify the page-2 queries closest to breaking onto page 1.</p>
+          <span class="maps">Quantifies the audit's open items</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- PHASE 2 -->
+  <div class="phase">
+    <div class="phase-head">
+      <div class="phase-tag">Phase Two &middot; Ongoing</div>
+      <h3>Authority &amp; AI Visibility</h3>
+      <div class="phase-when">The compounding growth engine, organic plus AI search.</div>
+    </div>
+    <div class="phase-body">
+      <div class="wi">
+        <div class="wi-ck">&#10003;</div>
+        <div class="wi-txt">
+          <h4>Generative Engine Optimization (AI search)</h4>
+          <p>Place and optimize Amzur on the exact sources AI engines cite (G2, Clutch, Goodfirms, ERP Research, SoftwareConnect, the official Oracle NetSuite partner directory), pursue top-partner listicle inclusion, and restructure key pages for clean machine extraction.</p>
+          <span class="maps">Maps to Finding 6 (Critical)</span>
+        </div>
+      </div>
+      <div class="wi">
+        <div class="wi-ck">&#10003;</div>
+        <div class="wi-txt">
+          <h4>Authority and backlink building</h4>
+          <p>Targeted earned links and citations against the competitor authority gap, focused on the terms and clusters where Amzur can realistically win.</p>
+          <span class="maps">Closes the Gate 3 leak</span>
+        </div>
+      </div>
+      <div class="wi">
+        <div class="wi-ck">&#10003;</div>
+        <div class="wi-txt">
+          <h4>Topical content clusters</h4>
+          <p>Hub-and-spoke content around the winnable terms, built on the standardized page pattern, directing your India team's output against a strategic brief instead of scattered tactics.</p>
+          <span class="maps">Builds Gate 2 depth</span>
+        </div>
+      </div>
+      <div class="wi">
+        <div class="wi-ck">&#10003;</div>
+        <div class="wi-txt">
+          <h4>Marketing the hard-to-position services</h4>
+          <p>A positioning and demand approach for the high-margin team-engagement model that you said is the most profitable and the hardest to market, so the work also feeds the revenue you most want to grow.</p>
+          <span class="maps">Ties SEO to your margin goals</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <section style="margin-top:2.5rem;">
+    <div class="section-eyebrow">Who Does What</div>
+    <h2>Clear Lines, <span>No Overlap</span></h2>
+    <div class="twocol">
+      <div class="panel you">
+        <h4>What I own</h4>
+        <ul>
+          <li>The forensic audit, strategy, and prioritization</li>
+          <li>Technical SEO direction and Core Web Vitals remediation plan</li>
+          <li>Architecture and redirect mapping</li>
+          <li>GEO and authority strategy and outreach</li>
+          <li>Keyword and content strategy</li>
+          <li>Weekly reporting and the working sessions</li>
+          <li>Direction of your India team against the plan</li>
+        </ul>
+      </div>
+      <div class="panel them">
+        <h4>What I need from Amzur</h4>
+        <ul>
+          <li>Search Console, analytics, and ad-account access</li>
+          <li>The marketing, funnel, and tech-stack detail I requested</li>
+          <li>WordPress and DNS access for the technical fixes</li>
+          <li>Your India marketing team's time to execute against briefs</li>
+          <li>Sign-off on the priority keyword and service list</li>
+          <li>One internal point of contact for fast decisions</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <div class="cadence">
+    <div class="lbl">Reporting</div>
+    <h3>Weekly numbers, no black box</h3>
+    <p>You get a weekly report and a short working session: what was done, what moved, what is next. Phase One reports against technical milestones (Core Web Vitals, pages fixed, redirects shipped). Phase Two reports against rankings, page-2 movement, directory and citation placements, and what the AI engines say about your category over time.</p>
+  </div>
+
+  <div class="cta-strip">
+    <h3>The schedule is in the timeline</h3>
+    <p>See exactly when each piece lands, the Day 14, 30, 60, and 90 milestones, and the early wins you can show the board.</p>
+    <a href="timeline" class="cta-primary">Open the Timeline</a>
+    <a href="proposal" class="cta-ghost">See the Proposal</a>
+  </div>
+
+</main>
+
+<footer class="doc-footer">
+  <div class="doc-footer-inner">
+    <div>
+      <div class="doc-footer-logo">MARK<span>CMO</span></div>
+      <p>Prepared by Mark Gabrielli &middot; markcmo.com &middot; mark@markcmo.com</p>
+      <p style="margin-top:0.2rem;">Scope of Work for Amzur Technologies.</p>
+    </div>
+    <div class="doc-footer-meta">
+      Doc AMZ-SOW-001 &middot; v1.0<br/>
+      Confidential &middot; Do Not Distribute
+    </div>
+  </div>
+</footer>
+
+<script>(function(){try{var k='mc_jsid';var s=sessionStorage.getItem(k)||('s_'+Math.random().toString(36).slice(2)+Date.now().toString(36));sessionStorage.setItem(k,s);fetch('/.netlify/functions/track',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({t:'view',client:'amzur',page:'scope-of-work',session_id:s,url:location.pathname,title:document.title}),keepalive:true}).catch(function(){});}catch(e){}})();</script>
+</body>
+</html>
