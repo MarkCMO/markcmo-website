@@ -144,6 +144,24 @@ export default {
             error: (e && e.message) || String(e),
           }));
         }
+        // Mark's directive 2026-06-10 (later): "how do i add them to my
+        // iphone and outlook desktop." Native clients need IMAP/POP/Exchange.
+        // Instead of running an IMAP server, we forward a copy to Mark's
+        // Gmail (free gmail.com, already configured in his Mail.app +
+        // Outlook). He sees the mail natively on every device AND in the
+        // /mail.html webmail. Belt-and-suspenders.
+        try {
+          await message.forward('marklgabriellijr@gmail.com');
+          audit.gmail_forwarded = true;
+        } catch (e) {
+          audit.gmail_forwarded = false;
+          audit.gmail_forward_error = (e && e.message) || String(e);
+          // Don't fail the worker - mail is already stored in mailbox.
+          console.error('GMAIL_FORWARD_FAILED', JSON.stringify({
+            from: audit.from, to: audit.to, subject: audit.subject,
+            error: (e && e.message) || String(e),
+          }));
+        }
         // Done - inbound to mark@ does NOT go through the prep classifier.
         // Return early so we skip the engagement match / classification path.
         return;
