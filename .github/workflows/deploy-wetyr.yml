@@ -40,7 +40,7 @@ jobs:
           if [ -f favicon.webp ]; then cp favicon.webp wetyr-dist/; fi
           echo "Assembled wetyr-dist:"; find wetyr-dist -maxdepth 2 -type f | sort
 
-      - name: Deploy to Cloudflare Pages (project: wetyr)
+      - name: "Deploy to Cloudflare Pages (project wetyr)"
         run: |
           npx wrangler@latest pages deploy wetyr-dist \
             --project-name wetyr \
