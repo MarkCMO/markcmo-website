@@ -1,0 +1,439 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Go-to-Market &amp; Channel Strategy | Amzur Technologies | MarkCMO</title>
+<meta name="description" content="Go-to-market and paid-channel strategy for Amzur Technologies: channel architecture, the find-what-works-and-double-down method, and the missing strategic owner of the push to market." />
+<meta name="robots" content="noindex, nofollow, noarchive, nosnippet, noimageindex" />
+<meta http-equiv="Cache-Control" content="no-store, no-cache, must-revalidate, private" />
+<link rel="preconnect" href="https://fonts.googleapis.com" crossorigin>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=DM+Mono:wght@400;500&display=swap">
+<style>
+  :root{
+    --navy:#0B2239;--navy-mid:#0F2D4A;--navy-light:#16395E;
+    --blue:#066AAB;--blue-hover:#055A92;--blue-light:#4FBFE4;--blue-pale:#ECF6FC;
+    --green:#22C55E;--green-pale:#ECFDF3;--amber:#F59E0B;--amber-pale:#FFF7ED;--red:#DC2626;--red-pale:#FEF2F2;
+    --white:#FFFFFF;--off-white:#F8FAFC;--light:#F1F5F9;--border:#E5E7EB;
+    --text:#1F2937;--text-mid:#64748B;--text-light:#94A3B8;
+    --shadow-md:0 4px 16px rgba(11,34,57,0.08), 0 8px 32px rgba(11,34,57,0.06);
+  }
+  *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+  body{font-family:'Inter',system-ui,-apple-system,sans-serif;background:var(--off-white);color:var(--text);line-height:1.65;-webkit-font-smoothing:antialiased;}
+  a{color:var(--blue);text-decoration:none;}
+  .doc-nav{position:sticky;top:0;z-index:100;background:var(--white);border-bottom:1px solid var(--border);padding:0.9rem 2rem;display:flex;justify-content:space-between;align-items:center;}
+  .doc-nav-logo{font-weight:800;font-size:1.15rem;letter-spacing:0.04em;color:var(--blue);}
+  .doc-nav-logo span{color:var(--text);}
+  .doc-nav-back{font-family:'DM Mono',monospace;font-size:0.7rem;letter-spacing:0.12em;text-transform:uppercase;color:var(--text-light);}
+  .doc-nav-back a{color:var(--blue);font-weight:600;}
+  .cover-hero{background:linear-gradient(135deg,var(--navy) 0%,var(--navy-mid) 50%,var(--navy-light) 100%);color:#fff;padding:3.5rem 2rem;position:relative;overflow:hidden;box-shadow:0 24px 60px -16px rgba(11,34,57,0.35);}
+  .cover-hero::before{content:'';position:absolute;inset:0;background:radial-gradient(circle at 85% 15%, rgba(79,191,228,0.20) 0%, transparent 52%);pointer-events:none;}
+  .cover-hero-inner{max-width:920px;margin:0 auto;position:relative;z-index:1;}
+  .cover-logo{height:30px;width:auto;margin-bottom:1.4rem;display:block;}
+  .doc-id-tag{font-family:'DM Mono',monospace;font-size:0.72rem;letter-spacing:0.2em;text-transform:uppercase;color:var(--blue-light);margin-bottom:0.9rem;}
+  .cover-hero h1{font-size:clamp(2rem,4.4vw,2.9rem);font-weight:800;letter-spacing:-0.02em;line-height:1.08;margin-bottom:1rem;}
+  .cover-hero h1 em{color:var(--blue-light);font-style:normal;}
+  .cover-hero-sub{font-size:1.04rem;color:rgba(248,250,252,0.80);max-width:640px;line-height:1.6;}
+  .doc-body{max-width:920px;margin:0 auto;padding:3.5rem 2rem;}
+  .section-eyebrow{font-family:'DM Mono',monospace;font-size:0.7rem;letter-spacing:0.18em;text-transform:uppercase;color:var(--blue);margin-bottom:0.85rem;font-weight:500;display:inline-block;padding:0.35rem 0.85rem;background:var(--blue-pale);border-radius:6px;}
+  h2{font-size:clamp(1.5rem,3vw,2rem);font-weight:800;letter-spacing:-0.02em;color:var(--navy);margin-bottom:1.1rem;line-height:1.15;}
+  h2 span{color:var(--blue);}
+  p{margin-bottom:1rem;font-size:0.99rem;}
+  strong{color:var(--navy);font-weight:700;}
+
+  .thesis{background:var(--navy);color:#fff;border-radius:18px;padding:2.2rem 2.2rem;margin:1.5rem 0 2rem;position:relative;overflow:hidden;box-shadow:var(--shadow-md);}
+  .thesis::before{content:'';position:absolute;inset:0;background:radial-gradient(circle at 88% 20%,rgba(79,191,228,0.22),transparent 58%);}
+  .thesis > *{position:relative;z-index:1;}
+  .thesis .lbl{font-family:'DM Mono',monospace;font-size:0.66rem;letter-spacing:0.18em;text-transform:uppercase;color:var(--blue-light);margin-bottom:0.7rem;}
+  .thesis h3{font-weight:800;font-size:1.6rem;letter-spacing:-0.01em;color:#fff;margin-bottom:0.8rem;line-height:1.2;}
+  .thesis p{color:rgba(255,255,255,0.85);font-size:1rem;margin-bottom:0.8rem;}
+  .thesis p:last-child{margin-bottom:0;}
+  .thesis strong{color:#fff;}
+
+  .layers{display:grid;grid-template-columns:1fr 1fr 1fr;gap:1rem;margin:1.75rem 0;}
+  @media(max-width:760px){.layers{grid-template-columns:1fr;}}
+  .layer{background:var(--white);border:1px solid var(--border);border-radius:14px;padding:1.4rem;box-shadow:var(--shadow-md);position:relative;}
+  .layer .lnum{font-family:'DM Mono',monospace;font-size:0.62rem;letter-spacing:0.14em;text-transform:uppercase;color:var(--blue);margin-bottom:0.5rem;}
+  .layer h4{font-weight:700;font-size:1.05rem;color:var(--navy);margin-bottom:0.4rem;}
+  .layer p{font-size:0.88rem;color:var(--text-mid);margin:0;line-height:1.5;}
+  .layer.missing{border:2px dashed var(--red);background:var(--red-pale);}
+  .layer.missing .lnum{color:var(--red);}
+  .layer.missing .tagmiss{display:inline-block;font-family:'DM Mono',monospace;font-size:0.56rem;letter-spacing:0.12em;text-transform:uppercase;background:var(--red);color:#fff;padding:0.18rem 0.5rem;border-radius:4px;margin-top:0.6rem;}
+
+  .channel{background:var(--white);border:1px solid var(--border);border-radius:18px;margin:1.5rem 0;box-shadow:var(--shadow-md);overflow:hidden;}
+  .channel-head{padding:1.4rem 1.7rem;border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:space-between;gap:1rem;background:linear-gradient(135deg,var(--navy),var(--navy-mid));}
+  .channel-head h3{font-weight:800;font-size:1.2rem;color:#fff;letter-spacing:-0.01em;}
+  .channel-head .role{font-family:'DM Mono',monospace;font-size:0.6rem;letter-spacing:0.12em;text-transform:uppercase;color:var(--navy);background:var(--blue-light);padding:0.3rem 0.65rem;border-radius:6px;font-weight:600;white-space:nowrap;}
+  .channel-body{padding:1.4rem 1.7rem;}
+  .cr{margin-bottom:1rem;}
+  .cr:last-child{margin-bottom:0;}
+  .cr .cr-lbl{font-family:'DM Mono',monospace;font-size:0.62rem;letter-spacing:0.14em;text-transform:uppercase;font-weight:500;margin-bottom:0.3rem;color:var(--blue);}
+  .cr p{font-size:0.93rem;margin:0;line-height:1.55;color:var(--text);}
+  .cr.dbl{background:var(--green-pale);border-left:3px solid var(--green);padding:0.8rem 1rem;border-radius:0 8px 8px 0;}
+  .cr.dbl .cr-lbl{color:#15803D;}
+  .struct{list-style:none;margin:0.3rem 0 0;}
+  .struct li{font-size:0.9rem;color:var(--text-mid);padding:0.25rem 0 0.25rem 1.2rem;position:relative;line-height:1.5;}
+  .struct li::before{content:'';position:absolute;left:2px;top:9px;width:5px;height:5px;border-radius:50%;background:var(--blue);}
+
+  .method{display:grid;grid-template-columns:repeat(4,1fr);gap:0.9rem;margin:1.5rem 0;}
+  @media(max-width:760px){.method{grid-template-columns:1fr 1fr;}}
+  @media(max-width:460px){.method{grid-template-columns:1fr;}}
+  .ms{background:var(--white);border:1px solid var(--border);border-radius:12px;padding:1.2rem;box-shadow:var(--shadow-md);}
+  .ms .msn{font-family:'Inter',sans-serif;font-weight:800;font-size:1.3rem;color:var(--blue);margin-bottom:0.3rem;}
+  .ms h4{font-weight:700;font-size:0.98rem;color:var(--navy);margin-bottom:0.3rem;}
+  .ms p{font-size:0.84rem;color:var(--text-mid);margin:0;line-height:1.45;}
+
+  .maptbl{width:100%;border-collapse:collapse;margin:1.25rem 0;font-size:0.9rem;background:var(--white);border:1px solid var(--border);border-radius:12px;overflow:hidden;}
+  .maptbl th{background:var(--navy);color:#fff;text-align:left;padding:0.8rem 1rem;font-size:0.7rem;letter-spacing:0.1em;text-transform:uppercase;font-family:'DM Mono',monospace;font-weight:500;}
+  .maptbl td{padding:0.8rem 1rem;border-top:1px solid var(--light);color:var(--text-mid);vertical-align:top;}
+  .maptbl td strong{color:var(--navy);}
+  .maptbl tr:nth-child(even) td{background:var(--off-white);}
+
+  .own{display:grid;grid-template-columns:1fr 1fr;gap:1.25rem;margin:1.5rem 0;}
+  @media(max-width:680px){.own{grid-template-columns:1fr;}}
+  .ownp{border:1px solid var(--border);border-radius:14px;padding:1.4rem 1.5rem;background:var(--white);box-shadow:var(--shadow-md);}
+  .ownp.lead{border-top:3px solid var(--blue);}
+  .ownp.team{border-top:3px solid var(--green);}
+  .ownp h4{font-weight:700;font-size:1.05rem;color:var(--navy);margin-bottom:0.7rem;}
+  .ownp ul{list-style:none;}
+  .ownp ul li{font-size:0.9rem;color:var(--text-mid);padding:0.35rem 0 0.35rem 1.3rem;position:relative;line-height:1.5;}
+  .ownp ul li::before{content:'';position:absolute;left:2px;top:10px;width:6px;height:6px;border-radius:50%;background:var(--blue);}
+  .ownp.team ul li::before{background:var(--green);}
+
+  .callout{background:var(--blue-pale);border:1px solid rgba(6,106,171,0.18);border-radius:14px;padding:1.5rem 1.7rem;margin:2rem 0;}
+  .callout .lbl{font-family:'DM Mono',monospace;font-size:0.66rem;letter-spacing:0.18em;text-transform:uppercase;color:var(--blue);font-weight:500;margin-bottom:0.5rem;}
+  .callout h3{font-weight:700;font-size:1.2rem;color:var(--navy);margin-bottom:0.6rem;letter-spacing:-0.01em;}
+  .callout p{font-size:0.94rem;margin-bottom:0;}
+
+  .cta-strip{background:linear-gradient(135deg,var(--navy) 0%,var(--navy-mid) 100%);color:#fff;border-radius:18px;padding:2.4rem;margin:3rem 0 1rem;text-align:center;position:relative;overflow:hidden;box-shadow:var(--shadow-md);}
+  .cta-strip::before{content:'';position:absolute;inset:0;background:radial-gradient(circle at 80% 30%,rgba(79,191,228,0.22) 0%,transparent 60%);}
+  .cta-strip > *{position:relative;z-index:1;}
+  .cta-strip h3{font-weight:800;font-size:1.5rem;color:#fff;margin-bottom:0.6rem;letter-spacing:-0.01em;}
+  .cta-strip p{color:rgba(255,255,255,0.80);max-width:560px;margin:0 auto 1.4rem;font-size:0.96rem;}
+  .cta-primary{display:inline-flex;align-items:center;gap:0.5rem;padding:0.95rem 1.9rem;background:var(--blue);color:#fff;font-weight:700;font-size:0.95rem;border-radius:10px;transition:all 0.18s;box-shadow:0 4px 14px rgba(6,106,171,0.3);}
+  .cta-primary:hover{background:var(--blue-hover);transform:translateY(-1px);color:#fff;}
+  .cta-ghost{display:inline-flex;align-items:center;gap:0.5rem;padding:0.95rem 1.9rem;background:transparent;color:#fff;border:1.5px solid rgba(79,191,228,0.45);font-weight:600;font-size:0.95rem;border-radius:10px;margin-left:0.5rem;}
+
+  footer.doc-footer{background:var(--navy);color:rgba(255,255,255,0.6);padding:2.5rem 2rem;border-top:3px solid var(--blue);}
+  .doc-footer-inner{max-width:920px;margin:0 auto;display:grid;grid-template-columns:1fr auto;gap:2rem;align-items:center;}
+  @media(max-width:600px){.doc-footer-inner{grid-template-columns:1fr;}}
+  .doc-footer-logo{font-weight:800;font-size:1.25rem;letter-spacing:0.03em;color:#fff;}
+  .doc-footer-logo span{color:var(--blue-light);}
+  .doc-footer p{font-size:0.82rem;line-height:1.6;margin:0.4rem 0 0;color:rgba(255,255,255,0.55);}
+  .doc-footer-meta{font-family:'DM Mono',monospace;font-size:0.68rem;letter-spacing:0.12em;text-transform:uppercase;color:rgba(255,255,255,0.4);text-align:right;}
+  @media(max-width:600px){.doc-footer-meta{text-align:left;}}
+</style>
+</head>
+<body>
+<!-- ACCESS GATE. Code: amzur2026 -->
+<div id="cdb-gate" role="dialog" aria-modal="true" aria-label="Private document access">
+  <div class="cdb-gate-card">
+    <div class="cdb-gate-eyebrow">Confidential Document</div>
+    <h1>Private Access</h1>
+    <p>This document is confidential and prepared for the Amzur Technologies leadership team. Please enter your access code to continue.</p>
+    <form id="cdb-gate-form" autocomplete="off">
+      <input id="cdb-gate-code" type="password" placeholder="Access code" aria-label="Access code" autocomplete="off" spellcheck="false">
+      <button type="submit">Unlock Document</button>
+      <div id="cdb-gate-err" class="cdb-gate-err" hidden>That code is not right. Please try again.</div>
+    </form>
+    <div class="cdb-gate-foot">Need access? Contact Mark at mark@markcmo.com</div>
+  </div>
+</div>
+<style>
+  body:not(.cdb-unlocked) { overflow: hidden !important; }
+  body:not(.cdb-unlocked) > *:not(#cdb-gate):not(script):not(style) { display: none !important; }
+  body.cdb-unlocked #cdb-gate { display: none !important; }
+  #cdb-gate { position: fixed; inset: 0; z-index: 2147483647; display: flex; align-items: center; justify-content: center; padding: 24px; background: #0B2239; background-image: radial-gradient(circle at 80% 8%, rgba(6,106,171,0.35), transparent 55%); font-family: 'Inter', system-ui, sans-serif; }
+  #cdb-gate .cdb-gate-card { width: 100%; max-width: 430px; background: #FFFFFF; border: 1px solid #E5E7EB; border-radius: 16px; padding: 40px 34px; text-align: center; box-shadow: 0 30px 80px rgba(0,0,0,0.45); }
+  #cdb-gate .cdb-gate-eyebrow { font-family: 'DM Mono', monospace; font-size: 10px; letter-spacing: 4px; text-transform: uppercase; color: #066AAB; }
+  #cdb-gate h1 { font-family: 'Inter', sans-serif; font-weight: 800; letter-spacing: -0.01em; font-size: 28px; color: #0B2239; margin: 16px 0 8px; }
+  #cdb-gate p { font-size: 14px; color: #5b6470; line-height: 1.6; margin: 0 0 22px; }
+  #cdb-gate-form { display: flex; flex-direction: column; gap: 12px; }
+  #cdb-gate-code { width: 100%; padding: 13px 16px; border: 1px solid #cbd5e1; border-radius: 10px; font-size: 16px; font-family: inherit; background: #fff; color: #1F2937; text-align: center; letter-spacing: 2px; }
+  #cdb-gate-code:focus { outline: none; border-color: #066AAB; box-shadow: 0 0 0 3px rgba(6,106,171,0.18); }
+  #cdb-gate-form button { padding: 13px 16px; border: none; border-radius: 10px; background: #066AAB; color: #fff; font-size: 15px; font-weight: 700; font-family: inherit; cursor: pointer; }
+  #cdb-gate-form button:hover { background: #055A92; }
+  #cdb-gate .cdb-gate-err { color: #b3261e; font-size: 13px; }
+  #cdb-gate .cdb-gate-foot { margin-top: 22px; font-size: 12px; color: #8F8F8F; }
+  #cdb-gate .cdb-shake { animation: cdbShake .4s; }
+  @keyframes cdbShake { 0%,100%{transform:translateX(0)} 20%,60%{transform:translateX(-7px)} 40%,80%{transform:translateX(7px)} }
+</style>
+<script>
+(function(){
+  var HASH='24c70c56999f4b29707be3c9dc36d4f49791e2b583133be3bb9ada3f8c331c54';
+  var KEY='amzur_doc_access';
+  function unlock(){ try{ document.body.classList.add('cdb-unlocked'); }catch(e){} var g=document.getElementById('cdb-gate'); if(g) g.parentNode && g.parentNode.removeChild(g); }
+  try { if (sessionStorage.getItem(KEY)==='1') { if(document.body) unlock(); else document.addEventListener('DOMContentLoaded', unlock); return; } } catch(e){}
+  async function sha256(s){ try{ var b=new TextEncoder().encode(s); var h=await crypto.subtle.digest('SHA-256', b); return Array.from(new Uint8Array(h)).map(function(x){return x.toString(16).padStart(2,'0');}).join(''); }catch(e){ return null; } }
+  document.addEventListener('DOMContentLoaded', function(){
+    var form=document.getElementById('cdb-gate-form'); var input=document.getElementById('cdb-gate-code');
+    var err=document.getElementById('cdb-gate-err'); var card=document.querySelector('#cdb-gate .cdb-gate-card');
+    if(input) input.focus(); if(!form) return;
+    form.addEventListener('submit', async function(e){
+      e.preventDefault();
+      var hashed=await sha256((input.value||'').toLowerCase().trim());
+      if(hashed===HASH){ try{ sessionStorage.setItem(KEY,'1'); }catch(e){} unlock(); }
+      else { if(err) err.hidden=false; if(card){ card.classList.remove('cdb-shake'); void card.offsetWidth; card.classList.add('cdb-shake'); } input.value=''; input.focus(); }
+    });
+  });
+})();
+</script>
+<!-- /ACCESS GATE -->
+
+<nav class="doc-nav">
+  <div class="doc-nav-logo">MARK<span>CMO</span></div>
+  <div class="doc-nav-back">Doc AMZ-GTM-001 &middot; <a href="./">Back to package</a></div>
+</nav>
+
+<header class="cover-hero">
+  <div class="cover-hero-inner">
+    <img class="cover-logo" src="https://amzur.com/wp-content/uploads/2024/08/Amzur_white_logo.png" alt="Amzur Technologies" />
+    <div class="doc-id-tag">AMZ-GTM-001 &middot; Go-to-Market &amp; Channel Strategy</div>
+    <h1>You have channels. <em>What you do not have is a strategy or an owner.</em></h1>
+    <p class="cover-hero-sub">The audit explained why the site underperforms. This explains the bigger problem behind it: marketing is being executed tactically with no one above it owning the push to market, reverse-engineering from revenue, and deciding what to double down on. Here is the channel strategy, the structure, and the operating model that fixes it.</p>
+  </div>
+</header>
+
+<main class="doc-body">
+
+  <section style="margin-bottom:1.5rem;">
+    <div class="section-eyebrow">The Root Cause</div>
+    <h2>Six Symptoms, <span>One Disease</span></h2>
+    <p>The audit found six things wrong with the digital footprint. They are real, but they are symptoms. The disease underneath is simpler and more expensive: <strong>no one owns the go-to-market.</strong> You have a capable team in India producing content, running Google Ads and LinkedIn, sending some cold email. That is execution. What is missing is the layer above it, the strategist who sets the plan, reverse-engineers the numbers from your revenue goals, decides which channels and services to bet on, kills what is not working, and is personally accountable for pipeline.</p>
+
+    <div class="thesis">
+      <div class="lbl">The Core Finding</div>
+      <h3>A tactical team without a strategic owner produces motion, not pipeline.</h3>
+      <p>Your team is doing the things. Posting, running ads, sending email. But activity is not strategy. Nobody is asking the hard questions: which campaigns actually produced a closed deal last quarter, which service line has the best return on ad spend, why are we marketing staffing when the margin is in software and the team-engagement model, and where should the next dollar go. When no one owns those answers, every channel runs at half power and the budget leaks.</p>
+      <p><strong>That is the role you are actually hiring for.</strong> Not another set of hands. The owner of the push to market.</p>
+    </div>
+
+    <p>Here is the layer that is missing, drawn out:</p>
+    <div class="layers">
+      <div class="layer">
+        <div class="lnum">Layer 1 &middot; Present</div>
+        <h4>Execution</h4>
+        <p>The India team. Content, social, ad operations, email sends. Capable hands doing the work.</p>
+      </div>
+      <div class="layer missing">
+        <div class="lnum">Layer 2 &middot; Missing</div>
+        <h4>Strategy &amp; Ownership</h4>
+        <p>The plan, the channel bets, the budget decisions, the accountability for pipeline. The reverse-engineering from revenue back to daily activity.</p>
+        <span class="tagmiss">This is the gap</span>
+      </div>
+      <div class="layer">
+        <div class="lnum">Layer 3 &middot; Present</div>
+        <h4>Leadership Goals</h4>
+        <p>You want qualified leads and revenue growth, especially in the high-margin services. Clear destination, no map to it.</p>
+      </div>
+    </div>
+    <p style="font-size:0.94rem;color:var(--text-mid);">Layers 1 and 3 exist. Layer 2 is empty, so the goals at the top never translate into the right work at the bottom. That is why effort has not turned into revenue.</p>
+  </section>
+
+  <section style="margin-bottom:1.5rem;">
+    <div class="section-eyebrow">The Method</div>
+    <h2>Find What Works. <span>Double Down. Cut The Rest.</span></h2>
+    <p>Strategy is not a guess. It is a loop. Before adding a single new dollar of spend, the first job is to instrument everything and find out what is actually producing pipeline today, because something is, and right now no one can tell you what. Then the budget moves toward the winners and away from the waste. This is the discipline the engagement runs on.</p>
+    <div class="method">
+      <div class="ms"><div class="msn">1</div><h4>Instrument</h4><p>Proper tracking and attribution across every channel, tied to real pipeline, not clicks. Most of this is dark today.</p></div>
+      <div class="ms"><div class="msn">2</div><h4>Find the winners</h4><p>Which channels, campaigns, keywords, and segments produced actual opportunities and closed deals. The signal is in your accounts, unread.</p></div>
+      <div class="ms"><div class="msn">3</div><h4>Double down</h4><p>Reallocate budget and effort to the proven winners. Scale what converts, by service line and by margin, not by volume.</p></div>
+      <div class="ms"><div class="msn">4</div><h4>Cut the waste</h4><p>Kill the campaigns and keywords burning spend with nothing to show. The savings fund the winners.</p></div>
+    </div>
+    <p style="font-size:0.94rem;color:var(--text-mid);">This is the honest part: I cannot tell you today which Amzur campaigns are winners, because the data lives in your ad and analytics accounts and I have not seen it yet. Getting that access is step one of the engagement, and the reason the information request matters. The framework below is how each channel gets run once we know.</p>
+  </section>
+
+  <section>
+    <div class="section-eyebrow">Channel By Channel</div>
+    <h2>The Strategy &amp; Structure <span>For Each Channel</span></h2>
+    <p>Each channel has a job. Run together with a strategy on top, they compound. Run in isolation as tasks, they leak. Here is the role, the structure, and how we find and scale the winners for each.</p>
+
+    <!-- GOOGLE ADS -->
+    <div class="channel">
+      <div class="channel-head">
+        <h3>Google Ads / Paid Search</h3>
+        <div class="role">Capture high intent</div>
+      </div>
+      <div class="channel-body">
+        <div class="cr">
+          <div class="cr-lbl">Strategic role</div>
+          <p>Catch buyers at the moment they are searching with intent, NetSuite implementation, custom software development, managed services, IT staffing. This is your highest-intent, fastest-converting channel and it should be pointed at your highest-margin services, not the cheapest clicks.</p>
+        </div>
+        <div class="cr">
+          <div class="cr-lbl">How it should be structured</div>
+          <ul class="struct">
+            <li>Campaigns split by service line and by intent stage, so budget and messaging match the buyer, not one catch-all campaign</li>
+            <li>Tight, themed ad groups with match-type discipline and an actively managed negative-keyword list to stop wasted spend</li>
+            <li>Conversion tracking tied to real lead and pipeline events, not form-fills alone, with offline conversion import from the CRM so Google optimizes toward deals</li>
+            <li>Smart Bidding fed by clean conversion data, and Performance Max boxed in with brand exclusions and asset control rather than left on autopilot</li>
+            <li>Dedicated landing pages per service that match the ad and load fast, the audit's Core Web Vitals fix directly raises Quality Score and lowers cost per click here</li>
+          </ul>
+        </div>
+        <div class="cr dbl">
+          <div class="cr-lbl">Find and double down</div>
+          <p>Pull the search-term and conversion report, find the keywords and campaigns that produced actual opportunities, shift budget to them, and cut the terms spending with no pipeline. High-intent service terms get scaled. Broad, cheap, low-intent traffic gets cut.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- LINKEDIN + ABM -->
+    <div class="channel">
+      <div class="channel-head">
+        <h3>LinkedIn Ads &amp; ABM</h3>
+        <div class="role">Create demand + land target accounts</div>
+      </div>
+      <div class="channel-body">
+        <div class="cr">
+          <div class="cr-lbl">Strategic role</div>
+          <p>Google captures people already searching. LinkedIn creates demand and lands the named accounts that fit your best-fit profile, and it is the right home for marketing the high-margin team-engagement model that does not have obvious search demand. This is where you build the pipeline that Google cannot find.</p>
+        </div>
+        <div class="cr">
+          <div class="cr-lbl">How it should be structured</div>
+          <ul class="struct">
+            <li>A defined ideal-customer profile and a named target-account list, the foundation ABM is built on, segmented by industry and by the services with the best margin</li>
+            <li>A layered program: thought-leadership and value content to warm the account, then conversion ads and lead-gen forms to the engaged, then retargeting of site and content visitors</li>
+            <li>Decision-maker and committee targeting by title and function, run as account-based plays rather than broad audience spray</li>
+            <li>Tight integration with outbound, the same target accounts get LinkedIn air cover and cold email and outreach on the ground, so touches reinforce instead of running blind to each other</li>
+          </ul>
+        </div>
+        <div class="cr dbl">
+          <div class="cr-lbl">Find and double down</div>
+          <p>Identify which industries, account tiers, and creative actually generate meetings and opportunities, then concentrate budget on those segments and retire the audiences that only generate cheap leads that never close. Quality of account over volume of leads.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- COLD EMAIL / OUTBOUND -->
+    <div class="channel">
+      <div class="channel-head">
+        <h3>Cold Email &amp; Outbound</h3>
+        <div class="role">Proactive pipeline</div>
+      </div>
+      <div class="channel-body">
+        <div class="cr">
+          <div class="cr-lbl">Strategic role</div>
+          <p>Your current 500 to 1000 sends a month is a toe in the water, not a system. Done right, outbound is the most controllable pipeline source you have, you decide exactly which accounts to pursue rather than waiting to be found. It is also the natural channel to sell the team-engagement model directly to the people who would buy it.</p>
+        </div>
+        <div class="cr">
+          <div class="cr-lbl">How it should be structured</div>
+          <ul class="struct">
+            <li>Separate sending domains and a real deliverability setup (authentication, warmup, list validation) so messages land in the inbox and the brand domain stays protected</li>
+            <li>ABM-aligned lists built from the same target-account profile as LinkedIn, so the two channels hit the same accounts on purpose</li>
+            <li>Multi-touch sequences across email, LinkedIn, and phone with messaging tied to the prospect's real problem, not a generic services blast</li>
+            <li>Tracking and triggers so an engaged prospect is routed to a person fast, and volume scaled deliberately as deliverability proves out</li>
+          </ul>
+        </div>
+        <div class="cr dbl">
+          <div class="cr-lbl">Find and double down</div>
+          <p>Measure reply, meeting, and opportunity rates by segment and message, double down on the lists and angles that book meetings, and scale send volume only as the inbox-placement and reply data earn it. Scale what books calls, drop what gets ignored.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- ORGANIC + RETARGETING (connective tissue) -->
+    <div class="channel">
+      <div class="channel-head">
+        <h3>Organic, AI Search &amp; Retargeting</h3>
+        <div class="role">Lower cost + recover demand</div>
+      </div>
+      <div class="channel-body">
+        <div class="cr">
+          <div class="cr-lbl">Strategic role</div>
+          <p>The connective tissue. Organic and AI-search visibility (the audit's SEO and GEO work) lowers your blended cost per lead over time and feeds the top of every other channel. Retargeting recovers the buyers who visited but did not convert, which in a long B2B sales cycle is most of them.</p>
+        </div>
+        <div class="cr">
+          <div class="cr-lbl">How it should be structured</div>
+          <ul class="struct">
+            <li>Topic clusters around the winnable, high-intent terms identified in the audit, built on the standardized service-page pattern</li>
+            <li>The GEO push so Amzur gets cited in AI answers where buyers increasingly research, the gap the audit proved</li>
+            <li>Retargeting across LinkedIn and display for site and content visitors, sequenced to the buying stage, so the slow-cycle prospect is not lost</li>
+            <li>Every channel feeding the others: ads drive traffic, content earns trust, retargeting recovers, organic compounds and lowers the whole cost base</li>
+          </ul>
+        </div>
+        <div class="cr dbl">
+          <div class="cr-lbl">Find and double down</div>
+          <p>Track which content and terms assist pipeline, invest in the clusters that pull qualified traffic, and weight retargeting toward the pages and segments that actually re-engage and convert.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="section-eyebrow">Tie It To Revenue</div>
+    <h2>Stop Marketing The <span>Wrong Service</span></h2>
+    <p>The strategic mistake hiding in the channel mix: marketing effort is not aligned to margin. Staffing is 75 percent of revenue and the lowest margin. The software, managed services, ERP, and especially the team-engagement model are where the profit is, and they are the hardest to market, so they get the least attention. A strategy fixes that deliberately. Here is how each channel should be weighted to the services that actually grow profit.</p>
+    <table class="maptbl">
+      <thead><tr><th>Service line</th><th>Margin</th><th>Best-fit channels</th><th>Strategic priority</th></tr></thead>
+      <tbody>
+        <tr><td><strong>Team-engagement model</strong></td><td>Highest</td><td>ABM (LinkedIn + outbound), direct sales enablement</td><td>Top priority, the profit center no one markets</td></tr>
+        <tr><td><strong>Software &amp; app dev</strong></td><td>High</td><td>Google Ads (high-intent), organic, AI search</td><td>Scale, clear search demand exists</td></tr>
+        <tr><td><strong>Managed services &amp; ERP</strong></td><td>High</td><td>Google Ads, organic, NetSuite directories, GEO</td><td>Scale, win on niche and credibility</td></tr>
+        <tr><td><strong>US IT staffing</strong></td><td>Lowest</td><td>Efficient capture only, do not over-invest</td><td>Maintain, do not let it absorb the budget</td></tr>
+      </tbody>
+    </table>
+    <p style="font-size:0.94rem;color:var(--text-mid);">This is the kind of decision that only gets made when someone owns the strategy. Left to tactical execution, budget flows to whatever is easiest to market, which is rarely what is most profitable to sell.</p>
+  </section>
+
+  <section>
+    <div class="section-eyebrow">The Operating Model</div>
+    <h2>Someone Owns It. <span>The Team Executes It.</span></h2>
+    <p>The fix for "no one owns the push to market" is not to replace your team. It is to put a strategic owner above them. I set the plan, make the channel and budget calls, run the find-and-double-down loop, and carry the number. Your India team becomes the execution engine for a real strategy instead of a tactical unit guessing at priorities. Clear lines, one owner.</p>
+    <div class="own">
+      <div class="ownp lead">
+        <h4>Mark owns (the missing layer)</h4>
+        <ul>
+          <li>The go-to-market strategy and channel plan</li>
+          <li>Budget allocation across channels and service lines</li>
+          <li>The reverse-engineering from revenue to activity</li>
+          <li>The find-what-works and double-down decisions</li>
+          <li>Attribution, reporting, and accountability for pipeline</li>
+          <li>ICP and target-account definition for ABM</li>
+          <li>Channel structure and the priority service mix</li>
+        </ul>
+      </div>
+      <div class="ownp team">
+        <h4>The India team executes</h4>
+        <ul>
+          <li>Content and creative production against the brief</li>
+          <li>Ad operations and campaign build to the structure</li>
+          <li>Email sends and sequence operation</li>
+          <li>Reporting inputs and data hygiene</li>
+          <li>Design and landing-page production</li>
+          <li>Day-to-day channel management to plan</li>
+        </ul>
+      </div>
+    </div>
+    <div class="callout">
+      <div class="lbl">The Difference</div>
+      <h3>Tactical output becomes strategic output</h3>
+      <p>Same team, completely different result. Today they produce activity with no one deciding whether it is the right activity. With a strategic owner setting direction and holding the number, that same capacity gets pointed at the channels, services, and accounts that actually move revenue. You are not buying more hands. You are buying the brain that tells the hands what matters.</p>
+    </div>
+  </section>
+
+  <div class="cta-strip">
+    <h3>The scope turns this strategy into work</h3>
+    <p>Phase One fixes the floor and instruments the channels so we can see what is working. Phase Two runs this channel strategy and the double-down loop.</p>
+    <a href="scope-of-work" class="cta-primary">Read the Scope of Work</a>
+    <a href="audit" class="cta-ghost">Back to the Audit</a>
+  </div>
+
+</main>
+
+<footer class="doc-footer">
+  <div class="doc-footer-inner">
+    <div>
+      <div class="doc-footer-logo">MARK<span>CMO</span></div>
+      <p>Prepared by Mark Gabrielli &middot; markcmo.com &middot; mark@markcmo.com</p>
+      <p style="margin-top:0.2rem;">Go-to-Market &amp; Channel Strategy for Amzur Technologies.</p>
+    </div>
+    <div class="doc-footer-meta">
+      Doc AMZ-GTM-001 &middot; v1.0<br/>
+      Confidential &middot; Do Not Distribute
+    </div>
+  </div>
+</footer>
+
+<script>(function(){try{var k='mc_jsid';var s=sessionStorage.getItem(k)||('s_'+Math.random().toString(36).slice(2)+Date.now().toString(36));sessionStorage.setItem(k,s);fetch('/.netlify/functions/track',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({t:'view',client:'amzur',page:'strategy',session_id:s,url:location.pathname,title:document.title}),keepalive:true}).catch(function(){});}catch(e){}})();</script>
+</body>
+</html>
