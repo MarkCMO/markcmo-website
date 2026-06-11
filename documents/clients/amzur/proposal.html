@@ -56,7 +56,7 @@
   .opt .price small{display:block;font-family:'DM Mono',monospace;font-size:0.62rem;font-weight:500;color:var(--text-light);letter-spacing:0.12em;text-transform:uppercase;margin-top:0.5rem;}
   .opt ul{list-style:none;margin:1.2rem 0;flex:1;}
   .opt ul li{font-size:0.9rem;color:var(--text-mid);padding:0.4rem 0 0.4rem 1.4rem;position:relative;line-height:1.5;}
-  .opt ul li::before{content:'\2713';position:absolute;left:0;color:var(--green);font-weight:800;}
+  .opt ul li::before{content:'';position:absolute;left:2px;top:9px;width:5px;height:9px;border:solid var(--green);border-width:0 2px 2px 0;transform:rotate(45deg);}
   .opt .opt-foot{font-family:'DM Mono',monospace;font-size:0.62rem;letter-spacing:0.1em;text-transform:uppercase;color:var(--text-light);border-top:1px solid var(--light);padding-top:0.9rem;}
 
   .terms{background:var(--white);border:1px solid var(--border);border-radius:16px;padding:1.6rem 1.8rem;margin:1.75rem 0;box-shadow:var(--shadow-md);}
@@ -97,7 +97,6 @@
 <div id="cdb-gate" role="dialog" aria-modal="true" aria-label="Private document access">
   <div class="cdb-gate-card">
     <div class="cdb-gate-eyebrow">Confidential Document</div>
-    <div class="cdb-gate-lock" aria-hidden="true">&#128274;</div>
     <h1>Private Access</h1>
     <p>This document is confidential and prepared for the Amzur Technologies leadership team. Please enter your access code to continue.</p>
     <form id="cdb-gate-form" autocomplete="off">

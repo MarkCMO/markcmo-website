@@ -52,7 +52,8 @@
   .phase-body{padding:1.6rem 1.8rem;}
   .wi{display:flex;gap:0.9rem;padding:0.9rem 0;border-bottom:1px solid var(--light);}
   .wi:last-child{border-bottom:none;}
-  .wi .wi-ck{flex-shrink:0;width:24px;height:24px;border-radius:7px;background:var(--blue-pale);color:var(--blue);display:flex;align-items:center;justify-content:center;font-size:0.8rem;font-weight:800;margin-top:0.1rem;}
+  .wi .wi-ck{flex-shrink:0;width:24px;height:24px;border-radius:7px;background:var(--blue-pale);display:flex;align-items:center;justify-content:center;margin-top:0.1rem;position:relative;}
+  .wi .wi-ck::after{content:'';width:5px;height:10px;border:solid var(--blue);border-width:0 2px 2px 0;transform:rotate(45deg);margin-top:-2px;}
   .wi .wi-txt h4{font-size:1rem;font-weight:700;color:var(--navy);margin-bottom:0.2rem;}
   .wi .wi-txt p{font-size:0.9rem;color:var(--text-mid);margin:0;line-height:1.55;}
   .wi .wi-txt .maps{font-family:'DM Mono',monospace;font-size:0.62rem;letter-spacing:0.1em;text-transform:uppercase;color:var(--blue);margin-top:0.3rem;display:inline-block;}
@@ -97,7 +98,6 @@
 <div id="cdb-gate" role="dialog" aria-modal="true" aria-label="Private document access">
   <div class="cdb-gate-card">
     <div class="cdb-gate-eyebrow">Confidential Document</div>
-    <div class="cdb-gate-lock" aria-hidden="true">&#128274;</div>
     <h1>Private Access</h1>
     <p>This document is confidential and prepared for the Amzur Technologies leadership team. Please enter your access code to continue.</p>
     <form id="cdb-gate-form" autocomplete="off">
@@ -182,7 +182,7 @@
     </div>
     <div class="phase-body">
       <div class="wi">
-        <div class="wi-ck">&#10003;</div>
+        <div class="wi-ck"></div>
         <div class="wi-txt">
           <h4>CDN and Core Web Vitals remediation</h4>
           <p>Cloudflare in front of the site, edge caching and Brotli on, render path cleaned up, CSS and JavaScript consolidated and deferred, unused Elementor add-ons removed.</p>
@@ -190,7 +190,7 @@
         </div>
       </div>
       <div class="wi">
-        <div class="wi-ck">&#10003;</div>
+        <div class="wi-ck"></div>
         <div class="wi-txt">
           <h4>Homepage and on-page signal fix</h4>
           <p>Single keyword-driven H1, corrected heading hierarchy, title and meta alignment on the priority pages, slogan demoted to styled design.</p>
@@ -198,7 +198,7 @@
         </div>
       </div>
       <div class="wi">
-        <div class="wi-ck">&#10003;</div>
+        <div class="wi-ck"></div>
         <div class="wi-txt">
           <h4>Service-page standardization</h4>
           <p>Roll the winning NetSuite-page pattern (depth, schema, FAQ, clean structure) across the other money pages, then wire internal links from the blog into them.</p>
@@ -206,7 +206,7 @@
         </div>
       </div>
       <div class="wi">
-        <div class="wi-ck">&#10003;</div>
+        <div class="wi-ck"></div>
         <div class="wi-txt">
           <h4>URL architecture consolidation</h4>
           <p>Resolve the /industry/ versus /industries/ split, 301 the orphans, consolidate the cluster, fix internal links, and audit for other refocus URLs leaking equity.</p>
@@ -214,7 +214,7 @@
         </div>
       </div>
       <div class="wi">
-        <div class="wi-ck">&#10003;</div>
+        <div class="wi-ck"></div>
         <div class="wi-txt">
           <h4>Technical hygiene and schema rollout</h4>
           <p>Fix the robots.txt sitemap directive, validate indexation, and roll out Service, Breadcrumb, and Organization schema sitewide.</p>
@@ -222,7 +222,7 @@
         </div>
       </div>
       <div class="wi">
-        <div class="wi-ck">&#10003;</div>
+        <div class="wi-ck"></div>
         <div class="wi-txt">
           <h4>Baseline and keyword strategy</h4>
           <p>Full backlink and Search Console pull to set the baseline, map the 15 to 30 winnable high-intent terms, and identify the page-2 queries closest to breaking onto page 1.</p>
@@ -241,7 +241,7 @@
     </div>
     <div class="phase-body">
       <div class="wi">
-        <div class="wi-ck">&#10003;</div>
+        <div class="wi-ck"></div>
         <div class="wi-txt">
           <h4>Generative Engine Optimization (AI search)</h4>
           <p>Place and optimize Amzur on the exact sources AI engines cite (G2, Clutch, Goodfirms, ERP Research, SoftwareConnect, the official Oracle NetSuite partner directory), pursue top-partner listicle inclusion, and restructure key pages for clean machine extraction.</p>
@@ -249,7 +249,7 @@
         </div>
       </div>
       <div class="wi">
-        <div class="wi-ck">&#10003;</div>
+        <div class="wi-ck"></div>
         <div class="wi-txt">
           <h4>Authority and backlink building</h4>
           <p>Targeted earned links and citations against the competitor authority gap, focused on the terms and clusters where Amzur can realistically win.</p>
@@ -257,7 +257,7 @@
         </div>
       </div>
       <div class="wi">
-        <div class="wi-ck">&#10003;</div>
+        <div class="wi-ck"></div>
         <div class="wi-txt">
           <h4>Topical content clusters</h4>
           <p>Hub-and-spoke content around the winnable terms, built on the standardized page pattern, directing your India team's output against a strategic brief instead of scattered tactics.</p>
@@ -265,7 +265,7 @@
         </div>
       </div>
       <div class="wi">
-        <div class="wi-ck">&#10003;</div>
+        <div class="wi-ck"></div>
         <div class="wi-txt">
           <h4>Marketing the hard-to-position services</h4>
           <p>A positioning and demand approach for the high-margin team-engagement model that you said is the most profitable and the hardest to market, so the work also feeds the revenue you most want to grow.</p>
