@@ -1,0 +1,25 @@
+# WETYR Arena realtime market feed (Cloudflare Worker + Durable Object)
+# One MarketSession per symbol/competition: ingests a feed and fans identical
+# ticks out to every connected trader over WebSocket. Server is the single
+# source of truth for price, so fills (pf-trade) are computed server-side.
+#
+# Deploy:  wrangler deploy   (from this dir)
+# Live data: wrangler secret put DATABENTO_KEY   (until then, runs on replay)
+#            wrangler secret put INGEST_SECRET    (auth for a live data relay)
+
+name = "wetyr-arena-realtime"
+main = "market-session.js"
+compatibility_date = "2026-05-01"
+compatibility_flags = ["nodejs_compat"]
+
+[[durable_objects.bindings]]
+name = "MARKET_SESSION"
+class_name = "MarketSession"
+
+[[migrations]]
+tag = "v1"
+new_classes = ["MarketSession"]
+
+[vars]
+# Symbols a session may serve; price scale is informational for clients.
+SYMBOLS = "MNQ,MES,MNQ,NQ,ES,MCL,CL,MGC,GC"

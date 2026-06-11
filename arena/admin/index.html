@@ -1,0 +1,296 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>WETYR Arena: admin</title>
+<meta name="robots" content="noindex,nofollow">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Newsreader:opsz,wght@6..72,500;6..72,600&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ink-900:#0a0f2c;--ink-800:#0F1828;--ink-700:#15203a;--ink-600:#1E2A47;--ink-line:rgba(255,255,255,0.08);
+    --gold:#C9A84C;--gold-bright:#E8C76A;--gold-dim:#8B7332;--ok:#2EBA73;--ok-bg:rgba(46,186,115,0.12);
+    --red:#e74c3c;--red-bg:rgba(231,76,60,0.12);--amber:#F2C744;--amber-bg:rgba(242,199,68,0.12);--info:#3A7BD5;--info-bg:rgba(58,123,213,0.12);
+    --t1:#fff;--t2:rgba(255,255,255,0.72);--t3:rgba(255,255,255,0.45);--t4:rgba(255,255,255,0.28);
+    --disp:'Newsreader',Georgia,serif;--sans:-apple-system,BlinkMacSystemFont,'SF Pro Text','Inter','Segoe UI',Roboto,Helvetica,Arial,sans-serif;
+    --mono:'JetBrains Mono','SF Mono',ui-monospace,Menlo,Consolas,monospace;
+  }
+  *{box-sizing:border-box;}
+  body{margin:0;background:var(--ink-900);color:var(--t1);font-family:var(--sans);-webkit-font-smoothing:antialiased;}
+  a{color:inherit;text-decoration:none;} .mono{font-family:var(--mono);}
+  .wrap{max-width:1180px;margin:0 auto;padding:0 24px;}
+
+  /* login */
+  #login{position:fixed;inset:0;background:var(--ink-900);display:flex;align-items:center;justify-content:center;z-index:100;}
+  #login .box{width:360px;background:var(--ink-800);border-radius:16px;padding:32px;box-shadow:0 16px 48px rgba(0,0,0,0.4);}
+  #login .brand{font-family:var(--disp);font-size:22px;font-weight:600;}
+  #login .brand .sub{font-family:var(--sans);font-size:10px;letter-spacing:0.18em;text-transform:uppercase;color:var(--gold);font-weight:600;margin-left:8px;}
+  #login p{font-size:13px;color:var(--t3);margin:6px 0 22px;}
+  #login input{width:100%;background:var(--ink-900);border:1px solid var(--ink-600);border-radius:9px;color:var(--t1);font-size:15px;padding:12px 14px;margin-bottom:12px;font-family:var(--sans);}
+  #login input:focus{outline:0;border-color:var(--gold);}
+  #login button{width:100%;background:var(--gold);color:var(--ink-900);border:0;border-radius:9px;padding:13px 0;font-weight:700;font-size:14px;cursor:pointer;}
+  #login button:hover{background:var(--gold-bright);}
+  #login .msg{font-size:12px;margin-top:12px;color:#9DC3F2;display:none;}
+
+  /* chrome */
+  header{border-bottom:1px solid var(--ink-line);background:rgba(10,15,44,0.92);position:sticky;top:0;z-index:20;}
+  header .wrap{display:flex;align-items:center;justify-content:space-between;height:58px;}
+  .brand{font-family:var(--disp);font-size:18px;font-weight:600;}
+  .brand .sub{font-family:var(--sans);font-size:10px;letter-spacing:0.18em;text-transform:uppercase;color:var(--gold);font-weight:600;margin-left:8px;}
+  .badge{font-size:10px;letter-spacing:0.14em;text-transform:uppercase;font-weight:600;padding:5px 11px;border-radius:9999px;background:var(--amber-bg);color:#EBD79A;}
+  .tabs{display:flex;gap:4px;border-bottom:1px solid var(--ink-line);overflow-x:auto;}
+  .tab{padding:14px 16px;font-size:13px;color:var(--t3);cursor:pointer;white-space:nowrap;border-bottom:2px solid transparent;}
+  .tab:hover{color:var(--t1);} .tab.active{color:var(--gold);border-bottom-color:var(--gold);}
+  main{padding:28px 0 80px;}
+  h2{font-family:var(--disp);font-weight:500;font-size:24px;letter-spacing:-0.01em;margin:0 0 4px;}
+  .cap{font-size:13px;color:var(--t3);margin-bottom:20px;}
+  .pane{display:none;} .pane.active{display:block;}
+
+  .kpis{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;}
+  .kpi{padding:16px 0;border-top:2px solid var(--ink-line);}
+  .kpi .l{font-size:11px;letter-spacing:0.12em;text-transform:uppercase;color:var(--t3);}
+  .kpi .v{font-family:var(--mono);font-size:30px;margin-top:8px;line-height:1;}
+  .kpi .v.gold{color:var(--gold);} .kpi .d{font-size:12px;color:var(--t3);margin-top:6px;}
+
+  table{width:100%;border-collapse:collapse;margin-top:8px;}
+  th,td{text-align:left;padding:11px 12px;border-bottom:1px solid var(--ink-line);font-size:13px;}
+  th{font-size:10px;letter-spacing:0.12em;text-transform:uppercase;color:var(--t3);font-weight:600;}
+  td.r,th.r{text-align:right;font-family:var(--mono);}
+  tr:hover td{background:rgba(255,255,255,0.02);}
+  .tag{font-size:10px;letter-spacing:0.1em;text-transform:uppercase;padding:3px 9px;border-radius:9999px;}
+  .tag-ok{background:var(--ok-bg);color:#5ED99A;} .tag-warn{background:var(--amber-bg);color:#EBD79A;} .tag-bad{background:var(--red-bg);color:#F08A7F;} .tag-info{background:var(--info-bg);color:#9DC3F2;} .tag-gold{background:rgba(201,168,76,0.14);color:var(--gold);}
+  .mini{padding:6px 12px;border-radius:7px;border:1px solid var(--ink-600);background:var(--ink-800);color:var(--t2);font-size:12px;font-weight:600;cursor:pointer;}
+  .mini:hover{border-color:var(--gold);color:var(--gold-bright);}
+  .mini.gold{background:var(--gold);color:var(--ink-900);border-color:var(--gold);} .mini.gold:hover{background:var(--gold-bright);}
+
+  .sectionhead{display:flex;justify-content:space-between;align-items:center;}
+  .card{background:var(--ink-800);border-radius:14px;padding:18px;margin-top:14px;}
+  .editrow{display:grid;grid-template-columns:repeat(6,1fr);gap:10px;align-items:end;}
+  .editrow .f label{display:block;font-size:10px;letter-spacing:0.1em;text-transform:uppercase;color:var(--t3);margin-bottom:5px;}
+  .editrow .f input{width:100%;background:var(--ink-900);border:1px solid var(--ink-600);border-radius:8px;color:var(--t1);padding:9px 10px;font-family:var(--mono);font-size:13px;}
+  .toast{position:fixed;bottom:24px;left:50%;transform:translateX(-50%);background:var(--ink-700);border:1px solid var(--gold-dim);color:var(--gold-bright);padding:12px 20px;border-radius:10px;font-size:13px;display:none;z-index:50;}
+  @media(max-width:820px){ .kpis{grid-template-columns:1fr 1fr;} .editrow{grid-template-columns:1fr 1fr;} }
+</style>
+</head>
+<body>
+
+<div id="login">
+  <div class="box">
+    <div class="brand">WETYR <span class="sub">Arena Admin</span></div>
+    <p>Operator access only.</p>
+    <input id="luser" type="email" placeholder="email" autocomplete="username" value="mark@markcmo.com">
+    <input id="lpass" type="password" placeholder="password" autocomplete="current-password">
+    <button id="lbtn">Sign in</button>
+    <div class="msg" id="lmsg"></div>
+  </div>
+</div>
+
+<div id="app" style="display:none;">
+  <header><div class="wrap">
+    <div class="brand">WETYR <span class="sub">Arena Admin</span></div>
+    <div style="display:flex;gap:12px;align-items:center;">
+      <span class="badge" id="modeBadge">test mode</span>
+      <a href="/arena/" style="font-size:13px;color:var(--t3);">View site</a>
+    </div>
+  </div></header>
+  <div class="wrap">
+    <div class="tabs" id="tabs">
+      <div class="tab active" data-p="overview">Overview</div>
+      <div class="tab" data-p="divisions">Divisions</div>
+      <div class="tab" data-p="seasons">Seasons</div>
+      <div class="tab" data-p="risk">Risk monitor</div>
+      <div class="tab" data-p="prizes">Prizes</div>
+      <div class="tab" data-p="partners">Partners</div>
+      <div class="tab" data-p="audit">Audit log</div>
+    </div>
+    <main>
+      <!-- OVERVIEW -->
+      <div class="pane active" data-pane="overview">
+        <h2>Overview</h2>
+        <div class="cap">This week across all divisions.</div>
+        <div class="kpis">
+          <div class="kpi"><div class="l">Active traders</div><div class="v gold">927</div><div class="d">+84 this week</div></div>
+          <div class="kpi"><div class="l">Paying subscriptions</div><div class="v">641</div><div class="d">$6,410 weekly</div></div>
+          <div class="kpi"><div class="l">Free (AMOE) entries</div><div class="v">286</div><div class="d">31% of field</div></div>
+          <div class="kpi"><div class="l">Prizes to award Fri</div><div class="v gold">9</div><div class="d">3 per division</div></div>
+        </div>
+        <div class="kpis" style="margin-top:18px;">
+          <div class="kpi"><div class="l">Accounts active</div><div class="v">812</div><div class="d">passed: 47</div></div>
+          <div class="kpi"><div class="l">Breached today</div><div class="v">63</div><div class="d">drawdown 41 . daily 22</div></div>
+          <div class="kpi"><div class="l">Prize COGS (est.)</div><div class="v">$540</div><div class="d">9 evals at codes</div></div>
+          <div class="kpi"><div class="l">Weekly margin (est.)</div><div class="v gold">$5,870</div><div class="d">subs minus COGS</div></div>
+        </div>
+      </div>
+
+      <!-- DIVISIONS -->
+      <div class="pane" data-pane="divisions">
+        <h2>Divisions</h2>
+        <div class="cap">Edit the rules and price for each division. Saving updates pf_plans.</div>
+        <div id="divCards"></div>
+      </div>
+
+      <!-- SEASONS -->
+      <div class="pane" data-pane="seasons">
+        <div class="sectionhead"><div><h2>Seasons</h2><div class="cap">Weekly competitions per division.</div></div>
+          <button class="mini gold" data-act="Created next week's seasons (Starter, Pro, Elite)">Create next week</button></div>
+        <table id="seasonsTbl"></table>
+      </div>
+
+      <!-- RISK -->
+      <div class="pane" data-pane="risk">
+        <h2>Risk monitor</h2>
+        <div class="cap">Active accounts nearest a breach. Live equity vs floor and daily loss buffer.</div>
+        <table id="riskTbl"></table>
+      </div>
+
+      <!-- PRIZES -->
+      <div class="pane" data-pane="prizes">
+        <h2>Prizes</h2>
+        <div class="cap">Winners pending fulfillment. Issue the prop account after KYC clears.</div>
+        <table id="prizeTbl"></table>
+      </div>
+
+      <!-- PARTNERS -->
+      <div class="pane" data-pane="partners">
+        <h2>Partners</h2>
+        <div class="cap">Prop firms used to source prize accounts (top 5 from the audit).</div>
+        <table id="partnerTbl"></table>
+      </div>
+
+      <!-- AUDIT -->
+      <div class="pane" data-pane="audit">
+        <h2>Audit log</h2>
+        <div class="cap">Recent system + operator events (pf_audit_log).</div>
+        <table id="auditTbl"></table>
+      </div>
+    </main>
+  </div>
+</div>
+
+<div class="toast" id="toast"></div>
+
+<script>
+(function(){
+  // ---- login: try real admin auth, fall to clearly-labeled test mode ----
+  var btn=document.getElementById('lbtn');
+  btn.onclick=async function(){
+    var msg=document.getElementById('lmsg'); msg.style.display='block'; msg.textContent='Checking...';
+    try{
+      var r=await fetch('/.netlify/functions/admin-auth',{method:'POST',headers:{'Content-Type':'application/json'},
+        body:JSON.stringify({email:document.getElementById('luser').value,password:document.getElementById('lpass').value})});
+      if(r.ok){ enter(false); } else { throw new Error('no'); }
+    }catch(e){
+      msg.textContent='Backend not connected. Opening in test mode with sample data.';
+      setTimeout(function(){ enter(true); }, 600);
+    }
+  };
+  function enter(test){
+    document.getElementById('login').style.display='none';
+    document.getElementById('app').style.display='block';
+    document.getElementById('modeBadge').style.display=test?'inline-block':'none';
+    render();
+  }
+
+  // ---- tab switching ----
+  document.querySelectorAll('#tabs .tab').forEach(function(t){
+    t.onclick=function(){
+      document.querySelectorAll('#tabs .tab').forEach(function(x){x.classList.remove('active');}); t.classList.add('active');
+      document.querySelectorAll('.pane').forEach(function(p){p.classList.toggle('active', p.dataset.pane===t.dataset.p);});
+    };
+  });
+
+  function money(c){ return '$'+(c).toLocaleString('en-US'); }
+  window.act=function(msg){ var t=document.getElementById('toast'); t.textContent='Test mode: '+msg+'. (wired to pf-admin-write; backend pending)'; t.style.display='block'; setTimeout(function(){t.style.display='none';},2600); };
+  document.addEventListener('click', function(e){ var el=e.target.closest('[data-act]'); if(el) act(el.getAttribute('data-act')); });
+
+  function render(){
+    // divisions
+    var divs=[
+      {slug:'starter',name:'Starter',price:5,acct:25000,target:1500,dd:1000,dll:500,max:3,win:3},
+      {slug:'pro',name:'Pro',price:10,acct:50000,target:3000,dd:2000,dll:1100,max:5,win:3},
+      {slug:'elite',name:'Elite',price:15,acct:100000,target:6000,dd:3000,dll:2200,max:10,win:3}
+    ];
+    document.getElementById('divCards').innerHTML=divs.map(function(d){
+      return '<div class="card"><div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:14px;">'+
+      '<b style="font-size:15px;">'+d.name+' . '+money(d.acct)+'</b><button class="mini gold" data-act="'+d.name+' division saved">Save</button></div>'+
+      '<div class="editrow">'+
+      field('Weekly $',d.price)+field('Target $',d.target)+field('Trailing DD $',d.dd)+field('Daily loss $',d.dll)+field('Max contracts',d.max)+field('Winners',d.win)+
+      '</div></div>';
+    }).join('');
+
+    // seasons
+    var seasons=[
+      ['Starter','Jun 8','live','487','Apex 25K','Fri 4:00 PM'],
+      ['Pro','Jun 8','live','312','Apex 50K','Fri 4:00 PM'],
+      ['Elite','Jun 8','live','128','Apex 100K','Fri 4:00 PM'],
+      ['Pro','Jun 1','closed','298','Apex 50K','awarded']
+    ];
+    tbl('seasonsTbl',['Division','Week','Status','Entrants','Prize','Close'],seasons.map(function(s){
+      var st=s[2]==='live'?'<span class="tag tag-ok">live</span>':'<span class="tag tag-info">closed</span>';
+      var action=s[2]==='live'?'<button class="mini" data-act="'+s[0]+' '+s[1]+' closed + winners selected">Close + award</button>':'';
+      return ['<b>'+s[0]+'</b>',s[1],st,'<span class="r">'+s[3]+'</span>',s[4],s[5]+' '+action];
+    }));
+
+    // risk monitor
+    var risk=[
+      ['nq_sniper','Pro','$53,420','$640','$1,100','pass'],
+      ['range_rider','Elite','$104,210','$2,410','$590','warn'],
+      ['micro_macro','Pro','$51,480','$1,480','$120','warn'],
+      ['fade_open','Starter','$24,510','$480','$60','danger'],
+      ['steady_eddie','Starter','$26,510','$1,510','$900','ok']
+    ];
+    tbl('riskTbl',['Trader','Division','Equity','DD cushion','Daily buffer','Flag'],risk.map(function(r){
+      var f=r[5]==='danger'?'<span class="tag tag-bad">near breach</span>':r[5]==='warn'?'<span class="tag tag-warn">watch</span>':r[5]==='pass'?'<span class="tag tag-gold">passed</span>':'<span class="tag tag-ok">healthy</span>';
+      return ['<b>'+r[0]+'</b>',r[1],'<span class="r">'+r[2]+'</span>','<span class="r">'+r[3]+'</span>','<span class="r">'+r[4]+'</span>',f];
+    }));
+
+    // prizes
+    var prizes=[
+      ['opening_drive','Pro','Apex 50K','verified','pending'],
+      ['nq_sniper','Pro','Apex 50K','verified','pending'],
+      ['es_discipline','Pro','Apex 50K','awaiting KYC','blocked'],
+      ['tape_reader','Starter','Apex 25K','verified','pending']
+    ];
+    tbl('prizeTbl',['Trader','Division','Prize','KYC','Action'],prizes.map(function(p){
+      var kyc=p[3]==='verified'?'<span class="tag tag-ok">verified</span>':'<span class="tag tag-warn">'+p[3]+'</span>';
+      var act_=p[4]==='blocked'?'<span class="tag tag-bad">blocked on KYC</span>':'<button class="mini gold" data-act="Issued '+p[2]+' to '+p[0]+'">Issue account</button>';
+      return ['<b>'+p[0]+'</b>',p[1],p[2],kyc,act_];
+    }));
+
+    // partners
+    var partners=[
+      ['Apex Trader Funding',93,'DGT','prospect','up to 90% off'],
+      ['Alpha Futures',92,'Paul001554','prospect','25% off'],
+      ['Tradeify',91,'DASH','prospect','~30% off'],
+      ['TradeDay',88,'VIBES','prospect','30% off'],
+      ['Phidias',85,'--','prospect','no code']
+    ];
+    tbl('partnerTbl',['Firm','Score','Code','Status','Deal'],partners.map(function(p){
+      return ['<b>'+p[0]+'</b>','<span class="r">'+p[1]+'</span>','<span class="mono">'+p[2]+'</span>',
+        '<span class="tag tag-info">'+p[3]+'</span>',p[4]+' <button class="mini" data-act="'+p[0]+' marked active">Activate</button>'];
+    }));
+
+    // audit
+    var audit=[
+      ['09:42','prize_awarded','opening_drive won Pro week Jun 1'],
+      ['09:42','prize_awarded','nq_sniper won Pro week Jun 1'],
+      ['09:40','competition_closed','Pro week Jun 1'],
+      ['08:15','daily_reset','812 accounts reset'],
+      ['07:58','max_drawdown_breach','fade_open breached']
+    ];
+    tbl('auditTbl',['Time','Event','Detail'],audit.map(function(a){
+      return ['<span class="mono">'+a[0]+'</span>','<span class="tag tag-gold">'+a[1]+'</span>',a[2]];
+    }));
+  }
+  function field(label,val){ return '<div class="f"><label>'+label+'</label><input value="'+val+'"></div>'; }
+  function tbl(id,heads,rows){
+    var h='<thead><tr>'+heads.map(function(x){return '<th>'+x+'</th>';}).join('')+'</tr></thead><tbody>'+
+      rows.map(function(r){return '<tr>'+r.map(function(c){return '<td>'+c+'</td>';}).join('')+'</tr>';}).join('')+'</tbody>';
+    document.getElementById(id).innerHTML=h;
+  }
+})();
+</script>
+</body>
+</html>

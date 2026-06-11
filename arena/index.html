@@ -1,0 +1,471 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>WETYR Arena: win a funded prop account, prove it for $5 a week</title>
+<meta name="description" content="A weekly futures trading competition. Compete on a simulator, rank by skill, and the top 3 in each division win a real funded prop account. Prove you can trade for $5 a week instead of paying $200+ for a challenge.">
+<link rel="canonical" href="https://wetyr.com/arena/">
+<meta name="robots" content="index,follow,max-image-preview:large,max-snippet:-1">
+<meta name="theme-color" content="#0a0f2c">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="alternate icon" href="/favicon.webp">
+<link rel="apple-touch-icon" href="/favicon.webp">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="WETYR Arena">
+<meta property="og:title" content="Win a funded prop account. Prove it for $5 a week.">
+<meta property="og:description" content="A weekly futures trading competition. Compete on a simulator, rank by skill, and the top 3 in each division win a real funded prop account.">
+<meta property="og:url" content="https://wetyr.com/arena/">
+<meta property="og:image" content="https://wetyr.com/arena/og.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Win a funded prop account. Prove it for $5 a week.">
+<meta name="twitter:description" content="A weekly futures trading competition. Top 3 in each division win a real funded prop account.">
+<meta name="twitter:image" content="https://wetyr.com/arena/og.jpg">
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"Organization","name":"WETYR Arena","url":"https://wetyr.com/arena/","logo":"https://wetyr.com/favicon.svg","parentOrganization":{"@type":"Organization","name":"WETYR Corporation"},"description":"A weekly futures trading competition where winners earn funded prop firm accounts as prizes."}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"Is the prize a real funded account?","acceptedAnswer":{"@type":"Answer","text":"Yes. You compete on a trading simulator, but the prize is a real funded or evaluation account at a top-rated prop firm. The competition itself involves no real-money trading and no capital at risk."}},{"@type":"Question","name":"How do I win?","acceptedAnswer":{"@type":"Answer","text":"Reach your division's profit target during the week without breaching the drawdown or daily-loss rules. Everyone who passes is ranked by consistency and risk discipline, and the top 3 each week win a funded account."}},{"@type":"Question","name":"Why is this cheaper than a normal challenge?","acceptedAnswer":{"@type":"Answer","text":"A prop firm challenge charges you up front whether you pass or not. Here you pay $5 a week to compete, and the account is the prize for winning."}},{"@type":"Question","name":"Is there a free way to enter?","acceptedAnswer":{"@type":"Answer","text":"Yes. A free alternative method of entry with no purchase necessary is available for every competition. Details are in the official rules."}},{"@type":"Question","name":"Do I need a brokerage account or a download?","acceptedAnswer":{"@type":"Answer","text":"No. Everything runs in the browser. You never connect a broker, fund an account, or place a real market order to compete."}}]}</script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Newsreader:opsz,wght@6..72,400;6..72,500;6..72,600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ink-900:#0a0f2c; --ink-800:#0F1828; --ink-700:#15203a; --ink-600:#1E2A47;
+    --ink-line:rgba(255,255,255,0.08);
+    --gold:#C9A84C; --gold-bright:#E8C76A; --gold-dim:#8B7332;
+    --ok-green:#2EBA73; --ok-green-bg:rgba(46,186,115,0.12);
+    --alert-red:#e74c3c; --info-blue:#3A7BD5; --amber:#F2C744;
+    --t1:#ffffff; --t2:rgba(255,255,255,0.72); --t3:rgba(255,255,255,0.45); --t4:rgba(255,255,255,0.28);
+    --font-display:'Newsreader','Charter','Iowan Old Style',Georgia,'Times New Roman',serif;
+    --font-sans:-apple-system,BlinkMacSystemFont,'SF Pro Text','Inter','Segoe UI',Roboto,Helvetica,Arial,sans-serif;
+    --font-mono:'JetBrains Mono','SF Mono',ui-monospace,Menlo,Consolas,monospace;
+    --shadow-2:0 1px 0 rgba(255,255,255,0.06) inset,0 16px 48px rgba(0,0,0,0.4);
+  }
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{margin:0;background:var(--ink-900);color:var(--t1);font-family:var(--font-sans);
+    -webkit-font-smoothing:antialiased;line-height:1.5;}
+  a{color:inherit;text-decoration:none;}
+  .wrap{max-width:1120px;margin:0 auto;padding:0 24px;}
+  .eyebrow{font-size:11px;letter-spacing:0.18em;text-transform:uppercase;color:var(--gold);font-weight:600;}
+  .mono{font-family:var(--font-mono);}
+  .serif{font-family:var(--font-display);font-weight:500;letter-spacing:-0.02em;line-height:1.1;}
+
+  nav{position:sticky;top:0;z-index:50;background:rgba(10,15,44,0.82);backdrop-filter:blur(12px);
+    border-bottom:1px solid var(--ink-line);}
+  nav .wrap{display:flex;align-items:center;justify-content:space-between;height:64px;}
+  .brand{display:flex;align-items:baseline;gap:10px;font-family:var(--font-display);font-size:20px;font-weight:600;letter-spacing:-0.01em;}
+  .brand .sub{font-family:var(--font-sans);font-size:11px;letter-spacing:0.18em;text-transform:uppercase;color:var(--t3);font-weight:600;}
+  .nav-links{display:flex;align-items:center;gap:32px;}
+  .nav-links a{font-size:14px;color:var(--t2);transition:color .15s;}
+  .nav-links a:hover{color:var(--t1);}
+  .btn{display:inline-block;font-weight:600;font-size:14px;letter-spacing:0.01em;border-radius:8px;
+    padding:12px 24px;transition:transform .12s,background .15s,box-shadow .15s;cursor:pointer;border:0;}
+  .btn-gold{background:var(--gold);color:var(--ink-900);box-shadow:0 1px 0 rgba(255,255,255,0.18) inset;}
+  .btn-gold:hover{background:var(--gold-bright);transform:translateY(-1px);}
+  .btn-ghost{background:transparent;color:var(--t1);border:1px solid var(--ink-600);}
+  .btn-ghost:hover{border-color:var(--gold-dim);color:var(--gold-bright);}
+
+  .hero{padding:96px 0 64px;position:relative;overflow:hidden;}
+  .hero::after{content:"";position:absolute;top:-160px;right:-120px;width:520px;height:520px;
+    background:radial-gradient(circle,rgba(201,168,76,0.14),transparent 62%);pointer-events:none;}
+  .hero-grid{display:grid;grid-template-columns:1.15fr 0.85fr;gap:56px;align-items:center;}
+  .hero h1{font-size:60px;margin:18px 0 0;}
+  .hero h1 .accent{color:var(--gold);}
+  .hero p.lede{font-size:18px;line-height:1.6;color:var(--t2);margin:24px 0 0;max-width:32em;}
+  .hero-cta{display:flex;align-items:center;gap:20px;margin-top:36px;flex-wrap:wrap;}
+  .price-note{font-size:13px;color:var(--t3);}
+  .price-note b{color:var(--t2);font-weight:600;}
+
+  /* hero prize card */
+  .prizecard{background:var(--ink-800);border-radius:16px;box-shadow:var(--shadow-2);overflow:hidden;}
+  .prizecard .top{padding:18px 22px;border-bottom:1px solid var(--ink-line);display:flex;justify-content:space-between;align-items:center;}
+  .pill{font-size:11px;letter-spacing:0.16em;text-transform:uppercase;font-weight:600;padding:6px 12px;border-radius:9999px;}
+  .pill-gold{background:rgba(201,168,76,0.14);color:var(--gold);}
+  .prizecard .body{padding:24px 22px;}
+  .prizecard .winlabel{font-size:11px;letter-spacing:0.16em;text-transform:uppercase;color:var(--t3);}
+  .prizecard .winval{font-family:var(--font-display);font-size:34px;line-height:1.1;margin-top:8px;color:var(--t1);}
+  .prizecard .winval b{color:var(--gold);font-weight:600;}
+  .prizecard .meta{margin-top:18px;border-top:1px solid var(--ink-line);padding-top:16px;display:flex;justify-content:space-between;}
+  .prizecard .meta div .l{font-size:10px;letter-spacing:0.14em;text-transform:uppercase;color:var(--t3);}
+  .prizecard .meta div .v{font-family:var(--font-mono);font-size:15px;color:var(--t1);margin-top:4px;}
+  .prizecard .strike{color:var(--t3);text-decoration:line-through;}
+
+  .strip{border-top:1px solid var(--ink-line);border-bottom:1px solid var(--ink-line);}
+  .strip .wrap{display:grid;grid-template-columns:repeat(4,1fr);gap:24px;padding:32px 24px;}
+  .stat .n{font-family:var(--font-mono);font-size:30px;color:var(--gold);line-height:1.1;}
+  .stat .l{font-size:13px;color:var(--t3);margin-top:6px;}
+
+  section.block{padding:88px 0;}
+  .sec-head{max-width:36em;}
+  .sec-head h2{font-size:40px;margin:14px 0 0;}
+  .sec-head p{font-size:16px;color:var(--t2);margin:16px 0 0;}
+
+  /* prize section */
+  .prizes{display:grid;grid-template-columns:1.1fr 0.9fr;gap:48px;margin-top:40px;align-items:start;}
+  .hero-prize{background:linear-gradient(180deg,var(--ink-700),var(--ink-800));border-radius:16px;padding:32px;box-shadow:var(--shadow-2);}
+  .hero-prize .eyebrow{color:var(--gold-bright);}
+  .hero-prize h3{font-family:var(--font-display);font-weight:500;font-size:28px;margin:12px 0 0;letter-spacing:-0.01em;}
+  .hero-prize .val{font-family:var(--font-mono);font-size:44px;color:var(--gold);margin:16px 0 0;line-height:1;}
+  .hero-prize p{font-size:15px;color:var(--t2);margin:16px 0 0;line-height:1.6;}
+  .partners{margin-top:0;}
+  .partners .lbl{font-size:11px;letter-spacing:0.16em;text-transform:uppercase;color:var(--t3);}
+  .partners ul{list-style:none;padding:0;margin:16px 0 0;}
+  .partners li{padding:14px 0;border-bottom:1px solid var(--ink-line);display:flex;justify-content:space-between;align-items:baseline;gap:16px;}
+  .partners li:last-child{border-bottom:0;}
+  .partners li .nm{font-size:15px;color:var(--t1);font-weight:500;}
+  .partners li .nt{font-size:13px;color:var(--t3);text-align:right;}
+
+  .steps{display:grid;grid-template-columns:repeat(4,1fr);gap:24px;margin-top:48px;}
+  .step .num{font-family:var(--font-mono);font-size:13px;color:var(--gold);letter-spacing:0.04em;}
+  .step h3{font-family:var(--font-display);font-weight:500;font-size:20px;margin:14px 0 0;letter-spacing:-0.01em;}
+  .step p{font-size:14px;color:var(--t2);margin:10px 0 0;line-height:1.55;}
+  .step{padding-top:20px;border-top:1px solid var(--ink-line);}
+
+  .tiers{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;margin-top:48px;}
+  .tier{background:var(--ink-800);border-radius:16px;padding:32px;box-shadow:var(--shadow-2);position:relative;display:flex;flex-direction:column;}
+  .tier.feature{outline:1px solid var(--gold-dim);}
+  .tier .tag{position:absolute;top:20px;right:20px;font-size:10px;letter-spacing:0.16em;text-transform:uppercase;color:var(--gold);background:rgba(201,168,76,0.12);padding:5px 11px;border-radius:9999px;font-weight:600;}
+  .tier .name{font-size:11px;letter-spacing:0.18em;text-transform:uppercase;color:var(--t3);font-weight:600;}
+  .tier .price{font-family:var(--font-mono);font-size:46px;color:var(--t1);margin:14px 0 0;line-height:1;}
+  .tier .price span{font-size:15px;color:var(--t3);font-family:var(--font-sans);}
+  .tier .acct{font-size:14px;color:var(--gold-bright);margin-top:10px;}
+  .tier .prize-line{font-size:13px;color:var(--t2);margin-top:6px;}
+  .tier ul{list-style:none;padding:0;margin:22px 0 0;}
+  .tier li{font-size:14px;color:var(--t2);padding:9px 0;border-bottom:1px solid var(--ink-line);display:flex;justify-content:space-between;gap:12px;}
+  .tier li:last-child{border-bottom:0;}
+  .tier li .v{font-family:var(--font-mono);color:var(--t1);}
+  .tier .btn{margin-top:26px;text-align:center;width:100%;}
+
+  /* leaderboard teaser */
+  .lb{background:var(--ink-800);border-radius:16px;box-shadow:var(--shadow-2);overflow:hidden;margin-top:40px;}
+  .lb .head{display:flex;justify-content:space-between;align-items:center;padding:18px 24px;border-bottom:1px solid var(--ink-line);}
+  .lb .head .t{font-size:12px;letter-spacing:0.04em;text-transform:uppercase;color:var(--t3);}
+  .lb table{width:100%;border-collapse:collapse;}
+  .lb td,.lb th{padding:14px 24px;text-align:left;border-bottom:1px solid var(--ink-line);font-size:14px;}
+  .lb th{font-size:10px;letter-spacing:0.14em;text-transform:uppercase;color:var(--t3);font-weight:600;}
+  .lb tr:last-child td{border-bottom:0;}
+  .lb .rk{font-family:var(--font-mono);color:var(--gold);width:48px;}
+  .lb .mono{font-family:var(--font-mono);}
+  .lb .win{color:var(--ok-green);font-size:11px;letter-spacing:0.12em;text-transform:uppercase;}
+
+  .rules{display:grid;grid-template-columns:repeat(2,1fr);gap:0 56px;margin-top:40px;}
+  .rule{padding:24px 0;border-top:1px solid var(--ink-line);}
+  .rule h4{font-size:15px;margin:0;color:var(--t1);font-weight:600;}
+  .rule p{font-size:14px;color:var(--t2);margin:8px 0 0;line-height:1.55;}
+
+  details{border-top:1px solid var(--ink-line);padding:22px 0;}
+  details summary{font-size:17px;font-family:var(--font-display);font-weight:500;cursor:pointer;list-style:none;display:flex;justify-content:space-between;align-items:center;letter-spacing:-0.01em;}
+  details summary::-webkit-details-marker{display:none;}
+  details summary .pm{color:var(--gold);font-family:var(--font-mono);font-size:20px;transition:transform .2s;}
+  details[open] summary .pm{transform:rotate(45deg);}
+  details p{font-size:15px;color:var(--t2);line-height:1.6;margin:16px 0 0;max-width:48em;}
+
+  .band{background:linear-gradient(180deg,var(--ink-800),var(--ink-700));border-radius:16px;padding:56px 48px;text-align:center;box-shadow:var(--shadow-2);}
+  .band h2{font-size:40px;margin:0;}
+  .band p{color:var(--t2);font-size:16px;margin:16px auto 0;max-width:36em;}
+  .band .btn{margin-top:32px;}
+
+  footer{border-top:1px solid var(--ink-line);margin-top:88px;padding:48px 0 64px;}
+  footer .cols{display:flex;justify-content:space-between;gap:40px;flex-wrap:wrap;}
+  footer .disc{font-size:12px;color:var(--t4);line-height:1.7;max-width:64em;margin-top:32px;}
+  footer a{color:var(--t3);} footer a:hover{color:var(--t1);}
+
+  @media(max-width:900px){
+    .hero-grid{grid-template-columns:1fr;gap:40px;} .hero h1{font-size:46px;}
+    .strip .wrap{grid-template-columns:repeat(2,1fr);} .steps{grid-template-columns:repeat(2,1fr);}
+    .tiers{grid-template-columns:1fr;} .rules{grid-template-columns:1fr;} .prizes{grid-template-columns:1fr;}
+    .nav-links a:not(.btn){display:none;}
+  }
+  @media(max-width:560px){
+    .hero h1{font-size:38px;} .sec-head h2,.band h2{font-size:30px;} .strip .wrap{grid-template-columns:1fr 1fr;}
+    .lb td,.lb th{padding:12px 14px;}
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="wrap">
+    <a class="brand" href="/arena/">WETYR <span class="sub">Arena</span></a>
+    <div class="nav-links">
+      <a href="#prize">The prize</a>
+      <a href="#how">How it works</a>
+      <a href="#divisions">Divisions</a>
+      <a href="#leaderboard">Leaderboard</a>
+      <a href="#faq">FAQ</a>
+      <a href="#divisions" class="btn btn-gold">Compete for $5</a>
+    </div>
+  </div>
+</nav>
+
+<header class="hero">
+  <div class="wrap hero-grid">
+    <div>
+      <div class="eyebrow">Weekly futures trading competition</div>
+      <h1 class="serif">Win a funded prop account.<br><span class="accent">Prove it for $5 a week.</span></h1>
+      <p class="lede">Compete in a weekly simulated futures season. Trade clean, rank by skill, and
+      the top 3 in your division win a real funded account at a top-rated prop firm. Earn the
+      account by trading well, instead of paying $200+ to attempt a challenge.</p>
+      <div class="hero-cta">
+        <a href="#divisions" class="btn btn-gold">Enter this week</a>
+        <a href="#prize" class="btn btn-ghost">See the prize</a>
+      </div>
+      <p class="price-note" style="margin-top:20px;">$5 a week. <b>Cancel anytime.</b> Simulated trading, the prize is real. Free entry option available.</p>
+    </div>
+
+    <div class="prizecard" aria-hidden="true">
+      <div class="top">
+        <span class="pill pill-gold">This week's top prize</span>
+        <span class="mono" style="font-size:12px;color:var(--t3);">Elite division</span>
+      </div>
+      <div class="body">
+        <div class="winlabel">Winner receives</div>
+        <div class="winval">A funded <b>Apex $100K</b> account</div>
+        <div class="meta">
+          <div><div class="l">Normal cost</div><div class="v strike">$200+</div></div>
+          <div><div class="l">Your entry</div><div class="v">$15 / wk</div></div>
+          <div><div class="l">Winners</div><div class="v">Top 3</div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</header>
+
+<div class="strip">
+  <div class="wrap">
+    <div class="stat"><div class="n">$5</div><div class="l">Entry, per week</div></div>
+    <div class="stat"><div class="n">Top 3</div><div class="l">Win per division, per week</div></div>
+    <div class="stat"><div class="n">$100K</div><div class="l">Funded account prizes</div></div>
+    <div class="stat"><div class="n">5</div><div class="l">Partner firms reviewed</div></div>
+  </div>
+</div>
+
+<section class="block" id="prize">
+  <div class="wrap">
+    <div class="sec-head">
+      <div class="eyebrow">The prize</div>
+      <h2 class="serif">You do not buy a challenge. You earn the account.</h2>
+      <p>Attempting a prop firm challenge normally costs you money up front, win or lose. In WETYR
+      Arena you compete first. Win your division and the funded account is the prize.</p>
+    </div>
+    <div class="prizes">
+      <div class="hero-prize">
+        <div class="eyebrow">Flagship prize</div>
+        <h3>Apex Trader Funding account</h3>
+        <div class="val">up to $100K</div>
+        <p>Apex is the highest-scoring firm in our independent 26-firm review. Division winners earn
+        a real Apex evaluation account sized to their division, the same account other traders pay
+        to attempt. Prove the skill here, claim it there.</p>
+      </div>
+      <div class="partners">
+        <div class="lbl">Prizes also drawn from our top-rated firms</div>
+        <ul>
+          <li><span class="nm">Alpha Futures</span><span class="nt">4.9 rated, EOD, no daily loss limit</span></li>
+          <li><span class="nm">Tradeify</span><span class="nt">EOD on eval and funded</span></li>
+          <li><span class="nm">TradeDay</span><span class="nt">95% split ceiling</span></li>
+          <li><span class="nm">Phidias</span><span class="nt">No time limit, 30 min payouts</span></li>
+        </ul>
+        <p style="font-size:12px;color:var(--t4);margin-top:18px;line-height:1.6;">Firms are selected
+        from our independent review. WETYR Arena is a separate competition and is not affiliated with
+        or endorsed by these firms unless stated. Prize firm may vary by season.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="block" id="how" style="padding-top:0;">
+  <div class="wrap">
+    <div class="sec-head">
+      <div class="eyebrow">How it works</div>
+      <h2 class="serif">Four steps to a funded account.</h2>
+      <p>A fresh season every week. No brokerage account, no capital at risk, no download.</p>
+    </div>
+    <div class="steps">
+      <div class="step"><div class="num">01</div><h3>Enter your division</h3><p>Pick a division from $5 a week. Your subscription enters you in that account-size league. A free alternative entry is available.</p></div>
+      <div class="step"><div class="num">02</div><h3>Trade the week</h3><p>Trade simulated ES, NQ, crude and gold in the browser against live-feel price action, inside the division rules.</p></div>
+      <div class="step"><div class="num">03</div><h3>Pass, then rank</h3><p>Hit the profit target without breaching the drawdown or daily-loss rules. Passing traders are ranked by consistency and risk discipline.</p></div>
+      <div class="step"><div class="num">04</div><h3>Top 3 win an account</h3><p>The top 3 in each division win a real funded prop account, sized to the division. Verify your identity, claim the prize.</p></div>
+    </div>
+  </div>
+</section>
+
+<section class="block" id="divisions" style="padding-top:0;">
+  <div class="wrap">
+    <div class="sec-head">
+      <div class="eyebrow">Divisions</div>
+      <h2 class="serif">Compete where you belong. Win what you earn.</h2>
+      <p>Each division is its own weekly league with its own leaderboard. Bigger division, bigger
+      account on the line. Every division is a weekly subscription, cancel anytime.</p>
+    </div>
+    <div class="tiers">
+      <div class="tier">
+        <div class="name">Starter</div>
+        <div class="price">$5<span> / wk</span></div>
+        <div class="acct">$25,000 simulated account</div>
+        <div class="prize-line">Prize: funded $25K account</div>
+        <ul>
+          <li>Profit target <span class="v">$1,500</span></li>
+          <li>Trailing drawdown <span class="v">$1,000</span></li>
+          <li>Daily loss limit <span class="v">$500</span></li>
+          <li>Max contracts <span class="v">3 micro</span></li>
+          <li>Winners <span class="v">Top 3</span></li>
+          <li>Min trading days <span class="v">5</span></li>
+        </ul>
+        <a href="#" class="btn btn-ghost">Enter Starter</a>
+      </div>
+      <div class="tier feature">
+        <div class="tag">Most entered</div>
+        <div class="name">Pro</div>
+        <div class="price">$10<span> / wk</span></div>
+        <div class="acct">$50,000 simulated account</div>
+        <div class="prize-line">Prize: funded $50K account</div>
+        <ul>
+          <li>Profit target <span class="v">$3,000</span></li>
+          <li>Trailing drawdown <span class="v">$2,000</span></li>
+          <li>Daily loss limit <span class="v">$1,100</span></li>
+          <li>Max contracts <span class="v">5 micro</span></li>
+          <li>Winners <span class="v">Top 3</span></li>
+          <li>Min trading days <span class="v">7</span></li>
+        </ul>
+        <a href="#" class="btn btn-gold">Enter Pro</a>
+      </div>
+      <div class="tier">
+        <div class="name">Elite</div>
+        <div class="price">$15<span> / wk</span></div>
+        <div class="acct">$100,000 simulated account</div>
+        <div class="prize-line">Prize: funded $100K account</div>
+        <ul>
+          <li>Profit target <span class="v">$6,000</span></li>
+          <li>Trailing drawdown <span class="v">$3,000</span></li>
+          <li>Daily loss limit <span class="v">$2,200</span></li>
+          <li>Max contracts <span class="v">10 micro</span></li>
+          <li>Winners <span class="v">Top 3</span></li>
+          <li>Min trading days <span class="v">10</span></li>
+        </ul>
+        <a href="#" class="btn btn-ghost">Enter Elite</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="block" id="leaderboard" style="padding-top:0;">
+  <div class="wrap">
+    <div class="sec-head">
+      <div class="eyebrow">Leaderboard</div>
+      <h2 class="serif">Skill is ranked in the open.</h2>
+      <p>Ranking is not who gambled biggest. Among traders who passed without breaching, the board
+      ranks by consistency and risk discipline, the exact profile a prop firm wants to fund.</p>
+    </div>
+    <div class="lb">
+      <div class="head"><span class="t">Pro division, this week</span><span class="t mono">sample</span></div>
+      <table>
+        <thead><tr><th>Rank</th><th>Trader</th><th>Profit</th><th>Max drawdown</th><th>Consistency</th><th></th></tr></thead>
+        <tbody>
+          <tr><td class="rk">1</td><td>nq_sniper</td><td class="mono">+$3,420</td><td class="mono">$640</td><td class="mono">92%</td><td class="win">Winning</td></tr>
+          <tr><td class="rk">2</td><td>opening_drive</td><td class="mono">+$3,180</td><td class="mono">$710</td><td class="mono">88%</td><td class="win">Winning</td></tr>
+          <tr><td class="rk">3</td><td>es_discipline</td><td class="mono">+$3,050</td><td class="mono">$690</td><td class="mono">86%</td><td class="win">Winning</td></tr>
+          <tr><td class="rk">4</td><td>micro_macro</td><td class="mono">+$3,610</td><td class="mono">$1,480</td><td class="mono">71%</td><td></td></tr>
+          <tr><td class="rk">5</td><td>wick_hunter</td><td class="mono">+$2,940</td><td class="mono">$980</td><td class="mono">78%</td><td></td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>
+
+<section class="block" id="rules" style="padding-top:0;">
+  <div class="wrap">
+    <div class="sec-head">
+      <div class="eyebrow">The rules</div>
+      <h2 class="serif">Risk discipline is the whole game.</h2>
+      <p>The rules mirror what real prop firms enforce, so winning here proves you are ready there.</p>
+    </div>
+    <div class="rules">
+      <div class="rule"><h4>Profit target</h4><p>Grow the simulated balance to the division target during the week to qualify for the leaderboard.</p></div>
+      <div class="rule"><h4>Trailing maximum drawdown</h4><p>A floor that trails your highest balance. Fall below it and you are out of the running for the week.</p></div>
+      <div class="rule"><h4>Daily loss limit</h4><p>Measured from your start-of-day balance. Cross it and the account locks for the day.</p></div>
+      <div class="rule"><h4>Ranked by consistency</h4><p>Among traders who pass, the leaderboard ranks by drawdown control and consistency, not by who took the wildest swing.</p></div>
+      <div class="rule"><h4>Minimum trading days</h4><p>Trade at least the minimum days before a result counts. No one-shot gambles win an account.</p></div>
+      <div class="rule"><h4>Instruments</h4><p>Trade micro and mini futures: MES, ES, MNQ, NQ, MCL, CL, MGC, GC. Position size is capped per division.</p></div>
+    </div>
+  </div>
+</section>
+
+<section class="block" id="faq" style="padding-top:0;">
+  <div class="wrap">
+    <div class="sec-head">
+      <div class="eyebrow">FAQ</div>
+      <h2 class="serif">Straight answers.</h2>
+    </div>
+    <div style="margin-top:40px;">
+      <details open>
+        <summary>Is the prize a real funded account? <span class="pm">+</span></summary>
+        <p>Yes. You compete on a trading simulator, but the prize is a real funded or evaluation
+        account at a top-rated prop firm such as Apex. Winners verify their identity, then receive
+        the account. The competition itself involves no real-money trading and no capital at risk.</p>
+      </details>
+      <details>
+        <summary>How do I win? <span class="pm">+</span></summary>
+        <p>Reach your division's profit target during the week without breaching the drawdown or
+        daily-loss rules. Everyone who passes is then ranked by consistency and risk discipline. The
+        top 3 each week win a funded account. It rewards trading like a funded trader, not gambling.</p>
+      </details>
+      <details>
+        <summary>Why is this cheaper than a normal challenge? <span class="pm">+</span></summary>
+        <p>A prop firm challenge charges you up front whether you pass or not. Here you pay $5 a week
+        to compete, and the account is the prize for winning. You only need the skill, not the fee.</p>
+      </details>
+      <details>
+        <summary>Is there a free way to enter? <span class="pm">+</span></summary>
+        <p>Yes. A free alternative method of entry is available for every competition, with no
+        purchase necessary. Full details are in the official rules for each season.</p>
+      </details>
+      <details>
+        <summary>Do I need a brokerage account or a download? <span class="pm">+</span></summary>
+        <p>No. Everything runs in the browser. You never connect a broker, fund an account, or place
+        a real market order to compete.</p>
+      </details>
+    </div>
+  </div>
+</section>
+
+<section class="block" style="padding-top:0;">
+  <div class="wrap">
+    <div class="band">
+      <h2 class="serif">Prove you can trade. Win the account.</h2>
+      <p>Enter this week's competition for $5. No brokerage account, no capital at risk, cancel
+      anytime, and a free entry option for those who want it.</p>
+      <a href="#divisions" class="btn btn-gold">Enter this week</a>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <div class="cols">
+      <a class="brand" href="/arena/">WETYR <span class="sub">Arena</span></a>
+      <div style="display:flex;gap:32px;font-size:14px;">
+        <a href="#prize">The prize</a>
+        <a href="#how">How it works</a>
+        <a href="#divisions">Divisions</a>
+        <a href="#faq">FAQ</a>
+      </div>
+    </div>
+    <p class="disc">WETYR Arena is a skill-based trading competition operated by WETYR Corporation.
+    All trading in the competition is simulated. No real funds are deposited, traded, or at risk in
+    the competition itself. Prizes are funded or evaluation accounts provided through third-party
+    prop firms; WETYR Arena is a separate entity and is not affiliated with, sponsored by, or
+    endorsed by those firms unless expressly stated, and prize firms may change by season. Winners
+    are determined by objective trading performance under the published official rules. A free
+    alternative method of entry with no purchase necessary is available for every competition. Void
+    where prohibited; some states or jurisdictions may be excluded. Prizes valued over $600 may
+    require tax reporting; identity verification is required before any prize is issued. Nothing here
+    is investment, financial, or trading advice, and simulated performance is not indicative of real
+    results. Trading futures involves substantial risk of loss. By entering you agree to the Official
+    Rules, Terms of Service, and Privacy Policy.</p>
+    <p class="disc" style="margin-top:16px;">&copy; 2026 WETYR Corporation. All rights reserved.</p>
+  </div>
+</footer>
+
+</body>
+</html>

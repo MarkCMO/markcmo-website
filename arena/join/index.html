@@ -1,0 +1,206 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<link rel="canonical" href="https://wetyr.com/arena/join/">
+<meta name="robots" content="index,follow">
+<meta name="theme-color" content="#0a0f2c">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="alternate icon" href="/favicon.webp">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="WETYR Arena">
+<meta property="og:title" content="Enter the WETYR Arena competition">
+<meta property="og:description" content="Pick your division from $5 a week. Pass the challenge, finish top 3 by consistency, win a funded prop account. Free entry available.">
+<meta property="og:url" content="https://wetyr.com/arena/join/">
+<meta property="og:image" content="https://wetyr.com/arena/og.jpg">
+<meta name="twitter:card" content="summary_large_image">
+<title>WETYR Arena: enter the competition</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Newsreader:opsz,wght@6..72,500;6..72,600&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ink-900:#0a0f2c;--ink-800:#0F1828;--ink-700:#15203a;--ink-600:#1E2A47;--ink-line:rgba(255,255,255,0.08);
+    --gold:#C9A84C;--gold-bright:#E8C76A;--gold-dim:#8B7332;--ok:#2EBA73;--ok-bg:rgba(46,186,115,0.12);
+    --red:#e74c3c;--amber:#F2C744;--info:#3A7BD5;--info-bg:rgba(58,123,213,0.12);
+    --t1:#fff;--t2:rgba(255,255,255,0.72);--t3:rgba(255,255,255,0.45);--t4:rgba(255,255,255,0.28);
+    --disp:'Newsreader',Georgia,serif;--sans:-apple-system,BlinkMacSystemFont,'SF Pro Text','Inter','Segoe UI',Roboto,Helvetica,Arial,sans-serif;
+    --mono:'JetBrains Mono','SF Mono',ui-monospace,Menlo,Consolas,monospace;
+    --shadow:0 1px 0 rgba(255,255,255,0.05) inset,0 16px 48px rgba(0,0,0,0.4);
+  }
+  *{box-sizing:border-box;}
+  body{margin:0;background:var(--ink-900);color:var(--t1);font-family:var(--sans);-webkit-font-smoothing:antialiased;}
+  a{color:inherit;text-decoration:none;} .mono{font-family:var(--mono);}
+  .wrap{max-width:980px;margin:0 auto;padding:0 24px;}
+  nav{border-bottom:1px solid var(--ink-line);background:rgba(10,15,44,0.9);position:sticky;top:0;z-index:20;}
+  nav .wrap{display:flex;align-items:center;justify-content:space-between;height:62px;}
+  .brand{font-family:var(--disp);font-size:19px;font-weight:600;}
+  .brand .sub{font-family:var(--sans);font-size:10px;letter-spacing:0.18em;text-transform:uppercase;color:var(--t3);font-weight:600;margin-left:8px;}
+  .links a{font-size:14px;color:var(--t2);} .links a:hover{color:var(--t1);}
+  .eyebrow{font-size:11px;letter-spacing:0.18em;text-transform:uppercase;color:var(--gold);font-weight:600;}
+  h1{font-family:var(--disp);font-weight:500;font-size:34px;letter-spacing:-0.02em;margin:10px 0 0;}
+  .sub2{color:var(--t2);font-size:15px;margin-top:8px;}
+  .grid{display:grid;grid-template-columns:1.3fr 0.7fr;gap:28px;margin:28px 0 60px;align-items:start;}
+  .panel{background:var(--ink-800);border-radius:16px;padding:24px;box-shadow:var(--shadow);}
+  .label{font-size:11px;letter-spacing:0.14em;text-transform:uppercase;color:var(--t3);font-weight:600;margin:0 0 12px;}
+
+  .divs{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;}
+  .divopt{border:1px solid var(--ink-600);border-radius:11px;padding:14px;cursor:pointer;transition:border-color .15s,background .15s;}
+  .divopt:hover{border-color:var(--gold-dim);}
+  .divopt.sel{border-color:var(--gold-bright);background:rgba(201,168,76,0.07);}
+  .divopt .nm{font-size:11px;letter-spacing:0.14em;text-transform:uppercase;color:var(--t3);font-weight:600;}
+  .divopt .pr{font-family:var(--mono);font-size:22px;margin-top:6px;}
+  .divopt .ac{font-size:12px;color:var(--gold-bright);margin-top:4px;}
+
+  .field{margin-top:18px;}
+  .field label{display:block;font-size:13px;color:var(--t2);margin-bottom:7px;}
+  .field input{width:100%;background:var(--ink-900);border:1px solid var(--ink-600);border-radius:9px;color:var(--t1);
+    font-size:15px;padding:12px 14px;font-family:var(--sans);}
+  .field input:focus{outline:0;border-color:var(--gold);}
+  .err{color:#F08A7F;font-size:12px;margin-top:6px;display:none;}
+
+  .entry{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:18px;}
+  .entryopt{border:1px solid var(--ink-600);border-radius:11px;padding:14px;cursor:pointer;}
+  .entryopt.sel{border-color:var(--gold-bright);background:rgba(201,168,76,0.07);}
+  .entryopt .t{font-size:14px;font-weight:600;}
+  .entryopt .d{font-size:12px;color:var(--t3);margin-top:5px;line-height:1.45;}
+
+  .btn{display:block;width:100%;text-align:center;font-weight:700;font-size:15px;border-radius:10px;padding:15px 0;cursor:pointer;border:0;margin-top:22px;}
+  .btn-gold{background:var(--gold);color:var(--ink-900);} .btn-gold:hover{background:var(--gold-bright);}
+  .btn:disabled{opacity:0.5;cursor:not-allowed;}
+
+  /* summary */
+  .sum .row{display:flex;justify-content:space-between;font-size:14px;padding:9px 0;border-bottom:1px solid var(--ink-line);}
+  .sum .row:last-of-type{border-bottom:0;}
+  .sum .row .v{font-family:var(--mono);}
+  .sum .prize{background:linear-gradient(180deg,var(--ink-700),var(--ink-800));border:1px solid var(--gold-bright);border-radius:12px;padding:16px;margin-top:16px;}
+  .sum .prize .l{font-size:10px;letter-spacing:0.14em;text-transform:uppercase;color:var(--gold-bright);}
+  .sum .prize .v{font-family:var(--mono);font-size:18px;color:var(--gold);margin-top:6px;}
+  .total{display:flex;justify-content:space-between;align-items:baseline;margin-top:14px;}
+  .total .l{font-size:13px;color:var(--t3);} .total .v{font-family:var(--mono);font-size:28px;color:var(--gold);}
+
+  .banner{display:none;border-radius:10px;padding:14px 16px;font-size:14px;margin-top:18px;}
+  .banner.ok{display:block;background:var(--ok-bg);color:#7DE0AC;border:1px solid rgba(46,186,115,0.3);}
+  .banner.info{display:block;background:var(--info-bg);color:#9DC3F2;border:1px solid rgba(58,123,213,0.3);}
+  .note{font-size:11px;color:var(--t4);line-height:1.6;margin-top:18px;}
+  @media(max-width:760px){ .grid{grid-template-columns:1fr;} .divs{grid-template-columns:1fr;} .entry{grid-template-columns:1fr;} }
+</style>
+</head>
+<body>
+<nav><div class="wrap">
+  <a class="brand" href="/arena/">WETYR <span class="sub">Arena</span></a>
+  <div class="links"><a href="/arena/leaderboard/">Leaderboard</a> &nbsp; <a href="/arena/#how">How it works</a></div>
+</div></nav>
+
+<div class="wrap">
+  <div style="padding-top:32px;">
+    <div class="eyebrow">Enter the competition</div>
+    <h1>Pick your division. Start this week.</h1>
+    <p class="sub2">Weekly season. Pass the challenge, finish top 3 by consistency, win a funded prop account. Cancel anytime.</p>
+  </div>
+
+  <div class="grid">
+    <div class="panel">
+      <div class="label">1 . Choose your division</div>
+      <div class="divs" id="divs">
+        <div class="divopt" data-slug="starter"><div class="nm">Starter</div><div class="pr">$5<span style="font-size:13px;color:var(--t3);">/wk</span></div><div class="ac">$25K account</div></div>
+        <div class="divopt sel" data-slug="pro"><div class="nm">Pro</div><div class="pr">$10<span style="font-size:13px;color:var(--t3);">/wk</span></div><div class="ac">$50K account</div></div>
+        <div class="divopt" data-slug="elite"><div class="nm">Elite</div><div class="pr">$15<span style="font-size:13px;color:var(--t3);">/wk</span></div><div class="ac">$100K account</div></div>
+      </div>
+
+      <div class="label" style="margin-top:26px;">2 . Your details</div>
+      <div class="field">
+        <label for="name">Full name</label>
+        <input id="name" type="text" autocomplete="name" placeholder="Jordan Trader">
+        <div class="err" id="nameErr">Enter your name.</div>
+      </div>
+      <div class="field">
+        <label for="email">Email</label>
+        <input id="email" type="email" autocomplete="email" placeholder="you@email.com">
+        <div class="err" id="emailErr">Enter a valid email.</div>
+      </div>
+
+      <div class="label" style="margin-top:26px;">3 . Entry method</div>
+      <div class="entry" id="entry">
+        <div class="entryopt sel" data-amoe="0"><div class="t">Subscribe</div><div class="d" id="subDesc">$10/week. Keeps your account active, cancel anytime.</div></div>
+        <div class="entryopt" data-amoe="1"><div class="t">Free entry</div><div class="d">No purchase necessary. Same competition, same prize. Mailed-entry rules apply.</div></div>
+      </div>
+
+      <button class="btn btn-gold" id="submit">Enter the Pro division</button>
+      <div class="banner" id="banner"></div>
+      <p class="note">Simulated trading. The prize is a real funded/evaluation account at a partner
+      prop firm, issued after identity verification. A free Alternative Method of Entry is available
+      for every competition. By entering you agree to the Official Rules and Terms.</p>
+    </div>
+
+    <div class="panel sum">
+      <div class="label">Order summary</div>
+      <div class="row"><span>Division</span><span class="v" id="sDiv">Pro</span></div>
+      <div class="row"><span>Simulated account</span><span class="v" id="sAcct">$50,000</span></div>
+      <div class="row"><span>Entry</span><span class="v" id="sEntry">Subscription</span></div>
+      <div class="row"><span>Winners each week</span><span class="v">Top 3</span></div>
+      <div class="prize">
+        <div class="l">If you finish top 3</div>
+        <div class="v" id="sPrize">Funded $50K account</div>
+      </div>
+      <div class="total"><span class="l">Billed weekly</span><span class="v" id="sTotal">$10</span></div>
+    </div>
+  </div>
+</div>
+
+<script>
+(function(){
+  var PLANS={ starter:{name:'Starter',price:5,acct:'$25,000',prize:'Funded $25K account'},
+              pro:{name:'Pro',price:10,acct:'$50,000',prize:'Funded $50K account'},
+              elite:{name:'Elite',price:15,acct:'$100,000',prize:'Funded $100K account'} };
+  var slug='pro', amoe=0;
+  var qp=new URLSearchParams(location.search).get('plan'); if(qp&&PLANS[qp]) slug=qp;
+
+  function renderSummary(){
+    var p=PLANS[slug];
+    document.getElementById('sDiv').textContent=p.name;
+    document.getElementById('sAcct').textContent=p.acct;
+    document.getElementById('sPrize').textContent=p.prize;
+    document.getElementById('sEntry').textContent=amoe?'Free entry (AMOE)':'Subscription';
+    document.getElementById('sTotal').textContent=amoe?'$0':'$'+p.price;
+    document.getElementById('subDesc').textContent='$'+p.price+'/week. Keeps your account active, cancel anytime.';
+    document.getElementById('submit').textContent=(amoe?'Enter free . ':'Enter the '+p.name+' division');
+    // reflect selection
+    document.querySelectorAll('#divs .divopt').forEach(function(d){ d.classList.toggle('sel', d.dataset.slug===slug); });
+  }
+  document.querySelectorAll('#divs .divopt').forEach(function(d){ d.onclick=function(){ slug=d.dataset.slug; renderSummary(); }; });
+  document.querySelectorAll('#entry .entryopt').forEach(function(e){ e.onclick=function(){
+    amoe=Number(e.dataset.amoe);
+    document.querySelectorAll('#entry .entryopt').forEach(function(x){x.classList.remove('sel');}); e.classList.add('sel');
+    renderSummary();
+  };});
+
+  function valid(){
+    var n=document.getElementById('name').value.trim();
+    var em=document.getElementById('email').value.trim();
+    var okN=n.length>1, okE=/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(em);
+    document.getElementById('nameErr').style.display=okN?'none':'block';
+    document.getElementById('emailErr').style.display=okE?'none':'block';
+    return okN&&okE?{name:n,email:em}:null;
+  }
+
+  document.getElementById('submit').onclick=async function(){
+    var v=valid(); if(!v) return;
+    var b=document.getElementById('banner'); var btn=this; btn.disabled=true; b.className='banner';
+    try{
+      var r=await fetch('/.netlify/functions/pf-subscribe',{method:'POST',headers:{'Content-Type':'application/json'},
+        body:JSON.stringify({email:v.email,name:v.name,plan_slug:slug,amoe:!!amoe})});
+      if(r.ok){ var j=await r.json(); b.className='banner ok'; b.textContent='You are in. '+(amoe?'Free entry':'Subscription')+' confirmed for the '+PLANS[slug].name+' division. Account '+(j.account_id||'').slice(0,8)+' is live.'; }
+      else { throw new Error('not ok'); }
+    }catch(e){
+      b.className='banner info';
+      b.textContent='Test mode: the entry form is wired to pf-subscribe, but the backend is not connected yet (Supabase + Square sandbox pending). Your selection ('+PLANS[slug].name+', '+(amoe?'free entry':'$'+PLANS[slug].price+'/wk')+') validated correctly.';
+    }
+    btn.disabled=false;
+  };
+  renderSummary();
+})();
+</script>
+</body>
+</html>

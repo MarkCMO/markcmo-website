@@ -1,0 +1,9 @@
+# wetyr.com robots. Served at the wetyr.com root by the wetyr Cloudflare Pages project.
+User-agent: *
+Allow: /
+Disallow: /arena/admin/
+Disallow: /arena/app/
+Disallow: /arena/dashboard/
+Disallow: /arena/claim/
+
+Sitemap: https://wetyr.com/arena/sitemap.xml

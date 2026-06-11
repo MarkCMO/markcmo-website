@@ -1,0 +1,167 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<link rel="canonical" href="https://wetyr.com/arena/leaderboard/">
+<meta name="robots" content="index,follow,max-image-preview:large">
+<meta name="theme-color" content="#0a0f2c">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="alternate icon" href="/favicon.webp">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="WETYR Arena">
+<meta property="og:title" content="WETYR Arena live leaderboard">
+<meta property="og:description" content="This week's standings. Pass the challenge, rank by consistency, and the top 3 in each division win a funded prop account.">
+<meta property="og:url" content="https://wetyr.com/arena/leaderboard/">
+<meta property="og:image" content="https://wetyr.com/arena/og.jpg">
+<meta name="twitter:card" content="summary_large_image">
+<title>WETYR Arena: live leaderboard</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Newsreader:opsz,wght@6..72,500;6..72,600&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ink-900:#0a0f2c;--ink-800:#0F1828;--ink-700:#15203a;--ink-600:#1E2A47;--ink-line:rgba(255,255,255,0.08);
+    --gold:#C9A84C;--gold-bright:#E8C76A;--ok:#2EBA73;--ok-bg:rgba(46,186,115,0.12);
+    --red:#e74c3c;--red-bg:rgba(231,76,60,0.12);--amber:#F2C744;
+    --t1:#fff;--t2:rgba(255,255,255,0.72);--t3:rgba(255,255,255,0.45);--t4:rgba(255,255,255,0.28);
+    --disp:'Newsreader',Georgia,serif;--sans:-apple-system,BlinkMacSystemFont,'SF Pro Text','Inter','Segoe UI',Roboto,Helvetica,Arial,sans-serif;
+    --mono:'JetBrains Mono','SF Mono',ui-monospace,Menlo,Consolas,monospace;
+    --shadow:0 1px 0 rgba(255,255,255,0.05) inset,0 16px 48px rgba(0,0,0,0.4);
+  }
+  *{box-sizing:border-box;}
+  body{margin:0;background:var(--ink-900);color:var(--t1);font-family:var(--sans);-webkit-font-smoothing:antialiased;}
+  a{color:inherit;text-decoration:none;} .mono{font-family:var(--mono);}
+  .wrap{max-width:1000px;margin:0 auto;padding:0 24px;}
+  nav{border-bottom:1px solid var(--ink-line);background:rgba(10,15,44,0.9);position:sticky;top:0;z-index:20;}
+  nav .wrap{display:flex;align-items:center;justify-content:space-between;height:62px;}
+  .brand{font-family:var(--disp);font-size:19px;font-weight:600;}
+  .brand .sub{font-family:var(--sans);font-size:10px;letter-spacing:0.18em;text-transform:uppercase;color:var(--t3);font-weight:600;margin-left:8px;}
+  .links{display:flex;gap:28px;align-items:center;}
+  .links a{font-size:14px;color:var(--t2);} .links a.active{color:var(--gold);} .links a:hover{color:var(--t1);}
+  .btn{display:inline-block;font-weight:600;font-size:13px;border-radius:8px;padding:10px 18px;cursor:pointer;border:0;background:var(--gold);color:var(--ink-900);}
+  .btn:hover{background:var(--gold-bright);}
+  .eyebrow{font-size:11px;letter-spacing:0.18em;text-transform:uppercase;color:var(--gold);font-weight:600;}
+  section{padding:32px 0;}
+  h1{font-family:var(--disp);font-weight:500;font-size:34px;letter-spacing:-0.02em;margin:10px 0 0;}
+  .sub2{color:var(--t2);font-size:15px;margin-top:8px;max-width:46em;}
+
+  .tabs{display:flex;gap:8px;margin:24px 0 0;}
+  .tab{padding:10px 18px;border-radius:9px;background:var(--ink-800);border:1px solid var(--ink-line);color:var(--t2);font-size:13px;font-weight:600;cursor:pointer;}
+  .tab.active{border-color:var(--gold-dim,#8B7332);color:var(--gold);background:rgba(201,168,76,0.08);}
+  .tab .sz{font-family:var(--mono);font-size:11px;color:var(--t3);display:block;margin-top:2px;}
+
+  .week{display:flex;justify-content:space-between;align-items:center;margin-top:24px;}
+  .week .t{font-size:13px;color:var(--t3);font-family:var(--mono);}
+
+  .prizebar{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-top:16px;}
+  .pz{background:linear-gradient(180deg,var(--ink-700),var(--ink-800));border:1px solid var(--ink-line);border-radius:12px;padding:16px;}
+  .pz.win{border-color:var(--gold-bright);}
+  .pz .p{font-family:var(--mono);font-size:13px;color:var(--gold);}
+  .pz .w{font-size:14px;margin-top:6px;}
+  .pz .nm{font-family:var(--mono);font-size:12px;color:var(--t3);margin-top:6px;}
+
+  .panel{background:var(--ink-800);border-radius:16px;box-shadow:var(--shadow);overflow:hidden;margin-top:18px;}
+  table{width:100%;border-collapse:collapse;}
+  th,td{text-align:left;padding:13px 20px;border-bottom:1px solid var(--ink-line);font-size:13px;}
+  th{font-size:10px;letter-spacing:0.14em;text-transform:uppercase;color:var(--t3);font-weight:600;}
+  td.r{font-family:var(--mono);} tr:last-child td{border-bottom:0;}
+  tr.win td{background:rgba(201,168,76,0.05);}
+  .rk{font-family:var(--mono);color:var(--gold);width:40px;}
+  .medal{color:var(--gold);}
+  .tag{font-size:10px;letter-spacing:0.1em;text-transform:uppercase;padding:3px 9px;border-radius:9999px;}
+  .tag-win{background:var(--ok-bg);color:#5ED99A;} .tag-out{background:var(--red-bg);color:#F08A7F;} .tag-live{background:rgba(201,168,76,0.14);color:var(--gold);}
+  .how{display:flex;gap:10px;align-items:flex-start;background:var(--ink-800);border-radius:12px;padding:16px 18px;margin-top:18px;}
+  .how .k{color:var(--gold);font-family:var(--mono);} .how p{margin:0;font-size:13px;color:var(--t2);line-height:1.6;}
+  .note{font-size:11px;color:var(--t4);margin-top:18px;}
+  @media(max-width:760px){ .prizebar{grid-template-columns:1fr;} .links a:not(.btn){display:none;} th.h,td.h{display:none;} }
+</style>
+</head>
+<body>
+<nav>
+  <div class="wrap">
+    <a class="brand" href="/arena/">WETYR <span class="sub">Arena</span></a>
+    <div class="links">
+      <a href="/arena/dashboard/">Dashboard</a>
+      <a href="/arena/leaderboard/" class="active">Leaderboard</a>
+      <a href="/arena/app/">Simulator</a>
+      <a href="/arena/#divisions" class="btn">Enter this week</a>
+    </div>
+  </div>
+</nav>
+
+<div class="wrap">
+  <section>
+    <div class="eyebrow">Live leaderboard</div>
+    <h1>This week's standings</h1>
+    <p class="sub2">Ranked by skill, not by who gambled biggest. Everyone who passes the challenge is
+    ranked by consistency and drawdown control. The top 3 in each division win a funded prop account.</p>
+
+    <div class="tabs" id="tabs">
+      <div class="tab active" data-div="starter">Starter<span class="sz">$25K . $5/wk</span></div>
+      <div class="tab" data-div="pro">Pro<span class="sz">$50K . $10/wk</span></div>
+      <div class="tab" data-div="elite">Elite<span class="sz">$100K . $15/wk</span></div>
+    </div>
+
+    <div class="week">
+      <div class="t">Week of Jun 8, 2026 . closes Fri 4:00 PM ET</div>
+      <div class="t" id="entrants">312 entrants</div>
+    </div>
+
+    <div class="prizebar" id="prizebar"></div>
+
+    <div class="panel">
+      <table id="lb">
+        <thead><tr><th>Rank</th><th>Trader</th><th>Profit</th><th class="h">Max DD</th><th class="h">Days</th><th>Consistency</th><th>Status</th></tr></thead>
+        <tbody></tbody>
+      </table>
+    </div>
+
+    <div class="how">
+      <span class="k">i</span>
+      <p><b>How ranking works.</b> You must reach the profit target without breaching the trailing
+      drawdown or daily loss limit. Among everyone who passes, rank is set by consistency (no single
+      day over 40% of profit) and lowest drawdown. A bigger one-day gamble does not beat steady,
+      disciplined trading. The same profile a real prop firm wants to fund.</p>
+    </div>
+    <p class="note">Simulated trading on replayed data. Prizes are funded/evaluation accounts at
+    partner prop firms, issued after identity verification. Standings shown are sample data.</p>
+  </section>
+</div>
+
+<script>
+(function(){
+  var prizeByDiv={ starter:'Funded $25K account', pro:'Funded $50K account', elite:'Funded $100K account' };
+  var entrantsByDiv={ starter:'487 entrants', pro:'312 entrants', elite:'128 entrants' };
+  // [name, profit, maxDD, days, consistency, status]
+  var data={
+    starter:[['tape_reader',1640,180,5,94,'pass'],['micro_mike',1580,240,5,91,'pass'],['steady_eddie',1510,210,6,90,'pass'],
+      ['gap_n_go',1490,520,5,77,'pass'],['orb_trader',1320,440,5,80,'live'],['scalp_queen',1180,360,4,83,'live'],['yolo_yuki',1710,1010,3,52,'out']],
+    pro:[['nq_sniper',3420,640,7,92,'pass'],['opening_drive',3180,710,7,88,'pass'],['es_discipline',3050,690,6,86,'pass'],
+      ['micro_macro',2610,1480,6,71,'live'],['wick_hunter',1940,980,5,78,'live'],['fade_the_open',1610,1320,5,69,'out']],
+    elite:[['liquidity_hunt',6240,1180,8,90,'pass'],['delta_dom',6020,1320,8,87,'pass'],['vwap_vince',5880,1240,7,85,'pass'],
+      ['range_rider',5210,2410,6,73,'live'],['breakout_bo',4760,2680,6,66,'live']]
+  };
+  function money(x){return (x>=0?'+$':'-$')+Math.abs(x).toLocaleString('en-US');}
+  function render(div){
+    document.getElementById('entrants').textContent=entrantsByDiv[div];
+    // prize bar: top 3
+    var pb=document.getElementById('prizebar'); var labels=['1st place','2nd place','3rd place']; var h='';
+    for(var i=0;i<3;i++){ var r=data[div][i]; h+='<div class="pz win"><div class="p">'+labels[i]+' . '+prizeByDiv[div]+'</div><div class="w">'+(r?money(r[1]):'--')+'</div><div class="nm">'+(r?r[0]:'open')+'</div></div>'; }
+    pb.innerHTML=h;
+    // table
+    var tb=document.querySelector('#lb tbody'),html='';
+    data[div].forEach(function(r,i){
+      var status = r[5]==='out'?'<span class="tag tag-out">Breached</span>':(i<3?'<span class="tag tag-win">Winning</span>':'<span class="tag tag-live">In the running</span>');
+      var rk = i<3?'<span class="medal">'+(i+1)+'</span>':(i+1);
+      html+='<tr class="'+(i<3?'win':'')+'"><td class="rk">'+rk+'</td><td>'+r[0]+'</td><td class="r">'+money(r[1])+'</td><td class="r h">$'+r[2].toLocaleString()+'</td><td class="r h">'+r[3]+'</td><td class="r">'+r[4]+'%</td><td>'+status+'</td></tr>';
+    });
+    tb.innerHTML=html;
+  }
+  var tabs=document.querySelectorAll('#tabs .tab');
+  tabs.forEach(function(t){ t.onclick=function(){ tabs.forEach(function(x){x.classList.remove('active');}); t.classList.add('active'); render(t.dataset.div); }; });
+  render('starter');
+})();
+</script>
+</body>
+</html>

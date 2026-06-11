@@ -35,6 +35,9 @@ const SKIP_DIRS = new Set([
   'node_modules', 'dist', 'tmp', '.git', '.claude', '.netlify',
   '.wrangler', '.cursor', 'functions', 'netlify', 'scripts',
   'cloudflare', 'supabase', '.github',
+  // WETYR Arena lives on its own domain (wetyr.com), deployed by
+  // .github/workflows/deploy-wetyr.yml. Keep it OFF markcmo.com.
+  'arena', 'wetyr-static',
 ]);
 
 // Max uncompressed body per CF KV bulk-put request. CF's hard limit is

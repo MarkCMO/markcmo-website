@@ -1,0 +1,37 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630">
+  <!-- WETYR Arena OG share card. Source. Export to og.jpg (1200x630) for social. -->
+  <defs>
+    <radialGradient id="glow" cx="78%" cy="22%" r="55%">
+      <stop offset="0" stop-color="#C9A84C" stop-opacity="0.22"/>
+      <stop offset="60%" stop-color="#C9A84C" stop-opacity="0"/>
+    </radialGradient>
+    <linearGradient id="card" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#15203a"/>
+      <stop offset="1" stop-color="#0F1828"/>
+    </linearGradient>
+  </defs>
+
+  <rect width="1200" height="630" fill="#0a0f2c"/>
+  <rect width="1200" height="630" fill="url(#glow)"/>
+
+  <!-- eyebrow -->
+  <text x="80" y="150" font-family="'JetBrains Mono','SF Mono',monospace" font-size="22" letter-spacing="6" fill="#C9A84C" font-weight="600">WETYR ARENA</text>
+
+  <!-- headline -->
+  <text x="78" y="278" font-family="Georgia,'Newsreader',serif" font-size="84" fill="#ffffff" font-weight="500">Win a funded prop account.</text>
+  <text x="78" y="378" font-family="Georgia,'Newsreader',serif" font-size="84" fill="#C9A84C" font-weight="500">Prove it for $5 a week.</text>
+
+  <!-- subline -->
+  <text x="80" y="448" font-family="-apple-system,Helvetica,Arial,sans-serif" font-size="28" fill="rgba(255,255,255,0.72)">Weekly futures trading competition. Top 3 in each division</text>
+  <text x="80" y="486" font-family="-apple-system,Helvetica,Arial,sans-serif" font-size="28" fill="rgba(255,255,255,0.72)">win a real funded account. Simulated trading, real prize.</text>
+
+  <!-- prize chip -->
+  <rect x="80" y="528" width="360" height="64" rx="14" fill="url(#card)" stroke="#C9A84C" stroke-opacity="0.6"/>
+  <text x="104" y="558" font-family="'JetBrains Mono',monospace" font-size="13" letter-spacing="3" fill="rgba(255,255,255,0.55)">THIS WEEK'S TOP PRIZE</text>
+  <text x="104" y="582" font-family="'JetBrains Mono',monospace" font-size="22" fill="#C9A84C">Funded Apex $100K account</text>
+
+  <!-- tiers, right -->
+  <g font-family="'JetBrains Mono',monospace" text-anchor="end">
+    <text x="1120" y="500" font-size="20" fill="rgba(255,255,255,0.45)">Starter $5  .  Pro $10  .  Elite $15</text>
+  </g>
+</svg>
