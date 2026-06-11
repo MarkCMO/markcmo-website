@@ -87,6 +87,62 @@ export default {
       audit.from = headerFromEmail || envelopeFrom;
       audit.envelope_from = envelopeFrom;
 
+      // ─── Mark's personal inbound capture ───────────────────────
+      // Mark's directive 2026-06-10: "make it land in mark@markcmo.com
+      // instead of marklgabriellijr@gmail.com."
+      //
+      // For mail addressed to mark@markcmo.com (the canonical address),
+      // store the full message in mc_mailbox_messages with direction=
+      // inbound so Mark sees it in his webmail Inbox at /mail.html.
+      // We do NOT classify it as a prep reply; that's a separate flow
+      // for prep@markcmo.com only.
+      if (audit.to === 'mark@markcmo.com') {
+        try {
+          // Extract auth result headers stamped by CF Email Routing
+          const authResults = (parsed.headers['authentication-results'] || '').toLowerCase();
+          const spfResult = (authResults.match(/spf=([a-z]+)/) || [])[1] || null;
+          const dkimResult = (authResults.match(/dkim=([a-z]+)/) || [])[1] || null;
+          const dmarcResult = (authResults.match(/dmarc=([a-z]+)/) || [])[1] || null;
+
+          const fromName = extractDisplayName(parsed.fromRaw) || '';
+          const bodyText = parsed.body || '';
+
+          await withRetry(
+            () => sbInsert(env, 'mc_mailbox_messages', {
+              direction: 'inbound',
+              from_addr: headerFromEmail || envelopeFrom,
+              from_name: fromName || null,
+              to_addrs: [audit.to],
+              reply_to: parsed.headers['reply-to'] || null,
+              subject: audit.subject,
+              body_text: bodyText.substring(0, 32000),
+              body_html: (parsed.htmlBody || null),
+              body_preview: bodyText.replace(/\s+/g, ' ').trim().slice(0, 240),
+              raw_headers: parsed.headers || null,
+              spf_result: spfResult,
+              dkim_result: dkimResult,
+              dmarc_result: dmarcResult,
+              message_id_header: parsed.headers['message-id'] || null,
+              in_reply_to: parsed.headers['in-reply-to'] || null,
+              references_header: parsed.headers['references'] || null,
+              metadata: { handler_version: HANDLER_VERSION, envelope_from: envelopeFrom },
+            }),
+            'mailbox_inbound_store',
+          );
+          audit.step = 'stored_in_mailbox';
+        } catch (e) {
+          audit.step = 'mailbox_store_failed';
+          audit.error_message = (e && e.message) || String(e);
+          console.error('MAILBOX_INBOUND_STORE_FAILED', JSON.stringify({
+            from: audit.from, subject: audit.subject,
+            error: (e && e.message) || String(e),
+          }));
+        }
+        // Done - inbound to mark@ does NOT go through the prep classifier.
+        // Return early so we skip the engagement match / classification path.
+        return;
+      }
+
       // Look up engagement by sender email (prefer header From over envelope From)
       let engagement = null;
       let client = null;
