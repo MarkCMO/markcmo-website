@@ -75,7 +75,17 @@
 
   /* ── nav injection ───────────────────────────────────────── */
   function injectNav(html) {
-    /* If canonical nav already present (id="mainNav"), just wire interactions */
+    /* If the NEW master nav (functions/_middleware.js injection) is
+       already on the page, do NOTHING. The middleware system supersedes
+       this legacy fetch-and-inject path. Mark's directive 2026-06-11:
+       previously this function was DELETING the master nav because it
+       only knew about the old id="mainNav" canonical and treated
+       id="mcMasterNav" as garbage to remove. */
+    if (document.getElementById('mcMasterNav') ||
+        document.querySelector('.mc-master-nav')) {
+      return;
+    }
+    /* If old canonical nav already present (id="mainNav"), just wire interactions */
     if (document.getElementById('mainNav')) {
       initNav();
       return;
@@ -103,10 +113,16 @@
 
   /* ── footer injection ────────────────────────────────────── */
   function injectFooter(html) {
-    /* Always replace any existing footer with the canonical footer.
-       This ensures consistent layout across city, state, service, and
-       blog pages — eliminates footer-mega column-overflow and sparse-
-       grid issues on older page templates. */
+    /* If the NEW master footer is already injected by middleware, leave
+       it alone. Without this guard, the legacy "always replace any footer"
+       behavior below would delete the master footer that was just injected
+       by functions/_middleware.js. */
+    if (document.getElementById('mcMasterFooter') ||
+        document.querySelector('.mc-master-footer')) {
+      return;
+    }
+    /* Otherwise: replace any existing footer with the legacy canonical
+       footer. */
     var existing = document.querySelector('footer');
     if (existing) existing.remove();
     document.body.insertAdjacentHTML('beforeend', html);
