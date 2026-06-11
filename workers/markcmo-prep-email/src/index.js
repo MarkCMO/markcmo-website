@@ -89,14 +89,20 @@ export default {
 
       // ─── Mark's personal inbound capture ───────────────────────
       // Mark's directive 2026-06-10: "make it land in mark@markcmo.com
-      // instead of marklgabriellijr@gmail.com."
+      // instead of marklgabriellijr@gmail.com." Extended same-day to also
+      // cover info@wetyr.com (fix #2). All of Mark's personal addresses
+      // route through this worker and land in the /mail.html webmail.
       //
-      // For mail addressed to mark@markcmo.com (the canonical address),
-      // store the full message in mc_mailbox_messages with direction=
-      // inbound so Mark sees it in his webmail Inbox at /mail.html.
-      // We do NOT classify it as a prep reply; that's a separate flow
-      // for prep@markcmo.com only.
-      if (audit.to === 'mark@markcmo.com') {
+      // For mail addressed to any of Mark's mailbox addresses, store the
+      // full message in mc_mailbox_messages with direction=inbound so
+      // Mark sees it in his webmail Inbox at /mail.html. We do NOT
+      // classify it as a prep reply; that's a separate flow for
+      // prep@markcmo.com only.
+      const MARKS_MAILBOXES = new Set([
+        'mark@markcmo.com',
+        'info@wetyr.com',
+      ]);
+      if (MARKS_MAILBOXES.has(audit.to)) {
         try {
           // Extract auth result headers stamped by CF Email Routing
           const authResults = (parsed.headers['authentication-results'] || '').toLowerCase();
