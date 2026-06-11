@@ -1,0 +1,301 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>How I Work: AI-Native Operating Model | Amzur Technologies | MarkCMO</title>
+<meta name="description" content="How AI shows up in Mark Gabrielli's own operating model, and why the gated audit package you are reading is the proof." />
+<meta name="robots" content="noindex, nofollow, noarchive, nosnippet, noimageindex" />
+<meta http-equiv="Cache-Control" content="no-store, no-cache, must-revalidate, private" />
+<link rel="preconnect" href="https://fonts.googleapis.com" crossorigin>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=DM+Mono:wght@400;500&display=swap">
+<style>
+  :root{
+    --navy:#0B2239;--navy-mid:#0F2D4A;--navy-light:#16395E;
+    --blue:#066AAB;--blue-hover:#055A92;--blue-light:#4FBFE4;--blue-pale:#ECF6FC;
+    --green:#22C55E;--green-pale:#ECFDF3;--amber:#F59E0B;--amber-pale:#FFF7ED;--red:#DC2626;--red-pale:#FEF2F2;
+    --white:#FFFFFF;--off-white:#F8FAFC;--light:#F1F5F9;--border:#E5E7EB;
+    --text:#1F2937;--text-mid:#64748B;--text-light:#94A3B8;
+    --shadow-md:0 4px 16px rgba(11,34,57,0.08), 0 8px 32px rgba(11,34,57,0.06);
+  }
+  *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+  body{font-family:'Inter',system-ui,-apple-system,sans-serif;background:var(--off-white);color:var(--text);line-height:1.65;-webkit-font-smoothing:antialiased;}
+  a{color:var(--blue);text-decoration:none;}
+  .doc-nav{position:sticky;top:0;z-index:100;background:var(--white);border-bottom:1px solid var(--border);padding:0.9rem 2rem;display:flex;justify-content:space-between;align-items:center;}
+  .doc-nav-logo{font-weight:800;font-size:1.15rem;letter-spacing:0.04em;color:var(--blue);}
+  .doc-nav-logo span{color:var(--text);}
+  .doc-nav-back{font-family:'DM Mono',monospace;font-size:0.7rem;letter-spacing:0.12em;text-transform:uppercase;color:var(--text-light);}
+  .doc-nav-back a{color:var(--blue);font-weight:600;}
+  .cover-hero{background:linear-gradient(135deg,var(--navy) 0%,var(--navy-mid) 50%,var(--navy-light) 100%);color:#fff;padding:3.5rem 2rem;position:relative;overflow:hidden;box-shadow:0 24px 60px -16px rgba(11,34,57,0.35);}
+  .cover-hero::before{content:'';position:absolute;inset:0;background:radial-gradient(circle at 85% 15%, rgba(79,191,228,0.20) 0%, transparent 52%);pointer-events:none;}
+  .cover-hero-inner{max-width:920px;margin:0 auto;position:relative;z-index:1;}
+  .cover-logo{height:30px;width:auto;margin-bottom:1.4rem;display:block;}
+  .doc-id-tag{font-family:'DM Mono',monospace;font-size:0.72rem;letter-spacing:0.2em;text-transform:uppercase;color:var(--blue-light);margin-bottom:0.9rem;}
+  .cover-hero h1{font-size:clamp(2rem,4.4vw,2.9rem);font-weight:800;letter-spacing:-0.02em;line-height:1.08;margin-bottom:1rem;}
+  .cover-hero h1 em{color:var(--blue-light);font-style:normal;}
+  .cover-hero-sub{font-size:1.04rem;color:rgba(248,250,252,0.80);max-width:640px;line-height:1.6;}
+  .doc-body{max-width:920px;margin:0 auto;padding:3.5rem 2rem;}
+  .section-eyebrow{font-family:'DM Mono',monospace;font-size:0.7rem;letter-spacing:0.18em;text-transform:uppercase;color:var(--blue);margin-bottom:0.85rem;font-weight:500;display:inline-block;padding:0.35rem 0.85rem;background:var(--blue-pale);border-radius:6px;}
+  h2{font-size:clamp(1.5rem,3vw,2rem);font-weight:800;letter-spacing:-0.02em;color:var(--navy);margin-bottom:1.1rem;line-height:1.15;}
+  h2 span{color:var(--blue);}
+  p{margin-bottom:1rem;font-size:0.99rem;}
+  strong{color:var(--navy);font-weight:700;}
+
+  .split{display:grid;grid-template-columns:1fr 1fr;gap:1.25rem;margin:1.75rem 0;}
+  @media(max-width:680px){.split{grid-template-columns:1fr;}}
+  .sp{border:1px solid var(--border);border-radius:14px;padding:1.5rem;background:var(--white);box-shadow:var(--shadow-md);}
+  .sp.human{border-top:3px solid var(--navy);}
+  .sp.ai{border-top:3px solid var(--blue);}
+  .sp .sp-pct{font-family:'Inter',sans-serif;font-weight:800;font-size:2rem;letter-spacing:-0.01em;}
+  .sp.human .sp-pct{color:var(--navy);}
+  .sp.ai .sp-pct{color:var(--blue);}
+  .sp h4{font-weight:700;font-size:1.05rem;color:var(--navy);margin:0.2rem 0 0.6rem;}
+  .sp ul{list-style:none;}
+  .sp ul li{font-size:0.9rem;color:var(--text-mid);padding:0.3rem 0 0.3rem 1.2rem;position:relative;line-height:1.5;}
+  .sp ul li::before{content:'';position:absolute;left:2px;top:9px;width:6px;height:6px;border-radius:50%;background:var(--blue);}
+  .sp.human ul li::before{background:var(--navy);}
+
+  .stats{display:grid;grid-template-columns:repeat(3,1fr);gap:1rem;margin:1.75rem 0;}
+  @media(max-width:680px){.stats{grid-template-columns:1fr;}}
+  .stat{background:var(--white);border:1px solid var(--border);border-radius:14px;padding:1.4rem;box-shadow:var(--shadow-md);text-align:center;}
+  .stat .n{font-family:'Inter',sans-serif;font-weight:800;font-size:2rem;color:var(--blue);letter-spacing:-0.01em;line-height:1;}
+  .stat .l{font-size:0.86rem;color:var(--text-mid);margin-top:0.5rem;line-height:1.4;}
+
+  .proof{background:var(--navy);color:#fff;border-radius:18px;padding:2.2rem;margin:1.75rem 0;position:relative;overflow:hidden;box-shadow:var(--shadow-md);}
+  .proof::before{content:'';position:absolute;inset:0;background:radial-gradient(circle at 88% 20%,rgba(79,191,228,0.22),transparent 58%);}
+  .proof > *{position:relative;z-index:1;}
+  .proof .lbl{font-family:'DM Mono',monospace;font-size:0.66rem;letter-spacing:0.18em;text-transform:uppercase;color:var(--blue-light);margin-bottom:0.7rem;}
+  .proof h3{font-weight:800;font-size:1.5rem;color:#fff;margin-bottom:0.8rem;letter-spacing:-0.01em;line-height:1.2;}
+  .proof p{color:rgba(255,255,255,0.85);font-size:1rem;margin-bottom:0.8rem;}
+  .proof p:last-child{margin-bottom:0;}
+  .proof strong{color:#fff;}
+
+  .pgrid{display:grid;grid-template-columns:1fr 1fr;gap:0.8rem;margin-top:1.2rem;}
+  @media(max-width:600px){.pgrid{grid-template-columns:1fr;}}
+  .pitem{background:rgba(255,255,255,0.06);border:1px solid rgba(79,191,228,0.22);border-radius:10px;padding:0.9rem 1.1rem;}
+  .pitem .pi-ai{font-family:'DM Mono',monospace;font-size:0.58rem;letter-spacing:0.12em;text-transform:uppercase;color:var(--blue-light);margin-bottom:0.3rem;}
+  .pitem .pi-h{color:#fff;font-weight:700;font-size:0.92rem;margin-bottom:0.2rem;}
+  .pitem p{color:rgba(255,255,255,0.7);font-size:0.82rem;margin:0;line-height:1.45;}
+
+  .principle{background:var(--blue-pale);border:1px solid rgba(6,106,171,0.18);border-radius:14px;padding:1.6rem 1.8rem;margin:2rem 0;}
+  .principle .lbl{font-family:'DM Mono',monospace;font-size:0.66rem;letter-spacing:0.18em;text-transform:uppercase;color:var(--blue);font-weight:500;margin-bottom:0.5rem;}
+  .principle h3{font-weight:700;font-size:1.2rem;color:var(--navy);margin-bottom:0.6rem;letter-spacing:-0.01em;}
+  .principle p{font-size:0.95rem;margin-bottom:0.6rem;}
+  .principle p:last-child{margin-bottom:0;}
+
+  .apply{list-style:none;margin:1.25rem 0;}
+  .apply li{background:var(--white);border:1px solid var(--border);border-radius:12px;padding:1.1rem 1.3rem;margin-bottom:0.8rem;box-shadow:var(--shadow-md);display:flex;gap:1rem;align-items:flex-start;}
+  .apply li .an{flex-shrink:0;font-family:'Inter',sans-serif;font-weight:800;color:var(--blue);font-size:1.1rem;width:26px;}
+  .apply li .at h4{font-weight:700;font-size:1rem;color:var(--navy);margin-bottom:0.2rem;}
+  .apply li .at p{font-size:0.9rem;color:var(--text-mid);margin:0;line-height:1.5;}
+
+  .cta-strip{background:linear-gradient(135deg,var(--navy) 0%,var(--navy-mid) 100%);color:#fff;border-radius:18px;padding:2.4rem;margin:3rem 0 1rem;text-align:center;position:relative;overflow:hidden;box-shadow:var(--shadow-md);}
+  .cta-strip::before{content:'';position:absolute;inset:0;background:radial-gradient(circle at 80% 30%,rgba(79,191,228,0.22) 0%,transparent 60%);}
+  .cta-strip > *{position:relative;z-index:1;}
+  .cta-strip h3{font-weight:800;font-size:1.5rem;color:#fff;margin-bottom:0.6rem;letter-spacing:-0.01em;}
+  .cta-strip p{color:rgba(255,255,255,0.80);max-width:560px;margin:0 auto 1.4rem;font-size:0.96rem;}
+  .cta-primary{display:inline-flex;align-items:center;gap:0.5rem;padding:0.95rem 1.9rem;background:var(--blue);color:#fff;font-weight:700;font-size:0.95rem;border-radius:10px;transition:all 0.18s;box-shadow:0 4px 14px rgba(6,106,171,0.3);}
+  .cta-primary:hover{background:var(--blue-hover);transform:translateY(-1px);color:#fff;}
+  .cta-ghost{display:inline-flex;align-items:center;gap:0.5rem;padding:0.95rem 1.9rem;background:transparent;color:#fff;border:1.5px solid rgba(79,191,228,0.45);font-weight:600;font-size:0.95rem;border-radius:10px;margin-left:0.5rem;}
+
+  footer.doc-footer{background:var(--navy);color:rgba(255,255,255,0.6);padding:2.5rem 2rem;border-top:3px solid var(--blue);}
+  .doc-footer-inner{max-width:920px;margin:0 auto;display:grid;grid-template-columns:1fr auto;gap:2rem;align-items:center;}
+  @media(max-width:600px){.doc-footer-inner{grid-template-columns:1fr;}}
+  .doc-footer-logo{font-weight:800;font-size:1.25rem;letter-spacing:0.03em;color:#fff;}
+  .doc-footer-logo span{color:var(--blue-light);}
+  .doc-footer p{font-size:0.82rem;line-height:1.6;margin:0.4rem 0 0;color:rgba(255,255,255,0.55);}
+  .doc-footer-meta{font-family:'DM Mono',monospace;font-size:0.68rem;letter-spacing:0.12em;text-transform:uppercase;color:rgba(255,255,255,0.4);text-align:right;}
+  @media(max-width:600px){.doc-footer-meta{text-align:left;}}
+</style>
+</head>
+<body>
+<!-- ACCESS GATE. Code: amzur2026 -->
+<div id="cdb-gate" role="dialog" aria-modal="true" aria-label="Private document access">
+  <div class="cdb-gate-card">
+    <div class="cdb-gate-eyebrow">Confidential Document</div>
+    <h1>Private Access</h1>
+    <p>This document is confidential and prepared for the Amzur Technologies leadership team. Please enter your access code to continue.</p>
+    <form id="cdb-gate-form" autocomplete="off">
+      <input id="cdb-gate-code" type="password" placeholder="Access code" aria-label="Access code" autocomplete="off" spellcheck="false">
+      <button type="submit">Unlock Document</button>
+      <div id="cdb-gate-err" class="cdb-gate-err" hidden>That code is not right. Please try again.</div>
+    </form>
+    <div class="cdb-gate-foot">Need access? Contact Mark at mark@markcmo.com</div>
+  </div>
+</div>
+<style>
+  body:not(.cdb-unlocked) { overflow: hidden !important; }
+  body:not(.cdb-unlocked) > *:not(#cdb-gate):not(script):not(style) { display: none !important; }
+  body.cdb-unlocked #cdb-gate { display: none !important; }
+  #cdb-gate { position: fixed; inset: 0; z-index: 2147483647; display: flex; align-items: center; justify-content: center; padding: 24px; background: #0B2239; background-image: radial-gradient(circle at 80% 8%, rgba(6,106,171,0.35), transparent 55%); font-family: 'Inter', system-ui, sans-serif; }
+  #cdb-gate .cdb-gate-card { width: 100%; max-width: 430px; background: #FFFFFF; border: 1px solid #E5E7EB; border-radius: 16px; padding: 40px 34px; text-align: center; box-shadow: 0 30px 80px rgba(0,0,0,0.45); }
+  #cdb-gate .cdb-gate-eyebrow { font-family: 'DM Mono', monospace; font-size: 10px; letter-spacing: 4px; text-transform: uppercase; color: #066AAB; }
+  #cdb-gate h1 { font-family: 'Inter', sans-serif; font-weight: 800; letter-spacing: -0.01em; font-size: 28px; color: #0B2239; margin: 16px 0 8px; }
+  #cdb-gate p { font-size: 14px; color: #5b6470; line-height: 1.6; margin: 0 0 22px; }
+  #cdb-gate-form { display: flex; flex-direction: column; gap: 12px; }
+  #cdb-gate-code { width: 100%; padding: 13px 16px; border: 1px solid #cbd5e1; border-radius: 10px; font-size: 16px; font-family: inherit; background: #fff; color: #1F2937; text-align: center; letter-spacing: 2px; }
+  #cdb-gate-code:focus { outline: none; border-color: #066AAB; box-shadow: 0 0 0 3px rgba(6,106,171,0.18); }
+  #cdb-gate-form button { padding: 13px 16px; border: none; border-radius: 10px; background: #066AAB; color: #fff; font-size: 15px; font-weight: 700; font-family: inherit; cursor: pointer; }
+  #cdb-gate-form button:hover { background: #055A92; }
+  #cdb-gate .cdb-gate-err { color: #b3261e; font-size: 13px; }
+  #cdb-gate .cdb-gate-foot { margin-top: 22px; font-size: 12px; color: #8F8F8F; }
+  #cdb-gate .cdb-shake { animation: cdbShake .4s; }
+  @keyframes cdbShake { 0%,100%{transform:translateX(0)} 20%,60%{transform:translateX(-7px)} 40%,80%{transform:translateX(7px)} }
+</style>
+<script>
+(function(){
+  var HASH='24c70c56999f4b29707be3c9dc36d4f49791e2b583133be3bb9ada3f8c331c54';
+  var KEY='amzur_doc_access';
+  function unlock(){ try{ document.body.classList.add('cdb-unlocked'); }catch(e){} var g=document.getElementById('cdb-gate'); if(g) g.parentNode && g.parentNode.removeChild(g); }
+  try { if (sessionStorage.getItem(KEY)==='1') { if(document.body) unlock(); else document.addEventListener('DOMContentLoaded', unlock); return; } } catch(e){}
+  async function sha256(s){ try{ var b=new TextEncoder().encode(s); var h=await crypto.subtle.digest('SHA-256', b); return Array.from(new Uint8Array(h)).map(function(x){return x.toString(16).padStart(2,'0');}).join(''); }catch(e){ return null; } }
+  document.addEventListener('DOMContentLoaded', function(){
+    var form=document.getElementById('cdb-gate-form'); var input=document.getElementById('cdb-gate-code');
+    var err=document.getElementById('cdb-gate-err'); var card=document.querySelector('#cdb-gate .cdb-gate-card');
+    if(input) input.focus(); if(!form) return;
+    form.addEventListener('submit', async function(e){
+      e.preventDefault();
+      var hashed=await sha256((input.value||'').toLowerCase().trim());
+      if(hashed===HASH){ try{ sessionStorage.setItem(KEY,'1'); }catch(e){} unlock(); }
+      else { if(err) err.hidden=false; if(card){ card.classList.remove('cdb-shake'); void card.offsetWidth; card.classList.add('cdb-shake'); } input.value=''; input.focus(); }
+    });
+  });
+})();
+</script>
+<!-- /ACCESS GATE -->
+
+<nav class="doc-nav">
+  <div class="doc-nav-logo">MARK<span>CMO</span></div>
+  <div class="doc-nav-back">Doc AMZ-OPS-001 &middot; <a href="./">Back to package</a></div>
+</nav>
+
+<header class="cover-hero">
+  <div class="cover-hero-inner">
+    <img class="cover-logo" src="https://amzur.com/wp-content/uploads/2024/08/Amzur_white_logo.png" alt="Amzur Technologies" />
+    <div class="doc-id-tag">AMZ-OPS-001 &middot; How I Work</div>
+    <h1>You asked how AI shows up in my work. <em>You are holding the answer.</em></h1>
+    <p class="cover-hero-sub">Your brief said AI fluency is not optional, and that you want a partner who has genuinely rebuilt their own operating model around AI rather than bolting tools onto a traditional playbook. Fair test. This document explains how I actually work, and the rest of this package is the evidence, an AI-native firm's marketing run the way we would run yours.</p>
+  </div>
+</header>
+
+<main class="doc-body">
+
+  <section style="margin-bottom:1.5rem;">
+    <div class="section-eyebrow">The Principle</div>
+    <h2>AI Amplifies Expertise. <span>It Does Not Replace It.</span></h2>
+    <p>You wrote that AI should be embedded in how you deliver, not bolted on as a buzzword, and that you hold a strong principle against inflated claims. I work the same way, and I will say plainly where the line is. AI is only as good as the subject-matter expertise pointing it. Hand a model a vague brief and you get confident, generic, often wrong output. Hand it a sharp strategy and real constraints and it becomes a force multiplier. The judgment stays human. The leverage is AI.</p>
+
+    <div class="split">
+      <div class="sp human">
+        <div class="sp-pct">60%</div>
+        <h4>Human strategy and judgment</h4>
+        <ul>
+          <li>Positioning, ICP, and the go-to-market thesis</li>
+          <li>What to build, what to cut, where the next dollar goes</li>
+          <li>Reading the data and deciding what it means</li>
+          <li>Taste, narrative, and what is actually true</li>
+          <li>Accountability for the number</li>
+        </ul>
+      </div>
+      <div class="sp ai">
+        <div class="sp-pct">40%</div>
+        <h4>AI-augmented execution</h4>
+        <ul>
+          <li>Forensic audits and research at speed and depth</li>
+          <li>Programmatic SEO and GEO at scale</li>
+          <li>Content drafting, repurposing, and variation</li>
+          <li>ABM list building, enrichment, and personalization</li>
+          <li>Reporting, monitoring, and the repetitive operational load</li>
+        </ul>
+      </div>
+    </div>
+    <p style="font-size:0.94rem;color:var(--text-mid);">This is not a traditional playbook with a few tools added. The execution layer is rebuilt around agents and automation, which is why a forensic audit that would take a traditional consultant weeks took days, and why the marketing function I build for you can run at a scale your current headcount could not reach on its own.</p>
+  </section>
+
+  <section style="margin-bottom:1rem;">
+    <div class="section-eyebrow">The Toolkit</div>
+    <h2>What The Operating Model <span>Is Built On</span></h2>
+    <div class="stats">
+      <div class="stat"><div class="n">1,200+</div><div class="l">Skill sets in my AI platform for programmatic SEO, research, content, and automation</div></div>
+      <div class="stat"><div class="n">65+</div><div class="l">Large language models tracked and used, matched to the job rather than one default</div></div>
+      <div class="stat"><div class="n">60 / 40</div><div class="l">Human strategy to AI execution, the split I actually run engagements on</div></div>
+    </div>
+    <p style="font-size:0.94rem;color:var(--text-mid);">Tools change monthly, so the edge is not any one of them. It is an operating model that absorbs new capability fast and a discipline for knowing which task belongs to a model and which belongs to a strategist.</p>
+  </section>
+
+  <section>
+    <div class="section-eyebrow">The Proof</div>
+    <h2>This Package Is The <span>Artifact</span></h2>
+    <div class="proof">
+      <div class="lbl">Built before our first working session</div>
+      <h3>I did not describe an AI-native workflow. I ran one on your own business and handed you the output.</h3>
+      <p>Before we have had a real working call, this package already contains a forensic, evidence-based audit of your live digital footprint, a full channel strategy, a scope, a timeline, and a proposal. That is not a capabilities deck. It is the work, produced the way I would produce it for Amzur, at a speed and depth a traditional approach could not match.</p>
+      <p><strong>Here is what AI did, and what judgment did:</strong></p>
+      <div class="pgrid">
+        <div class="pitem">
+          <div class="pi-ai">AI-augmented</div>
+          <div class="pi-h">Forensic site pull</div>
+          <p>Crawled and analyzed your live pages, headers, sitemap, and schema to surface the technical and on-page evidence.</p>
+        </div>
+        <div class="pitem">
+          <div class="pi-ai">AI-augmented</div>
+          <div class="pi-h">AI-visibility test</div>
+          <p>Queried answer engines the way your buyers do and captured exactly who gets cited instead of Amzur.</p>
+        </div>
+        <div class="pitem">
+          <div class="pi-ai">Human judgment</div>
+          <div class="pi-h">What it means</div>
+          <p>Reading six findings as symptoms of one disease, no one owning the go-to-market, is strategy, not output.</p>
+        </div>
+        <div class="pitem">
+          <div class="pi-ai">Human judgment</div>
+          <div class="pi-h">What to do about it</div>
+          <p>The channel strategy, the priority service mix, and the operating model are calls, not generations.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="section-eyebrow">For Amzur</div>
+    <h2>An AI-First Company Deserves An <span>AI-First Marketing Engine</span></h2>
+    <p>You are rebuilding delivery, operations, and culture around AI. Your go-to-market should be built the same way, and that is exactly what I would build, not as a slogan but as the actual operating model of your marketing function. Here is how it applies directly to your six asks.</p>
+    <ul class="apply">
+      <li><span class="an">1</span><div class="at"><h4>An AI-augmented marketing function, not just campaigns</h4><p>I would install the same agents-and-automation execution layer into your marketing operation and upskill your India team to run it, so you end with a durable AI-native function, not a dependency on me or an agency.</p></div></li>
+      <li><span class="an">2</span><div class="at"><h4>The AI-first story told honestly</h4><p>Your real, fast-maturing AI capability becomes the spine of the positioning, proven with evidence, never inflated. The credibility comes from showing the work, the same way this package does.</p></div></li>
+      <li><span class="an">3</span><div class="at"><h4>Demand generation at a scale your headcount cannot reach alone</h4><p>Programmatic SEO and GEO, AI-assisted ABM and outbound, and automated reporting let a lean team run a wide, measurable engine. AI carries the volume so your people carry the judgment.</p></div></li>
+    </ul>
+    <div class="principle">
+      <div class="lbl">Where AI Does Not Belong</div>
+      <h3>The honest boundary</h3>
+      <p>I will not let AI write your positioning, invent proof you cannot stand behind, or own a decision that needs accountability. Your principle against inflated claims is also mine, and AI makes overclaiming easier, so the discipline matters more, not less. Strategy, taste, truth, and the number stay with a human. That is the difference between AI-native and AI-theater.</p>
+    </div>
+  </section>
+
+  <div class="cta-strip">
+    <h3>The rest of the package is the proof in full</h3>
+    <p>Read the audit for the evidence, the strategy for the plan, and the scope and proposal for how the AI-first engine gets built around your existing team.</p>
+    <a href="audit" class="cta-primary">Read the Audit</a>
+    <a href="strategy" class="cta-ghost">Read the Strategy</a>
+  </div>
+
+</main>
+
+<footer class="doc-footer">
+  <div class="doc-footer-inner">
+    <div>
+      <div class="doc-footer-logo">MARK<span>CMO</span></div>
+      <p>Prepared by Mark Gabrielli &middot; markcmo.com &middot; mark@markcmo.com</p>
+      <p style="margin-top:0.2rem;">How I Work, AI-Native Operating Model, for Amzur Technologies.</p>
+    </div>
+    <div class="doc-footer-meta">
+      Doc AMZ-OPS-001 &middot; v1.0<br/>
+      Confidential &middot; Do Not Distribute
+    </div>
+  </div>
+</footer>
+
+<script>(function(){try{var k='mc_jsid';var s=sessionStorage.getItem(k)||('s_'+Math.random().toString(36).slice(2)+Date.now().toString(36));sessionStorage.setItem(k,s);fetch('/.netlify/functions/track',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({t:'view',client:'amzur',page:'ai-operating-model',session_id:s,url:location.pathname,title:document.title}),keepalive:true}).catch(function(){});}catch(e){}})();</script>
+</body>
+</html>
