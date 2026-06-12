@@ -129,28 +129,63 @@ platform :ios do
     frame_screenshots(path: "./fastlane/screenshots")
   end
 
-  # Shared build step. Uses Xcode automatic signing driven by the App Store Connect
-  # API key, so a macOS CI runner can create/fetch the distribution cert and profile
-  # on the fly (-allowProvisioningUpdates). On a developer's own Mac with signing
-  # already set up in Xcode, this also works unchanged.
+  MATCH_GIT_URL = "git@github.com:MarkCMO/markcmo-ios-certs.git".freeze
+  APP_ID = "com.petchores.app".freeze
+
+  # One-time: free a distribution-certificate slot, then generate the App Store
+  # signing identity (distribution cert + profile) and store it encrypted via match.
+  # An Apple account allows only 2 distribution certs; an earlier CI run created one
+  # (R48V36LMP5) whose private key lived on an ephemeral runner and is gone, so it is
+  # dead weight occupying a slot. Revoke just that one (never the EAS cert in use by
+  # WETYR Films), then let match create and persist a reusable identity.
+  lane :certs do
+    require "spaceship"
+    Spaceship::ConnectAPI.token = Spaceship::ConnectAPI::Token.from(
+      hash: {
+        key_id: ENV["ASC_KEY_ID"],
+        issuer_id: ENV["ASC_ISSUER_ID"],
+        key: File.read(ENV["ASC_KEY_PATH"])
+      }
+    )
+    begin
+      orphan = Spaceship::ConnectAPI::Certificate.all.find { |c| c.id == "R48V36LMP5" }
+      if orphan
+        orphan.delete!
+        UI.success("Revoked orphaned distribution certificate R48V36LMP5")
+      else
+        UI.message("Orphan cert R48V36LMP5 not present; nothing to revoke")
+      end
+    rescue => e
+      UI.important("Could not revoke R48V36LMP5: #{e.message}")
+    end
+
+    match(
+      type: "appstore",
+      app_identifier: APP_ID,
+      git_url: MATCH_GIT_URL,
+      storage_mode: "git",
+      api_key: lane_context[SharedValues::APP_STORE_CONNECT_API_KEY],
+      team_id: ENV["TEAM_ID"],
+      readonly: false
+    )
+  end
+
+  # Shared build step. Pulls the persisted signing identity from match (read-only),
+  # then builds with manual App Store signing. Run the `certs` lane once first.
   private_lane :build_ios do
     gen
     team = ENV["TEAM_ID"]
-    api_key = lane_context[SharedValues::APP_STORE_CONNECT_API_KEY]
 
-    # Automatic signing insists on a *development* provisioning profile during the
-    # archive, which requires a registered device, which a CI account does not have
-    # ("Your team has no devices"). App Store distribution profiles need no devices,
-    # so create the Apple Distribution certificate and an App Store profile up front
-    # via the API key, then build with manual signing.
-    cert(api_key: api_key, development: false)
-    sigh(
-      api_key: api_key,
-      app_identifier: "com.petchores.app",
-      platform: "ios",
-      adhoc: false
+    match(
+      type: "appstore",
+      app_identifier: APP_ID,
+      git_url: MATCH_GIT_URL,
+      storage_mode: "git",
+      api_key: lane_context[SharedValues::APP_STORE_CONNECT_API_KEY],
+      team_id: team,
+      readonly: true
     )
-    profile = lane_context[SharedValues::SIGH_NAME]
+    profile = ENV["sigh_#{APP_ID}_appstore_profile-name"]
 
     build_app(
       scheme: "PetChores",
@@ -164,7 +199,7 @@ platform :ios do
       export_options: {
         teamID: team,
         signingStyle: "manual",
-        provisioningProfiles: { "com.petchores.app" => profile }
+        provisioningProfiles: { APP_ID => profile }
       }
     )
   end

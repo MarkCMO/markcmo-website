@@ -26,7 +26,7 @@ on:
         required: true
         default: "beta"
         type: choice
-        options: [setup_app, create_iap, frames, meta, beta, release]
+        options: [setup_app, create_iap, certs, frames, meta, beta, release]
 
 jobs:
   build:
@@ -53,6 +53,15 @@ jobs:
         env:
           ASC_KEY_BASE64: ${{ secrets.ASC_KEY_BASE64 }}
 
+      - name: Set up SSH for fastlane match
+        run: |
+          mkdir -p ~/.ssh
+          printf '%s\n' "$MATCH_SSH_PRIVATE_KEY" > ~/.ssh/id_ed25519
+          chmod 600 ~/.ssh/id_ed25519
+          ssh-keyscan github.com >> ~/.ssh/known_hosts 2>/dev/null
+        env:
+          MATCH_SSH_PRIVATE_KEY: ${{ secrets.MATCH_SSH_PRIVATE_KEY }}
+
       - name: Run fastlane ${{ github.event.inputs.lane }}
         run: fastlane ios ${{ github.event.inputs.lane }}
         env:
@@ -60,3 +69,4 @@ jobs:
           ASC_ISSUER_ID: ${{ secrets.ASC_ISSUER_ID }}
           ASC_KEY_PATH: ${{ github.workspace }}/PetChores/fastlane/.keys/AuthKey.p8
           TEAM_ID: ${{ secrets.APPLE_TEAM_ID }}
+          MATCH_PASSWORD: ${{ secrets.MATCH_PASSWORD }}
