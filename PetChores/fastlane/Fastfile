@@ -136,21 +136,33 @@ platform :ios do
   private_lane :build_ios do
     gen
     team = ENV["TEAM_ID"]
-    # gym does not take an api_key option, so hand the App Store Connect API key to
-    # xcodebuild directly via the authentication-key flags. With
-    # -allowProvisioningUpdates this lets Xcode create the distribution certificate
-    # and App Store provisioning profile on the fly, with no Apple ID logged in on
-    # the runner ("No Accounts" otherwise). Applied to both the archive and export
-    # xcodebuild invocations.
-    auth = "-authenticationKeyPath #{ENV['ASC_KEY_PATH']} " \
-           "-authenticationKeyID #{ENV['ASC_KEY_ID']} " \
-           "-authenticationKeyIssuerID #{ENV['ASC_ISSUER_ID']}"
+    api_key = lane_context[SharedValues::APP_STORE_CONNECT_API_KEY]
+
+    # Automatic signing insists on a *development* provisioning profile during the
+    # archive, which requires a registered device, which a CI account does not have
+    # ("Your team has no devices"). App Store distribution profiles need no devices,
+    # so create the Apple Distribution certificate and an App Store profile up front
+    # via the API key, then build with manual signing.
+    cert(api_key: api_key, development: false)
+    sigh(
+      api_key: api_key,
+      app_identifier: "com.petchores.app",
+      platform: "ios",
+      adhoc: false
+    )
+    profile = lane_context[SharedValues::SIGH_NAME]
+
     build_app(
       scheme: "PetChores",
       export_method: "app-store",
-      xcargs: "-allowProvisioningUpdates #{auth} DEVELOPMENT_TEAM=#{team} CODE_SIGN_STYLE=Automatic",
-      export_xcargs: "-allowProvisioningUpdates #{auth}",
-      export_options: { teamID: team }
+      xcargs: "DEVELOPMENT_TEAM=#{team} CODE_SIGN_STYLE=Manual " \
+              "CODE_SIGN_IDENTITY='Apple Distribution' " \
+              "PROVISIONING_PROFILE_SPECIFIER='#{profile}'",
+      export_options: {
+        teamID: team,
+        signingStyle: "manual",
+        provisioningProfiles: { "com.petchores.app" => profile }
+      }
     )
   end
 
