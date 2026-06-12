@@ -19,6 +19,40 @@
 
 default_platform(:ios)
 
+require "net/http"
+require "json"
+
+APP_STORE_APP_ID = "6779748088".freeze
+
+# Raw App Store Connect REST helpers, for the listing fields fastlane's high-level
+# actions do not manage (App Privacy nutrition labels, age rating, category, IAP v2).
+def asc_jwt
+  require "spaceship"
+  token = Spaceship::ConnectAPI::Token.from(
+    hash: {
+      key_id: ENV["ASC_KEY_ID"],
+      issuer_id: ENV["ASC_ISSUER_ID"],
+      key: File.read(ENV["ASC_KEY_PATH"])
+    }
+  )
+  token.text
+end
+
+def asc_request(method, path, jwt, body = nil)
+  uri = URI("https://api.appstoreconnect.apple.com#{path}")
+  http = Net::HTTP.new(uri.host, 443)
+  http.use_ssl = true
+  klass = { get: Net::HTTP::Get, post: Net::HTTP::Post,
+            patch: Net::HTTP::Patch, delete: Net::HTTP::Delete }[method]
+  req = klass.new(uri)
+  req["Authorization"] = "Bearer #{jwt}"
+  req["Content-Type"] = "application/json"
+  req.body = body.to_json if body
+  res = http.request(req)
+  parsed = (JSON.parse(res.body) rescue res.body)
+  [res.code.to_i, parsed]
+end
+
 platform :ios do
   before_all do
     # On CI, create and unlock a dedicated temporary keychain and configure its
@@ -125,6 +159,39 @@ platform :ios do
       force: true,                       # do not open the HTML summary prompt
       precheck_include_in_app_purchases: false
     )
+  end
+
+  desc "Inspect the App Store Connect resources needed for submission (read-only)."
+  lane :asc_inspect do
+    jwt = asc_jwt
+    app = APP_STORE_APP_ID
+
+    code, info = asc_request(:get, "/v1/apps/#{app}/appInfos", jwt)
+    UI.message("=== appInfos (#{code}) ===")
+    puts JSON.pretty_generate(info)
+    info_id = (info["data"] && info["data"].first && info["data"].first["id"]) rescue nil
+    UI.message("appInfo id = #{info_id}")
+
+    if info_id
+      c, ard = asc_request(:get, "/v1/appInfos/#{info_id}/ageRatingDeclaration", jwt)
+      UI.message("=== ageRatingDeclaration (#{c}) ===")
+      puts JSON.pretty_generate(ard)
+      c2, cat = asc_request(:get, "/v1/appInfos/#{info_id}?include=primaryCategory,secondaryCategory", jwt)
+      UI.message("=== appInfo categories (#{c2}) ===")
+      puts JSON.pretty_generate(cat)
+    end
+
+    c3, pub = asc_request(:get, "/v1/apps/#{app}/appDataUsagesPublishState", jwt)
+    UI.message("=== appDataUsagesPublishState (#{c3}) ===")
+    puts JSON.pretty_generate(pub)
+
+    c4, du = asc_request(:get, "/v1/apps/#{app}/appDataUsages?limit=50", jwt)
+    UI.message("=== appDataUsages (#{c4}) ===")
+    puts JSON.pretty_generate(du)
+
+    c5, iaps = asc_request(:get, "/v2/apps/#{app}/inAppPurchases?limit=50", jwt)
+    UI.message("=== inAppPurchases v2 (#{c5}) ===")
+    puts JSON.pretty_generate(iaps)
   end
 
   desc "Capture App Store screenshots on the CI simulators via the -uitestSeed demo " \
