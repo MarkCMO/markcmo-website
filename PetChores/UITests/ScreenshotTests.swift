@@ -4,6 +4,7 @@ import XCTest
 // is launched with -uitestSeed, which populates a believable multi-pet "happy" state
 // (see RootView.seedDemoForScreenshots) and skips onboarding and the parent PIN gate,
 // so each screen is deterministic with no fragile navigation.
+@MainActor
 final class ScreenshotTests: XCTestCase {
 
     override func setUpWithError() throws {
