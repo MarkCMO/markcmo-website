@@ -136,12 +136,16 @@ platform :ios do
   private_lane :build_ios do
     gen
     team = ENV["TEAM_ID"]
+    # Pass the App Store Connect API key to gym so it forwards the authentication
+    # key to xcodebuild. With -allowProvisioningUpdates this lets Xcode create the
+    # distribution certificate and App Store provisioning profile on the fly, with
+    # no Apple ID logged in on the runner ("No Accounts" otherwise).
     build_app(
       scheme: "PetChores",
       export_method: "app-store",
-      xcargs: team.to_s.empty? ? "-allowProvisioningUpdates" :
-              "-allowProvisioningUpdates DEVELOPMENT_TEAM=#{team} CODE_SIGN_STYLE=Automatic",
-      export_options: team.to_s.empty? ? {} : { teamID: team }
+      api_key: lane_context[SharedValues::APP_STORE_CONNECT_API_KEY],
+      xcargs: "-allowProvisioningUpdates DEVELOPMENT_TEAM=#{team} CODE_SIGN_STYLE=Automatic",
+      export_options: { teamID: team }
     )
   end
 
