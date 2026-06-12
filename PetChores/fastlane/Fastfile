@@ -207,8 +207,6 @@ platform :ios do
       "alcoholTobaccoOrDrugUseOrReferences" => "NONE",
       "contests" => "NONE",
       "gamblingSimulated" => "NONE",
-      "gunsOrOtherWeapons" => "NONE",
-      "healthOrWellnessTopics" => "NONE",
       "medicalOrTreatmentInformation" => "NONE",
       "profanityOrCrudeHumor" => "NONE",
       "sexualContentGraphicAndNudity" => "NONE",
@@ -226,6 +224,8 @@ platform :ios do
       "parentalControls" => false,
       "ageAssurance" => false,
       "advertising" => false,
+      "healthOrWellnessTopics" => false,
+      "gunsOrOtherWeapons" => false,
       "kidsAgeBand" => nil
     }
     c, b = asc_request(:patch, "/v1/ageRatingDeclarations/#{ard_id}", jwt,
@@ -267,14 +267,18 @@ platform :ios do
       puts ib
     end
 
-    # 4. App Privacy: probe endpoints to learn the correct path for "Data Not Collected"
-    ["/v1/apps/#{app}/appDataUsagesPublishState",
-     "/v1/appDataUsagesPublishStates/#{app}",
-     "/v1/apps/#{app}?include=appDataUsagesPublishState"].each do |p|
-      pc, pb = asc_request(:get, p, jwt)
-      UI.message("privacy probe #{p} -> #{pc}")
-      puts JSON.pretty_generate(pb) if pc.between?(200, 299)
+    # 4. App Privacy discovery: is the privacy nutrition-label API reachable at all?
+    [:get, "/v1/appDataUsageCategories?limit=5"].tap do |m, p|
+      pc, pb = asc_request(m, p, jwt)
+      UI.message("privacy: GET appDataUsageCategories -> #{pc}")
+      puts JSON.pretty_generate(pb)
     end
+    # Try creating the canonical "Data Not Collected" declaration directly.
+    dc, db = asc_request(:post, "/v1/appDataUsages", jwt,
+      { "data" => { "type" => "appDataUsages",
+        "relationships" => { "app" => { "data" => { "type" => "apps", "id" => app } } } } })
+    UI.message("privacy: POST appDataUsages (empty) -> #{dc}")
+    puts JSON.pretty_generate(db)
   end
 
   desc "Capture App Store screenshots on the CI simulators via the -uitestSeed demo " \
