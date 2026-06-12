@@ -60,17 +60,20 @@ platform :ios do
     if bundle.nil?
       bundle = Spaceship::ConnectAPI::BundleId.create(name: "Pet Chores", identifier: identifier)
       UI.success("Registered bundle id #{identifier}")
+    else
+      UI.success("Bundle id already registered: #{identifier}")
     end
 
-    app = Spaceship::ConnectAPI::App.create(
-      name: "Pet Chores: Pet Care Practice",
-      version_string: "1.0",
-      sku: "petchores-001",
-      primary_locale: "en-US",
-      bundle_id: bundle.id,
-      platforms: ["IOS"]
+    # The App Store Connect API does not permit creating the initial app record
+    # ('apps' resource disallows CREATE). It must be created once in the App Store
+    # Connect website. Everything else (IAP, build, TestFlight, metadata) then runs
+    # through the API key. Fail loudly with instructions instead of erroring opaquely.
+    UI.user_error!(
+      "App record for #{identifier} does not exist yet. Create it once at " \
+      "https://appstoreconnect.apple.com -> Apps -> New App: Platform iOS, name " \
+      "'Pet Chores: Pet Care Practice', primary language English (U.S.), bundle id " \
+      "#{identifier}, SKU petchores-001. Then re-run a lane (create_iap or beta)."
     )
-    UI.success("Created App Store Connect record for #{identifier} (id #{app.id})")
   end
 
   desc "One-time best-effort: create the non-consumable IAP. If it errors, create it " \
