@@ -192,7 +192,7 @@ struct EnvironmentBackdrop: View {
         .position(x: x, y: y)
     }
 
-    private func grass(_ w: CGFloat, _ h: CGFloat) -> some View {
+    private func grass(w: CGFloat, h: CGFloat) -> some View {
         ZStack(alignment: .bottom) {
             VStack { Spacer(); Rectangle().fill(Color(red: 0.42, green: 0.72, blue: 0.36)).frame(height: h * 0.30) }
             ForEach(0..<14, id: \.self) { i in
@@ -264,7 +264,7 @@ struct EnvironmentBackdrop: View {
         }
     }
 
-    private func gravel(_ w: CGFloat, _ h: CGFloat) -> some View {
+    private func gravel(w: CGFloat, h: CGFloat) -> some View {
         VStack { Spacer(); Rectangle().fill(Color(red: 0.30, green: 0.26, blue: 0.22)).frame(height: h * 0.10) }
     }
 
