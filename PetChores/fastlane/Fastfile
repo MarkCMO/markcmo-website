@@ -36,21 +36,41 @@ platform :ios do
 
   desc "One-time: create the app record on App Store Connect"
   lane :setup_app do
-    # skip_devcenter: the App Store Connect API key does not drive the legacy
-    # Developer Portal login produce falls back to (that path asks for a username
-    # and fails in CI). The bundle id gets registered automatically by Xcode
-    # automatic signing (-allowProvisioningUpdates) during build_app, so we only
-    # need produce to create the App Store Connect record here, via the API key.
-    produce(
-      app_identifier: "com.petchores.app",
-      app_name: "Pet Chores: Pet Care Practice",
-      language: "English",
-      app_version: "1.0",
-      sku: "petchores-001",
-      company_name: ENV["COMPANY_NAME"] || "WETYR Corporation",
-      skip_devcenter: true,
-      api_key: lane_context[SharedValues::APP_STORE_CONNECT_API_KEY]
+    # produce(...) only supports legacy Apple ID (username) login and cannot use an
+    # App Store Connect API key, so it fails in headless CI. Create the records
+    # directly through Spaceship::ConnectAPI instead (same token path as create_iap).
+    require "spaceship"
+    Spaceship::ConnectAPI.token = Spaceship::ConnectAPI::Token.from(
+      hash: {
+        key_id: ENV["ASC_KEY_ID"],
+        issuer_id: ENV["ASC_ISSUER_ID"],
+        key: File.read(ENV["ASC_KEY_PATH"])
+      }
     )
+
+    identifier = "com.petchores.app"
+
+    existing = Spaceship::ConnectAPI::App.find(identifier)
+    if existing
+      UI.success("App already exists on App Store Connect: #{identifier} (id #{existing.id})")
+      next
+    end
+
+    bundle = Spaceship::ConnectAPI::BundleId.all.find { |b| b.identifier == identifier }
+    if bundle.nil?
+      bundle = Spaceship::ConnectAPI::BundleId.create(name: "Pet Chores", identifier: identifier)
+      UI.success("Registered bundle id #{identifier}")
+    end
+
+    app = Spaceship::ConnectAPI::App.create(
+      name: "Pet Chores: Pet Care Practice",
+      version_string: "1.0",
+      sku: "petchores-001",
+      primary_locale: "en-US",
+      bundle_id: bundle.id,
+      platforms: ["IOS"]
+    )
+    UI.success("Created App Store Connect record for #{identifier} (id #{app.id})")
   end
 
   desc "One-time best-effort: create the non-consumable IAP. If it errors, create it " \
