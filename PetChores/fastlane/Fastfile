@@ -207,6 +207,7 @@ platform :ios do
       "alcoholTobaccoOrDrugUseOrReferences" => "NONE",
       "contests" => "NONE",
       "gamblingSimulated" => "NONE",
+      "gunsOrOtherWeapons" => "NONE",
       "medicalOrTreatmentInformation" => "NONE",
       "profanityOrCrudeHumor" => "NONE",
       "sexualContentGraphicAndNudity" => "NONE",
@@ -225,7 +226,6 @@ platform :ios do
       "ageAssurance" => false,
       "advertising" => false,
       "healthOrWellnessTopics" => false,
-      "gunsOrOtherWeapons" => false,
       "kidsAgeBand" => nil
     }
     c, b = asc_request(:patch, "/v1/ageRatingDeclarations/#{ard_id}", jwt,
