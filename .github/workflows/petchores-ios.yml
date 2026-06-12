@@ -26,7 +26,7 @@ on:
         required: true
         default: "beta"
         type: choice
-        options: [setup_app, create_iap, certs, frames, meta, beta, release]
+        options: [setup_app, create_iap, certs, screenshots, frames, meta, beta, release]
 
 jobs:
   build:
@@ -46,6 +46,8 @@ jobs:
           XC=$(ls -d /Applications/Xcode_26*.app 2>/dev/null | sort -V | tail -1)
           if [ -n "$XC" ]; then sudo xcode-select -s "$XC/Contents/Developer"; fi
           xcodebuild -version
+          echo "=== available simulators ==="
+          xcrun simctl list devices available | grep -iE "iPhone|iPad" || true
 
       - name: Install XcodeGen and fastlane
         run: |
@@ -76,3 +78,11 @@ jobs:
           ASC_KEY_PATH: ${{ github.workspace }}/PetChores/fastlane/.keys/AuthKey.p8
           TEAM_ID: ${{ secrets.APPLE_TEAM_ID }}
           MATCH_PASSWORD: ${{ secrets.MATCH_PASSWORD }}
+
+      - name: Upload screenshots artifact
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: screenshots
+          path: PetChores/fastlane/screenshots/**/*.png
+          if-no-files-found: ignore

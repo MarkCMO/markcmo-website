@@ -27,6 +27,10 @@ targets:
     deploymentTarget: "17.0"
     sources:
       - path: PetChores
+    scheme:
+      testTargets:
+        - PetChoresTests
+        - PetChoresUITests
     settings:
       base:
         INFOPLIST_FILE: PetChores/Resources/Info.plist
@@ -57,3 +61,17 @@ targets:
       base:
         PRODUCT_BUNDLE_IDENTIFIER: com.petchores.tests
         GENERATE_INFOPLIST_FILE: YES
+
+  PetChoresUITests:
+    type: bundle.ui-testing
+    platform: iOS
+    deploymentTarget: "17.0"
+    sources:
+      - path: UITests
+    dependencies:
+      - target: PetChores
+    settings:
+      base:
+        PRODUCT_BUNDLE_IDENTIFIER: com.petchores.uitests
+        GENERATE_INFOPLIST_FILE: YES
+        TEST_TARGET_NAME: PetChores

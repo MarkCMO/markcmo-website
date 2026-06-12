@@ -1,0 +1,18 @@
+# fastlane snapshot config for App Store screenshots.
+# Apple requires a large iPhone (6.9"/6.7") and a 13" iPad for a new universal app.
+# Device names must match simulators available on the CI runner (Xcode 26); the
+# workflow prints `xcrun simctl list devices available` so they can be corrected.
+devices([
+  "iPhone 16 Pro Max",
+  "iPad Pro 13-inch (M4)"
+])
+
+languages(["en-US"])
+
+scheme("PetChores")
+only_testing(["PetChoresUITests"])
+
+output_directory("./fastlane/screenshots")
+clear_previous_screenshots(true)
+concurrent_simulators(false)
+stop_after_first_error(true)

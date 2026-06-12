@@ -127,6 +127,12 @@ platform :ios do
     )
   end
 
+  desc "Capture App Store screenshots on the CI simulators via the -uitestSeed demo " \
+       "state. Outputs to fastlane/screenshots/<locale>/ (uploaded as a CI artifact)."
+  lane :screenshots do
+    capture_screenshots
+  end
+
   desc "Add device frames, captions, and the paw background to raw screenshots in " \
        "fastlane/screenshots/<locale>/. Outputs *_framed.png that deliver then uploads."
   lane :frames do
