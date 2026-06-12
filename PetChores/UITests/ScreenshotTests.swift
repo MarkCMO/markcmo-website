@@ -10,7 +10,8 @@ import XCTest
 final class ScreenshotTests: XCTestCase {
 
     override func setUpWithError() throws {
-        continueAfterFailure = false
+        // Keep capturing the remaining screens even if one tab lookup misbehaves.
+        continueAfterFailure = true
     }
 
     func testCaptureScreenshots() throws {
@@ -32,7 +33,9 @@ final class ScreenshotTests: XCTestCase {
     }
 
     private func snapshotTab(_ app: XCUIApplication, label: String, name: String) {
-        let tab = app.buttons[label]
+        // firstMatch avoids "multiple matches" when the label appears more than once
+        // in the accessibility tree (e.g. the iPad floating tab bar).
+        let tab = app.buttons[label].firstMatch
         if tab.waitForExistence(timeout: 10) {
             tab.tap()
             sleep(2)
