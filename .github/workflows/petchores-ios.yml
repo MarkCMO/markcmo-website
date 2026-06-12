@@ -30,7 +30,10 @@ on:
 
 jobs:
   build:
-    runs-on: macos-14
+    # macos-15 ships Xcode 16. The current XcodeGen emits a project in object
+    # format 77, which Xcode 15.4 (on macos-14) cannot open. iOS 17 deployment
+    # target builds fine on Xcode 16.
+    runs-on: macos-15
     defaults:
       run:
         working-directory: PetChores
