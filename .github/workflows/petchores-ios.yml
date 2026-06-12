@@ -30,16 +30,22 @@ on:
 
 jobs:
   build:
-    # macos-15 ships Xcode 16. The current XcodeGen emits a project in object
-    # format 77, which Xcode 15.4 (on macos-14) cannot open. iOS 17 deployment
-    # target builds fine on Xcode 16.
-    runs-on: macos-15
+    # Apple requires the iOS 26 SDK (Xcode 26+) for all App Store / TestFlight
+    # uploads, so the runner must have Xcode 26. macos-26 ships it; the build step
+    # below also explicitly selects the newest Xcode 26 as a guard.
+    runs-on: macos-26
     defaults:
       run:
         working-directory: PetChores
     steps:
       - name: Checkout
         uses: actions/checkout@v4
+
+      - name: Select Xcode 26
+        run: |
+          XC=$(ls -d /Applications/Xcode_26*.app 2>/dev/null | sort -V | tail -1)
+          if [ -n "$XC" ]; then sudo xcode-select -s "$XC/Contents/Developer"; fi
+          xcodebuild -version
 
       - name: Install XcodeGen and fastlane
         run: |
