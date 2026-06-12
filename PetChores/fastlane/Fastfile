@@ -21,6 +21,10 @@ default_platform(:ios)
 
 platform :ios do
   before_all do
+    # On CI, create and unlock a dedicated temporary keychain and configure its
+    # partition list, so codesign never blocks on a GUI keychain-access prompt
+    # (which hangs the headless runner). No-op on a developer's own machine.
+    setup_ci
     app_store_connect_api_key(
       key_id: ENV["ASC_KEY_ID"],
       issuer_id: ENV["ASC_ISSUER_ID"],
