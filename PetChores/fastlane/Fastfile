@@ -340,6 +340,9 @@ platform :ios do
   private_lane :build_ios do
     gen
     team = ENV["TEAM_ID"]
+    # Each App Store Connect upload needs a unique, increasing build number. The CI run
+    # number is monotonic, so use it (fallback 1 for local runs).
+    build_num = ENV["GITHUB_RUN_NUMBER"].to_s.empty? ? "1" : ENV["GITHUB_RUN_NUMBER"]
 
     match(
       type: "appstore",
@@ -360,6 +363,7 @@ platform :ios do
       xcodebuild_formatter: "",
       xcargs: "DEVELOPMENT_TEAM=#{team} CODE_SIGN_STYLE=Manual " \
               "CODE_SIGN_IDENTITY='Apple Distribution' " \
+              "CURRENT_PROJECT_VERSION=#{build_num} " \
               "PROVISIONING_PROFILE_SPECIFIER='#{profile}'",
       export_options: {
         teamID: team,
