@@ -49,5 +49,20 @@
     <string>Pet Chores can attach a photo as proof a chore was done. Photos stay on this device and are never uploaded.</string>
     <key>ITSAppUsesNonExemptEncryption</key>
     <false/>
+    <!-- AdMob. This is Google's PUBLIC TEST application id; replace with the real
+         ca-app-pub-XXXXXXXX~YYYYYYYY from the AdMob account before the production release.
+         The app crashes on launch if this key is missing. -->
+    <key>GADApplicationIdentifier</key>
+    <string>ca-app-pub-3940256099942544~1458002511</string>
+    <key>SKAdNetworkItems</key>
+    <array>
+        <dict><key>SKAdNetworkIdentifier</key><string>cstr6suwn9.skadnetwork</string></dict>
+        <dict><key>SKAdNetworkIdentifier</key><string>4fzdc2evr5.skadnetwork</string></dict>
+        <dict><key>SKAdNetworkIdentifier</key><string>2fnua5tdw4.skadnetwork</string></dict>
+        <dict><key>SKAdNetworkIdentifier</key><string>ydx93a7ass.skadnetwork</string></dict>
+        <dict><key>SKAdNetworkIdentifier</key><string>p78axxw29g.skadnetwork</string></dict>
+        <dict><key>SKAdNetworkIdentifier</key><string>v72qych5uu.skadnetwork</string></dict>
+        <dict><key>SKAdNetworkIdentifier</key><string>3qcr597p9d.skadnetwork</string></dict>
+    </array>
 </dict>
 </plist>

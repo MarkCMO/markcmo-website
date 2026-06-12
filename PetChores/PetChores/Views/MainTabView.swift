@@ -9,7 +9,12 @@ struct MainTabView: View {
            sort: [SortDescriptor(\PetInstance.startDate, order: .reverse)])
     private var activePets: [PetInstance]
 
+    @EnvironmentObject private var store: StoreService
+
     @State private var selectedId: UUID?
+
+    /// Banner ads show only to free users, and never during screenshot capture.
+    private var showsAds: Bool { !store.isUnlocked && !UITestFlags.staticScenes }
 
     private var selected: PetInstance? {
         if let id = selectedId, let match = activePets.first(where: { $0.instanceId == id }) {
@@ -19,18 +24,26 @@ struct MainTabView: View {
     }
 
     var body: some View {
-        TabView {
-            navWrapped { HomeView(instance: selected, picker: AnyView(petPicker)) }
-                .tabItem { Label("Home", systemImage: "house.fill") }
+        VStack(spacing: 0) {
+            TabView {
+                navWrapped { HomeView(instance: selected, picker: AnyView(petPicker)) }
+                    .tabItem { Label("Home", systemImage: "house.fill") }
 
-            navWrapped { PetDetailView(instance: selected, picker: AnyView(petPicker)) }
-                .tabItem { Label("Pet", systemImage: "pawprint.fill") }
+                navWrapped { PetDetailView(instance: selected, picker: AnyView(petPicker)) }
+                    .tabItem { Label("Pet", systemImage: "pawprint.fill") }
 
-            navWrapped { BudgetView(instance: selected, picker: AnyView(petPicker)) }
-                .tabItem { Label("Budget", systemImage: "dollarsign.circle.fill") }
+                navWrapped { BudgetView(instance: selected, picker: AnyView(petPicker)) }
+                    .tabItem { Label("Budget", systemImage: "dollarsign.circle.fill") }
 
-            navWrapped { RewardsView(instance: selected, picker: AnyView(petPicker)) }
-                .tabItem { Label("Rewards", systemImage: "rosette") }
+                navWrapped { RewardsView(instance: selected, picker: AnyView(petPicker)) }
+                    .tabItem { Label("Rewards", systemImage: "rosette") }
+            }
+            if showsAds {
+                AdBannerView()
+                    .frame(height: 50)
+                    .frame(maxWidth: .infinity)
+                    .background(Color(.secondarySystemBackground))
+            }
         }
         .onAppear { if selectedId == nil { selectedId = activePets.first?.instanceId } }
     }
