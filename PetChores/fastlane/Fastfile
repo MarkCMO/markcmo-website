@@ -194,6 +194,89 @@ platform :ios do
     puts JSON.pretty_generate(iaps)
   end
 
+  desc "Set the submission-required App Store Connect fields via the REST API: age " \
+       "rating, category, the IAP, and probe App Privacy."
+  lane :asc_prep do
+    jwt = asc_jwt
+    app = APP_STORE_APP_ID
+    info_id = "edbf418d-20f0-433a-9143-f6e8339fa6dc"
+    ard_id  = "edbf418d-20f0-433a-9143-f6e8339fa6dc"
+
+    # 1. Age rating: nothing objectionable -> 4+. Frequency fields NONE, flags false.
+    age_attrs = {
+      "alcoholTobaccoOrDrugUseOrReferences" => "NONE",
+      "contests" => "NONE",
+      "gamblingSimulated" => "NONE",
+      "gunsOrOtherWeapons" => "NONE",
+      "healthOrWellnessTopics" => "NONE",
+      "medicalOrTreatmentInformation" => "NONE",
+      "profanityOrCrudeHumor" => "NONE",
+      "sexualContentGraphicAndNudity" => "NONE",
+      "sexualContentOrNudity" => "NONE",
+      "horrorOrFearThemes" => "NONE",
+      "matureOrSuggestiveThemes" => "NONE",
+      "violenceCartoonOrFantasy" => "NONE",
+      "violenceRealisticProlongedGraphicOrSadistic" => "NONE",
+      "violenceRealistic" => "NONE",
+      "gambling" => false,
+      "unrestrictedWebAccess" => false,
+      "lootBox" => false,
+      "messagingAndChat" => false,
+      "userGeneratedContent" => false,
+      "parentalControls" => false,
+      "ageAssurance" => false,
+      "advertising" => false,
+      "kidsAgeBand" => nil
+    }
+    c, b = asc_request(:patch, "/v1/ageRatingDeclarations/#{ard_id}", jwt,
+                       { "data" => { "type" => "ageRatingDeclarations", "id" => ard_id,
+                                     "attributes" => age_attrs } })
+    UI.message("age rating PATCH -> #{c}")
+    puts b unless c.between?(200, 299)
+
+    # 2. Category -> Education
+    cc, cats = asc_request(:get, "/v1/appCategories?filter[platforms]=IOS&limit=100", jwt)
+    edu = (cats["data"].find { |x| x["id"].to_s.casecmp("EDUCATION").zero? } rescue nil)
+    UI.message("appCategories GET -> #{cc}; education id = #{edu && edu['id']}")
+    if edu
+      pc, pb = asc_request(:patch, "/v1/appInfos/#{info_id}", jwt,
+                           { "data" => { "type" => "appInfos", "id" => info_id,
+                             "relationships" => { "primaryCategory" =>
+                               { "data" => { "type" => "appCategories", "id" => edu["id"] } } } } })
+      UI.message("category PATCH -> #{pc}")
+      puts pb unless pc.between?(200, 299)
+    end
+
+    # 3. IAP petchores.unlock.full (non-consumable, family sharable)
+    ic, iaps = asc_request(:get, "/v1/apps/#{app}/inAppPurchasesV2?limit=50", jwt)
+    UI.message("inAppPurchasesV2 GET -> #{ic}")
+    have = (iaps["data"].any? { |p| p.dig("attributes", "productId") == "petchores.unlock.full" } rescue false)
+    if have
+      UI.message("IAP petchores.unlock.full already exists")
+    else
+      icr, ib = asc_request(:post, "/v2/inAppPurchases", jwt,
+        { "data" => { "type" => "inAppPurchases",
+          "attributes" => {
+            "name" => "Pet Chores Full Unlock",
+            "productId" => "petchores.unlock.full",
+            "inAppPurchaseType" => "NON_CONSUMABLE",
+            "reviewNote" => "Unlocks all pets, multiple pets at once, photo proof, and report export. Reachable only inside PIN-gated Parent Mode.",
+            "familySharable" => true },
+          "relationships" => { "app" => { "data" => { "type" => "apps", "id" => app } } } } })
+      UI.message("IAP create -> #{icr}")
+      puts ib
+    end
+
+    # 4. App Privacy: probe endpoints to learn the correct path for "Data Not Collected"
+    ["/v1/apps/#{app}/appDataUsagesPublishState",
+     "/v1/appDataUsagesPublishStates/#{app}",
+     "/v1/apps/#{app}?include=appDataUsagesPublishState"].each do |p|
+      pc, pb = asc_request(:get, p, jwt)
+      UI.message("privacy probe #{p} -> #{pc}")
+      puts JSON.pretty_generate(pb) if pc.between?(200, 299)
+    end
+  end
+
   desc "Capture App Store screenshots on the CI simulators via the -uitestSeed demo " \
        "state. Outputs to fastlane/screenshots/<locale>/ (uploaded as a CI artifact)."
   lane :screenshots do
