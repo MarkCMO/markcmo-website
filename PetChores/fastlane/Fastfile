@@ -36,13 +36,20 @@ platform :ios do
 
   desc "One-time: create the app record on App Store Connect"
   lane :setup_app do
+    # skip_devcenter: the App Store Connect API key does not drive the legacy
+    # Developer Portal login produce falls back to (that path asks for a username
+    # and fails in CI). The bundle id gets registered automatically by Xcode
+    # automatic signing (-allowProvisioningUpdates) during build_app, so we only
+    # need produce to create the App Store Connect record here, via the API key.
     produce(
       app_identifier: "com.petchores.app",
       app_name: "Pet Chores: Pet Care Practice",
       language: "English",
       app_version: "1.0",
       sku: "petchores-001",
-      company_name: ENV["COMPANY_NAME"] || "WETYR Corporation"
+      company_name: ENV["COMPANY_NAME"] || "WETYR Corporation",
+      skip_devcenter: true,
+      api_key: lane_context[SharedValues::APP_STORE_CONNECT_API_KEY]
     )
   end
 
