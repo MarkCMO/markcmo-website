@@ -3129,7 +3129,9 @@ function openModal(id) { document.getElementById('modal-' + id).classList.add('o
 function closeModal(id) { document.getElementById('modal-' + id).classList.remove('open'); document.body.style.overflow = ''; }
 document.querySelectorAll('.modal-overlay').forEach(o => o.addEventListener('click', function(e) { if (e.target === this) { this.classList.remove('open'); document.body.style.overflow = ''; } }));
 
-// CTA Contact Form
+// CTA Contact Form -> /api/lead (Cloudflare Pages Function)
+// Replaced the old Netlify Forms POST-to-"/" path on 2026-06-12 - that
+// path was silently dropping every submission since the May 29 CF migration.
 function handleCtaForm(e) {
   e.preventDefault();
   const btn = document.getElementById('ctaSubmitBtn');
@@ -3137,18 +3139,20 @@ function handleCtaForm(e) {
   const data = new FormData(form);
   btn.textContent = 'Sending...';
   btn.disabled = true;
-  // Submit to Netlify Forms
-  fetch('/', {
+  fetch('/api/lead', {
     method: 'POST',
-    headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-    body: new URLSearchParams({
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({
       'form-name': 'homepage_cta',
+      'source': 'homepage_cta',
       'name': data.get('name') || '',
       'email': data.get('email') || '',
       'company': data.get('company') || '',
-      'message': data.get('message') || 'No message provided'
-    }).toString()
-  }).then(function() {
+      'message': data.get('message') || '',
+      'bot-field': data.get('bot-field') || ''
+    })
+  }).then(function(r) {
+    if (!r.ok) throw new Error('lead endpoint ' + r.status);
     form.innerHTML = '<div style="text-align:center;padding:2rem 0;">' +
       '<div style="width:52px;height:52px;border-radius:50%;background:rgba(201,168,76,0.1);border:1px solid rgba(201,168,76,0.3);display:flex;align-items:center;justify-content:center;margin:0 auto 1.25rem;"><svg width="24" height="24" viewBox="0 0 24 24" fill="none"><polyline points="4,12 10,18 20,6" stroke="#C9A84C" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div>' +
       '<div style="font-family:Outfit,sans-serif;font-size:1.25rem;font-weight:800;color:#fff;margin-bottom:0.75rem;">Message Sent.</div>' +
