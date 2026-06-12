@@ -81,7 +81,7 @@ struct EnvironmentBackdrop: View {
             }
             clouds(w: w, h: h, alpha: raining ? 0.85 : (sky.isNight ? 0.35 : 0.9), grey: raining)
             grass(w: w, h: h)
-            fence(w: w, h: h)
+            fence(w, h)
             if raining {
                 Rectangle().fill(Color.black.opacity(0.12))
                 rain(w: w, h: h)
