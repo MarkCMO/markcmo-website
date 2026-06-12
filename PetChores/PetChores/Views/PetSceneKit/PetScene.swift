@@ -24,7 +24,7 @@ struct PetScene: View {
     var body: some View {
         GeometryReader { geo in
             Group {
-                if reduceMotion {
+                if reduceMotion || UITestFlags.staticScenes {
                     frame(t: 0, date: Date(), size: geo.size)
                 } else {
                     TimelineView(.animation) { timeline in
