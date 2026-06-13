@@ -1,16 +1,15 @@
 import XCTest
 
-// Captures App Store screenshots on the CI simulator with fastlane snapshot. The app
-// is launched with -uitestSeed, which populates a believable multi-pet "happy" state
-// (see RootView.seedDemoForScreenshots) and skips onboarding and the parent PIN gate,
-// so each screen is deterministic with no fragile navigation. Element lookups are
-// device-agnostic: iPad lays out TabView differently than iPhone, so we gate on the
-// Home header text and address tabs as plain buttons rather than tabBars buttons.
+// Captures App Store screenshots on the CI simulator with fastlane snapshot. The app is
+// launched with -uitestSeed, which seeds four pets in different states (Rex the dog hero,
+// Clover the rabbit, Luna the cat, Bubbles the fish that needs attention) and skips
+// onboarding, so each screen is deterministic. Element lookups are device-agnostic: iPad
+// lays out TabView differently than iPhone, so we gate on the Home header text and address
+// tabs / pet pills as plain buttons with firstMatch.
 @MainActor
 final class ScreenshotTests: XCTestCase {
 
     override func setUpWithError() throws {
-        // Keep capturing the remaining screens even if one tab lookup misbehaves.
         continueAfterFailure = true
     }
 
@@ -20,26 +19,39 @@ final class ScreenshotTests: XCTestCase {
         app.launchArguments += ["-uitestSeed"]
         app.launch()
 
-        // The Home tab is selected on launch; its "Today" header is a reliable,
-        // device-independent signal that the seeded UI has rendered.
         let today = app.staticTexts["Today"]
         XCTAssertTrue(today.waitForExistence(timeout: 40), "Home did not render")
         sleep(2)
-        snapshot("01-Home")
 
-        snapshotTab(app, label: "Pet", name: "02-Pet")
-        snapshotTab(app, label: "Budget", name: "03-Budget")
-        snapshotTab(app, label: "Rewards", name: "04-Rewards")
+        // Core flow on the hero pet (Rex the dog).
+        snapshot("01-Home")
+        tapTab(app, "Pet");     snapshot("02-Pet")
+        tapTab(app, "Budget");  snapshot("03-Budget")
+        tapTab(app, "Rewards"); snapshot("04-Rewards")
+
+        // Variety: show other animals, habitats, and care states via the pet picker.
+        tapTab(app, "Home")
+        selectPet(app, "Bubbles"); snapshot("05-Home-Fish")   // aquarium, needs attention
+        tapTab(app, "Pet");        snapshot("06-Pet-Fish")    // fish care details
+        tapTab(app, "Home")
+        selectPet(app, "Clover");  snapshot("07-Home-Rabbit")
+        selectPet(app, "Luna");    snapshot("08-Home-Cat")
     }
 
-    private func snapshotTab(_ app: XCUIApplication, label: String, name: String) {
-        // firstMatch avoids "multiple matches" when the label appears more than once
-        // in the accessibility tree (e.g. the iPad floating tab bar).
+    private func tapTab(_ app: XCUIApplication, _ label: String) {
         let tab = app.buttons[label].firstMatch
         if tab.waitForExistence(timeout: 10) {
             tab.tap()
             sleep(2)
         }
-        snapshot(name)
+    }
+
+    /// Tap a pet pill in the selector (labelled with the pet's nickname).
+    private func selectPet(_ app: XCUIApplication, _ nickname: String) {
+        let pill = app.buttons[nickname].firstMatch
+        if pill.waitForExistence(timeout: 8) {
+            pill.tap()
+            sleep(2)
+        }
     }
 }
