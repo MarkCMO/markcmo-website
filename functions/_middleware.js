@@ -151,10 +151,10 @@ const MASTER_NAV_HTML = `<!--
   <ul class="mc-links">
     <li><a href="/about">About</a></li>
     <li><a href="/services">Services</a></li>
+    <li><a href="/seo-expert" class="mc-accent">SEO Expert</a></li>
     <li><a href="/magnet-framework" class="mc-accent">MAGNET&trade;</a></li>
     <li><a href="/portfolio">Portfolio</a></li>
     <li><a href="/apps" class="mc-accent">Apps</a></li>
-    <li><a href="/links">Links</a></li>
     <li><a href="/results">Results</a></li>
     <li><a href="/blog">Insights</a></li>
     <li><a href="https://academy.markcmo.com" target="_blank" rel="noopener" class="mc-accent">Academy</a></li>
