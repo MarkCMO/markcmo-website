@@ -35,6 +35,58 @@ enum BudgetEntryType: String, Codable, CaseIterable {
     case recurring
 }
 
+/// How harshly the "serious lessons" consequence engine treats neglect. A parent picks
+/// this in Settings so consequences can be introduced gradually, from training wheels
+/// (off) up to real stakes (harsh). Controls how fast a pet's needs climb between chores,
+/// and how many days of good care are needed to earn a strike back.
+enum ConsequenceIntensity: Int, Codable, CaseIterable, Identifiable {
+    case off = 0       // no strikes, no loss: a gentle introduction
+    case gentle = 1
+    case normal = 2
+    case harsh = 3
+
+    var id: Int { rawValue }
+
+    var label: String {
+        switch self {
+        case .off:    return "Off"
+        case .gentle: return "Gentle"
+        case .normal: return "Normal"
+        case .harsh:  return "Harsh"
+        }
+    }
+
+    var subtitle: String {
+        switch self {
+        case .off:    return "No strikes or lost pets. Pure practice."
+        case .gentle: return "Slow to slip, easy to recover. A soft start."
+        case .normal: return "Real stakes at a fair pace."
+        case .harsh:  return "Fast needs, hard to recover. The full lesson."
+        }
+    }
+
+    /// Fraction of a need (hunger / yard waste / tank fouling) that builds per hour while
+    /// a chore is outstanding. Higher = the pet slips toward critical faster.
+    var needRatePerHour: Double {
+        switch self {
+        case .off:    return 0
+        case .gentle: return 1.0 / 72.0   // ~3 days to critical
+        case .normal: return 1.0 / 36.0   // ~1.5 days
+        case .harsh:  return 1.0 / 18.0   // ~18 hours
+        }
+    }
+
+    /// Consecutive cared-for days needed to earn back one strike. 0 = never (off).
+    var streakDaysToRegainStrike: Int {
+        switch self {
+        case .off:    return 0
+        case .gentle: return 2
+        case .normal: return 3
+        case .harsh:  return 5
+        }
+    }
+}
+
 /// Pet wellbeing mapped to a mood band for art and copy (Section 9).
 enum Mood: String, CaseIterable {
     case happy

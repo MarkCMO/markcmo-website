@@ -373,6 +373,18 @@ platform :ios do
     )
   end
 
+  desc "Run the unit-test suite (pure logic: scoring, schedule, budget, consequences)."
+  lane :tests do
+    gen
+    run_tests(
+      project: "./PetChores.xcodeproj",
+      scheme: "PetChores",
+      devices: ["iPhone 17 Pro Max"],
+      only_testing: ["PetChoresTests"],
+      xcodebuild_formatter: ""
+    )
+  end
+
   desc "Build and upload a build to TestFlight"
   lane :beta do
     build_ios

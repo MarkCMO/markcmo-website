@@ -21,6 +21,20 @@ final class PetInstance {
     /// Used so streak and wellbeing are recomputed exactly once per elapsed day.
     var lastSettledDay: Date
 
+    // MARK: Consequence engine (Phase 2). Inline defaults keep older stores migrating.
+    /// Strikes accrued from severe neglect; cleared by good care streaks. At the parent's
+    /// strike limit the pet is lost (recoverable scare or permanent, per settings).
+    var strikes: Int = 0
+    /// Set when the pet is permanently lost. nil while the pet is still in the child's care.
+    var lostAt: Date? = nil
+    /// Real-time need levels (0...1) that climb while a chore is outstanding (hybrid model).
+    /// hunger applies to every animal; waste to yard animals; tankFoul to aquatic animals.
+    var hungerLevel: Double = 0
+    var wasteLevel: Double = 0
+    var tankFoulLevel: Double = 0
+    /// Last time the real-time needs were advanced, so accumulation survives app restarts.
+    var lastNeedTickAt: Date? = nil
+
     init(
         instanceId: UUID = UUID(),
         speciesId: String,
@@ -62,6 +76,9 @@ final class PetInstance {
     }
 
     var mood: Mood { Mood.from(wellbeing: wellbeing) }
+
+    /// Whether the pet has been permanently lost to neglect.
+    var isLost: Bool { lostAt != nil }
 
     /// Trust drives the level shown in Rewards (Section 11). Simple banded level.
     var level: Int { max(1, (trust / 20) + 1) }

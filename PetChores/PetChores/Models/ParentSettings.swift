@@ -22,6 +22,21 @@ final class ParentSettings {
     /// Inline default so SwiftData can lightly migrate stores created before this field.
     var carryOverMissedTasks: Bool = false
 
+    // MARK: Consequence engine (the "serious lessons" stakes). Inline defaults keep older
+    // stores migrating cleanly. Defaults start easy so a parent can ramp up gradually.
+    var consequenceIntensityRaw: Int = ConsequenceIntensity.gentle.rawValue
+    /// Strikes a pet can take before the terminal outcome. Five by design.
+    var maxStrikes: Int = 5
+    /// When true, the final strike means the pet is gone for good. When false, the final
+    /// strike is a recoverable scare (animal-control warning / very sick) the child can
+    /// pull back from with good care.
+    var permanentLossEnabled: Bool = false
+
+    var consequenceIntensity: ConsequenceIntensity {
+        get { ConsequenceIntensity(rawValue: consequenceIntensityRaw) ?? .gentle }
+        set { consequenceIntensityRaw = newValue.rawValue }
+    }
+
     init(
         id: UUID = UUID(),
         pinHash: String,
