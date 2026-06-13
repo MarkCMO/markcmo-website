@@ -309,11 +309,11 @@ platform :ios do
 
     plans = [
       { pid: "petchores.weekly",  name: "One Pet Weekly",  period: "ONE_WEEK",  level: 2, price: "1.99",  family: false, trial: true,
-        desc: "Train one pet at a time, billed weekly. 3-day free trial." },
+        desc: "One pet at a time, billed weekly." },
       { pid: "petchores.monthly", name: "One Pet Monthly", period: "ONE_MONTH", level: 2, price: "4.99",  family: false, trial: true,
-        desc: "Train one pet at a time, billed monthly. 3-day free trial." },
+        desc: "One pet at a time, billed monthly." },
       { pid: "petchores.unlimited", name: "Unlimited Pets", period: "ONE_MONTH", level: 1, price: "19.99", family: true, trial: false,
-        desc: "Train as many pets at once as your family can handle." }
+        desc: "Train as many pets at once as you like." }
     ]
 
     plans.each do |p|
@@ -347,29 +347,32 @@ platform :ios do
       _, prices = asc_request(:get, "/v1/subscriptions/#{sub_id}/prices?limit=50", jwt)
       unless ((prices["data"] || []).any? rescue false)
         _, pps = asc_request(:get, "/v1/subscriptions/#{sub_id}/pricePoints?filter[territory]=USA&limit=200", jwt)
-        pp = ((pps["data"] || []).find { |x| x.dig("attributes", "customerPrice") == p[:price] } rescue nil)
+        list = pps["data"] || []
+        pp = (list.find { |x| x.dig("attributes", "customerPrice") == p[:price] } rescue nil)
+        UI.message("  USA price points: #{list.count}; sample: #{list.first(3).map { |x| x.dig('attributes','customerPrice') }.inspect}; matched id=#{pp && pp['id']}")
         if pp
           code, body = asc_request(:post, "/v1/subscriptionPrices", jwt,
             { "data" => { "type" => "subscriptionPrices",
-              "attributes" => { "preserveCurrentPrice" => false },
               "relationships" => {
                 "subscription" => { "data" => { "type" => "subscriptions", "id" => sub_id } },
                 "subscriptionPricePoint" => { "data" => { "type" => "subscriptionPricePoints", "id" => pp["id"] } } } } })
           UI.message("  price #{p[:price]} -> #{code}")
           puts body unless code.between?(200, 299)
         else
-          UI.important("  no USA price point found matching #{p[:price]} for #{p[:pid]}")
+          UI.important("  no USA price point matching #{p[:price]} for #{p[:pid]}")
         end
       end
 
-      # 3-day free trial introductory offer (weekly / monthly).
+      # 3-day free trial introductory offer (weekly / monthly), USA territory.
       if p[:trial]
         _, offers = asc_request(:get, "/v1/subscriptions/#{sub_id}/introductoryOffers?limit=10", jwt)
         unless ((offers["data"] || []).any? rescue false)
           code, body = asc_request(:post, "/v1/subscriptionIntroductoryOffers", jwt,
             { "data" => { "type" => "subscriptionIntroductoryOffers",
               "attributes" => { "duration" => "THREE_DAYS", "offerMode" => "FREE_TRIAL", "numberOfPeriods" => 1 },
-              "relationships" => { "subscription" => { "data" => { "type" => "subscriptions", "id" => sub_id } } } } })
+              "relationships" => {
+                "subscription" => { "data" => { "type" => "subscriptions", "id" => sub_id } },
+                "territory" => { "data" => { "type" => "territories", "id" => "USA" } } } } })
           UI.message("  free trial -> #{code}")
           puts body unless code.between?(200, 299)
         end
