@@ -281,6 +281,102 @@ platform :ios do
     puts JSON.pretty_generate(db)
   end
 
+  desc "Create the auto-renewable subscription group + plans (weekly/monthly/unlimited) " \
+       "with prices and the 3-day free trial, via the App Store Connect API. Idempotent."
+  lane :asc_subs do
+    jwt = asc_jwt
+    app = APP_STORE_APP_ID
+
+    # 1. Find or create the subscription group.
+    _, groups = asc_request(:get, "/v1/apps/#{app}/subscriptionGroups?limit=50", jwt)
+    group = ((groups["data"] || []).find { |g| g.dig("attributes", "referenceName") == "Pet Care Plans" } rescue nil)
+    group_id = group && group["id"]
+    if group_id.nil?
+      code, body = asc_request(:post, "/v1/subscriptionGroups", jwt,
+        { "data" => { "type" => "subscriptionGroups",
+          "attributes" => { "referenceName" => "Pet Care Plans" },
+          "relationships" => { "app" => { "data" => { "type" => "apps", "id" => app } } } } })
+      UI.message("create group -> #{code}")
+      puts body unless code.between?(200, 299)
+      group_id = body.dig("data", "id")
+    end
+    UI.message("subscription group id = #{group_id}")
+    next if group_id.nil?
+
+    _, subs = asc_request(:get, "/v1/subscriptionGroups/#{group_id}/subscriptions?limit=50", jwt)
+    existing = {}
+    (subs["data"] || []).each { |s| existing[s.dig("attributes", "productId")] = s["id"] }
+
+    plans = [
+      { pid: "petchores.weekly",  name: "One Pet Weekly",  period: "ONE_WEEK",  level: 2, price: "1.99",  family: false, trial: true,
+        desc: "Train one pet at a time, billed weekly. 3-day free trial." },
+      { pid: "petchores.monthly", name: "One Pet Monthly", period: "ONE_MONTH", level: 2, price: "4.99",  family: false, trial: true,
+        desc: "Train one pet at a time, billed monthly. 3-day free trial." },
+      { pid: "petchores.unlimited", name: "Unlimited Pets", period: "ONE_MONTH", level: 1, price: "19.99", family: true, trial: false,
+        desc: "Train as many pets at once as your family can handle." }
+    ]
+
+    plans.each do |p|
+      sub_id = existing[p[:pid]]
+      if sub_id.nil?
+        code, body = asc_request(:post, "/v1/subscriptions", jwt,
+          { "data" => { "type" => "subscriptions",
+            "attributes" => { "name" => p[:name], "productId" => p[:pid],
+              "subscriptionPeriod" => p[:period], "familySharable" => p[:family], "groupLevel" => p[:level] },
+            "relationships" => { "group" => { "data" => { "type" => "subscriptionGroups", "id" => group_id } } } } })
+        UI.message("create sub #{p[:pid]} -> #{code}")
+        puts body unless code.between?(200, 299)
+        sub_id = body.dig("data", "id")
+      else
+        UI.message("sub #{p[:pid]} exists (#{sub_id})")
+      end
+      next if sub_id.nil?
+
+      # Localization (en-US).
+      _, locs = asc_request(:get, "/v1/subscriptions/#{sub_id}/subscriptionLocalizations?limit=10", jwt)
+      unless ((locs["data"] || []).any? { |l| l.dig("attributes", "locale") == "en-US" } rescue false)
+        code, body = asc_request(:post, "/v1/subscriptionLocalizations", jwt,
+          { "data" => { "type" => "subscriptionLocalizations",
+            "attributes" => { "name" => p[:name], "locale" => "en-US", "description" => p[:desc] },
+            "relationships" => { "subscription" => { "data" => { "type" => "subscriptions", "id" => sub_id } } } } })
+        UI.message("  localization -> #{code}")
+        puts body unless code.between?(200, 299)
+      end
+
+      # Price (USA price point matching the target).
+      _, prices = asc_request(:get, "/v1/subscriptions/#{sub_id}/prices?limit=50", jwt)
+      unless ((prices["data"] || []).any? rescue false)
+        _, pps = asc_request(:get, "/v1/subscriptions/#{sub_id}/pricePoints?filter[territory]=USA&limit=200", jwt)
+        pp = ((pps["data"] || []).find { |x| x.dig("attributes", "customerPrice") == p[:price] } rescue nil)
+        if pp
+          code, body = asc_request(:post, "/v1/subscriptionPrices", jwt,
+            { "data" => { "type" => "subscriptionPrices",
+              "attributes" => { "preserveCurrentPrice" => false },
+              "relationships" => {
+                "subscription" => { "data" => { "type" => "subscriptions", "id" => sub_id } },
+                "subscriptionPricePoint" => { "data" => { "type" => "subscriptionPricePoints", "id" => pp["id"] } } } } })
+          UI.message("  price #{p[:price]} -> #{code}")
+          puts body unless code.between?(200, 299)
+        else
+          UI.important("  no USA price point found matching #{p[:price]} for #{p[:pid]}")
+        end
+      end
+
+      # 3-day free trial introductory offer (weekly / monthly).
+      if p[:trial]
+        _, offers = asc_request(:get, "/v1/subscriptions/#{sub_id}/introductoryOffers?limit=10", jwt)
+        unless ((offers["data"] || []).any? rescue false)
+          code, body = asc_request(:post, "/v1/subscriptionIntroductoryOffers", jwt,
+            { "data" => { "type" => "subscriptionIntroductoryOffers",
+              "attributes" => { "duration" => "THREE_DAYS", "offerMode" => "FREE_TRIAL", "numberOfPeriods" => 1 },
+              "relationships" => { "subscription" => { "data" => { "type" => "subscriptions", "id" => sub_id } } } } })
+          UI.message("  free trial -> #{code}")
+          puts body unless code.between?(200, 299)
+        end
+      end
+    end
+  end
+
   desc "Capture App Store screenshots on the CI simulators via the -uitestSeed demo " \
        "state. Outputs to fastlane/screenshots/<locale>/ (uploaded as a CI artifact)."
   lane :screenshots do
