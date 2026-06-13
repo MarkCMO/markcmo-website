@@ -1,28 +1,62 @@
 {
   "identifier" : "PETCHORES_STOREKIT_CONFIG",
   "nonRenewingSubscriptions" : [],
-  "products" : [
-    {
-      "displayPrice" : "4.99",
-      "familyShareable" : true,
-      "internalID" : "PCUNLOCKFULL01",
-      "localizations" : [
-        {
-          "description" : "Unlock all pets, run several pets at once, photo proof, and Readiness Report export.",
-          "displayName" : "Pet Chores Full Unlock",
-          "locale" : "en_US"
-        }
-      ],
-      "productID" : "petchores.unlock.full",
-      "referenceName" : "Full Unlock",
-      "type" : "NonConsumable"
-    }
-  ],
+  "products" : [],
   "settings" : {
     "_failTransactionsEnabled" : false,
     "_askToBuyEnabled" : false
   },
-  "subscriptionGroups" : [],
+  "subscriptionGroups" : [
+    {
+      "id" : "PETCHORES_PLANS",
+      "localizations" : [],
+      "name" : "Pet Care Plans",
+      "subscriptions" : [
+        {
+          "adHocOffers" : [],
+          "codeOffers" : [],
+          "displayPrice" : "4.99",
+          "familyShareable" : true,
+          "groupNumber" : 1,
+          "internalID" : "PCPLANTHREE",
+          "introductoryOffer" : null,
+          "localizations" : [
+            {
+              "description" : "Train up to three pets at the same time.",
+              "displayName" : "Three Pets",
+              "locale" : "en_US"
+            }
+          ],
+          "productID" : "petchores.plan.three",
+          "recurringSubscriptionPeriod" : "P1M",
+          "referenceName" : "Three Pets",
+          "subscriptionGroupID" : "PETCHORES_PLANS",
+          "type" : "RecurringSubscription"
+        },
+        {
+          "adHocOffers" : [],
+          "codeOffers" : [],
+          "displayPrice" : "9.99",
+          "familyShareable" : true,
+          "groupNumber" : 2,
+          "internalID" : "PCPLANUNLIM",
+          "introductoryOffer" : null,
+          "localizations" : [
+            {
+              "description" : "Train as many pets at once as your family can handle.",
+              "displayName" : "Unlimited Pets",
+              "locale" : "en_US"
+            }
+          ],
+          "productID" : "petchores.plan.unlimited",
+          "recurringSubscriptionPeriod" : "P1M",
+          "referenceName" : "Unlimited Pets",
+          "subscriptionGroupID" : "PETCHORES_PLANS",
+          "type" : "RecurringSubscription"
+        }
+      ]
+    }
+  ],
   "version" : {
     "major" : 3,
     "minor" : 0

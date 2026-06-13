@@ -1,68 +1,87 @@
 import SwiftUI
+import StoreKit
 
-/// The paywall, shown only inside PIN-gated Parent Mode (Section 13B). A child can
-/// never reach this screen. Includes the required Restore Purchases button.
+/// The plan picker, shown only inside PIN-gated Parent Mode (Section 13B). A child can
+/// never reach this screen. One pet is free; monthly plans add more pets at once. Includes
+/// the required Restore Purchases button and subscription disclosure.
 struct StoreView: View {
     @EnvironmentObject private var store: StoreService
 
-    private let benefits: [(String, String)] = [
-        ("pawprint.fill", "Unlock every pet in the catalog"),
-        ("square.stack.3d.up.fill", "Train several pets at the same time"),
-        ("camera.fill", "Turn on photo proof for chores"),
-        ("square.and.arrow.up", "Export the Readiness Report"),
-        ("sparkles", "All future pets added in updates")
-    ]
-
     var body: some View {
         ScrollView {
-            VStack(spacing: 20) {
-                Image(systemName: "lock.open.fill")
+            VStack(spacing: 18) {
+                Image(systemName: "pawprint.circle.fill")
                     .font(.system(size: 56))
                     .foregroundStyle(Color.accentColor)
 
-                Text(store.isUnlocked ? "Full version unlocked" : "Unlock the full app")
+                Text(store.isUnlocked ? "\(store.activePlan.title) plan active" : "Add more pets")
                     .font(.largeTitle.bold())
                     .multilineTextAlignment(.center)
 
-                if !store.isUnlocked {
-                    Text("One simple purchase. No subscriptions, no ads.")
-                        .font(.subheadline).foregroundStyle(.secondary)
-                }
+                Text("One pet is always free. Subscribe monthly to train more pets at the same time. Cancel anytime.")
+                    .font(.subheadline)
+                    .foregroundStyle(.secondary)
+                    .multilineTextAlignment(.center)
 
-                Card {
-                    VStack(alignment: .leading, spacing: 14) {
-                        ForEach(benefits, id: \.1) { benefit in
-                            Label(benefit.1, systemImage: benefit.0)
-                                .font(.body)
-                        }
-                    }
-                }
-
-                if store.isUnlocked {
-                    Label("Thank you. Everything is unlocked.", systemImage: "checkmark.seal.fill")
-                        .foregroundStyle(.green)
-                        .font(.headline)
+                if store.products.isEmpty {
+                    ProgressView("Loading plans...")
+                        .padding(.vertical, 8)
                 } else {
-                    Button {
-                        Task { await store.purchase() }
-                    } label: {
-                        Text("Unlock for \(store.displayPrice)")
+                    ForEach(store.products, id: \.id) { product in
+                        planCard(product)
                     }
-                    .buttonStyle(BigButtonStyle())
-
-                    Button("Restore Purchases") {
-                        Task { await store.restore() }
-                    }
-                    .font(.subheadline.weight(.semibold))
                 }
+
+                Button("Restore Purchases") {
+                    Task { await store.restore() }
+                }
+                .font(.subheadline.weight(.semibold))
+
+                Text("Plans renew monthly until cancelled in your Apple ID settings. Payment is charged to your Apple ID. One pet is always free with no subscription.")
+                    .font(.caption2)
+                    .foregroundStyle(.secondary)
+                    .multilineTextAlignment(.center)
 
                 phaseMessage
             }
             .padding()
         }
-        .navigationTitle("Unlock")
+        .navigationTitle("Pet Plans")
         .navigationBarTitleDisplayMode(.inline)
-        .task { if store.product == nil { await store.loadProduct() } }
+        .task { if store.products.isEmpty { await store.loadProducts() } }
+    }
+
+    @ViewBuilder
+    private func planCard(_ product: Product) -> some View {
+        let plan = store.plan(for: product)
+        let isActive = store.activePlan == plan
+        Card {
+            VStack(alignment: .leading, spacing: 10) {
+                HStack(alignment: .firstTextBaseline) {
+                    Text(plan.title).font(.headline)
+                    Spacer()
+                    Text("\(product.displayPrice)/mo")
+                        .font(.headline)
+                        .foregroundStyle(Color.accentColor)
+                }
+                Text(plan.blurb)
+                    .font(.subheadline)
+                    .foregroundStyle(.secondary)
+
+                if isActive {
+                    Label("Current plan", systemImage: "checkmark.seal.fill")
+                        .foregroundStyle(.green)
+                        .font(.subheadline.weight(.semibold))
+                } else {
+                    Button {
+                        Task { await store.purchase(product) }
+                    } label: {
+                        Text("Choose \(plan.title)")
+                    }
+                    .buttonStyle(BigButtonStyle())
+                }
+            }
+        }
     }
 
     @ViewBuilder

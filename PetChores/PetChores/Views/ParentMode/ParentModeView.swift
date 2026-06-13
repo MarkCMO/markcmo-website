@@ -45,12 +45,12 @@ struct ParentModeView: View {
                     }
                 }
 
-                Section("Unlock") {
+                Section("Pet Plans") {
                     NavigationLink {
                         StoreView()
                     } label: {
-                        Label(store.isUnlocked ? "Full version unlocked" : "Unlock the full app",
-                              systemImage: store.isUnlocked ? "checkmark.seal.fill" : "lock.open")
+                        Label(store.isUnlocked ? "\(store.activePlan.title) plan active" : "Add more pets",
+                              systemImage: store.isUnlocked ? "checkmark.seal.fill" : "pawprint.circle")
                     }
                 }
             }

@@ -1,13 +1,12 @@
 import Foundation
 import StoreKit
 
-/// StoreKit 2 wrapper for the single non consumable unlock (Section 13B). StoreKit is
-/// the source of truth for entitlement; `isUnlocked` is a cached mirror for snappy UI,
-/// refreshed from current entitlements on launch and on every transaction update.
+/// StoreKit 2 wrapper for the per-pet monthly subscription plans (Three Pets / Unlimited).
+/// One pet is always free. StoreKit is the source of truth for entitlement; `activePlan`
+/// is a cached mirror refreshed from current entitlements on launch and on every
+/// transaction update. The highest active plan wins.
 @MainActor
 final class StoreService: ObservableObject {
-
-    static let productId = "petchores.unlock.full"
 
     enum PurchasePhase: Equatable {
         case idle
@@ -19,65 +18,72 @@ final class StoreService: ObservableObject {
         case cancelled
     }
 
-    @Published private(set) var product: Product?
-    @Published private(set) var isUnlocked: Bool = false
+    /// Loaded subscription products, sorted by plan rank (Three then Unlimited).
+    @Published private(set) var products: [Product] = []
+    /// The highest currently-active plan. `.free` when no subscription is active.
+    @Published private(set) var activePlan: PetPlan = .free
     @Published var phase: PurchasePhase = .idle
+
+    /// How many pets may be active at once on the current plan.
+    var maxPets: Int { activePlan.maxPets }
+    /// Whether any paid plan is active (gates photo proof, report export, etc.).
+    var isUnlocked: Bool { activePlan != .free }
 
     private var updatesTask: Task<Void, Never>?
 
     init() {
         // Listen for transactions that arrive outside of an explicit purchase call
-        // (Ask to Buy approvals, purchases on other devices, Family Sharing).
+        // (Ask to Buy approvals, renewals, purchases on other devices, Family Sharing).
         updatesTask = Task { [weak self] in
             for await result in Transaction.updates {
-                await self?.handle(transactionResult: result)
+                await self?.handle(result)
             }
         }
     }
 
     deinit { updatesTask?.cancel() }
 
-    /// Load the product and resolve the current entitlement. Call at launch.
+    /// Load products and resolve the current entitlement. Call at launch.
     func start() async {
-        await loadProduct()
+        await loadProducts()
         await refreshEntitlement()
     }
 
-    func loadProduct() async {
+    func loadProducts() async {
         do {
-            let products = try await Product.products(for: [Self.productId])
-            product = products.first
+            let loaded = try await Product.products(for: PetPlan.productIds)
+            products = loaded.sorted {
+                (PetPlan.plan(forProductId: $0.id)?.rank ?? 0) < (PetPlan.plan(forProductId: $1.id)?.rank ?? 0)
+            }
         } catch {
-            // Non-fatal: the paywall will show a friendly retry state.
-            product = nil
+            // Non-fatal: the paywall shows a friendly retry state.
+            products = []
         }
     }
 
-    /// Read live entitlements; the truth for whether the app is unlocked.
+    /// Read live entitlements; the truth for the active plan.
     func refreshEntitlement() async {
-        var unlocked = false
+        var best = PetPlan.free
         for await result in Transaction.currentEntitlements {
             if case .verified(let transaction) = result,
-               transaction.productID == Self.productId,
-               transaction.revocationDate == nil {
-                unlocked = true
+               transaction.revocationDate == nil,
+               (transaction.expirationDate ?? .distantFuture) > Date(),
+               let plan = PetPlan.plan(forProductId: transaction.productID),
+               plan.rank > best.rank {
+                best = plan
             }
         }
-        isUnlocked = unlocked
+        activePlan = best
     }
 
-    /// Begin a purchase. The caller must already be behind the parental gate.
-    func purchase() async {
-        guard let product else {
-            phase = .failed("The unlock is not available right now. Please try again.")
-            return
-        }
+    /// Begin a subscription purchase. The caller must already be behind the parental gate.
+    func purchase(_ product: Product) async {
         phase = .purchasing
         do {
             let result = try await product.purchase()
             switch result {
             case .success(let verification):
-                await handle(transactionResult: verification)
+                await handle(verification)
                 phase = .purchased
             case .pending:
                 phase = .pending
@@ -91,28 +97,26 @@ final class StoreService: ObservableObject {
         }
     }
 
-    /// Restore Purchases button (required by App Review, Section 13B).
+    /// Restore Purchases button (required by App Review).
     func restore() async {
         phase = .purchasing
         do {
             try await AppStore.sync()
             await refreshEntitlement()
-            phase = isUnlocked ? .restored : .failed("No previous purchase was found for this Apple ID.")
+            phase = isUnlocked ? .restored : .failed("No active subscription was found for this Apple ID.")
         } catch {
             phase = .failed(error.localizedDescription)
         }
     }
 
-    private func handle(transactionResult: VerificationResult<Transaction>) async {
-        guard case .verified(let transaction) = transactionResult else { return }
-        if transaction.productID == Self.productId, transaction.revocationDate == nil {
-            isUnlocked = true
-        }
-        await transaction.finish()
-        await refreshEntitlement()
+    /// The plan a given product represents.
+    func plan(for product: Product) -> PetPlan {
+        PetPlan.plan(forProductId: product.id) ?? .free
     }
 
-    var displayPrice: String {
-        product?.displayPrice ?? "$4.99"
+    private func handle(_ result: VerificationResult<Transaction>) async {
+        guard case .verified(let transaction) = result else { return }
+        await transaction.finish()
+        await refreshEntitlement()
     }
 }

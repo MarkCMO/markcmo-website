@@ -1,14 +1,15 @@
 import Foundation
 
-/// Free-tier limits and paid-feature gates (Section 13B). The free tier gives full
-/// access to ONE pet for ONE training window. The paid unlock adds all pets, multiple
-/// pets at once, photo proof, and Readiness Report export.
+/// Free-tier limits and paid-feature gates (Section 13B). One pet is always free to
+/// train; a monthly subscription plan raises how many pets may be active at once (Three
+/// Pets / Unlimited) and unlocks photo proof and Readiness Report export.
 enum FreeTier {
 
-    /// Free users may create a pet only when they have none yet. Paid users are
-    /// unlimited. Count includes archived pets so the free window is genuinely "one".
-    static func canCreatePet(isUnlocked: Bool, existingInstanceCount: Int) -> Bool {
-        isUnlocked || existingInstanceCount == 0
+    /// A new pet may be started while the number of ACTIVE pets is under the plan's
+    /// limit. Free = 1, Three = 3, Unlimited = no limit. Archived pets do not count, so
+    /// finishing one always frees a slot.
+    static func canCreatePet(maxPets: Int, activePetCount: Int) -> Bool {
+        activePetCount < maxPets
     }
 
     static func photoProofAvailable(isUnlocked: Bool) -> Bool { isUnlocked }
@@ -17,5 +18,5 @@ enum FreeTier {
 
     /// Friendly, child-safe message shown when a locked feature is tapped. Never shows a
     /// buy button to the child; routes to the parental gate first (Section 13B).
-    static let lockedMessage = "Ask a grown up to unlock more pets."
+    static let lockedMessage = "Ask a grown up to add more pets."
 }

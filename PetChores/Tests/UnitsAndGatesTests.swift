@@ -40,9 +40,14 @@ final class UnitsAndGatesTests: XCTestCase {
     // MARK: - FreeTier
 
     func testFreeTierCreateGate() {
-        XCTAssertTrue(FreeTier.canCreatePet(isUnlocked: false, existingInstanceCount: 0))
-        XCTAssertFalse(FreeTier.canCreatePet(isUnlocked: false, existingInstanceCount: 1))
-        XCTAssertTrue(FreeTier.canCreatePet(isUnlocked: true, existingInstanceCount: 5))
+        // Free plan: 1 pet.
+        XCTAssertTrue(FreeTier.canCreatePet(maxPets: PetPlan.free.maxPets, activePetCount: 0))
+        XCTAssertFalse(FreeTier.canCreatePet(maxPets: PetPlan.free.maxPets, activePetCount: 1))
+        // Three plan: up to 3 active at once.
+        XCTAssertTrue(FreeTier.canCreatePet(maxPets: PetPlan.three.maxPets, activePetCount: 2))
+        XCTAssertFalse(FreeTier.canCreatePet(maxPets: PetPlan.three.maxPets, activePetCount: 3))
+        // Unlimited plan: never blocked.
+        XCTAssertTrue(FreeTier.canCreatePet(maxPets: PetPlan.unlimited.maxPets, activePetCount: 50))
     }
 
     func testFreeTierFeatureGates() {

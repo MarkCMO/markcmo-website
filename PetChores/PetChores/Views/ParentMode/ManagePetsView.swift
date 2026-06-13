@@ -42,16 +42,17 @@ struct ManagePetsView: View {
         .navigationTitle("Manage Pets")
         .sheet(isPresented: $showAdd) { AddPetView() }
         .sheet(isPresented: $showStore) { NavigationStack { StoreView() } }
-        .alert("Unlock more pets", isPresented: $showLockedAlert) {
+        .alert("Add more pets", isPresented: $showLockedAlert) {
             Button("Not now", role: .cancel) {}
-            Button("See unlock") { showStore = true }
+            Button("See plans") { showStore = true }
         } message: {
-            Text("The free version includes one pet for one training window. Unlock the full app to add more pets and run several at once.")
+            Text("One pet is free. Subscribe to a monthly plan to train more pets at the same time.")
         }
     }
 
     private func startNewPet() {
-        if FreeTier.canCreatePet(isUnlocked: store.isUnlocked, existingInstanceCount: pets.count) {
+        let activeCount = pets.filter { $0.isActive }.count
+        if FreeTier.canCreatePet(maxPets: store.maxPets, activePetCount: activeCount) {
             showAdd = true
         } else {
             showLockedAlert = true
