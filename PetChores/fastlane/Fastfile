@@ -343,6 +343,20 @@ platform :ios do
         puts body unless code.between?(200, 299)
       end
 
+      # Availability MUST be set before prices or offers can be attached.
+      ac, avail = asc_request(:get, "/v1/subscriptions/#{sub_id}/subscriptionAvailability", jwt)
+      has_avail = (ac.between?(200, 299) && !avail["data"].nil?)
+      unless has_avail
+        code, body = asc_request(:post, "/v1/subscriptionAvailabilities", jwt,
+          { "data" => { "type" => "subscriptionAvailabilities",
+            "attributes" => { "availableInNewTerritories" => true },
+            "relationships" => {
+              "subscription" => { "data" => { "type" => "subscriptions", "id" => sub_id } },
+              "availableTerritories" => { "data" => [{ "type" => "territories", "id" => "USA" }] } } } })
+        UI.message("  availability -> #{code}")
+        puts body unless code.between?(200, 299)
+      end
+
       # Price (USA price point matching the target).
       _, prices = asc_request(:get, "/v1/subscriptions/#{sub_id}/prices?limit=50", jwt)
       unless ((prices["data"] || []).any? rescue false)
