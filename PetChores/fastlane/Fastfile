@@ -282,6 +282,18 @@ platform :ios do
     puts JSON.pretty_generate(db)
   end
 
+  desc "Print the Beta App Review state of the latest build (WAITING/IN_REVIEW/APPROVED/REJECTED)."
+  lane :beta_status do
+    jwt = asc_jwt
+    app = APP_STORE_APP_ID
+    _, builds = asc_request(:get, "/v1/builds?filter[app]=#{app}&sort=-version&limit=1", jwt)
+    b = (builds["data"] || []).first
+    next if b.nil?
+    _, sub = asc_request(:get, "/v1/builds/#{b['id']}/betaAppReviewSubmission", jwt)
+    state = sub.dig("data", "attributes", "betaReviewState")
+    UI.message("BETA_REVIEW_STATE build=#{b.dig('attributes', 'version')} state=#{state || 'NONE'}")
+  end
+
   desc "Read back the live subscription prices, trials, and state from App Store Connect."
   lane :subs_check do
     jwt = asc_jwt

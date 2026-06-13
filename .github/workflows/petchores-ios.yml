@@ -26,7 +26,7 @@ on:
         required: true
         default: "beta"
         type: choice
-        options: [setup_app, create_iap, certs, screenshots, frames, meta, beta, release, asc_inspect, asc_prep, asc_subs, tf_link, unlock_shots, subs_check, tests]
+        options: [setup_app, create_iap, certs, screenshots, frames, meta, beta, release, asc_inspect, asc_prep, asc_subs, tf_link, unlock_shots, subs_check, beta_status, tests]
 
 jobs:
   build:
