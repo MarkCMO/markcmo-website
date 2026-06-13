@@ -282,6 +282,25 @@ platform :ios do
     puts JSON.pretty_generate(db)
   end
 
+  desc "Show app store version state and clear any pending submission that locks editing."
+  lane :unlock_shots do
+    jwt = asc_jwt
+    app = APP_STORE_APP_ID
+    _, vers = asc_request(:get, "/v1/apps/#{app}/appStoreVersions?limit=5", jwt)
+    (vers["data"] || []).each do |v|
+      vid = v["id"]
+      UI.message("version #{v.dig('attributes', 'versionString')} state=#{v.dig('attributes', 'appStoreState')} id=#{vid}")
+      _, sub = asc_request(:get, "/v1/appStoreVersions/#{vid}/appStoreVersionSubmission", jwt)
+      sid = sub.dig("data", "id")
+      if sid
+        dc, _ = asc_request(:delete, "/v1/appStoreVersionSubmissions/#{sid}", jwt)
+        UI.message("  cleared submission #{sid} -> #{dc}")
+      else
+        UI.message("  no pending submission")
+      end
+    end
+  end
+
   desc "Set up an external TestFlight group with a PUBLIC LINK, attach the latest build, " \
        "and submit it for Beta App Review. Prints the shareable link."
   lane :tf_link do
