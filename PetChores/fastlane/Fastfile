@@ -302,11 +302,26 @@ platform :ios do
         { "data" => { "type" => "betaAppReviewDetails", "id" => detail_id,
           "attributes" => {
             "contactFirstName" => "Mark", "contactLastName" => "Gabrielli",
-            "contactEmail" => "info@wetyr.com", "contactPhone" => "555-555-0100",
+            "contactEmail" => "info@wetyr.com", "contactPhone" => "+13865550100",
             "demoAccountRequired" => false,
             "notes" => "No account needed. On launch: set a child name and a 4-digit PIN, pick a pet, tap Start Training to begin the 3-day free trial. Parent Mode is the Grown-ups button on Home (enter the PIN you set)." } } })
       UI.message("beta review detail -> #{dc}")
       puts db unless dc.between?(200, 299)
+    end
+
+    # 2b. Beta App Description + feedback email (required for external review).
+    _, balocs = asc_request(:get, "/v1/apps/#{app}/betaAppLocalizations?limit=10", jwt)
+    unless ((balocs["data"] || []).any? { |l| l.dig("attributes", "locale") == "en-US" } rescue false)
+      ac, ab = asc_request(:post, "/v1/betaAppLocalizations", jwt,
+        { "data" => { "type" => "betaAppLocalizations",
+          "attributes" => { "locale" => "en-US",
+            "description" => "Pet Chores is a kid trainer disguised as a pet-care game. Children practice the real daily care of a chosen animal on a real schedule, with real costs, and earn a parent readiness verdict before a real pet ever comes home.",
+            "feedbackEmail" => "info@wetyr.com",
+            "marketingUrl" => "https://markcmo.com",
+            "privacyPolicyUrl" => "https://markcmo.com" },
+          "relationships" => { "app" => { "data" => { "type" => "apps", "id" => app } } } } })
+      UI.message("beta app localization -> #{ac}")
+      puts ab unless ac.between?(200, 299)
     end
 
     # 3. "What to test" localization for the build.
