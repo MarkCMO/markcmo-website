@@ -282,6 +282,37 @@ platform :ios do
     puts JSON.pretty_generate(db)
   end
 
+  desc "Read back the live subscription prices, trials, and state from App Store Connect."
+  lane :subs_check do
+    jwt = asc_jwt
+    app = APP_STORE_APP_ID
+    _, groups = asc_request(:get, "/v1/apps/#{app}/subscriptionGroups?limit=50", jwt)
+    grp = ((groups["data"] || []).find { |g| g.dig("attributes", "referenceName") == "Pet Care Plans" } rescue nil)
+    next if grp.nil?
+    _, subs = asc_request(:get, "/v1/subscriptionGroups/#{grp['id']}/subscriptions?limit=50", jwt)
+    (subs["data"] || []).each do |s|
+      a = s["attributes"]
+      UI.message("== #{a['productId']} | #{a['name']} | #{a['subscriptionPeriod']} | state=#{a['state']} ==")
+      _, pr = asc_request(:get, "/v1/subscriptions/#{s['id']}/prices?include=subscriptionPricePoint&limit=50", jwt)
+      inc = pr["included"] || []
+      shown = false
+      (pr["data"] || []).each do |price|
+        ppid = price.dig("relationships", "subscriptionPricePoint", "data", "id")
+        pp = inc.find { |x| x["id"] == ppid }
+        if pp
+          UI.message("   price: $#{pp.dig('attributes', 'customerPrice')} (start #{price.dig('attributes', 'startDate') || 'now'})")
+          shown = true
+        end
+      end
+      UI.important("   NO PRICE SET") unless shown
+      _, io = asc_request(:get, "/v1/subscriptions/#{s['id']}/introductoryOffers?limit=10", jwt)
+      (io["data"] || []).each do |o|
+        oa = o["attributes"]
+        UI.message("   intro offer: #{oa['offerMode']} #{oa['duration']} x#{oa['numberOfPeriods']}")
+      end
+    end
+  end
+
   desc "Show app store version state and clear any pending submission that locks editing."
   lane :unlock_shots do
     jwt = asc_jwt
