@@ -20,11 +20,6 @@ settings:
     DEVELOPMENT_TEAM: "" # set your Apple Developer Team ID here
     GENERATE_INFOPLIST_FILE: NO
 
-packages:
-  GoogleMobileAds:
-    url: https://github.com/googleads/swift-package-manager-google-mobile-ads
-    from: "13.5.0"
-
 targets:
   PetChores:
     type: application
@@ -32,9 +27,6 @@ targets:
     deploymentTarget: "17.0"
     sources:
       - path: PetChores
-    dependencies:
-      - package: GoogleMobileAds
-        product: GoogleMobileAds
     scheme:
       testTargets:
         - PetChoresTests

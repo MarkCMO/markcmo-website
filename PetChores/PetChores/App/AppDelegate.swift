@@ -14,11 +14,6 @@ final class AppDelegate: NSObject, UIApplicationDelegate, UNUserNotificationCent
         Task { @MainActor in
             NotificationService.shared.registerCategories()
             await NotificationService.shared.refreshAuthorizationStatus()
-            // Start AdMob, except during screenshot capture so ads never appear in the
-            // store screenshots. Ads are still only shown to free users (see MainTabView).
-            if !UITestFlags.staticScenes {
-                AdService.start()
-            }
         }
         return true
     }
