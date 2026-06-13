@@ -1,52 +1,60 @@
 import Foundation
 
-/// Monetization model: one pet is always free to train; parents subscribe monthly to
-/// train more pets at once. The plans are auto-renewable subscriptions in a single group;
-/// when more than one is somehow active, the highest plan wins. "Charge per pet, per
-/// month" is offered as tiers the parent chooses from.
+/// Monetization model: a 3-day free trial, then a subscription is required to train pets.
+/// Two single-pet billing options (weekly / monthly) and an unlimited-pets plan, all in one
+/// auto-renewable subscription group. The highest active plan wins. `.none` means no active
+/// subscription (trial not started or lapsed): the paywall is shown.
 enum PetPlan: String, CaseIterable, Identifiable {
-    case free = "free"
-    case three = "petchores.plan.three"
-    case unlimited = "petchores.plan.unlimited"
+    case none = "none"
+    case weekly = "petchores.weekly"        // 1 pet, $1.99/week, 3-day free trial
+    case monthly = "petchores.monthly"      // 1 pet, $4.99/month, 3-day free trial
+    case unlimited = "petchores.unlimited"  // unlimited pets, $19.99/month
 
     var id: String { rawValue }
 
     /// How many pets may be ACTIVE (in training) at once on this plan.
     var maxPets: Int {
         switch self {
-        case .free:      return 1
-        case .three:     return 3
+        case .none:      return 0
+        case .weekly:    return 1
+        case .monthly:   return 1
         case .unlimited: return Int.max
         }
     }
 
     var title: String {
         switch self {
-        case .free:      return "One Pet"
-        case .three:     return "Three Pets"
+        case .none:      return "No plan"
+        case .weekly:    return "One Pet"
+        case .monthly:   return "One Pet"
         case .unlimited: return "Unlimited Pets"
         }
     }
 
     var blurb: String {
         switch self {
-        case .free:      return "Train one pet at a time, free forever."
-        case .three:     return "Train up to three pets at once."
-        case .unlimited: return "As many pets as your family can handle."
+        case .none:      return "Start a 3-day free trial to train your first pet."
+        case .weekly:    return "Train one pet at a time, billed weekly."
+        case .monthly:   return "Train one pet at a time, billed monthly."
+        case .unlimited: return "Train as many pets at once as your family can handle."
         }
     }
 
-    /// Higher rank wins when resolving the active entitlement.
+    /// Higher rank wins when resolving the active entitlement (weekly and monthly are the
+    /// same access level: one pet).
     var rank: Int {
         switch self {
-        case .free:      return 0
-        case .three:     return 1
+        case .none:      return 0
+        case .weekly:    return 1
+        case .monthly:   return 1
         case .unlimited: return 2
         }
     }
 
-    /// The auto-renewable subscription product ids (the free plan has none).
-    static let productIds: [String] = [PetPlan.three.rawValue, PetPlan.unlimited.rawValue]
+    /// The auto-renewable subscription product ids (the `.none` state has none).
+    static let productIds: [String] = [PetPlan.weekly.rawValue,
+                                        PetPlan.monthly.rawValue,
+                                        PetPlan.unlimited.rawValue]
 
     static func plan(forProductId id: String) -> PetPlan? { PetPlan(rawValue: id) }
 }

@@ -1,10 +1,10 @@
 import Foundation
 import StoreKit
 
-/// StoreKit 2 wrapper for the per-pet monthly subscription plans (Three Pets / Unlimited).
-/// One pet is always free. StoreKit is the source of truth for entitlement; `activePlan`
-/// is a cached mirror refreshed from current entitlements on launch and on every
-/// transaction update. The highest active plan wins.
+/// StoreKit 2 wrapper for the subscription plans: a 3-day free trial, then One Pet weekly
+/// or monthly, or an Unlimited plan. StoreKit is the source of truth for entitlement;
+/// `activePlan` is a cached mirror refreshed from current entitlements on launch and on
+/// every transaction update. The highest active plan wins; `.none` shows the paywall.
 @MainActor
 final class StoreService: ObservableObject {
 
@@ -18,16 +18,16 @@ final class StoreService: ObservableObject {
         case cancelled
     }
 
-    /// Loaded subscription products, sorted by plan rank (Three then Unlimited).
+    /// Loaded subscription products, sorted by plan rank (One Pet plans, then Unlimited).
     @Published private(set) var products: [Product] = []
-    /// The highest currently-active plan. `.free` when no subscription is active.
-    @Published private(set) var activePlan: PetPlan = .free
+    /// The highest currently-active plan. `.none` when no subscription/trial is active.
+    @Published private(set) var activePlan: PetPlan = .none
     @Published var phase: PurchasePhase = .idle
 
     /// How many pets may be active at once on the current plan.
     var maxPets: Int { activePlan.maxPets }
     /// Whether any paid plan is active (gates photo proof, report export, etc.).
-    var isUnlocked: Bool { activePlan != .free }
+    var isUnlocked: Bool { activePlan != .none }
 
     private var updatesTask: Task<Void, Never>?
 
@@ -63,7 +63,7 @@ final class StoreService: ObservableObject {
 
     /// Read live entitlements; the truth for the active plan.
     func refreshEntitlement() async {
-        var best = PetPlan.free
+        var best = PetPlan.none
         for await result in Transaction.currentEntitlements {
             if case .verified(let transaction) = result,
                transaction.revocationDate == nil,
@@ -111,7 +111,7 @@ final class StoreService: ObservableObject {
 
     /// The plan a given product represents.
     func plan(for product: Product) -> PetPlan {
-        PetPlan.plan(forProductId: product.id) ?? .free
+        PetPlan.plan(forProductId: product.id) ?? .none
     }
 
     private func handle(_ result: VerificationResult<Transaction>) async {

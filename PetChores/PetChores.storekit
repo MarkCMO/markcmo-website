@@ -15,31 +15,60 @@
         {
           "adHocOffers" : [],
           "codeOffers" : [],
-          "displayPrice" : "4.99",
-          "familyShareable" : true,
+          "displayPrice" : "1.99",
+          "familyShareable" : false,
           "groupNumber" : 1,
-          "internalID" : "PCPLANTHREE",
-          "introductoryOffer" : null,
+          "internalID" : "PCWEEKLY",
+          "introductoryOffer" : {
+            "internalID" : "PCWEEKLYTRIAL",
+            "paymentMode" : "free",
+            "subscriptionPeriod" : "P3D"
+          },
           "localizations" : [
             {
-              "description" : "Train up to three pets at the same time.",
-              "displayName" : "Three Pets",
+              "description" : "Train one pet at a time, billed weekly. 3-day free trial.",
+              "displayName" : "One Pet (Weekly)",
               "locale" : "en_US"
             }
           ],
-          "productID" : "petchores.plan.three",
-          "recurringSubscriptionPeriod" : "P1M",
-          "referenceName" : "Three Pets",
+          "productID" : "petchores.weekly",
+          "recurringSubscriptionPeriod" : "P1W",
+          "referenceName" : "One Pet Weekly",
           "subscriptionGroupID" : "PETCHORES_PLANS",
           "type" : "RecurringSubscription"
         },
         {
           "adHocOffers" : [],
           "codeOffers" : [],
-          "displayPrice" : "9.99",
+          "displayPrice" : "4.99",
+          "familyShareable" : false,
+          "groupNumber" : 1,
+          "internalID" : "PCMONTHLY",
+          "introductoryOffer" : {
+            "internalID" : "PCMONTHLYTRIAL",
+            "paymentMode" : "free",
+            "subscriptionPeriod" : "P3D"
+          },
+          "localizations" : [
+            {
+              "description" : "Train one pet at a time, billed monthly. 3-day free trial.",
+              "displayName" : "One Pet (Monthly)",
+              "locale" : "en_US"
+            }
+          ],
+          "productID" : "petchores.monthly",
+          "recurringSubscriptionPeriod" : "P1M",
+          "referenceName" : "One Pet Monthly",
+          "subscriptionGroupID" : "PETCHORES_PLANS",
+          "type" : "RecurringSubscription"
+        },
+        {
+          "adHocOffers" : [],
+          "codeOffers" : [],
+          "displayPrice" : "19.99",
           "familyShareable" : true,
           "groupNumber" : 2,
-          "internalID" : "PCPLANUNLIM",
+          "internalID" : "PCUNLIM",
           "introductoryOffer" : null,
           "localizations" : [
             {
@@ -48,7 +77,7 @@
               "locale" : "en_US"
             }
           ],
-          "productID" : "petchores.plan.unlimited",
+          "productID" : "petchores.unlimited",
           "recurringSubscriptionPeriod" : "P1M",
           "referenceName" : "Unlimited Pets",
           "subscriptionGroupID" : "PETCHORES_PLANS",

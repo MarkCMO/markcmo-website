@@ -40,12 +40,12 @@ final class UnitsAndGatesTests: XCTestCase {
     // MARK: - FreeTier
 
     func testFreeTierCreateGate() {
-        // Free plan: 1 pet.
-        XCTAssertTrue(FreeTier.canCreatePet(maxPets: PetPlan.free.maxPets, activePetCount: 0))
-        XCTAssertFalse(FreeTier.canCreatePet(maxPets: PetPlan.free.maxPets, activePetCount: 1))
-        // Three plan: up to 3 active at once.
-        XCTAssertTrue(FreeTier.canCreatePet(maxPets: PetPlan.three.maxPets, activePetCount: 2))
-        XCTAssertFalse(FreeTier.canCreatePet(maxPets: PetPlan.three.maxPets, activePetCount: 3))
+        // No subscription / lapsed trial: cannot create a pet (paywall).
+        XCTAssertFalse(FreeTier.canCreatePet(maxPets: PetPlan.none.maxPets, activePetCount: 0))
+        // One-pet plans (weekly / monthly): exactly one active pet.
+        XCTAssertEqual(PetPlan.weekly.maxPets, PetPlan.monthly.maxPets)
+        XCTAssertTrue(FreeTier.canCreatePet(maxPets: PetPlan.monthly.maxPets, activePetCount: 0))
+        XCTAssertFalse(FreeTier.canCreatePet(maxPets: PetPlan.monthly.maxPets, activePetCount: 1))
         // Unlimited plan: never blocked.
         XCTAssertTrue(FreeTier.canCreatePet(maxPets: PetPlan.unlimited.maxPets, activePetCount: 50))
     }

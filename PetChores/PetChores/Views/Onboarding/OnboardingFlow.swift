@@ -274,8 +274,10 @@ private struct MeetPetScreen: View {
 private struct NameAndLengthScreen: View {
     @Bindable var model: OnboardingViewModel
     @Environment(\.modelContext) private var context
+    @EnvironmentObject private var store: StoreService
     @State private var showGate = false
     @State private var lengthUnlocked = false
+    @State private var showPaywall = false
 
     var body: some View {
         VStack(alignment: .leading, spacing: 18) {
@@ -323,6 +325,17 @@ private struct NameAndLengthScreen: View {
                 onSuccess: { lengthUnlocked = true }
             )
         }
+        .sheet(isPresented: $showPaywall) {
+            NavigationStack { StoreView() }
+        }
+        // When the trial / subscription becomes active, create the first pet and let
+        // RootView route into the app.
+        .onChange(of: store.isUnlocked) { _, unlocked in
+            if unlocked {
+                showPaywall = false
+                _ = model.finalize(context: context)
+            }
+        }
     }
 
     private var lengthPicker: some View {
@@ -358,7 +371,14 @@ private struct NameAndLengthScreen: View {
     }
 
     private func finish() {
-        _ = model.finalize(context: context)
-        // RootView's @Query updates and routes to the main app automatically.
+        // A subscription (including the 3-day free trial) is required to train a pet.
+        // If one is already active, create the pet now; otherwise present the paywall and
+        // create the pet once the trial/subscription starts (see onChange above).
+        if store.isUnlocked {
+            _ = model.finalize(context: context)
+            // RootView's @Query updates and routes to the main app automatically.
+        } else {
+            showPaywall = true
+        }
     }
 }

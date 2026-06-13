@@ -14,11 +14,11 @@ struct StoreView: View {
                     .font(.system(size: 56))
                     .foregroundStyle(Color.accentColor)
 
-                Text(store.isUnlocked ? "\(store.activePlan.title) plan active" : "Add more pets")
+                Text(store.isUnlocked ? "\(store.activePlan.title) plan active" : "Start your free trial")
                     .font(.largeTitle.bold())
                     .multilineTextAlignment(.center)
 
-                Text("One pet is always free. Subscribe monthly to train more pets at the same time. Cancel anytime.")
+                Text("Try Pet Chores free for 3 days, then keep training with the plan that fits. Cancel anytime.")
                     .font(.subheadline)
                     .foregroundStyle(.secondary)
                     .multilineTextAlignment(.center)
@@ -60,13 +60,19 @@ struct StoreView: View {
                 HStack(alignment: .firstTextBaseline) {
                     Text(plan.title).font(.headline)
                     Spacer()
-                    Text("\(product.displayPrice)/mo")
+                    Text("\(product.displayPrice)/\(periodLabel(product))")
                         .font(.headline)
                         .foregroundStyle(Color.accentColor)
                 }
                 Text(plan.blurb)
                     .font(.subheadline)
                     .foregroundStyle(.secondary)
+
+                if hasFreeTrial(product) {
+                    Label("3-day free trial", systemImage: "gift.fill")
+                        .font(.caption.weight(.semibold))
+                        .foregroundStyle(Color.accentColor)
+                }
 
                 if isActive {
                     Label("Current plan", systemImage: "checkmark.seal.fill")
@@ -76,12 +82,28 @@ struct StoreView: View {
                     Button {
                         Task { await store.purchase(product) }
                     } label: {
-                        Text("Choose \(plan.title)")
+                        Text(hasFreeTrial(product) ? "Start free trial" : "Choose \(plan.title)")
                     }
                     .buttonStyle(BigButtonStyle())
                 }
             }
         }
+    }
+
+    /// "week" / "month" from the product's subscription period.
+    private func periodLabel(_ product: Product) -> String {
+        guard let unit = product.subscription?.subscriptionPeriod.unit else { return "month" }
+        switch unit {
+        case .day:   return "day"
+        case .week:  return "week"
+        case .month: return "month"
+        case .year:  return "year"
+        @unknown default: return "month"
+        }
+    }
+
+    private func hasFreeTrial(_ product: Product) -> Bool {
+        product.subscription?.introductoryOffer?.paymentMode == .freeTrial
     }
 
     @ViewBuilder
