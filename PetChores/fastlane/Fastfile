@@ -281,6 +281,80 @@ platform :ios do
     puts JSON.pretty_generate(db)
   end
 
+  desc "Set up an external TestFlight group with a PUBLIC LINK, attach the latest build, " \
+       "and submit it for Beta App Review. Prints the shareable link."
+  lane :tf_link do
+    jwt = asc_jwt
+    app = APP_STORE_APP_ID
+
+    # 1. Latest build + processing state.
+    _, builds = asc_request(:get, "/v1/builds?filter[app]=#{app}&sort=-version&limit=5", jwt)
+    build = (builds["data"] || []).first
+    build_id = build && build["id"]
+    UI.message("latest build #{build && build.dig('attributes', 'version')} id=#{build_id} state=#{build && build.dig('attributes', 'processingState')}")
+    next if build_id.nil?
+
+    # 2. Beta App Review contact detail (required to submit for external review).
+    _, detail = asc_request(:get, "/v1/apps/#{app}/betaAppReviewDetail", jwt)
+    detail_id = detail.dig("data", "id")
+    if detail_id
+      dc, db = asc_request(:patch, "/v1/betaAppReviewDetails/#{detail_id}", jwt,
+        { "data" => { "type" => "betaAppReviewDetails", "id" => detail_id,
+          "attributes" => {
+            "contactFirstName" => "Mark", "contactLastName" => "Gabrielli",
+            "contactEmail" => "info@wetyr.com", "contactPhone" => "555-555-0100",
+            "demoAccountRequired" => false,
+            "notes" => "No account needed. On launch: set a child name and a 4-digit PIN, pick a pet, tap Start Training to begin the 3-day free trial. Parent Mode is the Grown-ups button on Home (enter the PIN you set)." } } })
+      UI.message("beta review detail -> #{dc}")
+      puts db unless dc.between?(200, 299)
+    end
+
+    # 3. "What to test" localization for the build.
+    _, locs = asc_request(:get, "/v1/builds/#{build_id}/betaBuildLocalizations?limit=10", jwt)
+    unless ((locs["data"] || []).any? rescue false)
+      lc, lb = asc_request(:post, "/v1/betaBuildLocalizations", jwt,
+        { "data" => { "type" => "betaBuildLocalizations",
+          "attributes" => { "locale" => "en-US",
+            "whatsNew" => "Try the 3-day free trial: onboard, pick a pet, tap Start Training. Test the weekly/monthly/unlimited plans. Parent Mode is the Grown-ups button on Home." },
+          "relationships" => { "build" => { "data" => { "type" => "builds", "id" => build_id } } } } })
+      UI.message("build localization -> #{lc}")
+      puts lb unless lc.between?(200, 299)
+    end
+
+    # 4. External group with a public link.
+    _, groups = asc_request(:get, "/v1/apps/#{app}/betaGroups?limit=50", jwt)
+    grp = ((groups["data"] || []).find { |g| g.dig("attributes", "name") == "Public Beta" } rescue nil)
+    grp_id = grp && grp["id"]
+    if grp_id.nil?
+      gc, gb = asc_request(:post, "/v1/betaGroups", jwt,
+        { "data" => { "type" => "betaGroups",
+          "attributes" => { "name" => "Public Beta", "publicLinkEnabled" => true },
+          "relationships" => { "app" => { "data" => { "type" => "apps", "id" => app } } } } })
+      UI.message("create group -> #{gc}")
+      puts gb unless gc.between?(200, 299)
+      grp = gb["data"]
+      grp_id = grp && grp["id"]
+    end
+
+    # 5. Attach the build to the group.
+    bc, bb = asc_request(:post, "/v1/betaGroups/#{grp_id}/relationships/builds", jwt,
+      { "data" => [{ "type" => "builds", "id" => build_id }] })
+    UI.message("attach build -> #{bc}")
+    puts bb unless bc.between?(200, 299)
+
+    # 6. Submit the build for Beta App Review (required before the public link works).
+    sc, sb = asc_request(:post, "/v1/betaAppReviewSubmissions", jwt,
+      { "data" => { "type" => "betaAppReviewSubmissions",
+        "relationships" => { "build" => { "data" => { "type" => "builds", "id" => build_id } } } } })
+    UI.message("beta review submit -> #{sc}")
+    puts sb unless sc.between?(200, 299)
+
+    # 7. Read back the public link.
+    _, g2 = asc_request(:get, "/v1/betaGroups/#{grp_id}", jwt)
+    link = g2.dig("data", "attributes", "publicLink")
+    UI.success("TestFlight public link: #{link.inspect}")
+  end
+
   desc "Create the auto-renewable subscription group + plans (weekly/monthly/unlimited) " \
        "with prices and the 3-day free trial, via the App Store Connect API. Idempotent."
   lane :asc_subs do
