@@ -155,6 +155,7 @@ platform :ios do
     upload_to_app_store(
       skip_binary_upload: true,
       skip_screenshots: false,
+      overwrite_screenshots: true,       # replace the App Store Connect set with this one
       submit_for_review: false,
       force: true,                       # do not open the HTML summary prompt
       precheck_include_in_app_purchases: false
