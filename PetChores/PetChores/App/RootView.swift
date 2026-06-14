@@ -22,7 +22,9 @@ struct RootView: View {
 
     var body: some View {
         Group {
-            if let seedError {
+            if UITestFlags.gallery {
+                ArtGalleryView()
+            } else if let seedError {
                 SeedErrorView(message: seedError.localizedDescription)
             } else if isOnboarded {
                 MainTabView()

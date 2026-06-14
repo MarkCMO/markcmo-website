@@ -9,7 +9,8 @@ devices([
 languages(["en-US"])
 
 scheme("PetChores")
-only_testing(["PetChoresUITests"])
+# Temporarily limited to the art gallery while refining the animals (fast single capture).
+only_testing(["PetChoresUITests/ScreenshotTests/testGallery"])
 
 output_directory("./fastlane/screenshots")
 clear_previous_screenshots(true)

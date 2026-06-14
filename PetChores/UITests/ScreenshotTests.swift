@@ -38,6 +38,19 @@ final class ScreenshotTests: XCTestCase {
         selectPet(app, "Luna");    snapshot("08-Home-Cat")
     }
 
+    /// Internal: capture the all-animals art gallery for review.
+    func testGallery() throws {
+        let app = XCUIApplication()
+        setupSnapshot(app)
+        app.launchArguments += ["-uitestGallery"]
+        app.launch()
+        sleep(4)
+        snapshot("00-Gallery-Top")
+        app.swipeUp(); sleep(1)
+        app.swipeUp(); sleep(1)
+        snapshot("00-Gallery-Bottom")
+    }
+
     private func tapTab(_ app: XCUIApplication, _ label: String) {
         let tab = app.buttons[label].firstMatch
         if tab.waitForExistence(timeout: 10) {

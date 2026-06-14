@@ -7,4 +7,8 @@ enum UITestFlags {
     /// this mode so XCUITest can reach an idle state instead of waiting out every
     /// synchronization timeout, which otherwise makes the snapshot run crawl.
     static let staticScenes = ProcessInfo.processInfo.arguments.contains("-uitestSeed")
+        || ProcessInfo.processInfo.arguments.contains("-uitestGallery")
+
+    /// True when launched to render the all-animals art gallery for review.
+    static let gallery = ProcessInfo.processInfo.arguments.contains("-uitestGallery")
 }
