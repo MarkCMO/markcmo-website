@@ -3,8 +3,7 @@
 # Device names must match simulators available on the CI runner (Xcode 26); the
 # workflow prints `xcrun simctl list devices available` so they can be corrected.
 devices([
-  "iPhone 17 Pro Max",
-  "iPad Pro 13-inch (M5)"
+  "iPhone 17 Pro Max"
 ])
 
 languages(["en-US"])

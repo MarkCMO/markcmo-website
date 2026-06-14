@@ -42,9 +42,11 @@ struct PetScene: View {
     }
 
     private func frame(t: Double, date: Date, size: CGSize) -> some View {
-        let phase = Self.skyPhase(date)
+        // For App Store screenshots, force a bright clear midday so the scene looks its
+        // best regardless of the capture machine's clock.
+        let phase = UITestFlags.staticScenes ? 0.5 : Self.skyPhase(date)
         let night = phase < 0.20 || phase > 0.88
-        let weather = Self.weather(date)
+        let weather = UITestFlags.staticScenes ? SceneWeather.clear : Self.weather(date)
         return ZStack {
             if showEnvironment {
                 EnvironmentBackdrop(habitat: habitat, t: t, skyPhase: phase, weather: weather)

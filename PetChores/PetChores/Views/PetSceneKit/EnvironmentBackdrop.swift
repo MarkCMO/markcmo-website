@@ -80,11 +80,77 @@ struct EnvironmentBackdrop: View {
                 sun(w: w, h: h)
             }
             clouds(w: w, h: h, alpha: raining ? 0.85 : (sky.isNight ? 0.35 : 0.9), grey: raining)
+            bush(w: w, h: h)
             grass(w: w, h: h)
+            flowers(w: w, h: h)
             fence(w, h)
+            if !sky.isNight && !raining { butterflies(w: w, h: h) }
             if raining {
                 Rectangle().fill(Color.black.opacity(0.12))
                 rain(w: w, h: h)
+            }
+        }
+    }
+
+    /// A leafy bush tucked by the fence.
+    private func bush(w: CGFloat, h: CGFloat) -> some View {
+        let c = Color(red: 0.26, green: 0.50, blue: 0.27)
+        let cd = Color(red: 0.20, green: 0.42, blue: 0.22)
+        return ZStack {
+            Circle().fill(cd).frame(width: w * 0.17, height: w * 0.17).offset(x: -w * 0.06, y: w * 0.01)
+            Circle().fill(c).frame(width: w * 0.22, height: w * 0.22)
+            Circle().fill(c).frame(width: w * 0.15, height: w * 0.15).offset(x: w * 0.07, y: w * 0.01)
+        }
+        .position(x: w * 0.85, y: h * 0.605)
+    }
+
+    /// A few simple flowers that sway in the grass.
+    private func flowers(w: CGFloat, h: CGFloat) -> some View {
+        let spots: [(CGFloat, Color)] = [
+            (0.10, Color(red: 0.95, green: 0.45, blue: 0.62)),
+            (0.27, Color(red: 0.98, green: 0.80, blue: 0.30)),
+            (0.66, Color(red: 0.66, green: 0.50, blue: 0.92)),
+            (0.90, Color(red: 0.97, green: 0.58, blue: 0.30))
+        ]
+        return ZStack {
+            ForEach(0..<spots.count, id: \.self) { i in
+                let sway = sin(t * 1.8 + Double(i) * 1.3) * 4
+                ZStack {
+                    Rectangle().fill(Color(red: 0.30, green: 0.55, blue: 0.28))
+                        .frame(width: 3, height: h * 0.09)
+                    ZStack {
+                        ForEach(0..<5, id: \.self) { p in
+                            Circle().fill(spots[i].1)
+                                .frame(width: w * 0.028, height: w * 0.028)
+                                .offset(y: -w * 0.024)
+                                .rotationEffect(.degrees(Double(p) * 72))
+                        }
+                        Circle().fill(Color(red: 1.0, green: 0.86, blue: 0.30))
+                            .frame(width: w * 0.02, height: w * 0.02)
+                    }
+                    .offset(y: -h * 0.045)
+                }
+                .rotationEffect(.degrees(sway), anchor: .bottom)
+                .position(x: spots[i].0 * w, y: h * 0.85)
+            }
+        }
+    }
+
+    /// Two butterflies that flutter across the yard in daylight.
+    private func butterflies(w: CGFloat, h: CGFloat) -> some View {
+        ZStack {
+            ForEach(0..<2, id: \.self) { i in
+                let ii = Double(i)
+                let px = w * (0.30 + 0.36 * ii) + CGFloat(sin(t * 0.8 + ii * 2)) * w * 0.16
+                let py = h * (0.40 + 0.10 * ii) + CGFloat(cos(t * 1.1 + ii)) * h * 0.08
+                let flap = CGFloat(abs(sin(t * 8 + ii)) * 0.6 + 0.4)
+                let col = i == 0 ? Color(red: 0.97, green: 0.58, blue: 0.30) : Color(red: 0.66, green: 0.50, blue: 0.92)
+                ZStack {
+                    Ellipse().fill(col.opacity(0.9)).frame(width: w * 0.03 * flap, height: w * 0.045).offset(x: -w * 0.014)
+                    Ellipse().fill(col.opacity(0.9)).frame(width: w * 0.03 * flap, height: w * 0.045).offset(x: w * 0.014)
+                    Capsule().fill(Color.black.opacity(0.7)).frame(width: 2, height: w * 0.04)
+                }
+                .position(x: px, y: py)
             }
         }
     }
