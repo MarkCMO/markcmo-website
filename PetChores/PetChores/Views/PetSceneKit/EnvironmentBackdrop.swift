@@ -448,6 +448,45 @@ struct EnvironmentBackdrop: View {
         VStack { Spacer(); Rectangle().fill(Color(red: 0.30, green: 0.26, blue: 0.22)).frame(height: h * 0.10) }
     }
 
+    // MARK: - Ground mess for the caged habitats (soiled bedding, droppings, substrate)
+
+    /// Small droppings scattered on the floor that multiply as the cage / cage tray /
+    /// terrarium soils. Used by the cage, birdcage, and terrarium so each has a visible
+    /// mess to clean, the way the yard and tank already do. Stink wisps rise when bad.
+    private func groundMess(w: CGFloat, h: CGFloat, baseline: CGFloat) -> some View {
+        let count = waste >= 0.85 ? 6 : (waste >= 0.55 ? 4 : 2)
+        let spots: [(CGFloat, CGFloat)] = [
+            (0.22, 0.0), (0.42, 0.04), (0.61, -0.02), (0.74, 0.05), (0.34, 0.07), (0.55, 0.09)
+        ]
+        let c1 = Color(red: 0.36, green: 0.25, blue: 0.15)
+        let c2 = Color(red: 0.46, green: 0.32, blue: 0.20)
+        return ZStack {
+            ForEach(0..<count, id: \.self) { i in
+                let s = w * 0.018
+                ZStack {
+                    Ellipse().fill(.black.opacity(0.12)).frame(width: s * 2.6, height: s * 0.8).offset(y: s * 0.5)
+                    Capsule().fill(c1).frame(width: s * 2.2, height: s * 1.1)
+                    Capsule().fill(c2).frame(width: s * 1.3, height: s * 0.7).offset(x: s * 0.2, y: -s * 0.1)
+                }
+                .position(x: w * spots[i].0, y: baseline + h * spots[i].1)
+            }
+            if waste >= 0.6 {
+                ForEach(0..<2, id: \.self) { k in
+                    let kk = Double(k)
+                    let rise = (t * 0.8 + kk * 0.5).truncatingRemainder(dividingBy: 1.0)
+                    Path { pp in
+                        let bx = w * (0.40 + 0.18 * kk)
+                        pp.move(to: CGPoint(x: bx, y: baseline - CGFloat(rise) * h * 0.18))
+                        pp.addQuadCurve(to: CGPoint(x: bx + w * 0.02, y: baseline - h * 0.10 - CGFloat(rise) * h * 0.18),
+                                        control: CGPoint(x: bx - w * 0.02, y: baseline - h * 0.05 - CGFloat(rise) * h * 0.18))
+                    }
+                    .stroke(Color(red: 0.55, green: 0.62, blue: 0.40).opacity(0.45 * (1 - rise)),
+                            style: StrokeStyle(lineWidth: 2, lineCap: .round))
+                }
+            }
+        }
+    }
+
     // MARK: - Terrarium
 
     private func terrarium(_ w: CGFloat, _ h: CGFloat) -> some View {
@@ -463,6 +502,7 @@ struct EnvironmentBackdrop: View {
             Ellipse().fill(Color(red: 0.45, green: 0.42, blue: 0.40))
                 .frame(width: w * 0.22, height: h * 0.16)
                 .position(x: w * 0.18, y: h * 0.80)
+            if waste > 0.15 { groundMess(w: w, h: h, baseline: h * 0.86) }
         }
     }
 
@@ -482,6 +522,7 @@ struct EnvironmentBackdrop: View {
             }
             Rectangle().fill(Color(white: 0.5).opacity(0.6)).frame(width: w, height: 5).position(x: w / 2, y: 4)
             Rectangle().fill(Color(white: 0.5).opacity(0.6)).frame(width: w, height: 5).position(x: w / 2, y: h - 4)
+            if waste > 0.15 { groundMess(w: w, h: h, baseline: h * 0.90) }
         }
     }
 
@@ -502,6 +543,7 @@ struct EnvironmentBackdrop: View {
                 Rectangle().fill(Color(white: 0.6)).frame(width: 3, height: h * 0.06)
             }
             .position(x: w * 0.9, y: h * 0.3)
+            if waste > 0.15 { groundMess(w: w, h: h, baseline: h * 0.88) }
         }
     }
 }

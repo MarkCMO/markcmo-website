@@ -36,6 +36,7 @@ final class ScreenshotTests: XCTestCase {
         tapTab(app, "Home")
         selectPet(app, "Clover");  snapshot("07-Home-Rabbit")
         selectPet(app, "Luna");    snapshot("08-Home-Cat")
+        selectPet(app, "Pepper");  snapshot("09-Home-GuineaPig")   // caged: soiled bedding to clean
     }
 
     /// Internal: capture the all-animals art gallery for review.

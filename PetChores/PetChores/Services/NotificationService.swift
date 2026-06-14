@@ -68,12 +68,18 @@ final class NotificationService: ObservableObject {
 
     // MARK: - Scheduling
 
-    /// Replace the pending queue with the nearest upcoming tasks. `nicknames` maps an
-    /// instanceId to the pet nickname for the notification text.
-    func rescheduleAll(pendingTasks: [ScheduledTask], nicknames: [UUID: String], settings: ParentSettings) {
+    /// Replace the pending queue with the nearest upcoming tasks plus any escalating care
+    /// reminders. `nicknames` maps an instanceId to the pet nickname for the text.
+    func rescheduleAll(pendingTasks: [ScheduledTask],
+                       nicknames: [UUID: String],
+                       settings: ParentSettings,
+                       careAlerts: [PendingCareAlert] = []) {
         center.removeAllPendingNotificationRequests()
 
         let now = Date()
+        // Reserve a few slots for the escalation reminders so a busy schedule never crowds
+        // out the "your pet needs you now" warning.
+        let taskCap = max(0, Self.maxPending - careAlerts.count)
         // Only future, pending tasks. Shift any that fall in quiet hours.
         let upcoming = pendingTasks
             .filter { $0.status == .pending }
@@ -87,10 +93,33 @@ final class NotificationService: ObservableObject {
             }
             .filter { $0.fireDate > now }
             .sorted { $0.fireDate < $1.fireDate }
-            .prefix(Self.maxPending)
+            .prefix(taskCap)
 
         for entry in upcoming {
             schedule(task: entry.task, fireDate: entry.fireDate, nickname: nicknames[entry.task.instanceId] ?? "Your pet")
+        }
+
+        scheduleCareAlerts(careAlerts, settings: settings, now: now)
+    }
+
+    /// Schedule one escalating care reminder per slipping pet, ~45 minutes out (shifted past
+    /// quiet hours). A stable per-pet id means a fresh maintenance pass replaces the old
+    /// reminder with the current, possibly louder, tier rather than stacking duplicates.
+    private func scheduleCareAlerts(_ alerts: [PendingCareAlert], settings: ParentSettings, now: Date) {
+        for pending in alerts {
+            let base = now.addingTimeInterval(45 * 60)
+            let fire = max(
+                TimeUtilities.shiftedOutOfQuietHours(base, start: settings.quietHoursStart, end: settings.quietHoursEnd),
+                base
+            )
+            let content = UNMutableNotificationContent()
+            content.title = pending.alert.title
+            content.body = pending.alert.body
+            content.sound = .default
+            let comps = Calendar.current.dateComponents([.year, .month, .day, .hour, .minute], from: fire)
+            let trigger = UNCalendarNotificationTrigger(dateMatching: comps, repeats: false)
+            let id = "care-escalation-\(pending.instanceId.uuidString)"
+            center.add(UNNotificationRequest(identifier: id, content: content, trigger: trigger))
         }
     }
 
@@ -128,6 +157,12 @@ final class NotificationService: ObservableObject {
         }
         return task.realAction
     }
+}
+
+/// An escalating care reminder to schedule for one pet (built by CareEscalation).
+struct PendingCareAlert {
+    let instanceId: UUID
+    let alert: CareEscalation.Alert
 }
 
 /// Payload passed from the AppDelegate notification handler to the app.

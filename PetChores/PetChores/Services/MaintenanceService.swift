@@ -21,6 +21,8 @@ struct MaintenanceService {
         guard let settings = DataStore.parentSettings(context) else { return }
         let instances = DataStore.activeInstances(context)
 
+        var careAlerts: [PendingCareAlert] = []
+
         for instance in instances {
             guard let species = DataStore.species(id: instance.speciesId, context: context) else { continue }
             let existing = DataStore.tasks(for: instance.instanceId, context: context)
@@ -46,64 +48,93 @@ struct MaintenanceService {
             let settled = DataStore.tasks(for: instance.instanceId, context: context)
             scoring.settleElapsedDays(instance: instance, tasks: settled, now: now)
 
-            // 3b. Advance the real-time care needs and apply the strike consequence.
-            advanceNeeds(instance: instance, species: species, settings: settings, now: now)
+            // 3b. Advance the real-time care needs and apply the strike consequence, and
+            //     collect the escalating reminder for any pet whose needs are slipping.
+            if let alert = advanceNeeds(instance: instance, species: species, settings: settings, now: now) {
+                careAlerts.append(alert)
+            }
         }
 
         // 4. Save.
         DataStore.save(context)
 
-        // 5. Reschedule notifications from all pending tasks across active instances.
-        rescheduleNotifications(context: context, settings: settings)
+        // 5. Reschedule notifications from all pending tasks plus the escalation reminders.
+        rescheduleNotifications(context: context, settings: settings, careAlerts: careAlerts)
     }
 
-    /// Advance the pet's real-time needs (yard waste, hunger, tank fouling) by the time
-    /// elapsed since the last tick, then apply the strike consequence when a need is
-    /// critical. Demo mode multiplies the elapsed time so it plays out in a minute.
-    func advanceNeeds(instance: PetInstance, species: PetSpecies, settings: ParentSettings, now: Date) {
-        let intensity = settings.consequenceIntensity
-        guard intensity != .off, !instance.isLost else { return }
+    /// Advance the pet's real-time needs by the time elapsed since the last tick, then apply
+    /// the strike consequence when a need is critical, and build the escalating reminder for
+    /// the pet's current state. Demo mode multiplies the elapsed time so it plays out in a
+    /// minute. Grooming and exercise climb as ordinary daily life (even at Off intensity);
+    /// hunger, mess, and tank fouling only carry strike stakes when consequences are on.
+    @discardableResult
+    func advanceNeeds(instance: PetInstance, species: PetSpecies, settings: ParentSettings, now: Date) -> PendingCareAlert? {
+        guard !instance.isLost else { return nil }
 
         let last = instance.lastNeedTickAt ?? instance.startDate
         var hours = now.timeIntervalSince(last) / 3600.0
-        guard hours > 0 else { return }
+        guard hours > 0 else { return nil }
         if settings.demoMode { hours *= 1200.0 } // ~1 real minute fills a need at normal
 
         let habitat = Habitat(category: species.category, id: species.id)
-        let hasWaste = (habitat == .backyard || habitat == .coop)
-        let isAquatic = (habitat == .aquarium)
 
-        let needs = ConsequenceService.Needs(hunger: instance.hungerLevel,
-                                             waste: instance.wasteLevel,
-                                             tank: instance.tankFoulLevel)
-        let next = ConsequenceService.tick(needs, elapsedHours: hours, intensity: intensity,
-                                           hasWaste: hasWaste, isAquatic: isAquatic)
-        instance.hungerLevel = next.hunger
-        instance.wasteLevel = next.waste
-        instance.tankFoulLevel = next.tank
-        instance.lastNeedTickAt = now
+        // Daily-life needs always climb: a coat gets scruffy, an active pet gets restless.
+        // These never lose a pet; they nudge wellbeing and surface "brush me" / "play" prompts.
+        if habitat.needsGrooming {
+            instance.groomLevel = min(1.0, instance.groomLevel + hours * (1.0 / 96.0))   // ~4 days to scruffy
+        }
+        if habitat.needsExercise {
+            instance.energyLevel = min(1.0, instance.energyLevel + hours * (1.0 / 30.0))  // restless in ~1.25 days
+        }
 
-        // A critical, unmet need costs a strike; a good care streak earns one back.
-        let delta = ConsequenceService.dailyStrikeDelta(criticalNeglect: next.anyCritical,
-                                                        careStreakDays: instance.currentStreakDays,
-                                                        intensity: intensity)
-        if delta != 0 {
-            instance.strikes = ConsequenceService.applyStrikeDelta(instance.strikes, delta: delta,
-                                                                   maxStrikes: settings.maxStrikes)
-            if ConsequenceService.outcome(strikes: instance.strikes, maxStrikes: settings.maxStrikes,
-                                          permanentLossEnabled: settings.permanentLossEnabled) == .lost {
-                instance.lostAt = now
+        let intensity = settings.consequenceIntensity
+        let isAquatic = habitat.usesTank
+        let hasWaste = !isAquatic   // every land habitat makes a solid mess to clean
+
+        if intensity != .off {
+            let needs = ConsequenceService.Needs(hunger: instance.hungerLevel,
+                                                 waste: instance.wasteLevel,
+                                                 tank: instance.tankFoulLevel)
+            let next = ConsequenceService.tick(needs, elapsedHours: hours, intensity: intensity,
+                                               hasWaste: hasWaste, isAquatic: isAquatic)
+            instance.hungerLevel = next.hunger
+            instance.wasteLevel = next.waste
+            instance.tankFoulLevel = next.tank
+
+            // A critical, unmet need costs a strike; a good care streak earns one back.
+            let delta = ConsequenceService.dailyStrikeDelta(criticalNeglect: next.anyCritical,
+                                                            careStreakDays: instance.currentStreakDays,
+                                                            intensity: intensity)
+            if delta != 0 {
+                instance.strikes = ConsequenceService.applyStrikeDelta(instance.strikes, delta: delta,
+                                                                       maxStrikes: settings.maxStrikes)
+                if ConsequenceService.outcome(strikes: instance.strikes, maxStrikes: settings.maxStrikes,
+                                              permanentLossEnabled: settings.permanentLossEnabled) == .lost {
+                    instance.lostAt = now
+                }
             }
         }
+        instance.lastNeedTickAt = now
+
+        // The escalating reminder reflects the worst real-time need and the strike count.
+        let worst = max(instance.hungerLevel, max(instance.wasteLevel, instance.tankFoulLevel))
+        if let alert = CareEscalation.current(needLevel: worst, strikes: instance.strikes,
+                                              maxStrikes: settings.maxStrikes,
+                                              nickname: instance.nickname, habitat: habitat) {
+            return PendingCareAlert(instanceId: instance.instanceId, alert: alert)
+        }
+        return nil
     }
 
-    /// Rebuild the pending notification queue (the nearest 64) from current data.
-    func rescheduleNotifications(context: ModelContext, settings: ParentSettings) {
+    /// Rebuild the pending notification queue (the nearest 64) from current data, plus any
+    /// escalating care reminders for pets whose needs are slipping.
+    func rescheduleNotifications(context: ModelContext, settings: ParentSettings, careAlerts: [PendingCareAlert] = []) {
         let activeIds = Set(DataStore.activeInstances(context).map { $0.instanceId })
         let pending = DataStore.allTasks(context).filter {
             $0.status == .pending && activeIds.contains($0.instanceId)
         }
         let nicknames = DataStore.nicknameMap(context)
-        NotificationService.shared.rescheduleAll(pendingTasks: pending, nicknames: nicknames, settings: settings)
+        NotificationService.shared.rescheduleAll(pendingTasks: pending, nicknames: nicknames,
+                                                 settings: settings, careAlerts: careAlerts)
     }
 }

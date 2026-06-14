@@ -35,6 +35,20 @@ final class PetInstance {
     /// Last time the real-time needs were advanced, so accumulation survives app restarts.
     var lastNeedTickAt: Date? = nil
 
+    // MARK: Daily-life care (grooming + exercise). These never cause a lost pet; they climb
+    // gently, nudge wellbeing, and surface "brush me" / "let's play" prompts. Inline
+    // defaults keep older stores migrating.
+    /// 0...1 coat/cage scruffiness for furry and feathered animals; cleared by grooming.
+    var groomLevel: Double = 0
+    /// 0...1 restlessness for active animals; cleared by a walk or play session.
+    var energyLevel: Double = 0
+
+    // MARK: Trick training (the "trainer" side). Tricks are taught over several sessions.
+    /// Comma-separated ids of tricks the pet has fully learned (see TrainingService).
+    var tricksLearnedRaw: String = ""
+    /// 0...1 progress toward the next unlearned trick.
+    var trickProgress: Double = 0
+
     init(
         instanceId: UUID = UUID(),
         speciesId: String,
@@ -82,4 +96,10 @@ final class PetInstance {
 
     /// Trust drives the level shown in Rewards (Section 11). Simple banded level.
     var level: Int { max(1, (trust / 20) + 1) }
+
+    /// Ids of tricks this pet has fully learned.
+    var tricksLearned: [String] {
+        get { tricksLearnedRaw.split(separator: ",").map(String.init) }
+        set { tricksLearnedRaw = newValue.joined(separator: ",") }
+    }
 }

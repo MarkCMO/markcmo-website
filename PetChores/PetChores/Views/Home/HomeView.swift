@@ -77,6 +77,8 @@ struct HomeView: View {
 
                 PetStatusCard(instance: instance, species: species)
 
+                TricksCard(instance: instance, species: species)
+
                 if instance.isTrainingComplete() {
                     TrainingCompleteCallout(instance: instance)
                 }
@@ -138,8 +140,11 @@ private struct PetStatusCard: View {
     let instance: PetInstance
     let species: PetSpecies
 
-    private var isAquatic: Bool { Habitat(category: species.category, id: species.id) == .aquarium }
+    private var habitat: Habitat { Habitat(category: species.category, id: species.id) }
+    private var isAquatic: Bool { habitat.usesTank }
     private var messy: Bool { (isAquatic ? instance.tankFoulLevel : instance.wasteLevel) >= 0.5 }
+    private var needsGroom: Bool { habitat.needsGrooming && instance.groomLevel >= 0.6 }
+    private var needsPlay: Bool { habitat.needsExercise && instance.energyLevel >= 0.6 }
     private var sick: Bool { instance.mood == .pleaseHelp || instance.strikes >= 4 }
 
     var body: some View {
@@ -156,15 +161,40 @@ private struct PetStatusCard: View {
                             else { ScenarioActions.cleanYard(instance, context: context) }
                         }
                     } label: {
-                        Label(isAquatic ? "Freshen the tank!" : "Scoop the poop!",
-                              systemImage: isAquatic ? "drop.fill" : "trash.fill")
+                        Label(habitat.cleanupTitle, systemImage: habitat.cleanupIcon)
                             .frame(maxWidth: .infinity)
                     }
                     .buttonStyle(BigButtonStyle())
-                    Text(isAquatic ? "The water is getting dirty. Clean it before the fish gets sick."
-                                   : "The yard needs cleaning before it reaches the neighbor!")
+                    Text(habitat.cleanupHint)
                         .font(.caption)
                         .foregroundStyle(Color(red: 0.78, green: 0.35, blue: 0.10))
+                }
+
+                if needsGroom {
+                    Button {
+                        withAnimation(.spring) { ScenarioActions.groom(instance, context: context) }
+                    } label: {
+                        Label("Brush \(instance.nickname)", systemImage: "comb.fill")
+                            .frame(maxWidth: .infinity)
+                    }
+                    .buttonStyle(BigButtonStyle())
+                    Text("\(instance.nickname)'s coat is getting scruffy. A good brush keeps them healthy and happy.")
+                        .font(.caption)
+                        .foregroundStyle(Color(red: 0.45, green: 0.40, blue: 0.20))
+                }
+
+                if needsPlay {
+                    Button {
+                        withAnimation(.spring) { ScenarioActions.play(instance, context: context) }
+                    } label: {
+                        Label(habitat == .backyard ? "Take \(instance.nickname) for a walk" : "Play with \(instance.nickname)",
+                              systemImage: "figure.run")
+                            .frame(maxWidth: .infinity)
+                    }
+                    .buttonStyle(BigButtonStyle())
+                    Text("\(instance.nickname) has energy to burn. Exercise and play keep a pet content.")
+                        .font(.caption)
+                        .foregroundStyle(Color(red: 0.20, green: 0.40, blue: 0.55))
                 }
 
                 if sick {
@@ -205,6 +235,85 @@ private struct PetStatusCard: View {
         case .needsAttention: return "\(instance.nickname) could use a little attention."
         case .sad:            return "\(instance.nickname) is feeling lonely. A little care will help."
         case .pleaseHelp:     return "\(instance.nickname) really needs you today. Let's take care of them."
+        }
+    }
+}
+
+/// The "trainer" side of owning a pet: teach tricks over several short sessions. Each
+/// practice builds toward the next trick; finishing one earns a jump of trust.
+private struct TricksCard: View {
+    @Environment(\.modelContext) private var context
+    let instance: PetInstance
+    let species: PetSpecies
+
+    @State private var justLearned: String?
+
+    private var allTricks: [Trick] {
+        TrainingService.tricks(speciesId: species.id, category: species.category)
+    }
+    private var learnedIds: [String] { instance.tricksLearned }
+    private var next: Trick? {
+        TrainingService.nextTrick(speciesId: species.id, category: species.category, learned: learnedIds)
+    }
+
+    var body: some View {
+        Card {
+            VStack(alignment: .leading, spacing: 12) {
+                HStack {
+                    Label("Tricks & Training", systemImage: "graduationcap.fill")
+                        .font(.headline)
+                    Spacer()
+                    Text("\(learnedIds.count)/\(allTricks.count)")
+                        .font(.subheadline.bold())
+                        .foregroundStyle(.secondary)
+                }
+
+                ScrollView(.horizontal, showsIndicators: false) {
+                    HStack(spacing: 8) {
+                        ForEach(allTricks) { trick in
+                            let known = learnedIds.contains(trick.id)
+                            HStack(spacing: 5) {
+                                Image(systemName: known ? "checkmark.seal.fill" : trick.icon)
+                                Text(trick.name)
+                            }
+                            .font(.caption.bold())
+                            .padding(.horizontal, 10).padding(.vertical, 6)
+                            .background(
+                                Capsule().fill(known ? Color.green.opacity(0.18) : Color.secondary.opacity(0.12))
+                            )
+                            .foregroundStyle(known ? Color.green : Color.secondary)
+                        }
+                    }
+                }
+
+                if let justLearned {
+                    Text("\(instance.nickname) learned \(justLearned)! Trust is growing.")
+                        .font(.caption.bold())
+                        .foregroundStyle(.green)
+                }
+
+                if let next {
+                    VStack(alignment: .leading, spacing: 6) {
+                        Text("Teaching: \(next.name)")
+                            .font(.subheadline)
+                            .foregroundStyle(.secondary)
+                        ProgressView(value: min(1, max(0, instance.trickProgress)))
+                            .tint(.blue)
+                    }
+                    Button {
+                        let finished = ScenarioActions.train(instance, context: context)
+                        withAnimation(.spring) { justLearned = finished?.name }
+                    } label: {
+                        Label("Practice \(next.name)", systemImage: next.icon)
+                            .frame(maxWidth: .infinity)
+                    }
+                    .buttonStyle(BigButtonStyle())
+                } else {
+                    Text("\(instance.nickname) has learned every trick. What a star.")
+                        .font(.subheadline)
+                        .foregroundStyle(.secondary)
+                }
+            }
         }
     }
 }

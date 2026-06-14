@@ -6,7 +6,9 @@ import SwiftData
 @MainActor
 enum ScenarioActions {
 
-    /// Scoop the yard: clears the mess (and the annoyed neighbor) and earns care points.
+    /// Clean up the pet's space (scoop the yard, muck the coop, change the bedding). Clears
+    /// the solid-mess need and the annoyed neighbor, and earns care points. Used by every
+    /// land habitat; the tank uses freshenTank instead.
     static func cleanYard(_ instance: PetInstance, context: ModelContext) {
         guard instance.wasteLevel > 0 else { return }
         instance.wasteLevel = 0
@@ -43,10 +45,51 @@ enum ScenarioActions {
         DataStore.save(context)
     }
 
+    /// Groom the pet (brush, bath, nails). Clears the scruffiness need, lifts wellbeing a
+    /// little, and builds a bit of trust, the way real handling does.
+    static func groom(_ instance: PetInstance, context: ModelContext) {
+        instance.groomLevel = 0
+        instance.wellbeing = min(100, instance.wellbeing + 2)
+        instance.trust = min(100, instance.trust + 2)
+        instance.carePoints += 3
+        DataStore.save(context)
+    }
+
+    /// Play with or walk the pet. Burns off restlessness, lifts wellbeing, and builds trust.
+    static func play(_ instance: PetInstance, context: ModelContext) {
+        instance.energyLevel = 0
+        instance.wellbeing = min(100, instance.wellbeing + 3)
+        instance.trust = min(100, instance.trust + 3)
+        instance.carePoints += 3
+        DataStore.save(context)
+    }
+
+    /// Run one trick-training session. Advances the current trick; finishing one builds a
+    /// bigger jump of trust. Returns the trick just learned, if any (so the UI can cheer).
+    @discardableResult
+    static func train(_ instance: PetInstance, context: ModelContext) -> Trick? {
+        let category = DataStore.species(id: instance.speciesId, context: context)?.category ?? ""
+        let result = TrainingService.practice(progress: instance.trickProgress,
+                                              learned: instance.tricksLearned,
+                                              speciesId: instance.speciesId,
+                                              category: category)
+        instance.trickProgress = result.progress
+        instance.tricksLearned = result.learned
+        instance.carePoints += TrainingService.pointsPerSession
+        instance.wellbeing = min(100, instance.wellbeing + 1)
+        if result.finished != nil {
+            instance.trust = min(100, instance.trust + TrainingService.trustPerTrick)
+        }
+        DataStore.save(context)
+        return result.finished
+    }
+
     /// Demo helper (Parent Mode): instantly make a mess so the scenario can be seen now.
     static func makeMessNow(_ instance: PetInstance, context: ModelContext) {
         instance.wasteLevel = 0.95
         instance.tankFoulLevel = 0.95
+        instance.groomLevel = 0.8
+        instance.energyLevel = 0.8
         DataStore.save(context)
     }
 }
