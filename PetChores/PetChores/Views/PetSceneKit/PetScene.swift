@@ -16,6 +16,9 @@ struct PetScene: View {
     let species: PetSpecies
     let mood: Mood
     var showEnvironment: Bool = true
+    /// 0...1 real-time mess (yard waste / tank fouling), passed to the backdrop so the
+    /// care scenario (poop in the yard, the neighbor) shows.
+    var waste: Double = 0
 
     @Environment(\.accessibilityReduceMotion) private var reduceMotion
 
@@ -49,7 +52,7 @@ struct PetScene: View {
         let weather = UITestFlags.staticScenes ? SceneWeather.clear : Self.weather(date)
         return ZStack {
             if showEnvironment {
-                EnvironmentBackdrop(habitat: habitat, t: t, skyPhase: phase, weather: weather)
+                EnvironmentBackdrop(habitat: habitat, t: t, skyPhase: phase, weather: weather, waste: waste)
             } else {
                 Color(.secondarySystemBackground)
             }

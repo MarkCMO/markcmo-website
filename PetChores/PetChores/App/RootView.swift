@@ -86,7 +86,7 @@ struct RootView: View {
 
         let creator = PetCreationService()
         func make(_ species: String, _ name: String, wellbeing: Int, trust: Int = 0,
-                  points: Int = 0, streak: Int = 0, longest: Int = 0) -> PetInstance? {
+                  points: Int = 0, streak: Int = 0, longest: Int = 0, waste: Double = 0) -> PetInstance? {
             guard let pet = creator.create(speciesId: species, nickname: name,
                                            trainingLengthDays: 21, context: context) else { return nil }
             pet.wellbeing = wellbeing
@@ -94,6 +94,7 @@ struct RootView: View {
             pet.carePoints = points
             pet.currentStreakDays = streak
             pet.longestStreakDays = longest
+            pet.wasteLevel = waste
             return pet
         }
 
@@ -102,7 +103,7 @@ struct RootView: View {
         _ = make("cat", "Luna", wellbeing: 72, trust: 18, points: 110, streak: 2, longest: 4)        // content
         _ = make("fish", "Bubbles", wellbeing: 32, points: 50)                                       // needs attention
         _ = make("rabbit", "Clover", wellbeing: 86, trust: 24, points: 160, streak: 3, longest: 5)   // happy
-        let hero = make("dog", "Rex", wellbeing: 94, trust: 56, points: 640, streak: 6, longest: 9)  // hero, badges
+        let hero = make("dog", "Rex", wellbeing: 94, trust: 56, points: 640, streak: 6, longest: 9, waste: 0.95) // hero + messy-yard scenario demo
 
         // Leave a couple of the hero's chores done-but-unverified so Parent Mode ->
         // Verify Tasks has content for that screenshot.

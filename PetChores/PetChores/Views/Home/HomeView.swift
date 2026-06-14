@@ -139,7 +139,7 @@ private struct PetStatusCard: View {
     var body: some View {
         Card {
             VStack(alignment: .leading, spacing: 12) {
-                PetScene(species: species, mood: instance.mood)
+                PetScene(species: species, mood: instance.mood, waste: instance.wasteLevel)
                     .frame(height: 160)
                 HStack(alignment: .top) {
                     VStack(alignment: .leading, spacing: 4) {

@@ -10,6 +10,9 @@ struct EnvironmentBackdrop: View {
     let t: Double
     var skyPhase: Double = 0.5
     var weather: SceneWeather = .clear
+    /// 0...1 real-time mess: as it climbs, poop appears in the yard, drifts toward the
+    /// fence, and the neighbor shows up annoyed. Drives the backyard care scenario.
+    var waste: Double = 0
 
     var body: some View {
         GeometryReader { geo in
@@ -83,13 +86,99 @@ struct EnvironmentBackdrop: View {
             bush(w: w, h: h)
             grass(w: w, h: h)
             flowers(w: w, h: h)
+            if waste > 0.15 { poopPiles(w: w, h: h) }
             fence(w, h)
+            if waste >= 0.85 { neighbor(w: w, h: h) }
             if !sky.isNight && !raining { butterflies(w: w, h: h) }
             if raining {
                 Rectangle().fill(Color.black.opacity(0.12))
                 rain(w: w, h: h)
             }
         }
+    }
+
+    // MARK: - Backyard care scenario (poop, drift to the neighbor, the neighbor)
+
+    /// Poop piles in the grass; more of them, and one drifting toward the fence, as the
+    /// mess builds. Small stink wisps rise so it reads clearly.
+    private func poopPiles(w: CGFloat, h: CGFloat) -> some View {
+        let count = waste >= 0.9 ? 3 : (waste >= 0.55 ? 2 : 1)
+        // The third pile creeps toward the fence (the neighbor's side) as waste maxes out.
+        let creep = CGFloat(min(1.0, max(0.0, (waste - 0.85) / 0.15)))
+        let spots: [(CGFloat, CGFloat)] = [
+            (0.34, 0.80), (0.54, 0.86), (0.74 + creep * 0.12, 0.70 - creep * 0.08)
+        ]
+        return ZStack {
+            ForEach(0..<count, id: \.self) { i in
+                poop(at: CGPoint(x: spots[i].0 * w, y: spots[i].1 * h), s: w * 0.05)
+            }
+        }
+    }
+
+    private func poop(at p: CGPoint, s: CGFloat) -> some View {
+        let c1 = Color(red: 0.40, green: 0.27, blue: 0.15)
+        let c2 = Color(red: 0.46, green: 0.31, blue: 0.18)
+        let c3 = Color(red: 0.52, green: 0.36, blue: 0.21)
+        return ZStack {
+            Ellipse().fill(.black.opacity(0.12)).frame(width: s * 2.2, height: s * 0.5).offset(y: s * 0.7)
+            Ellipse().fill(c1).frame(width: s * 2.0, height: s * 0.85).offset(y: s * 0.45)
+            Ellipse().fill(c2).frame(width: s * 1.5, height: s * 0.75).offset(y: s * 0.02)
+            Ellipse().fill(c3).frame(width: s * 1.0, height: s * 0.62).offset(y: -s * 0.38)
+            Circle().fill(c3).frame(width: s * 0.34, height: s * 0.34).offset(y: -s * 0.7)
+            // Stink wisps.
+            ForEach(0..<2, id: \.self) { k in
+                let kk = Double(k)
+                let rise = (t * 0.9 + kk * 0.5).truncatingRemainder(dividingBy: 1.0)
+                Path { pp in
+                    let bx = CGFloat(-0.3 + 0.6 * kk) * s
+                    pp.move(to: CGPoint(x: bx, y: -s * 0.7 - CGFloat(rise) * s * 1.4))
+                    pp.addQuadCurve(to: CGPoint(x: bx + s * 0.18, y: -s * 1.1 - CGFloat(rise) * s * 1.4),
+                                    control: CGPoint(x: bx - s * 0.2, y: -s * 0.9 - CGFloat(rise) * s * 1.4))
+                }
+                .stroke(Color(red: 0.55, green: 0.65, blue: 0.45).opacity(0.5 * (1 - rise)),
+                        style: StrokeStyle(lineWidth: max(1, s * 0.1), lineCap: .round))
+            }
+        }
+        .position(p)
+    }
+
+    /// The neighbor peeks over the fence, annoyed, when the mess reaches their side.
+    private func neighbor(w: CGFloat, h: CGFloat) -> some View {
+        let skin = Color(red: 0.95, green: 0.80, blue: 0.66)
+        let bob = CGFloat(sin(t * 3)) * h * 0.006
+        return ZStack {
+            // Speech bubble with an angry mark.
+            ZStack {
+                RoundedRectangle(cornerRadius: 8).fill(.white)
+                    .frame(width: w * 0.12, height: w * 0.09)
+                Text("!").font(.system(size: w * 0.06, weight: .black, design: .rounded))
+                    .foregroundStyle(Color(red: 0.85, green: 0.18, blue: 0.18))
+            }
+            .offset(x: w * 0.02, y: -h * 0.13)
+
+            // Head and hair peeking over the fence top.
+            ZStack {
+                Circle().fill(Color(red: 0.45, green: 0.32, blue: 0.22))
+                    .frame(width: w * 0.115, height: w * 0.115).offset(y: -w * 0.018) // hair
+                Circle().fill(skin).frame(width: w * 0.10, height: w * 0.10)
+                // Angry brows.
+                ForEach([-1.0, 1.0], id: \.self) { sgn in
+                    Capsule().fill(.black.opacity(0.7)).frame(width: w * 0.022, height: 3)
+                        .rotationEffect(.degrees(sgn * 18))
+                        .offset(x: CGFloat(sgn) * w * 0.020, y: -w * 0.012)
+                    Circle().fill(.black.opacity(0.8)).frame(width: w * 0.011, height: w * 0.011)
+                        .offset(x: CGFloat(sgn) * w * 0.020, y: -w * 0.002)
+                }
+                // Frown.
+                Path { pp in
+                    pp.move(to: CGPoint(x: -w * 0.018, y: w * 0.022))
+                    pp.addQuadCurve(to: CGPoint(x: w * 0.018, y: w * 0.022), control: CGPoint(x: 0, y: w * 0.012))
+                }
+                .stroke(.black.opacity(0.6), style: StrokeStyle(lineWidth: 2, lineCap: .round))
+            }
+            .offset(y: bob)
+        }
+        .position(x: w * 0.82, y: h * 0.55)
     }
 
     /// A leafy bush tucked by the fence.
