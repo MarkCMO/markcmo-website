@@ -13,6 +13,10 @@ struct EnvironmentBackdrop: View {
     /// 0...1 real-time mess: as it climbs, poop appears in the yard, drifts toward the
     /// fence, and the neighbor shows up annoyed. Drives the backyard care scenario.
     var waste: Double = 0
+    /// 0...1 hunger, so the food bowl empties as the pet gets hungry.
+    var hunger: Double = 0
+    /// 0...1 bladder fullness for yard animals, so a puddle shows when an accident is near.
+    var relief: Double = 0
 
     var body: some View {
         GeometryReader { geo in
@@ -27,9 +31,55 @@ struct EnvironmentBackdrop: View {
                 case .birdcage:  birdcage(w, h)
                 case .cage:      cage(w, h)
                 }
+                if habitat == .backyard && relief >= 0.55 { puddle(w: w, h: h) }
+                if habitat.hasFoodBowl { foodBowl(w: w, h: h, fill: 1 - hunger) }
             }
             .frame(width: w, height: h)
         }
+    }
+
+    // MARK: - Food bowl and accidents (shared across the land habitats)
+
+    /// A food dish on the ground. The kibble mound shrinks as the bowl empties (hunger
+    /// climbs); when empty only the dish is left, so "feed me" reads at a glance.
+    private func foodBowl(w: CGFloat, h: CGFloat, fill: Double) -> some View {
+        let f = max(0.0, min(1.0, fill))
+        let bowlW = w * 0.14
+        let kibble = Color(red: 0.55, green: 0.36, blue: 0.18)
+        return ZStack {
+            // Shadow + dish.
+            Ellipse().fill(.black.opacity(0.12)).frame(width: bowlW * 1.1, height: bowlW * 0.34).offset(y: bowlW * 0.22)
+            Ellipse().fill(Color(red: 0.30, green: 0.55, blue: 0.78)).frame(width: bowlW, height: bowlW * 0.42)
+            Ellipse().fill(Color(red: 0.20, green: 0.42, blue: 0.62)).frame(width: bowlW * 0.82, height: bowlW * 0.30)
+            // Kibble mound, scaled by how full the bowl is.
+            if f > 0.05 {
+                ZStack {
+                    Ellipse().fill(kibble)
+                        .frame(width: bowlW * 0.72 * CGFloat(f), height: bowlW * 0.30 * CGFloat(f))
+                        .offset(y: -bowlW * 0.02)
+                    ForEach(0..<5, id: \.self) { i in
+                        Circle().fill(kibble.opacity(0.95))
+                            .frame(width: bowlW * 0.12, height: bowlW * 0.12)
+                            .offset(x: CGFloat(i - 2) * bowlW * 0.13 * CGFloat(f),
+                                    y: -bowlW * 0.05 * CGFloat(f))
+                    }
+                }
+            }
+        }
+        .position(x: w * 0.17, y: h * 0.88)
+    }
+
+    /// A small yellow puddle that appears when a yard animal needs to go (or just has an
+    /// accident), with a couple of faint ripples so it reads as fresh.
+    private func puddle(w: CGFloat, h: CGFloat) -> some View {
+        let pw = w * 0.16
+        let c = Color(red: 0.96, green: 0.86, blue: 0.30)
+        return ZStack {
+            Ellipse().fill(c.opacity(0.55)).frame(width: pw, height: pw * 0.45)
+            Ellipse().fill(c.opacity(0.75)).frame(width: pw * 0.6, height: pw * 0.28)
+            Ellipse().strokeBorder(c.opacity(0.5), lineWidth: 1).frame(width: pw * 1.2, height: pw * 0.55)
+        }
+        .position(x: w * 0.62, y: h * 0.82)
     }
 
     // MARK: - Sky palette (time of day)

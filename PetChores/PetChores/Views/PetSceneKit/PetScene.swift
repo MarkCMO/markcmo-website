@@ -19,6 +19,10 @@ struct PetScene: View {
     /// 0...1 real-time mess (yard waste / tank fouling), passed to the backdrop so the
     /// care scenario (poop in the yard, the neighbor) shows.
     var waste: Double = 0
+    /// 0...1 hunger, so the food bowl in the scene empties as the pet gets hungry.
+    var hunger: Double = 0
+    /// 0...1 bladder fullness for yard animals, so a puddle shows when an accident is near.
+    var relief: Double = 0
 
     @Environment(\.accessibilityReduceMotion) private var reduceMotion
 
@@ -52,7 +56,8 @@ struct PetScene: View {
         let weather = UITestFlags.staticScenes ? SceneWeather.clear : Self.weather(date)
         return ZStack {
             if showEnvironment {
-                EnvironmentBackdrop(habitat: habitat, t: t, skyPhase: phase, weather: weather, waste: waste)
+                EnvironmentBackdrop(habitat: habitat, t: t, skyPhase: phase, weather: weather,
+                                    waste: waste, hunger: hunger, relief: relief)
             } else {
                 Color(.secondarySystemBackground)
             }

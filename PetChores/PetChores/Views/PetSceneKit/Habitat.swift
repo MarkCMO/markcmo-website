@@ -91,4 +91,12 @@ enum Habitat {
         case .aquarium, .terrarium:               return false
         }
     }
+
+    /// Yard animals (dogs, cats) need to be let out, and have accidents if they are not.
+    /// The other animals relieve themselves in their space (covered by the mess need).
+    var needsToGo: Bool { self == .backyard }
+
+    /// Whether to draw a food bowl on the ground. Aquatic pets are fed by sprinkling food
+    /// on the water instead of from a bowl.
+    var hasFoodBowl: Bool { !usesTank }
 }

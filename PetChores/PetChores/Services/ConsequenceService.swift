@@ -47,6 +47,23 @@ enum ConsequenceService {
         return out
     }
 
+    /// How much faster the bladder fills than the slow needs (hunger, mess). A pet needs to
+    /// be let out well before its bowl is empty.
+    static let reliefRateMultiplier = 2.5
+
+    /// Advance a yard animal's bladder by `elapsedHours`. Returns the new level and whether
+    /// it overflowed into an accident (a puddle). On an accident the bladder empties and the
+    /// caller adds the puddle to the pet's mess. Off intensity never fills the bladder.
+    static func advanceRelief(_ relief: Double,
+                              elapsedHours: Double,
+                              intensity: ConsequenceIntensity) -> (relief: Double, accident: Bool) {
+        guard intensity != .off, elapsedHours > 0 else { return (relief, false) }
+        let rate = intensity.needRatePerHour * reliefRateMultiplier
+        let next = relief + rate * elapsedHours
+        if next >= 1.0 { return (0.0, true) }
+        return (Needs.clamp(next), false)
+    }
+
     /// The net change to a pet's strike count for one settled day.
     /// +1 when the day was critically neglected; -1 when a redemption milestone is reached
     /// (a care streak that is an exact multiple of the intensity's regain cadence); else 0.

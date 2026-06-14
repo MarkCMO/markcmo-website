@@ -32,6 +32,10 @@ final class PetInstance {
     var hungerLevel: Double = 0
     var wasteLevel: Double = 0
     var tankFoulLevel: Double = 0
+    /// 0...1 bladder fullness for yard animals (dogs, cats). Climbs faster than the other
+    /// needs; if it maxes out before the pet is let out, it becomes an accident (a puddle
+    /// that adds to the mess). Cleared by letting the pet out.
+    var reliefLevel: Double = 0
     /// Last time the real-time needs were advanced, so accumulation survives app restarts.
     var lastNeedTickAt: Date? = nil
 

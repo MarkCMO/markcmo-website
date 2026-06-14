@@ -92,7 +92,7 @@ private struct ParentAlertsSection: View {
             let petMissed = missed.filter { $0.instanceId == pet.instanceId }
             let missedToday = petMissed.filter { $0.dueAt >= startToday }.count
             let missedWeek = petMissed.filter { $0.dueAt >= weekAgo }.count
-            let worst = max(pet.hungerLevel, max(pet.wasteLevel, pet.tankFoulLevel))
+            let worst = max(pet.hungerLevel, max(pet.reliefLevel, max(pet.wasteLevel, pet.tankFoulLevel)))
             let signals = ParentAlert.CareSignals(missedToday: missedToday, missedThisWeek: missedWeek,
                                                   strikes: pet.strikes, maxStrikes: settings.maxStrikes,
                                                   wellbeing: pet.wellbeing, worstNeed: worst,

@@ -40,6 +40,34 @@ final class ConsequenceServiceTests: XCTestCase {
         XCTAssertFalse(C.Needs(hunger: 0.99, waste: 0.99, tank: 0.99).anyCritical)
     }
 
+    // MARK: - advanceRelief (bladder + accidents)
+
+    func testReliefOffNeverFills() {
+        let out = C.advanceRelief(0, elapsedHours: 1000, intensity: .off)
+        XCTAssertEqual(out.relief, 0)
+        XCTAssertFalse(out.accident)
+    }
+
+    func testReliefClimbsWithoutAccidentBelowFull() {
+        let out = C.advanceRelief(0, elapsedHours: 2, intensity: .normal)
+        XCTAssertGreaterThan(out.relief, 0)
+        XCTAssertLessThan(out.relief, 1.0)
+        XCTAssertFalse(out.accident)
+    }
+
+    func testReliefOverflowsIntoAnAccidentAndResets() {
+        let out = C.advanceRelief(0.9, elapsedHours: 100, intensity: .harsh)
+        XCTAssertTrue(out.accident)
+        XCTAssertEqual(out.relief, 0, "an accident empties the bladder")
+    }
+
+    func testReliefFillsFasterThanTheSlowNeeds() {
+        // Same elapsed time: relief should outpace a strike-bearing need at the same intensity.
+        let relief = C.advanceRelief(0, elapsedHours: 5, intensity: .normal).relief
+        let hunger = C.tick(C.Needs(), elapsedHours: 5, intensity: .normal, hasWaste: false, isAquatic: false).hunger
+        XCTAssertGreaterThan(relief, hunger)
+    }
+
     // MARK: - dailyStrikeDelta (accrual + redemption)
 
     func testNeglectAddsAStrike() {

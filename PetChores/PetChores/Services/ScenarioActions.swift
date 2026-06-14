@@ -45,6 +45,23 @@ enum ScenarioActions {
         DataStore.save(context)
     }
 
+    /// Feed the pet (fill the bowl / sprinkle the food). Clears hunger, lifts wellbeing a
+    /// little, and earns care points. Every animal eats.
+    static func feed(_ instance: PetInstance, context: ModelContext) {
+        instance.hungerLevel = 0
+        instance.wellbeing = min(100, instance.wellbeing + 2)
+        instance.carePoints += 3
+        DataStore.save(context)
+    }
+
+    /// Let the pet out to relieve itself before it has an accident. Clears the bladder and
+    /// earns a couple of care points.
+    static func letOut(_ instance: PetInstance, context: ModelContext) {
+        instance.reliefLevel = 0
+        instance.carePoints += 3
+        DataStore.save(context)
+    }
+
     /// Groom the pet (brush, bath, nails). Clears the scruffiness need, lifts wellbeing a
     /// little, and builds a bit of trust, the way real handling does.
     static func groom(_ instance: PetInstance, context: ModelContext) {
@@ -90,6 +107,8 @@ enum ScenarioActions {
         instance.tankFoulLevel = 0.95
         instance.groomLevel = 0.8
         instance.energyLevel = 0.8
+        instance.hungerLevel = 0.8
+        instance.reliefLevel = 0.8
         DataStore.save(context)
     }
 }

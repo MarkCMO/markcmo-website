@@ -143,6 +143,8 @@ private struct PetStatusCard: View {
     private var habitat: Habitat { Habitat(category: species.category, id: species.id) }
     private var isAquatic: Bool { habitat.usesTank }
     private var messy: Bool { (isAquatic ? instance.tankFoulLevel : instance.wasteLevel) >= 0.5 }
+    private var hungry: Bool { instance.hungerLevel >= 0.5 }
+    private var gottaGo: Bool { habitat.needsToGo && instance.reliefLevel >= 0.5 }
     private var needsGroom: Bool { habitat.needsGrooming && instance.groomLevel >= 0.6 }
     private var needsPlay: Bool { habitat.needsExercise && instance.energyLevel >= 0.6 }
     private var sick: Bool { instance.mood == .pleaseHelp || instance.strikes >= 4 }
@@ -151,8 +153,36 @@ private struct PetStatusCard: View {
         Card {
             VStack(alignment: .leading, spacing: 12) {
                 PetScene(species: species, mood: instance.mood,
-                         waste: isAquatic ? instance.tankFoulLevel : instance.wasteLevel)
+                         waste: isAquatic ? instance.tankFoulLevel : instance.wasteLevel,
+                         hunger: instance.hungerLevel, relief: instance.reliefLevel)
                     .frame(height: 160)
+
+                if gottaGo {
+                    Button {
+                        withAnimation(.spring) { ScenarioActions.letOut(instance, context: context) }
+                    } label: {
+                        Label("Let \(instance.nickname) out!", systemImage: "door.left.hand.open")
+                            .frame(maxWidth: .infinity)
+                    }
+                    .buttonStyle(BigButtonStyle())
+                    Text("\(instance.nickname) needs to go. Let them out before there is an accident in the yard.")
+                        .font(.caption)
+                        .foregroundStyle(Color(red: 0.70, green: 0.55, blue: 0.10))
+                }
+
+                if hungry {
+                    Button {
+                        withAnimation(.spring) { ScenarioActions.feed(instance, context: context) }
+                    } label: {
+                        Label("Feed \(instance.nickname)", systemImage: "fork.knife")
+                            .frame(maxWidth: .infinity)
+                    }
+                    .buttonStyle(BigButtonStyle())
+                    Text(isAquatic ? "\(instance.nickname) is hungry. Sprinkle in some food."
+                                   : "\(instance.nickname)'s bowl is empty. Time to fill it up.")
+                        .font(.caption)
+                        .foregroundStyle(Color(red: 0.55, green: 0.35, blue: 0.15))
+                }
 
                 if messy {
                     Button {

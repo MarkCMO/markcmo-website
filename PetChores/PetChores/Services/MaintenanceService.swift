@@ -83,7 +83,8 @@ struct MaintenanceService {
         let petTasks = DataStore.tasks(for: instance.instanceId, context: context)
         let missedToday = petTasks.filter { $0.status == .missed && $0.dueAt >= startToday }.count
         let missedWeek = petTasks.filter { $0.status == .missed && $0.dueAt >= weekAgo }.count
-        let worst = max(instance.hungerLevel, max(instance.wasteLevel, instance.tankFoulLevel))
+        let worst = max(instance.hungerLevel,
+                        max(instance.reliefLevel, max(instance.wasteLevel, instance.tankFoulLevel)))
 
         let signals = ParentAlert.CareSignals(missedToday: missedToday, missedThisWeek: missedWeek,
                                               strikes: instance.strikes, maxStrikes: settings.maxStrikes,
@@ -133,6 +134,17 @@ struct MaintenanceService {
             instance.wasteLevel = next.waste
             instance.tankFoulLevel = next.tank
 
+            // Yard animals build up a bladder; if it overflows before they are let out, it
+            // is an accident that adds to the mess.
+            if habitat.needsToGo {
+                let relief = ConsequenceService.advanceRelief(instance.reliefLevel,
+                                                              elapsedHours: hours, intensity: intensity)
+                instance.reliefLevel = relief.relief
+                if relief.accident {
+                    instance.wasteLevel = ConsequenceService.Needs.clamp(instance.wasteLevel + 0.4)
+                }
+            }
+
             // A critical, unmet need costs a strike; a good care streak earns one back.
             let delta = ConsequenceService.dailyStrikeDelta(criticalNeglect: next.anyCritical,
                                                             careStreakDays: instance.currentStreakDays,
@@ -149,7 +161,8 @@ struct MaintenanceService {
         instance.lastNeedTickAt = now
 
         // The escalating reminder reflects the worst real-time need and the strike count.
-        let worst = max(instance.hungerLevel, max(instance.wasteLevel, instance.tankFoulLevel))
+        let worst = max(instance.hungerLevel,
+                        max(instance.reliefLevel, max(instance.wasteLevel, instance.tankFoulLevel)))
         if let alert = CareEscalation.current(needLevel: worst, strikes: instance.strikes,
                                               maxStrikes: settings.maxStrikes,
                                               nickname: instance.nickname, habitat: habitat) {
