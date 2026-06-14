@@ -1,5 +1,6 @@
 // functions/[[path]].js
 import { SITE_NAV_HTML, SITE_FOOTER_HTML, SITE_FOOTER_ELEMENT } from './_lib/site-chrome.js';
+import { TRUNCATED_REDIRECTS } from './_lib/legacy-redirects.js';
 // Root catch-all for Cloudflare Pages.
 // Handles two responsibilities:
 //
@@ -119,6 +120,9 @@ const STATE_NAME_TO_ABBR = {
 
 // Returns a canonical flat slug candidate for a legacy-shaped path, or null.
 function legacyCanonical(p) {
+  // Truncated-city-slug recovery (e.g. "lead-generation-toms" → "...-toms-river-nj").
+  // Static map of ~400 stale GSC 404s; target existence is verified by the caller.
+  if (TRUNCATED_REDIRECTS[p]) return TRUNCATED_REDIRECTS[p];
   // location/{slug} → {slug}
   if (p.startsWith('location/')) return p.slice('location/'.length);
   // {service}/{state-name}/{city} → {service}-{city}-{abbr}
