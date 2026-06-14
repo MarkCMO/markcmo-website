@@ -60,6 +60,20 @@ enum AnimalArt {
         ctx.fill(Path(ellipseIn: rect), with: shading)
     }
 
+    /// A cat eye: tall almond, amber-green iris, vertical slit pupil, and a catchlight.
+    static func catEye(_ ctx: inout GraphicsContext, _ c: CGPoint, _ r: CGFloat, mood: Mood, skin: Color) {
+        ctx.fill(Path(ellipseIn: CGRect(x: c.x - r * 0.85, y: c.y - r, width: r * 1.7, height: r * 2.0)),
+                 with: .color(rgb(178, 208, 120)))
+        ctx.fill(Path(ellipseIn: CGRect(x: c.x - r * 0.16, y: c.y - r * 0.82, width: r * 0.32, height: r * 1.64)),
+                 with: .color(rgb(24, 28, 20)))
+        dot(&ctx, c.x - r * 0.22, c.y - r * 0.42, r * 0.2, .white.opacity(0.9))
+        if mood == .sad || mood == .pleaseHelp {
+            let lidH = r * (mood == .sad ? 1.2 : 0.8)
+            ctx.fill(Path(roundedRect: CGRect(x: c.x - r * 0.95, y: c.y - r * 1.1, width: r * 1.9, height: lidH),
+                          cornerRadius: r * 0.4), with: .color(skin))
+        }
+    }
+
     /// A more lifelike eye: almond sclera, brown iris, pupil, and a catchlight. Droops a
     /// lid on the sadder moods. Used by the realistic animals.
     static func realEye(_ ctx: inout GraphicsContext, _ c: CGPoint, _ r: CGFloat, mood: Mood,

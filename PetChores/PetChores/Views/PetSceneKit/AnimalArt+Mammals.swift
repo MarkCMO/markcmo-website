@@ -103,47 +103,84 @@ extension AnimalArt {
     static func cat(_ ctx: inout GraphicsContext, _ size: CGSize, _ mood: Mood, _ t: Double) {
         let s = min(size.width, size.height)
         let cx = size.width / 2
-        let cy = size.height * 0.56 + bob(t, mood, s, speed: 1.6)
-        let body = rgb(140, 146, 156)
-        let dark = rgb(108, 114, 126)
+        let cy = size.height * 0.57 + bob(t, mood, s, speed: 1.6, amp: 0.03)
+        let furL = rgb(172, 176, 186)   // light grey tabby
+        let furD = rgb(120, 124, 136)   // shaded
+        let stripe = rgb(96, 100, 112)
+        let pink = rgb(236, 166, 174)
 
-        // Curled tail swishing.
+        // Curled striped tail, swishing.
         var tc = ctx
-        tc.translateBy(x: cx + s * 0.22, y: cy + s * 0.04)
-        tc.rotate(by: .degrees(sin(t * 2.4) * (8 + 14 * liveliness(mood))))
+        tc.translateBy(x: cx + s * 0.22, y: cy + s * 0.05)
+        tc.rotate(by: .degrees(sin(t * 2.4) * (7 + 12 * liveliness(mood))))
         var tail = Path()
         tail.move(to: .zero)
-        tail.addQuadCurve(to: CGPoint(x: s * 0.18, y: -s * 0.18), control: CGPoint(x: s * 0.22, y: s * 0.02))
-        tc.stroke(tail, with: .color(dark), style: StrokeStyle(lineWidth: s * 0.07, lineCap: .round))
-
-        // Body and head.
-        oval(&ctx, cx, cy, s * 0.46, s * 0.40, body)
-        let hx = cx, hy = cy - s * 0.24
-
-        // Pointy ears.
-        for side in [-1.0, 1.0] {
-            var p = Path()
-            let bx = hx + CGFloat(side) * s * 0.14
-            p.move(to: CGPoint(x: bx - s * 0.07, y: hy - s * 0.10))
-            p.addLine(to: CGPoint(x: bx + CGFloat(side) * s * 0.02, y: hy - s * 0.26))
-            p.addLine(to: CGPoint(x: bx + s * 0.07, y: hy - s * 0.10))
-            p.closeSubpath()
-            ctx.fill(p, with: .color(body))
+        tail.addQuadCurve(to: CGPoint(x: s * 0.20, y: -s * 0.20), control: CGPoint(x: s * 0.26, y: s * 0.04))
+        tc.stroke(tail, with: .color(furD), style: StrokeStyle(lineWidth: s * 0.08, lineCap: .round))
+        for k in 0..<3 {
+            tc.stroke(Path { p in
+                let fx = s * (0.04 + 0.06 * Double(k))
+                p.move(to: CGPoint(x: fx, y: -s * 0.03 * Double(k)))
+                p.addLine(to: CGPoint(x: fx + s * 0.02, y: -s * 0.05 - s * 0.03 * Double(k)))
+            }, with: .color(stripe.opacity(0.6)), lineWidth: max(1, s * 0.02))
         }
-        oval(&ctx, hx, hy, s * 0.38, s * 0.34, body)
 
-        eyes(&ctx, left: CGPoint(x: hx - s * 0.09, y: hy - s * 0.02),
-             right: CGPoint(x: hx + s * 0.09, y: hy - s * 0.02), r: s * 0.05, mood: mood, skin: body)
-        dot(&ctx, hx, hy + s * 0.05, s * 0.03, rgb(220, 130, 140)) // nose
-        mouth(&ctx, center: CGPoint(x: hx, y: hy + s * 0.10), width: s * 0.14, mood: mood)
+        // Body with faint stripes.
+        shadedOval(&ctx, cx, cy, s * 0.46, s * 0.40, furL, furD)
+        for k in [-0.08, 0.04, 0.16] {
+            ctx.stroke(Path { p in
+                p.move(to: CGPoint(x: cx - s * 0.17, y: cy + CGFloat(k) * s))
+                p.addQuadCurve(to: CGPoint(x: cx + s * 0.17, y: cy + CGFloat(k) * s),
+                               control: CGPoint(x: cx, y: cy + CGFloat(k) * s - s * 0.03))
+            }, with: .color(stripe.opacity(0.35)), lineWidth: max(1, s * 0.018))
+        }
+
+        let hx = cx, hy = cy - s * 0.25
+        // Pointy ears with pink inner.
+        for side in [-1.0, 1.0] {
+            let bx = hx + CGFloat(side) * s * 0.15
+            var p = Path()
+            p.move(to: CGPoint(x: bx - s * 0.08, y: hy - s * 0.07))
+            p.addLine(to: CGPoint(x: bx + CGFloat(side) * s * 0.03, y: hy - s * 0.28))
+            p.addLine(to: CGPoint(x: bx + s * 0.08, y: hy - s * 0.07))
+            p.closeSubpath()
+            ctx.fill(p, with: .color(furD))
+            var pi = Path()
+            pi.move(to: CGPoint(x: bx - s * 0.04, y: hy - s * 0.10))
+            pi.addLine(to: CGPoint(x: bx + CGFloat(side) * s * 0.02, y: hy - s * 0.22))
+            pi.addLine(to: CGPoint(x: bx + s * 0.04, y: hy - s * 0.10))
+            pi.closeSubpath()
+            ctx.fill(pi, with: .color(pink))
+        }
+        shadedOval(&ctx, hx, hy, s * 0.38, s * 0.34, furL, furD)
+        // Tabby "M" on the forehead.
+        for dx in [-0.05, 0.0, 0.05] {
+            ctx.stroke(Path { p in
+                p.move(to: CGPoint(x: hx + CGFloat(dx) * s, y: hy - s * 0.16))
+                p.addLine(to: CGPoint(x: hx + CGFloat(dx) * s, y: hy - s * 0.08))
+            }, with: .color(stripe.opacity(0.5)), lineWidth: max(1, s * 0.016))
+        }
+
+        // Slit-pupil cat eyes.
+        catEye(&ctx, CGPoint(x: hx - s * 0.105, y: hy - s * 0.02), s * 0.055, mood: mood, skin: furL)
+        catEye(&ctx, CGPoint(x: hx + s * 0.105, y: hy - s * 0.02), s * 0.055, mood: mood, skin: furL)
+
+        // Pink triangle nose + mouth.
+        var nose = Path()
+        nose.move(to: CGPoint(x: hx - s * 0.026, y: hy + s * 0.045))
+        nose.addLine(to: CGPoint(x: hx + s * 0.026, y: hy + s * 0.045))
+        nose.addLine(to: CGPoint(x: hx, y: hy + s * 0.07))
+        nose.closeSubpath()
+        ctx.fill(nose, with: .color(pink))
+        mouth(&ctx, center: CGPoint(x: hx, y: hy + s * 0.115), width: s * 0.13, mood: mood)
 
         // Whiskers.
         for side in [-1.0, 1.0] {
             for k in [-1.0, 0.0, 1.0] {
                 var w = Path()
                 w.move(to: CGPoint(x: hx + CGFloat(side) * s * 0.05, y: hy + s * 0.06))
-                w.addLine(to: CGPoint(x: hx + CGFloat(side) * s * 0.22, y: hy + s * 0.06 + CGFloat(k) * s * 0.04))
-                ctx.stroke(w, with: .color(.white.opacity(0.7)), lineWidth: max(1, s * 0.008))
+                w.addLine(to: CGPoint(x: hx + CGFloat(side) * s * 0.24, y: hy + s * 0.06 + CGFloat(k) * s * 0.045))
+                ctx.stroke(w, with: .color(.white.opacity(0.75)), lineWidth: max(1, s * 0.008))
             }
         }
     }
@@ -153,32 +190,61 @@ extension AnimalArt {
     static func rabbit(_ ctx: inout GraphicsContext, _ size: CGSize, _ mood: Mood, _ t: Double) {
         let s = min(size.width, size.height)
         let cx = size.width / 2
-        let cy = size.height * 0.58 + bob(t, mood, s, speed: 2.4, amp: 0.06)
-        let body = rgb(232, 226, 220)
+        let cy = size.height * 0.58 + bob(t, mood, s, speed: 2.4, amp: 0.05)
+        let furL = rgb(238, 232, 226)   // soft white-grey
+        let furD = rgb(196, 186, 178)   // shaded
         let inner = rgb(248, 196, 200)
+        let pink = rgb(226, 150, 162)
 
-        // Tall ears that twitch.
+        // Tall ears that twitch (shaded outer, pink inner).
         for side in [-1.0, 1.0] {
             var ec = ctx
             ec.translateBy(x: cx + CGFloat(side) * s * 0.09, y: cy - s * 0.26)
             ec.rotate(by: .degrees(side * (8 + sin(t * 3 + side) * 5 * liveliness(mood))))
-            ec.fill(Path(ellipseIn: CGRect(x: -s * 0.05, y: -s * 0.30, width: s * 0.10, height: s * 0.34)),
-                    with: .color(body))
-            ec.fill(Path(ellipseIn: CGRect(x: -s * 0.025, y: -s * 0.26, width: s * 0.05, height: s * 0.24)),
+            ec.fill(Path(ellipseIn: CGRect(x: -s * 0.055, y: -s * 0.32, width: s * 0.11, height: s * 0.36)),
+                    with: .color(furL))
+            ec.fill(Path(ellipseIn: CGRect(x: -s * 0.045, y: -s * 0.30, width: s * 0.045, height: s * 0.30)),
+                    with: .color(furD.opacity(0.5)))
+            ec.fill(Path(ellipseIn: CGRect(x: -s * 0.025, y: -s * 0.27, width: s * 0.05, height: s * 0.25)),
                     with: .color(inner))
         }
 
-        // Body and head.
-        oval(&ctx, cx, cy + s * 0.05, s * 0.42, s * 0.40, body)
+        // Cotton tail behind, body, head.
+        oval(&ctx, cx - s * 0.30, cy + s * 0.10, s * 0.14, s * 0.13, furL)
+        shadedOval(&ctx, cx, cy + s * 0.05, s * 0.42, s * 0.40, furL, furD)
         let hy = cy - s * 0.18
-        oval(&ctx, cx, hy, s * 0.34, s * 0.32, body)
-        oval(&ctx, cx, cy + s * 0.22, s * 0.12, s * 0.10, .white) // tail puff hint at front base
+        shadedOval(&ctx, cx, hy, s * 0.34, s * 0.32, furL, furD)
 
-        eyes(&ctx, left: CGPoint(x: cx - s * 0.08, y: hy - s * 0.01),
-             right: CGPoint(x: cx + s * 0.08, y: hy - s * 0.01), r: s * 0.05, mood: mood, skin: body)
-        dot(&ctx, cx, hy + s * 0.06, s * 0.028, rgb(220, 150, 160)) // nose
-        mouth(&ctx, center: CGPoint(x: cx, y: hy + s * 0.10), width: s * 0.12, mood: mood)
-        cheeks(&ctx, left: CGPoint(x: cx - s * 0.13, y: hy + s * 0.05),
-               right: CGPoint(x: cx + s * 0.13, y: hy + s * 0.05), r: s * 0.03, mood: mood)
+        // Dark round rabbit eyes.
+        realEye(&ctx, CGPoint(x: cx - s * 0.085, y: hy - s * 0.01), s * 0.05, mood: mood, skin: furL, iris: rgb(56, 40, 38))
+        realEye(&ctx, CGPoint(x: cx + s * 0.085, y: hy - s * 0.01), s * 0.05, mood: mood, skin: furL, iris: rgb(56, 40, 38))
+
+        // Pink Y nose with a cleft.
+        var nose = Path()
+        nose.move(to: CGPoint(x: cx - s * 0.022, y: hy + s * 0.045))
+        nose.addLine(to: CGPoint(x: cx + s * 0.022, y: hy + s * 0.045))
+        nose.addLine(to: CGPoint(x: cx, y: hy + s * 0.068))
+        nose.closeSubpath()
+        ctx.fill(nose, with: .color(pink))
+        ctx.stroke(Path { p in
+            p.move(to: CGPoint(x: cx, y: hy + s * 0.068))
+            p.addLine(to: CGPoint(x: cx, y: hy + s * 0.10))
+        }, with: .color(furD), lineWidth: max(1, s * 0.008))
+
+        // Two front teeth.
+        ctx.fill(Path(roundedRect: CGRect(x: cx - s * 0.022, y: hy + s * 0.10, width: s * 0.044, height: s * 0.055),
+                      cornerRadius: s * 0.01), with: .color(.white))
+        ctx.stroke(Path { p in
+            p.move(to: CGPoint(x: cx, y: hy + s * 0.10)); p.addLine(to: CGPoint(x: cx, y: hy + s * 0.155))
+        }, with: .color(furD.opacity(0.6)), lineWidth: max(1, s * 0.006))
+
+        cheeks(&ctx, left: CGPoint(x: cx - s * 0.13, y: hy + s * 0.06),
+               right: CGPoint(x: cx + s * 0.13, y: hy + s * 0.06), r: s * 0.03, mood: mood)
+        // Whisker dots.
+        for side in [-1.0, 1.0] {
+            for ky in [-0.01, 0.02] {
+                dot(&ctx, cx + CGFloat(side) * s * 0.07, hy + s * CGFloat(0.07 + ky), s * 0.006, furD.opacity(0.6))
+            }
+        }
     }
 }
