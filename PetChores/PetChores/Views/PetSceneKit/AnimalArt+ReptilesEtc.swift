@@ -8,38 +8,48 @@ extension AnimalArt {
     static func gecko(_ ctx: inout GraphicsContext, _ size: CGSize, _ mood: Mood, _ t: Double) {
         let s = min(size.width, size.height)
         let cx = size.width / 2
-        let cy = size.height * 0.58 + bob(t, mood, s, speed: 1.4, amp: 0.025)
-        let body = rgb(240, 210, 110)
-        let spot = rgb(120, 90, 50)
+        let cy = size.height * 0.58 + bob(t, mood, s, speed: 1.4, amp: 0.02)
+        let bodyL = rgb(246, 218, 122)
+        let bodyD = rgb(214, 180, 90)
+        let spot = rgb(110, 80, 46)
 
-        // Curving tail that sways.
+        // Thick banded tail that sways.
         var tc = ctx
-        tc.translateBy(x: cx - s * 0.22, y: cy + s * 0.02)
-        tc.rotate(by: .degrees(sin(t * 2.2) * (8 + 12 * liveliness(mood))))
+        tc.translateBy(x: cx - s * 0.20, y: cy + s * 0.02)
+        tc.rotate(by: .degrees(sin(t * 2.2) * (6 + 10 * liveliness(mood))))
         var tail = Path()
         tail.move(to: .zero)
-        tail.addQuadCurve(to: CGPoint(x: -s * 0.26, y: s * 0.04), control: CGPoint(x: -s * 0.14, y: -s * 0.10))
-        tc.stroke(tail, with: .color(body), style: StrokeStyle(lineWidth: s * 0.10, lineCap: .round))
+        tail.addQuadCurve(to: CGPoint(x: -s * 0.28, y: s * 0.05), control: CGPoint(x: -s * 0.15, y: -s * 0.11))
+        tc.stroke(tail, with: .color(bodyL), style: StrokeStyle(lineWidth: s * 0.12, lineCap: .round))
+        for k in 1...3 {
+            tc.stroke(Path { p in
+                let x = -s * 0.06 * Double(k)
+                p.move(to: CGPoint(x: x, y: -s * 0.02)); p.addLine(to: CGPoint(x: x, y: s * 0.05))
+            }, with: .color(spot.opacity(0.65)), lineWidth: max(1, s * 0.022))
+        }
 
-        // Legs.
-        for sx in [-0.14, 0.18] {
-            for sy in [-0.06, 0.10] {
-                oval(&ctx, cx + CGFloat(sx) * s, cy + CGFloat(sy) * s + s * 0.10, s * 0.10, s * 0.05, body)
+        // Splayed legs.
+        for sx in [-0.16, 0.16] {
+            for sy in [-0.04, 0.12] {
+                oval(&ctx, cx + CGFloat(sx) * s, cy + CGFloat(sy) * s + s * 0.10, s * 0.11, s * 0.05, bodyD)
             }
         }
-        // Body.
-        oval(&ctx, cx, cy, s * 0.56, s * 0.26, body)
-        // Spots.
-        for dx in [-0.18, -0.06, 0.06] {
-            dot(&ctx, cx + CGFloat(dx) * s, cy - s * 0.02, s * 0.03, spot)
-            dot(&ctx, cx + CGFloat(dx) * s + s * 0.03, cy + s * 0.04, s * 0.022, spot)
+        // Low body with leopard spots.
+        shadedOval(&ctx, cx, cy, s * 0.54, s * 0.26, bodyL, bodyD)
+        for (dx, dy) in [(-0.18, -0.02), (-0.08, 0.04), (0.02, -0.03), (0.10, 0.03), (-0.13, 0.05), (0.0, 0.06)] {
+            dot(&ctx, cx + CGFloat(dx) * s, cy + CGFloat(dy) * s, s * 0.028, spot)
         }
-        // Head to the right.
-        let hx = cx + s * 0.26, hy = cy - s * 0.01
-        oval(&ctx, hx, hy, s * 0.26, s * 0.20, body)
-        eyes(&ctx, left: CGPoint(x: hx - s * 0.01, y: hy - s * 0.03),
-             right: CGPoint(x: hx + s * 0.07, y: hy - s * 0.03), r: s * 0.035, mood: mood, skin: body)
-        mouth(&ctx, center: CGPoint(x: hx + s * 0.04, y: hy + s * 0.05), width: s * 0.12, mood: mood, color: rgb(150, 110, 70))
+        // Big head to the right.
+        let hx = cx + s * 0.26, hy = cy - s * 0.02
+        shadedOval(&ctx, hx, hy, s * 0.30, s * 0.24, bodyL, bodyD)
+        realEye(&ctx, CGPoint(x: hx - s * 0.02, y: hy - s * 0.04), s * 0.045, mood: mood, skin: bodyL, iris: rgb(64, 48, 30))
+        realEye(&ctx, CGPoint(x: hx + s * 0.10, y: hy - s * 0.04), s * 0.045, mood: mood, skin: bodyL, iris: rgb(64, 48, 30))
+        // Wide gecko grin.
+        ctx.stroke(Path { p in
+            p.move(to: CGPoint(x: hx - s * 0.06, y: hy + s * 0.07))
+            p.addQuadCurve(to: CGPoint(x: hx + s * 0.13, y: hy + s * 0.07), control: CGPoint(x: hx + s * 0.04, y: hy + s * 0.12))
+        }, with: .color(rgb(150, 110, 70)), style: StrokeStyle(lineWidth: max(1.4, s * 0.012), lineCap: .round))
+        dot(&ctx, hx + s * 0.14, hy - s * 0.005, s * 0.012, spot) // nostril
     }
 
     // MARK: - Tortoise
@@ -48,30 +58,41 @@ extension AnimalArt {
         let s = min(size.width, size.height)
         let cx = size.width / 2
         let cy = size.height * 0.58 + bob(t, mood, s, speed: 0.9, amp: 0.02)
-        let shell = rgb(150, 110, 60)
-        let shellDark = rgb(120, 86, 46)
-        let skin = rgb(170, 150, 110)
+        let shellL = rgb(170, 128, 72)
+        let shellD = rgb(118, 84, 44)
+        let skin = rgb(178, 158, 118)
+        let skinD = rgb(146, 126, 92)
 
-        // Stubby legs.
-        for dx in [-0.20, 0.20] {
-            oval(&ctx, cx + CGFloat(dx) * s, cy + s * 0.16, s * 0.12, s * 0.10, skin)
+        // Stubby shaded legs.
+        for dx in [-0.22, 0.22] {
+            shadedOval(&ctx, cx + CGFloat(dx) * s, cy + s * 0.16, s * 0.13, s * 0.11, skin, skinD)
         }
-        // High domed shell with plates.
-        oval(&ctx, cx, cy, s * 0.62, s * 0.46, shell)
-        ctx.fill(Path(ellipseIn: CGRect(x: cx - s * 0.31, y: cy - s * 0.23, width: s * 0.62, height: s * 0.30)),
-                 with: .color(shellDark.opacity(0.5)))
-        for dx in [-0.18, 0.0, 0.18] {
-            ctx.stroke(Path(ellipseIn: CGRect(x: cx + CGFloat(dx) * s - s * 0.07, y: cy - s * 0.16,
-                                              width: s * 0.14, height: s * 0.18)),
-                       with: .color(shellDark), lineWidth: max(1, s * 0.01))
+        // High domed shell, shaded.
+        shadedOval(&ctx, cx, cy, s * 0.62, s * 0.48, shellL, shellD)
+        // Central scute plus a ring of plates (the tortoise scute pattern).
+        ctx.stroke(Path(ellipseIn: CGRect(x: cx - s * 0.10, y: cy - s * 0.13, width: s * 0.20, height: s * 0.18)),
+                   with: .color(shellD), lineWidth: max(1, s * 0.012))
+        for i in 0..<6 {
+            let a = Double(i) * 60 * .pi / 180
+            let px = cx + CGFloat(cos(a)) * s * 0.22
+            let py = cy - s * 0.02 + CGFloat(sin(a)) * s * 0.16
+            ctx.stroke(Path(ellipseIn: CGRect(x: px - s * 0.07, y: py - s * 0.06, width: s * 0.14, height: s * 0.12)),
+                       with: .color(shellD.opacity(0.8)), lineWidth: max(1, s * 0.01))
         }
-        // Head to the right, slowly poking in and out.
+        // Bottom rim plates.
+        for dx in stride(from: -0.26, through: 0.26, by: 0.13) {
+            ctx.stroke(Path { p in
+                let x = cx + CGFloat(dx) * s
+                p.move(to: CGPoint(x: x, y: cy + s * 0.11)); p.addLine(to: CGPoint(x: x, y: cy + s * 0.21))
+            }, with: .color(shellD.opacity(0.55)), lineWidth: max(1, s * 0.008))
+        }
+        // Head poking out, slowly.
         let poke = CGFloat(sin(t * 0.8)) * s * 0.03 * CGFloat(liveliness(mood))
-        let hx = cx + s * 0.30 + poke, hy = cy + s * 0.04
-        oval(&ctx, hx, hy, s * 0.24, s * 0.20, skin)
-        eyes(&ctx, left: CGPoint(x: hx, y: hy - s * 0.03),
-             right: CGPoint(x: hx + s * 0.07, y: hy - s * 0.03), r: s * 0.03, mood: mood, skin: skin)
-        mouth(&ctx, center: CGPoint(x: hx + s * 0.04, y: hy + s * 0.05), width: s * 0.10, mood: mood, color: rgb(120, 100, 70))
+        let hx = cx + s * 0.32 + poke, hy = cy + s * 0.06
+        shadedOval(&ctx, hx, hy, s * 0.26, s * 0.22, skin, skinD)
+        realEye(&ctx, CGPoint(x: hx, y: hy - s * 0.03), s * 0.032, mood: mood, skin: skin, iris: rgb(50, 40, 30))
+        realEye(&ctx, CGPoint(x: hx + s * 0.08, y: hy - s * 0.03), s * 0.032, mood: mood, skin: skin, iris: rgb(50, 40, 30))
+        mouth(&ctx, center: CGPoint(x: hx + s * 0.05, y: hy + s * 0.06), width: s * 0.10, mood: mood, color: rgb(120, 100, 70))
     }
 
     // MARK: - Chicken

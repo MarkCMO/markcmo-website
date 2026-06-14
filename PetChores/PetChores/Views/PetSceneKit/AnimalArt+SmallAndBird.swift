@@ -8,31 +8,39 @@ extension AnimalArt {
     static func hamster(_ ctx: inout GraphicsContext, _ size: CGSize, _ mood: Mood, _ t: Double) {
         let s = min(size.width, size.height)
         let cx = size.width / 2
-        let cy = size.height * 0.56 + bob(t, mood, s, speed: 2.6, amp: 0.05)
-        let body = rgb(226, 178, 120)
-        let belly = rgb(248, 236, 220)
+        let cy = size.height * 0.57 + bob(t, mood, s, speed: 2.6, amp: 0.04)
+        let furL = rgb(234, 190, 132)
+        let furD = rgb(196, 150, 96)
+        let belly = rgb(250, 240, 226)
+        let pink = rgb(232, 168, 166)
 
-        // Round body.
-        oval(&ctx, cx, cy, s * 0.56, s * 0.52, body)
-        oval(&ctx, cx, cy + s * 0.06, s * 0.34, s * 0.30, belly)
+        // Round shaded body with a cream belly.
+        shadedOval(&ctx, cx, cy, s * 0.56, s * 0.52, furL, furD)
+        oval(&ctx, cx, cy + s * 0.09, s * 0.34, s * 0.30, belly)
 
-        // Tiny ears.
+        // Rounded ears with pink inner.
         for side in [-1.0, 1.0] {
-            dot(&ctx, cx + CGFloat(side) * s * 0.20, cy - s * 0.20, s * 0.07, body)
+            oval(&ctx, cx + CGFloat(side) * s * 0.20, cy - s * 0.21, s * 0.12, s * 0.12, furD)
+            oval(&ctx, cx + CGFloat(side) * s * 0.20, cy - s * 0.20, s * 0.06, s * 0.06, pink)
         }
-        // Cheek pouches puff on happier moods.
-        let puff = s * (0.10 + 0.03 * CGFloat(liveliness(mood)))
-        oval(&ctx, cx - s * 0.22, cy + s * 0.02, puff, puff, body)
-        oval(&ctx, cx + s * 0.22, cy + s * 0.02, puff, puff, body)
+        // Chubby cheek pouches (stuffed with food).
+        let puff = s * (0.13 + 0.03 * CGFloat(liveliness(mood)))
+        shadedOval(&ctx, cx - s * 0.22, cy + s * 0.04, puff, puff, furL, furD)
+        shadedOval(&ctx, cx + s * 0.22, cy + s * 0.04, puff, puff, furL, furD)
 
-        eyes(&ctx, left: CGPoint(x: cx - s * 0.10, y: cy - s * 0.04),
-             right: CGPoint(x: cx + s * 0.10, y: cy - s * 0.04), r: s * 0.05, mood: mood, skin: body)
-        dot(&ctx, cx, cy + s * 0.02, s * 0.028, rgb(140, 90, 90)) // nose
-        mouth(&ctx, center: CGPoint(x: cx, y: cy + s * 0.07), width: s * 0.10, mood: mood)
-        // Little paws.
-        for side in [-1.0, 1.0] {
-            dot(&ctx, cx + CGFloat(side) * s * 0.08, cy + s * 0.22, s * 0.04, belly)
-        }
+        realEye(&ctx, CGPoint(x: cx - s * 0.10, y: cy - s * 0.05), s * 0.045, mood: mood, skin: furL, iris: rgb(40, 30, 28))
+        realEye(&ctx, CGPoint(x: cx + s * 0.10, y: cy - s * 0.05), s * 0.045, mood: mood, skin: furL, iris: rgb(40, 30, 28))
+        dot(&ctx, cx, cy + s * 0.0, s * 0.026, pink) // nose
+        mouth(&ctx, center: CGPoint(x: cx, y: cy + s * 0.045), width: s * 0.08, mood: mood)
+
+        // Tiny paws holding a sunflower seed.
+        oval(&ctx, cx, cy + s * 0.19, s * 0.11, s * 0.07, belly)
+        var seed = Path(ellipseIn: CGRect(x: cx - s * 0.022, y: cy + s * 0.135, width: s * 0.044, height: s * 0.065))
+        ctx.fill(seed, with: .color(rgb(58, 48, 40)))
+        seed = Path(ellipseIn: CGRect(x: cx - s * 0.012, y: cy + s * 0.145, width: s * 0.024, height: s * 0.04))
+        ctx.fill(seed, with: .color(rgb(220, 210, 190)))
+        // Whisker dots.
+        for side in [-1.0, 1.0] { dot(&ctx, cx + CGFloat(side) * s * 0.06, cy + s * 0.0, s * 0.006, furD) }
     }
 
     // MARK: - Guinea pig
@@ -40,24 +48,42 @@ extension AnimalArt {
     static func guineaPig(_ ctx: inout GraphicsContext, _ size: CGSize, _ mood: Mood, _ t: Double) {
         let s = min(size.width, size.height)
         let cx = size.width / 2
-        let cy = size.height * 0.56 + bob(t, mood, s, speed: 1.8, amp: 0.035)
-        let body = rgb(196, 142, 96)
-        let patch = rgb(244, 238, 230)
+        let cy = size.height * 0.57 + bob(t, mood, s, speed: 1.8, amp: 0.03)
+        let furL = rgb(210, 156, 106)
+        let furD = rgb(166, 116, 76)
+        let patch = rgb(246, 240, 232)
+        let pink = rgb(226, 158, 156)
 
-        // Oblong body, no tail.
-        oval(&ctx, cx, cy, s * 0.74, s * 0.46, body)
-        // White patch.
-        oval(&ctx, cx + s * 0.14, cy, s * 0.34, s * 0.40, patch)
-
-        // Small ears near the head end (left side).
-        let hx = cx - s * 0.22
-        for side in [-1.0, 1.0] {
-            oval(&ctx, hx + CGFloat(side) * s * 0.10, cy - s * 0.18, s * 0.10, s * 0.08, rgb(150, 100, 80))
+        // Oblong shaded body, no tail.
+        shadedOval(&ctx, cx, cy, s * 0.74, s * 0.46, furL, furD)
+        // Two-tone (rosette) white patch on the rump.
+        oval(&ctx, cx + s * 0.17, cy, s * 0.32, s * 0.42, patch)
+        // Cowlick fur tufts along the back.
+        for fx in stride(from: -0.26, through: 0.26, by: 0.105) {
+            let tx = cx + CGFloat(fx) * s
+            var tuft = Path()
+            tuft.move(to: CGPoint(x: tx, y: cy - s * 0.21))
+            tuft.addLine(to: CGPoint(x: tx + s * 0.028, y: cy - s * 0.27))
+            tuft.addLine(to: CGPoint(x: tx + s * 0.056, y: cy - s * 0.21))
+            tuft.closeSubpath()
+            ctx.fill(tuft, with: .color(fx > 0.03 ? patch : furD))
         }
-        eyes(&ctx, left: CGPoint(x: hx - s * 0.02, y: cy - s * 0.05),
-             right: CGPoint(x: hx + s * 0.12, y: cy - s * 0.05), r: s * 0.045, mood: mood, skin: body)
-        dot(&ctx, hx + s * 0.05, cy + s * 0.02, s * 0.03, rgb(150, 100, 100)) // nose
-        mouth(&ctx, center: CGPoint(x: hx + s * 0.05, y: cy + s * 0.07), width: s * 0.10, mood: mood)
+
+        let hx = cx - s * 0.24
+        // Petal ears.
+        for side in [-1.0, 1.0] {
+            oval(&ctx, hx + CGFloat(side) * s * 0.08, cy - s * 0.16, s * 0.11, s * 0.085, furD)
+        }
+        realEye(&ctx, CGPoint(x: hx - s * 0.02, y: cy - s * 0.05), s * 0.045, mood: mood, skin: furL, iris: rgb(44, 32, 30))
+        realEye(&ctx, CGPoint(x: hx + s * 0.13, y: cy - s * 0.05), s * 0.045, mood: mood, skin: furL, iris: rgb(44, 32, 30))
+        dot(&ctx, hx + s * 0.055, cy + s * 0.02, s * 0.028, pink) // nose
+        mouth(&ctx, center: CGPoint(x: hx + s * 0.055, y: cy + s * 0.07), width: s * 0.09, mood: mood)
+        // A leaf of veggie to munch.
+        ctx.fill(Path(ellipseIn: CGRect(x: hx - s * 0.17, y: cy + s * 0.01, width: s * 0.11, height: s * 0.055)),
+                 with: .color(rgb(108, 170, 78)))
+        ctx.stroke(Path { p in
+            p.move(to: CGPoint(x: hx - s * 0.16, y: cy + s * 0.037)); p.addLine(to: CGPoint(x: hx - s * 0.07, y: cy + s * 0.037))
+        }, with: .color(rgb(80, 130, 56)), lineWidth: max(1, s * 0.006))
     }
 
     // MARK: - Parakeet
