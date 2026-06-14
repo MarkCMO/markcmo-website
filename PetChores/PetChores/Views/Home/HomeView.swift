@@ -137,8 +137,13 @@ struct HomeView: View {
 
 private struct PetStatusCard: View {
     @Environment(\.modelContext) private var context
+    @Query private var settingsList: [ParentSettings]
     let instance: PetInstance
     let species: PetSpecies
+
+    private var settings: ParentSettings? { settingsList.first }
+    private var vetBills: Bool { settings?.vetBillsEnabled ?? true }
+    private var social: Bool { settings?.socialPressureEnabled ?? true }
 
     private var habitat: Habitat { Habitat(category: species.category, id: species.id) }
     private var isAquatic: Bool { habitat.usesTank }
@@ -155,7 +160,7 @@ private struct PetStatusCard: View {
                 PetScene(species: species, mood: instance.mood,
                          waste: isAquatic ? instance.tankFoulLevel : instance.wasteLevel,
                          hunger: instance.hungerLevel, relief: instance.reliefLevel,
-                         growth: instance.growth)
+                         growth: instance.growth, showNeighbor: social)
                     .frame(height: 160)
 
                 if gottaGo {
@@ -230,14 +235,16 @@ private struct PetStatusCard: View {
 
                 if sick {
                     Button {
-                        withAnimation(.spring) { ScenarioActions.vetVisit(instance, context: context) }
+                        withAnimation(.spring) { ScenarioActions.vetVisit(instance, context: context, charge: vetBills) }
                     } label: {
-                        Label("Take \(instance.nickname) to the vet ($\(ScenarioActions.vetBill))",
+                        Label(vetBills ? "Take \(instance.nickname) to the vet ($\(ScenarioActions.vetBill))"
+                                       : "Nurse \(instance.nickname) back to health",
                               systemImage: "cross.case.fill")
                             .frame(maxWidth: .infinity)
                     }
                     .buttonStyle(BigButtonStyle())
-                    Text("\(instance.nickname) is very sick. A vet visit costs $\(ScenarioActions.vetBill) and some care points. Neglect is expensive.")
+                    Text(vetBills ? "\(instance.nickname) is very sick. A vet visit costs $\(ScenarioActions.vetBill) and some care points. Neglect is expensive."
+                                  : "\(instance.nickname) is very sick. Give them extra care to nurse them back to health.")
                         .font(.caption)
                         .foregroundStyle(Color(red: 0.80, green: 0.20, blue: 0.20))
                 }

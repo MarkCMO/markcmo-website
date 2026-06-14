@@ -27,21 +27,24 @@ enum ScenarioActions {
     /// A real vet bill in dollars, the way an unexpected illness costs a real owner.
     static let vetBill = 45
 
-    /// Take the pet to the vet: nurses it back to health and clears the worst of the
-    /// strikes, but it costs real money (a vet bill) and some of the child's care points.
-    /// Neglect is expensive, just like real life.
-    static func vetVisit(_ instance: PetInstance, context: ModelContext) {
+    /// Nurse a sick pet back to health and clear the worst of the strikes. When `charge` is
+    /// true (vet bills are on) it costs real money (a vet bill) and some care points, the
+    /// way an unexpected illness costs a real owner. When off, the child can still nurse the
+    /// pet, but it is free.
+    static func vetVisit(_ instance: PetInstance, context: ModelContext, charge: Bool = true) {
         instance.wellbeing = max(instance.wellbeing, 55)
         instance.strikes = max(0, instance.strikes - 1)
         instance.lostAt = nil                       // recovered from the scare
-        instance.carePoints = max(0, instance.carePoints - 25)
-        // Record the bill against this pet's true cost of ownership.
-        let bill = BudgetEntry(instanceId: instance.instanceId,
-                               label: "Vet visit",
-                               amount: Double(vetBill),
-                               type: .recurring,
-                               date: Date())
-        context.insert(bill)
+        if charge {
+            instance.carePoints = max(0, instance.carePoints - 25)
+            // Record the bill against this pet's true cost of ownership.
+            let bill = BudgetEntry(instanceId: instance.instanceId,
+                                   label: "Vet visit",
+                                   amount: Double(vetBill),
+                                   type: .recurring,
+                                   date: Date())
+            context.insert(bill)
+        }
         DataStore.save(context)
     }
 

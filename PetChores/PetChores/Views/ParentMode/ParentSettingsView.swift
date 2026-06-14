@@ -62,17 +62,28 @@ struct ParentSettingsView: View {
                     }
                 }
 
-                Section("Care scenarios") {
-                    Picker("Consequences", selection: binding(\.consequenceIntensityRaw)) {
+                Section {
+                    Picker("How real should it get?", selection: binding(\.consequenceIntensityRaw)) {
                         ForEach(ConsequenceIntensity.allCases) { lvl in
                             Text(lvl.label).tag(lvl.rawValue)
                         }
                     }
                     Text(settings.consequenceIntensity.subtitle)
                         .font(.caption).foregroundStyle(.secondary)
+
+                    Toggle("Accidents in the yard", isOn: binding(\.accidentsEnabled))
+                    Toggle("Pets can get sick (vet bills)", isOn: binding(\.vetBillsEnabled))
+                    Toggle("Neighbors and animal control", isOn: binding(\.socialPressureEnabled))
                     Toggle("Pet can be lost for good", isOn: binding(\.permanentLossEnabled))
-                    Toggle("Demo: speed up needs", isOn: binding(\.demoMode))
-                    Button("Make a mess now (demo)") {
+                } header: {
+                    Text("Real-life consequences")
+                } footer: {
+                    Text("Set how harsh the lessons are. \"How real\" sets the overall pace, from no stakes (Off) to the full lesson (Harsh). Turn each consequence on as your child is ready: messy accidents, vet bills when a pet gets sick, the annoyed neighbor and animal-control warnings, and whether a badly neglected pet can be lost for good.")
+                }
+
+                Section("Demo") {
+                    Toggle("Speed up needs", isOn: binding(\.demoMode))
+                    Button("Make a mess now") {
                         for pet in activePets { ScenarioActions.makeMessNow(pet, context: context) }
                     }
                     Text("Use the demo controls to see the care scenarios right away, like a messy yard or a fouling tank.")

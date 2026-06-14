@@ -17,6 +17,9 @@ struct EnvironmentBackdrop: View {
     var hunger: Double = 0
     /// 0...1 bladder fullness for yard animals, so a puddle shows when an accident is near.
     var relief: Double = 0
+    /// Whether the annoyed neighbor appears at a maxed-out yard (off when the parent has
+    /// turned social pressure off).
+    var showNeighbor: Bool = true
 
     var body: some View {
         GeometryReader { geo in
@@ -138,7 +141,7 @@ struct EnvironmentBackdrop: View {
             flowers(w: w, h: h)
             if waste > 0.15 { poopPiles(w: w, h: h) }
             fence(w, h)
-            if waste >= 0.85 { neighbor(w: w, h: h) }
+            if waste >= 0.85 && showNeighbor { neighbor(w: w, h: h) }
             if !sky.isNight && !raining { butterflies(w: w, h: h) }
             if raining {
                 Rectangle().fill(Color.black.opacity(0.12))

@@ -25,6 +25,9 @@ struct PetScene: View {
     var relief: Double = 0
     /// 0...1 growth, so a young pet is drawn smaller than a full-grown adult.
     var growth: Double = 1
+    /// Whether the annoyed neighbor appears over the fence at a maxed-out yard. Off when the
+    /// parent has turned social pressure off.
+    var showNeighbor: Bool = true
 
     @Environment(\.accessibilityReduceMotion) private var reduceMotion
 
@@ -59,7 +62,7 @@ struct PetScene: View {
         return ZStack {
             if showEnvironment {
                 EnvironmentBackdrop(habitat: habitat, t: t, skyPhase: phase, weather: weather,
-                                    waste: waste, hunger: hunger, relief: relief)
+                                    waste: waste, hunger: hunger, relief: relief, showNeighbor: showNeighbor)
             } else {
                 Color(.secondarySystemBackground)
             }

@@ -146,7 +146,8 @@ struct MaintenanceService {
                 let relief = ConsequenceService.advanceRelief(instance.reliefLevel,
                                                               elapsedHours: hours, intensity: intensity)
                 instance.reliefLevel = relief.relief
-                if relief.accident {
+                // The overflow only becomes a real mess when the parent has accidents on.
+                if relief.accident && settings.accidentsEnabled {
                     instance.wasteLevel = ConsequenceService.Needs.clamp(instance.wasteLevel + 0.4)
                 }
             }
@@ -171,7 +172,8 @@ struct MaintenanceService {
                         max(instance.reliefLevel, max(instance.wasteLevel, instance.tankFoulLevel)))
         if let alert = CareEscalation.current(needLevel: worst, strikes: instance.strikes,
                                               maxStrikes: settings.maxStrikes,
-                                              nickname: instance.nickname, habitat: habitat) {
+                                              nickname: instance.nickname, habitat: habitat,
+                                              socialPressure: settings.socialPressureEnabled) {
             return PendingCareAlert(instanceId: instance.instanceId, alert: alert)
         }
         return nil

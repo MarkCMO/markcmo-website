@@ -32,6 +32,18 @@ final class ParentSettings {
     /// pull back from with good care.
     var permanentLossEnabled: Bool = false
 
+    // MARK: Granular harshness dials. Each one lets a parent turn a specific real-life
+    // consequence on or off, on top of the overall intensity, so the lessons can be
+    // introduced one at a time. Inline defaults keep older stores migrating.
+    /// When on, a yard pet that is not let out in time has an accident that adds to the mess.
+    var accidentsEnabled: Bool = true
+    /// When on, a sick pet costs a real vet bill (and care points) to nurse back. When off,
+    /// the child can still nurse the pet, but it is free.
+    var vetBillsEnabled: Bool = true
+    /// When on, neglect brings social pressure: the annoyed neighbor over the fence and the
+    /// animal-control warning. When off, the reminders stay gentle and private.
+    var socialPressureEnabled: Bool = true
+
     /// Demo mode hugely speeds up how fast needs build, so the care scenarios (a messy
     /// yard, a fouling tank) can be seen and played within a minute instead of over days.
     /// For TestFlight demos only; off by default.

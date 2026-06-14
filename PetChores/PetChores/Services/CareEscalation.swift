@@ -25,18 +25,21 @@ enum CareEscalation {
     }
 
     /// The single most-urgent alert that applies right now, or nil when all is well.
-    /// `needLevel` is the highest of the pet's real-time needs (0...1).
+    /// `needLevel` is the highest of the pet's real-time needs (0...1). When `socialPressure`
+    /// is off, the most-severe tier drops the neighbor / animal-control framing.
     static func current(needLevel: Double,
                         strikes: Int,
                         maxStrikes: Int,
                         nickname: String,
-                        habitat: Habitat) -> Alert? {
+                        habitat: Habitat,
+                        socialPressure: Bool = true) -> Alert? {
         let warning = maxStrikes > 0 && strikes >= maxStrikes - 1
 
         if warning || needLevel >= 0.95 {
+            let tail = socialPressure ? " \(habitat.severeLine)" : ""
             return Alert(urgency: .severe,
                          title: "\(nickname) needs you now",
-                         body: "Last chance: keep neglecting \(nickname) and you could lose them. \(habitat.severeLine)")
+                         body: "Last chance: keep neglecting \(nickname) and you could lose them.\(tail)")
         }
         if needLevel >= 0.7 {
             return Alert(urgency: .urgent,
@@ -57,9 +60,10 @@ enum CareEscalation {
                        strikes: Int,
                        maxStrikes: Int,
                        nickname: String,
-                       habitat: Habitat) -> [Alert] {
+                       habitat: Habitat,
+                       socialPressure: Bool = true) -> [Alert] {
         guard let top = current(needLevel: needLevel, strikes: strikes, maxStrikes: maxStrikes,
-                                nickname: nickname, habitat: habitat) else { return [] }
+                                nickname: nickname, habitat: habitat, socialPressure: socialPressure) else { return [] }
         var rungs: [Alert] = []
         if top.urgency >= .nudge {
             rungs.append(Alert(urgency: .nudge, title: "\(nickname) needs you", body: habitat.nudgeLine(nickname)))
