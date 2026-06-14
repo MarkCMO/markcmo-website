@@ -23,6 +23,8 @@ struct PetScene: View {
     var hunger: Double = 0
     /// 0...1 bladder fullness for yard animals, so a puddle shows when an accident is near.
     var relief: Double = 0
+    /// 0...1 growth, so a young pet is drawn smaller than a full-grown adult.
+    var growth: Double = 1
 
     @Environment(\.accessibilityReduceMotion) private var reduceMotion
 
@@ -65,7 +67,8 @@ struct PetScene: View {
                 AnimalArt.draw(&ctx, size: canvasSize, id: species.id,
                                category: species.category, mood: mood, t: t, night: night)
             }
-            .frame(width: size.height * 0.95, height: size.height * 0.95)
+            .frame(width: size.height * 0.95 * CGFloat(GrowthService.scale(growth)),
+                   height: size.height * 0.95 * CGFloat(GrowthService.scale(growth)))
         }
     }
 

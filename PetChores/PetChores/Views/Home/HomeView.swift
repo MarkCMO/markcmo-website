@@ -154,7 +154,8 @@ private struct PetStatusCard: View {
             VStack(alignment: .leading, spacing: 12) {
                 PetScene(species: species, mood: instance.mood,
                          waste: isAquatic ? instance.tankFoulLevel : instance.wasteLevel,
-                         hunger: instance.hungerLevel, relief: instance.reliefLevel)
+                         hunger: instance.hungerLevel, relief: instance.reliefLevel,
+                         growth: instance.growth)
                     .frame(height: 160)
 
                 if gottaGo {
@@ -243,7 +244,10 @@ private struct PetStatusCard: View {
 
                 HStack(alignment: .top) {
                     VStack(alignment: .leading, spacing: 4) {
-                        Text(instance.nickname).font(.title2.bold())
+                        HStack(spacing: 8) {
+                            Text(instance.nickname).font(.title2.bold())
+                            GrowthChip(growth: instance.growth)
+                        }
                         Text(moodMessage)
                             .font(.subheadline)
                             .foregroundStyle(.secondary)
@@ -266,6 +270,33 @@ private struct PetStatusCard: View {
         case .sad:            return "\(instance.nickname) is feeling lonely. A little care will help."
         case .pleaseHelp:     return "\(instance.nickname) really needs you today. Let's take care of them."
         }
+    }
+}
+
+/// A small chip showing the pet's life stage (Baby / Growing up / Full grown), with a
+/// progress dot so the child can see a young pet inching toward grown.
+private struct GrowthChip: View {
+    let growth: Double
+    private var stage: GrowthStage { GrowthService.stage(growth) }
+
+    private var color: Color {
+        switch stage {
+        case .baby:  return .pink
+        case .young: return .orange
+        case .grown: return .green
+        }
+    }
+
+    var body: some View {
+        HStack(spacing: 4) {
+            Image(systemName: stage == .grown ? "pawprint.fill" : "leaf.fill")
+                .font(.caption2)
+            Text(stage.label)
+                .font(.caption.bold())
+        }
+        .padding(.horizontal, 8).padding(.vertical, 3)
+        .background(Capsule().fill(color.opacity(0.16)))
+        .foregroundStyle(color)
     }
 }
 

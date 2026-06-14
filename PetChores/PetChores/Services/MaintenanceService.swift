@@ -111,6 +111,12 @@ struct MaintenanceService {
 
         let habitat = Habitat(category: species.category, id: species.id)
 
+        // A well-cared pet grows up a little each day; neglect stalls it (handled inside
+        // GrowthService via the wellbeing gate). Reuses the same elapsed window as the needs.
+        instance.growth = GrowthService.advance(instance.growth, wellbeing: instance.wellbeing,
+                                                elapsedDays: hours / 24.0,
+                                                windowDays: Double(max(1, instance.trainingLengthDays)))
+
         // Daily-life needs always climb: a coat gets scruffy, an active pet gets restless.
         // These never lose a pet; they nudge wellbeing and surface "brush me" / "play" prompts.
         if habitat.needsGrooming {

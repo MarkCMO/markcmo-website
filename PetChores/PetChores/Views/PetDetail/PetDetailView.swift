@@ -30,7 +30,8 @@ struct PetDetailView: View {
                     PetScene(species: species, mood: instance.mood,
                              waste: Habitat(category: species.category, id: species.id) == .aquarium
                                  ? instance.tankFoulLevel : instance.wasteLevel,
-                             hunger: instance.hungerLevel, relief: instance.reliefLevel)
+                             hunger: instance.hungerLevel, relief: instance.reliefLevel,
+                             growth: instance.growth)
                         .frame(height: 220)
                     Text(instance.nickname).font(.largeTitle.bold())
                     Text(species.name).font(.headline).foregroundStyle(.secondary)

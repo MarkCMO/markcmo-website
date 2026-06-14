@@ -90,7 +90,7 @@ struct RootView: View {
         func make(_ species: String, _ name: String, wellbeing: Int, trust: Int = 0,
                   points: Int = 0, streak: Int = 0, longest: Int = 0, waste: Double = 0,
                   energy: Double = 0, groom: Double = 0, hunger: Double = 0, relief: Double = 0,
-                  tricks: [String] = [], trickProgress: Double = 0) -> PetInstance? {
+                  growth: Double = 1, tricks: [String] = [], trickProgress: Double = 0) -> PetInstance? {
             guard let pet = creator.create(speciesId: species, nickname: name,
                                            trainingLengthDays: 21, context: context) else { return nil }
             pet.wellbeing = wellbeing
@@ -103,6 +103,7 @@ struct RootView: View {
             pet.groomLevel = groom
             pet.hungerLevel = hunger
             pet.reliefLevel = relief
+            pet.growth = growth
             pet.tricksLearned = tricks
             pet.trickProgress = trickProgress
             return pet
@@ -112,17 +113,17 @@ struct RootView: View {
         // slice of the reality of owning a pet. The hero (dog) is created last so it is the
         // most recent and shows first on Home.
         _ = make("cat", "Luna", wellbeing: 72, trust: 18, points: 110, streak: 2, longest: 4,
-                 hunger: 0.7, tricks: ["come", "sit"], trickProgress: 0.3)                             // hungry: empty bowl + Feed
-        if let bub = make("fish", "Bubbles", wellbeing: 14, points: 50, tricks: ["follow"]) {
+                 hunger: 0.7, growth: 0.5, tricks: ["come", "sit"], trickProgress: 0.3)                // hungry + growing up
+        if let bub = make("fish", "Bubbles", wellbeing: 14, points: 50, growth: 0.7, tricks: ["follow"]) {
             bub.tankFoulLevel = 0.9                                                                    // sick + fouled tank demo
         }
         _ = make("rabbit", "Clover", wellbeing: 80, trust: 24, points: 160, streak: 3, longest: 5,
-                 waste: 0.9, tricks: ["handtame", "come"], trickProgress: 0.5)                         // messy yard + the neighbor
+                 waste: 0.9, growth: 0.9, tricks: ["handtame", "come"], trickProgress: 0.5)            // messy yard + the neighbor
         _ = make("guinea_pig", "Pepper", wellbeing: 68, trust: 12, points: 90, streak: 1,
-                 waste: 0.8, groom: 0.7, tricks: ["handtame"], trickProgress: 0.4)                     // caged: soiled bedding + scruffy coat
+                 waste: 0.8, groom: 0.7, growth: 0.22, tricks: ["handtame"], trickProgress: 0.4)       // a tiny baby in a cage to clean
         let hero = make("dog", "Rex", wellbeing: 90, trust: 56, points: 640, streak: 6, longest: 9,
-                        hunger: 0.6, relief: 0.8,
-                        tricks: ["sit", "stay", "come"], trickProgress: 0.66)                          // hero: needs to go out + hungry + mid-training
+                        hunger: 0.6, relief: 0.8, growth: 0.95,
+                        tricks: ["sit", "stay", "come"], trickProgress: 0.66)                          // hero: full grown, needs to go out + hungry
 
         // Leave a couple of the hero's chores done-but-unverified so Parent Mode ->
         // Verify Tasks has content for that screenshot.

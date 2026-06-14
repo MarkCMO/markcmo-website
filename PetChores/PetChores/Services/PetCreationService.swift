@@ -34,6 +34,8 @@ struct PetCreationService {
             trainingLengthDays: trainingLengthDays,
             lastSettledDay: dayBeforeStart
         )
+        // A newly adopted pet starts young and grows up with good care.
+        instance.growth = GrowthService.newbornGrowth
         context.insert(instance)
 
         generator.generateAndInsert(for: instance, species: species, settings: settings, context: context)

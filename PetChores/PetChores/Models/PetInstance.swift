@@ -36,6 +36,11 @@ final class PetInstance {
     /// needs; if it maxes out before the pet is let out, it becomes an accident (a puddle
     /// that adds to the mess). Cleared by letting the pet out.
     var reliefLevel: Double = 0
+
+    /// 0...1 growth from newborn (0) to full grown (1). Advances with the days a well-cared
+    /// pet has been in the child's charge; neglect (low wellbeing) stalls it. Drives how big
+    /// the animal is drawn, so a cared-for pet visibly grows up.
+    var growth: Double = 1
     /// Last time the real-time needs were advanced, so accumulation survives app restarts.
     var lastNeedTickAt: Date? = nil
 
