@@ -37,6 +37,26 @@ final class ScreenshotTests: XCTestCase {
         selectPet(app, "Clover");  snapshot("07-Home-Rabbit")
         selectPet(app, "Luna");    snapshot("08-Home-Cat")
         selectPet(app, "Pepper");  snapshot("09-Home-GuineaPig")   // caged: soiled bedding to clean
+
+        // Parent Mode: the grown-up oversight surface (care alerts about the child).
+        openParentMode(app)
+        snapshot("10-ParentMode")
+    }
+
+    /// Enter Parent Mode through the PIN gate (seed PIN is 1234).
+    private func openParentMode(_ app: XCUIApplication) {
+        tapTab(app, "Home")
+        let lock = app.buttons["Grown-ups"].firstMatch
+        guard lock.waitForExistence(timeout: 8) else { return }
+        lock.tap()
+        sleep(1)
+        for digit in ["1", "2", "3", "4"] {
+            let key = app.buttons[digit].firstMatch
+            if key.waitForExistence(timeout: 4) { key.tap() }
+        }
+        // Wait for the Parent Mode hub to present.
+        _ = app.staticTexts["Parent Mode"].waitForExistence(timeout: 8)
+        sleep(1)
     }
 
     /// Internal: capture the all-animals art gallery for review.

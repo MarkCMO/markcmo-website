@@ -22,6 +22,8 @@ struct MaintenanceService {
         let instances = DataStore.activeInstances(context)
 
         var careAlerts: [PendingCareAlert] = []
+        var parentAlerts: [PendingParentAlert] = []
+        let childName = DataStore.childProfile(context)?.name ?? "Your child"
 
         for instance in instances {
             guard let species = DataStore.species(id: instance.speciesId, context: context) else { continue }
@@ -53,13 +55,43 @@ struct MaintenanceService {
             if let alert = advanceNeeds(instance: instance, species: species, settings: settings, now: now) {
                 careAlerts.append(alert)
             }
+
+            // 3c. Build the grown-up oversight alert when the child is falling behind.
+            if settings.parentCareAlertsEnabled,
+               let parent = parentAlert(for: instance, settings: settings, childName: childName,
+                                        context: context, now: now) {
+                parentAlerts.append(parent)
+            }
         }
 
         // 4. Save.
         DataStore.save(context)
 
-        // 5. Reschedule notifications from all pending tasks plus the escalation reminders.
-        rescheduleNotifications(context: context, settings: settings, careAlerts: careAlerts)
+        // 5. Reschedule notifications: pending tasks, the child escalation reminders, and
+        //    the grown-up oversight alerts.
+        rescheduleNotifications(context: context, settings: settings,
+                                careAlerts: careAlerts, parentAlerts: parentAlerts)
+    }
+
+    /// Build the parent oversight alert for one pet from the child's recent care record
+    /// (missed chores today and this week, strikes, wellbeing, and the worst real-time need).
+    func parentAlert(for instance: PetInstance, settings: ParentSettings, childName: String,
+                     context: ModelContext, now: Date) -> PendingParentAlert? {
+        let cal = Calendar.current
+        let startToday = cal.startOfDay(for: now)
+        let weekAgo = cal.date(byAdding: .day, value: -7, to: startToday) ?? startToday
+        let petTasks = DataStore.tasks(for: instance.instanceId, context: context)
+        let missedToday = petTasks.filter { $0.status == .missed && $0.dueAt >= startToday }.count
+        let missedWeek = petTasks.filter { $0.status == .missed && $0.dueAt >= weekAgo }.count
+        let worst = max(instance.hungerLevel, max(instance.wasteLevel, instance.tankFoulLevel))
+
+        let signals = ParentAlert.CareSignals(missedToday: missedToday, missedThisWeek: missedWeek,
+                                              strikes: instance.strikes, maxStrikes: settings.maxStrikes,
+                                              wellbeing: instance.wellbeing, worstNeed: worst,
+                                              isLost: instance.isLost)
+        guard let alert = ParentAlert.current(childName: childName, petName: instance.nickname,
+                                              signals: signals) else { return nil }
+        return PendingParentAlert(instanceId: instance.instanceId, alert: alert)
     }
 
     /// Advance the pet's real-time needs by the time elapsed since the last tick, then apply
@@ -128,13 +160,16 @@ struct MaintenanceService {
 
     /// Rebuild the pending notification queue (the nearest 64) from current data, plus any
     /// escalating care reminders for pets whose needs are slipping.
-    func rescheduleNotifications(context: ModelContext, settings: ParentSettings, careAlerts: [PendingCareAlert] = []) {
+    func rescheduleNotifications(context: ModelContext, settings: ParentSettings,
+                                 careAlerts: [PendingCareAlert] = [],
+                                 parentAlerts: [PendingParentAlert] = []) {
         let activeIds = Set(DataStore.activeInstances(context).map { $0.instanceId })
         let pending = DataStore.allTasks(context).filter {
             $0.status == .pending && activeIds.contains($0.instanceId)
         }
         let nicknames = DataStore.nicknameMap(context)
         NotificationService.shared.rescheduleAll(pendingTasks: pending, nicknames: nicknames,
-                                                 settings: settings, careAlerts: careAlerts)
+                                                 settings: settings, careAlerts: careAlerts,
+                                                 parentAlerts: parentAlerts)
     }
 }

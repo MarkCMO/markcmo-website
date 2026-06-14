@@ -79,6 +79,12 @@ struct ParentSettingsView: View {
                         .font(.caption).foregroundStyle(.secondary)
                 }
 
+                Section("Grown-up alerts") {
+                    Toggle("Notify me about care problems", isOn: binding(\.parentCareAlertsEnabled))
+                    Text("Get a heads-up when your child falls behind on a pet's care, like missed chores or a pet that is slipping. Separate from the reminders your child sees.")
+                        .font(.caption).foregroundStyle(.secondary)
+                }
+
                 Section("Security") {
                     Button("Change PIN") { showChangePIN = true }
                 }

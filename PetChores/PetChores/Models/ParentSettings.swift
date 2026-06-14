@@ -37,6 +37,11 @@ final class ParentSettings {
     /// For TestFlight demos only; off by default.
     var demoMode: Bool = false
 
+    /// When on (default), the grown-up gets notifications when the child falls behind on a
+    /// pet's care (missed chores, a slipping pet, a strike taken). Distinct from the
+    /// child-facing reminders. Inline default so older stores migrate cleanly.
+    var parentCareAlertsEnabled: Bool = true
+
     var consequenceIntensity: ConsequenceIntensity {
         get { ConsequenceIntensity(rawValue: consequenceIntensityRaw) ?? .gentle }
         set { consequenceIntensityRaw = newValue.rawValue }

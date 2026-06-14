@@ -73,13 +73,14 @@ final class NotificationService: ObservableObject {
     func rescheduleAll(pendingTasks: [ScheduledTask],
                        nicknames: [UUID: String],
                        settings: ParentSettings,
-                       careAlerts: [PendingCareAlert] = []) {
+                       careAlerts: [PendingCareAlert] = [],
+                       parentAlerts: [PendingParentAlert] = []) {
         center.removeAllPendingNotificationRequests()
 
         let now = Date()
-        // Reserve a few slots for the escalation reminders so a busy schedule never crowds
-        // out the "your pet needs you now" warning.
-        let taskCap = max(0, Self.maxPending - careAlerts.count)
+        // Reserve a few slots for the escalation and parent alerts so a busy schedule never
+        // crowds out the "your pet needs you now" warning or the grown-up oversight alert.
+        let taskCap = max(0, Self.maxPending - careAlerts.count - parentAlerts.count)
         // Only future, pending tasks. Shift any that fall in quiet hours.
         let upcoming = pendingTasks
             .filter { $0.status == .pending }
@@ -100,6 +101,7 @@ final class NotificationService: ObservableObject {
         }
 
         scheduleCareAlerts(careAlerts, settings: settings, now: now)
+        scheduleParentAlerts(parentAlerts, settings: settings, now: now)
     }
 
     /// Schedule one escalating care reminder per slipping pet, ~45 minutes out (shifted past
@@ -119,6 +121,28 @@ final class NotificationService: ObservableObject {
             let comps = Calendar.current.dateComponents([.year, .month, .day, .hour, .minute], from: fire)
             let trigger = UNCalendarNotificationTrigger(dateMatching: comps, repeats: false)
             let id = "care-escalation-\(pending.instanceId.uuidString)"
+            center.add(UNNotificationRequest(identifier: id, content: content, trigger: trigger))
+        }
+    }
+
+    /// Schedule one grown-up oversight alert per pet whose child is falling behind. Fired a
+    /// little later than the child reminder (~90 min, shifted past quiet hours) so the parent
+    /// is told after the child has had a chance to act. Stable per-pet id so a fresh pass
+    /// replaces the old alert with the current tier rather than stacking duplicates.
+    private func scheduleParentAlerts(_ alerts: [PendingParentAlert], settings: ParentSettings, now: Date) {
+        for pending in alerts {
+            let base = now.addingTimeInterval(90 * 60)
+            let fire = max(
+                TimeUtilities.shiftedOutOfQuietHours(base, start: settings.quietHoursStart, end: settings.quietHoursEnd),
+                base
+            )
+            let content = UNMutableNotificationContent()
+            content.title = pending.alert.title
+            content.body = pending.alert.body
+            content.sound = .default
+            let comps = Calendar.current.dateComponents([.year, .month, .day, .hour, .minute], from: fire)
+            let trigger = UNCalendarNotificationTrigger(dateMatching: comps, repeats: false)
+            let id = "parent-alert-\(pending.instanceId.uuidString)"
             center.add(UNNotificationRequest(identifier: id, content: content, trigger: trigger))
         }
     }
@@ -163,6 +187,12 @@ final class NotificationService: ObservableObject {
 struct PendingCareAlert {
     let instanceId: UUID
     let alert: CareEscalation.Alert
+}
+
+/// A grown-up oversight alert to schedule for one pet (built by ParentAlert).
+struct PendingParentAlert {
+    let instanceId: UUID
+    let alert: ParentAlert.Alert
 }
 
 /// Payload passed from the AppDelegate notification handler to the app.
