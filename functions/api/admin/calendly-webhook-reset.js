@@ -57,7 +57,12 @@ export async function onRequest(context) {
     log.deleted.push({ uri: w.uri, status: del.status });
   }
 
-  // 3. Create a fresh subscription
+  // 3. Create a fresh subscription WITH a signing key we control.
+  // Calendly does NOT auto-generate a signing key; the caller supplies it
+  // (the same value we store in CALENDLY_SIGNING_KEY so HMAC verify matches).
+  // Generate a strong random key here and return it so the operator can set
+  // the CF Pages secret to the exact same value.
+  const signingKey = genSigningKey();
   const createRes = await fetch('https://api.calendly.com/webhook_subscriptions', {
     method: 'POST',
     headers: { Authorization: `Bearer ${calToken}`, 'Content-Type': 'application/json' },
@@ -67,6 +72,7 @@ export async function onRequest(context) {
       organization: orgUri,
       user: userUri,
       scope: 'user',
+      signing_key: signingKey,
     }),
   });
   const createText = await createRes.text().catch(() => '');
@@ -85,11 +91,19 @@ export async function onRequest(context) {
     events: resource.events,
     callback_url: resource.callback_url,
   };
-  // signing_key is returned ONCE at creation
-  log.signing_key = resource.signing_key || null;
-  log.next_step = 'Set CALENDLY_SIGNING_KEY (CF Pages secret) to signing_key, then redeploy is not needed (secrets are read at runtime).';
+  // Return the signing key we generated so the operator sets the matching
+  // CF Pages secret CALENDLY_SIGNING_KEY. A redeploy IS required for Pages
+  // Functions to pick up the new secret value.
+  log.signing_key = signingKey;
+  log.next_step = 'Set CALENDLY_SIGNING_KEY (CF Pages secret) = signing_key, then redeploy the Pages project so the handler reads the new value.';
 
   return j(200, log);
+}
+
+function genSigningKey() {
+  const bytes = new Uint8Array(32);
+  crypto.getRandomValues(bytes);
+  return Array.from(bytes).map(b => b.toString(16).padStart(2, '0')).join('');
 }
 
 async function cal(token, url) {
