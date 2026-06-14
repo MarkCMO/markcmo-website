@@ -71,19 +71,32 @@ struct HomeView: View {
             VStack(alignment: .leading, spacing: 16) {
                 picker
 
-                if notifications.authorizationStatus == .denied {
-                    NotificationsOffBanner()
+                if instance.isLost {
+                    LostPetView(nickname: instance.nickname, species: species) { showGate = true }
+                } else {
+                    activeContent(instance: instance, species: species)
                 }
+            }
+            .padding()
+        }
+    }
 
-                PetStatusCard(instance: instance, species: species)
+    @ViewBuilder
+    private func activeContent(instance: PetInstance, species: PetSpecies) -> some View {
+        Group {
+            if notifications.authorizationStatus == .denied {
+                NotificationsOffBanner()
+            }
 
-                TricksCard(instance: instance, species: species)
+            PetStatusCard(instance: instance, species: species)
 
-                if instance.isTrainingComplete() {
-                    TrainingCompleteCallout(instance: instance)
-                }
+            TricksCard(instance: instance, species: species)
 
-                let carryOver = DataStore.parentSettings(context)?.carryOverMissedTasks ?? false
+            if instance.isTrainingComplete() {
+                TrainingCompleteCallout(instance: instance)
+            }
+
+            let carryOver = DataStore.parentSettings(context)?.carryOverMissedTasks ?? false
                 if carryOver && !carriedOverTasks.isEmpty {
                     Section {
                         ForEach(carriedOverTasks) { task in
@@ -127,8 +140,6 @@ struct HomeView: View {
                             .foregroundStyle(.secondary)
                     }
                 }
-            }
-            .padding()
         }
     }
 }

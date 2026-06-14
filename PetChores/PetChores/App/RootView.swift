@@ -121,6 +121,10 @@ struct RootView: View {
                  waste: 0.9, growth: 0.9, tricks: ["handtame", "come"], trickProgress: 0.5)            // messy yard + the neighbor
         _ = make("guinea_pig", "Pepper", wellbeing: 68, trust: 12, points: 90, streak: 1,
                  waste: 0.8, groom: 0.7, growth: 0.22, tricks: ["handtame"], trickProgress: 0.4)       // a tiny baby in a cage to clean
+        if let buddy = make("dog", "Buddy", wellbeing: 8, growth: 0.85) {
+            buddy.strikes = 5
+            buddy.lostAt = Date()                                                                     // lost to neglect: the terminal scene
+        }
         let hero = make("dog", "Rex", wellbeing: 90, trust: 56, points: 640, streak: 6, longest: 9,
                         hunger: 0.6, relief: 0.8, growth: 0.95,
                         tricks: ["sit", "stay", "come"], trickProgress: 0.66)                          // hero: full grown, needs to go out + hungry

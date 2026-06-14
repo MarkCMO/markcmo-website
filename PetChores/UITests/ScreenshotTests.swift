@@ -37,6 +37,7 @@ final class ScreenshotTests: XCTestCase {
         selectPet(app, "Clover");  snapshot("07-Home-Rabbit")
         selectPet(app, "Luna");    snapshot("08-Home-Cat")
         selectPet(app, "Pepper");  snapshot("09-Home-GuineaPig")   // caged: soiled bedding to clean
+        selectPet(app, "Buddy");   snapshot("10-Home-LostPet")     // lost to neglect: the terminal scene
 
         // Parent Mode: the grown-up oversight surface (care alerts about the child).
         openParentMode(app)
