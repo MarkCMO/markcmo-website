@@ -46,6 +46,36 @@ enum AnimalArt {
         Color(red: r / 255, green: g / 255, blue: b / 255)
     }
 
+    /// An oval filled with a soft radial gradient, lit from the upper left, so a body or
+    /// head reads with real volume instead of a flat fill.
+    static func shadedOval(_ ctx: inout GraphicsContext, _ cx: CGFloat, _ cy: CGFloat,
+                           _ w: CGFloat, _ h: CGFloat, _ light: Color, _ dark: Color) {
+        let rect = CGRect(x: cx - w / 2, y: cy - h / 2, width: w, height: h)
+        let shading = GraphicsContext.Shading.radialGradient(
+            Gradient(colors: [light, dark]),
+            center: CGPoint(x: cx - w * 0.14, y: cy - h * 0.22),
+            startRadius: 0,
+            endRadius: max(w, h) * 0.62
+        )
+        ctx.fill(Path(ellipseIn: rect), with: shading)
+    }
+
+    /// A more lifelike eye: almond sclera, brown iris, pupil, and a catchlight. Droops a
+    /// lid on the sadder moods. Used by the realistic animals.
+    static func realEye(_ ctx: inout GraphicsContext, _ c: CGPoint, _ r: CGFloat, mood: Mood,
+                        skin: Color, iris: Color = AnimalArt.rgb(86, 56, 34)) {
+        ctx.fill(Path(ellipseIn: CGRect(x: c.x - r * 1.1, y: c.y - r * 0.82, width: r * 2.2, height: r * 1.64)),
+                 with: .color(rgb(250, 248, 245)))
+        dot(&ctx, c.x, c.y, r * 0.74, iris)
+        dot(&ctx, c.x, c.y, r * 0.42, rgb(26, 20, 18))
+        dot(&ctx, c.x - r * 0.26, c.y - r * 0.26, r * 0.22, .white.opacity(0.9))
+        if mood == .sad || mood == .pleaseHelp {
+            let lidH = r * (mood == .sad ? 1.0 : 0.7)
+            ctx.fill(Path(roundedRect: CGRect(x: c.x - r * 1.2, y: c.y - r * 0.95, width: r * 2.4, height: lidH),
+                          cornerRadius: r * 0.4), with: .color(skin))
+        }
+    }
+
     // MARK: - Face
 
     /// Two eyes with pupils, highlights, and mood-driven eyelids. `look` shifts pupils.
