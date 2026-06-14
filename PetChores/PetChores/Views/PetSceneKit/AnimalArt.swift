@@ -161,13 +161,32 @@ enum AnimalArt {
         default:              blob(&ctx, size, mood, t)
         }
 
-        // At night the pet rests with a gentle "z z z". Otherwise a thriving pet gets
-        // twinkling sparkles, and a happy one gets floating hearts.
-        if night {
+        // A critically unwell pet shows a "needs a vet" cross. Otherwise, at night it
+        // rests with a gentle "z z z", and a thriving pet gets twinkling sparkles.
+        if mood == .pleaseHelp {
+            sickOverlay(&ctx, size, t)
+        } else if night {
             zzz(&ctx, size, t)
         } else if mood == .happy || mood == .content {
             sparkles(&ctx, size, mood, t)
         }
+    }
+
+    /// A pulsing white bubble with a red medical cross above a very unwell pet: it needs
+    /// a trip to the vet. Gentle, never scary.
+    static func sickOverlay(_ ctx: inout GraphicsContext, _ size: CGSize, _ t: Double) {
+        let s = min(size.width, size.height)
+        let p = CGPoint(x: size.width * 0.70, y: size.height * 0.24)
+        let pulse = CGFloat(0.88 + 0.12 * sin(t * 3))
+        ctx.fill(Path(ellipseIn: CGRect(x: p.x - s * 0.10 * pulse, y: p.y - s * 0.10 * pulse,
+                                        width: s * 0.20 * pulse, height: s * 0.20 * pulse)),
+                 with: .color(.white.opacity(0.95)))
+        let cw = s * 0.026 * pulse, cl = s * 0.09 * pulse
+        let cross = rgb(220, 60, 60)
+        ctx.fill(Path(roundedRect: CGRect(x: p.x - cw / 2, y: p.y - cl / 2, width: cw, height: cl),
+                      cornerRadius: cw * 0.3), with: .color(cross))
+        ctx.fill(Path(roundedRect: CGRect(x: p.x - cl / 2, y: p.y - cw / 2, width: cl, height: cw),
+                      cornerRadius: cw * 0.3), with: .color(cross))
     }
 
     /// Sleepy "z z z" rising near the pet's head at night.

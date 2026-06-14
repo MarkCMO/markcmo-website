@@ -27,7 +27,9 @@ struct PetDetailView: View {
                 picker
 
                 VStack(spacing: 10) {
-                    PetScene(species: species, mood: instance.mood, waste: instance.wasteLevel)
+                    PetScene(species: species, mood: instance.mood,
+                             waste: Habitat(category: species.category, id: species.id) == .aquarium
+                                 ? instance.tankFoulLevel : instance.wasteLevel)
                         .frame(height: 220)
                     Text(instance.nickname).font(.largeTitle.bold())
                     Text(species.name).font(.headline).foregroundStyle(.secondary)

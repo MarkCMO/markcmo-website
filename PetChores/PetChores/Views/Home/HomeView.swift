@@ -140,11 +140,13 @@ private struct PetStatusCard: View {
 
     private var isAquatic: Bool { Habitat(category: species.category, id: species.id) == .aquarium }
     private var messy: Bool { (isAquatic ? instance.tankFoulLevel : instance.wasteLevel) >= 0.5 }
+    private var sick: Bool { instance.mood == .pleaseHelp || instance.strikes >= 4 }
 
     var body: some View {
         Card {
             VStack(alignment: .leading, spacing: 12) {
-                PetScene(species: species, mood: instance.mood, waste: instance.wasteLevel)
+                PetScene(species: species, mood: instance.mood,
+                         waste: isAquatic ? instance.tankFoulLevel : instance.wasteLevel)
                     .frame(height: 160)
 
                 if messy {
@@ -163,6 +165,20 @@ private struct PetStatusCard: View {
                                    : "The yard needs cleaning before it reaches the neighbor!")
                         .font(.caption)
                         .foregroundStyle(Color(red: 0.78, green: 0.35, blue: 0.10))
+                }
+
+                if sick {
+                    Button {
+                        withAnimation(.spring) { ScenarioActions.vetVisit(instance, context: context) }
+                    } label: {
+                        Label("Take \(instance.nickname) to the vet ($\(ScenarioActions.vetBill))",
+                              systemImage: "cross.case.fill")
+                            .frame(maxWidth: .infinity)
+                    }
+                    .buttonStyle(BigButtonStyle())
+                    Text("\(instance.nickname) is very sick. A vet visit costs $\(ScenarioActions.vetBill) and some care points. Neglect is expensive.")
+                        .font(.caption)
+                        .foregroundStyle(Color(red: 0.80, green: 0.20, blue: 0.20))
                 }
 
                 HStack(alignment: .top) {

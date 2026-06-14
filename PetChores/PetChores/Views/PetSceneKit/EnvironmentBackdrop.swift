@@ -387,6 +387,31 @@ struct EnvironmentBackdrop: View {
             plants(w: w, h: h)
             bubbles(w: w, h: h)
             gravel(w: w, h: h)
+            if waste > 0.2 { tankFouling(w: w, h: h) }
+        }
+    }
+
+    /// As the tank fouls, the water clouds green and bits of waste drift through it.
+    private func tankFouling(w: CGFloat, h: CGFloat) -> some View {
+        let murk = min(0.5, (waste - 0.2) * 0.7)
+        return ZStack {
+            Rectangle().fill(Color(red: 0.34, green: 0.52, blue: 0.28).opacity(murk))
+            // Algae creeping up the glass edges.
+            ForEach(0..<6, id: \.self) { i in
+                let side: CGFloat = i % 2 == 0 ? 0.03 : 0.97
+                Circle().fill(Color(red: 0.30, green: 0.50, blue: 0.26).opacity(min(0.7, waste)))
+                    .frame(width: w * 0.05, height: w * 0.05)
+                    .position(x: w * side, y: h * CGFloat(0.25 + 0.12 * Double(i)))
+            }
+            // Floating debris specks drifting across.
+            ForEach(0..<9, id: \.self) { i in
+                let span = Double(w) + 30
+                let drift = (t * 6 + Double(i) * 41).truncatingRemainder(dividingBy: span) - 15
+                Circle().fill(Color(red: 0.42, green: 0.50, blue: 0.30).opacity(0.55 * min(1.0, waste)))
+                    .frame(width: w * 0.014, height: w * 0.014)
+                    .position(x: CGFloat(drift),
+                              y: h * CGFloat(0.18 + 0.62 * Double((i * 37) % 100) / 100) + CGFloat(sin(t + Double(i)) * 6))
+            }
         }
     }
 
