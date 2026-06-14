@@ -48,6 +48,10 @@ final class ScreenshotTests: XCTestCase {
             settingsRow.tap()
             _ = app.staticTexts["Settings"].waitForExistence(timeout: 6)
             sleep(1)
+            // Scroll down to the "Real-life consequences" control panel (below the
+            // verification / quiet-hours / new-pet sections).
+            app.swipeUp(); sleep(1)
+            app.swipeUp(); sleep(1)
             snapshot("11-Settings")
         }
     }
