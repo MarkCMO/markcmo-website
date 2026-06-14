@@ -94,9 +94,11 @@ extension AnimalArt {
         // Birds hop: a sharper bob.
         let hop = abs(sin(t * 3)) * s * 0.05 * CGFloat(liveliness(mood))
         let cy = size.height * 0.54 - hop
-        let body = rgb(120, 200, 110)
-        let wing = rgb(90, 170, 90)
-        let head = rgb(240, 220, 90)
+        let body = rgb(126, 206, 114)
+        let bodyD = rgb(92, 168, 88)
+        let wing = rgb(86, 162, 86)
+        let head = rgb(244, 224, 96)
+        let headD = rgb(214, 192, 70)
 
         // Tail feathers.
         var tc = ctx
@@ -106,7 +108,7 @@ extension AnimalArt {
                      cornerRadius: s * 0.03), with: .color(wing))
 
         // Body and head.
-        oval(&ctx, cx, cy + s * 0.02, s * 0.40, s * 0.50, body)
+        shadedOval(&ctx, cx, cy + s * 0.02, s * 0.40, s * 0.50, body, bodyD)
         // Wing that flutters slightly.
         var wc = ctx
         wc.translateBy(x: cx + s * 0.04, y: cy + s * 0.04)
@@ -115,7 +117,7 @@ extension AnimalArt {
                 with: .color(wing))
 
         let hy = cy - s * 0.20
-        oval(&ctx, cx, hy, s * 0.30, s * 0.28, head)
+        shadedOval(&ctx, cx, hy, s * 0.30, s * 0.28, head, headD)
 
         // Beak.
         var beak = Path()
@@ -129,5 +131,9 @@ extension AnimalArt {
              right: CGPoint(x: cx + s * 0.06, y: hy - s * 0.01), r: s * 0.035, mood: mood, skin: head)
         // Cheek spot, a budgie marking.
         dot(&ctx, cx - s * 0.04, hy + s * 0.07, s * 0.025, rgb(120, 160, 220).opacity(0.7))
+        // Budgie throat spots.
+        for dx in [-0.06, -0.02, 0.02, 0.06] {
+            dot(&ctx, cx + CGFloat(dx) * s, hy + s * 0.14, s * 0.014, rgb(44, 44, 50))
+        }
     }
 }

@@ -124,13 +124,17 @@ extension AnimalArt {
                     with: .color(rgb(210, 200, 190)))
         }
         // Body.
-        oval(&ctx, cx, cy, s * 0.50, s * 0.46, body)
+        shadedOval(&ctx, cx, cy, s * 0.50, s * 0.46, body, rgb(226, 220, 210))
         // Wing.
-        oval(&ctx, cx + s * 0.04, cy + s * 0.02, s * 0.26, s * 0.24, rgb(232, 226, 218))
+        oval(&ctx, cx + s * 0.04, cy + s * 0.02, s * 0.26, s * 0.24, rgb(230, 222, 212))
+        ctx.stroke(Path { p in
+            p.move(to: CGPoint(x: cx - s * 0.04, y: cy + s * 0.02))
+            p.addQuadCurve(to: CGPoint(x: cx + s * 0.14, y: cy + s * 0.02), control: CGPoint(x: cx + s * 0.05, y: cy - s * 0.06))
+        }, with: .color(rgb(206, 198, 188)), lineWidth: max(1, s * 0.01)) // wing feather line
 
         // Head.
         let hx = cx + s * 0.16, hy = cy - s * 0.20 + peck
-        oval(&ctx, hx, hy, s * 0.26, s * 0.26, body)
+        shadedOval(&ctx, hx, hy, s * 0.26, s * 0.26, body, rgb(226, 220, 210))
         // Comb.
         for dx in [-0.04, 0.0, 0.04] {
             dot(&ctx, hx + CGFloat(dx) * s, hy - s * 0.14, s * 0.035, comb)
@@ -174,9 +178,19 @@ extension AnimalArt {
             }
         }
 
-        // Abdomen and cephalothorax.
-        oval(&ctx, cx, cy + s * 0.06, s * 0.40, s * 0.34, body)
-        oval(&ctx, cx, cy - s * 0.14, s * 0.30, s * 0.24, fuzz)
+        // Abdomen and cephalothorax (shaded, fuzzy).
+        shadedOval(&ctx, cx, cy + s * 0.06, s * 0.40, s * 0.34, fuzz, body)
+        shadedOval(&ctx, cx, cy - s * 0.14, s * 0.30, s * 0.24, rgb(134, 104, 96), body)
+        // A few fuzz hairs on the abdomen.
+        for a in stride(from: 0.0, to: 360.0, by: 45.0) {
+            let r = a * .pi / 180
+            let bx = cx + CGFloat(cos(r)) * s * 0.18
+            let by = cy + s * 0.06 + CGFloat(sin(r)) * s * 0.15
+            ctx.stroke(Path { p in
+                p.move(to: CGPoint(x: bx, y: by))
+                p.addLine(to: CGPoint(x: bx + CGFloat(cos(r)) * s * 0.03, y: by + CGFloat(sin(r)) * s * 0.03))
+            }, with: .color(fuzz.opacity(0.7)), lineWidth: max(1, s * 0.006))
+        }
 
         // A friendly cluster of small eyes and a soft smile.
         for dx in [-0.06, -0.02, 0.02, 0.06] {
