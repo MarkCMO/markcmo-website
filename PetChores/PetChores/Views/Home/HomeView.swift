@@ -134,13 +134,37 @@ struct HomeView: View {
 // MARK: - Pieces
 
 private struct PetStatusCard: View {
+    @Environment(\.modelContext) private var context
     let instance: PetInstance
     let species: PetSpecies
+
+    private var isAquatic: Bool { Habitat(category: species.category, id: species.id) == .aquarium }
+    private var messy: Bool { (isAquatic ? instance.tankFoulLevel : instance.wasteLevel) >= 0.5 }
+
     var body: some View {
         Card {
             VStack(alignment: .leading, spacing: 12) {
                 PetScene(species: species, mood: instance.mood, waste: instance.wasteLevel)
                     .frame(height: 160)
+
+                if messy {
+                    Button {
+                        withAnimation(.spring) {
+                            if isAquatic { ScenarioActions.freshenTank(instance, context: context) }
+                            else { ScenarioActions.cleanYard(instance, context: context) }
+                        }
+                    } label: {
+                        Label(isAquatic ? "Freshen the tank!" : "Scoop the poop!",
+                              systemImage: isAquatic ? "drop.fill" : "trash.fill")
+                            .frame(maxWidth: .infinity)
+                    }
+                    .buttonStyle(BigButtonStyle())
+                    Text(isAquatic ? "The water is getting dirty. Clean it before the fish gets sick."
+                                   : "The yard needs cleaning before it reaches the neighbor!")
+                        .font(.caption)
+                        .foregroundStyle(Color(red: 0.78, green: 0.35, blue: 0.10))
+                }
+
                 HStack(alignment: .top) {
                     VStack(alignment: .leading, spacing: 4) {
                         Text(instance.nickname).font(.title2.bold())

@@ -10,6 +10,8 @@ struct ParentSettingsView: View {
     @Query private var settingsList: [ParentSettings]
     private var settings: ParentSettings? { settingsList.first }
 
+    @Query(filter: #Predicate<PetInstance> { $0.isActive }) private var activePets: [PetInstance]
+
     @State private var quietStart = Date()
     @State private var quietEnd = Date()
     @State private var loaded = false
@@ -58,6 +60,23 @@ struct ParentSettingsView: View {
                             Text("\(d) days").tag(d)
                         }
                     }
+                }
+
+                Section("Care scenarios") {
+                    Picker("Consequences", selection: binding(\.consequenceIntensityRaw)) {
+                        ForEach(ConsequenceIntensity.allCases) { lvl in
+                            Text(lvl.label).tag(lvl.rawValue)
+                        }
+                    }
+                    Text(settings.consequenceIntensity.subtitle)
+                        .font(.caption).foregroundStyle(.secondary)
+                    Toggle("Pet can be lost for good", isOn: binding(\.permanentLossEnabled))
+                    Toggle("Demo: speed up needs", isOn: binding(\.demoMode))
+                    Button("Make a mess now (demo)") {
+                        for pet in activePets { ScenarioActions.makeMessNow(pet, context: context) }
+                    }
+                    Text("Use the demo controls to see the care scenarios right away, like a messy yard or a fouling tank.")
+                        .font(.caption).foregroundStyle(.secondary)
                 }
 
                 Section("Security") {

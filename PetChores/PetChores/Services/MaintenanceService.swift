@@ -45,6 +45,9 @@ struct MaintenanceService {
             // 3. Settle elapsed days.
             let settled = DataStore.tasks(for: instance.instanceId, context: context)
             scoring.settleElapsedDays(instance: instance, tasks: settled, now: now)
+
+            // 3b. Advance the real-time care needs and apply the strike consequence.
+            advanceNeeds(instance: instance, species: species, settings: settings, now: now)
         }
 
         // 4. Save.
@@ -52,6 +55,46 @@ struct MaintenanceService {
 
         // 5. Reschedule notifications from all pending tasks across active instances.
         rescheduleNotifications(context: context, settings: settings)
+    }
+
+    /// Advance the pet's real-time needs (yard waste, hunger, tank fouling) by the time
+    /// elapsed since the last tick, then apply the strike consequence when a need is
+    /// critical. Demo mode multiplies the elapsed time so it plays out in a minute.
+    func advanceNeeds(instance: PetInstance, species: PetSpecies, settings: ParentSettings, now: Date) {
+        let intensity = settings.consequenceIntensity
+        guard intensity != .off, !instance.isLost else { return }
+
+        let last = instance.lastNeedTickAt ?? instance.startDate
+        var hours = now.timeIntervalSince(last) / 3600.0
+        guard hours > 0 else { return }
+        if settings.demoMode { hours *= 1200.0 } // ~1 real minute fills a need at normal
+
+        let habitat = Habitat(category: species.category, id: species.id)
+        let hasWaste = (habitat == .backyard || habitat == .coop)
+        let isAquatic = (habitat == .aquarium)
+
+        let needs = ConsequenceService.Needs(hunger: instance.hungerLevel,
+                                             waste: instance.wasteLevel,
+                                             tank: instance.tankFoulLevel)
+        let next = ConsequenceService.tick(needs, elapsedHours: hours, intensity: intensity,
+                                           hasWaste: hasWaste, isAquatic: isAquatic)
+        instance.hungerLevel = next.hunger
+        instance.wasteLevel = next.waste
+        instance.tankFoulLevel = next.tank
+        instance.lastNeedTickAt = now
+
+        // A critical, unmet need costs a strike; a good care streak earns one back.
+        let delta = ConsequenceService.dailyStrikeDelta(criticalNeglect: next.anyCritical,
+                                                        careStreakDays: instance.currentStreakDays,
+                                                        intensity: intensity)
+        if delta != 0 {
+            instance.strikes = ConsequenceService.applyStrikeDelta(instance.strikes, delta: delta,
+                                                                   maxStrikes: settings.maxStrikes)
+            if ConsequenceService.outcome(strikes: instance.strikes, maxStrikes: settings.maxStrikes,
+                                          permanentLossEnabled: settings.permanentLossEnabled) == .lost {
+                instance.lostAt = now
+            }
+        }
     }
 
     /// Rebuild the pending notification queue (the nearest 64) from current data.

@@ -32,6 +32,11 @@ final class ParentSettings {
     /// pull back from with good care.
     var permanentLossEnabled: Bool = false
 
+    /// Demo mode hugely speeds up how fast needs build, so the care scenarios (a messy
+    /// yard, a fouling tank) can be seen and played within a minute instead of over days.
+    /// For TestFlight demos only; off by default.
+    var demoMode: Bool = false
+
     var consequenceIntensity: ConsequenceIntensity {
         get { ConsequenceIntensity(rawValue: consequenceIntensityRaw) ?? .gentle }
         set { consequenceIntensityRaw = newValue.rawValue }
