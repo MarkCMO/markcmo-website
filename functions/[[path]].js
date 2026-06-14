@@ -97,6 +97,38 @@ const SPA_INDEX = {
   'admin':    'admin/index',
 };
 
+// ── Legacy URL recovery (301) ─────────────────────────────────────────────────
+// Google still crawls old URL shapes from pre-migration sitemaps:
+//   • directory-style  /fractional-cmo/kansas/manhattan  → fractional-cmo-manhattan-ks
+//   • location/ prefix /location/saas-development         → saas-development
+// When a page 404s, we try to rebuild the canonical flat slug and 301 to it IF
+// that page actually exists in KV. This recovers ~77 GSC "Not found" URLs and
+// any future legacy-shaped links, without redirecting to non-existent pages.
+const STATE_NAME_TO_ABBR = {
+  alabama:'al',alaska:'ak',arizona:'az',arkansas:'ar',california:'ca',colorado:'co',
+  connecticut:'ct',delaware:'de',florida:'fl',georgia:'ga',hawaii:'hi',idaho:'id',
+  illinois:'il',indiana:'in',iowa:'ia',kansas:'ks',kentucky:'ky',louisiana:'la',
+  maine:'me',maryland:'md',massachusetts:'ma',michigan:'mi',minnesota:'mn',
+  mississippi:'ms',missouri:'mo',montana:'mt',nebraska:'ne',nevada:'nv',
+  'new-hampshire':'nh','new-jersey':'nj','new-mexico':'nm','new-york':'ny',
+  'north-carolina':'nc','north-dakota':'nd',ohio:'oh',oklahoma:'ok',oregon:'or',
+  pennsylvania:'pa','rhode-island':'ri','south-carolina':'sc','south-dakota':'sd',
+  tennessee:'tn',texas:'tx',utah:'ut',vermont:'vt',virginia:'va',washington:'wa',
+  'west-virginia':'wv',wisconsin:'wi',wyoming:'wy','district-of-columbia':'dc',
+};
+
+// Returns a canonical flat slug candidate for a legacy-shaped path, or null.
+function legacyCanonical(p) {
+  // location/{slug} → {slug}
+  if (p.startsWith('location/')) return p.slice('location/'.length);
+  // {service}/{state-name}/{city} → {service}-{city}-{abbr}
+  const m = p.match(/^([a-z0-9-]+?)\/([a-z-]+)\/([a-z0-9-]+)$/);
+  if (m && STATE_NAME_TO_ABBR[m[2]]) {
+    return `${m[1]}-${m[3]}-${STATE_NAME_TO_ABBR[m[2]]}`;
+  }
+  return null;
+}
+
 // ── Nav/footer auto-injection ─────────────────────────────────────────────────
 // Pages that should NOT have nav/footer injected (special/admin/utility pages).
 const NO_INJECT = new Set([
@@ -259,6 +291,18 @@ export async function onRequest(context) {
     const topLevel = p.split('/')[0];
     const spaKey   = SPA_INDEX[topLevel];
     if (spaKey) html = await kv.get(spaKey, { type: 'text' });
+  }
+
+  // 4b. Legacy URL recovery: rebuild canonical flat slug from old URL shapes
+  //     (directory-style + location/ prefix) and 301 to it IF it exists.
+  if (html === null) {
+    const canonical = legacyCanonical(p);
+    if (canonical && canonical !== p) {
+      const target = await kv.get(canonical, { type: 'text' });
+      if (target !== null) {
+        return Response.redirect(`https://markcmo.com/${canonical}`, 301);
+      }
+    }
   }
 
   if (html !== null) {
