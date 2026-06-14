@@ -41,6 +41,15 @@ final class ScreenshotTests: XCTestCase {
         // Parent Mode: the grown-up oversight surface (care alerts about the child).
         openParentMode(app)
         snapshot("10-ParentMode")
+
+        // Settings: the "how harsh" real-life-consequences control panel.
+        let settingsRow = app.buttons["Settings"].firstMatch
+        if settingsRow.waitForExistence(timeout: 6) {
+            settingsRow.tap()
+            _ = app.staticTexts["Settings"].waitForExistence(timeout: 6)
+            sleep(1)
+            snapshot("11-Settings")
+        }
     }
 
     /// Enter Parent Mode through the PIN gate (seed PIN is 1234).
