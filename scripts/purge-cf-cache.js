@@ -52,6 +52,15 @@ const URLS_TO_PURGE = [
   'https://markcmo.com/footer.html',
   'https://markcmo.com/nav.html',
   'https://markcmo.com/_headers',
+  // Amzur client engagement docs (served as static assets, must be purged each deploy)
+  'https://markcmo.com/documents/clients/amzur/',
+  'https://markcmo.com/documents/clients/amzur/audit',
+  'https://markcmo.com/documents/clients/amzur/strategy',
+  'https://markcmo.com/documents/clients/amzur/ai-operating-model',
+  'https://markcmo.com/documents/clients/amzur/roadmap',
+  'https://markcmo.com/documents/clients/amzur/scope-of-work',
+  'https://markcmo.com/documents/clients/amzur/timeline',
+  'https://markcmo.com/documents/clients/amzur/proposal',
 ];
 
 function cfFetch(method, path, body) {
