@@ -1,0 +1,393 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>National Growth Roadmap | Amzur Technologies | MarkCMO</title>
+<meta name="description" content="A 3, 6, 9, 12, and 24 month roadmap to make Amzur the most-found and most-cited provider of its services in every US state and city, built on the resources they have today." />
+<meta name="robots" content="noindex, nofollow, noarchive, nosnippet, noimageindex" />
+<meta http-equiv="Cache-Control" content="no-store, no-cache, must-revalidate, private" />
+<link rel="preconnect" href="https://fonts.googleapis.com" crossorigin>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=DM+Mono:wght@400;500&display=swap">
+<style>
+  :root{
+    --navy:#0B2239;--navy-mid:#0F2D4A;--navy-light:#16395E;
+    --blue:#066AAB;--blue-hover:#055A92;--blue-light:#4FBFE4;--blue-pale:#ECF6FC;
+    --green:#22C55E;--green-pale:#ECFDF3;--amber:#F59E0B;--amber-pale:#FFF7ED;--red:#DC2626;--red-pale:#FEF2F2;
+    --white:#FFFFFF;--off-white:#F8FAFC;--light:#F1F5F9;--border:#E5E7EB;
+    --text:#1F2937;--text-mid:#64748B;--text-light:#94A3B8;
+    --shadow-md:0 4px 16px rgba(11,34,57,0.08), 0 8px 32px rgba(11,34,57,0.06);
+  }
+  *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+  body{font-family:'Inter',system-ui,-apple-system,sans-serif;background:var(--off-white);color:var(--text);line-height:1.65;-webkit-font-smoothing:antialiased;}
+  a{color:var(--blue);text-decoration:none;}
+  .doc-nav{position:sticky;top:0;z-index:100;background:var(--white);border-bottom:1px solid var(--border);padding:0.9rem 2rem;display:flex;justify-content:space-between;align-items:center;}
+  .doc-nav-logo{font-weight:800;font-size:1.15rem;letter-spacing:0.04em;color:var(--blue);}
+  .doc-nav-logo span{color:var(--text);}
+  .doc-nav-back{font-family:'DM Mono',monospace;font-size:0.7rem;letter-spacing:0.12em;text-transform:uppercase;color:var(--text-light);}
+  .doc-nav-back a{color:var(--blue);font-weight:600;}
+  .cover-hero{background:linear-gradient(135deg,var(--navy) 0%,var(--navy-mid) 50%,var(--navy-light) 100%);color:#fff;padding:3.5rem 2rem;position:relative;overflow:hidden;box-shadow:0 24px 60px -16px rgba(11,34,57,0.35);}
+  .cover-hero::before{content:'';position:absolute;inset:0;background:radial-gradient(circle at 85% 15%, rgba(79,191,228,0.20) 0%, transparent 52%);pointer-events:none;}
+  .cover-hero-inner{max-width:920px;margin:0 auto;position:relative;z-index:1;}
+  .cover-logo{height:30px;width:auto;margin-bottom:1.4rem;display:block;}
+  .doc-id-tag{font-family:'DM Mono',monospace;font-size:0.72rem;letter-spacing:0.2em;text-transform:uppercase;color:var(--blue-light);margin-bottom:0.9rem;}
+  .cover-hero h1{font-size:clamp(2rem,4.4vw,2.9rem);font-weight:800;letter-spacing:-0.02em;line-height:1.08;margin-bottom:1rem;}
+  .cover-hero h1 em{color:var(--blue-light);font-style:normal;}
+  .cover-hero-sub{font-size:1.04rem;color:rgba(248,250,252,0.80);max-width:660px;line-height:1.6;}
+  .doc-body{max-width:920px;margin:0 auto;padding:3.5rem 2rem;}
+  .section-eyebrow{font-family:'DM Mono',monospace;font-size:0.7rem;letter-spacing:0.18em;text-transform:uppercase;color:var(--blue);margin-bottom:0.85rem;font-weight:500;display:inline-block;padding:0.35rem 0.85rem;background:var(--blue-pale);border-radius:6px;}
+  h2{font-size:clamp(1.5rem,3vw,2rem);font-weight:800;letter-spacing:-0.02em;color:var(--navy);margin-bottom:1.1rem;line-height:1.15;}
+  h2 span{color:var(--blue);}
+  p{margin-bottom:1rem;font-size:0.99rem;}
+  strong{color:var(--navy);font-weight:700;}
+
+  .stats{display:grid;grid-template-columns:repeat(4,1fr);gap:0.8rem;margin:1.5rem 0;}
+  @media(max-width:760px){.stats{grid-template-columns:1fr 1fr;}}
+  .stat{background:var(--white);border:1px solid var(--border);border-radius:12px;padding:1.1rem;box-shadow:var(--shadow-md);text-align:center;}
+  .stat .n{font-family:'Inter',sans-serif;font-weight:800;font-size:1.5rem;color:var(--blue);letter-spacing:-0.01em;line-height:1;}
+  .stat .l{font-size:0.78rem;color:var(--text-mid);margin-top:0.45rem;line-height:1.35;}
+
+  .gap{background:var(--red-pale);border:1px solid rgba(220,38,38,0.25);border-left:4px solid var(--red);border-radius:0 14px 14px 0;padding:1.5rem 1.7rem;margin:1.75rem 0;}
+  .gap .lbl{font-family:'DM Mono',monospace;font-size:0.66rem;letter-spacing:0.16em;text-transform:uppercase;color:var(--red);font-weight:600;margin-bottom:0.5rem;}
+  .gap h3{font-weight:800;font-size:1.25rem;color:var(--navy);margin-bottom:0.6rem;letter-spacing:-0.01em;}
+  .gap p{font-size:0.95rem;margin-bottom:0;}
+
+  .northstar{background:var(--navy);color:#fff;border-radius:18px;padding:2.2rem;margin:1.75rem 0;position:relative;overflow:hidden;box-shadow:var(--shadow-md);}
+  .northstar::before{content:'';position:absolute;inset:0;background:radial-gradient(circle at 88% 20%,rgba(79,191,228,0.22),transparent 58%);}
+  .northstar > *{position:relative;z-index:1;}
+  .northstar .lbl{font-family:'DM Mono',monospace;font-size:0.66rem;letter-spacing:0.18em;text-transform:uppercase;color:var(--blue-light);margin-bottom:0.7rem;}
+  .northstar h3{font-weight:800;font-size:1.5rem;color:#fff;margin-bottom:0.8rem;letter-spacing:-0.01em;line-height:1.2;}
+  .northstar p{color:rgba(255,255,255,0.85);font-size:1rem;margin-bottom:0;}
+  .northstar strong{color:#fff;}
+
+  .mathbox{display:grid;grid-template-columns:repeat(4,auto);gap:0.6rem;align-items:center;margin:1.25rem 0;justify-content:start;}
+  @media(max-width:600px){.mathbox{grid-template-columns:1fr;justify-content:stretch;}}
+  .mb{background:var(--white);border:1px solid var(--border);border-radius:12px;padding:0.9rem 1.1rem;box-shadow:var(--shadow-md);text-align:center;}
+  .mb .mbn{font-weight:800;font-size:1.2rem;color:var(--blue);}
+  .mb .mbl{font-size:0.74rem;color:var(--text-mid);margin-top:0.2rem;}
+  .mbx{font-weight:800;color:var(--text-light);text-align:center;font-size:1.1rem;}
+  @media(max-width:600px){.mbx{display:none;}}
+
+  .rphase{background:var(--white);border:1px solid var(--border);border-radius:18px;margin:1.5rem 0;box-shadow:var(--shadow-md);overflow:hidden;}
+  .rphase-head{padding:1.4rem 1.7rem;background:linear-gradient(135deg,var(--navy),var(--navy-mid));color:#fff;position:relative;overflow:hidden;}
+  .rphase-head::before{content:'';position:absolute;inset:0;background:radial-gradient(circle at 92% 30%,rgba(79,191,228,0.20),transparent 60%);}
+  .rphase-head > *{position:relative;z-index:1;}
+  .rphase-when{font-family:'DM Mono',monospace;font-size:0.66rem;letter-spacing:0.16em;text-transform:uppercase;color:var(--blue-light);margin-bottom:0.4rem;}
+  .rphase-head h3{font-weight:800;font-size:1.3rem;color:#fff;letter-spacing:-0.01em;margin-bottom:0.3rem;}
+  .rphase-head .obj{font-size:0.92rem;color:rgba(255,255,255,0.82);}
+  .rphase-body{padding:1.4rem 1.7rem;}
+  .rphase-body h4{font-family:'DM Mono',monospace;font-size:0.64rem;letter-spacing:0.14em;text-transform:uppercase;color:var(--blue);margin:0 0 0.5rem;font-weight:500;}
+  .moves{list-style:none;margin:0 0 1.1rem;}
+  .moves li{font-size:0.93rem;color:var(--text);padding:0.35rem 0 0.35rem 1.5rem;position:relative;line-height:1.55;}
+  .moves li::before{content:'';position:absolute;left:2px;top:11px;width:6px;height:11px;border:solid var(--blue);border-width:0 2px 2px 0;transform:rotate(45deg);}
+  .rphase-foot{display:grid;grid-template-columns:1fr 1fr;gap:1rem;border-top:1px solid var(--light);padding-top:1.1rem;}
+  @media(max-width:560px){.rphase-foot{grid-template-columns:1fr;}}
+  .ff .ff-l{font-family:'DM Mono',monospace;font-size:0.6rem;letter-spacing:0.12em;text-transform:uppercase;color:var(--text-light);margin-bottom:0.25rem;}
+  .ff .ff-v{font-size:0.9rem;color:var(--navy);font-weight:600;line-height:1.4;}
+  .ff.metric .ff-v{color:#15803D;}
+  .coverbadge{display:inline-block;background:var(--green-pale);color:#15803D;font-family:'DM Mono',monospace;font-size:0.6rem;letter-spacing:0.1em;text-transform:uppercase;padding:0.3rem 0.7rem;border-radius:6px;margin-top:0.6rem;font-weight:600;}
+
+  .callout{background:var(--blue-pale);border:1px solid rgba(6,106,171,0.18);border-radius:14px;padding:1.6rem 1.8rem;margin:2rem 0;}
+  .callout .lbl{font-family:'DM Mono',monospace;font-size:0.66rem;letter-spacing:0.18em;text-transform:uppercase;color:var(--blue);font-weight:500;margin-bottom:0.5rem;}
+  .callout h3{font-weight:700;font-size:1.2rem;color:var(--navy);margin-bottom:0.6rem;letter-spacing:-0.01em;}
+  .callout p{font-size:0.95rem;margin-bottom:0.6rem;}
+  .callout p:last-child{margin-bottom:0;}
+
+  .cta-strip{background:linear-gradient(135deg,var(--navy) 0%,var(--navy-mid) 100%);color:#fff;border-radius:18px;padding:2.4rem;margin:3rem 0 1rem;text-align:center;position:relative;overflow:hidden;box-shadow:var(--shadow-md);}
+  .cta-strip::before{content:'';position:absolute;inset:0;background:radial-gradient(circle at 80% 30%,rgba(79,191,228,0.22) 0%,transparent 60%);}
+  .cta-strip > *{position:relative;z-index:1;}
+  .cta-strip h3{font-weight:800;font-size:1.5rem;color:#fff;margin-bottom:0.6rem;letter-spacing:-0.01em;}
+  .cta-strip p{color:rgba(255,255,255,0.80);max-width:560px;margin:0 auto 1.4rem;font-size:0.96rem;}
+  .cta-primary{display:inline-flex;align-items:center;gap:0.5rem;padding:0.95rem 1.9rem;background:var(--blue);color:#fff;font-weight:700;font-size:0.95rem;border-radius:10px;transition:all 0.18s;box-shadow:0 4px 14px rgba(6,106,171,0.3);}
+  .cta-primary:hover{background:var(--blue-hover);transform:translateY(-1px);color:#fff;}
+  .cta-ghost{display:inline-flex;align-items:center;gap:0.5rem;padding:0.95rem 1.9rem;background:transparent;color:#fff;border:1.5px solid rgba(79,191,228,0.45);font-weight:600;font-size:0.95rem;border-radius:10px;margin-left:0.5rem;}
+
+  footer.doc-footer{background:var(--navy);color:rgba(255,255,255,0.6);padding:2.5rem 2rem;border-top:3px solid var(--blue);}
+  .doc-footer-inner{max-width:920px;margin:0 auto;display:grid;grid-template-columns:1fr auto;gap:2rem;align-items:center;}
+  @media(max-width:600px){.doc-footer-inner{grid-template-columns:1fr;}}
+  .doc-footer-logo{font-weight:800;font-size:1.25rem;letter-spacing:0.03em;color:#fff;}
+  .doc-footer-logo span{color:var(--blue-light);}
+  .doc-footer p{font-size:0.82rem;line-height:1.6;margin:0.4rem 0 0;color:rgba(255,255,255,0.55);}
+  .doc-footer-meta{font-family:'DM Mono',monospace;font-size:0.68rem;letter-spacing:0.12em;text-transform:uppercase;color:rgba(255,255,255,0.4);text-align:right;}
+  @media(max-width:600px){.doc-footer-meta{text-align:left;}}
+</style>
+</head>
+<body>
+<!-- ACCESS GATE. Code: amzur2026 -->
+<div id="cdb-gate" role="dialog" aria-modal="true" aria-label="Private document access">
+  <div class="cdb-gate-card">
+    <div class="cdb-gate-eyebrow">Confidential Document</div>
+    <h1>Private Access</h1>
+    <p>This document is confidential and prepared for the Amzur Technologies leadership team. Please enter your access code to continue.</p>
+    <form id="cdb-gate-form" autocomplete="off">
+      <input id="cdb-gate-code" type="password" placeholder="Access code" aria-label="Access code" autocomplete="off" spellcheck="false">
+      <button type="submit">Unlock Document</button>
+      <div id="cdb-gate-err" class="cdb-gate-err" hidden>That code is not right. Please try again.</div>
+    </form>
+    <div class="cdb-gate-foot">Need access? Contact Mark at mark@markcmo.com</div>
+  </div>
+</div>
+<style>
+  body:not(.cdb-unlocked) { overflow: hidden !important; }
+  body:not(.cdb-unlocked) > *:not(#cdb-gate):not(script):not(style) { display: none !important; }
+  body.cdb-unlocked #cdb-gate { display: none !important; }
+  #cdb-gate { position: fixed; inset: 0; z-index: 2147483647; display: flex; align-items: center; justify-content: center; padding: 24px; background: #0B2239; background-image: radial-gradient(circle at 80% 8%, rgba(6,106,171,0.35), transparent 55%); font-family: 'Inter', system-ui, sans-serif; }
+  #cdb-gate .cdb-gate-card { width: 100%; max-width: 430px; background: #FFFFFF; border: 1px solid #E5E7EB; border-radius: 16px; padding: 40px 34px; text-align: center; box-shadow: 0 30px 80px rgba(0,0,0,0.45); }
+  #cdb-gate .cdb-gate-eyebrow { font-family: 'DM Mono', monospace; font-size: 10px; letter-spacing: 4px; text-transform: uppercase; color: #066AAB; }
+  #cdb-gate h1 { font-family: 'Inter', sans-serif; font-weight: 800; letter-spacing: -0.01em; font-size: 28px; color: #0B2239; margin: 16px 0 8px; }
+  #cdb-gate p { font-size: 14px; color: #5b6470; line-height: 1.6; margin: 0 0 22px; }
+  #cdb-gate-form { display: flex; flex-direction: column; gap: 12px; }
+  #cdb-gate-code { width: 100%; padding: 13px 16px; border: 1px solid #cbd5e1; border-radius: 10px; font-size: 16px; font-family: inherit; background: #fff; color: #1F2937; text-align: center; letter-spacing: 2px; }
+  #cdb-gate-code:focus { outline: none; border-color: #066AAB; box-shadow: 0 0 0 3px rgba(6,106,171,0.18); }
+  #cdb-gate-form button { padding: 13px 16px; border: none; border-radius: 10px; background: #066AAB; color: #fff; font-size: 15px; font-weight: 700; font-family: inherit; cursor: pointer; }
+  #cdb-gate-form button:hover { background: #055A92; }
+  #cdb-gate .cdb-gate-err { color: #b3261e; font-size: 13px; }
+  #cdb-gate .cdb-gate-foot { margin-top: 22px; font-size: 12px; color: #8F8F8F; }
+  #cdb-gate .cdb-shake { animation: cdbShake .4s; }
+  @keyframes cdbShake { 0%,100%{transform:translateX(0)} 20%,60%{transform:translateX(-7px)} 40%,80%{transform:translateX(7px)} }
+</style>
+<script>
+(function(){
+  var HASH='24c70c56999f4b29707be3c9dc36d4f49791e2b583133be3bb9ada3f8c331c54';
+  var KEY='amzur_doc_access';
+  function unlock(){ try{ document.body.classList.add('cdb-unlocked'); }catch(e){} var g=document.getElementById('cdb-gate'); if(g) g.parentNode && g.parentNode.removeChild(g); }
+  try { if (sessionStorage.getItem(KEY)==='1') { if(document.body) unlock(); else document.addEventListener('DOMContentLoaded', unlock); return; } } catch(e){}
+  async function sha256(s){ try{ var b=new TextEncoder().encode(s); var h=await crypto.subtle.digest('SHA-256', b); return Array.from(new Uint8Array(h)).map(function(x){return x.toString(16).padStart(2,'0');}).join(''); }catch(e){ return null; } }
+  document.addEventListener('DOMContentLoaded', function(){
+    var form=document.getElementById('cdb-gate-form'); var input=document.getElementById('cdb-gate-code');
+    var err=document.getElementById('cdb-gate-err'); var card=document.querySelector('#cdb-gate .cdb-gate-card');
+    if(input) input.focus(); if(!form) return;
+    form.addEventListener('submit', async function(e){
+      e.preventDefault();
+      var hashed=await sha256((input.value||'').toLowerCase().trim());
+      if(hashed===HASH){ try{ sessionStorage.setItem(KEY,'1'); }catch(e){} unlock(); }
+      else { if(err) err.hidden=false; if(card){ card.classList.remove('cdb-shake'); void card.offsetWidth; card.classList.add('cdb-shake'); } input.value=''; input.focus(); }
+    });
+  });
+})();
+</script>
+<!-- /ACCESS GATE -->
+
+<nav class="doc-nav">
+  <div class="doc-nav-logo">MARK<span>CMO</span></div>
+  <div class="doc-nav-back">Doc AMZ-RMP-001 &middot; <a href="./">Back to package</a></div>
+</nav>
+
+<header class="cover-hero">
+  <div class="cover-hero-inner">
+    <img class="cover-logo" src="https://amzur.com/wp-content/uploads/2024/08/Amzur_white_logo.png" alt="Amzur Technologies" />
+    <div class="doc-id-tag">AMZ-RMP-001 &middot; National Growth Roadmap</div>
+    <h1>Found and trusted in every US city. <em>The 24-month plan.</em></h1>
+    <p class="cover-hero-sub">A 3, 6, 9, 12, and 24 month roadmap to make Amzur the most-found, most-cited, and most-trusted provider of its services in every state and city in the country, built on the team, tools, and budget you have today. Grounded in the real numbers you shared, and honest about what those resources can and cannot do.</p>
+  </div>
+</header>
+
+<main class="doc-body">
+
+  <section style="margin-bottom:1.5rem;">
+    <div class="section-eyebrow">Where You Are Today</div>
+    <h2>The Starting Line, <span>In Your Own Numbers</span></h2>
+    <p>This is the baseline from your discovery. Every target in the roadmap is measured against it, and it sets the order of operations. You do not have a coverage problem yet, you have a conversion-and-follow-through problem, and that has to be fixed before coverage is worth scaling.</p>
+    <div class="stats">
+      <div class="stat"><div class="n">4 to 5</div><div class="l">Qualified leads per month today (goal: 15 to 20)</div></div>
+      <div class="stat"><div class="n">1%</div><div class="l">Lead-to-close win rate (40% lead, 10% meeting, 7% opp)</div></div>
+      <div class="stat"><div class="n">$50 to $200</div><div class="l">Google Ads CPC on a $1,000 to $1,500 monthly spend</div></div>
+      <div class="stat"><div class="n">64% / 14%</div><div class="l">Leads from paid vs organic and SEO</div></div>
+    </div>
+    <div class="stats">
+      <div class="stat"><div class="n">75%</div><div class="l">Revenue from Staffing (lowest margin, the cash base)</div></div>
+      <div class="stat"><div class="n">14%</div><div class="l">Extended Teams, the high-stickiness, recurring model</div></div>
+      <div class="stat"><div class="n">8%</div><div class="l">NetSuite + Custom Software, the growth priorities</div></div>
+      <div class="stat"><div class="n">9</div><div class="l">Marketing team members, plus a full AI toolkit in use</div></div>
+    </div>
+
+    <div class="gap">
+      <div class="lbl">The Finding That Reorders Everything</div>
+      <h3>You have no sales team and no sales follow-up</h3>
+      <p>You named it yourself under what has not worked: no sales follow-up, no sales team. That is why the funnel collapses from 10% meetings to a 1% close. Until that is fixed, spending more to generate leads just fills a leaking bucket faster. So the roadmap fixes the follow-through motion in the first 90 days, before it pours national volume into the top. Coverage without conversion is vanity. We build conversion first.</p>
+    </div>
+  </section>
+
+  <section style="margin-bottom:1.5rem;">
+    <div class="section-eyebrow">The North Star</div>
+    <h2>The Destination, <span>Stated Honestly</span></h2>
+    <div class="northstar">
+      <div class="lbl">24-Month Goal</div>
+      <h3>When a US buyer searches or asks an AI for your services in their city, Amzur is the answer.</h3>
+      <p>Across Solution Engineering, NetSuite, Cloud, and Extended Teams, in all 50 states and the cities that matter, Amzur becomes the provider that gets found, gets cited, and gets trusted, proven with real case work like the 10-year Khameleon partnership, never with inflated claims. <strong>An honest word on the word "best":</strong> you do not buy national dominance at a $1,500 monthly ad budget, and no one becomes number one everywhere in 24 months against firms like BairesDev and RSM. You earn category leadership by being the most useful and most present, built on programmatic content, AI-search visibility, and targeted outbound, the channels that scale with your team and tools rather than your ad spend.</p>
+    </div>
+  </section>
+
+  <section style="margin-bottom:1.5rem;">
+    <div class="section-eyebrow">The Mechanism</div>
+    <h2>How You Cover <span>Every State And City</span></h2>
+    <p>Paid ads at $1,500 a month cannot reach every city, and at $50 to $200 a click they should not try. National coverage is won organically, with a programmatic engine your 9-person team and AI toolkit can actually produce at scale: a genuinely useful page for each service in each market, engineered to rank and to be cited by AI answer engines, backed by outbound and ABM for the high-value deals search cannot capture.</p>
+    <div class="mathbox">
+      <div class="mb"><div class="mbn">50</div><div class="mbl">states</div></div>
+      <div class="mbx">+</div>
+      <div class="mb"><div class="mbn">300+</div><div class="mbl">priority cities</div></div>
+      <div class="mbx">&times;</div>
+      <div class="mb"><div class="mbn">4</div><div class="mbl">service lines</div></div>
+      <div class="mbx">=</div>
+      <div class="mb"><div class="mbn">1000s</div><div class="mbl">targeted, useful pages</div></div>
+    </div>
+    <p style="font-size:0.94rem;color:var(--text-mid);">Built with AI assistance and human review so the pages are real and on-brand, not thin spam, in keeping with your principle against inflated claims. This is the same kind of programmatic location engine I have built before, and it is exactly what your AI-first team is equipped to run.</p>
+  </section>
+
+  <section>
+    <div class="section-eyebrow">The Roadmap</div>
+    <h2>Five Horizons, <span>One Compounding Engine</span></h2>
+
+    <!-- 0-3 -->
+    <div class="rphase">
+      <div class="rphase-head">
+        <div class="rphase-when">Months 0 to 3 &middot; Foundation</div>
+        <h3>Fix the bucket before filling it</h3>
+        <div class="obj">Fix conversion and follow-through, set strategy and positioning, repair the technical and SEO floor, and prove the coverage engine in a pilot.</div>
+      </div>
+      <div class="rphase-body">
+        <h4>Key moves</h4>
+        <ul class="moves">
+          <li>Stand up the missing sales follow-up motion: SLAs, sequences, and an SDR-style cadence in RevUp and Freshworks so no qualified lead goes dark</li>
+          <li>Lock the ICP ($10M to $200M B2B in Retail, Healthcare, Manufacturing, IT/SaaS) and the AI-first positioning around real, provable strengths</li>
+          <li>Fix the technical floor and reverse the NetSuite URL/SEO damage from the restructure (per the Audit)</li>
+          <li>Instrument the full funnel in GA, Clarity, and the CRMs so every later number is measured honestly</li>
+          <li>Launch the programmatic pilot: top 10 to 15 metros for Solution Engineering and NetSuite, and submit the GEO directory placements</li>
+        </ul>
+        <div class="rphase-foot">
+          <div class="ff metric"><div class="ff-l">Target</div><div class="ff-v">15 to 20 qualified leads/mo and a working follow-up motion (no more lead leakage)</div></div>
+          <div class="ff"><div class="ff-l">Owner / resources</div><div class="ff-v">Mark sets strategy; the 9-person team plus AI tools execute; sales motion built with leadership</div></div>
+        </div>
+        <span class="coverbadge">Coverage: 10 to 15 metros, 2 services</span>
+      </div>
+    </div>
+
+    <!-- 3-6 -->
+    <div class="rphase">
+      <div class="rphase-head">
+        <div class="rphase-when">Months 3 to 6 &middot; Beachhead</div>
+        <h3>Win the priority services in the top markets</h3>
+        <div class="obj">Scale the proven pilot across the top US metros for the two growth services, and turn on ABM and outbound for the high-value deals.</div>
+      </div>
+      <div class="rphase-body">
+        <h4>Key moves</h4>
+        <ul class="moves">
+          <li>Expand programmatic location pages to the top 50 to 75 US metros for Solution Engineering and NetSuite, on the standardized, AI-assisted page pattern</li>
+          <li>Launch ABM against named ICP accounts (LinkedIn Sales Navigator plus outbound on amzurtech.com and amzurconsulting.com), aimed at the Extended Teams and larger Solution Engineering deals</li>
+          <li>Rebuild outbound on real deliverability and tighter Apollo lists, lifting reply rate off the current 1 to 2%</li>
+          <li>Fix or formally kill the dead channels (content syndication, untargeted email), and reallocate that effort to what converts</li>
+          <li>Stand up the case-study flywheel: Khameleon, Ashley Stewart, iTPM, IFB, the Public Health agency, as proof assets, not just logos</li>
+        </ul>
+        <div class="rphase-foot">
+          <div class="ff metric"><div class="ff-l">Target</div><div class="ff-v">Qualified leads holding 20+/mo with rising quality; first pipeline attributable to programmatic and ABM</div></div>
+          <div class="ff"><div class="ff-l">Owner / resources</div><div class="ff-v">Team runs production to brief; Mark owns channel strategy, budget, and the double-down calls</div></div>
+        </div>
+        <span class="coverbadge">Coverage: top 50 to 75 metros, 2 services</span>
+      </div>
+    </div>
+
+    <!-- 6-9 -->
+    <div class="rphase">
+      <div class="rphase-head">
+        <div class="rphase-when">Months 6 to 9 &middot; Expansion</div>
+        <h3>All four services, every state</h3>
+        <div class="obj">Extend coverage to all four service lines and all 50 states, and deepen AI-search citation so Amzur appears in the answer, not just the results.</div>
+      </div>
+      <div class="rphase-body">
+        <h4>Key moves</h4>
+        <ul class="moves">
+          <li>Roll the location engine out to all four service lines and across all 50 states plus secondary cities</li>
+          <li>Deepen GEO: get cited in AI answers for service-plus-city queries through directories, listicles, reviews, and structured, extractable content</li>
+          <li>Build vertical hubs for the four ICP industries (Retail, Healthcare, Manufacturing, IT/SaaS) with industry proof and language</li>
+          <li>Pursue the AI-platform and Oracle/NetSuite partnerships you are already chasing, as credibility anchors</li>
+          <li>Tighten marketing-to-sales handoff with scoring and routing so the higher volume still converts</li>
+        </ul>
+        <div class="rphase-foot">
+          <div class="ff metric"><div class="ff-l">Target</div><div class="ff-v">Organic and AI-sourced share of leads rising toward parity with paid; cost per qualified lead falling</div></div>
+          <div class="ff"><div class="ff-l">Owner / resources</div><div class="ff-v">AI-augmented team at full production; Mark on strategy, partnerships, and attribution</div></div>
+        </div>
+        <span class="coverbadge">Coverage: 50 states, all 4 services</span>
+      </div>
+    </div>
+
+    <!-- 9-12 -->
+    <div class="rphase">
+      <div class="rphase-head">
+        <div class="rphase-when">Months 9 to 12 &middot; Coverage</div>
+        <h3>National presence, measurable pipeline</h3>
+        <div class="obj">Complete national coverage, hit the trusted-partner positioning goal, and run a measurable, predictable pipeline.</div>
+      </div>
+      <div class="rphase-body">
+        <h4>Key moves</h4>
+        <ul class="moves">
+          <li>Full national coverage of state and major-city pages across all four service lines, continuously refreshed</li>
+          <li>The AI-first, trusted-IT-partner narrative consistent across every page and channel, the positioning goal from your brief</li>
+          <li>Predictable demand engine: organic plus AI plus ABM plus outbound, reported monthly on pipeline and conversion quality, not vanity volume</li>
+          <li>The India team running the AI-augmented marketing function with reduced dependence on outside direction</li>
+        </ul>
+        <div class="rphase-foot">
+          <div class="ff metric"><div class="ff-l">Target</div><div class="ff-v">A functioning, measurable pipeline (your 12-month brief goal); reduced reliance on high-CPC paid</div></div>
+          <div class="ff"><div class="ff-l">Owner / resources</div><div class="ff-v">Self-running team on the engine; Mark on strategy, optimization, and the next horizon</div></div>
+        </div>
+        <span class="coverbadge">Coverage: national, all 4 services</span>
+      </div>
+    </div>
+
+    <!-- 12-24 -->
+    <div class="rphase">
+      <div class="rphase-head">
+        <div class="rphase-when">Months 12 to 24 &middot; Category Leadership</div>
+        <h3>The default answer, and a moat</h3>
+        <div class="obj">Move from present everywhere to preferred, build defensible advantages, and own the verticals where Amzur genuinely wins.</div>
+      </div>
+      <div class="rphase-body">
+        <h4>Key moves</h4>
+        <ul class="moves">
+          <li>Extend to long-tail cities and become the cited default for service-plus-city queries in the markets that convert</li>
+          <li>Vertical dominance: be the recognized AI-first modernization and NetSuite partner in Retail, Healthcare, Manufacturing, and IT/SaaS</li>
+          <li>Build a moat: proprietary data and benchmarks, original research, and a thought-leadership engine competitors cannot easily copy</li>
+          <li>Productize the Extended Teams story (the Khameleon-style 38% cost reduction outcome) into a repeatable, marketed offer that grows the high-margin recurring line</li>
+          <li>Compounding flywheel: every win becomes proof, every proof feeds content and AI citations, lowering cost and raising trust</li>
+        </ul>
+        <div class="rphase-foot">
+          <div class="ff metric"><div class="ff-l">Target</div><div class="ff-v">Category leadership in the chosen verticals; recurring Extended-Teams revenue growing as a share of mix</div></div>
+          <div class="ff"><div class="ff-l">Owner / resources</div><div class="ff-v">Mark as fractional CMO on strategy and moat; mature AI-augmented team running the machine</div></div>
+        </div>
+        <span class="coverbadge">Coverage: national + vertical category leadership</span>
+      </div>
+    </div>
+  </section>
+
+  <div class="callout">
+    <div class="lbl">The Honest Caveat</div>
+    <h3>This is the path, not a guarantee</h3>
+    <p>Rankings and AI citations compound over months, and they move at Google and the model-makers' pace, not ours. The 24-month destination is realistic with consistent execution and the sales motion fixed early. What I will not do is promise number-one-everywhere on a timeline no one can honestly hold, that is the inflated claim your brief warned against. The roadmap front-loads the fast, provable wins (conversion, technical, pilot coverage, AI placements) so you see real movement inside the first two quarters while the national engine compounds underneath.</p>
+  </div>
+
+  <div class="cta-strip">
+    <h3>The first 90 days of this roadmap is the engagement</h3>
+    <p>The scope and proposal lay out exactly how the Foundation phase gets built and what it takes to start.</p>
+    <a href="scope-of-work" class="cta-primary">Read the Scope</a>
+    <a href="proposal" class="cta-ghost">See the Proposal</a>
+  </div>
+
+</main>
+
+<footer class="doc-footer">
+  <div class="doc-footer-inner">
+    <div>
+      <div class="doc-footer-logo">MARK<span>CMO</span></div>
+      <p>Prepared by Mark Gabrielli &middot; markcmo.com &middot; mark@markcmo.com</p>
+      <p style="margin-top:0.2rem;">National Growth Roadmap for Amzur Technologies. Built on the resources and numbers you shared.</p>
+    </div>
+    <div class="doc-footer-meta">
+      Doc AMZ-RMP-001 &middot; v1.0<br/>
+      Confidential &middot; Do Not Distribute
+    </div>
+  </div>
+</footer>
+
+<script>(function(){try{var k='mc_jsid';var s=sessionStorage.getItem(k)||('s_'+Math.random().toString(36).slice(2)+Date.now().toString(36));sessionStorage.setItem(k,s);fetch('/.netlify/functions/track',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({t:'view',client:'amzur',page:'roadmap',session_id:s,url:location.pathname,title:document.title}),keepalive:true}).catch(function(){});}catch(e){}})();</script>
+</body>
+</html>
