@@ -22,11 +22,14 @@
   *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
   body{font-family:'Inter',system-ui,-apple-system,sans-serif;background:var(--off-white);color:var(--text);line-height:1.65;-webkit-font-smoothing:antialiased;}
   a{color:var(--blue);text-decoration:none;}
-  .doc-nav{position:sticky;top:0;z-index:100;background:var(--white);border-bottom:1px solid var(--border);padding:0.9rem 2rem;display:flex;justify-content:space-between;align-items:center;}
-  .doc-nav-logo{font-weight:800;font-size:1.15rem;letter-spacing:0.04em;color:var(--blue);}
-  .doc-nav-logo span{color:var(--text);}
-  .doc-nav-back{font-family:'Inter',sans-serif;font-size:0.7rem;letter-spacing:0.12em;text-transform:uppercase;color:var(--text-light);}
-  .doc-nav-back a{color:var(--blue);font-weight:600;}
+  .doc-nav{position:sticky;top:0;z-index:100;background:var(--navy);padding:0.85rem 2rem;display:flex;justify-content:space-between;align-items:center;gap:1rem;}
+  .doc-nav-logo-img{height:26px;width:auto;display:block;}
+  .doc-nav-right{display:flex;align-items:center;gap:1.25rem;}
+  .doc-nav-back{font-family:'Inter',sans-serif;font-size:0.7rem;letter-spacing:0.12em;text-transform:uppercase;color:rgba(255,255,255,0.6);}
+  .doc-nav-back a{color:var(--blue-light);font-weight:600;}
+  .doc-nav-cta{display:inline-flex;align-items:center;padding:0.65rem 1.3rem;border-radius:100px;background:var(--blue);color:#fff;font-weight:600;font-size:0.85rem;border:1px solid transparent;transition:all .18s;text-decoration:none;white-space:nowrap;}
+  .doc-nav-cta:hover{background:#fff;color:var(--blue-light);border-color:#fff;}
+  @media(max-width:640px){.doc-nav-back{display:none;}}
   .cover-hero{background:linear-gradient(135deg,var(--navy) 0%,var(--navy-mid) 50%,var(--navy-light) 100%);color:var(--white);padding:3.5rem 2rem;position:relative;overflow:hidden;box-shadow:0 24px 60px -16px rgba(13,13,18,0.35);}
   .cover-hero::before{content:'';position:absolute;inset:0;background:radial-gradient(circle at 85% 15%, rgba(194,99,243,0.20) 0%, transparent 52%);pointer-events:none;}
   .cover-hero-inner{max-width:920px;margin:0 auto;position:relative;z-index:1;}
@@ -150,8 +153,11 @@
 <!-- /access gate -->
 
 <nav class="doc-nav">
-  <div class="doc-nav-logo">MARK<span>CMO</span></div>
-  <div class="doc-nav-back">Doc AMZ-SOW-001 &middot; <a href="./">Back to package</a></div>
+  <img class="doc-nav-logo-img" src="https://amzur.com/wp-content/uploads/2024/08/Amzur_white_logo.png" alt="Amzur Technologies" />
+  <div class="doc-nav-right">
+    <div class="doc-nav-back">Doc AMZ-SOW-001 &middot; <a href="./">Back to package</a></div>
+    <a href="https://markcmo.com/book" class="doc-nav-cta">Schedule a Consultation</a>
+  </div>
 </nav>
 
 <header class="cover-hero">
@@ -184,7 +190,7 @@
         <div class="wi-ck"></div>
         <div class="wi-txt">
           <h4>GTM strategy, ICP, and AI-first positioning</h4>
-          <p>Define the ideal customer profile for the US mid-market, sharpen the positioning around your real, provable AI-first identity, and set the repeatable go-to-market strategy. This is the strategy layer your brief said has never existed, and everything else hangs off it.</p>
+          <p>Establishes the US-market strategy, ideal customer profile, and AI-first positioning that the entire engine is built on.</p>
           <span class="maps">Your ask 1: GTM strategy &amp; positioning</span>
         </div>
       </div>
@@ -192,7 +198,7 @@
         <div class="wi-ck"></div>
         <div class="wi-txt">
           <h4>CDN and Core Web Vitals remediation</h4>
-          <p>Cloudflare in front of the site, edge caching and Brotli on, render path cleaned up, CSS and JavaScript consolidated and deferred, unused Elementor add-ons removed.</p>
+          <p>Gets the site fast and stable so it stops bleeding rankings and conversions to slow load times.</p>
           <span class="maps">Maps to Finding 1 (Critical)</span>
         </div>
       </div>
@@ -200,7 +206,7 @@
         <div class="wi-ck"></div>
         <div class="wi-txt">
           <h4>Homepage and on-page signal fix</h4>
-          <p>Single keyword-driven H1, corrected heading hierarchy, title and meta alignment on the priority pages, slogan demoted to styled design.</p>
+          <p>Aligns the highest-value pages with the terms you want to win so they finally signal correctly to search.</p>
           <span class="maps">Maps to Finding 2 (High)</span>
         </div>
       </div>
@@ -208,7 +214,7 @@
         <div class="wi-ck"></div>
         <div class="wi-txt">
           <h4>Service-page standardization</h4>
-          <p>Roll the winning NetSuite-page pattern (depth, schema, FAQ, clean structure) across the other money pages, then wire internal links from the blog into them.</p>
+          <p>Brings every money page up to the standard of your best-performing one so the whole service line competes.</p>
           <span class="maps">Maps to Finding 3 (Strength)</span>
         </div>
       </div>
@@ -216,7 +222,7 @@
         <div class="wi-ck"></div>
         <div class="wi-txt">
           <h4>URL architecture consolidation</h4>
-          <p>Resolve the /industry/ versus /industries/ split, 301 the orphans, consolidate the cluster, fix internal links, and audit for other refocus URLs leaking equity.</p>
+          <p>Consolidates split and orphaned URLs so the site stops leaking authority and ranking power.</p>
           <span class="maps">Maps to Finding 4 (High)</span>
         </div>
       </div>
@@ -224,7 +230,7 @@
         <div class="wi-ck"></div>
         <div class="wi-txt">
           <h4>Technical hygiene and schema rollout</h4>
-          <p>Fix the robots.txt sitemap directive, validate indexation, and roll out Service, Breadcrumb, and Organization schema sitewide.</p>
+          <p>Cleans up indexation and structured data so search engines read and trust the site correctly.</p>
           <span class="maps">Maps to Finding 5 (Medium)</span>
         </div>
       </div>
@@ -232,7 +238,7 @@
         <div class="wi-ck"></div>
         <div class="wi-txt">
           <h4>Baseline and keyword strategy</h4>
-          <p>Full backlink and Search Console pull to set the baseline, map the 15 to 30 winnable high-intent terms, and identify the page-2 queries closest to breaking onto page 1.</p>
+          <p>Sets the measurement baseline and the shortlist of winnable, high-intent terms to focus the engine on.</p>
           <span class="maps">Quantifies the audit's open items</span>
         </div>
       </div>
@@ -240,7 +246,7 @@
         <div class="wi-ck"></div>
         <div class="wi-txt">
           <h4>Channel instrumentation and attribution</h4>
-          <p>Proper tracking and attribution across Google Ads, LinkedIn, and outbound, tied to real pipeline rather than clicks, plus offline conversion import from the CRM. This is the audit that finally answers which channels and campaigns actually produce opportunities, the foundation for doubling down.</p>
+          <p>Ties every channel to real pipeline so you finally know what produces opportunities and where to double down.</p>
           <span class="maps">Powers the find-what-works method (Strategy)</span>
         </div>
       </div>
@@ -259,7 +265,7 @@
         <div class="wi-ck"></div>
         <div class="wi-txt">
           <h4>Paid channel strategy and budget reallocation</h4>
-          <p>Run the per-channel plan from the strategy doc: Google Ads structured by service line and intent, LinkedIn and ABM against the target-account list, outbound scaled on real deliverability, retargeting to recover demand. Reallocate budget to the proven winners, cut the waste, and weight spend toward the high-margin services and the team-engagement model, not staffing.</p>
+          <p>Concentrates spend on the channels and high-margin services that prove out, so every dollar works harder on pipeline.</p>
           <span class="maps">Runs the Go-to-Market &amp; Channel Strategy</span>
         </div>
       </div>
@@ -267,7 +273,7 @@
         <div class="wi-ck"></div>
         <div class="wi-txt">
           <h4>Generative Engine Optimization (AI search)</h4>
-          <p>Place and optimize Amzur on the exact sources AI engines cite (G2, Clutch, Goodfirms, ERP Research, SoftwareConnect, the official Oracle NetSuite partner directory), pursue top-partner listicle inclusion, and restructure key pages for clean machine extraction.</p>
+          <p>Gets Amzur cited and recommended by the AI engines buyers now use to shortlist vendors.</p>
           <span class="maps">Maps to Finding 6 (Critical)</span>
         </div>
       </div>
@@ -275,7 +281,7 @@
         <div class="wi-ck"></div>
         <div class="wi-txt">
           <h4>Authority and backlink building</h4>
-          <p>Targeted earned links and citations against the competitor authority gap, focused on the terms and clusters where Amzur can realistically win.</p>
+          <p>Closes the authority gap with competitors so Amzur can rank for the terms it can realistically win.</p>
           <span class="maps">Closes the Gate 3 leak</span>
         </div>
       </div>
@@ -283,7 +289,7 @@
         <div class="wi-ck"></div>
         <div class="wi-txt">
           <h4>Topical content clusters</h4>
-          <p>Hub-and-spoke content around the winnable terms, built on the standardized page pattern, directing your India team's output against a strategic brief instead of scattered tactics.</p>
+          <p>Builds topical depth around the winnable terms so your team's output compounds into ranking authority.</p>
           <span class="maps">Builds Gate 2 depth</span>
         </div>
       </div>
@@ -291,8 +297,16 @@
         <div class="wi-ck"></div>
         <div class="wi-txt">
           <h4>Marketing the hard-to-position services</h4>
-          <p>A positioning and demand approach for the high-margin team-engagement model that you said is the most profitable and the hardest to market, so the work also feeds the revenue you most want to grow.</p>
+          <p>Creates demand for your most profitable, hardest-to-market services so the engine feeds the revenue you most want to grow.</p>
           <span class="maps">Ties SEO to your margin goals</span>
+        </div>
+      </div>
+      <div class="wi">
+        <div class="wi-ck"></div>
+        <div class="wi-txt">
+          <h4>PR, earned media and digital footprint</h4>
+          <p>A PR and earned-media play and an expanded online digital footprint that build authority and demand, executed by your 9-person team at my direction.</p>
+          <span class="maps">Builds authority and demand</span>
         </div>
       </div>
     </div>
@@ -346,7 +360,7 @@
 <footer class="doc-footer">
   <div class="doc-footer-inner">
     <div>
-      <div class="doc-footer-logo">MARK<span>CMO</span></div>
+      <img src="https://amzur.com/wp-content/uploads/2024/08/Amzur_white_logo.png" alt="Amzur Technologies" style="height:26px;width:auto;display:block;margin-bottom:0.6rem;" />
       <p>Prepared by Mark Gabrielli &middot; markcmo.com &middot; mark@markcmo.com</p>
       <p style="margin-top:0.2rem;">Scope of Work for Amzur Technologies.</p>
     </div>

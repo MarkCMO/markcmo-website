@@ -22,11 +22,14 @@
   *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
   body{font-family:'Inter',system-ui,-apple-system,sans-serif;background:var(--off-white);color:var(--text);line-height:1.65;-webkit-font-smoothing:antialiased;}
   a{color:var(--blue);text-decoration:none;}
-  .doc-nav{position:sticky;top:0;z-index:100;background:var(--white);border-bottom:1px solid var(--border);padding:0.9rem 2rem;display:flex;justify-content:space-between;align-items:center;}
-  .doc-nav-logo{font-weight:800;font-size:1.15rem;letter-spacing:0.04em;color:var(--blue);}
-  .doc-nav-logo span{color:var(--text);}
-  .doc-nav-back{font-family:'Inter',sans-serif;font-size:0.7rem;letter-spacing:0.12em;text-transform:uppercase;color:var(--text-light);}
-  .doc-nav-back a{color:var(--blue);font-weight:600;}
+  .doc-nav{position:sticky;top:0;z-index:100;background:var(--navy);padding:0.85rem 2rem;display:flex;justify-content:space-between;align-items:center;gap:1rem;}
+  .doc-nav-logo-img{height:26px;width:auto;display:block;}
+  .doc-nav-right{display:flex;align-items:center;gap:1.25rem;}
+  .doc-nav-back{font-family:'Inter',sans-serif;font-size:0.7rem;letter-spacing:0.12em;text-transform:uppercase;color:rgba(255,255,255,0.6);}
+  .doc-nav-back a{color:var(--blue-light);font-weight:600;}
+  .doc-nav-cta{display:inline-flex;align-items:center;padding:0.65rem 1.3rem;border-radius:100px;background:var(--blue);color:#fff;font-weight:600;font-size:0.85rem;border:1px solid transparent;transition:all .18s;text-decoration:none;white-space:nowrap;}
+  .doc-nav-cta:hover{background:#fff;color:var(--blue-light);border-color:#fff;}
+  @media(max-width:640px){.doc-nav-back{display:none;}}
   .cover-hero{background:linear-gradient(135deg,var(--navy) 0%,var(--navy-mid) 50%,var(--navy-light) 100%);color:#fff;padding:3.5rem 2rem;position:relative;overflow:hidden;box-shadow:0 24px 60px -16px rgba(13,13,18,0.35);}
   .cover-hero::before{content:'';position:absolute;inset:0;background:radial-gradient(circle at 85% 15%, rgba(194,99,243,0.20) 0%, transparent 52%);pointer-events:none;}
   .cover-hero-inner{max-width:920px;margin:0 auto;position:relative;z-index:1;}
@@ -166,8 +169,11 @@
 <!-- /access gate -->
 
 <nav class="doc-nav">
-  <div class="doc-nav-logo">MARK<span>CMO</span></div>
-  <div class="doc-nav-back">Doc AMZ-OPS-001 &middot; <a href="./">Back to package</a></div>
+  <img class="doc-nav-logo-img" src="https://amzur.com/wp-content/uploads/2024/08/Amzur_white_logo.png" alt="Amzur Technologies" />
+  <div class="doc-nav-right">
+    <div class="doc-nav-back">Doc AMZ-OPS-001 &middot; <a href="./">Back to package</a></div>
+    <a href="https://markcmo.com/book" class="doc-nav-cta">Schedule a Consultation</a>
+  </div>
 </nav>
 
 <header class="cover-hero">
@@ -285,7 +291,7 @@
 <footer class="doc-footer">
   <div class="doc-footer-inner">
     <div>
-      <div class="doc-footer-logo">MARK<span>CMO</span></div>
+      <img src="https://amzur.com/wp-content/uploads/2024/08/Amzur_white_logo.png" alt="Amzur Technologies" style="height:26px;width:auto;display:block;margin-bottom:0.6rem;" />
       <p>Prepared by Mark Gabrielli &middot; markcmo.com &middot; mark@markcmo.com</p>
       <p style="margin-top:0.2rem;">How I Work, AI-Native Operating Model, for Amzur Technologies.</p>
     </div>

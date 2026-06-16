@@ -22,11 +22,14 @@
   *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
   body{font-family:'Inter',system-ui,-apple-system,sans-serif;background:var(--off-white);color:var(--text);line-height:1.65;-webkit-font-smoothing:antialiased;}
   a{color:var(--blue);text-decoration:none;}
-  .doc-nav{position:sticky;top:0;z-index:100;background:var(--white);border-bottom:1px solid var(--border);padding:0.9rem 2rem;display:flex;justify-content:space-between;align-items:center;}
-  .doc-nav-logo{font-weight:800;font-size:1.15rem;letter-spacing:0.04em;color:var(--blue);}
-  .doc-nav-logo span{color:var(--text);}
-  .doc-nav-back{font-family:'Inter',sans-serif;font-size:0.7rem;letter-spacing:0.12em;text-transform:uppercase;color:var(--text-light);}
-  .doc-nav-back a{color:var(--blue);font-weight:600;}
+  .doc-nav{position:sticky;top:0;z-index:100;background:var(--navy);padding:0.85rem 2rem;display:flex;justify-content:space-between;align-items:center;gap:1rem;}
+  .doc-nav-logo-img{height:26px;width:auto;display:block;}
+  .doc-nav-right{display:flex;align-items:center;gap:1.25rem;}
+  .doc-nav-back{font-family:'Inter',sans-serif;font-size:0.7rem;letter-spacing:0.12em;text-transform:uppercase;color:rgba(255,255,255,0.6);}
+  .doc-nav-back a{color:var(--blue-light);font-weight:600;}
+  .doc-nav-cta{display:inline-flex;align-items:center;padding:0.65rem 1.3rem;border-radius:100px;background:var(--blue);color:#fff;font-weight:600;font-size:0.85rem;border:1px solid transparent;transition:all .18s;text-decoration:none;white-space:nowrap;}
+  .doc-nav-cta:hover{background:#fff;color:var(--blue-light);border-color:#fff;}
+  @media(max-width:640px){.doc-nav-back{display:none;}}
   .cover-hero{background:linear-gradient(135deg,var(--navy) 0%,var(--navy-mid) 50%,var(--navy-light) 100%);color:#fff;padding:3.5rem 2rem;position:relative;overflow:hidden;box-shadow:0 24px 60px -16px rgba(13,13,18,0.35);}
   .cover-hero::before{content:'';position:absolute;inset:0;background:radial-gradient(circle at 85% 15%, rgba(194,99,243,0.20) 0%, transparent 52%);pointer-events:none;}
   .cover-hero-inner{max-width:920px;margin:0 auto;position:relative;z-index:1;}
@@ -171,8 +174,11 @@
 <!-- /access gate -->
 
 <nav class="doc-nav">
-  <div class="doc-nav-logo">MARK<span>CMO</span></div>
-  <div class="doc-nav-back">Doc AMZ-RMP-001 &middot; <a href="./">Back to package</a></div>
+  <img class="doc-nav-logo-img" src="https://amzur.com/wp-content/uploads/2024/08/Amzur_white_logo.png" alt="Amzur Technologies" />
+  <div class="doc-nav-right">
+    <div class="doc-nav-back">Doc AMZ-RMP-001 &middot; <a href="./">Back to package</a></div>
+    <a href="https://markcmo.com/book" class="doc-nav-cta">Schedule a Consultation</a>
+  </div>
 </nav>
 
 <header class="cover-hero">
@@ -250,11 +256,8 @@
       <div class="rphase-body">
         <h4>Key moves</h4>
         <ul class="moves">
-          <li>Stand up the missing sales follow-up motion: SLAs, sequences, and an SDR-style cadence in RevUp and Freshworks so no qualified lead goes dark</li>
-          <li>Lock the ICP ($10M to $200M B2B in Retail, Healthcare, Manufacturing, IT/SaaS) and the AI-first positioning around real, provable strengths</li>
-          <li>Fix the technical floor and reverse the NetSuite URL/SEO damage from the restructure (per the Audit)</li>
-          <li>Instrument the full funnel in GA, Clarity, and the CRMs so every later number is measured honestly</li>
-          <li>Launch the programmatic pilot: top 10 to 15 metros for Solution Engineering and NetSuite, and submit the GEO directory placements</li>
+          <li>Close the conversion gap first: a working sales follow-up motion and locked ICP and positioning so qualified leads stop leaking and every later number is measured honestly</li>
+          <li>Prove the coverage engine in a focused pilot while repairing the technical and SEO floor, so there is real movement before national volume turns on</li>
         </ul>
         <div class="rphase-foot">
           <div class="ff metric"><div class="ff-l">Target</div><div class="ff-v">15 to 20 qualified leads/mo and a working follow-up motion (no more lead leakage)</div></div>
@@ -274,11 +277,9 @@
       <div class="rphase-body">
         <h4>Key moves</h4>
         <ul class="moves">
-          <li>Expand programmatic location pages to the top 50 to 75 US metros for Solution Engineering and NetSuite, on the standardized, AI-assisted page pattern</li>
-          <li>Launch ABM against named ICP accounts (LinkedIn Sales Navigator plus outbound on amzurtech.com and amzurconsulting.com), aimed at the Extended Teams and larger Solution Engineering deals</li>
-          <li>Rebuild outbound on real deliverability and tighter Apollo lists, lifting reply rate off the current 1 to 2%</li>
-          <li>Fix or formally kill the dead channels (content syndication, untargeted email), and reallocate that effort to what converts</li>
-          <li>Stand up the case-study flywheel: Khameleon, Ashley Stewart, iTPM, IFB, the Public Health agency, as proof assets, not just logos</li>
+          <li>Scale the proven pilot across the top US metros for the two growth services, and turn on targeted account-based and outbound motions for the high-value deals search cannot capture</li>
+          <li>Concentrate effort on the channels that convert and stand up a proof-and-case-study flywheel that compounds credibility</li>
+          <li>Launch a PR and earned-media play and expand the online digital footprint to build authority, executed by the 9-person team at Mark's direction</li>
         </ul>
         <div class="rphase-foot">
           <div class="ff metric"><div class="ff-l">Target</div><div class="ff-v">Qualified leads holding 20+/mo with rising quality; first pipeline attributable to programmatic and ABM</div></div>
@@ -298,11 +299,8 @@
       <div class="rphase-body">
         <h4>Key moves</h4>
         <ul class="moves">
-          <li>Roll the location engine out to all four service lines and across all 50 states plus secondary cities</li>
-          <li>Deepen GEO: get cited in AI answers for service-plus-city queries through directories, listicles, reviews, and structured, extractable content</li>
-          <li>Build vertical hubs for the four ICP industries (Retail, Healthcare, Manufacturing, IT/SaaS) with industry proof and language</li>
-          <li>Pursue the AI-platform and Oracle/NetSuite partnerships you are already chasing, as credibility anchors</li>
-          <li>Tighten marketing-to-sales handoff with scoring and routing so the higher volume still converts</li>
+          <li>Extend coverage to all four service lines and all 50 states, and deepen AI-search visibility so Amzur appears in the answer, not just the results</li>
+          <li>Build industry credibility and tighten the marketing-to-sales handoff so the higher volume still converts</li>
         </ul>
         <div class="rphase-foot">
           <div class="ff metric"><div class="ff-l">Target</div><div class="ff-v">Organic and AI-sourced share of leads rising toward parity with paid; cost per qualified lead falling</div></div>
@@ -322,10 +320,8 @@
       <div class="rphase-body">
         <h4>Key moves</h4>
         <ul class="moves">
-          <li>Full national coverage of state and major-city pages across all four service lines, continuously refreshed</li>
-          <li>The AI-first, trusted-IT-partner narrative consistent across every page and channel, the positioning goal from your brief</li>
-          <li>Predictable demand engine: organic plus AI plus ABM plus outbound, reported monthly on pipeline and conversion quality, not vanity volume</li>
-          <li>The India team running the AI-augmented marketing function with reduced dependence on outside direction</li>
+          <li>Complete national coverage with the trusted-partner positioning consistent across every page and channel, the goal from your brief</li>
+          <li>Run a predictable, measurable demand engine the team can largely operate on its own, reported on pipeline and conversion quality, not vanity volume</li>
         </ul>
         <div class="rphase-foot">
           <div class="ff metric"><div class="ff-l">Target</div><div class="ff-v">A functioning, measurable pipeline (your 12-month brief goal); reduced reliance on high-CPC paid</div></div>
@@ -345,11 +341,8 @@
       <div class="rphase-body">
         <h4>Key moves</h4>
         <ul class="moves">
-          <li>Extend to long-tail cities and become the cited default for service-plus-city queries in the markets that convert</li>
-          <li>Vertical dominance: be the recognized AI-first modernization and NetSuite partner in Retail, Healthcare, Manufacturing, and IT/SaaS</li>
-          <li>Build a moat: proprietary data and benchmarks, original research, and a thought-leadership engine competitors cannot easily copy</li>
-          <li>Productize the Extended Teams story (the Khameleon-style 38% cost reduction outcome) into a repeatable, marketed offer that grows the high-margin recurring line</li>
-          <li>Compounding flywheel: every win becomes proof, every proof feeds content and AI citations, lowering cost and raising trust</li>
+          <li>Move from present everywhere to preferred: own the verticals where Amzur genuinely wins and become the cited default in the markets that convert</li>
+          <li>Build a durable moat and compounding flywheel where every win becomes proof that lowers cost and raises trust over time</li>
         </ul>
         <div class="rphase-foot">
           <div class="ff metric"><div class="ff-l">Target</div><div class="ff-v">Category leadership in the chosen verticals; recurring Extended-Teams revenue growing as a share of mix</div></div>
@@ -378,7 +371,7 @@
 <footer class="doc-footer">
   <div class="doc-footer-inner">
     <div>
-      <div class="doc-footer-logo">MARK<span>CMO</span></div>
+      <img src="https://amzur.com/wp-content/uploads/2024/08/Amzur_white_logo.png" alt="Amzur Technologies" style="height:26px;width:auto;display:block;margin-bottom:0.6rem;" />
       <p>Prepared by Mark Gabrielli &middot; markcmo.com &middot; mark@markcmo.com</p>
       <p style="margin-top:0.2rem;">National Growth Roadmap for Amzur Technologies. Built on the resources and numbers you shared.</p>
     </div>

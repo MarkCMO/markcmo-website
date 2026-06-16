@@ -25,11 +25,14 @@
   body{font-family:'Inter',system-ui,-apple-system,sans-serif;background:var(--off-white);color:var(--text);line-height:1.65;min-height:100vh;-webkit-font-smoothing:antialiased;}
   a{color:var(--blue);text-decoration:none;}
 
-  .doc-nav{position:sticky;top:0;z-index:100;background:var(--white);border-bottom:1px solid var(--border);padding:0.9rem 2rem;display:flex;justify-content:space-between;align-items:center;}
-  .doc-nav-logo{font-family:'Inter',sans-serif;font-weight:800;font-size:1.15rem;letter-spacing:0.04em;color:var(--blue);}
-  .doc-nav-logo span{color:var(--text);}
-  .doc-nav-meta{font-family:'Inter',sans-serif;font-size:0.7rem;letter-spacing:0.12em;text-transform:uppercase;color:var(--text-light);}
-  .doc-nav-meta strong{color:var(--blue);font-weight:600;}
+  .doc-nav{position:sticky;top:0;z-index:100;background:var(--navy);padding:0.85rem 2rem;display:flex;justify-content:space-between;align-items:center;gap:1rem;}
+  .doc-nav-logo-img{height:26px;width:auto;display:block;}
+  .doc-nav-right{display:flex;align-items:center;gap:1.25rem;}
+  .doc-nav-meta{font-family:'Inter',sans-serif;font-size:0.7rem;letter-spacing:0.12em;text-transform:uppercase;color:rgba(255,255,255,0.6);}
+  .doc-nav-meta strong{color:var(--blue-light);font-weight:600;}
+  .doc-nav-cta{display:inline-flex;align-items:center;padding:0.65rem 1.3rem;border-radius:100px;background:var(--blue);color:#fff;font-weight:600;font-size:0.85rem;border:1px solid transparent;transition:all .18s;text-decoration:none;white-space:nowrap;}
+  .doc-nav-cta:hover{background:#fff;color:var(--blue-light);border-color:#fff;}
+  @media(max-width:640px){.doc-nav-meta{display:none;}}
 
   .cover-hero{
     background:linear-gradient(135deg,var(--navy) 0%,var(--navy-mid) 50%,var(--navy-light) 100%);
@@ -212,8 +215,11 @@
 
 
 <nav class="doc-nav">
-  <div class="doc-nav-logo">MARK<span>CMO</span></div>
-  <div class="doc-nav-meta">Engagement <strong>AMZUR</strong> &middot; Amzur Technologies &middot; Confidential</div>
+  <img class="doc-nav-logo-img" src="https://amzur.com/wp-content/uploads/2024/08/Amzur_white_logo.png" alt="Amzur Technologies" />
+  <div class="doc-nav-right">
+    <div class="doc-nav-meta">Engagement <strong>AMZUR</strong> &middot; Amzur Technologies &middot; Confidential</div>
+    <a href="https://markcmo.com/book" class="doc-nav-cta">Schedule a Consultation</a>
+  </div>
 </nav>
 
 <header class="cover-hero">
@@ -415,7 +421,7 @@
 <footer class="doc-footer">
   <div class="doc-footer-inner">
     <div>
-      <div class="doc-footer-logo">MARK<span>CMO</span></div>
+      <img src="https://amzur.com/wp-content/uploads/2024/08/Amzur_white_logo.png" alt="Amzur Technologies" style="height:26px;width:auto;display:block;margin-bottom:0.6rem;" />
       <p>Prepared by Mark Gabrielli &middot; markcmo.com &middot; mark@markcmo.com</p>
       <p style="margin-top:0.2rem;">For the leadership team at Amzur Technologies.</p>
     </div>

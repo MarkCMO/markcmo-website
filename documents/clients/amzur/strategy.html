@@ -22,11 +22,14 @@
   *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
   body{font-family:'Inter',system-ui,-apple-system,sans-serif;background:var(--off-white);color:var(--text);line-height:1.65;-webkit-font-smoothing:antialiased;}
   a{color:var(--blue);text-decoration:none;}
-  .doc-nav{position:sticky;top:0;z-index:100;background:var(--white);border-bottom:1px solid var(--border);padding:0.9rem 2rem;display:flex;justify-content:space-between;align-items:center;}
-  .doc-nav-logo{font-weight:800;font-size:1.15rem;letter-spacing:0.04em;color:var(--blue);}
-  .doc-nav-logo span{color:var(--text);}
-  .doc-nav-back{font-family:'Inter',sans-serif;font-size:0.7rem;letter-spacing:0.12em;text-transform:uppercase;color:var(--text-light);}
-  .doc-nav-back a{color:var(--blue);font-weight:600;}
+  .doc-nav{position:sticky;top:0;z-index:100;background:var(--navy);padding:0.85rem 2rem;display:flex;justify-content:space-between;align-items:center;gap:1rem;}
+  .doc-nav-logo-img{height:26px;width:auto;display:block;}
+  .doc-nav-right{display:flex;align-items:center;gap:1.25rem;}
+  .doc-nav-back{font-family:'Inter',sans-serif;font-size:0.7rem;letter-spacing:0.12em;text-transform:uppercase;color:rgba(255,255,255,0.6);}
+  .doc-nav-back a{color:var(--blue-light);font-weight:600;}
+  .doc-nav-cta{display:inline-flex;align-items:center;padding:0.65rem 1.3rem;border-radius:100px;background:var(--blue);color:#fff;font-weight:600;font-size:0.85rem;border:1px solid transparent;transition:all .18s;text-decoration:none;white-space:nowrap;}
+  .doc-nav-cta:hover{background:#fff;color:var(--blue-light);border-color:#fff;}
+  @media(max-width:640px){.doc-nav-back{display:none;}}
   .cover-hero{background:linear-gradient(135deg,var(--navy) 0%,var(--navy-mid) 50%,var(--navy-light) 100%);color:#fff;padding:3.5rem 2rem;position:relative;overflow:hidden;box-shadow:0 24px 60px -16px rgba(13,13,18,0.35);}
   .cover-hero::before{content:'';position:absolute;inset:0;background:radial-gradient(circle at 85% 15%, rgba(194,99,243,0.20) 0%, transparent 52%);pointer-events:none;}
   .cover-hero-inner{max-width:920px;margin:0 auto;position:relative;z-index:1;}
@@ -182,8 +185,11 @@
 <!-- /access gate -->
 
 <nav class="doc-nav">
-  <div class="doc-nav-logo">MARK<span>CMO</span></div>
-  <div class="doc-nav-back">Doc AMZ-GTM-001 &middot; <a href="./">Back to package</a></div>
+  <img class="doc-nav-logo-img" src="https://amzur.com/wp-content/uploads/2024/08/Amzur_white_logo.png" alt="Amzur Technologies" />
+  <div class="doc-nav-right">
+    <div class="doc-nav-back">Doc AMZ-GTM-001 &middot; <a href="./">Back to package</a></div>
+    <a href="https://markcmo.com/book" class="doc-nav-cta">Schedule a Consultation</a>
+  </div>
 </nav>
 
 <header class="cover-hero">
@@ -262,13 +268,7 @@
         </div>
         <div class="cr">
           <div class="cr-lbl">How it should be structured</div>
-          <ul class="struct">
-            <li>Campaigns split by service line and by intent stage, so budget and messaging match the buyer, not one catch-all campaign</li>
-            <li>Tight, themed ad groups with match-type discipline and an actively managed negative-keyword list to stop wasted spend</li>
-            <li>Conversion tracking tied to real lead and pipeline events, not form-fills alone, with offline conversion import from the CRM so Google optimizes toward deals</li>
-            <li>Smart Bidding fed by clean conversion data, and Performance Max boxed in with brand exclusions and asset control rather than left on autopilot</li>
-            <li>Dedicated landing pages per service that match the ad and load fast, the audit's Core Web Vitals fix directly raises Quality Score and lowers cost per click here</li>
-          </ul>
+          <p>Structured by service line and buyer intent, pointed at the high-margin services, and measured to real pipeline. The detailed build is part of the engagement.</p>
         </div>
         <div class="cr dbl">
           <div class="cr-lbl">Find and double down</div>
@@ -290,12 +290,7 @@
         </div>
         <div class="cr">
           <div class="cr-lbl">How it should be structured</div>
-          <ul class="struct">
-            <li>A defined ideal-customer profile and a named target-account list, the foundation ABM is built on, segmented by industry and by the services with the best margin</li>
-            <li>A layered program: thought-leadership and value content to warm the account, then conversion ads and lead-gen forms to the engaged, then retargeting of site and content visitors</li>
-            <li>Decision-maker and committee targeting by title and function, run as account-based plays rather than broad audience spray</li>
-            <li>Tight integration with outbound, the same target accounts get LinkedIn air cover and cold email and outreach on the ground, so touches reinforce instead of running blind to each other</li>
-          </ul>
+          <p>Built on a defined ideal-customer profile and a named target-account list, aimed at decision-makers in the best-margin segments, and run in concert with outbound so touches reinforce. The detailed build is part of the engagement.</p>
         </div>
         <div class="cr dbl">
           <div class="cr-lbl">Find and double down</div>
@@ -317,12 +312,7 @@
         </div>
         <div class="cr">
           <div class="cr-lbl">How it should be structured</div>
-          <ul class="struct">
-            <li>Separate sending domains and a real deliverability setup (authentication, warmup, list validation) so messages land in the inbox and the brand domain stays protected</li>
-            <li>ABM-aligned lists built from the same target-account profile as LinkedIn, so the two channels hit the same accounts on purpose</li>
-            <li>Multi-touch sequences across email, LinkedIn, and phone with messaging tied to the prospect's real problem, not a generic services blast</li>
-            <li>Tracking and triggers so an engaged prospect is routed to a person fast, and volume scaled deliberately as deliverability proves out</li>
-          </ul>
+          <p>Run as a deliverability-safe system against the same target accounts as ABM, with multi-touch sequences tied to each prospect's real problem and engaged prospects routed to a person fast. The detailed build is part of the engagement.</p>
         </div>
         <div class="cr dbl">
           <div class="cr-lbl">Find and double down</div>
@@ -344,16 +334,29 @@
         </div>
         <div class="cr">
           <div class="cr-lbl">How it should be structured</div>
-          <ul class="struct">
-            <li>Topic clusters around the winnable, high-intent terms identified in the audit, built on the standardized service-page pattern</li>
-            <li>The GEO push so Amzur gets cited in AI answers where buyers increasingly research, the gap the audit proved</li>
-            <li>Retargeting across LinkedIn and display for site and content visitors, sequenced to the buying stage, so the slow-cycle prospect is not lost</li>
-            <li>Every channel feeding the others: ads drive traffic, content earns trust, retargeting recovers, organic compounds and lowers the whole cost base</li>
-          </ul>
+          <p>Organic and AI-search visibility built around the winnable, high-intent terms from the audit, with retargeting sequenced to the buying stage so slow-cycle prospects are recovered and every channel compounds the others. The detailed build is part of the engagement.</p>
         </div>
         <div class="cr dbl">
           <div class="cr-lbl">Find and double down</div>
           <p>Track which content and terms assist pipeline, invest in the clusters that pull qualified traffic, and weight retargeting toward the pages and segments that actually re-engage and convert.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- PR + DIGITAL FOOTPRINT -->
+    <div class="channel">
+      <div class="channel-head">
+        <h3>PR, Earned Media &amp; Digital Footprint</h3>
+        <div class="role">Build authority</div>
+      </div>
+      <div class="channel-body">
+        <div class="cr">
+          <div class="cr-lbl">Strategic role</div>
+          <p>PR and earned media plus a deliberately expanded online digital footprint that build credibility and surface Amzur where buyers and AI engines look, planned by me and executed by your 9-person team at my direction.</p>
+        </div>
+        <div class="cr dbl">
+          <div class="cr-lbl">Find and double down</div>
+          <p>Double down on the placements and footprint that actually drive authority and inbound interest.</p>
         </div>
       </div>
     </div>
@@ -424,7 +427,7 @@
 <footer class="doc-footer">
   <div class="doc-footer-inner">
     <div>
-      <div class="doc-footer-logo">MARK<span>CMO</span></div>
+      <img src="https://amzur.com/wp-content/uploads/2024/08/Amzur_white_logo.png" alt="Amzur Technologies" style="height:26px;width:auto;display:block;margin-bottom:0.6rem;" />
       <p>Prepared by Mark Gabrielli &middot; markcmo.com &middot; mark@markcmo.com</p>
       <p style="margin-top:0.2rem;">Go-to-Market &amp; Channel Strategy for Amzur Technologies.</p>
     </div>
