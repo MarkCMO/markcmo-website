@@ -3,7 +3,7 @@
 const fs = require('fs');
 const path = require('path');
 const DIST = 'dist';
-const TOP_LEVEL_DIRS = ['blog', 'data', 'images', 'js', 'assets', '.well-known', 'css', 'fonts', 'documents', 'docs', 'forms', 'scripts-client', 'daily-assets', 'brand'];
+const TOP_LEVEL_DIRS = ['blog', 'data', 'images', 'js', 'assets', '.well-known', 'css', 'fonts', 'documents', 'docs', 'forms', 'proposals', 'scripts-client', 'daily-assets', 'brand'];
 // INTENTIONALLY EXCLUDES .html - those 21k+ pages go into KV (BLOBS_MARKCMO_PAGES_HTML)
 const TOP_LEVEL_FILE_PATTERNS = [/\.css$/, /\.json$/, /\.txt$/, /\.xml$/, /\.ico$/, /\.svg$/, /\.png$/, /\.jpg$/, /\.webp$/, /\.pdf$/, /\.webmanifest$/];
 const TOP_LEVEL_LITERALS = ['_headers', '_redirects', 'robots.txt', 'humans.txt', 'manifest.json', 'linkedin-widget.js', 'components.js', 'components-loader.js', 'footer.html', 'nav.html', 'ach-instructions.html'];
@@ -15,7 +15,7 @@ function topLevelKeep(n) { if (shouldSkip(n)) return false; if (TOP_LEVEL_LITERA
 function cpRecursive(src, dst, skipHtml) { const s = fs.statSync(src); if (s.isDirectory()) { fs.mkdirSync(dst, { recursive: true }); for (const e of fs.readdirSync(src)) cpRecursive(path.join(src, e), path.join(dst, e), skipHtml); } else { if (skipHtml && /\.html$/i.test(src)) return; fs.copyFileSync(src, dst); } }
 fs.rmSync(DIST, { recursive: true, force: true }); fs.mkdirSync(DIST);
 let copied = 0;
-for (const e of fs.readdirSync('.')) { if (!topLevelKeep(e)) continue; cpRecursive(e, path.join(DIST, e), e === 'documents'); copied++; }
+for (const e of fs.readdirSync('.')) { if (!topLevelKeep(e)) continue; cpRecursive(e, path.join(DIST, e), e === 'documents' || e === 'proposals'); copied++; }
 let total = 0;
 function countF(dir) { for (const e of fs.readdirSync(dir)) { const f = path.join(dir, e); if (fs.statSync(f).isDirectory()) countF(f); else total++; } }
 countF(DIST);

@@ -62,6 +62,9 @@ const URLS_TO_PURGE = [
   'https://markcmo.com/documents/clients/amzur/timeline',
   'https://markcmo.com/documents/clients/amzur/proposal',
   'https://markcmo.com/documents/clients/amzur/welcome',
+  // BBQ'n Fools proposal (HTML from KV, assets shipped via dist)
+  'https://markcmo.com/proposals/bbqnfools',
+  'https://markcmo.com/proposals/bbqnfools/',
 ];
 
 function cfFetch(method, path, body) {

@@ -1,0 +1,734 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>BBQ'n Fools - Relaunch &amp; Scale | Engagement Proposal | MarkCMO</title>
+<meta name="description" content="A 12-24 month engagement to relaunch BBQ'n Fools on an owned, automated commerce, marketing, and operations ecosystem - built to scale to $8M and to sell.">
+<meta name="robots" content="noindex,nofollow">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,600;12..96,700;12..96,800&family=Caveat:wght@600;700&family=Newsreader:ital,opsz,wght@1,6..72,400;1,6..72,500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#0D0A0F; --surf:#181220; --surf2:#211829; --surf3:#2A1E34;
+    --line:rgba(255,255,255,0.09); --line2:rgba(255,255,255,0.055);
+    --fire:#FF7A18; --fire2:#FF9D3D; --ember:#E2371C; --gold:#F2B736; --gold2:#FFD36B;
+    --grape:#9B45D6; --grape-bg:rgba(155,69,214,0.14); --green:#46B85A;
+    --fire-bg:rgba(255,122,24,0.13); --ember-bg:rgba(226,55,28,0.13); --gold-bg:rgba(242,183,54,0.13); --green-bg:rgba(70,184,90,0.14);
+    --t1:#ffffff; --t2:rgba(255,255,255,0.74); --t3:rgba(255,255,255,0.46); --t4:rgba(255,255,255,0.3);
+    --paper:#F2E8D2;
+    --disp:'Bricolage Grotesque',-apple-system,'Segoe UI',sans-serif;
+    --serif:'Newsreader',Georgia,serif;
+    --sans:-apple-system,BlinkMacSystemFont,'SF Pro Text','Inter','Segoe UI',Roboto,Helvetica,Arial,sans-serif;
+    --mono:'SF Mono',ui-monospace,'JetBrains Mono',Menlo,Consolas,monospace;
+  }
+  *{box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{margin:0;background:var(--bg);color:var(--t1);font-family:var(--sans);font-size:16px;line-height:1.5;
+    -webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility;overflow-x:hidden}
+  a{color:var(--fire2);text-decoration:none}
+  .wrap{max-width:1000px;margin:0 auto;padding:0 32px}
+  .eyebrow{font-size:11px;letter-spacing:0.2em;text-transform:uppercase;color:var(--fire);font-weight:700}
+  h1,h2,h3,h4{font-family:var(--disp);font-weight:700;letter-spacing:-0.02em;margin:0;line-height:1.05}
+  .mono{font-family:var(--mono)}
+  .fire{color:var(--fire)} .gold{color:var(--gold)} .grape{color:var(--grape)}
+  .t2{color:var(--t2)} .t3{color:var(--t3)}
+  p{margin:16px 0 0}
+  section{padding:74px 0;border-top:1px solid var(--line2)}
+  .lead{font-size:20px;line-height:1.6;color:var(--t2)}
+  .kicker{font-size:16px;color:var(--t2);line-height:1.65;margin-top:20px;max-width:780px}
+  .note{font-size:13px;color:var(--t3);margin-top:16px;line-height:1.6}
+
+  /* top bar */
+  .bar{position:sticky;top:0;z-index:50;background:rgba(13,10,15,0.85);backdrop-filter:blur(12px);border-bottom:1px solid var(--line2)}
+  .bar .wrap{display:flex;align-items:center;justify-content:space-between;height:58px}
+  .brandmark{display:flex;align-items:center;gap:11px;font-family:var(--disp);font-weight:700;font-size:15px;letter-spacing:-0.01em}
+  .brandmark img{height:32px;width:32px;object-fit:contain;filter:drop-shadow(0 2px 6px rgba(255,122,24,0.4))}
+  .brandmark .x{color:var(--t3);font-weight:500;margin:0 2px}
+  .bar .meta{font-family:var(--mono);font-size:11px;letter-spacing:0.05em;color:var(--t3)}
+
+  /* hero */
+  .hero{position:relative;padding:84px 0 76px;overflow:hidden}
+  .hero:before{content:"";position:absolute;top:-160px;right:-120px;width:680px;height:680px;border-radius:50%;
+    background:radial-gradient(circle,rgba(255,122,24,0.34) 0%,rgba(226,55,28,0.16) 38%,transparent 66%);
+    filter:blur(8px);z-index:0;pointer-events:none}
+  .hero .wrap{position:relative;z-index:2}
+  .hero-grid{display:grid;grid-template-columns:1.35fr 0.65fr;gap:32px;align-items:center}
+  .hero h1{font-size:62px;margin-top:18px}
+  .hero h1 em{font-style:normal;color:var(--fire);position:relative}
+  .hero .sub{font-size:21px;line-height:1.5;color:var(--t2);margin-top:24px;max-width:600px}
+  .hero-mascot{position:relative;text-align:center}
+  .hero-mascot img{width:100%;max-width:330px;filter:drop-shadow(0 18px 40px rgba(226,55,28,0.45))}
+  .pill{display:inline-flex;align-items:center;gap:8px;padding:7px 15px;border-radius:9999px;font-size:11px;letter-spacing:0.16em;text-transform:uppercase;font-weight:700}
+  .pill.fire{background:var(--fire-bg);color:var(--fire2)}
+  .pill.grape{background:var(--grape-bg);color:#C58CEC}
+
+  .coverstats{display:grid;grid-template-columns:repeat(4,1fr);margin-top:56px;border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
+  .coverstats .s{padding:22px 22px 22px 0}
+  .coverstats .s + .s{padding-left:22px;border-left:1px solid var(--line)}
+  .coverstats .lab{font-size:11px;letter-spacing:0.16em;text-transform:uppercase;color:var(--t3)}
+  .coverstats .num{font-family:var(--mono);font-size:30px;color:var(--fire);font-weight:500;margin-top:8px;line-height:1.1}
+  .coverstats .num.small{font-family:var(--disp);font-size:20px;color:var(--t1)}
+  .coverstats .fine{font-size:12px;color:var(--t3);margin-top:6px}
+
+  h2.big{font-size:40px;margin-top:14px}
+  h3.sec{font-size:22px}
+
+  .grid2{display:grid;grid-template-columns:1fr 1fr;gap:22px;margin-top:32px}
+  .grid3{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;margin-top:32px}
+  .card{background:var(--surf);border-radius:16px;padding:26px}
+  .card h4{font-size:20px}
+  .card p{font-size:15px;color:var(--t2);line-height:1.6}
+  .card .k{font-family:var(--mono);font-size:11px;letter-spacing:0.16em;text-transform:uppercase;color:var(--fire);font-weight:600}
+
+  .stat-row{display:grid;grid-template-columns:repeat(3,1fr);margin-top:34px;border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
+  .stat-row .s{padding:24px 24px 24px 0}
+  .stat-row .s + .s{padding-left:24px;border-left:1px solid var(--line)}
+  .stat-row .num{font-family:var(--mono);font-size:38px;color:var(--fire);font-weight:500;line-height:1.05}
+  .stat-row .num.ember{color:var(--ember)} .stat-row .num.gold{color:var(--gold)}
+  .stat-row .lab{font-size:13px;color:var(--t2);margin-top:10px;line-height:1.45}
+
+  /* art frames */
+  .art-cream{background:var(--paper);border-radius:16px;display:flex;align-items:center;justify-content:center;padding:18px}
+  .art-cream img{width:100%;height:100%;object-fit:contain;max-height:240px}
+  .art-dark{background:var(--surf2);border-radius:16px;display:flex;align-items:center;justify-content:center;padding:18px;border:1px solid var(--line2)}
+  .art-dark img{width:100%;height:100%;object-fit:contain;max-height:200px}
+  .photo{border-radius:16px;overflow:hidden;border:1px solid var(--line2)}
+  .photo img{width:100%;height:100%;object-fit:cover;display:block}
+
+  /* heritage */
+  .heritage{display:grid;grid-template-columns:0.9fr 1.1fr;gap:32px;align-items:center;margin-top:32px}
+  .cast{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+  .awards{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:24px}
+  .awards .art-dark{padding:14px}
+  .awards img{max-height:140px}
+  .awards .cap{font-size:11px;color:var(--t3);text-align:center;margin-top:8px;letter-spacing:0.02em}
+
+  table{width:100%;border-collapse:collapse;margin-top:28px;font-size:14px}
+  th,td{text-align:left;padding:14px 16px;border-bottom:1px solid var(--line)}
+  th{font-size:11px;letter-spacing:0.1em;text-transform:uppercase;color:var(--t3);font-weight:700}
+  td{color:var(--t2);vertical-align:top}
+  td.mono{font-family:var(--mono)}
+  td strong{color:var(--t1);font-weight:600}
+  tr:hover td{background:rgba(255,255,255,0.025)}
+  .tag{display:inline-block;padding:3px 10px;border-radius:9999px;font-size:11px;font-weight:600}
+  .tag.red{background:var(--ember-bg);color:#F08A78} .tag.ok{background:var(--green-bg);color:#7FD993}
+  .tag.fire{background:var(--fire-bg);color:var(--fire2)}
+
+  ul.clean{list-style:none;padding:0;margin:20px 0 0}
+  ul.clean li{position:relative;padding:10px 0 10px 26px;font-size:15px;color:var(--t2);line-height:1.55;border-bottom:1px solid var(--line2)}
+  ul.clean li:before{content:"";position:absolute;left:0;top:18px;width:7px;height:7px;border-radius:2px;background:var(--fire)}
+  ul.clean li strong{color:var(--t1);font-weight:600}
+
+  .tco{margin-top:32px}
+  .tco .row{display:grid;grid-template-columns:230px 1fr 140px;align-items:center;gap:16px;padding:14px 0;border-bottom:1px solid var(--line2)}
+  .tco .name{font-size:14px;color:var(--t2)}
+  .tco .track{height:14px;border-radius:9999px;background:rgba(255,255,255,0.05);overflow:hidden}
+  .tco .fill{height:100%;border-radius:9999px}
+  .tco .v{font-family:var(--mono);font-size:14px;text-align:right;color:var(--t1)}
+
+  .road{margin-top:36px}
+  .phase{position:relative;padding:0 0 34px 32px;border-left:2px solid var(--fire);margin-left:6px}
+  .phase:last-child{border-left-color:transparent}
+  .phase:before{content:"";position:absolute;left:-9px;top:2px;width:16px;height:16px;border-radius:50%;background:var(--fire);box-shadow:0 0 0 4px var(--bg),0 0 14px rgba(255,122,24,0.6)}
+  .phase .wk{font-family:var(--mono);font-size:11px;letter-spacing:0.12em;text-transform:uppercase;color:var(--gold)}
+  .phase h4{margin:6px 0 0;font-size:22px}
+  .phase p{font-size:15px;color:var(--t2);margin-top:8px}
+  .phase.launch:before{background:var(--ember);box-shadow:0 0 0 4px var(--bg),0 0 16px rgba(226,55,28,0.7)}
+  .phase.launch .wk{color:var(--ember)}
+
+  .bp{margin-top:30px;background:var(--surf);border-radius:16px;padding:30px}
+  .bp-tier{display:grid;grid-template-columns:140px 1fr;gap:20px;align-items:start;padding:18px 0;border-bottom:1px solid var(--line2)}
+  .bp-tier:last-child{border-bottom:none}
+  .bp-tier .lyr{font-family:var(--mono);font-size:11px;letter-spacing:0.12em;text-transform:uppercase;color:var(--fire);padding-top:6px}
+  .bp-nodes{display:flex;flex-wrap:wrap;gap:10px}
+  .node{background:var(--surf2);border:1px solid var(--line);border-radius:8px;padding:10px 14px;font-size:13px}
+  .node b{color:var(--t1)} .node span{color:var(--t3);font-size:11px;display:block;margin-top:2px}
+
+  .price-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;margin-top:32px}
+  .pcard{background:var(--surf);border-radius:16px;padding:26px;position:relative}
+  .pcard.feature{background:linear-gradient(180deg,#2A1A1A 0%,#181220 100%);box-shadow:0 1px 0 rgba(255,255,255,0.06) inset,0 18px 50px rgba(226,55,28,0.18)}
+  .pcard.feature:before{content:"Recommended";position:absolute;top:18px;right:18px;font-size:10px;letter-spacing:0.14em;text-transform:uppercase;color:#1a0d05;background:var(--fire);padding:4px 10px;border-radius:9999px;font-weight:700}
+  .pcard .tier{font-size:11px;letter-spacing:0.16em;text-transform:uppercase;color:var(--fire);font-weight:700}
+  .pcard .amt{font-family:var(--mono);font-size:32px;color:var(--t1);margin-top:14px;line-height:1}
+  .pcard .per{font-size:13px;color:var(--t3);margin-top:6px}
+  .pcard ul{list-style:none;padding:0;margin:18px 0 0}
+  .pcard li{font-size:13px;color:var(--t2);padding:8px 0 8px 22px;position:relative;line-height:1.45;border-top:1px solid var(--line2)}
+  .pcard li:before{content:"";position:absolute;left:0;top:14px;width:6px;height:6px;border-radius:50%;background:var(--fire)}
+
+  .feebox{background:var(--surf);border-radius:16px;padding:8px 30px;margin-top:30px}
+  .feebox .frow{display:grid;grid-template-columns:1fr 130px;gap:16px;padding:18px 0;border-bottom:1px solid var(--line2);align-items:baseline}
+  .feebox .frow:last-child{border-bottom:none}
+  .feebox .fname{font-size:15px;color:var(--t1);font-weight:600}
+  .feebox .fdesc{font-size:13px;color:var(--t3);margin-top:4px}
+  .feebox .fv{font-family:var(--mono);font-size:18px;color:var(--fire);text-align:right}
+  .feebox .total{border-top:1px solid var(--line)}
+  .feebox .total .fname{font-family:var(--disp);font-size:20px}
+  .feebox .total .fv{font-size:24px;color:var(--gold2)}
+
+  .stage{background:var(--surf);border-radius:16px;padding:6px 30px 26px;margin-top:22px;border:1px solid var(--line2)}
+  .stage.s3{background:linear-gradient(180deg,#241327 0%,#181220 100%);border-color:rgba(155,69,214,0.32)}
+  .stage-head{display:flex;justify-content:space-between;align-items:flex-end;gap:16px;padding:22px 0 16px;border-bottom:1px solid var(--line)}
+  .stage-head .sn{font-family:var(--mono);font-size:11px;letter-spacing:0.16em;text-transform:uppercase;color:var(--fire);font-weight:600}
+  .stage-head h3{font-size:25px;margin-top:6px}
+  .stage-head .ssub{font-size:13px;color:var(--t3);margin-top:6px;max-width:440px;line-height:1.45}
+  .stage-head .rhs{text-align:right;white-space:nowrap}
+  .stage-head .amt{font-family:var(--mono);font-size:30px;color:var(--gold2);line-height:1}
+  .stage-head .amtsub{font-size:10px;color:var(--t3);letter-spacing:0.1em;text-transform:uppercase;margin-top:4px}
+  .stage .items{display:grid;grid-template-columns:1fr 1fr;gap:0 36px;margin-top:6px}
+  .stage .it{padding:12px 0;border-bottom:1px solid var(--line2);display:grid;grid-template-columns:1fr auto;gap:12px;align-items:baseline}
+  .stage .it .nm{font-size:14px;color:var(--t1);font-weight:500}
+  .stage .it .ds{font-size:12px;color:var(--t3);margin-top:3px;line-height:1.4}
+  .stage .it .vv{font-family:var(--mono);font-size:13px;color:var(--fire)}
+  .stage .unlock{margin-top:18px;font-size:13.5px;color:var(--t2);line-height:1.55}
+  .stage .unlock b{color:var(--gold)}
+
+  .esign{background:var(--surf);border:1px solid var(--line2);border-radius:16px;padding:24px 28px;margin-top:32px}
+  .esign-affirm{display:flex;gap:12px;align-items:flex-start;font-size:14px;color:var(--t2);line-height:1.55;padding-bottom:20px;border-bottom:1px solid var(--line2)}
+  .esign-affirm .chk{flex:none;width:22px;height:22px;border-radius:50%;background:var(--green-bg);color:var(--green);display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:700;margin-top:1px}
+  .esign-grid{display:grid;grid-template-columns:1fr 1fr;gap:28px;margin-top:22px}
+  .sigcard .acc-lab{font-size:11px;letter-spacing:0.14em;text-transform:uppercase;color:var(--t3);font-weight:600}
+  .sig-name{width:100%;margin-top:14px;background:rgba(255,255,255,0.04);border:1px solid var(--line);border-radius:8px;padding:12px 14px;color:var(--t1);font-family:var(--sans);font-size:15px}
+  .sig-name:focus{outline:none;border-color:var(--fire)}
+  .sig-agree{display:flex;gap:10px;align-items:flex-start;margin-top:12px;font-size:12.5px;color:var(--t2);line-height:1.5;cursor:pointer}
+  .sig-agree input{margin-top:2px;width:16px;height:16px;accent-color:var(--fire);flex:none}
+  .sig-btn{margin-top:14px;width:100%;padding:12px 18px;background:var(--fire);color:#1a0d05;font-weight:700;font-size:14px;border:none;border-radius:8px;cursor:pointer;font-family:var(--sans)}
+  .sig-btn:hover{background:var(--fire2)} .sig-btn:disabled{opacity:0.4;cursor:not-allowed}
+  .sig-done{margin-top:14px;border-top:1px dashed var(--line);padding-top:14px}
+  .sig-done .dchk{display:inline-flex;width:20px;height:20px;border-radius:50%;background:var(--green);color:#06210f;align-items:center;justify-content:center;font-size:12px;font-weight:800;vertical-align:middle;margin-right:8px}
+  .sig-script{font-family:'Caveat',cursive;font-size:30px;color:var(--t1);line-height:1;vertical-align:middle}
+  .sig-meta{font-family:var(--mono);font-size:11px;color:var(--green);margin-top:8px;letter-spacing:0.04em;font-weight:600}
+
+  .quote{font-family:var(--serif);font-style:italic;font-size:27px;line-height:1.42;color:var(--t1);font-weight:400;margin-top:8px}
+
+  .cta{background:radial-gradient(circle at 70% 20%,rgba(226,55,28,0.32),transparent 55%),linear-gradient(135deg,#221019 0%,#0D0A0F 70%);border-radius:22px;padding:56px 48px;margin-top:40px;text-align:center;border:1px solid var(--line2)}
+  .cta h2{font-size:40px}
+  .btn{display:inline-block;padding:16px 34px;background:var(--fire);color:#1a0d05;font-weight:700;font-size:15px;border-radius:10px;margin-top:26px}
+  .btn:hover{background:var(--fire2)}
+  .btn.ghost{background:transparent;color:var(--fire2);border:1px solid var(--fire);margin-left:12px}
+
+  footer{padding:46px 0 64px;border-top:1px solid var(--line2)}
+  footer .fine{font-family:var(--mono);font-size:11px;letter-spacing:0.04em;color:var(--t4);line-height:1.85}
+
+  @media screen and (max-width:780px){
+    .wrap{padding:0 20px}
+    .hero-grid,.heritage{grid-template-columns:1fr}
+    .hero-mascot{display:none}
+    .hero h1{font-size:38px} .hero{padding:48px 0 44px}
+    h2.big,.cta h2{font-size:28px}
+    .coverstats,.grid2,.grid3,.stat-row,.price-grid,.awards,.cast{grid-template-columns:1fr}
+    .coverstats .s+.s,.stat-row .s+.s{border-left:none;padding-left:0;border-top:1px solid var(--line)}
+    .tco .row{grid-template-columns:1fr;gap:6px} .bp-tier{grid-template-columns:1fr}
+    table{font-size:12px} th,td{padding:10px 8px}
+    .stage .items{grid-template-columns:1fr} .stage-head{flex-direction:column;align-items:flex-start}
+    .esign-grid{grid-template-columns:1fr;gap:20px}
+  }
+  @media print{
+    @page{size:A4;margin:12mm}
+    :root{
+      --bg:#fff;--surf:#FAF5EA;--surf2:#ffffff;--surf3:#F7F0FA;
+      --line:rgba(13,10,15,0.16);--line2:rgba(13,10,15,0.10);
+      --t1:#0D0A0F;--t2:#39333f;--t3:#6b6470;--t4:#9a94a0;
+      --fire:#B5560C;--fire2:#B5560C;--ember:#C0301A;--gold:#9A6B12;--gold2:#9A6B12;--grape:#7a2faa;--green:#2e8f48;
+      --fire-bg:rgba(181,86,12,0.10);--ember-bg:rgba(192,48,26,0.10);--gold-bg:rgba(154,107,18,0.10);--green-bg:rgba(46,140,72,0.13);--grape-bg:rgba(122,47,170,0.10);
+    }
+    html,body{background:#fff;color:#0D0A0F}
+    body{font-size:10pt;-webkit-print-color-adjust:exact;print-color-adjust:exact}
+    .bar{display:none}
+    a{color:#B5560C;text-decoration:none}
+    section{padding:15px 0;border-top:1px solid rgba(13,10,15,0.12)}
+    section:first-of-type,.hero{border-top:none}
+    .hero{padding:4px 0 12px} .hero:before{display:none}
+    .hero h1{font-size:25pt} .hero-mascot img{filter:none;max-width:185px}
+    h2.big,.cta h2{font-size:19pt} .lead{font-size:11.5pt}
+    .pcard,.photo,.art-cream,.art-dark,.awards>div,.tco .row,.bp,.esign,.sigcard,tr{page-break-inside:avoid}
+    .stage-head,.stage .it{page-break-inside:avoid}
+    .page-break{page-break-before:auto}
+    .card,.bp,.pcard,.feebox,.cta,.pcard.feature,.art-dark,.stage,.esign{box-shadow:none;border:1px solid rgba(13,10,15,0.12)}
+    .pcard.feature{background:#FAF5EA} .stage.s3{background:#F7F0FA} .cta{background:#FAF5EA;padding:22px}
+    .node{background:#fff;border:1px solid rgba(13,10,15,0.14)}
+    .tag.red{color:#C0301A} .tag.ok{color:#2e8f48} .tag.fire{color:#B5560C}
+    .btn{display:none}
+    .tco .track{background:rgba(13,10,15,0.08)}
+    img{max-width:100%}
+    .sig-btn{display:none}
+    .sig-name{border:none;border-bottom:1px solid #555;background:transparent;color:#0D0A0F;border-radius:0;padding:6px 0}
+  }
+</style>
+</head>
+<body>
+
+<div class="bar">
+  <div class="wrap">
+    <div class="brandmark"><img src="/proposals/bbqnfools/assets/fool-3.png" alt="BBQ'n Fools">BBQ'n Fools <span class="x">&times;</span> MarkCMO</div>
+    <div class="meta">PROPOSAL &middot; JUN 2026</div>
+  </div>
+</div>
+
+<div class="wrap">
+
+<!-- HERO -->
+<section class="hero" style="border-top:none">
+  <div class="hero-grid">
+    <div>
+      <span class="pill fire">Relaunch &amp; Scale &middot; Engagement Proposal</span>
+      <h1>Award-winning flavor. Now an <em>operation built to scale</em> - and to sell.</h1>
+      <p class="sub">A 12-to-24 month partnership to relaunch BBQ'n Fools on an owned, automated ecosystem for commerce, marketing, inventory, and accounting - so the business runs itself, keeps its margin, and is worth more the day you exit.</p>
+    </div>
+    <div class="hero-mascot">
+      <img src="/proposals/bbqnfools/assets/hero-jester.png" alt="BBQ'n Fools flaming jester mascot">
+    </div>
+  </div>
+
+  <div class="coverstats">
+    <div class="s"><div class="lab">Prepared for</div><div class="num small">Grant Ford</div><div class="fine">BBQ'n Fools, LLC &middot; bbqnfools.com</div></div>
+    <div class="s"><div class="lab">Prepared by</div><div class="num small">MarkCMO</div><div class="fine">Mark Gabrielli, fractional CMO</div></div>
+    <div class="s"><div class="lab">Catalog</div><div class="num">25 <span style="font-size:15px;color:var(--t3)">SKUs</span></div><div class="fine">phased, bestsellers first</div></div>
+    <div class="s"><div class="lab">5-year target</div><div class="num">$8M</div><div class="fine">on owned infrastructure</div></div>
+  </div>
+</section>
+
+<!-- THESIS -->
+<section id="thesis">
+  <span class="eyebrow">The thesis</span>
+  <h2 class="big">Stop renting your business. Own the whole machine.</h2>
+  <p class="kicker">The easy path for a relaunch is to bolt together Shopify, MailChimp, QuickBooks, and a marketing agency - then pay all four of them rent, every month, forever, while owning none of it. It is quick to stand up and it quietly bleeds margin as you grow. Worse, when an acquirer looks at the business, they see a pile of third-party subscriptions, not an asset.</p>
+  <p class="kicker">BBQ'n Fools is not starting from zero. It is a brand people already love, with awards on the wall and a loyal list. What it needs now is the machine underneath it: one owned system where the store, the email, the inventory, and the books all talk to each other and run with almost no hands on the wheel. We build that machine as IP you own outright - then partner with you to fill the shelf and grow revenue toward the exit.</p>
+
+  <div class="stat-row">
+    <div class="s"><div class="num gold">$5.28B</div><div class="lab">U.S. seasoning-blend market - BBQ rubs are the single largest segment at 26.5%</div></div>
+    <div class="s"><div class="num">$1.45B</div><div class="lab">U.S. hot sauce market in 2025, growing every year - DTC is lowering the barrier for niche brands</div></div>
+    <div class="s"><div class="num ember">~95%</div><div class="lab">of order, inventory, and accounting busywork automated away by an integrated owned system</div></div>
+  </div>
+</section>
+
+<!-- HERITAGE -->
+<section id="heritage" class="page-break">
+  <span class="eyebrow">Two decades of proof</span>
+  <h2 class="big">A championship pitmaster team. A 20-year trophy case. Product people already buy.</h2>
+  <div class="heritage">
+    <div class="cast">
+      <div class="art-cream"><img src="/proposals/bbqnfools/assets/char-dreadlock.png" alt="BBQ'n Fools dreadlock jester"></div>
+      <div class="art-cream"><img src="/proposals/bbqnfools/assets/char-skull.png" alt="BBQ'n Fools skull jester"></div>
+    </div>
+    <div>
+      <p class="kicker" style="margin-top:0">BBQ'n Fools is not a startup guess. It began as a competition team good enough to earn a seat at the Jack Daniels World Championship Invitational, win Grand Champion at multiple California state championships, and take Team of the Year honors. Those winning recipes became a packaged line that has won flavor awards almost every year since - including 1st-place Golden Chili and Scovie wins in 2026. The product wins, the demand is proven, and the "Fans of the Fool" list is still warm.</p>
+      <ul class="clean">
+        <li><strong>Jack Daniels World Invitational, 2003</strong> - plus Grand Champion CA state titles and multiple Team of the Year awards</li>
+        <li><strong>10+ Golden Chili 1st-place wins</strong> at the Fiery Food Challenge, 2004-2026, across sauces and rubs</li>
+        <li><strong>$100K/yr wholesale &amp; 40 Albertsons stores</strong> in California, won with person-to-person butcher sales (invoice on file)</li>
+        <li><strong>"Fans of the Fool"</strong> - a ~500-member list ready for early access and feedback</li>
+      </ul>
+    </div>
+  </div>
+  <div class="awards">
+    <div><div class="art-dark"><img src="/proposals/bbqnfools/assets/award-goldenchile-2021.jpg" alt="Golden Chili Award winner"></div><div class="cap">Golden Chili 1st - Fiery Food Challenge</div></div>
+    <div><div class="art-dark"><img src="/proposals/bbqnfools/assets/award-scovie-2018.jpg" alt="Scovie Awards First Place"></div><div class="cap">Scovie Awards - 1st Place</div></div>
+    <div><div class="art-dark"><img src="/proposals/bbqnfools/assets/award-spicyflaves-2025.png" alt="Spicy Flavor Awards winner"></div><div class="cap">Spicy Flavor Awards - 1st, Signature BBQ 2025</div></div>
+  </div>
+</section>
+
+<!-- LINEUP -->
+<section id="lineup" class="page-break">
+  <span class="eyebrow">The lineup</span>
+  <h2 class="big">25 SKUs deep, decorated, and ready to merchandise.</h2>
+  <p class="kicker">Sauces, rubs, seasonings, and a breadcrumb mix - most of them award-winners, with three more in R&amp;D (one launchable as early as late 2027). The catalog is broad enough to lead with a different hero for every audience and every season.</p>
+  <div class="grid3">
+    <div class="card">
+      <div class="k">Sauces</div>
+      <h4>Mild and sweet to deadly hot</h4>
+      <ul class="clean" style="margin-top:14px">
+        <li><strong>Signature Barbecue</strong> <span class="tag ok">crowd-pleaser</span> <span class="tag fire">award</span></li>
+        <li><strong>Mild Sweet BBQ</strong> <span class="tag ok">crowd-pleaser</span></li>
+        <li><strong>Spicy Teriyaki Pepper</strong> <span class="tag red">heat</span> <span class="tag fire">award</span></li>
+        <li><strong>Foolishly Hot BBQ &amp; Wing</strong> <span class="tag red">heat</span></li>
+        <li><strong>Deadly Hot &middot; Hot Sweet &middot; Signature Teriyaki</strong></li>
+      </ul>
+    </div>
+    <div class="card">
+      <div class="k">Rubs &amp; seasonings</div>
+      <h4>The most-decorated side of the house</h4>
+      <ul class="clean" style="margin-top:14px">
+        <li><strong>Signature Seasoning</strong> <span class="tag ok">all-purpose</span> <span class="tag fire">most awards</span></li>
+        <li><strong>Grant's Blend Magic Dust</strong> <span class="tag fire">award</span></li>
+        <li><strong>Signature Montreal BBQ Rub</strong> <span class="tag fire">award</span></li>
+        <li><strong>Chipotle Lime Dry Rub</strong> <span class="tag red">heat</span> <span class="tag fire">award</span></li>
+        <li><strong>Steak &middot; Burn Ya Twice Jerk &middot; Wing &middot; Pork &middot; Rib</strong></li>
+      </ul>
+    </div>
+    <div class="card">
+      <div class="k">Specialty + pipeline</div>
+      <h4>Range now, roadmap next</h4>
+      <ul class="clean" style="margin-top:14px">
+        <li><strong>Breadcrumb mix</strong> - a lane most competitors do not have</li>
+        <li><strong>Hot Apple Cider Mix</strong> <span class="tag fire">award</span></li>
+        <li><strong>3 new products in R&amp;D</strong> - one launchable late 2027</li>
+        <li>Deep enough to never force a launch on an unfinished SKU</li>
+      </ul>
+    </div>
+  </div>
+  <div class="photo" style="margin-top:24px"><img src="/proposals/bbqnfools/assets/products-lineup.jpg" alt="BBQ'n Fools rub and seasoning lineup"></div>
+  <p class="note">A 20-year flavor-award record across the Fiery Food Challenge (Golden Chili), Scovie, Spicy Flave, Rubs of Honor, the American Royal International Contest, and more - the receipts are in the product listing.</p>
+</section>
+
+<!-- COST -->
+<section id="cost" class="page-break">
+  <span class="eyebrow">The hidden cost of the default</span>
+  <h2 class="big">Shopify + MailChimp + QuickBooks + an agency is rent that never stops.</h2>
+  <p class="kicker">Card processing exists everywhere - that is not the issue. The issue is the stack of rent piled on top: a storefront subscription, an email bill that now charges for every contact whether you email them or not, a wall of paid apps, and an agency retainer to glue it all together by hand. Here is the honest math as a brand scales into its second year.</p>
+
+  <table>
+    <thead><tr><th>Recurring rent</th><th>Launch stage</th><th>Scaling stage</th><th>Who owns it</th></tr></thead>
+    <tbody>
+      <tr><td><strong>Storefront subscription</strong><br><span class="t3" style="font-size:12px">Shopify $79-399/mo, pushed to Plus at $2,300+/mo with volume</span></td><td class="mono">$399/mo</td><td class="mono">$2,300/mo</td><td><span class="tag red">Shopify</span></td></tr>
+      <tr><td><strong>Email / CRM</strong><br><span class="t3" style="font-size:12px">MailChimp &amp; Klaviyo bill on every profile, not on sends</span></td><td class="mono">$300/mo</td><td class="mono">$1,700-4,000/mo</td><td><span class="tag red">MailChimp</span></td></tr>
+      <tr><td><strong>App stack</strong><br><span class="t3" style="font-size:12px">Reviews, subscriptions, inventory sync, returns, bundles</span></td><td class="mono">$400/mo</td><td class="mono">$1,000-3,000/mo</td><td><span class="tag red">3rd parties</span></td></tr>
+      <tr><td><strong>Agency to run it</strong><br><span class="t3" style="font-size:12px">Manual glue between store, email, and books</span></td><td class="mono">$2,000+/mo</td><td class="mono">$4,000+/mo</td><td><span class="tag red">Agency</span></td></tr>
+      <tr><td><strong>Owned ecosystem (this proposal)</strong><br><span class="t3" style="font-size:12px">Cloudflare + Supabase + your own processor, automated</span></td><td class="mono" style="color:var(--green)">~$60/mo</td><td class="mono" style="color:var(--green)">~$95/mo</td><td><span class="tag ok">BBQ'n Fools</span></td></tr>
+    </tbody>
+  </table>
+
+  <div class="tco">
+    <div class="row"><div class="name">Rented stack, year 2 (tooling + agency)</div><div class="track"><div class="fill" style="width:100%;background:linear-gradient(90deg,#FF7A18,#E2371C)"></div></div><div class="v">~$110-160k/yr</div></div>
+    <div class="row"><div class="name">Owned ecosystem, year 2 (hosting)</div><div class="track"><div class="fill" style="width:1.5%;background:linear-gradient(90deg,#46B85A,#2e8f48)"></div></div><div class="v">~$1.1k/yr</div></div>
+  </div>
+  <h3 class="sec fire" style="font-size:18px;margin-top:48px">And then there are the fees taken off every sale</h3>
+  <p class="kicker">The subscriptions above are only half of it. The other half is skimmed off the top of revenue - so the more BBQ'n Fools sells, the more these platforms make. That is the part most founders never see until they are big enough for it to hurt. Here is the anatomy of the per-sale load.</p>
+  <table>
+    <thead><tr><th>Fee taken off each sale</th><th>Who charges it</th><th>Rented stack</th><th>Owned stack</th></tr></thead>
+    <tbody>
+      <tr><td><strong>Card / merchant processing</strong><br><span class="t3" style="font-size:12px">Unavoidable anywhere - but Shopify marks it up</span></td><td>Processor</td><td class="mono">~2.9% + $0.30</td><td class="mono">your own rate</td></tr>
+      <tr><td><strong>Shopify platform fee</strong><br><span class="t3" style="font-size:12px">Plus takes up to 0.40% of everything you sell</span></td><td><span class="tag red">Shopify</span></td><td class="mono">up to 0.40%</td><td class="mono" style="color:var(--green)">$0</td></tr>
+      <tr><td><strong>Outside-gateway penalty</strong><br><span class="t3" style="font-size:12px">Charged if you do not use Shopify Payments</span></td><td><span class="tag red">Shopify</span></td><td class="mono">0.15-2.0%</td><td class="mono" style="color:var(--green)">$0</td></tr>
+      <tr><td><strong>Email, per profile</strong><br><span class="t3" style="font-size:12px">Klaviyo/MailChimp bill grows with your whole list</span></td><td><span class="tag red">Klaviyo</span></td><td class="mono">~0.8% of rev</td><td class="mono">~0.1% by send</td></tr>
+      <tr><td><strong>App-stack cut</strong><br><span class="t3" style="font-size:12px">Subscriptions, reviews, loyalty, bundles, returns</span></td><td><span class="tag red">3rd parties</span></td><td class="mono">~1.0% of rev</td><td class="mono" style="color:var(--green)">built in</td></tr>
+      <tr><td><strong>Effective load on every sale</strong></td><td>&mdash;</td><td class="mono" style="color:var(--ember);font-weight:600">~6.3%</td><td class="mono" style="color:var(--green);font-weight:600">~3.8%</td></tr>
+    </tbody>
+  </table>
+
+  <div class="page-break"></div>
+  <h3 class="sec fire" style="font-size:18px;margin-top:46px">What that load costs as you scale to $8M</h3>
+  <p class="kicker">Because it is a percentage, the bill grows every time your sales do - the rented platforms quite literally make more the more you make. Same revenue, two very different annual bills, and the gap is money you keep.</p>
+  <table>
+    <thead><tr><th>Annual sales</th><th>Rented stack &middot; ~6.3%</th><th>Owned stack &middot; ~3.8%</th><th>You keep / year</th></tr></thead>
+    <tbody>
+      <tr><td class="mono"><strong>$1M</strong></td><td class="mono">$63,000</td><td class="mono">$38,000</td><td class="mono" style="color:var(--green)">$25,000</td></tr>
+      <tr><td class="mono"><strong>$2M</strong></td><td class="mono">$126,000</td><td class="mono">$76,000</td><td class="mono" style="color:var(--green)">$50,000</td></tr>
+      <tr><td class="mono"><strong>$3M</strong></td><td class="mono">$189,000</td><td class="mono">$114,000</td><td class="mono" style="color:var(--green)">$75,000</td></tr>
+      <tr><td class="mono"><strong>$4M</strong></td><td class="mono">$252,000</td><td class="mono">$152,000</td><td class="mono" style="color:var(--green)">$100,000</td></tr>
+      <tr><td class="mono"><strong>$5M</strong></td><td class="mono">$315,000</td><td class="mono">$190,000</td><td class="mono" style="color:var(--green)">$125,000</td></tr>
+      <tr><td class="mono"><strong>$6M</strong></td><td class="mono">$378,000</td><td class="mono">$228,000</td><td class="mono" style="color:var(--green)">$150,000</td></tr>
+      <tr><td class="mono"><strong>$7M</strong></td><td class="mono">$441,000</td><td class="mono">$266,000</td><td class="mono" style="color:var(--green)">$175,000</td></tr>
+      <tr><td class="mono"><strong>$8M</strong></td><td class="mono" style="color:var(--ember);font-weight:600">$504,000</td><td class="mono">$304,000</td><td class="mono" style="color:var(--green);font-weight:600">$200,000</td></tr>
+    </tbody>
+  </table>
+  <p class="note" style="font-size:14px;color:var(--t2)">At your $8M target, the rented model skims roughly <strong style="color:var(--ember)">$504K a year</strong> off the top - and you own none of it. The owned stack runs about <strong>$304K</strong>, almost all of it the card processing you would pay anywhere, so you keep close to <strong style="color:var(--green)">$200K every year</strong> - on per-sale fees alone, before the subscriptions and agency above. That is the difference between a platform that profits when you grow and one you own outright.</p>
+  <p class="note">Per-sale percentages are illustrative blended estimates at roughly $35 average order value; your exact rates will vary, and the outside-gateway penalty and agency retainer sit on top of the rented column. Owned does not mean free - card processing and shipping exist everywhere; owning removes the subscription rent, the platform and gateway cuts, the per-profile email tax, and the app fees. Sources: IMARC, Fortune Business Insights, Grand View Research; Shopify Plus, Klaviyo &amp; MailChimp 2025-2026 pricing disclosures.</p>
+</section>
+
+<!-- COMPETITIVE -->
+<section id="competitive">
+  <span class="eyebrow">Competitive analysis</span>
+  <h2 class="big">How the winners win - and the lane BBQ'n Fools already owns.</h2>
+  <p class="kicker">The category is crowded but legible. Nearly every breakout sauce or rub brand wins on one of five repeatable plays - and almost all of them rent the same leaky stack. Very few pair award-winning product, a brand with genuine character, and an owned, automated system. That intersection is BBQ'n Fools.</p>
+  <table>
+    <thead><tr><th>Brand</th><th>Winning play</th><th>Platform</th><th>Price band</th><th>The opening</th></tr></thead>
+    <tbody>
+      <tr><td><strong>Truff</strong></td><td>Luxury design + gifting, heavy influencer</td><td><span class="tag red">Shopify</span></td><td class="mono">$17-35</td><td>Premium but precious; no everyday warmth</td></tr>
+      <tr><td><strong>Heatonist / Hot Ones</strong></td><td>Curation + media flywheel</td><td><span class="tag red">Shopify</span></td><td class="mono">$12-25</td><td>A marketplace, not one owned brand</td></tr>
+      <tr><td><strong>Meat Church</strong></td><td>Founder face + content moat</td><td><span class="tag red">Shopify</span></td><td class="mono">$11-15</td><td>Content is the moat - replicable here</td></tr>
+      <tr><td><strong>Kosmos Q</strong></td><td>Competition-BBQ credibility, bundles</td><td><span class="tag red">Shopify</span></td><td class="mono">$10-20</td><td>Insider lean; less mainstream charm</td></tr>
+      <tr><td><strong>Bachan's</strong></td><td>Family story + retail breakout</td><td><span class="tag red">Shopify</span></td><td class="mono">$10-13</td><td>One hero SKU; thin rub presence</td></tr>
+    </tbody>
+  </table>
+  <div class="grid2">
+    <div class="card"><div class="k">The pattern</div><h4>Five plays, one leaky stack</h4><p>Every winner picks one angle - and every one of them rents Shopify and pays the email tax. The product is good; the economics and the ownership are not.</p></div>
+    <div class="card"><div class="k">The lane for BBQ'n Fools</div><h4>Foolproof, award-winning, owned</h4><p>The jester brand is a gift - confident, irreverent, fun, anti-snob, built for the home cook who wants to look like a pitmaster. Pair that with real awards, a warm list, and an owned automated system, and you out-position the luxury brands on warmth and out-build all of them on economics.</p></div>
+  </div>
+</section>
+
+<!-- THE BUILD -->
+<section id="platform" class="page-break">
+  <span class="eyebrow">The build</span>
+  <h2 class="big">One owned ecosystem. Four engines. Almost no hands on the wheel.</h2>
+  <p class="kicker">We are not reskinning Shopify. We build BBQ'n Fools a lean commerce, marketing, operations, and discovery stack on the same infrastructure that runs MarkCMO's own portfolio - Cloudflare at the edge, Supabase for data. It is fast, it is automated, and it is yours to keep.</p>
+  <div class="grid2">
+    <div class="card"><div class="k">Engine 01</div><h4>Commerce + B2B</h4><p>A storefront that loads in under a second worldwide, branded checkout, bundles, and subscriptions - plus a wholesale portal for retail and distributor accounts, built on the Albertsons-and-distributor playbook you already know. Your own processor, no platform fee per order.</p></div>
+    <div class="card"><div class="k">Engine 02</div><h4>Marketing + CRM</h4><p>The MailChimp killer. Own your list and your data, with automated lifecycle flows - welcome, waitlist, abandoned cart, post-purchase, restock, win-back - billed by send, not by every "Fan of the Fool" you have ever collected.</p></div>
+    <div class="card"><div class="k">Engine 03</div><h4>Operations + Automation</h4><p>The piece most brands never build: inventory and stock sync, orders routed automatically to your Stephen Gould 3PL and co-packers, and a live two-way QuickBooks feed - all in one dashboard. We wire it for your point-A-to-Z test run first, then scale. This is the engine that removes ~95% of the manual labor and lets the business run itself.</p></div>
+    <div class="card"><div class="k">Engine 04</div><h4>SEO + Content</h4><p>Programmatic recipe and pairing pages, technical schema, and an editorial layer engineered to rank for "best brisket rub" and to get cited by AI answer engines like ChatGPT and Perplexity - the new top of funnel.</p></div>
+  </div>
+
+  <div class="bp">
+    <div class="bp-tier"><div class="lyr">Edge</div><div class="bp-nodes"><div class="node"><b>Cloudflare Pages</b><span>Storefront + global CDN</span></div><div class="node"><b>Workers</b><span>Checkout, API, automation</span></div><div class="node"><b>R2</b><span>Product + brand media</span></div></div></div>
+    <div class="bp-tier"><div class="lyr">Data</div><div class="bp-nodes"><div class="node"><b>Supabase / Postgres</b><span>Products, orders, customers, stock</span></div><div class="node"><b>Event pipeline</b><span>First-party analytics</span></div></div></div>
+    <div class="bp-tier"><div class="lyr">Commerce</div><div class="bp-nodes"><div class="node"><b>Square / Stripe</b><span>Your processor, your rate</span></div><div class="node"><b>Subscriptions</b><span>Repeat-buyer revenue</span></div><div class="node"><b>Wholesale portal</b><span>B2B / distributor</span></div></div></div>
+    <div class="bp-tier"><div class="lyr">Operations</div><div class="bp-nodes"><div class="node"><b>Stephen Gould 3PL</b><span>Automated order routing</span></div><div class="node"><b>Inventory + co-packer</b><span>Stock sync across SKUs</span></div><div class="node"><b>QuickBooks sync</b><span>Two-way accounting feed</span></div></div></div>
+    <div class="bp-tier"><div class="lyr">Marketing</div><div class="bp-nodes"><div class="node"><b>Owned email engine</b><span>List + flows + waitlist</span></div><div class="node"><b>SEO content engine</b><span>Recipes, schema, AI citation</span></div><div class="node"><b>Reviews + UGC</b><span>Social proof on-site</span></div></div></div>
+  </div>
+  <p class="note"><strong>It plugs into the work you are already doing.</strong> You own product - co-packers, bottle selection, shelf-ready cases, FDA labels, manufacturing (~90% done). We build the digital layer on top and coordinate with it, including your Stephen Gould 3PL. And honest about what is not free: card processing, transactional email volume, and shipping are real costs on any platform. Owned does not mean free - it means no subscription rent, no per-profile email tax, no per-sale platform cut, no agency to glue it together by hand, and full ownership of your data, your margin, and your IP.</p>
+</section>
+
+<!-- BRAND + SITE -->
+<section id="brand">
+  <span class="eyebrow">Brand &amp; website</span>
+  <h2 class="big">Sharpen the brand. Build a store worth landing on.</h2>
+  <div class="art-cream" style="max-width:560px;margin:26px auto 0;padding:24px"><img src="/proposals/bbqnfools/assets/brand-logo-lockup.png" alt="BBQ'n Fools logo"></div>
+  <div class="grid2">
+    <div>
+      <h3 class="sec fire" style="font-size:18px">Brand system refresh</h3>
+      <ul class="clean">
+        <li><strong>Positioning &amp; voice</strong> - the "foolproof flavor" platform around the jester cast</li>
+        <li><strong>Logo, characters &amp; marks</strong> - your existing art systematized for web, retail, and packaging</li>
+        <li><strong>Color, type &amp; art direction</strong> - the fiery jester palette, made consistent everywhere</li>
+        <li><strong>FDA-ready label direction</strong> - design support as you update to current standards</li>
+        <li><strong>Brand guidelines</strong> - one document so every future SKU stays on-brand</li>
+      </ul>
+    </div>
+    <div>
+      <h3 class="sec fire" style="font-size:18px">The website</h3>
+      <ul class="clean">
+        <li><strong>Homepage + brand story</strong> - the awards, the heritage, the cast of Fools</li>
+        <li><strong>Product pages</strong> - heat scale, pairings, recipes, reviews, schema</li>
+        <li><strong>Shop, cart &amp; branded checkout</strong> - fast, mobile-first, conversion-tuned</li>
+        <li><strong>Wholesale / B2B portal</strong> - for retail and distributor accounts</li>
+        <li><strong>Recipe / content hub</strong> - the SEO and retention flywheel</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- LAUNCH STRATEGY -->
+<section id="launch" class="page-break">
+  <span class="eyebrow">Launch strategy</span>
+  <h2 class="big">Two rooms, two heroes - and a system that serves both.</h2>
+  <p class="kicker">The sharpest lever in the lineup is that your biggest winners split by audience. The chili-head room - the March Fiery Food &amp; Barbecue Show - wants Spicy Teriyaki Pepper and Chipotle Lime. The everyday shopper who fills a grocery cart wants Signature Seasoning and Mild Sweet BBQ. Most brands pick one and quietly lose the other. The owned platform lets you merchandise, email, and waitlist by audience, so the right hero leads in the right room.</p>
+  <div class="grid2">
+    <div class="card"><div class="k">March &middot; Fiery Food &amp; BBQ Show</div><h4>Lead with the heat</h4><p>The room is chili heads and heat lovers. Front the line with <strong>Spicy Teriyaki Pepper</strong>, <strong>Chipotle Lime</strong>, <strong>Deadly Hot</strong>, and <strong>Burn Ya Twice</strong> - the SKUs that already win in that crowd.</p></div>
+    <div class="card"><div class="k">DTC + retail &middot; everyday shoppers</div><h4>Lead with the crowd-pleasers</h4><p>The grocery-cart shopper wants approachable flavor. Front <strong>Signature Seasoning</strong>, <strong>Mild Sweet BBQ</strong>, <strong>Signature Barbecue</strong>, and <strong>Grant's Blend Magic Dust</strong> - broad, award-winning, repeat-buy.</p></div>
+  </div>
+  <div class="grid3" style="margin-top:20px">
+    <div class="card"><div class="k">Demand control</div><h4>Waitlist-gated drops</h4><p>Release in controlled waves with a waitlist. Demand becomes a signal, not a fire drill - "sold out, join the list" builds urgency instead of refunds and bad reviews.</p></div>
+    <div class="card"><div class="k">Reach</div><h4>Influencer ignition</h4><p>Seed launches with BBQ and hot-sauce creators who already have the audience. Trackable codes, affiliate links, and UGC feeding straight back into the owned site.</p></div>
+    <div class="card"><div class="k">Sequencing</div><h4>Bestsellers first</h4><p>Open with 4-6 proven SKUs so production and Stephen Gould fulfillment stay sane, then phase in the rest. The "Fans of the Fool" list gets first access.</p></div>
+  </div>
+  <div class="grid2" style="margin-top:22px">
+    <div class="photo"><img src="/proposals/bbqnfools/assets/food-brats.jpg" alt="BBQ'n Fools on the grill"></div>
+    <div class="photo"><img src="/proposals/bbqnfools/assets/food-primerib.jpg" alt="Prime rib seasoned with BBQ'n Fools rub"></div>
+  </div>
+</section>
+
+<!-- ROADMAP -->
+<section id="roadmap" class="page-break">
+  <span class="eyebrow">Roadmap &middot; 12-24 months</span>
+  <h2 class="big">From discovery to a Christmas soft launch to the March trade-show debut.</h2>
+  <div class="road">
+    <div class="phase"><div class="wk">Phase 1 &middot; Jul-Aug 2026</div><h4>Discovery &amp; brand</h4><p>Brand workshop, competitive and keyword deep-dive, catalog and pricing plan for the first 4-6 SKUs and the full 25, system architecture, and brand-system refresh.</p></div>
+    <div class="phase"><div class="wk">Phase 2 &middot; Aug-Oct 2026</div><h4>Build the ecosystem</h4><p>Commerce + B2B storefront, owned marketing/CRM engine, and the operations engine - inventory sync, QuickBooks feed, and order routing wired to your Stephen Gould 3PL for the point-A-to-Z test run.</p></div>
+    <div class="phase"><div class="wk">Phase 3 &middot; Oct-Nov 2026</div><h4>Content &amp; pre-launch</h4><p>SEO content hub, schema, analytics, "Fans of the Fool" early access, waitlist live, influencer seeding lined up.</p></div>
+    <div class="phase launch"><div class="wk">Phase 4 &middot; December 2026</div><h4>Christmas soft launch</h4><p>4-6 bestsellers live, payments and fulfillment running, first campaigns out, waitlist managing demand, dashboard reporting real numbers.</p></div>
+    <div class="phase launch"><div class="wk">Phase 5 &middot; Jan-Mar 2027</div><h4>Trade-show debut</h4><p>Scale prep, B2B/wholesale enablement, influencer program in full swing, and the major launch at the March trade show.</p></div>
+    <div class="phase"><div class="wk">Phase 6 &middot; 2027-2028</div><h4>Scale to 25 SKUs, R&amp;D &amp; the exit</h4><p>Full catalog rollout, the R&amp;D pipeline (3 new products, one launchable late 2027), infrastructure tuned for $5-10M, and the business packaged as a clean, automated, acquisition-ready asset.</p></div>
+  </div>
+</section>
+
+<!-- EXIT -->
+<section id="exit">
+  <span class="eyebrow">Built to sell</span>
+  <h2 class="big">Every decision here raises the number on the day you exit.</h2>
+  <p class="kicker">You already have investor interest and a letter of intent on the table. The fastest way to grow that valuation is not more spend - it is owned IP and an operation that does not depend on you. Acquirers pay a premium for a business with its own systems, clean automated books, owned customer data, and margins that hold as it scales. A pile of cancelable third-party subscriptions is a discount; an owned, automated ecosystem is a multiple.</p>
+  <div class="stat-row">
+    <div class="s"><div class="num gold">Owned IP</div><div class="lab">Code, data, brand, and list are assets on the balance sheet, not rented tools</div></div>
+    <div class="s"><div class="num">Clean books</div><div class="lab">Automated QuickBooks feed means diligence-ready financials from day one</div></div>
+    <div class="s"><div class="num ember">Runs itself</div><div class="lab">A business that does not depend on the founder is worth a higher multiple</div></div>
+  </div>
+</section>
+
+<!-- PRICING -->
+<section id="pricing" class="page-break">
+  <span class="eyebrow">Investment</span>
+  <h2 class="big">Three build stages, then a retainer that grows with you.</h2>
+  <p class="kicker">The build is staged so spend always tracks the business. Stage 1 gets you selling. Stage 2 scales the catalog and opens the channels. Stage 3 is the enterprise layer that makes the company run itself and sell for a premium. Each stage stands alone - you green-light the next only once the last has earned it.</p>
+
+  <div class="stage">
+    <div class="stage-head">
+      <div class="lhs"><div class="sn">Stage 1 &middot; Foundation</div><h3>Get the Fools selling</h3><div class="ssub">Brand, the owned ecosystem, and a live store with bestsellers - ready for the March trade show.</div></div>
+      <div class="rhs"><div class="amt">$47,000</div><div class="amtsub">one-time</div></div>
+    </div>
+    <div class="items">
+      <div class="it"><div><div class="nm">Brand system refresh</div><div class="ds">Positioning, character system, palette, label + packaging direction</div></div><div class="vv">$5,500</div></div>
+      <div class="it"><div><div class="nm">Commerce + B2B platform</div><div class="ds">Storefront, branded checkout, subscriptions, wholesale portal, admin</div></div><div class="vv">$14,500</div></div>
+      <div class="it"><div><div class="nm">Marketing + CRM engine</div><div class="ds">Owned list, segments, lifecycle + waitlist flows</div></div><div class="vv">$7,500</div></div>
+      <div class="it"><div><div class="nm">Operations + automation</div><div class="ds">Inventory sync, routing to Stephen Gould, two-way QuickBooks</div></div><div class="vv">$9,500</div></div>
+      <div class="it"><div><div class="nm">SEO + content infrastructure</div><div class="ds">Content hub, programmatic templates, schema, analytics</div></div><div class="vv">$5,500</div></div>
+      <div class="it"><div><div class="nm">Soft launch - Christmas, 4-6 SKUs</div><div class="ds">Payments, fulfillment, launch content, waitlist, first campaign</div></div><div class="vv">$4,500</div></div>
+    </div>
+    <p class="unlock"><b>Unlocks:</b> an owned, selling store with bestsellers live and the books wired - the foundation everything else is built on. Payment: 40% start / 35% staging / 25% go-live.</p>
+  </div>
+
+  <div class="stage">
+    <div class="stage-head">
+      <div class="lhs"><div class="sn">Stage 2 &middot; Scale</div><h3>Fill the shelf, open the channels</h3><div class="ssub">Turn a working store into a multi-channel machine across DTC, wholesale, and retail.</div></div>
+      <div class="rhs"><div class="amt">$72,000</div><div class="amtsub">one-time</div></div>
+    </div>
+    <div class="items">
+      <div class="it"><div><div class="nm">Full 25-SKU catalog + dual-audience merchandising</div><div class="ds">Heat vs. everyday storefronts, bundles, gifting</div></div><div class="vv">$12,000</div></div>
+      <div class="it"><div><div class="nm">Wholesale / retail EDI + distributor portal</div><div class="ds">Stephen Gould, brokers, retail accounts, purchase orders</div></div><div class="vv">$14,000</div></div>
+      <div class="it"><div><div class="nm">Subscription, loyalty &amp; referral systems</div><div class="ds">Repeat-buyer revenue and word-of-mouth engines</div></div><div class="vv">$9,500</div></div>
+      <div class="it"><div><div class="nm">Demand forecasting + auto-reorder</div><div class="ds">Co-packer and 3PL replenishment on autopilot</div></div><div class="vv">$11,000</div></div>
+      <div class="it"><div><div class="nm">Paid-acquisition + server-side tracking</div><div class="ds">Meta / Google infrastructure, attribution, CAPI</div></div><div class="vv">$9,500</div></div>
+      <div class="it"><div><div class="nm">Advanced lifecycle / SMS / replenishment</div><div class="ds">Segmentation, win-back, restock, SMS revenue</div></div><div class="vv">$8,000</div></div>
+      <div class="it"><div><div class="nm">Content + SEO engine expansion</div><div class="ds">Programmatic recipe scale, AI-citation optimization</div></div><div class="vv">$8,000</div></div>
+    </div>
+    <p class="unlock"><b>Unlocks:</b> a multi-channel operation doing $1-3M, with wholesale and retention revenue compounding on top of DTC. Phased over the year following launch.</p>
+  </div>
+
+  <div class="stage s3">
+    <div class="stage-head">
+      <div class="lhs"><div class="sn">Stage 3 &middot; Enterprise value</div><h3>Run itself. Sell for a premium.</h3><div class="ssub">The enterprise layer that supports $5-10M and packages the company as an acquisition-grade asset.</div></div>
+      <div class="rhs"><div class="amt">$135,000</div><div class="amtsub">one-time</div></div>
+    </div>
+    <div class="items">
+      <div class="it"><div><div class="nm">ERP-grade operations + multi-warehouse</div><div class="ds">Landed cost, COGS, lot tracking, multi-node fulfillment</div></div><div class="vv">$24,000</div></div>
+      <div class="it"><div><div class="nm">Omnichannel: Amazon, retail, marketplace</div><div class="ds">EDI / 3PL integrations and channel sync</div></div><div class="vv">$22,000</div></div>
+      <div class="it"><div><div class="nm">Data warehouse + BI dashboards</div><div class="ds">Real-time P&amp;L, cohort, LTV, channel margin</div></div><div class="vv">$20,000</div></div>
+      <div class="it"><div><div class="nm">Custom AI / automation copilots</div><div class="ds">Support, reorder, content, and ops automation</div></div><div class="vv">$19,000</div></div>
+      <div class="it"><div><div class="nm">Financial automation + investor reporting</div><div class="ds">Board-grade financials straight from the system</div></div><div class="vv">$18,000</div></div>
+      <div class="it"><div><div class="nm">IP documentation + valuation packaging</div><div class="ds">Diligence-ready data room for raise or acquisition</div></div><div class="vv">$18,000</div></div>
+      <div class="it"><div><div class="nm">Security, reliability &amp; compliance hardening</div><div class="ds">Uptime, backups, access control, audit trail</div></div><div class="vv">$14,000</div></div>
+    </div>
+    <p class="unlock"><b>Unlocks:</b> a self-running, $5-10M-ready operation packaged as a clean, automated, acquisition-grade asset that commands a premium multiple on exit.</p>
+  </div>
+
+  <p class="note">Stages are sequential and optional - Stage 1 stands alone, and you commit to Stage 2 and Stage 3 only when the business has earned them. Combined build across all three stages is roughly $254,000, spread across the engagement as the company scales.</p>
+
+  <div class="page-break"></div>
+  <h3 class="sec fire" style="font-size:18px;margin-top:46px">Growth retainer - it scales as the company does</h3>
+  <p class="kicker">As BBQ'n Fools grows from zero to $5M, the work and my involvement grow with it. The retainer steps up at clear revenue milestones - never a surprise, always tied to results.</p>
+  <div class="price-grid">
+    <div class="pcard">
+      <div class="tier">Launch &middot; $0-1M</div>
+      <div class="amt">$7,500<span style="font-size:14px;color:var(--t3)">/mo</span></div>
+      <div class="per">Through soft launch &amp; the March show</div>
+      <ul>
+        <li>SKU onboarding + dual-audience merchandising</li>
+        <li>Campaigns, core flows, waitlist drops</li>
+        <li>SEO content cadence</li>
+        <li>Ops + QuickBooks support</li>
+        <li>Monthly reporting</li>
+      </ul>
+    </div>
+    <div class="pcard feature">
+      <div class="tier">Scale &middot; $1-3M</div>
+      <div class="amt">$10,000<span style="font-size:14px;color:var(--t3)">/mo</span></div>
+      <div class="per">Multi-channel growth</div>
+      <ul>
+        <li>Full 25-SKU rollout</li>
+        <li>Paid + influencer acquisition</li>
+        <li>Wholesale / retail enablement</li>
+        <li>CRO + advanced lifecycle</li>
+        <li>Bi-weekly strategy, deeper involvement</li>
+      </ul>
+    </div>
+    <div class="pcard">
+      <div class="tier">Enterprise &middot; $3-5M+</div>
+      <div class="amt">$15,000<span style="font-size:14px;color:var(--t3)">/mo</span></div>
+      <div class="per">Toward $5M and the exit</div>
+      <ul>
+        <li>Omnichannel + enterprise ops</li>
+        <li>Amazon / retail / distributor scale</li>
+        <li>Exit-readiness &amp; investor reporting</li>
+        <li>Weekly executive cadence</li>
+        <li>Fractional-CMO-level involvement</li>
+      </ul>
+    </div>
+  </div>
+  <p class="note">Milestones from zero to $5M/yr: the retainer steps from $7,500 to $10,000 to $15,000 as revenue crosses $1M and $3M - each step reflects more work, more channels, and more of my time. 6-month initial term, then month-to-month. It replaces the agency you would otherwise hire and most of the SaaS rent the default stack would charge - while compounding an asset you own.</p>
+</section>
+
+<!-- WHY -->
+<section id="why">
+  <span class="eyebrow">Why MarkCMO</span>
+  <p class="quote">"Most agencies set you up to pay rent forever. I build you an asset that runs itself - then help you grow it toward the number you want on the day you sell. Straight advice, not a sales pitch."</p>
+  <div class="grid3" style="margin-top:34px">
+    <div class="card"><div class="k">Operator, not vendor</div><h4>I run this stack daily</h4><p>Cloudflare, Supabase, owned email and automation - the infrastructure behind a live portfolio of brands, not a theory deck.</p></div>
+    <div class="card"><div class="k">Full-stack</div><h4>Brand to back office</h4><p>Positioning, design, software, operations, accounting integration, SEO, and lifecycle under one roof - no handoffs, no finger-pointing.</p></div>
+    <div class="card"><div class="k">Aligned</div><h4>You own everything</h4><p>The code, the data, the list, the brand, the books. If we ever part ways, you keep the entire asset - that is the whole point.</p></div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section id="next" style="border-top:none">
+  <div class="cta">
+    <span class="eyebrow">We're underway</span>
+    <h2>You're in. Let's get the Fools selling - then build the machine.</h2>
+    <p class="lead" style="margin:18px auto 0;max-width:600px">Samples and the award list are on the way. Next: a working session to lock the first 4-6 SKUs and the Christmas soft-launch plan, and we begin discovery this week.</p>
+    <a class="btn" href="mailto:mark@markcmo.com?subject=BBQ'n%20Fools%20-%20kickoff">Schedule the working session</a>
+    <a class="btn ghost" href="https://markcmo.com">markcmo.com</a>
+  </div>
+</section>
+
+<!-- NEXT STEPS -->
+<section id="begin" class="page-break">
+  <span class="eyebrow">Next steps</span>
+  <h2 class="big">Terms to begin.</h2>
+  <p class="kicker">A simple start: a one-time engagement fee plus half of the Stage 1 build kicks everything off. The retainer does not bill in the first month - it begins on the 1st of the following month, then monthly on the 1st.</p>
+  <div class="feebox">
+    <div class="frow"><div><div class="fname">Engagement fee</div><div class="fdesc">One-time, secures your start and kicks off discovery + the brand workshop</div></div><div class="fv">$10,000</div></div>
+    <div class="frow"><div><div class="fname">Stage 1 deposit - 50%</div><div class="fdesc">Half of the $47,000 foundation build, due to begin</div></div><div class="fv">$23,500</div></div>
+    <div class="frow total"><div><div class="fname">Total to begin</div><div class="fdesc">Engagement fee + Stage 1 deposit</div></div><div class="fv">$33,500</div></div>
+    <div class="frow"><div><div class="fname">Stage 1 balance - 50%</div><div class="fdesc">Remaining half of the foundation build, due at go-live</div></div><div class="fv">$23,500</div></div>
+    <div class="frow"><div><div class="fname">Monthly retainer - Launch tier</div><div class="fdesc">Not billed in month one; first invoice on the 1st of the following month, then monthly on the 1st</div></div><div class="fv">$7,500/mo</div></div>
+  </div>
+  <p class="note">Stages 2 and 3 are quoted separately and begin only when you green-light them. The retainer steps to $10,000 and $15,000 as revenue crosses the $1M and $3M milestones.</p>
+  <div class="esign">
+    <div class="esign-affirm"><span class="chk">&#10003;</span><div>By approving below, you commit to seeing the full scope of this engagement through to completion - and confirm we are getting started now. MarkCMO counter-signs, then emails your full scope of work and wire/ACH payment instructions.</div></div>
+    <div class="esign-grid">
+      <div class="sigcard" id="clientSign">
+        <div class="acc-lab">Approved for BBQ'n Fools, LLC</div>
+        <input class="sig-name" type="text" placeholder="Type full name to approve" autocomplete="name" aria-label="Your full name">
+        <label class="sig-agree"><input type="checkbox" class="sig-check"> I approve this proposal and commit to seeing the full scope through to completion - we are getting started now.</label>
+        <button class="sig-btn" type="button" disabled>Approve &amp; get started</button>
+        <div class="sig-msg" style="margin-top:12px;font-size:13px;color:var(--fire2);min-height:16px"></div>
+      </div>
+      <div class="sigcard">
+        <div class="acc-lab">MarkCMO</div>
+        <p style="font-size:13.5px;color:var(--t2);line-height:1.55;margin-top:14px">When you approve, MarkCMO is notified to counter-sign. You then receive an email with your full <strong style="color:var(--t1)">scope of work</strong> and <strong style="color:var(--t1)">wire/ACH payment instructions</strong> to begin.</p>
+        <div style="margin-top:14px;font-family:var(--mono);font-size:11px;color:var(--t3);letter-spacing:0.04em">COUNTER-SIGNED AFTER YOUR APPROVAL</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div style="font-size:12px;letter-spacing:0.04em;color:var(--gold);font-weight:600;margin-bottom:14px">CONFIDENTIAL - Do not use or distribute this information without Mark Gabrielli's consent.</div>
+  <div class="fine">
+    MARKCMO &middot; ENGAGEMENT PROPOSAL FOR BBQ'N FOOLS, LLC (GRANT FORD) &middot; PREPARED JUNE 2026<br>
+    Pricing valid 30 days from issue. Figures exclude baseline card processing, shipping, and ad spend.<br>
+    Market data: IMARC Group, Fortune Business Insights, Grand View Research. Platform pricing: Shopify Plus, Klaviyo &amp; MailChimp 2025-2026 disclosures.<br>
+    Brand art and award marks &copy; BBQ'n Fools / Spicy Food Productions, used with permission for this proposal.<br>
+    mark@markcmo.com &middot; markcmo.com
+  </div>
+</footer>
+
+</div>
+<script>
+(function(){
+  var W='https://markcmo-proposals.marklgabriellijr.workers.dev';
+  var card=document.getElementById('clientSign'); if(!card) return;
+  var name=card.querySelector('.sig-name'),chk=card.querySelector('.sig-check'),btn=card.querySelector('.sig-btn'),msg=card.querySelector('.sig-msg');
+  function sync(){ btn.disabled=!(name.value.trim().length>1 && chk.checked); }
+  name.addEventListener('input',sync); chk.addEventListener('change',sync);
+  btn.addEventListener('click',function(){
+    if(btn.disabled) return;
+    btn.disabled=true; btn.textContent='Approving...';
+    fetch(W+'/sign',{method:'POST',headers:{'content-type':'application/json'},body:JSON.stringify({name:name.value.trim(),proposal:'bbqnfools'})})
+      .then(function(r){return r.json();})
+      .then(function(d){ if(d&&d.redirect){ window.location.href=d.redirect; } else { msg.textContent=(d&&d.error)||'Something went wrong - please email mark@markcmo.com.'; btn.disabled=false; btn.textContent='Approve & get started'; } })
+      .catch(function(){ msg.textContent='Network error - please email mark@markcmo.com.'; btn.disabled=false; btn.textContent='Approve & get started'; });
+  });
+})();
+</script>
+</body>
+</html>
