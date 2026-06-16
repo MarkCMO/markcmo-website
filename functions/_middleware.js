@@ -420,6 +420,9 @@ const SKIP_PATH_PREFIXES = [
   '/courses/',         // course player chrome differs
   '/access/',          // access portals
   '/proposals/',       // client proposals are standalone branded docs
+  '/documents/',       // client engagement docs (served raw from KV, own branding)
+  '/docs/',            // standalone doc surfaces
+  '/forms/',           // standalone branded forms
 ];
 
 // Static asset extensions - skip middleware entirely
