@@ -289,6 +289,23 @@ export async function onRequest(context) {
   // 3. Try path/index for directory-style URLs (/courses → "courses/index")
   if (html === null) html = await kv.get(p + '/index', { type: 'text' });
 
+  // 3b. Client engagement docs under /documents/ are self-contained and must
+  //     serve verbatim from KV with NO nav/footer/canonical/schema injection.
+  //     They were previously excluded from this Function and served as static
+  //     assets, which went stale at the CF edge. Serving from KV here is the
+  //     durable fix (matches the /documents/* no-store headers).
+  if (html !== null && p.startsWith('documents/')) {
+    return new Response(html, {
+      headers: {
+        'content-type': 'text/html; charset=utf-8',
+        'cache-control': 'no-store, no-cache, must-revalidate, private',
+        'x-robots-tag': 'noindex, nofollow, noarchive, nosnippet, noimageindex',
+        'x-frame-options': 'DENY',
+        'referrer-policy': 'no-referrer',
+      },
+    });
+  }
+
   // 4. SPA fallback: /portal/*, /sign/*, /admin/* → serve their index page
   //    The SPA's JS reads window.location to load the right content.
   if (html === null) {
@@ -310,6 +327,19 @@ export async function onRequest(context) {
   }
 
   if (html !== null) {
+    // ── Favicon / icon links ──────────────────────────────────────────────────
+    // Every page declares the MarkCMO "M" favicon (browsers + Google result icon
+    // + AI search cards). Idempotent: skipped if the page already declares an icon
+    // (e.g. the homepage, which has them inline). Root /favicon.ico also covers the
+    // whole origin by default as a belt-and-suspenders fallback.
+    if (html.includes('</head>') && !/rel=["']?(shortcut )?icon/i.test(html)) {
+      html = html.replace('</head>',
+        '<link rel="icon" href="/favicon.ico" sizes="any">' +
+        '<link rel="icon" type="image/png" sizes="96x96" href="/favicon-96x96.png">' +
+        '<link rel="icon" type="image/svg+xml" href="/favicon.svg">' +
+        '<link rel="apple-touch-icon" href="/apple-touch-icon.png">' +
+        '<link rel="manifest" href="/site.webmanifest">\n</head>');
+    }
     // ── Nav / footer injection ────────────────────────────────────────────────
     // Automatically add/replace nav and footer on every page so all pages
     // share the same chrome, regardless of what HTML is stored in KV.
