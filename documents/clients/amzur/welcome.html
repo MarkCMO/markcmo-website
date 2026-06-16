@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Welcome | Amzur Technologies x MarkCMO</title>
+<meta name="description" content="Thank you for signing the Amzur Technologies engagement. Here is what happens next." />
+<meta name="robots" content="noindex, nofollow, noarchive, nosnippet, noimageindex" />
+<link rel="preconnect" href="https://fonts.googleapis.com" crossorigin>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap">
+<style>
+  :root{
+    --violet:#BB4CF0;--violet-2:#C263F3;--violet-deep:#9A2FD4;--green:#25D366;
+    --ink:#0D0D12;--ink-soft:#3B3B45;--muted:#6B6B76;--light:#ECEFF3;--line:#E3E6EC;--white:#FFFFFF;--violet-pale:#F6ECFE;
+    --shadow:0 10px 30px rgba(13,13,18,0.08), 0 2px 8px rgba(13,13,18,0.05);--pill:100px;
+  }
+  *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+  body{font-family:'Inter',system-ui,-apple-system,sans-serif;background:var(--white);color:var(--ink-soft);line-height:1.65;-webkit-font-smoothing:antialiased;}
+  .nav{background:var(--ink);padding:0.85rem 2rem;display:flex;align-items:center;gap:1rem;}
+  .nav-logo{height:26px;width:auto;display:block;}
+  .hero{background:var(--ink);color:#fff;padding:4.5rem 2rem 4rem;position:relative;overflow:hidden;text-align:center;}
+  .hero::before{content:'';position:absolute;inset:0;background:radial-gradient(circle at 50% 0%, rgba(187,76,240,0.40) 0%, transparent 60%);pointer-events:none;}
+  .hero::after{content:'';position:absolute;left:50%;bottom:-50%;width:60%;height:120%;transform:translateX(-50%);background:radial-gradient(circle, rgba(37,211,102,0.14) 0%, transparent 60%);pointer-events:none;}
+  .hero-inner{max-width:760px;margin:0 auto;position:relative;z-index:1;}
+  .check{width:74px;height:74px;border-radius:50%;background:var(--green);margin:0 auto 1.6rem;position:relative;box-shadow:0 8px 30px rgba(37,211,102,0.4);}
+  .check::after{content:'';position:absolute;left:27px;top:18px;width:14px;height:28px;border:solid #fff;border-width:0 5px 5px 0;transform:rotate(45deg);}
+  .eyebrow{display:inline-block;font-size:0.72rem;letter-spacing:0.2em;text-transform:uppercase;color:var(--violet-2);font-weight:600;margin-bottom:1rem;}
+  .hero h1{font-weight:800;font-size:clamp(2.2rem,5vw,3.3rem);letter-spacing:-0.025em;line-height:1.05;color:#fff;margin-bottom:1.1rem;}
+  .hero h1 em{color:var(--violet-2);font-style:normal;}
+  .hero p{font-size:1.1rem;color:rgba(255,255,255,0.82);max-width:560px;margin:0 auto;line-height:1.6;}
+  .body{max-width:760px;margin:0 auto;padding:3.5rem 2rem;}
+  .seyebrow{display:inline-block;font-size:0.7rem;letter-spacing:0.16em;text-transform:uppercase;color:var(--violet);font-weight:600;background:var(--violet-pale);padding:0.4rem 0.9rem;border-radius:var(--pill);margin-bottom:0.9rem;}
+  h2{font-weight:800;font-size:clamp(1.6rem,3.4vw,2.1rem);letter-spacing:-0.02em;color:var(--ink);line-height:1.15;margin-bottom:1.4rem;}
+  .steps{list-style:none;counter-reset:s;}
+  .steps li{background:var(--white);border:1px solid var(--line);border-radius:16px;padding:1.3rem 1.5rem 1.3rem 4rem;margin-bottom:1rem;box-shadow:var(--shadow);position:relative;}
+  .steps li::before{counter-increment:s;content:counter(s);position:absolute;left:1.1rem;top:1.25rem;width:34px;height:34px;border-radius:50%;background:var(--violet);color:#fff;font-weight:800;display:flex;align-items:center;justify-content:center;font-size:1rem;}
+  .steps li h3{font-weight:700;font-size:1.08rem;color:var(--ink);margin-bottom:0.25rem;}
+  .steps li p{font-size:0.95rem;color:var(--muted);margin:0;line-height:1.55;}
+  .cta{margin-top:2rem;text-align:center;}
+  .btn{display:inline-flex;align-items:center;gap:0.5rem;padding:0.95rem 1.9rem;border-radius:var(--pill);font-weight:600;font-size:1rem;background:var(--violet);color:#fff;text-decoration:none;border:1px solid transparent;transition:all .18s;}
+  .btn:hover{background:#fff;color:var(--violet-2);border-color:var(--ink);}
+  footer{background:var(--ink);color:rgba(255,255,255,0.55);padding:2rem;text-align:center;border-top:3px solid var(--violet);font-size:0.82rem;}
+  footer img{height:24px;width:auto;display:block;margin:0 auto 0.7rem;}
+  @media(max-width:520px){.hero,.body,.nav{padding-left:1.25rem;padding-right:1.25rem;}}
+</style>
+</head>
+<body>
+<nav class="nav">
+  <img class="nav-logo" src="https://amzur.com/wp-content/uploads/2024/08/Amzur_white_logo.png" alt="Amzur Technologies" />
+</nav>
+
+<header class="hero">
+  <div class="hero-inner">
+    <div class="check" aria-hidden="true"></div>
+    <div class="eyebrow">Amzur Technologies x MarkCMO</div>
+    <h1>You're in. <em>We're getting started.</em></h1>
+    <p>Thank you for signing. The engagement is approved on your side, and the work to build Amzur's go-to-market engine begins now.</p>
+  </div>
+</header>
+
+<main class="body">
+  <div class="seyebrow">What Happens Next</div>
+  <h2>Three things, in the next 48 hours</h2>
+  <ol class="steps">
+    <li>
+      <h3>You get the countersigned agreement</h3>
+      <p>Mark countersigns and you receive a fully executed copy for your records.</p>
+    </li>
+    <li>
+      <h3>The invoice to begin</h3>
+      <p>You receive an invoice for the $25,000 engagement fee, payable by ACH or wire. This secures your start and kicks off discovery and the foundation.</p>
+    </li>
+    <li>
+      <h3>Kickoff and access</h3>
+      <p>We schedule the kickoff and you grant the access we listed (analytics, Search Console, ad accounts, CRM). The Foundation Sprint starts the following week. The $15,000 monthly retainer does not bill in month one, it begins on the 1st of the following month.</p>
+    </li>
+  </ol>
+
+  <div class="cta">
+    <a class="btn" href="https://markcmo.com/book">Schedule the kickoff</a>
+  </div>
+</main>
+
+<footer>
+  <img src="https://amzur.com/wp-content/uploads/2024/08/Amzur_white_logo.png" alt="Amzur Technologies" />
+  Prepared by Mark Gabrielli &middot; markcmo.com &middot; mark@markcmo.com<br/>
+  Confidential &middot; Amzur Technologies engagement
+</footer>
+
+<script>(function(){try{var k='mc_jsid';var s=sessionStorage.getItem(k)||('s_'+Math.random().toString(36).slice(2)+Date.now().toString(36));sessionStorage.setItem(k,s);fetch('/.netlify/functions/track',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({t:'view',client:'amzur',page:'welcome',session_id:s,url:location.pathname,title:document.title}),keepalive:true}).catch(function(){});}catch(e){}})();</script>
+</body>
+</html>

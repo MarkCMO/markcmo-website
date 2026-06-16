@@ -61,6 +61,7 @@ const URLS_TO_PURGE = [
   'https://markcmo.com/documents/clients/amzur/scope-of-work',
   'https://markcmo.com/documents/clients/amzur/timeline',
   'https://markcmo.com/documents/clients/amzur/proposal',
+  'https://markcmo.com/documents/clients/amzur/welcome',
 ];
 
 function cfFetch(method, path, body) {

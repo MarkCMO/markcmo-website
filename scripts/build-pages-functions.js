@@ -15,6 +15,7 @@ const NATIVE_ROUTES = new Set([
   'api/ig-token-refresh.js',
   'api/post-dashboard.js',
   'api/sign-engagement.js',
+  'api/amzur-sign.js',
   'api/roc-intake.js',
   // Social OAuth (TikTok + Facebook) hosted on the registered markcmo.com domain.
   'connect/tiktok.js',

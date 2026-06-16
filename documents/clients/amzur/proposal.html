@@ -294,15 +294,154 @@
     </div>
   </section>
 
-  <div class="sign">
-    <div class="eyebrow">Next Step</div>
-    <h3>The working session, then a short proposal to scope</h3>
-    <p>As your brief laid out: we take the working session, I walk you through the 90-day approach and the findings already in hand, and we align on scope, model, and investment. Then a short working proposal and we start the Foundation Sprint. Capacity is one to two clients, so the slot is first to sign.</p>
-    <div class="row">
-      <a href="https://markcmo.com/book" class="btn btn-primary">Schedule the Working Session</a>
-      <a href="mailto:mark@markcmo.com?subject=Amzur%20Engagement" class="btn btn-ghost">Email Mark</a>
+  <style>
+    .tb-table{border-collapse:collapse;width:100%;margin:1.4rem 0;font-size:0.98rem;background:var(--white);border:1px solid var(--line);border-radius:16px;overflow:hidden;}
+    .tb-table td{padding:0.95rem 1.1rem;border-top:1px solid var(--line);vertical-align:top;}
+    .tb-table tr:first-child td{border-top:none;}
+    .tb-table .tb-label{color:var(--ink);font-weight:700;}
+    .tb-table .tb-desc{color:var(--muted);font-size:0.86rem;display:block;margin-top:0.15rem;font-weight:400;}
+    .tb-table .tb-amt{text-align:right;white-space:nowrap;font-weight:800;color:var(--ink);font-size:1.05rem;}
+    .tb-table tr.tb-total td{background:var(--violet-pale);}
+    .tb-table tr.tb-total .tb-amt{color:var(--violet);font-size:1.25rem;}
+    .tb-note{font-size:0.88rem;color:var(--muted);margin-top:0.4rem;}
+
+    .commit-bar{display:flex;gap:0.9rem;align-items:flex-start;background:var(--ink);color:#fff;border-radius:16px;padding:1.3rem 1.5rem;margin:2rem 0 1.4rem;}
+    .commit-bar .cb-check{flex-shrink:0;width:30px;height:30px;border-radius:50%;background:var(--green);position:relative;margin-top:2px;}
+    .commit-bar .cb-check::after{content:'';position:absolute;left:11px;top:6px;width:6px;height:13px;border:solid #fff;border-width:0 3px 3px 0;transform:rotate(45deg);}
+    .commit-bar p{margin:0;font-size:0.98rem;color:rgba(255,255,255,0.9);line-height:1.55;}
+    .sigwrap{display:grid;grid-template-columns:1fr 1fr;gap:1.4rem;margin:1rem 0;}
+    @media(max-width:680px){.sigwrap{grid-template-columns:1fr;}}
+    .sigcard{background:var(--white);border:1px solid var(--line);border-radius:18px;padding:1.6rem;box-shadow:var(--shadow);}
+    .sigcard.target{border:2px solid var(--violet);box-shadow:0 14px 40px -16px rgba(187,76,240,0.4);}
+    .sigcard .sig-for{font-size:0.66rem;letter-spacing:0.14em;text-transform:uppercase;color:var(--violet);font-weight:700;margin-bottom:0.3rem;}
+    .sigcard h4{font-weight:800;font-size:1.2rem;color:var(--ink);margin-bottom:1rem;letter-spacing:-0.01em;}
+    .sigcard label{display:block;font-size:0.78rem;color:var(--muted);font-weight:600;margin:0.6rem 0 0.3rem;}
+    .sigcard input[type=text],.sigcard input[type=email]{width:100%;padding:0.75rem 0.9rem;border:1px solid #cbd0da;border-radius:10px;font-size:1rem;font-family:'Inter',sans-serif;color:var(--ink);}
+    .sigcard input.sig-name{font-family:'Inter',sans-serif;font-style:italic;font-size:1.25rem;}
+    .sigcard input:focus{outline:none;border-color:var(--violet);box-shadow:0 0 0 3px rgba(187,76,240,0.18);}
+    .sig-consent{display:flex;gap:0.6rem;align-items:flex-start;margin:1rem 0;font-size:0.86rem;color:var(--ink-soft);line-height:1.5;}
+    .sig-consent input{margin-top:3px;flex-shrink:0;width:16px;height:16px;accent-color:var(--violet);}
+    .sig-btn{width:100%;padding:0.9rem;border:none;border-radius:100px;background:var(--violet);color:#fff;font-weight:700;font-size:1rem;font-family:'Inter',sans-serif;cursor:pointer;transition:all .18s;}
+    .sig-btn:hover{background:var(--violet-deep);}
+    .sig-btn:disabled{opacity:0.5;cursor:not-allowed;}
+    .sig-msg{font-size:0.85rem;margin-top:0.7rem;min-height:1em;}
+    .sig-msg.err{color:#DC2626;}
+    .sig-done{text-align:center;padding:1.5rem 0.5rem;}
+    .sig-done .sd-check{width:46px;height:46px;border-radius:50%;background:var(--green);margin:0 auto 0.8rem;position:relative;}
+    .sig-done .sd-check::after{content:'';position:absolute;left:17px;top:11px;width:9px;height:18px;border:solid #fff;border-width:0 4px 4px 0;transform:rotate(45deg);}
+    .sig-done h4{color:var(--ink);margin-bottom:0.3rem;}
+    .sig-done p{font-size:0.9rem;color:var(--muted);margin:0;}
+  </style>
+
+  <section>
+    <div class="seyebrow">Terms To Begin</div>
+    <h2>Next Steps, <span class="g">Plainly</span></h2>
+    <p>A simple start: a one-time engagement fee kicks everything off, discovery and the strategy foundation. The monthly retainer does not bill in the first month. It begins on the 1st of the following month, then monthly on the 1st.</p>
+    <table class="tb-table">
+      <tr>
+        <td><span class="tb-label">Engagement fee</span><span class="tb-desc">One-time, secures your start and kicks off discovery and the foundation</span></td>
+        <td class="tb-amt">$25,000</td>
+      </tr>
+      <tr class="tb-total">
+        <td><span class="tb-label">Total to begin</span><span class="tb-desc">Engagement fee, due to get started</span></td>
+        <td class="tb-amt">$25,000</td>
+      </tr>
+      <tr>
+        <td><span class="tb-label">Monthly retainer</span><span class="tb-desc">Not billed in month one. First invoice on the 1st of the following month, then monthly on the 1st</span></td>
+        <td class="tb-amt">$15,000/mo</td>
+      </tr>
+    </table>
+    <p class="tb-note">Payment by ACH or wire. Card accepted with a 3 percent processing fee. The engagement fee is invoiced once both parties sign below.</p>
+  </section>
+
+  <section id="sign">
+    <div class="commit-bar">
+      <div class="cb-check" aria-hidden="true"></div>
+      <p>By signing below, both parties commit to delivering and completing the full scope of this engagement, and confirm we are getting started now.</p>
     </div>
-  </div>
+
+    <div class="sigwrap">
+      <!-- Client -->
+      <div class="sigcard" id="sig-client">
+        <div class="sig-for">Approved for Amzur Technologies</div>
+        <h4>Amzur Technologies</h4>
+        <div class="sig-live">
+          <label for="cl-name">Type full name to sign</label>
+          <input type="text" id="cl-name" class="sig-name" autocomplete="name" placeholder="Full name" />
+          <label for="cl-email">Email (for your countersigned copy and invoice)</label>
+          <input type="email" id="cl-email" autocomplete="email" placeholder="you@amzur.com" />
+          <div class="sig-consent">
+            <input type="checkbox" id="cl-consent" />
+            <label for="cl-consent" style="margin:0;font-weight:400;color:var(--ink-soft);">I approve this proposal and commit to seeing the full scope through to completion. We are getting started now, and I consent to sign electronically.</label>
+          </div>
+          <button class="sig-btn" id="cl-btn" type="button">Approve &amp; sign</button>
+          <div class="sig-msg" id="cl-msg"></div>
+        </div>
+      </div>
+
+      <!-- Provider -->
+      <div class="sigcard" id="sig-provider">
+        <div class="sig-for">MarkCMO</div>
+        <h4>Mark Gabrielli, MarkCMO</h4>
+        <div class="sig-live">
+          <label for="pr-name">Type full name to sign</label>
+          <input type="text" id="pr-name" class="sig-name" autocomplete="name" placeholder="Full name" />
+          <div class="sig-consent">
+            <input type="checkbox" id="pr-consent" />
+            <label for="pr-consent" style="margin:0;font-weight:400;color:var(--ink-soft);">I approve this proposal and commit to delivering the full scope through to completion, and I consent to sign electronically.</label>
+          </div>
+          <button class="sig-btn" id="pr-btn" type="button">Approve &amp; sign</button>
+          <div class="sig-msg" id="pr-msg"></div>
+        </div>
+      </div>
+    </div>
+    <p class="tb-note" style="text-align:center;">Questions first? <a href="https://markcmo.com/book">Book the working session</a> or email <a href="mailto:mark@markcmo.com?subject=Amzur%20Engagement">mark@markcmo.com</a>.</p>
+  </section>
+
+  <script>
+  (function(){
+    var params = new URLSearchParams(location.search);
+    var countersignRef = params.get('countersign');
+    function post(payload){
+      return fetch('/api/amzur-sign', { method:'POST', headers:{'content-type':'application/json'}, body:JSON.stringify(payload) }).then(function(r){ return r.json().then(function(j){ return {ok:r.ok, data:j}; }); });
+    }
+    function done(cardId, title, sub){
+      var card = document.getElementById(cardId);
+      if(card) card.querySelector('.sig-live').innerHTML = '<div class="sig-done"><div class="sd-check"></div><h4>'+title+'</h4><p>'+sub+'</p></div>';
+    }
+    function err(msgId, text){ var m=document.getElementById(msgId); if(m){ m.textContent=text; m.className='sig-msg err'; } }
+
+    // Client sign
+    var clBtn = document.getElementById('cl-btn');
+    if(clBtn) clBtn.addEventListener('click', function(){
+      var name=(document.getElementById('cl-name').value||'').trim();
+      var email=(document.getElementById('cl-email').value||'').trim();
+      var consent=document.getElementById('cl-consent').checked;
+      if(name.length<2) return err('cl-msg','Please type your full name.');
+      if(!/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(email)) return err('cl-msg','Please enter a valid email.');
+      if(!consent) return err('cl-msg','Please confirm the consent checkbox.');
+      clBtn.disabled=true; clBtn.textContent='Signing...';
+      post({ party:'client', signerName:name, signerEmail:email, consent:true, signedAt:new Date().toISOString(), agreementUrl:location.href.split('?')[0] })
+        .then(function(res){ if(res.ok && res.data && res.data.ok){ window.location.href='/documents/clients/amzur/welcome'; } else { clBtn.disabled=false; clBtn.textContent='Approve & sign'; err('cl-msg', (res.data && res.data.error) || 'Something went wrong, please try again.'); } })
+        .catch(function(){ clBtn.disabled=false; clBtn.textContent='Approve & sign'; err('cl-msg','Network error, please try again.'); });
+    });
+
+    // Provider countersign
+    var prCard = document.getElementById('sig-provider');
+    var prBtn = document.getElementById('pr-btn');
+    if(countersignRef && prCard){ prCard.classList.add('target'); try{ prCard.scrollIntoView({behavior:'smooth',block:'center'}); }catch(e){} }
+    if(prBtn) prBtn.addEventListener('click', function(){
+      var name=(document.getElementById('pr-name').value||'').trim();
+      var consent=document.getElementById('pr-consent').checked;
+      if(name.length<2) return err('pr-msg','Please type your full name.');
+      if(!consent) return err('pr-msg','Please confirm the consent checkbox.');
+      prBtn.disabled=true; prBtn.textContent='Signing...';
+      post({ party:'provider', signerName:name, consent:true, signedAt:new Date().toISOString(), clientRef:countersignRef||null })
+        .then(function(res){ if(res.ok && res.data && res.data.ok){ done('sig-provider','Countersigned','Both parties have signed. The client has been emailed payment instructions and you have a reminder to send the invoice.'); } else { prBtn.disabled=false; prBtn.textContent='Approve & sign'; err('pr-msg', (res.data && res.data.error) || 'Something went wrong, please try again.'); } })
+        .catch(function(){ prBtn.disabled=false; prBtn.textContent='Approve & sign'; err('pr-msg','Network error, please try again.'); });
+    });
+  })();
+  </script>
 
 </main>
 
