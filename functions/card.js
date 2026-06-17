@@ -98,6 +98,7 @@ color:var(--muted);text-decoration:none;font-size:14px;font-weight:700;backgroun
 display:flex;align-items:center;justify-content:center;color:var(--gold);font-weight:900;font-size:15px}
 .foot a{color:var(--goldlt);text-decoration:none;font-weight:700}
 .ico{font-size:17px}
+.qr{margin-top:22px;background:#fff;border-radius:18px;padding:16px 16px 12px;display:flex;flex-direction:column;align-items:center;width:100%;max-width:236px}.qr-label{font-size:11px;font-weight:800;letter-spacing:.12em;text-transform:uppercase;color:#0A0F2C;margin-bottom:10px}.qr-img{width:188px;height:188px;display:block;image-rendering:pixelated}
 </style></head>
 <body data-master-chrome="off">
 <main class="wrap">
@@ -120,6 +121,7 @@ display:flex;align-items:center;justify-content:center;color:var(--gold);font-we
     <a href="${C.linkedin}">LinkedIn</a>
     <a href="${C.x}">X / Twitter</a>
   </div>
+  <div class="qr"><div class="qr-label">Scan to save my contact</div><img class="qr-img" alt="Scan to add Mark Gabrielli to contacts" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAmIAAAJiAQMAAABemDylAAAABlBMVEUKDyz///9s9jvsAAAFKklEQVR42u1dW47jMAwTtgfokXL1HCkHCKCdSSSRcudngcECEZiPoo+EPzYr0ZJp81+8dhOa0IQmNKE9H+2wuLbjenl9/3B+vbterl/f5/3i+9v9/hg/fH+8r6/H9j/2m5fQhPY/0b658Lp58TX5PWlQ3+G+/bq57tuLGvdjh7ggtAlcuP7WIxD4NcfPmPwVCK531w/3LRdnrriAcCIuCG0KF65ocFTGY1azPZgSceGwooa4ILSpXLjfWeVDuIIBGQ0gH8QFoc3TC6mTmw74nug3K4Ipcd2xQnpBaJO4gH/+DA7/9BKXuCC0x3MB15EpU/3fRwJ0xYUSCPFYZEu8QqtRENrzc6TjxXO8lEMIBIoauIVjinIkoY2IC1lQ2I0ZQAurEQNOg7IOKX2981M5ktDGxIXIfV4soPk6e1U6UiZU3eKdRkFoT9fOpBf2yoxQdfPMjCJCFGe25FG8aBSE9vS4sKjjtW5w0wCrR7WI6tWNIe0stAl6wR3NRjyziRonCwSjj9m6Ib0gtCFciNyn5IPlREcZOmgQN6dszg4NU44ktAFcOI2yoNLES2t2tmTEelNK7qSQ9ILQxuiFFhecNPHJSZGjKclSSMTaq3IkoY2ICzTv659/X3tXq4U706PoVjoUF4Q2iwtRVTiMtTMihLvzOtKttiuDEheENiFHsqwlWFtMurXzG7sWMkyEXgBGRRKNgtBGaGcQIq5qxHAUFEovbNXIhwY9cUFoj48LuYhqFA1ijqPkjMkPptirdWNoFIT2bC7U5AcNSh1XNQ2JEnXkbfWsuCC0QdoZq0KxxAonGKt+1h96NaSdhTZJO/Pef144QrcSlaaJONWxqh4MoQ3hwkadF2bwAFv2L5ATDOkFrSMJbUqO5M7BwbnIQPKhqAFDvbbopBxJaBO0M3deGO9pSP+wfFfUYH89PKtRENrT40LbzLysHmH7M2+C+7BVUlwQ2hwuLG15LSniWzIpyo48h1GARkFoA7Rzft5aKRkNrGbUknHyE5Z0EReENoEL7mQAgBozBwJ79Vtqp8/btY4ktDFcoOvNHmC45bNVz6g0rVqb0MbohVxJJRv5SJlSG3i3gyFWaL+z0KZwocpn6fWCChs7iVWrXrlkUH1aOZLQJukF7+ftQCCwj/CH1yRve9AoCO3pXCDPC3ZAqr0K3jd/vv2jOqe4ILQZeoG2qm3rshK7ItHuhsqRUj4oLghtiHaGUV71cVsziPTFC+lS1t58V8UFoQ3gQtlddGskPqwwP2ZCxedbKUcS2pQcifrw6GDCk7yQmodkriP5YSbtLLQ5XKgtmlfa087sZBduOEfiXLcFQKMgtEdz4Vg2+ycXSk9DObTzDGsHqHwwhDZpHanbacNZNUwusCX61ay4FwCNgtCeHheWo3byT98/Tnreeke3LycbahSE9mwulFi2Vkuof/6flpWYFfKEEdogvbCVbx50MgUMQ3vSZ/1N2llog+KCRY3A6EQ23qvgbBHDe9165564ILTna+defGaJ3CyEkSg1g+EyHdYoCG0EF8gXjPcxVwyAToaKxn2KC0KbkiOZsVnq0X7dwIruKUY+9OKC0EZoZ8qRsCpUDXrQBq0vw+SPJLR5XDDaulBnEpZnEuY9HWWI4KDePKHN4wJt9m/t2jtWmX486LAIoVEQ2hwuLAfWggHYF93aLyp+qL4gtHF6oQoKe7lfUAv3WocwPsZKXBDaw7nQFYGf5KRNB1Bxx+rJRx6iSC0uCO3ZXPi9axea0IQmNKE9He0vYvsEXZTDsTUAAAAASUVORK5CYII="></div>
   <div class="foot"><span class="m">M</span> <span>&copy; ${'{{YEAR}}'} MarkCMO &middot; <a href="${C.site}">markcmo.com</a></span></div>
 </main>
 </body></html>`.replace('{{YEAR}}', String(new Date().getUTCFullYear()));
