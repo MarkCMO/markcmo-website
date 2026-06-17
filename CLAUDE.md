@@ -134,6 +134,15 @@ Mark gets every email Resend sends through his inbox, there is no such thing as 
 
 If the user explicitly says "send a test to mark@markcmo.com" or "fire the proposal to Wendal now," that's consent, proceed. Otherwise: do not.
 
+## RULE #1a (CURRENT, 2026-06-17): Deploys are Cloudflare Pages via GitHub Actions, gated on Mark's approval. NEVER deploy directly.
+
+The live pipeline is `.github/workflows/deploy.yml` (push to `main` -> Actions -> Cloudflare Pages, HTML served from KV). It is gated by the GitHub `production` environment, which **requires Mark to approve every run** before it deploys. A `concurrency` lock serializes runs so two sessions cannot deploy at once.
+
+- To ship: commit, push to `main`, then Mark approves the paused run in GitHub (Actions tab -> the run -> Review deployments -> Approve).
+- **Direct `wrangler pages deploy` from any worktree is FORBIDDEN.** It bypasses the approval gate. On 2026-06-17 a stale worktree (local `main` 3 days behind) did exactly this and reverted the live Amzur docs to an old pre-rebrand bundle.
+- Claude must **ASK Mark before pushing anything that triggers a deploy.**
+- The Netlify/`safe-deploy.sh` guidance in RULE #1 below is STALE; ignore it for markcmo.com production.
+
 ## RULE #1: Never run `netlify deploy --prod` directly. Use safe-deploy.sh.
 
 ```bash

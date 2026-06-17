@@ -7,10 +7,21 @@ on:
   push:
     branches: [main, staging]
 
+# Serialize deploys so two runs (or two sessions) can never deploy at once
+# and clobber each other. A second push waits for the first to finish.
+concurrency:
+  group: cf-deploy-${{ github.ref_name }}
+  cancel-in-progress: false
+
 jobs:
   deploy:
     runs-on: ubuntu-latest
     name: Deploy (${{ github.ref_name }})
+    # Gate every deploy behind the `production` environment, which requires
+    # Mark's manual approval in GitHub before the job runs. This is the only
+    # sanctioned deploy path; direct `wrangler pages deploy` from a worktree
+    # is forbidden (see CLAUDE.md). Approving here is what ships to markcmo.com.
+    environment: production
     permissions:
       contents: read
       deployments: write
