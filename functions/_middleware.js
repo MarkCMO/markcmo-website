@@ -153,6 +153,7 @@ const MASTER_NAV_HTML = `<!--
     <li><a href="/services">Services</a></li>
     <li><a href="/seo-expert" class="mc-accent">SEO Expert</a></li>
     <li><a href="/magnet-framework" class="mc-accent">MAGNET&trade;</a></li>
+    <li><a href="/systems" class="mc-accent">Build</a></li>
     <li><a href="/portfolio">Portfolio</a></li>
     <li><a href="/apps" class="mc-accent">Apps</a></li>
     <li><a href="/results">Results</a></li>
@@ -169,6 +170,7 @@ const MASTER_NAV_HTML = `<!--
   <a href="/about">About</a>
   <a href="/services">Services</a>
   <a href="/magnet-framework" class="mc-accent">MAGNET Framework&trade;</a>
+  <a href="/systems" class="mc-accent">Build (Systems)</a>
   <a href="/portfolio">Portfolio</a>
   <a href="/apps" class="mc-accent">Apps</a>
   <a href="/links">Links</a>
@@ -372,6 +374,9 @@ const MASTER_FOOTER_HTML = `<!--
     </ul></div>
     <div class="mc-foot-col"><h4>Learn</h4><ul>
       <li><a href="/magnet-framework" class="mc-accent">MAGNET Framework&trade;</a></li>
+      <li><a href="/systems" class="mc-accent">Build, Don't Advise</a></li>
+      <li><a href="/seo-aeo-geo">SEO, AEO &amp; GEO</a></li>
+      <li><a href="/ai-agents">AI &amp; Agents</a></li>
       <li><a href="/blog">Insights &amp; Blog</a></li>
       <li><a href="/about">About Mark</a></li>
       <li><a href="/testimonials">Testimonials</a></li>
