@@ -56,6 +56,7 @@ function html() {
 <meta property="og:description" content="Win traditional search and AI search at the same time.">
 <meta property="og:image" content="https://markcmo.com/assets/mark-gabrielli.jpg">
 <script type="application/ld+json">${JSON.stringify(faqLd)}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://markcmo.com/"},{"@type":"ListItem","position":2,"name":"SEO, AEO & GEO","item":"https://markcmo.com/seo-aeo-geo"}]},{"@type":"Service","name":"Search Optimization (SEO, AEO, GEO)","serviceType":"Search Engine Optimization","areaServed":{"@type":"Country","name":"United States"},"provider":{"@type":"Person","name":"Mark Gabrielli","url":"https://markcmo.com","jobTitle":"Fractional CMO & COO","sameAs":["https://www.linkedin.com/in/marklgabrielli/","https://x.com/markgcmo"]},"url":"https://markcmo.com/seo-aeo-geo"}]}</script>
 ${STYLE}</head>
 <body>
 <div class="pg">

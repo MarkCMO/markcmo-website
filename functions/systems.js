@@ -50,6 +50,7 @@ function html() {
 <meta property="og:description" content="Owned systems and SOPs that raise enterprise value, from startup to exit.">
 <meta property="og:image" content="https://markcmo.com/assets/mark-gabrielli.jpg">
 <script type="application/ld+json">${JSON.stringify(faqLd)}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://markcmo.com/"},{"@type":"ListItem","position":2,"name":"Build Systems","item":"https://markcmo.com/systems"}]},{"@type":"Service","name":"Enterprise Systems & Fractional Executive","serviceType":"Business Consulting","areaServed":{"@type":"Country","name":"United States"},"provider":{"@type":"Person","name":"Mark Gabrielli","url":"https://markcmo.com","jobTitle":"Fractional CMO & COO","sameAs":["https://www.linkedin.com/in/marklgabrielli/","https://x.com/markgcmo"]},"url":"https://markcmo.com/systems"}]}</script>
 ${STYLE}</head>
 <body>
 <div class="pg">
