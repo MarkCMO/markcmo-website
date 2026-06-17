@@ -1,40 +1,6 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" width="64" height="64">
-  <defs>
-    <style>
-      @keyframes zoom-pulse {
-        0%,100% { transform: scale(0.82); opacity: 0.72; }
-        50%      { transform: scale(1.0);  opacity: 1;    }
-      }
-      @keyframes ring-pulse {
-        0%,100% { opacity: 0.35; r: 29; }
-        50%      { opacity: 0.9;  r: 31; }
-      }
-      .m-letter {
-        transform-box: fill-box;
-        transform-origin: center;
-        animation: zoom-pulse 2.6s ease-in-out infinite;
-      }
-      .outer-ring {
-        animation: ring-pulse 2.6s ease-in-out infinite;
-      }
-    </style>
-  </defs>
-
-  <!-- Dark navy background with rounded corners -->
-  <rect width="64" height="64" rx="14" fill="#080E27"/>
-
-  <!-- Subtle outer glow ring -->
-  <circle class="outer-ring" cx="32" cy="32" r="30" fill="none"
-    stroke="#C9A84C" stroke-width="1.5" opacity="0.35"/>
-
-  <!-- Animated M -->
-  <text class="m-letter"
-    x="32" y="48"
-    font-family="'Outfit','Arial Black',Arial,sans-serif"
-    font-weight="900"
-    font-size="46"
-    fill="#C9A84C"
-    text-anchor="middle"
-    dominant-baseline="auto"
+  <rect width="64" height="64" rx="14" fill="#0A0F2C"/>
+  <text x="32" y="34" font-family="'Arial Black',Arial,sans-serif" font-weight="900"
+    font-size="50" fill="#C9A84C" text-anchor="middle" dominant-baseline="central"
     letter-spacing="-2">M</text>
 </svg>
