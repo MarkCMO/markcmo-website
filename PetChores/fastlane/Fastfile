@@ -583,9 +583,16 @@ platform :ios do
       pid = s.dig("attributes", "productId")
 
       sc, scr = asc_request(:get, "/v1/subscriptions/#{sid}/appStoreReviewScreenshot", jwt)
-      if sc.between?(200, 299) && !scr["data"].nil?
-        UI.message("#{pid}: review screenshot already present, skipping")
-        next
+      existing = (sc.between?(200, 299) ? scr["data"] : nil)
+      if existing
+        dstate = (existing.dig("attributes", "assetDeliveryState", "state") rescue nil)
+        if dstate == "COMPLETE"
+          UI.message("#{pid}: review screenshot already complete, skipping")
+          next
+        end
+        # A FAILED / UPLOAD_COMPLETE-but-invalid asset must be removed before re-uploading.
+        dc, _ = asc_request(:delete, "/v1/subscriptionAppStoreReviewScreenshots/#{existing['id']}", jwt)
+        UI.message("#{pid}: removed #{dstate} screenshot -> #{dc}")
       end
 
       # 1. Reserve the screenshot asset.
