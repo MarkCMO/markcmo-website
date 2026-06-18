@@ -647,17 +647,10 @@ platform :ios do
       shot_errs = (sc.dig("data", "attributes", "assetDeliveryState", "errors") rescue nil)
       UI.message("== #{pid} state=#{st} loc=#{(l['data'] || []).count} price=#{(pr['data'] || []).count} " \
                  "avail=#{ac.between?(200, 299) && !av['data'].nil?} shot=#{shot_state} shotErr=#{shot_errs.inspect} ==")
-
-      if pid == "petchores.monthly"
-        UI.message("---- raw subscription #{pid} ----")
-        _, full = asc_request(:get, "/v1/subscriptions/#{sid}", jwt)
-        puts JSON.pretty_generate(full["data"]["attributes"]) rescue nil
-        puts "LOCALIZATION:"; puts JSON.pretty_generate((l["data"] || []).map { |x| x["attributes"] })
-        puts "PRICES:"; puts JSON.pretty_generate((pr["data"] || []).map { |x| x["attributes"] })
-        _, io = asc_request(:get, "/v1/subscriptions/#{sid}/introductoryOffers?limit=10", jwt)
-        puts "INTRO OFFERS:"; puts JSON.pretty_generate((io["data"] || []).map { |x| x["attributes"] })
-      end
     end
+    UI.important("If subscriptions remain MISSING_METADATA with loc/price/avail/shot all present, " \
+                 "the Paid Applications Agreement is almost certainly not in effect (Account Holder " \
+                 "must accept it in App Store Connect -> Business).")
   end
 
   desc "Capture App Store screenshots on the CI simulators via the -uitestSeed demo " \
