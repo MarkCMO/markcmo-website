@@ -163,6 +163,33 @@ platform :ios do
   end
 
   desc "Inspect the App Store Connect resources needed for submission (read-only)."
+  desc "Read-only: report the editable App Store version + its selected build, and any " \
+       "review submission and its items/states (to confirm readiness to submit)."
+  lane :submit_status do
+    jwt = asc_jwt
+    app = APP_STORE_APP_ID
+
+    _, vers = asc_request(:get, "/v1/apps/#{app}/appStoreVersions?limit=5&include=build", jwt)
+    (vers["data"] || []).each do |v|
+      a = v["attributes"]
+      bid = (v.dig("relationships", "build", "data", "id") rescue nil)
+      bver = ((vers["included"] || []).find { |x| x["type"] == "builds" && x["id"] == bid }&.dig("attributes", "version") rescue nil)
+      UI.message("version #{a['versionString']} state=#{a['appStoreState'] || a['appVersionState']} build=#{bver || bid || 'none'}")
+    end
+
+    _, rs = asc_request(:get, "/v1/apps/#{app}/reviewSubmissions?limit=10&include=items", jwt)
+    if (rs["data"] || []).empty?
+      UI.important("no review submissions found")
+    end
+    (rs["data"] || []).each do |r|
+      UI.message("reviewSubmission #{r['id']} state=#{r.dig('attributes', 'state')} platform=#{r.dig('attributes', 'platform')}")
+    end
+    (rs["included"] || []).each do |it|
+      a = it["attributes"] || {}
+      UI.message("  item #{it['id']} state=#{a['state']} removed=#{a['removed']}")
+    end
+  end
+
   lane :asc_inspect do
     jwt = asc_jwt
     app = APP_STORE_APP_ID
