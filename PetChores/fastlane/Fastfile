@@ -546,6 +546,78 @@ platform :ios do
     end
   end
 
+  desc "Upload the App Review screenshot to each subscription so they leave Missing " \
+       "Metadata and can be submitted for review (App Review 2.1b requirement)."
+  lane :subs_review_shot do
+    require "digest"
+    jwt = asc_jwt
+    app = APP_STORE_APP_ID
+    shot_path = File.join(__dir__, "metadata", "subscription_review_screenshot.png")
+    bytes = File.binread(shot_path)
+    md5 = Digest::MD5.hexdigest(bytes)
+    file_name = "paywall_review.png"
+    UI.message("review screenshot: #{shot_path} (#{bytes.bytesize} bytes, md5 #{md5})")
+
+    _, groups = asc_request(:get, "/v1/apps/#{app}/subscriptionGroups?limit=50", jwt)
+    group = ((groups["data"] || []).find { |g| g.dig("attributes", "referenceName") == "Pet Care Plans" } rescue nil)
+    next if group.nil?
+    _, subs = asc_request(:get, "/v1/subscriptionGroups/#{group['id']}/subscriptions?limit=50", jwt)
+
+    (subs["data"] || []).each do |s|
+      sid = s["id"]
+      pid = s.dig("attributes", "productId")
+
+      sc, scr = asc_request(:get, "/v1/subscriptions/#{sid}/appStoreReviewScreenshot", jwt)
+      if sc.between?(200, 299) && !scr["data"].nil?
+        UI.message("#{pid}: review screenshot already present, skipping")
+        next
+      end
+
+      # 1. Reserve the screenshot asset.
+      code, body = asc_request(:post, "/v1/subscriptionAppStoreReviewScreenshots", jwt,
+        { "data" => { "type" => "subscriptionAppStoreReviewScreenshots",
+          "attributes" => { "fileName" => file_name, "fileSize" => bytes.bytesize },
+          "relationships" => { "subscription" => { "data" => { "type" => "subscriptions", "id" => sid } } } } })
+      unless code.between?(200, 299)
+        UI.important("#{pid}: reserve failed -> #{code}"); puts body; next
+      end
+      shot_id = body.dig("data", "id")
+      ops = body.dig("data", "attributes", "uploadOperations") || []
+
+      # 2. Upload the bytes to each operation's URL with its headers.
+      ok = true
+      ops.each do |op|
+        uri = URI(op["url"])
+        http = Net::HTTP.new(uri.host, uri.port); http.use_ssl = (uri.scheme == "https")
+        req = Net::HTTP::Put.new(uri)
+        (op["requestHeaders"] || []).each { |h| req[h["name"]] = h["value"] }
+        offset = op["offset"] || 0
+        length = op["length"] || bytes.bytesize
+        req.body = bytes.byteslice(offset, length)
+        res = http.request(req)
+        ok &&= res.code.to_i.between?(200, 299)
+        UI.message("  #{pid}: upload chunk (#{length}B) -> #{res.code}")
+      end
+      next unless ok
+
+      # 3. Commit the upload.
+      code, body = asc_request(:patch, "/v1/subscriptionAppStoreReviewScreenshots/#{shot_id}", jwt,
+        { "data" => { "type" => "subscriptionAppStoreReviewScreenshots", "id" => shot_id,
+          "attributes" => { "uploaded" => true, "sourceFileChecksum" => md5 } } })
+      if code.between?(200, 299)
+        UI.success("#{pid}: review screenshot uploaded")
+      else
+        UI.important("#{pid}: commit failed -> #{code}"); puts body
+      end
+    end
+
+    # Report the resulting states.
+    _, subs2 = asc_request(:get, "/v1/subscriptionGroups/#{group['id']}/subscriptions?limit=50&fields[subscriptions]=productId,state", jwt)
+    (subs2["data"] || []).each do |s|
+      UI.message("== #{s.dig('attributes', 'productId')} state=#{s.dig('attributes', 'state')} ==")
+    end
+  end
+
   desc "Capture App Store screenshots on the CI simulators via the -uitestSeed demo " \
        "state. Outputs to fastlane/screenshots/<locale>/ (uploaded as a CI artifact)."
   lane :screenshots do
