@@ -561,6 +561,21 @@ platform :ios do
     _, groups = asc_request(:get, "/v1/apps/#{app}/subscriptionGroups?limit=50", jwt)
     group = ((groups["data"] || []).find { |g| g.dig("attributes", "referenceName") == "Pet Care Plans" } rescue nil)
     next if group.nil?
+
+    # The subscription GROUP needs a customer-facing localized name, or every subscription
+    # in it stays in Missing Metadata (asc_subs only set the internal reference name).
+    _, glocs = asc_request(:get, "/v1/subscriptionGroups/#{group['id']}/subscriptionGroupLocalizations?limit=10", jwt)
+    unless ((glocs["data"] || []).any? { |l| l.dig("attributes", "locale") == "en-US" } rescue false)
+      code, body = asc_request(:post, "/v1/subscriptionGroupLocalizations", jwt,
+        { "data" => { "type" => "subscriptionGroupLocalizations",
+          "attributes" => { "name" => "Pet Care Plans", "locale" => "en-US" },
+          "relationships" => { "subscriptionGroup" => { "data" => { "type" => "subscriptionGroups", "id" => group["id"] } } } } })
+      UI.message("group localization -> #{code}")
+      puts body unless code.between?(200, 299)
+    else
+      UI.message("group localization already present")
+    end
+
     _, subs = asc_request(:get, "/v1/subscriptionGroups/#{group['id']}/subscriptions?limit=50", jwt)
 
     (subs["data"] || []).each do |s|
