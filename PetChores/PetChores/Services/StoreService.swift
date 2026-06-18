@@ -18,10 +18,16 @@ final class StoreService: ObservableObject {
         case cancelled
     }
 
+    /// Whether the product fetch is in flight, done, or failed. The paywall keys its spinner
+    /// off this (not off an empty product list) so it can never load indefinitely: once the
+    /// fetch finishes, the paywall shows the plans, or a graceful retry if none came back.
+    enum LoadState: Equatable { case loading, loaded, failed }
+
     /// Loaded subscription products, sorted by plan rank (One Pet plans, then Unlimited).
     @Published private(set) var products: [Product] = []
     /// The highest currently-active plan. `.none` when no subscription/trial is active.
     @Published private(set) var activePlan: PetPlan = .none
+    @Published private(set) var loadState: LoadState = .loading
     @Published var phase: PurchasePhase = .idle
 
     /// How many pets may be active at once on the current plan.
@@ -50,14 +56,19 @@ final class StoreService: ObservableObject {
     }
 
     func loadProducts() async {
+        loadState = .loading
         do {
             let loaded = try await Product.products(for: PetPlan.productIds)
             products = loaded.sorted {
                 (PetPlan.plan(forProductId: $0.id)?.rank ?? 0) < (PetPlan.plan(forProductId: $1.id)?.rank ?? 0)
             }
+            // A successful fetch that returns nothing (e.g. products not yet available in
+            // this storefront) is "loaded", so the paywall shows a retry instead of spinning.
+            loadState = .loaded
         } catch {
             // Non-fatal: the paywall shows a friendly retry state.
             products = []
+            loadState = .failed
         }
     }
 

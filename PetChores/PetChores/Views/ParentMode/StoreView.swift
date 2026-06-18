@@ -23,9 +23,11 @@ struct StoreView: View {
                     .foregroundStyle(.secondary)
                     .multilineTextAlignment(.center)
 
-                if store.products.isEmpty {
+                if store.loadState == .loading {
                     ProgressView("Loading plans...")
                         .padding(.vertical, 8)
+                } else if store.products.isEmpty {
+                    plansUnavailable
                 } else {
                     ForEach(store.products, id: \.id) { product in
                         planCard(product)
@@ -49,6 +51,28 @@ struct StoreView: View {
         .navigationTitle("Pet Plans")
         .navigationBarTitleDisplayMode(.inline)
         .task { if store.products.isEmpty { await store.loadProducts() } }
+    }
+
+    /// Shown when the product fetch finished but returned no plans (offline, storefront not
+    /// ready, or the App Store account is still being set up). Never an endless spinner.
+    private var plansUnavailable: some View {
+        Card {
+            VStack(spacing: 10) {
+                Image(systemName: "wifi.exclamationmark")
+                    .font(.system(size: 32))
+                    .foregroundStyle(.secondary)
+                Text("Plans aren't available right now.")
+                    .font(.headline)
+                Text("Your one pet is always free, so you can keep training. Check your connection and try again to add more pets.")
+                    .font(.subheadline)
+                    .foregroundStyle(.secondary)
+                    .multilineTextAlignment(.center)
+                Button("Try again") {
+                    Task { await store.loadProducts() }
+                }
+                .buttonStyle(BigButtonStyle())
+            }
+        }
     }
 
     @ViewBuilder
