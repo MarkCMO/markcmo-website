@@ -626,10 +626,20 @@ platform :ios do
       end
     end
 
-    # Report the resulting states.
-    _, subs2 = asc_request(:get, "/v1/subscriptionGroups/#{group['id']}/subscriptions?limit=50&fields[subscriptions]=productId,state", jwt)
+    # Report exactly what each subscription still has / lacks.
+    _, subs2 = asc_request(:get, "/v1/subscriptionGroups/#{group['id']}/subscriptions?limit=50", jwt)
     (subs2["data"] || []).each do |s|
-      UI.message("== #{s.dig('attributes', 'productId')} state=#{s.dig('attributes', 'state')} ==")
+      sid = s["id"]
+      pid = s.dig("attributes", "productId")
+      st = s.dig("attributes", "state")
+      _, l = asc_request(:get, "/v1/subscriptions/#{sid}/subscriptionLocalizations?limit=10", jwt)
+      _, pr = asc_request(:get, "/v1/subscriptions/#{sid}/prices?limit=50", jwt)
+      ac, av = asc_request(:get, "/v1/subscriptions/#{sid}/subscriptionAvailability", jwt)
+      _, sc = asc_request(:get, "/v1/subscriptions/#{sid}/appStoreReviewScreenshot", jwt)
+      shot_state = (sc.dig("data", "attributes", "assetDeliveryState", "state") rescue nil)
+      shot_errs = (sc.dig("data", "attributes", "assetDeliveryState", "errors") rescue nil)
+      UI.message("== #{pid} state=#{st} loc=#{(l['data'] || []).count} price=#{(pr['data'] || []).count} " \
+                 "avail=#{ac.between?(200, 299) && !av['data'].nil?} shot=#{shot_state} shotErr=#{shot_errs.inspect} ==")
     end
   end
 
