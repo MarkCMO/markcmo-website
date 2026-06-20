@@ -162,6 +162,18 @@ platform :ios do
     )
   end
 
+  desc "Push only the text metadata (description, support URL, privacy URL) to App Store " \
+       "Connect, without touching screenshots or the binary."
+  lane :meta_text do
+    upload_to_app_store(
+      skip_binary_upload: true,
+      skip_screenshots: true,
+      submit_for_review: false,
+      force: true,
+      precheck_include_in_app_purchases: false
+    )
+  end
+
   desc "Inspect the App Store Connect resources needed for submission (read-only)."
   desc "Read-only: report the editable App Store version + its selected build, and any " \
        "review submission and its items/states (to confirm readiness to submit)."
