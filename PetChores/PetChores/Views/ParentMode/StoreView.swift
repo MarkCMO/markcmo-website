@@ -7,6 +7,11 @@ import StoreKit
 struct StoreView: View {
     @EnvironmentObject private var store: StoreService
 
+    /// Functional Terms of Use (EULA) and Privacy Policy links, required in the subscription
+    /// purchase flow (Guideline 3.1.2). Served by the petchores-legal Cloudflare Worker.
+    static let termsURL = URL(string: "https://petchores-legal.marklgabriellijr.workers.dev/terms")!
+    static let privacyURL = URL(string: "https://petchores-legal.marklgabriellijr.workers.dev/privacy")!
+
     var body: some View {
         ScrollView {
             VStack(spacing: 18) {
@@ -39,10 +44,16 @@ struct StoreView: View {
                 }
                 .font(.subheadline.weight(.semibold))
 
-                Text("Plans renew monthly until cancelled in your Apple ID settings. Payment is charged to your Apple ID. One pet is always free with no subscription.")
+                Text("Plans are auto-renewable. Payment is charged to your Apple ID at confirmation of purchase. A subscription renews automatically unless cancelled at least 24 hours before the end of the period; manage or cancel any time in your Apple ID settings. One pet is always free with no subscription.")
                     .font(.caption2)
                     .foregroundStyle(.secondary)
                     .multilineTextAlignment(.center)
+
+                HStack(spacing: 18) {
+                    Link("Terms of Use (EULA)", destination: Self.termsURL)
+                    Link("Privacy Policy", destination: Self.privacyURL)
+                }
+                .font(.caption.weight(.semibold))
 
                 phaseMessage
             }
