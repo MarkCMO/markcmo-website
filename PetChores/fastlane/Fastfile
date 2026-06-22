@@ -202,6 +202,35 @@ platform :ios do
     end
   end
 
+  desc "Read-only deep diagnostic of why the subscriptions are Missing Metadata: the actual " \
+       "price amount/territory, app price schedule, and the orphan unlock IAP state."
+  lane :subs_diag do
+    jwt = asc_jwt
+    app = APP_STORE_APP_ID
+
+    sc, sched = asc_request(:get, "/v1/apps/#{app}/appPriceSchedule?include=manualPrices,baseTerritory", jwt)
+    UI.message("appPriceSchedule -> #{sc}, data=#{sched['data'] ? 'present' : 'MISSING'}")
+
+    av, avail = asc_request(:get, "/v1/apps/#{app}/appAvailabilityV2", jwt)
+    UI.message("appAvailabilityV2 -> #{av}")
+
+    ic, iaps = asc_request(:get, "/v2/apps/#{app}/inAppPurchases?limit=50", jwt)
+    (iaps["data"] || []).each do |i|
+      UI.message("legacy IAP #{i.dig('attributes', 'productId')} state=#{i.dig('attributes', 'state')}")
+    end
+
+    _, groups = asc_request(:get, "/v1/apps/#{app}/subscriptionGroups?limit=50", jwt)
+    group = ((groups["data"] || []).find { |g| g.dig("attributes", "referenceName") == "Pet Care Plans" } rescue nil)
+    _, subs = asc_request(:get, "/v1/subscriptionGroups/#{group['id']}/subscriptions?limit=50", jwt)
+    s = ((subs["data"] || []).find { |x| x.dig("attributes", "productId") == "petchores.monthly" } rescue nil)
+    sid = s["id"]
+    _, pr = asc_request(:get, "/v1/subscriptions/#{sid}/prices?include=subscriptionPricePoint,territory&limit=10", jwt)
+    UI.message("monthly prices count=#{(pr['data'] || []).count}")
+    (pr["included"] || []).each do |inc|
+      UI.message("  incl #{inc['type']} #{inc.dig('attributes', 'customerPrice') || inc.dig('attributes', 'currency') || inc['id']}")
+    end
+  end
+
   lane :asc_inspect do
     jwt = asc_jwt
     app = APP_STORE_APP_ID
