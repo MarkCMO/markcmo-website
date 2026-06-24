@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<link rel="icon" type="image/webp" href="/favicon.webp">
+<meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+<title>Deep Intake | MarkCMO Growth Partnership</title>
+<meta name="description" content="Your post-call deep intake. Ten minutes that lets us build a proposal around your real numbers, stage and team."/>
+<meta name="robots" content="noindex, nofollow"/>
+<link rel="preconnect" href="https://fonts.googleapis.com" crossorigin>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800;900&family=Space+Grotesk:wght@400;500;600;700&display=swap">
+<link rel="stylesheet" href="/style.css"/>
+<style>
+.fi{max-width:780px;margin:0 auto;padding:2.5rem 6vw 5rem;}
+.fi-hero{margin-bottom:1.5rem;}
+.fi-badge{display:inline-flex;gap:8px;background:rgba(201,168,76,.1);border:1px solid rgba(201,168,76,.25);border-radius:30px;padding:.35rem 1rem;font-size:.7rem;font-weight:800;letter-spacing:.12em;color:var(--accent);text-transform:uppercase;margin-bottom:1rem;}
+.fi-h1{font-family:'Outfit',sans-serif;font-size:clamp(1.7rem,4.5vw,2.6rem);font-weight:900;letter-spacing:-.04em;color:var(--text);line-height:1.1;margin:0 0 .8rem;}
+.fi-h1 em{color:var(--accent);font-style:italic;}
+.fi-sub{font-size:1rem;color:var(--text2);line-height:1.65;max-width:600px;}
+.fi-save{font-size:.74rem;color:var(--text3);margin-top:.6rem;height:1em;}
+.fi-prog{position:sticky;top:64px;z-index:5;background:linear-gradient(var(--bg),var(--bg) 70%,transparent);padding:.8rem 0 1rem;}
+.fi-prog-bar{height:5px;background:var(--bg3);border-radius:4px;overflow:hidden;}
+.fi-prog-fill{height:100%;width:0;background:var(--accent);border-radius:4px;transition:width .3s;}
+.fi-prog-txt{font-size:.72rem;letter-spacing:.08em;text-transform:uppercase;color:var(--text3);margin-top:.45rem;}
+.fi-sec{margin:2.2rem 0 .5rem;}
+.fi-sec-t{font-family:'Outfit',sans-serif;font-size:.74rem;font-weight:800;letter-spacing:.14em;text-transform:uppercase;color:var(--accent);border-bottom:1px solid var(--border);padding-bottom:.6rem;margin-bottom:1.4rem;}
+.fi-q{margin-bottom:1.7rem;}
+.fi-qt{font-family:'Outfit',sans-serif;font-size:1.08rem;font-weight:700;color:var(--text);line-height:1.35;margin:0 0 .2rem;}
+.fi-qh{font-size:.83rem;color:var(--text3);margin:0 0 .85rem;line-height:1.5;}
+.fi-opts{display:grid;gap:.5rem;}
+.fi-opt{display:flex;align-items:flex-start;gap:.7rem;background:var(--bg3);border:1.5px solid var(--border);border-radius:11px;padding:.75rem .95rem;cursor:pointer;transition:border-color .15s,background .15s;}
+.fi-opt:hover{border-color:rgba(201,168,76,.45);}
+.fi-opt .dot{flex-shrink:0;width:18px;height:18px;border-radius:50%;border:2px solid var(--border);margin-top:1px;position:relative;}
+.fi-opt.multi .dot{border-radius:5px;}
+.fi-opt .dot::after{content:'';position:absolute;inset:3px;border-radius:50%;background:var(--accent);transform:scale(0);transition:transform .15s;}
+.fi-opt.multi .dot::after{border-radius:2px;}
+.fi-opt.sel{border-color:var(--accent);background:rgba(201,168,76,.07);}
+.fi-opt.sel .dot{border-color:var(--accent);}
+.fi-opt.sel .dot::after{transform:scale(1);}
+.fi-opt .lbl{font-size:.93rem;color:var(--text);font-weight:600;line-height:1.4;}
+.fi-opt .lbl small{display:block;font-size:.79rem;color:var(--text3);font-weight:400;margin-top:.12rem;}
+.fi-note{margin-top:.4rem;}
+.fi-note textarea{width:100%;box-sizing:border-box;min-height:90px;background:var(--bg);border:1px solid var(--border);border-radius:10px;padding:.8rem;font-size:.93rem;color:var(--text);font-family:inherit;resize:vertical;}
+.fi-note textarea:focus{outline:none;border-color:var(--accent);}
+.fi-submit{width:100%;background:var(--accent);color:#0A0F2C;font-family:'Outfit',sans-serif;font-weight:800;font-size:1.05rem;padding:1rem;border:none;border-radius:11px;cursor:pointer;transition:opacity .15s;margin-top:1.5rem;}
+.fi-submit:hover{opacity:.92;}
+.fi-submit:disabled{opacity:.5;cursor:not-allowed;}
+.fi-err{display:none;color:#e5736a;font-size:.85rem;text-align:center;margin-top:.7rem;}
+.fi-err.show{display:block;}
+.fi-state{text-align:center;padding:4rem 1rem;}
+.fi-state .ic{font-size:2.4rem;}
+.fi-state h2{font-family:'Outfit',sans-serif;font-size:1.6rem;font-weight:900;color:var(--text);margin:.7rem 0 .6rem;letter-spacing:-.03em;}
+.fi-state p{font-size:1rem;color:var(--text2);line-height:1.65;max-width:480px;margin:0 auto;}
+.fi-hidden{display:none;}
+</style>
+</head>
+<body>
+<div class="fi">
+  <div id="fiLoad" class="fi-state"><div class="ic">&#8987;</div><h2>Loading your intake...</h2></div>
+  <div id="fiInvalid" class="fi-state fi-hidden"><div class="ic">&#128274;</div><h2>This link isn't valid</h2><p>This intake link is missing or expired. If you just finished your strategy call, check the email we sent or reach out to mark@markcmo.com.</p></div>
+
+  <div id="fiMain" class="fi-hidden">
+    <div class="fi-hero">
+      <div class="fi-badge">Post-call deep intake</div>
+      <h1 class="fi-h1">Let's build this around <em>your</em> numbers</h1>
+      <p class="fi-sub" id="fiSub">Ten minutes. This is what lets us tie every recommendation to your revenue, your stage and your team, so any proposal is built for you, not a template. Your progress saves automatically.</p>
+      <div class="fi-save" id="fiSave"></div>
+    </div>
+
+    <div class="fi-prog">
+      <div class="fi-prog-bar"><div class="fi-prog-fill" id="fiFill"></div></div>
+      <div class="fi-prog-txt" id="fiProgTxt">0% complete</div>
+    </div>
+
+    <form id="fiForm" novalidate><div id="fiSections"></div>
+      <button type="submit" class="fi-submit" id="fiSubmit">Submit intake</button>
+      <div class="fi-err" id="fiErr"></div>
+    </form>
+  </div>
+
+  <div id="fiDone" class="fi-state fi-hidden">
+    <div class="ic">&#9989;</div>
+    <h2>Got it. We're on it.</h2>
+    <p>Your intake is in. We're building your proposal around exactly what you told us, your stage, your team and your revenue goals. You'll hear from us shortly with the engagement and next steps.</p>
+  </div>
+</div>
+
+<script>
+(function(){
+  var SECTIONS = [
+    { t:'Company context', qs:[
+      { key:'a_offering_type', t:'Primary offering type', opts:[
+        {v:'service',l:'Done-for-you service'},{v:'product',l:'Physical product'},{v:'software',l:'Software / subscription'},{v:'platform',l:'Marketplace / platform'},{v:'mixed',l:'Mixed / multiple'} ]},
+      { key:'a_trajectory', t:'Revenue trajectory this year vs last', opts:[
+        {v:'declining',l:'Declining'},{v:'flat',l:'Flat / plateaued'},{v:'grow_25',l:'Growing under 25%'},{v:'grow_25_100',l:'Growing 25 - 100%'},{v:'grow_100',l:'Growing 100%+'} ]},
+      { key:'a_positioning_clarity', t:'How clearly can your best customer say why they chose you?', opts:[
+        {v:'cannot',l:'They cannot really articulate it'},{v:'vaguely',l:'Vaguely'},{v:'mostly',l:'Mostly clear'},{v:'crisp',l:'Crisp and consistent'} ]},
+    ]},
+    { t:'Business model', qs:[
+      { key:'b_growth_stage', t:'Which stage is the business in?', h:'Growing, succession planning, or buying more businesses. This locks the strategy track.', opts:[
+        {v:'growing',l:'Growing',s:'Scaling revenue'},{v:'succession',l:'Succession planning',s:'Preparing to sell, raise or hand off'},{v:'acquiring',l:'Buying more businesses',s:'Acquiring / rolling up / building a platform'} ]},
+      { key:'b_acv', t:'Average deal or order value', opts:[
+        {v:'under_100',l:'Under $100'},{v:'100_1k',l:'$100 - $1,000'},{v:'1k_10k',l:'$1,000 - $10,000'},{v:'high_ticket',l:'$10,000 - $100,000'},{v:'enterprise_deal',l:'$100,000+'} ]},
+      { key:'b_cycle', t:'Sales cycle length', opts:[
+        {v:'impulse',l:'Same day / impulse'},{v:'days_weeks',l:'Days to weeks'},{v:'1_3mo',l:'1 - 3 months'},{v:'quarters',l:'Quarters / 6+ months'} ]},
+      { key:'b_motion', t:'Sales motion', opts:[
+        {v:'self_serve',l:'Self-serve checkout'},{v:'sales_assisted',l:'Sales-assisted'},{v:'sales_led',l:'Fully sales-led'} ]},
+      { key:'b_revenue_source', t:'Where does revenue mainly come from today?', opts:[
+        {v:'paid_ads',l:'Paid ads'},{v:'organic_inbound',l:'Organic / SEO / inbound'},{v:'outbound',l:'Outbound / sales team'},{v:'referral',l:'Referral / word of mouth'},{v:'partnerships',l:'Partnerships / channel'} ]},
+      { key:'b_constraint', t:'The real constraint on growth right now?', opts:[
+        {v:'demand',l:'Demand: not enough leads'},{v:'nurture',l:'Conversion: leads do not close'},{v:'engineer',l:'Operations: cannot fulfill'},{v:'map',l:'Clarity: do not know which'} ]},
+    ]},
+    { t:'Goals and horizon', qs:[
+      { key:'c_goal_6mo', t:'6-month goal (primary metric)', opts:[
+        {v:'stabilize',l:'Stabilize / stop the bleeding'},{v:'lead_flow',l:'Add a predictable lead flow'},{v:'rev_25_50',l:'Increase revenue 25 - 50%'},{v:'rev_50_100',l:'Increase revenue 50 - 100%'},{v:'more_than_double',l:'More than double'} ]},
+      { key:'c_goal_1yr', t:'1-year goal', opts:[
+        {v:'steady',l:'Steady, profitable growth'},{v:'engine',l:'Build the growth engine/system'},{v:'aggressive',l:'Aggressive scale'},{v:'exit_or_raise',l:'Prep for raise or sale'} ]},
+      { key:'c_endgame_5yr', t:'5-year end game', opts:[
+        {v:'scale_hold',l:'Scale and hold'},{v:'acquire',l:'Acquire other businesses'},{v:'sell',l:'Be acquired / sell'},{v:'raise',l:'Raise capital'},{v:'lifestyle',l:'Lifestyle / cashflow'} ]},
+      { key:'c_exit_intent', t:'Any of these in the next 5 years?', h:'Select all that apply.', multi:true, opts:[
+        {v:'selling',l:'Selling within 5 years'},{v:'raising',l:'Raising within 5 years'},{v:'acquiring',l:'Acquiring within 5 years'},{v:'none',l:'None of these'} ]},
+    ]},
+    { t:'Resources and team', qs:[
+      { key:'d_monthly_budget', t:'Confirmed monthly budget for this engagement', opts:[
+        {v:'under_5k',l:'Under $5,000'},{v:'b5_8k',l:'$5,000 - $8,000'},{v:'b8_12k',l:'$8,000 - $12,000'},{v:'b12_20k',l:'$12,000 - $20,000'},{v:'over_20k',l:'$20,000+'} ]},
+      { key:'d_annual', t:'Open to an annual engagement (unlocks a discount)?', opts:[
+        {v:'yes',l:'Yes, prefer annual'},{v:'maybe',l:'Maybe, show me both'},{v:'no',l:'No, month-to-month only'} ]},
+      { key:'d_marketing_dept', t:'How robust is your marketing department?', h:'This sets whether we lead as a strategy partner or run it end to end as your strategy + execution (VIP) partner.', opts:[
+        {v:'none',l:'No one in marketing'},{v:'solo',l:'One person'},{v:'lean',l:'Small team (2 - 3 seats)'},{v:'robust',l:'Robust team (4+ seats)'},{v:'agency',l:'External agency in place'} ]},
+      { key:'d_team', t:'Internal team available to execute', opts:[
+        {v:'none',l:'None, you would run it all'},{v:'junior',l:'Junior / generalist'},{v:'mid',l:'Mid-level marketer(s)'},{v:'senior',l:'Senior team'},{v:'agency',l:'External agency in place'} ]},
+      { key:'d_signoff', t:'Who else signs off on this?', opts:[
+        {v:'just_me',l:'Just me'},{v:'partner',l:'Me + one partner'},{v:'board',l:'A board / committee'},{v:'unsure',l:'Not sure'} ]},
+      { key:'d_deadline', t:'Any hard deadline or event driving this?', opts:[
+        {v:'within_30',l:'Yes, within 30 days'},{v:'this_quarter',l:'Yes, this quarter'},{v:'this_year',l:'Yes, this year'},{v:'none',l:'No fixed deadline'} ]},
+    ]},
+    { t:'What is at stake', qs:[
+      { key:'e_stakes', t:'If this is NOT solved in 12 months, the biggest cost is:', opts:[
+        {v:'revenue_stakes',l:'Lost revenue / missed targets'},{v:'competitive_stakes',l:'Falling behind competitors'},{v:'founder_relief',l:'Burnout, I cannot keep carrying it'},{v:'exit_stakes',l:'Failed raise or failed exit'},{v:'credibility_stakes',l:'Team / investor confidence'} ]},
+      { key:'e_objection', t:'What has made you hesitant to bring in outside help before?', opts:[
+        {v:'past_burn',l:'Been burned by an agency before'},{v:'cost',l:'Cost / ROI uncertainty'},{v:'control',l:'Giving up control'},{v:'time',l:'No time to manage another vendor'},{v:'none',l:'No hesitation'} ]},
+      { key:'e_internal_resistance', t:'Likely internal resistance?', opts:[
+        {v:'none',l:'None'},{v:'skeptic',l:'A skeptical partner / exec'},{v:'budget_gate',l:'Finance / budget gatekeeper'},{v:'team_threat',l:'The existing team feels threatened'} ]},
+      { key:'e_notes', t:'Anything else we should know?', h:'Optional.', note:true },
+    ]},
+    { t:'Industry (optional)', qs:[
+      { key:'f_compliance', t:'Does your industry carry regulatory constraints?', h:'Select all that apply. This routes you to the right specialist.', multi:true, opts:[
+        {v:'compliance_healthcare',l:'Healthcare / HIPAA'},{v:'compliance_aerospace',l:'Aerospace / defense / ITAR'},{v:'compliance_fintech',l:'Fintech / financial regulation'},{v:'compliance_restricted',l:'Cannabis / restricted ads'},{v:'none',l:'None of these'} ]},
+    ]},
+  ];
+
+  var REQUIRED = ['a_offering_type','b_growth_stage','b_acv','b_constraint','c_goal_6mo','d_monthly_budget','d_marketing_dept','d_signoff'];
+  var TOTAL = SECTIONS.reduce(function(n,s){return n+s.qs.filter(function(q){return !q.note;}).length;},0);
+
+  var token = new URLSearchParams(location.search).get('t') || new URLSearchParams(location.search).get('token') || '';
+  var answers = {};
+  var saveTimer = null;
+
+  function show(id){ ['fiLoad','fiInvalid','fiMain','fiDone'].forEach(function(x){document.getElementById(x).classList.toggle('fi-hidden', x!==id);}); }
+
+  if(!token){ show('fiInvalid'); return; }
+
+  fetch('/api/funnel/intake?token='+encodeURIComponent(token))
+    .then(function(r){return r.json();})
+    .then(function(j){
+      if(!j||!j.ok){ show('fiInvalid'); return; }
+      answers = j.answers || {};
+      if(j.theme_css){ var ts=document.createElement('style'); ts.id='fiTheme'; ts.textContent=j.theme_css; document.head.appendChild(ts); }
+      if(j.prospect && j.prospect.full_name){
+        document.getElementById('fiSub').textContent = j.prospect.full_name.split(' ')[0]+', this is what lets us tie every recommendation to your revenue, your stage and your team, so the proposal is built for you, not a template. Your progress saves automatically.';
+      }
+      render();
+      show('fiMain');
+    })
+    .catch(function(){ show('fiInvalid'); });
+
+  function render(){
+    var wrap = document.getElementById('fiSections');
+    wrap.innerHTML='';
+    SECTIONS.forEach(function(sec){
+      var sd = document.createElement('div'); sd.className='fi-sec';
+      sd.innerHTML='<div class="fi-sec-t">'+sec.t+'</div>';
+      sec.qs.forEach(function(q){
+        var qd = document.createElement('div'); qd.className='fi-q';
+        qd.innerHTML='<div class="fi-qt">'+q.t+'</div>'+(q.h?'<div class="fi-qh">'+q.h+'</div>':'');
+        if(q.note){
+          var ta=document.createElement('div'); ta.className='fi-note';
+          ta.innerHTML='<textarea data-key="'+q.key+'" placeholder="Optional"></textarea>';
+          var t=ta.querySelector('textarea'); t.value=answers[q.key]||'';
+          t.addEventListener('input',function(){answers[q.key]=t.value;queueSave();});
+          qd.appendChild(ta);
+        } else {
+          var od=document.createElement('div'); od.className='fi-opts';
+          var labels=[];
+          function syncMulti(){
+            var cur=Array.isArray(answers[q.key])?answers[q.key]:[];
+            labels.forEach(function(p){ p.lab.classList.toggle('sel', cur.indexOf(p.v)>-1); });
+          }
+          q.opts.forEach(function(o){
+            var lab=document.createElement('label'); lab.className='fi-opt'+(q.multi?' multi':'');
+            lab.innerHTML='<span class="dot"></span><span class="lbl">'+o.l+(o.s?'<small>'+o.s+'</small>':'')+'</span>';
+            labels.push({lab:lab, v:o.v});
+            var selected = q.multi ? (Array.isArray(answers[q.key])&&answers[q.key].indexOf(o.v)>-1) : (answers[q.key]===o.v);
+            if(selected) lab.classList.add('sel');
+            lab.addEventListener('click',function(){
+              if(q.multi){
+                var cur = Array.isArray(answers[q.key])?answers[q.key].slice():[];
+                if(o.v==='none'){
+                  cur = cur.indexOf('none')>-1 ? [] : ['none'];           // toggle the exclusive "none"
+                } else {
+                  cur = cur.filter(function(x){return x!=='none';});       // any real pick clears "none"
+                  var i=cur.indexOf(o.v);
+                  if(i>-1) cur.splice(i,1); else cur.push(o.v);
+                }
+                answers[q.key]=cur;
+                syncMulti();
+              } else {
+                answers[q.key]=o.v;
+                labels.forEach(function(p){ p.lab.classList.toggle('sel', p.v===o.v); });
+              }
+              updateProgress(); queueSave();
+            });
+            od.appendChild(lab);
+          });
+          qd.appendChild(od);
+        }
+        sd.appendChild(qd);
+      });
+      wrap.appendChild(sd);
+    });
+    updateProgress();
+  }
+
+  function answeredCount(){
+    var n=0;
+    SECTIONS.forEach(function(s){s.qs.forEach(function(q){ if(q.note) return; var v=answers[q.key]; if(q.multi){ if(Array.isArray(v)&&v.length) n++; } else if(v) n++; });});
+    return n;
+  }
+  function updateProgress(){
+    var pct=Math.round(answeredCount()/TOTAL*100);
+    document.getElementById('fiFill').style.width=pct+'%';
+    document.getElementById('fiProgTxt').textContent=pct+'% complete';
+  }
+
+  function queueSave(){
+    var s=document.getElementById('fiSave'); s.textContent='Saving...';
+    clearTimeout(saveTimer);
+    saveTimer=setTimeout(function(){
+      fetch('/api/funnel/intake',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({token:token,answers:answers,partial:true})})
+        .then(function(r){return r.json();})
+        .then(function(){ s.textContent='Progress saved'; })
+        .catch(function(){ s.textContent='Saved locally'; });
+    },800);
+  }
+
+  document.getElementById('fiForm').addEventListener('submit',function(e){
+    e.preventDefault();
+    var err=document.getElementById('fiErr'); err.classList.remove('show');
+    var missing = REQUIRED.filter(function(k){ var v=answers[k]; return !(Array.isArray(v)?v.length:v); });
+    if(missing.length){ err.textContent='Please answer the key questions before submitting ('+missing.length+' left in business model, goals, budget and team).'; err.classList.add('show'); return; }
+    var btn=document.getElementById('fiSubmit'); btn.disabled=true; btn.textContent='Submitting...';
+    fetch('/api/funnel/intake',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({token:token,answers:answers,partial:false})})
+      .then(function(r){return r.json();})
+      .then(function(j){ if(!j||!j.ok) throw new Error(); show('fiDone'); window.scrollTo({top:0,behavior:'smooth'}); })
+      .catch(function(){ btn.disabled=false; btn.textContent='Submit intake'; err.textContent='Something went wrong. Your answers are saved, please try again or email mark@markcmo.com.'; err.classList.add('show'); });
+  });
+})();
+</script>
+</body>
+</html>
