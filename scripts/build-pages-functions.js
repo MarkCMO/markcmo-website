@@ -17,6 +17,15 @@ const NATIVE_ROUTES = new Set([
   'api/sign-engagement.js',
   'api/amzur-sign.js',
   'api/roc-intake.js',
+  // Fractional acquisition funnel - native CF routes (no netlify/functions twin).
+  // They import the shared engine/themes/brand libs from functions/_lib. The
+  // cleaner MUST preserve them or Stage 1 qualify, Stage 2 intake, the post-call
+  // dispatch, and the hosted proposal all go dark on deploy.
+  'api/funnel/qualify.js',
+  'api/funnel/intake.js',
+  'api/funnel/call-recap.js',
+  'api/funnel/dispatch.js',
+  'api/funnel/proposal.js',
   // Social OAuth (TikTok + Facebook) hosted on the registered markcmo.com domain.
   'connect/tiktok.js',
   'connect/facebook.js',
