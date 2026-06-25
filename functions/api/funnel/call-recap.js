@@ -125,9 +125,9 @@ async function sendRecap(env, { prospect, recap, aiSummary, suggested }) {
     const url = `${SITE}/api/funnel/dispatch?p=${tok}&path=productized&theme=${t.key}`;
     const isSug = t.key === suggested;
     return `<a href="${url}" style="display:block;margin:8px 0;text-decoration:none;border-radius:10px;overflow:hidden;border:1.5px solid ${isSug ? '#C9A84C' : '#e5e7eb'};">
-      <span style="display:block;padding:11px 16px;background:${esc(t.bg)};color:#fff;font-weight:700;font-size:14px;">
+      <span style="display:block;padding:11px 16px;background:${esc(t.bg)};color:${esc(t.text || '#fff')};font-weight:700;font-size:14px;">
         ${isSug ? '&#9733; ' : ''}Productized &middot; ${esc(t.label)}
-        <span style="display:inline-block;width:12px;height:12px;border-radius:3px;background:${esc(t.accent)};vertical-align:middle;margin-left:8px;border:1px solid rgba(255,255,255,.4);"></span>
+        <span style="display:inline-block;width:12px;height:12px;border-radius:3px;background:${esc(t.accent)};vertical-align:middle;margin-left:8px;border:1px solid rgba(120,120,120,.4);"></span>
       </span>
       <span style="display:block;padding:7px 16px;background:#fafafa;color:#6b7280;font-size:11px;">${esc(t.note)}</span>
     </a>`;
