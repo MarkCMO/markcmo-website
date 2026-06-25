@@ -26,6 +26,7 @@ const NATIVE_ROUTES = new Set([
   'api/funnel/call-recap.js',
   'api/funnel/dispatch.js',
   'api/funnel/proposal.js',
+  'api/funnel/sign.js',
   // Social OAuth (TikTok + Facebook) hosted on the registered markcmo.com domain.
   'connect/tiktok.js',
   'connect/facebook.js',
