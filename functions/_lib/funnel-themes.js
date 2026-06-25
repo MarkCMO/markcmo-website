@@ -117,7 +117,9 @@ export function suggestTheme({ firstName = '', segment = '', growth_stage = '' }
 }
 
 export function themeButtons() {
-  return Object.entries(THEMES).map(([key, t]) => ({ key, label: t.label, note: t.note, accent: t.vars['--accent'], bg: t.vars['--bg'] }));
+  // `text` is the theme's own foreground color so a button label stays readable
+  // on its background (dark text on the light warm theme, white on dark themes).
+  return Object.entries(THEMES).map(([key, t]) => ({ key, label: t.label, note: t.note, accent: t.vars['--accent'], bg: t.vars['--bg'], text: t.vars['--text'] }));
 }
 
 // ── tiny color helpers (no deps) ────────────────────────────────────────────
