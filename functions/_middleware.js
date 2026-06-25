@@ -558,84 +558,6 @@ class BannerInjector {
 }
 
 // ────────────────────────────────────────────────────────────────────
-// 3. Sticky conversion bar (tap-to-call + Book a Free Call)
-//
-// The city/state/industry pages already carry the full on-page playbook
-// (intent terms, FAQ/Service schema, /book links). The missing piece for
-// turning impressions into booked calls is a PERSISTENT, thumb-reachable
-// CTA - most traffic is mobile and the in-body /book links scroll away.
-// This bar rides the bottom of every chrome-injected page. It adds zero
-// content (no thin-content / duplication risk) and lifts conversion
-// site-wide from one code change.
-//
-// Excluded on conversion-destination pages where it would be redundant
-// (already on /book, /contact, etc.) and anywhere chrome is skipped or a
-// page opts out via data-master-chrome="off".
-// ────────────────────────────────────────────────────────────────────
-
-const CTA_PHONE_E164 = '+13219175738';
-const CTA_PHONE_DISPLAY = '(321) 917-5738';
-const CTA_BOOK_PATH = '/book';
-
-// Paths where the sticky bar is redundant or unwanted.
-const STICKY_CTA_SKIP = new Set([
-  '/book', '/book.html',
-  '/contact', '/contact.html',
-  '/card', '/card.html',
-  '/call-prep', '/call-prep.html',
-  '/thank-you', '/thank-you.html',
-]);
-
-function shouldShowStickyCta(url) {
-  if (STICKY_CTA_SKIP.has(url.pathname)) return false;
-  return true;
-}
-
-const STICKY_CTA_CSS = `
-  #mc-cta-bar{position:fixed;z-index:99990;left:0;right:0;bottom:0;display:flex;gap:10px;
-    padding:10px 14px calc(10px + env(safe-area-inset-bottom,0px));box-sizing:border-box;
-    background:rgba(10,15,44,.97);backdrop-filter:saturate(140%) blur(6px);
-    -webkit-backdrop-filter:saturate(140%) blur(6px);
-    border-top:1px solid rgba(201,168,76,.45);box-shadow:0 -6px 24px rgba(0,0,0,.35);
-    font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Inter,sans-serif;}
-  #mc-cta-bar a{flex:1 1 0;min-height:50px;display:flex;align-items:center;justify-content:center;
-    gap:8px;border-radius:11px;font-size:16px;font-weight:700;letter-spacing:.01em;
-    text-decoration:none;line-height:1.1;transition:transform .12s ease,filter .12s ease;}
-  #mc-cta-bar a:active{transform:translateY(1px);}
-  #mc-cta-call{background:transparent;color:#F4ECD4;border:1.5px solid rgba(201,168,76,.7);}
-  #mc-cta-call:hover{filter:brightness(1.12);}
-  #mc-cta-book{background:#C9A84C;color:#0A0F2C;border:1.5px solid #C9A84C;
-    box-shadow:0 2px 10px rgba(201,168,76,.35);}
-  #mc-cta-book:hover{filter:brightness(1.06);}
-  #mc-cta-bar .mc-cta-ic{font-size:17px;line-height:1;}
-  body{padding-bottom:74px;}
-  @media (min-width:721px){
-    #mc-cta-bar{left:auto;right:22px;bottom:22px;width:auto;gap:12px;padding:12px 14px;
-      border:1px solid rgba(201,168,76,.45);border-radius:16px;}
-    #mc-cta-bar a{flex:0 0 auto;padding:0 22px;min-width:150px;}
-    body{padding-bottom:0;}
-  }
-  @media print{#mc-cta-bar{display:none !important;}}
-`;
-
-function stickyCtaHtml() {
-  return `<div id="mc-cta-bar" role="complementary" aria-label="Contact Mark">` +
-    `<a id="mc-cta-call" href="tel:${CTA_PHONE_E164}" aria-label="Call ${CTA_PHONE_DISPLAY}">` +
-      `<span class="mc-cta-ic" aria-hidden="true">&#128222;</span><span>Call</span></a>` +
-    `<a id="mc-cta-book" href="${CTA_BOOK_PATH}" aria-label="Book a free call">` +
-      `<span class="mc-cta-ic" aria-hidden="true">&#128197;</span><span>Book a Free Call</span></a>` +
-    `</div>`;
-}
-
-class StickyCtaInjector {
-  element(el) {
-    const attr = el.getAttribute('data-master-chrome');
-    if (attr === 'off' || attr === 'false') return;
-    el.append(stickyCtaHtml(), { html: true });
-  }
-}
-
-// ────────────────────────────────────────────────────────────────────
 // Main handler
 // ────────────────────────────────────────────────────────────────────
 
@@ -654,15 +576,9 @@ export async function onRequest(context) {
 
   const message = (env.MAINTENANCE_MESSAGE || '').trim();
   const injectChrome = shouldInjectChrome(url);
-  const showCta = injectChrome && shouldShowStickyCta(url);
   if (!message && !injectChrome) return response;
 
   const rewriter = new HTMLRewriter();
-
-  if (showCta) {
-    rewriter.on('head', new HeadInjector(STICKY_CTA_CSS));
-    rewriter.on('body', new StickyCtaInjector());
-  }
 
   if (injectChrome) {
     const navHtml = getMasterNav();
