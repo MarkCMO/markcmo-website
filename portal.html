@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<link rel="icon" type="image/webp" href="/favicon.webp">
+<meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+<title>Your Client Portal | MarkCMO</title>
+<meta name="robots" content="noindex, nofollow"/>
+<link rel="preconnect" href="https://fonts.googleapis.com" crossorigin>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;600;700;800;900&family=Space+Grotesk:wght@400;500;600;700&display=swap">
+<style>
+*{box-sizing:border-box;}
+:root{
+  --bg:#0A0F2C;--bg2:#0D1330;--bg3:#141a3d;--border:rgba(201,168,76,.18);
+  --text:#ffffff;--text2:rgba(255,255,255,.82);--text3:rgba(255,255,255,.55);
+  --accent:#C9A84C;--accent2:#E2C878;--on-accent:#0A0F2C;
+}
+html,body{margin:0;}
+body{background:var(--bg);color:var(--text);font-family:'Space Grotesk',-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Helvetica,Arial,sans-serif;-webkit-font-smoothing:antialiased;}
+.pt{max-width:720px;margin:0 auto;padding:3rem 6vw 5rem;}
+.eyebrow{font-size:.7rem;letter-spacing:.16em;text-transform:uppercase;color:var(--accent);font-weight:800;}
+.h1{font-family:'Outfit',sans-serif;font-size:clamp(1.8rem,5vw,2.6rem);font-weight:900;letter-spacing:-.03em;color:var(--text);line-height:1.1;margin:.5rem 0 .6rem;}
+.sub{color:var(--text2);font-size:1rem;line-height:1.6;max-width:560px;}
+.gate{max-width:420px;margin-top:1.6rem;}
+.field{margin-bottom:.9rem;}
+.field label{display:block;font-size:.68rem;letter-spacing:.08em;text-transform:uppercase;color:var(--text3);margin-bottom:.35rem;}
+.field input{width:100%;background:var(--bg3);border:1px solid var(--border);border-radius:9px;padding:.8rem .9rem;font-size:1rem;color:var(--text);font-family:inherit;}
+.field input:focus{outline:none;border-color:var(--accent);}
+.field input.code{letter-spacing:.4em;font-size:1.3rem;text-align:center;font-family:'Outfit',sans-serif;}
+.btn{background:var(--accent);color:var(--on-accent);font-family:'Outfit',sans-serif;font-weight:800;font-size:1rem;padding:.85rem 1.6rem;border:none;border-radius:10px;cursor:pointer;}
+.btn:disabled{opacity:.5;cursor:not-allowed;}
+.muted{font-size:.8rem;color:var(--text3);margin-top:.7rem;line-height:1.5;}
+.err{display:none;color:#e5736a;font-size:.85rem;margin-top:.6rem;}
+.err.show{display:block;}
+.hidden{display:none;}
+.card{background:var(--bg3);border:1px solid var(--border);border-radius:14px;padding:1.3rem 1.4rem;margin:1.1rem 0;}
+.card h3{font-family:'Outfit',sans-serif;font-size:.72rem;font-weight:800;letter-spacing:.12em;text-transform:uppercase;color:var(--accent);margin:0 0 .8rem;}
+.row{display:flex;justify-content:space-between;gap:1rem;padding:.5rem 0;border-top:1px solid var(--border);font-size:.95rem;}
+.row:first-of-type{border-top:none;}
+.row .k{color:var(--text2);} .row .v{color:var(--text);font-weight:600;text-align:right;}
+.pill{font-size:.62rem;font-weight:800;letter-spacing:.1em;text-transform:uppercase;padding:4px 9px;border-radius:9999px;}
+.pill.signed{background:rgba(46,186,115,.16);color:#5ED99A;}
+.pill.todo{background:rgba(242,199,68,.14);color:#E8C76A;}
+.cta{display:inline-block;background:var(--accent);color:var(--on-accent);font-family:'Outfit',sans-serif;font-weight:800;font-size:.95rem;padding:.7rem 1.4rem;border-radius:9px;text-decoration:none;margin-top:.4rem;}
+.cta.ghost{background:transparent;border:1px solid var(--border);color:var(--text);}
+.bank{font-family:'Outfit',sans-serif;}
+.bank .mono{font-family:ui-monospace,Menlo,Consolas,monospace;color:var(--accent);font-weight:600;}
+.next h2{font-family:'Outfit',sans-serif;font-size:1.25rem;font-weight:800;color:var(--text);margin:0 0 .3rem;}
+.next p{color:var(--text2);font-size:.95rem;line-height:1.55;margin:0;}
+.locked{color:var(--text3);font-size:.92rem;font-style:italic;}
+</style>
+</head>
+<body>
+<div class="pt">
+  <!-- Gate -->
+  <div id="ptGate">
+    <div class="eyebrow">Client portal</div>
+    <h1 class="h1">Your plan, in one place</h1>
+    <p class="sub">Your proposal, your agreements, and your payment instructions. Enter your email and we'll send a one-time code.</p>
+    <div class="gate">
+      <div id="stepEmail">
+        <div class="field"><label>Email</label><input id="ptEmail" type="email" placeholder="you@company.com" autocomplete="email"/></div>
+        <button class="btn" id="ptSendBtn">Send my code</button>
+        <div class="err" id="ptEmailErr"></div>
+      </div>
+      <div id="stepCode" class="hidden">
+        <div class="field"><label>6-digit code (check your email)</label><input id="ptCode" class="code" inputmode="numeric" maxlength="6" placeholder="000000"/></div>
+        <button class="btn" id="ptVerifyBtn" disabled>View my portal</button>
+        <div class="muted">Code sent. It expires in 10 minutes. <a href="#" id="ptResend" style="color:var(--accent);">Resend</a></div>
+        <div class="err" id="ptCodeErr"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Dashboard -->
+  <div id="ptDash" class="hidden">
+    <div class="eyebrow">Client portal</div>
+    <h1 class="h1" id="ptHello">Welcome</h1>
+    <div id="ptNext" class="card next"></div>
+    <div id="ptPlan"></div>
+    <div id="ptAgree"></div>
+    <div id="ptPay"></div>
+  </div>
+</div>
+
+<script>
+(function(){
+  var token=null;
+  function $(id){return document.getElementById(id);}
+  function showErr(id,msg){var e=$(id);e.textContent=msg;e.classList.add('show');}
+  function clrErr(id){$(id).classList.remove('show');}
+
+  function sendCode(){
+    clrErr('ptEmailErr');
+    var email=($('ptEmail').value||'').trim();
+    if(!/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(email)){ showErr('ptEmailErr','Enter a valid email.'); return; }
+    var btn=$('ptSendBtn'); btn.disabled=true; btn.textContent='Sending...';
+    fetch('/api/funnel/portal-code',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({email:email})})
+      .then(function(r){return r.json();})
+      .then(function(j){
+        btn.disabled=false; btn.textContent='Send my code';
+        token=j.token||null;
+        $('stepEmail').classList.add('hidden'); $('stepCode').classList.remove('hidden'); $('ptCode').focus();
+        // If unknown email, j.sent is false and token null; verify will just fail gracefully.
+      })
+      .catch(function(){ btn.disabled=false; btn.textContent='Send my code'; showErr('ptEmailErr','Something went wrong. Try again.'); });
+  }
+  function verify(){
+    clrErr('ptCodeErr');
+    var code=($('ptCode').value||'').trim();
+    if(code.length<6){ showErr('ptCodeErr','Enter the 6-digit code.'); return; }
+    if(!token){ showErr('ptCodeErr','We could not find an account for that email. Email mark@markcmo.com.'); return; }
+    var btn=$('ptVerifyBtn'); btn.disabled=true; btn.textContent='Verifying...';
+    fetch('/api/funnel/portal',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({token:token,code:code})})
+      .then(function(r){return r.json().then(function(j){return {status:r.status,j:j};});})
+      .then(function(res){
+        btn.disabled=false; btn.textContent='View my portal';
+        if(res.status!==200||!res.j.ok){ showErr('ptCodeErr', res.j.error==='expired'?'That code expired. Resend a new one.':'Incorrect code. Try again.'); return; }
+        renderDash(res.j);
+      })
+      .catch(function(){ btn.disabled=false; btn.textContent='View my portal'; showErr('ptCodeErr','Something went wrong. Try again.'); });
+  }
+
+  $('ptSendBtn').addEventListener('click',sendCode);
+  $('ptEmail').addEventListener('keydown',function(e){if(e.key==='Enter')sendCode();});
+  $('ptResend').addEventListener('click',function(e){e.preventDefault();$('stepCode').classList.add('hidden');$('stepEmail').classList.remove('hidden');});
+  $('ptCode').addEventListener('input',function(){$('ptVerifyBtn').disabled=($('ptCode').value||'').trim().length<6;});
+  $('ptCode').addEventListener('keydown',function(e){if(e.key==='Enter'&&!$('ptVerifyBtn').disabled)verify();});
+  $('ptVerifyBtn').addEventListener('click',verify);
+
+  function esc(s){return String(s==null?'':s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');}
+
+  function renderDash(d){
+    if(d.theme_css){var ts=document.createElement('style');ts.textContent=d.theme_css;document.head.appendChild(ts);}
+    $('ptGate').classList.add('hidden'); $('ptDash').classList.remove('hidden');
+    var first=(d.client.full_name||'').split(' ')[0]||d.client.company||'there';
+    $('ptHello').textContent='Welcome, '+first;
+    // next
+    $('ptNext').innerHTML='<div class="next"><h2>'+esc(d.next.headline)+'</h2><p>'+esc(d.next.body)+'</p></div>';
+    // plan
+    if(d.plan){
+      $('ptPlan').innerHTML='<div class="card"><h3>Your plan</h3>'+
+        '<div class="row"><span class="k">Tier</span><span class="v">'+esc(d.plan.tier)+'</span></div>'+
+        '<div class="row"><span class="k">Engagement</span><span class="v">'+esc(d.plan.engagement)+'</span></div>'+
+        '<div class="row"><span class="k">Investment</span><span class="v">'+esc(d.plan.monthly_label)+(d.plan.onetime_label?' + '+esc(d.plan.onetime_label)+' once':'')+'</span></div>'+
+        '<a class="cta ghost" href="'+esc(d.plan.proposal_url)+'">View full proposal</a></div>';
+    }
+    // agreements
+    var rows=d.agreements.map(function(a){return '<div class="row"><span class="k">'+esc(a.label)+'</span><span class="v"><span class="pill '+(a.status==='signed'?'signed':'todo')+'">'+(a.status==='signed'?'Signed':'To sign')+'</span></span></div>';}).join('');
+    $('ptAgree').innerHTML='<div class="card"><h3>Your agreements</h3>'+rows+(d.all_signed?'':'<a class="cta" href="'+esc(d.sign_url)+'">Review and sign</a>')+'</div>';
+    // payment
+    if(d.payment && d.payment.unlocked){
+      var p=d.payment; var r=p.remit;
+      var bank = r ? '<div class="bank">'+
+        (r.bank_name?row('Bank',r.bank_name):'')+
+        (r.beneficiary?row('Beneficiary',r.beneficiary):'')+
+        (r.ach_routing?rowMono('ACH routing',r.ach_routing):'')+
+        (r.wire_routing?rowMono('Wire routing',r.wire_routing):'')+
+        (r.account_number?rowMono('Account #',r.account_number):'')+
+        (r.account_type?row('Account type',r.account_type):'')+
+        (r.swift?rowMono('SWIFT',r.swift):'')+
+        '<div class="row"><span class="k">Memo</span><span class="v">'+esc(p.memo)+'</span></div>'+
+        '</div>'
+        : '<p class="locked">Bank details are being finalized. Email '+esc(p.contact)+' for wire/ACH instructions.</p>';
+      $('ptPay').innerHTML='<div class="card"><h3>Pay your first invoice</h3>'+
+        '<div class="row"><span class="k">Amount due</span><span class="v">'+esc(p.amount_label)+'</span></div>'+
+        bank+
+        '<p class="muted">Pay by ACH or wire transfer. Reply to mark@markcmo.com once sent and we schedule kickoff.</p></div>';
+    } else if(d.payment){
+      $('ptPay').innerHTML='<div class="card"><h3>Payment</h3><p class="locked">'+esc(d.payment.reason)+'</p></div>';
+    }
+  }
+  function row(k,v){return '<div class="row"><span class="k">'+esc(k)+'</span><span class="v">'+esc(v)+'</span></div>';}
+  function rowMono(k,v){return '<div class="row"><span class="k">'+esc(k)+'</span><span class="v mono">'+esc(v)+'</span></div>';}
+})();
+</script>
+</body>
+</html>

@@ -71,6 +71,7 @@ export async function onRequest(context) {
     await sbPatch(env, 'mcf_prospects', `id=eq.${prospect.id}`, { stage: 'signed', updated_at: new Date().toISOString() }).catch(() => {});
     await logEvent(env, prospect.id, 'all_agreements_signed', { count: agreements.length }, 'prospect');
     await notifyAllSigned(env, prospect, agreements);
+    await emailClientPortal(env, prospect).catch(() => {});
   }
 
   return json(200, {
@@ -158,6 +159,22 @@ async function notifyAllSigned(env, prospect, agreements) {
 </div></body></html>`;
   try {
     await fetch('https://api.resend.com/emails', { method: 'POST', headers: { Authorization: `Bearer ${env.RESEND_API_KEY}`, 'Content-Type': 'application/json' }, body: JSON.stringify({ from: 'MarkCMO Funnel <leads@markcmo.com>', to: ['mark@markcmo.com'], reply_to: prospect.email, subject: `SIGNED: ${prospect.company || prospect.full_name} - all 3 agreements executed`, html, tags: [{ name: 'category', value: 'funnel_signed' }] }) });
+  } catch (_) {}
+}
+
+// Email the client (Mark's voice, bare) their portal link to pay + see everything.
+async function emailClientPortal(env, prospect) {
+  if (!env.RESEND_API_KEY || !prospect.email) return;
+  const first = (prospect.full_name || '').trim().split(/\s+/)[0] || 'there';
+  const html = `<!DOCTYPE html><html><head><meta charset="UTF-8"></head><body>
+<p>Hi ${esc(first)},</p>
+<p>Everything's signed - thank you. Last step to engage the work is the first invoice.</p>
+<p>Your client portal has your plan, your signed agreements, and the wire/ACH payment instructions in one place: <a href="https://markcmo.com/portal">https://markcmo.com/portal</a></p>
+<p>Sign in with this email and the one-time code it sends you. Reply here once payment is sent and we'll schedule kickoff.</p>
+<p>- Mark</p>
+</body></html>`;
+  try {
+    await fetch('https://api.resend.com/emails', { method: 'POST', headers: { Authorization: `Bearer ${env.RESEND_API_KEY}`, 'Content-Type': 'application/json' }, body: JSON.stringify({ from: 'Mark Gabrielli <mark@markcmo.com>', to: [prospect.email], reply_to: 'mark@markcmo.com', subject: `${prospect.company ? prospect.company + ': ' : ''}signed - your portal and payment`, html, tags: [{ name: 'category', value: 'funnel_signed_client' }] }) });
   } catch (_) {}
 }
 
