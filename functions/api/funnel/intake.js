@@ -19,7 +19,8 @@ import { scoreIntake, buildProposalModel, routeAssignment, DEFAULT_PRICING } fro
 import { themeCss, DEFAULT_THEME } from '../../_lib/funnel-themes.js';
 import { sbInsert, sbPatch, sbSelect, logEvent, safeAudit, parseBody, json, cors, clientMeta } from '../../_lib/funnel-db.js';
 
-const HANDLER_VERSION = 'funnel-intake-v1-2026-06-24';
+const HANDLER_VERSION = 'funnel-intake-v2-2026-06-25';
+const SITE = 'https://markcmo.com';
 
 export async function onRequest(context) {
   const { request, env } = context;
@@ -116,7 +117,7 @@ export async function onRequest(context) {
       mode: prospect.proposal_mode || 'productized',
       theme: prospect.theme || DEFAULT_THEME,
       brand_kit: prospect.brand_kit || null,
-      status: 'draft',
+      status: 'sent',
       expires_at: expires,
     });
     proposalId = rows?.[0]?.id || null;
@@ -132,10 +133,19 @@ export async function onRequest(context) {
 
   await notifyTeam(env, { prospect, intake, routing, proposalId, monthly_total, onetime_total });
 
+  // The client gets their cost + plan immediately - no waiting on Mark. The
+  // proposal is built and sent; the page redirects them straight to it, and we
+  // also email them the link as a backup. Mark still gets the notification and
+  // can override assignment in the admin, but the client is never blocked.
+  const proposal_url = `${SITE}/api/funnel/proposal?t=${encodeURIComponent(prospect.resume_token)}`;
+  await sbPatch(env, 'mcf_prospects', `id=eq.${prospect.id}`, { stage: 'proposal_sent', updated_at: new Date().toISOString() }).catch(() => {});
+  await emailClientProposal(env, { prospect, proposal_url, monthly_total, tier: intake.recommended_tier }).catch(() => {});
+
   return json(200, {
     ok: true,
     prospect_id: prospect.id,
     proposal_id: proposalId,
+    proposal_url,
     full_score: intake.full_score,
     segment: intake.segment,
     growth_stage: intake.growth_stage,
@@ -145,6 +155,27 @@ export async function onRequest(context) {
     needs_approval: routing.approval,
     handler_version: HANDLER_VERSION,
   });
+}
+
+// Email the client their proposal link in Mark's voice (bare, typed-feel - per
+// the design rule: emails TO a prospect are plain, not branded marketing HTML).
+async function emailClientProposal(env, { prospect, proposal_url }) {
+  if (!env.RESEND_API_KEY || !prospect.email) return;
+  const first = (prospect.full_name || '').trim().split(/\s+/)[0] || 'there';
+  const html = `<!DOCTYPE html><html><head><meta charset="UTF-8"></head><body>
+<p>Hi ${esc(first)},</p>
+<p>Thanks for filling that out. I built your plan and investment around exactly what you told me - your stage, your team and your revenue goals.</p>
+<p>Here it is: <a href="${esc(proposal_url)}">${esc(proposal_url)}</a></p>
+<p>Take a look and accept right on the page when you're ready, or reply here with any questions.</p>
+<p>- Mark</p>
+</body></html>`;
+  try {
+    await fetch('https://api.resend.com/emails', {
+      method: 'POST',
+      headers: { Authorization: `Bearer ${env.RESEND_API_KEY}`, 'Content-Type': 'application/json' },
+      body: JSON.stringify({ from: 'Mark Gabrielli <mark@markcmo.com>', to: [prospect.email], reply_to: 'mark@markcmo.com', subject: `${prospect.company ? prospect.company + ': ' : ''}your plan and investment`, html, tags: [{ name: 'category', value: 'funnel_proposal_ready' }] }),
+    });
+  } catch (_) {}
 }
 
 // ---- GET resume ----
