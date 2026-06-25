@@ -92,8 +92,9 @@ body{background:var(--bg);color:var(--text);font-family:'Space Grotesk',-apple-s
 
   <div id="fiDone" class="fi-state fi-hidden">
     <div class="ic">&#9989;</div>
-    <h2>Got it. We're on it.</h2>
-    <p>Your intake is in. We're building your proposal around exactly what you told us, your stage, your team and your revenue goals. You'll hear from us shortly with the engagement and next steps.</p>
+    <h2>Your plan is ready.</h2>
+    <p>We built your plan and investment around exactly what you told us, your stage, your team and your revenue goals. Opening it now...</p>
+    <p style="margin-top:1.2rem;"><a id="fiPropLink" href="#" style="display:inline-block;background:var(--accent);color:var(--on-accent);font-family:'Outfit',sans-serif;font-weight:800;font-size:1rem;padding:.85rem 1.8rem;border-radius:10px;text-decoration:none;">View your plan &amp; investment</a></p>
   </div>
 </div>
 
@@ -273,7 +274,13 @@ body{background:var(--bg);color:var(--text);font-family:'Space Grotesk',-apple-s
     var btn=document.getElementById('fiSubmit'); btn.disabled=true; btn.textContent='Submitting...';
     fetch('/api/funnel/intake',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({token:token,answers:answers,partial:false})})
       .then(function(r){return r.json();})
-      .then(function(j){ if(!j||!j.ok) throw new Error(); show('fiDone'); window.scrollTo({top:0,behavior:'smooth'}); })
+      .then(function(j){
+        if(!j||!j.ok) throw new Error();
+        var url = j.proposal_url || ('/api/funnel/proposal?t='+encodeURIComponent(token));
+        var link=document.getElementById('fiPropLink'); if(link) link.href=url;
+        show('fiDone'); window.scrollTo({top:0,behavior:'smooth'});
+        setTimeout(function(){ window.location.href=url; }, 1600); // auto-open their plan
+      })
       .catch(function(){ btn.disabled=false; btn.textContent='Submit intake'; err.textContent='Something went wrong. Your answers are saved, please try again or email mark@markcmo.com.'; err.classList.add('show'); });
   });
 })();
