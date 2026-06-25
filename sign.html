@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<link rel="icon" type="image/webp" href="/favicon.webp">
+<meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+<title>Sign Your Agreements | MarkCMO</title>
+<meta name="robots" content="noindex, nofollow"/>
+<link rel="preconnect" href="https://fonts.googleapis.com" crossorigin>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;600;700;800;900&family=Space+Grotesk:wght@400;500;600;700&display=swap">
+<style>
+/* Self-contained (no dark-site /style.css). Theme controls contrast. */
+*{box-sizing:border-box;}
+:root{
+  --bg:#0A0F2C;--bg2:#0D1330;--bg3:#141a3d;--border:rgba(201,168,76,.18);
+  --text:#ffffff;--text2:rgba(255,255,255,.82);--text3:rgba(255,255,255,.55);
+  --accent:#C9A84C;--accent2:#E2C878;--on-accent:#0A0F2C;
+}
+html,body{margin:0;}
+body{background:var(--bg);color:var(--text);font-family:'Space Grotesk',-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Helvetica,Arial,sans-serif;-webkit-font-smoothing:antialiased;}
+.sg{max-width:780px;margin:0 auto;padding:2.5rem 6vw 5rem;}
+.sg-state{text-align:center;padding:4rem 1rem;}
+.sg-state .ic{font-size:2.4rem;}
+.sg-state h2{font-family:'Outfit',sans-serif;font-size:1.6rem;font-weight:900;color:var(--text);margin:.7rem 0 .6rem;}
+.sg-state p{font-size:1rem;color:var(--text2);max-width:480px;margin:0 auto;line-height:1.6;}
+.hidden{display:none;}
+.sg-hero{margin-bottom:1.5rem;}
+.sg-badge{display:inline-flex;gap:8px;background:rgba(201,168,76,.1);border:1px solid var(--border);border-radius:30px;padding:.35rem 1rem;font-size:.7rem;font-weight:800;letter-spacing:.12em;color:var(--accent);text-transform:uppercase;margin-bottom:1rem;}
+.sg-h1{font-family:'Outfit',sans-serif;font-size:clamp(1.7rem,4.5vw,2.4rem);font-weight:900;letter-spacing:-.03em;color:var(--text);line-height:1.12;margin:0 0 .7rem;}
+.sg-sub{font-size:1rem;color:var(--text2);line-height:1.6;max-width:620px;}
+.sg-prog{display:flex;gap:8px;margin:1.4rem 0 .5rem;}
+.sg-step{flex:1;height:5px;border-radius:4px;background:var(--bg3);}
+.sg-step.done{background:var(--accent);}
+.sg-progtxt{font-size:.72rem;letter-spacing:.08em;text-transform:uppercase;color:var(--text3);}
+.doc-card{background:var(--bg3);border:1px solid var(--border);border-radius:14px;margin:1.2rem 0;overflow:hidden;}
+.doc-head{display:flex;align-items:center;justify-content:space-between;gap:1rem;padding:1rem 1.3rem;cursor:pointer;}
+.doc-head .dn{font-family:'Outfit',sans-serif;font-size:.7rem;font-weight:800;letter-spacing:.12em;text-transform:uppercase;color:var(--accent);}
+.doc-head .dt{font-size:1.12rem;font-weight:700;color:var(--text);margin-top:2px;}
+.doc-status{flex-shrink:0;font-size:.66rem;font-weight:800;letter-spacing:.1em;text-transform:uppercase;padding:5px 11px;border-radius:9999px;}
+.doc-status.todo{background:rgba(242,199,68,.14);color:#E8C76A;}
+.doc-status.signed{background:rgba(46,186,115,.16);color:#5ED99A;}
+.doc-body{border-top:1px solid var(--border);}
+.doc-scroll{max-height:340px;overflow-y:auto;padding:1.2rem 1.4rem;font-size:13.5px;line-height:1.65;color:var(--text2);}
+.doc-scroll .doc h4{font-family:'Outfit',sans-serif;font-size:13px;color:var(--text);margin:16px 0 4px;letter-spacing:.01em;}
+.doc-scroll .doc p{margin:0 0 10px;}
+.doc-scroll .doc strong{color:var(--text);font-weight:700;}
+.doc-scroll ul.dl{margin:6px 0 10px;padding-left:18px;}
+.doc-scroll ul.dl li{margin:3px 0;}
+.sign-block{padding:1.1rem 1.4rem 1.4rem;border-top:1px solid var(--border);background:rgba(255,255,255,.02);}
+.sign-grid{display:grid;grid-template-columns:1.3fr 1fr;gap:.7rem;}
+.sign-grid label{display:block;font-size:.68rem;letter-spacing:.08em;text-transform:uppercase;color:var(--text3);margin-bottom:.3rem;}
+.sign-grid input{width:100%;background:var(--bg);border:1px solid var(--border);border-radius:8px;padding:.65rem .8rem;font-size:.95rem;color:var(--text);font-family:inherit;}
+.sign-grid input:focus{outline:none;border-color:var(--accent);}
+.sig-prev{margin:.7rem 0;font-family:'Outfit',cursive;font-size:1.5rem;color:var(--text);min-height:1.6em;border-bottom:1px dashed var(--border);padding-bottom:4px;}
+.consent{display:flex;align-items:flex-start;gap:.6rem;margin:.7rem 0 .9rem;font-size:.82rem;color:var(--text2);line-height:1.45;cursor:pointer;}
+.consent input{margin-top:2px;}
+.sign-btn{background:var(--accent);color:var(--on-accent);font-family:'Outfit',sans-serif;font-weight:800;font-size:.95rem;padding:.8rem 1.6rem;border:none;border-radius:9px;cursor:pointer;}
+.sign-btn:disabled{opacity:.5;cursor:not-allowed;}
+.signed-note{font-size:.9rem;color:#5ED99A;font-weight:600;}
+.sg-err{display:none;color:#e5736a;font-size:.85rem;margin-top:.6rem;}
+.sg-err.show{display:block;}
+.finish{text-align:center;margin-top:1.6rem;padding:1.6rem;background:var(--bg3);border:1px solid var(--border);border-radius:14px;}
+.finish .fbig{font-family:'Outfit',sans-serif;font-size:1.3rem;font-weight:900;color:var(--text);}
+.finish p{color:var(--text2);font-size:.95rem;margin:.5rem 0 0;line-height:1.55;}
+</style>
+</head>
+<body>
+<div class="sg">
+  <div id="sgLoad" class="sg-state"><div class="ic">&#8987;</div><h2>Loading your agreements...</h2></div>
+  <div id="sgInvalid" class="sg-state hidden"><div class="ic">&#128274;</div><h2>This link isn't ready</h2><p>Accept your proposal first, or check the link. Questions? Reach mark@markcmo.com.</p></div>
+
+  <div id="sgMain" class="hidden">
+    <div class="sg-hero">
+      <div class="sg-badge">Engagement documents</div>
+      <h1 class="sg-h1" id="sgTitle">Sign to start</h1>
+      <p class="sg-sub">Three short documents: a mutual NDA, the engagement letter, and the master services agreement. Read each, type your name to sign. Electronic signatures are valid and binding.</p>
+      <div class="sg-prog" id="sgProg"></div>
+      <div class="sg-progtxt" id="sgProgTxt"></div>
+    </div>
+    <div id="sgDocs"></div>
+    <div id="sgFinish" class="finish hidden">
+      <div class="fbig">&#9989; All signed</div>
+      <p>Your agreements are executed. We will issue the first invoice to engage the work, then build your onboarding doc and schedule kickoff. You will hear from us shortly.</p>
+    </div>
+  </div>
+</div>
+
+<script>
+(function(){
+  var token = new URLSearchParams(location.search).get('t') || new URLSearchParams(location.search).get('token') || '';
+  var data = null;
+  function show(id){ ['sgLoad','sgInvalid','sgMain'].forEach(function(x){document.getElementById(x).classList.toggle('hidden', x!==id);}); }
+  if(!token){ show('sgInvalid'); return; }
+
+  fetch('/api/funnel/sign?token='+encodeURIComponent(token))
+    .then(function(r){return r.json();})
+    .then(function(j){
+      if(!j||!j.ok){ show('sgInvalid'); return; }
+      data = j;
+      if(j.theme_css){ var ts=document.createElement('style'); ts.textContent=j.theme_css; document.head.appendChild(ts); }
+      render();
+      show('sgMain');
+    })
+    .catch(function(){ show('sgInvalid'); });
+
+  function statusOf(type){ var a=(data.agreements||[]).find(function(x){return x.type===type;}); return a?a.status:'sent'; }
+
+  function render(){
+    var wrap=document.getElementById('sgDocs'); wrap.innerHTML='';
+    data.order.forEach(function(type){
+      var d=data.docs[type]; var signed=statusOf(type)==='signed';
+      var card=document.createElement('div'); card.className='doc-card'; card.dataset.type=type;
+      card.innerHTML=
+        '<div class="doc-head"><div><div class="dn">'+(data.labels[type]?'Document':'')+'</div><div class="dt">'+esc(d.title)+'</div></div>'+
+        '<div class="doc-status '+(signed?'signed':'todo')+'">'+(signed?'Signed':'To sign')+'</div></div>'+
+        '<div class="doc-body"><div class="doc-scroll">'+d.html+'</div>'+
+        (signed
+          ? '<div class="sign-block"><span class="signed-note">&#10003; Signed by '+esc((data.agreements.find(function(x){return x.type===type;})||{}).signer_name||'')+'</span></div>'
+          : signBlock(type))+
+        '</div>';
+      wrap.appendChild(card);
+    });
+    wireSignBlocks();
+    updateProgress();
+  }
+
+  function signBlock(type){
+    return '<div class="sign-block">'+
+      '<div class="sign-grid">'+
+        '<div><label>Full legal name</label><input data-f="name" placeholder="Your full name" autocomplete="name"/></div>'+
+        '<div><label>Title</label><input data-f="title" placeholder="e.g. Founder" autocomplete="organization-title"/></div>'+
+      '</div>'+
+      '<div class="sig-prev" data-sig>&nbsp;</div>'+
+      '<label class="consent"><input type="checkbox" data-f="consent"/> <span>I have read this document and agree to be bound by it. I consent to sign electronically, and my typed name is my signature.</span></label>'+
+      '<button class="sign-btn" data-sign disabled>Sign this document</button>'+
+      '<div class="sg-err"></div>'+
+    '</div>';
+  }
+
+  function wireSignBlocks(){
+    document.querySelectorAll('.doc-card').forEach(function(card){
+      var type=card.dataset.type;
+      var nameI=card.querySelector('[data-f="name"]'); if(!nameI) return;
+      var titleI=card.querySelector('[data-f="title"]');
+      var consent=card.querySelector('[data-f="consent"]');
+      var sig=card.querySelector('[data-sig]');
+      var btn=card.querySelector('[data-sign]');
+      var err=card.querySelector('.sg-err');
+      function refresh(){ var n=(nameI.value||'').trim(); sig.textContent=n||' '; btn.disabled=!(n.length>=2 && consent.checked); }
+      nameI.addEventListener('input',refresh); consent.addEventListener('change',refresh);
+      // toggle body open/close on header
+      var head=card.querySelector('.doc-head'); var body=card.querySelector('.doc-body');
+      head.addEventListener('click',function(e){ if(e.target.closest('.sign-block')) return; body.style.display = body.style.display==='none'?'':'none'; });
+      btn.addEventListener('click',function(){
+        err.classList.remove('show'); btn.disabled=true; btn.textContent='Signing...';
+        fetch('/api/funnel/sign',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({token:token,type:type,signerName:nameI.value.trim(),signerTitle:(titleI.value||'').trim(),consent:true,signatureType:'type'})})
+          .then(function(r){return r.json();})
+          .then(function(j){
+            if(!j||!j.ok) throw new Error();
+            // mark signed locally
+            var a=(data.agreements||[]).find(function(x){return x.type===type;}); if(a){a.status='signed';a.signer_name=nameI.value.trim();}
+            render();
+            if(j.all_signed){ document.getElementById('sgFinish').classList.remove('hidden'); document.getElementById('sgFinish').scrollIntoView({behavior:'smooth',block:'center'}); }
+          })
+          .catch(function(){ btn.disabled=false; btn.textContent='Sign this document'; err.textContent='Could not sign. Please try again or email mark@markcmo.com.'; err.classList.add('show'); });
+      });
+    });
+  }
+
+  function updateProgress(){
+    var prog=document.getElementById('sgProg'); prog.innerHTML='';
+    var done=0;
+    data.order.forEach(function(type){ var s=document.createElement('div'); s.className='sg-step'+(statusOf(type)==='signed'?' done':''); if(statusOf(type)==='signed')done++; prog.appendChild(s); });
+    document.getElementById('sgProgTxt').textContent=done+' of '+data.order.length+' signed';
+    if(done===data.order.length){ document.getElementById('sgFinish').classList.remove('hidden'); }
+  }
+
+  function esc(s){ return String(s==null?'':s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;'); }
+})();
+</script>
+</body>
+</html>

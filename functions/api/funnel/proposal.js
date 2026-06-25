@@ -60,21 +60,23 @@ async function acceptProposal(env, request, prospect, proposal) {
     await logEvent(env, prospect.id, 'proposal_accepted', { proposal_id: proposal.id, tier: proposal.tier, engagement_id: bridge?.engagementId, client_id: bridge?.clientId }, 'prospect');
     await notifyAccepted(env, { prospect, proposal, bridge });
   }
+  const signUrl = `https://markcmo.com/sign?t=${encodeURIComponent(prospect.resume_token)}`;
   const inner = `
     <header class="phero">
       <div class="pkick">Accepted</div>
       <h1>You're in.</h1>
       <p class="ptag">Welcome to the partnership, ${esc((prospect.full_name || '').split(' ')[0] || prospect.company || '')}.</p>
-      <p class="pengine">Here is exactly what happens next. No surprises.</p>
+      <p class="pengine">One step to make it official: sign the three agreements. Takes a few minutes.</p>
     </header>
     <section class="ps"><div class="kick">Next</div><h2>From here to kickoff</h2>
       <ol class="path">
-        <li><span class="n">1</span>We send the engagement letter, MSA and mutual NDA to sign (a few minutes).</li>
+        <li><span class="n">1</span>Sign the mutual NDA, engagement letter and MSA below.</li>
         <li><span class="n">2</span>First invoice for the engagement is issued.</li>
         <li><span class="n">3</span>We build your onboarding doc from everything you told us, so your CMO starts with full context.</li>
         <li><span class="n">4</span>Kickoff call is scheduled and the engine starts.</li>
       </ol>
-      <a class="cta" href="mailto:mark@markcmo.com?subject=${encodeURIComponent('Accepted - ' + (prospect.company || prospect.full_name || ''))}">Email Mark with any questions</a>
+      <a class="cta" href="${signUrl}">Review and sign your agreements</a>
+      <div class="exp">Or email mark@markcmo.com with any questions.</div>
     </section>`;
   return html(`Accepted - ${prospect.company || prospect.full_name || 'MarkCMO'}`, inner, theme);
 }
