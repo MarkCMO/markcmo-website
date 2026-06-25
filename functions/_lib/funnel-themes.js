@@ -30,9 +30,12 @@ export const THEMES = {
     fonts: { heading: "'Fraunces', Georgia, serif", body: "'Outfit', sans-serif" },
     googleFonts: 'https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,600;9..144,700&family=Outfit:wght@400;500;600;700&display=swap',
     vars: {
-      '--bg': '#FBF6F1', '--bg2': '#F6ECE4', '--bg3': '#FFFFFF', '--border': 'rgba(180,120,110,.22)',
-      '--text': '#3A2A2A', '--text2': '#6B5450', '--text3': '#9A817C',
-      '--accent': '#C2756B', '--accent2': '#D8A48C', '--on-accent': '#FFFFFF',
+      // accent + text3 darkened to clear 4.5:1 AA on the light cream/white
+      // grounds (the lighter #C2756B/#9A817C only hit ~3.2 - readable but
+      // sub-AA, flagged by contrast-guard). Still warm rose + taupe.
+      '--bg': '#FBF6F1', '--bg2': '#F6ECE4', '--bg3': '#FFFFFF', '--border': 'rgba(168,80,74,.28)',
+      '--text': '#3A2A2A', '--text2': '#6B5450', '--text3': '#715850',
+      '--accent': '#A8504A', '--accent2': '#D8A48C', '--on-accent': '#FFFFFF',
     },
   },
   bold_masculine: {
