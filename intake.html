@@ -10,8 +10,19 @@
 <link rel="preconnect" href="https://fonts.googleapis.com" crossorigin>
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800;900&family=Space+Grotesk:wght@400;500;600;700&display=swap">
-<link rel="stylesheet" href="/style.css"/>
 <style>
+/* Self-contained: the funnel intake does NOT load the dark-site /style.css,
+   so its global rules (h1{color:#fff}, body text colors) can't poison a light
+   theme. These defaults (premium-neutral) are the base; the runtime theme
+   (fiTheme) overrides :root per client, so contrast is always correct. */
+*{box-sizing:border-box;}
+:root{
+  --bg:#0A0F2C;--bg2:#0D1330;--bg3:#141a3d;--border:rgba(201,168,76,.18);
+  --text:#ffffff;--text2:rgba(255,255,255,.82);--text3:rgba(255,255,255,.55);
+  --accent:#C9A84C;--accent2:#E2C878;--on-accent:#0A0F2C;
+}
+html,body{margin:0;}
+body{background:var(--bg);color:var(--text);font-family:'Space Grotesk',-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Helvetica,Arial,sans-serif;-webkit-font-smoothing:antialiased;}
 .fi{max-width:780px;margin:0 auto;padding:2.5rem 6vw 5rem;}
 .fi-hero{margin-bottom:1.5rem;}
 .fi-badge{display:inline-flex;gap:8px;background:rgba(201,168,76,.1);border:1px solid rgba(201,168,76,.25);border-radius:30px;padding:.35rem 1rem;font-size:.7rem;font-weight:800;letter-spacing:.12em;color:var(--accent);text-transform:uppercase;margin-bottom:1rem;}
