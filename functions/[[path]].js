@@ -147,6 +147,12 @@ const NO_INJECT = new Set([
 function shouldInjectChrome(pagePath) {
   if (NO_INJECT.has(pagePath)) return false;
   if (pagePath.startsWith('MLG-Resume')) return false;
+  // Funnel client-flow pages are self-contained + per-client THEMED. They must
+  // NOT get nav/footer/style.css injected - that chrome (and the dark-site
+  // style.css) overrides a light theme and produces light-on-light text. These
+  // are the bare single-segment keys ('portal'/'sign' below only matched the
+  // 'portal/' subpath prefix, not the page itself).
+  if (pagePath === 'intake' || pagePath === 'sign' || pagePath === 'portal') return false;
   if (pagePath.startsWith('admin/') || pagePath.startsWith('portal/') ||
       pagePath.startsWith('sign/')  || pagePath.startsWith('exam/') ||
       pagePath.startsWith('learn/') || pagePath.startsWith('proposals/')) return false;
