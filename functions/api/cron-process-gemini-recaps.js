@@ -26,6 +26,10 @@
 // project (used by markcmo-cron worker for other endpoints).
 
 import { findGeminiMeetingNotes, getDocPlainText, extractRecapSections } from '../_lib/google-drive.js';
+// Acquisition-funnel decision email (internal, to Mark). Fired once per call
+// from the recap-sent path below for prospects who came through /start. Fully
+// guarded + idempotent so it can never affect the recap / booking flow.
+import { dispatchCallRecap } from './funnel/call-recap.js';
 
 const RECAP_LOOKBACK_MIN = 60;  // look at meetings ended in the last hour
 const MAX_ENGAGEMENTS_PER_RUN = 10;
@@ -359,6 +363,23 @@ export async function onRequest(context) {
           candAudit.step = sendResult.ok ? 'sent' : 'send_failed';
           event = sendResult.ok ? 'gemini_recap_sent' : 'gemini_recap_failed';
           run.processed.push({ engagement_id: cand.engagement_id, doc: match.name, resend_id: sendResult.resend_id });
+
+          // ── Acquisition-funnel decision email (internal, to Mark) ──────────
+          // The call happened and a recap just went out, so this is the moment
+          // to send Mark the custom/productized decision email - but ONLY if the
+          // invitee came through the /start funnel (has an mcf_prospects row).
+          // dispatchCallRecap is self-contained, returns instead of throwing,
+          // and is idempotent, so it can never affect the recap/booking flow.
+          try {
+            const geminiSummary = [sections.summary, (sections.action_items || sections.actionItems || []).join('; ')].filter(Boolean).join(' ').trim();
+            await dispatchCallRecap(env, {
+              email: cand.invitee_email,
+              idempotent: true,
+              calendly: { event_name: cand.event_name, start_time: cand.scheduled_at, ai_summary: geminiSummary || null },
+            });
+          } catch (e) {
+            candAudit.funnel_decision_error = (e && e.message) || String(e);
+          }
         }
       } catch (err) {
         candAudit.error_message = (err && err.message) || String(err);
