@@ -1,0 +1,340 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Brevard Lagoon Initiative - A Plan to Make the Indian River Lagoon Clear Again</title>
+<meta name="description" content="A quantitative, costed plan to restore water clarity to the Brevard County Indian River Lagoon - oyster and clam filtration, muck removal, stormwater treatment, and desalination, ranked by dollars per pound of nitrogen removed.">
+<link rel="canonical" href="https://markcmo.com/brevard/">
+<meta property="og:title" content="Brevard Lagoon Initiative - Making the Indian River Lagoon Clear Again">
+<meta property="og:description" content="A numbers-first restoration plan for the Brevard Indian River Lagoon, with interactive calculators and a board-ready brief.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://markcmo.com/brevard/">
+<link rel="stylesheet" href="/style.css">
+<style id="bv-css">
+/* ============================================================
+   BREVARD LAGOON INITIATIVE - shared design system
+   Deep-water dark theme. Harmonized with markcmo.com
+   (Bebas Neue / Barlow / DM Mono, dark navy) but a fresh,
+   distinct civic identity. All classes namespaced .bv-*.
+   ============================================================ */
+
+.bv-page{
+  /* palette */
+  --bv-ink:#EAF4F1;
+  --bv-muted:#9BB3AE;
+  --bv-faint:#6E8A84;
+  --bv-line:rgba(120,205,193,0.16);
+  --bv-line-soft:rgba(120,205,193,0.09);
+  --bv-surface:#0C2128;
+  --bv-surface2:#0F2A32;
+  --bv-surface3:#123540;
+  --bv-aqua:#2AD6C6;
+  --bv-aqua-deep:#0E9C90;
+  --bv-tide:#3BB6D6;
+  --bv-gold:#D3B45B;
+  --bv-coral:#FF7E69;
+  --bv-good:#46CCA2;
+  --bv-muck:#CFA063;
+  --bv-display:'Bebas Neue','Barlow',sans-serif;
+  --bv-body:'Barlow',system-ui,sans-serif;
+  --bv-mono:'DM Mono',ui-monospace,Menlo,Consolas,monospace;
+  --bv-maxw:940px;
+  --bv-narrow:760px;
+
+  background:
+    radial-gradient(120% 80% at 80% -5%, rgba(42,214,198,0.10), transparent 55%),
+    radial-gradient(100% 60% at 0% 100%, rgba(59,182,214,0.08), transparent 60%),
+    linear-gradient(180deg,#07171C 0%, #061419 55%, #05171B 100%);
+  color:var(--bv-ink);
+  font-family:var(--bv-body);
+  font-size:17px;
+  line-height:1.6;
+  min-height:100vh;
+}
+
+.bv-page *{box-sizing:border-box;}
+.bv-wrap{max-width:var(--bv-maxw);margin:0 auto;padding:0 24px;}
+.bv-narrow{max-width:var(--bv-narrow);margin:0 auto;padding:0 24px;}
+.bv-wide{max-width:1180px;margin:0 auto;padding:0 24px;}
+
+/* ---- type ---- */
+.bv-page h1,.bv-page h2{font-family:var(--bv-display);font-weight:400;letter-spacing:.01em;line-height:.98;margin:0;text-wrap:balance;}
+.bv-page h3,.bv-page h4{font-family:var(--bv-body);font-weight:800;line-height:1.15;margin:0;letter-spacing:-.01em;text-wrap:balance;}
+.bv-page p{margin:0 0 1.05em;}
+.bv-page a{color:var(--bv-aqua);text-decoration:none;}
+.bv-page a:hover{text-decoration:underline;}
+.bv-mono{font-family:var(--bv-mono);font-variant-numeric:tabular-nums;}
+.bv-eyebrow{font-family:var(--bv-mono);font-size:12px;letter-spacing:.22em;text-transform:uppercase;color:var(--bv-aqua);font-weight:500;}
+.bv-lede{font-size:clamp(18px,2.3vw,22px);color:#C4DAD5;line-height:1.5;}
+.bv-muted{color:var(--bv-muted);}
+.bv-disc{font-size:13px;color:var(--bv-faint);font-style:italic;line-height:1.5;}
+
+/* ---- hero ---- */
+.bv-hero{padding:clamp(48px,9vw,104px) 0 clamp(40px,6vw,64px);border-bottom:1px solid var(--bv-line);position:relative;overflow:hidden;}
+.bv-hero h1{font-size:clamp(46px,10vw,110px);color:#F2FBF9;margin:16px 0 20px;}
+.bv-hero .bv-lede{max-width:44ch;}
+.bv-hero-meta{display:flex;flex-wrap:wrap;gap:10px 30px;margin-top:30px;font-family:var(--bv-mono);font-size:12.5px;letter-spacing:.03em;color:var(--bv-muted);}
+.bv-hero-meta b{color:var(--bv-ink);font-weight:500;}
+
+/* ---- sections ---- */
+.bv-section{padding:clamp(44px,7vw,72px) 0;border-bottom:1px solid var(--bv-line-soft);}
+.bv-sechead{display:flex;gap:16px;align-items:baseline;margin-bottom:26px;}
+.bv-secnum{font-family:var(--bv-mono);font-size:13px;color:var(--bv-faint);letter-spacing:.1em;flex-shrink:0;padding-top:8px;}
+.bv-page h2.bv-h2{font-size:clamp(30px,5vw,52px);color:#EFFAF8;}
+.bv-sub{color:var(--bv-muted);font-size:15px;margin-top:6px;max-width:60ch;}
+
+/* ---- stat band ---- */
+.bv-stats{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:var(--bv-line);border:1px solid var(--bv-line);border-radius:16px;overflow:hidden;}
+.bv-stat{background:var(--bv-surface);padding:22px 18px;}
+.bv-stat .n{font-family:var(--bv-display);font-size:clamp(34px,4.4vw,52px);color:var(--bv-aqua);line-height:.9;font-variant-numeric:tabular-nums;}
+.bv-stat .k{font-size:13.5px;color:var(--bv-muted);margin-top:10px;line-height:1.35;}
+@media(max-width:760px){.bv-stats{grid-template-columns:repeat(2,1fr);}}
+
+/* ---- cards ---- */
+.bv-card{background:var(--bv-surface);border:1px solid var(--bv-line);border-radius:16px;padding:22px 24px;}
+.bv-grid{display:grid;gap:18px;}
+.bv-grid.two{grid-template-columns:1fr 1fr;}
+.bv-grid.three{grid-template-columns:repeat(3,1fr);}
+@media(max-width:760px){.bv-grid.two,.bv-grid.three{grid-template-columns:1fr;}}
+
+/* ---- callouts ---- */
+.bv-callout{background:var(--bv-surface);border:1px solid var(--bv-line);border-left:3px solid var(--bv-aqua);border-radius:12px;padding:20px 22px;margin:22px 0;}
+.bv-callout.coral{border-left-color:var(--bv-coral);}
+.bv-callout.muck{border-left-color:var(--bv-muck);}
+.bv-callout.good{border-left-color:var(--bv-good);}
+.bv-callout.gold{border-left-color:var(--bv-gold);}
+.bv-callout h4{font-family:var(--bv-mono);font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:var(--bv-muted);margin-bottom:10px;font-weight:500;}
+.bv-callout.coral h4{color:var(--bv-coral);}
+.bv-callout.good h4{color:var(--bv-good);}
+.bv-callout p:last-child{margin-bottom:0;}
+
+/* big feature callout */
+.bv-feature{background:linear-gradient(135deg,#0C2E33,#0A2229);border:1px solid var(--bv-line);border-radius:18px;padding:28px 30px;}
+.bv-feature .h{font-family:var(--bv-mono);font-size:12px;letter-spacing:.16em;text-transform:uppercase;color:var(--bv-aqua);margin-bottom:12px;}
+.bv-feature p{color:#CFE4DF;margin:0;}
+.bv-feature strong{color:#F2FBF9;}
+
+/* ---- formula ---- */
+.bv-formula{font-family:var(--bv-mono);font-size:15px;background:#081C21;border:1px solid var(--bv-line);border-radius:10px;padding:16px 18px;margin:8px 0 16px;overflow-x:auto;line-height:1.8;}
+.bv-formula .v{color:var(--bv-aqua);}
+.bv-formula .c{color:var(--bv-faint);}
+
+/* ---- tables ---- */
+.bv-tablewrap{overflow-x:auto;margin:18px 0;border:1px solid var(--bv-line);border-radius:14px;}
+.bv-table{border-collapse:collapse;width:100%;font-size:14.5px;}
+.bv-table th,.bv-table td{text-align:left;padding:12px 15px;border-bottom:1px solid var(--bv-line-soft);}
+.bv-table thead th{background:#0A2027;font-family:var(--bv-mono);font-size:11px;letter-spacing:.06em;text-transform:uppercase;color:var(--bv-muted);font-weight:500;}
+.bv-table tbody tr:last-child td{border-bottom:none;}
+.bv-table td.num,.bv-table th.num{text-align:right;font-family:var(--bv-mono);font-variant-numeric:tabular-nums;}
+.bv-table tr.total td{font-weight:700;background:rgba(42,214,198,0.08);color:#F2FBF9;}
+.bv-table tr.hi td{background:rgba(70,204,162,0.10);}
+
+.bv-pill{font-family:var(--bv-mono);font-size:10.5px;padding:2px 8px;border-radius:6px;letter-spacing:.03em;white-space:nowrap;display:inline-block;}
+.bv-pill.aqua{background:rgba(42,214,198,0.16);color:var(--bv-aqua);}
+.bv-pill.good{background:rgba(70,204,162,0.16);color:var(--bv-good);}
+.bv-pill.warn{background:rgba(255,126,105,0.14);color:var(--bv-coral);}
+.bv-pill.muck{background:rgba(207,160,99,0.16);color:var(--bv-muck);}
+.bv-pill.gold{background:rgba(211,180,91,0.16);color:var(--bv-gold);}
+
+/* ---- lists ---- */
+.bv-list{list-style:none;padding:0;margin:14px 0;}
+.bv-list li{padding-left:24px;position:relative;margin-bottom:12px;}
+.bv-list li::before{content:"";position:absolute;left:2px;top:10px;width:8px;height:8px;background:var(--bv-aqua);border-radius:2px;transform:rotate(45deg);}
+
+/* ---- cost-effectiveness bars ---- */
+.bv-bars{display:flex;flex-direction:column;gap:9px;margin:22px 0;}
+.bv-bars .row{display:grid;grid-template-columns:220px 1fr;gap:14px;align-items:center;}
+.bv-bars .lab{font-size:13.5px;text-align:right;line-height:1.2;}
+.bv-bars .lab small{display:block;color:var(--bv-faint);font-family:var(--bv-mono);font-size:10.5px;margin-top:2px;}
+.bv-bar{height:28px;background:#0A2027;border-radius:6px;overflow:hidden;position:relative;}
+.bv-bar span{position:absolute;left:0;top:0;height:100%;border-radius:6px;display:flex;align-items:center;justify-content:flex-end;padding-right:9px;font-family:var(--bv-mono);font-size:12px;font-weight:500;color:#03130F;font-variant-numeric:tabular-nums;}
+.bv-bar .g{background:var(--bv-good);}.bv-bar .a{background:var(--bv-muck);}.bv-bar .r{background:var(--bv-coral);}
+@media(max-width:640px){.bv-bars .row{grid-template-columns:120px 1fr;}.bv-bars .lab{font-size:12px;}}
+
+/* ---- timeline ---- */
+.bv-timeline{border-left:2px solid var(--bv-line);margin:20px 0 0;}
+.bv-phase{position:relative;padding:0 0 26px 30px;}
+.bv-phase::before{content:"";position:absolute;left:-8px;top:5px;width:13px;height:13px;border-radius:50%;background:var(--bv-aqua);border:3px solid #061419;}
+.bv-phase .yr{font-family:var(--bv-mono);font-size:12px;letter-spacing:.08em;text-transform:uppercase;color:var(--bv-aqua);}
+.bv-phase h4{font-size:18px;margin:4px 0 5px;}
+.bv-phase p{font-size:14.5px;color:var(--bv-muted);margin:0;}
+
+/* ---- sub-page cards (hub) ---- */
+.bv-decks{display:grid;grid-template-columns:repeat(2,1fr);gap:18px;}
+@media(max-width:760px){.bv-decks{grid-template-columns:1fr;}}
+.bv-deck{display:block;background:var(--bv-surface);border:1px solid var(--bv-line);border-radius:16px;padding:24px;transition:border-color .18s,transform .18s,background .18s;color:var(--bv-ink);}
+.bv-deck:hover{border-color:var(--bv-aqua);transform:translateY(-3px);background:var(--bv-surface2);text-decoration:none;}
+.bv-deck .tag{font-family:var(--bv-mono);font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--bv-aqua);}
+.bv-deck h3{font-size:22px;margin:8px 0 8px;}
+.bv-deck p{font-size:14.5px;color:var(--bv-muted);margin:0 0 14px;}
+.bv-deck .go{font-family:var(--bv-mono);font-size:12.5px;color:var(--bv-aqua);}
+
+/* ---- page nav (prev/next + crumb) ---- */
+.bv-crumb{font-family:var(--bv-mono);font-size:12px;letter-spacing:.06em;color:var(--bv-faint);padding:20px 0 0;}
+.bv-crumb a{color:var(--bv-muted);}
+.bv-pagenav{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;padding:36px 0;border-top:1px solid var(--bv-line);margin-top:20px;}
+.bv-pagenav a{font-family:var(--bv-mono);font-size:13px;color:var(--bv-aqua);}
+
+/* ---- CTA button ---- */
+.bv-btn{display:inline-flex;align-items:center;gap:8px;font-family:var(--bv-body);font-weight:700;font-size:15px;color:#03130F;background:var(--bv-aqua);padding:13px 22px;border-radius:10px;transition:transform .15s,box-shadow .15s;text-decoration:none;border:none;cursor:pointer;}
+.bv-btn:hover{transform:translateY(-2px);box-shadow:0 10px 28px -12px rgba(42,214,198,0.6);text-decoration:none;}
+.bv-btn.ghost{background:transparent;color:var(--bv-aqua);border:1px solid var(--bv-aqua);}
+.bv-btn.ghost:hover{background:rgba(42,214,198,0.1);}
+.bv-btnrow{display:flex;flex-wrap:wrap;gap:12px;margin-top:8px;}
+
+/* ---- figure / map ---- */
+.bv-fig{background:var(--bv-surface);border:1px solid var(--bv-line);border-radius:16px;padding:22px;margin:22px 0;}
+.bv-fig svg{width:100%;height:auto;display:block;}
+.bv-fig figcaption{font-size:13.5px;color:var(--bv-muted);margin-top:14px;}
+.bv-legend{display:flex;flex-wrap:wrap;gap:8px 20px;margin-top:14px;font-family:var(--bv-mono);font-size:12px;color:var(--bv-muted);}
+.bv-legend i{display:inline-block;width:12px;height:12px;border-radius:3px;margin-right:6px;vertical-align:-1px;}
+
+/* ---- focus + motion ---- */
+.bv-page a:focus-visible,.bv-page button:focus-visible,.bv-page input:focus-visible{outline:2px solid var(--bv-aqua);outline-offset:3px;border-radius:4px;}
+@media(prefers-reduced-motion:reduce){.bv-page *{transition:none!important;scroll-behavior:auto!important;}}
+
+/* ---- interactive model ---- */
+.bv-model{display:grid;grid-template-columns:1fr 400px;gap:26px;align-items:start;}
+@media(max-width:900px){.bv-model{grid-template-columns:1fr;}.bv-results{position:static!important;}}
+.bv-presets{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:12px;}
+.bv-presets button{font-family:var(--bv-mono);font-size:12px;background:var(--bv-surface);border:1px solid var(--bv-line);color:var(--bv-ink);border-radius:999px;padding:9px 15px;cursor:pointer;transition:border-color .15s,color .15s;}
+.bv-presets button:hover{border-color:var(--bv-aqua);color:var(--bv-aqua);}
+.bv-lever{background:var(--bv-surface);border:1px solid var(--bv-line);border-radius:14px;padding:16px 18px;margin-bottom:10px;}
+.bv-lever .hd{display:flex;justify-content:space-between;align-items:baseline;gap:12px;}
+.bv-lever .nm{font-weight:700;font-size:15.5px;}
+.bv-lever .nm small{display:block;font-family:var(--bv-mono);font-size:10.5px;color:var(--bv-faint);font-weight:400;margin-top:2px;letter-spacing:.02em;}
+.bv-lever .val{font-family:var(--bv-mono);font-size:21px;color:var(--bv-aqua);white-space:nowrap;font-variant-numeric:tabular-nums;}
+.bv-lever .val small{font-size:12px;color:var(--bv-muted);}
+.bv-lever input[type=range]{-webkit-appearance:none;appearance:none;width:100%;height:6px;border-radius:6px;background:#0A2027;margin:14px 0 4px;cursor:pointer;}
+.bv-lever input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;appearance:none;width:20px;height:20px;border-radius:50%;background:var(--bv-aqua);border:3px solid #061419;cursor:pointer;}
+.bv-lever input[type=range]::-moz-range-thumb{width:20px;height:20px;border-radius:50%;background:var(--bv-aqua);border:3px solid #061419;cursor:pointer;}
+.bv-lever .rng{display:flex;justify-content:space-between;font-family:var(--bv-mono);font-size:11px;color:var(--bv-faint);}
+.bv-results{position:sticky;top:84px;background:var(--bv-surface2);border:1px solid var(--bv-line);border-radius:18px;padding:22px;}
+.bv-results h3{font-family:var(--bv-mono);font-size:13px;letter-spacing:.1em;text-transform:uppercase;color:var(--bv-muted);font-weight:500;margin-bottom:16px;}
+.bv-headline{font-family:var(--bv-display);font-size:52px;color:var(--bv-aqua);line-height:.85;font-variant-numeric:tabular-nums;}
+.bv-headline small{display:block;font-family:var(--bv-body);font-size:14px;color:var(--bv-muted);margin-top:10px;line-height:1.35;}
+.bv-prog{margin:16px 0;}
+.bv-prog .lab{display:flex;justify-content:space-between;font-family:var(--bv-mono);font-size:12px;margin-bottom:5px;}
+.bv-prog .lab b{color:var(--bv-aqua);}
+.bv-track{height:12px;background:#0A2027;border-radius:7px;overflow:hidden;}
+.bv-track i{display:block;height:100%;background:linear-gradient(90deg,var(--bv-tide),var(--bv-aqua));border-radius:7px;transition:width .25s ease;}
+.bv-track.over i{background:var(--bv-good);}
+.bv-rgrid{display:grid;grid-template-columns:1fr 1fr;gap:1px;background:var(--bv-line);border:1px solid var(--bv-line);border-radius:12px;overflow:hidden;margin-top:16px;}
+.bv-rcell{background:var(--bv-surface2);padding:13px 14px;}
+.bv-rcell .k{font-family:var(--bv-mono);font-size:10px;letter-spacing:.05em;text-transform:uppercase;color:var(--bv-faint);}
+.bv-rcell .v{font-family:var(--bv-mono);font-size:19px;font-weight:500;margin-top:4px;font-variant-numeric:tabular-nums;}
+.bv-rcell .v.good{color:var(--bv-good);}
+.bv-chip{display:inline-block;margin-top:14px;font-family:var(--bv-mono);font-size:12px;padding:7px 13px;border-radius:999px;background:rgba(70,204,162,0.14);color:var(--bv-good);}
+.bv-chip.slow{background:rgba(255,126,105,0.14);color:var(--bv-coral);}
+.bv-chip.med{background:rgba(207,160,99,0.16);color:var(--bv-muck);}
+.bv-note{font-size:12.5px;color:var(--bv-faint);margin-top:14px;font-style:italic;line-height:1.45;}
+
+</style>
+</head>
+<body>
+
+<div class="bv-page">
+
+<header class="bv-hero">
+  <div class="bv-wrap">
+    <div class="bv-eyebrow">Brevard County &middot; Indian River Lagoon</div>
+    <h1>Make the lagoon clear again</h1>
+    <p class="bv-lede">A numbers-first plan to restore water clarity to Brevard's Indian River Lagoon - sizing oyster and clam filtration against the real nutrient load, ranking every fix by dollars per pound of nitrogen, and showing the fastest, cheapest path to visible results.</p>
+    <div class="bv-btnrow">
+      <a href="/brevard/plan/" class="bv-btn">See the plan</a>
+      <a href="/brevard/model/" class="bv-btn ghost">Open the calculator</a>
+      <a href="/brevard/board-brief" class="bv-btn ghost">Board brief (PDF)</a>
+    </div>
+    <div class="bv-hero-meta">
+      <span>Prepared by <b>Mark Gabrielli</b></span>
+      <span>Scope <b>Sebastian Inlet to Ponce de Leon Inlet</b></span>
+      <span>Basis <b>FDEP BMAP &middot; SOIRL &middot; peer-reviewed</b></span>
+    </div>
+  </div>
+</header>
+
+<section class="bv-section">
+  <div class="bv-wrap">
+    <div class="bv-stats">
+      <div class="bv-stat"><div class="n">208.5B</div><div class="k">gallons held in the Brevard lagoon</div></div>
+      <div class="bv-stat"><div class="n">3.4M</div><div class="k">lbs of nitrogen entering per year</div></div>
+      <div class="bv-stat"><div class="n">220+</div><div class="k">days water sits before it flushes</div></div>
+      <div class="bv-stat"><div class="n">$5M</div><div class="k">to clear water in 5 neighborhoods in 18 months</div></div>
+    </div>
+  </div>
+</section>
+
+<section class="bv-section">
+  <div class="bv-narrow">
+    <div class="bv-eyebrow">The problem</div>
+    <h2 class="bv-h2" style="margin:12px 0 18px">A bathtub with the drain half-plugged</h2>
+    <p>Between Sebastian Inlet and Ponce de Leon Inlet lies a 50+ mile stretch of barrier island with no open ocean connection, and Port Canaveral's only link to the Banana River is a navigation lock that throttles exchange. Water in north Brevard sits for 148 to 220+ days versus 2 to 16 days near Sebastian. Nutrients concentrate instead of washing out - and the result is algae blooms, fish kills, and lost seagrass.</p>
+    <p>The nitrogen driving those blooms is roughly <b>3.4 million pounds a year</b>. The biggest sources are the legacy muck on the bottom (~35%) and sewage and septic (~26%) - not lawn fertilizer, which is barely 6%. That means the fixes that matter are not the obvious ones.</p>
+  </div>
+</section>
+
+<section class="bv-section">
+  <div class="bv-narrow">
+    <div class="bv-eyebrow">The approach</div>
+    <h2 class="bv-h2" style="margin:12px 0 18px">Rank every fix by cost per pound of nitrogen</h2>
+    <p>When you score each intervention the way Brevard's own lagoon plan does - dollars per pound of nitrogen removed - the flashy projects fall to the bottom and the cheap, fast wins rise to the top. Stormwater baffle boxes and a handful of engineered canal "demonstration cells" clear visible water in a single season for single-digit millions. Oyster reef, muck dredging, and desalination are the bigger, slower builds that finish the job once the momentum and funding are in place.</p>
+    <div class="bv-feature" style="margin-top:8px">
+      <div class="h">The one-line answer</div>
+      <p>Biggest impact, lowest cost, shortest time is <strong>not</strong> the oyster mega-reef or the desalination plant. It is <strong>stormwater baffle boxes plus canal demonstration cells plus the cheapest plant upgrades</strong> - roughly $5M for visibly clear water in five neighborhoods inside 18 months, while removing real nitrogen at the lowest cost per pound available.</p>
+    </div>
+  </div>
+</section>
+
+<section class="bv-section">
+  <div class="bv-wide">
+    <div class="bv-sechead"><div class="bv-secnum">/</div><div><h2 class="bv-h2">Explore the plan</h2><div class="bv-sub">Four documents and one live tool. Each stands alone and links back here.</div></div></div>
+    <div class="bv-decks">
+      <a class="bv-deck" href="/brevard/feasibility/">
+        <div class="tag">Document 01</div>
+        <h3>Feasibility brief</h3>
+        <p>The full picture - geography and hydrology, the nutrient budget, and the engineering math sizing oyster reef and a desalination plant against the real load.</p>
+        <div class="go">Read the brief &rarr;</div>
+      </a>
+      <a class="bv-deck" href="/brevard/plan/">
+        <div class="tag">Document 02</div>
+        <h3>Action plan</h3>
+        <p>Every fix ranked by dollars per pound of nitrogen, the $5M / 18-month flagship, demonstration-cell design math, and the desal and nutrient-credit financial models.</p>
+        <div class="go">Read the plan &rarr;</div>
+      </a>
+      <a class="bv-deck" href="/brevard/model/">
+        <div class="tag">Interactive tool</div>
+        <h3>Cleanup calculator</h3>
+        <p>Move the levers - baffle boxes, canal cells, clams, oyster reef, plant upgrades, muck, desal - and watch nitrogen removed, cost per pound, and progress to the legal targets update live.</p>
+        <div class="go">Open the calculator &rarr;</div>
+      </a>
+      <a class="bv-deck" href="/brevard/guide/">
+        <div class="tag">Document 03</div>
+        <h3>Field guide</h3>
+        <p>Plain-English explanations of every method - baffle boxes, demonstration cells, clams vs oysters, the plants, and how muck is actually removed.</p>
+        <div class="go">Read the guide &rarr;</div>
+      </a>
+    </div>
+    <div class="bv-btnrow" style="margin-top:22px">
+      <a href="/brevard/board-brief" class="bv-btn">Download the board brief (PDF)</a>
+    </div>
+  </div>
+</section>
+
+<section class="bv-section">
+  <div class="bv-narrow">
+    <div class="bv-eyebrow">The ask</div>
+    <h2 class="bv-h2" style="margin:12px 0 18px">Fund the flagship, prove the model, scale what works</h2>
+    <p>The proposal to the Board is simple: fund a ~$5M, 18-month flagship - 20 baffle boxes, 5 canal demonstration cells, one cost-effective plant upgrade, and lagoon-wide clam seeding - largely from grants Brevard already touches. It removes real nitrogen at the lowest cost per pound, and it puts visibly clear water in five neighborhoods before the next budget cycle. That visible win is what earns the funding for the oyster reef, muck dredging, and desalination utility that finish the job.</p>
+    <div class="bv-btnrow">
+      <a href="https://markcmo.com/book" class="bv-btn">Book a briefing</a>
+      <a href="mailto:mark@markcmo.com?subject=Brevard%20Lagoon%20Initiative" class="bv-btn ghost">Email Mark</a>
+    </div>
+    <p class="bv-disc" style="margin-top:24px">Planning-grade analysis for public discussion, prepared independently by Mark Gabrielli (markcmo.com). Figures are drawn from the Save Our Indian River Lagoon Project Plan, FDEP Basin Management Action Plans, UF and Florida Tech research, and peer-reviewed restoration science. Confirm current-year figures against live source documents before committing capital.</p>
+  </div>
+</section>
+
+</div>
+
+</body>
+</html>

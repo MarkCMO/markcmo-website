@@ -1,0 +1,377 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Cleanup Calculator - Brevard Lagoon Initiative</title>
+<meta name="description" content="Interactive model for cleaning the Brevard Indian River Lagoon. Move the levers and see nitrogen removed, cost per pound, progress to the legal targets, and nutrient-credit revenue update live.">
+<link rel="canonical" href="https://markcmo.com/brevard/model/">
+<meta property="og:title" content="Brevard Lagoon Cleanup Calculator">
+<meta property="og:description" content="Move the levers - baffle boxes, clams, oyster reef, muck, desal - and watch the nitrogen, cost, and targets update live.">
+<meta property="og:url" content="https://markcmo.com/brevard/model/">
+<link rel="stylesheet" href="/style.css">
+<style id="bv-css">
+/* ============================================================
+   BREVARD LAGOON INITIATIVE - shared design system
+   Deep-water dark theme. Harmonized with markcmo.com
+   (Bebas Neue / Barlow / DM Mono, dark navy) but a fresh,
+   distinct civic identity. All classes namespaced .bv-*.
+   ============================================================ */
+
+.bv-page{
+  /* palette */
+  --bv-ink:#EAF4F1;
+  --bv-muted:#9BB3AE;
+  --bv-faint:#6E8A84;
+  --bv-line:rgba(120,205,193,0.16);
+  --bv-line-soft:rgba(120,205,193,0.09);
+  --bv-surface:#0C2128;
+  --bv-surface2:#0F2A32;
+  --bv-surface3:#123540;
+  --bv-aqua:#2AD6C6;
+  --bv-aqua-deep:#0E9C90;
+  --bv-tide:#3BB6D6;
+  --bv-gold:#D3B45B;
+  --bv-coral:#FF7E69;
+  --bv-good:#46CCA2;
+  --bv-muck:#CFA063;
+  --bv-display:'Bebas Neue','Barlow',sans-serif;
+  --bv-body:'Barlow',system-ui,sans-serif;
+  --bv-mono:'DM Mono',ui-monospace,Menlo,Consolas,monospace;
+  --bv-maxw:940px;
+  --bv-narrow:760px;
+
+  background:
+    radial-gradient(120% 80% at 80% -5%, rgba(42,214,198,0.10), transparent 55%),
+    radial-gradient(100% 60% at 0% 100%, rgba(59,182,214,0.08), transparent 60%),
+    linear-gradient(180deg,#07171C 0%, #061419 55%, #05171B 100%);
+  color:var(--bv-ink);
+  font-family:var(--bv-body);
+  font-size:17px;
+  line-height:1.6;
+  min-height:100vh;
+}
+
+.bv-page *{box-sizing:border-box;}
+.bv-wrap{max-width:var(--bv-maxw);margin:0 auto;padding:0 24px;}
+.bv-narrow{max-width:var(--bv-narrow);margin:0 auto;padding:0 24px;}
+.bv-wide{max-width:1180px;margin:0 auto;padding:0 24px;}
+
+/* ---- type ---- */
+.bv-page h1,.bv-page h2{font-family:var(--bv-display);font-weight:400;letter-spacing:.01em;line-height:.98;margin:0;text-wrap:balance;}
+.bv-page h3,.bv-page h4{font-family:var(--bv-body);font-weight:800;line-height:1.15;margin:0;letter-spacing:-.01em;text-wrap:balance;}
+.bv-page p{margin:0 0 1.05em;}
+.bv-page a{color:var(--bv-aqua);text-decoration:none;}
+.bv-page a:hover{text-decoration:underline;}
+.bv-mono{font-family:var(--bv-mono);font-variant-numeric:tabular-nums;}
+.bv-eyebrow{font-family:var(--bv-mono);font-size:12px;letter-spacing:.22em;text-transform:uppercase;color:var(--bv-aqua);font-weight:500;}
+.bv-lede{font-size:clamp(18px,2.3vw,22px);color:#C4DAD5;line-height:1.5;}
+.bv-muted{color:var(--bv-muted);}
+.bv-disc{font-size:13px;color:var(--bv-faint);font-style:italic;line-height:1.5;}
+
+/* ---- hero ---- */
+.bv-hero{padding:clamp(48px,9vw,104px) 0 clamp(40px,6vw,64px);border-bottom:1px solid var(--bv-line);position:relative;overflow:hidden;}
+.bv-hero h1{font-size:clamp(46px,10vw,110px);color:#F2FBF9;margin:16px 0 20px;}
+.bv-hero .bv-lede{max-width:44ch;}
+.bv-hero-meta{display:flex;flex-wrap:wrap;gap:10px 30px;margin-top:30px;font-family:var(--bv-mono);font-size:12.5px;letter-spacing:.03em;color:var(--bv-muted);}
+.bv-hero-meta b{color:var(--bv-ink);font-weight:500;}
+
+/* ---- sections ---- */
+.bv-section{padding:clamp(44px,7vw,72px) 0;border-bottom:1px solid var(--bv-line-soft);}
+.bv-sechead{display:flex;gap:16px;align-items:baseline;margin-bottom:26px;}
+.bv-secnum{font-family:var(--bv-mono);font-size:13px;color:var(--bv-faint);letter-spacing:.1em;flex-shrink:0;padding-top:8px;}
+.bv-page h2.bv-h2{font-size:clamp(30px,5vw,52px);color:#EFFAF8;}
+.bv-sub{color:var(--bv-muted);font-size:15px;margin-top:6px;max-width:60ch;}
+
+/* ---- stat band ---- */
+.bv-stats{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:var(--bv-line);border:1px solid var(--bv-line);border-radius:16px;overflow:hidden;}
+.bv-stat{background:var(--bv-surface);padding:22px 18px;}
+.bv-stat .n{font-family:var(--bv-display);font-size:clamp(34px,4.4vw,52px);color:var(--bv-aqua);line-height:.9;font-variant-numeric:tabular-nums;}
+.bv-stat .k{font-size:13.5px;color:var(--bv-muted);margin-top:10px;line-height:1.35;}
+@media(max-width:760px){.bv-stats{grid-template-columns:repeat(2,1fr);}}
+
+/* ---- cards ---- */
+.bv-card{background:var(--bv-surface);border:1px solid var(--bv-line);border-radius:16px;padding:22px 24px;}
+.bv-grid{display:grid;gap:18px;}
+.bv-grid.two{grid-template-columns:1fr 1fr;}
+.bv-grid.three{grid-template-columns:repeat(3,1fr);}
+@media(max-width:760px){.bv-grid.two,.bv-grid.three{grid-template-columns:1fr;}}
+
+/* ---- callouts ---- */
+.bv-callout{background:var(--bv-surface);border:1px solid var(--bv-line);border-left:3px solid var(--bv-aqua);border-radius:12px;padding:20px 22px;margin:22px 0;}
+.bv-callout.coral{border-left-color:var(--bv-coral);}
+.bv-callout.muck{border-left-color:var(--bv-muck);}
+.bv-callout.good{border-left-color:var(--bv-good);}
+.bv-callout.gold{border-left-color:var(--bv-gold);}
+.bv-callout h4{font-family:var(--bv-mono);font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:var(--bv-muted);margin-bottom:10px;font-weight:500;}
+.bv-callout.coral h4{color:var(--bv-coral);}
+.bv-callout.good h4{color:var(--bv-good);}
+.bv-callout p:last-child{margin-bottom:0;}
+
+/* big feature callout */
+.bv-feature{background:linear-gradient(135deg,#0C2E33,#0A2229);border:1px solid var(--bv-line);border-radius:18px;padding:28px 30px;}
+.bv-feature .h{font-family:var(--bv-mono);font-size:12px;letter-spacing:.16em;text-transform:uppercase;color:var(--bv-aqua);margin-bottom:12px;}
+.bv-feature p{color:#CFE4DF;margin:0;}
+.bv-feature strong{color:#F2FBF9;}
+
+/* ---- formula ---- */
+.bv-formula{font-family:var(--bv-mono);font-size:15px;background:#081C21;border:1px solid var(--bv-line);border-radius:10px;padding:16px 18px;margin:8px 0 16px;overflow-x:auto;line-height:1.8;}
+.bv-formula .v{color:var(--bv-aqua);}
+.bv-formula .c{color:var(--bv-faint);}
+
+/* ---- tables ---- */
+.bv-tablewrap{overflow-x:auto;margin:18px 0;border:1px solid var(--bv-line);border-radius:14px;}
+.bv-table{border-collapse:collapse;width:100%;font-size:14.5px;}
+.bv-table th,.bv-table td{text-align:left;padding:12px 15px;border-bottom:1px solid var(--bv-line-soft);}
+.bv-table thead th{background:#0A2027;font-family:var(--bv-mono);font-size:11px;letter-spacing:.06em;text-transform:uppercase;color:var(--bv-muted);font-weight:500;}
+.bv-table tbody tr:last-child td{border-bottom:none;}
+.bv-table td.num,.bv-table th.num{text-align:right;font-family:var(--bv-mono);font-variant-numeric:tabular-nums;}
+.bv-table tr.total td{font-weight:700;background:rgba(42,214,198,0.08);color:#F2FBF9;}
+.bv-table tr.hi td{background:rgba(70,204,162,0.10);}
+
+.bv-pill{font-family:var(--bv-mono);font-size:10.5px;padding:2px 8px;border-radius:6px;letter-spacing:.03em;white-space:nowrap;display:inline-block;}
+.bv-pill.aqua{background:rgba(42,214,198,0.16);color:var(--bv-aqua);}
+.bv-pill.good{background:rgba(70,204,162,0.16);color:var(--bv-good);}
+.bv-pill.warn{background:rgba(255,126,105,0.14);color:var(--bv-coral);}
+.bv-pill.muck{background:rgba(207,160,99,0.16);color:var(--bv-muck);}
+.bv-pill.gold{background:rgba(211,180,91,0.16);color:var(--bv-gold);}
+
+/* ---- lists ---- */
+.bv-list{list-style:none;padding:0;margin:14px 0;}
+.bv-list li{padding-left:24px;position:relative;margin-bottom:12px;}
+.bv-list li::before{content:"";position:absolute;left:2px;top:10px;width:8px;height:8px;background:var(--bv-aqua);border-radius:2px;transform:rotate(45deg);}
+
+/* ---- cost-effectiveness bars ---- */
+.bv-bars{display:flex;flex-direction:column;gap:9px;margin:22px 0;}
+.bv-bars .row{display:grid;grid-template-columns:220px 1fr;gap:14px;align-items:center;}
+.bv-bars .lab{font-size:13.5px;text-align:right;line-height:1.2;}
+.bv-bars .lab small{display:block;color:var(--bv-faint);font-family:var(--bv-mono);font-size:10.5px;margin-top:2px;}
+.bv-bar{height:28px;background:#0A2027;border-radius:6px;overflow:hidden;position:relative;}
+.bv-bar span{position:absolute;left:0;top:0;height:100%;border-radius:6px;display:flex;align-items:center;justify-content:flex-end;padding-right:9px;font-family:var(--bv-mono);font-size:12px;font-weight:500;color:#03130F;font-variant-numeric:tabular-nums;}
+.bv-bar .g{background:var(--bv-good);}.bv-bar .a{background:var(--bv-muck);}.bv-bar .r{background:var(--bv-coral);}
+@media(max-width:640px){.bv-bars .row{grid-template-columns:120px 1fr;}.bv-bars .lab{font-size:12px;}}
+
+/* ---- timeline ---- */
+.bv-timeline{border-left:2px solid var(--bv-line);margin:20px 0 0;}
+.bv-phase{position:relative;padding:0 0 26px 30px;}
+.bv-phase::before{content:"";position:absolute;left:-8px;top:5px;width:13px;height:13px;border-radius:50%;background:var(--bv-aqua);border:3px solid #061419;}
+.bv-phase .yr{font-family:var(--bv-mono);font-size:12px;letter-spacing:.08em;text-transform:uppercase;color:var(--bv-aqua);}
+.bv-phase h4{font-size:18px;margin:4px 0 5px;}
+.bv-phase p{font-size:14.5px;color:var(--bv-muted);margin:0;}
+
+/* ---- sub-page cards (hub) ---- */
+.bv-decks{display:grid;grid-template-columns:repeat(2,1fr);gap:18px;}
+@media(max-width:760px){.bv-decks{grid-template-columns:1fr;}}
+.bv-deck{display:block;background:var(--bv-surface);border:1px solid var(--bv-line);border-radius:16px;padding:24px;transition:border-color .18s,transform .18s,background .18s;color:var(--bv-ink);}
+.bv-deck:hover{border-color:var(--bv-aqua);transform:translateY(-3px);background:var(--bv-surface2);text-decoration:none;}
+.bv-deck .tag{font-family:var(--bv-mono);font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--bv-aqua);}
+.bv-deck h3{font-size:22px;margin:8px 0 8px;}
+.bv-deck p{font-size:14.5px;color:var(--bv-muted);margin:0 0 14px;}
+.bv-deck .go{font-family:var(--bv-mono);font-size:12.5px;color:var(--bv-aqua);}
+
+/* ---- page nav (prev/next + crumb) ---- */
+.bv-crumb{font-family:var(--bv-mono);font-size:12px;letter-spacing:.06em;color:var(--bv-faint);padding:20px 0 0;}
+.bv-crumb a{color:var(--bv-muted);}
+.bv-pagenav{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;padding:36px 0;border-top:1px solid var(--bv-line);margin-top:20px;}
+.bv-pagenav a{font-family:var(--bv-mono);font-size:13px;color:var(--bv-aqua);}
+
+/* ---- CTA button ---- */
+.bv-btn{display:inline-flex;align-items:center;gap:8px;font-family:var(--bv-body);font-weight:700;font-size:15px;color:#03130F;background:var(--bv-aqua);padding:13px 22px;border-radius:10px;transition:transform .15s,box-shadow .15s;text-decoration:none;border:none;cursor:pointer;}
+.bv-btn:hover{transform:translateY(-2px);box-shadow:0 10px 28px -12px rgba(42,214,198,0.6);text-decoration:none;}
+.bv-btn.ghost{background:transparent;color:var(--bv-aqua);border:1px solid var(--bv-aqua);}
+.bv-btn.ghost:hover{background:rgba(42,214,198,0.1);}
+.bv-btnrow{display:flex;flex-wrap:wrap;gap:12px;margin-top:8px;}
+
+/* ---- figure / map ---- */
+.bv-fig{background:var(--bv-surface);border:1px solid var(--bv-line);border-radius:16px;padding:22px;margin:22px 0;}
+.bv-fig svg{width:100%;height:auto;display:block;}
+.bv-fig figcaption{font-size:13.5px;color:var(--bv-muted);margin-top:14px;}
+.bv-legend{display:flex;flex-wrap:wrap;gap:8px 20px;margin-top:14px;font-family:var(--bv-mono);font-size:12px;color:var(--bv-muted);}
+.bv-legend i{display:inline-block;width:12px;height:12px;border-radius:3px;margin-right:6px;vertical-align:-1px;}
+
+/* ---- focus + motion ---- */
+.bv-page a:focus-visible,.bv-page button:focus-visible,.bv-page input:focus-visible{outline:2px solid var(--bv-aqua);outline-offset:3px;border-radius:4px;}
+@media(prefers-reduced-motion:reduce){.bv-page *{transition:none!important;scroll-behavior:auto!important;}}
+
+/* ---- interactive model ---- */
+.bv-model{display:grid;grid-template-columns:1fr 400px;gap:26px;align-items:start;}
+@media(max-width:900px){.bv-model{grid-template-columns:1fr;}.bv-results{position:static!important;}}
+.bv-presets{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:12px;}
+.bv-presets button{font-family:var(--bv-mono);font-size:12px;background:var(--bv-surface);border:1px solid var(--bv-line);color:var(--bv-ink);border-radius:999px;padding:9px 15px;cursor:pointer;transition:border-color .15s,color .15s;}
+.bv-presets button:hover{border-color:var(--bv-aqua);color:var(--bv-aqua);}
+.bv-lever{background:var(--bv-surface);border:1px solid var(--bv-line);border-radius:14px;padding:16px 18px;margin-bottom:10px;}
+.bv-lever .hd{display:flex;justify-content:space-between;align-items:baseline;gap:12px;}
+.bv-lever .nm{font-weight:700;font-size:15.5px;}
+.bv-lever .nm small{display:block;font-family:var(--bv-mono);font-size:10.5px;color:var(--bv-faint);font-weight:400;margin-top:2px;letter-spacing:.02em;}
+.bv-lever .val{font-family:var(--bv-mono);font-size:21px;color:var(--bv-aqua);white-space:nowrap;font-variant-numeric:tabular-nums;}
+.bv-lever .val small{font-size:12px;color:var(--bv-muted);}
+.bv-lever input[type=range]{-webkit-appearance:none;appearance:none;width:100%;height:6px;border-radius:6px;background:#0A2027;margin:14px 0 4px;cursor:pointer;}
+.bv-lever input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;appearance:none;width:20px;height:20px;border-radius:50%;background:var(--bv-aqua);border:3px solid #061419;cursor:pointer;}
+.bv-lever input[type=range]::-moz-range-thumb{width:20px;height:20px;border-radius:50%;background:var(--bv-aqua);border:3px solid #061419;cursor:pointer;}
+.bv-lever .rng{display:flex;justify-content:space-between;font-family:var(--bv-mono);font-size:11px;color:var(--bv-faint);}
+.bv-results{position:sticky;top:84px;background:var(--bv-surface2);border:1px solid var(--bv-line);border-radius:18px;padding:22px;}
+.bv-results h3{font-family:var(--bv-mono);font-size:13px;letter-spacing:.1em;text-transform:uppercase;color:var(--bv-muted);font-weight:500;margin-bottom:16px;}
+.bv-headline{font-family:var(--bv-display);font-size:52px;color:var(--bv-aqua);line-height:.85;font-variant-numeric:tabular-nums;}
+.bv-headline small{display:block;font-family:var(--bv-body);font-size:14px;color:var(--bv-muted);margin-top:10px;line-height:1.35;}
+.bv-prog{margin:16px 0;}
+.bv-prog .lab{display:flex;justify-content:space-between;font-family:var(--bv-mono);font-size:12px;margin-bottom:5px;}
+.bv-prog .lab b{color:var(--bv-aqua);}
+.bv-track{height:12px;background:#0A2027;border-radius:7px;overflow:hidden;}
+.bv-track i{display:block;height:100%;background:linear-gradient(90deg,var(--bv-tide),var(--bv-aqua));border-radius:7px;transition:width .25s ease;}
+.bv-track.over i{background:var(--bv-good);}
+.bv-rgrid{display:grid;grid-template-columns:1fr 1fr;gap:1px;background:var(--bv-line);border:1px solid var(--bv-line);border-radius:12px;overflow:hidden;margin-top:16px;}
+.bv-rcell{background:var(--bv-surface2);padding:13px 14px;}
+.bv-rcell .k{font-family:var(--bv-mono);font-size:10px;letter-spacing:.05em;text-transform:uppercase;color:var(--bv-faint);}
+.bv-rcell .v{font-family:var(--bv-mono);font-size:19px;font-weight:500;margin-top:4px;font-variant-numeric:tabular-nums;}
+.bv-rcell .v.good{color:var(--bv-good);}
+.bv-chip{display:inline-block;margin-top:14px;font-family:var(--bv-mono);font-size:12px;padding:7px 13px;border-radius:999px;background:rgba(70,204,162,0.14);color:var(--bv-good);}
+.bv-chip.slow{background:rgba(255,126,105,0.14);color:var(--bv-coral);}
+.bv-chip.med{background:rgba(207,160,99,0.16);color:var(--bv-muck);}
+.bv-note{font-size:12.5px;color:var(--bv-faint);margin-top:14px;font-style:italic;line-height:1.45;}
+
+</style>
+</head>
+<body>
+
+<div class="bv-page">
+
+<header class="bv-hero" style="padding-bottom:28px">
+  <div class="bv-wide">
+    <div class="bv-crumb"><a href="/brevard/">Brevard Lagoon Initiative</a> / Cleanup Calculator</div>
+    <div class="bv-eyebrow" style="margin-top:18px">Interactive model</div>
+    <h1 style="font-size:clamp(40px,8vw,84px)">Build your own scenario</h1>
+    <p class="bv-lede" style="max-width:60ch">Move the levers and watch the nitrogen removed, the cost, the cost per pound, and progress toward the legal targets update live. Every coefficient is planning-grade, drawn from Brevard's lagoon plan and peer-reviewed science.</p>
+  </div>
+</header>
+
+<section class="bv-section" style="border-bottom:none">
+  <div class="bv-wide">
+    <div class="bv-model">
+      <div class="bv-controls">
+        <div class="bv-presets">
+          <button data-preset="flagship">Load the $5M flagship</button>
+          <button data-preset="tmdl">Hit Brevard's TMDL</button>
+          <button data-preset="bmap">Hit lagoon-wide BMAP</button>
+          <button data-preset="zero">Clear all</button>
+        </div>
+
+        <div class="bv-lever">
+          <div class="hd"><div class="nm">Stormwater baffle boxes<small>$88/lb &middot; installs in weeks &middot; stops new load</small></div><div class="val"><span id="v_box">20</span> <small>units</small></div></div>
+          <input type="range" id="box" min="0" max="200" step="1" value="20" aria-label="Baffle boxes">
+          <div class="rng"><span>0</span><span>200</span></div>
+        </div>
+        <div class="bv-lever">
+          <div class="hd"><div class="nm">Canal demonstration cells<small>muck + clams + oysters + wetland &middot; visible in 1 season</small></div><div class="val"><span id="v_cell">5</span> <small>cells</small></div></div>
+          <input type="range" id="cell" min="0" max="50" step="1" value="5" aria-label="Demonstration cells">
+          <div class="rng"><span>0</span><span>50</span></div>
+        </div>
+        <div class="bv-lever">
+          <div class="hd"><div class="nm">Clam seeding<small>~$2k/acre all-in &middot; matures 12-16 mo &middot; the scale play</small></div><div class="val"><span id="v_clam">500</span> <small>acres</small></div></div>
+          <input type="range" id="clam" min="0" max="5000" step="50" value="500" aria-label="Clam seeding acres">
+          <div class="rng"><span>0</span><span>5,000</span></div>
+        </div>
+        <div class="bv-lever">
+          <div class="hd"><div class="nm">Oyster reef<small>$392/lb &middot; built structure &middot; permanent living filter</small></div><div class="val"><span id="v_reef">0</span> <small>acres</small></div></div>
+          <input type="range" id="reef" min="0" max="3000" step="10" value="0" aria-label="Oyster reef acres">
+          <div class="rng"><span>0</span><span>3,000</span></div>
+        </div>
+        <div class="bv-lever">
+          <div class="hd"><div class="nm">Plant nutrient upgrades<small>$125/lb &middot; Palm Bay-type &middot; ~11,000 lbs each</small></div><div class="val"><span id="v_plant">1</span> <small>plants</small></div></div>
+          <input type="range" id="plant" min="0" max="12" step="1" value="1" aria-label="Plant upgrades">
+          <div class="rng"><span>0</span><span>12</span></div>
+        </div>
+        <div class="bv-lever">
+          <div class="hd"><div class="nm">Muck removal<small>$40/cy &middot; deletes the biggest source &middot; slow, 2+ yr</small></div><div class="val"><span id="v_muck">0</span> <small>k cubic yd</small></div></div>
+          <input type="range" id="muck" min="0" max="6000" step="50" value="0" aria-label="Muck removal thousand cubic yards">
+          <div class="rng"><span>0</span><span>6,000k</span></div>
+        </div>
+        <div class="bv-lever">
+          <div class="hd"><div class="nm">Desalination plant<small>self-funding water utility &middot; captures N into brine</small></div><div class="val"><span id="v_desal">0</span> <small>MGD</small></div></div>
+          <input type="range" id="desal" min="0" max="25" step="1" value="0" aria-label="Desalination MGD">
+          <div class="rng"><span>0</span><span>25</span></div>
+        </div>
+        <div class="bv-lever">
+          <div class="hd"><div class="nm">Nutrient credit price<small>Florida market nascent &middot; benchmark $5-50/lb</small></div><div class="val">$<span id="v_credit">10</span> <small>/lb N</small></div></div>
+          <input type="range" id="credit" min="5" max="50" step="1" value="10" aria-label="Nutrient credit price">
+          <div class="rng"><span>$5</span><span>$50</span></div>
+        </div>
+      </div>
+
+      <aside class="bv-results" aria-live="polite">
+        <h3>Scenario result</h3>
+        <div class="bv-headline"><span id="r_n">0</span> <small>lbs of nitrogen removed per year</small></div>
+        <div class="bv-prog"><div class="lab"><span>Brevard TMDL cut (64,372 lbs)</span><b><span id="r_tmdl">0</span>%</b></div><div class="bv-track" id="t_tmdl"><i style="width:0%"></i></div></div>
+        <div class="bv-prog"><div class="lab"><span>Lagoon-wide BMAP (380,239 lbs)</span><b><span id="r_bmap">0</span>%</b></div><div class="bv-track" id="t_bmap"><i style="width:0%"></i></div></div>
+        <div class="bv-prog"><div class="lab"><span>Gross load (3.4M lbs)</span><b><span id="r_gross">0</span>%</b></div><div class="bv-track" id="t_gross"><i style="width:0%"></i></div></div>
+        <div class="bv-rgrid">
+          <div class="bv-rcell"><div class="k">Restoration capital</div><div class="v" id="r_cap">$0</div></div>
+          <div class="bv-rcell"><div class="k">Blended cost / lb-yr</div><div class="v" id="r_cpl">-</div></div>
+          <div class="bv-rcell"><div class="k">Credit revenue / yr</div><div class="v good" id="r_rev">$0</div></div>
+          <div class="bv-rcell"><div class="k">One-time muck N</div><div class="v" id="r_muckn">0 lbs</div></div>
+        </div>
+        <div id="r_time" class="bv-chip">Add levers to estimate time-to-impact</div>
+        <div class="bv-note" id="r_note">Desalination capital is shown separately - it is a water utility that repays itself from water sales, not a grant-funded restoration cost.</div>
+      </aside>
+    </div>
+    <p class="bv-disc" style="margin-top:26px;max-width:70ch">Coefficients are planning-grade defaults for scenario exploration, not engineering design values. Sources: Save Our Indian River Lagoon Project Plan (Table 52 cost-per-pound), UF Whitney Laboratory and UF Center for Coastal Solutions (clams), Kellogg et al. (reef nitrogen removal), Tampa Bay Water and Florida brackish-RO data (desal), and Chesapeake / North Carolina nutrient-credit markets. Muck shows both a one-time legacy-mass removal (~4 lbs N per cubic yard) and its annualized flux reduction.</p>
+    <div class="bv-pagenav">
+      <a href="/brevard/plan/">&larr; Action plan</a>
+      <a href="/brevard/guide/">Field guide &rarr;</a>
+    </div>
+  </div>
+</section>
+
+</div>
+
+<script>
+(function(){
+  var C={box:{cost:80000,n:900},cell:{cost:280000,n:1000},clam:{cost:2000,n:40},reef:{cost:105000,n:268},plant:{cost:1400000,n:11119},muck:{costPerK:40000,nOngoingPerK:99,nOneTimePerK:4000},desal:{costPerMGD:8000000,n:2588}};
+  var TMDL=64372,BMAP=380239,GROSS=3400000;
+  var ids=['box','cell','clam','reef','plant','muck','desal','credit'];
+  var el={};ids.forEach(function(k){el[k]=document.getElementById(k);});
+  function fmt(x){return Math.round(x).toLocaleString('en-US');}
+  function money(x){if(x>=1e9)return '$'+(x/1e9).toFixed(2)+'B';if(x>=1e6)return '$'+(x/1e6).toFixed(1)+'M';if(x>=1e3)return '$'+Math.round(x/1e3)+'k';return '$'+Math.round(x);}
+  function setbar(id,pct){var t=document.getElementById(id);t.querySelector('i').style.width=Math.min(100,pct)+'%';t.classList.toggle('over',pct>=100);}
+  function calc(){
+    var v={};ids.forEach(function(k){v[k]=parseFloat(el[k].value);});
+    document.getElementById('v_box').textContent=v.box;
+    document.getElementById('v_cell').textContent=v.cell;
+    document.getElementById('v_clam').textContent=fmt(v.clam);
+    document.getElementById('v_reef').textContent=fmt(v.reef);
+    document.getElementById('v_plant').textContent=v.plant;
+    document.getElementById('v_muck').textContent=fmt(v.muck);
+    document.getElementById('v_desal').textContent=v.desal;
+    document.getElementById('v_credit').textContent=v.credit;
+    var nBox=v.box*C.box.n,nCell=v.cell*C.cell.n,nClam=v.clam*C.clam.n,nReef=v.reef*C.reef.n,nPlant=v.plant*C.plant.n,nMuck=v.muck*C.muck.nOngoingPerK,nDesal=v.desal*C.desal.n;
+    var nTotal=nBox+nCell+nClam+nReef+nPlant+nMuck+nDesal;
+    var muckOneTime=v.muck*C.muck.nOneTimePerK;
+    var capRestore=v.box*C.box.cost+v.cell*C.cell.cost+v.clam*C.clam.cost+v.reef*C.reef.cost+v.plant*C.plant.cost+v.muck*C.muck.costPerK;
+    var capDesal=v.desal*C.desal.costPerMGD;
+    var rev=nTotal*v.credit;var cpl=nTotal>0?capRestore/nTotal:0;
+    document.getElementById('r_n').textContent=fmt(nTotal);
+    document.getElementById('r_tmdl').textContent=Math.round(nTotal/TMDL*100);
+    document.getElementById('r_bmap').textContent=Math.round(nTotal/BMAP*100);
+    document.getElementById('r_gross').textContent=(nTotal/GROSS*100).toFixed(1);
+    setbar('t_tmdl',nTotal/TMDL*100);setbar('t_bmap',nTotal/BMAP*100);setbar('t_gross',nTotal/GROSS*100);
+    document.getElementById('r_cap').textContent=money(capRestore);
+    document.getElementById('r_cpl').textContent=nTotal>0?('$'+Math.round(cpl)+'/lb'):'-';
+    document.getElementById('r_rev').textContent=money(rev)+'/yr';
+    document.getElementById('r_muckn').textContent=fmt(muckOneTime)+' lbs';
+    var chip=document.getElementById('r_time'),cls='';var timetxt;
+    if(nTotal===0){timetxt='Add levers to estimate time-to-impact';}
+    else if(v.muck>1000||v.desal>0){timetxt='Time to full impact: 3-7 years (muck / desal are slow builds)';cls='slow';}
+    else if(v.reef>200||v.plant>2){timetxt='Time to full impact: 1-3 years';cls='med';}
+    else{timetxt='Time to visible impact: under 18 months';}
+    chip.textContent=timetxt;chip.className='bv-chip'+(cls?(' '+cls):'');
+    var note=document.getElementById('r_note');
+    if(capDesal>0){note.textContent='Plus '+money(capDesal)+' desalination capital, shown separately - a water utility that repays itself from water sales. Its brine, with the captured nutrients, must go to a deep injection well.';}
+    else{note.textContent='Restoration capital is largely grant-eligible (SOIRL, NOAA, NFWF). Certified removals can be sold as nutrient credits for the revenue shown.';}
+  }
+  var presets={flagship:{box:20,cell:5,clam:500,reef:0,plant:1,muck:0,desal:0,credit:10},tmdl:{box:40,cell:8,clam:800,reef:100,plant:2,muck:0,desal:0,credit:10},bmap:{box:120,cell:20,clam:3000,reef:850,plant:6,muck:2000,desal:15,credit:15},zero:{box:0,cell:0,clam:0,reef:0,plant:0,muck:0,desal:0,credit:10}};
+  document.querySelectorAll('.bv-presets button').forEach(function(b){b.addEventListener('click',function(){var p=presets[b.dataset.preset];if(!p)return;ids.forEach(function(k){if(p[k]!==undefined)el[k].value=p[k];});calc();});});
+  ids.forEach(function(k){el[k].addEventListener('input',calc);});
+  calc();
+})();
+</script>
+</body>
+</html>

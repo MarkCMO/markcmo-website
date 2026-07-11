@@ -1,0 +1,456 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Field Guide - How Every Fix Works - Brevard Lagoon Initiative</title>
+<meta name="description" content="Plain-English explanations of every lagoon-restoration method: baffle boxes, demonstration cells, clams vs oysters, the plants (seagrass, marsh, floating wetlands), and how muck is actually removed.">
+<link rel="canonical" href="https://markcmo.com/brevard/guide/">
+<meta property="og:title" content="Field Guide - How Every Lagoon Fix Actually Works">
+<meta property="og:description" content="Baffle boxes, demonstration cells, clams vs oysters, the plants, and muck removal - explained.">
+<meta property="og:url" content="https://markcmo.com/brevard/guide/">
+<link rel="stylesheet" href="/style.css">
+<style id="bv-css">
+/* ============================================================
+   BREVARD LAGOON INITIATIVE - shared design system
+   Deep-water dark theme. Harmonized with markcmo.com
+   (Bebas Neue / Barlow / DM Mono, dark navy) but a fresh,
+   distinct civic identity. All classes namespaced .bv-*.
+   ============================================================ */
+
+.bv-page{
+  /* palette */
+  --bv-ink:#EAF4F1;
+  --bv-muted:#9BB3AE;
+  --bv-faint:#6E8A84;
+  --bv-line:rgba(120,205,193,0.16);
+  --bv-line-soft:rgba(120,205,193,0.09);
+  --bv-surface:#0C2128;
+  --bv-surface2:#0F2A32;
+  --bv-surface3:#123540;
+  --bv-aqua:#2AD6C6;
+  --bv-aqua-deep:#0E9C90;
+  --bv-tide:#3BB6D6;
+  --bv-gold:#D3B45B;
+  --bv-coral:#FF7E69;
+  --bv-good:#46CCA2;
+  --bv-muck:#CFA063;
+  --bv-display:'Bebas Neue','Barlow',sans-serif;
+  --bv-body:'Barlow',system-ui,sans-serif;
+  --bv-mono:'DM Mono',ui-monospace,Menlo,Consolas,monospace;
+  --bv-maxw:940px;
+  --bv-narrow:760px;
+
+  background:
+    radial-gradient(120% 80% at 80% -5%, rgba(42,214,198,0.10), transparent 55%),
+    radial-gradient(100% 60% at 0% 100%, rgba(59,182,214,0.08), transparent 60%),
+    linear-gradient(180deg,#07171C 0%, #061419 55%, #05171B 100%);
+  color:var(--bv-ink);
+  font-family:var(--bv-body);
+  font-size:17px;
+  line-height:1.6;
+  min-height:100vh;
+}
+
+.bv-page *{box-sizing:border-box;}
+.bv-wrap{max-width:var(--bv-maxw);margin:0 auto;padding:0 24px;}
+.bv-narrow{max-width:var(--bv-narrow);margin:0 auto;padding:0 24px;}
+.bv-wide{max-width:1180px;margin:0 auto;padding:0 24px;}
+
+/* ---- type ---- */
+.bv-page h1,.bv-page h2{font-family:var(--bv-display);font-weight:400;letter-spacing:.01em;line-height:.98;margin:0;text-wrap:balance;}
+.bv-page h3,.bv-page h4{font-family:var(--bv-body);font-weight:800;line-height:1.15;margin:0;letter-spacing:-.01em;text-wrap:balance;}
+.bv-page p{margin:0 0 1.05em;}
+.bv-page a{color:var(--bv-aqua);text-decoration:none;}
+.bv-page a:hover{text-decoration:underline;}
+.bv-mono{font-family:var(--bv-mono);font-variant-numeric:tabular-nums;}
+.bv-eyebrow{font-family:var(--bv-mono);font-size:12px;letter-spacing:.22em;text-transform:uppercase;color:var(--bv-aqua);font-weight:500;}
+.bv-lede{font-size:clamp(18px,2.3vw,22px);color:#C4DAD5;line-height:1.5;}
+.bv-muted{color:var(--bv-muted);}
+.bv-disc{font-size:13px;color:var(--bv-faint);font-style:italic;line-height:1.5;}
+
+/* ---- hero ---- */
+.bv-hero{padding:clamp(48px,9vw,104px) 0 clamp(40px,6vw,64px);border-bottom:1px solid var(--bv-line);position:relative;overflow:hidden;}
+.bv-hero h1{font-size:clamp(46px,10vw,110px);color:#F2FBF9;margin:16px 0 20px;}
+.bv-hero .bv-lede{max-width:44ch;}
+.bv-hero-meta{display:flex;flex-wrap:wrap;gap:10px 30px;margin-top:30px;font-family:var(--bv-mono);font-size:12.5px;letter-spacing:.03em;color:var(--bv-muted);}
+.bv-hero-meta b{color:var(--bv-ink);font-weight:500;}
+
+/* ---- sections ---- */
+.bv-section{padding:clamp(44px,7vw,72px) 0;border-bottom:1px solid var(--bv-line-soft);}
+.bv-sechead{display:flex;gap:16px;align-items:baseline;margin-bottom:26px;}
+.bv-secnum{font-family:var(--bv-mono);font-size:13px;color:var(--bv-faint);letter-spacing:.1em;flex-shrink:0;padding-top:8px;}
+.bv-page h2.bv-h2{font-size:clamp(30px,5vw,52px);color:#EFFAF8;}
+.bv-sub{color:var(--bv-muted);font-size:15px;margin-top:6px;max-width:60ch;}
+
+/* ---- stat band ---- */
+.bv-stats{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:var(--bv-line);border:1px solid var(--bv-line);border-radius:16px;overflow:hidden;}
+.bv-stat{background:var(--bv-surface);padding:22px 18px;}
+.bv-stat .n{font-family:var(--bv-display);font-size:clamp(34px,4.4vw,52px);color:var(--bv-aqua);line-height:.9;font-variant-numeric:tabular-nums;}
+.bv-stat .k{font-size:13.5px;color:var(--bv-muted);margin-top:10px;line-height:1.35;}
+@media(max-width:760px){.bv-stats{grid-template-columns:repeat(2,1fr);}}
+
+/* ---- cards ---- */
+.bv-card{background:var(--bv-surface);border:1px solid var(--bv-line);border-radius:16px;padding:22px 24px;}
+.bv-grid{display:grid;gap:18px;}
+.bv-grid.two{grid-template-columns:1fr 1fr;}
+.bv-grid.three{grid-template-columns:repeat(3,1fr);}
+@media(max-width:760px){.bv-grid.two,.bv-grid.three{grid-template-columns:1fr;}}
+
+/* ---- callouts ---- */
+.bv-callout{background:var(--bv-surface);border:1px solid var(--bv-line);border-left:3px solid var(--bv-aqua);border-radius:12px;padding:20px 22px;margin:22px 0;}
+.bv-callout.coral{border-left-color:var(--bv-coral);}
+.bv-callout.muck{border-left-color:var(--bv-muck);}
+.bv-callout.good{border-left-color:var(--bv-good);}
+.bv-callout.gold{border-left-color:var(--bv-gold);}
+.bv-callout h4{font-family:var(--bv-mono);font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:var(--bv-muted);margin-bottom:10px;font-weight:500;}
+.bv-callout.coral h4{color:var(--bv-coral);}
+.bv-callout.good h4{color:var(--bv-good);}
+.bv-callout p:last-child{margin-bottom:0;}
+
+/* big feature callout */
+.bv-feature{background:linear-gradient(135deg,#0C2E33,#0A2229);border:1px solid var(--bv-line);border-radius:18px;padding:28px 30px;}
+.bv-feature .h{font-family:var(--bv-mono);font-size:12px;letter-spacing:.16em;text-transform:uppercase;color:var(--bv-aqua);margin-bottom:12px;}
+.bv-feature p{color:#CFE4DF;margin:0;}
+.bv-feature strong{color:#F2FBF9;}
+
+/* ---- formula ---- */
+.bv-formula{font-family:var(--bv-mono);font-size:15px;background:#081C21;border:1px solid var(--bv-line);border-radius:10px;padding:16px 18px;margin:8px 0 16px;overflow-x:auto;line-height:1.8;}
+.bv-formula .v{color:var(--bv-aqua);}
+.bv-formula .c{color:var(--bv-faint);}
+
+/* ---- tables ---- */
+.bv-tablewrap{overflow-x:auto;margin:18px 0;border:1px solid var(--bv-line);border-radius:14px;}
+.bv-table{border-collapse:collapse;width:100%;font-size:14.5px;}
+.bv-table th,.bv-table td{text-align:left;padding:12px 15px;border-bottom:1px solid var(--bv-line-soft);}
+.bv-table thead th{background:#0A2027;font-family:var(--bv-mono);font-size:11px;letter-spacing:.06em;text-transform:uppercase;color:var(--bv-muted);font-weight:500;}
+.bv-table tbody tr:last-child td{border-bottom:none;}
+.bv-table td.num,.bv-table th.num{text-align:right;font-family:var(--bv-mono);font-variant-numeric:tabular-nums;}
+.bv-table tr.total td{font-weight:700;background:rgba(42,214,198,0.08);color:#F2FBF9;}
+.bv-table tr.hi td{background:rgba(70,204,162,0.10);}
+
+.bv-pill{font-family:var(--bv-mono);font-size:10.5px;padding:2px 8px;border-radius:6px;letter-spacing:.03em;white-space:nowrap;display:inline-block;}
+.bv-pill.aqua{background:rgba(42,214,198,0.16);color:var(--bv-aqua);}
+.bv-pill.good{background:rgba(70,204,162,0.16);color:var(--bv-good);}
+.bv-pill.warn{background:rgba(255,126,105,0.14);color:var(--bv-coral);}
+.bv-pill.muck{background:rgba(207,160,99,0.16);color:var(--bv-muck);}
+.bv-pill.gold{background:rgba(211,180,91,0.16);color:var(--bv-gold);}
+
+/* ---- lists ---- */
+.bv-list{list-style:none;padding:0;margin:14px 0;}
+.bv-list li{padding-left:24px;position:relative;margin-bottom:12px;}
+.bv-list li::before{content:"";position:absolute;left:2px;top:10px;width:8px;height:8px;background:var(--bv-aqua);border-radius:2px;transform:rotate(45deg);}
+
+/* ---- cost-effectiveness bars ---- */
+.bv-bars{display:flex;flex-direction:column;gap:9px;margin:22px 0;}
+.bv-bars .row{display:grid;grid-template-columns:220px 1fr;gap:14px;align-items:center;}
+.bv-bars .lab{font-size:13.5px;text-align:right;line-height:1.2;}
+.bv-bars .lab small{display:block;color:var(--bv-faint);font-family:var(--bv-mono);font-size:10.5px;margin-top:2px;}
+.bv-bar{height:28px;background:#0A2027;border-radius:6px;overflow:hidden;position:relative;}
+.bv-bar span{position:absolute;left:0;top:0;height:100%;border-radius:6px;display:flex;align-items:center;justify-content:flex-end;padding-right:9px;font-family:var(--bv-mono);font-size:12px;font-weight:500;color:#03130F;font-variant-numeric:tabular-nums;}
+.bv-bar .g{background:var(--bv-good);}.bv-bar .a{background:var(--bv-muck);}.bv-bar .r{background:var(--bv-coral);}
+@media(max-width:640px){.bv-bars .row{grid-template-columns:120px 1fr;}.bv-bars .lab{font-size:12px;}}
+
+/* ---- timeline ---- */
+.bv-timeline{border-left:2px solid var(--bv-line);margin:20px 0 0;}
+.bv-phase{position:relative;padding:0 0 26px 30px;}
+.bv-phase::before{content:"";position:absolute;left:-8px;top:5px;width:13px;height:13px;border-radius:50%;background:var(--bv-aqua);border:3px solid #061419;}
+.bv-phase .yr{font-family:var(--bv-mono);font-size:12px;letter-spacing:.08em;text-transform:uppercase;color:var(--bv-aqua);}
+.bv-phase h4{font-size:18px;margin:4px 0 5px;}
+.bv-phase p{font-size:14.5px;color:var(--bv-muted);margin:0;}
+
+/* ---- sub-page cards (hub) ---- */
+.bv-decks{display:grid;grid-template-columns:repeat(2,1fr);gap:18px;}
+@media(max-width:760px){.bv-decks{grid-template-columns:1fr;}}
+.bv-deck{display:block;background:var(--bv-surface);border:1px solid var(--bv-line);border-radius:16px;padding:24px;transition:border-color .18s,transform .18s,background .18s;color:var(--bv-ink);}
+.bv-deck:hover{border-color:var(--bv-aqua);transform:translateY(-3px);background:var(--bv-surface2);text-decoration:none;}
+.bv-deck .tag{font-family:var(--bv-mono);font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--bv-aqua);}
+.bv-deck h3{font-size:22px;margin:8px 0 8px;}
+.bv-deck p{font-size:14.5px;color:var(--bv-muted);margin:0 0 14px;}
+.bv-deck .go{font-family:var(--bv-mono);font-size:12.5px;color:var(--bv-aqua);}
+
+/* ---- page nav (prev/next + crumb) ---- */
+.bv-crumb{font-family:var(--bv-mono);font-size:12px;letter-spacing:.06em;color:var(--bv-faint);padding:20px 0 0;}
+.bv-crumb a{color:var(--bv-muted);}
+.bv-pagenav{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;padding:36px 0;border-top:1px solid var(--bv-line);margin-top:20px;}
+.bv-pagenav a{font-family:var(--bv-mono);font-size:13px;color:var(--bv-aqua);}
+
+/* ---- CTA button ---- */
+.bv-btn{display:inline-flex;align-items:center;gap:8px;font-family:var(--bv-body);font-weight:700;font-size:15px;color:#03130F;background:var(--bv-aqua);padding:13px 22px;border-radius:10px;transition:transform .15s,box-shadow .15s;text-decoration:none;border:none;cursor:pointer;}
+.bv-btn:hover{transform:translateY(-2px);box-shadow:0 10px 28px -12px rgba(42,214,198,0.6);text-decoration:none;}
+.bv-btn.ghost{background:transparent;color:var(--bv-aqua);border:1px solid var(--bv-aqua);}
+.bv-btn.ghost:hover{background:rgba(42,214,198,0.1);}
+.bv-btnrow{display:flex;flex-wrap:wrap;gap:12px;margin-top:8px;}
+
+/* ---- figure / map ---- */
+.bv-fig{background:var(--bv-surface);border:1px solid var(--bv-line);border-radius:16px;padding:22px;margin:22px 0;}
+.bv-fig svg{width:100%;height:auto;display:block;}
+.bv-fig figcaption{font-size:13.5px;color:var(--bv-muted);margin-top:14px;}
+.bv-legend{display:flex;flex-wrap:wrap;gap:8px 20px;margin-top:14px;font-family:var(--bv-mono);font-size:12px;color:var(--bv-muted);}
+.bv-legend i{display:inline-block;width:12px;height:12px;border-radius:3px;margin-right:6px;vertical-align:-1px;}
+
+/* ---- focus + motion ---- */
+.bv-page a:focus-visible,.bv-page button:focus-visible,.bv-page input:focus-visible{outline:2px solid var(--bv-aqua);outline-offset:3px;border-radius:4px;}
+@media(prefers-reduced-motion:reduce){.bv-page *{transition:none!important;scroll-behavior:auto!important;}}
+
+/* ---- interactive model ---- */
+.bv-model{display:grid;grid-template-columns:1fr 400px;gap:26px;align-items:start;}
+@media(max-width:900px){.bv-model{grid-template-columns:1fr;}.bv-results{position:static!important;}}
+.bv-presets{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:12px;}
+.bv-presets button{font-family:var(--bv-mono);font-size:12px;background:var(--bv-surface);border:1px solid var(--bv-line);color:var(--bv-ink);border-radius:999px;padding:9px 15px;cursor:pointer;transition:border-color .15s,color .15s;}
+.bv-presets button:hover{border-color:var(--bv-aqua);color:var(--bv-aqua);}
+.bv-lever{background:var(--bv-surface);border:1px solid var(--bv-line);border-radius:14px;padding:16px 18px;margin-bottom:10px;}
+.bv-lever .hd{display:flex;justify-content:space-between;align-items:baseline;gap:12px;}
+.bv-lever .nm{font-weight:700;font-size:15.5px;}
+.bv-lever .nm small{display:block;font-family:var(--bv-mono);font-size:10.5px;color:var(--bv-faint);font-weight:400;margin-top:2px;letter-spacing:.02em;}
+.bv-lever .val{font-family:var(--bv-mono);font-size:21px;color:var(--bv-aqua);white-space:nowrap;font-variant-numeric:tabular-nums;}
+.bv-lever .val small{font-size:12px;color:var(--bv-muted);}
+.bv-lever input[type=range]{-webkit-appearance:none;appearance:none;width:100%;height:6px;border-radius:6px;background:#0A2027;margin:14px 0 4px;cursor:pointer;}
+.bv-lever input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;appearance:none;width:20px;height:20px;border-radius:50%;background:var(--bv-aqua);border:3px solid #061419;cursor:pointer;}
+.bv-lever input[type=range]::-moz-range-thumb{width:20px;height:20px;border-radius:50%;background:var(--bv-aqua);border:3px solid #061419;cursor:pointer;}
+.bv-lever .rng{display:flex;justify-content:space-between;font-family:var(--bv-mono);font-size:11px;color:var(--bv-faint);}
+.bv-results{position:sticky;top:84px;background:var(--bv-surface2);border:1px solid var(--bv-line);border-radius:18px;padding:22px;}
+.bv-results h3{font-family:var(--bv-mono);font-size:13px;letter-spacing:.1em;text-transform:uppercase;color:var(--bv-muted);font-weight:500;margin-bottom:16px;}
+.bv-headline{font-family:var(--bv-display);font-size:52px;color:var(--bv-aqua);line-height:.85;font-variant-numeric:tabular-nums;}
+.bv-headline small{display:block;font-family:var(--bv-body);font-size:14px;color:var(--bv-muted);margin-top:10px;line-height:1.35;}
+.bv-prog{margin:16px 0;}
+.bv-prog .lab{display:flex;justify-content:space-between;font-family:var(--bv-mono);font-size:12px;margin-bottom:5px;}
+.bv-prog .lab b{color:var(--bv-aqua);}
+.bv-track{height:12px;background:#0A2027;border-radius:7px;overflow:hidden;}
+.bv-track i{display:block;height:100%;background:linear-gradient(90deg,var(--bv-tide),var(--bv-aqua));border-radius:7px;transition:width .25s ease;}
+.bv-track.over i{background:var(--bv-good);}
+.bv-rgrid{display:grid;grid-template-columns:1fr 1fr;gap:1px;background:var(--bv-line);border:1px solid var(--bv-line);border-radius:12px;overflow:hidden;margin-top:16px;}
+.bv-rcell{background:var(--bv-surface2);padding:13px 14px;}
+.bv-rcell .k{font-family:var(--bv-mono);font-size:10px;letter-spacing:.05em;text-transform:uppercase;color:var(--bv-faint);}
+.bv-rcell .v{font-family:var(--bv-mono);font-size:19px;font-weight:500;margin-top:4px;font-variant-numeric:tabular-nums;}
+.bv-rcell .v.good{color:var(--bv-good);}
+.bv-chip{display:inline-block;margin-top:14px;font-family:var(--bv-mono);font-size:12px;padding:7px 13px;border-radius:999px;background:rgba(70,204,162,0.14);color:var(--bv-good);}
+.bv-chip.slow{background:rgba(255,126,105,0.14);color:var(--bv-coral);}
+.bv-chip.med{background:rgba(207,160,99,0.16);color:var(--bv-muck);}
+.bv-note{font-size:12.5px;color:var(--bv-faint);margin-top:14px;font-style:italic;line-height:1.45;}
+
+</style>
+</head>
+<body>
+
+<div class="bv-page">
+
+<header class="bv-hero">
+  <div class="bv-wrap">
+    <div class="bv-crumb"><a href="/brevard/">Brevard Lagoon Initiative</a> / Field Guide</div>
+    <div class="bv-eyebrow" style="margin-top:18px">Document 03 &middot; The methods, explained</div>
+    <h1>The field guide</h1>
+    <p class="bv-lede">Every tool in the plan, in plain English - what it is, how it works, what it costs, how fast it works, and where it fits. No jargon, no hand-waving.</p>
+  </div>
+</header>
+
+<!-- TREATMENT TRAIN -->
+<section class="bv-section">
+  <div class="bv-wrap">
+    <div class="bv-sechead"><div class="bv-secnum">00</div><div><h2 class="bv-h2">The big idea: a treatment train</h2><div class="bv-sub">No single fix cleans a lagoon. They work as a chain, each handling a different stage of the water's journey.</div></div></div>
+    <p>Think of the water moving from the land, across the shoreline, and out into the open lagoon. Each fix intercepts it at a different point:</p>
+    <div class="bv-fig">
+      <svg viewBox="0 0 900 250" role="img" aria-label="Treatment train diagram showing baffle boxes and floating wetlands upstream, living shoreline and oyster reef at the edge, and clams and seagrass in the open lagoon.">
+        <defs><linearGradient id="tt" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#CFA063" stop-opacity="0.35"/><stop offset="0.5" stop-color="#0E9C90" stop-opacity="0.35"/><stop offset="1" stop-color="#3BB6D6" stop-opacity="0.4"/></linearGradient></defs>
+        <rect x="0" y="0" width="900" height="250" fill="url(#tt)"/>
+        <line x1="300" y1="0" x2="300" y2="250" stroke="#2AD6C6" stroke-opacity="0.25" stroke-dasharray="4 6"/>
+        <line x1="600" y1="0" x2="600" y2="250" stroke="#2AD6C6" stroke-opacity="0.25" stroke-dasharray="4 6"/>
+        <text x="150" y="34" text-anchor="middle" font-family="'Bebas Neue',sans-serif" font-size="24" fill="#EAF4F1">1 &middot; ON LAND</text>
+        <text x="450" y="34" text-anchor="middle" font-family="'Bebas Neue',sans-serif" font-size="24" fill="#EAF4F1">2 &middot; THE EDGE</text>
+        <text x="750" y="34" text-anchor="middle" font-family="'Bebas Neue',sans-serif" font-size="24" fill="#EAF4F1">3 &middot; OPEN LAGOON</text>
+        <text x="150" y="70" text-anchor="middle" font-family="'DM Mono',monospace" font-size="12.5" fill="#CFE4DF">Stop nutrients before</text>
+        <text x="150" y="88" text-anchor="middle" font-family="'DM Mono',monospace" font-size="12.5" fill="#CFE4DF">they reach the water</text>
+        <text x="450" y="70" text-anchor="middle" font-family="'DM Mono',monospace" font-size="12.5" fill="#CFE4DF">Buffer and filter</text>
+        <text x="450" y="88" text-anchor="middle" font-family="'DM Mono',monospace" font-size="12.5" fill="#CFE4DF">at the shoreline</text>
+        <text x="750" y="70" text-anchor="middle" font-family="'DM Mono',monospace" font-size="12.5" fill="#CFE4DF">Filter the water,</text>
+        <text x="750" y="88" text-anchor="middle" font-family="'DM Mono',monospace" font-size="12.5" fill="#CFE4DF">regrow the bottom</text>
+        <text x="150" y="140" text-anchor="middle" font-family="Barlow,sans-serif" font-weight="700" font-size="15" fill="#2AD6C6">Baffle boxes</text>
+        <text x="150" y="164" text-anchor="middle" font-family="Barlow,sans-serif" font-weight="700" font-size="15" fill="#2AD6C6">Floating wetlands</text>
+        <text x="150" y="188" text-anchor="middle" font-family="Barlow,sans-serif" font-weight="700" font-size="15" fill="#2AD6C6">Septic-to-sewer</text>
+        <text x="450" y="140" text-anchor="middle" font-family="Barlow,sans-serif" font-weight="700" font-size="15" fill="#46CCA2">Living shorelines</text>
+        <text x="450" y="164" text-anchor="middle" font-family="Barlow,sans-serif" font-weight="700" font-size="15" fill="#46CCA2">Marsh + mangroves</text>
+        <text x="450" y="188" text-anchor="middle" font-family="Barlow,sans-serif" font-weight="700" font-size="15" fill="#46CCA2">Oyster reef</text>
+        <text x="750" y="140" text-anchor="middle" font-family="Barlow,sans-serif" font-weight="700" font-size="15" fill="#3BB6D6">Clam beds</text>
+        <text x="750" y="164" text-anchor="middle" font-family="Barlow,sans-serif" font-weight="700" font-size="15" fill="#3BB6D6">Muck removal</text>
+        <text x="750" y="188" text-anchor="middle" font-family="Barlow,sans-serif" font-weight="700" font-size="15" fill="#3BB6D6">Seagrass return</text>
+        <text x="450" y="228" text-anchor="middle" font-family="Barlow,sans-serif" font-style="italic" font-size="13" fill="#9BB3AE">Clean upstream, buffer the edge, filter the middle - and the lagoon clears from the bottom up.</text>
+      </svg>
+    </div>
+  </div>
+</section>
+
+<!-- BAFFLE BOXES -->
+<section class="bv-section">
+  <div class="bv-wrap">
+    <div class="bv-sechead"><div class="bv-secnum">01</div><div><h2 class="bv-h2">Baffle boxes</h2><div class="bv-sub">The cheapest pound of nitrogen in the whole plan, installed in weeks.</div></div></div>
+    <p>A baffle box is a large concrete vault buried under a storm drain. Runoff flows through it on the way to the lagoon, and internal walls ("baffles") slow the water so sediment, trash, and nutrients drop out and get trapped instead of washing into the water. They come in two generations:</p>
+    <div class="bv-tablewrap">
+      <table class="bv-table">
+        <thead><tr><th>Type</th><th>What it removes</th><th>How</th></tr></thead>
+        <tbody>
+          <tr><td>First-generation sediment box</td><td>Sand, trash, coarse sediment and the nutrients bound to them</td><td>Settling chambers + screens; caught material is vacuumed out periodically</td></tr>
+          <tr><td><b>Nutrient-Separating Baffle Box (NSBB)</b></td><td>The above <b>plus dissolved nitrogen and phosphorus</b></td><td>Adds a bed of <b>sorption media</b> (Bold &amp; Gold / BAM - a sand, clay and recycled-material blend) that chemically grabs dissolved nutrients as water passes through</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="bv-grid two" style="margin:6px 0 4px">
+      <div class="bv-card"><h4 style="color:var(--bv-aqua);font-size:15px;margin-bottom:8px">Why it wins</h4><p class="bv-muted" style="margin:0;font-size:15px">At about <b style="color:var(--bv-ink)">$88 per pound of nitrogen per year</b>, stormwater treatment is the cheapest capital category in Brevard's own lagoon plan. A single unit is a precast structure dropped in over one construction season, and it works the day it is connected. The Bold &amp; Gold media lasts ~20 years and can be rinsed and reused.</p></div>
+      <div class="bv-card"><h4 style="color:var(--bv-coral);font-size:15px;margin-bottom:8px">The catch</h4><p class="bv-muted" style="margin:0;font-size:15px">They only treat what flows through them, so they must be placed at the <b style="color:var(--bv-ink)">highest-load outfalls</b> to matter. And they need maintenance - the trapped sediment must be vacuumed out on a schedule, or a full box stops working and can even release its captured load.</p></div>
+    </div>
+    <p class="bv-disc">Bottom line: the first thing to buy. Cheapest dollars per pound, fastest to install, lowest science risk.</p>
+  </div>
+</section>
+
+<!-- DEMONSTRATION CELLS -->
+<section class="bv-section">
+  <div class="bv-wrap">
+    <div class="bv-sechead"><div class="bv-secnum">02</div><div><h2 class="bv-h2">Demonstration cells</h2><div class="bv-sub">The fastest way to show visibly clear water - engineered, in a single season.</div></div></div>
+    <p>A demonstration cell is a small, contained, badly-flushed water body - a dead-end residential canal, a marina basin, a cove - that we treat as an all-at-once proof of concept. These spots are the worst offenders (small volume, terrible flushing, high nutrient), which is exactly why they respond fastest: you can filter the water faster than fresh water replaces it, so it visibly clears in one season. In the open, well-flushed lagoon the same effort would be invisible.</p>
+    <p>Each cell gets the full stack at once:</p>
+    <ul class="bv-list">
+      <li><b>Vacuum the muck first</b> so the biggest nutrient source stops feeding blooms.</li>
+      <li><b>Broadcast clam seed</b> across the cleared floor - buried filter feeders, no structure needed.</li>
+      <li><b>Hang oyster mats and cages</b> on every dock piling - biomass filtering the day it goes in.</li>
+      <li><b>Float treatment-wetland rafts</b> at the dead end where the stormwater comes in.</li>
+      <li><b>Add aeration</b> to hold oxygen up and keep the water circulating past the filters.</li>
+    </ul>
+    <div class="bv-feature">
+      <div class="h">The design rule</div>
+      <p>Size the filter-feeder population so total daily clearance beats the cell's volume divided by its flushing time. A typical 1,500 ft canal holds ~5.4M gallons and flushes in ~14 days, so it needs ~385,000 gallons cleared per day. One drone drop of clam seed across the floor, plus oysters on the docks, clears <strong>several times that</strong> - and the water gets measurably clearer within 12 to 18 months. Cost runs roughly <strong>$80k to $280k per cell</strong>, most of it the muck vacuum.</p>
+    </div>
+  </div>
+</section>
+
+<!-- CLAMS VS OYSTERS -->
+<section class="bv-section">
+  <div class="bv-wrap">
+    <div class="bv-sechead"><div class="bv-secnum">03</div><div><h2 class="bv-h2">Clams vs oysters</h2><div class="bv-sub">Both are living filters. They cost, deploy, and pay off very differently.</div></div></div>
+    <p>Both are bivalves that filter algae and nutrients out of the water. The difference is how they live: oysters build hard reefs above the bottom, clams bury themselves in the sediment. That one fact drives everything else.</p>
+    <div class="bv-tablewrap">
+      <table class="bv-table">
+        <thead><tr><th></th><th>Hard clam (Mercenaria)</th><th>Eastern oyster (Crassostrea)</th></tr></thead>
+        <tbody>
+          <tr><td>How it lives</td><td>Buried in the sediment</td><td>Cemented onto a hard reef</td></tr>
+          <tr><td>Filters per animal</td><td class="num">~13-25 gal/day</td><td class="num">~30-50 gal/day</td></tr>
+          <tr><td>Needs built structure?</td><td><span class="bv-pill good">No</span></td><td><span class="bv-pill warn">Yes - cultch / reef</span></td></tr>
+          <tr><td>Deployment speed</td><td>Drone broadcasts 1 acre in ~15 min</td><td>Build reef, then it recruits over months</td></tr>
+          <tr><td>Seed cost</td><td class="num">~$6k / million seed</td><td class="num">~$225-300 / million larvae</td></tr>
+          <tr><td>All-in cost</td><td class="num">~$2k / acre</td><td class="num">~$49k-121k / acre</td></tr>
+          <tr><td>Time to filtering size</td><td>12-16 months</td><td>Months (on placed reef)</td></tr>
+          <tr><td>Extra benefits</td><td>Clears water for seagrass</td><td>Habitat, shoreline wave-break, fisheries</td></tr>
+          <tr><td>Best role</td><td><b>Cheap biomass at scale</b></td><td><b>Permanent living infrastructure</b></td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="bv-grid two">
+      <div class="bv-callout good"><h4>Use clams when</h4><p style="margin:0">You want the most filtering capacity per dollar, fast to deploy, over large soft-bottom areas. Clams are the scale play - dirt cheap to seed, no construction - but they take a year-plus to mature and seed survival is low, so you oversize the drop.</p></div>
+      <div class="bv-callout"><h4>Use oysters when</h4><p style="margin:0">You want permanent, self-sustaining reef that also protects shoreline, builds habitat, and can filter immediately when placed as cages or mats. Oysters cost far more per acre (the money is in the reef structure and labor, not the animals) but they are living infrastructure that reproduces and lasts.</p></div>
+    </div>
+    <p>In practice you use <b>both</b>: clams broadcast across the soft bottom for cheap volume, oysters built into reefs and living shorelines at the edges. See the <a href="/brevard/model/">calculator</a> to weigh them, or the <a href="/brevard/feasibility/">feasibility brief</a> for the full oyster-reef sizing and the exact hatchery costs.</p>
+  </div>
+</section>
+
+<!-- THE PLANTS -->
+<section class="bv-section">
+  <div class="bv-wrap">
+    <div class="bv-sechead"><div class="bv-secnum">04</div><div><h2 class="bv-h2">The plants</h2><div class="bv-sub">Three plant families for three zones. Get the plant matched to the place.</div></div></div>
+
+    <h3 style="margin:8px 0 6px;font-size:19px">Seagrass - the open lagoon bottom</h3>
+    <p>Seagrass is the goal, not just a tool: it is the nursery of the whole lagoon and what the manatees eat. The 2011 algae superbloom blocked the sunlight and killed roughly <b>47,000 acres (~60%)</b> of it, which is what triggered the manatee starvation crisis. It comes back only when the water is clear enough for light to reach the bottom - which is the whole point of the filters and muck removal. The key species:</p>
+    <div class="bv-tablewrap">
+      <table class="bv-table">
+        <thead><tr><th>Species</th><th>Role</th><th>Where</th></tr></thead>
+        <tbody>
+          <tr><td>Shoal grass (Halodule wrightii)</td><td><b>Pioneer</b> - the first to establish, used for replanting</td><td>Shallow, variable light</td></tr>
+          <tr><td>Manatee grass (Syringodium filiforme)</td><td>Mixed beds</td><td>Mid-depth (~5 ft)</td></tr>
+          <tr><td>Turtle grass (Thalassia testudinum)</td><td>Needs the most light - a sign of healthy water</td><td>Clearer southern lagoon</td></tr>
+          <tr><td>Widgeon grass (Ruppia maritima)</td><td>Tolerates low, variable salinity</td><td>Very shallow (&lt;1 ft)</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p class="bv-muted" style="font-size:15px">It is replanted from nursery-grown shoal-grass fragments set in peat pots and protected by mesh cages that keep manatees and fish from grazing the young plants. Brevard Zoo's Restore Our Shores and Sea &amp; Shoreline's "GrowSAV" both run IRL seagrass nurseries; clams and oysters are deliberately paired with seagrass because filtering the water is what lets the light back in.</p>
+
+    <h3 style="margin:26px 0 6px;font-size:19px">Marsh grass and mangroves - the shoreline</h3>
+    <p>At the water's edge, <b>smooth cordgrass (Spartina), black needlerush (Juncus)</b>, and the three <b>mangroves (red, black, white)</b> hold the shoreline together with their roots, break incoming waves, and soak up nutrients from runoff before it reaches open water. Combined with an oyster reef at the toe, this is a "living shoreline" - it does the job of a seawall while also filtering and building habitat.</p>
+
+    <h3 style="margin:26px 0 6px;font-size:19px">Floating treatment wetlands - the ponds and canals</h3>
+    <p>These are planted rafts floated on stormwater ponds and canals. The plant roots hang down into the water, hosting the microbes that strip nitrogen and growing tissue that you harvest to physically export the nutrients. A full-scale study at <b>Wickham Park in Melbourne</b> (local data) measured the best performers:</p>
+    <div class="bv-tablewrap">
+      <table class="bv-table">
+        <thead><tr><th>Species</th><th class="num">Nitrogen fixed (g/m&sup2;/yr)</th></tr></thead>
+        <tbody>
+          <tr><td>Soft rush (Juncus effusus)</td><td class="num">13.5</td></tr>
+          <tr><td>Bentgrass (Agrostis alba)</td><td class="num">13.2</td></tr>
+          <tr><td>Duck potato (Sagittaria lancifolia)</td><td class="num">12.1</td></tr>
+          <tr><td>Pickerelweed (Pontederia cordata)</td><td class="num">lower N, good P uptake</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p class="bv-disc">Zonation in one line: floating wetlands strip nutrients upstream, marsh and mangroves buffer the edge, and clearer water lets seagrass recover on the bottom.</p>
+  </div>
+</section>
+
+<!-- MUCK REMOVAL -->
+<section class="bv-section">
+  <div class="bv-wrap">
+    <div class="bv-sechead"><div class="bv-secnum">05</div><div><h2 class="bv-h2">Muck removal</h2><div class="bv-sub">The single biggest nitrogen source - the "black mayonnaise" on the bottom - and how it is actually dug out.</div></div></div>
+    <p>Decades of runoff and dead algae have settled into a soupy black organic ooze on the lagoon floor. This "muck" is the single largest nutrient source - about <b>35% of the nitrogen</b> - because it constantly leaks stored nitrogen and phosphorus back into the water. Removing it is the biggest permanent win, and also the slowest and most capital-heavy. Here is how it is done:</p>
+
+    <h3 style="margin:8px 0 6px;font-size:19px">Step 1 - Dredge it (hydraulically, not mechanically)</h3>
+    <p>Because muck is fine and soupy, the lagoon projects use <b>hydraulic dredging</b>: a rotating auger head with a suction pump lifts the muck as a slurry inside an enclosed pipeline. That keeps the fine, contaminated material from re-clouding the water - the decisive advantage over a mechanical clamshell bucket, which smears and resuspends muck. Florida Tech even built a custom fine-sediment suction head for the work.</p>
+
+    <h3 style="margin:22px 0 6px;font-size:19px">Step 2 - Dewater it in geotubes</h3>
+    <p>The slurry is pumped into giant woven fabric bags called <b>geotextile tubes ("geotubes")</b> at a management area onshore. The fabric holds the solids while water seeps out over ~5-7 days. Critically, that drained water is <b>nutrient-rich, so it is not returned untreated</b> - it runs through a temporary treatment system to strip the nitrogen and phosphorus first, or the whole point is defeated.</p>
+
+    <h3 style="margin:22px 0 6px;font-size:19px">Step 3 - Reuse the dried muck</h3>
+    <p>Once dry, the geotubes are opened and the muck is trucked out and spread on <b>farmland west of I-95 as a soil amendment</b> (after testing for contaminants). Emerging "muck-to-product" pathways from Florida Tech turn waste biomass into <b>biochar</b> (which is being tested to fight algae blooms and boost seagrass) and blend treated sediment into <b>concrete aggregate</b>.</p>
+
+    <div class="bv-callout muck" style="margin-top:24px">
+      <h4>The cheaper in-place alternatives (and their trade-offs)</h4>
+      <p style="margin:0">Where full removal is too costly, three in-place options <b>manage</b> the muck instead of removing it: <b>sand capping</b> (bury it under clean sand - cheap, but a storm can breach it), <b>alum treatment</b> (aluminum locks up phosphorus - effective but can starve the bottom water of oxygen), and <b>aeration</b> (bubbling oxygen into the sediment - an IRL canal pilot raised oxygen and cut ammonium, but it is an ongoing energy cost, not a permanent fix). Removal deletes the source; the in-place options only hold it down.</p>
+    </div>
+
+    <h3 style="margin:26px 0 10px;font-size:19px">Proof it works</h3>
+    <div class="bv-tablewrap">
+      <table class="bv-table">
+        <thead><tr><th>Project</th><th class="num">Muck removed</th><th class="num">Cost</th><th>Result</th></tr></thead>
+        <tbody>
+          <tr><td>Eau Gallie River (2017-2019)</td><td class="num">600,000+ cy</td><td class="num">$23.95M</td><td>Removed 1,200 tons N + 260 tons P</td></tr>
+          <tr><td>Grand Canal (Satellite Beach)</td><td class="num">~479,000 cy</td><td class="num">~$26.5M</td><td>7-mile pipeline to dewatering site</td></tr>
+          <tr><td>Turkey Creek (Palm Bay)</td><td class="num">early pilot</td><td class="num">state grant</td><td>Proved dredging clears the water</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p class="bv-disc">All-in cost runs roughly <b>$40 to $55 per cubic yard</b> (dredge + dewater + treat + dispose). Brevard's lagoon plan budgets at least $200M over a decade for muck. Expensive and slow - but it is the biggest single lever, so it runs in parallel with the fast, cheap wins.</p>
+  </div>
+</section>
+
+<!-- OTHER LEVERS -->
+<section class="bv-section">
+  <div class="bv-wrap">
+    <div class="bv-sechead"><div class="bv-secnum">06</div><div><h2 class="bv-h2">The rest of the toolkit</h2><div class="bv-sub">The source-control and water-supply levers that round out the plan.</div></div></div>
+    <div class="bv-grid two">
+      <div class="bv-card"><h4 style="font-size:16px;margin-bottom:8px">Septic-to-sewer + plant upgrades</h4><p class="bv-muted" style="margin:0;font-size:15px">Sewage and septic are ~26% of the nitrogen. Connecting septic homes to sewer works but is slow and costly ($20k+/home). Far more cost-effective: upgrading treatment plants to strip nutrients - the Palm Bay-type upgrade removes ~11,000 lbs of nitrogen a year at just $125/lb, the best big-block buy in the plan.</p></div>
+      <div class="bv-card"><h4 style="font-size:16px;margin-bottom:8px">Fertilizer control</h4><p class="bv-muted" style="margin:0;font-size:15px">The cheapest lever of all, and the most overrated. Lawn fertilizer is only ~6% of the load, and Brevard's ordinance already cut ~46,000 lbs a year. Worth keeping, but it is a supporting policy, not a solution - sewage and muck are where the nitrogen actually is.</p></div>
+      <div class="bv-card"><h4 style="font-size:16px;margin-bottom:8px">Desalination</h4><p class="bv-muted" style="margin:0;font-size:15px">A drinking-water utility that skims some nutrients as a bonus - not a lagoon cure. It cannot pump a 208-billion-gallon lagoon clean, and its membranes concentrate nutrients into a brine that must be injected deep underground, never returned to the lagoon. Build it for water supply; see the <a href="/brevard/plan/">financial model</a>.</p></div>
+      <div class="bv-card"><h4 style="font-size:16px;margin-bottom:8px">Nutrient credits</h4><p class="bv-muted" style="margin:0;font-size:15px">Florida lets you sell certified nitrogen reductions as credits to polluters who owe cleanup. Benchmark prices run $5-50/lb (oyster credits have traded near $400/lb elsewhere). Real upside that helps repay reef and clam work - but Florida's market is young, so treat it as a bonus, not the bankable core.</p></div>
+    </div>
+    <div class="bv-feature" style="margin-top:22px">
+      <div class="h">How it all fits</div>
+      <p>Rank everything by cost per pound of nitrogen and the order is clear: <strong>baffle boxes and demonstration cells first</strong> (cheap, fast, visible), <strong>cheap plant upgrades and clam seeding next</strong> (big blocks at low cost), and <strong>muck dredging, oyster reef, and desalination as the larger permanent builds</strong> once the momentum and funding are there. Every fix removes a different pound in a different place - together they clear the water; alone, none of them do.</p>
+    </div>
+    <div class="bv-btnrow" style="margin-top:22px">
+      <a href="/brevard/plan/" class="bv-btn">See the ranked plan</a>
+      <a href="/brevard/model/" class="bv-btn ghost">Model it yourself</a>
+    </div>
+    <div class="bv-pagenav">
+      <a href="/brevard/model/">&larr; Calculator</a>
+      <a href="/brevard/">Back to overview &rarr;</a>
+    </div>
+  </div>
+</section>
+
+</div>
+
+</body>
+</html>
