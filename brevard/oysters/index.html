@@ -106,12 +106,7 @@
 
 /* ---- vibrant stat band ---- */
 .bv-stats{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;}
-.bv-stat{background:var(--bv-surface);padding:22px 20px 20px;border-radius:16px;box-shadow:var(--bv-shadow);border:1px solid var(--bv-line);position:relative;overflow:hidden;}
-.bv-stat::before{content:"";position:absolute;top:0;left:0;right:0;height:5px;background:var(--bv-aqua);}
-.bv-stat:nth-child(1)::before{background:linear-gradient(90deg,#0FB2A3,#33ADD8);}
-.bv-stat:nth-child(2)::before{background:linear-gradient(90deg,#1C7FA6,#33ADD8);}
-.bv-stat:nth-child(3)::before{background:linear-gradient(90deg,#3DA76A,#0FB2A3);}
-.bv-stat:nth-child(4)::before{background:linear-gradient(90deg,#EFA53A,#F0664A);}
+.bv-stat{background:none;border:0;border-top:2px solid var(--bv-line);border-radius:0;box-shadow:none;padding:16px 2px 0;}
 .bv-stat .n{font-family:var(--bv-display);font-size:clamp(38px,4.6vw,58px);line-height:.88;color:var(--bv-ocean);font-variant-numeric:tabular-nums;}
 .bv-stat:nth-child(1) .n{color:#0FB2A3;} .bv-stat:nth-child(2) .n{color:#1C7FA6;}
 .bv-stat:nth-child(3) .n{color:#3DA76A;} .bv-stat:nth-child(4) .n{color:#E4823C;}
@@ -119,7 +114,7 @@
 @media(max-width:760px){.bv-stats{grid-template-columns:repeat(2,1fr);}}
 
 /* ---- cards ---- */
-.bv-card{background:var(--bv-surface);border:1px solid var(--bv-line);border-radius:16px;padding:24px;box-shadow:var(--bv-shadow);}
+.bv-card{background:none;border:0;border-top:1px solid var(--bv-line);border-radius:0;box-shadow:none;padding:18px 0 0;}
 .bv-grid{display:grid;gap:18px;}
 .bv-grid.two{grid-template-columns:1fr 1fr;}
 .bv-grid.three{grid-template-columns:repeat(3,1fr);}
