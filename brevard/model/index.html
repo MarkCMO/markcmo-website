@@ -374,6 +374,16 @@ body{padding-top:0!important;}
           <div class="rng"><span>0</span><span>3,000</span></div>
         </div>
         <div class="bv-lever">
+          <div class="hd"><div class="nm">Macroalgae (Ulva) cages<small>~1,660 lb/acre/yr &middot; most N per acre &middot; must harvest</small></div><div class="val"><span id="v_ulva">0</span> <small>acres</small></div></div>
+          <input type="range" id="ulva" min="0" max="500" step="5" value="0" aria-label="Ulva macroalgae acres">
+          <div class="rng"><span>0</span><span>500</span></div>
+        </div>
+        <div class="bv-lever">
+          <div class="hd"><div class="nm">Ribbed mussel beds<small>~250 lb/acre/yr &middot; native, self-recruiting &middot; brackish</small></div><div class="val"><span id="v_mussel">0</span> <small>acres</small></div></div>
+          <input type="range" id="mussel" min="0" max="500" step="5" value="0" aria-label="Ribbed mussel acres">
+          <div class="rng"><span>0</span><span>500</span></div>
+        </div>
+        <div class="bv-lever">
           <div class="hd"><div class="nm">Plant nutrient upgrades<small>$125/lb &middot; Palm Bay-type &middot; ~11,000 lbs each</small></div><div class="val"><span id="v_plant">1</span> <small>plants</small></div></div>
           <input type="range" id="plant" min="0" max="12" step="1" value="1" aria-label="Plant upgrades">
           <div class="rng"><span>0</span><span>12</span></div>
@@ -423,9 +433,9 @@ body{padding-top:0!important;}
 
 <script>
 (function(){
-  var C={box:{cost:80000,n:900},cell:{cost:280000,n:1000},clam:{cost:2000,n:40},reef:{cost:105000,n:268},plant:{cost:1400000,n:11119},muck:{costPerK:40000,nOngoingPerK:99,nOneTimePerK:4000},desal:{costPerMGD:8000000,n:2588}};
+  var C={box:{cost:80000,n:900},cell:{cost:280000,n:1000},clam:{cost:2000,n:40},reef:{cost:105000,n:268},ulva:{cost:60000,n:1660},mussel:{cost:40000,n:250},plant:{cost:1400000,n:11119},muck:{costPerK:40000,nOngoingPerK:99,nOneTimePerK:4000},desal:{costPerMGD:8000000,n:2588}};
   var TMDL=64372,BMAP=380239,GROSS=3400000;
-  var ids=['box','cell','clam','reef','plant','muck','desal','credit'];
+  var ids=['box','cell','clam','reef','ulva','mussel','plant','muck','desal','credit'];
   var el={};ids.forEach(function(k){el[k]=document.getElementById(k);});
   function fmt(x){return Math.round(x).toLocaleString('en-US');}
   function money(x){if(x>=1e9)return '$'+(x/1e9).toFixed(2)+'B';if(x>=1e6)return '$'+(x/1e6).toFixed(1)+'M';if(x>=1e3)return '$'+Math.round(x/1e3)+'k';return '$'+Math.round(x);}
@@ -436,14 +446,16 @@ body{padding-top:0!important;}
     document.getElementById('v_cell').textContent=v.cell;
     document.getElementById('v_clam').textContent=fmt(v.clam);
     document.getElementById('v_reef').textContent=fmt(v.reef);
+    document.getElementById('v_ulva').textContent=fmt(v.ulva);
+    document.getElementById('v_mussel').textContent=fmt(v.mussel);
     document.getElementById('v_plant').textContent=v.plant;
     document.getElementById('v_muck').textContent=fmt(v.muck);
     document.getElementById('v_desal').textContent=v.desal;
     document.getElementById('v_credit').textContent=v.credit;
-    var nBox=v.box*C.box.n,nCell=v.cell*C.cell.n,nClam=v.clam*C.clam.n,nReef=v.reef*C.reef.n,nPlant=v.plant*C.plant.n,nMuck=v.muck*C.muck.nOngoingPerK,nDesal=v.desal*C.desal.n;
-    var nTotal=nBox+nCell+nClam+nReef+nPlant+nMuck+nDesal;
+    var nBox=v.box*C.box.n,nCell=v.cell*C.cell.n,nClam=v.clam*C.clam.n,nReef=v.reef*C.reef.n,nUlva=v.ulva*C.ulva.n,nMussel=v.mussel*C.mussel.n,nPlant=v.plant*C.plant.n,nMuck=v.muck*C.muck.nOngoingPerK,nDesal=v.desal*C.desal.n;
+    var nTotal=nBox+nCell+nClam+nReef+nUlva+nMussel+nPlant+nMuck+nDesal;
     var muckOneTime=v.muck*C.muck.nOneTimePerK;
-    var capRestore=v.box*C.box.cost+v.cell*C.cell.cost+v.clam*C.clam.cost+v.reef*C.reef.cost+v.plant*C.plant.cost+v.muck*C.muck.costPerK;
+    var capRestore=v.box*C.box.cost+v.cell*C.cell.cost+v.clam*C.clam.cost+v.reef*C.reef.cost+v.ulva*C.ulva.cost+v.mussel*C.mussel.cost+v.plant*C.plant.cost+v.muck*C.muck.costPerK;
     var capDesal=v.desal*C.desal.costPerMGD;
     var rev=nTotal*v.credit;var cpl=nTotal>0?capRestore/nTotal:0;
     document.getElementById('r_n').textContent=fmt(nTotal);
@@ -465,7 +477,7 @@ body{padding-top:0!important;}
     if(capDesal>0){note.textContent='Plus '+money(capDesal)+' desalination capital, shown separately - a water utility that repays itself from water sales. Its brine, with the captured nutrients, must go to a deep injection well.';}
     else{note.textContent='Restoration capital is largely grant-eligible (SOIRL, NOAA, NFWF). Certified removals can be sold as nutrient credits for the revenue shown.';}
   }
-  var presets={flagship:{box:20,cell:5,clam:500,reef:0,plant:1,muck:0,desal:0,credit:10},tmdl:{box:40,cell:8,clam:800,reef:100,plant:2,muck:0,desal:0,credit:10},bmap:{box:120,cell:20,clam:3000,reef:850,plant:6,muck:2000,desal:15,credit:15},zero:{box:0,cell:0,clam:0,reef:0,plant:0,muck:0,desal:0,credit:10}};
+  var presets={flagship:{box:20,cell:5,clam:500,reef:0,ulva:0,mussel:0,plant:1,muck:0,desal:0,credit:10},tmdl:{box:40,cell:8,clam:800,reef:100,ulva:15,mussel:0,plant:2,muck:0,desal:0,credit:10},bmap:{box:120,cell:20,clam:3000,reef:850,ulva:150,mussel:80,plant:6,muck:2000,desal:15,credit:15},zero:{box:0,cell:0,clam:0,reef:0,ulva:0,mussel:0,plant:0,muck:0,desal:0,credit:10}};
   document.querySelectorAll('.bv-presets button').forEach(function(b){b.addEventListener('click',function(){var p=presets[b.dataset.preset];if(!p)return;ids.forEach(function(k){if(p[k]!==undefined)el[k].value=p[k];});calc();});});
   ids.forEach(function(k){el[k].addEventListener('input',calc);});
   calc();
