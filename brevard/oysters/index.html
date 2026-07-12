@@ -131,6 +131,12 @@
 .bv-callout p{color:var(--bv-ink2);}
 .bv-callout p:last-child{margin-bottom:0;}
 
+/* ---- confidentiality strip (prints on every page + PDF) ---- */
+.bv-confid{padding:9px 24px;font-family:var(--bv-mono);font-size:10.5px;line-height:1.55;letter-spacing:.03em;color:var(--bv-ink2);background:var(--bv-bg-alt);border-bottom:1px solid var(--bv-line2);text-align:center;}
+.bv-confid b{color:var(--bv-coral);letter-spacing:.14em;font-weight:600;}
+.bv-foot-confid{font-family:var(--bv-mono);font-size:11px;line-height:1.6;color:var(--bv-muted);letter-spacing:.02em;padding:0 0 4px;}
+.bv-foot-confid b{color:var(--bv-coral);letter-spacing:.12em;}
+
 /* big feature callout - rich accent block */
 .bv-feature{background:radial-gradient(120% 140% at 90% 0%, rgba(51,173,216,.35), transparent 55%),linear-gradient(150deg,#0a6e64,#0d8a7d 60%,#12a898);border-radius:20px;padding:30px 32px;color:#E9FBF6;box-shadow:var(--bv-shadow-lg);}
 .bv-feature .h{font-family:var(--bv-mono);font-size:12px;letter-spacing:.15em;text-transform:uppercase;color:#8FF0E0;margin-bottom:12px;}
@@ -352,6 +358,7 @@ body{padding-top:0!important;}
   </div>
   <button class="bv-navtog" aria-label="Menu" onclick="document.getElementById('bvnl').classList.toggle('open')">&#9776;</button>
 </nav>
+<div class="bv-confid" role="note"><b>CONFIDENTIAL</b> - This information is confidential to Mark Gabrielli and WETYR Corporation. Any use or distribution is not allowed without written consent by Mark Gabrielli or WETYR Corporation. Do not share or distribute.</div>
 
 <header class="bv-hero pic" style="background-image:url('https://upload.wikimedia.org/wikipedia/commons/thumb/5/56/Oyster_clusters.jpg/1280px-Oyster_clusters.jpg')">
   <div class="bv-wrap">
@@ -480,6 +487,7 @@ body{padding-top:0!important;}
       <a href="/brevard/faq/">Questions answered</a>
     </nav>
   </div>
+  <div class="bv-foot-confid"><b>CONFIDENTIAL</b> - Confidential to Mark Gabrielli and WETYR Corporation. No use or distribution without written consent by Mark Gabrielli or WETYR Corporation. Do not share or distribute.</div>
   <div class="bv-foot-bar"><span>&copy; 2026 &middot; markcmo.com/brevard &middot; imagery: M. Seeley, J. St. John &amp; Wikimedia Commons (CC BY / CC BY-SA)</span><a href="mailto:mark@markcmo.com?subject=Brevard%20Lagoon%20Initiative">mark@markcmo.com</a></div>
 </footer>
 </body>
