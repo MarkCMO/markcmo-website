@@ -296,6 +296,22 @@
 /* hide the site-wide injected CMO chrome (middleware master nav/drawer/footer + start CTA) - this microsite ships its own */
 #mcMasterNav,#mcMasterDrawer,#mcMasterHam,#mcMasterFooter,.mc-master-footer,#mc-start-band,#mc-start-bar,[data-eeat-byline]:not(.bv-footer){display:none!important;}
 body{padding-top:0!important;}
+
+/* ---- imagery ---- */
+.bv-hero.pic{background-size:cover;background-position:center;}
+.bv-hero.pic::before{content:"";position:absolute;inset:0;background:linear-gradient(150deg,rgba(6,58,67,.94),rgba(10,110,100,.84) 52%,rgba(15,159,143,.76));z-index:0;}
+.bv-hero.pic .bv-wrap,.bv-hero.pic .bv-wide{position:relative;z-index:1;}
+.bv-hero.pic::after{z-index:2;}
+.bv-figimg{margin:24px 0;border-radius:16px;overflow:hidden;box-shadow:var(--bv-shadow-lg);border:1px solid var(--bv-line);background:var(--bv-surface);}
+.bv-figimg img{width:100%;height:auto;display:block;object-fit:cover;background:var(--bv-tint);}
+.bv-figimg figcaption{font-size:12.5px;color:var(--bv-muted);padding:11px 16px;line-height:1.4;}
+.bv-imgrow{display:grid;grid-template-columns:1fr 1fr;gap:18px;margin:24px 0;}
+.bv-imgrow .bv-figimg{margin:0;}
+@media(max-width:640px){.bv-imgrow{grid-template-columns:1fr;}}
+.bv-deck .thumb{height:132px;margin:-26px -26px 18px;background-size:cover;background-position:center;border-radius:17px 17px 0 0;position:relative;}
+.bv-deck .thumb::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,transparent 55%,rgba(13,42,44,.22));border-radius:17px 17px 0 0;}
+.bv-band{position:relative;height:clamp(200px,30vw,360px);background-size:cover;background-position:center;margin:0;}
+.bv-band::before{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(243,250,248,.0) 60%,rgba(243,250,248,1));}
 </style>
 <script type="application/ld+json">{"@context":"https://schema.org","@type":"WebPage","name":"Brevard Lagoon Initiative","about":"Indian River Lagoon restoration","publisher":{"@type":"Organization","name":"Brevard Lagoon Initiative","url":"https://markcmo.com/brevard/"}}</script>
 </head>
@@ -309,8 +325,8 @@ body{padding-top:0!important;}
     <a href="/brevard/plan/">Plan</a>
     <a href="/brevard/model/">Calculator</a>
     <a href="/brevard/guide/">Guide</a>
-    <a href="/brevard/oysters/">Oysters</a>
     <a href="/brevard/desalination/">Desalination</a>
+    <a href="/brevard/macroalgae/">Aquaculture</a>
     <a href="/brevard/funding/">Funding</a>
   </div>
   <button class="bv-navtog" aria-label="Menu" onclick="document.getElementById('bvnl').classList.toggle('open')">&#9776;</button>
@@ -353,6 +369,22 @@ body{padding-top:0!important;}
     <div class="bv-sechead"><div class="bv-secnum">01</div><div><h2 class="bv-h2">Product one - drinking water</h2><div class="bv-sub">The proven core. Real, rising demand that the aquifer can't keep meeting.</div></div></div>
     <p>Brevard's largest system (City of Cocoa) already runs about <b>20.3 MGD average and 27 MGD peak</b>, serving ~298,000 people, and the county's own water-supply plan projects demand up <b>~34% by 2035</b> - explicitly stating it must find new freshwater sources as the aquifer strains. Seawater and brackish reverse osmosis is fully proven (Tampa Bay runs the largest US seawater plant), so the water side is not a science question - it's an engineering and financing one. A 10 to 25 MGD plant sells every gallon it makes at roughly <b>$4 to $6 per 1,000 gallons</b>, which is what makes the whole facility bankable through utility revenue bonds.</p>
     <div class="bv-callout"><h4>Why this pays for the rest</h4><p style="margin:0">Water sales are the anchor tenant. They service the debt and cover operations, which means the salt and nutrient systems don't have to be profit centers - they just have to beat the cost of the deep-well injection they replace. See the <a href="/brevard/plan/">financial model</a> for the utility pro-forma.</p></div>
+  </div>
+</section>
+
+<section class="bv-section">
+  <div class="bv-wrap">
+    <div class="bv-eyebrow">WETYR Water</div>
+    <h2 class="bv-h2" style="margin:12px 0 18px">Free water, paid by the brands on the bottle</h2>
+    <p>The plant's public face is <b>WETYR Water</b> - free, ad-supported bottled water handed out across the Space Coast. Local businesses and national brands sponsor the bottle; the water is free to residents. Every bottle is a mobile billboard whose ad revenue funds the lagoon cleanup, and every label says the water was made here and helps clean the Indian River Lagoon.</p>
+    <div class="bv-grid two">
+      <div class="bv-card"><h4 style="font-size:16px;margin-bottom:8px">How the model works</h4><p class="bv-muted" style="margin:0;font-size:15px">Proven format (FreeWater and others): ads printed on <b>aluminum bottles and paper cartons</b> - no plastic. An advertiser pays roughly <b>$1 per bottle</b>, distribution partners keep a slice, and a fixed share of every bottle is donated - here, to the lagoon. The consumer pays nothing.</p></div>
+      <div class="bv-card"><h4 style="font-size:16px;margin-bottom:8px">The brand story</h4><p class="bv-muted" style="margin:0;font-size:15px">"Space Coast businesses put their name on water that cleans the Indian River Lagoon." It ties the plant, the cleanup, and the community into one visible symbol - a bottle people hold, refill, and associate with saving the lagoon. That is a marketing engine, not just a beverage.</p></div>
+    </div>
+    <div class="bv-callout coral">
+      <h4>The honest read</h4>
+      <p style="margin:0">On raw ad efficiency, a physical bottle is expensive - roughly a <b>$1,000 cost per thousand impressions</b> versus single-digit dollars for digital. So WETYR Water works as a <b>premium local-sponsorship, CSR, and awareness vehicle</b>, not a mass ad network. Treat it as the brand and goodwill layer that makes the whole initiative visible and fundable - the municipal water sales remain the plant's economic core.</p>
+    </div>
   </div>
 </section>
 
@@ -477,6 +509,7 @@ body{padding-top:0!important;}
       <a href="/brevard/guide/">Field guide</a>
       <a href="/brevard/oysters/">Oyster economics</a>
       <a href="/brevard/desalination/">Desalination plant</a>
+      <a href="/brevard/macroalgae/">Aquaculture venture</a>
       <a href="/brevard/funding/">Funding &amp; launch</a>
       <a href="/brevard/cells/">Demonstration cells</a>
     </nav>

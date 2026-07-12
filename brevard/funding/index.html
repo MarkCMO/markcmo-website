@@ -296,6 +296,22 @@
 /* hide the site-wide injected CMO chrome (middleware master nav/drawer/footer + start CTA) - this microsite ships its own */
 #mcMasterNav,#mcMasterDrawer,#mcMasterHam,#mcMasterFooter,.mc-master-footer,#mc-start-band,#mc-start-bar,[data-eeat-byline]:not(.bv-footer){display:none!important;}
 body{padding-top:0!important;}
+
+/* ---- imagery ---- */
+.bv-hero.pic{background-size:cover;background-position:center;}
+.bv-hero.pic::before{content:"";position:absolute;inset:0;background:linear-gradient(150deg,rgba(6,58,67,.94),rgba(10,110,100,.84) 52%,rgba(15,159,143,.76));z-index:0;}
+.bv-hero.pic .bv-wrap,.bv-hero.pic .bv-wide{position:relative;z-index:1;}
+.bv-hero.pic::after{z-index:2;}
+.bv-figimg{margin:24px 0;border-radius:16px;overflow:hidden;box-shadow:var(--bv-shadow-lg);border:1px solid var(--bv-line);background:var(--bv-surface);}
+.bv-figimg img{width:100%;height:auto;display:block;object-fit:cover;background:var(--bv-tint);}
+.bv-figimg figcaption{font-size:12.5px;color:var(--bv-muted);padding:11px 16px;line-height:1.4;}
+.bv-imgrow{display:grid;grid-template-columns:1fr 1fr;gap:18px;margin:24px 0;}
+.bv-imgrow .bv-figimg{margin:0;}
+@media(max-width:640px){.bv-imgrow{grid-template-columns:1fr;}}
+.bv-deck .thumb{height:132px;margin:-26px -26px 18px;background-size:cover;background-position:center;border-radius:17px 17px 0 0;position:relative;}
+.bv-deck .thumb::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,transparent 55%,rgba(13,42,44,.22));border-radius:17px 17px 0 0;}
+.bv-band{position:relative;height:clamp(200px,30vw,360px);background-size:cover;background-position:center;margin:0;}
+.bv-band::before{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(243,250,248,.0) 60%,rgba(243,250,248,1));}
 </style>
 <script type="application/ld+json">{"@context":"https://schema.org","@type":"WebPage","name":"Brevard Lagoon Initiative","about":"Indian River Lagoon restoration","publisher":{"@type":"Organization","name":"Brevard Lagoon Initiative","url":"https://markcmo.com/brevard/"}}</script>
 </head>
@@ -309,8 +325,8 @@ body{padding-top:0!important;}
     <a href="/brevard/plan/">Plan</a>
     <a href="/brevard/model/">Calculator</a>
     <a href="/brevard/guide/">Guide</a>
-    <a href="/brevard/oysters/">Oysters</a>
     <a href="/brevard/desalination/">Desalination</a>
+    <a href="/brevard/macroalgae/">Aquaculture</a>
     <a href="/brevard/funding/">Funding</a>
   </div>
   <button class="bv-navtog" aria-label="Menu" onclick="document.getElementById('bvnl').classList.toggle('open')">&#9776;</button>
@@ -444,6 +460,7 @@ body{padding-top:0!important;}
       <a href="/brevard/guide/">Field guide</a>
       <a href="/brevard/oysters/">Oyster economics</a>
       <a href="/brevard/desalination/">Desalination plant</a>
+      <a href="/brevard/macroalgae/">Aquaculture venture</a>
       <a href="/brevard/funding/">Funding &amp; launch</a>
       <a href="/brevard/cells/">Demonstration cells</a>
     </nav>
