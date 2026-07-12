@@ -265,10 +265,55 @@
 
 /* hide the site-wide lead-gen CTA on this environmental microsite */
 #mc-start-band,#mc-start-bar{display:none!important;}
+
+/* ---- self-contained nav (id=mainNav suppresses the site's CMO nav) ---- */
+.bv-nav{position:sticky;top:0;z-index:60;display:flex;align-items:center;justify-content:space-between;gap:16px;height:62px;padding:0 clamp(16px,4vw,44px);background:rgba(6,50,58,.94);backdrop-filter:blur(12px);border-bottom:1px solid rgba(143,240,224,.16);font-family:'Barlow',system-ui,sans-serif;}
+.bv-nav .bv-brand{display:flex;align-items:center;gap:10px;font-family:'Bebas Neue','Barlow',sans-serif;font-size:22px;letter-spacing:.03em;color:#fff!important;text-decoration:none;white-space:nowrap;}
+.bv-nav .bv-brand .m{display:inline-flex;align-items:center;justify-content:center;width:26px;height:26px;border-radius:7px;background:linear-gradient(135deg,#0FB2A3,#33ADD8);color:#04302b;font-size:16px;}
+.bv-nav .bv-navlinks{display:flex;align-items:center;gap:6px;}
+.bv-nav .bv-navlinks a{font-size:14px;font-weight:600;color:#CFEDE7!important;text-decoration:none;padding:7px 11px;border-radius:8px;transition:background .15s,color .15s;}
+.bv-nav .bv-navlinks a:hover{color:#fff!important;background:rgba(143,240,224,.14);text-decoration:none;}
+.bv-navtog{display:none;background:none;border:0;color:#CFEDE7;font-size:24px;cursor:pointer;line-height:1;padding:6px;}
+@media(max-width:860px){
+  .bv-nav .bv-navlinks{position:absolute;top:62px;left:0;right:0;flex-direction:column;align-items:stretch;gap:2px;background:#06323a;padding:10px 16px 16px;border-bottom:1px solid rgba(143,240,224,.16);display:none;}
+  .bv-nav .bv-navlinks.open{display:flex;}
+  .bv-nav .bv-navlinks a{padding:11px 12px;font-size:15px;}
+  .bv-navtog{display:block;}
+}
+
+/* ---- self-contained footer (has </footer> + data-eeat-byline: suppresses CMO footer + byline) ---- */
+.bv-footer{background:linear-gradient(160deg,#063a43,#08272c);color:#B9DAD4;font-family:'Barlow',system-ui,sans-serif;margin-top:0;}
+.bv-footer .bv-foot-in{max-width:1100px;margin:0 auto;display:grid;grid-template-columns:1.5fr 1fr;gap:32px;padding:52px 24px 34px;}
+.bv-footer .bv-foot-brand{font-family:'Bebas Neue','Barlow',sans-serif;font-size:28px;letter-spacing:.02em;color:#fff;}
+.bv-footer .bv-foot-desc{font-size:14px;line-height:1.6;color:#94C4BC;max-width:44ch;margin-top:10px;}
+.bv-footer .bv-foot-links{display:grid;grid-template-columns:1fr 1fr;gap:9px 16px;align-content:start;}
+.bv-footer .bv-foot-links a{color:#BFE8E0!important;font-size:13.5px;font-weight:500;text-decoration:none;}
+.bv-footer .bv-foot-links a:hover{color:#fff!important;text-decoration:underline;}
+.bv-footer .bv-foot-bar{border-top:1px solid rgba(143,240,224,.14);max-width:1100px;margin:0 auto;padding:16px 24px 22px;display:flex;justify-content:space-between;flex-wrap:wrap;gap:8px;font-family:'DM Mono',monospace;font-size:12px;color:#7FB3AB;}
+.bv-footer .bv-foot-bar a{color:#BFE8E0!important;}
+@media(max-width:640px){.bv-footer .bv-foot-in{grid-template-columns:1fr;gap:24px;}}
+
+/* hide the site-wide injected CMO chrome (middleware master nav/drawer/footer + start CTA) - this microsite ships its own */
+#mcMasterNav,#mcMasterDrawer,#mcMasterHam,#mcMasterFooter,.mc-master-footer,#mc-start-band,#mc-start-bar,[data-eeat-byline]:not(.bv-footer){display:none!important;}
+body{padding-top:0!important;}
 </style>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"WebPage","name":"Brevard Lagoon Initiative","about":"Indian River Lagoon restoration","publisher":{"@type":"Organization","name":"Brevard Lagoon Initiative","url":"https://markcmo.com/brevard/"}}</script>
 </head>
 <body>
 <div class="bv-page">
+<nav class="bv-nav" id="mainNav" aria-label="Brevard Lagoon Initiative">
+  <a href="/brevard/" class="bv-brand"><span class="m">&#8776;</span> Lagoon Initiative</a>
+  <div class="bv-navlinks" id="bvnl">
+    <a href="/brevard/">Overview</a>
+    <a href="/brevard/feasibility/">Feasibility</a>
+    <a href="/brevard/plan/">Plan</a>
+    <a href="/brevard/model/">Calculator</a>
+    <a href="/brevard/guide/">Guide</a>
+    <a href="/brevard/oysters/">Oysters</a>
+    <a href="/brevard/funding/">Funding</a>
+  </div>
+  <button class="bv-navtog" aria-label="Menu" onclick="document.getElementById('bvnl').classList.toggle('open')">&#9776;</button>
+</nav>
 
 <header class="bv-hero">
   <div class="bv-wrap">
@@ -377,5 +422,24 @@
 </section>
 
 </div>
+<footer class="bv-footer" data-eeat-byline="v1">
+  <div class="bv-foot-in">
+    <div>
+      <div class="bv-foot-brand">Brevard Lagoon Initiative</div>
+      <p class="bv-foot-desc">An independent, quantitative plan to restore water clarity to the Indian River Lagoon. Prepared by Mark Gabrielli. Planning-grade analysis for public discussion, drawn from FDEP, the Save Our Indian River Lagoon plan, UF and Florida Tech research, and peer-reviewed science.</p>
+    </div>
+    <nav class="bv-foot-links" aria-label="Initiative pages">
+      <a href="/brevard/">Overview</a>
+      <a href="/brevard/feasibility/">Feasibility brief</a>
+      <a href="/brevard/plan/">Action plan</a>
+      <a href="/brevard/model/">Cleanup calculator</a>
+      <a href="/brevard/guide/">Field guide</a>
+      <a href="/brevard/oysters/">Oyster economics</a>
+      <a href="/brevard/funding/">Funding &amp; launch</a>
+      <a href="/brevard/cells/">Demonstration cells</a>
+    </nav>
+  </div>
+  <div class="bv-foot-bar"><span>&copy; 2026 &middot; markcmo.com/brevard</span><a href="mailto:mark@markcmo.com?subject=Brevard%20Lagoon%20Initiative">mark@markcmo.com</a></div>
+</footer>
 </body>
 </html>
