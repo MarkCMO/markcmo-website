@@ -470,7 +470,8 @@ body{padding-top:0!important;}
     var chip=document.getElementById('r_time'),cls='';var timetxt;
     if(nTotal===0){timetxt='Add levers to estimate time-to-impact';}
     else if(v.muck>1000||v.desal>0){timetxt='Time to full impact: 3-7 years (muck / desal are slow builds)';cls='slow';}
-    else if(v.reef>200||v.plant>2){timetxt='Time to full impact: 1-3 years';cls='med';}
+    else if(v.reef>200||v.plant>2||v.mussel>150){timetxt='Time to full impact: 1-3 years (reef / mussel beds establish over seasons)';cls='med';}
+    else if(v.ulva>0){timetxt='Time to visible impact: one warm season - seaweed grows fast (~3.5-day doubling)';}
     else{timetxt='Time to visible impact: under 18 months';}
     chip.textContent=timetxt;chip.className='bv-chip'+(cls?(' '+cls):'');
     var note=document.getElementById('r_note');

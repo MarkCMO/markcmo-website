@@ -314,6 +314,23 @@ body{padding-top:0!important;}
 .bv-band::before{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(243,250,248,.0) 60%,rgba(243,250,248,1));}
 </style>
 <script type="application/ld+json">{"@context":"https://schema.org","@type":"WebPage","name":"Brevard Lagoon Initiative","about":"Indian River Lagoon restoration","publisher":{"@type":"Organization","name":"Brevard Lagoon Initiative","url":"https://markcmo.com/brevard/"}}</script>
+<style>
+  .bv-printbar{display:flex;gap:12px;flex-wrap:wrap;align-items:center;margin-top:22px}
+  @media print{
+    #mainNav,.bv-nav,.bv-footer,.bv-printbar,.bv-pagenav,[data-eeat-byline]{display:none!important}
+    .bv-page{background:#fff!important;color:#12292B!important}
+    .bv-page h1,.bv-page h2{color:#0A4B43!important}
+    .bv-hero{padding:0 0 12pt!important;background:#fff!important}
+    .bv-hero.pic::before,.bv-hero::after{display:none!important}
+    .bv-hero h1,.bv-hero .bv-lede,.bv-hero .bv-eyebrow,.bv-hero .bv-crumb{color:#12292B!important;text-shadow:none!important}
+    .bv-card,.bv-callout,.bv-feature{background:#F3F8F6!important;border-color:#dbe6e3!important;color:#12292B!important}
+    .bv-feature,.bv-feature p,.bv-feature strong{color:#12292B!important}
+    .bv-stat .n,.bv-eyebrow{color:#0E8C80!important}
+    body{padding-top:0!important}
+    a{color:#12292B!important}
+    .bv-section{padding:14pt 0!important;border:none!important}
+  }
+</style>
 </head>
 <body>
 <div class="bv-page">
@@ -338,6 +355,10 @@ body{padding-top:0!important;}
     <div class="bv-eyebrow" style="margin-top:18px">Investor &amp; partner summary</div>
     <h1>A campus that cleans a lagoon</h1>
     <p class="bv-lede">One Port Canaveral operation - water, salt, bottled water, shrimp, seaweed, and shellfish - built so the products pay for the cleanup. A food-and-water business whose output is a clearer Indian River Lagoon.</p>
+    <div class="bv-printbar">
+      <button class="bv-btn" onclick="window.print()">Print / Save as PDF</button>
+      <a class="bv-btn ghost" href="/brevard/">Explore the full plan</a>
+    </div>
   </div>
 </header>
 
