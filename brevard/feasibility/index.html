@@ -190,20 +190,46 @@
 .bv-phase p{font-size:14.5px;color:var(--bv-muted);margin:0;}
 
 /* ---- deck cards (hub) ---- */
-.bv-decks{display:grid;grid-template-columns:repeat(2,1fr);gap:20px;}
+.bv-decks{display:grid;grid-template-columns:repeat(2,1fr);gap:22px;counter-reset:deck;}
 @media(max-width:760px){.bv-decks{grid-template-columns:1fr;}}
-.bv-deck{display:block;background:var(--bv-surface);border:1px solid var(--bv-line);border-radius:18px;padding:26px;box-shadow:var(--bv-shadow);transition:transform .18s ease,box-shadow .18s ease,border-color .18s ease;position:relative;overflow:hidden;color:var(--bv-ink);}
-.bv-deck::before{content:"";position:absolute;top:0;left:0;bottom:0;width:5px;background:linear-gradient(180deg,var(--bv-aqua),var(--bv-sky));}
-.bv-deck:nth-child(2)::before{background:linear-gradient(180deg,#1C7FA6,#33ADD8);}
-.bv-deck:nth-child(3)::before{background:linear-gradient(180deg,#3DA76A,#0FB2A3);}
-.bv-deck:nth-child(4)::before{background:linear-gradient(180deg,#EFA53A,#F0664A);}
-.bv-deck:nth-child(5)::before{background:linear-gradient(180deg,#0FB2A3,#1C7FA6);}
-.bv-deck:nth-child(6)::before{background:linear-gradient(180deg,#F0664A,#EFA53A);}
-.bv-deck:hover{transform:translateY(-4px);box-shadow:var(--bv-shadow-lg);border-color:var(--bv-line2);text-decoration:none;}
-.bv-deck .tag{font-family:var(--bv-mono);font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--bv-aqua-d);font-weight:600;}
-.bv-deck h3{font-size:23px;margin:8px 0 9px;}
-.bv-deck p{font-size:14.5px;color:var(--bv-muted);margin:0 0 15px;}
-.bv-deck .go{font-family:var(--bv-mono);font-size:12.5px;color:var(--bv-aqua-d);font-weight:600;}
+/* per-card color identity */
+.bv-deck{--c1:#0FB2A3;--c2:#33ADD8;--wash:rgba(15,178,163,.09);--glow:rgba(15,178,163,.34);}
+.bv-deck:nth-child(2){--c1:#1C7FA6;--c2:#33ADD8;--wash:rgba(28,127,166,.09);--glow:rgba(28,127,166,.32);}
+.bv-deck:nth-child(3){--c1:#3DA76A;--c2:#0FB2A3;--wash:rgba(61,167,106,.10);--glow:rgba(61,167,106,.32);}
+.bv-deck:nth-child(4){--c1:#EF9A3A;--c2:#F0664A;--wash:rgba(239,150,58,.11);--glow:rgba(239,120,74,.34);}
+.bv-deck:nth-child(5){--c1:#0FB2A3;--c2:#1C7FA6;--wash:rgba(15,178,163,.09);--glow:rgba(15,178,163,.32);}
+.bv-deck:nth-child(6){--c1:#F0664A;--c2:#EFA53A;--wash:rgba(240,102,74,.10);--glow:rgba(240,102,74,.34);}
+.bv-deck:nth-child(7){--c1:#33ADD8;--c2:#0FB2A3;--wash:rgba(51,173,216,.11);--glow:rgba(51,173,216,.32);}
+.bv-deck:nth-child(8){--c1:#1C7FA6;--c2:#3DA76A;--wash:rgba(28,127,166,.09);--glow:rgba(28,127,166,.32);}
+.bv-deck:nth-child(9){--c1:#3DA76A;--c2:#33ADD8;--wash:rgba(61,167,106,.10);--glow:rgba(61,167,106,.32);}
+.bv-deck:nth-child(10){--c1:#EFA53A;--c2:#0FB2A3;--wash:rgba(239,165,58,.11);--glow:rgba(239,165,58,.32);}
+.bv-deck{counter-increment:deck;display:block;position:relative;overflow:hidden;color:var(--bv-ink);
+  background:var(--bv-surface);border:1px solid var(--bv-line);border-radius:20px;padding:30px 28px 26px;
+  box-shadow:var(--bv-shadow);isolation:isolate;
+  transition:transform .24s cubic-bezier(.2,.75,.25,1),box-shadow .24s ease,border-color .24s ease;}
+/* soft corner color wash */
+.bv-deck::before{content:"";position:absolute;inset:0;z-index:-1;pointer-events:none;
+  background:radial-gradient(130% 100% at 100% 0%,var(--wash),transparent 62%);
+  transition:opacity .24s ease;opacity:.85;}
+/* big ghost numeral, top-right */
+.bv-deck::after{content:counter(deck,decimal-leading-zero);position:absolute;top:12px;right:20px;z-index:-1;
+  font-family:var(--bv-display);font-weight:400;font-size:64px;line-height:1;letter-spacing:.02em;
+  color:var(--c1);opacity:.12;pointer-events:none;
+  transition:opacity .24s ease,transform .24s cubic-bezier(.2,.75,.25,1);}
+.bv-deck:hover{transform:translateY(-6px);border-color:transparent;text-decoration:none;
+  box-shadow:0 22px 44px -20px var(--glow),0 10px 22px -14px rgba(11,90,82,.28);}
+.bv-deck:hover::before{opacity:1;}
+.bv-deck:hover::after{opacity:.20;transform:scale(1.08) rotate(-2deg);}
+.bv-deck:focus-visible{outline:none;border-color:transparent;box-shadow:0 0 0 3px var(--glow),var(--bv-shadow-lg);}
+/* gradient category pill */
+.bv-deck .tag{display:inline-block;font-family:var(--bv-mono);font-size:10.5px;letter-spacing:.14em;
+  text-transform:uppercase;font-weight:600;color:#fff;padding:6px 13px;border-radius:999px;
+  background:linear-gradient(135deg,var(--c1),var(--c2));box-shadow:0 5px 12px -5px var(--glow);}
+.bv-deck h3{font-size:24px;margin:15px 0 9px;}
+.bv-deck p{font-size:14.5px;color:var(--bv-muted);margin:0 0 18px;max-width:40ch;}
+.bv-deck .go{display:inline-block;font-family:var(--bv-mono);font-size:12.5px;font-weight:600;color:var(--c1);
+  transition:transform .2s ease,color .2s ease;}
+.bv-deck:hover .go{transform:translateX(5px);color:var(--c2);}
 
 /* ---- page nav ---- */
 .bv-pagenav{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;padding:32px 0 4px;border-top:1px solid var(--bv-line);margin-top:26px;}
@@ -362,6 +388,7 @@ body{padding-top:0!important;}
       <li><b>The lagoon is a bathtub with the drain half-plugged.</b> A 50+ mile inlet-free barrier island and the Port Canaveral lock mean water sits 148 to 220+ days in north Brevard versus 2 to 16 days near Sebastian. Poor flushing is the root cause.</li>
       <li><b>Muck is the biggest nitrogen source, not fertilizer.</b> Bottom muck is ~35%, sewage and septic ~26%, lawn fertilizer barely 6%.</li>
       <li><b>Oysters must be sized by nitrogen removed, not the "50 gallons a day" headline.</b> To offset the regulator-required cut you need ~850 to 2,840 acres of reef, at ~$43M to $344M.</li>
+      <li><b>But oysters are not the cheapest filter.</b> Fast-growing macroalgae (Ulva) and self-reproducing clams and ribbed mussels pull nitrogen at roughly <b>$36 to $160 per pound</b> versus oyster reef at ~$392 - and Ulva regrows in a single warm season and can be harvested for revenue. The <a href="/brevard/plan/">action plan</a> ranks every lever by cost per pound.</li>
       <li><b>Desalination is a water utility, not a lagoon cure.</b> At 25 MGD it would take ~23 years to cycle the lagoon once, and it concentrates nutrients into a brine that must be injected deep underground.</li>
     </ul>
   </div>

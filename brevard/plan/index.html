@@ -190,20 +190,46 @@
 .bv-phase p{font-size:14.5px;color:var(--bv-muted);margin:0;}
 
 /* ---- deck cards (hub) ---- */
-.bv-decks{display:grid;grid-template-columns:repeat(2,1fr);gap:20px;}
+.bv-decks{display:grid;grid-template-columns:repeat(2,1fr);gap:22px;counter-reset:deck;}
 @media(max-width:760px){.bv-decks{grid-template-columns:1fr;}}
-.bv-deck{display:block;background:var(--bv-surface);border:1px solid var(--bv-line);border-radius:18px;padding:26px;box-shadow:var(--bv-shadow);transition:transform .18s ease,box-shadow .18s ease,border-color .18s ease;position:relative;overflow:hidden;color:var(--bv-ink);}
-.bv-deck::before{content:"";position:absolute;top:0;left:0;bottom:0;width:5px;background:linear-gradient(180deg,var(--bv-aqua),var(--bv-sky));}
-.bv-deck:nth-child(2)::before{background:linear-gradient(180deg,#1C7FA6,#33ADD8);}
-.bv-deck:nth-child(3)::before{background:linear-gradient(180deg,#3DA76A,#0FB2A3);}
-.bv-deck:nth-child(4)::before{background:linear-gradient(180deg,#EFA53A,#F0664A);}
-.bv-deck:nth-child(5)::before{background:linear-gradient(180deg,#0FB2A3,#1C7FA6);}
-.bv-deck:nth-child(6)::before{background:linear-gradient(180deg,#F0664A,#EFA53A);}
-.bv-deck:hover{transform:translateY(-4px);box-shadow:var(--bv-shadow-lg);border-color:var(--bv-line2);text-decoration:none;}
-.bv-deck .tag{font-family:var(--bv-mono);font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--bv-aqua-d);font-weight:600;}
-.bv-deck h3{font-size:23px;margin:8px 0 9px;}
-.bv-deck p{font-size:14.5px;color:var(--bv-muted);margin:0 0 15px;}
-.bv-deck .go{font-family:var(--bv-mono);font-size:12.5px;color:var(--bv-aqua-d);font-weight:600;}
+/* per-card color identity */
+.bv-deck{--c1:#0FB2A3;--c2:#33ADD8;--wash:rgba(15,178,163,.09);--glow:rgba(15,178,163,.34);}
+.bv-deck:nth-child(2){--c1:#1C7FA6;--c2:#33ADD8;--wash:rgba(28,127,166,.09);--glow:rgba(28,127,166,.32);}
+.bv-deck:nth-child(3){--c1:#3DA76A;--c2:#0FB2A3;--wash:rgba(61,167,106,.10);--glow:rgba(61,167,106,.32);}
+.bv-deck:nth-child(4){--c1:#EF9A3A;--c2:#F0664A;--wash:rgba(239,150,58,.11);--glow:rgba(239,120,74,.34);}
+.bv-deck:nth-child(5){--c1:#0FB2A3;--c2:#1C7FA6;--wash:rgba(15,178,163,.09);--glow:rgba(15,178,163,.32);}
+.bv-deck:nth-child(6){--c1:#F0664A;--c2:#EFA53A;--wash:rgba(240,102,74,.10);--glow:rgba(240,102,74,.34);}
+.bv-deck:nth-child(7){--c1:#33ADD8;--c2:#0FB2A3;--wash:rgba(51,173,216,.11);--glow:rgba(51,173,216,.32);}
+.bv-deck:nth-child(8){--c1:#1C7FA6;--c2:#3DA76A;--wash:rgba(28,127,166,.09);--glow:rgba(28,127,166,.32);}
+.bv-deck:nth-child(9){--c1:#3DA76A;--c2:#33ADD8;--wash:rgba(61,167,106,.10);--glow:rgba(61,167,106,.32);}
+.bv-deck:nth-child(10){--c1:#EFA53A;--c2:#0FB2A3;--wash:rgba(239,165,58,.11);--glow:rgba(239,165,58,.32);}
+.bv-deck{counter-increment:deck;display:block;position:relative;overflow:hidden;color:var(--bv-ink);
+  background:var(--bv-surface);border:1px solid var(--bv-line);border-radius:20px;padding:30px 28px 26px;
+  box-shadow:var(--bv-shadow);isolation:isolate;
+  transition:transform .24s cubic-bezier(.2,.75,.25,1),box-shadow .24s ease,border-color .24s ease;}
+/* soft corner color wash */
+.bv-deck::before{content:"";position:absolute;inset:0;z-index:-1;pointer-events:none;
+  background:radial-gradient(130% 100% at 100% 0%,var(--wash),transparent 62%);
+  transition:opacity .24s ease;opacity:.85;}
+/* big ghost numeral, top-right */
+.bv-deck::after{content:counter(deck,decimal-leading-zero);position:absolute;top:12px;right:20px;z-index:-1;
+  font-family:var(--bv-display);font-weight:400;font-size:64px;line-height:1;letter-spacing:.02em;
+  color:var(--c1);opacity:.12;pointer-events:none;
+  transition:opacity .24s ease,transform .24s cubic-bezier(.2,.75,.25,1);}
+.bv-deck:hover{transform:translateY(-6px);border-color:transparent;text-decoration:none;
+  box-shadow:0 22px 44px -20px var(--glow),0 10px 22px -14px rgba(11,90,82,.28);}
+.bv-deck:hover::before{opacity:1;}
+.bv-deck:hover::after{opacity:.20;transform:scale(1.08) rotate(-2deg);}
+.bv-deck:focus-visible{outline:none;border-color:transparent;box-shadow:0 0 0 3px var(--glow),var(--bv-shadow-lg);}
+/* gradient category pill */
+.bv-deck .tag{display:inline-block;font-family:var(--bv-mono);font-size:10.5px;letter-spacing:.14em;
+  text-transform:uppercase;font-weight:600;color:#fff;padding:6px 13px;border-radius:999px;
+  background:linear-gradient(135deg,var(--c1),var(--c2));box-shadow:0 5px 12px -5px var(--glow);}
+.bv-deck h3{font-size:24px;margin:15px 0 9px;}
+.bv-deck p{font-size:14.5px;color:var(--bv-muted);margin:0 0 18px;max-width:40ch;}
+.bv-deck .go{display:inline-block;font-family:var(--bv-mono);font-size:12.5px;font-weight:600;color:var(--c1);
+  transition:transform .2s ease,color .2s ease;}
+.bv-deck:hover .go{transform:translateX(5px);color:var(--c2);}
 
 /* ---- page nav ---- */
 .bv-pagenav{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;padding:32px 0 4px;border-top:1px solid var(--bv-line);margin-top:26px;}
@@ -338,20 +364,23 @@ body{padding-top:0!important;}
 <header class="bv-hero pic" style="background-image:url('https://live.staticflickr.com/526/18563814131_2e4f68179b_b.jpg')">
   <div class="bv-wrap">
     <div class="bv-crumb"><a href="/brevard/">Brevard Lagoon Initiative</a> / Action Plan</div>
-    <div class="bv-eyebrow" style="margin-top:18px">Document 02 &middot; The fast, cheap, visible path</div>
+    <div class="bv-eyebrow" style="margin-top:18px">The fast, cheap, visible path</div>
     <h1>The action plan</h1>
-    <p class="bv-lede">Optimizing for the most nitrogen removed per dollar in the least time. The surprising result: the oyster mega-reef and the desalination plant are not the quick wins.</p>
+    <p class="bv-lede">Optimizing for the most nitrogen removed per dollar in the least time. The surprising result: fast-growing macroalgae and self-reproducing shellfish are the cheapest nitrogen in the lagoon, while the oyster mega-reef and the desalination plant are the slow, expensive scale plays - not the quick wins.</p>
   </div>
 </header>
 
 <!-- RANKING -->
 <section class="bv-section">
   <div class="bv-wrap">
-    <div class="bv-sechead"><div class="bv-secnum">01</div><div><h2 class="bv-h2">Rank by cost per pound</h2><div class="bv-sub">Brevard already publishes the answer. Cheapest to most expensive, dollars per pound of nitrogen per year:</div></div></div>
+    <div class="bv-sechead"><div class="bv-secnum">01</div><div><h2 class="bv-h2">Rank by cost per pound</h2><div class="bv-sub">Brevard already publishes most of this. Cheapest to most expensive, dollars per pound of nitrogen per year - with the aquaculture levers (macroalgae, clams, mussels) added in:</div></div></div>
     <div class="bv-bars" aria-label="Cost per pound of nitrogen removed by intervention">
+      <div class="row"><div class="lab">Macroalgae / Ulva biofilter<small>one warm season</small></div><div class="bv-bar"><span class="g" style="width:4.1%">$36</span></div></div>
       <div class="row"><div class="lab">Fertilizer / education<small>policy - immediate</small></div><div class="bv-bar"><span class="g" style="width:5.6%">$49</span></div></div>
+      <div class="row"><div class="lab">Clams (drone-seeded)<small>months, self-seeding</small></div><div class="bv-bar"><span class="g" style="width:5.7%">$50</span></div></div>
       <div class="row"><div class="lab">Stormwater baffle boxes<small>weeks to months</small></div><div class="bv-bar"><span class="g" style="width:10.1%">$88</span></div></div>
       <div class="row"><div class="lab">Palm Bay-type plant upgrade<small>1 to 3 years</small></div><div class="bv-bar"><span class="g" style="width:14.3%">$125</span></div></div>
+      <div class="row"><div class="lab">Ribbed mussels<small>self-recruiting</small></div><div class="bv-bar"><span class="a" style="width:18.3%">$160</span></div></div>
       <div class="row"><div class="lab">Muck water treatment<small>vacuum + polish</small></div><div class="bv-bar"><span class="a" style="width:20.1%">$175</span></div></div>
       <div class="row"><div class="lab">Living shorelines<small>months</small></div><div class="bv-bar"><span class="a" style="width:20.6%">$180</span></div></div>
       <div class="row"><div class="lab">Plant upgrades (avg)<small>1 to 3 years</small></div><div class="bv-bar"><span class="a" style="width:26.5%">$231</span></div></div>
@@ -363,9 +392,9 @@ body{padding-top:0!important;}
     </div>
     <div class="bv-callout good">
       <h4>What the ranking tells you</h4>
-      <p style="margin:0"><b>Baffle boxes ($88/lb) win on both axes</b> - cheapest and installable in weeks. Cheap plant upgrades ($125/lb, 11,000+ lbs each) are the best big-block buys. <b>Oyster reef ($392) and septic-to-sewer ($443 to $872) are 4 to 10x more expensive per pound</b> - worth doing at scale later, wrong place to start.</p>
+      <p style="margin:0"><b>Macroalgae (Ulva, ~$36/lb) and self-reproducing bivalves - clams (~$50) and ribbed mussels (~$160) - are now the cheapest nitrogen in the lagoon</b>, and they regrow themselves instead of needing to be rebuilt. Baffle boxes ($88) stay the best gray-infrastructure buy, installable in weeks, and cheap plant upgrades ($125/lb, 11,000+ lbs each) are the best big-block buys. <b>Oyster reef ($392) and septic-to-sewer ($443 to $872) run 11 to 24x the cost of Ulva per pound</b> - worth doing at scale later, wrong place to start.</p>
     </div>
-    <p class="bv-muted" style="font-size:15px">Two footnotes: muck dredging looks mid-pack per annual pound but removed legacy nitrogen at only <b>~$10/lb</b> at Eau Gallie, and it deletes 35% of the load permanently. And <b>clams rewrite the bivalve math</b> - seed is ~$6,000 per million and a drone covers an acre in 15 minutes, versus oyster reef at $392/lb.</p>
+    <p class="bv-muted" style="font-size:15px">Two footnotes. Muck dredging looks mid-pack per annual pound but removed legacy nitrogen at only <b>~$10/lb</b> at Eau Gallie and deletes 35% of the load permanently. And the top of this list understates its own case: <b>Ulva, clams, and mussels reproduce themselves</b>, so the seed is a one-time cost while the filtration compounds - and the biomass can be harvested and sold as seaweed or an <a href="/brevard/macroalgae/">IMTA shrimp crop</a>, which no pipe or drainfield can do. Desalination is left off this chart on purpose - it is funded by water and salt revenue, not by cost per pound.</p>
   </div>
 </section>
 
@@ -375,12 +404,12 @@ body{padding-top:0!important;}
     <div class="bv-sechead"><div class="bv-secnum">02</div><div><h2 class="bv-h2">The three-layer strategy</h2><div class="bv-sub">Stop new nitrogen cheaply, prove a visible win fast, then buy the biggest cheap blocks.</div></div></div>
     <div class="bv-grid three">
       <div class="bv-card"><div style="font-family:var(--bv-mono);font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--bv-aqua)">Layer 1 &middot; 0-6 mo</div><h3 style="font-size:18px;margin:6px 0 8px">Turn off the cheapest taps</h3><p class="bv-muted" style="margin:0;font-size:14.5px">Baffle boxes at the worst outfalls plus fertilizer enforcement. Cheapest dollars per pound, installed in weeks, no science risk.</p></div>
-      <div class="bv-card"><div style="font-family:var(--bv-mono);font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--bv-aqua)">Layer 2 &middot; 6-18 mo</div><h3 style="font-size:18px;margin:6px 0 8px">Win visibly in the canals</h3><p class="bv-muted" style="margin:0;font-size:14.5px">Five demonstration cells: vacuum muck, seed clams, hang oysters, float wetlands, aerate. Water clears in one season - the proof that unlocks funding.</p></div>
-      <div class="bv-card"><div style="font-family:var(--bv-mono);font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--bv-aqua)">Layer 3 &middot; 1-3 yr</div><h3 style="font-size:18px;margin:6px 0 8px">Buy the biggest cheap blocks</h3><p class="bv-muted" style="margin:0;font-size:14.5px">Cheap plant upgrades (~11,000 lbs each at $125/lb) and muck removal in the worst hotspots. Large permanent removals at low unit cost.</p></div>
+      <div class="bv-card"><div style="font-family:var(--bv-mono);font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--bv-aqua)">Layer 2 &middot; 6-18 mo</div><h3 style="font-size:18px;margin:6px 0 8px">Win visibly in the canals</h3><p class="bv-muted" style="margin:0;font-size:14.5px">Five demonstration cells: vacuum muck, grow Ulva biofilters, seed clams and ribbed mussels, hang oysters, float wetlands, aerate. Water clears in one season - the proof that unlocks funding.</p></div>
+      <div class="bv-card"><div style="font-family:var(--bv-mono);font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--bv-aqua)">Layer 3 &middot; 1-3 yr</div><h3 style="font-size:18px;margin:6px 0 8px">Buy the biggest cheap blocks</h3><p class="bv-muted" style="margin:0;font-size:14.5px">Cheap plant upgrades (~11,000 lbs each at $125/lb), muck removal in the worst hotspots, and scaled macroalgae and shellfish beds. Large permanent removals at low unit cost - some of it harvestable for revenue.</p></div>
     </div>
     <div class="bv-feature" style="margin-top:18px">
       <div class="h">Why not lead with oysters or desal</div>
-      <p>A well-flushed open lagoon will <strong>not</strong> show a fast visible clarity change from bivalves at any achievable density - that is a measured finding. So oysters and clams pay off slowly and at scale, and desalination is a 5-to-7-year build. Leading with <strong>baffle boxes + demonstration cells + cheap plant upgrades</strong> delivers measurable nitrogen cuts and visible clear water inside 18 months, for single-digit millions.</p>
+      <p>A well-flushed open lagoon will <strong>not</strong> show a fast visible clarity change from bivalves at any achievable density - that is a measured finding. So the <strong>oyster mega-reef pays off slowly and at scale</strong>, and desalination is a 5-to-7-year build. The fast levers are different: baffle boxes, muck vacuuming, and - inside the small, poorly-flushed demonstration cells - <strong>fast-growing macroalgae and dense shellfish</strong>, which turn a confined canal visibly clear in a single warm season because the filters lap the water faster than it refills. Lead with those and you get measurable nitrogen cuts and clear water inside 18 months, for single-digit millions.</p>
     </div>
   </div>
 </section>
@@ -396,7 +425,7 @@ body{padding-top:0!important;}
           <tr class="hi"><td>20 nutrient-separating baffle boxes</td><td class="num">$1.5M</td><td><span class="bv-pill good">weeks each</span></td><td>Cheapest ongoing N removal</td></tr>
           <tr class="hi"><td>5 canal demonstration cells</td><td class="num">$1.4M</td><td><span class="bv-pill good">1 season</span></td><td>Visible clear water; the proof</td></tr>
           <tr><td>Co-fund 1 plant nutrient upgrade</td><td class="num">$1.4M</td><td><span class="bv-pill muck">1-3 yr</span></td><td>~11,000 lbs N/yr at $125/lb</td></tr>
-          <tr><td>Lagoon-wide clam seeding (500 ac)</td><td class="num">$0.4M</td><td><span class="bv-pill muck">matures 12-16 mo</span></td><td>Cheap biomass for scale</td></tr>
+          <tr><td>Macroalgae, clam &amp; mussel starter (500 ac)</td><td class="num">$0.4M</td><td><span class="bv-pill muck">matures 12-16 mo</span></td><td>Cheapest N; self-reproducing + harvest revenue</td></tr>
           <tr><td>Monitoring + credit certification</td><td class="num">$0.3M</td><td><span class="bv-pill good">continuous</span></td><td>Data + sellable credits</td></tr>
           <tr class="total"><td>Flagship total</td><td class="num">~$5.0M</td><td></td><td>Mostly grant-eligible</td></tr>
         </tbody>
@@ -444,6 +473,10 @@ body{padding-top:0!important;}
       <li><b>B and C work</b> - sell water at ~$5/1,000 gal, or treat the estuary intake and injection well (~$40M) as grant-funded restoration infrastructure. Both clear a healthy 1.4-1.5x coverage.</li>
       <li><b>Non-negotiable:</b> the brine goes down a Class I injection well (~$7-10M each), never back to the lagoon.</li>
     </ul>
+
+    <h3 style="margin:26px 0 10px;font-size:19px">Aquaculture revenue (macroalgae, shellfish &amp; IMTA shrimp)</h3>
+    <p>The cheapest cleanup levers are also the only ones that pay you back. The same Ulva, clams, and mussels doing the filtering are a harvestable crop, and stacking shrimp on top in an integrated multi-trophic loop (IMTA) turns the filtration beds into a working farm. It is the one line on this page that generates cash from day one instead of drawing on grants - the full unit economics, grow-out math, and revenue stack live on the <a href="/brevard/macroalgae/">aquaculture</a> and <a href="/brevard/venture/">venture</a> pages.</p>
+    <div class="bv-callout good"><h4>Three revenue engines, one cleanup</h4><p style="margin:0">Nutrient credits monetize the pounds removed, the desalination utility sells water and salt, and the aquaculture beds sell biomass and shrimp. Restoration stops being a pure cost center and starts carrying part of its own weight.</p></div>
   </div>
 </section>
 
@@ -466,7 +499,7 @@ body{padding-top:0!important;}
     <p class="bv-muted" style="font-size:15px">The standard structure: a public or nonprofit partner (Brevard County, a city, a university, or Brevard Zoo's Restore Our Shores) is the grantee of record; the private venture is the contractor, technology provider, or operator, and owns the pieces it can hold outright - the nutrient-credit area and the desalination utility. Note: the <b>RESTORE Act does not apply</b> - that is Gulf-coast-only money; Brevard is Atlantic.</p>
     <div class="bv-feature" style="margin-top:8px">
       <div class="h">The honest verdict</div>
-      <p>Oysters are the best living answer at scale, and desalination is a real self-funding water utility - but neither works on dirty, stagnant water. <strong>Muck removal and sewage control come first</strong> (61% of the nitrogen), the <strong>baffle boxes and demonstration cells deliver the fast visible win</strong>, and the big permanent builds follow the proof. Fund the flagship, and the rest follows.</p>
+      <p>Oysters are the best living answer at scale, and desalination is a real self-funding water utility - but neither works on dirty, stagnant water, and neither is the fast lever. <strong>Muck removal and sewage control come first</strong> (61% of the nitrogen); <strong>baffle boxes, muck vacuuming, and fast-growing macroalgae plus dense shellfish in the demonstration cells deliver the visible win</strong> in one season; and the big permanent builds - the oyster mega-reef, the desalination utility - follow the proof. The aquaculture beds are the cheapest nitrogen of all and pay part of their own way. Fund the flagship, and the rest follows.</p>
     </div>
     <div class="bv-btnrow" style="margin-top:22px">
       <a href="/brevard/model/" class="bv-btn">Model it yourself</a>
