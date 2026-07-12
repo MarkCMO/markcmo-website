@@ -3,12 +3,12 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Cleanup Calculator - Brevard Lagoon Initiative</title>
-<meta name="description" content="Interactive model for cleaning the Brevard Indian River Lagoon. Move the levers and see nitrogen removed, cost per pound, progress to the legal targets, and nutrient-credit revenue update live.">
-<link rel="canonical" href="https://markcmo.com/brevard/model/">
-<meta property="og:title" content="Brevard Lagoon Cleanup Calculator">
-<meta property="og:description" content="Move the levers - baffle boxes, clams, oyster reef, muck, desal - and watch the nitrogen, cost, and targets update live.">
-<meta property="og:url" content="https://markcmo.com/brevard/model/">
+<title>The Venture - Investor &amp; Partner Summary - Brevard Lagoon Initiative</title>
+<meta name="description" content="A one-page summary of the Port Canaveral venture: water, salt, WETYR bottled water, shrimp, seaweed, and shellfish - a self-funding campus whose product is a cleaner Indian River Lagoon.">
+<link rel="canonical" href="https://markcmo.com/brevard/venture/">
+<meta property="og:title" content="The Venture - A Self-Funding Campus That Cleans a Lagoon">
+<meta property="og:description" content="Water, salt, WETYR water, shrimp, seaweed, shellfish, and nitrogen credits - the whole venture on one page.">
+<meta property="og:url" content="https://markcmo.com/brevard/venture/">
 <link rel="stylesheet" href="/style.css">
 <style id="bv-css">
 /* ============================================================
@@ -316,7 +316,6 @@ body{padding-top:0!important;}
 <script type="application/ld+json">{"@context":"https://schema.org","@type":"WebPage","name":"Brevard Lagoon Initiative","about":"Indian River Lagoon restoration","publisher":{"@type":"Organization","name":"Brevard Lagoon Initiative","url":"https://markcmo.com/brevard/"}}</script>
 </head>
 <body>
-
 <div class="bv-page">
 <nav class="bv-nav" id="mainNav" aria-label="Brevard Lagoon Initiative">
   <a href="/brevard/" class="bv-brand"><span class="m">&#8776;</span> Lagoon Initiative</a>
@@ -333,156 +332,93 @@ body{padding-top:0!important;}
   <button class="bv-navtog" aria-label="Menu" onclick="document.getElementById('bvnl').classList.toggle('open')">&#9776;</button>
 </nav>
 
-<header class="bv-hero" style="padding-bottom:28px">
-  <div class="bv-wide">
-    <div class="bv-crumb"><a href="/brevard/">Brevard Lagoon Initiative</a> / Cleanup Calculator</div>
-    <div class="bv-eyebrow" style="margin-top:18px">Interactive model</div>
-    <h1 style="font-size:clamp(40px,8vw,84px)">Build your own scenario</h1>
-    <p class="bv-lede" style="max-width:60ch">Move the levers and watch the nitrogen removed, the cost, the cost per pound, and progress toward the legal targets update live. Every coefficient is planning-grade, drawn from Brevard's lagoon plan and peer-reviewed science.</p>
+<header class="bv-hero pic" style="background-image:url('https://live.staticflickr.com/8605/16045757515_84617c432b_b.jpg')">
+  <div class="bv-wrap">
+    <div class="bv-crumb"><a href="/brevard/">Brevard Lagoon Initiative</a> / The Venture</div>
+    <div class="bv-eyebrow" style="margin-top:18px">Investor &amp; partner summary</div>
+    <h1>A campus that cleans a lagoon</h1>
+    <p class="bv-lede">One Port Canaveral operation - water, salt, bottled water, shrimp, seaweed, and shellfish - built so the products pay for the cleanup. A food-and-water business whose output is a clearer Indian River Lagoon.</p>
   </div>
 </header>
 
-<section class="bv-section" style="border-bottom:none">
-  <div class="bv-wide">
-    <div class="bv-model">
-      <div class="bv-controls">
-        <div class="bv-presets">
-          <button data-preset="flagship">Load the $5M flagship</button>
-          <button data-preset="tmdl">Hit Brevard's TMDL</button>
-          <button data-preset="bmap">Hit lagoon-wide BMAP</button>
-          <button data-preset="zero">Clear all</button>
-        </div>
-
-        <div class="bv-lever">
-          <div class="hd"><div class="nm">Stormwater baffle boxes<small>$88/lb &middot; installs in weeks &middot; stops new load</small></div><div class="val"><span id="v_box">20</span> <small>units</small></div></div>
-          <input type="range" id="box" min="0" max="200" step="1" value="20" aria-label="Baffle boxes">
-          <div class="rng"><span>0</span><span>200</span></div>
-        </div>
-        <div class="bv-lever">
-          <div class="hd"><div class="nm">Canal demonstration cells<small>muck + clams + oysters + wetland &middot; visible in 1 season</small></div><div class="val"><span id="v_cell">5</span> <small>cells</small></div></div>
-          <input type="range" id="cell" min="0" max="50" step="1" value="5" aria-label="Demonstration cells">
-          <div class="rng"><span>0</span><span>50</span></div>
-        </div>
-        <div class="bv-lever">
-          <div class="hd"><div class="nm">Clam seeding<small>~$2k/acre all-in &middot; matures 12-16 mo &middot; the scale play</small></div><div class="val"><span id="v_clam">500</span> <small>acres</small></div></div>
-          <input type="range" id="clam" min="0" max="5000" step="50" value="500" aria-label="Clam seeding acres">
-          <div class="rng"><span>0</span><span>5,000</span></div>
-        </div>
-        <div class="bv-lever">
-          <div class="hd"><div class="nm">Oyster reef<small>$392/lb &middot; built structure &middot; permanent living filter</small></div><div class="val"><span id="v_reef">0</span> <small>acres</small></div></div>
-          <input type="range" id="reef" min="0" max="3000" step="10" value="0" aria-label="Oyster reef acres">
-          <div class="rng"><span>0</span><span>3,000</span></div>
-        </div>
-        <div class="bv-lever">
-          <div class="hd"><div class="nm">Macroalgae (Ulva) cages<small>~1,660 lb/acre/yr &middot; most N per acre &middot; must harvest</small></div><div class="val"><span id="v_ulva">0</span> <small>acres</small></div></div>
-          <input type="range" id="ulva" min="0" max="500" step="5" value="0" aria-label="Ulva macroalgae acres">
-          <div class="rng"><span>0</span><span>500</span></div>
-        </div>
-        <div class="bv-lever">
-          <div class="hd"><div class="nm">Ribbed mussel beds<small>~250 lb/acre/yr &middot; native, self-recruiting &middot; brackish</small></div><div class="val"><span id="v_mussel">0</span> <small>acres</small></div></div>
-          <input type="range" id="mussel" min="0" max="500" step="5" value="0" aria-label="Ribbed mussel acres">
-          <div class="rng"><span>0</span><span>500</span></div>
-        </div>
-        <div class="bv-lever">
-          <div class="hd"><div class="nm">Plant nutrient upgrades<small>$125/lb &middot; Palm Bay-type &middot; ~11,000 lbs each</small></div><div class="val"><span id="v_plant">1</span> <small>plants</small></div></div>
-          <input type="range" id="plant" min="0" max="12" step="1" value="1" aria-label="Plant upgrades">
-          <div class="rng"><span>0</span><span>12</span></div>
-        </div>
-        <div class="bv-lever">
-          <div class="hd"><div class="nm">Muck removal<small>$40/cy &middot; deletes the biggest source &middot; slow, 2+ yr</small></div><div class="val"><span id="v_muck">0</span> <small>k cubic yd</small></div></div>
-          <input type="range" id="muck" min="0" max="6000" step="50" value="0" aria-label="Muck removal thousand cubic yards">
-          <div class="rng"><span>0</span><span>6,000k</span></div>
-        </div>
-        <div class="bv-lever">
-          <div class="hd"><div class="nm">Desalination plant<small>self-funding water utility &middot; captures N into brine</small></div><div class="val"><span id="v_desal">0</span> <small>MGD</small></div></div>
-          <input type="range" id="desal" min="0" max="25" step="1" value="0" aria-label="Desalination MGD">
-          <div class="rng"><span>0</span><span>25</span></div>
-        </div>
-        <div class="bv-lever">
-          <div class="hd"><div class="nm">Nutrient credit price<small>Florida market nascent &middot; benchmark $5-50/lb</small></div><div class="val">$<span id="v_credit">10</span> <small>/lb N</small></div></div>
-          <input type="range" id="credit" min="5" max="50" step="1" value="10" aria-label="Nutrient credit price">
-          <div class="rng"><span>$5</span><span>$50</span></div>
-        </div>
-      </div>
-
-      <aside class="bv-results" aria-live="polite">
-        <h3>Scenario result</h3>
-        <div class="bv-headline"><span id="r_n">0</span> <small>lbs of nitrogen removed per year</small></div>
-        <div class="bv-prog"><div class="lab"><span>Brevard TMDL cut (64,372 lbs)</span><b><span id="r_tmdl">0</span>%</b></div><div class="bv-track" id="t_tmdl"><i style="width:0%"></i></div></div>
-        <div class="bv-prog"><div class="lab"><span>Lagoon-wide BMAP (380,239 lbs)</span><b><span id="r_bmap">0</span>%</b></div><div class="bv-track" id="t_bmap"><i style="width:0%"></i></div></div>
-        <div class="bv-prog"><div class="lab"><span>Gross load (3.4M lbs)</span><b><span id="r_gross">0</span>%</b></div><div class="bv-track" id="t_gross"><i style="width:0%"></i></div></div>
-        <div class="bv-rgrid">
-          <div class="bv-rcell"><div class="k">Restoration capital</div><div class="v" id="r_cap">$0</div></div>
-          <div class="bv-rcell"><div class="k">Blended cost / lb-yr</div><div class="v" id="r_cpl">-</div></div>
-          <div class="bv-rcell"><div class="k">Credit revenue / yr</div><div class="v good" id="r_rev">$0</div></div>
-          <div class="bv-rcell"><div class="k">One-time muck N</div><div class="v" id="r_muckn">0 lbs</div></div>
-        </div>
-        <div id="r_time" class="bv-chip">Add levers to estimate time-to-impact</div>
-        <div class="bv-note" id="r_note">Desalination capital is shown separately - it is a water utility that repays itself from water sales, not a grant-funded restoration cost.</div>
-      </aside>
+<section class="bv-section">
+  <div class="bv-wrap">
+    <div class="bv-stats">
+      <div class="bv-stat"><div class="n">6+</div><div class="k">revenue lines from one campus</div></div>
+      <div class="bv-stat"><div class="n">$5M</div><div class="k">phase-1 flagship - visible results in 18 mo</div></div>
+      <div class="bv-stat"><div class="n">~40 ac</div><div class="k">of seaweed covers Brevard's whole TMDL cut</div></div>
+      <div class="bv-stat"><div class="n">net-neg</div><div class="k">nitrogen: the campus removes more than it adds</div></div>
     </div>
-    <p class="bv-disc" style="margin-top:26px;max-width:70ch">Coefficients are planning-grade defaults for scenario exploration, not engineering design values. Sources: Save Our Indian River Lagoon Project Plan (Table 52 cost-per-pound), UF Whitney Laboratory and UF Center for Coastal Solutions (clams), Kellogg et al. (reef nitrogen removal), Tampa Bay Water and Florida brackish-RO data (desal), and Chesapeake / North Carolina nutrient-credit markets. Muck shows both a one-time legacy-mass removal (~4 lbs N per cubic yard) and its annualized flux reduction.</p>
+  </div>
+</section>
+
+<section class="bv-section">
+  <div class="bv-narrow">
+    <div class="bv-eyebrow">The thesis</div>
+    <h2 class="bv-h2" style="margin:12px 0 18px">Make products from the pollution</h2>
+    <p>The Indian River Lagoon is choked with nitrogen. Every tool that removes it - shellfish, seaweed, desalination - also makes something sellable: food, fertilizer, drinking water, salt, and verified nitrogen credits. Co-locate them at Port Canaveral as one campus and the revenue funds the restoration, instead of the restoration depending on grants forever. The lagoon gets cleaner as a <b>byproduct of a profitable operation</b>.</p>
+    <div class="bv-feature">
+      <div class="h">The one-line pitch</div>
+      <p>A <strong>self-funding water and aquaculture campus</strong> at Port Canaveral that supplies Brevard with drinking water, sells salt and seafood, gives away branded WETYR water, and pulls nitrogen out of the Indian River Lagoon - turning a cleanup cost into a business.</p>
+    </div>
+  </div>
+</section>
+
+<section class="bv-section">
+  <div class="bv-wrap">
+    <div class="bv-sechead"><div class="bv-secnum">01</div><div><h2 class="bv-h2">The revenue stack</h2><div class="bv-sub">What the campus sells, and how bankable each line is.</div></div></div>
+    <div class="bv-tablewrap">
+      <table class="bv-table">
+        <thead><tr><th>Product</th><th>Revenue basis</th><th class="num">Confidence</th></tr></thead>
+        <tbody>
+          <tr class="hi"><td>Drinking water</td><td>Municipal water sales (~$4-6/1,000 gal)</td><td class="num"><span class="bv-pill good">Bankable core</span></td></tr>
+          <tr class="hi"><td>Shrimp</td><td>Fresh local shrimp at a premium</td><td class="num"><span class="bv-pill good">Bankable core</span></td></tr>
+          <tr><td>Salt</td><td>Offtake to a salt partner (Morton-style)</td><td class="num"><span class="bv-pill muck">Offsets disposal</span></td></tr>
+          <tr><td>Seaweed (Ulva / Gracilaria)</td><td>Food, biostimulant, feed</td><td class="num"><span class="bv-pill muck">Secondary</span></td></tr>
+          <tr><td>Shellfish (mussels / oysters)</td><td>Seafood + water cleaning</td><td class="num"><span class="bv-pill muck">Secondary</span></td></tr>
+          <tr><td>Nitrogen credits</td><td>Sold to dischargers who owe cuts</td><td class="num"><span class="bv-pill warn">Upside (FL market nascent)</span></td></tr>
+          <tr><td>WETYR Water</td><td>Advertisers pay; water is free</td><td class="num"><span class="bv-pill warn">Brand / awareness</span></td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p class="bv-muted" style="font-size:15px"><b>Water and shrimp carry the economics</b> (proven, high-value, real demand). Salt, seaweed, shellfish, credits, and WETYR Water are the layers that cut disposal cost, add margin, and tell the circular-economy story - real, but sized as upside, not the base case.</p>
+  </div>
+</section>
+
+<section class="bv-section">
+  <div class="bv-wrap">
+    <div class="bv-sechead"><div class="bv-secnum">02</div><div><h2 class="bv-h2">The impact</h2><div class="bv-sub">What the campus actually removes from the lagoon.</div></div></div>
+    <div class="bv-grid two">
+      <div class="bv-card"><h4 style="font-size:16px;margin-bottom:8px">Nitrogen removed</h4><p class="bv-muted" style="margin:0;font-size:15px">~40 acres of seaweed covers Brevard's <b>64,372 lb/yr TMDL</b> cut; ~230 acres covers the lagoon-wide <b>380,239 lb/yr BMAP</b>. A 25 MGD desal plant on lagoon feed pulls another ~65,000 lb/yr, and the contained aquaculture loop runs net-negative. Together, a serious dent in the ~3.4M lb annual load.</p></div>
+      <div class="bv-card"><h4 style="font-size:16px;margin-bottom:8px">Water clarity</h4><p class="bv-muted" style="margin:0;font-size:15px">The <a href="/brevard/plan/">flagship</a> - baffle boxes, muck removal, and canal demonstration cells - delivers <b>visibly clearer water in five neighborhoods within 18 months</b>, the proof that unlocks the campus build-out.</p></div>
+    </div>
+  </div>
+</section>
+
+<section class="bv-section">
+  <div class="bv-wrap">
+    <div class="bv-sechead"><div class="bv-secnum">03</div><div><h2 class="bv-h2">Capital &amp; phasing</h2><div class="bv-sub">Prove it small, then build the campus on the momentum.</div></div></div>
+    <div class="bv-timeline">
+      <div class="bv-phase"><div class="yr">Phase 1 &middot; ~$5M &middot; 18 months</div><h4>The flagship</h4><p>Baffle boxes, canal demonstration cells, a cheap plant upgrade, and clam seeding - largely grant-funded. Delivers visible clear water and the credibility to raise the rest. (See the <a href="/brevard/funding/">funding stack</a>.)</p></div>
+      <div class="bv-phase"><div class="yr">Phase 2 &middot; ~$80-200M</div><h4>The desalination utility</h4><p>Water + salt + nitrogen capture, financed through utility revenue bonds and alternative-water-supply cost-share - it repays itself from water sales.</p></div>
+      <div class="bv-phase"><div class="yr">Phase 3 &middot; modular</div><h4>The aquaculture campus</h4><p>Contained shrimp + seaweed + shellfish modules (~$0.75-1.5M each), scaled as demand and the nitrogen-credit market grow. Private-ownable via a Water Quality Enhancement Area.</p></div>
+    </div>
+    <div class="bv-feature" style="margin-top:20px">
+      <div class="h">The honest verdict</div>
+      <p>This is not a get-rich pitch - it is a <strong>credible, staged, mostly-self-funding way to clean the lagoon</strong> while building real businesses. The water and shrimp are bankable; the salt, seaweed, credits, and WETYR brand are the upside that makes it a circular-economy story a county, a funder, and a partner will all back.</p>
+    </div>
+    <div class="bv-btnrow" style="margin-top:22px">
+      <a href="mailto:mark@markcmo.com?subject=Brevard%20Lagoon%20Venture" class="bv-btn">Talk to Mark</a>
+      <a href="/brevard/" class="bv-btn ghost">Explore the full plan</a>
+    </div>
     <div class="bv-pagenav">
-      <a href="/brevard/plan/">&larr; Action plan</a>
-      <a href="/brevard/guide/">Field guide &rarr;</a>
+      <a href="/brevard/macroalgae/">&larr; Aquaculture</a>
+      <a href="/brevard/">Overview &rarr;</a>
     </div>
   </div>
 </section>
 
 </div>
-
-<script>
-(function(){
-  var C={box:{cost:80000,n:900},cell:{cost:280000,n:1000},clam:{cost:2000,n:40},reef:{cost:105000,n:268},ulva:{cost:60000,n:1660},mussel:{cost:40000,n:250},plant:{cost:1400000,n:11119},muck:{costPerK:40000,nOngoingPerK:99,nOneTimePerK:4000},desal:{costPerMGD:8000000,n:2588}};
-  var TMDL=64372,BMAP=380239,GROSS=3400000;
-  var ids=['box','cell','clam','reef','ulva','mussel','plant','muck','desal','credit'];
-  var el={};ids.forEach(function(k){el[k]=document.getElementById(k);});
-  function fmt(x){return Math.round(x).toLocaleString('en-US');}
-  function money(x){if(x>=1e9)return '$'+(x/1e9).toFixed(2)+'B';if(x>=1e6)return '$'+(x/1e6).toFixed(1)+'M';if(x>=1e3)return '$'+Math.round(x/1e3)+'k';return '$'+Math.round(x);}
-  function setbar(id,pct){var t=document.getElementById(id);t.querySelector('i').style.width=Math.min(100,pct)+'%';t.classList.toggle('over',pct>=100);}
-  function calc(){
-    var v={};ids.forEach(function(k){v[k]=parseFloat(el[k].value);});
-    document.getElementById('v_box').textContent=v.box;
-    document.getElementById('v_cell').textContent=v.cell;
-    document.getElementById('v_clam').textContent=fmt(v.clam);
-    document.getElementById('v_reef').textContent=fmt(v.reef);
-    document.getElementById('v_ulva').textContent=fmt(v.ulva);
-    document.getElementById('v_mussel').textContent=fmt(v.mussel);
-    document.getElementById('v_plant').textContent=v.plant;
-    document.getElementById('v_muck').textContent=fmt(v.muck);
-    document.getElementById('v_desal').textContent=v.desal;
-    document.getElementById('v_credit').textContent=v.credit;
-    var nBox=v.box*C.box.n,nCell=v.cell*C.cell.n,nClam=v.clam*C.clam.n,nReef=v.reef*C.reef.n,nUlva=v.ulva*C.ulva.n,nMussel=v.mussel*C.mussel.n,nPlant=v.plant*C.plant.n,nMuck=v.muck*C.muck.nOngoingPerK,nDesal=v.desal*C.desal.n;
-    var nTotal=nBox+nCell+nClam+nReef+nUlva+nMussel+nPlant+nMuck+nDesal;
-    var muckOneTime=v.muck*C.muck.nOneTimePerK;
-    var capRestore=v.box*C.box.cost+v.cell*C.cell.cost+v.clam*C.clam.cost+v.reef*C.reef.cost+v.ulva*C.ulva.cost+v.mussel*C.mussel.cost+v.plant*C.plant.cost+v.muck*C.muck.costPerK;
-    var capDesal=v.desal*C.desal.costPerMGD;
-    var rev=nTotal*v.credit;var cpl=nTotal>0?capRestore/nTotal:0;
-    document.getElementById('r_n').textContent=fmt(nTotal);
-    document.getElementById('r_tmdl').textContent=Math.round(nTotal/TMDL*100);
-    document.getElementById('r_bmap').textContent=Math.round(nTotal/BMAP*100);
-    document.getElementById('r_gross').textContent=(nTotal/GROSS*100).toFixed(1);
-    setbar('t_tmdl',nTotal/TMDL*100);setbar('t_bmap',nTotal/BMAP*100);setbar('t_gross',nTotal/GROSS*100);
-    document.getElementById('r_cap').textContent=money(capRestore);
-    document.getElementById('r_cpl').textContent=nTotal>0?('$'+Math.round(cpl)+'/lb'):'-';
-    document.getElementById('r_rev').textContent=money(rev)+'/yr';
-    document.getElementById('r_muckn').textContent=fmt(muckOneTime)+' lbs';
-    var chip=document.getElementById('r_time'),cls='';var timetxt;
-    if(nTotal===0){timetxt='Add levers to estimate time-to-impact';}
-    else if(v.muck>1000||v.desal>0){timetxt='Time to full impact: 3-7 years (muck / desal are slow builds)';cls='slow';}
-    else if(v.reef>200||v.plant>2){timetxt='Time to full impact: 1-3 years';cls='med';}
-    else{timetxt='Time to visible impact: under 18 months';}
-    chip.textContent=timetxt;chip.className='bv-chip'+(cls?(' '+cls):'');
-    var note=document.getElementById('r_note');
-    if(capDesal>0){note.textContent='Plus '+money(capDesal)+' desalination capital, shown separately - a water utility that repays itself from water sales. Its brine, with the captured nutrients, must go to a deep injection well.';}
-    else{note.textContent='Restoration capital is largely grant-eligible (SOIRL, NOAA, NFWF). Certified removals can be sold as nutrient credits for the revenue shown.';}
-  }
-  var presets={flagship:{box:20,cell:5,clam:500,reef:0,ulva:0,mussel:0,plant:1,muck:0,desal:0,credit:10},tmdl:{box:40,cell:8,clam:800,reef:100,ulva:15,mussel:0,plant:2,muck:0,desal:0,credit:10},bmap:{box:120,cell:20,clam:3000,reef:850,ulva:150,mussel:80,plant:6,muck:2000,desal:15,credit:15},zero:{box:0,cell:0,clam:0,reef:0,ulva:0,mussel:0,plant:0,muck:0,desal:0,credit:10}};
-  document.querySelectorAll('.bv-presets button').forEach(function(b){b.addEventListener('click',function(){var p=presets[b.dataset.preset];if(!p)return;ids.forEach(function(k){if(p[k]!==undefined)el[k].value=p[k];});calc();});});
-  ids.forEach(function(k){el[k].addEventListener('input',calc);});
-  calc();
-})();
-</script>
 <footer class="bv-footer" data-eeat-byline="v1">
   <div class="bv-foot-in">
     <div>
