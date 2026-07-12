@@ -191,20 +191,46 @@
 .bv-phase p{font-size:14.5px;color:var(--bv-muted);margin:0;}
 
 /* ---- deck cards (hub) ---- */
-.bv-decks{display:grid;grid-template-columns:repeat(2,1fr);gap:20px;}
+.bv-decks{display:grid;grid-template-columns:repeat(2,1fr);gap:22px;counter-reset:deck;}
 @media(max-width:760px){.bv-decks{grid-template-columns:1fr;}}
-.bv-deck{display:block;background:var(--bv-surface);border:1px solid var(--bv-line);border-radius:18px;padding:26px;box-shadow:var(--bv-shadow);transition:transform .18s ease,box-shadow .18s ease,border-color .18s ease;position:relative;overflow:hidden;color:var(--bv-ink);}
-.bv-deck::before{content:"";position:absolute;top:0;left:0;bottom:0;width:5px;background:linear-gradient(180deg,var(--bv-aqua),var(--bv-sky));}
-.bv-deck:nth-child(2)::before{background:linear-gradient(180deg,#1C7FA6,#33ADD8);}
-.bv-deck:nth-child(3)::before{background:linear-gradient(180deg,#3DA76A,#0FB2A3);}
-.bv-deck:nth-child(4)::before{background:linear-gradient(180deg,#EFA53A,#F0664A);}
-.bv-deck:nth-child(5)::before{background:linear-gradient(180deg,#0FB2A3,#1C7FA6);}
-.bv-deck:nth-child(6)::before{background:linear-gradient(180deg,#F0664A,#EFA53A);}
-.bv-deck:hover{transform:translateY(-4px);box-shadow:var(--bv-shadow-lg);border-color:var(--bv-line2);text-decoration:none;}
-.bv-deck .tag{font-family:var(--bv-mono);font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--bv-aqua-d);font-weight:600;}
-.bv-deck h3{font-size:23px;margin:8px 0 9px;}
-.bv-deck p{font-size:14.5px;color:var(--bv-muted);margin:0 0 15px;}
-.bv-deck .go{font-family:var(--bv-mono);font-size:12.5px;color:var(--bv-aqua-d);font-weight:600;}
+/* per-card color identity */
+.bv-deck{--c1:#0FB2A3;--c2:#33ADD8;--wash:rgba(15,178,163,.09);--glow:rgba(15,178,163,.34);}
+.bv-deck:nth-child(2){--c1:#1C7FA6;--c2:#33ADD8;--wash:rgba(28,127,166,.09);--glow:rgba(28,127,166,.32);}
+.bv-deck:nth-child(3){--c1:#3DA76A;--c2:#0FB2A3;--wash:rgba(61,167,106,.10);--glow:rgba(61,167,106,.32);}
+.bv-deck:nth-child(4){--c1:#EF9A3A;--c2:#F0664A;--wash:rgba(239,150,58,.11);--glow:rgba(239,120,74,.34);}
+.bv-deck:nth-child(5){--c1:#0FB2A3;--c2:#1C7FA6;--wash:rgba(15,178,163,.09);--glow:rgba(15,178,163,.32);}
+.bv-deck:nth-child(6){--c1:#F0664A;--c2:#EFA53A;--wash:rgba(240,102,74,.10);--glow:rgba(240,102,74,.34);}
+.bv-deck:nth-child(7){--c1:#33ADD8;--c2:#0FB2A3;--wash:rgba(51,173,216,.11);--glow:rgba(51,173,216,.32);}
+.bv-deck:nth-child(8){--c1:#1C7FA6;--c2:#3DA76A;--wash:rgba(28,127,166,.09);--glow:rgba(28,127,166,.32);}
+.bv-deck:nth-child(9){--c1:#3DA76A;--c2:#33ADD8;--wash:rgba(61,167,106,.10);--glow:rgba(61,167,106,.32);}
+.bv-deck:nth-child(10){--c1:#EFA53A;--c2:#0FB2A3;--wash:rgba(239,165,58,.11);--glow:rgba(239,165,58,.32);}
+.bv-deck{counter-increment:deck;display:block;position:relative;overflow:hidden;color:var(--bv-ink);
+  background:var(--bv-surface);border:1px solid var(--bv-line);border-radius:20px;padding:30px 28px 26px;
+  box-shadow:var(--bv-shadow);isolation:isolate;
+  transition:transform .24s cubic-bezier(.2,.75,.25,1),box-shadow .24s ease,border-color .24s ease;}
+/* soft corner color wash */
+.bv-deck::before{content:"";position:absolute;inset:0;z-index:-1;pointer-events:none;
+  background:radial-gradient(130% 100% at 100% 0%,var(--wash),transparent 62%);
+  transition:opacity .24s ease;opacity:.85;}
+/* big ghost numeral, top-right */
+.bv-deck::after{content:counter(deck,decimal-leading-zero);position:absolute;top:12px;right:20px;z-index:-1;
+  font-family:var(--bv-display);font-weight:400;font-size:64px;line-height:1;letter-spacing:.02em;
+  color:var(--c1);opacity:.12;pointer-events:none;
+  transition:opacity .24s ease,transform .24s cubic-bezier(.2,.75,.25,1);}
+.bv-deck:hover{transform:translateY(-6px);border-color:transparent;text-decoration:none;
+  box-shadow:0 22px 44px -20px var(--glow),0 10px 22px -14px rgba(11,90,82,.28);}
+.bv-deck:hover::before{opacity:1;}
+.bv-deck:hover::after{opacity:.20;transform:scale(1.08) rotate(-2deg);}
+.bv-deck:focus-visible{outline:none;border-color:transparent;box-shadow:0 0 0 3px var(--glow),var(--bv-shadow-lg);}
+/* gradient category pill */
+.bv-deck .tag{display:inline-block;font-family:var(--bv-mono);font-size:10.5px;letter-spacing:.14em;
+  text-transform:uppercase;font-weight:600;color:#fff;padding:6px 13px;border-radius:999px;
+  background:linear-gradient(135deg,var(--c1),var(--c2));box-shadow:0 5px 12px -5px var(--glow);}
+.bv-deck h3{font-size:24px;margin:15px 0 9px;}
+.bv-deck p{font-size:14.5px;color:var(--bv-muted);margin:0 0 18px;max-width:40ch;}
+.bv-deck .go{display:inline-block;font-family:var(--bv-mono);font-size:12.5px;font-weight:600;color:var(--c1);
+  transition:transform .2s ease,color .2s ease;}
+.bv-deck:hover .go{transform:translateX(5px);color:var(--c2);}
 
 /* ---- page nav ---- */
 .bv-pagenav{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;padding:32px 0 4px;border-top:1px solid var(--bv-line);margin-top:26px;}
@@ -393,55 +419,55 @@ body{padding-top:0!important;}
     <div class="bv-sechead"><div class="bv-secnum">/</div><div><h2 class="bv-h2">Explore the plan</h2><div class="bv-sub">Four documents and one live tool. Each stands alone and links back here.</div></div></div>
     <div class="bv-decks">
       <a class="bv-deck" href="/brevard/feasibility/">
-        <div class="tag">Document 01</div>
+        <div class="tag">The full picture</div>
         <h3>Feasibility brief</h3>
         <p>The full picture - geography and hydrology, the nutrient budget, and the engineering math sizing oyster reef and a desalination plant against the real load.</p>
         <div class="go">Read the brief &rarr;</div>
       </a>
       <a class="bv-deck" href="/brevard/plan/">
-        <div class="tag">Document 02</div>
+        <div class="tag">The strategy</div>
         <h3>Action plan</h3>
         <p>Every fix ranked by dollars per pound of nitrogen, the $5M / 18-month flagship, demonstration-cell design math, and the desal and nutrient-credit financial models.</p>
         <div class="go">Read the plan &rarr;</div>
       </a>
       <a class="bv-deck" href="/brevard/model/">
-        <div class="tag">Interactive tool</div>
+        <div class="tag">Interactive</div>
         <h3>Cleanup calculator</h3>
         <p>Move the levers - baffle boxes, canal cells, clams, oyster reef, plant upgrades, muck, desal - and watch nitrogen removed, cost per pound, and progress to the legal targets update live.</p>
         <div class="go">Open the calculator &rarr;</div>
       </a>
       <a class="bv-deck" href="/brevard/guide/">
-        <div class="tag">Document 03</div>
+        <div class="tag">Explainer</div>
         <h3>Field guide</h3>
         <p>Plain-English explanations of every method - baffle boxes, demonstration cells, clams vs oysters, the plants, and how muck is actually removed.</p>
         <div class="go">Read the guide &rarr;</div>
       </a>
       <a class="bv-deck" href="/brevard/oysters/">
-        <div class="tag">Document 04</div>
+        <div class="tag">The economics</div>
         <h3>Oyster economics</h3>
         <p>What an acre actually costs - oysters per acre by density, hatchery seed pricing by form, and where the money really goes (hint: not the animals).</p>
         <div class="go">See the numbers &rarr;</div>
       </a>
       <a class="bv-deck" href="/brevard/funding/">
-        <div class="tag">Document 05</div>
+        <div class="tag">The playbook</div>
         <h3>Funding &amp; launch</h3>
         <p>The grant stack and who can apply, the capital plan for the $5M flagship, a 90-day launch checklist, and the permitting pathway.</p>
         <div class="go">Read the playbook &rarr;</div>
       </a>
       <a class="bv-deck" href="/brevard/cells/">
-        <div class="tag">Document 06</div>
+        <div class="tag">The pilot</div>
         <h3>Demonstration cells</h3>
         <p>Where the flagship starts and how we prove it - cell selection, the candidate Brevard canals, and the monitoring protocol with success criteria and a control.</p>
         <div class="go">See where we start &rarr;</div>
       </a>
       <a class="bv-deck" href="/brevard/desalination/">
-        <div class="tag">Document 07</div>
+        <div class="tag">The plant</div>
         <h3>The Port Canaveral plant</h3>
         <p>The circular desalination pitch - drinking water for Brevard, salt harvested for offtake, and nitrogen pulled from the lagoon as struvite or a Salicornia crop.</p>
         <div class="go">Read the pitch &rarr;</div>
       </a>
       <a class="bv-deck" href="/brevard/macroalgae/">
-        <div class="tag">Document 08</div>
+        <div class="tag">The venture</div>
         <h3>Seaweed, shellfish &amp; shrimp</h3>
         <p>Growing the cleanup into a business - the Ulva nitrogen math, the filtration lineup (vs oysters, clams, mussels, snails), and a shrimp-funded IMTA loop.</p>
         <div class="go">See the venture &rarr;</div>
