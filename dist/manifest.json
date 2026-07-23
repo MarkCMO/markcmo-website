@@ -8,7 +8,8 @@
   "theme_color": "#c9a84c",
   "lang": "en-US",
   "icons": [
-    {"src": "/og-image.jpg", "sizes": "512x512", "type": "image/jpeg", "purpose": "any"}
+    {"src": "/icon-512.png", "sizes": "512x512", "type": "image/png", "purpose": "any"},
+    {"src": "/icon-192.png", "sizes": "192x192", "type": "image/png", "purpose": "any"}
   ],
   "categories": ["business", "productivity"],
   "related_applications": []
