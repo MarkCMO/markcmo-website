@@ -3257,9 +3257,28 @@ window.addEventListener('load', function() {
   });
 });
 </script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r134/three.min.js" crossorigin="anonymous" defer></script>
 <script>
 window.addEventListener('load', function() {
+  // The hero particle field is decorative only (opacity 0.55, pointer-events:none).
+  // Loading three.js r134 (~600 KB) unconditionally cost roughly 750 ms of unused
+  // JavaScript and pushed mobile LCP past 7 s, so only fetch it where the effect is
+  // actually visible and affordable. Desktop behaviour is unchanged.
+  var heroCanvas = document.getElementById('heroCanvas');
+  if (!heroCanvas) return;
+  var mq = window.matchMedia;
+  var reduceMotion = !!(mq && mq('(prefers-reduced-motion: reduce)').matches);
+  var conn = navigator.connection || navigator.webkitConnection || {};
+  var saveData = conn.saveData === true;
+  var slowNet = /(^|-)2g$/.test(conn.effectiveType || '');
+  if (window.innerWidth < 1024 || reduceMotion || saveData || slowNet) {
+    heroCanvas.style.display = 'none';
+    return;
+  }
+  var s = document.createElement('script');
+  s.src = 'https://cdnjs.cloudflare.com/ajax/libs/three.js/r134/three.min.js';
+  s.crossOrigin = 'anonymous';
+  s.onerror = function() { heroCanvas.style.display = 'none'; };
+  s.onload = function() {
 (function() {
   try {
     var canvas = document.getElementById('heroCanvas');
@@ -3366,6 +3385,8 @@ window.addEventListener('load', function() {
     if (c) c.style.display = 'none';
   }
 })();
+  };
+  document.head.appendChild(s);
 });
 </script>
 <script src="/linkedin-widget.js" defer></script>
