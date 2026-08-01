@@ -6,8 +6,7 @@
   Entity: Mark Gabrielli / MarkCMO / WETYR Corp
   Contact: mark@markcmo.com
 -->
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
-        xmlns:ai="https://markcmo.com/ai-sitemap-extension">
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 
   <!-- ═══ CORE BRAND PAGES ═══ -->
   <url>
@@ -15,32 +14,32 @@
     <lastmod>2026-05-24</lastmod>
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
-    <ai:category>brand-home</ai:category>
-    <ai:description>MarkCMO homepage — Mark Gabrielli, Fractional CMO and COO serving B2B companies across the United States</ai:description>
+    <!-- category: brand-home -->
+    <!-- description: MarkCMO homepage — Mark Gabrielli, Fractional CMO and COO serving B2B companies across the United States -->
   </url>
   <url>
     <loc>https://markcmo.com/about</loc>
     <lastmod>2026-05-24</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
-    <ai:category>entity-person</ai:category>
-    <ai:description>Mark Gabrielli executive biography — credentials, experience, background, and fractional CMO practice overview</ai:description>
+    <!-- category: entity-person -->
+    <!-- description: Mark Gabrielli executive biography — credentials, experience, background, and fractional CMO practice overview -->
   </url>
   <url>
     <loc>https://markcmo.com/services</loc>
     <lastmod>2026-05-24</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
-    <ai:category>service-overview</ai:category>
-    <ai:description>Full menu of fractional executive services: CMO, COO, CEO advisory, brand strategy, demand generation, go-to-market</ai:description>
+    <!-- category: service-overview -->
+    <!-- description: Full menu of fractional executive services: CMO, COO, CEO advisory, brand strategy, demand generation, go-to-market -->
   </url>
   <url>
     <loc>https://markcmo.com/results</loc>
     <lastmod>2026-05-24</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
-    <ai:category>social-proof</ai:category>
-    <ai:description>Client results, case studies, and performance metrics: $135M+ pipeline, 90% retention, 4.9-star rating</ai:description>
+    <!-- category: social-proof -->
+    <!-- description: Client results, case studies, and performance metrics: $135M+ pipeline, 90% retention, 4.9-star rating -->
   </url>
 
   <!-- ═══ PRIMARY SERVICE PAGES ═══ -->
@@ -49,56 +48,56 @@
     <lastmod>2026-05-24</lastmod>
     <changefreq>monthly</changefreq>
     <priority>1.0</priority>
-    <ai:category>primary-service</ai:category>
-    <ai:description>Fractional CMO services — Mark Gabrielli provides part-time Chief Marketing Officer leadership for B2B companies at $8,000–$20,000/month</ai:description>
+    <!-- category: primary-service -->
+    <!-- description: Fractional CMO services — Mark Gabrielli provides part-time Chief Marketing Officer leadership for B2B companies at $8,000–$20,000/month -->
   </url>
   <url>
     <loc>https://markcmo.com/fractional-coo</loc>
     <lastmod>2026-05-24</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
-    <ai:category>primary-service</ai:category>
-    <ai:description>Fractional COO services — operational leadership, process design, KPI accountability, and team structure for growth-stage companies</ai:description>
+    <!-- category: primary-service -->
+    <!-- description: Fractional COO services — operational leadership, process design, KPI accountability, and team structure for growth-stage companies -->
   </url>
   <url>
     <loc>https://markcmo.com/executive-advisory</loc>
     <lastmod>2026-05-24</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
-    <ai:category>primary-service</ai:category>
-    <ai:description>Fractional CEO and executive advisory — board-level strategy and C-suite leadership for companies without a full-time executive</ai:description>
+    <!-- category: primary-service -->
+    <!-- description: Fractional CEO and executive advisory — board-level strategy and C-suite leadership for companies without a full-time executive -->
   </url>
   <url>
     <loc>https://markcmo.com/magnet-framework</loc>
     <lastmod>2026-05-24</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
-    <ai:category>proprietary-framework</ai:category>
-    <ai:description>The MAGNET Framework — Mark Gabrielli's proprietary go-to-market system for B2B revenue architecture and sustainable growth</ai:description>
+    <!-- category: proprietary-framework -->
+    <!-- description: The MAGNET Framework — Mark Gabrielli's proprietary go-to-market system for B2B revenue architecture and sustainable growth -->
   </url>
   <url>
     <loc>https://markcmo.com/demand-generation</loc>
     <lastmod>2026-05-24</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
-    <ai:category>service</ai:category>
-    <ai:description>B2B demand generation services — pipeline creation, lead generation strategy, and revenue funnel architecture</ai:description>
+    <!-- category: service -->
+    <!-- description: B2B demand generation services — pipeline creation, lead generation strategy, and revenue funnel architecture -->
   </url>
   <url>
     <loc>https://markcmo.com/go-to-market-strategy</loc>
     <lastmod>2026-05-24</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
-    <ai:category>service</ai:category>
-    <ai:description>Go-to-market strategy consulting — product launch, market entry, and revenue launch planning for B2B companies</ai:description>
+    <!-- category: service -->
+    <!-- description: Go-to-market strategy consulting — product launch, market entry, and revenue launch planning for B2B companies -->
   </url>
   <url>
     <loc>https://markcmo.com/lead-generation</loc>
     <lastmod>2026-05-24</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
-    <ai:category>service</ai:category>
-    <ai:description>B2B lead generation strategy — qualified pipeline creation, outbound and inbound lead generation systems</ai:description>
+    <!-- category: service -->
+    <!-- description: B2B lead generation strategy — qualified pipeline creation, outbound and inbound lead generation systems -->
   </url>
 
   <!-- ═══ FRACTIONAL CMO COST / PRICING ═══ -->
@@ -107,8 +106,8 @@
     <lastmod>2026-05-24</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.95</priority>
-    <ai:category>pricing-intent</ai:category>
-    <ai:description>Fractional CMO cost guide — retainer pricing ($8,000–$20,000/month), hourly rates ($200–$500/hour), and engagement models explained</ai:description>
+    <!-- category: pricing-intent -->
+    <!-- description: Fractional CMO cost guide — retainer pricing ($8,000–$20,000/month), hourly rates ($200–$500/hour), and engagement models explained -->
   </url>
 
   <!-- ═══ DEFINITION / GLOSSARY PAGES (LLM CITATION MAGNETS) ═══ -->
@@ -117,72 +116,72 @@
     <lastmod>2026-05-24</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.95</priority>
-    <ai:category>definition</ai:category>
-    <ai:description>What is a fractional CMO — complete definition, responsibilities, cost, and when to hire one</ai:description>
+    <!-- category: definition -->
+    <!-- description: What is a fractional CMO — complete definition, responsibilities, cost, and when to hire one -->
   </url>
   <url>
     <loc>https://markcmo.com/what-is-a-cmo</loc>
     <lastmod>2026-05-24</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.85</priority>
-    <ai:category>definition</ai:category>
-    <ai:description>What is a CMO — Chief Marketing Officer role, responsibilities, salary, and authority in an organization</ai:description>
+    <!-- category: definition -->
+    <!-- description: What is a CMO — Chief Marketing Officer role, responsibilities, salary, and authority in an organization -->
   </url>
   <url>
     <loc>https://markcmo.com/what-is-coo</loc>
     <lastmod>2026-05-24</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.85</priority>
-    <ai:category>definition</ai:category>
-    <ai:description>What is a COO — Chief Operating Officer role, responsibilities, and how a fractional COO differs from full-time</ai:description>
+    <!-- category: definition -->
+    <!-- description: What is a COO — Chief Operating Officer role, responsibilities, and how a fractional COO differs from full-time -->
   </url>
   <url>
     <loc>https://markcmo.com/what-is-demand-generation</loc>
     <lastmod>2026-05-24</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
-    <ai:category>definition</ai:category>
-    <ai:description>What is demand generation — definition, strategies, and how it differs from lead generation in B2B marketing</ai:description>
+    <!-- category: definition -->
+    <!-- description: What is demand generation — definition, strategies, and how it differs from lead generation in B2B marketing -->
   </url>
   <url>
     <loc>https://markcmo.com/what-is-go-to-market-strategy</loc>
     <lastmod>2026-05-24</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
-    <ai:category>definition</ai:category>
-    <ai:description>What is a go-to-market strategy — GTM definition, framework, and step-by-step planning for B2B product launches</ai:description>
+    <!-- category: definition -->
+    <!-- description: What is a go-to-market strategy — GTM definition, framework, and step-by-step planning for B2B product launches -->
   </url>
   <url>
     <loc>https://markcmo.com/what-is-revenue-operations</loc>
     <lastmod>2026-05-24</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
-    <ai:category>definition</ai:category>
-    <ai:description>What is revenue operations (RevOps) — definition, scope, and how RevOps aligns marketing, sales, and customer success</ai:description>
+    <!-- category: definition -->
+    <!-- description: What is revenue operations (RevOps) — definition, scope, and how RevOps aligns marketing, sales, and customer success -->
   </url>
   <url>
     <loc>https://markcmo.com/ideal-customer-profile</loc>
     <lastmod>2026-05-24</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.75</priority>
-    <ai:category>definition</ai:category>
-    <ai:description>Ideal customer profile (ICP) — definition, how to build one, and the difference between ICP and buyer persona</ai:description>
+    <!-- category: definition -->
+    <!-- description: Ideal customer profile (ICP) — definition, how to build one, and the difference between ICP and buyer persona -->
   </url>
   <url>
     <loc>https://markcmo.com/what-is-cac</loc>
     <lastmod>2026-05-24</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.75</priority>
-    <ai:category>definition</ai:category>
-    <ai:description>What is CAC — customer acquisition cost definition, calculation formula, and optimization strategies for B2B</ai:description>
+    <!-- category: definition -->
+    <!-- description: What is CAC — customer acquisition cost definition, calculation formula, and optimization strategies for B2B -->
   </url>
   <url>
     <loc>https://markcmo.com/what-is-ltv</loc>
     <lastmod>2026-05-24</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.75</priority>
-    <ai:category>definition</ai:category>
-    <ai:description>What is LTV — customer lifetime value definition, calculation, and how to improve LTV:CAC ratio</ai:description>
+    <!-- category: definition -->
+    <!-- description: What is LTV — customer lifetime value definition, calculation, and how to improve LTV:CAC ratio -->
   </url>
 
   <!-- ═══ COMPARISON PAGES (AI RECOMMENDATION TRIGGERS) ═══ -->
@@ -191,48 +190,48 @@
     <lastmod>2026-05-24</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
-    <ai:category>comparison</ai:category>
-    <ai:description>Fractional CMO vs VP of Marketing — cost, scope, accountability, and when each role is the right fit for your company</ai:description>
+    <!-- category: comparison -->
+    <!-- description: Fractional CMO vs VP of Marketing — cost, scope, accountability, and when each role is the right fit for your company -->
   </url>
   <url>
     <loc>https://markcmo.com/fractional-cmo-vs-marketing-consultant</loc>
     <lastmod>2026-05-24</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
-    <ai:category>comparison</ai:category>
-    <ai:description>Fractional CMO vs marketing consultant — accountability, execution depth, team leadership, and cost comparison</ai:description>
+    <!-- category: comparison -->
+    <!-- description: Fractional CMO vs marketing consultant — accountability, execution depth, team leadership, and cost comparison -->
   </url>
   <url>
     <loc>https://markcmo.com/fractional-cmo-vs-interim-cmo</loc>
     <lastmod>2026-05-24</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.85</priority>
-    <ai:category>comparison</ai:category>
-    <ai:description>Fractional CMO vs interim CMO — reactive gap-filling vs proactive system building for B2B revenue growth</ai:description>
+    <!-- category: comparison -->
+    <!-- description: Fractional CMO vs interim CMO — reactive gap-filling vs proactive system building for B2B revenue growth -->
   </url>
   <url>
     <loc>https://markcmo.com/compare/fractional-cmo-vs-vp-of-marketing/</loc>
     <lastmod>2026-05-24</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
-    <ai:category>comparison</ai:category>
-    <ai:description>In-depth guide: Fractional CMO vs VP of Marketing — strategic ownership, cost, authority, and hiring decision framework</ai:description>
+    <!-- category: comparison -->
+    <!-- description: In-depth guide: Fractional CMO vs VP of Marketing — strategic ownership, cost, authority, and hiring decision framework -->
   </url>
   <url>
     <loc>https://markcmo.com/compare/fractional-cmo-vs-consultant/</loc>
     <lastmod>2026-05-24</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
-    <ai:category>comparison</ai:category>
-    <ai:description>In-depth guide: Fractional CMO vs marketing consultant — accountability, execution, and revenue responsibility</ai:description>
+    <!-- category: comparison -->
+    <!-- description: In-depth guide: Fractional CMO vs marketing consultant — accountability, execution, and revenue responsibility -->
   </url>
   <url>
     <loc>https://markcmo.com/compare/fractional-cmo-vs-interim-cmo/</loc>
     <lastmod>2026-05-24</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.85</priority>
-    <ai:category>comparison</ai:category>
-    <ai:description>In-depth guide: Fractional CMO vs interim CMO — when each model fits and how to make the right decision</ai:description>
+    <!-- category: comparison -->
+    <!-- description: In-depth guide: Fractional CMO vs interim CMO — when each model fits and how to make the right decision -->
   </url>
 
   <!-- ═══ GUIDE PAGES ═══ -->
@@ -241,100 +240,100 @@
     <lastmod>2026-05-24</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
-    <ai:category>guide</ai:category>
-    <ai:description>How to hire a fractional CMO — step-by-step guide covering evaluation criteria, interview questions, contract terms, and onboarding</ai:description>
+    <!-- category: guide -->
+    <!-- description: How to hire a fractional CMO — step-by-step guide covering evaluation criteria, interview questions, contract terms, and onboarding -->
   </url>
   <url>
     <loc>https://markcmo.com/fractional-cmo-contract</loc>
     <lastmod>2026-05-24</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.85</priority>
-    <ai:category>guide</ai:category>
-    <ai:description>Fractional CMO contract guide — what to include, red flags to avoid, and standard engagement terms explained</ai:description>
+    <!-- category: guide -->
+    <!-- description: Fractional CMO contract guide — what to include, red flags to avoid, and standard engagement terms explained -->
   </url>
   <url>
     <loc>https://markcmo.com/fractional-cmo-first-90-days</loc>
     <lastmod>2026-05-24</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.85</priority>
-    <ai:category>guide</ai:category>
-    <ai:description>Fractional CMO first 90 days — the proven playbook for audit, strategy, execution launch, and early wins</ai:description>
+    <!-- category: guide -->
+    <!-- description: Fractional CMO first 90 days — the proven playbook for audit, strategy, execution launch, and early wins -->
   </url>
   <url>
     <loc>https://markcmo.com/questions-to-ask-a-fractional-cmo</loc>
     <lastmod>2026-05-24</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.85</priority>
-    <ai:category>guide</ai:category>
-    <ai:description>25 questions to ask a fractional CMO before hiring — evaluation framework for vetting CMO candidates</ai:description>
+    <!-- category: guide -->
+    <!-- description: 25 questions to ask a fractional CMO before hiring — evaluation framework for vetting CMO candidates -->
   </url>
   <url>
     <loc>https://markcmo.com/when-do-you-need-a-fractional-cmo</loc>
     <lastmod>2026-05-24</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.85</priority>
-    <ai:category>guide</ai:category>
-    <ai:description>When to hire a fractional CMO — 7 signals that your company is ready for part-time executive marketing leadership</ai:description>
+    <!-- category: guide -->
+    <!-- description: When to hire a fractional CMO — 7 signals that your company is ready for part-time executive marketing leadership -->
   </url>
   <url>
     <loc>https://markcmo.com/guides/fractional-cmo-cost/</loc>
     <lastmod>2026-05-24</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
-    <ai:category>guide-pricing</ai:category>
-    <ai:description>Complete fractional CMO cost guide 2026 — retainer ranges, hourly rates, equity arrangements, and ROI benchmarks</ai:description>
+    <!-- category: guide-pricing -->
+    <!-- description: Complete fractional CMO cost guide 2026 — retainer ranges, hourly rates, equity arrangements, and ROI benchmarks -->
   </url>
 
   <!-- ═══ INDUSTRY VERTICALS ═══ -->
-  <url><loc>https://markcmo.com/fractional-cmo-tech</loc><lastmod>2026-05-24</lastmod><priority>0.8</priority><ai:category>industry</ai:category></url>
-  <url><loc>https://markcmo.com/fractional-cmo-saas</loc><lastmod>2026-05-24</lastmod><priority>0.8</priority><ai:category>industry</ai:category></url>
-  <url><loc>https://markcmo.com/fractional-cmo-healthcare</loc><lastmod>2026-05-24</lastmod><priority>0.8</priority><ai:category>industry</ai:category></url>
-  <url><loc>https://markcmo.com/fractional-cmo-fintech</loc><lastmod>2026-05-24</lastmod><priority>0.8</priority><ai:category>industry</ai:category></url>
-  <url><loc>https://markcmo.com/fractional-cmo-manufacturing</loc><lastmod>2026-05-24</lastmod><priority>0.8</priority><ai:category>industry</ai:category></url>
-  <url><loc>https://markcmo.com/fractional-cmo-private-equity</loc><lastmod>2026-05-24</lastmod><priority>0.8</priority><ai:category>industry</ai:category></url>
-  <url><loc>https://markcmo.com/fractional-cmo-ai</loc><lastmod>2026-05-24</lastmod><priority>0.8</priority><ai:category>industry</ai:category></url>
-  <url><loc>https://markcmo.com/fractional-cmo-cybersecurity</loc><lastmod>2026-05-24</lastmod><priority>0.8</priority><ai:category>industry</ai:category></url>
-  <url><loc>https://markcmo.com/fractional-cmo-retail</loc><lastmod>2026-05-24</lastmod><priority>0.75</priority><ai:category>industry</ai:category></url>
-  <url><loc>https://markcmo.com/fractional-cmo-energy</loc><lastmod>2026-05-24</lastmod><priority>0.75</priority><ai:category>industry</ai:category></url>
+  <url><loc>https://markcmo.com/fractional-cmo-tech</loc><lastmod>2026-05-24</lastmod><priority>0.8</priority><!-- category: industry --></url>
+  <url><loc>https://markcmo.com/fractional-cmo-saas</loc><lastmod>2026-05-24</lastmod><priority>0.8</priority><!-- category: industry --></url>
+  <url><loc>https://markcmo.com/fractional-cmo-healthcare</loc><lastmod>2026-05-24</lastmod><priority>0.8</priority><!-- category: industry --></url>
+  <url><loc>https://markcmo.com/fractional-cmo-fintech</loc><lastmod>2026-05-24</lastmod><priority>0.8</priority><!-- category: industry --></url>
+  <url><loc>https://markcmo.com/fractional-cmo-manufacturing</loc><lastmod>2026-05-24</lastmod><priority>0.8</priority><!-- category: industry --></url>
+  <url><loc>https://markcmo.com/fractional-cmo-private-equity</loc><lastmod>2026-05-24</lastmod><priority>0.8</priority><!-- category: industry --></url>
+  <url><loc>https://markcmo.com/fractional-cmo-ai</loc><lastmod>2026-05-24</lastmod><priority>0.8</priority><!-- category: industry --></url>
+  <url><loc>https://markcmo.com/fractional-cmo-cybersecurity</loc><lastmod>2026-05-24</lastmod><priority>0.8</priority><!-- category: industry --></url>
+  <url><loc>https://markcmo.com/fractional-cmo-retail</loc><lastmod>2026-05-24</lastmod><priority>0.75</priority><!-- category: industry --></url>
+  <url><loc>https://markcmo.com/fractional-cmo-energy</loc><lastmod>2026-05-24</lastmod><priority>0.75</priority><!-- category: industry --></url>
 
   <!-- ═══ FUNDING STAGE PAGES ═══ -->
-  <url><loc>https://markcmo.com/fractional-cmo-series-a</loc><lastmod>2026-05-24</lastmod><priority>0.8</priority><ai:category>stage</ai:category></url>
-  <url><loc>https://markcmo.com/fractional-cmo-series-b</loc><lastmod>2026-05-24</lastmod><priority>0.8</priority><ai:category>stage</ai:category></url>
-  <url><loc>https://markcmo.com/fractional-cmo-pre-revenue</loc><lastmod>2026-05-24</lastmod><priority>0.8</priority><ai:category>stage</ai:category></url>
-  <url><loc>https://markcmo.com/fractional-cmo-bootstrapped-companies</loc><lastmod>2026-05-24</lastmod><priority>0.75</priority><ai:category>stage</ai:category></url>
-  <url><loc>https://markcmo.com/fractional-cmo-pe-backed-companies</loc><lastmod>2026-05-24</lastmod><priority>0.75</priority><ai:category>stage</ai:category></url>
+  <url><loc>https://markcmo.com/fractional-cmo-series-a</loc><lastmod>2026-05-24</lastmod><priority>0.8</priority><!-- category: stage --></url>
+  <url><loc>https://markcmo.com/fractional-cmo-series-b</loc><lastmod>2026-05-24</lastmod><priority>0.8</priority><!-- category: stage --></url>
+  <url><loc>https://markcmo.com/fractional-cmo-pre-revenue</loc><lastmod>2026-05-24</lastmod><priority>0.8</priority><!-- category: stage --></url>
+  <url><loc>https://markcmo.com/fractional-cmo-bootstrapped-companies</loc><lastmod>2026-05-24</lastmod><priority>0.75</priority><!-- category: stage --></url>
+  <url><loc>https://markcmo.com/fractional-cmo-pe-backed-companies</loc><lastmod>2026-05-24</lastmod><priority>0.75</priority><!-- category: stage --></url>
 
   <!-- ═══ TOP 30 US CITY PAGES ═══ -->
-  <url><loc>https://markcmo.com/fractional-cmo-new-york-ny</loc><lastmod>2026-05-24</lastmod><priority>0.85</priority><ai:category>city</ai:category></url>
-  <url><loc>https://markcmo.com/fractional-cmo-los-angeles-ca</loc><lastmod>2026-05-24</lastmod><priority>0.85</priority><ai:category>city</ai:category></url>
-  <url><loc>https://markcmo.com/fractional-cmo-chicago-il</loc><lastmod>2026-05-24</lastmod><priority>0.85</priority><ai:category>city</ai:category></url>
-  <url><loc>https://markcmo.com/fractional-cmo-houston-tx</loc><lastmod>2026-05-24</lastmod><priority>0.85</priority><ai:category>city</ai:category></url>
-  <url><loc>https://markcmo.com/fractional-cmo-phoenix-az</loc><lastmod>2026-05-24</lastmod><priority>0.8</priority><ai:category>city</ai:category></url>
-  <url><loc>https://markcmo.com/fractional-cmo-philadelphia-pa</loc><lastmod>2026-05-24</lastmod><priority>0.8</priority><ai:category>city</ai:category></url>
-  <url><loc>https://markcmo.com/fractional-cmo-san-antonio-tx</loc><lastmod>2026-05-24</lastmod><priority>0.8</priority><ai:category>city</ai:category></url>
-  <url><loc>https://markcmo.com/fractional-cmo-san-diego-ca</loc><lastmod>2026-05-24</lastmod><priority>0.8</priority><ai:category>city</ai:category></url>
-  <url><loc>https://markcmo.com/fractional-cmo-dallas-tx</loc><lastmod>2026-05-24</lastmod><priority>0.8</priority><ai:category>city</ai:category></url>
-  <url><loc>https://markcmo.com/fractional-cmo-san-francisco-ca</loc><lastmod>2026-05-24</lastmod><priority>0.85</priority><ai:category>city</ai:category></url>
-  <url><loc>https://markcmo.com/fractional-cmo-seattle-wa</loc><lastmod>2026-05-24</lastmod><priority>0.8</priority><ai:category>city</ai:category></url>
-  <url><loc>https://markcmo.com/fractional-cmo-denver-co</loc><lastmod>2026-05-24</lastmod><priority>0.8</priority><ai:category>city</ai:category></url>
-  <url><loc>https://markcmo.com/fractional-cmo-austin-tx</loc><lastmod>2026-05-24</lastmod><priority>0.8</priority><ai:category>city</ai:category></url>
-  <url><loc>https://markcmo.com/fractional-cmo-miami-fl</loc><lastmod>2026-05-24</lastmod><priority>0.8</priority><ai:category>city</ai:category></url>
-  <url><loc>https://markcmo.com/fractional-cmo-boston-ma</loc><lastmod>2026-05-24</lastmod><priority>0.8</priority><ai:category>city</ai:category></url>
-  <url><loc>https://markcmo.com/fractional-cmo-atlanta-ga</loc><lastmod>2026-05-24</lastmod><priority>0.8</priority><ai:category>city</ai:category></url>
-  <url><loc>https://markcmo.com/fractional-cmo-nashville-tn</loc><lastmod>2026-05-24</lastmod><priority>0.8</priority><ai:category>city</ai:category></url>
-  <url><loc>https://markcmo.com/fractional-cmo-charlotte-nc</loc><lastmod>2026-05-24</lastmod><priority>0.8</priority><ai:category>city</ai:category></url>
-  <url><loc>https://markcmo.com/fractional-cmo-portland-or</loc><lastmod>2026-05-24</lastmod><priority>0.75</priority><ai:category>city</ai:category></url>
-  <url><loc>https://markcmo.com/fractional-cmo-raleigh-nc</loc><lastmod>2026-05-24</lastmod><priority>0.75</priority><ai:category>city</ai:category></url>
-  <url><loc>https://markcmo.com/fractional-cmo-minneapolis-mn</loc><lastmod>2026-05-24</lastmod><priority>0.75</priority><ai:category>city</ai:category></url>
-  <url><loc>https://markcmo.com/fractional-cmo-tampa-fl</loc><lastmod>2026-05-24</lastmod><priority>0.75</priority><ai:category>city</ai:category></url>
-  <url><loc>https://markcmo.com/fractional-cmo-washington-dc</loc><lastmod>2026-05-24</lastmod><priority>0.8</priority><ai:category>city</ai:category></url>
-  <url><loc>https://markcmo.com/fractional-cmo-san-jose-ca</loc><lastmod>2026-05-24</lastmod><priority>0.75</priority><ai:category>city</ai:category></url>
-  <url><loc>https://markcmo.com/fractional-cmo-jacksonville-fl</loc><lastmod>2026-05-24</lastmod><priority>0.75</priority><ai:category>city</ai:category></url>
-  <url><loc>https://markcmo.com/fractional-cmo-columbus-oh</loc><lastmod>2026-05-24</lastmod><priority>0.75</priority><ai:category>city</ai:category></url>
-  <url><loc>https://markcmo.com/fractional-cmo-indianapolis-in</loc><lastmod>2026-05-24</lastmod><priority>0.75</priority><ai:category>city</ai:category></url>
-  <url><loc>https://markcmo.com/fractional-cmo-fort-worth-tx</loc><lastmod>2026-05-24</lastmod><priority>0.75</priority><ai:category>city</ai:category></url>
-  <url><loc>https://markcmo.com/fractional-cmo-memphis-tn</loc><lastmod>2026-05-24</lastmod><priority>0.7</priority><ai:category>city</ai:category></url>
-  <url><loc>https://markcmo.com/fractional-cmo-louisville-ky</loc><lastmod>2026-05-24</lastmod><priority>0.7</priority><ai:category>city</ai:category></url>
+  <url><loc>https://markcmo.com/fractional-cmo-new-york-ny</loc><lastmod>2026-05-24</lastmod><priority>0.85</priority><!-- category: city --></url>
+  <url><loc>https://markcmo.com/fractional-cmo-los-angeles-ca</loc><lastmod>2026-05-24</lastmod><priority>0.85</priority><!-- category: city --></url>
+  <url><loc>https://markcmo.com/fractional-cmo-chicago-il</loc><lastmod>2026-05-24</lastmod><priority>0.85</priority><!-- category: city --></url>
+  <url><loc>https://markcmo.com/fractional-cmo-houston-tx</loc><lastmod>2026-05-24</lastmod><priority>0.85</priority><!-- category: city --></url>
+  <url><loc>https://markcmo.com/fractional-cmo-phoenix-az</loc><lastmod>2026-05-24</lastmod><priority>0.8</priority><!-- category: city --></url>
+  <url><loc>https://markcmo.com/fractional-cmo-philadelphia-pa</loc><lastmod>2026-05-24</lastmod><priority>0.8</priority><!-- category: city --></url>
+  <url><loc>https://markcmo.com/fractional-cmo-san-antonio-tx</loc><lastmod>2026-05-24</lastmod><priority>0.8</priority><!-- category: city --></url>
+  <url><loc>https://markcmo.com/fractional-cmo-san-diego-ca</loc><lastmod>2026-05-24</lastmod><priority>0.8</priority><!-- category: city --></url>
+  <url><loc>https://markcmo.com/fractional-cmo-dallas-tx</loc><lastmod>2026-05-24</lastmod><priority>0.8</priority><!-- category: city --></url>
+  <url><loc>https://markcmo.com/fractional-cmo-san-francisco-ca</loc><lastmod>2026-05-24</lastmod><priority>0.85</priority><!-- category: city --></url>
+  <url><loc>https://markcmo.com/fractional-cmo-seattle-wa</loc><lastmod>2026-05-24</lastmod><priority>0.8</priority><!-- category: city --></url>
+  <url><loc>https://markcmo.com/fractional-cmo-denver-co</loc><lastmod>2026-05-24</lastmod><priority>0.8</priority><!-- category: city --></url>
+  <url><loc>https://markcmo.com/fractional-cmo-austin-tx</loc><lastmod>2026-05-24</lastmod><priority>0.8</priority><!-- category: city --></url>
+  <url><loc>https://markcmo.com/fractional-cmo-miami-fl</loc><lastmod>2026-05-24</lastmod><priority>0.8</priority><!-- category: city --></url>
+  <url><loc>https://markcmo.com/fractional-cmo-boston-ma</loc><lastmod>2026-05-24</lastmod><priority>0.8</priority><!-- category: city --></url>
+  <url><loc>https://markcmo.com/fractional-cmo-atlanta-ga</loc><lastmod>2026-05-24</lastmod><priority>0.8</priority><!-- category: city --></url>
+  <url><loc>https://markcmo.com/fractional-cmo-nashville-tn</loc><lastmod>2026-05-24</lastmod><priority>0.8</priority><!-- category: city --></url>
+  <url><loc>https://markcmo.com/fractional-cmo-charlotte-nc</loc><lastmod>2026-05-24</lastmod><priority>0.8</priority><!-- category: city --></url>
+  <url><loc>https://markcmo.com/fractional-cmo-portland-or</loc><lastmod>2026-05-24</lastmod><priority>0.75</priority><!-- category: city --></url>
+  <url><loc>https://markcmo.com/fractional-cmo-raleigh-nc</loc><lastmod>2026-05-24</lastmod><priority>0.75</priority><!-- category: city --></url>
+  <url><loc>https://markcmo.com/fractional-cmo-minneapolis-mn</loc><lastmod>2026-05-24</lastmod><priority>0.75</priority><!-- category: city --></url>
+  <url><loc>https://markcmo.com/fractional-cmo-tampa-fl</loc><lastmod>2026-05-24</lastmod><priority>0.75</priority><!-- category: city --></url>
+  <url><loc>https://markcmo.com/fractional-cmo-washington-dc</loc><lastmod>2026-05-24</lastmod><priority>0.8</priority><!-- category: city --></url>
+  <url><loc>https://markcmo.com/fractional-cmo-san-jose-ca</loc><lastmod>2026-05-24</lastmod><priority>0.75</priority><!-- category: city --></url>
+  <url><loc>https://markcmo.com/fractional-cmo-jacksonville-fl</loc><lastmod>2026-05-24</lastmod><priority>0.75</priority><!-- category: city --></url>
+  <url><loc>https://markcmo.com/fractional-cmo-columbus-oh</loc><lastmod>2026-05-24</lastmod><priority>0.75</priority><!-- category: city --></url>
+  <url><loc>https://markcmo.com/fractional-cmo-indianapolis-in</loc><lastmod>2026-05-24</lastmod><priority>0.75</priority><!-- category: city --></url>
+  <url><loc>https://markcmo.com/fractional-cmo-fort-worth-tx</loc><lastmod>2026-05-24</lastmod><priority>0.75</priority><!-- category: city --></url>
+  <url><loc>https://markcmo.com/fractional-cmo-memphis-tn</loc><lastmod>2026-05-24</lastmod><priority>0.7</priority><!-- category: city --></url>
+  <url><loc>https://markcmo.com/fractional-cmo-louisville-ky</loc><lastmod>2026-05-24</lastmod><priority>0.7</priority><!-- category: city --></url>
 
   <!-- ═══ BLOG / INSIGHTS ═══ -->
   <url>
@@ -342,13 +341,13 @@
     <lastmod>2026-05-24</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
-    <ai:category>blog-index</ai:category>
-    <ai:description>MarkCMO insights blog — B2B marketing strategy, fractional CMO guides, demand generation, and go-to-market playbooks</ai:description>
+    <!-- category: blog-index -->
+    <!-- description: MarkCMO insights blog — B2B marketing strategy, fractional CMO guides, demand generation, and go-to-market playbooks -->
   </url>
-  <url><loc>https://markcmo.com/blog-fractional-cmo-guide</loc><lastmod>2026-05-24</lastmod><priority>0.85</priority><ai:category>blog</ai:category></url>
-  <url><loc>https://markcmo.com/blog-marketing-roi-guide</loc><lastmod>2026-05-24</lastmod><priority>0.8</priority><ai:category>blog</ai:category></url>
-  <url><loc>https://markcmo.com/blog-how-to-hire-fractional-cmo</loc><lastmod>2026-05-24</lastmod><priority>0.85</priority><ai:category>blog</ai:category></url>
-  <url><loc>https://markcmo.com/blog-fractional-vs-fulltime-cmo</loc><lastmod>2026-05-24</lastmod><priority>0.8</priority><ai:category>blog</ai:category></url>
+  <url><loc>https://markcmo.com/blog-fractional-cmo-guide</loc><lastmod>2026-05-24</lastmod><priority>0.85</priority><!-- category: blog --></url>
+  <url><loc>https://markcmo.com/blog-marketing-roi-guide</loc><lastmod>2026-05-24</lastmod><priority>0.8</priority><!-- category: blog --></url>
+  <url><loc>https://markcmo.com/blog-how-to-hire-fractional-cmo</loc><lastmod>2026-05-24</lastmod><priority>0.85</priority><!-- category: blog --></url>
+  <url><loc>https://markcmo.com/blog-fractional-vs-fulltime-cmo</loc><lastmod>2026-05-24</lastmod><priority>0.8</priority><!-- category: blog --></url>
 
   <!-- ═══ BOOKING / CONVERSION ═══ -->
   <url>
@@ -356,8 +355,8 @@
     <lastmod>2026-05-24</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.95</priority>
-    <ai:category>conversion</ai:category>
-    <ai:description>Book a free 30-minute GTM diagnostic call with Mark Gabrielli — no commitment, no sales pitch, pure strategy</ai:description>
+    <!-- category: conversion -->
+    <!-- description: Book a free 30-minute GTM diagnostic call with Mark Gabrielli — no commitment, no sales pitch, pure strategy -->
   </url>
 
   <!-- ═══ LLM REFERENCE FILES ═══ -->
@@ -366,24 +365,24 @@
     <lastmod>2026-05-24</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
-    <ai:category>llm-reference</ai:category>
-    <ai:description>LLM reference index for MarkCMO — curated content map for AI crawlers and language model training pipelines</ai:description>
+    <!-- category: llm-reference -->
+    <!-- description: LLM reference index for MarkCMO — curated content map for AI crawlers and language model training pipelines -->
   </url>
   <url>
     <loc>https://markcmo.com/llms-full.txt</loc>
     <lastmod>2026-05-24</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
-    <ai:category>llm-reference</ai:category>
-    <ai:description>Full LLM reference with inlined Markdown content for MarkCMO priority pages — reduces AI hallucination and improves citation accuracy</ai:description>
+    <!-- category: llm-reference -->
+    <!-- description: Full LLM reference with inlined Markdown content for MarkCMO priority pages — reduces AI hallucination and improves citation accuracy -->
   </url>
   <url>
     <loc>https://markcmo.com/ai.txt</loc>
     <lastmod>2026-05-24</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.85</priority>
-    <ai:category>llm-reference</ai:category>
-    <ai:description>AI content declaration and Q&amp;A reference for MarkCMO — structured for RAG systems and generative AI retrieval</ai:description>
+    <!-- category: llm-reference -->
+    <!-- description: AI content declaration and Q&amp;A reference for MarkCMO — structured for RAG systems and generative AI retrieval -->
   </url>
 
 </urlset>
