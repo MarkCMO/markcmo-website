@@ -65,6 +65,13 @@ export async function onRequest(context) {
   const userAgent = request.headers.get('user-agent') || '';
   const referer = request.headers.get('referer') || '';
 
+  // Rapid-duplicate guard: a double-clicked form (same email inside RECENT_DUP_MS)
+  // must not fire a second identical alert to Mark - repeated near-identical mail
+  // is a spam-filter trigger. We still STORE every submission; we only suppress the
+  // duplicate NOTIFICATION.
+  const RECENT_DUP_MS = 60 * 1000;
+  const isRapidDuplicate = await recentDuplicateExists(env, email, RECENT_DUP_MS);
+
   // Insert into Supabase
   let leadId = null;
   try {
@@ -87,10 +94,20 @@ export async function onRequest(context) {
     await safeAudit(env, 'lead_db_insert_failed', { error: String(e), payload: redact(payload) });
   }
 
-  // Email Mark with the lead
+  // Email Mark with the lead (skipped when this is a rapid duplicate of a just-received lead)
   let resendId = null;
   let notifyError = null;
   try {
+    if (isRapidDuplicate) {
+      await safeAudit(env, 'lead_notify_skipped_duplicate', { email, lead_id: leadId, source });
+      return jsonResponse(200, {
+        ok: true,
+        lead_id: leadId,
+        notified: false,
+        duplicate: true,
+        handler_version: HANDLER_VERSION,
+      });
+    }
     const html = renderEmailHtml({ source, name, email, company, phone, message, referer, ip, leadId });
     const text = renderEmailText({ source, name, email, company, phone, message, referer, leadId });
     const subject = buildSubject({ source, name, company, email });
@@ -295,6 +312,25 @@ async function safeAudit(env, event, payload) {
   try {
     await sbInsert(env, 'mc_audit_log', { event, payload });
   } catch (_) {}
+}
+
+// True if a lead with this email was already stored within `windowMs` (double-submit).
+// Best-effort: any lookup failure returns false so a real lead is never silently dropped.
+async function recentDuplicateExists(env, email, windowMs) {
+  if (!email) return false;
+  try {
+    const since = new Date(Date.now() - windowMs).toISOString();
+    const filter = `email=eq.${encodeURIComponent(email)}&created_at=gte.${encodeURIComponent(since)}&limit=1`;
+    const res = await fetch(`${env.MARKCMO_SUPABASE_URL}/rest/v1/mc_inbound_leads?${filter}`, {
+      method: 'GET',
+      headers: sbHeaders(env),
+    });
+    if (!res.ok) return false;
+    const rows = await res.json().catch(() => null);
+    return Array.isArray(rows) && rows.length > 0;
+  } catch (_) {
+    return false;
+  }
 }
 
 function redact(p) {
