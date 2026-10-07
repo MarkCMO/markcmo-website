@@ -304,7 +304,7 @@ const MASTER_FOOTER_HTML = `<!--
         <span class="mc-foot-chip">CST Certified</span>
       </div>
       <div class="mc-foot-socials">
-        <a href="https://www.linkedin.com/in/marklgabrielli/" target="_blank" rel="noopener" class="mc-foot-soc" aria-label="LinkedIn">in</a>
+        <a href="https://www.linkedin.com/in/marklgabrielli" target="_blank" rel="noopener" class="mc-foot-soc" aria-label="LinkedIn">in</a>
         <a href="mailto:mark@markcmo.com" class="mc-foot-soc" aria-label="Email">@</a>
       </div>
     </div>
@@ -388,7 +388,7 @@ const MASTER_FOOTER_HTML = `<!--
   <div class="mc-foot-bar">
     <span class="mc-foot-copy">&copy; 2026 Mark Gabrielli &middot; markcmo.com &middot; All rights reserved.</span>
     <div class="mc-foot-bar-links">
-      <a href="https://www.linkedin.com/in/marklgabrielli/" target="_blank" rel="noopener">LinkedIn</a>
+      <a href="https://www.linkedin.com/in/marklgabrielli" target="_blank" rel="noopener">LinkedIn</a>
       <a href="https://x.com/markgcmo" target="_blank" rel="noopener">X / Twitter</a>
       <a href="https://medium.com/@mark_louis_gabrielli_jr" target="_blank" rel="noopener">Medium</a>
       <a href="https://www.tiktok.com/@mark.gabrielli.cmo" target="_blank" rel="noopener">TikTok</a>
