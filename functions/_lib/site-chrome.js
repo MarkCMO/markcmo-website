@@ -212,7 +212,7 @@ footer::before { display: none; content: none; }
         <span class="footer-chip">CST Certified</span>
       </div>
       <div class="footer-socials">
-        <a href="https://www.linkedin.com/in/marklgabrielli/" target="_blank" rel="noopener" class="footer-soc">in</a>
+        <a href="https://www.linkedin.com/in/marklgabrielli" target="_blank" rel="noopener" class="footer-soc">in</a>
         <a href="mailto:mark@markcmo.com" class="footer-soc">@</a>
       </div>
     </div>
@@ -300,7 +300,7 @@ footer::before { display: none; content: none; }
   <div class="footer-bar">
     <span class="footer-copy">&copy; 2026 Mark Gabrielli &middot; markcmo.com &middot; All rights reserved.</span>
     <div class="footer-bar-links">
-      <a href="https://www.linkedin.com/in/marklgabrielli/" target="_blank" rel="noopener">LinkedIn</a>
+      <a href="https://www.linkedin.com/in/marklgabrielli" target="_blank" rel="noopener">LinkedIn</a>
       <a href="https://x.com/markgcmo" target="_blank" rel="noopener">X / Twitter</a>
       <a href="https://medium.com/@mark_louis_gabrielli_jr" target="_blank" rel="noopener">Medium</a>
       <a href="https://www.tiktok.com/@mark.gabrielli.cmo" target="_blank" rel="noopener">TikTok</a>
@@ -322,7 +322,7 @@ export const SITE_FOOTER_ELEMENT = `<footer>
         <span class="footer-chip">CST Certified</span>
       </div>
       <div class="footer-socials">
-        <a href="https://www.linkedin.com/in/marklgabrielli/" target="_blank" rel="noopener" class="footer-soc">in</a>
+        <a href="https://www.linkedin.com/in/marklgabrielli" target="_blank" rel="noopener" class="footer-soc">in</a>
         <a href="mailto:mark@markcmo.com" class="footer-soc">@</a>
       </div>
     </div>
@@ -410,7 +410,7 @@ export const SITE_FOOTER_ELEMENT = `<footer>
   <div class="footer-bar">
     <span class="footer-copy">&copy; 2026 Mark Gabrielli &middot; markcmo.com &middot; All rights reserved.</span>
     <div class="footer-bar-links">
-      <a href="https://www.linkedin.com/in/marklgabrielli/" target="_blank" rel="noopener">LinkedIn</a>
+      <a href="https://www.linkedin.com/in/marklgabrielli" target="_blank" rel="noopener">LinkedIn</a>
       <a href="https://x.com/markgcmo" target="_blank" rel="noopener">X / Twitter</a>
       <a href="https://medium.com/@mark_louis_gabrielli_jr" target="_blank" rel="noopener">Medium</a>
       <a href="https://www.tiktok.com/@mark.gabrielli.cmo" target="_blank" rel="noopener">TikTok</a>

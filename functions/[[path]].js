@@ -441,7 +441,7 @@ export async function onRequest(context) {
             "@type": "Organization",
             "@id": "https://markcmo.com/#organization",
             "name": "MarkCMO",
-            "legalName": "WETYR Corp",
+            "legalName": "WETYR Corporation",
             "url": "https://markcmo.com",
             "logo": "https://markcmo.com/assets/mark-gabrielli.jpg",
             "description": "MarkCMO is a fractional executive leadership practice providing part-time CMO, COO, and C-suite advisory services to growth-stage B2B companies across the United States.",
@@ -458,12 +458,11 @@ export async function onRequest(context) {
             "areaServed": "United States",
             "priceRange": "$8,000–$20,000/month",
             "sameAs": [
-              "https://www.linkedin.com/in/markgabriellijr",
+              "https://www.linkedin.com/in/marklgabrielli",
               "https://www.linkedin.com/company/markcmo",
               "https://clutch.co/profile/mark-gabrielli-chief-marketing-officer",
               "https://www.crunchbase.com/person/mark-gabrielli",
-              "https://twitter.com/markcmo",
-              "https://x.com/markcmo",
+              "https://x.com/markgcmo",
               "https://www.facebook.com/markgabriellijr",
               "https://www.youtube.com/@markcmo",
               "https://g2.com/sellers/markcmo",
@@ -500,11 +499,10 @@ export async function onRequest(context) {
               "Revenue Architecture", "Brand Strategy"
             ],
             "sameAs": [
-              "https://www.linkedin.com/in/markgabriellijr",
+              "https://www.linkedin.com/in/marklgabrielli",
               "https://clutch.co/profile/mark-gabrielli-chief-marketing-officer",
               "https://www.crunchbase.com/person/mark-gabrielli",
-              "https://twitter.com/markcmo",
-              "https://x.com/markcmo",
+              "https://x.com/markgcmo",
               "https://markcmo.com"
             ]
           }

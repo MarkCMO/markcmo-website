@@ -16,7 +16,7 @@ export const DOC_LABELS = {
   msa: 'Master Services Agreement',
 };
 
-const PROVIDER = 'WETYR Corp (operating as MarkCMO)';
+const PROVIDER = 'WETYR Corporation (operating as MarkCMO)';
 const PROVIDER_SHORT = 'MarkCMO';
 const GOVERNING = 'the State of Florida';
 
