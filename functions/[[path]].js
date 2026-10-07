@@ -1,6 +1,7 @@
 // functions/[[path]].js
 import { SITE_NAV_HTML, SITE_FOOTER_HTML, SITE_FOOTER_ELEMENT } from './_lib/site-chrome.js';
 import { TRUNCATED_REDIRECTS } from './_lib/legacy-redirects.js';
+import { applyAeo } from './_lib/aeo-schema.js';
 // Root catch-all for Cloudflare Pages.
 // Handles two responsibilities:
 //
@@ -333,6 +334,21 @@ export async function onRequest(context) {
   }
 
   if (html !== null) {
+    // AEO normalization (functions/_lib/aeo-schema.js): FAQPage schema derived
+    // from the visible FAQ (hidden Q&As dropped, never rendered), Speakable on
+    // the H1 + answer-first paragraph, over-long title/meta trimmed at natural
+    // separators. Runs on the raw KV HTML before chrome/schema injection so the
+    // speakable check below sees it. Fails closed (no change) on any error.
+    // Disable with env AEO_SCHEMA=off.
+    // The homepage is in NO_INJECT (own nav/footer) but its schema still needs
+    // the fix; applyAeo itself never touches the homepage title/meta.
+    let aeoReport = 'skip';
+    if (shouldInjectChrome(p) || p === 'index') {
+      const aeo = applyAeo(html, p, env);
+      html = aeo.html;
+      aeoReport = aeo.report;
+    }
+
     // ── Favicon / icon links ──────────────────────────────────────────────────
     // Every page declares the MarkCMO "M" favicon (browsers + Google result icon
     // + AI search cards). Idempotent: skipped if the page already declares an icon
@@ -663,6 +679,7 @@ export async function onRequest(context) {
       headers: {
         'content-type':  'text/html; charset=utf-8',
         'cache-control': 'public, max-age=3600',
+        'x-mc-aeo':      aeoReport,
       },
     });
   }
